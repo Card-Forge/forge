@@ -25,24 +25,17 @@ import forge.deck.FDeckViewer;
 import forge.deck.FSideboardDialog;
 import forge.error.BugReportDialog;
 import forge.events.UiEvent;
-import forge.game.Game;
-import forge.game.GameEntity;
 import forge.game.GameType;
 import forge.game.Match;
-import forge.game.card.Card;
-import forge.game.combat.Combat;
-import forge.game.event.GameEventTurnBegan;
-import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.IHasIcon;
-import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
-import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.interfaces.IButton;
 import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
 import forge.match.input.InputQueue;
+import forge.player.LobbyPlayerHuman;
 import forge.properties.ForgeConstants;
 import forge.screens.match.FControl;
 import forge.screens.match.views.VPlayerPanel;
@@ -61,13 +54,15 @@ import forge.util.ThreadUtil;
 import forge.util.WaitCallback;
 import forge.util.WaitRunnable;
 import forge.util.gui.SGuiChoose;
+import forge.view.CardView;
+import forge.view.CombatView;
+import forge.view.GameEntityView;
+import forge.view.PlayerView;
+import forge.view.SpellAbilityView;
 
 public class GuiMobile implements IGuiBase {
 
-    private final String assetsDir;
-    
-    public GuiMobile(String assetsDir0) {
-        assetsDir = assetsDir0;
+    public GuiMobile() {
     }
 
     @Override
@@ -106,16 +101,6 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public String getAssetsDir() {
-        return assetsDir;
-    }
-
-    @Override
-    public boolean mayShowCard(Card card) {
-        return FControl.mayShowCard(card);
-    }
-
-    @Override
     public ISkinImage getSkinIcon(FSkinProp skinProp) {
         if (skinProp == null) { return null; }
         return FSkin.getImages().get(skinProp);
@@ -137,7 +122,7 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public int showCardOptionDialog(final Card card, final String message, final String title, final FSkinProp icon, final String[] options, final int defaultOption) {
+    public int showCardOptionDialog(final CardView card, final String message, final String title, final FSkinProp icon, final String[] options, final int defaultOption) {
         return new WaitCallback<Integer>() {
             @Override
             public void run() {
@@ -168,7 +153,7 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
-            final List<T> sourceChoices, final List<T> destChoices, final Card referenceCard, final boolean sideboardingMode) {
+            final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode) {
         return new WaitCallback<List<T>>() {
             @Override
             public void run() {
@@ -230,9 +215,8 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public void updatePhase() {
-        PhaseHandler pH = FControl.getGame().getPhaseHandler();
-        Player p = pH.getPlayerTurn();
-        PhaseType ph = pH.getPhase();
+        final PlayerView p = FControl.getGameView().getPlayerTurn();
+        final PhaseType ph = FControl.getGameView().getPhase();
 
         PhaseLabel lbl = FControl.getPlayerPanel(p).getPhaseIndicator().getLabel(ph);
 
@@ -243,7 +227,7 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public void updateTurn(final GameEventTurnBegan event, final Game game) {
+    public void updateTurn(final PlayerView player) {
         //VField nextField = FControl.getFieldViewFor(event.turnOwner);
         //SDisplayUtil.showTab(nextField);
     }
@@ -263,7 +247,7 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public void finishGame() {
-        new ViewWinLose(FControl.getGame()).setVisible(true);
+        new ViewWinLose(FControl.getGameView()).setVisible(true);
     }
 
     @Override
@@ -277,19 +261,19 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public void setPanelSelection(Card c) {
+    public void setPanelSelection(final CardView c) {
         //GuiUtils.setPanelSelection(c); //TODO
     }
 
     @Override
-    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, ITriggerEvent triggerEvent) {
+    public SpellAbilityView getAbilityToPlay(List<SpellAbilityView> abilities, ITriggerEvent triggerEvent) {
         if (abilities.isEmpty()) {
             return null;
         }
         if (abilities.size() == 1) {
             return abilities.get(0);
         }
-        return SGuiChoose.oneOrNone("Choose ability to play", abilities);
+        return SGuiChoose.oneOrNone(this, "Choose ability to play", abilities);
     }
 
     @Override
@@ -311,22 +295,22 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public void setCard(Card card) {
+    public void setCard(final CardView card) {
         //doesn't need to do anything
     }
 
     @Override
-    public void showCombat(Combat combat) {
+    public void showCombat(final CombatView combat) {
         FControl.showCombat(combat);
     }
 
     @Override
-    public void setUsedToPay(Card card, boolean b) {
+    public void setUsedToPay(final CardView card, final boolean b) {
         FControl.setUsedToPay(card, b);
     }
 
     @Override
-    public void setHighlighted(Player player, boolean b) {
+    public void setHighlighted(final PlayerView player, boolean b) {
         FControl.setHighlighted(player, b);
     }
 
@@ -336,7 +320,7 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public boolean stopAtPhase(Player playerTurn, PhaseType phase) {
+    public boolean stopAtPhase(final PlayerView playerTurn, final PhaseType phase) {
         return FControl.stopAtPhase(playerTurn, phase);
     }
 
@@ -346,12 +330,7 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public Game getGame() {
-        return FControl.getGame();
-    }
-
-    @Override
-    public Object showManaPool(Player player) {
+    public Object showManaPool(final PlayerView player) {
         VPlayerPanel playerPanel = FControl.getPlayerPanel(player);
         InfoTab oldSelectedTab = playerPanel.getSelectedTab();
         playerPanel.setSelectedTab(playerPanel.getManaPoolTab());
@@ -359,7 +338,7 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public void hideManaPool(Player player, Object zoneToRestore) {
+    public void hideManaPool(final PlayerView player, final Object zoneToRestore) {
         VPlayerPanel playerPanel = FControl.getPlayerPanel(player);
         if (zoneToRestore == playerPanel.getManaPoolTab()) {
             return; //if mana pool was selected previously, we don't need to switch back to anything
@@ -371,9 +350,9 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public boolean openZones(List<ZoneType> zones, Map<Player, Object> players) {
+    public boolean openZones(Collection<ZoneType> zones, Map<PlayerView, Object> players) {
         if (zones.size() == 1) {
-            ZoneType zoneType = zones.get(0);
+            ZoneType zoneType = zones.iterator().next();
             switch (zoneType) {
             case Battlefield:
             case Command:
@@ -382,7 +361,7 @@ public class GuiMobile implements IGuiBase {
             default:
                 //open zone tab for given zone if needed
                 boolean result = true;
-                for (Player player : players.keySet()) {
+                for (PlayerView player : players.keySet()) {
                     VPlayerPanel playerPanel = FControl.getPlayerPanel(player);
                     players.put(player, playerPanel.getSelectedTab()); //backup selected tab before changing it
                     InfoTab zoneTab = playerPanel.getZoneTab(zoneType);
@@ -400,35 +379,35 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public void restoreOldZones(Map<Player, Object> playersToRestoreZonesFor) {
-        for (Entry<Player, Object> player : playersToRestoreZonesFor.entrySet()) {
+    public void restoreOldZones(Map<PlayerView, Object> playersToRestoreZonesFor) {
+        for (Entry<PlayerView, Object> player : playersToRestoreZonesFor.entrySet()) {
             VPlayerPanel playerPanel = FControl.getPlayerPanel(player.getKey());
             playerPanel.setSelectedTab((InfoTab)player.getValue());
         }
     }
 
     @Override
-    public void updateZones(List<Pair<Player, ZoneType>> zonesToUpdate) {
+    public void updateZones(List<Pair<PlayerView, ZoneType>> zonesToUpdate) {
         FControl.updateZones(zonesToUpdate);
     }
 
     @Override
-    public void updateCards(Set<Card> cardsToUpdate) {
+    public void updateCards(Set<CardView> cardsToUpdate) {
         FControl.updateCards(cardsToUpdate);
     }
 
     @Override
-    public void refreshCardDetails(Collection<Card> cards) {
+    public void refreshCardDetails(Iterable<CardView> cards) {
         FControl.refreshCardDetails(cards);
     }
 
     @Override
-    public void updateManaPool(List<Player> manaPoolUpdate) {
+    public void updateManaPool(List<PlayerView> manaPoolUpdate) {
         FControl.updateManaPool(manaPoolUpdate);
     }
 
     @Override
-    public void updateLives(List<Player> livesUpdate) {
+    public void updateLives(List<PlayerView> livesUpdate) {
         FControl.updateLives(livesUpdate);
     }
 
@@ -438,8 +417,8 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public Map<Card, Integer> getDamageToAssign(Card attacker, List<Card> blockers,
-            int damageDealt, GameEntity defender, boolean overrideOrder) {
+    public Map<CardView, Integer> getDamageToAssign(CardView attacker, List<CardView> blockers,
+            int damageDealt, GameEntityView defender, boolean overrideOrder) {
         return FControl.getDamageToAssign(attacker, blockers,
                 damageDealt, defender, overrideOrder);
     }
@@ -464,9 +443,10 @@ public class GuiMobile implements IGuiBase {
         Gdx.net.openURI(url);
     }
 
+    private final LobbyPlayer guiPlayer = new LobbyPlayerHuman("Human", this);
     @Override
     public LobbyPlayer getGuiPlayer() {
-        return FControl.getGuiPlayer();
+        return guiPlayer;
     }
 
     @Override

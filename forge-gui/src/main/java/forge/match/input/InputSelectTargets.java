@@ -1,6 +1,11 @@
 package forge.match.input;
 
-import forge.GuiBase;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.ApiType;
@@ -8,14 +13,9 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.gui.SGuiChoose;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 
 public final class InputSelectTargets extends InputSyncronizedBase {
@@ -43,7 +43,8 @@ public final class InputSelectTargets extends InputSyncronizedBase {
      * @param sa
      * @param mandatory
      */
-    public InputSelectTargets(List<Card> choices, SpellAbility sa, boolean mandatory) {
+    public InputSelectTargets(final PlayerControllerHuman controller, final List<Card> choices, final SpellAbility sa, final boolean mandatory) {
+        super(controller);
         this.choices = choices;
         this.tgt = sa.getTargetRestrictions();
         this.sa = sa;
@@ -77,19 +78,19 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         if (!tgt.isMinTargetsChosen(sa.getHostCard(), sa) || tgt.isDividedAsYouChoose()) {
             if (mandatory && tgt.hasCandidates(sa, true)) {
                 // Player has to click on a target
-                ButtonUtil.update(false, false, false);
+                ButtonUtil.update(getGui(), false, false, false);
             }
             else {
-                ButtonUtil.update(false, true, false);
+                ButtonUtil.update(getGui(), false, true, false);
             }
         }
         else {
             if (mandatory && tgt.hasCandidates(sa, true)) {
                 // Player has to click on a target or ok
-                ButtonUtil.update(true, false, true);
+                ButtonUtil.update(getGui(), true, false, true);
             }
             else {
-                ButtonUtil.update(true, true, true);
+                ButtonUtil.update(getGui(), true, true, true);
             }
         }
     }
@@ -176,7 +177,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 final StringBuilder sb = new StringBuilder();
                 sb.append(apiBasedMessage);
                 sb.append(card.toString());
-                Integer chosen = SGuiChoose.oneOrNone(sb.toString(), choices);
+                Integer chosen = SGuiChoose.oneOrNone(getGui(), sb.toString(), choices);
                 if (chosen == null) {
                     return true; //still return true since there was a valid choice
                 }
@@ -220,7 +221,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 final StringBuilder sb = new StringBuilder();
                 sb.append(apiBasedMessage);
                 sb.append(player.getName());
-                Integer chosen = SGuiChoose.oneOrNone(sb.toString(), choices);
+                Integer chosen = SGuiChoose.oneOrNone(getGui(), sb.toString(), choices);
                 if (null == chosen) {
                     return;
                 }
@@ -234,13 +235,13 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         addTarget(player);
     }
 
-    private void addTarget(GameEntity ge) {
+    private void addTarget(final GameEntity ge) {
         sa.getTargets().add(ge);
         if (ge instanceof Card) {
-            GuiBase.getInterface().setUsedToPay((Card) ge, true);
+            getGui().setUsedToPay(getController().getCardView((Card) ge), true);
             lastTarget = (Card) ge;
         }
-        Integer val = targetDepth.get(ge);
+        final Integer val = targetDepth.get(ge);
         targetDepth.put(ge, val == null ? Integer.valueOf(1) : Integer.valueOf(val.intValue() + 1) );
         
         if(hasAllTargets()) {
@@ -252,9 +253,9 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
     
     private void done() {
-        for (GameEntity c : targetDepth.keySet()) {
+        for (final GameEntity c : targetDepth.keySet()) {
             if (c instanceof Card) {
-                GuiBase.getInterface().setUsedToPay((Card)c, false);
+                getGui().setUsedToPay(getController().getCardView((Card) c), false);
             }
         }
 

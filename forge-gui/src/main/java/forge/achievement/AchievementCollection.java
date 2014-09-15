@@ -17,6 +17,7 @@ import org.w3c.dom.NodeList;
 import forge.game.GameType;
 import forge.game.player.Player;
 import forge.interfaces.IComboBox;
+import forge.interfaces.IGuiBase;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
@@ -50,9 +51,9 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         achievements.put(name, achievement);
     }
 
-    public void updateAll(Player player) {
+    public void updateAll(IGuiBase gui, Player player) {
         for (Achievement achievement : achievements.values()) {
-            achievement.update(player);
+            achievement.update(gui, player);
         }
         save();
     }

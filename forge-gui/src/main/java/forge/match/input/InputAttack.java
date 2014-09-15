@@ -17,9 +17,13 @@
  */
 package forge.match.input;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.collect.Iterables;
 
-import forge.GuiBase;
 import forge.events.UiEventAttackerDeclared;
 import forge.game.GameEntity;
 import forge.game.card.Card;
@@ -31,12 +35,8 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * <p>
@@ -56,7 +56,8 @@ public class InputAttack extends InputSyncronizedBase {
     private final Player playerAttacks;
     private AttackingBand activeBand = null;
 
-    public InputAttack(Player attacks0, Combat combat0) {
+    public InputAttack(PlayerControllerHuman controller, Player attacks0, Combat combat0) {
+        super(controller);
         playerAttacks = attacks0;
         combat = combat0;
         defenders = combat.getDefenders();
@@ -77,7 +78,9 @@ public class InputAttack extends InputSyncronizedBase {
         List<Pair<Card, GameEntity>> mandatoryAttackers = CombatUtil.getMandatoryAttackers(playerAttacks, combat, defenders);
         for (Pair<Card, GameEntity> attacker : mandatoryAttackers) {
             combat.addAttacker(attacker.getLeft(), attacker.getRight());
-            GuiBase.getInterface().fireEvent(new UiEventAttackerDeclared(attacker.getLeft(), attacker.getRight()));
+            getGui().fireEvent(new UiEventAttackerDeclared(
+                    getController().getCardView(attacker.getLeft()),
+                    getController().getGameEntityView(attacker.getRight())));
         }
         updateMessage();
     }
@@ -94,10 +97,10 @@ public class InputAttack extends InputSyncronizedBase {
 
     private void updatePrompt() {
         if (canCallBackAttackers()) {
-            ButtonUtil.update("OK", "Call Back", true, true, true);
+            ButtonUtil.update(getGui(), "OK", "Call Back", true, true, true);
         }
         else {
-            ButtonUtil.update("OK", "Alpha Strike", true, true, true);
+            ButtonUtil.update(getGui(), "OK", "Alpha Strike", true, true, true);
         }
     }
 
@@ -225,7 +228,9 @@ public class InputAttack extends InputSyncronizedBase {
         combat.addAttacker(card, currentDefender, activeBand);
         activateBand(activeBand);
 
-        GuiBase.getInterface().fireEvent(new UiEventAttackerDeclared(card, currentDefender));
+        getGui().fireEvent(new UiEventAttackerDeclared(
+                getController().getCardView(card),
+                getController().getGameEntityView(currentDefender)));
     }
 
     private boolean canUndeclareAttacker(Card card) {
@@ -238,49 +243,50 @@ public class InputAttack extends InputSyncronizedBase {
         if (canUndeclareAttacker(card)) {
             // TODO Is there no way to attacks each turn cards to attack Planeswalkers?
             combat.removeFromCombat(card);
-            GuiBase.getInterface().setUsedToPay(card, false);
+            getGui().setUsedToPay(getController().getCardView(card), false);
             // When removing an attacker clear the attacking band
             activateBand(null);
 
-            GuiBase.getInterface().fireEvent(new UiEventAttackerDeclared(card, null));
+            getGui().fireEvent(new UiEventAttackerDeclared(
+                    getController().getCardView(card), null));
             return true;
         }
         return false;
     }
 
-    private final void setCurrentDefender(GameEntity def) {
+    private final void setCurrentDefender(final GameEntity def) {
         currentDefender = def;
-        for (GameEntity ge : defenders) {
+        for (final GameEntity ge : defenders) {
             if (ge instanceof Card) {
-                GuiBase.getInterface().setUsedToPay((Card)ge, ge == def);
+                getGui().setUsedToPay(getController().getCardView((Card) ge), ge == def);
             }
             else if (ge instanceof Player) {
-                GuiBase.getInterface().setHighlighted((Player) ge, ge == def);
+                getGui().setHighlighted(getController().getPlayerView((Player) ge), ge == def);
             }
         }
 
         updateMessage();
     }
 
-    private final void activateBand(AttackingBand band) {
+    private final void activateBand(final AttackingBand band) {
         if (activeBand != null) {
-            for (Card card : activeBand.getAttackers()) {
-                GuiBase.getInterface().setUsedToPay(card, false);
+            for (final Card card : activeBand.getAttackers()) {
+                getGui().setUsedToPay(getController().getCardView(card), false);
             }
         }
         activeBand = band;
 
         if (activeBand != null) {
-            for(Card card : activeBand.getAttackers()) {
-                GuiBase.getInterface().setUsedToPay(card, true);
+            for (final Card card : activeBand.getAttackers()) {
+                getGui().setUsedToPay(getController().getCardView(card), true);
             }
         }
     }
 
     //only enable banding message and actions if a creature that can attack has banding
     private boolean isBandingPossible() {
-        List<Card> possibleAttackers = playerAttacks.getCardsIn(ZoneType.Battlefield);
-        for (Card c : Iterables.filter(possibleAttackers, CardPredicates.hasKeyword("Banding"))) {
+        final List<Card> possibleAttackers = playerAttacks.getCardsIn(ZoneType.Battlefield);
+        for (final Card c : Iterables.filter(possibleAttackers, CardPredicates.hasKeyword("Banding"))) {
             if (c.isCreature() && CombatUtil.canAttack(c, currentDefender, combat)) {
                 return true;
             }
@@ -296,6 +302,6 @@ public class InputAttack extends InputSyncronizedBase {
         showMessage(message);
 
         updatePrompt();
-        GuiBase.getInterface().showCombat(combat); // redraw sword icons
+        getGui().showCombat(getController().getCombat(combat)); // redraw sword icons
     }
 }

@@ -17,6 +17,8 @@
  */
 package forge.match.input;
 
+import forge.player.PlayerControllerHuman;
+
  /**
   * <p>
   * InputConfirm class.
@@ -34,15 +36,16 @@ public class InputConfirm extends InputSyncronizedBase {
     private final boolean defaultYes;
     private boolean result;
 
-    public InputConfirm(String message0) {
-        this(message0, "Yes", "No", true);
+    public InputConfirm(final PlayerControllerHuman controller, String message0) {
+        this(controller, message0, "Yes", "No", true);
     }
 
-    public InputConfirm(String message0, String yesButtonText0, String noButtonText0) {
-        this(message0, yesButtonText0, noButtonText0, true);
+    public InputConfirm(final PlayerControllerHuman controller, String message0, String yesButtonText0, String noButtonText0) {
+        this(controller, message0, yesButtonText0, noButtonText0, true);
     }
 
-    public InputConfirm(String message0, String yesButtonText0, String noButtonText0, boolean defaultYes0) {
+    public InputConfirm(final PlayerControllerHuman controller, String message0, String yesButtonText0, String noButtonText0, boolean defaultYes0) {
+        super(controller);
         message = message0;
         yesButtonText = yesButtonText0;
         noButtonText = noButtonText0;
@@ -53,7 +56,7 @@ public class InputConfirm extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     protected final void showMessage() {
-        ButtonUtil.update(yesButtonText, noButtonText, true, true, defaultYes);
+        ButtonUtil.update(getGui(), yesButtonText, noButtonText, true, true, defaultYes);
         showMessage(message);
     }
 

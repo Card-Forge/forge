@@ -17,7 +17,9 @@
  */
 package forge.screens.match.views;
 
-import forge.game.player.Player;
+import javax.swing.JPanel;
+
+import net.miginfocom.swing.MigLayout;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -26,10 +28,8 @@ import forge.gui.framework.IVDoc;
 import forge.screens.match.controllers.CCommand;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
+import forge.view.PlayerView;
 import forge.view.arcane.PlayArea;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
 
 /** 
  * Assembles Swing components of a player command instance.
@@ -44,7 +44,7 @@ public class VCommand implements IVDoc<CCommand> {
     private final DragTab tab = new DragTab("Command");
 
     // Other fields
-    private Player player = null;
+    private PlayerView player = null;
 
     // Top-level containers
     private final FScrollPane scroller = new FScrollPane(false);
@@ -54,20 +54,20 @@ public class VCommand implements IVDoc<CCommand> {
     /**
      * Assembles Swing components of a player command instance.
      * 
-     * @param player0 &emsp; {@link forge.game.player.Player}
+     * @param p &emsp; {@link forge.game.player.Player}
      * @param id0 &emsp; {@link forge.gui.framework.EDocID}
      */
-    public VCommand(final EDocID id0, final Player player0) {
+    public VCommand(final EDocID id0, final PlayerView p) {
         this.docID = id0;
         id0.setDoc(this);
 
-        this.player = player0;
-        if (player0 != null) { tab.setText(player0.getName() + " Command"); }
+        this.player = p;
+        if (p != null) { tab.setText(p.getName() + " Command"); }
         else { tab.setText("NO PLAYER FOR " + docID.toString()); }
 
         // TODO player is hard-coded into tabletop...should be dynamic
         // (haven't looked into it too deeply). Doublestrike 12-04-12
-        tabletop = new PlayArea(scroller, id0 == EDocID.COMMAND_0, player.getZone(ZoneType.Command).getCards(false));
+        tabletop = new PlayArea(scroller, id0 == EDocID.COMMAND_0, player, ZoneType.Command);
 
         control = new CCommand(player, this);
 
@@ -135,7 +135,7 @@ public class VCommand implements IVDoc<CCommand> {
      * Gets the player currently associated with this command.
      * @return {@link forge.game.player.Player}
      */
-    public Player getPlayer() {
+    public PlayerView getPlayer() {
         return this.player;
     }
 

@@ -44,7 +44,7 @@ public enum VDetail implements IVDoc<CDetail> {
     private final DragTab tab = new DragTab("Card Detail");
 
     // Top-level containers
-    private final CardDetailPanel pnlDetail = new CardDetailPanel(null);
+    private final CardDetailPanel pnlDetail = new CardDetailPanel();
     private final SkinnedLabel lblFlipcard = new SkinnedLabel();
 
     //========= Constructor

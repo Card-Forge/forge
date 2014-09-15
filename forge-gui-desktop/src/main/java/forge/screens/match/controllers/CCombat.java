@@ -1,16 +1,18 @@
 package forge.screens.match.controllers;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.Iterables;
+
 import forge.UiCommand;
-import forge.game.GameEntity;
-import forge.game.card.Card;
-import forge.game.combat.AttackingBand;
-import forge.game.combat.Combat;
-import forge.game.player.Player;
 import forge.gui.framework.ICDoc;
 import forge.screens.match.views.VCombat;
 import forge.util.Lang;
-
-import java.util.List;
+import forge.view.CardView;
+import forge.view.CardView.CardStateView;
+import forge.view.CombatView;
+import forge.view.GameEntityView;
+import forge.view.PlayerView;
 
 /** 
  * Controls the combat panel in the match UI.
@@ -22,7 +24,7 @@ public enum CCombat implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
     
-    private Combat combat;
+    private CombatView combat;
 
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
@@ -44,84 +46,94 @@ public enum CCombat implements ICDoc {
      */
     @Override
     public void update() {
-        Combat localCombat = this.combat; // noone will re-assign this from other thread. 
+        final CombatView localCombat = this.combat; // noone will re-assign this from other thread. 
         if (localCombat != null) {
-            VCombat.SINGLETON_INSTANCE.updateCombat(localCombat.getAttackers().size(), getCombatDescription(localCombat));
-        }
-        else {
+            VCombat.SINGLETON_INSTANCE.updateCombat(localCombat.getNumAttackers(), getCombatDescription(localCombat));
+        } else {
             VCombat.SINGLETON_INSTANCE.updateCombat(0, "");
         }
     }
-    
-    public void setModel(Combat combat) {
+
+    public void setModel(final CombatView combat) {
         this.combat = combat;
     }
-    
-    private static String getCombatDescription(Combat combat) {
+
+    private static String getCombatDescription(final CombatView localCombat) {
         final StringBuilder display = new StringBuilder();
 
-        // Not a big fan of the triple nested loop here
-        for (GameEntity defender : combat.getDefenders()) {
-            List<AttackingBand> bands = combat.getAttackingBandsOf(defender);
-            if (bands == null || bands.isEmpty()) {
-                continue;
-            }
-
-            if (display.length() > 0) {
-                display.append("\n");
-            }
-
-            if (defender instanceof Card) {
-                Player controller = ((Card) defender).getController();
-                display.append(Lang.getPossesive(controller.getName())).append(" ");
-            }
-
-            display.append(defender.getName()).append(" is attacked by:\n");
-
-            // Associate Bands, Attackers Blockers
-            boolean previousBand = false;
-            for(AttackingBand band : bands) {
-                if (band.isEmpty())
-                    continue;
-                
-                // Space out band blocks from non-band blocks
-                if (previousBand) {
-                    display.append("\n");
-                }
-                
-                Boolean blocked = band.isBlocked();
-                boolean isBand = band.getAttackers().size() > 1;
-                if (isBand) {
-                    // Only print Band data if it's actually a band
-                    display.append(" > BAND");
-                    
-                    if( blocked != null )
-                        display.append(blocked.booleanValue() ? " (blocked)" : " >>>");
-                    
-                    display.append("\n");
-                }
-                
-                for (final Card c : band.getAttackers()) {
-                    display.append(" > ");
-                    display.append(combatantToString(c)).append("\n");
-                }
-
-                List<Card> blockers = combat.getBlockers(band);
-                if (!isBand && blockers.isEmpty()) {
-                    // if single creature is blocked, but no longer has blockers, tell the user!
-                    if (blocked != null)
-                        display.append(blocked.booleanValue() ? "     (blocked)\n" : "     >>>\n");
-                }
-
-                for (final Card element : blockers) {
-                    display.append("     < ").append(combatantToString(element)).append("\n");
-                }
-                previousBand = isBand;
-            }
+        for (final GameEntityView defender : localCombat.getDefenders()) {
+            display.append(getCombatDescription(localCombat, defender));
         }
         return display.toString().trim();
     }
-    
+
+    private static String getCombatDescription(final CombatView localCombat, final GameEntityView defender) {
+        final StringBuilder display = new StringBuilder();
+
+        Iterable<Iterable<CardView>> bands = localCombat.getAttackingBandsOf(defender);
+        if (bands == null || Iterables.isEmpty(bands)) {
+            return StringUtils.EMPTY;
+        }
+
+        display.append("\n");
+
+        if (defender instanceof CardView) {
+            final PlayerView controller = ((CardView) defender).getController();
+            display.append(Lang.getPossesive(controller.getName())).append(" ");
+        }
+
+        display.append(defender).append(" is attacked by:\n");
+
+        // Associate Bands, Attackers Blockers
+        boolean previousBand = false;
+        for (final Iterable<CardView> band : bands) {
+            final int bandSize = Iterables.size(band);
+            if (bandSize == 0) {
+                continue;
+            }
+
+            // Space out band blocks from non-band blocks
+            if (previousBand) {
+                display.append("\n");
+            }
+
+            final Iterable<CardView> blockers = localCombat.getBlockers(band); 
+            final boolean blocked = (blockers != null);
+            final boolean isBand = bandSize > 1;
+            if (isBand) {
+                // Only print Band data if it's actually a band
+                display.append(" > BAND");
+                display.append(blocked ? " (blocked)" : " >>>");
+                display.append("\n");
+            }
+
+            for (final CardView attacker : band) {
+                display.append(" > ");
+                display.append(combatantToString(attacker)).append("\n");
+            }
+
+            if (!isBand) {
+                if (blockers != null && Iterables.isEmpty(blockers)) {
+                    // if single creature is blocked, but no longer has blockers, tell the user!
+                    display.append("     (blocked)\n");
+                } else {
+                    display.append("     >>>\n");
+                }
+            }
+
+            if (blockers != null) {
+                for (final CardView blocker : blockers) {
+                    display.append("     < ")
+                           .append(combatantToString(blocker))
+                           .append("\n");
+                }
+            }
+            previousBand = isBand;
+        }
+
+        return display.toString();
+    }
+
     /**
      * <p>
      * combatantToString.
@@ -131,15 +143,15 @@ public enum CCombat implements ICDoc {
      *            a {@link forge.game.card.Card} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String combatantToString(final Card c) {
+    private static String combatantToString(final CardView c) {
         final StringBuilder sb = new StringBuilder();
+        final CardStateView state = c.getOriginal();
 
-        final String name = (c.isFaceDown()) ? "Morph" : c.getName();
-        
-        sb.append("( ").append(c.getNetAttack()).append(" / ").append(c.getNetDefense()).append(" ) ... ");
+        final String name = state.getName();
+
+        sb.append("( ").append(state.getPower()).append(" / ").append(state.getToughness()).append(" ) ... ");
         sb.append(name);
-        sb.append(" [").append(c.getUniqueNumber()).append("] ");
-        
+        sb.append(" [").append(c.getId()).append("] ");
 
         return sb.toString();
     }

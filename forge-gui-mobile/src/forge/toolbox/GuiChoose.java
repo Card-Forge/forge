@@ -3,13 +3,12 @@ package forge.toolbox;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 
-import forge.game.card.Card;
 import forge.util.Callback;
+import forge.view.CardView;
 
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
-
 
 public class GuiChoose {
 
@@ -240,22 +239,22 @@ public class GuiChoose {
         c.show(selected, false);
     }
 
-    public static <T> void many(final String title, final String topCaption, int cnt, final List<T> sourceChoices, Card referenceCard, final Callback<List<T>> callback) {
+    public static <T> void many(final String title, final String topCaption, int cnt, final List<T> sourceChoices, CardView referenceCard, final Callback<List<T>> callback) {
         order(title, topCaption, cnt, cnt, sourceChoices, null, referenceCard, callback);
     }
 
-    public static <T> void many(final String title, final String topCaption, int min, int max, final List<T> sourceChoices, Card referenceCard, final Callback<List<T>> callback) {
+    public static <T> void many(final String title, final String topCaption, int min, int max, final List<T> sourceChoices, CardView referenceCard, final Callback<List<T>> callback) {
         int m2 = min >= 0 ? sourceChoices.size() - min : -1;
         int m1 = max >= 0 ? sourceChoices.size() - max : -1;
         order(title, topCaption, m1, m2, sourceChoices, null, referenceCard, callback);
     }
 
-    public static <T> void order(final String title, final String top, final List<T> sourceChoices, Card referenceCard, final Callback<List<T>> callback) {
+    public static <T> void order(final String title, final String top, final List<T> sourceChoices, CardView referenceCard, final Callback<List<T>> callback) {
         order(title, top, 0, 0, sourceChoices, null, referenceCard, callback);
     }
 
     public static <T> void order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
-            final List<T> sourceChoices, final List<T> destChoices, final Card referenceCard, final Callback<List<T>> callback) {
+            final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final Callback<List<T>> callback) {
         // An input box for handling the order of choices.
         DualListBox<T> dual = new DualListBox<T>(title, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, callback);
         dual.setSecondColumnLabelText(top);

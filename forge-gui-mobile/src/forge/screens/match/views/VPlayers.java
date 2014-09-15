@@ -7,11 +7,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
-import forge.game.GameType;
-import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
-import forge.game.player.Player;
-import forge.game.zone.ZoneType;
 import forge.menu.FDropDown;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
@@ -20,10 +15,12 @@ import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FList;
 import forge.util.Utils;
+import forge.view.CardView;
+import forge.view.PlayerView;
 
 public class VPlayers extends FDropDown {
     public VPlayers() {
-        for (final Player p : FControl.getSortedPlayers()) {
+        for (final PlayerView p : FControl.getGameView().getPlayers()) {
             add(new PlayerInfoPanel(p));
         }
     }
@@ -49,9 +46,9 @@ public class VPlayers extends FDropDown {
         private static final FSkinFont FONT = FSkinFont.get(12);
         private static final float PADDING = Utils.scaleMin(5);
         private static final float HEIGHT = Utils.AVG_FINGER_HEIGHT * 1.8f;
-        private final Player player;
+        private final PlayerView player;
 
-        private PlayerInfoPanel(Player player0) {
+        private PlayerInfoPanel(PlayerView player0) {
             player = player0;
         }
 
@@ -76,12 +73,12 @@ public class VPlayers extends FDropDown {
             builder.append("  |  Poison counters: " + String.valueOf(player.getPoisonCounters()));
             builder.append("  |  Maximum hand size: " + String.valueOf(player.getMaxHandSize()));
             builder.append("  |  Cards drawn this turn: " + String.valueOf(player.getNumDrawnThisTurn()));
-            builder.append("  |  Damage Prevention: " + String.valueOf(player.getPreventNextDamageTotalShields()));
+            builder.append("  |  Damage Prevention: " + String.valueOf(player.getPreventNextDamage()));
             if (!player.getKeywords().isEmpty()) {
                 builder.append("  |  " + player.getKeywords().toString());
             }
             if (FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
-                List<Card> list = player.getCardsIn(ZoneType.Ante);
+                List<CardView> list = player.getAnteCards();
                 builder.append("  |  Ante'd: ");
                 for (int i = 0; i < list.size(); i++) {
                     builder.append(list.get(i));
@@ -90,8 +87,8 @@ public class VPlayers extends FDropDown {
                     }
                 }
             }
-            if (player.getGame().getRules().getGameType() == GameType.Commander) {
-                builder.append("  |  " + CardFactoryUtil.getCommanderInfo(player));
+            if (FControl.getGameView().isCommander()) {
+                builder.append("  |  " + player.getCommanderInfo());
             }
 
             g.drawText(builder.toString(), FONT, FList.FORE_COLOR, x, y, getWidth() - PADDING - x, h, true, HAlignment.LEFT, true);

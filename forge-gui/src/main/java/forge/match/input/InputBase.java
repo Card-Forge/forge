@@ -21,12 +21,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import forge.FThreads;
-import forge.GuiBase;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.interfaces.IGuiBase;
+import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 
 /**
@@ -40,13 +41,25 @@ import forge.util.ITriggerEvent;
 public abstract class InputBase implements java.io.Serializable, Input {
     /** Constant <code>serialVersionUID=-6539552513871194081L</code>. */
     private static final long serialVersionUID = -6539552513871194081L;
+
+    private final PlayerControllerHuman controller;
+    public InputBase(final PlayerControllerHuman controller) {
+        this.controller = controller;
+    }
+    public final PlayerControllerHuman getController() {
+        return this.controller;
+    }
+    public IGuiBase getGui() {
+        return getController().getGui();
+    }
+
     private boolean finished = false;
     protected final boolean isFinished() { return finished; }
     protected final void setFinished() {
         finished = true;
 
         if (allowAwaitNextInput()) {
-            awaitNextInput();
+            awaitNextInput(getGui());
         }
     }
 
@@ -57,18 +70,18 @@ public abstract class InputBase implements java.io.Serializable, Input {
     private static final Timer awaitNextInputTimer = new Timer();
     private static TimerTask awaitNextInputTask;
 
-    public static void awaitNextInput() {
+    public static void awaitNextInput(final IGuiBase gui) {
         //delay updating prompt to await next input briefly so buttons don't flicker disabled then enabled
         awaitNextInputTask = new TimerTask() {
             @Override
             public void run() {
-                FThreads.invokeInEdtLater(new Runnable() {
+                FThreads.invokeInEdtLater(gui, new Runnable() {
                     @Override
                     public void run() {
                         synchronized (awaitNextInputTimer) {
                             if (awaitNextInputTask != null) {
-                                GuiBase.getInterface().showPromptMessage("Waiting for opponent...");
-                                ButtonUtil.update(false, false, false);
+                                gui.showPromptMessage("Waiting for opponent...");
+                                ButtonUtil.update(gui, false, false, false);
                                 awaitNextInputTask = null;
                             }
                         }
@@ -108,7 +121,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
     }
 
     @Override
-    public void selectAbility(SpellAbility ab) { }
+    public void selectAbility(final SpellAbility ab) { }
 
     @Override
     public final void selectButtonCancel() {
@@ -131,20 +144,20 @@ public abstract class InputBase implements java.io.Serializable, Input {
     protected boolean onCardSelected(final Card c, final ITriggerEvent triggerEvent) {
         return false;
     }
-    protected void onPlayerSelected(final Player p, final ITriggerEvent triggerEvent) {}
+    protected void onPlayerSelected(final Player player, final ITriggerEvent triggerEvent) {}
     protected void onCancel() {}
     protected void onOk() {}
 
     // to remove need for CMatchUI dependence
-    protected final void showMessage(String message) {
-        GuiBase.getInterface().showPromptMessage(message);
+    protected final void showMessage(final String message) {
+        getGui().showPromptMessage(message);
     }
 
     protected final void flashIncorrectAction() {
-        GuiBase.getInterface().flashIncorrectAction();
+        getGui().flashIncorrectAction();
     }
 
-    protected String getTurnPhasePriorityMessage(Game game) {
+    protected String getTurnPhasePriorityMessage(final Game game) {
         final PhaseHandler ph = game.getPhaseHandler();
         final StringBuilder sb = new StringBuilder();
 

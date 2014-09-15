@@ -97,7 +97,7 @@ public class PlayerControllerForTests extends PlayerController {
 	public void playSpellAbilityNoStack(SpellAbility effectSA, boolean mayChoseNewTargets) {
 		//TODO: eventually (when the real code is refactored) this should be handled normally...
 		if (effectSA.getDescription().equals("At the beginning of your upkeep, if you have exactly 1 life, you win the game.")) {//test_104_2b_effect_may_state_that_player_wins_the_game
-			HumanPlay.playSpellAbilityNoStack(player, effectSA, !mayChoseNewTargets);
+			HumanPlay.playSpellAbilityNoStack(null, player, effectSA, !mayChoseNewTargets);
 			return;
 		}
 		SpellAbilityAi sai = SpellApiToAi.Converter.get(effectSA.getApi());
@@ -106,7 +106,7 @@ public class PlayerControllerForTests extends PlayerController {
 				(effectSA.getHostCard().getName().equals("Laboratory Maniac") && sai instanceof GameWinAi) ||
 				(effectSA.getHostCard().getName().equals("Nefarious Lich") && sai instanceof ChangeZoneAi)
 		) {//test_104_3f_if_a_player_would_win_and_lose_simultaneously_he_loses
-			HumanPlay.playSpellAbilityNoStack(player, effectSA, !mayChoseNewTargets);
+			HumanPlay.playSpellAbilityNoStack(null, player, effectSA, !mayChoseNewTargets);
 			return;
 		}
 		throw new IllegalStateException("Callers of this method currently assume that it performs extra functionality!");

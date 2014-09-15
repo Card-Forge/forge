@@ -16,12 +16,17 @@
  */
 package forge.screens.match;
 
+import java.awt.Dimension;
+import java.util.List;
+
+import javax.swing.SwingConstants;
+
+import forge.GuiBase;
 import forge.assets.FSkinProp;
-import forge.game.Game;
-import forge.item.*;
+import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
-import forge.quest.*;
+import forge.quest.QuestWinLoseController;
 import forge.screens.home.quest.CSubmenuChallenges;
 import forge.screens.home.quest.CSubmenuDuels;
 import forge.toolbox.FSkin;
@@ -29,11 +34,7 @@ import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinIcon;
 import forge.toolbox.FSkin.SkinnedLabel;
-
-import java.awt.Dimension;
-import java.util.List;
-
-import javax.swing.SwingConstants;
+import forge.view.IGameView;
 
 /**
  * <p>
@@ -61,10 +62,10 @@ public class QuestWinLose extends ControlWinLose {
      * @param view0 ViewWinLose object
      * @param match2
      */
-    public QuestWinLose(final ViewWinLose view0, Game lastGame) {
-        super(view0, lastGame);
+    public QuestWinLose(final ViewWinLose view0, final IGameView game0) {
+        super(view0, game0);
         view = view0;
-        controller = new QuestWinLoseController(lastGame) {
+        controller = new QuestWinLoseController(game0, GuiBase.getInterface()) {
             @Override
             protected void showRewards(Runnable runnable) {
                 runnable.run(); //just run on GUI thread

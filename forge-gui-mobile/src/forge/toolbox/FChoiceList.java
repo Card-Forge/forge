@@ -14,14 +14,15 @@ import forge.assets.TextRenderer;
 import forge.assets.FSkinColor.Colors;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
-import forge.game.card.Card;
-import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.item.PaperCard;
 import forge.screens.match.FControl;
 import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VStack;
 import forge.util.Utils;
+import forge.view.CardView;
+import forge.view.PlayerView;
+import forge.view.SpellAbilityView;
 
 public class FChoiceList<T> extends FList<T> {
     public static final FSkinColor ITEM_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);
@@ -57,13 +58,13 @@ public class FChoiceList<T> extends FList<T> {
         if (item instanceof PaperCard) {
             renderer = new PaperCardItemRenderer();
         }
-        else if (item instanceof Card) {
+        else if (item instanceof CardView) {
             renderer = new CardItemRenderer();
         }
         else if (item instanceof SpellAbility) {
             renderer = new SpellAbilityItemRenderer();
         }
-        else if (item instanceof Player) {
+        else if (item instanceof PlayerView) {
             renderer = new PlayerItemRenderer();
         }
         else {
@@ -347,18 +348,18 @@ public class FChoiceList<T> extends FList<T> {
 
         @Override
         public boolean tap(T value, float x, float y, int count) {
-            return CardRenderer.cardListItemTap((Card)value, x, y, count, compactModeHandler.isCompactMode());
+            return CardRenderer.cardListItemTap((CardView)value, x, y, count, compactModeHandler.isCompactMode());
         }
 
         @Override
         public boolean longPress(T value, float x, float y) {
-            CardZoom.show((Card)value);
+            CardZoom.show((CardView)value);
             return true;
         }
 
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            CardRenderer.drawCardListItem(g, font, foreColor, (Card)value, 0, null, x, y, w, h, compactModeHandler.isCompactMode());
+            CardRenderer.drawCardListItem(g, font, foreColor, (CardView)value, 0, null, x, y, w, h, compactModeHandler.isCompactMode());
         }
     }
     //special renderer for SpellAbilities
@@ -378,7 +379,7 @@ public class FChoiceList<T> extends FList<T> {
         @Override
         public boolean tap(T value, float x, float y, int count) {
             if (x <= VStack.CARD_WIDTH + 2 * FList.PADDING) {
-                CardZoom.show(((SpellAbility)value).getHostCard());
+                CardZoom.show(((SpellAbilityView)value).getHostCard());
                 return true;
             }
             return false;
@@ -386,13 +387,13 @@ public class FChoiceList<T> extends FList<T> {
 
         @Override
         public boolean longPress(T value, float x, float y) {
-            CardZoom.show(((SpellAbility)value).getHostCard());
+            CardZoom.show(((SpellAbilityView)value).getHostCard());
             return true;
         }
 
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            SpellAbility spellAbility = (SpellAbility)value;
+            SpellAbilityView spellAbility = (SpellAbilityView)value;
             CardRenderer.drawCardWithOverlays(g, spellAbility.getHostCard(), x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT);
 
             float dx = VStack.CARD_WIDTH + FList.PADDING;
@@ -424,7 +425,7 @@ public class FChoiceList<T> extends FList<T> {
 
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            Player player = (Player)value;
+            PlayerView player = (PlayerView)value;
             g.drawImage(FControl.getPlayerAvatar(player), x - FList.PADDING, y - FList.PADDING, VAvatar.WIDTH, VAvatar.HEIGHT);
             x += VAvatar.WIDTH;
             w -= VAvatar.WIDTH;

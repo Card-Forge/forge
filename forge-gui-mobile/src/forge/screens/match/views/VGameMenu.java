@@ -1,13 +1,14 @@
 package forge.screens.match.views;
 
+import forge.GuiBase;
+import forge.LobbyPlayer;
 import forge.assets.FSkinImage;
+import forge.deck.Deck;
 import forge.deck.FDeckViewer;
 import forge.game.io.GameStateDeserializer;
 import forge.game.io.GameStateSerializer;
-import forge.game.player.RegisteredPlayer;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
-import forge.player.GamePlayerUtil;
 import forge.properties.ForgeConstants;
 import forge.screens.match.FControl;
 import forge.screens.settings.SettingsScreen;
@@ -40,9 +41,10 @@ public class VGameMenu extends FDropDownMenu {
         addItem(new FMenuItem("Deck List", FSkinImage.DECKLIST, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                RegisteredPlayer player = GamePlayerUtil.getGuiRegisteredPlayer(FControl.getGame());
-                if (player != null) {
-                    FDeckViewer.show(player.getDeck());
+                final LobbyPlayer guiPlayer = GuiBase.getInterface().getGuiPlayer();
+                final Deck deck = FControl.getGameView().getDeck(guiPlayer);
+                if (deck != null) {
+                    FDeckViewer.show(deck);
                 }
             }
         }));

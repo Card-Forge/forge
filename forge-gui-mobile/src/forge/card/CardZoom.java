@@ -5,25 +5,26 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
-import forge.game.card.Card;
-import forge.item.PaperCard;
+import forge.item.IPaperCard;
 import forge.toolbox.FList;
 import forge.toolbox.FOverlay;
 import forge.util.Utils;
+import forge.view.CardView;
+import forge.view.ViewUtil;
 
 public class CardZoom extends FOverlay {
     private static final float TAB_HEIGHT = Utils.AVG_FINGER_HEIGHT;
     private static final FSkinFont FONT = FSkinFont.get(14);
     private static final CardZoom cardZoom = new CardZoom();
-    private static Card card;
+    private static CardView card;
     private static boolean zoomMode = true;
 
-    public static <T> void show(final PaperCard pc0) {
-        card = Card.getCardForUi(pc0);
+    public static <T> void show(final IPaperCard pc0) {
+        card = ViewUtil.getCardForUi(pc0);
         cardZoom.show();
     }
-    public static <T> void show(final Card card0) {
-        card = card0.getCardForUi();
+    public static <T> void show(final CardView card0) {
+        card = card0;
         cardZoom.show();
     }
 

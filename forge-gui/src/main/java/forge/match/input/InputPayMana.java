@@ -1,7 +1,12 @@
 package forge.match.input;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import forge.FThreads;
-import forge.GuiBase;
 import forge.ai.ComputerUtilMana;
 import forge.ai.PlayerControllerAi;
 import forge.card.ColorSet;
@@ -17,15 +22,10 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.player.HumanPlay;
+import forge.player.PlayerControllerHuman;
 import forge.util.Evaluator;
 import forge.util.ITriggerEvent;
 import forge.util.gui.SGuiChoose;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 
 public abstract class InputPayMana extends InputSyncronizedBase {
@@ -45,20 +45,21 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     private boolean locked = false;
 
-    protected InputPayMana(SpellAbility saPaidFor0, Player player0) {
+    protected InputPayMana(final PlayerControllerHuman controller, final SpellAbility saPaidFor0, final Player player0) {
+        super(controller);
         player = player0;
         game = player.getGame();
         saPaidFor = saPaidFor0;
 
         //if player is floating mana, show mana pool to make it easier to use that mana
         wasFloatingMana = !player.getManaPool().isEmpty();
-        zoneToRestore = wasFloatingMana ? GuiBase.getInterface().showManaPool(player) : null;
+        zoneToRestore = wasFloatingMana ? getGui().showManaPool(getController().getPlayerView(player)) : null;
     }
 
     @Override
     protected void onStop() {
         if (wasFloatingMana) { //hide mana pool if it was shown due to floating mana
-            GuiBase.getInterface().hideManaPool(player, zoneToRestore);
+            getGui().hideManaPool(getController().getPlayerView(player), zoneToRestore);
         }
     }
 
@@ -244,7 +245,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
         final SpellAbility chosen;
         if (chosenAbility == null) {
-            chosen = abilities.size() > 1 && choice ? SGuiChoose.one("Choose mana ability", abilities) : abilities.get(0);
+            chosen = abilities.size() > 1 && choice ? SGuiChoose.one(getGui(), "Choose mana ability", abilities) : abilities.get(0);
         }
         else {
             chosen = chosenAbility;
@@ -256,7 +257,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         Runnable proc = new Runnable() {
             @Override
             public void run() {
-                HumanPlay.playSpellAbility(chosen.getActivatingPlayer(), chosen);
+                HumanPlay.playSpellAbility(getController(), chosen.getActivatingPlayer(), chosen);
                 player.getManaPool().payManaFromAbility(saPaidFor, InputPayMana.this.manaCost, chosen);
                 
                 onManaAbilityPaid();
@@ -370,10 +371,10 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     protected void updateButtons() {
         if (supportAutoPay()) {
-            ButtonUtil.update("Auto", "Cancel", false, true, false);
+            ButtonUtil.update(getGui(), "Auto", "Cancel", false, true, false);
         }
         else {
-            ButtonUtil.update("", "Cancel", false, true, false);
+            ButtonUtil.update(getGui(), "", "Cancel", false, true, false);
         }
     }
 
@@ -392,7 +393,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 canPayManaCost = proc.getResult();
             }
             if (canPayManaCost) { //enabled Auto button if mana cost can be paid
-                ButtonUtil.update("Auto", "Cancel", true, true, true);
+                ButtonUtil.update(getGui(), "Auto", "Cancel", true, true, true);
             }
         }
         showMessage(getMessage());
@@ -412,7 +413,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             stop();
         }
         else {
-            FThreads.invokeInEdtNowOrLater(new Runnable() {
+            FThreads.invokeInEdtNowOrLater(getGui(), new Runnable() {
                 @Override
                 public void run() {
                     updateMessage();

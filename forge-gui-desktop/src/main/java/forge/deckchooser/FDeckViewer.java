@@ -1,33 +1,36 @@
 package forge.deckchooser;
 
-import forge.deck.CardPool;
-import forge.deck.Deck;
-import forge.deck.DeckSection;
-import forge.game.card.Card;
-import forge.gui.CardDetailPanel;
-import forge.gui.CardPicturePanel;
-import forge.item.PaperCard;
-import forge.itemmanager.CardManager;
-import forge.itemmanager.ItemManagerConfig;
-import forge.itemmanager.ItemManagerContainer;
-import forge.itemmanager.ItemManagerModel;
-import forge.itemmanager.views.*;
-import forge.toolbox.FButton;
-import forge.toolbox.FOptionPane;
-import forge.view.FDialog;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
+
+import javax.swing.JPanel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import net.miginfocom.swing.MigLayout;
+import forge.deck.CardPool;
+import forge.deck.Deck;
+import forge.deck.DeckSection;
+import forge.gui.CardDetailPanel;
+import forge.gui.CardPicturePanel;
+import forge.item.IPaperCard;
+import forge.item.PaperCard;
+import forge.itemmanager.CardManager;
+import forge.itemmanager.ItemManagerConfig;
+import forge.itemmanager.ItemManagerContainer;
+import forge.itemmanager.ItemManagerModel;
+import forge.itemmanager.views.ImageView;
+import forge.toolbox.FButton;
+import forge.toolbox.FOptionPane;
+import forge.view.CardView;
+import forge.view.FDialog;
+import forge.view.ViewUtil;
 
 @SuppressWarnings("serial")
 public class FDeckViewer extends FDialog {
@@ -36,7 +39,7 @@ public class FDeckViewer extends FDialog {
     private final CardManager cardManager;
     private DeckSection currentSection;
 
-    private final CardDetailPanel cardDetail = new CardDetailPanel(null);
+    private final CardDetailPanel cardDetail = new CardDetailPanel();
     private final CardPicturePanel cardPicture = new CardPicturePanel();
     private final FButton btnCopyToClipboard = new FButton("Copy to Clipboard");
     private final FButton btnChangeSection = new FButton("Change Section");
@@ -59,11 +62,11 @@ public class FDeckViewer extends FDialog {
                 return new ImageView<PaperCard>(this, model0) {
                     @Override
                     protected void showHoveredItem(PaperCard item) {
-                        Card card = Card.getCardForUi(item);
+                        final CardView card = ViewUtil.getCardForUi(item);
                         if (card == null) { return; }
 
                         cardDetail.setCard(card);
-                        cardPicture.setCard(card, true);
+                        cardPicture.setCard(card.getOriginal());
                     }
                 };
             }
@@ -72,14 +75,14 @@ public class FDeckViewer extends FDialog {
         this.cardManager.addSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                PaperCard paperCard = cardManager.getSelectedItem();
+                final IPaperCard paperCard = cardManager.getSelectedItem();
                 if (paperCard == null) { return; }
 
-                Card card = Card.getCardForUi(paperCard);
+                final CardView card = ViewUtil.getCardForUi(paperCard);
                 if (card == null) { return; }
 
                 cardDetail.setCard(card);
-                cardPicture.setCard(card, true);
+                cardPicture.setCard(card.getOriginal());
             }
         });
 

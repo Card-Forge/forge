@@ -17,12 +17,15 @@
  */
 package forge.screens.match.views;
 
-import forge.game.Game;
-import forge.game.GameType;
-import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
-import forge.game.player.Player;
-import forge.game.zone.ZoneType;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.swing.JLabel;
+import javax.swing.ScrollPaneConstants;
+
+import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -33,14 +36,9 @@ import forge.screens.match.controllers.CPlayers;
 import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+import forge.view.CardView;
+import forge.view.IGameView;
+import forge.view.PlayerView;
 
 /** 
  * Assembles Swing components of players report.
@@ -59,7 +57,7 @@ public enum VPlayers implements IVDoc<CPlayers> {
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     // Other fields
-    private Map<Player, JLabel[]> infoLBLs;
+    private Map<PlayerView, JLabel[]> infoLBLs;
 
     //========= Overridden methods
 
@@ -70,7 +68,7 @@ public enum VPlayers implements IVDoc<CPlayers> {
     public void populate() {
         scroller.removeAll();
         final String constraints = "w 97%!, gapleft 2%, gapbottom 1%";
-        for (final Entry<Player, JLabel[]> p : infoLBLs.entrySet()) {
+        for (final Entry<PlayerView, JLabel[]> p : infoLBLs.entrySet()) {
             for (JLabel label : p.getValue()) {
                 scroller.add(label, constraints);
             }
@@ -79,9 +77,9 @@ public enum VPlayers implements IVDoc<CPlayers> {
         parentCell.getBody().add(scroller, "w 100%, h 100%!");
     }
 
-    public void init(final Iterable<Player> players) {
+    public void init(final Iterable<PlayerView> players) {
         this.infoLBLs = new HashMap<>();
-        for (final Player p : players) {
+        for (final PlayerView p : players) {
             // Create and store labels detailing various non-critical player info.
             final InfoLabel name = new InfoLabel();
             final InfoLabel life = new InfoLabel();
@@ -142,19 +140,19 @@ public enum VPlayers implements IVDoc<CPlayers> {
     //========== Observer update methods
 
     /** @param game {@link forge.game.player.Player} */
-    public void update(Game game) {
+    public void update(final IGameView game) {
         // No need to update if this panel isn't showing
         if (parentCell == null || !this.equals(parentCell.getSelected())) { return; }
-        boolean isCommander = game.getRules().hasAppliedVariant(GameType.Commander);
+        boolean isCommander = game.isCommander();
 
-        for(Entry<Player, JLabel[]> rr : infoLBLs.entrySet()) {
-            Player p0 = rr.getKey();
+        for(final Entry<PlayerView, JLabel[]> rr : infoLBLs.entrySet()) {
+            PlayerView p0 = rr.getKey();
             final JLabel[] temp = rr.getValue();
             temp[1].setText("Life: " + String.valueOf(p0.getLife()) + "  |  Poison counters: "
                     + String.valueOf(p0.getPoisonCounters()));
             temp[2].setText("Maximum hand size: " + String.valueOf(p0.getMaxHandSize()));
             temp[3].setText("Cards drawn this turn: " + String.valueOf(p0.getNumDrawnThisTurn()));
-            temp[4].setText("Damage Prevention: " + String.valueOf(p0.getPreventNextDamageTotalShields()));
+            temp[4].setText("Damage Prevention: " + String.valueOf(p0.getPreventNextDamage()));
             List<String> keywords = p0.getKeywords();
             while (keywords.indexOf("CanSeeOpponentsFaceDownCards") != -1) {
                 keywords.remove("CanSeeOpponentsFaceDownCards");
@@ -165,8 +163,8 @@ public enum VPlayers implements IVDoc<CPlayers> {
                 temp[5].setText("");
             }
             if (FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
-                List<Card> list = p0.getCardsIn(ZoneType.Ante);
-                StringBuilder sb = new StringBuilder();
+                final List<CardView> list = p0.getAnteCards();
+                final StringBuilder sb = new StringBuilder();
                 sb.append("Ante'd: ");
                 for (int i = 0; i < list.size(); i++) {
                     sb.append(list.get(i));
@@ -177,7 +175,7 @@ public enum VPlayers implements IVDoc<CPlayers> {
                 temp[6].setText(sb.toString());
             }
             if (isCommander) {
-                temp[7].setText(CardFactoryUtil.getCommanderInfo(p0).trim().replace("\r\n", "; "));
+                temp[7].setText(p0.getCommanderInfo());
             }
         }
     }

@@ -13,6 +13,7 @@ import org.apache.commons.lang3.text.WordUtils;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.FThreads;
+import forge.GuiBase;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.card.MagicColor;
@@ -434,7 +435,8 @@ public class NewQuestScreen extends FScreen {
 
             case CustomFormat:
                 if (customFormatCodes.isEmpty()) {
-                    if (!SOptionPane.showConfirmDialog("You have defined a custom format that doesn't contain any sets.\nThis will start a game without restriction.\n\nContinue?")) {
+                    if (!SOptionPane.showConfirmDialog(GuiBase.getInterface(),
+                            "You have defined a custom format that doesn't contain any sets.\nThis will start a game without restriction.\n\nContinue?")) {
                         return;
                     }
                 }
@@ -446,7 +448,8 @@ public class NewQuestScreen extends FScreen {
             case Cube:
                 dckStartPool = getSelectedDeck();
                 if (dckStartPool == null) {
-                    SOptionPane.showMessageDialog("You have not selected a deck to start.", "Cannot start a quest", SOptionPane.ERROR_ICON);
+                    SOptionPane.showMessageDialog(GuiBase.getInterface(),
+                            "You have not selected a deck to start.", "Cannot start a quest", SOptionPane.ERROR_ICON);
                     return;
                 }
                 break;
@@ -492,7 +495,8 @@ public class NewQuestScreen extends FScreen {
                 break;
             case CustomFormat:
                 if (customPrizeFormatCodes.isEmpty()) {
-                    if (!SOptionPane.showConfirmDialog("You have defined custom format as containing no sets.\nThis will choose all editions without restriction as prized.\n\nContinue?")) {
+                    if (!SOptionPane.showConfirmDialog(GuiBase.getInterface(),
+                            "You have defined custom format as containing no sets.\nThis will choose all editions without restriction as prized.\n\nContinue?")) {
                         return;
                     }
                 }
@@ -508,17 +512,17 @@ public class NewQuestScreen extends FScreen {
 
         String questName;
         while (true) {
-            questName = SOptionPane.showInputDialog("Poets will remember your quest as:", "Quest Name");
+            questName = SOptionPane.showInputDialog(GuiBase.getInterface(), "Poets will remember your quest as:", "Quest Name");
             if (questName == null) { return; }
 
             questName = QuestUtil.cleanString(questName);
 
             if (questName.isEmpty()) {
-                SOptionPane.showMessageDialog("Please specify a quest name.");
+                SOptionPane.showMessageDialog(GuiBase.getInterface(), "Please specify a quest name.");
                 continue;
             }
             if (FileUtil.doesFileExist(ForgeConstants.QUEST_SAVE_DIR + questName + ".dat")) {
-                SOptionPane.showMessageDialog("A quest already exists with that name. Please pick another quest name.");
+                SOptionPane.showMessageDialog(GuiBase.getInterface(), "A quest already exists with that name. Please pick another quest name.");
                 continue;
             }
             break;
@@ -528,7 +532,7 @@ public class NewQuestScreen extends FScreen {
     }
 
     private void startNewQuest(final String questName, final GameFormat fmtPrizes, final Deck dckStartPool, final GameFormat fmtStartPool) {
-        FThreads.invokeInEdtLater(new Runnable() {
+        FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
             @Override
             public void run() {
                 LoadingOverlay.show("Creating new quest...", new Runnable() {

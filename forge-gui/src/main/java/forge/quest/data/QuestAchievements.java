@@ -252,7 +252,7 @@ public class QuestAchievements {
         for (int i = 0; i < draftsToGenerate; i++) {
             QuestEventDraft draft;
             if (nextDraftBlock != null) {
-                draft = QuestEventDraft.getDraftOrNull(nextDraftBlock);
+                draft = QuestEventDraft.getDraftOrNull(FModel.getQuest(), nextDraftBlock);
                 nextDraftBlock = null;
             } else {
                 draft = QuestEventDraft.getRandomDraftOrNull(FModel.getQuest());

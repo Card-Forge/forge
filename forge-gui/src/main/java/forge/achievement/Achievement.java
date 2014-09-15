@@ -5,6 +5,7 @@ import org.w3c.dom.Element;
 import forge.assets.FSkinProp;
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.interfaces.IGuiBase;
 import forge.util.gui.SOptionPane;
 
 public abstract class Achievement {
@@ -67,7 +68,7 @@ public abstract class Achievement {
         return null;
     }
 
-    public void update(Player player) {
+    public void update(IGuiBase gui, Player player) {
         current = evaluate(player, player.getGame(), current);
         if (current > best) {
             int oldBest = best;
@@ -98,7 +99,7 @@ public abstract class Achievement {
                 }
             }
             if (type != null) {
-                SOptionPane.showMessageDialog("You've earned a " + type + " trophy!\n\n" +
+                SOptionPane.showMessageDialog(gui, "You've earned a " + type + " trophy!\n\n" +
                         displayName + " - " + desc, "Achievement Earned", image);
             }
         }

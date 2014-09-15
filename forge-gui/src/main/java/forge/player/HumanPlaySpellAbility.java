@@ -50,10 +50,12 @@ import java.util.List;
  * @version $Id: HumanPlaySpellAbility.java 24317 2014-01-17 08:32:39Z Max mtg $
  */
 public class HumanPlaySpellAbility {
+    private final PlayerControllerHuman controller;
     private final SpellAbility ability;
     private final CostPayment payment;
 
-    public HumanPlaySpellAbility(final SpellAbility sa, final CostPayment cp) {
+    public HumanPlaySpellAbility(final PlayerControllerHuman controller, final SpellAbility sa, final CostPayment cp) {
+        this.controller = controller;
         this.ability = sa;
         this.payment = cp;
     }
@@ -94,7 +96,7 @@ public class HumanPlaySpellAbility {
         boolean prerequisitesMet = this.announceValuesLikeX()
                 && this.announceType()
                 && (!mayChooseTargets || setupTargets()) // if you can choose targets, then do choose them.
-                && (isFree || this.payment.payCost(new HumanCostDecision(human, ability, ability.getHostCard())));
+                && (isFree || this.payment.payCost(new HumanCostDecision(controller, human, ability, ability.getHostCard())));
 
         if (!prerequisitesMet) {
             if (!ability.isTrigger()) {

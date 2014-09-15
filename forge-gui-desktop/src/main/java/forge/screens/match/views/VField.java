@@ -17,8 +17,18 @@
  */
 package forge.screens.match.views;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+
+import net.miginfocom.swing.MigLayout;
 import forge.LobbyPlayer;
-import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -32,16 +42,8 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PlayerDetailsPanel;
+import forge.view.PlayerView;
 import forge.view.arcane.PlayArea;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /** 
  * Assembles Swing components of a player field instance.
@@ -56,7 +58,7 @@ public class VField implements IVDoc<CField> {
     private final DragTab tab = new DragTab("Field");
 
     // Other fields
-    private Player player = null;
+    private PlayerView player = null;
 
     // Top-level containers
     private final FScrollPane scroller = new FScrollPane(false);
@@ -79,22 +81,22 @@ public class VField implements IVDoc<CField> {
     /**
      * Assembles Swing components of a player field instance.
      * 
-     * @param playerOnwer &emsp; {@link forge.game.player.Player}
+     * @param p &emsp; {@link forge.game.player.Player}
      * @param id0 &emsp; {@link forge.gui.framework.EDocID}
      */
-    public VField(final EDocID id0, final Player playerOnwer, LobbyPlayer playerViewer) {
+    public VField(final EDocID id0, final PlayerView p, final LobbyPlayer playerViewer) {
         this.docID = id0;
         id0.setDoc(this);
 
-        this.player = playerOnwer;
-        if (playerOnwer != null) { tab.setText(playerOnwer.getName() + " Field"); }
+        this.player = p;
+        if (p != null) { tab.setText(p.getName() + " Field"); }
         else { tab.setText("NO PLAYER FOR " + docID.toString()); }
 
         detailsPanel = new PlayerDetailsPanel(player);
 
         // TODO player is hard-coded into tabletop...should be dynamic
         // (haven't looked into it too deeply). Doublestrike 12-04-12
-        tabletop = new PlayArea(scroller, id0 == EDocID.FIELD_1, player.getZone(ZoneType.Battlefield).getCards(false));
+        tabletop = new PlayArea(scroller, id0 == EDocID.FIELD_1, player, ZoneType.Battlefield);
 
         control = new CField(player, this, playerViewer);
 
@@ -195,7 +197,7 @@ public class VField implements IVDoc<CField> {
      * Gets the player currently associated with this field.
      * @return {@link forge.game.player.Player}
      */
-    public Player getPlayer() {
+    public PlayerView getPlayer() {
         return this.player;
     }
 

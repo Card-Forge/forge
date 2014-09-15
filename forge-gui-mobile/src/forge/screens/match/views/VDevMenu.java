@@ -1,7 +1,5 @@
 package forge.screens.match.views;
 
-import forge.GuiBase;
-import forge.game.player.Player;
 import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
@@ -11,7 +9,6 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.FControl;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.util.GuiDisplayUtil;
 import forge.util.ThreadUtil;
 
 public class VDevMenu extends FDropDownMenu {
@@ -23,7 +20,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() { //must invoke all these in game thread since they may require synchronous user input
                     @Override
                     public void run() {
-                        GuiDisplayUtil.devModeGenerateMana();
+                        FControl.getGameView().devGenerateMana();
                     }
                 });
             }
@@ -34,7 +31,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        GuiDisplayUtil.devModeTutor();
+                        FControl.getGameView().devTutorForCard();
                     }
                 });
             }
@@ -45,7 +42,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        GuiDisplayUtil.devModeCardToHand();
+                        FControl.getGameView().devAddCardToHand();
                     }
                 });
             }
@@ -56,7 +53,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        GuiDisplayUtil.devModeCardToBattlefield();
+                        FControl.getGameView().devAddCardToBattlefield();
                     }
                 });
             }
@@ -67,7 +64,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        GuiDisplayUtil.devModeSetLife();
+                        FControl.getGameView().devSetPlayerLife();
                     }
                 });
             }
@@ -78,7 +75,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        GuiDisplayUtil.devModeWinGame();
+                        FControl.getGameView().devWinGame();
                     }
                 });
             }
@@ -89,7 +86,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        GuiDisplayUtil.devSetupGameState();
+                        FControl.getGameView().devSetupGameState();
                     }
                 });
             }
@@ -102,12 +99,8 @@ public class VDevMenu extends FDropDownMenu {
             @Override
             public void handleEvent(FEvent e) {
                 boolean unlimitedLands = !prefs.getPrefBoolean(FPref.DEV_UNLIMITED_LAND);
+                FControl.getGameView().devTogglePlayManyLands(unlimitedLands);
 
-                for (Player p : FControl.getGame().getPlayers()) {
-                    if (p.getLobbyPlayer() == GuiBase.getInterface().getGuiPlayer() ) {
-                        p.canCheatPlayUnlimitedLands = unlimitedLands;
-                    }
-                }
                 // probably will need to call a synchronized method to have the game thread see changed value of the variable
 
                 prefs.setPref(FPref.DEV_UNLIMITED_LAND, String.valueOf(unlimitedLands));
@@ -120,7 +113,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        GuiDisplayUtil.devModeAddCounter();
+                        FControl.getGameView().devAddCounterToPermanent();
                     }
                 });
             }
@@ -131,7 +124,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        GuiDisplayUtil.devModeTapPerm();
+                        FControl.getGameView().devTapPermanent();
                     }
                 });
             }
@@ -142,7 +135,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        GuiDisplayUtil.devModeUntapPerm();
+                        FControl.getGameView().devUntapPermanent();
                     }
                 });
             }
@@ -153,7 +146,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        GuiDisplayUtil.devModeRiggedPlanarRoll();
+                        FControl.getGameView().devRiggedPlanerRoll();
                     }
                 });
             }
@@ -164,7 +157,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        GuiDisplayUtil.devModePlaneswalkTo();
+                        FControl.getGameView().devPlaneswalkTo();
                     }
                 });
             }

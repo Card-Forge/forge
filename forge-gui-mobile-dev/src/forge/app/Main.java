@@ -11,12 +11,14 @@ import com.badlogic.gdx.backends.lwjgl.LwjglClipboard;
 import forge.Forge;
 import forge.assets.AssetsDownloader;
 import forge.interfaces.IDeviceAdapter;
+import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.Utils;
 
 public class Main {
     public static void main(String[] args) {
         String assetsDir = AssetsDownloader.SHARE_DESKTOP_ASSETS ? "../forge-gui/" : "testAssets/";
+        ForgeConstants.init(assetsDir);
         if (!AssetsDownloader.SHARE_DESKTOP_ASSETS) {
             FileUtil.ensureDirectoryExists(assetsDir);
         }

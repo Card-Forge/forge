@@ -17,20 +17,11 @@
  */
 package forge.screens.match;
 
-import forge.Singletons;
-import forge.game.card.Card;
-import forge.game.combat.Combat;
-import forge.gui.framework.FScreen;
-import forge.screens.match.controllers.CDock;
-import forge.screens.match.views.VField;
-import forge.toolbox.FSkin;
-import forge.toolbox.FSkin.SkinnedPanel;
-import forge.view.FView;
-import forge.view.arcane.CardPanel;
-
-import javax.swing.*;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.GeneralPath;
@@ -38,6 +29,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.swing.JPanel;
+
+import com.google.common.collect.Lists;
+
+import forge.Singletons;
+import forge.gui.framework.FScreen;
+import forge.screens.match.controllers.CDock;
+import forge.screens.match.views.VField;
+import forge.toolbox.FSkin;
+import forge.toolbox.FSkin.SkinnedPanel;
+import forge.view.CardView;
+import forge.view.CombatView;
+import forge.view.FView;
+import forge.view.GameEntityView;
+import forge.view.arcane.CardPanel;
 
 /**
  * Semi-transparent overlay panel. Should be used with layered panes.
@@ -74,7 +81,7 @@ public enum TargetingOverlay {
     // TODO - this is called every repaint, regardless if card
     // positions have changed or not.  Could perform better if
     // it checked for a state change.  Doublestrike 28-09-12
-    private void assembleArcs(Combat combat) {
+    private void assembleArcs(final CombatView combat) {
         //List<VField> fields = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
         arcsCombat.clear();
         arcsOther.clear();
@@ -115,7 +122,7 @@ public enum TargetingOverlay {
         for (CardPanel c : cardPanels) {
             if (c.isShowing()) {
 	            cardLocOnScreen = c.getCardLocationOnScreen();
-	            endpoints.put(c.getCard().getUniqueNumber(), new Point(
+	            endpoints.put(c.getCard().getId(), new Point(
 	                (int) (cardLocOnScreen.getX() - locOnScreen.getX() + c.getWidth() / 4),
 	                (int) (cardLocOnScreen.getY() - locOnScreen.getY() + c.getHeight() / 2)
 	            ));
@@ -124,16 +131,16 @@ public enum TargetingOverlay {
 
         if (CDock.SINGLETON_INSTANCE.getArcState() == 1) {
             // Only work with the active panel
-            Card c = activePanel.getCard();
+            final CardView c = activePanel.getCard();
             addArcsForCard(c, endpoints, combat);
         } else {
             // Work with all card panels currently visible
-            List<Card> visualized = new ArrayList<Card>();
-            for (CardPanel c : cardPanels) {
+            final List<CardView> visualized = Lists.newArrayList();
+            for (final CardPanel c : cardPanels) {
                 if (!c.isShowing()) {
                     continue;
                 }
-                Card card = c.getCard();
+                final CardView card = c.getCard();
                 if (visualized.contains(card)) { continue; }
 
                 visualized.addAll(addArcsForCard(card, endpoints, combat));
@@ -141,23 +148,22 @@ public enum TargetingOverlay {
         }
     }
 
-    private List<Card> addArcsForCard(final Card c, final Map<Integer, Point> endpoints, final Combat combat) {
-        List<Card> cardsVisualized = new ArrayList<Card>();
-        cardsVisualized.add(c);
+    private List<CardView> addArcsForCard(final CardView c, final Map<Integer, Point> endpoints, final CombatView combat) {
+        final List<CardView> cardsVisualized = Lists.newArrayList(c);
 
-        Card enchanting = c.getEnchantingCard();
-        Card equipping = c.getEquippingCard();
-        Card fortifying = c.getFortifyingCard();
-        List<Card> enchantedBy = c.getEnchantedBy();
-        List<Card> equippedBy = c.getEquippedBy();
-        List<Card> fortifiedBy = c.getFortifiedBy();
-        Card paired = c.getPairedWith();
+        final CardView enchanting = c.getEnchantingCard();
+        final CardView equipping = c.getEquipping();
+        final CardView fortifying = c.getFortifying();
+        final Iterable<CardView> enchantedBy = c.getEnchantedBy();
+        final Iterable<CardView> equippedBy = c.getEquippedBy();
+        final Iterable<CardView> fortifiedBy = c.getFortifiedBy();
+        final CardView paired = c.getPairedWith();
 
         if (null != enchanting) {
             if (!enchanting.getController().equals(c.getController())) {
                 arcsOther.add(new Point[] {
-                    endpoints.get(enchanting.getUniqueNumber()),
-                    endpoints.get(c.getUniqueNumber())
+                    endpoints.get(enchanting.getId()),
+                    endpoints.get(c.getId())
                 });
                 cardsVisualized.add(enchanting);
             }
@@ -165,8 +171,8 @@ public enum TargetingOverlay {
         if (null != equipping) {
             if (!equipping.getController().equals(c.getController())) {
                 arcsOther.add(new Point[] {
-                    endpoints.get(equipping.getUniqueNumber()),
-                    endpoints.get(c.getUniqueNumber())
+                    endpoints.get(equipping.getId()),
+                    endpoints.get(c.getId())
                 });
                 cardsVisualized.add(equipping);
             }
@@ -174,40 +180,40 @@ public enum TargetingOverlay {
         if (null != fortifying) {
             if (!fortifying.getController().equals(c.getController())) {
                 arcsOther.add(new Point[] {
-                    endpoints.get(fortifying.getUniqueNumber()),
-                    endpoints.get(c.getUniqueNumber())
+                    endpoints.get(fortifying.getId()),
+                    endpoints.get(c.getId())
                 });
                 cardsVisualized.add(fortifying);
             }
         }
         if (null != enchantedBy) {
-            for (Card enc : enchantedBy) {
+            for (final CardView enc : enchantedBy) {
                 if (!enc.getController().equals(c.getController())) {
                     arcsOther.add(new Point[] {
-                        endpoints.get(c.getUniqueNumber()),
-                        endpoints.get(enc.getUniqueNumber())
+                        endpoints.get(c.getId()),
+                        endpoints.get(enc.getId())
                     });
                     cardsVisualized.add(enc);
                 }
             }
         }
         if (null != equippedBy) {
-            for (Card eq : equippedBy) {
+            for (final CardView eq : equippedBy) {
                 if (!eq.getController().equals(c.getController())) {
                     arcsOther.add(new Point[] {
-                        endpoints.get(c.getUniqueNumber()),
-                        endpoints.get(eq.getUniqueNumber())
+                        endpoints.get(c.getId()),
+                        endpoints.get(eq.getId())
                     });
                     cardsVisualized.add(eq);
                 }
             }
         }
         if (null != fortifiedBy) {
-            for (Card eq : fortifiedBy) {
+            for (final CardView eq : fortifiedBy) {
                 if (!eq.getController().equals(c.getController())) {
                     arcsOther.add(new Point[] {
-                        endpoints.get(c.getUniqueNumber()),
-                        endpoints.get(eq.getUniqueNumber())
+                        endpoints.get(c.getId()),
+                        endpoints.get(eq.getId())
                     });
                     cardsVisualized.add(eq);
                 }
@@ -215,29 +221,36 @@ public enum TargetingOverlay {
         }
         if (null != paired) {
             arcsOther.add(new Point[] {
-                endpoints.get(paired.getUniqueNumber()),
-                endpoints.get(c.getUniqueNumber())
+                endpoints.get(paired.getId()),
+                endpoints.get(c.getId())
             });
             cardsVisualized.add(paired);
         }
-        if ( null != combat ) {
-            for (Card planeswalker : combat.getDefendingPlaneswalkers()) {
-                List<Card> cards = combat.getAttackersOf(planeswalker);
-                for (Card pwAttacker : cards) {
-                    if (!planeswalker.equals(c) && !pwAttacker.equals(c)) { continue; }
-                    arcsCombat.add(new Point[] {
-                        endpoints.get(planeswalker.getUniqueNumber()),
-                        endpoints.get(pwAttacker.getUniqueNumber())
+        if (null != combat) {
+            final GameEntityView defender = combat.getDefender(c);
+            // if c is attacking a planeswalker
+            if (defender instanceof CardView) {
+                arcsCombat.add(new Point[] {
+                        endpoints.get(((CardView)defender).getId()),
+                        endpoints.get(c.getId())
                     });
-                }
             }
-            for (Card attackingCard : combat.getAttackers()) {
-                List<Card> cards = combat.getBlockers(attackingCard);
-                for (Card blockingCard : cards) {
+            // if c is a planeswalker that's being attacked
+            final Iterable<CardView> attackers = combat.getAttackersOf(c);
+            for (final CardView pwAttacker : attackers) {
+                arcsCombat.add(new Point[] {
+                    endpoints.get(c.getId()),
+                    endpoints.get(pwAttacker.getId())
+                });
+            }
+            for (final CardView attackingCard : combat.getAttackers()) {
+                final Iterable<CardView> cards = combat.getBlockers(attackingCard);
+                if (cards == null) continue;
+                for (final CardView blockingCard : cards) {
                     if (!attackingCard.equals(c) && !blockingCard.equals(c)) { continue; }
                     arcsCombat.add(new Point[] {
-                        endpoints.get(attackingCard.getUniqueNumber()),
-                        endpoints.get(blockingCard.getUniqueNumber())
+                        endpoints.get(attackingCard.getId()),
+                        endpoints.get(blockingCard.getId())
                     });
                     cardsVisualized.add(blockingCard);
                 }
@@ -340,7 +353,6 @@ public enum TargetingOverlay {
          */
         @Override
         public void paintComponent(final Graphics g) {
-            final Combat combat = Singletons.getControl().getObservedGame().getCombat(); // this will get deprecated too
             // No need for this except in match view
             if (Singletons.getControl().getCurrentScreen() != FScreen.MATCH_SCREEN) { return; }
 
@@ -351,7 +363,7 @@ public enum TargetingOverlay {
             if (overlaystate == 0) { return; }
 
             // Arc drawing
-            assembleArcs(combat);
+            assembleArcs(Singletons.getControl().getGameView().getCombat());
 
             if (arcsCombat.isEmpty() && arcsOther.isEmpty()) { return; }
 

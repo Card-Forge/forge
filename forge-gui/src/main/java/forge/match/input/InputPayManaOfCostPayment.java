@@ -4,11 +4,12 @@ import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 
 public class InputPayManaOfCostPayment extends InputPayMana {
-    public InputPayManaOfCostPayment(ManaCostBeingPaid cost, SpellAbility spellAbility, Player payer) {
-        super(spellAbility, payer);
+    public InputPayManaOfCostPayment(final PlayerControllerHuman controller, ManaCostBeingPaid cost, SpellAbility spellAbility, Player payer) {
+        super(controller, spellAbility, payer);
         manaCost = cost;
     }
 

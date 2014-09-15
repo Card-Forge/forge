@@ -17,18 +17,20 @@
  */
 package forge.toolbox.special;
 
-import forge.game.card.Card;
+import java.util.Collections;
+import java.util.List;
+
+import javax.swing.AbstractListModel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import forge.gui.CardDetailPanel;
 import forge.gui.CardPicturePanel;
 import forge.item.PaperCard;
 import forge.toolbox.FScrollPane;
-
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import java.util.Collections;
-import java.util.List;
+import forge.view.ViewUtil;
 
 /**
  * A simple JPanel that shows three columns: card list, pic, and description..
@@ -56,7 +58,7 @@ public class CardViewer extends JPanel {
     public CardViewer(final List<PaperCard> list) {
         this.list = Collections.unmodifiableList(list);
         this.jList = new JList<PaperCard>(new ChooserListModel());
-        this.detail = new CardDetailPanel(null);
+        this.detail = new CardDetailPanel();
         this.picture = new CardPicturePanel();
 
         this.add(new FScrollPane(this.jList, true));
@@ -91,7 +93,7 @@ public class CardViewer extends JPanel {
             // (String) jList.getSelectedValue();
             if ((row >= 0) && (row < CardViewer.this.list.size())) {
                 final PaperCard cp = CardViewer.this.list.get(row);
-                CardViewer.this.detail.setCard(Card.getCardForUi(cp));
+                CardViewer.this.detail.setCard(ViewUtil.getCardForUi(cp));
                 CardViewer.this.picture.setCard(cp);
             }
         }

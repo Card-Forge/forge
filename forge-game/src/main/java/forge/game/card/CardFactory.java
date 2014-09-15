@@ -418,6 +418,8 @@ public class CardFactory {
         c.setText(face.getNonAbilityText());
         if( face.getInitialLoyalty() > 0 ) c.setBaseLoyalty(face.getInitialLoyalty());
 
+        c.getCharacteristics().setOracleText(face.getOracleText().replace("\\n", "\r\n"));
+
         // Super and 'middle' types should use enums.
         List<String> coreTypes = face.getType().getTypesBeforeDash();
         coreTypes.addAll(face.getType().getSubTypes());

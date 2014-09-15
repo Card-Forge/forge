@@ -1,21 +1,31 @@
 package forge.match.input;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import forge.FThreads;
-import forge.GuiBase;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.interfaces.IGuiBase;
 import forge.util.ITriggerEvent;
 import forge.util.ThreadUtil;
-
-import java.util.concurrent.atomic.AtomicInteger;
-
 
 public class InputLockUI implements Input  {
     private final AtomicInteger iCall = new AtomicInteger();
 
-    public InputLockUI(InputQueue inputQueue) {
+    private IGuiBase gui;
+    private final Game game;
+    public InputLockUI(final Game game, final InputQueue inputQueue) {
+        this.game = game;
+    }
+
+    private IGuiBase getGui() {
+        return gui;
+    }
+
+    public void setGui(final IGuiBase gui) {
+        this.gui = gui;
     }
 
     public void showMessageInitial() {
@@ -39,24 +49,24 @@ public class InputLockUI implements Input  {
         public void run() {
             if ( ixCall != iCall.get() || !isActive()) // cancel the message if it's not from latest call or input is gone already 
                 return;
-            FThreads.invokeInEdtLater(showMessageFromEdt);
+            FThreads.invokeInEdtLater(getGui(), showMessageFromEdt);
         }
     };
     
     private final Runnable showMessageFromEdt = new Runnable() {
         @Override
         public void run() {
-            ButtonUtil.update("", "", false, false, false);
+            ButtonUtil.update(getGui(), "", "", false, false, false);
             showMessage("Waiting for actions...");
         }
     };
 
     protected final boolean isActive() {
-        return GuiBase.getInterface().getInputQueue().getInput() == this;
+        return getGui().getInputQueue().getInput() == this;
     }
 
     protected void showMessage(String message) { 
-        GuiBase.getInterface().showPromptMessage(message);
+        getGui().showPromptMessage(message);
     }
 
     @Override
@@ -75,7 +85,6 @@ public class InputLockUI implements Input  {
     @Override
     public void selectButtonCancel() {
         //cancel auto pass for all players
-        Game game = GuiBase.getInterface().getGame();
         for (Player player : game.getPlayers()) {
             player.getController().autoPassCancel();
         }

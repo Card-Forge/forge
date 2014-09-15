@@ -17,21 +17,30 @@
  */
 package forge.screens.match.views;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
+
+import net.miginfocom.swing.MigLayout;
 import forge.ImageCache;
-import forge.Singletons;
 import forge.card.CardDetailUtil;
 import forge.card.CardDetailUtil.DetailColors;
-import forge.game.card.Card;
-import forge.game.player.Player;
-import forge.game.player.PlayerController;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.zone.MagicStack;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
-import forge.match.input.InputConfirm;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CPrompt;
 import forge.screens.match.controllers.CStack;
@@ -39,18 +48,11 @@ import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedTextArea;
+import forge.view.CardView;
+import forge.view.IGameView;
+import forge.view.PlayerView;
+import forge.view.StackItemView;
 import forge.view.arcane.CardPanel;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 
 /** 
  * Assembles Swing components of stack report.
@@ -129,10 +131,11 @@ public enum VStack implements IVDoc<CStack> {
     //========== Observer update methods
 
     /**
-     * @param stack
+     * @param model
      * @param viewer */
-    public void updateStack(final MagicStack stack, final Player localPlayer) {
-        tab.setText("Stack : " + stack.size());
+    public void updateStack(final IGameView model, final PlayerView localPlayer) {
+        final java.util.List<StackItemView> items = model.getStack();
+        tab.setText("Stack : " + items.size());
 
         // No need to update the rest unless it's showing
         if (!parentCell.getSelected().equals(this)) { return; }
@@ -140,15 +143,15 @@ public enum VStack implements IVDoc<CStack> {
         scroller.removeAll();
 
         boolean isFirst = true;
-        for (final SpellAbilityStackInstance spell : stack) {
-            StackInstanceTextArea tar = new StackInstanceTextArea(stack, spell, localPlayer);
+        for (final StackItemView item : items) {
+            final StackInstanceTextArea tar = new StackInstanceTextArea(model, item, localPlayer);
 
             scroller.add(tar, "pushx, growx" + (isFirst ? "" : ", gaptop 2px"));
 
             //update the Card Picture/Detail when the spell is added to the stack
             if (isFirst) {
                 isFirst = false;
-                CMatchUI.SINGLETON_INSTANCE.setCard(spell.getSourceCard());
+                CMatchUI.SINGLETON_INSTANCE.setCard(item.getSource());
             }
         }
 
@@ -169,16 +172,14 @@ public enum VStack implements IVDoc<CStack> {
         private static final int CARD_WIDTH = 50;
         private static final int CARD_HEIGHT = Math.round((float)CARD_WIDTH * CardPanel.ASPECT_RATIO);
 
-        private final Card sourceCard;
+        private final CardView sourceCard;
 
-        public StackInstanceTextArea(final MagicStack stack, final SpellAbilityStackInstance spell, final Player localPlayer) {
-            sourceCard = spell.getSourceCard().getCardForUi();
+        public StackInstanceTextArea(final IGameView game, final StackItemView item, final PlayerView localPlayer) {
+            sourceCard = item.getSource();
 
-            String txt = spell.getStackDescription();
-            if (spell.getSpellAbility().isOptionalTrigger()
-                    && spell.getSourceCard().getController().equals(localPlayer)) {
-                txt = "(OPTIONAL) " + txt;
-            }
+            final String txt = (item.isOptionalTrigger() && item.getActivatingPlayer().equals(localPlayer)
+                    ? "(OPTIONAL) " : "") + item.getText();
+
             setText(txt);
             setToolTipText(txt);
             setOpaque(true);
@@ -193,13 +194,13 @@ public enum VStack implements IVDoc<CStack> {
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
-                    if (!spell.getStackDescription().startsWith("Morph ")) {
-                        CMatchUI.SINGLETON_INSTANCE.setCard(spell.getSpellAbility().getHostCard());
+                    if (!txt.startsWith("Morph ")) {
+                        CMatchUI.SINGLETON_INSTANCE.setCard(item.getSource());
                     }
                 }
             });
 
-            if (spell.getSpellAbility().isAbility() && localPlayer != null) {
+            if (item.isAbility() && localPlayer != null) {
                 addMouseListener(new FMouseAdapter() {
                     @Override
                     public void onLeftClick(MouseEvent e) {
@@ -210,13 +211,13 @@ public enum VStack implements IVDoc<CStack> {
                         onClick(e);
                     }
                     private void onClick(MouseEvent e) {
-                        abilityMenu.setStackInstance(stack, spell.getSpellAbility(), localPlayer);
+                        abilityMenu.setStackInstance(game, item, localPlayer);
                         abilityMenu.show(e.getComponent(), e.getX(), e.getY());
                     }
                 });
             }
 
-            DetailColors color = CardDetailUtil.getBorderColor(sourceCard, !spell.getStackDescription().startsWith("Morph "));
+            final DetailColors color = CardDetailUtil.getBorderColor(item.getSource().getOriginal());
             setBackground(new Color(color.r, color.g, color.b));
             setForeground(FSkin.getHighContrastColor(getBackground()));
         }
@@ -228,7 +229,7 @@ public enum VStack implements IVDoc<CStack> {
             final Graphics2D g2d = (Graphics2D) g;
 
             //draw image for source card
-            BufferedImage img = ImageCache.getImage(sourceCard, CARD_WIDTH, CARD_HEIGHT);
+            final BufferedImage img = ImageCache.getImage(sourceCard, CARD_WIDTH, CARD_HEIGHT);
             if (img != null) {
                 g2d.drawImage(img, null, PADDING, PADDING);
             }
@@ -242,9 +243,8 @@ public enum VStack implements IVDoc<CStack> {
         private final JCheckBoxMenuItem jmiAutoYield;
         private final JCheckBoxMenuItem jmiAlwaysYes;
         private final JCheckBoxMenuItem jmiAlwaysNo;
-        private MagicStack stack;
-        private SpellAbility ability;
-        private PlayerController controller;
+        private IGameView game;
+        private StackItemView item;
 
         private Integer triggerID = 0;
 
@@ -253,12 +253,12 @@ public enum VStack implements IVDoc<CStack> {
             jmiAutoYield.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    final String key = ability.toUnsuppressedString();
-                    final boolean autoYield = controller.shouldAutoYield(key);
-                    controller.setShouldAutoYield(key, !autoYield);
-                    if (!autoYield && stack.peekAbility() == ability) {
+                    final String key = item.getKey();
+                    final boolean autoYield = game.shouldAutoYield(key);
+                    game.setShouldAutoYield(key, !autoYield);
+                    if (!autoYield && game.peekStack() == item) {
                         //auto-pass priority if ability is on top of stack
-                        CPrompt.SINGLETON_INSTANCE.getInputControl().passPriority();
+                        CPrompt.SINGLETON_INSTANCE.passPriority();
                     }
                 }
             });
@@ -268,15 +268,14 @@ public enum VStack implements IVDoc<CStack> {
             jmiAlwaysYes.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    if (controller.shouldAlwaysAcceptTrigger(triggerID)) {
-                        controller.setShouldAlwaysAskTrigger(triggerID);
+                    if (game.shouldAlwaysAcceptTrigger(triggerID)) {
+                        game.setShouldAlwaysAskTrigger(triggerID);
                     }
                     else {
-                        controller.setShouldAlwaysAcceptTrigger(triggerID);
-                        if (stack.peekAbility() == ability &&
-                                Singletons.getControl().getInputQueue().getInput() instanceof InputConfirm) {
+                        game.setShouldAlwaysAcceptTrigger(triggerID);
+                        if (game.peekStack() == item) {
                             //auto-yes if ability is on top of stack
-                            CPrompt.SINGLETON_INSTANCE.getInputControl().selectButtonOK();
+                            game.confirm();
                         }
                     }
                 }
@@ -287,15 +286,14 @@ public enum VStack implements IVDoc<CStack> {
             jmiAlwaysNo.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    if (controller.shouldAlwaysDeclineTrigger(triggerID)) {
-                        controller.setShouldAlwaysAskTrigger(triggerID);
+                    if (game.shouldAlwaysDeclineTrigger(triggerID)) {
+                        game.setShouldAlwaysAskTrigger(triggerID);
                     }
                     else {
-                        controller.setShouldAlwaysDeclineTrigger(triggerID);
-                        if (stack.peekAbility() == ability &&
-                                Singletons.getControl().getInputQueue().getInput() instanceof InputConfirm) {
+                        game.setShouldAlwaysDeclineTrigger(triggerID);
+                        if (game.peekStack() == item) {
                             //auto-no if ability is on top of stack
-                            CPrompt.SINGLETON_INSTANCE.getInputControl().selectButtonOK();
+                            game.confirm();
                         }
                     }
                 }
@@ -303,17 +301,16 @@ public enum VStack implements IVDoc<CStack> {
             add(jmiAlwaysNo);
         }
 
-        public void setStackInstance(final MagicStack stack0, final SpellAbility ability0, final Player localPlayer) {
-            stack = stack0;
-            ability = ability0;
-            controller = localPlayer.getController();
-            triggerID = ability.getSourceTrigger();
+        public void setStackInstance(final IGameView game, final StackItemView item, final PlayerView localPlayer) {
+            this.game = game;
+            this.item = item;
+            triggerID = Integer.valueOf(item.getSourceTrigger());
 
-            jmiAutoYield.setSelected(controller.shouldAutoYield(ability.toUnsuppressedString()));
+            jmiAutoYield.setSelected(game.shouldAutoYield(item.getKey()));
 
-            if (ability.isOptionalTrigger() && ability.getActivatingPlayer() == localPlayer) {
-                jmiAlwaysYes.setSelected(controller.shouldAlwaysAcceptTrigger(triggerID));
-                jmiAlwaysNo.setSelected(controller.shouldAlwaysDeclineTrigger(triggerID));
+            if (item.isOptionalTrigger() && item.getActivatingPlayer().equals(localPlayer)) {
+                jmiAlwaysYes.setSelected(game.shouldAlwaysAcceptTrigger(triggerID));
+                jmiAlwaysNo.setSelected(game.shouldAlwaysDeclineTrigger(triggerID));
                 jmiAlwaysYes.setVisible(true);
                 jmiAlwaysNo.setVisible(true);
             }

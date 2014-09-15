@@ -18,7 +18,19 @@
 
 package forge.gui;
 
-import forge.game.card.Card;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
+import java.util.Collections;
+import java.util.List;
+
+import javax.swing.AbstractListModel;
+import javax.swing.Icon;
+import javax.swing.JList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
@@ -26,17 +38,7 @@ import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.view.FDialog;
-
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
-import java.util.Collections;
-import java.util.List;
+import forge.view.ViewUtil;
 
 /**
  * A simple class that shows a list of cards in a dialog with preview in its
@@ -97,7 +99,7 @@ public class CardListViewer extends FDialog {
     public CardListViewer(final String title, final String message, final List<PaperCard> list, final Icon dialogIcon) {
         this.list = Collections.unmodifiableList(list);
         this.jList = new JList<PaperCard>(new ChooserListModel());
-        this.detail = new CardDetailPanel(null);
+        this.detail = new CardDetailPanel();
         this.picture = new CardPicturePanel();
         this.picture.setOpaque(false);
 
@@ -170,7 +172,7 @@ public class CardListViewer extends FDialog {
             // (String) jList.getSelectedValue();
             if ((row >= 0) && (row < CardListViewer.this.list.size())) {
                 final PaperCard cp = CardListViewer.this.list.get(row);
-                CardListViewer.this.detail.setCard(Card.getCardForUi(cp));
+                CardListViewer.this.detail.setCard(ViewUtil.getCardForUi(cp));
                 CardListViewer.this.picture.setCard(cp);
             }
         }

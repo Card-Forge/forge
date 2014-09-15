@@ -18,8 +18,10 @@
 package forge.game.card;
 
 import com.google.common.collect.Lists;
+
 import forge.card.CardEdition;
 import forge.card.CardRarity;
+import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
@@ -41,6 +43,7 @@ public class CardCharacteristics {
     private List<String> type = new CopyOnWriteArrayList<String>();
     private ManaCost manaCost = ManaCost.NO_COST;
     private List<CardColor> cardColor = new ArrayList<CardColor>();
+    private String oracleText = "";
     private int baseAttack = 0;
     private int baseDefense = 0;
     private List<String> intrinsicKeyword = new ArrayList<String>();
@@ -144,6 +147,20 @@ public class CardCharacteristics {
     }
 
     /**
+     * @return the oracleText
+     */
+    public String getOracleText() {
+        return oracleText;
+    }
+
+    /**
+     * @param oracleText the oracleText to set
+     */
+    public void setOracleText(final String oracleText) {
+        this.oracleText = oracleText;
+    }
+
+    /**
      * Gets the base attack.
      * 
      * @return the baseAttack
@@ -211,7 +228,9 @@ public class CardCharacteristics {
 
     public final void setSpellAbility(SpellAbility sa) {
     	this.spellAbility.clear();
-    	this.spellAbility.add(sa);
+    	if (sa != null) {
+    	    this.spellAbility.add(sa);
+    	}
     }
 
     /**
@@ -432,7 +451,6 @@ public class CardCharacteristics {
         }
     }
 
-
     public CardRarity getRarity() {
         return rarity;
     }
@@ -452,4 +470,22 @@ public class CardCharacteristics {
         this.curSetCode = curSetCode; 
     }
 
+
+    /**
+     * Determine the colors.
+     * 
+     * @return a {@link ColorSet}.
+     */
+    public final ColorSet determineColor() {
+        final List<CardColor> colorList = this.getCardColor();
+        byte colors = 0;
+        for (int i = colorList.size() - 1;i >= 0;i--) {
+            final CardColor cc = colorList.get(i);
+            colors |= cc.getColorMask();
+            if (!cc.isAdditional()) {
+                return ColorSet.fromMask(colors);
+            }
+        }
+        return ColorSet.fromMask(colors);
+    }
 }

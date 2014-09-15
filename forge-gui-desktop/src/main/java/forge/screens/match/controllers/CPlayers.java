@@ -1,9 +1,9 @@
 package forge.screens.match.controllers;
 
 import forge.UiCommand;
-import forge.game.Game;
 import forge.gui.framework.ICDoc;
 import forge.screens.match.views.VPlayers;
+import forge.view.IGameView;
 
 /** 
  * Controls the combat panel in the match UI.
@@ -14,7 +14,7 @@ import forge.screens.match.views.VPlayers;
 public enum CPlayers implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
-    private Game game;
+    private IGameView game;
 
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
@@ -39,7 +39,7 @@ public enum CPlayers implements ICDoc {
         VPlayers.SINGLETON_INSTANCE.update(game);
     }
 
-    public void setModel(Game game) {
+    public void setModel(IGameView game) {
         this.game = game;
     }
 

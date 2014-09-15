@@ -17,28 +17,20 @@
  */
 package forge.screens.match.controllers;
 
-import forge.LobbyPlayer;
-import forge.UiCommand;
+import java.io.File;
+
 import forge.FThreads;
+import forge.GuiBase;
 import forge.Singletons;
+import forge.UiCommand;
 import forge.assets.FSkinProp;
+import forge.control.FControl;
+import forge.deck.Deck;
 import forge.deckchooser.FDeckViewer;
-import forge.game.Game;
-import forge.game.card.Card;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates.Presets;
-import forge.game.combat.Combat;
-import forge.game.combat.CombatUtil;
-import forge.game.phase.PhaseHandler;
-import forge.game.phase.PhaseType;
-import forge.game.player.Player;
-import forge.game.player.RegisteredPlayer;
-import forge.game.zone.ZoneType;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SLayoutIO;
 import forge.model.FModel;
-import forge.player.GamePlayerUtil;
 import forge.properties.FileLocation;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
@@ -47,9 +39,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.SaveOpenDialog;
 import forge.toolbox.SaveOpenDialog.Filetypes;
 import forge.view.FView;
-
-import java.io.File;
-import java.util.List;
+import forge.view.IGameView;
 
 /**
  * Controls the dock panel in the match UI.
@@ -61,32 +51,24 @@ public enum CDock implements ICDoc {
     SINGLETON_INSTANCE;
 
     private int arcState;
-    private Game game;
+    private IGameView game;
 
-    public void setModel(Game game0, LobbyPlayer player0) {
+    public void setModel(final IGameView game0) {
         game = game0;
-    }
-
-    public Player findAffectedPlayer() {
-        return Singletons.getControl().getCurrentPlayer();
     }
 
     /**
      * End turn.
      */
     public void endTurn() {
-        Player p = findAffectedPlayer();
-
-        if (p != null) {
-            CPrompt.SINGLETON_INSTANCE.getInputControl().passPriority(p, PhaseType.CLEANUP);
-        }
+        CPrompt.SINGLETON_INSTANCE.passPriorityUntilEndOfTurn();
     }
 
     public void revertLayout() {
         SOverlayUtils.genericOverlay();
         FView.SINGLETON_INSTANCE.getPnlContent().removeAll();
 
-        FThreads.invokeInEdtLater(new Runnable(){
+        FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable(){
             @Override public void run() {
                 SLayoutIO.loadLayout(null);
                 SOverlayUtils.hideOverlay();
@@ -116,7 +98,7 @@ public enum CDock implements ICDoc {
             FView.SINGLETON_INSTANCE.getPnlContent().removeAll();
             // let it redraw everything first
 
-            FThreads.invokeInEdtLater(new Runnable() {
+            FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
                 @Override
                 public void run() {
                     if (loadFile != null) {
@@ -133,9 +115,9 @@ public enum CDock implements ICDoc {
      * View deck list.
      */
     public void viewDeckList() {
-        RegisteredPlayer player = GamePlayerUtil.getGuiRegisteredPlayer(game);
-        if (player != null) {
-            FDeckViewer.show(player.getDeck());
+        final Deck deck = FControl.instance.getGameView().getDeck(GuiBase.getInterface().getGuiPlayer());
+        if (deck != null) {
+            FDeckViewer.show(deck);
         }
     }
 
@@ -175,12 +157,11 @@ public enum CDock implements ICDoc {
 
     /** Attack with everyone. */
     public void alphaStrike() {
-        final PhaseHandler ph = game.getPhaseHandler();
-
-        final Player p = findAffectedPlayer();
-        final Game game = p.getGame();
-        Combat combat = game.getCombat();
-        if (ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, p) && combat!= null) { // ph.is(...) includes null check
+        game.alphaStrike();
+        /* TODO: rewrite this!
+        final Player p = this.findAffectedPlayer();
+        final Combat combat = FControl.instance.getObservedGame().getCombat();
+        if (this.game.isCombatDeclareAttackers()) {
             List<Player> defenders = p.getOpponents();
 
             for (Card c : CardLists.filter(p.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
@@ -198,6 +179,7 @@ public enum CDock implements ICDoc {
             // TODO Is this redrawing immediately?
             FView.SINGLETON_INSTANCE.getFrame().repaint();
         }
+        */
     }
 
     /** Toggle targeting overlay painting. */

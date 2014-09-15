@@ -17,30 +17,35 @@
  */
 package forge.download;
 
-import com.esotericsoftware.minlog.Log;
-
-import forge.FThreads;
-import forge.GuiBase;
-import forge.UiCommand;
-import forge.error.BugReporter;
-import forge.interfaces.IButton;
-import forge.interfaces.IProgressBar;
-import forge.interfaces.ITextField;
-import forge.util.FileUtil;
-import forge.util.MyRandom;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.*;
+import java.net.ConnectException;
+import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.MalformedURLException;
+import java.net.Proxy;
+import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
+
+import org.apache.commons.lang3.tuple.Pair;
+
+import com.esotericsoftware.minlog.Log;
+
+import forge.FThreads;
+import forge.UiCommand;
+import forge.error.BugReporter;
+import forge.interfaces.IButton;
+import forge.interfaces.IGuiBase;
+import forge.interfaces.IProgressBar;
+import forge.interfaces.ITextField;
+import forge.util.FileUtil;
+import forge.util.MyRandom;
 
 @SuppressWarnings("serial")
 public abstract class GuiDownloadService implements Runnable {
@@ -53,12 +58,13 @@ public abstract class GuiDownloadService implements Runnable {
     private IButton btnStart;
     private UiCommand cmdClose;
     private Runnable onUpdate;
+    private IGuiBase gui;
 
     private final UiCommand cmdStartDownload = new UiCommand() {
         @Override
         public void run() {
             //invalidate image cache so newly downloaded images will be loaded
-            GuiBase.getInterface().clearImageCache();
+            gui.clearImageCache();
             FThreads.invokeInBackgroundThread(GuiDownloadService.this);
             btnStart.setEnabled(false);
         }
@@ -78,13 +84,14 @@ public abstract class GuiDownloadService implements Runnable {
     protected GuiDownloadService() {
     }
 
-    public void initialize(ITextField txtAddress0, ITextField txtPort0, IProgressBar progressBar0, IButton btnStart0, UiCommand cmdClose0, final Runnable onReadyToStart, Runnable onUpdate0) {
+    public void initialize(final IGuiBase gui, ITextField txtAddress0, ITextField txtPort0, IProgressBar progressBar0, IButton btnStart0, UiCommand cmdClose0, final Runnable onReadyToStart, Runnable onUpdate0) {
         txtAddress = txtAddress0;
         txtPort = txtPort0;
         progressBar = progressBar0;
         btnStart = btnStart0;
         cmdClose = cmdClose0;
         onUpdate = onUpdate0;
+        this.gui = gui;
 
         // Free up the EDT by assembling card list on a background thread
         FThreads.invokeInBackgroundThread(new Runnable() {
@@ -96,7 +103,7 @@ public abstract class GuiDownloadService implements Runnable {
                 catch (Exception e) {
                     e.printStackTrace();
                 }
-                FThreads.invokeInEdtLater(new Runnable() {
+                FThreads.invokeInEdtLater(gui, new Runnable() {
                     @Override
                     public void run() {
                         if (onReadyToStart != null) {
@@ -123,7 +130,7 @@ public abstract class GuiDownloadService implements Runnable {
         }
         btnStart.setEnabled(true);
 
-        FThreads.invokeInEdtLater(new Runnable() {
+        FThreads.invokeInEdtLater(gui, new Runnable() {
             @Override
             public void run() {
                 btnStart.requestFocusInWindow();
@@ -162,7 +169,7 @@ public abstract class GuiDownloadService implements Runnable {
     }
 
     private void update(final int count, final File dest) {
-        FThreads.invokeInEdtLater(new Runnable() {
+        FThreads.invokeInEdtLater(gui, new Runnable() {
             @Override
             public void run() {
                 if (onUpdate != null) {
@@ -220,7 +227,7 @@ public abstract class GuiDownloadService implements Runnable {
                 p = new Proxy(TYPES[type], new InetSocketAddress(txtAddress.getText(), Integer.parseInt(txtPort.getText())));
             }
             catch (final Exception ex) {
-                BugReporter.reportException(ex,
+                BugReporter.reportException(ex, gui,
                         "Proxy connection could not be established!\nProxy address: %s\nProxy port: %s",
                         txtAddress.getText(), txtPort.getText());
                 return;

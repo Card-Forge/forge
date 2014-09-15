@@ -1,6 +1,8 @@
 package forge.screens.home.quest;
 
+import forge.GuiBase;
 import forge.UiCommand;
+import forge.assets.FSkinProp;
 import forge.model.FModel;
 import forge.quest.QuestUtil;
 import forge.quest.bazaar.IQuestBazaarItem;
@@ -75,7 +77,23 @@ public class ViewItem extends FPanel {
                 final QuestAssets qA = FModel.getQuest().getAssets();
                 IQuestBazaarItem bazaarItem = ViewItem.this.getItem();
 
-                ViewItem.this.lblIcon.setIcon((SkinImage)bazaarItem.getIcon(qA));
+                SkinImage i;
+                try {
+                    final FSkinProp f = FSkinProp.valueOf(FSkinProp.class, bazaarItem.getIcon(qA));
+                    i = (SkinImage) GuiBase.getInterface().getSkinIcon(f);
+                } catch (final IllegalArgumentException e) {
+                    // Failed to parse FSkinProp
+                    try {
+                        i = (SkinImage) GuiBase.getInterface().getUnskinnedIcon(bazaarItem.getIcon(qA));
+                    } catch (final Exception e1) {
+                        // give up, icon unknown
+                        e1.printStackTrace();
+                        i = (SkinImage) GuiBase.getInterface().getSkinIcon(FSkinProp.ICO_UNKNOWN);
+                    }
+                }
+
+                ViewItem.this.lblIcon.setIcon(i);
+
                 ViewItem.this.lblName.setText(bazaarItem.getPurchaseName());
                 ViewItem.this.lblPrice.setText("Cost: " + String.valueOf(bazaarItem.getBuyingPrice(qA)) + " credits");
                 String desc = bazaarItem.getPurchaseDescription(qA);

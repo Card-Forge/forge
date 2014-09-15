@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Array;
 
 import forge.FThreads;
+import forge.GuiBase;
 import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.Utils;
@@ -163,7 +164,7 @@ public class FSkinFont {
         FileHandle fontFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + fontName + ".fnt");
         if (fontFile != null && fontFile.exists()) {
             final BitmapFontData data = new BitmapFontData(fontFile, false);
-            FThreads.invokeInEdtNowOrLater(new Runnable() {
+            FThreads.invokeInEdtNowOrLater(GuiBase.getInterface(), new Runnable() {
                 @Override
                 public void run() { //font must be initialized on UI thread
                     font = new BitmapFont(data, (TextureRegion)null, true);
@@ -202,7 +203,7 @@ public class FSkinFont {
         final Array<PixmapPacker.Page> pages = packer.getPages();
 
         //finish generating font on UI thread
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
+        FThreads.invokeInEdtNowOrLater(GuiBase.getInterface(), new Runnable() {
             @Override
             public void run() {
                 TextureRegion[] textureRegions = new TextureRegion[pages.size];

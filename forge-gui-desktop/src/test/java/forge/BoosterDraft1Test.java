@@ -3,6 +3,7 @@ package forge;
 import forge.deck.CardPool;
 import forge.limited.BoosterDraft;
 import forge.limited.LimitedPoolType;
+
 import org.testng.annotations.Test;
 
 /**
@@ -19,7 +20,7 @@ public class BoosterDraft1Test {
      */
     @Test(groups = { "UnitTest", "fast" }, timeOut = 1000, enabled = false)
     public void boosterDraft1Test1() throws Exception {
-        final BoosterDraft draft = BoosterDraft.createDraft(LimitedPoolType.Full);
+        final BoosterDraft draft = BoosterDraft.createDraft(GuiBase.getInterface(), LimitedPoolType.Full);
         if (draft == null) { return; }
 
         while (draft.hasNextChoice()) {

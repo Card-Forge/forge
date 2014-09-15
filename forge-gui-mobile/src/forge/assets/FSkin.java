@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import forge.FThreads;
+import forge.GuiBase;
 import forge.assets.FSkinImage.SourceFile;
 import forge.card.CardFaceSymbols;
 import forge.card.CardImageRenderer;
@@ -51,7 +52,7 @@ public class FSkin {
         FThreads.invokeInBackgroundThread(new Runnable() {
             @Override
             public void run() {
-                FThreads.invokeInEdtLater(new Runnable() {
+                FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
                     @Override
                     public void run() {
                         loadLight(skinName, null);
@@ -63,7 +64,7 @@ public class FSkin {
                                 FSkinFont.deleteCachedFiles(); //delete cached font files so font can be update for new skin
                                 FSkinFont.updateAll();
                                 CardImageRenderer.forceStaticFieldUpdate();
-                                FThreads.invokeInEdtLater(new Runnable() {
+                                FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
                                     @Override
                                     public void run() {
                                         loader.hide();

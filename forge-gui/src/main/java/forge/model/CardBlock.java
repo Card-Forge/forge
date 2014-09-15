@@ -19,13 +19,16 @@ package forge.model;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+
 import forge.card.CardEdition;
 import forge.card.IUnOpenedProduct;
 import forge.card.UnOpenedProduct;
+import forge.interfaces.IGuiBase;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.TextUtil;
 import forge.util.storage.StorageReaderFile;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -292,11 +295,13 @@ public final class CardBlock implements Comparable<CardBlock> {
      * Tries to create a booster for the selected meta-set code.
      *
      * @param code
-     *      String, the MetaSet code
+     *            String, the MetaSet code
+     * @param gui
+     *            the {@link IGuiBase} resolving any choices to be made.
      * @return UnOpenedProduct, the created booster.
      */
-    public IUnOpenedProduct getBooster(final String code) {
+    public IUnOpenedProduct getBooster(final String code, final IGuiBase gui) {
         MetaSet ms = metaSets.get(code);
-        return ms == null ? new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(code)) : ms.getBooster();
+        return ms == null ? new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(code)) : ms.getBooster(gui);
     }
 }

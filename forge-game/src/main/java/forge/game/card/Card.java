@@ -57,7 +57,6 @@ import forge.item.PaperCard;
 import forge.util.CollectionSuppliers;
 import forge.util.Expressions;
 import forge.util.Lang;
-import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
@@ -1607,29 +1606,15 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
-     * 
-     * TODO Write javadoc for this method.
-     * 
-     * @param globalChanges
-     *            an ArrayList<CardColor>
-     * @return a CardColor
+     * @return a {@link ColorSet}.
+     * @see CardCharacteristics#determineColor()
      */
     public final ColorSet determineColor() {
         if (this.isImmutable()) {
             return ColorSet.getNullColor();
         }
 
-        List<CardColor> colorList = this.getCharacteristics().getCardColor();
-
-        byte colors = 0;
-        for (int i = colorList.size() - 1;i >= 0;i--) {
-            final CardColor cc = colorList.get(i);
-            colors |= cc.getColorMask();
-            if (!cc.isAdditional()) {
-                return ColorSet.fromMask(colors);
-            }
-        }
-        return ColorSet.fromMask(colors);
+        return this.getCharacteristics().determineColor();
     }
 
     /**
@@ -2359,7 +2344,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         boolean primaryCost = true;
         for (final SpellAbility sa : this.getSpellAbilities()) {
             // only add abilities not Spell portions of cards
-            if (!this.isPermanent()) {
+            if (sa == null || !this.isPermanent()) {
                 continue;
             }
 
@@ -8255,13 +8240,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * removed.
      */
     public final void setRandomFoil() {
-        CardEdition.FoilType foilType = CardEdition.FoilType.NOT_SUPPORTED;
-        if (this.getCurSetCode() != null && StaticData.instance().getEditions().get(this.getCurSetCode()) != null) {
-            foilType = StaticData.instance().getEditions().get(this.getCurSetCode()).getFoilType();
-        }
-        if (foilType != CardEdition.FoilType.NOT_SUPPORTED) {
-            this.setFoil(foilType == CardEdition.FoilType.MODERN ? MyRandom.getRandom().nextInt(9) + 1 : MyRandom.getRandom().nextInt(9) + 11);
-        }
+        this.setFoil(CardEdition.getRandomFoil(this.getCurSetCode()));
     }
 
     /**
@@ -8885,6 +8864,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         Zone zone = this.getZone();
         if (zone == null) { return true; } //cards outside any zone are visible to all
 
+        final Player controller = this.getController();
         switch (zone.getZoneType()) {
         case Ante:
         case Command:
@@ -8893,33 +8873,31 @@ public class Card extends GameEntity implements Comparable<Card> {
         case Graveyard:
         case Stack:
             //cards in these zones are visible to all
-            if (isFaceDown() && getController().isOpponentOf(viewer) && !hasKeyword("Your opponent may look at this card.")
-					&& !isVisibleToWhileFaceDown(viewer)) { //Support Lens of Clarity
-                break; //exception is face down cards controlled by opponents
-            }
             return true;
         case Hand:
-            if (getController().hasKeyword("Play with your hand revealed.")) {
+            if (controller.hasKeyword("Play with your hand revealed.")) {
                 return true;
             }
             //fall through
         case Sideboard:
             //face-up cards in these zones are hidden to opponents unless they specify otherwise
-            if (getController().isOpponentOf(viewer) && !hasKeyword("Your opponent may look at this card.")) {
+            if (controller.isOpponentOf(viewer) && !hasKeyword("Your opponent may look at this card.")) {
                 break;
             }
             return true;
         case Library:
         case PlanarDeck:
-        case SchemeDeck:
             //cards in these zones are hidden to all unless they specify otherwise
-            if (getController() == viewer && hasKeyword("You may look at this card.")) {
+            if (controller == viewer && hasKeyword("You may look at this card.")) {
                 return true;
             }
-            if (getController().isOpponentOf(viewer) && hasKeyword("Your opponent may look at this card.")) {
+            if (controller.isOpponentOf(viewer) && hasKeyword("Your opponent may look at this card.")) {
                 return true;
             }
             break;
+        case SchemeDeck:
+            // true for now, to actually see the Scheme cards (can't see deck anyway)
+            return true;
         }
 
         //one last check to see if card can be shown
@@ -8934,16 +8912,26 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         //if viewer is controlled by another player, also check if card can be shown to that player
-        if (viewer.isMindSlaved()) {
-            return canBeShownTo(viewer.getMindSlaveMaster());
+        if (controller.isMindSlaved() && viewer == controller.getMindSlaveMaster()) {
+            return canBeShownTo(controller);
         }
 
         return false;
     }
-	
-	public boolean isVisibleToWhileFaceDown(final Player viewer) {
-		return viewer != null && viewer.getAmountOfKeyword("CanSeeOpponentsFaceDownCards") > 0;
-	}
+
+    public boolean canCardFaceBeShownTo(final Player viewer) {
+        if (!this.isFaceDown()) {
+            return true;
+        }
+        if (viewer.hasKeyword("CanSeeOpponentsFaceDownCards")) {
+            return true;
+        }
+        //if viewer is controlled by another player, also check if face can be shown to that player
+        if (viewer.isMindSlaved() && canCardFaceBeShownTo(viewer.getMindSlaveMaster())) {
+            return true;
+        }
+        return !getController().isOpponentOf(viewer) || hasKeyword("Your opponent may look at this card.");
+    }
 
     /**
      * <p>

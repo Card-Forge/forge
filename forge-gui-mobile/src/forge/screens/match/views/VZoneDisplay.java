@@ -3,17 +3,18 @@ package forge.screens.match.views;
 import java.util.ArrayList;
 
 import forge.FThreads;
-import forge.game.player.Player;
+import forge.GuiBase;
 import forge.game.zone.ZoneType;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
+import forge.view.PlayerView;
 
 public class VZoneDisplay extends VCardDisplayArea {
-    private final Player player;
+    private final PlayerView player;
     private final ZoneType zoneType;
     private FCardPanel revealedPanel;
 
-    public VZoneDisplay(Player player0, ZoneType zoneType0) {
+    public VZoneDisplay(PlayerView player0, ZoneType zoneType0) {
         player = player0;
         zoneType = zoneType0;
     }
@@ -23,14 +24,19 @@ public class VZoneDisplay extends VCardDisplayArea {
     }
 
     @Override
+    public int getCount() {
+        return player.getNCards(zoneType);
+    }
+
+    @Override
     public void update() {
-        FThreads.invokeInEdtNowOrLater(updateRoutine);
+        FThreads.invokeInEdtNowOrLater(GuiBase.getInterface(), updateRoutine);
     }
 
     private final Runnable updateRoutine = new Runnable() {
         @Override
         public void run() {
-            refreshCardPanels(player.getZone(zoneType).getCards());
+            refreshCardPanels(player.getCards(zoneType));
         }
     };
 

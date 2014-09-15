@@ -1,9 +1,11 @@
 package forge.gui.framework;
 
 import forge.FThreads;
+import forge.GuiBase;
 import forge.view.FFrame;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -100,7 +102,7 @@ public class SDisplayUtil {
                 }
             }
         };
-        FThreads.invokeInEdtLater(showTabRoutine);
+        FThreads.invokeInEdtLater(GuiBase.getInterface(), showTabRoutine);
     }
     
     public static GraphicsDevice getGraphicsDevice(Point point) {

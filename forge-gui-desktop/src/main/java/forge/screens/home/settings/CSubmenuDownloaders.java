@@ -1,5 +1,6 @@
 package forge.screens.home.settings;
 
+import forge.GuiBase;
 import forge.UiCommand;
 import forge.download.GuiDownloadPicturesLQ;
 import forge.download.GuiDownloadPrices;
@@ -37,7 +38,7 @@ public enum CSubmenuDownloaders implements ICDoc {
     private final UiCommand cmdImportPictures = new UiCommand() { @Override
         public void run() { new ImportDialog(null, null); } };
     private final UiCommand cmdReportBug = new UiCommand() { @Override
-        public void run() { BugReporter.reportBug(null); }
+        public void run() { BugReporter.reportBug(GuiBase.getInterface(), null); }
     };
 
     /* (non-Javadoc)

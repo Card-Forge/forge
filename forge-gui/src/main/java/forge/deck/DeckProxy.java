@@ -1,5 +1,11 @@
 package forge.deck;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -9,11 +15,6 @@ import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.deck.CardPool;
-import forge.deck.Deck;
-import forge.deck.DeckGroup;
-import forge.deck.DeckSection;
-import forge.error.BugReporter;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.item.InventoryItem;
@@ -27,12 +28,6 @@ import forge.util.BinaryUtil;
 import forge.util.IHasName;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageImmediatelySerialized;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map.Entry;
 
 // Adding a generic to this class creates compile problems in ItemManager (that I can not fix)
 public class DeckProxy implements InventoryItem {
@@ -361,7 +356,7 @@ public class DeckProxy implements InventoryItem {
             StringBuilder errorBuilder = new StringBuilder();
             deck.getMain().addAll(gen.getThemeDeck(this.getName(), 60, errorBuilder));
             if (errorBuilder.length() > 0) {
-                BugReporter.reportBug(errorBuilder.toString());
+                throw new RuntimeException(errorBuilder.toString());
             }
             return deck;
         }

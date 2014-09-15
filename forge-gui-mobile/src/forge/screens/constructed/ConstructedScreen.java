@@ -176,7 +176,7 @@ public class ConstructedScreen extends LaunchScreen {
                 playerPanels.get(6).initialize(FPref.CONSTRUCTED_P7_DECK_STATE, DeckType.COLOR_DECK);
                 playerPanels.get(7).initialize(FPref.CONSTRUCTED_P8_DECK_STATE, DeckType.COLOR_DECK);*/ //TODO: Support multiplayer and improve performance of loading this screen by using background thread
 
-                FThreads.invokeInEdtLater(new Runnable() {
+                FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
                     @Override
                     public void run() {
                         btnStart.setEnabled(true);

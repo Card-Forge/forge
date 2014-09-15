@@ -1,14 +1,14 @@
 package forge.screens.match;
 
-import forge.Singletons;
-import forge.game.Game;
-import forge.game.Match;
-import forge.gui.SOverlayUtils;
-import forge.gui.framework.FScreen;
-import javax.swing.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+
+import forge.Singletons;
+import forge.gui.SOverlayUtils;
+import forge.gui.framework.FScreen;
+import forge.view.IGameView;
 
 /** 
  * Default controller for a ViewWinLose object. This class can
@@ -18,13 +18,13 @@ import java.awt.event.ActionListener;
  */
 public class ControlWinLose {
     private final ViewWinLose view;
-    protected final Game lastGame;
+    protected final IGameView lastGame;
 
     /** @param v &emsp; ViewWinLose
      * @param match */
-    public ControlWinLose(final ViewWinLose v, Game game) {
+    public ControlWinLose(final ViewWinLose v, final IGameView game0) {
         this.view = v;
-        this.lastGame = game;
+        this.lastGame = game0;
         addListeners();
     }
 
@@ -59,17 +59,15 @@ public class ControlWinLose {
         saveOptions();
 
         Singletons.getControl().endCurrentGame();
-        Singletons.getControl().startGameWithUi(lastGame.getMatch());
+        Singletons.getControl().startGameInSameMatch();
     }
 
     /** Action performed when "restart" button is pressed in default win/lose UI. */
     public void actionOnRestart() {
         SOverlayUtils.hideOverlay();
         saveOptions();
-        final Match match = lastGame.getMatch();
-        match.clearGamesPlayed();
         Singletons.getControl().endCurrentGame();
-        Singletons.getControl().startGameWithUi(match);
+        Singletons.getControl().startGameAndClearMatch();
     }
 
     /** Action performed when "quit" button is pressed in default win/lose UI. */

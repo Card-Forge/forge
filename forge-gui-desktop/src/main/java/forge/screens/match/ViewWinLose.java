@@ -11,13 +11,14 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
+
+import org.apache.commons.lang3.StringUtils;
+
+import forge.GuiBase;
+import forge.LobbyPlayer;
 import forge.UiCommand;
-import forge.game.Game;
-import forge.game.GameLog;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
-import forge.game.GameOutcome;
-import forge.game.player.Player;
 import forge.gui.SOverlayUtils;
 import forge.interfaces.IWinLoseView;
 import forge.model.FModel;
@@ -29,7 +30,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.FTextArea;
-
+import forge.view.IGameView;
 
 public class ViewWinLose implements IWinLoseView<FButton> {
     private final FButton btnContinue, btnRestart, btnQuit;
@@ -39,12 +40,12 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     private final SkinnedLabel lblStats = new SkinnedLabel("WinLoseFrame > lblStats needs updating.");
     private final JPanel pnlOutcomes = new JPanel(new MigLayout("wrap, align center"));
 
-    private final Game game;
+    private final IGameView game;
     
     @SuppressWarnings("serial")
-    public ViewWinLose(final Game game0) {
+    public ViewWinLose(final IGameView game0) {
 
-        game = game0;
+        this.game = game0;
 
         final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
 
@@ -60,7 +61,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         // Control of the win/lose is handled differently for various game
         // modes.
         ControlWinLose control = null;
-        switch (game0.getRules().getGameType()) {
+        switch (game0.getGameType()) {
         case Quest:
             control = new QuestWinLose(this, game0);
             break;
@@ -68,14 +69,14 @@ public class ViewWinLose implements IWinLoseView<FButton> {
             control = new QuestDraftWinLose(this, game0);
             break;
         case Draft:
-            if (!FModel.getGauntletMini().isGauntletDraft()) {
+            if (!FModel.getGauntletMini(GuiBase.getInterface()).isGauntletDraft()) {
                 break;
             }
         case Sealed:
             control = new LimitedWinLose(this, game0);
             break;
         case Gauntlet:
-            control = new GauntletWinLose(this, game0);
+            control = new GauntletWinLose(this, game0, GuiBase.getInterface());
             break;
         default: // will catch it after switch
             break;
@@ -103,11 +104,11 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         btnRestart.setFont(FSkin.getFont(22));
         btnQuit.setText("Quit Match");
         btnQuit.setFont(FSkin.getFont(22));
-        btnContinue.setEnabled(!game0.getMatch().isMatchOver());
+        btnContinue.setEnabled(!game0.isMatchOver());
 
         // Assemble game log scroller.
         final FTextArea txtLog = new FTextArea();
-        txtLog.setText(game.getGameLog().getLogText(null).replace("[COMPUTER]", "[AI]"));
+        txtLog.setText(StringUtils.join(game.getLogEntries(null), "\r\n").replace("[COMPUTER]", "[AI]"));
         txtLog.setFont(FSkin.getFont(14));
         txtLog.setFocusable(true); // allow highlighting and copying of log
 
@@ -180,20 +181,20 @@ public class ViewWinLose implements IWinLoseView<FButton> {
             }
         });
 
-        lblTitle.setText(composeTitle(game0.getOutcome()));
+        lblTitle.setText(composeTitle(game0));
 
         showGameOutcomeSummary();
         showPlayerScores();
 
     }
 
-    private String composeTitle(GameOutcome outcome) {
-        Player winner = outcome.getWinningPlayer();
-        int winningTeam = outcome.getWinningTeam();
+    private String composeTitle(final IGameView game) {
+        final LobbyPlayer winner = game.getWinningPlayer();
+        final int winningTeam = game.getWinningTeam();
         if (winner == null) {
             return "It's a draw!";
         } else if (winningTeam != -1) {
-            return "Team " + winner.getTeam() + " Won!";
+            return "Team " + winningTeam + " Won!";
         } else {
             return winner.getName() + " Won!";
         }
@@ -220,14 +221,12 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     }
 
     private void showGameOutcomeSummary() {
-        GameLog log = game.getGameLog();
-        for (GameLogEntry o : log.getLogEntriesExact(GameLogEntryType.GAME_OUTCOME))
+        for (final GameLogEntry o : game.getLogEntriesExact(GameLogEntryType.GAME_OUTCOME))
             pnlOutcomes.add(new FLabel.Builder().text(o.message).fontSize(14).build(), "h 20!");
     }
 
     private void showPlayerScores() {
-        GameLog log = game.getGameLog();
-        for (GameLogEntry o : log.getLogEntriesExact(GameLogEntryType.MATCH_RESULTS)) {
+        for (final GameLogEntry o : game.getLogEntriesExact(GameLogEntryType.MATCH_RESULTS)) {
             lblStats.setText(removePlayerTypeFromLogMessage(o.message));
         }
     }

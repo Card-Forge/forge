@@ -11,7 +11,6 @@ import forge.assets.ImageCache;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.deck.DeckProxy;
-import forge.game.card.Card;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
@@ -32,6 +31,7 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.util.Utils;
+import forge.view.ViewUtil;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -870,7 +870,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         public boolean longPress(float x, float y) {
             ItemInfo item = getItemAtPoint(x + getLeft(), y + getTop());
             if (item != null && item.item instanceof IPaperCard) {
-                CardZoom.show(Card.getCardForUi((IPaperCard) item.item));
+                CardZoom.show(ViewUtil.getCardForUi((IPaperCard) item.item));
                 return true;
             }
             return false;

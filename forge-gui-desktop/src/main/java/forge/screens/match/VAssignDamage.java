@@ -17,33 +17,38 @@
  */
 package forge.screens.match;
 
-import forge.game.GameEntity;
-import forge.game.card.Card;
-import forge.game.card.CounterType;
-import forge.game.player.Player;
+import java.awt.Dialog.ModalityType;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
+import java.util.Map;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
+
+import net.miginfocom.swing.MigLayout;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
+import forge.control.FControl;
 import forge.gui.SOverlayUtils;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
+import forge.view.CardView;
 import forge.view.FDialog;
+import forge.view.GameEntityView;
+import forge.view.PlayerView;
 import forge.view.arcane.CardPanel;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-
-import java.awt.Dialog.ModalityType;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Assembles Swing components of assign damage dialog.
@@ -68,7 +73,7 @@ public class VAssignDamage {
     private boolean attackerHasInfect = false;
     private boolean overrideCombatantOrder = false;
 
-    private final GameEntity defender;
+    private final GameEntityView defender;
 
     private final JLabel lblTotalDamage = new FLabel.Builder().text("Available damage points: Unknown").build();
     private final JLabel lblAssignRemaining = new FLabel.Builder().text("Distribute the remaining damage points among lethally wounded entities").build();
@@ -79,24 +84,24 @@ public class VAssignDamage {
 
     
     private static class DamageTarget {
-        public final Card card;
+        public final CardView card;
         public final JLabel label;
         public int damage;
 
-        public DamageTarget(Card entity0, JLabel lbl) {
-            card = entity0;
+        public DamageTarget(final CardView c, final JLabel lbl) {
+            card = c;
             label = lbl;
         }
     }
 
     // Indexes of defenders correspond to their indexes in the damage list and labels.
-    private final List<DamageTarget> defenders = new ArrayList<DamageTarget>(); // NULL in this map means defender
-    private final Map<Card, DamageTarget> damage = new HashMap<Card, DamageTarget>();  // NULL in this map means defender
+    private final List<DamageTarget> defenders = Lists.newArrayList(); // NULL in this map means defender
+    private final Map<CardView, DamageTarget> damage = Maps.newHashMap(); // NULL in this map means defender
 
-    private boolean canAssignTo(Card card) {
-        for(DamageTarget dt : defenders) {
-            if ( dt.card == card ) return true;
-            if ( getDamageToKill(dt.card) > dt.damage )
+    private boolean canAssignTo(final CardView card) {
+        for (DamageTarget dt : defenders) {
+            if (dt.card == card ) return true;
+            if (getDamageToKill(dt.card) > dt.damage )
                 return false;
         }
         throw new RuntimeException("Asking to assign damage to object which is not present in defenders list");
@@ -106,10 +111,10 @@ public class VAssignDamage {
     private final MouseAdapter mad = new MouseAdapter() {
         @Override
         public void mouseEntered(final MouseEvent evt) {
-            Card source = ((CardPanel) evt.getSource()).getCard();
+            CardView source = ((CardPanel) evt.getSource()).getCard();
             if (!damage.containsKey(source)) source = null; // to get player instead of fake card
-            
-            FSkin.Colors brdrColor = VAssignDamage.this.canAssignTo(source) ? FSkin.Colors.CLR_ACTIVE : FSkin.Colors.CLR_INACTIVE;
+
+            final FSkin.Colors brdrColor = VAssignDamage.this.canAssignTo(source) ? FSkin.Colors.CLR_ACTIVE : FSkin.Colors.CLR_INACTIVE;
             ((CardPanel) evt.getSource()).setBorder(new FSkin.LineSkinBorder(FSkin.getColor(brdrColor), 2));
         }
 
@@ -120,7 +125,7 @@ public class VAssignDamage {
 
         @Override
         public void mousePressed(final MouseEvent evt) {
-            Card source = ((CardPanel) evt.getSource()).getCard(); // will be NULL for player
+            CardView source = ((CardPanel) evt.getSource()).getCard(); // will be NULL for player
 
             boolean meta = evt.isControlDown();
             boolean isLMB = SwingUtilities.isLeftMouseButton(evt);
@@ -133,22 +138,22 @@ public class VAssignDamage {
 
     /** Constructor.
      * 
-     * @param attacker0 {@link forge.game.card.Card}
-     * @param defenderCards List<{@link forge.game.card.Card}>
+     * @param attacker {@link forge.game.card.Card}
+     * @param blockers List<{@link forge.game.card.Card}>
      * @param damage0 int
      * @param defender GameEntity that's bein attacked
      * @param overrideOrder override combatant order
 
      */
-    public VAssignDamage(final Card attacker0, final List<Card> defenderCards, final int damage0, final GameEntity defender, boolean overrideOrder) {
-        dlg.setTitle("Assign damage dealt by " + attacker0.getName());
+    public VAssignDamage(final CardView attacker, final List<CardView> blockers, final int damage0, final GameEntityView defender, boolean overrideOrder) {
+        dlg.setTitle("Assign damage dealt by " + attacker);
 
         // Set damage storage vars
         this.totalDamageToAssign = damage0;
         this.defender = defender;
-        this.attackerHasDeathtouch = attacker0.hasKeyword("Deathtouch");
-        this.attackerHasInfect = attacker0.hasKeyword("Infect");
-        this.attackerHasTrample = defender != null && attacker0.hasKeyword("Trample");
+        this.attackerHasDeathtouch = attacker.getOriginal().hasDeathtouch();
+        this.attackerHasInfect = attacker.getOriginal().hasInfect();
+        this.attackerHasTrample = defender != null && attacker.getOriginal().hasTrample();
         this.overrideCombatantOrder = overrideOrder;
 
         // Top-level UI stuff
@@ -157,7 +162,7 @@ public class VAssignDamage {
         pnlMain.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         // Attacker area
-        final CardPanel pnlAttacker = new CardPanel(attacker0);
+        final CardPanel pnlAttacker = new CardPanel(attacker);
         pnlAttacker.setOpaque(false);
         pnlAttacker.setCardBounds(0, 0, 105, 150);
 
@@ -170,14 +175,14 @@ public class VAssignDamage {
         // Defenders area
         final JPanel pnlDefenders = new JPanel();
         pnlDefenders.setOpaque(false);
-        int cols = attackerHasTrample ? defenderCards.size() + 1 : defenderCards.size();
+        int cols = attackerHasTrample ? blockers.size() + 1 : blockers.size();
         final String wrap = "wrap " +  Integer.toString(cols);
         pnlDefenders.setLayout(new MigLayout("insets 0, gap 0, ax center, " + wrap));
 
         final FScrollPane scrDefenders = new FScrollPane(pnlDefenders, false);
 
         // Top row of cards...
-        for (final Card c : defenderCards) {
+        for (final CardView c : blockers) {
             DamageTarget dt = new DamageTarget(c, new FLabel.Builder().text("0").fontSize(18).fontAlign(SwingConstants.CENTER).build());
             this.damage.put(c, dt);
             this.defenders.add(dt);
@@ -188,19 +193,18 @@ public class VAssignDamage {
             DamageTarget dt = new DamageTarget(null, new FLabel.Builder().text("0").fontSize(18).fontAlign(SwingConstants.CENTER).build());
             this.damage.put(null, dt);
             this.defenders.add(dt);
-            Card fakeCard; 
-            if (defender instanceof Card) 
-                fakeCard = (Card)defender;
-            else if (defender instanceof Player) { 
-                fakeCard = new Card(-1);
-                fakeCard.setName(this.defender.getName());
-                fakeCard.setOwner((Player)defender);
-                Player p = (Player)defender;
-                fakeCard.setImageKey(CMatchUI.SINGLETON_INSTANCE.avatarImages.get(p.getOriginalLobbyPlayer()));
-            } else {
-                fakeCard = new Card(-2);
-                fakeCard.setName(this.defender.getName());
+            CardView fakeCard = null;
+            if (defender instanceof CardView) 
+                fakeCard = (CardView)defender;
+            else if (defender instanceof PlayerView) { 
+                fakeCard = new CardView(true);
+                fakeCard.getOriginal().setName(this.defender.toString());
+                final PlayerView p = (PlayerView)defender;
+                fakeCard.setOwner(p);
+                fakeCard.setController(p);
+                fakeCard.getOriginal().setImageKey(CMatchUI.SINGLETON_INSTANCE.avatarImages.get(p.getLobbyPlayer()));
             }
+
             addPanelForDefender(pnlDefenders, fakeCard);
         }        
 
@@ -259,7 +263,7 @@ public class VAssignDamage {
      * @param pnlDefenders
      * @param defender
      */
-    private void addPanelForDefender(final JPanel pnlDefenders, final Card defender) {
+    private void addPanelForDefender(final JPanel pnlDefenders, final CardView defender) {
         final CardPanel cp = new CardPanel(defender);
         cp.setCardBounds(0, 0, 105, 150);
         cp.setOpaque(true);
@@ -273,7 +277,7 @@ public class VAssignDamage {
      * @param meta
      * @param isLMB
      */
-    private void assignDamageTo(Card source, boolean meta, boolean isAdding) {
+    private void assignDamageTo(CardView source, final boolean meta, final boolean isAdding) {
         if ( !damage.containsKey(source) ) 
             source = null;
 
@@ -366,14 +370,14 @@ public class VAssignDamage {
             dt.damage = 0;
     }
     
-    private void addDamage(final Card card, int addedDamage) {
+    private void addDamage(final CardView card, int addedDamage) {
         // If we don't have enough left or we're trying to unassign too much return
-        int canAssign = getRemainingDamage();
+        final int canAssign = getRemainingDamage();
         if (canAssign < addedDamage) {
             addedDamage = canAssign;
         }
 
-        DamageTarget dt = damage.get(card);
+        final DamageTarget dt = damage.get(card);
         dt.damage = Math.max(0, addedDamage + dt.damage); 
     }
 
@@ -433,28 +437,28 @@ public class VAssignDamage {
     
     /**
      * TODO: Write javadoc for this method.
-     * @param source
+     * @param card
      * @return
      */
-    private int getDamageToKill(Card source) {
+    private int getDamageToKill(final CardView card) {
         int lethalDamage = 0;
-        if ( source == null ) {
-            if ( defender instanceof Player ) {
-                Player p = (Player)defender;
-                lethalDamage = attackerHasInfect ? p.getGame().getRules().getPoisonCountersToLose() - p.getPoisonCounters() : p.getLife();
-            } else if ( defender instanceof Card ) { // planeswalker
-                Card pw = (Card)defender;
-                lethalDamage = pw.getCounters(CounterType.LOYALTY);
+        if (card == null) {
+            if (defender instanceof PlayerView) {
+                final PlayerView p = (PlayerView)defender;
+                lethalDamage = attackerHasInfect ? FControl.instance.getGameView().getPoisonCountersToLose() - p.getPoisonCounters() : p.getLife();
+            } else if (defender instanceof CardView) { // planeswalker
+                final CardView pw = (CardView)defender;
+                lethalDamage = pw.getOriginal().getLoyalty();
             }
         } else {
-            lethalDamage = VAssignDamage.this.attackerHasDeathtouch ? 1 : Math.max(0, source.getLethalDamage());
+            lethalDamage = VAssignDamage.this.attackerHasDeathtouch ? 1 : Math.max(0, card.getLethalDamage());
         }
         return lethalDamage;
     }
 
-    public Map<Card, Integer> getDamageMap() {
-        Map<Card, Integer> result = new HashMap<Card, Integer>();
-        for(DamageTarget dt : defenders)
+    public Map<CardView, Integer> getDamageMap() {
+        Map<CardView, Integer> result = Maps.newHashMapWithExpectedSize(defenders.size());
+        for (DamageTarget dt : defenders)
             result.put(dt.card, dt.damage);
         return result;
     }

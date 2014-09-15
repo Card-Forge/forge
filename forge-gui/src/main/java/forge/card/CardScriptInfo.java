@@ -17,19 +17,17 @@
  */
 package forge.card;
 
-import forge.CardStorageReader;
-import forge.card.CardRules;
-import forge.properties.ForgeConstants;
-import forge.util.FileUtil;
-import forge.util.gui.SOptionPane;
-
-import org.apache.commons.lang3.StringUtils;
-
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.apache.commons.lang3.StringUtils;
+
+import forge.CardStorageReader;
+import forge.properties.ForgeConstants;
+import forge.util.FileUtil;
 
 public final class CardScriptInfo {
     private String text;
@@ -53,20 +51,21 @@ public final class CardScriptInfo {
     }
 
     public boolean trySetText(String text0) {
-    	if (file == null) { return false; }
+        if (file == null) { return false; }
 
-    	try {
-    	    PrintWriter p = new PrintWriter(file);
-    	    p.print(text0);
-    	    p.close();
+        try {
+            PrintWriter p = new PrintWriter(file);
+            p.print(text0);
+            p.close();
 
-    	    text = text0;
-    	    return true;
-    	}
-    	catch (final Exception ex) {
-    		SOptionPane.showErrorDialog("Problem writing file - " + file + " : " + ex);
-    		return false;
-    	}
+            text = text0;
+            return true;
+        }
+        catch (final Exception ex) {
+            System.err.println("Problem writing file - " + file);
+            ex.printStackTrace();
+            return false;
+        }
     }
 
     private static Map<String, CardScriptInfo> allScripts = new ConcurrentHashMap<>();

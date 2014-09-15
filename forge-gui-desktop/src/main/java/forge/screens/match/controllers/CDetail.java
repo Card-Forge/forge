@@ -17,18 +17,17 @@
  */
 package forge.screens.match.controllers;
 
+import java.awt.event.MouseEvent;
+
 import forge.UiCommand;
-import forge.Singletons;
-import forge.card.CardDetailUtil;
-import forge.game.card.Card;
 import forge.gui.framework.ICDoc;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.InventoryItemFromSet;
 import forge.screens.match.views.VDetail;
 import forge.toolbox.FMouseAdapter;
-
-import java.awt.event.MouseEvent;
+import forge.view.CardView;
+import forge.view.ViewUtil;
 
 /**
  * Controls the card detail area in the match UI.
@@ -43,30 +42,29 @@ public enum CDetail implements ICDoc {
     /**
      * Shows card details and/or picture in sidebar cardview tabber.
      * 
-     * @param c &emsp; Card object
+     * @param c &emsp; {@link CardView} object
      */
-    public void showCard(Card c) {
-        if (c != null) {
-            c = c.getCardForUi();
-        }
-        view.getLblFlipcard().setVisible(c != null && CardDetailUtil.isCardFlippable(c) && Singletons.getControl().mayShowCard(c));
-        view.getPnlDetail().setCard(c);
+    public void showCard(final CardView c) {
+        this.showCard(c, false);
+    }
+
+    public void showCard(final CardView c, final boolean isInAltState) {
+        view.getLblFlipcard().setVisible(c != null && c.hasAltState());
+        view.getPnlDetail().setCard(c, isInAltState);
         if (view.getParentCell() != null) {
             view.getParentCell().repaintSelf();
         }
     }
 
-    public void showCard(InventoryItem item) {
+    public void showCard(final InventoryItem item) {
         if (item instanceof IPaperCard) {
-            showCard(Card.getCardForUi((IPaperCard)item));
-        }
-        else if (item instanceof InventoryItemFromSet) {
+            showCard(ViewUtil.getCardForUi((IPaperCard)item));
+        } else if (item instanceof InventoryItemFromSet) {
             view.getLblFlipcard().setVisible(false);
             view.getPnlDetail().setItem((InventoryItemFromSet)item);
             view.getParentCell().repaintSelf();
-        }
-        else {
-            showCard((Card)null);
+        } else {
+            showCard((CardView)null);
         }
     }
 

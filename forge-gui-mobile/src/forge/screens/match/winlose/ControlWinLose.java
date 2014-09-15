@@ -1,10 +1,9 @@
 package forge.screens.match.winlose;
 
-import forge.game.Game;
-import forge.game.Match;
 import forge.screens.match.FControl;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.view.IGameView;
 
 /** 
  * Default controller for a ViewWinLose object. This class can
@@ -14,11 +13,11 @@ import forge.toolbox.FEvent.FEventHandler;
  */
 public class ControlWinLose {
     private final ViewWinLose view;
-    protected final Game lastGame;
+    protected final IGameView lastGame;
 
     /** @param v &emsp; ViewWinLose
      * @param match */
-    public ControlWinLose(final ViewWinLose v, Game game) {
+    public ControlWinLose(final ViewWinLose v, IGameView game) {
         view = v;
         lastGame = game;
         addListeners();
@@ -54,18 +53,14 @@ public class ControlWinLose {
         view.hide();
         saveOptions();
 
-        FControl.endCurrentGame();
-        FControl.startGame(lastGame.getMatch());
+        FControl.startGameInSameMatch();
     }
 
     /** Action performed when "restart" button is pressed in default win/lose UI. */
     public void actionOnRestart() {
         view.hide();
         saveOptions();
-        final Match match = lastGame.getMatch();
-        match.clearGamesPlayed();
-        FControl.endCurrentGame();
-        FControl.startGame(match);
+        FControl.startGameInNewMatch();
     }
 
     /** Action performed when "quit" button is pressed in default win/lose UI. */

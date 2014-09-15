@@ -1,21 +1,31 @@
 package forge.match.input;
 
-import forge.GuiBase;
 import forge.control.FControlGamePlayback;
 import forge.game.Game;
 import forge.game.phase.PhaseHandler;
-
+import forge.interfaces.IGuiBase;
 
 public class InputPlaybackControl extends InputSyncronizedBase implements InputSynchronized {
     private static final long serialVersionUID = 7979208993306642072L;
 
-    FControlGamePlayback control;
+    final FControlGamePlayback control;
 
     private boolean isPaused = false;
     private boolean isFast = false;
 
-    public InputPlaybackControl(FControlGamePlayback fControlGamePlayback) {
+    private final IGuiBase gui;
+    private final Game game;
+    public InputPlaybackControl(final IGuiBase gui, final Game game, final FControlGamePlayback fControlGamePlayback) {
+        super(null);
+        this.gui = gui;
+        this.game = game;
         control = fControlGamePlayback;
+        setPause(false);
+    }
+
+    @Override
+    public IGuiBase getGui() {
+        return gui;
     }
 
     /* (non-Javadoc)
@@ -29,7 +39,6 @@ public class InputPlaybackControl extends InputSyncronizedBase implements InputS
     //update message based on current turn and paused state
     private int currentTurn;
     public void updateTurnMessage() {
-        Game game = GuiBase.getInterface().getGame();
         if (isPaused) {
             showMessage(getTurnPhasePriorityMessage(game));
             currentTurn = 0;
@@ -46,10 +55,10 @@ public class InputPlaybackControl extends InputSyncronizedBase implements InputS
     private void setPause(boolean pause) {
         isPaused = pause; 
         if (isPaused) {
-            ButtonUtil.update("Resume", "Step", true, true, true);
+            ButtonUtil.update(getGui(), "Resume", "Step", true, true, true);
         }
         else {
-            ButtonUtil.update("Pause", isFast ? "1x Speed" : "10x Faster", true, true, true);
+            ButtonUtil.update(getGui(), "Pause", isFast ? "1x Speed" : "10x Faster", true, true, true);
         }
     }
 

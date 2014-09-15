@@ -38,7 +38,7 @@ import java.util.Map;
 
 public class HumanPlay {
 
-    public HumanPlay() {
+    private HumanPlay() {
     }
 
     /**
@@ -49,8 +49,8 @@ public class HumanPlay {
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
-    public final static void playSpellAbility(Player p, SpellAbility sa) {
-        FThreads.assertExecutedByEdt(false);
+    public final static void playSpellAbility(final PlayerControllerHuman controller, final Player p, SpellAbility sa) {
+        FThreads.assertExecutedByEdt(controller.getGui(), false);
 
         if (sa == Ability.PLAY_LAND_SURROGATE) {
             p.playLand(sa.getHostCard(), false);
@@ -89,10 +89,10 @@ public class HumanPlay {
             Cost abCost = sa.getPayCosts() == null ? new Cost("0", sa.isAbility()) : sa.getPayCosts();
             CostPayment payment = new CostPayment(abCost, sa);
 
-            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(sa, payment);
+            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa, payment);
             req.playAbility(true, false, false);
         }
-        else if (payManaCostIfNeeded(p, sa)) {
+        else if (payManaCostIfNeeded(controller, p, sa)) {
             if (sa.isSpell() && !source.isCopiedSpell()) {
                 sa.setHostCard(p.getGame().getAction().moveToStack(source));
             }
@@ -116,7 +116,7 @@ public class HumanPlay {
         return p.getController().getAbilityToPlay(abilities);
     }
 
-    private static boolean payManaCostIfNeeded(final Player p, final SpellAbility sa) {
+    private static boolean payManaCostIfNeeded(final PlayerControllerHuman controller, final Player p, final SpellAbility sa) {
         final ManaCostBeingPaid manaCost;
         if (sa.getHostCard().isCopiedSpell() && sa.isSpell()) {
             manaCost = new ManaCostBeingPaid(ManaCost.ZERO);
@@ -129,7 +129,7 @@ public class HumanPlay {
         boolean isPaid = manaCost.isPaid();
 
         if (!isPaid) {
-            InputPayManaSimple inputPay = new InputPayManaSimple(p.getGame(), sa, manaCost);
+            InputPayManaSimple inputPay = new InputPayManaSimple(controller, p.getGame(), sa, manaCost);
             inputPay.showAndWait();
             isPaid = inputPay.isPaid();
         }
@@ -144,8 +144,8 @@ public class HumanPlay {
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
-    public static final void playSaWithoutPayingManaCost(final Game game, final SpellAbility sa, boolean mayChooseNewTargets) {
-        FThreads.assertExecutedByEdt(false);
+    public static final void playSaWithoutPayingManaCost(final PlayerControllerHuman controller, final Game game, final SpellAbility sa, boolean mayChooseNewTargets) {
+        FThreads.assertExecutedByEdt(controller.getGui(), false);
         final Card source = sa.getHostCard();
 
         source.setSplitStateToPlayAbility(sa);
@@ -156,7 +156,7 @@ public class HumanPlay {
             }
             final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
 
-            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(sa, payment);
+            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa, payment);
             req.playAbility(mayChooseNewTargets, true, false);
         }
         else {
@@ -180,19 +180,19 @@ public class HumanPlay {
      * @param skipTargeting
      *            a boolean.
      */
-    public final static void playSpellAbilityNoStack(final Player player, final SpellAbility sa) {
-        playSpellAbilityNoStack(player, sa, false);
+    public final static void playSpellAbilityNoStack(final PlayerControllerHuman controller, final Player player, final SpellAbility sa) {
+        playSpellAbilityNoStack(controller, player, sa, false);
     }
 
-    public final static void playSpellAbilityNoStack(final Player player, final SpellAbility sa, boolean useOldTargets) {
+    public final static void playSpellAbilityNoStack(final PlayerControllerHuman controller, final Player player, final SpellAbility sa, boolean useOldTargets) {
         sa.setActivatingPlayer(player);
 
         if (sa.getPayCosts() != null) {
-            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(sa, new CostPayment(sa.getPayCosts(), sa));
+            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa, new CostPayment(sa.getPayCosts(), sa));
 
             req.playAbility(!useOldTargets, false, true);
         }
-        else if (payManaCostIfNeeded(player, sa)) {
+        else if (payManaCostIfNeeded(controller, player, sa)) {
             AbilityUtils.resolve(sa);
         }
     }
@@ -231,7 +231,7 @@ public class HumanPlay {
      *            a {@link forge.UiCommand} object.
      * @param sourceAbility TODO
      */
-    public static boolean payCostDuringAbilityResolve(final Player p, final Card source, final Cost cost, SpellAbility sourceAbility, String prompt) {
+    public static boolean payCostDuringAbilityResolve(final PlayerControllerHuman controller, final Player p, final Card source, final Cost cost, SpellAbility sourceAbility, String prompt) {
         // Only human player pays this way
         Card current = null; // Used in spells with RepeatEach effect to distinguish cards, Cut the Tethers
         if (sourceAbility.hasParam("ShowCurrentCard")) {
@@ -259,7 +259,7 @@ public class HumanPlay {
             }
         }
 
-        HumanCostDecision hcd = new HumanCostDecision(p, sourceAbility, source);
+        final HumanCostDecision hcd = new HumanCostDecision(controller, p, sourceAbility, source);
         
         //the following costs do not need inputs
         for (CostPart part : parts) {
@@ -378,7 +378,7 @@ public class HumanPlay {
                         return false;
                     }
                     while (amount > 0) {
-                        InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, list);
+                        InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, list);
                         inp.setMessage("Select a card to add a counter to");
                         inp.setCancelAllowed(true);
                         inp.showAndWait();
@@ -430,7 +430,7 @@ public class HumanPlay {
                         }
                     });
                     if (list.isEmpty()) { return false; }
-                    InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, list);
+                    InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, list);
                     inp.setMessage("Select a card to remove a counter");
                     inp.setCancelAllowed(true);
                     inp.showAndWait();
@@ -447,7 +447,7 @@ public class HumanPlay {
                     }
                     if (typeChoices.size() > 1) {
                         String cprompt = "Select type counters to remove";
-                        counterType = SGuiChoose.one(cprompt, typeChoices);
+                        counterType = SGuiChoose.one(controller.getGui(), cprompt, typeChoices);
                     }
                     else {
                         counterType = typeChoices.get(0);
@@ -488,7 +488,7 @@ public class HumanPlay {
                     }
                     // replace this with input
                     for (int i = 0; i < nNeeded; i++) {
-                        final Card c = SGuiChoose.oneOrNone("Exile from " + from, list);
+                        final Card c = SGuiChoose.oneOrNone(controller.getGui(), "Exile from " + from, list);
                         if (c == null) {
                             return false;
                         }
@@ -522,7 +522,7 @@ public class HumanPlay {
                             payableZone.add(player);
                         }
                     }
-                    Player chosen = SGuiChoose.oneOrNone(String.format("Put cards from whose %s?", from), payableZone);
+                    Player chosen = SGuiChoose.oneOrNone(controller.getGui(), String.format("Put cards from whose %s?", from), payableZone);
                     if (chosen == null) {
                         return false;
                     }
@@ -534,7 +534,7 @@ public class HumanPlay {
                             return false;
                         }
 
-                        final Card c = SGuiChoose.oneOrNone("Put cards to Library", typeList);
+                        final Card c = SGuiChoose.oneOrNone(controller.getGui(), "Put cards to Library", typeList);
 
                         if (c != null) {
                             typeList.remove(c);
@@ -546,7 +546,7 @@ public class HumanPlay {
                     }
                 }
                 else if (from == ZoneType.Hand) { // Tainted Specter
-                    boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "put into library." + orString);
+                    boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "put into library." + orString);
                     if (!hasPaid) {
                         return false;
                     }
@@ -556,19 +556,19 @@ public class HumanPlay {
             else if (part instanceof CostSacrifice) {
                 int amount = Integer.parseInt(((CostSacrifice)part).getAmount());
                 List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
-                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "sacrifice." + orString);
+                boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "sacrifice." + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostGainControl) {
                 int amount = Integer.parseInt(((CostGainControl)part).getAmount());
                 List<Card> list = CardLists.getValidCards(p.getGame().getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
-                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "gain control." + orString);
+                boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "gain control." + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostReturn) {
                 List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
-                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "return to hand." + orString);
+                boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "return to hand." + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostDiscard) {
@@ -584,21 +584,21 @@ public class HumanPlay {
                 } else {
                     List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source);
                     int amount = getAmountFromPartX(part, source, sourceAbility);
-                    boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "discard." + orString);
+                    boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "discard." + orString);
                     if (!hasPaid) { return false; }
                 }
             }
             else if (part instanceof CostReveal) {
                 List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
-                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "reveal." + orString);
+                boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "reveal." + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostTapType) {
                 List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
                 list = CardLists.filter(list, Presets.UNTAPPED);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
-                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "tap." + orString);
+                boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "tap." + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostPartMana) {
@@ -642,10 +642,10 @@ public class HumanPlay {
         return paid;
     }
 
-    private static boolean payCostPart(SpellAbility sourceAbility, CostPartWithList cpl, int amount, List<Card> list, String actionName) {
+    private static boolean payCostPart(final PlayerControllerHuman controller, SpellAbility sourceAbility, CostPartWithList cpl, int amount, List<Card> list, String actionName) {
         if (list.size() < amount) { return false; } // unable to pay (not enough cards)
 
-        InputSelectCardsFromList inp = new InputSelectCardsFromList(amount, amount, list);
+        InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, amount, amount, list);
         inp.setMessage("Select %d " + cpl.getDescriptiveType() + " card(s) to " + actionName);
         inp.setCancelAllowed(true);
 
@@ -686,7 +686,7 @@ public class HumanPlay {
         return done;
     }
     
-    public static boolean payManaCost(final ManaCost realCost, final CostPartMana mc, final SpellAbility ability, final Player activator, String prompt, boolean isActivatedSa) {
+    public static boolean payManaCost(final PlayerControllerHuman controller, final ManaCost realCost, final CostPartMana mc, final SpellAbility ability, final Player activator, String prompt, boolean isActivatedSa) {
         final Card source = ability.getHostCard();
         ManaCostBeingPaid toPay = new ManaCostBeingPaid(realCost, mc.getRestiction());
 
@@ -726,7 +726,7 @@ public class HumanPlay {
             return false;
         }
         if (!toPay.isPaid()) {
-            inpPayment = new InputPayManaOfCostPayment(toPay, ability, activator);
+            inpPayment = new InputPayManaOfCostPayment(controller, toPay, ability, activator);
             inpPayment.setMessagePrefix(prompt);
             inpPayment.showAndWait();
             if (!inpPayment.isPaid()) {

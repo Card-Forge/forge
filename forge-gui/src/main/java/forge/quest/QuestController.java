@@ -24,16 +24,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.eventbus.Subscribe;
 
-import forge.GuiBase;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.game.GameFormat;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventMulligan;
+import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
 import forge.item.PreconDeck;
 import forge.model.FModel;
@@ -57,6 +58,7 @@ import forge.util.storage.StorageBase;
  */
 public class QuestController {
 
+    private final IGuiBase gui;
     private QuestData model;
     // gadgets
 
@@ -99,7 +101,15 @@ public class QuestController {
 
     /** */
     public static final int MAX_PET_SLOTS = 2;
-    
+
+    public QuestController(final IGuiBase gui) {
+        this.gui = gui;
+    }
+
+    public final IGuiBase getGui() {
+        return this.gui;
+    }
+
     /**
      * 
      * TODO: Write javadoc for this method.
@@ -471,7 +481,7 @@ public class QuestController {
         if (ev instanceof GameEventMulligan) {
             GameEventMulligan mev = (GameEventMulligan) ev;
             // First mulligan is free
-            if (mev.player.getLobbyPlayer() == GuiBase.getInterface().getQuestPlayer()
+            if (mev.player.getLobbyPlayer() == gui.getGuiPlayer()
                     && getAssets().hasItem(QuestItemType.SLEIGHT) && mev.player.getStats().getMulliganCount() < 7) {
                 mev.player.drawCard();
             }

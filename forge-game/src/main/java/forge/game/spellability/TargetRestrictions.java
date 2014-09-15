@@ -17,20 +17,21 @@
  */
 package forge.game.spellability;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.Lists;
+
 import forge.card.CardType;
 import forge.game.Game;
-import forge.game.GameObject;
+import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * <p>
@@ -473,9 +474,9 @@ public class TargetRestrictions {
      *            Check Valid Candidates and Targeting
      * @return a List<Object>.
      */
-    public final List<GameObject> getAllCandidates(final SpellAbility sa, final boolean isTargeted) {
+    public final List<GameEntity> getAllCandidates(final SpellAbility sa, final boolean isTargeted) {
         final Game game = sa.getActivatingPlayer().getGame();
-        List<GameObject> candidates = new ArrayList<GameObject>();
+        final List<GameEntity> candidates = Lists.newArrayList();
         for (Player player : game.getPlayers()) {
             if (sa.canTarget(player)) {
                 candidates.add(player);

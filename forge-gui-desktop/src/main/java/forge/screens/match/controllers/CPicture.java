@@ -17,11 +17,13 @@
  */
 package forge.screens.match.controllers;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+
+import javax.swing.JLabel;
+
 import forge.UiCommand;
-import forge.Singletons;
-import forge.card.CardCharacteristicName;
-import forge.card.CardDetailUtil;
-import forge.game.card.Card;
 import forge.gui.CardPicturePanel;
 import forge.gui.framework.ICDoc;
 import forge.item.IPaperCard;
@@ -29,13 +31,8 @@ import forge.item.InventoryItem;
 import forge.screens.match.views.VPicture;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.special.CardZoomer;
-import forge.view.FDialog;
-
-import javax.swing.*;
-
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
+import forge.view.CardView;
+import forge.view.ViewUtil;
 
 /**
  * Singleton controller for VPicture.
@@ -57,31 +54,23 @@ public enum CPicture implements ICDoc {
     private final JLabel flipIndicator = this.view.getLblFlipcard();
     private final CardZoomer zoomer = CardZoomer.SINGLETON_INSTANCE;
 
-    private Card currentCard = null;
-    private CardCharacteristicName displayedState = CardCharacteristicName.Original;
-
-    private boolean mayShowCurrentCard() {
-        if (currentCard == null) { return false; }
-        if (FDialog.isModalOpen()) { return true; } //allow showing cards while modal open to account for revealing, picking, and ordering cards
-        return Singletons.getControl().mayShowCard(currentCard);
-    }
+    private CardView currentView = null;
+    private boolean isDisplayAlt = false;
 
     /**
      * Shows card details and/or picture in sidebar cardview tabber.
      * 
      */
-    public void showCard(Card c, boolean showFlipped) {
-        if (c == null) {
+    public void showCard(final CardView c, boolean showAlt) {
+        if (null == c) {
             return;
         }
 
-        c = c.getCardForUi();
-        currentCard = c;
-        displayedState = c.getCurState();
-        boolean isFlippable = isCurrentCardFlippable();
-        flipIndicator.setVisible(isFlippable);
-        picturePanel.setCard(c, mayShowCurrentCard());
-        if (showFlipped && isFlippable) {
+        currentView = c;
+        isDisplayAlt = showAlt;
+        flipIndicator.setVisible(c.hasAltState());
+        picturePanel.setCard(c.getState(showAlt));
+        if (showAlt && c.hasAltState()) {
             flipCard();
         }
     }
@@ -92,21 +81,18 @@ public enum CPicture implements ICDoc {
      */
     public void showImage(final InventoryItem item) {
         if (item instanceof IPaperCard) {
-            IPaperCard paperCard = ((IPaperCard)item);
-            Card c = Card.getCardForUi(paperCard);
-            if (paperCard.isFoil() && c.getFoil() == 0) {
+            final IPaperCard paperCard = ((IPaperCard)item);
+            final CardView c = ViewUtil.getCardForUi(paperCard);
+            if (paperCard.isFoil() && c.getFoilIndex() == 0) {
                 c.setRandomFoil();
             }
             showCard(c, false);
         } else {
-            currentCard = null;
+            currentView = null;
+            isDisplayAlt = false;
             flipIndicator.setVisible(false);
             picturePanel.setCard(item);
         }
-    }
-
-    public Card getCurrentCard() {
-        return currentCard;
     }
 
     @Override
@@ -137,7 +123,7 @@ public enum CPicture implements ICDoc {
             @Override
             public void onMiddleMouseDown(MouseEvent e) {
                 if (isCardDisplayed()) {
-                    CardZoomer.SINGLETON_INSTANCE.doMouseButtonZoom(currentCard, displayedState);
+                    CardZoomer.SINGLETON_INSTANCE.doMouseButtonZoom(currentView);
                 }
             }
 
@@ -162,7 +148,7 @@ public enum CPicture implements ICDoc {
             public void mouseWheelMoved(MouseWheelEvent arg0) {
                 if (isCardDisplayed()) {
                     if (arg0.getWheelRotation() < 0) {
-                        zoomer.doMouseWheelZoom(currentCard, displayedState);
+                        zoomer.doMouseWheelZoom(currentView);
                     }
                 }
             }
@@ -170,7 +156,7 @@ public enum CPicture implements ICDoc {
     }
 
     private boolean isCardDisplayed() {
-        return (currentCard != null);
+        return (currentView != null);
     }
 
     @Override
@@ -178,36 +164,11 @@ public enum CPicture implements ICDoc {
     }
 
     public void flipCard() {
-        if (isCurrentCardFlippable()) {
-            displayedState = CardDetailUtil.getAlternateState(currentCard, displayedState);
-            picturePanel.setCardImage(displayedState);
-            setCardDetailPanel();
+        if (currentView.hasAltState()) {
+            isDisplayAlt = !isDisplayAlt;
+            picturePanel.setCard(currentView.getState(isDisplayAlt));
+            CDetail.SINGLETON_INSTANCE.showCard(currentView, isDisplayAlt);
         }
     }
 
-    /**
-     * Displays details about the current card state in appropriate GUI panel.
-     * <p>
-     * It does this by temporarily setting the {@code CardCharacteristicName} state
-     * of the card, extracting the details and then setting the card back to its
-     * original state.
-     * <p>
-     * TODO: at the moment setting the state of {@code Card} does not appear to
-     * trigger any significant functionality but potentially this could cause
-     * unforeseen consequences. Recommend that a read-only mechanism is implemented
-     * to get card details for a given {@code CardCharacteristicName} state that does
-     * not require temporarily setting state of {@code Card} instance.
-     */
-    private void setCardDetailPanel() {
-        CardCharacteristicName temp = currentCard.getCurState();
-        currentCard.setState(displayedState);
-        CDetail.SINGLETON_INSTANCE.showCard(currentCard);
-        currentCard.setState(temp);
-    }
-
-    private boolean isCurrentCardFlippable() {
-        if (!mayShowCurrentCard()) { return false; }
-
-        return CardDetailUtil.isCardFlippable(currentCard);
-    }
 }

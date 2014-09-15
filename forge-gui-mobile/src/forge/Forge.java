@@ -17,6 +17,7 @@ import forge.assets.ImageCache;
 import forge.error.BugReporter;
 import forge.error.ExceptionHandler;
 import forge.interfaces.IDeviceAdapter;
+import forge.interfaces.IGuiBase;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
@@ -49,14 +50,17 @@ public class Forge implements ApplicationListener {
     private static SplashScreen splashScreen;
     private static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
-    private static final SoundSystem soundSystem = new SoundSystem();
+    private static SoundSystem soundSystem;
     private static final Stack<FScreen> screens = new Stack<FScreen>();
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0) {
         if (GuiBase.getInterface() == null) {
+            ForgeConstants.init(assetDir0);
             clipboard = clipboard0;
             deviceAdapter = deviceAdapter0;
-            GuiBase.setInterface(new GuiMobile(assetDir0));
+            final IGuiBase gui = new GuiMobile();
+            GuiBase.setInterface(gui);
+            soundSystem = new SoundSystem(gui);
         }
         return app;
     }
@@ -67,7 +71,7 @@ public class Forge implements ApplicationListener {
     @Override
     public void create() {
         //install our error handler
-        ExceptionHandler.registerErrorHandling();
+        ExceptionHandler.registerErrorHandling(GuiBase.getInterface());
 
         graphics = new Graphics();
         splashScreen = new SplashScreen();
@@ -90,7 +94,7 @@ public class Forge implements ApplicationListener {
                 AssetsDownloader.checkForUpdates(splashScreen);
                 if (exited) { return; } //don't continue if user chose to exit or couldn't download required assets
 
-                FModel.initialize(splashScreen.getProgressBar());
+                FModel.initialize(GuiBase.getInterface(), splashScreen.getProgressBar());
 
                 splashScreen.getProgressBar().setDescription("Loading fonts...");
                 FSkinFont.preloadAll();
@@ -211,7 +215,7 @@ public class Forge implements ApplicationListener {
         }
         catch (Exception ex) {
             graphics.end();
-            BugReporter.reportException(ex);
+            BugReporter.reportException(ex, GuiBase.getInterface());
         }
     }
 
@@ -245,7 +249,7 @@ public class Forge implements ApplicationListener {
         }
         catch (Exception ex) {
             graphics.end();
-            BugReporter.reportException(ex);
+            BugReporter.reportException(ex, GuiBase.getInterface());
         }
     }
 
@@ -263,7 +267,7 @@ public class Forge implements ApplicationListener {
         }
         catch (Exception ex) {
             graphics.end();
-            BugReporter.reportException(ex);
+            BugReporter.reportException(ex, GuiBase.getInterface());
         }
     }
 
@@ -433,7 +437,7 @@ public class Forge implements ApplicationListener {
                 return false;
             }
             catch (Exception ex) {
-                BugReporter.reportException(ex);
+                BugReporter.reportException(ex, GuiBase.getInterface());
                 return true;
             }
         }
@@ -449,7 +453,7 @@ public class Forge implements ApplicationListener {
                 return false;
             }
             catch (Exception ex) {
-                BugReporter.reportException(ex);
+                BugReporter.reportException(ex, GuiBase.getInterface());
                 return true;
             }
         }
@@ -465,7 +469,7 @@ public class Forge implements ApplicationListener {
                 return false;
             }
             catch (Exception ex) {
-                BugReporter.reportException(ex);
+                BugReporter.reportException(ex, GuiBase.getInterface());
                 return true;
             }
         }
@@ -481,7 +485,7 @@ public class Forge implements ApplicationListener {
                 return false;
             }
             catch (Exception ex) {
-                BugReporter.reportException(ex);
+                BugReporter.reportException(ex, GuiBase.getInterface());
                 return true;
             }
         }
@@ -497,7 +501,7 @@ public class Forge implements ApplicationListener {
                 return false;
             }
             catch (Exception ex) {
-                BugReporter.reportException(ex);
+                BugReporter.reportException(ex, GuiBase.getInterface());
                 return true;
             }
         }
@@ -513,7 +517,7 @@ public class Forge implements ApplicationListener {
                 return false;
             }
             catch (Exception ex) {
-                BugReporter.reportException(ex);
+                BugReporter.reportException(ex, GuiBase.getInterface());
                 return true;
             }
         }
@@ -529,7 +533,7 @@ public class Forge implements ApplicationListener {
                 return false;
             }
             catch (Exception ex) {
-                BugReporter.reportException(ex);
+                BugReporter.reportException(ex, GuiBase.getInterface());
                 return true;
             }
         }
@@ -545,7 +549,7 @@ public class Forge implements ApplicationListener {
                 return false;
             }
             catch (Exception ex) {
-                BugReporter.reportException(ex);
+                BugReporter.reportException(ex, GuiBase.getInterface());
                 return true;
             }
         }

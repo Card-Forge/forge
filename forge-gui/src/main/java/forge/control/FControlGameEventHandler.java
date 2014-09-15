@@ -1,33 +1,73 @@
 package forge.control;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.Vector;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import org.apache.commons.lang3.tuple.Pair;
+
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.common.eventbus.Subscribe;
 
 import forge.FThreads;
-import forge.GuiBase;
 import forge.game.Game;
 import forge.game.card.Card;
-import forge.game.event.*;
+import forge.game.event.GameEvent;
+import forge.game.event.GameEventAnteCardsSelected;
+import forge.game.event.GameEventAttackersDeclared;
+import forge.game.event.GameEventBlockersDeclared;
+import forge.game.event.GameEventCardAttachment;
+import forge.game.event.GameEventCardChangeZone;
+import forge.game.event.GameEventCardCounters;
+import forge.game.event.GameEventCardDamaged;
+import forge.game.event.GameEventCardPhased;
+import forge.game.event.GameEventCardStatsChanged;
+import forge.game.event.GameEventCardTapped;
+import forge.game.event.GameEventCombatEnded;
+import forge.game.event.GameEventGameFinished;
+import forge.game.event.GameEventGameOutcome;
+import forge.game.event.GameEventManaPool;
+import forge.game.event.GameEventPlayerControl;
+import forge.game.event.GameEventPlayerLivesChanged;
+import forge.game.event.GameEventPlayerPoisoned;
+import forge.game.event.GameEventPlayerPriority;
+import forge.game.event.GameEventPlayerStatsChanged;
+import forge.game.event.GameEventShuffle;
+import forge.game.event.GameEventSpellAbilityCast;
+import forge.game.event.GameEventSpellRemovedFromStack;
+import forge.game.event.GameEventSpellResolved;
+import forge.game.event.GameEventTurnBegan;
+import forge.game.event.GameEventTurnPhase;
+import forge.game.event.GameEventZone;
+import forge.game.event.IGameEventVisitor;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.interfaces.IGuiBase;
 import forge.match.input.ButtonUtil;
 import forge.match.input.InputBase;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Lang;
-import forge.util.ThreadUtil;
 import forge.util.gui.SGuiChoose;
 import forge.util.maps.MapOfLists;
-
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.atomic.AtomicBoolean;
+import forge.view.CardView;
+import forge.view.LocalGameView;
+import forge.view.PlayerView;
 
 public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
-    public FControlGameEventHandler() {
+
+    private final IGuiBase gui;
+    private final LocalGameView gameView;
+    public FControlGameEventHandler(final IGuiBase gui, final LocalGameView gameView) {
+        this.gui = gui;
+        this.gameView = gameView;
     }
 
     @Subscribe
@@ -40,11 +80,11 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(final GameEventTurnPhase ev) {
         if (phaseUpdPlanned.getAndSet(true)) return null;
 
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
+        FThreads.invokeInEdtNowOrLater(gui, new Runnable() {
             @Override
             public void run() {
                 phaseUpdPlanned.set(false);
-                GuiBase.getInterface().updatePhase();
+                gui.updatePhase();
             }
         });
         return null;
@@ -57,11 +97,11 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(GameEventPlayerPriority event) {
         if (combatUpdPlanned.getAndSet(true)) { return null; }
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
+        FThreads.invokeInEdtNowOrLater(gui, new Runnable() {
             @Override
             public void run() {
                 combatUpdPlanned.set(false);
-                GuiBase.getInterface().showCombat(GuiBase.getInterface().getGame().getCombat());
+                gui.showCombat(gameView.getCombat());
             }
         });
         return null;
@@ -72,17 +112,16 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(final GameEventTurnBegan event) {
         if (FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES) && event.turnOwner != null) {
             // anything except stack will get here
-            updateZone(Pair.of(event.turnOwner, ZoneType.Battlefield));
+            updateZone(Pair.of(gameView.getPlayerView(event.turnOwner), ZoneType.Battlefield));
         }
         
         if (turnUpdPlanned.getAndSet(true)) { return null; }
 
-        final Game game = GuiBase.getInterface().getGame(); // to make sure control gets a correct game instance
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
+        FThreads.invokeInEdtNowOrLater(gui, new Runnable() {
             @Override
             public void run() {
                 turnUpdPlanned.set(false);
-                GuiBase.getInterface().updateTurn(event, game);
+                gui.updateTurn(gameView.getPlayerView(event.turnOwner));
             }
         });
         return null;
@@ -90,27 +129,27 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(GameEventAnteCardsSelected ev) {
-        List<Card> options = new ArrayList<Card>();
-        for (final Entry<Player, Card> kv : ((GameEventAnteCardsSelected) ev).cards.entries()) {
-            Card fakeCard = new Card(-1); //use fake card so real cards appear with proper formatting
-            fakeCard.setName("  -- From " + Lang.getPossesive(kv.getKey().getName()) + " deck --");
+        final List<CardView> options = Lists.newArrayList();
+        for (final Entry<Player, Card> kv : ev.cards.entries()) {
+            final CardView fakeCard = new CardView(true); //use fake card so real cards appear with proper formatting
+            fakeCard.getOriginal().setName("  -- From " + Lang.getPossesive(kv.getKey().getName()) + " deck --");
             options.add(fakeCard);
-            options.add(kv.getValue());
+            options.add(gameView.getCardView(kv.getValue()));
         }
-        SGuiChoose.reveal("These cards were chosen to ante", options);
+        SGuiChoose.reveal(gui, "These cards were chosen to ante", options);
         return null;
     }
 
     @Override
     public Void visit(GameEventPlayerControl ev) {
-        if (GuiBase.getInterface().getGame().isGameOver()) {
+        if (ev.player.getGame().isGameOver()) {
             return null;
         }
 
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
+        FThreads.invokeInEdtNowOrLater(gui, new Runnable() {
             @Override
             public void run() {
-                GuiBase.getInterface().updatePlayerControl();
+                gui.updatePlayerControl();
             }
         });
         return null;
@@ -119,41 +158,26 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final Runnable unlockGameThreadOnGameOver = new Runnable() {
         @Override
         public void run() {
-            GuiBase.getInterface().getInputQueue().onGameOver(true); // this will unlock any game threads waiting for inputs to complete
+            gui.getInputQueue().onGameOver(true); // this will unlock any game threads waiting for inputs to complete
         }
     };
 
     @Override
     public Void visit(GameEventGameOutcome ev) {
-        FThreads.invokeInEdtNowOrLater(unlockGameThreadOnGameOver);
+        FThreads.invokeInEdtNowOrLater(gui, unlockGameThreadOnGameOver);
         return null;
     }
 
     @Override
     public Void visit(GameEventGameFinished ev) {
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
+        FThreads.invokeInEdtNowOrLater(gui, new Runnable() {
             @Override
             public void run() {
                 InputBase.cancelAwaitNextInput(); //ensure "Waiting for opponent..." doesn't appear behind WinLo
-                GuiBase.getInterface().showPromptMessage(""); //clear prompt behind WinLose overlay
-                ButtonUtil.update("", "", false, false, false);
-                GuiBase.getInterface().finishGame();
-
-                //update all achievements for GUI player after game finished
-                ThreadUtil.invokeInGameThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Game game = GuiBase.getInterface().getGame();
-                        if (game == null) {
-                            return;
-                        }
-                        for (Player p : game.getRegisteredPlayers()) {
-                            if (p.getController().getLobbyPlayer() == GuiBase.getInterface().getGuiPlayer()) {
-                                FModel.getAchievements(game.getRules().getGameType()).updateAll(p);
-                            }
-                        }
-                    }
-                });
+                gui.showPromptMessage(""); //clear prompt behind WinLose overlay
+                ButtonUtil.update(gui, "", "", false, false, false);
+                gui.finishGame();
+                gameView.updateAchievements();
             }
         });
         return null;
@@ -164,38 +188,38 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         @Override
         public void run() {
             stackUpdPlanned.set(false);
-            GuiBase.getInterface().updateStack();
+            gui.updateStack();
         }
     };
 
     @Override
     public Void visit(GameEventSpellAbilityCast event) {
         if (!stackUpdPlanned.getAndSet(true)) {
-            FThreads.invokeInEdtNowOrLater(updStack);
+            FThreads.invokeInEdtNowOrLater(gui, updStack);
         }
         return null;
     }
     @Override
     public Void visit(GameEventSpellResolved event) {
         if (!stackUpdPlanned.getAndSet(true)) {
-            FThreads.invokeInEdtNowOrLater(updStack);
+            FThreads.invokeInEdtNowOrLater(gui, updStack);
         }
         return null;
     }
     @Override
     public Void visit(GameEventSpellRemovedFromStack event) {
         if (!stackUpdPlanned.getAndSet(true)) {
-            FThreads.invokeInEdtNowOrLater(updStack);
+            FThreads.invokeInEdtNowOrLater(gui, updStack);
         }
         return null;
     }
 
-    private final List<Pair<Player, ZoneType>> zonesToUpdate = new Vector<Pair<Player, ZoneType>>();
+    private final List<Pair<PlayerView, ZoneType>> zonesToUpdate = new Vector<Pair<PlayerView,ZoneType>>();
     private final Runnable updZones = new Runnable() {
         @Override
         public void run() {
             synchronized (zonesToUpdate) {
-                GuiBase.getInterface().updateZones(zonesToUpdate);
+                gui.updateZones(zonesToUpdate);
                 zonesToUpdate.clear();
             }
         }
@@ -205,16 +229,15 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(GameEventZone event) {
         if (event.player != null) {
             // anything except stack will get here
-            updateZone(Pair.of(event.player, event.zoneType));
+            updateZone(Pair.of(gameView.getPlayerView(event.player), event.zoneType));
         }
         return null;
     }
 
     @Override
     public Void visit(GameEventCardAttachment event) {
-        // TODO Auto-generated method stub
-        Game game = event.equipment.getGame();
-        PlayerZone zEq = (PlayerZone)game.getZoneOf(event.equipment);
+        final Game game = event.equipment.getGame();
+        final PlayerZone zEq = (PlayerZone)game.getZoneOf(event.equipment);
         if (event.oldEntiy instanceof Card) {
             updateZone(game.getZoneOf((Card)event.oldEntiy));
         }
@@ -224,11 +247,11 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         return updateZone(zEq);
     }
 
-    private Void updateZone(Zone z) {
-        return updateZone(Pair.of(z.getPlayer(), z.getZoneType()));
+    private Void updateZone(final Zone z) {
+        return updateZone(Pair.of(gameView.getPlayerView(z.getPlayer()), z.getZoneType()));
     }
 
-    private Void updateZone(Pair<Player, ZoneType> kv) {
+    private Void updateZone(final Pair<PlayerView, ZoneType> kv) {
         boolean needUpdate = false;
         synchronized (zonesToUpdate) {
             needUpdate = zonesToUpdate.isEmpty();
@@ -237,47 +260,47 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             }
         }
         if (needUpdate) {
-            FThreads.invokeInEdtNowOrLater(updZones);
+            FThreads.invokeInEdtNowOrLater(gui, updZones);
         }
         return null;
     }
 
-    private final Set<Card> cardsToUpdate = new HashSet<Card>();
+    private final Set<CardView> cardsToUpdate = Sets.newHashSet();
     private final Runnable updCards = new Runnable() {
         @Override
         public void run() {
             synchronized (cardsToUpdate) {
-                GuiBase.getInterface().updateCards(cardsToUpdate);
+                gui.updateCards(cardsToUpdate);
                 cardsToUpdate.clear();
             }
         }
     };
 
     @Override
-    public Void visit(GameEventCardTapped event) {
-        return updateSingleCard(event.card);
+    public Void visit(final GameEventCardTapped event) {
+        return updateSingleCard(gameView.getCardView(event.card));
     }
     
     @Override
-    public Void visit(GameEventCardPhased event) {
-        return updateSingleCard(event.card);
+    public Void visit(final GameEventCardPhased event) {
+        return updateSingleCard(gameView.getCardView(event.card));
     }
 
     @Override
-    public Void visit(GameEventCardDamaged event) {
-        return updateSingleCard(event.card);
+    public Void visit(final GameEventCardDamaged event) {
+        return updateSingleCard(gameView.getCardView(event.card));
     }
 
     @Override
-    public Void visit(GameEventCardCounters event) {
-        return updateSingleCard(event.card);
+    public Void visit(final GameEventCardCounters event) {
+        return updateSingleCard(gameView.getCardView(event.card));
     }
 
     @Override
-    public Void visit(GameEventBlockersDeclared event) { // This is to draw icons on blockers declared by AI
+    public Void visit(final GameEventBlockersDeclared event) { // This is to draw icons on blockers declared by AI
         for (MapOfLists<Card, Card> kv : event.blockers.values()) {
             for (Collection<Card> blockers : kv.values()) {
-                updateManyCards(blockers);
+                updateManyCards(gameView.getCardViews(blockers));
             }
         }
         return super.visit(event);
@@ -286,13 +309,13 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(GameEventAttackersDeclared event) {
         // Skip redraw for GUI player?
-        if (event.player.getLobbyPlayer() == GuiBase.getInterface().getGuiPlayer()) {
+        if (event.player.getLobbyPlayer() == gui.getGuiPlayer()) {
             return null;
         }
 
         // Update all attackers.
         // Although they might have been updated when they were apped, there could be someone with vigilance, not redrawn yet.
-        updateManyCards(event.attackersMap.values());
+        updateManyCards(gameView.getCardViews(event.attackersMap.values()));
 
         return super.visit(event);
     }
@@ -300,12 +323,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(GameEventCombatEnded event) {
         // This should remove sword/shield icons from combatants by the time game moves to M2
-        updateManyCards(event.attackers);
-        updateManyCards(event.blockers);
+        updateManyCards(gameView.getCardViews(event.attackers));
+        updateManyCards(gameView.getCardViews(event.blockers));
         return null;
     }
 
-    private Void updateSingleCard(Card c) {
+    private Void updateSingleCard(final CardView c) {
         boolean needUpdate = false;
         synchronized (cardsToUpdate) {
             needUpdate = cardsToUpdate.isEmpty();
@@ -314,19 +337,30 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             }
         }
         if (needUpdate) {
-            FThreads.invokeInEdtNowOrLater(updCards);
+            FThreads.invokeInEdtNowOrLater(gui, updCards);
         }
         return null;
     }
 
-    private Void updateManyCards(Collection<Card> cc) {
+    private Void updateManyCards(final Iterable<CardView> cc) {
         boolean needUpdate = false;
         synchronized (cardsToUpdate) {
             needUpdate = cardsToUpdate.isEmpty();
-            cardsToUpdate.addAll(cc);
+            Iterables.addAll(cardsToUpdate, cc);
         }
         if (needUpdate) {
-            FThreads.invokeInEdtNowOrLater(updCards);
+            FThreads.invokeInEdtNowOrLater(gui, updCards);
+        }
+        return null;
+    }
+
+    @Override
+    public Void visit(GameEventCardChangeZone event) {
+        if (event.from != null) {
+            updateZone(event.from);
+        }
+        if (event.to != null) {
+            updateZone(event.to);
         }
         return null;
     }
@@ -336,8 +370,23 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
      */
     @Override
     public Void visit(GameEventCardStatsChanged event) {
-        GuiBase.getInterface().refreshCardDetails(event.cards);
-        return updateManyCards(event.cards);
+        final Iterable<CardView> cardViews = gameView.getCardViews(event.cards);
+        gui.refreshCardDetails(cardViews);
+        return updateManyCards(cardViews);
+    }
+
+    @Override
+    public Void visit(GameEventPlayerStatsChanged event) {
+        for (final Player p : event.players) {
+            gui.refreshCardDetails(gameView.getCardViews(p.getAllCards()));
+        }
+        return null;
+    }
+
+    @Override
+    public Void visit(GameEventShuffle event) {
+        updateZone(event.player.getZone(ZoneType.Library));
+        return null;
     }
 
     // Update manapool
@@ -345,7 +394,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final Runnable updManaPool = new Runnable() {
         @Override public void run() {
             synchronized (manaPoolUpdate) {
-                GuiBase.getInterface().updateManaPool(manaPoolUpdate);
+                gui.updateManaPool(gameView.getPlayerViews(manaPoolUpdate));
                 manaPoolUpdate.clear();
             }
         }
@@ -361,7 +410,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             }
         }
         if (invokeUpdate) {
-            FThreads.invokeInEdtNowOrLater(updManaPool);
+            FThreads.invokeInEdtNowOrLater(gui, updManaPool);
         }
         return null;
     }
@@ -371,7 +420,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final Runnable updLives = new Runnable() {
         @Override public void run() {
             synchronized (livesUpdate) {
-                GuiBase.getInterface().updateLives(livesUpdate);
+                gui.updateLives(gameView.getPlayerViews(livesUpdate));
                 livesUpdate.clear();
             }
         }
@@ -386,7 +435,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             }
         }
         if (invokeUpdate) {
-            FThreads.invokeInEdtNowOrLater(updLives);
+            FThreads.invokeInEdtNowOrLater(gui, updLives);
         }
         return null;
     }
@@ -401,7 +450,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             }
         }
         if (invokeUpdate) {
-            FThreads.invokeInEdtNowOrLater(updLives);
+            FThreads.invokeInEdtNowOrLater(gui, updLives);
         }
         return null;
     }

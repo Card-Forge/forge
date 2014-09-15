@@ -17,21 +17,28 @@
  */
 package forge.screens.match.controllers;
 
-import forge.UiCommand;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+
+import javax.swing.JButton;
+
 import forge.FThreads;
-import forge.game.Game;
-import forge.game.GameRules;
-import forge.game.Match;
+import forge.GuiBase;
+import forge.Singletons;
+import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
-import forge.match.input.InputProxy;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FSkin;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.*;
+import forge.util.ITriggerEvent;
+import forge.view.CardView;
+import forge.view.IGameView;
+import forge.view.PlayerView;
+import forge.view.SpellAbilityView;
 
 /**
  * Controls the prompt panel in the match UI.
@@ -42,20 +49,19 @@ public enum CPrompt implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
-    private InputProxy inputControl = new InputProxy();
     private Component lastFocusedButton = null;
-    private VPrompt view = VPrompt.SINGLETON_INSTANCE;
+    private final VPrompt view = VPrompt.SINGLETON_INSTANCE;
 
     private final ActionListener actCancel = new ActionListener() {
         @Override
         public void actionPerformed(final ActionEvent evt) {
-            inputControl.selectButtonCancel();
+            selectButtonCancel();
         }
     };
     private final ActionListener actOK = new ActionListener() {
         @Override
         public void actionPerformed(final ActionEvent evt) {
-            inputControl.selectButtonOK();
+            selectButtonOk();
         }
     };
 
@@ -83,13 +89,32 @@ public enum CPrompt implements ICDoc {
         _initButton(view.getBtnOK(), actOK);
     }
 
-    /**
-     * Gets the input control.
-     * 
-     * @return GuiInput
-     */
-    public InputProxy getInputControl() {
-        return this.inputControl;
+    public void selectButtonOk() {
+        Singletons.getControl().getGameView().selectButtonOk();
+    }
+
+    public void selectButtonCancel() {
+        Singletons.getControl().getGameView().selectButtonCancel();
+    }
+
+    public boolean passPriority() {
+        return Singletons.getControl().getGameView().passPriority();
+    }
+
+    public boolean passPriorityUntilEndOfTurn() {
+        return Singletons.getControl().getGameView().passPriorityUntilEndOfTurn();
+    }
+
+    public void selectPlayer(final PlayerView player, final ITriggerEvent triggerEvent) {
+        Singletons.getControl().getGameView().selectPlayer(player, triggerEvent);
+    }
+
+    public void selectCard(final CardView card, final ITriggerEvent triggerEvent) {
+        Singletons.getControl().getGameView().selectCard(card, triggerEvent);
+    }
+
+    public void selectAbility(final SpellAbilityView sa) {
+        Singletons.getControl().getGameView().selectAbility(sa);
     }
 
     /** @param s0 &emsp; {@link java.lang.String} */
@@ -113,21 +138,19 @@ public enum CPrompt implements ICDoc {
     /* (non-Javadoc)
      * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
      */
-
-    public void updateText(Game game) {
-        FThreads.assertExecutedByEdt(true);
-        final Match match = game.getMatch();
-        final GameRules rules = game.getRules();
-        final String text = String.format("T:%d G:%d/%d [%s]", game.getPhaseHandler().getTurn(), match.getPlayedGames().size() + 1, rules.getGamesPerMatch(), rules.getGameType());
-        view.getLblGames().setText(text);
-        view.getLblGames().setToolTipText(String.format("%s: Game #%d of %d, turn %d", rules.getGameType(), match.getPlayedGames().size() + 1, rules.getGamesPerMatch(), game.getPhaseHandler().getTurn()));
-    }
-
     @Override
     public void update() {
         // set focus back to button that last had it
         if (null != lastFocusedButton) {
             lastFocusedButton.requestFocusInWindow();
         }
+    }
+
+    public void updateText() {
+        FThreads.assertExecutedByEdt(GuiBase.getInterface(), true);
+        final IGameView game = Singletons.getControl().getGameView();
+        final String text = String.format("T:%d G:%d/%d [%s]", game.getTurnNumber(), game.getNumPlayedGamesInMatch() + 1, game.getNumGamesInMatch(), game.getGameType());
+        view.getLblGames().setText(text);
+        view.getLblGames().setToolTipText(String.format("%s: Game #%d of %d, turn %d", game.getGameType(), game.getNumPlayedGamesInMatch() + 1, game.getNumGamesInMatch(), game.getTurnNumber()));
     }
 }

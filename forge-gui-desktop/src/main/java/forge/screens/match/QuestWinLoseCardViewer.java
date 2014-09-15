@@ -17,7 +17,15 @@
  */
 package forge.screens.match;
 
-import forge.game.card.Card;
+import java.util.Collections;
+import java.util.List;
+
+import javax.swing.AbstractListModel;
+import javax.swing.JList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import net.miginfocom.swing.MigLayout;
 import forge.gui.CardDetailPanel;
 import forge.gui.CardPicturePanel;
 import forge.item.PaperCard;
@@ -27,14 +35,7 @@ import forge.toolbox.FList;
 import forge.toolbox.FPanel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import java.util.Collections;
-import java.util.List;
+import forge.view.ViewUtil;
 
 /**
  * A simple JPanel that shows three columns: card list, pic, and description..
@@ -63,7 +64,7 @@ public class QuestWinLoseCardViewer extends FPanel {
     public QuestWinLoseCardViewer(final List<PaperCard> list) {
         this.list = Collections.unmodifiableList(list);
         this.jList = new FList<PaperCard>(new ChooserListModel());
-        this.detail = new CardDetailPanel(null);
+        this.detail = new CardDetailPanel();
         this.picture = new CardPicturePanel();
         this.scroller = new FScrollPane(this.jList, false);
 
@@ -111,7 +112,7 @@ public class QuestWinLoseCardViewer extends FPanel {
             // (String) jList.getSelectedValue();
             if ((row >= 0) && (row < QuestWinLoseCardViewer.this.list.size())) {
                 final PaperCard cp = QuestWinLoseCardViewer.this.list.get(row);
-                QuestWinLoseCardViewer.this.detail.setCard(Card.getCardForUi(cp));
+                QuestWinLoseCardViewer.this.detail.setCard(ViewUtil.getCardForUi(cp));
                 QuestWinLoseCardViewer.this.picture.setCard(cp);
             }
         }

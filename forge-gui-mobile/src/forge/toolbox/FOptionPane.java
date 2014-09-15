@@ -10,11 +10,11 @@ import forge.assets.FImage;
 import forge.assets.FSkinImage;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
-import forge.game.card.Card;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FEvent.*;
 import forge.util.Callback;
 import forge.util.Utils;
+import forge.view.CardView;
 
 public class FOptionPane extends FDialog {
     public static final FSkinImage QUESTION_ICON = FSkinImage.QUESTION;
@@ -88,7 +88,7 @@ public class FOptionPane extends FDialog {
         optionPane.show();
     }
 
-    public static void showCardOptionDialog(final Card card, String message, String title, FImage icon, String[] options, int defaultOption, final Callback<Integer> callback) {
+    public static void showCardOptionDialog(final CardView card, String message, String title, FImage icon, String[] options, int defaultOption, final Callback<Integer> callback) {
         final FDisplayObject cardDisplay;
         if (card != null) {
             cardDisplay = new FDisplayObject() {
@@ -109,7 +109,7 @@ public class FOptionPane extends FDialog {
                     float x = (getWidth() - w) / 2;
                     float y = 0;
 
-                    CardRenderer.drawCard(g, card, true, x, y, w, h);
+                    CardRenderer.drawCard(g, card, x, y, w, h);
                 }
             };
             cardDisplay.setHeight(Utils.SCREEN_HEIGHT / 2);

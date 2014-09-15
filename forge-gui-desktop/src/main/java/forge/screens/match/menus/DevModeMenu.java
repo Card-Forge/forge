@@ -31,7 +31,6 @@ public class DevModeMenu implements ActionListener {
         ADD_CARD_TO_PLAY("Add card to play"),
         RIGGED_PLANAR_ROLL("Rigged planar roll"),
         PLANESWALK_TO("Planeswalk to"),
-//        LOSS_BY_MILLING("Loss by Milling"),
         PLAY_MANY_LANDS("Play many lands per Turn"),
         SETUP_GAME_STATE("Setup Game State"),
         ADD_COUNTER("Add Counter to Permanent"),
@@ -68,7 +67,6 @@ public class DevModeMenu implements ActionListener {
         menu.add(getMenuItem(DevMenuItem.RIGGED_PLANAR_ROLL));
         menu.add(getMenuItem(DevMenuItem.PLANESWALK_TO));
         menu.addSeparator();
-//        menu.add(getCheckboxMenuItem(DevMenuItem.LOSS_BY_MILLING, prefs.getPrefBoolean(FPref.DEV_MILLING_LOSS)));
         menu.add(getCheckboxMenuItem(DevMenuItem.PLAY_MANY_LANDS, prefs.getPrefBoolean(FPref.DEV_UNLIMITED_LAND)));
         menu.add(getMenuItem(DevMenuItem.SETUP_GAME_STATE));
         menu.add(getMenuItem(DevMenuItem.ADD_COUNTER));
@@ -104,10 +102,9 @@ public class DevModeMenu implements ActionListener {
         case GENERATE_MANA:     { controller.generateMana(); break; }
         case TUTOR_FOR_CARD:    { controller.tutorForCard(); break; }
         case ADD_CARD_TO_HAND:  { controller.addCardToHand(); break; }
-        case ADD_CARD_TO_PLAY:  { controller.addCardToPlay(); break; }
+        case ADD_CARD_TO_PLAY:  { controller.addCardToBattlefield(); break; }
         case RIGGED_PLANAR_ROLL:{ controller.riggedPlanerRoll(); break; }
         case PLANESWALK_TO:     { controller.planeswalkTo(); break; }
-//        case LOSS_BY_MILLING:   { controller.toggleLossByMilling(); break; }
         case PLAY_MANY_LANDS:   { controller.togglePlayManyLandsPerTurn(); break; }
         case SETUP_GAME_STATE:  { controller.setupGameState(); break; }
         case ADD_COUNTER:       { controller.addCounterToPermanent(); break; }

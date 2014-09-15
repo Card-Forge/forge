@@ -1,22 +1,26 @@
 package forge.match.input;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
+import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.gui.SGuiChoose;
-
-import java.util.*;
-import java.util.Map.Entry;
-
 
 public final class InputProliferate extends InputSelectManyBase<GameEntity> {
     private static final long serialVersionUID = -1779224307654698954L;
     private Map<GameEntity, CounterType> chosenCounters = new HashMap<GameEntity, CounterType>();
 
-    public InputProliferate() {
-        super(1, Integer.MAX_VALUE);
+    public InputProliferate(final PlayerControllerHuman controller) {
+        super(controller, 1, Integer.MAX_VALUE);
     }
 
     protected String getMessage() {
@@ -57,7 +61,7 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
                 }
             }
 
-            CounterType toAdd = choices.size() == 1 ? choices.get(0) : SGuiChoose.one("Select counter type", choices);
+            CounterType toAdd = choices.size() == 1 ? choices.get(0) : SGuiChoose.one(getGui(), "Select counter type", choices);
             chosenCounters.put(card, toAdd);
         }
 

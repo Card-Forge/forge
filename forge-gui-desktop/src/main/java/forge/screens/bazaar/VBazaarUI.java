@@ -1,5 +1,6 @@
 package forge.screens.bazaar;
 
+import forge.GuiBase;
 import forge.UiCommand;
 import forge.assets.FSkinProp;
 import forge.gui.framework.FScreen;
@@ -42,7 +43,7 @@ public enum VBazaarUI implements IVTopLevelUI {
 
             final FLabel lbl = new FLabel.ButtonBuilder().text(s + "  ")
                     .fontAlign(SwingConstants.RIGHT).iconInBackground(true).selectable()
-                    .fontSize(16).icon((SkinImage)bazaar.getStall(s).getIcon()).build();
+                    .fontSize(16).icon((SkinImage)GuiBase.getInterface().getSkinIcon(bazaar.getStall(s).getIcon())).build();
 
             pnlAllStalls.add(lbl, "h 80px!, w 90%!, gap 0 0 10px 10px");
 

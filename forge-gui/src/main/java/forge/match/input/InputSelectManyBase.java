@@ -1,12 +1,12 @@
 package forge.match.input;
 
+import java.util.Collection;
+
 import com.google.common.collect.Iterables;
 
-import forge.GuiBase;
 import forge.game.GameEntity;
 import forge.game.card.Card;
-
-import java.util.Collection;
+import forge.player.PlayerControllerHuman;
 
 public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyncronizedBase {
     private static final long serialVersionUID = -2305549394512889450L;
@@ -18,7 +18,8 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
 
     protected String message = "Source-Card-Name - Select %d more card(s)";
 
-    protected InputSelectManyBase(int min, int max) {
+    protected InputSelectManyBase(final PlayerControllerHuman controller, final int min, final int max) {
+        super(controller);
         if (min > max) {
             throw new IllegalArgumentException("Min must not be greater than Max");
         }
@@ -43,7 +44,7 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     @Override
     public final void showMessage() {
         showMessage(getMessage());
-        ButtonUtil.update(hasEnoughTargets(), allowCancel, true);
+        ButtonUtil.update(getGui(), hasEnoughTargets(), allowCancel, true);
     }
 
     @Override
@@ -71,16 +72,16 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
         this.message = message0;
     }
 
-    protected void onSelectStateChanged(GameEntity c, boolean newState) {
+    protected void onSelectStateChanged(final GameEntity c, final boolean newState) {
         if (c instanceof Card) {
-            GuiBase.getInterface().setUsedToPay((Card)c, newState); // UI supports card highlighting though this abstraction-breaking mechanism
+            getGui().setUsedToPay(getController().getCardView((Card) c), newState); // UI supports card highlighting though this abstraction-breaking mechanism
         }
     }
 
     private void resetUsedToPay() {
-        for (GameEntity c : getSelected()) {
+        for (final GameEntity c : getSelected()) {
             if (c instanceof Card) {
-                GuiBase.getInterface().setUsedToPay((Card)c, false);
+                getGui().setUsedToPay(getController().getCardView((Card) c), false);
             }
         }
     }

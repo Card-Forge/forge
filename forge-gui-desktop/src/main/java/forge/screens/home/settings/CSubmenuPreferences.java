@@ -1,5 +1,6 @@
 package forge.screens.home.settings;
 
+import forge.GuiBase;
 import forge.UiCommand;
 import forge.Singletons;
 import forge.ai.AiProfileUtil;
@@ -339,7 +340,7 @@ public enum CSubmenuPreferences implements ICDoc {
         return new UiCommand() {
             @Override
             public void run() {
-                GamePlayerUtil.setPlayerName();
+                GamePlayerUtil.setPlayerName(GuiBase.getInterface());
                 setPlayerNameButtonText();
             }
         };

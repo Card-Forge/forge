@@ -1,7 +1,7 @@
 package forge.events;
 
-import forge.game.GameEntity;
-import forge.game.card.Card;
+import forge.view.CardView;
+import forge.view.GameEntityView;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -9,16 +9,16 @@ import forge.game.card.Card;
  */
 public class UiEventAttackerDeclared extends UiEvent {
 
-    public final Card attacker; 
-    public final GameEntity defender;
+    public final CardView attacker; 
+    public final GameEntityView defender;
     
-    public UiEventAttackerDeclared(Card card, GameEntity currentDefender) {
+    public UiEventAttackerDeclared(final CardView card, final GameEntityView currentDefender) {
         attacker = card;
         defender = currentDefender;
     }
 
     @Override
-    public <T> T visit(IUiEventVisitor<T> visitor) {
+    public <T> T visit(final IUiEventVisitor<T> visitor) {
         return visitor.visit(this);
     }
     
@@ -27,6 +27,6 @@ public class UiEventAttackerDeclared extends UiEvent {
      */
     @Override
     public String toString() {
-        return attacker.toString() + ( defender == null ? " removed from combat" : " declared to attack " + defender.getName() ); 
+        return attacker.toString() + ( defender == null ? " removed from combat" : " declared to attack " + defender ); 
     }
 }

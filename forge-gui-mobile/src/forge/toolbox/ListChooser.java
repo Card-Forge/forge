@@ -21,11 +21,13 @@ package forge.toolbox;
 import com.google.common.base.Function;
 
 import forge.FThreads;
+import forge.GuiBase;
 import forge.assets.FSkinFont;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -69,7 +71,7 @@ public class ListChooser<T> extends FContainer {
     private final Callback<List<T>> callback;
 
     public ListChooser(final String title, final int minChoices, final int maxChoices, final Collection<T> list0, final Function<T, String> display0, final Callback<List<T>> callback0) {
-        FThreads.assertExecutedByEdt(true);
+        FThreads.assertExecutedByEdt(GuiBase.getInterface(), true);
         list = list0;
         if (list.size() > 25) { //only show search field if more than 25 items
             txtSearch = add(new FTextField());

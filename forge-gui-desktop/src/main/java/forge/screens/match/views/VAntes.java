@@ -17,9 +17,15 @@
  */
 package forge.screens.match.views;
 
-import forge.game.card.Card;
-import forge.game.player.Player;
-import forge.game.zone.ZoneType;
+import java.awt.Dimension;
+import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import net.miginfocom.swing.MigLayout;
 import forge.gui.CardPicturePanel;
 import forge.gui.WrapLayout;
 import forge.gui.framework.DragCell;
@@ -29,13 +35,8 @@ import forge.gui.framework.IVDoc;
 import forge.screens.match.controllers.CAntes;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import forge.view.CardView;
+import forge.view.PlayerView;
 
 /** 
  * Assembles Swing components of card ante area.
@@ -54,7 +55,7 @@ public enum VAntes implements IVDoc<CAntes> {
     private final FScrollPane scroller = new FScrollPane(pnl, false);
     private final SortedSet<AntePanel> allAntes = new TreeSet<AntePanel>();
 
-    private Iterable<Player> players;
+    private Iterable<PlayerView> players;
     //========== Constructor
     private VAntes() {
         pnl.setLayout(new WrapLayout());
@@ -72,8 +73,8 @@ public enum VAntes implements IVDoc<CAntes> {
         parentCell.getBody().add(scroller, "w 100%!, h 100%!");
     }
     
-    public final void setModel(Iterable<Player> playerz) {
-        players = playerz;
+    public final void setModel(final List<PlayerView> players) {
+        this.players = players;
         update();
     }
 
@@ -121,8 +122,8 @@ public enum VAntes implements IVDoc<CAntes> {
         allAntes.clear();
         pnl.removeAll();
 
-        for(Player p : players) {
-            for(Card c : p.getZone(ZoneType.Ante)) {
+        for (final PlayerView p : players) {
+            for (final CardView c : p.getAnteCards()) {
                 final AntePanel pnlTemp = new AntePanel(c);
                 allAntes.add(pnlTemp);
             }
@@ -136,15 +137,15 @@ public enum VAntes implements IVDoc<CAntes> {
     //========= Private class handling
     @SuppressWarnings("serial")
     private class AntePanel extends JPanel implements Comparable<AntePanel> {
-        private final Card card;
+        private final CardView card;
         /**
          * 
          * @param p0 &emsp; {@link forge.game.player.Player}
-         * @param c0 &emsp; {@link forge.game.card.Card}
+         * @param c &emsp; {@link forge.game.card.Card}
          */
-        public AntePanel(final Card c0) {
+        public AntePanel(final CardView c) {
             super();
-            card = c0;
+            card = c;
 
             final Dimension d = new Dimension(160, 250);
             setPreferredSize(d);
@@ -157,12 +158,12 @@ public enum VAntes implements IVDoc<CAntes> {
                 .fontAlign(SwingConstants.CENTER).build(), "w 160px, h 20px");
             CardPicturePanel picPanel = new CardPicturePanel();
             add(picPanel, "w 160px, h 230px");
-            picPanel.setCard(c0, true);
+            picPanel.setCard(c.getOriginal());
         }
 
         @Override
-        public int compareTo(AntePanel o) {
-            return o.card.getUniqueNumber() - card.getUniqueNumber();
+        public int compareTo(final AntePanel o) {
+            return o.card.getId() - card.getId();
         }
     }
 }

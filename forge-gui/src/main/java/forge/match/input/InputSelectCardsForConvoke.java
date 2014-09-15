@@ -1,20 +1,21 @@
 package forge.match.input;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
+import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 
 public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> {
@@ -24,8 +25,8 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
     private final Player player;
     private final List<Card> availableCreatures;
     
-    public InputSelectCardsForConvoke(Player p, ManaCost cost, List<Card> untapped) { 
-        super(0, Math.min(cost.getCMC(), untapped.size()));
+    public InputSelectCardsForConvoke(final PlayerControllerHuman controller, final Player p, final ManaCost cost, final List<Card> untapped) { 
+        super(controller, 0, Math.min(cost.getCMC(), untapped.size()));
         remainingCost = new ManaCostBeingPaid(cost);
         player = p;
         availableCreatures = untapped;

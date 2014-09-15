@@ -4,20 +4,20 @@ import com.badlogic.gdx.math.Vector2;
 
 import forge.Graphics;
 import forge.assets.FImage;
-import forge.game.player.Player;
 import forge.screens.match.FControl;
 import forge.toolbox.FDisplayObject;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
+import forge.view.PlayerView;
 
 public class VAvatar extends FDisplayObject {
     public static final float WIDTH = Utils.AVG_FINGER_WIDTH;
     public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT;
 
-    private final Player player;
+    private final PlayerView player;
     private final FImage image;
 
-    public VAvatar(Player player0) {
+    public VAvatar(PlayerView player0) {
         player = player0;
         image = FControl.getPlayerAvatar(player);
         setSize(WIDTH, HEIGHT);
@@ -28,7 +28,7 @@ public class VAvatar extends FDisplayObject {
         ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread in case a dialog needs to be shown
             @Override
             public void run() {
-                FControl.getInputProxy().selectPlayer(player, null);
+                FControl.getGameView().selectPlayer(player, null);
             }
         });
         return true;

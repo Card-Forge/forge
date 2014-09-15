@@ -23,6 +23,7 @@ import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 
 //pays the cost of a card played from the player's hand
@@ -36,8 +37,8 @@ public class InputPayManaSimple extends InputPayMana {
     private final Card originalCard;
     private final ManaCost originalManaCost;
 
-    public InputPayManaSimple(final Game game, final SpellAbility sa, final ManaCostBeingPaid manaCostToPay) {
-        super(sa, sa.getActivatingPlayer());
+    public InputPayManaSimple(final PlayerControllerHuman controller, final Game game, final SpellAbility sa, final ManaCostBeingPaid manaCostToPay) {
+        super(controller, sa, sa.getActivatingPlayer());
         this.originalManaCost = manaCostToPay.toManaCost();
         this.originalCard = sa.getHostCard();
 

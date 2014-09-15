@@ -20,7 +20,6 @@ import javax.swing.MenuElement;
 import javax.swing.MenuSelectionManager;
 import javax.swing.SwingUtilities;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
@@ -31,19 +30,12 @@ import forge.control.FControl;
 import forge.deck.CardPool;
 import forge.error.BugReportDialog;
 import forge.events.UiEvent;
-import forge.game.Game;
-import forge.game.GameEntity;
+import forge.game.GameObject;
 import forge.game.GameType;
 import forge.game.Match;
-import forge.game.card.Card;
-import forge.game.combat.Combat;
-import forge.game.event.GameEventTurnBegan;
-import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.IHasIcon;
-import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
-import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.BoxedProductCardListViewer;
 import forge.gui.CardListViewer;
@@ -81,6 +73,11 @@ import forge.toolbox.MouseTriggerEvent;
 import forge.toolbox.special.PhaseLabel;
 import forge.util.BuildInfo;
 import forge.util.ITriggerEvent;
+import forge.view.CardView;
+import forge.view.CombatView;
+import forge.view.GameEntityView;
+import forge.view.PlayerView;
+import forge.view.SpellAbilityView;
 
 public class GuiDesktop implements IGuiBase {
     
@@ -126,17 +123,6 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public String getAssetsDir() {
-        return StringUtils.containsIgnoreCase(BuildInfo.getVersionString(), "svn") ?
-                "../forge-gui/" : "";
-    }
-
-    @Override
-    public boolean mayShowCard(Card card) {
-        return Singletons.getControl().mayShowCard(card);
-    }
-
-    @Override
     public ISkinImage getSkinIcon(FSkinProp skinProp) {
         if (skinProp == null) { return null; }
         return FSkin.getIcon(skinProp);
@@ -153,9 +139,9 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public int showCardOptionDialog(final Card card, String message, String title, FSkinProp skinIcon, String[] options, int defaultOption) {
+    public int showCardOptionDialog(final CardView card, String message, String title, FSkinProp skinIcon, String[] options, int defaultOption) {
         if (card != null) {
-            FThreads.invokeInEdtAndWait(new Runnable() {
+            FThreads.invokeInEdtAndWait(GuiBase.getInterface(), new Runnable() {
                 @Override
                 public void run() {
                     GuiBase.getInterface().setCard(card);
@@ -167,17 +153,30 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public <T> T showInputDialog(String message, String title, FSkinProp icon, T initialInput, T[] inputOptions) {
+        if (initialInput instanceof GameObject || (inputOptions != null && inputOptions.length > 0 && inputOptions[0] instanceof GameObject)) {
+            System.err.println("Warning: GameObject passed to GUI! Printing stack trace.");
+            Thread.dumpStack();
+        }
         return FOptionPane.showInputDialog(message, title, icon == null ? null : FSkin.getImage(icon), initialInput, inputOptions);
     }
 
     @Override
     public <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display) {
+        if ((choices != null && !choices.isEmpty() && choices.iterator().next() instanceof GameObject) || selected instanceof GameObject) {
+            System.err.println("Warning: GameObject passed to GUI! Printing stack trace.");
+            Thread.dumpStack();
+        }
         return GuiChoose.getChoices(message, min, max, choices, selected, display);
     }
 
     @Override
     public <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
-            final List<T> sourceChoices, final List<T> destChoices, final Card referenceCard, final boolean sideboardingMode) {
+            final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode) {
+        if ((sourceChoices != null && !sourceChoices.isEmpty() && sourceChoices.iterator().next() instanceof GameObject)
+                || (destChoices != null && !destChoices.isEmpty() && destChoices.iterator().next() instanceof GameObject)) {
+            System.err.println("Warning: GameObject passed to GUI! Printing stack trace.");
+            Thread.dumpStack();
+        }
         return GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode);
     }
 
@@ -215,7 +214,7 @@ public class GuiDesktop implements IGuiBase {
     public void focusButton(final IButton button) {
         // ensure we don't steal focus from an overlay
         if (!SOverlayUtils.overlayHasFocus()) {
-            FThreads.invokeInEdtLater(new Runnable() {
+            FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
                 @Override
                 public void run() {
                     ((FButton)button).requestFocusInWindow();
@@ -231,10 +230,8 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public void updatePhase() {
-        PhaseHandler pH = Singletons.getControl().getObservedGame().getPhaseHandler();
-        Player p = pH.getPlayerTurn();
-        PhaseType ph = pH.getPhase();
-
+        final PlayerView p = Singletons.getControl().getGameView().getPlayerTurn();
+        final PhaseType ph = Singletons.getControl().getGameView().getPhase();
         final CMatchUI matchUi = CMatchUI.SINGLETON_INSTANCE;
         PhaseLabel lbl = matchUi.getFieldViewFor(p).getPhaseIndicator().getLabelFor(ph);
 
@@ -245,10 +242,10 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public void updateTurn(final GameEventTurnBegan event, final Game game) {
-        VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(event.turnOwner);
+    public void updateTurn(final PlayerView player) {
+        VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(player);
         SDisplayUtil.showTab(nextField);
-        CPrompt.SINGLETON_INSTANCE.updateText(game);
+        CPrompt.SINGLETON_INSTANCE.updateText();
     }
 
     @Override
@@ -273,7 +270,7 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public void finishGame() {
-        new ViewWinLose(Singletons.getControl().getObservedGame());
+        new ViewWinLose(Singletons.getControl().getGameView());
         if (showOverlay) {
             SOverlayUtils.showOverlay();
         }
@@ -290,12 +287,12 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public void setPanelSelection(Card c) {
+    public void setPanelSelection(final CardView c) {
         GuiUtils.setPanelSelection(c);
     }
 
     @Override
-    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, ITriggerEvent triggerEvent) {
+    public SpellAbilityView getAbilityToPlay(List<SpellAbilityView> abilities, ITriggerEvent triggerEvent) {
         if (triggerEvent == null) {
             if (abilities.isEmpty()) {
                 return null;
@@ -309,7 +306,7 @@ public class GuiDesktop implements IGuiBase {
         if (abilities.isEmpty()) {
             return null;
         }
-        if (abilities.size() == 1 && !abilities.get(0).promptIfOnlyPossibleAbility()) {
+        if (abilities.size() == 1 && !abilities.get(0).isPromptIfOnlyPossibleAbility()) {
             if (abilities.get(0).canPlay()) {
                 return abilities.get(0); //only return ability if it's playable, otherwise return null
             }
@@ -322,7 +319,7 @@ public class GuiDesktop implements IGuiBase {
         boolean enabled;
         boolean hasEnabled = false;
         int shortcut = KeyEvent.VK_1; //use number keys as shortcuts for abilities 1-9
-        for (final SpellAbility ab : abilities) {
+        for (final SpellAbilityView ab : abilities) {
             enabled = ab.canPlay();
             if (enabled) {
                 hasEnabled = true;
@@ -332,7 +329,7 @@ public class GuiDesktop implements IGuiBase {
                     new Runnable() {
                         @Override
                         public void run() {
-                            CPrompt.SINGLETON_INSTANCE.getInputControl().selectAbility(ab);
+                            CPrompt.SINGLETON_INSTANCE.selectAbility(ab);
                         }
                     }, enabled);
             if (shortcut > 0) {
@@ -374,32 +371,32 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public void setCard(Card card) {
+    public void setCard(final CardView card) {
         CMatchUI.SINGLETON_INSTANCE.setCard(card);
     }
 
     @Override
-    public void showCombat(Combat combat) {
+    public void showCombat(final CombatView combat) {
         CMatchUI.SINGLETON_INSTANCE.showCombat(combat);
     }
 
     @Override
-    public void setUsedToPay(Card card, boolean b) {
+    public void setUsedToPay(final CardView card, final boolean b) {
         CMatchUI.SINGLETON_INSTANCE.setUsedToPay(card, b);
     }
 
     @Override
-    public void setHighlighted(Player player, boolean b) {
+    public void setHighlighted(final PlayerView player, final boolean b) {
         CMatchUI.SINGLETON_INSTANCE.setHighlighted(player, b);
     }
 
     @Override
-    public void showPromptMessage(String message) {
+    public void showPromptMessage(final String message) {
         CMatchUI.SINGLETON_INSTANCE.showMessage(message);
     }
 
     @Override
-    public boolean stopAtPhase(Player playerTurn, PhaseType phase) {
+    public boolean stopAtPhase(final PlayerView playerTurn, PhaseType phase) {
         return CMatchUI.SINGLETON_INSTANCE.stopAtPhase(playerTurn, phase);
     }
 
@@ -408,24 +405,19 @@ public class GuiDesktop implements IGuiBase {
         return FControl.instance.getInputQueue();
     }
 
-    @Override
-    public Game getGame() {
-        return FControl.instance.getObservedGame();
-    }
-
-    public Object showManaPool(Player player) {
+    public Object showManaPool(final PlayerView player) {
         return null; //not needed since mana pool icons are always visible
     }
 
     @Override
-    public void hideManaPool(Player player, Object zoneToRestore) {
+    public void hideManaPool(final PlayerView player, final Object zoneToRestore) {
         //not needed since mana pool icons are always visible
     }
 
     @Override
-    public boolean openZones(List<ZoneType> zones, Map<Player, Object> players) {
+    public boolean openZones(final Collection<ZoneType> zones, final Map<PlayerView, Object> players) {
         if (zones.size() == 1) {
-            switch (zones.get(0)) {
+            switch (zones.iterator().next()) {
             case Battlefield:
             case Hand:
                 return true; //don't actually need to open anything, but indicate that zone can be opened
@@ -437,31 +429,31 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public void restoreOldZones(Map<Player, Object> playersToRestoreZonesFor) {
+    public void restoreOldZones(final Map<PlayerView, Object> playersToRestoreZonesFor) {
     }
 
     @Override
-    public void updateZones(List<Pair<Player, ZoneType>> zonesToUpdate) {
+    public void updateZones(final List<Pair<PlayerView, ZoneType>> zonesToUpdate) {
         CMatchUI.SINGLETON_INSTANCE.updateZones(zonesToUpdate);
     }
 
     @Override
-    public void updateCards(Set<Card> cardsToUpdate) {
+    public void updateCards(final Set<CardView> cardsToUpdate) {
         CMatchUI.SINGLETON_INSTANCE.updateCards(cardsToUpdate);
     }
 
     @Override
-    public void refreshCardDetails(Collection<Card> cards) {
+    public void refreshCardDetails(final Iterable<CardView> cards) {
         CMatchUI.SINGLETON_INSTANCE.refreshCardDetails(cards);
     }
 
     @Override
-    public void updateManaPool(List<Player> manaPoolUpdate) {
+    public void updateManaPool(final List<PlayerView> manaPoolUpdate) {
         CMatchUI.SINGLETON_INSTANCE.updateManaPool(manaPoolUpdate);
     }
 
     @Override
-    public void updateLives(List<Player> livesUpdate) {
+    public void updateLives(final List<PlayerView> livesUpdate) {
         CMatchUI.SINGLETON_INSTANCE.updateLives(livesUpdate);
     }
 
@@ -471,10 +463,11 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public Map<Card, Integer> getDamageToAssign(Card attacker, List<Card> blockers,
-            int damageDealt, GameEntity defender, boolean overrideOrder) {
-        return CMatchUI.SINGLETON_INSTANCE.getDamageToAssign(attacker, blockers,
-                damageDealt, defender, overrideOrder);
+    public Map<CardView, Integer> getDamageToAssign(final CardView attacker,
+            final List<CardView> blockers, final int damageDealt,
+            final GameEntityView defender, final boolean overrideOrder) {
+        return CMatchUI.SINGLETON_INSTANCE.getDamageToAssign(attacker,
+                blockers, damageDealt, defender, overrideOrder);
     }
 
     @Override

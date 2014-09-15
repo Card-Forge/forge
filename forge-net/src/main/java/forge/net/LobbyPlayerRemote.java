@@ -21,7 +21,7 @@ public class LobbyPlayerRemote extends LobbyPlayer implements IGameEntitiesFacto
      * @see forge.game.player.LobbyPlayer#getPlayer(forge.game.GameState)
      */
     @Override
-    public Player createIngamePlayer(Game gameState) {
+    public Player createIngamePlayer(Game gameState, final int id) {
         // Cannot create remote players yet 
         throw new UnsupportedOperationException("method is not implemented");
     }

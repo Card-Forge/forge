@@ -17,17 +17,17 @@
  */
 package forge.screens.match.views;
 
-import forge.game.player.Player;
+import javax.swing.JPanel;
+
+import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.screens.match.controllers.CHand;
 import forge.toolbox.FScrollPane;
+import forge.view.PlayerView;
 import forge.view.arcane.HandArea;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
 
 /**
  * Assembles Swing components of hand area.
@@ -41,7 +41,6 @@ public class VHand implements IVDoc<CHand> {
     private final EDocID docID;
     private final DragTab tab = new DragTab("Your Hand");
 
-
     // Top-level containers
     private final FScrollPane scroller = new FScrollPane(false);
     private final HandArea hand = new HandArea(scroller);
@@ -51,23 +50,23 @@ public class VHand implements IVDoc<CHand> {
      * Assembles Swing components of a player hand instance.
      * 
      * @param id0 &emsp; {@link forge.gui.framework.EDocID}
-     * @param owner &emsp; {@link forge.game.player.Player}
+     * @param p &emsp; {@link forge.game.player.Player}
      */
-    public VHand(final EDocID id0, final Player owner) {
+    public VHand(final EDocID id0, final PlayerView p) {
         docID = id0;
         id0.setDoc(this);
 
-        if (owner == null) {
+        if (p == null) {
             tab.setText("NO PLAYER Hand");
         } else {
-            tab.setText(owner.getName() + " Hand");
+            tab.setText(p.getName() + " Hand");
         }
 
         scroller.setViewportView(VHand.this.hand);
 
         hand.setOpaque(false);
 
-        control = new CHand(owner, this);
+        control = new CHand(p, this);
     }
 
     //========= Overridden methods

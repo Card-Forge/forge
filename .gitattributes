@@ -509,6 +509,7 @@ forge-game/src/main/java/forge/game/event/GameEventPlayerDamaged.java -text
 forge-game/src/main/java/forge/game/event/GameEventPlayerLivesChanged.java -text
 forge-game/src/main/java/forge/game/event/GameEventPlayerPoisoned.java -text
 forge-game/src/main/java/forge/game/event/GameEventPlayerPriority.java -text
+forge-game/src/main/java/forge/game/event/GameEventPlayerStatsChanged.java -text
 forge-game/src/main/java/forge/game/event/GameEventShuffle.java -text
 forge-game/src/main/java/forge/game/event/GameEventSpellAbilityCast.java -text
 forge-game/src/main/java/forge/game/event/GameEventSpellRemovedFromStack.java -text
@@ -717,6 +718,7 @@ forge-gui-desktop/src/main/html/js/jquery/jquery-1.9.1.js -text
 forge-gui-desktop/src/main/html/js/jquery/jquery-1.9.1.min.js -text
 forge-gui-desktop/src/main/html/js/observable.js -text
 forge-gui-desktop/src/main/html/js/socket.js -text
+forge-gui-desktop/src/main/java/forge/GuiBase.java -text
 forge-gui-desktop/src/main/java/forge/GuiDesktop.java -text
 forge-gui-desktop/src/main/java/forge/ImageCache.java -text
 forge-gui-desktop/src/main/java/forge/ImageLoader.java -text
@@ -1123,6 +1125,7 @@ forge-gui-mobile/libs/gdx.jar -text
 forge-gui-mobile/pom.xml -text
 forge-gui-mobile/src/forge/Forge.java -text
 forge-gui-mobile/src/forge/Graphics.java -text
+forge-gui-mobile/src/forge/GuiBase.java -text
 forge-gui-mobile/src/forge/GuiMobile.java -text
 forge-gui-mobile/src/forge/animation/AbilityEffect.java -text
 forge-gui-mobile/src/forge/animation/ForgeAnimation.java -text
@@ -1281,6 +1284,7 @@ forge-gui-mobile/src/forge/toolbox/ListChooser.java -text
 forge-gui-mobile/src/forge/util/LayoutHelper.java -text
 forge-gui-mobile/src/forge/util/PhysicsObject.java -text
 forge-gui-mobile/src/forge/util/Utils.java -text
+forge-gui-mobile/src/forge/util/WaitCallback.java -text
 forge-gui-mobile/src/forge/util/WaitRunnable.java -text
 forge-gui/.classpath -text
 forge-gui/.project -text
@@ -16650,7 +16654,6 @@ forge-gui/src/main/html/js/jquery/jquery-1.9.1.min.js -text
 forge-gui/src/main/html/js/observable.js -text
 forge-gui/src/main/html/js/socket.js -text
 forge-gui/src/main/java/forge/FThreads.java -text
-forge-gui/src/main/java/forge/GuiBase.java -text
 forge-gui/src/main/java/forge/UiCommand.java svneol=native#text/plain
 forge-gui/src/main/java/forge/achievement/Achievement.java -text
 forge-gui/src/main/java/forge/achievement/AchievementCollection.java -text
@@ -16739,7 +16742,6 @@ forge-gui/src/main/java/forge/limited/WinstonDraft.java -text
 forge-gui/src/main/java/forge/limited/WinstonDraftAI.java -text
 forge-gui/src/main/java/forge/limited/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/match/MatchConstants.java -text
-forge-gui/src/main/java/forge/match/MatchUtil.java -text
 forge-gui/src/main/java/forge/match/input/ButtonUtil.java -text
 forge-gui/src/main/java/forge/match/input/Input.java -text
 forge-gui/src/main/java/forge/match/input/InputAttack.java -text
@@ -16848,6 +16850,7 @@ forge-gui/src/main/java/forge/sound/SoundEffectType.java -text
 forge-gui/src/main/java/forge/sound/SoundSystem.java -text
 forge-gui/src/main/java/forge/util/Base64Coder.java svneol=native#text/plain
 forge-gui/src/main/java/forge/util/Callback.java -text
+forge-gui/src/main/java/forge/util/DevModeUtil.java -text
 forge-gui/src/main/java/forge/util/Evaluator.java -text
 forge-gui/src/main/java/forge/util/GuiDisplayUtil.java -text
 forge-gui/src/main/java/forge/util/HttpUtil.java svneol=native#text/plain
@@ -16855,12 +16858,22 @@ forge-gui/src/main/java/forge/util/IgnoringXStream.java -text
 forge-gui/src/main/java/forge/util/LineReader.java -text
 forge-gui/src/main/java/forge/util/MultiplexOutputStream.java svneol=native#text/plain
 forge-gui/src/main/java/forge/util/OperatingSystem.java -text
-forge-gui/src/main/java/forge/util/WaitCallback.java -text
 forge-gui/src/main/java/forge/util/XmlUtil.java -text
 forge-gui/src/main/java/forge/util/gui/SGuiChoose.java -text
 forge-gui/src/main/java/forge/util/gui/SGuiDialog.java -text
 forge-gui/src/main/java/forge/util/gui/SOptionPane.java -text
 forge-gui/src/main/java/forge/util/package-info.java -text
+forge-gui/src/main/java/forge/view/Cache.java -text
+forge-gui/src/main/java/forge/view/CardView.java -text
+forge-gui/src/main/java/forge/view/CombatView.java -text
+forge-gui/src/main/java/forge/view/GameEntityView.java -text
+forge-gui/src/main/java/forge/view/IGameView.java -text
+forge-gui/src/main/java/forge/view/LocalGameView.java -text
+forge-gui/src/main/java/forge/view/PlayerView.java -text
+forge-gui/src/main/java/forge/view/SpellAbilityView.java -text
+forge-gui/src/main/java/forge/view/StackItemView.java -text
+forge-gui/src/main/java/forge/view/ViewUtil.java -text
+forge-gui/src/main/java/forge/view/WatchLocalGame.java -text
 forge-gui/src/main/resources/proxy-template.ftl -text
 forge-gui/src/site/apt/index.apt -text
 forge-gui/tools/PerSetTracking.py svneol=native#text/x-python

@@ -1,24 +1,31 @@
 package forge.gui;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
+
+import javax.swing.JList;
+import javax.swing.WindowConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 
 import forge.FThreads;
-import forge.Singletons;
-import forge.game.card.Card;
+import forge.GuiBase;
 import forge.item.InventoryItem;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FOptionPane;
-
-import org.apache.commons.lang3.StringUtils;
-
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import java.util.*;
-import java.util.concurrent.Callable;
-import java.util.concurrent.FutureTask;
+import forge.view.CardView;
+import forge.view.CardView.CardStateView;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -200,14 +207,17 @@ public class GuiChoose {
                 list.addListSelectionListener(new ListSelectionListener() {
                     @Override
                     public void valueChanged(final ListSelectionEvent ev) {
-                        if (list.getSelectedValue() instanceof Card) {
-                            Card card = (Card) list.getSelectedValue();
-                            if (card.isFaceDown() && Singletons.getControl().mayShowCard(card)) {
-                                CMatchUI.SINGLETON_INSTANCE.setCard(card, true);
-                            }
-                            else {
-                                CMatchUI.SINGLETON_INSTANCE.setCard(card);
-                            }
+                        final T sel = list.getSelectedValue();
+                        final CardView card;
+                        if (sel instanceof CardStateView) {
+                            card = ((CardStateView) sel).getCard();
+                        } else if (sel instanceof CardView) {
+                            card = (CardView) sel;
+                        } else {
+                            card = null;
+                        }
+                        if (card != null) {
+                            CMatchUI.SINGLETON_INSTANCE.setCard(card);
 
                             GuiUtils.clearPanelSelections();
                             GuiUtils.setPanelSelection(card);
@@ -231,7 +241,7 @@ public class GuiChoose {
         };
 
         FutureTask<List<T>> future = new FutureTask<List<T>>(showChoice);
-        FThreads.invokeInEdtAndWait(future);
+        FThreads.invokeInEdtAndWait(GuiBase.getInterface(), future);
         try {
             return future.get();
         } catch (Exception e) { // should be no exception here
@@ -240,17 +250,17 @@ public class GuiChoose {
         return null;
     }
 
-    public static <T> List<T> many(final String title, final String topCaption, int cnt, final List<T> sourceChoices, Card referenceCard) {
+    public static <T> List<T> many(final String title, final String topCaption, int cnt, final List<T> sourceChoices, final CardView referenceCard) {
         return order(title, topCaption, cnt, cnt, sourceChoices, null, referenceCard, false);
     }
 
-    public static <T> List<T> many(final String title, final String topCaption, int min, int max, final List<T> sourceChoices, Card referenceCard) {
+    public static <T> List<T> many(final String title, final String topCaption, int min, int max, final List<T> sourceChoices, final CardView referenceCard) {
         int m2 = min >= 0 ? sourceChoices.size() - min : -1;
         int m1 = max >= 0 ? sourceChoices.size() - max : -1;
         return order(title, topCaption, m1, m2, sourceChoices, null, referenceCard, false);
     }
 
-    public static <T> List<T> order(final String title, final String top, final List<T> sourceChoices, Card referenceCard) {
+    public static <T> List<T> order(final String title, final String top, final List<T> sourceChoices, final CardView referenceCard) {
         return order(title, top, 0, 0, sourceChoices, null, referenceCard, false);
     }
 
@@ -261,7 +271,7 @@ public class GuiChoose {
     }
 
     public static <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
-            final List<T> sourceChoices, final List<T> destChoices, final Card referenceCard, final boolean sideboardingMode) {
+            final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode) {
         // An input box for handling the order of choices.
 
         Callable<List<T>> callable = new Callable<List<T>>() {
@@ -290,7 +300,7 @@ public class GuiChoose {
         };
 
         FutureTask<List<T>> ft = new FutureTask<List<T>>(callable);
-        FThreads.invokeInEdtAndWait(ft);
+        FThreads.invokeInEdtAndWait(GuiBase.getInterface(), ft);
         try {
             return ft.get();
         } catch (Exception e) { // we have waited enough

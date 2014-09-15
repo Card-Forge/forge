@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -30,7 +29,6 @@ import forge.assets.FImage;
 import forge.assets.FSkin;
 import forge.assets.FTextureRegionImage;
 import forge.card.CardCharacteristicName;
-import forge.card.ColorSet;
 import forge.control.FControlGameEventHandler;
 import forge.control.FControlGamePlayback;
 import forge.events.IUiEventVisitor;
@@ -38,28 +36,20 @@ import forge.events.UiEvent;
 import forge.events.UiEventAttackerDeclared;
 import forge.events.UiEventBlockerAssigned;
 import forge.game.Game;
-import forge.game.GameEntity;
 import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.card.Card;
-import forge.game.card.CardLists;
 import forge.game.card.CounterType;
-import forge.game.card.CardPredicates.Presets;
-import forge.game.combat.Combat;
-import forge.game.combat.CombatUtil;
-import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.trigger.TriggerType;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.match.input.InputPlaybackControl;
-import forge.match.input.InputProxy;
 import forge.match.input.InputQueue;
 import forge.model.FModel;
-import forge.player.LobbyPlayerHuman;
+import forge.player.PlayerControllerHuman;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
@@ -78,20 +68,27 @@ import forge.util.GuiDisplayUtil;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
 import forge.util.WaitCallback;
+import forge.view.CardView;
+import forge.view.CardView.CardStateView;
+import forge.view.CombatView;
+import forge.view.GameEntityView;
+import forge.view.IGameView;
+import forge.view.LocalGameView;
+import forge.view.PlayerView;
+import forge.view.WatchLocalGame;
 
 public class FControl {
     private FControl() { } //don't allow creating instance
 
     private static Game game;
+    private static IGameView gameView;
     private static MatchScreen view;
     private static InputQueue inputQueue;
-    private static InputProxy inputProxy;
-    private static List<Player> sortedPlayers;
     private static final EventBus uiEvents;
     private static boolean gameHasHumanPlayer;
     private static final MatchUiEventVisitor visitor = new MatchUiEventVisitor();
-    private static final FControlGameEventHandler fcVisitor = new FControlGameEventHandler();
-    private static final FControlGamePlayback playbackControl = new FControlGamePlayback();
+    private static FControlGameEventHandler fcVisitor;
+    private static FControlGamePlayback playbackControl;
     private static final Map<LobbyPlayer, FImage> avatarImages = new HashMap<LobbyPlayer, FImage>();
 
     static {
@@ -121,6 +118,19 @@ public class FControl {
         startGame(new Match(rules, players));
     }
 
+    public static void startGameInSameMatch() {
+        final Match match = game.getMatch();
+        endCurrentGame();
+        startGame(match);
+    }
+
+    public static void startGameInNewMatch() {
+        final Match match = game.getMatch();
+        endCurrentGame();
+        match.clearGamesPlayed();
+        startGame(match);
+    }
+
     public static void startGame(final Match match) {
         cardDetailsCache.clear(); //ensure details cache cleared before starting a new game
         CardAreaPanel.resetForNewGame(); //ensure card panels reset between games
@@ -138,8 +148,7 @@ public class FControl {
             game.subscribeToEvents(qc); // this one listens to player's mulligans ATM
         }
 
-        inputQueue = new InputQueue();
-        inputProxy = new InputProxy();
+        inputQueue = new InputQueue(game);
 
         game.subscribeToEvents(Forge.getSoundSystem());
 
@@ -148,16 +157,18 @@ public class FControl {
         initMatch(game.getRegisteredPlayers(), humanLobbyPlayer);
 
         actuateMatchPreferences();
-        inputProxy.setGame(game);
 
         // Listen to DuelOutcome event to show ViewWinLose
         game.subscribeToEvents(fcVisitor);
 
         // Add playback controls to match if needed
         gameHasHumanPlayer = false;
+        boolean gameHasAiPlayer = false;
         for (Player p :  game.getPlayers()) {
             if (p.getController().getLobbyPlayer() == getGuiPlayer()) {
                 gameHasHumanPlayer = true;
+            } else if (p.getLobbyPlayer() instanceof LobbyPlayerAi) {
+                gameHasAiPlayer = true;
             }
         }
         if (!gameHasHumanPlayer) {
@@ -179,6 +190,17 @@ public class FControl {
             });
         }
 
+        if (!gameHasAiPlayer) {
+            // If there are no AI's, allow all players to see all cards (hotseat
+            // mode).
+            for (final Player p : game.getPlayers()) {
+                if (p.getController() instanceof PlayerControllerHuman) {
+                    final PlayerControllerHuman controller = (PlayerControllerHuman) p.getController();
+                    controller.setMayLookAtAllCards(true);
+                }
+            }
+        }
+
         Forge.openScreen(view);
 
         // It's important to run match in a different thread to allow GUI inputs to be invoked from inside game. 
@@ -195,6 +217,10 @@ public class FControl {
         return game;
     }
 
+    public static IGameView getGameView() {
+        return gameView;
+    }
+
     public static MatchScreen getView() {
         return view;
     }
@@ -203,28 +229,20 @@ public class FControl {
         return inputQueue;
     }
 
-    public static InputProxy getInputProxy() {
-        return inputProxy;
-    }
-
-    public static boolean stopAtPhase(final Player turn, final PhaseType phase) {
+    public static boolean stopAtPhase(final PlayerView turn, final PhaseType phase) {
         PhaseLabel label = getPlayerPanel(turn).getPhaseIndicator().getLabel(phase);
         return label == null || label.getStopAtPhase();
     }
 
     public static void endCurrentTurn() {
-        Player p = getCurrentPlayer();
-
-        if (p != null) {
-            inputProxy.passPriority(p, PhaseType.CLEANUP);
-        }
+        gameView.passPriorityUntilEndOfTurn();
     }
 
     public static void initMatch(final List<Player> players, Player localPlayer) {
         final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
 
         // Instantiate all required field slots (user at 0)
-        sortedPlayers = shiftPlayersPlaceLocalFirst(players, localPlayer);
+        final List<Player> sortedPlayers = shiftPlayersPlaceLocalFirst(players, localPlayer);
 
         List<VPlayerPanel> playerPanels = new ArrayList<VPlayerPanel>();
 
@@ -236,10 +254,34 @@ public class FControl {
                 i++;
             }
             p.getLobbyPlayer().setAvatarIndex(avatarIndex);
-            playerPanels.add(new VPlayerPanel(p));
         }
 
-        view = new MatchScreen(game, localPlayer, playerPanels);
+        final LocalGameView localGameView;
+        final boolean isWatchingGame;
+        if (localPlayer.getController() instanceof PlayerControllerHuman) {
+            final PlayerControllerHuman controller = (PlayerControllerHuman) localPlayer.getController();
+            localGameView = controller.getGameView(); 
+            gameView = localGameView; 
+            fcVisitor = new FControlGameEventHandler(GuiBase.getInterface(), localGameView);
+            isWatchingGame = false;
+        } else {
+            // Watch game but do not participate
+            localGameView = new WatchLocalGame(game, inputQueue);
+            gameView = localGameView;
+            fcVisitor = new FControlGameEventHandler(GuiBase.getInterface(), localGameView);
+            isWatchingGame = true;
+        }
+
+        for (Player p : sortedPlayers) {
+            playerPanels.add(new VPlayerPanel(localGameView.getPlayerView(p)));
+        }
+        view = new MatchScreen(localGameView, localGameView.getPlayerView(localPlayer), playerPanels);
+
+        if (isWatchingGame) {
+            playbackControl = new FControlGamePlayback(GuiBase.getInterface(), localGameView);
+            playbackControl.setGame(game);
+            game.subscribeToEvents(playbackControl);
+        }
     }
 
     private static List<Player> shiftPlayersPlaceLocalFirst(final List<Player> players, Player localPlayer) {
@@ -268,11 +310,11 @@ public class FControl {
         view.getPrompt().setMessage(s0);
     }
 
-    public static VPlayerPanel getPlayerPanel(Player p) {
-        return view.getPlayerPanels().get(p);
+    public static VPlayerPanel getPlayerPanel(final PlayerView playerView) {
+        return view.getPlayerPanels().get(playerView);
     }
 
-    public static void highlightCard(final Card c) {
+    public static void highlightCard(final CardView c) {
         for (VPlayerPanel playerPanel : FControl.getView().getPlayerPanels().values()) {
             for (FCardPanel p : playerPanel.getField().getCardPanels()) {
                 if (p.getCard().equals(c)) {
@@ -289,10 +331,6 @@ public class FControl {
                 p.setHighlighted(false);
             }
         }
-    }
-
-    public static Iterable<Player> getSortedPlayers() {
-        return sortedPlayers;
     }
 
     public static Player getCurrentPlayer() {
@@ -312,37 +350,11 @@ public class FControl {
         return null;
     }
 
-    public static boolean mayShowCard(Card c) {
-        return game == null || !gameHasHumanPlayer || c.canBeShownTo(getCurrentPlayer());
-    }
-
     public static void alphaStrike() {
-        final PhaseHandler ph = game.getPhaseHandler();
-
-        final Player p = getCurrentPlayer();
-        final Game game = p.getGame();
-        Combat combat = game.getCombat();
-        if (combat == null) { return; }
-
-        if (ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, p)) {
-            List<Player> defenders = p.getOpponents();
-
-            for (Card c : CardLists.filter(p.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
-                if (combat.isAttacking(c)) {
-                    continue;
-                }
-
-                for (Player defender : defenders) {
-                    if (CombatUtil.canAttack(c, defender, combat)) {
-                        combat.addAttacker(c, defender);
-                        break;
-                    }
-                }
-            }
-        }
+        gameView.alphaStrike();
     }
 
-    public static void showCombat(Combat combat) {
+    public static void showCombat(CombatView combat) {
         /*if (combat != null && combat.getAttackers().size() > 0 && combat.getAttackingPlayer().getGame().getStack().isEmpty()) {
             if (selectedDocBeforeCombat == null) {
                 IVDoc<? extends ICDoc> combatDoc = EDocID.REPORT_COMBAT.getDoc();
@@ -365,20 +377,20 @@ public class FControl {
         CCombat.SINGLETON_INSTANCE.update();*/
     }
 
-    public static Map<Card, Integer> getDamageToAssign(final Card attacker, final List<Card> blockers, final int damage, final GameEntity defender, final boolean overrideOrder) {
+    public static Map<CardView, Integer> getDamageToAssign(final CardView attacker, final List<CardView> blockers, final int damage, final GameEntityView defender, final boolean overrideOrder) {
         if (damage <= 0) {
-            return new HashMap<Card, Integer>();
+            return new HashMap<CardView, Integer>();
         }
 
         // If the first blocker can absorb all of the damage, don't show the Assign Damage dialog
-        Card firstBlocker = blockers.get(0);
-        if (!overrideOrder && !attacker.hasKeyword("Deathtouch") && firstBlocker.getLethalDamage() >= damage) {
-            Map<Card, Integer> res = new HashMap<Card, Integer>();
+        CardView firstBlocker = blockers.get(0);
+        if (!overrideOrder && !attacker.getOriginal().hasDeathtouch() && firstBlocker.getLethalDamage() >= damage) {
+            Map<CardView, Integer> res = new HashMap<CardView, Integer>();
             res.put(firstBlocker, damage);
             return res;
         }
 
-        return new WaitCallback<Map<Card, Integer>>() {
+        return new WaitCallback<Map<CardView, Integer>>() {
             @Override
             public void run() {
                 VAssignDamage v = new VAssignDamage(attacker, blockers, damage, defender, overrideOrder, this);
@@ -387,8 +399,8 @@ public class FControl {
         }.invokeAndWait();
     }
 
-    private static Set<Player> highlightedPlayers = new HashSet<Player>();
-    public static void setHighlighted(Player ge, boolean b) {
+    private static Set<PlayerView> highlightedPlayers = new HashSet<PlayerView>();
+    public static void setHighlighted(PlayerView ge, boolean b) {
         if (b) highlightedPlayers.add(ge);
         else highlightedPlayers.remove(ge);
     }
@@ -397,115 +409,92 @@ public class FControl {
         return highlightedPlayers.contains(player);
     }
 
-    private static Set<Card> highlightedCards = new HashSet<Card>();
+    private static Set<CardView> highlightedCards = new HashSet<CardView>();
     // used to highlight cards in UI
-    public static void setUsedToPay(Card card, boolean value) {
+    public static void setUsedToPay(CardView card, boolean value) {
         boolean hasChanged = value ? highlightedCards.add(card) : highlightedCards.remove(card);
         if (hasChanged) { // since we are in UI thread, may redraw the card right now
             updateSingleCard(card);
         }
     }
 
-    public static boolean isUsedToPay(Card card) {
+    public static boolean isUsedToPay(CardView card) {
         return highlightedCards.contains(card);
     }
 
-    public static void updateZones(List<Pair<Player, ZoneType>> zonesToUpdate) {
-        for (Pair<Player, ZoneType> kv : zonesToUpdate) {
-            Player owner = kv.getKey();
+    public static void updateZones(List<Pair<PlayerView, ZoneType>> zonesToUpdate) {
+        for (Pair<PlayerView, ZoneType> kv : zonesToUpdate) {
+            PlayerView owner = kv.getKey();
             ZoneType zt = kv.getValue();
+            if (owner == null || zt == null) {
+                continue;
+            }
             getPlayerPanel(owner).updateZone(zt);
         }
     }
 
     // Player's mana pool changes
-    public static void updateManaPool(List<Player> manaPoolUpdate) {
-        for (Player p : manaPoolUpdate) {
+    public static void updateManaPool(List<PlayerView> manaPoolUpdate) {
+        for (PlayerView p : manaPoolUpdate) {
             getPlayerPanel(p).updateManaPool();
         }
     }
 
     // Player's lives and poison counters
-    public static void updateLives(List<Player> livesUpdate) {
-        for (Player p : livesUpdate) {
+    public static void updateLives(List<PlayerView> livesUpdate) {
+        for (PlayerView p : livesUpdate) {
             getPlayerPanel(p).updateLife();
         }
     }
 
-    public static void updateCards(Set<Card> cardsToUpdate) {
-        for (Card c : cardsToUpdate) {
+    public static void updateCards(Set<CardView> cardsToUpdate) {
+        for (CardView c : cardsToUpdate) {
             updateSingleCard(c);
         }
     }
 
-    private static final Map<Integer, CardDetails> cardDetailsCache = new HashMap<Integer, CardDetails>();
+    private static final Map<Integer, CardStateView> cardDetailsCache = new HashMap<Integer, CardStateView>();
 
-    public static CardDetails getCardDetails(Card card) {
-        CardDetails details = cardDetailsCache.get(card.getUniqueNumber());
+    public static CardStateView getCardDetails(CardView card) {
+        final CardStateView details = cardDetailsCache.get(card.getId());
         if (details == null) {
-            details = new CardDetails(card);
-            cardDetailsCache.put(card.getUniqueNumber(), details);
+            cardDetailsCache.put(card.getId(), card.getOriginal());
+            return card.getOriginal();
         }
         return details;
     }
 
-    public static class CardDetails {
-        public final int power, toughness, loyalty;
-        public final boolean isCreature, isPlaneswalker, isLand;
-        public final ColorSet colors;
+    public static void refreshCardDetails(Iterable<CardView> cards) {
+        Set<PlayerView> playersNeedingFieldUpdate = null;
 
-        private CardDetails(Card card) {
-            isCreature = card.isCreature();
-            if (isCreature) {
-                power = card.getNetAttack();
-                toughness = card.getNetDefense();
-            }
-            else {
-                power = 0;
-                toughness = 0;
-            }
-            isPlaneswalker = card.isPlaneswalker();
-            if (isPlaneswalker) {
-                loyalty = card.getCurrentLoyalty();
-            }
-            else {
-                loyalty = 0;
-            }
-            colors = card.determineColor();
-            isLand = card.isLand();
-        }
-    }
-
-    public static void refreshCardDetails(Collection<Card> cards) {
-        Set<Player> playersNeedingFieldUpdate = null;
-
-        for (Card c : cards) {
+        for (final CardView c : cards) {
             //for each card in play, if it changed from creature to non-creature or vice versa,
             //or if it changed from land to non-land or vice-versa,
             //ensure field containing that card is updated to reflect that change
-            if (c.isInPlay()) {
-                CardDetails oldDetails = cardDetailsCache.get(c);
-                if (oldDetails == null || c.isCreature() != oldDetails.isCreature || c.isLand() != oldDetails.isLand) {
+            final CardStateView state = c.getOriginal();
+            if (c.getZone() == ZoneType.Battlefield) {
+                CardStateView oldDetails = cardDetailsCache.get(c);
+                if (oldDetails == null || state.isCreature() != oldDetails.isCreature() || state.isLand() != oldDetails.isLand()) {
                     if (playersNeedingFieldUpdate == null) {
-                        playersNeedingFieldUpdate = new HashSet<Player>();
+                        playersNeedingFieldUpdate = new HashSet<PlayerView>();
                     }
                     playersNeedingFieldUpdate.add(c.getController());
                 }
             }
-            cardDetailsCache.put(c.getUniqueNumber(), new CardDetails(c));
+            cardDetailsCache.put(c.getId(), c.getOriginal());
         }
 
         if (playersNeedingFieldUpdate != null) { //update field for any players necessary
-            for (Player p : playersNeedingFieldUpdate) {
+            for (PlayerView p : playersNeedingFieldUpdate) {
                 getPlayerPanel(p).getField().update();
             }
         }
     }
 
-    public static void updateSingleCard(Card c) {
-        Zone zone = c.getZone();
-        if (zone != null && zone.getZoneType() == ZoneType.Battlefield) {
-            getPlayerPanel(zone.getPlayer()).getField().updateCard(c);
+    public static void updateSingleCard(final CardView card) {
+        final ZoneType zone = card.getZone();
+        if (zone != null && zone == ZoneType.Battlefield) {
+            getPlayerPanel(card.getController()).getField().updateCard(card);
         }
     }
 
@@ -552,7 +541,9 @@ public class FControl {
             inputQueue.onGameOver(false); //release any waiting input, effectively passing priority
         }
 
-        playbackControl.onGameStopRequested();
+        if (playbackControl != null) {
+            playbackControl.onGameStopRequested();
+        }
     }
 
     public static void endCurrentGame() {
@@ -871,12 +862,11 @@ public class FControl {
         return player;
     }
 
-    private final static LobbyPlayer guiPlayer = new LobbyPlayerHuman("Human");
     public final static LobbyPlayer getGuiPlayer() {
-        return guiPlayer;
+        return GuiBase.getInterface().getGuiPlayer();
     }
 
-    public static FImage getPlayerAvatar(final Player p) {
+    public static FImage getPlayerAvatar(final PlayerView p) {
         LobbyPlayer lp = p.getLobbyPlayer();
         FImage avatar = avatarImages.get(lp);
         if (avatar == null) {

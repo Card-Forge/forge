@@ -18,7 +18,6 @@
 
 package forge.gui;
 
-import forge.game.card.Card;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
@@ -27,10 +26,12 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.view.FDialog;
+import forge.view.ViewUtil;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
 import java.awt.event.*;
 import java.util.Collections;
 import java.util.List;
@@ -53,7 +54,7 @@ public class CardListChooser extends FDialog {
     public CardListChooser(final String title, final String message, final List<PaperCard> list) {
         this.list = Collections.unmodifiableList(list);
         this.jList = new JList<>(new ChooserListModel());
-        this.detail = new CardDetailPanel(null);
+        this.detail = new CardDetailPanel();
         this.picture = new CardPicturePanel();
         this.picture.setOpaque(false);
 
@@ -172,7 +173,7 @@ public class CardListChooser extends FDialog {
             final int row = CardListChooser.this.jList.getSelectedIndex();
             if ((row >= 0) && (row < CardListChooser.this.list.size())) {
                 final PaperCard cp = CardListChooser.this.list.get(row);
-                CardListChooser.this.detail.setCard(Card.getCardForUi(cp));
+                CardListChooser.this.detail.setCard(ViewUtil.getCardForUi(cp));
                 CardListChooser.this.picture.setCard(cp);
             }
         }

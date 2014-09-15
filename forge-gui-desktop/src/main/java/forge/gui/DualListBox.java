@@ -1,23 +1,38 @@
 package forge.gui;
 
-import forge.game.card.Card;
-import forge.game.spellability.SpellAbility;
-import forge.item.IPaperCard;
-import forge.item.PaperCard;
-import forge.screens.match.CMatchUI;
-import forge.toolbox.*;
-import forge.view.FDialog;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.ListModel;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.List;
+import forge.item.IPaperCard;
+import forge.item.PaperCard;
+import forge.screens.match.CMatchUI;
+import forge.toolbox.FButton;
+import forge.toolbox.FLabel;
+import forge.toolbox.FList;
+import forge.toolbox.FPanel;
+import forge.toolbox.FScrollPane;
+import forge.view.CardView;
+import forge.view.FDialog;
+import forge.view.SpellAbilityView;
+import forge.view.ViewUtil;
 
 // An input box for handling the order of choices.
 // Left box has the original choices
@@ -310,13 +325,13 @@ public class DualListBox<T> extends FDialog {
         if (!showCard || null == obj) {
             return;
         }
-        Card card = null;
-        if (obj instanceof Card) {
-            card = (Card) obj;
-        } else if (obj instanceof SpellAbility) {
-            card = ((SpellAbility) obj).getHostCard();
+        CardView card = null;
+        if (obj instanceof CardView) {
+            card = (CardView) obj;
+        } else if (obj instanceof SpellAbilityView) {
+            card = ((SpellAbilityView) obj).getHostCard();
         } else if (obj instanceof PaperCard) {
-            card = Card.getCardForUi((IPaperCard) obj);
+            card = ViewUtil.getCardForUi((IPaperCard) obj);
         }
 
         GuiUtils.clearPanelSelections();

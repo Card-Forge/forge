@@ -13,8 +13,8 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.GuiBase;
-import forge.game.card.Card;
+import forge.interfaces.IGuiBase;
+import forge.view.CardView;
 
 public class SGuiChoose {
     /**
@@ -31,19 +31,19 @@ public class SGuiChoose {
      *         getChoices.
      * @see #getChoices(String, int, int, Object...)
      */
-    public static <T> T oneOrNone(final String message, final T[] choices) {
+    public static <T> T oneOrNone(final IGuiBase gui, final String message, final T[] choices) {
         if ((choices == null) || (choices.length == 0)) {
             return null;
         }
-        final List<T> choice = SGuiChoose.getChoices(message, 0, 1, choices);
+        final List<T> choice = SGuiChoose.getChoices(gui, message, 0, 1, choices);
         return choice.isEmpty() ? null : choice.get(0);
     }
 
-    public static <T> T oneOrNone(final String message, final Collection<T> choices) {
+    public static <T> T oneOrNone(final IGuiBase gui, final String message, final Collection<T> choices) {
         if ((choices == null) || choices.isEmpty()) {
             return null;
         }
-        final List<T> choice = SGuiChoose.getChoices(message, 0, 1, choices);
+        final List<T> choice = SGuiChoose.getChoices(gui, message, 0, 1, choices);
         return choice.isEmpty() ? null : choice.get(0);
     }
 
@@ -61,13 +61,13 @@ public class SGuiChoose {
      *            a T object.
      * @return a T object.
      */
-    public static <T> T one(final String message, final T[] choices) {
-        final List<T> choice = SGuiChoose.getChoices(message, 1, 1, choices);
+    public static <T> T one(final IGuiBase gui, final String message, final T[] choices) {
+        final List<T> choice = SGuiChoose.getChoices(gui, message, 1, 1, choices);
         assert choice.size() == 1;
         return choice.get(0);
     }
 
-    public static <T> T one(final String message, final Collection<T> choices) {
+    public static <T> T one(final IGuiBase gui, final String message, final Collection<T> choices) {
         if (choices == null || choices.isEmpty()) {
             return null;
         }
@@ -75,48 +75,48 @@ public class SGuiChoose {
             return Iterables.getFirst(choices, null);
         }
 
-        final List<T> choice = SGuiChoose.getChoices(message, 1, 1, choices);
+        final List<T> choice = SGuiChoose.getChoices(gui, message, 1, 1, choices);
         assert choice.size() == 1;
         return choice.get(0);
     }
 
-    public static <T> List<T> noneOrMany(final String message, final Collection<T> choices) {
-        return SGuiChoose.getChoices(message, 0, choices.size(), choices, null, null);
+    public static <T> List<T> noneOrMany(final IGuiBase gui, final String message, final Collection<T> choices) {
+        return SGuiChoose.getChoices(gui, message, 0, choices.size(), choices, null, null);
     }
 
     // Nothing to choose here. Code uses this to just reveal one or more items
-    public static <T> void reveal(final String message, final T item) {
+    public static <T> void reveal(final IGuiBase gui, final String message, final T item) {
         List<T> items = new ArrayList<T>();
         items.add(item);
-        reveal(message, items);
+        reveal(gui, message, items);
     }
-    public static <T> void reveal(final String message, final T[] items) {
-        SGuiChoose.getChoices(message, -1, -1, items);
+    public static <T> void reveal(final IGuiBase gui, final String message, final T[] items) {
+        SGuiChoose.getChoices(gui, message, -1, -1, items);
     }
-    public static <T> void reveal(final String message, final Collection<T> items) {
-        SGuiChoose.getChoices(message, -1, -1, items);
+    public static <T> void reveal(final IGuiBase gui, final String message, final Collection<T> items) {
+        SGuiChoose.getChoices(gui, message, -1, -1, items);
     }
 
     // Get Integer in range
-    public static Integer getInteger(final String message) {
-        return getInteger(message, 0, Integer.MAX_VALUE, false);
+    public static Integer getInteger(final IGuiBase gui, final String message) {
+        return getInteger(gui, message, 0, Integer.MAX_VALUE, false);
     }
-    public static Integer getInteger(final String message, int min) {
-        return getInteger(message, min, Integer.MAX_VALUE, false);
+    public static Integer getInteger(final IGuiBase gui, final String message, int min) {
+        return getInteger(gui, message, min, Integer.MAX_VALUE, false);
     }
-    public static Integer getInteger(final String message, int min, int max) {
-        return getInteger(message, min, max, false);
+    public static Integer getInteger(final IGuiBase gui, final String message, int min, int max) {
+        return getInteger(gui, message, min, max, false);
     }
-    public static Integer getInteger(final String message, int min, int max, boolean sortDesc) {
+    public static Integer getInteger(final IGuiBase gui, final String message, int min, int max, boolean sortDesc) {
         if (max <= min) { return min; } //just return min if max <= min
 
         //force cutting off after 100 numbers at most
         if (max == Integer.MAX_VALUE) {
-            return getInteger(message, min, max, min + 99);
+            return getInteger(gui, message, min, max, min + 99);
         }
         int count = max - min + 1;
         if (count > 100) { 
-            return getInteger(message, min, max, min + 99);
+            return getInteger(gui, message, min, max, min + 99);
         }
 
         final Integer[] choices = new Integer[count];
@@ -130,13 +130,13 @@ public class SGuiChoose {
                 choices[i] = Integer.valueOf(i + min);
             }
         }
-        return SGuiChoose.oneOrNone(message, choices);
+        return SGuiChoose.oneOrNone(gui, message, choices);
     }
-    public static Integer getInteger(final String message, int min, int max, int cutoff) {
+    public static Integer getInteger(final IGuiBase gui, final String message, int min, int max, int cutoff) {
         if (max <= min || cutoff < min) { return min; } //just return min if max <= min or cutoff < min
 
         if (cutoff >= max) { //fallback to regular integer prompt if cutoff at or after max
-            return getInteger(message, min, max);
+            return getInteger(gui, message, min, max);
         }
 
         List<Object> choices = new ArrayList<Object>();
@@ -145,7 +145,7 @@ public class SGuiChoose {
         }
         choices.add("Other...");
 
-        Object choice = SGuiChoose.oneOrNone(message, choices);
+        Object choice = SGuiChoose.oneOrNone(gui, message, choices);
         if (choice instanceof Integer || choice == null) {
             return (Integer)choice;
         }
@@ -166,7 +166,7 @@ public class SGuiChoose {
         prompt += ":";
 
         while (true) {
-            String str = SOptionPane.showInputDialog(prompt, message);
+            String str = SOptionPane.showInputDialog(gui, prompt, message);
             if (str == null) { return null; } // that is 'cancel'
 
             if (StringUtils.isNumeric(str)) {
@@ -179,30 +179,30 @@ public class SGuiChoose {
     }
 
     // returned Object will never be null
-    public static <T> List<T> getChoices(final String message, final int min, final int max, final T[] choices) {
-        return getChoices(message, min, max, Arrays.asList(choices), null, null);
+    public static <T> List<T> getChoices(final IGuiBase gui, final String message, final int min, final int max, final T[] choices) {
+        return getChoices(gui, message, min, max, Arrays.asList(choices), null, null);
     }
 
-    public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices) {
-        return getChoices(message, min, max, choices, null, null);
+    public static <T> List<T> getChoices(final IGuiBase gui, final String message, final int min, final int max, final Collection<T> choices) {
+        return getChoices(gui, message, min, max, choices, null, null);
     }
 
-    public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display) {
-        return GuiBase.getInterface().getChoices(message, min, max, choices, selected, display);
+    public static <T> List<T> getChoices(final IGuiBase gui, final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display) {
+        return gui.getChoices(message, min, max, choices, selected, display);
     }
 
-    public static <T> List<T> many(final String title, final String topCaption, int cnt, final List<T> sourceChoices, Card referenceCard) {
-        return order(title, topCaption, cnt, cnt, sourceChoices, null, referenceCard, false);
+    public static <T> List<T> many(final IGuiBase gui, final String title, final String topCaption, int cnt, final List<T> sourceChoices, final CardView referenceCard) {
+        return order(gui, title, topCaption, cnt, cnt, sourceChoices, null, referenceCard, false);
     }
 
-    public static <T> List<T> many(final String title, final String topCaption, int min, int max, final List<T> sourceChoices, Card referenceCard) {
+    public static <T> List<T> many(final IGuiBase gui, final String title, final String topCaption, int min, int max, final List<T> sourceChoices, final CardView referenceCard) {
         int m2 = min >= 0 ? sourceChoices.size() - min : -1;
         int m1 = max >= 0 ? sourceChoices.size() - max : -1;
-        return order(title, topCaption, m1, m2, sourceChoices, null, referenceCard, false);
+        return order(gui, title, topCaption, m1, m2, sourceChoices, null, referenceCard, false);
     }
 
-    public static <T> List<T> order(final String title, final String top, final List<T> sourceChoices, Card referenceCard) {
-        return order(title, top, 0, 0, sourceChoices, null, referenceCard, false);
+    public static <T> List<T> order(final IGuiBase gui, final String title, final String top, final List<T> sourceChoices, final CardView referenceCard) {
+        return order(gui, title, top, 0, 0, sourceChoices, null, referenceCard, false);
     }
 
     /**
@@ -215,8 +215,8 @@ public class SGuiChoose {
      * @param oldItems the list of objects.
      * @return A shallow copy of the list of objects, with newItem inserted.
      */
-    public static <T> List<T> insertInList(final String title, final T newItem, final List<T> oldItems) {
-		final T placeAfter = oneOrNone(title, oldItems);
+    public static <T> List<T> insertInList(final IGuiBase gui, final String title, final T newItem, final List<T> oldItems) {
+		final T placeAfter = oneOrNone(gui, title, oldItems);
     	final int indexAfter = (placeAfter == null ? 0 : oldItems.indexOf(placeAfter) + 1);
     	final List<T> result = Lists.newArrayListWithCapacity(oldItems.size() + 1);
     	result.addAll(oldItems);
@@ -224,63 +224,62 @@ public class SGuiChoose {
     	return result;
     }
 
-    private static <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
-            final List<T> sourceChoices, final List<T> destChoices, final Card referenceCard, final boolean sideboardingMode) {
-        return GuiBase.getInterface().order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode);
+    private static <T> List<T> order(final IGuiBase gui, final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
+            final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode) {
+        return gui.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode);
     }
 
-
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
-    public static <T> T sortedOneOrNone(final String message, final T[] choices, Comparator<T> comparer) {
+    public static <T> T sortedOneOrNone(final IGuiBase gui, final String message, final T[] choices, Comparator<T> comparer) {
         if ((choices == null) || (choices.length == 0)) {
             return null;
         }
-        final List<T> choice = SGuiChoose.sortedGetChoices(message, 0, 1, choices, comparer);
+        final List<T> choice = SGuiChoose.sortedGetChoices(gui, message, 0, 1, choices, comparer);
         return choice.isEmpty() ? null : choice.get(0);
     }
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
-    public static <T> T sortedOneOrNone(final String message, final List<T> choices, Comparator<T> comparer) {
+    public static <T> T sortedOneOrNone(final IGuiBase gui, final String message, final List<T> choices, Comparator<T> comparer) {
         if ((choices == null) || choices.isEmpty()) {
             return null;
         }
-        final List<T> choice = SGuiChoose.sortedGetChoices(message, 0, 1, choices, comparer);
+        final List<T> choice = SGuiChoose.sortedGetChoices(gui, message, 0, 1, choices, comparer);
         return choice.isEmpty() ? null : choice.get(0);
     }
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
-    public static <T> T sortedOne(final String message, final T[] choices, Comparator<T> comparer) {
-        final List<T> choice = SGuiChoose.sortedGetChoices(message, 1, 1, choices, comparer);
+    public static <T> T sortedOne(final IGuiBase gui, final String message, final T[] choices, Comparator<T> comparer) {
+        final List<T> choice = SGuiChoose.sortedGetChoices(gui, message, 1, 1, choices, comparer);
         assert choice.size() == 1;
         return choice.get(0);
     } 
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
-    public static <T> T sortedOne(final String message, final List<T> choices, Comparator<T> comparer) {
+    public static <T> T sortedOne(final IGuiBase gui, final String message, final List<T> choices, Comparator<T> comparer) {
         if ((choices == null) || (choices.size() == 0)) {
             return null;
         }
-        final List<T> choice = SGuiChoose.sortedGetChoices(message, 1, 1, choices, comparer);
+        final List<T> choice = SGuiChoose.sortedGetChoices(gui, message, 1, 1, choices, comparer);
         assert choice.size() == 1;
         return choice.get(0);
     }
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
-    public static <T> List<T> sortedNoneOrMany(final String message, final List<T> choices, Comparator<T> comparer) {
-        return SGuiChoose.sortedGetChoices(message, 0, choices.size(), choices, comparer);
+    public static <T> List<T> sortedNoneOrMany(final IGuiBase gui, final String message, final List<T> choices, Comparator<T> comparer) {
+        return SGuiChoose.sortedGetChoices(gui, message, 0, choices.size(), choices, comparer);
     }
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
-    public static <T> List<T> sortedGetChoices(final String message, final int min, final int max, final T[] choices, Comparator<T> comparer) {
+    public static <T> List<T> sortedGetChoices(final IGuiBase gui, final String message, final int min, final int max, final T[] choices, Comparator<T> comparer) {
         // You may create a copy of source array if callers expect the collection to be unchanged
         Arrays.sort(choices, comparer);
-        return getChoices(message, min, max, choices);
+        return getChoices(gui, message, min, max, choices);
     }
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
-    public static <T> List<T> sortedGetChoices(final String message, final int min, final int max, final List<T> choices, Comparator<T> comparer) {
+    public static <T> List<T> sortedGetChoices(final IGuiBase gui, final String message, final int min, final int max, final List<T> choices, Comparator<T> comparer) {
         // You may create a copy of source list if callers expect the collection to be unchanged
         Collections.sort(choices, comparer);
-        return getChoices(message, min, max, choices);
+        return getChoices(gui, message, min, max, choices);
     }
 }

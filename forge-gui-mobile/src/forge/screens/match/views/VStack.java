@@ -1,8 +1,11 @@
 package forge.screens.match.views;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
@@ -17,15 +20,7 @@ import forge.card.CardDetailUtil;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.card.CardDetailUtil.DetailColors;
-import forge.game.card.Card;
-import forge.game.player.Player;
-import forge.game.player.PlayerController;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.TargetChoices;
-import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
-import forge.match.input.InputConfirm;
 import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDown;
 import forge.menu.FMenuItem;
@@ -38,6 +33,10 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.util.Utils;
+import forge.view.CardView;
+import forge.view.IGameView;
+import forge.view.PlayerView;
+import forge.view.StackItemView;
 
 public class VStack extends FDropDown {
     public static final float CARD_WIDTH = Utils.AVG_FINGER_WIDTH;
@@ -49,16 +48,16 @@ public class VStack extends FDropDown {
     private static final float ALPHA_COMPOSITE = 0.5f;
     private static final TextRenderer textRenderer = new TextRenderer(true);
 
-    private final MagicStack stack;
-    private final Player localPlayer;
+    private final IGameView gameView;
+    private final PlayerView localPlayer;
     private StackInstanceDisplay activeItem;
-    private SpellAbilityStackInstance activeStackInstance;
-    private Map<Player, Object> playersWithValidTargets;
+    private StackItemView activeStackInstance;
+    private Map<PlayerView, Object> playersWithValidTargets;
 
     private int stackSize;
 
-    public VStack(MagicStack stack0, Player localPlayer0) {
-        stack = stack0;
+    public VStack(IGameView stack0, PlayerView localPlayer0) {
+        gameView = stack0;
         localPlayer = localPlayer0;
     }
 
@@ -71,8 +70,12 @@ public class VStack extends FDropDown {
     private void revealTargetZones() {
         if (activeStackInstance == null) { return; }
 
-        final List<ZoneType> zones = activeStackInstance.getZonesToOpen();
-        playersWithValidTargets = activeStackInstance.getPlayersWithValidTargets();
+        final Set<ZoneType> zones = new HashSet<ZoneType>();
+        playersWithValidTargets = new HashMap<PlayerView, Object>();
+        for (final CardView c : activeStackInstance.getTargetCards()) {
+            zones.add(c.getZone());
+            playersWithValidTargets.put(c.getController(), c);
+        }
         if (zones != null && zones.size() > 0 && playersWithValidTargets != null && playersWithValidTargets.size() > 0) {
             GuiBase.getInterface().openZones(zones, playersWithValidTargets);
         }
@@ -91,6 +94,7 @@ public class VStack extends FDropDown {
         activeStackInstance = null; //reset before updating stack
         restoreOldZones();
 
+        final List<StackItemView> stack = gameView.getStack();
         if (stackSize != stack.size()) {
             int oldStackSize = stackSize;
             stackSize = stack.size();
@@ -121,6 +125,7 @@ public class VStack extends FDropDown {
         float totalWidth = Math.min(4 * CARD_WIDTH, maxWidth);
         float width = totalWidth - 2 * MARGINS;
 
+        final List<StackItemView> stack = gameView.getStack();
         if (stack.isEmpty()) { //show label if stack empty
             FLabel label = add(new FLabel.Builder().text("[Empty]").font(FONT).align(HAlignment.CENTER).build());
 
@@ -130,10 +135,10 @@ public class VStack extends FDropDown {
         }
         else {
             //iterate stack in reverse so most recent items appear on bottom
-            SpellAbilityStackInstance stackInstance = null;
+            StackItemView stackInstance = null;
             StackInstanceDisplay display = null;
             float overlap = Math.round(CARD_HEIGHT / 2 + PADDING + BORDER_THICKNESS);
-            Iterator<SpellAbilityStackInstance> iterator = stack.reverseIterator();
+            Iterator<StackItemView> iterator = stack.iterator();
             while (iterator.hasNext()) {
                 stackInstance = iterator.next();
                 display = new StackInstanceDisplay(stackInstance, width);
@@ -177,36 +182,35 @@ public class VStack extends FDropDown {
                     activeItem.getLeft() + VStack.CARD_WIDTH * FCardPanel.TARGET_ORIGIN_FACTOR_X + VStack.PADDING + VStack.BORDER_THICKNESS,
                     activeItem.getTop() + VStack.CARD_HEIGHT * FCardPanel.TARGET_ORIGIN_FACTOR_Y + VStack.PADDING + VStack.BORDER_THICKNESS);
 
-            TargetChoices targets = activeStackInstance.getSpellAbility().getTargets();
-            Player activator = activeStackInstance.getActivator();
+            PlayerView activator = activeStackInstance.getActivatingPlayer();
             arrowOrigin = arrowOrigin.add(getScreenPosition());
 
-            for (Card c : targets.getTargetCards()) {
-                TargetingOverlay.drawArrow(g, arrowOrigin, c, activator.isOpponentOf(c.getOwner()));
+            for (CardView c : activeStackInstance.getTargetCards()) {
+                TargetingOverlay.drawArrow(g, arrowOrigin, c, activator.isOpponentOf(c.getController()));
             }
-            for (Player p : targets.getTargetPlayers()) {
+            for (PlayerView p : activeStackInstance.getTargetPlayers()) {
                 TargetingOverlay.drawArrow(g, arrowOrigin, p, activator.isOpponentOf(p));
             }
         }
     }
 
     private class StackInstanceDisplay extends FDisplayObject {
-        private final SpellAbilityStackInstance stackInstance;
+        private final StackItemView stackInstance;
         private final Color foreColor, backColor;
         private String text;
         private float preferredHeight;
 
-        private StackInstanceDisplay(SpellAbilityStackInstance stackInstance0, float width) {
+        private StackInstanceDisplay(StackItemView stackInstance0, float width) {
             stackInstance = stackInstance0;
-            Card card = stackInstance.getSourceCard().getCardForUi();
+            CardView card = stackInstance.getSource();
 
-            text = stackInstance.getStackDescription();
-            if (stackInstance.getSpellAbility().isOptionalTrigger() &&
-                    card.getController().getController().getLobbyPlayer().equals(localPlayer)) {
+            text = stackInstance.getText();
+            if (stackInstance.isOptionalTrigger() &&
+                    stackInstance0.getActivatingPlayer().getLobbyPlayer().equals(localPlayer)) {
                 text = "(OPTIONAL) " + text;
             }
 
-            DetailColors color = CardDetailUtil.getBorderColor(card, !stackInstance.getStackDescription().startsWith("Morph "));
+            DetailColors color = CardDetailUtil.getBorderColor(card.getOriginal());
             backColor = FSkinColor.fromRGB(color.r, color.g, color.b);
             foreColor = FSkinColor.getHighContrastColor(backColor);
 
@@ -226,59 +230,55 @@ public class VStack extends FDropDown {
                 return true;
             }
             if (localPlayer != null) { //don't show menu if tapping on art
-                final SpellAbility ability = stackInstance.getSpellAbility();
-                if (ability.isAbility()) {
+                if (stackInstance.isAbility()) {
                     FPopupMenu menu = new FPopupMenu() {
                         @Override
                         protected void buildMenu() {
-                            final PlayerController controller = localPlayer.getController();
-                            final String key = ability.toUnsuppressedString();
-                            final boolean autoYield = controller.shouldAutoYield(key);
+                            final String key = stackInstance.getKey();
+                            final boolean autoYield = gameView.shouldAutoYield(key);
                             addItem(new FCheckBoxMenuItem("Auto-Yield", autoYield,
                                     new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
-                                    controller.setShouldAutoYield(key, !autoYield);
-                                    if (!autoYield && stack.peekAbility() == ability) {
+                                    FControl.getGameView().setShouldAutoYield(key, !autoYield);
+                                    if (!autoYield && stackInstance.equals(gameView.peekStack())) {
                                         //auto-pass priority if ability is on top of stack
-                                        FControl.getInputProxy().passPriority();
+                                        gameView.passPriority();
                                     }
                                 }
                             }));
-                            if (ability.isOptionalTrigger() && ability.getActivatingPlayer() == localPlayer) {
-                                final int triggerID = ability.getSourceTrigger();
+                            if (stackInstance.isOptionalTrigger() && stackInstance.getActivatingPlayer() == localPlayer) {
+                                final int triggerID = stackInstance.getSourceTrigger();
                                 addItem(new FCheckBoxMenuItem("Always Yes",
-                                        controller.shouldAlwaysAcceptTrigger(triggerID),
+                                        gameView.shouldAlwaysAcceptTrigger(triggerID),
                                         new FEventHandler() {
                                     @Override
                                     public void handleEvent(FEvent e) {
-                                        if (controller.shouldAlwaysAcceptTrigger(triggerID)) {
-                                            controller.setShouldAlwaysAskTrigger(triggerID);
+                                        if (gameView.shouldAlwaysAcceptTrigger(triggerID)) {
+                                            gameView.setShouldAlwaysAskTrigger(triggerID);
                                         }
                                         else {
-                                            controller.setShouldAlwaysAcceptTrigger(triggerID);
-                                            if (stack.peekAbility() == ability &&
-                                                    FControl.getInputQueue().getInput() instanceof InputConfirm) {
+                                            gameView.setShouldAlwaysAcceptTrigger(triggerID);
+                                            if (stackInstance.equals(gameView.peekStack())) {
                                                 //auto-yes if ability is on top of stack
-                                                FControl.getInputProxy().selectButtonOK();
+                                                gameView.confirm();
                                             }
                                         }
                                     }
                                 }));
                                 addItem(new FCheckBoxMenuItem("Always No",
-                                        controller.shouldAlwaysDeclineTrigger(triggerID),
+                                        gameView.shouldAlwaysDeclineTrigger(triggerID),
                                         new FEventHandler() {
                                     @Override
                                     public void handleEvent(FEvent e) {
-                                        if (controller.shouldAlwaysDeclineTrigger(triggerID)) {
-                                            controller.setShouldAlwaysAskTrigger(triggerID);
+                                        if (gameView.shouldAlwaysDeclineTrigger(triggerID)) {
+                                            gameView.setShouldAlwaysAskTrigger(triggerID);
                                         }
                                         else {
-                                            controller.setShouldAlwaysDeclineTrigger(triggerID);
-                                            if (stack.peekAbility() == ability &&
-                                                    FControl.getInputQueue().getInput() instanceof InputConfirm) {
+                                            gameView.setShouldAlwaysDeclineTrigger(triggerID);
+                                            if (stackInstance.equals(gameView.peekStack())) {
                                                 //auto-no if ability is on top of stack
-                                                FControl.getInputProxy().selectButtonOK();
+                                                gameView.confirm();
                                             }
                                         }
                                     }
@@ -287,7 +287,7 @@ public class VStack extends FDropDown {
                             addItem(new FMenuItem("Zoom/Details", new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
-                                    CardZoom.show(stackInstance.getSourceCard());
+                                    CardZoom.show(stackInstance.getSource());
                                 }
                             }));
                         };
@@ -297,13 +297,13 @@ public class VStack extends FDropDown {
                     return true;
                 }
             }
-            CardZoom.show(stackInstance.getSourceCard());
+            CardZoom.show(stackInstance.getSource());
             return true;
         }
 
         @Override
         public boolean longPress(float x, float y) {
-            CardZoom.show(stackInstance.getSourceCard());
+            CardZoom.show(stackInstance.getSource());
             return true;
         }
 
@@ -331,7 +331,7 @@ public class VStack extends FDropDown {
 
             x += PADDING;
             y += PADDING;
-            CardRenderer.drawCardWithOverlays(g, stackInstance.getSourceCard(), x, y, CARD_WIDTH, CARD_HEIGHT);
+            CardRenderer.drawCardWithOverlays(g, stackInstance.getSource(), x, y, CARD_WIDTH, CARD_HEIGHT);
 
             x += CARD_WIDTH + PADDING;
             w -= x + PADDING - BORDER_THICKNESS;

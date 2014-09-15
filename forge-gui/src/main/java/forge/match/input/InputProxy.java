@@ -17,19 +17,19 @@
  */
 package forge.match.input;
 
-import forge.FThreads;
-import forge.GuiBase;
-import forge.game.Game;
-import forge.game.card.Card;
-import forge.game.phase.PhaseType;
-import forge.game.player.Player;
-import forge.game.spellability.SpellAbility;
-import forge.util.ITriggerEvent;
-import forge.util.gui.SOptionPane;
-
 import java.util.Observable;
 import java.util.Observer;
 import java.util.concurrent.atomic.AtomicReference;
+
+import forge.FThreads;
+import forge.game.Game;
+import forge.interfaces.IGuiBase;
+import forge.player.PlayerControllerHuman;
+import forge.util.ITriggerEvent;
+import forge.util.gui.SOptionPane;
+import forge.view.CardView;
+import forge.view.PlayerView;
+import forge.view.SpellAbilityView;
 
 /**
  * <p>
@@ -43,32 +43,40 @@ public class InputProxy implements Observer {
 
     /** The input. */
     private AtomicReference<Input> input = new AtomicReference<Input>();
-    private Game game = null;
+    private final Game game;
 
 //    private static final boolean DEBUG_INPUT = true; // false;
-    
-    public void setGame(Game game0) {
-        game = game0;
-        GuiBase.getInterface().getInputQueue().addObserver(this);
+
+    private final PlayerControllerHuman controller;
+    public InputProxy(final PlayerControllerHuman controller, final Game game) {
+        this.controller = controller;
+        this.game = game;
+    }
+
+    private IGuiBase getGui() {
+        return this.controller.getGui();
     }
 
     public boolean passPriority() {
-        return passPriority(null, null);
+        return passPriority(false);
     }
-    public boolean passPriority(Player p, PhaseType autoPassUntilPhase) {
-        Input inp = getInput();
-        if (inp != null && inp instanceof InputPassPriority) {
-            if (p != null && autoPassUntilPhase != null) {
-                p.getController().autoPassUntil(autoPassUntilPhase);
+    public boolean passPriorityUntilEndOfTurn() {
+        return passPriority(true);
+    }
+    private boolean passPriority(final boolean passUntilEndOfTurn) {
+        final Input inp = getInput();
+        if (inp instanceof InputPassPriority) {
+            if (passUntilEndOfTurn) {
+                controller.autoPassUntilEndOfTurn();
             }
             inp.selectButtonOK();
             return true;
         }
 
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
+        FThreads.invokeInEdtNowOrLater(getGui(), new Runnable() {
             @Override
             public void run() {
-                SOptionPane.showMessageDialog("Cannot pass priority at this time.");
+                SOptionPane.showMessageDialog(getGui(), "Cannot pass priority at this time.");
             }
         });
         return false;
@@ -76,8 +84,7 @@ public class InputProxy implements Observer {
 
     @Override
     public final void update(final Observable observable, final Object obj) {
-        final Input nextInput = GuiBase.getInterface().getInputQueue().getActualInput(game);
-        
+        final Input nextInput = getGui().getInputQueue().getActualInput(game);
 /*        if(DEBUG_INPUT) 
             System.out.printf("%s ... \t%s on %s, \tstack = %s%n", 
                     FThreads.debugGetStackTraceItem(6, true), nextInput == null ? "null" : nextInput.getClass().getSimpleName(), 
@@ -87,13 +94,13 @@ public class InputProxy implements Observer {
         Runnable showMessage = new Runnable() {
             @Override public void run() { 
                 Input current = getInput(); 
-                GuiBase.getInterface().getInputQueue().syncPoint();
+                getGui().getInputQueue().syncPoint();
                 //System.out.printf("\t%s > showMessage @ %s/%s during %s%n", FThreads.debugGetCurrThreadId(), nextInput.getClass().getSimpleName(), current.getClass().getSimpleName(), game.getPhaseHandler().debugPrintState());
                 current.showMessageInitial(); 
             }
         };
         
-        FThreads.invokeInEdtLater(showMessage);
+        FThreads.invokeInEdtLater(getGui(), showMessage);
     }
     /**
      * <p>
@@ -127,10 +134,10 @@ public class InputProxy implements Observer {
      * @param player
      *            a {@link forge.game.player.Player} object.
      */
-    public final void selectPlayer(final Player player, final ITriggerEvent triggerEvent) {
-        Input inp = getInput();
+    public final void selectPlayer(final PlayerView player, final ITriggerEvent triggerEvent) {
+        final Input inp = getInput();
         if (inp != null) {
-            inp.selectPlayer(player, triggerEvent);
+            inp.selectPlayer(controller.getPlayer(player), triggerEvent);
         }
     }
 
@@ -139,22 +146,22 @@ public class InputProxy implements Observer {
      * selectCard.
      * </p>
      * 
-     * @param card
+     * @param cardView
      *            a {@link forge.game.card.Card} object.
      * @param triggerEvent
      */
-    public final boolean selectCard(final Card card, final ITriggerEvent triggerEvent) {
-        Input inp = getInput();
+    public final boolean selectCard(final CardView cardView, final ITriggerEvent triggerEvent) {
+        final Input inp = getInput();
         if (inp != null) {
-            return inp.selectCard(card, triggerEvent);
+            return inp.selectCard(controller.getCard(cardView), triggerEvent);
         }
         return false;
     }
 
-    public final void selectAbility(SpellAbility ab) {
-    	Input inp = getInput();
+    public final void selectAbility(final SpellAbilityView ab) {
+    	final Input inp = getInput();
         if (inp != null) {
-            inp.selectAbility(ab);
+            inp.selectAbility(controller.getSpellAbility(ab));
         }
     }
 

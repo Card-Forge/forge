@@ -17,6 +17,7 @@
  */
 package forge.error;
 
+import forge.GuiBase;
 import forge.gui.WrapLayout;
 import forge.toolbox.FHyperlink;
 import forge.toolbox.FLabel;
@@ -92,7 +93,7 @@ public class BugReportDialog {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            BugReporter.copyAndGoToForums(text.getText());
+            BugReporter.copyAndGoToForums(GuiBase.getInterface(), text.getText());
         }
     }
 
@@ -108,7 +109,7 @@ public class BugReportDialog {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            BugReporter.saveToFile(area.getText());
+            BugReporter.saveToFile(GuiBase.getInterface(), area.getText());
         }
     }
 

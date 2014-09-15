@@ -18,7 +18,6 @@
 package forge.match.input;
 
 import forge.FThreads;
-import forge.GuiBase;
 import forge.events.UiEventBlockerAssigned;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -27,9 +26,11 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.ThreadUtil;
 import forge.util.gui.SGuiDialog;
+import forge.view.CardView;
 
 /**
  * <p>
@@ -48,7 +49,8 @@ public class InputBlock extends InputSyncronizedBase {
     private final Combat combat;
     private final Player defender;
 
-    public InputBlock(Player defender0, Combat combat0) {
+    public InputBlock(final PlayerControllerHuman controller, final Player defender0, final Combat combat0) {
+        super(controller);
         defender = defender0;
         combat = combat0;
 
@@ -56,7 +58,7 @@ public class InputBlock extends InputSyncronizedBase {
         for (final Card attacker : combat.getAttackers()) {
             for (final Card c : CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
                 if (CombatUtil.canBlock(attacker, c, combat)) {
-                    FThreads.invokeInEdtNowOrLater(new Runnable() { //must set current attacker on EDT
+                    FThreads.invokeInEdtNowOrLater(getGui(), new Runnable() { //must set current attacker on EDT
                         @Override
                         public void run() {
                             setCurrentAttacker(attacker);
@@ -72,7 +74,7 @@ public class InputBlock extends InputSyncronizedBase {
     @Override
     protected final void showMessage() {
         // could add "Reset Blockers" button
-        ButtonUtil.update(true, false, true);
+        ButtonUtil.update(getGui(), true, false, true);
 
         if (currentAttacker == null) {
             showMessage("Select another attacker to declare blockers for.");
@@ -83,7 +85,7 @@ public class InputBlock extends InputSyncronizedBase {
             showMessage(message);
         }
 
-        GuiBase.getInterface().showCombat(combat);
+        getGui().showCombat(getController().getCombat(combat));
     }
 
     /** {@inheritDoc} */
@@ -100,7 +102,7 @@ public class InputBlock extends InputSyncronizedBase {
             ThreadUtil.invokeInGameThread(new Runnable() {
                 @Override
                 public void run() {
-                    SGuiDialog.message(blockErrors);
+                    SGuiDialog.message(getGui(), blockErrors);
                 }
             });
         }
@@ -112,7 +114,8 @@ public class InputBlock extends InputSyncronizedBase {
         boolean isCorrectAction = false;
         if (triggerEvent != null && triggerEvent.getButton() == 3 && card.getController() == defender) {
             combat.removeFromCombat(card);
-            GuiBase.getInterface().fireEvent(new UiEventBlockerAssigned(card, (Card)null));
+            getGui().fireEvent(new UiEventBlockerAssigned(
+                    getController().getCardView(card), (CardView) null));
             isCorrectAction = true;
         }
         else {
@@ -127,14 +130,17 @@ public class InputBlock extends InputSyncronizedBase {
                     if (combat.isBlocking(card, currentAttacker)) {
                         //if creature already blocking current attacker, remove blocker from combat
                         combat.removeBlockAssignment(currentAttacker, card);
-                        GuiBase.getInterface().fireEvent(new UiEventBlockerAssigned(card, (Card)null));
+                        getGui().fireEvent(new UiEventBlockerAssigned(
+                                getController().getCardView(card), (CardView) null));
                         isCorrectAction = true;
                     }
                     else {
                         isCorrectAction = CombatUtil.canBlock(currentAttacker, card, combat);
                         if (isCorrectAction) {
                             combat.addBlocker(currentAttacker, card);
-                            GuiBase.getInterface().fireEvent(new UiEventBlockerAssigned(card, currentAttacker));
+                            getGui().fireEvent(new UiEventBlockerAssigned(
+                                    getController().getCardView(card),
+                                    getController().getCardView(currentAttacker)));
                         }
                     }
                 }
@@ -148,10 +154,10 @@ public class InputBlock extends InputSyncronizedBase {
         return isCorrectAction;
     }
 
-    private void setCurrentAttacker(Card card) {
+    private void setCurrentAttacker(final Card card) {
         currentAttacker = card;
-        for (Card c : combat.getAttackers()) {
-            GuiBase.getInterface().setUsedToPay(c, card == c);
+        for (final Card c : combat.getAttackers()) {
+            getGui().setUsedToPay(getController().getCardView(c), card == c);
         }
     }
 }
