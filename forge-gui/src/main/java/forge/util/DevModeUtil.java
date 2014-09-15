@@ -249,8 +249,10 @@ public final class DevModeUtil {
         }
 
         final List<Card> lib = pPriority.getCardsIn(ZoneType.Library);
-        final CardView cardView = SGuiChoose.oneOrNone(controller.getGui(), "Choose a card", controller.getCardViews(lib));
-        final Card card = controller.getCard(cardView);
+        final List<ZoneType> origin = new ArrayList<ZoneType>();
+        origin.add(ZoneType.Library);
+        SpellAbility sa = new SpellAbility.EmptySa(new Card(-1));
+        final Card card = controller.chooseSingleCardForZoneChange(ZoneType.Hand, origin, sa, lib, "Choose a card", true, pPriority);
         if (card == null) { return; }
 
         game.getAction().invoke(new Runnable() {

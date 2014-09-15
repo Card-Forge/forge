@@ -1294,8 +1294,8 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public Card chooseSingleCardForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, List<Card> fetchList, String selectPrompt, boolean b, Player decider) {
-        return chooseSingleEntityForEffect(fetchList, sa, selectPrompt, b, decider);
+    public Card chooseSingleCardForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, List<Card> fetchList, String selectPrompt, boolean isOptional, Player decider) {
+        return chooseSingleEntityForEffect(fetchList, sa, selectPrompt, isOptional, decider);
     }
 
     public boolean isGuiPlayer() {

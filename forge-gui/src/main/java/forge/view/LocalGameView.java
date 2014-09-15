@@ -394,7 +394,8 @@ public abstract class LocalGameView implements IGameView {
             // is not an outdated Card.
             cards.put(c, view);
             mayShow = mayShowCard(view);
-        } else {
+        }
+        else {
             view = new CardView(isDisplayable);
             mayShow = mayShowCard(view);
             if (isDisplayable && mayShow) {
@@ -404,9 +405,11 @@ public abstract class LocalGameView implements IGameView {
 
         if (mayShow) {
             writeCardToView(cUi, view);
-        } else if (isDisplayable) {
+        }
+        else if (isDisplayable) {
             view.reset();
-        } else {
+        }
+        else {
             return null;
         }
 

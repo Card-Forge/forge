@@ -838,7 +838,7 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public Card chooseSingleCardForZoneChange(ZoneType destination,
             List<ZoneType> origin, SpellAbility sa, List<Card> fetchList,
-            String selectPrompt, boolean b, Player decider) {
+            String selectPrompt, boolean isOptional, Player decider) {
 
         return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player, decider);
     }
