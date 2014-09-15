@@ -2,16 +2,21 @@ package forge.screens.settings;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.math.Rectangle;
 
 import forge.Graphics;
 import forge.achievement.Achievement;
 import forge.achievement.AchievementCollection;
+import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
+import forge.menu.FDropDown;
+import forge.screens.FScreen;
 import forge.screens.TabPageScreen.TabPage;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FEvent;
+import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Utils;
@@ -21,6 +26,10 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
     private static final float SELECTED_BORDER_THICKNESS = Utils.scaleMin(1);
     private static final int MIN_SHELVES = 4;
     private static final int TROPHIES_PER_SHELVE = 4;
+    private static final FSkinFont NAME_FONT = FSkinFont.get(14);
+    private static final FSkinFont DESC_FONT = FSkinFont.get(12);
+    private static final FSkinColor TEXT_COLOR = FLabel.DEFAULT_TEXT_COLOR;
+    private static final FSkinColor NOT_EARNED_COLOR = TEXT_COLOR.alphaColor(0.5f);
 
     private final FComboBox<AchievementCollection> cbCollections = add(new FComboBox<AchievementCollection>());
     private final TrophyCase trophyCase = add(new TrophyCase());
@@ -196,6 +205,7 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
 
             int trophyCount = 0;
             float startX = x;
+            Rectangle selectRect = null;
 
             for (Achievement achievement : achievements) {
                 if (trophyCount == TROPHIES_PER_SHELVE) {
@@ -230,11 +240,79 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
 
                     if (achievement == selectedAchievement) {
                         g.drawRect(SELECTED_BORDER_THICKNESS, Color.GREEN, x, y, trophyWidth, shelfHeight);
+                        selectRect = new Rectangle(x, y, trophyWidth, shelfHeight);
                     }
                 }
 
                 trophyCount++;
                 x += trophyWidth;
+            }
+
+            //draw tooltip for selected achievement if needed
+            if (selectRect != null) {
+                String subTitle = selectedAchievement.getSubTitle();
+                String goldDesc = selectedAchievement.getGoldDesc() == null ? null : "(Gold) " + selectedAchievement.getGoldDesc();
+                String silverDesc = selectedAchievement.getSilverDesc() == null ? null : "(Silver) " + selectedAchievement.getSilverDesc();
+                String bronzeDesc = selectedAchievement.getBronzeDesc() == null ? null : "(Bronze) " + selectedAchievement.getBronzeDesc();
+
+                w = getWidth() - 2 * PADDING;
+                float h = NAME_FONT.getLineHeight() + 2.5f * PADDING;
+                if (subTitle != null) {
+                    h += DESC_FONT.getLineHeight();
+                }
+                if (goldDesc != null) {
+                    h += DESC_FONT.getLineHeight();
+                }
+                if (silverDesc != null) {
+                    h += DESC_FONT.getLineHeight();
+                }
+                if (bronzeDesc != null) {
+                    h += DESC_FONT.getLineHeight();
+                }
+
+                x = PADDING;
+                y = selectRect.y + selectRect.height + PADDING;
+                if (y + h > getHeight()) {
+                    if (selectRect.y - PADDING > h) {
+                        y = selectRect.y - h - PADDING;
+                    }
+                    else {
+                        y = getHeight() - h;
+                    }
+                }
+
+                g.drawImage(FSkinTexture.BG_TEXTURE, x, y, w, h);
+                g.fillRect(FScreen.TEXTURE_OVERLAY_COLOR, x, y, w, h);
+                g.drawRect(SELECTED_BORDER_THICKNESS, FDropDown.BORDER_COLOR, x, y, w, h);
+
+                x += PADDING;
+                y += PADDING;
+                w -= 2 * PADDING;
+                h -= 2 * PADDING;
+                g.drawText(selectedAchievement.getDisplayName(), NAME_FONT, TEXT_COLOR, x, y, w, h, false, HAlignment.LEFT, false);
+                y += NAME_FONT.getLineHeight();
+                if (subTitle != null) {
+                    g.drawText(subTitle, DESC_FONT, TEXT_COLOR, x, y, w, h, false, HAlignment.LEFT, false);
+                    y += DESC_FONT.getLineHeight();
+                }
+                y += PADDING;
+                if (goldDesc != null) {
+                    g.drawText(goldDesc, DESC_FONT,
+                            selectedAchievement.earnedGold() ? TEXT_COLOR : NOT_EARNED_COLOR,
+                            x, y, w, h, false, HAlignment.LEFT, false);
+                    y += DESC_FONT.getLineHeight();
+                }
+                if (silverDesc != null) {
+                    g.drawText(silverDesc, DESC_FONT,
+                            selectedAchievement.earnedSilver() ? TEXT_COLOR : NOT_EARNED_COLOR,
+                            x, y, w, h, false, HAlignment.LEFT, false);
+                    y += DESC_FONT.getLineHeight();
+                }
+                if (bronzeDesc != null) {
+                    g.drawText(bronzeDesc, DESC_FONT,
+                            selectedAchievement.earnedBronze() ? TEXT_COLOR : NOT_EARNED_COLOR,
+                            x, y, w, h, false, HAlignment.LEFT, false);
+                }
             }
         }
     }
