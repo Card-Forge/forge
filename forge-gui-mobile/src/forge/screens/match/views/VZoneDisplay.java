@@ -24,11 +24,6 @@ public class VZoneDisplay extends VCardDisplayArea {
     }
 
     @Override
-    public int getCount() {
-        return player.getNCards(zoneType);
-    }
-
-    @Override
     public void update() {
         FThreads.invokeInEdtNowOrLater(GuiBase.getInterface(), updateRoutine);
     }
