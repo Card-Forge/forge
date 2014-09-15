@@ -18,6 +18,7 @@ import forge.util.Utils;
 
 public class AchievementsPage extends TabPage<SettingsScreen> {
     private static final float PADDING = Utils.scaleMin(5);
+    private static final int MIN_SHELVES = 4;
     private static final int TROPHIES_PER_SHELVE = 4;
 
     private final FComboBox<AchievementCollection> cbCollections = add(new FComboBox<AchievementCollection>());
@@ -52,30 +53,52 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
 
     private void setAchievements(AchievementCollection achievements0) {
         trophyCase.achievements = achievements0;
-
-        trophyCase.shelfCount = achievements0.getCount() % TROPHIES_PER_SHELVE;
-
+        trophyCase.shelfCount = Math.max(achievements0.getCount() % TROPHIES_PER_SHELVE, MIN_SHELVES);
         trophyCase.revalidate();
     }
 
     private static class TrophyCase extends FScrollPane {
-        private static final FSkinFont FONT = FSkinFont.get(12);
-        private static final FSkinFont SUB_FONT = FSkinFont.get(10);
         private static final Color FORE_COLOR = new Color(239f / 255f, 220f / 255f, 144f / 255f, 1f);
 
         private AchievementCollection achievements;
         private int shelfCount;
+        private float extraWidth = 0;
 
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-            float scrollWidth = visibleWidth;
+            float scrollWidth = visibleWidth + extraWidth;
             float scale = scrollWidth / FSkinTexture.BG_TROPHY_CASE_TOP.getWidth();
             float scrollHeight = (FSkinTexture.BG_TROPHY_CASE_TOP.getHeight() +
                     shelfCount * FSkinTexture.BG_TROPHY_CASE_SHELF.getHeight()) * scale;
-            while (scrollHeight < visibleHeight) {
-                scrollHeight += FSkinTexture.BG_TROPHY_CASE_SHELF.getHeight() * scale;
-            }
             return new ScrollBounds(scrollWidth, scrollHeight);
+        }
+
+        @Override
+        public boolean zoom(float x, float y, float amount) {
+            float oldScrollLeft = getScrollLeft();
+            float oldScrollTop = getScrollTop();
+            float oldScrollWidth = getScrollWidth();
+            float oldScrollHeight = getScrollHeight();
+
+            x += oldScrollLeft;
+            y += oldScrollTop;
+
+            float zoom = oldScrollWidth / getWidth();
+            extraWidth += amount * zoom; //scale amount by current zoom
+            if (extraWidth < 0) {
+                extraWidth = 0;
+            }
+            revalidate(); //apply change in height to all scroll panes
+
+            //adjust scroll positions to keep x, y in the same spot
+            float newScrollWidth = getScrollWidth();
+            float xAfter = x * newScrollWidth / oldScrollWidth;
+            setScrollLeft(oldScrollLeft + xAfter - x);
+
+            float newScrollHeight = getScrollHeight();
+            float yAfter = y * newScrollHeight / oldScrollHeight;
+            setScrollTop(oldScrollTop + yAfter - y);
+            return true;
         }
 
         @Override
@@ -93,6 +116,11 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
             float trophyHeight = FSkinImage.GOLD_TROPHY.getHeight() * trophyScale;
             float plateWidth = FSkinImage.TROPHY_PLATE.getWidth() * plateScale;
             float plateHeight = FSkinImage.TROPHY_PLATE.getHeight() * plateScale;
+
+            float titleHeight = plateHeight * 0.55f;
+            float subTitleHeight = plateHeight * 0.35f;
+            FSkinFont titleFont = FSkinFont.forHeight(titleHeight);
+            FSkinFont subTitleFont = FSkinFont.forHeight(subTitleHeight);
 
             float plateY = y + topHeight + shelfHeight - plateHeight;
             float trophyStartY = y + topHeight + (shelfHeight - trophyHeight - 12 * scale) / 2;
@@ -143,11 +171,11 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
                     }
                     g.drawImage(FSkinImage.TROPHY_PLATE, x + plateOffset, plateY, plateWidth, plateHeight);
     
-                    g.drawText(achievement.getDisplayName(), FONT, FORE_COLOR, x + plateOffset + plateWidth * 0.075f, plateY + plateHeight * 0.05f, plateWidth * 0.85f, plateHeight * 0.55f, false, HAlignment.CENTER, true);
+                    g.drawText(achievement.getDisplayName(), titleFont, FORE_COLOR, x + plateOffset + plateWidth * 0.075f, plateY + plateHeight * 0.05f, plateWidth * 0.85f, titleHeight, false, HAlignment.CENTER, true);
     
                     String subTitle = achievement.getSubTitle();
                     if (subTitle != null) {
-                        g.drawText(subTitle, SUB_FONT, FORE_COLOR, x + plateOffset + plateWidth * 0.075f, plateY + plateHeight * 0.6f, plateWidth * 0.85f, plateHeight * 0.35f, false, HAlignment.CENTER, true);
+                        g.drawText(subTitle, subTitleFont, FORE_COLOR, x + plateOffset + plateWidth * 0.075f, plateY + plateHeight * 0.6f, plateWidth * 0.85f, subTitleHeight, false, HAlignment.CENTER, true);
                     }
                 }
 
