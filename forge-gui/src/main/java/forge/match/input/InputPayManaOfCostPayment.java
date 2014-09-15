@@ -58,7 +58,7 @@ public class InputPayManaOfCostPayment extends InputPayMana {
         if (manaCost.containsPhyrexianMana()) {
             msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
         }
-        
+
         return msg.toString();
     }
 }

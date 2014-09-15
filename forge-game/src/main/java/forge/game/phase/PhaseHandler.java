@@ -342,6 +342,9 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
                     break;
 
                 case END_OF_TURN:
+                    if (playerTurn.getController().isAI()) {
+                        playerTurn.getController().resetAtEndOfTurn();
+                    }
                     game.getEndOfTurn().executeAt();
                     break;
 

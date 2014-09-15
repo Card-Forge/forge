@@ -1703,5 +1703,9 @@ public class PlayerControllerHuman extends PlayerController {
         return gameView.tryUndoLastAction();
     }
 
+    @Override
+    public void resetAtEndOfTurn() {
+        // Not used by the human controller
+    }
 
 }

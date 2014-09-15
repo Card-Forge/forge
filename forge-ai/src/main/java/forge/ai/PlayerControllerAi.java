@@ -412,7 +412,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public SpellAbility chooseSpellAbilityToPlay() {
-        return brains.choooseSpellAbilityToPlay();
+        return brains.chooseSpellAbilityToPlay();
     }
     
     @Override
@@ -841,6 +841,12 @@ public class PlayerControllerAi extends PlayerController {
             String selectPrompt, boolean b, Player decider) {
 
         return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player, decider);
+    }
+
+    @Override
+    public void resetAtEndOfTurn() {
+        // TODO - if card memory is ever used to remember something for longer than a turn, make sure it's not reset here.
+        getAi().getCardMemory().clearAllRemembered();
     }
 
 }

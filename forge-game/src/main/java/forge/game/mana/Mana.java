@@ -63,11 +63,9 @@ public class Mana {
         return mp == mp2 || mp.getManaRestrictions().equals(mp2.getManaRestrictions());
     }
 
-
     private byte color;
     private Card sourceCard = null;
     private AbilityManaPart manaAbility = null;
-
 
     public Mana(final byte color, final Card source, final AbilityManaPart manaAbility) {
         this.color = color;

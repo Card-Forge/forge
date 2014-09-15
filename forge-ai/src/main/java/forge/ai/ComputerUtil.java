@@ -1355,6 +1355,17 @@ public class ComputerUtil {
             // If PredictDamage is >= Lethal Damage
             final int dmg = AbilityUtils.calculateAmount(topStack.getHostCard(),
                     topStack.getParam("NumDmg"), topStack);
+            final SpellAbility sub = topStack.getSubAbility();
+            boolean noRegen = false;
+            if (sub != null && sub.getApi() == ApiType.Pump) {
+                final List<String> keywords = sub.hasParam("KW") ? Arrays.asList(sub.getParam("KW").split(" & ")) : new ArrayList<String>();
+                for (String kw : keywords) {
+                    if (kw.contains("can't be regenerated")) {
+                        noRegen = true;
+                        break;
+                    }
+                }
+            }
             for (final Object o : objects) {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
@@ -1370,7 +1381,8 @@ public class ComputerUtil {
                     }
 
                     // don't use it on creatures that can't be regenerated
-                    if ((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll) && !c.canBeShielded()) {
+                    if ((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll) && 
+                            (!c.canBeShielded() || noRegen)) {
                         continue;
                     }
 

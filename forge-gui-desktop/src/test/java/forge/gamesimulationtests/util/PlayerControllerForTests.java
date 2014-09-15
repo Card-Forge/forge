@@ -622,4 +622,8 @@ public class PlayerControllerForTests extends PlayerController {
         return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player, decider);
     }
 
+    @Override
+    public void resetAtEndOfTurn() {
+        // Not used by the controller for tests
+    }
 }

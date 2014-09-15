@@ -13,11 +13,9 @@ import java.awt.event.ActionListener;
 import forge.achievement.Achievement;
 import forge.achievement.AchievementCollection;
 import forge.assets.FSkinProp;
-import forge.game.GameType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.model.FModel;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
@@ -56,11 +54,8 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         trophyCase.setMinimumSize(new Dimension(266 * IMAGE_SCALE, 0));
-        
-        cbCollections.addItem(FModel.getAchievements(GameType.Constructed));
-        cbCollections.addItem(FModel.getAchievements(GameType.Draft));
-        cbCollections.addItem(FModel.getAchievements(GameType.Sealed));
-        cbCollections.addItem(FModel.getAchievements(GameType.Quest));
+
+        AchievementCollection.buildComboBox(cbCollections);
 
         cbCollections.setSkinFont(FSkin.getBoldFont(14));
         cbCollections.setTextAlignment(TextAlignment.CENTER);
@@ -186,7 +181,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
         private static final Color foreColor = new Color(239, 220, 144);
 
         private AchievementCollection achievements;
-        int shelfCount;
+        private int shelfCount;
 
         @Override
         public void paintComponent(final Graphics g) {

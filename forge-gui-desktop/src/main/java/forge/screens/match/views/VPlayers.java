@@ -17,14 +17,13 @@
  */
 package forge.screens.match.views;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JLabel;
 import javax.swing.ScrollPaneConstants;
-
-import com.google.common.collect.Maps;
 
 import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;
@@ -78,8 +77,8 @@ public enum VPlayers implements IVDoc<CPlayers> {
         parentCell.getBody().add(scroller, "w 100%, h 100%!");
     }
 
-    public void init(final List<PlayerView> players) {
-        this.infoLBLs = Maps.newHashMap();
+    public void init(final Iterable<PlayerView> players) {
+        this.infoLBLs = new HashMap<>();
         for (final PlayerView p : players) {
             // Create and store labels detailing various non-critical player info.
             final InfoLabel name = new InfoLabel();
@@ -140,7 +139,7 @@ public enum VPlayers implements IVDoc<CPlayers> {
 
     //========== Observer update methods
 
-    /** @param p0 {@link forge.game.player.Player} */
+    /** @param game {@link forge.game.player.Player} */
     public void update(final IGameView game) {
         // No need to update if this panel isn't showing
         if (parentCell == null || !this.equals(parentCell.getSelected())) { return; }
@@ -154,8 +153,12 @@ public enum VPlayers implements IVDoc<CPlayers> {
             temp[2].setText("Maximum hand size: " + String.valueOf(p0.getMaxHandSize()));
             temp[3].setText("Cards drawn this turn: " + String.valueOf(p0.getNumDrawnThisTurn()));
             temp[4].setText("Damage Prevention: " + String.valueOf(p0.getPreventNextDamage()));
-            if (!p0.getKeywords().isEmpty()) {
-                temp[5].setText(p0.getKeywords().toString());
+            List<String> keywords = p0.getKeywords();
+            while (keywords.indexOf("CanSeeOpponentsFaceDownCards") != -1) {
+                keywords.remove("CanSeeOpponentsFaceDownCards");
+            }
+            if (!keywords.isEmpty()) {
+                temp[5].setText(keywords.toString());
             } else {
                 temp[5].setText("");
             }

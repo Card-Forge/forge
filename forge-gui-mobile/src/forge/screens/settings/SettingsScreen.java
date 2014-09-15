@@ -27,8 +27,8 @@ public class SettingsScreen extends TabPageScreen<SettingsScreen> {
     private SettingsScreen() {
         super(new TabPage[] {
                 new SettingsPage(),
-                new FilesPage()/*,
-                new HelpPage()*/
+                new AchievementsPage(),
+                new FilesPage()
         });
     }
 

@@ -8,7 +8,9 @@ import forge.Graphics;
 
 public enum FSkinTexture implements FImage {
     BG_TEXTURE("bg_texture.jpg", true),
-    BG_MATCH("bg_match.jpg", false);
+    BG_MATCH("bg_match.jpg", false),
+    BG_TROPHY_CASE_TOP("bg_trophy_case_top.png", false),
+    BG_TROPHY_CASE_SHELF("bg_trophy_case_shelf.png", false);
 
     private final String filename;
     private final boolean repeat;
