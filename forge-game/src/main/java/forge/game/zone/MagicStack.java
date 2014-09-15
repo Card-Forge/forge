@@ -766,6 +766,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return hasFizzled(sa.getSubAbility(), source, fizzle) && fizzle;
     }
 
+    public final SpellAbilityStackInstance peek() {
+        return this.stack.peekFirst();
+    }
+
     public final SpellAbility peekAbility() {
         return this.stack.peekFirst().getSpellAbility();
     }

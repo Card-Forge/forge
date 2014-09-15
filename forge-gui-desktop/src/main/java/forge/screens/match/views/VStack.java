@@ -26,6 +26,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JPopupMenu;
@@ -134,7 +135,7 @@ public enum VStack implements IVDoc<CStack> {
      * @param model
      * @param viewer */
     public void updateStack(final IGameView model, final PlayerView localPlayer) {
-        final java.util.List<StackItemView> items = model.getStack();
+        final List<StackItemView> items = model.getStack();
         tab.setText("Stack : " + items.size());
 
         // No need to update the rest unless it's showing

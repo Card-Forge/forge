@@ -248,8 +248,7 @@ public abstract class LocalGameView implements IGameView {
      */
     @Override
     public StackItemView peekStack() {
-        final SpellAbilityStackInstance top =
-                Iterables.getFirst(game.getStack(), null);
+        final SpellAbilityStackInstance top = game.getStack().peek();
         if (top == null) {
             return null;
         }

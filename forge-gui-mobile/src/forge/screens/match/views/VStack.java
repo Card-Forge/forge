@@ -2,7 +2,6 @@ package forge.screens.match.views;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -138,9 +137,8 @@ public class VStack extends FDropDown {
             StackItemView stackInstance = null;
             StackInstanceDisplay display = null;
             float overlap = Math.round(CARD_HEIGHT / 2 + PADDING + BORDER_THICKNESS);
-            Iterator<StackItemView> iterator = stack.iterator();
-            while (iterator.hasNext()) {
-                stackInstance = iterator.next();
+            for (int i = stack.size() - 1; i >= 0; i--) {
+                stackInstance = stack.get(i);
                 display = new StackInstanceDisplay(stackInstance, width);
                 if (activeStackInstance == stackInstance) {
                     activeItem = display;
@@ -149,7 +147,7 @@ public class VStack extends FDropDown {
                     add(display);
                 }
                 //use full preferred height of display for topmost item on stack, overlap amount for other items
-                display.setBounds(x, y, width, iterator.hasNext() ? overlap : display.preferredHeight);
+                display.setBounds(x, y, width, i > 0 ? overlap : display.preferredHeight);
                 y += display.getHeight();
             }
             if (activeStackInstance == null) {
