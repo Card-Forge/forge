@@ -268,7 +268,8 @@ public class CardRenderer {
             drawCardListItem(g, font, foreColor, getCardArt(card), card, card.getSetCode(),
                     card.getRarity(), state.getPower(), state.getToughness(),
                     state.getLoyalty(), count, suffix, x, y, w, h, compactMode);
-        } else { //if fake card, just draw card name centered
+        }
+        else { //if fake card, just draw card name centered
             String name = state.getName();
             if (count > 0) { //preface name with count if applicable
                 name = count + " " + name;
@@ -359,7 +360,7 @@ public class CardRenderer {
             availableTypeWidth -= setWidth;
             drawSetLabel(g, typeFont, set, rarity, x + availableTypeWidth + SET_BOX_MARGIN, y - SET_BOX_MARGIN, setWidth, lineHeight + 2 * SET_BOX_MARGIN);
         }
-        String type = CardDetailUtil.formatCardId(card.getOriginal());
+        String type = CardDetailUtil.formatCardType(card.getOriginal());
         if (card.getOriginal().isCreature()) { //include P/T or Loyalty at end of type
             type += " (" + power + " / " + toughness + ")";
         }
