@@ -30,6 +30,7 @@ import forge.toolbox.FList;
 import forge.toolbox.FPanel;
 import forge.toolbox.FScrollPane;
 import forge.view.CardView;
+import forge.view.CardView.CardStateView;
 import forge.view.FDialog;
 import forge.view.SpellAbilityView;
 import forge.view.ViewUtil;
@@ -328,6 +329,8 @@ public class DualListBox<T> extends FDialog {
         CardView card = null;
         if (obj instanceof CardView) {
             card = (CardView) obj;
+        } else if (obj instanceof CardStateView) {
+            card = ((CardStateView) obj).getCard();
         } else if (obj instanceof SpellAbilityView) {
             card = ((SpellAbilityView) obj).getHostCard();
         } else if (obj instanceof PaperCard) {

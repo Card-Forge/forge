@@ -40,7 +40,6 @@ public final class ViewUtil {
         view.setTransformed(c.getCurState().equals(CardCharacteristicName.Transformed));
         view.setSetCode(c.getCurSetCode());
         view.setRarity(c.getRarity());
-        view.setTimestamp(c.getTimestamp());
         view.setPhasedOut(c.isPhasedOut());
         view.setSick(c.isInPlay() && c.isSick());
         view.setTapped(c.isTapped());

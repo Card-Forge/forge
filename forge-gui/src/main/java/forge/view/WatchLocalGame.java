@@ -16,9 +16,13 @@ import forge.util.ITriggerEvent;
 public class WatchLocalGame extends LocalGameView {
 
     private final InputQueue inputQueue;
+
     /**
      * @param game
-     * @param inputQueue 
+     *            the @{link Game} to attach to.
+     * @param inputQueue
+     *            the {@link InputQueue} of the game to enable playback
+     *            controls, or {@code null} to disallow them.
      */
     public WatchLocalGame(final Game game, final InputQueue inputQueue) {
         super(game);
@@ -40,6 +44,9 @@ public class WatchLocalGame extends LocalGameView {
 
     @Override
     public void selectButtonOk() {
+        if (this.inputQueue == null) {
+            return;
+        }
         final Input i = inputQueue.getInput();
         if (i instanceof InputPlaybackControl) {
             i.selectButtonOK();
@@ -48,6 +55,9 @@ public class WatchLocalGame extends LocalGameView {
 
     @Override
     public void selectButtonCancel() {
+        if (this.inputQueue == null) {
+            return;
+        }
         final Input i = inputQueue.getInput();
         if (i instanceof InputPlaybackControl) {
             i.selectButtonCancel();

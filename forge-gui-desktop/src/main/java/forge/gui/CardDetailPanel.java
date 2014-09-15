@@ -33,7 +33,6 @@ import org.apache.commons.lang3.StringUtils;
 import forge.card.CardDetailUtil;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.CardEdition;
-import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.InventoryItemFromSet;
 import forge.model.FModel;
@@ -245,12 +244,6 @@ public class CardDetailPanel extends SkinnedPanel {
 
         // fill the card text
         this.cdArea.setText(FSkin.encodeSymbols(CardDetailUtil.composeCardText(state), true));
-
-        if (card.isFaceDown() && card.getZone() == ZoneType.Battlefield) {
-            this.nameCostLabel.setText("???");
-            this.typeLabel.setText("Creature");
-            this.cdArea.setText(FSkin.encodeSymbols("(You may look at this card.)", true));
-        }
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override

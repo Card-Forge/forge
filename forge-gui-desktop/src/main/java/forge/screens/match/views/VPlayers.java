@@ -25,7 +25,7 @@ import java.util.Map.Entry;
 import javax.swing.JLabel;
 import javax.swing.ScrollPaneConstants;
 
-import com.beust.jcommander.internal.Lists;
+import com.google.common.collect.Lists;
 
 import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;

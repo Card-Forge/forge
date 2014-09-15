@@ -710,8 +710,7 @@ public class CardRenderer {
 
     private static boolean showCardManaCostOverlay(CardView card) {
         return isShowingOverlays(card) &&
-                isPreferenceEnabled(FPref.UI_OVERLAY_CARD_MANA_COST) &&
-                !card.isFaceDown();
+                isPreferenceEnabled(FPref.UI_OVERLAY_CARD_MANA_COST);
     }
 
     private static boolean showCardIdOverlay(CardView card) {

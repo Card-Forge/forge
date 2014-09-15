@@ -326,7 +326,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         g2d.fillRoundRect(this.cardXOffset - n, (this.cardYOffset - n) + offset, this.cardWidth + (n * 2), this.cardHeight + (n * 2), cornerSize + n , cornerSize + n);
 
         // White border if card is known to have it.
-        if (this.getCard() != null && !this.getCard().isFaceDown()) {
+        if (this.getCard() != null) {
             CardEdition ed = FModel.getMagicDb().getEditions().get(this.getCard().getSetCode());
             if (ed != null && ed.isWhiteBorder() && this.getCard().getFoilIndex() == 0) {
                 g2d.setColor(Color.white);
@@ -797,8 +797,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     private boolean showCardManaCostOverlay() {
         return isShowingOverlays() &&
-                isPreferenceEnabled(FPref.UI_OVERLAY_CARD_MANA_COST) &&
-                !this.getCard().isFaceDown();
+                isPreferenceEnabled(FPref.UI_OVERLAY_CARD_MANA_COST);
     }
 
     private boolean showCardIdOverlay() {

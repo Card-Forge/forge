@@ -38,7 +38,6 @@ public class CardView extends GameEntityView {
     private boolean isCloned, isFaceDown, isFlipCard, isFlipped, isSplitCard, isTransformed;
     private String setCode;
     private CardRarity rarity;
-    private long timestamp;
     private boolean isAttacking, isBlocking, isPhasedOut, isSick, isTapped, isToken;
     private Map<CounterType, Integer> counters;
     private int damage, assignedDamage, regenerationShields, preventNextDamage;
@@ -80,7 +79,6 @@ public class CardView extends GameEntityView {
         this.isTransformed = false;
         this.setCode = StringUtils.EMPTY;
         this.rarity = CardRarity.Unknown;
-        this.timestamp = 0L;
         this.isAttacking = this.isBlocking = this.isPhasedOut = this.isSick = this.isTapped = false;
         this.counters = ImmutableMap.of();
         this.damage = this.assignedDamage = this.regenerationShields = this.preventNextDamage = 0;
@@ -316,20 +314,6 @@ public class CardView extends GameEntityView {
      */
     public void setRarity(final CardRarity rarity) {
         this.rarity = rarity;
-    }
-
-    /**
-     * @return the timestamp
-     */
-    public long getTimestamp() {
-        return timestamp;
-    }
-
-    /**
-     * @param timestamp the timestamp to set
-     */
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
     }
 
     /**

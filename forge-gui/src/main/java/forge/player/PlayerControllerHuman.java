@@ -573,24 +573,34 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public List<Card> orderMoveToZoneList(List<Card> cards, ZoneType destinationZone) {
+        List<CardView> choices;
+        mayLookAt.addAll(cards);
         switch (destinationZone) {
             case Library:
-                return SGuiChoose.order(getGui(), "Choose order of cards to put into the library", "Closest to top", cards, null);
+                choices = SGuiChoose.order(getGui(), "Choose order of cards to put into the library", "Closest to top", getCardViews(cards), null);
+                break;
             case Battlefield:
-                return SGuiChoose.order(getGui(), "Choose order of cards to put onto the battlefield", "Put first", cards, null);
+                choices = SGuiChoose.order(getGui(), "Choose order of cards to put onto the battlefield", "Put first", getCardViews(cards), null);
+                break;
             case Graveyard:
-                return SGuiChoose.order(getGui(), "Choose order of cards to put into the graveyard", "Closest to bottom", cards, null);
+                choices = SGuiChoose.order(getGui(), "Choose order of cards to put into the graveyard", "Closest to bottom", getCardViews(cards), null);
+                break;
             case PlanarDeck:
-                return SGuiChoose.order(getGui(), "Choose order of cards to put into the planar deck", "Closest to top", cards, null);
+                choices = SGuiChoose.order(getGui(), "Choose order of cards to put into the planar deck", "Closest to top", getCardViews(cards), null);
+                break;
             case SchemeDeck:
-                return SGuiChoose.order(getGui(), "Choose order of cards to put into the scheme deck", "Closest to top", cards, null);
+                choices = SGuiChoose.order(getGui(), "Choose order of cards to put into the scheme deck", "Closest to top", getCardViews(cards), null);
+                break;
             case Stack:
-                return SGuiChoose.order(getGui(), "Choose order of copies to cast", "Put first", cards, null);
+                choices = SGuiChoose.order(getGui(), "Choose order of copies to cast", "Put first", getCardViews(cards), null);
+                break;
             default:
                 System.out.println("ZoneType " + destinationZone + " - Not Ordered");
-                break;
+                mayLookAt.clear();
+                return cards;
         }
-        return cards;
+        mayLookAt.clear();
+        return getCards(choices);
     }
 
     @Override
