@@ -18,6 +18,7 @@ import forge.util.Utils;
 
 public class AchievementsPage extends TabPage<SettingsScreen> {
     private static final float PADDING = Utils.scaleMin(5);
+    private static final float SELECTED_BORDER_THICKNESS = Utils.scaleMin(1);
     private static final int MIN_SHELVES = 4;
     private static final int TROPHIES_PER_SHELVE = 4;
 
@@ -53,6 +54,7 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
 
     private void setAchievements(AchievementCollection achievements0) {
         trophyCase.achievements = achievements0;
+        trophyCase.selectedAchievement = null;
         trophyCase.shelfCount = Math.max(achievements0.getCount() % TROPHIES_PER_SHELVE, MIN_SHELVES);
         trophyCase.revalidate();
     }
@@ -63,6 +65,7 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
         private AchievementCollection achievements;
         private int shelfCount;
         private float extraWidth = 0;
+        private Achievement selectedAchievement;
 
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
@@ -71,6 +74,51 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
             float scrollHeight = (FSkinTexture.BG_TROPHY_CASE_TOP.getHeight() +
                     shelfCount * FSkinTexture.BG_TROPHY_CASE_SHELF.getHeight()) * scale;
             return new ScrollBounds(scrollWidth, scrollHeight);
+        }
+
+        private Achievement getAchievementAt(float x0, float y0) {
+            float w = getScrollWidth();
+            float scale = w / FSkinTexture.BG_TROPHY_CASE_TOP.getWidth();
+            float trophyScale = scale / 3f * 1.8f;
+
+            float shelfHeight = FSkinTexture.BG_TROPHY_CASE_SHELF.getHeight() * scale;
+            float trophyWidth = FSkinImage.GOLD_TROPHY.getWidth() * trophyScale;
+            float trophyHeight = FSkinImage.GOLD_TROPHY.getHeight() * trophyScale;
+            float x = -getScrollLeft() + (w - TROPHIES_PER_SHELVE * trophyWidth) / 2;
+            float y = -getScrollTop() + FSkinTexture.BG_TROPHY_CASE_TOP.getHeight() * scale + (shelfHeight - trophyHeight - 12 * scale) / 2;
+
+            int trophyCount = 0;
+            float startX = x;
+
+            for (Achievement achievement : achievements) {
+                if (trophyCount == TROPHIES_PER_SHELVE) {
+                    trophyCount = 0;
+                    x = startX;
+                    y += shelfHeight;
+
+                    if (y >= getHeight()) {
+                        return null;
+                    }
+                }
+
+                if (x <= x0 && x0 < x + trophyWidth && y <= y0 && y0 < y + shelfHeight) {
+                    return achievement;
+                }
+
+                trophyCount++;
+                x += trophyWidth;
+            }
+            return null;
+        }
+
+        @Override
+        public boolean tap(float x, float y, int count) {
+            Achievement achievement = getAchievementAt(x, y);
+            if (achievement == selectedAchievement) {
+                achievement = null; //unselect if selected achievement tapped again
+            }
+            selectedAchievement = achievement;
+            return true;
         }
 
         @Override
@@ -176,6 +224,10 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
                     String subTitle = achievement.getSubTitle();
                     if (subTitle != null) {
                         g.drawText(subTitle, subTitleFont, FORE_COLOR, x + plateOffset + plateWidth * 0.075f, plateY + plateHeight * 0.6f, plateWidth * 0.85f, subTitleHeight, false, HAlignment.CENTER, true);
+                    }
+
+                    if (achievement == selectedAchievement) {
+                        g.drawRect(SELECTED_BORDER_THICKNESS, Color.GREEN, x, y, trophyWidth, shelfHeight);
                     }
                 }
 
