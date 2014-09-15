@@ -18,7 +18,6 @@ import forge.util.Utils;
 
 public class AchievementsPage extends TabPage<SettingsScreen> {
     private static final float PADDING = Utils.scaleMin(5);
-    private static final int MIN_SHELVES = 3;
     private static final int TROPHIES_PER_SHELVE = 4;
 
     private final FComboBox<AchievementCollection> cbCollections = add(new FComboBox<AchievementCollection>());
@@ -55,9 +54,6 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
         trophyCase.achievements = achievements0;
 
         trophyCase.shelfCount = achievements0.getCount() % TROPHIES_PER_SHELVE;
-        if (trophyCase.shelfCount < MIN_SHELVES) {
-            trophyCase.shelfCount = MIN_SHELVES;
-        }
 
         trophyCase.revalidate();
     }
@@ -72,8 +68,14 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
 
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-            
-            return new ScrollBounds(visibleWidth * 1.6f, visibleHeight * 1.6f);
+            float scrollWidth = visibleWidth;
+            float scale = scrollWidth / FSkinTexture.BG_TROPHY_CASE_TOP.getWidth();
+            float scrollHeight = (FSkinTexture.BG_TROPHY_CASE_TOP.getHeight() +
+                    shelfCount * FSkinTexture.BG_TROPHY_CASE_SHELF.getHeight()) * scale;
+            while (scrollHeight < visibleHeight) {
+                scrollHeight += FSkinTexture.BG_TROPHY_CASE_SHELF.getHeight() * scale;
+            }
+            return new ScrollBounds(scrollWidth, scrollHeight);
         }
 
         @Override
@@ -101,7 +103,7 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
             }
             y += topHeight;
 
-            for (int i = 0; i < shelfCount; i++) {
+            while (true) {
                 if (y + shelfHeight > 0) {
                     g.drawImage(FSkinTexture.BG_TROPHY_CASE_SHELF, x, y, w, shelfHeight);
                 }
@@ -141,11 +143,11 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
                     }
                     g.drawImage(FSkinImage.TROPHY_PLATE, x + plateOffset, plateY, plateWidth, plateHeight);
     
-                    g.drawText(achievement.getDisplayName(), FONT, FORE_COLOR, x + plateOffset + plateWidth * 0.05f, plateY + plateHeight * 0.05f, plateWidth * 0.9f, plateHeight * 0.55f, false, HAlignment.CENTER, true);
+                    g.drawText(achievement.getDisplayName(), FONT, FORE_COLOR, x + plateOffset + plateWidth * 0.075f, plateY + plateHeight * 0.05f, plateWidth * 0.85f, plateHeight * 0.55f, false, HAlignment.CENTER, true);
     
                     String subTitle = achievement.getSubTitle();
                     if (subTitle != null) {
-                        g.drawText(subTitle, SUB_FONT, FORE_COLOR, x + plateOffset + plateWidth * 0.05f, plateY + plateHeight * 0.6f, plateWidth * 0.9f, plateHeight * 0.35f, false, HAlignment.CENTER, true);
+                        g.drawText(subTitle, SUB_FONT, FORE_COLOR, x + plateOffset + plateWidth * 0.075f, plateY + plateHeight * 0.6f, plateWidth * 0.85f, plateHeight * 0.35f, false, HAlignment.CENTER, true);
                     }
                 }
 
