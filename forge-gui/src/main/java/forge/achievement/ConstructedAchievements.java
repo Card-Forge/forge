@@ -17,7 +17,7 @@ public class ConstructedAchievements extends AchievementCollection {
     @Override
     protected void buildBottomShelf() {
         add("Vanguard", new VariantWins(GameType.Vanguard, 25, 50));
-        add("Momir Basic", new VariantWins(GameType.MomirBasic, 25, 50));
+        add("MomirBasic", new VariantWins(GameType.MomirBasic, 25, 50));
         add("Commander", new VariantWins(GameType.Commander, 25, 50));
         add("Planechase", new VariantWins(GameType.Planechase, 25, 50));
         add("Archenemy", new VariantWins(GameType.Archenemy, 25, 50));
