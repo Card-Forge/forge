@@ -14,7 +14,7 @@ public class DraftAchievements extends AchievementCollection {
         add("TotalGameWins", new TotalGameWins(250, 500, 1000));
         add("TotalMatchWins", new TotalMatchWins(100, 250, 500));
         add("Overkill", new Overkill(25, 50, 100));
-        add("LifeToSpare", new LifeToSpare(25, 50, 100));
+        add("LifeToSpare", new LifeToSpare(20, 40, 80));
         add("Hellbent", new Hellbent());
     }
 }
