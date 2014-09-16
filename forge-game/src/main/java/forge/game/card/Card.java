@@ -2421,15 +2421,15 @@ public class Card extends GameEntity implements Comparable<Card> {
 			
 			String elementText = element.toString();
 
-			//Determine if a card has multiple choices, then format it in an easier to read list.
-			if (element.getApi() != null && element.getApi().equals(ApiType.Charm)) {
-				
-				String chooseText = elementText.split("-")[0].trim();
-                String[] splitElemText = elementText.split("-");
-				String[] choices = splitElemText.length > 1 ? splitElemText[1].split(";") : null;
+            //Determine if a card has multiple choices, then format it in an easier to read list.
+            if (element.getApi() != null && element.getApi().equals(ApiType.Charm)) {
 
-				sb.append(chooseText);
-				
+                String chooseText = elementText.split("-")[0].trim();
+                String[] splitElemText = elementText.split("-");
+                String[] choices = splitElemText.length > 1 ? splitElemText[1].split(";") : null;
+
+                sb.append(chooseText);
+
                 if (choices != null) {
                     sb.append("&#151;\r\n");
                     for (int i = 0; i < choices.length; i++) {
@@ -2448,10 +2448,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 }
 
-			} else {
-				sb.append(elementText).append("\r\n");
-			}
-			
+            } else {
+                sb.append(elementText).append("\r\n");
+            }
+
         }
 
         // Add Keywords
