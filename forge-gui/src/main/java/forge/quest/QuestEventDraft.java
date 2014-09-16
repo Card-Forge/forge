@@ -17,15 +17,6 @@
  */
 package forge.quest;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
 import forge.card.CardEdition;
 import forge.card.CardEdition.CardInSet;
 import forge.card.CardRarity;
@@ -45,6 +36,9 @@ import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.ReadPriceList;
 import forge.util.NameGenerator;
 import forge.util.storage.IStorage;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * <p>
@@ -472,7 +466,10 @@ public class QuestEventDraft {
         for (CardEdition edition : getAllEditions()) {
             for (CardInSet card : edition.getCards()) {
                 if (card.rarity == CardRarity.Rare || card.rarity == CardRarity.MythicRare) {
-                    possibleCards.add(FModel.getMagicDb().getCommonCards().getCard(card.name, edition.getCode()));
+                    PaperCard cardToAdd = FModel.getMagicDb().getCommonCards().getCard(card.name, edition.getCode());
+                    if (cardToAdd != null) {
+                        possibleCards.add(cardToAdd);
+                    }
                 }
             }
         }
@@ -526,9 +523,9 @@ public class QuestEventDraft {
         
     }
 
-    private List<CardEdition> getAllEditions() {
-
-        List<CardEdition> editions = new ArrayList<>();
+    private Set<CardEdition> getAllEditions() {
+        
+        Set<CardEdition> editions = new HashSet<>();
         for (String booster : boosterConfiguration.split("/")) {
             editions.add(FModel.getMagicDb().getEditions().get(booster));
         }
