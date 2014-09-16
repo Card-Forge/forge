@@ -41,11 +41,24 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
     protected AchievementCollection(String name0, String filename0) {
         name = name0;
         filename = filename0;
-        buildAchievementList();
+        buildTopShelf();
+        buildCoreShelves();
+        buildBottomShelf();
         load();
     }
 
-    protected abstract void buildAchievementList();
+    private void buildCoreShelves() {
+        add("GameWinStreak", new GameWinStreak(10, 25, 50));
+        add("MatchWinStreak", new MatchWinStreak(10, 25, 50));
+        add("TotalGameWins", new TotalGameWins(250, 500, 1000));
+        add("TotalMatchWins", new TotalMatchWins(100, 250, 500));
+        add("Overkill", new Overkill(25, 50, 100));
+        add("LifeToSpare", new LifeToSpare(20, 40, 80));
+        add("Hellbent", new Hellbent());
+    }
+
+    protected abstract void buildTopShelf();
+    protected abstract void buildBottomShelf();
 
     protected void add(String name, Achievement achievement) {
         achievements.put(name, achievement);
