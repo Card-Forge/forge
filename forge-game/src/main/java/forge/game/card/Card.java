@@ -2425,25 +2425,29 @@ public class Card extends GameEntity implements Comparable<Card> {
 			if (element.getApi() != null && element.getApi().equals(ApiType.Charm)) {
 				
 				String chooseText = elementText.split("-")[0].trim();
-				sb.append(chooseText).append("&#151;\r\n");
-				
-				String[] choices = elementText.split("-")[1].split(";");
+                String[] splitElemText = elementText.split("-");
+				String[] choices = splitElemText.length > 1 ? splitElemText[1].split(";") : null;
 
-				for (int i = 0; i < choices.length; i++) {
-					String choice = choices[i].trim();
-					
-					if (choice.startsWith("Or ") || choice.startsWith("or ")) {
-						choice = choice.substring(3);
-					}
-					
-					sb.append("&#32;&#32;&#32;&#32;&#149; ").append(Character.toUpperCase(choice.charAt(0)))
-							.append(choice.substring(1));
-					if (i < choices.length - 1) {
-						sb.append(".");
-					}
-					sb.append("\r\n");
-				}
+				sb.append(chooseText);
 				
+                if (choices != null) {
+                    sb.append("&#151;\r\n");
+                    for (int i = 0; i < choices.length; i++) {
+                        String choice = choices[i].trim();
+
+                        if (choice.startsWith("Or ") || choice.startsWith("or ")) {
+                            choice = choice.substring(3);
+                        }
+
+                        sb.append("&#32;&#32;&#32;&#32;&#149; ").append(Character.toUpperCase(choice.charAt(0)))
+                                .append(choice.substring(1));
+                        if (i < choices.length - 1) {
+                            sb.append(".");
+                        }
+                        sb.append("\r\n");
+                    }
+                }
+
 			} else {
 				sb.append(elementText).append("\r\n");
 			}
