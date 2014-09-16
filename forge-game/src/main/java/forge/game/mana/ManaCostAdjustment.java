@@ -40,7 +40,7 @@ public class ManaCostAdjustment {
             if (sa.isDelve()) {
                 final Player pc = originalCard.getController();
                 final List<Card> mutableGrave = new ArrayList<Card>(pc.getCardsIn(ZoneType.Graveyard));
-                final List<Card> toExile = pc.getController().chooseCardsToDelve(cost.getColorlessManaAmount(), mutableGrave);
+                final List<Card> toExile = pc.getController().chooseCardsToDelve(cost.getUnpaidShards(ManaCostShard.COLORLESS), mutableGrave);
                 for (final Card c : toExile) {
                     cost.decreaseColorlessMana(1);
                     if (!test) {

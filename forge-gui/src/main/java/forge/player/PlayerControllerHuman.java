@@ -630,7 +630,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public List<Card> chooseCardsToDelve(int colorLessAmount, List<Card> grave) {
         List<Card> toExile = new ArrayList<Card>();
-        int cardsInGrave = grave.size();
+        int cardsInGrave = Math.min(colorLessAmount, grave.size());
         final Integer[] cntChoice = new Integer[cardsInGrave + 1];
         for (int i = 0; i <= cardsInGrave; i++) {
             cntChoice[i] = Integer.valueOf(i);
@@ -648,7 +648,7 @@ public class PlayerControllerHuman extends PlayerController {
                 break;
             }
 
-            grave.remove(nowChosen);
+            grave.remove(gameView.getCard(nowChosen));
             toExile.add(gameView.getCard(nowChosen));
         }
         return toExile;
