@@ -7,5 +7,6 @@ SVar:DBEffect:DB$ Effect | ValidTgts$ Creature | TgtPrompt$ Select target creatu
 SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ Card.IsImprinted | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen source deals damage to the targeted creature, prevent that damage.
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/charm_peddler.jpg
 Oracle:{W}, {T}, Discard a card: The next time a source of your choice would deal damage to target creature this turn, prevent that damage.
