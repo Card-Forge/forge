@@ -43,6 +43,9 @@ public abstract class CardTraitBase extends GameObject {
     /** Keys of descriptive (text) parameters. */
     private static final ImmutableList<String> descriptiveKeys = ImmutableList.<String>builder()
             .add("Description", "SpellDescription", "StackDescription", "TriggerDescription").build();
+    /** Keys to be followed as SVar names when changing text. */
+    private static final ImmutableList<String> mutableKeys = ImmutableList.<String>builder()
+            .add("AddAbility").build();
 
     /**
      * Sets the temporary.
@@ -357,15 +360,19 @@ public abstract class CardTraitBase extends GameObject {
     public void changeText() {
         for (final String key : this.mapParams.keySet()) {
             final String value = this.originalMapParams.get(key), newValue;
-            // change descriptions differently
             if (descriptiveKeys.contains(key)) {
+                // change descriptions differently
                 newValue = AbilityUtils.applyDescriptionTextChangeEffects(value, this);
-            }
-            // don't change literal SVar names!
-            else if (!this.getHostCard().hasSVar(key)) {
-                newValue = AbilityUtils.applyAbilityTextChangeEffects(value, this);
-            } else {
+            } else if (mutableKeys.contains(key)) {
+                // follow SVar and change it
+                final String originalSVarValue = hostCard.getSVar(value);
+                hostCard.changeSVar(value, AbilityUtils.applyAbilityTextChangeEffects(originalSVarValue, this));
                 newValue = null;
+            } else if (this.getHostCard().hasSVar(value)) {
+                // don't change literal SVar names!
+                newValue = null;
+            } else {
+                newValue = AbilityUtils.applyAbilityTextChangeEffects(value, this);
             }
 
             if (newValue != null) {

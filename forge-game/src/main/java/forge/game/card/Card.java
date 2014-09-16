@@ -22,6 +22,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import forge.GameCommand;
@@ -123,6 +124,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final CardChangedWords changedTextTypes = new CardChangedWords();
     /** List of the keywords that have been added by text changes. */
     private final List<String> keywordsGrantedByTextChanges = Lists.newArrayList();
+    /** Original values of SVars changed by text changes. */
+    private Map<String, String> originalSVars = Maps.newHashMap();
 
     private final ArrayList<Object> rememberedObjects = new ArrayList<Object>();
     private final MapOfLists<GameEntity, Object> rememberMap = new HashMapOfLists<GameEntity, Object>(CollectionSuppliers.<Object>arrayLists());
@@ -4609,6 +4612,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * Update the changed text of the intrinsic spell abilities and keywords.
      */
     private final void updateChangedText() {
+        resetChangedSVars();
         final List<CardTraitBase> allAbs = ImmutableList.<CardTraitBase>builder()
             .addAll(this.getSpellAbilities())
             .addAll(this.getStaticAbilities())
@@ -4638,6 +4642,26 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void copyChangedTextFrom(final Card other) {
         this.changedTextColors.copyFrom(other.changedTextColors);
         this.changedTextTypes.copyFrom(other.changedTextTypes);
+    }
+
+    /**
+     * Change a SVar due to a text change effect. Change is volatile and will be
+     * reverted upon refreshing text changes (unless it is changed again at that
+     * time).
+     * 
+     * @param key the SVar name.
+     * @param value the new SVar value.
+     */
+    public final void changeSVar(final String key, final String value) {
+        originalSVars.put(key, getSVar(key));
+        this.setSVar(key, value);
+    }
+
+    private void resetChangedSVars() {
+        for (final Entry<String, String> svar : originalSVars.entrySet()) {
+            this.setSVar(svar.getKey(), svar.getValue());
+        }
+        originalSVars.clear();
     }
 
     /**
