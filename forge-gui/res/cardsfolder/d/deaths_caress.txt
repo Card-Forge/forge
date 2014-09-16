@@ -4,7 +4,7 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ 3 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberLKI$ True | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature. If that creature was a Human, you gain life equal to its toughness.
 SVar:DBGainLife:DB$ GainLife | Cost$ 0 | LifeAmount$ Y | ConditionCheckSVar$ IsHuman | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup | References$ IsHuman,Y
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:IsHuman:Remembered$Valid Human
+SVar:IsHuman:RememberedLKI$Valid Human
 SVar:Y:RememberedLKI$CardToughness
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deaths_caress.jpg
 Oracle:Destroy target creature. If that creature was a Human, you gain life equal to its toughness.
