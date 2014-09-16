@@ -1,0 +1,279 @@
+[metadata]
+Code=KTK
+Date=2014-09-26
+Name=Khans of Tarkir
+Code2=KTK
+Type=Expansion
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand KTK
+
+[cards]
+U Abzan Battle Priest
+U Abzan Falconer
+C Ainok Bond-Kin
+C Alabaster Kirin
+U Brave the Sands
+U Dazzling Ramparts
+C Defiant Strike
+R End Hostilities
+C Erase
+C Feat of Resistance
+C Firehoof Cavalry
+R Herald of Anafenza
+R High Sentinels of Arashin
+C Jeskai Student
+C Kill Shot
+C Mardu Hateblade
+C Mardu Hordechief
+R Master of Pearls
+C Rush of Battle
+C Sage-Eye Harrier
+C Salt Road Patrol
+U Seeker of the Way
+C Siegecraft
+C Smite the Monstrous
+U Suspension Field
+U Take Up Arms
+U Timely Hordemate
+U Venerable Lammasu
+C War Behemoth
+U Watcher of the Roost
+M Wingmate Roc
+U Blinding Spray
+C Cancel
+M Clever Impersonator
+C Crippling Chill
+R Dig Through Time
+C Disdainful Stroke
+U Dragon's Eye Savants
+C Embodiment of Spring
+C Force Away
+C Glacial Stalker
+R Icy Blast
+U Jeskai Elder
+C Jeskai Windscout
+R Kheru Spellsnatcher
+U Mistfire Weaver
+C Monastery Flock
+C Mystic of the Hidden Way
+M Pearl Lake Ancient
+U Quiet Contemplation
+U Riverwheel Aerialists
+C Scaldkin
+U Scion of Glaciers
+U Set Adrift
+C Singing Bell Strike
+U Stubborn Denial
+C Taigam's Scheming
+R Thousand Winds
+C Treasure Cruise
+U Waterwhirl
+C Weave Fate
+C Wetland Sambar
+C Whirlwind Adept
+U Bellowing Saddlebrute
+C Bitter Revelation
+R Bloodsoaked Champion
+U Dead Drop
+C Debilitating Injury
+U Despise
+C Disowned Ancestor
+C Dutiful Return
+M Empty the Pits
+R Grim Haruspex
+U Gurmag Swiftwing
+U Kheru Bloodsucker
+C Kheru Dreadmaw
+C Krumar Bond-Kin
+C Mardu Skullhunter
+U Mer-Ek Nightblade
+C Molting Snakeskin
+U Murderous Cut
+R Necropolis Fiend
+U Raiders' Spoils
+C Rakshasa's Secret
+R Retribution of the Ancients
+C Rite of the Serpent
+C Rotting Mastodon
+U Ruthless Ripper
+C Shambling Attendants
+C Sidisi's Pet
+C Sultai Scavenger
+U Swarm of Bloodflies
+C Throttle
+C Unyielding Krumar
+C Act of Treason
+C Ainok Tracker
+U Arc Lightning
+C Arrow Storm
+M Ashcloud Phoenix
+C Barrage of Boulders
+C Bloodfire Expert
+C Bloodfire Mentor
+C Bring Low
+U Burn Away
+C Canyon Lurkers
+R Crater's Claws
+U Dragon Grip
+R Dragon-Style Twins
+U Goblinslide
+U Horde Ambusher
+U Hordeling Outburst
+R Howl of the Horde
+R Jeering Instigator
+C Leaping Master
+U Mardu Blazebringer
+U Mardu Heart-Piercer
+C Mardu Warshrieker
+U Monastery Swiftspear
+M Sarkhan, the Dragonspeaker
+C Shatter
+C Summit Prowler
+C Swift Kick
+C Tormenting Voice
+C Trumpet Blast
+C Valley Dasher
+U War-Name Aspirant
+C Alpine Grizzly
+C Archer's Parapet
+C Awaken the Bear
+U Become Immense
+C Dragonscale Boon
+C Feed the Clan
+R Hardened Scales
+U Heir of the Wilds
+C Highland Game
+M Hooded Hydra
+C Hooting Mandrills
+U Incremental Growth
+C Kin-Tree Warden
+C Longshot Squad
+R Meandering Towershell
+C Naturalize
+U Pine Walker
+R Rattleclaw Mystic
+U Roar of Challenge
+C Sagu Archer
+C Savage Punch
+C Scout the Borders
+M See the Unwritten
+U Seek the Horizon
+C Smoke Teller
+U Sultai Flayer
+U Temur Charger
+R Trail of Mystery
+C Tusked Colossodon
+U Tuskguard Captain
+U Windstorm
+C Woolly Loxodon
+C Abomination of Gudul
+R Abzan Ascendancy
+U Abzan Charm
+C Abzan Guide
+M Anafenza, the Foremost
+R Ankle Shanker
+U Armament Corps
+R Avalanche Tusker
+U Bear's Companion
+R Butcher of the Horde
+U Chief of the Edge
+U Chief of the Scale
+R Crackling Doom
+U Death Frenzy
+R Deflecting Palm
+R Duneblast
+C Efreet Weaponmaster
+R Flying Crane Technique
+U Highspire Mantis
+U Icefeather Aven
+R Ivorytusk Fortress
+R Jeskai Ascendency
+U Jeskai Charm
+R Kheru Lich Lord
+U Kin-Tree Invocation
+R Mantis Rider
+R Mardu Ascendancy
+U Mardu Charm
+U Mardu Roughrider
+U Master the Way
+R Mindswipe
+M Narset, Enlightened Master
+C Ponyback Brigade
+R Rakshasa Deathdealer
+R Rakshasa Vizier
+U Ride Down
+R Sage of the Inward Eye
+R Sagu Mauler
+R Savage Knuckleblade
+U Secret Plans
+M Sidisi, Brood Tyrant
+R Siege Rhino
+C Snowhorn Rider
+M Sorin, Solemn Visitor
+R Sultai Ascendancy
+U Sultai Charm
+U Sultai Soothsayer
+M Surrak Dragonclaw
+R Temur Ascendancy
+U Temur Charm
+R Trap Essence
+R Utter End
+R Villainous Wealth
+U Warden of the Eye
+U Winterflame
+M Zurgo Helmsmasher
+C Abzan Banner
+R Altar of the Brood
+U Briber's Purse
+U Cranial Archive
+R Dragon Throne of Tarkir
+R Ghostfire Blade
+U Heart-Piercer Bow
+C Jeskai Banner
+C Lens of Clarity
+C Mardu Banner
+C Sultai Banner
+C Temur Banner
+M Ugin's Nexus
+U Witness of the Ages
+C Bloodfell Caves
+R Bloodstained Mire
+C Blossoming Sands
+C Dismal Backwater
+R Flooded Strand
+U Frontier Bivouac
+C Jungle Hollow
+U Mystic Monastery
+U Nomad Outpost
+U Opulent Palace
+R Polluted Delta
+C Rugged Highlands
+U Sandsteppe Citadel
+C Scoured Barrens
+C Swiftwater Cliffs
+C Thornwood Falls
+U Tomb of the Spirit Dragon
+C Tranquil Cove
+C Wind-Scarred Crag
+R Windswept Heath
+R Wooded Foothills
+L Forest
+L Forest
+L Forest
+L Forest
+L Island
+L Island
+L Island
+L Island
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Plains
+L Plains
+L Plains
+L Plains
+L Swamp
+L Swamp
+L Swamp
+L Swamp
