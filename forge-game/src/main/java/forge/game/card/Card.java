@@ -2418,8 +2418,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         // I think SpellAbilities should be displayed after Keywords
         // Add SpellAbilities
         for (final SpellAbility element : this.getSpellAbilities()) {
-			
-			String elementText = element.toString();
+
+            String elementText = element.toString();
 
             //Determine if a card has multiple choices, then format it in an easier to read list.
             if (element.getApi() != null && element.getApi().equals(ApiType.Charm)) {
