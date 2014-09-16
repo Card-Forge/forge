@@ -154,7 +154,7 @@ public abstract class Achievement {
     public String getSubTitle() {
         if (showBest) {
             if (showCurrent) {
-                return "Best: " + formatValue(best) + " Current: " + formatValue(current);
+                return "Best: " + formatValue(best) + " Active: " + formatValue(current);
             }
             return "Best: " + formatValue(best);
         }
