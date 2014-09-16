@@ -65,7 +65,7 @@ public abstract class Achievement {
         return best <= bronzeThreshold;
     }
 
-    protected abstract int evaluate(Player player, Game game, int current); 
+    protected abstract int evaluate(Player player, Game game, int current);
 
     protected Player getSingleOpponent(Player player) {
         if (player.getGame().getRegisteredPlayers().size() == 2) {
@@ -146,15 +146,20 @@ public abstract class Achievement {
         return 0;
     }
 
+    //allow overriding to add suffix or otherwise customize display of value
+    protected String formatValue(int value) {
+        return Integer.toString(value);
+    }
+
     public String getSubTitle() {
         if (showBest) {
             if (showCurrent) {
-                return "Best: " + best + " Current: " + current;
+                return "Best: " + formatValue(best) + " Current: " + formatValue(current);
             }
-            return "Best: " + best;
+            return "Best: " + formatValue(best);
         }
         else if (showCurrent) {
-            return "Current: " + current;
+            return formatValue(current);
         }
         return null;
     }

@@ -21,4 +21,9 @@ public class LifeToSpare extends Achievement {
         }
         return 0;
     }
+
+    @Override
+    protected String formatValue(int value) {
+        return value + " Life";
+    }
 }

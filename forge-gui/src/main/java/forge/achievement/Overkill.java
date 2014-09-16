@@ -25,6 +25,11 @@ public class Overkill extends Achievement {
     }
 
     @Override
+    protected String formatValue(int value) {
+        return value + " Life";
+    }
+
+    @Override
     public void loadFromXml(Element el) {
         super.loadFromXml(el);
 

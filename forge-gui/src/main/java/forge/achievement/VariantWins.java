@@ -27,4 +27,9 @@ public class VariantWins extends Achievement {
         }
         return current;
     }
+
+    @Override
+    protected String formatValue(int value) {
+        return value + " Win" + (value != 1 ? "s" : "");
+    }
 }
