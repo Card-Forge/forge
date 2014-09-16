@@ -245,6 +245,30 @@ Treasure Cruise
 Waterwhirl
 Feed the Clan
 Jeskai Charm
+Butcher of the Horde
+Crackling Doom
+Mardu Charm
+Sage of the Inward Eye
+Sultai Soothsayer
+Trap Essence
+Icy Blast
+Kheru Spellsnatcher
+Stubborn Denial
+Bellowing Saddlebrute
+Bloodsoaked Champion
+Hooded Hydra
+Pine Walker
+Savage Punch
+Trail of Mystery
+Empty the Pits
+Necropolis Fiend
+Rite of the Serpent
+Retribution of the Ancients
+Arrow Storm
+Meandering Towershell
+Death Frenzy
+Duneblast
+Temur Charm
 
 
 ------------
