@@ -11,8 +11,8 @@ import forge.util.gui.SOptionPane;
 public abstract class Achievement {
     private final String displayName, bronzeDesc, silverDesc, goldDesc;
     private final int bronzeThreshold, silverThreshold, goldThreshold;
-    private final boolean showBest, showCurrent;
-    private int best, current;
+    private final boolean showBest, showCurrent, checkGreaterThan;
+    protected int best, current;
 
     public Achievement(String displayName0,
             boolean showBest0, boolean showCurrent0,
@@ -28,6 +28,7 @@ public abstract class Achievement {
         silverThreshold = silverThreshold0;
         goldDesc = goldDesc0;
         goldThreshold = goldThreshold0;
+        checkGreaterThan = goldThreshold0 > silverThreshold0;
     }
 
     public String getDisplayName() {
@@ -46,13 +47,22 @@ public abstract class Achievement {
         return best;
     }
     public boolean earnedGold() {
-        return best >= goldThreshold;
+        if (checkGreaterThan) {
+            return best >= goldThreshold;
+        }
+        return best <= goldThreshold;
     }
     public boolean earnedSilver() {
-        return best >= silverThreshold;
+        if (checkGreaterThan) {
+            return best >= silverThreshold;
+        }
+        return best <= silverThreshold;
     }
     public boolean earnedBronze() {
-        return best >= bronzeThreshold;
+        if (checkGreaterThan) {
+            return best >= bronzeThreshold;
+        }
+        return best <= bronzeThreshold;
     }
 
     protected abstract int evaluate(Player player, Game game, int current); 
@@ -70,43 +80,49 @@ public abstract class Achievement {
 
     public void update(IGuiBase gui, Player player) {
         current = evaluate(player, player.getGame(), current);
-        if (current > best) {
-            int oldBest = best;
-            best = current;
+        if (checkGreaterThan) {
+            if (current <= best) { return; }
+        }
+        else if (current >= best) { return; }
 
-            String type = null;
-            FSkinProp image = null;
-            String desc = null;
-            if (earnedGold()) {
-                if (oldBest < goldThreshold) {
-                    type = "Gold";
-                    image = FSkinProp.IMG_GOLD_TROPHY;
-                    desc = goldDesc;
-                }
+        boolean hadEarnedGold = earnedGold();
+        boolean hadEarnedSilver = earnedSilver();
+        boolean hadEarnedBronze = earnedBronze();
+
+        best = current;
+
+        String type = null;
+        FSkinProp image = null;
+        String desc = null;
+        if (earnedGold()) {
+            if (!hadEarnedGold) {
+                type = "Gold";
+                image = FSkinProp.IMG_GOLD_TROPHY;
+                desc = goldDesc;
             }
-            else if (earnedSilver()) {
-                if (oldBest < silverThreshold) {
-                    type = "Silver";
-                    image = FSkinProp.IMG_SILVER_TROPHY;
-                    desc = silverDesc;
-                }
+        }
+        else if (earnedSilver()) {
+            if (!hadEarnedSilver) {
+                type = "Silver";
+                image = FSkinProp.IMG_SILVER_TROPHY;
+                desc = silverDesc;
             }
-            else if (earnedBronze()) {
-                if (oldBest < bronzeThreshold) {
-                    type = "Bronze";
-                    image = FSkinProp.IMG_BRONZE_TROPHY;
-                    desc = bronzeDesc;
-                }
+        }
+        else if (earnedBronze()) {
+            if (!hadEarnedBronze) {
+                type = "Bronze";
+                image = FSkinProp.IMG_BRONZE_TROPHY;
+                desc = bronzeDesc;
             }
-            if (type != null) {
-                SOptionPane.showMessageDialog(gui, "You've earned a " + type + " trophy!\n\n" +
-                        displayName + " - " + desc, "Achievement Earned", image);
-            }
+        }
+        if (type != null) {
+            SOptionPane.showMessageDialog(gui, "You've earned a " + type + " trophy!\n\n" +
+                    displayName + " - " + desc, "Achievement Earned", image);
         }
     }
 
     public boolean needSave() {
-        return best > 0 || current > 0;
+        return best != 0 || current != 0;
     }
 
     public void saveToXml(Element el) {
