@@ -6,14 +6,14 @@ import forge.game.zone.ZoneType;
 
 public class Hellbent extends Achievement {
     public Hellbent() {
-        super("Hellbent", false, false,
+        super("Hellbent",
                 "Win game with no cards in hand.", 1,
                 "Win game with no cards in hand or library.", 2,
                 "Win game with no cards in hand, library, or graveyard.", 3);
     }
 
     @Override
-    protected int evaluate(Player player, Game game, int current) {
+    protected int evaluate(Player player, Game game) {
         if (player.getOutcome().hasWon()) {
             if (player.getZone(ZoneType.Hand).size() == 0) {
                 if (player.getZone(ZoneType.Library).size() == 0) {
@@ -26,5 +26,10 @@ public class Hellbent extends Achievement {
             }
         }
         return 0;
+    }
+
+    @Override
+    public String getSubTitle() {
+        return null;
     }
 }

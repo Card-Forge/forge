@@ -11,17 +11,14 @@ import forge.util.gui.SOptionPane;
 public abstract class Achievement {
     private final String displayName, bronzeDesc, silverDesc, goldDesc;
     private final int bronzeThreshold, silverThreshold, goldThreshold;
-    private final boolean showBest, showCurrent, checkGreaterThan;
+    private final boolean checkGreaterThan;
     protected int best, current;
 
     public Achievement(String displayName0,
-            boolean showBest0, boolean showCurrent0,
             String bronzeDesc0, int bronzeThreshold0,
             String silverDesc0, int silverThreshold0,
             String goldDesc0, int goldThreshold0) {
         displayName = displayName0;
-        showBest = showBest0;
-        showCurrent = showCurrent0;
         bronzeDesc = bronzeDesc0;
         bronzeThreshold = bronzeThreshold0;
         silverDesc = silverDesc0;
@@ -65,7 +62,7 @@ public abstract class Achievement {
         return best <= bronzeThreshold;
     }
 
-    protected abstract int evaluate(Player player, Game game, int current);
+    protected abstract int evaluate(Player player, Game game);
 
     protected Player getSingleOpponent(Player player) {
         if (player.getGame().getRegisteredPlayers().size() == 2) {
@@ -79,7 +76,7 @@ public abstract class Achievement {
     }
 
     public void update(IGuiBase gui, Player player) {
-        current = evaluate(player, player.getGame(), current);
+        current = evaluate(player, player.getGame());
         if (checkGreaterThan) {
             if (current <= best) { return; }
         }
@@ -146,21 +143,5 @@ public abstract class Achievement {
         return 0;
     }
 
-    //allow overriding to add suffix or otherwise customize display of value
-    protected String formatValue(int value) {
-        return Integer.toString(value);
-    }
-
-    public String getSubTitle() {
-        if (showBest) {
-            if (showCurrent) {
-                return "Best: " + formatValue(best) + " Active: " + formatValue(current);
-            }
-            return "Best: " + formatValue(best);
-        }
-        else if (showCurrent) {
-            return formatValue(current);
-        }
-        return null;
-    }
+    public abstract String getSubTitle();
 }

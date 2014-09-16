@@ -8,7 +8,7 @@ public class VariantWins extends Achievement {
     private GameType variant;
 
     public VariantWins(GameType variant0, int silver0, int gold0) {
-        super(variant0.toString(), false, true,
+        super(variant0.toString(),
             String.format("Win a %s game.", variant0.toString()), 1,
             String.format("Win %d %s games.", silver0, variant0.toString()), silver0,
             String.format("Win %d %s games.", gold0, variant0.toString()), gold0);
@@ -16,7 +16,7 @@ public class VariantWins extends Achievement {
     }
 
     @Override
-    protected int evaluate(Player player, Game game, int current) {
+    protected int evaluate(Player player, Game game) {
         if (player.getOutcome().hasWon()) {
             if (game.getRules().hasAppliedVariant(variant)) {
                 return current + 1;
@@ -29,7 +29,7 @@ public class VariantWins extends Achievement {
     }
 
     @Override
-    protected String formatValue(int value) {
-        return value + " Win" + (value != 1 ? "s" : "");
+    public String getSubTitle() {
+        return current + " Win" + (current != 1 ? "s" : "");
     }
 }
