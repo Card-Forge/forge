@@ -92,6 +92,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
     private IGameView game;
     private List<PlayerView> sortedPlayers;
     private VMatchUI view;
+    private boolean allHands;
 
     private EventBus uiEvents;
     private IVDoc<? extends ICDoc> selectedDocBeforeCombat;
@@ -119,14 +120,11 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
     }
 
     /**
-     * Instantiates at a match with a specified number of players
-     * and hands.
-     * 
-     * @param numFieldPanels int
-     * @param numHandPanels int
+     * Instantiates at a match.
      */
-    public void initMatch(final IGameView game, final List<PlayerView> players, LobbyPlayer localPlayer) {
+    public void initMatch(final IGameView game, final List<PlayerView> players, final LobbyPlayer localPlayer, final boolean allHands) {
         this.game = game;
+        this.allHands = allHands;
         view = VMatchUI.SINGLETON_INSTANCE;
         // TODO fix for use with multiplayer
 
@@ -160,15 +158,18 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
 
         VPlayers.SINGLETON_INSTANCE.init(players);
 
-        initHandViews(localPlayer);
+        initHandViews(localPlayer, allHands);
     }
 
-    public void initHandViews(LobbyPlayer localPlayer) {
+    public void initHandViews(final LobbyPlayer localPlayer) {
+        this.initHandViews(localPlayer, this.allHands);
+    }
+    public void initHandViews(final LobbyPlayer localPlayer, final boolean allHands) {
         final List<VHand> hands = new ArrayList<VHand>();
 
         int i = 0;
         for (final PlayerView p : sortedPlayers) {
-            if (p.getLobbyPlayer().equals(localPlayer) || !p.getHandCards().isEmpty()) {
+            if (allHands || p.getLobbyPlayer().equals(localPlayer) || !p.getHandCards().isEmpty()) {
                 VHand newHand = new VHand(EDocID.Hands[i], p);
                 newHand.getLayoutControl().initialize();
                 hands.add(newHand);

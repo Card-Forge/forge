@@ -10,7 +10,6 @@ import forge.view.IGameView;
 public abstract class LimitedWinLoseController {
     private final IWinLoseView<? extends IButton> view;
     private final IGameView lastGame;
-    private final IGuiBase gui;
     private final boolean wonMatch;
     private GauntletMini gauntlet;
     private boolean nextRound = false;
@@ -18,7 +17,6 @@ public abstract class LimitedWinLoseController {
     public LimitedWinLoseController(IWinLoseView<? extends IButton> view0, final IGameView game0, final IGuiBase gui) {
         view = view0;
         lastGame = game0;
-        this.gui = gui;
         gauntlet = FModel.getGauntletMini(gui);
         wonMatch = lastGame.isMatchWonBy(GamePlayerUtil.getGuiPlayer());
     }

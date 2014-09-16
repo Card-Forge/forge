@@ -474,8 +474,10 @@ public enum FControl implements KeyEventDispatcher {
             }
         }
 
+        boolean openAllHands = !anyPlayerIsAi;
         if (this.gameView == null) {
             // Watch game but do not participate
+            openAllHands = true;
             final LocalGameView gameView = new WatchLocalGame(game, inputQueue);
             this.gameView = gameView;
             this.fcVisitor = new FControlGameEventHandler(GuiBase.getInterface(), gameView);
@@ -484,7 +486,7 @@ public enum FControl implements KeyEventDispatcher {
             this.game.subscribeToEvents(playbackControl);
         }
 
-        attachToGame(this.gameView);
+        attachToGame(this.gameView, openAllHands);
 
         // It's important to run match in a different thread to allow GUI inputs to be invoked from inside game. 
         // Game is set on pause while gui player takes decisions
@@ -507,7 +509,7 @@ public enum FControl implements KeyEventDispatcher {
 
     private FControlGameEventHandler fcVisitor;
     private FControlGamePlayback playbackControl;
-    private void attachToGame(final IGameView game0) {
+    private void attachToGame(final IGameView game0, final boolean openAllHands) {
         if (game0.getGameType().equals(GameType.Quest)) {
             QuestController qc = FModel.getQuest();
             // Reset new list when the Match round starts, not when each game starts
@@ -525,7 +527,7 @@ public enum FControl implements KeyEventDispatcher {
         final LobbyPlayer humanLobbyPlayer = getGuiPlayer();
         // The UI controls should use these game data as models
         final List<PlayerView> players = game0.getPlayers();
-        CMatchUI.SINGLETON_INSTANCE.initMatch(game0, players, humanLobbyPlayer);
+        CMatchUI.SINGLETON_INSTANCE.initMatch(game0, players, humanLobbyPlayer, openAllHands);
 
         localPlayer = null;
         for (final PlayerView p : players) {
