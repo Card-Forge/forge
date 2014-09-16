@@ -17,6 +17,8 @@
  */
 package forge.card.mana;
 
+import forge.card.MagicColor;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -163,21 +165,14 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
         String cost = getSimpleString();
 
         for (int i = 0; i < cost.length(); i++) {
-            switch (cost.charAt(i)) {
+            char symbol = cost.charAt(i);
+            switch (symbol) {
                 case 'W': 
-                    counts[0]++;
-                    break;
                 case 'U':
-                    counts[1]++;
-                    break;
                 case 'B':
-                    counts[2]++;
-                    break;
                 case 'R':
-                    counts[3]++;
-                    break;
                 case 'G':
-                    counts[4]++;
+                    counts[MagicColor.getIndexOfFirstColor(MagicColor.fromName(symbol))]++;
                     break;
             }
             
