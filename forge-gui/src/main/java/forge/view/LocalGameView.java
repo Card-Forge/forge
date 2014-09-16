@@ -426,6 +426,15 @@ public abstract class LocalGameView implements IGameView {
         return ViewUtil.transformIfNotNull(cards, FN_GET_CARD_VIEW);
     }
 
+    public final List<CardView> getRefreshedCardViews(final Iterable<CardView> cardViews) {
+        return ViewUtil.transformIfNotNull(cardViews, new Function<CardView, CardView>() {
+            @Override
+            public CardView apply(CardView input) {
+                return cards.getValue(input);
+            }
+        });
+    }
+
     private CardView getCardViewFast(final Card c) {
         if (c == null) {
             return null;

@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -76,7 +75,7 @@ public interface IGuiBase {
     void restoreOldZones(Map<PlayerView, Object> playersToRestoreZonesFor);
     void updateStack();
     void updateZones(List<Pair<PlayerView, ZoneType>> zonesToUpdate);
-    void updateCards(Set<CardView> cardsToUpdate);
+    void updateCards(Iterable<CardView> cardsToUpdate);
     void refreshCardDetails(Iterable<CardView> cards);
     void updateManaPool(List<PlayerView> manaPoolUpdate);
     void updateLives(List<PlayerView> livesUpdate);

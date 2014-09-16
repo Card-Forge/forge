@@ -446,7 +446,7 @@ public class FControl {
         }
     }
 
-    public static void updateCards(Set<CardView> cardsToUpdate) {
+    public static void updateCards(Iterable<CardView> cardsToUpdate) {
         for (CardView c : cardsToUpdate) {
             updateSingleCard(c);
         }

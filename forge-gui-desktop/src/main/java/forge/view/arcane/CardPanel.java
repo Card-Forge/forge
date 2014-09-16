@@ -386,7 +386,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         displayCardNameOverlay(showText && showCardNameOverlay(), imgSize, imgPos);
         displayPTOverlay(showText && showCardPowerOverlay(), imgSize, imgPos);
         displayCardIdOverlay(showText && showCardIdOverlay(), imgSize, imgPos);
-        displayIconOverlay(getGraphics());  
     }
 
     private void displayCardIdOverlay(boolean isVisible, Dimension imgSize, Point imgPos) {
@@ -656,11 +655,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             return;
         }
 
-        if (this.card != cardView) {
-            this.updatePTOverlay(); //update PT Overlay if card changes
-        }
-
         this.card = cardView;
+        this.doLayout();
+
         if (!this.isShowing()) {
             return;
         }

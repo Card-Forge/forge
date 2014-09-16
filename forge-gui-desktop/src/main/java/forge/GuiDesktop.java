@@ -11,7 +11,6 @@ import java.net.URI;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.swing.JFileChooser;
 import javax.swing.JPopupMenu;
@@ -440,7 +439,7 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public void updateCards(final Set<CardView> cardsToUpdate) {
+    public void updateCards(final Iterable<CardView> cardsToUpdate) {
         CMatchUI.SINGLETON_INSTANCE.updateCards(cardsToUpdate);
     }
 

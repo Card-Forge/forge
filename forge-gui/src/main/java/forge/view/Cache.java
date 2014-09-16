@@ -32,6 +32,22 @@ public class Cache<K, V> {
     }
 
     /**
+     * Get a value as it is present in this Cache, compared using the equals
+     * method.
+     * 
+     * @param value
+     * @return a value equal to value, if such a value is present in the Cache.
+     */
+    public synchronized V getValue(final V value) {
+        for (final V currentValue : inverseCache.keySet()) {
+            if (currentValue.equals(value)) {
+                return currentValue;
+            }
+        }
+        return null;
+    }
+
+    /**
      * @param key
      * @param value
      * @return

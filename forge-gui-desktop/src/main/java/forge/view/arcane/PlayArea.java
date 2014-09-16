@@ -707,7 +707,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             toPanel.setAttachedToPanel(null);
         }
    
-        toPanel.setCard(toPanel.getCard());
+        toPanel.setCard(card);
         if (fromRefresh) {
             toPanel.updatePTOverlay(); //ensure PT Overlay updated on refresh
         }

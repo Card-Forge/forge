@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -391,7 +390,7 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public void updateCards(Set<CardView> cardsToUpdate) {
+    public void updateCards(Iterable<CardView> cardsToUpdate) {
         FControl.updateCards(cardsToUpdate);
     }
 

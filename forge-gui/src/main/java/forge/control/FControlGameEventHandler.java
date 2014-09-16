@@ -271,7 +271,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         @Override
         public void run() {
             synchronized (cardsToUpdate) {
-                gui.updateCards(cardsToUpdate);
+                final Iterable<CardView> newCardsToUpdate = gameView.getRefreshedCardViews(cardsToUpdate);
+                gui.updateCards(newCardsToUpdate);
                 cardsToUpdate.clear();
             }
         }

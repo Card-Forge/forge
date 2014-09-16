@@ -388,7 +388,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
 
     }
 
-    public void updateCards(final Set<CardView> cardsToUpdate) {
+    public void updateCards(final Iterable<CardView> cardsToUpdate) {
         for (final CardView c : cardsToUpdate) {
             updateSingleCard(c);
         }
