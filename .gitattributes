@@ -16516,8 +16516,6 @@ forge-gui/res/skins/default/bg_draft_deck.png -text
 forge-gui/res/skins/default/bg_match.jpg -text
 forge-gui/res/skins/default/bg_splash.png -text
 forge-gui/res/skins/default/bg_texture.jpg -text
-forge-gui/res/skins/default/bg_trophy_case_shelf.png -text
-forge-gui/res/skins/default/bg_trophy_case_top.png -text
 forge-gui/res/skins/default/font1.ttf -text
 forge-gui/res/skins/default/grid_icons.png -text
 forge-gui/res/skins/default/loader.gif -text

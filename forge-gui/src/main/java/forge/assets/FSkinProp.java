@@ -27,8 +27,6 @@ public enum FSkinProp {
     BG_SPLASH (null, PropType.BACKGROUND),
     BG_TEXTURE (null, PropType.BACKGROUND),
     BG_MATCH (null, PropType.BACKGROUND),
-    BG_TROPHY_CASE_TOP (null, PropType.BACKGROUND),
-    BG_TROPHY_CASE_SHELF (null, PropType.BACKGROUND),
 
     //colors
     CLR_THEME                   (new int[] {70, 10}, PropType.COLOR),
@@ -232,11 +230,13 @@ public enum FSkinProp {
     IMG_PACK            (new int[] {80, 760, 40, 40}, PropType.IMAGE),
     IMG_SORCERY         (new int[] {160, 720, 40, 40}, PropType.IMAGE),
 
-    //achievement trophies
-    IMG_BRONZE_TROPHY   (new int[] {0, 880, 100, 120}, PropType.IMAGE),
-    IMG_SILVER_TROPHY   (new int[] {100, 880, 100, 120}, PropType.IMAGE),
-    IMG_GOLD_TROPHY     (new int[] {200, 880, 100, 120}, PropType.IMAGE),
-    IMG_TROPHY_PLATE    (new int[] {300, 880, 160, 40}, PropType.IMAGE),
+    //achievement trophies and shelf
+    IMG_BRONZE_TROPHY     (new int[] {0, 880, 100, 120}, PropType.IMAGE),
+    IMG_SILVER_TROPHY     (new int[] {100, 880, 100, 120}, PropType.IMAGE),
+    IMG_GOLD_TROPHY       (new int[] {200, 880, 100, 120}, PropType.IMAGE),
+    IMG_TROPHY_PLATE      (new int[] {300, 880, 160, 40}, PropType.IMAGE),
+    IMG_TROPHY_CASE_TOP   (new int[] {1, 1001, 798, 42}, PropType.IMAGE),
+    IMG_TROPHY_CASE_SHELF (new int[] {1, 1043, 798, 257}, PropType.IMAGE),
 
     //button images
     IMG_BTN_START_UP        (new int[] {480, 200, 160, 80}, PropType.ICON),
@@ -276,6 +276,14 @@ public enum FSkinProp {
     }
     public PropType getType() {
         return type;
+    }
+
+    public int getWidth() {
+        return coords[2];
+    }
+
+    public int getHeight() {
+        return coords[3];
     }
 
     public enum PropType {

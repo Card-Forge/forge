@@ -79,22 +79,22 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
             float scrollWidth = visibleWidth + extraWidth;
-            float scale = scrollWidth / FSkinTexture.BG_TROPHY_CASE_TOP.getWidth();
-            float scrollHeight = (FSkinTexture.BG_TROPHY_CASE_TOP.getHeight() +
-                    shelfCount * FSkinTexture.BG_TROPHY_CASE_SHELF.getHeight()) * scale;
+            float scale = scrollWidth / FSkinImage.TROPHY_CASE_TOP.getWidth();
+            float scrollHeight = (FSkinImage.TROPHY_CASE_TOP.getHeight() +
+                    shelfCount * FSkinImage.TROPHY_CASE_SHELF.getHeight()) * scale;
             return new ScrollBounds(scrollWidth, scrollHeight);
         }
 
         private Achievement getAchievementAt(float x0, float y0) {
             float w = getScrollWidth();
-            float scale = w / FSkinTexture.BG_TROPHY_CASE_TOP.getWidth();
-            float trophyScale = scale / 3f * 1.8f;
+            float scale = w / FSkinImage.TROPHY_CASE_TOP.getWidth();
+            float trophyScale = scale * 1.8f;
 
-            float shelfHeight = FSkinTexture.BG_TROPHY_CASE_SHELF.getHeight() * scale;
+            float shelfHeight = FSkinImage.TROPHY_CASE_SHELF.getHeight() * scale;
             float trophyWidth = FSkinImage.GOLD_TROPHY.getWidth() * trophyScale;
             float trophyHeight = FSkinImage.GOLD_TROPHY.getHeight() * trophyScale;
             float x = -getScrollLeft() + (w - TROPHIES_PER_SHELVE * trophyWidth) / 2;
-            float y = -getScrollTop() + FSkinTexture.BG_TROPHY_CASE_TOP.getHeight() * scale + (shelfHeight - trophyHeight - 12 * scale) / 2;
+            float y = -getScrollTop() + FSkinImage.TROPHY_CASE_TOP.getHeight() * scale + (shelfHeight - trophyHeight - 12 * scale) / 2;
 
             int trophyCount = 0;
             float startX = x;
@@ -165,16 +165,15 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
             float x = -getScrollLeft();
             float y = -getScrollTop();
             float w = getScrollWidth();
-            float scale = w / FSkinTexture.BG_TROPHY_CASE_TOP.getWidth();
-            float trophyScale = scale / 3f * 1.8f;
-            float plateScale = scale / 3f;
+            float scale = w / FSkinImage.TROPHY_CASE_TOP.getWidth();
+            float trophyScale = scale * 1.8f;
 
-            float topHeight = FSkinTexture.BG_TROPHY_CASE_TOP.getHeight() * scale;
-            float shelfHeight = FSkinTexture.BG_TROPHY_CASE_SHELF.getHeight() * scale;
+            float topHeight = FSkinImage.TROPHY_CASE_TOP.getHeight() * scale;
+            float shelfHeight = FSkinImage.TROPHY_CASE_SHELF.getHeight() * scale;
             float trophyWidth = FSkinImage.GOLD_TROPHY.getWidth() * trophyScale;
             float trophyHeight = FSkinImage.GOLD_TROPHY.getHeight() * trophyScale;
-            float plateWidth = FSkinImage.TROPHY_PLATE.getWidth() * plateScale;
-            float plateHeight = FSkinImage.TROPHY_PLATE.getHeight() * plateScale;
+            float plateWidth = FSkinImage.TROPHY_PLATE.getWidth() * scale;
+            float plateHeight = FSkinImage.TROPHY_PLATE.getHeight() * scale;
 
             float titleHeight = plateHeight * 0.55f;
             float subTitleHeight = plateHeight * 0.35f;
@@ -186,13 +185,13 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
             float plateOffset = (trophyWidth - plateWidth) / 2;
 
             if (y + topHeight > 0) {
-                g.drawImage(FSkinTexture.BG_TROPHY_CASE_TOP, x, y, w, topHeight);
+                g.drawImage(FSkinImage.TROPHY_CASE_TOP, x, y, w, topHeight);
             }
             y += topHeight;
 
             for (int i = 0; i < shelfCount; i++) {
                 if (y + shelfHeight > 0) {
-                    g.drawImage(FSkinTexture.BG_TROPHY_CASE_SHELF, x, y, w, shelfHeight);
+                    g.drawImage(FSkinImage.TROPHY_CASE_SHELF, x, y, w, shelfHeight);
                 }
                 y += shelfHeight;
                 if (y >= getHeight()) {
