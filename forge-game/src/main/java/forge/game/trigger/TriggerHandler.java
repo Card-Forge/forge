@@ -34,13 +34,15 @@ import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-
 import java.util.*;
+
+import com.google.common.collect.ArrayListMultimap;
 
 public class TriggerHandler implements IGameStateObject {
     private final ArrayList<TriggerType> suppressedModes = new ArrayList<TriggerType>();
 
     private final ArrayList<Trigger> delayedTriggers = new ArrayList<Trigger>();
+    private final ArrayListMultimap<Player, Trigger> playerDefinedDelayedTriggers = ArrayListMultimap.create();
     private final List<TriggerWaiting> waitingTriggers = new ArrayList<TriggerWaiting>();
     private final Game game;
 
@@ -69,6 +71,10 @@ public class TriggerHandler implements IGameStateObject {
         }
     }
 
+    public final boolean hasDelayedTriggers() {
+        return !this.delayedTriggers.isEmpty();
+    }
+
     public final void registerDelayedTrigger(final Trigger trig) {
         this.delayedTriggers.add(trig);
     }
@@ -87,6 +93,13 @@ public class TriggerHandler implements IGameStateObject {
         }
     }
 
+    public final void registerPlayerDefinedDelayedTrigger(final Player player, final Trigger trig) {
+        this.playerDefinedDelayedTriggers.put(player, trig);
+    }
+
+    public final void handlePlayerDefinedDelTriggers(final Player player) {
+        this.delayedTriggers.addAll(this.playerDefinedDelayedTriggers.removeAll(player));
+    }
 
     public final void suppressMode(final TriggerType mode) {
         this.suppressedModes.add(mode);

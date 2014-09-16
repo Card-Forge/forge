@@ -3,12 +3,15 @@ package forge.game.ability.effects;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import com.google.common.collect.Iterables;
 
 public class DelayedTriggerEffect extends SpellAbilityEffect {
 
@@ -71,7 +74,12 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
             overridingSA.setActivatingPlayer(sa.getActivatingPlayer());
             delTrig.setOverridingAbility(overridingSA);
         }
-
-        sa.getActivatingPlayer().getGame().getTriggerHandler().registerDelayedTrigger(delTrig);
+        final TriggerHandler trigHandler  = sa.getActivatingPlayer().getGame().getTriggerHandler();
+        if (mapParams.containsKey("DelayedTriggerDefinedPlayer")) { // on sb's next turn
+            Player p = Iterables.getFirst(AbilityUtils.getDefinedPlayers(sa.getHostCard(), mapParams.get("DelayedTriggerDefinedPlayer"), sa), null);
+            trigHandler.registerPlayerDefinedDelayedTrigger(p, delTrig);
+        } else {
+            trigHandler.registerDelayedTrigger(delTrig);
+        }
     }
 }

@@ -216,6 +216,7 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
     }
 
     private boolean isSkippingPhase(PhaseType phase) {
+        // TODO: Refactor this method to replacement effect
         switch(phase) {
             case UNTAP:
                 if (playerTurn.hasKeyword("Skip your next untap step.")) {
@@ -291,7 +292,8 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
                         declareAttackersTurnBasedAction();
                         game.getStack().unfreezeStack();
 
-                        if (combat != null && combat.getAttackers().isEmpty()) {
+                        if (combat != null && combat.getAttackers().isEmpty()
+                                && !game.getTriggerHandler().hasDelayedTriggers()) {
                             combat = null;
                         }
                     }
@@ -746,6 +748,8 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
         }
 
         Player next = getNextActivePlayer();
+
+        game.getTriggerHandler().handlePlayerDefinedDelTriggers(next);
 
         if (game.getRules().hasAppliedVariant(GameType.Planechase)) {
             for (Card p :game.getActivePlanes()) {
