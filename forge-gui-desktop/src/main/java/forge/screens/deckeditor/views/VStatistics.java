@@ -31,13 +31,28 @@ public enum VStatistics implements IVDoc<CStatistics> {
 
     // Global stats
     private FLabel lblTotal = new FLabel.Builder()
-            .text("Total cards: 0").tooltip("TOTAL CARDS")
+            .text("TOTAL CARDS: 0").tooltip("Total cards")
             .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
     private FLabel lblTMC = new FLabel.Builder()
-            .text("Total mana cost: 0").tooltip("TOTAL MANA COST")
+            .text("TOTAL MANA COST: 0").tooltip("Total mana cost")
             .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
     private FLabel lblAMC = new FLabel.Builder()
-            .text("Average mana cost: 0.00").tooltip("AVERAGE MANA COST")
+            .text("AVERAGE MANA COST: 0.00").tooltip("Average mana cost")
+            .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
+    private FLabel lblTSCWhite = new FLabel.Builder()
+            .text("WHITE MANA SYMBOLS IN MANA COST: 0").tooltip("White mana symbol count")
+            .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
+    private FLabel lblTSCBlue = new FLabel.Builder()
+            .text("BLUE MANA SYMBOLS IN MANA COST: 0").tooltip("Blue mana symbol count")
+            .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
+    private FLabel lblTSCBlack = new FLabel.Builder()
+            .text("BLACK MANA SYMBOLS IN MANA COST: 0").tooltip("Black mana symbol count")
+            .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
+    private FLabel lblTSCRed = new FLabel.Builder()
+            .text("RED MANA SYMBOLS IN MANA COST: 0").tooltip("Red mana symbol count")
+            .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
+    private FLabel lblTSCGreen = new FLabel.Builder()
+            .text("GREEN MANA SYMBOLS IN MANA COST: 0").tooltip("Green mana symbol count")
             .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
 
     // Total and color count labels
@@ -139,6 +154,12 @@ public enum VStatistics implements IVDoc<CStatistics> {
         pnlStats.add(lblColorless, constraints);
         pnlStats.add(lblSorcery, constraints);
         pnlStats.add(lblCMC6, constraints);
+
+        pnlStats.add(lblTSCWhite, "w 96%!, h 20px!, span 3 1, gap 2% 0 0 0");
+        pnlStats.add(lblTSCBlue, "w 96%!, h 20px!, span 3 1, gap 2% 0 0 0");
+        pnlStats.add(lblTSCBlack, "w 96%!, h 20px!, span 3 1, gap 2% 0 0 0");
+        pnlStats.add(lblTSCRed, "w 96%!, h 20px!, span 3 1, gap 2% 0 0 0");
+        pnlStats.add(lblTSCGreen, "w 96%!, h 20px!, span 3 1, gap 2% 0 0 0");
     }
 
     //========== Overridden methods
@@ -245,10 +266,21 @@ public enum VStatistics implements IVDoc<CStatistics> {
     /** @return {@link forge.toolbox.FLabel} */
     public FLabel getLblAMC() { return lblAMC; }
 
+    /** @return {@link forge.toolbox.FLabel} */
+    public FLabel getLblTSCWhite() { return lblTSCWhite; }
+    /** @return {@link forge.toolbox.FLabel} */
+    public FLabel getLblTSCBlue() { return lblTSCBlue; }
+    /** @return {@link forge.toolbox.FLabel} */
+    public FLabel getLblTSCBlack() { return lblTSCBlack; }
+    /** @return {@link forge.toolbox.FLabel} */
+    public FLabel getLblTSCRed() { return lblTSCRed; }
+    /** @return {@link forge.toolbox.FLabel} */
+    public FLabel getLblTSCGreen() { return lblTSCGreen; }
+
     //========== Other methods
 
     private FLabel buildLabel(SkinImage icon, boolean zebra) {
-        final FLabel lbl = new FLabel.Builder().text("0")
+        final FLabel lbl = new FLabel.Builder().text("0 (0%)")
                 .icon(icon).iconScaleAuto(false)
                 .fontSize(11).build();
 

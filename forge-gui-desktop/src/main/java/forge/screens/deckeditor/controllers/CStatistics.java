@@ -72,6 +72,7 @@ public enum CStatistics implements ICDoc {
         final ItemPool<PaperCard> deck = ItemPool.createFrom(ed.getDeckManager().getPool(), PaperCard.class);
 
         int total = deck.countAll();
+        int[] shardCount = calculateShards(deck);
 
         // Hack-ish: avoid /0 cases, but still populate labels :)
         if (total == 0) { total = 1; }
@@ -100,6 +101,12 @@ public enum CStatistics implements ICDoc {
         setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblCMC5(), deck, StatTypes.CMC_5.predicate, total);
         setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblCMC6(), deck, StatTypes.CMC_6.predicate, total);
 
+        VStatistics.SINGLETON_INSTANCE.getLblTSCWhite().setText("WHITE MANA SYMBOLS IN MANA COST: " + shardCount[0]);
+        VStatistics.SINGLETON_INSTANCE.getLblTSCBlue().setText("BLUE MANA SYMBOLS IN MANA COST: " + shardCount[1]);
+        VStatistics.SINGLETON_INSTANCE.getLblTSCBlack().setText("BLACK MANA SYMBOLS IN MANA COST: " + shardCount[2]);
+        VStatistics.SINGLETON_INSTANCE.getLblTSCRed().setText("RED MANA SYMBOLS IN MANA COST: " + shardCount[3]);
+        VStatistics.SINGLETON_INSTANCE.getLblTSCGreen().setText("GREEN MANA SYMBOLS IN MANA COST: " + shardCount[4]);
+
         int tmc = 0;
         for (final Entry<PaperCard, Integer> e : deck) {
             tmc += e.getKey().getRules().getManaCost().getCMC() * e.getValue();
@@ -120,5 +127,16 @@ public enum CStatistics implements ICDoc {
      */
     public static int calculatePercentage(final int x0, final int y0) {
         return (int) Math.round((double) (x0 * 100) / (double) y0);
+    }
+
+    public static int[] calculateShards(ItemPool<PaperCard> deck) {
+        int[] counts = new int[5]; // in WUBRG order
+        for (PaperCard c : deck.toFlatList()) {
+            int[] cShards = c.getRules().getManaCost().getColorShardCounts();
+            for (int i = 0; i < 5; i++) {
+                counts[i] += cShards[i];
+            }
+        }
+        return counts;
     }
 }
