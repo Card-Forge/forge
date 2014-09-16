@@ -49,7 +49,7 @@ public final class FImageUtil {
      */
     public static BufferedImage getImage(final CardStateView card) {
         BufferedImage image = ImageCache.getOriginalImage(card.getImageKey(), true);
-        final int foilIndex = card.getCard().getFoilIndex();
+        final int foilIndex = card.getFoilIndex();
         if (image != null && foilIndex > 0) { 
             image = getImageWithFoilEffect(image, foilIndex);
         }

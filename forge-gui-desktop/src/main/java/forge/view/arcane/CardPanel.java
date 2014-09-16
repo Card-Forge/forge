@@ -328,7 +328,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         // White border if card is known to have it.
         if (this.getCard() != null) {
             CardEdition ed = FModel.getMagicDb().getEditions().get(this.getCard().getSetCode());
-            if (ed != null && ed.isWhiteBorder() && this.getCard().getFoilIndex() == 0) {
+            if (ed != null && ed.isWhiteBorder() && this.getCard().getOriginal().getFoilIndex() == 0) {
                 g2d.setColor(Color.white);
                 int ins = 1;
                 g2d.fillRoundRect(this.cardXOffset + ins, this.cardYOffset + ins, this.cardWidth - ins*2, this.cardHeight - ins*2, cornerSize-ins, cornerSize-ins);
@@ -356,6 +356,81 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             return;
         }
 
+        displayIconOverlay(g);
+        drawFoilEffect(g, card, this.cardXOffset, this.cardYOffset,
+                this.cardWidth, this.cardHeight, Math.round(this.cardWidth * BLACK_BORDER_SIZE));
+    }
+
+    public static void drawFoilEffect(final Graphics g, final CardView card2, final int x, final int y, final int width, final int height, final int borderSize) {
+        if (isPreferenceEnabled(FPref.UI_OVERLAY_FOIL_EFFECT)) {
+            int foil = card2.getOriginal().getFoilIndex();
+            if (foil > 0) {
+                CardFaceSymbols.drawOther(g, String.format("foil%02d", foil),
+                        x + borderSize, y + borderSize, width - 2 * borderSize, height - 2 * borderSize);
+            }
+        }
+    }
+
+    @Override
+    public final void doLayout() {
+        final int borderSize = Math.round(this.cardWidth * CardPanel.BLACK_BORDER_SIZE);
+
+        final Point imgPos = new Point(this.cardXOffset + borderSize, this.cardYOffset + borderSize);
+        final Dimension imgSize = new Dimension(this.cardWidth - (borderSize * 2), this.cardHeight - (borderSize * 2));
+
+        this.imagePanel.setLocation(imgPos);
+        this.imagePanel.setSize(imgSize);
+
+        boolean showText = !this.imagePanel.hasImage() || !this.isAnimationPanel;
+
+        displayCardNameOverlay(showText && showCardNameOverlay(), imgSize, imgPos);
+        displayPTOverlay(showText && showCardPowerOverlay(), imgSize, imgPos);
+        displayCardIdOverlay(showText && showCardIdOverlay(), imgSize, imgPos);
+        displayIconOverlay(getGraphics());  
+    }
+
+    private void displayCardIdOverlay(boolean isVisible, Dimension imgSize, Point imgPos) {
+        if (isVisible) {
+            final Dimension idSize = this.cardIdText.getPreferredSize();
+            this.cardIdText.setSize(idSize.width, idSize.height);
+            final int idX = Math.round(imgSize.width * (24f / 480));
+            final int idY = Math.round(imgSize.height * (650f / 680)) - 8;
+            this.cardIdText.setLocation(imgPos.x + idX, imgPos.y + idY);
+        }
+        this.cardIdText.setVisible(isVisible);
+    }
+
+    private void displayPTOverlay(boolean isVisible, Dimension imgSize, Point imgPos) {
+        if (isVisible) {
+            final int rightLine = Math.round(imgSize.width * (412f / 480)) + 3;
+            // Power
+            final Dimension ptSize = this.ptText.getPreferredSize();
+            this.ptText.setSize(ptSize.width, ptSize.height);
+            final int ptX = rightLine - ptSize.width/2;
+            final int ptY = Math.round(imgSize.height * (650f / 680)) - 10;
+            this.ptText.setLocation(imgPos.x + ptX, imgPos.y + ptY);
+            // Toughness
+            final Dimension dmgSize = this.damageText.getPreferredSize();
+            this.damageText.setSize(dmgSize.width, dmgSize.height);
+            final int dmgX = rightLine - dmgSize.width / 2;
+            final int dmgY =  ptY - 16;
+            this.damageText.setLocation(imgPos.x + dmgX, imgPos.y + dmgY);
+        }
+        this.ptText.setVisible(isVisible);
+        this.damageText.setVisible(isVisible);
+    }
+
+    private void displayCardNameOverlay(boolean isVisible, Dimension imgSize, Point imgPos) {
+        if (isVisible) {
+            final int titleX = Math.round(imgSize.width * (24f / 480));
+            final int titleY = Math.round(imgSize.height * (54f / 640)) - 15;
+            final int titleH = Math.round(imgSize.height * (360f / 640));
+            this.titleText.setBounds(imgPos.x + titleX, imgPos.y + titleY + 2, imgSize.width - 2 * titleX, titleH - titleY);
+        }
+        this.titleText.setVisible(isVisible);
+    }
+
+    private void displayIconOverlay(final Graphics g) {
         if (showCardManaCostOverlay() && this.cardWidth < 200) {
             final boolean showSplitMana = card.isSplitCard();
             if (!showSplitMana) {
@@ -407,77 +482,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             CardFaceSymbols.drawSymbol("sacrifice", g, (this.cardXOffset + (this.cardWidth / 2)) - 20,
                     (this.cardYOffset + (this.cardHeight / 2)) - 20);
         }
-
-        drawFoilEffect(g, card, this.cardXOffset, this.cardYOffset,
-                this.cardWidth, this.cardHeight, Math.round(this.cardWidth * BLACK_BORDER_SIZE));
-    }
-
-    public static void drawFoilEffect(final Graphics g, final CardView card2, final int x, final int y, final int width, final int height, final int borderSize) {
-        if (isPreferenceEnabled(FPref.UI_OVERLAY_FOIL_EFFECT)) {
-            int foil = card2.getFoilIndex();
-            if (foil > 0) {
-                CardFaceSymbols.drawOther(g, String.format("foil%02d", foil),
-                        x + borderSize, y + borderSize, width - 2 * borderSize, height - 2 * borderSize);
-            }
-        }
-    }
-
-    @Override
-    public final void doLayout() {
-        final int borderSize = Math.round(this.cardWidth * CardPanel.BLACK_BORDER_SIZE);
-
-        final Point imgPos = new Point(this.cardXOffset + borderSize, this.cardYOffset + borderSize);
-        final Dimension imgSize = new Dimension(this.cardWidth - (borderSize * 2), this.cardHeight - (borderSize * 2));
-
-        this.imagePanel.setLocation(imgPos);
-        this.imagePanel.setSize(imgSize);
-
-        boolean showText = !this.imagePanel.hasImage() || !this.isAnimationPanel;
-
-        displayCardNameOverlay(showText && showCardNameOverlay(), imgSize, imgPos);
-        displayPTOverlay(showText && showCardPowerOverlay(), imgSize, imgPos);
-        displayCardIdOverlay(showText && showCardIdOverlay(), imgSize, imgPos);
-    }
-
-    private void displayCardIdOverlay(boolean isVisible, Dimension imgSize, Point imgPos) {
-        if (isVisible) {
-            final Dimension idSize = this.cardIdText.getPreferredSize();
-            this.cardIdText.setSize(idSize.width, idSize.height);
-            final int idX = Math.round(imgSize.width * (24f / 480));
-            final int idY = Math.round(imgSize.height * (650f / 680)) - 8;
-            this.cardIdText.setLocation(imgPos.x + idX, imgPos.y + idY);
-        }
-        this.cardIdText.setVisible(isVisible);
-    }
-
-    private void displayPTOverlay(boolean isVisible, Dimension imgSize, Point imgPos) {
-        if (isVisible) {
-            final int rightLine = Math.round(imgSize.width * (412f / 480)) + 3;
-            // Power
-            final Dimension ptSize = this.ptText.getPreferredSize();
-            this.ptText.setSize(ptSize.width, ptSize.height);
-            final int ptX = rightLine - ptSize.width/2;
-            final int ptY = Math.round(imgSize.height * (650f / 680)) - 10;
-            this.ptText.setLocation(imgPos.x + ptX, imgPos.y + ptY);
-            // Toughness
-            final Dimension dmgSize = this.damageText.getPreferredSize();
-            this.damageText.setSize(dmgSize.width, dmgSize.height);
-            final int dmgX = rightLine - dmgSize.width / 2;
-            final int dmgY =  ptY - 16;
-            this.damageText.setLocation(imgPos.x + dmgX, imgPos.y + dmgY);
-        }
-        this.ptText.setVisible(isVisible);
-        this.damageText.setVisible(isVisible);
-    }
-
-    private void displayCardNameOverlay(boolean isVisible, Dimension imgSize, Point imgPos) {
-        if (isVisible) {
-            final int titleX = Math.round(imgSize.width * (24f / 480));
-            final int titleY = Math.round(imgSize.height * (54f / 640)) - 15;
-            final int titleH = Math.round(imgSize.height * (360f / 640));
-            this.titleText.setBounds(imgPos.x + titleX, imgPos.y + titleY + 2, imgSize.width - 2 * titleX, titleH - titleY);
-        }
-        this.titleText.setVisible(isVisible);
     }
 
     @Override

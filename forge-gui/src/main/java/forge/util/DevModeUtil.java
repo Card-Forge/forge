@@ -46,6 +46,7 @@ import forge.util.gui.SGuiDialog;
 import forge.util.gui.SOptionPane;
 import forge.view.CardView;
 import forge.view.PlayerView;
+import forge.view.SpellAbilityView;
 
 public final class DevModeUtil {
 
@@ -437,7 +438,14 @@ public final class DevModeUtil {
                         return; // when would it happen?
                     }
 
-                    final SpellAbility sa = choices.size() == 1 ? choices.get(0) : SGuiChoose.oneOrNone(controller.getGui(), "Choose", choices);
+                    final SpellAbility sa;
+                    if (choices.size() == 1) {
+                        sa = choices.iterator().next();
+                    } else {
+                        final SpellAbilityView saView = SGuiChoose.oneOrNone(controller.getGui(), "Choose", controller.getSpellAbilityViews(choices));
+                        sa = controller.getSpellAbility(saView);
+                    }
+
                     if (sa == null) {
                         return; // happens if cancelled
                     }

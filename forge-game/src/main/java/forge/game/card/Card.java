@@ -8248,20 +8248,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
-     * 
-     * TODO Write javadoc for this method.
-     * 
-     * @return an int
-     */
-    public final int getFoil() {
-        final String foil = this.getCardForUi().getCharacteristics().getSVar("Foil");
-        if (!foil.isEmpty()) {
-            return Integer.parseInt(foil);
-        }
-        return 0;
-    }
-
-    /**
      * Assign a random foil finish depending on the card edition.
      *
      * @param remove if true, a random foil is assigned, otherwise it is

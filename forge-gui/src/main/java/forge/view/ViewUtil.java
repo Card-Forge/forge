@@ -32,7 +32,6 @@ public final class ViewUtil {
         view.setZone(c.getZone() == null ? null : c.getZone().getZoneType());
         view.setHasAltState(hasAltState);
         view.setFaceDown(c.isFaceDown());
-        view.setFoilIndex(c.getFoil()); 
         view.setCloned(c.isCloned());
         view.setFlipCard(c.isFlipCard());
         view.setFlipped(c.getCurState().equals(CardCharacteristicName.Flipped));
@@ -85,6 +84,7 @@ public final class ViewUtil {
         origView.setHasInfect(c.hasKeyword("Infect"));
         origView.setHasStorm(c.hasKeyword("Storm"));
         origView.setHasTrample(c.hasKeyword("Trample"));
+        origView.setFoilIndex(c.getCharacteristics().getFoil());
 
         final CardStateView altView = view.getAlternate();
         CardCharacteristicName altState = null;
@@ -116,8 +116,9 @@ public final class ViewUtil {
         view.setManaCost(chars.getManaCost());
         view.setPower(chars.getBaseAttack());
         view.setToughness(chars.getBaseDefense());
-        view.setLoyalty(0); // FIXME why is loyalty not a property of CardCharacteristic?
+        view.setLoyalty(0); // Q why is loyalty not a property of CardCharacteristic? A: because no alt states have a base loyalty (only candidate is Garruk Relentless).
         view.setText(chars.getOracleText());
+        view.setFoilIndex(chars.getFoil());
     }
 
     public static CardView getCardForUi(final IPaperCard pc) {

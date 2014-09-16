@@ -247,6 +247,7 @@ public class GuiDesktop implements IGuiBase {
         VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(player);
         SDisplayUtil.showTab(nextField);
         CPrompt.SINGLETON_INSTANCE.updateText();
+        CMatchUI.SINGLETON_INSTANCE.repaintCardOverlays();
     }
 
     @Override

@@ -505,8 +505,8 @@ public class CardRenderer {
             }
             if (pc.isFoil()) { //draw foil effect if needed
                 final CardView card = ViewUtil.getCardForUi(pc);
-                if (card.getFoilIndex() == 0) { //if foil finish not yet established, assign a random one
-                    card.setRandomFoil();
+                if (card.getOriginal().getFoilIndex() == 0) { //if foil finish not yet established, assign a random one
+                    card.getOriginal().setRandomFoil();
                 }
                 drawFoilEffect(g, card, x, y, w, h);
             }
@@ -686,7 +686,7 @@ public class CardRenderer {
 
     public static void drawFoilEffect(Graphics g, CardView card, float x, float y, float w, float h) {
         if (isPreferenceEnabled(FPref.UI_OVERLAY_FOIL_EFFECT)) {
-            int foil = card.getFoilIndex();
+            int foil = card.getOriginal().getFoilIndex();
             if (foil > 0) {
                 CardFaceSymbols.drawOther(g, String.format("foil%02d", foil), x, y, w, h);
             }

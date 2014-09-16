@@ -1101,8 +1101,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 IPaperCard paperCard = (IPaperCard)item;
                 if (paperCard.isFoil()) {
                     final CardView card = ViewUtil.getCardForUi(paperCard);
-                    if (card.getFoilIndex() == 0) { //if foil finish not yet established, assign a random one
-                        card.setRandomFoil();
+                    if (card.getOriginal().getFoilIndex() == 0) { //if foil finish not yet established, assign a random one
+                        card.getOriginal().setRandomFoil();
                     }
                     CardPanel.drawFoilEffect(g, card, bounds.x, bounds.y, bounds.width, bounds.height, borderSize);
                 }

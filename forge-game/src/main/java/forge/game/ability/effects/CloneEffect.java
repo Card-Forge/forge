@@ -11,6 +11,7 @@ import forge.game.card.CardCharacteristics;
 import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardUtil;
+import forge.game.event.GameEventCardStatsChanged;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
@@ -57,6 +58,7 @@ public class CloneEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         Card tgtCard = host;
         Map<String, String> origSVars = host.getSVars();
+        final Game game = sa.getActivatingPlayer().getGame();
 
         // find cloning source i.e. thing to be copied
         Card cardToCopy = null;
@@ -179,7 +181,7 @@ public class CloneEffect extends SpellAbilityEffect {
                 }
             };
 
-            final Game game = sa.getActivatingPlayer().getGame();
+            
             String duration = sa.getParam("Duration");
             if (duration.equals("UntilEndOfTurn")) {
                 game.getEndOfTurn().addUntil(unclone);
@@ -188,6 +190,7 @@ public class CloneEffect extends SpellAbilityEffect {
             }
         }
 
+        game.fireEvent(new GameEventCardStatsChanged(tgtCard));
     } // cloneResolve
 
     private void addExtraCharacteristics(final Card tgtCard, final SpellAbility sa, final Map<String, String> origSVars) {

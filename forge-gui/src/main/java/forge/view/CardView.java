@@ -34,7 +34,6 @@ public class CardView extends GameEntityView {
     private final boolean isUiDisplayable;
     private PlayerView owner, controller;
     private ZoneType zone;
-    private int foilIndex;
     private boolean isCloned, isFaceDown, isFlipCard, isFlipped, isSplitCard, isTransformed;
     private String setCode;
     private CardRarity rarity;
@@ -71,7 +70,6 @@ public class CardView extends GameEntityView {
         this.owner = null;
         this.controller = null;
         this.zone = null;
-        this.foilIndex = 0;
         this.isCloned = false;
         this.isFaceDown = false;
         this.isFlipped = false;
@@ -184,24 +182,6 @@ public class CardView extends GameEntityView {
      */
     public void setHasAltState(final boolean hasAltState) {
         this.hasAltState = hasAltState;
-    }
-
-    /**
-     * @return the foilIndex
-     */
-    public int getFoilIndex() {
-        return foilIndex;
-    }
-
-    /**
-     * @param foilIndex the foilIndex to set
-     */
-    public void setFoilIndex(final int foilIndex) {
-        this.foilIndex = foilIndex;
-    }
-
-    public void setRandomFoil() {
-        this.setFoilIndex(CardEdition.getRandomFoil(getSetCode()));
     }
 
     /**
@@ -760,6 +740,7 @@ public class CardView extends GameEntityView {
         private Map<String, String> changedColorWords,
                 changedTypes;
         private boolean hasDeathtouch, hasInfect, hasStorm, hasTrample;
+        private int foilIndex;
 
         public CardStateView() {
             this.reset();
@@ -781,6 +762,7 @@ public class CardView extends GameEntityView {
             this.hasInfect = false;
             this.hasStorm = false;
             this.hasTrample = false;
+            this.foilIndex = 0;
         }
 
         @Override
@@ -1004,6 +986,24 @@ public class CardView extends GameEntityView {
          */
         public void setHasTrample(boolean hasTrample) {
             this.hasTrample = hasTrample;
+        }
+
+        /**
+         * @return the foilIndex
+         */
+        public int getFoilIndex() {
+            return foilIndex;
+        }
+
+        /**
+         * @param foilIndex the foilIndex to set
+         */
+        public void setFoilIndex(final int foilIndex) {
+            this.foilIndex = foilIndex;
+        }
+
+        public void setRandomFoil() {
+            this.setFoilIndex(CardEdition.getRandomFoil(getSetCode()));
         }
 
         public boolean isBasicLand() {

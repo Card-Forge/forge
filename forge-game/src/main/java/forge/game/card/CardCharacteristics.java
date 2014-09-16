@@ -411,6 +411,20 @@ public class CardCharacteristics {
     }
 
     /**
+     * 
+     * TODO Write javadoc for this method.
+     * 
+     * @return an int
+     */
+    public final int getFoil() {
+        final String foil = this.getSVar("Foil");
+        if (!foil.isEmpty()) {
+            return Integer.parseInt(foil);
+        }
+        return 0;
+    }
+
+    /**
      * <p>
      * copy.
      * </p>

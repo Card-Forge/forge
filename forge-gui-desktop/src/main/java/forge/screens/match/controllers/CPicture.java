@@ -83,8 +83,8 @@ public enum CPicture implements ICDoc {
         if (item instanceof IPaperCard) {
             final IPaperCard paperCard = ((IPaperCard)item);
             final CardView c = ViewUtil.getCardForUi(paperCard);
-            if (paperCard.isFoil() && c.getFoilIndex() == 0) {
-                c.setRandomFoil();
+            if (paperCard.isFoil() && c.getOriginal().getFoilIndex() == 0) {
+                c.getOriginal().setRandomFoil();
             }
             showCard(c, false);
         } else {
