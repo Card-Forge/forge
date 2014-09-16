@@ -178,6 +178,43 @@ Barrage of Boulders
 Bring Low
 Dig Through Time
 Embodiment of Spring
+Bitter Revelation
+Feat of Resistance
+High Sentinels of Arashin
+Kheru Bloodsucker
+Kheru Dreadmaw
+Molting Snakeskin
+Raiders' Spoils
+Rakshasa's Secret
+Suspension Field
+Swarm of Bloodflies
+Taigam's Scheming
+Unyielding Krumar
+War Behemoth
+Timely Hordemate
+Wingmate Roc
+Force Away
+Lens of Clarity
+Abomination of Gudul
+Avalanche Tusker
+Icefeather Aven
+Mardu Roughrider
+Mardu Warshrieker
+War-Name Aspirant
+Blinding Spray
+Glacial Stalker
+Mardu Heart-Piercer
+Mistfire Weaver
+Mystic of the Hidden Way
+Quiet Contemplation
+Scaldkin
+Scion of Glaciers
+Set Adrift
+Singing Bell Strike
+Treasure Cruise
+Waterwhirl
+Feed the Clan
+Jeskai Charm
 
 
 ------------
