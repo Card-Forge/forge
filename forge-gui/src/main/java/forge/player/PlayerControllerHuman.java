@@ -41,8 +41,6 @@ import forge.game.GameOutcome;
 import forge.game.GameType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardShields;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
@@ -1407,27 +1405,7 @@ public class PlayerControllerHuman extends PlayerController {
 
         @Override
         public void alphaStrike() {
-            final Combat combat = game.getCombat();
-            if (!game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                    || combat == null
-                    || game.getPhaseHandler().getPlayerTurn() != player
-                    || !(getGui().getInputQueue().getInput() instanceof InputAttack)) {
-                return;
-            }
-
-            final List<Player> defenders = player.getOpponents();
-
-            for (final Card c : CardLists.filter(player.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
-                if (combat.isAttacking(c))
-                    continue;
-
-                for (final Player defender : defenders) {
-                    if (CombatUtil.canAttack(c, defender, combat)) {
-                        combat.addAttacker(c, defender);
-                        break;
-                    }
-                }
-            }
+            getInputProxy().alphaStrike();
         }
 
         /**

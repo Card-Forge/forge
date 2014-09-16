@@ -165,6 +165,13 @@ public class InputProxy implements Observer {
         }
     }
 
+    public final void alphaStrike() {
+        final Input inp = getInput();
+        if (inp instanceof InputAttack) {
+            ((InputAttack) inp).alphaStrike();
+        }
+    }
+
     /** {@inheritDoc} */
     @Override
     public final String toString() {

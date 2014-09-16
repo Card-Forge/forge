@@ -19,10 +19,12 @@ package forge.match.input;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 
 import forge.events.UiEventAttackerDeclared;
 import forge.game.GameEntity;
@@ -37,6 +39,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
+import forge.view.CardView;
 
 /**
  * <p>
@@ -124,24 +127,31 @@ public class InputAttack extends InputSyncronizedBase {
             for (Card c : attackers) {
                 undeclareAttacker(c);
             }
+        } else {
+            alphaStrike();
         }
-        else {
-            //alpha strike
-            List<Player> defenders = playerAttacks.getOpponents();
-    
-            for (Card c : CardLists.filter(playerAttacks.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
-                if (combat.isAttacking(c)) {
-                    continue;
-                }
-    
-                for (Player defender : defenders) {
-                    if (CombatUtil.canAttack(c, defender, combat)) {
-                        combat.addAttacker(c, defender);
-                        break;
-                    }
+        updateMessage();
+    }
+
+    void alphaStrike() {
+      //alpha strike
+        final List<Player> defenders = playerAttacks.getOpponents();
+        final Set<CardView> refreshCards = Sets.newHashSet();
+
+        for (Card c : CardLists.filter(playerAttacks.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
+            if (combat.isAttacking(c)) {
+                continue;
+            }
+
+            for (Player defender : defenders) {
+                if (CombatUtil.canAttack(c, defender, combat)) {
+                    combat.addAttacker(c, defender);
+                    refreshCards.add(getController().getCardView(c));
+                    break;
                 }
             }
         }
+        getGui().updateCards(refreshCards);
         updateMessage();
     }
 
