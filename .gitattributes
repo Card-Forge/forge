@@ -16711,6 +16711,7 @@ forge-gui/src/main/java/forge/interfaces/IGuiBase.java -text
 forge-gui/src/main/java/forge/interfaces/IProgressBar.java -text
 forge-gui/src/main/java/forge/interfaces/ITextField.java -text
 forge-gui/src/main/java/forge/interfaces/IWinLoseView.java -text
+forge-gui/src/main/java/forge/itemmanager/BooleanExpression.java -text
 forge-gui/src/main/java/forge/itemmanager/ColumnDef.java -text
 forge-gui/src/main/java/forge/itemmanager/GroupDef.java -text
 forge-gui/src/main/java/forge/itemmanager/IItemManager.java -text
@@ -16721,6 +16722,7 @@ forge-gui/src/main/java/forge/itemmanager/ItemManagerModel.java -text
 forge-gui/src/main/java/forge/itemmanager/SColumnUtil.java -text
 forge-gui/src/main/java/forge/itemmanager/SFilterUtil.java -text
 forge-gui/src/main/java/forge/itemmanager/SItemManagerUtil.java -text
+forge-gui/src/main/java/forge/itemmanager/StringTokenizer.java -text
 forge-gui/src/main/java/forge/itemmanager/package-info.java -text
 forge-gui/src/main/java/forge/limited/BoosterDeckBuilder.java -text
 forge-gui/src/main/java/forge/limited/BoosterDraft.java svneol=native#text/plain

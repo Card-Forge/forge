@@ -23,6 +23,36 @@ Now, when you place first or second, you will get to pick a rare in the drafted 
 Additionally, when you spend draft tokens, you no longer receive a random draft. Instead, you get to pick which block the new draft will be (but you still have to pay for it!), completely eliminating the game of chance.
 
 
+- Boolean Expressions Finished -
+Yes, again! They say the third time's the charm, and, well, it is! Boolean expressions have undergone a complete rewrite again with a slightly different method of parsing that works much better.
+Parenthesis work correctly, order is preserved, and NOT operators are applied in the correct places (and also in the correct order). This means that what you expect is what you really get!
+There's one big change to note: The operators have been shortened to one character. They are now: & | ! \
+The only conflicts the AND operator has is a few Unhinged/Unglued cards (which aren't even in Forge), but you can use the escape operator (\) to tell it you really meant to use the & (and that's assuming these cards ever get added to Forge).
+There's a couple cards with exclamation points in their names, but again, you can escape that character to search for them.
+
+A few examples of possible expressions:
+
+>   Search by type: All warriors or cats that aren't zombies, vampires, orcs, or skeletons.
+    (warrior | cat) & !(zombie | vampire | orc | skeleton)
+
+>   Search by mana cost: All non-red cards.
+    !r
+    
+>   Search by mana cost: All non-red, non-black green cards that are also either blue or white, but not only blue or white.
+    !(r|b) & (g & (u | w))
+    
+>   Search by mana cost: All red or black cards that are not also green and blue or green and white.
+    (r|b) & !(g & (u | w))
+    
+>   Search by mana cost: All cards that cost 4 colorless mana.
+    !(w | r | u | g | b) & 4
+    
+>   Search by text: All cards that have both Lifelink and Vigilance printed in the rules text.
+    lifelink & vigilance
+    
+These examples should get you started with this powerful-now-that-it's-finished feature. Enjoy!
+
+    
 -------------------------------
 New Commander 2014 branch Cards
 -------------------------------
