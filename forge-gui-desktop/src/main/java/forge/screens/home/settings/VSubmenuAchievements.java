@@ -156,7 +156,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
     private void setAchievements(AchievementCollection achievements0) {
         trophyCase.achievements = achievements0;
 
-        trophyCase.shelfCount = achievements0.getCount() % TROPHIES_PER_SHELVE;
+        trophyCase.shelfCount = (int)Math.ceil((double)achievements0.getCount() / (double)TROPHIES_PER_SHELVE);
         if (trophyCase.shelfCount < MIN_SHELVES) {
             trophyCase.shelfCount = MIN_SHELVES;
         }

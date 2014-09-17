@@ -64,7 +64,10 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
     private void setAchievements(AchievementCollection achievements0) {
         trophyCase.achievements = achievements0;
         trophyCase.selectedAchievement = null;
-        trophyCase.shelfCount = Math.max(achievements0.getCount() % TROPHIES_PER_SHELVE, MIN_SHELVES);
+        trophyCase.shelfCount = (int)Math.ceil((double)achievements0.getCount() / (double)TROPHIES_PER_SHELVE);
+        if (trophyCase.shelfCount < MIN_SHELVES) {
+            trophyCase.shelfCount = MIN_SHELVES;
+        }
         trophyCase.revalidate();
     }
 
