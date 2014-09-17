@@ -16,11 +16,12 @@ public class ConstructedAchievements extends AchievementCollection {
     //add achievements that should appear at the bottom below core achievements for each game mode
     @Override
     protected void buildBottomShelf() {
-        add("Poisoned", new Poisoned(10, 15, 25));
+        add("Poisoned", new Poisoned(15, 25));
         add("DeckedOut", new DeckedOut(8, 4));
         add("Vanguard", new VariantWins(GameType.Vanguard, 25, 50));
         add("MomirBasic", new VariantWins(GameType.MomirBasic, 25, 50));
         add("Commander", new VariantWins(GameType.Commander, 25, 50));
+        add("Blackjack", new Blackjack(30, 50));
         add("Planechase", new VariantWins(GameType.Planechase, 25, 50));
         add("Archenemy", new VariantWins(GameType.Archenemy, 25, 50));
     }

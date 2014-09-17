@@ -15,7 +15,7 @@ public class QuestAchievements extends AchievementCollection {
     //add achievements that should appear at the bottom below core achievements for each game mode
     @Override
     protected void buildBottomShelf() {
-        add("Poisoned", new Poisoned(10, 15, 25));
+        add("Poisoned", new Poisoned(15, 25));
         add("DeckedOut", new DeckedOut(8, 4));
     }
 }

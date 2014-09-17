@@ -16655,6 +16655,7 @@ forge-gui/src/main/java/forge/GuiBase.java -text
 forge-gui/src/main/java/forge/UiCommand.java svneol=native#text/plain
 forge-gui/src/main/java/forge/achievement/Achievement.java -text
 forge-gui/src/main/java/forge/achievement/AchievementCollection.java -text
+forge-gui/src/main/java/forge/achievement/Blackjack.java -text
 forge-gui/src/main/java/forge/achievement/ConstructedAchievements.java -text
 forge-gui/src/main/java/forge/achievement/DeckedOut.java -text
 forge-gui/src/main/java/forge/achievement/DraftAchievements.java -text
