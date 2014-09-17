@@ -546,7 +546,7 @@ public abstract class LocalGameView implements IGameView {
 
     private void writeSpellAbilityToView(final SpellAbility sa, final SpellAbilityView view) {
         view.setHostCard(getCardView(sa.getHostCard()));
-        view.setDescription(sa.getDescription());
+        view.setDescription(sa.toUnsuppressedString());
         view.setCanPlay(sa.canPlay());
         view.setPromptIfOnlyPossibleAbility(sa.promptIfOnlyPossibleAbility());
     }
