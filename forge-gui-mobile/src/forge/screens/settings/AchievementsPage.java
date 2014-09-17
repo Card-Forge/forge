@@ -98,7 +98,7 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
             float trophyWidth = FSkinImage.GOLD_TROPHY.getWidth() * trophyScale;
             float trophyHeight = FSkinImage.GOLD_TROPHY.getHeight() * trophyScale;
             float x = -getScrollLeft() + (w - TROPHIES_PER_SHELVE * trophyWidth) / 2;
-            float y = -getScrollTop() + FSkinImage.TROPHY_CASE_TOP.getHeight() * scale + (shelfHeight - trophyHeight - 12 * scale) / 2;
+            float y = -getScrollTop() + FSkinImage.TROPHY_CASE_TOP.getHeight() * scale + (shelfHeight - trophyHeight - 37 * scale) / 2;
 
             int trophyCount = 0;
             float startX = x;
