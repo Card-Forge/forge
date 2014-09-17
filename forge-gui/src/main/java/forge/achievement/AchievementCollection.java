@@ -26,6 +26,7 @@ import forge.util.XmlUtil;
 public abstract class AchievementCollection implements Iterable<Achievement> {
     private final Map<String, Achievement> achievements = new LinkedHashMap<String, Achievement>();
     private final String name, filename;
+    private final boolean isLimitedFormat;
 
     static {
         FileUtil.ensureDirectoryExists(ForgeConstants.ACHIEVEMENTS_DIR);
@@ -38,9 +39,10 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         cb.addItem(FModel.getAchievements(GameType.Quest));
     }
 
-    protected AchievementCollection(String name0, String filename0) {
+    protected AchievementCollection(String name0, String filename0, boolean isLimitedFormat0) {
         name = name0;
         filename = filename0;
+        isLimitedFormat = isLimitedFormat0;
         buildTopShelf();
         buildCoreShelves();
         buildBottomShelf();
@@ -52,6 +54,12 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         add("MatchWinStreak", new MatchWinStreak(10, 25, 50));
         add("TotalGameWins", new TotalGameWins(250, 500, 1000));
         add("TotalMatchWins", new TotalMatchWins(100, 250, 500));
+        if (isLimitedFormat) { //make need for speed goal more realistic for limited formats
+            add("NeedForSpeed", new NeedForSpeed(8, 6, 4));
+        }
+        else {
+            add("NeedForSpeed", new NeedForSpeed(5, 3, 1));
+        }
         add("Overkill", new Overkill(-25, -50, -100));
         add("LifeToSpare", new LifeToSpare(20, 40, 80));
         add("Hellbent", new Hellbent());

@@ -4,7 +4,7 @@ import forge.properties.ForgeConstants;
 
 public class SealedAchievements extends AchievementCollection {
     public SealedAchievements() {
-        super("Sealed Deck", ForgeConstants.ACHIEVEMENTS_DIR + "sealed.xml");
+        super("Sealed Deck", ForgeConstants.ACHIEVEMENTS_DIR + "sealed.xml", true);
     }
 
     //add achievements that should appear at the top above core achievements for each game mode

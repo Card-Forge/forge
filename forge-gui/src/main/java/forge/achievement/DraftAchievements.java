@@ -4,7 +4,7 @@ import forge.properties.ForgeConstants;
 
 public class DraftAchievements extends AchievementCollection {
     public DraftAchievements() {
-        super("Booster Draft", ForgeConstants.ACHIEVEMENTS_DIR + "draft.xml");
+        super("Booster Draft", ForgeConstants.ACHIEVEMENTS_DIR + "draft.xml", true);
     }
 
     //add achievements that should appear at the top above core achievements for each game mode
