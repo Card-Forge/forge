@@ -6,9 +6,13 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 
 import forge.achievement.Achievement;
 import forge.achievement.AchievementCollection;
@@ -53,6 +57,22 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         trophyCase.setMinimumSize(new Dimension(FSkinProp.IMG_TROPHY_CASE_SHELF.getWidth(), 0));
+        trophyCase.addMouseMotionListener(new MouseMotionListener() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                trophyCase.setSelectedAchievement(getAchievementAt(e.getX(), e.getY()));
+            }
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+            }
+        });
+        trophyCase.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                trophyCase.setSelectedAchievement(null);
+            }
+        });
 
         AchievementCollection.buildComboBox(cbCollections);
 
@@ -167,6 +187,35 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
         scroller.repaint();
     }
 
+    private Achievement getAchievementAt(float x0, float y0) {
+        float w = scroller.getWidth();
+        float trophyScale = 1.8f;
+        float shelfHeight = FSkinProp.IMG_TROPHY_CASE_SHELF.getHeight();
+        float trophyWidth = FSkinProp.IMG_GOLD_TROPHY.getWidth() * trophyScale;
+        float trophyHeight = FSkinProp.IMG_GOLD_TROPHY.getHeight() * trophyScale;
+        float x = (w - TROPHIES_PER_SHELVE * trophyWidth) / 2;
+        float y = FSkinProp.IMG_TROPHY_CASE_TOP.getHeight() + (shelfHeight - trophyHeight - 37) / 2;
+
+        int trophyCount = 0;
+        float startX = x;
+
+        for (Achievement achievement : trophyCase.achievements) {
+            if (trophyCount == TROPHIES_PER_SHELVE) {
+                trophyCount = 0;
+                x = startX;
+                y += shelfHeight;
+            }
+
+            if (x <= x0 && x0 < x + trophyWidth && y <= y0 && y0 < y + shelfHeight) {
+                return achievement;
+            }
+
+            trophyCount++;
+            x += trophyWidth;
+        }
+        return null;
+    }
+
     @SuppressWarnings("serial")
     private static class TrophyCase extends JPanel {
         private static final SkinImage imgTop = FSkin.getImage(FSkinProp.IMG_TROPHY_CASE_TOP);
@@ -181,6 +230,13 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
 
         private AchievementCollection achievements;
         private int shelfCount;
+        private Achievement selectedAchievement;
+
+        private void setSelectedAchievement(Achievement selectedAchievement0) {
+            if (selectedAchievement == selectedAchievement0) { return; }
+            selectedAchievement = selectedAchievement0;
+            repaint();
+        }
 
         @Override
         public void paintComponent(final Graphics g) {
@@ -223,6 +279,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
             w = trophySize.width;
             h = trophySize.height;
             int plateOffset = (w - trophyPlateSize.width) / 2;
+            Rectangle selectRect = null;
 
             for (Achievement achievement : achievements) {
                 if (trophyCount == TROPHIES_PER_SHELVE) {
@@ -264,6 +321,13 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
                     g2d.setFont(subFont);
                     fm = g2d.getFontMetrics();
                     g2d.drawString(label, x + plateOffset + (trophyPlateSize.width - fm.stringWidth(label)) / 2, textY);
+                }
+
+                if (achievement == selectedAchievement) {
+                    g2d.setColor(Color.GREEN);
+                    int arcSize = w / 10;
+                    g2d.drawRoundRect(x, y, w, imgShelfSize.height, arcSize, arcSize);
+                    selectRect = new Rectangle(x, y, w, imgShelfSize.height);
                 }
 
                 trophyCount++;
