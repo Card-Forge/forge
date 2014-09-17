@@ -656,11 +656,12 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
 
         this.card = cardView;
-        this.doLayout();
 
         if (!this.isShowing()) {
             return;
         }
+
+        this.doLayout();
 
         final BufferedImage image = cardView == null ? null : ImageCache.getImage(cardView, imagePanel.getWidth(), imagePanel.getHeight());
         this.updateText();

@@ -2,7 +2,7 @@ Name:Mul Daya Channelers
 ManaCost:1 G G
 Types:Creature Elf Druid Shaman
 PT:2/2
-K:Play with the top card of your library revealed.
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | AddHiddenKeyword$ You may look at this card. & Your opponent may look at this card. | Description$ Play with the top card of your library revealed.
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | TopCardOfLibraryIs$ Creature | Description$ As long as the top card of your library is a creature card, CARDNAME gets +3/+3.
 S:Mode$ Continuous | Affected$ Card.Self | AddAbility$ AnyMana | TopCardOfLibraryIs$ Land | Description$ As long as the top card of your library is a land card, CARDNAME has "{T}: Add two mana of any one color to your mana pool."
 SVar:AnyMana:AB$Mana | Cost$ T | Produced$ Any | Amount$ 2 | SpellDescription$ Add two mana of any one color to your mana pool.
