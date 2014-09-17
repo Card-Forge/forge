@@ -25,6 +25,9 @@ import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
 import forge.toolbox.*;
 import forge.toolbox.FComboBox.TextAlignment;
+import forge.toolbox.FSkin.Colors;
+import forge.toolbox.FSkin.SkinColor;
+import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinImage;
 import net.miginfocom.swing.MigLayout;
 
@@ -41,6 +44,13 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
 
     private static final int MIN_SHELVES = 3;
     private static final int TROPHIES_PER_SHELVE = 4;
+    private static final int PADDING = 5;
+    private static final SkinFont NAME_FONT = FSkin.getBoldFont(14);
+    private static final SkinFont DESC_FONT = FSkin.getFont(12);
+    private static final SkinColor TEXT_COLOR = FSkin.getColor(Colors.CLR_TEXT);
+    private static final SkinColor NOT_EARNED_COLOR = TEXT_COLOR.alphaColor(128);
+    private static final SkinColor TEXTURE_OVERLAY_COLOR = FSkin.getColor(Colors.CLR_THEME);
+    private static final SkinColor BORDER_COLOR = FSkin.getColor(Colors.CLR_BORDERS);
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
@@ -332,6 +342,92 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
 
                 trophyCount++;
                 x += w;
+            }
+
+            //draw tooltip for selected achievement if needed
+            if (selectRect != null) {
+                String subTitle = selectedAchievement.getSubTitle();
+                String sharedDesc = selectedAchievement.getSharedDesc();
+                String goldDesc = selectedAchievement.getGoldDesc();
+                String silverDesc = selectedAchievement.getSilverDesc();
+                String bronzeDesc = selectedAchievement.getBronzeDesc();
+
+                int nameHeight = NAME_FONT.getFontMetrics().getHeight();
+                int descHeight = DESC_FONT.getFontMetrics().getHeight();
+
+                w = getWidth() - 2 * PADDING;
+                h = nameHeight + PADDING * 5 / 2;
+                if (subTitle != null) {
+                    h += descHeight;
+                }
+                if (sharedDesc != null) {
+                    h += descHeight;
+                }
+                if (goldDesc != null) {
+                    h += descHeight;
+                }
+                if (silverDesc != null) {
+                    h += descHeight;
+                }
+                if (bronzeDesc != null) {
+                    h += descHeight;
+                }
+
+                x = PADDING;
+                y = selectRect.y + selectRect.height + PADDING;
+                FScrollPane scroller = (FScrollPane)getParent().getParent();
+                if (y + h - scroller.getVerticalScrollBar().getValue() > scroller.getHeight()) {
+                    if (selectRect.y - PADDING > h) {
+                        y = selectRect.y - h - PADDING;
+                    }
+                    else {
+                        y = getHeight() - h;
+                    }
+                }
+
+                FSkin.drawImage(g2d, FSkin.getImage(FSkinProp.BG_TEXTURE), x, y, w, h);
+                FSkin.setGraphicsColor(g2d, TEXTURE_OVERLAY_COLOR);
+                g2d.fillRect(x, y, w, h);
+                FSkin.setGraphicsColor(g2d, BORDER_COLOR);
+                g2d.drawRect(x, y, w, h);
+
+                x += PADDING;
+                y += PADDING;
+                w -= 2 * PADDING;
+                h -= 2 * PADDING;
+
+                FSkin.setGraphicsFont(g2d, NAME_FONT);
+                FSkin.setGraphicsColor(g2d, TEXT_COLOR);
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                fm = g2d.getFontMetrics();
+                y += fm.getAscent();
+                g2d.drawString(selectedAchievement.getDisplayName(), x, y);
+                y += nameHeight;
+
+                FSkin.setGraphicsFont(g2d, DESC_FONT);
+                if (subTitle != null) {
+                    g2d.drawString(subTitle, x, y);
+                    y += descHeight;
+                }
+                y += PADDING;
+                if (sharedDesc != null) {
+                    g2d.drawString(sharedDesc + "...", x, y);
+                    y += descHeight;
+                }
+                if (goldDesc != null) {
+                    FSkin.setGraphicsColor(g2d, selectedAchievement.earnedGold() ? TEXT_COLOR : NOT_EARNED_COLOR);
+                    g2d.drawString("(Gold) " + goldDesc, x, y);
+                    y += descHeight;
+                }
+                if (silverDesc != null) {
+                    FSkin.setGraphicsColor(g2d, selectedAchievement.earnedSilver() ? TEXT_COLOR : NOT_EARNED_COLOR);
+                    g2d.drawString("(Silver) " + silverDesc, x, y);
+                    y += descHeight;
+                }
+                if (bronzeDesc != null) {
+                    FSkin.setGraphicsColor(g2d, selectedAchievement.earnedBronze() ? TEXT_COLOR : NOT_EARNED_COLOR);
+                    g2d.drawString("(Bronze) " + bronzeDesc, x, y);
+                }
             }
 
             g2d.dispose();
