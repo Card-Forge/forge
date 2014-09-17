@@ -17,7 +17,7 @@ public class ConstructedAchievements extends AchievementCollection {
     @Override
     protected void buildBottomShelf() {
         add("Poisoned", new Poisoned(10, 15, 25));
-        add("Decked Out", new DeckedOut(8, 4));
+        add("DeckedOut", new DeckedOut(8, 4));
         add("Vanguard", new VariantWins(GameType.Vanguard, 25, 50));
         add("MomirBasic", new VariantWins(GameType.MomirBasic, 25, 50));
         add("Commander", new VariantWins(GameType.Commander, 25, 50));
