@@ -77,7 +77,7 @@ public abstract class Achievement {
         return customImage;
     }
 
-    private void updateCustomImage() {
+    public void updateCustomImage() {
         int suffix;
         if (earnedGold()) {
             suffix = 3;
@@ -94,12 +94,7 @@ public abstract class Achievement {
         }
         final String filename = ForgeConstants.CACHE_ACHIEVEMENT_PICS_DIR + imagePrefix + "_" + suffix + ".png";
         if (FileUtil.doesFileExist(filename)) {
-            FThreads.invokeInEdtNowOrLater(GuiBase.getInterface(), new Runnable() {
-                @Override
-                public void run() {
-                    customImage = GuiBase.getInterface().getUnskinnedIcon(filename);
-                }
-            });
+            customImage = GuiBase.getInterface().getUnskinnedIcon(filename);
             return;
         }
         customImage = null;
@@ -156,7 +151,12 @@ public abstract class Achievement {
             }
         }
         if (type != null) {
-            updateCustomImage();
+            FThreads.invokeInEdtNowOrLater(GuiBase.getInterface(), new Runnable() {
+                @Override
+                public void run() {
+                    updateCustomImage();
+                }
+            });
             SOptionPane.showMessageDialog(gui, "You've earned a " + type + " trophy!\n\n" +
                     displayName + " - " + desc, "Achievement Earned", image);
         }
@@ -174,7 +174,6 @@ public abstract class Achievement {
     public void loadFromXml(Element el) {
         best = getIntAttribute(el, "best");
         current = getIntAttribute(el, "current");
-        updateCustomImage();
     }
 
     private int getIntAttribute(Element el, String name) {

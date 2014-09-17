@@ -20,7 +20,9 @@ package forge.model;
 import forge.CardStorageReader;
 import forge.CardStorageReader.ProgressObserver;
 import forge.FThreads;
+import forge.GuiBase;
 import forge.StaticData;
+import forge.achievement.Achievement;
 import forge.achievement.AchievementCollection;
 import forge.achievement.ConstructedAchievements;
 import forge.achievement.DraftAchievements;
@@ -173,6 +175,20 @@ public class FModel {
         achievements.put(GameType.Draft, new DraftAchievements());
         achievements.put(GameType.Sealed, new SealedAchievements());
         achievements.put(GameType.Quest, new QuestAchievements());
+
+        //as long as custom achievement pics directory exists, queue up load for those images
+        if (FileUtil.doesFileExist(ForgeConstants.CACHE_ACHIEVEMENT_PICS_DIR)) {
+            FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
+                @Override
+                public void run() {
+                    for (AchievementCollection achievementCol : achievements.values()) {
+                        for (Achievement achievement : achievementCol) {
+                            achievement.updateCustomImage();
+                        }
+                    }
+                }
+            });
+        }
 
         //preload AI profiles
         AiProfileUtil.loadAllProfiles(ForgeConstants.AI_PROFILE_DIR);
