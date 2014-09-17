@@ -8,10 +8,10 @@ public class Blackjack extends Achievement {
     private static final int THRESHOLD = 21;
 
     public Blackjack(int silver0, int gold0) {
-        super("Blackjack",
-            String.format("Win a game by dealing %d combat damage with your commander.", THRESHOLD), THRESHOLD,
-            String.format("Win a game by dealing %d combat damage with your commander.", silver0), silver0,
-            String.format("Win a game by dealing %d combat damage with your commander.", gold0), gold0);
+        super("Blackjack", "Win a game from your commander dealing",
+            String.format("%d combat damage", THRESHOLD), THRESHOLD,
+            String.format("%d combat damage", silver0), silver0,
+            String.format("%d combat damage", gold0), gold0);
     }
 
     @Override

@@ -6,10 +6,10 @@ import forge.game.player.Player;
 
 public class DeckedOut extends Achievement {
     public DeckedOut(int silver0, int gold0) {
-        super("Decked Out",
-            "Win a game from opponent drawing into an empty library.", Integer.MAX_VALUE - 1,
-            String.format("Win a game this way by turn %d.", silver0), silver0,
-            String.format("Win a game this way by turn %d.", gold0), gold0);
+        super("Decked Out", "Win a game from opponent",
+            "drawing into an empty library", Integer.MAX_VALUE - 1,
+            String.format("drawing into an empty library by turn %d", silver0), silver0,
+            String.format("drawing into an empty library by turn %d", gold0), gold0);
         best = Integer.MAX_VALUE;
     }
 

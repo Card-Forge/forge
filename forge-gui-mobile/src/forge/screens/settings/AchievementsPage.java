@@ -263,13 +263,17 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
             //draw tooltip for selected achievement if needed
             if (selectRect != null) {
                 String subTitle = selectedAchievement.getSubTitle();
-                String goldDesc = selectedAchievement.getGoldDesc() == null ? null : "(Gold) " + selectedAchievement.getGoldDesc();
-                String silverDesc = selectedAchievement.getSilverDesc() == null ? null : "(Silver) " + selectedAchievement.getSilverDesc();
-                String bronzeDesc = selectedAchievement.getBronzeDesc() == null ? null : "(Bronze) " + selectedAchievement.getBronzeDesc();
+                String sharedDesc = selectedAchievement.getSharedDesc();
+                String goldDesc = selectedAchievement.getGoldDesc();
+                String silverDesc = selectedAchievement.getSilverDesc();
+                String bronzeDesc = selectedAchievement.getBronzeDesc();
 
                 w = getWidth() - 2 * PADDING;
                 float h = NAME_FONT.getLineHeight() + 2.5f * PADDING;
                 if (subTitle != null) {
+                    h += DESC_FONT.getLineHeight();
+                }
+                if (sharedDesc != null) {
                     h += DESC_FONT.getLineHeight();
                 }
                 if (goldDesc != null) {
@@ -308,20 +312,25 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
                     y += DESC_FONT.getLineHeight();
                 }
                 y += PADDING;
+                if (sharedDesc != null) {
+                    g.drawText(sharedDesc + "...", DESC_FONT, TEXT_COLOR,
+                            x, y, w, h, false, HAlignment.LEFT, false);
+                    y += DESC_FONT.getLineHeight();
+                }
                 if (goldDesc != null) {
-                    g.drawText(goldDesc, DESC_FONT,
+                    g.drawText("(Gold) " + goldDesc, DESC_FONT,
                             selectedAchievement.earnedGold() ? TEXT_COLOR : NOT_EARNED_COLOR,
                             x, y, w, h, false, HAlignment.LEFT, false);
                     y += DESC_FONT.getLineHeight();
                 }
                 if (silverDesc != null) {
-                    g.drawText(silverDesc, DESC_FONT,
+                    g.drawText("(Silver) " + silverDesc, DESC_FONT,
                             selectedAchievement.earnedSilver() ? TEXT_COLOR : NOT_EARNED_COLOR,
                             x, y, w, h, false, HAlignment.LEFT, false);
                     y += DESC_FONT.getLineHeight();
                 }
                 if (bronzeDesc != null) {
-                    g.drawText(bronzeDesc, DESC_FONT,
+                    g.drawText("(Bronze) " + bronzeDesc, DESC_FONT,
                             selectedAchievement.earnedBronze() ? TEXT_COLOR : NOT_EARNED_COLOR,
                             x, y, w, h, false, HAlignment.LEFT, false);
                 }

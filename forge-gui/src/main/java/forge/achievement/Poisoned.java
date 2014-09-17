@@ -8,10 +8,10 @@ public class Poisoned extends Achievement {
     private static final int THRESHOLD = 10;
 
     public Poisoned(int silver0, int gold0) {
-        super("Poisoned",
-            String.format("Win a game by giving opponent %d poison counters.", THRESHOLD), THRESHOLD,
-            String.format("Win a game by giving opponent %d poison counters.", silver0), silver0,
-            String.format("Win a game by giving opponent %d poison counters.", gold0), gold0);
+        super("Poisoned", "Win a game by giving opponent",
+            String.format("%d poison counters", THRESHOLD), THRESHOLD,
+            String.format("%d poison counters", silver0), silver0,
+            String.format("%d poison counters", gold0), gold0);
     }
 
     @Override

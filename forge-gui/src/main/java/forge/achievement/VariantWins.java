@@ -8,10 +8,10 @@ public class VariantWins extends Achievement {
     private GameType variant;
 
     public VariantWins(GameType variant0, int silver0, int gold0) {
-        super(variant0.toString(),
-            String.format("Win a %s game.", variant0.toString()), 1,
-            String.format("Win %d %s games.", silver0, variant0.toString()), silver0,
-            String.format("Win %d %s games.", gold0, variant0.toString()), gold0);
+        super(variant0.toString(), null,
+            String.format("Win a %s game", variant0.toString()), 1,
+            String.format("Win %d %s games", silver0, variant0.toString()), silver0,
+            String.format("Win %d %s games", gold0, variant0.toString()), gold0);
         variant = variant0;
     }
 

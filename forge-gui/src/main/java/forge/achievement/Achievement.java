@@ -14,18 +14,19 @@ import forge.util.FileUtil;
 import forge.util.gui.SOptionPane;
 
 public abstract class Achievement {
-    private final String displayName, bronzeDesc, silverDesc, goldDesc;
+    private final String displayName, sharedDesc, bronzeDesc, silverDesc, goldDesc;
     private final int bronzeThreshold, silverThreshold, goldThreshold;
     private final boolean checkGreaterThan;
     private String imagePrefix;
     private ISkinImage customImage;
     protected int best, current;
 
-    public Achievement(String displayName0,
+    public Achievement(String displayName0, String sharedDesc0,
             String bronzeDesc0, int bronzeThreshold0,
             String silverDesc0, int silverThreshold0,
             String goldDesc0, int goldThreshold0) {
         displayName = displayName0;
+        sharedDesc = sharedDesc0;
         bronzeDesc = bronzeDesc0;
         bronzeThreshold = bronzeThreshold0;
         silverDesc = silverDesc0;
@@ -37,6 +38,9 @@ public abstract class Achievement {
 
     public String getDisplayName() {
         return displayName;
+    }
+    public String getSharedDesc() {
+        return sharedDesc;
     }
     public String getBronzeDesc() {
         return bronzeDesc;
@@ -157,8 +161,11 @@ public abstract class Achievement {
                     updateCustomImage();
                 }
             });
+            if (sharedDesc != null) {
+                desc = sharedDesc + " " + desc;
+            }
             SOptionPane.showMessageDialog(gui, "You've earned a " + type + " trophy!\n\n" +
-                    displayName + " - " + desc, "Achievement Earned", image);
+                    displayName + "\n" + desc + ".", "Achievement Earned", image);
         }
     }
 

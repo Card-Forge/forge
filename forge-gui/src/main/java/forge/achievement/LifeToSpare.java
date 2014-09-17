@@ -5,10 +5,10 @@ import forge.game.player.Player;
 
 public class LifeToSpare extends Achievement {
     public LifeToSpare(int bronze0, int silver0, int gold0) {
-        super("Life to Spare",
-            String.format("Win game with %d life more than you started with.", bronze0), bronze0,
-            String.format("Win game with %d life more than you started with.", silver0), silver0,
-            String.format("Win game with %d life more than you started with.", gold0), gold0);
+        super("Life to Spare", "Win a game with",
+            String.format("%d life more than you started with", bronze0), bronze0,
+            String.format("%d life more than you started with", silver0), silver0,
+            String.format("%d life more than you started with", gold0), gold0);
     }
 
     @Override

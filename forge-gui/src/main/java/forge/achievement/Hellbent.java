@@ -6,10 +6,10 @@ import forge.game.zone.ZoneType;
 
 public class Hellbent extends Achievement {
     public Hellbent() {
-        super("Hellbent",
-                "Win game with no cards in hand.", 1,
-                "Win game with no cards in hand or library.", 2,
-                "Win game with no cards in hand, library, or graveyard.", 3);
+        super("Hellbent", "Win a game with no cards",
+                "in your hand", 1,
+                "in your hand or library", 2,
+                "in your hand, library, or graveyard", 3);
     }
 
     @Override
