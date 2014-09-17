@@ -3372,6 +3372,7 @@ public class CardFactoryUtil {
         final Trigger prowessTrigger = TriggerHandler.parseTrigger(trigProwess.toString(), card, true);
         for (int i = 0; i < prowess; i++) {
             card.addTrigger(prowessTrigger);
+            card.setSVar("BuffedBy", "Card.nonCreature+nonLand"); // for the AI
         } // Prowess
     }
 
