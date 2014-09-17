@@ -235,8 +235,8 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
                 if (customImage != null) {
                     Dimension customImageSize = customImage.getSizeForPaint(g2d);
                     FSkin.drawImage(g2d, customImage,
-                            x + (w - customImageSize.width) / 2,
-                            y + h - customImageSize.height + 8, //TODO: Remove when gap below images removed
+                            x + (w - customImageSize.width) / 2 + 1, //TODO: Remove +1 when image centered properly
+                            y + h - customImageSize.height + 8, //TODO: Remove +8 when gap below images removed
                             customImageSize.width, customImageSize.height);
                 }
                 else if (achievement.earnedGold()) {
