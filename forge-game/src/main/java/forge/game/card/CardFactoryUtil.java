@@ -899,6 +899,20 @@ public class CardFactoryUtil {
             return highest;
         }
 
+        if (l[0].startsWith("GreatestToughness_")) {
+            System.out.println("GREAT!");
+            final String restriction = l[0].substring(18);
+            final String[] rest = restriction.split(",");
+            List<Card> list = CardLists.getValidCards(cc.getGame().getCardsIn(ZoneType.Battlefield), rest, cc, c);
+            int highest = 0;
+            for (final Card crd : list) {
+                if (crd.getNetDefense() > highest) {
+                    highest = crd.getNetDefense();
+                }
+            }
+            return highest;
+        }
+
         if (l[0].startsWith("HighestCMC_")) {
             final String restriction = l[0].substring(11);
             final String[] rest = restriction.split(",");
