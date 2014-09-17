@@ -2,6 +2,7 @@ package forge.achievement;
 
 import org.w3c.dom.Element;
 
+import forge.FThreads;
 import forge.GuiBase;
 import forge.assets.FSkinProp;
 import forge.assets.ISkinImage;
@@ -91,9 +92,14 @@ public abstract class Achievement {
             customImage = null;
             return;
         }
-        String filename = ForgeConstants.CACHE_ACHIEVEMENT_PICS_DIR + imagePrefix + "_" + suffix + ".png";
+        final String filename = ForgeConstants.CACHE_ACHIEVEMENT_PICS_DIR + imagePrefix + "_" + suffix + ".png";
         if (FileUtil.doesFileExist(filename)) {
-            customImage = GuiBase.getInterface().getUnskinnedIcon(filename);
+            FThreads.invokeInEdtNowOrLater(GuiBase.getInterface(), new Runnable() {
+                @Override
+                public void run() {
+                    customImage = GuiBase.getInterface().getUnskinnedIcon(filename);
+                }
+            });
             return;
         }
         customImage = null;

@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import forge.Graphics;
 import forge.achievement.Achievement;
 import forge.achievement.AchievementCollection;
+import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -184,7 +185,7 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
             FSkinFont subTitleFont = FSkinFont.forHeight(subTitleHeight);
 
             float plateY = y + topHeight + shelfHeight - plateHeight;
-            float trophyStartY = y + topHeight + (shelfHeight - trophyHeight - 12 * scale) / 2;
+            float trophyStartY = y + topHeight + (shelfHeight - trophyHeight - 37 * scale) / 2;
             float plateOffset = (trophyWidth - plateWidth) / 2;
 
             if (y + topHeight > 0) {
@@ -222,7 +223,16 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
                 }
 
                 if (plateY + plateHeight > 0) {
-                    if (achievement.earnedGold()) {
+                    FImage customImage = (FImage)achievement.getCustomImage();
+                    if (customImage != null) {
+                        float customImageWidth = customImage.getWidth() * scale;
+                        float customImageHeight = customImage.getHeight() * scale;
+                        g.drawImage(customImage,
+                                x + (trophyWidth - customImageWidth) / 2 + 1f * scale, //TODO: Remove +1 when image centered properly
+                                y + trophyHeight - customImageHeight + 8f * scale, //TODO: Remove +8 when gap below images removed
+                                customImageWidth, customImageHeight);
+                    }
+                    else if (achievement.earnedGold()) {
                         g.drawImage(FSkinImage.GOLD_TROPHY, x, y, trophyWidth, trophyHeight);
                     }
                     else if (achievement.earnedSilver()) {
