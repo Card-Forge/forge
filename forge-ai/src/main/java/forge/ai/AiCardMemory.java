@@ -42,7 +42,7 @@ public class AiCardMemory {
 
     private HashSet<Card> memMandatoryAttackers = new HashSet<Card>();
     private HashSet<Card> memHeldManaSources = new HashSet<Card>();
-    private HashSet<Card> memMovedEquipment = new HashSet<Card>();
+    private HashSet<Card> memAttachedThisTurn = new HashSet<Card>();
     //private HashSet<Card> memRevealedCards = new HashSet<Card>();
 
     /**
@@ -53,7 +53,7 @@ public class AiCardMemory {
     public enum MemorySet {
         MANDATORY_ATTACKERS,
         HELD_MANA_SOURCES, 
-        MOVED_EQUIPMENT,
+        ATTACHED_THIS_TURN,
         //REVEALED_CARDS // stub, not linked to AI code yet
     }
 
@@ -63,8 +63,8 @@ public class AiCardMemory {
                 return memMandatoryAttackers;
             case HELD_MANA_SOURCES:
                 return memHeldManaSources;
-            case MOVED_EQUIPMENT:
-                return memMovedEquipment;
+            case ATTACHED_THIS_TURN:
+                return memAttachedThisTurn;
             //case REVEALED_CARDS:
             //    return memRevealedCards;
             default:
@@ -235,6 +235,6 @@ public class AiCardMemory {
     public void clearAllRemembered() {
         clearMemorySet(MemorySet.MANDATORY_ATTACKERS);
         clearMemorySet(MemorySet.HELD_MANA_SOURCES);
-        clearMemorySet(MemorySet.MOVED_EQUIPMENT);
+        clearMemorySet(MemorySet.ATTACHED_THIS_TURN);
     }
 }
