@@ -197,9 +197,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         Player activator = sa.getActivatingPlayer();
-        if (activator == null) {
-            return true;
-        }
 
         Zone cardZone = activator.getGame().getZoneOf(c);
         if (cardZone == null || !cardZone.is(this.getZone())) {
