@@ -97,7 +97,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private Map<Card, Map<CounterType, Integer>> countersAddedBy = new TreeMap<Card, Map<CounterType, Integer>>();
     private ArrayList<String> extrinsicKeyword = new ArrayList<String>();
     // Hidden keywords won't be displayed on the card
-    private final ArrayList<String> hiddenExtrinsicKeyword = new ArrayList<String>();
+    private final CopyOnWriteArrayList<String> hiddenExtrinsicKeyword = new CopyOnWriteArrayList<String>();
 
     // which equipment cards are equipping this card?
     private ArrayList<Card> equippedBy = new ArrayList<Card>();
