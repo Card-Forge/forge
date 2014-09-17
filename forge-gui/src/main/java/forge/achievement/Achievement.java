@@ -2,16 +2,22 @@ package forge.achievement;
 
 import org.w3c.dom.Element;
 
+import forge.GuiBase;
 import forge.assets.FSkinProp;
+import forge.assets.ISkinImage;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.interfaces.IGuiBase;
+import forge.properties.ForgeConstants;
+import forge.util.FileUtil;
 import forge.util.gui.SOptionPane;
 
 public abstract class Achievement {
     private final String displayName, bronzeDesc, silverDesc, goldDesc;
     private final int bronzeThreshold, silverThreshold, goldThreshold;
     private final boolean checkGreaterThan;
+    private String imagePrefix;
+    private ISkinImage customImage;
     protected int best, current;
 
     public Achievement(String displayName0,
@@ -60,6 +66,37 @@ public abstract class Achievement {
             return best >= bronzeThreshold;
         }
         return best <= bronzeThreshold;
+    }
+
+    public void setImagePrefix(String imagePrefix0) {
+        imagePrefix = imagePrefix0;
+    }
+
+    public ISkinImage getCustomImage() {
+        return customImage;
+    }
+
+    private void updateCustomImage() {
+        int suffix;
+        if (earnedGold()) {
+            suffix = 3;
+        }
+        else if (earnedSilver()) {
+            suffix = 2;
+        }
+        else if (earnedBronze()) {
+            suffix = 1;
+        }
+        else {
+            customImage = null;
+            return;
+        }
+        String filename = ForgeConstants.CACHE_ACHIEVEMENT_PICS_DIR + imagePrefix + "_" + suffix + ".png";
+        if (FileUtil.doesFileExist(filename)) {
+            customImage = GuiBase.getInterface().getUnskinnedIcon(filename);
+            return;
+        }
+        customImage = null;
     }
 
     protected abstract int evaluate(Player player, Game game);
@@ -113,6 +150,7 @@ public abstract class Achievement {
             }
         }
         if (type != null) {
+            updateCustomImage();
             SOptionPane.showMessageDialog(gui, "You've earned a " + type + " trophy!\n\n" +
                     displayName + " - " + desc, "Achievement Earned", image);
         }
@@ -130,6 +168,7 @@ public abstract class Achievement {
     public void loadFromXml(Element el) {
         best = getIntAttribute(el, "best");
         current = getIntAttribute(el, "current");
+        updateCustomImage();
     }
 
     private int getIntAttribute(Element el, String name) {

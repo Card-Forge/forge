@@ -121,7 +121,8 @@ public final class ForgeConstants {
         CACHE_BOOSTERBOX_PICS_DIR     = PICS_DIR + "boosterboxes/";
         CACHE_PRECON_PICS_DIR         = PICS_DIR + "precons/";
         CACHE_TOURNAMENTPACK_PICS_DIR = PICS_DIR + "tournamentpacks/";
-        QUEST_CARD_PRICE_FILE         = DB_DIR + "all-prices.txt";;
+        CACHE_ACHIEVEMENT_PICS_DIR    = PICS_DIR + "achievements/";
+        QUEST_CARD_PRICE_FILE         = DB_DIR + "all-prices.txt";
 
         PROFILE_DIRS = new String[] {
             USER_DIR,
@@ -256,6 +257,7 @@ public final class ForgeConstants {
     public static String CACHE_BOOSTERBOX_PICS_DIR;
     public static String CACHE_PRECON_PICS_DIR;
     public static String CACHE_TOURNAMENTPACK_PICS_DIR;
+    public static String CACHE_ACHIEVEMENT_PICS_DIR;
     public static String QUEST_CARD_PRICE_FILE;
 
     public static String[] PROFILE_DIRS;

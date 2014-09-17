@@ -231,7 +231,15 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
                     plateY += dy;
                     x = startX;
                 }
-                if (achievement.earnedGold()) {
+                SkinImage customImage = (SkinImage)achievement.getCustomImage();
+                if (customImage != null) {
+                    Dimension customImageSize = customImage.getSizeForPaint(g2d);
+                    FSkin.drawImage(g2d, customImage,
+                            x + (w - customImageSize.width) / 2,
+                            y + h - customImageSize.height + 8, //TODO: Remove when gap below images removed
+                            customImageSize.width, customImageSize.height);
+                }
+                else if (achievement.earnedGold()) {
                     FSkin.drawImage(g2d, imgGoldTrophy, x, y, w, h);
                 }
                 else if (achievement.earnedSilver()) {

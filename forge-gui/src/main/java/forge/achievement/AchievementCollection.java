@@ -68,8 +68,9 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
     protected abstract void buildTopShelf();
     protected abstract void buildBottomShelf();
 
-    protected void add(String name, Achievement achievement) {
-        achievements.put(name, achievement);
+    protected void add(String key, Achievement achievement) {
+        achievement.setImagePrefix(key.toLowerCase());
+        achievements.put(key, achievement);
     }
 
     public void updateAll(IGuiBase gui, Player player) {
