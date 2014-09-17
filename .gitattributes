@@ -1132,6 +1132,7 @@ forge-gui-mobile/src/forge/animation/GifDecoder.java -text
 forge-gui-mobile/src/forge/assets/AssetsDownloader.java -text
 forge-gui-mobile/src/forge/assets/BitmapFontWriter.java -text
 forge-gui-mobile/src/forge/assets/FBufferedImage.java -text
+forge-gui-mobile/src/forge/assets/FDelayLoadImage.java -text
 forge-gui-mobile/src/forge/assets/FImage.java -text
 forge-gui-mobile/src/forge/assets/FImageComplex.java -text
 forge-gui-mobile/src/forge/assets/FSkin.java -text

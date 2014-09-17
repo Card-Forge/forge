@@ -2,7 +2,6 @@ package forge.achievement;
 
 import org.w3c.dom.Element;
 
-import forge.FThreads;
 import forge.GuiBase;
 import forge.assets.FSkinProp;
 import forge.assets.ISkinImage;
@@ -81,7 +80,7 @@ public abstract class Achievement {
         return customImage;
     }
 
-    public void updateCustomImage() {
+    private void updateCustomImage() {
         int suffix;
         if (earnedGold()) {
             suffix = 3;
@@ -155,12 +154,7 @@ public abstract class Achievement {
             }
         }
         if (type != null) {
-            FThreads.invokeInEdtNowOrLater(GuiBase.getInterface(), new Runnable() {
-                @Override
-                public void run() {
-                    updateCustomImage();
-                }
-            });
+            updateCustomImage();
             if (sharedDesc != null) {
                 desc = sharedDesc + " " + desc;
             }
@@ -181,6 +175,7 @@ public abstract class Achievement {
     public void loadFromXml(Element el) {
         best = getIntAttribute(el, "best");
         current = getIntAttribute(el, "current");
+        updateCustomImage();
     }
 
     private int getIntAttribute(Element el, String name) {

@@ -13,6 +13,7 @@ import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.Texture;
 import com.google.common.base.Function;
 
+import forge.assets.FDelayLoadImage;
 import forge.assets.FSkin;
 import forge.assets.FSkinProp;
 import forge.assets.FTextureImage;
@@ -106,7 +107,12 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public ISkinImage getUnskinnedIcon(String path) {
-        return new FTextureImage(new Texture(Gdx.files.absolute(path)));
+        if (FThreads.isGuiThread(this)) {
+            return new FTextureImage(new Texture(Gdx.files.absolute(path)));
+        }
+
+        //use a delay load image to avoid an error if called from background thread
+        return new FDelayLoadImage(path);
     }
 
     @Override
