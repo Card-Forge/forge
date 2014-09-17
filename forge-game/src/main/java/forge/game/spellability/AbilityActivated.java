@@ -124,8 +124,8 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
     	//consider activated abilities possible always and simply disable if not currently playable
     	//the exception is to consider them not possible if there's a zone or activator restriction that's not met
 
-        // FIXME: Something is potentially leading to hard-to-reproducing conditions where this method is getting called
-        // with no activator set for the SA. Most likely deserves a better fix in the future.
+        // FIXME: Something is potentially leading to hard-to-reproduce conditions where this method is getting called
+        // with no activator set for the SA (by the AI). Most likely deserves a better fix in the future.
         if (this.getActivatingPlayer() == null) {
             this.setActivatingPlayer(this.getHostCard().getController());
             System.out.println(this.getHostCard().getName() + " Did not have activator set in AbilityActivated.isPossible");
