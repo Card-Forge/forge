@@ -12,6 +12,7 @@ public class NeedForSpeed extends Achievement {
         best = Integer.MAX_VALUE; //initialize best to max value so any
     }
 
+    @Override
     public boolean needSave() {
         return best != Integer.MAX_VALUE;
     }
