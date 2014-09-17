@@ -117,8 +117,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      *            a {@link forge.game.card.Card} object.
      */
     public CardPanel(final CardView card0) {
-        this.card = card0;
-
         this.setBackground(Color.black);
         this.setOpaque(false);
 
@@ -126,6 +124,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         createPTOverlay();
         createCardIdOverlay();
         createScaleImagePanel();
+
+        this.setCard(card0);
     }
 
     private void createScaleImagePanel() {
@@ -159,7 +159,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         this.ptText.setForeground(Color.white);
         this.ptText.setGlow(Color.black);
         this.add(this.ptText);
-        this.updatePTOverlay();
+
         // Damage
         this.damageText = new OutlinedLabel();
         this.damageText.setFont(this.getFont().deriveFont(Font.BOLD, 15f));
@@ -210,6 +210,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      *            a {@link forge.view.arcane.CardPanel} object.
      */
     public final void setImage(final CardPanel panel) {
+        if (panel == this) {
+            throw new IllegalArgumentException("Can't pass 'this' as argument to CardPanel#setImage");
+        }
         synchronized (panel.imagePanel) {
             if (panel.imagePanel.hasImage()) {
                 this.setImage(panel.imagePanel.getSrcImage());
@@ -657,14 +660,13 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         this.card = cardView;
 
-        if (!this.isShowing()) {
+        if (this.imagePanel == null) {
             return;
         }
 
-        this.doLayout();
-
         final BufferedImage image = cardView == null ? null : ImageCache.getImage(cardView, imagePanel.getWidth(), imagePanel.getHeight());
         this.updateText();
+        this.updatePTOverlay();
 
         this.setImage(image);
     }
