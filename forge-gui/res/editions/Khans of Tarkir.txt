@@ -187,7 +187,7 @@ R Flying Crane Technique
 U Highspire Mantis
 U Icefeather Aven
 R Ivorytusk Fortress
-R Jeskai Ascendency
+R Jeskai Ascendancy
 U Jeskai Charm
 R Kheru Lich Lord
 U Kin-Tree Invocation
