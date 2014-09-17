@@ -17,6 +17,7 @@
  */
 package forge.quest.bazaar;
 
+import forge.quest.QuestController;
 import forge.quest.data.QuestAssets;
 
 /**
@@ -39,8 +40,8 @@ public class QuestItemCharmOfVigor extends QuestItemBasic {
 
     /** {@inheritDoc} */
     @Override
-    public final boolean isAvailableForPurchase(QuestAssets qA) {
-        return super.isAvailableForPurchase(qA);
+    public final boolean isAvailableForPurchase(QuestAssets qA, QuestController qCtrl) {
+        return super.isAvailableForPurchase(qA, qCtrl);
     }
 
 

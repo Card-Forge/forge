@@ -144,7 +144,14 @@ public class ViewStall extends JPanel {
         }
 
         final QuestAssets qS = qData.getAssets();
-        this.lblStats.setText("Credits: " + qS.getCredits() + "         Life: " + qS.getLife(qData.getMode()));
+        StringBuilder sb = new StringBuilder();
+        sb.append("Credits: ");
+        sb.append(qS.getCredits());
+        sb.append("         Life: ");
+        sb.append(qS.getLife(qData.getMode()));
+        sb.append("         Level: ");
+        sb.append(qData.getLevel());
+        this.lblStats.setText(sb.toString());
 
         final List<IQuestBazaarItem> items = qData.getBazaar().getItems(qData, this.stall.getName());
 

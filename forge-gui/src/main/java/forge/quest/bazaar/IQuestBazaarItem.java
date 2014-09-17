@@ -17,6 +17,7 @@
  */
 package forge.quest.bazaar;
 
+import forge.quest.QuestController;
 import forge.quest.data.QuestAssets;
 
 /**
@@ -78,7 +79,7 @@ public interface IQuestBazaarItem extends Comparable<Object> {
      *         <code>false</code> if the item should not be displayed in store
      *         since, for example, prerequisites are not met
      */
-    boolean isAvailableForPurchase(QuestAssets questAssets);
+    boolean isAvailableForPurchase(QuestAssets questAssets, QuestController qCtrl);
 
     /**
      * Executed when the item is bought.

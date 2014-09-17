@@ -22,6 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
 import forge.assets.FSkinProp;
+import forge.quest.QuestController;
 import forge.quest.data.QuestAssets;
 
 /**
@@ -118,11 +119,13 @@ public class QuestItemBasic implements IQuestBazaarItem {
      * isAvailableForPurchase.
      * </p>
      *
+     *
      * @param qA the q a
+     * @param qCtrl
      * @return a boolean.
      */
     @Override
-    public boolean isAvailableForPurchase(final QuestAssets qA) {
+    public boolean isAvailableForPurchase(final QuestAssets qA, QuestController qCtrl) {
         return qA.getItemLevel(itemType) < maxLevel;
     }
 

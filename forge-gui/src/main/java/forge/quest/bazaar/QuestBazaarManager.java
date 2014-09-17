@@ -164,7 +164,7 @@ public class QuestBazaarManager {
 
         QuestAssets qA = FModel.getQuest().getAssets();
         for (final IQuestBazaarItem purchasable : itemsOnStalls.get(stallName)) {
-            if (purchasable.isAvailableForPurchase(qA)) {
+            if (purchasable.isAvailableForPurchase(qA, qCtrl)) {
                 ret.add(purchasable);
             }
         }
