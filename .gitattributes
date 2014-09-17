@@ -16656,6 +16656,7 @@ forge-gui/src/main/java/forge/UiCommand.java svneol=native#text/plain
 forge-gui/src/main/java/forge/achievement/Achievement.java -text
 forge-gui/src/main/java/forge/achievement/AchievementCollection.java -text
 forge-gui/src/main/java/forge/achievement/ConstructedAchievements.java -text
+forge-gui/src/main/java/forge/achievement/DeckedOut.java -text
 forge-gui/src/main/java/forge/achievement/DraftAchievements.java -text
 forge-gui/src/main/java/forge/achievement/GameWinStreak.java -text
 forge-gui/src/main/java/forge/achievement/Hellbent.java -text

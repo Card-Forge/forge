@@ -14,7 +14,7 @@ public class NeedForSpeed extends Achievement {
 
     @Override
     public boolean needSave() {
-        return best != Integer.MAX_VALUE;
+        return best < Integer.MAX_VALUE;
     }
 
     @Override
