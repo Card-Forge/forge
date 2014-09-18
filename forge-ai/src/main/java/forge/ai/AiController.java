@@ -651,7 +651,7 @@ public class AiController {
                 continue;
             }
             sa.setActivatingPlayer(player);
-            if (sa.canPlay() && !ComputerUtil.castPermanentInMain1(player, sa) && sa.getHostCard() != null && !sa.getHostCard().getType().contains("Land") && ComputerUtilCost.canPayCost(sa, player)) {
+            if (!ComputerUtil.castPermanentInMain1(player, sa) && sa.getHostCard() != null && !sa.getHostCard().getType().contains("Land") && ComputerUtilCost.canPayCost(sa, player)) {
                 return sa;
             }
         }
