@@ -651,7 +651,7 @@ public class AiController {
                 continue;
             }
             sa.setActivatingPlayer(player);
-            if (!ComputerUtil.castPermanentInMain1(player, sa) && sa.getHostCard() != null && !sa.getHostCard().getType().contains("Land") && ComputerUtilCost.canPayCost(sa, player)) {
+            if (!ComputerUtil.castPermanentInMain1(player, sa) && sa.getHostCard() != null && !sa.getHostCard().getType().contains("Land") && ComputerUtilCost.canPayCost(sa, player) && canPlaySa(sa, PhaseType.MAIN2) == AiPlayDecision.WillPlay) {
                 return sa;
             }
         }
@@ -681,9 +681,14 @@ public class AiController {
     }
     
     public AiPlayDecision canPlaySa(SpellAbility sa) {
+        return canPlaySa(sa, null);
+    }
+
+    public AiPlayDecision canPlaySa(SpellAbility sa, PhaseType inPhase) {
         final Card card = sa.getHostCard();
+        final PhaseType phase = inPhase == null ? game.getPhaseHandler().getPhase() : inPhase;
         if ( sa instanceof WrappedAbility ) {
-            return canPlaySa(((WrappedAbility) sa).getWrappedAbility());
+            return canPlaySa(((WrappedAbility) sa).getWrappedAbility(), inPhase);
         }
         if( sa.getApi() != null ) {
             boolean canPlay = SpellApiToAi.Converter.get(sa.getApi()).canPlayAIWithSubs(player, sa);
@@ -729,7 +734,7 @@ public class AiController {
             // Prevent the computer from summoning Ball Lightning type creatures after attacking
             if (card.hasSVar("EndOfTurnLeavePlay")
                     && (game.getPhaseHandler().isPlayerTurn(player.getOpponent())
-                         || game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS))) {
+                         || phase.isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS))) {
                 return AiPlayDecision.AnotherTime;
             }
 
@@ -739,7 +744,7 @@ public class AiController {
             }
             
             // Wait for Main2 if possible
-            if (game.getPhaseHandler().is(PhaseType.MAIN1)
+            if (phase == PhaseType.MAIN1
                     && game.getPhaseHandler().isPlayerTurn(player)
                     && player.getManaPool().totalMana() <= 0
                     && !ComputerUtil.castPermanentInMain1(player, sa)) {
@@ -751,7 +756,7 @@ public class AiController {
                     && (player.isUnlimitedHandSize() || player.getCardsIn(ZoneType.Hand).size() <= player.getMaxHandSize())
                     && player.getManaPool().totalMana() <= 0
                     && (game.getPhaseHandler().isPlayerTurn(player)
-                            || game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                            || phase.isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && !card.hasETBTrigger())
                     && !ComputerUtil.castPermanentInMain1(player, sa)) {
                 return AiPlayDecision.AnotherTime;
