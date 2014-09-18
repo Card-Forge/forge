@@ -71,6 +71,7 @@ import forge.sound.IAudioMusic;
 import forge.toolbox.FButton;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
+import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.MouseTriggerEvent;
 import forge.toolbox.special.PhaseLabel;
 import forge.util.BuildInfo;
@@ -144,6 +145,11 @@ public class GuiDesktop implements IGuiBase {
         FSkin.drawImage(g, backgroundImage, 0, 0, background.getWidth(), background.getHeight());
         FSkin.drawImage(g, overlayImage, (background.getWidth() - overlay.getWidth()) / 2, (background.getHeight() - overlay.getHeight()) / 2, overlay.getWidth(), overlay.getHeight());
         return new FSkin.UnskinnedIcon(image, opacity);
+    }
+
+    @Override
+    public void showImageDialog(ISkinImage image, String message, String title) {
+        FOptionPane.showMessageDialog(message, title, (SkinImage)image);
     }
 
     @Override

@@ -15,6 +15,7 @@ import com.google.common.base.Function;
 
 import forge.assets.FBufferedImage;
 import forge.assets.FDelayLoadImage;
+import forge.assets.FImage;
 import forge.assets.FSkin;
 import forge.assets.FSkinProp;
 import forge.assets.FTextureImage;
@@ -125,6 +126,16 @@ public class GuiMobile implements IGuiBase {
                 g.drawImage(FSkin.getImages().get(overlay), (background.getWidth() - overlay.getWidth()) / 2, (background.getHeight() - overlay.getHeight()) / 2, overlay.getWidth(), overlay.getHeight());
             }
         };
+    }
+
+    @Override
+    public void showImageDialog(final ISkinImage image, final String message, final String title) {
+        new WaitCallback<Void>() {
+            @Override
+            public void run() {
+                FOptionPane.showMessageDialog(message, title, (FImage)image);
+            }
+        }.invokeAndWait();
     }
 
     @Override

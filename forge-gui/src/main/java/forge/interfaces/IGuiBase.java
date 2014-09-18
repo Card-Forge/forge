@@ -41,6 +41,7 @@ public interface IGuiBase {
     ISkinImage getUnskinnedIcon(String path);
     ISkinImage createLayeredImage(FSkinProp background, FSkinProp overlay, float opacity);
     void showBugReportDialog(String title, String text, boolean showExitAppBtn);
+    void showImageDialog(ISkinImage image, String message, String title);
     int showOptionDialog(String message, String title, FSkinProp icon, String[] options, int defaultOption);
     int showCardOptionDialog(CardView card, String message, String title, FSkinProp icon, String[] options, int defaultOption);
     <T> T showInputDialog(String message, String title, FSkinProp icon, T initialInput, T[] inputOptions);

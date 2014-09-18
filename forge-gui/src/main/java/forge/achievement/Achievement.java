@@ -8,7 +8,6 @@ import forge.assets.ISkinImage;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.interfaces.IGuiBase;
-import forge.util.gui.SOptionPane;
 
 public abstract class Achievement {
     private final String displayName, sharedDesc, commonDesc, uncommonDesc, rareDesc, mythicDesc;
@@ -147,12 +146,23 @@ public abstract class Achievement {
         }
         else if (current >= best) { return; }
 
+        boolean hadEarnedSpecial = earnedSpecial();
         boolean hadEarnedMythic = earnedMythic();
         boolean hadEarnedRare = earnedRare();
         boolean hadEarnedUncommon = earnedUncommon();
         boolean hadEarnedCommon = earnedCommon();
 
         best = current;
+
+        if (earnedSpecial()) {
+            if (!hadEarnedSpecial) {
+                if (image != null) { //only update image if it has already been initialized
+                    updateTrophyImage();
+                }
+                gui.showImageDialog(image, displayName + "\n" + sharedDesc + ".", "Achievement Earned");
+            }
+            return;
+        }
 
         String type = null;
         String desc = null;
@@ -181,14 +191,11 @@ public abstract class Achievement {
             }
         }
         if (type != null) {
-            if (image != null) { //only update image if it has already been initialized
-                updateTrophyImage();
-            }
+            updateTrophyImage();
             if (sharedDesc != null) {
                 desc = sharedDesc + " " + desc;
             }
-            SOptionPane.showMessageDialog(gui, "You've earned a " + type + " trophy!\n\n" +
-                    displayName + "\n" + desc + ".", "Achievement Earned", overlayImage);
+            gui.showImageDialog(image, displayName + " (" + type + ")\n" + desc + ".", "Achievement Earned");
         }
     }
 

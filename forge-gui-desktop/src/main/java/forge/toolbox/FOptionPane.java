@@ -5,6 +5,7 @@ import forge.toolbox.FSkin.SkinImage;
 import forge.view.FDialog;
 
 import javax.swing.*;
+import javax.swing.text.StyleConstants;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -137,21 +138,41 @@ public class FOptionPane extends FDialog {
         int padding = 10;
         int x = padding;
         int gapAboveButtons = padding * 3 / 2;
-        int gapBottom = comp == null ? gapAboveButtons: padding;
+        int gapBottom = comp == null ? gapAboveButtons : padding;
+        FLabel centeredLabel = null;
+        FTextPane centeredPrompt = null;
 
         if (icon != null) {
-            FLabel lblIcon = new FLabel.Builder().icon(icon).build();
-            int labelWidth = icon.getWidth();
-            this.add(lblIcon, "x " + (x - 3) + ", ay top, w " + labelWidth + ", h " + icon.getHeight() + ", gapbottom " + gapBottom);
-            x += labelWidth;
+            if (icon.getWidth() < 100) {
+                FLabel lblIcon = new FLabel.Builder().icon(icon).build();
+                this.add(lblIcon, "x " + (x - 3) + ", ay top, w " + icon.getWidth() + ", h " + icon.getHeight() + ", gapbottom " + gapBottom);
+                x += icon.getWidth();
+            }
+            else {
+                FLabel lblIcon = new FLabel.Builder().icon(icon).iconInBackground(true).iconScaleFactor(1).iconAlignX(SwingConstants.CENTER).build();
+                lblIcon.setMinimumSize(new Dimension(icon.getWidth() * 2, icon.getHeight()));
+                this.add(lblIcon, "x " + x + ", ay top, wrap, gapbottom " + gapBottom);
+                centeredLabel = lblIcon;
+            }
         }
         if (message != null) {
-            FTextArea prompt = new FTextArea(message);
-            prompt.setFont(FSkin.getFont(14));
-            prompt.setAutoSize(true);
-            Dimension parentSize = JOptionPane.getRootFrame().getSize();
-            prompt.setMaximumSize(new Dimension(parentSize.width / 2, parentSize.height - 100));
-            this.add(prompt, "x " + x + ", ay top, wrap, gaptop " + (icon == null ? 0 : 7) + ", gapbottom " + gapBottom);
+            if (centeredLabel == null) {
+                FTextArea prompt = new FTextArea(message);
+                prompt.setFont(FSkin.getFont(14));
+                prompt.setAutoSize(true);
+                Dimension parentSize = JOptionPane.getRootFrame().getSize();
+                prompt.setMaximumSize(new Dimension(parentSize.width / 2, parentSize.height - 100));
+                this.add(prompt, "x " + x + ", ay top, wrap, gaptop " + (icon == null ? 0 : 7) + ", gapbottom " + gapBottom);
+            }
+            else {
+                FTextPane prompt = new FTextPane(message);
+                prompt.setFont(FSkin.getFont(14));
+                prompt.setTextAlignment(StyleConstants.ALIGN_CENTER);
+                Dimension parentSize = JOptionPane.getRootFrame().getSize();
+                prompt.setMaximumSize(new Dimension(parentSize.width / 2, parentSize.height - 100));
+                this.add(prompt, "x " + x + ", ay top, wrap, gapbottom " + gapBottom);
+                centeredPrompt = prompt;
+            }
             x = padding;
         }
         if (comp != null) {
@@ -231,6 +252,11 @@ public class FOptionPane extends FDialog {
             }
             this.add(btn, "x " + x + ", w " + buttonWidth + ", h " + buttonHeight);
             x += dx;
+        }
+
+        if (centeredLabel != null) {
+            centeredLabel.setPreferredSize(new Dimension(width - 2 * padding, centeredLabel.getMinimumSize().height));
+            centeredPrompt.setPreferredSize(new Dimension(width - 2 * padding, centeredPrompt.getPreferredSize().height));
         }
 
         this.setSize(width, this.getHeight() + buttonHeight); //resize dialog again to account for buttons

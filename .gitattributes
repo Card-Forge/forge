@@ -1011,6 +1011,7 @@ forge-gui-desktop/src/main/java/forge/toolbox/FTabbedPane.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/FTextArea.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/FTextEditor.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/FTextField.java -text
+forge-gui-desktop/src/main/java/forge/toolbox/FTextPane.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/FUndoManager.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/IDisposable.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/JXButtonPanel.java -text
