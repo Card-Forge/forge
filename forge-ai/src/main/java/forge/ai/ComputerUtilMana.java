@@ -661,9 +661,8 @@ public class ComputerUtilMana {
             return false;
         }
 
-        // If the spell ability being considered is high priority, ignore mana source reservations.
-        // TODO: currently the only "low priority" spell abilities are +X/+X pumps.
-        if (!(sa.getApi() == ApiType.Pump && (sa.hasParam("NumAtk") || (sa.hasParam("NumDef"))))) {
+        // LowPriorityAI SVar should be set to 'low' elsewhere to indicate that it is a low priority spell ability
+        if (!sa.getSVar("LowPriorityAI").equals("")) {
             return false;
         }
 

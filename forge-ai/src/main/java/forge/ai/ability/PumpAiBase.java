@@ -443,16 +443,15 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             return false;
         }
 
-        // TODO: This currently does not work optimally. Ideally needs at least prediction of whether the future spell is actually playable in main 2.
         // Determine if some mana sources need to be held for the future spell to cast in Main 2 before determining whether to pump.
-        //AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        //if (aic.getCardMemory().isMemorySetEmpty(AiCardMemory.MemorySet.HELD_MANA_SOURCES)) {
+        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+        if (aic.getCardMemory().isMemorySetEmpty(AiCardMemory.MemorySet.HELD_MANA_SOURCES)) {
             // only hold mana sources once
-        //    SpellAbility futureSpell = aic.predictSpellToCastInMain2(ApiType.Pump);
-        //    if (futureSpell != null && futureSpell.getHostCard() != null) {
-        //        aic.reserveManaSourcesForMain2(futureSpell);
-        //    }
-        //}
+            SpellAbility futureSpell = aic.predictSpellToCastInMain2(ApiType.Pump);
+            if (futureSpell != null && futureSpell.getHostCard() != null) {
+                aic.reserveManaSourcesForMain2(futureSpell);
+            }
+        }
 
         // will the creature attack (only relevant for sorcery speed)?
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
