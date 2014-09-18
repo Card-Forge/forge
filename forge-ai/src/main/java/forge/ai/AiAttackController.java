@@ -983,9 +983,7 @@ public class AiAttackController {
                 numberOfPossibleBlockers += 1;
                 if (isWorthLessThanAllKillers && ComputerUtilCombat.canDestroyAttacker(ai, attacker, defender, combat, false)
                         && !(attacker.hasKeyword("Undying") && attacker.getCounters(CounterType.P1P1) == 0)) {
-                    canBeKilledByOne = true; // there is a single creature on
-                                             // the battlefield that can kill
-                                             // the creature
+                    canBeKilledByOne = true; // there is a single creature on the battlefield that can kill the creature
                     // see if the defending creature is of higher or lower
                     // value. We don't want to attack only to lose value
                     if (isWorthLessThanAllKillers && !attacker.hasSVar("SacMe")
@@ -1027,7 +1025,9 @@ public class AiAttackController {
             return true;
         }
 
-        if (numberOfPossibleBlockers > 1 || (numberOfPossibleBlockers == 1 && CombatUtil.canAttackerBeBlockedWithAmount(attacker, 1, combat))) {
+        if (numberOfPossibleBlockers > 2 
+        		|| (numberOfPossibleBlockers >= 1 && CombatUtil.canAttackerBeBlockedWithAmount(attacker, 1, combat))
+        		|| (numberOfPossibleBlockers == 2 && CombatUtil.canAttackerBeBlockedWithAmount(attacker, 2, combat))) {
             canBeBlocked = true;
         }
         /*System.out.println(attacker + " canBeKilledByOne: " + canBeKilledByOne + " canKillAll: "
