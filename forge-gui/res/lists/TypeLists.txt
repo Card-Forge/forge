@@ -157,6 +157,7 @@ Moonfolk
 Mutant
 Myr
 Mystic
+Naga
 Nautilus
 Nephilim
 Nightmare

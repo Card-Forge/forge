@@ -81,3 +81,4 @@ THS: 36 Boosters
 BNG: 36 Boosters
 JOU: 36 Boosters
 M15: 36 Boosters
+KTK: 36 Boosters

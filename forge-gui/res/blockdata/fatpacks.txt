@@ -52,4 +52,5 @@ M14: 9 Boosters, 80 BasicLands
 THS: 9 Boosters, 80 BasicLands 
 BNG: 9 Boosters, 80 BasicLands THS
 JOU: 9 Boosters, 80 BasicLands THS
-M15: 9 Boosters, 80 BasicLands 
+M15: 9 Boosters, 80 BasicLands
+KTK: 9 Boosters, 80 BasicLands 
