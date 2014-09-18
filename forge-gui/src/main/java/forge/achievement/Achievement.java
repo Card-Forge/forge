@@ -2,105 +2,146 @@ package forge.achievement;
 
 import org.w3c.dom.Element;
 
-import forge.GuiBase;
 import forge.assets.FSkinProp;
-import forge.assets.ISkinImage;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.interfaces.IGuiBase;
-import forge.properties.ForgeConstants;
-import forge.util.FileUtil;
 import forge.util.gui.SOptionPane;
 
 public abstract class Achievement {
-    private final String displayName, sharedDesc, bronzeDesc, silverDesc, goldDesc;
-    private final int bronzeThreshold, silverThreshold, goldThreshold;
+    private final String displayName, sharedDesc, commonDesc, uncommonDesc, rareDesc, mythicDesc;
+    private final int commonThreshold, uncommonThreshold, rareThreshold, mythicThreshold;
     private final boolean checkGreaterThan;
-    private String imagePrefix;
-    private ISkinImage customImage;
+    private final TrophyDisplay trophyDisplay;
     protected int best, current;
 
-    public Achievement(String displayName0, String sharedDesc0,
-            String bronzeDesc0, int bronzeThreshold0,
-            String silverDesc0, int silverThreshold0,
-            String goldDesc0, int goldThreshold0) {
+    public class TrophyDisplay {
+        private final FSkinProp overlay;
+        private FSkinProp background;
+        private float backgroundOpacity, overlayOpacity;
+
+        private TrophyDisplay(FSkinProp overlay0) {
+            overlay = overlay0;
+            background = mythicThreshold == commonThreshold ? FSkinProp.IMG_SPECIAL_TROPHY : FSkinProp.IMG_COMMON_TROPHY;
+            backgroundOpacity = 0.25f; //fade out heavily if achievement not earned
+            overlayOpacity = backgroundOpacity;
+        }
+
+        public FSkinProp getOverlay() {
+            return overlay;
+        }
+
+        public FSkinProp getBackground() {
+            return background;
+        }
+
+        public float getBackgroundOpacity() {
+            return backgroundOpacity;
+        }
+
+        public float getOverlayOpacity() {
+            return overlayOpacity;
+        }
+
+        private void update() {
+            if (earnedSpecial()) {
+                overlayOpacity = 1;
+                backgroundOpacity = 1;
+            }
+            else if (earnedMythic()) {
+                background = FSkinProp.IMG_MYTHIC_TROPHY;
+                overlayOpacity = 1;
+                backgroundOpacity = 1;
+            }
+            else if (earnedRare()) {
+                background = FSkinProp.IMG_RARE_TROPHY;
+                overlayOpacity = 1;
+                backgroundOpacity = 1;
+            }
+            else if (earnedUncommon()) {
+                background = FSkinProp.IMG_UNCOMMON_TROPHY;
+                overlayOpacity = 1; //0.8f; //TODO: fade out slightly until rare earned
+                backgroundOpacity = 1;
+            }
+            else if (earnedCommon()) {
+                overlayOpacity = 1; //0.6f; //TODO: fade out a bit more until uncommon earned
+                backgroundOpacity = 1;
+            }
+        }
+    }
+
+    //use this constructor for special achievements without tiers
+    protected Achievement(String displayName0, String description0, FSkinProp image0) {
+        this(displayName0, description0, null, 1, null, 1, null, 1, null, 1, image0);
+    }
+    //use this constructor for regular tiered achievements
+    protected Achievement(String displayName0, String sharedDesc0,
+            String commonDesc0, int commonThreshold0,
+            String uncommonDesc0, int uncommonThreshold0,
+            String rareDesc0, int rareThreshold0,
+            String mythicDesc0, int mythicThreshold0,
+            FSkinProp image0) {
         displayName = displayName0;
         sharedDesc = sharedDesc0;
-        bronzeDesc = bronzeDesc0;
-        bronzeThreshold = bronzeThreshold0;
-        silverDesc = silverDesc0;
-        silverThreshold = silverThreshold0;
-        goldDesc = goldDesc0;
-        goldThreshold = goldThreshold0;
-        checkGreaterThan = goldThreshold0 > silverThreshold0;
+        commonDesc = commonDesc0;
+        commonThreshold = commonThreshold0;
+        uncommonDesc = uncommonDesc0;
+        uncommonThreshold = uncommonThreshold0;
+        rareDesc = rareDesc0;
+        rareThreshold = rareThreshold0;
+        mythicDesc = mythicDesc0;
+        mythicThreshold = mythicThreshold0;
+        trophyDisplay = new TrophyDisplay(image0);
+        checkGreaterThan = rareThreshold0 > uncommonThreshold0;
     }
 
     public String getDisplayName() {
         return displayName;
     }
+    public TrophyDisplay getTrophyDisplay() {
+        return trophyDisplay;
+    }
     public String getSharedDesc() {
         return sharedDesc;
     }
-    public String getBronzeDesc() {
-        return bronzeDesc;
+    public String getCommonDesc() {
+        return commonDesc;
     }
-    public String getSilverDesc() {
-        return silverDesc;
+    public String getUncommonDesc() {
+        return uncommonDesc;
     }
-    public String getGoldDesc() {
-        return goldDesc;
+    public String getRareDesc() {
+        return rareDesc;
     }
-    public int getBest() {
-        return best;
+    public String getMythicDesc() {
+        return mythicDesc;
     }
-    public boolean earnedGold() {
+    private boolean earnedSpecial() {
+        return (mythicThreshold == commonThreshold && best > 1);
+    }
+    public boolean earnedMythic() {
         if (checkGreaterThan) {
-            return best >= goldThreshold;
+            return best >= mythicThreshold;
         }
-        return best <= goldThreshold;
+        return best <= mythicThreshold;
     }
-    public boolean earnedSilver() {
+    public boolean earnedRare() {
         if (checkGreaterThan) {
-            return best >= silverThreshold;
+            return best >= rareThreshold;
         }
-        return best <= silverThreshold;
+        return best <= rareThreshold;
     }
-    public boolean earnedBronze() {
+    public boolean earnedUncommon() {
         if (checkGreaterThan) {
-            return best >= bronzeThreshold;
+            return best >= uncommonThreshold;
         }
-        return best <= bronzeThreshold;
+        return best <= uncommonThreshold;
     }
-
-    public void setImagePrefix(String imagePrefix0) {
-        imagePrefix = imagePrefix0;
-    }
-
-    public ISkinImage getCustomImage() {
-        return customImage;
-    }
-
-    private void updateCustomImage() {
-        int suffix;
-        if (earnedGold()) {
-            suffix = 3;
+    public boolean earnedCommon() {
+        if (checkGreaterThan) {
+            return best >= commonThreshold;
         }
-        else if (earnedSilver()) {
-            suffix = 2;
-        }
-        else if (earnedBronze()) {
-            suffix = 1;
-        }
-        else {
-            customImage = null;
-            return;
-        }
-        final String filename = ForgeConstants.CACHE_ACHIEVEMENT_PICS_DIR + imagePrefix + "_" + suffix + ".png";
-        if (FileUtil.doesFileExist(filename)) {
-            customImage = GuiBase.getInterface().getUnskinnedIcon(filename);
-            return;
-        }
-        customImage = null;
+        return best <= commonThreshold;
     }
 
     protected abstract int evaluate(Player player, Game game);
@@ -123,43 +164,46 @@ public abstract class Achievement {
         }
         else if (current >= best) { return; }
 
-        boolean hadEarnedGold = earnedGold();
-        boolean hadEarnedSilver = earnedSilver();
-        boolean hadEarnedBronze = earnedBronze();
+        boolean hadEarnedMythic = earnedMythic();
+        boolean hadEarnedRare = earnedRare();
+        boolean hadEarnedUncommon = earnedUncommon();
+        boolean hadEarnedCommon = earnedCommon();
 
         best = current;
 
         String type = null;
-        FSkinProp image = null;
         String desc = null;
-        if (earnedGold()) {
-            if (!hadEarnedGold) {
-                type = "Gold";
-                image = FSkinProp.IMG_GOLD_TROPHY;
-                desc = goldDesc;
+        if (earnedMythic()) {
+            if (!hadEarnedMythic) {
+                type = "Mythic";
+                desc = mythicDesc;
             }
         }
-        else if (earnedSilver()) {
-            if (!hadEarnedSilver) {
-                type = "Silver";
-                image = FSkinProp.IMG_SILVER_TROPHY;
-                desc = silverDesc;
+        else if (earnedRare()) {
+            if (!hadEarnedRare) {
+                type = "Rare";
+                desc = rareDesc;
             }
         }
-        else if (earnedBronze()) {
-            if (!hadEarnedBronze) {
-                type = "Bronze";
-                image = FSkinProp.IMG_BRONZE_TROPHY;
-                desc = bronzeDesc;
+        else if (earnedUncommon()) {
+            if (!hadEarnedUncommon) {
+                type = "Uncommon";
+                desc = uncommonDesc;
+            }
+        }
+        else if (earnedCommon()) {
+            if (!hadEarnedCommon) {
+                type = "Common";
+                desc = commonDesc;
             }
         }
         if (type != null) {
-            updateCustomImage();
+            trophyDisplay.update();
             if (sharedDesc != null) {
                 desc = sharedDesc + " " + desc;
             }
             SOptionPane.showMessageDialog(gui, "You've earned a " + type + " trophy!\n\n" +
-                    displayName + "\n" + desc + ".", "Achievement Earned", image);
+                    displayName + "\n" + desc + ".", "Achievement Earned", trophyDisplay.getOverlay());
         }
     }
 
@@ -175,7 +219,7 @@ public abstract class Achievement {
     public void loadFromXml(Element el) {
         best = getIntAttribute(el, "best");
         current = getIntAttribute(el, "current");
-        updateCustomImage();
+        trophyDisplay.update();
     }
 
     private int getIntAttribute(Element el, String name) {

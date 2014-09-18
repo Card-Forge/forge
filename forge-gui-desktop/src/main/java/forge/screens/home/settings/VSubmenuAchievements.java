@@ -1,6 +1,8 @@
 package forge.screens.home.settings;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Composite;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -16,6 +18,7 @@ import java.awt.event.MouseMotionListener;
 
 import forge.achievement.Achievement;
 import forge.achievement.AchievementCollection;
+import forge.achievement.Achievement.TrophyDisplay;
 import forge.assets.FSkinProp;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -45,6 +48,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
     private static final int MIN_SHELVES = 3;
     private static final int TROPHIES_PER_SHELVE = 4;
     private static final int PADDING = 5;
+    private static final int TROPHY_PADDING = 45;
     private static final SkinFont NAME_FONT = FSkin.getBoldFont(14);
     private static final SkinFont DESC_FONT = FSkin.getFont(12);
     private static final SkinColor TEXT_COLOR = FSkin.getColor(Colors.CLR_TEXT);
@@ -66,7 +70,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
     private VSubmenuAchievements() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
-        trophyCase.setMinimumSize(new Dimension(FSkinProp.IMG_TROPHY_CASE_SHELF.getWidth(), 0));
+        trophyCase.setMinimumSize(new Dimension(FSkinProp.IMG_TROPHY_SHELF.getWidth(), 0));
         trophyCase.addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseMoved(MouseEvent e) {
@@ -191,7 +195,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
             trophyCase.shelfCount = MIN_SHELVES;
         }
 
-        trophyCase.setMinimumSize(new Dimension(trophyCase.getMinimumSize().width, (FSkinProp.IMG_TROPHY_CASE_TOP.getHeight() + trophyCase.shelfCount * FSkinProp.IMG_TROPHY_CASE_SHELF.getHeight())));
+        trophyCase.setMinimumSize(new Dimension(trophyCase.getMinimumSize().width, (FSkinProp.IMG_TROPHY_CASE_TOP.getHeight() + trophyCase.shelfCount * FSkinProp.IMG_TROPHY_SHELF.getHeight())));
         trophyCase.setPreferredSize(trophyCase.getMinimumSize());
         scroller.revalidate();
         scroller.repaint();
@@ -199,12 +203,10 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
 
     private Achievement getAchievementAt(float x0, float y0) {
         float w = scroller.getWidth();
-        float trophyScale = 1.8f;
-        float shelfHeight = FSkinProp.IMG_TROPHY_CASE_SHELF.getHeight();
-        float trophyWidth = FSkinProp.IMG_GOLD_TROPHY.getWidth() * trophyScale;
-        float trophyHeight = FSkinProp.IMG_GOLD_TROPHY.getHeight() * trophyScale;
+        float shelfHeight = FSkinProp.IMG_TROPHY_SHELF.getHeight();
+        float trophyWidth = FSkinProp.IMG_COMMON_TROPHY.getWidth() + TROPHY_PADDING;
         float x = (w - TROPHIES_PER_SHELVE * trophyWidth) / 2;
-        float y = FSkinProp.IMG_TROPHY_CASE_TOP.getHeight() + (shelfHeight - trophyHeight - 37) / 2;
+        float y = FSkinProp.IMG_TROPHY_CASE_TOP.getHeight();
 
         int trophyCount = 0;
         float startX = x;
@@ -229,10 +231,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
     @SuppressWarnings("serial")
     private static class TrophyCase extends JPanel {
         private static final SkinImage imgTop = FSkin.getImage(FSkinProp.IMG_TROPHY_CASE_TOP);
-        private static final SkinImage imgShelf = FSkin.getImage(FSkinProp.IMG_TROPHY_CASE_SHELF);
-        private static final SkinImage imgBronzeTrophy = FSkin.getImage(FSkinProp.IMG_BRONZE_TROPHY).scale(1.8);
-        private static final SkinImage imgSilverTrophy = FSkin.getImage(FSkinProp.IMG_SILVER_TROPHY).scale(1.8);
-        private static final SkinImage imgGoldTrophy = FSkin.getImage(FSkinProp.IMG_GOLD_TROPHY).scale(1.8);
+        private static final SkinImage imgShelf = FSkin.getImage(FSkinProp.IMG_TROPHY_SHELF);
         private static final SkinImage imgTrophyPlate = FSkin.getImage(FSkinProp.IMG_TROPHY_PLATE);
         private static final Font font = FSkin.getFixedFont(14).deriveFont(Font.BOLD);
         private static final Font subFont = FSkin.getFixedFont(12);
@@ -273,21 +272,23 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
                 y += h;
             }
 
-            Dimension trophySize = imgBronzeTrophy.getSizeForPaint(g2d);
+            int trophyImageWidth = FSkinProp.IMG_COMMON_TROPHY.getWidth();
+            int trophyWidth = trophyImageWidth + TROPHY_PADDING;
+            int trophyHeight = FSkinProp.IMG_COMMON_TROPHY.getHeight();
             Dimension trophyPlateSize = imgTrophyPlate.getSizeForPaint(g2d);
+            int plateY = imgTopSize.height + h - trophyPlateSize.height;
 
-            x += (w - TROPHIES_PER_SHELVE * trophySize.width) / 2;
-            y = imgTopSize.height + (h - trophySize.height - 37) / 2;
+            x += (w - TROPHIES_PER_SHELVE * trophyWidth) / 2;
+            y = plateY - trophyHeight;
 
             FontMetrics fm;
             String label;
             int trophyCount = 0;
             int startX = x;
-            int plateY = imgTopSize.height + imgShelfSize.height - trophyPlateSize.height;
             int textY;
             int dy = h;
-            w = trophySize.width;
-            h = trophySize.height;
+            w = trophyWidth;
+            h = trophyHeight;
             int plateOffset = (w - trophyPlateSize.width) / 2;
             Rectangle selectRect = null;
 
@@ -298,22 +299,20 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
                     plateY += dy;
                     x = startX;
                 }
-                SkinImage customImage = (SkinImage)achievement.getCustomImage();
-                if (customImage != null) {
-                    Dimension customImageSize = customImage.getSizeForPaint(g2d);
-                    FSkin.drawImage(g2d, customImage,
-                            x + (w - customImageSize.width) / 2 + 1, //TODO: Remove +1 when image centered properly
-                            y + h - customImageSize.height + 8, //TODO: Remove +8 when gap below images removed
-                            customImageSize.width, customImageSize.height);
+                TrophyDisplay display = achievement.getTrophyDisplay();
+                Composite oldComp = g2d.getComposite();
+                boolean needAlpha = display.getBackgroundOpacity() < 1;
+                if (needAlpha) {
+                    g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, display.getBackgroundOpacity()));
                 }
-                else if (achievement.earnedGold()) {
-                    FSkin.drawImage(g2d, imgGoldTrophy, x, y, w, h);
+                FSkin.drawImage(g2d, FSkin.getImage(display.getBackground()), x + TROPHY_PADDING / 2, y, trophyImageWidth, h);
+                needAlpha = display.getOverlayOpacity() < 1;
+                if (needAlpha) {
+                    g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, display.getOverlayOpacity()));
                 }
-                else if (achievement.earnedSilver()) {
-                    FSkin.drawImage(g2d, imgSilverTrophy, x, y, w, h);
-                }
-                else if (achievement.earnedBronze()) {
-                    FSkin.drawImage(g2d, imgBronzeTrophy, x, y, w, h);
+                FSkin.drawImage(g2d, FSkin.getImage(display.getOverlay()), x + TROPHY_PADDING / 2, y, trophyImageWidth, h);
+                if (needAlpha) {
+                    g2d.setComposite(oldComp);
                 }
                 FSkin.drawImage(g2d, imgTrophyPlate, x + plateOffset, plateY, trophyPlateSize.width, trophyPlateSize.height);
 
@@ -336,8 +335,9 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
                 if (achievement == selectedAchievement) {
                     g2d.setColor(Color.GREEN);
                     int arcSize = w / 10;
-                    g2d.drawRoundRect(x, y, w, imgShelfSize.height, arcSize, arcSize);
-                    selectRect = new Rectangle(x, y, w, imgShelfSize.height);
+                    int selY = y - imgShelfSize.height + trophyHeight + trophyPlateSize.height;
+                    g2d.drawRoundRect(x, selY, w, imgShelfSize.height, arcSize, arcSize);
+                    selectRect = new Rectangle(x, selY, w, imgShelfSize.height);
                 }
 
                 trophyCount++;
@@ -348,9 +348,10 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
             if (selectRect != null) {
                 String subTitle = selectedAchievement.getSubTitle();
                 String sharedDesc = selectedAchievement.getSharedDesc();
-                String goldDesc = selectedAchievement.getGoldDesc();
-                String silverDesc = selectedAchievement.getSilverDesc();
-                String bronzeDesc = selectedAchievement.getBronzeDesc();
+                String mythicDesc = selectedAchievement.getMythicDesc();
+                String rareDesc = selectedAchievement.getRareDesc();
+                String uncommonDesc = selectedAchievement.getUncommonDesc();
+                String commonDesc = selectedAchievement.getCommonDesc();
 
                 int nameHeight = NAME_FONT.getFontMetrics().getHeight();
                 int descHeight = DESC_FONT.getFontMetrics().getHeight();
@@ -363,13 +364,16 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
                 if (sharedDesc != null) {
                     h += descHeight;
                 }
-                if (goldDesc != null) {
+                if (mythicDesc != null) {
                     h += descHeight;
                 }
-                if (silverDesc != null) {
+                if (rareDesc != null) {
                     h += descHeight;
                 }
-                if (bronzeDesc != null) {
+                if (uncommonDesc != null) {
+                    h += descHeight;
+                }
+                if (commonDesc != null) {
                     h += descHeight;
                 }
 
@@ -414,19 +418,24 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
                     g2d.drawString(sharedDesc + "...", x, y);
                     y += descHeight;
                 }
-                if (goldDesc != null) {
-                    FSkin.setGraphicsColor(g2d, selectedAchievement.earnedGold() ? TEXT_COLOR : NOT_EARNED_COLOR);
-                    g2d.drawString("(Gold) " + goldDesc, x, y);
+                if (mythicDesc != null) {
+                    FSkin.setGraphicsColor(g2d, selectedAchievement.earnedMythic() ? TEXT_COLOR : NOT_EARNED_COLOR);
+                    g2d.drawString("(Mythic) " + mythicDesc, x, y);
                     y += descHeight;
                 }
-                if (silverDesc != null) {
-                    FSkin.setGraphicsColor(g2d, selectedAchievement.earnedSilver() ? TEXT_COLOR : NOT_EARNED_COLOR);
-                    g2d.drawString("(Silver) " + silverDesc, x, y);
+                if (rareDesc != null) {
+                    FSkin.setGraphicsColor(g2d, selectedAchievement.earnedRare() ? TEXT_COLOR : NOT_EARNED_COLOR);
+                    g2d.drawString("(Rare) " + rareDesc, x, y);
                     y += descHeight;
                 }
-                if (bronzeDesc != null) {
-                    FSkin.setGraphicsColor(g2d, selectedAchievement.earnedBronze() ? TEXT_COLOR : NOT_EARNED_COLOR);
-                    g2d.drawString("(Bronze) " + bronzeDesc, x, y);
+                if (uncommonDesc != null) {
+                    FSkin.setGraphicsColor(g2d, selectedAchievement.earnedUncommon() ? TEXT_COLOR : NOT_EARNED_COLOR);
+                    g2d.drawString("(Uncommon) " + uncommonDesc, x, y);
+                    y += descHeight;
+                }
+                if (commonDesc != null) {
+                    FSkin.setGraphicsColor(g2d, selectedAchievement.earnedCommon() ? TEXT_COLOR : NOT_EARNED_COLOR);
+                    g2d.drawString("(Common) " + commonDesc, x, y);
                 }
             }
 

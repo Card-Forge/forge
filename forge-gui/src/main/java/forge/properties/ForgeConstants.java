@@ -99,7 +99,6 @@ public final class ForgeConstants {
         DECK_PREFS_FILE      = USER_PREFS_DIR + "deck.preferences";
         QUEST_PREFS_FILE     = USER_PREFS_DIR + "quest.preferences";
         ITEM_VIEW_PREFS_FILE = USER_PREFS_DIR + "item_view.preferences";
-        ACHIEVEMENTS_FILE    = USER_PREFS_DIR + "achievements.xml";
 
         _DEFAULTS_DIR = RES_DIR + "defaults/";
         NO_CARD_FILE  = _DEFAULTS_DIR + "no_card.jpg";
@@ -121,7 +120,6 @@ public final class ForgeConstants {
         CACHE_BOOSTERBOX_PICS_DIR     = PICS_DIR + "boosterboxes/";
         CACHE_PRECON_PICS_DIR         = PICS_DIR + "precons/";
         CACHE_TOURNAMENTPACK_PICS_DIR = PICS_DIR + "tournamentpacks/";
-        CACHE_ACHIEVEMENT_PICS_DIR    = PICS_DIR + "achievements/";
         QUEST_CARD_PRICE_FILE         = DB_DIR + "all-prices.txt";
 
         PROFILE_DIRS = new String[] {
@@ -195,17 +193,17 @@ public final class ForgeConstants {
     public static String SKINS_DIR;
     public static String DEFAULT_SKINS_DIR;
     //don't associate these skin files with a directory since skin directory will be determined later
-    public static final String SPRITE_ICONS_FILE      = "sprite_icons.png"; 
-    public static final String SPRITE_FOILS_FILE      = "sprite_foils.png";
-    public static final String SPRITE_OLD_FOILS_FILE  = "sprite_old_foils.png";
-    public static final String SPRITE_AVATARS_FILE    = "sprite_avatars.png";
-    public static final String FONT_FILE              = "font1.ttf";
-    public static final String SPLASH_BG_FILE         = "bg_splash.png";
-    public static final String MATCH_BG_FILE          = "bg_match.jpg";
-    public static final String TEXTURE_BG_FILE        = "bg_texture.jpg";
-    public static final String DRAFT_DECK_IMG_FILE    = "bg_draft_deck.png";
-    public static final String TROPHY_CASE_TOP_FILE   = "bg_trophy_case_top.png";
-    public static final String TROPHY_CASE_SHELF_FILE = "bg_trophy_case_shelf.png";
+    public static final String SPRITE_ICONS_FILE     = "sprite_icons.png"; 
+    public static final String SPRITE_FOILS_FILE     = "sprite_foils.png";
+    public static final String SPRITE_OLD_FOILS_FILE = "sprite_old_foils.png";
+    public static final String SPRITE_AVATARS_FILE   = "sprite_avatars.png";
+    public static final String TROPHIES_FILE         = "sprite_trophies.png";
+    public static final String TROPHY_SHELF_FILE     = "bg_trophy_shelf.png";
+    public static final String FONT_FILE             = "font1.ttf";
+    public static final String SPLASH_BG_FILE        = "bg_splash.png";
+    public static final String MATCH_BG_FILE         = "bg_match.jpg";
+    public static final String TEXTURE_BG_FILE       = "bg_texture.jpg";
+    public static final String DRAFT_DECK_IMG_FILE   = "bg_draft_deck.png";
 
     // data tree roots
     public static String USER_DIR;
@@ -257,7 +255,6 @@ public final class ForgeConstants {
     public static String CACHE_BOOSTERBOX_PICS_DIR;
     public static String CACHE_PRECON_PICS_DIR;
     public static String CACHE_TOURNAMENTPACK_PICS_DIR;
-    public static String CACHE_ACHIEVEMENT_PICS_DIR;
     public static String QUEST_CARD_PRICE_FILE;
 
     public static String[] PROFILE_DIRS;

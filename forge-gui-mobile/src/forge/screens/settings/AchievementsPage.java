@@ -7,7 +7,8 @@ import com.badlogic.gdx.math.Rectangle;
 import forge.Graphics;
 import forge.achievement.Achievement;
 import forge.achievement.AchievementCollection;
-import forge.assets.FImage;
+import forge.achievement.Achievement.TrophyDisplay;
+import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -23,6 +24,7 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Utils;
 
 public class AchievementsPage extends TabPage<SettingsScreen> {
+    private static final float TROPHY_PADDING = 45;
     private static final float PADDING = Utils.scaleMin(5);
     private static final float SELECTED_BORDER_THICKNESS = Utils.scaleMin(1);
     private static final int MIN_SHELVES = 4;
@@ -36,7 +38,7 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
     private final TrophyCase trophyCase = add(new TrophyCase());
 
     protected AchievementsPage() {
-        super("Achievements", FSkinImage.GOLD_TROPHY);
+        super("Achievements", FSkinImage.QUEST_BOX);
 
         AchievementCollection.buildComboBox(cbCollections);
 
@@ -85,18 +87,17 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
             float scrollWidth = visibleWidth + extraWidth;
             float scale = scrollWidth / FSkinImage.TROPHY_CASE_TOP.getWidth();
             float scrollHeight = (FSkinImage.TROPHY_CASE_TOP.getHeight() +
-                    shelfCount * FSkinImage.TROPHY_CASE_SHELF.getHeight()) * scale;
+                    shelfCount * FSkinImage.TROPHY_SHELF.getHeight()) * scale;
             return new ScrollBounds(scrollWidth, scrollHeight);
         }
 
         private Achievement getAchievementAt(float x0, float y0) {
             float w = getScrollWidth();
             float scale = w / FSkinImage.TROPHY_CASE_TOP.getWidth();
-            float trophyScale = scale * 1.8f;
 
-            float shelfHeight = FSkinImage.TROPHY_CASE_SHELF.getHeight() * scale;
-            float trophyWidth = FSkinImage.GOLD_TROPHY.getWidth() * trophyScale;
-            float trophyHeight = FSkinImage.GOLD_TROPHY.getHeight() * trophyScale;
+            float shelfHeight = FSkinImage.TROPHY_SHELF.getHeight() * scale;
+            float trophyWidth = (FSkinImage.COMMON_TROPHY.getWidth() + TROPHY_PADDING) * scale;
+            float trophyHeight = FSkinImage.COMMON_TROPHY.getHeight() * scale;
             float x = -getScrollLeft() + (w - TROPHIES_PER_SHELVE * trophyWidth) / 2;
             float y = -getScrollTop() + FSkinImage.TROPHY_CASE_TOP.getHeight() * scale + (shelfHeight - trophyHeight - 37 * scale) / 2;
 
@@ -170,12 +171,13 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
             float y = -getScrollTop();
             float w = getScrollWidth();
             float scale = w / FSkinImage.TROPHY_CASE_TOP.getWidth();
-            float trophyScale = scale * 1.8f;
 
             float topHeight = FSkinImage.TROPHY_CASE_TOP.getHeight() * scale;
-            float shelfHeight = FSkinImage.TROPHY_CASE_SHELF.getHeight() * scale;
-            float trophyWidth = FSkinImage.GOLD_TROPHY.getWidth() * trophyScale;
-            float trophyHeight = FSkinImage.GOLD_TROPHY.getHeight() * trophyScale;
+            float shelfHeight = FSkinImage.TROPHY_SHELF.getHeight() * scale;
+            float trophyOffset = TROPHY_PADDING * scale / 2;
+            float trophyImageWidth = FSkinImage.COMMON_TROPHY.getWidth() * scale;
+            float trophyWidth = trophyImageWidth + TROPHY_PADDING * scale;
+            float trophyHeight = FSkinImage.COMMON_TROPHY.getHeight() * scale;
             float plateWidth = FSkinImage.TROPHY_PLATE.getWidth() * scale;
             float plateHeight = FSkinImage.TROPHY_PLATE.getHeight() * scale;
 
@@ -185,7 +187,7 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
             FSkinFont subTitleFont = FSkinFont.forHeight(subTitleHeight);
 
             float plateY = y + topHeight + shelfHeight - plateHeight;
-            float trophyStartY = y + topHeight + (shelfHeight - trophyHeight - 37 * scale) / 2;
+            float trophyStartY = plateY - trophyHeight;
             float plateOffset = (trophyWidth - plateWidth) / 2;
 
             if (y + topHeight > 0) {
@@ -195,7 +197,7 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
 
             for (int i = 0; i < shelfCount; i++) {
                 if (y + shelfHeight > 0) {
-                    g.drawImage(FSkinImage.TROPHY_CASE_SHELF, x, y, w, shelfHeight);
+                    g.drawImage(FSkinImage.TROPHY_SHELF, x, y, w, shelfHeight);
                 }
                 y += shelfHeight;
                 if (y >= getHeight()) {
@@ -223,23 +225,19 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
                 }
 
                 if (plateY + plateHeight > 0) {
-                    FImage customImage = (FImage)achievement.getCustomImage();
-                    if (customImage != null) {
-                        float customImageWidth = customImage.getWidth() * scale;
-                        float customImageHeight = customImage.getHeight() * scale;
-                        g.drawImage(customImage,
-                                x + (trophyWidth - customImageWidth) / 2 + 1f * scale, //TODO: Remove +1 when image centered properly
-                                y + trophyHeight - customImageHeight + 8f * scale, //TODO: Remove +8 when gap below images removed
-                                customImageWidth, customImageHeight);
+                    TrophyDisplay display = achievement.getTrophyDisplay();
+                    boolean needAlpha = display.getBackgroundOpacity() < 1;
+                    if (needAlpha) {
+                        g.setAlphaComposite(display.getBackgroundOpacity());
                     }
-                    else if (achievement.earnedGold()) {
-                        g.drawImage(FSkinImage.GOLD_TROPHY, x, y, trophyWidth, trophyHeight);
+                    g.drawImage(FSkin.getImages().get(display.getBackground()), x + trophyOffset, y, trophyImageWidth, trophyHeight);
+                    needAlpha = display.getOverlayOpacity() < 1;
+                    if (needAlpha) {
+                        g.setAlphaComposite(display.getOverlayOpacity());
                     }
-                    else if (achievement.earnedSilver()) {
-                        g.drawImage(FSkinImage.SILVER_TROPHY, x, y, trophyWidth, trophyHeight);
-                    }
-                    else if (achievement.earnedBronze()) {
-                        g.drawImage(FSkinImage.BRONZE_TROPHY, x, y, trophyWidth, trophyHeight);
+                    g.drawImage(FSkin.getImages().get(display.getOverlay()), x + trophyOffset, y, trophyImageWidth, trophyHeight);
+                    if (needAlpha) {
+                        g.resetAlphaComposite();
                     }
                     g.drawImage(FSkinImage.TROPHY_PLATE, x + plateOffset, plateY, plateWidth, plateHeight);
     
@@ -251,8 +249,9 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
                     }
 
                     if (achievement == selectedAchievement) {
-                        g.drawRect(SELECTED_BORDER_THICKNESS, Color.GREEN, x, y, trophyWidth, shelfHeight);
-                        selectRect = new Rectangle(x, y, trophyWidth, shelfHeight);
+                        float selY = y - shelfHeight + trophyHeight + plateHeight;
+                        g.drawRect(SELECTED_BORDER_THICKNESS, Color.GREEN, x, selY, trophyWidth, shelfHeight);
+                        selectRect = new Rectangle(x, selY, trophyWidth, shelfHeight);
                     }
                 }
 
@@ -264,9 +263,10 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
             if (selectRect != null) {
                 String subTitle = selectedAchievement.getSubTitle();
                 String sharedDesc = selectedAchievement.getSharedDesc();
-                String goldDesc = selectedAchievement.getGoldDesc();
-                String silverDesc = selectedAchievement.getSilverDesc();
-                String bronzeDesc = selectedAchievement.getBronzeDesc();
+                String mythicDesc = selectedAchievement.getMythicDesc();
+                String rareDesc = selectedAchievement.getRareDesc();
+                String uncommonDesc = selectedAchievement.getUncommonDesc();
+                String commonDesc = selectedAchievement.getCommonDesc();
 
                 w = getWidth() - 2 * PADDING;
                 float h = NAME_FONT.getLineHeight() + 2.5f * PADDING;
@@ -276,13 +276,16 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
                 if (sharedDesc != null) {
                     h += DESC_FONT.getLineHeight();
                 }
-                if (goldDesc != null) {
+                if (mythicDesc != null) {
                     h += DESC_FONT.getLineHeight();
                 }
-                if (silverDesc != null) {
+                if (rareDesc != null) {
                     h += DESC_FONT.getLineHeight();
                 }
-                if (bronzeDesc != null) {
+                if (uncommonDesc != null) {
+                    h += DESC_FONT.getLineHeight();
+                }
+                if (commonDesc != null) {
                     h += DESC_FONT.getLineHeight();
                 }
 
@@ -317,21 +320,27 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
                             x, y, w, h, false, HAlignment.LEFT, false);
                     y += DESC_FONT.getLineHeight();
                 }
-                if (goldDesc != null) {
-                    g.drawText("(Gold) " + goldDesc, DESC_FONT,
-                            selectedAchievement.earnedGold() ? TEXT_COLOR : NOT_EARNED_COLOR,
+                if (mythicDesc != null) {
+                    g.drawText("(Mythic) " + mythicDesc, DESC_FONT,
+                            selectedAchievement.earnedRare() ? TEXT_COLOR : NOT_EARNED_COLOR,
                             x, y, w, h, false, HAlignment.LEFT, false);
                     y += DESC_FONT.getLineHeight();
                 }
-                if (silverDesc != null) {
-                    g.drawText("(Silver) " + silverDesc, DESC_FONT,
-                            selectedAchievement.earnedSilver() ? TEXT_COLOR : NOT_EARNED_COLOR,
+                if (rareDesc != null) {
+                    g.drawText("(Rare) " + rareDesc, DESC_FONT,
+                            selectedAchievement.earnedRare() ? TEXT_COLOR : NOT_EARNED_COLOR,
                             x, y, w, h, false, HAlignment.LEFT, false);
                     y += DESC_FONT.getLineHeight();
                 }
-                if (bronzeDesc != null) {
-                    g.drawText("(Bronze) " + bronzeDesc, DESC_FONT,
-                            selectedAchievement.earnedBronze() ? TEXT_COLOR : NOT_EARNED_COLOR,
+                if (uncommonDesc != null) {
+                    g.drawText("(Uncommon) " + uncommonDesc, DESC_FONT,
+                            selectedAchievement.earnedUncommon() ? TEXT_COLOR : NOT_EARNED_COLOR,
+                            x, y, w, h, false, HAlignment.LEFT, false);
+                    y += DESC_FONT.getLineHeight();
+                }
+                if (commonDesc != null) {
+                    g.drawText("(Common) " + commonDesc, DESC_FONT,
+                            selectedAchievement.earnedCommon() ? TEXT_COLOR : NOT_EARNED_COLOR,
                             x, y, w, h, false, HAlignment.LEFT, false);
                 }
             }

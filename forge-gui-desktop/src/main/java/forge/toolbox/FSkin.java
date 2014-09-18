@@ -62,7 +62,7 @@ public class FSkin {
      * Retrieves a color from this skin's color map.
      * 
      * @param c0 &emsp; Colors property (from enum)
-     * @return {@link forge.toolbox.FSkin.SkinColor}
+     * @return {@link forge.toolbox.SkinColor}
      */
     public static SkinColor getColor(final Colors c0) {
         return SkinColor.baseColors.get(c0);
@@ -158,7 +158,7 @@ public class FSkin {
 
         public Color getColor() { return color; }
 
-        //private constructors for color that changes with skin (use FSkin.getColor())
+        //private constructors for color that changes with skin (use getColor())
         private SkinColor(Colors baseColor0) {
             this(baseColor0, NO_BRIGHTNESS_DELTA, NO_STEP, NO_STEP, NO_ALPHA);
         }
@@ -397,7 +397,7 @@ public class FSkin {
             x0 = tempCoords[0];
             y0 = tempCoords[1];
 
-            color = bimPreferredSprite.getData().getBounds().contains(x0, y0) ? FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x0, y0)) : new Color(0, 0, 0, 0);
+            color = bimPreferredSprite.getData().getBounds().contains(x0, y0) ? getColorFromPixel(bimPreferredSprite.getRGB(x0, y0)) : new Color(0, 0, 0, 0);
         }
     }
 
@@ -415,7 +415,7 @@ public class FSkin {
      * Gets an image.
      *
      * @param s0 &emsp; FSkinProp enum
-     * @return {@link forge.toolbox.FSkin.SkinImage}
+     * @return {@link forge.toolbox.SkinImage}
      */
     public static SkinImage getImage(final FSkinProp s0) {
         SkinImage image = SkinImage.images.get(s0);
@@ -437,7 +437,7 @@ public class FSkin {
      *            int new width
      * @param h0
      *            int new height
-     * @return {@link forge.toolbox.FSkin.SkinImage}
+     * @return {@link forge.toolbox.SkinImage}
      */
     public static SkinImage getImage(final FSkinProp s0, int w0, int h0) {
         w0 = (w0 < 1) ? 1 : w0;
@@ -487,7 +487,7 @@ public class FSkin {
             h0 = tempCoords[3];
             newW = (tempCoords.length == 6 ? tempCoords[4] : 0);
             newH = (tempCoords.length == 6 ? tempCoords[5] : 0);
-            final BufferedImage img = FSkin.testPreferredSprite(s0);
+            final BufferedImage img = testPreferredSprite(s0);
             final BufferedImage bi0 = img.getSubimage(x0, y0, w0, h0);
 
             if (scale && newW != 0) {
@@ -646,7 +646,7 @@ public class FSkin {
      * Gets an image.
      *
      * @param s0 &emsp; FSkinProp enum
-     * @return {@link forge.toolbox.FSkin.SkinCursor}
+     * @return {@link forge.toolbox.SkinCursor}
      */
     public static SkinCursor getCursor(final FSkinProp s0, int hotSpotX, int hotSpotY, String name) {
         return getImage(s0).toCursor(hotSpotX, hotSpotY, name);
@@ -673,7 +673,7 @@ public class FSkin {
      * Gets an icon.
      *
      * @param s0 &emsp; FSkinProp enum
-     * @return {@link forge.toolbox.FSkin.SkinImage}
+     * @return {@link forge.toolbox.SkinImage}
      */
     public static SkinIcon getIcon(final FSkinProp s0) {
         SkinIcon icon = SkinIcon.icons.get(s0);
@@ -813,45 +813,45 @@ public class FSkin {
     }
 
     /**
-     * @return {@link forge.toolbox.FSkin.SkinFont}
+     * @return {@link forge.toolbox.SkinFont}
      */
     public static SkinFont getFont() {
-        return FSkin.getFont(FSkin.defaultFontSize);
+        return getFont(defaultFontSize);
     }
 
     /**
      * @param size - integer, pixel size
-     * @return {@link forge.toolbox.FSkin.SkinFont}
+     * @return {@link forge.toolbox.SkinFont}
      */
     public static SkinFont getFont(final int size) {
         return SkinFont.get(Font.PLAIN, size);
     }
 
     /**
-     * @return {@link forge.toolbox.FSkin.SkinFont}
+     * @return {@link forge.toolbox.SkinFont}
      */
     public static SkinFont getBoldFont() {
-        return FSkin.getBoldFont(FSkin.defaultFontSize);
+        return getBoldFont(defaultFontSize);
     }
 
     /**
      * @param size - integer, pixel size
-     * @return {@link forge.toolbox.FSkin.SkinFont}
+     * @return {@link forge.toolbox.SkinFont}
      */
     public static SkinFont getBoldFont(final int size) {
         return SkinFont.get(Font.BOLD, size);
     }
 
     /**
-     * @return {@link forge.toolbox.FSkin.SkinFont}
+     * @return {@link forge.toolbox.SkinFont}
      */
     public static SkinFont getItalicFont() {
-        return FSkin.getItalicFont(FSkin.defaultFontSize);
+        return getItalicFont(defaultFontSize);
     }
 
     /**
      * @param size - integer, pixel size
-     * @return {@link forge.toolbox.FSkin.SkinFont}
+     * @return {@link forge.toolbox.SkinFont}
      */
     public static SkinFont getItalicFont(final int size) {
         return SkinFont.get(Font.ITALIC, size);
@@ -943,7 +943,7 @@ public class FSkin {
     private static String preferredDir;
     private static String preferredName;
     private static BufferedImage bimDefaultSprite, bimPreferredSprite, bimFoils, bimQuestDraftDeck,
-    bimOldFoils, bimDefaultAvatars, bimPreferredAvatars;
+        bimOldFoils, bimDefaultAvatars, bimPreferredAvatars, bimTrophyShelf, bimTrophies;
     private static int x0, y0, w0, h0, newW, newH, preferredW, preferredH;
     private static int[] tempCoords;
     private static int defaultFontSize = 12;
@@ -997,8 +997,8 @@ public class FSkin {
         currentSkinIndex = allSkins.indexOf(skinName);
 
         // Non-default (preferred) skin name and dir.
-        FSkin.preferredName = skinName.toLowerCase().replace(' ', '_');
-        FSkin.preferredDir = ForgeConstants.SKINS_DIR + preferredName + "/";
+        preferredName = skinName.toLowerCase().replace(' ', '_');
+        preferredDir = ForgeConstants.SKINS_DIR + preferredName + "/";
 
         if (onInit) {
             final File f = new File(preferredDir + ForgeConstants.SPLASH_BG_FILE);
@@ -1006,7 +1006,7 @@ public class FSkin {
                 if (skinName.equals("default")) {
                     throw new RuntimeException("Cannot find default skin.");
                 }
-                FSkin.loadLight("default", onInit);
+                loadLight("default", onInit);
                 return;
             }
 
@@ -1019,10 +1019,10 @@ public class FSkin {
 
                 SkinIcon.setIcon(FSkinProp.BG_SPLASH, img.getSubimage(0, 0, w, h - 100));
 
-                UIManager.put("ProgressBar.background", FSkin.getColorFromPixel(img.getRGB(25, h - 75)));
-                UIManager.put("ProgressBar.selectionBackground", FSkin.getColorFromPixel(img.getRGB(75, h - 75)));
-                UIManager.put("ProgressBar.foreground", FSkin.getColorFromPixel(img.getRGB(25, h - 25)));
-                UIManager.put("ProgressBar.selectionForeground", FSkin.getColorFromPixel(img.getRGB(75, h - 25)));
+                UIManager.put("ProgressBar.background", getColorFromPixel(img.getRGB(25, h - 75)));
+                UIManager.put("ProgressBar.selectionBackground", getColorFromPixel(img.getRGB(75, h - 75)));
+                UIManager.put("ProgressBar.foreground", getColorFromPixel(img.getRGB(25, h - 25)));
+                UIManager.put("ProgressBar.selectionForeground", getColorFromPixel(img.getRGB(75, h - 25)));
                 UIManager.put("ProgressBar.border", new LineBorder(Color.BLACK, 0));
             }
             catch (final IOException e) {
@@ -1058,7 +1058,7 @@ public class FSkin {
 
             // Preferred skin name must be called via loadLight() method,
             // which does some cleanup and init work.
-            if (FSkin.preferredName.isEmpty()) { FSkin.loadLight("default", onInit); }
+            if (preferredName.isEmpty()) { loadLight("default", onInit); }
         }
 
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Processing image sprites: ", 6);
@@ -1072,6 +1072,8 @@ public class FSkin {
         final File f5 = new File(preferredDir + ForgeConstants.SPRITE_AVATARS_FILE);
         final File f6 = new File(defaultDir + ForgeConstants.SPRITE_OLD_FOILS_FILE);
         final File f7 = new File(defaultDir + ForgeConstants.DRAFT_DECK_IMG_FILE);
+        final File f8 = new File(defaultDir + ForgeConstants.TROPHY_SHELF_FILE);
+        final File f9 = new File(defaultDir + ForgeConstants.TROPHIES_FILE);
 
         try {
             int p = 0;
@@ -1086,6 +1088,8 @@ public class FSkin {
             bimDefaultAvatars = ImageIO.read(f4);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimQuestDraftDeck = ImageIO.read(f7);
+            bimTrophyShelf = ImageIO.read(f8);
+            bimTrophies = ImageIO.read(f9);
 
             if (f5.exists()) { bimPreferredAvatars = ImageIO.read(f5); }
 
@@ -1104,7 +1108,7 @@ public class FSkin {
         if (onInit) { //set default font size only once onInit
             Font f = UIManager.getDefaults().getFont("Label.font");
             if (f != null) {
-                FSkin.defaultFontSize = f.getSize();
+                defaultFontSize = f.getSize();
             }
         }
         SkinFont.setBaseFont(GuiUtils.newFont(preferredDir + ForgeConstants.FONT_FILE));
@@ -1125,10 +1129,16 @@ public class FSkin {
                 SkinIcon.setIcon(prop);
                 break;
             case FOIL:
-                FSkin.setFoil(prop, false);
+                setImage(prop, bimFoils);
                 break;
             case OLD_FOIL:
-                FSkin.setFoil(prop, true);
+                setImage(prop, bimOldFoils);
+                break;
+            case TROPHY_SHELF:
+                setImage(prop, bimTrophyShelf);
+                break;
+            case TROPHY:
+                setImage(prop, bimTrophies);
                 break;
             default:
                 break;
@@ -1136,29 +1146,33 @@ public class FSkin {
         }
 
         // Assemble avatar images
-        FSkin.assembleAvatars();
+        assembleAvatars();
 
         // Images loaded; can start UI init.
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Creating display components.");
         loaded = true;
 
         // Clear references to buffered images
-        FSkin.bimDefaultSprite.flush();
-        FSkin.bimFoils.flush();
-        FSkin.bimOldFoils.flush();
-        FSkin.bimPreferredSprite.flush();
-        FSkin.bimDefaultAvatars.flush();
-        FSkin.bimQuestDraftDeck.flush();
+        bimDefaultSprite.flush();
+        bimFoils.flush();
+        bimOldFoils.flush();
+        bimPreferredSprite.flush();
+        bimDefaultAvatars.flush();
+        bimQuestDraftDeck.flush();
+        bimTrophyShelf.flush();
+        bimTrophies.flush();
 
-        if (FSkin.bimPreferredAvatars != null) { FSkin.bimPreferredAvatars.flush(); }
+        if (bimPreferredAvatars != null) { bimPreferredAvatars.flush(); }
 
-        FSkin.bimDefaultSprite = null;
-        FSkin.bimFoils = null;
-        FSkin.bimOldFoils = null;
-        FSkin.bimPreferredSprite = null;
-        FSkin.bimDefaultAvatars = null;
-        FSkin.bimPreferredAvatars = null;
-        FSkin.bimQuestDraftDeck = null;
+        bimDefaultSprite = null;
+        bimFoils = null;
+        bimOldFoils = null;
+        bimPreferredSprite = null;
+        bimDefaultAvatars = null;
+        bimPreferredAvatars = null;
+        bimQuestDraftDeck = null;
+        bimTrophyShelf = null;
+        bimTrophies = null;
 
         //establish encoding symbols
         File dir = new File(ForgeConstants.CACHE_SYMBOLS_DIR);
@@ -1216,7 +1230,7 @@ public class FSkin {
      * @return Name of the current skin.
      */
     public static String getName() {
-        return FSkin.preferredName;
+        return preferredName;
     }
 
     /**
@@ -1277,10 +1291,10 @@ public class FSkin {
         h0 = tempCoords[3];
 
         if (s0.equals(FSkinProp.IMG_QUEST_DRAFT_DECK)) {
-            Color c = FSkin.getColorFromPixel(bimQuestDraftDeck.getRGB((x0 + w0 / 2), (y0 + h0 / 2)));
+            Color c = getColorFromPixel(bimQuestDraftDeck.getRGB((x0 + w0 / 2), (y0 + h0 / 2)));
             if (c.getAlpha() != 0) { return bimQuestDraftDeck; }
         }
-        
+
         // Test if requested sub-image in inside bounds of preferred sprite.
         // (Height and width of preferred sprite were set in loadFontAndImages.)
         if (x0 > preferredW || x0 + w0 > preferredW
@@ -1296,31 +1310,31 @@ public class FSkin {
         // Center
         x = (x0 + w0 / 2);
         y = (y0 + h0 / 2);
-        c = FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
+        c = getColorFromPixel(bimPreferredSprite.getRGB(x, y));
         if (c.getAlpha() != 0) { return bimPreferredSprite; }
 
         x += 2;
         y += 2;
-        c = FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
+        c = getColorFromPixel(bimPreferredSprite.getRGB(x, y));
         if (c.getAlpha() != 0) { return bimPreferredSprite; }
 
         x -= 4;
-        c = FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
+        c = getColorFromPixel(bimPreferredSprite.getRGB(x, y));
         if (c.getAlpha() != 0) { return bimPreferredSprite; }
 
         y -= 4;
-        c = FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
+        c = getColorFromPixel(bimPreferredSprite.getRGB(x, y));
         if (c.getAlpha() != 0) { return bimPreferredSprite; }
 
         x += 4;
-        c = FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
+        c = getColorFromPixel(bimPreferredSprite.getRGB(x, y));
         if (c.getAlpha() != 0) { return bimPreferredSprite; }
 
         return bimDefaultSprite;
     }
 
     private static void assembleAvatars() {
-        FSkin.avatars = new HashMap<Integer, SkinImage>();
+        avatars = new HashMap<Integer, SkinImage>();
         int counter = 0;
         Color pxTest;
 
@@ -1331,9 +1345,9 @@ public class FSkin {
             for (int j = 0; j < ph; j += 100) {
                 for (int i = 0; i < pw; i += 100) {
                     if (i == 0 && j == 0) { continue; }
-                    pxTest = FSkin.getColorFromPixel(bimPreferredAvatars.getRGB(i + 50, j + 50));
+                    pxTest = getColorFromPixel(bimPreferredAvatars.getRGB(i + 50, j + 50));
                     if (pxTest.getAlpha() == 0) { continue; }
-                    FSkin.avatars.put(counter++, new SkinImage(bimPreferredAvatars.getSubimage(i, j, 100, 100)));
+                    avatars.put(counter++, new SkinImage(bimPreferredAvatars.getSubimage(i, j, 100, 100)));
                 }
             }
         }
@@ -1344,21 +1358,21 @@ public class FSkin {
         for (int j = 0; j < ah; j += 100) {
             for (int i = 0; i < aw; i += 100) {
                 if (i == 0 && j == 0) { continue; }
-                pxTest = FSkin.getColorFromPixel(bimDefaultAvatars.getRGB(i + 50, j + 50));
+                pxTest = getColorFromPixel(bimDefaultAvatars.getRGB(i + 50, j + 50));
                 if (pxTest.getAlpha() == 0) { continue; }
-                FSkin.avatars.put(counter++, new SkinImage(bimDefaultAvatars.getSubimage(i, j, 100, 100)));
+                avatars.put(counter++, new SkinImage(bimDefaultAvatars.getSubimage(i, j, 100, 100)));
             }
         }
     }
 
-    private static void setFoil(final FSkinProp s0, boolean isOldStyle) {
+    private static void setImage(final FSkinProp s0, BufferedImage bim) {
         tempCoords = s0.getCoords();
         x0 = tempCoords[0];
         y0 = tempCoords[1];
         w0 = tempCoords[2];
         h0 = tempCoords[3];
 
-        SkinImage.setImage(s0, isOldStyle ? bimOldFoils.getSubimage(x0, y0, w0, h0) : bimFoils.getSubimage(x0, y0, w0, h0));
+        SkinImage.setImage(s0, bim.getSubimage(x0, y0, w0, h0));
     }
 
     public static boolean isLookAndFeelSet() {
@@ -1374,8 +1388,8 @@ public class FSkin {
         private static boolean onInit = true;
         private static boolean isMetalLafSet = false;
 
-        private final Color FORE_COLOR = FSkin.getColor(FSkin.Colors.CLR_TEXT).color;
-        private final Color BACK_COLOR = FSkin.getColor(FSkin.Colors.CLR_THEME2).color;
+        private final Color FORE_COLOR = getColor(Colors.CLR_TEXT).color;
+        private final Color BACK_COLOR = getColor(Colors.CLR_THEME2).color;
         private final Color HIGHLIGHT_COLOR = BACK_COLOR.brighter();
         private final Border LINE_BORDER = BorderFactory.createLineBorder(FORE_COLOR.darker(), 1);
         private final Border EMPTY_BORDER = BorderFactory.createEmptyBorder(2, 2, 2, 2);
@@ -1421,9 +1435,9 @@ public class FSkin {
          */
         private void setMenusLookAndFeel() {
             // JMenuBar
-            Color clrTheme = FSkin.getColor(FSkin.Colors.CLR_THEME).color;
-            Color backgroundColor = FSkin.stepColor(clrTheme, 0);
-            Color menuBarEdgeColor = FSkin.stepColor(clrTheme, -80);
+            Color clrTheme = getColor(Colors.CLR_THEME).color;
+            Color backgroundColor = stepColor(clrTheme, 0);
+            Color menuBarEdgeColor = stepColor(clrTheme, -80);
             UIManager.put("MenuBar.foreground", FORE_COLOR);
             UIManager.put("MenuBar.gradient", getColorGradients(backgroundColor.darker(), backgroundColor));
             UIManager.put("MenuBar.border", BorderFactory.createMatteBorder(0, 0, 1, 0, menuBarEdgeColor));
@@ -1468,7 +1482,7 @@ public class FSkin {
 
         private void setTabbedPaneLookAndFeel() {
             UIManager.put("TabbedPane.selected", HIGHLIGHT_COLOR);
-            UIManager.put("TabbedPane.contentOpaque", FSkin.getColor(FSkin.Colors.CLR_THEME));
+            UIManager.put("TabbedPane.contentOpaque", getColor(Colors.CLR_THEME));
             UIManager.put("TabbedPane.unselectedBackground", BACK_COLOR);
         }
 
@@ -1512,7 +1526,7 @@ public class FSkin {
         }
 
         private Font getDefaultFont(String component) {
-            return FSkin.getFont(UIManager.getFont(component).getSize()).font;
+            return getFont(UIManager.getFont(component).getSize()).font;
         }
 
         private ArrayList<Object> getColorGradients(Color bottom, Color top) {
@@ -1530,14 +1544,14 @@ public class FSkin {
         private SkinColor foreground, background;
         private SkinFont font;
         private SkinCursor cursor;
-        private int appliedSkinIndex = FSkin.currentSkinIndex;
+        private int appliedSkinIndex = currentSkinIndex;
 
         protected ComponentSkin() {
         }
 
         protected boolean update(T comp) {
-            if (appliedSkinIndex == FSkin.currentSkinIndex) { return false; }
-            appliedSkinIndex = FSkin.currentSkinIndex;
+            if (appliedSkinIndex == currentSkinIndex) { return false; }
+            appliedSkinIndex = currentSkinIndex;
             reapply(comp);
             return true;
         }
@@ -2023,8 +2037,8 @@ public class FSkin {
                 }
             };
 
-            private static final SkinColor backColor = FSkin.getColor(Colors.CLR_THEME2);
-            private static final SkinColor borderColor = FSkin.getColor(Colors.CLR_TEXT);
+            private static final SkinColor backColor = getColor(Colors.CLR_THEME2);
+            private static final SkinColor borderColor = getColor(Colors.CLR_TEXT);
             private static final SkinColor grooveColor = borderColor.alphaColor(200);
             private static final AlphaComposite alphaDim = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f);
             private static final int grooveSpace = 3;
