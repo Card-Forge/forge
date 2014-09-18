@@ -756,7 +756,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         }
         //Copies tap-state and extra keywords (auras, equipment, etc.) 
         if (c.isTapped()) {
-            pumped.tap();
+            pumped.setTapped(true);
         }
         final List<String> copiedKeywords = pumped.getKeyword();
         List<String> toCopy = new ArrayList<String>();
