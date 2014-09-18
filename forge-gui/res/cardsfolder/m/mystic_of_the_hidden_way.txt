@@ -1,0 +1,7 @@
+Name:Mystic of the Hidden Way
+ManaCost:4 U
+Types:Creature Human Monk
+PT:3/2
+K:Morph:2 U
+K:Unblockable
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_of_the_hidden_way.jpg

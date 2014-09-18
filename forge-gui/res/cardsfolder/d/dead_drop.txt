@@ -1,0 +1,6 @@
+Name:Dead Drop
+ManaCost:9 B
+Types:Sorcery
+K:Delve
+A:SP$ Sacrifice | Cost$ 9 B | ValidTgts$ Player | Amount$ 2 | SacValid$ Creature | SpellDescription$ Target player sacrifices two creatures.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dead_drop.jpg

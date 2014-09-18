@@ -1,0 +1,6 @@
+Name:Mardu Hateblade
+ManaCost:W
+Types:Creature Human Warrior
+PT:1/1
+A:AB$ Pump | Cost$ B | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mardu_hateblade.jpg

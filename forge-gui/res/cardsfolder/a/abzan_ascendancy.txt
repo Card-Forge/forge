@@ -1,0 +1,10 @@
+Name:Abzan Ascendancy
+ManaCost:W B G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on each creature you control.
+SVar:TrigPutCounters:AB$ PutCounterAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+nonToken | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a nontoken creature you control dies, put a 1/1 white Spirit creature token with flying onto the battlefield.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
+SVar:PlayMain1:TRUE
+SVar:NeedsToPlay:Creature.YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/abzan_ascendancy.jpg

@@ -1,0 +1,6 @@
+Name:Murderous Cut
+ManaCost:4 B
+Types:Instant
+K:Delve
+A:SP$ Destroy | Cost$ 4 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/murderous_cut.jpg

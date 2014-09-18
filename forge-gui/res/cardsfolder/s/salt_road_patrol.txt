@@ -1,0 +1,6 @@
+Name:Salt Road Patrol
+ManaCost:3 W
+Types:Creature Human Scout
+PT:2/5
+K:Outlast 1 W
+SVar:Picture:http://www.wizards.com/global/images/magic/general/salt_road_patrol.jpg

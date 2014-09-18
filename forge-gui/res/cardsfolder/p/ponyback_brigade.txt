@@ -1,0 +1,9 @@
+Name:Ponyback Brigade
+ManaCost:3 R W B
+Types:Creature Goblin Warrior
+PT:2/2
+K:Morph:2 R W B
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME enters the battlefield or is turned face up, put three 1/1 red Goblin creature tokens onto the battlefield.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or is turned face up, put three 1/1 red Goblin creature tokens onto the battlefield.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 3 | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ r_1_1_goblin_ktk
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ponyback_brigade.jpg

@@ -1,0 +1,9 @@
+Name:War-Name Aspirant
+ManaCost:1 R
+Types:Creature Human Warrior
+PT:2/1
+K:CantBeBlockedBy Creature.powerLE1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RaidTest | Execute$ DBPutCounter | TriggerDescription$ Raid - CARDNAME enters the battlefield with a +1/+1 counter on it if you attacked with a creature this turn.
+SVar:RaidTest:Count$AttackersDeclared
+SVar:DBPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/war_name_aspirant.jpg

@@ -1,0 +1,7 @@
+Name:Abzan Guide
+ManaCost:3 W B G
+Types:Creature Human Warrior
+PT:4/4
+K:Lifelink
+K:Morph:2 W B G
+SVar:Picture:http://www.wizards.com/global/images/magic/general/abzan_guide.jpg

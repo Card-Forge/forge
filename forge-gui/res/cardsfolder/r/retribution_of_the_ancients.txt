@@ -1,0 +1,8 @@
+Name:Retribution of the Ancients
+ManaCost:B
+Types:Enchantment
+A:AB$ Pump | Announce$ X | Cost$ B SubCounter<X/P1P1/Creature/among creatures you control> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | References$ X | IsCurse$ True | SpellDescription$ Target creature gets -X/-X until end of turn.
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/retribution_of_the_ancients.jpg

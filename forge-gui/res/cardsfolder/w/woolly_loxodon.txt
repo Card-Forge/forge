@@ -1,0 +1,6 @@
+Name:Woolly Loxodon
+ManaCost:5 G G
+Types:Creature Elephant Warrior
+PT:6/7
+K:Morph:5 G
+SVar:Picture:http://www.wizards.com/global/images/magic/general/woolly_loxodon.jpg

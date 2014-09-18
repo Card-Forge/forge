@@ -1,0 +1,8 @@
+Name:Monastery Flock
+ManaCost:2 U
+Types:Creature Bird
+PT:0/5
+K:Defender
+K:Flying
+K:Morph:U
+SVar:Picture:http://www.wizards.com/global/images/magic/general/monastery_flock.jpg

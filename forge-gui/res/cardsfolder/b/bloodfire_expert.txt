@@ -1,0 +1,6 @@
+Name:Bloodfire Expert
+ManaCost:2 R
+Types:Creature Efreet Monk
+PT:3/1
+K:Prowess
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodfire_expert.jpg

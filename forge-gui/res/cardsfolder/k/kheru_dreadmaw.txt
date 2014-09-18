@@ -1,0 +1,9 @@
+Name:Kheru Dreadmaw
+ManaCost:4 B
+Types:Creature Zombie Crocodile
+PT:4/4
+K:Defender
+A:AB$ GainLife | Cost$ 1 G Sac<1/Creature.Other/another creature> | LifeAmount$ X | References$ X | SpellDescription$ You gain life equal to the sacrificed creature's toughness.
+SVar:X:Sacrificed$CardToughness
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kheru_dreadmaw.jpg

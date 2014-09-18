@@ -1,0 +1,7 @@
+Name:Sidisi's Pet
+ManaCost:3 B
+Types:Creature Zombie Ape
+PT:1/4
+K:Lifelink
+K:Morph:1 B
+SVar:Picture:http://www.wizards.com/global/images/magic/sidisis_pet.jpg

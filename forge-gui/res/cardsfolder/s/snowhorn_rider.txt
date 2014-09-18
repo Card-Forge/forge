@@ -1,0 +1,7 @@
+Name:Snowhorn Rider
+ManaCost:3 G U R
+Types:Creature Human Warrior
+PT:5/5
+K:Trample
+K:Morph:2 G U R
+SVar:Picture:http://www.wizards.com/global/images/magic/general/snowhorn_rider.jpg

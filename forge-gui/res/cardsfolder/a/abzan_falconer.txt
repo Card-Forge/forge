@@ -1,0 +1,8 @@
+Name:Abzan Falconer
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:2/3
+K:Outlast W
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ Flying | Description$ Each creature you control wth a +1/+1 counter on it has flying.
+SVar:PlayMain1:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/abzan_falconer.jpg

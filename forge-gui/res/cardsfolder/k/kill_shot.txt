@@ -1,0 +1,6 @@
+Name:Kill Shot
+ManaCost:2 W
+Types:Instant
+A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SpellDescription$ Destroy target attacking creature.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kill_shot.jpg
+Oracle:Destroy target attacking creature.

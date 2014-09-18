@@ -1,0 +1,7 @@
+Name:Sultai Scavenger
+ManaCost:5 B
+Types:Creature Bird Warrior
+PT:3/3
+K:Delve
+K:Flying
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sultai_scavenger.jpg

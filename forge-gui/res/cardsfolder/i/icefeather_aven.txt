@@ -1,0 +1,8 @@
+Name:Icefeather Aven
+ManaCost:G U
+Types:Creature Bird Shaman
+PT:2/2
+K:Morph:1 G U
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigBounce | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ When CARDNAME is turned face up, you may return another target creature to its owner's hand.
+SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand
+SVar:Picture:http://www.wizards.com/global/images/magic/general/icefeather_aven.jpg

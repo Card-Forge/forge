@@ -1,0 +1,9 @@
+Name:Sultai Charm
+ManaCost:B G U
+Types:Instant
+A:SP$ Charm | Cost$ B G U | Choices$ DBDestroyCreature,DBDestroyArtEnc,DBDraw | SpellDescription$ Choose one - Destroy target monocolored creature; destroy target artifact or enchantment; draw two cards, then discard a card.
+SVar:DBDestroyCreature:DB$ Destroy | ValidTgts$ Creature.MonoColor | TgtPrompt$ Choose target monocolored creature. | SpellDescription$ Destroy target monocolored creature.
+SVar:DBDestroyArtEnc:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Choose target artifact or enchantment. | SpellDescription$ Destroy target artifact or enchantment.
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard a card.
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sultai_charm.jpg

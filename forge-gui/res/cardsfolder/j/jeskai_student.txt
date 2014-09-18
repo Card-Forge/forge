@@ -1,0 +1,6 @@
+Name:Jeskai Student
+ManaCost:1 W
+Types:Creature Human Monk
+PT:1/3
+K:Prowess
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jeskai_student.jpg

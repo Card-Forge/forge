@@ -1,0 +1,8 @@
+Name:Hardened Scales
+ManaCost:G
+Types:Enchantment
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Creature.YouCtrl | ValidCounterType$ P1P1 | ReplaceWith$ AddOneMoreCounters | Description$ If one or more +1/+1 counters would be placed on a creature you control, that many plus one +1/+1 counters are placed on it instead.
+SVar:AddOneMoreCounters:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ ReplacedCounterType | CounterNum$ X | References$ X
+SVar:X:ReplaceCount$CounterNum/Plus.1
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hardened_scales.jpg

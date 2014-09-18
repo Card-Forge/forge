@@ -1,0 +1,7 @@
+Name:Chief of the Edge
+ManaCost:W B
+Types:Creature Human Warrior
+PT:3/2
+S:Mode$ Continuous | Affected$ Creature.Warrior+Other+YouCtrl | AddPower$ 1 | Description$ Other Warrior creatures you control get +1/+0.
+SVar:PlayMain1:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chief_of_the_edge.jpg

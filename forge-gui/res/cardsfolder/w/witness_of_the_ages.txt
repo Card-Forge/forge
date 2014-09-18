@@ -1,0 +1,6 @@
+Name:Witness of the Ages
+ManaCost:6
+Types:Artifact Creature Golem
+PT:4/4
+K:Morph:5
+SVar:Picture:http://www.wizards.com/global/images/magic/general/witness_of_the_ages.jpg

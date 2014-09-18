@@ -1,0 +1,6 @@
+Name:Canyon Lurkers
+ManaCost:4 R
+Types:Creature Human Rogue
+PT:5/2
+K:Morph:3 R
+SVar:Picture:http://www.wizards.com/global/images/magic/general/canyon_lurkers.jpg

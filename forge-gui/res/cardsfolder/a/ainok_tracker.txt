@@ -1,0 +1,7 @@
+Name:Ainok Tracker
+ManaCost:5 R
+Types:Creature Hound Scout
+PT:3/3
+K:First Strike
+K:Morph:4 R
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ainok_tracker.jpg

@@ -1,0 +1,8 @@
+Name:Mantis Rider
+ManaCost:U R W
+Types:Creature Human Monk
+PT:3/3
+K:Flying
+K:Vigilance
+K:Haste
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mantis_rider.jpg

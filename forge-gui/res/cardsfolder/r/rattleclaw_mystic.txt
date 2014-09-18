@@ -1,0 +1,11 @@
+Name:Rattleclaw Mystic
+ManaCost:1 G
+Types:Creature Human Shaman
+PT:2/1
+K:Morph:2
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R} to your mana pool.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigMana | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, add {G}{U}{R} to your mana pool.
+SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ G U R
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rattleclaw_mystic.jpg

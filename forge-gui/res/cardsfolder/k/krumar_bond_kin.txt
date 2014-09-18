@@ -1,0 +1,6 @@
+Name:Krumar Bond-Kin
+ManaCost:3 B B
+Types:Creature Orc Warrior
+PT:5/3
+K:Morph:4 B
+SVar:Picture:http://www.wizards.com/global/images/magic/general/krumar_bond_kin.jpg

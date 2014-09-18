@@ -1,0 +1,9 @@
+Name:Ruthless Ripper
+ManaCost:B	
+Types:Creature Human Assassin
+PT:1/1
+K:Deathtouch
+K:Morph:Reveal<1/Card.Black/black>
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, target player loses 2 life.
+SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 2
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ruthless_ripper.jpg

@@ -1,0 +1,7 @@
+Name:Disowned Ancestor
+ManaCost:B
+Types:Creature Spirit Warrior
+PT:0/4
+K:Outlast 1 B
+SVar:Picture:http://www.wizards.com/global/images/magic/general/disowned_ancestor.jpg
+

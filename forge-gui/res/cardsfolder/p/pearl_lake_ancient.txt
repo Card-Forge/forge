@@ -1,0 +1,9 @@
+Name:Pearl Lake Ancient
+ManaCost:5 U U
+Types:Creature Leviathan
+PT:6/7
+K:Flash
+K:Prowess
+K:CARDNAME can't be countered.
+A:AB$ ChangeZone | Cost$ Return<3/Land> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pearl_lake_ancient.jpg

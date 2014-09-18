@@ -1,0 +1,7 @@
+Name:Valley Dasher
+ManaCost:1 R
+Types:Creature Human Berserker
+PT:2/2
+K:Haste
+K:CARDNAME attacks each turn if able.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/valley_dasher.jpg

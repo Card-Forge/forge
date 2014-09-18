@@ -1,0 +1,6 @@
+Name:Set Adrift
+ManaCost:5 U
+Types:Sorcery
+K:Delve
+A:SP$ ChangeZone | Cost$ 5 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target nonland permanent on top of its owner's library.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/set_adrift.jpg

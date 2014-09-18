@@ -1,0 +1,9 @@
+Name:Swiftwater Cliffs
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R} to your mana pool.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 1 life.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 1
+K:CARDNAME enters the battlefield tapped.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/swiftwater_cliffs.jpg

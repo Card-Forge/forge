@@ -1,0 +1,7 @@
+Name:Sage-Eye Harrier
+ManaCost:4 W
+Types:Creature Bird Warrior
+PT:1/5
+K:Flying
+K:Morph:3 W
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sage_eye_harrier.jpg

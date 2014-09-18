@@ -1,0 +1,7 @@
+Name:Riverwheel Aerialists
+ManaCost:5 U
+Types:Creature Djinn Monk
+PT:4/5
+K:Flying
+K:Prowess
+SVar:Picture:http://www.wizards.com/global/images/magic/general/riverwheel_aerialists.jpg

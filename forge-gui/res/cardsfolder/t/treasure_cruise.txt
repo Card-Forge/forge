@@ -1,0 +1,6 @@
+Name:Treasure Cruise
+ManaCost:7 U
+Types:Sorcery
+K:Delve
+A:SP$ Draw | Cost$ 7 U | NumCards$ 3 | SpellDescription$ Draw three cards.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/treasure_cruise.jpg

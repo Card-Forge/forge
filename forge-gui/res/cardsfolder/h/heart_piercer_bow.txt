@@ -1,0 +1,9 @@
+Name:Heart-Piercer Bow
+ManaCost:2
+Types:Artifact Equipment
+K:Equip 1
+T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigDamage | TriggerDescription$ Whenever equipped creature attacks, CARDNAME deals 1 damage to target creature defending player controls.
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature defending player controls | NumDmg$ 1
+S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddSVar$ AE
+SVar:AE:SVar:HasAttackEffect:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_piercer_bow.jpg

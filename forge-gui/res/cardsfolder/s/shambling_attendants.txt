@@ -1,0 +1,7 @@
+Name:Shambling Attendants
+ManaCost:7 B
+Types:Creature Zombie
+PT:3/5
+K:Delve
+K:Deathtouch
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shambling_attendants.jpg

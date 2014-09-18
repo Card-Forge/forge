@@ -1,0 +1,8 @@
+Name:Jeskai Banner
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W} to your mana pool.
+A:AB$ Draw | Cost$ U R W T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jeskai_banner.jpg

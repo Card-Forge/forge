@@ -1,0 +1,6 @@
+Name:Flying Crane Technique
+ManaCost:3 U R W
+Types:Instant
+A:SP$ UntapAll | Cost$ 3 U R W | ValidCards$ Creature.YouCtrl | SpellDescription$ Untap all creatures you control. All creatures you control gain flying and double strike until end of turn. | SubAbility$ DBPumpAll
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Flying & Double Strike | 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flying_crane_technique.jpg

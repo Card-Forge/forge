@@ -1,0 +1,8 @@
+Name:Sagu Mauler
+ManaCost:4 G U
+Types:Creature Beast
+PT:6/6
+K:Trample
+K:Hexproof
+K:Morph:3 G U
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sagu_mauler.jpg

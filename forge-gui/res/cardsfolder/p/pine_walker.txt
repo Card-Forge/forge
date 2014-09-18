@@ -1,0 +1,9 @@
+Name:Pine Walker
+ManaCost:3 G G
+Types:Creature Elemental
+PT:5/5
+K:Morph:4 G
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another creature you control is turned face up, untap that creature.
+T:Mode$ TurnFaceUp | ValidCard$ Creature.Other+YouCtrl | Execute$ TrigUntap | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another creature you control is turned face up, untap that creature.
+SVar:TrigUntap:DB$ Untap | Defined$ TriggeredCard
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pine_walker.jpg

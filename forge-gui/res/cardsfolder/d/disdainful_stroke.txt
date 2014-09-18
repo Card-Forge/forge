@@ -1,0 +1,6 @@
+Name:Disdainful Stroke
+ManaCost:1 U
+Types:Instant
+A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target spell with CMC 4 or greater | ValidTgts$ Card.cmcGE4 | SpellDescription$ Counter target spell with converted mana cost 4 or greater.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/disdainful_stroke.jpg
+Oracle:Counter target spell with converted mana cost 4 or greater.

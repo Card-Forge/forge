@@ -1,0 +1,6 @@
+Name:Weave Fate
+ManaCost:3 U
+Types:Instant
+A:SP$ Draw | Cost$ 3 U | NumCards$ 2 | SpellDescription$ Draw two cards.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/weave_fate.jpg
+Oracle:Draw two cards.

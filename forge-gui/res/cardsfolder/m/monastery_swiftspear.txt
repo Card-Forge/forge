@@ -1,0 +1,7 @@
+Name:Monastery Swiftspear
+ManaCost:R
+Types:Creature Human Monk
+PT:1/2
+K:Haste
+K:Prowess
+SVar:Picture:http://www.wizards.com/global/images/magic/general/monastery_swiftspear.jpg

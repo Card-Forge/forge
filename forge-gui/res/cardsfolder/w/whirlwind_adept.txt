@@ -1,0 +1,7 @@
+Name:Whirlwind Adept
+ManaCost:4 U
+Types:Creature Djinn Monk
+PT:4/2
+K:Hexproof
+K:Prowess
+SVar:Picture:http://www.wizards.com/global/images/magic/general/whirlwind_adept.jpg
