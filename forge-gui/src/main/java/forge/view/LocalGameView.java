@@ -179,7 +179,7 @@ public abstract class LocalGameView implements IGameView {
         for (final AttackingBand b : combat.getAttackingBands()) {
             if (b == null) continue;
             final GameEntity defender = combat.getDefenderByAttacker(b);
-            final List<Card> blockers = (b.isBlocked() != null && b.isBlocked()) ? combat.getBlockers(b) : null;
+            final List<Card> blockers = combat.getBlockers(b);
             combatView.addAttackingBand(getCardViews(b.getAttackers()), getGameEntityView(defender), blockers == null ? null : getCardViews(blockers));
         }
         return combatView;
