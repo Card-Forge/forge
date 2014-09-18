@@ -652,7 +652,6 @@ public class AiController {
             }
             sa.setActivatingPlayer(player);
             if (sa.canPlay() && !ComputerUtil.castPermanentInMain1(player, sa) && sa.getHostCard() != null && !sa.getHostCard().getType().contains("Land") && ComputerUtilCost.canPayCost(sa, player)) {
-                System.out.println("Predicted " + sa.getHostCard().getName());
                 return sa;
             }
         }
