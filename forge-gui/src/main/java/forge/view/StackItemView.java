@@ -1,5 +1,14 @@
 package forge.view;
 
+/**
+ * Representation of a {@link forge.game.spellability.SpellAbilityStackInstance}
+ * , containing only the information relevant to a user interface.
+ * 
+ * Conversion from and to SpellAbilityStackInstances happens through
+ * {@link LocalGameView}.
+ * 
+ * @author elcnesh
+ */
 public class StackItemView {
 
     private final String key;

@@ -13,6 +13,14 @@ import forge.LobbyPlayer;
 import forge.card.MagicColor;
 import forge.game.zone.ZoneType;
 
+/**
+ * Representation of a {@link forge.game.player.Player}, containing only the
+ * information relevant to a user interface.
+ * 
+ * Conversion from and to Players happens through {@link LocalGameView}.
+ * 
+ * @author elcnesh
+ */
 public class PlayerView extends GameEntityView {
 
     private final LobbyPlayer lobbyPlayer;

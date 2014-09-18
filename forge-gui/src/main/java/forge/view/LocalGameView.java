@@ -201,19 +201,6 @@ public abstract class LocalGameView implements IGameView {
     }
 
     /* (non-Javadoc)
-     * @see forge.view.IGameView#getGuiRegisteredPlayer(forge.LobbyPlayer)
-     */
-    @Override
-    public RegisteredPlayer getGuiRegisteredPlayer(final LobbyPlayer p) {
-        for (final RegisteredPlayer player : game.getMatch().getPlayers()) {
-            if (player.getPlayer() == p) {
-                return player;
-            }
-        }
-        return null;
-    }
-
-    /* (non-Javadoc)
      * @see forge.view.IGameView#getRegisteredPlayers()
      */
     @Override

@@ -9,6 +9,14 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
+/**
+ * Representation of a {@link forge.game.combat.Combat}, containing only the
+ * information relevant to a user interface.
+ * 
+ * Conversion from and to Combat happens through {@link LocalGameView}.
+ * 
+ * @author elcnesh
+ */
 public class CombatView {
 
     private Map<CardView, GameEntityView> attackersWithDefenders = Maps.newHashMap();

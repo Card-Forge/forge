@@ -24,6 +24,14 @@ import forge.card.mana.ManaCost;
 import forge.game.card.CounterType;
 import forge.game.zone.ZoneType;
 
+/**
+ * Representation of a {@link forge.game.card.Card}, containing only the
+ * information relevant to a user interface.
+ * 
+ * Conversion from and to Cards happens through {@link LocalGameView}.
+ * 
+ * @author elcnesh
+ */
 public class CardView extends GameEntityView {
 
     private static final List<Integer> randomInts = Lists.newArrayListWithCapacity(1000);

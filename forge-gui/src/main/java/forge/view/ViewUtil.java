@@ -14,6 +14,11 @@ import forge.game.card.CardCharacteristics;
 import forge.item.IPaperCard;
 import forge.view.CardView.CardStateView;
 
+/**
+ * Static class providing utility methods to the view classes.
+ * 
+ * @author elcnesh
+ */
 public final class ViewUtil {
 
     private ViewUtil() {

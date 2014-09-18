@@ -1,5 +1,13 @@
 package forge.view;
 
+/**
+ * Representation of a {@link forge.game.spellability.SpellAbility}, containing
+ * only the information relevant to a user interface.
+ * 
+ * Conversion from and to SpellAbilities happens through {@link LocalGameView}.
+ * 
+ * @author elcnesh
+ */
 public class SpellAbilityView {
 
     private CardView hostCard;
