@@ -19,10 +19,10 @@ public class ConstructedAchievements extends AchievementCollection {
     protected void buildBottomShelf() {
         add("Poisoned", new Poisoned(15, 25, 40));
         add("DeckedOut", new DeckedOut(8, 4, 2));
+        add("Blackjack", new Blackjack(30, 50, 100));
         add("Vanguard", new VariantWins(GameType.Vanguard, 25, 50, 100, FSkinProp.IMG_VANGUARD));
         add("MomirBasic", new VariantWins(GameType.MomirBasic, 25, 50, 100, FSkinProp.IMG_MOMIR_BASIC));
         add("Commander", new VariantWins(GameType.Commander, 25, 50, 100, FSkinProp.IMG_COMMANDER));
-        add("Blackjack", new Blackjack(30, 50, 100));
         add("Planechase", new VariantWins(GameType.Planechase, 25, 50, 100, FSkinProp.IMG_PLANECHASE));
         add("Archenemy", new VariantWins(GameType.Archenemy, 25, 50, 100, FSkinProp.IMG_ARCHENEMY));
     }
