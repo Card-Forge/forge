@@ -75,6 +75,7 @@ import forge.view.CombatView;
 import forge.view.GameEntityView;
 import forge.view.IGameView;
 import forge.view.PlayerView;
+import forge.view.ViewUtil;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.PlayArea;
 
@@ -169,7 +170,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
 
         int i = 0;
         for (final PlayerView p : sortedPlayers) {
-            if (allHands || p.getLobbyPlayer().equals(localPlayer) || !p.getHandCards().isEmpty()) {
+            if (allHands || p.getLobbyPlayer().equals(localPlayer) || ViewUtil.mayViewAny(p.getHandCards())) {
                 VHand newHand = new VHand(EDocID.Hands[i], p);
                 newHand.getLayoutControl().initialize();
                 hands.add(newHand);

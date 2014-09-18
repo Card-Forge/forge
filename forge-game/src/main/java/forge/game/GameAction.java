@@ -21,6 +21,7 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
 
 import forge.GameCommand;
 import forge.card.CardCharacteristicName;
@@ -112,7 +113,7 @@ public class GameAction {
         }
         if (zoneFrom == null && !c.isToken()) {
             zoneTo.add(c, position);
-            checkStaticAbilities();
+            checkStaticAbilities(true);
             game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
             return c;
         }
@@ -229,7 +230,7 @@ public class GameAction {
         }
 
         // Need to apply any static effects to produce correct triggers
-        checkStaticAbilities();
+        checkStaticAbilities(true);
 
         // play the change zone sound
         game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
@@ -685,10 +686,16 @@ public class GameAction {
         }
     }
 
-    /** */
-    public final boolean checkStaticAbilities() {
+    /**
+     * @param fireEvents
+     *            {@code true} to have this method fire events about changed
+     *            cards.
+     * @return the cards that are affected by static abilities, or {@code null}
+     *         if no cards were affected.
+     */
+    public final Set<Card> checkStaticAbilities(final boolean fireEvents) {
         if (game.isGameOver()) {
-            return false;
+            return null;
         }
 
         // remove old effects
@@ -769,33 +776,31 @@ public class GameAction {
             }
         }
 
-        boolean checkAgain = false;
         for (Player p : game.getPlayers()) {
             for (Card c : p.getCardsIn(ZoneType.Battlefield)) {
                 if (!c.getController().equals(p)) {
                     controllerChangeZoneCorrection(c);
-                    checkAgain = true;
+                    affectedCards.add(c);
                 }
                 if (c.isCreature() && c.isPaired()) {
                     Card partner = c.getPairedWith();
                     if (!partner.isCreature() || c.getController() != partner.getController() || !c.isInZone(ZoneType.Battlefield)) {
                         c.setPairedWith(null);
                         partner.setPairedWith(null);
-                        checkAgain = true;
+                        affectedCards.add(c);
                     }
                 }
             }
         }
 
-        if (!affectedCards.isEmpty()) {
+        if (fireEvents && affectedCards != null && !affectedCards.isEmpty()) {
             game.fireEvent(new GameEventCardStatsChanged(affectedCards));
-            checkAgain = true;
         }
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
 
-        return checkAgain;
+        return affectedCards;
     }
 
     /**
@@ -830,8 +835,11 @@ public class GameAction {
 
         // do this twice, sometimes creatures/permanents will survive when they
         // shouldn't
+        final Set<Card> allAffectedCards = Sets.newHashSet();
         for (int q = 0; q < 9; q++) {
-            boolean checkAgain = this.checkStaticAbilities();
+            final Set<Card> affectedCards = this.checkStaticAbilities(false);
+            boolean checkAgain = affectedCards != null;
+            allAffectedCards.addAll(affectedCards);
 
             for (Player p : game.getPlayers()) {
                 for (ZoneType zt : ZoneType.values()) {
@@ -914,6 +922,8 @@ public class GameAction {
                 break; // do not continue the loop
             }
         } // for q=0;q<2
+
+        game.fireEvent(new GameEventCardStatsChanged(allAffectedCards));
 
         checkGameOverCondition();
 

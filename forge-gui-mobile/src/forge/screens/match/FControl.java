@@ -700,7 +700,7 @@ public class FControl {
 
                 game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
-                game.getAction().checkStaticAbilities();
+                game.getAction().checkStaticAbilities(true);
             }
         });
     }

@@ -1,6 +1,7 @@
 package forge.view;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,8 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
+import com.google.common.collect.Lists;
 
 import forge.ImageKeys;
 import forge.card.CardEdition;
@@ -22,6 +25,18 @@ import forge.game.card.CounterType;
 import forge.game.zone.ZoneType;
 
 public class CardView extends GameEntityView {
+
+    private static final List<Integer> randomInts = Lists.newArrayListWithCapacity(1000);
+    static {
+        for (int i = 0; i < 1000; i++) {
+            randomInts.add(Integer.valueOf(i));
+        }
+        Collections.shuffle(randomInts);
+    }
+    private static final Iterator<Integer> randomIntsIterator = Iterators.cycle(randomInts);
+    private static int nextRandomInt() {
+        return randomIntsIterator.next().intValue();
+    }
 
     private final CardStateView
         original = new CardStateView(),
@@ -65,7 +80,7 @@ public class CardView extends GameEntityView {
 
     public void reset() {
         final Iterable<CardView> emptyIterable = ImmutableSet.of();
-        this.id = 0;
+        this.id = -nextRandomInt();
         this.hasAltState = false;
         this.owner = null;
         this.controller = null;

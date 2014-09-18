@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.List;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.card.CardCharacteristicName;
@@ -137,5 +139,14 @@ public final class ViewUtil {
             }
         }
         return ret;
+    }
+
+    public static boolean mayViewAny(final Iterable<CardView> cards) {
+        return Iterables.any(cards, new Predicate<CardView>() {
+            @Override
+            public boolean apply(final CardView input) {
+                return input.getId() >= 0;
+            }
+        });
     }
 }
