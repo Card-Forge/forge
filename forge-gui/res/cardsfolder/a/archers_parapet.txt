@@ -1,4 +1,4 @@
-Name:Archer's Parapet
+Name:Archers' Parapet
 ManaCost:1 G
 Types:Creature Wall
 PT:0/5
