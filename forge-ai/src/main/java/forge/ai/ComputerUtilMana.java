@@ -662,7 +662,7 @@ public class ComputerUtilMana {
         }
 
         // LowPriorityAI SVar should be set to 'low' elsewhere to indicate that it is a low priority spell ability
-        if (!sa.getSVar("LowPriorityAI").equals("")) {
+        if (sa.getSVar("LowPriorityAI").equals("")) {
             return false;
         }
 
