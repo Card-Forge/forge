@@ -1,10 +1,12 @@
 package forge;
 
 import java.awt.Desktop;
+import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
@@ -131,6 +133,17 @@ public class GuiDesktop implements IGuiBase {
     @Override
     public ISkinImage getUnskinnedIcon(String path) {
         return new FSkin.UnskinnedIcon(path);
+    }
+
+    @Override
+    public ISkinImage createLayeredImage(FSkinProp background, FSkinProp overlay, float opacity) {
+        BufferedImage image = new BufferedImage(background.getWidth(), background.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = image.createGraphics();
+        FSkin.SkinImage backgroundImage = FSkin.getImage(background);
+        FSkin.SkinImage overlayImage = FSkin.getImage(overlay);
+        FSkin.drawImage(g, backgroundImage, 0, 0, background.getWidth(), background.getHeight());
+        FSkin.drawImage(g, overlayImage, (background.getWidth() - overlay.getWidth()) / 2, (background.getHeight() - overlay.getHeight()) / 2, overlay.getWidth(), overlay.getHeight());
+        return new FSkin.UnskinnedIcon(image, opacity);
     }
 
     @Override

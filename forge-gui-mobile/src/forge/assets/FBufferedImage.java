@@ -13,12 +13,16 @@ import forge.GuiBase;
 
 //Special graphics object for rendering to a texture
 public abstract class FBufferedImage extends FImageComplex {
-    private final float width, height;
+    private final float width, height, opacity;
     private FrameBuffer frameBuffer;
 
     public FBufferedImage(float width0, float height0) {
+        this(width0, height0, 1);
+    }
+    public FBufferedImage(float width0, float height0, float opacity0) {
         width = width0;
         height = height0;
+        opacity = opacity0;
     }
 
     @Override
@@ -47,7 +51,7 @@ public abstract class FBufferedImage extends FImageComplex {
             Gdx.gl.glDisable(GL20.GL_SCISSOR_TEST); //prevent buffered image being clipped
 
             //render texture to frame buffer if needed
-            frameBuffer = new FrameBuffer(Format.RGB565, (int)width, (int)height, false);
+            frameBuffer = new FrameBuffer(Format.RGBA8888, (int)width, (int)height, false);
             frameBuffer.begin();
 
             //frame graphics must be given a projection matrix
@@ -86,6 +90,12 @@ public abstract class FBufferedImage extends FImageComplex {
 
     @Override
     public void draw(Graphics g, float x, float y, float w, float h) {
+        if (opacity < 1) {
+            g.setAlphaComposite(opacity);
+        }
         g.drawFlippedImage(getTexture(), x, y, w, h); //need to draw image flipped because of how FrameBuffer works
+        if (opacity < 1) {
+            g.resetAlphaComposite();
+        }
     }
 }

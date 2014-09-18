@@ -402,13 +402,13 @@ public class FSkin {
     }
 
     public static void drawImage(Graphics g, SkinImage skinImage, int x, int y) {
-        g.drawImage(skinImage.image, x, y, null);
+        skinImage.draw(g, x, y);
     }
     public static void drawImage(Graphics g, SkinImage skinImage, int x, int y, int w, int h) {
-        g.drawImage(skinImage.image, x, y, w, h, null);
+        skinImage.draw(g, x, y, w, h);
     }
     public static void drawImage(Graphics g, SkinImage skinImage, int dx1, int dy1, int dx2, int dy2, int sx1, int sy1, int sx2, int sy2) {
-        g.drawImage(skinImage.image, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, null);
+        skinImage.draw(g, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2);
     }
 
     /**
@@ -640,6 +640,16 @@ public class FSkin {
             }
             return this.imageIcon;
         }
+
+        protected void draw(Graphics g, int x, int y) {
+            g.drawImage(image, x, y, null);
+        }
+        protected void draw(Graphics g, int x, int y, int w, int h) {
+            g.drawImage(image, x, y, w, h, null);
+        }
+        protected void draw(Graphics g, int dx1, int dy1, int dx2, int dy2, int sx1, int sy1, int sx2, int sy2) {
+            g.drawImage(image, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, null);
+        }
     }
 
     /**
@@ -786,16 +796,60 @@ public class FSkin {
 
     //allow creating dynamic icons that can be used in place of skin icons
     public static class UnskinnedIcon extends SkinIcon {
+        private final float opacity;
+
         public UnskinnedIcon(String path0) {
             super(new ImageIcon(path0));
+            opacity = 1;
         }
         public UnskinnedIcon(BufferedImage i0) {
+            this(i0, 1);
+        }
+        public UnskinnedIcon(BufferedImage i0, float opacity0) {
             super(new ImageIcon(i0));
+            opacity = opacity0;
         }
 
         @Override
         public ImageIcon getIcon() {
             return super.getIcon();
+        }
+
+        @Override
+        protected void draw(Graphics g, int x, int y) {
+            if (opacity == 1) {
+                super.draw(g, x, y);
+                return;
+            }
+            Graphics2D g2d = (Graphics2D)g;
+            Composite oldComp = g2d.getComposite();
+            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
+            super.draw(g2d, x, y);
+            g2d.setComposite(oldComp);
+        }
+        @Override
+        protected void draw(Graphics g, int x, int y, int w, int h) {
+            if (opacity == 1) {
+                super.draw(g, x, y, w, h);
+                return;
+            }
+            Graphics2D g2d = (Graphics2D)g;
+            Composite oldComp = g2d.getComposite();
+            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
+            super.draw(g, x, y, w, h);
+            g2d.setComposite(oldComp);
+        }
+        @Override
+        protected void draw(Graphics g, int dx1, int dy1, int dx2, int dy2, int sx1, int sy1, int sx2, int sy2) {
+            if (opacity == 1) {
+                super.draw(g, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2);
+                return;
+            }
+            Graphics2D g2d = (Graphics2D)g;
+            Composite oldComp = g2d.getComposite();
+            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
+            super.draw(g, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2);
+            g2d.setComposite(oldComp);
         }
     }
 

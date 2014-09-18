@@ -2,7 +2,9 @@ package forge.achievement;
 
 import org.w3c.dom.Element;
 
+import forge.GuiBase;
 import forge.assets.FSkinProp;
+import forge.assets.ISkinImage;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.interfaces.IGuiBase;
@@ -12,67 +14,13 @@ public abstract class Achievement {
     private final String displayName, sharedDesc, commonDesc, uncommonDesc, rareDesc, mythicDesc;
     private final int commonThreshold, uncommonThreshold, rareThreshold, mythicThreshold;
     private final boolean checkGreaterThan;
-    private final TrophyDisplay trophyDisplay;
+    private final FSkinProp overlayImage;
+    private ISkinImage image;
     protected int best, current;
 
-    public class TrophyDisplay {
-        private final FSkinProp overlay;
-        private FSkinProp background;
-        private float backgroundOpacity, overlayOpacity;
-
-        private TrophyDisplay(FSkinProp overlay0) {
-            overlay = overlay0;
-            background = mythicThreshold == commonThreshold ? FSkinProp.IMG_SPECIAL_TROPHY : FSkinProp.IMG_COMMON_TROPHY;
-            backgroundOpacity = 0.25f; //fade out heavily if achievement not earned
-            overlayOpacity = backgroundOpacity;
-        }
-
-        public FSkinProp getOverlay() {
-            return overlay;
-        }
-
-        public FSkinProp getBackground() {
-            return background;
-        }
-
-        public float getBackgroundOpacity() {
-            return backgroundOpacity;
-        }
-
-        public float getOverlayOpacity() {
-            return overlayOpacity;
-        }
-
-        private void update() {
-            if (earnedSpecial()) {
-                overlayOpacity = 1;
-                backgroundOpacity = 1;
-            }
-            else if (earnedMythic()) {
-                background = FSkinProp.IMG_MYTHIC_TROPHY;
-                overlayOpacity = 1;
-                backgroundOpacity = 1;
-            }
-            else if (earnedRare()) {
-                background = FSkinProp.IMG_RARE_TROPHY;
-                overlayOpacity = 1;
-                backgroundOpacity = 1;
-            }
-            else if (earnedUncommon()) {
-                background = FSkinProp.IMG_UNCOMMON_TROPHY;
-                overlayOpacity = 1; //0.8f; //TODO: fade out slightly until rare earned
-                backgroundOpacity = 1;
-            }
-            else if (earnedCommon()) {
-                overlayOpacity = 1; //0.6f; //TODO: fade out a bit more until uncommon earned
-                backgroundOpacity = 1;
-            }
-        }
-    }
-
     //use this constructor for special achievements without tiers
-    protected Achievement(String displayName0, String description0, FSkinProp image0) {
-        this(displayName0, description0, null, 1, null, 1, null, 1, null, 1, image0);
+    protected Achievement(String displayName0, String description0, FSkinProp overlayImage0) {
+        this(displayName0, description0, null, 1, null, 1, null, 1, null, 1, overlayImage0);
     }
     //use this constructor for regular tiered achievements
     protected Achievement(String displayName0, String sharedDesc0,
@@ -80,7 +28,7 @@ public abstract class Achievement {
             String uncommonDesc0, int uncommonThreshold0,
             String rareDesc0, int rareThreshold0,
             String mythicDesc0, int mythicThreshold0,
-            FSkinProp image0) {
+            FSkinProp overlayImage0) {
         displayName = displayName0;
         sharedDesc = sharedDesc0;
         commonDesc = commonDesc0;
@@ -91,15 +39,12 @@ public abstract class Achievement {
         rareThreshold = rareThreshold0;
         mythicDesc = mythicDesc0;
         mythicThreshold = mythicThreshold0;
-        trophyDisplay = new TrophyDisplay(image0);
+        overlayImage = overlayImage0;
         checkGreaterThan = rareThreshold0 > uncommonThreshold0;
     }
 
     public String getDisplayName() {
         return displayName;
-    }
-    public TrophyDisplay getTrophyDisplay() {
-        return trophyDisplay;
     }
     public String getSharedDesc() {
         return sharedDesc;
@@ -115,6 +60,12 @@ public abstract class Achievement {
     }
     public String getMythicDesc() {
         return mythicDesc;
+    }
+    public ISkinImage getImage() {
+        if (image == null) {
+            updateTrophyImage();
+        }
+        return image;
     }
     private boolean earnedSpecial() {
         return (mythicThreshold == commonThreshold && best > 1);
@@ -155,6 +106,38 @@ public abstract class Achievement {
             }
         }
         return null;
+    }
+
+    private void updateTrophyImage() {
+        FSkinProp background;
+        float opacity = 1;
+        if (earnedSpecial()) {
+            background = FSkinProp.IMG_SPECIAL_TROPHY;
+        }
+        else if (earnedMythic()) {
+            background = FSkinProp.IMG_MYTHIC_TROPHY;
+        }
+        else if (earnedRare()) {
+            background = FSkinProp.IMG_RARE_TROPHY;
+        }
+        else if (earnedUncommon()) {
+            background = FSkinProp.IMG_UNCOMMON_TROPHY;
+            //0.8f; //TODO: fade out slightly until rare earned
+        }
+        else if (earnedCommon()) {
+            background = FSkinProp.IMG_COMMON_TROPHY;
+            //0.6f; //TODO: fade out a bit more until uncommon earned
+        }
+        else {
+            opacity = 0.25f; //fade out if achievement hasn't been earned yet
+            if (mythicThreshold == commonThreshold) {
+                background = FSkinProp.IMG_SPECIAL_TROPHY;
+            }
+            else {
+                background = FSkinProp.IMG_COMMON_TROPHY;
+            }
+        }
+        image = GuiBase.getInterface().createLayeredImage(background, overlayImage, opacity);
     }
 
     public void update(IGuiBase gui, Player player) {
@@ -198,12 +181,14 @@ public abstract class Achievement {
             }
         }
         if (type != null) {
-            trophyDisplay.update();
+            if (image != null) { //only update image if it has already been initialized
+                updateTrophyImage();
+            }
             if (sharedDesc != null) {
                 desc = sharedDesc + " " + desc;
             }
             SOptionPane.showMessageDialog(gui, "You've earned a " + type + " trophy!\n\n" +
-                    displayName + "\n" + desc + ".", "Achievement Earned", trophyDisplay.getOverlay());
+                    displayName + "\n" + desc + ".", "Achievement Earned", overlayImage);
         }
     }
 
@@ -219,7 +204,6 @@ public abstract class Achievement {
     public void loadFromXml(Element el) {
         best = getIntAttribute(el, "best");
         current = getIntAttribute(el, "current");
-        trophyDisplay.update();
     }
 
     private int getIntAttribute(Element el, String name) {

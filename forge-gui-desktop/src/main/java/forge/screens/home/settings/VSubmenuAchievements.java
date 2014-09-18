@@ -1,8 +1,6 @@
 package forge.screens.home.settings;
 
-import java.awt.AlphaComposite;
 import java.awt.Color;
-import java.awt.Composite;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -18,7 +16,6 @@ import java.awt.event.MouseMotionListener;
 
 import forge.achievement.Achievement;
 import forge.achievement.AchievementCollection;
-import forge.achievement.Achievement.TrophyDisplay;
 import forge.assets.FSkinProp;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -299,21 +296,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
                     plateY += dy;
                     x = startX;
                 }
-                TrophyDisplay display = achievement.getTrophyDisplay();
-                Composite oldComp = g2d.getComposite();
-                boolean needAlpha = display.getBackgroundOpacity() < 1;
-                if (needAlpha) {
-                    g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, display.getBackgroundOpacity()));
-                }
-                FSkin.drawImage(g2d, FSkin.getImage(display.getBackground()), x + TROPHY_PADDING / 2, y, trophyImageWidth, h);
-                needAlpha = display.getOverlayOpacity() < 1;
-                if (needAlpha) {
-                    g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, display.getOverlayOpacity()));
-                }
-                FSkin.drawImage(g2d, FSkin.getImage(display.getOverlay()), x + TROPHY_PADDING / 2, y, trophyImageWidth, h);
-                if (needAlpha) {
-                    g2d.setComposite(oldComp);
-                }
+                FSkin.drawImage(g2d, (SkinImage)achievement.getImage(), x + TROPHY_PADDING / 2, y, trophyImageWidth, h);
                 FSkin.drawImage(g2d, imgTrophyPlate, x + plateOffset, plateY, trophyPlateSize.width, trophyPlateSize.height);
 
                 g2d.setColor(foreColor);

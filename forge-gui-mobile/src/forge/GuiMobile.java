@@ -13,6 +13,7 @@ import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.Texture;
 import com.google.common.base.Function;
 
+import forge.assets.FBufferedImage;
 import forge.assets.FDelayLoadImage;
 import forge.assets.FSkin;
 import forge.assets.FSkinProp;
@@ -113,6 +114,17 @@ public class GuiMobile implements IGuiBase {
 
         //use a delay load image to avoid an error if called from background thread
         return new FDelayLoadImage(path);
+    }
+
+    @Override
+    public ISkinImage createLayeredImage(final FSkinProp background, final FSkinProp overlay, final float opacity) {
+        return new FBufferedImage(background.getWidth(), background.getHeight(), opacity) {
+            @Override
+            protected void draw(Graphics g, float w, float h) {
+                g.drawImage(FSkin.getImages().get(background), 0, 0, background.getWidth(), background.getHeight());
+                g.drawImage(FSkin.getImages().get(overlay), (background.getWidth() - overlay.getWidth()) / 2, (background.getHeight() - overlay.getHeight()) / 2, overlay.getWidth(), overlay.getHeight());
+            }
+        };
     }
 
     @Override

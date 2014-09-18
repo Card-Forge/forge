@@ -7,8 +7,8 @@ import com.badlogic.gdx.math.Rectangle;
 import forge.Graphics;
 import forge.achievement.Achievement;
 import forge.achievement.AchievementCollection;
-import forge.achievement.Achievement.TrophyDisplay;
-import forge.assets.FSkin;
+import forge.assets.FBufferedImage;
+import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -70,6 +70,10 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
         trophyCase.shelfCount = (int)Math.ceil((double)achievements0.getCount() / (double)TROPHIES_PER_SHELVE);
         if (trophyCase.shelfCount < MIN_SHELVES) {
             trophyCase.shelfCount = MIN_SHELVES;
+        }
+        for (Achievement achievement : achievements0) {
+            //call getImage() and getTexture() here so images are loaded before the first draw
+            ((FBufferedImage)achievement.getImage()).getTexture();
         }
         trophyCase.revalidate();
     }
@@ -225,22 +229,8 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
                 }
 
                 if (plateY + plateHeight > 0) {
-                    TrophyDisplay display = achievement.getTrophyDisplay();
-                    boolean needAlpha = display.getBackgroundOpacity() < 1;
-                    if (needAlpha) {
-                        g.setAlphaComposite(display.getBackgroundOpacity());
-                    }
-                    g.drawImage(FSkin.getImages().get(display.getBackground()), x + trophyOffset, y, trophyImageWidth, trophyHeight);
-                    needAlpha = display.getOverlayOpacity() < 1;
-                    if (needAlpha) {
-                        g.setAlphaComposite(display.getOverlayOpacity());
-                    }
-                    g.drawImage(FSkin.getImages().get(display.getOverlay()), x + trophyOffset, y, trophyImageWidth, trophyHeight);
-                    if (needAlpha) {
-                        g.resetAlphaComposite();
-                    }
+                    g.drawImage((FImage)achievement.getImage(), x + trophyOffset, y, trophyImageWidth, trophyHeight);
                     g.drawImage(FSkinImage.TROPHY_PLATE, x + plateOffset, plateY, plateWidth, plateHeight);
-    
                     g.drawText(achievement.getDisplayName(), titleFont, FORE_COLOR, x + plateOffset + plateWidth * 0.075f, plateY + plateHeight * 0.05f, plateWidth * 0.85f, titleHeight, false, HAlignment.CENTER, true);
     
                     String subTitle = achievement.getSubTitle();
