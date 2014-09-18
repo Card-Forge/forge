@@ -747,8 +747,8 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 kws.add(kw);
             }
         }
-        pumped.addTempAttackBoost(a);
-        pumped.addTempDefenseBoost(d);
+        pumped.addTempAttackBoost(c.getTempAttackBoost() + a);
+        pumped.addTempDefenseBoost(c.getTempDefenseBoost() + d);
         pumped.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);
         Set<CounterType> types = c.getCounters().keySet();
         for(CounterType ct : types) {
