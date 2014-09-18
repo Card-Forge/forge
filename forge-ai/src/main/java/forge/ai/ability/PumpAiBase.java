@@ -488,6 +488,9 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 if (CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(pumped)).isEmpty()) {
                     threat *= 2;
                 }
+                if (c.getNetAttack() == 0 && c == sa.getHostCard() && attack > 0 ) {
+                    threat *= 4;    //over-value self +attack for 0 power creatures which may be pumped further after attacking 
+                }
                 chance += threat;
             }
             
@@ -583,12 +586,13 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 if (pumpedDmg >= opp.getLife()) {
                     return true;
                 }
-                if (opposing.isEmpty() || !pumpedWillDie) {
-                    if (sa.hasParam("NumAtt") && sa.getParam("NumAtt").contains("+")) {
-                        return true;
-                    }
+                float value = 1.0f * (pumpedDmg - dmg);
+                if (c == sa.getHostCard() && attack > 0) {
+                    value *= attack / sa.getPayCosts().getTotalMana().getCMC();
+                } else {
+                    value /= opp.getLife();
                 }
-                chance += 1.0f * (pumpedDmg - dmg) / opp.getLife();
+                chance += value;
             }
             
             //4. lifelink

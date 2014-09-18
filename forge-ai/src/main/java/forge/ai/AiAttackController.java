@@ -196,7 +196,7 @@ public class AiAttackController {
         }
 
         final Player opp = this.defendingOpponent;
-        if (ComputerUtilCombat.damageIfUnblocked(attacker, opp, combat, false) > 0) {
+        if (ComputerUtilCombat.damageIfUnblocked(attacker, opp, combat, true) > 0) {
             return true;
         }
         if (ComputerUtilCombat.poisonIfUnblocked(attacker, opp) > 0) {
