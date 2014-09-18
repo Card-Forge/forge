@@ -1028,11 +1028,23 @@ public class AiController {
     }
 
     public int getIntProperty(AiProps propName) {
-        return Integer.parseInt(AiProfileUtil.getAIProp(getPlayer().getLobbyPlayer(), propName));
+        String prop = AiProfileUtil.getAIProp(getPlayer().getLobbyPlayer(), propName);
+
+        if (prop == null || prop.equals("")) {
+            return 0;
+        }
+
+        return Integer.parseInt(prop);
     }
 
     public boolean getBooleanProperty(AiProps propName) {
-        return Boolean.parseBoolean(AiProfileUtil.getAIProp(getPlayer().getLobbyPlayer(), propName));
+        String prop = AiProfileUtil.getAIProp(getPlayer().getLobbyPlayer(), propName);
+
+        if (prop == null || prop.equals("")) {
+            return false;
+        }
+
+        return Boolean.parseBoolean(prop);
     }
 
     /** Returns the spell ability which has already been played - use it for reference only */ 
