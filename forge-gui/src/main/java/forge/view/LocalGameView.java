@@ -481,10 +481,11 @@ public abstract class LocalGameView implements IGameView {
         // First, write the values independent of other views.
         ViewUtil.writeNonDependentCardViewProperties(c, view, mayShowCardFace(view));
         // Next, write the values that depend on other views.
+        final Combat combat = game.getCombat();
         view.setOwner(getPlayerViewFast(c.getOwner()));
         view.setController(getPlayerViewFast(c.getController()));
-        view.setAttacking(game.getCombat() != null && game.getCombat().isAttacking(c));
-        view.setBlocking(game.getCombat() != null && game.getCombat().isBlocking(c));
+        view.setAttacking(combat != null && combat.isAttacking(c));
+        view.setBlocking(combat != null && combat.isBlocking(c));
         view.setChosenPlayer(getPlayerViewFast(c.getChosenPlayer()));
         view.setEquipping(getCardViewFast(Iterables.getFirst(c.getEquipping(), null)));
         view.setEquippedBy(getCardViewsFast(c.getEquippedBy()));

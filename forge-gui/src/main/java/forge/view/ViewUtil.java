@@ -132,10 +132,12 @@ public final class ViewUtil {
 
     public static <T,V> List<V> transformIfNotNull(final Iterable<T> input, final Function<T, V> transformation) {
         final List<V> ret = Lists.newLinkedList();
-        for (final T t : input) {
-            final V v = transformation.apply(t);
-            if (v != null) {
-                ret.add(v);
+        synchronized (input) {
+            for (final T t : input) {
+                final V v = transformation.apply(t);
+                if (v != null) {
+                    ret.add(v);
+                }
             }
         }
         return ret;
