@@ -195,7 +195,7 @@ public abstract class Achievement {
             if (sharedDesc != null) {
                 desc = sharedDesc + " " + desc;
             }
-            gui.showImageDialog(image, displayName + " (" + type + ")\n" + desc + ".", "Achievement Earned");
+            gui.showImageDialog(image, displayName + " (" + type + ")\n" + desc, "Achievement Earned");
         }
     }
 
