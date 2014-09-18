@@ -1031,7 +1031,7 @@ public class AiController {
         String prop = AiProfileUtil.getAIProp(getPlayer().getLobbyPlayer(), propName);
 
         if (prop == null || prop.equals("")) {
-            return 0;
+            return Integer.parseInt(propName.getDefault());
         }
 
         return Integer.parseInt(prop);
@@ -1041,7 +1041,7 @@ public class AiController {
         String prop = AiProfileUtil.getAIProp(getPlayer().getLobbyPlayer(), propName);
 
         if (prop == null || prop.equals("")) {
-            return false;
+            return Boolean.parseBoolean(propName.getDefault());
         }
 
         return Boolean.parseBoolean(prop);
