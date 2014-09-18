@@ -339,7 +339,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
                 int nameHeight = NAME_FONT.getFontMetrics().getHeight();
                 int descHeight = DESC_FONT.getFontMetrics().getHeight();
 
-                w = getWidth() - 2 * PADDING;
+                w = imgShelfSize.width - 2 * PADDING - 1;
                 h = nameHeight + PADDING * 5 / 2;
                 if (subTitle != null) {
                     h += descHeight;
