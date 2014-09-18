@@ -30,6 +30,7 @@ import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.MyRandom;
 import forge.util.TextUtil;
 
 import org.apache.commons.lang3.StringUtils;
@@ -661,17 +662,24 @@ public class ComputerUtilMana {
             return false;
         }
 
-        // LowPriorityAI SVar should be set to 'low' elsewhere to indicate that it is a low priority spell ability
+        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+        int chanceToReserve = aic.getIntProperty(AiProps.RESERVE_MANA_FOR_MAIN2_CHANCE);
+
+        // If it's a low priority spell (it's explicitly marked so elsewhere in the AI with a SVar), always
+        // obey mana reservations; otherwise, obey mana reservations depending on the "chance to reserve" 
+        // AI profile variable.
         if (sa.getSVar("LowPriorityAI").equals("")) {
-            return false;
+            if (chanceToReserve == 0 || MyRandom.getRandom().nextInt(100) >= chanceToReserve) {
+                return false;
+            }
         }
 
         PhaseType curPhase = ai.getGame().getPhaseHandler().getPhase();
         if (curPhase == PhaseType.MAIN2 || curPhase == PhaseType.CLEANUP) {
-            ((PlayerControllerAi)ai.getController()).getAi().getCardMemory().clearMemorySet(AiCardMemory.MemorySet.HELD_MANA_SOURCES);
+            aic.getCardMemory().clearMemorySet(AiCardMemory.MemorySet.HELD_MANA_SOURCES);
         }
         else {
-            if (((PlayerControllerAi)ai.getController()).getAi().getCardMemory().isRememberedCard(sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES)) {
+            if (aic.getCardMemory().isRememberedCard(sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES)) {
                 // This mana source is held elsewhere for a Main Phase 2 spell.
                 return true;
             }
