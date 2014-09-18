@@ -7,3 +7,4 @@ SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | ValidTgts$ Creature.YouCtrl | Tgt
 SVar:RemAIDeck:True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armament_corps.jpg
+Oracle:When Armament Corps enters the battlefield, distribute two +1/+1 counters among one or two target creatures you control.

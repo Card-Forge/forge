@@ -6,3 +6,4 @@ A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U} to your mana pool
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R} to your mana pool.
 A:AB$ Draw | Cost$ G U R T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temur_banner.jpg
+Oracle:{T}: Add {G}, {U}, or {R} to your mana pool.\n{G}{U}{R}, {T}, Sacrifice Temur Banner: Draw a card.

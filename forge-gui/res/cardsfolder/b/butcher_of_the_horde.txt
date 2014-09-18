@@ -9,3 +9,4 @@ SVar:DBTrample:DB$ Pump | Defined$ Self | KW$ Lifelink | SpellDescription$ CARDN
 SVar:DBHaste:DB$ Pump | Defined$ Self | KW$ Haste | SpellDescription$ CARDNAME gains haste until end of turn.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/butcher_of_the_horde.jpg
+Oracle:Flying\nSacrifice another creature: Butcher of the Horde gains your choice of vigilance, lifelink, or haste until end of turn.

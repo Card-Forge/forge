@@ -10,3 +10,4 @@ SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ 
 SVar:PlayMain1:TRUE
 SVar:OblivionRing:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/suspension_field.jpg
+Oracle:When Suspension Field enters the battlefield, you may exile target creature with toughness 3 or greater until Suspension Field leaves the battlefield. (That creature returns under its owner's control.)

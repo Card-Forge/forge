@@ -5,3 +5,4 @@ PT:6/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCantBlock | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, target creature defending player controls blocks this combat if able.
 SVar:TrigCantBlock:AB$ MustBlock | Cost$ 0 | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature | SpellDescription$ Target creature blocks CARDNAME this turn if able.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avalanche_tusker.jpg
+Oracle:Whenever Avalanche Tusker attacks, target creature defending player controls blocks it this combat if able.

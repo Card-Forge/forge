@@ -6,3 +6,4 @@ SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.IsNotRemembered | SubAbi
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duneblast.jpg
+Oracle:Choose up to one creature. Destroy the rest.

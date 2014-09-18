@@ -6,3 +6,4 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME can
 SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brave_the_sands.jpg
+Oracle:Creatures you control have vigilance.\nEach creature you control can block an additional creature.

@@ -7,3 +7,4 @@ SVar:W:Count$xPaid/Plus.2
 SVar:Y:Count$Compare Z GE1.W.X
 SVar:Z:Count$Valid Creature.YouCtrl+powerGE4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/craters_claws.jpg
+Oracle:Crater's Claws deals X damage to target creature or player.\nFerocious - Crater's Claws deals X plus 2 damage to that creature or player instead if you control a creature with power 4 or greater.

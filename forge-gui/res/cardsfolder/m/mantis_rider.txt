@@ -6,3 +6,4 @@ K:Flying
 K:Vigilance
 K:Haste
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mantis_rider.jpg
+Oracle:Flying, vigilance, haste

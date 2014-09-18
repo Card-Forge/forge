@@ -7,3 +7,4 @@ SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield |
 SVar:X:Count$Valid Creature.powerGE4+YouCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barrage_of_boulders.jpg
+Oracle:Barrage of Boulders deals 1 damage to each creature you don't control.\nFerocious - If you control a creature with power 4 or greater, creatures can't block this turn.

@@ -6,3 +6,4 @@ SVar:AddOneMoreCounters:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ Re
 SVar:X:ReplaceCount$CounterNum/Plus.1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hardened_scales.jpg
+Oracle:If one or more +1/+1 counters would be placed on a creature you control, that many plus one +1/+1 counters are placed on it instead.

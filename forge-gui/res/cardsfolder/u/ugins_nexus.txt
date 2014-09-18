@@ -8,3 +8,4 @@ SVar:DBAddTurn:DB$ AddTurn | Defined$ ReplacedCardLKIController | NumTurns$ 1
 SVar:RemRandomDeck:True
 SVar:SacMe:5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ugins_nexus.jpg
+Oracle:If a player would begin an extra turn, that player skips that turn instead.\nIf Ugin's Nexus would be put into a graveyard from the battlefield, instead exile it and take an extra turn after this one.

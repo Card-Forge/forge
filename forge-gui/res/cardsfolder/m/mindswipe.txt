@@ -6,3 +6,4 @@ SVar:DBBurn:DB$DealDamage | Cost$ 0 | NumDmg$ X | References$ X | Defined$ Targe
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindswipe.jpg
+Oracle:Counter target spell unless its controller pays {X}. Mindswipe deals X damage to that spell's controller.

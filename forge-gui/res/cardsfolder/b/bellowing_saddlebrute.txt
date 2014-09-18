@@ -7,3 +7,4 @@ SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 4 | ConditionCheckSV
 SVar:RaidTest:Count$AttackersDeclared
 SVar:NeedsToPlayVar:RaidTest GE1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bellowing_saddlebrute.jpg
+Oracle:Raid - When Bellowing Saddlebrute enters the battlefield, you lose 4 life unless you attacked with a creature this turn.

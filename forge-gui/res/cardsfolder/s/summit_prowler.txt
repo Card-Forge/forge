@@ -3,3 +3,4 @@ ManaCost:2 R R
 Types:Creature Yeti
 PT:4/3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/summit_prowler.jpg
+Oracle:

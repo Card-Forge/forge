@@ -6,3 +6,4 @@ S:Mode$ Continuous | Affected$ You | AddKeyword$ CanSeeOpponentsFaceDownCards
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lens_of_clarity.jpg
+Oracle:You may look at the top card of your library and at face-down creatures you don't control. (You may do this at any time.)

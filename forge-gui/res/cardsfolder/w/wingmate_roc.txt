@@ -11,3 +11,4 @@ SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | Refere
 SVar:X:Count$Valid Creature.attacking
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wingmate_roc.jpg
+Oracle:Flying\nRaid - When Wingmate Roc enters the battlefield, if you attacked with a creature this turn, put a 3/4 white Bird creature token with flying onto the battlefield.\nWhenever Wingmate Roc attacks, you gain 1 life for each attacking creature.

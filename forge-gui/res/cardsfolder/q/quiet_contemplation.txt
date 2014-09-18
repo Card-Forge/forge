@@ -6,3 +6,4 @@ SVar:TrigTap:AB$ Tap | Cost$ 1 | ValidTgts$ Creature.OppCtrl | SubAbility$ DBPum
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
 SVar:BuffedBy:Card.nonCreature+nonLand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quiet_contemplation.jpg
+Oracle:Whenever you cast a noncreature spell, you may pay {1}. If you do, tap target creature an opponent controls and it doesn't untap during its controller's next untap step.

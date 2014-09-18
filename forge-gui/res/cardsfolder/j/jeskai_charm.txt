@@ -6,3 +6,4 @@ SVar:ChangeZone:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target 
 SVar:DealDmg:DB$ DealDamage | ValidTgts$ Player | AILogic$ ChoiceBurn | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target player.
 SVar:PumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Lifelink | SpellDescription$ Creatures you control get +1/+1 and gain lifelink until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jeskai_charm.jpg
+Oracle:Choose one -\n• Put target creature on top of its owner's library.\n• Jeskai Charm deals 4 damage to target opponent.\n• Creatures you control get +1/+1 and gain lifelink until end of turn.

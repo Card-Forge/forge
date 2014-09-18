@@ -10,3 +10,4 @@ SVar:DBMayBePlayed:DB$ PumpAll | ValidCards$ Card.IsRemembered+nonCreature | Pum
 SVar:PlayMain1:TRUE
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/narset_enlightened_master.jpg
+Oracle:First strike, hexproof\nWhenever Narset, Enlightened Master attacks, exile the top four cards of your library. Until end of turn, you may cast noncreature cards exiled with Narset this turn without paying their mana costs.

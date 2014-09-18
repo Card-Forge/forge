@@ -7,3 +7,4 @@ SVar:SearingDeath:Mode$ ChangesZone | ValidCard$ Creature.IsRemembered | Origin$
 SVar:DBExile:DB$ ChangeZoneAll | Defined$ TriggeredCardController | Origin$ Graveyard | Destination$ Exile | SubAbility$ EndEffect
 SVar:EndEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burn_away.jpg
+Oracle:Burn Away deals 6 damage to target creature. When that creature dies this turn, exile all cards from its controller's graveyard.

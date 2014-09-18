@@ -6,3 +6,4 @@ SVar:DBEffect:DB$ Effect | Triggers$ TrigDies | SVars$ TrigGainLife
 SVar:TrigDies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature dies this turn, you gain 1 life.
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_frenzy.jpg
+Oracle:All creatures get -2/-2 until end of turn. Whenever a creature dies this turn, you gain 1 life.

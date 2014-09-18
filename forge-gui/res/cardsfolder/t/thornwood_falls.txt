@@ -7,3 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 1
 K:CARDNAME enters the battlefield tapped.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thornwood_falls.jpg
+Oracle:Thornwood Falls enters the battlefield tapped.\nWhen Thornwood Falls enters the battlefield, you gain 1 life.\n{T}: Add {G} or {U} to your mana pool.

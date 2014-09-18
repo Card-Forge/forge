@@ -6,3 +6,4 @@ K:Flying
 K:First Strike
 K:Haste
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gurmag_swiftwing.jpg
+Oracle:Flying, first strike, haste

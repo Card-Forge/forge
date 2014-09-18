@@ -9,3 +9,4 @@ SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0 | Defined$ Self
 SVar:SacrificeEndCombat:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mardu_blazebringer.jpg
+Oracle:When Mardu Blazebringer attacks or blocks, sacrifice it at end of combat.

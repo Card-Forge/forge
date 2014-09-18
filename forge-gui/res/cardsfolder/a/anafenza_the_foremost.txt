@@ -8,3 +8,4 @@ R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:Exile:AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anafenza_the_foremost.jpg
+Oracle:Whenever Anafenza, the Foremost attacks, put a +1/+1 counter on another target tapped creature you control.\nIf a creature card would be put into an opponent's graveyard from anywhere, exile it instead.

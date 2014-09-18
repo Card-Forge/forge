@@ -6,3 +6,4 @@ SVar:DBPump:DB$ Pump | Defined$ Targeted | Permanent$ True | KW$ HIDDEN This car
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/icy_blast.jpg
+Oracle:Tap X target creatures.\nFerocious - If you control a creature with power 4 or greater, those creatures don't untap during their controllers' next untap steps.

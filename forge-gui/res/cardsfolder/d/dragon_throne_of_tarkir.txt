@@ -7,3 +7,4 @@ SVar:ThroneTarkir:AB$ PumpAll | Cost$ 2 T | ValidCards$ Creature.Other+YouCtrl |
 SVar:ThroneTarkirX:Count$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_throne_of_tarkir.jpg
+Oracle:Equipped creature has defender and "{2}, {T}: Other creatures you control gain trample and get +X/+X until end of turn, where X is this creature's power."\nEquip {3}

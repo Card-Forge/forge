@@ -9,3 +9,4 @@ SVar:Effect:DB$ Effect | Cost$ 0 | Name$ Temur Charm Effect | StaticAbilities$ K
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.powerLE3 | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures with power 3 or less can't block this turn.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temur_charm.jpg
+Oracle:Choose one -\n• Target creature you control gets +1/+1 until end of turn. It fights target creature you don't control.\n• Counter target spell unless its controller pays {3}.\n• Creatures with power 3 or less can't block this turn.

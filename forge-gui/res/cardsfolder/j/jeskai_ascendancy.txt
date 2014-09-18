@@ -11,3 +11,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:BuffedBy:Card.nonCreature+nonLand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jeskai_ascendancy.jpg
+Oracle:Whenever you cast a noncreature spell, creatures you control get +1/+1 until end of turn. Untap those creatures.\nWhenever you cast a noncreature spell, you may draw a card. If you do, discard a card.

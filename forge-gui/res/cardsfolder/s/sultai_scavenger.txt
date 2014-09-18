@@ -5,3 +5,4 @@ PT:3/3
 K:Delve
 K:Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sultai_scavenger.jpg
+Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nFlying

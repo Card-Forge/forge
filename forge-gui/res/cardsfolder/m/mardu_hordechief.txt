@@ -6,3 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Warrior | TokenTypes$ Creature,Warrior | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1
 SVar:RaidTest:Count$AttackersDeclared
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mardu_hordechief.jpg
+Oracle:Raid - When Mardu Hordechief enters the battlefield, if you attacked with a creature this turn, put a 1/1 white Warrior creature token onto the battlefield.

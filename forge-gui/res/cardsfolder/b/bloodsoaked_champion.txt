@@ -8,3 +8,4 @@ SVar:RaidTest:Count$AttackersDeclared
 SVar:DiscardMe:1
 SVar:SacMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodsoaked_champion.jpg
+Oracle:Bloodsoaked Champion can't block.\nRaid - {1}{B}: Return Bloodsoaked Champion from your graveyard to the battlefield. Activate this ability only if you attacked with a creature this turn.

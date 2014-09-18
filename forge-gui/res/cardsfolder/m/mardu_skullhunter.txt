@@ -7,3 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose
 SVar:RaidTest:Count$AttackersDeclared
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mardu_skullhunter.jpg
+Oracle:Mardu Skullhunter enters the battlefield tapped.\nRaid - When Mardu Skullhunter enters the battlefield, if you attacked with a creature this turn, target opponent discards a card.

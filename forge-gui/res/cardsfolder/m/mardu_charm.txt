@@ -8,3 +8,4 @@ SVar:DBPumpFirstStrike:DB$ PumpAll | ValidCards$ Creature.IsRemembered | KW$ Fir
 SVar:DBCleanUp:DB$ Cleanup | ClearRemembered$ True
 SVar:DBDiscard:DB$ Discard | ValidTgts$ Opponent | Mode$ RevealYouChoose | DiscardValid$ Card.nonCreature+nonLand | NumCards$ 1 | SpellDescription$ Target opponent reveals his or her hand. You choose a noncreature, nonland card from it. That player discards that card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mardu_charm.jpg
+Oracle:Choose one -\n• Mardu Charm deals 4 damage to target creature.\n• Put two 1/1 white Warrior creature tokens onto the battlefield. They gain first strike until end of turn.\n• Target opponent reveals his or her hand. You choose a noncreature, nonland card from it. That player discards that card.

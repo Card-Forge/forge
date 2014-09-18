@@ -7,3 +7,4 @@ SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creat
 SVar:DBSac:DB$ Sacrifice | Defined$ Player.IsRemembered | SacValid$ Card.ChosenCard | SacMessage$ the creature with the highest power
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crackling_doom.jpg
+Oracle:Crackling Doom deals 2 damage to each opponent. Each opponent sacrifices a creature with the greatest power among creatures he or she controls.

@@ -3,3 +3,4 @@ ManaCost:2 G
 Types:Creature Bear
 PT:4/2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alpine_grizzly.jpg
+Oracle:

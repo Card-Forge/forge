@@ -6,3 +6,4 @@ K:Outlast 2 W
 T:Mode$ AbilityCast | ValidCard$ Card.Self | ValidActivatingPlayer$ You | Outlast$ True | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you activate CARDNAME's outlast ability, put a 1/1 white Warrior creature token onto the battlefield.
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Warrior | TokenTypes$ Creature,Warrior | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/herald_of_anafenza.jpg
+Oracle:Outlast {2}{W} ({2}{W}, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)\nWhenever you activate Herald of Anafenza's outlast ability, put a 1/1 white Warrior creature token onto the battlefield.

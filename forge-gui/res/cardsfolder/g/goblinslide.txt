@@ -5,3 +5,4 @@ T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | T
 SVar:TrigToken:AB$ Token | Cost$ 1 | TokenAmount$ 1 | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Haste | TokenImage$ r_1_1_goblin_ktk | TokenOwner$ You
 SVar:BuffedBy:Card.nonCreature+nonLand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblinslide.jpg
+Oracle:Whenever you cast a noncreature spell, you may pay {1}. If you do, put a 1/1 red Goblin creature token with haste onto the battlefield.
