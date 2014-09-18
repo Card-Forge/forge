@@ -1,0 +1,7 @@
+Name:Kin-Tree Warden
+ManaCost:G
+Types:Creature Human Warrior
+PT:1/1
+K:Morph:G
+A:AB$ Regenerate | Cost$ 2 | SpellDescription$ Regenerate CARDNAME.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kin_tree_warden.jpg

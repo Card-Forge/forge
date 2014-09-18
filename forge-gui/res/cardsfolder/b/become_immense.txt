@@ -1,0 +1,6 @@
+Name:Become Immense
+ManaCost:5 G
+Types:Instant
+K:Delve
+A:SP$ Pump | Cost$ 5 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +6 | NumDef$ +6 | SpellDescription$ Target creature gets +6/+6 until end of turn.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/become_immense.jpg
