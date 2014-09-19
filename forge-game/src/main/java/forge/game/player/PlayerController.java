@@ -291,4 +291,8 @@ public abstract class PlayerController {
     public boolean canPlayUnlimitedLands() {
         return false;
     }
+
+    public boolean hasCheated() {
+        return false;
+    }
 }

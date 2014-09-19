@@ -1681,8 +1681,12 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     //Dev Mode cheat functions
-    private DevModeCheats cheats;
     private boolean canPlayUnlimitedLands;
+    @Override
+    public boolean canPlayUnlimitedLands() {
+        return canPlayUnlimitedLands;
+    }
+    private DevModeCheats cheats;
     public DevModeCheats cheat() {
         if (cheats == null) {
             cheats = new DevModeCheats();
@@ -1690,12 +1694,9 @@ public class PlayerControllerHuman extends PlayerController {
         }
         return cheats;
     }
+    @Override
     public boolean hasCheated() {
         return cheats != null;
-    }
-    @Override
-    public boolean canPlayUnlimitedLands() {
-        return canPlayUnlimitedLands;
     }
     public class DevModeCheats {
         private DevModeCheats() {

@@ -73,6 +73,8 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
     }
 
     public void updateAll(IGuiBase gui, Player player) {
+        if (player.getController().hasCheated()) { return; } //don't update achievements if player cheated during game
+
         for (Achievement achievement : achievements.values()) {
             achievement.update(gui, player);
         }
