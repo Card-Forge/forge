@@ -135,7 +135,7 @@ C Trumpet Blast
 C Valley Dasher
 U War-Name Aspirant
 C Alpine Grizzly
-C Archer's Parapet
+C Archers' Parapet
 C Awaken the Bear
 U Become Immense
 C Dragonscale Boon
