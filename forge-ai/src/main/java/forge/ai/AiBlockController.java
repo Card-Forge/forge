@@ -234,7 +234,11 @@ public class AiBlockController {
                 // 3.Blockers that can destroy the attacker and have an upside when dying
                 killingBlockers = getKillingBlockers(combat, attacker, blockers);
                 for (Card b : killingBlockers) {
-                    if ((b.hasKeyword("Undying") && b.getCounters(CounterType.P1P1) == 0) || b.hasSVar("SacMe")) {
+                    if ((b.hasKeyword("Undying") && b.getCounters(CounterType.P1P1) == 0) 
+                    		|| b.hasSVar("SacMe")
+                    		|| (b.hasStartOfKeyword("Vanishing") && b.getCounters(CounterType.TIME) == 1)
+                    		|| (b.hasStartOfKeyword("Fading") && b.getCounters(CounterType.FADE) == 0)
+                    		|| b.hasSVar("EndOfTurnLeavePlay")) {
                         blocker = b;
                         break;
                     }
@@ -278,6 +282,32 @@ public class AiBlockController {
                     if ((ComputerUtilCard.evaluateCreature(worst) + diff) < value) {
                         blocker = worst;
                     }
+                }
+            }
+            if (blocker != null) {
+                currentAttackers.remove(attacker);
+                combat.addBlocker(attacker, blocker);
+            }
+        }
+        attackersLeft = (new ArrayList<Card>(currentAttackers));
+
+        // 6. Blockers that don't survive until the next turn anyway
+        for (final Card attacker : attackersLeft) {
+        	if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")
+                    || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
+                continue;
+            }
+
+            Card blocker = null;
+
+            final List<Card> blockers = getPossibleBlockers(combat, attacker, blockersLeft, true);
+            
+            for (Card b : blockers) {
+                if ((b.hasStartOfKeyword("Vanishing") && b.getCounters(CounterType.TIME) == 1)
+                		|| (b.hasStartOfKeyword("Fading") && b.getCounters(CounterType.FADE) == 0)
+                		|| b.hasSVar("EndOfTurnLeavePlay")) {
+                    blocker = b;
+                    break;
                 }
             }
             if (blocker != null) {
