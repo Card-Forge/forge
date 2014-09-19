@@ -8,7 +8,11 @@ Forge Beta: 09-##-2014 ver 1.5.28
 Release Notes
 -------------
 
-- New Commander 2014 and Khans of Tarkir cards -
+- New Khans of Tarkir cards -
+Forge now includes many of the new Khans of Tarkir cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
+
+
+- New Commander 2014 cards -
 We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
 
 
@@ -53,18 +57,9 @@ A few examples of possible expressions:
 These examples should get you started with this powerful-now-that-it's-finished feature. Enjoy!
 
     
--------------------------------
-New Commander 2014 branch Cards
--------------------------------
-
-Ghoulcaller Gisa
-Stitcher Geralf
-Teferi, Temporal Archmage
-
-
---------------------------------
-New Khans of Tarkir branch Cards
---------------------------------
+---------
+New Cards
+---------
 
 Abzan Ascendancy
 Abzan Banner
@@ -269,6 +264,34 @@ Meandering Towershell
 Death Frenzy
 Duneblast
 Temur Charm
+Mindswipe
+Efreet Weaponmaster
+Narset, Enlightened Master
+Jeskai Ascendancy
+Kin-Tree Invocation
+Master the Way
+Mardu Ascendancy
+Sultai Ascendancy
+Sultai Charm
+Burn Away
+Alpine Grizzly
+Archers' Parapet
+Become Immense
+Dragonscale Boon
+Highland Game
+Hooting Mandrills
+Kin-Tree Warden
+Longshot Squad
+Winterflame
+
+
+-------------------------------
+New Commander 2014 branch Cards
+-------------------------------
+
+Ghoulcaller Gisa
+Stitcher Geralf
+Teferi, Temporal Archmage
 
 
 ------------
