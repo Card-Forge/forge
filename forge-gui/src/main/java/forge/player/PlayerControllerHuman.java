@@ -1220,32 +1220,47 @@ public class PlayerControllerHuman extends PlayerController {
             final String[] possibleValues = { p1Str , p2Str };
             return SGuiDialog.confirm(getGui(), gameView.getCardView(sa.getHostCard()), "Choose a Pile", possibleValues);
         }
-        else {
-            final Card[] disp = new Card[pile1.size() + pile2.size() + 2];
-            disp[0] = new Card(-1);
-            disp[0].setName("Pile 1");
-            for (int i = 0; i < pile1.size(); i++) {
-                disp[1 + i] = pile1.get(i);
+
+        mayLookAt.addAll(pile1);
+        mayLookAt.addAll(pile2);
+
+        final int idPile1 = Integer.MIN_VALUE, idPile2 = Integer.MIN_VALUE + 1;
+        final List<CardView> cards = Lists.newArrayListWithCapacity(pile1.size() + pile2.size() + 2);
+        final CardView pileView1 = new CardView(true) {
+            @Override
+            public String toString() {
+                return "--- Pile 1 ---";
             }
-            disp[pile1.size() + 1] = new Card(-2);
-            disp[pile1.size() + 1].setName("Pile 2");
-            for (int i = 0; i < pile2.size(); i++) {
-                disp[pile1.size() + i + 2] = pile2.get(i);
+        };
+        pileView1.setId(idPile1);
+        cards.add(pileView1);
+        cards.addAll(getCardViews(pile1));
+
+        final CardView pileView2 = new CardView(true) {
+            @Override
+            public String toString() {
+                return "--- Pile 2 ---";
             }
+        };
+        pileView2.setId(idPile2);
+        cards.add(pileView2);
+        cards.addAll(getCardViews(pile2));
 
-            // make sure Pile 1 or Pile 2 is clicked on
-            while (true) {
-                final Object o = SGuiChoose.one(getGui(), "Choose a pile", disp);
-                final Card c = (Card) o;
-                String name = c.getName();
-
-                if (!(name.equals("Pile 1") || name.equals("Pile 2"))) {
-                    continue;
-                }
-
-                return name.equals("Pile 1");
+        // make sure Pile 1 or Pile 2 is clicked on
+        boolean result;
+        while (true) {
+            final CardView chosen = SGuiChoose.one(getGui(), "Choose a pile", cards);
+            if (chosen.equals(pileView1)) {
+                result = true;
+                break;
+            } else if (chosen.equals(pileView2)) {
+                result = false;
+                break;
             }
         }
+
+        mayLookAt.clear();
+        return result;
     }
 
     @Override
