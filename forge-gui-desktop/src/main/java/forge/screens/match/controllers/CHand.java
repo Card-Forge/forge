@@ -28,6 +28,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
 import forge.FThreads;
 import forge.GuiBase;
@@ -51,7 +52,7 @@ import forge.view.arcane.util.CardPanelMouseAdapter;
 public class CHand implements ICDoc {
     private final PlayerView player;
     private final VHand view;
-    private boolean initializedAlready = false;
+    private final List<CardView> ordering = Lists.newArrayList();
 
     /**
      * Controls Swing components of a player's hand instance.
@@ -66,19 +67,17 @@ public class CHand implements ICDoc {
             @Override
             public void mouseDragEnd(CardPanel dragPanel, MouseEvent evt) {
                 //update index of dragged card in hand zone to match new index within hand area
-                //int index = CHand.this.view.getHandArea().getCardPanels().indexOf(dragPanel);
-                //CHand.this.player.getZone(ZoneType.Hand).reposition(dragPanel.getCard(), index);
+                final int index = CHand.this.view.getHandArea().getCardPanels().indexOf(dragPanel);
+                synchronized (ordering) {
+                    ordering.remove(dragPanel.getCard());
+                    ordering.add(index, dragPanel.getCard());
+                }
             }
         });
     }
 
     @Override
     public void initialize() {
-        if (initializedAlready) { return; }
-        initializedAlready = true;
-
-//        if (player != null)
-//            player.getZone(ZoneType.Hand).addObserver(this);
     }
 
     public void update(final Observable a, final Object b) {
@@ -112,10 +111,22 @@ public class CHand implements ICDoc {
         synchronized (player) {
             cards = ImmutableList.copyOf(player.getHandCards());
         }
+
+        synchronized (ordering) {
+            // Remove old cards from ordering
+            ordering.retainAll(cards);
+            // Append new cards to ordering
+            for (final CardView c : cards) {
+                if (!ordering.contains(c)) {
+                    ordering.add(c);
+                }
+            }
+        }
+
         final List<CardPanel> placeholders = new ArrayList<CardPanel>();
         final List<CardPanel> cardPanels = new ArrayList<CardPanel>();
 
-        for (final CardView card : cards) {
+        for (final CardView card : ordering) {
             CardPanel cardPanel = p.getCardPanel(card.getId());
             if (cardPanel == null) { //create placeholders for new cards
                 cardPanel = new CardPanel(card);
