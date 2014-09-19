@@ -647,7 +647,7 @@ public class AiController {
         Collections.sort(all, saComparator); // put best spells first
         
         for (final SpellAbility sa : getOriginalAndAltCostAbilities(all)) {
-            if (sa.getApi() == ApiType.Counter || sa.getApi() == exceptSA) {
+            if (sa.getApi() == ApiType.Counter || sa.getApi() == exceptSA || (exceptSA == ApiType.Pump && sa.getApi() == ApiType.PumpAll)) {
                 continue;
             }
             sa.setActivatingPlayer(player);
