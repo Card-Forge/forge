@@ -77,8 +77,7 @@ public enum VDev implements IVDoc<CDev> {
     //========= Constructor
 
     private VDev() {
-        //devLBLs.add(lblRiggedRoll);
-        // devLBLs.add(lblMilling);
+        devLBLs.add(lblRiggedRoll);
         devLBLs.add(lblUnlimitedLands);
         devLBLs.add(lblGenerateMana);
         devLBLs.add(lblSetupGame);
@@ -101,14 +100,13 @@ public enum VDev implements IVDoc<CDev> {
         viewport.add(this.lblCardToBattlefield, halfConstraints);
         viewport.add(this.lblSetLife, halfConstraints + ", split 2");
         viewport.add(this.lblWinGame, halfConstraints);
-        viewport.add(this.lblRiggedRoll, halfConstraints + ", split 2");
-        viewport.add(this.lblWalkTo, halfConstraints);
-        // viewport.add(this.lblMilling, constraints);
-        viewport.add(this.lblUnlimitedLands, constraints);
         viewport.add(this.lblSetupGame, constraints);
+        viewport.add(this.lblUnlimitedLands, constraints);
         viewport.add(this.lblCounterPermanent, constraints);
         viewport.add(this.lblTapPermanent, halfConstraints + ", split 2");
         viewport.add(this.lblUntapPermanent, halfConstraints);
+        viewport.add(this.lblRiggedRoll, halfConstraints + ", split 2");
+        viewport.add(this.lblWalkTo, halfConstraints);
     }
 
     //========= Overridden methods
@@ -163,11 +161,6 @@ public enum VDev implements IVDoc<CDev> {
     }
 
     //========= Retrieval methods
-
-    /** @return {@link forge.gui.match.views.VDev.DevLabel} */
-//    public DevLabel getLblMilling() {
-//        return this.lblMilling;
-//    }
 
     /** @return {@link forge.screens.match.views.VDev.DevLabel} */
     public DevLabel getLblGenerateMana() {

@@ -33,7 +33,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Add card to hand", new FEventHandler() {
+        addItem(new FMenuItem("Add Card to Hand", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -44,7 +44,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Add card to play", new FEventHandler() {
+        addItem(new FMenuItem("Add Card to Play", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -130,7 +130,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Rigged planar roll", new FEventHandler() {
+        addItem(new FMenuItem("Rigged Planar Roll", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {

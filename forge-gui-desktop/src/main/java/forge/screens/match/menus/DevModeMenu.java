@@ -25,16 +25,17 @@ public class DevModeMenu implements ActionListener {
     private enum DevMenuItem {
         GENERATE_MANA("Generate Mana"),
         TUTOR_FOR_CARD("Tutor for Card"),
-        ADD_CARD_TO_HAND("Add card to hand"),
-        ADD_CARD_TO_PLAY("Add card to play"),
-        RIGGED_PLANAR_ROLL("Rigged planar roll"),
-        PLANESWALK_TO("Planeswalk to"),
-        PLAY_MANY_LANDS("Play many lands per Turn"),
+        ADD_CARD_TO_HAND("Add Card to Hand"),
+        ADD_CARD_TO_PLAY("Add Card to Play"),
+        SET_PLAYER_LIFE("Set Player Life"),
+        WIN_GAME("Win Game"),
         SETUP_GAME_STATE("Setup Game State"),
+        PLAY_UNLIMITED_LANDS("Play Unlimited Lands"),
         ADD_COUNTER("Add Counter to Permanent"),
         TAP_PERMANENT("Tap Permanent"),
         UNTAP_PERMANENT("Untap Permanent"),
-        SET_PLAYER_LIFE("Set Player Life"),
+        RIGGED_PLANAR_ROLL("Rigged Planar Roll"),
+        PLANESWALK_TO("Planeswalk to"),
         DEV_CORNER("Developer's Corner");
 
         protected String caption;
@@ -61,17 +62,18 @@ public class DevModeMenu implements ActionListener {
         menu.add(getMenuItem(DevMenuItem.ADD_CARD_TO_HAND));
         menu.add(getMenuItem(DevMenuItem.ADD_CARD_TO_PLAY));
         menu.addSeparator();
-        menu.add(getMenuItem(DevMenuItem.RIGGED_PLANAR_ROLL));
-        menu.add(getMenuItem(DevMenuItem.PLANESWALK_TO));
+        menu.add(getMenuItem(DevMenuItem.SET_PLAYER_LIFE));
+        menu.add(getMenuItem(DevMenuItem.WIN_GAME));
         menu.addSeparator();
-        menu.add(getCheckboxMenuItem(DevMenuItem.PLAY_MANY_LANDS, Singletons.getControl().getGameView().devGetUnlimitedLands()));
         menu.add(getMenuItem(DevMenuItem.SETUP_GAME_STATE));
+        menu.add(getCheckboxMenuItem(DevMenuItem.PLAY_UNLIMITED_LANDS, Singletons.getControl().getGameView().devGetUnlimitedLands()));
         menu.add(getMenuItem(DevMenuItem.ADD_COUNTER));
         menu.addSeparator();
         menu.add(getMenuItem(DevMenuItem.TAP_PERMANENT));
         menu.add(getMenuItem(DevMenuItem.UNTAP_PERMANENT));
         menu.addSeparator();
-        menu.add(getMenuItem(DevMenuItem.SET_PLAYER_LIFE));
+        menu.add(getMenuItem(DevMenuItem.RIGGED_PLANAR_ROLL));
+        menu.add(getMenuItem(DevMenuItem.PLANESWALK_TO));
         menu.addSeparator();
         menu.add(getMenuItem(DevMenuItem.DEV_CORNER));
         return menu;
@@ -100,15 +102,18 @@ public class DevModeMenu implements ActionListener {
         case TUTOR_FOR_CARD:    { controller.tutorForCard(); break; }
         case ADD_CARD_TO_HAND:  { controller.addCardToHand(); break; }
         case ADD_CARD_TO_PLAY:  { controller.addCardToBattlefield(); break; }
-        case RIGGED_PLANAR_ROLL:{ controller.riggedPlanerRoll(); break; }
-        case PLANESWALK_TO:     { controller.planeswalkTo(); break; }
-        case PLAY_MANY_LANDS:   { controller.togglePlayManyLandsPerTurn(); break; }
+        case SET_PLAYER_LIFE:   { controller.setPlayerLife(); break; }
+        case WIN_GAME:          { controller.winGame(); break; }
         case SETUP_GAME_STATE:  { controller.setupGameState(); break; }
+        case PLAY_UNLIMITED_LANDS:   { controller.togglePlayManyLandsPerTurn(); break; }
         case ADD_COUNTER:       { controller.addCounterToPermanent(); break; }
         case TAP_PERMANENT:     { controller.tapPermanent(); break; }
         case UNTAP_PERMANENT:   { controller.untapPermanent(); break; }
-        case SET_PLAYER_LIFE:   { controller.setPlayerLife(); break; }
+        case RIGGED_PLANAR_ROLL:{ controller.riggedPlanerRoll(); break; }
+        case PLANESWALK_TO:     { controller.planeswalkTo(); break; }
         case DEV_CORNER:        { openDevForumInBrowser(); break; }
+        default:
+            break;
         }
     }
 
