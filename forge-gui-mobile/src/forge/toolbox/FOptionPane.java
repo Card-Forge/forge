@@ -1,6 +1,7 @@
 package forge.toolbox;
 
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Forge;
@@ -178,20 +179,29 @@ public class FOptionPane extends FDialog {
     private final FButton[] buttons;
     private final Callback<Integer> callback;
     private final int defaultOption;
+    private final boolean centerIcon;
 
     public FOptionPane(String message, String title, FImage icon, FDisplayObject displayObj0, String[] options, int defaultOption0, final Callback<Integer> callback0) {
         super(title);
 
         if (icon != null) {
-            lblIcon = add(new FLabel.Builder().icon(icon).iconScaleFactor(1).insets(new Vector2(0, 0)).build());
+            centerIcon = icon.getWidth() >= 100; //for large icon, center in dialog
+            lblIcon = add(new FLabel.Builder().icon(icon).iconScaleFactor(1).insets(new Vector2(0, 0)).iconInBackground(centerIcon).build());
+            if (centerIcon) {
+                lblIcon.setAlignment(HAlignment.CENTER);
+            }
         }
         else {
             lblIcon = null;
+            centerIcon = false;
         }
 
         if (message != null) {
             prompt = add(new FTextArea(true, message));
             prompt.setFont(FSkinFont.get(12));
+            if (centerIcon) {
+                prompt.setAlignment(HAlignment.CENTER);
+            }
         }
         else {
             prompt = null;
@@ -250,20 +260,26 @@ public class FOptionPane extends FDialog {
             if (promptHeight > maxPromptHeight) {
                 promptHeight = maxPromptHeight;
             }
-            lblIcon.setBounds(x - Utils.scaleX(3), y, labelWidth, promptHeight);
-            x += labelWidth;
+            if (centerIcon) {
+                lblIcon.setBounds(x, y, width - 2 * PADDING, promptHeight);
+                y += promptHeight + PADDING;
+            }
+            else {
+                lblIcon.setBounds(x - Utils.scaleX(3), y, labelWidth, promptHeight);
+                x += labelWidth;
+            }
         }
         if (prompt != null) {
             float promptWidth = width - x - PADDING;
             prompt.setBounds(x, y, promptWidth, prompt.getPreferredHeight(promptWidth));
-            if (prompt.getHeight() < promptHeight) {
-               //ensure prompt centered next to icon if less tall than icon
+            if (prompt.getHeight() < promptHeight && !centerIcon) {
+                //ensure prompt centered next to icon if less tall than icon
                 prompt.setTop(y + (promptHeight - prompt.getHeight()) / 2);
             }
             else if (prompt.getHeight() > maxPromptHeight) {
                 prompt.setHeight(maxPromptHeight);
             }
-            if (prompt.getHeight() > promptHeight) {
+            if (prompt.getHeight() > promptHeight || centerIcon) {
                 promptHeight = prompt.getHeight();
             }
         }
