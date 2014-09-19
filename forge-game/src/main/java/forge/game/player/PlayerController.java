@@ -215,10 +215,11 @@ public abstract class PlayerController {
     public abstract List<SpellAbility> chooseSaToActivateFromOpeningHand(List<SpellAbility> usableFromOpeningHand);
     public abstract Mana chooseManaFromPool(List<Mana> manaChoices);
 
+    public abstract String chooseSomeType(String kindOfType, SpellAbility sa, List<String> validTypes, List<String> invalidTypes, boolean isOptional);
     public final String chooseSomeType(String kindOfType, SpellAbility sa, List<String> validTypes, List<String> invalidTypes) {
         return chooseSomeType(kindOfType, sa, validTypes, invalidTypes, false);
     }
-    public abstract String chooseSomeType(String kindOfType, SpellAbility sa, List<String> validTypes, List<String> invalidTypes, boolean isOptional);
+
     public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ArrayListMultimap<Object, Player> votes);
     public abstract Pair<CounterType,String> chooseAndRemoveOrPutCounter(Card cardWithCounter);
     public abstract boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question);
@@ -284,6 +285,10 @@ public abstract class PlayerController {
     public abstract Card chooseSingleCardForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, List<Card> fetchList, String selectPrompt, boolean isOptional, Player decider);
 
     public boolean isGuiPlayer() {
+        return false;
+    }
+
+    public boolean canPlayUnlimitedLands() {
         return false;
     }
 }

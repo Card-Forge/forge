@@ -1,8 +1,15 @@
 package forge.player;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +23,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -24,6 +32,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 
 import forge.LobbyPlayer;
+import forge.card.CardCharacteristicName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -39,8 +48,11 @@ import forge.game.GameLogEntryType;
 import forge.game.GameObject;
 import forge.game.GameOutcome;
 import forge.game.GameType;
+import forge.game.PlanarDice;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardShields;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
@@ -54,16 +66,19 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController;
 import forge.game.replacement.ReplacementEffect;
+import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.MagicStack;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.interfaces.IGuiBase;
+import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.match.input.ButtonUtil;
 import forge.match.input.Input;
@@ -80,8 +95,8 @@ import forge.match.input.InputSelectCardsForConvoke;
 import forge.match.input.InputSelectCardsFromList;
 import forge.match.input.InputSelectEntitiesFromList;
 import forge.model.FModel;
+import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences.FPref;
-import forge.util.DevModeUtil;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.TextUtil;
@@ -1318,16 +1333,14 @@ public class PlayerControllerHuman extends PlayerController {
     /*
      * What follows are the View methods.
      */
-
     private class GameView extends LocalGameView {
-
         public GameView(Game game) {
             super(game);
         }
 
         @Override
         public GameOutcome.AnteResult getAnteResult() {
-            return this.getGame().getOutcome().anteResult.get(player);
+            return game.getOutcome().anteResult.get(player);
         }
 
         public void updateAchievements() {
@@ -1449,64 +1462,6 @@ public class PlayerControllerHuman extends PlayerController {
             return card == null || !c.isFaceDown() || card.canCardFaceBeShownTo(player);
         }
 
-        // Dev mode functions
-        @Override
-        public boolean devGetUnlimitedLands() {
-            return player.canCheatPlayUnlimitedLands;
-        }
-        @Override
-        public void devSetUnlimitedLands(final boolean b) {
-            player.canCheatPlayUnlimitedLands = b;
-        }
-        @Override
-        public void devGenerateMana() {
-            DevModeUtil.devModeGenerateMana(game, PlayerControllerHuman.this);
-        }
-        @Override
-        public void devSetupGameState() {
-            DevModeUtil.devSetupGameState(game, PlayerControllerHuman.this);
-        }
-        @Override
-        public void devTutorForCard() {
-            DevModeUtil.devModeTutor(game, PlayerControllerHuman.this);
-        }
-        @Override
-        public void devAddCardToHand() {
-            DevModeUtil.devModeCardToHand(game, PlayerControllerHuman.this);
-        }
-        @Override
-        public void devAddCounterToPermanent() {
-            DevModeUtil.devModeAddCounter(game, PlayerControllerHuman.this);
-        }
-        @Override
-        public void devTapPermanent() {
-            DevModeUtil.devModeTapPerm(game, PlayerControllerHuman.this);
-        }
-        @Override
-        public void devUntapPermanent() {
-            DevModeUtil.devModeUntapPerm(game, PlayerControllerHuman.this);
-        }
-        @Override
-        public void devSetPlayerLife() {
-            DevModeUtil.devModeSetLife(game, PlayerControllerHuman.this);
-        }
-        @Override
-        public void devWinGame() {
-            DevModeUtil.devModeWinGame(game, PlayerControllerHuman.this);
-        }
-        @Override
-        public void devAddCardToBattlefield() {
-            DevModeUtil.devModeCardToBattlefield(game, PlayerControllerHuman.this);
-        }
-        @Override
-        public void devRiggedPlanerRoll() {
-            DevModeUtil.devModeRiggedPlanarRoll(game, PlayerControllerHuman.this);
-        }
-        @Override
-        public void devPlaneswalkTo() {
-            DevModeUtil.devModePlaneswalkTo(game, PlayerControllerHuman.this);
-        }
-
         @Override
         public Iterable<String> getAutoYields() {
             return PlayerControllerHuman.this.getAutoYields();
@@ -1563,6 +1518,16 @@ public class PlayerControllerHuman extends PlayerController {
         @Override
         public void autoPassCancel() {
             PlayerControllerHuman.this.autoPassCancel();
+        }
+
+        @Override
+        public boolean canPlayUnlimitedLands() {
+            return PlayerControllerHuman.this.canPlayUnlimitedLands();
+        }
+
+        @Override
+        public DevModeCheats cheat() {
+            return PlayerControllerHuman.this.cheat();
         }
     }
 
@@ -1715,4 +1680,447 @@ public class PlayerControllerHuman extends PlayerController {
         // Not used by the human controller
     }
 
+    //Dev Mode cheat functions
+    private DevModeCheats cheats;
+    private boolean canPlayUnlimitedLands;
+    public DevModeCheats cheat() {
+        if (cheats == null) {
+            cheats = new DevModeCheats();
+            //TODO: In Network game, inform other players that this player is cheating
+        }
+        return cheats;
+    }
+    public boolean hasCheated() {
+        return cheats != null;
+    }
+    @Override
+    public boolean canPlayUnlimitedLands() {
+        return canPlayUnlimitedLands;
+    }
+    public class DevModeCheats {
+        private DevModeCheats() {
+        }
+
+        public void setCanPlayUnlimitedLands(boolean canPlayUnlimitedLands0) {
+            canPlayUnlimitedLands = canPlayUnlimitedLands0;
+        }
+
+        public void generateMana() {
+            Player pPriority = game.getPhaseHandler().getPriorityPlayer();
+            if (pPriority == null) {
+                SGuiDialog.message(getGui(), "No player has priority at the moment, so mana cannot be added to their pool.");
+                return;
+            }
+
+            final Card dummy = new Card(-777777);
+            dummy.setOwner(pPriority);
+            Map<String, String> produced = new HashMap<String, String>();
+            produced.put("Produced", "W W W W W W W U U U U U U U B B B B B B B G G G G G G G R R R R R R R 7");
+            final AbilityManaPart abMana = new AbilityManaPart(dummy, produced);
+            game.getAction().invoke(new Runnable() {
+                @Override public void run() { abMana.produceMana(null); }
+            });
+        }
+
+        public void setupGameState() {
+            int humanLife = -1;
+            int computerLife = -1;
+
+            final Map<ZoneType, String> humanCardTexts = new EnumMap<ZoneType, String>(ZoneType.class);
+            final Map<ZoneType, String> aiCardTexts = new EnumMap<ZoneType, String>(ZoneType.class);
+
+            String tChangePlayer = "NONE";
+            String tChangePhase = "NONE";
+
+            File gamesDir = new File(ForgeConstants.USER_GAMES_DIR);
+            if (!gamesDir.exists()) { // if the directory does not exist, try to create it
+                gamesDir.mkdir();
+            }
+            
+            String filename = getGui().showFileDialog("Select Game State File", ForgeConstants.USER_GAMES_DIR);
+            if (filename == null) {
+                return;
+            }
+
+            try {
+                final FileInputStream fstream = new FileInputStream(filename);
+                final DataInputStream in = new DataInputStream(fstream);
+                final BufferedReader br = new BufferedReader(new InputStreamReader(in));
+
+                String temp = "";
+
+                while ((temp = br.readLine()) != null) {
+
+                    final String[] tempData = temp.split("=");
+                    if (tempData.length < 2 || temp.charAt(0) == '#') {
+                        continue;
+                    }
+
+                    final String categoryName = tempData[0].toLowerCase();
+                    final String categoryValue = tempData[1];
+
+                    if (categoryName.equals("humanlife"))                   humanLife = Integer.parseInt(categoryValue);
+                    else if (categoryName.equals("ailife"))                 computerLife = Integer.parseInt(categoryValue);
+
+                    else if (categoryName.equals("activeplayer"))           tChangePlayer = categoryValue.trim().toLowerCase();
+                    else if (categoryName.equals("activephase"))            tChangePhase = categoryValue;
+
+                    else if (categoryName.equals("humancardsinplay"))       humanCardTexts.put(ZoneType.Battlefield, categoryValue);
+                    else if (categoryName.equals("aicardsinplay"))          aiCardTexts.put(ZoneType.Battlefield, categoryValue);
+                    else if (categoryName.equals("humancardsinhand"))       humanCardTexts.put(ZoneType.Hand, categoryValue);
+                    else if (categoryName.equals("aicardsinhand"))          aiCardTexts.put(ZoneType.Hand, categoryValue);
+                    else if (categoryName.equals("humancardsingraveyard"))  humanCardTexts.put(ZoneType.Graveyard, categoryValue);
+                    else if (categoryName.equals("aicardsingraveyard"))     aiCardTexts.put(ZoneType.Graveyard, categoryValue);
+                    else if (categoryName.equals("humancardsinlibrary"))    humanCardTexts.put(ZoneType.Library, categoryValue);
+                    else if (categoryName.equals("aicardsinlibrary"))       aiCardTexts.put(ZoneType.Library, categoryValue);
+                    else if (categoryName.equals("humancardsinexile"))      humanCardTexts.put(ZoneType.Exile, categoryValue);
+                    else if (categoryName.equals("aicardsinexile"))         aiCardTexts.put(ZoneType.Exile, categoryValue);
+                }
+
+                in.close();
+            }
+            catch (final FileNotFoundException fnfe) {
+                SOptionPane.showErrorDialog(getGui(), "File not found: " + filename);
+            }
+            catch (final Exception e) {
+                SOptionPane.showErrorDialog(getGui(), "Error loading battle setup file!");
+                return;
+            }
+
+            setupGameState(humanLife, computerLife, humanCardTexts, aiCardTexts, tChangePlayer, tChangePhase);
+        }
+
+        private void setupGameState(final int humanLife, final int computerLife, final Map<ZoneType, String> humanCardTexts,
+                final Map<ZoneType, String> aiCardTexts, final String tChangePlayer, final String tChangePhase) {
+
+            Player pPriority = game.getPhaseHandler().getPriorityPlayer();
+            if (pPriority == null) {
+                SGuiDialog.message(getGui(), "No player has priority at the moment, so game state cannot be setup.");
+                return;
+            }
+            game.getAction().invoke(new Runnable() {
+                @Override
+                public void run() {
+                    final Player human = game.getPlayers().get(0);
+                    final Player ai = game.getPlayers().get(1);
+
+                    Player newPlayerTurn = tChangePlayer.equals("human") ? newPlayerTurn = human : tChangePlayer.equals("ai") ? newPlayerTurn = ai : null;
+                    PhaseType newPhase = tChangePhase.trim().equalsIgnoreCase("none") ? null : PhaseType.smartValueOf(tChangePhase);
+
+                    game.getPhaseHandler().devModeSet(newPhase, newPlayerTurn);
+
+                    game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+
+                    setupPlayerState(humanLife, humanCardTexts, human);
+                    setupPlayerState(computerLife, aiCardTexts, ai);
+
+                    game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+
+                    game.getAction().checkStaticAbilities(true);
+                }
+            });
+        }
+
+        private void setupPlayerState(int life, Map<ZoneType, String> cardTexts, final Player p) {
+            Map<ZoneType, List<Card>> humanCards = new EnumMap<ZoneType, List<Card>>(ZoneType.class);
+            for(Entry<ZoneType, String> kv : cardTexts.entrySet()) {
+                humanCards.put(kv.getKey(), processCardsForZone(kv.getValue().split(";"), p));
+            }
+
+            if (life > 0) p.setLife(life, null);
+            for (Entry<ZoneType, List<Card>> kv : humanCards.entrySet()) {
+                if (kv.getKey() == ZoneType.Battlefield) {
+                    for (final Card c : kv.getValue()) {
+                        p.getZone(ZoneType.Hand).add(c);
+                        p.getGame().getAction().moveToPlay(c);
+                        c.setSickness(false);
+                    }
+                } else {
+                    p.getZone(kv.getKey()).setCards(kv.getValue());
+                }
+            }
+        }
+
+        /**
+         * <p>
+         * processCardsForZone.
+         * </p>
+         * 
+         * @param data
+         *            an array of {@link java.lang.String} objects.
+         * @param player
+         *            a {@link forge.game.player.Player} object.
+         * @return a {@link forge.CardList} object.
+         */
+        private List<Card> processCardsForZone(final String[] data, final Player player) {
+            final List<Card> cl = new ArrayList<Card>();
+            for (final String element : data) {
+                final String[] cardinfo = element.trim().split("\\|");
+
+                final Card c = Card.fromPaperCard(FModel.getMagicDb().getCommonCards().getCard(cardinfo[0]), player);
+
+                boolean hasSetCurSet = false;
+                for (final String info : cardinfo) {
+                    if (info.startsWith("Set:")) {
+                        c.setCurSetCode(info.substring(info.indexOf(':') + 1));
+                        hasSetCurSet = true;
+                    } else if (info.equalsIgnoreCase("Tapped:True")) {
+                        c.tap();
+                    } else if (info.startsWith("Counters:")) {
+                        final String[] counterStrings = info.substring(info.indexOf(':') + 1).split(",");
+                        for (final String counter : counterStrings) {
+                            c.addCounter(CounterType.valueOf(counter), 1, true);
+                        }
+                    } else if (info.equalsIgnoreCase("SummonSick:True")) {
+                        c.setSickness(true);
+                    } else if (info.equalsIgnoreCase("FaceDown:True")) {
+                        c.setState(CardCharacteristicName.FaceDown);
+                    }
+                }
+
+                if (!hasSetCurSet) {
+                    c.setCurSetCode(c.getMostRecentSet());
+                }
+
+                cl.add(c);
+            }
+            return cl;
+        }
+
+        /**
+         * <p>
+         * Tutor.
+         * </p>
+         * 
+         * @since 1.0.15
+         */
+        public void tutorForCard() {
+            Player pPriority = game.getPhaseHandler().getPriorityPlayer();
+            if (pPriority == null) {
+                SGuiDialog.message(getGui(), "No player has priority at the moment, so their deck can't be tutored from.");
+                return;
+            }
+
+            final List<Card> lib = pPriority.getCardsIn(ZoneType.Library);
+            final List<ZoneType> origin = new ArrayList<ZoneType>();
+            origin.add(ZoneType.Library);
+            SpellAbility sa = new SpellAbility.EmptySa(new Card(-1));
+            final Card card = chooseSingleCardForZoneChange(ZoneType.Hand, origin, sa, lib, "Choose a card", true, pPriority);
+            if (card == null) { return; }
+
+            game.getAction().invoke(new Runnable() {
+                @Override
+                public void run() {
+                    game.getAction().moveToHand(card);
+                }
+            });
+        }
+
+        /**
+         * <p>
+         * AddCounter.
+         * </p>
+         * 
+         * @since 1.0.15
+         */
+        public void addCountersToPermanent() {
+            final List<Card> cards = game.getCardsIn(ZoneType.Battlefield);
+            final CardView cardView = SGuiChoose.oneOrNone(getGui(), "Add counters to which card?", getCardViews(cards));
+            final Card card = getCard(cardView);
+            if (card == null) { return; }
+
+            final CounterType counter = SGuiChoose.oneOrNone(getGui(), "Which type of counter?", CounterType.values());
+            if (counter == null) { return; }
+
+            final Integer count = SGuiChoose.getInteger(getGui(), "How many counters?", 1, Integer.MAX_VALUE, 10);
+            if (count == null) { return; }
+            
+            card.addCounter(counter, count, false);
+        }
+
+        public void tapPermanents() {
+            game.getAction().invoke(new Runnable() {
+                @Override
+                public void run() {
+                    final List<Card> untapped = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Predicates.not(CardPredicates.Presets.TAPPED));
+                    InputSelectCardsFromList inp = new InputSelectCardsFromList(PlayerControllerHuman.this, 0, Integer.MAX_VALUE, untapped);
+                    inp.setCancelAllowed(true);
+                    inp.setMessage("Choose permanents to tap");
+                    inp.showAndWait();
+                    if (!inp.hasCancelled()) {
+                        for (Card c : inp.getSelected()) {
+                            c.tap();
+                        }
+                    }
+                }
+            });
+        }
+
+        public void untapPermanents() {
+            game.getAction().invoke(new Runnable() {
+                @Override
+                public void run() {
+                    final List<Card> tapped = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.TAPPED);
+                    InputSelectCardsFromList inp = new InputSelectCardsFromList(PlayerControllerHuman.this, 0, Integer.MAX_VALUE, tapped);
+                    inp.setCancelAllowed(true);
+                    inp.setMessage("Choose permanents to untap");
+                    inp.showAndWait();
+                    if( !inp.hasCancelled() )
+                        for(Card c : inp.getSelected())
+                            c.untap();
+                }
+            });
+        }
+
+        public void setPlayerLife() {
+            final List<Player> players = game.getPlayers();
+            final PlayerView playerView = SGuiChoose.oneOrNone(getGui(), "Set life for which player?", getPlayerViews(players));
+            final Player player = getPlayer(playerView);
+            if (player == null) { return; }
+
+            final Integer life = SGuiChoose.getInteger(getGui(), "Set life to what?", 0);
+            if (life == null) { return; }
+
+            player.setLife(life, null);
+        }
+
+        public void winGame() {
+            Input input = getGui().getInputQueue().getInput();
+            if (!(input instanceof InputPassPriority)) {
+                SOptionPane.showMessageDialog(getGui(), "You must have priority to use this feature.", "Win Game", SOptionPane.INFORMATION_ICON);
+                return;
+            }
+
+            //set life of all other players to 0
+            final LobbyPlayer guiPlayer = getLobbyPlayer();
+            final List<Player> players = game.getPlayers();
+            for (Player player : players) {
+                if (player.getLobbyPlayer() != guiPlayer) {
+                    player.setLife(0, null);
+                }
+            }
+
+            //pass priority so that causes gui player to win
+            input.selectButtonOK();
+        }
+
+        public void addCardToHand() {
+            final List<Player> players = game.getPlayers();
+            final PlayerView pView = SGuiChoose.oneOrNone(getGui(), "Put card in hand for which player?", getPlayerViews(players));
+            final Player p = getPlayer(pView);
+            if (null == p) {
+                return;
+            }
+
+            final List<PaperCard> cards =  Lists.newArrayList(FModel.getMagicDb().getCommonCards().getUniqueCards());
+            Collections.sort(cards);
+
+            // use standard forge's list selection dialog
+            final IPaperCard c = SGuiChoose.oneOrNone(getGui(), "Name the card", cards);
+            if (c == null) {
+                return;
+            }
+
+            game.getAction().invoke(new Runnable() { @Override public void run() {
+                game.getAction().moveToHand(Card.fromPaperCard(c, p));
+            }});
+        }
+
+        public void addCardToBattlefield() {
+            final List<Player> players = game.getPlayers();
+            final PlayerView pView = SGuiChoose.oneOrNone(getGui(), "Put card in play for which player?", getPlayerViews(players));
+            final Player p = getPlayer(pView);
+            if (null == p) {
+                return;
+            }
+
+            final List<PaperCard> cards =  Lists.newArrayList(FModel.getMagicDb().getCommonCards().getUniqueCards());
+            Collections.sort(cards);
+
+            // use standard forge's list selection dialog
+            final IPaperCard c = SGuiChoose.oneOrNone(getGui(), "Name the card", cards);
+            if (c == null) {
+                return;
+            }
+
+            game.getAction().invoke(new Runnable() {
+                @Override public void run() {
+                    final Card forgeCard = Card.fromPaperCard(c, p);
+
+                    if (c.getRules().getType().isLand()) {
+                        game.getAction().moveToPlay(forgeCard);
+                    } else {
+                        final List<SpellAbility> choices = forgeCard.getBasicSpells();
+                        if (choices.isEmpty()) {
+                            return; // when would it happen?
+                        }
+
+                        final SpellAbility sa;
+                        if (choices.size() == 1) {
+                            sa = choices.iterator().next();
+                        } else {
+                            final SpellAbilityView saView = SGuiChoose.oneOrNone(getGui(), "Choose", getSpellAbilityViews(choices));
+                            sa = getSpellAbility(saView);
+                        }
+
+                        if (sa == null) {
+                            return; // happens if cancelled
+                        }
+
+                        game.getAction().moveToHand(forgeCard); // this is really needed (for rollbacks at least)
+                        // Human player is choosing targets for an ability controlled by chosen player.
+                        sa.setActivatingPlayer(p);
+                        HumanPlay.playSaWithoutPayingManaCost(PlayerControllerHuman.this, game, sa, true);
+                    }
+                    game.getStack().addAllTriggeredAbilitiesToStack(); // playSa could fire some triggers
+                }
+            });
+        }
+
+        public void riggedPlanarRoll() {
+            final List<Player> players = game.getPlayers();
+            final PlayerView playerView = SGuiChoose.oneOrNone(getGui(), "Which player should roll?", getPlayerViews(players));
+            final Player player = getPlayer(playerView);
+            if (player == null) { return; }
+
+            final PlanarDice res = SGuiChoose.oneOrNone(getGui(), "Choose result", PlanarDice.values());
+            if (res == null) { return; }
+
+            System.out.println("Rigging planar dice roll: " + res.toString());
+
+            game.getAction().invoke(new Runnable() {
+                @Override
+                public void run() {
+                    PlanarDice.roll(player, res);
+                }
+            });
+        }
+
+        public void planeswalkTo() {
+            if (!game.getRules().hasAppliedVariant(GameType.Planechase)) { return; }
+            final Player p = game.getPhaseHandler().getPlayerTurn();
+
+            final List<PaperCard> allPlanars = new ArrayList<PaperCard>();
+            for (PaperCard c : FModel.getMagicDb().getVariantCards().getAllCards()) {
+                if (c.getRules().getType().isPlane() || c.getRules().getType().isPhenomenon()) {
+                    allPlanars.add(c);
+                }
+            }
+            Collections.sort(allPlanars);
+
+            // use standard forge's list selection dialog
+            final IPaperCard c = SGuiChoose.oneOrNone(getGui(), "Name the card", allPlanars);
+            if (c == null) { return; }
+            final Card forgeCard = Card.fromPaperCard(c, p);
+
+            forgeCard.setOwner(p);
+            game.getAction().invoke(new Runnable() { 
+                @Override
+                public void run() {
+                    game.getAction().changeZone(null, p.getZone(ZoneType.PlanarDeck), forgeCard, 0);
+                    PlanarDice.roll(p, PlanarDice.Planeswalk);
+                }
+            });
+        }
+    }
 }

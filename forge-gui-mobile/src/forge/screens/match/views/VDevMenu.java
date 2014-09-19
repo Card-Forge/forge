@@ -17,7 +17,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() { //must invoke all these in game thread since they may require synchronous user input
                     @Override
                     public void run() {
-                        FControl.getGameView().devGenerateMana();
+                        FControl.getGameView().cheat().generateMana();
                     }
                 });
             }
@@ -28,7 +28,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        FControl.getGameView().devTutorForCard();
+                        FControl.getGameView().cheat().tutorForCard();
                     }
                 });
             }
@@ -39,7 +39,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        FControl.getGameView().devAddCardToHand();
+                        FControl.getGameView().cheat().addCardToHand();
                     }
                 });
             }
@@ -50,7 +50,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        FControl.getGameView().devAddCardToBattlefield();
+                        FControl.getGameView().cheat().addCardToBattlefield();
                     }
                 });
             }
@@ -61,7 +61,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        FControl.getGameView().devSetPlayerLife();
+                        FControl.getGameView().cheat().setPlayerLife();
                     }
                 });
             }
@@ -72,7 +72,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        FControl.getGameView().devWinGame();
+                        FControl.getGameView().cheat().winGame();
                     }
                 });
             }
@@ -83,18 +83,18 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        FControl.getGameView().devSetupGameState();
+                        FControl.getGameView().cheat().setupGameState();
                     }
                 });
             }
         }));
 
-        final boolean unlimitedLands = FControl.getGameView().devGetUnlimitedLands();
+        final boolean unlimitedLands = FControl.getGameView().canPlayUnlimitedLands();
         addItem(new FCheckBoxMenuItem("Play Unlimited Lands", unlimitedLands,
                 new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                FControl.getGameView().devSetUnlimitedLands(!unlimitedLands);
+                FControl.getGameView().cheat().setCanPlayUnlimitedLands(!unlimitedLands);
             }
         }));
         addItem(new FMenuItem("Add Counters to Permanent", new FEventHandler() {
@@ -103,7 +103,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        FControl.getGameView().devAddCounterToPermanent();
+                        FControl.getGameView().cheat().addCountersToPermanent();
                     }
                 });
             }
@@ -114,7 +114,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        FControl.getGameView().devTapPermanent();
+                        FControl.getGameView().cheat().tapPermanents();
                     }
                 });
             }
@@ -125,7 +125,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        FControl.getGameView().devUntapPermanent();
+                        FControl.getGameView().cheat().untapPermanents();
                     }
                 });
             }
@@ -136,7 +136,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        FControl.getGameView().devRiggedPlanerRoll();
+                        FControl.getGameView().cheat().riggedPlanarRoll();
                     }
                 });
             }
@@ -147,7 +147,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        FControl.getGameView().devPlaneswalkTo();
+                        FControl.getGameView().cheat().planeswalkTo();
                     }
                 });
             }

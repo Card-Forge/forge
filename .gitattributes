@@ -17080,7 +17080,6 @@ forge-gui/src/main/java/forge/sound/SoundEffectType.java -text
 forge-gui/src/main/java/forge/sound/SoundSystem.java -text
 forge-gui/src/main/java/forge/util/Base64Coder.java svneol=native#text/plain
 forge-gui/src/main/java/forge/util/Callback.java -text
-forge-gui/src/main/java/forge/util/DevModeUtil.java -text
 forge-gui/src/main/java/forge/util/Evaluator.java -text
 forge-gui/src/main/java/forge/util/GuiDisplayUtil.java -text
 forge-gui/src/main/java/forge/util/HttpUtil.java svneol=native#text/plain

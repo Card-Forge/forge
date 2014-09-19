@@ -7,6 +7,7 @@ import forge.game.Game;
 import forge.match.input.Input;
 import forge.match.input.InputPlaybackControl;
 import forge.match.input.InputQueue;
+import forge.player.PlayerControllerHuman.DevModeCheats;
 import forge.util.ITriggerEvent;
 
 /**
@@ -109,51 +110,6 @@ public class WatchLocalGame extends LocalGameView {
         return true;
     }
 
-    // Dev mode functions
-    @Override
-    public boolean devGetUnlimitedLands() {
-        return false;
-    }
-    @Override
-    public void devSetUnlimitedLands(final boolean b) {
-    }
-    @Override
-    public void devGenerateMana() {
-    }
-    @Override
-    public void devSetupGameState() {
-    }
-    @Override
-    public void devTutorForCard() {
-    }
-    @Override
-    public void devAddCardToHand() {
-    }
-    @Override
-    public void devAddCounterToPermanent() {
-    }
-    @Override
-    public void devTapPermanent() {
-    }
-    @Override
-    public void devUntapPermanent() {
-    }
-    @Override
-    public void devSetPlayerLife() {
-    }
-    @Override
-    public void devWinGame() {
-    }
-    @Override
-    public void devAddCardToBattlefield() {
-    }
-    @Override
-    public void devRiggedPlanerRoll() {
-    }
-    @Override
-    public void devPlaneswalkTo() {
-    }
-
     @Override
     public Iterable<String> getAutoYields() {
         return null;
@@ -188,6 +144,16 @@ public class WatchLocalGame extends LocalGameView {
     }
     @Override
     public void autoPassCancel() {
+    }
+
+    @Override
+    public boolean canPlayUnlimitedLands() {
+        return false;
+    }
+
+    @Override
+    public DevModeCheats cheat() {
+        return null;
     }
 
 }

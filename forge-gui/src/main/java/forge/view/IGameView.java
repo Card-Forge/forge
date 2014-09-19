@@ -14,6 +14,7 @@ import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.match.input.Input;
 import forge.match.input.InputConfirm;
+import forge.player.PlayerControllerHuman.DevModeCheats;
 import forge.util.ITriggerEvent;
 
 /**
@@ -251,20 +252,9 @@ public interface IGameView {
      * automatically.
      */
     public abstract void autoPassCancel();
+    
+    public abstract boolean canPlayUnlimitedLands();
 
-    public abstract boolean devGetUnlimitedLands();
-    public abstract void devSetUnlimitedLands(boolean b);
-    public abstract void devGenerateMana();
-    public abstract void devSetupGameState();
-    public abstract void devTutorForCard();
-    public abstract void devAddCardToHand();
-    public abstract void devAddCounterToPermanent();
-    public abstract void devTapPermanent();
-    public abstract void devUntapPermanent();
-    public abstract void devSetPlayerLife();
-    public abstract void devWinGame();
-    public abstract void devAddCardToBattlefield();
-    public abstract void devRiggedPlanerRoll();
-    public abstract void devPlaneswalkTo();
-
+    //method used to wrap all functions that cheat
+    public abstract DevModeCheats cheat();
 }

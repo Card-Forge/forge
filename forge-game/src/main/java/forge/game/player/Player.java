@@ -185,8 +185,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private boolean isPlayingExtraTrun = false;
 
-    public  boolean canCheatPlayUnlimitedLands = false;
-
     private List<Card> lostOwnership = new ArrayList<Card>();
     private List<Card> gainedOwnership = new ArrayList<Card>();
 
@@ -1923,7 +1921,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         // **** Check for land play limit per turn ****
         // Dev Mode
-        if (this.canCheatPlayUnlimitedLands || this.hasKeyword("You may play any number of additional lands on each of your turns.")) {
+        if (this.getController().canPlayUnlimitedLands() || this.hasKeyword("You may play any number of additional lands on each of your turns.")) {
             return true;
         }
 
