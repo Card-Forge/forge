@@ -60,9 +60,7 @@ public enum VDev implements IVDoc<CDev> {
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     // Dev labels
-    // private final DevLabel lblMilling = new DevLabel("Loss by Milling: Enabled", "Loss by Milling: Disabled");
-    private final DevLabel lblUnlimitedLands = new DevLabel("Play many lands per Turn: Enabled",
-            "Play many lands per Turn: Disabled");
+    private final DevLabel lblUnlimitedLands = new DevLabel("Play Unlimited Lands");
     private final DevLabel lblGenerateMana = new DevLabel("Generate Mana");
     private final DevLabel lblSetupGame = new DevLabel("Setup Game State");
     private final DevLabel lblTutor = new DevLabel("Tutor for Card");
@@ -71,9 +69,9 @@ public enum VDev implements IVDoc<CDev> {
     private final DevLabel lblUntapPermanent = new DevLabel("Untap Permanent");
     private final DevLabel lblSetLife = new DevLabel("Set Player Life");
     private final DevLabel lblWinGame = new DevLabel("Win Game");
-    private final DevLabel lblCardToBattlefield = new DevLabel("Add card to play");
-    private final DevLabel lblCardToHand = new DevLabel("Add card to hand");
-    private final DevLabel lblRiggedRoll = new DevLabel("Rigged planar roll");
+    private final DevLabel lblCardToBattlefield = new DevLabel("Add Card to Play");
+    private final DevLabel lblCardToHand = new DevLabel("Add Card to Hand");
+    private final DevLabel lblRiggedRoll = new DevLabel("Rigged Planar Roll");
     private final DevLabel lblWalkTo = new DevLabel("Planeswalk to");
 
     //========= Constructor
@@ -241,52 +239,23 @@ public enum VDev implements IVDoc<CDev> {
     public class DevLabel extends SkinnedLabel {
         private static final long serialVersionUID = 7917311680519060700L;
 
-        private FSkin.SkinColor defaultBG = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
+        private FSkin.SkinColor defaultBG;
         private final FSkin.SkinColor hoverBG = FSkin.getColor(FSkin.Colors.CLR_HOVER);
         private final FSkin.SkinColor pressedBG = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
-        private boolean enabled;
-        private final String enabledText, disabledText;
+        private boolean toggled;
         private int w, h; // Width, height, radius, insets (for paintComponent)
 
-        private final int r;
+        private final int r, i;
 
-        private final int i;
-
-        /**
-         * Labels that act as buttons which control dev mode functions. Labels
-         * are used (instead of buttons) to support multiline text.
-         * 
-         * Constructor for DevLabel which doesn't use enabled/disabled states;
-         * only single text string required.
-         * 
-         * @param s0
-         *            &emsp; String text/tooltip of label
-         */
-        public DevLabel(final String s0) {
-            this(s0, s0);
-        }
-
-        /**
-         * Labels that act as buttons which control dev mode functions. Labels
-         * are used (instead of buttons) to support multiline text.
-         * 
-         * This constructor for DevLabels empowers an "enable" state that
-         * displays them as green (enabled) or red (disabled).
-         * 
-         * @param en0
-         *            &emsp; String text/tooltip of label, in "enabled" state
-         * @param dis0
-         *            &emsp; String text/tooltip of label, in "disabled" state
-         */
-        public DevLabel(final String en0, final String dis0) {
+        public DevLabel(final String text0) {
             super();
+            this.setText(text0);
+            this.setToolTipText(text0);
             this.setUI(MultiLineLabelUI.getLabelUI());
             this.setBorder(new EmptyBorder(5, 5, 5, 5));
-            this.enabledText = en0;
-            this.disabledText = dis0;
             this.r = 6; // Radius (for paintComponent)
             this.i = 2; // Insets (for paintComponent)
-            this.setEnabled(true);
+            this.setToggled(false);
             this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
             this.addMouseListener(new MouseAdapter() {
@@ -312,6 +281,10 @@ public enum VDev implements IVDoc<CDev> {
             });
         }
 
+        public boolean getToggled() {
+            return toggled;
+        }
+
         /**
          * Changes enabled state per boolean parameter, automatically updating
          * text string and background color.
@@ -319,43 +292,15 @@ public enum VDev implements IVDoc<CDev> {
          * @param b
          *            &emsp; boolean
          */
-        @Override
-        public void setEnabled(final boolean b) {
-            String s;
+        public void setToggled(final boolean b) {
             if (b) {
-                this.defaultBG = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
-                s = this.enabledText;
-            } else {
                 this.defaultBG = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
-                s = this.disabledText;
             }
-            this.enabled = b;
-            this.setText(s);
-            this.setToolTipText(s);
+            else {
+                this.defaultBG = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
+            }
+            this.toggled = b;
             this.setBackground(this.defaultBG);
-        }
-
-        /**
-         * Gets the enabled.
-         * 
-         * @return boolean
-         */
-        public boolean getEnabled() {
-            return this.enabled;
-        }
-
-        /**
-         * In many cases, a DevLabel state will just be toggling a boolean. This
-         * method sets up and evaluates the condition and toggles as
-         * appropriate.
-         * 
-         */
-        public void toggleEnabled() {
-            if (this.enabled) {
-                this.setEnabled(false);
-            } else {
-                this.setEnabled(true);
-            }
         }
 
         /*

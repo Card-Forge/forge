@@ -3,9 +3,6 @@ package forge.screens.match.views;
 import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
-import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.FControl;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
@@ -92,19 +89,12 @@ public class VDevMenu extends FDropDownMenu {
             }
         }));
 
-        final ForgePreferences prefs = FModel.getPreferences();
-        addItem(new FCheckBoxMenuItem("Play Unlimited Lands",
-                prefs.getPrefBoolean(FPref.DEV_UNLIMITED_LAND),
+        final boolean unlimitedLands = FControl.getGameView().devGetUnlimitedLands();
+        addItem(new FCheckBoxMenuItem("Play Unlimited Lands", unlimitedLands,
                 new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                boolean unlimitedLands = !prefs.getPrefBoolean(FPref.DEV_UNLIMITED_LAND);
-                FControl.getGameView().devTogglePlayManyLands(unlimitedLands);
-
-                // probably will need to call a synchronized method to have the game thread see changed value of the variable
-
-                prefs.setPref(FPref.DEV_UNLIMITED_LAND, String.valueOf(unlimitedLands));
-                prefs.save();
+                FControl.getGameView().devSetUnlimitedLands(!unlimitedLands);
             }
         }));
         addItem(new FMenuItem("Add Counter to Permanent", new FEventHandler() {

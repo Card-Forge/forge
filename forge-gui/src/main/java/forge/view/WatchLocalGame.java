@@ -111,7 +111,11 @@ public class WatchLocalGame extends LocalGameView {
 
     // Dev mode functions
     @Override
-    public void devTogglePlayManyLands(final boolean b) {
+    public boolean devGetUnlimitedLands() {
+        return false;
+    }
+    @Override
+    public void devSetUnlimitedLands(final boolean b) {
     }
     @Override
     public void devGenerateMana() {

@@ -1451,7 +1451,11 @@ public class PlayerControllerHuman extends PlayerController {
 
         // Dev mode functions
         @Override
-        public void devTogglePlayManyLands(final boolean b) {
+        public boolean devGetUnlimitedLands() {
+            return player.canCheatPlayUnlimitedLands;
+        }
+        @Override
+        public void devSetUnlimitedLands(final boolean b) {
             player.canCheatPlayUnlimitedLands = b;
         }
         @Override

@@ -252,7 +252,8 @@ public interface IGameView {
      */
     public abstract void autoPassCancel();
 
-    public abstract void devTogglePlayManyLands(boolean b);
+    public abstract boolean devGetUnlimitedLands();
+    public abstract void devSetUnlimitedLands(boolean b);
     public abstract void devGenerateMana();
     public abstract void devSetupGameState();
     public abstract void devTutorForCard();

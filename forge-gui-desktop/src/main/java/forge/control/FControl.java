@@ -80,7 +80,6 @@ import forge.screens.match.controllers.CLog;
 import forge.screens.match.controllers.CPlayers;
 import forge.screens.match.controllers.CStack;
 import forge.screens.match.views.VAntes;
-import forge.screens.match.views.VDev;
 import forge.screens.match.views.VField;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
@@ -676,11 +675,6 @@ public enum FControl implements KeyEventDispatcher {
         prefs.setPref(FPref.PHASE_HUMAN_MAIN2, String.valueOf(fvHuman.getLblMain2().getEnabled()));
         prefs.setPref(FPref.PHASE_HUMAN_EOT, fvHuman.getLblEndTurn().getEnabled());
         prefs.setPref(FPref.PHASE_HUMAN_CLEANUP, fvHuman.getLblCleanup().getEnabled());
-
-        final VDev v = VDev.SINGLETON_INSTANCE;
-
-        // prefs.setPref(FPref.DEV_MILLING_LOSS, v.getLblMilling().getEnabled());
-        prefs.setPref(FPref.DEV_UNLIMITED_LAND, v.getLblUnlimitedLands().getEnabled());
 
         prefs.save();
     }

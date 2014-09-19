@@ -7,9 +7,6 @@ import java.awt.event.MouseListener;
 import forge.Singletons;
 import forge.UiCommand;
 import forge.gui.framework.ICDoc;
-import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.views.VDev;
 
 /**
@@ -19,124 +16,135 @@ import forge.screens.match.views.VDev;
  *
  */
 public enum CDev implements ICDoc {
-    /** */
     SINGLETON_INSTANCE;
 
-//    //========= Start mouse listener inits
-//    private final MouseListener madMilling = new MouseAdapter() { @Override
-//        public void mousePressed(final MouseEvent e) {
-//        toggleLossByMilling();
-//    } };
-//    public void toggleLossByMilling() {
-//        VDev.SINGLETON_INSTANCE.getLblMilling().toggleEnabled();
-//        FModel.getPreferences().writeMatchPreferences();
-//        FModel.getPreferences().save();
-//    }
-
-    private final MouseListener madUnlimited = new MouseAdapter() { @Override
+    private final MouseListener madUnlimited = new MouseAdapter() {
+        @Override
         public void mousePressed(final MouseEvent e) {
-        togglePlayManyLandsPerTurn();
-    } };
+            togglePlayManyLandsPerTurn();
+        }
+    };
     public void togglePlayManyLandsPerTurn() {
-        VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().toggleEnabled();
-        boolean newValue = VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().getEnabled();
-        FModel.getPreferences().setPref(FPref.DEV_UNLIMITED_LAND, String.valueOf(newValue));
-        Singletons.getControl().getGameView().devTogglePlayManyLands(newValue);
-        // probably will need to call a synchronized method to have the game thread see changed value of the variable 
-        FModel.getPreferences().save();
+        boolean newValue = !VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().getToggled();
+        VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().setToggled(newValue);
+        Singletons.getControl().getGameView().devSetUnlimitedLands(newValue);
     }
 
-    private final MouseListener madMana = new MouseAdapter() { @Override
+    private final MouseListener madMana = new MouseAdapter() {
+        @Override
         public void mousePressed(final MouseEvent e) {
-        generateMana(); }
+            generateMana();
+        }
     };
     public void generateMana() {
         Singletons.getControl().getGameView().devGenerateMana();
     }
 
-    private final MouseListener madSetup = new MouseAdapter() { @Override
+    private final MouseListener madSetup = new MouseAdapter() {
+        @Override
         public void mousePressed(final MouseEvent e) {
-        setupGameState(); }
+            setupGameState();
+        }
     };
     public void setupGameState() {
         Singletons.getControl().getGameView().devSetupGameState();
     }
 
-    private final MouseListener madTutor = new MouseAdapter() { @Override
+    private final MouseListener madTutor = new MouseAdapter() {
+        @Override
         public void mousePressed(final MouseEvent e) {
-        tutorForCard(); }
+            tutorForCard();
+        }
     };
     public void tutorForCard() {
         Singletons.getControl().getGameView().devTutorForCard();
     }
 
-    private final MouseListener madCardToHand = new MouseAdapter() { @Override
+    private final MouseListener madCardToHand = new MouseAdapter() {
+        @Override
         public void mousePressed(final MouseEvent e) {
-        addCardToHand(); }
+            addCardToHand();
+        }
     };
     public void addCardToHand() {
         Singletons.getControl().getGameView().devAddCardToHand();
     }
 
-    private final MouseListener madCounter = new MouseAdapter() { @Override
+    private final MouseListener madCounter = new MouseAdapter() {
+        @Override
         public void mousePressed(final MouseEvent e) {
-        addCounterToPermanent(); }
+            addCounterToPermanent();
+        }
     };
     public void addCounterToPermanent() {
         Singletons.getControl().getGameView().devAddCounterToPermanent();
     }
 
-    private final MouseListener madTap = new MouseAdapter() { @Override
+    private final MouseListener madTap = new MouseAdapter() {
+        @Override
         public void mousePressed(final MouseEvent e) {
-        tapPermanent(); }
+            tapPermanent();
+        }
     };
     public void tapPermanent() {
         Singletons.getControl().getGameView().devTapPermanent();
     }
 
-    private final MouseListener madUntap = new MouseAdapter() { @Override
+    private final MouseListener madUntap = new MouseAdapter() {
+        @Override
         public void mousePressed(final MouseEvent e) {
-        untapPermanent(); }
+            untapPermanent();
+        }
     };
     public void untapPermanent() {
         Singletons.getControl().getGameView().devUntapPermanent();
     }
 
-    private final MouseListener madLife = new MouseAdapter() { @Override
+    private final MouseListener madLife = new MouseAdapter() {
+        @Override
         public void mousePressed(final MouseEvent e) {
-        setPlayerLife(); }
+            setPlayerLife();
+        }
     };
     public void setPlayerLife() {
         Singletons.getControl().getGameView().devSetPlayerLife();
     }
 
-    private final MouseListener madWinGame = new MouseAdapter() { @Override
+    private final MouseListener madWinGame = new MouseAdapter() {
+        @Override
         public void mousePressed(final MouseEvent e) {
-        winGame(); }
+            winGame();
+        }
     };
     public void winGame() {
         Singletons.getControl().getGameView().devWinGame();
     }
 
-    private final MouseListener madCardToBattlefield = new MouseAdapter() { @Override
+    private final MouseListener madCardToBattlefield = new MouseAdapter() {
+        @Override
         public void mousePressed(final MouseEvent e) {
-        addCardToBattlefield(); }
+            addCardToBattlefield();
+        }
     };
     public void addCardToBattlefield() {
         Singletons.getControl().getGameView().devAddCardToBattlefield();
     }
 
-    private final MouseListener madRiggedRoll = new MouseAdapter() { @Override
+    private final MouseListener madRiggedRoll = new MouseAdapter() {
+        @Override
         public void mousePressed(final MouseEvent e) {
-        riggedPlanerRoll(); }
+            riggedPlanerRoll();
+        }
     };
     public void riggedPlanerRoll() {
         Singletons.getControl().getGameView().devRiggedPlanerRoll();
     }
 
-    private final MouseListener madWalkToPlane = new MouseAdapter() { @Override
+    private final MouseListener madWalkToPlane = new MouseAdapter() {
+        @Override
         public void mousePressed(final MouseEvent e) {
-        planeswalkTo(); }
+            planeswalkTo();
+        }
     };
     public void planeswalkTo() {
         Singletons.getControl().getGameView().devPlaneswalkTo();
@@ -171,12 +179,6 @@ public enum CDev implements ICDoc {
         VDev.SINGLETON_INSTANCE.getLblCardToBattlefield().addMouseListener(madCardToBattlefield);
         VDev.SINGLETON_INSTANCE.getLblRiggedRoll().addMouseListener(madRiggedRoll);
         VDev.SINGLETON_INSTANCE.getLblWalkTo().addMouseListener(madWalkToPlane);
-
-        ForgePreferences prefs = FModel.getPreferences();
-
-       //  VDev.SINGLETON_INSTANCE.getLblMilling().setEnabled(prefs.getPrefBoolean(FPref.DEV_MILLING_LOSS));
-        //VDev.SINGLETON_INSTANCE.getLblMilling().setEnabled(Constant.Runtime.MILL[0]);
-        VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().setEnabled(prefs.getPrefBoolean(FPref.DEV_UNLIMITED_LAND));
     }
 
     /* (non-Javadoc)
@@ -184,8 +186,6 @@ public enum CDev implements ICDoc {
      */
     @Override
     public void update() {
-        // VDev.SINGLETON_INSTANCE.getLblMilling().setEnabled(FModel.getPreferences().getPrefBoolean(FPref.DEV_MILLING_LOSS));
-        VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().setEnabled(FModel.getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND));
+        VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().setToggled(Singletons.getControl().getGameView().devGetUnlimitedLands());
     }
-
 }

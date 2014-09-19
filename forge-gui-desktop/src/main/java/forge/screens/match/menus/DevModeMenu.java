@@ -1,9 +1,7 @@
 package forge.screens.match.menus;
 
+import forge.Singletons;
 import forge.menus.MenuUtil;
-import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.controllers.CDev;
 
 import javax.swing.*;
@@ -52,7 +50,6 @@ public class DevModeMenu implements ActionListener {
         }
     };
 
-    private static ForgePreferences prefs = FModel.getPreferences();
     private static CDev controller = CDev.SINGLETON_INSTANCE;
 
     public static JMenu getMenu() {
@@ -67,7 +64,7 @@ public class DevModeMenu implements ActionListener {
         menu.add(getMenuItem(DevMenuItem.RIGGED_PLANAR_ROLL));
         menu.add(getMenuItem(DevMenuItem.PLANESWALK_TO));
         menu.addSeparator();
-        menu.add(getCheckboxMenuItem(DevMenuItem.PLAY_MANY_LANDS, prefs.getPrefBoolean(FPref.DEV_UNLIMITED_LAND)));
+        menu.add(getCheckboxMenuItem(DevMenuItem.PLAY_MANY_LANDS, Singletons.getControl().getGameView().devGetUnlimitedLands()));
         menu.add(getMenuItem(DevMenuItem.SETUP_GAME_STATE));
         menu.add(getMenuItem(DevMenuItem.ADD_COUNTER));
         menu.addSeparator();

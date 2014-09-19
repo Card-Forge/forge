@@ -6,9 +6,6 @@ import forge.game.player.IGameEntitiesFactory;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.interfaces.IGuiBase;
-import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.util.GuiDisplayUtil;
 
 public class LobbyPlayerHuman extends LobbyPlayer implements IGameEntitiesFactory {
@@ -28,10 +25,6 @@ public class LobbyPlayerHuman extends LobbyPlayer implements IGameEntitiesFactor
     public Player createIngamePlayer(Game game, final int id) {
         Player player = new Player(GuiDisplayUtil.personalizeHuman(getName()), game, id);
         player.setFirstController(new PlayerControllerHuman(game, player, this, gui));
-
-        if (ForgePreferences.DEV_MODE && FModel.getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND)) {
-            player.canCheatPlayUnlimitedLands = true;
-        }
         return player;
     }
 
