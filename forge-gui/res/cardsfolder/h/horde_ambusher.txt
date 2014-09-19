@@ -2,7 +2,7 @@ Name:Horde Ambusher
 ManaCost:1 R
 Types:Creature Human Berserker
 PT:2/2
-T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Whenever blocks, it deals 1 damage to you.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME blocks, it deals 1 damage to you.
 SVar:TrigDealDamage:AB$ DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 1
 K:Morph:Reveal<1/Card.Red/red>
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, target creature can't block this turn.
