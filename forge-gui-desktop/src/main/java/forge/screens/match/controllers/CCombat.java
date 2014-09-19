@@ -113,7 +113,7 @@ public enum CCombat implements ICDoc {
             }
 
             if (!isBand) {
-                if (blockers != null && Iterables.isEmpty(blockers)) {
+                if (blocked) {
                     // if single creature is blocked, but no longer has blockers, tell the user!
                     display.append("     (blocked)\n");
                 } else {
