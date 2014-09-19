@@ -160,7 +160,7 @@ public enum TargetingOverlay {
         final CardView paired = c.getPairedWith();
 
         if (null != enchanting) {
-            if (!enchanting.getController().equals(c.getController())) {
+            if (enchanting.getController() != null && !enchanting.getController().equals(c.getController())) {
                 arcsOther.add(new Point[] {
                     endpoints.get(enchanting.getId()),
                     endpoints.get(c.getId())
@@ -169,7 +169,7 @@ public enum TargetingOverlay {
             }
         }
         if (null != equipping) {
-            if (!equipping.getController().equals(c.getController())) {
+            if (equipping.getController() != null && !equipping.getController().equals(c.getController())) {
                 arcsOther.add(new Point[] {
                     endpoints.get(equipping.getId()),
                     endpoints.get(c.getId())
@@ -178,7 +178,7 @@ public enum TargetingOverlay {
             }
         }
         if (null != fortifying) {
-            if (!fortifying.getController().equals(c.getController())) {
+            if (fortifying.getController() != null && !fortifying.getController().equals(c.getController())) {
                 arcsOther.add(new Point[] {
                     endpoints.get(fortifying.getId()),
                     endpoints.get(c.getId())
@@ -188,7 +188,7 @@ public enum TargetingOverlay {
         }
         if (null != enchantedBy) {
             for (final CardView enc : enchantedBy) {
-                if (!enc.getController().equals(c.getController())) {
+                if (enc.getController() != null && !enc.getController().equals(c.getController())) {
                     arcsOther.add(new Point[] {
                         endpoints.get(c.getId()),
                         endpoints.get(enc.getId())
@@ -199,7 +199,7 @@ public enum TargetingOverlay {
         }
         if (null != equippedBy) {
             for (final CardView eq : equippedBy) {
-                if (!eq.getController().equals(c.getController())) {
+                if (eq.getController() != null && !eq.getController().equals(c.getController())) {
                     arcsOther.add(new Point[] {
                         endpoints.get(c.getId()),
                         endpoints.get(eq.getId())
@@ -210,7 +210,7 @@ public enum TargetingOverlay {
         }
         if (null != fortifiedBy) {
             for (final CardView eq : fortifiedBy) {
-                if (!eq.getController().equals(c.getController())) {
+                if (eq.getController() != null && !eq.getController().equals(c.getController())) {
                     arcsOther.add(new Point[] {
                         endpoints.get(c.getId()),
                         endpoints.get(eq.getId())
