@@ -31,9 +31,9 @@ public class DevModeMenu implements ActionListener {
         WIN_GAME("Win Game"),
         SETUP_GAME_STATE("Setup Game State"),
         PLAY_UNLIMITED_LANDS("Play Unlimited Lands"),
-        ADD_COUNTER("Add Counter to Permanent"),
-        TAP_PERMANENT("Tap Permanent"),
-        UNTAP_PERMANENT("Untap Permanent"),
+        ADD_COUNTER("Add Counters to Permanent"),
+        TAP_PERMANENT("Tap Permanents"),
+        UNTAP_PERMANENT("Untap Permanents"),
         RIGGED_PLANAR_ROLL("Rigged Planar Roll"),
         PLANESWALK_TO("Planeswalk to"),
         DEV_CORNER("Developer's Corner");

@@ -64,9 +64,9 @@ public enum VDev implements IVDoc<CDev> {
     private final DevLabel lblGenerateMana = new DevLabel("Generate Mana");
     private final DevLabel lblSetupGame = new DevLabel("Setup Game State");
     private final DevLabel lblTutor = new DevLabel("Tutor for Card");
-    private final DevLabel lblCounterPermanent = new DevLabel("Add Counter to Permanent");
-    private final DevLabel lblTapPermanent = new DevLabel("Tap Permanent");
-    private final DevLabel lblUntapPermanent = new DevLabel("Untap Permanent");
+    private final DevLabel lblCounterPermanent = new DevLabel("Add Counters to Permanent");
+    private final DevLabel lblTapPermanent = new DevLabel("Tap Permanents");
+    private final DevLabel lblUntapPermanent = new DevLabel("Untap Permanents");
     private final DevLabel lblSetLife = new DevLabel("Set Player Life");
     private final DevLabel lblWinGame = new DevLabel("Win Game");
     private final DevLabel lblCardToBattlefield = new DevLabel("Add Card to Play");

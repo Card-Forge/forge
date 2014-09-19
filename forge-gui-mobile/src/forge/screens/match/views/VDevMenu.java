@@ -97,7 +97,7 @@ public class VDevMenu extends FDropDownMenu {
                 FControl.getGameView().devSetUnlimitedLands(!unlimitedLands);
             }
         }));
-        addItem(new FMenuItem("Add Counter to Permanent", new FEventHandler() {
+        addItem(new FMenuItem("Add Counters to Permanent", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -108,7 +108,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Tap Permanent", new FEventHandler() {
+        addItem(new FMenuItem("Tap Permanents", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -119,7 +119,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Untap Permanent", new FEventHandler() {
+        addItem(new FMenuItem("Untap Permanents", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
