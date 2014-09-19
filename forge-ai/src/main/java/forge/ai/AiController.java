@@ -641,6 +641,10 @@ public class AiController {
     }
 
     public SpellAbility predictSpellToCastInMain2(ApiType exceptSA, boolean handOnly) {
+        if (!getBooleanProperty(AiProps.PREDICT_SPELLS_FOR_MAIN2)) {
+            return null;
+        }
+
         final List<Card> cards = handOnly ? player.getCardsIn(ZoneType.Hand) : getAvailableCards();
     
         ArrayList<SpellAbility> all = getSpellAbilities(cards);

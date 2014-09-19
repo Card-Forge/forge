@@ -31,6 +31,7 @@ public enum AiProps { /** */
     PLANAR_DIE_ROLL_HESITATION_CHANCE ("10"),
     CHEAT_WITH_MANA_ON_SHUFFLE ("false"),
     MOVE_EQUIPMENT_TO_BETTER_CREATURES ("from_useless_only"),
+    PREDICT_SPELLS_FOR_MAIN2 ("true"), /** */
     RESERVE_MANA_FOR_MAIN2_CHANCE ("0"); /** */
 
     private final String strDefaultVal;
