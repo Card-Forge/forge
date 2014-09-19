@@ -1344,6 +1344,8 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         public void updateAchievements() {
+            if (hasCheated()) { return; } //don't update achievements if player cheated during game
+
             //update all achievements for GUI player after game finished
             ThreadUtil.invokeInGameThread(new Runnable() {
                 @Override
@@ -1694,7 +1696,6 @@ public class PlayerControllerHuman extends PlayerController {
         }
         return cheats;
     }
-    @Override
     public boolean hasCheated() {
         return cheats != null;
     }
