@@ -1,5 +1,5 @@
 Name:Crackling Doom
-ManaCost:R B W
+ManaCost:R W B
 Types:Instant
 A:SP$ RepeatEach | Cost$ R B W | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 2 damage to each opponent. Each opponent sacrifices a creature with the greatest power among creatures he or she controls.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ Player.IsRemembered | NumDmg$ 2 | SubAbility$ DBChooseCard
