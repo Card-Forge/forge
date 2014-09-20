@@ -651,12 +651,17 @@ public class AiController {
         Collections.sort(all, saComparator); // put best spells first
         
         for (final SpellAbility sa : getOriginalAndAltCostAbilities(all)) {
-            if (sa.getApi() == ApiType.Counter || sa.getApi() == exceptSA || (exceptSA == ApiType.Pump && sa.getApi() == ApiType.PumpAll)) {
+            if (sa.getApi() == ApiType.Counter || sa.getApi() == exceptSA) {
                 continue;
             }
             sa.setActivatingPlayer(player);
-            if (!ComputerUtil.castPermanentInMain1(player, sa) && sa.getHostCard() != null && !sa.getHostCard().getType().contains("Land") && ComputerUtilCost.canPayCost(sa, player) && canPlaySa(sa, PhaseType.MAIN2) == AiPlayDecision.WillPlay) {
-                return sa;
+            // TODO: this currently only works as a limited prediction of permanent spells.
+            // Ideally this should cast canPlaySa to determine that the AI is truly able/willing to cast a spell,
+            // but that is currently difficult to implement due to various side effects leading to stack overflow.
+            if (!ComputerUtil.castPermanentInMain1(player, sa) && sa.getHostCard() != null && !sa.getHostCard().getType().contains("Land") && ComputerUtilCost.canPayCost(sa, player)) {
+                if (sa instanceof SpellPermanent) {
+                    return sa;
+                }
             }
         }
 
@@ -685,14 +690,9 @@ public class AiController {
     }
     
     public AiPlayDecision canPlaySa(SpellAbility sa) {
-        return canPlaySa(sa, null);
-    }
-
-    public AiPlayDecision canPlaySa(SpellAbility sa, PhaseType inPhase) {
         final Card card = sa.getHostCard();
-        final PhaseType phase = inPhase == null ? game.getPhaseHandler().getPhase() : inPhase;
         if ( sa instanceof WrappedAbility ) {
-            return canPlaySa(((WrappedAbility) sa).getWrappedAbility(), inPhase);
+            return canPlaySa(((WrappedAbility) sa).getWrappedAbility());
         }
         if( sa.getApi() != null ) {
             boolean canPlay = SpellApiToAi.Converter.get(sa.getApi()).canPlayAIWithSubs(player, sa);
@@ -738,7 +738,7 @@ public class AiController {
             // Prevent the computer from summoning Ball Lightning type creatures after attacking
             if (card.hasSVar("EndOfTurnLeavePlay")
                     && (game.getPhaseHandler().isPlayerTurn(player.getOpponent())
-                         || phase.isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS))) {
+                         || game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS))) {
                 return AiPlayDecision.AnotherTime;
             }
 
@@ -748,7 +748,7 @@ public class AiController {
             }
             
             // Wait for Main2 if possible
-            if (phase == PhaseType.MAIN1
+            if (game.getPhaseHandler().is(PhaseType.MAIN1)
                     && game.getPhaseHandler().isPlayerTurn(player)
                     && player.getManaPool().totalMana() <= 0
                     && !ComputerUtil.castPermanentInMain1(player, sa)) {
@@ -760,7 +760,7 @@ public class AiController {
                     && (player.isUnlimitedHandSize() || player.getCardsIn(ZoneType.Hand).size() <= player.getMaxHandSize())
                     && player.getManaPool().totalMana() <= 0
                     && (game.getPhaseHandler().isPlayerTurn(player)
-                            || phase.isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                            || game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && !card.hasETBTrigger())
                     && !ComputerUtil.castPermanentInMain1(player, sa)) {
                 return AiPlayDecision.AnotherTime;
