@@ -11,6 +11,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CounterType;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -160,6 +161,19 @@ public class CountersPutAi extends SpellAbilityAi {
                 if (!canSurvive){
                     return false;
                 }
+            }
+        }
+        
+        PhaseHandler ph = ai.getGame().getPhaseHandler();
+        if (sa.isOutlast()) {
+            if (ph.is(PhaseType.MAIN2, ai)) {   //applicable to non-attackers only
+                float chance = 0.8f;
+                if (!ai.getOpponent().getCreaturesInPlay().isEmpty()) {
+                    chance /= 2;    //needs a better way to check if target is required as a blocker
+                }
+                return chance > r.nextFloat();
+            } else {
+                return false;
             }
         }
 

@@ -730,7 +730,18 @@ public class AiController {
                 final ZoneType origin = ZoneType.listValueOf(effectExile.getParam("Origin")).get(0);
                 final TargetRestrictions tgt = effectExile.getTargetRestrictions();
                 final List<Card> list = CardLists.getValidCards(game.getCardsIn(origin), tgt.getValidTgts(), player, card);
-                if (CardLists.getTargetableCards(list, sa).isEmpty()) {
+                List<Card> targets = CardLists.getTargetableCards(list, sa);
+                if (sa.getHostCard().getName().equals("Suspension Field")) {
+                    //existing "exile until leaves" enchantments only target opponent's permanents
+                    final Player ai = sa.getActivatingPlayer();
+                    targets = CardLists.filter(targets, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(final Card c) {
+                            return !c.getController().equals(ai);
+                        }
+                    });
+                }
+                if (targets.isEmpty()) {
                     return AiPlayDecision.AnotherTime;
                 }
             }

@@ -1,5 +1,5 @@
 Name:Dazzling Ramparts
-ManaCost:1 W
+ManaCost:4 W
 Types:Creature Wall
 PT:0/7
 K:Defender
