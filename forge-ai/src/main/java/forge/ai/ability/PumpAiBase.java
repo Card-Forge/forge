@@ -588,7 +588,11 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 }
                 float value = 1.0f * (pumpedDmg - dmg);
                 if (c == sa.getHostCard() && attack > 0) {
-                    value *= attack / sa.getPayCosts().getTotalMana().getCMC();
+                    int divisor = sa.getPayCosts().getTotalMana().getCMC();
+                    if (divisor <= 0) {
+                        divisor = 1;
+                    }
+                    value *= attack / divisor;
                 } else {
                     value /= opp.getLife();
                 }
