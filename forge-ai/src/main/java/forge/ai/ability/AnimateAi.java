@@ -86,6 +86,20 @@ public class AnimateAi extends SpellAbilityAi {
             }
         }
 
+        // Launch the Fleet (why is this an Animate ability?)
+        if (sa.hasParam("AILogic") && "Attacking".equals(sa.getParam("AILogic"))) {
+            if (ph.getPlayerTurn().isOpponentOf(aiPlayer) || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) { 
+                return false;
+            }
+            List<Card> list = CardLists.getValidCards(aiPlayer.getCreaturesInPlay(), tgt.getValidTgts(), aiPlayer, source);
+            for (Card c : list) {
+                if (ComputerUtilCard.doesCreatureAttackAI(aiPlayer, c)) {
+                    sa.getTargets().add(c);
+                }
+            }
+            return !sa.getTargets().isEmpty();
+        }
+        
         // don't use instant speed animate abilities outside computers
         // Combat_Begin step
         if (!ph.is(PhaseType.COMBAT_BEGIN)
