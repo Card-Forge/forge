@@ -443,6 +443,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             return false;
         }
 
+        /* -- currently disabled until better conditions are devised and the spell prediction is made smarter --
         // Determine if some mana sources need to be held for the future spell to cast in Main 2 before determining whether to pump.
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
         if (aic.getCardMemory().isMemorySetEmpty(AiCardMemory.MemorySet.HELD_MANA_SOURCES)) {
@@ -452,6 +453,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 aic.reserveManaSourcesForMain2(futureSpell);
             }
         }
+        */
 
         // will the creature attack (only relevant for sorcery speed)?
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
