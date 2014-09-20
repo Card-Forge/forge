@@ -14729,6 +14729,7 @@ forge-gui/res/cardsfolder/v/village_ironsmith_ironfang.txt -text
 forge-gui/res/cardsfolder/v/village_survivors.txt -text
 forge-gui/res/cardsfolder/v/villagers_of_estwald_howlpack_of_estwald.txt -text
 forge-gui/res/cardsfolder/v/villainous_ogre.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/v/villainous_wealth.txt -text
 forge-gui/res/cardsfolder/v/vindicate.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/vindictive_mob.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/vine_dryad.txt svneol=native#text/plain

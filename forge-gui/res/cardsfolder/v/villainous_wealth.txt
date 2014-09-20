@@ -1,0 +1,10 @@
+Name:Villainous Wealth
+ManaCost:X B G U
+Types:Sorcery
+A:SP$ Mill | Cost$ X B G U | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumCards$ X | References$ X | Destination$ Exile | RememberMilled$ True | SubAbility$ DBPlay | SpellDescription$ Target opponent exiles the top X cards of his or her library. You may cast any number of nonland cards with converted mana cost X or less from among them without paying their mana costs.
+SVar:DBPlay:DB$ Play | WithoutManaCost$ True | ValidZone$ Exile | Valid$ Card.nonLand+cmcLEX+IsRemembered | Amount$ All | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/villainous_wealth.jpg
+Oracle:Target opponent exiles the top X cards of his or her library. You may cast any number of nonland cards with converted mana cost X or less from among them without paying their mana costs.
