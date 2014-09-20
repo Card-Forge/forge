@@ -1,4 +1,259 @@
 //Rank|Name|Rarity|Set
+#1|Sarkhan the Dragonspeaker|M|KTK
+#2|Ashcloud Phoenix|M|KTK
+#3|Wingmate Roc|M|KTK
+#4|Zurgo Helmsmasher|M|KTK
+#5|Anafenza the Foremost|M|KTK
+#6|Sorin Solemn Visitor|M|KTK
+#7|Hooded Hydra|M|KTK
+#8|Sidisi Brood Tyrant|M|KTK
+#9|Clever Impersonator|M|KTK
+#10|Surrak Dragonclaw|M|KTK
+#11|Pearl Lake Ancient|M|KTK
+#12|Utter End|R|KTK
+#13|Narset Enlightened Master|M|KTK
+#14|Master of Pearls|R|KTK
+#15|Sagu Mauler|R|KTK
+#16|End Hostilities|R|KTK
+#17|Herald of Anafenza|R|KTK
+#18|See the Unwritten|M|KTK
+#19|Rakshasa Deathdealer|R|KTK
+#20|Ankle Shanker|R|KTK
+#21|Grim Haruspex|R|KTK
+#22|Butcher of the Horde|R|KTK
+#23|Necropolis Fiend|R|KTK
+#24|Crater's Claws|R|KTK
+#25|Mantis Rider|R|KTK
+#26|Rattleclaw Mystic|R|KTK
+#27|Mardu Ascendancy|R|KTK
+#28|Duneblast|R|KTK
+#29|Abzan Ascendancy|R|KTK
+#30|Savage Knuckleblade|R|KTK
+#31|Empty the Pits|M|KTK
+#32|Thousand Winds|R|KTK
+#33|Icy Blast|R|KTK
+#34|Dragon Style Twins|R|KTK
+#35|Flying Crane Technique|R|KTK
+#36|Siege Rhino|R|KTK
+#37|Ivorytusk Fortress|R|KTK
+#38|Bloodstained Mire|R|KTK
+#39|High Sentinels of Arashin|R|KTK
+#40|Crackling Doom|R|KTK
+#41|Mindswipe|R|KTK
+#42|Sultai Ascendancy|R|KTK
+#43|Avalanche Tusker|R|KTK
+#44|Highspire Mantis|U|KTK
+#45|Arc Lightning|U|KTK
+#46|Windswept Heath|R|KTK
+#47|Kheru Spellsnatcher|R|KTK
+#48|Abzan Charm|U|KTK
+#49|Heir of the Wilds|U|KTK
+#50|Kheru Lich Lord|R|KTK
+#51|Bloodsoaked Champion|R|KTK
+#52|Chief of the Edge|U|KTK
+#53|Suspension Field|U|KTK
+#54|Jeskai Ascendancy|R|KTK
+#55|Jeering Instigator|R|KTK
+#56|Murderous Cut|U|KTK
+#57|Ghostfire Blade|R|KTK
+#58|Mardu Heart Piercer|U|KTK
+#59|Deflecting Palm|R|KTK
+#60|Chief of the Scale|U|KTK
+#61|Abzan Falconer|U|KTK
+#62|Mer Ek Nightblade|U|KTK
+#63|War Name Aspirant|U|KTK
+#64|Icefeather Aven|U|KTK
+#65|Abzan Battle Priest|U|KTK
+#66|Sage of the Inward Eye|R|KTK
+#67|Bellowing Saddlebrute|U|KTK
+#68|Wooded Foothills|R|KTK
+#69|Polluted Delta|R|KTK
+#70|Winterflame|U|KTK
+#71|Mardu Charm|U|KTK
+#72|Armament Corps|U|KTK
+#73|Rakshasa Vizier|R|KTK
+#74|Mardu Roughrider|U|KTK
+#75|Meandering Towershell|R|KTK
+#76|Temur Ascendancy|R|KTK
+#77|Altar of the Brood|R|KTK
+#78|Trail of Mystery|R|KTK
+#79|Temur Charm|U|KTK
+#80|Flooded Strand|R|KTK
+#81|Dragon Throne of Tarkir|R|KTK
+#82|Ride Down|U|KTK
+#83|Seeker of the Way|U|KTK
+#84|Jeskai Charm|U|KTK
+#85|Retribution of the Ancients|R|KTK
+#86|Timely Hordemate|U|KTK
+#87|Tuskguard Captain|U|KTK
+#88|Sultai Charm|U|KTK
+#89|Temur Charger|U|KTK
+#90|Nomad Outpost|U|KTK
+#91|Watcher of the Roost|U|KTK
+#92|Sandsteppe Citadel|U|KTK
+#93|Trap Essence|R|KTK
+#94|Hordeling Outburst|U|KTK
+#95|Ruthless Ripper|U|KTK
+#96|Villainous Wealth|R|KTK
+#97|Bear's Companion|U|KTK
+#98|Kin Tree Invocation|U|KTK
+#99|Incremental Growth|U|KTK
+#100|Take Up Arms|U|KTK
+#101|Burn Away|U|KTK
+#102|Pine Walker|U|KTK
+#103|Mystic Monastery|U|KTK
+#104|Hardened Scales|R|KTK
+#105|Swarm of Bloodflies|U|KTK
+#106|Raiders' Spoils|U|KTK
+#107|Monastery Swiftspear|U|KTK
+#108|Dig Through Time|R|KTK
+#109|Gurmag Swiftwing|U|KTK
+#110|Sultai Flayer|U|KTK
+#111|Death Frenzy|U|KTK
+#112|Ainok Bond Kin|C|KTK
+#113|Mistfire Weaver|U|KTK
+#114|Frontier Bivouac|U|KTK
+#115|Kheru Bloodsucker|U|KTK
+#116|Ponyback Brigade|C|KTK
+#117|Sultai Soothsayer|U|KTK
+#118|Mardu Hordechief|C|KTK
+#119|Opulent Palace|U|KTK
+#120|Horde Ambusher|U|KTK
+#121|Abzan Guide|C|KTK
+#122|Kill Shot|C|KTK
+#123|Riverwheel Aerialists|U|KTK
+#124|Throttle|C|KTK
+#125|Debilitating Injury|C|KTK
+#126|Scion of Glaciers|U|KTK
+#127|Warden of the Eye|U|KTK
+#128|Mardu Skullhunter|C|KTK
+#129|Longshot Squad|C|KTK
+#130|Mardu Warshrieker|C|KTK
+#131|Arrow Storm|C|KTK
+#132|Sultai Scavenger|C|KTK
+#133|Feat of Resistance|C|KTK
+#134|Despise|U|KTK
+#135|Smite the Monstrous|C|KTK
+#136|Seek the Horizon|U|KTK
+#137|Alabaster Kirin|C|KTK
+#138|Howl of the Horde|R|KTK
+#139|Dead Drop|U|KTK
+#140|Master the Way|U|KTK
+#141|Savage Punch|C|KTK
+#142|Jeskai Elder|U|KTK
+#143|Roar of Challenge|U|KTK
+#144|Jeskai Windscout|C|KTK
+#145|Goblinslide|U|KTK
+#146|Disowned Ancestor|C|KTK
+#147|Become Immense|U|KTK
+#148|Mardu Hateblade|C|KTK
+#149|Scoured Barrens|C|KTK
+#150|Unyielding Krumar|C|KTK
+#151|Dragon Grip|U|KTK
+#152|Bring Low|C|KTK
+#153|Wind Scarred Crag|C|KTK
+#154|Snowhorn Rider|C|KTK
+#155|Jungle Hollow|C|KTK
+#156|Hooting Mandrills|C|KTK
+#157|Alpine Grizzly|C|KTK
+#158|Dragon's Eye Savants|U|KTK
+#159|Valley Dasher|C|KTK
+#160|Mardu Blazebringer|U|KTK
+#161|Thornwood Falls|C|KTK
+#162|Highland Game|C|KTK
+#163|Rite of the Serpent|C|KTK
+#164|Swiftwater Cliffs|C|KTK
+#165|Jeskai Student|C|KTK
+#166|Windstorm|U|KTK
+#167|Abomination of Gudul|C|KTK
+#168|Crippling Chill|C|KTK
+#169|Salt Road Patrol|C|KTK
+#170|Smoke Teller|C|KTK
+#171|Secret Plans|U|KTK
+#172|Bloodfell Caves|C|KTK
+#173|Woolly Loxodon|C|KTK
+#174|Waterwhirl|U|KTK
+#175|Efreet Weaponmaster|C|KTK
+#176|Tranquil Cove|C|KTK
+#177|Mystic of the Hidden Way|C|KTK
+#178|Witness of the Ages|U|KTK
+#179|Krumar Bond Kin|C|KTK
+#180|Brave the Sands|U|KTK
+#181|Force Away|C|KTK
+#182|Bloodfire Expert|C|KTK
+#183|Rush of Battle|C|KTK
+#184|Scaldkin|C|KTK
+#185|Rugged Highlands|C|KTK
+#186|Blossoming Sands|C|KTK
+#187|Canyon Lurkers|C|KTK
+#188|Archers' Parapet|C|KTK
+#189|Dragonscale Boon|C|KTK
+#190|Awaken the Bear|C|KTK
+#191|Sagu Archer|C|KTK
+#192|Act of Treason|C|KTK
+#193|Singing Bell Strike|C|KTK
+#194|Heart Piercer Bow|U|KTK
+#195|Bitter Revelation|C|KTK
+#196|Sage Eye Harrier|C|KTK
+#197|Treasure Cruise|C|KTK
+#198|Embodiment of Spring|C|KTK
+#199|Tormenting Voice|C|KTK
+#200|Kin Tree Warden|C|KTK
+#201|Sidisi's Pet|C|KTK
+#202|Ainok Tracker|C|KTK
+#203|Summit Prowler|C|KTK
+#204|Trumpet Blast|C|KTK
+#205|Leaping Master|C|KTK
+#206|Swift Kick|C|KTK
+#207|Dazzling Ramparts|U|KTK
+#208|Shambling Attendants|C|KTK
+#209|Firehoof Cavalry|C|KTK
+#210|Dismal Backwater|C|KTK
+#211|Weave Fate|C|KTK
+#212|Barrage of Boulders|C|KTK
+#213|Defiant Strike|C|KTK
+#214|Whirlwind Adept|C|KTK
+#215|Mardu Banner|C|KTK
+#216|Quiet Contemplation|U|KTK
+#217|Venerable Lammasu|U|KTK
+#218|Monastery Flock|C|KTK
+#219|Abzan Banner|C|KTK
+#220|Disdainful Stroke|C|KTK
+#221|Cancel|C|KTK
+#222|War Behemoth|C|KTK
+#223|Glacial Stalker|C|KTK
+#224|Wetland Sambar|C|KTK
+#225|Jeskai Banner|C|KTK
+#226|Rakshasa's Secret|C|KTK
+#227|Set Adrift|U|KTK
+#228|Rotting Mastodon|C|KTK
+#229|Molting Snakeskin|C|KTK
+#230|Bloodfire Mentor|C|KTK
+#231|Tusked Colossodon|C|KTK
+#232|Kheru Dreadmaw|C|KTK
+#233|Dutiful Return|C|KTK
+#234|Scout the Borders|C|KTK
+#235|Ugin's Nexus|M|KTK
+#236|Temur Banner|C|KTK
+#237|Erase|C|KTK
+#238|Taigam's Scheming|C|KTK
+#239|Siegecraft|C|KTK
+#240|Sultai Banner|C|KTK
+#241|Stubborn Denial|U|KTK
+#242|Feed the Clan|C|KTK
+#243|Shatter|C|KTK
+#244|Naturalize|C|KTK
+#245|Briber's Purse|U|KTK
+#246|Blinding Spray|U|KTK
+#247|Lens of Clarity|C|KTK
+#248|Tomb of the Spirit Dragon|U|KTK
+#249|Cranial Archive|U|KTK
+#250|Forest|L|KTK
+#251|Swamp|L|KTK
+#252|Mountain|L|KTK
+#253|Plains|L|KTK
+#254|Island|L|KTK
+//Rank|Name|Rarity|Set
 #1|Ajani Steadfast|M|M15
 #2|Soul of New Phyrexia|M|M15
 #3|Soul of Shandalar|M|M15
