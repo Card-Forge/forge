@@ -542,7 +542,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
 
-        final ZoneType origin = ZoneType.smartValueOf(sa.getParam("Origin"));
+        final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
 
         if (abCost != null) {
