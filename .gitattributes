@@ -7004,6 +7004,7 @@ forge-gui/res/cardsfolder/h/hoverguard_observer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/hoverguard_sweepers.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/hovermyr.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/howl_from_beyond.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/h/howl_of_the_horde.txt -text
 forge-gui/res/cardsfolder/h/howl_of_the_night_pack.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/howlgeist.txt -text
 forge-gui/res/cardsfolder/h/howling_banshee.txt svneol=native#text/plain
