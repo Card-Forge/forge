@@ -1,0 +1,15 @@
+Name:Kheru Lich Lord
+ManaCost:3 B G U
+Types:Creature Zombie Wizard
+PT:4/4
+K:Trample
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChangZone | TriggerDescription$ At the beginning of your upkeep, you may pay {2}{B}. If you do, return a creature card at random from your graveyard to the battlefield. It gains flying, trample, and haste. Exile that card at the beginning of your next end step. If it would leave the battlefield, exile it instead of putting it anywhere else.
+SVar:TrigChangZone:AB$ ChangeZone | Cost$ 2 B | ChangeType$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | Hidden$ True | Mandatory$ True | AtRandom$ True | RememberChanged$ True | SubAbility$ DBUnearthed
+SVar:DBUnearthed:DB$ Animate | Defined$ Remembered | Keywords$ Flying & Trample & Haste  | HiddenKeywords$ If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else. | sVars$ KheruMustAttack | Permanent$ True | SubAbility$ DBTrueDeath | StackDescription$ It gains flying, trample, and haste. Exile that card at the beginning of your next end step. If it would leave the battlefield, exile it instead of putting it anywhere else.
+SVar:KheruMustAttack:SVar:MustAttack:True
+SVar:DBTrueDeath:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ DBExile | RememberObjects$ Remembered | TriggerDescription$ Exile the creature at the beginning of the next end step. | AILogic$ Always | SubAbility$ DBCleanup
+SVar:DBExile:AB$ ChangeZone | Cost$ 0 | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kheru_lich_lord.jpg
+Oracle:At the beginning of your upkeep, you may pay {2}{B}. If you do, return a creature card at random from your graveyard to the battlefield. It gains flying, trample, and haste. Exile that card at the beginning of your next end step. If it would leave the battlefield, exile it instead of putting it anywhere else.
