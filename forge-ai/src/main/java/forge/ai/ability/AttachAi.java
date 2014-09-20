@@ -1026,19 +1026,23 @@ public class AttachAi extends SpellAbilityAi {
                 return null;
             }
 
+            boolean uselessCreature = isUselessCreature(aiPlayer, attachSource.getEquippingCard());
+
             if (aic.getProperty(AiProps.MOVE_EQUIPMENT_TO_BETTER_CREATURES).equals("never")) {
                 // Do not equip other creatures if the AI profile does not allow moving equipment around
                 return null;
             } else if (aic.getProperty(AiProps.MOVE_EQUIPMENT_TO_BETTER_CREATURES).equals("from_useless_only")) {
                 // Do not equip other creatures if the AI profile only allows moving equipment from useless creatures
                 // and the equipped creature is still useful (not non-untapping+tapped and not set to can't attack/block)
-                if (!isUselessCreature(aiPlayer, attachSource.getEquippingCard())) {
+                if (!uselessCreature) {
                     return null;
                 }
             }
             
             // make sure to prioritize casting spells in main 2 (creatures, other equipment, etc.) rather than moving equipment around
-            if (aic.getCardMemory().isMemorySetEmpty(AiCardMemory.MemorySet.HELD_MANA_SOURCES)) {
+            boolean decideMoveFromUseless = uselessCreature && aic.getBooleanProperty(AiProps.PRIORITIZE_MOVE_EQUIPMENT_IF_USELESS);
+
+            if (!decideMoveFromUseless && aic.getCardMemory().isMemorySetEmpty(AiCardMemory.MemorySet.HELD_MANA_SOURCES)) {
                 SpellAbility futureSpell = aic.predictSpellToCastInMain2(ApiType.Attach);
                 if (futureSpell != null && futureSpell.getHostCard() != null) {
                     aic.reserveManaSourcesForMain2(futureSpell);
