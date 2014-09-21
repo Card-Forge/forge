@@ -248,6 +248,7 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
     private final void onPhaseBegin() {
         boolean skipped = false;
 
+        game.getTriggerHandler().resetActiveTriggers();
         if (isSkippingPhase(phase)) {
             skipped = true;
             givePriorityToPlayer = false;

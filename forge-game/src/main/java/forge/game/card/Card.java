@@ -291,6 +291,10 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         if ((cur == CardCharacteristicName.Original && state == CardCharacteristicName.Transformed)
                 || (cur == CardCharacteristicName.Transformed && state == CardCharacteristicName.Original)) {
+
+            // Clear old dfc trigger from the trigger handler
+            getGame().getTriggerHandler().clearInstrinsicActiveTriggers(this);
+            getGame().getTriggerHandler().registerActiveTrigger(this, false);
             HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Transformer", this);
             getGame().getTriggerHandler().runTrigger(TriggerType.Transformed, runParams, false);
@@ -399,6 +403,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (this.curCharacteristics == CardCharacteristicName.FaceDown) {
             boolean result = this.setState(this.preTFDCharacteristic);
             if (result) {
+                getGame().getTriggerHandler().registerActiveTrigger(this, false);
                 // Run replacement effects
                 HashMap<String, Object> repParams = new HashMap<String, Object>();
                 repParams.put("Event", "TurnFaceUp");
@@ -5244,6 +5249,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         if (!this.phasedOut) {
             // Just phased in, time to run the phased in trigger
+            getGame().getTriggerHandler().registerActiveTrigger(this, false);
             getGame().getTriggerHandler().runTrigger(TriggerType.PhaseIn, runParams, false);
         }
 

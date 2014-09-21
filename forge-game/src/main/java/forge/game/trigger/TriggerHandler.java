@@ -25,6 +25,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
+import forge.game.card.CardUtil;
 import forge.game.io.GameStateDeserializer;
 import forge.game.io.GameStateSerializer;
 import forge.game.io.IGameStateObject;
@@ -40,6 +41,7 @@ import com.google.common.collect.ArrayListMultimap;
 
 public class TriggerHandler implements IGameStateObject {
     private final ArrayList<TriggerType> suppressedModes = new ArrayList<TriggerType>();
+    private final ArrayList<Trigger> activeTriggers = new ArrayList<Trigger>();
 
     private final ArrayList<Trigger> delayedTriggers = new ArrayList<Trigger>();
     private final ArrayListMultimap<Player, Trigger> playerDefinedDelayedTriggers = ArrayListMultimap.create();
@@ -165,6 +167,49 @@ public class TriggerHandler implements IGameStateObject {
         return mapParams;
     }
 
+    public final void resetActiveTriggers() {
+        activeTriggers.clear();
+        List<Card> allCards = new ArrayList<Card>();
+        for(Player p : game.getPlayers()) {
+            allCards.addAll(p.getAllCards());
+        }
+
+        for (final Card c : allCards) {
+            for (final Trigger t : c.getTriggers()) {
+                if (isTriggerActive(t)) {
+                    activeTriggers.add(t);
+                }
+            }
+        }
+    }
+
+    public final void clearInstrinsicActiveTriggers(Card c) {
+        Iterator<?> itr = activeTriggers.iterator();
+        Trigger t;
+        ArrayList<Trigger> toBeRemoved = new ArrayList<>();
+
+        while(itr.hasNext()) {
+            t = (Trigger)itr.next();
+            if (c.getUniqueNumber() == t.getHostCard().getUniqueNumber() && t.isIntrinsic()) {
+                toBeRemoved.add(t);
+            }
+        }
+
+        for(Trigger removed : toBeRemoved) {
+            activeTriggers.remove(removed);
+        }
+    }
+
+    public final void registerActiveTrigger(Card c, boolean onlyExtrinsic) {
+        for(final Trigger t: c.getTriggers()) {
+            if (!onlyExtrinsic || c.isCloned() || !t.isIntrinsic() || t instanceof TriggerAlways) {
+                if (isTriggerActive(t)) {
+                    activeTriggers.add(t);
+                }
+            }
+        }
+    }
+
     public final void runTrigger(final TriggerType mode, final Map<String, Object> runParams, boolean holdTrigger) {
         if (this.suppressedModes.contains(mode)) {
             return;
@@ -184,13 +229,11 @@ public class TriggerHandler implements IGameStateObject {
     public final boolean runStateTrigger(Map<String, Object> runParams) {
         boolean checkStatics = false;
         // only cards in play can run state triggers
-        List<Card> allCards = new ArrayList<Card>(game.getCardsIn(ZoneType.listValueOf("Battlefield,Command")));
-        for (final Card c : allCards) {
-            for (final Trigger t : c.getTriggers()) {
-                if (canRunTrigger(t, TriggerType.Always, runParams)) {
-                    this.runSingleTrigger(t, runParams);
-                    checkStatics = true;
-                }
+
+        for(final Trigger t: this.activeTriggers) {
+            if (canRunTrigger(t, TriggerType.Always, runParams)) {
+                this.runSingleTrigger(t, runParams);
+                checkStatics = true;
             }
         }
         return checkStatics;
@@ -217,29 +260,20 @@ public class TriggerHandler implements IGameStateObject {
 
         final Player playerAP = game.getPhaseHandler().getPlayerTurn();
         if (playerAP == null) {
-            // This should only happen outside of games, so it's safe to just
-            // abort.
+            // This should only happen outside of games, so it's safe to abort.
             return false;
         }
 
-        // This is done to allow the list of triggers to be modified while
-        // triggers are running.
+        // Copy triggers here, so things can be modified just in case
         final ArrayList<Trigger> delayedTriggersWorkingCopy = new ArrayList<Trigger>(this.delayedTriggers);
-        List<Card> allCards = new ArrayList<Card>();
-        for(Player p : game.getPlayers())
-        {
-            allCards.addAll(p.getAllCards());
-        }
-        //allCards.addAll(game.getCardsIn(ZoneType.Stack));
+
         boolean checkStatics = false;
 
         // Static triggers
-        for (final Card c : allCards) {
-            for (final Trigger t : c.getTriggers()) {
-                if (t.isStatic() && canRunTrigger(t, mode, runParams)) {
-                    this.runSingleTrigger(t, runParams);
-                    checkStatics = true;
-                }
+        for (final Trigger t : this.activeTriggers) {
+            if (t.isStatic() && canRunTrigger(t, mode, runParams)) {
+                this.runSingleTrigger(t, runParams);
+                checkStatics = true;
             }
         }
 
@@ -265,35 +299,30 @@ public class TriggerHandler implements IGameStateObject {
             final Map<String, Object> runParams, final ArrayList<Trigger> delayedTriggersWorkingCopy ) {
         
         boolean checkStatics = false;
-        List<Card> playerCards = player.getAllCards();
-        
-        // check LKI copies for triggers
-        if (runParams.containsKey("Destination") && !ZoneType.Battlefield.name().equals(runParams.get("Destination"))
-                && runParams.containsKey("Card")) {
-            Card card = (Card) runParams.get("Card");
-            if (card.getController() == player) {
-                for (final Trigger t : card.getTriggers()) {
-                    if (!t.isStatic() && (card.isCloned() || !t.isIntrinsic()) 
-                            && canRunTrigger(t, mode, runParams)) {
-                        this.runSingleTrigger(t, runParams);
-                        checkStatics = true;
+
+        Card card = null;
+        for (final Trigger t : this.activeTriggers) {
+            if (!t.isStatic() && t.getHostCard().getController().equals(player)
+                    && canRunTrigger(t, mode, runParams)) {
+
+                if (runParams.containsKey("Card")) {
+                    card = (Card) runParams.get("Card");
+                    if (runParams.containsKey("Destination") && !ZoneType.Battlefield.name().equals(runParams.get("Destination"))) {
+                        card = CardUtil.getLKICopy(card);
+                        if (card.isCloned() || !t.isIntrinsic()) {
+                            runParams.put("Card", card);
+                        }
                     }
                 }
-            }
-        }
 
-        for (final Card c : playerCards) {
-            for (final Trigger t : c.getTriggers()) {
-                if (!t.isStatic() && canRunTrigger(t, mode, runParams)) {
-                    this.runSingleTrigger(t, runParams);
-                    checkStatics = true;
-                }
+                this.runSingleTrigger(t, runParams);
+                checkStatics = true;
             }
         }
 
         for (Trigger deltrig : delayedTriggersWorkingCopy) {
             if (deltrig.getHostCard().getController().equals(player)) {
-                if (this.canRunTrigger(deltrig, mode, runParams)) {
+                if (this.isTriggerActive(deltrig) && this.canRunTrigger(deltrig, mode, runParams)) {
                     this.runSingleTrigger(deltrig, runParams);
                     this.delayedTriggers.remove(deltrig);
                 }
@@ -302,26 +331,42 @@ public class TriggerHandler implements IGameStateObject {
         return checkStatics;
     }
 
-    private boolean canRunTrigger(final Trigger regtrig, final TriggerType mode, final Map<String, Object> runParams) {
-        if (regtrig.getMode() != mode) {
-            return false; // Not the right mode.
-        }
-
+    private boolean isTriggerActive(final Trigger regtrig) {
         if (!regtrig.phasesCheck(game)) {
             return false; // It's not the right phase to go off.
         }
 
-        if (!regtrig.requirementsCheck(game, runParams)) {
-            return false; // Conditions aren't right.
-        }
         if (regtrig.getHostCard().isFaceDown() && regtrig.isIntrinsic()) {
             return false; // Morphed cards only have pumped triggers go off.
         }
         if (regtrig instanceof TriggerAlways) {
             if (game.getStack().hasStateTrigger(regtrig.getId())) {
                 return false; // State triggers that are already on the stack
-                              // don't trigger again.
+                // don't trigger again.
             }
+        }
+
+        if (regtrig.isSuppressed()) {
+            return false; // Trigger removed by effect
+        }
+        if (!regtrig.zonesCheck(game.getZoneOf(regtrig.getHostCard()))) {
+            return false; // Host card isn't where it needs to be.
+        }
+        if (!regtrig.requirementsCheck(game)) {
+            return false; // Conditions aren't right.
+        }
+
+        return true;
+    }
+
+
+    private boolean canRunTrigger(final Trigger regtrig, final TriggerType mode, final Map<String, Object> runParams) {
+        if (regtrig.getMode() != mode) {
+            return false; // Not the right mode.
+        }
+
+        if (!regtrig.meetsRequirementsOnTriggeredObjects(game, runParams)) {
+            return false; // Conditions aren't right.
         }
 
         if (!regtrig.performTest(runParams)) {
@@ -330,8 +375,12 @@ public class TriggerHandler implements IGameStateObject {
         if (regtrig.isSuppressed()) {
             return false; // Trigger removed by effect
         }
-        if (!regtrig.zonesCheck(game.getZoneOf(regtrig.getHostCard()))) {
-            return false; // Host card isn't where it needs to be.
+
+        if (regtrig instanceof TriggerAlways) {
+            if (game.getStack().hasStateTrigger(regtrig.getId())) {
+                return false; // State triggers that are already on the stack
+                // don't trigger again.
+            }
         }
 
         // Torpor Orb check
@@ -369,11 +418,18 @@ public class TriggerHandler implements IGameStateObject {
 
         SpellAbility sa = null;
         Card host = regtrig.getHostCard();
+        Card trigCard = regtrig.getRunParams().containsKey("Card") ? (Card)regtrig.getRunParams().get("Card") : null;
+
+        if (trigCard != null && (host.getUniqueNumber() == trigCard.getUniqueNumber())) {
+            host = trigCard;
+        } else {
+            host = game.getCardState(regtrig.getHostCard());
+        }
 
         sa = regtrig.getOverridingAbility();
         if (sa == null) {
             if (!triggerParams.containsKey("Execute")) {
-                sa = new Ability(regtrig.getHostCard(), ManaCost.ZERO) {
+                sa = new Ability(host, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
                     }
@@ -382,7 +438,7 @@ public class TriggerHandler implements IGameStateObject {
                 sa = AbilityFactory.getAbility(host.getSVar(triggerParams.get("Execute")), host);
             }
         }
-        host = game.getCardState(regtrig.getHostCard());
+
         sa.setHostCard(host);
         sa.setTrigger(true);
         sa.setSourceTrigger(regtrig.getId());

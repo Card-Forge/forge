@@ -208,24 +208,10 @@ public abstract class Trigger extends TriggerReplacementBase {
      * requirementsCheck.
      * </p>
      * @param game 
-     * 
+     *
      * @return a boolean.
      */
     public final boolean requirementsCheck(Game game) {
-        return this.requirementsCheck(game, this.getRunParams());
-    }
-
-    /**
-     * <p>
-     * requirementsCheck.
-     * </p>
-     * @param game 
-     * 
-     * @param runParams
-     *            a {@link java.util.HashMap} object.
-     * @return a boolean.
-     */
-    public final boolean requirementsCheck(Game game, final Map<String, Object> runParams) {
 
         if (this.mapParams.containsKey("APlayerHasMoreLifeThanEachOther")) {
             int highestLife = -50; // Negative base just in case a few Lich's or Platinum Angels are running around
@@ -270,9 +256,11 @@ public abstract class Trigger extends TriggerReplacementBase {
         if ( !meetsCommonRequirements(this.mapParams))
             return false;
 
-//        if ( !meetsRequirementsOnTriggeredObjects(runParams) )
-//            return false;
-        
+        return true;
+    }
+
+
+    public boolean meetsRequirementsOnTriggeredObjects(Game game,  Map<String, Object> runParams) {
         if ("True".equals(this.mapParams.get("EvolveCondition"))) {
             final Card moved = (Card) runParams.get("Card");
             if (moved == null) {
@@ -287,7 +275,7 @@ public abstract class Trigger extends TriggerReplacementBase {
                 return false;
             }
         }
-        
+
         String condition = this.mapParams.get("Condition");
         if ("AltCost".equals(condition)) {
             final Card moved = (Card) runParams.get("Card");
@@ -300,16 +288,8 @@ public abstract class Trigger extends TriggerReplacementBase {
                 return false;
             }
         }
-
-
         return true;
     }
-
-
-//    private boolean meetsRequirementsOnTriggeredObjects(Map<String, Object> runParams) {
-//
-//        return true;
-//    }
 
     /**
      * <p>

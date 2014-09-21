@@ -114,6 +114,7 @@ public class GameAction {
         if (zoneFrom == null && !c.isToken()) {
             zoneTo.add(c, position);
             checkStaticAbilities(true);
+            game.getTriggerHandler().registerActiveTrigger(c, true);
             game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
             return c;
         }
@@ -231,6 +232,7 @@ public class GameAction {
 
         // Need to apply any static effects to produce correct triggers
         checkStaticAbilities(true);
+        game.getTriggerHandler().registerActiveTrigger(c, true);
 
         // play the change zone sound
         game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
@@ -615,7 +617,7 @@ public class GameAction {
      *            a {@link forge.game.card.Card} object.
      * @param zone
      *            a {@link forge.game.card.Card} object.
-     * @param libPosition
+     * @param deckPosition
      *            a int.
      * @return a {@link forge.game.card.Card} object.
      */
@@ -926,7 +928,10 @@ public class GameAction {
         game.fireEvent(new GameEventCardStatsChanged(allAffectedCards));
 
         checkGameOverCondition();
+        if (game.getAge() != GameStage.Play)
+            return;
 
+        game.getTriggerHandler().resetActiveTriggers();
         if (!refreeze) {
             game.getStack().unfreezeStack();
         }
@@ -934,7 +939,6 @@ public class GameAction {
 
     /**
      * TODO: Write javadoc for this method.
-     * @param checkAgain
      * @param c
      * @return
      */
@@ -996,7 +1000,6 @@ public class GameAction {
 
     /**
      * TODO: Write javadoc for this method.
-     * @param checkAgain
      * @param c
      * @return
      */
@@ -1056,7 +1059,6 @@ public class GameAction {
 
     /**
      * TODO: Write javadoc for this method.
-     * @param checkAgain
      * @param c
      * @return
      */
