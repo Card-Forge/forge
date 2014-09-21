@@ -39,7 +39,9 @@ public class Utils {
     }
 
     public static float scale(float value) {
-        return Math.round(value * HEIGHT_RATIO); //use height ratio to prioritize making fonts look good
+        //use height ratio to prioritize making fonts look good
+        //fonts can always auto-scale down if container not wide enough
+        return Math.round(value * HEIGHT_RATIO);
     }
 
     public static long secondsToTimeSpan(float seconds) {
