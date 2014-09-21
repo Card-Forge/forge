@@ -32,6 +32,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 
 import forge.LobbyPlayer;
+import forge.achievement.AltWinAchievements;
 import forge.card.CardCharacteristicName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -1344,13 +1345,14 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         public void updateAchievements() {
-            if (hasCheated()) { return; } //don't update achievements if player cheated during game
+            //if (hasCheated()) { return; } //don't update achievements if player cheated during game
 
             //update all achievements for GUI player after game finished
             ThreadUtil.invokeInGameThread(new Runnable() {
                 @Override
                 public void run() {
                     FModel.getAchievements(game.getRules().getGameType()).updateAll(gui, player);
+                    AltWinAchievements.instance.updateAll(gui, player);
                 }
             });
         }

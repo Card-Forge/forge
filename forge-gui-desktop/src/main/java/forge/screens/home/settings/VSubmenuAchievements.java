@@ -398,12 +398,12 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
                 }
                 y += PADDING;
                 if (sharedDesc != null) {
-                    g2d.drawString(sharedDesc + "...", x, y);
+                    g2d.drawString(selectedAchievement.isSpecial() ? sharedDesc : sharedDesc + "...", x, y);
                     y += descHeight;
                 }
                 if (mythicDesc != null) {
                     FSkin.setGraphicsColor(g2d, selectedAchievement.earnedMythic() ? TEXT_COLOR : NOT_EARNED_COLOR);
-                    g2d.drawString("(Mythic) " + mythicDesc, x, y);
+                    g2d.drawString(selectedAchievement.isSpecial() ? mythicDesc : "(Mythic) " + mythicDesc, x, y); //handle flavor text here too
                     y += descHeight;
                 }
                 if (rareDesc != null) {

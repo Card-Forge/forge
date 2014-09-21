@@ -322,6 +322,19 @@ public class Player extends GameEntity implements Comparable<Player> {
         return result;
     }
 
+    //get single opponent for player if only one, otherwise returns null
+    //meant to be used after game ends for the sake of achievements
+    public Player getSingleOpponent() {
+        if (game.getRegisteredPlayers().size() == 2) {
+            for (Player p : game.getRegisteredPlayers()) {
+                if (p.isOpponentOf(this)) {
+                    return p;
+                }
+            }
+        }
+        return null;
+    }
+
     /**
      * Find the smallest life total amongst this player's opponents.
      * 

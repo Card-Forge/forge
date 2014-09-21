@@ -24,7 +24,7 @@ public class DeckedOut extends Achievement {
     @Override
     protected int evaluate(Player player, Game game) {
         if (player.getOutcome().hasWon()) {
-            Player opponent = getSingleOpponent(player);
+            Player opponent = player.getSingleOpponent();
             if (opponent != null && opponent.getOutcome().lossState == GameLossReason.Milled) {
                 return player.getTurn();
             }

@@ -7,13 +7,8 @@ public class DraftAchievements extends AchievementCollection {
         super("Booster Draft", ForgeConstants.ACHIEVEMENTS_DIR + "draft.xml", true);
     }
 
-    //add achievements that should appear at the top above core achievements for each game mode
-    @Override
-    protected void buildTopShelf() {
-    }
-
     //add achievements that should appear at the bottom below core achievements for each game mode
     @Override
-    protected void buildBottomShelf() {
+    protected void addAchievements() {
     }
 }

@@ -20,7 +20,7 @@ public class Poisoned extends Achievement {
     @Override
     protected int evaluate(Player player, Game game) {
         if (player.getOutcome().hasWon()) {
-            Player opponent = getSingleOpponent(player);
+            Player opponent = player.getSingleOpponent();
             if (opponent != null && opponent.getOutcome().lossState == GameLossReason.Poisoned) {
                 return opponent.getPoisonCounters();
             }

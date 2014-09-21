@@ -18,8 +18,8 @@ public abstract class Achievement {
     protected int best, current;
 
     //use this constructor for special achievements without tiers
-    protected Achievement(String displayName0, String description0, FSkinProp overlayImage0) {
-        this(displayName0, description0, null, 1, null, 1, null, 1, null, 1, overlayImage0);
+    protected Achievement(String displayName0, String description0, String flavorText0, FSkinProp overlayImage0) {
+        this(displayName0, description0, null, 1, null, 1, null, 1, "(" + flavorText0 + ")", 1, overlayImage0); //pass flavor text as mythic description so it appears below description faded out
     }
     //use this constructor for regular tiered achievements
     protected Achievement(String displayName0, String sharedDesc0,
@@ -39,7 +39,7 @@ public abstract class Achievement {
         mythicDesc = mythicDesc0;
         mythicThreshold = mythicThreshold0;
         overlayImage = overlayImage0;
-        checkGreaterThan = rareThreshold0 > uncommonThreshold0;
+        checkGreaterThan = rareThreshold0 >= uncommonThreshold0;
     }
 
     public String getDisplayName() {
@@ -66,8 +66,11 @@ public abstract class Achievement {
         }
         return image;
     }
+    public boolean isSpecial() {
+        return mythicThreshold == commonThreshold;
+    }
     private boolean earnedSpecial() {
-        return (mythicThreshold == commonThreshold && best > 1);
+        return (isSpecial() && best > 0);
     }
     public boolean earnedMythic() {
         if (checkGreaterThan) {
@@ -95,17 +98,6 @@ public abstract class Achievement {
     }
 
     protected abstract int evaluate(Player player, Game game);
-
-    protected Player getSingleOpponent(Player player) {
-        if (player.getGame().getRegisteredPlayers().size() == 2) {
-            for (Player p : player.getGame().getRegisteredPlayers()) {
-                if (p.isOpponentOf(player)) {
-                    return p;
-                }
-            }
-        }
-        return null;
-    }
 
     private void updateTrophyImage() {
         FSkinProp background;

@@ -306,13 +306,13 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
                 }
                 y += PADDING;
                 if (sharedDesc != null) {
-                    g.drawText(sharedDesc + "...", DESC_FONT, TEXT_COLOR,
+                    g.drawText(selectedAchievement.isSpecial() ? sharedDesc : sharedDesc + "...", DESC_FONT, TEXT_COLOR,
                             x, y, w, h, false, HAlignment.LEFT, false);
                     y += DESC_FONT.getLineHeight();
                 }
                 if (mythicDesc != null) {
-                    g.drawText("(Mythic) " + mythicDesc, DESC_FONT,
-                            selectedAchievement.earnedRare() ? TEXT_COLOR : NOT_EARNED_COLOR,
+                    g.drawText(selectedAchievement.isSpecial() ? mythicDesc : "(Mythic) " + mythicDesc, DESC_FONT, //handle flavor text here too
+                            selectedAchievement.earnedMythic() ? TEXT_COLOR : NOT_EARNED_COLOR,
                             x, y, w, h, false, HAlignment.LEFT, false);
                     y += DESC_FONT.getLineHeight();
                 }

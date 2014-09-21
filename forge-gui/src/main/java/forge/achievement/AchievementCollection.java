@@ -24,9 +24,9 @@ import forge.util.FileUtil;
 import forge.util.XmlUtil;
 
 public abstract class AchievementCollection implements Iterable<Achievement> {
-    private final Map<String, Achievement> achievements = new LinkedHashMap<String, Achievement>();
-    private final String name, filename;
-    private final boolean isLimitedFormat;
+    protected final Map<String, Achievement> achievements = new LinkedHashMap<String, Achievement>();
+    protected final String name, filename;
+    protected final boolean isLimitedFormat;
 
     static {
         FileUtil.ensureDirectoryExists(ForgeConstants.ACHIEVEMENTS_DIR);
@@ -37,19 +37,19 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         cb.addItem(FModel.getAchievements(GameType.Draft));
         cb.addItem(FModel.getAchievements(GameType.Sealed));
         cb.addItem(FModel.getAchievements(GameType.Quest));
+        cb.addItem(AltWinAchievements.instance);
     }
 
     protected AchievementCollection(String name0, String filename0, boolean isLimitedFormat0) {
         name = name0;
         filename = filename0;
         isLimitedFormat = isLimitedFormat0;
-        buildTopShelf();
-        buildCoreShelves();
-        buildBottomShelf();
+        addSharedAchivements();
+        addAchievements();
         load();
     }
 
-    private void buildCoreShelves() {
+    protected void addSharedAchivements() {
         add("GameWinStreak", new GameWinStreak(10, 25, 50, 100));
         add("MatchWinStreak", new MatchWinStreak(10, 25, 50, 100));
         add("TotalGameWins", new TotalGameWins(250, 500, 1000, 2000));
@@ -65,8 +65,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         add("Hellbent", new Hellbent());
     }
 
-    protected abstract void buildTopShelf();
-    protected abstract void buildBottomShelf();
+    protected abstract void addAchievements();
 
     protected void add(String key, Achievement achievement) {
         achievements.put(key, achievement);
@@ -103,7 +102,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         }
     }
 
-    private void save() {
+    protected void save() {
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document document = builder.newDocument();

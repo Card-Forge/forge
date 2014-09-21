@@ -4,6 +4,7 @@ import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.ai.AiProfileUtil;
 import forge.ai.LobbyPlayerAi;
+import forge.game.player.Player;
 import forge.interfaces.IGuiBase;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
@@ -57,6 +58,17 @@ public final class GamePlayerUtil {
         player.setAiProfile(lastProfileChosen);
         player.setAvatarIndex(avatarIndex);
         return player;
+    }
+
+    public Player getSingleOpponent(Player player) {
+        if (player.getGame().getRegisteredPlayers().size() == 2) {
+            for (Player p : player.getGame().getRegisteredPlayers()) {
+                if (p.isOpponentOf(player)) {
+                    return p;
+                }
+            }
+        }
+        return null;
     }
 
     public static void setPlayerName(final IGuiBase gui) {
