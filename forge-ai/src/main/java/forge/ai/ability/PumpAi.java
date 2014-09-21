@@ -246,6 +246,10 @@ public class PumpAi extends PumpAiBase {
                 	return false;
                 }
                 int buffedAtk = attack, buffedDef = defense;
+                if (source.getName().equals("Savage Punch") && !ai.hasFerocious()) {
+                    buffedAtk = 0;
+                    buffedDef = 0;
+                }
                 for (Card humanCreature : humCreatures) {
                 	for (Card aiCreature : aiCreatures) {
                 	    if (sa.isSpell()) {   //heroic triggers adding counters
