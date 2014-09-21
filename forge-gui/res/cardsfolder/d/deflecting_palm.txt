@@ -1,0 +1,13 @@
+Name:Deflecting Palm
+ManaCost:R W
+Types:Instant
+A:SP$ ChooseSource | Cost$ R W | Choices$ Card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to you this turn, prevent that damage. If damage is prevented this way, CARDNAME deals that much damage to that source's controller.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ Remembered | ImprintCards$ Self | SVars$ RPreventNextFromSource,ExileEffect,DamageControllerInstead,X | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ You | ReplaceWith$ DamageControllerInstead | PreventionEffect$ True | Description$ The next time the chosen source deals damage to you, prevent that damage.
+SVar:DamageControllerInstead:DB$ DealDamage | Defined$ RememberedController | DamageSource$ Imprinted | NumDmg$ X | References$ X | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:X:ReplaceCount$DamageAmount
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deflecting_palm.jpg
+Oracle:The next time a source of your choice would deal damage to you this turn, prevent that damage. If damage is prevented this way, Deflecting Palm deals that much damage to that source's controller.

@@ -4154,6 +4154,7 @@ forge-gui/res/cardsfolder/d/defiant_strike.txt -text
 forge-gui/res/cardsfolder/d/defiant_vanguard.txt -text
 forge-gui/res/cardsfolder/d/defiler_of_souls.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/defiling_tears.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/d/deflecting_palm.txt -text
 forge-gui/res/cardsfolder/d/deflection.txt -text
 forge-gui/res/cardsfolder/d/deft_duelist.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/deftblade_elite.txt -text svneol=unset#text/plain
