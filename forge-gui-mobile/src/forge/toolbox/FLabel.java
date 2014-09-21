@@ -23,7 +23,7 @@ public class FLabel extends FDisplayObject implements IButton {
         private FSkinFont  bldFont            = FSkinFont.get(14);
         private float      bldAlphaComposite  = 0.7f;
         private HAlignment bldAlignment       = HAlignment.LEFT;
-        private Vector2    bldInsets          = new Vector2(Utils.scaleX(3), Utils.scaleY(3));
+        private Vector2    bldInsets          = new Vector2(Utils.scale(3), Utils.scale(3));
 
         private boolean bldSelectable       = false;
         private boolean bldSelected         = false;
@@ -90,7 +90,7 @@ public class FLabel extends FDisplayObject implements IButton {
     private static final FSkinColor d10 = clrMain.stepColor(-10);
     private static final FSkinColor l10 = clrMain.stepColor(10);
     private static final FSkinColor l20 = clrMain.stepColor(20);
-    public static final float BORDER_THICKNESS = Utils.scaleMin(1);
+    public static final float BORDER_THICKNESS = Utils.scale(1);
 
     private float iconScaleFactor;
     private FSkinFont font;
@@ -293,8 +293,8 @@ public class FLabel extends FDisplayObject implements IButton {
         w -= 2 * x;
         h -= 2 * y;
         if (pressed) { //while pressed, translate graphics so icon and text appear shifted down and to the right
-            x += Utils.scaleX(1);
-            y += Utils.scaleY(1);
+            x += Utils.scale(1);
+            y += Utils.scale(1);
         }
 
         if (icon != null) {

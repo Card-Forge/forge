@@ -16,8 +16,8 @@ public class FMenuTab extends FDisplayObject {
     private static final FSkinColor SEL_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinColor FORE_COLOR = SEL_FORE_COLOR.alphaColor(0.5f);
     private static final FSkinColor SEPARATOR_COLOR = SEL_FORE_COLOR.alphaColor(0.3f);
-    public static final float PADDING = Utils.scaleMin(2);
-    private static final float SEPARATOR_WIDTH = Utils.scaleX(1);
+    public static final float PADDING = Utils.scale(2);
+    private static final float SEPARATOR_WIDTH = Utils.scale(1);
 
     private final FMenuBar menuBar;
     private final FDropDown dropDown;

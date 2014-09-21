@@ -25,8 +25,8 @@ import forge.util.Utils;
 
 public class AchievementsPage extends TabPage<SettingsScreen> {
     private static final float TROPHY_PADDING = 45;
-    private static final float PADDING = Utils.scaleMin(5);
-    private static final float SELECTED_BORDER_THICKNESS = Utils.scaleMin(1);
+    private static final float PADDING = Utils.scale(5);
+    private static final float SELECTED_BORDER_THICKNESS = Utils.scale(1);
     private static final int MIN_SHELVES = 4;
     private static final int TROPHIES_PER_SHELVE = 4;
     private static final FSkinFont NAME_FONT = FSkinFont.get(14);

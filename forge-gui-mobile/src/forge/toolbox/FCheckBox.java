@@ -12,7 +12,7 @@ import forge.util.Utils;
 public class FCheckBox extends FLabel implements ICheckBox {
     private static final FSkinColor CHECK_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinColor BOX_COLOR = CHECK_COLOR.alphaColor(0.5f);
-    private static final float EXTRA_GAP = Utils.scaleX(3);
+    private static final float EXTRA_GAP = Utils.scale(3);
 
     public FCheckBox() {
         this("", false);
@@ -56,15 +56,15 @@ public class FCheckBox extends FLabel implements ICheckBox {
         drawCheckBox(g, BOX_COLOR, CHECK_COLOR, isChecked, x, y, w, h);
     }
     public static void drawCheckBox(Graphics g, FSkinColor boxColor, FSkinColor checkColor, boolean isChecked, float x, float y, float w, float h) {
-        g.drawRect(Utils.scaleMin(1), boxColor, x, y, w, h);
+        g.drawRect(Utils.scale(1), boxColor, x, y, w, h);
         if (isChecked) {
             //draw check mark
-            float padX = Utils.scaleX(3);
-            float thickness = Utils.scaleMin(2);
+            float padX = Utils.scale(3);
+            float thickness = Utils.scale(2);
             x += padX;
-            y += Utils.scaleY(1);
+            y += Utils.scale(1);
             w -= 2 * padX;
-            h -= Utils.scaleY(3);
+            h -= Utils.scale(3);
             g.drawLine(thickness, checkColor, x, y + h / 2, x + w / 2, y + h);
             g.drawLine(thickness, checkColor, x + w / 2, y + h, x + w, y);
         }

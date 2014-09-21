@@ -153,7 +153,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
 
         @Override
         protected void doLayout(float width, float height) {
-            float y = Utils.scaleY(2); //move credits label down a couple pixels so it looks better
+            float y = Utils.scale(2); //move credits label down a couple pixels so it looks better
             float halfWidth = width / 2;
             lblCredits.setBounds(0, y, halfWidth, lblCredits.getAutoSizeBounds().height);
             getSecondLabel().setBounds(halfWidth, y, halfWidth, lblCredits.getHeight());

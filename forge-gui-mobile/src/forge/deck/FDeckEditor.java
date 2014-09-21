@@ -174,7 +174,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     private FEventHandler saveHandler;
 
     protected final DeckHeader deckHeader = add(new DeckHeader());
-    protected final FLabel lblName = deckHeader.add(new FLabel.Builder().font(FSkinFont.get(16)).insets(new Vector2(Utils.scaleX(5), 0)).build());
+    protected final FLabel lblName = deckHeader.add(new FLabel.Builder().font(FSkinFont.get(16)).insets(new Vector2(Utils.scale(5), 0)).build());
     private final FLabel btnSave = deckHeader.add(new FLabel.Builder().icon(FSkinImage.SAVE).align(HAlignment.CENTER).pressedColor(Header.BTN_PRESSED_COLOR).build());
     private final FLabel btnMoreOptions = deckHeader.add(new FLabel.Builder().text("...").font(FSkinFont.get(20)).align(HAlignment.CENTER).pressedColor(Header.BTN_PRESSED_COLOR).build());
 

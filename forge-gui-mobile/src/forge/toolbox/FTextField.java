@@ -17,8 +17,8 @@ import forge.util.Utils;
 
 public class FTextField extends FDisplayObject implements ITextField {
     private static final FSkinFont DEFAULT_FONT = FSkinFont.get(14);
-    private static final float BORDER_THICKNESS = Utils.scaleX(1);
-    public static final float PADDING = Utils.scaleX(5);
+    private static final float BORDER_THICKNESS = Utils.scale(1);
+    public static final float PADDING = Utils.scale(5);
     protected static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     protected static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_THEME2);
     protected static final FSkinColor GHOST_TEXT_COLOR = FORE_COLOR.alphaColor(0.7f);

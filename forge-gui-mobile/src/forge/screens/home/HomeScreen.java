@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
 import forge.Forge;
-import forge.Graphics;
 import forge.assets.FSkinImage;
 import forge.screens.constructed.ConstructedScreen;
 import forge.screens.draft.DraftScreen;
@@ -17,11 +16,13 @@ import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FLabel;
+import forge.util.Utils;
 
 public class HomeScreen extends FScreen {
-    public static final float LOGO_SIZE_FACTOR = 0.7f;
-    public static final float INSETS_FACTOR = 0.025f;
-    private static final float GAP_Y_FACTOR = 0.01f;
+    private static final float PADDING = Utils.scale(5);
+
+    private final FLabel lblLogo = add(new FLabel.Builder().icon(FSkinImage.LOGO).iconInBackground().iconScaleFactor(1).build());
     private final ArrayList<FButton> buttons = new ArrayList<FButton>();
 
     public HomeScreen() {
@@ -76,26 +77,24 @@ public class HomeScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
-        float x = width * INSETS_FACTOR;
-        float y = width * LOGO_SIZE_FACTOR + 2 * x; //start below background logo
-        float dy = height * GAP_Y_FACTOR;
-        float buttonWidth = width - 2 * x;
-        float buttonHeight = (height - y - x) / buttons.size() - dy;
-        dy += buttonHeight;
+        float buttonWidth = width - 2 * PADDING;
+        float buttonHeight = buttons.get(0).getFont().getCapHeight() * 3.5f;
+        float x = PADDING;
+        float y = height;
+        float dy = buttonHeight + PADDING;
 
-        for (FButton button : buttons) {
-            button.setBounds(x, y, buttonWidth, buttonHeight);
-            y += dy;
+        for (int i = buttons.size() - 1; i >= 0; i--) {
+            y -= dy;
+            buttons.get(i).setBounds(x, y, buttonWidth, buttonHeight);
         }
-    }
 
-    @Override
-    protected void drawBackground(Graphics g) {
-        super.drawBackground(g);
-
-        float size = getWidth() * LOGO_SIZE_FACTOR;
-        float x = (getWidth() - size) / 2f;
-        float y = getWidth() * INSETS_FACTOR;
-        g.drawImage(FSkinImage.LOGO, x, y, size, size);
+        float logoSize = y - 2 * PADDING;
+        y = PADDING;
+        if (logoSize > buttonWidth) {
+            y += (logoSize - buttonWidth) / 2;
+            logoSize = buttonWidth;
+        }
+        x = (width - logoSize) / 2;
+        lblLogo.setBounds(x, y, logoSize, logoSize);
     }
 }

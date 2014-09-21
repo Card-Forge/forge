@@ -50,7 +50,7 @@ import java.util.Map;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 public class VAssignDamage extends FDialog {
-    private static final float CARD_GAP_X = Utils.scaleX(10);
+    private static final float CARD_GAP_X = Utils.scale(10);
     private static final float ADD_BTN_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.75f;
 
     private final Callback<Map<CardView, Integer>> callback;

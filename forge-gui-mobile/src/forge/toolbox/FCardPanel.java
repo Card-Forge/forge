@@ -8,7 +8,7 @@ import forge.view.CardView;
 public class FCardPanel extends FDisplayObject {
     public static final float TAPPED_ANGLE = -90;
     public static final float ASPECT_RATIO = 3.5f / 2.5f;
-    public static final float PADDING = Utils.scaleMin(2);
+    public static final float PADDING = Utils.scale(2);
     public static final float TARGET_ORIGIN_FACTOR_X = 0.15f;
     public static final float TARGET_ORIGIN_FACTOR_Y = 0.5f;
 

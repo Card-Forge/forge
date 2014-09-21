@@ -53,7 +53,7 @@ import forge.util.Utils;
 
 public class ConstructedScreen extends LaunchScreen {
     private static final ForgePreferences prefs = FModel.getPreferences();
-    private static final float PADDING = Utils.scaleMin(5);
+    private static final float PADDING = Utils.scale(5);
     private static final int MAX_PLAYERS = 2; //8; //TODO: Support multiplayer
     private static final FSkinFont VARIANTS_FONT = FSkinFont.get(12);
     private static final FSkinFont LABEL_FONT = FSkinFont.get(14);

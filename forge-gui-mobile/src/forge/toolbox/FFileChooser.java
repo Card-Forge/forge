@@ -22,7 +22,7 @@ import forge.util.FileUtil;
 import forge.util.Utils;
 
 public class FFileChooser extends FDialog {
-    private static final float BACK_ICON_THICKNESS = Utils.scaleMax(2);
+    private static final float BACK_ICON_THICKNESS = Utils.scale(2);
 
     public enum ChoiceType {
         OpenFile,

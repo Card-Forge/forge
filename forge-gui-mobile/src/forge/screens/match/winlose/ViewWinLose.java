@@ -189,7 +189,7 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
     }
 
     private static class OutcomesPanel extends FContainer {
-        private static final float LBL_HEIGHT = Utils.scaleY(20);
+        private static final float LBL_HEIGHT = Utils.scale(20);
  
         @Override
         protected void doLayout(float width, float height) {

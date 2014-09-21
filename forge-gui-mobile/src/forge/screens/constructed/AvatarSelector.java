@@ -35,7 +35,7 @@ public class AvatarSelector extends FScreen {
         Forge.openScreen(selector);
     }
 
-    private static final float PADDING = Utils.scaleMin(5);
+    private static final float PADDING = Utils.scale(5);
     private static final int COLUMNS = 4;
 
     private final int currentIndex;

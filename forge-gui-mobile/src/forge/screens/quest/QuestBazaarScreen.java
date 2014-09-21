@@ -49,7 +49,7 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
     }
 
     private static class BazaarPage extends TabPage<QuestBazaarScreen> {
-        private static final float PADDING = Utils.scaleMax(5);
+        private static final float PADDING = Utils.scale(5);
 
         private final QuestStallDefinition stallDef;
         private final FLabel lblStallName = add(new FLabel.Builder().text("").align(HAlignment.CENTER).build());

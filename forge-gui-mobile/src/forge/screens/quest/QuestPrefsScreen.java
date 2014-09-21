@@ -19,7 +19,7 @@ import forge.toolbox.FTextField;
 import forge.util.Utils;
 
 public class QuestPrefsScreen extends FScreen {
-    private static final float PADDING = Utils.scaleMin(5);
+    private static final float PADDING = Utils.scale(5);
 
     private enum PrefsGroup {
         REWARDS,

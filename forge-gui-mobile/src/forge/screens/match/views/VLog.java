@@ -19,7 +19,7 @@ import forge.util.Utils;
 import forge.view.IGameView;
 
 public class VLog extends FDropDown {
-    private static final float PADDING = Utils.scaleMin(5);
+    private static final float PADDING = Utils.scale(5);
     private static final FSkinFont FONT = FSkinFont.get(11);
     private static final FSkinColor ALT_ROW_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);
     private static final FSkinColor ROW_COLOR = ALT_ROW_COLOR.darker();

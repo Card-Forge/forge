@@ -44,7 +44,7 @@ public class VPlayers extends FDropDown {
 
     private static class PlayerInfoPanel extends FContainer {
         private static final FSkinFont FONT = FSkinFont.get(12);
-        private static final float PADDING = Utils.scaleMin(5);
+        private static final float PADDING = Utils.scale(5);
         private static final float HEIGHT = Utils.AVG_FINGER_HEIGHT * 1.8f;
         private final PlayerView player;
 

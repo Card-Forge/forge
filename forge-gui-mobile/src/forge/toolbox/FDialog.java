@@ -18,7 +18,7 @@ public abstract class FDialog extends FOverlay {
     private static final FSkinColor TITLE_BACK_COLOR = FSkinColor.get(Colors.CLR_THEME2);
     private static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
     public static final float TITLE_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.6f);
-    public static final float INSETS = Utils.scaleMin(10);
+    public static final float INSETS = Utils.scale(10);
     private static int openDialogCount = 0;
 
     public static boolean isDialogOpen() {

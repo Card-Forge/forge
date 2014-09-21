@@ -98,7 +98,7 @@ public class QuestStatsScreen extends FScreen {
 
     public QuestStatsScreen() {
         super("Quest Statistics", QuestMenu.getMenu());
-        lblZep.setHeight(Utils.scaleY(60));
+        lblZep.setHeight(Utils.scale(60));
 
         cbxPet.setDropDownChangeHandler(new FEventHandler() {
             @Override

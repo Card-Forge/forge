@@ -29,8 +29,8 @@ public class VPlayerPanel extends FContainer {
     private static final FSkinFont INFO_FONT = FSkinFont.get(12);
     private static final FSkinColor INFO_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinColor DISPLAY_AREA_BACK_COLOR = FSkinColor.get(Colors.CLR_INACTIVE).alphaColor(0.5f);
-    private static final float INFO_TAB_PADDING_X = Utils.scaleX(2);
-    private static final float INFO_TAB_PADDING_Y = Utils.scaleY(2);
+    private static final float INFO_TAB_PADDING_X = Utils.scale(2);
+    private static final float INFO_TAB_PADDING_Y = Utils.scale(2);
 
     private final PlayerView player;
     private final VPhaseIndicator phaseIndicator;
@@ -304,7 +304,7 @@ public class VPlayerPanel extends FContainer {
             }
             else {
                 float halfHeight = getHeight() / 2;
-                float textStart = halfHeight + Utils.scaleX(1);
+                float textStart = halfHeight + Utils.scale(1);
                 float textWidth = getWidth() - textStart;
                 g.drawImage(FSkinImage.QUEST_LIFE, 0, 0, halfHeight, halfHeight);
                 g.drawText(lifeStr, INFO_FONT, INFO_FORE_COLOR, textStart, 0, textWidth, halfHeight, false, HAlignment.CENTER, true);

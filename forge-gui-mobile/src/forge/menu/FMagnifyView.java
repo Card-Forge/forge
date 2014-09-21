@@ -11,7 +11,7 @@ import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
 
 public class FMagnifyView extends FDropDown {
-    private static final float PADDING = Utils.scaleMin(5);
+    private static final float PADDING = Utils.scale(5);
 
     private FDisplayObject owner;
     private String text;

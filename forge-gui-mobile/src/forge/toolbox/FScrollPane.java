@@ -12,8 +12,8 @@ import forge.util.Utils;
 public abstract class FScrollPane extends FContainer {
     private static final float FLING_DECEL = 750f;
     /*private static final FSkinColor INDICATOR_COLOR = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.7f);
-    private static final float INDICATOR_SIZE = Utils.scaleMax(5);
-    private static final float INDICATOR_MARGIN = Utils.scaleMax(3);*/
+    private static final float INDICATOR_SIZE = Utils.scale(5);
+    private static final float INDICATOR_MARGIN = Utils.scale(3);*/
 
     private float scrollLeft, scrollTop;
     private ScrollBounds scrollBounds;

@@ -15,9 +15,9 @@ public class FToggleSwitch extends FDisplayObject {
     private static final FSkinColor PRESSED_COLOR = ACTIVE_COLOR.stepColor(-30);
     private static final FSkinColor INACTIVE_COLOR = FSkinColor.get(Colors.CLR_INACTIVE);
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    private static final float BORDER_THICKNESS = Utils.scaleMin(1);
-    private static final float INSETS = Utils.scaleMin(2);
-    private static final float PADDING = Utils.scaleMin(3);
+    private static final float BORDER_THICKNESS = Utils.scale(1);
+    private static final float INSETS = Utils.scale(2);
+    private static final float PADDING = Utils.scale(3);
 
     private FSkinFont font;
     private final String offText, onText;

@@ -40,9 +40,9 @@ import forge.view.StackItemView;
 public class VStack extends FDropDown {
     public static final float CARD_WIDTH = Utils.AVG_FINGER_WIDTH;
     public static final float CARD_HEIGHT = Math.round(CARD_WIDTH * FCardPanel.ASPECT_RATIO);
-    public static final float BORDER_THICKNESS = Utils.scaleMin(2);
-    public static final float PADDING = Utils.scaleMin(3);
-    public static final float MARGINS = Utils.scaleMin(4);
+    public static final float BORDER_THICKNESS = Utils.scale(2);
+    public static final float PADDING = Utils.scale(3);
+    public static final float MARGINS = Utils.scale(4);
     private static final FSkinFont FONT = FSkinFont.get(11);
     private static final float ALPHA_COMPOSITE = 0.5f;
     private static final TextRenderer textRenderer = new TextRenderer(true);

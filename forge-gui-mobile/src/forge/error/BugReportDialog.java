@@ -20,7 +20,7 @@ import forge.util.Callback;
 import forge.util.Utils;
 
 public class BugReportDialog extends FScreen { //use screen rather than dialog so screen with bug isn't rendered
-    private static final float PADDING = Utils.scaleMin(5);
+    private static final float PADDING = Utils.scale(5);
     private static boolean isOpen;
 
     public static void show(String title, String text, boolean showExitAppBtn) {
@@ -110,7 +110,7 @@ public class BugReportDialog extends FScreen { //use screen rather than dialog s
         private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);
         private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
         private static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
-        private static final float PADDING = Utils.scaleMin(3);
+        private static final float PADDING = Utils.scale(3);
 
         private final String text;
 

@@ -51,7 +51,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 public class AddBasicLandsDialog extends FDialog {
     private static final float ADD_BTN_SIZE = Utils.AVG_FINGER_HEIGHT * 0.75f;
-    private static final float LAND_PANEL_PADDING = Utils.scaleY(3);
+    private static final float LAND_PANEL_PADDING = Utils.scale(3);
 
     private final Callback<CardPool> callback;
 

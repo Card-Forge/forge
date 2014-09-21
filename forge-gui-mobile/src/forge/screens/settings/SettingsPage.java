@@ -307,7 +307,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         float radius = h / 3;
                         x += w - radius;
                         y += h / 2;
-                        g.drawCircle(Utils.scaleMin(1), SettingsScreen.DESC_COLOR, x, y, radius);
+                        g.drawCircle(Utils.scale(1), SettingsScreen.DESC_COLOR, x, y, radius);
                         if (value.equals(currentValue)) {
                             g.fillCircle(foreColor, x, y, radius / 2);
                         }

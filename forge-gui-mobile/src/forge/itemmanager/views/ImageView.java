@@ -43,16 +43,16 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class ImageView<T extends InventoryItem> extends ItemView<T> {
-    private static final float PADDING = Utils.scaleMin(5);
+    private static final float PADDING = Utils.scale(5);
     private static final float PILE_SPACING_Y = 0.1f;
     private static final FSkinFont LABEL_FONT = FSkinFont.get(12);
     private static final FSkinColor GROUP_HEADER_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinColor GROUP_HEADER_LINE_COLOR = GROUP_HEADER_FORE_COLOR.alphaColor(0.5f);
     private static final FSkinFont GROUP_HEADER_FONT = LABEL_FONT;
-    private static final float GROUP_HEADER_HEIGHT = Utils.scaleY(19);
-    private static final float GROUP_HEADER_GLYPH_WIDTH = Utils.scaleX(6);
-    private static final float GROUP_HEADER_LINE_THICKNESS = Utils.scaleY(1);
-    private static final float SEL_BORDER_SIZE = Utils.scaleMax(1);
+    private static final float GROUP_HEADER_HEIGHT = Utils.scale(19);
+    private static final float GROUP_HEADER_GLYPH_WIDTH = Utils.scale(6);
+    private static final float GROUP_HEADER_LINE_THICKNESS = Utils.scale(1);
+    private static final float SEL_BORDER_SIZE = Utils.scale(1);
     private static final int MIN_COLUMN_COUNT = 1;
     private static final int MAX_COLUMN_COUNT = 10;
 
@@ -102,7 +102,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         @Override
         protected void drawContent(Graphics g, float w, float h, final boolean pressed) {
-            float lineThickness = Utils.scaleMin(1);
+            float lineThickness = Utils.scale(1);
             float offset = 2 * lineThickness;
             float squareSize = Math.round(w / 2 - offset);
             if (squareSize % 2 == 1) {
@@ -420,7 +420,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         float itemAreaWidth = getScroller().getWidth();
         float groupWidth = itemAreaWidth - 2 * groupX;
 
-        float gap = (MAX_COLUMN_COUNT - columnCount) / 2 + Utils.scaleX(2); //more items per row == less gap between them
+        float gap = (MAX_COLUMN_COUNT - columnCount) / 2 + Utils.scale(2); //more items per row == less gap between them
         float itemWidth = (groupWidth + gap) / columnCount - gap;
         if (pileBy != null) {
             //if showing piles, make smaller so part of the next card is visible so it's obvious if scrolling is needed

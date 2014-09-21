@@ -13,7 +13,7 @@ import forge.util.Aggregates;
 import forge.util.Utils;
 
 public class FVanguardChooser extends FScreen {
-    public static final float PADDING = Utils.scaleMin(5);
+    public static final float PADDING = Utils.scale(5);
 
     private static final CardPool allHumanAvatars = new CardPool();
     private static final CardPool allAiAvatars = new CardPool();

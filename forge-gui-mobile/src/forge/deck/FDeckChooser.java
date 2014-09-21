@@ -36,7 +36,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FDeckChooser extends FScreen {
-    public static final float PADDING = Utils.scaleMin(5);
+    public static final float PADDING = Utils.scale(5);
 
     private FComboBox<DeckType> cmbDeckTypes;
     private DeckType selectedDeckType;

@@ -11,7 +11,7 @@ import forge.util.Utils;
 
 
 public abstract class ItemFilter<T extends InventoryItem> {
-    public static final float PADDING = Utils.scaleMax(3);
+    public static final float PADDING = Utils.scale(3);
     public static final FSkinFont DEFAULT_FONT = FSkinFont.get(11);
 
     protected final ItemManager<? super T> itemManager;

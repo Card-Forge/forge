@@ -21,11 +21,11 @@ import forge.util.Utils;
 public class VPrompt extends FContainer {
     public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT;
     public static final float BTN_WIDTH = HEIGHT * 1.5f;
-    public static final float PADDING = Utils.scaleMin(2);
+    public static final float PADDING = Utils.scale(2);
 
+    private static final FSkinFont FONT = FSkinFont.get(14);
     private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_THEME2);
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    private static final FSkinFont FONT = FSkinFont.get(14);
 
     private final FButton btnOk, btnCancel;
     private final MessageLabel lblMessage;

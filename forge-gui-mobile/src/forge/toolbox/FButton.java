@@ -20,7 +20,7 @@ import forge.util.Utils;
 
 public class FButton extends FDisplayObject implements IButton {
     private static final FSkinColor DEFAULT_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    private static final float PADDING = Utils.scaleX(10);
+    private static final float PADDING = Utils.scale(10);
 
     private FSkinImage imgL, imgM, imgR;
     private String text;

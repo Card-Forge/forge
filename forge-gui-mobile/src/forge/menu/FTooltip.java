@@ -15,7 +15,7 @@ import forge.util.Utils;
 public class FTooltip extends FDropDown {
     private static final FSkinFont FONT = FSkinFont.get(12);
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    private static final float PADDING = Utils.scaleMin(5);
+    private static final float PADDING = Utils.scale(5);
 
     private FDisplayObject owner;
     private float x, y;

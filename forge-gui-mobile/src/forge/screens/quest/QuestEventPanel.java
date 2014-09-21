@@ -30,7 +30,7 @@ class QuestEventPanel extends FDisplayObject {
     private static final FSkinFont DESC_FONT = FSkinFont.get(12);
     private static final FSkinColor TITLE_COLOR = FList.FORE_COLOR;
     private static final FSkinColor DESC_COLOR = SettingsScreen.DESC_COLOR;
-    private static final float PADDING = Utils.scaleMax(5);
+    private static final float PADDING = Utils.scale(5);
     private static final FSkinColor GRADIENT_LEFT_COLOR = FSkinColor.get(Colors.CLR_THEME2).alphaColor(200 / 255f);
     private static final Color GRADIENT_RIGHT_COLOR = new Color(1, 1, 0, 0);
     private static final float RADIO_BUTTON_RADIUS = Utils.AVG_FINGER_WIDTH / 4;
@@ -108,7 +108,7 @@ class QuestEventPanel extends FDisplayObject {
         //draw radio button
         x = getWidth() - PADDING - RADIO_BUTTON_RADIUS;
         y = h / 2;
-        g.drawCircle(Utils.scaleMin(1), SettingsScreen.DESC_COLOR, x, y, RADIO_BUTTON_RADIUS);
+        g.drawCircle(Utils.scale(1), SettingsScreen.DESC_COLOR, x, y, RADIO_BUTTON_RADIUS);
         if (isSelected()) {
             g.fillCircle(TITLE_COLOR, x, y, RADIO_BUTTON_RADIUS / 2);
         }

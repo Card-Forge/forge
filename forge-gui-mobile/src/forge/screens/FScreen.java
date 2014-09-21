@@ -94,7 +94,7 @@ public abstract class FScreen extends FContainer {
         public static final FSkinColor BTN_PRESSED_COLOR = TEXTURE_OVERLAY_COLOR.alphaColor(1f);
         public static final FSkinColor LINE_COLOR = BTN_PRESSED_COLOR.stepColor(-40);
         public static final FSkinColor BACK_COLOR = BTN_PRESSED_COLOR.stepColor(-80);
-        public static final float LINE_THICKNESS = Utils.scaleY(1);
+        public static final float LINE_THICKNESS = Utils.scale(1);
 
         public abstract float getPreferredHeight();
     }
@@ -158,7 +158,7 @@ public abstract class FScreen extends FContainer {
     }
 
     protected static class BackIcon implements FImage {
-        private static final float THICKNESS = Utils.scaleMax(3);
+        private static final float THICKNESS = Utils.scale(3);
         private static final FSkinColor COLOR = FSkinColor.get(Colors.CLR_TEXT);
 
         private final float width, height;

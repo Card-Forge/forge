@@ -9,10 +9,9 @@ public class Utils {
     public static final float BASE_HEIGHT = 480f;
     public static final float SCREEN_WIDTH = (float)Gdx.graphics.getWidth();
     public static final float SCREEN_HEIGHT = (float)Gdx.graphics.getHeight();
-    public static final float WIDTH_RATIO = SCREEN_WIDTH / BASE_WIDTH;
-    public static final float HEIGHT_RATIO = SCREEN_HEIGHT / BASE_HEIGHT;
-    public static final float MIN_RATIO = Math.min(WIDTH_RATIO, HEIGHT_RATIO);
-    public static final float MAX_RATIO = Math.max(WIDTH_RATIO, HEIGHT_RATIO);
+    private static final float WIDTH_RATIO = SCREEN_WIDTH / BASE_WIDTH;
+    private static final float HEIGHT_RATIO = SCREEN_HEIGHT / BASE_HEIGHT;
+    private static final float MIN_RATIO = Math.min(WIDTH_RATIO, HEIGHT_RATIO);
 
     private static final float AVG_FINGER_SIZE_CM = 1.1f;
 
@@ -21,17 +20,18 @@ public class Utils {
     public static final int DEV_SCREEN_WIDTH = (int)BASE_WIDTH, DEV_SCREEN_HEIGHT = (int)BASE_HEIGHT;
     //private static final float ppcX = 169f / AVG_FINGER_SIZE_CM, ppcY = 237f / AVG_FINGER_SIZE_CM;
     //public static final int DEV_SCREEN_WIDTH = 400, DEV_SCREEN_HEIGHT = 600;
-    //private static final float scaleX = 1.4f, scaleY = 1.5f;
+    //private static final float scaleX = 1.9f, scaleY = 1.5f;
     //private static final float ppcX = Gdx.graphics.getPpcX() * scaleX, ppcY = Gdx.graphics.getPpcY() * scaleY;
     //public static final int DEV_SCREEN_WIDTH = (int)(BASE_WIDTH * scaleX), DEV_SCREEN_HEIGHT = (int)(BASE_HEIGHT * scaleY);
 
     //round to nearest int to reduce floating point display issues
     //reduce if either would take up too large a percentage of the screen to prevent layouts not working
+    private static final float MIN_FINGER_SIZE = scale(40); //scaled value of 40 is approximately how tall the Prompt buttons would need to be to fit their text
     private static final float MIN_FINGERS_WIDE = 5; //ensure screen considered to be at least 5 "fingers" wide
     private static final float MIN_FINGERS_TALL = MIN_FINGERS_WIDE * BASE_HEIGHT / BASE_WIDTH; //ensure screen tall enough based on fingers wide and base ratio
 
-    public static final float AVG_FINGER_WIDTH = Math.round(Math.min(cmToPixelsX(AVG_FINGER_SIZE_CM), SCREEN_WIDTH / MIN_FINGERS_WIDE));
-    public static final float AVG_FINGER_HEIGHT = Math.round(Math.min(cmToPixelsY(AVG_FINGER_SIZE_CM), SCREEN_HEIGHT / MIN_FINGERS_TALL));
+    public static final float AVG_FINGER_WIDTH = Math.round(Math.min(Math.max(cmToPixelsX(AVG_FINGER_SIZE_CM), MIN_FINGER_SIZE), SCREEN_WIDTH / MIN_FINGERS_WIDE));
+    public static final float AVG_FINGER_HEIGHT = Math.round(Math.min(Math.max(cmToPixelsY(AVG_FINGER_SIZE_CM), MIN_FINGER_SIZE), SCREEN_HEIGHT / MIN_FINGERS_TALL));
 
     public static float cmToPixelsX(float cm) {
         return ppcX * cm;
@@ -40,20 +40,8 @@ public class Utils {
         return ppcY * cm;
     }
 
-    public static float scaleX(float value) {
-        return Math.round(value * WIDTH_RATIO);
-    }
-
-    public static float scaleY(float value) {
-        return Math.round(value * HEIGHT_RATIO);
-    }
-
-    public static float scaleMin(float value) {
+    public static float scale(float value) {
         return Math.round(value * MIN_RATIO);
-    }
-
-    public static float scaleMax(float value) {
-        return Math.round(value * MAX_RATIO);
     }
 
     public static long secondsToTimeSpan(float seconds) {

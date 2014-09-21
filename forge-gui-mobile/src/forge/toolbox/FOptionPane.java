@@ -23,11 +23,11 @@ public class FOptionPane extends FDialog {
     public static final FSkinImage WARNING_ICON = FSkinImage.WARNING;
     public static final FSkinImage ERROR_ICON = FSkinImage.ERROR;
 
-    public static final float PADDING = Utils.scaleMin(10);
-    public static final float GAP_BETWEEN_BUTTONS = Utils.scaleX(3);
+    public static final float PADDING = Utils.scale(10);
+    public static final float GAP_BETWEEN_BUTTONS = Utils.scale(3);
     public static final float GAP_BELOW_BUTTONS = PADDING * 0.5f;
     public static final float BUTTON_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.75f;
-    public static final float MIN_BUTTON_WIDTH = Utils.scaleX(120);
+    public static final float MIN_BUTTON_WIDTH = Utils.scale(120);
 
     public static float getMaxDisplayObjHeight() {
         return Forge.getCurrentScreen().getHeight() - 2 * VPrompt.HEIGHT - FDialog.TITLE_HEIGHT - 
@@ -255,7 +255,7 @@ public class FOptionPane extends FDialog {
 
         float promptHeight = 0;
         if (lblIcon != null) {
-            float labelWidth = Utils.scaleX(lblIcon.getIcon().getWidth());
+            float labelWidth = Utils.scale(lblIcon.getIcon().getWidth());
             promptHeight = lblIcon.getIcon().getHeight() * labelWidth / lblIcon.getIcon().getWidth();
             if (promptHeight > maxPromptHeight) {
                 promptHeight = maxPromptHeight;
@@ -265,7 +265,7 @@ public class FOptionPane extends FDialog {
                 y += promptHeight + PADDING;
             }
             else {
-                lblIcon.setBounds(x - Utils.scaleX(3), y, labelWidth, promptHeight);
+                lblIcon.setBounds(x - Utils.scale(3), y, labelWidth, promptHeight);
                 x += labelWidth;
             }
         }

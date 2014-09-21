@@ -48,12 +48,12 @@ public class CardRenderer {
     public static final float NAME_BOX_TINT = 0.2f;
     public static final float TEXT_BOX_TINT = 0.1f;
     public static final float PT_BOX_TINT = 0.2f;
-    public static final float MANA_COST_PADDING = Utils.scaleMin(3);
-    public static final float SET_BOX_MARGIN = Utils.scaleMin(1);
+    public static final float MANA_COST_PADDING = Utils.scale(3);
+    public static final float SET_BOX_MARGIN = Utils.scale(1);
     public static final float MANA_SYMBOL_SIZE = FSkinImage.MANA_1.getNearestHQWidth(2 * (NAME_FONT.getCapHeight() - MANA_COST_PADDING));
-    private static final float NAME_COST_THRESHOLD = Utils.scaleY(200);
+    private static final float NAME_COST_THRESHOLD = Utils.scale(200);
     public static final float BLACK_BORDER_THICKNESS_RATIO = 0.021f;
-    private static final float BORDER_THICKNESS = Utils.scaleMin(1);
+    private static final float BORDER_THICKNESS = Utils.scale(1);
 
     private static Color fromDetailColor(DetailColors detailColor) {
         return FSkinColor.fromRGB(detailColor.r, detailColor.g, detailColor.b);
@@ -461,7 +461,7 @@ public class CardRenderer {
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
         float padX = TEXT_FONT.getCapHeight() / 2;
-        float padY = padX + Utils.scaleY(2); //add a little more vertical padding
+        float padY = padX + Utils.scale(2); //add a little more vertical padding
         x += padX;
         y += padY;
         w -= 2 * padX;
@@ -553,7 +553,7 @@ public class CardRenderer {
             if (showCardManaCostOverlay(card)) {
                 float manaSymbolSize = w / 4;
                 if (card.isSplitCard() && card.hasAltState()) {
-                    float dy = manaSymbolSize / 2 + Utils.scaleY(5);
+                    float dy = manaSymbolSize / 2 + Utils.scale(5);
                     drawManaCost(g, card.getOriginal().getManaCost(), x, y + dy, w, h, manaSymbolSize);
                     drawManaCost(g, card.getAlternate().getManaCost(), x, y - dy, w, h, manaSymbolSize);
                 }

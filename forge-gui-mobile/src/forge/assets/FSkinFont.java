@@ -39,7 +39,7 @@ public class FSkinFont {
     }
 
     public static FSkinFont get(final int unscaledSize) {
-        return _get((int)Utils.scaleMax(unscaledSize));
+        return _get((int)Utils.scale(unscaledSize));
     }
     public static FSkinFont _get(final int scaledSize) {
         FSkinFont skinFont = fonts.get(scaledSize);

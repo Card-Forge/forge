@@ -271,8 +271,8 @@ public class LoadQuestScreen extends FScreen {
                     h += SettingsScreen.SETTING_PADDING;
                     y += h;
                     h = totalHeight - h + w * SettingsScreen.INSETS_FACTOR;
-                    float iconSize = h + Utils.scaleMin(1);
-                    float iconOffset = SettingsScreen.SETTING_PADDING - Utils.scaleX(2);
+                    float iconSize = h + Utils.scale(1);
+                    float iconOffset = SettingsScreen.SETTING_PADDING - Utils.scale(2);
 
                     String cards = String.valueOf(value.getAssets().getCardPool().countAll());
                     String credits = String.valueOf(value.getAssets().getCredits());

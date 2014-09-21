@@ -18,8 +18,8 @@ import forge.util.Utils;
 
 public class VPhaseIndicator extends FContainer {
     private static final FSkinFont BASE_FONT = FSkinFont.get(11);
-    private static final float PADDING_X = Utils.scaleX(1);
-    private static final float PADDING_Y = Utils.scaleY(2);
+    private static final float PADDING_X = Utils.scale(1);
+    private static final float PADDING_Y = Utils.scale(2);
 
     private final Map<PhaseType, PhaseLabel> phaseLabels = new HashMap<PhaseType, PhaseLabel>();
     private FSkinFont font;

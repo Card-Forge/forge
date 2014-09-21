@@ -175,6 +175,6 @@ public class FProgressBar extends FDisplayObject implements IProgressBar {
         }
 
         //draw border
-        g.drawRect(Utils.scaleMin(1), Color.BLACK, 0, 0, w, h);
+        g.drawRect(Utils.scale(1), Color.BLACK, 0, 0, w, h);
     }
 }
