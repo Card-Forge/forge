@@ -670,6 +670,7 @@ forge-gui-android/assets/fallback_skin/bg_splash.png -text
 forge-gui-android/assets/fallback_skin/bg_texture.jpg -text
 forge-gui-android/assets/fallback_skin/font1.ttf -text
 forge-gui-android/filters/version.txt -text
+forge-gui-android/forge.keystore -text
 forge-gui-android/ic_launcher-web.png -text
 forge-gui-android/libs/android-support-v4.jar -text
 forge-gui-android/libs/armeabi-v7a/libgdx-freetype.so -text
