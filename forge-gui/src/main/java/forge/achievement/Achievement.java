@@ -148,10 +148,8 @@ public abstract class Achievement {
 
         if (earnedSpecial()) {
             if (!hadEarnedSpecial) {
-                if (image != null) { //only update image if it has already been initialized
-                    updateTrophyImage();
-                }
-                gui.showImageDialog(image, displayName + "\n" + sharedDesc + ".", "Achievement Earned");
+                updateTrophyImage();
+                gui.showImageDialog(image, displayName + "\n" + sharedDesc + "\n" + mythicDesc, "Achievement Earned");
             }
             return;
         }
