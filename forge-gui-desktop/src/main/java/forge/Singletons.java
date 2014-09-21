@@ -19,7 +19,6 @@ package forge;
 
 import forge.control.FControl;
 import forge.model.FModel;
-import forge.properties.ForgeProfileProperties;
 import forge.view.FView;
 
 /**
@@ -46,8 +45,6 @@ public final class Singletons {
             }
             initialized = true;
         }
-
-        ForgeProfileProperties.init(GuiBase.getInterface());
 
         if (withUi) {
             view = FView.SINGLETON_INSTANCE;

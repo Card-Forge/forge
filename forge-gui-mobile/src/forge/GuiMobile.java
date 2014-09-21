@@ -62,8 +62,10 @@ import forge.view.PlayerView;
 import forge.view.SpellAbilityView;
 
 public class GuiMobile implements IGuiBase {
-
-    public GuiMobile() {
+    private final String assetsDir;
+    
+    public GuiMobile(String assetsDir0) {
+        assetsDir = assetsDir0;
     }
 
     @Override
@@ -74,6 +76,11 @@ public class GuiMobile implements IGuiBase {
     @Override
     public String getCurrentVersion() {
         return Forge.CURRENT_VERSION;
+    }
+
+    @Override
+    public String getAssetsDir() {
+        return assetsDir;
     }
 
     @Override

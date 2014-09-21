@@ -6,7 +6,6 @@ import java.util.List;
 
 import junit.framework.Assert;
 
-import org.apache.commons.lang3.StringUtils;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -16,7 +15,6 @@ import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.DeckHints;
 import forge.properties.ForgeConstants;
-import forge.util.BuildInfo;
 import forge.util.FileUtil;
 
 /**
@@ -28,10 +26,6 @@ public class DeckHintsTest {
 
 	@BeforeTest
 	void setupTest() {
-        // Init ForgeConstants
-        final String assetsDir = StringUtils.containsIgnoreCase(BuildInfo.getVersionString(), "svn") ? "../forge-gui/" : "";
-        ForgeConstants.init(assetsDir);
-
 		GuiBase.setInterface(new GuiDesktop());
 	}
 	

@@ -26,7 +26,7 @@ import java.util.Properties;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-import forge.interfaces.IGuiBase;
+import forge.GuiBase;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 
@@ -36,7 +36,6 @@ import forge.util.FileUtil;
  * so they can be easily appended with further path elements.
  */
 public class ForgeProfileProperties {
-    private static boolean isRunningOnDesktop;
     private static String userDir;
     private static String cacheDir;
     private static String cardPicsDir;
@@ -53,8 +52,7 @@ public class ForgeProfileProperties {
         //prevent initializing static class
     }
 
-    public static void init(final IGuiBase gui) {
-        isRunningOnDesktop = gui.isRunningOnDesktop();
+    public static void init() {
     }
 
     public static void load() {
@@ -149,7 +147,7 @@ public class ForgeProfileProperties {
 
     // returns a pair <userDir, cacheDir>
     private static Pair<String, String> getDefaultDirs() {
-        if (isRunningOnDesktop) { //special case for mobile devices
+        if (!GuiBase.getInterface().isRunningOnDesktop()) { //special case for mobile devices
             String assetsDir = ForgeConstants.ASSETS_DIR;
             return Pair.of(assetsDir + "data" + File.separator, assetsDir + "cache" + File.separator);
         }

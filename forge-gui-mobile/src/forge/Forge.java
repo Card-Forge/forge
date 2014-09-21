@@ -55,10 +55,9 @@ public class Forge implements ApplicationListener {
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0) {
         if (GuiBase.getInterface() == null) {
-            ForgeConstants.init(assetDir0);
             clipboard = clipboard0;
             deviceAdapter = deviceAdapter0;
-            final IGuiBase gui = new GuiMobile();
+            final IGuiBase gui = new GuiMobile(assetDir0);
             GuiBase.setInterface(gui);
             soundSystem = new SoundSystem(gui);
         }

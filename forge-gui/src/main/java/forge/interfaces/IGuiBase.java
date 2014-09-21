@@ -34,6 +34,7 @@ import forge.view.SpellAbilityView;
 public interface IGuiBase {
     boolean isRunningOnDesktop();
     String getCurrentVersion();
+    String getAssetsDir();
     void invokeInEdtLater(Runnable runnable);
     void invokeInEdtAndWait(final Runnable proc);
     boolean isGuiThread();

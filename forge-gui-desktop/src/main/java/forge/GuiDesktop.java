@@ -21,6 +21,7 @@ import javax.swing.MenuElement;
 import javax.swing.MenuSelectionManager;
 import javax.swing.SwingUtilities;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
@@ -83,7 +84,6 @@ import forge.view.PlayerView;
 import forge.view.SpellAbilityView;
 
 public class GuiDesktop implements IGuiBase {
-    
     private boolean showOverlay = true;
 
     @Override
@@ -94,6 +94,12 @@ public class GuiDesktop implements IGuiBase {
     @Override
     public String getCurrentVersion() {
         return BuildInfo.getVersionString();
+    }
+
+    @Override
+    public String getAssetsDir() {
+        return StringUtils.containsIgnoreCase(BuildInfo.getVersionString(), "svn") ?
+                "../forge-gui/" : "";
     }
 
     @Override
