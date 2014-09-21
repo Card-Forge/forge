@@ -85,7 +85,14 @@ public class  DamageAllAi extends SpellAbilityAi {
 
         int minGain = 200; // The minimum gain in destroyed creatures
         if (sa.getPayCosts() != null && sa.getPayCosts().isReusuableResource()) {
-            minGain = 100;
+        	if (computerList.isEmpty()) {
+        		minGain = 10; // nothing to lose
+        	} else {
+        		minGain = 100; // safety for errors in evaluate creature
+        	}
+        } else if (sa.getSubAbility() != null && ai.getGame().getPhaseHandler().isPreCombatMain() && computerList.isEmpty()
+        		&& opp.getCreaturesInPlay().size() > 1 && !ai.getCreaturesInPlay().isEmpty()) {
+        	minGain = 126; // prepare for attack
         }
 
         // evaluate both lists and pass only if human creatures are more valuable
