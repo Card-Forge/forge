@@ -111,6 +111,13 @@ public class RepeatEachAi extends SpellAbilityAi {
                     return false;
                 }
             }
+        } else if ("OpponentHasCreatures".equals(logic)) {
+        	for (Player opp : aiPlayer.getOpponents()) {
+        		if (!opp.getCreaturesInPlay().isEmpty()){
+        			return true;
+        		}
+        	}
+        	return false;
         }
 
         // TODO Add some normal AI variability here
