@@ -2348,6 +2348,25 @@ public class Player extends GameEntity implements Comparable<Player> {
         return false;
     }
 
+    
+    /**
+     * <p>
+     * hasFerocious.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public boolean hasFerocious() {
+        final List<Card> list = this.getCreaturesInPlay();
+        final List<Card> ferocious = CardLists.filter(list, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.getNetAttack() > 3;
+            }
+        });
+        return !ferocious.isEmpty();
+    }
+
     /**
      * <p>
      * getBloodthirstAmount.

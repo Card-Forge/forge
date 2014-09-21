@@ -51,10 +51,14 @@ public class DamageDealAi extends DamageAiBase {
         final String damage = sa.getParam("NumDmg");
         int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
 
-        if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
+        if ((damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid") ||
+                sa.getHostCard().getName().equals("Crater's Claws"))) {
             // Set PayX here to maximum value.
             dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(dmg));
+        }
+        if (sa.getHostCard().getName().equals("Crater's Claws") && ai.hasFerocious()) {
+            dmg += 2;
         }
         String logic = sa.getParam("AILogic");
         
@@ -95,7 +99,8 @@ public class DamageDealAi extends DamageAiBase {
             return false;
         }
 
-        if (damage.equals("X") && source.getSVar(damage).equals("Count$xPaid")) {
+        if ((damage.equals("X") && source.getSVar(damage).equals("Count$xPaid")) ||
+                sa.getHostCard().getName().equals("Crater's Claws")){
             // If I can kill my target by paying less mana, do it
             if (sa.usesTargeting() && !sa.getTargets().isTargetingAnyPlayer() && !sa.hasParam("DividedAsYouChoose")) {
                 int actualPay = 0;
@@ -105,6 +110,9 @@ public class DamageDealAi extends DamageAiBase {
                     if ((adjDamage > actualPay) && (adjDamage <= dmg)) {
                         actualPay = adjDamage;
                     }
+                }
+                if (sa.getHostCard().getName().equals("Crater's Claws") && ai.hasFerocious()) {
+                    actualPay = actualPay > 2 ? actualPay - 2 : 0;
                 }
                 source.setSVar("PayX", Integer.toString(actualPay));
             }
