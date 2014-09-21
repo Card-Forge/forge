@@ -24,7 +24,7 @@ public class AltWinAchievements extends AchievementCollection {
     protected void addAchievements() {
         add("Azor's Elocutors", "The Filibuster", "Talk might be cheap, but it can buy you victory!", FSkinProp.IMG_THE_FILIBUSTER);
         add("Barren Glory", "The Clean Slate", "When you have nothing, you can lose nothing... so you can win everything!", FSkinProp.IMG_THE_CLEAN_SLATE);
-        add("Battle of Wits", "The Huge Library", "So many answers, so little time to look through them...", FSkinProp.IMG_THE_LIBRARY_OF_CONGRESS);
+        add("Battle of Wits", "The Great Library", "So many answers, so little time to look through them...", FSkinProp.IMG_THE_LIBRARY_OF_CONGRESS);
         add("Biovisionary", "The Clique", "And now my... I mean our plan is complete!", FSkinProp.IMG_THE_CLIQUE);
         add("Chance Encounter", "The Accident", "This victory was brought to you by a series of fortunate events.", FSkinProp.IMG_THE_ACCIDENT);
         add("Coalition Victory", "The Teamwork", "Let's all be friends!", FSkinProp.IMG_THE_TEAMWORK);
