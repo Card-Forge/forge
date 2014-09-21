@@ -9,9 +9,7 @@ public class Utils {
     public static final float BASE_HEIGHT = 480f;
     public static final float SCREEN_WIDTH = (float)Gdx.graphics.getWidth();
     public static final float SCREEN_HEIGHT = (float)Gdx.graphics.getHeight();
-    private static final float WIDTH_RATIO = SCREEN_WIDTH / BASE_WIDTH;
     private static final float HEIGHT_RATIO = SCREEN_HEIGHT / BASE_HEIGHT;
-    private static final float MIN_RATIO = Math.min(WIDTH_RATIO, HEIGHT_RATIO);
 
     private static final float AVG_FINGER_SIZE_CM = 1.1f;
 
@@ -41,7 +39,7 @@ public class Utils {
     }
 
     public static float scale(float value) {
-        return Math.round(value * MIN_RATIO);
+        return Math.round(value * HEIGHT_RATIO); //use height ratio to prioritize making fonts look good
     }
 
     public static long secondsToTimeSpan(float seconds) {
