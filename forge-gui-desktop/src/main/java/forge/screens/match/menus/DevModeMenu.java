@@ -31,6 +31,7 @@ public class DevModeMenu implements ActionListener {
         WIN_GAME("Win Game"),
         SETUP_GAME_STATE("Setup Game State"),
         PLAY_UNLIMITED_LANDS("Play Unlimited Lands"),
+        VIEW_ALL("View All Cards"),
         ADD_COUNTER("Add Counters to Permanent"),
         TAP_PERMANENT("Tap Permanents"),
         UNTAP_PERMANENT("Untap Permanents"),
@@ -67,6 +68,7 @@ public class DevModeMenu implements ActionListener {
         menu.addSeparator();
         menu.add(getMenuItem(DevMenuItem.SETUP_GAME_STATE));
         menu.add(getCheckboxMenuItem(DevMenuItem.PLAY_UNLIMITED_LANDS, Singletons.getControl().getGameView().canPlayUnlimitedLands()));
+        menu.add(getCheckboxMenuItem(DevMenuItem.VIEW_ALL, Singletons.getControl().getGameView().canViewAllCards()));
         menu.add(getMenuItem(DevMenuItem.ADD_COUNTER));
         menu.addSeparator();
         menu.add(getMenuItem(DevMenuItem.TAP_PERMANENT));
@@ -106,6 +108,7 @@ public class DevModeMenu implements ActionListener {
         case WIN_GAME:          { controller.winGame(); break; }
         case SETUP_GAME_STATE:  { controller.setupGameState(); break; }
         case PLAY_UNLIMITED_LANDS:   { controller.togglePlayManyLandsPerTurn(); break; }
+        case VIEW_ALL:          { controller.toggleViewAllCards(); break; }
         case ADD_COUNTER:       { controller.addCounterToPermanent(); break; }
         case TAP_PERMANENT:     { controller.tapPermanent(); break; }
         case UNTAP_PERMANENT:   { controller.untapPermanent(); break; }

@@ -394,9 +394,7 @@ public abstract class LocalGameView implements IGameView {
         }
 
         if (mayShow) {
-            synchronized (cUi) {
-                writeCardToView(cUi, view);
-            }
+            writeCardToView(cUi, view);
         }
         else if (isDisplayable) {
             view.reset();

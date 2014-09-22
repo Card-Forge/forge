@@ -97,6 +97,14 @@ public class VDevMenu extends FDropDownMenu {
                 FControl.getGameView().cheat().setCanPlayUnlimitedLands(!unlimitedLands);
             }
         }));
+        final boolean viewAll = FControl.getGameView().canViewAllCards();
+        addItem(new FCheckBoxMenuItem("View All Cards", viewAll,
+                new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                FControl.getGameView().cheat().setViewAllCards(!viewAll);
+            }
+        }));
         addItem(new FMenuItem("Add Counters to Permanent", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
