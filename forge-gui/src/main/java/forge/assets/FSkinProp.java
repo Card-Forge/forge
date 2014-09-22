@@ -236,7 +236,7 @@ public enum FSkinProp {
     IMG_RARE_TROPHY       (new int[] {270, 0, 135, 185}, PropType.TROPHY),
     IMG_MYTHIC_TROPHY     (new int[] {405, 0, 135, 185}, PropType.TROPHY),
     IMG_SPECIAL_TROPHY    (new int[] {540, 0, 135, 185}, PropType.TROPHY),
-    IMG_TROPHY_PLATE      (new int[] {675, 0, 160, 40}, PropType.TROPHY),
+    IMG_TROPHY_PLATE      (new int[] {675, 0, 170, 40}, PropType.TROPHY),
     IMG_TROPHY_CASE_TOP   (new int[] {0, 185, 798, 38}, PropType.TROPHY),
     IMG_TROPHY_SHELF      (new int[] {0, 223, 798, 257}, PropType.TROPHY),
 

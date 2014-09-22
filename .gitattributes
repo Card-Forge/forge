@@ -16895,6 +16895,7 @@ forge-gui/src/main/java/forge/achievement/LifeToSpare.java -text
 forge-gui/src/main/java/forge/achievement/MatchWinStreak.java -text
 forge-gui/src/main/java/forge/achievement/NeedForSpeed.java -text
 forge-gui/src/main/java/forge/achievement/Overkill.java -text
+forge-gui/src/main/java/forge/achievement/PlaneswalkerAchievements.java -text
 forge-gui/src/main/java/forge/achievement/Poisoned.java -text
 forge-gui/src/main/java/forge/achievement/QuestAchievements.java -text
 forge-gui/src/main/java/forge/achievement/SealedAchievements.java -text

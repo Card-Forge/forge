@@ -45,7 +45,7 @@ public class AltWinAchievements extends AchievementCollection {
 
     @Override
     public void updateAll(IGuiBase gui, Player player) {
-        //only call update on achievement for alternate win condition (if any)
+        //only call update achievement for alternate win condition (if any)
         if (player.getOutcome().hasWon()) {
             String altWinCondition = player.getOutcome().altWinSourceName;
             if (!StringUtils.isEmpty(altWinCondition)) {

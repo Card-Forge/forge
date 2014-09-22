@@ -38,6 +38,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         cb.addItem(FModel.getAchievements(GameType.Sealed));
         cb.addItem(FModel.getAchievements(GameType.Quest));
         cb.addItem(AltWinAchievements.instance);
+        cb.addItem(PlaneswalkerAchievements.instance);
     }
 
     protected AchievementCollection(String name0, String filename0, boolean isLimitedFormat0) {
