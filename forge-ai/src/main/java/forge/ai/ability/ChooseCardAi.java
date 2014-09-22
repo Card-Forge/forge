@@ -105,6 +105,25 @@ public class ChooseCardAi extends SpellAbilityAi {
                 if (CardLists.getValidCards(choices, "Card.nonLand", host.getController(), host).isEmpty()) {
                     return false;
                 }
+            } else if (logic.equals("Duneblast")) {
+            	List<Card> aiCreatures = ai.getCreaturesInPlay();
+            	List<Card> oppCreatures = ai.getOpponent().getCreaturesInPlay();
+            	aiCreatures = CardLists.getNotKeyword(aiCreatures, "Indestructible");
+            	oppCreatures = CardLists.getNotKeyword(oppCreatures, "Indestructible");
+            	
+            	// Use it as a wrath, when the human creatures threat the ai's life
+            	if (aiCreatures.isEmpty() && ComputerUtilCombat.sumDamageIfUnblocked(oppCreatures, ai) >= ai.getLife()) {
+            		return true;
+            	}
+            	
+            	Card chosen = ComputerUtilCard.getBestCreatureAI(aiCreatures);
+            	aiCreatures.remove(chosen);
+            	int minGain = 200;
+            	
+            	if ((ComputerUtilCard.evaluateCreatureList(aiCreatures) + minGain) >= ComputerUtilCard
+                        .evaluateCreatureList(oppCreatures)) {
+                    return false;
+                }
             }
         }
 
@@ -204,6 +223,16 @@ public class ChooseCardAi extends SpellAbilityAi {
             } else {
                 choice = ComputerUtilCard.getWorstPermanentAI(options, false, false, false, false);
             }
+        } else if (logic.equals("Duneblast")) {
+        	List<Card> aiCreatures = ai.getCreaturesInPlay();
+        	aiCreatures = CardLists.getNotKeyword(aiCreatures, "Indestructible");
+        	
+        	if (aiCreatures.isEmpty()) {
+        		return null;
+        	}
+        	
+        	Card chosen = ComputerUtilCard.getBestCreatureAI(aiCreatures);
+        	return chosen;
         } else {
             choice = ComputerUtilCard.getBestAI(options);
         }
