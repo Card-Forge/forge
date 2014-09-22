@@ -1606,7 +1606,7 @@ public class ComputerUtilCombat {
                 + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, defender, combat, withoutAbilities);
 
         if (defender.hasKeyword("Double Strike")) {
-            if (defenderDamage > 0 && (canGainKeyword(defender, "Deathtouch") || attacker.hasSVar("DestroyWhenDamaged"))) {
+            if (defenderDamage > 0 && (hasKeyword(defender, "Deathtouch", withoutAbilities) || attacker.hasSVar("DestroyWhenDamaged"))) {
                 return true;
             }
             if (defenderDamage >= attackerLife) {
@@ -1619,7 +1619,7 @@ public class ComputerUtilCombat {
                 if (attackerDamage >= defenderLife) {
                     return false;
                 }
-                if (attackerDamage > 0 && (canGainKeyword(attacker, "Deathtouch") || defender.hasSVar("DestroyWhenDamaged"))) {
+                if (attackerDamage > 0 && (hasKeyword(attacker, "Deathtouch", withoutAbilities) || defender.hasSVar("DestroyWhenDamaged"))) {
                     return false;
                 }
             }
@@ -1637,12 +1637,12 @@ public class ComputerUtilCombat {
                 if (attackerDamage >= defenderLife) {
                     return false;
                 }
-                if (attackerDamage > 0 && (canGainKeyword(attacker, "Deathtouch") || defender.hasSVar("DestroyWhenDamaged"))) {
+                if (attackerDamage > 0 && (hasKeyword(attacker, "Deathtouch", withoutAbilities) || defender.hasSVar("DestroyWhenDamaged"))) {
                     return false;
                 }
             }
 
-            if (defenderDamage > 0 && (canGainKeyword(defender, "Deathtouch") || attacker.hasSVar("DestroyWhenDamaged"))) {
+            if (defenderDamage > 0 && (hasKeyword(defender, "Deathtouch", withoutAbilities) || attacker.hasSVar("DestroyWhenDamaged"))) {
                 return true;
             }
 
@@ -1772,7 +1772,7 @@ public class ComputerUtilCombat {
                 + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, defender, combat, withoutAbilities);
 
         if (attacker.hasKeyword("Double Strike")) {
-            if (attackerDamage > 0 && (canGainKeyword(attacker, "Deathtouch") || defender.hasSVar("DestroyWhenDamaged"))) {
+            if (attackerDamage > 0 && (hasKeyword(attacker, "Deathtouch", withoutAbilities) || defender.hasSVar("DestroyWhenDamaged"))) {
                 return true;
             }
             if (attackerDamage >= defenderLife) {
@@ -1785,7 +1785,7 @@ public class ComputerUtilCombat {
                 if (defenderDamage >= attackerLife) {
                     return false;
                 }
-                if (defenderDamage > 0 && (canGainKeyword(defender, "Deathtouch") || attacker.hasSVar("DestroyWhenDamaged"))) {
+                if (defenderDamage > 0 && (hasKeyword(defender, "Deathtouch", withoutAbilities) || attacker.hasSVar("DestroyWhenDamaged"))) {
                     return false;
                 }
             }
@@ -1802,12 +1802,12 @@ public class ComputerUtilCombat {
                 if (defenderDamage >= attackerLife) {
                     return false;
                 }
-                if (defenderDamage > 0 && (canGainKeyword(defender, "Deathtouch") || attacker.hasSVar("DestroyWhenDamaged"))) {
+                if (defenderDamage > 0 && (hasKeyword(defender, "Deathtouch", withoutAbilities) || attacker.hasSVar("DestroyWhenDamaged"))) {
                     return false;
                 }
             }
 
-            if (attackerDamage > 0 && (canGainKeyword(attacker, "Deathtouch") || defender.hasSVar("DestroyWhenDamaged"))) {
+            if (attackerDamage > 0 && (hasKeyword(attacker, "Deathtouch", withoutAbilities) || defender.hasSVar("DestroyWhenDamaged"))) {
                 return true;
             }
 
@@ -2127,14 +2127,25 @@ public class ComputerUtilCombat {
         return false;
     }
 
-    public final static boolean canGainKeyword(final Card combatant, final String keyword) {
+    /**
+     * Refactored version of canGainKeyword(final Card combatant, final String keyword) that specifies if abilities are
+     * to be considered.
+     * @param combatant target card
+     * @param keyword keyword to consider
+     * @param withoutAbilities flag that determines if activated abilities are to be considered
+     * @return
+     */
+    public final static boolean hasKeyword(final Card combatant, final String keyword, final boolean withoutAbilities) {
         if (combatant.hasKeyword(keyword)) {
             return true;
         }
-
-    	List<String> keywords = new ArrayList<String>();
-    	keywords.add(keyword);
-        return canGainKeyword(combatant, keywords);
+        if (!withoutAbilities) {
+        	List<String> keywords = new ArrayList<String>();
+        	keywords.add(keyword);
+            return canGainKeyword(combatant, keywords);
+        } else {
+            return false;
+        }
     }
 
     public final static boolean canGainKeyword(final Card combatant, final List<String> keywords) {
