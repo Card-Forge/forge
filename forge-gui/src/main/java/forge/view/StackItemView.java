@@ -1,5 +1,7 @@
 package forge.view;
 
+import forge.game.IIdentifiable;
+
 /**
  * Representation of a {@link forge.game.spellability.SpellAbilityStackInstance}
  * , containing only the information relevant to a user interface.
@@ -9,8 +11,9 @@ package forge.view;
  * 
  * @author elcnesh
  */
-public class StackItemView {
+public class StackItemView implements IIdentifiable {
 
+    private final int id;
     private final String key;
     private final int sourceTrigger;
     private final String text;
@@ -20,12 +23,13 @@ public class StackItemView {
     private final Iterable<PlayerView> targetPlayers;
     private final boolean ability, optionalTrigger;
 
-    public StackItemView(final String key, final int sourceTrigger,
-            final String text, final CardView source,
+    public StackItemView(final int id, final String key,
+            final int sourceTrigger, final String text, final CardView source,
             final PlayerView activatingPlayer,
             final Iterable<CardView> targetCards,
             final Iterable<PlayerView> targetPlayers, final boolean isAbility,
             final boolean isOptionalTrigger) {
+        this.id = id;
         this.key = key;
         this.sourceTrigger = sourceTrigger;
         this.text = text;
@@ -35,6 +39,11 @@ public class StackItemView {
         this.targetPlayers = targetPlayers;
         this.ability = isAbility;
         this.optionalTrigger = isOptionalTrigger;
+    }
+
+    @Override
+    public int getId() {
+        return this.id;
     }
 
     public String getKey() {

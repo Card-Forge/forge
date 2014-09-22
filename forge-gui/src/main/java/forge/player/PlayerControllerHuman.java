@@ -1451,21 +1451,19 @@ public class PlayerControllerHuman extends PlayerController {
          * @see GameView#mayShowCardNoRedirect(CardView)
          */
         @Override
-        public boolean mayShowCard(final CardView c) {
+        public boolean mayShowCard(final Card c) {
             if (mayLookAtAllCards()) {
                 return true;
             }
-            final Card card = getCard(c);
-            return card == null || mayLookAt.contains(card) || card.canBeShownTo(player);
+            return c == null || mayLookAt.contains(c) || c.canBeShownTo(player);
         }
 
         @Override
-        public boolean mayShowCardFace(final CardView c) {
+        public boolean mayShowCardFace(final Card c) {
             if (mayLookAtAllCards()) {
                 return true;
             }
-            final Card card = getCard(c);
-            return card == null || !c.isFaceDown() || card.canCardFaceBeShownTo(player);
+            return c == null || !c.isFaceDown() || c.canCardFaceBeShownTo(player);
         }
 
         @Override

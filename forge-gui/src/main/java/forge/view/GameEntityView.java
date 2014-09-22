@@ -1,5 +1,7 @@
 package forge.view;
 
+import forge.game.IIdentifiable;
+
 /**
  * Representation of a {@link forge.game.GameEntity}. Contains no methods, but
  * {@link toString} may be assumed to be overridden in subclasses to provide a
@@ -7,6 +9,6 @@ package forge.view;
  * 
  * @author elcnesh
  */
-public abstract class GameEntityView {
+public abstract class GameEntityView implements IIdentifiable {
 
 }

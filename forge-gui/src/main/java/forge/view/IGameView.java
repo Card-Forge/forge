@@ -217,21 +217,6 @@ public interface IGameView {
      */
     public abstract StackItemView peekStack();
 
-    /**
-     * @param c
-     *            a card.
-     * @return whether this player may view the specified card.
-     */
-    public abstract boolean mayShowCard(CardView c);
-
-    /**
-     * @param c
-     *            a card.
-     * @return whether this player may view the front card face of the specified
-     *         card.
-     */
-    public abstract boolean mayShowCardFace(CardView c);
-
     // Auto-yield related methods
     public abstract Iterable<String> getAutoYields();
     public abstract boolean shouldAutoYield(String key);

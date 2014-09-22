@@ -70,7 +70,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * @author Forge
  * @version $Id$
  */
-public class Player extends GameEntity implements Comparable<Player> {
+public class Player extends GameEntity implements Comparable<Player>, IIdentifiable {
     private final int id;
 
     private final Map<Card,Integer> commanderDamage = new HashMap<Card,Integer>();
@@ -235,6 +235,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         return nameCandidate;
     }
 
+    @Override
     public int getId() {
         return this.id;
     }

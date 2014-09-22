@@ -252,8 +252,9 @@ public abstract class LocalGameView implements IGameView {
             stackItems.retainAllKeys(Lists.newArrayList(stack));
             final List<StackItemView> items = Lists.newLinkedList();
             for (final SpellAbilityStackInstance si : stack) {
-                if (stackItems.containsKey(si)) {
-                    items.add(stackItems.get(si));
+                final int id = si.getId();
+                if (stackItems.containsKey(id)) {
+                    items.add(stackItems.get(id));
                 } else {
                     items.add(getStackItemView(si));
                 }
@@ -263,7 +264,11 @@ public abstract class LocalGameView implements IGameView {
     }
 
     public StackItemView getStackItemView(final SpellAbilityStackInstance si) {
-        final StackItemView newItem = new StackItemView(
+        if (si == null) {
+            return null;
+        }
+
+        final StackItemView newItem = new StackItemView(si.getId(),
                 si.getSpellAbility().toUnsuppressedString(),
                 si.getSpellAbility().getSourceTrigger(),
                 si.getStackDescription(), getCardView(si.getSourceCard()),
@@ -274,7 +279,10 @@ public abstract class LocalGameView implements IGameView {
     }
 
     public SpellAbilityStackInstance getStackItem(final StackItemView view) {
-        return stackItems.getKey(view);
+        if (view == null) {
+            return null;
+        }
+        return stackItems.getKey(view.getId());
     }
 
     public final GameEntityView getGameEntityView(final GameEntity e) {
@@ -323,8 +331,8 @@ public abstract class LocalGameView implements IGameView {
         }
 
         final PlayerView view;
-        if (players.containsKey(p)) {
-            view = players.get(p);
+        if (players.containsKey(p.getId())) {
+            view = players.get(p.getId());
             getPlayerView(p, view);
         } else {
             view = new PlayerView(p.getLobbyPlayer(), p.getId());
@@ -336,11 +344,17 @@ public abstract class LocalGameView implements IGameView {
     }
 
     private PlayerView getPlayerViewFast(final Player p) {
-        return players.get(p);
+        if (p == null) {
+            return null;
+        }
+        return players.get(p.getId());
     }
 
     public Player getPlayer(final PlayerView p) {
-        return players.getKey(p);
+        if (p == null) {
+            return null;
+        }
+        return players.getKey(p.getId());
     }
 
     private void getPlayerView(final Player p, final PlayerView view) {
@@ -377,18 +391,16 @@ public abstract class LocalGameView implements IGameView {
 
         final Card cUi = c.getCardForUi();
         final boolean isDisplayable = cUi == c;
+        final boolean mayShow = mayShowCard(c);
 
-        CardView view = cards.get(c);
-        final boolean mayShow;
+        CardView view = cards.get(c.getId());
         if (view != null) {
             // Put here again to ensure the Card reference in the cache
             // is not an outdated Card.
             cards.put(c, view);
-            mayShow = mayShowCard(view);
         }
         else {
             view = new CardView(isDisplayable);
-            mayShow = mayShowCard(view);
             if (isDisplayable && mayShow) {
                 cards.put(c, view);
             }
@@ -421,7 +433,7 @@ public abstract class LocalGameView implements IGameView {
     public final List<CardView> getRefreshedCardViews(final Iterable<CardView> cardViews) {
         return ViewUtil.transformIfNotNull(cardViews, new Function<CardView, CardView>() {
             @Override
-            public CardView apply(CardView input) {
+            public CardView apply(final CardView input) {
                 return cards.getValue(input);
             }
         });
@@ -432,8 +444,8 @@ public abstract class LocalGameView implements IGameView {
             return null;
         }
 
-        final CardView view = cards.get(c);
-        if (mayShowCard(view)) {
+        final CardView view = cards.get(c.getId());
+        if (mayShowCard(c)) {
             return view;
         } else if (view.isUiDisplayable()) {
             view.reset();
@@ -455,7 +467,10 @@ public abstract class LocalGameView implements IGameView {
     }
 
     public Card getCard(final CardView c) {
-        return cards.getKey(c);
+        if (c == null) {
+            return null;
+        }
+        return cards.getKey(c.getId());
     }
 
     private final Function<CardView, Card> FN_GET_CARD = new Function<CardView, Card>() {
@@ -472,7 +487,7 @@ public abstract class LocalGameView implements IGameView {
     private void writeCardToView(final Card c, final CardView view) {
         synchronized (c) {
             // First, write the values independent of other views.
-            ViewUtil.writeNonDependentCardViewProperties(c, view, mayShowCardFace(view));
+            ViewUtil.writeNonDependentCardViewProperties(c, view, mayShowCardFace(c));
             // Next, write the values that depend on other views.
             final Combat combat = game.getCombat();
             view.setOwner(getPlayerViewFast(c.getOwner()));
@@ -502,11 +517,11 @@ public abstract class LocalGameView implements IGameView {
         }
 
         final SpellAbilityView view;
-        if (spabs.containsKey(sa)) {
-            view = spabs.get(sa);
+        if (spabs.containsKey(sa.getId())) {
+            view = spabs.get(sa.getId());
             writeSpellAbilityToView(sa, view);
         } else {
-            view = new SpellAbilityView();
+            view = new SpellAbilityView(sa.getId());
             writeSpellAbilityToView(sa, view);
             spabs.put(sa, view);
         }
@@ -525,7 +540,10 @@ public abstract class LocalGameView implements IGameView {
     }
 
     public SpellAbility getSpellAbility(final SpellAbilityView c) {
-        return spabs.getKey(c);
+        if (c == null) {
+            return null;
+        }
+        return spabs.getKey(c.getId());
     }
 
     private final Function<SpellAbilityView, SpellAbility> FN_GET_SPAB = new Function<SpellAbilityView, SpellAbility>() {
@@ -555,4 +573,18 @@ public abstract class LocalGameView implements IGameView {
         this.game.setDisableAutoYields(b);
     }
 
+    /**
+     * @param c
+     *            a card.
+     * @return whether this player may view the specified card.
+     */
+    protected abstract boolean mayShowCard(Card c);
+
+    /**
+     * @param c
+     *            a card.
+     * @return whether this player may view the front card face of the specified
+     *         card.
+     */
+    protected abstract boolean mayShowCardFace(Card c);
 }

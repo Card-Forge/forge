@@ -1,5 +1,7 @@
 package forge.view;
 
+import forge.game.IIdentifiable;
+
 /**
  * Representation of a {@link forge.game.spellability.SpellAbility}, containing
  * only the information relevant to a user interface.
@@ -8,11 +10,21 @@ package forge.view;
  * 
  * @author elcnesh
  */
-public class SpellAbilityView {
+public class SpellAbilityView implements IIdentifiable {
 
+    private final int id;
     private CardView hostCard;
     private String description;
     private boolean canPlay, promptIfOnlyPossibleAbility;
+
+    public SpellAbilityView(final int id) {
+        this.id = id;
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
 
     @Override
     public String toString() {

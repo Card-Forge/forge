@@ -130,6 +130,7 @@ public class CardView extends GameEntityView {
     /**
      * @return the id
      */
+    @Override
     public int getId() {
         return id;
     }

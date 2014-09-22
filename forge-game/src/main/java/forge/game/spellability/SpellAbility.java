@@ -26,6 +26,7 @@ import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
+import forge.game.IIdentifiable;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -53,7 +54,10 @@ import java.util.*;
  * @author Forge
  * @version $Id$
  */
-public abstract class SpellAbility extends CardTraitBase implements ISpellAbility {
+public abstract class SpellAbility extends CardTraitBase implements ISpellAbility, IIdentifiable {
+
+    private static int maxId = 0;
+    private static int nextId() { return ++maxId; }
 
     public static class EmptySa extends SpellAbility {
         public EmptySa(Card sourceCard) { super(sourceCard, Cost.Zero); setActivatingPlayer(sourceCard.getController());}
@@ -63,7 +67,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         @Override public void resolve() {}
         @Override public boolean canPlay() { return false; }
     }
-    
+
+    private final int id;
+
     // choices for constructor isPermanent argument
     private String originalDescription = "", description = "";
     private String originalStackDescription = "", stackDescription = "";
@@ -198,8 +204,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
      *            a {@link forge.game.card.Card} object.
      */
     public SpellAbility(final Card iSourceCard, Cost toPay) {
+        this.id = nextId();
         this.hostCard = iSourceCard;
         this.payCosts = toPay;
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 
     // Spell, and Ability, and other Ability objects override this method

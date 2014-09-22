@@ -3,7 +3,10 @@ package forge.view;
 import java.util.Collection;
 import java.util.Map;
 
+import com.google.common.collect.Collections2;
 import com.google.common.collect.Maps;
+
+import forge.game.IIdentifiable;
 
 /**
  * Implementation of a two-way cache, containing bidirectional mappings from
@@ -19,17 +22,17 @@ import com.google.common.collect.Maps;
  * @param <V>
  *            the type of this Cache's values.
  */
-public class Cache<K, V> {
+public class Cache<K extends IIdentifiable, V extends IIdentifiable> {
 
-    private final Map<K, V> cache;
-    private final Map<V, K> inverseCache;
+    private final Map<Integer, V> cache;
+    private final Map<Integer, K> inverseCache;
 
     /**
      * Create a new, empty Cache instance.
      */
     public Cache() {
-        this.cache = Maps.newHashMap();
-        this.inverseCache = Maps.newHashMap();
+        this.cache = Maps.newTreeMap();
+        this.inverseCache = Maps.newTreeMap();
     }
 
     /**
@@ -38,8 +41,8 @@ public class Cache<K, V> {
      * @return {@code true} if and only if this Cache contains the specified
      *         key.
      */
-    public boolean containsKey(final K key) {
-        return cache.containsKey(key);
+    public boolean containsKey(final int keyId) {
+        return cache.containsKey(keyId);
     }
 
     /**
@@ -50,8 +53,8 @@ public class Cache<K, V> {
      * @return the value associated to key, or {@code null} if no such value
      *         exists.
      */
-    public V get(final K key) {
-        return cache.get(key);
+    public V get(final int keyId) {
+        return cache.get(keyId);
     }
 
     /**
@@ -62,8 +65,8 @@ public class Cache<K, V> {
      * @return the key associated to value, or {@code null} if no such key
      *         exists.
      */
-    public K getKey(final V value) {
-        return inverseCache.get(value);
+    public K getKey(final int valueId) {
+        return inverseCache.get(valueId);
     }
 
     /**
@@ -75,7 +78,7 @@ public class Cache<K, V> {
      *         {@code null} otherwise.
      */
     public synchronized V getValue(final V value) {
-        for (final V currentValue : inverseCache.keySet()) {
+        for (final V currentValue : cache.values()) {
             if (currentValue.equals(value)) {
                 return currentValue;
             }
@@ -103,14 +106,17 @@ public class Cache<K, V> {
         }
 
         synchronized (this) {
-            if (inverseCache.containsKey(value)) {
-                cache.remove(inverseCache.get(value));
-                inverseCache.remove(value);
+            final int valueId = value.getId();
+            if (inverseCache.containsKey(valueId)) {
+                cache.remove(inverseCache.get(valueId).getId());
+                inverseCache.remove(valueId);
             }
 
-            final V oldValue = cache.put(key, value);
-            inverseCache.remove(oldValue);
-            inverseCache.put(value, key);
+            final V oldValue = cache.put(key.getId(), value);
+            if (oldValue != null) {
+                inverseCache.remove(oldValue.getId());
+            }
+            inverseCache.put(valueId, key);
         }
     }
 
@@ -122,7 +128,7 @@ public class Cache<K, V> {
      *            the keys to retain.
      */
     public synchronized void retainAllKeys(final Collection<K> keys) {
-        cache.keySet().retainAll(keys);
+        cache.keySet().retainAll(Collections2.transform(keys, IIdentifiable.FN_GET_ID));
         inverseCache.values().retainAll(keys);
     }
 }

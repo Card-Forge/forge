@@ -57,6 +57,7 @@ public class PlayerView extends GameEntityView {
         return lobbyPlayer;
     }
 
+    @Override
     public int getId() {
         return id;
     }

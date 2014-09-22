@@ -4,6 +4,7 @@
 package forge.view;
 
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.match.input.Input;
 import forge.match.input.InputPlaybackControl;
 import forge.match.input.InputQueue;
@@ -11,7 +12,7 @@ import forge.player.PlayerControllerHuman.DevModeCheats;
 import forge.util.ITriggerEvent;
 
 /**
- * @author lennaert
+ * @author elcnesh
  *
  */
 public class WatchLocalGame extends LocalGameView {
@@ -101,12 +102,12 @@ public class WatchLocalGame extends LocalGameView {
     }
 
     @Override
-    public boolean mayShowCard(final CardView c) {
+    public boolean mayShowCard(final Card c) {
         return true;
     }
 
     @Override
-    public boolean mayShowCardFace(final CardView c) {
+    public boolean mayShowCardFace(final Card c) {
         return true;
     }
 

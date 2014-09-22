@@ -17,6 +17,7 @@
  */
 package forge.game.spellability;
 
+import forge.game.IIdentifiable;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
@@ -36,7 +37,11 @@ import java.util.Map;
  * @author Forge
  * @version $Id$
  */
-public class SpellAbilityStackInstance {
+public class SpellAbilityStackInstance implements IIdentifiable {
+
+    private static int maxId = 0;
+    private static int nextId() { return ++maxId; }
+
     // At some point I want this functioning more like Target/Target Choices
     // where the SA has an "active"
     // Stack Instance, and instead of having duplicate parameters, it adds
@@ -46,6 +51,7 @@ public class SpellAbilityStackInstance {
     // Coming off the Stack would work similarly, except it would just add the
     // full active SI instead of each of the parts
 
+    private final int id;
     private SpellAbility ability = null;
 
     private SpellAbilityStackInstance subInstace = null;
@@ -91,6 +97,7 @@ public class SpellAbilityStackInstance {
      */
     public SpellAbilityStackInstance(final SpellAbility sa) {
         // Base SA info
+        this.id = nextId();
         this.ability = sa;
         this.stackDescription = this.ability.getStackDescription();
         this.activator = sa.getActivatingPlayer();
@@ -149,6 +156,11 @@ public class SpellAbilityStackInstance {
                 }
             }
         }
+    }
+
+    @Override
+    public int getId() {
+        return this.id;
     }
 
     /**

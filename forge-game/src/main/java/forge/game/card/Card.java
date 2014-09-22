@@ -81,7 +81,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @author Forge
  * @version $Id$
  */
-public class Card extends GameEntity implements Comparable<Card> {
+public class Card extends GameEntity implements Comparable<Card>, IIdentifiable {
     private final int uniqueNumber;
     private final IPaperCard paperCard;
 
@@ -5003,6 +5003,11 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final int getUniqueNumber() {
         return this.uniqueNumber;
+    }
+
+    @Override
+    public int getId() {
+        return getUniqueNumber();
     }
 
     /** {@inheritDoc} */

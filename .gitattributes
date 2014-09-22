@@ -282,6 +282,7 @@ forge-game/src/main/java/forge/game/GameStage.java -text
 forge-game/src/main/java/forge/game/GameType.java -text
 forge-game/src/main/java/forge/game/GlobalRuleChange.java -text
 forge-game/src/main/java/forge/game/IHasGameType.java -text
+forge-game/src/main/java/forge/game/IIdentifiable.java -text
 forge-game/src/main/java/forge/game/KeywordsChange.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/Match.java -text
 forge-game/src/main/java/forge/game/PlanarDice.java -text
