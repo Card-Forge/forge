@@ -30,6 +30,18 @@ public enum CDev implements ICDoc {
         Singletons.getControl().getGameView().cheat().setCanPlayUnlimitedLands(newValue);
     }
 
+    private final MouseListener madViewAll = new MouseAdapter() {
+        @Override
+        public void mousePressed(MouseEvent e) {
+            toggleViewAllCards();
+        }
+    };
+    public void toggleViewAllCards() {
+        boolean newValue = !VDev.SINGLETON_INSTANCE.getLblViewAll().getToggled();
+        VDev.SINGLETON_INSTANCE.getLblViewAll().setToggled(newValue);
+        Singletons.getControl().getGameView().cheat().setViewAllCards(newValue);
+    }
+
     private final MouseListener madMana = new MouseAdapter() {
         @Override
         public void mousePressed(final MouseEvent e) {
@@ -165,8 +177,8 @@ public enum CDev implements ICDoc {
      */
     @Override
     public void initialize() {
-       //  VDev.SINGLETON_INSTANCE.getLblMilling().addMouseListener(madMilling);
         VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().addMouseListener(madUnlimited);
+        VDev.SINGLETON_INSTANCE.getLblViewAll().addMouseListener(madViewAll);
         VDev.SINGLETON_INSTANCE.getLblGenerateMana().addMouseListener(madMana);
         VDev.SINGLETON_INSTANCE.getLblSetupGame().addMouseListener(madSetup);
         VDev.SINGLETON_INSTANCE.getLblTutor().addMouseListener(madTutor);
@@ -187,5 +199,6 @@ public enum CDev implements ICDoc {
     @Override
     public void update() {
         VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().setToggled(Singletons.getControl().getGameView().canPlayUnlimitedLands());
+        VDev.SINGLETON_INSTANCE.getLblViewAll().setToggled(Singletons.getControl().getGameView().canViewAllCards());
     }
 }

@@ -34,16 +34,18 @@ import forge.game.zone.ZoneType;
  */
 public class CardView extends GameEntityView {
 
-    private static final List<Integer> randomInts = Lists.newArrayListWithCapacity(1000);
+    private static final List<Integer> randomInts = Lists.newArrayListWithCapacity(1024);
     static {
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 1; i < 1025; i++) {
             randomInts.add(Integer.valueOf(i));
         }
         Collections.shuffle(randomInts);
     }
     private static final Iterator<Integer> randomIntsIterator = Iterators.cycle(randomInts);
     private static int nextRandomInt() {
-        return randomIntsIterator.next().intValue();
+        synchronized (randomIntsIterator) {
+            return randomIntsIterator.next().intValue();
+        }
     }
 
     private final CardStateView

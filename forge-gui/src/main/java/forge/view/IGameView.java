@@ -254,6 +254,7 @@ public interface IGameView {
     public abstract void autoPassCancel();
     
     public abstract boolean canPlayUnlimitedLands();
+    public abstract boolean canViewAllCards();
 
     //method used to wrap all functions that cheat
     public abstract DevModeCheats cheat();

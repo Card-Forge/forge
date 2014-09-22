@@ -180,7 +180,11 @@ public abstract class LocalGameView implements IGameView {
             if (b == null) continue;
             final GameEntity defender = combat.getDefenderByAttacker(b);
             final List<Card> blockers = combat.getBlockers(b);
-            combatView.addAttackingBand(getCardViews(b.getAttackers()), getGameEntityView(defender), blockers == null ? null : getCardViews(blockers));
+            final boolean isBlocked = b.isBlocked() == Boolean.TRUE;
+            combatView.addAttackingBand(
+                    getCardViews(b.getAttackers()),
+                    getGameEntityView(defender),
+                    blockers == null || !isBlocked ? null : getCardViews(blockers));
         }
         return combatView;
     }
@@ -348,7 +352,7 @@ public abstract class LocalGameView implements IGameView {
         view.setPreventNextDamage(p.getPreventNextDamageTotalShields());
         view.setHasUnlimitedHandSize(p.isUnlimitedHandSize());
         view.setAnteCards(getCardViews(p.getCardsIn(ZoneType.Ante)));
-        view.setBfCards(getCardViews(p.getCardsIn(ZoneType.Battlefield)));
+        view.setBfCards(getCardViews(p.getCardsIn(ZoneType.Battlefield, false)));
         view.setCommandCards(getCardViews(p.getCardsIn(ZoneType.Command)));
         view.setExileCards(getCardViews(p.getCardsIn(ZoneType.Exile)));
         view.setFlashbackCards(getCardViews(p.getCardsActivableInExternalZones(false)));
@@ -390,7 +394,9 @@ public abstract class LocalGameView implements IGameView {
         }
 
         if (mayShow) {
-            writeCardToView(cUi, view);
+            synchronized (cUi) {
+                writeCardToView(cUi, view);
+            }
         }
         else if (isDisplayable) {
             view.reset();
@@ -465,28 +471,30 @@ public abstract class LocalGameView implements IGameView {
     }
 
     private void writeCardToView(final Card c, final CardView view) {
-        // First, write the values independent of other views.
-        ViewUtil.writeNonDependentCardViewProperties(c, view, mayShowCardFace(view));
-        // Next, write the values that depend on other views.
-        final Combat combat = game.getCombat();
-        view.setOwner(getPlayerViewFast(c.getOwner()));
-        view.setController(getPlayerViewFast(c.getController()));
-        view.setAttacking(combat != null && combat.isAttacking(c));
-        view.setBlocking(combat != null && combat.isBlocking(c));
-        view.setChosenPlayer(getPlayerViewFast(c.getChosenPlayer()));
-        view.setEquipping(getCardViewFast(Iterables.getFirst(c.getEquipping(), null)));
-        view.setEquippedBy(getCardViewsFast(c.getEquippedBy()));
-        view.setEnchantingCard(getCardViewFast(c.getEnchantingCard()));
-        view.setEnchantingPlayer(getPlayerViewFast(c.getEnchantingPlayer()));
-        view.setEnchantedBy(getCardViewsFast(c.getEnchantedBy()));
-        view.setFortifiedBy(getCardViewsFast(c.getFortifiedBy()));
-        view.setGainControlTargets(getCardViewsFast(c.getGainControlTargets()));
-        view.setCloneOrigin(getCardViewFast(c.getCloneOrigin()));
-        view.setImprinted(getCardViewsFast(c.getImprinted()));
-        view.setHauntedBy(getCardViewsFast(c.getHauntedBy()));
-        view.setHaunting(getCardViewFast(c.getHaunting()));
-        view.setMustBlock(c.getMustBlockCards() == null ? Collections.<CardView>emptySet() : getCardViewsFast(c.getMustBlockCards()));
-        view.setPairedWith(getCardViewFast(c.getPairedWith()));
+        synchronized (c) {
+            // First, write the values independent of other views.
+            ViewUtil.writeNonDependentCardViewProperties(c, view, mayShowCardFace(view));
+            // Next, write the values that depend on other views.
+            final Combat combat = game.getCombat();
+            view.setOwner(getPlayerViewFast(c.getOwner()));
+            view.setController(getPlayerViewFast(c.getController()));
+            view.setAttacking(combat != null && combat.isAttacking(c));
+            view.setBlocking(combat != null && combat.isBlocking(c));
+            view.setChosenPlayer(getPlayerViewFast(c.getChosenPlayer()));
+            view.setEquipping(getCardViewFast(Iterables.getFirst(c.getEquipping(), null)));
+            view.setEquippedBy(getCardViewsFast(c.getEquippedBy()));
+            view.setEnchantingCard(getCardViewFast(c.getEnchantingCard()));
+            view.setEnchantingPlayer(getPlayerViewFast(c.getEnchantingPlayer()));
+            view.setEnchantedBy(getCardViewsFast(c.getEnchantedBy()));
+            view.setFortifiedBy(getCardViewsFast(c.getFortifiedBy()));
+            view.setGainControlTargets(getCardViewsFast(c.getGainControlTargets()));
+            view.setCloneOrigin(getCardViewFast(c.getCloneOrigin()));
+            view.setImprinted(getCardViewsFast(c.getImprinted()));
+            view.setHauntedBy(getCardViewsFast(c.getHauntedBy()));
+            view.setHaunting(getCardViewFast(c.getHaunting()));
+            view.setMustBlock(c.getMustBlockCards() == null ? Collections.<CardView>emptySet() : getCardViewsFast(c.getMustBlockCards()));
+            view.setPairedWith(getCardViewFast(c.getPairedWith()));
+        }
     }
 
     public SpellAbilityView getSpellAbilityView(final SpellAbility sa) {

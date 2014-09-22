@@ -17,6 +17,15 @@
  */
 package forge.screens.match.views;
 
+import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JPanel;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.border.EmptyBorder;
+
+import net.miginfocom.swing.MigLayout;
 import forge.gui.MultiLineLabelUI;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -26,16 +35,6 @@ import forge.screens.match.controllers.CDev;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 /** 
  * Assembles Swing components of players report.
@@ -50,9 +49,6 @@ public enum VDev implements IVDoc<CDev> {
     private DragCell parentCell;
     private final DragTab tab = new DragTab("Dev Mode");
 
-    // Other fields
-    private List<JLabel> devLBLs = new ArrayList<JLabel>();
-
     // Top-level containers
     private final JPanel viewport = new JPanel(new MigLayout("wrap, insets 0, ax center"));
     private final FScrollPane scroller = new FScrollPane(viewport, true,
@@ -61,6 +57,7 @@ public enum VDev implements IVDoc<CDev> {
 
     // Dev labels
     private final DevLabel lblUnlimitedLands = new DevLabel("Play Unlimited Lands");
+    private final DevLabel lblViewAll = new DevLabel("View All Cards");
     private final DevLabel lblGenerateMana = new DevLabel("Generate Mana");
     private final DevLabel lblSetupGame = new DevLabel("Setup Game State");
     private final DevLabel lblTutor = new DevLabel("Tutor for Card");
@@ -77,35 +74,23 @@ public enum VDev implements IVDoc<CDev> {
     //========= Constructor
 
     private VDev() {
-        devLBLs.add(lblRiggedRoll);
-        devLBLs.add(lblUnlimitedLands);
-        devLBLs.add(lblGenerateMana);
-        devLBLs.add(lblSetupGame);
-        devLBLs.add(lblTutor);
-        devLBLs.add(lblCardToHand);
-        devLBLs.add(lblCardToBattlefield);
-        devLBLs.add(lblSetLife);
-        devLBLs.add(lblWinGame);
-        devLBLs.add(lblCounterPermanent);
-        devLBLs.add(lblTapPermanent);
-        devLBLs.add(lblUntapPermanent);
-        devLBLs.add(lblWalkTo);
-
         final String constraints = "w 95%!, gap 0 0 4px 0";
         final String halfConstraints = "w 47%!, gap 0 0 4px 0";
+        final String halfConstraintsLeft = halfConstraints + ", split 2";
         viewport.setOpaque(false);
         viewport.add(this.lblGenerateMana, constraints);
-        viewport.add(this.lblTutor, constraints);
-        viewport.add(this.lblCardToHand, halfConstraints + ", split 2");
+        viewport.add(this.lblTutor, halfConstraintsLeft);
+        viewport.add(this.lblViewAll, halfConstraints);
+        viewport.add(this.lblCardToHand, halfConstraintsLeft);
         viewport.add(this.lblCardToBattlefield, halfConstraints);
-        viewport.add(this.lblSetLife, halfConstraints + ", split 2");
+        viewport.add(this.lblSetLife, halfConstraintsLeft);
         viewport.add(this.lblWinGame, halfConstraints);
         viewport.add(this.lblSetupGame, constraints);
         viewport.add(this.lblUnlimitedLands, constraints);
         viewport.add(this.lblCounterPermanent, constraints);
-        viewport.add(this.lblTapPermanent, halfConstraints + ", split 2");
+        viewport.add(this.lblTapPermanent, halfConstraintsLeft);
         viewport.add(this.lblUntapPermanent, halfConstraints);
-        viewport.add(this.lblRiggedRoll, halfConstraints + ", split 2");
+        viewport.add(this.lblRiggedRoll, halfConstraintsLeft);
         viewport.add(this.lblWalkTo, halfConstraints);
     }
 
@@ -205,6 +190,11 @@ public enum VDev implements IVDoc<CDev> {
     /** @return {@link forge.screens.match.views.VDev.DevLabel} */
     public DevLabel getLblUnlimitedLands() {
         return this.lblUnlimitedLands;
+    }
+
+    /** @return {@link forge.screens.match.views.VDev.DevLabel} */
+    public DevLabel getLblViewAll() {
+        return this.lblViewAll;
     }
 
     /** @return {@link forge.screens.match.views.VDev.DevLabel} */

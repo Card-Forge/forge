@@ -152,6 +152,11 @@ public class WatchLocalGame extends LocalGameView {
     }
 
     @Override
+    public boolean canViewAllCards() {
+        return false;
+    }
+
+    @Override
     public DevModeCheats cheat() {
         return null;
     }

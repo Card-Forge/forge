@@ -1530,6 +1530,11 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         @Override
+        public boolean canViewAllCards() {
+            return PlayerControllerHuman.this.mayLookAtAllCards;
+        }
+
+        @Override
         public DevModeCheats cheat() {
             return PlayerControllerHuman.this.cheat();
         }
@@ -1707,6 +1712,13 @@ public class PlayerControllerHuman extends PlayerController {
 
         public void setCanPlayUnlimitedLands(boolean canPlayUnlimitedLands0) {
             canPlayUnlimitedLands = canPlayUnlimitedLands0;
+        }
+
+        public void setViewAllCards(final boolean canViewAll) {
+            mayLookAtAllCards = canViewAll;
+            for (final Player p : game.getPlayers()) {
+                getGui().updateCards(getCardViews(p.getAllCards()));
+            }
         }
 
         public void generateMana() {
