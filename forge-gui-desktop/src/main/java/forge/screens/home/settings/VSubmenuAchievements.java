@@ -81,10 +81,18 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
             }
         });
         trophyCase.addMouseListener(new FMouseAdapter() {
+            private boolean preventMouseOut;
+
             @Override
             public void onMiddleMouseDown(MouseEvent e) {
                 showCard(e);
             }
+
+            @Override
+            public void onMiddleMouseUp(MouseEvent e) {
+                CardZoomer.SINGLETON_INSTANCE.closeZoomer();
+            }
+
             @Override
             public void onLeftDoubleClick(MouseEvent e) {
                 showCard(e);
@@ -95,6 +103,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
                 if (achievement != null) {
                     IPaperCard pc = achievement.getPaperCard();
                     if (pc != null) {
+                        preventMouseOut = true;
                         CardZoomer.SINGLETON_INSTANCE.doMouseButtonZoom(ViewUtil.getCardForUi(pc));
                     }
                 }
@@ -102,6 +111,10 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
 
             @Override
             public void onMouseExit(MouseEvent e) {
+                if (preventMouseOut) {
+                    preventMouseOut = false;
+                    return;
+                }
                 trophyCase.setSelectedAchievement(null);
             }
         });

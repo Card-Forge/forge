@@ -294,6 +294,6 @@ public enum CardZoomer {
     }
 
     private CardStateView getState() {
-        return thisCard.getState(isButtonMode);
+        return thisCard.getState(isInAltState);
     }
 }
