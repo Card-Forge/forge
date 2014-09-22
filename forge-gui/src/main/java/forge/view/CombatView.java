@@ -111,14 +111,6 @@ public class CombatView {
         return Maps.filterValues(bandsWithDefenders, Predicates.equalTo(defender)).keySet();
     }
 
-    public void addPlannedBlockers(final CardView attacker, final Iterable<CardView> blockers) {
-        List<CardView> blockersCopy = null;
-        if (blockers != null) {
-            blockersCopy = Lists.newArrayList(blockers);
-        }
-        this.attackersWithPlannedBlockers.put(attacker, blockersCopy);
-    }
-
     public void addAttackingBand(final Iterable<CardView> attackingBand, final GameEntityView defender, final Iterable<CardView> blockers, final Iterable<CardView> plannedBlockers) {
         final List<CardView> attackingBandCopy = Lists.newArrayList(attackingBand),
                 blockersCopy, plannedBlockersCopy;
