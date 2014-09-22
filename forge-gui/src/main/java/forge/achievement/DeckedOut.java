@@ -1,18 +1,16 @@
 package forge.achievement;
 
-import forge.assets.FSkinProp;
 import forge.game.Game;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 
 public class DeckedOut extends Achievement {
     public DeckedOut(int silver0, int gold0, int mythic0) {
-        super("Decked Out", "Win a game from opponent",
+        super("DeckedOut", "Decked Out", "Win a game from opponent",
             "drawing into an empty library", Integer.MAX_VALUE - 1,
             String.format("drawing into an empty library by turn %d", silver0), silver0,
             String.format("drawing into an empty library by turn %d", gold0), gold0,
-            String.format("drawing into an empty library by turn %d", mythic0), mythic0,
-            FSkinProp.IMG_DECKED_OUT);
+            String.format("drawing into an empty library by turn %d", mythic0), mythic0);
         best = Integer.MAX_VALUE;
     }
 

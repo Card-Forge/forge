@@ -10,7 +10,7 @@ public class QuestAchievements extends AchievementCollection {
     //add achievements that should appear at the bottom below core achievements for each game mode
     @Override
     protected void addAchievements() {
-        add("Poisoned", new Poisoned(15, 25, 40));
-        add("DeckedOut", new DeckedOut(8, 4, 2));
+        add(new Poisoned(15, 25, 40));
+        add(new DeckedOut(8, 4, 2));
     }
 }

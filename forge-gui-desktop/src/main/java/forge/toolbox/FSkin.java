@@ -997,7 +997,7 @@ public class FSkin {
     private static String preferredDir;
     private static String preferredName;
     private static BufferedImage bimDefaultSprite, bimPreferredSprite, bimFoils, bimQuestDraftDeck,
-        bimOldFoils, bimDefaultAvatars, bimPreferredAvatars, bimTrophyShelf, bimTrophies;
+        bimOldFoils, bimDefaultAvatars, bimPreferredAvatars, bimTrophies;
     private static int x0, y0, w0, h0, newW, newH, preferredW, preferredH;
     private static int[] tempCoords;
     private static int defaultFontSize = 12;
@@ -1125,9 +1125,8 @@ public class FSkin {
         final File f4 = new File(defaultDir + ForgeConstants.SPRITE_AVATARS_FILE);
         final File f5 = new File(preferredDir + ForgeConstants.SPRITE_AVATARS_FILE);
         final File f6 = new File(defaultDir + ForgeConstants.SPRITE_OLD_FOILS_FILE);
-        final File f7 = new File(defaultDir + ForgeConstants.DRAFT_DECK_IMG_FILE);
-        final File f8 = new File(defaultDir + ForgeConstants.TROPHY_SHELF_FILE);
-        final File f9 = new File(defaultDir + ForgeConstants.TROPHIES_FILE);
+        final File f7 = new File(defaultDir + ForgeConstants.SPRITE_TROPHIES_FILE);
+        final File f8 = new File(defaultDir + ForgeConstants.DRAFT_DECK_IMG_FILE);
 
         try {
             int p = 0;
@@ -1141,9 +1140,9 @@ public class FSkin {
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimDefaultAvatars = ImageIO.read(f4);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
-            bimQuestDraftDeck = ImageIO.read(f7);
-            bimTrophyShelf = ImageIO.read(f8);
-            bimTrophies = ImageIO.read(f9);
+            bimTrophies = ImageIO.read(f7);
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
+            bimQuestDraftDeck = ImageIO.read(f8);
 
             if (f5.exists()) { bimPreferredAvatars = ImageIO.read(f5); }
 
@@ -1188,9 +1187,6 @@ public class FSkin {
             case OLD_FOIL:
                 setImage(prop, bimOldFoils);
                 break;
-            case TROPHY_SHELF:
-                setImage(prop, bimTrophyShelf);
-                break;
             case TROPHY:
                 setImage(prop, bimTrophies);
                 break;
@@ -1213,7 +1209,6 @@ public class FSkin {
         bimPreferredSprite.flush();
         bimDefaultAvatars.flush();
         bimQuestDraftDeck.flush();
-        bimTrophyShelf.flush();
         bimTrophies.flush();
 
         if (bimPreferredAvatars != null) { bimPreferredAvatars.flush(); }
@@ -1225,7 +1220,6 @@ public class FSkin {
         bimDefaultAvatars = null;
         bimPreferredAvatars = null;
         bimQuestDraftDeck = null;
-        bimTrophyShelf = null;
         bimTrophies = null;
 
         //establish encoding symbols

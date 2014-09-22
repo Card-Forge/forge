@@ -8,26 +8,26 @@ import forge.assets.ISkinImage;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.interfaces.IGuiBase;
+import forge.properties.ForgeConstants;
 
 public abstract class Achievement {
-    private final String displayName, sharedDesc, commonDesc, uncommonDesc, rareDesc, mythicDesc;
+    private final String key, displayName, sharedDesc, commonDesc, uncommonDesc, rareDesc, mythicDesc;
     private final int commonThreshold, uncommonThreshold, rareThreshold, mythicThreshold;
     private final boolean checkGreaterThan;
-    private final FSkinProp overlayImage;
     private ISkinImage image;
     protected int best, current;
 
     //use this constructor for special achievements without tiers
-    protected Achievement(String displayName0, String description0, String flavorText0, FSkinProp overlayImage0) {
-        this(displayName0, description0, null, 1, null, 1, null, 1, "(" + flavorText0 + ")", 1, overlayImage0); //pass flavor text as mythic description so it appears below description faded out
+    protected Achievement(String key0, String displayName0, String description0, String flavorText0) {
+        this(key0, displayName0, description0, null, 1, null, 1, null, 1, "(" + flavorText0 + ")", 1); //pass flavor text as mythic description so it appears below description faded out
     }
     //use this constructor for regular tiered achievements
-    protected Achievement(String displayName0, String sharedDesc0,
+    protected Achievement(String key0, String displayName0, String sharedDesc0,
             String commonDesc0, int commonThreshold0,
             String uncommonDesc0, int uncommonThreshold0,
             String rareDesc0, int rareThreshold0,
-            String mythicDesc0, int mythicThreshold0,
-            FSkinProp overlayImage0) {
+            String mythicDesc0, int mythicThreshold0) {
+        key = key0;
         displayName = displayName0;
         sharedDesc = sharedDesc0;
         commonDesc = commonDesc0;
@@ -38,10 +38,12 @@ public abstract class Achievement {
         rareThreshold = rareThreshold0;
         mythicDesc = mythicDesc0;
         mythicThreshold = mythicThreshold0;
-        overlayImage = overlayImage0;
         checkGreaterThan = rareThreshold0 >= uncommonThreshold0;
     }
 
+    public String getKey() {
+        return key;
+    }
     public String getDisplayName() {
         return displayName;
     }
@@ -128,7 +130,7 @@ public abstract class Achievement {
                 background = FSkinProp.IMG_COMMON_TROPHY;
             }
         }
-        image = GuiBase.getInterface().createLayeredImage(background, overlayImage, opacity);
+        image = GuiBase.getInterface().createLayeredImage(background, ForgeConstants.CACHE_ACHIEVEMENTS_DIR + "/" + key + ".png", opacity);
     }
 
     public void update(IGuiBase gui, Player player) {

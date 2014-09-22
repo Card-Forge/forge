@@ -40,7 +40,7 @@ public interface IGuiBase {
     boolean isGuiThread();
     ISkinImage getSkinIcon(FSkinProp skinProp);
     ISkinImage getUnskinnedIcon(String path);
-    ISkinImage createLayeredImage(FSkinProp background, FSkinProp overlay, float opacity);
+    ISkinImage createLayeredImage(FSkinProp background, String overlayFilename, float opacity);
     void showBugReportDialog(String title, String text, boolean showExitAppBtn);
     void showImageDialog(ISkinImage image, String message, String title);
     int showOptionDialog(String message, String title, FSkinProp icon, String[] options, int defaultOption);

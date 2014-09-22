@@ -50,25 +50,25 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
     }
 
     protected void addSharedAchivements() {
-        add("GameWinStreak", new GameWinStreak(10, 25, 50, 100));
-        add("MatchWinStreak", new MatchWinStreak(10, 25, 50, 100));
-        add("TotalGameWins", new TotalGameWins(250, 500, 1000, 2000));
-        add("TotalMatchWins", new TotalMatchWins(100, 250, 500, 1000));
+        add(new GameWinStreak(10, 25, 50, 100));
+        add(new MatchWinStreak(10, 25, 50, 100));
+        add(new TotalGameWins(250, 500, 1000, 2000));
+        add(new TotalMatchWins(100, 250, 500, 1000));
         if (isLimitedFormat) { //make need for speed goal more realistic for limited formats
-            add("NeedForSpeed", new NeedForSpeed(8, 6, 4, 2));
+            add(new NeedForSpeed(8, 6, 4, 2));
         }
         else {
-            add("NeedForSpeed", new NeedForSpeed(5, 3, 1, 0));
+            add(new NeedForSpeed(5, 3, 1, 0));
         }
-        add("Overkill", new Overkill(-25, -50, -100, -200));
-        add("LifeToSpare", new LifeToSpare(20, 40, 80, 160));
-        add("Hellbent", new Hellbent());
+        add(new Overkill(-25, -50, -100, -200));
+        add(new LifeToSpare(20, 40, 80, 160));
+        add(new Hellbent());
     }
 
     protected abstract void addAchievements();
 
-    protected void add(String key, Achievement achievement) {
-        achievements.put(key, achievement);
+    protected void add(Achievement achievement) {
+        achievements.put(achievement.getKey(), achievement);
     }
 
     public void updateAll(IGuiBase gui, Player player) {

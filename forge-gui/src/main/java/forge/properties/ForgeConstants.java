@@ -75,14 +75,13 @@ public final class ForgeConstants {
     public static final String SPRITE_ICONS_FILE      = "sprite_icons.png"; 
     public static final String SPRITE_FOILS_FILE      = "sprite_foils.png";
     public static final String SPRITE_OLD_FOILS_FILE  = "sprite_old_foils.png";
+    public static final String SPRITE_TROPHIES_FILE   = "sprite_trophies.png";
     public static final String SPRITE_AVATARS_FILE    = "sprite_avatars.png";
     public static final String FONT_FILE              = "font1.ttf";
     public static final String SPLASH_BG_FILE         = "bg_splash.png";
     public static final String MATCH_BG_FILE          = "bg_match.jpg";
     public static final String TEXTURE_BG_FILE        = "bg_texture.jpg";
     public static final String DRAFT_DECK_IMG_FILE    = "bg_draft_deck.png";
-    public static final String TROPHIES_FILE          = "sprite_trophies.png";
-    public static final String TROPHY_SHELF_FILE      = "bg_trophy_shelf.png";
 
     // data tree roots
     public static final String USER_DIR;
@@ -141,6 +140,7 @@ public final class ForgeConstants {
     public static final String CACHE_BOOSTERBOX_PICS_DIR     = PICS_DIR + "boosterboxes/";
     public static final String CACHE_PRECON_PICS_DIR         = PICS_DIR + "precons/";
     public static final String CACHE_TOURNAMENTPACK_PICS_DIR = PICS_DIR + "tournamentpacks/";
+    public static final String CACHE_ACHIEVEMENTS_DIR        = PICS_DIR + "achievements/";
     public static final String QUEST_CARD_PRICE_FILE         = DB_DIR + "all-prices.txt";
 
     public static final String[] PROFILE_DIRS = {

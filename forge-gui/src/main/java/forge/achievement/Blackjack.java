@@ -1,6 +1,5 @@
 package forge.achievement;
 
-import forge.assets.FSkinProp;
 import forge.game.Game;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
@@ -9,12 +8,11 @@ public class Blackjack extends Achievement {
     private static final int THRESHOLD = 21;
 
     public Blackjack(int silver0, int gold0, int mythic0) {
-        super("Blackjack", "Win a game from your commander dealing",
+        super("Blackjack", "Blackjack", "Win a game from your commander dealing",
             String.format("%d combat damage", THRESHOLD), THRESHOLD,
             String.format("%d combat damage", silver0), silver0,
             String.format("%d combat damage", gold0), gold0,
-            String.format("%d combat damage", mythic0), mythic0,
-            FSkinProp.IMG_BLACKJACK);
+            String.format("%d combat damage", mythic0), mythic0);
     }
 
     @Override

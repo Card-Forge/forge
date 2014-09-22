@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
@@ -76,6 +77,7 @@ import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.MouseTriggerEvent;
 import forge.toolbox.special.PhaseLabel;
 import forge.util.BuildInfo;
+import forge.util.FileUtil;
 import forge.util.ITriggerEvent;
 import forge.view.CardView;
 import forge.view.CombatView;
@@ -143,13 +145,21 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public ISkinImage createLayeredImage(FSkinProp background, FSkinProp overlay, float opacity) {
+    public ISkinImage createLayeredImage(FSkinProp background, String overlayFilename, float opacity) {
         BufferedImage image = new BufferedImage(background.getWidth(), background.getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         FSkin.SkinImage backgroundImage = FSkin.getImage(background);
-        FSkin.SkinImage overlayImage = FSkin.getImage(overlay);
         FSkin.drawImage(g, backgroundImage, 0, 0, background.getWidth(), background.getHeight());
-        FSkin.drawImage(g, overlayImage, (background.getWidth() - overlay.getWidth()) / 2, (background.getHeight() - overlay.getHeight()) / 2, overlay.getWidth(), overlay.getHeight());
+
+        if (FileUtil.doesFileExist(overlayFilename)) {
+            try {
+                ImageIcon overlay = new ImageIcon(overlayFilename);
+                if (overlay != null) {
+                    g.drawImage(overlay.getImage(), (background.getWidth() - overlay.getIconWidth()) / 2, (background.getHeight() - overlay.getIconHeight()) / 2, overlay.getIconWidth(), overlay.getIconHeight(), null);
+                }
+            }
+            catch (Exception e) {}
+        }
         return new FSkin.UnskinnedIcon(image, opacity);
     }
 

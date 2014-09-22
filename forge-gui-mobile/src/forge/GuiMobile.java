@@ -50,6 +50,7 @@ import forge.sound.IAudioClip;
 import forge.sound.IAudioMusic;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.GuiChoose;
+import forge.util.FileUtil;
 import forge.util.ITriggerEvent;
 import forge.util.ThreadUtil;
 import forge.util.WaitCallback;
@@ -125,12 +126,21 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public ISkinImage createLayeredImage(final FSkinProp background, final FSkinProp overlay, final float opacity) {
+    public ISkinImage createLayeredImage(final FSkinProp background, final String overlayFilename, final float opacity) {
         return new FBufferedImage(background.getWidth(), background.getHeight(), opacity) {
             @Override
             protected void draw(Graphics g, float w, float h) {
                 g.drawImage(FSkin.getImages().get(background), 0, 0, background.getWidth(), background.getHeight());
-                g.drawImage(FSkin.getImages().get(overlay), (background.getWidth() - overlay.getWidth()) / 2, (background.getHeight() - overlay.getHeight()) / 2, overlay.getWidth(), overlay.getHeight());
+
+                if (FileUtil.doesFileExist(overlayFilename)) {
+                    try {
+                        Texture overlay = new Texture(Gdx.files.absolute(overlayFilename));
+                        if (overlay != null) {
+                            g.drawImage(overlay, (background.getWidth() - overlay.getWidth()) / 2, (background.getHeight() - overlay.getHeight()) / 2, overlay.getWidth(), overlay.getHeight());
+                        }
+                    }
+                    catch (Exception e) {}
+                }
             }
         };
     }
