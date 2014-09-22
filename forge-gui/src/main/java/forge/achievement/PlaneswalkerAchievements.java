@@ -5,6 +5,8 @@ import java.util.HashSet;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.interfaces.IGuiBase;
+import forge.item.IPaperCard;
+import forge.model.FModel;
 import forge.properties.ForgeConstants;
 
 public class PlaneswalkerAchievements extends AchievementCollection {
@@ -107,6 +109,11 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         @Override
         protected int evaluate(Player player, Game game) {
             return current + 1; //if this reaches this point, it can be presumed that alternate win condition achieved
+        }
+
+        @Override
+        public IPaperCard getPaperCard() {
+            return FModel.getMagicDb().getCommonCards().getCard(getKey());
         }
 
         @Override

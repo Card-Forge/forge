@@ -8,6 +8,7 @@ import forge.assets.ISkinImage;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.interfaces.IGuiBase;
+import forge.item.IPaperCard;
 import forge.properties.ForgeConstants;
 
 public abstract class Achievement {
@@ -97,6 +98,11 @@ public abstract class Achievement {
             return best >= commonThreshold;
         }
         return best <= commonThreshold;
+    }
+
+    //get card associated with this achievement if any
+    public IPaperCard getPaperCard() {
+        return null;
     }
 
     protected abstract int evaluate(Player player, Game game);

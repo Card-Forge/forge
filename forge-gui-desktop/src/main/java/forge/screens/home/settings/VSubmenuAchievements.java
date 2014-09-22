@@ -10,7 +10,6 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
@@ -20,6 +19,7 @@ import forge.assets.FSkinProp;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
+import forge.item.IPaperCard;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
@@ -29,6 +29,8 @@ import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinImage;
+import forge.toolbox.special.CardZoomer;
+import forge.view.ViewUtil;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -78,9 +80,28 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
             public void mouseDragged(MouseEvent e) {
             }
         });
-        trophyCase.addMouseListener(new MouseAdapter() {
+        trophyCase.addMouseListener(new FMouseAdapter() {
             @Override
-            public void mouseExited(MouseEvent e) {
+            public void onMiddleMouseDown(MouseEvent e) {
+                showCard(e);
+            }
+            @Override
+            public void onLeftDoubleClick(MouseEvent e) {
+                showCard(e);
+            }
+
+            private void showCard(MouseEvent e) {
+                Achievement achievement = getAchievementAt(e.getX(), e.getY());
+                if (achievement != null) {
+                    IPaperCard pc = achievement.getPaperCard();
+                    if (pc != null) {
+                        CardZoomer.SINGLETON_INSTANCE.doMouseButtonZoom(ViewUtil.getCardForUi(pc));
+                    }
+                }
+            }
+
+            @Override
+            public void onMouseExit(MouseEvent e) {
                 trophyCase.setSelectedAchievement(null);
             }
         });

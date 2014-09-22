@@ -13,6 +13,8 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
+import forge.card.CardZoom;
+import forge.item.IPaperCard;
 import forge.menu.FDropDown;
 import forge.screens.FScreen;
 import forge.screens.TabPageScreen.TabPage;
@@ -132,11 +134,30 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
         @Override
         public boolean tap(float x, float y, int count) {
             Achievement achievement = getAchievementAt(x, y);
+            if (count > 1 && showCard(achievement)) {
+                return true;
+            }
             if (achievement == selectedAchievement) {
                 achievement = null; //unselect if selected achievement tapped again
             }
             selectedAchievement = achievement;
             return true;
+        }
+
+        @Override
+        public boolean longPress(float x, float y) {
+            return showCard(getAchievementAt(x, y));
+        }
+
+        private boolean showCard(Achievement achievement) {
+            if (achievement != null) {
+                IPaperCard pc = achievement.getPaperCard();
+                if (pc != null) {
+                    CardZoom.show(pc);
+                    return true;
+                }
+            }
+            return false;
         }
 
         @Override
