@@ -244,7 +244,7 @@ public enum TargetingOverlay {
                 });
             }
             for (final CardView attackingCard : combat.getAttackers()) {
-                final Iterable<CardView> cards = combat.getBlockers(attackingCard);
+                final Iterable<CardView> cards = combat.getPlannedBlockers(attackingCard);
                 if (cards == null) continue;
                 for (final CardView blockingCard : cards) {
                     if (!attackingCard.equals(c) && !blockingCard.equals(c)) { continue; }

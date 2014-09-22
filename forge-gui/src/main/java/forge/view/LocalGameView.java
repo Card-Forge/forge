@@ -184,7 +184,8 @@ public abstract class LocalGameView implements IGameView {
             combatView.addAttackingBand(
                     getCardViews(b.getAttackers()),
                     getGameEntityView(defender),
-                    blockers == null || !isBlocked ? null : getCardViews(blockers));
+                    blockers == null || !isBlocked ? null : getCardViews(blockers),
+                    blockers == null ? null : getCardViews(blockers));
         }
         return combatView;
     }

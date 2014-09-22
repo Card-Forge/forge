@@ -24,6 +24,9 @@ public class CombatView {
     private Map<Iterable<CardView>, GameEntityView> bandsWithDefenders = Maps.newHashMap();
     private Map<Iterable<CardView>, Iterable<CardView>> bandsWithBlockers = Maps.newHashMap();
 
+    private Map<CardView, Iterable<CardView>> attackersWithPlannedBlockers = Maps.newHashMap();
+    private Map<Iterable<CardView>, Iterable<CardView>> bandsWithPlannedBlockers = Maps.newHashMap();
+
     public CombatView() {
     }
 
@@ -69,6 +72,15 @@ public class CombatView {
     }
 
     /**
+     * @param attacker
+     * @return the blockers associated with an attacker, or {@code null} if the
+     *         attacker is unblocked (planning stage, for targeting overlay).
+     */
+    public Iterable<CardView> getPlannedBlockers(final CardView attacker) {
+        return attackersWithPlannedBlockers.get(attacker);
+    }
+
+    /**
      * Get an {@link Iterable} of the blockers of the specified band, or
      * {@code null} if that band is unblocked.
      * 
@@ -80,6 +92,18 @@ public class CombatView {
         return bandsWithBlockers.get(attackingBand);
     }
 
+    /**
+     * Get an {@link Iterable} of the blockers of the specified band, or
+     * {@code null} if that band is unblocked (planning stage, for targeting overlay).
+     * 
+     * @param attackingBand
+     *            an {@link Iterable} representing an attacking band.
+     * @return an {@link Iterable} of {@link CardView} objects, or {@code null}.
+     */
+    public Iterable<CardView> getPlannedBlockers(final Iterable<CardView> attackingBand) {
+        return bandsWithPlannedBlockers.get(attackingBand);
+    }
+
     public Iterable<CardView> getAttackersOf(final GameEntityView defender) {
         return Maps.filterValues(attackersWithDefenders, Predicates.equalTo(defender)).keySet();
     }
@@ -87,21 +111,29 @@ public class CombatView {
         return Maps.filterValues(bandsWithDefenders, Predicates.equalTo(defender)).keySet();
     }
 
-    public void addAttackingBand(final Iterable<CardView> attackingBand, final GameEntityView defender, final Iterable<CardView> blockers) {
-        final List<CardView> attackingBandCopy = Lists.newArrayList(attackingBand),
-                blockersCopy;
-        if (blockers == null) {
-            blockersCopy = null;
-        } else {
+    public void addPlannedBlockers(final CardView attacker, final Iterable<CardView> blockers) {
+        List<CardView> blockersCopy = null;
+        if (blockers != null) {
             blockersCopy = Lists.newArrayList(blockers);
         }
+        this.attackersWithPlannedBlockers.put(attacker, blockersCopy);
+    }
+
+    public void addAttackingBand(final Iterable<CardView> attackingBand, final GameEntityView defender, final Iterable<CardView> blockers, final Iterable<CardView> plannedBlockers) {
+        final List<CardView> attackingBandCopy = Lists.newArrayList(attackingBand),
+                blockersCopy, plannedBlockersCopy;
+
+        blockersCopy = blockers == null ? null : Lists.newArrayList(blockers);
+        plannedBlockersCopy = plannedBlockers == null ? null : Lists.newArrayList(plannedBlockers);
 
         for (final CardView attacker : attackingBandCopy) {
             this.attackersWithDefenders.put(attacker, defender);
             this.attackersWithBlockers.put(attacker, blockersCopy);
+            this.attackersWithPlannedBlockers.put(attacker, plannedBlockersCopy);
         }
         this.bandsWithDefenders.put(attackingBandCopy, defender);
         this.bandsWithBlockers.put(attackingBandCopy, blockersCopy);
+        this.bandsWithPlannedBlockers.put(attackingBandCopy, plannedBlockersCopy);
     }
 
 }
