@@ -173,7 +173,7 @@ public class MatchScreen extends FScreen {
     @Override
     protected void doLayout(float startY, float width, float height) {
         if (topPlayerPrompt != null) {
-            bottomPlayerPrompt.setBounds(0, startY, width, VPrompt.HEIGHT);
+            topPlayerPrompt.setBounds(0, startY, width, VPrompt.HEIGHT);
             startY += VPrompt.HEIGHT;
         }
         scroller.setBounds(0, startY, width, height - VPrompt.HEIGHT - startY);

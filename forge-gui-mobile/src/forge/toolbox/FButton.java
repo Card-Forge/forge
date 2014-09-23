@@ -198,15 +198,19 @@ public class FButton extends FDisplayObject implements IButton {
             w -= 2 * PADDING;
             break;
         case BottomLeft:
+            g.startClip(x, y, w, h);
             g.drawImage(imgM, 0, 0, cornerButtonWidth, cornerButtonHeight);
             g.drawImage(imgR, cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
+            g.endClip();
             w -= cornerTextOffsetX;
             y += cornerTextOffsetY;
             h -= cornerTextOffsetY;
             break;
         case BottomRight:
+            g.startClip(x, y, w, h);
             g.drawImage(imgL, 0, 0, cornerButtonWidth, cornerButtonHeight);
             g.drawImage(imgM, cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
+            g.endClip();
             x += cornerTextOffsetX;
             w -= cornerTextOffsetX;
             y += cornerTextOffsetY;
