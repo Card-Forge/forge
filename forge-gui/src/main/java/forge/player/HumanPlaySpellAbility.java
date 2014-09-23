@@ -19,6 +19,7 @@ package forge.player;
 
 import com.google.common.collect.Iterables;
 
+import forge.achievement.PlaneswalkerAchievements;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -54,10 +55,10 @@ public class HumanPlaySpellAbility {
     private final SpellAbility ability;
     private final CostPayment payment;
 
-    public HumanPlaySpellAbility(final PlayerControllerHuman controller, final SpellAbility sa, final CostPayment cp) {
-        this.controller = controller;
-        this.ability = sa;
-        this.payment = cp;
+    public HumanPlaySpellAbility(final PlayerControllerHuman controller0, final SpellAbility ability0, final CostPayment payment0) {
+        controller = controller0;
+        ability = ability0;
+        payment = payment0;
     }
 
     public final void playAbility(boolean mayChooseTargets, boolean isFree, boolean skipStack) {
@@ -69,16 +70,16 @@ public class HumanPlaySpellAbility {
         int zonePosition = 0;
         final ManaPool manapool = human.getManaPool();
 
-        final Card c = this.ability.getHostCard();
+        final Card c = ability.getHostCard();
         boolean manaConversion = (ability.isSpell() && c.hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME"));
         boolean playerManaConversion = human.hasManaConversion()
                 && human.getController().confirmAction(ability, null, "Do you want to spend mana as though it were mana of any color to pay the cost?");
-        if (this.ability instanceof Spell && !c.isCopiedSpell()) {
+        if (ability instanceof Spell && !c.isCopiedSpell()) {
             fromZone = game.getZoneOf(c);
             if (fromZone != null) {
             	zonePosition = fromZone.getCards().indexOf(c);
             }
-            this.ability.setHostCard(game.getAction().moveToStack(c));
+            ability.setHostCard(game.getAction().moveToStack(c));
         }
 
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
@@ -93,10 +94,10 @@ public class HumanPlaySpellAbility {
         }
         // This line makes use of short-circuit evaluation of boolean values, that is each subsequent argument
         // is only executed or evaluated if the first argument does not suffice to determine the value of the expression
-        boolean prerequisitesMet = this.announceValuesLikeX()
-                && this.announceType()
+        boolean prerequisitesMet = announceValuesLikeX()
+                && announceType()
                 && (!mayChooseTargets || setupTargets()) // if you can choose targets, then do choose them.
-                && (isFree || this.payment.payCost(new HumanCostDecision(controller, human, ability, ability.getHostCard())));
+                && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, ability.getHostCard())));
 
         if (!prerequisitesMet) {
             if (!ability.isTrigger()) {
@@ -119,13 +120,18 @@ public class HumanPlaySpellAbility {
             return;
         }
 
-        if (isFree || this.payment.isFullyPaid()) {
+        if (isFree || payment.isFullyPaid()) {
+            //track when planeswalker ultimates are activated
+            if (ability.getRestrictions().isPwAbility() && ability.hasParam("Ultimate") && ability.getActivatingPlayer().getController() instanceof PlayerControllerHuman) {
+                PlaneswalkerAchievements.activatedUltimates.add(ability.getHostCard().getName());
+            }
+
             if (skipStack) {
-                AbilityUtils.resolve(this.ability);
+                AbilityUtils.resolve(ability);
             }
             else {
-                this.enusureAbilityHasDescription(this.ability);
-                game.getStack().addAndUnfreeze(this.ability);
+                enusureAbilityHasDescription(ability);
+                game.getStack().addAndUnfreeze(ability);
             }
 
             // no worries here. The same thread must resolve, and by this moment ability will have been resolved already
@@ -190,8 +196,8 @@ public class HumanPlaySpellAbility {
 
         clearTargets(ability);
 
-        this.ability.resetOnceResolved();
-        this.payment.refundPayment();
+        ability.resetOnceResolved();
+        payment.refundPayment();
         game.getStack().clearFrozen();
     }
 

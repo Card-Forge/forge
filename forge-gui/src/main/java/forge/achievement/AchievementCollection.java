@@ -14,13 +14,16 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import forge.game.Game;
 import forge.game.GameType;
 import forge.game.player.Player;
 import forge.interfaces.IComboBox;
 import forge.interfaces.IGuiBase;
 import forge.model.FModel;
+import forge.player.PlayerControllerHuman;
 import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
+import forge.util.ThreadUtil;
 import forge.util.XmlUtil;
 
 public abstract class AchievementCollection implements Iterable<Achievement> {
@@ -30,6 +33,27 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
 
     static {
         FileUtil.ensureDirectoryExists(ForgeConstants.ACHIEVEMENTS_DIR);
+    }
+
+    public static void updateAll(PlayerControllerHuman controller) {
+        /*if (controller.hasCheated()) { //don't update achievements if player cheated during game
+            PlaneswalkerAchievements.activatedUltimates.clear(); //ensure these are cleared
+            return;
+        }*/
+
+        final IGuiBase gui = controller.getGui();
+        final Game game = controller.getGame();
+        final Player player = controller.getPlayer();
+
+        //update all achievements for GUI player after game finished
+        ThreadUtil.invokeInGameThread(new Runnable() {
+            @Override
+            public void run() {
+                FModel.getAchievements(game.getRules().getGameType()).updateAll(gui, player);
+                AltWinAchievements.instance.updateAll(gui, player);
+                PlaneswalkerAchievements.instance.updateAll(gui, player);
+            }
+        });
     }
 
     public static void buildComboBox(IComboBox<AchievementCollection> cb) {

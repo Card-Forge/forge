@@ -572,30 +572,6 @@ public class SpellAbilityVariables {
         this.presentDefined = defined;
     }
 
-    // used to define as a Planeswalker ability
-    /**
-     * <p>
-     * setPlaneswalker.
-     * </p>
-     * 
-     * @param bPlaneswalker
-     *            a boolean.
-     */
-    public final void setPlaneswalker(final boolean bPlaneswalker) {
-        this.setPwAbility(bPlaneswalker);
-    }
-
-    /**
-     * <p>
-     * getPlaneswalker.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean getPlaneswalker() {
-        return this.isPwAbility();
-    }
-
     // Checking the values of SVars (Mostly for Traps)
     /**
      * <p>

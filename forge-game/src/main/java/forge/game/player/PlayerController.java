@@ -146,6 +146,8 @@ public abstract class PlayerController {
 
     // End of Triggers preliminary choice
 
+    public Game getGame() { return game; }
+    public Player getPlayer() { return player; }
     public LobbyPlayer getLobbyPlayer() { return lobbyPlayer; }
 
     public final SpellAbility getAbilityToPlay(List<SpellAbility> abilities) { return getAbilityToPlay(abilities, null); }

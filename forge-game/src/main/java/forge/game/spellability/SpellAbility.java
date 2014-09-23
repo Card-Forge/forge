@@ -152,7 +152,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
         // without a target
         if (this.usesTargeting()) { return false; }
-        if (getRestrictions() != null && getRestrictions().getPlaneswalker()) {
+        if (restrictions != null && restrictions.isPwAbility()) {
             return false; //Loyalty ability, not a mana ability.
         }
         if (this.isWrapper() && ((WrappedAbility) this).getTrigger().getMode() != TriggerType.TapsForMana) {

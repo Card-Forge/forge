@@ -76,24 +76,28 @@ public abstract class Achievement {
         return (isSpecial() && best > 0);
     }
     public boolean earnedMythic() {
+        if (isSpecial()) { return false; }
         if (checkGreaterThan) {
             return best >= mythicThreshold;
         }
         return best <= mythicThreshold;
     }
     public boolean earnedRare() {
+        if (isSpecial()) { return false; }
         if (checkGreaterThan) {
             return best >= rareThreshold;
         }
         return best <= rareThreshold;
     }
     public boolean earnedUncommon() {
+        if (isSpecial()) { return false; }
         if (checkGreaterThan) {
             return best >= uncommonThreshold;
         }
         return best <= uncommonThreshold;
     }
     public boolean earnedCommon() {
+        if (isSpecial()) { return false; }
         if (checkGreaterThan) {
             return best >= commonThreshold;
         }

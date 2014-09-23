@@ -146,7 +146,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (params.containsKey("Planeswalker")) {
-            this.setPlaneswalker(true);
+            this.setPwAbility(true);
         }
 
         if (params.containsKey("IsPresent")) {
@@ -382,7 +382,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 // check all abilities on card that have their planeswalker
                 // restriction set to confirm they haven't been activated
                 final SpellAbilityRestriction restrict = pwAbs.getRestrictions();
-                if (restrict.getPlaneswalker()) {
+                if (restrict.isPwAbility()) {
                     numActivates += restrict.getNumberTurnActivations();
                 }
             }

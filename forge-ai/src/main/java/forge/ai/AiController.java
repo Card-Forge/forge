@@ -877,7 +877,7 @@ public class AiController {
                 p -= 9;
             }
             // sort planeswalker abilities for ultimate
-            if (sa.getRestrictions().getPlaneswalker()) {
+            if (sa.getRestrictions().isPwAbility()) {
                 if (sa.hasParam("Ultimate")) {
                     p += 9;
                 }

@@ -11,8 +11,7 @@ import forge.properties.ForgeConstants;
 
 public class PlaneswalkerAchievements extends AchievementCollection {
     public static final PlaneswalkerAchievements instance = new PlaneswalkerAchievements();
-
-    private final HashSet<String> activatedUltimates = new HashSet<String>();
+    public static final HashSet<String> activatedUltimates = new HashSet<String>();
 
     private PlaneswalkerAchievements() {
         super("Planeswalker Ultimates", ForgeConstants.ACHIEVEMENTS_DIR + "planeswalkers.xml", false);

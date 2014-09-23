@@ -116,7 +116,7 @@ public abstract class SpellAbilityAi extends SaTargetRoutines {
             return false;
         }
     
-        if (sa.getRestrictions().getPlaneswalker() && ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
+        if (sa.getRestrictions().isPwAbility() && ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
             return true;
         }
         if (sa.isTrigger()) {

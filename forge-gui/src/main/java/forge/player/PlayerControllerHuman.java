@@ -32,8 +32,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 
 import forge.LobbyPlayer;
-import forge.achievement.AltWinAchievements;
-import forge.achievement.PlaneswalkerAchievements;
+import forge.achievement.AchievementCollection;
 import forge.card.CardCharacteristicName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -102,7 +101,6 @@ import forge.properties.ForgePreferences.FPref;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.TextUtil;
-import forge.util.ThreadUtil;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SGuiDialog;
 import forge.util.gui.SOptionPane;
@@ -1345,18 +1343,9 @@ public class PlayerControllerHuman extends PlayerController {
             return game.getOutcome().anteResult.get(player);
         }
 
+        @Override
         public void updateAchievements() {
-            if (hasCheated()) { return; } //don't update achievements if player cheated during game
-
-            //update all achievements for GUI player after game finished
-            ThreadUtil.invokeInGameThread(new Runnable() {
-                @Override
-                public void run() {
-                    FModel.getAchievements(game.getRules().getGameType()).updateAll(gui, player);
-                    AltWinAchievements.instance.updateAll(gui, player);
-                    PlaneswalkerAchievements.instance.updateAll(gui, player);
-                }
-            });
+            AchievementCollection.updateAll(PlayerControllerHuman.this);
         }
 
         @Override
