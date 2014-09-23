@@ -10,7 +10,7 @@ SVar:DBMayBePlayed:DB$ Effect | RememberObjects$ Remembered | Triggers$ TrigCast
 SVar:STMayPlay:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Exile | Affected$ Card.IsRemembered+nonCreature+nonLand | AddHiddenKeyword$ May be played without paying its mana cost | Description$ You may cast noncreature cards exiled with Narset this turn without paying their mana costs.
 SVar:TrigCast:Mode$ SpellCast | ValidCard$ Card.IsRemembered | ValidActivatingPlayer$ You | Execute$ RemoveCard | Static$ True | TriggerZones$ Command
 SVar:RemoveCard:DB$ Pump | ForgetObjects$ TriggeredCard
-SVar:PlayMain1:TRUE
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/narset_enlightened_master.jpg
 Oracle:First strike, hexproof\nWhenever Narset, Enlightened Master attacks, exile the top four cards of your library. Until end of turn, you may cast noncreature cards exiled with Narset this turn without paying their mana costs.
