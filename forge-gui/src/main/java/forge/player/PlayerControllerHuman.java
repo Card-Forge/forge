@@ -89,6 +89,7 @@ import forge.match.input.InputBase;
 import forge.match.input.InputBlock;
 import forge.match.input.InputConfirm;
 import forge.match.input.InputConfirmMulligan;
+import forge.match.input.InputNone;
 import forge.match.input.InputPassPriority;
 import forge.match.input.InputPayMana;
 import forge.match.input.InputProliferate;
@@ -129,7 +130,7 @@ public class PlayerControllerHuman extends PlayerController {
 
     public PlayerControllerHuman(final Game game0, final Player p, final LobbyPlayer lp, final IGuiBase gui) {
         super(game0, p, lp);
-        this.gameView = new GameView(game0, gui);
+        this.gameView = new GameView(gui, game0);
 
         // aggressively cache a view for each player (also caches cards)
         for (final Player player : game.getRegisteredPlayers()) {
@@ -796,9 +797,10 @@ public class PlayerControllerHuman extends PlayerController {
             //allow user to cancel auto-pass
             InputBase.cancelAwaitNextInput(); //don't overwrite prompt with awaiting opponent
             PhaseType phase = getAutoPassUntilPhase();
-            getGui().showPromptMessage("Yielding until " + (phase == PhaseType.CLEANUP ? "end of turn" : phase.nameForUi.toString()) +
+            InputNone inputNone = new InputNone(gameView);
+            getGui().showPromptMessage(inputNone.getOwner(), "Yielding until " + (phase == PhaseType.CLEANUP ? "end of turn" : phase.nameForUi.toString()) +
                     ".\nYou may cancel this yield to take an action.");
-            ButtonUtil.update(getGui(), false, true, false);
+            ButtonUtil.update(inputNone, false, true, false);
         }
     }
 
@@ -814,9 +816,10 @@ public class PlayerControllerHuman extends PlayerController {
         super.autoPassCancel();
 
         //prevent prompt getting stuck on yielding message while actually waiting for next input opportunity
-        getGui().showPromptMessage("");
-        ButtonUtil.update(getGui(), false, false, false);
-        InputBase.awaitNextInput(getGui());
+        InputNone inputNone = new InputNone(gameView);
+        getGui().showPromptMessage(inputNone.getOwner(), "");
+        ButtonUtil.update(inputNone, false, false, false);
+        InputBase.awaitNextInput(inputNone);
     }
 
     @Override
@@ -1330,8 +1333,8 @@ public class PlayerControllerHuman extends PlayerController {
      * What follows are the View methods.
      */
     private class GameView extends LocalGameView {
-        public GameView(Game game0, IGuiBase gui0) {
-            super(game0, gui0);
+        public GameView(IGuiBase gui0, Game game0) {
+            super(gui0, game0);
         }
 
         @Override
@@ -1363,7 +1366,7 @@ public class PlayerControllerHuman extends PlayerController {
             }
 
             if (game.getStack().undo()) {
-                final Input currentInput = getGui().getInputQueue().getInput();
+                final Input currentInput = inputQueue.getInput();
                 if (currentInput instanceof InputPassPriority) {
                     currentInput.showMessageInitial(); //ensure prompt updated if needed
                 }
@@ -1384,7 +1387,7 @@ public class PlayerControllerHuman extends PlayerController {
 
         @Override
         public void confirm() {
-            if (getGui().getInputQueue().getInput() instanceof InputConfirm) {
+            if (inputQueue.getInput() instanceof InputConfirm) {
                 selectButtonOk();
             }
         }
@@ -1418,7 +1421,7 @@ public class PlayerControllerHuman extends PlayerController {
 
         @Override
         public void useMana(final byte mana) {
-            final Input input = getGui().getInputQueue().getInput();
+            final Input input = inputQueue.getInput();
             if (input instanceof InputPayMana) {
                 ((InputPayMana) input).useManaFromPool(mana);
             }
@@ -1587,11 +1590,9 @@ public class PlayerControllerHuman extends PlayerController {
         return gameView.getPlayerViews(players);
     }
 
-    /**
-     * @param p
-     * @return
-     * @see forge.view.LocalGameView#getPlayerView(forge.game.player.Player)
-     */
+    public PlayerView getPlayerView() {
+        return gameView.getPlayerView(getPlayer());
+    }
     public PlayerView getPlayerView(Player p) {
         return gameView.getPlayerView(p);
     }
@@ -2003,7 +2004,7 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         public void winGame() {
-            Input input = getGui().getInputQueue().getInput();
+            Input input = gameView.getInputQueue().getInput();
             if (!(input instanceof InputPassPriority)) {
                 SOptionPane.showMessageDialog(getGui(), "You must have priority to use this feature.", "Win Game", SOptionPane.INFORMATION_ICON);
                 return;

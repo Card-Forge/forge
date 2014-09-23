@@ -16988,6 +16988,7 @@ forge-gui/src/main/java/forge/match/input/InputBlock.java -text
 forge-gui/src/main/java/forge/match/input/InputConfirm.java -text
 forge-gui/src/main/java/forge/match/input/InputConfirmMulligan.java -text
 forge-gui/src/main/java/forge/match/input/InputLockUI.java -text
+forge-gui/src/main/java/forge/match/input/InputNone.java -text
 forge-gui/src/main/java/forge/match/input/InputPassPriority.java -text
 forge-gui/src/main/java/forge/match/input/InputPayMana.java -text
 forge-gui/src/main/java/forge/match/input/InputPayManaOfCostPayment.java -text

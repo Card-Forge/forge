@@ -72,11 +72,11 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
         }
 
         if (isCommander) {
-            ButtonUtil.update(getGui(), "Keep", "Exile", true, false, true);
+            ButtonUtil.update(this, "Keep", "Exile", true, false, true);
             sb.append("Will you keep your hand or choose some cards to exile those and draw one less card?");
         }
         else {
-            ButtonUtil.update(getGui(), "Keep", "Mulligan", true, true, true);
+            ButtonUtil.update(this, "Keep", "Mulligan", true, true, true);
             sb.append("Do you want to keep your hand?");
         }
 
@@ -144,7 +144,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
                 getGui().setUsedToPay(getController().getCardView(c0), true);
                 selected.add(c0);
             }
-            ButtonUtil.update(getGui(), "Keep", "Exile", true, !selected.isEmpty(), true);
+            ButtonUtil.update(this, "Keep", "Exile", true, !selected.isEmpty(), true);
         }
         return true;
     }

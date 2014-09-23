@@ -371,10 +371,10 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     protected void updateButtons() {
         if (supportAutoPay()) {
-            ButtonUtil.update(getGui(), "Auto", "Cancel", false, true, false);
+            ButtonUtil.update(this, "Auto", "Cancel", false, true, false);
         }
         else {
-            ButtonUtil.update(getGui(), "", "Cancel", false, true, false);
+            ButtonUtil.update(this, "", "Cancel", false, true, false);
         }
     }
 
@@ -393,7 +393,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 canPayManaCost = proc.getResult();
             }
             if (canPayManaCost) { //enabled Auto button if mana cost can be paid
-                ButtonUtil.update(getGui(), "Auto", "Cancel", true, true, true);
+                ButtonUtil.update(this, "Auto", "Cancel", true, true, true);
             }
         }
         showMessage(getMessage());

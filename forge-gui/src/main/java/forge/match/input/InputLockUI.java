@@ -10,22 +10,31 @@ import forge.game.spellability.SpellAbility;
 import forge.interfaces.IGuiBase;
 import forge.util.ITriggerEvent;
 import forge.util.ThreadUtil;
+import forge.view.PlayerView;
 
 public class InputLockUI implements Input  {
     private final AtomicInteger iCall = new AtomicInteger();
 
     private IGuiBase gui;
+    private final InputQueue inputQueue;
     private final Game game;
-    public InputLockUI(final Game game, final InputQueue inputQueue) {
-        this.game = game;
+    public InputLockUI(final Game game0, final InputQueue inputQueue0) {
+        game = game0;
+        inputQueue = inputQueue0;
     }
 
-    private IGuiBase getGui() {
+    @Override
+    public PlayerView getOwner() {
+        return null;
+    }
+
+    @Override
+    public IGuiBase getGui() {
         return gui;
     }
 
-    public void setGui(final IGuiBase gui) {
-        this.gui = gui;
+    public void setGui(final IGuiBase gui0) {
+        gui = gui0;
     }
 
     public void showMessageInitial() {
@@ -56,17 +65,17 @@ public class InputLockUI implements Input  {
     private final Runnable showMessageFromEdt = new Runnable() {
         @Override
         public void run() {
-            ButtonUtil.update(getGui(), "", "", false, false, false);
+            ButtonUtil.update(InputLockUI.this, "", "", false, false, false);
             showMessage("Waiting for actions...");
         }
     };
 
     protected final boolean isActive() {
-        return getGui().getInputQueue().getInput() == this;
+        return inputQueue.getInput() == this;
     }
 
     protected void showMessage(String message) { 
-        getGui().showPromptMessage(message);
+        getGui().showPromptMessage(getOwner(), message);
     }
 
     @Override

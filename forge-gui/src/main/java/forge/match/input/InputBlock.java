@@ -74,7 +74,7 @@ public class InputBlock extends InputSyncronizedBase {
     @Override
     protected final void showMessage() {
         // could add "Reset Blockers" button
-        ButtonUtil.update(getGui(), true, false, true);
+        ButtonUtil.update(this, true, false, true);
 
         if (currentAttacker == null) {
             showMessage("Select another attacker to declare blockers for.");

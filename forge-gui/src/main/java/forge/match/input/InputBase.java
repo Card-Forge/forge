@@ -29,6 +29,8 @@ import forge.game.spellability.SpellAbility;
 import forge.interfaces.IGuiBase;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
+import forge.view.LocalGameView;
+import forge.view.PlayerView;
 
 /**
  * <p>
@@ -43,14 +45,20 @@ public abstract class InputBase implements java.io.Serializable, Input {
     private static final long serialVersionUID = -6539552513871194081L;
 
     private final PlayerControllerHuman controller;
-    public InputBase(final PlayerControllerHuman controller) {
-        this.controller = controller;
+    public InputBase(final PlayerControllerHuman controller0) {
+        controller = controller0;
     }
     public final PlayerControllerHuman getController() {
-        return this.controller;
+        return controller;
+    }
+    public LocalGameView getGameView() {
+        return controller.getGameView();
+    }
+    public PlayerView getOwner() {
+        return controller.getPlayerView(controller.getPlayer());
     }
     public IGuiBase getGui() {
-        return getController().getGui();
+        return controller.getGui();
     }
 
     private boolean finished = false;
@@ -59,7 +67,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
         finished = true;
 
         if (allowAwaitNextInput()) {
-            awaitNextInput(getGui());
+            awaitNextInput(this);
         }
     }
 
@@ -70,18 +78,18 @@ public abstract class InputBase implements java.io.Serializable, Input {
     private static final Timer awaitNextInputTimer = new Timer();
     private static TimerTask awaitNextInputTask;
 
-    public static void awaitNextInput(final IGuiBase gui) {
+    public static void awaitNextInput(final Input input) {
         //delay updating prompt to await next input briefly so buttons don't flicker disabled then enabled
         awaitNextInputTask = new TimerTask() {
             @Override
             public void run() {
-                FThreads.invokeInEdtLater(gui, new Runnable() {
+                FThreads.invokeInEdtLater(input.getGui(), new Runnable() {
                     @Override
                     public void run() {
                         synchronized (awaitNextInputTimer) {
                             if (awaitNextInputTask != null) {
-                                gui.showPromptMessage("Waiting for opponent...");
-                                ButtonUtil.update(gui, false, false, false);
+                                input.getGui().showPromptMessage(input.getOwner(), "Waiting for opponent...");
+                                ButtonUtil.update(input, false, false, false);
                                 awaitNextInputTask = null;
                             }
                         }
@@ -150,7 +158,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
 
     // to remove need for CMatchUI dependence
     protected final void showMessage(final String message) {
-        getGui().showPromptMessage(message);
+        getGui().showPromptMessage(getOwner(), message);
     }
 
     protected final void flashIncorrectAction() {

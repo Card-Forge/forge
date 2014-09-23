@@ -44,7 +44,7 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     @Override
     public final void showMessage() {
         showMessage(getMessage());
-        ButtonUtil.update(getGui(), hasEnoughTargets(), allowCancel, true);
+        ButtonUtil.update(this, hasEnoughTargets(), allowCancel, true);
     }
 
     @Override

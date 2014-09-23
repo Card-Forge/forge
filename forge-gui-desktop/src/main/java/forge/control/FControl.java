@@ -63,6 +63,7 @@ import forge.gui.framework.SLayoutIO;
 import forge.gui.framework.SOverflowUtil;
 import forge.gui.framework.SResizingUtil;
 import forge.match.input.InputQueue;
+import forge.match.input.InputSynchronized;
 import forge.menus.ForgeMenu;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -407,19 +408,20 @@ public enum FControl implements KeyEventDispatcher {
     public Player getCurrentPlayer() {
         if (game == null) { return null; }
 
-        // try current priority
-        Player currentPriority = game.getPhaseHandler().getPriorityPlayer();
-        if (null != currentPriority && currentPriority.getLobbyPlayer() == getGuiPlayer()) {
-            return currentPriority;
-        }
-
-        // otherwise find just any player, belonging to this lobbyplayer
-        for (Player p : game.getPlayers()) {
-            if (p.getLobbyPlayer() == getGuiPlayer()) {
-                return p;
+        LobbyPlayer lobbyPlayer = getGuiPlayer();
+        if (gameViews.size() > 1) {
+            //account for if second human player is currently being prompted
+            InputSynchronized activeInput = InputQueue.getActiveInput();
+            if (activeInput != null) {
+                lobbyPlayer = activeInput.getOwner().getLobbyPlayer();
             }
         }
 
+        for (Player p : game.getPlayers()) {
+            if (p.getLobbyPlayer() == lobbyPlayer) {
+                return p;
+            }
+        }
         return null;
     }
 
@@ -511,15 +513,16 @@ public enum FControl implements KeyEventDispatcher {
             if (p.getController() instanceof PlayerControllerHuman) {
                 final PlayerControllerHuman controller = (PlayerControllerHuman) p.getController();
                 LocalGameView gameView = controller.getGameView();
-                game.subscribeToEvents(new FControlGameEventHandler(GuiBase.getInterface(), gameView));
+                game.subscribeToEvents(new FControlGameEventHandler(gameView));
                 gameViews.add(gameView);
                 humanCount++;
             }
         }
 
         if (humanCount == 0) { //watch game but do not participate
-            LocalGameView gameView = new WatchLocalGame(game, GuiBase.getInterface());
-            game.subscribeToEvents(new FControlGameEventHandler(GuiBase.getInterface(), gameView));
+            LocalGameView gameView = new WatchLocalGame(GuiBase.getInterface(), game);
+            gameView.setLocalPlayer(sortedPlayers.get(0));
+            game.subscribeToEvents(new FControlGameEventHandler(gameView));
             gameViews.add(gameView);
         }
         else if (humanCount == sortedPlayers.size()) {

@@ -19,17 +19,20 @@ package forge.match.input;
 
 import forge.interfaces.IButton;
 import forge.interfaces.IGuiBase;
+import forge.view.PlayerView;
 
 /**
  * Manages match UI OK/Cancel button enabling and focus
  */
 public class ButtonUtil {
-    public static void update(final IGuiBase gui, boolean okEnabled, boolean cancelEnabled, boolean focusOk) {
-        update(gui, "OK", "Cancel", okEnabled, cancelEnabled, focusOk);
+    public static void update(final Input input, boolean okEnabled, boolean cancelEnabled, boolean focusOk) {
+        update(input, "OK", "Cancel", okEnabled, cancelEnabled, focusOk);
     }
-    public static void update(final IGuiBase gui, String okLabel, String cancelLabel, boolean okEnabled, boolean cancelEnabled, boolean focusOk) {
-        IButton btnOk = gui.getBtnOK();
-        IButton btnCancel = gui.getBtnCancel();
+    public static void update(final Input input, String okLabel, String cancelLabel, boolean okEnabled, boolean cancelEnabled, boolean focusOk) {
+        IGuiBase gui = input.getGui();
+        PlayerView owner = input.getOwner();
+        IButton btnOk = gui.getBtnOK(owner);
+        IButton btnCancel = gui.getBtnCancel(owner);
 
         btnOk.setText(okLabel);
         btnCancel.setText(cancelLabel);

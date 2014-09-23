@@ -33,6 +33,12 @@ import forge.view.IGameView;
  * @version $Id: InputQueue.java 24769 2014-02-09 13:56:04Z Hellfish $
  */
 public class InputQueue extends Observable {
+    private static InputSynchronized activeInput;
+
+    public static InputSynchronized getActiveInput() {
+        return activeInput;
+    }
+
     private final BlockingDeque<InputSynchronized> inputStack = new LinkedBlockingDeque<InputSynchronized>();
     private final InputLockUI inputLock;
 
@@ -55,6 +61,9 @@ public class InputQueue extends Observable {
 
         if (topMostInput != inp) {
             throw new RuntimeException("Cannot remove input " + inp.getClass().getSimpleName() + " because it's not on top of stack. Stack = " + inputStack );
+        }
+        if (inp == activeInput) {
+            activeInput = null;
         }
         updateObservers();
     }
@@ -80,6 +89,7 @@ public class InputQueue extends Observable {
     }
 
     public void setInput(final InputSynchronized input) {
+        activeInput = input;
         inputStack.push(input);
         inputLock.setGui(input.getGui());
         syncPoint();

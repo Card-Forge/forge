@@ -24,8 +24,8 @@ public class WatchLocalGame extends LocalGameView {
      *            the {@link InputQueue} of the game to enable playback
      *            controls, or {@code null} to disallow them.
      */
-    public WatchLocalGame(Game game0, IGuiBase gui0) {
-        super(game0, gui0);
+    public WatchLocalGame(IGuiBase gui0, Game game0) {
+        super(gui0, game0);
     }
 
     @Override
@@ -158,5 +158,4 @@ public class WatchLocalGame extends LocalGameView {
     public DevModeCheats cheat() {
         return null;
     }
-
 }

@@ -36,8 +36,9 @@ public abstract class LocalGameView implements IGameView {
     protected final IGuiBase gui;
     protected final InputQueue inputQueue;
     protected final InputProxy inputProxy;
+    private PlayerView localPlayerView;
 
-    public LocalGameView(Game game0, IGuiBase gui0) {
+    public LocalGameView(IGuiBase gui0, Game game0) {
         game = game0;
         gui = gui0;
         inputProxy = new InputProxy(this);
@@ -58,6 +59,14 @@ public abstract class LocalGameView implements IGameView {
 
     public InputProxy getInputProxy() {
         return inputProxy;
+    }
+
+    public PlayerView getLocalPlayerView() {
+        return localPlayerView;
+    }
+
+    public void setLocalPlayer(Player localPlayer) {
+        localPlayerView = getPlayerView(localPlayer);
     }
 
     /** Cache of players. */

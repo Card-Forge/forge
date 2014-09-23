@@ -78,19 +78,19 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         if (!tgt.isMinTargetsChosen(sa.getHostCard(), sa) || tgt.isDividedAsYouChoose()) {
             if (mandatory && tgt.hasCandidates(sa, true)) {
                 // Player has to click on a target
-                ButtonUtil.update(getGui(), false, false, false);
+                ButtonUtil.update(this, false, false, false);
             }
             else {
-                ButtonUtil.update(getGui(), false, true, false);
+                ButtonUtil.update(this, false, true, false);
             }
         }
         else {
             if (mandatory && tgt.hasCandidates(sa, true)) {
                 // Player has to click on a target or ok
-                ButtonUtil.update(getGui(), true, false, true);
+                ButtonUtil.update(this, true, false, true);
             }
             else {
-                ButtonUtil.update(getGui(), true, true, true);
+                ButtonUtil.update(this, true, true, true);
             }
         }
     }

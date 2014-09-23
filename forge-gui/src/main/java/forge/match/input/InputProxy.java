@@ -46,11 +46,11 @@ public class InputProxy implements Observer {
 //    private static final boolean DEBUG_INPUT = true; // false;
 
     public InputProxy(final LocalGameView gameView0) {
-        this.gameView = gameView0;
+        gameView = gameView0;
     }
 
     private IGuiBase getGui() {
-        return this.gameView.getGui();
+        return gameView.getGui();
     }
 
     @Override
@@ -61,11 +61,11 @@ public class InputProxy implements Observer {
                     FThreads.debugGetStackTraceItem(6, true), nextInput == null ? "null" : nextInput.getClass().getSimpleName(), 
                             game.getPhaseHandler().debugPrintState(), Singletons.getControl().getInputQueue().printInputStack());
 */
-        this.input.set(nextInput);
+        input.set(nextInput);
         Runnable showMessage = new Runnable() {
             @Override public void run() { 
                 Input current = getInput(); 
-                getGui().getInputQueue().syncPoint();
+                gameView.getInputQueue().syncPoint();
                 //System.out.printf("\t%s > showMessage @ %s/%s during %s%n", FThreads.debugGetCurrThreadId(), nextInput.getClass().getSimpleName(), current.getClass().getSimpleName(), game.getPhaseHandler().debugPrintState());
                 current.showMessageInitial(); 
             }
@@ -152,6 +152,6 @@ public class InputProxy implements Observer {
 
     /** @return {@link forge.gui.InputProxy.InputBase} */
     public Input getInput() {
-        return this.input.get();
+        return input.get();
     }
 }

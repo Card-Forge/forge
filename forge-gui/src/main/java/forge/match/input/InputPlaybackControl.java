@@ -55,10 +55,10 @@ public class InputPlaybackControl extends InputSyncronizedBase implements InputS
     private void setPause(boolean pause) {
         isPaused = pause; 
         if (isPaused) {
-            ButtonUtil.update(getGui(), "Resume", "Step", true, true, true);
+            ButtonUtil.update(this, "Resume", "Step", true, true, true);
         }
         else {
-            ButtonUtil.update(getGui(), "Pause", isFast ? "1x Speed" : "10x Faster", true, true, true);
+            ButtonUtil.update(this, "Pause", isFast ? "1x Speed" : "10x Faster", true, true, true);
         }
     }
 

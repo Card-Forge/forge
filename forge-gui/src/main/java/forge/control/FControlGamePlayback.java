@@ -102,13 +102,13 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
      */
     @Override
     public Void visit(GameEventGameFinished event) {
-        gui.getInputQueue().removeInput(inputPlayback);
+        gameView.getInputQueue().removeInput(inputPlayback);
         return null;
     }
 
     @Override
     public Void visit(GameEventGameStarted event) {
-        gui.getInputQueue().setInput(inputPlayback);
+        gameView.getInputQueue().setInput(inputPlayback);
         return null;
     }
 

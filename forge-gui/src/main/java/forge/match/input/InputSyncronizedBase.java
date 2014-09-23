@@ -30,7 +30,7 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
     }
 
     public void showAndWait() {
-        getGui().getInputQueue().setInput(this);
+        getGameView().getInputQueue().setInput(this);
         awaitLatchRelease();
     }
     
@@ -46,7 +46,7 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
         });
 
         // thread irrelevant
-        getGui().getInputQueue().removeInput(InputSyncronizedBase.this);
+        getGameView().getInputQueue().removeInput(InputSyncronizedBase.this);
         cdlDone.countDown();
     }
 

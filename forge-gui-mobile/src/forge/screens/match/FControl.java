@@ -48,6 +48,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.match.input.InputPlaybackControl;
 import forge.match.input.InputQueue;
+import forge.match.input.InputSynchronized;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.player.PlayerControllerHuman;
@@ -175,15 +176,16 @@ public class FControl {
             if (p.getController() instanceof PlayerControllerHuman) {
                 final PlayerControllerHuman controller = (PlayerControllerHuman) p.getController();
                 LocalGameView gameView = controller.getGameView();
-                game.subscribeToEvents(new FControlGameEventHandler(GuiBase.getInterface(), gameView));
+                game.subscribeToEvents(new FControlGameEventHandler(gameView));
                 gameViews.add(gameView);
                 humanCount++;
             }
         }
 
         if (humanCount == 0) { //watch game but do not participate
-            LocalGameView gameView = new WatchLocalGame(game, GuiBase.getInterface());
-            game.subscribeToEvents(new FControlGameEventHandler(GuiBase.getInterface(), gameView));
+            LocalGameView gameView = new WatchLocalGame(GuiBase.getInterface(), game);
+            gameView.setLocalPlayer(sortedPlayers.get(0));
+            game.subscribeToEvents(new FControlGameEventHandler(gameView));
             gameViews.add(gameView);
         }
         else if (humanCount == sortedPlayers.size()) {
@@ -281,13 +283,6 @@ public class FControl {
         }
     }
 
-    public static void showMessage(final String s0) {
-        view.getActivePrompt().setMessage(s0);
-    }
-    public static void showMessage(final PlayerView playerView, final String s0) {
-        view.getPrompt(playerView).setMessage(s0);
-    }
-
     public static VPlayerPanel getPlayerPanel(final PlayerView playerView) {
         return view.getPlayerPanels().get(playerView);
     }
@@ -314,19 +309,20 @@ public class FControl {
     public static Player getCurrentPlayer() {
         if (game == null) { return null; }
 
-        // try current priority
-        Player currentPriority = game.getPhaseHandler().getPriorityPlayer();
-        if (null != currentPriority && currentPriority.getLobbyPlayer() == getGuiPlayer()) {
-            return currentPriority;
-        }
-
-        // otherwise find just any player, belonging to this lobbyplayer
-        for (Player p : game.getPlayers()) {
-            if (p.getLobbyPlayer() == getGuiPlayer()) {
-                return p;
+        LobbyPlayer lobbyPlayer = getGuiPlayer();
+        if (gameViews.size() > 1) {
+            //account for if second human player is currently being prompted
+            InputSynchronized activeInput = InputQueue.getActiveInput();
+            if (activeInput != null) {
+                lobbyPlayer = activeInput.getOwner().getLobbyPlayer();
             }
         }
 
+        for (Player p : game.getPlayers()) {
+            if (p.getLobbyPlayer() == lobbyPlayer) {
+                return p;
+            }
+        }
         return null;
     }
 

@@ -36,7 +36,6 @@ import forge.game.zone.ZoneType;
 import forge.interfaces.IButton;
 import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
-import forge.match.input.InputQueue;
 import forge.properties.ForgeConstants;
 import forge.screens.match.FControl;
 import forge.screens.match.views.VPlayerPanel;
@@ -238,13 +237,18 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public IButton getBtnOK() {
-        return FControl.getView().getActivePrompt().getBtnOk();
+    public IButton getBtnOK(PlayerView player) {
+        return FControl.getView().getPrompt(player).getBtnOk();
     }
 
     @Override
-    public IButton getBtnCancel() {
-        return FControl.getView().getActivePrompt().getBtnCancel();
+    public IButton getBtnCancel(PlayerView player) {
+        return FControl.getView().getPrompt(player).getBtnCancel();
+    }
+
+    @Override
+    public void showPromptMessage(final PlayerView player, String message) {
+        FControl.getView().getPrompt(player).setMessage(message);
     }
 
     @Override
@@ -359,18 +363,8 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public void showPromptMessage(String message) {
-        FControl.showMessage(message);
-    }
-
-    @Override
     public boolean stopAtPhase(final PlayerView playerTurn, final PhaseType phase) {
         return FControl.stopAtPhase(playerTurn, phase);
-    }
-
-    @Override
-    public InputQueue getInputQueue() {
-        return FControl.getInputQueue();
     }
 
     @Override

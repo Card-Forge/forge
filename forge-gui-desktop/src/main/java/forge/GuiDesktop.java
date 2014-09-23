@@ -52,7 +52,6 @@ import forge.gui.framework.SLayoutIO;
 import forge.interfaces.IButton;
 import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
-import forge.match.input.InputQueue;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorQuestCardShop;
@@ -235,12 +234,12 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public IButton getBtnOK() {
+    public IButton getBtnOK(PlayerView playerView) {
         return VMatchUI.SINGLETON_INSTANCE.getBtnOK();
     }
 
     @Override
-    public IButton getBtnCancel() {
+    public IButton getBtnCancel(PlayerView playerView) {
         return VMatchUI.SINGLETON_INSTANCE.getBtnCancel();
     }
 
@@ -426,18 +425,13 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public void showPromptMessage(final String message) {
+    public void showPromptMessage(final PlayerView playerView, final String message) {
         CMatchUI.SINGLETON_INSTANCE.showMessage(message);
     }
 
     @Override
     public boolean stopAtPhase(final PlayerView playerTurn, PhaseType phase) {
         return CMatchUI.SINGLETON_INSTANCE.stopAtPhase(playerTurn, phase);
-    }
-
-    @Override
-    public InputQueue getInputQueue() {
-        return FControl.instance.getInputQueue();
     }
 
     public Object showManaPool(final PlayerView player) {

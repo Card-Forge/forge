@@ -100,10 +100,10 @@ public class InputAttack extends InputSyncronizedBase {
 
     private void updatePrompt() {
         if (canCallBackAttackers()) {
-            ButtonUtil.update(getGui(), "OK", "Call Back", true, true, true);
+            ButtonUtil.update(this, "OK", "Call Back", true, true, true);
         }
         else {
-            ButtonUtil.update(getGui(), "OK", "Alpha Strike", true, true, true);
+            ButtonUtil.update(this, "OK", "Alpha Strike", true, true, true);
         }
     }
 
