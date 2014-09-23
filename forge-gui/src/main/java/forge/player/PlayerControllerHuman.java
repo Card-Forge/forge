@@ -819,7 +819,7 @@ public class PlayerControllerHuman extends PlayerController {
         InputNone inputNone = new InputNone(gameView);
         getGui().showPromptMessage(inputNone.getOwner(), "");
         ButtonUtil.update(inputNone, false, false, false);
-        InputBase.awaitNextInput(inputNone);
+        InputBase.awaitNextInput(gameView);
     }
 
     @Override

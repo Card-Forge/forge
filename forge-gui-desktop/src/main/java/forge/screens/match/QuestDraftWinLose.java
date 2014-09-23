@@ -165,7 +165,7 @@ public class QuestDraftWinLose extends ControlWinLose {
         FModel.getQuestPreferences().save();
         Singletons.getControl().writeMatchPreferences();
 
-        Singletons.getControl().endCurrentGame();
+        Singletons.getControl().endCurrentGame(false, false);
         Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
 
         SOverlayUtils.hideOverlay();

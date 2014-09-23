@@ -58,23 +58,21 @@ public class ControlWinLose {
         SOverlayUtils.hideOverlay();
         saveOptions();
 
-        Singletons.getControl().endCurrentGame();
-        Singletons.getControl().startGameInSameMatch();
+        Singletons.getControl().endCurrentGame(true, false);
     }
 
     /** Action performed when "restart" button is pressed in default win/lose UI. */
     public void actionOnRestart() {
         SOverlayUtils.hideOverlay();
         saveOptions();
-        Singletons.getControl().endCurrentGame();
-        Singletons.getControl().startGameAndClearMatch();
+        Singletons.getControl().endCurrentGame(false, true);
     }
 
     /** Action performed when "quit" button is pressed in default win/lose UI. */
     public void actionOnQuit() {
         // Reset other stuff
         saveOptions();
-        Singletons.getControl().endCurrentGame();
+        Singletons.getControl().endCurrentGame(false, false);
         Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
         SOverlayUtils.hideOverlay();
     }

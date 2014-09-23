@@ -488,7 +488,7 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public void endCurrentGame() {
-        FControl.instance.endCurrentGame();
+        FControl.instance.endCurrentGame(false, false);
     }
 
     @Override
@@ -562,7 +562,7 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public void continueMatch(Match match) {
-        Singletons.getControl().endCurrentGame();
+        Singletons.getControl().endCurrentGame(false, false);
         if (match == null) {
             Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
         }

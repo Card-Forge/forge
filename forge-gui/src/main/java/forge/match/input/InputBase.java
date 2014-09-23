@@ -67,7 +67,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
         finished = true;
 
         if (allowAwaitNextInput()) {
-            awaitNextInput(this);
+            awaitNextInput(getGameView());
         }
     }
 
@@ -78,18 +78,17 @@ public abstract class InputBase implements java.io.Serializable, Input {
     private static final Timer awaitNextInputTimer = new Timer();
     private static TimerTask awaitNextInputTask;
 
-    public static void awaitNextInput(final Input input) {
+    public static void awaitNextInput(final LocalGameView gameView) {
         //delay updating prompt to await next input briefly so buttons don't flicker disabled then enabled
         awaitNextInputTask = new TimerTask() {
             @Override
             public void run() {
-                FThreads.invokeInEdtLater(input.getGui(), new Runnable() {
+                FThreads.invokeInEdtLater(gameView.getGui(), new Runnable() {
                     @Override
                     public void run() {
                         synchronized (awaitNextInputTimer) {
                             if (awaitNextInputTask != null) {
-                                input.getGui().showPromptMessage(input.getOwner(), "Waiting for opponent...");
-                                ButtonUtil.update(input, false, false, false);
+                                updatePromptForAwait(gameView);
                                 awaitNextInputTask = null;
                             }
                         }
@@ -98,6 +97,22 @@ public abstract class InputBase implements java.io.Serializable, Input {
             }
         };
         awaitNextInputTimer.schedule(awaitNextInputTask, 250);
+    }
+
+    public static void waitForHumanOpponent(final LocalGameView gameView) {
+        cancelAwaitNextInput();
+        FThreads.invokeInEdtNowOrLater(gameView.getGui(), new Runnable() {
+            @Override
+            public void run() {
+                updatePromptForAwait(gameView);
+            }
+        });
+    }
+
+    private static void updatePromptForAwait(final LocalGameView gameView) {
+        InputNone inputNone = new InputNone(gameView);
+        inputNone.getGui().showPromptMessage(inputNone.getOwner(), "Waiting for opponent...");
+        ButtonUtil.update(inputNone, false, false, false);
     }
 
     public static void cancelAwaitNextInput() {

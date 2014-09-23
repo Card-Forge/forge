@@ -450,16 +450,6 @@ public enum FControl implements KeyEventDispatcher {
         return null;
     }
 
-    public final void startGameInSameMatch() {
-        startGameWithUi(game.getMatch());
-    }
-    public final void startGameAndClearMatch() {
-        if (game != null) {
-            game.getMatch().clearGamesPlayed();
-        }
-        startGameInSameMatch();
-    }
-
     public final void startGameWithUi(final Match match) {
         if (game != null) {
             setCurrentScreen(FScreen.MATCH_SCREEN);
@@ -561,12 +551,21 @@ public enum FControl implements KeyEventDispatcher {
         SOverlayUtils.hideOverlay();
     }
 
-    public final void endCurrentGame() {
+    public final void endCurrentGame(boolean nextGame, boolean restart) {
         if (game == null) { return; }
+
+        Match match = game.getMatch();
+        game = null;
 
         Singletons.getView().getNavigationBar().closeTab(FScreen.MATCH_SCREEN);
 
-        game = null;
+        if (nextGame) {
+            startGameWithUi(match);
+        }
+        else if (restart) {
+            match.clearGamesPlayed();
+            startGameWithUi(match);
+        }
     }
 
     private FControlGamePlayback playbackControl;
