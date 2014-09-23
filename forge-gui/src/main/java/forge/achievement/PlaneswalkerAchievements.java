@@ -25,22 +25,22 @@ public class PlaneswalkerAchievements extends AchievementCollection {
 
     @Override
     protected void addAchievements() {
-        add("Ajani Goldmane", "Ajani's Better Half", "Serra? Is that you?");
+        add("Ajani Goldmane", "Ajani's Avatar", "Serra? Is that you?");
         add("Ajani Steadfast", "Ajani's Forcefield", "Shields up!");
         add("Ajani Vengeant", "Ajani's Tantrum", "Look Ma! No lands!");
         add("Ajani, Caller of the Pride", "Ajani's Menagerie", "You're a crazy cat lady now!");
         add("Ajani, Mentor of Heroes", "Ajani's Vitality", "Do sta let!");
         add("Ashiok, Nightmare Weaver", "Ashiok's Identity", "I subscribe to the theory of blank slate!");
-        add("Chandra Ablaze", "Chandra's Flashback", "I feel like I've seen those before...");
-        add("Chandra Nalaar", "Chandra's Hot Spring", "Careful! It's scalding!");
-        add("Chandra, Pyromaster", "Chandra's Menial Job", "Please file in triplicate!");
+        add("Chandra Ablaze", "Chandra's Bargain", "I feel like I've seen those before...");
+        add("Chandra Nalaar", "Chandra's Rage", "Feel the power of my wrath!");
+        add("Chandra, Pyromaster", "Chandra's Vengeance", "Please file in triplicate!");
         add("Chandra, the Firebrand", "Chandra's Hex", "When burning five is just not enough.");
         add("Dack Fayden", "Dack's Discount", "Do you have any evidence it was me?");
         add("Domri Rade", "Domri's Surprise", "That's GOTTA get me a date!");
         add("Elspeth Tirel", "Elspeth's Solitude", "Tokens are my only friends...");
-        add("Elspeth, Knight-Errant", "Elspeth's Immortality", "Bant will prevail!");
+        add("Elspeth, Knight-Errant", "Elspeth's Endurance", "Bant will prevail!");
         add("Elspeth, Sun's Champion", "Elspeth's Crusade", "With Heliod on my side, I'm invincible!");
-        add("Garruk, the Veil-Cursed", "Garruk's Grave Romp", "The dead shall help the living!");
+        add("Garruk, the Veil-Cursed", "Garruk's Graveyard", "The dead shall help the living!");
         add("Garruk Wildspeaker", "Garruk's Overrun", "I speak seven languages, including Wild!");
         add("Garruk, Apex Predator", "Garruk's Prey", "Funny, it's usually a good thing to have an emblem...");
         add("Garruk, Caller of Beasts", "Garruk's Wild Pair", "Can you beat two for the price of one?");
@@ -53,10 +53,10 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Jace, the Living Guildpact", "Jace's Timetwister", "Symmetry? What symmetry?");
         add("Jace, the Mind Sculptor", "Jace's Lobotomy", "What do you mean, \"overpowered\"?");
         add("Karn Liberated", "Karn's Reset", "Let's do this again!");
-        add("Kiora, the Crashing Wave", "Kiora's Best Friend", "Say hello to Cthulhu for me!");
+        add("Kiora, the Crashing Wave", "Kiora's Kraken", "Say hello to Cthulhu for me!");
         add("Koth of the Hammer", "Koth's Eruption", "You won't like the mountains when they are angry!");
-        add("Liliana Vess", "Liliana's Ritual", "Stop being lazy and go to work!");
-        add("Liliana of the Dark Realms", "Liliana's Swamp", "What do you mean, \"out of character\"?");
+        add("Liliana Vess", "Liliana's Bidding", "Stop being lazy and go to work!");
+        add("Liliana of the Dark Realms", "Liliana's Ritual", "What do you mean, \"out of character\"?");
         add("Liliana of the Veil", "Liliana's Choice", "Which one of your children do you love best?");
         add("Nicol Bolas, Planeswalker", "Bolas's Ultimatum", "Whatever you do, don't call him \"Nicol\"!");
         add("Nissa Revane", "Nissa's Summoning", "The whole village is here!");
@@ -72,7 +72,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Teferi, Temporal Archmage", "Teferi's Time Slip", "Let's speed this up a bit!");
         add("Tezzeret the Seeker", "Tezzeret's Robots", "You can't stop the progress!");
         add("Tezzeret, Agent of Bolas", "Tezzeret's Drain", "Technological superiority for the win!");
-        add("Tibalt, the Fiend-Blooded", "Tibalt's Insurrection", "My side is the winning side!");
+        add("Tibalt, the Fiend-Blooded", "Tibalt's Treason", "My side is the winning side!");
         add("Venser, the Sojourner", "Venser's Oblivion", "Let's just clean this up a bit...");
         add("Vraska, the Unseen", "Vraska's Crew", "Say hello to my little friends!");
         add("Xenagos, the Reveler", "Xenagos's Reveal", "Mwahahaha! Now I'm a god!");
