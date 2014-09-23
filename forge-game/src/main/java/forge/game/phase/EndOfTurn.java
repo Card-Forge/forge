@@ -52,7 +52,7 @@ public class EndOfTurn extends Phase {
     public final void executeAt() {
         // reset mustAttackEntity for me
         game.getPhaseHandler().getPlayerTurn().setMustAttackEntity(null);
-
+        // TODO: convert this to a delayed trigger
         Player activePlayer = game.getPhaseHandler().getPlayerTurn();
         if (activePlayer.hasKeyword("At the beginning of this turn's end step, you lose the game.")) {
             final Card source = new Card(game.nextCardId());
