@@ -123,8 +123,7 @@ M Inferno Titan
 R Magus of the Arena
 R Mass Mutiny
 R Molten Disaster
-U Rough
-U Tumble
+U Rough // Tumble
 U Slice and Dice
 U Spitebellows
 R Stalking Vengeance
