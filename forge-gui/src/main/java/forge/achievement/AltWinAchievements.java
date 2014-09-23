@@ -39,6 +39,7 @@ public class AltWinAchievements extends AchievementCollection {
         add("Maze's End", "The Labyrinth", "What? No bossfight?");
         add("Mortal Combat", "The Boneyard", "So peaceful...");
         add("Near-Death Experience", "The Edge", "Phew... I thought I was going to die!");
+        add("Test of Endurance", "The Test", "So... did I pass?");
     }
 
     private void add(String cardName0, String displayName0, String flavorText0) {
