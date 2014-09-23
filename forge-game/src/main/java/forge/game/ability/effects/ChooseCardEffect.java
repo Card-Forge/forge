@@ -60,6 +60,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
 
         final String numericAmount = sa.getParamOrDefault("Amount", "1");
         final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) : CardFactoryUtil.xCount(host, host.getSVar(numericAmount));
+        final int minAmount = sa.hasParam("MinAmount") ? Integer.parseInt(sa.getParam("MinAmount")) : validAmount;
 
         if (validAmount <= 0) {
             return;
@@ -91,7 +92,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     chosen = Aggregates.random(choices, validAmount);
                 } else {
                     String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a card ";
-                    chosen = p.getController().chooseCardsForEffect(choices, sa, title, validAmount, validAmount, !sa.hasParam("Mandatory"));
+                    chosen = p.getController().chooseCardsForEffect(choices, sa, title, minAmount, validAmount, !sa.hasParam("Mandatory"));
                 }
             }
         }
