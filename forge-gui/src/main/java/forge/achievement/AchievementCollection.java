@@ -36,10 +36,10 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
     }
 
     public static void updateAll(PlayerControllerHuman controller) {
-        /*if (controller.hasCheated()) { //don't update achievements if player cheated during game
+        if (controller.hasCheated()) { //don't update achievements if player cheated during game
             PlaneswalkerAchievements.activatedUltimates.clear(); //ensure these are cleared
             return;
-        }*/
+        }
 
         final IGuiBase gui = controller.getGui();
         final Game game = controller.getGame();
