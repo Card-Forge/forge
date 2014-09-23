@@ -30,6 +30,7 @@ public class AltWinAchievements extends AchievementCollection {
         add("Chance Encounter", "The Accident", "This victory was brought to you by a series of fortunate events.");
         add("Coalition Victory", "The Teamwork", "Let's all be friends!");
         add("Darksteel Reactor", "The Machine", "What are you going to do with all this power? Whatever you want!");
+        add("Door to Nothingness", "The Door", "And behind door #2 is...");
         add("Epic Struggle", "The Army", "Let's just trample them into the ground already!");
         add("Felidar Sovereign", "The Cat's Life", "Just wait for his other eight lives!");
         add("Helix Pinnacle", "The Tower", "The view from the top is great!");
@@ -39,6 +40,7 @@ public class AltWinAchievements extends AchievementCollection {
         add("Maze's End", "The Labyrinth", "What? No bossfight?");
         add("Mortal Combat", "The Boneyard", "So peaceful...");
         add("Near-Death Experience", "The Edge", "Phew... I thought I was going to die!");
+        add("Phage the Untouchable", "The Untouchable", "None are immune to her deadly touch!");
         add("Test of Endurance", "The Test", "So... did I pass?");
     }
 
@@ -51,12 +53,20 @@ public class AltWinAchievements extends AchievementCollection {
         //only call update achievement for alternate win condition (if any)
         if (player.getOutcome().hasWon()) {
             String altWinCondition = player.getOutcome().altWinSourceName;
-            if (!StringUtils.isEmpty(altWinCondition)) {
-                Achievement achievement = achievements.get(altWinCondition);
-                if (achievement != null) {
-                    achievement.update(gui, player);
-                    save();
+            if (StringUtils.isEmpty(altWinCondition)) {
+                Player opponent = player.getSingleOpponent();
+                if (opponent == null) { return; }
+
+                altWinCondition = opponent.getOutcome().loseConditionSpell;
+                if (StringUtils.isEmpty(altWinCondition)) {
+                    return;
                 }
+            }
+
+            Achievement achievement = achievements.get(altWinCondition);
+            if (achievement != null) {
+                achievement.update(gui, player);
+                save();
             }
         }
     }
