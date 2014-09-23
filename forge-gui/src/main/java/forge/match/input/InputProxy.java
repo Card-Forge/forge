@@ -22,12 +22,10 @@ import java.util.Observer;
 import java.util.concurrent.atomic.AtomicReference;
 
 import forge.FThreads;
-import forge.game.Game;
 import forge.interfaces.IGuiBase;
-import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
-import forge.util.gui.SOptionPane;
 import forge.view.CardView;
+import forge.view.LocalGameView;
 import forge.view.PlayerView;
 import forge.view.SpellAbilityView;
 
@@ -43,48 +41,21 @@ public class InputProxy implements Observer {
 
     /** The input. */
     private AtomicReference<Input> input = new AtomicReference<Input>();
-    private final Game game;
+    private final LocalGameView gameView;
 
 //    private static final boolean DEBUG_INPUT = true; // false;
 
-    private final PlayerControllerHuman controller;
-    public InputProxy(final PlayerControllerHuman controller, final Game game) {
-        this.controller = controller;
-        this.game = game;
+    public InputProxy(final LocalGameView gameView0) {
+        this.gameView = gameView0;
     }
 
     private IGuiBase getGui() {
-        return this.controller.getGui();
-    }
-
-    public boolean passPriority() {
-        return passPriority(false);
-    }
-    public boolean passPriorityUntilEndOfTurn() {
-        return passPriority(true);
-    }
-    private boolean passPriority(final boolean passUntilEndOfTurn) {
-        final Input inp = getInput();
-        if (inp instanceof InputPassPriority) {
-            if (passUntilEndOfTurn) {
-                controller.autoPassUntilEndOfTurn();
-            }
-            inp.selectButtonOK();
-            return true;
-        }
-
-        FThreads.invokeInEdtNowOrLater(getGui(), new Runnable() {
-            @Override
-            public void run() {
-                SOptionPane.showMessageDialog(getGui(), "Cannot pass priority at this time.");
-            }
-        });
-        return false;
+        return this.gameView.getGui();
     }
 
     @Override
     public final void update(final Observable observable, final Object obj) {
-        final Input nextInput = getGui().getInputQueue().getActualInput(game);
+        final Input nextInput = gameView.getInputQueue().getActualInput(gameView);
 /*        if(DEBUG_INPUT) 
             System.out.printf("%s ... \t%s on %s, \tstack = %s%n", 
                     FThreads.debugGetStackTraceItem(6, true), nextInput == null ? "null" : nextInput.getClass().getSimpleName(), 
@@ -137,7 +108,7 @@ public class InputProxy implements Observer {
     public final void selectPlayer(final PlayerView player, final ITriggerEvent triggerEvent) {
         final Input inp = getInput();
         if (inp != null) {
-            inp.selectPlayer(controller.getPlayer(player), triggerEvent);
+            inp.selectPlayer(gameView.getPlayer(player), triggerEvent);
         }
     }
 
@@ -153,7 +124,7 @@ public class InputProxy implements Observer {
     public final boolean selectCard(final CardView cardView, final ITriggerEvent triggerEvent) {
         final Input inp = getInput();
         if (inp != null) {
-            return inp.selectCard(controller.getCard(cardView), triggerEvent);
+            return inp.selectCard(gameView.getCard(cardView), triggerEvent);
         }
         return false;
     }
@@ -161,7 +132,7 @@ public class InputProxy implements Observer {
     public final void selectAbility(final SpellAbilityView ab) {
     	final Input inp = getInput();
         if (inp != null) {
-            inp.selectAbility(controller.getSpellAbility(ab));
+            inp.selectAbility(gameView.getSpellAbility(ab));
         }
     }
 
@@ -180,7 +151,7 @@ public class InputProxy implements Observer {
     }
 
     /** @return {@link forge.gui.InputProxy.InputBase} */
-    private Input getInput() {
+    public Input getInput() {
         return this.input.get();
     }
 }

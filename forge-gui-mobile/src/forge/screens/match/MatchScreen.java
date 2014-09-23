@@ -14,6 +14,7 @@ import com.google.common.collect.Maps;
 import forge.Forge;
 import forge.menu.FMenuBar;
 import forge.model.FModel;
+import forge.player.LobbyPlayerHuman;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
@@ -34,7 +35,6 @@ import forge.animation.AbilityEffect;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinTexture;
 import forge.assets.FSkinColor.Colors;
-import forge.game.zone.ZoneType;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FScrollPane;
@@ -42,52 +42,72 @@ import forge.util.Callback;
 import forge.view.CardView;
 import forge.view.CombatView;
 import forge.view.GameEntityView;
-import forge.view.IGameView;
 import forge.view.PlayerView;
 
 public class MatchScreen extends FScreen {
     public static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
 
-    private final IGameView gameView;
     private final Map<PlayerView, VPlayerPanel> playerPanels = Maps.newHashMap();
-    private final VPrompt prompt;
     private final VLog log;
     private final VStack stack;
     private final VDevMenu devMenu;
     private final FieldScroller scroller;
+    private final VPrompt bottomPlayerPrompt, topPlayerPrompt;
     private VPlayerPanel bottomPlayerPanel, topPlayerPanel;
     private AbilityEffect activeEffect;
 
-    public MatchScreen(final IGameView game, PlayerView localPlayer, List<VPlayerPanel> playerPanels0) {
+    public MatchScreen(List<VPlayerPanel> playerPanels0) {
         super(new FMenuBar());
-        this.gameView = game;
 
         scroller = add(new FieldScroller());
+
+        int humanCount = 0;
         for (VPlayerPanel playerPanel : playerPanels0) {
             playerPanels.put(playerPanel.getPlayer(), scroller.add(playerPanel));
+            if (playerPanel.getPlayer().getLobbyPlayer() instanceof LobbyPlayerHuman) {
+                humanCount++;
+            }
         }
         bottomPlayerPanel = playerPanels0.get(0);
         topPlayerPanel = playerPanels0.get(1);
         topPlayerPanel.setFlipped(true);
-        bottomPlayerPanel.setSelectedZone(ZoneType.Hand);
 
-        prompt = add(new VPrompt("", "",
+        bottomPlayerPrompt = add(new VPrompt("", "",
                 new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
-                        game.selectButtonOk();
+                        FControl.getGameView().selectButtonOk();
                     }
                 },
                 new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
-                        game.selectButtonCancel();
+                        FControl.getGameView().selectButtonCancel();
                     }
                 }));
 
-        log = new VLog(game);
+        if (humanCount > 1) { //show top prompt if multiple human players
+            topPlayerPrompt = add(new VPrompt("", "",
+                    new FEventHandler() {
+                        @Override
+                        public void handleEvent(FEvent e) {
+                            FControl.getGameView().selectButtonOk();
+                        }
+                    },
+                    new FEventHandler() {
+                        @Override
+                        public void handleEvent(FEvent e) {
+                            FControl.getGameView().selectButtonCancel();
+                        }
+                    }));
+        }
+        else {
+            topPlayerPrompt = null;
+        }
+
+        log = new VLog();
         log.setDropDownContainer(this);
-        stack = new VStack(game, localPlayer);
+        stack = new VStack();
         stack.setDropDownContainer(this);
         devMenu = new VDevMenu();
         devMenu.setDropDownContainer(this);
@@ -96,7 +116,7 @@ public class MatchScreen extends FScreen {
         players.setDropDownContainer(this);
 
         FMenuBar menuBar = (FMenuBar)getHeader();
-        menuBar.addTab("Game", new VGameMenu(game));
+        menuBar.addTab("Game", new VGameMenu());
         menuBar.addTab("Players (" + playerPanels.size() + ")", players);
         menuBar.addTab("Log", log);
         menuBar.addTab("Dev", devMenu);
@@ -109,16 +129,26 @@ public class MatchScreen extends FScreen {
         devMenu.getMenuTab().setVisible(ForgePreferences.DEV_MODE);
     }
 
+    public VPrompt getActivePrompt() {
+        if (topPlayerPrompt != null && topPlayerPanel.getPlayer().equals(FControl.getCurrentPlayer())) {
+            return topPlayerPrompt;
+        }
+        return bottomPlayerPrompt;
+    }
+
+    public VPrompt getPrompt(PlayerView playerView) {
+        if (topPlayerPrompt == null || bottomPlayerPanel.getPlayer() == playerView) {
+            return bottomPlayerPrompt;
+        }
+        return topPlayerPrompt;
+    }
+
     public VLog getLog() {
         return log;
     }
 
     public VStack getStack() {
         return stack;
-    }
-
-    public VPrompt getPrompt() {
-        return prompt;
     }
 
     public VPlayerPanel getTopPlayerPanel() {
@@ -142,8 +172,12 @@ public class MatchScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
+        if (topPlayerPrompt != null) {
+            bottomPlayerPrompt.setBounds(0, startY, width, VPrompt.HEIGHT);
+            startY += VPrompt.HEIGHT;
+        }
         scroller.setBounds(0, startY, width, height - VPrompt.HEIGHT - startY);
-        prompt.setBounds(0, height - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
+        bottomPlayerPrompt.setBounds(0, height - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
     }
 
     @Override
@@ -162,7 +196,7 @@ public class MatchScreen extends FScreen {
         }
 
         //draw arrows for combat
-        final CombatView combat = gameView.getCombat();
+        final CombatView combat = FControl.getGameView().getCombat();
         if (combat != null) {
             for (final CardView attacker : combat.getAttackers()) {
                 //connect each attacker with planeswalker it's attacking if applicable
@@ -190,12 +224,12 @@ public class MatchScreen extends FScreen {
         switch (keyCode) {
         case Keys.ENTER:
         case Keys.SPACE:
-            if (prompt.getBtnOk().trigger()) { //trigger OK on Enter or Space
+            if (getActivePrompt().getBtnOk().trigger()) { //trigger OK on Enter or Space
                 return true;
             }
-            return prompt.getBtnCancel().trigger(); //trigger Cancel if can't trigger OK
+            return getActivePrompt().getBtnCancel().trigger(); //trigger Cancel if can't trigger OK
         case Keys.ESCAPE:
-            return prompt.getBtnCancel().trigger(); //otherwise trigger Cancel
+            return getActivePrompt().getBtnCancel().trigger(); //otherwise trigger Cancel
         case Keys.BACK:
             return true; //suppress Back button so it's not bumped when trying to press OK or Cancel buttons
         case Keys.A: //alpha strike on Ctrl+A
@@ -218,7 +252,7 @@ public class MatchScreen extends FScreen {
             break;
         case Keys.Z: //undo on Ctrl+Z
             if (KeyInputAdapter.isCtrlKeyDown()) {
-                gameView.tryUndoLastAction();
+                FControl.getGameView().tryUndoLastAction();
                 return true;
             }
             break;

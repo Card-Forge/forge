@@ -18,7 +18,6 @@
 package forge.screens.match.views;
 
 import java.awt.Dimension;
-import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -26,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
+import forge.Singletons;
 import forge.gui.CardPicturePanel;
 import forge.gui.WrapLayout;
 import forge.gui.framework.DragCell;
@@ -55,7 +55,6 @@ public enum VAntes implements IVDoc<CAntes> {
     private final FScrollPane scroller = new FScrollPane(pnl, false);
     private final SortedSet<AntePanel> allAntes = new TreeSet<AntePanel>();
 
-    private Iterable<PlayerView> players;
     //========== Constructor
     private VAntes() {
         pnl.setLayout(new WrapLayout());
@@ -72,9 +71,8 @@ public enum VAntes implements IVDoc<CAntes> {
         parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
         parentCell.getBody().add(scroller, "w 100%!, h 100%!");
     }
-    
-    public final void setModel(final List<PlayerView> players) {
-        this.players = players;
+
+    public final void setModel() {
         update();
     }
 
@@ -122,7 +120,7 @@ public enum VAntes implements IVDoc<CAntes> {
         allAntes.clear();
         pnl.removeAll();
 
-        for (final PlayerView p : players) {
+        for (final PlayerView p : Singletons.getControl().getGameView().getPlayers()) {
             for (final CardView c : p.getAnteCards()) {
                 final AntePanel pnlTemp = new AntePanel(c);
                 allAntes.add(pnlTemp);

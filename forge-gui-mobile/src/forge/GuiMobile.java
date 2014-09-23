@@ -239,12 +239,12 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public IButton getBtnOK() {
-        return FControl.getView().getPrompt().getBtnOk();
+        return FControl.getView().getActivePrompt().getBtnOk();
     }
 
     @Override
     public IButton getBtnCancel() {
-        return FControl.getView().getPrompt().getBtnCancel();
+        return FControl.getView().getActivePrompt().getBtnCancel();
     }
 
     @Override

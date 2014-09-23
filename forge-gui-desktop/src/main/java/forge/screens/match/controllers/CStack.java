@@ -5,8 +5,6 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
 import forge.screens.match.views.VStack;
-import forge.view.IGameView;
-import forge.view.PlayerView;
 
 /** 
  * Controls the combat panel in the match UI.
@@ -17,9 +15,6 @@ import forge.view.PlayerView;
 public enum CStack implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
-
-    private IGameView model;
-    private PlayerView localPlayer;
 
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
@@ -39,12 +34,6 @@ public enum CStack implements ICDoc {
     @Override
     public void update() {
         SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
-        VStack.SINGLETON_INSTANCE.updateStack(model, localPlayer);
+        VStack.SINGLETON_INSTANCE.updateStack();
     }
-
-    public void setModel(final IGameView game0, final PlayerView localPlayer) { 
-        model = game0;
-        this.localPlayer = localPlayer;
-    }
-
 }

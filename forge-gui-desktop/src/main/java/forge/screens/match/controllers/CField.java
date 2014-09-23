@@ -23,7 +23,6 @@ import java.awt.event.MouseListener;
 
 import com.google.common.base.Function;
 
-import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.UiCommand;
 import forge.game.zone.ZoneType;
@@ -41,8 +40,6 @@ import forge.view.PlayerView;
 public class CField implements ICDoc {
     // The one who owns cards on this side of table
     private final PlayerView player;
-    // Tho one who looks at screen and 'performs actions'
-    private final LobbyPlayer viewer;
     private final VField view;
     private boolean initializedAlready = false;
 
@@ -60,9 +57,8 @@ public class CField implements ICDoc {
      * @param v0 &emsp; {@link forge.screens.match.views.VField}
      * @param playerViewer 
      */
-    public CField(final PlayerView player0, final VField v0, LobbyPlayer playerViewer) {
+    public CField(final PlayerView player0, final VField v0) {
         this.player = player0;
-        this.viewer = playerViewer;
         this.view = v0;
 
         final ZoneAction handAction      = new ZoneAction(player, ZoneType.Hand,      MatchConstants.HUMANHAND);
@@ -74,7 +70,7 @@ public class CField implements ICDoc {
             @Override
             protected void doAction(final CardView c) {
                 // activate cards only via your own flashback button
-                if (player.getLobbyPlayer() != CField.this.viewer) {
+                if (player.getLobbyPlayer() != Singletons.getControl().getGuiPlayer()) {
                     return;
                 }
 
@@ -88,7 +84,7 @@ public class CField implements ICDoc {
 
         Function<Byte, Void> manaAction = new Function<Byte, Void>() {
             public Void apply(Byte colorCode) {
-                if (CField.this.player.getLobbyPlayer() == CField.this.viewer) {
+                if (CField.this.player.getLobbyPlayer() == Singletons.getControl().getGuiPlayer()) {
                     Singletons.getControl().getGameView().useMana(colorCode.byteValue());
                 }
                 return null;

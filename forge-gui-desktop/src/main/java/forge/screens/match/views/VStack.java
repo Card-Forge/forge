@@ -36,8 +36,10 @@ import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.ImageCache;
+import forge.Singletons;
 import forge.card.CardDetailUtil;
 import forge.card.CardDetailUtil.DetailColors;
+import forge.game.player.Player;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -51,7 +53,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedTextArea;
 import forge.view.CardView;
 import forge.view.IGameView;
-import forge.view.PlayerView;
+import forge.view.LocalGameView;
 import forge.view.StackItemView;
 import forge.view.arcane.CardPanel;
 
@@ -132,9 +134,10 @@ public enum VStack implements IVDoc<CStack> {
     //========== Observer update methods
 
     /**
-     * @param model
+     * @param models
      * @param viewer */
-    public void updateStack(final IGameView model, final PlayerView localPlayer) {
+    public void updateStack() {
+        final LocalGameView model = Singletons.getControl().getGameView();
         final List<StackItemView> items = model.getStack();
         tab.setText("Stack : " + items.size());
 
@@ -145,7 +148,7 @@ public enum VStack implements IVDoc<CStack> {
 
         boolean isFirst = true;
         for (final StackItemView item : items) {
-            final StackInstanceTextArea tar = new StackInstanceTextArea(model, item, localPlayer);
+            final StackInstanceTextArea tar = new StackInstanceTextArea(model, item);
 
             scroller.add(tar, "pushx, growx" + (isFirst ? "" : ", gaptop 2px"));
 
@@ -175,9 +178,10 @@ public enum VStack implements IVDoc<CStack> {
 
         private final CardView sourceCard;
 
-        public StackInstanceTextArea(final IGameView game, final StackItemView item, final PlayerView localPlayer) {
+        public StackInstanceTextArea(final IGameView game, final StackItemView item) {
             sourceCard = item.getSource();
 
+            final Player localPlayer = Singletons.getControl().getCurrentPlayer();
             final String txt = (item.isOptionalTrigger() && item.getActivatingPlayer().equals(localPlayer)
                     ? "(OPTIONAL) " : "") + item.getText();
 
@@ -302,7 +306,7 @@ public enum VStack implements IVDoc<CStack> {
             add(jmiAlwaysNo);
         }
 
-        public void setStackInstance(final IGameView game, final StackItemView item, final PlayerView localPlayer) {
+        public void setStackInstance(final IGameView game, final StackItemView item, final Player localPlayer) {
             this.game = game;
             this.item = item;
             triggerID = Integer.valueOf(item.getSourceTrigger());

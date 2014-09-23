@@ -54,7 +54,6 @@ import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
 import forge.match.input.InputQueue;
 import forge.model.FModel;
-import forge.player.GamePlayerUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorQuestCardShop;
 import forge.screens.match.CMatchUI;
@@ -286,7 +285,7 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public void updatePlayerControl() {
-        CMatchUI.SINGLETON_INSTANCE.initHandViews(GamePlayerUtil.getGuiPlayer());
+        CMatchUI.SINGLETON_INSTANCE.initHandViews();
         SLayoutIO.loadLayout(null);
         VMatchUI.SINGLETON_INSTANCE.populate();
         for (VHand h : VMatchUI.SINGLETON_INSTANCE.getHands()) {

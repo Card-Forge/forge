@@ -27,6 +27,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -75,11 +77,6 @@ import forge.quest.io.QuestDataIO;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.VMatchUI;
-import forge.screens.match.controllers.CDock;
-import forge.screens.match.controllers.CLog;
-import forge.screens.match.controllers.CPlayers;
-import forge.screens.match.controllers.CStack;
-import forge.screens.match.views.VAntes;
 import forge.screens.match.views.VField;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
@@ -88,7 +85,6 @@ import forge.toolbox.FSkin;
 import forge.toolbox.special.PhaseIndicator;
 import forge.view.FFrame;
 import forge.view.FView;
-import forge.view.IGameView;
 import forge.view.LocalGameView;
 import forge.view.PlayerView;
 import forge.view.WatchLocalGame;
@@ -104,13 +100,14 @@ import forge.view.WatchLocalGame;
 public enum FControl implements KeyEventDispatcher {
     instance;
 
+    private Game game;
+    private List<LocalGameView> gameViews = new ArrayList<LocalGameView>();
     private ForgeMenu forgeMenu;
     private List<Shortcut> shortcuts;
     private JLayeredPane display;
     private FScreen currentScreen;
     private boolean altKeyLastDown;
     private CloseAction closeAction;
-    private PlayerView localPlayer;
 
     public static enum CloseAction {
         NONE,
@@ -170,12 +167,12 @@ public enum FControl implements KeyEventDispatcher {
     }
 
     public CloseAction getCloseAction() {
-        return this.closeAction;
+        return closeAction;
     }
 
     public void setCloseAction(CloseAction closeAction0) {
-        if (this.closeAction == closeAction0) { return; }
-        this.closeAction = closeAction0;
+        if (closeAction == closeAction0) { return; }
+        closeAction = closeAction0;
         Singletons.getView().getNavigationBar().updateBtnCloseTooltip();
 
         final ForgePreferences prefs = FModel.getPreferences();
@@ -186,10 +183,10 @@ public enum FControl implements KeyEventDispatcher {
     public boolean canExitForge(boolean forRestart) {
         String action = (forRestart ? "Restart" : "Exit");
         String userPrompt = "Are you sure you wish to " + (forRestart ? "restart" : "exit") + " Forge?";
-        if (this.gameView != null) {
+        if (game != null) {
             userPrompt = "A game is currently active. " + userPrompt;
         }
-        if (!FOptionPane.showConfirmDialog(userPrompt, action + " Forge", action, "Cancel", this.gameView == null)) { //default Yes if no game active
+        if (!FOptionPane.showConfirmDialog(userPrompt, action + " Forge", action, "Cancel", game == null)) { //default Yes if no game active
             return false;
         }
         if (!CDeckEditorUI.SINGLETON_INSTANCE.canSwitchAway(true)) {
@@ -212,14 +209,14 @@ public enum FControl implements KeyEventDispatcher {
         // Preloads skin components (using progress bar).
         FSkin.loadFull(true);
 
-        this.soundSystem = new SoundSystem(GuiBase.getInterface());
+        soundSystem = new SoundSystem(GuiBase.getInterface());
 
-        this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
-        this.display = FView.SINGLETON_INSTANCE.getLpnDocument();
+        shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
+        display = FView.SINGLETON_INSTANCE.getLpnDocument();
 
         final ForgePreferences prefs = FModel.getPreferences();
 
-        this.closeAction = CloseAction.valueOf(prefs.getPref(FPref.UI_CLOSE_ACTION));
+        closeAction = CloseAction.valueOf(prefs.getPref(FPref.UI_CLOSE_ACTION));
 
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("About to load current quest.");
         // Preload quest data if present
@@ -267,14 +264,14 @@ public enum FControl implements KeyEventDispatcher {
     }
 
     public ForgeMenu getForgeMenu() {
-        if (this.forgeMenu == null) {
-            this.forgeMenu = new ForgeMenu();
+        if (forgeMenu == null) {
+            forgeMenu = new ForgeMenu();
         }
-        return this.forgeMenu;
+        return forgeMenu;
     }
 
     public FScreen getCurrentScreen() {
-        return this.currentScreen;
+        return currentScreen;
     }
 
     /**
@@ -286,14 +283,14 @@ public enum FControl implements KeyEventDispatcher {
     public boolean setCurrentScreen(FScreen screen, boolean previousScreenClosed) {
         //TODO: Uncomment the line below if this function stops being used to refresh
         //the current screen in some places (such as Continue and Restart in the match screen)
-        //if (this.currentScreen == screen) { return; }
+        //if (currentScreen == screen) { return; }
 
         //give previous screen a chance to perform special switch handling and/or cancel switching away from screen
-        if (this.currentScreen != screen && !Singletons.getView().getNavigationBar().canSwitch(screen)) {
+        if (currentScreen != screen && !Singletons.getView().getNavigationBar().canSwitch(screen)) {
             return false;
         }
 
-        if (this.currentScreen == FScreen.MATCH_SCREEN) { //hide targeting overlay and reset image if was on match screen
+        if (currentScreen == FScreen.MATCH_SCREEN) { //hide targeting overlay and reset image if was on match screen
             SOverlayUtils.hideTargetingOverlay();
             if (isMatchBackgroundImageVisible()) {
                 FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(new ImageIcon());
@@ -304,7 +301,7 @@ public enum FControl implements KeyEventDispatcher {
         SOverlayUtils.hideOverlay();
         ImageCache.clear(); //reduce memory usage by clearing image cache when switching screens
 
-        this.currentScreen = screen;
+        currentScreen = screen;
 
         //load layout for new current screen
         try {
@@ -335,14 +332,14 @@ public enum FControl implements KeyEventDispatcher {
     }
 
     public boolean ensureScreenActive(FScreen screen) {
-        if (this.currentScreen == screen) { return true; }
+        if (currentScreen == screen) { return true; }
 
         return setCurrentScreen(screen);
     }
 
     /** @return List<Shortcut> A list of attached keyboard shortcut descriptions and properties. */
     public List<Shortcut> getShortcuts() {
-        return this.shortcuts;
+        return shortcuts;
     }
 
     /** Remove all children from a specified layer. */
@@ -374,17 +371,6 @@ public enum FControl implements KeyEventDispatcher {
         return soundSystem;
     }
 
-    private Game game;
-    private IGameView gameView;
-
-    public IGameView getGameView() {
-        return this.gameView;
-    }
-
-    public PlayerView getLocalPlayer() {
-        return localPlayer;
-    }
-
     public final void stopGame() {
         List<Player> pp = new ArrayList<Player>();
         for (Player p : game.getPlayers()) {
@@ -410,7 +396,7 @@ public enum FControl implements KeyEventDispatcher {
         }
         else {
             game.isGameOver(); // this is synchronized method - it's used to make Game-0 thread see changes made here
-            inputQueue.onGameOver(false); //release any waiting input, effectively passing priority
+            getInputQueue().onGameOver(false); //release any waiting input, effectively passing priority
         }
 
         if (playbackControl != null) {
@@ -418,74 +404,148 @@ public enum FControl implements KeyEventDispatcher {
         }
     }
 
-    private InputQueue inputQueue;
+    public Player getCurrentPlayer() {
+        if (game == null) { return null; }
+
+        // try current priority
+        Player currentPriority = game.getPhaseHandler().getPriorityPlayer();
+        if (null != currentPriority && currentPriority.getLobbyPlayer() == getGuiPlayer()) {
+            return currentPriority;
+        }
+
+        // otherwise find just any player, belonging to this lobbyplayer
+        for (Player p : game.getPlayers()) {
+            if (p.getLobbyPlayer() == getGuiPlayer()) {
+                return p;
+            }
+        }
+
+        return null;
+    }
+
+    public LocalGameView getGameView() {
+        return getGameView(getCurrentPlayer());
+    }
+    public LocalGameView getGameView(Player player) {
+        switch (gameViews.size()) {
+        case 1:
+            return gameViews.get(0);
+        case 0:
+            return null;
+        default:
+            if (player != null && player.getController() instanceof PlayerControllerHuman) {
+                return ((PlayerControllerHuman)player.getController()).getGameView();
+            }
+            return gameViews.get(0);
+        }
+    }
+
     public InputQueue getInputQueue() {
-        return inputQueue;
+        LocalGameView gameView = getGameView();
+        if (gameView != null) {
+            return gameView.getInputQueue();
+        }
+        return null;
     }
 
     public final void startGameInSameMatch() {
-        this.startGameWithUi(this.game.getMatch());
+        startGameWithUi(game.getMatch());
     }
     public final void startGameAndClearMatch() {
-        if (this.game != null) {
-            this.game.getMatch().clearGamesPlayed();
+        if (game != null) {
+            game.getMatch().clearGamesPlayed();
         }
         startGameInSameMatch();
     }
 
     public final void startGameWithUi(final Match match) {
-        if (this.gameView != null) {
-            this.setCurrentScreen(FScreen.MATCH_SCREEN);
+        if (game != null) {
+            setCurrentScreen(FScreen.MATCH_SCREEN);
             SOverlayUtils.hideOverlay();
             FOptionPane.showMessageDialog("Cannot start a new game while another game is already in progress.");
             return; //TODO: See if it's possible to run multiple games at once without crashing
         }
+
         setPlayerName(match.getPlayers());
-        this.game = match.createGame();
-        inputQueue = new InputQueue(game);
 
-        boolean anyPlayerIsAi = false;
-        for (final Player p : game.getPlayers()) {
-            if (p.getLobbyPlayer() instanceof LobbyPlayerAi) {
-                anyPlayerIsAi = true;
-                break;
+        getSoundSystem().setBackgroundMusic(MusicPlaylist.MATCH);
+
+        game = match.createGame();
+
+        if (game.getRules().getGameType() == GameType.Quest) {
+            QuestController qc = FModel.getQuest();
+            // Reset new list when the Match round starts, not when each game starts
+            if (game.getMatch().getPlayedGames().isEmpty()) {
+                qc.getCards().resetNewList();
             }
+            game.subscribeToEvents(qc); // this one listens to player's mulligans ATM
         }
 
-        final LobbyPlayer me = getGuiPlayer();
-        for (final Player p : game.getPlayers()) {
-            if (p.getLobbyPlayer().equals(me)) {
+        game.subscribeToEvents(getSoundSystem());
+
+        final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
+
+        // Instantiate all required field slots (user at 0)
+        final List<Player> sortedPlayers = new ArrayList<Player>(game.getRegisteredPlayers());
+        Collections.sort(sortedPlayers, new Comparator<Player>() {
+            @Override
+            public int compare(Player p1, Player p2) {
+                int v1 = p1.getController() instanceof PlayerControllerHuman ? 0 : 1;
+                int v2 = p2.getController() instanceof PlayerControllerHuman ? 0 : 1;
+                return Integer.compare(v1, v2);
+            }
+        });
+
+        gameViews.clear();
+
+        int i = 0;
+        int avatarIndex = 0;
+        int humanCount = 0;
+        for (Player p : sortedPlayers) {
+            if (i < indices.length) {
+                avatarIndex = Integer.parseInt(indices[i]);
+                i++;
+            }
+            p.getLobbyPlayer().setAvatarIndex(avatarIndex);
+
+            if (p.getController() instanceof PlayerControllerHuman) {
                 final PlayerControllerHuman controller = (PlayerControllerHuman) p.getController();
-                this.gameView = controller.getGameView();
-                this.fcVisitor = new FControlGameEventHandler(GuiBase.getInterface(), controller.getGameView());
-                break;
+                LocalGameView gameView = controller.getGameView();
+                game.subscribeToEvents(new FControlGameEventHandler(GuiBase.getInterface(), gameView));
+                gameViews.add(gameView);
+                humanCount++;
             }
         }
 
-        if (!anyPlayerIsAi) {
-            // If there are no AI's, allow all players to see all cards (hotseat
-            // mode).
-            for (final Player p : game.getPlayers()) {
-                if (p.getController() instanceof PlayerControllerHuman) {
-                    final PlayerControllerHuman controller = (PlayerControllerHuman) p.getController();
-                    controller.setMayLookAtAllCards(true);
-                }
+        if (humanCount == 0) { //watch game but do not participate
+            LocalGameView gameView = new WatchLocalGame(game, GuiBase.getInterface());
+            game.subscribeToEvents(new FControlGameEventHandler(GuiBase.getInterface(), gameView));
+            gameViews.add(gameView);
+        }
+        else if (humanCount == sortedPlayers.size()) {
+            //if there are no AI's, allow all players to see all cards (hotseat mode).
+            for (Player p : sortedPlayers) {
+                ((PlayerControllerHuman) p.getController()).setMayLookAtAllCards(true);
             }
         }
 
-        boolean openAllHands = !anyPlayerIsAi;
-        if (this.gameView == null) {
-            // Watch game but do not participate
-            openAllHands = true;
-            final LocalGameView gameView = new WatchLocalGame(game, inputQueue);
-            this.gameView = gameView;
-            this.fcVisitor = new FControlGameEventHandler(GuiBase.getInterface(), gameView);
-            this.playbackControl = new FControlGamePlayback(GuiBase.getInterface(), gameView);
-            this.playbackControl.setGame(game);
-            this.game.subscribeToEvents(playbackControl);
+        List<PlayerView> sortedPlayerViews = new ArrayList<PlayerView>();
+        for (Player p : sortedPlayers) {
+            sortedPlayerViews.add(getGameView().getPlayerView(p));
         }
+        CMatchUI.SINGLETON_INSTANCE.initMatch(sortedPlayerViews, humanCount != 1);
 
-        attachToGame(this.gameView, openAllHands);
+        actuateMatchPreferences();
+        
+        setCurrentScreen(FScreen.MATCH_SCREEN);
+        SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
+
+        // per player observers were set in CMatchUI.SINGLETON_INSTANCE.initMatch
+        //Set Field shown to current player.
+        if (humanCount > 0) {
+            final VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(sortedPlayerViews.get(0));
+            SDisplayUtil.showTab(nextField);
+        }
 
         // It's important to run match in a different thread to allow GUI inputs to be invoked from inside game. 
         // Game is set on pause while gui player takes decisions
@@ -499,64 +559,14 @@ public enum FControl implements KeyEventDispatcher {
     }
 
     public final void endCurrentGame() {
-        if (this.gameView == null) { return; }
+        if (game == null) { return; }
 
         Singletons.getView().getNavigationBar().closeTab(FScreen.MATCH_SCREEN);
 
-        this.gameView = null;
+        game = null;
     }
 
-    private FControlGameEventHandler fcVisitor;
     private FControlGamePlayback playbackControl;
-    private void attachToGame(final IGameView game0, final boolean openAllHands) {
-        if (game0.getGameType().equals(GameType.Quest)) {
-            QuestController qc = FModel.getQuest();
-            // Reset new list when the Match round starts, not when each game starts
-            if (game0.isFirstGameInMatch()) {
-                qc.getCards().resetNewList();
-            }
-            game0.subscribeToEvents(qc); // this one listens to player's mulligans ATM
-        }
-
-        game0.subscribeToEvents(Singletons.getControl().getSoundSystem());
-
-        //switch back to match screen music
-        Singletons.getControl().getSoundSystem().setBackgroundMusic(MusicPlaylist.MATCH);
-
-        final LobbyPlayer humanLobbyPlayer = getGuiPlayer();
-        // The UI controls should use these game data as models
-        final List<PlayerView> players = game0.getPlayers();
-        CMatchUI.SINGLETON_INSTANCE.initMatch(game0, players, humanLobbyPlayer, openAllHands);
-
-        localPlayer = null;
-        for (final PlayerView p : players) {
-            if (p.getLobbyPlayer() == humanLobbyPlayer) {
-                localPlayer = p;
-                break;
-            }
-        }
-
-        CDock.SINGLETON_INSTANCE.setModel(game0);
-        CStack.SINGLETON_INSTANCE.setModel(game0, localPlayer);
-        CPlayers.SINGLETON_INSTANCE.setModel(game0);
-        CLog.SINGLETON_INSTANCE.setModel(game0);
-
-        actuateMatchPreferences();
-        VAntes.SINGLETON_INSTANCE.setModel(players);
-        
-        setCurrentScreen(FScreen.MATCH_SCREEN);
-        SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
-
-        // Listen to DuelOutcome event to show ViewWinLose
-        game0.subscribeToEvents(fcVisitor);
-
-        // per player observers were set in CMatchUI.SINGLETON_INSTANCE.initMatch
-        //Set Field shown to current player.
-        if (localPlayer != null) {
-            final VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(localPlayer);
-            SDisplayUtil.showTab(nextField);
-        }
-    }
 
     /* (non-Javadoc)
      * @see java.awt.KeyEventDispatcher#dispatchKeyEvent(java.awt.event.KeyEvent)

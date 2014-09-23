@@ -14,9 +14,9 @@ import forge.game.GameLogEntryType;
 import forge.menu.FDropDown;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
+import forge.screens.match.FControl;
 import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
-import forge.view.IGameView;
 
 public class VLog extends FDropDown {
     private static final float PADDING = Utils.scale(5);
@@ -25,10 +25,7 @@ public class VLog extends FDropDown {
     private static final FSkinColor ROW_COLOR = ALT_ROW_COLOR.darker();
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
 
-    private final IGameView gameView;
-
-    public VLog(IGameView log0) {
-        gameView = log0;
+    public VLog() {
     }
 
     @Override
@@ -48,7 +45,7 @@ public class VLog extends FDropDown {
         clear();
 
         GameLogEntryType logVerbosityFilter = GameLogEntryType.valueOf(FModel.getPreferences().getPref(FPref.DEV_LOG_ENTRY_TYPE));
-        List<GameLogEntry> logEntrys = gameView.getLogEntries(logVerbosityFilter);
+        List<GameLogEntry> logEntrys = FControl.getGameView().getLogEntries(logVerbosityFilter);
 
         LogEntryDisplay logEntryDisplay;
         float width = maxWidth - getMenuTab().getScreenPosition().x; //stretch from tab to edge of screen

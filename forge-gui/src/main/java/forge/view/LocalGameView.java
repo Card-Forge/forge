@@ -27,16 +27,37 @@ import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
+import forge.interfaces.IGuiBase;
+import forge.match.input.InputProxy;
+import forge.match.input.InputQueue;
 
 public abstract class LocalGameView implements IGameView {
+    protected final Game game;
+    protected final IGuiBase gui;
+    protected final InputQueue inputQueue;
+    protected final InputProxy inputProxy;
 
-    private final Game game;
-    public LocalGameView(final Game game) {
-        this.game = game;
+    public LocalGameView(Game game0, IGuiBase gui0) {
+        game = game0;
+        gui = gui0;
+        inputProxy = new InputProxy(this);
+        inputQueue = new InputQueue(game, inputProxy);
     }
 
-    protected final Game getGame() {
-        return this.game;
+    public final Game getGame() {
+        return game;
+    }
+
+    public final IGuiBase getGui() {
+        return gui;
+    }
+
+    public final InputQueue getInputQueue() {
+        return inputQueue;
+    }
+
+    public InputProxy getInputProxy() {
+        return inputProxy;
     }
 
     /** Cache of players. */
@@ -60,17 +81,17 @@ public abstract class LocalGameView implements IGameView {
      */
     @Override
     public GameType getGameType() {
-        return this.game.getMatch().getRules().getGameType();
+        return game.getMatch().getRules().getGameType();
     }
 
     @Override
     public int getTurnNumber() {
-        return this.game.getPhaseHandler().getTurn();
+        return game.getPhaseHandler().getTurn();
     }
 
     @Override
     public boolean isCommandZoneNeeded() {
-        return this.game.getMatch().getRules().getGameType().isCommandZoneNeeded();
+        return game.getMatch().getRules().getGameType().isCommandZoneNeeded();
     }
 
     @Override
@@ -93,37 +114,37 @@ public abstract class LocalGameView implements IGameView {
      */
     @Override
     public boolean isFirstGameInMatch() {
-        return this.game.getMatch().getPlayedGames().isEmpty();
+        return game.getMatch().getPlayedGames().isEmpty();
     }
 
     @Override
     public boolean isMatchOver() {
-        return this.game.getMatch().isMatchOver();
+        return game.getMatch().isMatchOver();
     }
 
     @Override
     public int getNumGamesInMatch() {
-        return this.game.getMatch().getRules().getGamesPerMatch();
+        return game.getMatch().getRules().getGamesPerMatch();
     }
 
     @Override
     public int getNumPlayedGamesInMatch() {
-        return this.game.getMatch().getPlayedGames().size();
+        return game.getMatch().getPlayedGames().size();
     }
 
     @Override
     public Iterable<GameOutcome> getOutcomesOfMatch() {
-        return Iterables.unmodifiableIterable(this.game.getMatch().getPlayedGames());
+        return Iterables.unmodifiableIterable(game.getMatch().getPlayedGames());
     }
 
     @Override
     public boolean isMatchWonBy(final LobbyPlayer p) {
-        return this.game.getMatch().isWonBy(p);
+        return game.getMatch().isWonBy(p);
     }
 
     @Override
     public int getGamesWonBy(final LobbyPlayer p) {
-        return this.game.getMatch().getGamesWonBy(p);
+        return game.getMatch().getGamesWonBy(p);
     }
 
     @Override
@@ -133,7 +154,7 @@ public abstract class LocalGameView implements IGameView {
 
     @Override
     public Deck getDeck(final LobbyPlayer player) {
-        for (final RegisteredPlayer rp : this.game.getMatch().getPlayers()) {
+        for (final RegisteredPlayer rp : game.getMatch().getPlayers()) {
             if (rp.getPlayer().equals(player)) {
                 return rp.getDeck();
             }

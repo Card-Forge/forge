@@ -115,7 +115,7 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (Singletons.getControl().getCurrentScreen() != FScreen.MATCH_SCREEN) { return; }
-                CDock.SINGLETON_INSTANCE.alphaStrike();
+                Singletons.getControl().getGameView().alphaStrike();
             }
         };
 

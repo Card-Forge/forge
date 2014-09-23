@@ -44,9 +44,10 @@ public class VPlayerPanel extends FContainer {
     private final List<InfoTab> tabs = new ArrayList<InfoTab>();
     private InfoTab selectedTab;
 
-    public VPlayerPanel(PlayerView player0) {
+    public VPlayerPanel(PlayerView player0, boolean showHand) {
         player = player0;
         phaseIndicator = add(new VPhaseIndicator());
+
         field = add(new VField(player));
         avatar = add(new VAvatar(player));
         lblLife = add(new LifeLabel());
@@ -65,6 +66,10 @@ public class VPlayerPanel extends FContainer {
         addZoneDisplay(ZoneType.Exile, FSkinImage.EXILE);
 
         commandZone = add(new CommandZoneDisplay(player));
+
+        if (showHand) {
+            setSelectedZone(ZoneType.Hand);
+        }
     }
 
     public PlayerView getPlayer() {

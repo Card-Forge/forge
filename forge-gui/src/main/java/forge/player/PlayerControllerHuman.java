@@ -31,6 +31,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 
+import forge.FThreads;
 import forge.LobbyPlayer;
 import forge.achievement.AchievementCollection;
 import forge.card.CardCharacteristicName;
@@ -118,9 +119,6 @@ import forge.view.StackItemView;
  * Handles phase skips for now.
  */
 public class PlayerControllerHuman extends PlayerController {
-
-    private IGuiBase gui;
-    private final InputProxy inputProxy;
     private final GameView gameView;
     /**
      * Cards this player may look at right now, for example when searching a
@@ -131,9 +129,7 @@ public class PlayerControllerHuman extends PlayerController {
 
     public PlayerControllerHuman(final Game game0, final Player p, final LobbyPlayer lp, final IGuiBase gui) {
         super(game0, p, lp);
-        this.gui = gui;
-        this.inputProxy = new InputProxy(this, game0);
-        this.gameView = new GameView(game0);
+        this.gameView = new GameView(game0, gui);
 
         // aggressively cache a view for each player (also caches cards)
         for (final Player player : game.getRegisteredPlayers()) {
@@ -142,11 +138,11 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     public IGuiBase getGui() {
-        return gui;
+        return gameView.getGui();
     }
 
     public InputProxy getInputProxy() {
-        return inputProxy;
+        return gameView.getInputProxy();
     }
 
     public LocalGameView getGameView() {
@@ -1334,8 +1330,8 @@ public class PlayerControllerHuman extends PlayerController {
      * What follows are the View methods.
      */
     private class GameView extends LocalGameView {
-        public GameView(Game game) {
-            super(game);
+        public GameView(Game game0, IGuiBase gui0) {
+            super(game0, gui0);
         }
 
         @Override
@@ -1395,12 +1391,29 @@ public class PlayerControllerHuman extends PlayerController {
 
         @Override
         public boolean passPriority() {
-            return getInputProxy().passPriority();
+            return passPriority(false);
         }
-
         @Override
         public boolean passPriorityUntilEndOfTurn() {
-            return getInputProxy().passPriorityUntilEndOfTurn();
+            return passPriority(true);
+        }
+        private boolean passPriority(final boolean passUntilEndOfTurn) {
+            final Input inp = gameView.getInputProxy().getInput();
+            if (inp instanceof InputPassPriority) {
+                if (passUntilEndOfTurn) {
+                    autoPassUntilEndOfTurn();
+                }
+                inp.selectButtonOK();
+                return true;
+            }
+
+            FThreads.invokeInEdtNowOrLater(getGui(), new Runnable() {
+                @Override
+                public void run() {
+                    SOptionPane.showMessageDialog(getGui(), "Cannot pass priority at this time.");
+                }
+            });
+            return false;
         }
 
         @Override
@@ -1472,11 +1485,11 @@ public class PlayerControllerHuman extends PlayerController {
 
         @Override
         public boolean getDisableAutoYields() {
-            return this.getGame().getDisableAutoYields();
+            return game.getDisableAutoYields();
         }
         @Override
         public void setDisableAutoYields(final boolean b) {
-            this.getGame().setDisableAutoYields(b);
+            game.setDisableAutoYields(b);
         }
 
         @Override

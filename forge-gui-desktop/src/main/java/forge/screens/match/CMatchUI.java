@@ -27,7 +27,6 @@ import javax.swing.JMenu;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.eventbus.EventBus;
@@ -53,6 +52,7 @@ import forge.gui.framework.SDisplayUtil;
 import forge.item.InventoryItem;
 import forge.menus.IMenuProvider;
 import forge.model.FModel;
+import forge.player.LobbyPlayerHuman;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestDraftUtils;
 import forge.screens.match.controllers.CAntes;
@@ -73,7 +73,6 @@ import forge.toolbox.special.PhaseLabel;
 import forge.view.CardView;
 import forge.view.CombatView;
 import forge.view.GameEntityView;
-import forge.view.IGameView;
 import forge.view.PlayerView;
 import forge.view.ViewUtil;
 import forge.view.arcane.CardPanel;
@@ -90,7 +89,6 @@ import forge.view.arcane.PlayArea;
 public enum CMatchUI implements ICDoc, IMenuProvider {
     SINGLETON_INSTANCE;
 
-    private IGameView game;
     private List<PlayerView> sortedPlayers;
     private VMatchUI view;
     private boolean allHands;
@@ -123,16 +121,13 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
     /**
      * Instantiates at a match.
      */
-    public void initMatch(final IGameView game, final List<PlayerView> players, final LobbyPlayer localPlayer, final boolean allHands) {
-        this.game = game;
-        this.allHands = allHands;
+    public void initMatch(final List<PlayerView> sortedPlayers0, final boolean allHands0) {
+        sortedPlayers = sortedPlayers0;
+        allHands = allHands0;
         view = VMatchUI.SINGLETON_INSTANCE;
         // TODO fix for use with multiplayer
 
         final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
-
-        // Instantiate all required field slots (user at 0)
-        sortedPlayers = shiftPlayersPlaceLocalFirst(players, localPlayer);
 
         final List<VField> fields = new ArrayList<VField>();
         final List<VCommand> commands = new ArrayList<VCommand>();
@@ -141,7 +136,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         for (final PlayerView p : sortedPlayers) {
             // A field must be initialized after it's instantiated, to update player info.
             // No player, no init.
-            VField f = new VField(EDocID.Fields[i], p, localPlayer);
+            VField f = new VField(EDocID.Fields[i], p);
             VCommand c = new VCommand(EDocID.Commands[i], p);
             fields.add(f);
             commands.add(c);
@@ -157,20 +152,17 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         view.setCommandViews(commands);
         view.setFieldViews(fields);
 
-        VPlayers.SINGLETON_INSTANCE.init(players);
+        VPlayers.SINGLETON_INSTANCE.init(sortedPlayers0);
 
-        initHandViews(localPlayer, allHands);
+        initHandViews();
     }
 
-    public void initHandViews(final LobbyPlayer localPlayer) {
-        this.initHandViews(localPlayer, this.allHands);
-    }
-    public void initHandViews(final LobbyPlayer localPlayer, final boolean allHands) {
+    public void initHandViews() {
         final List<VHand> hands = new ArrayList<VHand>();
 
         int i = 0;
         for (final PlayerView p : sortedPlayers) {
-            if (allHands || p.getLobbyPlayer().equals(localPlayer) || ViewUtil.mayViewAny(p.getHandCards())) {
+            if (allHands || p.getLobbyPlayer() instanceof LobbyPlayerHuman || ViewUtil.mayViewAny(p.getHandCards())) {
                 VHand newHand = new VHand(EDocID.Hands[i], p);
                 newHand.getLayoutControl().initialize();
                 hands.add(newHand);
@@ -179,22 +171,6 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         }
 
         view.setHandViews(hands);
-    }
-
-    private List<PlayerView> shiftPlayersPlaceLocalFirst(final List<PlayerView> players, final LobbyPlayer localPlayer) {
-        // get an arranged list so that the first local player is at index 0
-        final List<PlayerView> sortedPlayers = Lists.newArrayList(players);
-        int ixFirstHuman = -1;
-        for (int i = 0; i < players.size(); i++) {
-            if (sortedPlayers.get(i).getLobbyPlayer() == localPlayer) {
-                ixFirstHuman = i;
-                break;
-            }
-        }
-        if (ixFirstHuman > 0) {
-            sortedPlayers.add(0, sortedPlayers.remove(ixFirstHuman));
-        }
-        return sortedPlayers;
     }
 
     /**
@@ -299,7 +275,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
     }
 
     public void showCombat(final CombatView combat) {
-        if (combat != null && combat.getNumAttackers() > 0 && game.peekStack() == null) {
+        if (combat != null && combat.getNumAttackers() > 0 && Singletons.getControl().getGameView().peekStack() == null) {
             if (selectedDocBeforeCombat == null) {
                 IVDoc<? extends ICDoc> combatDoc = EDocID.REPORT_COMBAT.getDoc();
                 if (combatDoc.getParentCell() != null) {

@@ -28,6 +28,7 @@ import javax.swing.ScrollPaneConstants;
 import com.google.common.collect.Lists;
 
 import net.miginfocom.swing.MigLayout;
+import forge.Singletons;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -39,7 +40,6 @@ import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.view.CardView;
-import forge.view.IGameView;
 import forge.view.PlayerView;
 
 /** 
@@ -142,10 +142,10 @@ public enum VPlayers implements IVDoc<CPlayers> {
     //========== Observer update methods
 
     /** @param game {@link forge.game.player.Player} */
-    public void update(final IGameView game) {
+    public void update() {
         // No need to update if this panel isn't showing
         if (parentCell == null || !this.equals(parentCell.getSelected())) { return; }
-        boolean isCommander = game.isCommander();
+        boolean isCommander = Singletons.getControl().getGameView().isCommander();
 
         for(final Entry<PlayerView, JLabel[]> rr : infoLBLs.entrySet()) {
             PlayerView p0 = rr.getKey();

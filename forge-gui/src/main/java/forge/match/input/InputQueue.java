@@ -22,8 +22,7 @@ import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
 import forge.game.Game;
-import forge.game.player.Player;
-import forge.player.PlayerControllerHuman;
+import forge.view.IGameView;
 
 /**
  * <p>
@@ -37,22 +36,18 @@ public class InputQueue extends Observable {
     private final BlockingDeque<InputSynchronized> inputStack = new LinkedBlockingDeque<InputSynchronized>();
     private final InputLockUI inputLock;
 
-    public InputQueue(final Game game) {
+    public InputQueue(final Game game, final InputProxy inputProxy) {
         inputLock = new InputLockUI(game, this);
-        for (final Player p : game.getPlayers()) {
-            if (p.getController() instanceof PlayerControllerHuman) {
-                this.addObserver(((PlayerControllerHuman) p.getController()).getInputProxy());
-            }
-        }
+        addObserver(inputProxy);
     }
 
     public final void updateObservers() {
-        this.setChanged();
-        this.notifyObservers();
+        setChanged();
+        notifyObservers();
     }
 
     public final Input getInput() {
-        return inputStack.isEmpty() ? null : this.inputStack.peek();
+        return inputStack.isEmpty() ? null : inputStack.peek();
     }
 
     public final void removeInput(Input inp) {
@@ -71,9 +66,9 @@ public class InputQueue extends Observable {
      * 
      * @return a {@link forge.gui.input.InputBase} object.
      */
-    public final Input getActualInput(final Game game) {
+    public final Input getActualInput(final IGameView gameView) {
         Input topMost = inputStack.peek(); // incoming input to Control
-        if (topMost != null && !game.isGameOver()) {
+        if (topMost != null && !gameView.isGameOver()) {
             return topMost;
         }
         return inputLock;
@@ -85,10 +80,10 @@ public class InputQueue extends Observable {
     }
 
     public void setInput(final InputSynchronized input) {
-        this.inputStack.push(input);
+        inputStack.push(input);
         inputLock.setGui(input.getGui());
         syncPoint();
-        this.updateObservers();
+        updateObservers();
     }
 
     public void syncPoint() {

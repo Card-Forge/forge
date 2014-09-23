@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -23,7 +25,6 @@ import forge.Forge;
 import forge.Graphics;
 import forge.GuiBase;
 import forge.LobbyPlayer;
-import forge.ai.LobbyPlayerAi;
 import forge.assets.FImage;
 import forge.assets.FSkin;
 import forge.assets.FTextureRegionImage;
@@ -71,7 +72,6 @@ import forge.view.CardView;
 import forge.view.CardView.CardStateView;
 import forge.view.CombatView;
 import forge.view.GameEntityView;
-import forge.view.IGameView;
 import forge.view.LocalGameView;
 import forge.view.PlayerView;
 import forge.view.WatchLocalGame;
@@ -80,13 +80,10 @@ public class FControl {
     private FControl() { } //don't allow creating instance
 
     private static Game game;
-    private static IGameView gameView;
+    private static List<LocalGameView> gameViews = new ArrayList<LocalGameView>();
     private static MatchScreen view;
-    private static InputQueue inputQueue;
     private static final EventBus uiEvents;
-    private static boolean gameHasHumanPlayer;
     private static final MatchUiEventVisitor visitor = new MatchUiEventVisitor();
-    private static FControlGameEventHandler fcVisitor;
     private static FControlGamePlayback playbackControl;
     private static final Map<LobbyPlayer, FImage> avatarImages = new HashMap<LobbyPlayer, FImage>();
 
@@ -147,30 +144,63 @@ public class FControl {
             game.subscribeToEvents(qc); // this one listens to player's mulligans ATM
         }
 
-        inputQueue = new InputQueue(game);
-
         game.subscribeToEvents(Forge.getSoundSystem());
 
-        Player humanLobbyPlayer = game.getRegisteredPlayers().get(0);
-        // The UI controls should use these game data as models
-        initMatch(game.getRegisteredPlayers(), humanLobbyPlayer);
+        final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
 
-        actuateMatchPreferences();
+        // Instantiate all required field slots (user at 0)
+        final List<Player> sortedPlayers = new ArrayList<Player>(game.getRegisteredPlayers());
+        Collections.sort(sortedPlayers, new Comparator<Player>() {
+            @Override
+            public int compare(Player p1, Player p2) {
+                int v1 = p1.getController() instanceof PlayerControllerHuman ? 0 : 1;
+                int v2 = p2.getController() instanceof PlayerControllerHuman ? 0 : 1;
+                return Integer.compare(v1, v2);
+            }
+        });
 
-        // Listen to DuelOutcome event to show ViewWinLose
-        game.subscribeToEvents(fcVisitor);
+        gameViews.clear();
+        List<VPlayerPanel> playerPanels = new ArrayList<VPlayerPanel>();
 
-        // Add playback controls to match if needed
-        gameHasHumanPlayer = false;
-        boolean gameHasAiPlayer = false;
-        for (Player p :  game.getPlayers()) {
-            if (p.getController().getLobbyPlayer() == getGuiPlayer()) {
-                gameHasHumanPlayer = true;
-            } else if (p.getLobbyPlayer() instanceof LobbyPlayerAi) {
-                gameHasAiPlayer = true;
+        int i = 0;
+        int avatarIndex = 0;
+        int humanCount = 0;
+        for (Player p : sortedPlayers) {
+            if (i < indices.length) {
+                avatarIndex = Integer.parseInt(indices[i]);
+                i++;
+            }
+            p.getLobbyPlayer().setAvatarIndex(avatarIndex);
+
+            if (p.getController() instanceof PlayerControllerHuman) {
+                final PlayerControllerHuman controller = (PlayerControllerHuman) p.getController();
+                LocalGameView gameView = controller.getGameView();
+                game.subscribeToEvents(new FControlGameEventHandler(GuiBase.getInterface(), gameView));
+                gameViews.add(gameView);
+                humanCount++;
             }
         }
-        if (!gameHasHumanPlayer) {
+
+        if (humanCount == 0) { //watch game but do not participate
+            LocalGameView gameView = new WatchLocalGame(game, GuiBase.getInterface());
+            game.subscribeToEvents(new FControlGameEventHandler(GuiBase.getInterface(), gameView));
+            gameViews.add(gameView);
+        }
+        else if (humanCount == sortedPlayers.size()) {
+            //if there are no AI's, allow all players to see all cards (hotseat mode).
+            for (Player p : sortedPlayers) {
+                ((PlayerControllerHuman) p.getController()).setMayLookAtAllCards(true);
+            }
+        }
+
+        for (Player p : sortedPlayers) {
+            playerPanels.add(new VPlayerPanel(getGameView(p).getPlayerView(p), humanCount == 0 || p.getController() instanceof PlayerControllerHuman));
+        }
+        view = new MatchScreen(playerPanels);
+
+        if (humanCount == 0) {
+            playbackControl = new FControlGamePlayback(GuiBase.getInterface(), getGameView());
+            playbackControl.setGame(game);
             game.subscribeToEvents(playbackControl);
 
             //add special object that pauses game if screen touched
@@ -189,16 +219,7 @@ public class FControl {
             });
         }
 
-        if (!gameHasAiPlayer) {
-            // If there are no AI's, allow all players to see all cards (hotseat
-            // mode).
-            for (final Player p : game.getPlayers()) {
-                if (p.getController() instanceof PlayerControllerHuman) {
-                    final PlayerControllerHuman controller = (PlayerControllerHuman) p.getController();
-                    controller.setMayLookAtAllCards(true);
-                }
-            }
-        }
+        actuateMatchPreferences();
 
         Forge.openScreen(view);
 
@@ -216,8 +237,21 @@ public class FControl {
         return game;
     }
 
-    public static IGameView getGameView() {
-        return gameView;
+    public static LocalGameView getGameView() {
+        return getGameView(getCurrentPlayer());
+    }
+    public static LocalGameView getGameView(Player player) {
+        switch (gameViews.size()) {
+        case 1:
+            return gameViews.get(0);
+        case 0:
+            return null;
+        default:
+            if (player != null && player.getController() instanceof PlayerControllerHuman) {
+                return ((PlayerControllerHuman)player.getController()).getGameView();
+            }
+            return gameViews.get(0);
+        }
     }
 
     public static MatchScreen getView() {
@@ -225,7 +259,11 @@ public class FControl {
     }
 
     public static InputQueue getInputQueue() {
-        return inputQueue;
+        LocalGameView gameView = getGameView();
+        if (gameView != null) {
+            return gameView.getInputQueue();
+        }
+        return null;
     }
 
     public static boolean stopAtPhase(final PlayerView turn, final PhaseType phase) {
@@ -234,69 +272,7 @@ public class FControl {
     }
 
     public static void endCurrentTurn() {
-        gameView.passPriorityUntilEndOfTurn();
-    }
-
-    public static void initMatch(final List<Player> players, Player localPlayer) {
-        final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
-
-        // Instantiate all required field slots (user at 0)
-        final List<Player> sortedPlayers = shiftPlayersPlaceLocalFirst(players, localPlayer);
-
-        List<VPlayerPanel> playerPanels = new ArrayList<VPlayerPanel>();
-
-        int i = 0;
-        int avatarIndex = 0;
-        for (Player p : sortedPlayers) {
-            if (i < indices.length) {
-                avatarIndex = Integer.parseInt(indices[i]);
-                i++;
-            }
-            p.getLobbyPlayer().setAvatarIndex(avatarIndex);
-        }
-
-        final LocalGameView localGameView;
-        final boolean isWatchingGame;
-        if (localPlayer.getController() instanceof PlayerControllerHuman) {
-            final PlayerControllerHuman controller = (PlayerControllerHuman) localPlayer.getController();
-            localGameView = controller.getGameView(); 
-            gameView = localGameView; 
-            fcVisitor = new FControlGameEventHandler(GuiBase.getInterface(), localGameView);
-            isWatchingGame = false;
-        } else {
-            // Watch game but do not participate
-            localGameView = new WatchLocalGame(game, inputQueue);
-            gameView = localGameView;
-            fcVisitor = new FControlGameEventHandler(GuiBase.getInterface(), localGameView);
-            isWatchingGame = true;
-        }
-
-        for (Player p : sortedPlayers) {
-            playerPanels.add(new VPlayerPanel(localGameView.getPlayerView(p)));
-        }
-        view = new MatchScreen(localGameView, localGameView.getPlayerView(localPlayer), playerPanels);
-
-        if (isWatchingGame) {
-            playbackControl = new FControlGamePlayback(GuiBase.getInterface(), localGameView);
-            playbackControl.setGame(game);
-            game.subscribeToEvents(playbackControl);
-        }
-    }
-
-    private static List<Player> shiftPlayersPlaceLocalFirst(final List<Player> players, Player localPlayer) {
-        // get an arranged list so that the first local player is at index 0
-        List<Player> sortedPlayers = new ArrayList<Player>(players);
-        int ixFirstHuman = -1;
-        for (int i = 0; i < players.size(); i++) {
-            if (sortedPlayers.get(i) == localPlayer) {
-                ixFirstHuman = i;
-                break;
-            }
-        }
-        if (ixFirstHuman > 0) {
-            sortedPlayers.add(0, sortedPlayers.remove(ixFirstHuman));
-        }
-        return sortedPlayers;
+        getGameView().passPriorityUntilEndOfTurn();
     }
 
     public static void resetAllPhaseButtons() {
@@ -306,7 +282,10 @@ public class FControl {
     }
 
     public static void showMessage(final String s0) {
-        view.getPrompt().setMessage(s0);
+        view.getActivePrompt().setMessage(s0);
+    }
+    public static void showMessage(final PlayerView playerView, final String s0) {
+        view.getPrompt(playerView).setMessage(s0);
     }
 
     public static VPlayerPanel getPlayerPanel(final PlayerView playerView) {
@@ -333,6 +312,8 @@ public class FControl {
     }
 
     public static Player getCurrentPlayer() {
+        if (game == null) { return null; }
+
         // try current priority
         Player currentPriority = game.getPhaseHandler().getPriorityPlayer();
         if (null != currentPriority && currentPriority.getLobbyPlayer() == getGuiPlayer()) {
@@ -350,7 +331,7 @@ public class FControl {
     }
 
     public static void alphaStrike() {
-        gameView.alphaStrike();
+        getGameView().alphaStrike();
     }
 
     public static void showCombat(CombatView combat) {
@@ -537,7 +518,7 @@ public class FControl {
         }
         else {
             game.isGameOver(); // this is synchronized method - it's used to make Game-0 thread see changes made here
-            inputQueue.onGameOver(false); //release any waiting input, effectively passing priority
+            getInputQueue().onGameOver(false); //release any waiting input, effectively passing priority
         }
 
         if (playbackControl != null) {
@@ -556,6 +537,7 @@ public class FControl {
     public static void pause() {
         Forge.getSoundSystem().pause();
         //pause playback if needed
+        InputQueue inputQueue = getInputQueue();
         if (inputQueue != null && inputQueue.getInput() instanceof InputPlaybackControl) {
             ((InputPlaybackControl)inputQueue.getInput()).pause();
         }

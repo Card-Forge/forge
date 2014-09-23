@@ -25,6 +25,7 @@ import net.miginfocom.swing.MigLayout;
 
 import com.google.common.collect.Lists;
 
+import forge.Singletons;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
 import forge.gui.framework.DragCell;
@@ -38,6 +39,7 @@ import forge.screens.match.controllers.CLog;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinFont;
 import forge.view.IGameView;
+import forge.view.LocalGameView;
 
 /**
  * Assembles Swing components of game log report.
@@ -124,8 +126,9 @@ public enum VLog implements IVDoc<CLog> {
      * <p>
      * @param model contains list of log entries.
      */
-    public void updateConsole(final IGameView model) {
+    public void updateConsole() {
         if (isGameLogConsoleVisible()) {
+            LocalGameView model = Singletons.getControl().getGameView();
             resetDisplayIfNewGame(model);
             displayNewGameLogEntries(model);
             // Important : refreshLayout() needs to be called every update.

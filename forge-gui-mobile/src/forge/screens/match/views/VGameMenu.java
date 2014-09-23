@@ -14,13 +14,9 @@ import forge.screens.match.FControl;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.view.IGameView;
 
 public class VGameMenu extends FDropDownMenu {
-    private final IGameView gameView;
-
-    public VGameMenu(IGameView gameView0) {
-        gameView = gameView0;
+    public VGameMenu() {
     }
 
     @Override
@@ -71,7 +67,7 @@ public class VGameMenu extends FDropDownMenu {
                                 //if re-enabling auto-yields, auto-yield to current ability on stack if applicable
                                 SpellAbility ability = game.getStack().peekAbility();
                                 if (ability != null && ability.isAbility() && localPlayer.getController().shouldAutoYield(ability.toUnsuppressedString())) {
-                                    gameView.passPriority();
+                                    FControl.getGameView().passPriority();
                                 }
                             }
                         }

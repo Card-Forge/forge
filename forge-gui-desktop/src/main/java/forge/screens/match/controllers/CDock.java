@@ -40,7 +40,6 @@ import forge.toolbox.FSkin;
 import forge.toolbox.SaveOpenDialog;
 import forge.toolbox.SaveOpenDialog.Filetypes;
 import forge.view.FView;
-import forge.view.IGameView;
 
 /**
  * Controls the dock panel in the match UI.
@@ -52,11 +51,6 @@ public enum CDock implements ICDoc {
     SINGLETON_INSTANCE;
 
     private int arcState;
-    private IGameView game;
-
-    public void setModel(final IGameView game0) {
-        game = game0;
-    }
 
     /**
      * End turn.
@@ -156,33 +150,6 @@ public enum CDock implements ICDoc {
         //FModel.SINGLETON_INSTANCE.getPreferences().save();
     }
 
-    /** Attack with everyone. */
-    public void alphaStrike() {
-        game.alphaStrike();
-        /* TODO: rewrite this!
-        final Player p = this.findAffectedPlayer();
-        final Combat combat = FControl.instance.getObservedGame().getCombat();
-        if (this.game.isCombatDeclareAttackers()) {
-            List<Player> defenders = p.getOpponents();
-
-            for (Card c : CardLists.filter(p.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
-                if (combat.isAttacking(c))
-                    continue;
-
-                for(Player defender : defenders)
-                    if( CombatUtil.canAttack(c, defender, combat)) {
-                        combat.addAttacker(c, defender);
-                        break;
-                    }
-            }
-            //human.updateObservers();
-
-            // TODO Is this redrawing immediately?
-            FView.SINGLETON_INSTANCE.getFrame().repaint();
-        }
-        */
-    }
-
     /** Toggle targeting overlay painting. */
     public void toggleTargeting() {
         arcState++;
@@ -271,7 +238,7 @@ public enum CDock implements ICDoc {
         VDock.SINGLETON_INSTANCE.getBtnAlphaStrike().setCommand(new UiCommand() {
             @Override
             public void run() {
-                alphaStrike();
+                Singletons.getControl().getGameView().alphaStrike();
             }
         });
         VDock.SINGLETON_INSTANCE.getBtnTargeting().setCommand(new UiCommand() {

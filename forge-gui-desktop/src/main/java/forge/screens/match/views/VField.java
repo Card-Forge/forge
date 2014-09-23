@@ -28,7 +28,6 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
-import forge.LobbyPlayer;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -84,7 +83,7 @@ public class VField implements IVDoc<CField> {
      * @param p &emsp; {@link forge.game.player.Player}
      * @param id0 &emsp; {@link forge.gui.framework.EDocID}
      */
-    public VField(final EDocID id0, final PlayerView p, final LobbyPlayer playerViewer) {
+    public VField(final EDocID id0, final PlayerView p) {
         this.docID = id0;
         id0.setDoc(this);
 
@@ -98,7 +97,7 @@ public class VField implements IVDoc<CField> {
         // (haven't looked into it too deeply). Doublestrike 12-04-12
         tabletop = new PlayArea(scroller, id0 == EDocID.FIELD_1, player, ZoneType.Battlefield);
 
-        control = new CField(player, this, playerViewer);
+        control = new CField(player, this);
 
         avatarArea.setOpaque(false);
         avatarArea.setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));

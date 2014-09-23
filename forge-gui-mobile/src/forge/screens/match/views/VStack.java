@@ -19,6 +19,7 @@ import forge.card.CardDetailUtil;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.card.CardDetailUtil.DetailColors;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDown;
@@ -47,17 +48,13 @@ public class VStack extends FDropDown {
     private static final float ALPHA_COMPOSITE = 0.5f;
     private static final TextRenderer textRenderer = new TextRenderer(true);
 
-    private final IGameView gameView;
-    private final PlayerView localPlayer;
     private StackInstanceDisplay activeItem;
     private StackItemView activeStackInstance;
     private Map<PlayerView, Object> playersWithValidTargets;
 
     private int stackSize;
 
-    public VStack(IGameView gameView0, PlayerView localPlayer0) {
-        gameView = gameView0;
-        localPlayer = localPlayer0;
+    public VStack() {
     }
 
     @Override
@@ -93,7 +90,7 @@ public class VStack extends FDropDown {
         activeStackInstance = null; //reset before updating stack
         restoreOldZones();
 
-        final List<StackItemView> stack = gameView.getStack();
+        final List<StackItemView> stack = FControl.getGameView().getStack();
         if (stackSize != stack.size()) {
             int oldStackSize = stackSize;
             stackSize = stack.size();
@@ -124,7 +121,7 @@ public class VStack extends FDropDown {
         float totalWidth = maxWidth - FControl.getView().getTopPlayerPanel().getTabs().iterator().next().getRight(); //keep avatar, life total, and hand tab visible to left of stack
         float width = totalWidth - 2 * MARGINS;
 
-        final List<StackItemView> stack = gameView.getStack();
+        final List<StackItemView> stack = FControl.getGameView().getStack();
         if (stack.isEmpty()) { //show label if stack empty
             FLabel label = add(new FLabel.Builder().text("[Empty]").font(FONT).align(HAlignment.CENTER).build());
 
@@ -204,7 +201,7 @@ public class VStack extends FDropDown {
 
             text = stackInstance.getText();
             if (stackInstance.isOptionalTrigger() &&
-                    stackInstance0.getActivatingPlayer().getLobbyPlayer().equals(localPlayer)) {
+                    stackInstance0.getActivatingPlayer().equals(FControl.getCurrentPlayer())) {
                 text = "(OPTIONAL) " + text;
             }
 
@@ -227,11 +224,14 @@ public class VStack extends FDropDown {
                 VStack.this.updateSizeAndPosition();
                 return true;
             }
-            if (localPlayer != null) { //don't show menu if tapping on art
+            Player player = FControl.getCurrentPlayer();
+            if (player != null) { //don't show menu if tapping on art
                 if (stackInstance.isAbility()) {
                     FPopupMenu menu = new FPopupMenu() {
                         @Override
                         protected void buildMenu() {
+                            final IGameView gameView = FControl.getGameView();
+                            final Player player = FControl.getCurrentPlayer();
                             final String key = stackInstance.getKey();
                             final boolean autoYield = gameView.shouldAutoYield(key);
                             addItem(new FCheckBoxMenuItem("Auto-Yield", autoYield,
@@ -245,7 +245,7 @@ public class VStack extends FDropDown {
                                     }
                                 }
                             }));
-                            if (stackInstance.isOptionalTrigger() && stackInstance.getActivatingPlayer() == localPlayer) {
+                            if (stackInstance.isOptionalTrigger() && stackInstance.getActivatingPlayer().equals(player)) {
                                 final int triggerID = stackInstance.getSourceTrigger();
                                 addItem(new FCheckBoxMenuItem("Always Yes",
                                         gameView.shouldAlwaysAcceptTrigger(triggerID),

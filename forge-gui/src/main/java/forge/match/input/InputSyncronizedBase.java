@@ -29,7 +29,6 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
         cdlDone.countDown();
     }
 
-
     public void showAndWait() {
         getGui().getInputQueue().setInput(this);
         awaitLatchRelease();

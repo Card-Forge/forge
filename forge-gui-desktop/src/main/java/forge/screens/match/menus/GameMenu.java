@@ -119,7 +119,7 @@ public final class GameMenu {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.alphaStrike();
+                Singletons.getControl().getGameView().alphaStrike();
             }
         };
     }
