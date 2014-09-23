@@ -4,9 +4,12 @@ Types:Legendary Creature Human Monk
 PT:3/2
 K:First Strike
 K:Hexproof
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, exile the top four cards of your library. Until end of turn, you may cast noncreature cards exiled with Narset this turn without paying their mana costs.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, exile the top four cards of your library. Until end of turn, you may cast noncreature cards exiled with CARDNAME this turn without paying their mana costs.
 SVar:TrigMill:AB$ Mill | Cost$ 0 | NumCards$ 4 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBMayBePlayed
-SVar:DBMayBePlayed:DB$ PumpAll | ValidCards$ Card.IsRemembered+nonCreature | PumpZone$ Exile | KW$ HIDDEN May be played | SubAbility$ DBCleanup
+SVar:DBMayBePlayed:DB$ Effect | RememberObjects$ Remembered | Triggers$ TrigCast | SVars$ RemoveCard | StaticAbilities$ STMayPlay | SubAbility$ DBCleanup
+SVar:STMayPlay:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Exile | Affected$ Card.IsRemembered+nonCreature+nonLand | AddHiddenKeyword$ May be played without paying its mana cost | Description$ You may cast noncreature cards exiled with Narset this turn without paying their mana costs.
+SVar:TrigCast:Mode$ SpellCast | ValidCard$ Card.IsRemembered | ValidActivatingPlayer$ You | Execute$ RemoveCard | Static$ True | TriggerZones$ Command
+SVar:RemoveCard:DB$ Pump | ForgetObjects$ TriggeredCard
 SVar:PlayMain1:TRUE
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/narset_enlightened_master.jpg
