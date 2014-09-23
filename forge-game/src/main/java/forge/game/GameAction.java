@@ -858,7 +858,7 @@ public class GameAction {
             List<Card> desCreats = new ArrayList<Card>();
             for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
                 if (c.isCreature()) {
-                    // Rule 704.5f - Destroy (no regeneration) for toughness <= 0
+                    // Rule 704.5f - Put into grave (no regeneration) for toughness <= 0
                     if (c.getNetDefense() <= 0) {
                         noRegCreats.add(c);
                         checkAgain = true;
@@ -895,7 +895,7 @@ public class GameAction {
             }
 
             for (Card c : noRegCreats) {
-                this.destroyNoRegeneration(c, null);
+                this.sacrificeDestroy(c);
             }
             for (Card c : desCreats) {
                 this.destroy(c, null);
