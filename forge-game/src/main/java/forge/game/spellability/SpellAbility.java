@@ -68,7 +68,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         @Override public boolean canPlay() { return false; }
     }
 
-    private final int id;
+    private int id;
 
     // choices for constructor isPermanent argument
     private String originalDescription = "", description = "";
@@ -969,6 +969,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         SpellAbility clone = null;
         try {
             clone = (SpellAbility) this.clone();
+            clone.id = nextId();
         } catch (final CloneNotSupportedException e) {
             System.err.println(e);
         }

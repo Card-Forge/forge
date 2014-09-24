@@ -51,7 +51,7 @@ public class SpellAbilityStackInstance implements IIdentifiable {
     // Coming off the Stack would work similarly, except it would just add the
     // full active SI instead of each of the parts
 
-    private final int id;
+    private int id;
     private SpellAbility ability = null;
 
     private SpellAbilityStackInstance subInstace = null;
