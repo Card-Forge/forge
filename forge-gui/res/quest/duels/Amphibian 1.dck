@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Amphibian 1
+Title=Amphibian
+Difficulty=easy
+Description=UG Landfall deck
+Icon=Amphibian.jpg
+Deck Type=constructed
+[main]
+8 Forest|ZEN
+8 Island|ZEN
+4 Terramorphic Expanse
+4 Evolving Wilds
+4 Khalni Heart Expedition
+4 Ior Ruin Expedition
+4 Hedron Scrabbler
+4 Grazing Gladehart
+4 Snapping Creeper
+3 Windrider Eel
+3 Hedron Rover
+3 Sporemound
+3 Territorial Baloth
+1 Shoal Serpent
+1 Lifegift
+1 Seed the Land
+1 Seer's Sundial
+[sideboard]
