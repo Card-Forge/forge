@@ -949,6 +949,7 @@ public class AiAttackController {
      * @return a boolean.
      */
     public final boolean shouldAttack(final Player ai, final Card attacker, final List<Card> defenders, final Combat combat) {
+        boolean canBeKilled = false; // indicates if the attacker can be killed
         boolean canBeKilledByOne = false; // indicates if the attacker can be killed by a single blocker
         boolean canKillAll = true; // indicates if the attacker can kill all single blockers
         boolean canKillAllDangerous = true; // indicates if the attacker can kill all single blockers with wither or infect
@@ -1015,6 +1016,7 @@ public class AiAttackController {
         }
         if (ComputerUtilCard.canBeBlockedProfitably(defendingOpponent, attacker)) {
             canKillAllDangerous = false;
+            canBeKilled = true;
         }
 
         // if the creature cannot block and can kill all opponents they might as
@@ -1065,7 +1067,8 @@ public class AiAttackController {
             break;
         case 2: // attack expecting to attract a group block or destroying a
                 // single blocker and surviving
-            if (((canKillAll || hasAttackEffect || hasCombatEffect) && !canBeKilledByOne) || !canBeBlocked) {
+            if ((((canKillAll || hasAttackEffect || hasCombatEffect) && !canBeKilledByOne) || !canBeBlocked) &&
+                    (canKillAllDangerous || !canBeKilled)) {
                 if ( LOG_AI_ATTACKS )
                     System.out.println(attacker.getName() + " = attacking expecting to survive or attract group block");
                 return true;
