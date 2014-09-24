@@ -14,7 +14,6 @@ import forge.assets.TextRenderer;
 import forge.assets.FSkinColor.Colors;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
-import forge.game.spellability.SpellAbility;
 import forge.item.PaperCard;
 import forge.screens.match.MatchController;
 import forge.screens.match.views.VAvatar;
@@ -61,7 +60,7 @@ public class FChoiceList<T> extends FList<T> {
         else if (item instanceof CardView) {
             renderer = new CardItemRenderer();
         }
-        else if (item instanceof SpellAbility) {
+        else if (item instanceof SpellAbilityView) {
             renderer = new SpellAbilityItemRenderer();
         }
         else if (item instanceof PlayerView) {
