@@ -3,7 +3,6 @@ package forge.ai.ability;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.ai.AiBlockController;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -171,7 +170,7 @@ public class AnimateAi extends SpellAbilityAi {
                     if (ph.isPlayerTurn(aiPlayer) && !ComputerUtilCard.doesSpecifiedCreatureAttackAI(aiPlayer, animatedCopy)) {
                         return false;
                     }
-                    if (ph.getPlayerTurn().isOpponentOf(aiPlayer) && !AiBlockController.shouldThisBlock(aiPlayer, animatedCopy)) {
+                    if (ph.getPlayerTurn().isOpponentOf(aiPlayer) && !ComputerUtilCard.doesSpecifiedCreatureBlock(aiPlayer, animatedCopy)) {
                         return false;
                     }
                 }

@@ -15,6 +15,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -627,11 +628,50 @@ public class ComputerUtilCard {
         aiAtk.declareAttackers(combat);
         return combat.isAttacking(card);
     }
+    
+    /**
+     * Extension of doesCreatureAttackAI() for "virtual" creatures that do not actually exist on the battlefield yet
+     * such as unanimated manlands.
+     * @param ai controller of creature 
+     * @param card creature to be evaluated
+     * @return creature will be attack
+     */
     public static boolean doesSpecifiedCreatureAttackAI(final Player ai, final Card card) {
         AiAttackController aiAtk = new AiAttackController(ai, card);
         Combat combat = new Combat(ai);
         aiAtk.declareAttackers(combat);
         return combat.isAttacking(card);
+    }
+    
+    /**
+     * Decide if a creature is going to be used as a blocker.
+     * @param ai controller of creature 
+     * @param blocker creature to be evaluated
+     * @return creature will be a blocker
+     */
+    public static boolean doesSpecifiedCreatureBlock(final Player ai, Card blocker) {
+        AiBlockController aiBlk = new AiBlockController(ai);
+        Combat combat = ai.getGame().getCombat();
+        if (combat == null) {
+            final Player opp = ai.getOpponent();
+            combat = new Combat(opp);
+            for (Card c : opp.getCreaturesInPlay()) {
+                if (CombatUtil.canAttackNextTurn(c, ai)) {
+                    combat.addAttacker(c, ai);
+                }
+            }
+        } else {
+            if (combat.getAllBlockers().contains(blocker)) {
+                return true;
+            }
+        }
+        aiBlk.assignBlockers(combat, blocker, null);
+        if (!combat.getAllBlockers().contains(blocker)) {
+            return false;
+        } else {
+            combat.removeFromCombat(blocker);
+            return true;
+        }
     }
 
     /**

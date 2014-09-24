@@ -928,23 +928,6 @@ public class AiBlockController {
     }
     
     /**
-     * Decide if a creature is going to be used as a blocker (is only used for AnimateAi so far)
-     * @param ai controller of creature 
-     * @param blocker creature to be evaluated (must NOT already be in combat)
-     * @return creature will be a blocker
-     */
-    public static boolean shouldThisBlock(final Player ai, Card blocker) {
-        AiBlockController aiBlk = new AiBlockController(ai);
-        Combat combat = ai.getGame().getCombat();
-        aiBlk.assignBlockers(combat, blocker, null);
-        if (combat.getAllBlockers().isEmpty()) {
-            return false;
-        } else {
-            combat.removeFromCombat(blocker);
-            return true;
-        }
-    }
-    /**
      * Check if an attacker can be blocked profitably (ie. kill attacker)
      * @param ai controller of attacking creature
      * @param attacker attacking creature to evaluate

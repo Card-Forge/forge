@@ -168,8 +168,8 @@ public class CountersPutAi extends SpellAbilityAi {
         if (sa.isOutlast()) {
             if (ph.is(PhaseType.MAIN2, ai)) {   //applicable to non-attackers only
                 float chance = 0.8f;
-                if (!ai.getOpponent().getCreaturesInPlay().isEmpty()) {
-                    chance /= 2;    //needs a better way to check if target is required as a blocker
+                if (ComputerUtilCard.doesSpecifiedCreatureBlock(ai, source)) {
+                    return false;
                 }
                 return chance > r.nextFloat();
             } else {
