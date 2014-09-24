@@ -77,7 +77,7 @@ public class Cache<K extends IIdentifiable, V extends IIdentifiable> {
      * @return a value equal to value, if such a value is present in the Cache;
      *         {@code null} otherwise.
      */
-    public synchronized V getValue(final V value) {
+    public synchronized V getCurrentValue(final V value) {
         for (final V currentValue : cache.values()) {
             if (currentValue.equals(value)) {
                 return currentValue;
@@ -106,16 +106,42 @@ public class Cache<K extends IIdentifiable, V extends IIdentifiable> {
         }
 
         synchronized (this) {
-            final int valueId = value.getId();
+            final int keyId = key.getId(), valueId = value.getId();
+
+            // remove value mapping if it exists already
             if (inverseCache.containsKey(valueId)) {
-                cache.remove(inverseCache.get(valueId).getId());
+                cache.values().remove(value);
                 inverseCache.remove(valueId);
             }
 
-            final V oldValue = cache.put(key.getId(), value);
-            if (oldValue != null) {
-                inverseCache.remove(oldValue.getId());
+            // remove key mapping if it exists already
+            if (cache.containsKey(keyId)) {
+                inverseCache.values().remove(key);
+                cache.remove(keyId);
             }
+
+            // put the new values
+            cache.put(keyId, value);
+            inverseCache.put(valueId, key);
+        }
+    }
+
+    /**
+     * Update the key of a particular entry. If the supplied key is {@code null}
+     * or if the Cache didn't already contain a mapping for the supplied id,
+     * this method silently returns.
+     * 
+     * @param valueId
+     *            the id of the value to which the key is associated.
+     * @param key
+     *            the new key.
+     */
+    public void updateKey(final int valueId, final K key) {
+        if (key == null || !inverseCache.containsKey(valueId)) {
+            return;
+        }
+
+        synchronized (this) {
             inverseCache.put(valueId, key);
         }
     }

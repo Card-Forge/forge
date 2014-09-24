@@ -424,23 +424,30 @@ public abstract class LocalGameView implements IGameView {
         final boolean mayShow = mayShowCard(c);
 
         CardView view = cards.get(c.getId());
+        final boolean isNewView;
         if (view != null) {
-            // Put here again to ensure the Card reference in the cache
+            // Update to ensure the Card reference in the cache
             // is not an outdated Card.
-            cards.put(c, view);
-        }
-        else {
-            view = new CardView(isDisplayable);
-            if (isDisplayable && mayShow) {
-                cards.put(c, view);
+            if (view.getId() > 0) {
+                cards.updateKey(view.getId(), c);
             }
+            isNewView = false;
+        } else if (isDisplayable && mayShow) {
+            view = new CardView(isDisplayable);
+            view.setId(c.getId());
+            cards.put(c, view);
+            isNewView = true;
+        } else {
+            return CardView.EMPTY;
         }
 
         if (mayShow) {
             writeCardToView(cUi, view);
         }
         else if (isDisplayable) {
-            view.reset();
+            if (!isNewView) {
+                view.reset();
+            }
         }
         else {
             return null;
@@ -464,7 +471,7 @@ public abstract class LocalGameView implements IGameView {
         return ViewUtil.transformIfNotNull(cardViews, new Function<CardView, CardView>() {
             @Override
             public CardView apply(final CardView input) {
-                return cards.getValue(input);
+                return cards.getCurrentValue(input);
             }
         });
     }
@@ -478,8 +485,7 @@ public abstract class LocalGameView implements IGameView {
         if (mayShowCard(c)) {
             return view;
         } else if (view.isUiDisplayable()) {
-            view.reset();
-            return view;
+            return CardView.EMPTY;
         }
 
         return null;
@@ -569,11 +575,14 @@ public abstract class LocalGameView implements IGameView {
         return ViewUtil.transformIfNotNull(cards, FN_GET_SPAB_VIEW);
     }
 
-    public SpellAbility getSpellAbility(final SpellAbilityView c) {
-        if (c == null) {
+    public SpellAbility getSpellAbility(final SpellAbilityView spabView) {
+        if (spabView == null) {
             return null;
         }
-        return spabs.getKey(c.getId());
+        return getSpellAbility(spabView.getId());
+    }
+    public SpellAbility getSpellAbility(final int id) {
+        return id >= 0 ? spabs.getKey(id) : null;
     }
 
     private final Function<SpellAbilityView, SpellAbility> FN_GET_SPAB = new Function<SpellAbilityView, SpellAbility>() {

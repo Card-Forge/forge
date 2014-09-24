@@ -314,14 +314,15 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public SpellAbilityView getAbilityToPlay(List<SpellAbilityView> abilities, ITriggerEvent triggerEvent) {
+    public int getAbilityToPlay(List<SpellAbilityView> abilities, ITriggerEvent triggerEvent) {
         if (abilities.isEmpty()) {
-            return null;
+            return -1;
         }
         if (abilities.size() == 1) {
-            return abilities.get(0);
+            return abilities.get(0).getId();
         }
-        return SGuiChoose.oneOrNone(this, "Choose ability to play", abilities);
+        final SpellAbilityView choice = SGuiChoose.oneOrNone(this, "Choose ability to play", abilities);
+        return choice == null ? -1 : choice.getId();
     }
 
     @Override

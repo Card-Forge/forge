@@ -1,7 +1,6 @@
 package forge.view;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -12,8 +11,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
-import com.google.common.collect.Lists;
 
 import forge.ImageKeys;
 import forge.card.CardEdition;
@@ -34,19 +31,7 @@ import forge.game.zone.ZoneType;
  */
 public class CardView extends GameEntityView {
 
-    private static final List<Integer> randomInts = Lists.newArrayListWithCapacity(1024);
-    static {
-        for (int i = 1; i < 1025; i++) {
-            randomInts.add(Integer.valueOf(i));
-        }
-        Collections.shuffle(randomInts);
-    }
-    private static final Iterator<Integer> randomIntsIterator = Iterators.cycle(randomInts);
-    private static int nextRandomInt() {
-        synchronized (randomIntsIterator) {
-            return randomIntsIterator.next().intValue();
-        }
-    }
+    public static final CardView EMPTY = new CardView(true);
 
     private final CardStateView
         original = new CardStateView(),
@@ -90,7 +75,7 @@ public class CardView extends GameEntityView {
 
     public void reset() {
         final Iterable<CardView> emptyIterable = ImmutableSet.of();
-        this.id = -nextRandomInt();
+        this.id = 0;
         this.hasAltState = false;
         this.owner = null;
         this.controller = null;
@@ -100,15 +85,15 @@ public class CardView extends GameEntityView {
         this.isFlipped = false;
         this.isSplitCard = false;
         this.isTransformed = false;
-        this.setCode = StringUtils.EMPTY;
+        this.setCode = "";
         this.rarity = CardRarity.Unknown;
         this.isAttacking = this.isBlocking = this.isPhasedOut = this.isSick = this.isTapped = false;
         this.counters = ImmutableMap.of();
         this.damage = this.assignedDamage = this.regenerationShields = this.preventNextDamage = 0;
-        this.chosenType = StringUtils.EMPTY;
+        this.chosenType = "";
         this.chosenColors = ImmutableList.of();
         this.chosenPlayer = null;
-        this.namedCard = StringUtils.EMPTY;
+        this.namedCard = "";
         this.equipping = null;
         this.equippedBy = emptyIterable;
         this.enchantingCard = null;
@@ -137,17 +122,6 @@ public class CardView extends GameEntityView {
 
     public void setId(final int id) {
         this.id = id;
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
-        return obj instanceof CardView && this.getId() == ((CardView) obj).getId()
-                && (this.getId() > 0 || this == obj);
-    }
-
-    @Override
-    public int hashCode() {
-        return id > 0 ? id : super.hashCode();
     }
 
     public boolean isUiDisplayable() {
@@ -773,7 +747,7 @@ public class CardView extends GameEntityView {
         }
 
         public void reset() {
-            this.name = StringUtils.EMPTY;
+            this.name = "";
             this.colors = ColorSet.getNullColor();
             this.imageKey = ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE;
             this.type = Collections.emptyList();
@@ -781,7 +755,7 @@ public class CardView extends GameEntityView {
             this.power = 0;
             this.toughness = 0;
             this.loyalty = 0;
-            this.text = StringUtils.EMPTY;
+            this.text = "";
             this.changedColorWords = ImmutableMap.of();
             this.changedTypes = ImmutableMap.of();
             this.hasDeathtouch = false;
@@ -957,7 +931,6 @@ public class CardView extends GameEntityView {
             this.changedTypes = Collections.unmodifiableMap(changedTypes);
         }
 
-      
         /**
          * @return the hasDeathtouch
          */

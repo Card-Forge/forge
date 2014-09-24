@@ -176,7 +176,7 @@ public class PlayerControllerHuman extends PlayerController {
      * Uses GUI to learn which spell the player (human in our case) would like to play
      */ 
     public SpellAbility getAbilityToPlay(final List<SpellAbility> abilities, final ITriggerEvent triggerEvent) {
-        final SpellAbilityView choice = getGui().getAbilityToPlay(gameView.getSpellAbilityViews(abilities), triggerEvent);
+        final int choice = getGui().getAbilityToPlay(gameView.getSpellAbilityViews(abilities), triggerEvent);
         return gameView.getSpellAbility(choice);
     }
 

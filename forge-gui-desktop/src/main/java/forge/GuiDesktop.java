@@ -326,25 +326,26 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public SpellAbilityView getAbilityToPlay(List<SpellAbilityView> abilities, ITriggerEvent triggerEvent) {
+    public int getAbilityToPlay(List<SpellAbilityView> abilities, ITriggerEvent triggerEvent) {
         if (triggerEvent == null) {
             if (abilities.isEmpty()) {
-                return null;
+                return -1;
             }
             if (abilities.size() == 1) {
-                return abilities.get(0);
+                return abilities.get(0).getId();
             }
-            return GuiChoose.oneOrNone("Choose ability to play", abilities);
+            final SpellAbilityView choice = GuiChoose.oneOrNone("Choose ability to play", abilities);
+            return choice == null ? -1 : choice.getId();
         }
 
         if (abilities.isEmpty()) {
-            return null;
+            return -1;
         }
         if (abilities.size() == 1 && !abilities.get(0).isPromptIfOnlyPossibleAbility()) {
             if (abilities.get(0).canPlay()) {
-                return abilities.get(0); //only return ability if it's playable, otherwise return null
+                return abilities.get(0).getId(); //only return ability if it's playable, otherwise return null
             }
-            return null;
+            return -1;
         }
 
         //show menu if mouse was trigger for ability
@@ -383,7 +384,7 @@ public class GuiDesktop implements IGuiBase {
             menu.show(mouseEvent.getComponent(), mouseEvent.getX(), mouseEvent.getY());
         }
 
-        return null; //delay ability until choice made
+        return -1; //delay ability until choice made
     }
 
     @Override

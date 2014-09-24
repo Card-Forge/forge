@@ -85,7 +85,7 @@ public interface IGuiBase {
     void setPanelSelection(CardView hostCard);
     Map<CardView, Integer> getDamageToAssign(CardView attacker, List<CardView> blockers,
             int damageDealt, GameEntityView defender, boolean overrideOrder);
-    SpellAbilityView getAbilityToPlay(List<SpellAbilityView> abilities, ITriggerEvent triggerEvent);
+    int getAbilityToPlay(List<SpellAbilityView> abilities, ITriggerEvent triggerEvent);
     void hear(LobbyPlayer player, String message);
     int getAvatarCount();
     void copyToClipboard(String text);
