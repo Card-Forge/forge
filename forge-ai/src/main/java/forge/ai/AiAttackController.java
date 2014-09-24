@@ -1013,7 +1013,7 @@ public class AiAttackController {
                 }
             }
         }
-        if (AiBlockController.canBeBlockedProfitably(defendingOpponent, attacker)) {
+        if (ComputerUtilCard.canBeBlockedProfitably(defendingOpponent, attacker)) {
             canKillAllDangerous = false;
         }
 

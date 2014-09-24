@@ -927,17 +927,4 @@ public class AiBlockController {
         return first;
     }
     
-    /**
-     * Check if an attacker can be blocked profitably (ie. kill attacker)
-     * @param ai controller of attacking creature
-     * @param attacker attacking creature to evaluate
-     * @return attacker will die
-     */
-    public static boolean canBeBlockedProfitably(final Player ai, Card attacker) {
-        AiBlockController aiBlk = new AiBlockController(ai);
-        Combat combat = new Combat(ai);
-        combat.addAttacker(attacker, ai);
-        aiBlk.assignBlockers(combat, null, attacker);
-        return ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, combat);
-    }
 }
