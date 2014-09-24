@@ -7,7 +7,7 @@
         <packaging.type>jar</packaging.type>
         <build.min.memory>-Xms128m</build.min.memory>
         <build.max.memory>-Xmx2048m</build.max.memory>
-        <alpha-version>1.5.28.004</alpha-version>
+        <alpha-version>1.5.28.005</alpha-version>
     </properties>
 
     <parent>
@@ -123,7 +123,7 @@
                                 <debug>true</debug>
                             </sign>
                             <sdk>
-                                <platform>20</platform>
+                                <platform>19</platform>
                             </sdk>
                             <dexForceJumbo>true</dexForceJumbo>
                             <deleteConflictingFiles>true</deleteConflictingFiles>
@@ -168,7 +168,7 @@
                                 <debug>false</debug>
                             </sign>
                             <sdk>
-                                <platform>20</platform>
+                                <platform>19</platform>
                             </sdk>
                             <zipalign>
                                 <verbose>false</verbose>
