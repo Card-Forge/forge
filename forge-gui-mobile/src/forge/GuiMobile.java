@@ -3,11 +3,6 @@ package forge;
 import java.io.File;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.Texture;
@@ -26,22 +21,11 @@ import forge.deck.Deck;
 import forge.deck.FDeckViewer;
 import forge.deck.FSideboardDialog;
 import forge.error.BugReportDialog;
-import forge.events.UiEvent;
-import forge.game.GameType;
-import forge.game.Match;
-import forge.game.phase.PhaseType;
 import forge.game.player.IHasIcon;
-import forge.game.player.RegisteredPlayer;
-import forge.game.zone.ZoneType;
-import forge.interfaces.IButton;
 import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
 import forge.properties.ForgeConstants;
-import forge.screens.match.FControl;
-import forge.screens.match.views.VPlayerPanel;
-import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
-import forge.screens.match.views.VPlayerPanel.InfoTab;
-import forge.screens.match.winlose.ViewWinLose;
+import forge.screens.match.MatchController;
 import forge.screens.quest.QuestMenu;
 import forge.sound.AudioClip;
 import forge.sound.AudioMusic;
@@ -50,16 +34,10 @@ import forge.sound.IAudioMusic;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.GuiChoose;
 import forge.util.FileUtil;
-import forge.util.ITriggerEvent;
 import forge.util.ThreadUtil;
 import forge.util.WaitCallback;
 import forge.util.WaitRunnable;
-import forge.util.gui.SGuiChoose;
 import forge.view.CardView;
-import forge.view.CombatView;
-import forge.view.GameEntityView;
-import forge.view.PlayerView;
-import forge.view.SpellAbilityView;
 
 public class GuiMobile implements IGuiBase {
     private final String assetsDir;
@@ -237,100 +215,6 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public IButton getBtnOK(PlayerView player) {
-        return FControl.getView().getPrompt(player).getBtnOk();
-    }
-
-    @Override
-    public IButton getBtnCancel(PlayerView player) {
-        return FControl.getView().getPrompt(player).getBtnCancel();
-    }
-
-    @Override
-    public void showPromptMessage(final PlayerView player, String message) {
-        FControl.getView().getPrompt(player).setMessage(message);
-    }
-
-    @Override
-    public void focusButton(final IButton button) {
-        //not needed for mobile game
-    }
-
-    @Override
-    public void flashIncorrectAction() {
-        //SDisplayUtil.remind(VPrompt.SINGLETON_INSTANCE); //TODO
-    }
-
-    @Override
-    public void updatePhase() {
-        final PlayerView p = FControl.getGameView().getPlayerTurn();
-        final PhaseType ph = FControl.getGameView().getPhase();
-
-        PhaseLabel lbl = FControl.getPlayerPanel(p).getPhaseIndicator().getLabel(ph);
-
-        FControl.resetAllPhaseButtons();
-        if (lbl != null) {
-            lbl.setActive(true);
-        }
-    }
-
-    @Override
-    public void updateTurn(final PlayerView player) {
-        //VField nextField = FControl.getFieldViewFor(event.turnOwner);
-        //SDisplayUtil.showTab(nextField);
-    }
-
-    @Override
-    public void updatePlayerControl() {
-        //TODO
-    }
-    
-    @Override
-    public void disableOverlay() {
-    }
-    
-    @Override
-    public void enableOverlay() {
-    }
-
-    @Override
-    public void finishGame() {
-        new ViewWinLose(FControl.getGameView()).setVisible(true);
-    }
-
-    @Override
-    public void updateStack() {
-        FControl.getView().getStack().update();
-    }
-
-    @Override
-    public void startMatch(GameType gameType, List<RegisteredPlayer> players) {
-        FControl.startMatch(gameType, players);
-    }
-
-    @Override
-    public void setPanelSelection(final CardView c) {
-        //GuiUtils.setPanelSelection(c); //TODO
-    }
-
-    @Override
-    public int getAbilityToPlay(List<SpellAbilityView> abilities, ITriggerEvent triggerEvent) {
-        if (abilities.isEmpty()) {
-            return -1;
-        }
-        if (abilities.size() == 1) {
-            return abilities.get(0).getId();
-        }
-        final SpellAbilityView choice = SGuiChoose.oneOrNone(this, "Choose ability to play", abilities);
-        return choice == null ? -1 : choice.getId();
-    }
-
-    @Override
-    public void hear(LobbyPlayer player, String message) {
-        //FNetOverlay.SINGLETON_INSTANCE.addMessage(player.getName(), message); //TODO
-    }
-
-    @Override
     public int getAvatarCount() {
         if (FSkin.isLoaded()) {
             return FSkin.getAvatars().size();
@@ -339,127 +223,8 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public void fireEvent(UiEvent e) {
-        FControl.fireEvent(e);
-    }
-
-    @Override
     public void setCard(final CardView card) {
         //doesn't need to do anything
-    }
-
-    @Override
-    public void showCombat(final CombatView combat) {
-        FControl.showCombat(combat);
-    }
-
-    @Override
-    public void setUsedToPay(final CardView card, final boolean b) {
-        FControl.setUsedToPay(card, b);
-    }
-
-    @Override
-    public void setHighlighted(final PlayerView player, boolean b) {
-        FControl.setHighlighted(player, b);
-    }
-
-    @Override
-    public boolean stopAtPhase(final PlayerView playerTurn, final PhaseType phase) {
-        return FControl.stopAtPhase(playerTurn, phase);
-    }
-
-    @Override
-    public Object showManaPool(final PlayerView player) {
-        VPlayerPanel playerPanel = FControl.getPlayerPanel(player);
-        InfoTab oldSelectedTab = playerPanel.getSelectedTab();
-        playerPanel.setSelectedTab(playerPanel.getManaPoolTab());
-        return oldSelectedTab;
-    }
-
-    @Override
-    public void hideManaPool(final PlayerView player, final Object zoneToRestore) {
-        VPlayerPanel playerPanel = FControl.getPlayerPanel(player);
-        if (zoneToRestore == playerPanel.getManaPoolTab()) {
-            return; //if mana pool was selected previously, we don't need to switch back to anything
-        }
-        if (playerPanel.getSelectedTab() != playerPanel.getManaPoolTab()) {
-            return; //if player switch away from mana pool already, don't change anything
-        }
-        playerPanel.setSelectedTab((InfoTab)zoneToRestore);
-    }
-
-    @Override
-    public boolean openZones(Collection<ZoneType> zones, Map<PlayerView, Object> players) {
-        if (zones.size() == 1) {
-            ZoneType zoneType = zones.iterator().next();
-            switch (zoneType) {
-            case Battlefield:
-            case Command:
-                players.clear(); //clear since no zones need to be restored
-                return true; //Battlefield is always open
-            default:
-                //open zone tab for given zone if needed
-                boolean result = true;
-                for (PlayerView player : players.keySet()) {
-                    VPlayerPanel playerPanel = FControl.getPlayerPanel(player);
-                    players.put(player, playerPanel.getSelectedTab()); //backup selected tab before changing it
-                    InfoTab zoneTab = playerPanel.getZoneTab(zoneType);
-                    if (zoneTab == null) {
-                        result = false;
-                    }
-                    else {
-                        playerPanel.setSelectedTab(zoneTab);
-                    }
-                }
-                return result;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public void restoreOldZones(Map<PlayerView, Object> playersToRestoreZonesFor) {
-        for (Entry<PlayerView, Object> player : playersToRestoreZonesFor.entrySet()) {
-            VPlayerPanel playerPanel = FControl.getPlayerPanel(player.getKey());
-            playerPanel.setSelectedTab((InfoTab)player.getValue());
-        }
-    }
-
-    @Override
-    public void updateZones(List<Pair<PlayerView, ZoneType>> zonesToUpdate) {
-        FControl.updateZones(zonesToUpdate);
-    }
-
-    @Override
-    public void updateCards(Iterable<CardView> cardsToUpdate) {
-        FControl.updateCards(cardsToUpdate);
-    }
-
-    @Override
-    public void refreshCardDetails(Iterable<CardView> cards) {
-        FControl.refreshCardDetails(cards);
-    }
-
-    @Override
-    public void updateManaPool(List<PlayerView> manaPoolUpdate) {
-        FControl.updateManaPool(manaPoolUpdate);
-    }
-
-    @Override
-    public void updateLives(List<PlayerView> livesUpdate) {
-        FControl.updateLives(livesUpdate);
-    }
-
-    @Override
-    public void endCurrentGame() {
-        FControl.endCurrentGame();
-    }
-
-    @Override
-    public Map<CardView, Integer> getDamageToAssign(CardView attacker, List<CardView> blockers,
-            int damageDealt, GameEntityView defender, boolean overrideOrder) {
-        return FControl.getDamageToAssign(attacker, blockers,
-                damageDealt, defender, overrideOrder);
     }
 
     @Override
@@ -503,22 +268,6 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public void startGame(Match match) {
-        FControl.startGame(match);
-    }
-
-    @Override
-    public void continueMatch(Match match) {
-        FControl.endCurrentGame();
-        if (match == null) {
-            Forge.back();
-        }
-        else {
-            FControl.startGame(match);
-        }
-    }
-
-    @Override
     public void showSpellShop() {
         QuestMenu.showSpellShop();
     }
@@ -530,6 +279,6 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public void setPlayerAvatar(LobbyPlayer player, IHasIcon ihi) {
-        FControl.setPlayerAvatar(player, ImageCache.getIcon(ihi));
+        MatchController.setPlayerAvatar(player, ImageCache.getIcon(ihi));
     }
 }

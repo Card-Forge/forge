@@ -48,7 +48,7 @@ public class GauntletWinLose extends ControlWinLose {
      */
     public GauntletWinLose(final ViewWinLose view0, final IGameView game0, final IGuiBase gui) {
         super(view0, game0);
-        controller = new GauntletWinLoseController(view0, game0, gui) {
+        controller = new GauntletWinLoseController(view0, game0) {
             @Override
             protected void showOutcome(String message1, String message2, FSkinProp icon, List<String> lstEventNames, List<String> lstEventRecords, int len, int num) {
                 final JLabel lblTitle = new FLabel.Builder().text("Gauntlet Progress")

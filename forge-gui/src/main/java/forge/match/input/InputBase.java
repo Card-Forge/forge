@@ -27,6 +27,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.interfaces.IGuiBase;
+import forge.match.MatchUtil;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.view.LocalGameView;
@@ -110,9 +111,9 @@ public abstract class InputBase implements java.io.Serializable, Input {
     }
 
     private static void updatePromptForAwait(final LocalGameView gameView) {
-        InputNone inputNone = new InputNone(gameView);
-        inputNone.getGui().showPromptMessage(inputNone.getOwner(), "Waiting for opponent...");
-        ButtonUtil.update(inputNone, false, false, false);
+        PlayerView playerView = gameView.getLocalPlayerView();
+        MatchUtil.getController().showPromptMessage(playerView, "Waiting for opponent...");
+        ButtonUtil.update(playerView, false, false, false);
     }
 
     public static void cancelAwaitNextInput() {
@@ -173,11 +174,11 @@ public abstract class InputBase implements java.io.Serializable, Input {
 
     // to remove need for CMatchUI dependence
     protected final void showMessage(final String message) {
-        getGui().showPromptMessage(getOwner(), message);
+        MatchUtil.getController().showPromptMessage(getOwner(), message);
     }
 
     protected final void flashIncorrectAction() {
-        getGui().flashIncorrectAction();
+        MatchUtil.getController().flashIncorrectAction();
     }
 
     protected String getTurnPhasePriorityMessage(final Game game) {

@@ -8,6 +8,7 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.interfaces.IGuiBase;
+import forge.match.MatchUtil;
 import forge.util.ITriggerEvent;
 import forge.util.ThreadUtil;
 import forge.view.PlayerView;
@@ -65,7 +66,7 @@ public class InputLockUI implements Input  {
     private final Runnable showMessageFromEdt = new Runnable() {
         @Override
         public void run() {
-            ButtonUtil.update(InputLockUI.this, "", "", false, false, false);
+            ButtonUtil.update(InputLockUI.this.getOwner(), "", "", false, false, false);
             showMessage("Waiting for actions...");
         }
     };
@@ -75,7 +76,7 @@ public class InputLockUI implements Input  {
     }
 
     protected void showMessage(String message) { 
-        getGui().showPromptMessage(getOwner(), message);
+        MatchUtil.getController().showPromptMessage(getOwner(), message);
     }
 
     @Override

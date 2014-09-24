@@ -36,6 +36,7 @@ import com.google.common.collect.Lists;
 
 import forge.Singletons;
 import forge.gui.framework.FScreen;
+import forge.match.MatchUtil;
 import forge.screens.match.controllers.CDock;
 import forge.screens.match.views.VField;
 import forge.toolbox.FSkin;
@@ -363,7 +364,7 @@ public enum TargetingOverlay {
             if (overlaystate == 0) { return; }
 
             // Arc drawing
-            assembleArcs(Singletons.getControl().getGameView().getCombat());
+            assembleArcs(MatchUtil.getGameView().getCombat());
 
             if (arcsCombat.isEmpty() && arcsOther.isEmpty()) { return; }
 

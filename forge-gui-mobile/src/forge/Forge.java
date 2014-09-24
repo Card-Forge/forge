@@ -18,6 +18,7 @@ import forge.error.BugReporter;
 import forge.error.ExceptionHandler;
 import forge.interfaces.IDeviceAdapter;
 import forge.interfaces.IGuiBase;
+import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
@@ -25,7 +26,7 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.screens.SplashScreen;
 import forge.screens.home.HomeScreen;
-import forge.screens.match.FControl;
+import forge.screens.match.MatchController;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FContainer;
@@ -50,7 +51,6 @@ public class Forge implements ApplicationListener {
     private static SplashScreen splashScreen;
     private static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
-    private static SoundSystem soundSystem;
     private static final Stack<FScreen> screens = new Stack<FScreen>();
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0) {
@@ -59,7 +59,6 @@ public class Forge implements ApplicationListener {
             deviceAdapter = deviceAdapter0;
             final IGuiBase gui = new GuiMobile(assetDir0);
             GuiBase.setInterface(gui);
-            soundSystem = new SoundSystem(gui);
         }
         return app;
     }
@@ -71,6 +70,8 @@ public class Forge implements ApplicationListener {
     public void create() {
         //install our error handler
         ExceptionHandler.registerErrorHandling(GuiBase.getInterface());
+
+        MatchUtil.setController(MatchController.instance);
 
         graphics = new Graphics();
         splashScreen = new SplashScreen();
@@ -115,7 +116,7 @@ public class Forge implements ApplicationListener {
 
         FSkin.loadFull(splashScreen);
 
-        soundSystem.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
+        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
 
         Gdx.input.setCatchBackKey(true);
         Gdx.input.setCatchMenuKey(true);
@@ -218,10 +219,6 @@ public class Forge implements ApplicationListener {
         }
     }
 
-    public static SoundSystem getSoundSystem() {
-        return soundSystem;
-    }
-
     @Override
     public void render() {
         try {
@@ -272,12 +269,12 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void pause() {
-        FControl.pause();
+        MatchUtil.pause();
     }
 
     @Override
     public void resume() {
-        FControl.resume();
+        MatchUtil.resume();
     }
 
     @Override
@@ -289,7 +286,7 @@ public class Forge implements ApplicationListener {
         }
         screens.clear();
         graphics.dispose();
-        soundSystem.dispose();
+        SoundSystem.instance.dispose();
     }
 
     //log message to Forge.log file

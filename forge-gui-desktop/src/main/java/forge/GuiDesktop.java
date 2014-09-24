@@ -4,88 +4,48 @@ import java.awt.Desktop;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JPopupMenu;
-import javax.swing.KeyStroke;
-import javax.swing.MenuElement;
-import javax.swing.MenuSelectionManager;
 import javax.swing.SwingUtilities;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Function;
 
 import forge.assets.FSkinProp;
 import forge.assets.ISkinImage;
-import forge.control.FControl;
 import forge.deck.CardPool;
 import forge.error.BugReportDialog;
-import forge.events.UiEvent;
 import forge.game.GameObject;
-import forge.game.GameType;
-import forge.game.Match;
-import forge.game.phase.PhaseType;
 import forge.game.player.IHasIcon;
-import forge.game.player.RegisteredPlayer;
-import forge.game.zone.ZoneType;
 import forge.gui.BoxedProductCardListViewer;
 import forge.gui.CardListViewer;
-import forge.gui.FNetOverlay;
 import forge.gui.GuiChoose;
-import forge.gui.GuiUtils;
-import forge.gui.SOverlayUtils;
 import forge.gui.framework.FScreen;
-import forge.gui.framework.SDisplayUtil;
-import forge.gui.framework.SLayoutIO;
-import forge.interfaces.IButton;
 import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorQuestCardShop;
 import forge.screens.match.CMatchUI;
-import forge.screens.match.VMatchUI;
-import forge.screens.match.ViewWinLose;
-import forge.screens.match.controllers.CPrompt;
-import forge.screens.match.controllers.CStack;
-import forge.screens.match.views.VField;
-import forge.screens.match.views.VHand;
-import forge.screens.match.views.VPrompt;
 import forge.sound.AltSoundSystem;
 import forge.sound.AudioClip;
 import forge.sound.AudioMusic;
 import forge.sound.IAudioClip;
 import forge.sound.IAudioMusic;
-import forge.toolbox.FButton;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
-import forge.toolbox.MouseTriggerEvent;
-import forge.toolbox.special.PhaseLabel;
 import forge.util.BuildInfo;
 import forge.util.FileUtil;
-import forge.util.ITriggerEvent;
 import forge.view.CardView;
-import forge.view.CombatView;
-import forge.view.GameEntityView;
-import forge.view.PlayerView;
-import forge.view.SpellAbilityView;
 
 public class GuiDesktop implements IGuiBase {
-    private boolean showOverlay = true;
-
     @Override
     public boolean isRunningOnDesktop() {
         return true;
@@ -234,165 +194,6 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public IButton getBtnOK(PlayerView playerView) {
-        return VMatchUI.SINGLETON_INSTANCE.getBtnOK();
-    }
-
-    @Override
-    public IButton getBtnCancel(PlayerView playerView) {
-        return VMatchUI.SINGLETON_INSTANCE.getBtnCancel();
-    }
-
-    @Override
-    public void focusButton(final IButton button) {
-        // ensure we don't steal focus from an overlay
-        if (!SOverlayUtils.overlayHasFocus()) {
-            FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
-                @Override
-                public void run() {
-                    ((FButton)button).requestFocusInWindow();
-                }
-            });
-        }
-    }
-
-    @Override
-    public void flashIncorrectAction() {
-        SDisplayUtil.remind(VPrompt.SINGLETON_INSTANCE);
-    }
-
-    @Override
-    public void updatePhase() {
-        final PlayerView p = Singletons.getControl().getGameView().getPlayerTurn();
-        final PhaseType ph = Singletons.getControl().getGameView().getPhase();
-        final CMatchUI matchUi = CMatchUI.SINGLETON_INSTANCE;
-        PhaseLabel lbl = matchUi.getFieldViewFor(p).getPhaseIndicator().getLabelFor(ph);
-
-        matchUi.resetAllPhaseButtons();
-        if (lbl != null) {
-            lbl.setActive(true);
-        }
-    }
-
-    @Override
-    public void updateTurn(final PlayerView player) {
-        VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(player);
-        SDisplayUtil.showTab(nextField);
-        CPrompt.SINGLETON_INSTANCE.updateText();
-        CMatchUI.SINGLETON_INSTANCE.repaintCardOverlays();
-    }
-
-    @Override
-    public void updatePlayerControl() {
-        CMatchUI.SINGLETON_INSTANCE.initHandViews();
-        SLayoutIO.loadLayout(null);
-        VMatchUI.SINGLETON_INSTANCE.populate();
-        for (VHand h : VMatchUI.SINGLETON_INSTANCE.getHands()) {
-            h.getLayoutControl().updateHand();
-        }
-    }
-    
-    @Override
-    public void disableOverlay() {
-        showOverlay = false;
-    }
-    
-    @Override
-    public void enableOverlay() {
-        showOverlay = true;
-    }
-
-    @Override
-    public void finishGame() {
-        new ViewWinLose(Singletons.getControl().getGameView());
-        if (showOverlay) {
-            SOverlayUtils.showOverlay();
-        }
-    }
-
-    @Override
-    public void updateStack() {
-        CStack.SINGLETON_INSTANCE.update();
-    }
-
-    @Override
-    public void startMatch(GameType gameType, List<RegisteredPlayer> players) {
-        FControl.instance.startMatch(gameType, players);
-    }
-
-    @Override
-    public void setPanelSelection(final CardView c) {
-        GuiUtils.setPanelSelection(c);
-    }
-
-    @Override
-    public int getAbilityToPlay(List<SpellAbilityView> abilities, ITriggerEvent triggerEvent) {
-        if (triggerEvent == null) {
-            if (abilities.isEmpty()) {
-                return -1;
-            }
-            if (abilities.size() == 1) {
-                return abilities.get(0).getId();
-            }
-            final SpellAbilityView choice = GuiChoose.oneOrNone("Choose ability to play", abilities);
-            return choice == null ? -1 : choice.getId();
-        }
-
-        if (abilities.isEmpty()) {
-            return -1;
-        }
-        if (abilities.size() == 1 && !abilities.get(0).isPromptIfOnlyPossibleAbility()) {
-            if (abilities.get(0).canPlay()) {
-                return abilities.get(0).getId(); //only return ability if it's playable, otherwise return null
-            }
-            return -1;
-        }
-
-        //show menu if mouse was trigger for ability
-        final JPopupMenu menu = new JPopupMenu("Abilities");
-
-        boolean enabled;
-        boolean hasEnabled = false;
-        int shortcut = KeyEvent.VK_1; //use number keys as shortcuts for abilities 1-9
-        for (final SpellAbilityView ab : abilities) {
-            enabled = ab.canPlay();
-            if (enabled) {
-                hasEnabled = true;
-            }
-            GuiUtils.addMenuItem(menu, FSkin.encodeSymbols(ab.toString(), true),
-                    shortcut > 0 ? KeyStroke.getKeyStroke(shortcut, 0) : null,
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            CPrompt.SINGLETON_INSTANCE.selectAbility(ab);
-                        }
-                    }, enabled);
-            if (shortcut > 0) {
-                shortcut++;
-                if (shortcut > KeyEvent.VK_9) {
-                    shortcut = 0; //stop adding shortcuts after 9
-                }
-            }
-        }
-        if (hasEnabled) { //only show menu if at least one ability can be played
-            SwingUtilities.invokeLater(new Runnable() { //use invoke later to ensure first ability selected by default
-                public void run() {
-                    MenuSelectionManager.defaultManager().setSelectedPath(new MenuElement[]{menu, menu.getSubElements()[0]});
-                }
-            });
-            MouseEvent mouseEvent = ((MouseTriggerEvent)triggerEvent).getMouseEvent();
-            menu.show(mouseEvent.getComponent(), mouseEvent.getX(), mouseEvent.getY());
-        }
-
-        return -1; //delay ability until choice made
-    }
-
-    @Override
-    public void hear(LobbyPlayer player, String message) {
-        FNetOverlay.SINGLETON_INSTANCE.addMessage(player.getName(), message);
-    }
-
-    @Override
     public int getAvatarCount() {
         if (FSkin.isLoaded()) {
             return FSkin.getAvatars().size();
@@ -401,104 +202,10 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public void fireEvent(UiEvent e) {
-        CMatchUI.SINGLETON_INSTANCE.fireEvent(e);
-    }
-
-    @Override
     public void setCard(final CardView card) {
         CMatchUI.SINGLETON_INSTANCE.setCard(card);
     }
 
-    @Override
-    public void showCombat(final CombatView combat) {
-        CMatchUI.SINGLETON_INSTANCE.showCombat(combat);
-    }
-
-    @Override
-    public void setUsedToPay(final CardView card, final boolean b) {
-        CMatchUI.SINGLETON_INSTANCE.setUsedToPay(card, b);
-    }
-
-    @Override
-    public void setHighlighted(final PlayerView player, final boolean b) {
-        CMatchUI.SINGLETON_INSTANCE.setHighlighted(player, b);
-    }
-
-    @Override
-    public void showPromptMessage(final PlayerView playerView, final String message) {
-        CMatchUI.SINGLETON_INSTANCE.showMessage(message);
-    }
-
-    @Override
-    public boolean stopAtPhase(final PlayerView playerTurn, PhaseType phase) {
-        return CMatchUI.SINGLETON_INSTANCE.stopAtPhase(playerTurn, phase);
-    }
-
-    public Object showManaPool(final PlayerView player) {
-        return null; //not needed since mana pool icons are always visible
-    }
-
-    @Override
-    public void hideManaPool(final PlayerView player, final Object zoneToRestore) {
-        //not needed since mana pool icons are always visible
-    }
-
-    @Override
-    public boolean openZones(final Collection<ZoneType> zones, final Map<PlayerView, Object> players) {
-        if (zones.size() == 1) {
-            switch (zones.iterator().next()) {
-            case Battlefield:
-            case Hand:
-                return true; //don't actually need to open anything, but indicate that zone can be opened
-            default:
-                return false;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public void restoreOldZones(final Map<PlayerView, Object> playersToRestoreZonesFor) {
-    }
-
-    @Override
-    public void updateZones(final List<Pair<PlayerView, ZoneType>> zonesToUpdate) {
-        CMatchUI.SINGLETON_INSTANCE.updateZones(zonesToUpdate);
-    }
-
-    @Override
-    public void updateCards(final Iterable<CardView> cardsToUpdate) {
-        CMatchUI.SINGLETON_INSTANCE.updateCards(cardsToUpdate);
-    }
-
-    @Override
-    public void refreshCardDetails(final Iterable<CardView> cards) {
-        CMatchUI.SINGLETON_INSTANCE.refreshCardDetails(cards);
-    }
-
-    @Override
-    public void updateManaPool(final List<PlayerView> manaPoolUpdate) {
-        CMatchUI.SINGLETON_INSTANCE.updateManaPool(manaPoolUpdate);
-    }
-
-    @Override
-    public void updateLives(final List<PlayerView> livesUpdate) {
-        CMatchUI.SINGLETON_INSTANCE.updateLives(livesUpdate);
-    }
-
-    @Override
-    public void endCurrentGame() {
-        FControl.instance.endCurrentGame(false, false);
-    }
-
-    @Override
-    public Map<CardView, Integer> getDamageToAssign(final CardView attacker,
-            final List<CardView> blockers, final int damageDealt,
-            final GameEntityView defender, final boolean overrideOrder) {
-        return CMatchUI.SINGLETON_INSTANCE.getDamageToAssign(attacker,
-                blockers, damageDealt, defender, overrideOrder);
-    }
 
     @Override
     public String showFileDialog(String title, String defaultDir) {
@@ -552,24 +259,6 @@ public class GuiDesktop implements IGuiBase {
     @Override
     public void clearImageCache() {
         ImageCache.clear();
-    }
-
-    @Override
-    public void startGame(Match match) {
-        SOverlayUtils.startGameOverlay();
-        SOverlayUtils.showOverlay();
-        Singletons.getControl().startGameWithUi(match);
-    }
-
-    @Override
-    public void continueMatch(Match match) {
-        Singletons.getControl().endCurrentGame(false, false);
-        if (match == null) {
-            Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
-        }
-        else {
-            Singletons.getControl().startGameWithUi(match);
-        }
     }
 
     @Override

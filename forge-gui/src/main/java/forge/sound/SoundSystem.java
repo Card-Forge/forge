@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.google.common.eventbus.Subscribe;
 
+import forge.GuiBase;
 import forge.events.UiEvent;
 import forge.game.event.GameEvent;
 import forge.interfaces.IGuiBase;
@@ -19,6 +20,8 @@ import forge.properties.ForgePreferences.FPref;
  *
  */
 public class SoundSystem {
+    public static final SoundSystem instance = new SoundSystem(GuiBase.getInterface());
+
     public static final int DELAY = 30;
 
     private static final IAudioClip emptySound = new NoSoundClip();
@@ -28,7 +31,7 @@ public class SoundSystem {
     private final IGuiBase gui;
     private final EventVisualizer visualizer;
 
-    public SoundSystem(final IGuiBase gui) {
+    private SoundSystem(final IGuiBase gui) {
         this.gui = gui;
         this.visualizer = new EventVisualizer(GamePlayerUtil.getGuiPlayer());
     }

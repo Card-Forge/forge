@@ -1,4 +1,4 @@
-package forge.screens.match;
+package forge.match;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -16,18 +16,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
-import forge.Forge;
-import forge.Graphics;
 import forge.GuiBase;
 import forge.LobbyPlayer;
-import forge.assets.FImage;
-import forge.assets.FSkin;
-import forge.assets.FTextureRegionImage;
+import forge.ai.LobbyPlayerAi;
 import forge.card.CardCharacteristicName;
 import forge.control.FControlGameEventHandler;
 import forge.control.FControlGamePlayback;
@@ -51,47 +47,41 @@ import forge.match.input.InputQueue;
 import forge.match.input.InputSynchronized;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
+import forge.player.LobbyPlayerHuman;
 import forge.player.PlayerControllerHuman;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
-import forge.screens.match.views.VAssignDamage;
-import forge.screens.match.views.VPrompt;
-import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
-import forge.screens.match.views.VPhaseIndicator;
-import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
-import forge.screens.match.views.VPlayerPanel;
 import forge.sound.MusicPlaylist;
-import forge.toolbox.FCardPanel;
-import forge.toolbox.FDisplayObject;
-import forge.toolbox.FOptionPane;
-import forge.util.Callback;
+import forge.sound.SoundSystem;
 import forge.util.GuiDisplayUtil;
 import forge.util.NameGenerator;
-import forge.util.WaitCallback;
+import forge.util.gui.SOptionPane;
 import forge.view.CardView;
-import forge.view.CardView.CardStateView;
-import forge.view.CombatView;
 import forge.view.GameEntityView;
 import forge.view.LocalGameView;
 import forge.view.PlayerView;
 import forge.view.WatchLocalGame;
 
-public class FControl {
-    private FControl() { } //don't allow creating instance
-
+public class MatchUtil {
+    private static IMatchController controller;
     private static Game game;
     private static List<LocalGameView> gameViews = new ArrayList<LocalGameView>();
-    private static MatchScreen view;
     private static final EventBus uiEvents;
-    private static final MatchUiEventVisitor visitor = new MatchUiEventVisitor();
     private static FControlGamePlayback playbackControl;
-    private static final Map<LobbyPlayer, FImage> avatarImages = new HashMap<LobbyPlayer, FImage>();
+    private static final MatchUiEventVisitor visitor = new MatchUiEventVisitor();
 
     static {
         uiEvents = new EventBus("ui events");
-        uiEvents.register(Forge.getSoundSystem());
+        uiEvents.register(SoundSystem.instance);
         uiEvents.register(visitor);
+    }
+
+    public static IMatchController getController() {
+        return controller;
+    }
+    public static void setController(IMatchController controller0) {
+        controller = controller0;
     }
 
     public static void startMatch(GameType gameType, List<RegisteredPlayer> players) {
@@ -112,16 +102,16 @@ public class FControl {
         rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
         rules.canCloneUseTargetsImage = FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE);
 
-        startGame(new Match(rules, players));
+        controller.startNewMatch(new Match(rules, players));
     }
 
-    public static void startGameInSameMatch() {
+    public static void continueMatch() {
         final Match match = game.getMatch();
         endCurrentGame();
         startGame(match);
     }
 
-    public static void startGameInNewMatch() {
+    public static void restartMatch() {
         final Match match = game.getMatch();
         endCurrentGame();
         match.clearGamesPlayed();
@@ -129,10 +119,19 @@ public class FControl {
     }
 
     public static void startGame(final Match match) {
-        cardDetailsCache.clear(); //ensure details cache cleared before starting a new game
-        CardAreaPanel.resetForNewGame(); //ensure card panels reset between games
+        if (!controller.resetForNewGame()) { return; }
 
-        Forge.getSoundSystem().setBackgroundMusic(MusicPlaylist.MATCH);
+        //prompt user for player one name if needed
+        final ForgePreferences prefs = FModel.getPreferences();
+        if (StringUtils.isBlank(prefs.getPref(FPref.PLAYER_NAME))) {
+            boolean isPlayerOneHuman = match.getPlayers().get(0).getPlayer() instanceof LobbyPlayerHuman;
+            boolean isPlayerTwoComputer = match.getPlayers().get(1).getPlayer() instanceof LobbyPlayerAi;
+            if (isPlayerOneHuman && isPlayerTwoComputer) {
+                GamePlayerUtil.setPlayerName(GuiBase.getInterface());
+            }
+        }
+
+        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MATCH);
 
         game = match.createGame();
 
@@ -145,9 +144,9 @@ public class FControl {
             game.subscribeToEvents(qc); // this one listens to player's mulligans ATM
         }
 
-        game.subscribeToEvents(Forge.getSoundSystem());
+        game.subscribeToEvents(SoundSystem.instance);
 
-        final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
+        final String[] indices = prefs.getPref(FPref.UI_AVATARS).split(",");
 
         // Instantiate all required field slots (user at 0)
         final List<Player> sortedPlayers = new ArrayList<Player>(game.getRegisteredPlayers());
@@ -161,7 +160,6 @@ public class FControl {
         });
 
         gameViews.clear();
-        List<VPlayerPanel> playerPanels = new ArrayList<VPlayerPanel>();
 
         int i = 0;
         int avatarIndex = 0;
@@ -195,35 +193,13 @@ public class FControl {
             }
         }
 
-        for (Player p : sortedPlayers) {
-            playerPanels.add(new VPlayerPanel(getGameView(p).getPlayerView(p), humanCount == 0 || p.getController() instanceof PlayerControllerHuman));
-        }
-        view = new MatchScreen(playerPanels);
-
         if (humanCount == 0) {
             playbackControl = new FControlGamePlayback(GuiBase.getInterface(), getGameView());
             playbackControl.setGame(game);
             game.subscribeToEvents(playbackControl);
-
-            //add special object that pauses game if screen touched
-            view.add(new FDisplayObject() {
-                @Override
-                public void draw(Graphics g) {
-                    //don't draw anything
-                }
-
-                @Override
-                public void buildTouchListeners(float screenX, float screenY, ArrayList<FDisplayObject> listeners) {
-                    if (screenY < view.getHeight() - VPrompt.HEIGHT) {
-                        pause();
-                    }
-                }
-            });
         }
 
-        actuateMatchPreferences();
-
-        Forge.openScreen(view);
+        controller.openView(sortedPlayers, humanCount);
 
         // It's important to run match in a different thread to allow GUI inputs to be invoked from inside game. 
         // Game is set on pause while gui player takes decisions
@@ -256,10 +232,6 @@ public class FControl {
         }
     }
 
-    public static MatchScreen getView() {
-        return view;
-    }
-
     public static InputQueue getInputQueue() {
         LocalGameView gameView = getGameView();
         if (gameView != null) {
@@ -268,42 +240,8 @@ public class FControl {
         return null;
     }
 
-    public static boolean stopAtPhase(final PlayerView turn, final PhaseType phase) {
-        PhaseLabel label = getPlayerPanel(turn).getPhaseIndicator().getLabel(phase);
-        return label == null || label.getStopAtPhase();
-    }
-
     public static void endCurrentTurn() {
         getGameView().passPriorityUntilEndOfTurn();
-    }
-
-    public static void resetAllPhaseButtons() {
-        for (final VPlayerPanel panel : view.getPlayerPanels().values()) {
-            panel.getPhaseIndicator().resetPhaseButtons();
-        }
-    }
-
-    public static VPlayerPanel getPlayerPanel(final PlayerView playerView) {
-        return view.getPlayerPanels().get(playerView);
-    }
-
-    public static void highlightCard(final CardView c) {
-        for (VPlayerPanel playerPanel : FControl.getView().getPlayerPanels().values()) {
-            for (FCardPanel p : playerPanel.getField().getCardPanels()) {
-                if (p.getCard().equals(c)) {
-                    p.setHighlighted(true);
-                    return;
-                }
-            }
-        }
-    }
-
-    public static void clearCardHighlights() {
-        for (VPlayerPanel playerPanel : FControl.getView().getPlayerPanels().values()) {
-            for (FCardPanel p : playerPanel.getField().getCardPanels()) {
-                p.setHighlighted(false);
-            }
-        }
     }
 
     public static Player getCurrentPlayer() {
@@ -330,29 +268,6 @@ public class FControl {
         getGameView().alphaStrike();
     }
 
-    public static void showCombat(CombatView combat) {
-        /*if (combat != null && combat.getAttackers().size() > 0 && combat.getAttackingPlayer().getGame().getStack().isEmpty()) {
-            if (selectedDocBeforeCombat == null) {
-                IVDoc<? extends ICDoc> combatDoc = EDocID.REPORT_COMBAT.getDoc();
-                if (combatDoc.getParentCell() != null) {
-                    selectedDocBeforeCombat = combatDoc.getParentCell().getSelected();
-                    if (selectedDocBeforeCombat != combatDoc) {
-                        SDisplayUtil.showTab(combatDoc);
-                    }
-                    else {
-                        selectedDocBeforeCombat = null; //don't need to cache combat doc this way
-                    }
-                }
-            }
-        }
-        else if (selectedDocBeforeCombat != null) { //re-select doc that was selected before once combat finished
-            SDisplayUtil.showTab(selectedDocBeforeCombat);
-            selectedDocBeforeCombat = null;
-        }
-        CCombat.SINGLETON_INSTANCE.setModel(combat);
-        CCombat.SINGLETON_INSTANCE.update();*/
-    }
-
     public static Map<CardView, Integer> getDamageToAssign(final CardView attacker, final List<CardView> blockers, final int damage, final GameEntityView defender, final boolean overrideOrder) {
         if (damage <= 0) {
             return new HashMap<CardView, Integer>();
@@ -366,22 +281,20 @@ public class FControl {
             return res;
         }
 
-        return new WaitCallback<Map<CardView, Integer>>() {
-            @Override
-            public void run() {
-                VAssignDamage v = new VAssignDamage(attacker, blockers, damage, defender, overrideOrder, this);
-                v.show();
-            }
-        }.invokeAndWait();
+        return controller.assignDamage(attacker, blockers, damage, defender, overrideOrder);
     }
 
     private static Set<PlayerView> highlightedPlayers = new HashSet<PlayerView>();
-    public static void setHighlighted(PlayerView ge, boolean b) {
-        if (b) highlightedPlayers.add(ge);
-        else highlightedPlayers.remove(ge);
+    public static void setHighlighted(PlayerView pv, boolean b) {
+        if (b) {
+            highlightedPlayers.add(pv);
+        }
+        else {
+            highlightedPlayers.remove(pv);
+        }
     }
 
-    public static boolean isHighlighted(Player player) {
+    public static boolean isHighlighted(PlayerView player) {
         return highlightedPlayers.contains(player);
     }
 
@@ -390,7 +303,7 @@ public class FControl {
     public static void setUsedToPay(CardView card, boolean value) {
         boolean hasChanged = value ? highlightedCards.add(card) : highlightedCards.remove(card);
         if (hasChanged) { // since we are in UI thread, may redraw the card right now
-            updateSingleCard(card);
+            controller.updateSingleCard(card);
         }
     }
 
@@ -398,79 +311,9 @@ public class FControl {
         return highlightedCards.contains(card);
     }
 
-    public static void updateZones(List<Pair<PlayerView, ZoneType>> zonesToUpdate) {
-        for (Pair<PlayerView, ZoneType> kv : zonesToUpdate) {
-            PlayerView owner = kv.getKey();
-            ZoneType zt = kv.getValue();
-            if (owner == null || zt == null) {
-                continue;
-            }
-            getPlayerPanel(owner).updateZone(zt);
-        }
-    }
-
-    // Player's mana pool changes
-    public static void updateManaPool(List<PlayerView> manaPoolUpdate) {
-        for (PlayerView p : manaPoolUpdate) {
-            getPlayerPanel(p).updateManaPool();
-        }
-    }
-
-    // Player's lives and poison counters
-    public static void updateLives(List<PlayerView> livesUpdate) {
-        for (PlayerView p : livesUpdate) {
-            getPlayerPanel(p).updateLife();
-        }
-    }
-
     public static void updateCards(Iterable<CardView> cardsToUpdate) {
         for (CardView c : cardsToUpdate) {
-            updateSingleCard(c);
-        }
-    }
-
-    private static final Map<Integer, CardStateView> cardDetailsCache = new HashMap<Integer, CardStateView>();
-
-    public static CardStateView getCardDetails(CardView card) {
-        final CardStateView details = cardDetailsCache.get(card.getId());
-        if (details == null) {
-            cardDetailsCache.put(card.getId(), card.getOriginal());
-            return card.getOriginal();
-        }
-        return details;
-    }
-
-    public static void refreshCardDetails(Iterable<CardView> cards) {
-        Set<PlayerView> playersNeedingFieldUpdate = null;
-
-        for (final CardView c : cards) {
-            //for each card in play, if it changed from creature to non-creature or vice versa,
-            //or if it changed from land to non-land or vice-versa,
-            //ensure field containing that card is updated to reflect that change
-            final CardStateView state = c.getOriginal();
-            if (c.getZone() == ZoneType.Battlefield) {
-                CardStateView oldDetails = cardDetailsCache.get(c);
-                if (oldDetails == null || state.isCreature() != oldDetails.isCreature() || state.isLand() != oldDetails.isLand()) {
-                    if (playersNeedingFieldUpdate == null) {
-                        playersNeedingFieldUpdate = new HashSet<PlayerView>();
-                    }
-                    playersNeedingFieldUpdate.add(c.getController());
-                }
-            }
-            cardDetailsCache.put(c.getId(), c.getOriginal());
-        }
-
-        if (playersNeedingFieldUpdate != null) { //update field for any players necessary
-            for (PlayerView p : playersNeedingFieldUpdate) {
-                getPlayerPanel(p).getField().update();
-            }
-        }
-    }
-
-    public static void updateSingleCard(final CardView card) {
-        final ZoneType zone = card.getZone();
-        if (zone != null && zone == ZoneType.Battlefield) {
-            getPlayerPanel(card.getController()).getField().updateCard(card);
+            controller.updateSingleCard(c);
         }
     }
 
@@ -479,14 +322,9 @@ public class FControl {
         String userPrompt =
                 "This will end the current game and you will not be able to resume.\n\n" +
                         "Concede anyway?";
-        FOptionPane.showConfirmDialog(userPrompt, "Concede Game?", "Concede", "Cancel", false, new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                if (result) {
-                    stopGame();
-                }
-            }
-        });
+        if (SOptionPane.showConfirmDialog(GuiBase.getInterface(), userPrompt, "Concede Game?", "Concede", "Cancel")) {
+            stopGame();
+        }
     }
 
     public static void stopGame() {
@@ -525,13 +363,12 @@ public class FControl {
     public static void endCurrentGame() {
         if (game == null) { return; }
 
-        Forge.back();
         game = null;
-        cardDetailsCache.clear(); //ensure card details cache cleared ending game
+        controller.afterGameEnd();
     }
 
     public static void pause() {
-        Forge.getSoundSystem().pause();
+        SoundSystem.instance.pause();
         //pause playback if needed
         InputQueue inputQueue = getInputQueue();
         if (inputQueue != null && inputQueue.getInput() instanceof InputPlaybackControl) {
@@ -540,7 +377,7 @@ public class FControl {
     }
 
     public static void resume() {
-        Forge.getSoundSystem().resume();
+        SoundSystem.instance.resume();
     }
 
     private final static boolean LOG_UIEVENTS = false;
@@ -551,25 +388,6 @@ public class FControl {
             //System.out.println("UI: " + uiEvent.toString()  + " \t\t " + FThreads.debugGetStackTraceItem(4, true));
         }
         uiEvents.post(uiEvent);
-    }
-
-    private static class MatchUiEventVisitor implements IUiEventVisitor<Void> {
-        @Override
-        public Void visit(UiEventBlockerAssigned event) {
-            updateSingleCard(event.blocker);
-            return null;
-        }
-
-        @Override
-        public Void visit(UiEventAttackerDeclared event) {
-            updateSingleCard(event.attacker);
-            return null;
-        }
-
-        @Subscribe
-        public void receiveEvent(UiEvent evt) {
-            evt.visit(this);
-        }
     }
 
     public static void setupGameState(String filename) {
@@ -647,10 +465,10 @@ public class FControl {
             in.close();
         }
         catch (final FileNotFoundException fnfe) {
-            FOptionPane.showErrorDialog("File not found: " + filename);
+            SOptionPane.showErrorDialog(GuiBase.getInterface(), "File not found: " + filename);
         }
         catch (final Exception e) {
-            FOptionPane.showErrorDialog("Error loading battle setup file!");
+            SOptionPane.showErrorDialog(GuiBase.getInterface(), "Error loading battle setup file!");
             return;
         }
 
@@ -745,72 +563,6 @@ public class FControl {
         }
         return cl;
     }
-
-    public static void writeMatchPreferences() {
-        ForgePreferences prefs = FModel.getPreferences();
-
-        VPhaseIndicator fvAi = FControl.getView().getTopPlayerPanel().getPhaseIndicator();
-        prefs.setPref(FPref.PHASE_AI_UPKEEP, String.valueOf(fvAi.getLabel(PhaseType.UPKEEP).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_AI_DRAW, String.valueOf(fvAi.getLabel(PhaseType.DRAW).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_AI_MAIN1, String.valueOf(fvAi.getLabel(PhaseType.MAIN1).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_AI_BEGINCOMBAT, String.valueOf(fvAi.getLabel(PhaseType.COMBAT_BEGIN).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_AI_DECLAREATTACKERS, String.valueOf(fvAi.getLabel(PhaseType.COMBAT_DECLARE_ATTACKERS).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_AI_DECLAREBLOCKERS, String.valueOf(fvAi.getLabel(PhaseType.COMBAT_DECLARE_BLOCKERS).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_AI_FIRSTSTRIKE, String.valueOf(fvAi.getLabel(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_AI_COMBATDAMAGE, String.valueOf(fvAi.getLabel(PhaseType.COMBAT_DAMAGE).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_AI_ENDCOMBAT, String.valueOf(fvAi.getLabel(PhaseType.COMBAT_END).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_AI_MAIN2, String.valueOf(fvAi.getLabel(PhaseType.MAIN2).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_AI_EOT, String.valueOf(fvAi.getLabel(PhaseType.END_OF_TURN).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_AI_CLEANUP, String.valueOf(fvAi.getLabel(PhaseType.CLEANUP).getStopAtPhase()));
-
-        VPhaseIndicator fvHuman = FControl.getView().getBottomPlayerPanel().getPhaseIndicator();
-        prefs.setPref(FPref.PHASE_HUMAN_UPKEEP, String.valueOf(fvHuman.getLabel(PhaseType.UPKEEP).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_HUMAN_DRAW, String.valueOf(fvHuman.getLabel(PhaseType.DRAW).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_HUMAN_MAIN1, String.valueOf(fvHuman.getLabel(PhaseType.MAIN1).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_HUMAN_BEGINCOMBAT, String.valueOf(fvHuman.getLabel(PhaseType.COMBAT_BEGIN).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_HUMAN_DECLAREATTACKERS, String.valueOf(fvHuman.getLabel(PhaseType.COMBAT_DECLARE_ATTACKERS).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_HUMAN_DECLAREBLOCKERS, String.valueOf(fvHuman.getLabel(PhaseType.COMBAT_DECLARE_BLOCKERS).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_HUMAN_FIRSTSTRIKE, String.valueOf(fvHuman.getLabel(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_HUMAN_COMBATDAMAGE, String.valueOf(fvHuman.getLabel(PhaseType.COMBAT_DAMAGE).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_HUMAN_ENDCOMBAT, String.valueOf(fvHuman.getLabel(PhaseType.COMBAT_END).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_HUMAN_MAIN2, String.valueOf(fvHuman.getLabel(PhaseType.MAIN2).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_HUMAN_EOT, fvHuman.getLabel(PhaseType.END_OF_TURN).getStopAtPhase());
-        prefs.setPref(FPref.PHASE_HUMAN_CLEANUP, fvHuman.getLabel(PhaseType.CLEANUP).getStopAtPhase());
-
-        prefs.save();
-    }
-
-    private static void actuateMatchPreferences() {
-        ForgePreferences prefs = FModel.getPreferences();
-
-        VPhaseIndicator fvAi = FControl.getView().getTopPlayerPanel().getPhaseIndicator();
-        fvAi.getLabel(PhaseType.UPKEEP).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_UPKEEP));
-        fvAi.getLabel(PhaseType.DRAW).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_DRAW));
-        fvAi.getLabel(PhaseType.MAIN1).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_MAIN1));
-        fvAi.getLabel(PhaseType.COMBAT_BEGIN).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_BEGINCOMBAT));
-        fvAi.getLabel(PhaseType.COMBAT_DECLARE_ATTACKERS).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_DECLAREATTACKERS));
-        fvAi.getLabel(PhaseType.COMBAT_DECLARE_BLOCKERS).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_DECLAREBLOCKERS));
-        fvAi.getLabel(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_FIRSTSTRIKE));
-        fvAi.getLabel(PhaseType.COMBAT_DAMAGE).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_COMBATDAMAGE));
-        fvAi.getLabel(PhaseType.COMBAT_END).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_ENDCOMBAT));
-        fvAi.getLabel(PhaseType.MAIN2).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_MAIN2));
-        fvAi.getLabel(PhaseType.END_OF_TURN).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_EOT));
-        fvAi.getLabel(PhaseType.CLEANUP).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_CLEANUP));
-
-        VPhaseIndicator fvHuman = FControl.getView().getBottomPlayerPanel().getPhaseIndicator();
-        fvHuman.getLabel(PhaseType.UPKEEP).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_UPKEEP));
-        fvHuman.getLabel(PhaseType.DRAW).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_DRAW));
-        fvHuman.getLabel(PhaseType.MAIN1).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_MAIN1));
-        fvHuman.getLabel(PhaseType.COMBAT_BEGIN).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_BEGINCOMBAT));
-        fvHuman.getLabel(PhaseType.COMBAT_DECLARE_ATTACKERS).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_DECLAREATTACKERS));
-        fvHuman.getLabel(PhaseType.COMBAT_DECLARE_BLOCKERS).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_DECLAREBLOCKERS));
-        fvHuman.getLabel(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_FIRSTSTRIKE));
-        fvHuman.getLabel(PhaseType.COMBAT_DAMAGE).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_COMBATDAMAGE));
-        fvHuman.getLabel(PhaseType.COMBAT_END).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_ENDCOMBAT));
-        fvHuman.getLabel(PhaseType.MAIN2).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_MAIN2));
-        fvHuman.getLabel(PhaseType.END_OF_TURN).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_EOT));
-        fvHuman.getLabel(PhaseType.CLEANUP).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_CLEANUP));
-    }
     
     /** Returns a random name from the supplied list. */
     public static String getRandomName() {
@@ -823,16 +575,22 @@ public class FControl {
         return GamePlayerUtil.getGuiPlayer();
     }
 
-    public static FImage getPlayerAvatar(final PlayerView p) {
-        LobbyPlayer lp = p.getLobbyPlayer();
-        FImage avatar = avatarImages.get(lp);
-        if (avatar == null) {
-            avatar = new FTextureRegionImage(FSkin.getAvatars().get(lp.getAvatarIndex()));
+    private static class MatchUiEventVisitor implements IUiEventVisitor<Void> {
+        @Override
+        public Void visit(UiEventBlockerAssigned event) {
+            controller.updateSingleCard(event.blocker);
+            return null;
         }
-        return avatar;
-    }
 
-    public static void setPlayerAvatar(final LobbyPlayer lp, final FImage avatarImage) {
-        avatarImages.put(lp, avatarImage);
+        @Override
+        public Void visit(UiEventAttackerDeclared event) {
+            controller.updateSingleCard(event.attacker);
+            return null;
+        }
+
+        @Subscribe
+        public void receiveEvent(UiEvent evt) {
+            evt.visit(this);
+        }
     }
 }

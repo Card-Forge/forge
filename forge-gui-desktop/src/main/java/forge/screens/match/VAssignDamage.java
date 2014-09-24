@@ -37,8 +37,8 @@ import net.miginfocom.swing.MigLayout;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import forge.control.FControl;
 import forge.gui.SOverlayUtils;
+import forge.match.MatchUtil;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
@@ -445,7 +445,7 @@ public class VAssignDamage {
         if (card == null) {
             if (defender instanceof PlayerView) {
                 final PlayerView p = (PlayerView)defender;
-                lethalDamage = attackerHasInfect ? FControl.instance.getGameView().getPoisonCountersToLose() - p.getPoisonCounters() : p.getLife();
+                lethalDamage = attackerHasInfect ? MatchUtil.getGameView().getPoisonCountersToLose() - p.getPoisonCounters() : p.getLife();
             } else if (defender instanceof CardView) { // planeswalker
                 final CardView pw = (CardView)defender;
                 lethalDamage = pw.getOriginal().getLoyalty();

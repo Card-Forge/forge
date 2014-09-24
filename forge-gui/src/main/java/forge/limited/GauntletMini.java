@@ -23,7 +23,7 @@ import java.util.List;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
-import forge.interfaces.IGuiBase;
+import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.Aggregates;
@@ -38,8 +38,6 @@ import forge.util.Aggregates;
  * @since 1.2.xx
  */
 public class GauntletMini {
-
-    private final IGuiBase gui;
     private int rounds;
     private Deck humanDeck;
     private int currentRound;
@@ -49,8 +47,7 @@ public class GauntletMini {
     private GameType gauntletType;
     private List<RegisteredPlayer> aiOpponents = new ArrayList<RegisteredPlayer>();
 
-    public GauntletMini(IGuiBase gui) {
-        this.gui = gui;
+    public GauntletMini() {
     }
 
     // private final String humanName;
@@ -86,7 +83,7 @@ public class GauntletMini {
         }
 
         currentRound++;
-        gui.endCurrentGame();
+        MatchUtil.endCurrentGame();
         startRound();
     }
 
@@ -143,7 +140,7 @@ public class GauntletMini {
         starter.add(new RegisteredPlayer(humanDeck).setPlayer(GamePlayerUtil.getGuiPlayer()));
         starter.add(aiOpponents.get(currentRound - 1).setPlayer(GamePlayerUtil.createAiPlayer()));
 
-        gui.startMatch(gauntletType, starter);
+        MatchUtil.startMatch(gauntletType, starter);
     }
 
     /**

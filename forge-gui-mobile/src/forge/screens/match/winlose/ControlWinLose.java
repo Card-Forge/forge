@@ -1,6 +1,7 @@
 package forge.screens.match.winlose;
 
-import forge.screens.match.FControl;
+import forge.match.MatchUtil;
+import forge.screens.match.MatchController;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.view.IGameView;
@@ -53,21 +54,21 @@ public class ControlWinLose {
         view.hide();
         saveOptions();
 
-        FControl.startGameInSameMatch();
+        MatchUtil.continueMatch();
     }
 
     /** Action performed when "restart" button is pressed in default win/lose UI. */
     public void actionOnRestart() {
         view.hide();
         saveOptions();
-        FControl.startGameInNewMatch();
+        MatchUtil.restartMatch();
     }
 
     /** Action performed when "quit" button is pressed in default win/lose UI. */
     public void actionOnQuit() {
         // Reset other stuff
         saveOptions();
-        FControl.endCurrentGame();
+        MatchUtil.endCurrentGame();
         view.hide();
     }
 
@@ -76,7 +77,7 @@ public class ControlWinLose {
      * with other game modes.
      */
     public void saveOptions() {
-        FControl.writeMatchPreferences();
+        MatchController.writeMatchPreferences();
     }
 
     /**

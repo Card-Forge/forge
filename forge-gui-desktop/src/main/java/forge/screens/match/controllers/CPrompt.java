@@ -28,10 +28,10 @@ import javax.swing.JButton;
 
 import forge.FThreads;
 import forge.GuiBase;
-import forge.Singletons;
 import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
+import forge.match.MatchUtil;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FSkin;
 import forge.util.ITriggerEvent;
@@ -90,31 +90,31 @@ public enum CPrompt implements ICDoc {
     }
 
     public void selectButtonOk() {
-        Singletons.getControl().getGameView().selectButtonOk();
+        MatchUtil.getGameView().selectButtonOk();
     }
 
     public void selectButtonCancel() {
-        Singletons.getControl().getGameView().selectButtonCancel();
+        MatchUtil.getGameView().selectButtonCancel();
     }
 
     public boolean passPriority() {
-        return Singletons.getControl().getGameView().passPriority();
+        return MatchUtil.getGameView().passPriority();
     }
 
     public boolean passPriorityUntilEndOfTurn() {
-        return Singletons.getControl().getGameView().passPriorityUntilEndOfTurn();
+        return MatchUtil.getGameView().passPriorityUntilEndOfTurn();
     }
 
     public void selectPlayer(final PlayerView player, final ITriggerEvent triggerEvent) {
-        Singletons.getControl().getGameView().selectPlayer(player, triggerEvent);
+        MatchUtil.getGameView().selectPlayer(player, triggerEvent);
     }
 
     public void selectCard(final CardView card, final ITriggerEvent triggerEvent) {
-        Singletons.getControl().getGameView().selectCard(card, triggerEvent);
+        MatchUtil.getGameView().selectCard(card, triggerEvent);
     }
 
     public void selectAbility(final SpellAbilityView sa) {
-        Singletons.getControl().getGameView().selectAbility(sa);
+        MatchUtil.getGameView().selectAbility(sa);
     }
 
     /** @param s0 &emsp; {@link java.lang.String} */
@@ -148,7 +148,7 @@ public enum CPrompt implements ICDoc {
 
     public void updateText() {
         FThreads.assertExecutedByEdt(GuiBase.getInterface(), true);
-        final IGameView game = Singletons.getControl().getGameView();
+        final IGameView game = MatchUtil.getGameView();
         final String text = String.format("T:%d G:%d/%d [%s]", game.getTurnNumber(), game.getNumPlayedGamesInMatch() + 1, game.getNumGamesInMatch(), game.getGameType());
         view.getLblGames().setText(text);
         view.getLblGames().setToolTipText(String.format("%s: Game #%d of %d, turn %d", game.getGameType(), game.getNumPlayedGamesInMatch() + 1, game.getNumGamesInMatch(), game.getTurnNumber()));

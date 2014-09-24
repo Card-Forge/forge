@@ -4,11 +4,11 @@ import forge.Singletons;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.SDisplayUtil;
+import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.home.settings.VSubmenuPreferences.KeyboardShortcutField;
-import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CDock;
 
 import org.apache.commons.lang3.StringUtils;
@@ -97,7 +97,7 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (Singletons.getControl().getCurrentScreen() != FScreen.MATCH_SCREEN) { return; }
-                CMatchUI.SINGLETON_INSTANCE.concede();
+                MatchUtil.concede();
             }
         };
 
@@ -115,7 +115,7 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (Singletons.getControl().getCurrentScreen() != FScreen.MATCH_SCREEN) { return; }
-                Singletons.getControl().getGameView().alphaStrike();
+                MatchUtil.alphaStrike();
             }
         };
 

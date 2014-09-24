@@ -38,6 +38,7 @@ import forge.interfaces.IButton;
 import forge.interfaces.IGuiBase;
 import forge.item.IPaperCard;
 import forge.item.PaperToken;
+import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
@@ -589,7 +590,7 @@ public class QuestUtil {
         FThreads.invokeInEdtNowOrLater(gui, new Runnable(){
             @Override
             public void run() {
-                gui.startGame(mc);
+                MatchUtil.startGame(mc);
             }
         });
     }

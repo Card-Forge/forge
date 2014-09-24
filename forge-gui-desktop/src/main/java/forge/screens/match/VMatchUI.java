@@ -1,10 +1,11 @@
 package forge.screens.match;
 
-import forge.Singletons;
 import forge.gui.framework.*;
+import forge.match.MatchUtil;
 import forge.properties.ForgePreferences;
 import forge.screens.match.views.*;
 import forge.sound.MusicPlaylist;
+import forge.sound.SoundSystem;
 import forge.toolbox.FButton;
 import forge.view.FView;
 
@@ -93,7 +94,7 @@ public enum VMatchUI implements IVTopLevelUI {
             }
         }
 
-        if (Singletons.getControl().getGameView().isCommandZoneNeeded()) {
+        if (MatchUtil.getGameView().isCommandZoneNeeded()) {
             // Add extra players alternatively to existing user/AI field panels.
             for (int i = 2; i < lstCommands.size(); i++) {
                 // If already in layout, no need to add again.
@@ -102,7 +103,8 @@ public enum VMatchUI implements IVTopLevelUI {
                     lstCommands.get(i % 2).getParentCell().addDoc(cmdView);
                 }
             }
-        } else {
+        }
+        else {
             //If game goesn't need command zone, remove it from existing field panels
             for (int i = 0; i < 2; i++) {
                 VCommand cmdView = lstCommands.get(i);
@@ -205,13 +207,13 @@ public enum VMatchUI implements IVTopLevelUI {
      */
     @Override
     public boolean onClosing(FScreen screen) {
-        if (!Singletons.getControl().getGameView().isGameOver()) {
-            CMatchUI.SINGLETON_INSTANCE.concede();
+        if (!MatchUtil.getGameView().isGameOver()) {
+            MatchUtil.concede();
             return false; //delay hiding tab even if concede successful
         }
 
         //switch back to menus music when closing screen
-        Singletons.getControl().getSoundSystem().setBackgroundMusic(MusicPlaylist.MENUS);
+        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
 
         wasClosed = true;
         return true;

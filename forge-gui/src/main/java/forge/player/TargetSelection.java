@@ -35,6 +35,7 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.match.MatchUtil;
 import forge.match.input.InputSelectTargets;
 import forge.util.Aggregates;
 import forge.util.gui.SGuiChoose;
@@ -138,12 +139,12 @@ public class TargetSelection {
             for (Card card : validTargets) {
                 playersWithValidTargets.put(controller.getPlayerView(card.getController()), null);
             }
-            if (controller.getGui().openZones(zone, playersWithValidTargets)) {
+            if (MatchUtil.getController().openZones(zone, playersWithValidTargets)) {
                 InputSelectTargets inp = new InputSelectTargets(controller, validTargets, ability, mandatory);
                 inp.showAndWait();
                 choiceResult = !inp.hasCancelled();
                 bTargetingDone = inp.hasPressedOk();
-                controller.getGui().restoreOldZones(playersWithValidTargets);
+                MatchUtil.getController().restoreOldZones(playersWithValidTargets);
             }
             else {
                 // for every other case an all-purpose GuiChoose

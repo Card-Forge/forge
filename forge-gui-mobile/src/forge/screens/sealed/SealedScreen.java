@@ -116,7 +116,7 @@ public class SealedScreen extends LaunchScreen {
         }
 
         int matches = FModel.getDecks().getSealed().get(human.getName()).getAiDecks().size();
-        FModel.getGauntletMini(GuiBase.getInterface()).launch(matches, human.getDeck(), GameType.Sealed);
+        FModel.getGauntletMini().launch(matches, human.getDeck(), GameType.Sealed);
         return false; //prevent launching via launch screen since gauntlet handles it
     }
 }

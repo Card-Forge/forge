@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Graphics;
-import forge.GuiBase;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.TextRenderer;
@@ -21,11 +20,12 @@ import forge.card.CardZoom;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.match.MatchUtil;
 import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDown;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
-import forge.screens.match.FControl;
+import forge.screens.match.MatchController;
 import forge.screens.match.TargetingOverlay;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
@@ -73,14 +73,14 @@ public class VStack extends FDropDown {
             playersWithValidTargets.put(c.getController(), c);
         }
         if (zones != null && zones.size() > 0 && playersWithValidTargets != null && playersWithValidTargets.size() > 0) {
-            GuiBase.getInterface().openZones(zones, playersWithValidTargets);
+            MatchController.instance.openZones(zones, playersWithValidTargets);
         }
     }
 
     //restore old zones when active stack instance changes
     private void restoreOldZones() {
         if (playersWithValidTargets == null) { return; }
-        GuiBase.getInterface().restoreOldZones(playersWithValidTargets);
+        MatchController.instance.restoreOldZones(playersWithValidTargets);
         playersWithValidTargets = null;
     }
 
@@ -90,7 +90,7 @@ public class VStack extends FDropDown {
         activeStackInstance = null; //reset before updating stack
         restoreOldZones();
 
-        final List<StackItemView> stack = FControl.getGameView().getStack();
+        final List<StackItemView> stack = MatchUtil.getGameView().getStack();
         if (stackSize != stack.size()) {
             int oldStackSize = stackSize;
             stackSize = stack.size();
@@ -118,10 +118,10 @@ public class VStack extends FDropDown {
 
         float x = MARGINS;
         float y = MARGINS;
-        float totalWidth = maxWidth - FControl.getView().getTopPlayerPanel().getTabs().iterator().next().getRight(); //keep avatar, life total, and hand tab visible to left of stack
+        float totalWidth = maxWidth - MatchController.getView().getTopPlayerPanel().getTabs().iterator().next().getRight(); //keep avatar, life total, and hand tab visible to left of stack
         float width = totalWidth - 2 * MARGINS;
 
-        final List<StackItemView> stack = FControl.getGameView().getStack();
+        final List<StackItemView> stack = MatchUtil.getGameView().getStack();
         if (stack.isEmpty()) { //show label if stack empty
             FLabel label = add(new FLabel.Builder().text("[Empty]").font(FONT).align(HAlignment.CENTER).build());
 
@@ -201,7 +201,7 @@ public class VStack extends FDropDown {
 
             text = stackInstance.getText();
             if (stackInstance.isOptionalTrigger() &&
-                    stackInstance0.getActivatingPlayer().equals(FControl.getCurrentPlayer())) {
+                    stackInstance0.getActivatingPlayer().equals(MatchUtil.getCurrentPlayer())) {
                 text = "(OPTIONAL) " + text;
             }
 
@@ -224,21 +224,21 @@ public class VStack extends FDropDown {
                 VStack.this.updateSizeAndPosition();
                 return true;
             }
-            Player player = FControl.getCurrentPlayer();
+            Player player = MatchUtil.getCurrentPlayer();
             if (player != null) { //don't show menu if tapping on art
                 if (stackInstance.isAbility()) {
                     FPopupMenu menu = new FPopupMenu() {
                         @Override
                         protected void buildMenu() {
-                            final IGameView gameView = FControl.getGameView();
-                            final Player player = FControl.getCurrentPlayer();
+                            final IGameView gameView = MatchUtil.getGameView();
+                            final Player player = MatchUtil.getCurrentPlayer();
                             final String key = stackInstance.getKey();
                             final boolean autoYield = gameView.shouldAutoYield(key);
                             addItem(new FCheckBoxMenuItem("Auto-Yield", autoYield,
                                     new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
-                                    FControl.getGameView().setShouldAutoYield(key, !autoYield);
+                                    MatchUtil.getGameView().setShouldAutoYield(key, !autoYield);
                                     if (!autoYield && stackInstance.equals(gameView.peekStack())) {
                                         //auto-pass priority if ability is on top of stack
                                         gameView.passPriority();

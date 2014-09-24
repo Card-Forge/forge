@@ -2,7 +2,6 @@ package forge.screens.home.sanctioned;
 
 import forge.LobbyPlayer;
 import forge.UiCommand;
-import forge.Singletons;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -13,6 +12,7 @@ import forge.game.player.RegisteredPlayer;
 import forge.gui.GuiDialog;
 import forge.gui.framework.ICDoc;
 import forge.item.PaperCard;
+import forge.match.MatchUtil;
 import forge.menus.IMenuProvider;
 import forge.menus.MenuUtil;
 import forge.model.CardCollections;
@@ -372,8 +372,8 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
             }
             view.getDeckChooser(i).saveState();
         }
-        
-        Singletons.getControl().startMatch(GameType.Constructed, variantTypes, players);
+
+        MatchUtil.startMatch(GameType.Constructed, variantTypes, players);
     }
 
     /* (non-Javadoc)

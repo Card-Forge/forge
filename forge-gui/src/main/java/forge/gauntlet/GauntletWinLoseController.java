@@ -10,8 +10,8 @@ import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IButton;
-import forge.interfaces.IGuiBase;
 import forge.interfaces.IWinLoseView;
+import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.view.IGameView;
@@ -19,12 +19,10 @@ import forge.view.IGameView;
 public abstract class GauntletWinLoseController {
     private final IGameView lastGame;
     private final IWinLoseView<? extends IButton> view;
-    private final IGuiBase gui;
 
-    public GauntletWinLoseController(IWinLoseView<? extends IButton> view0, final IGameView game0, final IGuiBase gui) {
+    public GauntletWinLoseController(IWinLoseView<? extends IButton> view0, final IGameView game0) {
         view = view0;
         lastGame = game0;
-        this.gui = gui;
     }
 
     public void showOutcome() {
@@ -121,9 +119,9 @@ public abstract class GauntletWinLoseController {
 
             view.hide();
             saveOptions();
-            gui.endCurrentGame();
+            MatchUtil.endCurrentGame();
 
-            gui.startMatch(GameType.Gauntlet, players);
+            MatchUtil.startMatch(GameType.Gauntlet, players);
             return true;
         }
         return false;

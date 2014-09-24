@@ -7,10 +7,11 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
+import forge.match.MatchUtil;
 import forge.menu.FDropDown;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
-import forge.screens.match.FControl;
+import forge.screens.match.MatchController;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FList;
@@ -20,7 +21,7 @@ import forge.view.PlayerView;
 
 public class VPlayers extends FDropDown {
     public VPlayers() {
-        for (final PlayerView p : FControl.getGameView().getPlayers()) {
+        for (final PlayerView p : MatchUtil.getGameView().getPlayers()) {
             add(new PlayerInfoPanel(p));
         }
     }
@@ -63,7 +64,7 @@ public class VPlayers extends FDropDown {
             float y = PADDING;
             float h = getHeight() - 2 * y;
 
-            FImage avatarImage = FControl.getPlayerAvatar(player);
+            FImage avatarImage = MatchController.getPlayerAvatar(player);
             g.drawImage(avatarImage, x, y, h, h);
             x += h + PADDING;
 
@@ -87,7 +88,7 @@ public class VPlayers extends FDropDown {
                     }
                 }
             }
-            if (FControl.getGameView().isCommander()) {
+            if (MatchUtil.getGameView().isCommander()) {
                 builder.append("  |  " + player.getCommanderInfo());
             }
 

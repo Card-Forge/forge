@@ -17,20 +17,22 @@
  */
 package forge.screens.match;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.swing.JMenu;
+import javax.swing.JPopupMenu;
+import javax.swing.KeyStroke;
+import javax.swing.MenuElement;
+import javax.swing.MenuSelectionManager;
+import javax.swing.SwingUtilities;
 
 import org.apache.commons.lang3.tuple.Pair;
-
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-import com.google.common.eventbus.EventBus;
-import com.google.common.eventbus.Subscribe;
 
 import forge.FThreads;
 import forge.GuiBase;
@@ -38,42 +40,55 @@ import forge.ImageCache;
 import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.UiCommand;
-import forge.events.IUiEventVisitor;
-import forge.events.UiEvent;
-import forge.events.UiEventAttackerDeclared;
-import forge.events.UiEventBlockerAssigned;
+import forge.game.Match;
 import forge.game.phase.PhaseType;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.gui.FNetOverlay;
+import forge.gui.GuiChoose;
+import forge.gui.GuiUtils;
+import forge.gui.SOverlayUtils;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.framework.SDisplayUtil;
+import forge.gui.framework.SLayoutIO;
+import forge.interfaces.IButton;
 import forge.item.InventoryItem;
+import forge.match.IMatchController;
+import forge.match.MatchUtil;
 import forge.menus.IMenuProvider;
 import forge.model.FModel;
 import forge.player.LobbyPlayerHuman;
+import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
-import forge.quest.QuestDraftUtils;
 import forge.screens.match.controllers.CAntes;
 import forge.screens.match.controllers.CCombat;
 import forge.screens.match.controllers.CDetail;
 import forge.screens.match.controllers.CPicture;
 import forge.screens.match.controllers.CPrompt;
+import forge.screens.match.controllers.CStack;
 import forge.screens.match.menus.CMatchUIMenus;
 import forge.screens.match.views.VCommand;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
 import forge.screens.match.views.VPlayers;
+import forge.screens.match.views.VPrompt;
+import forge.toolbox.FButton;
 import forge.toolbox.FOptionPane;
-import forge.toolbox.FOverlay;
 import forge.toolbox.FSkin;
+import forge.toolbox.MouseTriggerEvent;
 import forge.toolbox.FSkin.SkinImage;
+import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PhaseLabel;
+import forge.util.ITriggerEvent;
 import forge.view.CardView;
 import forge.view.CombatView;
 import forge.view.GameEntityView;
+import forge.view.LocalGameView;
 import forge.view.PlayerView;
+import forge.view.SpellAbilityView;
 import forge.view.ViewUtil;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.PlayArea;
@@ -86,23 +101,16 @@ import forge.view.arcane.PlayArea;
  * 
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
-public enum CMatchUI implements ICDoc, IMenuProvider {
+public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
     SINGLETON_INSTANCE;
 
     private List<PlayerView> sortedPlayers;
     private VMatchUI view;
     private boolean allHands;
+    private boolean showOverlay = true;
 
-    private EventBus uiEvents;
     private IVDoc<? extends ICDoc> selectedDocBeforeCombat;
-    private MatchUiEventVisitor visitor = new MatchUiEventVisitor();
     public final Map<LobbyPlayer, String> avatarImages = new HashMap<LobbyPlayer, String>();
-
-    private CMatchUI() {
-        uiEvents = new EventBus("ui events");
-        uiEvents.register(Singletons.getControl().getSoundSystem());
-        uiEvents.register(visitor);
-    }
 
     private SkinImage getPlayerAvatar(final LobbyPlayer p, final int defaultIndex) {
          if (avatarImages.containsKey(p)) {
@@ -208,40 +216,6 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
 
     /**
      * 
-     * Fires up trample dialog.  Very old code, due for refactoring with new UI.
-     * Could possibly move to view.
-     * 
-     * @param attacker &emsp; {@link forge.game.card.Card}
-     * @param blockers &emsp; {@link forge.CardList}
-     * @param damage &emsp; int
-     * @param overrideOrder overriding combatant order
-     */
-    @SuppressWarnings("unchecked")
-    public Map<CardView, Integer> getDamageToAssign(final CardView attacker, final List<CardView> blockers, final int damage, final GameEntityView defender, final boolean overrideOrder) {
-        if (damage <= 0) {
-            return Maps.newHashMap();
-        }
-
-        // If the first blocker can absorb all of the damage, don't show the Assign Damage Frame
-        final CardView firstBlocker = blockers.get(0);
-        if (!overrideOrder && !attacker.getOriginal().hasDeathtouch() && firstBlocker.getLethalDamage() >= damage) {
-            final Map<CardView, Integer> res = Maps.newHashMap();
-            res.put(firstBlocker, damage);
-            return res;
-        }
-
-        final Object[] result = { null }; // how else can I extract a value from EDT thread?
-        FThreads.invokeInEdtAndWait(GuiBase.getInterface(), new Runnable() {
-            @Override
-            public void run() {
-                VAssignDamage v = new VAssignDamage(attacker, blockers, damage, defender, overrideOrder);
-                result[0] = v.getDamageMap();
-            }});
-        return (Map<CardView, Integer>)result[0];
-    }
-
-    /**
-     * 
      * Checks if game control should stop at a phase, for either
      * a forced programmatic stop, or a user-induced phase toggle.
      * @param turn &emsp; {@link forge.game.player.Player}
@@ -275,7 +249,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
     }
 
     public void showCombat(final CombatView combat) {
-        if (combat != null && combat.getNumAttackers() > 0 && Singletons.getControl().getGameView().peekStack() == null) {
+        if (combat != null && combat.getNumAttackers() > 0 && MatchUtil.getGameView().peekStack() == null) {
             if (selectedDocBeforeCombat == null) {
                 IVDoc<? extends ICDoc> combatDoc = EDocID.REPORT_COMBAT.getDoc();
                 if (combatDoc.getParentCell() != null) {
@@ -296,31 +270,6 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         CCombat.SINGLETON_INSTANCE.setModel(combat);
         CCombat.SINGLETON_INSTANCE.update();
     } // showCombat(CombatView)
-
-    final Set<PlayerView> highlightedPlayers = Sets.newHashSet();
-    public void setHighlighted(PlayerView ge, boolean b) {
-        if (b) highlightedPlayers.add(ge);
-        else highlightedPlayers.remove(ge);
-    }
-
-    public boolean isHighlighted(final PlayerView player) {
-        return highlightedPlayers.contains(player);
-    }
-
-    Set<CardView> highlightedCards = Sets.newHashSet();
-    // used to highlight cards in UI
-    public void setUsedToPay(CardView card, boolean value) {
-        FThreads.assertExecutedByEdt(GuiBase.getInterface(), true);
-
-        boolean hasChanged = value ? highlightedCards.add(card) : highlightedCards.remove(card);
-        if (hasChanged) { // since we are in UI thread, may redraw the card right now
-            updateSingleCard(card);
-        }
-    }
-
-    public boolean isUsedToPay(CardView card) {
-        return highlightedCards.contains(card);
-    }
 
     public void updateZones(List<Pair<PlayerView, ZoneType>> zonesToUpdate) {
         //System.out.println("updateZones " + zonesToUpdate);
@@ -362,13 +311,6 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         for (final PlayerView p : livesUpdate) {
             getFieldViewFor(p).updateDetails();
         }
-
-    }
-
-    public void updateCards(final Iterable<CardView> cardsToUpdate) {
-        for (final CardView c : cardsToUpdate) {
-            updateSingleCard(c);
-        }
     }
 
     public void updateSingleCard(final CardView c) {
@@ -387,35 +329,6 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
                     pnl.updatePTOverlay();
                 }
             }
-        }
-    }
-
-    private final static boolean LOG_UIEVENTS = false;
-
-    // UI-related events should arrive here
-    public void fireEvent(UiEvent uiEvent) {
-        if (LOG_UIEVENTS) {
-            System.out.println("UI: " + uiEvent.toString()  + " \t\t " + FThreads.debugGetStackTraceItem(GuiBase.getInterface(), 4, true));
-        }
-        uiEvents.post(uiEvent);
-    }
-
-    public class MatchUiEventVisitor implements IUiEventVisitor<Void> {
-        @Override
-        public Void visit(UiEventBlockerAssigned event) {
-            updateSingleCard(event.blocker);
-            return null;
-        }
-
-        @Override
-        public Void visit(UiEventAttackerDeclared event) {
-            updateSingleCard(event.attacker);
-            return null;
-        }
-
-        @Subscribe
-        public void receiveEvent(UiEvent evt) {
-            evt.visit(this);
         }
     }
 
@@ -469,19 +382,339 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         return panels;
     }
 
-    /** Concede game, bring up WinLose UI. */
-    public void concede() {
-        if (FOverlay.SINGLETON_INSTANCE.getPanel().isShowing() || QuestDraftUtils.aiMatchInProgress) {
-            return;
+    @Override
+    public boolean resetForNewGame() {
+        if (MatchUtil.getGame() != null) {
+            Singletons.getControl().setCurrentScreen(FScreen.MATCH_SCREEN);
+            SOverlayUtils.hideOverlay();
+            FOptionPane.showMessageDialog("Cannot start a new game while another game is already in progress.");
+            return false; //TODO: See if it's possible to run multiple games at once without crashing
+        }
+        return true;
+    }
+
+    @Override
+    public IButton getBtnOK(PlayerView playerView) {
+        return VMatchUI.SINGLETON_INSTANCE.getBtnOK();
+    }
+
+    @Override
+    public IButton getBtnCancel(PlayerView playerView) {
+        return VMatchUI.SINGLETON_INSTANCE.getBtnCancel();
+    }
+
+    @Override
+    public void focusButton(final IButton button) {
+        // ensure we don't steal focus from an overlay
+        if (!SOverlayUtils.overlayHasFocus()) {
+            FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
+                @Override
+                public void run() {
+                    ((FButton)button).requestFocusInWindow();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void flashIncorrectAction() {
+        SDisplayUtil.remind(VPrompt.SINGLETON_INSTANCE);
+    }
+
+    @Override
+    public void updatePhase() {
+        LocalGameView gameView = MatchUtil.getGameView();
+        final PlayerView p = gameView.getPlayerTurn();
+        final PhaseType ph = gameView.getPhase();
+        final CMatchUI matchUi = CMatchUI.SINGLETON_INSTANCE;
+        PhaseLabel lbl = matchUi.getFieldViewFor(p).getPhaseIndicator().getLabelFor(ph);
+
+        matchUi.resetAllPhaseButtons();
+        if (lbl != null) {
+            lbl.setActive(true);
+        }
+    }
+
+    @Override
+    public void updateTurn(final PlayerView player) {
+        VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(player);
+        SDisplayUtil.showTab(nextField);
+        CPrompt.SINGLETON_INSTANCE.updateText();
+        CMatchUI.SINGLETON_INSTANCE.repaintCardOverlays();
+    }
+
+    @Override
+    public void updatePlayerControl() {
+        CMatchUI.SINGLETON_INSTANCE.initHandViews();
+        SLayoutIO.loadLayout(null);
+        VMatchUI.SINGLETON_INSTANCE.populate();
+        for (VHand h : VMatchUI.SINGLETON_INSTANCE.getHands()) {
+            h.getLayoutControl().updateHand();
+        }
+    }
+
+    @Override
+    public void disableOverlay() {
+        showOverlay = false;
+    }
+    
+    @Override
+    public void enableOverlay() {
+        showOverlay = true;
+    }
+
+    @Override
+    public void finishGame() {
+        new ViewWinLose(MatchUtil.getGameView());
+        if (showOverlay) {
+            SOverlayUtils.showOverlay();
+        }
+    }
+
+    @Override
+    public void updateStack() {
+        CStack.SINGLETON_INSTANCE.update();
+    }
+
+    @Override
+    public void setPanelSelection(final CardView c) {
+        GuiUtils.setPanelSelection(c);
+    }
+
+    @Override
+    public int getAbilityToPlay(List<SpellAbilityView> abilities, ITriggerEvent triggerEvent) {
+        if (triggerEvent == null) {
+            if (abilities.isEmpty()) {
+                return -1;
+            }
+            if (abilities.size() == 1) {
+                return abilities.get(0).getId();
+            }
+            final SpellAbilityView choice = GuiChoose.oneOrNone("Choose ability to play", abilities);
+            return choice == null ? -1 : choice.getId();
         }
 
-        Singletons.getControl().ensureScreenActive(FScreen.MATCH_SCREEN);
-
-        String userPrompt =
-                "This will end the current game and you will not be able to resume.\n\n" +
-                        "Concede anyway?";
-        if (FOptionPane.showConfirmDialog(userPrompt, "Concede Game?", "Concede", "Cancel", false)) {
-            Singletons.getControl().stopGame();
+        if (abilities.isEmpty()) {
+            return -1;
         }
+        if (abilities.size() == 1 && !abilities.get(0).isPromptIfOnlyPossibleAbility()) {
+            if (abilities.get(0).canPlay()) {
+                return abilities.get(0).getId(); //only return ability if it's playable, otherwise return null
+            }
+            return -1;
+        }
+
+        //show menu if mouse was trigger for ability
+        final JPopupMenu menu = new JPopupMenu("Abilities");
+
+        boolean enabled;
+        boolean hasEnabled = false;
+        int shortcut = KeyEvent.VK_1; //use number keys as shortcuts for abilities 1-9
+        for (final SpellAbilityView ab : abilities) {
+            enabled = ab.canPlay();
+            if (enabled) {
+                hasEnabled = true;
+            }
+            GuiUtils.addMenuItem(menu, FSkin.encodeSymbols(ab.toString(), true),
+                    shortcut > 0 ? KeyStroke.getKeyStroke(shortcut, 0) : null,
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            CPrompt.SINGLETON_INSTANCE.selectAbility(ab);
+                        }
+                    }, enabled);
+            if (shortcut > 0) {
+                shortcut++;
+                if (shortcut > KeyEvent.VK_9) {
+                    shortcut = 0; //stop adding shortcuts after 9
+                }
+            }
+        }
+        if (hasEnabled) { //only show menu if at least one ability can be played
+            SwingUtilities.invokeLater(new Runnable() { //use invoke later to ensure first ability selected by default
+                public void run() {
+                    MenuSelectionManager.defaultManager().setSelectedPath(new MenuElement[]{menu, menu.getSubElements()[0]});
+                }
+            });
+            MouseEvent mouseEvent = ((MouseTriggerEvent)triggerEvent).getMouseEvent();
+            menu.show(mouseEvent.getComponent(), mouseEvent.getX(), mouseEvent.getY());
+        }
+
+        return -1; //delay ability until choice made
+    }
+
+    @Override
+    public void showPromptMessage(final PlayerView playerView, final String message) {
+        CMatchUI.SINGLETON_INSTANCE.showMessage(message);
+    }
+
+    public Object showManaPool(final PlayerView player) {
+        return null; //not needed since mana pool icons are always visible
+    }
+
+    @Override
+    public void hideManaPool(final PlayerView player, final Object zoneToRestore) {
+        //not needed since mana pool icons are always visible
+    }
+
+    @Override
+    public boolean openZones(final Collection<ZoneType> zones, final Map<PlayerView, Object> players) {
+        if (zones.size() == 1) {
+            switch (zones.iterator().next()) {
+            case Battlefield:
+            case Hand:
+                return true; //don't actually need to open anything, but indicate that zone can be opened
+            default:
+                return false;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void restoreOldZones(final Map<PlayerView, Object> playersToRestoreZonesFor) {
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Map<CardView, Integer> assignDamage(final CardView attacker,
+            final List<CardView> blockers, final int damage,
+            final GameEntityView defender, final boolean overrideOrder) {
+        final Object[] result = { null }; // how else can I extract a value from EDT thread?
+        FThreads.invokeInEdtAndWait(GuiBase.getInterface(), new Runnable() {
+            @Override
+            public void run() {
+                VAssignDamage v = new VAssignDamage(attacker, blockers, damage, defender, overrideOrder);
+                result[0] = v.getDamageMap();
+            }});
+        return (Map<CardView, Integer>)result[0];
+    }
+
+    @Override
+    public void hear(LobbyPlayer player, String message) {
+        FNetOverlay.SINGLETON_INSTANCE.addMessage(player.getName(), message);
+    }
+
+    @Override
+    public void startNewMatch(final Match match) {
+        FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable(){
+            @Override
+            public void run() {
+                SOverlayUtils.startGameOverlay();
+                SOverlayUtils.showOverlay();
+                MatchUtil.startGame(match);
+            }
+        });
+    }
+
+    @Override
+    public void openView(List<Player> sortedPlayers, int humanCount) {
+        List<PlayerView> sortedPlayerViews = new ArrayList<PlayerView>();
+        for (Player p : sortedPlayers) {
+            sortedPlayerViews.add(MatchUtil.getGameView().getPlayerView(p));
+        }
+        CMatchUI.SINGLETON_INSTANCE.initMatch(sortedPlayerViews, humanCount != 1);
+
+        actuateMatchPreferences();
+
+        Singletons.getControl().setCurrentScreen(FScreen.MATCH_SCREEN);
+        SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
+
+        // per player observers were set in CMatchUI.SINGLETON_INSTANCE.initMatch
+        //Set Field shown to current player.
+        if (humanCount > 0) {
+            final VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(sortedPlayerViews.get(0));
+            SDisplayUtil.showTab(nextField);
+        }
+        SOverlayUtils.hideOverlay();
+    }
+
+    @Override
+    public void afterGameEnd() {
+        Singletons.getView().getNavigationBar().closeTab(FScreen.MATCH_SCREEN);
+    }
+
+    /**
+     * TODO: Needs to be reworked for efficiency with rest of prefs saves in
+     * codebase.
+     */
+    public void writeMatchPreferences() {
+        final ForgePreferences prefs = FModel.getPreferences();
+        final List<VField> fieldViews = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
+
+        // AI field is at index [1]
+        PhaseIndicator fvAi = fieldViews.get(1).getPhaseIndicator();
+        prefs.setPref(FPref.PHASE_AI_UPKEEP, String.valueOf(fvAi.getLblUpkeep().getEnabled()));
+        prefs.setPref(FPref.PHASE_AI_DRAW, String.valueOf(fvAi.getLblDraw().getEnabled()));
+        prefs.setPref(FPref.PHASE_AI_MAIN1, String.valueOf(fvAi.getLblMain1().getEnabled()));
+        prefs.setPref(FPref.PHASE_AI_BEGINCOMBAT, String.valueOf(fvAi.getLblBeginCombat().getEnabled()));
+        prefs.setPref(FPref.PHASE_AI_DECLAREATTACKERS, String.valueOf(fvAi.getLblDeclareAttackers().getEnabled()));
+        prefs.setPref(FPref.PHASE_AI_DECLAREBLOCKERS, String.valueOf(fvAi.getLblDeclareBlockers().getEnabled()));
+        prefs.setPref(FPref.PHASE_AI_FIRSTSTRIKE, String.valueOf(fvAi.getLblFirstStrike().getEnabled()));
+        prefs.setPref(FPref.PHASE_AI_COMBATDAMAGE, String.valueOf(fvAi.getLblCombatDamage().getEnabled()));
+        prefs.setPref(FPref.PHASE_AI_ENDCOMBAT, String.valueOf(fvAi.getLblEndCombat().getEnabled()));
+        prefs.setPref(FPref.PHASE_AI_MAIN2, String.valueOf(fvAi.getLblMain2().getEnabled()));
+        prefs.setPref(FPref.PHASE_AI_EOT, String.valueOf(fvAi.getLblEndTurn().getEnabled()));
+        prefs.setPref(FPref.PHASE_AI_CLEANUP, String.valueOf(fvAi.getLblCleanup().getEnabled()));
+
+        // Human field is at index [0]
+        PhaseIndicator fvHuman = fieldViews.get(0).getPhaseIndicator();
+        prefs.setPref(FPref.PHASE_HUMAN_UPKEEP, String.valueOf(fvHuman.getLblUpkeep().getEnabled()));
+        prefs.setPref(FPref.PHASE_HUMAN_DRAW, String.valueOf(fvHuman.getLblDraw().getEnabled()));
+        prefs.setPref(FPref.PHASE_HUMAN_MAIN1, String.valueOf(fvHuman.getLblMain1().getEnabled()));
+        prefs.setPref(FPref.PHASE_HUMAN_BEGINCOMBAT, String.valueOf(fvHuman.getLblBeginCombat().getEnabled()));
+        prefs.setPref(FPref.PHASE_HUMAN_DECLAREATTACKERS, String.valueOf(fvHuman.getLblDeclareAttackers().getEnabled()));
+        prefs.setPref(FPref.PHASE_HUMAN_DECLAREBLOCKERS, String.valueOf(fvHuman.getLblDeclareBlockers().getEnabled()));
+        prefs.setPref(FPref.PHASE_HUMAN_FIRSTSTRIKE, String.valueOf(fvHuman.getLblFirstStrike().getEnabled()));
+        prefs.setPref(FPref.PHASE_HUMAN_COMBATDAMAGE, String.valueOf(fvHuman.getLblCombatDamage().getEnabled()));
+        prefs.setPref(FPref.PHASE_HUMAN_ENDCOMBAT, String.valueOf(fvHuman.getLblEndCombat().getEnabled()));
+        prefs.setPref(FPref.PHASE_HUMAN_MAIN2, String.valueOf(fvHuman.getLblMain2().getEnabled()));
+        prefs.setPref(FPref.PHASE_HUMAN_EOT, fvHuman.getLblEndTurn().getEnabled());
+        prefs.setPref(FPref.PHASE_HUMAN_CLEANUP, fvHuman.getLblCleanup().getEnabled());
+
+        prefs.save();
+    }
+
+    /**
+     * TODO: Needs to be reworked for efficiency with rest of prefs saves in
+     * codebase.
+     */
+    private void actuateMatchPreferences() {
+        final ForgePreferences prefs = FModel.getPreferences();
+        final List<VField> fieldViews = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
+
+        // Human field is at index [0]
+        PhaseIndicator fvHuman = fieldViews.get(0).getPhaseIndicator();
+        fvHuman.getLblUpkeep().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_UPKEEP));
+        fvHuman.getLblDraw().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_DRAW));
+        fvHuman.getLblMain1().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_MAIN1));
+        fvHuman.getLblBeginCombat().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_BEGINCOMBAT));
+        fvHuman.getLblDeclareAttackers().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_DECLAREATTACKERS));
+        fvHuman.getLblDeclareBlockers().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_DECLAREBLOCKERS));
+        fvHuman.getLblFirstStrike().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_FIRSTSTRIKE));
+        fvHuman.getLblCombatDamage().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_COMBATDAMAGE));
+        fvHuman.getLblEndCombat().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_ENDCOMBAT));
+        fvHuman.getLblMain2().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_MAIN2));
+        fvHuman.getLblEndTurn().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_EOT));
+        fvHuman.getLblCleanup().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_CLEANUP));
+
+        // AI field is at index [1], ...
+        for (int i = 1; i < fieldViews.size(); i++) {
+            PhaseIndicator fvAi = fieldViews.get(i).getPhaseIndicator();
+            fvAi.getLblUpkeep().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_UPKEEP));
+            fvAi.getLblDraw().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_DRAW));
+            fvAi.getLblMain1().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_MAIN1));
+            fvAi.getLblBeginCombat().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_BEGINCOMBAT));
+            fvAi.getLblDeclareAttackers().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_DECLAREATTACKERS));
+            fvAi.getLblDeclareBlockers().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_DECLAREBLOCKERS));
+            fvAi.getLblFirstStrike().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_FIRSTSTRIKE));
+            fvAi.getLblCombatDamage().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_COMBATDAMAGE));
+            fvAi.getLblEndCombat().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_ENDCOMBAT));
+            fvAi.getLblMain2().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_MAIN2));
+            fvAi.getLblEndTurn().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_EOT));
+            fvAi.getLblCleanup().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_CLEANUP));
+        }
+
+        //Singletons.getView().getViewMatch().setLayoutParams(prefs.getPref(FPref.UI_LAYOUT_PARAMS));
     }
 }

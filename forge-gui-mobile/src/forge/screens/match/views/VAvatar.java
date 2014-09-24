@@ -4,7 +4,8 @@ import com.badlogic.gdx.math.Vector2;
 
 import forge.Graphics;
 import forge.assets.FImage;
-import forge.screens.match.FControl;
+import forge.match.MatchUtil;
+import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
@@ -19,7 +20,7 @@ public class VAvatar extends FDisplayObject {
 
     public VAvatar(PlayerView player0) {
         player = player0;
-        image = FControl.getPlayerAvatar(player);
+        image = MatchController.getPlayerAvatar(player);
         setSize(WIDTH, HEIGHT);
     }
 
@@ -28,7 +29,7 @@ public class VAvatar extends FDisplayObject {
         ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread in case a dialog needs to be shown
             @Override
             public void run() {
-                FControl.getGameView().selectPlayer(player, null);
+                MatchUtil.getGameView().selectPlayer(player, null);
             }
         });
         return true;
@@ -38,7 +39,7 @@ public class VAvatar extends FDisplayObject {
         Vector2 origin = new Vector2(getScreenPosition());
 
         origin.x += WIDTH * 0.75f;
-        if (origin.y < FControl.getView().getHeight() / 2) {
+        if (origin.y < MatchController.getView().getHeight() / 2) {
             origin.y += HEIGHT * 0.75f; //target bottom right corner if on top half of screen
         }
         else {

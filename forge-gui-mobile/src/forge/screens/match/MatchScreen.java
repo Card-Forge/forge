@@ -11,7 +11,9 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.badlogic.gdx.Input.Keys;
 import com.google.common.collect.Maps;
 
-import forge.Forge;
+import forge.game.phase.PhaseType;
+import forge.game.zone.ZoneType;
+import forge.match.MatchUtil;
 import forge.menu.FMenuBar;
 import forge.model.FModel;
 import forge.player.LobbyPlayerHuman;
@@ -24,17 +26,20 @@ import forge.screens.match.views.VGameMenu;
 import forge.screens.match.views.VLog;
 import forge.screens.match.views.VManaPool;
 import forge.screens.match.views.VPlayerPanel;
+import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
 import forge.screens.match.views.VPlayerPanel.InfoTab;
 import forge.screens.match.views.VPlayers;
 import forge.screens.match.views.VPrompt;
 import forge.screens.match.views.VStack;
 import forge.sound.MusicPlaylist;
+import forge.sound.SoundSystem;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
 import forge.animation.AbilityEffect;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinTexture;
 import forge.assets.FSkinColor.Colors;
+import forge.toolbox.FCardPanel;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FScrollPane;
@@ -76,13 +81,13 @@ public class MatchScreen extends FScreen {
                 new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
-                        FControl.getGameView().selectButtonOk();
+                        MatchUtil.getGameView().selectButtonOk();
                     }
                 },
                 new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
-                        FControl.getGameView().selectButtonCancel();
+                        MatchUtil.getGameView().selectButtonCancel();
                     }
                 }));
 
@@ -91,13 +96,13 @@ public class MatchScreen extends FScreen {
                     new FEventHandler() {
                         @Override
                         public void handleEvent(FEvent e) {
-                            FControl.getGameView().selectButtonOk();
+                            MatchUtil.getGameView().selectButtonOk();
                         }
                     },
                     new FEventHandler() {
                         @Override
                         public void handleEvent(FEvent e) {
-                            FControl.getGameView().selectButtonCancel();
+                            MatchUtil.getGameView().selectButtonCancel();
                         }
                     }));
         }
@@ -130,7 +135,7 @@ public class MatchScreen extends FScreen {
     }
 
     public VPrompt getActivePrompt() {
-        if (topPlayerPrompt != null && topPlayerPanel.getPlayer().equals(FControl.getCurrentPlayer())) {
+        if (topPlayerPrompt != null && topPlayerPanel.getPlayer().equals(MatchUtil.getCurrentPlayer())) {
             return topPlayerPrompt;
         }
         return bottomPlayerPrompt;
@@ -165,8 +170,8 @@ public class MatchScreen extends FScreen {
 
     @Override
     public void onClose(Callback<Boolean> canCloseCallback) {
-        FControl.writeMatchPreferences();
-        Forge.getSoundSystem().setBackgroundMusic(MusicPlaylist.MENUS);
+        MatchController.writeMatchPreferences();
+        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
         super.onClose(canCloseCallback);
     }
 
@@ -196,7 +201,7 @@ public class MatchScreen extends FScreen {
         }
 
         //draw arrows for combat
-        final CombatView combat = FControl.getGameView().getCombat();
+        final CombatView combat = MatchUtil.getGameView().getCombat();
         if (combat != null) {
             for (final CardView attacker : combat.getAttackers()) {
                 //connect each attacker with planeswalker it's attacking if applicable
@@ -234,25 +239,25 @@ public class MatchScreen extends FScreen {
             return true; //suppress Back button so it's not bumped when trying to press OK or Cancel buttons
         case Keys.A: //alpha strike on Ctrl+A
             if (KeyInputAdapter.isCtrlKeyDown()) {
-                FControl.alphaStrike();
+                MatchUtil.alphaStrike();
                 return true;
             }
             break;
         case Keys.E: //end turn on Ctrl+E
             if (KeyInputAdapter.isCtrlKeyDown()) {
-                FControl.endCurrentTurn();
+                MatchUtil.endCurrentTurn();
                 return true;
             }
             break;
         case Keys.Q: //concede game on Ctrl+Q
             if (KeyInputAdapter.isCtrlKeyDown()) {
-                FControl.concede();
+                MatchUtil.concede();
                 return true;
             }
             break;
         case Keys.Z: //undo on Ctrl+Z
             if (KeyInputAdapter.isCtrlKeyDown()) {
-                FControl.getGameView().tryUndoLastAction();
+                MatchUtil.getGameView().tryUndoLastAction();
                 return true;
             }
             break;
@@ -263,6 +268,58 @@ public class MatchScreen extends FScreen {
     @Override
     public void showMenu() {
         //don't show menu from this screen since it's too easy to bump the menu button when trying to press OK or Cancel
+    }
+
+    public boolean stopAtPhase(final PlayerView turn, final PhaseType phase) {
+        PhaseLabel label = getPlayerPanel(turn).getPhaseIndicator().getLabel(phase);
+        return label == null || label.getStopAtPhase();
+    }
+
+    public void resetAllPhaseButtons() {
+        for (final VPlayerPanel panel : getPlayerPanels().values()) {
+            panel.getPhaseIndicator().resetPhaseButtons();
+        }
+    }
+
+    public VPlayerPanel getPlayerPanel(final PlayerView playerView) {
+        return getPlayerPanels().get(playerView);
+    }
+
+    public void highlightCard(final CardView c) {
+        for (VPlayerPanel playerPanel : getPlayerPanels().values()) {
+            for (FCardPanel p : playerPanel.getField().getCardPanels()) {
+                if (p.getCard().equals(c)) {
+                    p.setHighlighted(true);
+                    return;
+                }
+            }
+        }
+    }
+
+    public void clearCardHighlights() {
+        for (VPlayerPanel playerPanel : getPlayerPanels().values()) {
+            for (FCardPanel p : playerPanel.getField().getCardPanels()) {
+                p.setHighlighted(false);
+            }
+        }
+    }
+
+    public void updateZones(List<Pair<PlayerView, ZoneType>> zonesToUpdate) {
+        for (Pair<PlayerView, ZoneType> kv : zonesToUpdate) {
+            PlayerView owner = kv.getKey();
+            ZoneType zt = kv.getValue();
+            if (owner == null || zt == null) {
+                continue;
+            }
+            getPlayerPanel(owner).updateZone(zt);
+        }
+    }
+
+    public void updateSingleCard(final CardView card) {
+        final ZoneType zone = card.getZone();
+        if (zone != null && zone == ZoneType.Battlefield) {
+            getPlayerPanel(card.getController()).getField().updateCard(card);
+        }
     }
 
     private class FieldScroller extends FScrollPane {

@@ -6,6 +6,7 @@ import forge.game.player.IGameEntitiesFactory;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.interfaces.IGuiBase;
+import forge.match.MatchUtil;
 import forge.util.GuiDisplayUtil;
 
 public class LobbyPlayerHuman extends LobbyPlayer implements IGameEntitiesFactory {
@@ -33,7 +34,7 @@ public class LobbyPlayerHuman extends LobbyPlayer implements IGameEntitiesFactor
     }
 
     public void hear(LobbyPlayer player, String message) {
-        gui.hear(player, message);
+        MatchUtil.getController().hear(player, message);
     }
 
     public IGuiBase getGui() {

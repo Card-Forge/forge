@@ -61,7 +61,7 @@ public class TargetingOverlay {
     }
     public static void drawArrow(Graphics g, Vector2 start, PlayerView targetPlayer, boolean connectsFoes) {
         drawArrow(g, start,
-                FControl.getPlayerPanel(targetPlayer).getAvatar().getTargetingArrowOrigin(),
+                MatchController.getView().getPlayerPanel(targetPlayer).getAvatar().getTargetingArrowOrigin(),
                 connectsFoes);
     }
     public static void drawArrow(Graphics g, Vector2 start, Vector2 end, boolean connectsFoes) {

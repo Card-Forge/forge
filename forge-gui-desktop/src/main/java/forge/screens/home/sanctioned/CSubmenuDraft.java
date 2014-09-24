@@ -15,6 +15,7 @@ import forge.gui.framework.ICDoc;
 import forge.itemmanager.ItemManagerConfig;
 import forge.limited.BoosterDraft;
 import forge.limited.LimitedPoolType;
+import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
@@ -115,11 +116,11 @@ public enum CSubmenuDraft implements ICDoc {
             }
         }
 
-        FModel.getGauntletMini(GuiBase.getInterface()).resetGauntletDraft();
+        FModel.getGauntletMini().resetGauntletDraft();
 
         if (gauntlet) {
             int rounds = FModel.getDecks().getDraft().get(humanDeck.getName()).getAiDecks().size();
-            FModel.getGauntletMini(GuiBase.getInterface()).launch(rounds, humanDeck.getDeck(), gameType);
+            FModel.getGauntletMini().launch(rounds, humanDeck.getDeck(), gameType);
             return;
         }
 
@@ -144,7 +145,7 @@ public enum CSubmenuDraft implements ICDoc {
             pl.assignConspiracies();
         }
 
-        Singletons.getControl().startMatch(GameType.Draft, starter);
+        MatchUtil.startMatch(GameType.Draft, starter);
     }
 
     /** */

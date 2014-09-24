@@ -6,7 +6,6 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge;
-import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -61,7 +60,7 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
             //control = new QuestDraftWinLose(this, game0);
             break;
         case Draft:
-            if (!FModel.getGauntletMini(GuiBase.getInterface()).isGauntletDraft()) {
+            if (!FModel.getGauntletMini().isGauntletDraft()) {
                 break;
             }
         case Sealed:

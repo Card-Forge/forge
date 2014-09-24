@@ -14,6 +14,7 @@ import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeConstants;
+import forge.sound.SoundSystem;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FComboBoxPanel;
 import forge.toolbox.FLabel;
@@ -79,7 +80,7 @@ public enum CSubmenuPreferences implements ICDoc {
                 final boolean toggle = view.getCbEnableMusic().isSelected();
                 prefs.setPref(FPref.UI_ENABLE_MUSIC, String.valueOf(toggle));
                 prefs.save();
-                Singletons.getControl().getSoundSystem().changeBackgroundTrack();
+                SoundSystem.instance.changeBackgroundTrack();
             }
         });
 

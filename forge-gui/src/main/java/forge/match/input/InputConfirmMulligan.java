@@ -24,6 +24,7 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.match.MatchUtil;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
@@ -72,11 +73,11 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
         }
 
         if (isCommander) {
-            ButtonUtil.update(this, "Keep", "Exile", true, false, true);
+            ButtonUtil.update(getOwner(), "Keep", "Exile", true, false, true);
             sb.append("Will you keep your hand or choose some cards to exile those and draw one less card?");
         }
         else {
-            ButtonUtil.update(this, "Keep", "Mulligan", true, true, true);
+            ButtonUtil.update(getOwner(), "Keep", "Mulligan", true, true, true);
             sb.append("Do you want to keep your hand?");
         }
 
@@ -101,7 +102,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
         if (isCommander) {
             // Clear the "selected" icon after clicking the done button
             for (final Card c : this.selected) {
-                getGui().setUsedToPay(getController().getCardView(c), false);
+                MatchUtil.setUsedToPay(getController().getCardView(c), false);
             }
         }
         stop();
@@ -137,14 +138,14 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
 
         if (isCommander) { // allow to choose cards for partial paris
             if (selected.contains(c0)) {
-                getGui().setUsedToPay(getController().getCardView(c0), false);
+                MatchUtil.setUsedToPay(getController().getCardView(c0), false);
                 selected.remove(c0);
             }
             else {
-                getGui().setUsedToPay(getController().getCardView(c0), true);
+                MatchUtil.setUsedToPay(getController().getCardView(c0), true);
                 selected.add(c0);
             }
-            ButtonUtil.update(this, "Keep", "Exile", true, !selected.isEmpty(), true);
+            ButtonUtil.update(getOwner(), "Keep", "Exile", true, !selected.isEmpty(), true);
         }
         return true;
     }

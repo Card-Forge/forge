@@ -9,6 +9,7 @@ import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
+import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.deck.DeckProxy;
@@ -132,7 +133,7 @@ public enum CSubmenuWinston implements ICDoc {
         starter.add(new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer()));
         starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
 
-        Singletons.getControl().startMatch(GameType.Winston, starter);
+        MatchUtil.startMatch(GameType.Winston, starter);
     }
 
     /** */

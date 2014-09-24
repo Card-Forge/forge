@@ -5,7 +5,7 @@ import java.util.List;
 
 import forge.FThreads;
 import forge.GuiBase;
-import forge.screens.match.FControl;
+import forge.screens.match.MatchController;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.toolbox.FContainer;
 import forge.view.CardView;
@@ -62,7 +62,7 @@ public class VField extends FContainer {
 
             for (CardView card : model) {
                 CardAreaPanel cardPanel = CardAreaPanel.get(card);
-                CardStateView details = FControl.getCardDetails(card); //use details so creature/land check is accurate
+                CardStateView details = MatchController.getCardDetails(card); //use details so creature/land check is accurate
                 if (cardPanel.getAttachedToPanel() == null) { //skip attached panels
                     if (details.isCreature()) {
                         if (!tryStackCard(card, creatures)) {

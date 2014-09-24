@@ -3,7 +3,6 @@ package forge.quest;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.FThreads;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
@@ -13,6 +12,7 @@ import forge.game.GameType;
 import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IGuiBase;
+import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
@@ -29,7 +29,12 @@ public class QuestDraftUtils {
         if (lastGame.getMatch().isMatchOver()) {
             matchInProgress = false;
         }
-        gui.continueMatch(matchInProgress ? lastGame.getMatch() : null);
+        if (matchInProgress) {
+            MatchUtil.continueMatch();
+        }
+        else {
+            MatchUtil.endCurrentGame();
+        }
     }
 	
 	public static void completeDraft(DeckGroup finishedDraft) {
@@ -184,15 +189,15 @@ public class QuestDraftUtils {
         if (matchInProgress) {
             return;
         }
-        
-        gui.enableOverlay();
-        
+
+        MatchUtil.getController().enableOverlay();
+
         DraftMatchup nextMatch = matchups.remove(0);
         
         matchInProgress = true;
         
         if (!nextMatch.hasHumanPlayer) {
-            gui.disableOverlay();
+            MatchUtil.getController().disableOverlay();
             waitForUserInput = false;
             aiMatchInProgress = true;
         }
@@ -207,14 +212,8 @@ public class QuestDraftUtils {
         rules.setGamesPerMatch(3);
         rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
         rules.canCloneUseTargetsImage = FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE);
-        
-        final Match match = new Match(rules, nextMatch.matchStarter);
-        FThreads.invokeInEdtLater(gui, new Runnable(){
-            @Override
-            public void run() {
-                gui.startGame(match);
-            }
-        });
+
+        MatchUtil.getController().startNewMatch(new Match(rules, nextMatch.matchStarter));
     }
     
     public static void continueMatches(final IGuiBase gui) {

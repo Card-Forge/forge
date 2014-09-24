@@ -25,9 +25,10 @@ import forge.card.CardDetailUtil.DetailColors;
 import forge.card.mana.ManaCost;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
+import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
-import forge.screens.match.FControl;
+import forge.screens.match.MatchController;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDialog;
 import forge.toolbox.FList;
@@ -540,7 +541,7 @@ public class CardRenderer {
         w -= 2 * padding;
         h -= 2 * padding;
 
-        CardStateView details = FControl.getCardDetails(card);
+        CardStateView details = MatchController.getCardDetails(card);
         DetailColors borderColor = CardDetailUtil.getBorderColor(details);
         Color color = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
         color = FSkinColor.tintColor(Color.WHITE, color, CardRenderer.PT_BOX_TINT);
@@ -598,7 +599,7 @@ public class CardRenderer {
         final float stateXSymbols = (x + (w / 2)) - otherSymbolsSize / 2;
         final float ySymbols = (y + h) - (h / 8) - otherSymbolsSize / 2;
 
-        final IGameView game = FControl.getGameView();
+        final IGameView game = MatchUtil.getGameView();
         if (game != null) {
             final CombatView combat = game.getCombat();
             if (combat != null) {
@@ -619,7 +620,7 @@ public class CardRenderer {
             CardFaceSymbols.drawSymbol("phasing", g, stateXSymbols, ySymbols, otherSymbolsSize, otherSymbolsSize);
         }
 
-        if (FControl.isUsedToPay(card)) {
+        if (MatchUtil.isUsedToPay(card)) {
             float sacSymbolSize = otherSymbolsSize * 1.2f;
             CardFaceSymbols.drawSymbol("sacrifice", g, (x + (w / 2)) - sacSymbolSize / 2, (y + (h / 2)) - sacSymbolSize / 2, otherSymbolsSize, otherSymbolsSize);
         }

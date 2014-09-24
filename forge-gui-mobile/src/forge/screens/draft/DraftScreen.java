@@ -145,8 +145,8 @@ public class DraftScreen extends LaunchScreen {
                         LoadingOverlay.show("Loading new game...", new Runnable() {
                             @Override
                             public void run() {
-                                FModel.getGauntletMini(GuiBase.getInterface()).resetGauntletDraft();
-                                FModel.getGauntletMini(GuiBase.getInterface()).launch(rounds, humanDeck.getDeck(), GameType.Draft);
+                                FModel.getGauntletMini().resetGauntletDraft();
+                                FModel.getGauntletMini().launch(rounds, humanDeck.getDeck(), GameType.Draft);
                                 creatingMatch = false;
                             }
                         });

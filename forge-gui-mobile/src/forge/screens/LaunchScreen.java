@@ -7,9 +7,9 @@ import java.util.Set;
 
 import com.badlogic.gdx.Input.Keys;
 
+import forge.match.MatchUtil;
 import forge.menu.FPopupMenu;
 import forge.screens.FScreen;
-import forge.screens.match.FControl;
 import forge.Graphics;
 import forge.assets.FSkinImage;
 import forge.game.GameType;
@@ -71,7 +71,7 @@ public abstract class LaunchScreen extends FScreen {
                         throw new RuntimeException("Must add at least one player to launchParams.players");
                     }
 
-                    FControl.startMatch(launchParams.gameType, launchParams.appliedVariants, launchParams.players);
+                    MatchUtil.startMatch(launchParams.gameType, launchParams.appliedVariants, launchParams.players);
                 }
                 creatingMatch = false;
             }

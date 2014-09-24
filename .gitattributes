@@ -1207,7 +1207,7 @@ forge-gui-mobile/src/forge/screens/draft/DraftScreen.java -text
 forge-gui-mobile/src/forge/screens/draft/DraftingProcessScreen.java -text
 forge-gui-mobile/src/forge/screens/gauntlet/GauntletScreen.java -text
 forge-gui-mobile/src/forge/screens/home/HomeScreen.java -text
-forge-gui-mobile/src/forge/screens/match/FControl.java -text
+forge-gui-mobile/src/forge/screens/match/MatchController.java -text
 forge-gui-mobile/src/forge/screens/match/MatchScreen.java -text
 forge-gui-mobile/src/forge/screens/match/TargetingOverlay.java -text
 forge-gui-mobile/src/forge/screens/match/views/VAssignDamage.java -text
@@ -16981,7 +16981,9 @@ forge-gui/src/main/java/forge/limited/SealedDeckBuilder.java svneol=native#text/
 forge-gui/src/main/java/forge/limited/WinstonDraft.java -text
 forge-gui/src/main/java/forge/limited/WinstonDraftAI.java -text
 forge-gui/src/main/java/forge/limited/package-info.java svneol=native#text/plain
+forge-gui/src/main/java/forge/match/IMatchController.java -text
 forge-gui/src/main/java/forge/match/MatchConstants.java -text
+forge-gui/src/main/java/forge/match/MatchUtil.java -text
 forge-gui/src/main/java/forge/match/input/ButtonUtil.java -text
 forge-gui/src/main/java/forge/match/input/Input.java -text
 forge-gui/src/main/java/forge/match/input/InputAttack.java -text
@@ -16990,7 +16992,6 @@ forge-gui/src/main/java/forge/match/input/InputBlock.java -text
 forge-gui/src/main/java/forge/match/input/InputConfirm.java -text
 forge-gui/src/main/java/forge/match/input/InputConfirmMulligan.java -text
 forge-gui/src/main/java/forge/match/input/InputLockUI.java -text
-forge-gui/src/main/java/forge/match/input/InputNone.java -text
 forge-gui/src/main/java/forge/match/input/InputPassPriority.java -text
 forge-gui/src/main/java/forge/match/input/InputPayMana.java -text
 forge-gui/src/main/java/forge/match/input/InputPayManaOfCostPayment.java -text

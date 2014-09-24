@@ -25,13 +25,13 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
-import forge.Singletons;
 import forge.gui.CardPicturePanel;
 import forge.gui.WrapLayout;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.match.MatchUtil;
 import forge.screens.match.controllers.CAntes;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
@@ -120,7 +120,7 @@ public enum VAntes implements IVDoc<CAntes> {
         allAntes.clear();
         pnl.removeAll();
 
-        for (final PlayerView p : Singletons.getControl().getGameView().getPlayers()) {
+        for (final PlayerView p : MatchUtil.getGameView().getPlayers()) {
             for (final CardView c : p.getAnteCards()) {
                 final AntePanel pnlTemp = new AntePanel(c);
                 allAntes.add(pnlTemp);

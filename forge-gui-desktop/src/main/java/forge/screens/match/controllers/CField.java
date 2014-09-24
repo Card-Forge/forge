@@ -28,6 +28,7 @@ import forge.UiCommand;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.ICDoc;
 import forge.match.MatchConstants;
+import forge.match.MatchUtil;
 import forge.screens.match.ZoneAction;
 import forge.screens.match.views.VField;
 import forge.toolbox.MouseTriggerEvent;
@@ -85,7 +86,7 @@ public class CField implements ICDoc {
         Function<Byte, Void> manaAction = new Function<Byte, Void>() {
             public Void apply(Byte colorCode) {
                 if (CField.this.player.getLobbyPlayer() == Singletons.getControl().getGuiPlayer()) {
-                    Singletons.getControl().getGameView().useMana(colorCode.byteValue());
+                    MatchUtil.getGameView().useMana(colorCode.byteValue());
                 }
                 return null;
             }

@@ -11,8 +11,8 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinColor.Colors;
 import forge.card.MagicColor;
+import forge.match.MatchUtil;
 import forge.player.GamePlayerUtil;
-import forge.screens.match.FControl;
 import forge.toolbox.FDisplayObject;
 import forge.view.PlayerView;
 
@@ -82,7 +82,7 @@ public class VManaPool extends VDisplayArea {
         @Override
         public boolean tap(float x, float y, int count) {
             if (player.getLobbyPlayer() == GamePlayerUtil.getGuiPlayer()) {
-                FControl.getGameView().useMana(colorCode);
+                MatchUtil.getGameView().useMana(colorCode);
             }
             return true;
         }

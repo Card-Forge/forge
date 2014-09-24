@@ -11,7 +11,7 @@ import forge.FThreads;
 import forge.Graphics;
 import forge.GuiBase;
 import forge.card.CardZoom;
-import forge.screens.match.FControl;
+import forge.match.MatchUtil;
 import forge.toolbox.FCardPanel;
 import forge.util.ThreadUtil;
 import forge.view.CardView;
@@ -245,7 +245,7 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         }
 
         public boolean selectCard() {
-            if (FControl.getGameView().selectCard(getCard(), null)) {
+            if (MatchUtil.getGameView().selectCard(getCard(), null)) {
                 return true;
             }
             //if panel can't do anything with card selection, try selecting previous panel in stack

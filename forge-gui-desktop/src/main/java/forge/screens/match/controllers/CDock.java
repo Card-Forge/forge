@@ -24,17 +24,16 @@ import forge.GuiBase;
 import forge.Singletons;
 import forge.UiCommand;
 import forge.assets.FSkinProp;
-import forge.control.FControl;
 import forge.deck.Deck;
 import forge.deckchooser.FDeckViewer;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SLayoutIO;
+import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.properties.FileLocation;
 import forge.properties.ForgePreferences.FPref;
-import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VDock;
 import forge.toolbox.FSkin;
 import forge.toolbox.SaveOpenDialog;
@@ -110,7 +109,7 @@ public enum CDock implements ICDoc {
      * View deck list.
      */
     public void viewDeckList() {
-        final Deck deck = FControl.instance.getGameView().getDeck(GamePlayerUtil.getGuiPlayer());
+        final Deck deck = MatchUtil.getGameView().getDeck(GamePlayerUtil.getGuiPlayer());
         if (deck != null) {
             FDeckViewer.show(deck);
         }
@@ -196,7 +195,7 @@ public enum CDock implements ICDoc {
         VDock.SINGLETON_INSTANCE.getBtnConcede().setCommand(new UiCommand() {
             @Override
             public void run() {
-                CMatchUI.SINGLETON_INSTANCE.concede();
+                MatchUtil.concede();
             }
         });
         VDock.SINGLETON_INSTANCE.getBtnSettings().setCommand(new UiCommand() {
@@ -238,7 +237,7 @@ public enum CDock implements ICDoc {
         VDock.SINGLETON_INSTANCE.getBtnAlphaStrike().setCommand(new UiCommand() {
             @Override
             public void run() {
-                Singletons.getControl().getGameView().alphaStrike();
+                MatchUtil.getGameView().alphaStrike();
             }
         });
         VDock.SINGLETON_INSTANCE.getBtnTargeting().setCommand(new UiCommand() {

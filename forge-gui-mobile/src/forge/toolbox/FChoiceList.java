@@ -16,7 +16,7 @@ import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.game.spellability.SpellAbility;
 import forge.item.PaperCard;
-import forge.screens.match.FControl;
+import forge.screens.match.MatchController;
 import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VStack;
 import forge.util.Utils;
@@ -426,7 +426,7 @@ public class FChoiceList<T> extends FList<T> {
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
             PlayerView player = (PlayerView)value;
-            g.drawImage(FControl.getPlayerAvatar(player), x - FList.PADDING, y - FList.PADDING, VAvatar.WIDTH, VAvatar.HEIGHT);
+            g.drawImage(MatchController.getPlayerAvatar(player), x - FList.PADDING, y - FList.PADDING, VAvatar.WIDTH, VAvatar.HEIGHT);
             x += VAvatar.WIDTH;
             w -= VAvatar.WIDTH;
             g.drawText(player.getName() + " (" + player.getLife() + ")", font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);

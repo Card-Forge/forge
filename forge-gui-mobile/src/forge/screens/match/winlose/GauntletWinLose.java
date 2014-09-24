@@ -41,7 +41,7 @@ public class GauntletWinLose extends ControlWinLose {
      */
     public GauntletWinLose(final ViewWinLose view0, IGameView lastGame) {
         super(view0, lastGame);
-        controller = new GauntletWinLoseController(view0, lastGame, GuiBase.getInterface()) {
+        controller = new GauntletWinLoseController(view0, lastGame) {
             @Override
             protected void showOutcome(final String message1, final String message2, final FSkinProp icon, final List<String> lstEventNames, final List<String> lstEventRecords, final int len, final int num) {
                 FThreads.invokeInBackgroundThread(new Runnable() {

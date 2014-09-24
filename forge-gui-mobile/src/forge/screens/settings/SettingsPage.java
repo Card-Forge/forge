@@ -18,6 +18,7 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.screens.TabPageScreen.TabPage;
+import forge.sound.SoundSystem;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FGroupList;
 import forge.toolbox.FList;
@@ -194,7 +195,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     public void select() {
                         super.select();
                         //update background music when this setting changes
-                        Forge.getSoundSystem().changeBackgroundTrack();
+                        SoundSystem.instance.changeBackgroundTrack();
                     }
                 }, 7);
         /*lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_SOUND_SYSTEM,

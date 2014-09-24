@@ -33,7 +33,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
-import forge.screens.match.CMatchUI;
+import forge.match.MatchUtil;
 import forge.screens.match.controllers.CField;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
@@ -110,15 +110,17 @@ public class VField implements IVDoc<CField> {
             @Override
             public void mouseEntered(final MouseEvent e) {
                 avatarArea.setOpaque(true);
-                if (!isHighlighted())
+                if (!isHighlighted()) {
                     avatarArea.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+                }
             }
 
             @Override
             public void mouseExited(final MouseEvent e) {
                 avatarArea.setOpaque(false);
-                if (!isHighlighted())
+                if (!isHighlighted()) {
                     avatarArea.setBorder(borderAvatarSimple);
+                }
             }
         });
 
@@ -243,7 +245,7 @@ public class VField implements IVDoc<CField> {
     }
 
     public boolean isHighlighted() {
-        return CMatchUI.SINGLETON_INSTANCE.isHighlighted(player);
+        return MatchUtil.isHighlighted(player);
     }
 
     /**

@@ -4,9 +4,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import forge.Singletons;
 import forge.UiCommand;
 import forge.gui.framework.ICDoc;
+import forge.match.MatchUtil;
 import forge.screens.match.views.VDev;
 
 /**
@@ -27,7 +27,7 @@ public enum CDev implements ICDoc {
     public void togglePlayManyLandsPerTurn() {
         boolean newValue = !VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().getToggled();
         VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().setToggled(newValue);
-        Singletons.getControl().getGameView().cheat().setCanPlayUnlimitedLands(newValue);
+        MatchUtil.getGameView().cheat().setCanPlayUnlimitedLands(newValue);
     }
 
     private final MouseListener madViewAll = new MouseAdapter() {
@@ -39,7 +39,7 @@ public enum CDev implements ICDoc {
     public void toggleViewAllCards() {
         boolean newValue = !VDev.SINGLETON_INSTANCE.getLblViewAll().getToggled();
         VDev.SINGLETON_INSTANCE.getLblViewAll().setToggled(newValue);
-        Singletons.getControl().getGameView().cheat().setViewAllCards(newValue);
+        MatchUtil.getGameView().cheat().setViewAllCards(newValue);
     }
 
     private final MouseListener madMana = new MouseAdapter() {
@@ -49,7 +49,7 @@ public enum CDev implements ICDoc {
         }
     };
     public void generateMana() {
-        Singletons.getControl().getGameView().cheat().generateMana();
+        MatchUtil.getGameView().cheat().generateMana();
     }
 
     private final MouseListener madSetup = new MouseAdapter() {
@@ -59,7 +59,7 @@ public enum CDev implements ICDoc {
         }
     };
     public void setupGameState() {
-        Singletons.getControl().getGameView().cheat().setupGameState();
+        MatchUtil.getGameView().cheat().setupGameState();
     }
 
     private final MouseListener madTutor = new MouseAdapter() {
@@ -69,7 +69,7 @@ public enum CDev implements ICDoc {
         }
     };
     public void tutorForCard() {
-        Singletons.getControl().getGameView().cheat().tutorForCard();
+        MatchUtil.getGameView().cheat().tutorForCard();
     }
 
     private final MouseListener madCardToHand = new MouseAdapter() {
@@ -79,7 +79,7 @@ public enum CDev implements ICDoc {
         }
     };
     public void addCardToHand() {
-        Singletons.getControl().getGameView().cheat().addCardToHand();
+        MatchUtil.getGameView().cheat().addCardToHand();
     }
 
     private final MouseListener madCounter = new MouseAdapter() {
@@ -89,7 +89,7 @@ public enum CDev implements ICDoc {
         }
     };
     public void addCounterToPermanent() {
-        Singletons.getControl().getGameView().cheat().addCountersToPermanent();
+        MatchUtil.getGameView().cheat().addCountersToPermanent();
     }
 
     private final MouseListener madTap = new MouseAdapter() {
@@ -99,7 +99,7 @@ public enum CDev implements ICDoc {
         }
     };
     public void tapPermanent() {
-        Singletons.getControl().getGameView().cheat().tapPermanents();
+        MatchUtil.getGameView().cheat().tapPermanents();
     }
 
     private final MouseListener madUntap = new MouseAdapter() {
@@ -109,7 +109,7 @@ public enum CDev implements ICDoc {
         }
     };
     public void untapPermanent() {
-        Singletons.getControl().getGameView().cheat().untapPermanents();
+        MatchUtil.getGameView().cheat().untapPermanents();
     }
 
     private final MouseListener madLife = new MouseAdapter() {
@@ -119,7 +119,7 @@ public enum CDev implements ICDoc {
         }
     };
     public void setPlayerLife() {
-        Singletons.getControl().getGameView().cheat().setPlayerLife();
+        MatchUtil.getGameView().cheat().setPlayerLife();
     }
 
     private final MouseListener madWinGame = new MouseAdapter() {
@@ -129,7 +129,7 @@ public enum CDev implements ICDoc {
         }
     };
     public void winGame() {
-        Singletons.getControl().getGameView().cheat().winGame();
+        MatchUtil.getGameView().cheat().winGame();
     }
 
     private final MouseListener madCardToBattlefield = new MouseAdapter() {
@@ -139,7 +139,7 @@ public enum CDev implements ICDoc {
         }
     };
     public void addCardToBattlefield() {
-        Singletons.getControl().getGameView().cheat().addCardToBattlefield();
+        MatchUtil.getGameView().cheat().addCardToBattlefield();
     }
 
     private final MouseListener madRiggedRoll = new MouseAdapter() {
@@ -149,7 +149,7 @@ public enum CDev implements ICDoc {
         }
     };
     public void riggedPlanerRoll() {
-        Singletons.getControl().getGameView().cheat().riggedPlanarRoll();
+        MatchUtil.getGameView().cheat().riggedPlanarRoll();
     }
 
     private final MouseListener madWalkToPlane = new MouseAdapter() {
@@ -159,7 +159,7 @@ public enum CDev implements ICDoc {
         }
     };
     public void planeswalkTo() {
-        Singletons.getControl().getGameView().cheat().planeswalkTo();
+        MatchUtil.getGameView().cheat().planeswalkTo();
     }
 
     //========== End mouse listener inits
@@ -198,7 +198,7 @@ public enum CDev implements ICDoc {
      */
     @Override
     public void update() {
-        VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().setToggled(Singletons.getControl().getGameView().canPlayUnlimitedLands());
-        VDev.SINGLETON_INSTANCE.getLblViewAll().setToggled(Singletons.getControl().getGameView().canViewAllCards());
+        VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().setToggled(MatchUtil.getGameView().canPlayUnlimitedLands());
+        VDev.SINGLETON_INSTANCE.getLblViewAll().setToggled(MatchUtil.getGameView().canViewAllCards());
     }
 }

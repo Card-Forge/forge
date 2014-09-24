@@ -110,7 +110,7 @@ public enum CSubmenuSealed implements ICDoc {
         }
 
         int matches = FModel.getDecks().getSealed().get(human.getName()).getAiDecks().size();
-        FModel.getGauntletMini(GuiBase.getInterface()).launch(matches, human.getDeck(), gameType);
+        FModel.getGauntletMini().launch(matches, human.getDeck(), gameType);
     }
 
     @SuppressWarnings("unchecked")

@@ -69,7 +69,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
             control = new QuestDraftWinLose(this, game0);
             break;
         case Draft:
-            if (!FModel.getGauntletMini(GuiBase.getInterface()).isGauntletDraft()) {
+            if (!FModel.getGauntletMini().isGauntletDraft()) {
                 break;
             }
         case Sealed:

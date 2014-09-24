@@ -14,9 +14,10 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinColor.Colors;
 import forge.game.zone.ZoneType;
+import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
-import forge.screens.match.FControl;
+import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
@@ -114,8 +115,8 @@ public class VPlayerPanel extends FContainer {
             selectedTab.displayArea.setVisible(true);
         }
 
-        if (FControl.getView() != null) { //must revalidate entire screen so panel heights updated
-            FControl.getView().revalidate();
+        if (MatchController.getView() != null) { //must revalidate entire screen so panel heights updated
+            MatchController.getView().revalidate();
         }
     }
 
@@ -289,7 +290,7 @@ public class VPlayerPanel extends FContainer {
             }
 
             //when gui player loses life, vibrate device for a length of time based on amount of life lost
-            if (vibrateDuration > 0 && player.getLobbyPlayer() == FControl.getGuiPlayer() &&
+            if (vibrateDuration > 0 && player.getLobbyPlayer() == MatchUtil.getGuiPlayer() &&
                     FModel.getPreferences().getPrefBoolean(FPref.UI_VIBRATE_ON_LIFE_LOSS)) {
                 //never vibrate more than two seconds regardless of life lost or poison counters gained
                 Gdx.input.vibrate(Math.min(vibrateDuration, 2000)); 
@@ -298,7 +299,7 @@ public class VPlayerPanel extends FContainer {
 
         @Override
         public boolean tap(float x, float y, int count) {
-            FControl.getGameView().selectPlayer(player, null); //treat tapping on life the same as tapping on the avatar
+            MatchUtil.getGameView().selectPlayer(player, null); //treat tapping on life the same as tapping on the avatar
             return true;
         }
 

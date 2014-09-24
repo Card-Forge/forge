@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import forge.Singletons;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.FScreen;
+import forge.match.MatchUtil;
 import forge.view.IGameView;
 
 /** 
@@ -57,22 +58,21 @@ public class ControlWinLose {
     public void actionOnContinue() {
         SOverlayUtils.hideOverlay();
         saveOptions();
-
-        Singletons.getControl().endCurrentGame(true, false);
+        MatchUtil.continueMatch();
     }
 
     /** Action performed when "restart" button is pressed in default win/lose UI. */
     public void actionOnRestart() {
         SOverlayUtils.hideOverlay();
         saveOptions();
-        Singletons.getControl().endCurrentGame(false, true);
+        MatchUtil.restartMatch();
     }
 
     /** Action performed when "quit" button is pressed in default win/lose UI. */
     public void actionOnQuit() {
         // Reset other stuff
         saveOptions();
-        Singletons.getControl().endCurrentGame(false, false);
+        MatchUtil.endCurrentGame();
         Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
         SOverlayUtils.hideOverlay();
     }
@@ -82,7 +82,7 @@ public class ControlWinLose {
      * with other game modes.
      */
     public void saveOptions() {
-        Singletons.getControl().writeMatchPreferences();
+        CMatchUI.SINGLETON_INSTANCE.writeMatchPreferences();
     }
 
     /**

@@ -82,6 +82,7 @@ import forge.game.zone.ZoneType;
 import forge.interfaces.IGuiBase;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.match.MatchUtil;
 import forge.match.input.ButtonUtil;
 import forge.match.input.Input;
 import forge.match.input.InputAttack;
@@ -89,7 +90,6 @@ import forge.match.input.InputBase;
 import forge.match.input.InputBlock;
 import forge.match.input.InputConfirm;
 import forge.match.input.InputConfirmMulligan;
-import forge.match.input.InputNone;
 import forge.match.input.InputPassPriority;
 import forge.match.input.InputPayMana;
 import forge.match.input.InputProliferate;
@@ -169,14 +169,14 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     public boolean isUiSetToSkipPhase(final Player turn, final PhaseType phase) {
-        return !getGui().stopAtPhase(gameView.getPlayerView(turn), phase);
+        return !MatchUtil.getController().stopAtPhase(gameView.getPlayerView(turn), phase);
     }
 
     /**
      * Uses GUI to learn which spell the player (human in our case) would like to play
      */ 
     public SpellAbility getAbilityToPlay(final List<SpellAbility> abilities, final ITriggerEvent triggerEvent) {
-        final int choice = getGui().getAbilityToPlay(gameView.getSpellAbilityViews(abilities), triggerEvent);
+        final int choice = MatchUtil.getController().getAbilityToPlay(gameView.getSpellAbilityViews(abilities), triggerEvent);
         return gameView.getSpellAbility(choice);
     }
 
@@ -258,7 +258,7 @@ public class PlayerControllerHuman extends PlayerController {
             if ((attacker.hasKeyword("Trample") && defender != null) || (blockers.size() > 1)) {
                 final CardView vAttacker = gameView.getCardView(attacker);
                 final GameEntityView vDefender = gameView.getGameEntityView(defender);
-                final Map<CardView, Integer> result = getGui().getDamageToAssign(vAttacker, vBlockers, damageDealt, vDefender, overrideOrder);
+                final Map<CardView, Integer> result = MatchUtil.getDamageToAssign(vAttacker, vBlockers, damageDealt, vDefender, overrideOrder);
                 for (final Entry<CardView, Integer> e : result.entrySet()) {
                     map.put(gameView.getCard(e.getKey()), e.getValue());
                 }
@@ -327,7 +327,7 @@ public class PlayerControllerHuman extends PlayerController {
             return singleChosen == null ?  Lists.<Card>newArrayList() : Lists.newArrayList(singleChosen);
         }
 
-        getGui().setPanelSelection(gameView.getCardView(sa.getHostCard()));
+        MatchUtil.getController().setPanelSelection(gameView.getCardView(sa.getHostCard()));
 
         // try to use InputSelectCardsFromList when possible 
         boolean cardsAreInMyHandOrBattlefield = true;
@@ -496,7 +496,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public List<Card> orderBlockers(final Card attacker, final List<Card> blockers) {
         final CardView vAttacker = gameView.getCardView(attacker);
-        getGui().setPanelSelection(vAttacker);
+        MatchUtil.getController().setPanelSelection(vAttacker);
         final List<CardView> choices = SGuiChoose.order(getGui(), "Choose Damage Order for " + vAttacker, "Damaged First", gameView.getCardViews(blockers), vAttacker);
         return gameView.getCards(choices);
     }
@@ -504,7 +504,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public List<Card> orderBlocker(final Card attacker, final Card blocker, final List<Card> oldBlockers) {
         final CardView vAttacker = gameView.getCardView(attacker);
-        getGui().setPanelSelection(vAttacker);
+        MatchUtil.getController().setPanelSelection(vAttacker);
         final List<CardView> choices = SGuiChoose.insertInList(getGui(), "Choose blocker after which to place " + vAttacker + " in damage order; cancel to place it first", gameView.getCardView(blocker), gameView.getCardViews(oldBlockers));
         return gameView.getCards(choices);
     }
@@ -512,7 +512,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public List<Card> orderAttackers(final Card blocker, final List<Card> attackers) {
         final CardView vBlocker = gameView.getCardView(blocker);
-        getGui().setPanelSelection(vBlocker);
+        MatchUtil.getController().setPanelSelection(vBlocker);
         final List<CardView> choices = SGuiChoose.order(getGui(), "Choose Damage Order for " + vBlocker, "Damaged First", gameView.getCardViews(attackers), vBlocker);
         return gameView.getCards(choices);
     }
@@ -767,7 +767,7 @@ public class PlayerControllerHuman extends PlayerController {
                 //ensure they're declared and then delay slightly so user can see as much
                 for (Pair<Card, GameEntity> attacker : mandatoryAttackers) {
                     combat.addAttacker(attacker.getLeft(), attacker.getRight());
-                    getGui().fireEvent(new UiEventAttackerDeclared(gameView.getCardView(attacker.getLeft()), gameView.getGameEntityView(attacker.getRight())));
+                    MatchUtil.fireEvent(new UiEventAttackerDeclared(gameView.getCardView(attacker.getLeft()), gameView.getGameEntityView(attacker.getRight())));
                 }
                 try {
                     Thread.sleep(FControlGamePlayback.combatDelay);
@@ -797,10 +797,10 @@ public class PlayerControllerHuman extends PlayerController {
             //allow user to cancel auto-pass
             InputBase.cancelAwaitNextInput(); //don't overwrite prompt with awaiting opponent
             PhaseType phase = getAutoPassUntilPhase();
-            InputNone inputNone = new InputNone(gameView);
-            getGui().showPromptMessage(inputNone.getOwner(), "Yielding until " + (phase == PhaseType.CLEANUP ? "end of turn" : phase.nameForUi.toString()) +
+            PlayerView playerView = gameView.getLocalPlayerView();
+            MatchUtil.getController().showPromptMessage(playerView, "Yielding until " + (phase == PhaseType.CLEANUP ? "end of turn" : phase.nameForUi.toString()) +
                     ".\nYou may cancel this yield to take an action.");
-            ButtonUtil.update(inputNone, false, true, false);
+            ButtonUtil.update(playerView, false, true, false);
         }
     }
 
@@ -816,9 +816,9 @@ public class PlayerControllerHuman extends PlayerController {
         super.autoPassCancel();
 
         //prevent prompt getting stuck on yielding message while actually waiting for next input opportunity
-        InputNone inputNone = new InputNone(gameView);
-        getGui().showPromptMessage(inputNone.getOwner(), "");
-        ButtonUtil.update(inputNone, false, false, false);
+        PlayerView playerView = gameView.getLocalPlayerView();
+        MatchUtil.getController().showPromptMessage(playerView, "");
+        ButtonUtil.update(playerView, false, false, false);
         InputBase.awaitNextInput(gameView);
     }
 
@@ -1720,7 +1720,7 @@ public class PlayerControllerHuman extends PlayerController {
         public void setViewAllCards(final boolean canViewAll) {
             mayLookAtAllCards = canViewAll;
             for (final Player p : game.getPlayers()) {
-                getGui().updateCards(getCardViews(p.getAllCards()));
+                MatchUtil.updateCards(getCardViews(p.getAllCards()));
             }
         }
 

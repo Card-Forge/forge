@@ -36,7 +36,6 @@ import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.ImageCache;
-import forge.Singletons;
 import forge.card.CardDetailUtil;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.game.player.Player;
@@ -44,6 +43,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.match.MatchUtil;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CPrompt;
 import forge.screens.match.controllers.CStack;
@@ -137,7 +137,7 @@ public enum VStack implements IVDoc<CStack> {
      * @param models
      * @param viewer */
     public void updateStack() {
-        final LocalGameView model = Singletons.getControl().getGameView();
+        final LocalGameView model = MatchUtil.getGameView();
         final List<StackItemView> items = model.getStack();
         tab.setText("Stack : " + items.size());
 
@@ -181,7 +181,7 @@ public enum VStack implements IVDoc<CStack> {
         public StackInstanceTextArea(final IGameView game, final StackItemView item) {
             sourceCard = item.getSource();
 
-            final Player localPlayer = Singletons.getControl().getCurrentPlayer();
+            final Player localPlayer = MatchUtil.getCurrentPlayer();
             final String txt = (item.isOptionalTrigger() && item.getActivatingPlayer().equals(localPlayer)
                     ? "(OPTIONAL) " : "") + item.getText();
 

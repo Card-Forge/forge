@@ -18,31 +18,29 @@
 package forge.match.input;
 
 import forge.interfaces.IButton;
-import forge.interfaces.IGuiBase;
+import forge.match.MatchUtil;
 import forge.view.PlayerView;
 
 /**
  * Manages match UI OK/Cancel button enabling and focus
  */
 public class ButtonUtil {
-    public static void update(final Input input, boolean okEnabled, boolean cancelEnabled, boolean focusOk) {
-        update(input, "OK", "Cancel", okEnabled, cancelEnabled, focusOk);
+    public static void update(PlayerView owner, boolean okEnabled, boolean cancelEnabled, boolean focusOk) {
+        update(owner, "OK", "Cancel", okEnabled, cancelEnabled, focusOk);
     }
-    public static void update(final Input input, String okLabel, String cancelLabel, boolean okEnabled, boolean cancelEnabled, boolean focusOk) {
-        IGuiBase gui = input.getGui();
-        PlayerView owner = input.getOwner();
-        IButton btnOk = gui.getBtnOK(owner);
-        IButton btnCancel = gui.getBtnCancel(owner);
+    public static void update(PlayerView owner, String okLabel, String cancelLabel, boolean okEnabled, boolean cancelEnabled, boolean focusOk) {
+        IButton btnOk = MatchUtil.getController().getBtnOK(owner);
+        IButton btnCancel = MatchUtil.getController().getBtnCancel(owner);
 
         btnOk.setText(okLabel);
         btnCancel.setText(cancelLabel);
         btnOk.setEnabled(okEnabled);
         btnCancel.setEnabled(cancelEnabled);
         if (okEnabled && focusOk) {
-            gui.focusButton(btnOk);
+            MatchUtil.getController().focusButton(btnOk);
         }
         else if (cancelEnabled) {
-            gui.focusButton(btnCancel);
+            MatchUtil.getController().focusButton(btnCancel);
         }
     }
 }

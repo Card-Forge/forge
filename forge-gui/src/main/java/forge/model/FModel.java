@@ -300,9 +300,9 @@ public class FModel {
         gauntletData = data0;
     }
 
-    public static GauntletMini getGauntletMini(final IGuiBase gui) {
+    public static GauntletMini getGauntletMini() {
         if (gauntlet == null) {
-            gauntlet = new GauntletMini(gui);
+            gauntlet = new GauntletMini();
         }
         return gauntlet;
     }

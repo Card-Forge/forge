@@ -17,7 +17,7 @@ public abstract class LimitedWinLoseController {
     public LimitedWinLoseController(IWinLoseView<? extends IButton> view0, final IGameView game0, final IGuiBase gui) {
         view = view0;
         lastGame = game0;
-        gauntlet = FModel.getGauntletMini(gui);
+        gauntlet = FModel.getGauntletMini();
         wonMatch = lastGame.isMatchWonBy(GamePlayerUtil.getGuiPlayer());
     }
 

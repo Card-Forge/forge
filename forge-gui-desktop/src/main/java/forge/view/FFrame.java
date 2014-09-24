@@ -1,8 +1,8 @@
 package forge.view;
 
-import forge.Singletons;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.framework.SResizingUtil;
+import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -78,14 +78,14 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
     private void pause() {
         if (paused || !isMainFrame) { return; }
 
-        Singletons.getControl().getSoundSystem().pause();
+        MatchUtil.pause();
         paused = true;
     }
 
     private void resume() {
         if (!paused || !isMainFrame) { return; }
 
-        Singletons.getControl().getSoundSystem().resume();
+        MatchUtil.resume();
         paused = false;
     }
 

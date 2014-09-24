@@ -49,9 +49,9 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.match.MatchUtil;
 import forge.match.input.ButtonUtil;
 import forge.match.input.InputBase;
-import forge.match.input.InputNone;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
@@ -83,7 +83,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             @Override
             public void run() {
                 phaseUpdPlanned.set(false);
-                gameView.getGui().updatePhase();
+                MatchUtil.getController().updatePhase();
             }
         });
         return null;
@@ -100,7 +100,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             @Override
             public void run() {
                 combatUpdPlanned.set(false);
-                gameView.getGui().showCombat(gameView.getCombat());
+                MatchUtil.getController().showCombat(gameView.getCombat());
             }
         });
         return null;
@@ -120,7 +120,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             @Override
             public void run() {
                 turnUpdPlanned.set(false);
-                gameView.getGui().updateTurn(gameView.getPlayerView(event.turnOwner));
+                MatchUtil.getController().updateTurn(gameView.getPlayerView(event.turnOwner));
             }
         });
         return null;
@@ -148,7 +148,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         FThreads.invokeInEdtNowOrLater(gameView.getGui(), new Runnable() {
             @Override
             public void run() {
-                gameView.getGui().updatePlayerControl();
+                MatchUtil.getController().updatePlayerControl();
             }
         });
         return null;
@@ -172,11 +172,11 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         FThreads.invokeInEdtNowOrLater(gameView.getGui(), new Runnable() {
             @Override
             public void run() {
-                InputNone inputNone = new InputNone(gameView);
+                PlayerView localPlayer = gameView.getLocalPlayerView();
                 InputBase.cancelAwaitNextInput(); //ensure "Waiting for opponent..." doesn't appear behind WinLo
-                gameView.getGui().showPromptMessage(inputNone.getOwner(), ""); //clear prompt behind WinLose overlay
-                ButtonUtil.update(inputNone, "", "", false, false, false);
-                gameView.getGui().finishGame();
+                MatchUtil.getController().showPromptMessage(localPlayer, ""); //clear prompt behind WinLose overlay
+                ButtonUtil.update(localPlayer, "", "", false, false, false);
+                MatchUtil.getController().finishGame();
                 gameView.updateAchievements();
             }
         });
@@ -188,7 +188,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         @Override
         public void run() {
             stackUpdPlanned.set(false);
-            gameView.getGui().updateStack();
+            MatchUtil.getController().updateStack();
         }
     };
 
@@ -219,7 +219,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         @Override
         public void run() {
             synchronized (zonesToUpdate) {
-                gameView.getGui().updateZones(zonesToUpdate);
+                MatchUtil.getController().updateZones(zonesToUpdate);
                 zonesToUpdate.clear();
             }
         }
@@ -271,7 +271,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         public void run() {
             synchronized (cardsToUpdate) {
                 final Iterable<CardView> newCardsToUpdate = gameView.getRefreshedCardViews(cardsToUpdate);
-                gameView.getGui().updateCards(newCardsToUpdate);
+                MatchUtil.updateCards(newCardsToUpdate);
                 cardsToUpdate.clear();
             }
         }
@@ -372,14 +372,14 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(GameEventCardStatsChanged event) {
         final Iterable<CardView> cardViews = gameView.getCardViews(event.cards);
-        gameView.getGui().refreshCardDetails(cardViews);
+        MatchUtil.getController().refreshCardDetails(cardViews);
         return updateManyCards(cardViews);
     }
 
     @Override
     public Void visit(GameEventPlayerStatsChanged event) {
         for (final Player p : event.players) {
-            gameView.getGui().refreshCardDetails(gameView.getCardViews(p.getAllCards()));
+            MatchUtil.getController().refreshCardDetails(gameView.getCardViews(p.getAllCards()));
         }
         return null;
     }
@@ -395,7 +395,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final Runnable updManaPool = new Runnable() {
         @Override public void run() {
             synchronized (manaPoolUpdate) {
-                gameView.getGui().updateManaPool(gameView.getPlayerViews(manaPoolUpdate));
+                MatchUtil.getController().updateManaPool(gameView.getPlayerViews(manaPoolUpdate));
                 manaPoolUpdate.clear();
             }
         }
@@ -421,7 +421,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final Runnable updLives = new Runnable() {
         @Override public void run() {
             synchronized (livesUpdate) {
-                gameView.getGui().updateLives(gameView.getPlayerViews(livesUpdate));
+                MatchUtil.getController().updateLives(gameView.getPlayerViews(livesUpdate));
                 livesUpdate.clear();
             }
         }

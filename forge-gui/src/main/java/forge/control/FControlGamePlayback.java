@@ -19,6 +19,7 @@ import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventTurnPhase;
 import forge.game.event.IGameEventVisitor;
 import forge.interfaces.IGuiBase;
+import forge.match.MatchUtil;
 import forge.match.input.InputPlaybackControl;
 import forge.view.LocalGameView;
 
@@ -76,7 +77,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
      */
     @Override
     public Void visit(GameEventTurnPhase ev) {
-        boolean isUiToStop = gui.stopAtPhase(
+        boolean isUiToStop = MatchUtil.getController().stopAtPhase(
                 gameView.getPlayerView(ev.playerTurn), ev.phase);
 
         switch(ev.phase) {

@@ -25,13 +25,13 @@ import net.miginfocom.swing.MigLayout;
 
 import com.google.common.collect.Lists;
 
-import forge.Singletons;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.GameLogPanel;
@@ -128,7 +128,7 @@ public enum VLog implements IVDoc<CLog> {
      */
     public void updateConsole() {
         if (isGameLogConsoleVisible()) {
-            LocalGameView model = Singletons.getControl().getGameView();
+            LocalGameView model = MatchUtil.getGameView();
             resetDisplayIfNewGame(model);
             displayNewGameLogEntries(model);
             // Important : refreshLayout() needs to be called every update.

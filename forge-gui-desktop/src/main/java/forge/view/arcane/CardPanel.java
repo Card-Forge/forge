@@ -38,9 +38,9 @@ import forge.ImageCache;
 import forge.card.CardEdition;
 import forge.card.mana.ManaCost;
 import forge.gui.CardContainer;
+import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
-import forge.screens.match.CMatchUI;
 import forge.toolbox.CardFaceSymbols;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.IDisposable;
@@ -310,7 +310,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final int offset = this.isTapped() ? 1 : 0;
 
         // Magenta outline for when card was chosen to pay
-        if (CMatchUI.SINGLETON_INSTANCE.isUsedToPay(this.getCard())) {
+        if (MatchUtil.isUsedToPay(this.getCard())) {
             g2d.setColor(Color.magenta);
             final int n2 = Math.max(1, Math.round(2 * this.cardWidth * CardPanel.SELECTED_BORDER_SIZE));
             g2d.fillRoundRect(this.cardXOffset - n2, (this.cardYOffset - n2) + offset, this.cardWidth + (n2 * 2), this.cardHeight + (n2 * 2), cornerSize + n2, cornerSize + n2);
@@ -480,7 +480,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             CardFaceSymbols.drawSymbol("phasing", g, stateXSymbols, ySymbols);
         }
 
-        if (CMatchUI.SINGLETON_INSTANCE.isUsedToPay(card)) {
+        if (MatchUtil.isUsedToPay(card)) {
             CardFaceSymbols.drawSymbol("sacrifice", g, (this.cardXOffset + (this.cardWidth / 2)) - 20,
                     (this.cardYOffset + (this.cardHeight / 2)) - 20);
         }

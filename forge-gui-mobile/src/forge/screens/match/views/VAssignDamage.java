@@ -24,7 +24,8 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinColor.Colors;
 import forge.card.CardZoom;
-import forge.screens.match.FControl;
+import forge.match.MatchUtil;
+import forge.screens.match.MatchController;
 import forge.toolbox.FButton;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
@@ -225,7 +226,7 @@ public class VAssignDamage extends FDialog {
             }
             else if (defender instanceof PlayerView) {
                 PlayerView player = (PlayerView)defender;
-                obj = add(new MiscAttDefPanel(player.getName(), FControl.getPlayerAvatar(player)));
+                obj = add(new MiscAttDefPanel(player.getName(), MatchController.getPlayerAvatar(player)));
             }
             else {
                 obj = add(new MiscAttDefPanel(defender.toString(), FSkinImage.UNKNOWN));
@@ -456,7 +457,7 @@ public class VAssignDamage extends FDialog {
         if (source == null) {
             if (defender instanceof PlayerView) {
                 PlayerView p = (PlayerView)defender;
-                lethalDamage = attackerHasInfect ? FControl.getGameView().getPoisonCountersToLose() - p.getPoisonCounters() : p.getLife();
+                lethalDamage = attackerHasInfect ? MatchUtil.getGameView().getPoisonCountersToLose() - p.getPoisonCounters() : p.getLife();
             }
             else if (defender instanceof CardView) { // planeswalker
                 CardView pw = (CardView)defender;

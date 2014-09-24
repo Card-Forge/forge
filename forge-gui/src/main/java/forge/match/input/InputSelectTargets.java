@@ -13,6 +13,7 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.match.MatchUtil;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.gui.SGuiChoose;
@@ -78,19 +79,19 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         if (!tgt.isMinTargetsChosen(sa.getHostCard(), sa) || tgt.isDividedAsYouChoose()) {
             if (mandatory && tgt.hasCandidates(sa, true)) {
                 // Player has to click on a target
-                ButtonUtil.update(this, false, false, false);
+                ButtonUtil.update(getOwner(), false, false, false);
             }
             else {
-                ButtonUtil.update(this, false, true, false);
+                ButtonUtil.update(getOwner(), false, true, false);
             }
         }
         else {
             if (mandatory && tgt.hasCandidates(sa, true)) {
                 // Player has to click on a target or ok
-                ButtonUtil.update(this, true, false, true);
+                ButtonUtil.update(getOwner(), true, false, true);
             }
             else {
-                ButtonUtil.update(this, true, true, true);
+                ButtonUtil.update(getOwner(), true, true, true);
             }
         }
     }
@@ -238,7 +239,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     private void addTarget(final GameEntity ge) {
         sa.getTargets().add(ge);
         if (ge instanceof Card) {
-            getGui().setUsedToPay(getController().getCardView((Card) ge), true);
+            MatchUtil.setUsedToPay(getController().getCardView((Card) ge), true);
             lastTarget = (Card) ge;
         }
         final Integer val = targetDepth.get(ge);
@@ -255,7 +256,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     private void done() {
         for (final GameEntity c : targetDepth.keySet()) {
             if (c instanceof Card) {
-                getGui().setUsedToPay(getController().getCardView((Card) c), false);
+                MatchUtil.setUsedToPay(getController().getCardView((Card) c), false);
             }
         }
 

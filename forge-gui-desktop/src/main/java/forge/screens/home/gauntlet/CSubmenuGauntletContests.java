@@ -1,6 +1,5 @@
 package forge.screens.home.gauntlet;
 
-import forge.Singletons;
 import forge.UiCommand;
 import forge.deck.Deck;
 import forge.game.GameType;
@@ -9,6 +8,7 @@ import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
+import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 
@@ -106,7 +106,7 @@ public enum CSubmenuGauntletContests implements ICDoc {
         starter.add(new RegisteredPlayer(gd.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer()));
         starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
 
-        Singletons.getControl().startMatch(GameType.Gauntlet, starter);
+        MatchUtil.startMatch(GameType.Gauntlet, starter);
     }
 
     /* (non-Javadoc)

@@ -8,14 +8,12 @@ import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
 
-import forge.Singletons;
 import forge.assets.FSkinProp;
-import forge.control.FControl;
+import forge.match.MatchUtil;
 import forge.menus.MenuUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
-import forge.screens.match.CMatchUI;
 import forge.screens.match.VAutoYields;
 import forge.screens.match.controllers.CDock;
 import forge.toolbox.FSkin.SkinIcon;
@@ -85,7 +83,7 @@ public final class GameMenu {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Singletons.getControl().getGameView().tryUndoLastAction();
+                MatchUtil.getGameView().tryUndoLastAction();
             }
         };
     }
@@ -102,7 +100,7 @@ public final class GameMenu {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CMatchUI.SINGLETON_INSTANCE.concede();
+                MatchUtil.concede();
             }
         };
     }
@@ -119,7 +117,7 @@ public final class GameMenu {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Singletons.getControl().getGameView().alphaStrike();
+                MatchUtil.alphaStrike();
             }
         };
     }
@@ -203,8 +201,7 @@ public final class GameMenu {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                final FControl control = Singletons.getControl();
-                final VAutoYields autoYields = new VAutoYields(control.getGameView());
+                final VAutoYields autoYields = new VAutoYields(MatchUtil.getGameView());
                 autoYields.showAutoYields();
             }
         };
