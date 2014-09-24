@@ -56,10 +56,11 @@ A few examples of possible expressions:
     
 These examples should get you started with this powerful-now-that-it's-finished feature. Enjoy!
 
-- Trigger Fixes -
 
+- Trigger Fixes -
 The long awaited fixes to Blood Artist/Deathgreeter triggering with multiple other creatures is finally here. There may be some residual oddness with other triggers, so please report those if you see them so we can get that worked out. 
-    
+
+
 ---------
 New Cards
 ---------
@@ -290,6 +291,7 @@ Howl of the Horde
 Kheru Lich Lord
 Villainous Wealth
 Deflecting Palm
+Ashcloud Phoenix
 
 
 -------------------------------
