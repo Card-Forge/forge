@@ -135,8 +135,12 @@ public class MatchScreen extends FScreen {
         }
     }
 
+    public boolean isTopHumanPlayerActive() {
+        return topPlayerPrompt != null && MatchUtil.getGameView().getPlayer(topPlayerPanel.getPlayer()) == MatchUtil.getCurrentPlayer();
+    }
+
     public VPrompt getActivePrompt() {
-        if (topPlayerPrompt != null && topPlayerPanel.getPlayer().equals(MatchUtil.getCurrentPlayer())) {
+        if (isTopHumanPlayerActive()) {
             return topPlayerPrompt;
         }
         return bottomPlayerPrompt;

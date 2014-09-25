@@ -6,6 +6,8 @@ import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.item.IPaperCard;
+import forge.match.MatchUtil;
+import forge.screens.match.MatchController;
 import forge.toolbox.FList;
 import forge.toolbox.FOverlay;
 import forge.util.Utils;
@@ -21,10 +23,13 @@ public class CardZoom extends FOverlay {
 
     public static <T> void show(final IPaperCard pc0) {
         card = ViewUtil.getCardForUi(pc0);
+        cardZoom.setRotate180(false);
         cardZoom.show();
     }
     public static <T> void show(final CardView card0) {
         card = card0;
+        //rotate card zoom to face top human player if needed
+        cardZoom.setRotate180(MatchUtil.getGame() != null && MatchController.getView().isTopHumanPlayerActive());
         cardZoom.show();
     }
 
