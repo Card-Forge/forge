@@ -23,10 +23,10 @@ public abstract class FGestureAdapter extends InputAdapter {
     public abstract boolean panStop(float x, float y);
     public abstract boolean zoom(float x, float y, float amount);
 
-    private float tapSquareSize, pressDelay, longPressDelay, quickTapDelay, lastTapX, lastTapY, tapSquareCenterX, tapSquareCenterY;
+    private float tapSquareSize, longPressDelay, lastTapX, lastTapY, tapSquareCenterX, tapSquareCenterY;
     private long tapCountInterval, flingDelay, lastTapTime, gestureStartTime;
     private int tapCount, lastTapButton, lastTapPointer;
-    private boolean inTapSquare, pressed, longPressed, longPressHandled, quickTapped, pinching, panning;
+    private boolean inTapSquare, pressed, longPressed, longPressHandled, pinching, panning;
 
     private final VelocityTracker tracker = new VelocityTracker();
     private final Vector2 pointer1 = new Vector2();
@@ -35,16 +35,6 @@ public abstract class FGestureAdapter extends InputAdapter {
     private final Vector2 prevPointer2 = new Vector2();
     private final Vector2 focalPoint = new Vector2();
 
-    private final Task pressTask = new Task() {
-        @Override
-        public void run() {
-            if (!pressed) {
-                pressed = true;
-                press(pointer1.x, pointer1.y);
-                Gdx.graphics.requestRendering();
-            }
-        }
-    };
     private final Task longPressTask = new Task() {
         @Override
         public void run() {
@@ -60,33 +50,19 @@ public abstract class FGestureAdapter extends InputAdapter {
             }
         }
     };
-    private final Task quickTapTask = new Task() {
-        @Override
-        public void run() {
-            if (quickTapped) {
-                quickTapped = false;
-                endPress(lastTapX, lastTapY);
-                tap(lastTapX, lastTapY, tapCount);
-                Gdx.graphics.requestRendering();
-            }
-        }
-    };
 
     public FGestureAdapter() {
-        this(Utils.AVG_FINGER_WIDTH / 2f, DOUBLE_TAP_INTERVAL, 0.05f, 0.5f, 0.025f, 0.15f);
+        this(Utils.AVG_FINGER_WIDTH / 2f, DOUBLE_TAP_INTERVAL, 0.5f, 0.15f);
     }
 
     /** @param tapSquareSize0 half width in pixels of the square around an initial touch event
      * @param tapCountInterval0 time in seconds that must pass for two touch down/up sequences to be detected as consecutive taps.
-     * @param pressDelay0 time in seconds that must pass for a press event to be fired.
      * @param longPressDelay0 time in seconds that must pass for a long press event to be fired.
      * @param flingDelay0 time in seconds the finger must have been dragged for a fling event to be fired. */
-    public FGestureAdapter(float tapSquareSize0, float tapCountInterval0, float pressDelay0, float longPressDelay0, float quickTapDelay0, float flingDelay0) {
+    public FGestureAdapter(float tapSquareSize0, float tapCountInterval0, float longPressDelay0, float flingDelay0) {
         tapSquareSize = tapSquareSize0;
         tapCountInterval = Utils.secondsToTimeSpan(tapCountInterval0);
-        pressDelay = pressDelay0;
         longPressDelay = longPressDelay0;
-        quickTapDelay = quickTapDelay0;
         flingDelay = Utils.secondsToTimeSpan(flingDelay0);
     }
 
@@ -96,11 +72,6 @@ public abstract class FGestureAdapter extends InputAdapter {
     }
     private boolean touchDown(float x, float y, int pointer, int button) {
         if (pointer > 1) { return false; }
-
-        if (quickTapped) { //finish quick tap immediately if another touchDown event is received
-            quickTapTask.cancel();
-            quickTapTask.run();
-        }
 
         if (pointer == 0) {
             pointer1.set(x, y);
@@ -217,10 +188,6 @@ public abstract class FGestureAdapter extends InputAdapter {
             if (wasPressed) {
                 return tap(x, y, tapCount);
             }
-
-            pressTask.run(); //allow pressed and released to fire if quick tapping
-            quickTapped = true;
-            Timer.schedule(quickTapTask, quickTapDelay);
             return false;
         }
 
@@ -255,12 +222,13 @@ public abstract class FGestureAdapter extends InputAdapter {
     }
 
     private void startPress() {
-        pressed = false; //ensure these fields reset
-        longPressed = false;
+        longPressed = false; //ensure these fields reset
         longPressHandled = false;
 
-        if (!pressTask.isScheduled()) {
-            Timer.schedule(pressTask, pressDelay);
+        if (!pressed) {
+            pressed = true;
+            press(pointer1.x, pointer1.y);
+            Gdx.graphics.requestRendering();
         }
         if (!longPressTask.isScheduled()) {
             Timer.schedule(longPressTask, longPressDelay);
@@ -268,7 +236,6 @@ public abstract class FGestureAdapter extends InputAdapter {
     }
 
     private void endPress(float x, float y) {
-        pressTask.cancel();
         longPressTask.cancel();
 
         longPressed = false;
