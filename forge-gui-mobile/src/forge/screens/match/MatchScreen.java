@@ -61,7 +61,7 @@ public class MatchScreen extends FScreen {
     private AbilityEffect activeEffect;
 
     public MatchScreen(List<VPlayerPanel> playerPanels0) {
-        super(new FMenuBar());
+        super(MatchUtil.getHumanCount() > 1 ? null : new FMenuBar());
 
         scroller = add(new FieldScroller());
 
@@ -115,18 +115,22 @@ public class MatchScreen extends FScreen {
         VPlayers players = new VPlayers();
         players.setDropDownContainer(this);
 
-        FMenuBar menuBar = (FMenuBar)getHeader();
-        menuBar.addTab("Game", new VGameMenu());
-        menuBar.addTab("Players (" + playerPanels.size() + ")", players);
-        menuBar.addTab("Log", log);
-        menuBar.addTab("Dev", devMenu);
-        menuBar.addTab("Stack (0)", stack);
+        if (topPlayerPrompt == null) {
+            FMenuBar menuBar = (FMenuBar)getHeader();
+            menuBar.addTab("Game", new VGameMenu());
+            menuBar.addTab("Players (" + playerPanels.size() + ")", players);
+            menuBar.addTab("Log", log);
+            menuBar.addTab("Dev", devMenu);
+            menuBar.addTab("Stack (0)", stack);
+        }
     }
 
     @Override
     public void onActivate() {
         //update dev menu visibility here so returning from Settings screen allows update
-        devMenu.getMenuTab().setVisible(ForgePreferences.DEV_MODE);
+        if (topPlayerPrompt == null) {
+            devMenu.getMenuTab().setVisible(ForgePreferences.DEV_MODE);
+        }
     }
 
     public VPrompt getActivePrompt() {
