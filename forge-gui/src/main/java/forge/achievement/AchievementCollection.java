@@ -19,6 +19,7 @@ import forge.game.GameType;
 import forge.game.player.Player;
 import forge.interfaces.IComboBox;
 import forge.interfaces.IGuiBase;
+import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.properties.ForgeConstants;
@@ -36,7 +37,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
     }
 
     public static void updateAll(PlayerControllerHuman controller) {
-        if (controller.hasCheated()) { //don't update achievements if player cheated during game
+        if (controller.hasCheated() || MatchUtil.getHumanCount() != 1) { //don't update achievements if player cheated during game or if it's not just a single human player
             PlaneswalkerAchievements.activatedUltimates.clear(); //ensure these are cleared
             return;
         }
