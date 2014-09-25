@@ -597,11 +597,11 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
 
     @Override
     public void startNewMatch(final Match match) {
-        FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable(){
+        SOverlayUtils.startGameOverlay();
+        SOverlayUtils.showOverlay();
+        FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
             @Override
             public void run() {
-                SOverlayUtils.startGameOverlay();
-                SOverlayUtils.showOverlay();
                 MatchUtil.startGame(match);
             }
         });
