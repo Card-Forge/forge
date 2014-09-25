@@ -28,6 +28,7 @@ public class Graphics {
 
     private final SpriteBatch batch = new SpriteBatch();
     private final ShapeRenderer shapeRenderer = new ShapeRenderer();
+    private final Vector3 tmp = new Vector3();
     private float regionHeight;
     private Rectangle bounds;
     private Rectangle visibleBounds;
@@ -63,7 +64,15 @@ public class Graphics {
     }
     public boolean startClip(float x, float y, float w, float h) {
         batch.flush(); //must flush batch to prevent other things not rendering
-        if (!ScissorStack.pushScissors(new Rectangle(adjustX(x), adjustY(y, h), w, h))) {
+
+        Rectangle clip = new Rectangle(adjustX(x), adjustY(y, h), w, h);
+        if (isTransformed) { //transform position if needed
+            tmp.set(clip.x + clip.width / 2, clip.y + clip.height / 2, 0);
+            tmp.mul(batch.getTransformMatrix());
+            clip.x = tmp.x - clip.width / 2;
+            clip.y = tmp.y - clip.height / 2;
+        }
+        if (!ScissorStack.pushScissors(clip)) {
             failedClipCount++; //tracked failed clips to prevent calling popScissors on endClip
             return false;
         }
@@ -86,14 +95,29 @@ public class Graphics {
 
         final Rectangle parentBounds = bounds;
         bounds = new Rectangle(parentBounds.x + displayObj.getLeft(), parentBounds.y + displayObj.getTop(), displayObj.getWidth(), displayObj.getHeight());
-        displayObj.setScreenPosition(bounds.x, bounds.y);
+        if (isTransformed) { //transform screen position if needed
+            tmp.set(bounds.x + bounds.width / 2, regionHeight - bounds.y - bounds.height / 2, 0);
+            tmp.mul(batch.getTransformMatrix());
+            displayObj.setScreenPosition(tmp.x - bounds.width / 2, regionHeight - tmp.y - bounds.height / 2);
+        }
+        else {
+            displayObj.setScreenPosition(bounds.x, bounds.y);
+        }
 
         Rectangle intersection = Utils.getIntersection(bounds, visibleBounds);
         if (intersection != null) { //avoid drawing object if it's not within visible region
             final Rectangle backup = visibleBounds;
             visibleBounds = intersection;
 
+            if (displayObj.getRotate180()) {
+                setRotateTransform(displayObj.getWidth() / 2, displayObj.getHeight() / 2, 180);
+            }
+
             displayObj.draw(this);
+
+            if (displayObj.getRotate180()) {
+                clearTransform();
+            }
 
             visibleBounds = backup;
         }

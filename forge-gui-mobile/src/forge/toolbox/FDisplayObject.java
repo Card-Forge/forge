@@ -12,6 +12,7 @@ public abstract class FDisplayObject {
 
     private boolean visible = true;
     private boolean enabled = true;
+    private boolean rotate180 = false;
     private final Rectangle bounds = new Rectangle();
     private final Vector2 screenPosition = new Vector2();
 
@@ -90,6 +91,13 @@ public abstract class FDisplayObject {
     }
     public void setVisible(boolean b0) {
         visible = b0;
+    }
+
+    public boolean getRotate180() {
+        return rotate180;
+    }
+    public void setRotate180(boolean b0) {
+        rotate180 = b0;
     }
 
     //override to return true if drawOverlay should be called on container before drawing this object

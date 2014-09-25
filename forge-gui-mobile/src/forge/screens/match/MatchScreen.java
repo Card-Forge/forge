@@ -100,6 +100,7 @@ public class MatchScreen extends FScreen {
                             MatchUtil.getGameView().selectButtonCancel();
                         }
                     }));
+            topPlayerPrompt.setRotate180(true);
         }
         else {
             topPlayerPrompt = null;
