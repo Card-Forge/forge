@@ -4,6 +4,6 @@ Types:Creature Dragon
 PT:4/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ You | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ If CARDNAME is put into your graveyard from the battlefield, you may shuffle it into your library.
-SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ Self
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ TriggeredCard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alabaster_dragon.jpg
 Oracle:Flying\nWhen Alabaster Dragon dies, shuffle it into its owner's library.
