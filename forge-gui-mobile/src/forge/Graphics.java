@@ -1,5 +1,7 @@
 package forge;
 
+import java.util.Stack;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -28,6 +30,7 @@ public class Graphics {
 
     private final SpriteBatch batch = new SpriteBatch();
     private final ShapeRenderer shapeRenderer = new ShapeRenderer();
+    private final Stack<Matrix4> transforms = new Stack<Matrix4>();
     private final Vector3 tmp = new Vector3();
     private float regionHeight;
     private Rectangle bounds;
@@ -66,7 +69,7 @@ public class Graphics {
         batch.flush(); //must flush batch to prevent other things not rendering
 
         Rectangle clip = new Rectangle(adjustX(x), adjustY(y, h), w, h);
-        if (isTransformed) { //transform position if needed
+        if (!transforms.isEmpty()) { //transform position if needed
             tmp.set(clip.x + clip.width / 2, clip.y + clip.height / 2, 0);
             tmp.mul(batch.getTransformMatrix());
             clip.x = tmp.x - clip.width / 2;
@@ -95,7 +98,7 @@ public class Graphics {
 
         final Rectangle parentBounds = bounds;
         bounds = new Rectangle(parentBounds.x + displayObj.getLeft(), parentBounds.y + displayObj.getTop(), displayObj.getWidth(), displayObj.getHeight());
-        if (isTransformed) { //transform screen position if needed
+        if (!transforms.isEmpty()) { //transform screen position if needed
             tmp.set(bounds.x + bounds.width / 2, regionHeight - bounds.y - bounds.height / 2, 0);
             tmp.mul(batch.getTransformMatrix());
             displayObj.setScreenPosition(tmp.x - bounds.width / 2, regionHeight - tmp.y - bounds.height / 2);
@@ -110,13 +113,13 @@ public class Graphics {
             visibleBounds = intersection;
 
             if (displayObj.getRotate180()) {
-                setRotateTransform(displayObj.getWidth() / 2, displayObj.getHeight() / 2, 180);
+                startRotateTransform(displayObj.getWidth() / 2, displayObj.getHeight() / 2, 180);
             }
 
             displayObj.draw(this);
 
             if (displayObj.getRotate180()) {
-                clearTransform();
+                endTransform();
             }
 
             visibleBounds = backup;
@@ -452,7 +455,7 @@ public class Graphics {
     }
 
     private void startShape(ShapeType shapeType) {
-        if (isTransformed) {
+        if (!transforms.isEmpty()) {
             //must copy matrix before starting shape if transformed
             shapeRenderer.setTransformMatrix(batch.getTransformMatrix());
         }
@@ -504,25 +507,22 @@ public class Graphics {
         shapeRenderer.setProjectionMatrix(matrix);
     }
 
-    private boolean isTransformed;
-
-    public void setRotateTransform(float originX, float originY, float rotation) {
+    public void startRotateTransform(float originX, float originY, float rotation) {
         batch.end();
         float dx = adjustX(originX);
         float dy = adjustY(originY, 0);
+        transforms.add(new Matrix4(batch.getTransformMatrix())); //backup current transform matrix
         batch.getTransformMatrix().translate(dx, dy, 0);
         batch.getTransformMatrix().rotate(Vector3.Z, rotation);
         batch.getTransformMatrix().translate(-dx, -dy, 0);
         batch.begin();
-        isTransformed = true;
     }
 
-    public void clearTransform() {
+    public void endTransform() {
         batch.end();
-        batch.getTransformMatrix().idt();
+        batch.getTransformMatrix().set(transforms.pop());
         shapeRenderer.setTransformMatrix(batch.getTransformMatrix());
         batch.begin();
-        isTransformed = false;
     }
 
     public void drawRotatedImage(Texture image, float x, float y, float w, float h, float originX, float originY, float rotation) {

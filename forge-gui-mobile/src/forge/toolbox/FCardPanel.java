@@ -90,13 +90,13 @@ public class FCardPanel extends FDisplayObject {
 
         if (tapped) {
             float edgeOffset = w / 2f;
-            g.setRotateTransform(x + edgeOffset, y + h - edgeOffset, tappedAngle);
+            g.startRotateTransform(x + edgeOffset, y + h - edgeOffset, tappedAngle);
         }
 
         CardRenderer.drawCardWithOverlays(g, card, x, y, w, h);
 
         if (tapped) {
-            g.clearTransform();
+            g.endTransform();
         }
     }
 }
