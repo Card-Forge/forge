@@ -61,7 +61,7 @@ public class MatchScreen extends FScreen {
     private AbilityEffect activeEffect;
 
     public MatchScreen(List<VPlayerPanel> playerPanels0) {
-        super(MatchUtil.getHumanCount() > 1 ? null : new FMenuBar());
+        super(new FMenuBar());
 
         scroller = add(new FieldScroller());
 
@@ -117,14 +117,12 @@ public class MatchScreen extends FScreen {
         VPlayers players = new VPlayers();
         players.setDropDownContainer(this);
 
-        if (topPlayerPrompt == null) {
-            FMenuBar menuBar = (FMenuBar)getHeader();
-            menuBar.addTab("Game", new VGameMenu());
-            menuBar.addTab("Players (" + playerPanels.size() + ")", players);
-            menuBar.addTab("Log", log);
-            menuBar.addTab("Dev", devMenu);
-            menuBar.addTab("Stack (0)", stack);
-        }
+        FMenuBar menuBar = (FMenuBar)getHeader();
+        menuBar.addTab("Game", new VGameMenu());
+        menuBar.addTab("Players (" + playerPanels.size() + ")", players);
+        menuBar.addTab("Log", log);
+        menuBar.addTab("Dev", devMenu);
+        menuBar.addTab("Stack (0)", stack);
     }
 
     @Override
