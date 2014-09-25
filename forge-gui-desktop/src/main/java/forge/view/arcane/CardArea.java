@@ -187,6 +187,10 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
             float x = CardArea.GUTTER_X;
             int y = CardArea.GUTTER_Y;
             int zOrder = this.getCardPanels().size() - 1, rowCount = 0;
+            int maxZOrder = this.getComponentCount() - 1; //needed to prevent crash for certain situations when not all card panels actually show up in component
+            if (zOrder > maxZOrder) {
+                zOrder = maxZOrder;
+            }
             for (final CardPanel panel : this.getCardPanels()) {
                 if (panel != this.getMouseDragPanel()) {
                     panel.setCardBounds((int) Math.floor(x), y, cardWidth, cardHeight);
@@ -195,7 +199,9 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
                 maxWidth = Math.round(x) + cardWidth + CardArea.GUTTER_X;
                 maxHeight = Math.max(maxHeight, (y + (cardHeight - cardSpacingY) + CardArea.GUTTER_Y));
                 this.setComponentZOrder(panel, zOrder);
-                zOrder--;
+                if (zOrder > 0) {
+                    zOrder--;
+                }
                 rowCount++;
                 if (rowCount == this.actualCardsPerRow) {
                     rowCount = 0;
