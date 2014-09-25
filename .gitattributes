@@ -11187,6 +11187,7 @@ forge-gui/res/cardsfolder/r/ricochet_trap.txt -text
 forge-gui/res/cardsfolder/r/riddle_of_lightning.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/riddlekeeper.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/riddlesmith.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/r/ride_down.txt -text
 forge-gui/res/cardsfolder/r/riders_of_gavony.txt -text
 forge-gui/res/cardsfolder/r/ridge_rannet.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/ridged_kusite.txt svneol=native#text/plain
