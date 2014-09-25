@@ -70,7 +70,6 @@ public class MatchScreen extends FScreen {
         }
         bottomPlayerPanel = playerPanels0.get(0);
         topPlayerPanel = playerPanels0.get(1);
-        topPlayerPanel.setFlipped(true);
 
         bottomPlayerPrompt = add(new VPrompt("", "",
                 new FEventHandler() {
@@ -86,7 +85,11 @@ public class MatchScreen extends FScreen {
                     }
                 }));
 
-        if (MatchUtil.getHumanCount() > 1) { //show top prompt if multiple human players
+        if (MatchUtil.getHumanCount() <= 1 || MatchUtil.getController().hotSeatMode()) {
+            topPlayerPrompt = null;
+            topPlayerPanel.setFlipped(true);
+        }
+        else { //show top prompt if multiple human players and not playing in Hot Seat mode
             topPlayerPrompt = add(new VPrompt("", "",
                     new FEventHandler() {
                         @Override
@@ -101,9 +104,7 @@ public class MatchScreen extends FScreen {
                         }
                     }));
             topPlayerPrompt.setRotate180(true);
-        }
-        else {
-            topPlayerPrompt = null;
+            topPlayerPanel.setRotate180(true);
         }
 
         log = new VLog();

@@ -394,6 +394,11 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
     }
 
     @Override
+    public boolean hotSeatMode() {
+        return true; //Desktop game only supports hot seat mode for Human v. Human
+    }
+
+    @Override
     public IButton getBtnOK(PlayerView playerView) {
         return VMatchUI.SINGLETON_INSTANCE.getBtnOK();
     }

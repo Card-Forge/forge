@@ -124,6 +124,11 @@ public class MatchController implements IMatchController {
     }
 
     @Override
+    public boolean hotSeatMode() {
+        return false; //TODO: Support hot seat mode for Human v. Human again
+    }
+
+    @Override
     public void openView(List<Player> sortedPlayers) {
         boolean noHumans = MatchUtil.getHumanCount() == 0;
         List<VPlayerPanel> playerPanels = new ArrayList<VPlayerPanel>();

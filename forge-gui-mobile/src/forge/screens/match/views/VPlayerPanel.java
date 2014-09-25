@@ -131,6 +131,15 @@ public class VPlayerPanel extends FContainer {
         field.setFlipped(flipped0);
     }
 
+    @Override
+    public void setRotate180(boolean b0) {
+        super.setRotate180(b0);
+        //only rotate certain parts of panel
+        //avatar.setRotate180(b0);
+        //lblLife.setRotate180(b0);
+        //phaseIndicator.setRotate180(b0);
+    }
+
     public VField getField() {
         return field;
     }

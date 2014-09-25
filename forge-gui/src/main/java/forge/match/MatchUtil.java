@@ -187,7 +187,7 @@ public class MatchUtil {
             game.subscribeToEvents(new FControlGameEventHandler(gameView));
             gameViews.add(gameView);
         }
-        else if (humanCount == sortedPlayers.size()) {
+        else if (humanCount == sortedPlayers.size() && controller.hotSeatMode()) {
             //if there are no AI's, allow all players to see all cards (hotseat mode).
             for (Player p : sortedPlayers) {
                 ((PlayerControllerHuman) p.getController()).setMayLookAtAllCards(true);

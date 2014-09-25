@@ -22,6 +22,7 @@ import forge.view.SpellAbilityView;
 public interface IMatchController {
     void startNewMatch(Match match);
     boolean resetForNewGame();
+    boolean hotSeatMode();
     void openView(List<Player> sortedPlayers);
     void afterGameEnd();
     void showCombat(CombatView combat);
