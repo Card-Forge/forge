@@ -193,13 +193,13 @@ public class MatchUtil {
             }
         }
 
+        controller.openView(sortedPlayers, humanCount);
+
         if (humanCount == 0) {
             playbackControl = new FControlGamePlayback(GuiBase.getInterface(), getGameView());
             playbackControl.setGame(game);
             game.subscribeToEvents(playbackControl);
         }
-
-        controller.openView(sortedPlayers, humanCount);
 
         // It's important to run match in a different thread to allow GUI inputs to be invoked from inside game. 
         // Game is set on pause while gui player takes decisions
