@@ -176,7 +176,11 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                 InputBase.cancelAwaitNextInput(); //ensure "Waiting for opponent..." doesn't appear behind WinLo
                 MatchUtil.getController().showPromptMessage(localPlayer, ""); //clear prompt behind WinLose overlay
                 ButtonUtil.update(localPlayer, "", "", false, false, false);
-                MatchUtil.getController().finishGame();
+
+                //only finish game once, and only if player is Gui player or Gui player isn't playing
+                if (localPlayer.getLobbyPlayer() == GamePlayerUtil.getGuiPlayer() || MatchUtil.getHumanCount() == 0) { 
+                    MatchUtil.getController().finishGame();
+                }
                 gameView.updateAchievements();
             }
         });

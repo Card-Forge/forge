@@ -67,6 +67,7 @@ public class MatchUtil {
     private static IMatchController controller;
     private static Game game;
     private static List<LocalGameView> gameViews = new ArrayList<LocalGameView>();
+    private static int humanCount;
     private static final EventBus uiEvents;
     private static FControlGamePlayback playbackControl;
     private static final MatchUiEventVisitor visitor = new MatchUiEventVisitor();
@@ -163,7 +164,7 @@ public class MatchUtil {
 
         int i = 0;
         int avatarIndex = 0;
-        int humanCount = 0;
+        humanCount = 0;
         for (Player p : sortedPlayers) {
             if (i < indices.length) {
                 avatarIndex = Integer.parseInt(indices[i]);
@@ -230,6 +231,10 @@ public class MatchUtil {
             }
             return gameViews.get(0);
         }
+    }
+
+    public static int getHumanCount() {
+        return humanCount;
     }
 
     public static LocalGameView getOtherGameView() {
