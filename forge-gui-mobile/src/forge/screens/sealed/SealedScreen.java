@@ -22,7 +22,6 @@ import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.util.ThreadUtil;
 
 public class SealedScreen extends LaunchScreen {
     private final DeckManager lstDecks = add(new DeckManager(GameType.Draft));
@@ -44,7 +43,7 @@ public class SealedScreen extends LaunchScreen {
         btnNewDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                ThreadUtil.invokeInGameThread(new Runnable() { //must run in game thread to prevent blocking UI thread
+                FThreads.invokeInBackgroundThread(new Runnable() { //must run in game thread to prevent blocking UI thread
                     @Override
                     public void run() {
                         final DeckGroup sealed = SealedCardPoolGenerator.generateSealedDeck(GuiBase.getInterface(), false);

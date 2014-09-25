@@ -25,7 +25,6 @@ import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.util.ThreadUtil;
 
 public class QuestMenu extends FPopupMenu implements IVQuestStats {
     private static final QuestMenu questMenu = new QuestMenu();
@@ -84,7 +83,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         final IGuiBase gui = GuiBase.getInterface();
         @Override
         public void handleEvent(FEvent e) {
-            ThreadUtil.invokeInGameThread(new Runnable() { //invoke in background thread so prompts can work
+            FThreads.invokeInBackgroundThread(new Runnable() { //invoke in background thread so prompts can work
                 @Override
                 public void run() {
                     QuestUtil.chooseAndUnlockEdition(gui);
@@ -102,7 +101,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         final IGuiBase gui = GuiBase.getInterface();
         @Override
         public void handleEvent(FEvent e) {
-            ThreadUtil.invokeInGameThread(new Runnable() { //invoke in background thread so prompts can work
+            FThreads.invokeInBackgroundThread(new Runnable() { //invoke in background thread so prompts can work
                 @Override
                 public void run() {
                     QuestUtil.travelWorld(gui);

@@ -11,7 +11,6 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.toolbox.FDialog;
 import forge.toolbox.FOverlay;
-import forge.util.ThreadUtil;
 import forge.util.Utils;
 
 public class LoadingOverlay extends FOverlay {
@@ -24,7 +23,7 @@ public class LoadingOverlay extends FOverlay {
     public static void show(String caption0, final Runnable runnable) {
         final LoadingOverlay loader = new LoadingOverlay(caption0);
         loader.show(); //show loading overlay then delay running remaining logic so UI can respond
-        ThreadUtil.invokeInGameThread(new Runnable() {
+        FThreads.invokeInBackgroundThread(new Runnable() {
             @Override
             public void run() {
                 FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {

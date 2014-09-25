@@ -1,12 +1,12 @@
 package forge.screens.match.views;
 
+import forge.FThreads;
 import forge.match.MatchUtil;
 import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.util.ThreadUtil;
 
 public class VDevMenu extends FDropDownMenu {
     @Override
@@ -14,7 +14,7 @@ public class VDevMenu extends FDropDownMenu {
         addItem(new FMenuItem("Generate Mana", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                ThreadUtil.invokeInGameThread(new Runnable() { //must invoke all these in game thread since they may require synchronous user input
+                FThreads.invokeInBackgroundThread(new Runnable() { //must invoke all these in game thread since they may require synchronous user input
                     @Override
                     public void run() {
                         MatchUtil.getGameView().cheat().generateMana();
@@ -25,7 +25,7 @@ public class VDevMenu extends FDropDownMenu {
         addItem(new FMenuItem("Tutor for Card", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                ThreadUtil.invokeInGameThread(new Runnable() {
+                FThreads.invokeInBackgroundThread(new Runnable() {
                     @Override
                     public void run() {
                         MatchUtil.getGameView().cheat().tutorForCard();
@@ -36,7 +36,7 @@ public class VDevMenu extends FDropDownMenu {
         addItem(new FMenuItem("Add Card to Hand", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                ThreadUtil.invokeInGameThread(new Runnable() {
+                FThreads.invokeInBackgroundThread(new Runnable() {
                     @Override
                     public void run() {
                         MatchUtil.getGameView().cheat().addCardToHand();
@@ -47,7 +47,7 @@ public class VDevMenu extends FDropDownMenu {
         addItem(new FMenuItem("Add Card to Play", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                ThreadUtil.invokeInGameThread(new Runnable() {
+                FThreads.invokeInBackgroundThread(new Runnable() {
                     @Override
                     public void run() {
                         MatchUtil.getGameView().cheat().addCardToBattlefield();
@@ -58,7 +58,7 @@ public class VDevMenu extends FDropDownMenu {
         addItem(new FMenuItem("Set Player Life", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                ThreadUtil.invokeInGameThread(new Runnable() {
+                FThreads.invokeInBackgroundThread(new Runnable() {
                     @Override
                     public void run() {
                         MatchUtil.getGameView().cheat().setPlayerLife();
@@ -69,7 +69,7 @@ public class VDevMenu extends FDropDownMenu {
         addItem(new FMenuItem("Win Game", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                ThreadUtil.invokeInGameThread(new Runnable() {
+                FThreads.invokeInBackgroundThread(new Runnable() {
                     @Override
                     public void run() {
                         MatchUtil.getGameView().cheat().winGame();
@@ -80,7 +80,7 @@ public class VDevMenu extends FDropDownMenu {
         addItem(new FMenuItem("Setup Game State", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                ThreadUtil.invokeInGameThread(new Runnable() {
+                FThreads.invokeInBackgroundThread(new Runnable() {
                     @Override
                     public void run() {
                         MatchUtil.getGameView().cheat().setupGameState();
@@ -108,7 +108,7 @@ public class VDevMenu extends FDropDownMenu {
         addItem(new FMenuItem("Add Counters to Permanent", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                ThreadUtil.invokeInGameThread(new Runnable() {
+                FThreads.invokeInBackgroundThread(new Runnable() {
                     @Override
                     public void run() {
                         MatchUtil.getGameView().cheat().addCountersToPermanent();
@@ -119,7 +119,7 @@ public class VDevMenu extends FDropDownMenu {
         addItem(new FMenuItem("Tap Permanents", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                ThreadUtil.invokeInGameThread(new Runnable() {
+                FThreads.invokeInBackgroundThread(new Runnable() {
                     @Override
                     public void run() {
                         MatchUtil.getGameView().cheat().tapPermanents();
@@ -130,7 +130,7 @@ public class VDevMenu extends FDropDownMenu {
         addItem(new FMenuItem("Untap Permanents", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                ThreadUtil.invokeInGameThread(new Runnable() {
+                FThreads.invokeInBackgroundThread(new Runnable() {
                     @Override
                     public void run() {
                         MatchUtil.getGameView().cheat().untapPermanents();
@@ -141,7 +141,7 @@ public class VDevMenu extends FDropDownMenu {
         addItem(new FMenuItem("Rigged Planar Roll", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                ThreadUtil.invokeInGameThread(new Runnable() {
+                FThreads.invokeInBackgroundThread(new Runnable() {
                     @Override
                     public void run() {
                         MatchUtil.getGameView().cheat().riggedPlanarRoll();
@@ -152,7 +152,7 @@ public class VDevMenu extends FDropDownMenu {
         addItem(new FMenuItem("Planeswalk to", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                ThreadUtil.invokeInGameThread(new Runnable() {
+                FThreads.invokeInBackgroundThread(new Runnable() {
                     @Override
                     public void run() {
                         MatchUtil.getGameView().cheat().planeswalkTo();

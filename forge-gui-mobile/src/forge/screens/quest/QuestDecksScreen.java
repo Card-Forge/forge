@@ -23,7 +23,6 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FLabel;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FTextField;
-import forge.util.ThreadUtil;
 
 public class QuestDecksScreen extends FScreen {
     private static final float PADDING = FDeckChooser.PADDING;
@@ -68,7 +67,7 @@ public class QuestDecksScreen extends FScreen {
         btnNewDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                ThreadUtil.invokeInGameThread(new Runnable() { //must run in game thread to prevent blocking UI thread
+                FThreads.invokeInBackgroundThread(new Runnable() { //must run in background thread to prevent blocking UI thread
                     @Override
                     public void run() {
                         if (!QuestUtil.checkActiveQuest(GuiBase.getInterface(), "Create a Deck.")) {

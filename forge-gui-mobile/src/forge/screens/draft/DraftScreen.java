@@ -10,7 +10,6 @@ import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
-import forge.util.ThreadUtil;
 import forge.assets.FSkinFont;
 import forge.deck.DeckProxy;
 import forge.deck.FDeckChooser;
@@ -46,7 +45,7 @@ public class DraftScreen extends LaunchScreen {
         btnNewDraft.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                ThreadUtil.invokeInGameThread(new Runnable() { //must run in game thread to prevent blocking UI thread
+                FThreads.invokeInBackgroundThread(new Runnable() { //must run in background thread to prevent blocking UI thread
                     @Override
                     public void run() {
                         final LimitedPoolType poolType = SGuiChoose.oneOrNone(GuiBase.getInterface(), "Choose Draft Format", LimitedPoolType.values());
