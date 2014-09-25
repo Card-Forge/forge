@@ -28,6 +28,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 import forge.interfaces.IGuiBase;
+import forge.match.MatchUtil;
 import forge.match.input.InputProxy;
 import forge.match.input.InputQueue;
 
@@ -68,15 +69,6 @@ public abstract class LocalGameView implements IGameView {
     public void setLocalPlayer(Player localPlayer) {
         localPlayerView = getPlayerView(localPlayer);
     }
-
-    /** Cache of players. */
-    private final Cache<Player, PlayerView> players = new Cache<>();
-    /** Cache of cards. */
-    private final Cache<Card, CardView> cards = new Cache<>();
-    /** Cache of spellabilities. */
-    private final Cache<SpellAbility, SpellAbilityView> spabs = new Cache<>();
-    /** Cache of stack items. */
-    private final Cache<SpellAbilityStackInstance, StackItemView> stackItems = new Cache<>();
 
     /* (non-Javadoc)
      * @see forge.view.IGameView#isCommander()
@@ -261,7 +253,7 @@ public abstract class LocalGameView implements IGameView {
         final List<SpellAbilityStackInstance> stack = Lists.newArrayList(game.getStack());
         final List<StackItemView> items = Collections.unmodifiableList(getStack(stack));
         // clear the cache
-        stackItems.retainAllKeys(stack);
+        MatchUtil.stackItems.retainAllKeys(stack);
         return items;
     }
 
@@ -278,19 +270,17 @@ public abstract class LocalGameView implements IGameView {
     }
 
     private List<StackItemView> getStack(final Iterable<SpellAbilityStackInstance> stack) {
-        synchronized (this) {
-            stackItems.retainAllKeys(Lists.newArrayList(stack));
-            final List<StackItemView> items = Lists.newLinkedList();
-            for (final SpellAbilityStackInstance si : stack) {
-                final int id = si.getId();
-                if (stackItems.containsKey(id)) {
-                    items.add(stackItems.get(id));
-                } else {
-                    items.add(getStackItemView(si));
-                }
+        MatchUtil.stackItems.retainAllKeys(Lists.newArrayList(stack));
+        final List<StackItemView> items = Lists.newLinkedList();
+        for (final SpellAbilityStackInstance si : stack) {
+            final int id = si.getId();
+            if (MatchUtil.stackItems.containsKey(id)) {
+                items.add(MatchUtil.stackItems.get(id));
+            } else {
+                items.add(getStackItemView(si));
             }
-            return items;
         }
+        return items;
     }
 
     public StackItemView getStackItemView(final SpellAbilityStackInstance si) {
@@ -304,7 +294,7 @@ public abstract class LocalGameView implements IGameView {
                 si.getStackDescription(), getCardView(si.getSourceCard()),
                 getPlayerView(si.getActivator()), getCardViews(si.getTargetChoices().getTargetCards()),
                 getPlayerViews(si.getTargetChoices().getTargetPlayers()), si.isAbility(), si.isOptionalTrigger());
-        stackItems.put(si, newItem);
+        MatchUtil.stackItems.put(si, newItem);
         return newItem;
     }
 
@@ -312,7 +302,7 @@ public abstract class LocalGameView implements IGameView {
         if (view == null) {
             return null;
         }
-        return stackItems.getKey(view.getId());
+        return MatchUtil.stackItems.getKey(view.getId());
     }
 
     public final GameEntityView getGameEntityView(final GameEntity e) {
@@ -360,13 +350,13 @@ public abstract class LocalGameView implements IGameView {
             return null;
         }
 
-        final PlayerView view;
-        if (players.containsKey(p.getId())) {
-            view = players.get(p.getId());
+        PlayerView view = MatchUtil.players.get(p.getId());
+        if (view != null) {
             getPlayerView(p, view);
-        } else {
+        }
+        else {
             view = new PlayerView(p.getLobbyPlayer(), p.getId());
-            players.put(p, view);
+            MatchUtil.players.put(p, view);
             getPlayerView(p, view);
             view.setOpponents(getPlayerViews(p.getOpponents()));
         }
@@ -377,14 +367,14 @@ public abstract class LocalGameView implements IGameView {
         if (p == null) {
             return null;
         }
-        return players.get(p.getId());
+        return MatchUtil.players.get(p.getId());
     }
 
     public Player getPlayer(final PlayerView p) {
         if (p == null) {
             return null;
         }
-        return players.getKey(p.getId());
+        return MatchUtil.players.getKey(p.getId());
     }
 
     private void getPlayerView(final Player p, final PlayerView view) {
@@ -423,19 +413,19 @@ public abstract class LocalGameView implements IGameView {
         final boolean isDisplayable = cUi == c;
         final boolean mayShow = mayShowCard(c);
 
-        CardView view = cards.get(c.getId());
+        CardView view = MatchUtil.cards.get(c.getId());
         final boolean isNewView;
         if (view != null) {
             // Update to ensure the Card reference in the cache
             // is not an outdated Card.
             if (view.getId() > 0) {
-                cards.updateKey(view.getId(), c);
+                MatchUtil.cards.updateKey(view.getId(), c);
             }
             isNewView = false;
         } else if (isDisplayable && mayShow) {
             view = new CardView(isDisplayable);
             view.setId(c.getId());
-            cards.put(c, view);
+            MatchUtil.cards.put(c, view);
             isNewView = true;
         } else {
             return CardView.EMPTY;
@@ -471,7 +461,7 @@ public abstract class LocalGameView implements IGameView {
         return ViewUtil.transformIfNotNull(cardViews, new Function<CardView, CardView>() {
             @Override
             public CardView apply(final CardView input) {
-                return cards.getCurrentValue(input);
+                return MatchUtil.cards.getCurrentValue(input);
             }
         });
     }
@@ -481,7 +471,7 @@ public abstract class LocalGameView implements IGameView {
             return null;
         }
 
-        final CardView view = cards.get(c.getId());
+        final CardView view = MatchUtil.cards.get(c.getId());
         if (mayShowCard(c)) {
             return view;
         } else if (view.isUiDisplayable()) {
@@ -506,7 +496,7 @@ public abstract class LocalGameView implements IGameView {
         if (c == null) {
             return null;
         }
-        return cards.getKey(c.getId());
+        return MatchUtil.cards.getKey(c.getId());
     }
 
     private final Function<CardView, Card> FN_GET_CARD = new Function<CardView, Card>() {
@@ -521,30 +511,28 @@ public abstract class LocalGameView implements IGameView {
     }
 
     private void writeCardToView(final Card c, final CardView view) {
-        synchronized (c) {
-            // First, write the values independent of other views.
-            ViewUtil.writeNonDependentCardViewProperties(c, view, mayShowCardFace(c));
-            // Next, write the values that depend on other views.
-            final Combat combat = game.getCombat();
-            view.setOwner(getPlayerViewFast(c.getOwner()));
-            view.setController(getPlayerViewFast(c.getController()));
-            view.setAttacking(combat != null && combat.isAttacking(c));
-            view.setBlocking(combat != null && combat.isBlocking(c));
-            view.setChosenPlayer(getPlayerViewFast(c.getChosenPlayer()));
-            view.setEquipping(getCardViewFast(Iterables.getFirst(c.getEquipping(), null)));
-            view.setEquippedBy(getCardViewsFast(c.getEquippedBy()));
-            view.setEnchantingCard(getCardViewFast(c.getEnchantingCard()));
-            view.setEnchantingPlayer(getPlayerViewFast(c.getEnchantingPlayer()));
-            view.setEnchantedBy(getCardViewsFast(c.getEnchantedBy()));
-            view.setFortifiedBy(getCardViewsFast(c.getFortifiedBy()));
-            view.setGainControlTargets(getCardViewsFast(c.getGainControlTargets()));
-            view.setCloneOrigin(getCardViewFast(c.getCloneOrigin()));
-            view.setImprinted(getCardViewsFast(c.getImprinted()));
-            view.setHauntedBy(getCardViewsFast(c.getHauntedBy()));
-            view.setHaunting(getCardViewFast(c.getHaunting()));
-            view.setMustBlock(c.getMustBlockCards() == null ? Collections.<CardView>emptySet() : getCardViewsFast(c.getMustBlockCards()));
-            view.setPairedWith(getCardViewFast(c.getPairedWith()));
-        }
+        // First, write the values independent of other views.
+        ViewUtil.writeNonDependentCardViewProperties(c, view, mayShowCardFace(c));
+        // Next, write the values that depend on other views.
+        final Combat combat = game.getCombat();
+        view.setOwner(getPlayerViewFast(c.getOwner()));
+        view.setController(getPlayerViewFast(c.getController()));
+        view.setAttacking(combat != null && combat.isAttacking(c));
+        view.setBlocking(combat != null && combat.isBlocking(c));
+        view.setChosenPlayer(getPlayerViewFast(c.getChosenPlayer()));
+        view.setEquipping(getCardViewFast(Iterables.getFirst(c.getEquipping(), null)));
+        view.setEquippedBy(getCardViewsFast(c.getEquippedBy()));
+        view.setEnchantingCard(getCardViewFast(c.getEnchantingCard()));
+        view.setEnchantingPlayer(getPlayerViewFast(c.getEnchantingPlayer()));
+        view.setEnchantedBy(getCardViewsFast(c.getEnchantedBy()));
+        view.setFortifiedBy(getCardViewsFast(c.getFortifiedBy()));
+        view.setGainControlTargets(getCardViewsFast(c.getGainControlTargets()));
+        view.setCloneOrigin(getCardViewFast(c.getCloneOrigin()));
+        view.setImprinted(getCardViewsFast(c.getImprinted()));
+        view.setHauntedBy(getCardViewsFast(c.getHauntedBy()));
+        view.setHaunting(getCardViewFast(c.getHaunting()));
+        view.setMustBlock(c.getMustBlockCards() == null ? Collections.<CardView>emptySet() : getCardViewsFast(c.getMustBlockCards()));
+        view.setPairedWith(getCardViewFast(c.getPairedWith()));
     }
 
     public SpellAbilityView getSpellAbilityView(final SpellAbility sa) {
@@ -553,13 +541,13 @@ public abstract class LocalGameView implements IGameView {
         }
 
         final SpellAbilityView view;
-        if (spabs.containsKey(sa.getId())) {
-            view = spabs.get(sa.getId());
+        if (MatchUtil.spabs.containsKey(sa.getId())) {
+            view = MatchUtil.spabs.get(sa.getId());
             writeSpellAbilityToView(sa, view);
         } else {
             view = new SpellAbilityView(sa.getId());
             writeSpellAbilityToView(sa, view);
-            spabs.put(sa, view);
+            MatchUtil.spabs.put(sa, view);
         }
         return view;
     }
@@ -582,7 +570,7 @@ public abstract class LocalGameView implements IGameView {
         return getSpellAbility(spabView.getId());
     }
     public SpellAbility getSpellAbility(final int id) {
-        return id >= 0 ? spabs.getKey(id) : null;
+        return id >= 0 ? MatchUtil.spabs.getKey(id) : null;
     }
 
     private final Function<SpellAbilityView, SpellAbility> FN_GET_SPAB = new Function<SpellAbilityView, SpellAbility>() {

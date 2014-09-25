@@ -93,7 +93,6 @@ import forge.match.input.InputConfirmMulligan;
 import forge.match.input.InputPassPriority;
 import forge.match.input.InputPayMana;
 import forge.match.input.InputProliferate;
-import forge.match.input.InputProxy;
 import forge.match.input.InputSelectCardsForConvoke;
 import forge.match.input.InputSelectCardsFromList;
 import forge.match.input.InputSelectEntitiesFromList;
@@ -151,10 +150,6 @@ public class PlayerControllerHuman extends PlayerController {
 
     public IGuiBase getGui() {
         return gameView.getGui();
-    }
-
-    public InputProxy getInputProxy() {
-        return gameView.getInputProxy();
     }
 
     public LocalGameView getGameView() {

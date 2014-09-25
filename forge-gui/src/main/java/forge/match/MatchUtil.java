@@ -40,6 +40,8 @@ import forge.game.card.CounterType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.match.input.InputPlaybackControl;
@@ -49,7 +51,6 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.player.LobbyPlayerHuman;
 import forge.player.PlayerControllerHuman;
-import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
 import forge.sound.MusicPlaylist;
@@ -57,16 +58,29 @@ import forge.sound.SoundSystem;
 import forge.util.GuiDisplayUtil;
 import forge.util.NameGenerator;
 import forge.util.gui.SOptionPane;
+import forge.view.Cache;
 import forge.view.CardView;
 import forge.view.GameEntityView;
 import forge.view.LocalGameView;
 import forge.view.PlayerView;
+import forge.view.SpellAbilityView;
+import forge.view.StackItemView;
 import forge.view.WatchLocalGame;
 
 public class MatchUtil {
     private static IMatchController controller;
     private static Game game;
     private static List<LocalGameView> gameViews = new ArrayList<LocalGameView>();
+
+    /** Cache of players. */
+    public static final Cache<Player, PlayerView> players = new Cache<>();
+    /** Cache of cards. */
+    public static final Cache<Card, CardView> cards = new Cache<>();
+    /** Cache of spellabilities. */
+    public static final Cache<SpellAbility, SpellAbilityView> spabs = new Cache<>();
+    /** Cache of stack items. */
+    public static final Cache<SpellAbilityStackInstance, StackItemView> stackItems = new Cache<>();
+
     private static int humanCount;
     private static final EventBus uiEvents;
     private static FControlGamePlayback playbackControl;
@@ -122,16 +136,6 @@ public class MatchUtil {
     public static void startGame(final Match match) {
         if (!controller.resetForNewGame()) { return; }
 
-        //prompt user for player one name if needed
-        final ForgePreferences prefs = FModel.getPreferences();
-        if (StringUtils.isBlank(prefs.getPref(FPref.PLAYER_NAME))) {
-            boolean isPlayerOneHuman = match.getPlayers().get(0).getPlayer() instanceof LobbyPlayerHuman;
-            boolean isPlayerTwoComputer = match.getPlayers().get(1).getPlayer() instanceof LobbyPlayerAi;
-            if (isPlayerOneHuman && isPlayerTwoComputer) {
-                GamePlayerUtil.setPlayerName(GuiBase.getInterface());
-            }
-        }
-
         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MATCH);
 
         game = match.createGame();
@@ -147,7 +151,7 @@ public class MatchUtil {
 
         game.subscribeToEvents(SoundSystem.instance);
 
-        final String[] indices = prefs.getPref(FPref.UI_AVATARS).split(",");
+        final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
 
         // Instantiate all required field slots (user at 0)
         final List<Player> sortedPlayers = new ArrayList<Player>(game.getRegisteredPlayers());
@@ -175,7 +179,7 @@ public class MatchUtil {
             if (p.getController() instanceof PlayerControllerHuman) {
                 final PlayerControllerHuman controller = (PlayerControllerHuman) p.getController();
                 LocalGameView gameView = controller.getGameView();
-                game.subscribeToEvents(new FControlGameEventHandler(gameView));
+                game.subscribeToEvents(new FControlGameEventHandler(gameView, humanCount == 0));
                 gameViews.add(gameView);
                 humanCount++;
             }
@@ -184,7 +188,7 @@ public class MatchUtil {
         if (humanCount == 0) { //watch game but do not participate
             LocalGameView gameView = new WatchLocalGame(GuiBase.getInterface(), game);
             gameView.setLocalPlayer(sortedPlayers.get(0));
-            game.subscribeToEvents(new FControlGameEventHandler(gameView));
+            game.subscribeToEvents(new FControlGameEventHandler(gameView, true));
             gameViews.add(gameView);
         }
         else if (humanCount == sortedPlayers.size() && controller.hotSeatMode()) {
@@ -207,6 +211,14 @@ public class MatchUtil {
         game.getAction().invoke(new Runnable() {
             @Override
             public void run() {
+                //prompt user for player one name if needed
+                if (StringUtils.isBlank(FModel.getPreferences().getPref(FPref.PLAYER_NAME))) {
+                    boolean isPlayerOneHuman = match.getPlayers().get(0).getPlayer() instanceof LobbyPlayerHuman;
+                    boolean isPlayerTwoComputer = match.getPlayers().get(1).getPlayer() instanceof LobbyPlayerAi;
+                    if (isPlayerOneHuman && isPlayerTwoComputer) {
+                        GamePlayerUtil.setPlayerName(GuiBase.getInterface());
+                    }
+                }
                 match.startGame(game);
             }
         });
