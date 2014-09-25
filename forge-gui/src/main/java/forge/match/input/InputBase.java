@@ -100,7 +100,10 @@ public abstract class InputBase implements java.io.Serializable, Input {
         awaitNextInputTimer.schedule(awaitNextInputTask, 250);
     }
 
-    public static void waitForHumanOpponent(final LocalGameView gameView) {
+    public static void waitForOtherPlayer() {
+        final LocalGameView gameView = MatchUtil.getOtherGameView();
+        if (gameView == null) { return; }
+
         cancelAwaitNextInput();
         FThreads.invokeInEdtNowOrLater(gameView.getGui(), new Runnable() {
             @Override

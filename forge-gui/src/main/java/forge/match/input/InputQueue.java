@@ -92,6 +92,7 @@ public class InputQueue extends Observable {
         activeInput = input;
         inputStack.push(input);
         inputLock.setGui(input.getGui());
+        InputBase.waitForOtherPlayer();
         syncPoint();
         updateObservers();
     }

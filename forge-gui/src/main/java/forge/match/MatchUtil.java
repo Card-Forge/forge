@@ -232,6 +232,18 @@ public class MatchUtil {
         }
     }
 
+    public static LocalGameView getOtherGameView() {
+        //return other game view besides current game view
+        if (gameViews.size() < 2) {
+            return null;
+        }
+        LocalGameView gameView = getGameView();
+        if (gameView == gameViews.get(0)) {
+            return gameViews.get(1);
+        }
+        return gameViews.get(0);
+    }
+
     public static InputQueue getInputQueue() {
         LocalGameView gameView = getGameView();
         if (gameView != null) {
