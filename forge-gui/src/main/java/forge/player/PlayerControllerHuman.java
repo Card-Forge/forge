@@ -128,13 +128,24 @@ public class PlayerControllerHuman extends PlayerController {
     private final Set<Card> mayLookAt = Sets.newHashSet();
     private boolean mayLookAtAllCards = false;
 
-    public PlayerControllerHuman(final Game game0, final Player p, final LobbyPlayer lp, final IGuiBase gui) {
+    public PlayerControllerHuman(Game game0, Player p, LobbyPlayer lp, IGuiBase gui) {
         super(game0, p, lp);
-        this.gameView = new GameView(gui, game0);
+        if (p.getController() == null || p.getLobbyPlayer() == lp) {
+            gameView = new GameView(gui, game0);
 
-        // aggressively cache a view for each player (also caches cards)
-        for (final Player player : game.getRegisteredPlayers()) {
-            gameView.getPlayerView(player);
+            // aggressively cache a view for each player (also caches cards)
+            for (final Player player : game.getRegisteredPlayers()) {
+                gameView.getPlayerView(player);
+            }
+        }
+        else { //handle the case of one player controlling another
+            for (Player p0 : game.getPlayers()) {
+                if (p0.getLobbyPlayer() == lp) {
+                    p = p0;
+                    break;
+                }
+            }
+            gameView = (GameView)MatchUtil.getGameView(p);
         }
     }
 
