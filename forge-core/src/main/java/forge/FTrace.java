@@ -9,7 +9,6 @@ import java.util.Map;
 public class FTrace {
     private static long appStartTime;
     private static Map<String, FTrace> traces = new HashMap<String, FTrace>();
-    private static SimpleDateFormat guiFormatter = new SimpleDateFormat("hh:mm:ss.SSS");
 
     public static void initialize() {
         appStartTime = new Date().getTime();
@@ -25,9 +24,6 @@ public class FTrace {
     }
 
     public static String formatTimestamp(Date timestamp) {
-        if (GuiBase.getInterface().isGuiThread()) {
-            return guiFormatter.format(timestamp); //use cache formatter for better performance on GUI thread
-        }
         return new SimpleDateFormat("hh:mm:ss.SSS").format(timestamp);
     }
 

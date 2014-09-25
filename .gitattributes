@@ -153,6 +153,7 @@ forge-core/.settings/org.eclipse.jdt.core.prefs -text
 forge-core/.settings/org.eclipse.m2e.core.prefs -text
 forge-core/pom.xml -text
 forge-core/src/main/java/forge/CardStorageReader.java -text
+forge-core/src/main/java/forge/FTrace.java -text
 forge-core/src/main/java/forge/LobbyPlayer.java -text
 forge-core/src/main/java/forge/StaticData.java -text
 forge-core/src/main/java/forge/card/BoosterGenerator.java svneol=native#text/plain
@@ -16886,7 +16887,6 @@ forge-gui/src/main/html/js/jquery/jquery-1.9.1.min.js -text
 forge-gui/src/main/html/js/observable.js -text
 forge-gui/src/main/html/js/socket.js -text
 forge-gui/src/main/java/forge/FThreads.java -text
-forge-gui/src/main/java/forge/FTrace.java -text
 forge-gui/src/main/java/forge/GuiBase.java -text
 forge-gui/src/main/java/forge/UiCommand.java svneol=native#text/plain
 forge-gui/src/main/java/forge/achievement/Achievement.java -text
