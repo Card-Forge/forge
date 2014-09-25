@@ -4,7 +4,7 @@ Types:Creature Goblin Warrior
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Goblin+Other+YouCtrl | AddHiddenKeyword$ CARDNAME attacks each turn if able. | Description$ Other Goblin creatures you control attack each turn if able.
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, put a 1/1 red Goblin creature token with haste onto the battlefield.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenOwner$ You | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Haste
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenOwner$ You | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ r 1 1 goblin M15 | TokenKeywords$ Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+0 until end of turn for each other attacking Goblin.
 SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ X | References$ X
 SVar:X:Count$Valid Goblin.attacking+Other

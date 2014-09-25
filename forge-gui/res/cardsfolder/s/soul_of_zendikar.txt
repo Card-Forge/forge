@@ -3,7 +3,7 @@ ManaCost:4 G G
 Types:Creature Avatar
 PT:6/6
 K:Reach
-A:AB$ Token | Cost$ 3 G G | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | SpellDescription$ Put a 3/3 green Beast creature token onto the battlefield.
-A:AB$ Token | Cost$ 3 G G ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3| TokenToughness$ 3 | SpellDescription$ Put a 3/3 green Beast creature token onto the battlefield.
+A:AB$ Token | Cost$ 3 G G | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | TokenImage$ g 3 3 beast M15 | SpellDescription$ Put a 3/3 green Beast creature token onto the battlefield.
+A:AB$ Token | Cost$ 3 G G ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3| TokenToughness$ 3 | TokenImage$ g 3 3 beast M15 | SpellDescription$ Put a 3/3 green Beast creature token onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_of_zendikar.jpg
 Oracle:Reach\n{3}{G}{G}: Put a 3/3 green Beast creature token onto the battlefield.\n{3}{G}{G}, Exile Soul of Zendikar from your graveyard: Put a 3/3 green Beast creature token onto the battlefield.

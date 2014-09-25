@@ -2,6 +2,6 @@ Name:Triplicate Spirits
 ManaCost:4 W W
 Types:Sorcery
 K:Convoke
-A:SP$ Token | Cost$ 4 W W | TokenAmount$ 3 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Put three 1/1 white Spirit creature tokens with flying onto the battlefield.
+A:SP$ Token | Cost$ 4 W W | TokenAmount$ 3 | TokenImage$ w 1 1 spirit M15 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Put three 1/1 white Spirit creature tokens with flying onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/triplicate_spirits.jpg
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nPut three 1/1 white Spirit creature tokens with flying onto the battlefield. (They can't be blocked except by creatures with flying or reach.)

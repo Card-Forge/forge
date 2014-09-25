@@ -2,7 +2,7 @@ Name:Spirit Bonds
 ManaCost:1 W
 Types:Enchantment
 T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a nontoken creature enters the battlefield under your control, you may pay {W}. If you do, put a 1/1 white Spirit creature token with flying onto the battlefield.
-SVar:TrigToken:AB$ Token | Cost$ W | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
+SVar:TrigToken:AB$ Token | Cost$ W | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ w 1 1 spirit M15 | TokenKeywords$ Flying
 A:AB$ Pump | Cost$ 1 W Sac<1/Spirit> | ValidTgts$ Creature.nonSpirit+YouCtrl | TgtPrompt$ Select target non-Spirit creature you control  | KW$ Indestructible | SpellDescription$ Target non-Spirit creature you control gains indestructible until end of turn.
 SVar:BuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_bonds.jpg

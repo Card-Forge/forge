@@ -2,7 +2,7 @@ Name:Necromancer's Stockpile
 ManaCost:1 B
 Types:Enchantment
 A:AB$ Draw | Cost$ 1 B Discard<1/Creature> | NumCards$ 1 | SubAbility$ DBToken | SpellDescription$ Draw a card. If the discarded card was a Zombie card, put a 2/2 black Zombie creature token onto the battlefield tapped.
-SVar:DBToken:DB$ Token | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenOwner$ You | TokenAmount$ 1 | TokenTapped$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X
+SVar:DBToken:DB$ Token | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ b 2 2 zombie M15 | TokenOwner$ You | TokenAmount$ 1 | TokenTapped$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X
 SVar:X:Discarded$Valid Card.Zombie
 SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
