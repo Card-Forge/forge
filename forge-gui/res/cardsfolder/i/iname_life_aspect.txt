@@ -7,6 +7,6 @@ SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Spirit | TargetsWithDefinedController$ TriggeredCardController | TargetMin$ 0 | TargetMax$ X | References$ X | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TriggeredCardController$ValidGraveyard Spirit.YouCtrl
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iname_life_aspect.jpg
 Oracle:When Iname, Life Aspect dies, you may exile it. If you do, return any number of target Spirit cards from your graveyard to your hand.
