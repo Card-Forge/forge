@@ -84,7 +84,7 @@ public enum CPicture implements ICDoc {
             final IPaperCard paperCard = ((IPaperCard)item);
             final CardView c = ViewUtil.getCardForUi(paperCard);
             if (paperCard.isFoil() && c.getOriginal().getFoilIndex() == 0) {
-                c.getOriginal().setRandomFoil();
+                c.getOriginal().setFoilIndex(1); // FIXME should assign random foil here
             }
             showCard(c, false);
         } else {

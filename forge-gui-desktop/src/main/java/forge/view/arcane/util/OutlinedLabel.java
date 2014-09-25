@@ -18,6 +18,9 @@
 package forge.view.arcane.util;
 
 import javax.swing.*;
+
+import org.apache.commons.lang3.StringUtils;
+
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.LineBreakMeasurer;
@@ -121,8 +124,11 @@ public class OutlinedLabel extends JLabel {
         int textX = outlineSize, textY = 0;
         int wrapWidth = Math.max(0, wrap ? size.width - outlineSize * 2 : Integer.MAX_VALUE);
 
-        AttributedString attributedString = new AttributedString(getText());
-        attributedString.addAttribute(TextAttribute.FONT, getFont());
+        final String text = getText();
+        AttributedString attributedString = new AttributedString(text);
+        if (!StringUtils.isEmpty(text)) {
+            attributedString.addAttribute(TextAttribute.FONT, getFont());
+        }
         AttributedCharacterIterator charIterator = attributedString.getIterator();
         FontRenderContext fontContext = g2d.getFontRenderContext();
 

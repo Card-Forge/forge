@@ -1102,7 +1102,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 if (paperCard.isFoil()) {
                     final CardView card = ViewUtil.getCardForUi(paperCard);
                     if (card.getOriginal().getFoilIndex() == 0) { //if foil finish not yet established, assign a random one
-                        card.getOriginal().setRandomFoil();
+                        card.getOriginal().setFoilIndex(1); // FIXME should assign a random foil here
                     }
                     CardPanel.drawFoilEffect(g, card, bounds.x, bounds.y, bounds.width, bounds.height, borderSize);
                 }
