@@ -33,6 +33,8 @@ public class FTrace {
 
     //dump total time of all traces into log file
     public static void dump() {
+        if (traces.isEmpty()) { return; }
+
         long appTotalTime = new Date().getTime() - appStartTime;
         NumberFormat percent = NumberFormat.getPercentInstance();
 
