@@ -164,8 +164,6 @@ public class MatchUtil {
             }
         });
 
-        gameViews.clear();
-
         int i = 0;
         int avatarIndex = 0;
         humanCount = 0;
@@ -393,6 +391,12 @@ public class MatchUtil {
         if (game == null) { return; }
 
         game = null;
+        gameViews.clear();
+        players.clear();
+        cards.clear();
+        spabs.clear();
+        stackItems.clear();
+
         controller.afterGameEnd();
     }
 

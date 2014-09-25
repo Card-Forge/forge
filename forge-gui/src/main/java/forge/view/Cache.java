@@ -157,4 +157,9 @@ public class Cache<K extends IIdentifiable, V extends IIdentifiable> {
         cache.keySet().retainAll(Collections2.transform(keys, IIdentifiable.FN_GET_ID));
         inverseCache.values().retainAll(keys);
     }
+
+    public void clear() {
+        cache.clear();
+        inverseCache.clear();
+    }
 }
