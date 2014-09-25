@@ -55,6 +55,8 @@ public class FTrace {
     }
 
     public void start() {
+        if (startTime > 0) { return; }
+
         Date now = new Date();
         startTime = now.getTime();
         System.out.println(name + " start - " + formatTimestamp(now));
