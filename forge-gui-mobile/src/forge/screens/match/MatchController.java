@@ -194,15 +194,22 @@ public class MatchController implements IMatchController {
 
     @Override
     public void updateTurn(final PlayerView player) {
-        //VField nextField = getFieldViewFor(event.turnOwner);
-        //SDisplayUtil.showTab(nextField);
     }
 
     @Override
     public void updatePlayerControl() {
-        //TODO
+        //show/hide hand for top player based on whether the opponent is controlled
+        if (MatchUtil.getHumanCount() == 1) {
+            Player player = MatchUtil.getGameView().getPlayer(view.getTopPlayerPanel().getPlayer());
+            if (player.getMindSlaveMaster() != null) {
+                view.getTopPlayerPanel().setSelectedZone(ZoneType.Hand);
+            }
+            else {
+                view.getTopPlayerPanel().setSelectedTab(null);
+            }
+        }
     }
-    
+
     @Override
     public void disableOverlay() {
     }
