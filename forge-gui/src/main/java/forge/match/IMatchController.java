@@ -22,7 +22,7 @@ import forge.view.SpellAbilityView;
 public interface IMatchController {
     void startNewMatch(Match match);
     boolean resetForNewGame();
-    void openView(List<Player> sortedPlayers, int humanCount);
+    void openView(List<Player> sortedPlayers);
     void afterGameEnd();
     void showCombat(CombatView combat);
     void showPromptMessage(PlayerView playerView, String message);

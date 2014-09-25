@@ -16,7 +16,6 @@ import forge.game.zone.ZoneType;
 import forge.match.MatchUtil;
 import forge.menu.FMenuBar;
 import forge.model.FModel;
-import forge.player.LobbyPlayerHuman;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
@@ -66,12 +65,8 @@ public class MatchScreen extends FScreen {
 
         scroller = add(new FieldScroller());
 
-        int humanCount = 0;
         for (VPlayerPanel playerPanel : playerPanels0) {
             playerPanels.put(playerPanel.getPlayer(), scroller.add(playerPanel));
-            if (playerPanel.getPlayer().getLobbyPlayer() instanceof LobbyPlayerHuman) {
-                humanCount++;
-            }
         }
         bottomPlayerPanel = playerPanels0.get(0);
         topPlayerPanel = playerPanels0.get(1);
@@ -91,7 +86,7 @@ public class MatchScreen extends FScreen {
                     }
                 }));
 
-        if (humanCount > 1) { //show top prompt if multiple human players
+        if (MatchUtil.getHumanCount() > 1) { //show top prompt if multiple human players
             topPlayerPrompt = add(new VPrompt("", "",
                     new FEventHandler() {
                         @Override

@@ -194,7 +194,7 @@ public class MatchUtil {
             }
         }
 
-        controller.openView(sortedPlayers, humanCount);
+        controller.openView(sortedPlayers);
 
         if (humanCount == 0) {
             playbackControl = new FControlGamePlayback(GuiBase.getInterface(), getGameView());

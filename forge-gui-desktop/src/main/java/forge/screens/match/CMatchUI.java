@@ -608,12 +608,12 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
     }
 
     @Override
-    public void openView(List<Player> sortedPlayers, int humanCount) {
+    public void openView(List<Player> sortedPlayers) {
         List<PlayerView> sortedPlayerViews = new ArrayList<PlayerView>();
         for (Player p : sortedPlayers) {
             sortedPlayerViews.add(MatchUtil.getGameView().getPlayerView(p));
         }
-        CMatchUI.SINGLETON_INSTANCE.initMatch(sortedPlayerViews, humanCount != 1);
+        CMatchUI.SINGLETON_INSTANCE.initMatch(sortedPlayerViews, MatchUtil.getHumanCount() != 1);
 
         actuateMatchPreferences();
 
@@ -622,7 +622,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
 
         // per player observers were set in CMatchUI.SINGLETON_INSTANCE.initMatch
         //Set Field shown to current player.
-        if (humanCount > 0) {
+        if (MatchUtil.getHumanCount() > 0) {
             final VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(sortedPlayerViews.get(0));
             SDisplayUtil.showTab(nextField);
         }

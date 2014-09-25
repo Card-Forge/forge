@@ -124,14 +124,15 @@ public class MatchController implements IMatchController {
     }
 
     @Override
-    public void openView(List<Player> sortedPlayers, int humanCount) {
+    public void openView(List<Player> sortedPlayers) {
+        boolean noHumans = MatchUtil.getHumanCount() == 0;
         List<VPlayerPanel> playerPanels = new ArrayList<VPlayerPanel>();
         for (Player p : sortedPlayers) {
-            playerPanels.add(new VPlayerPanel(MatchUtil.getGameView(p).getPlayerView(p), humanCount == 0 || p.getController() instanceof PlayerControllerHuman));
+            playerPanels.add(new VPlayerPanel(MatchUtil.getGameView(p).getPlayerView(p), noHumans || p.getController() instanceof PlayerControllerHuman));
         }
         view = new MatchScreen(playerPanels);
 
-        if (humanCount == 0) {
+        if (noHumans) {
             //add special object that pauses game if screen touched
             view.add(new FDisplayObject() {
                 @Override
