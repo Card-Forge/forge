@@ -28,6 +28,7 @@ import java.lang.Thread.UncaughtExceptionHandler;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.FTrace;
 import forge.interfaces.IGuiBase;
 import forge.properties.ForgeConstants;
 import forge.util.MultiplexOutputStream;
@@ -90,6 +91,7 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
         System.setErr(new PrintStream(new MultiplexOutputStream(System.err, logFileStream), true));
 
         Log.debug("Error handling registered!");
+        FTrace.initialize();
     }
 
     /**
@@ -97,6 +99,7 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
      * stream and resets the system output streams.
      */
     public static void unregisterErrorHandling() throws IOException {
+        FTrace.dump(); //dump trace before unregistering error handling
         System.setOut(oldSystemOut);
         System.setErr(oldSystemErr);
         logFileStream.close();

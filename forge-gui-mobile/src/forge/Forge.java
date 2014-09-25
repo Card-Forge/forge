@@ -222,6 +222,7 @@ public class Forge implements ApplicationListener {
     @Override
     public void render() {
         try {
+            forge.FTrace.get("Render").start();
             ImageCache.allowSingleLoad();
             ForgeAnimation.advanceAll();
 
@@ -253,6 +254,7 @@ public class Forge implements ApplicationListener {
             graphics.end();
             BugReporter.reportException(ex, GuiBase.getInterface());
         }
+        forge.FTrace.get("Render").end();
     }
 
     @Override
@@ -293,6 +295,10 @@ public class Forge implements ApplicationListener {
         screens.clear();
         graphics.dispose();
         SoundSystem.instance.dispose();
+        try {
+            ExceptionHandler.unregisterErrorHandling();
+        }
+        catch (Exception e) {}
     }
 
     //log message to Forge.log file

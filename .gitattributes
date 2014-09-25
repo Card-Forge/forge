@@ -16886,6 +16886,7 @@ forge-gui/src/main/html/js/jquery/jquery-1.9.1.min.js -text
 forge-gui/src/main/html/js/observable.js -text
 forge-gui/src/main/html/js/socket.js -text
 forge-gui/src/main/java/forge/FThreads.java -text
+forge-gui/src/main/java/forge/FTrace.java -text
 forge-gui/src/main/java/forge/GuiBase.java -text
 forge-gui/src/main/java/forge/UiCommand.java svneol=native#text/plain
 forge-gui/src/main/java/forge/achievement/Achievement.java -text
