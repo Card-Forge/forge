@@ -2,6 +2,7 @@ package forge.toolbox;
 
 import forge.Graphics;
 import forge.card.CardRenderer;
+import forge.card.CardRenderer.CardStackPosition;
 import forge.util.Utils;
 import forge.view.CardView;
 
@@ -75,6 +76,11 @@ public class FCardPanel extends FDisplayObject {
         return PADDING;
     }
 
+    //allow overriding stack position
+    protected CardStackPosition getStackPosition() {
+        return CardStackPosition.Top;
+    }
+
     @Override
     public void draw(Graphics g) {
         if (card == null) { return; }
@@ -93,7 +99,7 @@ public class FCardPanel extends FDisplayObject {
             g.startRotateTransform(x + edgeOffset, y + h - edgeOffset, tappedAngle);
         }
 
-        CardRenderer.drawCardWithOverlays(g, card, x, y, w, h);
+        CardRenderer.drawCardWithOverlays(g, card, x, y, w, h, getStackPosition());
 
         if (tapped) {
             g.endTransform();

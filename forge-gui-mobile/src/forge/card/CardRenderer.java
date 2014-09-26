@@ -40,6 +40,12 @@ import forge.view.CardView.CardStateView;
 import forge.view.ViewUtil;
 
 public class CardRenderer {
+    public enum CardStackPosition {
+        Top,
+        BehindHorz,
+        BehindVert
+    }
+
     private static final FSkinFont NAME_FONT = FSkinFont.get(16);
     private static final FSkinFont TYPE_FONT = FSkinFont.get(14);
     private static final FSkinFont SET_FONT = TYPE_FONT;
@@ -94,7 +100,7 @@ public class CardRenderer {
                 w = h / FCardPanel.ASPECT_RATIO;
                 x += (oldWidth - w) / 2;
             }
-            CardImageRenderer.drawCardImage(g, card, x, y, w, h);
+            CardImageRenderer.drawCardImage(g, card, x, y, w, h, CardStackPosition.Top);
             drawFoilEffect(g, card, x, y, w, h);
             return true;
         }
@@ -495,11 +501,11 @@ public class CardRenderer {
         g.drawText(ptText, PT_FONT, Color.BLACK, x, y, w, h, false, HAlignment.CENTER, true);
     }
 
-    public static void drawCard(Graphics g, IPaperCard pc, float x, float y, float w, float h) {
+    public static void drawCard(Graphics g, IPaperCard pc, float x, float y, float w, float h, CardStackPosition pos) {
         Texture image = ImageCache.getImage(pc);
         if (image != null) {
             if (image == ImageCache.defaultImage) {
-                CardImageRenderer.drawCardImage(g, ViewUtil.getCardForUi(pc), x, y, w, h);
+                CardImageRenderer.drawCardImage(g, ViewUtil.getCardForUi(pc), x, y, w, h, pos);
             }
             else {
                 g.drawImage(image, x, y, w, h);
@@ -516,11 +522,11 @@ public class CardRenderer {
             g.fillRect(Color.BLACK, x, y, w, h);
         }
     }
-    public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h) {
+    public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos) {
         Texture image = ImageCache.getImage(card);
         if (image != null) {
             if (image == ImageCache.defaultImage) {
-                CardImageRenderer.drawCardImage(g, card, x, y, w, h);
+                CardImageRenderer.drawCardImage(g, card, x, y, w, h, pos);
             }
             else {
                 g.drawImage(image, x, y, w, h);
@@ -532,8 +538,8 @@ public class CardRenderer {
         }
     }
 
-    public static void drawCardWithOverlays(Graphics g, CardView card, float x, float y, float w, float h) {
-        drawCard(g, card, x, y, w, h);
+    public static void drawCardWithOverlays(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos) {
+        drawCard(g, card, x, y, w, h, pos);
 
         float padding = w * 0.021f; //adjust for card border
         x += padding;
@@ -563,6 +569,9 @@ public class CardRenderer {
                 }
             }
         }
+
+        if (pos == CardStackPosition.BehindVert) { return; } //remaining rendering not needed if card is behind another card in a vertical stack
+        boolean onTop = (pos == CardStackPosition.Top);
 
         if (showCardIdOverlay(card)) {
             FSkinFont idFont = FSkinFont.forHeight(h * 0.12f);
@@ -612,7 +621,8 @@ public class CardRenderer {
             }
         }
 
-        if (details.isCreature() && card.isSick() && card.getZone() == ZoneType.Battlefield) {
+        if (onTop && details.isCreature() && card.isSick() && card.getZone() == ZoneType.Battlefield) {
+            //only needed if on top since otherwise symbol will be hidden
             CardFaceSymbols.drawSymbol("summonsick", g, stateXSymbols, ySymbols, otherSymbolsSize, otherSymbolsSize);
         }
 
@@ -625,7 +635,8 @@ public class CardRenderer {
             CardFaceSymbols.drawSymbol("sacrifice", g, (x + (w / 2)) - sacSymbolSize / 2, (y + (h / 2)) - sacSymbolSize / 2, otherSymbolsSize, otherSymbolsSize);
         }
 
-        if (showCardPowerOverlay(card)) { //make sure card p/t box appears on top
+        if (onTop && showCardPowerOverlay(card)) { //make sure card p/t box appears on top
+            //only needed if on top since otherwise P/T will be hidden
             drawPtBox(g, card, details, color, x, y, w, h);
         }
     }

@@ -18,6 +18,7 @@ import forge.card.CardDetailUtil;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.card.CardDetailUtil.DetailColors;
+import forge.card.CardRenderer.CardStackPosition;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.match.MatchUtil;
@@ -329,7 +330,7 @@ public class VStack extends FDropDown {
 
             x += PADDING;
             y += PADDING;
-            CardRenderer.drawCardWithOverlays(g, stackInstance.getSource(), x, y, CARD_WIDTH, CARD_HEIGHT);
+            CardRenderer.drawCardWithOverlays(g, stackInstance.getSource(), x, y, CARD_WIDTH, CARD_HEIGHT, CardStackPosition.Top);
 
             x += CARD_WIDTH + PADDING;
             w -= x + PADDING - BORDER_THICKNESS;

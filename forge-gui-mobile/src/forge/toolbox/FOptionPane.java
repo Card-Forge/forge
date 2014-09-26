@@ -11,6 +11,7 @@ import forge.assets.FImage;
 import forge.assets.FSkinImage;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
+import forge.card.CardRenderer.CardStackPosition;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FEvent.*;
 import forge.util.Callback;
@@ -110,7 +111,7 @@ public class FOptionPane extends FDialog {
                     float x = (getWidth() - w) / 2;
                     float y = 0;
 
-                    CardRenderer.drawCard(g, card, x, y, w, h);
+                    CardRenderer.drawCard(g, card, x, y, w, h, CardStackPosition.Top);
                 }
             };
             cardDisplay.setHeight(Utils.SCREEN_HEIGHT / 2);

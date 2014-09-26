@@ -9,6 +9,7 @@ import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.ImageCache;
 import forge.card.CardRenderer;
+import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardZoom;
 import forge.deck.DeckProxy;
 import forge.item.IPaperCard;
@@ -474,6 +475,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 x = 0;
 
                 for (ItemInfo itemInfo : group.items) {
+                    itemInfo.pos = CardStackPosition.Top;
+
                     if (pile.items.size() == columnCount) {
                         pile = new Pile();
                         x = 0;
@@ -500,9 +503,11 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     Pile pile = group.piles.get(j);
                     y = pileY;
                     for (ItemInfo itemInfo : pile.items) {
+                        itemInfo.pos = CardStackPosition.BehindVert;
                         itemInfo.setBounds(x, y, itemWidth, itemHeight);
                         y += dy;
                     }
+                    pile.items.get(pile.items.size() - 1).pos = CardStackPosition.Top;
                     pileHeight = y + itemHeight - dy - pileY;
                     if (pileHeight > maxPileHeight) {
                         maxPileHeight = pileHeight;
@@ -906,7 +911,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 }
             }
             if (skippedItem != null) {
+                CardStackPosition backupPos = skippedItem.pos;
+                skippedItem.pos = CardStackPosition.Top; //ensure skipped item rendered as if it was on top
                 skippedItem.draw(g);
+                skippedItem.pos = backupPos;
             }
         }
     }
@@ -914,6 +922,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         private final T item;
         private final Group group;
         private int index;
+        private CardStackPosition pos;
         private boolean selected;
 
         private ItemInfo(T item0, Group group0) {
@@ -954,7 +963,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             }
 
             if (item instanceof PaperCard) {
-                CardRenderer.drawCard(g, (PaperCard)item, x, y, w, h);
+                CardRenderer.drawCard(g, (PaperCard)item, x, y, w, h, pos);
             }
             else {
                 Texture img = ImageCache.getImage(item);

@@ -12,6 +12,7 @@ import forge.FThreads;
 import forge.Graphics;
 import forge.GuiBase;
 import forge.card.CardZoom;
+import forge.card.CardRenderer.CardStackPosition;
 import forge.match.MatchUtil;
 import forge.toolbox.FCardPanel;
 import forge.view.CardView;
@@ -213,6 +214,14 @@ public abstract class VCardDisplayArea extends VDisplayArea {
             prevPanelInStack = prevPanelInStack0;
         }
 
+        @Override
+        protected CardStackPosition getStackPosition() {
+            if (nextPanelInStack == null && attachedToPanel == null) {
+                return CardStackPosition.Top;
+            }
+            return CardStackPosition.BehindHorz;
+        }
+
         //clear and reset all pointers from this panel
         public void reset() {
             if (!attachedPanels.isEmpty()) {
@@ -230,16 +239,22 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         @Override
         public boolean tap(float x, float y, int count) {
             if (renderedCardContains(x, y)) {
+                forge.FTrace.get("tap").start();
+                forge.FTrace.get("tap2").start();
                 FThreads.invokeInBackgroundThread(new Runnable() { //must invoke in game thread in case a dialog needs to be shown
                     @Override
                     public void run() {
+                        forge.FTrace.get("selectCard").start();
                         if (!selectCard()) {
                             //if no cards in stack can be selected, just show zoom/details for card
                             CardZoom.show(getCard());
                         }
+                        forge.FTrace.get("selectCard").end();
                         Gdx.graphics.requestRendering();
+                        forge.FTrace.get("tap2").end();
                     }
                 });
+                forge.FTrace.get("tap").end();
                 return true;
             }
             return false;

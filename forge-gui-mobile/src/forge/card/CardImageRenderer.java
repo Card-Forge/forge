@@ -16,6 +16,7 @@ import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
 import forge.assets.TextRenderer;
 import forge.card.CardDetailUtil.DetailColors;
+import forge.card.CardRenderer.CardStackPosition;
 import forge.card.mana.ManaCost;
 import forge.screens.FScreen;
 import forge.view.CardView;
@@ -56,7 +57,7 @@ public class CardImageRenderer {
         prevImageHeight = h;
     }
 
-    public static void drawCardImage(Graphics g, CardView card, float x, float y, float w, float h) {
+    public static void drawCardImage(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos) {
         updateStaticFields(w, h);
         final CardStateView state = card.getOriginal();
 
@@ -94,6 +95,10 @@ public class CardImageRenderer {
         Color headerColor1 = FSkinColor.tintColor(Color.WHITE, color1, CardRenderer.NAME_BOX_TINT);
         Color headerColor2 = color2 == null ? null : FSkinColor.tintColor(Color.WHITE, color2, CardRenderer.NAME_BOX_TINT);
         drawHeader(g, card, headerColor1, headerColor2, x, y, w, headerHeight);
+
+        if (pos == CardStackPosition.BehindVert) { return; } //remaining rendering not needed if card is behind another card in a vertical stack
+        boolean onTop = (pos == CardStackPosition.Top);
+
         y += headerHeight;
 
         float artWidth = w - 2 * artInset;
@@ -138,7 +143,8 @@ public class CardImageRenderer {
         y += textBoxHeight;
 
         //draw P/T box
-        if (ptBoxHeight > 0) {
+        if (onTop && ptBoxHeight > 0) {
+            //only needed if on top since otherwise P/T will be hidden
             Color ptColor1 = FSkinColor.tintColor(Color.WHITE, color1, CardRenderer.PT_BOX_TINT);
             Color ptColor2 = color2 == null ? null : FSkinColor.tintColor(Color.WHITE, color2, CardRenderer.PT_BOX_TINT);
             drawPtBox(g, card, ptColor1, ptColor2, x, y - 2 * artInset, w, ptBoxHeight);
