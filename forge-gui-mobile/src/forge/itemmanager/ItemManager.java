@@ -17,7 +17,6 @@
  */
 package forge.itemmanager;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Rectangle;
 import com.google.common.base.Predicate;
@@ -799,7 +798,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                         do {
                             needSecondUpdate = false;
                             updateView(true, null);
-                            Gdx.graphics.requestRendering();
                         } while (needSecondUpdate);
                         viewUpdating = false;
                     }

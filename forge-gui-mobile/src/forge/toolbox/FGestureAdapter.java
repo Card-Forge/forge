@@ -228,7 +228,6 @@ public abstract class FGestureAdapter extends InputAdapter {
         if (!pressed) {
             pressed = true;
             press(pointer1.x, pointer1.y);
-            Gdx.graphics.requestRendering();
         }
         if (!longPressTask.isScheduled()) {
             Timer.schedule(longPressTask, longPressDelay);

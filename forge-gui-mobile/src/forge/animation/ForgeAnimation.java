@@ -12,9 +12,6 @@ public abstract class ForgeAnimation {
         if (activeAnimations.contains(this)) { return; } //prevent starting the same animation multiple times
 
         activeAnimations.add(this);
-        if (activeAnimations.size() == 1) { //if first animation being started, ensure continuous rendering turned on
-            Gdx.graphics.setContinuousRendering(true);
-        }
     }
 
     public static void advanceAll() {
@@ -27,17 +24,12 @@ public abstract class ForgeAnimation {
                 i--;
             }
         }
-
-        if (activeAnimations.isEmpty()) { //when all animations have ended, turn continuous rendering back off
-            Gdx.graphics.setContinuousRendering(false);
-        }
     }
 
     public static void endAll() {
         if (activeAnimations.isEmpty()) { return; }
 
         activeAnimations.clear();
-        Gdx.graphics.setContinuousRendering(false);
     }
 
     //return true if animation should continue, false to stop the animation

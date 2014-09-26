@@ -19,8 +19,6 @@ package forge.screens.settings;
 
 import java.net.Proxy;
 
-import com.badlogic.gdx.Gdx;
-
 import forge.GuiBase;
 import forge.UiCommand;
 import forge.assets.FSkinFont;
@@ -79,14 +77,12 @@ public class GuiDownloader extends FDialog {
         progressBar.reset();
         progressBar.setShowProgressTrail(true);
         progressBar.setDescription("Scanning for existing items...");
-        Gdx.graphics.setContinuousRendering(true);
 
         show();
 
         service.initialize(GuiBase.getInterface(), txtAddress, txtPort, progressBar, btnStart, cmdClose, new Runnable() {
             @Override
             public void run() {
-                Gdx.graphics.setContinuousRendering(false);
                 progressBar.setShowProgressTrail(false);
             }
         }, null);

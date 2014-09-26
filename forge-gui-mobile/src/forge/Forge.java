@@ -112,8 +112,6 @@ public class Forge implements ApplicationListener {
     }
 
     private void afterDbLoaded() {
-        Gdx.graphics.setContinuousRendering(false); //save power consumption by disabling continuous rendering once assets loaded
-
         FSkin.loadFull(splashScreen);
 
         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music

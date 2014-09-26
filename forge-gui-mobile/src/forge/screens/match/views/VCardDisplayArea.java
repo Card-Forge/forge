@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.FThreads;
@@ -246,7 +245,6 @@ public abstract class VCardDisplayArea extends VDisplayArea {
                             //if no cards in stack can be selected, just show zoom/details for card
                             CardZoom.show(getCard());
                         }
-                        Gdx.graphics.requestRendering();
                     }
                 });
                 return true;
