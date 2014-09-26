@@ -468,7 +468,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         if (card.isAttacking()) {
             CardFaceSymbols.drawSymbol("attack", g, combatXSymbols, ySymbols);
         }
-        if (card.isBlocking()) {
+        else if (card.isBlocking()) {
             CardFaceSymbols.drawSymbol("defend", g, combatXSymbols, ySymbols);
         }
 

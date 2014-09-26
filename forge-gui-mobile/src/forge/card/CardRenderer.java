@@ -23,7 +23,6 @@ import forge.assets.ImageCache;
 import forge.assets.TextRenderer;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.mana.ManaCost;
-import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.match.MatchUtil;
 import forge.model.FModel;
@@ -34,8 +33,6 @@ import forge.toolbox.FDialog;
 import forge.toolbox.FList;
 import forge.util.Utils;
 import forge.view.CardView;
-import forge.view.CombatView;
-import forge.view.IGameView;
 import forge.view.CardView.CardStateView;
 import forge.view.ViewUtil;
 
@@ -608,20 +605,14 @@ public class CardRenderer {
         final float stateXSymbols = (x + (w / 2)) - otherSymbolsSize / 2;
         final float ySymbols = (y + h) - (h / 8) - otherSymbolsSize / 2;
 
-        final IGameView game = MatchUtil.getGameView();
-        if (game != null) {
-            final CombatView combat = game.getCombat();
-            if (combat != null) {
-                if (combat.isAttacking(card)) {
-                    CardFaceSymbols.drawSymbol("attack", g, combatXSymbols, ySymbols, otherSymbolsSize, otherSymbolsSize);
-                }
-                if (combat.isBlocking(card)) {
-                    CardFaceSymbols.drawSymbol("defend", g, combatXSymbols, ySymbols, otherSymbolsSize, otherSymbolsSize);
-                }
-            }
+        if (card.isAttacking()) {
+            CardFaceSymbols.drawSymbol("attack", g, combatXSymbols, ySymbols, otherSymbolsSize, otherSymbolsSize);
+        }
+        else if (card.isBlocking()) {
+            CardFaceSymbols.drawSymbol("defend", g, combatXSymbols, ySymbols, otherSymbolsSize, otherSymbolsSize);
         }
 
-        if (onTop && details.isCreature() && card.isSick() && card.getZone() == ZoneType.Battlefield) {
+        if (onTop && card.isSick()) {
             //only needed if on top since otherwise symbol will be hidden
             CardFaceSymbols.drawSymbol("summonsick", g, stateXSymbols, ySymbols, otherSymbolsSize, otherSymbolsSize);
         }
