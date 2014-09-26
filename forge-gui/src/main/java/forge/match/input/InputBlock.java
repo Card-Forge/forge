@@ -147,13 +147,14 @@ public class InputBlock extends InputSyncronizedBase {
                     }
                 }
             }
-
-            if (isCorrectAction) {
-                card.getGame().fireEvent(new GameEventCombatChanged());
-            } else {
-                flashIncorrectAction();
-            }
         }
+
+        if (isCorrectAction) {
+            card.getGame().fireEvent(new GameEventCombatChanged());
+        } else {
+            flashIncorrectAction();
+        }
+
         showMessage();
         return isCorrectAction;
     }
