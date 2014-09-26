@@ -71,7 +71,7 @@ import forge.view.WatchLocalGame;
 public class MatchUtil {
     private static IMatchController controller;
     private static Game game;
-    private static List<LocalGameView> gameViews = new ArrayList<LocalGameView>();
+    private static final List<LocalGameView> gameViews = new ArrayList<LocalGameView>();
 
     /** Cache of players. */
     public static final Cache<Player, PlayerView> players = new Cache<>();
