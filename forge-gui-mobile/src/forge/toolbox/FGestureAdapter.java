@@ -3,7 +3,6 @@ package forge.toolbox;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
@@ -12,8 +11,6 @@ import forge.properties.ForgePreferences.FPref;
 import forge.util.Utils;
 
 public abstract class FGestureAdapter extends InputAdapter {
-    public static final float DOUBLE_TAP_INTERVAL = 0.25f;
-
     public abstract boolean press(float x, float y);
     public abstract boolean longPress(float x, float y);
     public abstract boolean release(float x, float y);
@@ -38,21 +35,28 @@ public abstract class FGestureAdapter extends InputAdapter {
     private final Task longPressTask = new Task() {
         @Override
         public void run() {
-            if (!longPressed) {
-                longPressed = true;
-                if (longPress(pointer1.x, pointer1.y)) {
-                    if (FModel.getPreferences().getPrefBoolean(FPref.UI_VIBRATE_ON_LONG_PRESS)) {
-                        Gdx.input.vibrate(25); //perform a quick vibrate to signify a successful long press
+            if (pressed) {
+                if (Gdx.input.isTouched(0)) {
+                    if (!longPressed) {
+                        longPressed = true;
+                        if (longPress(pointer1.x, pointer1.y)) {
+                            if (FModel.getPreferences().getPrefBoolean(FPref.UI_VIBRATE_ON_LONG_PRESS)) {
+                                Gdx.input.vibrate(25); //perform a quick vibrate to signify a successful long press
+                            }
+                            endPress(pointer1.x, pointer1.y); //end press immediately if long press handled
+                            longPressHandled = true;
+                        }
                     }
-                    endPress(pointer1.x, pointer1.y); //end press immediately if long press handled
-                    longPressHandled = true;
+                }
+                else { //end press immediately if finger no longer down
+                    endPress(pointer1.x, pointer1.y);
                 }
             }
         }
     };
 
     public FGestureAdapter() {
-        this(Utils.AVG_FINGER_WIDTH / 2f, DOUBLE_TAP_INTERVAL, 0.5f, 0.15f);
+        this(Utils.AVG_FINGER_WIDTH / 2f, 0.25f, 0.5f, 0.15f);
     }
 
     /** @param tapSquareSize0 half width in pixels of the square around an initial touch event
@@ -173,13 +177,16 @@ public abstract class FGestureAdapter extends InputAdapter {
 
         if (inTapSquare) {
             // handle taps
-            if (lastTapButton != button || lastTapPointer != pointer
-                    || TimeUtils.nanoTime() - lastTapTime > tapCountInterval
+            long time = Gdx.input.getCurrentEventTime();
+            if (tapCount == 2 //treat 3rd tap as a first tap, and 4th as a double tap
+                    || lastTapButton != button
+                    || lastTapPointer != pointer
+                    || time - lastTapTime > tapCountInterval
                     || !isWithinTapSquare(x, y, lastTapX, lastTapY)) {
                 tapCount = 0;
             }
             tapCount++;
-            lastTapTime = TimeUtils.nanoTime();
+            lastTapTime = time;
             lastTapX = x;
             lastTapY = y;
             lastTapButton = button;
