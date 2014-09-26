@@ -11,6 +11,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.combat.Combat;
+import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.AbilitySub;
@@ -511,6 +512,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             // Blockeres are already declared, set this to unblocked
                             game.getCombat().addAttacker(tgtC, defenders.get(0));
                             game.getCombat().getBandOfAttacker(tgtC).setBlocked(false);
+                            game.fireEvent(new GameEventCombatChanged());
                         }
                     }
                     if (sa.hasParam("Tapped") || sa.hasParam("Ninjutsu")) {
@@ -880,6 +882,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         final List<GameEntity> e = combat.getDefenders();
                         final GameEntity defender = player.getController().chooseSingleEntityForEffect(e, sa, "Declare " + c);
                         combat.addAttacker(c, defender);
+                        game.fireEvent(new GameEventCombatChanged());
                     }
                 }
                 if (sa.hasParam("Blocking")) {
@@ -891,6 +894,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             if (combat.isAttacking(attacker)) {
                                 combat.addBlocker(attacker, c);
                                 combat.orderAttackersForDamageAssignment(c);
+                                game.fireEvent(new GameEventCombatChanged());
                             }
                         }
                     }

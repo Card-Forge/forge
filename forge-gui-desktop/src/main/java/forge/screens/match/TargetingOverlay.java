@@ -45,6 +45,7 @@ import forge.view.CardView;
 import forge.view.CombatView;
 import forge.view.FView;
 import forge.view.GameEntityView;
+import forge.view.IGameView;
 import forge.view.arcane.CardPanel;
 
 /**
@@ -364,7 +365,10 @@ public enum TargetingOverlay {
             if (overlaystate == 0) { return; }
 
             // Arc drawing
-            assembleArcs(MatchUtil.getGameView().getCombat());
+            final IGameView gameView = MatchUtil.getGameView();
+            if (gameView != null) {
+                assembleArcs(gameView.getCombat());
+            }
 
             if (arcsCombat.isEmpty() && arcsOther.isEmpty()) { return; }
 

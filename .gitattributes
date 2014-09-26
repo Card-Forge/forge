@@ -496,6 +496,7 @@ forge-game/src/main/java/forge/game/event/GameEventCardRegenerated.java -text
 forge-game/src/main/java/forge/game/event/GameEventCardSacrificed.java -text
 forge-game/src/main/java/forge/game/event/GameEventCardStatsChanged.java -text
 forge-game/src/main/java/forge/game/event/GameEventCardTapped.java -text
+forge-game/src/main/java/forge/game/event/GameEventCombatChanged.java -text
 forge-game/src/main/java/forge/game/event/GameEventCombatEnded.java -text
 forge-game/src/main/java/forge/game/event/GameEventFlipCoin.java -text
 forge-game/src/main/java/forge/game/event/GameEventGameFinished.java -text

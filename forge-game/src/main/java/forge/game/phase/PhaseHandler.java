@@ -473,7 +473,7 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
         }
     }
 
-    private Combat declareAttackersTurnBasedAction() {
+    private void declareAttackersTurnBasedAction() {
         Player whoDeclares = playerDeclaresAttackers == null || playerDeclaresAttackers.hasLost() ? playerTurn : playerDeclaresAttackers;
 
         if (CombatUtil.canAttack(playerTurn)) {
@@ -481,7 +481,7 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
         }
 
         if (game.isGameOver()) { // they just like to close window at any moment
-            return null;
+            return;
         }
 
         combat.removeAbsentCombatants();
@@ -544,7 +544,8 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
         for (final Card c : combat.getAttackers()) {
             CombatUtil.checkDeclaredAttacker(game, c, combat);
         }
-        return combat;
+
+        game.fireEvent(new GameEventCombatChanged());
     }
 
 
@@ -686,6 +687,8 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
 
             a.getDamageHistory().setCreatureGotBlockedThisCombat(true);
         }
+
+        game.fireEvent(new GameEventCombatChanged());
     }
 
 

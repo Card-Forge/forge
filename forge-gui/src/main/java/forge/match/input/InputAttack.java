@@ -313,6 +313,6 @@ public class InputAttack extends InputSyncronizedBase {
         showMessage(message);
 
         updatePrompt();
-        MatchUtil.getController().showCombat(getController().getCombat(combat)); // redraw sword icons
+        MatchUtil.getController().showCombat(getController().getCombat()); // redraw sword icons
     }
 }

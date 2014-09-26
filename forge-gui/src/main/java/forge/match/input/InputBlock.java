@@ -24,6 +24,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.match.MatchUtil;
@@ -86,7 +87,7 @@ public class InputBlock extends InputSyncronizedBase {
             showMessage(message);
         }
 
-        MatchUtil.getController().showCombat(getController().getCombat(combat));
+        MatchUtil.getController().showCombat(getController().getCombat());
     }
 
     /** {@inheritDoc} */
@@ -147,7 +148,9 @@ public class InputBlock extends InputSyncronizedBase {
                 }
             }
 
-            if (!isCorrectAction) {
+            if (isCorrectAction) {
+                card.getGame().fireEvent(new GameEventCombatChanged());
+            } else {
                 flashIncorrectAction();
             }
         }

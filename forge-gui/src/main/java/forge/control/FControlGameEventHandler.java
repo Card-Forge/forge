@@ -28,6 +28,7 @@ import forge.game.event.GameEventCardDamaged;
 import forge.game.event.GameEventCardPhased;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.event.GameEventCardTapped;
+import forge.game.event.GameEventCombatChanged;
 import forge.game.event.GameEventCombatEnded;
 import forge.game.event.GameEventGameFinished;
 import forge.game.event.GameEventGameOutcome;
@@ -97,7 +98,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final AtomicBoolean combatUpdPlanned = new AtomicBoolean(false);
     @Override
     public Void visit(GameEventPlayerPriority event) {
-        if (!isMainHandler || combatUpdPlanned.getAndSet(true)) { return null; }
+        updateCombat();
+        return null;
+    }
+
+    public void updateCombat() {
+        if (!isMainHandler || combatUpdPlanned.getAndSet(true)) { return; }
 
         FThreads.invokeInEdtNowOrLater(gameView.getGui(), new Runnable() {
             @Override
@@ -106,7 +112,6 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                 MatchUtil.getController().showCombat(gameView.getCombat());
             }
         });
-        return null;
     }
 
     private final AtomicBoolean turnUpdPlanned = new AtomicBoolean(false);
@@ -353,8 +358,18 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
+    public Void visit(GameEventCombatChanged event) {
+        gameView.refreshCombat();
+        updateCombat();
+        return null;
+    }
+
+    @Override
     public Void visit(GameEventCombatEnded event) {
         if (!isMainHandler) { return null; }
+
+        gameView.refreshCombat();
+        updateCombat();
 
         // This should remove sword/shield icons from combatants by the time game moves to M2
         updateManyCards(gameView.getCardViews(event.attackers));

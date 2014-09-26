@@ -60,6 +60,7 @@ import forge.util.NameGenerator;
 import forge.util.gui.SOptionPane;
 import forge.view.Cache;
 import forge.view.CardView;
+import forge.view.CombatView;
 import forge.view.GameEntityView;
 import forge.view.LocalGameView;
 import forge.view.PlayerView;
@@ -80,6 +81,8 @@ public class MatchUtil {
     public static final Cache<SpellAbility, SpellAbilityView> spabs = new Cache<>();
     /** Cache of stack items. */
     public static final Cache<SpellAbilityStackInstance, StackItemView> stackItems = new Cache<>();
+    /** Cache of combat. */
+    public static CombatView cachedCombatView = null;
 
     private static int humanCount;
     private static final EventBus uiEvents;

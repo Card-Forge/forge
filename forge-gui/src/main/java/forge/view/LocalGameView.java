@@ -186,30 +186,39 @@ public abstract class LocalGameView implements IGameView {
 
     @Override
     public CombatView getCombat() {
-        return getCombat(game.getCombat());
+        synchronized (MatchUtil.class) {
+            if (MatchUtil.cachedCombatView != null) {
+                return MatchUtil.cachedCombatView;
+            }
+
+            final Combat combat = game.getCombat();
+            final CombatView combatView;
+            if (combat == null) {
+                combatView = null;
+            } else {
+                combatView = new CombatView();
+                for (final AttackingBand b : combat.getAttackingBands()) {
+                    if (b == null) continue;
+                    final GameEntity defender = combat.getDefenderByAttacker(b);
+                    final List<Card> blockers = combat.getBlockers(b);
+                    final boolean isBlocked = b.isBlocked() == Boolean.TRUE;
+                    combatView.addAttackingBand(
+                            getCardViews(b.getAttackers()),
+                            getGameEntityView(defender),
+                            blockers == null || !isBlocked ? null : getCardViews(blockers),
+                                    blockers == null ? null : getCardViews(blockers));
+                }
+            }
+            MatchUtil.cachedCombatView = combatView;
+            return combatView;
+        }
     }
 
-    /* (non-Javadoc)
-     * @see forge.view.IGameView#getCombat()
-     */
-    public CombatView getCombat(final Combat combat) {
-        if (combat == null) {
-            return null;
+    public final void refreshCombat() {
+        synchronized (MatchUtil.class) {
+            MatchUtil.cachedCombatView = null;
+            this.getCombat();
         }
-
-        final CombatView combatView = new CombatView();
-        for (final AttackingBand b : combat.getAttackingBands()) {
-            if (b == null) continue;
-            final GameEntity defender = combat.getDefenderByAttacker(b);
-            final List<Card> blockers = combat.getBlockers(b);
-            final boolean isBlocked = b.isBlocked() == Boolean.TRUE;
-            combatView.addAttackingBand(
-                    getCardViews(b.getAttackers()),
-                    getGameEntityView(defender),
-                    blockers == null || !isBlocked ? null : getCardViews(blockers),
-                    blockers == null ? null : getCardViews(blockers));
-        }
-        return combatView;
     }
 
     @Override
@@ -559,7 +568,7 @@ public abstract class LocalGameView implements IGameView {
         }
     };
 
-    public final List<SpellAbilityView> getSpellAbilityViews(final List<SpellAbility> cards) {
+    public final List<SpellAbilityView> getSpellAbilityViews(final List<? extends SpellAbility> cards) {
         return ViewUtil.transformIfNotNull(cards, FN_GET_SPAB_VIEW);
     }
 

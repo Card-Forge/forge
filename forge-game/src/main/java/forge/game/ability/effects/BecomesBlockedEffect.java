@@ -4,9 +4,11 @@ import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
+import forge.game.event.GameEventCombatChanged;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.TriggerType;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -29,13 +31,14 @@ public class BecomesBlockedEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-
+        boolean isCombatChanged = false;
         final Game game = sa.getActivatingPlayer().getGame();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         for (final Card c : getTargetCards(sa)) {
             if ((tgt == null) || c.canBeTargetedBy(sa)) {
                 game.getCombat().setBlocked(c, true);
                 if (!c.getDamageHistory().getCreatureGotBlockedThisCombat()) {
+                    isCombatChanged = true;
                     final HashMap<String, Object> runParams = new HashMap<String, Object>();
                     runParams.put("Attacker", c);
                     runParams.put("Blockers", new ArrayList<Card>());
@@ -50,5 +53,8 @@ public class BecomesBlockedEffect extends SpellAbilityEffect {
             }
         }
 
+        if (isCombatChanged) {
+            game.fireEvent(new GameEventCombatChanged());
+        }
     }
 }

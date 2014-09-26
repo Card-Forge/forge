@@ -440,7 +440,7 @@ public class Game implements IGameStateObject {
         return card.getZone();
     }
 
-    public List<Card> getCardsIn(final ZoneType zone) {
+    public synchronized List<Card> getCardsIn(final ZoneType zone) {
         if (zone == ZoneType.Stack) {
             return getStackZone().getCards();
         }

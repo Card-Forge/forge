@@ -8,6 +8,7 @@ import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FButton;
 import forge.view.FView;
+import forge.view.IGameView;
 
 import javax.swing.*;
 
@@ -207,7 +208,8 @@ public enum VMatchUI implements IVTopLevelUI {
      */
     @Override
     public boolean onClosing(FScreen screen) {
-        if (!MatchUtil.getGameView().isGameOver()) {
+        final IGameView gameView = MatchUtil.getGameView();
+        if (gameView != null && !gameView.isGameOver()) {
             MatchUtil.concede();
             return false; //delay hiding tab even if concede successful
         }

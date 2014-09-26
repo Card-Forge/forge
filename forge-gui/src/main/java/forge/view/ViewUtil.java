@@ -135,7 +135,7 @@ public final class ViewUtil {
         return view;
     }
 
-    public static <T,V> List<V> transformIfNotNull(final Iterable<T> input, final Function<T, V> transformation) {
+    public static <T,V> List<V> transformIfNotNull(final Iterable<? extends T> input, final Function<T, V> transformation) {
         final List<V> ret = Lists.newLinkedList();
         synchronized (input) {
             for (final T t : input) {

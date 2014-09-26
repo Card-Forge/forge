@@ -27,6 +27,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
 import forge.game.combat.Combat;
+import forge.game.event.GameEventCombatChanged;
 import forge.game.event.GameEventTokenCreated;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -297,6 +298,7 @@ public class TokenEffect extends SpellAbilityEffect {
                     }
                 }
 
+                boolean combatChanged = false;
                 final Game game = controller.getGame();
                 for (final Card c : tokens) {
                     if (this.tokenAttacking && game.getPhaseHandler().inCombat()) {
@@ -304,6 +306,7 @@ public class TokenEffect extends SpellAbilityEffect {
                         final List<GameEntity> defs = combat.getDefenders();
                         final GameEntity defender = c.getController().getController().chooseSingleEntityForEffect(defs, sa, "Choose which defender to attack with " + c, false);
                         combat.addAttacker(c, defender);
+                        combatChanged = true;
                     }
                     if (this.tokenBlocking != null && game.getPhaseHandler().inCombat()) {
                         Combat combat = game.getPhaseHandler().getCombat();
@@ -315,6 +318,7 @@ public class TokenEffect extends SpellAbilityEffect {
                             } else {
                                 // TODO Flash Foliage: set blocked; attackerBlocked trigger; damage 
                             }
+                            combatChanged = true;
                         }
                     }
                     if (remember) {
@@ -335,6 +339,10 @@ public class TokenEffect extends SpellAbilityEffect {
                             }
                         }
                     }
+                }
+
+                if (combatChanged) {
+                    game.fireEvent(new GameEventCombatChanged());
                 }
             }
         }

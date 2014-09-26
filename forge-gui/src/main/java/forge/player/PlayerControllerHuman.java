@@ -1080,11 +1080,11 @@ public class PlayerControllerHuman extends PlayerController {
      */
     @Override
     public List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num) {
-        List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
+        List<SpellAbilityView> choices = getSpellAbilityViews(CharmEffect.makePossibleOptions(sa));
         String modeTitle = String.format("%s activated %s - Choose a mode", sa.getActivatingPlayer(), sa.getHostCard());
-        List<AbilitySub> chosen = new ArrayList<AbilitySub>();
+        List<AbilitySub> chosen = Lists.newArrayListWithCapacity(num);
         for (int i = 0; i < num; i++) {
-            AbilitySub a;
+            SpellAbilityView a;
             if (i < min) {
                 a = SGuiChoose.one(getGui(), modeTitle, choices);
             }
@@ -1096,7 +1096,7 @@ public class PlayerControllerHuman extends PlayerController {
             }
 
             choices.remove(a);
-            chosen.add(a);
+            chosen.add((AbilitySub) getSpellAbility(a));
         }
         return chosen;
     }
@@ -1556,8 +1556,8 @@ public class PlayerControllerHuman extends PlayerController {
      * @return
      * @see forge.view.LocalGameView#getCombat(forge.game.combat.Combat)
      */
-    public CombatView getCombat(Combat c) {
-        return gameView.getCombat(c);
+    public CombatView getCombat() {
+        return gameView.getCombat();
     }
 
     /**
@@ -1663,8 +1663,8 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.view.LocalGameView#getSpellAbilityViews(java.util.List)
      */
     public final List<SpellAbilityView> getSpellAbilityViews(
-            List<SpellAbility> cards) {
-        return gameView.getSpellAbilityViews(cards);
+            final List<? extends SpellAbility> spabs) {
+        return gameView.getSpellAbilityViews(spabs);
     }
 
     /**

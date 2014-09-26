@@ -15,6 +15,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
+import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -189,6 +190,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     if (sa.hasParam("CopyAttacking") && game.getPhaseHandler().inCombat()) {
                         final GameEntity defender = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("CopyAttacking"), sa).get(0);
                         game.getCombat().addAttacker(copyInPlay, defender);
+                        game.fireEvent(new GameEventCombatChanged());
                     }
 
                     if (sa.hasParam("AttachedTo")) {
