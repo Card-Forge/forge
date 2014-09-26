@@ -169,21 +169,17 @@ public class InputAttack extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     protected final boolean onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
-        forge.FTrace.get("onCardSelected").start();
         final List<Card> att = combat.getAttackers();
         if (triggerEvent != null && triggerEvent.getButton() == 3 && att.contains(card)) {
             if (undeclareAttacker(card)) {
                 updateMessage();
-                forge.FTrace.get("onCardSelected").end();
                 return true;
             }
         }
 
-        forge.FTrace.get("isAttackingDefender").start();
         if (combat.isAttacking(card, currentDefender)) {
             boolean validAction = true;
             if (isBandingPossible()) {
-                forge.FTrace.get("activateBand").start();
                 // Activate band by selecting/deselecting a band member
                 if (activeBand == null) {
                     activateBand(combat.getBandOfAttacker(card));
@@ -201,61 +197,41 @@ public class InputAttack extends InputSyncronizedBase {
                         validAction = false;
                     }
                 }
-                forge.FTrace.get("activateBand").end();
             }
             else {
                 //if banding not possible, just undeclare attacker
-                forge.FTrace.get("undeclareAttacker").start();
                 undeclareAttacker(card);
-                forge.FTrace.get("undeclareAttacker").end();
             }
 
             updateMessage();
-            forge.FTrace.get("isAttackingDefender").end();
-            forge.FTrace.get("onCardSelected").end();
             return validAction;
         }
-        forge.FTrace.get("isAttackingDefender").end();
 
-        forge.FTrace.get("isOpponentOf").start();
         if (card.getController().isOpponentOf(playerAttacks)) {
             if (defenders.contains(card)) { // planeswalker?
                 setCurrentDefender(card);
-                forge.FTrace.get("isOpponentOf").end();
-                forge.FTrace.get("onCardSelected").end();
                 return true;
             }
         }
-        forge.FTrace.get("isOpponentOf").end();
 
-        forge.FTrace.get("canAttack").start();
         if (playerAttacks.getZone(ZoneType.Battlefield).contains(card) && CombatUtil.canAttack(card, currentDefender, combat)) {
             if (activeBand != null && !activeBand.canJoinBand(card)) {
                 activateBand(null);
                 updateMessage();
                 flashIncorrectAction();
-                forge.FTrace.get("onCardSelected").end();
                 return false;
             }
 
-            forge.FTrace.get("isAttacking").start();
             if (combat.isAttacking(card)) {
                 combat.removeFromCombat(card);
             }
-            forge.FTrace.get("isAttacking").end();
 
-            forge.FTrace.get("declareAttacker").start();
             declareAttacker(card);
-            forge.FTrace.get("declareAttacker").end();
             updateMessage();
-            forge.FTrace.get("canAttack").end();
-            forge.FTrace.get("onCardSelected").end();
             return true;
         }
-        forge.FTrace.get("canAttack").end();
 
         flashIncorrectAction();
-        forge.FTrace.get("onCardSelected").end();
         return false;
     }
 

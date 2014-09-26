@@ -239,22 +239,16 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         @Override
         public boolean tap(float x, float y, int count) {
             if (renderedCardContains(x, y)) {
-                forge.FTrace.get("tap").start();
-                forge.FTrace.get("tap2").start();
                 FThreads.invokeInBackgroundThread(new Runnable() { //must invoke in game thread in case a dialog needs to be shown
                     @Override
                     public void run() {
-                        forge.FTrace.get("selectCard").start();
                         if (!selectCard()) {
                             //if no cards in stack can be selected, just show zoom/details for card
                             CardZoom.show(getCard());
                         }
-                        forge.FTrace.get("selectCard").end();
                         Gdx.graphics.requestRendering();
-                        forge.FTrace.get("tap2").end();
                     }
                 });
-                forge.FTrace.get("tap").end();
                 return true;
             }
             return false;
