@@ -235,8 +235,11 @@ public class EffectEffect extends SpellAbilityEffect {
 
         // TODO: Add targeting to the effect so it knows who it's dealing with
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff);
+        Card cmdEffect = game.getAction().moveTo(ZoneType.Command, eff);
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        if (effectTriggers != null) {
+            game.getTriggerHandler().registerActiveTrigger(cmdEffect, false);
+        }
     }
 
 }
