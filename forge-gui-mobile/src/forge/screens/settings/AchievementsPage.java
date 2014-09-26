@@ -147,7 +147,8 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
         @Override
         public boolean longPress(float x, float y) {
             selectedAchievement = getAchievementAt(x, y);
-            return showCard(selectedAchievement);
+            showCard(selectedAchievement);
+            return true;
         }
 
         private boolean showCard(Achievement achievement) {
