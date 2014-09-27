@@ -12,6 +12,12 @@ Release Notes
 Forge now includes many of the new Khans of Tarkir cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
 
 
+- New Achievements -
+Added new achievements for 19 alternate win conditions and 52 Planeswalker ultimates
+Added five new tier achievements
+Trophies now have slick custom art that can be downloaded separate
+
+
 - New Commander 2014 cards -
 We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
 
