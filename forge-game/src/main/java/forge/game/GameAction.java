@@ -1641,8 +1641,9 @@ public class GameAction {
                 Player p = whoCanMulligan.get(i);
                 List<Card> toMulligan = p.canMulligan() ? p.getController().getCardsToMulligan(isCommander, firstPlayer) : null;
 
-                if (game.isGameOver()) // conceded on mulligan prompt
+                if (game.isGameOver()) { // conceded on mulligan prompt
                     return;
+                }
 
                 if (toMulligan != null && !toMulligan.isEmpty()) {
                     if (!isCommander) {

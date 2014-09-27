@@ -190,6 +190,12 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
 
     private int numManaConversion = 0;
 
+    private final AchievementTracker achievementTracker = new AchievementTracker();
+
+    public final AchievementTracker getAchievementTracker() {
+        return achievementTracker;
+    }
+
     public final PlayerOutcome getOutcome() {
         return stats.getOutcome();
     }
@@ -3351,6 +3357,7 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
         final int newHand = getCardsIn(ZoneType.Hand).size();
         stats.notifyHasMulliganed();
         stats.notifyOpeningHandSize(newHand);
+        achievementTracker.mulliganTo = newHand;
     }
 
     /**

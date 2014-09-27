@@ -88,7 +88,6 @@ public class Game implements IGameStateObject {
     private final ReplacementHandler replacementHandler = new ReplacementHandler(this);
     private final EventBus events = new EventBus("game events");
     private final GameLog gameLog = new GameLog();
-    private final AchievementTracker achievementTracker = new AchievementTracker();
 
     private final Zone stackZone = new Zone(ZoneType.Stack, this);
 
@@ -331,15 +330,6 @@ public class Game implements IGameStateObject {
      */
     public final GameLog getGameLog() {
         return gameLog;
-    }
-
-    /**
-     * Gets the achievement tracker
-     * 
-     * @return the achievement tracker
-     */
-    public final AchievementTracker getAchievementTracker() {
-        return achievementTracker;
     }
 
     /**

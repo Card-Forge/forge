@@ -83,7 +83,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         //only call update achievements for any ultimates activated during the game
         if (player.getOutcome().hasWon()) {
             boolean needSave = false;
-            for (String ultimate : player.getGame().getAchievementTracker().activatedUltimates) {
+            for (String ultimate : player.getAchievementTracker().activatedUltimates) {
                 Achievement achievement = achievements.get(ultimate);
                 if (achievement != null) {
                     achievement.update(gui, player);
