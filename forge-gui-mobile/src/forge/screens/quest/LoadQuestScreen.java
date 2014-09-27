@@ -36,6 +36,7 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FList;
 import forge.toolbox.FTextArea;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.util.ThreadUtil;
 import forge.util.Utils;
 import forge.util.gui.SOptionPane;
 
@@ -173,7 +174,7 @@ public class LoadQuestScreen extends FScreen {
     private void renameQuest(final QuestData quest) {
         if (quest == null) { return; }
 
-        FThreads.invokeInBackgroundThread(new Runnable() {
+        ThreadUtil.invokeInGameThread(new Runnable() {
             @Override
             public void run() {
                 String questName;
@@ -212,7 +213,7 @@ public class LoadQuestScreen extends FScreen {
     private void deleteQuest(final QuestData quest) {
         if (quest == null) { return; }
 
-        FThreads.invokeInBackgroundThread(new Runnable() {
+        ThreadUtil.invokeInGameThread(new Runnable() {
             @Override
             public void run() {
                 if (!SOptionPane.showConfirmDialog(GuiBase.getInterface(), 

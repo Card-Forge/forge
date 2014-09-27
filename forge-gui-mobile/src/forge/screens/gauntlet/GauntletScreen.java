@@ -38,6 +38,7 @@ import forge.toolbox.GuiChoose;
 import forge.toolbox.ListChooser;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
+import forge.util.ThreadUtil;
 import forge.util.Utils;
 import forge.util.gui.SOptionPane;
 
@@ -278,7 +279,7 @@ public class GauntletScreen extends LaunchScreen {
     private void renameGauntlet(final GauntletData gauntlet) {
         if (gauntlet == null) { return; }
 
-        FThreads.invokeInBackgroundThread(new Runnable() {
+        ThreadUtil.invokeInGameThread(new Runnable() {
             @Override
             public void run() {
                 String gauntletName;
@@ -324,7 +325,7 @@ public class GauntletScreen extends LaunchScreen {
     private void deleteGauntlet(final GauntletData gauntlet) {
         if (gauntlet == null) { return; }
 
-        FThreads.invokeInBackgroundThread(new Runnable() {
+        ThreadUtil.invokeInGameThread(new Runnable() {
             @Override
             public void run() {
                 if (!SOptionPane.showConfirmDialog(GuiBase.getInterface(), 

@@ -31,6 +31,7 @@ import forge.toolbox.GuiChoose;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 import forge.util.ItemPool;
+import forge.util.ThreadUtil;
 import forge.util.Utils;
 
 public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
@@ -126,7 +127,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
                     if (result == null || result <= 0) { return; }
 
                     //invoke in game thread so other dialogs can be shown properly
-                    FThreads.invokeInBackgroundThread(new Runnable() {
+                    ThreadUtil.invokeInGameThread(new Runnable() {
                         @Override
                         public void run() {
                             ItemPool<InventoryItem> items = new ItemPool<InventoryItem>(InventoryItem.class);
@@ -206,7 +207,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
             @Override
             public void handleEvent(FEvent e) {
                 //invoke in game thread so other dialogs can be shown properly
-                FThreads.invokeInBackgroundThread(new Runnable() {
+                ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
                         QuestSpellShop.sellExtras(((SpellShopPage)parentScreen.tabPages[0]).itemManager, itemManager);

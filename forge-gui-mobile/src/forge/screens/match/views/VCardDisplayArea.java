@@ -14,6 +14,7 @@ import forge.card.CardZoom;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.match.MatchUtil;
 import forge.toolbox.FCardPanel;
+import forge.util.ThreadUtil;
 import forge.view.CardView;
 
 public abstract class VCardDisplayArea extends VDisplayArea {
@@ -238,7 +239,7 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         @Override
         public boolean tap(float x, float y, int count) {
             if (renderedCardContains(x, y)) {
-                FThreads.invokeInBackgroundThread(new Runnable() { //must invoke in game thread in case a dialog needs to be shown
+                ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread in case a dialog needs to be shown
                     @Override
                     public void run() {
                         if (!selectCard()) {

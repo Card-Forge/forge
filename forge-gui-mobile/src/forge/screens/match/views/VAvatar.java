@@ -2,12 +2,12 @@ package forge.screens.match.views;
 
 import com.badlogic.gdx.math.Vector2;
 
-import forge.FThreads;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.match.MatchUtil;
 import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
+import forge.util.ThreadUtil;
 import forge.util.Utils;
 import forge.view.PlayerView;
 
@@ -26,7 +26,7 @@ public class VAvatar extends FDisplayObject {
 
     @Override
     public boolean tap(float x, float y, int count) {
-        FThreads.invokeInBackgroundThread(new Runnable() { //must invoke in background thread in case a dialog needs to be shown
+        ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread in case a dialog needs to be shown
             @Override
             public void run() {
                 MatchUtil.getGameView().selectPlayer(player, null);

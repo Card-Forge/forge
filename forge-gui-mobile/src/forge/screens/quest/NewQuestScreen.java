@@ -46,6 +46,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.util.FileUtil;
+import forge.util.ThreadUtil;
 import forge.util.Utils;
 import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
@@ -143,8 +144,8 @@ public class NewQuestScreen extends FScreen {
             .font(FSkinFont.get(22)).text("Embark!").icon(FSkinImage.QUEST_ZEP).command(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    //create new quest in background thread so option panes can wait for input
-                    FThreads.invokeInBackgroundThread(new Runnable() {
+                    //create new quest in game thread so option panes can wait for input
+                    ThreadUtil.invokeInGameThread(new Runnable() {
                         @Override
                         public void run() {
                             newQuest();
