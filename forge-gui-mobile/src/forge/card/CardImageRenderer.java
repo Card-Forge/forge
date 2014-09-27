@@ -139,7 +139,7 @@ public class CardImageRenderer {
         //draw text box
         Color textBoxColor1 = FSkinColor.tintColor(Color.WHITE, color1, CardRenderer.TEXT_BOX_TINT);
         Color textBoxColor2 = color2 == null ? null : FSkinColor.tintColor(Color.WHITE, color2, CardRenderer.TEXT_BOX_TINT);
-        drawTextBox(g, card, textBoxColor1, textBoxColor2, x + artInset, y, w - 2 * artInset, textBoxHeight);
+        drawTextBox(g, card, textBoxColor1, textBoxColor2, x + artInset, y, w - 2 * artInset, textBoxHeight, onTop);
         y += textBoxHeight;
 
         //draw P/T box
@@ -231,7 +231,7 @@ public class CardImageRenderer {
     //use text g to handle mana symbols and reminder text
     private static final TextRenderer cardTextRenderer = new TextRenderer(true);
 
-    private static void drawTextBox(Graphics g, CardView card, Color color1, Color color2, float x, float y, float w, float h) {
+    private static void drawTextBox(Graphics g, CardView card, Color color1, Color color2, float x, float y, float w, float h, boolean onTop) {
         if (color2 == null) {
             g.fillRect(color1, x, y, w, h);
         }
@@ -239,6 +239,8 @@ public class CardImageRenderer {
             g.fillGradientRect(color1, color2, false, x, y, w, h);
         }
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
+
+        if (!onTop) { return; } //remaining rendering only needed if card on top
 
         final CardStateView state = card.getOriginal();
         if (state.isBasicLand()) {
