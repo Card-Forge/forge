@@ -367,7 +367,6 @@ public abstract class LocalGameView implements IGameView {
             view = new PlayerView(p.getLobbyPlayer(), p.getId());
             MatchUtil.players.put(p, view);
             getPlayerView(p, view);
-            view.setOpponents(getPlayerViews(p.getOpponents()));
         }
         return view;
     }
