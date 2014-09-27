@@ -89,6 +89,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         add(new Overkill(-25, -50, -100, -200));
         add(new LifeToSpare(20, 40, 80, 160));
         add(new Hellbent());
+        add(new ArcaneMaster());
         add(new RagsToRiches());
         add(new ManaScrewed());
         if (isLimitedFormat) { //lower gold and mythic thresholds based on smaller decks

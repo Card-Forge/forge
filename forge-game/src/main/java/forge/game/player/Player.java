@@ -2779,6 +2779,7 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
      */
     public final void addSpellCastThisTurn() {
         this.spellsCastThisTurn++;
+        achievementTracker.spellsCast++;
     }
 
     /**

@@ -6,4 +6,5 @@ import java.util.HashSet;
 public class AchievementTracker {
     public final HashSet<String> activatedUltimates = new HashSet<String>();
     public int mulliganTo = 7;
+    public int spellsCast = 0;
 }
