@@ -49,7 +49,7 @@ public class ManaCostAdjustment {
                 }
             }
             else if (sa.getHostCard().hasKeyword("Convoke")) {
-                adjustCostByConvoke(cost, sa);
+                adjustCostByConvoke(cost, sa, test);
             } else if (((Spell) sa).isCastFaceDown()) {
             	// Turn face down to apply cost modifiers correctly
             	originalCard.setState(CardCharacteristicName.FaceDown);
@@ -141,7 +141,7 @@ public class ManaCostAdjustment {
         }
     }    
     
-    private static void adjustCostByConvoke(ManaCostBeingPaid cost, final SpellAbility sa) {
+    private static void adjustCostByConvoke(ManaCostBeingPaid cost, final SpellAbility sa, boolean test) {
     
         List<Card> untappedCreats = CardLists.filter(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
         untappedCreats = CardLists.filter(untappedCreats, CardPredicates.Presets.UNTAPPED);
@@ -155,7 +155,9 @@ public class ManaCostAdjustment {
         for (final Entry<Card, ManaCostShard> conv : convokedCards.entrySet()) {
             sa.addTappedForConvoke(conv.getKey());
             cost.decreaseShard(conv.getValue(), 1);
-            conv.getKey().tap();
+            if (!test) {
+                conv.getKey().tap();
+            }
         }
     }
 

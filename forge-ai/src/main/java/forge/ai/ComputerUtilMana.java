@@ -1198,4 +1198,33 @@ public class ComputerUtilMana {
             sa.resetSacrificedAsOffering();
         }
     }
+    
+        
+    /**
+     * Matches list of creatures to shards in mana cost for convoking.
+     * @param cost cost of convoked ability
+     * @param list creatures to be evaluated
+     * @return map between creatures and shards to convoke
+     */
+    public static Map<Card, ManaCostShard> getConvokeFromList(final ManaCost cost, List<Card> list) {
+        HashMap<Card, ManaCostShard> convoke = new HashMap<Card, ManaCostShard>();
+        Card convoked = null;
+        for (ManaCostShard toPay : cost) {
+            for (Card c : list) {
+                if (c.hasShardinCost(toPay)) {
+                    convoke.put(c, toPay);
+                    convoked = c;
+                    break;
+                }
+            }
+            if (convoked != null) {
+                list.remove(convoked);
+            }
+            convoked = null;
+        }
+        for (int i = 0; i < list.size() && i < cost.getGenericCost(); i++) {
+            convoke.put(list.get(i), ManaCostShard.COLORLESS);
+        }
+        return convoke;
+    }
 }

@@ -31,6 +31,7 @@ import forge.card.*;
 import forge.card.CardDb.SetPreference;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
+import forge.card.mana.ManaCostShard;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -42,6 +43,7 @@ import forge.game.cost.Cost;
 import forge.game.event.*;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
 import forge.game.event.GameEventCardDamaged.DamageType;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
@@ -9202,5 +9204,21 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             rules = copiedPermanent.getRules();
         }
         return rules != null ? rules.getOracleText() : "";
+    }
+    
+    /**
+     * Checks if a card contains a certain mana shard in its cost.
+     * @param shard ManaCostShard to find
+     * @return does card's cost contain shard
+     */
+    public boolean hasShardinCost(final ManaCostShard shard) {
+        final ManaCostBeingPaid cost = new ManaCostBeingPaid(getManaCost());
+        for (ManaCostShard s : cost.getDistinctShards()) {
+            if (s.equals(shard)) {
+                return true;
+            }
+            //TODO:need to check for hybrid shards
+        }
+        return false;
     }
 } // end Card class

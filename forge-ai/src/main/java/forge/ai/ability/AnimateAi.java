@@ -148,7 +148,6 @@ public class AnimateAi extends SpellAbilityAi {
                 bFlag |= !c.isCreature() && !c.isTapped()
                         && !(c.getTurnInZone() == game.getPhaseHandler().getTurn())
                         && !c.isEquipping();
-                System.out.print(!c.isCreature() && !c.isTapped());
 
                 // for creatures that could be improved (like Figure of Destiny)
                 if (!bFlag && c.isCreature() && (sa.hasParam("Permanent") || (!c.isTapped() && !c.isSick()))) {

@@ -801,9 +801,43 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public Map<Card, ManaCostShard> chooseCardsForConvoke(SpellAbility sa, ManaCost manaCost,
             List<Card> untappedCreats) {
-        // TODO: AI to choose a creature to tap would go here
-        // Probably along with deciding how many creatures to tap
-        return new HashMap<Card, ManaCostShard>();
+        final Player ai = sa.getActivatingPlayer();
+        final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        //Filter out mana sources that will interfere with payManaCost()
+        untappedCreats = CardLists.filter(untappedCreats, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.getManaAbility().isEmpty();
+            }
+        });
+        
+        //Only convoke after attackers have been declared
+        if (ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+            return new HashMap<Card, ManaCostShard>();
+        }
+        
+        //Do not convoke potential blockers until after opponent's attack
+        final List<Card> notBlocking = CardLists.filter(untappedCreats, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return !ComputerUtilCard.doesSpecifiedCreatureBlock(ai, c);
+            }
+        });
+        boolean nonBlockers = false;
+        if ((ph.isPlayerTurn(ai) && ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN)) ||
+                (!ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
+            nonBlockers = true;
+            //Add threatened creatures
+            if (!ai.getGame().getStack().isEmpty()) {
+                final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), null);
+                for (Card c : untappedCreats) {
+                    if (objects.contains(c) && !notBlocking.contains(c)) {
+                        notBlocking.add(c);
+                    }
+                }
+            }
+        }
+        return ComputerUtilMana.getConvokeFromList(manaCost, nonBlockers ? notBlocking : untappedCreats);
     }
 
     @Override
