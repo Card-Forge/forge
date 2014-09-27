@@ -155,7 +155,7 @@ public class ManaCostAdjustment {
         for (final Entry<Card, ManaCostShard> conv : convokedCards.entrySet()) {
             sa.addTappedForConvoke(conv.getKey());
             cost.decreaseShard(conv.getValue(), 1);
-            conv.getKey().setTapped(true);
+            conv.getKey().tap();
         }
     }
 
