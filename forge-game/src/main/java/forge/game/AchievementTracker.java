@@ -7,4 +7,5 @@ public class AchievementTracker {
     public final HashSet<String> activatedUltimates = new HashSet<String>();
     public int mulliganTo = 7;
     public int spellsCast = 0;
+    public int maxStormCount = 0;
 }

@@ -16912,6 +16912,7 @@ forge-gui/src/main/java/forge/achievement/Poisoned.java -text
 forge-gui/src/main/java/forge/achievement/QuestAchievements.java -text
 forge-gui/src/main/java/forge/achievement/RagsToRiches.java -text
 forge-gui/src/main/java/forge/achievement/SealedAchievements.java -text
+forge-gui/src/main/java/forge/achievement/StormChaser.java -text
 forge-gui/src/main/java/forge/achievement/TotalGameWins.java -text
 forge-gui/src/main/java/forge/achievement/TotalMatchWins.java -text
 forge-gui/src/main/java/forge/achievement/VariantWins.java -text

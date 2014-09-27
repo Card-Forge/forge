@@ -90,7 +90,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         add(new LifeToSpare(20, 40, 80, 160));
         add(new Hellbent());
         add(new ArcaneMaster());
-        add(new RagsToRiches());
+        add(new StormChaser(5, 10, 20, 50));
         add(new ManaScrewed());
         if (isLimitedFormat) { //lower gold and mythic thresholds based on smaller decks
             add(new ManaFlooded(8, 11, 14, 17));
@@ -98,6 +98,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         else {
             add(new ManaFlooded(8, 12, 18, 24));
         }
+        add(new RagsToRiches());
     }
 
     protected abstract void addAchievements();
