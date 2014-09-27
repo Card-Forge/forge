@@ -108,18 +108,19 @@ public abstract class SpellAbilityAi extends SaTargetRoutines {
             return true; // This is only true for Drawbacks and triggers
         }
         
+        if (!sa.getPayCosts().isReusuableResource()) {
+            return false;
+        }
+        
+        if (sa.isTrigger()) {
+            return true;
+        }
+        
         if (ComputerUtil.playImmediately(ai, sa)) {
             return true;
         }
     
-        if (!sa.getPayCosts().isReusuableResource()) {
-            return false;
-        }
-    
         if (sa.getRestrictions().isPwAbility() && ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
-            return true;
-        }
-        if (sa.isTrigger()) {
             return true;
         }
         if (sa.isSpell() && !sa.isBuyBackAbility()) {
