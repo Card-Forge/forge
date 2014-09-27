@@ -38,7 +38,6 @@ import net.miginfocom.swing.MigLayout;
 import forge.ImageCache;
 import forge.card.CardDetailUtil;
 import forge.card.CardDetailUtil.DetailColors;
-import forge.game.player.Player;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -54,6 +53,7 @@ import forge.toolbox.FSkin.SkinnedTextArea;
 import forge.view.CardView;
 import forge.view.IGameView;
 import forge.view.LocalGameView;
+import forge.view.PlayerView;
 import forge.view.StackItemView;
 import forge.view.arcane.CardPanel;
 
@@ -178,10 +178,10 @@ public enum VStack implements IVDoc<CStack> {
 
         private final CardView sourceCard;
 
-        public StackInstanceTextArea(final IGameView game, final StackItemView item) {
+        public StackInstanceTextArea(final LocalGameView gameView, final StackItemView item) {
             sourceCard = item.getSource();
 
-            final Player localPlayer = MatchUtil.getCurrentPlayer();
+            final PlayerView localPlayer = gameView.getPlayerView(MatchUtil.getCurrentPlayer());
             final String txt = (item.isOptionalTrigger() && item.getActivatingPlayer().equals(localPlayer)
                     ? "(OPTIONAL) " : "") + item.getText();
 
@@ -216,7 +216,7 @@ public enum VStack implements IVDoc<CStack> {
                         onClick(e);
                     }
                     private void onClick(MouseEvent e) {
-                        abilityMenu.setStackInstance(game, item, localPlayer);
+                        abilityMenu.setStackInstance(gameView, item, localPlayer);
                         abilityMenu.show(e.getComponent(), e.getX(), e.getY());
                     }
                 });
@@ -306,7 +306,7 @@ public enum VStack implements IVDoc<CStack> {
             add(jmiAlwaysNo);
         }
 
-        public void setStackInstance(final IGameView game, final StackItemView item, final Player localPlayer) {
+        public void setStackInstance(final IGameView game, final StackItemView item, final PlayerView localPlayer) {
             this.game = game;
             this.item = item;
             triggerID = Integer.valueOf(item.getSourceTrigger());

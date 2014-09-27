@@ -35,7 +35,7 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.util.Utils;
 import forge.view.CardView;
-import forge.view.IGameView;
+import forge.view.LocalGameView;
 import forge.view.PlayerView;
 import forge.view.StackItemView;
 
@@ -225,14 +225,14 @@ public class VStack extends FDropDown {
                 VStack.this.updateSizeAndPosition();
                 return true;
             }
-            Player player = MatchUtil.getCurrentPlayer();
+            final Player player = MatchUtil.getCurrentPlayer();
             if (player != null) { //don't show menu if tapping on art
                 if (stackInstance.isAbility()) {
                     FPopupMenu menu = new FPopupMenu() {
                         @Override
                         protected void buildMenu() {
-                            final IGameView gameView = MatchUtil.getGameView();
-                            final Player player = MatchUtil.getCurrentPlayer();
+                            final LocalGameView gameView = MatchUtil.getGameView();
+                            final PlayerView playerView = gameView.getPlayerView(player);
                             final String key = stackInstance.getKey();
                             final boolean autoYield = gameView.shouldAutoYield(key);
                             addItem(new FCheckBoxMenuItem("Auto-Yield", autoYield,
@@ -246,7 +246,7 @@ public class VStack extends FDropDown {
                                     }
                                 }
                             }));
-                            if (stackInstance.isOptionalTrigger() && stackInstance.getActivatingPlayer().equals(player)) {
+                            if (stackInstance.isOptionalTrigger() && stackInstance.getActivatingPlayer().equals(playerView)) {
                                 final int triggerID = stackInstance.getSourceTrigger();
                                 addItem(new FCheckBoxMenuItem("Always Yes",
                                         gameView.shouldAlwaysAcceptTrigger(triggerID),
