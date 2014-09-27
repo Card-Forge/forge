@@ -19,7 +19,6 @@ package forge.player;
 
 import com.google.common.collect.Iterables;
 
-import forge.achievement.PlaneswalkerAchievements;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -123,7 +122,7 @@ public class HumanPlaySpellAbility {
         if (isFree || payment.isFullyPaid()) {
             //track when planeswalker ultimates are activated
             if (ability.getRestrictions().isPwAbility() && ability.hasParam("Ultimate") && ability.getActivatingPlayer().getController() instanceof PlayerControllerHuman) {
-                PlaneswalkerAchievements.activatedUltimates.add(ability.getHostCard().getName());
+                game.getAchievementTracker().activatedUltimates.add(ability.getHostCard().getName());
             }
 
             if (skipStack) {

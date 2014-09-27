@@ -1,7 +1,5 @@
 package forge.achievement;
 
-import java.util.HashSet;
-
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.interfaces.IGuiBase;
@@ -11,7 +9,6 @@ import forge.properties.ForgeConstants;
 
 public class PlaneswalkerAchievements extends AchievementCollection {
     public static final PlaneswalkerAchievements instance = new PlaneswalkerAchievements();
-    public static final HashSet<String> activatedUltimates = new HashSet<String>();
 
     private PlaneswalkerAchievements() {
         super("Planeswalker Ultimates", ForgeConstants.ACHIEVEMENTS_DIR + "planeswalkers.xml", false);
@@ -86,7 +83,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         //only call update achievements for any ultimates activated during the game
         if (player.getOutcome().hasWon()) {
             boolean needSave = false;
-            for (String ultimate : activatedUltimates) {
+            for (String ultimate : player.getGame().getAchievementTracker().activatedUltimates) {
                 Achievement achievement = achievements.get(ultimate);
                 if (achievement != null) {
                     achievement.update(gui, player);
@@ -97,7 +94,6 @@ public class PlaneswalkerAchievements extends AchievementCollection {
                 save();
             }
         }
-        activatedUltimates.clear();
     }
 
     private class PlaneswalkerUltimate extends Achievement {

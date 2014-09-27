@@ -264,6 +264,7 @@ forge-game/.settings/org.eclipse.m2e.core.prefs -text
 forge-game/pom.xml -text
 forge-game/src/main/java/forge/GameCommand.java svneol=native#text/plain
 forge-game/src/main/java/forge/ImageKeys.java -text
+forge-game/src/main/java/forge/game/AchievementTracker.java -text
 forge-game/src/main/java/forge/game/CardTraitBase.java -text
 forge-game/src/main/java/forge/game/Direction.java -text
 forge-game/src/main/java/forge/game/Game.java -text
