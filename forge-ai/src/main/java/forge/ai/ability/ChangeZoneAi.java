@@ -505,7 +505,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             combat.addAttacker(att, ai);
         }
         AiBlockController block = new AiBlockController(ai);
-        block.assignBlockers(combat);
+        block.assignBlockersForCombat(combat);
 
         if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
             // need something AI can cast now

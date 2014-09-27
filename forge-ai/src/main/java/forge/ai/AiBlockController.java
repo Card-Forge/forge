@@ -680,26 +680,46 @@ public class AiBlockController {
     }
 
     /** Assigns blockers for the provided combat instance (in favor of player passes to ctor) */
-    public void assignBlockers(final Combat combat) {
-        assignBlockers(combat, null, null);
+    public void assignBlockersForCombat(final Combat combat) {
+        List<Card> possibleBlockers = ai.getCreaturesInPlay();
+        attackers = sortPotentialAttackers(combat);
+        assignBlockers(combat, possibleBlockers);
     }
     
-    public void assignBlockers(final Combat combat, Card evalBlocker, Card evalAttacker) {
-        
-        List<Card> possibleBlockers = null;
-        if (evalBlocker == null) {
-            possibleBlockers = ai.getCreaturesInPlay();
-        } else {
-            possibleBlockers = new ArrayList<Card>();
-            possibleBlockers.add(evalBlocker);
+    /**
+     * assignBlockersForCombat() with additional and possibly "virtual" blockers.
+     * @param combat combat instance
+     * @param blockers blockers to add in addition to creatures already in play
+     */
+    public void assignAdditionalBlockers(final Combat combat, List<Card> blockers) {
+        List<Card> possibleBlockers = ai.getCreaturesInPlay();
+        for (Card c : blockers) {
+            if (!possibleBlockers.contains(c)) {
+                possibleBlockers.add(c);
+            }
         }
-        if (evalAttacker == null) {
-            attackers = sortPotentialAttackers(combat);
-        } else {
-            attackers = new ArrayList<Card>();
-            attackers.add(evalAttacker);
-        }
-
+        attackers = sortPotentialAttackers(combat);
+        assignBlockers(combat, possibleBlockers);
+    }
+    
+    /**
+     * assignBlockersForCombat() with specific and possibly "virtual" attackers. No other creatures, even if
+     * they have already been declared in the combat instance, will be considered.
+     * @param combat combat instance
+     * @param givenAttackers specific attackers to consider
+     */
+    public void assignBlockersGivenAttackers(final Combat combat, List<Card> givenAttackers) {
+        List<Card> possibleBlockers = ai.getCreaturesInPlay();
+        attackers = givenAttackers;
+        assignBlockers(combat, possibleBlockers);
+    }
+    
+    /**
+     * Core blocker assignment algorithm.
+     * @param combat combat instance
+     * @param possibleBlockers list of blockers to be considered
+     */
+    private void assignBlockers(final Combat combat, List<Card> possibleBlockers) {
         if (attackers.isEmpty()) {
             return;
         }

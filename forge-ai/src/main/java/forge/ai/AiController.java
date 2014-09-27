@@ -1202,7 +1202,7 @@ public class AiController {
     public void declareBlockersFor(Player defender, Combat combat) {
         AiBlockController block = new AiBlockController(defender);
         // When player != defender, AI should declare blockers for its benefit.
-        block.assignBlockers(combat);
+        block.assignBlockersForCombat(combat);
     }
     
 

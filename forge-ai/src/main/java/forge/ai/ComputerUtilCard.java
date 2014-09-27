@@ -644,34 +644,45 @@ public class ComputerUtilCard {
     }
     
     /**
-     * Decide if a creature is going to be used as a blocker.
-     * @param ai controller of creature 
-     * @param blocker creature to be evaluated
-     * @return creature will be a blocker
+     * Create a mock combat and returns the list of likely blockers. 
+     * @param ai blocking player
+     * @param blockers list of additional blockers to be considered
+     * @return list of creatures assigned to block in the simulation
      */
-    public static boolean doesSpecifiedCreatureBlock(final Player ai, Card blocker) {
+    public static List<Card> getLikelyBlockers(final Player ai, final List<Card> blockers) {
         AiBlockController aiBlk = new AiBlockController(ai);
-        Combat combat = ai.getGame().getCombat();
-        if (combat == null) {
-            final Player opp = ai.getOpponent();
-            combat = new Combat(opp);
+        final Player opp = ai.getOpponent();
+        Combat combat = new Combat(opp);
+        //Use actual attackers if available, else consider all possible attackers
+        if (ai.getGame().getCombat() == null) {
             for (Card c : opp.getCreaturesInPlay()) {
                 if (CombatUtil.canAttackNextTurn(c, ai)) {
                     combat.addAttacker(c, ai);
                 }
             }
         } else {
-            if (combat.getAllBlockers().contains(blocker)) {
-                return true;
+            for (Card c : ai.getGame().getCombat().getAttackers()) {
+                combat.addAttacker(c, ai);
             }
         }
-        aiBlk.assignBlockers(combat, blocker, null);
-        if (!combat.getAllBlockers().contains(blocker)) {
-            return false;
+        if (blockers == null || blockers.isEmpty()) {
+            aiBlk.assignBlockersForCombat(combat);
         } else {
-            combat.removeFromCombat(blocker);
-            return true;
+            aiBlk.assignAdditionalBlockers(combat, blockers);
         }
+        return combat.getAllBlockers();
+    }
+    
+    /**
+     * Decide if a creature is going to be used as a blocker.
+     * @param ai controller of creature 
+     * @param blocker creature to be evaluated
+     * @return creature will be a blocker
+     */
+    public static boolean doesSpecifiedCreatureBlock(final Player ai, Card blocker) {
+        List<Card> blockers = new ArrayList<Card>();
+        blockers.add(blocker);
+        return getLikelyBlockers(ai, blockers).contains(blocker);
     }
 
     /**
@@ -684,7 +695,9 @@ public class ComputerUtilCard {
         AiBlockController aiBlk = new AiBlockController(ai);
         Combat combat = new Combat(ai);
         combat.addAttacker(attacker, ai);
-        aiBlk.assignBlockers(combat, null, attacker);
+        final List<Card> attackers = new ArrayList<Card>();
+        attackers.add(attacker);
+        aiBlk.assignBlockersGivenAttackers(combat, attackers);
         return ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, combat);
     }
     

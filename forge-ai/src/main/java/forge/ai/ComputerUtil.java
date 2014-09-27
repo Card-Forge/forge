@@ -966,7 +966,7 @@ public class ComputerUtil {
                 }
             }
             AiBlockController aiBlock = new AiBlockController(ai);
-            aiBlock.assignBlockers(combat);
+            aiBlock.assignBlockersForCombat(combat);
             if (!ComputerUtilCombat.lifeInDanger(ai, combat)) {
                 // Otherwise, return false. Do not play now.
                 ret = false;

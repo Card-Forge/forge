@@ -132,7 +132,7 @@ public class DestroyAllAi extends SpellAbilityAi {
                 combat.addAttacker(att, ai);
             }
             AiBlockController block = new AiBlockController(ai);
-            block.assignBlockers(combat);
+            block.assignBlockersForCombat(combat);
 
             if (ComputerUtilCombat.lifeInSeriousDanger(ai, combat)) {
             	return true;
