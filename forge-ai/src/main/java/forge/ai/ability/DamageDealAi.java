@@ -355,7 +355,8 @@ public class DamageDealAi extends DamageAiBase {
                 // TODO: add check here if card is about to die from something
                 // on the stack
                 // or from taking combat damage
-                boolean freePing = isTrigger || sa.getPayCosts() == null || sa.getTargets().getNumTargeted() > 0;
+                boolean freePing = isTrigger || sa.getPayCosts() == null || sa.getTargets().getNumTargeted() > 0
+                		|| ComputerUtil.playImmediately(ai, sa);
 
                 if (phase.is(PhaseType.END_OF_TURN) && sa.isAbility()) {
                     if (phase.getNextTurn().equals(ai))
@@ -366,8 +367,6 @@ public class DamageDealAi extends DamageAiBase {
                     if (sa.getRestrictions().isPwAbility() || source.hasSVar("EndOfTurnLeavePlay"))
                         freePing = true;
                 }
-                
-                freePing |= ComputerUtil.playImmediately(ai, sa);
 
                 if (freePing && sa.canTarget(enemy)) {
                     tcs.add(enemy);
