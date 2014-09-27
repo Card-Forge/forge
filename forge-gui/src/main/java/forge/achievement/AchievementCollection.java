@@ -89,6 +89,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         add(new Overkill(-25, -50, -100, -200));
         add(new LifeToSpare(20, 40, 80, 160));
         add(new Hellbent());
+        add(new ManaScrewed());
         add(new RagsToRiches());
     }
 
