@@ -51,7 +51,7 @@ public class Cost {
     }
 
     public final boolean hasNoManaCost() {
-        return this.getTotalMana().isZero();
+        return this.getCostMana() == null;
     }
 
     public final boolean hasManaCost() {
