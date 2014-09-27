@@ -124,10 +124,10 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public void showImageDialog(final ISkinImage image, final String message, final String title) {
-        new WaitCallback<Void>() {
+        new WaitCallback<Integer>() {
             @Override
             public void run() {
-                FOptionPane.showMessageDialog(message, title, (FImage)image);
+                FOptionPane.showMessageDialog(message, title, (FImage)image, this);
             }
         }.invokeAndWait();
     }

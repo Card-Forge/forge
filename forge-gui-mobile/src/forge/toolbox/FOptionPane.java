@@ -55,6 +55,10 @@ public class FOptionPane extends FDialog {
         showOptionDialog(message, title, icon, new String[] {"OK"}, 0, null);
     }
 
+    public static void showMessageDialog(String message, String title, FImage icon, final Callback<Integer> callback) {
+        showOptionDialog(message, title, icon, new String[] {"OK"}, 0, callback);
+    }
+
     public static void showConfirmDialog(String message, final Callback<Boolean> callback) {
         showConfirmDialog(message, "Forge", callback);
     }
