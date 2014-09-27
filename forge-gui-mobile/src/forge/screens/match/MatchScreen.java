@@ -215,7 +215,14 @@ public class MatchScreen extends FScreen {
                 final Iterable<CardView> blockers = combat.getBlockers(attacker);
                 if (blockers != null) {
                     //connect each blocker with the attacker it's blocking
-                    for (final CardView blocker : combat.getBlockers(attacker)) {
+                    for (final CardView blocker : blockers) {
+                        TargetingOverlay.drawArrow(g, blocker, attacker);
+                    }
+                }
+                final Iterable<CardView> plannedBlockers = combat.getPlannedBlockers(attacker);
+                if (plannedBlockers != null) {
+                    //connect each planned blocker with the attacker it's blocking
+                    for (final CardView blocker : plannedBlockers) {
                         TargetingOverlay.drawArrow(g, blocker, attacker);
                     }
                 }
