@@ -38,9 +38,9 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
 
     public static void updateAll(PlayerControllerHuman controller) {
         //don't update achievements if player cheated during game or if it's not just a single human player
-        /*if (controller.hasCheated() || MatchUtil.getHumanCount() != 1) {
+        if (controller.hasCheated() || MatchUtil.getHumanCount() != 1) {
             return;
-        }*/
+        }
 
         final IGuiBase gui = controller.getGui();
         final Game game = controller.getGame();
