@@ -31,7 +31,7 @@ public class RagsToRiches extends Achievement {
     @Override
     public String getSubTitle() {
         if (best < NO_MULLIGAN) {
-            return "Best: " + best + " card" + (best != 1 ? "s" : "");
+            return "Best: " + best + " Card" + (best != 1 ? "s" : "");
         }
         return null;
     }

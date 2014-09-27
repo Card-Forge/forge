@@ -16901,6 +16901,7 @@ forge-gui/src/main/java/forge/achievement/DraftAchievements.java -text
 forge-gui/src/main/java/forge/achievement/GameWinStreak.java -text
 forge-gui/src/main/java/forge/achievement/Hellbent.java -text
 forge-gui/src/main/java/forge/achievement/LifeToSpare.java -text
+forge-gui/src/main/java/forge/achievement/ManaFlooded.java -text
 forge-gui/src/main/java/forge/achievement/ManaScrewed.java -text
 forge-gui/src/main/java/forge/achievement/MatchWinStreak.java -text
 forge-gui/src/main/java/forge/achievement/NeedForSpeed.java -text

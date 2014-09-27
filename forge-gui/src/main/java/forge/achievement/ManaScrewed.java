@@ -29,7 +29,7 @@ public class ManaScrewed extends Achievement {
     @Override
     public String getSubTitle() {
         if (best < Integer.MAX_VALUE) {
-            return "Best: " + best + " land" + (best != 1 ? "s" : "");
+            return "Best: " + best + " Land" + (best != 1 ? "s" : "");
         }
         return null;
     }
