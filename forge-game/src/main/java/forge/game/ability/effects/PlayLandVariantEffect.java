@@ -93,9 +93,6 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
         runParams.put("Card", source);
         game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, runParams, false);
         game.getStack().unfreezeStack();
-        activator.setNumLandsPlayed(activator.getNumLandsPlayed() + 1);
-
-
+        activator.addLandPlayedThisTurn();
     }
-
 }

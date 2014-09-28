@@ -15,7 +15,7 @@ public class ManaScrewed extends Achievement {
     @Override
     protected int evaluate(Player player, Game game) {
         if (player.getOutcome().hasWon()) {
-            return player.getNumLandsPlayed();
+            return player.getAchievementTracker().landsPlayed;
         }
         return defaultValue; //indicate that player didn't win
     }

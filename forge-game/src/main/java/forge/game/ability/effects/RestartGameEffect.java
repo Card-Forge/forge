@@ -60,20 +60,20 @@ public class RestartGameEffect extends SpellAbilityEffect {
         List<Player> gamePlayers = game.getRegisteredPlayers();
         for (int i = 0; i < gamePlayers.size(); i++) {
             final Player player = gamePlayers.get(i);
-            if( player.hasLost()) continue;
-            
+            if (player.hasLost()) { continue; }
+
             RegisteredPlayer psc = game.getMatch().getPlayers().get(i);
-            
+
             player.setStartingLife(psc.getStartingLife());
             player.setPoisonCounters(0, sa.getHostCard());
-            player.setNumLandsPlayed(0);
+            player.resetLandsPlayedThisTurn();
             player.initVariantsZones(psc);
 
             List<Card> newLibrary = playerLibraries.get(player);
             for (Card c : newLibrary) {
                 action.moveToLibrary(c, 0);
             }
-    
+
             player.shuffle(null);
         }
     

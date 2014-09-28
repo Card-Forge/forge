@@ -783,7 +783,7 @@ public class CardFactoryUtil {
         }
 
         if (value.contains("LandsPlayed")) {
-            return doXMath(player.getNumLandsPlayed(), m, source);
+            return doXMath(player.getLandsPlayedThisTurn(), m, source);
         }
 
         if (value.contains("CardsDrawn")) {
@@ -1129,7 +1129,7 @@ public class CardFactoryUtil {
         }
         
         if (sq[0].contains("YourLandsPlayed")) {
-            return doXMath(cc.getNumLandsPlayed(), m, c);
+            return doXMath(cc.getLandsPlayedThisTurn(), m, c);
         }
 
         // Count$TopOfLibraryCMC

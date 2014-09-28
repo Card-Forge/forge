@@ -108,8 +108,8 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
     /** The prowl. */
     private ArrayList<String> prowl = new ArrayList<String>();
 
-    /** The num lands played. */
-    private int numLandsPlayed = 0;
+    /** The num lands played this turn. */
+    private int landsPlayedThisTurn = 0;
 
     /** The max hand size. */
     private int maxHandSize = 7;
@@ -1886,7 +1886,7 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
             runParams.put("Card", land);
             game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, runParams, false);
             game.getStack().unfreezeStack();
-            this.numLandsPlayed++;
+            addLandPlayedThisTurn();
             return true;
         }
 
@@ -1953,7 +1953,7 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
                 adjMax += Integer.valueOf(k[1]);
             }
         }
-        if (this.numLandsPlayed < adjMax) {
+        if (this.landsPlayedThisTurn < adjMax) {
             return true;
         }
 
@@ -2746,39 +2746,42 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
 
     /**
      * <p>
-     * Getter for the field <code>numLandsPlayed</code>.
+     * Getter for the field <code>landsPlayedThisTurn</code>.
      * </p>
      * 
      * @return a int.
      */
-    public final int getNumLandsPlayed() {
-        return this.numLandsPlayed;
+    public final int getLandsPlayedThisTurn() {
+        return landsPlayedThisTurn;
     }
 
     /**
-     * <p>
-     * Setter for the field <code>numLandsPlayed</code>.
-     * </p>
-     * 
-     * @param n
-     *            a int.
+     * Adds 1 to the number of lands played by this player this turn.
      */
-    public final void setNumLandsPlayed(final int n) {
-        this.numLandsPlayed = n;
+    public final void addLandPlayedThisTurn() {
+        landsPlayedThisTurn++;
+        achievementTracker.landsPlayed++;
+    }
+
+    /**
+     * Resets the number of lands played by this player this turn to 0.
+     */
+    public final void resetLandsPlayedThisTurn() {
+        landsPlayedThisTurn = 0;
     }
 
     /**
      * @return the number of spells cast by this player this turn.
      */
     public final int getSpellsCastThisTurn() {
-        return this.spellsCastThisTurn;
+        return spellsCastThisTurn;
     }
 
     /**
      * Adds 1 to the number of spells cast by this player this turn.
      */
     public final void addSpellCastThisTurn() {
-        this.spellsCastThisTurn++;
+        spellsCastThisTurn++;
         achievementTracker.spellsCast++;
         if (spellsCastThisTurn > achievementTracker.maxStormCount) {
             achievementTracker.maxStormCount = spellsCastThisTurn;
@@ -2789,7 +2792,7 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
      * Resets the number of spells cast by this player this turn to 0.
      */
     public final void resetSpellsCastThisTurn() {
-        this.spellsCastThisTurn = 0;
+        spellsCastThisTurn = 0;
     }
 
     /**
@@ -3075,7 +3078,7 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
         setNumCardsInHandStartedThisTurnWith(this.getCardsIn(ZoneType.Hand).size());
         setAttackedWithCreatureThisTurn(false);
         setActivateLoyaltyAbilityThisTurn(false);
-        setNumLandsPlayed(0);
+        resetLandsPlayedThisTurn();
         clearAssignedDamage();
         resetAttackersDeclaredThisTurn();
     }
