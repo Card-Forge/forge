@@ -133,7 +133,9 @@ public class TargetSelection {
                 //if only one valid target card for triggered ability, auto-target that card
                 //only do this for triggered abilities to prevent auto-targeting when user chooses
                 //to play a spell or activat an ability
-                tgt.addDividedAllocation(validTargets.get(0), tgt.getStillToDivide());
+                if (tgt.isDividedAsYouChoose()) {
+                    tgt.addDividedAllocation(validTargets.get(0), tgt.getStillToDivide());
+                }
                 return ability.getTargets().add(validTargets.get(0));
             }
             final Map<PlayerView, Object> playersWithValidTargets = Maps.newHashMap();
