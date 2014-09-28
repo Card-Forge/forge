@@ -1,8 +1,8 @@
 Name:Gustha's Scepter
 ManaCost:0
 Types:Artifact
-A:AB$ ChangeZone | Cost$ T | ChangeType$ Card | ChangeNum$ 1 | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | RememberChanged$ True | Mandatory$ True | SpellDescription$ Exile a card from your hand face down. You may look at it for as long as it remains exiled.
-S:Mode$ MayLookAt | Affected$ Card.IsRemembered | Player$ You | AffectedZone$ Exile
+A:AB$ ChangeZone | Cost$ T | ChangeType$ Card | ChangeNum$ 1 | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | RememberChanged$ True | Mandatory$ True | SubAbility$ DBMayLookAt | SpellDescription$ Exile a card from your hand face down. You may look at it for as long as it remains exiled.
+SVar:DBMayLookAt:DB$ Pump | Defined$ Remembered | PumpZone$ Exile | KW$ You may look at this card. | Permanent$ True
 A:AB$ ChooseCard | Cost$ T | Defined$ You | Amount$ 1 | Mandatory$ True | AILogic$ AtLeast1 | ChoiceTitle$ Choose a card you own to put into your hand | Choices$ Card.IsRemembered+YouOwn | ChoiceZone$ Exile | SubAbility$ MoveChosen | SpellDescription$ Return a card you own exiled with CARDNAME to your hand.
 SVar:MoveChosen:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ ChosenCard
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget

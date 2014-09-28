@@ -3,6 +3,7 @@ package forge;
 import java.io.File;
 import java.util.Collection;
 import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.Texture;
@@ -153,8 +154,8 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public <T> T showInputDialog(final String message, final String title, final FSkinProp icon, final T initialInput, final T[] inputOptions) {
-        return new WaitCallback<T>() {
+    public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final String[] inputOptions) {
+        return new WaitCallback<String>() {
             @Override
             public void run() {
                 FOptionPane.showInputDialog(message, title, icon == null ? null : FSkin.getImages().get(icon), initialInput, inputOptions, this);

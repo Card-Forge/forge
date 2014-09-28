@@ -33,7 +33,7 @@ public class EndTurnEffect extends SpellAbilityEffect {
 
         // 3) State-based actions are checked. No player gets priority, and no
         // triggered abilities are put onto the stack.
-        game.getAction().checkStateEffects();
+        game.getAction().checkStateEffects(true);
 
         // 4) The current phase and/or step ends. The game skips straight to the
         // cleanup step. The cleanup step happens in its entirety.

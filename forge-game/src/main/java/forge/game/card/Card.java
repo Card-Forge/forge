@@ -210,6 +210,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     private Player controller = null;
     private long controllerTimestamp = 0;
     private TreeMap<Long, Player> tempControllers = new TreeMap<Long, Player>();
+    private final Set<Player> mayLookAt = Sets.newHashSet();
 
     private String originalText = "", text = "";
     private String echoCost = "";
@@ -3256,6 +3257,14 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         this.owner = player;
     }
 
+    public final void setMayLookAt(final Player player, final boolean mayLookAt) {
+        if (mayLookAt) {
+            this.mayLookAt.add(player);
+        } else {
+            this.mayLookAt.remove(player);
+        }
+    }
+
     /**
      * <p>
      * Getter for the field <code>equippedBy</code>.
@@ -4013,7 +4022,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
      * left and right values of a {@link Pair}, respectively. A value of -1
      * means that particular property has not been set.
      */
-    private final Pair<Integer, Integer> getLatestPT() {
+    private final synchronized Pair<Integer, Integer> getLatestPT() {
         // Find latest set power
         long maxPowerTimestamp = -2;
         int latestPower = -1;
@@ -6336,9 +6345,13 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                         final SpellAbility root = sa.getRootAbility();
                         if (root != null && (root.getPaidList("MovedToGrave") != null)
                                 && !root.getPaidList("MovedToGrave").isEmpty()) {
-                            List<Card> list = root.getPaidList("MovedToGrave");
-                            for (Card card : list) {
-                                if (this.getName().equals(card.getName())) {
+                            final List<Card> list = root.getPaidList("MovedToGrave");
+                            for (final Card card : list) {
+                                String name = card.getName();
+                                if (StringUtils.isEmpty(name)) {
+                                    name = card.getPaperCard().getName();
+                                }
+                                if (this.getName().equals(name)) {
                                     return true;
                                 }
                             }
@@ -8933,15 +8946,9 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             return true;
         }
 
-        //one last check to see if card can be shown
-        final Game game = this.getGame();
-        for (Card host : game.getCardsIn(ZoneType.Battlefield)) {
-            final ArrayList<StaticAbility> staticAbilities = host.getStaticAbilities();
-            for (final StaticAbility stAb : staticAbilities) {
-                if (stAb.applyAbility("MayLookAt", this, viewer)) {
-                    return true;
-                }
-            }
+        // special viewing permissions for viewer
+        if (this.mayLookAt.contains(viewer)) {
+            return true;
         }
 
         //if viewer is controlled by another player, also check if card can be shown to that player
@@ -8959,6 +8966,12 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         if (viewer.hasKeyword("CanSeeOpponentsFaceDownCards")) {
             return true;
         }
+
+        // special viewing permissions for viewer
+        if (this.mayLookAt.contains(viewer)) {
+            return true;
+        }
+
         //if viewer is controlled by another player, also check if face can be shown to that player
         if (viewer.isMindSlaved() && canCardFaceBeShownTo(viewer.getMindSlaveMaster())) {
             return true;

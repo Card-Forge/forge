@@ -19,6 +19,7 @@ package forge.game.phase;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
 
 import forge.card.mana.ManaCost;
 import forge.game.*;
@@ -384,7 +385,7 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
                     givePriorityToPlayer = false;
 
                     // Rule 514.3a - state-based actions
-                    game.getAction().checkStateEffects();
+                    game.getAction().checkStateEffects(true);
                     break;
 
                 default:
@@ -1001,16 +1002,18 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
 
                 int loopCount = 0;
                 do {
-                    
+                    final Set<Card> allAffectedCards = Sets.newHashSet();
                     boolean addedAnythingToStack = false;
                     do { 
                         // Rule 704.3  Whenever a player would get priority, the game checks ... for state-based actions,
-                        game.getAction().checkStateEffects();
+                        allAffectedCards.addAll(game.getAction().checkStateEffects(false));
                         if (game.isGameOver())
                             return; // state-based effects check could lead to game over
     
                         addedAnythingToStack = game.getStack().addAllTriggeredAbilitiesToStack();
                     } while(addedAnythingToStack);
+
+                    game.fireEvent(new GameEventCardStatsChanged(allAffectedCards));
 
                     if (playerTurn.hasLost() && pPlayerPriority.equals(playerTurn) && pFirstPriority.equals(playerTurn)) {
                         // If the active player has lost, and they have priority, set the next player to have priority

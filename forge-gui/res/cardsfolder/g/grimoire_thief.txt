@@ -4,7 +4,7 @@ Types:Creature Merfolk Rogue
 PT:2/2
 T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME becomes tapped, exile the top three cards of target opponent's library face down.
 SVar:TrigExile:AB$ Mill | Cost$ 0 | ValidTgts$ Opponent | NumCards$ 3 | Destination$ Exile | ExileFaceDown$ True | RememberMilled$ True
-S:Mode$ MayLookAt | Affected$ Card.IsRemembered | Player$ You | AffectedZone$ Exile | Description$ You may look at cards exiled with CARDNAME.
+S:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayLookAt$ True | Description$ You may look at cards exiled with CARDNAME.
 A:AB$ SetState | Cost$ U Sac<1/CARDNAME> | Defined$ Remembered | Mode$ TurnFace | SubAbility$ DBCounter | SpellDescription$ Turn all cards exiled with CARDNAME face up. Counter all spells with those names.
 SVar:DBCounter:DB$ Counter | AllType$ Spell | AllValid$ Card.sharesNameWith Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

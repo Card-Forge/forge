@@ -3,6 +3,7 @@ package forge.interfaces;
 import java.io.File;
 import java.util.Collection;
 import java.util.List;
+
 import com.google.common.base.Function;
 
 import forge.LobbyPlayer;
@@ -29,7 +30,7 @@ public interface IGuiBase {
     void showImageDialog(ISkinImage image, String message, String title);
     int showOptionDialog(String message, String title, FSkinProp icon, String[] options, int defaultOption);
     int showCardOptionDialog(CardView card, String message, String title, FSkinProp icon, String[] options, int defaultOption);
-    <T> T showInputDialog(String message, String title, FSkinProp icon, T initialInput, T[] inputOptions);
+    String showInputDialog(String message, String title, FSkinProp icon, String initialInput, String[] inputOptions);
     <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display);
     <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode);

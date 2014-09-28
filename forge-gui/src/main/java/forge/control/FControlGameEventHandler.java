@@ -102,7 +102,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         return null;
     }
 
-    public void updateCombat() {
+    private void updateCombat() {
         if (!isMainHandler || combatUpdPlanned.getAndSet(true)) { return; }
 
         FThreads.invokeInEdtNowOrLater(gameView.getGui(), new Runnable() {

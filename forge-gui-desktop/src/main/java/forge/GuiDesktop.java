@@ -10,11 +10,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 import java.util.Collection;
 import java.util.List;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
 
 import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Function;
 
 import forge.assets.FSkinProp;
@@ -145,11 +147,7 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public <T> T showInputDialog(String message, String title, FSkinProp icon, T initialInput, T[] inputOptions) {
-        if (initialInput instanceof GameObject || (inputOptions != null && inputOptions.length > 0 && inputOptions[0] instanceof GameObject)) {
-            System.err.println("Warning: GameObject passed to GUI! Printing stack trace.");
-            Thread.dumpStack();
-        }
+    public String showInputDialog(String message, String title, FSkinProp icon, String initialInput, String[] inputOptions) {
         return FOptionPane.showInputDialog(message, title, icon == null ? null : FSkin.getImage(icon), initialInput, inputOptions);
     }
 

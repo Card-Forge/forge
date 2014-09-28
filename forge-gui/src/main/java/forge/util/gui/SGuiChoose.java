@@ -192,7 +192,7 @@ public class SGuiChoose {
     }
 
     public static <T> List<T> many(final IGuiBase gui, final String title, final String topCaption, int cnt, final List<T> sourceChoices, final CardView referenceCard) {
-        return order(gui, title, topCaption, cnt, cnt, sourceChoices, null, referenceCard, false);
+        return many(gui, title, topCaption, cnt, cnt, sourceChoices, referenceCard);
     }
 
     public static <T> List<T> many(final IGuiBase gui, final String title, final String topCaption, int min, int max, final List<T> sourceChoices, final CardView referenceCard) {

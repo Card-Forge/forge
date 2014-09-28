@@ -594,7 +594,6 @@ forge-game/src/main/java/forge/game/staticability/StaticAbilityCantBeCast.java s
 forge-game/src/main/java/forge/game/staticability/StaticAbilityCantTarget.java -text
 forge-game/src/main/java/forge/game/staticability/StaticAbilityContinuous.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/staticability/StaticAbilityETBTapped.java -text
-forge-game/src/main/java/forge/game/staticability/StaticAbilityMayLookAt.java -text
 forge-game/src/main/java/forge/game/staticability/StaticAbilityPreventDamage.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/staticability/package-info.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/Trigger.java svneol=native#text/plain

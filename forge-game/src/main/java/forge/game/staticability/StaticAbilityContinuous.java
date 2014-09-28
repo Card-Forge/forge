@@ -69,6 +69,7 @@ public class StaticAbilityContinuous {
     public static List<Card> applyContinuousAbility(final StaticAbility stAb, List<Card> affectedCards) {
         final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
+        final Player controller = hostCard.getController();
 
         final StaticEffect se = new StaticEffect(hostCard);
         final ArrayList<Player> affectedPlayers = StaticAbilityContinuous.getAffectedPlayers(stAb);
@@ -109,6 +110,7 @@ public class StaticAbilityContinuous {
         boolean removeCardTypes = false;
         boolean removeSubTypes = false;
         boolean removeCreatureTypes = false;
+        boolean controllerMayLookAt = false;
 
         //Global rules changes
         if (params.containsKey("GlobalRule")) {
@@ -324,6 +326,10 @@ public class StaticAbilityContinuous {
                     }
                 }
             }
+        }
+
+        if (params.containsKey("MayLookAt")) {
+            controllerMayLookAt = true;
         }
 
         if (params.containsKey("IgnoreEffectCost")) {
@@ -550,6 +556,10 @@ public class StaticAbilityContinuous {
                 for (final ReplacementEffect rE : affectedCard.getReplacementEffects()) {
                     rE.setTemporarilySuppressed(true);
                 }
+            }
+
+            if (controllerMayLookAt) {
+                affectedCard.setMayLookAt(controller, true);
             }
         }
         

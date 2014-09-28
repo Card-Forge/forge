@@ -288,10 +288,6 @@ public class StaticAbility extends CardTraitBase {
             return StaticAbilityCantBeCast.applyCantPlayLandAbility(this, card, player);
         }
 
-        if (mode.equals("MayLookAt")) {
-            return StaticAbilityMayLookAt.applyMayLookAtAbility(this, card, player);
-        }
-
         return false;
     }
 

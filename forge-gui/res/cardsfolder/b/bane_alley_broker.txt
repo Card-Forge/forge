@@ -4,7 +4,7 @@ Types:Creature Human Rogue
 PT:0/3
 A:AB$ Draw | Cost$ T | NumCards$ 1 | SubAbility$ DBExile | SpellDescription$ Draw a card, then exile a card from your hand face down.
 SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | ExileFaceDown$ True | Mandatory$ True | RememberChanged$ True
-S:Mode$ MayLookAt | Affected$ Card.IsRemembered | Player$ You | AffectedZone$ Exile | Description$ You may look at cards exiled with CARDNAME.
+S:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayLookAt$ True | Description$ You may look at cards exiled with CARDNAME.
 A:AB$ ChooseCard | Cost$ U B T | Defined$ You | Amount$ 1 | Mandatory$ True | AILogic$ AtLeast1 | ChoiceTitle$ Choose a card to put into your hand | Choices$ Card.IsRemembered | ChoiceZone$ Exile | SubAbility$ MoveChosen | SpellDescription$ Return a card exiled with CARDNAME to its owner's hand.
 SVar:MoveChosen:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ ChosenCard
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget

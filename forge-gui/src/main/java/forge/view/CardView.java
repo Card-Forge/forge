@@ -726,7 +726,23 @@ public class CardView extends GameEntityView {
 
     @Override
     public String toString() {
-        return this.getOriginal().toString();
+        if (StringUtils.isEmpty(this.getOriginal().getName())) {
+            if (this.getId() <= 0) {
+                return "(Unknown card)";
+            } else if (this.hasAltState()) {
+                return "Face-down card (" + this.getAlternate().getName() + ")";
+            }
+        }
+
+        return this.getOriginal().getName() + " (" + this.getId() + ")";
+    }
+
+    public String determineName(final CardStateView state) {
+        if (state == original) {
+            return this.toString();
+        }
+
+        return this.getAlternate().getName() + " (" + this.getId() + ")";
     }
 
     public class CardStateView {
@@ -767,10 +783,7 @@ public class CardView extends GameEntityView {
 
         @Override
         public String toString() {
-            if (StringUtils.isEmpty(this.getName()) && this.getCard().getId() <= 0) {
-                return "(Unknown card)";
-            }
-            return this.getName() + " (" + this.getCard().getId() + ")";
+            return this.getCard().determineName(this);
         }
 
         public CardView getCard() {

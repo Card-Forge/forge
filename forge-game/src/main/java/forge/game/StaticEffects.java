@@ -86,6 +86,7 @@ public class StaticEffects implements IGameStateObject {
         final List<Card> affectedCards = se.getAffectedCards();
         final ArrayList<Player> affectedPlayers = se.getAffectedPlayers();
         final Map<String, String> params = se.getParams();
+        final Player controller = se.getSource().getController();
 
         String changeColorWordsTo = null;
 
@@ -97,6 +98,7 @@ public class StaticEffects implements IGameStateObject {
         boolean setPT = false;
         String[] addHiddenKeywords = null;
         String addColors = null;
+        boolean removeMayLookAt = false;
 
         if (params.containsKey("ChangeColorWordsTo")) {
             changeColorWordsTo = params.get("ChangeColorWordsTo");
@@ -157,6 +159,10 @@ public class StaticEffects implements IGameStateObject {
             } else {
                 addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(colors.split(" & "))));
             }
+        }
+
+        if (params.containsKey("MayLookAt")) {
+            removeMayLookAt = true;
         }
 
         if (params.containsKey("IgnoreEffectCost")) {
@@ -248,6 +254,11 @@ public class StaticEffects implements IGameStateObject {
             if (addColors != null) {
                 affectedCard.removeColor(addColors, affectedCard, !se.isOverwriteColors(),
                         se.getTimestamp(affectedCard));
+            }
+
+            // remove may look at
+            if (removeMayLookAt) {
+                affectedCard.setMayLookAt(controller, false);
             }
         }
         se.clearTimestamps();

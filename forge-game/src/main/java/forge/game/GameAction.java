@@ -809,12 +809,17 @@ public class GameAction {
      * <p>
      * checkStateEffects.
      * </p>
+     * 
+     * @param runEvents
+     *            {@code true} to have this method run
+     *            {@link GameEventCardStatsChanged} events.
+     * @return a set of affected cards.
      */
-    public final void checkStateEffects() {
+    public final Set<Card> checkStateEffects(final boolean runEvents) {
         // sol(10/29) added for Phase updates, state effects shouldn't be
         // checked during Spell Resolution (except when persist-returning
         if (game.getStack().isResolving()) {
-            return;
+            return Collections.emptySet();
         }
 
         // final JFrame frame = Singletons.getView().getFrame();
@@ -823,7 +828,7 @@ public class GameAction {
         // }
 
         if (game.isGameOver()) {
-            return;
+            return Collections.emptySet();
         }
 
         // Max: I don't know where to put this! - but since it's a state based action, it must be in check state effects
@@ -835,8 +840,8 @@ public class GameAction {
         final boolean refreeze = game.getStack().isFrozen();
         game.getStack().setFrozen(true);
 
-        // do this twice, sometimes creatures/permanents will survive when they
-        // shouldn't
+        // do this multiple times, sometimes creatures/permanents will survive
+        // when they shouldn't
         final Set<Card> allAffectedCards = Sets.newHashSet();
         for (int q = 0; q < 9; q++) {
             final Set<Card> affectedCards = this.checkStaticAbilities(false);
@@ -923,18 +928,22 @@ public class GameAction {
             if (!checkAgain) {
                 break; // do not continue the loop
             }
-        } // for q=0;q<2
+        } // for q=0;q<9
 
-        game.fireEvent(new GameEventCardStatsChanged(allAffectedCards));
+        if (runEvents) {
+            game.fireEvent(new GameEventCardStatsChanged(allAffectedCards));
+        }
 
         checkGameOverCondition();
         if (game.getAge() != GameStage.Play)
-            return;
+            return Collections.emptySet();
 
         game.getTriggerHandler().resetActiveTriggers();
         if (!refreeze) {
             game.getStack().unfreezeStack();
         }
+
+        return allAffectedCards;
     } // checkStateEffects()
 
     /**
@@ -1561,7 +1570,7 @@ public class GameAction {
             }
 
             runOpeningHandActions(first);
-            checkStateEffects(); // why?
+            checkStateEffects(true); // why?
 
             // Run Trigger beginning of the game
             final HashMap<String, Object> runParams = new HashMap<String, Object>();

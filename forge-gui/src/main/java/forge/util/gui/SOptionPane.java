@@ -76,7 +76,7 @@ public class SOptionPane {
         return showInputDialog(gui, message, title, icon, initialInput, null);
     }
 
-    public static <T> T showInputDialog(IGuiBase gui, String message, String title, FSkinProp icon, T initialInput, T[] inputOptions) {
+    public static String showInputDialog(IGuiBase gui, String message, String title, FSkinProp icon, String initialInput, String[] inputOptions) {
         return gui.showInputDialog(message, title, icon, initialInput, inputOptions);
     }
 
