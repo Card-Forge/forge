@@ -3,6 +3,7 @@ package forge.ai.ability;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
@@ -776,6 +777,9 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         }
         final long timestamp2 = c.getGame().getNextTimestamp(); //is this necessary or can the timestamp be re-used?
         pumped.addChangedCardKeywords(toCopy, new ArrayList<String>(), false, timestamp2);
+        List<Card> exclude = new ArrayList<Card>();
+        exclude.add(c);
+        ComputerUtilCard.applyStaticContPT(ai.getGame(), pumped, exclude);
         return pumped;
     }
 }

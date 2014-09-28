@@ -520,5 +520,6 @@ public class AnimateAi extends SpellAbilityAi {
                 removedReplacements.add(re);
             }
         }
+        ComputerUtilCard.applyStaticContPT(game, card, null);
     }
 }

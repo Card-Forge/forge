@@ -1107,4 +1107,58 @@ public class ComputerUtilCard {
         }
     }
     
+    /**
+     * Applies static continuous Power/Toughness effects to a (virtual) creature.
+     * @param game game instance to work with 
+     * @param vCard creature to work with
+     * @param exclude list of cards to exclude when considering ability sources, accepts null
+     */
+    public static void applyStaticContPT(final Game game, Card vCard, final List<Card> exclude) {
+        if (!vCard.isCreature()) {
+            return;
+        }
+        final List<Card> list = game.getCardsIn(ZoneType.Battlefield);
+        list.addAll(game.getCardsIn(ZoneType.Command));
+        if (exclude != null) {
+            list.removeAll(exclude);
+        }
+        for (final Card c : list) {
+            for (final StaticAbility stAb : c.getStaticAbilities()) {
+                final Map<String, String> params = stAb.getMapParams();
+                if (!params.get("Mode").equals("Continuous")) {
+                    continue;
+                }
+                if (!params.containsKey("Affected")) {
+                    continue;
+                }
+                final String valid = params.get("Affected");
+                if (!vCard.isValid(valid, c.getController(), c)) {
+                    continue;
+                }
+                if (params.containsKey("AddPower")) {
+                    int att = 0;
+                    if (params.get("AddPower").equals("X")) {
+                        att = CardFactoryUtil.xCount(c, c.getSVar("X"));
+                    } else if (params.get("AddPower").equals("Y")) {
+                        att = CardFactoryUtil.xCount(c, c.getSVar("Y"));
+                    } else {
+                        att = Integer.valueOf(params.get("AddPower"));
+                    }
+                    vCard.addTempAttackBoost(att);
+                }
+                if (params.containsKey("AddToughness")) {
+                    int def = 0;
+                    if (params.get("AddToughness").equals("X")) {
+                        def = CardFactoryUtil.xCount(c, c.getSVar("X"));
+                    } else if (params.get("AddToughness").equals("Y")) {
+                        def = CardFactoryUtil.xCount(c, c.getSVar("Y"));
+                    } else {
+                        def = Integer.valueOf(params.get("AddToughness"));
+                    }
+                    vCard.addTempDefenseBoost(def);
+                }
+            }
+        }
+    }
+    
 }
