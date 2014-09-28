@@ -1,14 +1,10 @@
 package forge.achievement;
 
-import org.w3c.dom.Element;
-
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.util.Lang;
 
 public abstract class ProgressiveAchievement extends Achievement {
-    private int current;
-
     protected ProgressiveAchievement(String key0, String displayName0, String description0, String flavorText0) {
         super(key0, displayName0, description0, flavorText0, 0);
     }
@@ -28,25 +24,13 @@ public abstract class ProgressiveAchievement extends Achievement {
     @Override
     protected final int evaluate(Player player, Game game) {
         if (eval(player, game)) {
-            current++;
+            return getBest() + 1;
         }
-        return current;
+        return getBest();
     }
 
     @Override
     public final String getSubTitle() {
-        return current + " " + (current != 1 ? Lang.getPlural(getNoun()) : getNoun());
-    }
-
-    @Override
-    public void saveToXml(Element el) {
-        super.saveToXml(el);
-        el.setAttribute("current", String.valueOf(current));
-    }
-
-    @Override
-    public void loadFromXml(Element el) {
-        super.loadFromXml(el);
-        current = getIntAttribute(el, "current");
+        return getBest() + " " + (getBest() != 1 ? Lang.getPlural(getNoun()) : getNoun());
     }
 }

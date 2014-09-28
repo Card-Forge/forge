@@ -73,6 +73,9 @@ public abstract class Achievement {
         }
         return image;
     }
+    public int getBest() {
+        return best;
+    }
     public boolean isSpecial() {
         return mythicThreshold == commonThreshold;
     }
