@@ -16,5 +16,8 @@ public class ChallengeAchievements extends AchievementCollection {
 
     @Override
     protected void addAchievements() {
+        add(new NoCreatures());
+        add(new NoSpells());
+        add(new NoLands());
     }
 }

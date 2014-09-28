@@ -16897,6 +16897,7 @@ forge-gui/src/main/java/forge/achievement/ArcaneMaster.java -text
 forge-gui/src/main/java/forge/achievement/Blackjack.java -text
 forge-gui/src/main/java/forge/achievement/ChallengeAchievements.java -text
 forge-gui/src/main/java/forge/achievement/ConstructedAchievements.java -text
+forge-gui/src/main/java/forge/achievement/DeckChallengeAchievement.java -text
 forge-gui/src/main/java/forge/achievement/DeckedOut.java -text
 forge-gui/src/main/java/forge/achievement/DraftAchievements.java -text
 forge-gui/src/main/java/forge/achievement/GameWinStreak.java -text
@@ -16906,6 +16907,9 @@ forge-gui/src/main/java/forge/achievement/ManaFlooded.java -text
 forge-gui/src/main/java/forge/achievement/ManaScrewed.java -text
 forge-gui/src/main/java/forge/achievement/MatchWinStreak.java -text
 forge-gui/src/main/java/forge/achievement/NeedForSpeed.java -text
+forge-gui/src/main/java/forge/achievement/NoCreatures.java -text
+forge-gui/src/main/java/forge/achievement/NoLands.java -text
+forge-gui/src/main/java/forge/achievement/NoSpells.java -text
 forge-gui/src/main/java/forge/achievement/Overkill.java -text
 forge-gui/src/main/java/forge/achievement/PlaneswalkerAchievements.java -text
 forge-gui/src/main/java/forge/achievement/Poisoned.java -text

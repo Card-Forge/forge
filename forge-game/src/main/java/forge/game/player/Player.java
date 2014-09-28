@@ -2978,6 +2978,10 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
         return controllerCreator.getLobbyPlayer();
     }
 
+    public final RegisteredPlayer getRegisteredPlayer() {
+        return game.getMatch().getPlayers().get(game.getPlayers().indexOf(this));
+    }
+
     public final boolean isMindSlaved() {
         return mindSlaveMaster != null;
     }
