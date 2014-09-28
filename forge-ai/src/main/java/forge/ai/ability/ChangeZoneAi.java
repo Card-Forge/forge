@@ -736,7 +736,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     for (Card attacker : attackers) {
                         List<Card> blockers = currCombat.getBlockers(attacker);
                         // Save my attacker by bouncing a blocker
-                        if (attacker.getShield().isEmpty() && ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, currCombat) 
+                        if (attacker.getController().equals(ai) && attacker.getShield().isEmpty() 
+                        		&& ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, currCombat) 
                                 && !currCombat.getBlockers(attacker).isEmpty()) {
                             ComputerUtilCard.sortByEvaluateCreature(blockers);
                             Combat combat = new Combat(ai);
@@ -755,9 +756,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
                             }
                         }
                         // Save my blocker by bouncing the attacker (cannot handle blocking multiple attackers)
-                        if (!attacker.getController().equals(ai) && !blockers.isEmpty()) {
+                        if (attacker.getController().isOpponentOf(ai) && !blockers.isEmpty()) {
                             for (Card blocker : blockers) {
-                                if (ComputerUtilCombat.blockerWouldBeDestroyed(ai, blocker, currCombat)) {
+                                if (ComputerUtilCombat.blockerWouldBeDestroyed(ai, blocker, currCombat) && sa.canTarget(attacker)) {
                                     sa.getTargets().add(attacker);
                                     return true;
                                 }
@@ -896,7 +897,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         // Only care about combatants during combat
         if (ai.getGame().getPhaseHandler().inCombat()) {
-            CardLists.getValidCards(list, "Card.attacking,Card.blocking", null, null);
+            list = CardLists.getValidCards(list, "Card.attacking,Card.blocking", null, null);
         }
 
         if (list.isEmpty()) {
