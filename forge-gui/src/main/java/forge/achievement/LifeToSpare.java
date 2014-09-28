@@ -5,7 +5,7 @@ import forge.game.player.Player;
 
 public class LifeToSpare extends Achievement {
     public LifeToSpare(int bronze0, int silver0, int gold0, int mythic0) {
-        super("LifeToSpare", "Life to Spare", "Win a game with",
+        super("LifeToSpare", "Life to Spare", "Win a game with", 0,
             String.format("%d life more than you started with", bronze0), bronze0,
             String.format("%d life more than you started with", silver0), silver0,
             String.format("%d life more than you started with", gold0), gold0,
@@ -24,10 +24,11 @@ public class LifeToSpare extends Achievement {
     }
 
     @Override
-    public String getSubTitle() {
-        if (best > 0) {
-            return "Best: " + best + " Life";
-        }
-        return null;
+    protected String getNoun() {
+        return "Life";
+    }
+    @Override
+    protected boolean pluralizeNoun() {
+        return false;
     }
 }

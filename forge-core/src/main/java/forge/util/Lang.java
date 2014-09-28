@@ -84,7 +84,7 @@ public class Lang {
     }
 
     public static String getPlural(String noun) {
-        return noun + (noun.endsWith("s") || noun.endsWith("x") ? "es" : "s");
+        return noun + (noun.endsWith("s") || noun.endsWith("x") || noun.endsWith("ch") ? "es" : "s");
     }
 
     public static <T> String nounWithAmount(int cnt, String noun) {

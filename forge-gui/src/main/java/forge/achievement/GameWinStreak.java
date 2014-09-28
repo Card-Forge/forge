@@ -3,7 +3,7 @@ package forge.achievement;
 import forge.game.Game;
 import forge.game.player.Player;
 
-public class GameWinStreak extends Achievement {
+public class GameWinStreak extends StreakAchievement {
     public GameWinStreak(int bronze0, int silver0, int gold0, int mythic0) {
         super("GameWinStreak", "Game Win Streak", null,
             String.format("Win %d games in a row", bronze0), bronze0,
@@ -13,15 +13,7 @@ public class GameWinStreak extends Achievement {
     }
 
     @Override
-    protected int evaluate(Player player, Game game) {
-        if (player.getOutcome().hasWon()) {
-            return current + 1;
-        }
-        return 0; //reset if player didn't win
-    }
-
-    @Override
-    public String getSubTitle() {
-        return "Best: " + best + " Active: " + current;
+    protected Boolean eval(Player player, Game game) {
+        return player.getOutcome().hasWon();
     }
 }

@@ -8,7 +8,7 @@ public class Blackjack extends Achievement {
     private static final int THRESHOLD = 21;
 
     public Blackjack(int silver0, int gold0, int mythic0) {
-        super("Blackjack", "Blackjack", "Win a game from your commander dealing",
+        super("Blackjack", "Blackjack", "Win a game from your commander dealing", 0,
             String.format("%d combat damage", THRESHOLD), THRESHOLD,
             String.format("%d combat damage", silver0), silver0,
             String.format("%d combat damage", gold0), gold0,
@@ -31,10 +31,12 @@ public class Blackjack extends Achievement {
     }
 
     @Override
-    public String getSubTitle() {
-        if (best > 0) {
-            return "Best: " + best + " Damage";
-        }
-        return null;
+    public String getNoun() {
+        return "Damage";
+    }
+
+    @Override
+    protected boolean pluralizeNoun() {
+        return false;
     }
 }

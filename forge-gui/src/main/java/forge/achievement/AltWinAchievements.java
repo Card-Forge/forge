@@ -71,14 +71,14 @@ public class AltWinAchievements extends AchievementCollection {
         }
     }
 
-    private class AltWinAchievement extends Achievement {
+    private class AltWinAchievement extends ProgressiveAchievement {
         private AltWinAchievement(String cardName0, String displayName0, String flavorText0) {
             super(cardName0, displayName0, "Win a game with " + cardName0, flavorText0);
         }
 
         @Override
-        protected int evaluate(Player player, Game game) {
-            return current + 1; //if this reaches this point, it can be presumed that alternate win condition achieved
+        protected boolean eval(Player player, Game game) {
+            return true; //if this reaches this point, it can be presumed that alternate win condition achieved
         }
 
         @Override
@@ -87,8 +87,8 @@ public class AltWinAchievements extends AchievementCollection {
         }
 
         @Override
-        public String getSubTitle() {
-            return current + " Win" + (current != 1 ? "s" : "");
+        public String getNoun() {
+            return "Win";
         }
     }
 }

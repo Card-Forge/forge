@@ -5,17 +5,11 @@ import forge.game.player.Player;
 
 public class ManaScrewed extends Achievement {
     public ManaScrewed() {
-        super("ManaScrewed", "Mana Screwed", "Win a game despite playing only",
+        super("ManaScrewed", "Mana Screwed", "Win a game despite playing only", Integer.MAX_VALUE,
             "3 lands", 3,
             "2 lands", 2,
             "1 land", 1,
             "0 lands", 0);
-        best = Integer.MAX_VALUE; //initialize best to max value so any amount is smaller
-    }
-
-    @Override
-    public boolean needSave() {
-        return best < Integer.MAX_VALUE;
     }
 
     @Override
@@ -23,14 +17,11 @@ public class ManaScrewed extends Achievement {
         if (player.getOutcome().hasWon()) {
             return player.getNumLandsPlayed();
         }
-        return Integer.MAX_VALUE; //indicate that player didn't win
+        return defaultValue; //indicate that player didn't win
     }
 
     @Override
-    public String getSubTitle() {
-        if (best < Integer.MAX_VALUE) {
-            return "Best: " + best + " Land" + (best != 1 ? "s" : "");
-        }
-        return null;
+    protected String getNoun() {
+        return "Land";
     }
 }

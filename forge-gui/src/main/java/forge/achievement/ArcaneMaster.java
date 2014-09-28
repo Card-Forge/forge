@@ -5,17 +5,11 @@ import forge.game.player.Player;
 
 public class ArcaneMaster extends Achievement {
     public ArcaneMaster() {
-        super("ArcaneMaster", "Arcane Master", "Win a game without casting",
+        super("ArcaneMaster", "Arcane Master", "Win a game without casting", Integer.MAX_VALUE,
             "more than 3 spells", 3,
             "more than 2 spells", 2,
             "more than 1 spell", 1,
             "any spells", 0);
-        best = Integer.MAX_VALUE; //initialize best to max value so any amount is smaller
-    }
-
-    @Override
-    public boolean needSave() {
-        return best < Integer.MAX_VALUE;
     }
 
     @Override
@@ -23,14 +17,11 @@ public class ArcaneMaster extends Achievement {
         if (player.getOutcome().hasWon()) {
             return player.getAchievementTracker().spellsCast;
         }
-        return Integer.MAX_VALUE; //indicate that player didn't win
+        return defaultValue; //indicate that player didn't win
     }
 
     @Override
-    public String getSubTitle() {
-        if (best < Integer.MAX_VALUE) {
-            return "Best: " + best + " Spell" + (best != 1 ? "s" : "");
-        }
-        return null;
+    protected String getNoun() {
+        return "Spell";
     }
 }

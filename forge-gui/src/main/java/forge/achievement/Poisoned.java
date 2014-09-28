@@ -8,7 +8,7 @@ public class Poisoned extends Achievement {
     private static final int THRESHOLD = 10;
 
     public Poisoned(int silver0, int gold0, int mythic0) {
-        super("Poisoned", "Poisoned", "Win a game by giving opponent",
+        super("Poisoned", "Poisoned", "Win a game by giving opponent", 0,
             String.format("%d poison counters", THRESHOLD), THRESHOLD,
             String.format("%d poison counters", silver0), silver0,
             String.format("%d poison counters", gold0), gold0,
@@ -27,10 +27,7 @@ public class Poisoned extends Achievement {
     }
 
     @Override
-    public String getSubTitle() {
-        if (best > 0) {
-            return "Best: " + best + " Counters";
-        }
-        return null;
+    protected String getNoun() {
+        return "Counter";
     }
 }

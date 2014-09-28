@@ -5,17 +5,11 @@ import forge.game.player.Player;
 
 public class NeedForSpeed extends Achievement {
     public NeedForSpeed(int bronze0, int silver0, int gold0, int mythic0) {
-        super("NeedForSpeed", "Need for Speed", null,
+        super("NeedForSpeed", "Need for Speed", null, Integer.MAX_VALUE,
             String.format("Win a game by turn %d", bronze0), bronze0,
             String.format("Win a game by turn %d", silver0), silver0,
             String.format("Win a game by turn %d", gold0), gold0,
             String.format("Win a game by turn %d", mythic0), mythic0);
-        best = Integer.MAX_VALUE; //initialize best to max value so any
-    }
-
-    @Override
-    public boolean needSave() {
-        return best < Integer.MAX_VALUE;
     }
 
     @Override
@@ -23,14 +17,16 @@ public class NeedForSpeed extends Achievement {
         if (player.getOutcome().hasWon()) {
             return player.getTurn();
         }
-        return Integer.MAX_VALUE; //indicate that player didn't win
+        return defaultValue; //indicate that player didn't win
     }
 
     @Override
-    public String getSubTitle() {
-        if (best < Integer.MAX_VALUE) {
-            return "Best: Turn " + best;
-        }
-        return null;
+    protected String getNoun() {
+        return "Turn";
+    }
+
+    @Override
+    protected boolean displayNounBefore() {
+        return true;
     }
 }

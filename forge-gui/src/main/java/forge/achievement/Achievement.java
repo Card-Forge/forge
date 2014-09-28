@@ -10,20 +10,22 @@ import forge.game.player.Player;
 import forge.interfaces.IGuiBase;
 import forge.item.IPaperCard;
 import forge.properties.ForgeConstants;
+import forge.util.Lang;
 
 public abstract class Achievement {
     private final String key, displayName, sharedDesc, commonDesc, uncommonDesc, rareDesc, mythicDesc;
     private final int commonThreshold, uncommonThreshold, rareThreshold, mythicThreshold;
     private final boolean checkGreaterThan;
+    protected final int defaultValue;
     private ISkinImage image;
-    protected int best, current;
+    private int best;
 
     //use this constructor for special achievements without tiers
-    protected Achievement(String key0, String displayName0, String description0, String flavorText0) {
-        this(key0, displayName0, description0, null, 1, null, 1, null, 1, "(" + flavorText0 + ")", 1); //pass flavor text as mythic description so it appears below description faded out
+    protected Achievement(String key0, String displayName0, String description0, String flavorText0, int defaultValue0) {
+        this(key0, displayName0, description0, defaultValue0, null, 1, null, 1, null, 1, "(" + flavorText0 + ")", 1); //pass flavor text as mythic description so it appears below description faded out
     }
     //use this constructor for regular tiered achievements
-    protected Achievement(String key0, String displayName0, String sharedDesc0,
+    protected Achievement(String key0, String displayName0, String sharedDesc0, int defaultValue0,
             String commonDesc0, int commonThreshold0,
             String uncommonDesc0, int uncommonThreshold0,
             String rareDesc0, int rareThreshold0,
@@ -40,6 +42,8 @@ public abstract class Achievement {
         mythicDesc = mythicDesc0;
         mythicThreshold = mythicThreshold0;
         checkGreaterThan = rareThreshold0 >= uncommonThreshold0;
+        best = defaultValue0;
+        defaultValue = defaultValue0;
     }
 
     public String getKey() {
@@ -125,11 +129,9 @@ public abstract class Achievement {
         }
         else if (earnedUncommon()) {
             background = FSkinProp.IMG_UNCOMMON_TROPHY;
-            //0.8f; //TODO: fade out slightly until rare earned
         }
         else if (earnedCommon()) {
             background = FSkinProp.IMG_COMMON_TROPHY;
-            //0.6f; //TODO: fade out a bit more until uncommon earned
         }
         else {
             opacity = 0.25f; //fade out if achievement hasn't been earned yet
@@ -143,12 +145,12 @@ public abstract class Achievement {
         image = GuiBase.getInterface().createLayeredImage(background, ForgeConstants.CACHE_ACHIEVEMENTS_DIR + "/" + key + ".png", opacity);
     }
 
-    public void update(IGuiBase gui, Player player) {
-        current = evaluate(player, player.getGame());
+    public int update(IGuiBase gui, Player player) {
+        int value = evaluate(player, player.getGame());
         if (checkGreaterThan) {
-            if (current <= best) { return; }
+            if (value <= best) { return value; }
         }
-        else if (current >= best) { return; }
+        else if (value >= best) { return value; }
 
         boolean hadEarnedSpecial = earnedSpecial();
         boolean hadEarnedMythic = earnedMythic();
@@ -156,14 +158,14 @@ public abstract class Achievement {
         boolean hadEarnedUncommon = earnedUncommon();
         boolean hadEarnedCommon = earnedCommon();
 
-        best = current;
+        best = value;
 
         if (earnedSpecial()) {
             if (!hadEarnedSpecial) {
                 updateTrophyImage();
                 gui.showImageDialog(image, displayName + "\n" + sharedDesc + "\n" + mythicDesc, "Achievement Earned");
             }
-            return;
+            return value;
         }
 
         String type = null;
@@ -199,23 +201,22 @@ public abstract class Achievement {
             }
             gui.showImageDialog(image, displayName + " (" + type + ")\n" + desc, "Achievement Earned");
         }
+        return value;
     }
 
-    public boolean needSave() {
-        return best != 0 || current != 0;
+    public final boolean needSave() {
+        return best != defaultValue;
     }
 
     public void saveToXml(Element el) {
         el.setAttribute("best", String.valueOf(best));
-        el.setAttribute("current", String.valueOf(current));
     }
 
     public void loadFromXml(Element el) {
         best = getIntAttribute(el, "best");
-        current = getIntAttribute(el, "current");
     }
 
-    private int getIntAttribute(Element el, String name) {
+    protected int getIntAttribute(Element el, String name) {
         String value = el.getAttribute(name);
         if (value.length() > 0) {
             try {
@@ -226,5 +227,22 @@ public abstract class Achievement {
         return 0;
     }
 
-    public abstract String getSubTitle();
+    protected abstract String getNoun();
+
+    protected boolean pluralizeNoun() {
+        return best != 1;
+    }
+    protected boolean displayNounBefore() {
+        return false;
+    }
+
+    public String getSubTitle() {
+        if (best != defaultValue) {
+            if (displayNounBefore()) {
+                return "Best: " + getNoun() + " " + best;
+            }
+            return "Best: " + best + " " + (pluralizeNoun() ? Lang.getPlural(getNoun()) : getNoun());
+        }
+        return null;
+    }
 }

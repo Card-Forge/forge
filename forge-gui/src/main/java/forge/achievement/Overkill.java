@@ -1,13 +1,11 @@
 package forge.achievement;
 
-import org.w3c.dom.Element;
-
 import forge.game.Game;
 import forge.game.player.Player;
 
 public class Overkill extends Achievement {
     public Overkill(int bronze0, int silver0, int gold0, int mythic0) {
-        super("Overkill", "Overkill", "Win a game with opponent at",
+        super("Overkill", "Overkill", "Win a game with opponent at", 0,
             String.format("%d life", bronze0), bronze0,
             String.format("%d life", silver0), silver0,
             String.format("%d life", gold0), gold0,
@@ -26,23 +24,11 @@ public class Overkill extends Achievement {
     }
 
     @Override
-    public String getSubTitle() {
-        if (best < 0) {
-            return "Best: " + best + " Life";
-        }
-        return null;
+    protected String getNoun() {
+        return "Life";
     }
-
     @Override
-    public void loadFromXml(Element el) {
-        super.loadFromXml(el);
-
-        //perform conversion to handle data from old format before supporting negative thresholds
-        if (best > 0) {
-            best = -best;
-        }
-        if (current > 0) {
-            current = -current;
-        }
+    protected boolean pluralizeNoun() {
+        return false;
     }
 }

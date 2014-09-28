@@ -3,7 +3,7 @@ package forge.achievement;
 import forge.game.Game;
 import forge.game.player.Player;
 
-public class TotalMatchWins extends Achievement {
+public class TotalMatchWins extends ProgressiveAchievement {
     public TotalMatchWins(int bronze0, int silver0, int gold0, int mythic0) {
         super("TotalMatchWins", "Total Match Wins", null,
             String.format("Win %d matches", bronze0), bronze0,
@@ -13,17 +13,12 @@ public class TotalMatchWins extends Achievement {
     }
 
     @Override
-    protected int evaluate(Player player, Game game) {
-        if (game.getMatch().isMatchOver()) {
-            if (game.getMatch().isWonBy(player.getLobbyPlayer())) {
-                return current + 1;
-            }
-        }
-        return current;
+    protected boolean eval(Player player, Game game) {
+        return game.getMatch().isMatchOver() && game.getMatch().isWonBy(player.getLobbyPlayer());
     }
 
     @Override
-    public String getSubTitle() {
-        return Integer.toString(current);
+    protected String getNoun() {
+        return "Match";
     }
 }

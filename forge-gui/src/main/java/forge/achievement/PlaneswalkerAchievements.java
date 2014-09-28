@@ -96,14 +96,14 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         }
     }
 
-    private class PlaneswalkerUltimate extends Achievement {
+    private class PlaneswalkerUltimate extends ProgressiveAchievement {
         private PlaneswalkerUltimate(String cardName0, String displayName0, String flavorText0) {
             super(cardName0, displayName0, "Win a game after activating " + cardName0 + "'s ultimate", flavorText0);
         }
 
         @Override
-        protected int evaluate(Player player, Game game) {
-            return current + 1; //if this reaches this point, it can be presumed that alternate win condition achieved
+        protected boolean eval(Player player, Game game) {
+            return true; //if this reaches this point, it can be presumed that alternate win condition achieved
         }
 
         @Override
@@ -112,8 +112,8 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         }
 
         @Override
-        public String getSubTitle() {
-            return current + " Win" + (current != 1 ? "s" : "");
+        protected String getNoun() {
+            return "Win";
         }
     }
 }

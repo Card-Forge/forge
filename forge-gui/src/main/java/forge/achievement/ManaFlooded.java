@@ -7,7 +7,7 @@ import forge.game.zone.ZoneType;
 
 public class ManaFlooded extends Achievement {
     public ManaFlooded(int bronze0, int silver0, int gold0, int mythic0) {
-        super("ManaFlooded", "Mana Flooded", "Win a game with at least",
+        super("ManaFlooded", "Mana Flooded", "Win a game with at least", 0,
             String.format("%d lands on the battlefield", bronze0), bronze0,
             String.format("%d lands on the battlefield", silver0), silver0,
             String.format("%d lands on the battlefield", gold0), gold0,
@@ -29,10 +29,7 @@ public class ManaFlooded extends Achievement {
     }
 
     @Override
-    public String getSubTitle() {
-        if (best > 0) {
-            return "Best: " + best + " Land" + (best != 1 ? "s" : "");
-        }
-        return null;
+    protected String getNoun() {
+        return "Land";
     }
 }

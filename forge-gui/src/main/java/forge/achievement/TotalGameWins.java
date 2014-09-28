@@ -3,7 +3,7 @@ package forge.achievement;
 import forge.game.Game;
 import forge.game.player.Player;
 
-public class TotalGameWins extends Achievement {
+public class TotalGameWins extends ProgressiveAchievement {
     public TotalGameWins(int bronze0, int silver0, int gold0, int mythic0) {
         super("TotalGameWins", "Total Game Wins", null,
             String.format("Win %d games", bronze0), bronze0,
@@ -13,15 +13,12 @@ public class TotalGameWins extends Achievement {
     }
 
     @Override
-    protected int evaluate(Player player, Game game) {
-        if (player.getOutcome().hasWon()) {
-            return current + 1;
-        }
-        return current;
+    protected boolean eval(Player player, Game game) {
+        return player.getOutcome().hasWon();
     }
 
     @Override
-    public String getSubTitle() {
-        return Integer.toString(current);
+    protected String getNoun() {
+        return "Game";
     }
 }
