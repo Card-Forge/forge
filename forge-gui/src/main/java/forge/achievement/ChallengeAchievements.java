@@ -19,5 +19,6 @@ public class ChallengeAchievements extends AchievementCollection {
         add(new NoCreatures());
         add(new NoSpells());
         add(new NoLands());
+        add(new Domain());
     }
 }
