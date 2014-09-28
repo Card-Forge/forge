@@ -246,6 +246,7 @@ public class InputAttack extends InputSyncronizedBase {
 
     private boolean canUndeclareAttacker(Card card) {
         return !card.hasKeyword("CARDNAME attacks each turn if able.") &&
+               !card.hasKeyword("CARDNAME attacks each combat if able.") &&
                !card.hasStartOfKeyword("CARDNAME attacks specific player each combat if able") &&
                card.getController().getMustAttackEntity() == null;
     }
