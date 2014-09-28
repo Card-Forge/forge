@@ -219,6 +219,9 @@ public abstract class VCardDisplayArea extends VDisplayArea {
             if (nextPanelInStack == null && attachedToPanel == null) {
                 return CardStackPosition.Top;
             }
+            if (isTapped()) {
+                return CardStackPosition.Top; //ensure P/T not hidden for tapped cards
+            }
             return CardStackPosition.BehindHorz;
         }
 
