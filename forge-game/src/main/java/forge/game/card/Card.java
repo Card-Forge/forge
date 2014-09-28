@@ -243,7 +243,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     // Zone-changing spells should store card's zone here
     private Zone currentZone = null;
 
-	private int countersAdded = 0;
+    private int countersAdded = 0;
 
     // Enumeration for CMC request types
     public enum SplitCMCMode {
@@ -258,7 +258,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
      * @param id the unique id of the new card.
      */
     public Card(final int id) {
-    	this(id, null);
+        this(id, null);
     }
 
     /**
@@ -1205,11 +1205,11 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         }
         if (this.canReceiveCounters(counterType)) {
             if (counterType == CounterType.DREAM && this.hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
-            	addAmount = Math.min(7 - this.getCounters(CounterType.DREAM), addAmount);
+                addAmount = Math.min(7 - this.getCounters(CounterType.DREAM), addAmount);
             }
         }
         else {
-        	addAmount = 0;
+            addAmount = 0;
         }
 
         if (addAmount == 0) {
@@ -2239,7 +2239,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                     positive = !part.startsWith("without");
                     postponedAdjectives.add(Pair.of(positive, part.substring(positive ? 4 : 7)));
                 } else if (part.startsWith("powerLEX")) {// Kraken of the Straits
-                	postponedAdjectives.add(Pair.of(true, "power less than the number of islands you control"));
+                    postponedAdjectives.add(Pair.of(true, "power less than the number of islands you control"));
                 } else if (part.startsWith("power")) {
                     int kwLength = 5;
                     String opName = Expressions.operatorName(part.substring(kwLength, kwLength + 2));
@@ -2412,11 +2412,11 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     private StringBuilder abilityTextInstantSorcery() {
         final String s = this.getSpellText();
         final StringBuilder sb = new StringBuilder();
-		
+        
 
         // Give spellText line breaks for easier reading
         sb.append(s.replaceAll("\\\\r\\\\n", "\r\n"));
-		
+        
         // NOTE:
         if (sb.toString().contains(" (NOTE: ")) {
             sb.insert(sb.indexOf("(NOTE: "), "\r\n");
@@ -2428,7 +2428,6 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         // I think SpellAbilities should be displayed after Keywords
         // Add SpellAbilities
         for (final SpellAbility element : this.getSpellAbilities()) {
-
             String elementText = element.toString();
 
             //Determine if a card has multiple choices, then format it in an easier to read list.
@@ -2441,7 +2440,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 sb.append(chooseText);
 
                 if (choices != null) {
-                    sb.append("&#151;\r\n");
+                    sb.append(" &#151;\r\n");
                     for (int i = 0; i < choices.length; i++) {
                         String choice = choices[i].trim();
 
@@ -2449,7 +2448,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                             choice = choice.substring(3);
                         }
 
-                        sb.append("&#32;&#32;&#32;&#32;&#149; ").append(Character.toUpperCase(choice.charAt(0)))
+                        sb.append("&#149; ").append(Character.toUpperCase(choice.charAt(0)))
                                 .append(choice.substring(1));
                         if (i < choices.length - 1) {
                             sb.append(".");
@@ -2498,8 +2497,8 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             else if ((keyword.startsWith("Madness") && !sb.toString().contains("Madness"))
                     || (keyword.startsWith("Recover") && !sb.toString().contains("Recover"))
                     || (keyword.startsWith("Miracle") && !sb.toString().contains("Miracle"))) {
-            	String[] parts = keyword.split(":");
-            	sb.append(parts[0] + " " + ManaCostParser.parse(parts[1])).append("\r\n");
+                String[] parts = keyword.split(":");
+                sb.append(parts[0] + " " + ManaCostParser.parse(parts[1])).append("\r\n");
             }
             else if (keyword.equals("CARDNAME can't be countered.")
                     || keyword.startsWith("May be played") || keyword.startsWith("Conspire")
@@ -2684,12 +2683,12 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
      * @see SpellAbility#isSpell()
      */
     public final SpellAbility getFirstAttachSpell() {
-    	for (final SpellAbility sa : this.getSpells()) {
-    		if (sa.isSpell() && sa.getApi() == ApiType.Attach) {
-    			return sa;
-    		}
-    	}
-    	return null;
+        for (final SpellAbility sa : this.getSpells()) {
+            if (sa.isSpell() && sa.getApi() == ApiType.Attach) {
+                return sa;
+            }
+        }
+        return null;
     }
 
     /**
@@ -2847,9 +2846,9 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
      * </p>
      */
     public final void subtractShield(CardShields shield) {
-    	if (shield != null && shield.hasTrigger()) {
-    		this.getGame().getStack().addSimultaneousStackEntry(shield.getTriggerSA());
-    	}
+        if (shield != null && shield.hasTrigger()) {
+            this.getGame().getStack().addSimultaneousStackEntry(shield.getTriggerSA());
+        }
         this.nShield.remove(shield);
     }
 
@@ -6472,17 +6471,17 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 final String restriction = property.split("sharesTypeWith ")[1];
                 final Card checkCard;
                 if (restriction.startsWith("Triggered")) {
-                	final Object triggeringObject = source.getTriggeringObject(restriction.substring("Triggered".length()));
-                	if (!(triggeringObject instanceof Card)) {
-                		return false;
-                	}
-                	checkCard = (Card) triggeringObject;
+                    final Object triggeringObject = source.getTriggeringObject(restriction.substring("Triggered".length()));
+                    if (!(triggeringObject instanceof Card)) {
+                        return false;
+                    }
+                    checkCard = (Card) triggeringObject;
                 } else {
-                	return false;
+                    return false;
                 }
 
                 if (!this.sharesTypeWith(checkCard)) {
-                	return false;
+                    return false;
                 }
             }
         } else if (property.startsWith("hasKeyword")) {
@@ -6528,7 +6527,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 return false;
             }
         } else if (property.startsWith("hasLevelUp")) {
-        	for (final SpellAbility sa : this.getSpellAbilities()) {
+            for (final SpellAbility sa : this.getSpellAbilities()) {
                 if (sa.getApi() == ApiType.PutCounter && sa.hasParam("LevelUp")) {
                     return true;
                 }
@@ -6633,14 +6632,14 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 return false;
             }
         } else if (property.startsWith("greatestPower")) {
-        	List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             if (property.contains("ControlledBy")) {
-            	List<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], null);
-            	list = CardLists.filterControlledBy(list, p);
-        		if (!list.contains(this)) {
-        			return false;
-        		}
-        	}
+                List<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], null);
+                list = CardLists.filterControlledBy(list, p);
+                if (!list.contains(this)) {
+                    return false;
+                }
+            }
             for (final Card crd : list) {
                 if (crd.getNetAttack() > this.getNetAttack()) {
                     return false;
@@ -6670,12 +6669,12 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         } else if (property.startsWith("greatestCMC")) {
             List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             if (property.contains("ControlledBy")) {
-            	List<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], null);
-            	list = CardLists.filterControlledBy(list, p);
-        		if (!list.contains(this)) {
-        			return false;
-        		}
-        	}
+                List<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], null);
+                list = CardLists.filterControlledBy(list, p);
+                if (!list.contains(this)) {
+                    return false;
+                }
+            }
             for (final Card crd : list) {
                 if (crd.isSplitCard()) {
                     if (crd.getCMC(Card.SplitCMCMode.LeftSplitCMC) > this.getCMC() || crd.getCMC(Card.SplitCMCMode.RightSplitCMC) > this.getCMC()) {
@@ -7458,12 +7457,12 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
      * turn.
      */
     public final boolean hasDealtDamageToOpponentThisTurn() {
-    	for (final Player p : this.getDamageHistory().getThisTurnDamaged()) {
-    		if (this.getController().isOpponentOf(p)) {
-    			return true;
-    		}
-    	}
-    	return false;
+        for (final Player p : this.getDamageHistory().getThisTurnDamaged()) {
+            if (this.getController().isOpponentOf(p)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // this is the minimal damage a trampling creature has to assign to a blocker
@@ -9026,7 +9025,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             return false;
         }
         if (isPhasedOut()) {
-        	return false;
+            return false;
         }
         if (source != null && getController().isOpponentOf(source.getActivatingPlayer())
                 && getController().hasKeyword("Spells and abilities your opponents control can't cause you to sacrifice permanents.")) {
@@ -9120,7 +9119,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 abilities.remove(i);
             }
             else if (!sa.isPossible()) {
-            	abilities.remove(i);
+                abilities.remove(i);
             }
         }
 
@@ -9156,10 +9155,10 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
 
     public IPaperCard getPaperCard() {
-    	IPaperCard cp = this.paperCard;
-    	if (cp != null) {
-    		return cp;
-    	}
+        IPaperCard cp = this.paperCard;
+        if (cp != null) {
+            return cp;
+        }
 
         final String name = getName();
         final String set = getCurSetCode();
