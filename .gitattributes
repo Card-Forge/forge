@@ -16895,6 +16895,7 @@ forge-gui/src/main/java/forge/achievement/AchievementCollection.java -text
 forge-gui/src/main/java/forge/achievement/AltWinAchievements.java -text
 forge-gui/src/main/java/forge/achievement/ArcaneMaster.java -text
 forge-gui/src/main/java/forge/achievement/Blackjack.java -text
+forge-gui/src/main/java/forge/achievement/ChallengeAchievements.java -text
 forge-gui/src/main/java/forge/achievement/ConstructedAchievements.java -text
 forge-gui/src/main/java/forge/achievement/DeckedOut.java -text
 forge-gui/src/main/java/forge/achievement/DraftAchievements.java -text

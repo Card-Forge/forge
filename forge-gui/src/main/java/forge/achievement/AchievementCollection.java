@@ -53,6 +53,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
                 FModel.getAchievements(game.getRules().getGameType()).updateAll(gui, player);
                 AltWinAchievements.instance.updateAll(gui, player);
                 PlaneswalkerAchievements.instance.updateAll(gui, player);
+                ChallengeAchievements.instance.updateAll(gui, player);
             }
         });
     }
@@ -64,6 +65,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         cb.addItem(FModel.getAchievements(GameType.Quest));
         cb.addItem(AltWinAchievements.instance);
         cb.addItem(PlaneswalkerAchievements.instance);
+        cb.addItem(ChallengeAchievements.instance);
     }
 
     protected AchievementCollection(String name0, String filename0, boolean isLimitedFormat0) {
