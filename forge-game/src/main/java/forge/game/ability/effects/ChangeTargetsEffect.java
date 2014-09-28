@@ -62,7 +62,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                         for(GameObject it : changedSa.getTargets().getTargets())
                             allTargets.add(ImmutablePair.of(changingTgtSI, it));
                     }
-                    changingTgtSI = changingTgtSI.getSubInstace();
+                    changingTgtSI = changingTgtSI.getSubInstance();
                 }
                 if( allTargets.isEmpty() ) {
                     // is it an error or not?
@@ -118,7 +118,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                             }
                         }
                     }
-                    changingTgtSI = changingTgtSI.getSubInstace();
+                    changingTgtSI = changingTgtSI.getSubInstance();
                 }
             }
             if (remember) {

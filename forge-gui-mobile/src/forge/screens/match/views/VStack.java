@@ -181,11 +181,15 @@ public class VStack extends FDropDown {
             PlayerView activator = activeStackInstance.getActivatingPlayer();
             arrowOrigin = arrowOrigin.add(getScreenPosition());
 
-            for (CardView c : activeStackInstance.getTargetCards()) {
-                TargetingOverlay.drawArrow(g, arrowOrigin, c, activator.isOpponentOf(c.getController()));
-            }
-            for (PlayerView p : activeStackInstance.getTargetPlayers()) {
-                TargetingOverlay.drawArrow(g, arrowOrigin, p, activator.isOpponentOf(p));
+            StackItemView instance = activeStackInstance;
+            while (instance != null) {
+                for (CardView c : instance.getTargetCards()) {
+                    TargetingOverlay.drawArrow(g, arrowOrigin, c, activator.isOpponentOf(c.getController()));
+                }
+                for (PlayerView p : instance.getTargetPlayers()) {
+                    TargetingOverlay.drawArrow(g, arrowOrigin, p, activator.isOpponentOf(p));
+                }
+                instance = instance.getSubInstance();
             }
         }
     }

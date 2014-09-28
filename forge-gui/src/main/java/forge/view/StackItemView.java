@@ -1,6 +1,7 @@
 package forge.view;
 
 import forge.game.IIdentifiable;
+import forge.game.spellability.SpellAbilityStackInstance;
 
 /**
  * Representation of a {@link forge.game.spellability.SpellAbilityStackInstance}
@@ -22,28 +23,25 @@ public class StackItemView implements IIdentifiable {
     private final Iterable<CardView> targetCards;
     private final Iterable<PlayerView> targetPlayers;
     private final boolean ability, optionalTrigger;
+    private final StackItemView subInstance;
 
-    public StackItemView(final int id, final String key,
-            final int sourceTrigger, final String text, final CardView source,
-            final PlayerView activatingPlayer,
-            final Iterable<CardView> targetCards,
-            final Iterable<PlayerView> targetPlayers, final boolean isAbility,
-            final boolean isOptionalTrigger) {
-        this.id = id;
-        this.key = key;
-        this.sourceTrigger = sourceTrigger;
-        this.text = text;
-        this.source = source;
-        this.activatingPlayer = activatingPlayer;
-        this.targetCards = targetCards;
-        this.targetPlayers = targetPlayers;
-        this.ability = isAbility;
-        this.optionalTrigger = isOptionalTrigger;
+    public StackItemView(SpellAbilityStackInstance si, LocalGameView gameView) {
+        id = si.getId();
+        key = si.getSpellAbility().toUnsuppressedString();
+        sourceTrigger = si.getSpellAbility().getSourceTrigger();
+        text = si.getStackDescription();
+        source = gameView.getCardView(si.getSourceCard());
+        activatingPlayer = gameView.getPlayerView(si.getActivator());
+        targetCards = gameView.getCardViews(si.getTargetChoices().getTargetCards());
+        targetPlayers = gameView.getPlayerViews(si.getTargetChoices().getTargetPlayers());
+        ability = si.isAbility();
+        optionalTrigger = si.isOptionalTrigger();
+        subInstance = si.getSubInstance() == null ? null : new StackItemView(si.getSubInstance(), gameView);
     }
 
     @Override
     public int getId() {
-        return this.id;
+        return id;
     }
 
     public String getKey() {
@@ -74,6 +72,10 @@ public class StackItemView implements IIdentifiable {
         return targetPlayers;
     }
 
+    public StackItemView getSubInstance() {
+        return subInstance;
+    }
+
     public boolean isAbility() {
         return ability;
     }
@@ -84,6 +86,6 @@ public class StackItemView implements IIdentifiable {
 
     @Override
     public String toString() {
-        return this.getText();
+        return text;
     }
 }

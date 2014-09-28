@@ -54,7 +54,7 @@ public class SpellAbilityStackInstance implements IIdentifiable {
     private int id;
     private SpellAbility ability = null;
 
-    private SpellAbilityStackInstance subInstace = null;
+    private SpellAbilityStackInstance subInstance = null;
     private Player activator;
 
     // When going to a SubAbility that SA has a Instance Choice object
@@ -116,7 +116,7 @@ public class SpellAbilityStackInstance implements IIdentifiable {
 
         final AbilitySub subAb = this.ability.getSubAbility();
         if (subAb != null) {
-            this.subInstace = new SpellAbilityStackInstance(subAb);
+            this.subInstance = new SpellAbilityStackInstance(subAb);
         }
 
         // Targeting info -- 29/06/11 Moved to after taking care of SubAbilities
@@ -176,8 +176,8 @@ public class SpellAbilityStackInstance implements IIdentifiable {
         this.ability.setActivatingPlayer(activator);
 
         // Saved sub-SA needs to be reset on the way out
-        if (this.subInstace != null) {
-            this.ability.setSubAbility((AbilitySub) this.subInstace.getSpellAbility());
+        if (this.subInstance != null) {
+            this.ability.setSubAbility((AbilitySub) this.subInstance.getSpellAbility());
         }
 
         // Set Cost specific things here
@@ -280,8 +280,8 @@ public class SpellAbilityStackInstance implements IIdentifiable {
         return this.ability.isOptionalTrigger();
     }
 
-    public final SpellAbilityStackInstance getSubInstace() {
-        return this.subInstace;
+    public final SpellAbilityStackInstance getSubInstance() {
+        return this.subInstance;
     }
 
     public final TargetChoices getTargetChoices() {
@@ -337,7 +337,7 @@ public class SpellAbilityStackInstance implements IIdentifiable {
                 return false;
             }
             compare = compare.getSubAbility();
-            sub = sub.getSubInstace();
+            sub = sub.getSubInstance();
         }
 
         return true;

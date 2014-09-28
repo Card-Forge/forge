@@ -297,12 +297,7 @@ public abstract class LocalGameView implements IGameView {
             return null;
         }
 
-        final StackItemView newItem = new StackItemView(si.getId(),
-                si.getSpellAbility().toUnsuppressedString(),
-                si.getSpellAbility().getSourceTrigger(),
-                si.getStackDescription(), getCardView(si.getSourceCard()),
-                getPlayerView(si.getActivator()), getCardViews(si.getTargetChoices().getTargetCards()),
-                getPlayerViews(si.getTargetChoices().getTargetPlayers()), si.isAbility(), si.isOptionalTrigger());
+        final StackItemView newItem = new StackItemView(si, this);
         MatchUtil.stackItems.put(si, newItem);
         return newItem;
     }
