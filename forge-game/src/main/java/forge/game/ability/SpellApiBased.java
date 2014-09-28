@@ -45,9 +45,9 @@ public class SpellApiBased extends Spell {
     /* (non-Javadoc)
      * @see forge.card.spellability.SpellAbility#resolve()
      */
-
     @Override
     public void resolve() {
         effect.resolve(this);
+        getActivatingPlayer().getAchievementTracker().onSpellResolve(this);
     }
 }

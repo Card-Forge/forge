@@ -2,6 +2,7 @@ package forge.achievement;
 
 import java.util.Map.Entry;
 
+import forge.achievement.ChallengeAchievements.DeckChallengeAchievement;
 import forge.deck.Deck;
 import forge.item.PaperCard;
 

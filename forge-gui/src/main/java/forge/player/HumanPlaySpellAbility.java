@@ -121,9 +121,7 @@ public class HumanPlaySpellAbility {
 
         if (isFree || payment.isFullyPaid()) {
             //track when planeswalker ultimates are activated
-            if (ability.getRestrictions().isPwAbility() && ability.hasParam("Ultimate") && ability.getActivatingPlayer().getController() instanceof PlayerControllerHuman) {
-                ability.getActivatingPlayer().getAchievementTracker().activatedUltimates.add(ability.getHostCard().getName());
-            }
+            ability.getActivatingPlayer().getAchievementTracker().onSpellAbilityPlayed(ability);
 
             if (skipStack) {
                 AbilityUtils.resolve(ability);

@@ -264,7 +264,6 @@ forge-game/.settings/org.eclipse.m2e.core.prefs -text
 forge-game/pom.xml -text
 forge-game/src/main/java/forge/GameCommand.java svneol=native#text/plain
 forge-game/src/main/java/forge/ImageKeys.java -text
-forge-game/src/main/java/forge/game/AchievementTracker.java -text
 forge-game/src/main/java/forge/game/CardTraitBase.java -text
 forge-game/src/main/java/forge/game/Direction.java -text
 forge-game/src/main/java/forge/game/Game.java -text
@@ -542,6 +541,7 @@ forge-game/src/main/java/forge/game/phase/PhaseType.java -text
 forge-game/src/main/java/forge/game/phase/Untap.java -text
 forge-game/src/main/java/forge/game/phase/Upkeep.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/phase/package-info.java svneol=native#text/plain
+forge-game/src/main/java/forge/game/player/AchievementTracker.java -text
 forge-game/src/main/java/forge/game/player/GameLossReason.java -text
 forge-game/src/main/java/forge/game/player/IGameEntitiesFactory.java -text
 forge-game/src/main/java/forge/game/player/Player.java svneol=native#text/plain
@@ -16897,7 +16897,6 @@ forge-gui/src/main/java/forge/achievement/ArcaneMaster.java -text
 forge-gui/src/main/java/forge/achievement/Blackjack.java -text
 forge-gui/src/main/java/forge/achievement/ChallengeAchievements.java -text
 forge-gui/src/main/java/forge/achievement/ConstructedAchievements.java -text
-forge-gui/src/main/java/forge/achievement/DeckChallengeAchievement.java -text
 forge-gui/src/main/java/forge/achievement/DeckedOut.java -text
 forge-gui/src/main/java/forge/achievement/Domain.java -text
 forge-gui/src/main/java/forge/achievement/DraftAchievements.java -text
