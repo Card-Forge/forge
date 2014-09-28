@@ -817,27 +817,21 @@ public class PlayerControllerAi extends PlayerController {
         }
         
         //Do not convoke potential blockers until after opponent's attack
-        final List<Card> notBlocking = CardLists.filter(untappedCreats, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return !ComputerUtilCard.doesSpecifiedCreatureBlock(ai, c);
-            }
-        });
-        boolean nonBlockers = false;
+        final List<Card> blockers = ComputerUtilCard.getLikelyBlockers(ai, null);
         if ((ph.isPlayerTurn(ai) && ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN)) ||
                 (!ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
-            nonBlockers = true;
+            untappedCreats.removeAll(blockers);
             //Add threatened creatures
             if (!ai.getGame().getStack().isEmpty()) {
                 final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), null);
-                for (Card c : untappedCreats) {
-                    if (objects.contains(c) && !notBlocking.contains(c)) {
-                        notBlocking.add(c);
+                for (Card c : blockers) {
+                    if (objects.contains(c) && blockers.contains(c)) {
+                        untappedCreats.add(c);
                     }
                 }
             }
         }
-        return ComputerUtilMana.getConvokeFromList(manaCost, nonBlockers ? notBlocking : untappedCreats);
+        return ComputerUtilMana.getConvokeFromList(manaCost, untappedCreats);
     }
 
     @Override
