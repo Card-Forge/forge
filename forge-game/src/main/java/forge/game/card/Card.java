@@ -2441,7 +2441,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 sb.append(chooseText);
 
                 if (choices != null) {
-                    sb.append(" &#151;\r\n");
+                    sb.append(" \u2014\r\n");
                     for (int i = 0; i < choices.length; i++) {
                         String choice = choices[i].trim();
 
@@ -2449,7 +2449,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                             choice = choice.substring(3);
                         }
 
-                        sb.append("&#149; ").append(Character.toUpperCase(choice.charAt(0)))
+                        sb.append("\u2022 ").append(Character.toUpperCase(choice.charAt(0)))
                                 .append(choice.substring(1));
                         if (i < choices.length - 1) {
                             sb.append(".");
