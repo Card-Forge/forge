@@ -30,7 +30,14 @@ public abstract class ProgressiveAchievement extends Achievement {
     }
 
     @Override
-    public final String getSubTitle() {
-        return getBest() + " " + (getBest() != 1 ? Lang.getPlural(getNoun()) : getNoun());
+    public final String getSubTitle(boolean includeTimestamp) {
+        String subTitle = getBest() + " " + (getBest() != 1 ? Lang.getPlural(getNoun()) : getNoun());
+        if (includeTimestamp) {
+            String formattedTimestamp = getFormattedTimestamp();
+            if (formattedTimestamp != null) {
+                subTitle += " (" + formattedTimestamp + ")";
+            }
+        }
+        return subTitle;
     }
 }

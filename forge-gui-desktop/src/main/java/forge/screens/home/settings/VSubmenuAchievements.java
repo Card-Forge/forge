@@ -341,7 +341,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
                 textY = plateY + (trophyPlateSize.height * 2 / 3 - fm.getHeight()) / 2 + fm.getAscent();
                 g2d.drawString(label, x + plateOffset + (trophyPlateSize.width - fm.stringWidth(label)) / 2, textY);
 
-                label = achievement.getSubTitle();
+                label = achievement.getSubTitle(false);
                 if (label != null) {
                     textY += fm.getAscent();
                     g2d.setFont(subFont);
@@ -363,7 +363,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
 
             //draw tooltip for selected achievement if needed
             if (selectRect != null) {
-                String subTitle = selectedAchievement.getSubTitle();
+                String subTitle = selectedAchievement.getSubTitle(true);
                 String sharedDesc = selectedAchievement.getSharedDesc();
                 String mythicDesc = selectedAchievement.getMythicDesc();
                 String rareDesc = selectedAchievement.getRareDesc();

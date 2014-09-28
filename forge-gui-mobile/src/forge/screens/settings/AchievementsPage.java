@@ -256,7 +256,7 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
                     g.drawImage(FSkinImage.TROPHY_PLATE, x + plateOffset, plateY, plateWidth, plateHeight);
                     g.drawText(achievement.getDisplayName(), titleFont, FORE_COLOR, x + plateOffset + plateWidth * 0.075f, plateY + plateHeight * 0.05f, plateWidth * 0.85f, titleHeight, false, HAlignment.CENTER, true);
     
-                    String subTitle = achievement.getSubTitle();
+                    String subTitle = achievement.getSubTitle(false);
                     if (subTitle != null) {
                         g.drawText(subTitle, subTitleFont, FORE_COLOR, x + plateOffset + plateWidth * 0.075f, plateY + plateHeight * 0.6f, plateWidth * 0.85f, subTitleHeight, false, HAlignment.CENTER, true);
                     }
@@ -274,7 +274,7 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
 
             //draw tooltip for selected achievement if needed
             if (selectRect != null) {
-                String subTitle = selectedAchievement.getSubTitle();
+                String subTitle = selectedAchievement.getSubTitle(true);
                 String sharedDesc = selectedAchievement.getSharedDesc();
                 String mythicDesc = selectedAchievement.getMythicDesc();
                 String rareDesc = selectedAchievement.getRareDesc();

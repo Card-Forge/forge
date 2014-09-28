@@ -38,7 +38,13 @@ public class Hellbent extends Achievement {
     }
 
     @Override
-    public String getSubTitle() {
+    public String getSubTitle(boolean includeTimestamp) {
+        if (includeTimestamp) {
+            String formattedTimestamp = getFormattedTimestamp();
+            if (formattedTimestamp != null) {
+                return "Earned " + formattedTimestamp;
+            }
+        }
         return null;
     }
 }

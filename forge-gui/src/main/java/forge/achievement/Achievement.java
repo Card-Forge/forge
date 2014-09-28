@@ -1,6 +1,8 @@
 package forge.achievement;
 
+import java.text.DateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import org.w3c.dom.Element;
 
@@ -261,13 +263,29 @@ public abstract class Achievement {
         return false;
     }
 
-    public String getSubTitle() {
-        if (best != defaultValue) {
-            if (displayNounBefore()) {
-                return "Best: " + getNoun() + " " + best;
-            }
-            return "Best: " + best + " " + (pluralizeNoun() ? Lang.getPlural(getNoun()) : getNoun());
+    protected final String getFormattedTimestamp() {
+        if (timestamp == 0) { return null; }
+
+        DateFormat formatter = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.getDefault());
+        return formatter.format(new Date(timestamp));
+    }
+
+    public String getSubTitle(boolean includeTimestamp) {
+        if (best == defaultValue) { return null; }
+
+        String subTitle;
+        if (displayNounBefore()) {
+            subTitle = "Best: " + getNoun() + " " + best;
         }
-        return null;
+        else {
+            subTitle = "Best: " + best + " " + (pluralizeNoun() ? Lang.getPlural(getNoun()) : getNoun());
+        }
+        if (includeTimestamp) {
+            String formattedTimestamp = getFormattedTimestamp();
+            if (formattedTimestamp != null) {
+                subTitle += " (" + formattedTimestamp + ")";
+            }
+        }
+        return subTitle;
     }
 }
