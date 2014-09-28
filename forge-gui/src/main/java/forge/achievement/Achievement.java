@@ -1,5 +1,7 @@
 package forge.achievement;
 
+import java.util.Date;
+
 import org.w3c.dom.Element;
 
 import forge.GuiBase;
@@ -18,6 +20,7 @@ public abstract class Achievement {
     private final boolean checkGreaterThan;
     protected final int defaultValue;
     private ISkinImage image;
+    private long timestamp;
     private int best;
 
     //use this constructor for special achievements without tiers
@@ -162,6 +165,7 @@ public abstract class Achievement {
         boolean hadEarnedCommon = earnedCommon();
 
         best = value;
+        timestamp = new Date().getTime();
 
         if (earnedSpecial()) {
             if (!hadEarnedSpecial) {
@@ -213,10 +217,18 @@ public abstract class Achievement {
 
     public void saveToXml(Element el) {
         el.setAttribute("best", String.valueOf(best));
+        el.setAttribute("time", String.valueOf(timestamp));
     }
 
     public void loadFromXml(Element el) {
         best = getIntAttribute(el, "best");
+        timestamp = getLongAttribute(el, "time");
+        best = performConversion(best, timestamp);
+    }
+
+    //give derived classes a chance to perform a conversion if needed
+    protected int performConversion(int value, long timestamp) {
+        return value;
     }
 
     protected int getIntAttribute(Element el, String name) {
@@ -224,6 +236,16 @@ public abstract class Achievement {
         if (value.length() > 0) {
             try {
                 return Integer.parseInt(value);
+            }
+            catch (Exception ex) {}
+        }
+        return 0;
+    }
+    protected long getLongAttribute(Element el, String name) {
+        String value = el.getAttribute(name);
+        if (value.length() > 0) {
+            try {
+                return Long.parseLong(value);
             }
             catch (Exception ex) {}
         }

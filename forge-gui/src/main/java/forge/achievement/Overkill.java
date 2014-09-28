@@ -31,4 +31,13 @@ public class Overkill extends Achievement {
     protected boolean pluralizeNoun() {
         return false;
     }
+
+    @Override
+    protected int performConversion(int value, long timestamp) {
+        //perform conversion to handle data from old format before supporting negative thresholds
+        if (value > 0) {
+            value = -value;
+        }
+        return value;
+    }
 }

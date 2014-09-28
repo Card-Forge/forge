@@ -24,4 +24,14 @@ public class ManaScrewed extends Achievement {
     protected String getNoun() {
         return "Land";
     }
+
+    @Override
+    protected int performConversion(int value, long timestamp) {
+        //throw out any ManaScrewed achievements earned before timestamp support added
+        //since there was a bug where it was earned almost always
+        if (timestamp == 0) {
+            return defaultValue;
+        }
+        return value;
+    }
 }
