@@ -12,6 +12,7 @@ public abstract class FDisplayObject {
 
     private boolean visible = true;
     private boolean enabled = true;
+    private boolean rotate90 = false;
     private boolean rotate180 = false;
     private final Rectangle bounds = new Rectangle();
     private final Vector2 screenPosition = new Vector2();
@@ -93,6 +94,12 @@ public abstract class FDisplayObject {
         visible = b0;
     }
 
+    public boolean getRotate90() {
+        return rotate90;
+    }
+    public void setRotate90(boolean b0) {
+        rotate90 = b0;
+    }
     public boolean getRotate180() {
         return rotate180;
     }

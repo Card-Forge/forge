@@ -112,13 +112,16 @@ public class Graphics {
             final Rectangle backup = visibleBounds;
             visibleBounds = intersection;
 
-            if (displayObj.getRotate180()) {
+            if (displayObj.getRotate90()) { //use top-right corner of bounds as pivot point
+                startRotateTransform(displayObj.getWidth(), 0, -90);
+            }
+            else if (displayObj.getRotate180()) { //use center of bounds as pivot point
                 startRotateTransform(displayObj.getWidth() / 2, displayObj.getHeight() / 2, 180);
             }
 
             displayObj.draw(this);
 
-            if (displayObj.getRotate180()) {
+            if (displayObj.getRotate90() || displayObj.getRotate180()) {
                 endTransform();
             }
 

@@ -14,7 +14,9 @@ import com.google.common.collect.Maps;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
 import forge.match.MatchUtil;
+import forge.menu.FDropDownMenu;
 import forge.menu.FMenuBar;
+import forge.menu.FMenuItem;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -105,6 +107,7 @@ public class MatchScreen extends FScreen {
                     }));
             topPlayerPrompt.setRotate180(true);
             topPlayerPanel.setRotate180(true);
+            getHeader().setRotate90(true);
         }
 
         log = new VLog();
@@ -118,11 +121,49 @@ public class MatchScreen extends FScreen {
         players.setDropDownContainer(this);
 
         FMenuBar menuBar = (FMenuBar)getHeader();
-        menuBar.addTab("Game", new VGameMenu());
-        menuBar.addTab("Players (" + playerPanels.size() + ")", players);
-        menuBar.addTab("Log", log);
-        menuBar.addTab("Dev", devMenu);
-        menuBar.addTab("Stack (0)", stack);
+        if (topPlayerPrompt == null) {
+            menuBar.addTab("Game", new VGameMenu());
+            menuBar.addTab("Players (" + playerPanels.size() + ")", players);
+            menuBar.addTab("Log", log);
+            menuBar.addTab("Dev", devMenu);
+            menuBar.addTab("Stack (0)", stack);
+        }
+        else {
+            menuBar.addTab("\u2022 \u2022 \u2022", new PlayerSpecificMenu(true));
+            menuBar.addTab("Stack (0)", stack);
+            menuBar.addTab("\u2022 \u2022 \u2022", new PlayerSpecificMenu(false));
+        }
+    }
+
+    private class PlayerSpecificMenu extends FDropDownMenu {
+        private PlayerSpecificMenu(boolean forTopPlayer) {
+            setRotate180(forTopPlayer);
+        }
+        @Override
+        protected void buildMenu() {
+            addItem(new FMenuItem("Game", new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                }
+            }));
+            addItem(new FMenuItem("Players (" + playerPanels.size() + ")", new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                }
+            }));
+            addItem(new FMenuItem("Log", new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                }
+            }));
+            if (ForgePreferences.DEV_MODE) {
+                addItem(new FMenuItem("Dev", new FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {
+                    }
+                }));
+            }
+        }
     }
 
     @Override
@@ -180,11 +221,16 @@ public class MatchScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
+        float scrollerWidth = width;
         if (topPlayerPrompt != null) {
-            topPlayerPrompt.setBounds(0, startY, width, VPrompt.HEIGHT);
-            startY += VPrompt.HEIGHT;
+            topPlayerPrompt.setBounds(0, 0, width, VPrompt.HEIGHT);
+            float menuBarWidth = getHeader().getHeight();
+            float menuBarHeight = height - 2 * VPrompt.HEIGHT;
+            getHeader().setBounds(width - menuBarHeight, height - VPrompt.HEIGHT, menuBarHeight, menuBarWidth); //adjust position prior to rotate transform
+            startY = VPrompt.HEIGHT;
+            scrollerWidth -= menuBarWidth;
         }
-        scroller.setBounds(0, startY, width, height - VPrompt.HEIGHT - startY);
+        scroller.setBounds(0, startY, scrollerWidth, height - VPrompt.HEIGHT - startY);
         bottomPlayerPrompt.setBounds(0, height - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
     }
 
