@@ -133,11 +133,15 @@ public class VPlayerPanel extends FContainer {
 
     @Override
     public void setRotate180(boolean b0) {
-        super.setRotate180(b0);
         //only rotate certain parts of panel
-        //avatar.setRotate180(b0);
-        //lblLife.setRotate180(b0);
-        //phaseIndicator.setRotate180(b0);
+        avatar.setRotate180(b0);
+        lblLife.setRotate180(b0);
+        phaseIndicator.setRotate180(b0);
+        for (InfoTab tab : tabs) {
+            tab.displayArea.setRotate180(b0);
+        }
+        field.getRow1().setRotate180(b0);
+        field.getRow2().setRotate180(b0);
     }
 
     public VField getField() {
@@ -403,12 +407,29 @@ public class VPlayerPanel extends FContainer {
                 h = icon.getHeight() * w / icon.getWidth();
                 x = INFO_TAB_PADDING_X + (maxImageWidth - w) / 2;
                 y = (getHeight() - h) / 2;
+                if (lblLife.getRotate180()) {
+                    g.startRotateTransform(x + w / 2, y + h / 2, 180);
+                }
                 g.drawImage(icon, x, y, w, h);
+                if (lblLife.getRotate180()) {
+                    g.endTransform();
+                }
 
                 x += w + INFO_TAB_PADDING_X;
-                g.drawText(value, INFO_FONT, INFO_FORE_COLOR, x, 0, getWidth() - x + 1, getHeight(), false, HAlignment.LEFT, true);
+                HAlignment alignX = HAlignment.LEFT;
+                if (lblLife.getRotate180()) {
+                    g.startRotateTransform(x + (getWidth() - x + 1) / 2, getHeight() / 2, 180);
+                    alignX = HAlignment.RIGHT;
+                }
+                g.drawText(value, INFO_FONT, INFO_FORE_COLOR, x, 0, getWidth() - x + 1, getHeight(), false, alignX, true);
+                if (lblLife.getRotate180()) {
+                    g.endTransform();
+                }
             }
             else { //show image above text if taller than wide
+                if (lblLife.getRotate180()) {
+                    g.startRotateTransform(getWidth() / 2, getHeight() / 2, 180);
+                }
                 float maxImageWidth = getWidth() - 2 * INFO_TAB_PADDING_X;
                 w = icon.getNearestHQWidth(maxImageWidth);
                 if (w > maxImageWidth) {
@@ -421,6 +442,9 @@ public class VPlayerPanel extends FContainer {
 
                 y += h + INFO_TAB_PADDING_Y;
                 g.drawText(value, INFO_FONT, INFO_FORE_COLOR, 0, y, getWidth(), getHeight() - y + 1, false, HAlignment.CENTER, false);
+                if (lblLife.getRotate180()) {
+                    g.endTransform();
+                }
             }
         }
     }

@@ -22,6 +22,7 @@ public abstract class VCardDisplayArea extends VDisplayArea {
 
     protected final List<CardView> orderedCards = new ArrayList<CardView>();
     protected final List<CardAreaPanel> cardPanels = new ArrayList<CardAreaPanel>();
+    private boolean rotateCards180;
 
     public Iterable<CardView> getOrderedCards() {
         return orderedCards;
@@ -34,6 +35,12 @@ public abstract class VCardDisplayArea extends VDisplayArea {
     @Override
     public int getCount() {
         return cardPanels.size();
+    }
+
+    @Override
+    public void setRotate180(boolean b0) {
+        //only rotate cards themselves
+        rotateCards180 = b0;
     }
 
     protected void refreshCardPanels(List<CardView> model) {
@@ -321,6 +328,25 @@ public abstract class VCardDisplayArea extends VDisplayArea {
             origin.y += top + h * TARGET_ORIGIN_FACTOR_Y;
 
             return origin;
+        }
+
+        @Override
+        public void draw(Graphics g) {
+            if (displayArea.rotateCards180) {
+                float padding = getPadding();
+                float x = padding;
+                float y = padding;
+                float w = getWidth() - 2 * padding;
+                float h = getHeight() - 2 * padding;
+                if (w == h) { //adjust width if needed to make room for tapping
+                    w = h / ASPECT_RATIO;
+                }
+                g.startRotateTransform(x + w / 2, y + h / 2, 180);
+            }
+            super.draw(g);
+            if (displayArea.rotateCards180) {
+                g.endTransform();
+            }
         }
     }
 }

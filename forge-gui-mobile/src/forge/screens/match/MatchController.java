@@ -125,7 +125,7 @@ public class MatchController implements IMatchController {
 
     @Override
     public boolean hotSeatMode() {
-        return true; //TODO: Support toggling hot seat mode
+        return false; //TODO: Support toggling hot seat mode
     }
 
     @Override
