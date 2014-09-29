@@ -13,9 +13,9 @@ Forge now includes many of the new Khans of Tarkir cards. It may take a few days
 
 
 - New Achievements -
-Added new achievements for 19 alternate win conditions and 52 Planeswalker ultimates
-Added five new tier achievements
-Trophies now have slick custom art that can be downloaded separate
+Added new achievements for 19 alternate win conditions and 52 Planeswalker ultimates.
+Added five new tier achievements.
+Trophies now have slick custom art that can be downloaded separate.
 
 
 - New Commander 2014 cards -
@@ -298,6 +298,8 @@ Kheru Lich Lord
 Villainous Wealth
 Deflecting Palm
 Ashcloud Phoenix
+Ride Down
+Dragon Grip
 
 
 -------------------------------
