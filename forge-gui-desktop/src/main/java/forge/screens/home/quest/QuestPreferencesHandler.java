@@ -234,6 +234,9 @@ public class QuestPreferencesHandler extends SkinnedPanel {
         pnlShop.add(new FLabel.Builder().text("Rare Singles").build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_SINGLES_RARE, ErrType.SHOP), constraints1);
 
+        pnlShop.add(new FLabel.Builder().text("Item Level Restriction").build(), constraints2);
+        pnlShop.add(new PrefInput(QPref.ITEM_LEVEL_RESTRICTION, ErrType.SHOP), constraints1);
+
         constraints1 = "w 100%!, gap 0 0 20px 0";
         this.add(pnlRewards, constraints1);
         this.add(pnlDifficulty, constraints1);

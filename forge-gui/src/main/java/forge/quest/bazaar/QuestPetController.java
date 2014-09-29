@@ -24,9 +24,11 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
 import forge.item.PaperToken;
+import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.quest.QuestController;
 import forge.quest.data.QuestAssets;
+import forge.quest.data.QuestPreferences;
 
 /**
  * <p>
@@ -243,7 +245,8 @@ public class QuestPetController implements IQuestBazaarItem {
     @Override
     public boolean isAvailableForPurchase(final QuestAssets qA, QuestController qCtrl) {
         return this.getPetLevel(qA) < this.getMaxLevel() &&
-                (qCtrl == null || qCtrl.getLevel() >= this.getPetLevel(qA));
+                (qCtrl == null || qCtrl.getLevel() >= this.getPetLevel(qA) ||
+                FModel.getQuestPreferences().getPrefInt(QuestPreferences.QPref.ITEM_LEVEL_RESTRICTION) == 0);
     }
 
     /**

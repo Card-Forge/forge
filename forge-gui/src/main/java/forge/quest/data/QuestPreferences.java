@@ -146,7 +146,9 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         // How many wins it takes to open an additional pack in the shop
         SHOP_WINS_FOR_ADDITIONAL_PACK("10"),
         // How many packs the shop start with. 
-        SHOP_STARTING_PACKS("5");
+        SHOP_STARTING_PACKS("5"),
+
+        ITEM_LEVEL_RESTRICTION("1");
 
         private final String strDefaultVal;
 
@@ -335,6 +337,10 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
                     return "Bias value too large (maximum 10).";
                 }
                 break;
+            case ITEM_LEVEL_RESTRICTION:
+                if (val != 0 && val != 1) {
+                    return "Only values 0 or 1 are acceptable. 1 for enabled, 0 for disabled.";
+                }
             default:
                 if (val > 100) {
                     return "Value too large (maximum 100).";
