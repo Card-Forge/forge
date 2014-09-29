@@ -546,6 +546,8 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
             CombatUtil.checkDeclaredAttacker(game, c, combat);
         }
 
+        game.getTriggerHandler().resetActiveTriggers();
+
         game.fireEvent(new GameEventCombatChanged());
     }
 
