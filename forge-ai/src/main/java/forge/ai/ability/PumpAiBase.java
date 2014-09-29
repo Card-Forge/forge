@@ -758,7 +758,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         pumped.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);
         Set<CounterType> types = c.getCounters().keySet();
         for(CounterType ct : types) {
-            pumped.addCounter(ct, c.getCounters(ct), true);
+            pumped.addCounterFireNoEvents(ct, c.getCounters(ct), true);
         }
         //Copies tap-state and extra keywords (auras, equipment, etc.) 
         if (c.isTapped()) {

@@ -1194,6 +1194,13 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
 
     public final void addCounter(final CounterType counterType, final int n, final boolean applyMultiplier) {
+        this.addCounter(counterType, n, applyMultiplier, true);
+    }
+    public final void addCounterFireNoEvents(final CounterType counterType, final int n, final boolean applyMultiplier) {
+        this.addCounter(counterType, n, applyMultiplier, false);
+    }
+
+    private void addCounter(final CounterType counterType, final int n, final boolean applyMultiplier, final boolean fireEvents) {
         int addAmount = n;
         final HashMap<String, Object> repParams = new HashMap<String, Object>();
         repParams.put("Event", "AddCounter");
@@ -1218,21 +1225,24 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         }
         this.setTotalCountersToAdd(addAmount);
 
-        int powerBonusBefore = this.getPowerBonusFromCounters();
-        int toughnessBonusBefore = this.getToughnessBonusFromCounters();
-        int loyaltyBefore = this.getCurrentLoyalty();
+        if (fireEvents) {
+            final int powerBonusBefore = this.getPowerBonusFromCounters();
+            final int toughnessBonusBefore = this.getToughnessBonusFromCounters();
+            final int loyaltyBefore = this.getCurrentLoyalty();
 
-        Integer oldValue = this.counters.get(counterType);
-        int newValue = addAmount + (oldValue == null ? 0 : oldValue.intValue());
-        this.counters.put(counterType, Integer.valueOf(newValue));
+            final Integer oldValue = this.counters.get(counterType);
+            final int newValue = addAmount + (oldValue == null ? 0 : oldValue.intValue());
+            this.counters.put(counterType, Integer.valueOf(newValue));
 
-        //fire card stats changed event if p/t bonuses or loyalty changed from added counters
-        if (powerBonusBefore != getPowerBonusFromCounters() || toughnessBonusBefore != getToughnessBonusFromCounters() || loyaltyBefore != getCurrentLoyalty()) {
-            getGame().fireEvent(new GameEventCardStatsChanged(this));
+
+            //fire card stats changed event if p/t bonuses or loyalty changed from added counters
+            if (powerBonusBefore != getPowerBonusFromCounters() || toughnessBonusBefore != getToughnessBonusFromCounters() || loyaltyBefore != getCurrentLoyalty()) {
+                getGame().fireEvent(new GameEventCardStatsChanged(this));
+            }
+
+            // play the Add Counter sound
+            getGame().fireEvent(new GameEventCardCounters(this, counterType, oldValue == null ? 0 : oldValue.intValue(), newValue));
         }
-
-        // play the Add Counter sound
-        getGame().fireEvent(new GameEventCardCounters(this, counterType, oldValue == null ? 0 : oldValue.intValue(), newValue));
 
         // Run triggers
         final Map<String, Object> runParams = new TreeMap<String, Object>();
