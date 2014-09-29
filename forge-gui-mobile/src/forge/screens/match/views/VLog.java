@@ -48,7 +48,7 @@ public class VLog extends FDropDown {
         List<GameLogEntry> logEntrys = MatchUtil.getGameView().getLogEntries(logVerbosityFilter);
 
         LogEntryDisplay logEntryDisplay;
-        float width = maxWidth - getMenuTab().getScreenPosition().x; //stretch from tab to edge of screen
+        float width = maxWidth - getMenuTab().screenPos.x; //stretch from tab to edge of screen
         float minWidth = 4 * Utils.AVG_FINGER_WIDTH;
         if (width < minWidth) {
             width = minWidth;

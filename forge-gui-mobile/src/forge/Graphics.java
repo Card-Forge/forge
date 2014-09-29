@@ -98,13 +98,11 @@ public class Graphics {
 
         final Rectangle parentBounds = bounds;
         bounds = new Rectangle(parentBounds.x + displayObj.getLeft(), parentBounds.y + displayObj.getTop(), displayObj.getWidth(), displayObj.getHeight());
-        if (!transforms.isEmpty()) { //transform screen position if needed
-            tmp.set(bounds.x + bounds.width / 2, regionHeight - bounds.y - bounds.height / 2, 0);
-            tmp.mul(batch.getTransformMatrix());
-            displayObj.setScreenPosition(tmp.x - bounds.width / 2, regionHeight - tmp.y - bounds.height / 2);
+        if (!transforms.isEmpty()) { //transform screen position if needed by applying transform matrix to rectangle
+            updateScreenPosForRotation(displayObj);
         }
         else {
-            displayObj.setScreenPosition(bounds.x, bounds.y);
+            displayObj.screenPos.set(bounds);
         }
 
         Rectangle intersection = Utils.getIntersection(bounds, visibleBounds);
@@ -114,9 +112,11 @@ public class Graphics {
 
             if (displayObj.getRotate90()) { //use top-right corner of bounds as pivot point
                 startRotateTransform(displayObj.getWidth(), 0, -90);
+                updateScreenPosForRotation(displayObj);
             }
             else if (displayObj.getRotate180()) { //use center of bounds as pivot point
                 startRotateTransform(displayObj.getWidth() / 2, displayObj.getHeight() / 2, 180);
+                //screen position won't change for this object from a 180 degree rotation 
             }
 
             displayObj.draw(this);
@@ -129,6 +129,39 @@ public class Graphics {
         }
 
         bounds = parentBounds;
+    }
+
+    private void updateScreenPosForRotation(FDisplayObject displayObj) {
+        tmp.set(bounds.x, regionHeight - bounds.y, 0);
+        tmp.mul(batch.getTransformMatrix());
+        tmp.y = regionHeight - tmp.y;
+        float minX = tmp.x;
+        float maxX = minX;
+        float minY = tmp.y;
+        float maxY = minY;
+        tmp.set(bounds.x + bounds.width, regionHeight - bounds.y, 0);
+        tmp.mul(batch.getTransformMatrix());
+        tmp.y = regionHeight - tmp.y;
+        if (tmp.x < minX) { minX = tmp.x; }
+        else if (tmp.x > maxX) { maxX = tmp.x; }
+        if (tmp.y < minY) { minY = tmp.y; }
+        else if (tmp.y > maxY) { maxY = tmp.y; }
+        tmp.set(bounds.x + bounds.width, regionHeight - bounds.y - bounds.height, 0);
+        tmp.mul(batch.getTransformMatrix());
+        tmp.y = regionHeight - tmp.y;
+        if (tmp.x < minX) { minX = tmp.x; }
+        else if (tmp.x > maxX) { maxX = tmp.x; }
+        if (tmp.y < minY) { minY = tmp.y; }
+        else if (tmp.y > maxY) { maxY = tmp.y; }
+        tmp.set(bounds.x, regionHeight - bounds.y - bounds.height, 0);
+        tmp.mul(batch.getTransformMatrix());
+        tmp.y = regionHeight - tmp.y;
+        if (tmp.x < minX) { minX = tmp.x; }
+        else if (tmp.x > maxX) { maxX = tmp.x; }
+        if (tmp.y < minY) { minY = tmp.y; }
+        else if (tmp.y > maxY) { maxY = tmp.y; }
+
+        displayObj.screenPos.set(minX, minY, maxX - minX, maxY - minY);
     }
 
     public void drawLine(float thickness, FSkinColor skinColor, float x1, float y1, float x2, float y2) {

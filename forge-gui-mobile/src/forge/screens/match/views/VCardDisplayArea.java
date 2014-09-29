@@ -307,7 +307,7 @@ public abstract class VCardDisplayArea extends VDisplayArea {
             //don't show targeting arrow unless in display area that's visible
             if (displayArea == null || !displayArea.isVisible()) { return null; }
 
-            Vector2 origin = new Vector2(getScreenPosition());
+            Vector2 origin = new Vector2(screenPos.x, screenPos.y);
 
             float left = PADDING;
             float top = PADDING;

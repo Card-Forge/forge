@@ -34,8 +34,6 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FList;
 
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
-
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -128,8 +126,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     public Rectangle getSelectionBounds() {
         if (selectedIndices.isEmpty()) { return null; }
 
-        Vector2 screenPos = list.getScreenPosition();
-        return new Rectangle(screenPos.x, screenPos.y + list.getItemTop(getSelectedIndex()), list.getWidth(), list.getListItemRenderer().getItemHeight());
+        return new Rectangle(list.screenPos.x, list.screenPos.y + list.getItemTop(getSelectedIndex()), list.getWidth(), list.getListItemRenderer().getItemHeight());
     }
 
     @Override

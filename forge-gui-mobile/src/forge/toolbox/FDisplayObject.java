@@ -3,8 +3,6 @@ package forge.toolbox;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
-
 import forge.Graphics;
 
 public abstract class FDisplayObject {
@@ -15,7 +13,7 @@ public abstract class FDisplayObject {
     private boolean rotate90 = false;
     private boolean rotate180 = false;
     private final Rectangle bounds = new Rectangle();
-    private final Vector2 screenPosition = new Vector2();
+    public final Rectangle screenPos = new Rectangle();
 
     public void setPosition(float x, float y) {
         bounds.setPosition(x, y);
@@ -60,24 +58,17 @@ public abstract class FDisplayObject {
         return visible && bounds.contains(x, y);
     }
 
-    public Vector2 getScreenPosition() {
-        return screenPosition;
-    }
-    public void setScreenPosition(float x, float y) { //only call from Graphics when drawn
-        screenPosition.set(x, y);
-    }
-
     public float screenToLocalX(float x) {
-        return x - screenPosition.x;
+        return x - screenPos.x;
     }
     public float screenToLocalY(float y) {
-        return y - screenPosition.y;
+        return y - screenPos.y;
     }
     public float localToScreenX(float x) {
-        return x + screenPosition.x;
+        return x + screenPos.x;
     }
     public float localToScreenY(float y) {
-        return y + screenPosition.y;
+        return y + screenPos.y;
     }
 
     public boolean isEnabled() {
@@ -119,7 +110,7 @@ public abstract class FDisplayObject {
 
     public abstract void draw(Graphics g);
     public void buildTouchListeners(float screenX, float screenY, ArrayList<FDisplayObject> listeners) {
-        if (enabled && contains(getLeft() + screenToLocalX(screenX), getTop() + screenToLocalY(screenY))) {
+        if (enabled && visible && screenPos.contains(screenX, screenY)) {
             listeners.add(this);
         }
     }

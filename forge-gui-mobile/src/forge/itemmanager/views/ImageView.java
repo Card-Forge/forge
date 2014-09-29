@@ -767,10 +767,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         if (selectedIndices.isEmpty()) { return null; }
 
         ItemInfo itemInfo = orderedItems.get(selectedIndices.get(0));
-        Vector2 screenPos = itemInfo.group.getScreenPosition();
         Vector2 relPos = itemInfo.group.getChildRelativePosition(itemInfo);
-        return new Rectangle(screenPos.x + relPos.x - SEL_BORDER_SIZE + itemInfo.group.getLeft(),
-                screenPos.y + relPos.y - SEL_BORDER_SIZE,
+        return new Rectangle(itemInfo.group.screenPos.x + relPos.x - SEL_BORDER_SIZE + itemInfo.group.getLeft(),
+                itemInfo.group.screenPos.y + relPos.y - SEL_BORDER_SIZE,
                 itemInfo.getWidth() + 2 * SEL_BORDER_SIZE, itemInfo.getHeight() + 2 * SEL_BORDER_SIZE);
     }
 

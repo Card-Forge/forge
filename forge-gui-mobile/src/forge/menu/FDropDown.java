@@ -1,7 +1,5 @@
 package forge.menu;
 
-import com.badlogic.gdx.math.Vector2;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -119,9 +117,8 @@ public abstract class FDropDown extends FScrollPane {
         float screenWidth = screen.getWidth();
         float screenHeight = screen.getHeight();
 
-        Vector2 tabScreenPos = menuTab.getScreenPosition();
-        float x = tabScreenPos.x;
-        float y = tabScreenPos.y + menuTab.getHeight();
+        float x = menuTab.screenPos.x;
+        float y = menuTab.screenPos.y + menuTab.getHeight();
 
         float maxVisibleHeight = screenHeight - VPrompt.HEIGHT - y; //prevent covering prompt
         paneSize = updateAndGetPaneSize(screenWidth, maxVisibleHeight);

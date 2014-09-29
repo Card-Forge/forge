@@ -179,7 +179,7 @@ public class VStack extends FDropDown {
                     activeItem.getTop() + VStack.CARD_HEIGHT * FCardPanel.TARGET_ORIGIN_FACTOR_Y + VStack.PADDING + VStack.BORDER_THICKNESS);
 
             PlayerView activator = activeStackInstance.getActivatingPlayer();
-            arrowOrigin = arrowOrigin.add(getScreenPosition());
+            arrowOrigin = arrowOrigin.add(screenPos.x, screenPos.y);
 
             StackItemView instance = activeStackInstance;
             while (instance != null) {

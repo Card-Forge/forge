@@ -34,8 +34,8 @@ public class FMagnifyView extends FDropDown {
 
     @Override
     protected void updateSizeAndPosition() {
-        float x = owner.getScreenPosition().x;
-        float y = owner.getScreenPosition().y + owner.getHeight();
+        float x = owner.screenPos.x;
+        float y = owner.screenPos.y + owner.getHeight();
         paneSize = updateAndGetPaneSize(owner.getWidth(), y);
         float height = paneSize.getHeight();
         if (height > y) {
