@@ -311,37 +311,10 @@ public class ComputerUtilMana {
         adjustManaCostToAvoidNegEffects(cost, sa.getHostCard(), ai);
         List<Mana> manaSpentToPay = test ? new ArrayList<Mana>() : sa.getPayingMana();
         
-        final ManaPool manapool = ai.getManaPool();
-        List<ManaCostShard> unpaidShards = cost.getUnpaidShards();
-        Collections.sort(unpaidShards); // most difficult shards must come first
-        for (ManaCostShard part : unpaidShards) {
-            if (part != ManaCostShard.X) {
-                if (cost.isPaid()) {
-                    continue;
-                }
-
-                // get a mana of this type from floating, bail if none available
-                final Mana mana = getMana(ai, part, sa, cost.getSourceRestriction());
-                if (mana != null) {
-                    if (ai.getManaPool().tryPayCostWithMana(sa, cost, mana)) {
-                        manaSpentToPay.add(0, mana);
-                    }
-                }
-            }
-        }
-
-        if (cost.isPaid()) {
-            // refund any mana taken from mana pool when test
-            if (test) {
-                refundMana(manaSpentToPay, ai, sa);
-            }
-            else {
-                manaSpentToPay.clear(); //prevent mana spent to pay sticking around such that it can cause an improper refund later
-            }
-            handleOfferingsAI(sa, test, cost.isPaid());
+        if (payManaCostFromPool(cost, sa, ai, test, manaSpentToPay)) {
             return true;
         }
-
+        
         // arrange all mana abilities by color produced.
         final ArrayListMultimap<Integer, SpellAbility> manaAbilityMap = ComputerUtilMana.groupSourcesByManaColor(ai, checkPlayable);
         if (manaAbilityMap.isEmpty()) {
@@ -364,6 +337,7 @@ public class ComputerUtilMana {
             System.out.println("DEBUG_MANA_PAYMENT: sourcesForShards = " + sourcesForShards);
         }
 
+        final ManaPool manapool = ai.getManaPool();
         ManaCostShard toPay = null;
         // Loop over mana needed
         while (!cost.isPaid()) {
@@ -473,6 +447,49 @@ public class ComputerUtilMana {
         sa.getHostCard().setSunburstValue(cost.getSunburst());
         return true;
     } // payManaCost()
+
+    /**
+     * Checks if the given mana cost can be paid from floating mana.
+     * @param cost mana cost to pay for
+     * @param sa ability to pay for
+     * @param ai activating player
+     * @param test actual payment is made if this is false
+     * @param manaSpentToPay list of mana spent
+     * @return whether the floating mana is sufficient to pay the cost fully
+     */
+    private static boolean payManaCostFromPool(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, 
+            final boolean test, List<Mana> manaSpentToPay) {
+        List<ManaCostShard> unpaidShards = cost.getUnpaidShards();
+        Collections.sort(unpaidShards); // most difficult shards must come first
+        for (ManaCostShard part : unpaidShards) {
+            if (part != ManaCostShard.X) {
+                if (cost.isPaid()) {
+                    continue;
+                }
+
+                // get a mana of this type from floating, bail if none available
+                final Mana mana = getMana(ai, part, sa, cost.getSourceRestriction());
+                if (mana != null) {
+                    if (ai.getManaPool().tryPayCostWithMana(sa, cost, mana)) {
+                        manaSpentToPay.add(0, mana);
+                    }
+                }
+            }
+        }
+
+        if (cost.isPaid()) {
+            // refund any mana taken from mana pool when test
+            if (test) {
+                refundMana(manaSpentToPay, ai, sa);
+            }
+            else {
+                manaSpentToPay.clear(); //prevent mana spent to pay sticking around such that it can cause an improper refund later
+            }
+            handleOfferingsAI(sa, test, cost.isPaid());
+            return true;
+        }
+        return false;
+    }
 
     /**
      * <p>
