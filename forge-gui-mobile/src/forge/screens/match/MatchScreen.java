@@ -130,6 +130,7 @@ public class MatchScreen extends FScreen {
         }
         else {
             menuBar.addTab("\u2022 \u2022 \u2022", new PlayerSpecificMenu(true));
+            stack.setRotate90(true);
             menuBar.addTab("Stack (0)", stack);
             menuBar.addTab("\u2022 \u2022 \u2022", new PlayerSpecificMenu(false));
         }

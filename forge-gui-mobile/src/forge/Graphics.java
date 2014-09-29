@@ -70,10 +70,32 @@ public class Graphics {
 
         Rectangle clip = new Rectangle(adjustX(x), adjustY(y, h), w, h);
         if (!transforms.isEmpty()) { //transform position if needed
-            tmp.set(clip.x + clip.width / 2, clip.y + clip.height / 2, 0);
+            tmp.set(clip.x, clip.y, 0);
             tmp.mul(batch.getTransformMatrix());
-            clip.x = tmp.x - clip.width / 2;
-            clip.y = tmp.y - clip.height / 2;
+            float minX = tmp.x;
+            float maxX = minX;
+            float minY = tmp.y;
+            float maxY = minY;
+            tmp.set(clip.x + clip.width, clip.y, 0);
+            tmp.mul(batch.getTransformMatrix());
+            if (tmp.x < minX) { minX = tmp.x; }
+            else if (tmp.x > maxX) { maxX = tmp.x; }
+            if (tmp.y < minY) { minY = tmp.y; }
+            else if (tmp.y > maxY) { maxY = tmp.y; }
+            tmp.set(clip.x + clip.width, clip.y + clip.height, 0);
+            tmp.mul(batch.getTransformMatrix());
+            if (tmp.x < minX) { minX = tmp.x; }
+            else if (tmp.x > maxX) { maxX = tmp.x; }
+            if (tmp.y < minY) { minY = tmp.y; }
+            else if (tmp.y > maxY) { maxY = tmp.y; }
+            tmp.set(clip.x, clip.y + clip.height, 0);
+            tmp.mul(batch.getTransformMatrix());
+            if (tmp.x < minX) { minX = tmp.x; }
+            else if (tmp.x > maxX) { maxX = tmp.x; }
+            if (tmp.y < minY) { minY = tmp.y; }
+            else if (tmp.y > maxY) { maxY = tmp.y; }
+
+            clip.set(minX, minY, maxX - minX, maxY - minY);
         }
         if (!ScissorStack.pushScissors(clip)) {
             failedClipCount++; //tracked failed clips to prevent calling popScissors on endClip
