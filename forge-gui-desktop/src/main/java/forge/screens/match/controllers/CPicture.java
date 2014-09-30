@@ -24,6 +24,7 @@ import java.awt.event.MouseWheelListener;
 import javax.swing.JLabel;
 
 import forge.UiCommand;
+import forge.game.card.Card;
 import forge.gui.CardPicturePanel;
 import forge.gui.framework.ICDoc;
 import forge.item.IPaperCard;
@@ -84,7 +85,13 @@ public enum CPicture implements ICDoc {
             final IPaperCard paperCard = ((IPaperCard)item);
             final CardView c = ViewUtil.getCardForUi(paperCard);
             if (paperCard.isFoil() && c.getOriginal().getFoilIndex() == 0) {
-                c.getOriginal().setFoilIndex(1); // FIXME should assign random foil here
+                // FIXME should assign a random foil here in all cases
+                // (currently assigns 1 for the deck editors where foils "flicker" otherwise)
+                if (item instanceof Card) {
+                    c.getOriginal().setRandomFoil(); 
+                } else if (item instanceof IPaperCard) {
+                    c.getOriginal().setFoilIndex(1);
+                }
             }
             showCard(c, false);
         } else {

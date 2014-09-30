@@ -3,6 +3,7 @@ package forge.itemmanager.views;
 import forge.ImageCache;
 import forge.assets.FSkinProp;
 import forge.deck.DeckProxy;
+import forge.game.card.Card;
 import forge.gui.framework.ILocalRepaint;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
@@ -1102,7 +1103,13 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 if (paperCard.isFoil()) {
                     final CardView card = ViewUtil.getCardForUi(paperCard);
                     if (card.getOriginal().getFoilIndex() == 0) { //if foil finish not yet established, assign a random one
-                        card.getOriginal().setFoilIndex(1); // FIXME should assign a random foil here
+                        // FIXME should assign a random foil here in all cases
+                        // (currently assigns 1 for the deck editors where foils "flicker" otherwise)
+                        if (item instanceof Card) {
+                            card.getOriginal().setRandomFoil(); 
+                        } else if (item instanceof IPaperCard) {
+                            card.getOriginal().setFoilIndex(1);
+                        }
                     }
                     CardPanel.drawFoilEffect(g, card, bounds.x, bounds.y, bounds.width, bounds.height, borderSize);
                 }
