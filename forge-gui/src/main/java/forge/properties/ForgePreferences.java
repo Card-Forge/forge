@@ -67,21 +67,22 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ENABLE_MUSIC ("true"),
         UI_ALT_SOUND_SYSTEM ("false"),
         UI_CURRENT_AI_PROFILE (AiProfileUtil.AI_PROFILE_RANDOM_MATCH),
-        UI_CLONE_MODE_SOURCE ("false"), /** */
+        UI_CLONE_MODE_SOURCE ("false"),
         UI_MATCH_IMAGE_VISIBLE ("true"),
-        UI_THEMED_COMBOBOX ("true"),                // Now applies to all theme settings, not just Combo.
+        UI_THEMED_COMBOBOX ("true"), // Now applies to all theme settings, not just Combo.
         UI_LOCK_TITLE_BAR ("false"),
-        UI_HIDE_GAME_TABS ("false"),                // Visibility of tabs in match screen.
+        UI_HIDE_GAME_TABS ("false"), // Visibility of tabs in match screen.
         UI_CLOSE_ACTION ("NONE"),
-        UI_MANA_LOST_PROMPT ("false"),				// Prompt on losing mana when passing priority
+        UI_MANA_LOST_PROMPT ("false"), // Prompt on losing mana when passing priority
 
         UI_FOR_TOUCHSCREN("false"),
 
         UI_VIBRATE_ON_LIFE_LOSS("true"),
         UI_VIBRATE_ON_LONG_PRESS("true"),
-		
-		UI_LANGUAGE("en-US"),
+        
+        UI_LANGUAGE("en-US"),
 
+        MATCH_HOT_SEAT_MODE("false"), //this only applies to mobile game
         MATCHPREF_PROMPT_FREE_BLOCKS("false"),
 
         SUBMENU_CURRENTMENU ("CONSTRUCTED"),

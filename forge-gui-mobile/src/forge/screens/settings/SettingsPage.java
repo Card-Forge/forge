@@ -65,6 +65,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 "Match Ante Rarity",
                 "Attempts to make antes the same rarity for all players."),
                 1);
+        lstSettings.addItem(new BooleanSetting(FPref.MATCH_HOT_SEAT_MODE,
+                "Hot Seat Mode",
+                "When starting a game with 2 human players, use single prompt to control both players."),
+                1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_UPLOAD_DRAFT,
                 "Upload Draft Picks",
                 "Sends draft picks to Forge servers for analysis, to improve draft AI."),

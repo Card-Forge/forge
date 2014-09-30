@@ -125,7 +125,7 @@ public class MatchController implements IMatchController {
 
     @Override
     public boolean hotSeatMode() {
-        return false; //TODO: Support toggling hot seat mode
+        return FModel.getPreferences().getPrefBoolean(FPref.MATCH_HOT_SEAT_MODE);
     }
 
     @Override
