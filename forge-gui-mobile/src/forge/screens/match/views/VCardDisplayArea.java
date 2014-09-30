@@ -332,8 +332,7 @@ public abstract class VCardDisplayArea extends VDisplayArea {
 
         @Override
         public void draw(Graphics g) {
-            boolean rotate = displayArea != null && displayArea.rotateCards180;
-            if (rotate) {
+            if (displayArea != null && displayArea.rotateCards180) {
                 float padding = getPadding();
                 float x = padding;
                 float y = padding;
@@ -343,10 +342,11 @@ public abstract class VCardDisplayArea extends VDisplayArea {
                     w = h / ASPECT_RATIO;
                 }
                 g.startRotateTransform(x + w / 2, y + h / 2, 180);
-            }
-            super.draw(g);
-            if (rotate) {
+                super.draw(g);
                 g.endTransform();
+            }
+            else {
+                super.draw(g);
             }
         }
     }
