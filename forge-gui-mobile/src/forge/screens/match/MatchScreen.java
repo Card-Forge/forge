@@ -203,11 +203,18 @@ public class MatchScreen extends FScreen {
 
         @Override
         protected void buildMenu() {
-            addItem(new MenuItem("Game", gameMenu));
-            addItem(new MenuItem("Players (" + playerPanels.size() + ")", players));
-            addItem(new MenuItem("Log", log));
-            if (ForgePreferences.DEV_MODE) {
-                addItem(new MenuItem("Dev", devMenu));
+            if (isTopHumanPlayerActive() == getRotate180()) {
+                addItem(new MenuItem("Game", gameMenu));
+                addItem(new MenuItem("Players (" + playerPanels.size() + ")", players));
+                addItem(new MenuItem("Log", log));
+                if (ForgePreferences.DEV_MODE) {
+                    addItem(new MenuItem("Dev", devMenu));
+                }
+            }
+            else { //TODO: Support using menu when player doesn't have priority
+                FMenuItem item = new FMenuItem("Must wait for priority...", null);
+                item.setEnabled(false);
+                addItem(item);
             }
         }
     }
