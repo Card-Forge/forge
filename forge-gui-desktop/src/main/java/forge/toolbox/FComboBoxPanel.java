@@ -1,7 +1,5 @@
 package forge.toolbox;
 
-import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FSkin.SkinnedLabel;
 
 import javax.swing.*;
@@ -72,11 +70,9 @@ public class FComboBoxPanel<E> extends JPanel {
     
     private void setComboBoxLayout() {
         if (this.comboBox != null) {
-            if (FModel.getPreferences().getPrefBoolean(FPref.UI_THEMED_COMBOBOX)) {
-                this.comboBox.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-                this.comboBox.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-                this.comboBox.setFont(FSkin.getFont(12));
-            }
+            this.comboBox.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+            this.comboBox.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            this.comboBox.setFont(FSkin.getFont(12));
             this.comboBox.setEditable(false);
             this.comboBox.setFocusable(true);
             this.comboBox.setOpaque(true);                

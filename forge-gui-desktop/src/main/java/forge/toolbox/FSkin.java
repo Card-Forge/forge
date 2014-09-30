@@ -1446,14 +1446,12 @@ public class FSkin {
          * Sets the look and feel of the GUI based on the selected Forge theme.
          */
         private void setForgeLookAndFeel(final JFrame appFrame) {
-            if (isUIManagerEnabled()) {
-                if (setMetalLookAndFeel(appFrame)) {
-                    setMenusLookAndFeel();
-                    setComboBoxLookAndFeel();
-                    setTabbedPaneLookAndFeel();
-                    setButtonLookAndFeel();
-                    setToolTipLookAndFeel();
-                }
+            if (setMetalLookAndFeel(appFrame)) {
+                setMenusLookAndFeel();
+                setComboBoxLookAndFeel();
+                setTabbedPaneLookAndFeel();
+                setButtonLookAndFeel();
+                setToolTipLookAndFeel();
             }
             onInit = false;
         }
@@ -1561,16 +1559,6 @@ public class FSkin {
             UIManager.put("ToolTip.background", BACK_COLOR);
             UIManager.put("ToolTip.foreground", FORE_COLOR);
             UIManager.put("ToolTip.border", LINE_BORDER);
-        }
-
-        /**
-         * Determines whether theme styles should be applied to GUI.
-         * <p>
-         * TODO: Currently is using UI_THEMED_COMBOBOX setting but will
-         *       eventually want to rename for clarity.
-         */
-        private boolean isUIManagerEnabled() {
-            return FModel.getPreferences().getPrefBoolean(FPref.UI_THEMED_COMBOBOX);
         }
 
         private Font getDefaultFont(String component) {

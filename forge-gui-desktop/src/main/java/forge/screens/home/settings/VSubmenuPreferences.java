@@ -78,7 +78,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbAltSoundSystem = new OptionsCheckBox("Use Alternate Sound System");
     private final JCheckBox cbUiForTouchScreen = new OptionsCheckBox("Enchance UI for Touchscreens");
     private final JCheckBox cbCompactMainMenu = new OptionsCheckBox("Use Compact Main Sidebar Menu");
-    private final JCheckBox cbUseThemes = new OptionsCheckBox("Enable Themes");
     private final JCheckBox cbPromptFreeBlocks = new OptionsCheckBox("Free Block Handling");
     private final JCheckBox cbCompactPrompt = new OptionsCheckBox("Compact Prompt");
     private final JCheckBox cbHideReminderText = new OptionsCheckBox("Hide Reminder Text");
@@ -180,9 +179,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbpGameLogEntryType, "w 80%!, gap 10% 0 0 10px, span 2 1");
         pnlPrefs.add(new NoteLabel("Changes how much information is displayed in the game log. Sorted by least to most verbose."), regularConstraints);
-
-        pnlPrefs.add(cbUseThemes, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Currently only applies to UIManager-related theme settings. (RESTART REQUIRED)"), regularConstraints);
 
         pnlPrefs.add(cbpCloseAction, "w 80%!, gap 10% 0 0 10px, span 2 1");
         pnlPrefs.add(new NoteLabel("Changes what happens when clicking the X button in the upper right."), regularConstraints);
@@ -555,11 +551,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link forge.toolbox.FLabel} */
     public FLabel getBtnReset() {
         return btnReset;
-    }
-
-    /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getCbUseThemes() {
-        return cbUseThemes;
     }
 
     public FLabel getBtnPlayerName() {
