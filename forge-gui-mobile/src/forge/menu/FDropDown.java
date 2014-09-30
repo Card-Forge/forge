@@ -163,7 +163,7 @@ public abstract class FDropDown extends FScrollPane {
 
     protected boolean hideBackdropOnPress(float x, float y) {
         FDisplayObject owner = getDropDownOwner();
-        if (owner == null || !owner.contains(owner.getLeft() + owner.screenToLocalX(x), owner.getTop() + owner.screenToLocalY(y))) {
+        if (owner == null || !owner.screenPos.contains(x, y)) {
             return true; //auto-hide when backdrop pressed unless over owner
         }
         return false;
