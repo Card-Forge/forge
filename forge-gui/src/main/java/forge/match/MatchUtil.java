@@ -358,40 +358,29 @@ public class MatchUtil {
                 "This will end the current game and you will not be able to resume.\n\n" +
                         "Concede anyway?";
         if (SOptionPane.showConfirmDialog(GuiBase.getInterface(), userPrompt, "Concede Game?", "Concede", "Cancel")) {
-            stopGame();
-        }
-    }
-
-    public static void stopGame() {
-        List<Player> pp = new ArrayList<Player>();
-        for (Player p : game.getPlayers()) {
-            if (p.getOriginalLobbyPlayer() == getGuiPlayer()) {
-                pp.add(p);
+            if (humanCount == 0) { // no human? then all players surrender!
+                for (Player p : game.getPlayers()) {
+                    p.concede();
+                }
             }
-        }
-        boolean hasHuman = !pp.isEmpty();
+            else {
+                getCurrentPlayer().concede();
+            }
 
-        if (pp.isEmpty()) {
-            pp.addAll(game.getPlayers()); // no human? then all players surrender!
-        }
+            Player priorityPlayer = game.getPhaseHandler().getPriorityPlayer();
+            boolean humanHasPriority = priorityPlayer == null || priorityPlayer.getLobbyPlayer() == getGuiPlayer();
 
-        for (Player p: pp) {
-            p.concede();
-        }
+            if (humanCount > 0 && humanHasPriority) {
+                game.getAction().checkGameOverCondition();
+            }
+            else {
+                game.isGameOver(); // this is synchronized method - it's used to make Game-0 thread see changes made here
+                getInputQueue().onGameOver(false); //release any waiting input, effectively passing priority
+            }
 
-        Player priorityPlayer = game.getPhaseHandler().getPriorityPlayer();
-        boolean humanHasPriority = priorityPlayer == null || priorityPlayer.getLobbyPlayer() == getGuiPlayer();
-
-        if (hasHuman && humanHasPriority) {
-            game.getAction().checkGameOverCondition();
-        }
-        else {
-            game.isGameOver(); // this is synchronized method - it's used to make Game-0 thread see changes made here
-            getInputQueue().onGameOver(false); //release any waiting input, effectively passing priority
-        }
-
-        if (playbackControl != null) {
-            playbackControl.onGameStopRequested();
+            if (playbackControl != null) {
+                playbackControl.onGameStopRequested();
+            }
         }
     }
 

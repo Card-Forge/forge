@@ -10,6 +10,8 @@ import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
+import forge.match.MatchUtil;
+import forge.screens.match.MatchController;
 
 public abstract class FOverlay extends FContainer {
     public static final float ALPHA_COMPOSITE = 0.5f;
@@ -73,6 +75,8 @@ public abstract class FOverlay extends FContainer {
         }
 
         if (visible0) {
+            //rotate overlay to face top human player if needed
+            setRotate180(MatchUtil.getGame() != null && MatchController.getView().isTopHumanPlayerActive());
             overlays.push(this);
         }
         else if (!hidingAll) { //hiding all handles cleaning up overlay collection
