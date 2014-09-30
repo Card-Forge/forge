@@ -15,6 +15,7 @@ import com.google.common.collect.Maps;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
 import forge.match.MatchUtil;
+import forge.menu.FDropDown;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuBar;
 import forge.menu.FMenuItem;
@@ -57,6 +58,8 @@ public class MatchScreen extends FScreen {
     public static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
 
     private final Map<PlayerView, VPlayerPanel> playerPanels = Maps.newHashMap();
+    private final VGameMenu gameMenu;
+    private final VPlayers players;
     private final VLog log;
     private final VStack stack;
     private final VDevMenu devMenu;
@@ -113,19 +116,20 @@ public class MatchScreen extends FScreen {
             getHeader().setRotate90(true);
         }
 
+        gameMenu = new VGameMenu();
+        gameMenu.setDropDownContainer(this);
+        players = new VPlayers();
+        players.setDropDownContainer(this);
         log = new VLog();
         log.setDropDownContainer(this);
-        stack = new VStack();
-        stack.setDropDownContainer(this);
         devMenu = new VDevMenu();
         devMenu.setDropDownContainer(this);
-
-        VPlayers players = new VPlayers();
-        players.setDropDownContainer(this);
+        stack = new VStack();
+        stack.setDropDownContainer(this);
 
         FMenuBar menuBar = (FMenuBar)getHeader();
         if (topPlayerPrompt == null) {
-            menuBar.addTab("Game", new VGameMenu());
+            menuBar.addTab("Game", gameMenu);
             menuBar.addTab("Players (" + playerPanels.size() + ")", players);
             menuBar.addTab("Log", log);
             menuBar.addTab("Dev", devMenu);
@@ -136,6 +140,23 @@ public class MatchScreen extends FScreen {
             stack.setRotate90(true);
             menuBar.addTab("Stack (0)", stack);
             menuBar.addTab("\u2022 \u2022 \u2022", new PlayerSpecificMenu(false));
+
+            //create fake menu tabs for other drop downs so they can be positioned as needed
+            gameMenu.setMenuTab(new HiddenMenuTab(gameMenu));
+            players.setMenuTab(new HiddenMenuTab(players));
+            log.setMenuTab(new HiddenMenuTab(log));
+            devMenu.setMenuTab(new HiddenMenuTab(devMenu));
+        }
+    }
+
+    private class HiddenMenuTab extends FMenuTab {
+        private HiddenMenuTab(FDropDown dropDown0) {
+            super(null, null, dropDown0, -1);
+            setVisible(false);
+        }
+        @Override
+        public void setText(String text0) {
+            //avoid trying to set text for this tab
         }
     }
 
@@ -161,29 +182,32 @@ public class MatchScreen extends FScreen {
             setBounds(Math.round(x), Math.round(y), paneSize.getWidth(), paneSize.getHeight());
         }
 
-        @Override
-        protected void buildMenu() {
-            addItem(new FMenuItem("Game", new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                }
-            }));
-            addItem(new FMenuItem("Players (" + playerPanels.size() + ")", new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                }
-            }));
-            addItem(new FMenuItem("Log", new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                }
-            }));
-            if (ForgePreferences.DEV_MODE) {
-                addItem(new FMenuItem("Dev", new FEventHandler() {
+        private class MenuItem extends FMenuItem {
+            private MenuItem(String text0, final FDropDown dropDown) {
+                super(text0, new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
+                        dropDown.setRotate180(PlayerSpecificMenu.this.getRotate180());
+                        Rectangle menuScreenPos = PlayerSpecificMenu.this.screenPos;
+                        if (dropDown.getRotate180()) {
+                            dropDown.getMenuTab().screenPos.setPosition(menuScreenPos.x + menuScreenPos.width, menuScreenPos.y);
+                        }
+                        else {
+                            dropDown.getMenuTab().screenPos.setPosition(menuScreenPos.x + menuScreenPos.width, menuScreenPos.y + menuScreenPos.height);
+                        }
+                        dropDown.show();
                     }
-                }));
+                });
+            }
+        }
+
+        @Override
+        protected void buildMenu() {
+            addItem(new MenuItem("Game", gameMenu));
+            addItem(new MenuItem("Players (" + playerPanels.size() + ")", players));
+            addItem(new MenuItem("Log", log));
+            if (ForgePreferences.DEV_MODE) {
+                addItem(new MenuItem("Dev", devMenu));
             }
         }
     }
@@ -254,6 +278,14 @@ public class MatchScreen extends FScreen {
         }
         scroller.setBounds(0, startY, scrollerWidth, height - VPrompt.HEIGHT - startY);
         bottomPlayerPrompt.setBounds(0, height - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
+    }
+
+    @Override
+    public Rectangle getDropDownBoundary() {
+        if (topPlayerPrompt == null) {
+            return new Rectangle(0, 0, getWidth(), getHeight() - VPrompt.HEIGHT); //prevent covering prompt
+        }
+        return new Rectangle(0, VPrompt.HEIGHT, scroller.getWidth(), getHeight() - 2 * VPrompt.HEIGHT);
     }
 
     @Override

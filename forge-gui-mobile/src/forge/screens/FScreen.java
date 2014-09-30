@@ -2,6 +2,7 @@ package forge.screens;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.math.Rectangle;
 
 import forge.Forge;
 import forge.Graphics;
@@ -45,6 +46,10 @@ public abstract class FScreen extends FContainer {
         if (header instanceof DefaultHeader) {
             ((DefaultHeader)header).lblCaption.setText(headerCaption);
         }
+    }
+
+    public Rectangle getDropDownBoundary() {
+        return new Rectangle(0, 0, getWidth(), getHeight());
     }
 
     public void onActivate() {

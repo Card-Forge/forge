@@ -1,12 +1,13 @@
 package forge.menu;
 
+import com.badlogic.gdx.math.Rectangle;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinTexture;
 import forge.assets.FSkinColor.Colors;
 import forge.screens.FScreen;
-import forge.screens.match.views.VPrompt;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOverlay;
@@ -113,23 +114,36 @@ public abstract class FDropDown extends FScrollPane {
     protected void updateSizeAndPosition() {
         if (menuTab == null) { return; }
 
-        FScreen screen = Forge.getCurrentScreen();
-        float screenWidth = screen.getWidth();
-        float screenHeight = screen.getHeight();
+        Rectangle boundary = Forge.getCurrentScreen().getDropDownBoundary();
 
         float x = menuTab.screenPos.x;
         float y = menuTab.screenPos.y + menuTab.getHeight();
+        boolean showAbove;
+        float maxVisibleHeight;
+        if (y < boundary.y + boundary.height / 2) {
+            showAbove = false;
+            maxVisibleHeight = boundary.y + boundary.height - y; //prevent covering prompt
+        }
+        else { //handle drop downs at near bottom of screen
+            showAbove = true;
+            y = menuTab.screenPos.y;
+            maxVisibleHeight = y - boundary.y;
+        }
 
-        float maxVisibleHeight = screenHeight - VPrompt.HEIGHT - y; //prevent covering prompt
-        paneSize = updateAndGetPaneSize(screenWidth, maxVisibleHeight);
+        paneSize = updateAndGetPaneSize(boundary.width, maxVisibleHeight);
 
         //round width and height so borders appear properly
         paneSize = new ScrollBounds(Math.round(paneSize.getWidth()), Math.round(paneSize.getHeight()));
-        if (x + paneSize.getWidth() > screenWidth) {
-            x = screenWidth - paneSize.getWidth();
+        if (x + paneSize.getWidth() > boundary.x + boundary.width) {
+            x = boundary.x + boundary.width - paneSize.getWidth();
+        }
+        float height = Math.min(paneSize.getHeight(), maxVisibleHeight);
+        if (showAbove) {
+            //make drop down appear above
+            y -= height;
         }
 
-        setBounds(Math.round(x), Math.round(y), paneSize.getWidth(), Math.min(paneSize.getHeight(), maxVisibleHeight));
+        setBounds(Math.round(x), Math.round(y), paneSize.getWidth(), height);
     }
 
     @Override

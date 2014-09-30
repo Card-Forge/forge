@@ -57,7 +57,9 @@ public class FMenuTab extends FDisplayObject {
         if (!visible0) {
             dropDown.hide();
         }
-        menuBar.revalidate();
+        if (menuBar != null) {
+            menuBar.revalidate();
+        }
     }
 
     public float getMinWidth() {
