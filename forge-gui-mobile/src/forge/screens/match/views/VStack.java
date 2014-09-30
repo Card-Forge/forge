@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
@@ -25,6 +26,7 @@ import forge.match.MatchUtil;
 import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDown;
 import forge.menu.FMenuItem;
+import forge.menu.FMenuTab;
 import forge.menu.FPopupMenu;
 import forge.screens.match.MatchController;
 import forge.screens.match.TargetingOverlay;
@@ -163,6 +165,24 @@ public class VStack extends FDropDown {
             revealTargetZones();
         }
         return new ScrollBounds(totalWidth, y + MARGINS);
+    }
+
+    protected void updateSizeAndPosition() {
+        if (!getRotate90()) {
+            super.updateSizeAndPosition();
+            return;
+        }
+        
+        FMenuTab menuTab = getMenuTab();
+        float screenHeight = Forge.getCurrentScreen().getHeight();
+        float width = (screenHeight - 2 * VPrompt.HEIGHT - 2 * VAvatar.HEIGHT) * 4f / 6f;
+        float maxVisibleHeight = menuTab.screenPos.x;
+        paneSize = updateAndGetPaneSize(width + MatchController.getView().getTopPlayerPanel().getTabs().iterator().next().getRight(), maxVisibleHeight);
+
+        //round width and height so borders appear properly
+        paneSize = new ScrollBounds(Math.round(paneSize.getWidth()), Math.round(paneSize.getHeight()));
+
+        setBounds(Math.round(menuTab.screenPos.x - width), Math.round((screenHeight + width) / 2), paneSize.getWidth(), Math.min(paneSize.getHeight(), maxVisibleHeight));
     }
 
     @Override
