@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.math.Rectangle;
 import com.google.common.collect.Maps;
 
 import forge.game.phase.PhaseType;
@@ -17,6 +18,7 @@ import forge.match.MatchUtil;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuBar;
 import forge.menu.FMenuItem;
+import forge.menu.FMenuTab;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -35,6 +37,7 @@ import forge.screens.match.views.VStack;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.Forge.KeyInputAdapter;
+import forge.Forge;
 import forge.Graphics;
 import forge.animation.AbilityEffect;
 import forge.assets.FSkinColor;
@@ -140,6 +143,24 @@ public class MatchScreen extends FScreen {
         private PlayerSpecificMenu(boolean forTopPlayer) {
             setRotate180(forTopPlayer);
         }
+
+        @Override
+        protected void updateSizeAndPosition() {
+            Rectangle menuTabPos = getMenuTab().screenPos;
+            FScreen screen = Forge.getCurrentScreen();
+            float maxWidth = screen.getWidth() - menuTabPos.width;
+            float maxHeight = screen.getHeight() / 2;
+
+            paneSize = updateAndGetPaneSize(maxWidth, maxHeight);
+
+            //round width and height so borders appear properly
+            paneSize = new ScrollBounds(Math.round(paneSize.getWidth()), Math.round(paneSize.getHeight()));
+
+            float x = maxWidth - paneSize.getWidth();
+            float y = getRotate180() ? menuTabPos.y + FMenuTab.PADDING : menuTabPos.y + menuTabPos.height - paneSize.getHeight() - FMenuTab.PADDING + 1;
+            setBounds(Math.round(x), Math.round(y), paneSize.getWidth(), paneSize.getHeight());
+        }
+
         @Override
         protected void buildMenu() {
             addItem(new FMenuItem("Game", new FEventHandler() {
