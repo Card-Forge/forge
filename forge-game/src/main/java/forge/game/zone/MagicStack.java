@@ -301,7 +301,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 clearUndoStack(); //clear if undo stack owner changes
                 undoStackOwner = activator;
             }
-        	undoStack.push(sp);
+            undoStack.push(sp);
         }
         else {
             clearUndoStack();
@@ -352,8 +352,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             else {
                 if (sp.isSpell() && source.isCreature() && Iterables.any(activator.getCardsIn(ZoneType.Battlefield),
                         CardPredicates.hasKeyword("As an additional cost to cast creature spells," +
-                        		" you may pay any amount of mana. If you do, that creature enters " +
-                        		"the battlefield with that many additional +1/+1 counters on it."))) {
+                                " you may pay any amount of mana. If you do, that creature enters " +
+                                "the battlefield with that many additional +1/+1 counters on it."))) {
                     final Cost costPseudoKicker = new Cost(ManaCost.ONE, false);
                     boolean hasPaid = false;
                     do {
