@@ -38,8 +38,8 @@ public class ThreadUtil {
         getGameThreadPool().execute(toRun);
     }
 
-    public static void delay(int milliseconds, Runnable inputUpdater) {
-        getScheduledPool().schedule(inputUpdater, milliseconds, TimeUnit.MILLISECONDS);
+    public static ScheduledFuture<?> delay(int milliseconds, Runnable inputUpdater) {
+        return getScheduledPool().schedule(inputUpdater, milliseconds, TimeUnit.MILLISECONDS);
     }
 
     public static boolean isGameThread() {
