@@ -182,7 +182,6 @@ public class MatchUtil {
                 LocalGameView gameView = controller.getGameView();
                 if (humanCount == 0) {
                     currentPlayer = p;
-                    gameView.startUpdateDelay(); //delay updating views until game finishes initializing
                 }
                 game.subscribeToEvents(new FControlGameEventHandler(gameView, humanCount == 0));
                 gameViews.add(gameView);
@@ -194,7 +193,6 @@ public class MatchUtil {
             LocalGameView gameView = new WatchLocalGame(GuiBase.getInterface(), game);
             currentPlayer = sortedPlayers.get(0);
             gameView.setLocalPlayer(currentPlayer);
-            gameView.startUpdateDelay();
             game.subscribeToEvents(new FControlGameEventHandler(gameView, true));
             gameViews.add(gameView);
         }

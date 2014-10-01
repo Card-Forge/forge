@@ -38,7 +38,6 @@ public abstract class LocalGameView implements IGameView {
     protected final InputQueue inputQueue;
     protected final InputProxy inputProxy;
     private PlayerView localPlayerView;
-    private int updateDelays;
 
     public LocalGameView(IGuiBase gui0, Game game0) {
         game = game0;
@@ -365,9 +364,7 @@ public abstract class LocalGameView implements IGameView {
         PlayerView view = MatchUtil.players.get(p.getId());
         if (view == null) {
             view = new PlayerView(p.getLobbyPlayer(), p.getId());
-            if (updateDelays == 0) {
-                writePlayerToView(p, view);
-            }
+            writePlayerToView(p, view);
             MatchUtil.players.put(p, view);
         }
         return view;
@@ -408,26 +405,13 @@ public abstract class LocalGameView implements IGameView {
         CardView view = MatchUtil.cards.get(c.getId());
         if (view == null) {
             view = new CardView(c.getId());
-            if (updateDelays == 0) {
-                writeCardToView(c, view, MatchUtil.getGameView());
-            }
+            writeCardToView(c, view, MatchUtil.getGameView());
             MatchUtil.cards.put(c, view);
         }
         return view;
     }
-    
-    public void startUpdateDelay() {
-        updateDelays++;
-    }
-    public void endUpdateDelay() {
-        if (updateDelays > 0 && --updateDelays == 0) {
-            updateViews();
-        }
-    }
 
     public void updateViews() {
-        if (updateDelays > 0) { return; }
-
         for (Player p : MatchUtil.players.getKeys()) {
             writePlayerToView(p, getPlayerView(p));
         }

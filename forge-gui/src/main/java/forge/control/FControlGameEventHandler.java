@@ -32,7 +32,6 @@ import forge.game.event.GameEventCombatChanged;
 import forge.game.event.GameEventCombatEnded;
 import forge.game.event.GameEventGameFinished;
 import forge.game.event.GameEventGameOutcome;
-import forge.game.event.GameEventGameStarted;
 import forge.game.event.GameEventManaPool;
 import forge.game.event.GameEventPlayerControl;
 import forge.game.event.GameEventPlayerLivesChanged;
@@ -77,12 +76,6 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public void receiveGameEvent(final GameEvent ev) {
         gameView.updateViews();
         ev.visit(this);
-    }
-
-    @Override
-    public Void visit(GameEventGameStarted event) {
-        gameView.endUpdateDelay(); //allow views to update once game starts
-        return null;
     }
 
     private final AtomicBoolean phaseUpdPlanned = new AtomicBoolean(false);
