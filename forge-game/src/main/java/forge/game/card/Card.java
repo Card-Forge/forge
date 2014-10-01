@@ -8067,8 +8067,10 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 if (wither) {
                     this.addCounter(CounterType.M1M1, damageToAdd, true);
                     damageType = DamageType.M1M1Counters;
-                } else
+                }
+                else {
                     this.damage += damageToAdd;
+                }
             }
 
             if (source.hasKeyword("Deathtouch") && this.isCreature()) {

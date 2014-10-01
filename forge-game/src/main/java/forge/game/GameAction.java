@@ -228,6 +228,7 @@ public class GameAction {
 
         if (fromBattlefield) {
             c.setZone(zoneTo);
+            c.setDamage(0); //clear damage after a card leaves the battlefield
         }
 
         // Need to apply any static effects to produce correct triggers
