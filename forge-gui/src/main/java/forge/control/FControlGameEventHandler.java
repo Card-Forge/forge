@@ -74,7 +74,6 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Subscribe
     public void receiveGameEvent(final GameEvent ev) {
-        gameView.updateViews();
         ev.visit(this);
     }
 
@@ -104,7 +103,11 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     private void updateCombat() {
-        if (!isMainHandler || combatUpdPlanned.getAndSet(true)) { return; }
+        if (!isMainHandler) { return; }
+
+        gameView.updateViews();
+
+        if (combatUpdPlanned.getAndSet(true)) { return; }
 
         FThreads.invokeInEdtNowOrLater(gameView.getGui(), new Runnable() {
             @Override
@@ -141,6 +144,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(GameEventAnteCardsSelected ev) {
         if (!isMainHandler) { return null; }
 
+        gameView.updateViews();
         final List<CardView> options = Lists.newArrayList();
         for (final Entry<Player, Card> kv : ev.cards.entries()) {
             final CardView fakeCard = new CardView(-1); //use fake card so real cards appear with proper formatting
@@ -158,6 +162,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             return null;
         }
 
+        gameView.updateViews();
         FThreads.invokeInEdtNowOrLater(gameView.getGui(), new Runnable() {
             @Override
             public void run() {
@@ -182,6 +187,9 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(GameEventGameFinished ev) {
+        if (isMainHandler) {
+            gameView.updateViews();
+        }
         FThreads.invokeInEdtNowOrLater(gameView.getGui(), new Runnable() {
             @Override
             public void run() {
@@ -211,6 +219,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(GameEventSpellAbilityCast event) {
         if (!isMainHandler) { return null; }
 
+        gameView.updateViews();
         if (!stackUpdPlanned.getAndSet(true)) {
             FThreads.invokeInEdtNowOrLater(gameView.getGui(), updStack);
         }
@@ -220,6 +229,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(GameEventSpellResolved event) {
         if (!isMainHandler) { return null; }
 
+        gameView.updateViews();
         if (!stackUpdPlanned.getAndSet(true)) {
             FThreads.invokeInEdtNowOrLater(gameView.getGui(), updStack);
         }
@@ -229,6 +239,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(GameEventSpellRemovedFromStack event) {
         if (!isMainHandler) { return null; }
 
+        gameView.updateViews();
         if (!stackUpdPlanned.getAndSet(true)) {
             FThreads.invokeInEdtNowOrLater(gameView.getGui(), updStack);
         }
@@ -252,6 +263,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
         if (event.player != null) {
             // anything except stack will get here
+            gameView.updateViews();
             updateZone(Pair.of(gameView.getPlayerView(event.player), event.zoneType));
         }
         return null;
@@ -261,6 +273,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(GameEventCardAttachment event) {
         if (!isMainHandler) { return null; }
 
+        gameView.updateViews();
         final Game game = event.equipment.getGame();
         final PlayerZone zEq = (PlayerZone)game.getZoneOf(event.equipment);
         if (event.oldEntiy instanceof Card) {
@@ -305,6 +318,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(final GameEventCardTapped event) {
         if (!isMainHandler) { return null; }
 
+        gameView.updateViews();
         return updateSingleCard(gameView.getCardView(event.card));
     }
     
@@ -312,6 +326,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(final GameEventCardPhased event) {
         if (!isMainHandler) { return null; }
 
+        gameView.updateViews();
         return updateSingleCard(gameView.getCardView(event.card));
     }
 
@@ -319,6 +334,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(final GameEventCardDamaged event) {
         if (!isMainHandler) { return null; }
 
+        gameView.updateViews();
         return updateSingleCard(gameView.getCardView(event.card));
     }
 
@@ -326,6 +342,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(final GameEventCardCounters event) {
         if (!isMainHandler) { return null; }
 
+        gameView.updateViews();
         return updateSingleCard(gameView.getCardView(event.card));
     }
 
@@ -333,6 +350,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(final GameEventBlockersDeclared event) { // This is to draw icons on blockers declared by AI
         if (!isMainHandler) { return null; }
 
+        gameView.updateViews();
         for (MapOfLists<Card, Card> kv : event.blockers.values()) {
             for (Collection<Card> blockers : kv.values()) {
                 updateManyCards(gameView.getCardViews(blockers));
@@ -350,6 +368,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             return null;
         }
 
+        gameView.updateViews();
+
         // Update all attackers.
         // Although they might have been updated when they were tapped, there could be someone with vigilance, not redrawn yet.
         updateManyCards(gameView.getCardViews(event.attackersMap.values()));
@@ -359,6 +379,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(GameEventCombatChanged event) {
+        if (!isMainHandler) { return null; }
+
         gameView.refreshCombat();
         updateCombat();
         return null;
@@ -407,6 +429,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(GameEventCardChangeZone event) {
         if (!isMainHandler) { return null; }
 
+        gameView.updateViews();
         if (event.from != null) {
             updateZone(event.from);
         }
@@ -423,6 +446,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(GameEventCardStatsChanged event) {
         if (!isMainHandler) { return null; }
 
+        gameView.updateViews();
         final Iterable<CardView> cardViews = gameView.getCardViews(event.cards);
         MatchUtil.getController().refreshCardDetails(cardViews);
         return updateManyCards(cardViews);
@@ -432,6 +456,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(GameEventPlayerStatsChanged event) {
         if (!isMainHandler) { return null; }
 
+        gameView.updateViews();
         for (final Player p : event.players) {
             MatchUtil.getController().refreshCardDetails(gameView.getCardViews(p.getAllCards()));
         }
@@ -442,6 +467,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(GameEventShuffle event) {
         if (!isMainHandler) { return null; }
 
+        gameView.updateViews();
         updateZone(event.player.getZone(ZoneType.Library));
         return null;
     }
@@ -461,6 +487,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(GameEventManaPool event) {
         if (!isMainHandler) { return null; }
 
+        gameView.updateViews();
         boolean invokeUpdate = false;
         synchronized (manaPoolUpdate) {
             if (!manaPoolUpdate.contains(event.player)) {
@@ -488,6 +515,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(GameEventPlayerLivesChanged event) {
         if (!isMainHandler) { return null; }
 
+        gameView.updateViews();
         boolean invokeUpdate = false;
         synchronized (livesUpdate) {
             if (!livesUpdate.contains(event.player)) {
@@ -505,6 +533,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(GameEventPlayerPoisoned event) {
         if (!isMainHandler) { return null; }
 
+        gameView.updateViews();
         boolean invokeUpdate = false;
         synchronized (livesUpdate) {
             if (!livesUpdate.contains(event.receiver)) {
