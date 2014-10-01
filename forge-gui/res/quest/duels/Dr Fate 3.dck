@@ -11,17 +11,19 @@ Deck Type=constructed
 2 Hinterland Harbor
 2 Ancient Ziggurat
 4 Misty Rainforest
+2 Wooded Foothills
 4 Dryad Arbor
 2 Forest|ISD
-3 Island|ISD
+1 Island|ISD
 2 Essence Warden
 2 Fyndhorn Elves
 2 Llanowar Elves
 4 Noble Hierarch
 4 Coiling Oracle
-4 Gaea's Skyfolk
+2 Gaea's Skyfolk
+2 Icefeather Aven
 1 Shambleshark
-4 Jhessian Infiltrator
+2 Jhessian Infiltrator
 1 Edric, Spymaster of Trest
 1 Farhaven Elf
 2 Nulltread Gargantuan
@@ -30,4 +32,6 @@ Deck Type=constructed
 2 Momir Vig, Simic Visionary
 3 Murkfiend Liege
 3 Sages of the Anima
+1 Prophet of Kruphix
+1 Horizon Chimera
 [sideboard]

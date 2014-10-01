@@ -7,7 +7,7 @@ Description=Mono G Forest deck with with land fetch and Baru, Fist of Krosa
 Icon=Dr Watson.jpg
 Deck Type=constructed
 [main]
-24 Forest|M12
+25 Forest|M12
 1 Boundless Realms
 2 Cultivate
 1 Hunting Cheetah
@@ -39,4 +39,5 @@ Deck Type=constructed
 1 Traproot Kami
 1 Treefolk Seedlings
 1 Uktabi Wildcats
+1 Kalonian Twingrove
 [sideboard]

@@ -8,11 +8,17 @@ Icon=Gollum.jpg
 Deck Type=constructed
 [main]
 4 Corpsejack Menace
-2 Doubling Season
+1 Doubling Season
+3 Hardened Scales
 4 Woodland Cemetery
 4 Verdant Catacombs
-7 Swamp
-7 Forest
+6 Swamp
+6 Forest
+4 Jungle Hollow
+2 Temple of Malady
+1 Tuskguard Captain
+1 Mer-Ek Nightblade
+1 Longshot Squad
 1 Bramblewood Paragon
 1 Champion of Lambholt
 1 Consumptive Goo
@@ -39,7 +45,6 @@ Deck Type=constructed
 1 Skullbriar, the Walking Grave
 1 Slitherhead
 1 Sluiceway Scorpion
-1 Spiritmonger
 1 Sporeback Troll
 1 Vigor
 1 Vigor Mortis
