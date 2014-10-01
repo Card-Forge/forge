@@ -30,6 +30,7 @@ import forge.screens.match.views.VGameMenu;
 import forge.screens.match.views.VLog;
 import forge.screens.match.views.VManaPool;
 import forge.screens.match.views.VPlayerPanel;
+import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
 import forge.screens.match.views.VPlayerPanel.InfoTab;
 import forge.screens.match.views.VPlayers;
@@ -436,6 +437,16 @@ public class MatchScreen extends FScreen {
         final ZoneType zone = card.getZone();
         if (zone != null && zone == ZoneType.Battlefield) {
             getPlayerPanel(card.getController()).getField().updateCard(card);
+        }
+        else { //ensure card not on battlefield is reset such that it no longer thinks it's on the battlefield
+            final CardAreaPanel pnl = CardAreaPanel.get(card);
+            if (pnl != null) {
+                pnl.setTapped(false);
+                pnl.getAttachedPanels().clear();
+                pnl.setAttachedToPanel(null);
+                pnl.setPrevPanelInStack(null);
+                pnl.setNextPanelInStack(null);
+            }
         }
     }
 
