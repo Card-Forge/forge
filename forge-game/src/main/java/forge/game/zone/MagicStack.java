@@ -71,6 +71,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     private final Deque<SpellAbilityStackInstance> stack = new LinkedBlockingDeque<SpellAbilityStackInstance>();
     private final Stack<SpellAbilityStackInstance> frozenStack = new Stack<SpellAbilityStackInstance>();
     private final Stack<SpellAbility> undoStack = new Stack<SpellAbility>();
+    private Player undoStackOwner;
 
     private boolean frozen = false;
     private boolean bResolving = false;
@@ -126,7 +127,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         this.thisTurnCast.clear();
         this.curResolvingCard = null;
         this.frozenStack.clear();
-        this.undoStack.clear();
+        this.clearUndoStack();
     }
 
     /**
@@ -239,8 +240,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
      * 
      * @return a boolean.
      */
-    public final boolean canUndo() {
-        return !undoStack.isEmpty();
+    public final boolean canUndo(Player player) {
+        return undoStackOwner == player;
     }
 
     /**
@@ -256,6 +257,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         SpellAbility sa = undoStack.pop();
         sa.undo();
         sa.getActivatingPlayer().getManaPool().refundManaPaid(sa);
+        if (undoStack.isEmpty()) {
+            undoStackOwner = null;
+        }
         return true;
     }
 
@@ -265,7 +269,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
      * </p>
      */
     public final void clearUndoStack() {
+        if (undoStackOwner == null) { return; }
         undoStack.clear();
+        undoStackOwner = null;
     }
 
     /**
@@ -289,13 +295,16 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             System.out.println(source.getName() + " - activatingPlayer not set before adding to stack.");
         }
 
-        //either push onto or clear undo stack based on whether
-        //spell/ability is undoable and activator is the Gui player
-        if (sp.isUndoable() && activator.getController().isGuiPlayer()) {
+        //either push onto or clear undo stack based on whether spell/ability is undoable
+        if (sp.isUndoable()) {
+            if (undoStackOwner != activator) {
+                clearUndoStack(); //clear if undo stack owner changes
+                undoStackOwner = activator;
+            }
         	undoStack.push(sp);
         }
         else {
-        	undoStack.clear();
+            clearUndoStack();
         }
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through

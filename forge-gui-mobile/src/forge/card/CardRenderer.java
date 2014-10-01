@@ -27,7 +27,6 @@ import forge.item.IPaperCard;
 import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
-import forge.screens.match.MatchController;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDialog;
 import forge.toolbox.FList;
@@ -268,7 +267,7 @@ public class CardRenderer {
 
     public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, CardView card, int count, String suffix, float x, float y, float w, float h, boolean compactMode) {
         final CardStateView state = card.getOriginal();
-        if (card.isUiDisplayable()) {
+        if (card.getId() > 0) {
             drawCardListItem(g, font, foreColor, getCardArt(card), card, card.getSetCode(),
                     card.getRarity(), state.getPower(), state.getToughness(),
                     state.getLoyalty(), count, suffix, x, y, w, h, compactMode);
@@ -286,22 +285,10 @@ public class CardRenderer {
     }
     public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, IPaperCard pc, int count, String suffix, float x, float y, float w, float h, boolean compactMode) {
         final CardView card = ViewUtil.getCardForUi(pc);
-        if (card.isUiDisplayable()) {
-            final CardStateView state = card.getOriginal();
-            drawCardListItem(g, font, foreColor, getCardArt(pc), card, pc.getEdition(),
-                    pc.getRarity(), state.getPower(), state.getToughness(),
-                    state.getLoyalty(), count, suffix, x, y, w, h, compactMode);
-        }
-        else { //if fake card, just draw card name centered
-            String name = pc.getName();
-            if (count > 0) { //preface name with count if applicable
-                name = count + " " + name;
-            }
-            if (suffix != null) {
-                name += suffix;
-            }
-            g.drawText(name, font, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
-        }
+        final CardStateView state = card.getOriginal();
+        drawCardListItem(g, font, foreColor, getCardArt(pc), card, pc.getEdition(),
+                pc.getRarity(), state.getPower(), state.getToughness(),
+                state.getLoyalty(), count, suffix, x, y, w, h, compactMode);
     }
     public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, FImageComplex cardArt, CardView card, String set, CardRarity rarity, int power, int toughness, int loyalty, int count, String suffix, float x, float y, float w, float h, boolean compactMode) {
         float cardArtHeight = h + 2 * FList.PADDING;
@@ -544,13 +531,13 @@ public class CardRenderer {
         w -= 2 * padding;
         h -= 2 * padding;
 
-        CardStateView details = MatchController.getCardDetails(card);
+        CardStateView details = card.getOriginal();
         DetailColors borderColor = CardDetailUtil.getBorderColor(details);
         Color color = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
         color = FSkinColor.tintColor(Color.WHITE, color, CardRenderer.PT_BOX_TINT);
 
         //draw name and mana cost overlays if card is small or default card image being used
-        if (h <= NAME_COST_THRESHOLD) {
+        if (h <= NAME_COST_THRESHOLD && card.mayBeShown()) {
             if (showCardNameOverlay(card)) {
                 g.drawOutlinedText(details.getName(), FSkinFont.forHeight(h * 0.18f), Color.WHITE, Color.BLACK, x + padding, y + padding, w - 2 * padding, h * 0.4f, true, HAlignment.LEFT, false);
             }
@@ -626,7 +613,7 @@ public class CardRenderer {
             CardFaceSymbols.drawSymbol("sacrifice", g, (x + (w / 2)) - sacSymbolSize / 2, (y + (h / 2)) - sacSymbolSize / 2, otherSymbolsSize, otherSymbolsSize);
         }
 
-        if (onTop && showCardPowerOverlay(card)) { //make sure card p/t box appears on top
+        if (onTop && showCardPowerOverlay(card) && (card.mayBeShown() || card.isFaceDown())) { //make sure card p/t box appears on top
             //only needed if on top since otherwise P/T will be hidden
             drawPtBox(g, card, details, color, x, y, w, h);
         }
@@ -688,7 +675,7 @@ public class CardRenderer {
     }
 
     public static void drawFoilEffect(Graphics g, CardView card, float x, float y, float w, float h) {
-        if (isPreferenceEnabled(FPref.UI_OVERLAY_FOIL_EFFECT)) {
+        if (isPreferenceEnabled(FPref.UI_OVERLAY_FOIL_EFFECT) && card.mayBeShown()) {
             int foil = card.getOriginal().getFoilIndex();
             if (foil > 0) {
                 CardFaceSymbols.drawOther(g, String.format("foil%02d", foil), x, y, w, h);

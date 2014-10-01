@@ -30,18 +30,14 @@ import forge.game.zone.ZoneType;
  * @author elcnesh
  */
 public class CardView extends GameEntityView {
-
-    public static final CardView EMPTY = new CardView(true);
-
     private final CardStateView
         original = new CardStateView(),
         alternate = new CardStateView();
 
     private boolean hasAltState;
 
-    private int id;
-    /** Will be false for {@link forge.game.ability.effects.DetachedCardEffect}. */
-    private final boolean isUiDisplayable;
+    private final int id;
+    private boolean mayBeShown;
     private PlayerView owner, controller;
     private ZoneType zone;
     private boolean isCloned, isFaceDown, isFlipCard, isFlipped, isSplitCard, isTransformed;
@@ -68,14 +64,14 @@ public class CardView extends GameEntityView {
     private Iterable<CardView> mustBlock;
     private CardView pairedWith;
 
-    public CardView(final boolean isUiDisplayable) {
-        this.isUiDisplayable = isUiDisplayable;
+    public CardView(int id0) {
+        this.id = id0;
         this.reset();
     }
 
     public void reset() {
         final Iterable<CardView> emptyIterable = ImmutableSet.of();
-        this.id = 0;
+        this.mayBeShown = false;
         this.hasAltState = false;
         this.owner = null;
         this.controller = null;
@@ -120,12 +116,11 @@ public class CardView extends GameEntityView {
         return id;
     }
 
-    public void setId(final int id) {
-        this.id = id;
+    public boolean mayBeShown() {
+        return this.mayBeShown;
     }
-
-    public boolean isUiDisplayable() {
-        return isUiDisplayable;
+    public void setMayBeShown(boolean b0) {
+        this.mayBeShown = b0;
     }
 
     /**
@@ -726,12 +721,19 @@ public class CardView extends GameEntityView {
 
     @Override
     public String toString() {
+        if (this.getId() <= 0) { //if fake card, just return name
+            return this.getOriginal().getName();
+        }
+
+        if (!mayBeShown) {
+            return "(Unknown card)";
+        }
+
         if (StringUtils.isEmpty(this.getOriginal().getName())) {
-            if (this.getId() <= 0) {
-                return "(Unknown card)";
-            } else if (this.hasAltState()) {
+            if (this.hasAltState()) {
                 return "Face-down card (" + this.getAlternate().getName() + ")";
             }
+            return "(" + this.getId() + ")";
         }
 
         return this.getOriginal().getName() + " (" + this.getId() + ")";
@@ -765,7 +767,7 @@ public class CardView extends GameEntityView {
         public void reset() {
             this.name = "";
             this.colors = ColorSet.getNullColor();
-            this.imageKey = ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE;
+            this.imageKey = ImageKeys.HIDDEN_CARD;
             this.type = Collections.emptyList();
             this.manaCost = ManaCost.NO_COST;
             this.power = 0;
@@ -822,7 +824,7 @@ public class CardView extends GameEntityView {
          * @return the imageKey
          */
         public String getImageKey() {
-            return imageKey;
+            return mayBeShown ? imageKey : ImageKeys.HIDDEN_CARD;
         }
 
         /**

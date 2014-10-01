@@ -53,14 +53,6 @@ public class VPhaseIndicator extends FContainer {
         }
     }
 
-    @Override
-    public void setRotate180(boolean b0) {
-        //only rotate phase labels themselves
-        for (PhaseLabel lbl : phaseLabels.values()) {
-            lbl.setRotate180(b0);
-        }
-    }
-
     public float getPreferredHeight(float width) {
         //build string to use to determine ideal font
         float w = width / phaseLabels.size();

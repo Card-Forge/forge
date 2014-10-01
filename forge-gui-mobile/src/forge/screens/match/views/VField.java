@@ -5,7 +5,6 @@ import java.util.List;
 
 import forge.FThreads;
 import forge.GuiBase;
-import forge.screens.match.MatchController;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.toolbox.FContainer;
 import forge.view.CardView;
@@ -62,7 +61,7 @@ public class VField extends FContainer {
 
             for (CardView card : model) {
                 CardAreaPanel cardPanel = CardAreaPanel.get(card);
-                CardStateView details = MatchController.getCardDetails(card); //use details so creature/land check is accurate
+                CardStateView details = card.getOriginal();
                 if (cardPanel.getAttachedToPanel() == null) { //skip attached panels
                     if (details.isCreature()) {
                         if (!tryStackCard(card, creatures)) {
@@ -124,14 +123,7 @@ public class VField extends FContainer {
         final CardAreaPanel toPanel = CardAreaPanel.get(card);
         if (toPanel == null) { return; }
 
-        if (card.isTapped()) {
-            toPanel.setTapped(true);
-            toPanel.setTappedAngle(CardAreaPanel.TAPPED_ANGLE);
-        }
-        else {
-            toPanel.setTapped(false);
-            toPanel.setTappedAngle(0);
-        }
+        toPanel.setTapped(card.isTapped());
 
         toPanel.getAttachedPanels().clear();
         if (card.isEnchanted()) {

@@ -33,9 +33,9 @@ public final class ViewUtil {
      * @param view
      *            the {@link CardView} to write to.
      */
-    public static void writeNonDependentCardViewProperties(final Card c, final CardView view, final boolean mayShowCardFace) {
+    public static void writeNonDependentCardViewProperties(final Card c, final CardView view, final boolean mayShowCard, final boolean mayShowCardFace) {
         final boolean hasAltState = c.isDoubleFaced() || c.isFlipCard() || c.isSplitCard() || (c.isFaceDown() && mayShowCardFace);
-        view.setId(c.getUniqueNumber());
+        view.setMayBeShown(mayShowCard);
         view.setZone(c.getZone() == null ? null : c.getZone().getZoneType());
         view.setHasAltState(hasAltState);
         view.setFaceDown(c.isFaceDown());
@@ -130,8 +130,11 @@ public final class ViewUtil {
 
     public static CardView getCardForUi(final IPaperCard pc) {
         final Card c = Card.getCardForUi(pc);
-        final CardView view = new CardView(true);
-        writeNonDependentCardViewProperties(c, view, c.getCardForUi() == c);
+        if (c.getCardForUi() != c) {
+            return null;
+        }
+        final CardView view = new CardView(c.getId());
+        writeNonDependentCardViewProperties(c, view, true, true);
         return view;
     }
 

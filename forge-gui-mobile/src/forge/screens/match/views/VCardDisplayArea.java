@@ -48,13 +48,11 @@ public abstract class VCardDisplayArea extends VDisplayArea {
 
         CardAreaPanel newCardPanel = null;
         for (CardView card : model) {
-            if (card.isUiDisplayable()) { //only include cards that are meant for display
-                CardAreaPanel cardPanel = CardAreaPanel.get(card);
-                addCardPanelToDisplayArea(cardPanel);
-                cardPanels.add(cardPanel);
-                if (newCardPanel == null && !orderedCards.contains(card)) {
-                    newCardPanel = cardPanel;
-                }
+            CardAreaPanel cardPanel = CardAreaPanel.get(card);
+            addCardPanelToDisplayArea(cardPanel);
+            cardPanels.add(cardPanel);
+            if (newCardPanel == null && !orderedCards.contains(card)) {
+                newCardPanel = cardPanel;
             }
         }
         revalidate();
@@ -328,6 +326,14 @@ public abstract class VCardDisplayArea extends VDisplayArea {
             origin.y += top + h * TARGET_ORIGIN_FACTOR_Y;
 
             return origin;
+        }
+
+        @Override
+        protected float getTappedAngle() {
+            if (displayArea != null && displayArea.rotateCards180) {
+                return -super.getTappedAngle(); //reverse tap angle if rotated 180 degrees
+            }
+            return super.getTappedAngle();
         }
 
         @Override

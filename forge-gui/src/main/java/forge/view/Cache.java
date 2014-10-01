@@ -146,6 +146,14 @@ public class Cache<K extends IIdentifiable, V extends IIdentifiable> {
         }
     }
 
+    public Iterable<K> getKeys() {
+        return inverseCache.values();
+    }
+
+    public Iterable<V> getValues() {
+        return cache.values();
+    }
+
     /**
      * Clear all the mappings in this Cache, except for any key that exists in
      * the argument.

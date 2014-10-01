@@ -38,6 +38,7 @@ public abstract class LocalGameView implements IGameView {
     protected final InputQueue inputQueue;
     protected final InputProxy inputProxy;
     private PlayerView localPlayerView;
+    private int updateDelays;
 
     public LocalGameView(IGuiBase gui0, Game game0) {
         game = game0;
@@ -349,30 +350,6 @@ public abstract class LocalGameView implements IGameView {
         return ViewUtil.transformIfNotNull(players, FN_GET_PLAYER_VIEW);
     }
 
-    public PlayerView getPlayerView(final Player p) {
-        if (p == null) {
-            return null;
-        }
-
-        PlayerView view = MatchUtil.players.get(p.getId());
-        if (view != null) {
-            getPlayerView(p, view);
-        }
-        else {
-            view = new PlayerView(p.getLobbyPlayer(), p.getId());
-            MatchUtil.players.put(p, view);
-            getPlayerView(p, view);
-        }
-        return view;
-    }
-
-    private PlayerView getPlayerViewFast(final Player p) {
-        if (p == null) {
-            return null;
-        }
-        return MatchUtil.players.get(p.getId());
-    }
-
     public Player getPlayer(final PlayerView p) {
         if (p == null) {
             return null;
@@ -380,7 +357,23 @@ public abstract class LocalGameView implements IGameView {
         return MatchUtil.players.getKey(p.getId());
     }
 
-    private void getPlayerView(final Player p, final PlayerView view) {
+    public PlayerView getPlayerView(final Player p) {
+        if (p == null) {
+            return null;
+        }
+
+        PlayerView view = MatchUtil.players.get(p.getId());
+        if (view == null) {
+            view = new PlayerView(p.getLobbyPlayer(), p.getId());
+            if (updateDelays == 0) {
+                writePlayerToView(p, view);
+            }
+            MatchUtil.players.put(p, view);
+        }
+        return view;
+    }
+
+    private void writePlayerToView(final Player p, final PlayerView view) {
         view.setCommanderInfo(CardFactoryUtil.getCommanderInfo(p).trim().replace("\r\n", "; "));
         view.setKeywords(p.getKeywords());
         view.setLife(p.getLife());
@@ -408,45 +401,40 @@ public abstract class LocalGameView implements IGameView {
     }
 
     public CardView getCardView(final Card c) {
-        if (c == null) {
+        if (c == null || c != c.getCardForUi()) {
             return null;
         }
-
-        final Card cUi = c.getCardForUi();
-        final boolean isDisplayable = cUi == c;
-        final boolean mayShow = mayShowCard(c);
 
         CardView view = MatchUtil.cards.get(c.getId());
-        final boolean isNewView;
-        if (view != null) {
-            // Update to ensure the Card reference in the cache
-            // is not an outdated Card.
-            if (view.getId() > 0) {
-                MatchUtil.cards.updateKey(view.getId(), c);
+        if (view == null) {
+            view = new CardView(c.getId());
+            if (updateDelays == 0) {
+                writeCardToView(c, view, MatchUtil.getGameView());
             }
-            isNewView = false;
-        } else if (isDisplayable && mayShow) {
-            view = new CardView(isDisplayable);
-            view.setId(c.getId());
             MatchUtil.cards.put(c, view);
-            isNewView = true;
-        } else {
-            return CardView.EMPTY;
         }
-
-        if (mayShow) {
-            writeCardToView(cUi, view);
-        }
-        else if (isDisplayable) {
-            if (!isNewView) {
-                view.reset();
-            }
-        }
-        else {
-            return null;
-        }
-
         return view;
+    }
+    
+    public void startUpdateDelay() {
+        updateDelays++;
+    }
+    public void endUpdateDelay() {
+        if (updateDelays > 0 && --updateDelays == 0) {
+            updateViews();
+        }
+    }
+
+    public void updateViews() {
+        if (updateDelays > 0) { return; }
+
+        for (Player p : MatchUtil.players.getKeys()) {
+            writePlayerToView(p, getPlayerView(p));
+        }
+        LocalGameView gameView = MatchUtil.getGameView();
+        for (Card c : MatchUtil.cards.getKeys()) {
+            writeCardToView(c, getCardView(c), gameView);
+        }
     }
 
     private final Function<Card, CardView> FN_GET_CARD_VIEW = new Function<Card, CardView>() {
@@ -458,41 +446,6 @@ public abstract class LocalGameView implements IGameView {
 
     public final List<CardView> getCardViews(final Iterable<Card> cards) {
         return ViewUtil.transformIfNotNull(cards, FN_GET_CARD_VIEW);
-    }
-
-    public final List<CardView> getRefreshedCardViews(final Iterable<CardView> cardViews) {
-        return ViewUtil.transformIfNotNull(cardViews, new Function<CardView, CardView>() {
-            @Override
-            public CardView apply(final CardView input) {
-                return MatchUtil.cards.getCurrentValue(input);
-            }
-        });
-    }
-
-    private CardView getCardViewFast(final Card c) {
-        if (c == null) {
-            return null;
-        }
-
-        final CardView view = MatchUtil.cards.get(c.getId());
-        if (mayShowCard(c)) {
-            return view;
-        } else if (view.isUiDisplayable()) {
-            return CardView.EMPTY;
-        }
-
-        return null;
-    }
-
-    private final Function<Card, CardView> FN_GET_CARDVIEW_FAST = new Function<Card, CardView>() {
-        @Override
-        public CardView apply(Card input) {
-            return getCardViewFast(input);
-        }
-    };
-
-    private List<CardView> getCardViewsFast(final Iterable<Card> cards) {
-        return ViewUtil.transformIfNotNull(cards, FN_GET_CARDVIEW_FAST);
     }
 
     public Card getCard(final CardView c) {
@@ -513,29 +466,29 @@ public abstract class LocalGameView implements IGameView {
         return ViewUtil.transformIfNotNull(cards, FN_GET_CARD);
     }
 
-    private void writeCardToView(final Card c, final CardView view) {
+    private void writeCardToView(final Card c, final CardView view, final LocalGameView gameView) {
         // First, write the values independent of other views.
-        ViewUtil.writeNonDependentCardViewProperties(c, view, mayShowCardFace(c));
+        ViewUtil.writeNonDependentCardViewProperties(c, view, gameView.mayShowCard(c), gameView.mayShowCardFace(c));
         // Next, write the values that depend on other views.
         final Combat combat = game.getCombat();
-        view.setOwner(getPlayerViewFast(c.getOwner()));
-        view.setController(getPlayerViewFast(c.getController()));
+        view.setOwner(getPlayerView(c.getOwner()));
+        view.setController(getPlayerView(c.getController()));
         view.setAttacking(combat != null && combat.isAttacking(c));
         view.setBlocking(combat != null && combat.isBlocking(c));
-        view.setChosenPlayer(getPlayerViewFast(c.getChosenPlayer()));
-        view.setEquipping(getCardViewFast(Iterables.getFirst(c.getEquipping(), null)));
-        view.setEquippedBy(getCardViewsFast(c.getEquippedBy()));
-        view.setEnchantingCard(getCardViewFast(c.getEnchantingCard()));
-        view.setEnchantingPlayer(getPlayerViewFast(c.getEnchantingPlayer()));
-        view.setEnchantedBy(getCardViewsFast(c.getEnchantedBy()));
-        view.setFortifiedBy(getCardViewsFast(c.getFortifiedBy()));
-        view.setGainControlTargets(getCardViewsFast(c.getGainControlTargets()));
-        view.setCloneOrigin(getCardViewFast(c.getCloneOrigin()));
-        view.setImprinted(getCardViewsFast(c.getImprinted()));
-        view.setHauntedBy(getCardViewsFast(c.getHauntedBy()));
-        view.setHaunting(getCardViewFast(c.getHaunting()));
-        view.setMustBlock(c.getMustBlockCards() == null ? Collections.<CardView>emptySet() : getCardViewsFast(c.getMustBlockCards()));
-        view.setPairedWith(getCardViewFast(c.getPairedWith()));
+        view.setChosenPlayer(getPlayerView(c.getChosenPlayer()));
+        view.setEquipping(getCardView(Iterables.getFirst(c.getEquipping(), null)));
+        view.setEquippedBy(getCardViews(c.getEquippedBy()));
+        view.setEnchantingCard(getCardView(c.getEnchantingCard()));
+        view.setEnchantingPlayer(getPlayerView(c.getEnchantingPlayer()));
+        view.setEnchantedBy(getCardViews(c.getEnchantedBy()));
+        view.setFortifiedBy(getCardViews(c.getFortifiedBy()));
+        view.setGainControlTargets(getCardViews(c.getGainControlTargets()));
+        view.setCloneOrigin(getCardView(c.getCloneOrigin()));
+        view.setImprinted(getCardViews(c.getImprinted()));
+        view.setHauntedBy(getCardViews(c.getHauntedBy()));
+        view.setHaunting(getCardView(c.getHaunting()));
+        view.setMustBlock(c.getMustBlockCards() == null ? Collections.<CardView>emptySet() : getCardViews(c.getMustBlockCards()));
+        view.setPairedWith(getCardView(c.getPairedWith()));
     }
 
     public SpellAbilityView getSpellAbilityView(final SpellAbility sa) {

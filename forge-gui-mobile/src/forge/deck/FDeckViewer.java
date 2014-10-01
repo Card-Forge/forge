@@ -8,6 +8,7 @@ import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.screens.FScreen;
+import forge.screens.match.MatchController;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
@@ -33,7 +34,9 @@ public class FDeckViewer extends FScreen {
     public static void show(final Deck deck) {
         if (deck == null) { return; }
 
-        Forge.openScreen(new FDeckViewer(deck));
+        FDeckViewer deckViewer = new FDeckViewer(deck);
+        deckViewer.setRotate180(MatchController.getView() != null && MatchController.getView().isTopHumanPlayerActive());
+        Forge.openScreen(deckViewer);
     }
 
     private FDeckViewer(Deck deck0) {

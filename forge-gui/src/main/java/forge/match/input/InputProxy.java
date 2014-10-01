@@ -22,6 +22,9 @@ import java.util.Observer;
 import java.util.concurrent.atomic.AtomicReference;
 
 import forge.FThreads;
+import forge.game.card.Card;
+import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.interfaces.IGuiBase;
 import forge.util.ITriggerEvent;
 import forge.view.CardView;
@@ -97,34 +100,23 @@ public class InputProxy implements Observer {
         }
     }
 
-    /**
-     * <p>
-     * selectPlayer.
-     * </p>
-     * 
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     */
-    public final void selectPlayer(final PlayerView player, final ITriggerEvent triggerEvent) {
+    public final void selectPlayer(final PlayerView playerView, final ITriggerEvent triggerEvent) {
         final Input inp = getInput();
         if (inp != null) {
-            inp.selectPlayer(gameView.getPlayer(player), triggerEvent);
+            final Player player = gameView.getPlayer(playerView);
+            if (player != null) {
+                inp.selectPlayer(player, triggerEvent);
+            }
         }
     }
 
-    /**
-     * <p>
-     * selectCard.
-     * </p>
-     * 
-     * @param cardView
-     *            a {@link forge.game.card.Card} object.
-     * @param triggerEvent
-     */
     public final boolean selectCard(final CardView cardView, final ITriggerEvent triggerEvent) {
         final Input inp = getInput();
         if (inp != null) {
-            return inp.selectCard(gameView.getCard(cardView), triggerEvent);
+            final Card card = gameView.getCard(cardView);
+            if (card != null) {
+                return inp.selectCard(card, triggerEvent);
+            }
         }
         return false;
     }
@@ -132,7 +124,10 @@ public class InputProxy implements Observer {
     public final void selectAbility(final SpellAbilityView ab) {
     	final Input inp = getInput();
         if (inp != null) {
-            inp.selectAbility(gameView.getSpellAbility(ab));
+            final SpellAbility sa = gameView.getSpellAbility(ab);
+            if (sa != null) {
+                inp.selectAbility(sa);
+            }
         }
     }
 

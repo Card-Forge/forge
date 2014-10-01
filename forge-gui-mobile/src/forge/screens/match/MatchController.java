@@ -3,10 +3,8 @@ package forge.screens.match;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -47,14 +45,12 @@ import forge.view.GameEntityView;
 import forge.view.LocalGameView;
 import forge.view.PlayerView;
 import forge.view.SpellAbilityView;
-import forge.view.CardView.CardStateView;
 
 public class MatchController implements IMatchController {
     private MatchController() { }
     public static final MatchController instance = new MatchController();
 
     private static final Map<LobbyPlayer, FImage> avatarImages = new HashMap<LobbyPlayer, FImage>();
-    private static final Map<Integer, CardStateView> cardDetailsCache = new HashMap<Integer, CardStateView>();
 
     private static MatchScreen view;
 
@@ -75,39 +71,10 @@ public class MatchController implements IMatchController {
         avatarImages.put(lp, avatarImage);
     }
 
-    public static CardStateView getCardDetails(CardView card) {
-        final CardStateView details = cardDetailsCache.get(card.getId());
-        if (details == null) {
-            cardDetailsCache.put(card.getId(), card.getOriginal());
-            return card.getOriginal();
-        }
-        return details;
-    }
-
     public void refreshCardDetails(Iterable<CardView> cards) {
-        Set<PlayerView> playersNeedingFieldUpdate = null;
-
-        for (final CardView c : cards) {
-            //for each card in play, if it changed from creature to non-creature or vice versa,
-            //or if it changed from land to non-land or vice-versa,
-            //ensure field containing that card is updated to reflect that change
-            final CardStateView state = c.getOriginal();
-            if (c.getZone() == ZoneType.Battlefield) {
-                CardStateView oldDetails = cardDetailsCache.get(c);
-                if (oldDetails == null || state.isCreature() != oldDetails.isCreature() || state.isLand() != oldDetails.isLand()) {
-                    if (playersNeedingFieldUpdate == null) {
-                        playersNeedingFieldUpdate = new HashSet<PlayerView>();
-                    }
-                    playersNeedingFieldUpdate.add(c.getController());
-                }
-            }
-            cardDetailsCache.put(c.getId(), c.getOriginal());
-        }
-
-        if (playersNeedingFieldUpdate != null) { //update field for any players necessary
-            for (PlayerView p : playersNeedingFieldUpdate) {
-                view.getPlayerPanel(p).getField().update();
-            }
+        //ensure cards appear in the correct row of the field
+        for (VPlayerPanel pnl : view.getPlayerPanels().values()) {
+            pnl.getField().update();
         }
     }
 
@@ -118,7 +85,6 @@ public class MatchController implements IMatchController {
 
     @Override
     public boolean resetForNewGame() {
-        cardDetailsCache.clear(); //ensure details cache cleared before starting a new game
         CardAreaPanel.resetForNewGame(); //ensure card panels reset between games
         return true;
     }
@@ -359,7 +325,7 @@ public class MatchController implements IMatchController {
     @Override
     public void afterGameEnd() {
         Forge.back();
-        cardDetailsCache.clear(); //ensure card details cache cleared ending game
+        view = null;
     }
 
     private static void actuateMatchPreferences() {

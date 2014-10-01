@@ -46,7 +46,6 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.match.input.InputPlaybackControl;
 import forge.match.input.InputQueue;
-import forge.match.input.InputSynchronized;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.player.LobbyPlayerHuman;
@@ -71,6 +70,7 @@ import forge.view.WatchLocalGame;
 public class MatchUtil {
     private static IMatchController controller;
     private static Game game;
+    private static Player currentPlayer;
     private static final List<LocalGameView> gameViews = new ArrayList<LocalGameView>();
 
     /** Cache of players. */
@@ -180,6 +180,10 @@ public class MatchUtil {
             if (p.getController() instanceof PlayerControllerHuman) {
                 final PlayerControllerHuman controller = (PlayerControllerHuman) p.getController();
                 LocalGameView gameView = controller.getGameView();
+                if (humanCount == 0) {
+                    currentPlayer = p;
+                    gameView.startUpdateDelay(); //delay updating views until game finishes initializing
+                }
                 game.subscribeToEvents(new FControlGameEventHandler(gameView, humanCount == 0));
                 gameViews.add(gameView);
                 humanCount++;
@@ -188,7 +192,9 @@ public class MatchUtil {
 
         if (humanCount == 0) { //watch game but do not participate
             LocalGameView gameView = new WatchLocalGame(GuiBase.getInterface(), game);
-            gameView.setLocalPlayer(sortedPlayers.get(0));
+            currentPlayer = sortedPlayers.get(0);
+            gameView.setLocalPlayer(currentPlayer);
+            gameView.startUpdateDelay();
             game.subscribeToEvents(new FControlGameEventHandler(gameView, true));
             gameViews.add(gameView);
         }
@@ -235,7 +241,7 @@ public class MatchUtil {
     }
 
     public static LocalGameView getGameView() {
-        return getGameView(getCurrentPlayer());
+        return getGameView(currentPlayer);
     }
     public static LocalGameView getGameView(Player player) {
         switch (gameViews.size()) {
@@ -244,10 +250,7 @@ public class MatchUtil {
         case 0:
             return null;
         default:
-            if (player != null && player.getController() instanceof PlayerControllerHuman) {
-                return ((PlayerControllerHuman)player.getController()).getGameView();
-            }
-            return gameViews.get(0);
+            return gameViews.get(player.getId());
         }
     }
 
@@ -280,23 +283,14 @@ public class MatchUtil {
     }
 
     public static Player getCurrentPlayer() {
-        if (game == null) { return null; }
-
-        LobbyPlayer lobbyPlayer = getGuiPlayer();
+        return currentPlayer;
+    }
+    public static void setCurrentPlayer(Player currentPlayer0) {
+        if (currentPlayer == currentPlayer0) { return; }
+        currentPlayer = currentPlayer0;
         if (gameViews.size() > 1) {
-            //account for if second human player is currently being prompted
-            InputSynchronized activeInput = InputQueue.getActiveInput();
-            if (activeInput != null) {
-                lobbyPlayer = activeInput.getOwner().getLobbyPlayer();
-            }
+            gameViews.get(currentPlayer.getId()).updateViews(); //ensure views updated when current player changes to account for changes in card visibility
         }
-
-        for (Player p : game.getPlayers()) {
-            if (p.getLobbyPlayer() == lobbyPlayer) {
-                return p;
-            }
-        }
-        return null;
     }
 
     public static void alphaStrike() {
@@ -368,7 +362,7 @@ public class MatchUtil {
             }
 
             Player priorityPlayer = game.getPhaseHandler().getPriorityPlayer();
-            boolean humanHasPriority = priorityPlayer == null || priorityPlayer.getLobbyPlayer() == getGuiPlayer();
+            boolean humanHasPriority = priorityPlayer == null || priorityPlayer.getLobbyPlayer() instanceof LobbyPlayerHuman;
 
             if (humanCount > 0 && humanHasPriority) {
                 game.getAction().checkGameOverCondition();
@@ -388,6 +382,7 @@ public class MatchUtil {
         if (game == null) { return; }
 
         game = null;
+        currentPlayer = null;
         gameViews.clear();
         players.clear();
         cards.clear();

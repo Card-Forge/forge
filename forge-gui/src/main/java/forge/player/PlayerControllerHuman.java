@@ -11,11 +11,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
-
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -29,8 +28,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Sets;
-
 import forge.FThreads;
 import forge.LobbyPlayer;
 import forge.achievement.AchievementCollection;
@@ -124,7 +121,6 @@ public class PlayerControllerHuman extends PlayerController {
      * Cards this player may look at right now, for example when searching a
      * library.
      */
-    private final Set<Card> mayLookAt = Sets.newHashSet();
     private boolean mayLookAtAllCards = false;
 
     public PlayerControllerHuman(Game game0, Player p, LobbyPlayer lp, IGuiBase gui) {
@@ -161,6 +157,30 @@ public class PlayerControllerHuman extends PlayerController {
      */
     public boolean mayLookAtAllCards() {
         return mayLookAtAllCards;
+    }
+
+    private final HashSet<Card> tempShownCards = new HashSet<Card>();
+    private void tempShowCard(Card c) {
+        CardView cv = MatchUtil.cards.get(c.getId());
+        if (!cv.mayBeShown()) {
+            cv.setMayBeShown(true);
+            tempShownCards.add(c);
+        }
+    }
+    private void tempShowCards(Iterable<Card> cards) {
+        if (mayLookAtAllCards) { return; } //no needed if this is set
+ 
+        for (Card c : cards) {
+            tempShowCard(c);
+        }
+    }
+    private void endTempShowCards() {
+        if (tempShownCards.isEmpty()) { return; }
+
+        for (Card c : tempShownCards) {
+            MatchUtil.cards.get(c.getId()).setMayBeShown(false);
+        }
+        tempShownCards.clear();
     }
 
     /**
@@ -355,9 +375,9 @@ public class PlayerControllerHuman extends PlayerController {
             return Lists.newArrayList(sc.getSelected());
         }
 
-        this.mayLookAt.addAll(sourceList);
+        tempShowCards(sourceList);
         final List<CardView> choices = SGuiChoose.many(getGui(), title, "Chosen Cards", min, max, gameView.getCardViews(sourceList), gameView.getCardView(sa.getHostCard()));
-        this.mayLookAt.removeAll(sourceList);
+        endTempShowCards();
 
         return getCards(choices);
     }
@@ -398,11 +418,11 @@ public class PlayerControllerHuman extends PlayerController {
         for (final T t : options) {
             if (t instanceof Card) {
                 // assume you may see any card passed through here
-                mayLookAt.add((Card) t);
+                tempShowCard((Card) t);
             }
         }
         final GameEntityView result = isOptional ? SGuiChoose.oneOrNone(getGui(), title, gameView.getGameEntityViews((Iterable<GameEntity>) options)) : SGuiChoose.one(getGui(), title, gameView.getGameEntityViews((Iterable<GameEntity>) options));
-        mayLookAt.clear();
+        endTempShowCards();
         return (T) gameView.getGameEntity(result);
     }
 
@@ -540,9 +560,9 @@ public class PlayerControllerHuman extends PlayerController {
         }
         String fm = formatMessage(message, owner);
         if (!cards.isEmpty()) {
-            mayLookAt.addAll(cards);
+            tempShowCards(cards);
             SGuiChoose.reveal(getGui(), fm, gameView.getCardViews(cards));
-            mayLookAt.clear();
+            endTempShowCards();
         }
         else {
             SGuiDialog.message(getGui(), formatMessage("There are no cards in {player's} " +
@@ -555,7 +575,7 @@ public class PlayerControllerHuman extends PlayerController {
         List<Card> toBottom = null;
         List<Card> toTop = null;
 
-        mayLookAt.addAll(topN);
+        tempShowCards(topN);
         if (topN.size() == 1) {
             if (willPutCardOnTop(topN.get(0))) {
                 toTop = topN;
@@ -579,7 +599,7 @@ public class PlayerControllerHuman extends PlayerController {
                 toTop = gameView.getCards(toTopViews);
             }
         }
-        mayLookAt.clear();
+        endTempShowCards();
         return ImmutablePair.of(toTop, toBottom);
     }
 
@@ -594,7 +614,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public List<Card> orderMoveToZoneList(List<Card> cards, ZoneType destinationZone) {
         List<CardView> choices;
-        mayLookAt.addAll(cards);
+        tempShowCards(cards);
         switch (destinationZone) {
             case Library:
                 choices = SGuiChoose.order(getGui(), "Choose order of cards to put into the library", "Closest to top", getCardViews(cards), null);
@@ -616,20 +636,20 @@ public class PlayerControllerHuman extends PlayerController {
                 break;
             default:
                 System.out.println("ZoneType " + destinationZone + " - Not Ordered");
-                mayLookAt.clear();
+                endTempShowCards();
                 return cards;
         }
-        mayLookAt.clear();
+        endTempShowCards();
         return getCards(choices);
     }
 
     @Override
     public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> valid, int min, int max) {
         if (p != player) {
-            mayLookAt.addAll(valid);
+            tempShowCards(valid);
             final List<CardView> choices = SGuiChoose.many(getGui(), "Choose " + min + " card" + (min != 1 ? "s" : "") + " to discard",
                     "Discarded", min, min, gameView.getCardViews(valid), null);
-            mayLookAt.clear();
+            endTempShowCards();
             return getCards(choices);
         }
 
@@ -1245,28 +1265,17 @@ public class PlayerControllerHuman extends PlayerController {
             return SGuiDialog.confirm(getGui(), gameView.getCardView(sa.getHostCard()), "Choose a Pile", possibleValues);
         }
 
-        mayLookAt.addAll(pile1);
-        mayLookAt.addAll(pile2);
+        tempShowCards(pile1);
+        tempShowCards(pile2);
 
-        final int idPile1 = Integer.MIN_VALUE, idPile2 = Integer.MIN_VALUE + 1;
         final List<CardView> cards = Lists.newArrayListWithCapacity(pile1.size() + pile2.size() + 2);
-        final CardView pileView1 = new CardView(true) {
-            @Override
-            public String toString() {
-                return "--- Pile 1 ---";
-            }
-        };
-        pileView1.setId(idPile1);
+        final CardView pileView1 = new CardView(Integer.MIN_VALUE);
+        pileView1.getOriginal().setName("--- Pile 1 ---");
         cards.add(pileView1);
         cards.addAll(getCardViews(pile1));
 
-        final CardView pileView2 = new CardView(true) {
-            @Override
-            public String toString() {
-                return "--- Pile 2 ---";
-            }
-        };
-        pileView2.setId(idPile2);
+        final CardView pileView2 = new CardView(Integer.MIN_VALUE + 1);
+        pileView2.getOriginal().setName("--- Pile 2 ---");
         cards.add(pileView2);
         cards.addAll(getCardViews(pile2));
 
@@ -1277,13 +1286,14 @@ public class PlayerControllerHuman extends PlayerController {
             if (chosen.equals(pileView1)) {
                 result = true;
                 break;
-            } else if (chosen.equals(pileView2)) {
+            }
+            if (chosen.equals(pileView2)) {
                 result = false;
                 break;
             }
         }
 
-        mayLookAt.clear();
+        endTempShowCards();
         return result;
     }
 
@@ -1359,7 +1369,7 @@ public class PlayerControllerHuman extends PlayerController {
 
         @Override
         public boolean canUndoLastAction() {
-            if (!game.stack.canUndo()) {
+            if (!game.stack.canUndo(player)) {
                 return false;
             }
             final Player priorityPlayer = game.getPhaseHandler().getPriorityPlayer();
@@ -1467,15 +1477,15 @@ public class PlayerControllerHuman extends PlayerController {
          */
         @Override
         public boolean mayShowCard(final Card c) {
-            if (mayLookAtAllCards()) {
+            if (mayLookAtAllCards) {
                 return true;
             }
-            return c == null || mayLookAt.contains(c) || c.canBeShownTo(player);
+            return c == null || tempShownCards.contains(c) || c.canBeShownTo(player);
         }
 
         @Override
         public boolean mayShowCardFace(final Card c) {
-            if (mayLookAtAllCards()) {
+            if (mayLookAtAllCards) {
                 return true;
             }
             return c == null || !c.isFaceDown() || c.canCardFaceBeShownTo(player);

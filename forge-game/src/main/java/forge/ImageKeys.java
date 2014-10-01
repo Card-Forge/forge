@@ -12,8 +12,9 @@ public class ImageKeys {
     public static final String BOOSTERBOX_PREFIX     = "x:";
     public static final String PRECON_PREFIX         = "p:";
     public static final String TOURNAMENTPACK_PREFIX = "o:";
-    
+
     public static final String MORPH_IMAGE          = "morph";
+    public static final String HIDDEN_CARD          = TOKEN_PREFIX + MORPH_IMAGE;
     
     public static final String BACKFACE_POSTFIX  = "$alt";
 

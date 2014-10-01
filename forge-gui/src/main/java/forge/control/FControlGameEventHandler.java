@@ -32,6 +32,7 @@ import forge.game.event.GameEventCombatChanged;
 import forge.game.event.GameEventCombatEnded;
 import forge.game.event.GameEventGameFinished;
 import forge.game.event.GameEventGameOutcome;
+import forge.game.event.GameEventGameStarted;
 import forge.game.event.GameEventManaPool;
 import forge.game.event.GameEventPlayerControl;
 import forge.game.event.GameEventPlayerLivesChanged;
@@ -74,7 +75,14 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Subscribe
     public void receiveGameEvent(final GameEvent ev) {
+        gameView.updateViews();
         ev.visit(this);
+    }
+
+    @Override
+    public Void visit(GameEventGameStarted event) {
+        gameView.endUpdateDelay(); //allow views to update once game starts
+        return null;
     }
 
     private final AtomicBoolean phaseUpdPlanned = new AtomicBoolean(false);
@@ -142,7 +150,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
         final List<CardView> options = Lists.newArrayList();
         for (final Entry<Player, Card> kv : ev.cards.entries()) {
-            final CardView fakeCard = new CardView(true); //use fake card so real cards appear with proper formatting
+            final CardView fakeCard = new CardView(-1); //use fake card so real cards appear with proper formatting
             fakeCard.getOriginal().setName("  -- From " + Lang.getPossesive(kv.getKey().getName()) + " deck --");
             options.add(fakeCard);
             options.add(gameView.getCardView(kv.getValue()));
@@ -294,8 +302,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         @Override
         public void run() {
             synchronized (cardsToUpdate) {
-                final Iterable<CardView> newCardsToUpdate = gameView.getRefreshedCardViews(cardsToUpdate);
-                MatchUtil.updateCards(newCardsToUpdate);
+                MatchUtil.updateCards(cardsToUpdate);
                 cardsToUpdate.clear();
             }
         }

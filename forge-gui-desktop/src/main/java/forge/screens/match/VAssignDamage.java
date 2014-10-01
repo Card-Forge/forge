@@ -194,10 +194,11 @@ public class VAssignDamage {
             this.damage.put(null, dt);
             this.defenders.add(dt);
             CardView fakeCard = null;
-            if (defender instanceof CardView) 
+            if (defender instanceof CardView) {
                 fakeCard = (CardView)defender;
+            }
             else if (defender instanceof PlayerView) { 
-                fakeCard = new CardView(true);
+                fakeCard = new CardView(-1);
                 fakeCard.getOriginal().setName(this.defender.toString());
                 final PlayerView p = (PlayerView)defender;
                 fakeCard.setOwner(p);
