@@ -204,10 +204,10 @@ public abstract class LocalGameView implements IGameView {
                     final List<Card> blockers = combat.getBlockers(b);
                     final boolean isBlocked = b.isBlocked() == Boolean.TRUE;
                     combatView.addAttackingBand(
-                            getCardViews(b.getAttackers(), false),
-                            getGameEntityView(defender, false),
-                            blockers == null || !isBlocked ? null : getCardViews(blockers, false),
-                                    blockers == null ? null : getCardViews(blockers, false));
+                            getCardViews(b.getAttackers(), true),
+                            getGameEntityView(defender, true),
+                            blockers == null || !isBlocked ? null : getCardViews(blockers, true),
+                                    blockers == null ? null : getCardViews(blockers, true));
                 }
             }
             MatchUtil.cachedCombatView = combatView;
