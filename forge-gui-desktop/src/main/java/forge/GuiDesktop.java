@@ -21,6 +21,7 @@ import com.google.common.base.Function;
 
 import forge.assets.FSkinProp;
 import forge.assets.ISkinImage;
+import forge.control.GuiTimer;
 import forge.deck.CardPool;
 import forge.error.BugReportDialog;
 import forge.game.GameObject;
@@ -30,6 +31,7 @@ import forge.gui.CardListViewer;
 import forge.gui.GuiChoose;
 import forge.gui.framework.FScreen;
 import forge.interfaces.IGuiBase;
+import forge.interfaces.IGuiTimer;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
@@ -91,6 +93,11 @@ public class GuiDesktop implements IGuiBase {
     @Override
     public boolean isGuiThread() {
         return SwingUtilities.isEventDispatchThread();
+    }
+
+    @Override
+    public IGuiTimer createGuiTimer(Runnable proc, int interval) {
+        return new GuiTimer(proc, interval);
     }
 
     @Override

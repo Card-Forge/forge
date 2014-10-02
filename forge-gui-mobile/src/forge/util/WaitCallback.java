@@ -14,7 +14,7 @@ public abstract class WaitCallback<T> extends Callback<T> implements Runnable {
     @Override
     public final void run(T result0) {
         result = result0;
-        synchronized(lock) {
+        synchronized (lock) {
             lock.notify();
         }
     }
@@ -23,7 +23,7 @@ public abstract class WaitCallback<T> extends Callback<T> implements Runnable {
         FThreads.assertExecutedByEdt(GuiBase.getInterface(), false); //not supported if on UI thread
         FThreads.invokeInEdtLater(GuiBase.getInterface(), this);
         try {
-            synchronized(lock) {
+            synchronized (lock) {
                 lock.wait();
             }
         }

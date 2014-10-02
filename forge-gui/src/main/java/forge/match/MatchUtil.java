@@ -182,8 +182,8 @@ public class MatchUtil {
                 LocalGameView gameView = controller.getGameView();
                 if (humanCount == 0) {
                     currentPlayer = p;
+                    game.subscribeToEvents(new FControlGameEventHandler(gameView));
                 }
-                game.subscribeToEvents(new FControlGameEventHandler(gameView, humanCount == 0));
                 gameViews.add(gameView);
                 humanCount++;
             }
@@ -193,7 +193,7 @@ public class MatchUtil {
             LocalGameView gameView = new WatchLocalGame(GuiBase.getInterface(), game);
             currentPlayer = sortedPlayers.get(0);
             gameView.setLocalPlayer(currentPlayer);
-            game.subscribeToEvents(new FControlGameEventHandler(gameView, true));
+            game.subscribeToEvents(new FControlGameEventHandler(gameView));
             gameViews.add(gameView);
         }
         else if (humanCount == sortedPlayers.size() && controller.hotSeatMode()) {

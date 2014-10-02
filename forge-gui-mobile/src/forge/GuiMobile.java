@@ -9,6 +9,7 @@ import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.Texture;
 import com.google.common.base.Function;
 
+import forge.animation.GuiTimer;
 import forge.assets.FBufferedImage;
 import forge.assets.FDelayLoadImage;
 import forge.assets.FImage;
@@ -24,6 +25,7 @@ import forge.deck.FSideboardDialog;
 import forge.error.BugReportDialog;
 import forge.game.player.IHasIcon;
 import forge.interfaces.IGuiBase;
+import forge.interfaces.IGuiTimer;
 import forge.item.PaperCard;
 import forge.properties.ForgeConstants;
 import forge.screens.match.MatchController;
@@ -85,6 +87,11 @@ public class GuiMobile implements IGuiBase {
     @Override
     public boolean isGuiThread() {
         return !ThreadUtil.isGameThread();
+    }
+
+    @Override
+    public IGuiTimer createGuiTimer(Runnable proc, int interval) {
+        return new GuiTimer(proc, interval);
     }
 
     @Override

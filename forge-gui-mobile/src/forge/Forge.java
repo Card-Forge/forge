@@ -205,8 +205,8 @@ public class Forge implements ApplicationListener {
     private static void setCurrentScreen(FScreen screen0) {
         try {
             endKeyInput(); //end key input before switching screens
-            ForgeAnimation.endAll(); //end all active animations before switching screens
-    
+            ForgeAnimation.stopAll(true); //end all active animations before switching screens
+
             currentScreen = screen0;
             currentScreen.setSize(screenWidth, screenHeight);
             currentScreen.onActivate();

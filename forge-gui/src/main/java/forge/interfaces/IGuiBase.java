@@ -23,6 +23,7 @@ public interface IGuiBase {
     void invokeInEdtLater(Runnable runnable);
     void invokeInEdtAndWait(final Runnable proc);
     boolean isGuiThread();
+    IGuiTimer createGuiTimer(Runnable proc, int interval);
     ISkinImage getSkinIcon(FSkinProp skinProp);
     ISkinImage getUnskinnedIcon(String path);
     ISkinImage createLayeredImage(FSkinProp background, String overlayFilename, float opacity);
