@@ -12,6 +12,7 @@ import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardColor;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.combat.CombatUtil;
@@ -1228,9 +1229,15 @@ public class ComputerUtilMana {
         Card convoked = null;
         for (ManaCostShard toPay : cost) {
             for (Card c : list) {
-                if (c.hasShardinCost(toPay)) {
-                    convoke.put(c, toPay);
-                    convoked = c;
+                for (CardColor col : c.getColor()) {
+                    final int mask = col.getColorMask() & toPay.getColorMask();
+                    if (mask != 0) {
+                        convoked = c;
+                        convoke.put(c, toPay);
+                        break;
+                    }
+                }
+                if (convoked != null){
                     break;
                 }
             }
