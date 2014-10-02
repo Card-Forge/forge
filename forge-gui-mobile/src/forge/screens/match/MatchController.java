@@ -9,6 +9,8 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.badlogic.gdx.Gdx;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.GuiBase;
@@ -76,6 +78,7 @@ public class MatchController implements IMatchController {
         for (VPlayerPanel pnl : view.getPlayerPanels().values()) {
             pnl.getField().update();
         }
+        Gdx.graphics.requestRendering();
     }
 
     @Override
@@ -162,10 +165,12 @@ public class MatchController implements IMatchController {
         if (lbl != null) {
             lbl.setActive(true);
         }
+        Gdx.graphics.requestRendering();
     }
 
     @Override
     public void updateTurn(final PlayerView player) {
+        Gdx.graphics.requestRendering();
     }
 
     @Override
@@ -180,6 +185,7 @@ public class MatchController implements IMatchController {
                 view.getTopPlayerPanel().setSelectedTab(null);
             }
         }
+        Gdx.graphics.requestRendering();
     }
 
     @Override
@@ -198,6 +204,7 @@ public class MatchController implements IMatchController {
     @Override
     public void updateStack() {
         view.getStack().update();
+        Gdx.graphics.requestRendering();
     }
 
     @Override
@@ -219,6 +226,7 @@ public class MatchController implements IMatchController {
 
     @Override
     public void showCombat(final CombatView combat) {
+        Gdx.graphics.requestRendering();
     }
 
     @Override
@@ -294,6 +302,7 @@ public class MatchController implements IMatchController {
         for (PlayerView p : manaPoolUpdate) {
             view.getPlayerPanel(p).updateManaPool();
         }
+        Gdx.graphics.requestRendering();
     }
 
     @Override
@@ -301,10 +310,12 @@ public class MatchController implements IMatchController {
         for (PlayerView p : livesUpdate) {
             view.getPlayerPanel(p).updateLife();
         }
+        Gdx.graphics.requestRendering();
     }
 
     @Override
     public void hear(LobbyPlayer player, String message) {
+        Gdx.graphics.requestRendering();
     }
 
     @Override

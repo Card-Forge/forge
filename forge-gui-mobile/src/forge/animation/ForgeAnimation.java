@@ -7,51 +7,37 @@ import com.badlogic.gdx.Gdx;
 
 public abstract class ForgeAnimation {
     private static final List<ForgeAnimation> activeAnimations = new ArrayList<ForgeAnimation>();
-    private boolean stopped;
 
     public void start() {
         if (activeAnimations.contains(this)) { return; } //prevent starting the same animation multiple times
 
         activeAnimations.add(this);
-    }
-
-    protected boolean stopWhenScreenChanges() {
-        return true;
-    }
-
-    public void stop() {
-        stopped = true; //will be removed on the next iteration
+        if (activeAnimations.size() == 1) { //if first animation being started, ensure continuous rendering turned on
+            Gdx.graphics.setContinuousRendering(true);
+        }
     }
 
     public static void advanceAll() {
-        synchronized (activeAnimations) {
-            if (!activeAnimations.isEmpty()) {
-                float dt = Gdx.graphics.getDeltaTime();
-                for (int i = 0; i < activeAnimations.size(); i++) {
-                    ForgeAnimation animation = activeAnimations.get(i);
-                    if (animation.stopped || !animation.advance(dt)) {
-                        animation.stopped = true;
-                        activeAnimations.remove(i);
-                        i--;
-                    }
-                }
+        if (activeAnimations.isEmpty()) { return; }
+
+        float dt = Gdx.graphics.getDeltaTime();
+        for (int i = 0; i < activeAnimations.size(); i++) {
+            if (!activeAnimations.get(i).advance(dt)) {
+                activeAnimations.remove(i);
+                i--;
             }
+        }
+
+        if (activeAnimations.isEmpty()) { //when all animations have ended, turn continuous rendering back off
+            Gdx.graphics.setContinuousRendering(false);
         }
     }
 
-    public static void stopAll(boolean forScreenChange) {
-        synchronized (activeAnimations) {
-            if (!activeAnimations.isEmpty()) {
-                for (int i = 0; i < activeAnimations.size(); i++) {
-                    ForgeAnimation animation = activeAnimations.get(i);
-                    if (!forScreenChange || animation.stopWhenScreenChanges()) {
-                        animation.stopped = true;
-                        activeAnimations.remove(i);
-                        i--;
-                    }
-                }
-            }
-        }
+    public static void endAll() {
+        if (activeAnimations.isEmpty()) { return; }
+
+        activeAnimations.clear();
+        Gdx.graphics.setContinuousRendering(false);
     }
 
     //return true if animation should continue, false to stop the animation

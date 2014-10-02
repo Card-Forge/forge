@@ -22,7 +22,6 @@ import java.util.Observer;
 import java.util.concurrent.atomic.AtomicReference;
 
 import forge.FThreads;
-import forge.control.FControlGameEventHandler;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -86,7 +85,6 @@ public class InputProxy implements Observer {
     public final void selectButtonOK() {
         Input inp = getInput();
         if (inp != null) {
-            FControlGameEventHandler.processEventsAfterInput();
             inp.selectButtonOK();
         }
     }
@@ -99,7 +97,6 @@ public class InputProxy implements Observer {
     public final void selectButtonCancel() {
         Input inp = getInput();
         if (inp != null) {
-            FControlGameEventHandler.processEventsAfterInput();
             inp.selectButtonCancel();
         }
     }
@@ -109,7 +106,6 @@ public class InputProxy implements Observer {
         if (inp != null) {
             final Player player = gameView.getPlayer(playerView);
             if (player != null) {
-                FControlGameEventHandler.processEventsAfterInput();
                 inp.selectPlayer(player, triggerEvent);
             }
         }
@@ -120,7 +116,6 @@ public class InputProxy implements Observer {
         if (inp != null) {
             final Card card = gameView.getCard(cardView);
             if (card != null) {
-                FControlGameEventHandler.processEventsAfterInput();
                 return inp.selectCard(card, triggerEvent);
             }
         }
@@ -132,7 +127,6 @@ public class InputProxy implements Observer {
         if (inp != null) {
             final SpellAbility sa = gameView.getSpellAbility(ab);
             if (sa != null) {
-                FControlGameEventHandler.processEventsAfterInput();
                 inp.selectAbility(sa);
             }
         }

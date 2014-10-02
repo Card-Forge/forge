@@ -287,7 +287,7 @@ public class MatchUtil {
         if (currentPlayer == currentPlayer0) { return; }
         currentPlayer = currentPlayer0;
         if (gameViews.size() > 1) {
-            gameViews.get(currentPlayer.getId()).updateViews(); //ensure views updated when current player changes to account for changes in card visibility
+            gameViews.get(0).updateAllCards(); //ensure card views updated when current player changes to account for changes in card visibility
         }
     }
 

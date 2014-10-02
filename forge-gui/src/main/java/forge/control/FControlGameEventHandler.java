@@ -63,11 +63,7 @@ import forge.view.PlayerView;
 
 public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private static final String PLAYER_ZONE_DELIM = "|";
-    private static FControlGameEventHandler instance;
-
-    public static void processEventsAfterInput() {
-        instance.processEventsTimer.setInterval(10); //speed up event processing until an event has been raised
-    }
+    private static final int BASE_TIMER_INTERVAL = 100; //process events 10 times per second by default
 
     private final LocalGameView gameView;
     private final IGuiTimer processEventsTimer;
@@ -83,8 +79,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     public FControlGameEventHandler(final LocalGameView gameView0) {
         gameView = gameView0;
-        instance = this;
-        processEventsTimer = GuiBase.getInterface().createGuiTimer(processEvents, 100);
+        processEventsTimer = GuiBase.getInterface().createGuiTimer(processEvents, BASE_TIMER_INTERVAL);
         processEventsTimer.start(); //start event processing loop
     }
 
@@ -93,9 +88,9 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         public void run() {
             synchronized (processEventsTimer) {
                 if (eventReceived) {
-                    processEventsTimer.setInterval(100); //reset to 100 once an event has been raised
-                    gameView.updateViews();
-    
+                    eventReceived = false;
+
+                    gameView.startUpdate();
                     IMatchController controller = MatchUtil.getController();
                     if (!cardsUpdate.isEmpty()) {
                         MatchUtil.updateCards(gameView.getCardViews(cardsUpdate));
@@ -157,8 +152,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                         controller.finishGame();
                         gameView.updateAchievements();
                         processEventsTimer.stop();
-                        instance = null; //this can be reset after game is finished
                     }
+                    gameView.endUpdate();
                 }
             }
         }

@@ -140,6 +140,7 @@ public class ImageCache {
                 if (!delayLoadRequested) {
                     //ensure images continue to load even if no input is being received
                     delayLoadRequested = true;
+                    Gdx.graphics.requestRendering();
                 }
                 return null;
             }

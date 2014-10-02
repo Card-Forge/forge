@@ -367,6 +367,11 @@ public abstract class LocalGameView implements IGameView {
             writePlayerToView(p, view);
             MatchUtil.players.put(p, view);
         }
+        else if (updateViewOnAccess) {
+            updateViewOnAccess = false; //set to false temporarily to prevent stack overflow
+            writePlayerToView(p, view);
+            updateViewOnAccess = true;
+        }
         return view;
     }
 
@@ -397,6 +402,14 @@ public abstract class LocalGameView implements IGameView {
         }
     }
 
+    private boolean updateViewOnAccess;
+    public void startUpdate() {
+        updateViewOnAccess = true; //allow accessed card views and player views to be updated
+    }
+    public void endUpdate() {
+        updateViewOnAccess = false;
+    }
+
     public CardView getCardView(final Card c) {
         if (c == null || c != c.getCardForUi()) {
             return null;
@@ -408,13 +421,15 @@ public abstract class LocalGameView implements IGameView {
             writeCardToView(c, view, MatchUtil.getGameView());
             MatchUtil.cards.put(c, view);
         }
+        else if (updateViewOnAccess) {
+            updateViewOnAccess = false; //set to false temporarily to prevent stack overflow
+            writeCardToView(c, view, MatchUtil.getGameView());
+            updateViewOnAccess = true;
+        }
         return view;
     }
 
-    public void updateViews() {
-        for (Player p : MatchUtil.players.getKeys()) {
-            writePlayerToView(p, getPlayerView(p));
-        }
+    public void updateAllCards() {
         LocalGameView gameView = MatchUtil.getGameView();
         for (Card c : MatchUtil.cards.getKeys()) {
             writeCardToView(c, getCardView(c), gameView);

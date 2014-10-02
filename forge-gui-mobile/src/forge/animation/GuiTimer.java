@@ -1,35 +1,35 @@
 package forge.animation;
 
+import com.badlogic.gdx.utils.Timer;
+
 import forge.interfaces.IGuiTimer;
 
-//implement a GuiTimer as an animation since it can utilize the same logic for advancing
-public class GuiTimer extends ForgeAnimation implements IGuiTimer {
-    private final Runnable proc;
-    private float elapsed;
-    private int interval;
+public class GuiTimer implements IGuiTimer {
+    private float interval;
+    private Timer.Task task;
 
-    public GuiTimer(Runnable proc0, int interval0) {
-        proc = proc0;
-        interval = interval0;
+    public GuiTimer(final Runnable proc0, int interval0) {
+        interval = (float)interval0 / 1000f; //convert to seconds
+        task = new Timer.Task() {
+            @Override
+            public void run() {
+                proc0.run();
+            }
+        };
+    }
+
+    @Override
+    public void start() {
+        Timer.schedule(task, interval, interval);
+    }
+
+    @Override
+    public void stop() {
+        task.cancel();
     }
 
     @Override
     public void setInterval(int interval0) {
-        interval = interval0;
-    }
-
-    @Override
-    protected boolean advance(float dt) {
-        elapsed += dt * 1000; //convert seconds to milliseconds
-        if (elapsed >= interval) {
-            elapsed = 0;
-            proc.run();
-        }
-        return true;
-    }
-
-    @Override
-    protected boolean stopWhenScreenChanges() {
-        return false; //don't stop timers just because screen changed
+        //ignore this function since there's not a reliable way to change the interval on the fly
     }
 }
