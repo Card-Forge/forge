@@ -256,7 +256,7 @@ public class VStack extends FDropDown {
                         @Override
                         protected void buildMenu() {
                             final LocalGameView gameView = MatchUtil.getGameView();
-                            final PlayerView playerView = gameView.getPlayerView(player);
+                            final PlayerView playerView = gameView.getPlayerView(player, false);
                             final String key = stackInstance.getKey();
                             final boolean autoYield = gameView.shouldAutoYield(key);
                             addItem(new FCheckBoxMenuItem("Auto-Yield", autoYield,

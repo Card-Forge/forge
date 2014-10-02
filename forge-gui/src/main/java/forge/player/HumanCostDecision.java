@@ -942,14 +942,15 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             inp.setMessage("Remove %d " + cost.counter.getName() + " counters from " + cost.getDescriptiveType());
             inp.setCancelAllowed(true);
             inp.showAndWait();
-            if(inp.hasCancelled())
+            if (inp.hasCancelled()) {
                 return null;
+            }
 
             // Have to hack here: remove all counters minus one, without firing any triggers,
             // triggers will fire when last is removed by executePayment.
             // They don't care how many were removed anyway
             // int sum = 0;
-            for(Card crd : inp.getSelected()) {
+            for (Card crd : inp.getSelected()) {
                 int removed = inp.getTimesSelected(crd);
                // sum += removed;
                 if(removed < 2) continue;
@@ -961,9 +962,11 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         // Rift Elemental only - always removes 1 counter, so there will be no code for N counters.
         List<CardView> suspended = Lists.newArrayList();
-        for (final Card crd : validCards)
-            if (crd.getCounters( cost.counter) > 0)
+        for (final Card crd : validCards) {
+            if (crd.getCounters(cost.counter) > 0) {
                 suspended.add(controller.getCardView(crd));
+            }
+        }
 
         final CardView view = SGuiChoose.oneOrNone(getGui(), "Remove counter(s) from a card in " + cost.zone, suspended);
         final Card card = controller.getCard(view);

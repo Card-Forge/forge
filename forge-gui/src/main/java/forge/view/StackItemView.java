@@ -30,10 +30,10 @@ public class StackItemView implements IIdentifiable {
         key = si.getSpellAbility().toUnsuppressedString();
         sourceTrigger = si.getSpellAbility().getSourceTrigger();
         text = si.getStackDescription();
-        source = gameView.getCardView(si.getSourceCard());
-        activatingPlayer = gameView.getPlayerView(si.getActivator());
-        targetCards = gameView.getCardViews(si.getTargetChoices().getTargetCards());
-        targetPlayers = gameView.getPlayerViews(si.getTargetChoices().getTargetPlayers());
+        source = gameView.getCardView(si.getSourceCard(), false);
+        activatingPlayer = gameView.getPlayerView(si.getActivator(), false);
+        targetCards = gameView.getCardViews(si.getTargetChoices().getTargetCards(), false);
+        targetPlayers = gameView.getPlayerViews(si.getTargetChoices().getTargetPlayers(), false);
         ability = si.isAbility();
         optionalTrigger = si.isOptionalTrigger();
         subInstance = si.getSubInstance() == null ? null : new StackItemView(si.getSubInstance(), gameView);

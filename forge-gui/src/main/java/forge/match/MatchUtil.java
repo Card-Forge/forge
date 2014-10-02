@@ -213,7 +213,7 @@ public class MatchUtil {
 
         //ensure opponents set properly
         for (PlayerView pv : gameViews.get(0).getPlayers()) {
-            pv.setOpponents(gameViews.get(0).getPlayerViews(players.getKey(pv.getId()).getOpponents()));
+            pv.setOpponents(gameViews.get(0).getPlayerViews(players.getKey(pv.getId()).getOpponents(), false));
         }
 
         // It's important to run match in a different thread to allow GUI inputs to be invoked from inside game. 

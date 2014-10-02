@@ -616,7 +616,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
     public void openView(List<Player> sortedPlayers) {
         List<PlayerView> sortedPlayerViews = new ArrayList<PlayerView>();
         for (Player p : sortedPlayers) {
-            sortedPlayerViews.add(MatchUtil.getGameView().getPlayerView(p));
+            sortedPlayerViews.add(MatchUtil.getGameView().getPlayerView(p, false));
         }
         CMatchUI.SINGLETON_INSTANCE.initMatch(sortedPlayerViews, MatchUtil.getHumanCount() != 1);
 

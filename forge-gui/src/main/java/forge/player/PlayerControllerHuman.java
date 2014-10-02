@@ -127,11 +127,6 @@ public class PlayerControllerHuman extends PlayerController {
         super(game0, p, lp);
         if (p.getController() == null || p.getLobbyPlayer() == lp) {
             gameView = new GameView(gui, game0);
-
-            // aggressively cache a view for each player (also caches cards)
-            for (final Player player : game.getRegisteredPlayers()) {
-                gameView.getPlayerView(player);
-            }
         }
         else { //handle the case of one player controlling another
             for (Player p0 : game.getPlayers()) {
@@ -195,7 +190,7 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     public boolean isUiSetToSkipPhase(final Player turn, final PhaseType phase) {
-        return !MatchUtil.getController().stopAtPhase(gameView.getPlayerView(turn), phase);
+        return !MatchUtil.getController().stopAtPhase(getPlayerView(turn), phase);
     }
 
     /**
@@ -280,10 +275,10 @@ public class PlayerControllerHuman extends PlayerController {
         if (defender != null && assignDamageAsIfNotBlocked(attacker)) {
             map.put(null, damageDealt);
         } else {
-            final List<CardView> vBlockers = gameView.getCardViews(blockers);
+            final List<CardView> vBlockers = getCardViews(blockers);
             if ((attacker.hasKeyword("Trample") && defender != null) || (blockers.size() > 1)) {
-                final CardView vAttacker = gameView.getCardView(attacker);
-                final GameEntityView vDefender = gameView.getGameEntityView(defender);
+                final CardView vAttacker = getCardView(attacker);
+                final GameEntityView vDefender = getGameEntityView(defender);
                 final Map<CardView, Integer> result = MatchUtil.getDamageToAssign(vAttacker, vBlockers, damageDealt, vDefender, overrideOrder);
                 for (final Entry<CardView, Integer> e : result.entrySet()) {
                     map.put(gameView.getCard(e.getKey()), e.getValue());
@@ -298,7 +293,7 @@ public class PlayerControllerHuman extends PlayerController {
     private final boolean assignDamageAsIfNotBlocked(final Card attacker) {
         return attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.")
                 || (attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
-                && SGuiDialog.confirm(getGui(), gameView.getCardView(attacker), "Do you want to assign its combat damage as though it weren't blocked?"));
+                && SGuiDialog.confirm(getGui(), getCardView(attacker), "Do you want to assign its combat damage as though it weren't blocked?"));
     }
 
     /* (non-Javadoc)
@@ -354,7 +349,7 @@ public class PlayerControllerHuman extends PlayerController {
             return singleChosen == null ?  Lists.<Card>newArrayList() : Lists.newArrayList(singleChosen);
         }
 
-        MatchUtil.getController().setPanelSelection(gameView.getCardView(sa.getHostCard()));
+        MatchUtil.getController().setPanelSelection(getCardView(sa.getHostCard()));
 
         // try to use InputSelectCardsFromList when possible 
         boolean cardsAreInMyHandOrBattlefield = true;
@@ -376,7 +371,7 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         tempShowCards(sourceList);
-        final List<CardView> choices = SGuiChoose.many(getGui(), title, "Chosen Cards", min, max, gameView.getCardViews(sourceList), gameView.getCardView(sa.getHostCard()));
+        final List<CardView> choices = SGuiChoose.many(getGui(), title, "Chosen Cards", min, max, getCardViews(sourceList), getCardView(sa.getHostCard()));
         endTempShowCards();
 
         return getCards(choices);
@@ -421,7 +416,7 @@ public class PlayerControllerHuman extends PlayerController {
                 tempShowCard((Card) t);
             }
         }
-        final GameEntityView result = isOptional ? SGuiChoose.oneOrNone(getGui(), title, gameView.getGameEntityViews((Iterable<GameEntity>) options)) : SGuiChoose.one(getGui(), title, gameView.getGameEntityViews((Iterable<GameEntity>) options));
+        final GameEntityView result = isOptional ? SGuiChoose.oneOrNone(getGui(), title, gameView.getGameEntityViews((Iterable<GameEntity>) options, false)) : SGuiChoose.one(getGui(), title, gameView.getGameEntityViews((Iterable<GameEntity>) options, false));
         endTempShowCards();
         return (T) gameView.getGameEntity(result);
     }
@@ -456,18 +451,18 @@ public class PlayerControllerHuman extends PlayerController {
      */
     @Override
     public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
-        return SGuiDialog.confirm(getGui(), gameView.getCardView(sa.getHostCard()), message);
+        return SGuiDialog.confirm(getGui(), getCardView(sa.getHostCard()), message);
     }
 
     @Override
     public boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode bidlife,
             String string, int bid, Player winner) {
-        return SGuiDialog.confirm(getGui(), gameView.getCardView(sa.getHostCard()), string + " Highest Bidder " + winner);
+        return SGuiDialog.confirm(getGui(), getCardView(sa.getHostCard()), string + " Highest Bidder " + winner);
     }
 
     @Override
     public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
-        return SGuiDialog.confirm(getGui(), gameView.getCardView(hostCard), message);
+        return SGuiDialog.confirm(getGui(), getCardView(hostCard), message);
     }
 
     @Override
@@ -525,25 +520,25 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public List<Card> orderBlockers(final Card attacker, final List<Card> blockers) {
-        final CardView vAttacker = gameView.getCardView(attacker);
+        final CardView vAttacker = getCardView(attacker);
         MatchUtil.getController().setPanelSelection(vAttacker);
-        final List<CardView> choices = SGuiChoose.order(getGui(), "Choose Damage Order for " + vAttacker, "Damaged First", gameView.getCardViews(blockers), vAttacker);
+        final List<CardView> choices = SGuiChoose.order(getGui(), "Choose Damage Order for " + vAttacker, "Damaged First", getCardViews(blockers), vAttacker);
         return gameView.getCards(choices);
     }
 
     @Override
     public List<Card> orderBlocker(final Card attacker, final Card blocker, final List<Card> oldBlockers) {
-        final CardView vAttacker = gameView.getCardView(attacker);
+        final CardView vAttacker = getCardView(attacker);
         MatchUtil.getController().setPanelSelection(vAttacker);
-        final List<CardView> choices = SGuiChoose.insertInList(getGui(), "Choose blocker after which to place " + vAttacker + " in damage order; cancel to place it first", gameView.getCardView(blocker), gameView.getCardViews(oldBlockers));
+        final List<CardView> choices = SGuiChoose.insertInList(getGui(), "Choose blocker after which to place " + vAttacker + " in damage order; cancel to place it first", getCardView(blocker), getCardViews(oldBlockers));
         return gameView.getCards(choices);
     }
 
     @Override
     public List<Card> orderAttackers(final Card blocker, final List<Card> attackers) {
-        final CardView vBlocker = gameView.getCardView(blocker);
+        final CardView vBlocker = getCardView(blocker);
         MatchUtil.getController().setPanelSelection(vBlocker);
-        final List<CardView> choices = SGuiChoose.order(getGui(), "Choose Damage Order for " + vBlocker, "Damaged First", gameView.getCardViews(attackers), vBlocker);
+        final List<CardView> choices = SGuiChoose.order(getGui(), "Choose Damage Order for " + vBlocker, "Damaged First", getCardViews(attackers), vBlocker);
         return gameView.getCards(choices);
     }
 
@@ -561,7 +556,7 @@ public class PlayerControllerHuman extends PlayerController {
         String fm = formatMessage(message, owner);
         if (!cards.isEmpty()) {
             tempShowCards(cards);
-            SGuiChoose.reveal(getGui(), fm, gameView.getCardViews(cards));
+            SGuiChoose.reveal(getGui(), fm, getCardViews(cards));
             endTempShowCards();
         }
         else {
@@ -585,7 +580,7 @@ public class PlayerControllerHuman extends PlayerController {
             }
         }
         else {
-            final List<CardView> toBottomViews = SGuiChoose.many(getGui(), "Select cards to be put on the bottom of your library", "Cards to put on the bottom", -1, gameView.getCardViews(topN), null); 
+            final List<CardView> toBottomViews = SGuiChoose.many(getGui(), "Select cards to be put on the bottom of your library", "Cards to put on the bottom", -1, getCardViews(topN), null); 
             toBottom = gameView.getCards(toBottomViews);
             topN.removeAll(toBottom);
             if (topN.isEmpty()) {
@@ -595,7 +590,7 @@ public class PlayerControllerHuman extends PlayerController {
                 toTop = topN;
             }
             else {
-                final List<CardView> toTopViews = SGuiChoose.order(getGui(), "Arrange cards to be put on top of your library", "Cards arranged", gameView.getCardViews(topN), null); 
+                final List<CardView> toTopViews = SGuiChoose.order(getGui(), "Arrange cards to be put on top of your library", "Cards arranged", getCardViews(topN), null); 
                 toTop = gameView.getCards(toTopViews);
             }
         }
@@ -607,7 +602,7 @@ public class PlayerControllerHuman extends PlayerController {
     public boolean willPutCardOnTop(final Card c) {
         final PaperCard pc = FModel.getMagicDb().getCommonCards().getCard(c.getName());
         final Card c1 = (pc != null ? Card.fromPaperCard(pc, null) : c);
-        final CardView view = gameView.getCardView(c1);
+        final CardView view = getCardView(c1);
         return SGuiDialog.confirm(getGui(), view, "Put " + view + " on the top or bottom of your library?", new String[]{"Top", "Bottom"});
     }
 
@@ -648,7 +643,7 @@ public class PlayerControllerHuman extends PlayerController {
         if (p != player) {
             tempShowCards(valid);
             final List<CardView> choices = SGuiChoose.many(getGui(), "Choose " + min + " card" + (min != 1 ? "s" : "") + " to discard",
-                    "Discarded", min, min, gameView.getCardViews(valid), null);
+                    "Discarded", min, min, getCardViews(valid), null);
             endTempShowCards();
             return getCards(choices);
         }
@@ -661,7 +656,7 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public void playMiracle(final SpellAbility miracle, final Card card) {
-        final CardView view = gameView.getCardView(card);
+        final CardView view = getCardView(card);
         if (SGuiDialog.confirm(getGui(), view, view + " - Drawn. Play for Miracle Cost?")) {
             HumanPlay.playSpellAbility(this, player, miracle);
         }
@@ -680,7 +675,7 @@ public class PlayerControllerHuman extends PlayerController {
         System.out.println("Delve for " + chosenAmount);
 
         for (int i = 0; i < chosenAmount; i++) {
-            final CardView nowChosen = SGuiChoose.oneOrNone(getGui(), "Exile which card?", gameView.getCardViews(grave));
+            final CardView nowChosen = SGuiChoose.oneOrNone(getGui(), "Exile which card?", getCardViews(grave));
 
             if (nowChosen == null) {
                 // User canceled,abort delving.
@@ -778,7 +773,7 @@ public class PlayerControllerHuman extends PlayerController {
      */
     @Override
     public boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question) {
-        return SGuiDialog.confirm(getGui(), gameView.getCardView(replacementEffect.getHostCard()), question);
+        return SGuiDialog.confirm(getGui(), getCardView(replacementEffect.getHostCard()), question);
     }
 
     @Override
@@ -797,7 +792,7 @@ public class PlayerControllerHuman extends PlayerController {
                 //ensure they're declared and then delay slightly so user can see as much
                 for (Pair<Card, GameEntity> attacker : mandatoryAttackers) {
                     combat.addAttacker(attacker.getLeft(), attacker.getRight());
-                    MatchUtil.fireEvent(new UiEventAttackerDeclared(gameView.getCardView(attacker.getLeft()), gameView.getGameEntityView(attacker.getRight())));
+                    MatchUtil.fireEvent(new UiEventAttackerDeclared(getCardView(attacker.getLeft()), getGameEntityView(attacker.getRight())));
                 }
                 try {
                     Thread.sleep(FControlGamePlayback.combatDelay);
@@ -961,7 +956,7 @@ public class PlayerControllerHuman extends PlayerController {
         if (srcCards.isEmpty()) {
             return result;
         }
-        final List<CardView> chosen = SGuiChoose.many(getGui(), "Choose cards to activate from opening hand and their order", "Activate first", -1, gameView.getCardViews(srcCards), null);
+        final List<CardView> chosen = SGuiChoose.many(getGui(), "Choose cards to activate from opening hand and their order", "Activate first", -1, getCardViews(srcCards), null);
         for (final CardView view : chosen) {
             final Card c = getCard(view);
             for (SpellAbility sa : usableFromOpeningHand) {
@@ -991,7 +986,7 @@ public class PlayerControllerHuman extends PlayerController {
             case PlayOrDraw:    labels = new String[]{"Play", "Draw"}; break;
             default:            labels = kindOfChoice.toString().split("Or");
         }
-        return SGuiDialog.confirm(getGui(), gameView.getCardView(sa.getHostCard()), question, defaultVal == null || defaultVal.booleanValue(), labels);
+        return SGuiDialog.confirm(getGui(), getCardView(sa.getHostCard()), question, defaultVal == null || defaultVal.booleanValue(), labels);
     }
 
     @Override
@@ -1163,7 +1158,7 @@ public class PlayerControllerHuman extends PlayerController {
         if (colorNames.length > 2) {
             return MagicColor.fromName(SGuiChoose.one(getGui(), message, colorNames));
         }
-        int idxChosen = SGuiDialog.confirm(getGui(), gameView.getCardView(c), message, colorNames) ? 0 : 1;
+        int idxChosen = SGuiDialog.confirm(getGui(), getCardView(c), message, colorNames) ? 0 : 1;
         return MagicColor.fromName(colorNames[idxChosen]);
     }
 
@@ -1262,7 +1257,7 @@ public class PlayerControllerHuman extends PlayerController {
             final String p1Str = String.format("Pile 1 (%s cards)", pile1.size());
             final String p2Str = String.format("Pile 2 (%s cards)", pile2.size());
             final String[] possibleValues = { p1Str , p2Str };
-            return SGuiDialog.confirm(getGui(), gameView.getCardView(sa.getHostCard()), "Choose a Pile", possibleValues);
+            return SGuiDialog.confirm(getGui(), getCardView(sa.getHostCard()), "Choose a Pile", possibleValues);
         }
 
         tempShowCards(pile1);
@@ -1598,7 +1593,7 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.view.LocalGameView#getGameEntityView(forge.game.GameEntity)
      */
     public final GameEntityView getGameEntityView(GameEntity e) {
-        return gameView.getGameEntityView(e);
+        return gameView.getGameEntityView(e, false);
     }
 
     /**
@@ -1607,14 +1602,14 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.view.LocalGameView#getPlayerViews(java.lang.Iterable)
      */
     public final List<PlayerView> getPlayerViews(Iterable<Player> players) {
-        return gameView.getPlayerViews(players);
+        return gameView.getPlayerViews(players, false);
     }
 
     public PlayerView getPlayerView() {
-        return gameView.getPlayerView(getPlayer());
+        return gameView.getPlayerView(getPlayer(), false);
     }
     public PlayerView getPlayerView(Player p) {
-        return gameView.getPlayerView(p);
+        return gameView.getPlayerView(p, false);
     }
 
     /**
@@ -1632,7 +1627,7 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.view.LocalGameView#getCardView(forge.game.card.Card)
      */
     public CardView getCardView(Card c) {
-        return gameView.getCardView(c);
+        return gameView.getCardView(c, false);
     }
 
     /**
@@ -1641,7 +1636,7 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.view.LocalGameView#getCardViews(java.util.List)
      */
     public final List<CardView> getCardViews(final Iterable<Card> cards) {
-        return gameView.getCardViews(cards);
+        return gameView.getCardViews(cards, false);
     }
 
     /**
@@ -1740,7 +1735,7 @@ public class PlayerControllerHuman extends PlayerController {
         public void setViewAllCards(final boolean canViewAll) {
             mayLookAtAllCards = canViewAll;
             for (final Player p : game.getPlayers()) {
-                MatchUtil.updateCards(getCardViews(p.getAllCards()));
+                MatchUtil.updateCards(gameView.getCardViews(p.getAllCards(), true));
             }
         }
 

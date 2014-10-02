@@ -78,7 +78,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(GameEventTurnPhase ev) {
         boolean isUiToStop = MatchUtil.getController().stopAtPhase(
-                gameView.getPlayerView(ev.playerTurn), ev.phase);
+                gameView.getPlayerView(ev.playerTurn, true), ev.phase);
 
         switch(ev.phase) {
             case COMBAT_END:
@@ -124,9 +124,9 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
         FThreads.invokeInEdtNowOrLater(gui, new Runnable() {
             @Override
             public void run() {
-                gui.setCard(gameView.getCardView(event.spell.getHostCard()));
-                }
-            });
+                gui.setCard(gameView.getCardView(event.spell.getHostCard(), true));
+            }
+        });
         pauseForEvent(resolveDelay);
         return null;
     }
@@ -139,9 +139,9 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
         FThreads.invokeInEdtNowOrLater(gui, new Runnable() {
             @Override
             public void run() {
-                gui.setCard(gameView.getCardView(event.sa.getHostCard()));
-                }
-            });
+                gui.setCard(gameView.getCardView(event.sa.getHostCard(), true));
+            }
+        });
         pauseForEvent(castDelay);
         return null;
     }

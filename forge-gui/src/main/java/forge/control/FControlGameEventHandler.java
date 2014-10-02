@@ -79,6 +79,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     public FControlGameEventHandler(final LocalGameView gameView0) {
         gameView = gameView0;
+
+        // aggressively cache a view for each player (also caches cards)
+        for (Player player : gameView.getGame().getRegisteredPlayers()) {
+            gameView.getPlayerView(player, true);
+        }
+
         processEventsTimer = GuiBase.getInterface().createGuiTimer(processEvents, BASE_TIMER_INTERVAL);
         processEventsTimer.start(); //start event processing loop
     }
@@ -90,26 +96,25 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                 if (eventReceived) {
                     eventReceived = false;
 
-                    gameView.startUpdate();
                     IMatchController controller = MatchUtil.getController();
                     if (!cardsUpdate.isEmpty()) {
-                        MatchUtil.updateCards(gameView.getCardViews(cardsUpdate));
+                        MatchUtil.updateCards(gameView.getCardViews(cardsUpdate, true));
                         cardsUpdate.clear();
                     }
                     if (!cardsRefreshDetails.isEmpty()) {
-                        controller.refreshCardDetails(gameView.getCardViews(cardsRefreshDetails));
+                        controller.refreshCardDetails(gameView.getCardViews(cardsRefreshDetails, true));
                         cardsRefreshDetails.clear();
                     }
                     if (!livesUpdate.isEmpty()) {
-                        controller.updateLives(gameView.getPlayerViews(livesUpdate));
+                        controller.updateLives(gameView.getPlayerViews(livesUpdate, true));
                         livesUpdate.clear();
                     }
                     if (!manaPoolUpdate.isEmpty()) {
-                        controller.updateManaPool(gameView.getPlayerViews(manaPoolUpdate));
+                        controller.updateManaPool(gameView.getPlayerViews(manaPoolUpdate, true));
                         manaPoolUpdate.clear();
                     }
                     if (!zonesUpdate.isEmpty()) {
-                        List<PlayerView> players = gameView.getPlayers();
+                        List<PlayerView> players = gameView.getPlayers(true);
                         ArrayList<Pair<PlayerView, ZoneType>> zones = new ArrayList<Pair<PlayerView, ZoneType>>();
                         for (String z : zonesUpdate) {
                             int idx = z.indexOf(PLAYER_ZONE_DELIM);
@@ -119,7 +124,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                         zonesUpdate.clear();
                     }
                     if (turnUpdate != null) {
-                        controller.updateTurn(gameView.getPlayerView(turnUpdate));
+                        controller.updateTurn(gameView.getPlayerView(turnUpdate, true));
                         turnUpdate = null;
                     }
                     if (needPhaseUpdate) {
@@ -153,7 +158,6 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                         gameView.updateAchievements();
                         processEventsTimer.stop();
                     }
-                    gameView.endUpdate();
                 }
             }
         }
@@ -197,7 +201,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             final CardView fakeCard = new CardView(-1); //use fake card so real cards appear with proper formatting
             fakeCard.getOriginal().setName("  -- From " + Lang.getPossesive(kv.getKey().getName()) + " deck --");
             options.add(fakeCard);
-            options.add(gameView.getCardView(kv.getValue()));
+            options.add(gameView.getCardView(kv.getValue(), true));
         }
         SGuiChoose.reveal(gameView.getGui(), "These cards were chosen to ante", options);
         return null;

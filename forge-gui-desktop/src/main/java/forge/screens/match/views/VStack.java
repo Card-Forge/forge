@@ -181,7 +181,7 @@ public enum VStack implements IVDoc<CStack> {
         public StackInstanceTextArea(final LocalGameView gameView, final StackItemView item) {
             sourceCard = item.getSource();
 
-            final PlayerView localPlayer = gameView.getPlayerView(MatchUtil.getCurrentPlayer());
+            final PlayerView localPlayer = gameView.getPlayerView(MatchUtil.getCurrentPlayer(), false);
             final String txt = (item.isOptionalTrigger() && item.getActivatingPlayer().equals(localPlayer)
                     ? "(OPTIONAL) " : "") + item.getText();
 

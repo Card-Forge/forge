@@ -102,7 +102,7 @@ public class MatchController implements IMatchController {
         boolean noHumans = MatchUtil.getHumanCount() == 0;
         List<VPlayerPanel> playerPanels = new ArrayList<VPlayerPanel>();
         for (Player p : sortedPlayers) {
-            playerPanels.add(new VPlayerPanel(MatchUtil.getGameView(p).getPlayerView(p), noHumans || p.getController() instanceof PlayerControllerHuman));
+            playerPanels.add(new VPlayerPanel(MatchUtil.getGameView(p).getPlayerView(p, false), noHumans || p.getController() instanceof PlayerControllerHuman));
         }
         view = new MatchScreen(playerPanels);
 
