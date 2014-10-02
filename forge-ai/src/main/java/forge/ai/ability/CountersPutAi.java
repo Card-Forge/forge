@@ -66,14 +66,6 @@ public class CountersPutAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkCreatureSacrificeCost(ai, abCost, source)) {
-                return false;
-            }
-
             if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source)) {
                 return false;
             }
@@ -256,7 +248,13 @@ public class CountersPutAi extends SpellAbilityAi {
             }
         }
 
-        if (ComputerUtil.playImmediately(ai, sa)) {
+        boolean immediately = ComputerUtil.playImmediately(ai, sa);
+        
+        if (abCost != null && !ComputerUtilCost.checkSacrificeCost(ai, abCost, source, immediately)) {
+            return false;
+        }
+        
+        if (immediately) {
             return true;
         }
 
