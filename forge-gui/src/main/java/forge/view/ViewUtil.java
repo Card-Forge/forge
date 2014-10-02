@@ -38,6 +38,8 @@ public final class ViewUtil {
         view.setMayBeShown(mayShowCard);
         view.setZone(c.getZone() == null ? null : c.getZone().getZoneType());
         view.setHasAltState(hasAltState);
+        if (!mayShowCard) { return; } //remaining properties aren't needed if card can't be shown
+
         view.setFaceDown(c.isFaceDown());
         view.setCloned(c.isCloned());
         view.setFlipCard(c.isFlipCard());
