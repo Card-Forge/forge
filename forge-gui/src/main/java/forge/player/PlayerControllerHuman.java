@@ -1627,7 +1627,7 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.view.LocalGameView#getCardView(forge.game.card.Card)
      */
     public CardView getCardView(Card c) {
-        return gameView.getCardView(c, false);
+        return gameView.getCardView(c, true);
     }
 
     /**
@@ -1636,7 +1636,7 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.view.LocalGameView#getCardViews(java.util.List)
      */
     public final List<CardView> getCardViews(final Iterable<Card> cards) {
-        return gameView.getCardViews(cards, false);
+        return gameView.getCardViews(cards, true);
     }
 
     /**

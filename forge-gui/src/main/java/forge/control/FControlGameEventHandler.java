@@ -52,7 +52,6 @@ import forge.match.MatchUtil;
 import forge.match.input.ButtonUtil;
 import forge.match.input.InputBase;
 import forge.model.FModel;
-import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Lang;
 import forge.util.gui.SGuiChoose;
@@ -97,14 +96,6 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                     eventReceived = false;
 
                     IMatchController controller = MatchUtil.getController();
-                    if (!cardsUpdate.isEmpty()) {
-                        MatchUtil.updateCards(gameView.getCardViews(cardsUpdate, true));
-                        cardsUpdate.clear();
-                    }
-                    if (!cardsRefreshDetails.isEmpty()) {
-                        controller.refreshCardDetails(gameView.getCardViews(cardsRefreshDetails, true));
-                        cardsRefreshDetails.clear();
-                    }
                     if (!livesUpdate.isEmpty()) {
                         controller.updateLives(gameView.getPlayerViews(livesUpdate, true));
                         livesUpdate.clear();
@@ -112,16 +103,6 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                     if (!manaPoolUpdate.isEmpty()) {
                         controller.updateManaPool(gameView.getPlayerViews(manaPoolUpdate, true));
                         manaPoolUpdate.clear();
-                    }
-                    if (!zonesUpdate.isEmpty()) {
-                        List<PlayerView> players = gameView.getPlayers(true);
-                        ArrayList<Pair<PlayerView, ZoneType>> zones = new ArrayList<Pair<PlayerView, ZoneType>>();
-                        for (String z : zonesUpdate) {
-                            int idx = z.indexOf(PLAYER_ZONE_DELIM);
-                            zones.add(Pair.of(players.get(Integer.parseInt(z.substring(0, idx))), ZoneType.valueOf(z.substring(idx + 1))));
-                        }
-                        controller.updateZones(zones);
-                        zonesUpdate.clear();
                     }
                     if (turnUpdate != null) {
                         controller.updateTurn(gameView.getPlayerView(turnUpdate, true));
@@ -143,6 +124,24 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                     if (needPlayerControlUpdate) {
                         needPlayerControlUpdate = false;
                         controller.updatePlayerControl();
+                    }
+                    if (!zonesUpdate.isEmpty()) {
+                        List<PlayerView> players = gameView.getPlayers(true);
+                        ArrayList<Pair<PlayerView, ZoneType>> zones = new ArrayList<Pair<PlayerView, ZoneType>>();
+                        for (String z : zonesUpdate) {
+                            int idx = z.indexOf(PLAYER_ZONE_DELIM);
+                            zones.add(Pair.of(players.get(Integer.parseInt(z.substring(0, idx))), ZoneType.valueOf(z.substring(idx + 1))));
+                        }
+                        controller.updateZones(zones);
+                        zonesUpdate.clear();
+                    }
+                    if (!cardsUpdate.isEmpty()) {
+                        MatchUtil.updateCards(gameView.getCardViews(cardsUpdate, true));
+                        cardsUpdate.clear();
+                    }
+                    if (!cardsRefreshDetails.isEmpty()) {
+                        controller.refreshCardDetails(gameView.getCardViews(cardsRefreshDetails, true));
+                        cardsRefreshDetails.clear();
                     }
                     if (gameOver) {
                         gameOver = false;
@@ -303,7 +302,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
-    public Void visit(final GameEventBlockersDeclared event) { // This is to draw icons on blockers declared by AI
+    public Void visit(final GameEventBlockersDeclared event) {
         for (MapOfLists<Card, Card> kv : event.blockers.values()) {
             for (Collection<Card> blockers : kv.values()) {
                 cardsUpdate.addAll(blockers);
@@ -314,13 +313,6 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(GameEventAttackersDeclared event) {
-        // Skip redraw for GUI player?
-        if (event.player.getLobbyPlayer() == GamePlayerUtil.getGuiPlayer()) {
-            return null;
-        }
-
-        // Update all attackers.
-        // Although they might have been updated when they were tapped, there could be someone with vigilance, not redrawn yet.
         cardsUpdate.addAll(event.attackersMap.values());
         return null;
     }
