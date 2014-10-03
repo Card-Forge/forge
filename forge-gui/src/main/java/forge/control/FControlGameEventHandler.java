@@ -91,40 +91,44 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final Runnable processEvents = new Runnable() {
         @Override
         public void run() {
-            synchronized (processEventsTimer) {
-                if (eventReceived) {
-                    eventReceived = false;
+            if (eventReceived) {
+                eventReceived = false;
 
-                    IMatchController controller = MatchUtil.getController();
+                IMatchController controller = MatchUtil.getController();
+                synchronized (livesUpdate) {
                     if (!livesUpdate.isEmpty()) {
                         controller.updateLives(gameView.getPlayerViews(livesUpdate, true));
                         livesUpdate.clear();
                     }
+                }
+                synchronized (manaPoolUpdate) {
                     if (!manaPoolUpdate.isEmpty()) {
                         controller.updateManaPool(gameView.getPlayerViews(manaPoolUpdate, true));
                         manaPoolUpdate.clear();
                     }
-                    if (turnUpdate != null) {
-                        controller.updateTurn(gameView.getPlayerView(turnUpdate, true));
-                        turnUpdate = null;
-                    }
-                    if (needPhaseUpdate) {
-                        needPhaseUpdate = false;
-                        controller.updatePhase();
-                    }
-                    if (needCombatUpdate) {
-                        needCombatUpdate = false;
-                        gameView.refreshCombat();
-                        controller.showCombat(gameView.getCombat());
-                    }
-                    if (needStackUpdate) {
-                        needStackUpdate = false;
-                        controller.updateStack();
-                    }
-                    if (needPlayerControlUpdate) {
-                        needPlayerControlUpdate = false;
-                        controller.updatePlayerControl();
-                    }
+                }
+                if (turnUpdate != null) {
+                    controller.updateTurn(gameView.getPlayerView(turnUpdate, true));
+                    turnUpdate = null;
+                }
+                if (needPhaseUpdate) {
+                    needPhaseUpdate = false;
+                    controller.updatePhase();
+                }
+                if (needCombatUpdate) {
+                    needCombatUpdate = false;
+                    gameView.refreshCombat();
+                    controller.showCombat(gameView.getCombat());
+                }
+                if (needStackUpdate) {
+                    needStackUpdate = false;
+                    controller.updateStack();
+                }
+                if (needPlayerControlUpdate) {
+                    needPlayerControlUpdate = false;
+                    controller.updatePlayerControl();
+                }
+                synchronized (zonesUpdate) {
                     if (!zonesUpdate.isEmpty()) {
                         List<PlayerView> players = gameView.getPlayers(true);
                         ArrayList<Pair<PlayerView, ZoneType>> zones = new ArrayList<Pair<PlayerView, ZoneType>>();
@@ -135,28 +139,32 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                         controller.updateZones(zones);
                         zonesUpdate.clear();
                     }
+                }
+                synchronized (cardsUpdate) {
                     if (!cardsUpdate.isEmpty()) {
                         MatchUtil.updateCards(gameView.getCardViews(cardsUpdate, true));
                         cardsUpdate.clear();
                     }
+                }
+                synchronized (cardsRefreshDetails) {
                     if (!cardsRefreshDetails.isEmpty()) {
                         controller.refreshCardDetails(gameView.getCardViews(cardsRefreshDetails, true));
                         cardsRefreshDetails.clear();
                     }
-                    if (gameOver) {
-                        gameOver = false;
-                        gameView.getInputQueue().onGameOver(true); // this will unlock any game threads waiting for inputs to complete
-                    }
-                    if (gameFinished) {
-                        gameFinished = false;
-                        PlayerView localPlayer = gameView.getLocalPlayerView();
-                        InputBase.cancelAwaitNextInput(); //ensure "Waiting for opponent..." doesn't appear behind WinLo
-                        controller.showPromptMessage(localPlayer, ""); //clear prompt behind WinLose overlay
-                        ButtonUtil.update(localPlayer, "", "", false, false, false);
-                        controller.finishGame();
-                        gameView.updateAchievements();
-                        processEventsTimer.stop();
-                    }
+                }
+                if (gameOver) {
+                    gameOver = false;
+                    gameView.getInputQueue().onGameOver(true); // this will unlock any game threads waiting for inputs to complete
+                }
+                if (gameFinished) {
+                    gameFinished = false;
+                    PlayerView localPlayer = gameView.getLocalPlayerView();
+                    InputBase.cancelAwaitNextInput(); //ensure "Waiting for opponent..." doesn't appear behind WinLo
+                    controller.showPromptMessage(localPlayer, ""); //clear prompt behind WinLose overlay
+                    ButtonUtil.update(localPlayer, "", "", false, false, false);
+                    controller.finishGame();
+                    gameView.updateAchievements();
+                    processEventsTimer.stop();
                 }
             }
         }
@@ -164,10 +172,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Subscribe
     public void receiveGameEvent(final GameEvent ev) {
-        synchronized (processEventsTimer) { //ensure multiple events aren't processed at the same time
-            eventReceived = true;
-            ev.visit(this);
-        }
+        eventReceived = true;
+        ev.visit(this);
     }
 
     @Override
@@ -274,38 +280,50 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
     private void updateZone(Player p, ZoneType z) {
         if (p == null || z == null) { return; }
-        zonesUpdate.add(p.getId() + PLAYER_ZONE_DELIM + z.name());
+        synchronized (zonesUpdate) {
+            zonesUpdate.add(p.getId() + PLAYER_ZONE_DELIM + z.name());
+        }
     }
 
     @Override
     public Void visit(final GameEventCardTapped event) {
-        cardsUpdate.add(event.card);
+        synchronized (cardsUpdate) {
+            cardsUpdate.add(event.card);
+        }
         return null;
     }
     
     @Override
     public Void visit(final GameEventCardPhased event) {
-        cardsUpdate.add(event.card);
+        synchronized (cardsUpdate) {
+            cardsUpdate.add(event.card);
+        }
         return null;
     }
 
     @Override
     public Void visit(final GameEventCardDamaged event) {
-        cardsUpdate.add(event.card);
+        synchronized (cardsUpdate) {
+            cardsUpdate.add(event.card);
+        }
         return null;
     }
 
     @Override
     public Void visit(final GameEventCardCounters event) {
-        cardsUpdate.add(event.card);
+        synchronized (cardsUpdate) {
+            cardsUpdate.add(event.card);
+        }
         return null;
     }
 
     @Override
     public Void visit(final GameEventBlockersDeclared event) {
-        for (MapOfLists<Card, Card> kv : event.blockers.values()) {
-            for (Collection<Card> blockers : kv.values()) {
-                cardsUpdate.addAll(blockers);
+        synchronized (cardsUpdate) {
+            for (MapOfLists<Card, Card> kv : event.blockers.values()) {
+                for (Collection<Card> blockers : kv.values()) {
+                    cardsUpdate.addAll(blockers);
+                }
             }
         }
         return null;
@@ -313,7 +331,9 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(GameEventAttackersDeclared event) {
-        cardsUpdate.addAll(event.attackersMap.values());
+        synchronized (cardsUpdate) {
+            cardsUpdate.addAll(event.attackersMap.values());
+        }
         return null;
     }
 
@@ -328,8 +348,10 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         needCombatUpdate = true;
 
         // This should remove sword/shield icons from combatants by the time game moves to M2
-        cardsUpdate.addAll(event.attackers);
-        cardsUpdate.addAll(event.blockers);
+        synchronized (cardsUpdate) {
+            cardsUpdate.addAll(event.attackers);
+            cardsUpdate.addAll(event.blockers);
+        }
         return null;
     }
 
@@ -342,15 +364,21 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(GameEventCardStatsChanged event) {
-        cardsRefreshDetails.addAll(event.cards);
-        cardsUpdate.addAll(event.cards);
+        synchronized (cardsRefreshDetails) {
+            cardsRefreshDetails.addAll(event.cards);
+        }
+        synchronized (cardsUpdate) {
+            cardsUpdate.addAll(event.cards);
+        }
         return null;
     }
 
     @Override
     public Void visit(GameEventPlayerStatsChanged event) {
-        for (final Player p : event.players) {
-            cardsRefreshDetails.addAll(p.getAllCards());
+        synchronized (cardsRefreshDetails) {
+            for (final Player p : event.players) {
+                cardsRefreshDetails.addAll(p.getAllCards());
+            }
         }
         return null;
     }
@@ -363,19 +391,25 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(GameEventManaPool event) {
-        manaPoolUpdate.add(event.player);
+        synchronized (manaPoolUpdate) {
+            manaPoolUpdate.add(event.player);
+        }
         return null;
     }
 
     @Override
     public Void visit(GameEventPlayerLivesChanged event) {
-        livesUpdate.add(event.player);
+        synchronized (livesUpdate) {
+            livesUpdate.add(event.player);
+        }
         return null;
     }
 
     @Override
     public Void visit(GameEventPlayerPoisoned event) {
-        livesUpdate.add(event.receiver);
+        synchronized (livesUpdate) {
+            livesUpdate.add(event.receiver);
+        }
         return null;
     }
 }
