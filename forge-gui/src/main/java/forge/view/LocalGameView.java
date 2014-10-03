@@ -428,7 +428,10 @@ public abstract class LocalGameView implements IGameView {
     public final List<CardView> getCardViews(final Iterable<Card> cards, final boolean forceUpdate) {
         List<CardView> cardViews = new ArrayList<CardView>();
         for (Card c : cards) {
-            cardViews.add(getCardView(c, forceUpdate));
+            CardView cv = getCardView(c, forceUpdate);
+            if (cv != null) {
+                cardViews.add(cv);
+            }
         }
         return cardViews;
     }
