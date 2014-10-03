@@ -87,6 +87,9 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
                 }
             });
             list = add(new FChoiceList<GameEntityView>(items, maxChoices, maxChoices));
+            if (maxChoices > 0) {
+                list.addSelectedIndex(0);
+            }
         }
 
         @Override
