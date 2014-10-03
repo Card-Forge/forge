@@ -54,11 +54,15 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         selectedPage = tabPage0;
         if (selectedPage != null) {
             selectedPage.setVisible(true);
-            if (Forge.getCurrentScreen() == this) {
+            if (canActivateTabPage()) {
                 scrollSelectedTabIntoView();
                 selectedPage.onActivate();
             }
         }
+    }
+
+    protected boolean canActivateTabPage() {
+        return Forge.getCurrentScreen() == this;
     }
 
     @Override

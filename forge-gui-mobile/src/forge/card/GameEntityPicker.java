@@ -54,6 +54,11 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
         optionPane.show();
     }
 
+    @Override
+    protected boolean canActivateTabPage() {
+        return true; //always allow activating tab pages while this is open
+    }
+
     private static class PickerTab extends TabPage<GameEntityPicker> {
         private final FTextField txtSearch;
         private final FChoiceList<GameEntityView> list;
@@ -86,9 +91,23 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
                     list.setScrollTop(0);
                 }
             });
-            list = add(new FChoiceList<GameEntityView>(items, maxChoices, maxChoices));
+            list = add(new FChoiceList<GameEntityView>(items, maxChoices, maxChoices) {
+                @Override
+                protected void onItemActivate(Integer index, GameEntityView value) {
+                    if (maxChoices > 0) {
+                        parentScreen.optionPane.setResult(0);
+                    }
+                }
+            });
             if (maxChoices > 0) {
                 list.addSelectedIndex(0);
+            }
+        }
+
+        @Override
+        protected void onActivate() {
+            if (parentScreen.optionPane != null) {
+                parentScreen.optionPane.setButtonEnabled(0, list.getMaxChoices() > 0);
             }
         }
 

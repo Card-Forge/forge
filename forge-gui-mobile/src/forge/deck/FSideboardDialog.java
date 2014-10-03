@@ -82,6 +82,11 @@ public class FSideboardDialog extends FDialog {
             return ((MainDeckPage)tabPages[1]);
         }
 
+        @Override
+        protected boolean canActivateTabPage() {
+            return true; //always allow activating tab pages while this is open
+        }
+
         private static abstract class TabPageBase extends TabPage<SideboardTabs> {
             protected SideboardTabs parent;
             protected final CardManager cardManager = add(new CardManager(false));
