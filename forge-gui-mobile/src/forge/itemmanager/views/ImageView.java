@@ -565,8 +565,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     @Override
     protected boolean zoom(float x, float y, float amount) {
         totalZoomAmount += amount;
-        
-        float columnZoomAmount = Utils.AVG_FINGER_WIDTH;
+
+        float columnZoomAmount = 2 * Utils.AVG_FINGER_WIDTH;
         while (totalZoomAmount >= columnZoomAmount) {
             setColumnCount(getColumnCount() - 1);
             totalZoomAmount -= columnZoomAmount;
