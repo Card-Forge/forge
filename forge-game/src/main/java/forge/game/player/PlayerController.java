@@ -174,9 +174,9 @@ public abstract class PlayerController {
     // Q: why is there min/max and optional at once? A: This is to handle cases like 'choose 3 to 5 cards or none at all'  
     public abstract List<Card> chooseCardsForEffect(List<Card> sourceList, SpellAbility sa, String title, int min, int max, boolean isOptional);
     
-    public final <T extends GameEntity> T chooseSingleEntityForEffect(Collection<T> sourceList, SpellAbility sa, String title) { return chooseSingleEntityForEffect(sourceList, sa, title, false, null); }
-    public final <T extends GameEntity> T chooseSingleEntityForEffect(Collection<T> sourceList, SpellAbility sa, String title, boolean isOptional) { return chooseSingleEntityForEffect(sourceList, sa, title, isOptional, null); } 
-    public abstract <T extends GameEntity> T chooseSingleEntityForEffect(Collection<T> sourceList, SpellAbility sa, String title, boolean isOptional, Player relatedPlayer);
+    public final <T extends GameEntity> T chooseSingleEntityForEffect(Collection<T> optionList, SpellAbility sa, String title) { return chooseSingleEntityForEffect(optionList, null, sa, title, false, null); }
+    public final <T extends GameEntity> T chooseSingleEntityForEffect(Collection<T> optionList, SpellAbility sa, String title, boolean isOptional) { return chooseSingleEntityForEffect(optionList, null, sa, title, isOptional, null); } 
+    public abstract <T extends GameEntity> T chooseSingleEntityForEffect(Collection<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, boolean isOptional, Player relatedPlayer);
     public abstract SpellAbility chooseSingleSpellForEffect(List<SpellAbility> spells, SpellAbility sa, String title);
 
     public abstract boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message);
@@ -284,7 +284,7 @@ public abstract class PlayerController {
     public abstract String chooseCardName(SpellAbility sa, Predicate<PaperCard> cpp, String valid, String message);
 
     // better to have this odd method than those if playerType comparison in ChangeZone  
-    public abstract Card chooseSingleCardForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, List<Card> fetchList, String selectPrompt, boolean isOptional, Player decider);
+    public abstract Card chooseSingleCardForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, List<Card> fetchList, DelayedReveal delayedReveal, String selectPrompt, boolean isOptional, Player decider);
 
     public boolean isGuiPlayer() {
         return false;

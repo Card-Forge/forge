@@ -34,6 +34,7 @@ import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
+import forge.game.player.DelayedReveal;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController;
@@ -161,8 +162,11 @@ public class PlayerControllerForTests extends PlayerController {
 	}
 
 	@Override
-	public <T extends GameEntity> T chooseSingleEntityForEffect(Collection<T> sourceList, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer) {
-		return chooseItem(sourceList);
+	public <T extends GameEntity> T chooseSingleEntityForEffect(Collection<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer) {
+        if (delayedReveal != null) {
+            delayedReveal.reveal(this);
+        }
+		return chooseItem(optionList);
 	}
 
 	@Override
@@ -610,15 +614,18 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public String chooseCardName(SpellAbility sa, Predicate<PaperCard> cpp,
             String valid, String message) {
-        // TODO Auto-generated method stub
+
         return null;
     }
 
     @Override
     public Card chooseSingleCardForZoneChange(ZoneType destination,
-            List<ZoneType> origin, SpellAbility sa, List<Card> fetchList,
+            List<ZoneType> origin, SpellAbility sa, List<Card> fetchList, DelayedReveal delayedReveal,
             String selectPrompt, boolean isOptional, Player decider) {
-        // TODO Auto-generated method stub
+
+        if (delayedReveal != null) {
+            delayedReveal.reveal(this);
+        }
         return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player, decider);
     }
 

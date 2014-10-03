@@ -15,6 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -28,6 +29,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+
 import forge.FThreads;
 import forge.LobbyPlayer;
 import forge.achievement.AchievementCollection;
@@ -61,6 +63,7 @@ import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.mana.Mana;
 import forge.game.phase.PhaseType;
+import forge.game.player.DelayedReveal;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController;
@@ -379,17 +382,23 @@ public class PlayerControllerHuman extends PlayerController {
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T extends GameEntity> T chooseSingleEntityForEffect(Collection<T> options, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer) {
+    public <T extends GameEntity> T chooseSingleEntityForEffect(Collection<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer) {
         // Human is supposed to read the message and understand from it what to choose
-        if (options.isEmpty()) {
+        if (optionList.isEmpty()) {
+            if (delayedReveal != null) {
+                delayedReveal.reveal(this);
+            }
             return null;
         }
-        if (!isOptional && options.size() == 1) {
-            return Iterables.getFirst(options, null);
+        if (!isOptional && optionList.size() == 1) {
+            if (delayedReveal != null) {
+                delayedReveal.reveal(this);
+            }
+            return Iterables.getFirst(optionList, null);
         }
 
         boolean canUseSelectCardsInput = true;
-        for (GameEntity c : options) {
+        for (GameEntity c : optionList) {
             if (c instanceof Player) {
                 continue;
             }
@@ -403,20 +412,26 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         if (canUseSelectCardsInput) {
-            InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<T>(this, isOptional ? 0 : 1, 1, options);
+            if (delayedReveal != null) {
+                delayedReveal.reveal(this);
+            }
+            InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<T>(this, isOptional ? 0 : 1, 1, optionList);
             input.setCancelAllowed(isOptional);
             input.setMessage(formatMessage(title, targetedPlayer));
             input.showAndWait();
             return Iterables.getFirst(input.getSelected(), null);
         }
 
-        for (final T t : options) {
+        if (delayedReveal != null) {
+            delayedReveal.reveal(this); //TODO: Merge this into search dialog
+        }
+        for (final T t : optionList) {
             if (t instanceof Card) {
                 // assume you may see any card passed through here
                 tempShowCard((Card) t);
             }
         }
-        final GameEntityView result = isOptional ? SGuiChoose.oneOrNone(getGui(), title, gameView.getGameEntityViews((Iterable<GameEntity>) options, false)) : SGuiChoose.one(getGui(), title, gameView.getGameEntityViews((Iterable<GameEntity>) options, false));
+        final GameEntityView result = isOptional ? SGuiChoose.oneOrNone(getGui(), title, gameView.getGameEntityViews((Iterable<GameEntity>) optionList, false)) : SGuiChoose.one(getGui(), title, gameView.getGameEntityViews((Iterable<GameEntity>) optionList, false));
         endTempShowCards();
         return (T) gameView.getGameEntity(result);
     }
@@ -1336,8 +1351,8 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public Card chooseSingleCardForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, List<Card> fetchList, String selectPrompt, boolean isOptional, Player decider) {
-        return chooseSingleEntityForEffect(fetchList, sa, selectPrompt, isOptional, decider);
+    public Card chooseSingleCardForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, List<Card> fetchList, DelayedReveal delayedReveal, String selectPrompt, boolean isOptional, Player decider) {
+        return chooseSingleEntityForEffect(fetchList, delayedReveal, sa, selectPrompt, isOptional, decider);
     }
 
     public boolean isGuiPlayer() {
@@ -1939,7 +1954,7 @@ public class PlayerControllerHuman extends PlayerController {
             final List<ZoneType> origin = new ArrayList<ZoneType>();
             origin.add(ZoneType.Library);
             SpellAbility sa = new SpellAbility.EmptySa(new Card(-1));
-            final Card card = chooseSingleCardForZoneChange(ZoneType.Hand, origin, sa, lib, "Choose a card", true, pPriority);
+            final Card card = chooseSingleCardForZoneChange(ZoneType.Hand, origin, sa, lib, null, "Choose a card", true, pPriority);
             if (card == null) { return; }
 
             game.getAction().invoke(new Runnable() {

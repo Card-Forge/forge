@@ -542,6 +542,7 @@ forge-game/src/main/java/forge/game/phase/Untap.java -text
 forge-game/src/main/java/forge/game/phase/Upkeep.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/phase/package-info.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/player/AchievementTracker.java -text
+forge-game/src/main/java/forge/game/player/DelayedReveal.java -text
 forge-game/src/main/java/forge/game/player/GameLossReason.java -text
 forge-game/src/main/java/forge/game/player/IGameEntitiesFactory.java -text
 forge-game/src/main/java/forge/game/player/Player.java svneol=native#text/plain

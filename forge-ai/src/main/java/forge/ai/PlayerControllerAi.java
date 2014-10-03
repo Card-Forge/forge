@@ -33,6 +33,7 @@ import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.DelayedReveal;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController;
@@ -148,12 +149,15 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public <T extends GameEntity> T chooseSingleEntityForEffect(Collection<T> options, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer) {
+    public <T extends GameEntity> T chooseSingleEntityForEffect(Collection<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer) {
+        if (delayedReveal != null) {
+            delayedReveal.reveal(this);
+        }
         ApiType api = sa.getApi();
         if (null == api) {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
         }
-        return SpellApiToAi.Converter.get(api).chooseSingleEntity(player, sa, options, isOptional, targetedPlayer);
+        return SpellApiToAi.Converter.get(api).chooseSingleEntity(player, sa, optionList, isOptional, targetedPlayer);
     }
 
     @Override
@@ -865,9 +869,12 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public Card chooseSingleCardForZoneChange(ZoneType destination,
-            List<ZoneType> origin, SpellAbility sa, List<Card> fetchList,
+            List<ZoneType> origin, SpellAbility sa, List<Card> fetchList, DelayedReveal delayedReveal,
             String selectPrompt, boolean isOptional, Player decider) {
 
+        if (delayedReveal != null) {
+            delayedReveal.reveal(this);
+        }
         return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player, decider);
     }
 

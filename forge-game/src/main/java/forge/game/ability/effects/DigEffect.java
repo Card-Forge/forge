@@ -6,6 +6,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
+import forge.game.player.DelayedReveal;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -112,9 +113,11 @@ public class DigEffect extends SpellAbilityEffect {
             }
 
             if (top.size() > 0) {
+                DelayedReveal delayedReveal = null;
                 boolean hasRevealed = true;
                 if (sa.hasParam("Reveal")) {
-                    game.getAction().reveal(top, p, false);
+                    delayedReveal = new DelayedReveal(top, srcZone, p);
+                    game.getAction().reveal(top, p);
                 }
                 else if (sa.hasParam("RevealOptional")) {
                     String question = "Reveal: " + Lang.joinHomogenous(top) +"?";
@@ -140,7 +143,7 @@ public class DigEffect extends SpellAbilityEffect {
                 }
                 else if (!sa.hasParam("NoLooking")) {
                     // show the user the revealed cards
-                    chooser.getController().reveal(top, srcZone, p);
+                    delayedReveal = new DelayedReveal(top, srcZone, p);
                 }
 
                 if ((sa.hasParam("RememberRevealed")) && !sa.hasParam("RevealValid") && hasRevealed) {
@@ -190,7 +193,7 @@ public class DigEffect extends SpellAbilityEffect {
                             prompt = "Choose a card to leave in {player's} " + destZone2.name();
                         }
 
-                        Card chosen = chooser.getController().chooseSingleEntityForEffect(valid, sa, prompt, false, p);
+                        Card chosen = chooser.getController().chooseSingleEntityForEffect(valid, delayedReveal, sa, prompt, false, p);
                         movedCards.remove(chosen);
                         if (sa.hasParam("RandomOrder")) {
                             CardLists.shuffle(movedCards);
@@ -212,7 +215,7 @@ public class DigEffect extends SpellAbilityEffect {
                             // let user get choice
                             Card chosen = null;
                             if (!valid.isEmpty()) {
-                                chosen = chooser.getController().chooseSingleEntityForEffect(valid, sa, prompt, anyNumber || optional, p);
+                                chosen = chooser.getController().chooseSingleEntityForEffect(valid, delayedReveal, sa, prompt, anyNumber || optional, p);
                             }
                             else {
                                 chooser.getController().notifyOfValue(sa, null, "No valid cards");

@@ -12,6 +12,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.event.GameEventCombatChanged;
+import forge.game.player.DelayedReveal;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.AbilitySub;
@@ -602,7 +603,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 return;
             }
         }
-        
 
         List<ZoneType> origin = new ArrayList<ZoneType>();
         if (sa.hasParam("Origin")) {
@@ -631,7 +631,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("DestinationAlternative")) {
-
             final StringBuilder sb = new StringBuilder();
             sb.append(sa.getParam("AlternativeDestinationMessage"));
 
@@ -645,8 +644,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         int changeNum = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(source, sa.getParam("ChangeNum"), sa) : 1;
 
         final boolean optional = sa.hasParam("Optional");
-        if( optional && !decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, defined ? "Put that card from " + origin + "to " + destination : "Search " + origin + "?"))
+        if (optional && !decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, defined ? "Put that card from " + origin + "to " + destination : "Search " + origin + "?")) {
             return;
+        }
 
         String changeType = sa.getParam("ChangeType"); 
 
@@ -683,19 +683,18 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
         }
 
+        //determine list of all cards to reveal to player in addition to those that can be chosen
+        DelayedReveal delayedReveal = null;
         if (!defined) {
             if (origin.contains(ZoneType.Library) && searchedLibrary) {
                 final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
                 List<Card> shown = !decider.hasKeyword("LimitSearchLibrary") ? player.getCardsIn(ZoneType.Library) : player.getCardsIn(ZoneType.Library, fetchNum);
                 // Look at whole library before moving onto choosing a card
-                decider.getController().reveal(shown, ZoneType.Library, player, source.getName() + " - Looking at cards in ");
+                delayedReveal = new DelayedReveal(shown, ZoneType.Library, player, source.getName() + " - Looking at cards in ");
             }
-
-            // Look at opponents hand before moving onto choosing a card
-            if (origin.contains(ZoneType.Hand) && player.isOpponentOf(decider)) {
-                decider.getController().reveal(player.getCardsIn(ZoneType.Hand), ZoneType.Hand, player, source.getName() + " - Looking at cards in ");
+            else if (origin.contains(ZoneType.Hand) && player.isOpponentOf(decider)) {
+                delayedReveal = new DelayedReveal(player.getCardsIn(ZoneType.Hand), ZoneType.Hand, player, source.getName() + " - Looking at cards in ");
             }
-            
         }
 
         if (searchedLibrary) {
@@ -725,20 +724,19 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             runParams.put("Target", Lists.newArrayList(player));
             decider.getGame().getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
         }
-        
-        if (!defined && changeType != null)
+
+        if (!defined && changeType != null) {
             fetchList = AbilityUtils.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
+        }
 
         if (sa.hasParam("NoShuffle")) {
             shuffleMandatory = false;
         }
-        
+
         final Game game = player.getGame();
         if (sa.hasParam("Unimprint")) {
             source.clearImprinted();
         }
-        
-        
 
         final boolean remember = sa.hasParam("RememberChanged");
         final boolean champion = sa.hasParam("Champion");
@@ -747,8 +745,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final String selectPrompt = sa.hasParam("SelectPrompt") ? sa.getParam("SelectPrompt") : "Select a card from " + origin;
         final String totalcmc = sa.getParam("WithTotalCMC");
         int totcmc = AbilityUtils.calculateAmount(source, totalcmc, sa);
-        
-        
+
         List<Card> chosenCards = new ArrayList<Card>();
         for (int i = 0; i < changeNum && destination != null; i++) {
             if (sa.hasParam("DifferentNames")) {
@@ -764,11 +761,16 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
             Card c = null;
             if (sa.hasParam("AtRandom")) {
+                if (delayedReveal != null) {
+                    delayedReveal.reveal(decider.getController());
+                }
                 c = Aggregates.random(fetchList);
-            } else if (sa.hasParam("Defined")) {
+            }
+            else if (defined) {
                 c = Iterables.getFirst(fetchList, null);
-            } else {
-                c = decider.getController().chooseSingleCardForZoneChange(destination, origin, sa, fetchList, selectPrompt, !sa.hasParam("Mandatory"), decider);
+            }
+            else {
+                c = decider.getController().chooseSingleCardForZoneChange(destination, origin, sa, fetchList, delayedReveal, selectPrompt, !sa.hasParam("Mandatory"), decider);
             }
 
             if (c == null) {
@@ -801,11 +803,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         List<Card> movedCards = new ArrayList<Card>();
         long ts = game.getNextTimestamp();
-        for(Card c : chosenCards) {
+        for (Card c : chosenCards) {
             Card movedCard = null;
             if (destination.equals(ZoneType.Library)) {
                 movedCard = game.getAction().moveToLibrary(c, libraryPos);
-            } else if (destination.equals(ZoneType.Battlefield)) {
+            }
+            else if (destination.equals(ZoneType.Battlefield)) {
                 if (sa.hasParam("Tapped")) {
                     c.setTapped(true);
                 }
