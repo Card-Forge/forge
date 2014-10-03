@@ -135,5 +135,4 @@ public final class GamePlayerUtil {
         }
         return newName;
     }
-
 }

@@ -101,6 +101,7 @@ import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
+import forge.util.MessageUtil;
 import forge.util.TextUtil;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SGuiDialog;
@@ -417,7 +418,7 @@ public class PlayerControllerHuman extends PlayerController {
             }
             InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<T>(this, isOptional ? 0 : 1, 1, optionList);
             input.setCancelAllowed(isOptional);
-            input.setMessage(formatMessage(title, targetedPlayer));
+            input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
             input.showAndWait();
             return Iterables.getFirst(input.getSelected(), null);
         }
@@ -568,15 +569,15 @@ public class PlayerControllerHuman extends PlayerController {
         else {
             message += "{player's} " + zone.name().toLowerCase();
         }
-        String fm = formatMessage(message, owner);
+        String fm = MessageUtil.formatMessage(message, player, owner);
         if (!cards.isEmpty()) {
             tempShowCards(cards);
             SGuiChoose.reveal(getGui(), fm, getCardViews(cards));
             endTempShowCards();
         }
         else {
-            SGuiDialog.message(getGui(), formatMessage("There are no cards in {player's} " +
-                    zone.name().toLowerCase(), owner), fm);
+            SGuiDialog.message(getGui(), MessageUtil.formatMessage("There are no cards in {player's} " +
+                    zone.name().toLowerCase(), player, owner), fm);
         }
     }
 
@@ -1057,54 +1058,13 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public void notifyOfValue(SpellAbility sa, GameObject realtedTarget, String value) {
-        String message = formatNotificationMessage(sa, realtedTarget, value);
+        String message = MessageUtil.formatNotificationMessage(sa, player, realtedTarget, value);
         if (sa.isManaAbility()) {
             game.getGameLog().add(GameLogEntryType.LAND, message);
         }
         else {
             SGuiDialog.message(getGui(), message, sa.getHostCard() == null ? "" : getCardView(sa.getHostCard()).toString());
         }
-    }
-
-    private String formatMessage(String message, Object related) {
-        if (related instanceof Player && message.indexOf("{player") >= 0) {
-            message = message.replace("{player}", mayBeYou(related)).replace("{player's}", Lang.getPossesive(mayBeYou(related)));
-        }
-        return message;
-    }
-
-    // These are not much related to PlayerController
-    private String formatNotificationMessage(SpellAbility sa, GameObject target, String value) {
-        if (sa.getApi() == null || sa.getHostCard() == null) {
-            return ("Result: " + value);
-        }
-        switch(sa.getApi()) {
-            case ChooseDirection:
-                return value;
-            case ChooseNumber:
-                if (sa.hasParam("SecretlyChoose")) {
-                    return value;
-                }
-                final boolean random = sa.hasParam("Random");
-                return String.format(random ? "Randomly chosen number for %s is %s" : "%s choses number: %s", mayBeYou(target), value);
-            case FlipACoin:
-                String flipper = StringUtils.capitalize(mayBeYou(target));
-                return sa.hasParam("NoCall")
-                        ? String.format("%s flip comes up %s", Lang.getPossesive(flipper), value)
-                        : String.format("%s %s the flip", flipper, Lang.joinVerb(flipper, value));
-            case Protection:
-                String choser = StringUtils.capitalize(mayBeYou(target));
-                return String.format("%s %s protection from %s", choser, Lang.joinVerb(choser, "choose"), value);
-            case Vote:
-                String chooser = StringUtils.capitalize(mayBeYou(target));
-                return String.format("%s %s %s", chooser, Lang.joinVerb(chooser, "vote"), value);
-            default:
-                return String.format("%s effect's value for %s is %s", sa.getHostCard().getName(), mayBeYou(target), value);
-        }
-    }
-
-    private String mayBeYou(Object what) {
-        return what == null ? "(null)" : what == player ? "you" : what.toString();
     }
 
     // end of not related candidates for move.
@@ -1310,7 +1270,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public void revealAnte(String message, Multimap<Player, PaperCard> removedAnteCards) {
         for (Player p : removedAnteCards.keySet()) {
-            SGuiChoose.reveal(getGui(), message + " from " + Lang.getPossessedObject(mayBeYou(p), "deck"), removedAnteCards.get(p));
+            SGuiChoose.reveal(getGui(), message + " from " + Lang.getPossessedObject(MessageUtil.mayBeYou(player, p), "deck"), removedAnteCards.get(p));
         }
     }
 
