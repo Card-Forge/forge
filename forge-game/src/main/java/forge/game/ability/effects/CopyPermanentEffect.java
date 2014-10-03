@@ -172,6 +172,8 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         copy.addTrigger(parsedTrigger);
                     }
 
+                    // Temporarily register triggers of an object created with CopyPermanent
+                    game.getTriggerHandler().registerActiveTrigger(copy, false);
                     final Card copyInPlay = game.getAction().moveToPlay(copy);
 
                     // when copying something stolen:
