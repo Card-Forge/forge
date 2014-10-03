@@ -58,7 +58,7 @@ public class BooleanExpression {
                 operator = Operator.OPEN_PAREN;
             } else if (token.equals(Operator.CLOSE_PAREN.token)) {
                 operator = Operator.CLOSE_PAREN;
-            } else if (token.equals(Operator.NOT.token)) {
+            } else if (token.equals(Operator.NOT.token) && currentValue.trim().isEmpty()) { //Ignore ! operators that aren't the first token in a search term (Don't use '!' in 'Kaboom!')
                 operator = Operator.NOT;
             } else if (token.equals(Operator.ESCAPE.token)) {
                 escapeNext = true;
