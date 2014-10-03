@@ -83,7 +83,7 @@ public class CardRenderer {
         float w = width - 2 * x;
         float h = height - 2 * y;
 
-        final Texture image = ImageCache.getImage(card.getOriginal().getImageKey(), true);
+        final Texture image = ImageCache.getImage(card.getOriginal().getImageKey(false), true);
         if (image == ImageCache.defaultImage) { //support drawing card image manually if card image not found
             float ratio = h / w;
             if (ratio > FCardPanel.ASPECT_RATIO) {
@@ -221,7 +221,7 @@ public class CardRenderer {
         return getCardArt(ImageKeys.getImageKey(pc, false), pc.getRules().getSplitType() == CardSplitType.Split);
     }
     public static FImageComplex getCardArt(CardView card) {
-        return getCardArt(card.getOriginal().getImageKey(), card.isSplitCard());
+        return getCardArt(card.getOriginal().getImageKey(true), card.isSplitCard());
     }
     public static FImageComplex getCardArt(String imageKey, boolean isSplitCard) {
         FImageComplex cardArt = cardArtCache.get(imageKey);

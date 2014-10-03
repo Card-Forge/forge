@@ -48,7 +48,7 @@ public final class FImageUtil {
      * For flip cards, returns the un-flipped image. 
      */
     public static BufferedImage getImage(final CardStateView card) {
-        BufferedImage image = ImageCache.getOriginalImage(card.getImageKey(), true);
+        BufferedImage image = ImageCache.getOriginalImage(card.getImageKey(false), true);
         final int foilIndex = card.getFoilIndex();
         if (image != null && foilIndex > 0) { 
             image = getImageWithFoilEffect(image, foilIndex);

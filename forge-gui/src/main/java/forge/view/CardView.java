@@ -823,8 +823,8 @@ public class CardView extends GameEntityView {
         /**
          * @return the imageKey
          */
-        public String getImageKey() {
-            return mayBeShown ? imageKey : ImageKeys.HIDDEN_CARD;
+        public String getImageKey(boolean ignoreMayBeShown) {
+            return mayBeShown || ignoreMayBeShown ? imageKey : ImageKeys.HIDDEN_CARD;
         }
 
         /**

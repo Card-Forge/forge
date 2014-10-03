@@ -1,5 +1,6 @@
 package forge.toolbox;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 import com.badlogic.gdx.Input.Keys;
@@ -52,6 +53,7 @@ public abstract class FOverlay extends FContainer {
         @Override
         public void run () {
             tempOverlay.hide();
+            tempOverlay = null;
         }
     };
 
@@ -80,22 +82,14 @@ public abstract class FOverlay extends FContainer {
         }
         else if (!hidingAll) { //hiding all handles cleaning up overlay collection
             if (overlays.get(overlays.size() - 1) == this) {
-                overlays.pop();
-
-                //after removing the top overlay, put up an empty overlay for a brief period
+                //after removing the top overlay, delay hiding overlay for a brief period
                 //to prevent back color flickering if another popup immediately follows
                 if (tempOverlay != this) {
-                    if (tempOverlay == null) {
-                        tempOverlay = new FOverlay() {
-                            @Override
-                            protected void doLayout(float width, float height) {
-                            }
-                        };
-                    }
-                    tempOverlay.backColor = backColor;
-                    tempOverlay.show();
+                    tempOverlay = this;
                     Timer.schedule(hideTempOverlayTask, 0.025f);
+                    return;
                 }
+                overlays.pop();
             }
             else {
                 overlays.remove(this);
@@ -155,7 +149,16 @@ public abstract class FOverlay extends FContainer {
     }
 
     @Override
+    public void buildTouchListeners(float screenX, float screenY, ArrayList<FDisplayObject> listeners) {
+        if (tempOverlay == this) { return; } //suppress touch events if waiting to be hidden
+
+        super.buildTouchListeners(screenX, screenY, listeners);
+    }
+
+    @Override
     public boolean keyDown(int keyCode) {
+        if (tempOverlay == this) { return false; } //suppress key events if waiting to be hidden
+
         if (keyCode == Keys.ESCAPE || keyCode == Keys.BACK) {
             if (Forge.endKeyInput()) { return true; }
 
