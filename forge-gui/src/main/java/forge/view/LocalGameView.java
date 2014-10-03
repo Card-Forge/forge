@@ -413,6 +413,7 @@ public abstract class LocalGameView implements IGameView {
         }
         else if (forceUpdate) {
             writeCardToView(c, view, MatchUtil.getGameView());
+            MatchUtil.cards.updateKey(view.getId(), c); //ensure the Card reference in the cache is not outdated
         }
         return view;
     }
