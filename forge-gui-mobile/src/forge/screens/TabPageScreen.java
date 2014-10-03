@@ -323,7 +323,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                             iconHeight *= w / iconWidth;
                             iconWidth = w;
                         }
-                        g.drawImage(icon, (w - iconWidth) / 2, (y - iconHeight) / 2, iconWidth, iconHeight);
+                        g.drawImage(icon, padding + (w - iconWidth) / 2, (y - iconHeight) / 2, iconWidth, iconHeight);
                     }
                 }
 
