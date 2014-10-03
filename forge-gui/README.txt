@@ -1242,6 +1242,57 @@ The AI will no longer waste equipment on cards that are useless (e.g. are tapped
 The AI can now optionally move equipment from one creature to another. For this purpose, a new AI profile variable was added: MOVE_EQUIPMENT_TO_BETTER_CREATURES. It defines whether the AI will always move equipment to better creatures if it has mana ('always'), will only move if the currently equipped creature becomes useless as defined above or because the AI loses control of the creature ('from_useless_only'), or will never move equipment around ('never'). The "Default" profile is set to only move the equipment to other creatures if the currently equipped creatures become useless for the AI, while the "Reckless" AI profile always moves equipment to better creatures when given a chance to (if it has mana and if it doesn't need to reserve mana for a future spell in Main 2).
 
 
+- New Achievements -
+Added new achievements for 19 alternate win conditions and 52 Planeswalker ultimates.
+Added five new tier achievements.
+Trophies now have slick custom art that can be downloaded separate.
+
+
+- There will not be a 1.5.27 beta version -
+We will not be releasing a 1.5.27 beta version and the next beta version will be numbered 1.5.28. Beta 1.5.27 was an internal test version in an effort on our part to improve the build and deploy process.
+
+
+- Quest Draft Improvements -
+Quest drafts have been updated to be more valuable to your quest! 
+Bug fixes: Drafts now correctly rotate based on wins and quest preferences. Booster pack prices are now correctly calculated when presenting awards. No more 500+ alpha booster packs. Sorry! Other misc. fixes as well.
+Now, when you place first or second, you will get to pick a rare in the drafted block's pool to keep. This is in addition to the already existing prizes.
+Additionally, when you spend draft tokens, you no longer receive a random draft. Instead, you get to pick which block the new draft will be (but you still have to pay for it!), completely eliminating the game of chance.
+
+
+- Boolean Expressions Finished -
+Yes, again! They say the third time's the charm, and, well, it is! Boolean expressions have undergone a complete rewrite again with a slightly different method of parsing that works much better.
+Parenthesis work correctly, order is preserved, and NOT operators are applied in the correct places (and also in the correct order). This means that what you expect is what you really get!
+There's one big change to note: The operators have been shortened to one character. They are now: & | ! \
+The only conflicts the AND operator has is a few Unhinged/Unglued cards (which aren't even in Forge), but you can use the escape operator (\) to tell it you really meant to use the & (and that's assuming these cards ever get added to Forge).
+There's a couple cards with exclamation points in their names, but again, you can escape that character to search for them.
+
+A few examples of possible expressions:
+
+>   Search by type: All warriors or cats that aren't zombies, vampires, orcs, or skeletons.
+    (warrior | cat) & !(zombie | vampire | orc | skeleton)
+
+>   Search by mana cost: All non-red cards.
+    !r
+    
+>   Search by mana cost: All non-red, non-black green cards that are also either blue or white, but not only blue or white.
+    !(r|b) & (g & (u | w))
+    
+>   Search by mana cost: All red or black cards that are not also green and blue or green and white.
+    (r|b) & !(g & (u | w))
+    
+>   Search by mana cost: All cards that cost 4 colorless mana.
+    !(w | r | u | g | b) & 4
+    
+>   Search by text: All cards that have both Lifelink and Vigilance printed in the rules text.
+    lifelink & vigilance
+    
+These examples should get you started with this powerful-now-that-it's-finished feature. Enjoy!
+
+
+- Trigger Fixes -
+The long awaited fixes to Blood Artist/Deathgreeter triggering with multiple other creatures is finally here. There may be some residual oddness with other triggers, so please report those if you see them so we can get that worked out. 
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 
