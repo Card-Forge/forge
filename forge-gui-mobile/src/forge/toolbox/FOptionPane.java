@@ -180,7 +180,7 @@ public class FOptionPane extends FDialog {
 
     private final FLabel lblIcon;
     private final FTextArea prompt;
-    private final FDisplayObject displayObj;
+    protected final FDisplayObject displayObj;
     private final FButton[] buttons;
     private final Callback<Integer> callback;
     private final int defaultOption;
@@ -248,6 +248,10 @@ public class FOptionPane extends FDialog {
         buttons[index].setEnabled(enabled);
     }
 
+    protected boolean padDisplayObject() {
+        return true;
+    }
+
     @Override
     protected float layoutAndGetHeight(float width, float maxHeight) {
         float x = PADDING;
@@ -298,8 +302,14 @@ public class FOptionPane extends FDialog {
         }
 
         if (displayObj != null) {
-            displayObj.setBounds(x, y, width - 2 * x, displayObj.getHeight());
-            y += displayObj.getHeight() + PADDING;
+            if (padDisplayObject()) {
+                displayObj.setBounds(x, y, width - 2 * x, displayObj.getHeight());
+                y += displayObj.getHeight() + PADDING;
+            }
+            else {
+                displayObj.setBounds(x - PADDING, y - PADDING, width, displayObj.getHeight());
+                y += displayObj.getHeight();
+            }
         }
 
         //determine size for and position buttons

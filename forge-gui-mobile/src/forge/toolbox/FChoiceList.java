@@ -35,19 +35,19 @@ public class FChoiceList<T> extends FList<T> {
     private final CompactModeHandler compactModeHandler = new CompactModeHandler();
     private final List<Integer> selectedIndices = new ArrayList<Integer>();
 
-    public FChoiceList(Collection<T> items) {
+    public FChoiceList(Collection<? extends T> items) {
         this(items, null);
     }
-    protected FChoiceList(Collection<T> items, T typeItem) {
+    protected FChoiceList(Collection<? extends T> items, T typeItem) {
         this(items, 0, 1, typeItem);
         if (items.size() > 0) {
             addSelectedIndex(0); //select first item by default
         }
     }
-    public FChoiceList(Collection<T> items, int minChoices0, int maxChoices0) {
+    public FChoiceList(Collection<? extends T> items, int minChoices0, int maxChoices0) {
         this(items, minChoices0, maxChoices0, null);
     }
-    protected FChoiceList(Collection<T> items, int minChoices0, int maxChoices0, T typeItem) {
+    protected FChoiceList(Collection<? extends T> items, int minChoices0, int maxChoices0, T typeItem) {
         super(items);
         minChoices = minChoices0;
         maxChoices = maxChoices0;

@@ -343,6 +343,9 @@ public class VPlayerPanel extends FContainer {
             displayArea = displayArea0;
         }
 
+        public FSkinImage getIcon() {
+            return icon;
+        }
         public VDisplayArea getDisplayArea() {
             return displayArea;
         }

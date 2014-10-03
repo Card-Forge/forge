@@ -4,10 +4,13 @@ import java.io.File;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.Texture;
 import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 
 import forge.animation.GuiTimer;
 import forge.assets.FBufferedImage;
@@ -18,6 +21,7 @@ import forge.assets.FSkinProp;
 import forge.assets.FTextureImage;
 import forge.assets.ISkinImage;
 import forge.assets.ImageCache;
+import forge.card.GameEntityPicker;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.FDeckViewer;
@@ -40,6 +44,7 @@ import forge.sound.IAudioMusic;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.GuiChoose;
 import forge.util.FileUtil;
+import forge.util.MessageUtil;
 import forge.util.ThreadUtil;
 import forge.util.WaitCallback;
 import forge.util.WaitRunnable;
@@ -208,16 +213,30 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public GameEntityView chooseSingleEntityForEffect(String title, Collection<? extends GameEntity> optionList, DelayedReveal delayedReveal, boolean isOptional, PlayerControllerHuman controller) {
-        if (delayedReveal != null) {
-            delayedReveal.reveal(controller); //TODO: Merge this into search dialog
-        }
+    public GameEntityView chooseSingleEntityForEffect(final String title, final Collection<? extends GameEntity> optionList, final DelayedReveal delayedReveal, final boolean isOptional, final PlayerControllerHuman controller) {
         controller.tempShow(optionList);
-        List<GameEntityView> gameEntityViews = controller.getGameView().getGameEntityViews(optionList, false);
-        if (isOptional) {
-            return SGuiChoose.oneOrNone(this, title, gameEntityViews);
+        final List<GameEntityView> choiceList = controller.getGameView().getGameEntityViews(optionList, false);
+
+        if (delayedReveal == null || Iterables.isEmpty(delayedReveal.getCards())) {
+            if (isOptional) {
+                return SGuiChoose.oneOrNone(this, title, choiceList);
+            }
+            return SGuiChoose.one(this, title, choiceList);
         }
-        return SGuiChoose.one(this, title, gameEntityViews);
+
+        controller.tempShow(delayedReveal.getCards());
+        final List<CardView> revealList = controller.getGameView().getCardViews(delayedReveal.getCards(), false);
+        final String revealListCaption = StringUtils.capitalize(MessageUtil.formatMessage("{player's} " + delayedReveal.getZone().name(), controller.getPlayer(), delayedReveal.getOwner()));
+        final FImage revealListImage = MatchController.getView().getPlayerPanels().values().iterator().next().getZoneTab(delayedReveal.getZone()).getIcon();
+
+        //use special dialog for choosing card and offering ability to see all revealed cards at the same time 
+        return new WaitCallback<GameEntityView>() {
+            @Override
+            public void run() {
+                GameEntityPicker picker = new GameEntityPicker(title, choiceList, revealList, revealListCaption, revealListImage, isOptional, this);
+                picker.show();
+            }
+        }.invokeAndWait();
     }
 
     @Override

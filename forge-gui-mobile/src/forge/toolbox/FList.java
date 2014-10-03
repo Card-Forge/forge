@@ -37,7 +37,7 @@ public class FList<T> extends FScrollPane implements Iterable<T> {
         }
         initialize();
     }
-    public FList(Iterable<T> items0) {
+    public FList(Iterable<? extends T> items0) {
         for (T item : items0) {
             addItem(item);
         }

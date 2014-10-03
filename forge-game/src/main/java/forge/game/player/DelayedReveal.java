@@ -23,6 +23,18 @@ public class DelayedReveal {
         messagePrefix = messagePrefix0;
     }
 
+    public Iterable<Card> getCards() {
+        return cards;
+    }
+
+    public ZoneType getZone() {
+        return zone;
+    }
+
+    public Player getOwner() {
+        return owner;
+    }
+
     public void reveal(PlayerController controller) {
         if (revealed) { return; } //avoid revealing more than once
         revealed = true;
