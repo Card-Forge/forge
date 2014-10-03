@@ -1,7 +1,7 @@
-Forge Beta: 09-##-2014 ver 1.5.28
+Forge Beta: 10-03-2014 ver 1.5.28
 
 
-# cards in total.
+14277 cards in total.
 
 
 -------------
@@ -71,235 +71,235 @@ The long awaited fixes to Blood Artist/Deathgreeter triggering with multiple oth
 New Cards
 ---------
 
+Abomination of Gudul
 Abzan Ascendancy
 Abzan Banner
 Abzan Battle Priest
+Abzan Charm
 Abzan Falconer
 Abzan Guide
 Ainok Bond-Kin
+Ainok Tracker
 Alabaster Kirin
+Alpine Grizzly
+Altar of the Brood
 Anafenza, the Foremost
 Ankle Shanker
-Bear's Companion
-Bloodfell Caves
-Blossoming Sands
-Brave the Sands
-Clever Impersonator
-Crater's Claws
-Dazzling Ramparts
-Defiant Strike
-Disdainful Stroke
-Dismal Backwater
-Dragon's Eye Savants
-Dragon-Style Twins
-End Hostilities
-Flying Crane Technique
-Frontier Bivouac
-Ghostfire Blade
-Grim Haruspex
-Hardened Scales
-Heir of the Wilds
-Herald of Anafenza
-Horde Ambusher
-Ivorytusk Fortress
-Jeering Instigator
-Jeskai Banner
-Jeskai Elder
-Jeskai Windscout
-Jungle Hollow
-Mantis Rider
-Mardu Banner
-Mardu Skullhunter
-Master of Pearls
-Murderous Cut
-Mystic Monastery
-Nomad Outpost
-Opulent Palace
-Pearl Lake Ancient
-Rakshasa Deathdealer
-Rattleclaw Mystic
-Rugged Highlands
-Ruthless Ripper
-Sagu Mauler
-Sandsteppe Citadel
-Sarkhan, the Dragonspeaker
-Savage Knuckleblade
-Scoured Barrens
-See the Unwritten
-Shambling Attendants
-Sidisi's Pet
-Siege Rhino
-Sorin, Solemn Visitor
-Sultai Banner
-Surrak Dragonclaw
-Swiftwater Cliffs
-Temur Ascendancy
-Temur Banner
-Temur Charger
-Thornwood Falls
-Thousand Winds
-Tranquil Cove
-Ugin's Nexus
-Utter End
-Watcher of the Roost
-Wind-Scarred Crag
-Witness of the Ages
-Zurgo Helmsmasher
-Awaken the Bear
-Debilitating Injury
-Dutiful Return
-Kill Shot
-Siegecraft
-Throttle
-Weave Fate
-Abzan Charm
-Ainok Tracker
+Archers' Parapet
 Armament Corps
+Arrow Storm
+Ashcloud Phoenix
+Avalanche Tusker
+Awaken the Bear
+Barrage of Boulders
+Bear's Companion
+Become Immense
+Bellowing Saddlebrute
+Bitter Revelation
+Blinding Spray
+Bloodfell Caves
 Bloodfire Expert
 Bloodfire Mentor
+Bloodsoaked Champion
+Blossoming Sands
+Brave the Sands
+Briber's Purse
+Bring Low
+Burn Away
+Butcher of the Horde
 Canyon Lukers
 Chief of the Edge
 Chief of the Scale
+Clever Impersonator
+Crackling Doom
+Cranial Archive
+Crater's Claws
+Dazzling Ramparts
+Dead Drop
+Death Frenzy
+Debilitating Injury
+Defiant Strike
+Deflecting Palm
+Dig Through Time
+Disdainful Stroke
+Dismal Backwater
 Disowned Ancestor
+Dragon Grip
+Dragon Throne of Tarkir
+Dragon's Eye Savants
+Dragon-Style Twins
+Dragonscale Boon
+Duneblast
+Dutiful Return
+Efreet Weaponmaster
+Embodiment of Spring
+Empty the Pits
+End Hostilities
+Feat of Resistance
+Feed the Clan
+Firehoof Cavalry
+Flying Crane Technique
+Force Away
+Frontier Bivouac
+Ghostfire Blade
+Glacial Stalker
 Goblinslide
+Grim Haruspex
 Gurmag Swiftwing
+Hardened Scales
+Heart-Piercer Bow
+Heir of the Wilds
+Herald of Anafenza
+High Sentinels of Arashin
+Highland Game
 Highspire Mantis
+Hooded Hydra
+Hooting Mandrills
+Horde Ambusher
 Hordeling Outburst
+Howl of the Horde
+Icefeather Aven
+Icy Blast
+Ivorytusk Fortress
+Jeering Instigator
+Jeskai Ascendancy
+Jeskai Banner
+Jeskai Charm
+Jeskai Elder
+Jeskai Student
+Jeskai Windscout
+Jungle Hollow
+Kheru Bloodsucker
+Kheru Dreadmaw
+Kheru Lich Lord
+Kheru Spellsnatcher
+Kill Shot
+Kin-Tree Invocation
+Kin-Tree Warden
 Krumar Bond-Kin
 Leaping Master
+Lens of Clarity
+Longshot Squad
+Mantis Rider
+Mardu Ascendancy
+Mardu Banner
 Mardu Blazebringer
+Mardu Charm
+Mardu Hateblade
+Mardu Heart-Piercer
+Mardu Hordechief
+Mardu Roughrider
+Mardu Skullhunter
+Mardu Warshrieker
+Master of Pearls
+Master the Way
+Meandering Towershell
 Mer-Ek Nightblade
+Mindswipe
+Mistfire Weaver
+Molting Snakeskin
 Monastery Flock
 Monastery Swiftspear
+Murderous Cut
+Mystic Monastery
+Mystic of the Hidden Way
+Narset, Enlightened Master
+Necropolis Fiend
+Nomad Outpost
+Opulent Palace
+Pearl Lake Ancient
+Pine Walker
 Ponyback Brigade
+Quiet Contemplation
+Raiders' Spoils
+Rakshasa Deathdealer
+Rakshasa's Secret
+Rattleclaw Mystic
+Retribution of the Ancients
+Ride Down
+Rite of the Serpent
 Riverwheel Aerialists
+Roar of Challenge
 Rotting Mastodon
+Rugged Highlands
+Rush of Battle
+Ruthless Ripper
+Sage of the Inward Eye
+Sage-Eye Harrier
 Sagu Archer
+Sagu Mauler
+Salt Road Patrol
+Sandsteppe Citadel
+Sarkhan, the Dragonspeaker
+Savage Knuckleblade
+Savage Punch
+Scaldkin
+Scion of Glaciers
+Scoured Barrens
 Scout the Borders
+Secret Plans
+See the Unwritten
+Seeker of the Way
+Set Adrift
+Shambling Attendants
+Sidisi's Pet
+Siege Rhino
+Siegecraft
+Singing Bell Strike
 Snowhorn Rider
+Sorin, Solemn Visitor
+Stubborn Denial
+Sultai Ascendancy
+Sultai Banner
+Sultai Charm
 Sultai Flayer
 Sultai Scavenger
+Sultai Soothsayer
 Summit Prowler
+Surrak Dragonclaw
+Suspension Field
+Swarm of Bloodflies
 Swift Kick
+Swiftwater Cliffs
+Taigam's Scheming
 Take Up Arms
+Temur Ascendancy
+Temur Banner
+Temur Charger
+Temur Charm
+Thornwood Falls
+Thousand Winds
+Throttle
+Timely Hordemate
+Tomb of the Spirit Dragon
 Tormenting Voice
+Trail of Mystery
+Tranquil Cove
+Trap Essence
+Treasure Cruise
 Trumpet Blast
 Tusked Colossodon
 Tuskguard Captain
+Ugin's Nexus
+Unyielding Krumar
+Utter End
 Valley Dasher
 Venerable Lammasu
+Villainous Wealth
+War Behemoth
+War-Name Aspirant
+Warden of the Eye
+Watcher of the Roost
+Waterwhirl
+Weave Fate
 Wetland Sambar
 Whirlwind Adept
-Woolly Loxodon
-Firehoof Cavalry
-Jeskai Student
-Mardu Hateblade
-Mardu Hordechief
-Rush of Battle
-Sage-Eye Harrier
-Salt Road Patrol
-Seeker of the Way
-Dead Drop
-Tomb of the Spirit Dragon
-Altar of the Brood
-Briber's Purse
-Cranial Archive
-Dragon Throne of Tarkir
-Heart-Piercer Bow
-Secret Plans
-Warden of the Eye
-Roar of Challenge
-Barrage of Boulders
-Bring Low
-Dig Through Time
-Embodiment of Spring
-Bitter Revelation
-Feat of Resistance
-High Sentinels of Arashin
-Kheru Bloodsucker
-Kheru Dreadmaw
-Molting Snakeskin
-Raiders' Spoils
-Rakshasa's Secret
-Suspension Field
-Swarm of Bloodflies
-Taigam's Scheming
-Unyielding Krumar
-War Behemoth
-Timely Hordemate
+Wind-Scarred Crag
 Wingmate Roc
-Force Away
-Lens of Clarity
-Abomination of Gudul
-Avalanche Tusker
-Icefeather Aven
-Mardu Roughrider
-Mardu Warshrieker
-War-Name Aspirant
-Blinding Spray
-Glacial Stalker
-Mardu Heart-Piercer
-Mistfire Weaver
-Mystic of the Hidden Way
-Quiet Contemplation
-Scaldkin
-Scion of Glaciers
-Set Adrift
-Singing Bell Strike
-Treasure Cruise
-Waterwhirl
-Feed the Clan
-Jeskai Charm
-Butcher of the Horde
-Crackling Doom
-Mardu Charm
-Sage of the Inward Eye
-Sultai Soothsayer
-Trap Essence
-Icy Blast
-Kheru Spellsnatcher
-Stubborn Denial
-Bellowing Saddlebrute
-Bloodsoaked Champion
-Hooded Hydra
-Pine Walker
-Savage Punch
-Trail of Mystery
-Empty the Pits
-Necropolis Fiend
-Rite of the Serpent
-Retribution of the Ancients
-Arrow Storm
-Meandering Towershell
-Death Frenzy
-Duneblast
-Temur Charm
-Mindswipe
-Efreet Weaponmaster
-Narset, Enlightened Master
-Jeskai Ascendancy
-Kin-Tree Invocation
-Master the Way
-Mardu Ascendancy
-Sultai Ascendancy
-Sultai Charm
-Burn Away
-Alpine Grizzly
-Archers' Parapet
-Become Immense
-Dragonscale Boon
-Highland Game
-Hooting Mandrills
-Kin-Tree Warden
-Longshot Squad
 Winterflame
-Howl of the Horde
-Kheru Lich Lord
-Villainous Wealth
-Deflecting Palm
-Ashcloud Phoenix
-Ride Down
-Dragon Grip
+Witness of the Ages
+Woolly Loxodon
+Zurgo Helmsmasher
 
 
 -------------------------------
@@ -355,7 +355,18 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Agetian
+DrDev
+elcnesh
+excessum
+Gellesteus
+Gos
+Kapoue
+KrazyTheFox
+Sloth
+Sol
+Swordshine
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
