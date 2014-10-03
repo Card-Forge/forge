@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FChoiceList;
+import forge.toolbox.FDialog;
 import forge.toolbox.FEvent;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
@@ -22,8 +24,8 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
 
     public GameEntityPicker(String title, List<GameEntityView> choiceList, List<CardView> revealList, String revealListCaption, FImage revealListImage, boolean isOptional, final Callback<GameEntityView> callback) {
         super(new PickerTab[] {
-                new PickerTab(choiceList, "Choices", FSkinImage.DECKLIST),
-                new PickerTab(revealList, revealListCaption, revealListImage)
+                new PickerTab(choiceList, "Choices", FSkinImage.DECKLIST, 1),
+                new PickerTab(revealList, revealListCaption, revealListImage, 0)
         }, false);
 
         optionPane = new FOptionPane(null, title, null, this,
@@ -44,7 +46,8 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
             }
         };
 
-        setHeight(Math.min(((PickerTab)tabPages[0]).list.getListItemRenderer().getItemHeight() * Math.max(choiceList.size(), revealList.size()), FOptionPane.getMaxDisplayObjHeight() + FOptionPane.PADDING)); //add PADDING to account for the lack of top padding above tabs
+        setHeight(Forge.getCurrentScreen().getHeight() - FDialog.TITLE_HEIGHT - 
+                3 * FOptionPane.PADDING - FOptionPane.BUTTON_HEIGHT - FOptionPane.GAP_BELOW_BUTTONS);
     }
 
     public void show() {
@@ -55,7 +58,7 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
         private final FTextField txtSearch;
         private final FChoiceList<GameEntityView> list;
 
-        private PickerTab(Collection<? extends GameEntityView> items, String caption0, FImage icon0) {
+        private PickerTab(final Collection<? extends GameEntityView> items, String caption0, FImage icon0, final int maxChoices) {
             super(caption0 + " (" + items.size() + ")", icon0);
             txtSearch = add(new FTextField());
             txtSearch.setFont(FSkinFont.get(12));
@@ -63,27 +66,27 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
             txtSearch.setChangedHandler(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    /*String pattern = txtSearch.getText().toLowerCase();
+                    String pattern = txtSearch.getText().toLowerCase();
                     list.clearSelection();
                     if (pattern.isEmpty()) {
-                        lstChoices.setListData(list);
+                        list.setListData(items);
                     }
                     else {
-                        List<T> filteredList = new ArrayList<T>();
-                        for (T option : list) {
-                            if (lstChoices.getChoiceText(option).toLowerCase().contains(pattern)) {
+                        List<GameEntityView> filteredList = new ArrayList<GameEntityView>();
+                        for (GameEntityView option : items) {
+                            if (option.toString().toLowerCase().contains(pattern)) {
                                 filteredList.add(option);
                             }
                         }
-                        lstChoices.setListData(filteredList);
+                        list.setListData(filteredList);
                     }
-                    if (!lstChoices.isEmpty() && maxChoices > 0) {
-                        lstChoices.addSelectedIndex(0);
+                    if (!list.isEmpty() && maxChoices > 0) {
+                        list.addSelectedIndex(0);
                     }
-                    lstChoices.setScrollTop(0);*/
+                    list.setScrollTop(0);
                 }
             });
-            list = add(new FChoiceList<GameEntityView>(items));
+            list = add(new FChoiceList<GameEntityView>(items, maxChoices, maxChoices));
         }
 
         @Override

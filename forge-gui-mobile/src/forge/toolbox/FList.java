@@ -66,7 +66,7 @@ public class FList<T> extends FScrollPane implements Iterable<T> {
     public List<T> extractListData() {
         return new ArrayList<T>(items); //create copy to avoid modifying items
     }
-    public void setListData(Iterable<T> items0) {
+    public void setListData(Iterable<? extends T> items0) {
         clear();
         for (T item : items0) {
             addItem(item);
