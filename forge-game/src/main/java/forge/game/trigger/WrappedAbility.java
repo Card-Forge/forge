@@ -352,6 +352,11 @@ public class WrappedAbility extends Ability implements ISpellAbility {
             if (!regtrig.requirementsCheck(game)) {
                 return;
             }
+            // Since basic requirements check only cares about whether it's "Activated"
+            // Also check on triggered object specific requirements on resolution (e.g. evolve)
+            if (!regtrig.meetsRequirementsOnTriggeredObjects(game, regtrig.getRunParams())) {
+                return;
+            }
         }
         
         if (triggerParams.containsKey("ResolvingCheck")) {
