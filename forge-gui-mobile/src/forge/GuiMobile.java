@@ -23,10 +23,13 @@ import forge.deck.Deck;
 import forge.deck.FDeckViewer;
 import forge.deck.FSideboardDialog;
 import forge.error.BugReportDialog;
+import forge.game.GameEntity;
+import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
 import forge.interfaces.IGuiBase;
 import forge.interfaces.IGuiTimer;
 import forge.item.PaperCard;
+import forge.player.PlayerControllerHuman;
 import forge.properties.ForgeConstants;
 import forge.screens.match.MatchController;
 import forge.screens.quest.QuestMenu;
@@ -40,7 +43,9 @@ import forge.util.FileUtil;
 import forge.util.ThreadUtil;
 import forge.util.WaitCallback;
 import forge.util.WaitRunnable;
+import forge.util.gui.SGuiChoose;
 import forge.view.CardView;
+import forge.view.GameEntityView;
 
 public class GuiMobile implements IGuiBase {
     private final String assetsDir;
@@ -200,6 +205,19 @@ public class GuiMobile implements IGuiBase {
                 sideboardDialog.show();
             }
         }.invokeAndWait();
+    }
+
+    @Override
+    public GameEntityView chooseSingleEntityForEffect(String title, Collection<? extends GameEntity> optionList, DelayedReveal delayedReveal, boolean isOptional, PlayerControllerHuman controller) {
+        if (delayedReveal != null) {
+            delayedReveal.reveal(controller); //TODO: Merge this into search dialog
+        }
+        controller.tempShow(optionList);
+        List<GameEntityView> gameEntityViews = controller.getGameView().getGameEntityViews(optionList, false);
+        if (isOptional) {
+            return SGuiChoose.oneOrNone(this, title, gameEntityViews);
+        }
+        return SGuiChoose.one(this, title, gameEntityViews);
     }
 
     @Override

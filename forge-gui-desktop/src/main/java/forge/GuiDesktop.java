@@ -24,7 +24,9 @@ import forge.assets.ISkinImage;
 import forge.control.GuiTimer;
 import forge.deck.CardPool;
 import forge.error.BugReportDialog;
+import forge.game.GameEntity;
 import forge.game.GameObject;
+import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
 import forge.gui.BoxedProductCardListViewer;
 import forge.gui.CardListViewer;
@@ -34,6 +36,7 @@ import forge.interfaces.IGuiBase;
 import forge.interfaces.IGuiTimer;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.player.PlayerControllerHuman;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorQuestCardShop;
 import forge.screens.match.CMatchUI;
@@ -47,7 +50,9 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.util.BuildInfo;
 import forge.util.FileUtil;
+import forge.util.gui.SGuiChoose;
 import forge.view.CardView;
+import forge.view.GameEntityView;
 
 public class GuiDesktop implements IGuiBase {
     @Override
@@ -181,6 +186,19 @@ public class GuiDesktop implements IGuiBase {
     @Override
     public List<PaperCard> sideboard(CardPool sideboard, CardPool main) {
         return GuiChoose.sideboard(sideboard.toFlatList(), main.toFlatList());
+    }
+
+    @Override
+    public GameEntityView chooseSingleEntityForEffect(String title, Collection<? extends GameEntity> optionList, DelayedReveal delayedReveal, boolean isOptional, PlayerControllerHuman controller) {
+        if (delayedReveal != null) {
+            delayedReveal.reveal(controller); //TODO: Merge this into search dialog
+        }
+        controller.tempShow(optionList);
+        List<GameEntityView> gameEntityViews = controller.getGameView().getGameEntityViews(optionList, false);
+        if (isOptional) {
+            return SGuiChoose.oneOrNone(this, title, gameEntityViews);
+        }
+        return SGuiChoose.one(this, title, gameEntityViews);
     }
 
     @Override

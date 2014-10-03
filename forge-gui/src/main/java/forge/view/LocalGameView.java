@@ -323,7 +323,7 @@ public abstract class LocalGameView implements IGameView {
         return null;
     }
 
-    public final List<GameEntityView> getGameEntityViews(final Iterable<GameEntity> entities, final boolean forceUpdate) {
+    public final List<GameEntityView> getGameEntityViews(final Iterable<? extends GameEntity> entities, final boolean forceUpdate) {
         List<GameEntityView> views = new ArrayList<GameEntityView>();
         for (GameEntity e : entities) {
             views.add(getGameEntityView(e, forceUpdate));

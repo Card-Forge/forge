@@ -159,6 +159,14 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     private final HashSet<Card> tempShownCards = new HashSet<Card>();
+    public <T> void tempShow(Iterable<T> objects) {
+        for (final T t : objects) {
+            if (t instanceof Card) {
+                // assume you may see any card passed through here
+                tempShowCard((Card) t);
+            }
+        }
+    }
     private void tempShowCard(Card c) {
         CardView cv = MatchUtil.cards.get(c.getId());
         if (!cv.mayBeShown()) {
@@ -423,17 +431,8 @@ public class PlayerControllerHuman extends PlayerController {
             return Iterables.getFirst(input.getSelected(), null);
         }
 
-        if (delayedReveal != null) {
-            delayedReveal.reveal(this); //TODO: Merge this into search dialog
-        }
-        for (final T t : optionList) {
-            if (t instanceof Card) {
-                // assume you may see any card passed through here
-                tempShowCard((Card) t);
-            }
-        }
-        final GameEntityView result = isOptional ? SGuiChoose.oneOrNone(getGui(), title, gameView.getGameEntityViews((Iterable<GameEntity>) optionList, false)) : SGuiChoose.one(getGui(), title, gameView.getGameEntityViews((Iterable<GameEntity>) optionList, false));
-        endTempShowCards();
+        final GameEntityView result = getGui().chooseSingleEntityForEffect(title, optionList, delayedReveal, isOptional, this);
+        endTempShowCards(); //assume tempShow called by getGui().chooseSingleEntityForEffect
         return (T) gameView.getGameEntity(result);
     }
 
