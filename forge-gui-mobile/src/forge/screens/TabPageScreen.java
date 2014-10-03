@@ -218,6 +218,23 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         protected void onActivate() {
         }
 
+        @Override
+        public boolean fling(float velocityX, float velocityY) {
+            //switch to next/previous tab page when flung left or right
+            if (Math.abs(velocityX) > Math.abs(velocityY)) {
+                if (velocityX > 0) {
+                    if (index < parentScreen.tabPages.length - 1) {
+                        parentScreen.setSelectedPage(parentScreen.tabPages[index + 1]);
+                    }
+                }
+                else if (index > 0) {
+                    parentScreen.setSelectedPage(parentScreen.tabPages[index - 1]);
+                }
+                return true;
+            }
+            return false;
+        }
+
         protected class Tab extends FDisplayObject {
             @Override
             public boolean tap(float x, float y, int count) {
