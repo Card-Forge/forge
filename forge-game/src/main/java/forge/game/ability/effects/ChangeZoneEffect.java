@@ -783,7 +783,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
             if (c == null) {
                 final int num = Math.min(fetchList.size(), changeNum - i);
-                String message = String.format("Cancel Search? Up to %d more cards can change zones.", num);
+                String message = "Cancel Search? Up to " + num + " more card" + (num != 1 ? "s" : "") + " can be selected.";
 
                 if (fetchList.isEmpty() || decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, message)) {
                     break;
@@ -793,6 +793,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             fetchList.remove(c);
+            if (delayedReveal != null) {
+                delayedReveal.remove(c);
+            }
             chosenCards.add(c);
 
             if (totalcmc != null) {
@@ -838,7 +841,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         Card attachedTo = null;
                         if (list.size() > 1) {
                             attachedTo = decider.getController().chooseSingleEntityForEffect(list, sa, c + " - Select a card to attach to.");
-                        } else {
+                        }
+                        else {
                             attachedTo = list.get(0);
                         }
                         if (c.isAura()) {
@@ -849,14 +853,16 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                                 c.removeEnchanting(oldEnchanted);
                             }
                             c.enchantEntity(attachedTo);
-                        } else if (c.isEquipment()) { //Equipment
+                        }
+                        else if (c.isEquipment()) { //Equipment
                             if (c.isEquipping()) {
                                 final Card oldEquiped = c.getEquippingCard();
                                 if ( null != oldEquiped )
                                     c.unEquipCard(oldEquiped);
                             }
                             c.equipCard(attachedTo);
-                        } else {
+                        }
+                        else {
                             if (c.isFortifying()) {
                                 final Card oldFortified = c.getFortifyingCard();
                                 if ( null != oldFortified )
@@ -864,7 +870,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             }
                             c.fortifyCard(attachedTo);
                         }
-                    } else { // When it should enter the battlefield attached to an illegal permanent it fails
+                    }
+                    else { // When it should enter the battlefield attached to an illegal permanent it fails
                         continue;
                     }
                 }
@@ -882,7 +889,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             }
                             c.enchantEntity(attachedTo);
                         }
-                    } else { // When it should enter the battlefield attached to an illegal permanent it fails
+                    }
+                    else { // When it should enter the battlefield attached to an illegal permanent it fails
                         continue;
                     }
                 }
@@ -918,12 +926,14 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     movedCard.setState(CardCharacteristicName.FaceDown);
                 }
                 movedCard.setTimestamp(ts);
-            } else if (destination.equals(ZoneType.Exile)) {
+            }
+            else if (destination.equals(ZoneType.Exile)) {
                 movedCard = game.getAction().exile(c);
                 if (sa.hasParam("ExileFaceDown")) {
                     movedCard.setState(CardCharacteristicName.FaceDown);
                 }
-            } else {
+            }
+            else {
                 movedCard = game.getAction().moveTo(destination, c);
             }
             
