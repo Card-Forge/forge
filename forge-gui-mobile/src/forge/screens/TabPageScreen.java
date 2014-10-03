@@ -8,6 +8,8 @@ import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
+import forge.model.FModel;
+import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
@@ -17,6 +19,8 @@ import forge.toolbox.FScrollPane;
 import forge.util.Utils;
 
 public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
+    public static boolean COMPACT_TABS = FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_TABS);
+
     protected final TabPage<T>[] tabPages;
     private TabPage<T> selectedPage;
     protected final TabHeader<T> tabHeader;
@@ -88,7 +92,8 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
     }
 
     private static class TabHeader<T extends TabPageScreen<T>> extends Header {
-        public static final float HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 1.4f);
+        private static final float HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 1.4f);
+        private static final float COMPACT_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
         private static final float BACK_BUTTON_WIDTH = Math.round(HEIGHT / 2);
         private static final FSkinColor SEPARATOR_COLOR = BACK_COLOR.stepColor(-40);
 
@@ -127,13 +132,12 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
 
         public TabHeader(TabPage<T>[] tabPages, boolean showBackButton) {
             if (showBackButton) {
-                btnBack = add(new FLabel.Builder().iconScaleAuto(false).icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new FEventHandler() {
+                btnBack = add(new FLabel.Builder().icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
                         Forge.back();
                     }
                 }).build());
-                btnBack.setSize(BACK_BUTTON_WIDTH, HEIGHT);
             }
             else {
                 btnBack = null;
@@ -146,12 +150,12 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
 
         @Override
         public float getPreferredHeight() {
-            return HEIGHT;
+            return COMPACT_TABS ? COMPACT_HEIGHT : HEIGHT;
         }
 
         @Override
         public void drawBackground(Graphics g) {
-            g.fillRect(BACK_COLOR, 0, 0, getWidth(), HEIGHT);
+            g.fillRect(BACK_COLOR, 0, 0, getWidth(), getHeight());
         }
 
         @Override
@@ -163,19 +167,23 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
             }
 
             //draw bottom border for header
-            float y = HEIGHT - LINE_THICKNESS / 2;
+            float y = getHeight() - LINE_THICKNESS / 2;
             g.drawLine(LINE_THICKNESS, LINE_COLOR, 0, y, getWidth(), y);
         }
 
         @Override
         protected void doLayout(float width, float height) {
-            float x = btnBack != null ? btnBack.getWidth() : 0;
+            float x = 0;
+            if (btnBack != null) {
+                btnBack.setIconScaleAuto(COMPACT_TABS);
+                btnBack.setSize(BACK_BUTTON_WIDTH, height);
+                x += BACK_BUTTON_WIDTH;
+            }
             scroller.setBounds(x, 0, width - x, height);
         }
     }
 
     public static abstract class TabPage<T extends TabPageScreen<T>> extends FContainer {
-        private static final float TAB_PADDING = TabHeader.HEIGHT * 0.1f;
         private static final FSkinColor SEL_TAB_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
         private static final FSkinColor TAB_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
         private static final FSkinFont TAB_FONT = FSkinFont.get(12);
@@ -245,30 +253,67 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
             public void draw(Graphics g) {
                 float w = getWidth();
                 float h = getHeight();
+                float padding = h * 0.1f;
                 if (parentScreen.getSelectedPage() == TabPage.this) {
                     g.fillRect(SEL_TAB_COLOR, Header.LINE_THICKNESS / 2, 0, w - Header.LINE_THICKNESS, h);
                 }
+                w -= 2 * padding;
 
-                //draw caption
-                float y = h - TAB_PADDING - TAB_FONT.getCapHeight();
-                g.drawText(caption, TAB_FONT, TAB_FORE_COLOR, TAB_PADDING, y - TAB_PADDING, w - 2 * TAB_PADDING, h - y + TAB_PADDING, false, HAlignment.CENTER, true);
-
-                //draw icon if one
-                if (icon != null) {
-                    float iconHeight = y - 2 * TAB_PADDING;
-                    float iconWidth = iconHeight * icon.getWidth() / icon.getHeight();
-                    float maxWidth = w - 2 * TAB_PADDING;
-                    if (iconWidth > maxWidth) {
-                        iconHeight *= maxWidth / iconWidth;
-                        iconWidth = maxWidth;
+                //draw caption and icon
+                if (COMPACT_TABS) {
+                    h -= 2 * padding;
+                    if (icon == null) {
+                        g.drawText(caption, TAB_FONT, TAB_FORE_COLOR, padding, padding, w, h, false, HAlignment.CENTER, true);
                     }
-                    g.drawImage(icon, (w - iconWidth) / 2, (y - iconHeight) / 2, iconWidth, iconHeight);
+                    else {
+                        //center combination of icon and text
+                        float iconWidth = h * icon.getWidth() / icon.getHeight();
+                        float iconOffset = iconWidth + padding;
+
+                        float x = padding;
+                        float y = padding;
+                        float dx;
+                        FSkinFont font = TAB_FONT;
+                        while (true) {
+                            dx = (w - iconOffset - font.getMultiLineBounds(caption).width) / 2;
+                            if (dx > 0) {
+                                x += dx;
+                                break;
+                            }
+                            if (!font.canShrink()) {
+                                break;
+                            }
+                            font = font.shrink();
+                        }
+
+                        g.drawImage(icon, x, y, iconWidth, h);
+
+                        x += iconOffset;
+                        w -= iconOffset;
+                        g.startClip(x, y, w, h);
+                        g.drawText(caption, font, TAB_FORE_COLOR, x, y, w, h, false, HAlignment.LEFT, true);
+                        g.endClip();
+                    }
+                }
+                else {
+                    float y = h - padding - TAB_FONT.getCapHeight();
+                    g.drawText(caption, TAB_FONT, TAB_FORE_COLOR, padding, y - padding, w, h - y + padding, false, HAlignment.CENTER, true);
+
+                    if (icon != null) {
+                        float iconHeight = y - 2 * padding;
+                        float iconWidth = iconHeight * icon.getWidth() / icon.getHeight();
+                        if (iconWidth > w) {
+                            iconHeight *= w / iconWidth;
+                            iconWidth = w;
+                        }
+                        g.drawImage(icon, (w - iconWidth) / 2, (y - iconHeight) / 2, iconWidth, iconHeight);
+                    }
                 }
 
                 //draw right border if needed
                 if (parentScreen.tabHeader.finalVisibleTab != this) {
                     float x = getWidth() - Header.LINE_THICKNESS / 2;
-                    g.drawLine(Header.LINE_THICKNESS, TabHeader.SEPARATOR_COLOR, x, 0, x, h);
+                    g.drawLine(Header.LINE_THICKNESS, TabHeader.SEPARATOR_COLOR, x, 0, x, getHeight());
                 }
             }
         }

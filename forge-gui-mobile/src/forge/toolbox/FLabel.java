@@ -159,6 +159,13 @@ public class FLabel extends FDisplayObject implements IButton {
         icon = icon0;
     }
 
+    public boolean getIconScaleAuto() {
+        return iconScaleAuto;
+    }
+    public void setIconScaleAuto(boolean b0) {
+        iconScaleAuto = b0;
+    }
+
     public Vector2 getInsets() {
         return insets;
     }
@@ -306,6 +313,9 @@ public class FLabel extends FDisplayObject implements IButton {
                 iconHeight = h * iconScaleFactor;
                 iconWidth = iconHeight * aspectRatio;
             }
+
+            float iconOffset = iconWidth + insets.x + getExtraGapBetweenIconAndText();
+
             if (iconInBackground || text.isEmpty()) {
                 if (alignment == HAlignment.CENTER) {
                     x += (w - iconWidth) / 2;
@@ -316,7 +326,7 @@ public class FLabel extends FDisplayObject implements IButton {
                 if (alignment == HAlignment.CENTER) {
                     float dx;
                     while (true) {
-                        dx = (w - iconWidth - font.getMultiLineBounds(text).width - insets.x) / 2;
+                        dx = (w - iconOffset - font.getMultiLineBounds(text).width) / 2;
                         if (dx > 0) {
                             x += dx;
                             break;
@@ -351,9 +361,8 @@ public class FLabel extends FDisplayObject implements IButton {
                 if (pressed) {
                     y++;
                 }
-                float dx = iconWidth + insets.x + getExtraGapBetweenIconAndText();
-                x += dx;
-                w -= dx;
+                x += iconOffset;
+                w -= iconOffset;
                 g.startClip(x, y, w, h);
                 g.drawText(text, font, textColor, x, y, w, h, false, HAlignment.LEFT, true);
                 g.endClip();

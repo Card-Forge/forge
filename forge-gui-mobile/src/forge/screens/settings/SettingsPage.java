@@ -17,6 +17,7 @@ import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
+import forge.screens.TabPageScreen;
 import forge.screens.TabPageScreen.TabPage;
 import forge.sound.SoundSystem;
 import forge.toolbox.FCheckBox;
@@ -142,6 +143,17 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 "Randomize Card Art",
                 "Generates cards with random art in generated limited mode card pools."),
                 4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_COMPACT_TABS,
+                "Compact Tabs",
+                "Show smaller tabs on the top of tab page screens (such as this screen)") {
+                    @Override
+                    public void select() {
+                        super.select();
+                        //update layout of screen when this setting changes
+                        TabPageScreen.COMPACT_TABS = FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_TABS);
+                        parentScreen.revalidate();
+                    }
+                }, 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_COMPACT_LIST_ITEMS,
                 "Compact List Items",
                 "Show only a single line of text for cards and decks on all list views by default."),
