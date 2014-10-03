@@ -452,13 +452,10 @@ public abstract class LocalGameView implements IGameView {
     }
 
     private void writeCardToView(final Card c, final CardView view, final LocalGameView gameView) {
-        // First, write the values independent of other views.
-        boolean mayShowCard = gameView.mayShowCard(c);
-        ViewUtil.writeNonDependentCardViewProperties(c, view, mayShowCard, gameView.mayShowCardFace(c));
+        // First, write the values independent of other views
+        ViewUtil.writeNonDependentCardViewProperties(c, view, gameView.mayShowCard(c), gameView.mayShowCardFace(c));
 
-        // Next, write the values that depend on other views if card can be shown
-        if (!mayShowCard) { return; }
-
+        // Next, write the values that depend on other views
         final Combat combat = game.getCombat();
         view.setOwner(getPlayerView(c.getOwner(), false));
         view.setController(getPlayerView(c.getController(), false));
