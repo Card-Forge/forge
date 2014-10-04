@@ -430,6 +430,26 @@ public class ComputerUtilCombat {
         }
         return damage;
     }
+    /**
+     * Overload of totalDamageOfBlockers() for first-strike damage only.
+     * @param attacker creature to be blocked
+     * @param defenders first-strike blockers
+     * @return sum of first-strike damage from blockers
+     */
+    public static int totalFirstStrikeDamageOfBlockers(final Card attacker, final List<Card> defenders) {
+        int damage = 0;
+        
+        for (Card equipment : attacker.getEquippedBy()) {
+            if (equipment.getName().equals("Godsend") && !defenders.isEmpty()) {
+                defenders.remove(0);
+            }
+        }
+
+        for (final Card defender : defenders) {
+            damage += ComputerUtilCombat.predictDamageByBlockerWithoutDoubleStrike(attacker, defender);
+        }
+        return damage;
+    }
 
     // This calculates the amount of damage a blocker in a blockgang can deal to
     // the attacker
@@ -446,6 +466,22 @@ public class ComputerUtilCombat {
      */
     public static int dealsDamageAsBlocker(final Card attacker, final Card defender) {
 
+        int defenderDamage = predictDamageByBlockerWithoutDoubleStrike(attacker, defender);
+
+        if (defender.hasKeyword("Double Strike")) {
+            defenderDamage += predictDamageTo(attacker, defenderDamage, defender, true);
+        }
+
+        return defenderDamage;
+    }
+
+    /**
+     * Predicts the damage to an attacker by a defending creature without double-strike.
+     * @param attacker
+     * @param defender
+     * @return
+     */
+    private static int predictDamageByBlockerWithoutDoubleStrike(final Card attacker, final Card defender) {
         final Game game = attacker.getGame();
         if (attacker.getName().equals("Sylvan Basilisk") && !defender.hasKeyword("Indestructible")) {
             return 0;
@@ -476,11 +512,6 @@ public class ComputerUtilCombat {
 
         // consider static Damage Prevention
         defenderDamage = predictDamageTo(attacker, defenderDamage, defender, true);
-
-        if (defender.hasKeyword("Double Strike")) {
-            defenderDamage += predictDamageTo(attacker, defenderDamage, defender, true);
-        }
-
         return defenderDamage;
     }
 

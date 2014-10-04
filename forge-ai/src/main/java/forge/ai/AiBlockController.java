@@ -354,10 +354,10 @@ public class AiBlockController {
                         // if the total damage of the blockgang was not enough
                         // without but is enough with this blocker finish the
                         // blockgang
-                        if (ComputerUtilCombat.totalDamageOfBlockers(attacker, blockGang) < damageNeeded
+                        if (ComputerUtilCombat.totalFirstStrikeDamageOfBlockers(attacker, blockGang) < damageNeeded
                                 || CombatUtil.needsBlockers(attacker) > blockGang.size()) {
                             blockGang.add(blocker);
-                            if (ComputerUtilCombat.totalDamageOfBlockers(attacker, blockGang) >= damageNeeded) {
+                            if (ComputerUtilCombat.totalFirstStrikeDamageOfBlockers(attacker, blockGang) >= damageNeeded) {
                                 currentAttackers.remove(attacker);
                                 for (final Card b : blockGang) {
                                     if (CombatUtil.canBlock(attacker, blocker, combat)) {
