@@ -1136,24 +1136,22 @@ public class ComputerUtilCard {
                     continue;
                 }
                 if (params.containsKey("AddPower")) {
+                    String addP = params.get("AddPower");
                     int att = 0;
-                    if (params.get("AddPower").equals("X")) {
-                        att = CardFactoryUtil.xCount(c, c.getSVar("X"));
-                    } else if (params.get("AddPower").equals("Y")) {
-                        att = CardFactoryUtil.xCount(c, c.getSVar("Y"));
+                    if (addP.equals("AffectedX")) {
+                        att = CardFactoryUtil.xCount(vCard, AbilityUtils.getSVar(stAb, addP));
                     } else {
-                        att = AbilityUtils.calculateAmount(c, params.get("AddPower"), stAb);
+                        att = AbilityUtils.calculateAmount(c, addP, stAb);
                     }
                     vCard.addTempAttackBoost(att);
                 }
                 if (params.containsKey("AddToughness")) {
+                    String addT = params.get("AddToughness");
                     int def = 0;
-                    if (params.get("AddToughness").equals("X")) {
-                        def = CardFactoryUtil.xCount(c, c.getSVar("X"));
-                    } else if (params.get("AddToughness").equals("Y")) {
-                        def = CardFactoryUtil.xCount(c, c.getSVar("Y"));
+                    if (addT.equals("AffectedY")) {
+                        def = CardFactoryUtil.xCount(vCard, AbilityUtils.getSVar(stAb, addT));
                     } else {
-                        def = AbilityUtils.calculateAmount(c, params.get("AddToughness"), stAb);
+                        def = AbilityUtils.calculateAmount(c, addT, stAb);
                     }
                     vCard.addTempDefenseBoost(def);
                 }
