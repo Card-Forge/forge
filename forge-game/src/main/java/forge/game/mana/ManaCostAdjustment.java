@@ -233,11 +233,11 @@ public class ManaCostAdjustment {
                     }
                 }
             } else if (params.get("Type").equals("Ability")) {
-                if (!(sa instanceof AbilityActivated)) {
+                if (!(sa instanceof AbilityActivated) || sa.isReplacementAbility()) {
                     return;
                 }
             } else if (params.get("Type").equals("NonManaAbility")) {
-                if (!(sa instanceof AbilityActivated) || sa.isManaAbility()) {
+                if (!(sa instanceof AbilityActivated) || sa.isManaAbility() || sa.isReplacementAbility()) {
                     return;
                 }
             } else if (params.get("Type").equals("Flashback")) {

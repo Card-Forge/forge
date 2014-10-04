@@ -88,6 +88,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean basicSpell = true;
     private boolean trigger = false;
     private boolean optionalTrigger = false;
+    private boolean replacementAbility = false;
     private int sourceTrigger = -1;
     private List<Object> triggerRemembered = new ArrayList<Object>();
 
@@ -988,44 +989,16 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         newSA.setPayCosts(abCost);
         return newSA;
     }
-    /**
-     * <p>
-     * Setter for the field <code>trigger</code>.
-     * </p>
-     * 
-     * @param trigger
-     *            a boolean.
-     */
+
     public void setTrigger(final boolean trigger) {
         this.trigger = trigger;
     }
-
-    /**
-     * <p>
-     * isTrigger.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public boolean isTrigger() {
         return this.trigger;
     }
-
-    /**
-     * Sets the optional trigger.
-     * 
-     * @param optrigger
-     *            the new optional trigger
-     */
     public void setOptionalTrigger(final boolean optrigger) {
         this.optionalTrigger = optrigger;
     }
-
-    /**
-     * Checks if is optional trigger.
-     * 
-     * @return true, if is optional trigger
-     */
     public boolean isOptionalTrigger() {
         return this.optionalTrigger;
     }
@@ -1052,6 +1025,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public int getSourceTrigger() {
         return this.sourceTrigger;
     }
+
+    public boolean isReplacementAbility() { return this.replacementAbility; }
+    public void setReplacementAbility(boolean replacement) { this.replacementAbility = replacement; }
 
     /**
      * <p>
