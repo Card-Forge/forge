@@ -244,8 +244,8 @@ public abstract class LocalGameView implements IGameView {
     public List<PlayerView> getPlayers() {
         return getPlayerViews(game.getRegisteredPlayers(), false);
     }
-    public List<PlayerView> getPlayers(boolean forceUpdate) {
-        return getPlayerViews(game.getRegisteredPlayers(), forceUpdate);
+    public List<PlayerView> getPlayers(Boolean update) {
+        return getPlayerViews(game.getRegisteredPlayers(), update);
     }
 
     @Override
@@ -313,20 +313,20 @@ public abstract class LocalGameView implements IGameView {
         return MatchUtil.stackItems.getKey(view.getId());
     }
 
-    public final GameEntityView getGameEntityView(final GameEntity e, final boolean forceUpdate) {
+    public final GameEntityView getGameEntityView(final GameEntity e, final Boolean update) {
         if (e instanceof Card) {
-            return getCardView((Card)e, forceUpdate);
+            return getCardView((Card)e, update);
         }
         if (e instanceof Player) {
-            return getPlayerView((Player)e, forceUpdate);
+            return getPlayerView((Player)e, update);
         }
         return null;
     }
 
-    public final List<GameEntityView> getGameEntityViews(final Iterable<? extends GameEntity> entities, final boolean forceUpdate) {
+    public final List<GameEntityView> getGameEntityViews(final Iterable<? extends GameEntity> entities, final Boolean update) {
         List<GameEntityView> views = new ArrayList<GameEntityView>();
         for (GameEntity e : entities) {
-            views.add(getGameEntityView(e, forceUpdate));
+            views.add(getGameEntityView(e, update));
         }
         return views;
     }
@@ -341,10 +341,16 @@ public abstract class LocalGameView implements IGameView {
         return null;
     }
 
-    public final List<PlayerView> getPlayerViews(final Iterable<Player> players, final boolean forceUpdate) {
+    public void updatePlayers(Iterable<PlayerView> views) {
+        for (PlayerView pv : views) {
+            writePlayerToView(getPlayer(pv), pv, true);
+        }
+    }
+
+    public final List<PlayerView> getPlayerViews(final Iterable<Player> players, final Boolean update) {
         List<PlayerView> views = new ArrayList<PlayerView>();
         for (Player p : players) {
-            views.add(getPlayerView(p, forceUpdate));
+            views.add(getPlayerView(p, update));
         }
         return views;
     }
@@ -356,7 +362,7 @@ public abstract class LocalGameView implements IGameView {
         return MatchUtil.players.getKey(p.getId());
     }
 
-    public PlayerView getPlayerView(final Player p, final boolean forceUpdate) {
+    public PlayerView getPlayerView(final Player p, final Boolean update) {
         if (p == null) {
             return null;
         }
@@ -364,16 +370,18 @@ public abstract class LocalGameView implements IGameView {
         PlayerView view = MatchUtil.players.get(p.getId());
         if (view == null) {
             view = new PlayerView(p.getLobbyPlayer(), p.getId());
-            writePlayerToView(p, view, forceUpdate);
+            if (update != null) { //passing null signifies to delay writing card to view even first time
+                writePlayerToView(p, view, update);
+            }
             MatchUtil.players.put(p, view);
         }
-        else if (forceUpdate) {
+        else if (Boolean.TRUE.equals(update)) {
             writePlayerToView(p, view, true);
         }
         return view;
     }
 
-    private void writePlayerToView(final Player p, final PlayerView view, final boolean forceUpdate) {
+    private void writePlayerToView(final Player p, final PlayerView view, final Boolean update) {
         view.setCommanderInfo(CardFactoryUtil.getCommanderInfo(p).trim().replace("\r\n", "; "));
         view.setKeywords(p.getKeywords());
         view.setLife(p.getLife());
@@ -382,16 +390,16 @@ public abstract class LocalGameView implements IGameView {
         view.setPoisonCounters(p.getPoisonCounters());
         view.setPreventNextDamage(p.getPreventNextDamageTotalShields());
         view.setHasUnlimitedHandSize(p.isUnlimitedHandSize());
-        view.setAnteCards(getCardViews(p.getCardsIn(ZoneType.Ante), forceUpdate));
-        view.setBfCards(getCardViews(p.getCardsIn(ZoneType.Battlefield, false), forceUpdate));
-        view.setCommandCards(getCardViews(p.getCardsIn(ZoneType.Command), forceUpdate));
-        view.setExileCards(getCardViews(p.getCardsIn(ZoneType.Exile), forceUpdate));
-        view.setFlashbackCards(getCardViews(p.getCardsActivableInExternalZones(false), forceUpdate));
-        view.setGraveCards(getCardViews(p.getCardsIn(ZoneType.Graveyard), forceUpdate));
+        view.setAnteCards(getCardViews(p.getCardsIn(ZoneType.Ante), update));
+        view.setBfCards(getCardViews(p.getCardsIn(ZoneType.Battlefield, false), update));
+        view.setCommandCards(getCardViews(p.getCardsIn(ZoneType.Command), update));
+        view.setExileCards(getCardViews(p.getCardsIn(ZoneType.Exile), update));
+        view.setFlashbackCards(getCardViews(p.getCardsActivableInExternalZones(false), update));
+        view.setGraveCards(getCardViews(p.getCardsIn(ZoneType.Graveyard), update));
         final List<Card> handCards = p.getCardsIn(ZoneType.Hand),
                 libraryCards = p.getCardsIn(ZoneType.Library);
-        view.setHandCards(getCardViews(handCards, forceUpdate));
-        view.setLibraryCards(getCardViews(libraryCards, forceUpdate));
+        view.setHandCards(getCardViews(handCards, update));
+        view.setLibraryCards(getCardViews(libraryCards, update));
         view.setnHandCards(handCards.size());
         view.setnLibraryCards(libraryCards.size());
 
@@ -400,7 +408,7 @@ public abstract class LocalGameView implements IGameView {
         }
     }
 
-    public CardView getCardView(final Card c, final boolean forceUpdate) {
+    public CardView getCardView(final Card c, final Boolean update) {
         if (c == null || c != c.getCardForUi()) {
             return null;
         }
@@ -408,14 +416,25 @@ public abstract class LocalGameView implements IGameView {
         CardView view = MatchUtil.cards.get(c.getId());
         if (view == null) {
             view = new CardView(c.getId());
-            writeCardToView(c, view, MatchUtil.getGameView());
+            if (update != null) { //passing null signifies to delay writing card to view even first time
+                writeCardToView(c, view, MatchUtil.getGameView());
+            }
             MatchUtil.cards.put(c, view);
         }
-        else if (forceUpdate) {
-            writeCardToView(c, view, MatchUtil.getGameView());
+        else {
+            if (Boolean.TRUE.equals(update)) {
+                writeCardToView(c, view, MatchUtil.getGameView());
+            }
             MatchUtil.cards.updateKey(view.getId(), c); //ensure the Card reference in the cache is not outdated
         }
         return view;
+    }
+
+    public void updateCards(Iterable<CardView> views) {
+        LocalGameView gameView = MatchUtil.getGameView();
+        for (CardView cv : views) {
+            writeCardToView(getCard(cv), cv, gameView);
+        }
     }
 
     public void updateAllCards() {
@@ -425,10 +444,10 @@ public abstract class LocalGameView implements IGameView {
         }
     }
 
-    public final List<CardView> getCardViews(final Iterable<Card> cards, final boolean forceUpdate) {
+    public final List<CardView> getCardViews(final Iterable<Card> cards, final Boolean update) {
         List<CardView> cardViews = new ArrayList<CardView>();
         for (Card c : cards) {
-            CardView cv = getCardView(c, forceUpdate);
+            CardView cv = getCardView(c, update);
             if (cv != null) {
                 cardViews.add(cv);
             }

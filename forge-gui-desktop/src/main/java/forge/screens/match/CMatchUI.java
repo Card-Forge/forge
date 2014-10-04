@@ -299,7 +299,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
     }
 
     // Player's mana pool changes
-    public void updateManaPool(final List<PlayerView> manaPoolUpdate) {
+    public void updateManaPool(final Iterable<PlayerView> manaPoolUpdate) {
         for (final PlayerView p : manaPoolUpdate) {
             getFieldViewFor(p).getDetailsPanel().updateManaPool();
         }
@@ -307,7 +307,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
     }
 
     // Player's lives and poison counters
-    public void updateLives(final List<PlayerView> livesUpdate) {
+    public void updateLives(final Iterable<PlayerView> livesUpdate) {
         for (final PlayerView p : livesUpdate) {
             getFieldViewFor(p).updateDetails();
         }

@@ -298,7 +298,7 @@ public class MatchController implements IMatchController {
     }
 
     @Override
-    public void updateManaPool(List<PlayerView> manaPoolUpdate) {
+    public void updateManaPool(Iterable<PlayerView> manaPoolUpdate) {
         for (PlayerView p : manaPoolUpdate) {
             view.getPlayerPanel(p).updateManaPool();
         }
@@ -306,7 +306,7 @@ public class MatchController implements IMatchController {
     }
 
     @Override
-    public void updateLives(List<PlayerView> livesUpdate) {
+    public void updateLives(Iterable<PlayerView> livesUpdate) {
         for (PlayerView p : livesUpdate) {
             view.getPlayerPanel(p).updateLife();
         }

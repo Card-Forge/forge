@@ -46,8 +46,8 @@ public interface IMatchController {
     void updateZones(List<Pair<PlayerView, ZoneType>> zonesToUpdate);
     void updateSingleCard(CardView card);
     void refreshCardDetails(Iterable<CardView> cards);
-    void updateManaPool(List<PlayerView> manaPoolUpdate);
-    void updateLives(List<PlayerView> livesUpdate);
+    void updateManaPool(Iterable<PlayerView> manaPoolUpdate);
+    void updateLives(Iterable<PlayerView> livesUpdate);
     void setPanelSelection(CardView hostCard);
     void hear(LobbyPlayer player, String message);
     int getAbilityToPlay(List<SpellAbilityView> abilities, ITriggerEvent triggerEvent);
