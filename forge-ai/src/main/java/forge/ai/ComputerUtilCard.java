@@ -1142,7 +1142,7 @@ public class ComputerUtilCard {
                     } else if (params.get("AddPower").equals("Y")) {
                         att = CardFactoryUtil.xCount(c, c.getSVar("Y"));
                     } else {
-                        att = AbilityUtils.calculateAmount(vCard, params.get("AddPower"), stAb);
+                        att = AbilityUtils.calculateAmount(c, params.get("AddPower"), stAb);
                     }
                     vCard.addTempAttackBoost(att);
                 }
