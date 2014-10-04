@@ -1142,7 +1142,7 @@ public class ComputerUtilCard {
                     } else if (params.get("AddPower").equals("Y")) {
                         att = CardFactoryUtil.xCount(c, c.getSVar("Y"));
                     } else {
-                        att = Integer.valueOf(params.get("AddPower"));
+                        att = AbilityUtils.calculateAmount(vCard, params.get("AddPower"), stAb);
                     }
                     vCard.addTempAttackBoost(att);
                 }
@@ -1153,7 +1153,7 @@ public class ComputerUtilCard {
                     } else if (params.get("AddToughness").equals("Y")) {
                         def = CardFactoryUtil.xCount(c, c.getSVar("Y"));
                     } else {
-                        def = Integer.valueOf(params.get("AddToughness"));
+                        def = AbilityUtils.calculateAmount(c, params.get("AddToughness"), stAb);
                     }
                     vCard.addTempDefenseBoost(def);
                 }
