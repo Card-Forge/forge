@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Legendary Creature Moonfolk Monk
 PT:1/1
 K:Flying
-T:Mode$ SpellCast | CheckSVar$ NumCast | SVarCompare$ EQ4 | NoResolvingCheck$ True | Execute$ TrigFlip | TriggerZones$ Battlefield | TriggerDescription$ Whenever the fourth spell of a turn is cast, flip CARDNAME.
+T:Mode$ SpellCast | CheckSVar$ NumCast | SVarCompare$ EQ3 | NoResolvingCheck$ True | Execute$ TrigFlip | TriggerZones$ Battlefield | TriggerDescription$ Whenever the fourth spell of a turn is cast, flip CARDNAME.
 SVar:TrigFlip:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Flip
 SVar:NumCast:Count$ThisTurnCast_Card
 SVar:Picture:http://www.wizards.com/global/images/magic/general/erayo_soratami_ascendant.jpg
