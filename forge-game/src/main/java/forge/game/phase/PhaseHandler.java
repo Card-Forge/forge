@@ -950,7 +950,7 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
      * @return a boolean.
      */
     public final boolean isFirstUpkeep() {
-        return (this.nUpkeepsThisTurn == 1);
+        return (this.nUpkeepsThisTurn == 0);
     }
 
     /**
@@ -961,7 +961,7 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
      * @return a boolean.
      */
     public final boolean isFirstUpkeepThisGame() {
-        return (this.nUpkeepsThisGame == 1);
+        return (this.nUpkeepsThisGame == 0);
     }
 
     /**
