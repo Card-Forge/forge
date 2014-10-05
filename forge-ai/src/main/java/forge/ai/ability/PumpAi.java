@@ -123,7 +123,11 @@ public class PumpAi extends PumpAiBase {
         int defense;
         if (numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
+            int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
+            if (source.getName().equals("Necropolis Fiend")) {
+            	xPay = Math.min(xPay, sa.getActivatingPlayer().getCardsIn(ZoneType.Graveyard).size());
+                sa.setSVar("X", Integer.toString(xPay));
+            }
             source.setSVar("PayX", Integer.toString(xPay));
             defense = xPay;
             if (numDefense.equals("-X")) {
