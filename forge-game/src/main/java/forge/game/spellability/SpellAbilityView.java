@@ -10,6 +10,10 @@ public class SpellAbilityView extends TrackableObject<SpellAbilityProp> {
         super(sa.getId(), SpellAbilityProp.class);
         updateHostCard(sa);
         updateDescription(sa);
+
+        //only update remaining properties if within Game context
+        if (sa.getHostCard().getGame() == null) { return; }
+
         updateCanPlay(sa);
         updatePromptIfOnlyPossibleAbility(sa);
     }
