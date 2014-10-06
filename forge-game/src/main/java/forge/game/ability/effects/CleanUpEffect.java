@@ -27,7 +27,7 @@ public class CleanUpEffect extends SpellAbilityEffect {
             }
         }
         if (sa.hasParam("ClearImprinted")) {
-            source.clearImprinted();
+            source.clearImprintedCards();
         }
         if (sa.hasParam("ClearChosenX")) {
             source.setSVar("ChosenX", "");

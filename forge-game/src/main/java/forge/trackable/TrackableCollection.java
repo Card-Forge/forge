@@ -1,9 +1,8 @@
 package forge.trackable;
 
-import java.util.LinkedHashSet;
+import forge.util.FCollection;
 
-@SuppressWarnings("serial")
-public class TrackableCollection<T extends TrackableObject<?>> extends LinkedHashSet<T> { //use linked hash set so order is maintained
+public class TrackableCollection<T extends TrackableObject<?>> extends FCollection<T> {
     public TrackableCollection() {
     }
 

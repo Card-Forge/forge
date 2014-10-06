@@ -283,16 +283,16 @@ public class PumpEffect extends SpellAbilityEffect {
 
         if (pumpImprint != null) {
             for (final Card c : AbilityUtils.getDefinedCards(host, pumpImprint, sa)) {
-                if (!host.getImprinted().contains(c)) {
-                    host.addImprinted(c);
+                if (!host.getImprintedCards().contains(c)) {
+                    host.addImprintedCard(c);
                 }
             }
         }
 
         if (sa.hasParam("ForgetImprinted")) {
             for (final Card c : AbilityUtils.getDefinedCards(host, sa.getParam("ForgetImprinted"), sa)) {
-                if (host.getImprinted().contains(c)) {
-                    host.removeImprinted(c);
+                if (host.getImprintedCards().contains(c)) {
+                    host.removeImprintedCard(c);
                 }
             }
         }

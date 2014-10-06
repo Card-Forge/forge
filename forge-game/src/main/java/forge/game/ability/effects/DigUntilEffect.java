@@ -171,7 +171,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 }
                 if (sa.hasParam("ImprintRevealed")) {
                     for (final Card c : revealed) {
-                        host.addImprinted(c);
+                        host.addImprintedCard(c);
                     }
                 }
                 if (sa.hasParam("RevealRandomOrder")) {

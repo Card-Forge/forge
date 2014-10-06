@@ -36,10 +36,10 @@ public class TrackableProperty {
         FortifiedBy,
         GainControlTargets,
         CloneOrigin,
-        Imprinted,
+        ImprintedCards,
         HauntedBy,
         Haunting,
-        MustBlock,
+        MustBlockCards,
         PairedWith,
         Original,
         Alternate

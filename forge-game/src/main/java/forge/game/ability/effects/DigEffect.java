@@ -273,7 +273,7 @@ public class DigEffect extends SpellAbilityEffect {
                             c.setState(CardCharacteristicName.FaceDown);
                         }
                         if (sa.hasParam("Imprint")) {
-                            host.addImprinted(c);
+                            host.addImprintedCard(c);
                         }
                         if (sa.hasParam("ForgetOtherRemembered")) {
                             host.clearRemembered();

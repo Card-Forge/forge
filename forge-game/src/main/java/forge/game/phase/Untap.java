@@ -211,7 +211,7 @@ public class Untap extends Phase {
                 String prompt = "Untap " + c.toString() + "?";
                 boolean defaultChoice = true;
                 if (c.getGainControlTargets().size() > 0) {
-                    final List<Card> targets = c.getGainControlTargets();
+                    final Iterable<Card> targets = c.getGainControlTargets();
                     prompt += "\r\n" + c + " is controlling: ";
                     for (final Card target : targets) {
                         prompt += target;

@@ -68,7 +68,7 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
                 }
                 if (imprintRevealed) {
                     for(Card c : revealableCards) {
-                        source.addImprinted(CardUtil.getLKICopy(c));
+                        source.addImprintedCard(CardUtil.getLKICopy(c));
                     }
                 }
             } else if (sa.hasParam("RememberPeeked")) {

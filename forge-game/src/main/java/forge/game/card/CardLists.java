@@ -19,14 +19,12 @@ package forge.game.card;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
+
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.MyRandom;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -52,7 +50,7 @@ public class CardLists {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public static List<Card> filterToughness(final List<Card> in, final int atLeastToughness) {
+    public static CardCollection filterToughness(final List<Card> in, final int atLeastToughness) {
         return CardLists.filter(in, new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {
@@ -88,12 +86,10 @@ public class CardLists {
             return aLen - bLen;
         }
     };
-    
-    public static final List<Card> emptyList = ImmutableList.of();
 
     /**
      * <p>
-     * Sorts a List<Card> from highest converted mana cost to lowest.
+     * Sorts a CardCollection from highest converted mana cost to lowest.
      * </p>
      * 
      * @param list
@@ -131,7 +127,7 @@ public class CardLists {
 
     /**
      * 
-     * Given a List<Card> c, return a List<Card> that contains a random amount of cards from c.
+     * Given a CardCollection c, return a CardCollection that contains a random amount of cards from c.
      * 
      * @param c
      *            CardList
@@ -139,14 +135,13 @@ public class CardLists {
      *            int
      * @return CardList
      */
-    public static List<Card> getRandomSubList(final List<Card> c, final int amount) {
+    public static CardCollection getRandomSubList(final List<Card> c, final int amount) {
         if (c.size() < amount) {
             return null;
         }
 
-        final List<Card> cs = Lists.newArrayList(c);
-
-        final List<Card> subList = new ArrayList<Card>();
+        final CardCollection cs = new CardCollection(c);
+        final CardCollection subList = new CardCollection();
         while (subList.size() < amount) {
             CardLists.shuffle(cs);
             subList.add(cs.remove(0));
@@ -166,49 +161,49 @@ public class CardLists {
         Collections.shuffle(list, MyRandom.getRandom());
     }
 
-    public static List<Card> filterControlledBy(Iterable<Card> cardList, Player player) {
+    public static CardCollection filterControlledBy(Iterable<Card> cardList, Player player) {
         return CardLists.filter(cardList, CardPredicates.isController(player));
     }
 
-    public static List<Card> filterControlledBy(Iterable<Card> cardList, List<Player> player) {
+    public static CardCollection filterControlledBy(Iterable<Card> cardList, List<Player> player) {
         return CardLists.filter(cardList, CardPredicates.isControlledByAnyOf(player));
     }
 
-    public static List<Card> getValidCards(Iterable<Card> cardList, String[] restrictions, Player sourceController, Card source) {
+    public static CardCollection getValidCards(Iterable<Card> cardList, String[] restrictions, Player sourceController, Card source) {
         return CardLists.filter(cardList, CardPredicates.restriction(restrictions, sourceController, source));
     }
 
-    public static List<Card> getValidCards(Iterable<Card> cardList, String restriction, Player sourceController, Card source) {
+    public static CardCollection getValidCards(Iterable<Card> cardList, String restriction, Player sourceController, Card source) {
         return CardLists.filter(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source));
     }
 
-    public static List<Card> getTargetableCards(Iterable<Card> cardList, SpellAbility source) {
+    public static CardCollection getTargetableCards(Iterable<Card> cardList, SpellAbility source) {
         return CardLists.filter(cardList, CardPredicates.isTargetableBy(source));
     }
 
-    public static List<Card> getKeyword(Iterable<Card> cardList, String keyword) {
+    public static CardCollection getKeyword(Iterable<Card> cardList, String keyword) {
         return CardLists.filter(cardList, CardPredicates.hasKeyword(keyword));
     }
 
-    public static List<Card> getNotKeyword(Iterable<Card> cardList, String keyword) {
+    public static CardCollection getNotKeyword(Iterable<Card> cardList, String keyword) {
         return CardLists.filter(cardList, Predicates.not(CardPredicates.hasKeyword(keyword)));
     }
 
-    // cardType is like "Land" or "Goblin", returns a new ArrayList<Card> that is a
+    // cardType is like "Land" or "Goblin", returns a new CardCollection that is a
     // subset of current CardList
-    public static List<Card> getNotType(Iterable<Card> cardList, String cardType) {
+    public static CardCollection getNotType(Iterable<Card> cardList, String cardType) {
         return CardLists.filter(cardList, Predicates.not(CardPredicates.isType(cardType)));
     }
 
-    public static List<Card> getType(Iterable<Card> cardList, String cardType) {
+    public static CardCollection getType(Iterable<Card> cardList, String cardType) {
         return CardLists.filter(cardList, CardPredicates.isType(cardType));
     }
 
-    public static List<Card> getNotColor(Iterable<Card> cardList, byte color) {
+    public static CardCollection getNotColor(Iterable<Card> cardList, byte color) {
         return CardLists.filter(cardList, Predicates.not(CardPredicates.isColor(color)));
     }
 
-    public static List<Card> getColor(Iterable<Card> cardList, byte color) {
+    public static CardCollection getColor(Iterable<Card> cardList, byte color) {
         return CardLists.filter(cardList, CardPredicates.isColor(color));
     }
 
@@ -218,25 +213,25 @@ public class CardLists {
      * @param filt
      *            determines which cards are present in the resulting list
      * 
-     * @return a subset of this List<Card> whose items meet the filtering
+     * @return a subset of this CardCollection whose items meet the filtering
      *         criteria; may be empty, but never null.
      */
-    public static List<Card> filter(Iterable<Card> cardList, Predicate<Card> filt) {
-        return Lists.newArrayList(Iterables.filter(cardList, filt));
+    public static CardCollection filter(Iterable<Card> cardList, Predicate<Card> filt) {
+        return new CardCollection(Iterables.filter(cardList, filt));
     }
 
-    public static List<Card> filter(Iterable<Card> cardList, Predicate<Card> f1, Predicate<Card> f2) {
-        return Lists.newArrayList(Iterables.filter(Iterables.filter(cardList, f1), f2));
+    public static CardCollection filter(Iterable<Card> cardList, Predicate<Card> f1, Predicate<Card> f2) {
+        return new CardCollection(Iterables.filter(Iterables.filter(cardList, f1), f2));
     }    
     
     /**
-     * Given a List<Card> cardList, return a List<Card> that are tied for having the highest CMC.
+     * Given a CardCollection cardList, return a CardCollection that are tied for having the highest CMC.
      * 
      * @param cardList          the Card List to be filtered.
      * @return the list of Cards sharing the highest CMC.
      */
-    public static List<Card> getCardsWithHighestCMC(Iterable<Card> cardList) {
-        final List<Card> tiedForHighest = new ArrayList<Card>();
+    public static CardCollection getCardsWithHighestCMC(Iterable<Card> cardList) {
+        final CardCollection tiedForHighest = new CardCollection();
         int highest = 0;
         for (final Card crd : cardList) {
             int curCmc = crd.isSplitCard() ? Math.max(crd.getCMC(Card.SplitCMCMode.LeftSplitCMC), crd.getCMC(Card.SplitCMCMode.RightSplitCMC)) : crd.getCMC();
@@ -253,13 +248,13 @@ public class CardLists {
     }
 
     /**
-     * Given a List<Card> cardList, return a List<Card> that are tied for having the lowest CMC.
+     * Given a CardCollection cardList, return a CardCollection that are tied for having the lowest CMC.
      * 
      * @param cardList          the Card List to be filtered.
      * @return the list of Cards sharing the lowest CMC.
      */
-    public static List<Card> getCardsWithLowestCMC(Iterable<Card> cardList) {
-        final List<Card> tiedForLowest = new ArrayList<Card>();
+    public static CardCollection getCardsWithLowestCMC(Iterable<Card> cardList) {
+        final CardCollection tiedForLowest = new CardCollection();
         int lowest = 25;
         for (final Card crd : cardList) {
             int curCmc = crd.isSplitCard() ? Math.min(crd.getCMC(Card.SplitCMCMode.LeftSplitCMC), crd.getCMC(Card.SplitCMCMode.RightSplitCMC)) : crd.getCMC();
@@ -276,10 +271,7 @@ public class CardLists {
     }
 
     /**
-     * Given a List<Card> cardList, return a int TotalPower.
-     * 
-     * @param cardList          the Card List to be filtered.
-     * @return the total power.
+     * Given a list of cards, return their combined power
      */
     public static int getTotalPower(Iterable<Card> cardList) {
         int total = 0;

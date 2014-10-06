@@ -224,14 +224,16 @@ public class StaticAbilityContinuous {
                 addTypes[0] = chosenType;
                 se.setChosenType(chosenType);
             } else if (addTypes[0].equals("ImprintedCreatureType")) {
-                final Set<String> imprint = hostCard.getImprinted().get(0).getType();
-                ArrayList<String> imprinted = new ArrayList<String>();
-                for (String t : imprint) {
-                    if (CardType.isACreatureType(t) || t.equals("AllCreatureTypes")) {
-                        imprinted.add(t);
+                if (hostCard.hasImprintedCard()) {
+                    final Set<String> imprint = hostCard.getImprintedCards().getFirst().getType();
+                    ArrayList<String> imprinted = new ArrayList<String>();
+                    for (String t : imprint) {
+                        if (CardType.isACreatureType(t) || t.equals("AllCreatureTypes")) {
+                            imprinted.add(t);
+                        }
                     }
+                    addTypes = imprinted.toArray(new String[imprinted.size()]);
                 }
-                addTypes = imprinted.toArray(new String[imprinted.size()]);
             }
         }
 
@@ -667,5 +669,4 @@ public class StaticAbilityContinuous {
         affectedCards.removeAll(stAb.getIgnoreEffectCards());
         return affectedCards;
     }
-
 }

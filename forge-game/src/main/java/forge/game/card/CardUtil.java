@@ -256,8 +256,8 @@ public final class CardUtil {
         for (final Object o : in.getRemembered()) {
             newCopy.addRemembered(o);
         }
-        for (final Card o : in.getImprinted()) {
-            newCopy.addImprinted(o);
+        for (final Card o : in.getImprintedCards()) {
+            newCopy.addImprintedCard(o);
         }
 
         return newCopy;

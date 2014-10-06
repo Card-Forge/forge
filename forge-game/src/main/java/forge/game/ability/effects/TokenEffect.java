@@ -325,7 +325,7 @@ public class TokenEffect extends SpellAbilityEffect {
                         game.getCardState(sa.getHostCard()).addRemembered(c);
                     }
                     if (imprint) {
-                        game.getCardState(sa.getHostCard()).addImprinted(c);
+                        game.getCardState(sa.getHostCard()).addImprintedCard(c);
                     }
                     if (sa.hasParam("RememberSource")) {
                         game.getCardState(c).addRemembered(host);

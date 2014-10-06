@@ -37,8 +37,8 @@ public class GameEventBlockersDeclared extends GameEvent {
     @Override
     public String toString() {
         List<Card> blockerCards = new ArrayList<Card>();
-        for(MapOfLists<Card, Card> vv : blockers.values()) {
-            for(Collection<Card> cc : vv.values()) {
+        for (MapOfLists<Card, Card> vv : blockers.values()) {
+            for (Collection<Card> cc : vv.values()) {
                 blockerCards.addAll(cc);
             }
         }

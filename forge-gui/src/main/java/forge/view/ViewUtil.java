@@ -1,5 +1,6 @@
 package forge.view;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import com.google.common.base.Function;
@@ -138,7 +139,9 @@ public final class ViewUtil {
     }
 
     public static <T,V> List<V> transformIfNotNull(final Iterable<? extends T> input, final Function<T, V> transformation) {
-        final List<V> ret = Lists.newLinkedList();
+        return transformIfNotNull(input, transformation, new LinkedList<V>());
+    }
+    public static <T, V, L extends List<V>> L transformIfNotNull(final Iterable<? extends T> input, final Function<T, V> transformation, L ret) {
         synchronized (input) {
             for (final T t : input) {
                 final V v = transformation.apply(t);

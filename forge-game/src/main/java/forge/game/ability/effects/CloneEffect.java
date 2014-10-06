@@ -156,7 +156,7 @@ public class CloneEffect extends SpellAbilityEffect {
 
         //Clear Remembered and Imprint lists
         tgtCard.clearRemembered();
-        tgtCard.clearImprinted();
+        tgtCard.clearImprintedCards();
 
         //keep the Clone card image for the cloned card
         tgtCard.setImageKey(imageFileName);

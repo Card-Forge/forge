@@ -67,14 +67,14 @@ public class RepeatEachEffect extends SpellAbilityEffect {
 
             for (Card card : repeatCards) {
                 if (useImprinted) {
-                    source.addImprinted(card);
+                    source.addImprintedCard(card);
                 } else {
                     source.addRemembered(card);
                 }
 
                 AbilityUtils.resolve(repeat);
                 if (useImprinted) {
-                    source.removeImprinted(card);
+                    source.removeImprintedCard(card);
                 } else {
                     source.removeRemembered(card);
                 }
@@ -156,16 +156,15 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                         p = game.getNextPlayerAfter(p);
                     }
                 } while (!p.equals(sa.getActivatingPlayer()));
-               
             }
 
             for (Entry<Player, List<Card>> entry : recordMap.entrySet()) {
                 // Remember the player and imprint the cards
                 source.addRemembered(entry.getKey());
-                source.getImprinted().addAll(entry.getValue());
+                source.addImprintedCards(entry.getValue());
                 AbilityUtils.resolve(repeat);
                 source.removeRemembered(entry.getKey());
-                source.getImprinted().removeAll(entry.getValue());
+                source.removeImprintedCards(entry.getValue());
             }
         }
     }

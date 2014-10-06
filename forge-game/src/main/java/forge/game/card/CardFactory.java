@@ -104,8 +104,8 @@ public class CardFactory {
         for (final Object o : in.getRemembered()) {
             out.addRemembered(o);
         }
-        for (final Card o : in.getImprinted()) {
-            out.addImprinted(o);
+        for (final Card o : in.getImprintedCards()) {
+            out.addImprintedCard(o);
         }
         out.setCommander(in.isCommander());
         /*

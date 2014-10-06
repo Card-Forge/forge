@@ -33,17 +33,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
 
     public final boolean hasCancelled() { return bCancel; }
     public final boolean hasPressedOk() { return bOk; }
-    /**
-     * TODO: Write javadoc for Constructor.
-     * @param select
-     * @param choices
-     * @param req
-     * @param alreadyTargeted
-     * @param targeted
-     * @param tgt
-     * @param sa
-     * @param mandatory
-     */
+
     public InputSelectTargets(final PlayerControllerHuman controller, final List<Card> choices, final SpellAbility sa, final boolean mandatory) {
         super(controller);
         this.choices = choices;

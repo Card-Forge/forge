@@ -186,7 +186,7 @@ public class EffectEffect extends SpellAbilityEffect {
         // Set Imprinted
         if (effectImprinted != null) {
             for (final Card c : AbilityUtils.getDefinedCards(hostCard, effectImprinted, sa)) {
-                eff.addImprinted(c);
+                eff.addImprintedCard(c);
             }
         }
 

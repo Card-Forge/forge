@@ -882,8 +882,8 @@ public class CardFactoryUtil {
             return doXMath(cards.size(), m, c);
         }
 
-        if (l[0].startsWith("ImprintedCardManaCost") && !c.getImprinted().isEmpty()) {
-            return c.getImprinted().get(0).getCMC();
+        if (l[0].startsWith("ImprintedCardManaCost") && !c.getImprintedCards().isEmpty()) {
+            return c.getImprintedCards().get(0).getCMC();
         }
 
         if (l[0].startsWith("GreatestPower_")) {

@@ -59,10 +59,10 @@ public class EncodeEffect extends SpellAbilityEffect {
         }
 
         // store hostcard in encoded array
-        choice.addEncoded(movedCard);
+        choice.addEncodedCard(movedCard);
 
         // add trigger
-        final int numEncoded = choice.getEncoded().size();
+        final int numEncoded = choice.getEncodedCards().size();
         final StringBuilder cipherTrigger = new StringBuilder();
         cipherTrigger.append("Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ PlayEncoded").append(numEncoded);
         cipherTrigger.append(" | CombatDamage$ True | OptionalDecider$ You | TriggerDescription$ ");

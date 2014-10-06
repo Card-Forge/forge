@@ -303,8 +303,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         List<Card> typeList = CardLists.filter(list, CardPredicates.isOwner(p));
         int count = typeList.size();
-        if(count < nNeeded)
+        if (count < nNeeded) {
             return null;
+        }
         
         List<Card> toExile = SGuiChoose.many("Exile from " + cost.getFrom(), "To be exiled", count - nNeeded, typeList, null);
         return PaymentDecision.card(toExile);
@@ -603,17 +604,19 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
 
     private PaymentDecision putFromMiscZone(SpellAbility sa, int nNeeded, List<Card> typeList, ZoneType fromZone) {
-        if(typeList.size() < nNeeded)
+        if (typeList.size() < nNeeded) {
             return null;
+        }
 
         final List<CardView> viewList = controller.getCardViews(typeList);
-        List<Card> chosen = new ArrayList<>();
+        List<Card> chosen = new ArrayList<Card>();
         for (int i = 0; i < nNeeded; i++) {
             final CardView view = SGuiChoose.oneOrNone("Put from " + fromZone + " to library", viewList);
             final Card c = controller.getCard(view);
 
-            if (c == null)
+            if (c == null) {
                 return null;
+            }
 
             viewList.remove(view);
             chosen.add(c);
@@ -634,17 +637,19 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
     
         List<Card> typeList = CardLists.filter(list, CardPredicates.isOwner(p));
-        if (typeList.size() < nNeeded)
+        if (typeList.size() < nNeeded) {
             return null;
+        }
 
         final List<CardView> viewList = controller.getCardViews(typeList);
-        List<Card> chosen = new ArrayList<>();
+        List<Card> chosen = new ArrayList<Card>();
         for (int i = 0; i < nNeeded; i++) {
             final CardView view = SGuiChoose.oneOrNone("Put cards from " + fromZone + " to Library", viewList);
             final Card c = controller.getCard(view);
 
-            if (c == null)
+            if (c == null) {
                 return null;
+            }
 
             viewList.remove(view);
             chosen.add(c);

@@ -51,7 +51,7 @@ public class MillEffect extends SpellAbilityEffect {
                 }
                 if (sa.hasParam("Imprint")) {
                     for (final Card c : milled) {
-                        source.addImprinted(c);
+                        source.addImprintedCard(c);
                     }
                 }
             }

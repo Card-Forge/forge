@@ -2,6 +2,7 @@ package forge.trackable;
 
 import java.util.EnumMap;
 import java.util.EnumSet;
+
 import forge.game.IIdentifiable;
 
 //base class for objects that can be tracked and synced between game server and GUI

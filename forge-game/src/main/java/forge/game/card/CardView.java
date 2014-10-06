@@ -55,7 +55,7 @@ public class CardView extends GameEntityView<CardProp> {
         return get(CardProp.Controller);
     }
     void updateController(Card c) {
-        set(CardProp.Owner, PlayerView.get(c.getController()));
+        set(CardProp.Controller, PlayerView.get(c.getController()));
     }
 
     public ZoneType getZone() {
@@ -214,15 +214,9 @@ public class CardView extends GameEntityView<CardProp> {
     public CardView getEquipping() {
         return get(CardProp.Equipping);
     }
-    void updateEquipping(Card c) {
-        set(CardProp.Equipping, CardView.get(c.getEquipping()));
-    }
 
     public Iterable<CardView> getEquippedBy() {
         return get(CardProp.EquippedBy);
-    }
-    void updateEquippedBy(Card c) {
-        set(CardProp.EquippedBy, CardView.getCollection(c.getEquippedBy(false)));
     }
 
     public boolean isEquipped() {
@@ -254,15 +248,9 @@ public class CardView extends GameEntityView<CardProp> {
     public CardView getFortifying() {
         return get(CardProp.Fortifying);
     }
-    void updateFortifying(Card c) {
-        set(CardProp.Fortifying, c.getFortifying());
-    }
 
     public Iterable<CardView> getFortifiedBy() {
         return get(CardProp.FortifiedBy);
-    }
-    void updateFortifiedBy(Card c) {
-        set(CardProp.FortifiedBy, CardView.getCollection(c.getFortifiedBy(false)));
     }
 
     public boolean isFortified() {
@@ -272,50 +260,29 @@ public class CardView extends GameEntityView<CardProp> {
     public Iterable<CardView> getGainControlTargets() {
         return get(CardProp.GainControlTargets);
     }
-    void updateGainControlTargets(Card c) {
-        set(CardProp.GainControlTargets, CardView.getCollection(c.getGainControlTargets()));
-    }
 
     public CardView getCloneOrigin() {
         return get(CardProp.CloneOrigin);
     }
-    void updateCloneOrigin(Card c) {
-        set(CardProp.CloneOrigin, CardView.get(c.getCloneOrigin()));
-    }
 
-    public Iterable<CardView> getImprinted() {
-        return get(CardProp.Imprinted);
-    }
-    void updateImprinted(Card c) {
-        set(CardProp.Imprinted, CardView.getCollection(c.getImprinted()));
+    public Iterable<CardView> getImprintedCards() {
+        return get(CardProp.ImprintedCards);
     }
 
     public Iterable<CardView> getHauntedBy() {
         return get(CardProp.HauntedBy);
     }
-    void updateHauntedBy(Card c) {
-        set(CardProp.HauntedBy, CardView.getCollection(c.getHauntedBy()));
-    }
 
     public CardView getHaunting() {
         return get(CardProp.Haunting);
     }
-    void updateHaunting(Card c) {
-        set(CardProp.Haunting, CardView.get(c.getHaunting()));
-    }
 
-    public Iterable<CardView> getMustBlock() {
-        return get(CardProp.MustBlock);
-    }
-    void updateHaunting(CardView haunting) {
-        set(CardProp.MustBlock, haunting);
+    public Iterable<CardView> getMustBlockCards() {
+        return get(CardProp.MustBlockCards);
     }
 
     public CardView getPairedWith() {
         return get(CardProp.PairedWith);
-    }
-    void updatePairedWith(Card c) {
-        set(CardProp.PairedWith, CardView.get(c.getPairedWith()));
     }
 
     public CardStateView getOriginal() {
@@ -617,5 +584,121 @@ public class CardView extends GameEntityView<CardProp> {
     @Override
     protected CardProp enchantedByProp() {
         return CardProp.EnchantedBy;
+    }
+
+    //special methods for updating card and player properties as needed and returning the new collection
+    Card setCard(Card oldCard, Card newCard, CardProp key) {
+        if (newCard != oldCard) {
+            set(key, CardView.get(newCard));
+        }
+        return newCard;
+    }
+    CardCollection setCards(CardCollection oldCards, CardCollection newCards, CardProp key) {
+        set(key, CardView.getCollection(newCards)); //TODO prevent overwriting list if not necessary
+        return newCards;
+    }
+    CardCollection setCards(CardCollection oldCards, Iterable<Card> newCards, CardProp key) {
+        if (newCards == null) {
+            set(key, null);
+            return null;
+        }
+        return setCards(oldCards, new CardCollection(newCards), key);
+    }
+    CardCollection addCard(CardCollection oldCards, Card cardToAdd, CardProp key) {
+        if (cardToAdd == null) { return oldCards; }
+
+        if (oldCards == null) {
+            oldCards = new CardCollection();
+        }
+        if (oldCards.add(cardToAdd)) {
+            TrackableCollection<CardView> views = get(key);
+            if (views == null) {
+                views = new TrackableCollection<CardView>();
+                views.add(cardToAdd.getView());;
+                set(key, views);
+            }
+            else if (views.add(cardToAdd.getView())) {
+                flagAsChanged(key);
+            }
+        }
+        return oldCards;
+    }
+    CardCollection addCards(CardCollection oldCards, Iterable<Card> cardsToAdd, CardProp key) {
+        if (cardsToAdd == null) { return oldCards; }
+
+        TrackableCollection<CardView> views = get(key);
+        if (oldCards == null) {
+            oldCards = new CardCollection();
+        }
+        boolean needFlagAsChanged = false;
+        for (Card c : cardsToAdd) {
+            if (oldCards.add(c)) {
+                if (views == null) {
+                    views = new TrackableCollection<CardView>();
+                    views.add(c.getView());
+                    set(key, views);
+                }
+                else if (views.add(c.getView())) {
+                    needFlagAsChanged = true;
+                }
+            }
+        }
+        if (needFlagAsChanged) {
+            flagAsChanged(key);
+        }
+        return oldCards;
+    }
+    CardCollection removeCard(CardCollection oldCards, Card cardToRemove, CardProp key) {
+        if (cardToRemove == null || oldCards == null) { return oldCards; }
+
+        if (oldCards.remove(cardToRemove)) {
+            TrackableCollection<CardView> views = get(key);
+            if (views != null && views.remove(cardToRemove.getView())) {
+                if (views.isEmpty()) {
+                    set(key, null); //avoid keeping around an empty collection
+                }
+                else {
+                    flagAsChanged(key);
+                }
+            }
+            if (oldCards.isEmpty()) {
+                oldCards = null; //avoid keeping around an empty collection
+            }
+        }
+        return oldCards;
+    }
+    CardCollection removeCards(CardCollection oldCards, Iterable<Card> cardsToRemove, CardProp key) {
+        if (cardsToRemove == null || oldCards == null) { return oldCards; }
+
+        TrackableCollection<CardView> views = get(key);
+        boolean needFlagAsChanged = false;
+        for (Card c : cardsToRemove) {
+            if (oldCards.remove(c)) {
+                if (views != null && views.remove(c.getView())) {
+                    if (views.isEmpty()) {
+                        views = null;
+                        set(key, null); //avoid keeping around an empty collection
+                        needFlagAsChanged = false; //doesn't need to be flagged a second time
+                    }
+                    else {
+                        needFlagAsChanged = true;
+                    }
+                }
+                if (oldCards.isEmpty()) {
+                    oldCards = null; //avoid keeping around an empty collection
+                    break;
+                }
+            }
+        }
+        if (needFlagAsChanged) {
+            flagAsChanged(key);
+        }
+        return oldCards;
+    }
+    CardCollection clearCards(CardCollection oldCards, CardProp key) {
+        if (oldCards != null) {
+            set(key, null);
+        }
+        return null;
     }
 }

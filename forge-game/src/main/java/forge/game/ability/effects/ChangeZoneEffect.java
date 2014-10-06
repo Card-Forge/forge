@@ -393,7 +393,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final String imprint = sa.getParam("Imprint");
 
         if (sa.hasParam("Unimprint")) {
-            hostCard.clearImprinted();
+            hostCard.clearImprintedCards();
         }
 
         if (sa.hasParam("ForgetOtherRemembered")) {
@@ -547,7 +547,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 hostCard.getRemembered().remove(movedCard);
             }
             if (imprint != null && !movedCard.getZone().equals(originZone)) {
-                hostCard.addImprinted(movedCard);
+                hostCard.addImprintedCard(movedCard);
             }
         }
     }
@@ -739,7 +739,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         final Game game = player.getGame();
         if (sa.hasParam("Unimprint")) {
-            source.clearImprinted();
+            source.clearImprintedCards();
         }
 
         final boolean remember = sa.hasParam("RememberChanged");
@@ -954,7 +954,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
             // for imprinted since this doesn't use Target
             if (imprint) {
-                source.addImprinted(movedCard);
+                source.addImprintedCard(movedCard);
             }
         }
 

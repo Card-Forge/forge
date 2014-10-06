@@ -148,7 +148,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 game.getCardState(source).removeRemembered(c);
             }
             if (imprint != null) {
-                game.getCardState(source).addImprinted(movedCard);
+                game.getCardState(source).addImprintedCard(movedCard);
             }
             if (destination == ZoneType.Battlefield) {
                 movedCard.setTimestamp(ts);

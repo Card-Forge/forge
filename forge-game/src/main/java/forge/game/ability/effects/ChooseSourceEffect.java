@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
@@ -10,6 +11,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -134,7 +136,7 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
         final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) : CardFactoryUtil.xCount(host, host.getSVar(numericAmount));
 
         for (final Player p : tgtPlayers) {
-            final List<Card> chosen = new ArrayList<Card>();
+            final CardCollection chosen = new CardCollection();
             if (tgt == null || p.canBeTargetedBy(sa)) {
                 for (int i = 0; i < validAmount; i++) {
                     final String choiceTitle = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a source ";
@@ -154,6 +156,4 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
             }
         }
     }
-
-
 }

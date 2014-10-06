@@ -572,7 +572,7 @@ public class ComputerUtilCard {
             value += 14;
         }
         
-        if (!c.getEncoded().isEmpty()) {
+        if (!c.getEncodedCards().isEmpty()) {
             value += 24;
         }
     

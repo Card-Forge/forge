@@ -216,7 +216,7 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("Imprinted")) {
-            for (final Card imprint : hostCard.getImprinted()) {
+            for (final Card imprint : hostCard.getImprintedCards()) {
                 cards.add(game.getCardState(imprint));
             }
         }
@@ -482,15 +482,17 @@ public class AbilityUtils {
             // Add whole Imprinted list to handlePaid
             final List<Card> list = new ArrayList<Card>();
             Card newCard = card;
-            if (card.getImprinted().isEmpty()) {
+            if (card.getImprintedCards().isEmpty()) {
                 newCard = game.getCardState(card);
             }
 
             if (calcX[0].endsWith("LKI")) { // last known information
-                list.addAll(newCard.getImprinted());
+                for (final Card c : newCard.getImprintedCards()) {
+                    list.add(c);
+                }
             }
             else {
-                for (final Card c : newCard.getImprinted()) {
+                for (final Card c : newCard.getImprintedCards()) {
                     list.add(game.getCardState(c));
                 }
             }
@@ -915,12 +917,12 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("ImprintedController")) {
-            for (final Card rem : card.getImprinted()) {
+            for (final Card rem : card.getImprintedCards()) {
                 players.add(rem.getController());
             }
         }
         else if (defined.equals("ImprintedOwner")) {
-            for (final Card rem : card.getImprinted()) {
+            for (final Card rem : card.getImprintedCards()) {
                 players.add(rem.getOwner());
             }
         }
@@ -1178,7 +1180,7 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("Imprinted")) {
-            for (final Card imp : card.getImprinted()) {
+            for (final Card imp : card.getImprintedCards()) {
                 sas.addAll(imp.getSpellAbilities());
             }
         }
@@ -1347,7 +1349,7 @@ public class AbilityUtils {
 
         if (sa.hasParam("ImprintTargets") && sa.getTargetRestrictions() != null) {
             for (final Card c : sa.getTargets().getTargetCards()) {
-                host.addImprinted(c);
+                host.addImprintedCard(c);
             }
         }
 

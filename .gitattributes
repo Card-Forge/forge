@@ -223,6 +223,7 @@ forge-core/src/main/java/forge/util/BinaryUtil.java -text
 forge-core/src/main/java/forge/util/BuildInfo.java -text
 forge-core/src/main/java/forge/util/CollectionSuppliers.java -text
 forge-core/src/main/java/forge/util/ComparableOp.java -text
+forge-core/src/main/java/forge/util/FCollection.java -text
 forge-core/src/main/java/forge/util/FileSection.java -text
 forge-core/src/main/java/forge/util/FileSectionManual.java -text
 forge-core/src/main/java/forge/util/FileUtil.java svneol=native#text/plain
@@ -433,6 +434,7 @@ forge-game/src/main/java/forge/game/card/Card.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardChangedWord.java -text
 forge-game/src/main/java/forge/game/card/CardChangedWords.java -text
 forge-game/src/main/java/forge/game/card/CardCharacteristics.java -text
+forge-game/src/main/java/forge/game/card/CardCollection.java -text
 forge-game/src/main/java/forge/game/card/CardColor.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardDamageHistory.java -text
 forge-game/src/main/java/forge/game/card/CardFactory.java svneol=native#text/plain

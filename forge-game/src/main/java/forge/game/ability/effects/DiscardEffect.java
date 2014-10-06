@@ -241,16 +241,15 @@ public class DiscardEffect extends SpellAbilityEffect {
                     int min = sa.hasParam("AnyNumber") || sa.hasParam("Optional") ? 0 : Math.min(validCards.size(), numCards);
                     int max = sa.hasParam("AnyNumber") ? validCards.size() : Math.min(validCards.size(), numCards);
 
-                    List<Card> toBeDiscarded = validCards.isEmpty() ? CardLists.emptyList : chooser.getController().chooseCardsToDiscardFrom(p, sa, validCards, min, max);
-
-                    if (mode.startsWith("Reveal") ) {
-                        p.getController().reveal(toBeDiscarded, ZoneType.Hand, p,
-                                chooser + " has chosen " + (toBeDiscarded.size() == 1 ? "this card" : "these cards")  + " from ");
-                    }
+                    List<Card> toBeDiscarded = validCards.isEmpty() ? null : chooser.getController().chooseCardsToDiscardFrom(p, sa, validCards, min, max);
 
                     if (toBeDiscarded != null) {
+                        if (mode.startsWith("Reveal") ) {
+                            p.getController().reveal(toBeDiscarded, ZoneType.Hand, p,
+                                    chooser + " has chosen " + (toBeDiscarded.size() == 1 ? "this card" : "these cards")  + " from ");
+                        }
                         for (Card card : toBeDiscarded) {
-                            if ( null == card ) continue;
+                            if (card == null) { continue; }
                             p.discard(card, sa);
                             discarded.add(card);
                         }

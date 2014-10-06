@@ -285,23 +285,20 @@ public class ReplacementHandler implements IGameStateObject {
         return ret;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     */
     public void cleanUpTemporaryReplacements() {
-         final List<Card> absolutelyAllCards = game.getCardsInGame();
-         for (final Card c : absolutelyAllCards) {
-             for (int i = 0; i < c.getReplacementEffects().size(); i++) {
+        final List<Card> absolutelyAllCards = game.getCardsInGame();
+        for (final Card c : absolutelyAllCards) {
+            for (int i = 0; i < c.getReplacementEffects().size(); i++) {
                 if (c.getReplacementEffects().get(i).isTemporary()) {
-                     c.getReplacementEffects().remove(i);
-                     i--;
+                    c.getReplacementEffects().remove(i);
+                    i--;
                 }
-             }
+            }
         }
         for (final Card c : absolutelyAllCards) {
-             for (int i = 0; i < c.getReplacementEffects().size(); i++) {
-                 c.getReplacementEffects().get(i).setTemporarilySuppressed(false);
-             }
+            for (int i = 0; i < c.getReplacementEffects().size(); i++) {
+                c.getReplacementEffects().get(i).setTemporarilySuppressed(false);
+            }
         }
     }
 

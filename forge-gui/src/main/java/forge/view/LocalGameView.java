@@ -485,7 +485,7 @@ public abstract class LocalGameView implements IGameView {
         view.setFortifiedBy(getCardViews(c.getFortifiedBy(false), false));
         view.setGainControlTargets(getCardViews(c.getGainControlTargets(), false));
         view.setCloneOrigin(getCardView(c.getCloneOrigin(), false));
-        view.setImprinted(getCardViews(c.getImprinted(), false));
+        view.setImprinted(getCardViews(c.getImprintedCards(), false));
         view.setHauntedBy(getCardViews(c.getHauntedBy(), false));
         view.setHaunting(getCardView(c.getHaunting(), false));
         view.setMustBlock(c.getMustBlockCards() == null ? Collections.<CardView>emptySet() : getCardViews(c.getMustBlockCards(), false));
