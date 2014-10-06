@@ -504,7 +504,10 @@ public final class QuestUtilCards {
      * @return the sell price limit
      */
     public int getSellPriceLimit() {
-        return this.qc.getAchievements().getWin() <= 50 ? 1000 : Integer.MAX_VALUE;
+        int winsNoLimit = FModel.getQuestPreferences().getPrefInt(QPref.SHOP_WINS_FOR_NO_SELL_LIMIT);
+        int maxPrice = FModel.getQuestPreferences().getPrefInt(QPref.SHOP_MAX_SELLING_PRICE);
+
+        return this.qc.getAchievements().getWin() < winsNoLimit ? maxPrice : Integer.MAX_VALUE;
     }
 
     /**

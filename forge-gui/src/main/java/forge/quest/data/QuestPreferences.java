@@ -148,7 +148,13 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         // How many packs the shop start with. 
         SHOP_STARTING_PACKS("5"),
 
+        // Maximum selling price in a spell shop
+        SHOP_MAX_SELLING_PRICE("1000"),
+        // Wins until the selling price limit is removed
+        SHOP_WINS_FOR_NO_SELL_LIMIT("50"),
+
         ITEM_LEVEL_RESTRICTION("1");
+        
 
         private final String strDefaultVal;
 
@@ -341,6 +347,17 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
                 if (val != 0 && val != 1) {
                     return "Only values 0 or 1 are acceptable. 1 for enabled, 0 for disabled.";
                 }
+                break;
+            case SHOP_WINS_FOR_NO_SELL_LIMIT:
+                if (val < 0) {
+                    return "Value too small (minimum 0).";
+                }
+                break;
+            case SHOP_MAX_SELLING_PRICE:
+                if (val < 1) {
+                    return "Value too small (minimum 1).";
+                }
+                break;
             default:
                 if (val > 100) {
                     return "Value too large (maximum 100).";
