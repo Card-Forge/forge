@@ -1,6 +1,5 @@
 package forge.view;
 
-import java.util.Collections;
 import java.util.List;
 
 import com.google.common.base.Function;
@@ -53,10 +52,10 @@ public final class ViewUtil {
         view.setCounters(c.getCounters());
         view.setDamage(c.getDamage());
         view.setAssignedDamage(c.getTotalAssignedDamage());
-        view.setRegenerationShields(c.getShield().size());
+        view.setRegenerationShields(c.getShieldCount());
         view.setPreventNextDamage(c.getPreventNextDamageTotalShields());
         view.setChosenType(c.getChosenType());
-        view.setChosenColors(c.getChosenColor());
+        view.setChosenColors(c.getChosenColors());
         view.setNamedCard(c.getNamedCard());
 
         if (c.isSplitCard()) {
@@ -78,7 +77,7 @@ public final class ViewUtil {
         origView.setName(c.getName());
         origView.setColors(c.determineColor());
         origView.setImageKey(c.getImageKey() );
-        origView.setType(Collections.unmodifiableList(c.getType()));
+        origView.setType(c.getType());
         origView.setManaCost(c.getManaCost());
         origView.setPower(c.getNetAttack());
         origView.setToughness(c.getNetDefense());
@@ -119,7 +118,7 @@ public final class ViewUtil {
         view.setName(chars.getName());
         view.setColors(chars.determineColor());
         view.setImageKey(chars.getImageKey());
-        view.setType(Collections.unmodifiableList(chars.getType()));
+        view.setType(chars.getType());
         view.setManaCost(chars.getManaCost());
         view.setPower(chars.getBaseAttack());
         view.setToughness(chars.getBaseDefense());

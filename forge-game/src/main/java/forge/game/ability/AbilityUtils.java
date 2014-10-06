@@ -89,19 +89,16 @@ public class AbilityUtils {
         if (defined.equals("Self")) {
             c = hostCard;
         }
-
         else if (defined.equals("OriginalHost")) {
             c = sa.getRootAbility().getOriginalHost();
         }
-
         else if (defined.equals("EffectSource")) {
             if (hostCard.isType("Effect")) {
                 c = AbilityUtils.findEffectRoot(hostCard);
             }
         }
-
         else if (defined.equals("Equipped")) {
-            c = hostCard.getEquippingCard();
+            c = hostCard.getEquipping();
         }
 
         else if (defined.equals("Enchanted")) {
@@ -112,7 +109,6 @@ public class AbilityUtils {
                 c = sa.getRootAbility().getPaidList("Sacrificed").get(0).getEnchantingCard();
             }
         }
-
         else if (defined.endsWith("OfLibrary")) {
             final List<Card> lib = hostCard.getController().getCardsIn(ZoneType.Library);
             if (lib.size() > 0) { // TopOfLibrary or BottomOfLibrary
@@ -121,22 +117,26 @@ public class AbilityUtils {
                 // we don't want this to fall through and return the "Self"
                 return cards;
             }
-        } else if (defined.equals("Targeted")) {
+        }
+        else if (defined.equals("Targeted")) {
             final SpellAbility saTargeting = sa.getSATargetingCard();
             if (saTargeting != null) {
                 Iterables.addAll(cards, saTargeting.getTargets().getTargetCards());
             }
-        } else if (defined.equals("ThisTargetedCard")) { // do not add parent targeted
+        }
+        else if (defined.equals("ThisTargetedCard")) { // do not add parent targeted
             if (sa != null && sa.getTargets() != null) {
                 Iterables.addAll(cards, sa.getTargets().getTargetCards());
             }
-        } else if (defined.equals("ParentTarget")) {
+        }
+        else if (defined.equals("ParentTarget")) {
             final SpellAbility parent = sa.getParentTargetingCard();
             if (parent != null) {
                 Iterables.addAll(cards, parent.getTargets().getTargetCards());
             }
 
-        } else if (defined.startsWith("Triggered") && (sa != null)) {
+        }
+        else if (defined.startsWith("Triggered") && (sa != null)) {
             final SpellAbility root = sa.getRootAbility();
             if (defined.contains("LKICopy")) { //TriggeredCardLKICopy
                 final Object crd = root.getTriggeringObject(defined.substring(9, 13));
@@ -154,7 +154,8 @@ public class AbilityUtils {
                     }
                 }
             }
-        } else if (defined.startsWith("Replaced") && (sa != null)) {
+        }
+        else if (defined.startsWith("Replaced") && (sa != null)) {
             final SpellAbility root = sa.getRootAbility();
             final Object crd = root.getReplacingObject(defined.substring(8));
             if (crd instanceof Card) {
@@ -164,7 +165,8 @@ public class AbilityUtils {
                     cards.add(cardItem);
                 }
             }
-        } else if (defined.equals("Remembered")) {
+        }
+        else if (defined.equals("Remembered")) {
             if (hostCard.getRemembered().isEmpty()) {
                 final Card newCard = game.getCardState(hostCard);
                 for (final Object o : newCard.getRemembered()) {
@@ -179,7 +181,8 @@ public class AbilityUtils {
                     cards.add(game.getCardState((Card) o));
                 }
             }
-        } else if (defined.equals("DirectRemembered")) {
+        }
+        else if (defined.equals("DirectRemembered")) {
             if (hostCard.getRemembered().isEmpty()) {
                 final Card newCard = game.getCardState(hostCard);
                 for (final Object o : newCard.getRemembered()) {
@@ -194,7 +197,8 @@ public class AbilityUtils {
                     cards.add((Card) o);
                 }
             }
-        } else if (defined.equals("DelayTriggerRemembered")) {
+        }
+        else if (defined.equals("DelayTriggerRemembered")) {
             if (sa.getRootAbility().isTrigger()) {
                for (Object o : sa.getRootAbility().getTriggerRemembered()) {
                    if (o instanceof Card) {
@@ -202,20 +206,24 @@ public class AbilityUtils {
                    }
                }
             }
-        } else if (defined.equals("FirstRemembered")) {
+        }
+        else if (defined.equals("FirstRemembered")) {
             Object o = Iterables.getFirst(hostCard.getRemembered(), null);
             if (o != null && o instanceof Card) {
                 cards.add(game.getCardState((Card) o));
             }
-        } else if (defined.equals("Clones")) {
+        }
+        else if (defined.equals("Clones")) {
             for (final Card clone : hostCard.getClones()) {
                 cards.add(game.getCardState(clone));
             }
-        } else if (defined.equals("Imprinted")) {
+        }
+        else if (defined.equals("Imprinted")) {
             for (final Card imprint : hostCard.getImprinted()) {
                 cards.add(game.getCardState(imprint));
             }
-        } else if (defined.startsWith("ThisTurnEntered")) {
+        }
+        else if (defined.startsWith("ThisTurnEntered")) {
             final String[] workingCopy = defined.split("_");
             ZoneType destination, origin;
             String validFilter;
@@ -231,7 +239,8 @@ public class AbilityUtils {
             for (final Card cl : CardUtil.getThisTurnEntered(destination, origin, validFilter, hostCard)) {
                 cards.add(game.getCardState(cl));
             }
-        } else if (defined.equals("ChosenCard")) {
+        }
+        else if (defined.equals("ChosenCard")) {
             for (final Card chosen : hostCard.getChosenCard()) {
                 cards.add(game.getCardState(chosen));
             }
@@ -239,11 +248,12 @@ public class AbilityUtils {
         else if (defined.startsWith("CardUID_")) {
             String idString = defined.substring(8);
             for (final Card cardByID : game.getCardsInGame()) {
-                if (cardByID.getUniqueNumber() == Integer.valueOf(idString)) {
+                if (cardByID.getId() == Integer.valueOf(idString)) {
                     cards.add(game.getCardState(cardByID));
                 }
             }
-        } else {
+        }
+        else {
             List<Card> list = null;
             if (defined.startsWith("SacrificedCards")) {
                 list = sa.getRootAbility().getPaidList("SacrificedCards");
@@ -251,50 +261,42 @@ public class AbilityUtils {
             else if (defined.startsWith("Sacrificed")) {
                 list = sa.getRootAbility().getPaidList("Sacrificed");
             }
-
             else if (defined.startsWith("DiscardedCards")) {
                 list = sa.getRootAbility().getPaidList("DiscardedCards");
             }
             else if (defined.startsWith("Discarded")) {
                 list = sa.getRootAbility().getPaidList("Discarded");
             }
-
             else if (defined.startsWith("ExiledCards")) {
                 list = sa.getRootAbility().getPaidList("ExiledCards");
             }
             else if (defined.startsWith("Exiled")) {
                 list = sa.getRootAbility().getPaidList("Exiled");
             }
-
             else if (defined.startsWith("TappedCards")) {
                 list = sa.getRootAbility().getPaidList("TappedCards");
             }
             else if (defined.startsWith("Tapped")) {
                 list = sa.getRootAbility().getPaidList("Tapped");
             }
-
             else if (defined.startsWith("UntappedCards")) {
                 list = sa.getRootAbility().getPaidList("UntappedCards");
             }
             else if (defined.startsWith("Untapped")) {
                 list = sa.getRootAbility().getPaidList("Untapped");
             }
-
             else if (defined.startsWith("Valid ")) {
                 String validDefined = defined.substring("Valid ".length());
                 list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), validDefined.split(","), hostCard.getController(), hostCard);
             }
-
             else if (defined.startsWith("ValidHand ")) {
                 String validDefined = defined.substring("ValidHand ".length());
                 list = CardLists.getValidCards(game.getCardsIn(ZoneType.Hand), validDefined.split(","), hostCard.getController(), hostCard);
             }
-
             else if (defined.startsWith("ValidAll ")) {
                 String validDefined = defined.substring("ValidAll ".length());
                 list = CardLists.getValidCards(game.getCardsInGame(), validDefined.split(","), hostCard.getController(), hostCard);
             }
-
             else {
                 return cards;
             }
@@ -307,7 +309,6 @@ public class AbilityUtils {
         if (c != null) {
             cards.add(c);
         }
-
         return cards;
     }
 
@@ -1151,7 +1152,7 @@ public class AbilityUtils {
                 for (SpellAbility targetSpell : saTargeting.getTargets().getTargetSpells()) {
                     SpellAbilityStackInstance stackInstance = game.getStack().getInstanceFromSpellAbility(targetSpell);
                     if (stackInstance != null) {
-                        SpellAbility instanceSA = stackInstance.getSpellAbility();
+                        SpellAbility instanceSA = stackInstance.getSpellAbility(true);
                         if (instanceSA != null) {
                             sas.add(instanceSA);
                         }

@@ -213,14 +213,13 @@ public final class CardUtil {
      * @return a copy of C with LastKnownInfo stuff retained.
      */
     public static Card getLKICopy(final Card in) {
-
-        final Card newCopy = new Card(in.getUniqueNumber(), in.getPaperCard());
+        final Card newCopy = new Card(in.getId(), in.getPaperCard());
         newCopy.setCurSetCode(in.getCurSetCode());
         newCopy.setOwner(in.getOwner());
         newCopy.setController(in.getController(), 0);
         newCopy.getCharacteristics().copyFrom(in.getState(in.getCurState()));
         if (in.isCloned()) {
-            newCopy.addAlternateState(CardCharacteristicName.Cloner);
+            newCopy.addAlternateState(CardCharacteristicName.Cloner, false);
         }
         newCopy.setType(new ArrayList<String>(in.getType()));
         newCopy.setToken(in.isToken());
@@ -245,9 +244,9 @@ public final class CardUtil {
         newCopy.getDamageHistory().setCreatureGotBlockedThisTurn(in.getDamageHistory().getCreatureGotBlockedThisTurn());
         newCopy.setEnchanting(in.getEnchanting());
         newCopy.setEnchantedBy(new ArrayList<Card> (in.getEnchantedBy()));
-        newCopy.setEquipping(new ArrayList<Card> (in.getEquipping()));
+        newCopy.setEquipping(in.getEquipping());
         newCopy.setEquippedBy(new ArrayList<Card> (in.getEquippedBy()));
-        newCopy.setFortifying(new ArrayList<Card> (in.getFortifying()));
+        newCopy.setFortifying(in.getFortifying());
         newCopy.setFortifiedBy(new ArrayList<Card> (in.getFortifiedBy()));
         newCopy.setClones(in.getClones());
         newCopy.setHaunting(in.getHaunting());

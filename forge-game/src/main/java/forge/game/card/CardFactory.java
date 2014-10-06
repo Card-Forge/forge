@@ -75,9 +75,9 @@ public class CardFactory {
         Card out;
         if (!(in.isToken() || in.getCopiedPermanent() != null)) {
             out = assignNewId ? getCard(in.getPaperCard(), in.getOwner()) 
-                              : getCard(in.getPaperCard(), in.getOwner(), in.getUniqueNumber());
+                              : getCard(in.getPaperCard(), in.getOwner(), in.getId());
         } else { // token
-            out = assignNewId ? new Card(in.getGame().nextCardId(), in.getPaperCard()) : new Card(in.getUniqueNumber(), in.getPaperCard());
+            out = assignNewId ? new Card(in.getGame().nextCardId(), in.getPaperCard()) : new Card(in.getId(), in.getPaperCard());
             out = CardFactory.copyStats(in, in.getController());
             out.setToken(true);
 
@@ -148,7 +148,7 @@ public class CardFactory {
             String tmp = "";
             final String newColor = sourceSA.getParam("CopyIsColor");
             if (newColor.equals("ChosenColor")) {
-                tmp = CardUtil.getShortColorsString(source.getChosenColor());
+                tmp = CardUtil.getShortColorsString(source.getChosenColors());
             } else {
                 tmp = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(newColor.split(","))));
             }
@@ -356,20 +356,19 @@ public class CardFactory {
     }
 
     private static Card readCard(final CardRules rules, final IPaperCard paperCard, int cardId) {
-
         final Card card = new Card(cardId, paperCard);
 
         // 1. The states we may have:
         CardSplitType st = rules.getSplitType();
-        if ( st ==  CardSplitType.Split) {
-            card.addAlternateState(CardCharacteristicName.LeftSplit);
+        if (st == CardSplitType.Split) {
+            card.addAlternateState(CardCharacteristicName.LeftSplit, false);
             card.setState(CardCharacteristicName.LeftSplit);
         } 
 
         readCardFace(card, rules.getMainPart());
 
-        if ( st != CardSplitType.None) {
-            card.addAlternateState(st.getChangedStateName());
+        if (st != CardSplitType.None) {
+            card.addAlternateState(st.getChangedStateName(), false);
             card.setState(st.getChangedStateName());
             readCardFace(card, rules.getOtherPart());
         }
@@ -570,7 +569,7 @@ public class CardFactory {
     
         // get CardCharacteristics for desired state
         if (!to.getStates().contains(toState)) {
-        	to.addAlternateState(toState);
+        	to.addAlternateState(toState, true);
         }
     	final CardCharacteristics toCharacteristics = to.getState(toState),
     			fromCharacteristics = from.getState(fromState);
@@ -590,7 +589,7 @@ public class CardFactory {
         final CardCharacteristics fromCharacteristics = from.getState(fromState);
         final CardCharacteristicName oldToState = to.getCurState();
         if (!to.getStates().contains(toState)) {
-        	to.addAlternateState(toState);
+        	to.addAlternateState(toState, false);
         }
 
         to.setState(toState);
@@ -688,7 +687,7 @@ public class CardFactory {
         t.setTriggeringObjects(trig);
         trig.setTriggerRemembered(t.getTriggerRemembered());
         if (t.getStoredTriggeredObjects() != null) {
-            trig.setAllTriggeringObjects(t.getStoredTriggeredObjects());
+            trig.setTriggeringObjects(t.getStoredTriggeredObjects());
         }
 
         trig.setActivatingPlayer(sa.getActivatingPlayer());

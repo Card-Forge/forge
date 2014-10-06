@@ -83,7 +83,7 @@ public class UnattachAllAi extends SpellAbilityAi {
 
             //don't equip a worse creature
             if (card.isEquipping()) {
-                Card oldTarget = card.getEquipping().get(0);
+                Card oldTarget = card.getEquipping();
                 if (ComputerUtilCard.evaluateCreature(oldTarget) > ComputerUtilCard.evaluateCreature(newTarget)) {
                     return false;
                 }

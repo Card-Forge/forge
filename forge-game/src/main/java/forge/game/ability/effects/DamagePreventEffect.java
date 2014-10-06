@@ -104,7 +104,7 @@ public class DamagePreventEffect extends SpellAbilityEffect {
                             effTgts = AbilityUtils.getDefinedObjects(host, sa.getParam("ShieldEffectTarget"), sa);
                             for (final Object effTgt : effTgts) {
                                 if (effTgt instanceof Card) {
-                                    effTgtString = String.valueOf(((Card) effTgt).getUniqueNumber());
+                                    effTgtString = String.valueOf(((Card) effTgt).getId());
                                     effectMap.put("ShieldEffectTarget", "CardUID_" + effTgtString);
                                 } else if (effTgt instanceof Player) {
                                     effTgtString = ((Player) effTgt).getName();
@@ -131,7 +131,7 @@ public class DamagePreventEffect extends SpellAbilityEffect {
                             effTgts = AbilityUtils.getDefinedObjects(host, sa.getParam("ShieldEffectTarget"), sa);
                             for (final Object effTgt : effTgts) {
                                 if (effTgt instanceof Card) {
-                                    effTgtString = String.valueOf(((Card) effTgt).getUniqueNumber());
+                                    effTgtString = String.valueOf(((Card) effTgt).getId());
                                     effectMap.put("ShieldEffectTarget", "CardUID_" + effTgtString);
                                 } else if (effTgt instanceof Player) {
                                     effTgtString = ((Player) effTgt).getName();

@@ -95,7 +95,7 @@ public class TriggerSpellAbilityCast extends Trigger {
         }
 
         if (this.mapParams.containsKey("ValidActivatingPlayer")) {
-            if (si == null || !matchesValid(si.getSpellAbility().getActivatingPlayer(), this.mapParams.get("ValidActivatingPlayer")
+            if (si == null || !matchesValid(si.getSpellAbility(true).getActivatingPlayer(), this.mapParams.get("ValidActivatingPlayer")
                     .split(","), this.getHostCard())) {
                 return false;
             }
@@ -103,7 +103,7 @@ public class TriggerSpellAbilityCast extends Trigger {
                 String compare = this.mapParams.get("ActivatorThisTurnCast");
                 List<Card> thisTurnCast = CardUtil.getThisTurnCast(this.mapParams.containsKey("ValidCard") ? this.mapParams.get("ValidCard") : "Card",
                         this.getHostCard());
-                thisTurnCast = CardLists.filterControlledBy(thisTurnCast, si.getSpellAbility().getActivatingPlayer());
+                thisTurnCast = CardLists.filterControlledBy(thisTurnCast, si.getSpellAbility(true).getActivatingPlayer());
                 int left = thisTurnCast.size();
                 int right = Integer.parseInt(compare.substring(2));
                 if (!Expressions.compare(left, compare, right)) {
@@ -121,7 +121,7 @@ public class TriggerSpellAbilityCast extends Trigger {
         if (this.mapParams.containsKey("TargetsValid")) {
             SpellAbility sa = spellAbility;
             if (si != null) {
-                sa = si.getSpellAbility();
+                sa = si.getSpellAbility(true);
             }
            
             boolean validTgtFound = false;
@@ -211,7 +211,7 @@ public class TriggerSpellAbilityCast extends Trigger {
         final SpellAbilityStackInstance si = sa.getHostCard().getGame().getStack().getInstanceFromSpellAbility(castSA);
         sa.setTriggeringObject("Card", castSA.getHostCard());
         sa.setTriggeringObject("SpellAbility", castSA);
-        sa.setTriggeringObject("SpellAbilityTargetingCards", (si != null ? si.getSpellAbility() : castSA).getTargets().getTargetCards());
+        sa.setTriggeringObject("SpellAbilityTargetingCards", (si != null ? si.getSpellAbility(true) : castSA).getTargets().getTargetCards());
         sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
         sa.setTriggeringObject("Activator", this.getRunParams().get("Activator"));
         sa.setTriggeringObject("CurrentStormCount", this.getRunParams().get("CurrentStormCount"));

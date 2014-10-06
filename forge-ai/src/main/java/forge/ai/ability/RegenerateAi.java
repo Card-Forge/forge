@@ -99,7 +99,7 @@ public class RegenerateAi extends SpellAbilityAi {
                     boolean flag = false;
 
                     for (final Card c : list) {
-                        if (c.getShield().isEmpty()) {
+                        if (c.getShieldCount() == 0) {
                             flag |= ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat);
                         }
                     }
@@ -128,7 +128,7 @@ public class RegenerateAi extends SpellAbilityAi {
                 final List<Card> threatenedTargets = new ArrayList<Card>();
 
                 for (final Card c : targetables) {
-                    if (objects.contains(c) && c.getShield().isEmpty() && !ComputerUtil.canRegenerate(ai, c)) {
+                    if (objects.contains(c) && c.getShieldCount() == 0 && !ComputerUtil.canRegenerate(ai, c)) {
                         threatenedTargets.add(c);
                     }
                 }
@@ -144,7 +144,7 @@ public class RegenerateAi extends SpellAbilityAi {
                     ComputerUtilCard.sortByEvaluateCreature(combatants);
 
                     for (final Card c : combatants) {
-                        if (c.getShield().isEmpty() && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat)) {
+                        if (c.getShieldCount() == 0 && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat)) {
                             sa.getTargets().add(c);
                             chance = true;
                             break;
@@ -200,7 +200,7 @@ public class RegenerateAi extends SpellAbilityAi {
             if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 Combat combat = game.getCombat();
                 for (final Card c : combatants) {
-                    if (c.getShield().isEmpty() && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat)) {
+                    if (c.getShieldCount() == 0 && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat)) {
                         sa.getTargets().add(c);
                         return true;
                     }
@@ -213,7 +213,7 @@ public class RegenerateAi extends SpellAbilityAi {
             // choose my best X without regen
             if (CardLists.getNotType(compTargetables, "Creature").isEmpty()) {
                 for (final Card c : combatants) {
-                    if (c.getShield().isEmpty()) {
+                    if (c.getShieldCount() == 0) {
                         sa.getTargets().add(c);
                         return true;
                     }
@@ -223,7 +223,7 @@ public class RegenerateAi extends SpellAbilityAi {
             } else {
                 CardLists.sortByCmcDesc(compTargetables);
                 for (final Card c : compTargetables) {
-                    if (c.getShield().isEmpty()) {
+                    if (c.getShieldCount() == 0) {
                         sa.getTargets().add(c);
                         return true;
                     }

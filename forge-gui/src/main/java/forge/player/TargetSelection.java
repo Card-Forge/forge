@@ -318,7 +318,7 @@ public class TargetSelection {
 
         final Game game = ability.getActivatingPlayer().getGame();
         for (final SpellAbilityStackInstance si : game.getStack()) {
-            SpellAbility abilityOnStack = si.getSpellAbility();
+            SpellAbility abilityOnStack = si.getSpellAbility(true);
             if (ability.equals(abilityOnStack)) {
                 // By peeking at stack item, target is set to its SI state. So set it back before adding targets
                 ability.resetTargets();
@@ -346,7 +346,7 @@ public class TargetSelection {
                     return false;
                 }
                 if (madeChoice instanceof StackItemView) {
-                    ability.getTargets().add(controller.getStackItem((StackItemView)madeChoice).getSpellAbility());
+                    ability.getTargets().add(controller.getStackItem((StackItemView)madeChoice).getSpellAbility(true));
                 } else // 'FINISH TARGETING' chosen 
                     bTargetingDone = true;
             }

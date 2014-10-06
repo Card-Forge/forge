@@ -27,8 +27,8 @@ public class StackItemView implements IIdentifiable {
 
     public StackItemView(SpellAbilityStackInstance si, LocalGameView gameView) {
         id = si.getId();
-        key = si.getSpellAbility().toUnsuppressedString();
-        sourceTrigger = si.getSpellAbility().getSourceTrigger();
+        key = si.getSpellAbility(false).toUnsuppressedString();
+        sourceTrigger = si.getSpellAbility(false).getSourceTrigger();
         text = si.getStackDescription();
         source = gameView.getCardView(si.getSourceCard(), true);
         activatingPlayer = gameView.getPlayerView(si.getActivator(), false);

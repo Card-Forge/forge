@@ -61,7 +61,7 @@ public class RegenerateAllAi extends SpellAbilityAi {
             final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
 
             for (final Card c : list) {
-                if (objects.contains(c) && c.getShield().isEmpty()) {
+                if (objects.contains(c) && c.getShieldCount() == 0) {
                     numSaved++;
                 }
             }
@@ -70,7 +70,7 @@ public class RegenerateAllAi extends SpellAbilityAi {
                 final List<Card> combatants = CardLists.filter(list, CardPredicates.Presets.CREATURES);
                 final Combat combat = game.getCombat();
                 for (final Card c : combatants) {
-                    if (c.getShield().isEmpty() && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat)) {
+                    if (c.getShieldCount() == 0 && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat)) {
                         numSaved++;
                     }
                 }

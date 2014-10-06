@@ -518,7 +518,7 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
                 int exaltedMagnitude = card.getKeywordAmount("Exalted");
 
                 for (int i = 0; i < exaltedMagnitude; i++) {
-                    String abScript = String.format("AB$ Pump | Cost$ 0 | Defined$ CardUID_%d | NumAtt$ +1 | NumDef$ +1 | StackDescription$ Exalted for attacker {c:CardUID_%d} (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn).", attacker.getUniqueNumber(), attacker.getUniqueNumber());
+                    String abScript = String.format("AB$ Pump | Cost$ 0 | Defined$ CardUID_%d | NumAtt$ +1 | NumDef$ +1 | StackDescription$ Exalted for attacker {c:CardUID_%d} (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn).", attacker.getId(), attacker.getId());
                     SpellAbility ability = AbilityFactory.getAbility(abScript, card);
                     ability.setActivatingPlayer(card.getController());
                     ability.setDescription(ability.getStackDescription());

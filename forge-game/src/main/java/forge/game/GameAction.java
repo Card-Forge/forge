@@ -354,14 +354,14 @@ public class GameAction {
         }
         // equipment moving off battlefield
         if (copied.isEquipping()) {
-            final Card equippedCreature = copied.getEquipping().get(0);
+            final Card equippedCreature = copied.getEquipping();
             if (equippedCreature.isInPlay()) {
                 copied.unEquipCard(equippedCreature);
             }
         }
         // fortifications moving off battlefield
         if (copied.isFortifying()) {
-            final Card fortifiedLand = copied.getFortifying().get(0);
+            final Card fortifiedLand = copied.getFortifying();
             if (fortifiedLand.isInPlay()) {
                 copied.unFortifyCard(fortifiedLand);
             }
@@ -1040,7 +1040,7 @@ public class GameAction {
         } // if isFortified()
 
         if (c.isEquipping()) {
-            final Card equippedCreature = c.getEquipping().get(0);
+            final Card equippedCreature = c.getEquipping();
             if (!equippedCreature.isCreature() || !equippedCreature.isInPlay()
                     || !equippedCreature.canBeEquippedBy(c)
                     || (equippedCreature.isPhasedOut() && !c.isPhasedOut())
@@ -1056,7 +1056,7 @@ public class GameAction {
         } // if isEquipping()
 
         if (c.isFortifying()) {
-            final Card fortifiedLand = c.getFortifying().get(0);
+            final Card fortifiedLand = c.getFortifying();
             if (!fortifiedLand.isLand() || !fortifiedLand.isInPlay()
                     || (fortifiedLand.isPhasedOut() && !c.isPhasedOut())) {
                 c.unFortifyCard(fortifiedLand);
@@ -1071,11 +1071,6 @@ public class GameAction {
         return checkAgain;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param c
-     * @return
-     */
     private boolean stateBasedAction704_5r(Card c) {
         boolean checkAgain = false;
         int plusOneCounters = c.getCounters(CounterType.P1P1);
@@ -1334,7 +1329,7 @@ public class GameAction {
         }
 
         if (c.canBeShielded() && (!c.isCreature() || c.getNetDefense() > 0)
-                && (!c.getShield().isEmpty() || c.hasKeyword("If CARDNAME would be destroyed, regenerate it."))) {
+                && (c.getShieldCount() > 0 || c.hasKeyword("If CARDNAME would be destroyed, regenerate it."))) {
             c.subtractShield(c.getController().getController().chooseRegenerationShield(c));
             c.setDamage(0);
             c.tap();
@@ -1483,7 +1478,7 @@ public class GameAction {
             final Card persistCard = newCard;
             String effect = String.format("AB$ ChangeZone | Cost$ 0 | Defined$ CardUID_%d" +
             		" | Origin$ Graveyard | Destination$ Battlefield | WithCounters$ M1M1_1",
-                    persistCard.getUniqueNumber());
+                    persistCard.getId());
             SpellAbility persistAb = AbilityFactory.getAbility(effect, c);
             persistAb.setTrigger(true);
             persistAb.setStackDescription(newCard.getName() + " - Returning from Persist");
@@ -1497,7 +1492,7 @@ public class GameAction {
             final Card undyingCard = newCard;
             String effect = String.format("AB$ ChangeZone | Cost$ 0 | Defined$ CardUID_%d |" +
             		" Origin$ Graveyard | Destination$ Battlefield | WithCounters$ P1P1_1",
-            		undyingCard.getUniqueNumber());
+            		undyingCard.getId());
             SpellAbility undyingAb = AbilityFactory.getAbility(effect, c);
             undyingAb.setTrigger(true);
             undyingAb.setStackDescription(newCard.getName() + " - Returning from Undying");

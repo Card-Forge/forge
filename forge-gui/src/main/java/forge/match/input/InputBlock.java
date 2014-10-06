@@ -82,7 +82,7 @@ public class InputBlock extends InputSyncronizedBase {
             showMessage("Select another attacker to declare blockers for.");
         }
         else {
-            String attackerName = currentAttacker.isFaceDown() ? "Morph" : currentAttacker.getName() + " (" + currentAttacker.getUniqueNumber() + ")";
+            String attackerName = currentAttacker.isFaceDown() ? "Morph" : currentAttacker.getName() + " (" + currentAttacker.getId() + ")";
             String message = "Select creatures to block " + attackerName + " or select another attacker to declare blockers for.";
             showMessage(message);
         }

@@ -1275,10 +1275,14 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public CardShields chooseRegenerationShield(Card c) {
-        if (c.getShield().size() < 2) {
-            return Iterables.getFirst(c.getShield(), null);
+        if (c.getShieldCount() < 2) {
+            return Iterables.getFirst(c.getShields(), null);
         }
-        return SGuiChoose.one(getGui(), "Choose a regeneration shield:", c.getShield());
+        ArrayList<CardShields> shields = new ArrayList<CardShields>();
+        for (CardShields shield : c.getShields()) {
+            shields.add(shield);
+        }
+        return SGuiChoose.one(getGui(), "Choose a regeneration shield:", shields);
     }
 
     @Override

@@ -278,9 +278,9 @@ public class Combat {
         if (source.isAura()) {
             attacker = source.getEnchantingCard();
         } else if (source.isEquipment()) {
-            attacker = source.getEquippingCard();
+            attacker = source.getEquipping();
         } else if (source.isFortification()) {
-            attacker = source.getFortifyingCard();
+            attacker = source.getFortifying();
         }
 
         // return the corresponding defender

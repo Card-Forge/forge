@@ -1159,7 +1159,7 @@ public class CardFactoryUtil {
             ZoneType sourceZone = sq[0].contains("ChromaInGrave") ?  ZoneType.Graveyard : ZoneType.Battlefield;
             String colorName = sq[1];
             if (colorName.contains("Chosen")) {
-                colorName = MagicColor.toShortString(c.getChosenColor().get(0));
+                colorName = MagicColor.toShortString(c.getChosenColors().get(0));
             }
             final List<Card> cards;
             if (sq[0].contains("ChromaSource")) { // Runs Chroma for passed in Source card
@@ -1250,7 +1250,7 @@ public class CardFactoryUtil {
         if (sq[0].contains("CardManaCost")) {
             Card ce;
             if (sq[0].contains("Equipped") && c.isEquipping()) {
-                ce = c.getEquipping().get(0);
+                ce = c.getEquipping();
             }
             else if (sq[0].contains("Remembered")) {
                 ce = (Card) c.getRemembered().get(0);
@@ -2027,7 +2027,7 @@ public class CardFactoryUtil {
                 final int magnitude = Integer.parseInt(s);
 
                 String description = String.format("Bushido %d (When this blocks or becomes blocked, it gets +%d/+%d until end of turn).", magnitude, magnitude, magnitude);
-                String regularPart = String.format("AB$ Pump | Cost$ 0 | Defined$ CardUID_%d | NumAtt$ +%d | NumDef$ +%d | StackDescription$ %s", c.getUniqueNumber(), magnitude, magnitude, description);
+                String regularPart = String.format("AB$ Pump | Cost$ 0 | Defined$ CardUID_%d | NumAtt$ +%d | NumDef$ +%d | StackDescription$ %s", c.getId(), magnitude, magnitude, description);
                 
                 SpellAbility ability = AbilityFactory.getAbility(regularPart, c);
                 ability.setDescription(ability.getStackDescription());

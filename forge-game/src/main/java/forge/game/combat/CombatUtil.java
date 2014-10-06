@@ -634,7 +634,7 @@ public class CombatUtil {
             final String parse = blocker.getKeyword().get(keywordPosition).toString();
             if (parse.startsWith("CantBlockCardUID")) {
                 final String[] k = parse.split("_", 2);
-                if (attacker.getUniqueNumber() == Integer.parseInt(k[1])) {
+                if (attacker.getId() == Integer.parseInt(k[1])) {
                     return false;
                 }
             } else {
@@ -999,7 +999,7 @@ public class CombatUtil {
 
                 // Rule 702.23b:  If a creature has multiple instances of flanking, each triggers separately.
                 for( int i = 0; i < flankingMagnitude; i++ ) {
-                    String effect = String.format("AB$ Pump | Cost$ 0 | Defined$ CardUID_%d | NumAtt$ -1 | NumDef$ -1 | ", blocker.getUniqueNumber());
+                    String effect = String.format("AB$ Pump | Cost$ 0 | Defined$ CardUID_%d | NumAtt$ -1 | NumDef$ -1 | ", blocker.getId());
                     String desc = String.format("StackDescription$ Flanking (The blocking %s gets -1/-1 until end of turn)", blocker.getName());
 
                     SpellAbility ability = AbilityFactory.getAbility(effect + desc, attacker);
@@ -1031,7 +1031,7 @@ public class CombatUtil {
     private static void executeRampageAbility(final Game game, final Card c, final int magnitude, final int numBlockers) {
         // numBlockers starts with 1 since it is for every creature beyond the first
         for (int i = 1; i < numBlockers; i++) {
-            String effect = "AB$ Pump | Cost$ 0 | " + c.getUniqueNumber() + " | NumAtt$ " + magnitude + " | NumDef$ " + magnitude + " | ";
+            String effect = "AB$ Pump | Cost$ 0 | " + c.getId() + " | NumAtt$ " + magnitude + " | NumDef$ " + magnitude + " | ";
             String desc = "StackDescription$ Rampage " + magnitude + " (Whenever CARDNAME becomes blocked, it gets +" + magnitude + "/+"
                     + magnitude + " until end of turn for each creature blocking it beyond the first.)";
 

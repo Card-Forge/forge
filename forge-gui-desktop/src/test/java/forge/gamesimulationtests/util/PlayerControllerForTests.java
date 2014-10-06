@@ -575,7 +575,7 @@ public class PlayerControllerForTests extends PlayerController {
 
 	@Override
 	public CardShields chooseRegenerationShield(Card c) {
-		return Iterables.getFirst(c.getShield(), null);
+		return Iterables.getFirst(c.getShields(), null);
 	}
 
     @Override

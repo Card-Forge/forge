@@ -153,7 +153,7 @@ public class FightAi extends SpellAbilityAi {
     		return true;
     	}
     	if (opponent.hasProtectionFrom(fighter) || !opponent.canBeDestroyed() 
-    	        || !opponent.getShield().isEmpty() || ComputerUtil.canRegenerate(opponent.getController(), opponent)) {
+    	        || opponent.getShieldCount() > 0 || ComputerUtil.canRegenerate(opponent.getController(), opponent)) {
     		return false;
     	}
     	if (fighter.hasKeyword("Deathtouch") || ComputerUtilCombat.getDamageToKill(opponent) <= fighter.getNetAttack() + pumpAttack) {

@@ -55,15 +55,14 @@ import java.util.*;
  * @version $Id$
  */
 public abstract class SpellAbility extends CardTraitBase implements ISpellAbility, IIdentifiable {
-
     private static int maxId = 0;
     private static int nextId() { return ++maxId; }
 
     public static class EmptySa extends SpellAbility {
         public EmptySa(Card sourceCard) { super(sourceCard, Cost.Zero); setActivatingPlayer(sourceCard.getController());}
-        public EmptySa(ApiType api, Card sourceCard) { super(sourceCard, Cost.Zero); setActivatingPlayer(sourceCard.getController()); this.api = api;}
+        public EmptySa(ApiType api0, Card sourceCard) { super(sourceCard, Cost.Zero); setActivatingPlayer(sourceCard.getController()); api = api0;}
         public EmptySa(Card sourceCard, Player activator) { super(sourceCard, Cost.Zero); setActivatingPlayer(activator);}
-        public EmptySa(ApiType api, Card sourceCard, Player activator) { super(sourceCard, Cost.Zero); setActivatingPlayer(activator); this.api = api;}
+        public EmptySa(ApiType api0, Card sourceCard, Player activator) { super(sourceCard, Cost.Zero); setActivatingPlayer(activator); api = api0;}
         @Override public void resolve() {}
         @Override public boolean canPlay() { return false; }
     }
@@ -82,8 +81,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private Card grantorCard = null; // card which grants the ability (equipment or owner of static ability that gave this one)
 
     private List<Card> splicedCards = null;
-//    private List<Card> targetList;
-    // targetList doesn't appear to be used anymore
 
     private boolean basicSpell = true;
     private boolean trigger = false;
@@ -131,6 +128,32 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private boolean isCopied = false;
 
+    private EnumSet<OptionalCost> optionalCosts = EnumSet.noneOf(OptionalCost.class);
+    private TargetRestrictions targetRestrictions = null;
+    private TargetChoices targetChosen = new TargetChoices();
+
+    private final SpellAbilityView view;
+
+    public SpellAbility(final Card iSourceCard, Cost toPay) {
+        id = nextId();
+        hostCard = iSourceCard;
+        payCosts = toPay;
+        view = new SpellAbilityView(this);
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setHostCard(final Card c) {
+        if (hostCard == c) { return; }
+        super.setHostCard(c);
+        view.updateHostCard(this);
+        view.updateDescription(this); //description can change if host card does
+    }
+
     public final AbilityManaPart getManaPart() {
         return manaPart;
     }
@@ -148,23 +171,23 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public final boolean isManaAbility() {
         // Check whether spell or ability first
-        if (this.isSpell()) {
+        if (isSpell()) {
             return false;
         }
         // without a target
-        if (this.usesTargeting()) { return false; }
+        if (usesTargeting()) { return false; }
         if (restrictions != null && restrictions.isPwAbility()) {
             return false; //Loyalty ability, not a mana ability.
         }
-        if (this.isWrapper() && ((WrappedAbility) this).getTrigger().getMode() != TriggerType.TapsForMana) {
+        if (isWrapper() && ((WrappedAbility) this).getTrigger().getMode() != TriggerType.TapsForMana) {
             return false;
         }
 
         return getManaPartRecursive() != null;
     }
 
-    protected final void setManaPart(AbilityManaPart manaPart) {
-        this.manaPart = manaPart;
+    protected final void setManaPart(AbilityManaPart manaPart0) {
+        manaPart = manaPart0;
     }
 
     public final String getSVar(final String name) {
@@ -194,209 +217,67 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return sVars.keySet();
     }
 
-    /**
-     * <p>
-     * Constructor for SpellAbility.
-     * </p>
-     * 
-     * @param spellOrAbility
-     *            a int.
-     * @param iSourceCard
-     *            a {@link forge.game.card.Card} object.
-     */
-    public SpellAbility(final Card iSourceCard, Cost toPay) {
-        this.id = nextId();
-        this.hostCard = iSourceCard;
-        this.payCosts = toPay;
-    }
-
-    @Override
-    public int getId() {
-        return id;
-    }
-
     // Spell, and Ability, and other Ability objects override this method
-    /**
-     * <p>
-     * canPlay.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public abstract boolean canPlay();
 
-    /**
-     * <p>
-     * isPossible.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public boolean isPossible() {
     	return canPlay(); //by default, ability is only possible if it can be played
     }
 
-    /**
-     * <p>
-     * promptIfOnlyPossibleAbility.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public boolean promptIfOnlyPossibleAbility() {
     	return false; //by default, don't prompt user if ability is only possible ability
     }
 
     // all Spell's and Abilities must override this method
-    /**
-     * <p>
-     * resolve.
-     * </p>
-     */
     public abstract void resolve();
 
-    /**
-     * <p>
-     * Getter for the field <code>multiKickerManaCost</code>.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
     public ManaCost getMultiKickerManaCost() {
-        return this.multiKickerManaCost;
+        return multiKickerManaCost;
     }
-
-    /**
-     * <p>
-     * Setter for the field <code>multiKickerManaCost</code>.
-     * </p>
-     * 
-     * @param cost
-     *            a {@link java.lang.String} object.
-     */
     public void setMultiKickerManaCost(final ManaCost cost) {
-        this.multiKickerManaCost = cost;
+        multiKickerManaCost = cost;
     }
 
-
-    /**
-     * <p>
-     * Getter for the field <code>activatingPlayer</code>.
-     * </p>
-     * 
-     * @return a {@link forge.game.player.Player} object.
-     */
     public Player getActivatingPlayer() {
-        return this.activatingPlayer;
+        return activatingPlayer;
     }
-
-    /**
-     * <p>
-     * Setter for the field <code>activatingPlayer</code>.
-     * </p>
-     * 
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     */
     public void setActivatingPlayer(final Player player) {
         // trickle down activating player
-        this.activatingPlayer = player;
-        if (this.subAbility != null) {
-            this.subAbility.setActivatingPlayer(player);
+        activatingPlayer = player;
+        if (subAbility != null) {
+            subAbility.setActivatingPlayer(player);
         }
     }
 
-    /**
-     * @return the targetingPlayer
-     */
     public Player getTargetingPlayer() {
         return targetingPlayer;
     }
-
-    /**
-     * @param targetingPlayer the targetingPlayer to set
-     */
-    public void setTargetingPlayer(Player targetingPlayer) {
-        this.targetingPlayer = targetingPlayer;
+    public void setTargetingPlayer(Player targetingPlayer0) {
+        targetingPlayer = targetingPlayer0;
     }
 
-    /**
-     * <p>
-     * isSpell.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public boolean isSpell() { return false; }
     public boolean isAbility() { return true; }
 
-    /**
-     * <p>
-     * setIsMorphUp.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setIsMorphUp(final boolean b) {
-        this.morphup = b;
-    }
-
-    /**
-     * <p>
-     * isMorphUp.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public boolean isMorphUp() {
-        return this.morphup;
+        return morphup;
+    }
+    public final void setIsMorphUp(final boolean b) {
+        morphup = b;
     }
 
-    /**
-     * <p>
-     * setIsCycling.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setIsCycling(final boolean b) {
-        this.cycling = b;
-    }
-
-    /**
-     * <p>
-     * isCycling.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public boolean isCycling() {
-        return this.cycling;
+        return cycling;
+    }
+    public final void setIsCycling(final boolean b) {
+        cycling = b;
     }
 
-    /**
-     * <p>
-     * Setter for the field <code>originalHost</code>.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     */
-    public void setOriginalHost(final Card c) {
-        this.grantorCard = c;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>originalHost</code>.
-     * </p>
-     * 
-     * @return a {@link forge.game.card.Card} object.
-     */
     public Card getOriginalHost() {
-        return this.grantorCard;
+        return grantorCard;
+    }
+    public void setOriginalHost(final Card c) {
+        grantorCard = c;
     }
 
     public String getParamOrDefault(String key, String defaultValue) {
@@ -410,12 +291,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return mapParams.containsKey(key);
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param mapParams
-     */
     public void copyParamsToMap(Map<String, String> mapParams) {
-        mapParams.putAll(this.mapParams);
+        mapParams.putAll(mapParams);
     }
 
     // If this is not null, then ability was made in a factory
@@ -428,200 +305,79 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public final boolean isCurse() {
-        return this.hasParam("IsCurse");
+        return hasParam("IsCurse");
     }
 
     // begin - Input methods
-    /**
-     * <p>
-     * Getter for the field <code>payCosts</code>.
-     * </p>
-     * 
-     * @return a {@link forge.game.cost.Cost} object.
-     */
+
     public Cost getPayCosts() {
-        return this.payCosts;
+        return payCosts;
     }
-
-    /**
-     * <p>
-     * Setter for the field <code>payCosts</code>.
-     * </p>
-     * 
-     * @param abCost
-     *            a {@link forge.game.cost.Cost} object.
-     */
     public void setPayCosts(final Cost abCost) {
-        this.payCosts = abCost;
+        payCosts = abCost;
     }
 
-    /**
-     * <p>
-     * Setter for the field <code>restrictions</code>.
-     * </p>
-     * 
-     * @param restrict
-     *            a {@link forge.game.spellability.SpellAbilityRestriction}
-     *            object.
-     */
-    public void setRestrictions(final SpellAbilityRestriction restrict) {
-        this.restrictions = restrict;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>restrictions</code>.
-     * </p>
-     * 
-     * @return a {@link forge.game.spellability.SpellAbilityRestriction} object.
-     */
     public SpellAbilityRestriction getRestrictions() {
-        return this.restrictions;
+        return restrictions;
+    }
+    public void setRestrictions(final SpellAbilityRestriction restrict) {
+        restrictions = restrict;
     }
 
     /**
-     * <p>
-     * Shortcut to see how many activations there were.
-     * </p>
-     * 
-     * @return the activations this turn
+     * Shortcut to see how many activations there were this turn.
      */
     public int getActivationsThisTurn() {
-        return this.restrictions.getNumberTurnActivations();
+        return restrictions.getNumberTurnActivations();
     }
 
-    /**
-     * <p>
-     * Setter for the field <code>conditions</code>.
-     * </p>
-     * 
-     * @param condition
-     *            a {@link forge.game.spellability.SpellAbilityCondition}
-     *            object.
-     * @since 1.0.15
-     */
-    public final void setConditions(final SpellAbilityCondition condition) {
-        this.conditions = condition;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>conditions</code>.
-     * </p>
-     * 
-     * @return a {@link forge.game.spellability.SpellAbilityCondition} object.
-     * @since 1.0.15
-     */
     public SpellAbilityCondition getConditions() {
-        return this.conditions;
+        return conditions;
+    }
+    public final void setConditions(final SpellAbilityCondition condition) {
+        conditions = condition;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>payingMana</code>.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     */
     public List<Mana> getPayingMana() {
-        return this.payingMana;
+        return payingMana;
     }
-
     public final void clearManaPaid() {
         payingMana.clear();
     }    
-    
-    /**
-     * <p>
-     * getPayingManaAbilities.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     */
+
     public List<SpellAbility> getPayingManaAbilities() {
-        return this.paidAbilities;
+        return paidAbilities;
     }
 
     // Combined PaidLists
-    /**
-     * <p>
-     * setPaidHash.
-     * </p>
-     * 
-     * @param hash
-     *            a {@link java.util.HashMap} object.
-     */
-    public void setPaidHash(final HashMap<String, List<Card>> hash) {
-        this.paidLists = hash;
-    }
-
-    /**
-     * <p>
-     * getPaidHash.
-     * </p>
-     * 
-     * @return a {@link java.util.HashMap} object.
-     */
     public HashMap<String, List<Card>> getPaidHash() {
-        return this.paidLists;
+        return paidLists;
+    }
+    public void setPaidHash(final HashMap<String, List<Card>> hash) {
+        paidLists = hash;
     }
 
-    /**
-     * <p>
-     * getPaidList.
-     * </p>
-     * 
-     * @param str
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.CardList} object.
-     */
     public List<Card> getPaidList(final String str) {
-        return this.paidLists.get(str);
+        return paidLists.get(str);
     }
-
-    /**
-     * <p>
-     * addCostToHashList.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param str
-     *            a {@link java.lang.String} object.
-     */
     public void addCostToHashList(final Card c, final String str) {
-        if (!this.paidLists.containsKey(str)) {
-            this.paidLists.put(str, new ArrayList<Card>());
+        if (!paidLists.containsKey(str)) {
+            paidLists.put(str, new ArrayList<Card>());
         }
-
-        this.paidLists.get(str).add(c);
+        paidLists.get(str).add(c);
     }
-
-    /**
-     * <p>
-     * resetPaidHash.
-     * </p>
-     */
     public void resetPaidHash() {
-        this.paidLists = new HashMap<String, List<Card>>();
+        paidLists = new HashMap<String, List<Card>>();
     }
 
-    private EnumSet<OptionalCost> optionalCosts = EnumSet.noneOf(OptionalCost.class);
-    /**
-     * @return the optionalAdditionalCosts
-     */
     public Iterable<OptionalCost> getOptionalCosts() {
         return optionalCosts;
     }
-
-    /**
-     * @param cost the optionalAdditionalCost to add
-     */
     public final void addOptionalCost(OptionalCost cost) {
         // Optional costs are added to swallow copies of original SAs,
         // Thus, to protect the original's set from changes, we make a copy right here.
-        this.optionalCosts = EnumSet.copyOf(optionalCosts);
-        this.optionalCosts.add(cost);
+        optionalCosts = EnumSet.copyOf(optionalCosts);
+        optionalCosts.add(cost);
     }
 
     public boolean isBuyBackAbility() {
@@ -633,229 +389,98 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isOptionalCostPaid(OptionalCost cost) {
-        SpellAbility saRoot = this.getRootAbility();
+        SpellAbility saRoot = getRootAbility();
         return saRoot.optionalCosts.contains(cost);
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>triggeringObjects</code>.
-     * </p>
-     * 
-     * @return a {@link java.util.HashMap} object.
-     * @since 1.0.15
-     */
     public HashMap<String, Object> getTriggeringObjects() {
-        return this.triggeringObjects;
+        return triggeringObjects;
     }
-
-    /**
-     * <p>
-     * setAllTriggeringObjects.
-     * </p>
-     * 
-     * @param triggeredObjects
-     *            a {@link java.util.HashMap} object.
-     * @since 1.0.15
-     */
-    public void setAllTriggeringObjects(final HashMap<String, Object> triggeredObjects) {
-        this.triggeringObjects = triggeredObjects;
+    public void setTriggeringObjects(final HashMap<String, Object> triggeredObjects) {
+        triggeringObjects = triggeredObjects;
     }
-
-    /**
-     * <p>
-     * setTriggeringObject.
-     * </p>
-     * 
-     * @param type
-     *            a {@link java.lang.String} object.
-     * @param o
-     *            a {@link java.lang.Object} object.
-     * @since 1.0.15
-     */
-    public void setTriggeringObject(final String type, final Object o) {
-        this.triggeringObjects.put(type, o);
-    }
-
-    /**
-     * <p>
-     * getTriggeringObject.
-     * </p>
-     * 
-     * @param type
-     *            a {@link java.lang.String} object.
-     * @return a {@link java.lang.Object} object.
-     * @since 1.0.15
-     */
     public Object getTriggeringObject(final String type) {
-        return this.triggeringObjects.get(type);
+        return triggeringObjects.get(type);
     }
-
-    /**
-     * <p>
-     * hasTriggeringObject.
-     * </p>
-     * 
-     * @param type
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     * @since 1.0.15
-     */
+    public void setTriggeringObject(final String type, final Object o) {
+        triggeringObjects.put(type, o);
+    }
     public boolean hasTriggeringObject(final String type) {
-        return this.triggeringObjects.containsKey(type);
+        return triggeringObjects.containsKey(type);
     }
-
-    /**
-     * <p>
-     * resetTriggeringObjects.
-     * </p>
-     * 
-     * @since 1.0.15
-     */
     public void resetTriggeringObjects() {
-        this.triggeringObjects = new HashMap<String, Object>();
+        triggeringObjects = new HashMap<String, Object>();
     }
-
 
     public List<Object> getTriggerRemembered() {
-        return this.triggerRemembered;
+        return triggerRemembered;
     }
-
     public void setTriggerRemembered(List<Object> list) {
-        this.triggerRemembered = list;
+        triggerRemembered = list;
     }
-
     public void resetTriggerRemembered() {
-        this.triggerRemembered = new ArrayList<Object>();
+        triggerRemembered = new ArrayList<Object>();
     }
-    
-    /**
-     * Gets the replacing objects.
-     * 
-     * @return the replacing objects
-     */
+
     public HashMap<String, Object> getReplacingObjects() {
-        return this.replacingObjects;
+        return replacingObjects;
     }
-
-    /**
-     * Sets the replacing object.
-     * 
-     * @param type
-     *            the type
-     * @param o
-     *            the o
-     */
-    public void setReplacingObject(final String type, final Object o) {
-        this.replacingObjects.put(type, o);
-    }
-
-    /**
-     * Gets the replacing object.
-     * 
-     * @param type
-     *            the type
-     * @return the replacing object
-     */
     public Object getReplacingObject(final String type) {
-        final Object res = this.replacingObjects.get(type);
+        final Object res = replacingObjects.get(type);
         return res;
     }
+    public void setReplacingObject(final String type, final Object o) {
+        replacingObjects.put(type, o);
+    }
 
-
-    /**
-     * <p>
-     * resetOnceResolved.
-     * </p>
-     */
     public void resetOnceResolved() {
-        this.resetPaidHash();
-        this.resetTargets();
-        this.resetTriggeringObjects();
-        this.resetTriggerRemembered();
-        
+        resetPaidHash();
+        resetTargets();
+        resetTriggeringObjects();
+        resetTriggerRemembered();
 
         // Clear SVars
         for (final String store : Card.getStorableSVars()) {
-            final String value = this.hostCard.getSVar(store);
+            final String value = hostCard.getSVar(store);
             if (value.length() > 0) {
-                this.hostCard.setSVar(store, "");
+                hostCard.setSVar(store, "");
             }
         }
     }
 
-    /**
-     * <p>
-     * Setter for the field <code>stackDescription</code>.
-     * </p>
-     * 
-     * @param s
-     *            a {@link java.lang.String} object.
-     */
-    public void setStackDescription(final String s) {
-        this.originalStackDescription = s;
-        this.stackDescription = this.originalStackDescription;
-        if (StringUtils.isEmpty(this.description) && StringUtils.isEmpty(this.hostCard.getText())) {
-            this.setDescription(s);
-        }
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>stackDescription</code>.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
     public String getStackDescription() {
-        if (this.stackDescription.equals(this.getHostCard().getText().trim())) {
-            return this.getHostCard().getName() + " - " + this.getHostCard().getText();
+        if (stackDescription.equals(getHostCard().getText().trim())) {
+            return getHostCard().getName() + " - " + getHostCard().getText();
         }
-
-        return this.stackDescription.replaceAll("CARDNAME", this.getHostCard().getName());
+        return stackDescription.replaceAll("CARDNAME", getHostCard().getName());
+    }
+    public void setStackDescription(final String s) {
+        originalStackDescription = s;
+        stackDescription = originalStackDescription;
+        if (StringUtils.isEmpty(description) && StringUtils.isEmpty(hostCard.getText())) {
+            setDescription(s);
+        }
     }
 
     // setDescription() includes mana cost and everything like
     // "G, tap: put target creature from your hand onto the battlefield"
-    /**
-     * <p>
-     * Setter for the field <code>description</code>.
-     * </p>
-     * 
-     * @param s
-     *            a {@link java.lang.String} object.
-     */
-    public void setDescription(final String s) {
-        this.originalDescription = s;
-        this.description = this.originalDescription;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>description</code>.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
     public String getDescription() {
-        return this.description;
+        return description;
+    }
+    public void setDescription(final String s) {
+        originalDescription = s;
+        description = originalDescription;
     }
 
     /** {@inheritDoc} */
     @Override
     public final String toString() {
-        if (this.isSuppressed()) {
+        if (isSuppressed()) {
             return "";
         }
-
-        return this.toUnsuppressedString();
+        return toUnsuppressedString();
     }
 
-    /**
-     * To unsuppressed string.
-     * 
-     * @return the string
-     */
     public String toUnsuppressedString() {
         final StringBuilder sb = new StringBuilder();
         SpellAbility node = this;
@@ -871,6 +496,17 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return sb.toString();
     }
 
+    public AbilitySub getSubAbility() {
+        return subAbility;
+    }
+    public void setSubAbility(final AbilitySub subAbility0) {
+        if (subAbility == subAbility0) { return; }
+        subAbility = subAbility0;
+        if (subAbility != null) {
+            subAbility.setParent(this);
+        }
+        view.updateDescription(this); //description changes when sub-abilities change
+    }
     public void appendSubAbility(final AbilitySub toAdd) {
         SpellAbility tailend = this;
         while (tailend.getSubAbility() != null) {
@@ -879,97 +515,31 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         tailend.setSubAbility(toAdd);
     }
 
-    /**
-     * <p>
-     * Setter for the field <code>subAbility</code>.
-     * </p>
-     * 
-     * @param subAbility
-     *            a {@link forge.game.spellability.AbilitySub} object.
-     */
-    public void setSubAbility(final AbilitySub subAbility) {
-        this.subAbility = subAbility;
-        if (subAbility != null) {
-            subAbility.setParent(this);
-        }
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>subAbility</code>.
-     * </p>
-     * 
-     * @return a {@link forge.game.spellability.AbilitySub} object.
-     */
-    public AbilitySub getSubAbility() {
-        return this.subAbility;
-    }
-
-    /**
-     * <p>
-     * isBasicAbility.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public boolean isBasicSpell() {
-        return this.basicSpell && !this.isFlashBackAbility() && !this.isBuyBackAbility();
+        return basicSpell && !isFlashBackAbility() && !isBuyBackAbility();
+    }
+    public void setBasicSpell(final boolean basicSpell0) {
+        basicSpell = basicSpell0;
     }
 
-    /**
-     * <p>
-     * Setter for the field <code>setBasicSpell</code>.
-     * </p>
-     * 
-     * @param basicSpell
-     *            a boolean.
-     */
-    public void setBasicSpell(final boolean basicSpell) {
-        this.basicSpell = basicSpell;
+    public void setFlashBackAbility(final boolean flashBackAbility0) {
+        flashBackAbility = flashBackAbility0;
     }
-
-    /**
-     * <p>
-     * Setter for the field <code>flashBackAbility</code>.
-     * </p>
-     * 
-     * @param flashBackAbility
-     *            a boolean.
-     */
-    public void setFlashBackAbility(final boolean flashBackAbility) {
-        this.flashBackAbility = flashBackAbility;
-    }
-
-    /**
-     * <p>
-     * isFlashBackAbility.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public boolean isFlashBackAbility() {
-        return this.flashBackAbility;
+        return flashBackAbility;
     }
 
     public boolean isOutlast() {
         return outlast;
     }
-
-    public void setOutlast(boolean outlast) {
-        this.outlast = outlast;
+    public void setOutlast(boolean outlast0) {
+        outlast = outlast0;
     }
 
-    /**
-     * <p>
-     * copy.
-     * </p>
-     * 
-     * @return a {@link forge.game.spellability.SpellAbility} object.
-     */
     public SpellAbility copy() {
         SpellAbility clone = null;
         try {
-            clone = (SpellAbility) this.clone();
+            clone = (SpellAbility) clone();
             clone.id = nextId();
         } catch (final CloneNotSupportedException e) {
             System.err.println(e);
@@ -978,83 +548,56 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public SpellAbility copyWithNoManaCost() {
-        final SpellAbility newSA = this.copy();
+        final SpellAbility newSA = copy();
         newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
         newSA.setDescription(newSA.getDescription() + " (without paying its mana cost)");
         return newSA;
     }
 
     public SpellAbility copyWithDefinedCost(Cost abCost) {
-        final SpellAbility newSA = this.copy();
+        final SpellAbility newSA = copy();
         newSA.setPayCosts(abCost);
         return newSA;
     }
 
-    public void setTrigger(final boolean trigger) {
-        this.trigger = trigger;
-    }
     public boolean isTrigger() {
-        return this.trigger;
+        return trigger;
+    }
+    public void setTrigger(final boolean trigger0) {
+        trigger = trigger0;
+    }
+
+    public boolean isOptionalTrigger() {
+        return optionalTrigger;
     }
     public void setOptionalTrigger(final boolean optrigger) {
-        this.optionalTrigger = optrigger;
-    }
-    public boolean isOptionalTrigger() {
-        return this.optionalTrigger;
+        optionalTrigger = optrigger;
     }
 
-    /**
-     * <p>
-     * setSourceTrigger.
-     * </p>
-     * 
-     * @param id
-     *            a int.
-     */
-    public void setSourceTrigger(final int id) {
-        this.sourceTrigger = id;
-    }
-
-    /**
-     * <p>
-     * getSourceTrigger.
-     * </p>
-     * 
-     * @return a int.
-     */
     public int getSourceTrigger() {
-        return this.sourceTrigger;
+        return sourceTrigger;
+    }
+    public void setSourceTrigger(final int id) {
+        sourceTrigger = id;
     }
 
-    public boolean isReplacementAbility() { return this.replacementAbility; }
-    public void setReplacementAbility(boolean replacement) { this.replacementAbility = replacement; }
+    public boolean isReplacementAbility() {
+        return replacementAbility;
+    }
+    public void setReplacementAbility(boolean replacement) {
+        replacementAbility = replacement;
+    }
 
-    /**
-     * <p>
-     * isMandatory.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public boolean isMandatory() {
         return false;
     }
 
-    /**
-     * <p>
-     * canTarget.
-     * </p>
-     * 
-     * @param entity
-     *            a GameEntity
-     * @return a boolean.
-     */
     public final boolean canTarget(final GameObject entity) {
-        final TargetRestrictions tr = this.getTargetRestrictions();
+        final TargetRestrictions tr = getTargetRestrictions();
 
         // Restriction related to this ability
         if (tr != null) {
-            if (tr.isUniqueTargets() && this.getUniqueTargets().contains(entity))
+            if (tr.isUniqueTargets() && getUniqueTargets().contains(entity))
                 return false;
 
             // If the cards must have a specific controller
@@ -1076,7 +619,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
             if (hasParam("TargetsWithSharedTypes") && entity instanceof Card) {
                 final Card c = (Card) entity;
-                final SpellAbility parent = this.getParentTargetingCard();
+                final SpellAbility parent = getParentTargetingCard();
                 final Card parentTargeted = parent != null ? parent.getTargetCard() : null;
                 if (parentTargeted == null) {
                     return false;
@@ -1096,7 +639,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 final String related = getParam("TargetsWithRelatedProperty");
                 final Card c = (Card) entity;
                 Card parentTarget = null;
-                for (GameObject o : this.getUniqueTargets()) {
+                for (GameObject o : getUniqueTargets()) {
                     if (o instanceof Card) {
                         parentTarget = (Card) o;
                         break;
@@ -1121,7 +664,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
 
             String[] validTgt = tr.getValidTgts();
-            if (entity instanceof GameEntity && !((GameEntity) entity).isValid(validTgt, this.getActivatingPlayer(), this.getHostCard())) {
+            if (entity instanceof GameEntity && !((GameEntity) entity).isValid(validTgt, getActivatingPlayer(), getHostCard())) {
                return false;
             }
         }
@@ -1131,144 +674,62 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     // is this a wrapping ability (used by trigger abilities)
-    /**
-     * <p>
-     * isWrapper.
-     * </p>
-     * 
-     * @return a boolean.
-     * @since 1.0.15
-     */
     public boolean isWrapper() {
         return false;
     }
 
-
-    /**
-     * Gets the checks if is delve.
-     * 
-     * @return the isDelve
-     */
     public final boolean isDelve() {
-        return this.delve;
+        return delve;
     }
-
-    /**
-     * Sets the checks if is delve.
-     * 
-     * @param isDelve0
-     *            the isDelve to set
-     */
     public final void setDelve(final boolean isDelve0) {
-        this.delve = isDelve0;
+        delve = isDelve0;
     }
 
-    /**
-     * Adds the tapped for convoke.
-     * 
-     * @param c
-     *            the c
-     */
-    public void addTappedForConvoke(final Card c) {
-        if (this.tappedForConvoke == null) {
-            this.tappedForConvoke = new ArrayList<Card>();
-        }
-
-        this.tappedForConvoke.add(c);
-    }
-
-    /**
-     * Gets the tapped for convoke.
-     * 
-     * @return the tapped for convoke
-     */
     public List<Card> getTappedForConvoke() {
-        return this.tappedForConvoke;
+        return tappedForConvoke;
     }
-
-    /**
-     * Clear tapped for convoke.
-     */
+    public void addTappedForConvoke(final Card c) {
+        if (tappedForConvoke == null) {
+            tappedForConvoke = new ArrayList<Card>();
+        }
+        tappedForConvoke.add(c);
+    }
     public void clearTappedForConvoke() {
-        if (this.tappedForConvoke != null) {
-            this.tappedForConvoke.clear();
+        if (tappedForConvoke != null) {
+            tappedForConvoke.clear();
         }
     }
 
-    /**
-     * Returns whether the SA is a patron offering.
-     */
     public boolean isOffering() {
-        return this.offering;
+        return offering;
     }
-
-    /**
-     * Sets the SA as a patron offering.
-     * 
-     * @param c      card sacrificed for a patron offering
-     */
     public void setIsOffering(final boolean bOffering) {
-        this.offering = bOffering;
+        offering = bOffering;
     }
 
-    /**
-     * Sets the card sacrificed for a patron offering.
-     * 
-     * @param c      card sacrificed for a patron offering
-     */
+    public Card getSacrificedAsOffering() { //for Patron offering
+        return sacrificedAsOffering;
+    }
     public void setSacrificedAsOffering(final Card c) {
-        this.sacrificedAsOffering = c;
+        sacrificedAsOffering = c;
     }
-
-    /**
-     * Gets the card sacrificed for a patron offering.
-     * 
-     * @return the card sacrificed for a patron offering
-     */
-    public Card getSacrificedAsOffering() {
-        return this.sacrificedAsOffering;
-    }
-
-    /**
-     * Clear the card sacrificed for a patron offering.
-     */
     public void resetSacrificedAsOffering() {
-        this.sacrificedAsOffering = null;
+        sacrificedAsOffering = null;
     }
 
-    /**
-     * @return the splicedCards
-     */
     public List<Card> getSplicedCards() {
         return splicedCards;
     }
-
-    /**
-     * @param splicedCard the splicedCards to set
-     */
-    public void setSplicedCards(List<Card> splicedCards) {
-        this.splicedCards = splicedCards;
+    public void setSplicedCards(List<Card> splicedCards0) {
+        splicedCards = splicedCards0;
     }
-
-    /**
-     * @param splicedCard the splicedCard to add
-     */
     public void addSplicedCards(Card splicedCard) {
-        if (this.splicedCards == null) {
-            this.splicedCards = new ArrayList<Card>();
+        if (splicedCards == null) {
+            splicedCards = new ArrayList<Card>();
         }
-        this.splicedCards.add(splicedCard);
+        splicedCards.add(splicedCard);
     }
 
-    /**
-     * <p>
-     * knownDetermineDefined.
-     * </p>
-     * 
-     * @param defined
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.CardList} object.
-     */
     public List<Card> knownDetermineDefined(final String defined) {
         final List<Card> ret = new ArrayList<Card>();
         final List<Card> list = AbilityUtils.getDefinedCards(getHostCard(), defined, this);
@@ -1281,13 +742,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return ret;
     }
 
-    /**
-     * <p>
-     * findRootAbility.
-     * </p>
-     * 
-     * @return a {@link forge.game.spellability.SpellAbility} object.
-     */
     public SpellAbility getRootAbility() {
         SpellAbility parent = this;
         while (null != parent.getParent()) {
@@ -1300,44 +754,26 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return null;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
     public boolean isUndoable() {
-        return this.undoable && this.payCosts.isUndoable() && this.getHostCard().isInPlay();
+        return undoable && payCosts.isUndoable() && getHostCard().isInPlay();
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     */
     public boolean undo() {
-        if (isUndoable() && this.getActivatingPlayer().getManaPool().accountFor(this.getManaPart())) {
-            this.payCosts.refundPaidCost(hostCard);
+        if (isUndoable() && getActivatingPlayer().getManaPool().accountFor(getManaPart())) {
+            payCosts.refundPaidCost(hostCard);
         }
         return false;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param b
-     */
     public void setUndoable(boolean b) {
-        this.undoable = b;
+        undoable = b;
     }
 
-    /**
-     * @return the isCopied
-     */
     public boolean isCopied() {
         return isCopied;
     }
-
-    /**
-     * @param isCopied0 the isCopied to set
-     */
     public void setCopied(boolean isCopied0) {
-        this.isCopied = isCopied0;
+        isCopied = isCopied0;
     }
 
     /**
@@ -1380,8 +816,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return basicLandAbility;
     }
 
-    public void setBasicLandAbility(boolean basicLandAbility) {
-        this.basicLandAbility = basicLandAbility; // TODO: Add 0 to parameter's name.
+    public void setBasicLandAbility(boolean basicLandAbility0) {
+        basicLandAbility = basicLandAbility0;
     }
 
     @Override
@@ -1389,16 +825,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return sa.canTargetSpellAbility(this);
     }
 
-    /** The chosen target. */
-    private TargetRestrictions targetRestricions = null;
-    private TargetChoices targetChosen = new TargetChoices();
-
     public boolean usesTargeting() {
-        return targetRestricions != null;
+        return targetRestrictions != null;
     }
 
     public TargetRestrictions getTargetRestrictions() {
-        return targetRestricions;
+        return targetRestrictions;
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1408,7 +840,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void setTargetRestrictions(final TargetRestrictions tgt) {
-        targetRestricions = tgt;
+        targetRestrictions = tgt;
     }
 
     /**
@@ -1417,11 +849,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
      * @return the chosenTarget
      */
     public TargetChoices getTargets() {
-        return this.targetChosen;
+        return targetChosen;
     }
 
     public void setTargets(TargetChoices targets) {
-        this.targetChosen = targets;
+        targetChosen = targets;
     }
 
     public void resetTargets() {
@@ -1435,12 +867,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public void resetFirstTarget(GameObject c, SpellAbility originalSA) {
         SpellAbility sa = this;
         while (sa != null) {
-            if (sa.targetRestricions != null) {
+            if (sa.targetRestrictions != null) {
                 sa.targetChosen = new TargetChoices();
                 sa.targetChosen.add(c);
-                if (!originalSA.targetRestricions.getDividedMap().isEmpty()) {
-                    sa.targetRestricions.addDividedAllocation(c,
-                            Iterables.getFirst(originalSA.targetRestricions.getDividedMap().values(), null));
+                if (!originalSA.targetRestrictions.getDividedMap().isEmpty()) {
+                    sa.targetRestrictions.addDividedAllocation(c,
+                            Iterables.getFirst(originalSA.targetRestrictions.getDividedMap().values(), null));
                 }
                 break;
             }
@@ -1459,7 +891,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public final ArrayList<TargetChoices> getAllTargetChoices() {
         final ArrayList<TargetChoices> res = new ArrayList<TargetChoices>();
 
-        SpellAbility sa = this.getRootAbility();
+        SpellAbility sa = getRootAbility();
         if (sa.getTargetRestrictions() != null) {
             res.add(sa.getTargets());
         }
@@ -1488,7 +920,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
      */
     public void setTargetCard(final Card card) {
         if (card == null) {
-            System.out.println(this.getHostCard()
+            System.out.println(getHostCard()
                     + " - SpellAbility.setTargetCard() called with null for target card.");
             return;
         }
@@ -1498,12 +930,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
         final String desc;
         if (!card.isFaceDown()) {
-            desc = this.getHostCard().getName() + " - targeting " + card;
+            desc = getHostCard().getName() + " - targeting " + card;
         }
         else {
-            desc = this.getHostCard().getName() + " - targeting Morph(" + card.getUniqueNumber() + ")";
+            desc = getHostCard().getName() + " - targeting Morph(" + card.getId() + ")";
         }
-        this.setStackDescription(desc);
+        setStackDescription(desc);
     }
 
     /**
@@ -1529,13 +961,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
 
         // Lastly Search parent SAs that targets a card
-        SpellAbility parent = this.getParentTargetingCard();
+        SpellAbility parent = getParentTargetingCard();
         if (null != parent) {
             return parent.findTargetedCards();
         }
 
         // Lastly Search parent SAs that targets an SA
-        parent = this.getParentTargetingSA();
+        parent = getParentTargetingSA();
         if (null != parent) {
             return parent.findTargetedCards();
         }
@@ -1548,7 +980,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public SpellAbility getParentTargetingCard() {
-        SpellAbility parent = this.getParent();
+        SpellAbility parent = getParent();
         if (parent instanceof WrappedAbility) {
             parent = ((WrappedAbility) parent).getWrappedAbility();
         }
@@ -1566,7 +998,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public SpellAbility getParentTargetingSA() {
-        SpellAbility parent = this.getParent();
+        SpellAbility parent = getParent();
         while (parent != null) {
             if (parent.targetChosen.isTargetingAnySpell())
                 return parent;
@@ -1579,15 +1011,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return targetChosen.isTargetingAnyPlayer() ? this : getParentTargetingPlayer();
     }
 
-    /**
-     * <p>
-     * findParentsTargetedPlayer.
-     * </p>
-     * 
-     * @return a {@link forge.game.spellability.SpellAbility} object.
-     */
     public SpellAbility getParentTargetingPlayer() {
-        SpellAbility parent = this.getParent();
+        SpellAbility parent = getParent();
         while (parent != null) {
             if (parent.getTargets().isTargetingAnyPlayer())
                 return parent;
@@ -1596,16 +1021,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return null;
     }
 
-    /**
-     * Gets the unique targets.
-     * 
-     * @param ability
-     *            the ability
-     * @return the unique targets
-     */
     public final List<GameObject> getUniqueTargets() {
         final List<GameObject> targets = new ArrayList<GameObject>();
-        SpellAbility child = this.getParent();
+        SpellAbility child = getParent();
         while (child != null) {
             if (child.getTargetRestrictions() != null) {
                 Iterables.addAll(targets, child.getTargets().getTargets());
@@ -1616,9 +1034,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean canTargetSpellAbility(final SpellAbility topSA) {
-        final TargetRestrictions tgt = this.getTargetRestrictions();
+        final TargetRestrictions tgt = getTargetRestrictions();
 
-        if (this.hasParam("TargetType") && !topSA.isValid(this.getParam("TargetType").split(","), this.getActivatingPlayer(), this.getHostCard())) {
+        if (hasParam("TargetType") && !topSA.isValid(getParam("TargetType").split(","), getActivatingPlayer(), getHostCard())) {
             return false;
         }
 
@@ -1635,7 +1053,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             boolean result = false;
 
             for (final GameObject o : matchTgt.getTargets()) {
-                if (o.isValid(splitTargetRestrictions.split(","), this.getActivatingPlayer(), this.getHostCard())) {
+                if (o.isValid(splitTargetRestrictions.split(","), getActivatingPlayer(), getHostCard())) {
                     result = true;
                     break;
                 }
@@ -1661,36 +1079,22 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
         }
 
-        return topSA.getHostCard().isValid(tgt.getValidTgts(), this.getActivatingPlayer(), this.getHostCard());
+        return topSA.getHostCard().isValid(tgt.getValidTgts(), getActivatingPlayer(), getHostCard());
     }
 
     // Takes one argument like Permanent.Blue+withFlying
-    /**
-     * <p>
-     * isValid.
-     * </p>
-     * 
-     * @param restriction
-     *            a {@link java.lang.String} object.
-     * @param sourceController
-     *            a {@link forge.game.player.Player} object.
-     * @param source
-     *            a {@link forge.game.card.Card} object.
-     * @return a boolean.
-     */
     @Override
     public final boolean isValid(final String restriction, final Player sourceController, final Card source) {
-
         // Inclusive restrictions are Card types
         final String[] incR = restriction.split("\\.", 2);
 
         if (incR[0].equals("Spell")) {
-            if (!this.isSpell()) {
+            if (!isSpell()) {
                 return false;
             }
         }
         else if (incR[0].equals("Triggered")) {
-            if (!this.isTrigger()) {
+            if (!isTrigger()) {
                 return false;
             }
         }
@@ -1707,28 +1111,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             final String excR = incR[1];
             final String[] exR = excR.split("\\+"); // Exclusive Restrictions are ...
             for (int j = 0; j < exR.length; j++) {
-                if (!this.hasProperty(exR[j], sourceController, source)) {
+                if (!hasProperty(exR[j], sourceController, source)) {
                     return false;
                 }
             }
         }
         return true;
-    } // isValid(String Restriction)
+    }
 
     // Takes arguments like Blue or withFlying
-    /**
-     * <p>
-     * hasProperty.
-     * </p>
-     * 
-     * @param property
-     *            a {@link java.lang.String} object.
-     * @param sourceController
-     *            a {@link forge.game.player.Player} object.
-     * @param source
-     *            a {@link forge.game.card.Card} object.
-     * @return a boolean.
-     */
     @Override
     public boolean hasProperty(final String property, final Player sourceController, final Card source) {
         return true;
@@ -1736,37 +1127,37 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     // Methods enabling multiple instances of conspire
     public void addConspireInstance() {
-        this.conspireInstances++;
+        conspireInstances++;
     }
 
     public void subtractConspireInstance() {
-        this.conspireInstances--;
+        conspireInstances--;
     }
 
     public int getConspireInstances() {
-        return this.conspireInstances;
+        return conspireInstances;
     } // End of Conspire methods
 
     public boolean isCumulativeupkeep() {
         return cumulativeupkeep;
     }
 
-    public void setCumulativeupkeep(boolean cumulativeupkeep) {
-        this.cumulativeupkeep = cumulativeupkeep;
+    public void setCumulativeupkeep(boolean cumulativeupkeep0) {
+        cumulativeupkeep = cumulativeupkeep0;
     }
 
     // Return whether this spell tracks what color mana is spent to cast it for the sake of the effect
     public boolean tracksManaSpent() {
-        if (this.hostCard == null || this.hostCard.getRules() == null) { return false; }
+        if (hostCard == null || hostCard.getRules() == null) { return false; }
 
-        if (this.hostCard.hasKeyword("Sunburst")) {
+        if (hostCard.hasKeyword("Sunburst")) {
             return true;
         }
-        String text = this.hostCard.getRules().getOracleText();
-        if (this.isSpell() && text.contains("was spent to cast")) {
+        String text = hostCard.getRules().getOracleText();
+        if (isSpell() && text.contains("was spent to cast")) {
             return true;
         }
-        if (this.isAbility() && text.contains("mana spent to pay")) {
+        if (isAbility() && text.contains("mana spent to pay")) {
             return true;
         }
         return false;
@@ -1774,11 +1165,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public void checkActivationResloveSubs() {
         if (hasParam("ActivationNumberSacrifice")) {
-            String comp = this.getParam("ActivationNumberSacrifice");
+            String comp = getParam("ActivationNumberSacrifice");
             int right = Integer.parseInt(comp.substring(2));
-            int activationNum =  this.getRestrictions().getNumberTurnActivations();
+            int activationNum =  getRestrictions().getNumberTurnActivations();
             if (Expressions.compare(activationNum, comp, right)) {
-                SpellAbility deltrig = AbilityFactory.getAbility(hostCard.getSVar(this.getParam("ActivationResolveSub")), hostCard);
+                SpellAbility deltrig = AbilityFactory.getAbility(hostCard.getSVar(getParam("ActivationResolveSub")), hostCard);
                 deltrig.setActivatingPlayer(activatingPlayer);
                 AbilityUtils.resolve(deltrig);
             }
@@ -1786,11 +1177,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public void setTotalManaSpent(int totManaSpent) {
-        this.totalManaSpent = totManaSpent;
+        totalManaSpent = totManaSpent;
     }
     
     public int getTotalManaSpent() {
-        return this.totalManaSpent;
+        return totalManaSpent;
     }
     
     public List<AbilitySub> getChosenList() {
@@ -1798,34 +1189,38 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public void setChosenList(List<AbilitySub> choices) {
-        this.chosenList = choices;
+        chosenList = choices;
     }
 
     @Override
     public void changeText() {
         super.changeText();
 
-        if (this.targetRestricions != null) {
-            this.targetRestricions.applyTargetTextChanges(this);
+        if (targetRestrictions != null) {
+            targetRestrictions.applyTargetTextChanges(this);
         }
 
-        if (this.getPayCosts() != null) {
-            this.getPayCosts().applyTextChangeEffects(this);
+        if (getPayCosts() != null) {
+            getPayCosts().applyTextChangeEffects(this);
         }
 
-        this.stackDescription = AbilityUtils.applyDescriptionTextChangeEffects(this.originalStackDescription, this);
-        this.description = AbilityUtils.applyDescriptionTextChangeEffects(this.originalDescription, this);
+        stackDescription = AbilityUtils.applyDescriptionTextChangeEffects(originalStackDescription, this);
+        description = AbilityUtils.applyDescriptionTextChangeEffects(originalDescription, this);
 
-        if (this.subAbility != null) {
-            this.subAbility.changeText();
+        if (subAbility != null) {
+            subAbility.changeText();
         }
     }
 
     @Override
     public void setIntrinsic(boolean i) {
         super.setIntrinsic(i);
-        if (this.subAbility != null) {
-            this.subAbility.setIntrinsic(i);
+        if (subAbility != null) {
+            subAbility.setIntrinsic(i);
         }
+    }
+
+    public SpellAbilityView getView() {
+        return view;
     }
 }

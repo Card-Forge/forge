@@ -32,7 +32,7 @@ public class DestroyEffect extends SpellAbilityEffect {
         while (it.hasNext()) {
             final Card tgtC = it.next();
             if (tgtC.isFaceDown()) {
-                sb.append("Morph ").append("(").append(tgtC.getUniqueNumber()).append(")");
+                sb.append("Morph ").append("(").append(tgtC.getId()).append(")");
             } else {
                 sb.append(tgtC);
             }

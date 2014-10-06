@@ -257,11 +257,11 @@ public class Untap extends Phase {
                         continue;
                     }
                 } else if (c.isEquipment() && c.isEquipping()) {
-                    if (list.contains(c.getEquippingCard())) {
+                    if (list.contains(c.getEquipping())) {
                         continue;
                     }
                 } else if (c.isFortification() && c.isFortifying()) {
-                    if (list.contains(c.getFortifyingCard())) {
+                    if (list.contains(c.getFortifying())) {
                         continue;
                     }
                 }

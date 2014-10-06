@@ -31,8 +31,10 @@ import forge.game.trigger.Trigger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  * TODO: Write javadoc for this type.
@@ -40,7 +42,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class CardCharacteristics {
     private String name = "";
-    private List<String> type = new CopyOnWriteArrayList<String>();
+    private Set<String> type = new CopyOnWriteArraySet<String>();
     private ManaCost manaCost = ManaCost.NO_COST;
     private List<CardColor> cardColor = new ArrayList<CardColor>();
     private String oracleText = "";
@@ -84,7 +86,7 @@ public class CardCharacteristics {
      * 
      * @return the type
      */
-    public final List<String> getType() {
+    public final Set<String> getType() {
         return this.type;
     }
 
@@ -438,7 +440,7 @@ public class CardCharacteristics {
         // String name : just copy reference
         this.name = source.getName();
         // ArrayList<String> type : list of String objects so use copy constructor
-        this.type = new CopyOnWriteArrayList<String>(source.getType());
+        this.type = new CopyOnWriteArraySet<String>(source.getType());
         // CardManaCost manaCost : not sure if a deep copy is needed
         this.manaCost = source.getManaCost();
         // ArrayList<CardColor> cardColor : not sure if a deep copy is needed

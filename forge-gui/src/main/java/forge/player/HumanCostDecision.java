@@ -327,7 +327,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         for (SpellAbilityStackInstance si : game.getStack()) {
             final Card stC = si.getSourceCard();
-            final SpellAbility stSA = si.getSpellAbility().getRootAbility();
+            final SpellAbility stSA = si.getSpellAbility(true).getRootAbility();
             if (stC.isValid(cost.getType().split(";"), ability.getActivatingPlayer(), source) && stSA.isSpell()) {
                 saList.add(stSA);
                 if (stC.isCopiedSpell()) {

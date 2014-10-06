@@ -100,6 +100,8 @@ public class Game implements IGameStateObject {
     private GameOutcome outcome;
     private boolean disableAutoYields;
 
+    private final GameView view = new GameView(); 
+
     @Override
     public void loadState(GameStateDeserializer gsd) {
         gsd.readObject(rules);
@@ -200,6 +202,10 @@ public class Game implements IGameStateObject {
         endOfCombat = new Phase(PhaseType.COMBAT_END);
 
         subscribeToEvents(gameLog.getEventVisitor());
+    }
+
+    public GameView getView() {
+        return view;
     }
 
     /**

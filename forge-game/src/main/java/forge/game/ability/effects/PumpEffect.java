@@ -209,7 +209,7 @@ public class PumpEffect extends SpellAbilityEffect {
             if (defined.equals("ChosenType")) {
                 replaced = host.getChosenType();
             } else if (defined.equals("CardUIDSource")) {
-                replaced = "CardUID_" + String.valueOf(host.getUniqueNumber());
+                replaced = "CardUID_" + String.valueOf(host.getId());
             }
             for (int i = 0; i < keywords.size(); i++) {
                 keywords.set(i, keywords.get(i).replaceAll(defined, replaced));

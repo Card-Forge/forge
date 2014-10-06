@@ -51,10 +51,10 @@ public class SpellAbilityStackInstance implements IIdentifiable {
     // Coming off the Stack would work similarly, except it would just add the
     // full active SI instead of each of the parts
 
-    private int id;
-    private SpellAbility ability = null;
+    private final int id;
+    private final SpellAbility ability;
 
-    private SpellAbilityStackInstance subInstance = null;
+    private final SpellAbilityStackInstance subInstance;
     private Player activator;
 
     // When going to a SubAbility that SA has a Instance Choice object
@@ -73,67 +73,58 @@ public class SpellAbilityStackInstance implements IIdentifiable {
     private int xManaPaid = 0;
 
     // Other Paid things
-    private HashMap<String, List<Card>> paidHash = new HashMap<String, List<Card>>();
+    private final HashMap<String, List<Card>> paidHash;
 
     // Additional info
     // is Kicked, is Buyback
 
     // Triggers
-    private HashMap<String, Object> triggeringObjects = new HashMap<String, Object>();
-    private List<Object> triggerRemembered = new ArrayList<Object>();
+    private final HashMap<String, Object> triggeringObjects;
+    private final List<Object> triggerRemembered;
 
     private final HashMap<String, String> storedSVars = new HashMap<String, String>();
 
     private final List<ZoneType> zonesToOpen;
     private final Map<Player, Object> playersWithValidTargets;
 
-    /**
-     * <p>
-     * Constructor for SpellAbility_StackInstance.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     */
+    private final StackItemView view;
+
     public SpellAbilityStackInstance(final SpellAbility sa) {
         // Base SA info
-        this.id = nextId();
-        this.ability = sa;
-        this.stackDescription = this.ability.getStackDescription();
-        this.activator = sa.getActivatingPlayer();
+        id = nextId();
+        ability = sa;
+        stackDescription = sa.getStackDescription();
+        activator = sa.getActivatingPlayer();
         
         // Payment info
-        this.paidHash = this.ability.getPaidHash();
-        this.ability.resetPaidHash();
-        this.splicedCards = sa.getSplicedCards();
+        paidHash = ability.getPaidHash();
+        ability.resetPaidHash();
+        splicedCards = sa.getSplicedCards();
 
         // TODO getXManaCostPaid should be on the SA, not the Card
-        this.xManaPaid = sa.getHostCard().getXManaCostPaid();
+        xManaPaid = sa.getHostCard().getXManaCostPaid();
 
         // Triggering info
-        this.triggeringObjects = sa.getTriggeringObjects();
-        this.triggerRemembered = sa.getTriggerRemembered();
+        triggeringObjects = sa.getTriggeringObjects();
+        triggerRemembered = sa.getTriggerRemembered();
 
-        final AbilitySub subAb = this.ability.getSubAbility();
-        if (subAb != null) {
-            this.subInstance = new SpellAbilityStackInstance(subAb);
-        }
+        subInstance = ability.getSubAbility() == null ? null : new SpellAbilityStackInstance(ability.getSubAbility());
 
         // Targeting info -- 29/06/11 Moved to after taking care of SubAbilities
         // because otherwise AF_DealDamage SubAbilities that use Defined$
         // Targeted breaks (since it's parents target is reset)
         if (sa.usesTargeting()) {
-            this.tc = ability.getTargets();
-            this.ability.resetTargets();
+            tc = ability.getTargets();
+            ability.resetTargets();
         }
 
-        final Card source = this.ability.getHostCard();
+        final Card source = ability.getHostCard();
 
         // Store SVars and Clear
         for (final String store : Card.getStorableSVars()) {
             final String value = source.getSVar(store);
             if (value.length() > 0) {
-                this.storedSVars.put(store, value);
+                storedSVars.put(store, value);
                 source.setSVar(store, "");
             }
         }
@@ -156,154 +147,107 @@ public class SpellAbilityStackInstance implements IIdentifiable {
                 }
             }
         }
+
+        view = new StackItemView(this);
     }
 
     @Override
     public int getId() {
-        return this.id;
+        return id;
     }
 
-    /**
-     * <p>
-     * getSpellAbility.
-     * </p>
-     * 
-     * @return a {@link forge.game.spellability.SpellAbility} object.
-     */
-    public final SpellAbility getSpellAbility() {
-        this.ability.resetTargets();
-        this.ability.setTargets(tc);
-        this.ability.setActivatingPlayer(activator);
-
-        // Saved sub-SA needs to be reset on the way out
-        if (this.subInstance != null) {
-            this.ability.setSubAbility((AbilitySub) this.subInstance.getSpellAbility());
-        }
-
-        // Set Cost specific things here
-        this.ability.resetPaidHash();
-        this.ability.setPaidHash(this.paidHash);
-        this.ability.setSplicedCards(splicedCards);
-        this.ability.getHostCard().setXManaCostPaid(this.xManaPaid);
-
-        // Triggered
-        this.ability.setAllTriggeringObjects(this.triggeringObjects);
-        this.ability.setTriggerRemembered(this.triggerRemembered);
-
-        // Add SVars back in
-        final Card source = this.ability.getHostCard();
-        for (final String store : this.storedSVars.keySet()) {
-            final String value = this.storedSVars.get(store);
-            if (value.length() > 0) {
-                source.setSVar(store, value);
+    //TODO: See if refresh actually needed for most places this is being called
+    //      Perhaps lets move the refresh logic to a separate function called only when necessary
+    public final SpellAbility getSpellAbility(boolean refresh) {
+        if (refresh) {
+            ability.resetTargets();
+            ability.setTargets(tc);
+            ability.setActivatingPlayer(activator);
+    
+            // Saved sub-SA needs to be reset on the way out
+            if (subInstance != null) {
+                ability.setSubAbility((AbilitySub) subInstance.getSpellAbility(true));
+            }
+    
+            // Set Cost specific things here
+            ability.resetPaidHash();
+            ability.setPaidHash(paidHash);
+            ability.setSplicedCards(splicedCards);
+            ability.getHostCard().setXManaCostPaid(xManaPaid);
+    
+            // Triggered
+            ability.setTriggeringObjects(triggeringObjects);
+            ability.setTriggerRemembered(triggerRemembered);
+    
+            // Add SVars back in
+            final Card source = ability.getHostCard();
+            for (final String store : storedSVars.keySet()) {
+                final String value = storedSVars.get(store);
+                if (value.length() > 0) {
+                    source.setSVar(store, value);
+                }
             }
         }
-
-        return this.ability;
+        return ability;
     }
 
     // A bit of SA shared abilities to restrict conflicts
-    /**
-     * <p>
-     * Getter for the field <code>stackDescription</code>.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
     public final String getStackDescription() {
-        return this.stackDescription;
+        return stackDescription;
     }
 
-    /**
-     * <p>
-     * getHostCard.
-     * </p>
-     * 
-     * @return a {@link forge.game.card.Card} object.
-     */
     public final Card getSourceCard() {
-        return this.ability.getHostCard();
+        return ability.getHostCard();
     }
 
-    /**
-     * <p>
-     * isSpell.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean isSpell() {
-        return this.ability.isSpell();
+        return ability.isSpell();
     }
 
-    /**
-     * <p>
-     * isAbility.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean isAbility() {
-        return this.ability.isAbility();
+        return ability.isAbility();
     }
 
-    /**
-     * <p>
-     * isTrigger.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean isTrigger() {
-        return this.ability.isTrigger();
+        return ability.isTrigger();
     }
 
-    /**
-     * <p>
-     * isStateTrigger.
-     * </p>
-     * 
-     * @param id
-     *            a int.
-     * @return a boolean.
-     */
     public final boolean isStateTrigger(final int id) {
-        return this.ability.getSourceTrigger() == id;
+        return ability.getSourceTrigger() == id;
     }
 
-    /**
-     * Checks if is optional trigger.
-     * 
-     * @return true, if is optional trigger
-     */
     public final boolean isOptionalTrigger() {
-        return this.ability.isOptionalTrigger();
+        return ability.isOptionalTrigger();
     }
 
     public final SpellAbilityStackInstance getSubInstance() {
-        return this.subInstance;
+        return subInstance;
     }
 
     public final TargetChoices getTargetChoices() {
-        return this.tc;
+        return tc;
     }
 
     public final List<ZoneType> getZonesToOpen() {
-        return this.zonesToOpen;
+        return zonesToOpen;
     }
 
     public final Map<Player, Object> getPlayersWithValidTargets() {
-        return this.playersWithValidTargets;
+        return playersWithValidTargets;
     }
 
     public void updateTarget(TargetChoices target) {
         if (target != null) {
-            this.tc = target;
-            this.ability.setTargets(tc);
-            this.stackDescription = this.ability.getStackDescription();
+            tc = target;
+            ability.setTargets(tc);
+            stackDescription = ability.getStackDescription();
+            view.updateTargetCards(this);
+            view.updateTargetPlayers(this);
+            view.updateText(this);
+
             // Run BecomesTargetTrigger
             HashMap<String, Object> runParams = new HashMap<String, Object>();
-            runParams.put("SourceSA", this.ability);
+            runParams.put("SourceSA", ability);
             HashSet<Object> distinctObjects = new HashSet<Object>();
             for (final Object tgt : target.getTargets()) {
                 if (distinctObjects.contains(tgt)) {
@@ -315,7 +259,7 @@ public class SpellAbilityStackInstance implements IIdentifiable {
                     ((Card) tgt).setBecameTargetThisTurn(true);
                 }
                 runParams.put("Target", tgt);
-                this.getSourceCard().getGame().getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
+                getSourceCard().getGame().getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
             }
         }
     }
@@ -347,12 +291,18 @@ public class SpellAbilityStackInstance implements IIdentifiable {
         return activator;
     }
 
-    public void setActivator(Player activator) {
-        this.activator = activator;
+    public void setActivator(Player activator0) {
+        if (activator == activator0) { return; }
+        activator = activator0;
+        view.updateActivator(this);
     }
 
     @Override
     public String toString() {
-        return String.format("%s->%s", getSourceCard(), stackDescription);
-    }    
+        return String.format("%s->%s", getSourceCard(), getStackDescription());
+    }
+
+    public StackItemView getView() {
+        return view;
+    }
 }

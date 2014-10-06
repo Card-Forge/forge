@@ -113,7 +113,7 @@ public class DestroyAi extends SpellAbilityAi {
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        return (c.getShield().isEmpty() && !ComputerUtil.canRegenerate(ai, c));
+                        return (c.getShieldCount() == 0 && !ComputerUtil.canRegenerate(ai, c));
                     }
                 });
             }
@@ -237,7 +237,7 @@ public class DestroyAi extends SpellAbilityAi {
                 preferred = CardLists.filter(preferred, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        return c.getShield().isEmpty();
+                        return c.getShieldCount() == 0;
                     }
                 });
             }

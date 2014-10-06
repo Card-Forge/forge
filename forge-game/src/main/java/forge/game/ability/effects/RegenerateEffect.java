@@ -73,7 +73,7 @@ public class RegenerateEffect extends SpellAbilityEffect {
             		} else if (sa.hasParam("ReplaceCardUID")) { // Debt of Loyalty
             			String def = sa.getParam("ReplaceCardUID");
             			List<Card> replaced = AbilityUtils.getDefinedCards(sourceCard, def, sa);
-            			abString = abString.replace(def, replaced.isEmpty() ? "" : Integer.toString(replaced.get(0).getUniqueNumber()));
+            			abString = abString.replace(def, replaced.isEmpty() ? "" : Integer.toString(replaced.get(0).getId()));
             		}
             		triggerSA = AbilityFactory.getAbility(abString, sourceCard);
             		triggerSA.setActivatingPlayer(sa.getActivatingPlayer());

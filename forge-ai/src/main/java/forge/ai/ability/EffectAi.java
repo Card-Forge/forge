@@ -118,10 +118,11 @@ public class EffectAi extends SpellAbilityAi {
                     return false;
                 }
                 boolean threatened = false;
-                for (final SpellAbilityStackInstance stackSA : game.getStack()) {
-                    if (!stackSA.isSpell()) { continue; }
-                    if (stackSA.getSpellAbility().getApi() == ApiType.DealDamage) {
-                        final SpellAbility saTargeting = stackSA.getSpellAbility().getSATargetingPlayer();
+                for (final SpellAbilityStackInstance stackInst : game.getStack()) {
+                    if (!stackInst.isSpell()) { continue; }
+                    SpellAbility stackSpellAbility = stackInst.getSpellAbility(true);
+                    if (stackSpellAbility.getApi() == ApiType.DealDamage) {
+                        final SpellAbility saTargeting = stackSpellAbility.getSATargetingPlayer();
                         if (saTargeting != null && Iterables.contains(saTargeting.getTargets().getTargetPlayers(), ai)) {
                             threatened = true;
                         }

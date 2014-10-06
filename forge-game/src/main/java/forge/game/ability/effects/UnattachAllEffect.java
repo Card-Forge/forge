@@ -24,11 +24,11 @@ public class UnattachAllEffect extends SpellAbilityEffect {
                 //AbilityFactoryAttach.handleUnattachAura(cardToUnattach, c, gainControl);
             } else if (cardToUnattach.isEquipment()) {
                 if (cardToUnattach.isEquipping() && c.getEquippedBy().contains(cardToUnattach)) {
-                    cardToUnattach.unEquipCard(cardToUnattach.getEquipping().get(0));
+                    cardToUnattach.unEquipCard(cardToUnattach.getEquipping());
                 }
             } else if (cardToUnattach.isFortification()) {
                 if (cardToUnattach.isFortifying() && c.getFortifiedBy().contains(cardToUnattach)) {
-                    cardToUnattach.unFortifyCard(cardToUnattach.getFortifying().get(0));
+                    cardToUnattach.unFortifyCard(cardToUnattach.getFortifying());
                 }
             }
         } else if (o instanceof Player) {

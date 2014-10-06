@@ -31,7 +31,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     boolean mandatory = false;
 
     public WrappedAbility(final Trigger regTrig, final SpellAbility sa0, final Player decider0) {
-        super(regTrig.getHostCard(), ManaCost.ZERO);
+        super(sa0.getHostCard(), ManaCost.ZERO);
         regtrig = regTrig;
         sa = sa0;
         decider = decider0;
@@ -40,7 +40,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     public SpellAbility getWrappedAbility() { 
         return sa;
     }
-
 
     @Override
     public boolean isWrapper() {
@@ -109,8 +108,8 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public void setAllTriggeringObjects(final HashMap<String, Object> triggeredObjects) {
-        sa.setAllTriggeringObjects(triggeredObjects);
+    public void setTriggeringObjects(final HashMap<String, Object> triggeredObjects) {
+        sa.setTriggeringObjects(triggeredObjects);
     }
 
     @Override
@@ -176,11 +175,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     @Override
     public SpellAbilityRestriction getRestrictions() {
         return sa.getRestrictions();
-    }
-
-    @Override
-    public Card getHostCard() {
-        return sa.getHostCard();
     }
 
     @Override

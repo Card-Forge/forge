@@ -678,7 +678,7 @@ public class AttachAi extends SpellAbilityAi {
 
             //don't equip a worse creature
             if (card.isEquipping()) {
-                Card oldTarget = card.getEquipping().get(0);
+                Card oldTarget = card.getEquipping();
                 if (ComputerUtilCard.evaluateCreature(oldTarget) > ComputerUtilCard.evaluateCreature(newTarget)) {
                     return false;
                 }
@@ -990,7 +990,7 @@ public class AttachAi extends SpellAbilityAi {
             return null;
         }
         // Don't fortify if already fortifying
-        if (attachSource.getFortifyingCard() != null && attachSource.getFortifyingCard().getController() == aiPlayer) {
+        if (attachSource.getFortifying() != null && attachSource.getFortifying().getController() == aiPlayer) {
             return null;
         }
 
@@ -1019,14 +1019,14 @@ public class AttachAi extends SpellAbilityAi {
 
         AiController aic = ((PlayerControllerAi)aiPlayer.getController()).getAi();
         if (c != null && attachSource.getType().contains("Equipment") 
-                && attachSource.getEquippingCard() != null 
-                && attachSource.getEquippingCard().getController() == aiPlayer) {
-            if (c.equals(attachSource.getEquippingCard())) {
+                && attachSource.isEquipping()
+                && attachSource.getEquipping().getController() == aiPlayer) {
+            if (c.equals(attachSource.getEquipping())) {
                 // Do not equip if equipping the same card already
                 return null;
             }
 
-            boolean uselessCreature = isUselessCreature(aiPlayer, attachSource.getEquippingCard());
+            boolean uselessCreature = isUselessCreature(aiPlayer, attachSource.getEquipping());
 
             if (aic.getProperty(AiProps.MOVE_EQUIPMENT_TO_BETTER_CREATURES).equals("never")) {
                 // Do not equip other creatures if the AI profile does not allow moving equipment around
@@ -1330,9 +1330,7 @@ public class AttachAi extends SpellAbilityAi {
             return true;
         }
 
-        ArrayList<String> cardTypes = sa.getHostCard().getType();
-
-        if (cardTypes.contains("Equipment") && isUselessCreature(ai, c)) {
+        if (sa.getHostCard().getType().contains("Equipment") && isUselessCreature(ai, c)) {
             // useless to equip a creature that can't attack or block.
             return false;
         }

@@ -271,6 +271,7 @@ forge-game/src/main/java/forge/game/GameAction.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/GameActionUtil.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/GameEndReason.java -text
 forge-game/src/main/java/forge/game/GameEntity.java -text
+forge-game/src/main/java/forge/game/GameEntityView.java -text
 forge-game/src/main/java/forge/game/GameFormat.java -text
 forge-game/src/main/java/forge/game/GameLog.java -text
 forge-game/src/main/java/forge/game/GameLogEntry.java -text
@@ -281,6 +282,7 @@ forge-game/src/main/java/forge/game/GameOutcome.java -text
 forge-game/src/main/java/forge/game/GameRules.java -text
 forge-game/src/main/java/forge/game/GameStage.java -text
 forge-game/src/main/java/forge/game/GameType.java -text
+forge-game/src/main/java/forge/game/GameView.java -text
 forge-game/src/main/java/forge/game/GlobalRuleChange.java -text
 forge-game/src/main/java/forge/game/IHasGameType.java -text
 forge-game/src/main/java/forge/game/IIdentifiable.java -text
@@ -441,12 +443,14 @@ forge-game/src/main/java/forge/game/card/CardPredicates.java svneol=native#text/
 forge-game/src/main/java/forge/game/card/CardShields.java -text
 forge-game/src/main/java/forge/game/card/CardType.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardUtil.java svneol=native#text/plain
+forge-game/src/main/java/forge/game/card/CardView.java -text
 forge-game/src/main/java/forge/game/card/CounterType.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/package-info.java -text
 forge-game/src/main/java/forge/game/combat/AttackingBand.java -text
 forge-game/src/main/java/forge/game/combat/Combat.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/combat/CombatLki.java -text
 forge-game/src/main/java/forge/game/combat/CombatUtil.java svneol=native#text/plain
+forge-game/src/main/java/forge/game/combat/CombatView.java -text
 forge-game/src/main/java/forge/game/cost/Cost.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/cost/CostAddMana.java -text
 forge-game/src/main/java/forge/game/cost/CostChooseCreatureType.java -text
@@ -550,6 +554,7 @@ forge-game/src/main/java/forge/game/player/PlayerActionConfirmMode.java -text
 forge-game/src/main/java/forge/game/player/PlayerController.java -text
 forge-game/src/main/java/forge/game/player/PlayerOutcome.java -text
 forge-game/src/main/java/forge/game/player/PlayerStatistics.java -text
+forge-game/src/main/java/forge/game/player/PlayerView.java -text
 forge-game/src/main/java/forge/game/player/RegisteredPlayer.java -text
 forge-game/src/main/java/forge/game/player/package-info.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/replacement/ReplaceAddCounter.java -text
@@ -585,7 +590,9 @@ forge-game/src/main/java/forge/game/spellability/SpellAbilityCondition.java svne
 forge-game/src/main/java/forge/game/spellability/SpellAbilityRestriction.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/spellability/SpellAbilityStackInstance.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/spellability/SpellAbilityVariables.java svneol=native#text/plain
+forge-game/src/main/java/forge/game/spellability/SpellAbilityView.java -text
 forge-game/src/main/java/forge/game/spellability/SpellPermanent.java svneol=native#text/plain
+forge-game/src/main/java/forge/game/spellability/StackItemView.java -text
 forge-game/src/main/java/forge/game/spellability/TargetChoices.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/spellability/TargetRestrictions.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/spellability/package-info.java svneol=native#text/plain
@@ -663,6 +670,10 @@ forge-game/src/main/java/forge/game/zone/PlayerZoneBattlefield.java svneol=nativ
 forge-game/src/main/java/forge/game/zone/Zone.java -text
 forge-game/src/main/java/forge/game/zone/ZoneType.java -text
 forge-game/src/main/java/forge/game/zone/package-info.java svneol=native#text/plain
+forge-game/src/main/java/forge/trackable/TrackableCollection.java -text
+forge-game/src/main/java/forge/trackable/TrackableIndex.java -text
+forge-game/src/main/java/forge/trackable/TrackableObject.java -text
+forge-game/src/main/java/forge/trackable/TrackableProperty.java -text
 forge-game/src/main/java/forge/util/Expressions.java -text
 forge-game/src/main/java/forge/util/MessageUtil.java -text
 forge-gui-android/.classpath -text

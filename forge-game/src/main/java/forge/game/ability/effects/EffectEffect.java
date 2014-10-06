@@ -189,8 +189,8 @@ public class EffectEffect extends SpellAbilityEffect {
         }
 
         // Set Chosen Color(s)
-        if (!hostCard.getChosenColor().isEmpty()) {
-            eff.setChosenColor(hostCard.getChosenColor());
+        if (!hostCard.getChosenColors().isEmpty()) {
+            eff.setChosenColors(hostCard.getChosenColors());
         }
 
         // Set Chosen name

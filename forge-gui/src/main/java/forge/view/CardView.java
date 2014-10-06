@@ -3,6 +3,7 @@ package forge.view;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -751,7 +752,7 @@ public class CardView extends GameEntityView {
         private String name;
         private ColorSet colors;
         private String imageKey;
-        private List<String> type;
+        private Set<String> type;
         private ManaCost manaCost;
         private int power, toughness, loyalty;
         private String text;
@@ -768,7 +769,7 @@ public class CardView extends GameEntityView {
             this.name = "";
             this.colors = ColorSet.getNullColor();
             this.imageKey = ImageKeys.HIDDEN_CARD;
-            this.type = Collections.emptyList();
+            this.type = Collections.emptySet();
             this.manaCost = ManaCost.NO_COST;
             this.power = 0;
             this.toughness = 0;
@@ -837,15 +838,15 @@ public class CardView extends GameEntityView {
         /**
          * @return the type
          */
-        public List<String> getType() {
+        public Set<String> getType() {
             return type;
         }
 
         /**
          * @param type the type to set
          */
-        public void setType(final List<String> type) {
-            this.type = Collections.unmodifiableList(type);
+        public void setType(final Set<String> type) {
+            this.type = type;
         }
 
         /**

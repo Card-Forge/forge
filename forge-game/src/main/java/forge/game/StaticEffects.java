@@ -146,7 +146,7 @@ public class StaticEffects implements IGameStateObject {
         if (params.containsKey("AddColor")) {
             final String colors = params.get("AddColor");
             if (colors.equals("ChosenColor")) {
-                addColors = CardUtil.getShortColorsString(se.getSource().getChosenColor());
+                addColors = CardUtil.getShortColorsString(se.getSource().getChosenColors());
             } else {
                 addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(colors.split(" & "))));
             }
@@ -155,7 +155,7 @@ public class StaticEffects implements IGameStateObject {
         if (params.containsKey("SetColor")) {
             final String colors = params.get("SetColor");
             if (colors.equals("ChosenColor")) {
-                addColors = CardUtil.getShortColorsString(se.getSource().getChosenColor());
+                addColors = CardUtil.getShortColorsString(se.getSource().getChosenColors());
             } else {
                 addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(colors.split(" & "))));
             }

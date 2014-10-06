@@ -1196,7 +1196,7 @@ public class ComputerUtil {
                 for (StaticAbility stAb : c.getStaticAbilities()) {
                     Map<String, String> params = stAb.getMapParams();
                     if ("Continuous".equals(params.get("Mode")) && params.containsKey("AddKeyword")
-                            && params.get("AddKeyword").contains("Haste") && c.getEquippingCard() == null) {
+                            && params.get("AddKeyword").contains("Haste") && c.getEquipping() == null) {
                         return true;
                     }
                 }
@@ -1376,7 +1376,7 @@ public class ComputerUtil {
                     }
 
                     // already regenerated
-                    if (!c.getShield().isEmpty()) {
+                    if (c.getShieldCount() > 0) {
                         continue;
                     }
 
@@ -1431,13 +1431,13 @@ public class ComputerUtil {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     final boolean canRemove = (c.getNetDefense() <= dmg)
-                            || (!c.hasKeyword("Indestructible") && c.getShield().isEmpty() && (dmg >= ComputerUtilCombat.getDamageToKill(c)));
+                            || (!c.hasKeyword("Indestructible") && c.getShieldCount() == 0 && (dmg >= ComputerUtilCombat.getDamageToKill(c)));
                     if (!canRemove) {
                         continue;
                     }
                     if (saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll ) {
                         final boolean cantSave = c.getNetDefense() + defense <= dmg
-                                || (!c.hasKeyword("Indestructible") && c.getShield().isEmpty() && !grantIndestructible 
+                                || (!c.hasKeyword("Indestructible") && c.getShieldCount() == 0 && !grantIndestructible 
                                         && (dmg >= defense + ComputerUtilCombat.getDamageToKill(c)));
                         if (cantSave && (tgt == null || !grantShroud)) {
                             continue;
@@ -1473,7 +1473,7 @@ public class ComputerUtil {
                     }
 
                     // already regenerated
-                    if (!c.getShield().isEmpty()) {
+                    if (c.getShieldCount() > 0) {
                         continue;
                     }
 

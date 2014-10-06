@@ -191,7 +191,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         // Add all Frozen Abilities onto the stack
         while (!this.frozenStack.isEmpty()) {
-            final SpellAbility sa = this.frozenStack.pop().getSpellAbility();
+            final SpellAbility sa = this.frozenStack.pop().getSpellAbility(true);
             this.add(sa);
         }
         // Add all waiting triggers onto the stack
@@ -427,15 +427,15 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams.put("Cost", sp.getPayCosts());
             runParams.put("Player", sp.getHostCard().getController());
             runParams.put("Activator", sp.getActivatingPlayer());
-            runParams.put("CastSA", si.getSpellAbility());
-            runParams.put("CastSACMC", si.getSpellAbility().getHostCard().getCMC());
+            runParams.put("CastSA", si.getSpellAbility(true));
+            runParams.put("CastSACMC", si.getSpellAbility(true).getHostCard().getCMC());
             runParams.put("CurrentStormCount", game.getStack().getCardsCastThisTurn().size());
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
 
             // Run SpellCast triggers
             if (sp.isSpell()) {
                 game.getTriggerHandler().runTrigger(TriggerType.SpellCast, runParams, true);
-                this.executeCastCommand(si.getSpellAbility().getHostCard());
+                this.executeCastCommand(si.getSpellAbility(true).getHostCard());
             }
 
             // Run AbilityCast triggers
@@ -458,7 +458,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams = new HashMap<String, Object>();
             SpellAbility s = sp;
             if (si != null) {
-                s = si.getSpellAbility();
+                s = si.getSpellAbility(true);
             }
             runParams.put("SourceSA", s);
             HashSet<Object> distinctObjects = new HashSet<Object>();
@@ -780,13 +780,13 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     public final SpellAbility peekAbility() {
-        return this.stack.peekFirst().getSpellAbility();
+        return this.stack.peekFirst().getSpellAbility(true);
     }
 
     public final void remove(final SpellAbilityStackInstance si) {
         this.stack.remove(si);
         this.frozenStack.remove(si);
-        game.fireEvent(new GameEventSpellRemovedFromStack(si.getSpellAbility()));
+        game.fireEvent(new GameEventSpellRemovedFromStack(si.getSpellAbility(true)));
     }
 
     public final SpellAbilityStackInstance getInstanceFromSpellAbility(final SpellAbility sa) {

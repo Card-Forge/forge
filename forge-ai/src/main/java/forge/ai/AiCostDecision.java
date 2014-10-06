@@ -172,7 +172,7 @@ public class AiCostDecision extends CostDecisionMakerBase implements ICostVisito
         }
         List<SpellAbility> chosen = new ArrayList<SpellAbility>();
         for (SpellAbilityStackInstance si :source.getGame().getStack()) {
-            SpellAbility sp = si.getSpellAbility().getRootAbility();
+            SpellAbility sp = si.getSpellAbility(true).getRootAbility();
             if (si.getSourceCard().isValid(cost.getType().split(";"), source.getController(), source)) {
                 chosen.add(sp);
             }

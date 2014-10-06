@@ -111,7 +111,7 @@ public class CostUnattach extends CostPartWithList {
      */
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard) {
-        targetCard.unEquipCard(targetCard.getEquipping().get(0));
+        targetCard.unEquipCard(targetCard.getEquipping());
         return targetCard;
     }
 

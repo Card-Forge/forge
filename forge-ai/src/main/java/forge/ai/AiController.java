@@ -27,7 +27,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -1147,11 +1146,14 @@ public class AiController {
                 List<Card> list = player.getCardsIn(ZoneType.Battlefield);
                 list = CardLists.filter(list, CardPredicates.Presets.PLANEWALKERS);
 
-                List<String> type = card.getType();
-                final String subtype = type.get(type.size() - 1);
-                final List<Card> cl = CardLists.getType(list, subtype);
-                if (!cl.isEmpty()) {
-                    return AiPlayDecision.WouldDestroyOtherPlaneswalker;
+                for (String type : card.getType()) { //determine planewalker subtype
+                    if (!type.equals("Planeswalker")) {
+                        final List<Card> cl = CardLists.getType(list, type);
+                        if (!cl.isEmpty()) {
+                            return AiPlayDecision.WouldDestroyOtherPlaneswalker;
+                        }
+                        break;
+                    }
                 }
             }
             if (card.isType("World")) {

@@ -106,12 +106,12 @@ public class CloneEffect extends SpellAbilityEffect {
                 tgtCard.clearStates(CardCharacteristicName.Cloner);
             }
             // add "Cloner" state to clone
-            tgtCard.addAlternateState(CardCharacteristicName.Cloner);
+            tgtCard.addAlternateState(CardCharacteristicName.Cloner, false);
             tgtCard.switchStates(CardCharacteristicName.Original, CardCharacteristicName.Cloner);
             tgtCard.setState(CardCharacteristicName.Original);
         } else {
             //copy Original state to Cloned
-            tgtCard.addAlternateState(CardCharacteristicName.Cloned);
+            tgtCard.addAlternateState(CardCharacteristicName.Cloned, false);
             tgtCard.switchStates(CardCharacteristicName.Original, CardCharacteristicName.Cloned);
             if (tgtCard.isFlipCard()) {
                 tgtCard.setState(CardCharacteristicName.Original);
@@ -285,7 +285,7 @@ public class CloneEffect extends SpellAbilityEffect {
         if (sa.hasParam("Colors")) {
             final String colors = sa.getParam("Colors");
             if (colors.equals("ChosenColor")) {
-                shortColors = CardUtil.getShortColorsString(tgtCard.getChosenColor());
+                shortColors = CardUtil.getShortColorsString(tgtCard.getChosenColors());
             } else {
                 shortColors = CardUtil.getShortColorsString(Arrays.asList(colors.split(",")));
             }

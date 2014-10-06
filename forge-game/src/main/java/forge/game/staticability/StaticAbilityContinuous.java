@@ -159,7 +159,7 @@ public class StaticAbilityContinuous {
 
         if (params.containsKey("AddKeyword")) {
             addKeywords = params.get("AddKeyword").split(" & ");
-            final List<String> chosencolors = hostCard.getChosenColor();
+            final List<String> chosencolors = hostCard.getChosenColors();
             for (final String color : chosencolors) {
                 for (int w = 0; w < addKeywords.length; w++) {
                     addKeywords[w] = addKeywords[w].replaceAll("ChosenColor", color.substring(0, 1).toUpperCase().concat(color.substring(1, color.length())));
@@ -170,7 +170,7 @@ public class StaticAbilityContinuous {
                 addKeywords[w] = addKeywords[w].replaceAll("ChosenType", chosenType);
             }
             final String chosenName = hostCard.getNamedCard();
-            final String hostCardUID = Integer.toString(hostCard.getUniqueNumber()); // Protection with "doesn't remove" effect
+            final String hostCardUID = Integer.toString(hostCard.getId()); // Protection with "doesn't remove" effect
             for (int w = 0; w < addKeywords.length; w++) {
                 if (addKeywords[w].startsWith("Protection:")) {
                     addKeywords[w] = addKeywords[w].replaceAll("ChosenName", "Card.named" + chosenName).replace("HostCardUID", hostCardUID);
@@ -223,7 +223,7 @@ public class StaticAbilityContinuous {
                 addTypes[0] = chosenType;
                 se.setChosenType(chosenType);
             } else if (addTypes[0].equals("ImprintedCreatureType")) {
-                final ArrayList<String> imprint = hostCard.getImprinted().get(0).getType();
+                final Set<String> imprint = hostCard.getImprinted().get(0).getType();
                 ArrayList<String> imprinted = new ArrayList<String>();
                 for (String t : imprint) {
                     if (CardType.isACreatureType(t) || t.equals("AllCreatureTypes")) {
@@ -262,7 +262,7 @@ public class StaticAbilityContinuous {
         if (params.containsKey("AddColor")) {
             final String colors = params.get("AddColor");
             if (colors.equals("ChosenColor")) {
-                addColors = CardUtil.getShortColorsString(hostCard.getChosenColor());
+                addColors = CardUtil.getShortColorsString(hostCard.getChosenColors());
             } else {
                 addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(colors.split(
                     " & "))));
@@ -272,7 +272,7 @@ public class StaticAbilityContinuous {
         if (params.containsKey("SetColor")) {
             final String colors = params.get("SetColor");
             if (colors.equals("ChosenColor")) {
-                addColors = CardUtil.getShortColorsString(hostCard.getChosenColor());
+                addColors = CardUtil.getShortColorsString(hostCard.getChosenColors());
             } else {
                 addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(
                         colors.split(" & "))));
@@ -381,8 +381,8 @@ public class StaticAbilityContinuous {
             if (changeColorWordsTo != null) {
                 final byte color;
                 if (changeColorWordsTo.equals("ChosenColor")) {
-                    if (hostCard.getChosenColor().size() > 0) {
-                        color = MagicColor.fromName(hostCard.getChosenColor().get(0));
+                    if (hostCard.getChosenColors().size() > 0) {
+                        color = MagicColor.fromName(hostCard.getChosenColors().get(0));
                     } else {
                         color = 0;
                     }
@@ -653,7 +653,7 @@ public class StaticAbilityContinuous {
             } else if (params.get("Affected").contains("EnchantedBy")) {
                 affectedCards = Lists.newArrayList(hostCard.getEnchantingCard());
             } else if (params.get("Affected").contains("EquippedBy")) {
-                affectedCards = Lists.newArrayList(hostCard.getEquippingCard());
+                affectedCards = Lists.newArrayList(hostCard.getEquipping());
             } else if (params.get("Affected").equals("EffectSource")) {
                 affectedCards = new ArrayList<Card>(AbilityUtils.getDefinedCards(hostCard, params.get("Affected"), null));
                 return affectedCards;

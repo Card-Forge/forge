@@ -634,7 +634,7 @@ public class PlayerControllerAi extends PlayerController {
         String choice = choices.get(0);
         if (game.stack.size() > 1) {
             for (SpellAbilityStackInstance si : game.getStack()) {
-                SpellAbility spell = si.getSpellAbility();
+                SpellAbility spell = si.getSpellAbility(true);
                 if (sa != spell) {
                     String s = ProtectAi.toProtectFrom(spell.getHostCard(), sa);
                     if (s != null) {
@@ -786,7 +786,7 @@ public class PlayerControllerAi extends PlayerController {
 
 	@Override
 	public CardShields chooseRegenerationShield(Card c) {
-		return Iterables.getFirst(c.getShield(), null);
+		return Iterables.getFirst(c.getShields(), null);
 	}
 
     @Override

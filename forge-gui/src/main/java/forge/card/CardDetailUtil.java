@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -167,7 +168,7 @@ public class CardDetailUtil {
     }
 
     public static String formatCardType(final CardStateView card) {
-        final List<String> list = card.getType();
+        final Set<String> list = card.getType();
         final StringBuilder sb = new StringBuilder();
     
         final List<String> superTypes = new ArrayList<String>();

@@ -296,7 +296,7 @@ public class TokenAi extends SpellAbilityAi {
         for (int i = 0; i < substitutedColors.length; i++) {
             if (substitutedColors[i].equals("ChosenColor")) {
                 // this currently only supports 1 chosen color
-                substitutedColors[i] = host.getChosenColor().get(0);
+                substitutedColors[i] = host.getChosenColors().get(0);
             }
         }
         String colorDesc = "";

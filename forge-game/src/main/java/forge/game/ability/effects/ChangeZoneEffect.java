@@ -471,14 +471,14 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                                 tgtC.enchantEntity(attachedTo);
                             } else if (tgtC.isEquipment()) { //Equipment
                                 if (tgtC.isEquipping()) {
-                                    final Card oldEquiped = tgtC.getEquippingCard();
+                                    final Card oldEquiped = tgtC.getEquipping();
                                     if ( null != oldEquiped )
                                         tgtC.unEquipCard(oldEquiped);
                                 }
                                 tgtC.equipCard(attachedTo);
                             } else { // fortification
                                 if (tgtC.isFortifying()) {
-                                    final Card oldFortified = tgtC.getFortifyingCard();
+                                    final Card oldFortified = tgtC.getFortifying();
                                     if( oldFortified != null )
                                         tgtC.unFortifyCard(oldFortified);
                                 }
@@ -856,7 +856,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                         else if (c.isEquipment()) { //Equipment
                             if (c.isEquipping()) {
-                                final Card oldEquiped = c.getEquippingCard();
+                                final Card oldEquiped = c.getEquipping();
                                 if ( null != oldEquiped )
                                     c.unEquipCard(oldEquiped);
                             }
@@ -864,7 +864,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                         else {
                             if (c.isFortifying()) {
-                                final Card oldFortified = c.getFortifyingCard();
+                                final Card oldFortified = c.getFortifying();
                                 if ( null != oldFortified )
                                     c.unFortifyCard(oldFortified);
                             }

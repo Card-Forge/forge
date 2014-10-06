@@ -190,7 +190,7 @@ public class TriggerHandler implements IGameStateObject {
 
         while(itr.hasNext()) {
             t = (Trigger)itr.next();
-            if (c.getUniqueNumber() == t.getHostCard().getUniqueNumber() && t.isIntrinsic()) {
+            if (c.getId() == t.getHostCard().getId() && t.isIntrinsic()) {
                 toBeRemoved.add(t);
             }
         }
@@ -420,7 +420,7 @@ public class TriggerHandler implements IGameStateObject {
         Card host = regtrig.getHostCard();
         Card trigCard = regtrig.getRunParams().containsKey("Card") ? (Card)regtrig.getRunParams().get("Card") : null;
 
-        if (trigCard != null && (host.getUniqueNumber() == trigCard.getUniqueNumber())) {
+        if (trigCard != null && (host.getId() == trigCard.getId())) {
             host = trigCard;
         } else {
             host = game.getCardState(regtrig.getHostCard());
@@ -445,7 +445,7 @@ public class TriggerHandler implements IGameStateObject {
         regtrig.setTriggeringObjects(sa);
         sa.setTriggerRemembered(regtrig.getTriggerRemembered());
         if (regtrig.getStoredTriggeredObjects() != null) {
-            sa.setAllTriggeringObjects(regtrig.getStoredTriggeredObjects());
+            sa.setTriggeringObjects(regtrig.getStoredTriggeredObjects());
         }
         if (sa.getActivatingPlayer() == null) { // overriding delayed trigger should have set activator
             sa.setActivatingPlayer(host.getController());

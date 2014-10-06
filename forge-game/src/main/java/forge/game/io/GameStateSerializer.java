@@ -58,7 +58,7 @@ public class GameStateSerializer {
     public void write(Card card) {
         if (card == null) { return; }
 
-        int key = card.getUniqueNumber();
+        int key = card.getId();
         cards.put(key, card);
         write(key); //only write info for each card once at end of file
     }

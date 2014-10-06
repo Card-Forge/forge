@@ -736,7 +736,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     for (Card attacker : attackers) {
                         List<Card> blockers = currCombat.getBlockers(attacker);
                         // Save my attacker by bouncing a blocker
-                        if (attacker.getController().equals(ai) && attacker.getShield().isEmpty() 
+                        if (attacker.getController().equals(ai) && attacker.getShieldCount() == 0
                         		&& ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, currCombat) 
                                 && !currCombat.getBlockers(attacker).isEmpty()) {
                             ComputerUtilCard.sortByEvaluateCreature(blockers);
@@ -799,7 +799,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     ComputerUtilCard.sortByEvaluateCreature(combatants);
 
                     for (final Card c : combatants) {
-                        if (c.getShield().isEmpty() && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) && c.getOwner() == ai && !c.isToken()) {
+                        if (c.getShieldCount() == 0 && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) && c.getOwner() == ai && !c.isToken()) {
                             sa.getTargets().add(c);
                             return true;
                         }

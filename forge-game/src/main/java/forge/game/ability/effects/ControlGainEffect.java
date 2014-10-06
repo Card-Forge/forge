@@ -37,7 +37,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
         	for (final Card c : getDefinedCards(sa)) {
         	    sb.append(" ");
         	    if (c.isFaceDown()) {
-        	        sb.append("Face-down creature (").append(c.getUniqueNumber()).append(')');
+        	        sb.append("Face-down creature (").append(c.getId()).append(')');
         	    } else {
         	        sb.append(c);
         	    }

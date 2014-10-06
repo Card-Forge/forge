@@ -50,21 +50,21 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
             // Redirect rules read 'you MAY choose new targets' ... okay!
             // TODO: Don't even ask to change targets, if the SA and subs don't actually have targets
             boolean isOptional = sa.hasParam("Optional");
-            if( isOptional && !chooser.getController().confirmAction(sa, null, "Do you want to change targets of " + tgtSA.getHostCard() + "?"))
+            if (isOptional && !chooser.getController().confirmAction(sa, null, "Do you want to change targets of " + tgtSA.getHostCard() + "?")) {
                  continue;
-
-            if( changesOneTarget ) {
+            }
+            if (changesOneTarget) {
                 // 1. choose a target of target spell
                 List<Pair<SpellAbilityStackInstance, GameObject>> allTargets = new ArrayList<>();
                 while(changingTgtSI != null) {
-                    SpellAbility changedSa = changingTgtSI.getSpellAbility(); 
-                    if(changedSa.usesTargeting()) {
+                    SpellAbility changedSa = changingTgtSI.getSpellAbility(true); 
+                    if (changedSa.usesTargeting()) {
                         for(GameObject it : changedSa.getTargets().getTargets())
                             allTargets.add(ImmutablePair.of(changingTgtSI, it));
                     }
                     changingTgtSI = changingTgtSI.getSubInstance();
                 }
-                if( allTargets.isEmpty() ) {
+                if (allTargets.isEmpty()) {
                     // is it an error or not?
                     System.err.println("Player managed to target a spell without targets with Spellskite's ability.");
                     return;
@@ -80,28 +80,33 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                 replaceIn.updateTarget(newTargetBlock);
                 // 3. test if updated choices would be correct.
                 GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa), null);
-                if(replaceIn.getSpellAbility().canTarget(newTarget)) {
+                if (replaceIn.getSpellAbility(true).canTarget(newTarget)) {
                     newTargetBlock.add(newTarget);
                     replaceIn.updateTarget(newTargetBlock);
-                } else
+                }
+                else {
                     replaceIn.updateTarget(oldTargetBlock);
-            } else {
+                }
+            }
+            else {
                 while(changingTgtSI != null) {
-                    SpellAbility changingTgtSA = changingTgtSI.getSpellAbility();
+                    SpellAbility changingTgtSA = changingTgtSI.getSpellAbility(true);
                     if (sa.hasParam("RandomTarget")){
                         changingTgtSA.resetTargets();
                         List<GameEntity> candidates = changingTgtSA.getTargetRestrictions().getAllCandidates(changingTgtSA, true);
                         GameEntity choice = Aggregates.random(candidates);
                         changingTgtSA.getTargets().add(choice);
                         changingTgtSI.updateTarget(changingTgtSA.getTargets());
-                    } else if (sa.hasParam("DefinedMagnet")){
+                    }
+                    else if (sa.hasParam("DefinedMagnet")){
                         GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa, "DefinedMagnet"), null);
-                        if(changingTgtSA.canTarget(newTarget)) {
+                        if (changingTgtSA.canTarget(newTarget)) {
                             changingTgtSA.resetTargets();
                             changingTgtSA.getTargets().add(newTarget);
                             changingTgtSI.updateTarget(changingTgtSA.getTargets());
                         }
-                    } else {
+                    }
+                    else {
                         // Update targets, with a potential new target
                         TargetChoices newTarget = sa.getActivatingPlayer().getController().chooseNewTargetsFor(changingTgtSA);
                         if (null != newTarget) {

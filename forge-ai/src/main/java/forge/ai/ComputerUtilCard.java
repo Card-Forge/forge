@@ -784,9 +784,7 @@ public class ComputerUtilCard {
         final Map<String, Integer> map = new HashMap<String, Integer>();
     
         for (final Card c : list) {
-            final ArrayList<String> typeList = c.getType();
-    
-            for (final String var : typeList) {
+            for (final String var : c.getType()) {
                 if (CardType.isACreatureType(var)) {
                     if (!map.containsKey(var)) {
                         map.put(var, 1);
@@ -987,7 +985,7 @@ public class ComputerUtilCard {
             Combat currCombat = game.getCombat();
             if (currCombat != null && !currCombat.getAllBlockers().isEmpty() && currCombat.getAllBlockers().contains(c)) {
                 for (Card attacker : currCombat.getAttackersBlockedBy(c)) {
-                    if (attacker.getShield().isEmpty() && ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, currCombat)) {
+                    if (attacker.getShieldCount() == 0 && ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, currCombat)) {
                         List<Card> blockers = currCombat.getBlockers(attacker);
                         ComputerUtilCard.sortByEvaluateCreature(blockers);
                         Combat combat = new Combat(ai);

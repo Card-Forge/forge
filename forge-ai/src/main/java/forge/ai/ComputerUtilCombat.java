@@ -1978,7 +1978,7 @@ public class ComputerUtilCombat {
             final boolean noPrevention) {
         final int killDamage = ComputerUtilCombat.getDamageToKill(c);
 
-        if (c.hasKeyword("Indestructible") || !c.getShield().isEmpty()) {
+        if (c.hasKeyword("Indestructible") || c.getShieldCount() > 0) {
             if (!(source.hasKeyword("Wither") || source.hasKeyword("Infect"))) {
                 return maxDamage + 1;
             }
