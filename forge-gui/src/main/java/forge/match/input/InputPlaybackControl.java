@@ -3,7 +3,6 @@ package forge.match.input;
 import forge.control.FControlGamePlayback;
 import forge.game.Game;
 import forge.game.phase.PhaseHandler;
-import forge.interfaces.IGuiBase;
 import forge.match.MatchUtil;
 import forge.view.LocalGameView;
 import forge.view.PlayerView;
@@ -16,12 +15,10 @@ public class InputPlaybackControl extends InputSyncronizedBase implements InputS
     private boolean isPaused = false;
     private boolean isFast = false;
 
-    private final IGuiBase gui;
     private final Game game;
-    public InputPlaybackControl(final IGuiBase gui, final Game game, final FControlGamePlayback fControlGamePlayback) {
+    public InputPlaybackControl(final Game game0, final FControlGamePlayback fControlGamePlayback) {
         super(null);
-        this.gui = gui;
-        this.game = game;
+        game = game0;
         control = fControlGamePlayback;
         setPause(false);
     }
@@ -33,10 +30,6 @@ public class InputPlaybackControl extends InputSyncronizedBase implements InputS
     @Override
     public PlayerView getOwner() {
         return getGameView().getLocalPlayerView();
-    }
-    @Override
-    public IGuiBase getGui() {
-        return gui;
     }
 
     /* (non-Javadoc)

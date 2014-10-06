@@ -85,7 +85,6 @@ public class InputQueue extends Observable {
             MatchUtil.setCurrentPlayer(MatchUtil.players.getKey(input.getOwner().getId()));
         }
         inputStack.push(input);
-        inputLock.setGui(input.getGui());
         InputBase.waitForOtherPlayer();
         syncPoint();
         updateObservers();

@@ -121,7 +121,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
         }
 
         final CardView cView = getController().getCardView(c0);
-        if (isSerumPowder && SGuiDialog.confirm(getGui(), cView, "Use " + cView + "'s ability?")) {
+        if (isSerumPowder && SGuiDialog.confirm(cView, "Use " + cView + "'s ability?")) {
             cardSelectLocked = true;
             ThreadUtil.invokeInGameThread(new Runnable() {
                 public void run() {

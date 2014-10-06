@@ -21,7 +21,6 @@ import java.util.List;
 
 import javax.swing.SwingConstants;
 
-import forge.GuiBase;
 import forge.assets.FSkinProp;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -65,7 +64,7 @@ public class QuestWinLose extends ControlWinLose {
     public QuestWinLose(final ViewWinLose view0, final IGameView game0) {
         super(view0, game0);
         view = view0;
-        controller = new QuestWinLoseController(game0, GuiBase.getInterface()) {
+        controller = new QuestWinLoseController(game0) {
             @Override
             protected void showRewards(Runnable runnable) {
                 runnable.run(); //just run on GUI thread

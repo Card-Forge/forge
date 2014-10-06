@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.FThreads;
 import forge.Graphics;
-import forge.GuiBase;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
@@ -27,7 +26,7 @@ public class LoadingOverlay extends FOverlay {
         ThreadUtil.invokeInGameThread(new Runnable() {
             @Override
             public void run() {
-                FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
+                FThreads.invokeInEdtLater(new Runnable() {
                     @Override
                     public void run() {
                         runnable.run();

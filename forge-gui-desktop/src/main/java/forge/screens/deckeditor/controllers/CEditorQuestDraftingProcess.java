@@ -94,7 +94,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
     }
 
     /**
-     * Show gui.
+     * Show GuiBase.getInterface().
      * 
      * @param inBoosterDraft
      *            the in_booster draft

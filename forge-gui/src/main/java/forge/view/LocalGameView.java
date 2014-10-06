@@ -28,31 +28,24 @@ import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
-import forge.interfaces.IGuiBase;
 import forge.match.MatchUtil;
 import forge.match.input.InputProxy;
 import forge.match.input.InputQueue;
 
 public abstract class LocalGameView implements IGameView {
     protected final Game game;
-    protected final IGuiBase gui;
     protected final InputQueue inputQueue;
     protected final InputProxy inputProxy;
     private PlayerView localPlayerView;
 
-    public LocalGameView(IGuiBase gui0, Game game0) {
+    public LocalGameView(Game game0) {
         game = game0;
-        gui = gui0;
         inputProxy = new InputProxy(this);
         inputQueue = new InputQueue(game, inputProxy);
     }
 
     public final Game getGame() {
         return game;
-    }
-
-    public final IGuiBase getGui() {
-        return gui;
     }
 
     public final InputQueue getInputQueue() {

@@ -1,7 +1,6 @@
 package forge.screens.match.views;
 
 import forge.FThreads;
-import forge.GuiBase;
 import forge.view.PlayerView;
 
 public class VFlashbackZone extends VCardDisplayArea {
@@ -13,7 +12,7 @@ public class VFlashbackZone extends VCardDisplayArea {
 
     @Override
     public void update() {
-        FThreads.invokeInEdtNowOrLater(GuiBase.getInterface(), updateRoutine);
+        FThreads.invokeInEdtNowOrLater(updateRoutine);
     }
 
     private final Runnable updateRoutine = new Runnable() {

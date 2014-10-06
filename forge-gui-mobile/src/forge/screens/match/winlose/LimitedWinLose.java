@@ -17,7 +17,6 @@ package forge.screens.match.winlose;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import forge.GuiBase;
 import forge.limited.LimitedWinLoseController;
 import forge.view.IGameView;
 
@@ -36,7 +35,7 @@ public class LimitedWinLose extends ControlWinLose {
      */
     public LimitedWinLose(final ViewWinLose view0, IGameView lastGame) {
         super(view0, lastGame);
-        controller = new LimitedWinLoseController(view0, lastGame, GuiBase.getInterface()) {
+        controller = new LimitedWinLoseController(view0, lastGame) {
             @Override
             protected void showOutcome(Runnable runnable) {
                 //invoke reward logic in background thread so dialogs can be shown

@@ -61,7 +61,7 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
                 }
             }
 
-            CounterType toAdd = choices.size() == 1 ? choices.get(0) : SGuiChoose.one(getGui(), "Select counter type", choices);
+            CounterType toAdd = choices.size() == 1 ? choices.get(0) : SGuiChoose.one("Select counter type", choices);
             chosenCounters.put(card, toAdd);
         }
 

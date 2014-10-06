@@ -9,7 +9,6 @@ import com.badlogic.gdx.math.Matrix4;
 
 import forge.FThreads;
 import forge.Graphics;
-import forge.GuiBase;
 
 //Special graphics object for rendering to a texture
 public abstract class FBufferedImage extends FImageComplex {
@@ -77,7 +76,7 @@ public abstract class FBufferedImage extends FImageComplex {
         final FrameBuffer fb = frameBuffer;
         if (fb != null) {
             frameBuffer = null;
-            FThreads.invokeInEdtNowOrLater(GuiBase.getInterface(), new Runnable() {
+            FThreads.invokeInEdtNowOrLater(new Runnable() {
                 @Override
                 public void run() {
                     fb.dispose(); //must be disposed on EDT thread

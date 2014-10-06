@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 
 import forge.Forge;
 import forge.Graphics;
-import forge.GuiBase;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
@@ -44,13 +43,13 @@ public class BugReportDialog extends FScreen { //use screen rather than dialog s
         btnReport.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                BugReporter.copyAndGoToForums(GuiBase.getInterface(), tvDetails.text);
+                BugReporter.copyAndGoToForums(tvDetails.text);
             }
         });
         btnSave.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                BugReporter.saveToFile(GuiBase.getInterface(), tvDetails.text);
+                BugReporter.saveToFile(tvDetails.text);
             }
         });
         btnContinue.setCommand(new FEventHandler() {

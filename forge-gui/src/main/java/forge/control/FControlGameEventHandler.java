@@ -269,7 +269,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             options.add(fakeCard);
             options.add(gameView.getCardView(kv.getValue(), true));
         }
-        SGuiChoose.reveal(gameView.getGui(), "These cards were chosen to ante", options);
+        SGuiChoose.reveal("These cards were chosen to ante", options);
         return null;
     }
 

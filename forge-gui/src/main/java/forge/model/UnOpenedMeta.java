@@ -19,7 +19,6 @@
 package forge.model;
 
 import forge.card.IUnOpenedProduct;
-import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
@@ -45,7 +44,6 @@ public class UnOpenedMeta implements IUnOpenedProduct {
     private final ArrayList<MetaSet> metaSets;
     private final JoinOperation operation;
     private final Random generator = MyRandom.getRandom();
-    private final IGuiBase gui;
 
     /**
      * Constructor for UnOpenedMeta.
@@ -55,12 +53,11 @@ public class UnOpenedMeta implements IUnOpenedProduct {
      * @param choose
      *            sets the random/choice status.
      * @param gui
-     *            the gui.
+     *            the GuiBase.getInterface().
      */
-    private UnOpenedMeta(final String creationString, final JoinOperation op, final IGuiBase gui) {
+    private UnOpenedMeta(final String creationString, final JoinOperation op) {
         metaSets = new ArrayList<MetaSet>();
         operation = op;
-        this.gui = gui;
 
         for (String m : TextUtil.splitWithParenthesis(creationString, ';')) {
             metaSets.add(new MetaSet(m, true));
@@ -94,39 +91,39 @@ public class UnOpenedMeta implements IUnOpenedProduct {
                 if (isHuman) {
                     final MetaSet ms;
                     if (allowCancel) {
-                        ms = SGuiChoose.oneOrNone(gui, "Choose Booster", metaSets);
+                        ms = SGuiChoose.oneOrNone("Choose Booster", metaSets);
                         if (ms == null) {
                             return null;
                         }
                     }
                     else {
-                        ms = SGuiChoose.one(gui, "Choose Booster", metaSets);
+                        ms = SGuiChoose.one("Choose Booster", metaSets);
                     }
-                    return ms.getBooster(gui).get();
+                    return ms.getBooster().get();
                 }
 
             case RandomOne: // AI should fall though here from the case above
                 int selected = generator.nextInt(metaSets.size());
-                final IUnOpenedProduct newBooster = metaSets.get(selected).getBooster(gui);
+                final IUnOpenedProduct newBooster = metaSets.get(selected).getBooster();
                 return newBooster.get();
 
             case SelectAll:
                 List<PaperCard> allCards = new ArrayList<PaperCard>();
                 for (MetaSet ms : metaSets) {
-                    allCards.addAll(ms.getBooster(gui).get());
+                    allCards.addAll(ms.getBooster().get());
                 }
                 return allCards;
         }
         throw new IllegalStateException("Got wrong operation type in unopenedMeta - execution should never reach this point");
     }
 
-    public static UnOpenedMeta choose(final String desc, final IGuiBase gui) {
-        return new UnOpenedMeta(desc, JoinOperation.ChooseOne, gui);
+    public static UnOpenedMeta choose(final String desc) {
+        return new UnOpenedMeta(desc, JoinOperation.ChooseOne);
     }
     public static UnOpenedMeta random(final String desc) {
-        return new UnOpenedMeta(desc, JoinOperation.RandomOne, null);
+        return new UnOpenedMeta(desc, JoinOperation.RandomOne);
     }
     public static UnOpenedMeta selectAll(final String desc) {
-        return new UnOpenedMeta(desc, JoinOperation.SelectAll, null);
+        return new UnOpenedMeta(desc, JoinOperation.SelectAll);
     }
 }

@@ -1,6 +1,5 @@
 package forge.screens.home.quest;
 
-import forge.GuiBase;
 import forge.UiCommand;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
@@ -37,23 +36,23 @@ public enum CSubmenuDuels implements ICDoc {
 
         view.getBtnSpellShop().setCommand(
                 new UiCommand() { @Override
-                    public void run() { QuestUtil.showSpellShop(GuiBase.getInterface()); } });
+                    public void run() { QuestUtil.showSpellShop(); } });
 
         view.getBtnBazaar().setCommand(
                 new UiCommand() { @Override
-                    public void run() { QuestUtil.showBazaar(GuiBase.getInterface()); } });
+                    public void run() { QuestUtil.showBazaar(); } });
 
         view.getBtnTravel().setCommand(
                 new UiCommand() { @Override
-                    public void run() { QuestUtil.travelWorld(GuiBase.getInterface()); CSubmenuDuels.this.update(); } });
+                    public void run() { QuestUtil.travelWorld(); CSubmenuDuels.this.update(); } });
 
         view.getBtnUnlock().setCommand(
                 new UiCommand() { @Override
-                    public void run() { QuestUtil.chooseAndUnlockEdition(GuiBase.getInterface()); CSubmenuDuels.this.update(); } });
+                    public void run() { QuestUtil.chooseAndUnlockEdition(); CSubmenuDuels.this.update(); } });
 
         view.getBtnStart().addActionListener(
                 new ActionListener() { @Override
-            public void actionPerformed(final ActionEvent e) { QuestUtil.startGame(GuiBase.getInterface()); } });
+            public void actionPerformed(final ActionEvent e) { QuestUtil.startGame(); } });
 
         final QuestController quest = FModel.getQuest();
         view.getCbPlant().addActionListener(new ActionListener() {
@@ -87,11 +86,11 @@ public enum CSubmenuDuels implements ICDoc {
         view.getBtnRandomOpponent().setCommand(new UiCommand() {
             @Override
             public void run() { 
-                if (QuestUtil.canStartGame(GuiBase.getInterface())) {
+                if (QuestUtil.canStartGame()) {
                     FModel.getQuest().getDuelsManager().randomizeOpponents();
                     final List<QuestEventDuel> duels = FModel.getQuest().getDuelsManager().generateDuels();
                     QuestUtil.setEvent(duels.get((int) (Math.random() * duels.size())));
-                    QuestUtil.startGame(GuiBase.getInterface());
+                    QuestUtil.startGame();
                 }
             }
         });

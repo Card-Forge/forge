@@ -5,27 +5,23 @@ import forge.game.Game;
 import forge.game.player.IGameEntitiesFactory;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
-import forge.interfaces.IGuiBase;
 import forge.match.MatchUtil;
 import forge.util.GuiDisplayUtil;
 
 public class LobbyPlayerHuman extends LobbyPlayer implements IGameEntitiesFactory {
-    final IGuiBase gui;
-
-    public LobbyPlayerHuman(final String name, final IGuiBase gui) {
+    public LobbyPlayerHuman(final String name) {
         super(name);
-        this.gui = gui;
     }
 
     @Override
     public PlayerController createControllerFor(Player human) {
-        return new PlayerControllerHuman(human.getGame(), human, this, gui);
+        return new PlayerControllerHuman(human.getGame(), human, this);
     }
 
     @Override
     public Player createIngamePlayer(Game game, final int id) {
         Player player = new Player(GuiDisplayUtil.personalizeHuman(getName()), game, id);
-        PlayerControllerHuman controller = new PlayerControllerHuman(game, player, this, gui);
+        PlayerControllerHuman controller = new PlayerControllerHuman(game, player, this);
         player.setFirstController(controller);
         controller.getGameView().setLocalPlayer(player);
         return player;
@@ -33,9 +29,5 @@ public class LobbyPlayerHuman extends LobbyPlayer implements IGameEntitiesFactor
 
     public void hear(LobbyPlayer player, String message) {
         MatchUtil.getController().hear(player, message);
-    }
-
-    public IGuiBase getGui() {
-        return this.gui;
     }
 }

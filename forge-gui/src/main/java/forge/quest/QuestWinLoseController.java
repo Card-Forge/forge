@@ -12,7 +12,6 @@ import forge.game.player.GameLossReason;
 import forge.game.player.PlayerOutcome;
 import forge.game.player.PlayerStatistics;
 import forge.interfaces.IButton;
-import forge.interfaces.IGuiBase;
 import forge.interfaces.IWinLoseView;
 import forge.item.*;
 import forge.model.FModel;
@@ -37,15 +36,13 @@ import java.util.Map.Entry;
 
 public abstract class QuestWinLoseController {
     private final IGameView lastGame;
-    protected final IGuiBase gui;
     private final transient boolean wonMatch;
     private final transient boolean isAnte;
     private final transient QuestController qData;
     private final transient QuestEvent qEvent;
 
-    public QuestWinLoseController(final IGameView game0, final IGuiBase gui) {
+    public QuestWinLoseController(final IGameView game0) {
         lastGame = game0;
-        this.gui = gui;
         qData = FModel.getQuest();
         qEvent = qData.getCurrentEvent();
         wonMatch = lastGame.isMatchWonBy(GamePlayerUtil.getQuestPlayer());
@@ -507,7 +504,7 @@ public abstract class QuestWinLoseController {
 
             Collections.sort(formats);
 
-            final GameFormat selected = SGuiChoose.getChoices(gui, "Choose bonus booster format", 1, 1, formats, pref, null).get(0);
+            final GameFormat selected = SGuiChoose.getChoices("Choose bonus booster format", 1, 1, formats, pref, null).get(0);
             FModel.getQuestPreferences().setPref(QPref.BOOSTER_FORMAT, selected.toString());
 
             cardsWon = qData.getCards().generateQuestBooster(selected.getFilterPrinted());
@@ -544,7 +541,7 @@ public abstract class QuestWinLoseController {
                 maxChoices--;
             }
 
-            final CardEdition chooseEd = SGuiChoose.one(gui, "Choose bonus booster set", options);
+            final CardEdition chooseEd = SGuiChoose.one("Choose bonus booster set", options);
 
             IUnOpenedProduct product = new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(chooseEd.getCode()));
             cardsWon = product.get();
@@ -635,7 +632,7 @@ public abstract class QuestWinLoseController {
             }
             else if (ii instanceof IQuestRewardCard) {
                 final List<PaperCard> cardChoices = ((IQuestRewardCard) ii).getChoices();
-                final PaperCard chosenCard = (null == cardChoices ? null : SGuiChoose.one(gui, "Choose " + ((IQuestRewardCard) ii).getName(), cardChoices));
+                final PaperCard chosenCard = (null == cardChoices ? null : SGuiChoose.one("Choose " + ((IQuestRewardCard) ii).getName(), cardChoices));
                 if (null != chosenCard) {
                     cardsWon.add(chosenCard);
                 }

@@ -1,7 +1,6 @@
 package forge.util;
 
 import forge.FThreads;
-import forge.GuiBase;
 
 public abstract class WaitCallback<T> extends Callback<T> implements Runnable {
     public class Lock {
@@ -20,8 +19,8 @@ public abstract class WaitCallback<T> extends Callback<T> implements Runnable {
     }
 
     public final T invokeAndWait() {
-        FThreads.assertExecutedByEdt(GuiBase.getInterface(), false); //not supported if on UI thread
-        FThreads.invokeInEdtLater(GuiBase.getInterface(), this);
+        FThreads.assertExecutedByEdt(false); //not supported if on UI thread
+        FThreads.invokeInEdtLater(this);
         try {
             synchronized (lock) {
                 lock.wait();

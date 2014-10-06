@@ -82,7 +82,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     }
 
     /**
-     * Show gui.
+     * Show GuiBase.getInterface().
      * 
      * @param inBoosterDraft
      *            the in_booster draft

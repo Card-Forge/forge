@@ -14,7 +14,6 @@ import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.UiCommand;
 import forge.game.GameLogEntry;
@@ -76,7 +75,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
             control = new LimitedWinLose(this, game0);
             break;
         case Gauntlet:
-            control = new GauntletWinLose(this, game0, GuiBase.getInterface());
+            control = new GauntletWinLose(this, game0);
             break;
         default: // will catch it after switch
             break;

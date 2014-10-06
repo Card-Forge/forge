@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import forge.FThreads;
 import forge.Forge;
 import forge.Graphics;
-import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
@@ -177,7 +176,7 @@ public class ConstructedScreen extends LaunchScreen {
                 playerPanels.get(6).initialize(FPref.CONSTRUCTED_P7_DECK_STATE, DeckType.COLOR_DECK);
                 playerPanels.get(7).initialize(FPref.CONSTRUCTED_P8_DECK_STATE, DeckType.COLOR_DECK);*/ //TODO: Support multiplayer and improve performance of loading this screen by using background thread
 
-                FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
+                FThreads.invokeInEdtLater(new Runnable() {
                     @Override
                     public void run() {
                         btnStart.setEnabled(true);

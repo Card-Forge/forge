@@ -18,7 +18,6 @@
 package forge.toolbox;
 
 import forge.FThreads;
-import forge.GuiBase;
 import forge.Singletons;
 import forge.assets.FSkinProp;
 import forge.assets.ISkinImage;
@@ -1036,7 +1035,7 @@ public class FSkin {
     public static void loadLight(final String skinName, final boolean onInit) {
         if (onInit) {
             // No need for this method to be loaded while on the EDT.
-            FThreads.assertExecutedByEdt(GuiBase.getInterface(), false);
+            FThreads.assertExecutedByEdt(false);
 
             if (allSkins == null) { //initialize
                 allSkins = new ArrayList<String>();
@@ -1108,7 +1107,7 @@ public class FSkin {
     public static void loadFull(final boolean onInit) {
         if (onInit) {
             // No need for this method to be loaded while on the EDT.
-            FThreads.assertExecutedByEdt(GuiBase.getInterface(), false);
+            FThreads.assertExecutedByEdt(false);
 
             // Preferred skin name must be called via loadLight() method,
             // which does some cleanup and init work.

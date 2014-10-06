@@ -2,7 +2,6 @@ package forge.screens.quest;
 
 import java.util.List;
 
-import forge.GuiBase;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.interfaces.IButton;
@@ -128,7 +127,7 @@ public class QuestStatsScreen extends FScreen {
         lblZep.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                if (!QuestUtil.checkActiveQuest(GuiBase.getInterface(), "Launch a Zeppelin.")) {
+                if (!QuestUtil.checkActiveQuest("Launch a Zeppelin.")) {
                     return;
                 }
                 FModel.getQuest().getAchievements().setCurrentChallenges(null);

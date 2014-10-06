@@ -18,7 +18,6 @@ import forge.game.Game;
 import forge.game.GameType;
 import forge.game.player.Player;
 import forge.interfaces.IComboBox;
-import forge.interfaces.IGuiBase;
 import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
@@ -42,7 +41,6 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
             return;
         }
 
-        final IGuiBase gui = controller.getGui();
         final Game game = controller.getGame();
         final Player player = controller.getPlayer();
 
@@ -50,10 +48,10 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         ThreadUtil.invokeInGameThread(new Runnable() {
             @Override
             public void run() {
-                FModel.getAchievements(game.getRules().getGameType()).updateAll(gui, player);
-                AltWinAchievements.instance.updateAll(gui, player);
-                PlaneswalkerAchievements.instance.updateAll(gui, player);
-                ChallengeAchievements.instance.updateAll(gui, player);
+                FModel.getAchievements(game.getRules().getGameType()).updateAll(player);
+                AltWinAchievements.instance.updateAll(player);
+                PlaneswalkerAchievements.instance.updateAll(player);
+                ChallengeAchievements.instance.updateAll(player);
             }
         });
     }
@@ -109,9 +107,9 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         achievements.put(achievement.getKey(), achievement);
     }
 
-    public void updateAll(IGuiBase gui, Player player) {
+    public void updateAll(Player player) {
         for (Achievement achievement : achievements.values()) {
-            achievement.update(gui, player);
+            achievement.update(player);
         }
         save();
     }

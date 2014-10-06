@@ -178,7 +178,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 final StringBuilder sb = new StringBuilder();
                 sb.append(apiBasedMessage);
                 sb.append(card.toString());
-                Integer chosen = SGuiChoose.oneOrNone(getGui(), sb.toString(), choices);
+                Integer chosen = SGuiChoose.oneOrNone(sb.toString(), choices);
                 if (chosen == null) {
                     return true; //still return true since there was a valid choice
                 }
@@ -222,7 +222,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 final StringBuilder sb = new StringBuilder();
                 sb.append(apiBasedMessage);
                 sb.append(player.getName());
-                Integer chosen = SGuiChoose.oneOrNone(getGui(), sb.toString(), choices);
+                Integer chosen = SGuiChoose.oneOrNone(sb.toString(), choices);
                 if (null == chosen) {
                     return;
                 }

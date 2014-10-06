@@ -1,6 +1,5 @@
 package forge.screens.match.controllers;
 
-import forge.GuiBase;
 import forge.UiCommand;
 import forge.FThreads;
 import forge.gui.framework.ICDoc;
@@ -54,7 +53,7 @@ public enum CLog implements ICDoc, Observer {
      */
     @Override
     public void update() {
-        FThreads.invokeInEdtNowOrLater(GuiBase.getInterface(), r);
+        FThreads.invokeInEdtNowOrLater(r);
     }
 
 }

@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.FThreads;
 import forge.Forge;
-import forge.GuiBase;
 import forge.assets.FSkinFont;
 import forge.deck.DeckProxy;
 import forge.deck.DeckgenUtil;
@@ -71,10 +70,10 @@ public class QuestDecksScreen extends FScreen {
                 ThreadUtil.invokeInGameThread(new Runnable() { //must run in game thread to prevent blocking UI thread
                     @Override
                     public void run() {
-                        if (!QuestUtil.checkActiveQuest(GuiBase.getInterface(), "Create a Deck.")) {
+                        if (!QuestUtil.checkActiveQuest("Create a Deck.")) {
                             return;
                         }
-                        FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
+                        FThreads.invokeInEdtLater(new Runnable() {
                             @Override
                             public void run() {
                                 QuestDeckEditor editor = new QuestDeckEditor();

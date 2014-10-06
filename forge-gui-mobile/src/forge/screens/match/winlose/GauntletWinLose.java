@@ -18,7 +18,6 @@ package forge.screens.match.winlose;
  */
 
 import forge.FThreads;
-import forge.GuiBase;
 import forge.assets.FSkinProp;
 import forge.gauntlet.GauntletWinLoseController;
 import forge.util.gui.SOptionPane;
@@ -67,7 +66,7 @@ public class GauntletWinLose extends ControlWinLose {
                             sb.deleteCharAt(sb.length() - 1); //remove final new line character
                         }
 
-                        SOptionPane.showMessageDialog(GuiBase.getInterface(), sb.toString(), "Gauntlet Progress", icon);
+                        SOptionPane.showMessageDialog(sb.toString(), "Gauntlet Progress", icon);
                     }
                 });
             }

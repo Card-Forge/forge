@@ -21,7 +21,6 @@ import java.net.Proxy;
 
 import com.badlogic.gdx.Gdx;
 
-import forge.GuiBase;
 import forge.UiCommand;
 import forge.assets.FSkinFont;
 import forge.download.GuiDownloadService;
@@ -83,7 +82,7 @@ public class GuiDownloader extends FDialog {
 
         show();
 
-        service.initialize(GuiBase.getInterface(), txtAddress, txtPort, progressBar, btnStart, cmdClose, new Runnable() {
+        service.initialize(txtAddress, txtPort, progressBar, btnStart, cmdClose, new Runnable() {
             @Override
             public void run() {
                 Gdx.graphics.setContinuousRendering(false);

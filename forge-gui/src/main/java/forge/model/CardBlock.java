@@ -23,7 +23,6 @@ import com.google.common.base.Predicate;
 import forge.card.CardEdition;
 import forge.card.IUnOpenedProduct;
 import forge.card.UnOpenedProduct;
-import forge.interfaces.IGuiBase;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.TextUtil;
@@ -293,15 +292,9 @@ public final class CardBlock implements Comparable<CardBlock> {
 
     /**
      * Tries to create a booster for the selected meta-set code.
-     *
-     * @param code
-     *            String, the MetaSet code
-     * @param gui
-     *            the {@link IGuiBase} resolving any choices to be made.
-     * @return UnOpenedProduct, the created booster.
      */
-    public IUnOpenedProduct getBooster(final String code, final IGuiBase gui) {
+    public IUnOpenedProduct getBooster(final String code) {
         MetaSet ms = metaSets.get(code);
-        return ms == null ? new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(code)) : ms.getBooster(gui);
+        return ms == null ? new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(code)) : ms.getBooster();
     }
 }

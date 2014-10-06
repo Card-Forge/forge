@@ -50,7 +50,7 @@ public class HumanPlay {
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
     public final static void playSpellAbility(final PlayerControllerHuman controller, final Player p, SpellAbility sa) {
-        FThreads.assertExecutedByEdt(controller.getGui(), false);
+        FThreads.assertExecutedByEdt(false);
 
         if (sa == Ability.PLAY_LAND_SURROGATE) {
             p.playLand(sa.getHostCard(), false);
@@ -145,7 +145,7 @@ public class HumanPlay {
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
     public static final void playSaWithoutPayingManaCost(final PlayerControllerHuman controller, final Game game, final SpellAbility sa, boolean mayChooseNewTargets) {
-        FThreads.assertExecutedByEdt(controller.getGui(), false);
+        FThreads.assertExecutedByEdt(false);
         final Card source = sa.getHostCard();
 
         source.setSplitStateToPlayAbility(sa);
@@ -447,7 +447,7 @@ public class HumanPlay {
                     }
                     if (typeChoices.size() > 1) {
                         String cprompt = "Select type counters to remove";
-                        counterType = SGuiChoose.one(controller.getGui(), cprompt, typeChoices);
+                        counterType = SGuiChoose.one(cprompt, typeChoices);
                     }
                     else {
                         counterType = typeChoices.get(0);
@@ -488,7 +488,7 @@ public class HumanPlay {
                     }
                     // replace this with input
                     for (int i = 0; i < nNeeded; i++) {
-                        final Card c = SGuiChoose.oneOrNone(controller.getGui(), "Exile from " + from, list);
+                        final Card c = SGuiChoose.oneOrNone("Exile from " + from, list);
                         if (c == null) {
                             return false;
                         }
@@ -522,7 +522,7 @@ public class HumanPlay {
                             payableZone.add(player);
                         }
                     }
-                    Player chosen = SGuiChoose.oneOrNone(controller.getGui(), String.format("Put cards from whose %s?", from), payableZone);
+                    Player chosen = SGuiChoose.oneOrNone(String.format("Put cards from whose %s?", from), payableZone);
                     if (chosen == null) {
                         return false;
                     }
@@ -534,7 +534,7 @@ public class HumanPlay {
                             return false;
                         }
 
-                        final Card c = SGuiChoose.oneOrNone(controller.getGui(), "Put cards to Library", typeList);
+                        final Card c = SGuiChoose.oneOrNone("Put cards to Library", typeList);
 
                         if (c != null) {
                             typeList.remove(c);

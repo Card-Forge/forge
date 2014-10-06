@@ -2,7 +2,6 @@ package forge.deck;
 
 import forge.FThreads;
 import forge.Forge;
-import forge.GuiBase;
 import forge.deck.Deck;
 import forge.deck.FDeckEditor.EditorType;
 import forge.deck.io.DeckPreferences;
@@ -57,7 +56,7 @@ public class FDeckChooser extends FScreen {
     //Show screen to select a deck
     private static FDeckChooser deckChooserForPrompt;
     public static void promptForDeck(String title, GameType gameType, boolean forAi, final Callback<Deck> callback) {
-        FThreads.assertExecutedByEdt(GuiBase.getInterface(), true);
+        FThreads.assertExecutedByEdt(true);
         if (deckChooserForPrompt == null) {
             deckChooserForPrompt = new FDeckChooser(gameType, forAi, null);
         }
@@ -375,7 +374,7 @@ public class FDeckChooser extends FScreen {
                 "White", "Blue", "Black", "Red", "Green" };
         ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
         for (int i = 0; i < colors.length; i++) {
-            decks.add(new ColorDeckGenerator(GuiBase.getInterface(), colors[i], i, lstDecks, isAi));
+            decks.add(new ColorDeckGenerator(colors[i], i, lstDecks, isAi));
         }
 
         lstDecks.setPool(decks);

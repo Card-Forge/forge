@@ -20,7 +20,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.assets.FSkinProp;
@@ -103,10 +102,10 @@ public class QuestDraftWinLose extends ControlWinLose {
             if (lastGame.isMatchOver()) {
                 this.actionOnQuitMatch();
                 QuestDraftUtils.matchInProgress = false;
-                QuestDraftUtils.update(GuiBase.getInterface());
+                QuestDraftUtils.update();
             } else {
                 this.actionOnContinue();
-                QuestDraftUtils.update(GuiBase.getInterface());
+                QuestDraftUtils.update();
             }
             return false;
             
@@ -127,7 +126,7 @@ public class QuestDraftWinLose extends ControlWinLose {
                 public void actionPerformed(final ActionEvent e) {
                     MatchUtil.endCurrentGame();
                     QuestDraftUtils.matchInProgress = false;
-                    QuestDraftUtils.continueMatches(GuiBase.getInterface());
+                    QuestDraftUtils.continueMatches();
                 }
             });
         } else {
@@ -142,7 +141,7 @@ public class QuestDraftWinLose extends ControlWinLose {
                     if (FOptionPane.showOptionDialog("Quitting the match now will forfeit the tournament!\n\nReally quit?", "Really Quit Tournament?", FSkin.getImage(FSkinProp.ICO_WARNING).scale(2), new String[] { "Yes", "No" }, 1) == 0) {
                         MatchUtil.endCurrentGame();
                         QuestDraftUtils.matchInProgress = false;
-                        QuestDraftUtils.continueMatches(GuiBase.getInterface());
+                        QuestDraftUtils.continueMatches();
                     }
                 }
             });

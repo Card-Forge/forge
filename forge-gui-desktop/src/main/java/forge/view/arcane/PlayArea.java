@@ -28,7 +28,6 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import forge.FThreads;
-import forge.GuiBase;
 import forge.game.zone.ZoneType;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CPrompt;
@@ -595,7 +594,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
      * </p>
      */
     public void setupPlayZone() {
-        FThreads.assertExecutedByEdt(GuiBase.getInterface(), true);
+        FThreads.assertExecutedByEdt(true);
         recalculateCardPanels(model, zone);
     }
 

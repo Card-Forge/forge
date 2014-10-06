@@ -27,7 +27,6 @@ import java.awt.event.FocusListener;
 import javax.swing.JButton;
 
 import forge.FThreads;
-import forge.GuiBase;
 import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
@@ -147,7 +146,7 @@ public enum CPrompt implements ICDoc {
     }
 
     public void updateText() {
-        FThreads.assertExecutedByEdt(GuiBase.getInterface(), true);
+        FThreads.assertExecutedByEdt(true);
         final IGameView game = MatchUtil.getGameView();
         final String text = String.format("T:%d G:%d/%d [%s]", game.getTurnNumber(), game.getNumPlayedGamesInMatch() + 1, game.getNumGamesInMatch(), game.getGameType());
         view.getLblGames().setText(text);

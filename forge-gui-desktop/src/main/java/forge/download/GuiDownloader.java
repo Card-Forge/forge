@@ -19,7 +19,6 @@ package forge.download;
 
 import java.net.Proxy;
 
-import forge.GuiBase;
 import forge.UiCommand;
 import forge.assets.FSkinProp;
 import forge.gui.SOverlayUtils;
@@ -96,7 +95,7 @@ public class GuiDownloader extends DefaultBoundedRangeModel {
         pnl.add(pnlDialog, "w 400px!, h 350px!, ax center, ay center");
         SOverlayUtils.showOverlay();
 
-        service.initialize(GuiBase.getInterface(), txtAddress, txtPort, progressBar, btnStart, cmdClose, null, new Runnable() {
+        service.initialize(txtAddress, txtPort, progressBar, btnStart, cmdClose, null, new Runnable() {
             @Override
             public void run() {
                 fireStateChanged();

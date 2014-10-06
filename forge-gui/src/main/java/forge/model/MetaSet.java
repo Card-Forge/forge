@@ -22,7 +22,6 @@ import com.google.common.base.Predicate;
 
 import forge.card.IUnOpenedProduct;
 import forge.card.UnOpenedProduct;
-import forge.interfaces.IGuiBase;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
@@ -163,7 +162,7 @@ public class MetaSet {
      * 
      * @return UnOpenedProduct, the generated booster.
      */
-    public IUnOpenedProduct getBooster(final IGuiBase gui) {
+    public IUnOpenedProduct getBooster() {
 
         switch(type) {
             case Full:
@@ -182,7 +181,7 @@ public class MetaSet {
                 Predicate<PaperCard> predicate = IPaperCard.Predicates.printedInSets(data.split(" "));
                 return new UnOpenedProduct(SealedProduct.Template.genericBooster, predicate);
 
-            case Choose: return UnOpenedMeta.choose(data, gui);
+            case Choose: return UnOpenedMeta.choose(data);
             case Random: return UnOpenedMeta.random(data);
             case Combo:  return UnOpenedMeta.selectAll(data);
 

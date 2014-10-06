@@ -25,7 +25,6 @@ import forge.FThreads;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.interfaces.IGuiBase;
 import forge.util.ITriggerEvent;
 import forge.view.CardView;
 import forge.view.LocalGameView;
@@ -52,10 +51,6 @@ public class InputProxy implements Observer {
         gameView = gameView0;
     }
 
-    private IGuiBase getGui() {
-        return gameView.getGui();
-    }
-
     @Override
     public final void update(final Observable observable, final Object obj) {
         final Input nextInput = gameView.getInputQueue().getActualInput(gameView);
@@ -75,7 +70,7 @@ public class InputProxy implements Observer {
             }
         };
         
-        FThreads.invokeInEdtLater(getGui(), showMessage);
+        FThreads.invokeInEdtLater(showMessage);
     }
     /**
      * <p>

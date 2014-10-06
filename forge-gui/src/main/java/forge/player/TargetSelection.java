@@ -283,9 +283,9 @@ public class TargetSelection {
         
         Object chosen = null;
         if (!choices.isEmpty() && mandatory) {
-            chosen = SGuiChoose.one(controller.getGui(), getTgt().getVTSelection(), choicesFiltered);
+            chosen = SGuiChoose.one(getTgt().getVTSelection(), choicesFiltered);
         } else {
-            chosen = SGuiChoose.oneOrNone(controller.getGui(), getTgt().getVTSelection(), choicesFiltered);
+            chosen = SGuiChoose.oneOrNone(getTgt().getVTSelection(), choicesFiltered);
         }
         if (chosen == null) {
             return false;
@@ -341,7 +341,7 @@ public class TargetSelection {
                 // Not enough targets, cancel targeting
                 return false;
             } else {
-                final Object madeChoice = SGuiChoose.oneOrNone(controller.getGui(), message, selectOptions);
+                final Object madeChoice = SGuiChoose.oneOrNone(message, selectOptions);
                 if (madeChoice == null) {
                     return false;
                 }

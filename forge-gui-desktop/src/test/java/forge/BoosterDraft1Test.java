@@ -20,7 +20,7 @@ public class BoosterDraft1Test {
      */
     @Test(groups = { "UnitTest", "fast" }, timeOut = 1000, enabled = false)
     public void boosterDraft1Test1() throws Exception {
-        final BoosterDraft draft = BoosterDraft.createDraft(GuiBase.getInterface(), LimitedPoolType.Full);
+        final BoosterDraft draft = BoosterDraft.createDraft(LimitedPoolType.Full);
         if (draft == null) { return; }
 
         while (draft.hasNextChoice()) {

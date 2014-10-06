@@ -6,7 +6,6 @@ import com.google.common.collect.Iterables;
 
 import forge.deck.CardPool;
 import forge.deck.Deck;
-import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
 import forge.util.MyRandom;
 
@@ -20,9 +19,9 @@ public class WinstonDraft extends BoosterDraft {
     private Stack<PaperCard> deck;           // main deck where all cards
     private List<List<PaperCard>> piles;    // 3 piles to draft from
 
-    public static WinstonDraft createDraft(final IGuiBase gui, final LimitedPoolType draftType) {
+    public static WinstonDraft createDraft(final LimitedPoolType draftType) {
         WinstonDraft draft = new WinstonDraft(draftType);
-        if (!draft.generateProduct(gui)) {
+        if (!draft.generateProduct()) {
             return null;
         }
         draft.initializeWinstonDraft();

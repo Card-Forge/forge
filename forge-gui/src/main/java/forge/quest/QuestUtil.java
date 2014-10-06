@@ -23,6 +23,7 @@ import java.util.List;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import forge.FThreads;
+import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.assets.FSkinProp;
 import forge.card.CardDb.SetPreference;
@@ -35,7 +36,6 @@ import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IButton;
-import forge.interfaces.IGuiBase;
 import forge.item.IPaperCard;
 import forge.item.PaperToken;
 import forge.match.MatchUtil;
@@ -193,8 +193,8 @@ public class QuestUtil {
         return FModel.getMagicDb().getCommonCards().getCardFromEdition(name, SetPreference.Latest);
     }
     
-    public static void travelWorld(final IGuiBase gui) {
-        if (!checkActiveQuest(gui, "Travel between worlds.")) {
+    public static void travelWorld() {
+        if (!checkActiveQuest("Travel between worlds.")) {
             return;
         }
         List<QuestWorld> worlds = new ArrayList<QuestWorld>();
@@ -207,12 +207,12 @@ public class QuestUtil {
         }
 
         if (worlds.size() < 1) {
-            SOptionPane.showErrorDialog(gui, "There are currently no worlds you can travel to\nin this version of Forge.", "No Worlds");
+            SOptionPane.showErrorDialog("There are currently no worlds you can travel to\nin this version of Forge.", "No Worlds");
             return;
         }
 
         final String setPrompt = "Where do you wish to travel?";
-        final QuestWorld newWorld = SGuiChoose.oneOrNone(gui, setPrompt, worlds);
+        final QuestWorld newWorld = SGuiChoose.oneOrNone(setPrompt, worlds);
 
         if (worlds.indexOf(newWorld) < 0) {
             return;
@@ -223,7 +223,7 @@ public class QuestUtil {
             if (nextChallengeInWins() < 1 && qCtrl.getAchievements().getCurrentChallenges().size() > 0) {
                 needRemove = true;
 
-                if (!SOptionPane.showConfirmDialog(gui,
+                if (!SOptionPane.showConfirmDialog(
                         "You have uncompleted challenges in your current world. If you travel now, they will be LOST!"
                         + "\nAre you sure you wish to travel anyway?\n"
                         + "(Click \"No\" to go back  and complete your current challenges first.)",
@@ -468,11 +468,11 @@ public class QuestUtil {
         return draftEvent;
     }
 
-    public static boolean checkActiveQuest(final IGuiBase gui, final String location) {
+    public static boolean checkActiveQuest(final String location) {
         QuestController qc = FModel.getQuest();
         if (qc == null || qc.getAssets() == null) {
             String msg = "Please create a Quest before attempting to " + location;
-            SOptionPane.showErrorDialog(gui, msg, "No Quest");
+            SOptionPane.showErrorDialog(msg, "No Quest");
             System.out.println(msg);
             return false;
         }
@@ -480,24 +480,24 @@ public class QuestUtil {
     }
     
     /** */
-    public static void showSpellShop(final IGuiBase gui) {
-        if (!checkActiveQuest(gui, "Visit the Spell Shop.")) {
+    public static void showSpellShop() {
+        if (!checkActiveQuest("Visit the Spell Shop.")) {
             return;
         }
-        gui.showSpellShop();
+        GuiBase.getInterface().showSpellShop();
     }
 
     /** */
-    public static void showBazaar(final IGuiBase gui) {
-        if (!checkActiveQuest(gui, "Visit the Bazaar.")) {
+    public static void showBazaar() {
+        if (!checkActiveQuest("Visit the Bazaar.")) {
             return;
         }
-        gui.showBazaar();
+        GuiBase.getInterface().showBazaar();
     }
 
     /** */
-    public static void chooseAndUnlockEdition(final IGuiBase gui) {
-        if (!checkActiveQuest(gui, "Unlock Editions.")) {
+    public static void chooseAndUnlockEdition() {
+        if (!checkActiveQuest("Unlock Editions.")) {
             return;
         }
         final QuestController qData = FModel.getQuest();
@@ -508,19 +508,19 @@ public class QuestUtil {
 
         CardEdition unlocked = toUnlock.left;
         qData.getAssets().subtractCredits(toUnlock.right);
-        SOptionPane.showMessageDialog(gui, "You have successfully unlocked " + unlocked.getName() + "!",
+        SOptionPane.showMessageDialog("You have successfully unlocked " + unlocked.getName() + "!",
                 unlocked.getName() + " unlocked!", null);
 
-        QuestUtilUnlockSets.doUnlock(gui, qData, unlocked);
+        QuestUtilUnlockSets.doUnlock(qData, unlocked);
     }
 
-    public static void startGame(final IGuiBase gui) {
-        if (canStartGame(gui)) {
-            finishStartingGame(gui);
+    public static void startGame() {
+        if (canStartGame()) {
+            finishStartingGame();
         }
     }
 
-    public static void finishStartingGame(final IGuiBase gui) {
+    public static void finishStartingGame() {
         final QuestController qData = FModel.getQuest();
 
         FThreads.invokeInBackgroundThread(new Runnable() {
@@ -569,7 +569,7 @@ public class QuestUtil {
         starter.add(humanStart.setPlayer(GamePlayerUtil.getQuestPlayer()));
 
         LobbyPlayer aiPlayer = GamePlayerUtil.createAiPlayer(event.getOpponent() == null ? event.getTitle() : event.getOpponent());
-        gui.setPlayerAvatar(aiPlayer, event);
+        GuiBase.getInterface().setPlayerAvatar(aiPlayer, event);
         starter.add(aiStart.setPlayer(aiPlayer));
 
         boolean useRandomFoil = FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
@@ -587,7 +587,7 @@ public class QuestUtil {
         rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
         rules.canCloneUseTargetsImage = FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE);
         final Match mc = new Match(rules, starter);
-        FThreads.invokeInEdtNowOrLater(gui, new Runnable(){
+        FThreads.invokeInEdtNowOrLater(new Runnable(){
             @Override
             public void run() {
                 MatchUtil.startGame(mc);
@@ -612,15 +612,15 @@ public class QuestUtil {
      * Checks to see if a game can be started and displays relevant dialogues.
      * @return
      */
-    public static boolean canStartGame(final IGuiBase gui) {
-        if (!checkActiveQuest(gui, "Start a duel.") || null == event) {
+    public static boolean canStartGame() {
+        if (!checkActiveQuest("Start a duel.") || null == event) {
             return false;
         }
 
         Deck deck = getDeckForNewGame();
         if (deck == null) {
             String msg = "Please select a Quest Deck.";
-            SOptionPane.showErrorDialog(gui, msg, "No Deck");
+            SOptionPane.showErrorDialog(msg, "No Deck");
             System.out.println(msg);
             return false;
         }
@@ -628,7 +628,7 @@ public class QuestUtil {
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
             String errorMessage = GameType.Quest.getDeckFormat().getDeckConformanceProblem(deck);
             if (null != errorMessage) {
-                SOptionPane.showErrorDialog(gui, "Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid Deck");
+                SOptionPane.showErrorDialog("Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid Deck");
                 return false;
             }
         }

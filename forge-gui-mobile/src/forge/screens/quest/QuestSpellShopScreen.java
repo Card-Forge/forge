@@ -8,7 +8,6 @@ import java.util.Map;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.FThreads;
-import forge.GuiBase;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -133,7 +132,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
                             ItemPool<InventoryItem> items = new ItemPool<InventoryItem>(InventoryItem.class);
                             items.add(item, result);
                             activateItems(items);
-                            FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
+                            FThreads.invokeInEdtLater(new Runnable() {
                                 @Override
                                 public void run() {
                                     parentScreen.updateCreditsLabel();
@@ -181,7 +180,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
 
         @Override
         protected void activateItems(ItemPool<InventoryItem> items) {
-            QuestSpellShop.buy(GuiBase.getInterface(), items, itemManager, ((InventoryPage)parentScreen.tabPages[1]).itemManager, true);
+            QuestSpellShop.buy(items, itemManager, ((InventoryPage)parentScreen.tabPages[1]).itemManager, true);
         }
 
         @Override
@@ -211,7 +210,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
                     @Override
                     public void run() {
                         QuestSpellShop.sellExtras(((SpellShopPage)parentScreen.tabPages[0]).itemManager, itemManager);
-                        FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
+                        FThreads.invokeInEdtLater(new Runnable() {
                             @Override
                             public void run() {
                                 parentScreen.updateCreditsLabel();
@@ -241,7 +240,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
 
         @Override
         protected void activateItems(ItemPool<InventoryItem> items) {
-            QuestSpellShop.sell(GuiBase.getInterface(), items, ((SpellShopPage)parentScreen.tabPages[0]).itemManager, itemManager, true);
+            QuestSpellShop.sell(items, ((SpellShopPage)parentScreen.tabPages[0]).itemManager, itemManager, true);
         }
 
         @Override

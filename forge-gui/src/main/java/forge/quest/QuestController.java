@@ -34,7 +34,6 @@ import forge.deck.DeckGroup;
 import forge.game.GameFormat;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventMulligan;
-import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
 import forge.item.PreconDeck;
 import forge.model.FModel;
@@ -58,8 +57,6 @@ import forge.util.storage.StorageBase;
  * 
  */
 public class QuestController {
-
-    private final IGuiBase gui;
     private QuestData model;
     // gadgets
 
@@ -103,12 +100,7 @@ public class QuestController {
     /** */
     public static final int MAX_PET_SLOTS = 2;
 
-    public QuestController(final IGuiBase gui) {
-        this.gui = gui;
-    }
-
-    public final IGuiBase getGui() {
-        return this.gui;
+    public QuestController() {
     }
 
     /**

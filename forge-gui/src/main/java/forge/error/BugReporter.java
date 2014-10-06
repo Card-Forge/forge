@@ -29,7 +29,7 @@ import java.util.Map.Entry;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.FThreads;
-import forge.interfaces.IGuiBase;
+import forge.GuiBase;
 import forge.util.BuildInfo;
 import forge.util.gui.SOptionPane;
 
@@ -73,22 +73,22 @@ public class BugReporter {
      * Shows exception information in a format ready to post to the forum as a crash report.  Uses the exception's message
      * as the reason if message is null.
      */
-    public static void reportException(final Throwable ex, final IGuiBase gui, final String message) {
+    public static void reportException(final Throwable ex, final String message) {
         if (ex == null) {
             return;
         }
         if (message != null) {
-            System.err.printf("%s > %s%n", FThreads.debugGetCurrThreadId(gui), message);
+            System.err.printf("%s > %s%n", FThreads.debugGetCurrThreadId(), message);
         }
-        System.err.print(FThreads.debugGetCurrThreadId(gui) + " > ");
+        System.err.print(FThreads.debugGetCurrThreadId() + " > ");
         ex.printStackTrace();
         
         StringBuilder sb = new StringBuilder();
         sb.append("Description: [describe what you were doing when the crash occurred]\n\n");
-        buildSpoilerHeader(gui, sb, ex.getClass().getSimpleName());
+        buildSpoilerHeader(sb, ex.getClass().getSimpleName());
         sb.append("\n\n");
         if (null != message && !message.isEmpty()) {
-            sb.append(FThreads.debugGetCurrThreadId(gui)).append(" > ").append(message).append("\n");
+            sb.append(FThreads.debugGetCurrThreadId()).append(" > ").append(message).append("\n");
         }
         
         StringWriter sw = new StringWriter();
@@ -108,46 +108,46 @@ public class BugReporter {
 
         buildSpoilerFooter(sb);
 
-        gui.showBugReportDialog("Report a crash", sb.toString(), true);
+        GuiBase.getInterface().showBugReportDialog("Report a crash", sb.toString(), true);
     }
 
     /**
      * Alias for reportException(ex, null).
      */
-    public static void reportException(final Throwable ex, final IGuiBase gui) {
-        reportException(ex, gui, null);
+    public static void reportException(final Throwable ex) {
+        reportException(ex, null);
     }
 
     /**
      * Alias for reportException(ex, String.format(format, args)).
      */
-    public static void reportException(final Throwable ex, final IGuiBase gui, final String format, final Object... args) {
-        reportException(ex, gui, String.format(format, args));
+    public static void reportException(final Throwable ex, final String format, final Object... args) {
+        reportException(ex, String.format(format, args));
     }
 
     /**
      * Shows a forum post template for reporting a bug.
      */
-    public static void reportBug(final IGuiBase gui, final String details) {
+    public static void reportBug(final String details) {
         StringBuilder sb = new StringBuilder();
         sb.append("Description: [describe the problem]\n\n");
-        buildSpoilerHeader(gui, sb, "General bug report");
+        buildSpoilerHeader(sb, "General bug report");
         if (null != details && !details.isEmpty()) {
             sb.append("\n\n");
             sb.append(details);
         }
         buildSpoilerFooter(sb);
 
-        gui.showBugReportDialog("Report a bug", sb.toString(), false);
+        GuiBase.getInterface().showBugReportDialog("Report a bug", sb.toString(), false);
     }
 
     /**
      * Shows thread stack information in a format ready to post to the forum.
      */
-    public static void reportThreadStacks(final IGuiBase gui,final String message) {
+    public static void reportThreadStacks(final String message) {
         StringBuilder sb = new StringBuilder();
         sb.append("Description: [describe what you were doing at the time]\n\n");
-        buildSpoilerHeader(gui, sb, "Thread stack dump");
+        buildSpoilerHeader(sb, "Thread stack dump");
         sb.append("\n\n");
         if (null != message && !message.isEmpty()) {
             sb.append(message);
@@ -167,7 +167,7 @@ public class BugReporter {
 
         sb.append(sw.toString());
         buildSpoilerFooter(sb);
-        gui.showBugReportDialog("Thread stack dump", sb.toString(), false);
+        GuiBase.getInterface().showBugReportDialog("Thread stack dump", sb.toString(), false);
     }
 
     /**
@@ -177,9 +177,9 @@ public class BugReporter {
         reportThreadStacks(String.format(format, args));
     }
 
-    private static StringBuilder buildSpoilerHeader(final IGuiBase gui, final StringBuilder sb, final String reportTitle) {
+    private static StringBuilder buildSpoilerHeader(final StringBuilder sb, final String reportTitle) {
         sb.append("[spoiler=").append(reportTitle).append("][code]");
-        sb.append("\nForge Version:    ").append(gui.getCurrentVersion());
+        sb.append("\nForge Version:    ").append(GuiBase.getInterface().getCurrentVersion());
         sb.append("\nOperating System: ").append(System.getProperty("os.name"))
                                          .append(" ").append(System.getProperty("os.version"))
                                          .append(" ").append(System.getProperty("os.arch"));
@@ -193,19 +193,19 @@ public class BugReporter {
         return sb;
     }
 
-    public static void copyAndGoToForums(final IGuiBase gui, final String text) {
+    public static void copyAndGoToForums(final String text) {
         try {
             // copy text to clipboard
-            gui.copyToClipboard(text);
-            gui.browseToUrl(FORUM_URL);
+            GuiBase.getInterface().copyToClipboard(text);
+            GuiBase.getInterface().browseToUrl(FORUM_URL);
         }
         catch (Exception ex) {
-            SOptionPane.showMessageDialog(gui, "Sorry, a problem occurred while opening the forum in your default browser.",
+            SOptionPane.showMessageDialog("Sorry, a problem occurred while opening the forum in your default browser.",
                     "A problem occurred", SOptionPane.ERROR_ICON);
         }
     }
 
-    public static void saveToFile(final IGuiBase gui, final String text) {
+    public static void saveToFile(final String text) {
         File f;
         long curTime = System.currentTimeMillis();
         for (int i = 0;; i++) {
@@ -216,7 +216,7 @@ public class BugReporter {
             }
         }
 
-        f = gui.getSaveFile(f);
+        f = GuiBase.getInterface().getSaveFile(f);
 
         try {
             final BufferedWriter bw = new BufferedWriter(new FileWriter(f));
@@ -224,7 +224,7 @@ public class BugReporter {
             bw.close();
         }
         catch (final IOException ex) {
-            SOptionPane.showMessageDialog(gui, "There was an error during saving. Sorry!\n" + ex,
+            SOptionPane.showMessageDialog("There was an error during saving. Sorry!\n" + ex,
                     "Error saving file", SOptionPane.ERROR_ICON);
         }
     }

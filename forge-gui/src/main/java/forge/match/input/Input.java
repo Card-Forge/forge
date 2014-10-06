@@ -3,14 +3,11 @@ package forge.match.input;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.interfaces.IGuiBase;
 import forge.util.ITriggerEvent;
 import forge.view.PlayerView;
 
 public interface Input {
     PlayerView getOwner();
-
-    IGuiBase getGui();
 
     void showMessageInitial();
 

@@ -194,7 +194,7 @@ public class ImageCache {
      * Returns the Image corresponding to the key.
      */
     private static BufferedImage getImage(final String key) {
-        FThreads.assertExecutedByEdt(GuiBase.getInterface(), true);
+        FThreads.assertExecutedByEdt(true);
         try {
             return ImageCache._CACHE.get(key);
         } catch (final ExecutionException ex) {

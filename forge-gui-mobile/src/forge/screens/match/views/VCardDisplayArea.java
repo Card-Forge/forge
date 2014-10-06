@@ -9,7 +9,6 @@ import com.badlogic.gdx.math.Vector2;
 
 import forge.FThreads;
 import forge.Graphics;
-import forge.GuiBase;
 import forge.card.CardZoom;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.match.MatchUtil;
@@ -80,7 +79,7 @@ public abstract class VCardDisplayArea extends VDisplayArea {
     }
 
     public final void removeCardPanel(final CardAreaPanel fromPanel) {
-        FThreads.assertExecutedByEdt(GuiBase.getInterface(), true);
+        FThreads.assertExecutedByEdt(true);
         /*if (CardPanelContainer.this.getMouseDragPanel() != null) {
             CardPanel.getDragAnimationPanel().setVisible(false);
             CardPanel.getDragAnimationPanel().repaint();

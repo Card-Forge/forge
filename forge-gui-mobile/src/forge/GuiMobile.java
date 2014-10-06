@@ -112,7 +112,7 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public ISkinImage getUnskinnedIcon(String path) {
-        if (FThreads.isGuiThread(this)) {
+        if (isGuiThread()) {
             return new FTextureImage(new Texture(Gdx.files.absolute(path)));
         }
 
@@ -219,9 +219,9 @@ public class GuiMobile implements IGuiBase {
 
         if (delayedReveal == null || Iterables.isEmpty(delayedReveal.getCards())) {
             if (isOptional) {
-                return SGuiChoose.oneOrNone(this, title, choiceList);
+                return SGuiChoose.oneOrNone(title, choiceList);
             }
-            return SGuiChoose.one(this, title, choiceList);
+            return SGuiChoose.one(title, choiceList);
         }
 
         controller.tempShow(delayedReveal.getCards());

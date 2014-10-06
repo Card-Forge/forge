@@ -21,7 +21,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
-import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.ai.LobbyPlayerAi;
 import forge.card.CardCharacteristicName;
@@ -190,7 +189,7 @@ public class MatchUtil {
         }
 
         if (humanCount == 0) { //watch game but do not participate
-            LocalGameView gameView = new WatchLocalGame(GuiBase.getInterface(), game);
+            LocalGameView gameView = new WatchLocalGame(game);
             currentPlayer = sortedPlayers.get(0);
             gameView.setLocalPlayer(currentPlayer);
             game.subscribeToEvents(new FControlGameEventHandler(gameView));
@@ -206,7 +205,7 @@ public class MatchUtil {
         controller.openView(sortedPlayers);
 
         if (humanCount == 0) {
-            playbackControl = new FControlGamePlayback(GuiBase.getInterface(), getGameView());
+            playbackControl = new FControlGamePlayback(getGameView());
             playbackControl.setGame(game);
             game.subscribeToEvents(playbackControl);
         }
@@ -226,7 +225,7 @@ public class MatchUtil {
                     boolean isPlayerOneHuman = match.getPlayers().get(0).getPlayer() instanceof LobbyPlayerHuman;
                     boolean isPlayerTwoComputer = match.getPlayers().get(1).getPlayer() instanceof LobbyPlayerAi;
                     if (isPlayerOneHuman && isPlayerTwoComputer) {
-                        GamePlayerUtil.setPlayerName(GuiBase.getInterface());
+                        GamePlayerUtil.setPlayerName();
                     }
                 }
                 match.startGame(game);
@@ -349,7 +348,7 @@ public class MatchUtil {
         String userPrompt =
                 "This will end the current game and you will not be able to resume.\n\n" +
                         "Concede anyway?";
-        if (SOptionPane.showConfirmDialog(GuiBase.getInterface(), userPrompt, "Concede Game?", "Concede", "Cancel")) {
+        if (SOptionPane.showConfirmDialog(userPrompt, "Concede Game?", "Concede", "Cancel")) {
             if (humanCount == 0) { // no human? then all players surrender!
                 for (Player p : game.getPlayers()) {
                     p.concede();
@@ -488,10 +487,10 @@ public class MatchUtil {
             in.close();
         }
         catch (final FileNotFoundException fnfe) {
-            SOptionPane.showErrorDialog(GuiBase.getInterface(), "File not found: " + filename);
+            SOptionPane.showErrorDialog("File not found: " + filename);
         }
         catch (final Exception e) {
-            SOptionPane.showErrorDialog(GuiBase.getInterface(), "Error loading battle setup file!");
+            SOptionPane.showErrorDialog("Error loading battle setup file!");
             return;
         }
 

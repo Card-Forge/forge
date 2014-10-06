@@ -8,7 +8,6 @@ import javax.swing.UIManager;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.FThreads;
-import forge.GuiBase;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FOptionPane;
 import forge.view.CardView;
@@ -46,7 +45,7 @@ public class GuiDialog {
             }};
 
         FutureTask<Boolean> future = new FutureTask<Boolean>(confirmTask);
-        FThreads.invokeInEdtAndWait(GuiBase.getInterface(), future);
+        FThreads.invokeInEdtAndWait(future);
         try { 
             return future.get().booleanValue();
         }
@@ -69,7 +68,7 @@ public class GuiDialog {
     }
 
     public static void message(final String message, final String title) {
-        FThreads.invokeInEdtAndWait(GuiBase.getInterface(), new Runnable() {
+        FThreads.invokeInEdtAndWait(new Runnable() {
             @Override
             public void run() {
                 FOptionPane.showMessageDialog(message, title, null);

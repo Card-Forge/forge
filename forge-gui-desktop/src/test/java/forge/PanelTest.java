@@ -45,7 +45,7 @@ public class PanelTest extends JFrame {
             this.jbInit();
         }
         catch (final Exception ex) {
-            BugReporter.reportException(ex, GuiBase.getInterface());
+            BugReporter.reportException(ex);
             ex.printStackTrace();
         }
     }

@@ -92,7 +92,7 @@ final class ImageLoader extends CacheLoader<String, BufferedImage> {
                     return ImageIO.read(file);
                 }
                 catch (IOException ex) {
-                    BugReporter.reportException(ex, GuiBase.getInterface(), "Could not read image file " + file.getAbsolutePath() + " ");
+                    BugReporter.reportException(ex, "Could not read image file " + file.getAbsolutePath() + " ");
                     break;
                 }
             }

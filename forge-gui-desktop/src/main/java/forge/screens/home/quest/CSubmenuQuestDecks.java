@@ -1,6 +1,5 @@
 package forge.screens.home.quest;
 
-import forge.GuiBase;
 import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.DeckProxy;
@@ -57,7 +56,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
         VSubmenuQuestDecks.SINGLETON_INSTANCE.getBtnNewDeck().setCommand(new UiCommand() {
             @Override
             public void run() {
-                if (!QuestUtil.checkActiveQuest(GuiBase.getInterface(), "Create a Deck.")) {
+                if (!QuestUtil.checkActiveQuest("Create a Deck.")) {
                     return;
                 }
                 Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_QUEST);

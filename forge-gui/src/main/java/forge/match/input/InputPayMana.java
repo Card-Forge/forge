@@ -246,7 +246,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
         final SpellAbility chosen;
         if (chosenAbility == null) {
-            chosen = abilities.size() > 1 && choice ? SGuiChoose.one(getGui(), "Choose mana ability", abilities) : abilities.get(0);
+            chosen = abilities.size() > 1 && choice ? SGuiChoose.one("Choose mana ability", abilities) : abilities.get(0);
         }
         else {
             chosen = chosenAbility;
@@ -414,7 +414,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             stop();
         }
         else {
-            FThreads.invokeInEdtNowOrLater(getGui(), new Runnable() {
+            FThreads.invokeInEdtNowOrLater(new Runnable() {
                 @Override
                 public void run() {
                     updateMessage();

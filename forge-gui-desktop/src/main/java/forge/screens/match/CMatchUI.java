@@ -35,7 +35,6 @@ import javax.swing.SwingUtilities;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.FThreads;
-import forge.GuiBase;
 import forge.ImageCache;
 import forge.LobbyPlayer;
 import forge.Singletons;
@@ -234,7 +233,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
     }
 
     public void setCard(final CardView c, final boolean isInAltState) {
-        FThreads.assertExecutedByEdt(GuiBase.getInterface(), true);
+        FThreads.assertExecutedByEdt(true);
         CDetail.SINGLETON_INSTANCE.showCard(c, isInAltState);
         CPicture.SINGLETON_INSTANCE.showCard(c, isInAltState);
     }
@@ -412,7 +411,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
     public void focusButton(final IButton button) {
         // ensure we don't steal focus from an overlay
         if (!SOverlayUtils.overlayHasFocus()) {
-            FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
+            FThreads.invokeInEdtLater(new Runnable() {
                 @Override
                 public void run() {
                     ((FButton)button).requestFocusInWindow();
@@ -586,7 +585,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
             final List<CardView> blockers, final int damage,
             final GameEntityView defender, final boolean overrideOrder) {
         final Object[] result = { null }; // how else can I extract a value from EDT thread?
-        FThreads.invokeInEdtAndWait(GuiBase.getInterface(), new Runnable() {
+        FThreads.invokeInEdtAndWait(new Runnable() {
             @Override
             public void run() {
                 VAssignDamage v = new VAssignDamage(attacker, blockers, damage, defender, overrideOrder);
@@ -604,7 +603,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
     public void startNewMatch(final Match match) {
         SOverlayUtils.startGameOverlay();
         SOverlayUtils.showOverlay();
-        FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
+        FThreads.invokeInEdtLater(new Runnable() {
             @Override
             public void run() {
                 MatchUtil.startGame(match);

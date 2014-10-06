@@ -25,7 +25,6 @@ import forge.card.UnOpenedProduct;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.game.card.Card;
-import forge.interfaces.IGuiBase;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
@@ -67,13 +66,13 @@ public class BoosterDraft implements IBoosterDraft {
 
     protected final List<Supplier<List<PaperCard>>> product = new ArrayList<Supplier<List<PaperCard>>>();
 
-    public static BoosterDraft createDraft(final IGuiBase gui, final LimitedPoolType draftType) {
+    public static BoosterDraft createDraft(final LimitedPoolType draftType) {
         BoosterDraft draft = new BoosterDraft(draftType);
-        if (!draft.generateProduct(gui)) { return null; }
+        if (!draft.generateProduct()) { return null; }
         return draft;
     }
 
-    protected boolean generateProduct(final IGuiBase gui) {
+    protected boolean generateProduct() {
         switch (this.draftFormat) {
         case Full: // Draft from all cards in Forge
             Supplier<List<PaperCard>> s = new UnOpenedProduct(SealedProduct.Template.genericBooster);
@@ -96,12 +95,12 @@ public class BoosterDraft implements IBoosterDraft {
                 }
             }
 
-            final CardBlock block = SGuiChoose.oneOrNone(gui, "Choose Block", blocks);
+            final CardBlock block = SGuiChoose.oneOrNone("Choose Block", blocks);
             if (block == null) { return false; }
 
             final CardEdition[] cardSets = block.getSets();
             if (cardSets.length == 0) {
-                SOptionPane.showErrorDialog(gui, block.toString() + " does not contain any set combinations.");
+                SOptionPane.showErrorDialog(block.toString() + " does not contain any set combinations.");
                 return false;
             }
 
@@ -119,16 +118,16 @@ public class BoosterDraft implements IBoosterDraft {
             final int nPacks = block.getCntBoostersDraft();
 
             if (sets.size() > 1) {
-                final Object p = SGuiChoose.oneOrNone(gui, "Choose Set Combination", getSetCombos(sets));
+                final Object p = SGuiChoose.oneOrNone("Choose Set Combination", getSetCombos(sets));
                 if (p == null) { return false; }
 
                 final String[] pp = p.toString().split("/");
                 for (int i = 0; i < nPacks; i++) {
-                    this.product.add(block.getBooster(pp[i], gui));
+                    this.product.add(block.getBooster(pp[i]));
                 }
             }
             else {
-                IUnOpenedProduct product1 = block.getBooster(sets.get(0), gui);
+                IUnOpenedProduct product1 = block.getBooster(sets.get(0));
 
                 for (int i = 0; i < nPacks; i++) {
                     this.product.add(product1);
@@ -142,10 +141,10 @@ public class BoosterDraft implements IBoosterDraft {
             final List<CustomLimited> myDrafts = this.loadCustomDrafts();
 
             if (myDrafts.isEmpty()) {
-                SOptionPane.showMessageDialog(gui, "No custom draft files found.");
+                SOptionPane.showMessageDialog("No custom draft files found.");
             }
             else {
-                final CustomLimited customDraft = SGuiChoose.oneOrNone(gui, "Choose Custom Draft", myDrafts);
+                final CustomLimited customDraft = SGuiChoose.oneOrNone("Choose Custom Draft", myDrafts);
                 if (customDraft == null) { return false; }
 
                 this.setupCustomDraft(customDraft);
@@ -160,13 +159,13 @@ public class BoosterDraft implements IBoosterDraft {
         return true;
     }
 
-    public static BoosterDraft createDraft(final IGuiBase gui, final LimitedPoolType draftType, final CardBlock block, final String[] boosters) {   
+    public static BoosterDraft createDraft(final LimitedPoolType draftType, final CardBlock block, final String[] boosters) {   
         BoosterDraft draft = new BoosterDraft(draftType);
         
         final int nPacks = boosters.length;
 
         for (int i = 0; i < nPacks; i++) {
-            draft.product.add(block.getBooster(boosters[i], gui));
+            draft.product.add(block.getBooster(boosters[i]));
         }
 
         IBoosterDraft.LAND_SET_CODE[0] = block.getLandSet();

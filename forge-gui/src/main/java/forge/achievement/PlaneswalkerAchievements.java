@@ -2,7 +2,6 @@ package forge.achievement;
 
 import forge.game.Game;
 import forge.game.player.Player;
-import forge.interfaces.IGuiBase;
 import forge.item.IPaperCard;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
@@ -79,14 +78,14 @@ public class PlaneswalkerAchievements extends AchievementCollection {
     }
 
     @Override
-    public void updateAll(IGuiBase gui, Player player) {
+    public void updateAll(Player player) {
         //only call update achievements for any ultimates activated during the game
         if (player.getOutcome().hasWon()) {
             boolean needSave = false;
             for (String ultimate : player.getAchievementTracker().activatedUltimates) {
                 Achievement achievement = achievements.get(ultimate);
                 if (achievement != null) {
-                    achievement.update(gui, player);
+                    achievement.update(player);
                     needSave = true;
                 }
             }

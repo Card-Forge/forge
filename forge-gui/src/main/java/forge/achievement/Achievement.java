@@ -11,7 +11,6 @@ import forge.assets.FSkinProp;
 import forge.assets.ISkinImage;
 import forge.game.Game;
 import forge.game.player.Player;
-import forge.interfaces.IGuiBase;
 import forge.item.IPaperCard;
 import forge.properties.ForgeConstants;
 import forge.util.Lang;
@@ -153,7 +152,7 @@ public abstract class Achievement {
         image = GuiBase.getInterface().createLayeredImage(background, ForgeConstants.CACHE_ACHIEVEMENTS_DIR + "/" + key + ".png", opacity);
     }
 
-    public int update(IGuiBase gui, Player player) {
+    public int update(Player player) {
         int value = evaluate(player, player.getGame());
         if (checkGreaterThan) {
             if (value <= best) { return value; }
@@ -172,7 +171,7 @@ public abstract class Achievement {
         if (earnedSpecial()) {
             if (!hadEarnedSpecial) {
                 updateTrophyImage();
-                gui.showImageDialog(image, displayName + "\n" + sharedDesc + "\n" + mythicDesc, "Achievement Earned");
+                GuiBase.getInterface().showImageDialog(image, displayName + "\n" + sharedDesc + "\n" + mythicDesc, "Achievement Earned");
             }
             return value;
         }
@@ -208,7 +207,7 @@ public abstract class Achievement {
             if (sharedDesc != null) {
                 desc = sharedDesc + " " + desc;
             }
-            gui.showImageDialog(image, displayName + " (" + type + ")\n" + desc, "Achievement Earned");
+            GuiBase.getInterface().showImageDialog(image, displayName + " (" + type + ")\n" + desc, "Achievement Earned");
         }
         return value;
     }

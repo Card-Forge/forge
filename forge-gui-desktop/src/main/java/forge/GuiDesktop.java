@@ -148,7 +148,7 @@ public class GuiDesktop implements IGuiBase {
     @Override
     public int showCardOptionDialog(final CardView card, String message, String title, FSkinProp skinIcon, String[] options, int defaultOption) {
         if (card != null) {
-            FThreads.invokeInEdtAndWait(GuiBase.getInterface(), new Runnable() {
+            FThreads.invokeInEdtAndWait(new Runnable() {
                 @Override
                 public void run() {
                     GuiBase.getInterface().setCard(card);
@@ -196,9 +196,9 @@ public class GuiDesktop implements IGuiBase {
         controller.tempShow(optionList);
         List<GameEntityView> gameEntityViews = controller.getGameView().getGameEntityViews(optionList, false);
         if (isOptional) {
-            return SGuiChoose.oneOrNone(this, title, gameEntityViews);
+            return SGuiChoose.oneOrNone(title, gameEntityViews);
         }
-        return SGuiChoose.one(this, title, gameEntityViews);
+        return SGuiChoose.one(title, gameEntityViews);
     }
 
     @Override

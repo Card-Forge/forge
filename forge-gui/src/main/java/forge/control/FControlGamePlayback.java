@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.google.common.eventbus.Subscribe;
 
 import forge.FThreads;
+import forge.GuiBase;
 import forge.game.Game;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventBlockersDeclared;
@@ -18,7 +19,6 @@ import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventTurnPhase;
 import forge.game.event.IGameEventVisitor;
-import forge.interfaces.IGuiBase;
 import forge.match.MatchUtil;
 import forge.match.input.InputPlaybackControl;
 import forge.view.LocalGameView;
@@ -29,11 +29,9 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
 
     private final CyclicBarrier gameThreadPauser = new CyclicBarrier(2);
 
-    private final IGuiBase gui;
     private final LocalGameView gameView;
-    public FControlGamePlayback(final IGuiBase gui, final LocalGameView gameView) {
-        this.gui = gui;
-        this.gameView = gameView;
+    public FControlGamePlayback(final LocalGameView gameView0) {
+        gameView = gameView0;
     }
 
     private Game game;
@@ -42,9 +40,9 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
         return game;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
-        this.inputPlayback = new InputPlaybackControl(gui, game, this);
+    public void setGame(Game game0) {
+        game = game0;
+        inputPlayback = new InputPlaybackControl(game, this);
     }
 
     @Subscribe
@@ -121,10 +119,10 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventSpellResolved event) {
-        FThreads.invokeInEdtNowOrLater(gui, new Runnable() {
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override
             public void run() {
-                gui.setCard(gameView.getCardView(event.spell.getHostCard(), true));
+                GuiBase.getInterface().setCard(gameView.getCardView(event.spell.getHostCard(), true));
             }
         });
         pauseForEvent(resolveDelay);
@@ -136,10 +134,10 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
      */
     @Override
     public Void visit(final GameEventSpellAbilityCast event) {
-        FThreads.invokeInEdtNowOrLater(gui, new Runnable() {
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override
             public void run() {
-                gui.setCard(gameView.getCardView(event.sa.getHostCard(), true));
+                GuiBase.getInterface().setCard(gameView.getCardView(event.sa.getHostCard(), true));
             }
         });
         pauseForEvent(castDelay);

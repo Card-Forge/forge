@@ -17,7 +17,6 @@
  */
 package forge.gui;
 
-import forge.GuiBase;
 import forge.UiCommand;
 import forge.assets.FSkinProp;
 import forge.error.BugReporter;
@@ -514,7 +513,7 @@ public class ImportDialog {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override public void run() {
                         _progressBar.setString("Error");
-                        BugReporter.reportException(e, GuiBase.getInterface());
+                        BugReporter.reportException(e);
                     }
                 });
             } finally {
@@ -778,7 +777,7 @@ public class ImportDialog {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override public void run() {
                         // we never interrupt the thread, so this is not expected to happen
-                        BugReporter.reportException(e, GuiBase.getInterface());
+                        BugReporter.reportException(e);
                     }
                 });
             }
@@ -937,7 +936,7 @@ public class ImportDialog {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override public void run() {
                         _progressBar.setString("Error");
-                        BugReporter.reportException(e, GuiBase.getInterface());
+                        BugReporter.reportException(e);
                     }
                 });
             }

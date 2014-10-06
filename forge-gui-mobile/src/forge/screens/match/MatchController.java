@@ -13,7 +13,6 @@ import com.badlogic.gdx.Gdx;
 
 import forge.Forge;
 import forge.Graphics;
-import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.assets.FImage;
 import forge.assets.FSkin;
@@ -220,7 +219,7 @@ public class MatchController implements IMatchController {
         if (abilities.size() == 1) {
             return abilities.get(0).getId();
         }
-        final SpellAbilityView choice = SGuiChoose.oneOrNone(GuiBase.getInterface(), "Choose ability to play", abilities);
+        final SpellAbilityView choice = SGuiChoose.oneOrNone("Choose ability to play", abilities);
         return choice == null ? -1 : choice.getId();
     }
 

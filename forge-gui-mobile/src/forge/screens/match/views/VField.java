@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.FThreads;
-import forge.GuiBase;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.toolbox.FContainer;
 import forge.view.CardView;
@@ -42,7 +41,7 @@ public class VField extends FContainer {
     }
 
     public void update() {
-        FThreads.invokeInEdtNowOrLater(GuiBase.getInterface(), updateRoutine);
+        FThreads.invokeInEdtNowOrLater(updateRoutine);
     }
 
     private final Runnable updateRoutine = new Runnable() {

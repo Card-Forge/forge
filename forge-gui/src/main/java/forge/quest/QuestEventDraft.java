@@ -17,6 +17,7 @@
  */
 package forge.quest;
 
+import forge.GuiBase;
 import forge.card.CardEdition;
 import forge.card.CardEdition.CardInSet;
 import forge.card.CardRarity;
@@ -24,7 +25,6 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
-import forge.interfaces.IGuiBase;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.limited.BoosterDraft;
@@ -666,10 +666,10 @@ public class QuestEventDraft {
         return creditsAvailable < getEntryFee();
     }
 
-    public BoosterDraft enter(final IGuiBase gui) {
+    public BoosterDraft enter() {
         FModel.getQuest().getAchievements().setCurrentDraft(this);
         FModel.getQuest().getAssets().subtractCredits(getEntryFee());
-        return BoosterDraft.createDraft(gui, LimitedPoolType.Block, FModel.getBlocks().get(getBlock()), getBoosterConfiguration());
+        return BoosterDraft.createDraft(LimitedPoolType.Block, FModel.getBlocks().get(getBlock()), getBoosterConfiguration());
     }
 
     public boolean isStarted() {
@@ -806,7 +806,7 @@ public class QuestEventDraft {
             usedNames.add(event.aiNames[i]);
         }
         
-        int numberOfIcons = quest.getGui().getAvatarCount();
+        int numberOfIcons = GuiBase.getInterface().getAvatarCount();
         List<Integer> usedIcons = new ArrayList<>();
         
         for (int i = 0; i < 7; i++) {

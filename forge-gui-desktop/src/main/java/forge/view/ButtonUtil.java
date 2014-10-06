@@ -18,7 +18,6 @@
 package forge.view;
 
 import forge.FThreads;
-import forge.GuiBase;
 import forge.gui.SOverlayUtils;
 import forge.screens.match.VMatchUI;
 
@@ -69,7 +68,7 @@ public class ButtonUtil {
         
         // ensure we don't steal focus from an overlay
         if (!SOverlayUtils.overlayHasFocus()) {
-            FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() { @Override public void run() { button.requestFocusInWindow(); } });
+            FThreads.invokeInEdtLater(new Runnable() { @Override public void run() { button.requestFocusInWindow(); } });
         }
     }
     

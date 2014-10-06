@@ -20,7 +20,6 @@ package forge.screens.match.controllers;
 import java.io.File;
 
 import forge.FThreads;
-import forge.GuiBase;
 import forge.Singletons;
 import forge.UiCommand;
 import forge.assets.FSkinProp;
@@ -62,7 +61,7 @@ public enum CDock implements ICDoc {
         SOverlayUtils.genericOverlay();
         FView.SINGLETON_INSTANCE.getPnlContent().removeAll();
 
-        FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable(){
+        FThreads.invokeInEdtLater(new Runnable(){
             @Override public void run() {
                 SLayoutIO.loadLayout(null);
                 SOverlayUtils.hideOverlay();
@@ -92,7 +91,7 @@ public enum CDock implements ICDoc {
             FView.SINGLETON_INSTANCE.getPnlContent().removeAll();
             // let it redraw everything first
 
-            FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
+            FThreads.invokeInEdtLater(new Runnable() {
                 @Override
                 public void run() {
                     if (loadFile != null) {

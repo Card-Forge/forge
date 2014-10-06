@@ -37,7 +37,7 @@ public final class Singletons {
     public static FControl getControl() { return control; }
 
     public static void initializeOnce(boolean withUi) {
-        FThreads.assertExecutedByEdt(GuiBase.getInterface(), false);
+        FThreads.assertExecutedByEdt(false);
 
         synchronized (Singletons.class) {
             if (initialized) {
@@ -50,7 +50,7 @@ public final class Singletons {
             view = FView.SINGLETON_INSTANCE;
         }
 
-        FModel.initialize(GuiBase.getInterface(), view == null ? null : view.getSplash().getProgressBar());
+        FModel.initialize(view == null ? null : view.getSplash().getProgressBar());
 
         if (withUi) {
             control = FControl.instance;

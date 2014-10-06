@@ -1,8 +1,6 @@
 package forge.screens.quest;
 
 import forge.FThreads;
-import forge.GuiBase;
-import forge.interfaces.IGuiBase;
 import forge.model.FModel;
 import forge.quest.QuestUtil;
 import forge.screens.LaunchScreen;
@@ -29,15 +27,14 @@ public abstract class QuestLaunchScreen extends LaunchScreen {
         FThreads.invokeInBackgroundThread(new Runnable() {
             @Override
             public void run() {
-                final IGuiBase gui = GuiBase.getInterface();
-                if (QuestUtil.canStartGame(gui)) {
-                    FThreads.invokeInEdtLater(gui, new Runnable() {
+                if (QuestUtil.canStartGame()) {
+                    FThreads.invokeInEdtLater(new Runnable() {
                         @Override
                         public void run() {
                             LoadingOverlay.show("Loading new game...", new Runnable() {
                                 @Override
                                 public void run() {
-                                    QuestUtil.finishStartingGame(gui);
+                                    QuestUtil.finishStartingGame();
                                     creatingMatch = false;
                                 }
                             });

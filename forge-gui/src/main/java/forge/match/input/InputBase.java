@@ -26,7 +26,6 @@ import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.interfaces.IGuiBase;
 import forge.match.MatchUtil;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
@@ -58,9 +57,6 @@ public abstract class InputBase implements java.io.Serializable, Input {
     public PlayerView getOwner() {
         return controller.getPlayerView(controller.getPlayer());
     }
-    public IGuiBase getGui() {
-        return controller.getGui();
-    }
 
     private boolean finished = false;
     protected final boolean isFinished() { return finished; }
@@ -84,7 +80,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
         awaitNextInputTask = new TimerTask() {
             @Override
             public void run() {
-                FThreads.invokeInEdtLater(gameView.getGui(), new Runnable() {
+                FThreads.invokeInEdtLater(new Runnable() {
                     @Override
                     public void run() {
                         synchronized (awaitNextInputTimer) {
@@ -105,7 +101,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
         if (gameView == null) { return; }
 
         cancelAwaitNextInput();
-        FThreads.invokeInEdtNowOrLater(gameView.getGui(), new Runnable() {
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override
             public void run() {
                 updatePromptForAwait(gameView);

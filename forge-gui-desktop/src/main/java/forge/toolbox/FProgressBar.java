@@ -1,7 +1,6 @@
 package forge.toolbox;
 
 import forge.FThreads;
-import forge.GuiBase;
 import forge.interfaces.IProgressBar;
 
 import javax.swing.*;
@@ -37,7 +36,7 @@ public class FProgressBar extends JProgressBar implements IProgressBar {
      * @param s0 &emsp; A description to prepend before statistics.
      */
     public void setDescription(final String s0) {
-        FThreads.assertExecutedByEdt(GuiBase.getInterface(), true);
+        FThreads.assertExecutedByEdt(true);
         desc = s0;
         setString(s0);
     }
@@ -82,7 +81,7 @@ public class FProgressBar extends JProgressBar implements IProgressBar {
 
     /** Resets the various values required for this class. Must be called from EDT. */
     public void reset() {
-        FThreads.assertExecutedByEdt(GuiBase.getInterface(), true);
+        FThreads.assertExecutedByEdt(true);
         setIndeterminate(true);
         setValue(0);
         tempVal = 0;

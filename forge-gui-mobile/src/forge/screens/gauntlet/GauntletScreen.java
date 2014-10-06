@@ -12,7 +12,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.FThreads;
 import forge.Graphics;
-import forge.GuiBase;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
@@ -285,14 +284,14 @@ public class GauntletScreen extends LaunchScreen {
                 String gauntletName;
                 String oldGauntletName = gauntlet.getName();
                 while (true) {
-                    gauntletName = SOptionPane.showInputDialog(GuiBase.getInterface(), "Enter new name for gauntlet:", "Rename Gauntlet", null, oldGauntletName);
+                    gauntletName = SOptionPane.showInputDialog("Enter new name for gauntlet:", "Rename Gauntlet", null, oldGauntletName);
                     if (gauntletName == null) { return; }
 
                     gauntletName = QuestUtil.cleanString(gauntletName);
                     if (gauntletName.equals(oldGauntletName)) { return; } //quit if chose same name
 
                     if (gauntletName.isEmpty()) {
-                        SOptionPane.showMessageDialog(GuiBase.getInterface(), "Please specify a gauntlet name.");
+                        SOptionPane.showMessageDialog("Please specify a gauntlet name.");
                         continue;
                     }
 
@@ -304,13 +303,13 @@ public class GauntletScreen extends LaunchScreen {
                         }
                     }
                     if (exists) {
-                        SOptionPane.showMessageDialog(GuiBase.getInterface(), "A gauntlet already exists with that name. Please pick another gauntlet name.");
+                        SOptionPane.showMessageDialog("A gauntlet already exists with that name. Please pick another gauntlet name.");
                         continue;
                     }
                     break;
                 }
                 final String newGauntletName = gauntletName;
-                FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
+                FThreads.invokeInEdtLater(new Runnable() {
                     @Override
                     public void run() {
                         gauntlet.rename(newGauntletName);
@@ -328,7 +327,7 @@ public class GauntletScreen extends LaunchScreen {
         ThreadUtil.invokeInGameThread(new Runnable() {
             @Override
             public void run() {
-                if (!SOptionPane.showConfirmDialog(GuiBase.getInterface(), 
+                if (!SOptionPane.showConfirmDialog(
                         "Are you sure you want to delete '" + gauntlet.getName() + "'?",
                         "Delete Gauntlet", "Delete", "Cancel")) {
                     return;

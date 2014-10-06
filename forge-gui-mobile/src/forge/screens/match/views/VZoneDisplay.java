@@ -3,7 +3,6 @@ package forge.screens.match.views;
 import java.util.ArrayList;
 
 import forge.FThreads;
-import forge.GuiBase;
 import forge.game.zone.ZoneType;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
@@ -25,7 +24,7 @@ public class VZoneDisplay extends VCardDisplayArea {
 
     @Override
     public void update() {
-        FThreads.invokeInEdtNowOrLater(GuiBase.getInterface(), updateRoutine);
+        FThreads.invokeInEdtNowOrLater(updateRoutine);
     }
 
     private final Runnable updateRoutine = new Runnable() {

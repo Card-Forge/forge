@@ -5,7 +5,6 @@ package forge.view;
 
 import forge.game.Game;
 import forge.game.card.Card;
-import forge.interfaces.IGuiBase;
 import forge.match.input.Input;
 import forge.match.input.InputPlaybackControl;
 import forge.match.input.InputQueue;
@@ -24,8 +23,8 @@ public class WatchLocalGame extends LocalGameView {
      *            the {@link InputQueue} of the game to enable playback
      *            controls, or {@code null} to disallow them.
      */
-    public WatchLocalGame(IGuiBase gui0, Game game0) {
-        super(gui0, game0);
+    public WatchLocalGame(Game game0) {
+        super(game0);
     }
 
     @Override

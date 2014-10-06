@@ -109,7 +109,7 @@ public class InputPassPriority extends InputSyncronizedBase {
                             if (FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN)) {
                                 message += " You will take mana burn damage equal to the amount of floating mana lost this way.";
                             }
-                            if (SOptionPane.showOptionDialog(getGui(), message, "Mana Floating", SOptionPane.WARNING_ICON, new String[]{"OK", "Cancel"}) == 0) {
+                            if (SOptionPane.showOptionDialog(message, "Mana Floating", SOptionPane.WARNING_ICON, new String[]{"OK", "Cancel"}) == 0) {
                                 runnable.run();
                             }
                         }

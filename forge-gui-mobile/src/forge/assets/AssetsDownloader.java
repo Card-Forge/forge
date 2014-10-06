@@ -21,7 +21,6 @@ import com.esotericsoftware.minlog.Log;
 
 import forge.FThreads;
 import forge.Forge;
-import forge.GuiBase;
 import forge.properties.ForgeConstants;
 import forge.screens.SplashScreen;
 import forge.toolbox.FProgressBar;
@@ -52,7 +51,7 @@ public class AssetsDownloader {
                     if (!Forge.getDeviceAdapter().isConnectedToWifi()) {
                         message += " If so, you may want to connect to wifi first. The download is around 6.5MB.";
                     }
-                    if (SOptionPane.showConfirmDialog(GuiBase.getInterface(), message, "New Version Available", "Update Now", "Update Later")) {
+                    if (SOptionPane.showConfirmDialog(message, "New Version Available", "Update Now", "Update Later")) {
                         String apkFile = downloadFile("update", "forge-android-" + version + "-signed-aligned.apk",
                                 "http://cardforge.org/android/releases/forge/forge-gui-android/" + version + "/",
                                 Forge.getDeviceAdapter().getDownloadsDir(), splashScreen.getProgressBar());
@@ -61,7 +60,7 @@ public class AssetsDownloader {
                             Forge.exit(true);
                             return;
                         }
-                        SOptionPane.showMessageDialog(GuiBase.getInterface(), "Could not download update. " +
+                        SOptionPane.showMessageDialog("Could not download update. " +
                                 "Press OK to proceed without update.", "Update Failed");
                     }
                 }
@@ -99,7 +98,7 @@ public class AssetsDownloader {
             else {
                 message += "You cannot start the app since you haven't previously downloaded these files.";
             }
-            SOptionPane.showMessageDialog(GuiBase.getInterface(), message, "No Internet Connection");
+            SOptionPane.showMessageDialog(message, "No Internet Connection");
             if (!canIgnoreDownload) {
                 Forge.exit(true); //exit if can't ignore download
             }
@@ -125,7 +124,7 @@ public class AssetsDownloader {
             message += "This download is mandatory to start the app since you haven't previously downloaded these files.";
             options = new String[] { "Download", "Exit" };
         }
-        switch (SOptionPane.showOptionDialog(GuiBase.getInterface(), message, "Download Resource Files?",
+        switch (SOptionPane.showOptionDialog(message, "Download Resource Files?",
                 null, options)) {
         case 1:
             if (!canIgnoreDownload) {
@@ -142,7 +141,7 @@ public class AssetsDownloader {
         FSkinFont.deleteCachedFiles(); //delete cached font files in case any skin's .ttf file changed
 
         //reload light version of skin after assets updated
-        FThreads.invokeInEdtAndWait(GuiBase.getInterface(), new Runnable() {
+        FThreads.invokeInEdtAndWait(new Runnable() {
             @Override
             public void run() {
                 FSkinFont.updateAll(); //update all fonts used by splash screen

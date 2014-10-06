@@ -31,7 +31,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import forge.FThreads;
-import forge.GuiBase;
 import forge.Singletons;
 import forge.UiCommand;
 import forge.gui.framework.ICDoc;
@@ -81,7 +80,7 @@ public class CHand implements ICDoc {
     }
 
     public void update(final Observable a, final Object b) {
-        FThreads.invokeInEdtNowOrLater(GuiBase.getInterface(), updateRoutine);
+        FThreads.invokeInEdtNowOrLater(updateRoutine);
     }
 
     private final Runnable updateRoutine = new Runnable() {
@@ -89,7 +88,7 @@ public class CHand implements ICDoc {
     };
 
     public void updateHand() {
-        FThreads.assertExecutedByEdt(GuiBase.getInterface(), true);
+        FThreads.assertExecutedByEdt(true);
 
         final HandArea p = view.getHandArea();
 

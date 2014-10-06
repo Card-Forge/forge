@@ -60,7 +60,7 @@ public class InputBlock extends InputSyncronizedBase {
         for (final Card attacker : combat.getAttackers()) {
             for (final Card c : CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
                 if (CombatUtil.canBlock(attacker, c, combat)) {
-                    FThreads.invokeInEdtNowOrLater(getGui(), new Runnable() { //must set current attacker on EDT
+                    FThreads.invokeInEdtNowOrLater(new Runnable() { //must set current attacker on EDT
                         @Override
                         public void run() {
                             setCurrentAttacker(attacker);
@@ -104,7 +104,7 @@ public class InputBlock extends InputSyncronizedBase {
             ThreadUtil.invokeInGameThread(new Runnable() {
                 @Override
                 public void run() {
-                    SGuiDialog.message(getGui(), blockErrors);
+                    SGuiDialog.message(blockErrors);
                 }
             });
         }

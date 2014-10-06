@@ -26,7 +26,6 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
-import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.model.CardBlock;
@@ -67,12 +66,12 @@ public class SealedCardPoolGenerator {
     /** The Land set code. */
     private String landSetCode = null;
 
-    public static DeckGroup generateSealedDeck(final IGuiBase gui, final boolean addBasicLands) {
+    public static DeckGroup generateSealedDeck(final boolean addBasicLands) {
         final String prompt = "Choose Sealed Deck Format";
-        final LimitedPoolType poolType = SGuiChoose.oneOrNone(gui, prompt, LimitedPoolType.values());
+        final LimitedPoolType poolType = SGuiChoose.oneOrNone(prompt, LimitedPoolType.values());
         if (poolType == null) { return null; }
 
-        SealedCardPoolGenerator sd = new SealedCardPoolGenerator(gui, poolType);
+        SealedCardPoolGenerator sd = new SealedCardPoolGenerator(poolType);
         if (sd.isEmpty()) { return null; }
 
         final CardPool humanPool = sd.getCardPool(true);
@@ -83,10 +82,10 @@ public class SealedCardPoolGenerator {
         // This seems to be limited by the MAX_DRAFT_PLAYERS constant
         // in DeckGroupSerializer.java. You could create more AI decks
         // but only the first seven would load. --BBU
-        Integer rounds = SGuiChoose.getInteger(gui, "How many opponents are you willing to face?", 1, 7);
+        Integer rounds = SGuiChoose.getInteger("How many opponents are you willing to face?", 1, 7);
         if (rounds == null) { return null; }
 
-        final String sDeckName = SOptionPane.showInputDialog(gui,
+        final String sDeckName = SOptionPane.showInputDialog(
                 "Save this card pool as:",
                 "Save Card Pool",
                 FSkinProp.ICO_QUESTION);
@@ -97,7 +96,7 @@ public class SealedCardPoolGenerator {
 
         final IStorage<DeckGroup> sealedDecks = FModel.getDecks().getSealed();
         if (sealedDecks.contains(sDeckName)) {
-            if (!SOptionPane.showConfirmDialog(gui,
+            if (!SOptionPane.showConfirmDialog(
                     "'" + sDeckName + "' already exists. Do you want to replace it?",
                     "Sealed Deck Game Exists")) {
                 return null;
@@ -155,11 +154,11 @@ public class SealedCardPoolGenerator {
      * @param poolType
      *            a {@link java.lang.String} object.
      */
-    private SealedCardPoolGenerator(final IGuiBase gui, final LimitedPoolType poolType) {
+    private SealedCardPoolGenerator(final LimitedPoolType poolType) {
         switch(poolType) {
             case Full:
                 // Choose number of boosters
-                if (!chooseNumberOfBoosters(gui, new UnOpenedProduct(SealedProduct.Template.genericBooster))) {
+                if (!chooseNumberOfBoosters(new UnOpenedProduct(SealedProduct.Template.genericBooster))) {
                     return;
                 }
                 landSetCode = CardEdition.Predicates.getRandomSetWithAllBasicLands(FModel.getMagicDb().getEditions()).getCode();
@@ -173,7 +172,7 @@ public class SealedCardPoolGenerator {
                     blocks.add(b);
                 }
 
-                final CardBlock block = SGuiChoose.oneOrNone(gui, "Choose Block", blocks);
+                final CardBlock block = SGuiChoose.oneOrNone("Choose Block", blocks);
                 if (block == null) { return; }
 
                 final int nPacks = block.getCntBoostersSealed();
@@ -193,7 +192,7 @@ public class SealedCardPoolGenerator {
                         throw new RuntimeException("Unsupported amount of packs (" + nPacks + ") in a Sealed Deck block!");
                     }
 
-                    final String p = setCombos.size() > 1 ? SGuiChoose.oneOrNone(gui, "Choose packs to play with", setCombos) : setCombos.get(0);
+                    final String p = setCombos.size() > 1 ? SGuiChoose.oneOrNone("Choose packs to play with", setCombos) : setCombos.get(0);
                     if (p == null) { return; }
 
                     for (String pz : TextUtil.split(p, ',')) {
@@ -201,12 +200,12 @@ public class SealedCardPoolGenerator {
                         String setCode = pps[pps.length - 1];
                         int nBoosters = pps.length > 1 ? Integer.parseInt(pps[0]) : 1;
                         while (nBoosters-- > 0) {
-                            this.product.add(block.getBooster(setCode, gui));
+                            this.product.add(block.getBooster(setCode));
                         }
                     }
                 }
                 else {
-                    IUnOpenedProduct prod = block.getBooster(sets.get(0), gui);
+                    IUnOpenedProduct prod = block.getBooster(sets.get(0));
                     for (int i = 0; i < nPacks; i++) {
                         this.product.add(prod);
                     }
@@ -244,16 +243,16 @@ public class SealedCardPoolGenerator {
 
                 // present list to user
                 if (customs.isEmpty()) {
-                    SOptionPane.showMessageDialog(gui, "No custom sealed files found.");
+                    SOptionPane.showMessageDialog("No custom sealed files found.");
                     return;
                 }
 
-                final CustomLimited draft = SGuiChoose.oneOrNone(gui, "Choose Custom Sealed Pool", customs);
+                final CustomLimited draft = SGuiChoose.oneOrNone("Choose Custom Sealed Pool", customs);
                 if (draft == null) { return; }
 
                 UnOpenedProduct toAdd = new UnOpenedProduct(draft.getSealedProductTemplate(), draft.getCardPool());
                 toAdd.setLimitedPool(draft.isSingleton());
-                if (!chooseNumberOfBoosters(gui, toAdd)) {
+                if (!chooseNumberOfBoosters(toAdd)) {
                     return;
                 }
 
@@ -262,8 +261,8 @@ public class SealedCardPoolGenerator {
         }
     }
 
-    private boolean chooseNumberOfBoosters(final IGuiBase gui, final IUnOpenedProduct product1) {
-        Integer boosterCount = SGuiChoose.getInteger(gui, "How many booster packs?", 3, 12);
+    private boolean chooseNumberOfBoosters(final IUnOpenedProduct product1) {
+        Integer boosterCount = SGuiChoose.getInteger("How many booster packs?", 3, 12);
         if (boosterCount == null) { return false; }
 
         for (int i = 0; i < boosterCount; i++) {

@@ -1,6 +1,5 @@
 package forge.screens.home.sanctioned;
 
-import forge.GuiBase;
 import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.*;
@@ -115,7 +114,7 @@ public enum CSubmenuSealed implements ICDoc {
 
     @SuppressWarnings("unchecked")
     private <T extends DeckBase> void setupSealed() {
-        final DeckGroup sealed = SealedCardPoolGenerator.generateSealedDeck(GuiBase.getInterface(), true);
+        final DeckGroup sealed = SealedCardPoolGenerator.generateSealedDeck(true);
         if (sealed == null) { return; }
 
         final ACEditorBase<? extends InventoryItem, T> editor = (ACEditorBase<? extends InventoryItem, T>) new CEditorLimited(

@@ -1,7 +1,6 @@
 package forge.limited;
 
 import forge.interfaces.IButton;
-import forge.interfaces.IGuiBase;
 import forge.interfaces.IWinLoseView;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -14,7 +13,7 @@ public abstract class LimitedWinLoseController {
     private GauntletMini gauntlet;
     private boolean nextRound = false;
 
-    public LimitedWinLoseController(IWinLoseView<? extends IButton> view0, final IGameView game0, final IGuiBase gui) {
+    public LimitedWinLoseController(IWinLoseView<? extends IButton> view0, final IGameView game0) {
         view = view0;
         lastGame = game0;
         gauntlet = FModel.getGauntletMini();

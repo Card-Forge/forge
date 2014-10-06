@@ -21,7 +21,6 @@ import java.awt.Dimension;
 
 import javax.swing.SwingConstants;
 
-import forge.GuiBase;
 import forge.limited.LimitedWinLoseController;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.Colors;
@@ -49,7 +48,7 @@ public class LimitedWinLose extends ControlWinLose {
      */
     public LimitedWinLose(final ViewWinLose view0, final IGameView game0) {
         super(view0, game0);
-        controller = new LimitedWinLoseController(view0, game0, GuiBase.getInterface()) {
+        controller = new LimitedWinLoseController(view0, game0) {
             @Override
             protected void showOutcome(Runnable runnable) {
                 runnable.run(); //just run on GUI thread
