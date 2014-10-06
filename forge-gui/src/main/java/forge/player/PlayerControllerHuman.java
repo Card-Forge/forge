@@ -164,7 +164,9 @@ public class PlayerControllerHuman extends PlayerController {
         }
     }
     private void tempShowCard(Card c) {
-        CardView cv = MatchUtil.cards.get(c.getId());
+        if (c == null) { return; }
+
+        CardView cv = gameView.getCardView(c, false);
         if (!cv.mayBeShown()) {
             cv.setMayBeShown(true);
             tempShownCards.add(c);

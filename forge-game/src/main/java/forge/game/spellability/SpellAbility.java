@@ -247,6 +247,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (subAbility != null) {
             subAbility.setActivatingPlayer(player);
         }
+        view.updateCanPlay(this);
     }
 
     public Player getTargetingPlayer() {
