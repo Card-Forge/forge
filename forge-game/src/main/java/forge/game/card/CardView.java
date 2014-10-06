@@ -408,6 +408,8 @@ public class CardView extends GameEntityView<CardProp> {
     }
     private void updateState(Card c, CardStateView view, CardCharacteristicName state) {
         final CardCharacteristics chars = c.getState(state);
+        if (chars == null) { return; } //can happen when split card initialized before both sides have been initialized
+
         view.updateName(chars);
         view.updateColors(chars);
         view.updateImageKey(chars);
