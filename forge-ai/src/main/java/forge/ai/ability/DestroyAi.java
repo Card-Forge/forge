@@ -175,7 +175,7 @@ public class DestroyAi extends SpellAbilityAi {
                 } else {
                     // Don't destroy stolen permanents when the stealing aura can be destroyed
                     if (choice.getOwner() == ai) {
-                        for (Card aura : choice.getEnchantedBy()) {
+                        for (Card aura : choice.getEnchantedBy(false)) {
                             SpellAbility sp = aura.getFirstSpellAbility();
                             if (sp != null && "GainControl".equals(sp.getParam("AILogic")) 
                                     && aura.getController() != ai && sa.canTarget(aura)) {

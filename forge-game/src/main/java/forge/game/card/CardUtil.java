@@ -243,11 +243,11 @@ public final class CardUtil {
         newCopy.setReceivedDamageFromThisTurn(in.getReceivedDamageFromThisTurn());
         newCopy.getDamageHistory().setCreatureGotBlockedThisTurn(in.getDamageHistory().getCreatureGotBlockedThisTurn());
         newCopy.setEnchanting(in.getEnchanting());
-        newCopy.setEnchantedBy(new ArrayList<Card> (in.getEnchantedBy()));
+        newCopy.setEnchantedBy(in.getEnchantedBy(false));
         newCopy.setEquipping(in.getEquipping());
-        newCopy.setEquippedBy(new ArrayList<Card> (in.getEquippedBy()));
+        newCopy.setEquippedBy(in.getEquippedBy(false));
         newCopy.setFortifying(in.getFortifying());
-        newCopy.setFortifiedBy(new ArrayList<Card> (in.getFortifiedBy()));
+        newCopy.setFortifiedBy(in.getFortifiedBy(false));
         newCopy.setClones(in.getClones());
         newCopy.setHaunting(in.getHaunting());
         for (final Card haunter : in.getHauntedBy()) {

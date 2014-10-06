@@ -29,11 +29,11 @@ import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementResult;
 import forge.game.trigger.TriggerType;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -341,9 +341,8 @@ public class AbilityManaPart implements java.io.Serializable {
      */
     public final String mana() {
         if (this.getOrigProduced().contains("Chosen")) {
-            if (this.getSourceCard() != null && !this.getSourceCard().getChosenColors().isEmpty()) {
-                return MagicColor.toShortString(this.getSourceCard()
-                .getChosenColors().get(0));
+            if (this.getSourceCard() != null && this.getSourceCard().hasChosenColor()) {
+                return MagicColor.toShortString(this.getSourceCard().getChosenColor());
             }
         }
         return this.getOrigProduced();
@@ -473,8 +472,7 @@ public class AbilityManaPart implements java.io.Serializable {
         }
 
         if (this.getOrigProduced().contains("Chosen") && sourceCard != null ) {
-            List<String> chosenCol = this.getSourceCard().getChosenColors();
-            if ( !chosenCol.isEmpty() && MagicColor.toShortString(chosenCol.get(0)).contains(s)) {
+            if (this.getSourceCard().hasChosenColor() && MagicColor.toShortString(this.getSourceCard().getChosenColor()).contains(s)) {
                 return true;
             }
         }

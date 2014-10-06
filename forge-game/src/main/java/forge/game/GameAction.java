@@ -336,8 +336,7 @@ public class GameAction {
     private void unattachCardLeavingBattlefield(Card copied) {
         // Handle unequipping creatures
         if (copied.isEquipped()) {
-            final List<Card> equipments = new ArrayList<Card>(copied.getEquippedBy());
-            for (final Card equipment : equipments) {
+            for (final Card equipment : copied.getEquippedBy(true)) {
                 if (equipment.isInPlay()) {
                     equipment.unEquipCard(copied);
                 }
@@ -345,8 +344,7 @@ public class GameAction {
         }
         // Handle unfortifying lands
         if (copied.isFortified()) {
-            final List<Card> fortifications = new ArrayList<Card>(copied.getFortifiedBy());
-            for (final Card f : fortifications) {
+            for (final Card f : copied.getFortifiedBy(true)) {
                 if (f.isInPlay()) {
                     f.unFortifyCard(copied);
                 }
@@ -368,8 +366,7 @@ public class GameAction {
         }
         // remove enchantments from creatures
         if (copied.isEnchanted()) {
-            final List<Card> auras = new ArrayList<Card>(copied.getEnchantedBy());
-            for (final Card aura : auras) {
+            for (final Card aura : copied.getEnchantedBy(true)) {
                 aura.unEnchantEntity(copied);
             }
         }
@@ -1012,16 +1009,10 @@ public class GameAction {
         return checkAgain;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param c
-     * @return
-     */
     private boolean stateBasedAction704_5p(Card c) {
         boolean checkAgain = false;
         if (c.isEquipped()) {
-            final List<Card> equipments = new ArrayList<Card>(c.getEquippedBy());
-            for (final Card equipment : equipments) {
+            for (final Card equipment : c.getEquippedBy(true)) {
                 if (!equipment.isInPlay()) {
                     equipment.unEquipCard(c);
                     checkAgain = true;
@@ -1030,8 +1021,7 @@ public class GameAction {
         } // if isEquipped()
 
         if (c.isFortified()) {
-            final List<Card> fortifications = new ArrayList<Card>(c.getFortifiedBy());
-            for (final Card f : fortifications) {
+            for (final Card f : c.getFortifiedBy(true)) {
                 if (!f.isInPlay()) {
                     f.unFortifyCard(c);
                     checkAgain = true;
@@ -1363,7 +1353,7 @@ public class GameAction {
         }
 
         if (c.isEnchanted()) {
-            for (Card e : c.getEnchantedBy()) {
+            for (Card e : c.getEnchantedBy(false)) {
                 CardFactoryUtil.refreshTotemArmor(e);
             }
         }

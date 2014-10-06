@@ -101,12 +101,12 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     private final CopyOnWriteArrayList<String> hiddenExtrinsicKeyword = new CopyOnWriteArrayList<String>();
 
     // which equipment cards are equipping this card?
-    private ArrayList<Card> equippedBy = new ArrayList<Card>();
+    private LinkedHashSet<Card> equippedBy;
     // if this card is of the type equipment, what card is it currently equipping?
     private Card equipping = null;
 
     // which fortification cards are fortifying this card?
-    private ArrayList<Card> fortifiedBy = new ArrayList<Card>();
+    private LinkedHashSet<Card> fortifiedBy;
     // if this card is of the type fortification, what card is it currently fortifying?
     private Card fortifying = null;
 
@@ -213,11 +213,11 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     private String echoCost = "";
     private Cost miracleCost = null;
     private String chosenType = "";
-    private List<String> chosenColors = new ArrayList<String>();
+    private List<String> chosenColors;
     private String namedCard = "";
     private int chosenNumber;
     private Player chosenPlayer;
-    private List<Card> chosenCard = new ArrayList<Card>();
+    private List<Card> chosenCards;
     private Direction chosenDirection = null;
 
     private Card cloneOrigin = null;
@@ -871,9 +871,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         int newValue = oldValue == null ? 0 : Math.max(oldValue.intValue() - n, 0);
 
         final int delta = (oldValue == null ? 0 : oldValue.intValue()) - newValue;
-        if (delta == 0) {
-            return;
-        }
+        if (delta == 0) { return; }
 
         int powerBonusBefore = getPowerBonusFromCounters();
         int toughnessBonusBefore = getToughnessBonusFromCounters();
@@ -1016,7 +1014,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         getCharacteristics().setCardColor(colors);
     }
 
-    public final List<CardColor> getColor() {
+    public final Iterable<CardColor> getColor() {
         return getCharacteristics().getCardColor();
     }
 
@@ -1031,15 +1029,15 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     public final Player getChosenPlayer() {
         return chosenPlayer;
     }
-
     public final void setChosenPlayer(final Player p) {
+        if (chosenPlayer == p) { return; }
         chosenPlayer = p;
+        view.updateChosenPlayer(this);
     }
 
     public final int getChosenNumber() {
         return chosenNumber;
     }
-
     public final void setChosenNumber(final int i) {
         chosenNumber = i;
     }
@@ -1048,31 +1046,59 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     public final String getChosenType() {
         return chosenType;
     }
-
     public final void setChosenType(final String s) {
         chosenType = s;
+        view.updateChosenType(this);
     }
 
-    public final List<String> getChosenColors() {
+    public final String getChosenColor() {
+        if (hasChosenColor()) {
+            return chosenColors.get(0);
+        }
+        return "";
+    }
+    public final Iterable<String> getChosenColors() {
+        if (chosenColors == null) {
+            return new ArrayList<String>();
+        }
         return chosenColors;
     }
-
     public final void setChosenColors(final List<String> s) {
         chosenColors = s;
+        view.updateChosenColors(this);
+    }
+    public boolean hasChosenColor() {
+        return chosenColors != null && !chosenColors.isEmpty();
+    }
+    public boolean hasChosenColor(String s) {
+        return chosenColors != null && chosenColors.contains(s);
     }
 
-    public final List<Card> getChosenCard() {
-        return chosenCard;
+    public final Card getChosenCard() {
+        if (hasChosenCard()) {
+            return chosenCards.get(0);
+        }
+        return null;
     }
-
-    public final void setChosenCard(final List<Card> c) {
-        chosenCard = c;
+    public final Iterable<Card> getChosenCards() {
+        if (chosenCards == null) {
+            return new ArrayList<Card>();
+        }
+        return chosenCards;
+    }
+    public final void setChosenCards(final List<Card> c) {
+        chosenCards = c;
+    }
+    public boolean hasChosenCard() {
+        return chosenCards != null && !chosenCards.isEmpty();
+    }
+    public boolean hasChosenCard(Card c) {
+        return chosenCards != null && chosenCards.contains(c);
     }
 
     public Direction getChosenDirection() {
         return chosenDirection;
     }
-
     public void setChosenDirection(Direction chosenDirection0) {
         chosenDirection = chosenDirection0;
     }
@@ -1081,47 +1107,24 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     public final String getNamedCard() {
         return namedCard;
     }
-
     public final void setNamedCard(final String s) {
         namedCard = s;
-    }
-
-    public final void setDrawnThisTurn(final boolean b) {
-        drawnThisTurn = b;
+        view.updateNamedCard(this);
     }
 
     public final boolean getDrawnThisTurn() {
         return drawnThisTurn;
     }
-
-    /**
-     * get a list of Cards this card has gained control of.
-     * <p/>
-     * used primarily with AbilityFactory_GainControl
-     * 
-     * @return a list of cards this card has gained control of
-     */
-    public final List<Card> getGainControlTargets() {
-        return gainControlTargets;
+    public final void setDrawnThisTurn(final boolean b) {
+        drawnThisTurn = b;
     }
 
-    /**
-     * add a Card to the list of Cards this card has gained control of.
-     * <p/>
-     * used primarily with AbilityFactory_GainControl
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     */
+    public final List<Card> getGainControlTargets() { //used primarily with AbilityFactory_GainControl
+        return gainControlTargets;
+    }
     public final void addGainControlTarget(final Card c) {
         gainControlTargets.add(c);
     }
-
-    /**
-     * clear the list of Cards this card has gained control of.
-     * <p/>
-     * used primarily with AbilityFactory_GainControl
-     */
     public final void removeGainControlTargets(final Card c) {
         gainControlTargets.remove(c);
     }
@@ -1229,13 +1232,6 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
     // get the text that does not belong to a cards abilities (and is not really
     // there rules-wise)
-    /**
-     * <p>
-     * getNonAbilityText.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
     public final String getNonAbilityText() {
         final StringBuilder sb = new StringBuilder();
         final ArrayList<String> keyword = getHiddenExtrinsicKeyword();
@@ -1246,15 +1242,6 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
 
     // convert a keyword list to the String that should be displayed ingame
-    /**
-     * <p>
-     * keywordsToText.
-     * </p>
-     * 
-     * @param keywords
-     *            a {@link java.util.ArrayList} object.
-     * @return a {@link java.lang.String} object.
-     */
     public final String keywordsToText(final ArrayList<String> keywords) {
         final StringBuilder sb = new StringBuilder();
         final StringBuilder sbLong = new StringBuilder();
@@ -2223,31 +2210,77 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         }
     }
 
-    public final boolean isEquipped() {
-        return !equippedBy.isEmpty();
-    }
-    public final ArrayList<Card> getEquippedBy() {
+    public final Iterable<Card> getEquippedBy(boolean allowModify) {
+        if (equippedBy == null) {
+            return new LinkedHashSet<Card>();
+        }
+        if (allowModify) { //create copy to allow modifying original set while iterating
+            return new LinkedHashSet<Card>(equippedBy);
+        }
         return equippedBy;
     }
-    public final void setEquippedBy(final ArrayList<Card> list) {
+    public final void setEquippedBy(final LinkedHashSet<Card> list) {
         equippedBy = list;
+        view.updateEquippedBy(this);
+    }
+    public final void setEquippedBy(final Iterable<Card> list) {
+        if (list == null) {
+            equippedBy = null;
+        }
+        else {
+            equippedBy = new LinkedHashSet<Card>();
+            for (Card c : list) {
+                equippedBy.add(c);
+            }
+        }
+        getView().updateEquippedBy(this);
+    }
+    public final boolean isEquipped() {
+        return equippedBy != null && !equippedBy.isEmpty();
+    }
+    public final boolean isEquippedBy(Card c) {
+        return equippedBy != null && equippedBy.contains(c);
     }
 
-    public final boolean isFortified() {
-        return !fortifiedBy.isEmpty();
-    }
-    public final ArrayList<Card> getFortifiedBy() {
+    public final Iterable<Card> getFortifiedBy(boolean allowModify) {
+        if (fortifiedBy == null) {
+            return new LinkedHashSet<Card>();
+        }
+        if (allowModify) { //create copy to allow modifying original set while iterating
+            return new LinkedHashSet<Card>(fortifiedBy);
+        }
         return fortifiedBy;
     }
-    public final void setFortifiedBy(final ArrayList<Card> list) {
+    public final void setFortifiedBy(final LinkedHashSet<Card> list) {
         fortifiedBy = list;
+        view.updateFortifiedBy(this);
+    }
+    public final void setFortifiedBy(final Iterable<Card> list) {
+        if (list == null) {
+            fortifiedBy = null;
+        }
+        else {
+            fortifiedBy = new LinkedHashSet<Card>();
+            for (Card c : list) {
+                fortifiedBy.add(c);
+            }
+        }
+        getView().updateFortifiedBy(this);
+    }
+    public final boolean isFortified() {
+        return fortifiedBy != null && !fortifiedBy.isEmpty();
+    }
+    public final boolean isFortifiedBy(Card c) {
+        return fortifiedBy != null && fortifiedBy.contains(c);
     }
 
     public final Card getEquipping() {
         return equipping;
     }
     public final void setEquipping(final Card card) {
+        if (equipping == card) { return; }
         equipping = card;
+        view.updateEquipping(this);
     }
     public final boolean isEquipping() {
         return equipping != null;
@@ -2257,7 +2290,9 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return fortifying;
     }
     public final void setFortifying(final Card card) {
+        if (fortifying == card) { return; }
         fortifying = card;
+        view.updateFortifying(this);
     }
     public final boolean isFortifying() {
         return fortifying != null;
@@ -2286,9 +2321,13 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         }
 
         // They use double links... it's doubtful
-        equipping = c;
+        setEquipping(c);
         setTimestamp(getGame().getNextTimestamp());
+        if (c.equippedBy == null) {
+            c.equippedBy = new LinkedHashSet<Card>();
+        }
         c.equippedBy.add(this);
+        view.updateEquippedBy(this);
 
         // Play the Equip sound
         getGame().fireEvent(new GameEventCardAttachment(this, oldTarget, c, AttachMethod.Equip));
@@ -2307,9 +2346,13 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             unFortifyCard(oldTarget);
         }
 
-        fortifying = c;
+        setFortifying(c);
         setTimestamp(getGame().getNextTimestamp());
+        if (c.fortifiedBy == null) {
+            c.fortifiedBy = new LinkedHashSet<Card>();
+        }
         c.fortifiedBy.add(this);
+        view.updateFortifiedBy(this);
 
         // Play the Equip sound
         getGame().fireEvent(new GameEventCardAttachment(this, oldTarget, c, AttachMethod.Fortify));
@@ -2322,9 +2365,11 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
     public final void unEquipCard(final Card c) { // equipment.unEquipCard(equippedCard);
         if (equipping == c) {
-            equipping = null;
+            setEquipping(null);
         }
-        c.equippedBy.remove(this);
+        if (c.equippedBy != null && c.equippedBy.remove(this)) {
+            view.updateEquippedBy(this);
+        }
 
         getGame().fireEvent(new GameEventCardAttachment(this, c, null, AttachMethod.Equip));
 
@@ -2337,75 +2382,55 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
     public final void unFortifyCard(final Card c) { // fortification.unEquipCard(fortifiedCard);
         if (fortifying == c) {
-            fortifying = null;
+            setFortifying(null);
         }
-        c.fortifiedBy.remove(this);
-
+        if (c.fortifiedBy != null && c.fortifiedBy.remove(this)) {
+            view.updateFortifiedBy(this);
+        }
         getGame().fireEvent(new GameEventCardAttachment(this, c, null, AttachMethod.Fortify));
     }
 
     public final void unEquipAllCards() {
-        // while there exists equipment, unequip the first one
-        while (equippedBy.size() > 0) {
-            equippedBy.get(0).unEquipCard(this);
+        if (isEquipped()) {
+            for (Card c : getEquippedBy(true)) {
+                c.unEquipCard(this);
+            }
         }
     }
 
     public final GameEntity getEnchanting() {
         return enchanting;
     }
-
+    public final void setEnchanting(final GameEntity e) {
+        if (enchanting == e) { return; }
+        enchanting = e;
+        view.updateEnchanting(this);
+    }
     public final Card getEnchantingCard() {
         if (enchanting instanceof Card) {
             return (Card) enchanting;
         }
         return null;
     }
-
     public final Player getEnchantingPlayer() {
         if (enchanting instanceof Player) {
             return (Player) enchanting;
         }
         return null;
     }
-
-    public final void setEnchanting(final GameEntity e) {
-        enchanting = e;
-    }
-
     public final boolean isEnchanting() {
         return enchanting != null;
     }
-
     public final boolean isEnchantingCard() {
         return getEnchantingCard() != null;
     }
-
     public final boolean isEnchantingPlayer() {
         return getEnchantingPlayer() != null;
     }
 
-    /**
-     * checks to see if this card is enchanted by an aura with a given name.
-     * 
-     * @param cardName
-     *            the name of the aura
-     * @return true if this card is enchanted by an aura with the given name,
-     *         false otherwise
-     */
-    public final boolean isEnchantedBy(final String cardName) {
-        final ArrayList<Card> allAuras = getEnchantedBy();
-        for (final Card aura : allAuras) {
-            if (aura.getName().equals(cardName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public final void removeEnchanting(final GameEntity e) {
-        if (enchanting.equals(e)) {
-            enchanting = null;
+        if (enchanting == e) {
+            setEnchanting(null);
         }
     }
 
@@ -2416,7 +2441,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             + " but it can't be enchanted.");
             return;
         }
-        enchanting = entity;
+        setEnchanting(entity);
         setTimestamp(getGame().getNextTimestamp());
         entity.addEnchantedBy(this);
 
@@ -2430,10 +2455,11 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
 
     public final void unEnchantEntity(final GameEntity entity) {
-        if (enchanting == null || !enchanting.equals(entity))
+        if (enchanting == null || !enchanting.equals(entity)) {
             return;
+        }
 
-        enchanting = null;
+        setEnchanting(null);
         entity.removeEnchantedBy(this);
         if (isBestowed()) {
             unanimateBestow();
@@ -3294,21 +3320,25 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             setDirectlyPhasedOut(direct);
         }
 
-        for (final Card eq : getEquippedBy()) {
-            if (eq.isPhasedOut() == phasingIn) {
-                eq.phase(false);
+        if (isEquipped()) {
+            for (final Card eq : getEquippedBy(false)) {
+                if (eq.isPhasedOut() == phasingIn) {
+                    eq.phase(false);
+                }
             }
         }
-
-        for (final Card f : getFortifiedBy()) {
-            if (f.isPhasedOut() == phasingIn) {
-                f.phase(false);
+        if (isFortified()) {
+            for (final Card f : getFortifiedBy(false)) {
+                if (f.isPhasedOut() == phasingIn) {
+                    f.phase(false);
+                }
             }
         }
-
-        for (final Card aura : getEnchantedBy()) {
-            if (aura.isPhasedOut() == phasingIn) {
-                aura.phase(false);
+        if (isEnchanted()) {
+            for (final Card aura : getEnchantedBy(false)) {
+                if (aura.isPhasedOut() == phasingIn) {
+                    aura.phase(false);
+                }
             }
         }
 
@@ -3574,11 +3604,11 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 return false;
             }
         } else if (property.equals("ChosenCard")) {
-            if (!source.getChosenCard().contains(this)) {
+            if (!source.hasChosenCard(this)) {
                 return false;
             }
         } else if (property.equals("nonChosenCard")) {
-            if (source.getChosenCard().contains(this)) {
+            if (source.hasChosenCard(this)) {
                 return false;
             }
         }
@@ -3601,15 +3631,15 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             if (property.startsWith("non") == CardUtil.getColors(this).isMonoColor()) return false;
 
         } else if (property.equals("ChosenColor")) {
-            if (source.getChosenColors().isEmpty() || !CardUtil.getColors(this).hasAnyColor(MagicColor.fromName(source.getChosenColors().get(0))))
+            if (!source.hasChosenColor() || !CardUtil.getColors(this).hasAnyColor(MagicColor.fromName(source.getChosenColor())))
                 return false;
 
         } else if (property.equals("AllChosenColors")) {
-            if (source.getChosenColors().isEmpty() || !CardUtil.getColors(this).hasAllColors(ColorSet.fromNames(source.getChosenColors()).getColor()))
+            if (!source.hasChosenColor() || !CardUtil.getColors(this).hasAllColors(ColorSet.fromNames(source.getChosenColors()).getColor()))
                 return false;
 
         } else if (property.equals("AnyChosenColor")) {
-            if (source.getChosenColors().isEmpty() || !CardUtil.getColors(this).hasAnyColor(ColorSet.fromNames(source.getChosenColors()).getColor()))
+            if (!source.hasChosenColor() || !CardUtil.getColors(this).hasAnyColor(ColorSet.fromNames(source.getChosenColors()).getColor()))
                 return false;
 
         } else if (property.equals("DoubleFaced")) {
@@ -3801,7 +3831,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 return false;
             }
         } else if (property.startsWith("AttachedBy")) {
-            if (!equippedBy.contains(source) && !getEnchantedBy().contains(source) && !getFortifiedBy().contains(source)) {
+            if (!isEquippedBy(source) && !isEnchantedBy(source) && !isFortifiedBy(source)) {
                 return false;
             }
         } else if (property.equals("Attached")) {
@@ -3844,9 +3874,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             if (enchantedPlayer == null) {
                 return false;
             }
-
-            List<Card> enchanting = enchantedPlayer.getEnchantedBy();
-            for (Card c : enchanting) {
+            for (Card c : enchantedPlayer.getEnchantedBy(false)) {
                 if (getName().equals(c.getName())) {
                     return false;
                 }
@@ -3857,14 +3885,14 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             }
         } else if (property.startsWith("EnchantedBy")) {
             if (property.equals("EnchantedBy")) {
-                if (!getEnchantedBy().contains(source) && !equals(source.getEnchanting())) {
+                if (!isEnchantedBy(source) && !equals(source.getEnchanting())) {
                     return false;
                 }
             } else {
                 final String restriction = property.split("EnchantedBy ")[1];
                 if (restriction.equals("Imprinted")) {
                     for (final Card card : source.getImprinted()) {
-                        if (!getEnchantedBy().contains(card) && !equals(card.getEnchanting())) {
+                        if (!isEnchantedBy(card) && !equals(card.getEnchanting())) {
                             return false;
                         }
                     }
@@ -3873,14 +3901,14 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                         final SpellAbility saTargeting = sa.getSATargetingCard();
                         if (saTargeting != null) {
                             for (final Card c : saTargeting.getTargets().getTargetCards()) {
-                                if (!getEnchantedBy().contains(c) && !equals(c.getEnchanting())) {
+                                if (!isEnchantedBy(c) && !equals(c.getEnchanting())) {
                                     return false;
                                 }
                             }
                         }
                     }
                 } else { // EnchantedBy Aura.Other
-                    for (final Card aura : getEnchantedBy()){
+                    for (final Card aura : getEnchantedBy(false)){
                         if (aura.isValid(restriction, sourceController, source)) {
                             return true;
                         }
@@ -3894,14 +3922,14 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                     final SpellAbility saTargeting = sa.getSATargetingCard();
                     if (saTargeting != null) {
                         for (final Card c : saTargeting.getTargets().getTargetCards()) {
-                            if (getEnchantedBy().contains(c)) {
+                            if (isEnchantedBy(c)) {
                                 return false;
                             }
                         }
                     }
                 }
             } else {
-                if (getEnchantedBy().contains(source)) {
+                if (isEnchantedBy(source)) {
                     return false;
                 }
             }
@@ -3951,7 +3979,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                     final SpellAbility saTargeting = sa.getSATargetingCard();
                     if (saTargeting != null) {
                         for (final Card c : saTargeting.getTargets().getTargetCards()) {
-                            if (!equippedBy.contains(c)) {
+                            if (!isEquippedBy(c)) {
                                 return false;
                             }
                         }
@@ -3959,16 +3987,16 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 }
             } else if (property.substring(10).equals("Enchanted")) {
                 if (source.getEnchantingCard() == null ||
-                        !equippedBy.contains(source.getEnchantingCard())) {
+                        !isEquippedBy(source.getEnchantingCard())) {
                     return false;
                 }
             } else {
-                if (!equippedBy.contains(source)) {
+                if (!isEquippedBy(source)) {
                     return false;
                 }
             }
         } else if (property.startsWith("FortifiedBy")) {
-            if (!fortifiedBy.contains(source)) {
+            if (!isFortifiedBy(source)) {
                 return false;
             }
         } else if (property.startsWith("CanBeEquippedBy")) {
@@ -6081,7 +6109,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         }
 
         if (hasProtectionFrom(aura, checkSBA)
-            || (hasKeyword("CARDNAME can't be enchanted in the future.") && !getEnchantedBy().contains(aura))
+            || (hasKeyword("CARDNAME can't be enchanted in the future.") && !isEnchantedBy(aura))
             || (hasKeyword("CARDNAME can't be enchanted.") && !aura.getName().equals("Anti-Magic Aura")
                     && !(aura.getName().equals("Consecrate Land") && aura.isInZone(ZoneType.Battlefield)))
             || ((tgt != null) && !isValid(tgt.getValidTgts(), aura.getController(), aura))) {

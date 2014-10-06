@@ -275,7 +275,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         }
 
         if (this.getColorToCheck() != null) {
-            if (!sa.getHostCard().getChosenColors().contains(this.getColorToCheck())) {
+            if (!sa.getHostCard().hasChosenColor(this.getColorToCheck())) {
                 return false;
             }
         }

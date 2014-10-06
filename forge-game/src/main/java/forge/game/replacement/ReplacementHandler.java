@@ -233,8 +233,8 @@ public class ReplacementHandler implements IGameStateObject {
             // Replaced mana type
             final Card repHost = replacementEffect.getHostCard();
             String repType = repHost.getSVar(mapParams.get("ManaReplacement"));
-            if (repType.contains("Chosen") && !repHost.getChosenColors().isEmpty()) {
-                repType = repType.replace("Chosen", MagicColor.toShortString(repHost.getChosenColors().get(0)));
+            if (repType.contains("Chosen") && repHost.hasChosenColor()) {
+                repType = repType.replace("Chosen", MagicColor.toShortString(repHost.getChosenColor()));
             }
             manaAb.getManaPart().setManaReplaceType(repType);
             manaAb.getManaPart().produceMana(rep, player1, manaAb);

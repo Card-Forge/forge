@@ -39,8 +39,7 @@ public class CleanUpEffect extends SpellAbilityEffect {
             source.clearFlipResult();
         }
         if (sa.hasParam("ClearChosenCard")) {
-            source.getChosenCard().clear();
+            source.setChosenCards(null);
         }
     }
-
 }

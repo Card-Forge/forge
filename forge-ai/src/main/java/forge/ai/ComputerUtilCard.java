@@ -716,8 +716,10 @@ public class ComputerUtilCard {
             int curCMC = card.getCMC();
     
             // Add all cost of all auras with the same controller
-            final List<Card> auras = CardLists.filterControlledBy(card.getEnchantedBy(), card.getController());
-            curCMC += Aggregates.sum(auras, CardPredicates.Accessors.fnGetCmc) + auras.size();
+            if (card.isEnchanted()) {
+                final List<Card> auras = CardLists.filterControlledBy(card.getEnchantedBy(false), card.getController());
+                curCMC += Aggregates.sum(auras, CardPredicates.Accessors.fnGetCmc) + auras.size();
+            }
     
             if (curCMC >= bigCMC) {
                 bigCMC = curCMC;
@@ -1040,7 +1042,7 @@ public class ComputerUtilCard {
         }
         if (c.isEnchanted()) {
             boolean myEnchants = false;
-            for (Card enc : c.getEnchantedBy()) {
+            for (Card enc : c.getEnchantedBy(false)) {
                 if (enc.getOwner().equals(ai)) {
                     myEnchants = true;
                     break;

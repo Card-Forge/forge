@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.google.common.collect.Iterables;
+
 public class DestroyEffect extends SpellAbilityEffect {
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
@@ -97,9 +99,9 @@ public class DestroyEffect extends SpellAbilityEffect {
                 boolean destroyed = false;
                 final Card lki = CardUtil.getLKICopy(tgtC);
                 if (remAttached) {
-                	card.getRemembered().addAll(tgtC.getEnchantedBy());
-                	card.getRemembered().addAll(tgtC.getEquippedBy());
-                	card.getRemembered().addAll(tgtC.getFortifiedBy());
+                	Iterables.addAll(card.getRemembered(), tgtC.getEnchantedBy(false));
+                	Iterables.addAll(card.getRemembered(), tgtC.getEquippedBy(false));
+                	Iterables.addAll(card.getRemembered(), tgtC.getFortifiedBy(false));
                 }
                 if (sac) {
                     destroyed = game.getAction().sacrifice(tgtC, sa) != null;

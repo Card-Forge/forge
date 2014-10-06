@@ -222,7 +222,7 @@ public class CardView extends GameEntityView<CardProp> {
         return get(CardProp.EquippedBy);
     }
     void updateEquippedBy(Card c) {
-        set(CardProp.EquippedBy, CardView.getCollection(c.getEquippedBy()));
+        set(CardProp.EquippedBy, CardView.getCollection(c.getEquippedBy(false)));
     }
 
     public boolean isEquipped() {
@@ -251,17 +251,6 @@ public class CardView extends GameEntityView<CardProp> {
         return null;
     }
 
-    public Iterable<CardView> getEnchantedBy() {
-        return get(CardProp.EnchantedBy);
-    }
-    void updateEnchantedBy(Card c) {
-        set(CardProp.EnchantedBy, CardView.getCollection(c.getEnchantedBy()));
-    }
-
-    public boolean isEnchanted() {
-        return getEnchantedBy() != null;
-    }
-
     public CardView getFortifying() {
         return get(CardProp.Fortifying);
     }
@@ -273,7 +262,7 @@ public class CardView extends GameEntityView<CardProp> {
         return get(CardProp.FortifiedBy);
     }
     void updateFortifiedBy(Card c) {
-        set(CardProp.FortifiedBy, CardView.getCollection(c.getFortifiedBy()));
+        set(CardProp.FortifiedBy, CardView.getCollection(c.getFortifiedBy(false)));
     }
 
     public boolean isFortified() {
@@ -623,5 +612,10 @@ public class CardView extends GameEntityView<CardProp> {
     @Override
     protected CardProp preventNextDamageProp() {
         return CardProp.PreventNextDamage;
+    }
+
+    @Override
+    protected CardProp enchantedByProp() {
+        return CardProp.EnchantedBy;
     }
 }

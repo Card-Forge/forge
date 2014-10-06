@@ -22,8 +22,6 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
-import java.util.List;
-
 /**
  * <p>
  * Trigger_TapsForMana class.
@@ -93,8 +91,7 @@ public class TriggerTapsForMana extends Trigger {
             }
             String produced = (String) prod;
             if ("ChosenColor".equals(mapParams.get("Produced"))) {
-                List<String> colors = this.getHostCard().getChosenColors();
-                if (colors.isEmpty() || !produced.contains(MagicColor.toShortString(colors.get(0)))) {
+                if (!this.getHostCard().hasChosenColor() || !produced.contains(MagicColor.toShortString(this.getHostCard().getChosenColor()))) {
                     return false;
                 }
             }

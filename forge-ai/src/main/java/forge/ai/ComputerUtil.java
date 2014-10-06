@@ -715,21 +715,19 @@ public class ComputerUtil {
         }
 
         Card c;
-
         if (CardLists.getNotType(remaining, "Creature").size() == 0) {
             c = ComputerUtilCard.getWorstCreatureAI(remaining);
-        } else if (CardLists.getNotType(remaining, "Land").size() == 0) {
+        }
+        else if (CardLists.getNotType(remaining, "Land").size() == 0) {
             c = ComputerUtilCard.getWorstLand(CardLists.filter(remaining, CardPredicates.Presets.LANDS));
-        } else {
+        }
+        else {
             c = ComputerUtilCard.getWorstPermanentAI(remaining, false, false, false, false);
         }
 
-        final ArrayList<Card> auras = c.getEnchantedBy();
-
-        if (auras.size() > 0) {
+        if (c.isEnchanted()) {
             // TODO: choose "worst" controlled enchanting Aura
-            for (int j = 0; j < auras.size(); j++) {
-                final Card aura = auras.get(j);
+            for (Card aura : c.getEnchantedBy(false)) {
                 if (aura.getController().equals(c.getController()) && remaining.contains(aura)) {
                     return aura;
                 }

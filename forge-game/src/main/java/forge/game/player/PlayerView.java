@@ -204,4 +204,9 @@ public class PlayerView extends GameEntityView<PlayerProp> {
     protected PlayerProp preventNextDamageProp() {
         return PlayerProp.PreventNextDamage;
     }
+
+    @Override
+    protected PlayerProp enchantedByProp() {
+        return PlayerProp.EnchantedBy;
+    }
 }

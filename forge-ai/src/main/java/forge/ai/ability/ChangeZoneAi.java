@@ -811,7 +811,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 	                list = CardLists.filter(list, new Predicate<Card>() {
 	                    @Override
 	                    public boolean apply(final Card c) {
-	                        for (Card aura : c.getEnchantedBy()) {
+	                        for (Card aura : c.getEnchantedBy(false)) {
 	                            if (aura.getController().isOpponentOf(ai)) {
 	                                return true;
 	                            } else {
@@ -885,7 +885,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    for (Card aura : c.getEnchantedBy()) {
+                    for (Card aura : c.getEnchantedBy(false)) {
                         if (c.getOwner().isOpponentOf(ai) && aura.getController().equals(ai)) {
                             return false;
                         }

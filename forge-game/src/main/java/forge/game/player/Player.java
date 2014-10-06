@@ -2074,7 +2074,7 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
                 return false;
             }
         } else if (property.startsWith("EnchantedBy")) {
-            if (!getEnchantedBy().contains(source)) {
+            if (!isEnchantedBy(source)) {
                 return false;
             }
         } else if (property.startsWith("Chosen")) {

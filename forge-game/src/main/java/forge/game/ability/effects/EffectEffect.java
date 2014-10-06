@@ -19,6 +19,8 @@ import forge.game.zone.ZoneType;
 
 import java.util.List;
 
+import com.google.common.collect.Lists;
+
 public class EffectEffect extends SpellAbilityEffect {
 
     @Override
@@ -189,8 +191,8 @@ public class EffectEffect extends SpellAbilityEffect {
         }
 
         // Set Chosen Color(s)
-        if (!hostCard.getChosenColors().isEmpty()) {
-            eff.setChosenColors(hostCard.getChosenColors());
+        if (hostCard.hasChosenColor()) {
+            eff.setChosenColors(Lists.newArrayList(hostCard.getChosenColors()));
         }
 
         // Set Chosen name

@@ -418,11 +418,13 @@ public class ComputerUtilCombat {
      */
     public static int totalDamageOfBlockers(final Card attacker, final List<Card> defenders) {
         int damage = 0;
-        
-        for (Card equipment : attacker.getEquippedBy()) {
-        	if (equipment.getName().equals("Godsend") && !defenders.isEmpty()) {
-        		defenders.remove(0);
-        	}
+
+        if (attacker.isEquipped()) {
+            for (Card equipment : attacker.getEquippedBy(false)) {
+            	if (equipment.getName().equals("Godsend") && !defenders.isEmpty()) {
+            		defenders.remove(0);
+            	}
+            }
         }
 
         for (final Card defender : defenders) {
@@ -439,7 +441,7 @@ public class ComputerUtilCombat {
     public static int totalFirstStrikeDamageOfBlockers(final Card attacker, final List<Card> defenders) {
         int damage = 0;
         
-        for (Card equipment : attacker.getEquippedBy()) {
+        for (Card equipment : attacker.getEquippedBy(false)) {
             if (equipment.getName().equals("Godsend") && !defenders.isEmpty()) {
                 defenders.remove(0);
             }
@@ -1567,10 +1569,12 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        for (Card equipment : defender.getEquippedBy()) {
-        	if (equipment.getName().equals("Godsend")) {
-        		return true;
-        	}
+        if (defender.isEquipped()) {
+            for (Card equipment : defender.getEquippedBy(false)) {
+            	if (equipment.getName().equals("Godsend")) {
+            		return true;
+            	}
+            }
         }
 
         int flankingMagnitude = 0;
@@ -1599,10 +1603,12 @@ public class ComputerUtilCombat {
             return true;
         }
 
-        for (Card equipment : attacker.getEquippedBy()) {
-        	if (equipment.getName().equals("Godsend")) {
-        		return false;
-        	}
+        if (attacker.isEquipped()) {
+            for (Card equipment : attacker.getEquippedBy(false)) {
+            	if (equipment.getName().equals("Godsend")) {
+            		return false;
+            	}
+            }
         }
 
         if (attacker.hasKeyword("PreventAllDamageBy Creature.blockingSource")) {
@@ -1729,10 +1735,12 @@ public class ComputerUtilCombat {
             final boolean withoutAbilities) {
         final Game game = ai.getGame();
 
-        for (Card equipment : attacker.getEquippedBy()) {
-        	if (equipment.getName().equals("Godsend")) {
-        		return true;
-        	}
+        if (attacker.isEquipped()) {
+            for (Card equipment : attacker.getEquippedBy(false)) {
+            	if (equipment.getName().equals("Godsend")) {
+            		return true;
+            	}
+            }
         }
 
         int flankingMagnitude = 0;
@@ -1761,10 +1769,12 @@ public class ComputerUtilCombat {
             return true;
         }
 
-        for (Card equipment : defender.getEquippedBy()) {
-        	if (equipment.getName().equals("Godsend")) {
-        		return false;
-        	}
+        if (defender.isEquipped()) {
+            for (Card equipment : defender.getEquippedBy(false)) {
+            	if (equipment.getName().equals("Godsend")) {
+            		return false;
+            	}
+            }
         }
 
         int defenderDamage = defender.getNetAttack()

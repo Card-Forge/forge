@@ -55,7 +55,7 @@ public final class ViewUtil {
         view.setRegenerationShields(c.getShieldCount());
         view.setPreventNextDamage(c.getPreventNextDamageTotalShields());
         view.setChosenType(c.getChosenType());
-        view.setChosenColors(c.getChosenColors());
+        view.setChosenColors(Lists.newArrayList(c.getChosenColors()));
         view.setNamedCard(c.getNamedCard());
 
         if (c.isSplitCard()) {

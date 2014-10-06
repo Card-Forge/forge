@@ -16,7 +16,6 @@ import forge.util.TextUtil;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /** 
@@ -244,13 +243,12 @@ public class ComputerUtilCost {
                 final CostSacrifice sac = (CostSacrifice) part;
     
                 final String type = sac.getType();
-    
+
                 if (type.equals("CARDNAME")) {
                     if (!important) {
                         return false;
                     }
-                    List<Card> auras = new ArrayList<Card>(source.getEnchantedBy());
-                    if (!CardLists.filterControlledBy(auras, source.getController()).isEmpty()) {
+                    if (!CardLists.filterControlledBy(source.getEnchantedBy(false), source.getController()).isEmpty()) {
                         return false;
                     }
                     continue;

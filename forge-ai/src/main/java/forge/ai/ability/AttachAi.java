@@ -211,7 +211,7 @@ public class AttachAi extends SpellAbilityAi {
                     return true;
                 }
 
-                final ArrayList<Card> auras = c.getEnchantedBy();
+                final Iterable<Card> auras = c.getEnchantedBy(false);
                 final Iterator<Card> itr = auras.iterator();
                 while (itr.hasNext()) {
                     final Card aura = itr.next();
@@ -626,9 +626,10 @@ public class AttachAi extends SpellAbilityAi {
             prefList = CardLists.filter(prefList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    for (Card aura : c.getEnchantedBy()) {
-                        if (aura.getName().equals(attachSource.getName()))
+                    for (Card aura : c.getEnchantedBy(false)) {
+                        if (aura.getName().equals(attachSource.getName())) {
                             return false;
+                        }
                     }
                     return true;
                 }
@@ -684,9 +685,10 @@ public class AttachAi extends SpellAbilityAi {
                 }
                 // don't equip creatures that don't gain anything
                 if (card.hasSVar("NonStackingAttachEffect")) {
-                    for (Card equipment : newTarget.getEquippedBy()) {
-                        if (equipment.getName().equals(card.getName()))
+                    for (Card equipment : newTarget.getEquippedBy(false)) {
+                        if (equipment.getName().equals(card.getName())) {
                             return false;
+                        }
                     }
                 }
             }
@@ -907,13 +909,19 @@ public class AttachAi extends SpellAbilityAi {
             prefList = CardLists.filter(prefList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    for (Card equipment : c.getEquippedBy()) {
-                        if (equipment.getName().equals(attachSource.getName()))
-                            return false;
+                    if (c.isEquipped()) {
+                        for (Card equipment : c.getEquippedBy(false)) {
+                            if (equipment.getName().equals(attachSource.getName())) {
+                                return false;
+                            }
+                        }
                     }
-                    for (Card aura : c.getEnchantedBy()) {
-                        if (aura.getName().equals(attachSource.getName()))
-                            return false;
+                    if (c.isEnchanted()) {
+                        for (Card aura : c.getEnchantedBy(false)) {
+                            if (aura.getName().equals(attachSource.getName())) {
+                                return false;
+                            }
+                        }
                     }
                     return true;
                 }

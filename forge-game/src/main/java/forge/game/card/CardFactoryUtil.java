@@ -1159,7 +1159,7 @@ public class CardFactoryUtil {
             ZoneType sourceZone = sq[0].contains("ChromaInGrave") ?  ZoneType.Graveyard : ZoneType.Battlefield;
             String colorName = sq[1];
             if (colorName.contains("Chosen")) {
-                colorName = MagicColor.toShortString(c.getChosenColors().get(0));
+                colorName = MagicColor.toShortString(c.getChosenColor());
             }
             final List<Card> cards;
             if (sq[0].contains("ChromaSource")) { // Runs Chroma for passed in Source card

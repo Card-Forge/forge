@@ -74,6 +74,7 @@ public class TrackableProperty {
         HasUnlimitedHandSize,
         NumDrawnThisTurn,
         PreventNextDamage,
+        EnchantedBy,
         Keywords,
         CommanderInfo,
         Ante,

@@ -78,7 +78,7 @@ public class CountersPutAi extends SpellAbilityAi {
         if (sa.hasParam("LevelUp")) {
         	 // creatures enchanted by curse auras have low priority
         	if (source.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
-                for (Card aura : source.getEnchantedBy()) {
+                for (Card aura : source.getEnchantedBy(false)) {
                     if (aura.getController().isOpponentOf(ai)) {
                         return false;
                     }

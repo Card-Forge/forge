@@ -30,10 +30,7 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
+
 public class AbilityUtils {
 
     public static CounterType getCounterType(String name, SpellAbility sa) throws Exception {
@@ -241,7 +238,7 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("ChosenCard")) {
-            for (final Card chosen : hostCard.getChosenCard()) {
+            for (final Card chosen : hostCard.getChosenCards()) {
                 cards.add(game.getCardState(chosen));
             }
         }
@@ -1280,10 +1277,11 @@ public class AbilityUtils {
             }
         }
         else if (unlessCost.equals("ChosenManaCost")) {
-        	if (source.getChosenCard().isEmpty()) {
+        	if (!source.hasChosenCard()) {
                 cost = new Cost(ManaCost.ZERO, true);
-            } else {
-            	cost = new Cost(source.getChosenCard().get(0).getManaCost(), true);
+            }
+        	else {
+            	cost = new Cost(Iterables.getFirst(source.getChosenCards(), null).getManaCost(), true);
             }
         }
         else if (unlessCost.equals("RememberedCostMinus2")) {

@@ -45,4 +45,12 @@ public abstract class TrackableObject<E extends Enum<E>> implements IIdentifiabl
     protected void flagAsChanged(E key) {
         changedProps.add(key);
     }
+
+    public void serialize() {
+        //TODO
+    }
+
+    public void deserialize() {
+        //TODO
+    }
 }

@@ -16,24 +16,23 @@ import java.util.List;
 public class UnattachAllEffect extends SpellAbilityEffect {
 
     private void handleUnattachment(final GameEntity o, final Card cardToUnattach) {
-
         if (o instanceof Card) {
             final Card c = (Card) o;
             if (cardToUnattach.isAura()) {
                 //final boolean gainControl = "GainControl".equals(af.parseParams().get("AILogic"));
                 //AbilityFactoryAttach.handleUnattachAura(cardToUnattach, c, gainControl);
             } else if (cardToUnattach.isEquipment()) {
-                if (cardToUnattach.isEquipping() && c.getEquippedBy().contains(cardToUnattach)) {
+                if (cardToUnattach.isEquipping() && c.isEquippedBy(cardToUnattach)) {
                     cardToUnattach.unEquipCard(cardToUnattach.getEquipping());
                 }
             } else if (cardToUnattach.isFortification()) {
-                if (cardToUnattach.isFortifying() && c.getFortifiedBy().contains(cardToUnattach)) {
+                if (cardToUnattach.isFortifying() && c.isFortifiedBy(cardToUnattach)) {
                     cardToUnattach.unFortifyCard(cardToUnattach.getFortifying());
                 }
             }
         } else if (o instanceof Player) {
             final Player p = (Player) o;
-            if (cardToUnattach.isAura() && p.getEnchantedBy().contains(cardToUnattach)) {
+            if (cardToUnattach.isAura() && p.isEnchantedBy(cardToUnattach)) {
                 //AbilityFactoryAttach.handleUnattachAura(cardToUnattach, p, false);
             }
         }

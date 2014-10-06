@@ -1,5 +1,6 @@
 package forge.game;
 
+import forge.game.card.CardView;
 import forge.trackable.TrackableObject;
 
 public abstract class GameEntityView<E extends Enum<E>> extends TrackableObject<E> {
@@ -18,5 +19,22 @@ public abstract class GameEntityView<E extends Enum<E>> extends TrackableObject<
     }
     void updatePreventNextDamage(GameEntity e) {
         set(preventNextDamageProp(), e.getPreventNextDamageTotalShields());
+    }
+
+    protected abstract E enchantedByProp();
+
+    public Iterable<CardView> getEnchantedBy() {
+        return get(enchantedByProp());
+    }
+    void updateEnchantedBy(GameEntity e) {
+        if (e.isEnchanted()) {
+            set(enchantedByProp(), CardView.getCollection(e.getEnchantedBy(false)));
+        }
+        else {
+            set(enchantedByProp(), null);
+        }
+    }
+    public boolean isEnchanted() {
+        return getEnchantedBy() != null;
     }
 }

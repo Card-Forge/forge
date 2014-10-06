@@ -170,7 +170,7 @@ public class TokenEffect extends SpellAbilityEffect {
         for (int i = 0; i < substitutedColors.length; i++) {
             if (substitutedColors[i].equals("ChosenColor")) {
                 // this currently only supports 1 chosen color
-                substitutedColors[i] = host.getChosenColors().get(0);
+                substitutedColors[i] = host.getChosenColor();
             }
         }
         String colorDesc = "";

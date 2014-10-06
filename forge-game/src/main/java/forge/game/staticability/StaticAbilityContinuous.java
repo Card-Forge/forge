@@ -17,6 +17,7 @@
  */
 package forge.game.staticability;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.GameCommand;
@@ -159,7 +160,7 @@ public class StaticAbilityContinuous {
 
         if (params.containsKey("AddKeyword")) {
             addKeywords = params.get("AddKeyword").split(" & ");
-            final List<String> chosencolors = hostCard.getChosenColors();
+            final Iterable<String> chosencolors = hostCard.getChosenColors();
             for (final String color : chosencolors) {
                 for (int w = 0; w < addKeywords.length; w++) {
                     addKeywords[w] = addKeywords[w].replaceAll("ChosenColor", color.substring(0, 1).toUpperCase().concat(color.substring(1, color.length())));
@@ -381,8 +382,8 @@ public class StaticAbilityContinuous {
             if (changeColorWordsTo != null) {
                 final byte color;
                 if (changeColorWordsTo.equals("ChosenColor")) {
-                    if (hostCard.getChosenColors().size() > 0) {
-                        color = MagicColor.fromName(hostCard.getChosenColors().get(0));
+                    if (hostCard.hasChosenColor()) {
+                        color = MagicColor.fromName(Iterables.getFirst(hostCard.getChosenColors(), null));
                     } else {
                         color = 0;
                     }
