@@ -18,6 +18,7 @@
 package forge.game.spellability;
 
 import com.esotericsoftware.minlog.Log;
+
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.card.Card;
@@ -33,22 +34,19 @@ import forge.game.cost.Cost;
  */
 public abstract class Ability extends SpellAbility {
 
-    /**
-     * <p>
-     * Constructor for Ability.
-     * </p>
-     * 
-     * @param sourceCard
-     *            a {@link forge.game.card.Card} object.
-     * @param manaCost
-     *            a {@link java.lang.String} object.
-     */
-    public Ability(final Card sourceCard, final ManaCost manaCost) {
-        this(sourceCard, new Cost(manaCost, true));
+    protected Ability(final Card sourceCard, final ManaCost manaCost) {
+        this(sourceCard, new Cost(manaCost, true), null);
     }
-    public Ability(final Card sourceCard, final Cost cost) {
-        super(sourceCard, cost);
+    protected Ability(final Card sourceCard, final ManaCost manaCost, SpellAbilityView view0) {
+        this(sourceCard, new Cost(manaCost, true), view0);
     }
+    protected Ability(final Card sourceCard, final Cost cost) {
+        this(sourceCard, cost, null);
+    }
+    protected Ability(final Card sourceCard, final Cost cost, SpellAbilityView view0) {
+        super(sourceCard, cost, view0);
+    }
+
     /**
      * <p>
      * Constructor for Ability.
@@ -78,7 +76,7 @@ public abstract class Ability extends SpellAbility {
         return this.getHostCard().isInPlay() && !this.getHostCard().isFaceDown();
     }
     
-    public static final Ability PLAY_LAND_SURROGATE = new Ability(null, (Cost)null){
+    public static final Ability PLAY_LAND_SURROGATE = new Ability(null, (Cost)null, null){
     	@Override
         public boolean canPlay() {
     		return true; //if this ability is added anywhere, it can be assumed that land can be played

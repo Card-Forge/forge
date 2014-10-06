@@ -30,9 +30,9 @@ public class WrappedAbility extends Ability implements ISpellAbility {
 
     boolean mandatory = false;
 
-    public WrappedAbility(final Trigger regTrig, final SpellAbility sa0, final Player decider0) {
-        super(sa0.getHostCard(), ManaCost.ZERO);
-        regtrig = regTrig;
+    public WrappedAbility(final Trigger regtrig0, final SpellAbility sa0, final Player decider0) {
+        super(regtrig0.getHostCard(), ManaCost.ZERO, sa0.getView());
+        regtrig = regtrig0;
         sa = sa0;
         decider = decider0;
     }
@@ -175,6 +175,16 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     @Override
     public SpellAbilityRestriction getRestrictions() {
         return sa.getRestrictions();
+    }
+
+    @Override
+    public Card getHostCard() {
+        return sa.getHostCard();
+    }
+
+    @Override
+    public SpellAbilityView getView() {
+        return sa.getView();
     }
 
     @Override
