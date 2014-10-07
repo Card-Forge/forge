@@ -1,7 +1,5 @@
 package forge.trackable;
 
-import org.w3c.dom.Element;
-
 import forge.card.CardRarity;
 import forge.game.zone.ZoneType;
 import forge.trackable.TrackableTypes;
@@ -128,12 +126,12 @@ public enum TrackableProperty {
         return ((TrackableType<T>)type).getDefaultValue();
     }
     @SuppressWarnings("unchecked")
-    public <T> T loadFromXml(Element el, String name, T oldValue) {
-        return ((TrackableType<T>)type).loadFromXml(el, name, oldValue);
+    public <T> T deserialize(TrackableDeserializer td, T oldValue) {
+        return ((TrackableType<T>)type).deserialize(td, oldValue);
     }
     @SuppressWarnings("unchecked")
-    public <T> void saveToXml(Element el, String name, T value) {
-        ((TrackableType<T>)type).saveToXml(el, name, value);
+    public <T> void serialize(TrackableSerializer ts, T value) {
+        ((TrackableType<T>)type).serialize(ts, value);
     }
 
     //cache array of all properties to allow quick lookup by ordinal,
@@ -141,10 +139,10 @@ public enum TrackableProperty {
     //we don't need to worry about the values changing since we will ensure
     //both players are on the same version of Forge before allowing them to connect
     private static TrackableProperty[] props = values();
-    public static String serialize(TrackableProperty prop) {
-        return Integer.toString(prop.ordinal());
+    public static int serialize(TrackableProperty prop) {
+        return prop.ordinal();
     }
-    public static TrackableProperty deserialize(String ordinal) {
-        return props[Integer.valueOf(ordinal)];
+    public static TrackableProperty deserialize(int ordinal) {
+        return props[ordinal];
     }
 }

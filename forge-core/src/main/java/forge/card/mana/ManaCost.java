@@ -36,7 +36,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 
 public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostShard> {
-    private static final char DELIM = (char)5;
+    private static final char DELIM = (char)6;
 
     private List<ManaCostShard> shards;
     private final int genericCost;

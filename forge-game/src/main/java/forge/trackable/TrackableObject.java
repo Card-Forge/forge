@@ -51,11 +51,21 @@ public abstract class TrackableObject implements IIdentifiable {
         changedProps.add(key);
     }
 
-    public void serialize() {
-        //TODO
+    public void serialize(TrackableSerializer ts) {
+        ts.write(changedProps.size());
+        for (TrackableProperty key : changedProps) {
+            ts.write(TrackableProperty.serialize(key));
+            key.serialize(ts, props.get(key));
+        }
+        changedProps.clear();
     }
 
-    public void deserialize() {
-        //TODO
+    public void deserialize(TrackableDeserializer td) {
+        int count = td.readInt();
+        for (int i = 0; i < count; i++) {
+            TrackableProperty key = TrackableProperty.deserialize(td.readInt());
+            set(key, key.deserialize(td, props.get(key)));
+        }
+        changedProps.clear();
     }
 }

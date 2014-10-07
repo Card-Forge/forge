@@ -7,8 +7,6 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
-import org.w3c.dom.Element;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -29,8 +27,8 @@ public class TrackableTypes {
         }
 
         protected abstract T getDefaultValue();
-        protected abstract T loadFromXml(Element el, String name, T oldValue);
-        protected abstract void saveToXml(Element el, String name, T value);
+        protected abstract T deserialize(TrackableDeserializer td, T oldValue);
+        protected abstract void serialize(TrackableSerializer ts, T value);
     }
 
     public static final TrackableType<Boolean> BooleanType = new TrackableType<Boolean>() {
@@ -40,20 +38,13 @@ public class TrackableTypes {
         }
 
         @Override
-        public Boolean loadFromXml(Element el, String name, Boolean oldValue) {
-            String value = el.getAttribute(name);
-            if (value.equals("1")) {
-                return true;
-            }
-            if (value.equals("0")) {
-                return false;
-            }
-            return oldValue;
+        public Boolean deserialize(TrackableDeserializer td, Boolean oldValue) {
+            return td.readBoolean();
         }
 
         @Override
-        public void saveToXml(Element el, String name, Boolean value) {
-            el.setAttribute(name, value ? "1" : "0");
+        public void serialize(TrackableSerializer ts, Boolean value) {
+            ts.write(value);
         }
     };
     public static final TrackableType<Integer> IntegerType = new TrackableType<Integer>() {
@@ -63,20 +54,13 @@ public class TrackableTypes {
         }
 
         @Override
-        public Integer loadFromXml(Element el, String name, Integer oldValue) {
-            String value = el.getAttribute(name);
-            if (value.length() > 0) {
-                try {
-                    return Integer.parseInt(value);
-                }
-                catch (Exception ex) {}
-            }
-            return oldValue;
+        public Integer deserialize(TrackableDeserializer td, Integer oldValue) {
+            return td.readInt();
         }
 
         @Override
-        public void saveToXml(Element el, String name, Integer value) {
-            el.setAttribute(name, value.toString());
+        public void serialize(TrackableSerializer ts, Integer value) {
+            ts.write(value);
         }
     };
     public static final TrackableType<String> StringType = new TrackableType<String>() {
@@ -86,13 +70,13 @@ public class TrackableTypes {
         }
 
         @Override
-        public String loadFromXml(Element el, String name, String oldValue) {
-            return el.getAttribute(name);
+        public String deserialize(TrackableDeserializer td, String oldValue) {
+            return td.readString();
         }
 
         @Override
-        public void saveToXml(Element el, String name, String value) {
-            el.setAttribute(name, value);
+        public void serialize(TrackableSerializer ts, String value) {
+            ts.write(value);
         }
     };
 
@@ -110,9 +94,9 @@ public class TrackableTypes {
                 }
 
                 @Override
-                public E loadFromXml(Element el, String name, E oldValue) {
+                public E deserialize(TrackableDeserializer td, E oldValue) {
                     try {
-                        return Enum.valueOf(enumType, el.getAttribute(name));
+                        return Enum.valueOf(enumType, td.readString());
                     }
                     catch (Exception e) {
                         return oldValue;
@@ -120,8 +104,8 @@ public class TrackableTypes {
                 }
 
                 @Override
-                public void saveToXml(Element el, String name, E value) {
-                    el.setAttribute(name, value.name());
+                public void serialize(TrackableSerializer ts, E value) {
+                    ts.write(value.name());
                 }
             };
             enumTypes.put(enumType, type);
@@ -136,14 +120,17 @@ public class TrackableTypes {
         }
 
         @Override
-        protected CardView loadFromXml(Element el, String name, CardView oldValue) {
-            //TODO
-            return oldValue;
+        protected CardView deserialize(TrackableDeserializer td, CardView oldValue) {
+            int id = td.readInt();
+            if (id == -1) {
+                return null;
+            }
+            return oldValue; //TODO: return index lookup
         }
 
         @Override
-        protected void saveToXml(Element el, String name, CardView value) {
-            //TODO
+        protected void serialize(TrackableSerializer ts, CardView value) {
+            ts.write(value == null ? -1 : value.getId()); //just write ID for lookup via index when deserializing
         }
     };
     public static final TrackableType<TrackableCollection<CardView>> CardViewCollectionType = new TrackableType<TrackableCollection<CardView>>() {
@@ -153,14 +140,13 @@ public class TrackableTypes {
         }
 
         @Override
-        protected TrackableCollection<CardView> loadFromXml(Element el, String name, TrackableCollection<CardView> oldValue) {
-            //TODO
-            return oldValue;
+        protected TrackableCollection<CardView> deserialize(TrackableDeserializer td, TrackableCollection<CardView> oldValue) {
+            return td.readCollection(oldValue);
         }
 
         @Override
-        protected void saveToXml(Element el, String name, TrackableCollection<CardView> value) {
-            //TODO
+        protected void serialize(TrackableSerializer ts, TrackableCollection<CardView> value) {
+            ts.write(value);
         }
     };
     public static final TrackableType<CardStateView> CardStateViewType = new TrackableType<CardStateView>() {
@@ -170,14 +156,19 @@ public class TrackableTypes {
         }
 
         @Override
-        protected CardStateView loadFromXml(Element el, String name, CardStateView oldValue) {
-            //TODO
+        protected CardStateView deserialize(TrackableDeserializer td, CardStateView oldValue) {
+            oldValue.deserialize(td); //TODO handle old value being null or changing to null
             return oldValue;
         }
 
         @Override
-        protected void saveToXml(Element el, String name, CardStateView value) {
-            //TODO
+        protected void serialize(TrackableSerializer ts, CardStateView value) {
+            if (value == null) {
+                ts.write(-1);
+            }
+            else {
+                value.serialize(ts); //serialize card state views here since they won't be stored in an index
+            }
         }
     };
     public static final TrackableType<PlayerView> PlayerViewType = new TrackableType<PlayerView>() {
@@ -187,14 +178,17 @@ public class TrackableTypes {
         }
 
         @Override
-        protected PlayerView loadFromXml(Element el, String name, PlayerView oldValue) {
-            //TODO
-            return oldValue;
+        protected PlayerView deserialize(TrackableDeserializer td, PlayerView oldValue) {
+            int id = td.readInt();
+            if (id == -1) {
+                return null;
+            }
+            return oldValue; //TODO: return index lookup
         }
 
         @Override
-        protected void saveToXml(Element el, String name, PlayerView value) {
-            //TODO
+        protected void serialize(TrackableSerializer ts, PlayerView value) {
+            ts.write(value == null ? -1 : value.getId()); //just write ID for lookup via index when deserializing
         }
     };
     public static final TrackableType<TrackableCollection<PlayerView>> PlayerViewCollectionType = new TrackableType<TrackableCollection<PlayerView>>() {
@@ -204,14 +198,13 @@ public class TrackableTypes {
         }
 
         @Override
-        protected TrackableCollection<PlayerView> loadFromXml(Element el, String name, TrackableCollection<PlayerView> oldValue) {
-            //TODO
-            return oldValue;
+        protected TrackableCollection<PlayerView> deserialize(TrackableDeserializer td, TrackableCollection<PlayerView> oldValue) {
+            return td.readCollection(oldValue);
         }
 
         @Override
-        protected void saveToXml(Element el, String name, TrackableCollection<PlayerView> value) {
-            //TODO
+        protected void serialize(TrackableSerializer ts, TrackableCollection<PlayerView> value) {
+            ts.write(value);
         }
     };
     public static final TrackableType<GameEntityView> GameEntityViewType = new TrackableType<GameEntityView>() {
@@ -221,14 +214,32 @@ public class TrackableTypes {
         }
 
         @Override
-        protected GameEntityView loadFromXml(Element el, String name, GameEntityView oldValue) {
-            //TODO
-            return oldValue;
+        protected GameEntityView deserialize(TrackableDeserializer td, GameEntityView oldValue) {
+            switch (td.readInt()) {
+            case 0:
+                int cardId = td.readInt();
+                return oldValue; //TODO: lookup card by ID
+            case 1:
+                int playerId = td.readInt();
+                return oldValue; //TODO: lookup player by ID
+            }
+            return null;
         }
 
         @Override
-        protected void saveToXml(Element el, String name, GameEntityView value) {
-            //TODO
+        protected void serialize(TrackableSerializer ts, GameEntityView value) {
+            //just write ID for lookup via index when deserializing, with an additional value to indicate type
+            if (value instanceof CardView) {
+                ts.write(0);
+                ts.write(value.getId());
+            }
+            if (value instanceof PlayerView) {
+                ts.write(1);
+                ts.write(value.getId());
+            }
+            else {
+                ts.write(-1);
+            }
         }
     };
     public static final TrackableType<StackItemView> StackItemViewType = new TrackableType<StackItemView>() {
@@ -238,14 +249,19 @@ public class TrackableTypes {
         }
 
         @Override
-        protected StackItemView loadFromXml(Element el, String name, StackItemView oldValue) {
-            //TODO
+        protected StackItemView deserialize(TrackableDeserializer td, StackItemView oldValue) {
+            oldValue.deserialize(td); //TODO handle old value being null or changing to null
             return oldValue;
         }
 
         @Override
-        protected void saveToXml(Element el, String name, StackItemView value) {
-            //TODO
+        protected void serialize(TrackableSerializer ts, StackItemView value) {
+            if (value == null) {
+                ts.write(-1);
+            }
+            else {
+                value.serialize(ts); //serialize card state views here since they won't be stored in an index
+            }
         }
     };
     public static final TrackableType<ManaCost> ManaCostType = new TrackableType<ManaCost>() {
@@ -255,20 +271,17 @@ public class TrackableTypes {
         }
 
         @Override
-        public ManaCost loadFromXml(Element el, String name, ManaCost oldValue) {
-            String value = el.getAttribute(name);
+        public ManaCost deserialize(TrackableDeserializer td, ManaCost oldValue) {
+            String value = td.readString();
             if (value.length() > 0) {
-                try {
-                    return ManaCost.deserialize(value);
-                }
-                catch (Exception ex) {}
+                return ManaCost.deserialize(value);
             }
             return oldValue;
         }
 
         @Override
-        public void saveToXml(Element el, String name, ManaCost value) {
-            el.setAttribute(name, ManaCost.serialize(value));
+        public void serialize(TrackableSerializer ts, ManaCost value) {
+            ts.write(ManaCost.serialize(value));
         }
     };
     public static final TrackableType<ColorSet> ColorSetType = new TrackableType<ColorSet>() {
@@ -278,24 +291,17 @@ public class TrackableTypes {
         }
 
         @Override
-        public ColorSet loadFromXml(Element el, String name, ColorSet oldValue) {
-            String value = el.getAttribute(name);
-            if (value.length() > 0) {
-                try {
-                    return ColorSet.fromMask(Byte.parseByte(value));
-                }
-                catch (Exception ex) {}
-            }
-            return oldValue;
+        public ColorSet deserialize(TrackableDeserializer td, ColorSet oldValue) {
+            return ColorSet.fromMask(td.readInt());
         }
 
         @Override
-        public void saveToXml(Element el, String name, ColorSet value) {
-            el.setAttribute(name, Byte.toString(value.getColor()));
+        public void serialize(TrackableSerializer ts, ColorSet value) {
+            ts.write(value.getColor());
         }
     };
     public static final TrackableType<Set<String>> StringSetType = new TrackableType<Set<String>>() {
-        private static final char DELIM = (char)5;
+        private static final char DELIM = (char)6;
 
         @Override
         public Set<String> getDefaultValue() {
@@ -303,8 +309,8 @@ public class TrackableTypes {
         }
 
         @Override
-        public Set<String> loadFromXml(Element el, String name, Set<String> oldValue) {
-            String value = el.getAttribute(name);
+        public Set<String> deserialize(TrackableDeserializer td, Set<String> oldValue) {
+            String value = td.readString();
             if (value.length() > 0) {
                 return Sets.newHashSet(StringUtils.split(value, DELIM));
             }
@@ -312,13 +318,13 @@ public class TrackableTypes {
         }
 
         @Override
-        public void saveToXml(Element el, String name, Set<String> value) {
-            el.setAttribute(name, StringUtils.join(value, DELIM));
+        public void serialize(TrackableSerializer ts, Set<String> value) {
+            ts.write(StringUtils.join(value, DELIM));
         }
     };
     public static final TrackableType<Map<String, String>> StringMapType = new TrackableType<Map<String, String>>() {
-        private static final char DELIM_1 = (char)5;
-        private static final char DELIM_2 = (char)6;
+        private static final char DELIM_1 = (char)6;
+        private static final char DELIM_2 = (char)7;
 
         @Override
         public Map<String, String> getDefaultValue() {
@@ -326,8 +332,8 @@ public class TrackableTypes {
         }
 
         @Override
-        public Map<String, String> loadFromXml(Element el, String name, Map<String, String> oldValue) {
-            String value = el.getAttribute(name);
+        public Map<String, String> deserialize(TrackableDeserializer td, Map<String, String> oldValue) {
+            String value = td.readString();
             if (value.length() > 0) {
                 Map<String, String> map = ImmutableMap.of();
                 String[] entries = StringUtils.split(value, DELIM_1);
@@ -341,7 +347,7 @@ public class TrackableTypes {
         }
 
         @Override
-        public void saveToXml(Element el, String name, Map<String, String> value) {
+        public void serialize(TrackableSerializer ts, Map<String, String> value) {
             StringBuilder builder = new StringBuilder();
             for (Entry<String, String> entry : value.entrySet()) {
                 if (builder.length() > 0) {
@@ -349,12 +355,12 @@ public class TrackableTypes {
                 }
                 builder.append(entry.getKey() + DELIM_2 + entry.getValue());
             }
-            el.setAttribute(name, builder.toString());
+            ts.write(builder.toString());
         }
     };
     public static final TrackableType<Map<Byte, Integer>> ManaMapType = new TrackableType<Map<Byte, Integer>>() {
-        private static final char DELIM_1 = (char)5;
-        private static final char DELIM_2 = (char)6;
+        private static final char DELIM_1 = (char)6;
+        private static final char DELIM_2 = (char)7;
 
         @Override
         public Map<Byte, Integer> getDefaultValue() {
@@ -362,8 +368,8 @@ public class TrackableTypes {
         }
 
         @Override
-        public Map<Byte, Integer> loadFromXml(Element el, String name, Map<Byte, Integer> oldValue) {
-            String value = el.getAttribute(name);
+        public Map<Byte, Integer> deserialize(TrackableDeserializer td, Map<Byte, Integer> oldValue) {
+            String value = td.readString();
             if (value.length() > 0) {
                 Map<Byte, Integer> map = Maps.newHashMapWithExpectedSize(MagicColor.NUMBER_OR_COLORS + 1);
                 String[] entries = StringUtils.split(value, DELIM_1);
@@ -377,7 +383,7 @@ public class TrackableTypes {
         }
 
         @Override
-        public void saveToXml(Element el, String name, Map<Byte, Integer> value) {
+        public void serialize(TrackableSerializer ts, Map<Byte, Integer> value) {
             StringBuilder builder = new StringBuilder();
             for (Entry<Byte, Integer> entry : value.entrySet()) {
                 if (builder.length() > 0) {
@@ -385,12 +391,12 @@ public class TrackableTypes {
                 }
                 builder.append(Byte.toString(entry.getKey()) + DELIM_2 + Integer.toString(entry.getValue()));
             }
-            el.setAttribute(name, builder.toString());
+            ts.write(builder.toString());
         }
     };
     public static final TrackableType<Map<CounterType, Integer>> CounterMapType = new TrackableType<Map<CounterType, Integer>>() {
-        private static final char DELIM_1 = (char)5;
-        private static final char DELIM_2 = (char)6;
+        private static final char DELIM_1 = (char)6;
+        private static final char DELIM_2 = (char)7;
 
         @Override
         public Map<CounterType, Integer> getDefaultValue() {
@@ -398,8 +404,8 @@ public class TrackableTypes {
         }
 
         @Override
-        public Map<CounterType, Integer> loadFromXml(Element el, String name, Map<CounterType, Integer> oldValue) {
-            String value = el.getAttribute(name);
+        public Map<CounterType, Integer> deserialize(TrackableDeserializer td, Map<CounterType, Integer> oldValue) {
+            String value = td.readString();
             if (value.length() > 0) {
                 Map<CounterType, Integer> map = new TreeMap<CounterType, Integer>();
                 String[] entries = StringUtils.split(value, DELIM_1);
@@ -413,7 +419,7 @@ public class TrackableTypes {
         }
 
         @Override
-        public void saveToXml(Element el, String name, Map<CounterType, Integer> value) {
+        public void serialize(TrackableSerializer ts, Map<CounterType, Integer> value) {
             StringBuilder builder = new StringBuilder();
             for (Entry<CounterType, Integer> entry : value.entrySet()) {
                 if (builder.length() > 0) {
@@ -421,7 +427,7 @@ public class TrackableTypes {
                 }
                 builder.append(entry.getKey().name() + DELIM_2 + Integer.toString(entry.getValue()));
             }
-            el.setAttribute(name, builder.toString());
+            ts.write(builder.toString());
         }
     };
 }
