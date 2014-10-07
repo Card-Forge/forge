@@ -135,4 +135,16 @@ public enum TrackableProperty {
     public <T> void saveToXml(Element el, String name, T value) {
         ((TrackableType<T>)type).saveToXml(el, name, value);
     }
+
+    //cache array of all properties to allow quick lookup by ordinal,
+    //which reduces the size and improves performance of serialization
+    //we don't need to worry about the values changing since we will ensure
+    //both players are on the same version of Forge before allowing them to connect
+    private static TrackableProperty[] props = values();
+    public static String serialize(TrackableProperty prop) {
+        return Integer.toString(prop.ordinal());
+    }
+    public static TrackableProperty deserialize(String ordinal) {
+        return props[Integer.valueOf(ordinal)];
+    }
 }
