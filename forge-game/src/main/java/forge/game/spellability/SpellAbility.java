@@ -299,7 +299,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public void copyParamsToMap(Map<String, String> mapParam) {
-        mapParams.putAll(mapParam);
+        mapParam.putAll(mapParams);
     }
 
     // If this is not null, then ability was made in a factory
