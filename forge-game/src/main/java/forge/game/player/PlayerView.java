@@ -12,10 +12,10 @@ import forge.game.card.CardView;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.trackable.TrackableCollection;
-import forge.trackable.TrackableProperty.PlayerProp;
+import forge.trackable.TrackableProperty;
 
 
-public class PlayerView extends GameEntityView<PlayerProp> {
+public class PlayerView extends GameEntityView {
     public static PlayerView get(Player p) {
         return p == null ? null : p.getView();
     }
@@ -32,23 +32,23 @@ public class PlayerView extends GameEntityView<PlayerProp> {
     }
 
     public PlayerView(int id0) {
-        super(id0, PlayerProp.class);
+        super(id0);
 
-        set(PlayerProp.Mana, Maps.newHashMapWithExpectedSize(MagicColor.NUMBER_OR_COLORS + 1));
+        set(TrackableProperty.Mana, Maps.newHashMapWithExpectedSize(MagicColor.NUMBER_OR_COLORS + 1));
     }
 
     public LobbyPlayer getLobbyPlayer() {
-        return get(PlayerProp.LobbyPlayer);
+        return get(TrackableProperty.LobbyPlayer);
     }
     void updateLobbyPlayer(Player p) {
-        set(PlayerProp.LobbyPlayer, p.getLobbyPlayer());
+        set(TrackableProperty.LobbyPlayer, p.getLobbyPlayer());
     }
 
     public Iterable<PlayerView> getOpponents() {
-        return get(PlayerProp.Opponents);
+        return get(TrackableProperty.Opponents);
     }
     private TrackableCollection<PlayerView> getOpponentCollection() {
-        return get(PlayerProp.Opponents);
+        return get(TrackableProperty.Opponents);
     }
 
     public boolean isOpponentOf(final PlayerView other) {
@@ -65,121 +65,121 @@ public class PlayerView extends GameEntityView<PlayerProp> {
     }
 
     public int getLife() {
-        return get(PlayerProp.Life);
+        return get(TrackableProperty.Life);
     }
     void updateLife(Player p) {
-        set(PlayerProp.Life, p.getLife());
+        set(TrackableProperty.Life, p.getLife());
     }
 
     public int getPoisonCounters() {
-        return get(PlayerProp.PoisonCounters);
+        return get(TrackableProperty.PoisonCounters);
     }
     void updatePoisonCounters(Player p) {
-        set(PlayerProp.PoisonCounters, p.getPoisonCounters());
+        set(TrackableProperty.PoisonCounters, p.getPoisonCounters());
     }
 
     public int getMaxHandSize() {
-        return get(PlayerProp.MaxHandSize);
+        return get(TrackableProperty.MaxHandSize);
     }
     void updateMaxHandSize(Player p) {
-        set(PlayerProp.MaxHandSize, p.getMaxHandSize());
+        set(TrackableProperty.MaxHandSize, p.getMaxHandSize());
     }
 
     public boolean hasUnlimitedHandSize() {
-        return get(PlayerProp.HasUnlimitedHandSize);
+        return get(TrackableProperty.HasUnlimitedHandSize);
     }
     void updateUnlimitedHandSize(Player p) {
-        set(PlayerProp.HasUnlimitedHandSize, p.isUnlimitedHandSize());
+        set(TrackableProperty.HasUnlimitedHandSize, p.isUnlimitedHandSize());
     }
 
     public int getNumDrawnThisTurn() {
-        return get(PlayerProp.NumDrawnThisTurn);
+        return get(TrackableProperty.NumDrawnThisTurn);
     }
     void updateNumDrawnThisTurn(Player p) {
-        set(PlayerProp.NumDrawnThisTurn, p.getNumDrawnThisTurn());
+        set(TrackableProperty.NumDrawnThisTurn, p.getNumDrawnThisTurn());
     }
 
     public Iterable<String> getKeywords() {
-        return get(PlayerProp.Keywords);
+        return get(TrackableProperty.Keywords);
     }
     void updateKeywords(Player p) {
-        set(PlayerProp.Keywords, p.getKeywords());
+        set(TrackableProperty.Keywords, p.getKeywords());
     }
 
     public String getCommanderInfo() {
-        return get(PlayerProp.CommanderInfo);
+        return get(TrackableProperty.CommanderInfo);
     }
     void updateCommanderInfo(Player p) {
-        set(PlayerProp.CommanderInfo, CardFactoryUtil.getCommanderInfo(p).trim().replace("\r\n", "; "));
+        set(TrackableProperty.CommanderInfo, CardFactoryUtil.getCommanderInfo(p).trim().replace("\r\n", "; "));
     }
 
     public Iterable<CardView> getAnte() {
-        return get(PlayerProp.Ante);
+        return get(TrackableProperty.Ante);
     }
 
     public Iterable<CardView> getBattlefield() {
-        return get(PlayerProp.Battlefield);
+        return get(TrackableProperty.Battlefield);
     }
 
     public Iterable<CardView> getCommand() {
-        return get(PlayerProp.Command);
+        return get(TrackableProperty.Command);
     }
 
     public Iterable<CardView> getExile() {
-        return get(PlayerProp.Exile);
+        return get(TrackableProperty.Exile);
     }
 
     public Iterable<CardView> getFlashback() {
-        return get(PlayerProp.Flashback);
+        return get(TrackableProperty.Flashback);
     }
 
     public Iterable<CardView> getGraveyard() {
-        return get(PlayerProp.Graveyard);
+        return get(TrackableProperty.Graveyard);
     }
 
     public Iterable<CardView> getHand() {
-        return get(PlayerProp.Hand);
+        return get(TrackableProperty.Hand);
     }
 
     public Iterable<CardView> getLibrary() {
-        return get(PlayerProp.Library);
+        return get(TrackableProperty.Library);
     }
 
     public Iterable<CardView> getCards(final ZoneType zone) {
-        PlayerProp prop = getZoneProp(zone);
+        TrackableProperty prop = getZoneProp(zone);
         if (prop != null) {
             return get(prop);
         }
         return null;
     }
-    private PlayerProp getZoneProp(final ZoneType zone) {
+    private TrackableProperty getZoneProp(final ZoneType zone) {
         switch (zone) {
         case Ante:
-            return PlayerProp.Ante;
+            return TrackableProperty.Ante;
         case Battlefield:
-            return PlayerProp.Battlefield;
+            return TrackableProperty.Battlefield;
         case Command:
-            return PlayerProp.Command;
+            return TrackableProperty.Command;
         case Exile:
-            return PlayerProp.Exile;
+            return TrackableProperty.Exile;
         case Graveyard:
-            return PlayerProp.Graveyard;
+            return TrackableProperty.Graveyard;
         case Hand:
-            return PlayerProp.Hand;
+            return TrackableProperty.Hand;
         case Library:
-            return PlayerProp.Library;
+            return TrackableProperty.Library;
         default:
             return null; //other zones not represented
         }
     }
     void updateZone(PlayerZone zone) {
-        PlayerProp prop = getZoneProp(zone.getZoneType());
+        TrackableProperty prop = getZoneProp(zone.getZoneType());
         if (prop == null) { return; }
         set(prop, CardView.getCollection(zone.getCards()));
     }
 
     private Map<Byte, Integer> getMana() {
-        return get(PlayerProp.Mana);
+        return get(TrackableProperty.Mana);
     }
     void updateMana(Player p) {
         boolean changed = false;
@@ -191,22 +191,12 @@ public class PlayerView extends GameEntityView<PlayerProp> {
             }
         }
         if (changed) {
-            flagAsChanged(PlayerProp.Mana);
+            flagAsChanged(TrackableProperty.Mana);
         }
     }
 
     public int getMana(final byte color) {
         Integer count = getMana().get(color);
         return count != null ? count.intValue() : 0;
-    }
-
-    @Override
-    protected PlayerProp preventNextDamageProp() {
-        return PlayerProp.PreventNextDamage;
-    }
-
-    @Override
-    protected PlayerProp enchantedByProp() {
-        return PlayerProp.EnchantedBy;
     }
 }

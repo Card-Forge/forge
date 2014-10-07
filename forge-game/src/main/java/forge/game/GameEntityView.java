@@ -2,36 +2,33 @@ package forge.game;
 
 import forge.game.card.CardView;
 import forge.trackable.TrackableObject;
+import forge.trackable.TrackableProperty;
 
-public abstract class GameEntityView<E extends Enum<E>> extends TrackableObject<E> {
-    public static GameEntityView<?> get(GameEntity e) {
+public abstract class GameEntityView extends TrackableObject {
+    public static GameEntityView get(GameEntity e) {
         return e == null ? null : e.getView();
     }
 
-    protected GameEntityView(int id0, Class<E> propEnum0) {
-        super(id0, propEnum0);
+    protected GameEntityView(int id0) {
+        super(id0);
     }
-
-    protected abstract E preventNextDamageProp();
 
     public int getPreventNextDamage() {
-        return get(preventNextDamageProp());
+        return get(TrackableProperty.PreventNextDamage);
     }
     void updatePreventNextDamage(GameEntity e) {
-        set(preventNextDamageProp(), e.getPreventNextDamageTotalShields());
+        set(TrackableProperty.PreventNextDamage, e.getPreventNextDamageTotalShields());
     }
 
-    protected abstract E enchantedByProp();
-
     public Iterable<CardView> getEnchantedBy() {
-        return get(enchantedByProp());
+        return get(TrackableProperty.EnchantedBy);
     }
     void updateEnchantedBy(GameEntity e) {
         if (e.isEnchanted()) {
-            set(enchantedByProp(), CardView.getCollection(e.getEnchantedBy(false)));
+            set(TrackableProperty.EnchantedBy, CardView.getCollection(e.getEnchantedBy(false)));
         }
         else {
-            set(enchantedByProp(), null);
+            set(TrackableProperty.EnchantedBy, null);
         }
     }
     public boolean isEnchanted() {

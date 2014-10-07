@@ -2,12 +2,12 @@ package forge.game.spellability;
 
 import forge.game.card.CardView;
 import forge.trackable.TrackableObject;
-import forge.trackable.TrackableProperty.SpellAbilityProp;
+import forge.trackable.TrackableProperty;
 
 
-public class SpellAbilityView extends TrackableObject<SpellAbilityProp> {
+public class SpellAbilityView extends TrackableObject {
     SpellAbilityView(SpellAbility sa) {
-        super(sa.getId(), SpellAbilityProp.class);
+        super(sa.getId());
         updateHostCard(sa);
         updateDescription(sa);
         updatePromptIfOnlyPossibleAbility(sa);
@@ -19,30 +19,30 @@ public class SpellAbilityView extends TrackableObject<SpellAbilityProp> {
     }
 
     public CardView getHostCard() {
-        return get(SpellAbilityProp.HostCard);
+        return get(TrackableProperty.HostCard);
     }
     void updateHostCard(SpellAbility sa) {
-        set(SpellAbilityProp.HostCard, CardView.get(sa.getHostCard()));
+        set(TrackableProperty.HostCard, CardView.get(sa.getHostCard()));
     }
 
     public String getDescription() {
-        return get(SpellAbilityProp.Description);
+        return get(TrackableProperty.Description);
     }
     void updateDescription(SpellAbility sa) {
-        set(SpellAbilityProp.Description, sa.toUnsuppressedString());
+        set(TrackableProperty.Description, sa.toUnsuppressedString());
     }
 
     public boolean canPlay() {
-        return get(SpellAbilityProp.CanPlay);
+        return get(TrackableProperty.CanPlay);
     }
     void updateCanPlay(SpellAbility sa) {
-        set(SpellAbilityProp.CanPlay, sa.canPlay());
+        set(TrackableProperty.CanPlay, sa.canPlay());
     }
 
     public boolean promptIfOnlyPossibleAbility() {
-        return get(SpellAbilityProp.PromptIfOnlyPossibleAbility);
+        return get(TrackableProperty.PromptIfOnlyPossibleAbility);
     }
     void updatePromptIfOnlyPossibleAbility(SpellAbility sa) {
-        set(SpellAbilityProp.PromptIfOnlyPossibleAbility, sa.promptIfOnlyPossibleAbility());
+        set(TrackableProperty.PromptIfOnlyPossibleAbility, sa.promptIfOnlyPossibleAbility());
     }
 }

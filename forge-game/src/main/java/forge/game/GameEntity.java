@@ -204,5 +204,5 @@ public abstract class GameEntity extends GameObject {
     }
 
     public abstract Game getGame();
-    public abstract GameEntityView<?> getView();
+    public abstract GameEntityView getView();
 }

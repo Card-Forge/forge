@@ -58,7 +58,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
-import forge.trackable.TrackableProperty.CardProp;
+import forge.trackable.TrackableProperty;
 import forge.util.CollectionSuppliers;
 import forge.util.Expressions;
 import forge.util.Lang;
@@ -459,19 +459,19 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return CardCollection.hasCard(imprintedCards, c);
     }
     public final void addImprintedCard(final Card c) {
-        imprintedCards = view.addCard(imprintedCards, c, CardProp.ImprintedCards);
+        imprintedCards = view.addCard(imprintedCards, c, TrackableProperty.ImprintedCards);
     }
     public final void addImprintedCards(final Iterable<Card> cards) {
-        imprintedCards = view.addCards(imprintedCards, cards, CardProp.ImprintedCards);
+        imprintedCards = view.addCards(imprintedCards, cards, TrackableProperty.ImprintedCards);
     }
     public final void removeImprintedCard(final Card c) {
-        imprintedCards = view.removeCard(imprintedCards, c, CardProp.ImprintedCards);
+        imprintedCards = view.removeCard(imprintedCards, c, TrackableProperty.ImprintedCards);
     }
     public final void removeImprintedCards(final Iterable<Card> cards) {
-        imprintedCards = view.removeCards(imprintedCards, cards, CardProp.ImprintedCards);
+        imprintedCards = view.removeCards(imprintedCards, cards, TrackableProperty.ImprintedCards);
     }
     public final void clearImprintedCards() {
-        imprintedCards = view.clearCards(imprintedCards, CardProp.ImprintedCards);
+        imprintedCards = view.clearCards(imprintedCards, TrackableProperty.ImprintedCards);
     }
 
     public final CardCollectionView getEncodedCards() {
@@ -642,13 +642,13 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return CardCollection.getView(mustBlockCards);
     }
     public final void addMustBlockCard(final Card c) {
-        mustBlockCards = view.addCard(mustBlockCards, c, CardProp.MustBlockCards);
+        mustBlockCards = view.addCard(mustBlockCards, c, TrackableProperty.MustBlockCards);
     }
     public final void addMustBlockCards(final Iterable<Card> attackersToBlock) {
-        mustBlockCards = view.addCards(mustBlockCards, attackersToBlock, CardProp.MustBlockCards);
+        mustBlockCards = view.addCards(mustBlockCards, attackersToBlock, TrackableProperty.MustBlockCards);
     }
     public final void clearMustBlockCards() {
-        mustBlockCards = view.clearCards(mustBlockCards, CardProp.MustBlockCards);
+        mustBlockCards = view.clearCards(mustBlockCards, TrackableProperty.MustBlockCards);
     }
 
     public final CardCollectionView getClones() {
@@ -671,7 +671,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return cloneOrigin;
     }
     public final void setCloneOrigin(final Card cloneOrigin0) {
-        cloneOrigin = view.setCard(cloneOrigin, cloneOrigin0, CardProp.CloneOrigin);
+        cloneOrigin = view.setCard(cloneOrigin, cloneOrigin0, TrackableProperty.CloneOrigin);
     }
 
     public final boolean hasFirstStrike() {
@@ -1022,7 +1022,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return CardCollection.getView(chosenCards);
     }
     public final void setChosenCards(final CardCollection cards) {
-        chosenCards = view.setCards(chosenCards, cards, CardProp.ChosenColors);
+        chosenCards = view.setCards(chosenCards, cards, TrackableProperty.ChosenColors);
     }
     public boolean hasChosenCard() {
         return CardCollection.hasCard(chosenCards);
@@ -1058,10 +1058,10 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return CardCollection.getView(gainControlTargets);
     }
     public final void addGainControlTarget(final Card c) {
-        gainControlTargets = view.addCard(gainControlTargets, c, CardProp.GainControlTargets);
+        gainControlTargets = view.addCard(gainControlTargets, c, TrackableProperty.GainControlTargets);
     }
     public final void removeGainControlTargets(final Card c) {
-        gainControlTargets = view.removeCard(gainControlTargets, c, CardProp.GainControlTargets);
+        gainControlTargets = view.removeCard(gainControlTargets, c, TrackableProperty.GainControlTargets);
     }
     public final boolean hasGainControlTarget() {
         return CardCollection.hasCard(gainControlTargets);
@@ -2155,10 +2155,10 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return CardCollection.getView(equippedBy, allowModify);
     }
     public final void setEquippedBy(final CardCollection cards) {
-        equippedBy = view.setCards(equippedBy, cards, CardProp.EquippedBy);
+        equippedBy = view.setCards(equippedBy, cards, TrackableProperty.EquippedBy);
     }
     public final void setEquippedBy(final Iterable<Card> cards) {
-        equippedBy = view.setCards(equippedBy, cards, CardProp.EquippedBy);
+        equippedBy = view.setCards(equippedBy, cards, TrackableProperty.EquippedBy);
     }
     public final boolean isEquipped() {
         return CardCollection.hasCard(equippedBy);
@@ -2171,10 +2171,10 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return CardCollection.getView(fortifiedBy, allowModify);
     }
     public final void setFortifiedBy(final CardCollection cards) {
-        fortifiedBy = view.setCards(fortifiedBy, cards, CardProp.FortifiedBy);
+        fortifiedBy = view.setCards(fortifiedBy, cards, TrackableProperty.FortifiedBy);
     }
     public final void setFortifiedBy(final Iterable<Card> cards) {
-        fortifiedBy = view.setCards(fortifiedBy, cards, CardProp.FortifiedBy);
+        fortifiedBy = view.setCards(fortifiedBy, cards, TrackableProperty.FortifiedBy);
     }
     public final boolean isFortified() {
         return CardCollection.hasCard(fortifiedBy);
@@ -2187,7 +2187,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return equipping;
     }
     public final void setEquipping(final Card card) {
-        equipping = view.setCard(equipping, card, CardProp.Equipping);
+        equipping = view.setCard(equipping, card, TrackableProperty.Equipping);
     }
     public final boolean isEquipping() {
         return equipping != null;
@@ -2197,7 +2197,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return fortifying;
     }
     public final void setFortifying(final Card card) {
-        fortifying = view.setCard(fortifying, card, CardProp.Fortifying);
+        fortifying = view.setCard(fortifying, card, TrackableProperty.Fortifying);
     }
     public final boolean isFortifying() {
         return fortifying != null;
@@ -2228,7 +2228,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         // They use double links... it's doubtful
         setEquipping(c);
         setTimestamp(getGame().getNextTimestamp());
-        c.equippedBy = c.view.addCard(c.equippedBy, this, CardProp.EquippedBy);
+        c.equippedBy = c.view.addCard(c.equippedBy, this, TrackableProperty.EquippedBy);
 
         // Play the Equip sound
         getGame().fireEvent(new GameEventCardAttachment(this, oldTarget, c, AttachMethod.Equip));
@@ -2249,7 +2249,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
         setFortifying(c);
         setTimestamp(getGame().getNextTimestamp());
-        c.fortifiedBy = c.view.addCard(c.fortifiedBy, this, CardProp.FortifiedBy);
+        c.fortifiedBy = c.view.addCard(c.fortifiedBy, this, TrackableProperty.FortifiedBy);
 
         // Play the Equip sound
         getGame().fireEvent(new GameEventCardAttachment(this, oldTarget, c, AttachMethod.Fortify));
@@ -2264,7 +2264,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         if (equipping == c) {
             setEquipping(null);
         }
-        c.equippedBy = c.view.removeCard(c.equippedBy, this, CardProp.EquippedBy);
+        c.equippedBy = c.view.removeCard(c.equippedBy, this, TrackableProperty.EquippedBy);
 
         getGame().fireEvent(new GameEventCardAttachment(this, c, null, AttachMethod.Equip));
 
@@ -2279,7 +2279,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         if (fortifying == c) {
             setFortifying(null);
         }
-        c.fortifiedBy = c.view.removeCard(c.fortifiedBy, this, CardProp.FortifiedBy);
+        c.fortifiedBy = c.view.removeCard(c.fortifiedBy, this, TrackableProperty.FortifiedBy);
 
         getGame().fireEvent(new GameEventCardAttachment(this, c, null, AttachMethod.Fortify));
     }
@@ -5714,27 +5714,27 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return CardCollection.hasCard(hauntedBy, c);
     }
     public final void addHauntedBy(Card c) {
-        hauntedBy = view.addCard(hauntedBy, c, CardProp.HauntedBy);
+        hauntedBy = view.addCard(hauntedBy, c, TrackableProperty.HauntedBy);
         if (c != null) {
             c.setHaunting(this);
         }
     }
     public final void removeHauntedBy(Card c) {
-        hauntedBy = view.removeCard(hauntedBy, c, CardProp.HauntedBy);
+        hauntedBy = view.removeCard(hauntedBy, c, TrackableProperty.HauntedBy);
     }
 
     public final Card getHaunting() {
         return haunting;
     }
     public final void setHaunting(final Card c) {
-        haunting = view.setCard(haunting, c, CardProp.Haunting);
+        haunting = view.setCard(haunting, c, TrackableProperty.Haunting);
     }
 
     public final Card getPairedWith() {
         return pairedWith;
     }
     public final void setPairedWith(final Card c) {
-        pairedWith = view.setCard(pairedWith, c, CardProp.PairedWith);
+        pairedWith = view.setCard(pairedWith, c, TrackableProperty.PairedWith);
     }
     public final boolean isPaired() {
         return pairedWith != null;

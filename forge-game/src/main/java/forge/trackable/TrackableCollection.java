@@ -2,7 +2,7 @@ package forge.trackable;
 
 import forge.util.FCollection;
 
-public class TrackableCollection<T extends TrackableObject<?>> extends FCollection<T> {
+public class TrackableCollection<T extends TrackableObject> extends FCollection<T> {
     public TrackableCollection() {
     }
 

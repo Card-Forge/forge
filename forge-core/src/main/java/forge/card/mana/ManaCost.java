@@ -24,6 +24,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * <p>
  * CardManaCost class.
@@ -34,6 +36,8 @@ import java.util.List;
  */
 
 public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostShard> {
+    private static final char DELIM = (char)5;
+
     private List<ManaCostShard> shards;
     private final int genericCost;
     private final boolean hasNoCost; // lands cost
@@ -162,10 +166,9 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
      */
     public int[] getColorShardCounts() {
         int[] counts = new int[5]; // in WUBRG order
-        String cost = getSimpleString();
 
-        for (int i = 0; i < cost.length(); i++) {
-            char symbol = cost.charAt(i);
+        for (int i = 0; i < stringValue.length(); i++) {
+            char symbol = stringValue.charAt(i);
             switch (symbol) {
                 case 'W': 
                 case 'U':
@@ -234,6 +237,25 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
             this.compareWeight = Float.valueOf(weight);
         }
         return this.compareWeight;
+    }
+
+    public static String serialize(ManaCost mc) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(mc.hasNoCost ? -1 : mc.genericCost);
+        for (ManaCostShard shard : mc.shards) {
+            builder.append(DELIM + shard.name());
+        }
+        return builder.toString();
+    }
+    public static ManaCost deserialize(String value) {
+        String[] pieces = StringUtils.split(value, DELIM);
+        ManaCost mc = new ManaCost(Integer.parseInt(pieces[0]));
+        List<ManaCostShard> sh = new ArrayList<ManaCostShard>();
+        for (int i = 1; i < pieces.length; i++) {
+            sh.add(ManaCostShard.valueOf(pieces[i]));
+        }
+        mc.sealClass(sh);
+        return mc;
     }
 
     /*

@@ -676,6 +676,7 @@ forge-game/src/main/java/forge/trackable/TrackableCollection.java -text
 forge-game/src/main/java/forge/trackable/TrackableIndex.java -text
 forge-game/src/main/java/forge/trackable/TrackableObject.java -text
 forge-game/src/main/java/forge/trackable/TrackableProperty.java -text
+forge-game/src/main/java/forge/trackable/TrackableTypes.java -text
 forge-game/src/main/java/forge/util/Expressions.java -text
 forge-game/src/main/java/forge/util/MessageUtil.java -text
 forge-gui-android/.classpath -text

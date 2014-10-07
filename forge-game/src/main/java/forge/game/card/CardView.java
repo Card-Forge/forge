@@ -19,11 +19,10 @@ import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
-import forge.trackable.TrackableProperty.CardProp;
-import forge.trackable.TrackableProperty.CardStateProp;
+import forge.trackable.TrackableProperty;
 
 
-public class CardView extends GameEntityView<CardProp> {
+public class CardView extends GameEntityView {
     public static CardView get(Card c) {
         return c == null ? null : c.getView();
     }
@@ -40,92 +39,92 @@ public class CardView extends GameEntityView<CardProp> {
     }
 
     public CardView(int id0) {
-        super(id0, CardProp.class);
-        set(CardProp.Original, new CardStateView(id0));
+        super(id0);
+        set(TrackableProperty.Original, new CardStateView(id0));
     }
 
     public PlayerView getOwner() {
-        return get(CardProp.Owner);
+        return get(TrackableProperty.Owner);
     }
     void updateOwner(Card c) {
-        set(CardProp.Owner, PlayerView.get(c.getOwner()));
+        set(TrackableProperty.Owner, PlayerView.get(c.getOwner()));
     }
 
     public PlayerView getController() {
-        return get(CardProp.Controller);
+        return get(TrackableProperty.Controller);
     }
     void updateController(Card c) {
-        set(CardProp.Controller, PlayerView.get(c.getController()));
+        set(TrackableProperty.Controller, PlayerView.get(c.getController()));
     }
 
     public ZoneType getZone() {
-        return get(CardProp.Zone);
+        return get(TrackableProperty.Zone);
     }
     void updateZone(Card c) {
-        set(CardProp.Zone, c.getZone() == null ? null : c.getZone().getZoneType());
+        set(TrackableProperty.Zone, c.getZone() == null ? null : c.getZone().getZoneType());
     }
 
     public boolean isCloned() {
-        return get(CardProp.Cloned);
+        return get(TrackableProperty.Cloned);
     }
 
     public boolean isFaceDown() {
-        return get(CardProp.FaceDown);
+        return get(TrackableProperty.FaceDown);
     }
 
     public boolean isFlipCard() {
-        return get(CardProp.FlipCard);
+        return get(TrackableProperty.FlipCard);
     }
 
     public boolean isFlipped() {
-        return get(CardProp.Flipped);
+        return get(TrackableProperty.Flipped);
     }
 
     public boolean isSplitCard() {
-        return get(CardProp.SplitCard);
+        return get(TrackableProperty.SplitCard);
     }
 
     public boolean isTransformed() {
-        return get(CardProp.Transformed);
+        return get(TrackableProperty.Transformed);
     }
 
     public String getSetCode() {
-        return get(CardProp.SetCode);
+        return get(TrackableProperty.SetCode);
     }
     void updateSetCode(Card c) {
-        set(CardProp.SetCode, c.getCurSetCode());
+        set(TrackableProperty.SetCode, c.getCurSetCode());
     }
 
     public CardRarity getRarity() {
-        return get(CardProp.Rarity);
+        return get(TrackableProperty.Rarity);
     }
     void updateRarity(Card c) {
-        set(CardProp.Rarity, c.getRarity());
+        set(TrackableProperty.Rarity, c.getRarity());
     }
 
     public boolean isAttacking() {
-        return get(CardProp.Attacking);
+        return get(TrackableProperty.Attacking);
     }
     void updateAttacking(Card c) {
-        set(CardProp.Attacking, c.getGame().getCombat().isAttacking(c));
+        set(TrackableProperty.Attacking, c.getGame().getCombat().isAttacking(c));
     }
 
     public boolean isBlocking() {
-        return get(CardProp.Blocking);
+        return get(TrackableProperty.Blocking);
     }
     void updateBlocking(Card c) {
-        set(CardProp.Blocking, c.getGame().getCombat().isBlocking(c));
+        set(TrackableProperty.Blocking, c.getGame().getCombat().isBlocking(c));
     }
 
     public boolean isPhasedOut() {
-        return get(CardProp.PhasedOut);
+        return get(TrackableProperty.PhasedOut);
     }
     void updatePhasedOut(Card c) {
-        set(CardProp.PhasedOut, c.isPhasedOut());
+        set(TrackableProperty.PhasedOut, c.isPhasedOut());
     }
 
     public boolean isFirstTurnControlled() {
-        return get(CardProp.Sickness);
+        return get(TrackableProperty.Sickness);
     }
     public boolean hasSickness() {
         return isFirstTurnControlled() && !getOriginal().hasHaste();
@@ -134,42 +133,42 @@ public class CardView extends GameEntityView<CardProp> {
         return getZone() == ZoneType.Battlefield && hasSickness();
     }
     void updateSickness(Card c) {
-        set(CardProp.Sickness, c.isInPlay() && c.isSick());
+        set(TrackableProperty.Sickness, c.isInPlay() && c.isSick());
     }
 
     public boolean isTapped() {
-        return get(CardProp.Tapped);
+        return get(TrackableProperty.Tapped);
     }
     void updateTapped(Card c) {
-        set(CardProp.Tapped, c.isTapped());
+        set(TrackableProperty.Tapped, c.isTapped());
     }
 
     public boolean isToken() {
-        return get(CardProp.Token);
+        return get(TrackableProperty.Token);
     }
     void updateToken(Card c) {
-        set(CardProp.Token, c.isToken());
+        set(TrackableProperty.Token, c.isToken());
     }
 
     public Map<CounterType, Integer> getCounters() {
-        return get(CardProp.Counters);
+        return get(TrackableProperty.Counters);
     }
     void updateCounters(Card c) {
-        set(CardProp.Counters, c.getCounters());
+        set(TrackableProperty.Counters, c.getCounters());
     }
 
     public int getDamage() {
-        return get(CardProp.Damage);
+        return get(TrackableProperty.Damage);
     }
     void updateDamage(Card c) {
-        set(CardProp.Damage, c.getDamage());
+        set(TrackableProperty.Damage, c.getDamage());
     }
 
     public int getAssignedDamage() {
-        return get(CardProp.AssignedDamage);
+        return get(TrackableProperty.AssignedDamage);
     }
     void updateAssignedDamage(Card c) {
-        set(CardProp.AssignedDamage, c.getTotalAssignedDamage());
+        set(TrackableProperty.AssignedDamage, c.getTotalAssignedDamage());
     }
 
     public int getLethalDamage() {
@@ -177,68 +176,68 @@ public class CardView extends GameEntityView<CardProp> {
     }
 
     public int getShieldCount() {
-        return get(CardProp.ShieldCount);
+        return get(TrackableProperty.ShieldCount);
     }
     void updateShieldCount(Card c) {
-        set(CardProp.ShieldCount, c.getShieldCount());
+        set(TrackableProperty.ShieldCount, c.getShieldCount());
     }
 
     public String getChosenType() {
-        return get(CardProp.ChosenType);
+        return get(TrackableProperty.ChosenType);
     }
     void updateChosenType(Card c) {
-        set(CardProp.ChosenType, c.getChosenType());
+        set(TrackableProperty.ChosenType, c.getChosenType());
     }
 
     public List<String> getChosenColors() {
-        return get(CardProp.ChosenColors);
+        return get(TrackableProperty.ChosenColors);
     }
     void updateChosenColors(Card c) {
-        set(CardProp.ChosenColors, c.getChosenColors());
+        set(TrackableProperty.ChosenColors, c.getChosenColors());
     }
 
     public PlayerView getChosenPlayer() {
-        return get(CardProp.ChosenPlayer);
+        return get(TrackableProperty.ChosenPlayer);
     }
     void updateChosenPlayer(Card c) {
-        set(CardProp.ChosenPlayer, c.getChosenPlayer());
+        set(TrackableProperty.ChosenPlayer, c.getChosenPlayer());
     }
 
     public String getNamedCard() {
-        return get(CardProp.NamedCard);
+        return get(TrackableProperty.NamedCard);
     }
     void updateNamedCard(Card c) {
-        set(CardProp.NamedCard, c.getNamedCard());
+        set(TrackableProperty.NamedCard, c.getNamedCard());
     }
 
     public CardView getEquipping() {
-        return get(CardProp.Equipping);
+        return get(TrackableProperty.Equipping);
     }
 
     public Iterable<CardView> getEquippedBy() {
-        return get(CardProp.EquippedBy);
+        return get(TrackableProperty.EquippedBy);
     }
 
     public boolean isEquipped() {
         return getEquippedBy() != null;
     }
 
-    public GameEntityView<?> getEnchanting() {
-        return get(CardProp.Enchanting);
+    public GameEntityView getEnchanting() {
+        return get(TrackableProperty.Enchanting);
     }
     void updateEnchanting(Card c) {
-        set(CardProp.Owner, GameEntityView.get(c.getEnchanting()));
+        set(TrackableProperty.Owner, GameEntityView.get(c.getEnchanting()));
     }
 
     public CardView getEnchantingCard() {
-        GameEntityView<?> enchanting = getEnchanting();
+        GameEntityView enchanting = getEnchanting();
         if (enchanting instanceof CardView) {
             return (CardView) enchanting;
         }
         return null;
     }
     public PlayerView getEnchantingPlayer() {
-        GameEntityView<?> enchanting = getEnchanting();
+        GameEntityView enchanting = getEnchanting();
         if (enchanting instanceof PlayerView) {
             return (PlayerView) enchanting;
         }
@@ -246,11 +245,11 @@ public class CardView extends GameEntityView<CardProp> {
     }
 
     public CardView getFortifying() {
-        return get(CardProp.Fortifying);
+        return get(TrackableProperty.Fortifying);
     }
 
     public Iterable<CardView> getFortifiedBy() {
-        return get(CardProp.FortifiedBy);
+        return get(TrackableProperty.FortifiedBy);
     }
 
     public boolean isFortified() {
@@ -258,39 +257,39 @@ public class CardView extends GameEntityView<CardProp> {
     }
 
     public Iterable<CardView> getGainControlTargets() {
-        return get(CardProp.GainControlTargets);
+        return get(TrackableProperty.GainControlTargets);
     }
 
     public CardView getCloneOrigin() {
-        return get(CardProp.CloneOrigin);
+        return get(TrackableProperty.CloneOrigin);
     }
 
     public Iterable<CardView> getImprintedCards() {
-        return get(CardProp.ImprintedCards);
+        return get(TrackableProperty.ImprintedCards);
     }
 
     public Iterable<CardView> getHauntedBy() {
-        return get(CardProp.HauntedBy);
+        return get(TrackableProperty.HauntedBy);
     }
 
     public CardView getHaunting() {
-        return get(CardProp.Haunting);
+        return get(TrackableProperty.Haunting);
     }
 
     public Iterable<CardView> getMustBlockCards() {
-        return get(CardProp.MustBlockCards);
+        return get(TrackableProperty.MustBlockCards);
     }
 
     public CardView getPairedWith() {
-        return get(CardProp.PairedWith);
+        return get(TrackableProperty.PairedWith);
     }
 
     public CardStateView getOriginal() {
-        return get(CardProp.Original);
+        return get(TrackableProperty.Original);
     }
 
     public CardStateView getAlternate() {
-        return get(CardProp.Alternate);
+        return get(TrackableProperty.Alternate);
     }
 
     public CardStateView getState(final boolean alternate0) {
@@ -305,15 +304,15 @@ public class CardView extends GameEntityView<CardProp> {
         boolean isTransformed = c.getCurState() == CardCharacteristicName.Transformed;
         boolean hasAltState = isDoubleFaced || isFlipCard || isSplitCard || (isFaceDown/* && mayShowCardFace*/);
 
-        set(CardProp.Alternate, hasAltState ? new CardStateView(getId()) : null);
-        set(CardProp.Cloned, c.isCloned());
-        set(CardProp.FaceDown, isFaceDown);
-        set(CardProp.SplitCard, isSplitCard);
-        set(CardProp.FlipCard, isFlipCard);
+        set(TrackableProperty.Alternate, hasAltState ? new CardStateView(getId()) : null);
+        set(TrackableProperty.Cloned, c.isCloned());
+        set(TrackableProperty.FaceDown, isFaceDown);
+        set(TrackableProperty.SplitCard, isSplitCard);
+        set(TrackableProperty.FlipCard, isFlipCard);
 
         if (fromCurStateChange) {
-            set(CardProp.Flipped, isFlipped);
-            set(CardProp.Transformed, isTransformed);
+            set(TrackableProperty.Flipped, isFlipped);
+            set(TrackableProperty.Transformed, isTransformed);
             updateRarity(c); //rarity and set based on current state
             updateSetCode(c);
         }
@@ -405,9 +404,9 @@ public class CardView extends GameEntityView<CardProp> {
         return getAlternate().getName() + " (" + getId() + ")";
     }
 
-    public class CardStateView extends TrackableObject<CardStateProp> {
+    public class CardStateView extends TrackableObject {
         public CardStateView(int id0) {
-            super(id0, CardStateProp.class);
+            super(id0);
         }
 
         @Override
@@ -420,140 +419,140 @@ public class CardView extends GameEntityView<CardProp> {
         }
 
         public String getName() {
-            return get(CardStateProp.Name);
+            return get(TrackableProperty.Name);
         }
         void updateName(Card c) {
-            set(CardStateProp.Name, c.getName());
+            set(TrackableProperty.Name, c.getName());
         }
         void updateName(CardCharacteristics c) {
-            set(CardStateProp.Name, c.getName());
+            set(TrackableProperty.Name, c.getName());
         }
 
         public ColorSet getColors() {
-            return get(CardStateProp.Colors);
+            return get(TrackableProperty.Colors);
         }
         void updateColors(Card c) {
-            set(CardStateProp.Colors, c.determineColor());
+            set(TrackableProperty.Colors, c.determineColor());
         }
         void updateColors(CardCharacteristics c) {
-            set(CardStateProp.Colors, c.determineColor());
+            set(TrackableProperty.Colors, c.determineColor());
         }
 
         public String getImageKey() {
-            return get(CardStateProp.ImageKey);
+            return get(TrackableProperty.ImageKey);
         }
         void updateImageKey(Card c) {
-            set(CardStateProp.ImageKey, c.getImageKey());
+            set(TrackableProperty.ImageKey, c.getImageKey());
         }
         void updateImageKey(CardCharacteristics c) {
-            set(CardStateProp.ImageKey, c.getImageKey());
+            set(TrackableProperty.ImageKey, c.getImageKey());
         }
 
         public Set<String> getType() {
-            return get(CardStateProp.Type);
+            return get(TrackableProperty.Type);
         }
         void updateType(Card c) {
-            set(CardStateProp.Type, c.getType());
+            set(TrackableProperty.Type, c.getType());
         }
         void updateType(CardCharacteristics c) {
-            set(CardStateProp.Type, c.getType());
+            set(TrackableProperty.Type, c.getType());
         }
 
         public ManaCost getManaCost() {
-            return get(CardStateProp.ManaCost);
+            return get(TrackableProperty.ManaCost);
         }
         void updateManaCost(Card c) {
-            set(CardStateProp.ManaCost, c.getManaCost());
+            set(TrackableProperty.ManaCost, c.getManaCost());
         }
         void updateManaCost(CardCharacteristics c) {
-            set(CardStateProp.ManaCost, c.getManaCost());
+            set(TrackableProperty.ManaCost, c.getManaCost());
         }
 
         public int getPower() {
-            return get(CardStateProp.Power);
+            return get(TrackableProperty.Power);
         }
         void updatePower(Card c) {
-            set(CardStateProp.Power, c.getNetAttack());
+            set(TrackableProperty.Power, c.getNetAttack());
         }
         void updatePower(CardCharacteristics c) {
-            set(CardStateProp.Power, c.getBaseAttack());
+            set(TrackableProperty.Power, c.getBaseAttack());
         }
 
         public int getToughness() {
-            return get(CardStateProp.Toughness);
+            return get(TrackableProperty.Toughness);
         }
         void updateToughness(Card c) {
-            set(CardStateProp.Toughness, c.getNetDefense());
+            set(TrackableProperty.Toughness, c.getNetDefense());
         }
         void updateToughness(CardCharacteristics c) {
-            set(CardStateProp.Toughness, c.getBaseDefense());
+            set(TrackableProperty.Toughness, c.getBaseDefense());
         }
 
         public int getLoyalty() {
-            return get(CardStateProp.Loyalty);
+            return get(TrackableProperty.Loyalty);
         }
         void updateLoyalty(Card c) {
-            set(CardStateProp.Loyalty, c.getCurrentLoyalty());
+            set(TrackableProperty.Loyalty, c.getCurrentLoyalty());
         }
         void updateLoyalty(CardCharacteristics c) {
-            set(CardStateProp.Loyalty, 0); // Q why is loyalty not a property of CardCharacteristic? A: because no alt states have a base loyalty (only candidate is Garruk Relentless).
+            set(TrackableProperty.Loyalty, 0); // Q why is loyalty not a property of CardCharacteristic? A: because no alt states have a base loyalty (only candidate is Garruk Relentless).
         }
 
         public String getText() {
-            return get(CardStateProp.Text);
+            return get(TrackableProperty.Text);
         }
         void updateText(Card c) {
-            set(CardStateProp.Text, c.getText());
+            set(TrackableProperty.Text, c.getText());
         }
         void updateText(CardCharacteristics c) {
-            set(CardStateProp.Text, c.getOracleText());
+            set(TrackableProperty.Text, c.getOracleText());
         }
 
         public int getFoilIndex() {
-            return get(CardStateProp.FoilIndex);
+            return get(TrackableProperty.FoilIndex);
         }
         void updateFoilIndex(Card c) {
-            set(CardStateProp.FoilIndex, c.getCharacteristics().getFoil());
+            set(TrackableProperty.FoilIndex, c.getCharacteristics().getFoil());
         }
         void updateFoilIndex(CardCharacteristics c) {
-            set(CardStateProp.FoilIndex, c.getFoil());
+            set(TrackableProperty.FoilIndex, c.getFoil());
         }
 
         public Map<String, String> getChangedColorWords() {
-            return get(CardStateProp.ChangedColorWords);
+            return get(TrackableProperty.ChangedColorWords);
         }
         void updateChangedColorWords(Card c) {
-            set(CardStateProp.ChangedColorWords, c.getChangedTextColorWords());
+            set(TrackableProperty.ChangedColorWords, c.getChangedTextColorWords());
         }
 
         public Map<String, String> getChangedTypes() {
-            return get(CardStateProp.ChangedTypes);
+            return get(TrackableProperty.ChangedTypes);
         }
         void updateChangedTypes(Card c) {
-            set(CardStateProp.ChangedTypes, c.getChangedTextTypeWords());
+            set(TrackableProperty.ChangedTypes, c.getChangedTextTypeWords());
         }
 
         public boolean hasDeathtouch() {
-            return get(CardStateProp.HasDeathtouch);
+            return get(TrackableProperty.HasDeathtouch);
         }
         public boolean hasHaste() {
-            return get(CardStateProp.HasHaste);
+            return get(TrackableProperty.HasHaste);
         }
         public boolean hasInfect() {
-            return get(CardStateProp.HasInfect);
+            return get(TrackableProperty.HasInfect);
         }
         public boolean hasStorm() {
-            return get(CardStateProp.HasStorm);
+            return get(TrackableProperty.HasStorm);
         }
         public boolean hasTrample() {
-            return get(CardStateProp.HasTrample);
+            return get(TrackableProperty.HasTrample);
         }
         void updateKeywords(Card c) {
-            set(CardStateProp.HasDeathtouch, c.hasKeyword("Deathtouch"));
-            set(CardStateProp.HasHaste, c.hasKeyword("Haste"));
-            set(CardStateProp.HasInfect, c.hasKeyword("Infect"));
-            set(CardStateProp.HasStorm, c.hasKeyword("Storm"));
-            set(CardStateProp.HasTrample, c.hasKeyword("Trample"));
+            set(TrackableProperty.HasDeathtouch, c.hasKeyword("Deathtouch"));
+            set(TrackableProperty.HasHaste, c.hasKeyword("Haste"));
+            set(TrackableProperty.HasInfect, c.hasKeyword("Infect"));
+            set(TrackableProperty.HasStorm, c.hasKeyword("Storm"));
+            set(TrackableProperty.HasTrample, c.hasKeyword("Trample"));
         }
 
         public boolean isBasicLand() {
@@ -576,35 +575,25 @@ public class CardView extends GameEntityView<CardProp> {
         }
     }
 
-    @Override
-    protected CardProp preventNextDamageProp() {
-        return CardProp.PreventNextDamage;
-    }
-
-    @Override
-    protected CardProp enchantedByProp() {
-        return CardProp.EnchantedBy;
-    }
-
     //special methods for updating card and player properties as needed and returning the new collection
-    Card setCard(Card oldCard, Card newCard, CardProp key) {
+    Card setCard(Card oldCard, Card newCard, TrackableProperty key) {
         if (newCard != oldCard) {
             set(key, CardView.get(newCard));
         }
         return newCard;
     }
-    CardCollection setCards(CardCollection oldCards, CardCollection newCards, CardProp key) {
+    CardCollection setCards(CardCollection oldCards, CardCollection newCards, TrackableProperty key) {
         set(key, CardView.getCollection(newCards)); //TODO prevent overwriting list if not necessary
         return newCards;
     }
-    CardCollection setCards(CardCollection oldCards, Iterable<Card> newCards, CardProp key) {
+    CardCollection setCards(CardCollection oldCards, Iterable<Card> newCards, TrackableProperty key) {
         if (newCards == null) {
             set(key, null);
             return null;
         }
         return setCards(oldCards, new CardCollection(newCards), key);
     }
-    CardCollection addCard(CardCollection oldCards, Card cardToAdd, CardProp key) {
+    CardCollection addCard(CardCollection oldCards, Card cardToAdd, TrackableProperty key) {
         if (cardToAdd == null) { return oldCards; }
 
         if (oldCards == null) {
@@ -623,7 +612,7 @@ public class CardView extends GameEntityView<CardProp> {
         }
         return oldCards;
     }
-    CardCollection addCards(CardCollection oldCards, Iterable<Card> cardsToAdd, CardProp key) {
+    CardCollection addCards(CardCollection oldCards, Iterable<Card> cardsToAdd, TrackableProperty key) {
         if (cardsToAdd == null) { return oldCards; }
 
         TrackableCollection<CardView> views = get(key);
@@ -648,7 +637,7 @@ public class CardView extends GameEntityView<CardProp> {
         }
         return oldCards;
     }
-    CardCollection removeCard(CardCollection oldCards, Card cardToRemove, CardProp key) {
+    CardCollection removeCard(CardCollection oldCards, Card cardToRemove, TrackableProperty key) {
         if (cardToRemove == null || oldCards == null) { return oldCards; }
 
         if (oldCards.remove(cardToRemove)) {
@@ -667,7 +656,7 @@ public class CardView extends GameEntityView<CardProp> {
         }
         return oldCards;
     }
-    CardCollection removeCards(CardCollection oldCards, Iterable<Card> cardsToRemove, CardProp key) {
+    CardCollection removeCards(CardCollection oldCards, Iterable<Card> cardsToRemove, TrackableProperty key) {
         if (cardsToRemove == null || oldCards == null) { return oldCards; }
 
         TrackableCollection<CardView> views = get(key);
@@ -695,7 +684,7 @@ public class CardView extends GameEntityView<CardProp> {
         }
         return oldCards;
     }
-    CardCollection clearCards(CardCollection oldCards, CardProp key) {
+    CardCollection clearCards(CardCollection oldCards, TrackableProperty key) {
         if (oldCards != null) {
             set(key, null);
         }

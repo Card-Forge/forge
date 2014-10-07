@@ -3,12 +3,12 @@ package forge.game.spellability;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.trackable.TrackableObject;
-import forge.trackable.TrackableProperty.StackItemProp;
+import forge.trackable.TrackableProperty;
 
 
-public class StackItemView extends TrackableObject<StackItemProp> {
+public class StackItemView extends TrackableObject {
     public StackItemView(SpellAbilityStackInstance si) {
-        super(si.getId(), StackItemProp.class);
+        super(si.getId());
         updateKey(si);
         updateSourceTrigger(si);
         updateText(si);
@@ -22,73 +22,73 @@ public class StackItemView extends TrackableObject<StackItemProp> {
     }
 
     public String getKey() {
-        return get(StackItemProp.Key);
+        return get(TrackableProperty.Key);
     }
     void updateKey(SpellAbilityStackInstance si) {
-        set(StackItemProp.Key, si.getSpellAbility(false).toUnsuppressedString());
+        set(TrackableProperty.Key, si.getSpellAbility(false).toUnsuppressedString());
     }
 
     public int getSourceTrigger() {
-        return get(StackItemProp.SourceTrigger);
+        return get(TrackableProperty.SourceTrigger);
     }
     void updateSourceTrigger(SpellAbilityStackInstance si) {
-        set(StackItemProp.SourceTrigger, si.getSpellAbility(false).getSourceTrigger());
+        set(TrackableProperty.SourceTrigger, si.getSpellAbility(false).getSourceTrigger());
     }
 
     public String getText() {
-        return get(StackItemProp.Text);
+        return get(TrackableProperty.Text);
     }
     void updateText(SpellAbilityStackInstance si) {
-        set(StackItemProp.Text, si.getStackDescription());
+        set(TrackableProperty.Text, si.getStackDescription());
     }
 
     public CardView getSourceCard() {
-        return get(StackItemProp.SourceCard);
+        return get(TrackableProperty.SourceCard);
     }
     void updateSourceCard(SpellAbilityStackInstance si) {
-        set(StackItemProp.SourceCard, si.getSourceCard());
+        set(TrackableProperty.SourceCard, si.getSourceCard());
     }
 
     public PlayerView getActivator() {
-        return get(StackItemProp.Activator);
+        return get(TrackableProperty.Activator);
     }
     void updateActivator(SpellAbilityStackInstance si) {
-        set(StackItemProp.Activator, PlayerView.get(si.getActivator()));
+        set(TrackableProperty.Activator, PlayerView.get(si.getActivator()));
     }
 
     public Iterable<CardView> getTargetCards() {
-        return get(StackItemProp.TargetCards);
+        return get(TrackableProperty.TargetCards);
     }
     void updateTargetCards(SpellAbilityStackInstance si) {
-        set(StackItemProp.TargetCards, CardView.getCollection(si.getTargetChoices().getTargetCards()));
+        set(TrackableProperty.TargetCards, CardView.getCollection(si.getTargetChoices().getTargetCards()));
     }
 
     public Iterable<PlayerView> getTargetPlayers() {
-        return get(StackItemProp.TargetPlayers);
+        return get(TrackableProperty.TargetPlayers);
     }
     void updateTargetPlayers(SpellAbilityStackInstance si) {
-        set(StackItemProp.TargetPlayers, PlayerView.getCollection(si.getTargetChoices().getTargetPlayers()));
+        set(TrackableProperty.TargetPlayers, PlayerView.getCollection(si.getTargetChoices().getTargetPlayers()));
     }
 
     public boolean isAbility() {
-        return get(StackItemProp.Ability);
+        return get(TrackableProperty.Ability);
     }
     void updateAbility(SpellAbilityStackInstance si) {
-        set(StackItemProp.Ability, si.isAbility());
+        set(TrackableProperty.Ability, si.isAbility());
     }
 
     public boolean isOptionalTrigger() {
-        return get(StackItemProp.OptionalTrigger);
+        return get(TrackableProperty.OptionalTrigger);
     }
     void updateOptionalTrigger(SpellAbilityStackInstance si) {
-        set(StackItemProp.OptionalTrigger, si.isOptionalTrigger());
+        set(TrackableProperty.OptionalTrigger, si.isOptionalTrigger());
     }
 
     public StackItemView getSubInstance() {
-        return get(StackItemProp.SubInstance);
+        return get(TrackableProperty.SubInstance);
     }
     void updateSubInstance(SpellAbilityStackInstance si) {
-        set(StackItemProp.SubInstance, si.getSubInstance() == null ? null : new StackItemView(si.getSubInstance()));
+        set(TrackableProperty.SubInstance, si.getSubInstance() == null ? null : new StackItemView(si.getSubInstance()));
     }
 
     @Override

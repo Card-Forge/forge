@@ -6,15 +6,15 @@ import java.util.EnumSet;
 import forge.game.IIdentifiable;
 
 //base class for objects that can be tracked and synced between game server and GUI
-public abstract class TrackableObject<E extends Enum<E>> implements IIdentifiable {
+public abstract class TrackableObject implements IIdentifiable {
     private final int id;
-    private final EnumMap<E, Object> props;
-    private final EnumSet<E> changedProps;
+    private final EnumMap<TrackableProperty, Object> props;
+    private final EnumSet<TrackableProperty> changedProps;
 
-    protected TrackableObject(int id0, Class<E> propEnum0) {
+    protected TrackableObject(int id0) {
         id = id0;
-        props = new EnumMap<E, Object>(propEnum0);
-        changedProps = EnumSet.noneOf(propEnum0);
+        props = new EnumMap<TrackableProperty, Object>(TrackableProperty.class);
+        changedProps = EnumSet.noneOf(TrackableProperty.class);
     }
 
     public int getId() {
@@ -27,12 +27,16 @@ public abstract class TrackableObject<E extends Enum<E>> implements IIdentifiabl
     }
 
     @SuppressWarnings("unchecked")
-    protected <T> T get(E key) {
-        return (T)props.get(key);
-    }    
-
-    protected <T> void set(E key, T value) {
+    protected <T> T get(TrackableProperty key) {
+        T value = (T)props.get(key);
         if (value == null) {
+            value = key.getDefaultValue();
+        }
+        return value;
+    }
+
+    protected <T> void set(TrackableProperty key, T value) {
+        if (value == null || value.equals(key.getDefaultValue())) {
             if (props.remove(key) != null) {
                 changedProps.add(key);
             }
@@ -43,7 +47,7 @@ public abstract class TrackableObject<E extends Enum<E>> implements IIdentifiabl
     }
 
     //use when updating collection type properties with using set
-    protected void flagAsChanged(E key) {
+    protected void flagAsChanged(TrackableProperty key) {
         changedProps.add(key);
     }
 

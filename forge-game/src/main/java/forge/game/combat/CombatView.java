@@ -12,30 +12,30 @@ import com.google.common.collect.Sets;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
 import forge.trackable.TrackableObject;
-import forge.trackable.TrackableProperty.CombatProp;
+import forge.trackable.TrackableProperty;
 
 
-public class CombatView extends TrackableObject<CombatProp> {
+public class CombatView extends TrackableObject {
     public CombatView() {
-        super(-1, CombatProp.class); //ID not needed
+        super(-1); //ID not needed
     }
-    private Map<CardView, GameEntityView<?>> getAttackersWithDefenders() {
-        return get(CombatProp.AttackersWithDefenders);
+    private Map<CardView, GameEntityView> getAttackersWithDefenders() {
+        return get(TrackableProperty.AttackersWithDefenders);
     }
     private Map<CardView, Iterable<CardView>> getAttackersWithBlockers() {
-        return get(CombatProp.AttackersWithBlockers);
+        return get(TrackableProperty.AttackersWithBlockers);
     }
-    private Map<Iterable<CardView>, GameEntityView<?>> getBandsWithDefenders() {
-        return get(CombatProp.BandsWithDefenders);
+    private Map<Iterable<CardView>, GameEntityView> getBandsWithDefenders() {
+        return get(TrackableProperty.BandsWithDefenders);
     }
     private Map<Iterable<CardView>, Iterable<CardView>> getBandsWithBlockers() {
-        return get(CombatProp.BandsWithBlockers);
+        return get(TrackableProperty.BandsWithBlockers);
     }
     private Map<CardView, Iterable<CardView>> getAttackersWithPlannedBlockers() {
-        return get(CombatProp.AttackersWithPlannedBlockers);
+        return get(TrackableProperty.AttackersWithPlannedBlockers);
     }
     private Map<Iterable<CardView>, Iterable<CardView>> getBandsWithPlannedBlockers() {
-        return get(CombatProp.BandsWithPlannedBlockers);
+        return get(TrackableProperty.BandsWithPlannedBlockers);
     }
 
     public int getNumAttackers() {
@@ -50,11 +50,11 @@ public class CombatView extends TrackableObject<CombatProp> {
         return getAttackersWithDefenders().keySet();
     }
 
-    public Iterable<GameEntityView<?>> getDefenders() {
+    public Iterable<GameEntityView> getDefenders() {
         return Sets.newHashSet(getAttackersWithDefenders().values());
     }
 
-    public GameEntityView<?> getDefender(final CardView attacker) {
+    public GameEntityView getDefender(final CardView attacker) {
         return getAttackersWithDefenders().get(attacker);
     }
 
@@ -112,18 +112,18 @@ public class CombatView extends TrackableObject<CombatProp> {
         return getBandsWithPlannedBlockers().get(attackingBand);
     }
 
-    public Iterable<CardView> getAttackersOf(final GameEntityView<?> defender) {
+    public Iterable<CardView> getAttackersOf(final GameEntityView defender) {
         ArrayList<CardView> views = new ArrayList<CardView>();
-        for (Entry<CardView, GameEntityView<?>> entry : getAttackersWithDefenders().entrySet()) {
+        for (Entry<CardView, GameEntityView> entry : getAttackersWithDefenders().entrySet()) {
             if (entry.getValue().equals(defender)) {
                 views.add(entry.getKey());
             }
         }
         return views;
     }
-    public Iterable<Iterable<CardView>> getAttackingBandsOf(final GameEntityView<?> defender) {
+    public Iterable<Iterable<CardView>> getAttackingBandsOf(final GameEntityView defender) {
         ArrayList<Iterable<CardView>> views = new ArrayList<Iterable<CardView>>();
-        for (Entry<Iterable<CardView>, GameEntityView<?>> entry : getBandsWithDefenders().entrySet()) {
+        for (Entry<Iterable<CardView>, GameEntityView> entry : getBandsWithDefenders().entrySet()) {
             if (entry.getValue().equals(defender)) {
                 views.add(entry.getKey());
             }
@@ -131,7 +131,7 @@ public class CombatView extends TrackableObject<CombatProp> {
         return views;
     }
 
-    public void addAttackingBand(final Iterable<CardView> attackingBand, final GameEntityView<?> defender, final Iterable<CardView> blockers, final Iterable<CardView> plannedBlockers) {
+    public void addAttackingBand(final Iterable<CardView> attackingBand, final GameEntityView defender, final Iterable<CardView> blockers, final Iterable<CardView> plannedBlockers) {
         final List<CardView> attackingBandCopy = Lists.newArrayList(attackingBand),
                 blockersCopy, plannedBlockersCopy;
 
