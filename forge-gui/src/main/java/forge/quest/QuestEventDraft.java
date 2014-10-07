@@ -747,9 +747,16 @@ public class QuestEventDraft {
      * @return The created draft or null in the event no draft could be created.
      */
     public static QuestEventDraft getRandomDraftOrNull(final QuestController quest) {
+        
         List<CardBlock> possibleBlocks = getAvailableBlocks(quest);
+        
+        if (possibleBlocks == null) {
+            return null;
+        }
+        
         Collections.shuffle(possibleBlocks);
         return getDraftOrNull(quest, possibleBlocks.get(0));
+        
     }
 
     /**
