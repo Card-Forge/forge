@@ -439,8 +439,8 @@ public class AiAttackController {
         final List<Card> unblockedAttackers = new ArrayList<Card>();
         final List<Card> remainingAttackers = new ArrayList<Card>(this.attackers);
         final List<Card> remainingBlockers = new ArrayList<Card>(this.blockers);
+        final List<Card> blockedAttackers = new ArrayList<Card>();
         final Player opp = this.defendingOpponent;
-
 
         for (Card attacker : attackers) {
             if (!CombatUtil.canBeBlocked(attacker, this.blockers, null)
@@ -455,6 +455,7 @@ public class AiAttackController {
                 for (Card attacker : this.attackers) {
                     if (CombatUtil.canBlock(attacker, blocker)) {
                         remainingAttackers.remove(attacker);
+                        blockedAttackers.add(attacker);
                     }
                 }
                 remainingBlockers.remove(blocker);
@@ -467,21 +468,39 @@ public class AiAttackController {
                 break;
             }
             if (blocker.hasKeyword("CARDNAME can block an additional creature.")) {
+            	blockedAttackers.add(remainingAttackers.get(0));
                 remainingAttackers.remove(0);
                 if (remainingAttackers.isEmpty()) {
                     break;
                 }
             }
+            blockedAttackers.add(remainingAttackers.get(0));
             remainingAttackers.remove(0);
         }
         unblockedAttackers.addAll(remainingAttackers);
+        
+        int trampleDamage = 0;
+        for (Card attacker : blockedAttackers) {
+        	if (attacker.hasKeyword("Trample")) {
+        		int damage = ComputerUtilCombat.getAttack(attacker);
+        		for (Card blocker : this.blockers) {
+        			if (CombatUtil.canBlock(attacker, blocker)) {
+        				damage -= ComputerUtilCombat.shieldDamage(attacker, blocker);
+        			}
+        		}
+        		if (damage > 0) {
+        			trampleDamage += damage;
+        		}
+        	}
+        }
 
-        if (ComputerUtilCombat.sumDamageIfUnblocked(remainingAttackers, opp) + ComputerUtil.possibleNonCombatDamage(ai) >= opp.getLife()
+        if (ComputerUtilCombat.sumDamageIfUnblocked(unblockedAttackers, opp) + ComputerUtil.possibleNonCombatDamage(ai) 
+        		+ trampleDamage>= opp.getLife()
                 && !((opp.cantLoseForZeroOrLessLife() || ai.cantWin()) && (opp.getLife() < 1))) {
             return true;
         }
 
-        if (ComputerUtilCombat.sumPoisonIfUnblocked(remainingAttackers, opp) >= (10 - opp.getPoisonCounters())) {
+        if (ComputerUtilCombat.sumPoisonIfUnblocked(unblockedAttackers, opp) >= (10 - opp.getPoisonCounters())) {
             return true;
         }
 
