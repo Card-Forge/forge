@@ -539,6 +539,11 @@ public class AiController {
                             continue;
                         }
 
+                        // Glacial Fortress and friends
+                        if (land.hasSVar("ETBCheckSVar") && CardFactoryUtil.xCount(land, land.getSVar("ETBCheckSVar")) == 0) {
+                            continue;
+                        }
+
                         if (land.isType(MagicColor.Constant.BASIC_LANDS.get(i)))
                             return land;
                         
