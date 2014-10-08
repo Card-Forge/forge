@@ -7,23 +7,28 @@ Description=WU Delver of Secrets Tempo deck
 Icon=Green Hornet.jpg
 Deck Type=constructed
 [main]
+4 Flooded Strand
 4 Glacial Fortress
 10 Island
-2 Moorland Haunt
+1 Moorland Haunt
 3 Plains
-4 Sejiri Refuge
+1 Sejiri Refuge
 4 Delver of Secrets
-4 Cloud Sprite
+2 Cloud Sprite
 1 Flying Men
-4 AEther Figment
+3 AEther Figment
+3 Cloud of Faeries
 3 Puncturing Light
-4 Divination
-2 Runeboggle
-2 Frightful Delusion
-2 Runechanter's Pike
-2 Bonesplitter
+2 Divination
+1 Runeboggle
+1 Frightful Delusion
+1 Force Spike
+1 Mana Tithe
+1 Remand
+1 Mana Leak
+3 Runechanter's Pike
+1 Bonesplitter
 3 Sunlance
 4 Vapor Snag
-1 Jace, Memory Adept
-1 Jace Beleren
+2 Hoodwink
 [sideboard]
