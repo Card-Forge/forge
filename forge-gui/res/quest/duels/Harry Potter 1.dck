@@ -8,7 +8,7 @@ Icon=Harry Potter.jpg
 Deck Type=constructed
 [main]
 4 Vedalken Entrancer
-2 Remove Soul
+1 Remove Soul
 1 Traumatize
 3 Hedron Crab
 2 Essence Scatter
@@ -18,7 +18,7 @@ Deck Type=constructed
 1 Boomerang
 1 Jace Beleren
 2 Tome Scour
-2 Vision Skeins
+1 Vision Skeins
 1 Cancel
 4 Howling Mine
 1 Millstone
@@ -32,4 +32,6 @@ Deck Type=constructed
 1 Rotcrown Ghoul
 1 Shriekgeist
 1 Mind Sculpt
+1 Countermand
+1 Altar of the Brood
 [sideboard]
