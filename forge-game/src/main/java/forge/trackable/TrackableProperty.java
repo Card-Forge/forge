@@ -71,7 +71,7 @@ public enum TrackableProperty {
     FoilIndex(TrackableTypes.IntegerType),
 
     //Player
-    LobbyPlayer(TrackableTypes.PlayerViewType),
+    AvatarIndex(TrackableTypes.IntegerType),
     Opponents(TrackableTypes.PlayerViewCollectionType),
     Life(TrackableTypes.IntegerType),
     PoisonCounters(TrackableTypes.IntegerType),

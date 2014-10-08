@@ -69,7 +69,7 @@ public class VoteEffect extends SpellAbilityEffect {
         ArrayListMultimap<Object, Player> votes = ArrayListMultimap.create();
 
         for (final Player p : tgtPlayers) {
-            int voteAmount = p.getAmountOfKeyword("You get an additional vote.") + 1;
+            int voteAmount = p.getKeywords().getAmount("You get an additional vote.") + 1;
             for (int i = 0; i < voteAmount; i++) {
                 final Object result = p.getController().vote(sa, host + "Vote:", voteType, votes);
                 votes.put(result, p);

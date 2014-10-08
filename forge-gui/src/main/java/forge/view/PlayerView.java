@@ -169,7 +169,7 @@ public class PlayerView extends GameEntityView {
     /**
      * @param keywords the keywords to set
      */
-    public void setKeywords(final List<String> keywords) {
+    public void setKeywords(final Iterable<String> keywords) {
         this.keywords = ImmutableList.copyOf(keywords);
     }
 

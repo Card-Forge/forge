@@ -18,25 +18,37 @@
 package forge.game;
 
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollection.CardCollectionView;
 import forge.game.event.GameEventCardAttachment;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
 
-import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.TreeMap;
 
 
-public abstract class GameEntity extends GameObject {
+public abstract class GameEntity extends GameObject implements IIdentifiable {
+    protected final int id;
     private String name = "";
     private int preventNextDamage = 0;
-    private LinkedHashSet<Card> enchantedBy;
+    private CardCollection enchantedBy;
     private TreeMap<Card, Map<String, String>> preventionShieldsWithEffects = new TreeMap<Card, Map<String, String>>();
+
+    protected GameEntity(int id0) {
+        id = id0;
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
     }
     public void setName(final String s) {
         name = s;
+        getView().updateName(this);
     }
 
     public boolean addDamage(final int damage, final Card source) {
@@ -131,36 +143,27 @@ public abstract class GameEntity extends GameObject {
     }
 
     // GameEntities can now be Enchanted
-    public final Iterable<Card> getEnchantedBy(boolean allowModify) {
-        if (enchantedBy == null) {
-            return new LinkedHashSet<Card>();
-        }
-        if (allowModify) { //create copy to allow modifying original set while iterating
-            return new LinkedHashSet<Card>(enchantedBy);
-        }
-        return enchantedBy;
+    public final CardCollectionView getEnchantedBy(boolean allowModify) {
+        return CardCollection.getView(enchantedBy, allowModify);
     }
-    public final void setEnchantedBy(final LinkedHashSet<Card> list) {
-        enchantedBy = list;
+    public final void setEnchantedBy(final CardCollection cards) {
+        enchantedBy = cards;
         getView().updateEnchantedBy(this);
     }
-    public final void setEnchantedBy(final Iterable<Card> list) {
-        if (list == null) {
+    public final void setEnchantedBy(final Iterable<Card> cards) {
+        if (cards == null) {
             enchantedBy = null;
         }
         else {
-            enchantedBy = new LinkedHashSet<Card>();
-            for (Card c : list) {
-                enchantedBy.add(c);
-            }
+            enchantedBy = new CardCollection(cards);
         }
         getView().updateEnchantedBy(this);
     }
     public final boolean isEnchanted() {
-        return enchantedBy != null && !enchantedBy.isEmpty();
+        return CardCollection.hasCard(enchantedBy);
     }
     public final boolean isEnchantedBy(Card c) {
-        return enchantedBy != null && enchantedBy.contains(c);
+        return CardCollection.hasCard(enchantedBy, c);
     }
     public final boolean isEnchantedBy(final String cardName) {
         for (final Card aura : getEnchantedBy(false)) {
@@ -172,16 +175,20 @@ public abstract class GameEntity extends GameObject {
     }
     public final void addEnchantedBy(final Card c) {
         if (enchantedBy == null) {
-            enchantedBy = new LinkedHashSet<Card>();
+            enchantedBy = new CardCollection();
         }
-        enchantedBy.add(c);
-        getView().updateEnchantedBy(this);
-        getGame().fireEvent(new GameEventCardAttachment(c, null, this, AttachMethod.Enchant));
+        if (enchantedBy.add(c)) {
+            getView().updateEnchantedBy(this);
+            getGame().fireEvent(new GameEventCardAttachment(c, null, this, AttachMethod.Enchant));
+        }
     }
     public final void removeEnchantedBy(final Card c) {
         if (enchantedBy == null) { return; }
 
         if (enchantedBy.remove(c)) {
+            if (enchantedBy.isEmpty()) {
+                enchantedBy = null;
+            }
             getView().updateEnchantedBy(this);
             getGame().fireEvent(new GameEventCardAttachment(c, this, null, AttachMethod.Enchant));
         }

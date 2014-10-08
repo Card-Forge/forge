@@ -13,6 +13,13 @@ public abstract class GameEntityView extends TrackableObject {
         super(id0);
     }
 
+    public String getName() {
+        return get(TrackableProperty.Name);
+    }
+    void updateName(GameEntity e) {
+        set(TrackableProperty.Name, e.getName());
+    }
+
     public int getPreventNextDamage() {
         return get(TrackableProperty.PreventNextDamage);
     }

@@ -45,6 +45,7 @@ import forge.game.cost.Cost;
 import forge.game.event.*;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
 import forge.game.event.GameEventCardDamaged.DamageType;
+import forge.game.keyword.KeywordsChange;
 import forge.game.player.Player;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
@@ -86,7 +87,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @version $Id$
  */
 public class Card extends GameEntity implements Comparable<Card>, IIdentifiable {
-    private final int id;
     private final IPaperCard paperCard;
 
     private final Map<CardCharacteristicName, CardCharacteristics> characteristicsMap
@@ -252,7 +252,8 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
      * @see IPaperCard
      */
     public Card(final int id0, final IPaperCard paperCard0) {
-        id = id0;
+        super(id0);
+
         paperCard = paperCard0;
         characteristicsMap.put(CardCharacteristicName.Original, new CardCharacteristics());
         characteristicsMap.put(CardCharacteristicName.FaceDown, CardUtil.getFaceDownCharacteristic());
@@ -1122,7 +1123,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                     } else {
                         sb.append(c.getName());
                         sb.append(" (");
-                        sb.append(c.id);
+                        sb.append(c.getId());
                         sb.append(")");
                     }
                 } else if (o != null) {
@@ -3106,11 +3107,6 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         }
 
         return false;
-    }
-
-    @Override
-    public int getId() {
-        return id;
     }
 
     /** {@inheritDoc} */
@@ -5915,7 +5911,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
                 if (kw.equals("Hexproof")) {
                     if (sa.getActivatingPlayer().getOpponents().contains(getController())) {
-                        if (!sa.getActivatingPlayer().getKeywords().contains("Spells and abilities you control can target hexproof creatures")) {
+                        if (!sa.getActivatingPlayer().hasKeyword("Spells and abilities you control can target hexproof creatures")) {
                             return false;
                         }
                     }

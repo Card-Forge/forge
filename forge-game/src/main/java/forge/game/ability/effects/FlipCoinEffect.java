@@ -181,5 +181,4 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         }
         return 1 << i;
     }
-
 }

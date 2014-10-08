@@ -2,9 +2,9 @@ package forge.game.player;
 
 import java.util.Map;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
-import forge.LobbyPlayer;
 import forge.card.MagicColor;
 import forge.game.GameEntityView;
 import forge.game.card.CardFactoryUtil;
@@ -37,11 +37,11 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.Mana, Maps.newHashMapWithExpectedSize(MagicColor.NUMBER_OR_COLORS + 1));
     }
 
-    public LobbyPlayer getLobbyPlayer() {
-        return get(TrackableProperty.LobbyPlayer);
+    public int getAvatarIndex() {
+        return get(TrackableProperty.AvatarIndex);
     }
-    void updateLobbyPlayer(Player p) {
-        set(TrackableProperty.LobbyPlayer, p.getLobbyPlayer());
+    void updateAvatarIndex(Player p) {
+        set(TrackableProperty.AvatarIndex, p.getLobbyPlayer().getAvatarIndex());
     }
 
     public Iterable<PlayerView> getOpponents() {
@@ -53,10 +53,6 @@ public class PlayerView extends GameEntityView {
 
     public boolean isOpponentOf(final PlayerView other) {
         return getOpponentCollection().contains(other);
-    }
-
-    public String getName() {
-        return getLobbyPlayer().getName();
     }
 
     @Override
@@ -103,7 +99,7 @@ public class PlayerView extends GameEntityView {
         return get(TrackableProperty.Keywords);
     }
     void updateKeywords(Player p) {
-        set(TrackableProperty.Keywords, p.getKeywords());
+        set(TrackableProperty.Keywords, ImmutableList.of(p.getKeywords()));
     }
 
     public String getCommanderInfo() {

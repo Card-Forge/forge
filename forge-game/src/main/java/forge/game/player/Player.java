@@ -37,6 +37,9 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.event.*;
+import forge.game.keyword.KeywordCollection;
+import forge.game.keyword.KeywordCollection.KeywordCollectionView;
+import forge.game.keyword.KeywordsChange;
 import forge.game.mana.ManaPool;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -70,12 +73,10 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * @author Forge
  * @version $Id$
  */
-public class Player extends GameEntity implements Comparable<Player>, IIdentifiable {
+public class Player extends GameEntity implements Comparable<Player> {
     public static final List<ZoneType> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(ZoneType.Battlefield,
             ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante,
             ZoneType.Sideboard, ZoneType.PlanarDeck, ZoneType.SchemeDeck));
-
-    private final int id;
 
     private final Map<Card,Integer> commanderDamage = new HashMap<Card,Integer>();
 
@@ -105,6 +106,7 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
      * on tokens. */
     private List<Card> inboundTokens = new ArrayList<Card>();
 
+    private KeywordCollection keywords = new KeywordCollection();
     private Map<Long, KeywordsChange> changedKeywords = new ConcurrentSkipListMap<Long, KeywordsChange>();
     private ManaPool manaPool = new ManaPool(this);
     private GameEntity mustAttackEntity = null;
@@ -136,15 +138,17 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
     private final PlayerView view;
 
     public Player(String name0, Game game0, final int id0) {
+        super(id0);
+
         game = game0;
         for (final ZoneType z : Player.ALL_ZONES) {
             final PlayerZone toPut = z == ZoneType.Battlefield ? new PlayerZoneBattlefield(z, this) : new PlayerZone(z, this);
             zones.put(z, toPut);
         }
 
-        setName(chooseName(name0));
-        id = id0;
         view = new PlayerView(id);
+        view.updateMaxHandSize(this);
+        setName(chooseName(name0));
     }
 
     public final AchievementTracker getAchievementTracker() {
@@ -171,11 +175,6 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
             nameCandidate = Lang.getOrdinal(i) + " " + originalName;
         }
         return nameCandidate;
-    }
-
-    @Override
-    public int getId() {
-        return id;
     }
 
     @Override
@@ -352,6 +351,7 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
         //Should only be called from newGame().
         startingLife = startLife;
         life = startLife;
+        view.updateLife(this);
     }
 
     public final int getLife() {
@@ -378,6 +378,7 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
         if (lifeGain > 0) {
             int oldLife = life;
             life += lifeGain;
+            view.updateLife(this);
             newLifeSet = true;
             lifeGainedThisTurn += lifeGain;
 
@@ -410,6 +411,7 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
         if (toLose > 0) {
             int oldLife = life;
             life -= toLose;
+            view.updateLife(this);
             lifeLost = toLose;
             game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));
         }
@@ -831,8 +833,11 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
         return poisonCounters;
     }
     public final void setPoisonCounters(final int num, Card source) {
+        if (poisonCounters == num) { return; }
+
         int oldPoison = poisonCounters;
         poisonCounters = num;
+        view.updatePoisonCounters(this);
         game.fireEvent(new GameEventPlayerPoisoned(this, source, oldPoison, num));
     }
     public final void addPoisonCounters(final int num, final Card source) {
@@ -854,16 +859,22 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
             kws.addAll(cks.getKeywords());
             rkws.addAll(cks.getRemoveKeywords());
             changedKeywords.put(timestamp, new KeywordsChange(kws, rkws, cks.isRemoveAllKeywords()));
+            updateKeywords();
             return;
         }
 
         changedKeywords.put(timestamp, new KeywordsChange(addKeywords, removeKeywords, false));
+        updateKeywords();
         game.fireEvent(new GameEventPlayerStatsChanged(this));
     }
 
     public final KeywordsChange removeChangedKeywords(final Long timestamp) {
-        game.fireEvent(new GameEventPlayerStatsChanged(this));
-        return changedKeywords.remove(Long.valueOf(timestamp));
+        KeywordsChange change = changedKeywords.remove(Long.valueOf(timestamp));
+        if (change != null) {
+            updateKeywords();
+            game.fireEvent(new GameEventPlayerStatsChanged(this));
+        }
+        return change;
     }
 
     /**
@@ -880,11 +891,15 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
      * @param newKeyword the keyword with which to replace.
      */
     private final void replaceAllKeywordInstances(final String oldKeyword, final String newKeyword) {
+        boolean keywordReplaced = false;
         for (final KeywordsChange ck : changedKeywords.values()) {
-            if (ck.getKeywords().contains(oldKeyword)) {
-                ck.getKeywords().remove(oldKeyword);
+            if (ck.getKeywords().remove(oldKeyword)) {
                 ck.getKeywords().add(newKeyword);
+                keywordReplaced = true;
             }
+        }
+        if (keywordReplaced) {
+            updateKeywords();
         }
     }
 
@@ -894,29 +909,34 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
      * @param keyword the keyword to remove.
      */
     public final void removeKeyword(final String keyword) {
+        boolean keywordRemoved = false;
+
         for (final KeywordsChange ck : changedKeywords.values()) {
-            if (ck.getKeywords().contains(keyword)) {
-                ck.getKeywords().remove(keyword);
+            if (ck.getKeywords().remove(keyword)) {
+                keywordRemoved = true;
             }
         }
 
         // Remove the empty changes
         for (final Entry<Long, KeywordsChange> ck : ImmutableList.copyOf(changedKeywords.entrySet())) {
-            if (ck.getValue().isEmpty()) {
-                changedKeywords.remove(ck.getKey());
+            if (ck.getValue().isEmpty() && changedKeywords.remove(ck.getKey()) != null) {
+                keywordRemoved = true;
             }
         }
 
-        game.fireEvent(new GameEventPlayerStatsChanged(this));
+        if (keywordRemoved) {
+            updateKeywords();
+            game.fireEvent(new GameEventPlayerStatsChanged(this));
+        }
     }
 
     @Override
     public final boolean hasKeyword(final String keyword) {
-        return getKeywords().contains(keyword);
+        return keywords.contains(keyword);
     }
 
-    public final List<String> getKeywords() {
-        final ArrayList<String> keywords = Lists.newArrayList();
+    private void updateKeywords() {
+        keywords.clear();
 
         // see if keyword changes are in effect
         for (final KeywordsChange ck : changedKeywords.values()) {
@@ -931,7 +951,11 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
                 keywords.addAll(ck.getKeywords());
             }
         }
-        return keywords;
+        view.updateKeywords(this);
+    }
+
+    public final KeywordCollectionView getKeywords() {
+        return keywords.getView();
     }
 
     @Override
@@ -945,34 +969,32 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
 
     @Override
     public boolean hasProtectionFrom(final Card source) {
-        if (getKeywords() != null) {
-            final List<String> list = getKeywords();
-
-            String kw = "";
-            for (int i = 0; i < list.size(); i++) {
-                kw = list.get(i);
-
-                if (kw.equals("Protection from white") && source.isWhite()) {
-                    return true;
-                }
-                if (kw.equals("Protection from blue") && source.isBlue()) {
-                    return true;
-                }
-                if (kw.equals("Protection from black") && source.isBlack()) {
-                    return true;
-                }
-                if (kw.equals("Protection from red") && source.isRed()) {
-                    return true;
-                }
-                if (kw.equals("Protection from green") && source.isGreen()) {
-                    return true;
-                }
-
+        for (String kw : keywords) {
+            if (kw.startsWith("Protection")) {
                 if (kw.startsWith("Protection:")) { // uses isValid
                     final String characteristic = kw.split(":")[1];
                     final String[] characteristics = characteristic.split(",");
                     if (source.isValid(characteristics, this, null)) {
                         return true;
+                    }
+                }
+                else {
+                    switch (kw) {
+                    case "Protection from white":
+                        if (source.isWhite()) { return true; }
+                        break;
+                    case "Protection from blue":
+                        if (source.isBlue()) { return true; }
+                        break;
+                    case "Protection from black":
+                        if (source.isBlack()) { return true; }
+                        break;
+                    case "Protection from red":
+                        if (source.isRed()) { return true; }
+                        break;
+                    case "Protection from green":
+                        if (source.isGreen()) { return true; }
+                        break;
                     }
                 }
             }
@@ -1052,10 +1074,10 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
             if (game.getPhaseHandler().is(PhaseType.DRAW)) {
                 numDrawnThisDrawStep++;
             }
+            view.updateNumDrawnThisTurn(this);
 
             // Miracle draws
-            if (numDrawnThisTurn == 1
-                    && game.getAge() != GameStage.Mulligan) {
+            if (numDrawnThisTurn == 1 && game.getAge() != GameStage.Mulligan) {
                 drawMiracle(c);
             }
 
@@ -1194,6 +1216,7 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
     public final void resetNumDrawnThisTurn() {
         numDrawnThisTurn = 0;
         numDrawnThisDrawStep = 0;
+        view.updateNumDrawnThisTurn(this);
     }
 
     public final int getNumDrawnThisTurn() {
@@ -1438,7 +1461,7 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
 
         // check for adjusted max lands play per turn
         int adjMax = 1;
-        for (String keyword : getKeywords()) {
+        for (String keyword : keywords) {
             if (keyword.startsWith("AdjustLandPlays")) {
                 final String[] k = keyword.split(":");
                 adjMax += Integer.valueOf(k[1]);
@@ -1942,7 +1965,7 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
     }
 
     public final boolean hasManaConversion() {
-        return numManaConversion < getAmountOfKeyword("You may spend mana as though"
+        return numManaConversion < keywords.getAmount("You may spend mana as though"
                 + " it were mana of any color to cast a spell this turn.");
     }
 
@@ -2198,79 +2221,38 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
         return true;
     }
 
-    /**
-     * <p>
-     * getMaxHandSize.
-     * </p>
-     * 
-     * @return a int.
-     */
     public final int getMaxHandSize() {
         return maxHandSize;
     }
-
-    /**
-     * <p>
-     * setMaxHandSize.
-     * </p>
-     * 
-     * @param size
-     *            a int.
-     */
     public final void setMaxHandSize(int size) {
+        if (maxHandSize == size) { return; }
         maxHandSize = size;
+        view.updateMaxHandSize(this);
     }
 
-    /**
-     * @return the unlimitedHandSize
-     */
     public boolean isUnlimitedHandSize() {
         return unlimitedHandSize;
     }
-
-    /**
-     * @param unlimitedHandSize0 the unlimitedHandSize to set
-     */
     public void setUnlimitedHandSize(boolean unlimited) {
+        if (unlimitedHandSize == unlimited) { return; }
         unlimitedHandSize = unlimited;
+        view.updateUnlimitedHandSize(this);
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>landsPlayedThisTurn</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
     public final int getLandsPlayedThisTurn() {
         return landsPlayedThisTurn;
     }
-
-    /**
-     * Adds 1 to the number of lands played by this player this turn.
-     */
     public final void addLandPlayedThisTurn() {
         landsPlayedThisTurn++;
         achievementTracker.landsPlayed++;
     }
-
-    /**
-     * Resets the number of lands played by this player this turn to 0.
-     */
     public final void resetLandsPlayedThisTurn() {
         landsPlayedThisTurn = 0;
     }
 
-    /**
-     * @return the number of spells cast by this player this turn.
-     */
     public final int getSpellsCastThisTurn() {
         return spellsCastThisTurn;
     }
-
-    /**
-     * Adds 1 to the number of spells cast by this player this turn.
-     */
     public final void addSpellCastThisTurn() {
         spellsCastThisTurn++;
         achievementTracker.spellsCast++;
@@ -2278,94 +2260,29 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
             achievementTracker.maxStormCount = spellsCastThisTurn;
         }
     }
-
-    /**
-     * Resets the number of spells cast by this player this turn to 0.
-     */
     public final void resetSpellsCastThisTurn() {
         spellsCastThisTurn = 0;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>lifeGainedThisTurn</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
     public final int getLifeGainedThisTurn() {
         return lifeGainedThisTurn;
     }
-
-    /**
-     * <p>
-     * Setter for the field <code>lifeGainedThisTurn</code>.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     */
     public final void setLifeGainedThisTurn(final int n) {
         lifeGainedThisTurn = n;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>lifeLostThisTurn</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
     public final int getLifeLostThisTurn() {
         return lifeLostThisTurn;
     }
-
-    /**
-     * <p>
-     * Setter for the field <code>lifeLostThisTurn</code>.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     */
     public final void setLifeLostThisTurn(final int n) {
         lifeLostThisTurn = n;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>lifeLostLastTurn</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
     public final int getLifeLostLastTurn() {
         return lifeLostLastTurn;
     }
-
-    /**
-     * <p>
-     * Setter for the field <code>lifeLostLastTurn</code>.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     */
     public final void setLifeLostLastTurn(final int n) {
         lifeLostLastTurn = n;
-    }
-
-    /**
-     * a Player or Planeswalker that this Player must attack if able in an
-     * upcoming combat. This is cleared at the end of each combat.
-     * 
-     * @param o
-     *            Player or Planeswalker (Card) to attack
-     * 
-     * @since 1.1.01
-     */
-    public final void setMustAttackEntity(final GameEntity o) {
-        mustAttackEntity = o;
     }
 
     /**
@@ -2378,12 +2295,9 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
     public final GameEntity getMustAttackEntity() {
         return mustAttackEntity;
     }
-
-    // //////////////////////////////
-    //
-    // generic Object overrides
-    //
-    // ///////////////////////////////
+    public final void setMustAttackEntity(final GameEntity o) {
+        mustAttackEntity = o;
+    }
 
     /** {@inheritDoc} */
     @Override
@@ -2532,23 +2446,12 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
     }
 
     public int getTokenDoublersMagnitude() {
-        int tokenDoublers = 0;
-        for (String kw : getKeywords()) {
-            if (kw.equals("TokenDoubler")) {
-                tokenDoublers++;
-            }
-        }
+        int tokenDoublers = keywords.getAmount("TokenDoubler");
         return 1 << tokenDoublers; // pow(a,0) = 1; pow(a,1) = a
     }
 
     public final int getAmountOfKeyword(final String k) {
-        int count = 0;
-        for (String kw : getKeywords()) {
-            if (kw.equals(k)) {
-                count++;
-            }
-        }
-        return count;
+        return keywords.getAmount(k);
     }
 
     public void onCleanupPhase() {
@@ -2601,6 +2504,7 @@ public class Player extends GameEntity implements Comparable<Player>, IIdentifia
         }
         controllerCreator = ctrlr;
         controller = ctrlr;
+        view.updateAvatarIndex(this);
     }
 
     /**
