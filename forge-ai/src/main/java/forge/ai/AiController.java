@@ -853,6 +853,12 @@ public class AiController {
             } else if (a1 > 0 && b1 == 0) {
                 return 1;
             }
+            
+            if (a.getHostCard().hasSVar("FreeSpellAI")) {
+            	return -1;
+            } else if (b.getHostCard().hasSVar("FreeSpellAI")) {
+            	return 1;
+            }
 
             a1 += getSpellAbilityPriority(a);
             b1 += getSpellAbilityPriority(b);

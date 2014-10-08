@@ -7,5 +7,6 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, untap up to five lands.
 SVar:TrigUntap:AB$ Untap | Cost$ 0 | UntapUpTo$ True | UntapType$ Land | Amount$ 5
 SVar:PlayMain1:TRUE
+SVar:FreeSpellAI:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treachery.jpg
 Oracle:Enchant creature\nWhen Treachery enters the battlefield, untap up to five lands.\nYou control enchanted creature.
