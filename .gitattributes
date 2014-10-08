@@ -287,7 +287,6 @@ forge-game/src/main/java/forge/game/GameView.java -text
 forge-game/src/main/java/forge/game/GlobalRuleChange.java -text
 forge-game/src/main/java/forge/game/IHasGameType.java -text
 forge-game/src/main/java/forge/game/IIdentifiable.java -text
-forge-game/src/main/java/forge/game/KeywordsChange.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/Match.java -text
 forge-game/src/main/java/forge/game/PlanarDice.java -text
 forge-game/src/main/java/forge/game/StaticEffect.java svneol=native#text/plain
@@ -533,6 +532,18 @@ forge-game/src/main/java/forge/game/event/package-info.java -text
 forge-game/src/main/java/forge/game/io/GameStateDeserializer.java -text
 forge-game/src/main/java/forge/game/io/GameStateSerializer.java -text
 forge-game/src/main/java/forge/game/io/IGameStateObject.java -text
+forge-game/src/main/java/forge/game/keyword/Cycling.java -text
+forge-game/src/main/java/forge/game/keyword/Keyword.java -text
+forge-game/src/main/java/forge/game/keyword/KeywordCollection.java -text
+forge-game/src/main/java/forge/game/keyword/KeywordInstance.java -text
+forge-game/src/main/java/forge/game/keyword/KeywordWithAmount.java -text
+forge-game/src/main/java/forge/game/keyword/KeywordWithCost.java -text
+forge-game/src/main/java/forge/game/keyword/KeywordWithCostAndAmount.java -text
+forge-game/src/main/java/forge/game/keyword/KeywordWithCostAndType.java -text
+forge-game/src/main/java/forge/game/keyword/KeywordWithType.java -text
+forge-game/src/main/java/forge/game/keyword/KeywordsChange.java -text
+forge-game/src/main/java/forge/game/keyword/Protection.java -text
+forge-game/src/main/java/forge/game/keyword/SimpleKeyword.java -text
 forge-game/src/main/java/forge/game/mana/Mana.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/mana/ManaCostAdjustment.java -text
 forge-game/src/main/java/forge/game/mana/ManaCostBeingPaid.java svneol=native#text/plain
