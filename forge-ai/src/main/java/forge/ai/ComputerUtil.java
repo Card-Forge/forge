@@ -1833,6 +1833,8 @@ public class ComputerUtil {
         } else {
             String logic = sa.getParam("AILogic");
             switch (logic) {
+                case "Torture":
+                	return "Torture";
                 case "GraceOrCondemnation":
                     return ai.getCreaturesInPlay().size() > ai.getOpponent().getCreaturesInPlay().size() ? "Grace" : "Condemnation";
                 case "CarnageOrHomage":

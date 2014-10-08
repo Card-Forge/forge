@@ -4,6 +4,7 @@ package forge.ai.ability;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -22,6 +23,8 @@ public class VoteAi extends SpellAbilityAi {
         } else if ("Judgment".equals(logic)) {
             return !CardLists.getValidCards(host.getGame().getCardsIn(ZoneType.Battlefield),
                     sa.getParam("VoteCard"), host.getController(), host).isEmpty();
+        } else if ("Torture".equals(logic)) {
+            return aiPlayer.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.MAIN1);
         }
         return false;
     }
