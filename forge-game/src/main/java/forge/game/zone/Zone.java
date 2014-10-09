@@ -59,6 +59,9 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         roCardList = Collections.unmodifiableList(cardList);
     }
 
+    protected void onChanged() {
+    }
+
     public Player getPlayer() { // generic zones like stack have no player associated
         return null;
     }
@@ -87,6 +90,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         else {
             cardList.add(index.intValue(), c);
         }
+        onChanged();
         game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Added, c));
     }
 
@@ -99,8 +103,10 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     }
 
     public void remove(final Card c) {
-        cardList.remove(c);
-        game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Removed, c));
+        if (cardList.remove(c)) {
+            onChanged();
+            game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Removed, c));
+        }
     }
 
     public final void setCards(final Iterable<Card> cards) {
@@ -109,6 +115,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
             c.setZone(this);
             cardList.add(c);
         }
+        onChanged();
         game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.ComplexUpdate, null));
     }
 
@@ -191,6 +198,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
 
     public void shuffle() {
         Collections.shuffle(cardList);
+        onChanged();
     }
 
     @Override

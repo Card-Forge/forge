@@ -20,6 +20,7 @@ package forge.game.zone;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -36,7 +37,6 @@ import java.util.List;
  * @version $Id$
  */
 public class PlayerZone extends Zone {
-    /** Constant <code>serialVersionUID=-5687652485777639176L</code>. */
     private static final long serialVersionUID = -5687652485777639176L;
 
     // the this is not the owner of the card
@@ -83,16 +83,21 @@ public class PlayerZone extends Zone {
 
     public PlayerZone(final ZoneType zone, final Player inPlayer) {
         super(zone, inPlayer.getGame());
-        this.player = inPlayer;
+        player = inPlayer;
+    }
+
+    @Override
+    protected void onChanged() {
+        player.updateZoneForView(this);
     }
 
     public final Player getPlayer() {
-        return this.player;
+        return player;
     }
 
     @Override
     public final String toString() {
-        return String.format("%s %s", Lang.getPossesive(this.player.toString()), this.zoneType);
+        return String.format("%s %s", Lang.getPossesive(player.toString()), zoneType);
     }
 
     public List<Card> getCardsPlayerCanActivate(Player who) {
@@ -103,9 +108,9 @@ public class PlayerZone extends Zone {
             cl = Iterables.limit(cl, 1);
         }
 
-        boolean checkingForOwner = who == this.player;
+        boolean checkingForOwner = who == player;
 
-        if (checkingForOwner && (this.is(ZoneType.Battlefield) || this.is(ZoneType.Hand))) {
+        if (checkingForOwner && (is(ZoneType.Battlefield) || is(ZoneType.Hand))) {
             return roCardList;
         }
         final Predicate<Card> filterPredicate = checkingForOwner ? new OwnCardsActivationFilter() : new AlienCardsActivationFilter();

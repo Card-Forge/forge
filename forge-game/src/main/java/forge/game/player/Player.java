@@ -1096,6 +1096,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final PlayerZone getZone(final ZoneType zone) {
         return zones.get(zone);
     }
+    public void updateZoneForView(PlayerZone zone) {
+        view.updateZone(zone);
+    }
 
     public final List<Card> getCardsIn(final ZoneType zoneType) {
         return getCardsIn(zoneType, true);
