@@ -42,9 +42,6 @@ import forge.game.card.CardPredicates;
 import forge.game.combat.Combat;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventGameOutcome;
-import forge.game.io.GameStateDeserializer;
-import forge.game.io.GameStateSerializer;
-import forge.game.io.IGameStateObject;
 import forge.game.phase.EndOfTurn;
 import forge.game.phase.Phase;
 import forge.game.phase.PhaseHandler;
@@ -67,7 +64,7 @@ import forge.util.Aggregates;
 /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
  */
-public class Game implements IGameStateObject {
+public class Game {
     private final GameRules rules;
     private List<Player> roIngamePlayers;
     private List<Player> roIngamePlayersReversed;
@@ -102,57 +99,6 @@ public class Game implements IGameStateObject {
 
     private final GameView view = new GameView(); 
 
-    @Override
-    public void loadState(GameStateDeserializer gsd) {
-        gsd.readObject(rules);
-        gsd.readObject(cleanup);
-        gsd.readObject(endOfTurn);
-        gsd.readObject(endOfCombat);
-        gsd.readObject(untap);
-        gsd.readObject(upkeep);
-        gsd.readObject(stack);
-        gsd.readObject(phaseHandler);
-        gsd.readObject(staticEffects);
-        gsd.readObject(triggerHandler);
-        gsd.readObject(gameLog);
-        gsd.readObject(stackZone);
-        turnOrder = Direction.valueOf(gsd.readString());
-        timestamp = gsd.readLong();
-        age = GameStage.valueOf(gsd.readString());
-        outcome = (GameOutcome)gsd.readObject();
-        gsd.readPlayerList(allPlayers);
-        gsd.readPlayerList(ingamePlayers);
-    }
-
-    @Override
-    public void saveState(GameStateSerializer gss) {
-        gss.write(rules);
-        gss.write(cleanup);
-        gss.write(endOfTurn);
-        gss.write(endOfCombat);
-        gss.write(untap);
-        gss.write(upkeep);
-        gss.write(stack);
-        gss.write(phaseHandler);
-        gss.write(staticEffects);
-        gss.write(triggerHandler);
-        gss.write(replacementHandler);
-        gss.write(gameLog);
-        gss.write(stackZone);
-        gss.write(turnOrder.name());
-        gss.write(timestamp);
-        gss.write(age.name());
-        gss.write(outcome);
-        gss.writePlayerList(allPlayers);
-        gss.writePlayerList(ingamePlayers);
-        roIngamePlayers = Collections.unmodifiableList(ingamePlayers);
-        roIngamePlayersReversed = Lists.reverse(roIngamePlayers); // reverse of unmodifiable list is also unmodifiable
-    }
-
-    /**
-     * Constructor.
-     * @param match0
-     */
     public Game(List<RegisteredPlayer> players0, GameRules rules0, Match match0) { /* no more zones to map here */
         rules = rules0;
         match = match0;

@@ -25,9 +25,6 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventZone;
-import forge.game.io.GameStateDeserializer;
-import forge.game.io.GameStateSerializer;
-import forge.game.io.IGameStateObject;
 import forge.game.player.Player;
 import forge.util.CollectionSuppliers;
 import forge.util.maps.EnumMapOfLists;
@@ -45,7 +42,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @author Forge
  * @version $Id: PlayerZone.java 17582 2012-10-19 22:39:09Z Max mtg $
  */
-public class Zone implements java.io.Serializable, Iterable<Card>, IGameStateObject {
+public class Zone implements java.io.Serializable, Iterable<Card> {
     /** Constant <code>serialVersionUID=-5687652485777639176L</code>. */
     private static final long serialVersionUID = -5687652485777639176L;
 
@@ -58,12 +55,10 @@ public class Zone implements java.io.Serializable, Iterable<Card>, IGameStateObj
     protected final transient MapOfLists<ZoneType, Card> cardsAddedThisTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.<Card>arrayLists());
     protected final transient MapOfLists<ZoneType, Card> cardsAddedLastTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.<Card>arrayLists());
 
-    public Zone(final ZoneType zone, Game game) {
-        this.zoneType = zone;
-        this.game = game;
-        this.roCardList = Collections.unmodifiableList(cardList);
-
-        //System.out.println(zoneName + " (ct) " + Integer.toHexString(System.identityHashCode(roCardList)));
+    public Zone(final ZoneType zone0, Game game0) {
+        zoneType = zone0;
+        game = game0;
+        roCardList = Collections.unmodifiableList(cardList);
     }
 
     public Player getPlayer() { // generic zones like stack have no player associated
@@ -89,24 +84,24 @@ public class Zone implements java.io.Serializable, Iterable<Card>, IGameStateObj
         c.setZone(this);
 
         if (index == null) {
-            this.cardList.add(c);
+            cardList.add(c);
         }
         else {
-            this.cardList.add(index.intValue(), c);
+            cardList.add(index.intValue(), c);
         }
         game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Added, c));
     }
 
     public final boolean contains(final Card c) {
-        return this.cardList.contains(c);
+        return cardList.contains(c);
     }
 
     public final boolean contains(final Predicate<Card> condition) {
-        return Iterables.any(this.cardList, condition);
+        return Iterables.any(cardList, condition);
     }
 
     public void remove(final Card c) {
-        this.cardList.remove(c);
+        cardList.remove(c);
         game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Removed, c));
     }
 
@@ -120,7 +115,7 @@ public class Zone implements java.io.Serializable, Iterable<Card>, IGameStateObj
     }
 
     public final boolean is(final ZoneType zone) {
-        return zone == this.zoneType;
+        return zone == zoneType;
     }
 
     // PlayerZone should override it with a correct implementation
@@ -130,25 +125,25 @@ public class Zone implements java.io.Serializable, Iterable<Card>, IGameStateObj
     }
 
     public final ZoneType getZoneType() {
-        return this.zoneType;
+        return zoneType;
     }
 
     public final int size() {
-        return this.cardList.size();
+        return cardList.size();
     }
 
     public final Card get(final int index) {
-        return this.cardList.get(index);
+        return cardList.get(index);
     }
 
     public final List<Card> getCards() {
         //System.out.println(zoneName + ": " + Integer.toHexString(System.identityHashCode(roCardList)));
-        return this.getCards(true);
+        return getCards(true);
     }
 
     public List<Card> getCards(final boolean filter) {
         // Non-Battlefield PlayerZones don't care about the filter
-        return this.roCardList;
+        return roCardList;
     }
 
     /*
@@ -158,7 +153,7 @@ public class Zone implements java.io.Serializable, Iterable<Card>, IGameStateObj
      */
 
     public final boolean isEmpty() {
-        return this.cardList.isEmpty();
+        return cardList.isEmpty();
     }
 
     /**
@@ -189,7 +184,7 @@ public class Zone implements java.io.Serializable, Iterable<Card>, IGameStateObj
      * @return a {@link forge.CardList} object.
      */
     public final List<Card> getCardsAddedThisTurn(final ZoneType origin) {
-        //System.out.print("Request cards put into " + this.getZoneType() + " from " + origin + ".Amount: ");
+        //System.out.print("Request cards put into " + getZoneType() + " from " + origin + ".Amount: ");
         return getCardsAdded(cardsAddedThisTurn, origin);
     }
 
@@ -203,7 +198,7 @@ public class Zone implements java.io.Serializable, Iterable<Card>, IGameStateObj
      * @return a {@link forge.CardList} object.
      */
     public final List<Card> getCardsAddedLastTurn(final ZoneType origin) {
-        //System.out.print("Last turn - Request cards put into " + this.getZoneType() + " from " + origin + ".Amount: ");
+        //System.out.print("Last turn - Request cards put into " + getZoneType() + " from " + origin + ".Amount: ");
         return getCardsAdded(cardsAddedLastTurn, origin);
     }
     
@@ -232,11 +227,11 @@ public class Zone implements java.io.Serializable, Iterable<Card>, IGameStateObj
      * </p>
      */
     public final void resetCardsAddedThisTurn() {
-        this.cardsAddedLastTurn.clear();
-        for (Entry<ZoneType, Collection<Card>> entry : this.cardsAddedThisTurn.entrySet()) {
-            this.cardsAddedLastTurn.addAll(entry.getKey(), entry.getValue());
+        cardsAddedLastTurn.clear();
+        for (Entry<ZoneType, Collection<Card>> entry : cardsAddedThisTurn.entrySet()) {
+            cardsAddedLastTurn.addAll(entry.getKey(), entry.getValue());
         }
-        this.cardsAddedThisTurn.clear();
+        cardsAddedThisTurn.clear();
     }
 
     /* (non-Javadoc)
@@ -261,18 +256,6 @@ public class Zone implements java.io.Serializable, Iterable<Card>, IGameStateObj
      */
     @Override
     public String toString() {
-        return this.zoneType.toString();
-    }
-
-    @Override
-    public void loadState(GameStateDeserializer gsd) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void saveState(GameStateSerializer gss) {
-        // TODO Auto-generated method stub
-        
+        return zoneType.toString();
     }
 }

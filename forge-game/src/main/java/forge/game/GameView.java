@@ -47,4 +47,21 @@ public class GameView {
                     CardView.getCollection(blockers));
         }
     }
+
+    public void serialize() {
+        /*try {
+            GameStateSerializer serializer = new GameStateSerializer(filename);
+            game.saveState(serializer);
+            serializer.writeEndOfFile();
+            serializer.bw.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }*/
+    }
+
+    public void deserialize() {
+        /*GameStateDeserializer deserializer = new GameStateDeserializer();
+        deserializer.readObject();*/
+    }
 }

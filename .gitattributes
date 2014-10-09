@@ -529,9 +529,6 @@ forge-game/src/main/java/forge/game/event/GameEventTurnPhase.java -text
 forge-game/src/main/java/forge/game/event/GameEventZone.java -text
 forge-game/src/main/java/forge/game/event/IGameEventVisitor.java -text
 forge-game/src/main/java/forge/game/event/package-info.java -text
-forge-game/src/main/java/forge/game/io/GameStateDeserializer.java -text
-forge-game/src/main/java/forge/game/io/GameStateSerializer.java -text
-forge-game/src/main/java/forge/game/io/IGameStateObject.java -text
 forge-game/src/main/java/forge/game/keyword/Cycling.java -text
 forge-game/src/main/java/forge/game/keyword/Keyword.java -text
 forge-game/src/main/java/forge/game/keyword/KeywordCollection.java -text

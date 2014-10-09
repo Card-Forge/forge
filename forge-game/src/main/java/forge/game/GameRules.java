@@ -3,11 +3,7 @@ package forge.game;
 import java.util.EnumSet;
 import java.util.Set;
 
-import forge.game.io.GameStateDeserializer;
-import forge.game.io.GameStateSerializer;
-import forge.game.io.IGameStateObject;
-
-public class GameRules implements IGameStateObject {
+public class GameRules {
     private GameType gameType;
     private boolean manaBurn;
     private int poisonCountersToLose = 10; // is commonly 10, but turns into 15 for 2HG
@@ -19,41 +15,6 @@ public class GameRules implements IGameStateObject {
 
     // it's a preference, not rule... but I could hardly find a better place for it
     public boolean canCloneUseTargetsImage;
-
-    @Override
-    public void loadState(GameStateDeserializer gsd) {
-        gameType = GameType.valueOf(gsd.readString());
-        manaBurn = gsd.readBoolean();
-        poisonCountersToLose = gsd.readInt();
-        gamesPerMatch = gsd.readInt();
-        gamesToWinMatch = gsd.readInt();
-        playForAnte = gsd.readBoolean();
-        matchAnteRarity = gsd.readBoolean();
-        canCloneUseTargetsImage = gsd.readBoolean();
-
-        int variantCount = gsd.readInt();
-        appliedVariants.clear();
-        for (int i = 0; i < variantCount; i++) {
-            appliedVariants.add(GameType.valueOf(gsd.readString()));
-        }
-    }
-
-    @Override
-    public void saveState(GameStateSerializer gss) {
-        gss.write(gameType.name());
-        gss.write(manaBurn);
-        gss.write(poisonCountersToLose);
-        gss.write(gamesPerMatch);
-        gss.write(gamesToWinMatch);
-        gss.write(playForAnte);
-        gss.write(matchAnteRarity);
-        gss.write(canCloneUseTargetsImage);
-
-        gss.write(appliedVariants.size());
-        for (GameType variant : appliedVariants) {
-            gss.write(variant.name());
-        }
-    }
     
     public GameRules(GameType type) {
         this.gameType = type;
