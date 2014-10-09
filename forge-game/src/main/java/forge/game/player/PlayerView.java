@@ -187,25 +187,18 @@ public class PlayerView extends GameEntityView {
         set(prop, CardView.getCollection(zone.getCards()));
     }
 
+    public int getMana(final byte color) {
+        Integer count = getMana().get(color);
+        return count != null ? count.intValue() : 0;
+    }
     private Map<Byte, Integer> getMana() {
         return get(TrackableProperty.Mana);
     }
     void updateMana(Player p) {
-        boolean changed = false;
-        Map<Byte, Integer> mana = getMana();
+        Map<Byte, Integer> mana = new HashMap<Byte, Integer>();
         for (byte b : MagicColor.WUBRGC) {
-            int value = p.getManaPool().getAmountOfColor(b);
-            if (mana.put(b, value) != value) {
-                changed = true;
-            }
+            mana.put(b, p.getManaPool().getAmountOfColor(b));
         }
-        if (changed) {
-            flagAsChanged(TrackableProperty.Mana);
-        }
-    }
-
-    public int getMana(final byte color) {
-        Integer count = getMana().get(color);
-        return count != null ? count.intValue() : 0;
+        set(TrackableProperty.Mana, mana);
     }
 }
