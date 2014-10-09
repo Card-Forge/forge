@@ -43,10 +43,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @version $Id: PlayerZone.java 17582 2012-10-19 22:39:09Z Max mtg $
  */
 public class Zone implements java.io.Serializable, Iterable<Card> {
-    /** Constant <code>serialVersionUID=-5687652485777639176L</code>. */
     private static final long serialVersionUID = -5687652485777639176L;
 
-    /** The cards. */
     private final transient List<Card> cardList = new CopyOnWriteArrayList<Card>();
     protected final transient List<Card> roCardList;
     protected final ZoneType zoneType;
@@ -118,8 +116,6 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         return zone == zoneType;
     }
 
-    // PlayerZone should override it with a correct implementation
-
     public final boolean is(final ZoneType zone, final Player player) {
         return zoneType == zone && player == getPlayer();
     }
@@ -137,76 +133,35 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     }
 
     public final List<Card> getCards() {
-        //System.out.println(zoneName + ": " + Integer.toHexString(System.identityHashCode(roCardList)));
         return getCards(true);
     }
 
     public List<Card> getCards(final boolean filter) {
-        // Non-Battlefield PlayerZones don't care about the filter
-        return roCardList;
+        return roCardList; // Non-Battlefield PlayerZones don't care about the filter
     }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.IPlayerZone#isEmpty()
-     */
 
     public final boolean isEmpty() {
         return cardList.isEmpty();
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>cardsAddedThisTurn</code>.
-     * </p>
-     */
     public final MapOfLists<ZoneType, Card> getCardsAddedThisTurn() {
         return cardsAddedThisTurn;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>cardsAddedLastTurn</code>.
-     * </p>
-     */
     public final MapOfLists<ZoneType, Card> getCardsAddedLastTurn() {
         return cardsAddedLastTurn;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>cardsAddedThisTurn</code>.
-     * </p>
-     * 
-     * @param origin
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.CardList} object.
-     */
     public final List<Card> getCardsAddedThisTurn(final ZoneType origin) {
         //System.out.print("Request cards put into " + getZoneType() + " from " + origin + ".Amount: ");
         return getCardsAdded(cardsAddedThisTurn, origin);
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>getcardsAddedLastTurn</code>.
-     * </p>
-     * 
-     * @param origin
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.CardList} object.
-     */
     public final List<Card> getCardsAddedLastTurn(final ZoneType origin) {
         //System.out.print("Last turn - Request cards put into " + getZoneType() + " from " + origin + ".Amount: ");
         return getCardsAdded(cardsAddedLastTurn, origin);
     }
-    
-    /**
-     * <p>
-     * getCardsAdded.
-     * </p>
-     */
+
     private final List<Card> getCardsAdded(final MapOfLists<ZoneType, Card> cardsAdded, final ZoneType origin) {
         if (origin != null) {
             Collection<Card> cards = cardsAdded.get(origin);
@@ -221,11 +176,6 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         return ret;
     }
 
-    /**
-     * <p>
-     * resetCardsAddedThisTurn.
-     * </p>
-     */
     public final void resetCardsAddedThisTurn() {
         cardsAddedLastTurn.clear();
         for (Entry<ZoneType, Collection<Card>> entry : cardsAddedThisTurn.entrySet()) {
@@ -234,26 +184,15 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         cardsAddedThisTurn.clear();
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Iterable#iterator()
-     */
     @Override
     public Iterator<Card> iterator() {
         return roCardList.iterator();
     }
 
-    public void shuffle()
-    {
+    public void shuffle() {
         Collections.shuffle(cardList);
     }
 
-    /**
-     * <p>
-     * toString.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
     @Override
     public String toString() {
         return zoneType.toString();

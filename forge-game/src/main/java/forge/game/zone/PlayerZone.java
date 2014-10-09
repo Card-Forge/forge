@@ -36,12 +36,13 @@ import java.util.List;
  * @version $Id$
  */
 public class PlayerZone extends Zone {
+    /** Constant <code>serialVersionUID=-5687652485777639176L</code>. */
+    private static final long serialVersionUID = -5687652485777639176L;
 
     // the this is not the owner of the card
     private final class AlienCardsActivationFilter implements Predicate<Card> {
         @Override
         public boolean apply(final Card c) {
-   
             if (c.hasStartOfKeyword("May be played by your opponent")
                     || c.hasKeyword("Your opponent may look at this card.")) {
                 return true;
@@ -78,59 +79,36 @@ public class PlayerZone extends Zone {
         }
     }
 
-    /** Constant <code>serialVersionUID=-5687652485777639176L</code>. */
-    private static final long serialVersionUID = -5687652485777639176L;
-
-
     private final Player player;
-
-
 
     public PlayerZone(final ZoneType zone, final Player inPlayer) {
         super(zone, inPlayer.getGame());
         this.player = inPlayer;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>player</code>.
-     * </p>
-     * 
-     * @return a {@link forge.game.player.Player} object.
-     */
     public final Player getPlayer() {
         return this.player;
     }
 
-    /**
-     * <p>
-     * toString.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
     @Override
     public final String toString() {
-        return  String.format("%s %s", Lang.getPossesive(this.player.toString()), this.zoneType);
+        return String.format("%s %s", Lang.getPossesive(this.player.toString()), this.zoneType);
     }
 
     public List<Card> getCardsPlayerCanActivate(Player who) {
-    
         Iterable<Card> cl = roCardList; // copy to new AL won't help here
-    
+
         // Only check the top card of the library
         if (is(ZoneType.Library)) {
             cl = Iterables.limit(cl, 1);
         }
-        
+
         boolean checkingForOwner = who == this.player;
 
-        if (checkingForOwner && (this.is(ZoneType.Battlefield) || this.is(ZoneType.Hand)))
+        if (checkingForOwner && (this.is(ZoneType.Battlefield) || this.is(ZoneType.Hand))) {
             return roCardList;
-
+        }
         final Predicate<Card> filterPredicate = checkingForOwner ? new OwnCardsActivationFilter() : new AlienCardsActivationFilter();
         return Lists.newArrayList(cl = Iterables.filter(cl, filterPredicate));
     }
-
-
 }
