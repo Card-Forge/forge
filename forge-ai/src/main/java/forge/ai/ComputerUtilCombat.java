@@ -289,15 +289,14 @@ public class ComputerUtilCombat {
     
     public static List<Card> getLifeThreateningCommanders(final Player ai, final Combat combat) {
         List<Card> res = new ArrayList<Card>();
-        
-        for(Card c : combat.getAttackers()) {
-            if(c.isCommander()) {
-                int currentCommanderDamage = ai.getCommanderDamage().containsKey(c) ? ai.getCommanderDamage().get(c) : 0;                
-                if (damageIfUnblocked(c, ai, combat, false) + currentCommanderDamage >= 21)
+        for (Card c : combat.getAttackers()) {
+            if (c.isCommander()) {
+                int currentCommanderDamage = ai.getCommanderDamage(c);       
+                if (damageIfUnblocked(c, ai, combat, false) + currentCommanderDamage >= 21) {
                     res.add(c);
+                }
             }
         }
-        
         return res;
     }
 

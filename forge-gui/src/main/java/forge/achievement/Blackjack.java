@@ -20,7 +20,7 @@ public class Blackjack extends Achievement {
         if (player.getOutcome().hasWon()) {
             for (Player p : game.getRegisteredPlayers()) {
                 if (p.isOpponentOf(player) && p.getOutcome().lossState == GameLossReason.CommanderDamage) {
-                    Integer damage = p.getCommanderDamage().get(player.getCommander());
+                    Integer damage = p.getCommanderDamage(player.getCommander());
                     if (damage != null && damage >= THRESHOLD) {
                         return damage;
                     }

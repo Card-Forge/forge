@@ -19,6 +19,9 @@ public class TrackableDeserializer {
     public int readInt() {
         return Integer.parseInt(readString());
     }
+    public byte readByte() {
+        return Byte.parseByte(readString());
+    }
     public long readLong() {
         return Long.parseLong(readString());
     }

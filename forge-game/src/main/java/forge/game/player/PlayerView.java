@@ -1,13 +1,15 @@
 package forge.game.player;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
 import forge.card.MagicColor;
 import forge.game.GameEntityView;
-import forge.game.card.CardFactoryUtil;
+import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -102,11 +104,22 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.Keywords, ImmutableList.of(p.getKeywords()));
     }
 
-    public String getCommanderInfo() {
-        return get(TrackableProperty.CommanderInfo);
+    public CardView getCommander() {
+        return get(TrackableProperty.Commander);
     }
-    void updateCommanderInfo(Player p) {
-        set(TrackableProperty.CommanderInfo, CardFactoryUtil.getCommanderInfo(p).trim().replace("\r\n", "; "));
+    void updateCommander(Player p) {
+        set(TrackableProperty.Commander, PlayerView.get(p.getCommander()));
+    }
+
+    public Map<Integer, Integer> getCommanderDamage() {
+        return get(TrackableProperty.CommanderDamage);
+    }
+    void updateCommanderDamage(Player p) {
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for (Entry<Card, Integer> entry : p.getCommanderDamage()) {
+            map.put(entry.getKey().getId(), entry.getValue());
+        }
+        set(TrackableProperty.CommanderDamage, map);
     }
 
     public Iterable<CardView> getAnte() {

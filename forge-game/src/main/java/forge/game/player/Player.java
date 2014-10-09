@@ -78,7 +78,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante,
             ZoneType.Sideboard, ZoneType.PlanarDeck, ZoneType.SchemeDeck));
 
-    private final Map<Card,Integer> commanderDamage = new HashMap<Card,Integer>();
+    private final Map<Card, Integer> commanderDamage = new HashMap<Card, Integer>();
 
     private int poisonCounters = 0;
     private int life = 20;
@@ -496,12 +496,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         if (source.isCommander() && isCombat) {
-            if (!commanderDamage.containsKey(source)) {
-                commanderDamage.put(source, amount);
-            }
-            else {
-                commanderDamage.put(source,commanderDamage.get(source) + amount);
-            }
+            commanderDamage.put(source, getCommanderDamage(source) + amount);
+            view.updateCommanderDamage(this);
         }
 
         assignedDamage.put(source, amount);
@@ -1795,9 +1791,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         if (game.getRules().hasAppliedVariant(GameType.Commander)) {
-            Map<Card,Integer> cmdDmg = getCommanderDamage();
-            for (Card c : cmdDmg.keySet()) {
-                if (cmdDmg.get(c) >= 21) {
+            for (Entry<Card, Integer> entry : getCommanderDamage()) {
+                if (entry.getValue() >= 21) {
                     return loseConditionMet(GameLossReason.CommanderDamage, null);
                 }
             }
@@ -2709,11 +2704,17 @@ public class Player extends GameEntity implements Comparable<Player> {
         return commander;
     }
     public void setCommander(Card commander0) {
+        if (commander == commander0) { return; }
         commander = commander0;
+        view.updateCommander(this);
     }
 
-    public Map<Card,Integer> getCommanderDamage() {
-        return commanderDamage;
+    public Iterable<Entry<Card, Integer>> getCommanderDamage() {
+        return commanderDamage.entrySet();
+    }
+    public int getCommanderDamage(Card commander) {
+        Integer damage = commanderDamage.get(commander);
+        return damage == null ? 0 : damage.intValue();
     }
 
     public boolean isPlayingExtraTurn() {

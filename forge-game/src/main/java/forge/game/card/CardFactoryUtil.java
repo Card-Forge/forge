@@ -2114,13 +2114,12 @@ public class CardFactoryUtil {
             else {
             	text = "Commander Damage to " + p.getName() + ": ";
             }
-            
-            final Map<Card,Integer> map = p.getCommanderDamage();
-            if (map.containsKey(originPlayer.getCommander())) {
-                sb.append(text + map.get(originPlayer.getCommander()) + "\r\n");
+
+            int damage = p.getCommanderDamage(originPlayer.getCommander());
+            if (damage > 0) {
+                sb.append(text + damage + "\r\n");
             }
         }
-        
         return sb.toString();
     }
 

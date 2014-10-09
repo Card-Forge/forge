@@ -1,18 +1,13 @@
 package forge.trackable;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
-import org.apache.commons.lang3.StringUtils;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-
 import forge.card.ColorSet;
-import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
@@ -301,8 +296,6 @@ public class TrackableTypes {
         }
     };
     public static final TrackableType<Set<String>> StringSetType = new TrackableType<Set<String>>() {
-        private static final char DELIM = (char)6;
-
         @Override
         public Set<String> getDefaultValue() {
             return null;
@@ -310,22 +303,26 @@ public class TrackableTypes {
 
         @Override
         public Set<String> deserialize(TrackableDeserializer td, Set<String> oldValue) {
-            String value = td.readString();
-            if (value.length() > 0) {
-                return Sets.newHashSet(StringUtils.split(value, DELIM));
+            int size = td.readInt();
+            if (size > 0) {
+                Set<String> set = new HashSet<String>();
+                for (int i = 0; i < size; i++) {
+                    set.add(td.readString());
+                }
+                return set;
             }
             return null;
         }
 
         @Override
         public void serialize(TrackableSerializer ts, Set<String> value) {
-            ts.write(StringUtils.join(value, DELIM));
+            ts.write(value.size());
+            for (String s : value) {
+                ts.write(s);
+            }
         }
     };
     public static final TrackableType<Map<String, String>> StringMapType = new TrackableType<Map<String, String>>() {
-        private static final char DELIM_1 = (char)6;
-        private static final char DELIM_2 = (char)7;
-
         @Override
         public Map<String, String> getDefaultValue() {
             return null;
@@ -333,13 +330,11 @@ public class TrackableTypes {
 
         @Override
         public Map<String, String> deserialize(TrackableDeserializer td, Map<String, String> oldValue) {
-            String value = td.readString();
-            if (value.length() > 0) {
-                Map<String, String> map = ImmutableMap.of();
-                String[] entries = StringUtils.split(value, DELIM_1);
-                for (String entry : entries) {
-                    int idx = entry.indexOf(DELIM_2);
-                    map.put(entry.substring(0, idx), entry.substring(idx + 1));
+            int size = td.readInt();
+            if (size > 0) {
+                Map<String, String> map = new HashMap<String, String>();
+                for (int i = 0; i < size; i++) {
+                    map.put(td.readString(), td.readString());
                 }
                 return map;
             }
@@ -348,20 +343,42 @@ public class TrackableTypes {
 
         @Override
         public void serialize(TrackableSerializer ts, Map<String, String> value) {
-            StringBuilder builder = new StringBuilder();
+            ts.write(value.size());
             for (Entry<String, String> entry : value.entrySet()) {
-                if (builder.length() > 0) {
-                    builder.append(DELIM_1);
-                }
-                builder.append(entry.getKey() + DELIM_2 + entry.getValue());
+                ts.write(entry.getKey());
+                ts.write(entry.getValue());
             }
-            ts.write(builder.toString());
+        }
+    };
+    public static final TrackableType<Map<Integer, Integer>> IntegerMapType = new TrackableType<Map<Integer, Integer>>() {
+        @Override
+        public Map<Integer, Integer> getDefaultValue() {
+            return null;
+        }
+
+        @Override
+        public Map<Integer, Integer> deserialize(TrackableDeserializer td, Map<Integer, Integer> oldValue) {
+            int size = td.readInt();
+            if (size > 0) {
+                Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+                for (int i = 0; i < size; i++) {
+                    map.put(td.readInt(), td.readInt());
+                }
+                return map;
+            }
+            return null;
+        }
+
+        @Override
+        public void serialize(TrackableSerializer ts, Map<Integer, Integer> value) {
+            ts.write(value.size());
+            for (Entry<Integer, Integer> entry : value.entrySet()) {
+                ts.write(entry.getKey());
+                ts.write(entry.getValue());
+            }
         }
     };
     public static final TrackableType<Map<Byte, Integer>> ManaMapType = new TrackableType<Map<Byte, Integer>>() {
-        private static final char DELIM_1 = (char)6;
-        private static final char DELIM_2 = (char)7;
-
         @Override
         public Map<Byte, Integer> getDefaultValue() {
             return null;
@@ -369,13 +386,11 @@ public class TrackableTypes {
 
         @Override
         public Map<Byte, Integer> deserialize(TrackableDeserializer td, Map<Byte, Integer> oldValue) {
-            String value = td.readString();
-            if (value.length() > 0) {
-                Map<Byte, Integer> map = Maps.newHashMapWithExpectedSize(MagicColor.NUMBER_OR_COLORS + 1);
-                String[] entries = StringUtils.split(value, DELIM_1);
-                for (String entry : entries) {
-                    int idx = entry.indexOf(DELIM_2);
-                    map.put(Byte.valueOf(entry.substring(0, idx)), Integer.valueOf(entry.substring(idx + 1)));
+            int size = td.readInt();
+            if (size > 0) {
+                Map<Byte, Integer> map = new HashMap<Byte, Integer>();
+                for (int i = 0; i < size; i++) {
+                    map.put(td.readByte(), td.readInt());
                 }
                 return map;
             }
@@ -384,20 +399,14 @@ public class TrackableTypes {
 
         @Override
         public void serialize(TrackableSerializer ts, Map<Byte, Integer> value) {
-            StringBuilder builder = new StringBuilder();
+            ts.write(value.size());
             for (Entry<Byte, Integer> entry : value.entrySet()) {
-                if (builder.length() > 0) {
-                    builder.append(DELIM_1);
-                }
-                builder.append(Byte.toString(entry.getKey()) + DELIM_2 + Integer.toString(entry.getValue()));
+                ts.write(entry.getKey());
+                ts.write(entry.getValue());
             }
-            ts.write(builder.toString());
         }
     };
     public static final TrackableType<Map<CounterType, Integer>> CounterMapType = new TrackableType<Map<CounterType, Integer>>() {
-        private static final char DELIM_1 = (char)6;
-        private static final char DELIM_2 = (char)7;
-
         @Override
         public Map<CounterType, Integer> getDefaultValue() {
             return null;
@@ -405,13 +414,11 @@ public class TrackableTypes {
 
         @Override
         public Map<CounterType, Integer> deserialize(TrackableDeserializer td, Map<CounterType, Integer> oldValue) {
-            String value = td.readString();
-            if (value.length() > 0) {
+            int size = td.readInt();
+            if (size > 0) {
                 Map<CounterType, Integer> map = new TreeMap<CounterType, Integer>();
-                String[] entries = StringUtils.split(value, DELIM_1);
-                for (String entry : entries) {
-                    int idx = entry.indexOf(DELIM_2);
-                    map.put(CounterType.valueOf(entry.substring(0, idx)), Integer.valueOf(entry.substring(idx + 1)));
+                for (int i = 0; i < size; i++) {
+                    map.put(CounterType.valueOf(td.readString()), td.readInt());
                 }
                 return map;
             }
@@ -420,14 +427,11 @@ public class TrackableTypes {
 
         @Override
         public void serialize(TrackableSerializer ts, Map<CounterType, Integer> value) {
-            StringBuilder builder = new StringBuilder();
+            ts.write(value.size());
             for (Entry<CounterType, Integer> entry : value.entrySet()) {
-                if (builder.length() > 0) {
-                    builder.append(DELIM_1);
-                }
-                builder.append(entry.getKey().name() + DELIM_2 + Integer.toString(entry.getValue()));
+                ts.write(entry.getKey().name());
+                ts.write(entry.getValue());
             }
-            ts.write(builder.toString());
         }
     };
 }

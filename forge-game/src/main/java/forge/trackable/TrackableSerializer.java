@@ -23,16 +23,19 @@ public class TrackableSerializer {
         write(value ? "1" : "0");
     }
     public void write(int value) {
-        write(String.valueOf(value));
+        write(Integer.toString(value));
+    }
+    public void write(byte value) {
+        write(Byte.toString(value));
     }
     public void write(long value) {
-        write(String.valueOf(value));
+        write(Long.toString(value));
     }
     public void write(float value) {
-        write(String.valueOf(value));
+        write(Float.toString(value));
     }
     public void write(double value) {
-        write(String.valueOf(value));
+        write(Double.toString(value));
     }
     public void write(TrackableIndex<? extends TrackableObject> index) {
         write(index.size());
