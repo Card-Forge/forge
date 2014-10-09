@@ -1,6 +1,8 @@
 package forge.trackable;
 
 import forge.card.CardRarity;
+import forge.game.GameType;
+import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
 import forge.trackable.TrackableTypes;
 import forge.trackable.TrackableTypes.TrackableType;
@@ -114,7 +116,20 @@ public enum TrackableProperty {
     BandsWithDefenders(null),
     BandsWithBlockers(null),
     AttackersWithPlannedBlockers(null),
-    BandsWithPlannedBlockers(null);
+    BandsWithPlannedBlockers(null),
+
+    GameType(TrackableTypes.EnumType(GameType.class)),
+    Turn(TrackableTypes.IntegerType),
+    WinningTeam(TrackableTypes.IntegerType),
+    MatchOver(TrackableTypes.BooleanType),
+    NumGamesInMatch(TrackableTypes.IntegerType),
+    NumPlayedGamesInMatch(TrackableTypes.IntegerType),
+    StormCount(TrackableTypes.IntegerType),
+    GameOver(TrackableTypes.BooleanType),
+    PoisonCountersToLose(TrackableTypes.IntegerType),
+    GameLog(TrackableTypes.PlayerViewType),
+    PlayerTurn(TrackableTypes.PlayerViewType),
+    Phase(TrackableTypes.EnumType(PhaseType.class));
 
     private final TrackableType<?> type;
 

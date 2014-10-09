@@ -227,7 +227,7 @@ public class ManaCostAdjustment {
                     if (activator == null ) {
                         return;
                     }
-                    if (CardLists.filterControlledBy(activator.getGame().getStack().getCardsCastThisTurn(),
+                    if (CardLists.filterControlledBy(activator.getGame().getStack().getSpellsCastThisTurn(),
                             activator).size() > 0) {
                         return;
                     }
@@ -368,7 +368,7 @@ public class ManaCostAdjustment {
                     if (activator == null ) {
                         return;
                     }
-                    if (CardLists.filterControlledBy(activator.getGame().getStack().getCardsCastThisTurn(),
+                    if (CardLists.filterControlledBy(activator.getGame().getStack().getSpellsCastThisTurn(),
                             activator).size() > 0) {
                         return;
                     }

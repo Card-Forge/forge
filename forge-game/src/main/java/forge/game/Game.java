@@ -97,7 +97,7 @@ public class Game {
     private GameOutcome outcome;
     private boolean disableAutoYields;
 
-    private final GameView view = new GameView(); 
+    private final GameView view; 
 
     public Game(List<RegisteredPlayer> players0, GameRules rules0, Match match0) { /* no more zones to map here */
         rules = rules0;
@@ -147,6 +147,8 @@ public class Game {
         endOfTurn = new EndOfTurn(this);
         endOfCombat = new Phase(PhaseType.COMBAT_END);
 
+        view = new GameView(this);
+
         subscribeToEvents(gameLog.getEventVisitor());
     }
 
@@ -155,9 +157,14 @@ public class Game {
     }
 
     /**
+     * Gets the players who are still fighting to win.
+     */
+    public final List<Player> getPlayers() {
+        return roIngamePlayers;
+    }
+
+    /**
      * Gets the players who are still fighting to win, in turn order.
-     * 
-     * @return the players
      */
     public final List<Player> getPlayersInTurnOrder() {
     	if (turnOrder.isDefaultDirection()) {
@@ -165,130 +172,73 @@ public class Game {
     	}
     	return roIngamePlayersReversed;
     }
-    
-    /**
-     * Gets the players who are still fighting to win.
-     * 
-     * @return the players
-     */
-    public final List<Player> getPlayers() {
-    	return roIngamePlayers;
-    }
 
     /**
      * Gets the players who participated in match (regardless of outcome).
      * <i>Use this in UI and after match calculations</i>
-     * 
-     * @return the players
      */
     public final List<Player> getRegisteredPlayers() {
         return allPlayers;
     }
 
-    /**
-     * Gets the cleanup step.
-     * 
-     * @return the cleanup step
-     */
+    public final Untap getUntap() {
+        return untap;
+    }
+    public final Upkeep getUpkeep() {
+        return upkeep;
+    }
+    public final Phase getEndOfCombat() {
+        return endOfCombat;
+    }
+    public final EndOfTurn getEndOfTurn() {
+        return endOfTurn;
+    }
     public final Phase getCleanup() {
         return cleanup;
     }
 
-    /**
-     * Gets the end of turn.
-     * 
-     * @return the endOfTurn
-     */
-    public final EndOfTurn getEndOfTurn() {
-        return endOfTurn;
-    }
-
-    /**
-     * Gets the end of combat.
-     * 
-     * @return the endOfCombat
-     */
-    public final Phase getEndOfCombat() {
-        return endOfCombat;
-    }
-
-    /**
-     * Gets the upkeep.
-     * 
-     * @return the upkeep
-     */
-    public final Upkeep getUpkeep() {
-        return upkeep;
-    }
-
-    /**
-     * Gets the untap.
-     * 
-     * @return the upkeep
-     */
-    public final Untap getUntap() {
-        return untap;
-    }
-
-    /**
-     * Gets the phaseHandler.
-     * 
-     * @return the phaseHandler
-     */
     public final PhaseHandler getPhaseHandler() {
         return phaseHandler;
     }
+    public final void updateTurnForView() {
+        view.updateTurn(phaseHandler);
+    }
+    public final void updatePhaseForView() {
+        view.updatePhase(phaseHandler);
+    }
+    public final void updatePlayerTurnForView() {
+        view.updatePlayerTurn(phaseHandler);
+    }
 
-    /**
-     * Gets the stack.
-     * 
-     * @return the stack
-     */
     public final MagicStack getStack() {
         return stack;
     }
+    public final void updateStackForView() {
+        view.updateStack(stack);
+    }
 
-    /**
-     * Gets the static effects.
-     * 
-     * @return the staticEffects
-     */
     public final StaticEffects getStaticEffects() {
         return staticEffects;
     }
 
-    /**
-     * Gets the trigger handler.
-     * 
-     * @return the triggerHandler
-     */
     public final TriggerHandler getTriggerHandler() {
         return triggerHandler;
     }
 
-    /**
-     * Gets the combat.
-     * 
-     * @return the combat
-     */
     public final Combat getCombat() {
         return getPhaseHandler().getCombat();
     }
+    public final void updateCombatForView() {
+        view.updateCombat(getCombat());
+    }
 
-    /**
-     * Gets the game log.
-     * 
-     * @return the game log
-     */
     public final GameLog getGameLog() {
         return gameLog;
     }
+    public final void updateGameLogForView() {
+        view.updateGameLog(gameLog);
+    }
 
-    /**
-     * Gets the stack zone.
-     * 
-     * @return the stackZone
-     */
     public final Zone getStackZone() {
         return stackZone;
     }
@@ -311,37 +261,25 @@ public class Game {
     }
     
     /**
-     * Get the turn order.
-     * @return the Direction in which the turn order of this Game currently
-     * proceeds.
+     * The Direction in which the turn order of this Game currently proceeds.
      */
     public final Direction getTurnOrder() {
     	return turnOrder;
     }
-    
     public final void reverseTurnOrder() {
     	turnOrder = turnOrder.getOtherDirection();
     }
-
     public final void resetTurnOrder() {
     	turnOrder = Direction.getDefaultDirection();
     }
 
     /**
      * Create and return the next timestamp.
-     * 
-     * @return the next timestamp
      */
     public final long getNextTimestamp() {
         timestamp = getTimestamp() + 1;
         return getTimestamp();
     }
-
-    /**
-     * Gets the timestamp.
-     * 
-     * @return the timestamp
-     */
     public final long getTimestamp() {
         return timestamp;
     }
@@ -350,24 +288,14 @@ public class Game {
         return outcome;
     }
 
-    /**
-     * @return the replacementHandler
-     */
     public ReplacementHandler getReplacementHandler() {
         return replacementHandler;
     }
 
-    /**
-     * @return the gameOver
-     */
     public synchronized boolean isGameOver() {
         return age == GameStage.GameOver;
     }
 
-    /**
-     * @param reason
-     * @param go the gameOver to set
-     */
     public synchronized void setGameOver(GameEndReason reason) {
         age = GameStage.GameOver;
         for (Player p : allPlayers) {
@@ -380,9 +308,11 @@ public class Game {
 
         final GameOutcome result = new GameOutcome(reason, getRegisteredPlayers());
         result.setTurnsPlayed(getPhaseHandler().getTurn());
-        
+
         outcome = result;
         match.addGamePlayed(this);
+
+        view.updateGameOver(this);
 
         // The log shall listen to events and generate text internally
         fireEvent(new GameEventGameOutcome(result, match.getPlayedGames()));
@@ -544,10 +474,6 @@ public class Game {
         return position;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param p
-     */
     public void onPlayerLost(Player p) {
         ingamePlayers.remove(p);
 
@@ -571,23 +497,13 @@ public class Game {
         events.register(subscriber);
     }
 
-    /**
-     * @return the type of game (Constructed/Limited/Planechase/etc...)
-     */
     public GameRules getRules() {
         return rules;
     }
 
-    /**
-     * @return the activePlane
-     */
     public List<Card> getActivePlanes() {
         return activePlanes;
     }
-
-    /**
-     * @param activePlane0 the activePlane to set
-     */
     public void setActivePlanes(List<Card> activePlane0) {
         activePlanes = activePlane0;
     }
@@ -604,7 +520,7 @@ public class Game {
             Card c = getCardsIn(ZoneType.Command).get(i);
             if (c.isScheme() && !c.isType("Ongoing")) {
                 boolean foundonstack = false;
-                for (SpellAbilityStackInstance si : getStack()) {
+                for (SpellAbilityStackInstance si : stack) {
                     if (si.getSourceCard().equals(c)) {
                         foundonstack = true;
                         break;
@@ -719,7 +635,6 @@ public class Game {
                 chooseRandomCardsForAnte(player, anteed);
             }
         }
-        
         return anteed;
     }
 

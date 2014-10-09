@@ -4029,7 +4029,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                     if (!CardUtil.getColors(this).hasAnyColor(mask))
                         return false;
                 } else if (restriction.equals("LastCastThisTurn")) {
-                    final List<Card> c = game.getStack().getCardsCastThisTurn();
+                    final List<Card> c = game.getStack().getSpellsCastThisTurn();
                     if (c.isEmpty() || !sharesColorWith(c.get(c.size() - 1))) {
                         return false;
                     }

@@ -1029,7 +1029,7 @@ public class CardFactoryUtil {
             return doXMath(c.getFirstSpellAbility().getTotalManaSpent(), m, c);
         }
         if (sq[0].equals("StormCount")) {
-            return doXMath(game.getStack().getCardsCastThisTurn().size() - 1, m, c);
+            return doXMath(game.getStack().getSpellsCastThisTurn().size() - 1, m, c);
         }
         if (sq[0].equals("DamageDoneThisTurn")) {
             return doXMath(c.getDamageDoneThisTurn(), m, c);
