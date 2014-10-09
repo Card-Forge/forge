@@ -1424,6 +1424,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final ManaPool getManaPool() {
         return manaPool;
     }
+    public void updateManaForView() {
+        view.updateMana(this);
+    }
 
     public final int getNumPowerSurgeLands() {
         return numPowerSurgeLands;
