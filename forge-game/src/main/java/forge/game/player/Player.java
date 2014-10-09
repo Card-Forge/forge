@@ -1289,20 +1289,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final List<Card> mill(final int n) {
         return mill(n, ZoneType.Graveyard, false);
     }
-
-    /**
-     * <p>
-     * mill.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     * @param zone
-     *            a {@link java.lang.String} object.
-     * @param bottom
-     *            a boolean.
-     * @return the card list
-     */
     public final List<Card> mill(final int n, final ZoneType zone, final boolean bottom) {
         final List<Card> lib = new ArrayList<Card>(getCardsIn(ZoneType.Library));
         final List<Card> milled = new ArrayList<Card>();
@@ -1314,20 +1300,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         for (int i = 0; i < max; i++) {
             if (bottom) {
                 milled.add(game.getAction().moveTo(destination, lib.get(lib.size() - 1)));
-            } else {
+            }
+            else {
                 milled.add(game.getAction().moveTo(destination, lib.get(i)));
             }
         }
-
         return milled;
     }
 
-    // //////////////////////////////
-    /**
-     * <p>
-     * shuffle.
-     * </p>
-     */
     public final void shuffle(final SpellAbility sa) {
         final List<Card> list = Lists.newArrayList(getCardsIn(ZoneType.Library));
 
@@ -1366,22 +1346,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         // Play the shuffle sound
         game.fireEvent(new GameEventShuffle(this));
-    } // shuffle
-    // //////////////////////////////
+    }
 
-    // //////////////////////////////
-
-
-    // /////////////////////////////
-
-    /**
-     * <p>
-     * playLand.
-     * </p>
-     * 
-     * @param land
-     *            a {@link forge.game.card.Card} object.
-     */
     public final boolean playLand(final Card land, final boolean ignoreZoneAndTiming) {
         // Dakkon Blackblade Avatar will use a similar effect
         if (canPlayLand(land, ignoreZoneAndTiming)) {
@@ -1404,23 +1370,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         return false;
     }
 
-    /**
-     * <p>
-     * canPlayLand.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean canPlayLand(final Card land) {
         return canPlayLand(land, false);
     }
-    /**
-     * <p>
-     * canPlayLand.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean canPlayLand(Card land, final boolean ignoreZoneAndTiming) {
         if (!ignoreZoneAndTiming && !canCastSorcery()) {
             return false;
@@ -1466,226 +1418,76 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (landsPlayedThisTurn < adjMax) {
             return true;
         }
-
         return false;
     }
 
-    /**
-     * Gets the mana pool.
-     * 
-     * @return the mana pool
-     */
     public final ManaPool getManaPool() {
         return manaPool;
     }
 
-    // /////////////////////////////
-    // //
-    // // properties about the player and his/her cards/game status
-    // //
-    // /////////////////////////////
-
-    /**
-     * <p>
-     * Getter for the field <code>numPowerSurgeLands</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
     public final int getNumPowerSurgeLands() {
         return numPowerSurgeLands;
     }
-
-    /**
-     * <p>
-     * Setter for the field <code>numPowerSurgeLands</code>.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     * @return a int.
-     */
     public final int setNumPowerSurgeLands(final int n) {
         numPowerSurgeLands = n;
         return numPowerSurgeLands;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>lastDrawnCard</code>.
-     * </p>
-     * 
-     * @return a {@link forge.game.card.Card} object.
-     */
     public final Card getLastDrawnCard() {
         return lastDrawnCard;
     }
-
-    /**
-     * <p>
-     * Setter for the field <code>lastDrawnCard</code>.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a {@link forge.game.card.Card} object.
-     */
     private final Card setLastDrawnCard(final Card c) {
         lastDrawnCard = c;
         return lastDrawnCard;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>namedCard</code>.
-     * </p>
-     * 
-     * @return a String.
-     */
     public final String getNamedCard() {
         return namedCard;
     }
-
-    /**
-     * <p>
-     * Setter for the field <code>namedCard</code>.
-     * </p>
-     * 
-     * @param s
-     *            a {@link forge.game.card.Card} object.
-     * @return
-     * @return a {@link forge.game.card.Card} object.
-     */
     public final void setNamedCard(final String s) {
         namedCard = s;
     }
-    /**
-     * <p>
-     * getTurn.
-     * </p>
-     * 
-     * @return a int.
-     */
+
     public final int getTurn() {
         return stats.getTurnsPlayed();
     }
 
-    /**
-     * <p>
-     * incrementTurn.
-     * </p>
-     */
     public final void incrementTurn() {
         stats.nextTurn();
     }
 
-    /**
-     * <p>
-     * getActivateLoyaltyAbilityThisTurn.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean getActivateLoyaltyAbilityThisTurn() {
         return activateLoyaltyAbilityThisTurn;
     }
-
-    /**
-     * <p>
-     * Setter for the field <code>activateLoyaltyAbilityThisTurn</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
     public final void setActivateLoyaltyAbilityThisTurn(final boolean b) {
         activateLoyaltyAbilityThisTurn = b;
     }
- 
-    /**
-     * <p>
-     * getAttackedWithCreatureThisTurn.
-     * </p>
-     * 
-     * @return a boolean.
-     */
+
     public final boolean getAttackedWithCreatureThisTurn() {
         return attackedWithCreatureThisTurn;
     }
-
-    /**
-     * <p>
-     * Setter for the field <code>attackedWithCreatureThisTurn</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
     public final void setAttackedWithCreatureThisTurn(final boolean b) {
         attackedWithCreatureThisTurn = b;
     }
 
-    /**
-     * <p>
-     * Gets the number of attackers declared by Player this turn.
-     * </p>
-     *
-     * @return a boolean.
-     */
     public final int getAttackersDeclaredThisTurn() {
         return attackersDeclaredThisTurn;
     }
-
-    /**
-     * <p>
-     * Increase number of attackers declared by Player this turn.
-     * </p>
-     *
-     */
     public final void incrementAttackersDeclaredThisTurn() {
         attackersDeclaredThisTurn++;
     }
-
-    /**
-     * <p>
-     * Resets number of attackers declared by Player this turn.
-     * </p>
-     *
-     */
     public final void resetAttackersDeclaredThisTurn() {
         attackersDeclaredThisTurn = 0;
     }
 
-    // Game win/loss
-
-    /**
-     * <p>
-     * altWinConditionMet.
-     * </p>
-     * 
-     * @param sourceName
-     *            the source name
-     */
     public final void altWinBySpellEffect(final String sourceName) {
         if (cantWin()) {
             System.out.println("Tried to win, but currently can't.");
             return;
         }
         setOutcome(PlayerOutcome.altWin(sourceName));
-
     }
 
-    /**
-     * <p>
-     * altLoseConditionMet.
-     * </p>
-     * 
-     * @param state
-     *            the state
-     * @param spellName
-     *            the spell name
-     * @return a boolean.
-     */
     public final boolean loseConditionMet(final GameLossReason state, final String spellName) {
         if (state != GameLossReason.OpponentWon) {
             if (cantLose()) {
@@ -1702,51 +1504,25 @@ public class Player extends GameEntity implements Comparable<Player> {
                 return false;
             }
         }
-
         setOutcome(PlayerOutcome.loss(state, spellName));
         return true;
     }
 
-    /**
-     * Concede.
-     */
     public final void concede() { // No cantLose checks - just lose
         setOutcome(PlayerOutcome.concede());
     }
 
-    /**
-     * <p>
-     * cantLose.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean cantLose() {
         if (getOutcome() != null && getOutcome().lossState == GameLossReason.Conceded) {
             return false;
         }
-
         return (hasKeyword("You can't lose the game.") || Iterables.any(getOpponents(), Predicates.CANT_WIN));
     }
 
-    /**
-     * <p>
-     * cantLoseForZeroOrLessLife.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean cantLoseForZeroOrLessLife() {
         return (hasKeyword("You don't lose the game for having 0 or less life."));
     }
 
-    /**
-     * <p>
-     * cantWin.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean cantWin() {
         boolean isAnyOppLoseProof = false;
         for (Player p : game.getPlayers()) {
@@ -1759,13 +1535,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return hasKeyword("You can't win the game.") || isAnyOppLoseProof;
     }
 
-    /**
-     * <p>
-     * hasLost.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean checkLoseCondition() {
         // Just in case player already lost
         if (getOutcome() != null) {
@@ -1797,7 +1566,6 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
             }
         }
-
         return false;
     }
 
@@ -1811,63 +1579,27 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         // in multiplayer game one player's win is replaced by all other's lose (rule 103.4h)
         // so if someone cannot lose, the game appears to continue
-
         return getOutcome() != null && getOutcome().lossState == null;
     }
 
-    /**
-     * <p>
-     * hasMetalcraft.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean hasMetalcraft() {
         final List<Card> list = CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.ARTIFACTS);
         return list.size() >= 3;
     }
 
-    /**
-     * <p>
-     * hasThreshold.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean hasThreshold() {
         return getZone(ZoneType.Graveyard).size() >= 7;
     }
 
-    /**
-     * <p>
-     * hasHellbent.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean hasHellbent() {
         return getZone(ZoneType.Hand).isEmpty();
     }
 
-    /**
-     * <p>
-     * hasLandfall.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean hasLandfall() {
         final List<Card> list = getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null);
         return Iterables.any(list, CardPredicates.Presets.LANDS);
     }
 
-    /**
-     * <p>
-     * hasBloodthirst.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean hasBloodthirst() {
         for (Player opp : getOpponents()) {
             if (opp.getAssignedDamage() > 0) {
@@ -1877,14 +1609,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return false;
     }
 
-    
-    /**
-     * <p>
-     * hasFerocious.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public boolean hasFerocious() {
         final List<Card> list = getCreaturesInPlay();
         final List<Card> ferocious = CardLists.filter(list, new Predicate<Card>() {
@@ -1896,13 +1620,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return !ferocious.isEmpty();
     }
 
-    /**
-     * <p>
-     * getBloodthirstAmount.
-     * </p>
-     * 
-     * @return a int.
-     */
     public final int getBloodthirstAmount() {
         int blood = 0;
         for (Player opp : getOpponents()) {
@@ -1911,35 +1628,15 @@ public class Player extends GameEntity implements Comparable<Player> {
         return blood;
     }
 
-    /**
-     * <p>
-     * hasProwl.
-     * </p>
-     * 
-     * @param type
-     *            the type
-     * @return a boolean.
-     */
     public final boolean hasProwl(final String type) {
         if (prowl.contains("AllCreatureTypes")) {
             return true;
         }
         return prowl.contains(type);
     }
-
-    /**
-     * Adds the prowl type.
-     * 
-     * @param type
-     *            the type
-     */
     public final void addProwlType(final String type) {
         prowl.add(type);
     }
-
-    /**
-     * Reset prowl.
-     */
     public final void resetProwl() {
         prowl = new ArrayList<String>();
     }
@@ -1958,25 +1655,17 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void setNumManaConversion(final int l) {
         numManaConversion = l;
     }
-
     public final boolean hasManaConversion() {
         return numManaConversion < keywords.getAmount("You may spend mana as though"
                 + " it were mana of any color to cast a spell this turn.");
     }
-
     public final void incNumManaConversion() {
         numManaConversion++;
     }
-
     public final void decNumManaConversion() {
         numManaConversion--;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.GameEntity#isValid(java.lang.String, forge.Player, forge.Card)
-     */
     @Override
     public final boolean isValid(final String restriction, final Player sourceController, final Card source) {
         final String[] incR = restriction.split("\\.");
@@ -2014,16 +1703,9 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
             }
         }
-
         return true;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.GameEntity#hasProperty(java.lang.String, forge.Player,
-     * forge.Card)
-     */
     @Override
     public final boolean hasProperty(final String property, final Player sourceController, final Card source) {
         if (property.equals("You")) {
@@ -2212,7 +1894,6 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
             }
         }
-
         return true;
     }
 
