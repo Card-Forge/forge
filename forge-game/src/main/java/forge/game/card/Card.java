@@ -4995,6 +4995,11 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             if (!isCommander) {
                 return false;
             }
+        } else if (property.startsWith("HasSVar")) {
+        	final String svar = property.substring(8);
+        	if (!hasSVar(svar)) {
+                return false;
+            }
         } else {
             if (!isType(property)) {
                 return false;
