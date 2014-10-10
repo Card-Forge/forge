@@ -245,7 +245,7 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.ChosenPlayer);
     }
     void updateChosenPlayer(Card c) {
-        set(TrackableProperty.ChosenPlayer, c.getChosenPlayer());
+        set(TrackableProperty.ChosenPlayer, PlayerView.get(c.getChosenPlayer()));
     }
 
     public Direction getChosenDirection() {
