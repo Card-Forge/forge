@@ -1,14 +1,13 @@
 package forge.game.combat;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
 import forge.trackable.TrackableObject;
@@ -18,6 +17,12 @@ import forge.trackable.TrackableProperty;
 public class CombatView extends TrackableObject {
     public CombatView() {
         super(-1); //ID not needed
+        set(TrackableProperty.AttackersWithDefenders, new HashMap<CardView, GameEntityView>());
+        set(TrackableProperty.AttackersWithBlockers, new HashMap<CardView, Iterable<CardView>>());
+        set(TrackableProperty.BandsWithDefenders, new HashMap<Iterable<CardView>, GameEntityView>());
+        set(TrackableProperty.BandsWithBlockers, new HashMap<Iterable<CardView>, Iterable<CardView>>());
+        set(TrackableProperty.AttackersWithPlannedBlockers, new HashMap<CardView, Iterable<CardView>>());
+        set(TrackableProperty.BandsWithPlannedBlockers, new HashMap<Iterable<CardView>, Iterable<CardView>>());
     }
     private Map<CardView, GameEntityView> getAttackersWithDefenders() {
         return get(TrackableProperty.AttackersWithDefenders);
@@ -51,7 +56,7 @@ public class CombatView extends TrackableObject {
     }
 
     public Iterable<GameEntityView> getDefenders() {
-        return Sets.newHashSet(getAttackersWithDefenders().values());
+        return getAttackersWithDefenders().values();
     }
 
     public GameEntityView getDefender(final CardView attacker) {
@@ -132,11 +137,9 @@ public class CombatView extends TrackableObject {
     }
 
     public void addAttackingBand(final Iterable<CardView> attackingBand, final GameEntityView defender, final Iterable<CardView> blockers, final Iterable<CardView> plannedBlockers) {
-        final List<CardView> attackingBandCopy = Lists.newArrayList(attackingBand),
-                blockersCopy, plannedBlockersCopy;
-
-        blockersCopy = blockers == null ? null : Lists.newArrayList(blockers);
-        plannedBlockersCopy = plannedBlockers == null ? null : Lists.newArrayList(plannedBlockers);
+        final List<CardView> attackingBandCopy = Lists.newArrayList(attackingBand);
+        final List<CardView> blockersCopy = blockers == null ? null : Lists.newArrayList(blockers);
+        final List<CardView> plannedBlockersCopy = plannedBlockers == null ? null : Lists.newArrayList(plannedBlockers);
 
         for (final CardView attacker : attackingBandCopy) {
             this.getAttackersWithDefenders().put(attacker, defender);

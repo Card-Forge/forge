@@ -70,7 +70,7 @@ public class VGameMenu extends FDropDownMenu {
                                 //if re-enabling auto-yields, auto-yield to current ability on stack if applicable
                                 SpellAbility ability = game.getStack().peekAbility();
                                 if (ability != null && ability.isAbility() && localPlayer.getController().shouldAutoYield(ability.toUnsuppressedString())) {
-                                    MatchUtil.getGameView().passPriority();
+                                    MatchUtil.getHumanController().passPriority();
                                 }
                             }
                         }

@@ -2,7 +2,7 @@ package forge.util.gui;
 
 import forge.GuiBase;
 import forge.assets.FSkinProp;
-import forge.view.CardView;
+import forge.game.card.CardView;
 
 public class SOptionPane {
     public static final FSkinProp QUESTION_ICON = FSkinProp.ICO_QUESTION;

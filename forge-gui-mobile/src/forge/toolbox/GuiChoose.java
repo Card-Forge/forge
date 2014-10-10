@@ -3,8 +3,8 @@ package forge.toolbox;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 
+import forge.game.card.CardView;
 import forge.util.Callback;
-import forge.view.CardView;
 
 import org.apache.commons.lang3.StringUtils;
 

@@ -3,8 +3,8 @@ package forge.toolbox;
 import forge.Graphics;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
+import forge.game.card.CardView;
 import forge.util.Utils;
-import forge.view.CardView;
 
 public class FCardPanel extends FDisplayObject {
     public static final float ASPECT_RATIO = 3.5f / 2.5f;

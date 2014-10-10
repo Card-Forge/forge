@@ -27,6 +27,7 @@ import com.google.common.collect.Lists;
 
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
+import forge.game.GameView;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -38,8 +39,6 @@ import forge.screens.match.GameLogPanel;
 import forge.screens.match.controllers.CLog;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinFont;
-import forge.view.IGameView;
-import forge.view.LocalGameView;
 
 /**
  * Assembles Swing components of game log report.
@@ -55,7 +54,7 @@ public enum VLog implements IVDoc<CLog> {
     private final List<GameLogEntry> displayedLogEntries = Lists.newArrayList();
 
     // Used to determine when a new game has started.
-    private IGameView gameLogModel = null;
+    private GameView gameLogModel = null;
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
@@ -128,7 +127,7 @@ public enum VLog implements IVDoc<CLog> {
      */
     public void updateConsole() {
         if (isGameLogConsoleVisible()) {
-            LocalGameView model = MatchUtil.getGameView();
+            GameView model = MatchUtil.getGameView();
             resetDisplayIfNewGame(model);
             displayNewGameLogEntries(model);
             // Important : refreshLayout() needs to be called every update.
@@ -140,7 +139,7 @@ public enum VLog implements IVDoc<CLog> {
         return parentCell.getSelected().equals(this);
     }
 
-    private void resetDisplayIfNewGame(final IGameView model) {
+    private void resetDisplayIfNewGame(final GameView model) {
         if (this.gameLogModel != model) {
             gameLog.reset();
             this.displayedLogEntries.clear();
@@ -167,17 +166,17 @@ public enum VLog implements IVDoc<CLog> {
         p.add(gameLog, "w 10:100%, h 100%");
     }
 
-    private void displayNewGameLogEntries(final IGameView model) {
+    private void displayNewGameLogEntries(final GameView model) {
         List<GameLogEntry> newLogEntries = Lists.reverse(getNewGameLogEntries(model));
         if (newLogEntries.size() > 0) {
             addNewLogEntriesToJPanel(newLogEntries);
         }
     }
 
-    private List<GameLogEntry> getNewGameLogEntries(final IGameView model) {
+    private List<GameLogEntry> getNewGameLogEntries(final GameView model) {
         String logEntryType = FModel.getPreferences().getPref(FPref.DEV_LOG_ENTRY_TYPE);
         GameLogEntryType logVerbosityFilter = GameLogEntryType.valueOf(logEntryType);
-        List<GameLogEntry> logEntries = model.getLogEntries(logVerbosityFilter);
+        List<GameLogEntry> logEntries = model.getGameLog().getLogEntries(logVerbosityFilter);
         // Set subtraction - remove all log entries from new list which are already displayed.
         logEntries.removeAll(this.displayedLogEntries);
         return logEntries;

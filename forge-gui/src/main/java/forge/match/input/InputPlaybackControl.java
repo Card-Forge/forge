@@ -3,9 +3,8 @@ package forge.match.input;
 import forge.control.FControlGamePlayback;
 import forge.game.Game;
 import forge.game.phase.PhaseHandler;
+import forge.game.player.PlayerView;
 import forge.match.MatchUtil;
-import forge.view.LocalGameView;
-import forge.view.PlayerView;
 
 public class InputPlaybackControl extends InputSyncronizedBase implements InputSynchronized {
     private static final long serialVersionUID = 7979208993306642072L;
@@ -24,17 +23,10 @@ public class InputPlaybackControl extends InputSyncronizedBase implements InputS
     }
 
     @Override
-    public LocalGameView getGameView() {
-        return MatchUtil.getGameView();
-    }
-    @Override
     public PlayerView getOwner() {
-        return getGameView().getLocalPlayerView();
+        return MatchUtil.getHumanController().getLocalPlayerView();
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.input.InputBase#showMessage()
-     */
     @Override
     protected void showMessage() {
         setPause(false);

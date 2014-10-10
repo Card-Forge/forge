@@ -1,12 +1,24 @@
 package forge.game;
 
 import forge.game.card.CardView;
+import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 
 public abstract class GameEntityView extends TrackableObject {
     public static GameEntityView get(GameEntity e) {
         return e == null ? null : e.getView();
+    }
+
+    public static TrackableCollection<GameEntityView> getEntityCollection(Iterable<? extends GameEntity> entities) {
+        if (entities == null) {
+            return null;
+        }
+        TrackableCollection<GameEntityView> collection = new TrackableCollection<GameEntityView>();
+        for (GameEntity e : entities) {
+            collection.add(e.getView());
+        }
+        return collection;
     }
 
     protected GameEntityView(int id0) {

@@ -33,12 +33,12 @@ import com.google.common.collect.Lists;
 import forge.FThreads;
 import forge.Singletons;
 import forge.UiCommand;
+import forge.game.card.CardView;
+import forge.game.player.PlayerView;
 import forge.gui.framework.ICDoc;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
-import forge.view.CardView;
-import forge.view.PlayerView;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.HandArea;
 import forge.view.arcane.util.Animation;
@@ -46,7 +46,6 @@ import forge.view.arcane.util.CardPanelMouseAdapter;
 
 /**
  * Controls Swing components of a player's hand instance.
- * 
  */
 public class CHand implements ICDoc {
     private final PlayerView player;
@@ -108,7 +107,7 @@ public class CHand implements ICDoc {
         
         final List<CardView> cards;
         synchronized (player) {
-            cards = ImmutableList.copyOf(player.getHandCards());
+            cards = ImmutableList.copyOf(player.getHand());
         }
 
         synchronized (ordering) {

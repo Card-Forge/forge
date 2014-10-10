@@ -13,6 +13,8 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinColor.Colors;
+import forge.game.card.CardView;
+import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.match.MatchUtil;
 import forge.model.FModel;
@@ -22,8 +24,6 @@ import forge.screens.match.MatchScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
-import forge.view.CardView;
-import forge.view.PlayerView;
 
 public class VPlayerPanel extends FContainer {
     private static final FSkinFont LIFE_FONT = FSkinFont.get(18);
@@ -312,7 +312,7 @@ public class VPlayerPanel extends FContainer {
 
         @Override
         public boolean tap(float x, float y, int count) {
-            MatchUtil.getGameView().selectPlayer(player, null); //treat tapping on life the same as tapping on the avatar
+            MatchUtil.getHumanController().selectPlayer(player, null); //treat tapping on life the same as tapping on the avatar
             return true;
         }
 
@@ -458,7 +458,7 @@ public class VPlayerPanel extends FContainer {
         }
 
         @Override
-        protected void refreshCardPanels(List<CardView> model) {
+        protected void refreshCardPanels(Iterable<CardView> model) {
             int oldCount = getCount();
             super.refreshCardPanels(model);
             int newCount = getCount();

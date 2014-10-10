@@ -100,6 +100,9 @@ public class Game {
     private final GameView view; 
 
     public Game(List<RegisteredPlayer> players0, GameRules rules0, Match match0) { /* no more zones to map here */
+        Card.clearCache();
+        Player.clearCache();
+
         rules = rules0;
         match = match0;
         List<Player> players = new ArrayList<Player>();

@@ -3,10 +3,10 @@ package forge.screens.match.views;
 import java.util.ArrayList;
 
 import forge.FThreads;
+import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
-import forge.view.PlayerView;
 
 public class VZoneDisplay extends VCardDisplayArea {
     private final PlayerView player;

@@ -23,11 +23,11 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 
 import forge.ImageCache;
+import forge.game.card.CardView.CardStateView;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.toolbox.CardFaceSymbols;
 import forge.toolbox.FSkin.SkinIcon;
-import forge.view.CardView.CardStateView;
 
 /**
  * Common image-related routines specific to Forge images. 

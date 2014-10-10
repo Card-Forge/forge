@@ -32,9 +32,9 @@ import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 import javax.swing.KeyStroke;
 
+import forge.game.card.CardView;
 import forge.screens.match.VMatchUI;
 import forge.screens.match.views.VField;
-import forge.view.CardView;
 import forge.view.arcane.CardPanel;
 
 /**

@@ -25,6 +25,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
+import forge.game.card.CardView;
+import forge.game.player.PlayerView;
 import forge.gui.CardPicturePanel;
 import forge.gui.WrapLayout;
 import forge.gui.framework.DragCell;
@@ -35,8 +37,6 @@ import forge.match.MatchUtil;
 import forge.screens.match.controllers.CAntes;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
-import forge.view.CardView;
-import forge.view.PlayerView;
 
 /** 
  * Assembles Swing components of card ante area.
@@ -121,14 +121,14 @@ public enum VAntes implements IVDoc<CAntes> {
         pnl.removeAll();
 
         for (final PlayerView p : MatchUtil.getGameView().getPlayers()) {
-            for (final CardView c : p.getAnteCards()) {
-                final AntePanel pnlTemp = new AntePanel(c);
-                allAntes.add(pnlTemp);
+            Iterable<CardView> ante = p.getAnte();
+            if (ante != null) {
+                for (final CardView c : ante) {
+                    final AntePanel pnlTemp = new AntePanel(c);
+                    allAntes.add(pnlTemp);
+                    pnl.add(pnlTemp);
+                }
             }
-        }
-
-        for(AntePanel ap : allAntes) {
-            pnl.add(ap);
         }
     }
 

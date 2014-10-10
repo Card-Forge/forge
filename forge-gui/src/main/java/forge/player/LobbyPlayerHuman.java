@@ -23,7 +23,6 @@ public class LobbyPlayerHuman extends LobbyPlayer implements IGameEntitiesFactor
         Player player = new Player(GuiDisplayUtil.personalizeHuman(getName()), game, id);
         PlayerControllerHuman controller = new PlayerControllerHuman(game, player, this);
         player.setFirstController(controller);
-        controller.getGameView().setLocalPlayer(player);
         return player;
     }
 

@@ -20,11 +20,11 @@ import java.util.List;
 
 import forge.FThreads;
 import forge.assets.FSkinProp;
+import forge.game.GameView;
 import forge.item.PaperCard;
 import forge.quest.QuestWinLoseController;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
-import forge.view.IGameView;
 
 /**
  * <p>
@@ -44,7 +44,7 @@ public class QuestWinLose extends ControlWinLose {
      * @param view0 ViewWinLose object
      * @param match2
      */
-    public QuestWinLose(final ViewWinLose view0, IGameView lastGame) {
+    public QuestWinLose(final ViewWinLose view0, GameView lastGame) {
         super(view0, lastGame);
         controller = new QuestWinLoseController(lastGame) {
             @Override

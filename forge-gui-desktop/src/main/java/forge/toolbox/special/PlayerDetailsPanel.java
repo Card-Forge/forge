@@ -18,12 +18,12 @@ import com.google.common.base.Function;
 
 import forge.assets.FSkinProp;
 import forge.card.MagicColor;
+import forge.game.player.PlayerView;
 import forge.gui.ForgeAction;
 import forge.screens.match.controllers.CPlayers;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
-import forge.view.PlayerView;
 
 public class PlayerDetailsPanel extends JPanel {
     private static final long serialVersionUID = 8444559244193214459L;
@@ -119,14 +119,14 @@ public class PlayerDetailsPanel extends JPanel {
      * @param p0 &emsp; {@link forge.game.player.Player}
      */
     public void updateZones() {
-        this.getLblHand().setText("" + player.getnHandCards());
+        this.getLblHand().setText("" + player.getHandSize());
         final String handMaxToolTip = player.hasUnlimitedHandSize()
                 ? "no maximum hand size" : String.valueOf(player.getMaxHandSize());
         this.getLblHand().setToolTipText("Cards in hand (max: " + handMaxToolTip + ")");
-        this.getLblGraveyard().setText("" + player.getGraveCards().size());
-        this.getLblLibrary().setText("" + player.getnLibraryCards());
-        this.getLblFlashback().setText("" + player.getFlashbackCards().size());
-        this.getLblExile().setText("" + player.getExileCards().size());
+        this.getLblGraveyard().setText("" + player.getGraveyardSize());
+        this.getLblLibrary().setText("" + player.getLibrarySize());
+        this.getLblFlashback().setText("" + player.getFlashbackSize());
+        this.getLblExile().setText("" + player.getExileSize());
     }
 
     

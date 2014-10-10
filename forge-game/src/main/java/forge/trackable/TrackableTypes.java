@@ -212,10 +212,10 @@ public class TrackableTypes {
         protected GameEntityView deserialize(TrackableDeserializer td, GameEntityView oldValue) {
             switch (td.readInt()) {
             case 0:
-                int cardId = td.readInt();
+                //int cardId = td.readInt();
                 return oldValue; //TODO: lookup card by ID
             case 1:
-                int playerId = td.readInt();
+                //int playerId = td.readInt();
                 return oldValue; //TODO: lookup player by ID
             }
             return null;

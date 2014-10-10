@@ -11,14 +11,14 @@ import forge.assets.FSkinProp;
 import forge.assets.ISkinImage;
 import forge.deck.CardPool;
 import forge.game.GameEntity;
+import forge.game.GameEntityView;
+import forge.game.card.CardView;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
 import forge.item.PaperCard;
 import forge.player.PlayerControllerHuman;
 import forge.sound.IAudioClip;
 import forge.sound.IAudioMusic;
-import forge.view.CardView;
-import forge.view.GameEntityView;
 
 public interface IGuiBase {
     boolean isRunningOnDesktop();

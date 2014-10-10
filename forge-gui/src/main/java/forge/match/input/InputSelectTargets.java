@@ -10,6 +10,7 @@ import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -229,7 +230,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     private void addTarget(final GameEntity ge) {
         sa.getTargets().add(ge);
         if (ge instanceof Card) {
-            MatchUtil.setUsedToPay(getController().getCardView((Card) ge), true);
+            MatchUtil.setUsedToPay(CardView.get((Card) ge), true);
             lastTarget = (Card) ge;
         }
         final Integer val = targetDepth.get(ge);
@@ -246,7 +247,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     private void done() {
         for (final GameEntity c : targetDepth.keySet()) {
             if (c instanceof Card) {
-                MatchUtil.setUsedToPay(getController().getCardView((Card) c), false);
+                MatchUtil.setUsedToPay(CardView.get((Card) c), false);
             }
         }
 

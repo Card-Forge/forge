@@ -18,11 +18,11 @@ package forge.screens.match;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
-
 import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.assets.FSkinProp;
+import forge.game.GameView;
+import forge.game.player.PlayerView;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.FScreen;
 import forge.match.MatchUtil;
@@ -36,8 +36,6 @@ import forge.screens.home.quest.CSubmenuQuestDraft;
 import forge.screens.home.quest.VSubmenuQuestDraft;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
-import forge.view.IGameView;
-import forge.view.PlayerView;
 
 /**
  * <p>
@@ -59,7 +57,7 @@ public class QuestDraftWinLose extends ControlWinLose {
      * @param view0 ViewWinLose object
      * @param match2
      */
-    public QuestDraftWinLose(final ViewWinLose view0, final IGameView game0) {
+    public QuestDraftWinLose(final ViewWinLose view0, final GameView game0) {
         super(view0, game0);
         this.view = view0;
         qData = FModel.getQuest();
@@ -79,7 +77,7 @@ public class QuestDraftWinLose extends ControlWinLose {
         QuestController quest = FModel.getQuest();
         
         final LobbyPlayer questLobbyPlayer = GamePlayerUtil.getQuestPlayer();
-        final List<PlayerView> players = lastGame.getPlayers();
+        final Iterable<PlayerView> players = lastGame.getPlayers();
         boolean gameHadHumanPlayer = false;
         for (final PlayerView p : players) {
             if (p.getLobbyPlayer().equals(questLobbyPlayer)) {
@@ -87,33 +85,30 @@ public class QuestDraftWinLose extends ControlWinLose {
                 break;
             }
         }
-        
-        if (lastGame.isMatchOver()) {
 
+        if (lastGame.isMatchOver()) {
             String winner = lastGame.getWinningPlayer().getName();
             
             quest.getAchievements().getCurrentDraft().setWinner(winner);
             quest.save();
-            
         }
-        
+
         if (!gameHadHumanPlayer) {
-            
             if (lastGame.isMatchOver()) {
                 this.actionOnQuitMatch();
                 QuestDraftUtils.matchInProgress = false;
                 QuestDraftUtils.update();
-            } else {
+            }
+            else {
                 this.actionOnContinue();
                 QuestDraftUtils.update();
             }
             return false;
-            
         }
-        
+
         view.getBtnRestart().setEnabled(false);
         view.getBtnRestart().setVisible(false);
-        
+
         if (lastGame.isMatchOver()) {
             view.getBtnQuit().setEnabled(true);
             view.getBtnContinue().setEnabled(false);
@@ -129,7 +124,8 @@ public class QuestDraftWinLose extends ControlWinLose {
                     QuestDraftUtils.continueMatches();
                 }
             });
-        } else {
+        }
+        else {
             view.getBtnQuit().setEnabled(true);
             for (ActionListener listener : view.getBtnQuit().getActionListeners()) {
                 view.getBtnQuit().removeActionListener(listener);
@@ -146,13 +142,13 @@ public class QuestDraftWinLose extends ControlWinLose {
                 }
             });
         }
-        
+
         CSubmenuQuestDraft.SINGLETON_INSTANCE.update();
         VSubmenuQuestDraft.SINGLETON_INSTANCE.populate();
-        
+
         return false; //We're not awarding anything, so never display the custom panel.
     }
-    
+
     public final void actionOnQuitMatch() {
         CSubmenuDuels.SINGLETON_INSTANCE.update();
         CSubmenuChallenges.SINGLETON_INSTANCE.update();

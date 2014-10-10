@@ -20,10 +20,10 @@ package forge.screens.match;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
+import forge.game.card.CardView;
+import forge.game.player.PlayerView;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.util.Utils;
-import forge.view.CardView;
-import forge.view.PlayerView;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;

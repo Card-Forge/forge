@@ -20,13 +20,13 @@ package forge.screens.match.views;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
+import forge.game.player.PlayerView;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.screens.match.controllers.CHand;
 import forge.toolbox.FScrollPane;
-import forge.view.PlayerView;
 import forge.view.arcane.HandArea;
 
 /**

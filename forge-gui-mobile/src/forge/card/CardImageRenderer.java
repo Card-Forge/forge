@@ -18,9 +18,9 @@ import forge.assets.TextRenderer;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.card.mana.ManaCost;
+import forge.game.card.CardView;
+import forge.game.card.CardView.CardStateView;
 import forge.screens.FScreen;
-import forge.view.CardView;
-import forge.view.CardView.CardStateView;
 
 public class CardImageRenderer {
     private static final float BASE_IMAGE_WIDTH = 360;
@@ -166,7 +166,7 @@ public class CardImageRenderer {
         //draw mana cost for card
         float manaCostWidth = 0;
         ManaCost mainManaCost = state.getManaCost();
-        if (card.isSplitCard() && card.hasAltState()) {
+        if (card.isSplitCard() && card.getAlternate() != null) {
             //handle rendering both parts of split card
             mainManaCost = state.getManaCost();
             ManaCost otherManaCost = card.getAlternate().getManaCost();

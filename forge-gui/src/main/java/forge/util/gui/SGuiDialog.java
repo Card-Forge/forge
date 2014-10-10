@@ -2,7 +2,7 @@ package forge.util.gui;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.view.CardView;
+import forge.game.card.CardView;
 
 /** 
  * Holds player interactions using standard windows 

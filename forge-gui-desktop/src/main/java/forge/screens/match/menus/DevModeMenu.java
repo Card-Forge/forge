@@ -67,8 +67,8 @@ public class DevModeMenu implements ActionListener {
         menu.add(getMenuItem(DevMenuItem.WIN_GAME));
         menu.addSeparator();
         menu.add(getMenuItem(DevMenuItem.SETUP_GAME_STATE));
-        menu.add(getCheckboxMenuItem(DevMenuItem.PLAY_UNLIMITED_LANDS, MatchUtil.getGameView().canPlayUnlimitedLands()));
-        menu.add(getCheckboxMenuItem(DevMenuItem.VIEW_ALL, MatchUtil.getGameView().canViewAllCards()));
+        menu.add(getCheckboxMenuItem(DevMenuItem.PLAY_UNLIMITED_LANDS, MatchUtil.getHumanController().canPlayUnlimitedLands()));
+        menu.add(getCheckboxMenuItem(DevMenuItem.VIEW_ALL, MatchUtil.getHumanController().mayLookAtAllCards()));
         menu.add(getMenuItem(DevMenuItem.ADD_COUNTER));
         menu.addSeparator();
         menu.add(getMenuItem(DevMenuItem.TAP_PERMANENT));

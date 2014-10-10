@@ -83,7 +83,7 @@ public final class GameMenu {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MatchUtil.getGameView().tryUndoLastAction();
+                MatchUtil.getHumanController().tryUndoLastAction();
             }
         };
     }
@@ -201,7 +201,7 @@ public final class GameMenu {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                final VAutoYields autoYields = new VAutoYields(MatchUtil.getGameView());
+                final VAutoYields autoYields = new VAutoYields(MatchUtil.getHumanController());
                 autoYields.showAutoYields();
             }
         };

@@ -1,13 +1,12 @@
 package forge.toolbox;
 
+import forge.game.card.CardView;
 import forge.util.Callback;
-import forge.view.CardView;
 
 import org.apache.commons.lang3.StringUtils;
 
 /** 
  * Holds player interactions using standard windows 
- *
  */
 public class GuiDialog {
     private static final String[] defaultConfirmOptions = { "Yes", "No" };

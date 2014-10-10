@@ -25,12 +25,11 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.match.MatchUtil;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
-import forge.view.LocalGameView;
-import forge.view.PlayerView;
 
 /**
  * <p>
@@ -51,11 +50,8 @@ public abstract class InputBase implements java.io.Serializable, Input {
     public final PlayerControllerHuman getController() {
         return controller;
     }
-    public LocalGameView getGameView() {
-        return controller.getGameView();
-    }
     public PlayerView getOwner() {
-        return controller.getPlayerView(controller.getPlayer());
+        return controller.getPlayer().getView();
     }
 
     private boolean finished = false;
@@ -64,7 +60,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
         finished = true;
 
         if (allowAwaitNextInput()) {
-            awaitNextInput(getGameView());
+            awaitNextInput(controller);
         }
     }
 
@@ -75,7 +71,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
     private static final Timer awaitNextInputTimer = new Timer();
     private static TimerTask awaitNextInputTask;
 
-    public static void awaitNextInput(final LocalGameView gameView) {
+    public static void awaitNextInput(final PlayerControllerHuman controller) {
         //delay updating prompt to await next input briefly so buttons don't flicker disabled then enabled
         awaitNextInputTask = new TimerTask() {
             @Override
@@ -85,7 +81,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
                     public void run() {
                         synchronized (awaitNextInputTimer) {
                             if (awaitNextInputTask != null) {
-                                updatePromptForAwait(gameView);
+                                updatePromptForAwait(controller);
                                 awaitNextInputTask = null;
                             }
                         }
@@ -97,20 +93,20 @@ public abstract class InputBase implements java.io.Serializable, Input {
     }
 
     public static void waitForOtherPlayer() {
-        final LocalGameView gameView = MatchUtil.getOtherGameView();
-        if (gameView == null) { return; }
+        final PlayerControllerHuman controller = MatchUtil.getOtherHumanController();
+        if (controller == null) { return; }
 
         cancelAwaitNextInput();
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override
             public void run() {
-                updatePromptForAwait(gameView);
+                updatePromptForAwait(controller);
             }
         });
     }
 
-    private static void updatePromptForAwait(final LocalGameView gameView) {
-        PlayerView playerView = gameView.getLocalPlayerView();
+    private static void updatePromptForAwait(final PlayerControllerHuman controller) {
+        PlayerView playerView = controller.getLocalPlayerView();
         MatchUtil.getController().showPromptMessage(playerView, "Waiting for opponent...");
         ButtonUtil.update(playerView, false, false, false);
     }

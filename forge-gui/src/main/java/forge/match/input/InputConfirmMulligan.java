@@ -22,6 +22,7 @@ import java.util.List;
 
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.match.MatchUtil;
@@ -30,7 +31,6 @@ import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.ThreadUtil;
 import forge.util.gui.SGuiDialog;
-import forge.view.CardView;
  
 /**
   * <p>
@@ -102,7 +102,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
         if (isCommander) {
             // Clear the "selected" icon after clicking the done button
             for (final Card c : this.selected) {
-                MatchUtil.setUsedToPay(getController().getCardView(c), false);
+                MatchUtil.setUsedToPay(c.getView(), false);
             }
         }
         stop();
@@ -120,7 +120,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
             return false;
         }
 
-        final CardView cView = getController().getCardView(c0);
+        final CardView cView = c0.getView();
         if (isSerumPowder && SGuiDialog.confirm(cView, "Use " + cView + "'s ability?")) {
             cardSelectLocked = true;
             ThreadUtil.invokeInGameThread(new Runnable() {
@@ -138,11 +138,11 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
 
         if (isCommander) { // allow to choose cards for partial paris
             if (selected.contains(c0)) {
-                MatchUtil.setUsedToPay(getController().getCardView(c0), false);
+                MatchUtil.setUsedToPay(c0.getView(), false);
                 selected.remove(c0);
             }
             else {
-                MatchUtil.setUsedToPay(getController().getCardView(c0), true);
+                MatchUtil.setUsedToPay(c0.getView(), true);
                 selected.add(c0);
             }
             ButtonUtil.update(getOwner(), "Keep", "Exile", true, !selected.isEmpty(), true);

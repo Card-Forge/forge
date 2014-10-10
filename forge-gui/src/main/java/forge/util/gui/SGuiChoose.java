@@ -14,7 +14,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.GuiBase;
-import forge.view.CardView;
+import forge.game.card.CardView;
 
 public class SGuiChoose {
     /**

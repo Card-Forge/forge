@@ -47,7 +47,7 @@ public class LobbyPlayerAi extends LobbyPlayer implements IGameEntitiesFactory {
         Player ai = new Player(getName(), game, id);
         ai.setFirstController(createControllerFor(ai));
 
-        if( rotateProfileEachGame ) {
+        if (rotateProfileEachGame) {
             setAiProfile(AiProfileUtil.getRandomProfile());
             System.out.println(String.format("AI profile %s was chosen for the lobby player %s.", getAiProfile(), getName()));
         }

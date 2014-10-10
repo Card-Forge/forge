@@ -23,13 +23,12 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import forge.FThreads;
 import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
+import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
-import forge.view.CardView;
-import forge.view.LocalGameView;
-import forge.view.PlayerView;
-import forge.view.SpellAbilityView;
 
 /**
  * <p>
@@ -43,17 +42,17 @@ public class InputProxy implements Observer {
 
     /** The input. */
     private AtomicReference<Input> input = new AtomicReference<Input>();
-    private final LocalGameView gameView;
+    private final PlayerControllerHuman controller;
 
 //    private static final boolean DEBUG_INPUT = true; // false;
 
-    public InputProxy(final LocalGameView gameView0) {
-        gameView = gameView0;
+    public InputProxy(final PlayerControllerHuman controller0) {
+        controller = controller0;
     }
 
     @Override
     public final void update(final Observable observable, final Object obj) {
-        final Input nextInput = gameView.getInputQueue().getActualInput(gameView);
+        final Input nextInput = controller.getInputQueue().getActualInput(controller);
 /*        if(DEBUG_INPUT) 
             System.out.printf("%s ... \t%s on %s, \tstack = %s%n", 
                     FThreads.debugGetStackTraceItem(6, true), nextInput == null ? "null" : nextInput.getClass().getSimpleName(), 
@@ -64,7 +63,7 @@ public class InputProxy implements Observer {
             @Override
             public void run() {
                 Input current = getInput(); 
-                gameView.getInputQueue().syncPoint();
+                controller.getInputQueue().syncPoint();
                 //System.out.printf("\t%s > showMessage @ %s/%s during %s%n", FThreads.debugGetCurrThreadId(), nextInput.getClass().getSimpleName(), current.getClass().getSimpleName(), game.getPhaseHandler().debugPrintState());
                 current.showMessageInitial(); 
             }
@@ -99,7 +98,7 @@ public class InputProxy implements Observer {
     public final void selectPlayer(final PlayerView playerView, final ITriggerEvent triggerEvent) {
         final Input inp = getInput();
         if (inp != null) {
-            final Player player = gameView.getPlayer(playerView);
+            final Player player = Player.get(playerView);
             if (player != null) {
                 inp.selectPlayer(player, triggerEvent);
             }
@@ -109,7 +108,7 @@ public class InputProxy implements Observer {
     public final boolean selectCard(final CardView cardView, final ITriggerEvent triggerEvent) {
         final Input inp = getInput();
         if (inp != null) {
-            final Card card = gameView.getCard(cardView);
+            final Card card = Card.get(cardView);
             if (card != null) {
                 return inp.selectCard(card, triggerEvent);
             }
@@ -117,10 +116,9 @@ public class InputProxy implements Observer {
         return false;
     }
 
-    public final void selectAbility(final SpellAbilityView ab) {
+    public final void selectAbility(final SpellAbility sa) {
     	final Input inp = getInput();
         if (inp != null) {
-            final SpellAbility sa = gameView.getSpellAbility(ab);
             if (sa != null) {
                 inp.selectAbility(sa);
             }

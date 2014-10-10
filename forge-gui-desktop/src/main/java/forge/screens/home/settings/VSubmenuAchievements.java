@@ -16,6 +16,7 @@ import java.awt.event.MouseMotionListener;
 import forge.achievement.Achievement;
 import forge.achievement.AchievementCollection;
 import forge.assets.FSkinProp;
+import forge.game.card.CardView;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -30,7 +31,6 @@ import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.special.CardZoomer;
-import forge.view.ViewUtil;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -104,7 +104,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
                     IPaperCard pc = achievement.getPaperCard();
                     if (pc != null) {
                         preventMouseOut = true;
-                        CardZoomer.SINGLETON_INSTANCE.doMouseButtonZoom(ViewUtil.getCardForUi(pc));
+                        CardZoomer.SINGLETON_INSTANCE.doMouseButtonZoom(CardView.getCardForUi(pc));
                     }
                 }
             }

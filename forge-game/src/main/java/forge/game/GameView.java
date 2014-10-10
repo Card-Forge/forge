@@ -2,6 +2,9 @@ package forge.game;
 
 import java.util.List;
 
+import forge.LobbyPlayer;
+import forge.deck.Deck;
+import forge.game.GameOutcome.AnteResult;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.combat.AttackingBand;
@@ -9,23 +12,27 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatView;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.Player;
 import forge.game.player.PlayerView;
-import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.MagicStack;
-import forge.trackable.TrackableIndex;
+import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
+import forge.util.FCollection;
 
 public class GameView extends TrackableObject {
-    private final TrackableIndex<CardView> cards = new TrackableIndex<CardView>();
+    /*private final TrackableIndex<CardView> cards = new TrackableIndex<CardView>();
     private final TrackableIndex<PlayerView> players = new TrackableIndex<PlayerView>();
     private final TrackableIndex<SpellAbilityView> spellAbilities = new TrackableIndex<SpellAbilityView>();
-    private final TrackableIndex<StackItemView> stackItems = new TrackableIndex<StackItemView>();
+    private final TrackableIndex<StackItemView> stackItems = new TrackableIndex<StackItemView>();*/
+    private final TrackableCollection<PlayerView> players;
     private CombatView combatView;
+    private final Game game; //TODO: Remove this when possible before network support added
 
-    public GameView(Game game) {
+    public GameView(Game game0) {
         super(-1); //ID not needed
+        game = game0;
         set(TrackableProperty.WinningTeam, -1);
 
         GameRules rules = game.getRules();
@@ -36,6 +43,12 @@ public class GameView extends TrackableObject {
 
         set(TrackableProperty.GameLog, game.getGameLog());
         set(TrackableProperty.NumPlayedGamesInMatch, game.getMatch().getPlayedGames().size());
+
+        players = PlayerView.getCollection(game.getPlayers());
+    }
+
+    public FCollection<PlayerView>.FCollectionView getPlayers() {
+        return players.getView();
     }
 
     public boolean isCommander() {
@@ -144,5 +157,48 @@ public class GameView extends TrackableObject {
     public void deserialize() {
         /*GameStateDeserializer deserializer = new GameStateDeserializer();
         deserializer.readObject();*/
+    }
+
+    //TODO: Find better ways to make this information available to all GUIs without using the Game class
+
+    public FCollection<StackItemView>.FCollectionView getStack() {
+        return StackItemView.getCollection(game.getStack()).getView();
+    }
+
+    public boolean isMatchWonBy(LobbyPlayer questPlayer) {
+        return game.getMatch().isWonBy(questPlayer);
+    }
+
+    public Iterable<GameOutcome> getOutcomesOfMatch() {
+        return game.getMatch().getOutcomes();
+    }
+
+    public LobbyPlayer getWinningPlayer() {
+        return game.getOutcome().getWinningLobbyPlayer();
+    }
+
+    public StackItemView peekStack() {
+        return StackItemView.get(game.getStack().peek());
+    }
+
+    public boolean isWinner(LobbyPlayer guiPlayer) {
+        return game.getOutcome().isWinner(guiPlayer);
+    }
+
+    public int getGamesWonBy(LobbyPlayer questPlayer) {
+        return game.getMatch().getGamesWonBy(questPlayer);
+    }
+
+    public Deck getDeck(LobbyPlayer guiPlayer) {
+        for (Player p : game.getRegisteredPlayers()) {
+            if (p.getLobbyPlayer().equals(guiPlayer)) {
+                return p.getRegisteredPlayer().getDeck();
+            }
+        }
+        return null;
+    }
+
+    public AnteResult getAnteResult(PlayerView player) {
+        return game.getOutcome().anteResult.get(Player.get(player));
     }
 }

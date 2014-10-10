@@ -26,11 +26,11 @@ import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import forge.game.card.CardView;
 import forge.gui.CardDetailPanel;
 import forge.gui.CardPicturePanel;
 import forge.item.PaperCard;
 import forge.toolbox.FScrollPane;
-import forge.view.ViewUtil;
 
 /**
  * A simple JPanel that shows three columns: card list, pic, and description..
@@ -40,7 +40,6 @@ import forge.view.ViewUtil;
  */
 @SuppressWarnings("serial")
 public class CardViewer extends JPanel {
-
     // Data and number of choices for the list
     private final List<PaperCard> list;
 
@@ -49,12 +48,6 @@ public class CardViewer extends JPanel {
     private final CardDetailPanel detail;
     private final CardPicturePanel picture;
 
-    /**
-     * Instantiates a new card viewer.
-     * 
-     * @param list
-     *            the list
-     */
     public CardViewer(final List<PaperCard> list) {
         this.list = Collections.unmodifiableList(list);
         this.jList = new JList<PaperCard>(new ChooserListModel());
@@ -72,7 +65,6 @@ public class CardViewer extends JPanel {
     }
 
     private class ChooserListModel extends AbstractListModel<PaperCard> {
-
         private static final long serialVersionUID = 3871965346333840556L;
 
         @Override
@@ -93,11 +85,9 @@ public class CardViewer extends JPanel {
             // (String) jList.getSelectedValue();
             if ((row >= 0) && (row < CardViewer.this.list.size())) {
                 final PaperCard cp = CardViewer.this.list.get(row);
-                CardViewer.this.detail.setCard(ViewUtil.getCardForUi(cp));
+                CardViewer.this.detail.setCard(CardView.getCardForUi(cp));
                 CardViewer.this.picture.setCard(cp);
             }
         }
-
     }
-
 }

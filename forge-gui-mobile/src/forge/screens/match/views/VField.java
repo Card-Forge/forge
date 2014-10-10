@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.FThreads;
+import forge.game.card.CardView;
+import forge.game.card.CardView.CardStateView;
+import forge.game.player.PlayerView;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.toolbox.FContainer;
-import forge.view.CardView;
-import forge.view.CardView.CardStateView;
-import forge.view.PlayerView;
 
 public class VField extends FContainer {
     private final PlayerView player;
@@ -49,7 +49,7 @@ public class VField extends FContainer {
         public void run() {
             clear();
 
-            List<CardView> model = player.getBfCards();
+            Iterable<CardView> model = player.getBattlefield();
             for (CardView card : model) {
                 updateCard(card);
             }
@@ -103,7 +103,7 @@ public class VField extends FContainer {
         for (CardView c : cardsOfType) {
             if (!c.isEnchanted() && !c.isEquipped() &&
                     cardName.equals(c.getOriginal().getName()) &&
-                    card.getCounters().equals(c.getCounters()) &&
+                    card.hasSameCounters(c) &&
                     card.isToken() == c.isToken()) { //don't stack tokens on top of non-tokens
                 CardAreaPanel cPanel = CardAreaPanel.get(c);
                 while (cPanel.getNextPanelInStack() != null) {
@@ -125,6 +125,7 @@ public class VField extends FContainer {
         toPanel.setTapped(card.isTapped());
 
         toPanel.getAttachedPanels().clear();
+
         if (card.isEnchanted()) {
             final Iterable<CardView> enchants = card.getEnchantedBy();
             for (final CardView e : enchants) {

@@ -19,15 +19,28 @@ package forge.game;
 
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardView;
 import forge.game.card.CardCollection.CardCollectionView;
 import forge.game.event.GameEventCardAttachment;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
+import forge.game.player.Player;
+import forge.game.player.PlayerView;
 
 import java.util.Map;
 import java.util.TreeMap;
 
 
 public abstract class GameEntity extends GameObject implements IIdentifiable {
+    public static GameEntity get(GameEntityView gameEntityView) {
+        if (gameEntityView instanceof CardView) {
+            return Card.get((CardView)gameEntityView);
+        }
+        if (gameEntityView instanceof PlayerView) {
+            return Player.get((PlayerView)gameEntityView);
+        }
+        return null;
+    }
+
     protected final int id;
     private String name = "";
     private int preventNextDamage = 0;

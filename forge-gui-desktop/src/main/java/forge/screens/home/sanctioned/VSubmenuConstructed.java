@@ -40,6 +40,7 @@ import forge.deckchooser.DecksComboBoxEvent;
 import forge.deckchooser.FDeckChooser;
 import forge.deckchooser.IDecksComboBoxListener;
 import forge.game.GameType;
+import forge.game.card.CardView;
 import forge.gui.CardDetailPanel;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -75,7 +76,6 @@ import forge.toolbox.FTextField;
 import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
-import forge.view.ViewUtil;
 
 /**
  * Assembles Swing components of constructed submenu singleton.
@@ -1243,7 +1243,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
             if (obj instanceof PaperCard) {
                 pp.setVanguardButtonText(((PaperCard) obj).getName());
-                cdp.setCard(ViewUtil.getCardForUi((PaperCard) obj));
+                cdp.setCard(CardView.getCardForUi((PaperCard) obj));
                 cdp.setVisible(true);
                 refreshPanels(false, true);
             }

@@ -38,7 +38,6 @@ import java.util.Map;
  * @version $Id$
  */
 public class SpellAbilityStackInstance implements IIdentifiable {
-
     private static int maxId = 0;
     private static int nextId() { return ++maxId; }
 
@@ -55,7 +54,7 @@ public class SpellAbilityStackInstance implements IIdentifiable {
     private final SpellAbility ability;
 
     private final SpellAbilityStackInstance subInstance;
-    private Player activator;
+    private Player activatingPlayer;
 
     // When going to a SubAbility that SA has a Instance Choice object
     private TargetChoices tc = new TargetChoices();
@@ -94,7 +93,7 @@ public class SpellAbilityStackInstance implements IIdentifiable {
         id = nextId();
         ability = sa;
         stackDescription = sa.getStackDescription();
-        activator = sa.getActivatingPlayer();
+        activatingPlayer = sa.getActivatingPlayer();
         
         // Payment info
         paidHash = ability.getPaidHash();
@@ -162,7 +161,7 @@ public class SpellAbilityStackInstance implements IIdentifiable {
         if (refresh) {
             ability.resetTargets();
             ability.setTargets(tc);
-            ability.setActivatingPlayer(activator);
+            ability.setActivatingPlayer(activatingPlayer);
     
             // Saved sub-SA needs to be reset on the way out
             if (subInstance != null) {
@@ -287,14 +286,14 @@ public class SpellAbilityStackInstance implements IIdentifiable {
         return true;
     }
 
-    public Player getActivator() {
-        return activator;
+    public Player getActivatingPlayer() {
+        return activatingPlayer;
     }
 
-    public void setActivator(Player activator0) {
-        if (activator == activator0) { return; }
-        activator = activator0;
-        view.updateActivator(this);
+    public void setActivatingPlayer(Player activatingPlayer0) {
+        if (activatingPlayer == activatingPlayer0) { return; }
+        activatingPlayer = activatingPlayer0;
+        view.updateActivatingPlayer(this);
     }
 
     @Override

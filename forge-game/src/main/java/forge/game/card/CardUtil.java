@@ -281,11 +281,11 @@ public final class CardUtil {
         return res;
     }
 
-    public static CardCharacteristics getFaceDownCharacteristic() {
-        final ArrayList<String> types = new ArrayList<String>();
+    public static CardCharacteristics getFaceDownCharacteristic(Card c) {
+        final HashSet<String> types = new HashSet<String>();
         types.add("Creature");
 
-        final CardCharacteristics ret = new CardCharacteristics();
+        final CardCharacteristics ret = new CardCharacteristics(c.getView().createAlternateState());
         ret.setBaseAttack(2);
         ret.setBaseDefense(2);
 

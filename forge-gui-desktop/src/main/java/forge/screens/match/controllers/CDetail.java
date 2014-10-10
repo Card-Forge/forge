@@ -20,14 +20,13 @@ package forge.screens.match.controllers;
 import java.awt.event.MouseEvent;
 
 import forge.UiCommand;
+import forge.game.card.CardView;
 import forge.gui.framework.ICDoc;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.InventoryItemFromSet;
 import forge.screens.match.views.VDetail;
 import forge.toolbox.FMouseAdapter;
-import forge.view.CardView;
-import forge.view.ViewUtil;
 
 /**
  * Controls the card detail area in the match UI.
@@ -58,7 +57,7 @@ public enum CDetail implements ICDoc {
 
     public void showCard(final InventoryItem item) {
         if (item instanceof IPaperCard) {
-            showCard(ViewUtil.getCardForUi((IPaperCard)item));
+            showCard(CardView.getCardForUi((IPaperCard)item));
         } else if (item instanceof InventoryItemFromSet) {
             view.getLblFlipcard().setVisible(false);
             view.getPnlDetail().setItem((InventoryItemFromSet)item);

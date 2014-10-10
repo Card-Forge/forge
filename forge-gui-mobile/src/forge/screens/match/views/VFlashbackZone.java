@@ -1,7 +1,7 @@
 package forge.screens.match.views;
 
 import forge.FThreads;
-import forge.view.PlayerView;
+import forge.game.player.PlayerView;
 
 public class VFlashbackZone extends VCardDisplayArea {
     private final PlayerView player;
@@ -18,7 +18,7 @@ public class VFlashbackZone extends VCardDisplayArea {
     private final Runnable updateRoutine = new Runnable() {
         @Override
         public void run() {
-            refreshCardPanels(player.getFlashbackCards());
+            refreshCardPanels(player.getFlashback());
         }
     };
 }

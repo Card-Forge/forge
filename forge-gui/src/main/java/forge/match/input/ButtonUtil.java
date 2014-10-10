@@ -17,9 +17,9 @@
  */
 package forge.match.input;
 
+import forge.game.player.PlayerView;
 import forge.interfaces.IButton;
 import forge.match.MatchUtil;
-import forge.view.PlayerView;
 
 /**
  * Manages match UI OK/Cancel button enabling and focus

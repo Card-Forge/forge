@@ -19,9 +19,9 @@ package forge.screens.match.winlose;
 
 import forge.FThreads;
 import forge.assets.FSkinProp;
+import forge.game.GameView;
 import forge.gauntlet.GauntletWinLoseController;
 import forge.util.gui.SOptionPane;
-import forge.view.IGameView;
 
 import java.util.List;
 
@@ -38,7 +38,7 @@ public class GauntletWinLose extends ControlWinLose {
      * @param view0 ViewWinLose object
      * @param match
      */
-    public GauntletWinLose(final ViewWinLose view0, IGameView lastGame) {
+    public GauntletWinLose(final ViewWinLose view0, GameView lastGame) {
         super(view0, lastGame);
         controller = new GauntletWinLoseController(view0, lastGame) {
             @Override

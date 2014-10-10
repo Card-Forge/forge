@@ -21,6 +21,7 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
+
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -28,6 +29,7 @@ import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -69,6 +71,30 @@ public class Combat {
             for (final Card pw : planeswalkers) {
                 this.attackableEntries.add(pw);
             }
+        }
+    }
+
+    public void endCombat() {
+        //backup attackers and blockers
+        List<Card> attackers = Lists.newArrayList(getAttackers());
+        List<Card> blockers = Lists.newArrayList(getAllBlockers());
+
+        //clear all combat-related collections
+        attackableEntries.clear();
+        attackedByBands.clear();
+        blockedBands.clear();
+        defendingDamageMap.clear();
+        attackersOrderedForDamageAssignment.clear();
+        blockersOrderedForDamageAssignment.clear();
+        lkiCache.clear();
+        combatantsThatDealtFirstStrikeDamage.clear();
+
+        //update view for all attackers and blockers
+        for (Card c : attackers) {
+            c.updateAttackingForView();
+        }
+        for (Card c : blockers) {
+            c.updateBlockingForView();
         }
     }
 
@@ -136,6 +162,7 @@ public class Combat {
         else {
             band.addAttacker(c);
         }
+        c.updateAttackingForView();
     }
 
     public final GameEntity getDefenderByAttacker(final Card c) {
@@ -213,7 +240,6 @@ public class Combat {
     public final boolean isBlocked(final Card attacker) {
         AttackingBand band = getBandOfAttacker(attacker);
         return band == null ? false : Boolean.TRUE.equals(band.isBlocked());
-        
     }
 
     // Some cards in Alpha may UNBLOCK an attacker, so second parameter is not always-true
@@ -228,27 +254,32 @@ public class Combat {
         if (blockersOrderedForDamageAssignment.containsKey(attacker)) {
         	addBlockerToDamageAssignmentOrder(attacker, blocker);
         }
+        blocker.updateBlockingForView();
     }
 
     // remove blocked from specific attacker
     public final void removeBlockAssignment(final Card attacker, final Card blocker) {
         AttackingBand band = getBandOfAttacker(attacker);
         Collection<Card> cc = blockedBands.get(band);
-        if (cc != null)
+        if (cc != null) {
             cc.remove(blocker);
+        }
+        blocker.updateBlockingForView();
     }
 
     // remove blocker from everywhere
     public final void undoBlockingAssignment(final Card blocker) {
         List<Card> toRemove = Lists.newArrayList(blocker);
         blockedBands.values().removeAll(toRemove);
+        blocker.updateBlockingForView();
     }
 
     public final List<Card> getAllBlockers() {
         List<Card> result = new ArrayList<Card>();
         for (Card blocker : blockedBands.values()) {
-            if (!result.contains(blocker))
+            if (!result.contains(blocker)) {
                 result.add(blocker);
+            }
         }
         return result;
     }
@@ -267,7 +298,7 @@ public class Combat {
         }
         return blocked;
     }
-    
+
     public final List<AttackingBand> getAttackingBandsBlockedBy(Card blocker) {
         List<AttackingBand> bands = Lists.newArrayList();
         for (Entry<AttackingBand, Card> kv : blockedBands.entries()) {
@@ -372,7 +403,6 @@ public class Combat {
                 }
             }
         }
-        return;
     }
 
     // removes references to this defender from all indices and orders
@@ -391,6 +421,8 @@ public class Combat {
         if (ab != null) {
             unregisterAttacker(c, ab);
             ab.removeAttacker(c);
+            c.updateAttackingForView();
+            return;
         }
 
         // if not found in attackers, look for this card in blockers
@@ -402,7 +434,8 @@ public class Combat {
         
         // remove card from map
         while(blockedBands.values().remove(c));
-    } // removeFromCombat()
+        c.updateBlockingForView();
+    }
 
     public final boolean removeAbsentCombatants() {
         // iterate all attackers and remove them

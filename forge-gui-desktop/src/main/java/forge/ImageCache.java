@@ -34,11 +34,11 @@ import com.mortennobel.imagescaling.ResampleOp;
 
 import forge.assets.FSkinProp;
 import forge.assets.ImageUtil;
+import forge.game.card.CardView;
 import forge.item.InventoryItem;
 import forge.properties.ForgeConstants;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;
-import forge.view.CardView;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means

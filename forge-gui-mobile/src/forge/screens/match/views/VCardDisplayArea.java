@@ -11,10 +11,10 @@ import forge.FThreads;
 import forge.Graphics;
 import forge.card.CardZoom;
 import forge.card.CardRenderer.CardStackPosition;
+import forge.game.card.CardView;
 import forge.match.MatchUtil;
 import forge.toolbox.FCardPanel;
 import forge.util.ThreadUtil;
-import forge.view.CardView;
 
 public abstract class VCardDisplayArea extends VDisplayArea {
     private static final float CARD_STACK_OFFSET = 0.2f;
@@ -42,7 +42,7 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         rotateCards180 = b0;
     }
 
-    protected void refreshCardPanels(List<CardView> model) {
+    protected void refreshCardPanels(Iterable<CardView> model) {
         clear();
 
         CardAreaPanel newCardPanel = null;
@@ -261,7 +261,7 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         }
 
         public boolean selectCard() {
-            if (MatchUtil.getGameView().selectCard(getCard(), null)) {
+            if (MatchUtil.getHumanController().selectCard(getCard(), null)) {
                 return true;
             }
             //if panel can't do anything with card selection, try selecting previous panel in stack

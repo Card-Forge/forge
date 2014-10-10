@@ -8,9 +8,11 @@ import forge.card.UnOpenedProduct;
 import forge.game.GameEndReason;
 import forge.game.GameFormat;
 import forge.game.GameOutcome;
+import forge.game.GameView;
 import forge.game.player.GameLossReason;
 import forge.game.player.PlayerOutcome;
 import forge.game.player.PlayerStatistics;
+import forge.game.player.PlayerView;
 import forge.interfaces.IButton;
 import forge.interfaces.IWinLoseView;
 import forge.item.*;
@@ -23,8 +25,6 @@ import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.MyRandom;
 import forge.util.gui.SGuiChoose;
-import forge.view.IGameView;
-import forge.view.PlayerView;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -35,13 +35,13 @@ import java.util.List;
 import java.util.Map.Entry;
 
 public abstract class QuestWinLoseController {
-    private final IGameView lastGame;
+    private final GameView lastGame;
     private final transient boolean wonMatch;
     private final transient boolean isAnte;
     private final transient QuestController qData;
     private final transient QuestEvent qEvent;
 
-    public QuestWinLoseController(final IGameView game0) {
+    public QuestWinLoseController(final GameView game0) {
         lastGame = game0;
         qData = FModel.getQuest();
         qEvent = qData.getCurrentEvent();
@@ -88,7 +88,7 @@ public abstract class QuestWinLoseController {
             public void run() {
                 if (isAnte) {
                     // Won/lost cards should already be calculated (even in a draw)
-                    GameOutcome.AnteResult anteResult = lastGame.getAnteResult();
+                    GameOutcome.AnteResult anteResult = lastGame.getAnteResult(questPlayer);
                     if (anteResult != null) {
                         if (anteResult.wonCards != null) {
                             qc.getCards().addAllCards(anteResult.wonCards);

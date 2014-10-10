@@ -35,24 +35,23 @@ import javax.swing.JPanel;
 import com.google.common.collect.Lists;
 
 import forge.Singletons;
+import forge.game.GameEntityView;
+import forge.game.GameView;
+import forge.game.card.CardView;
+import forge.game.combat.CombatView;
 import forge.gui.framework.FScreen;
 import forge.match.MatchUtil;
 import forge.screens.match.controllers.CDock;
 import forge.screens.match.views.VField;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
-import forge.view.CardView;
-import forge.view.CombatView;
 import forge.view.FView;
-import forge.view.GameEntityView;
-import forge.view.IGameView;
 import forge.view.arcane.CardPanel;
 
 /**
  * Semi-transparent overlay panel. Should be used with layered panes.
  * 
  */
-
 @SuppressWarnings("serial")
 public enum TargetingOverlay {
     /** */
@@ -365,7 +364,7 @@ public enum TargetingOverlay {
             if (overlaystate == 0) { return; }
 
             // Arc drawing
-            final IGameView gameView = MatchUtil.getGameView();
+            final GameView gameView = MatchUtil.getGameView();
             if (gameView != null) {
                 assembleArcs(gameView.getCombat());
             }

@@ -16962,6 +16962,7 @@ forge-gui/src/main/java/forge/card/CardScriptInfo.java -text
 forge-gui/src/main/java/forge/control/ChatArea.java -text
 forge-gui/src/main/java/forge/control/FControlGameEventHandler.java -text
 forge-gui/src/main/java/forge/control/FControlGamePlayback.java -text
+forge-gui/src/main/java/forge/control/WatchLocalGame.java -text
 forge-gui/src/main/java/forge/control/package-info.java -text
 forge-gui/src/main/java/forge/deck/ColorDeckGenerator.java -text
 forge-gui/src/main/java/forge/deck/DeckGeneratorTheme.java -text
@@ -17151,17 +17152,6 @@ forge-gui/src/main/java/forge/util/gui/SGuiChoose.java -text
 forge-gui/src/main/java/forge/util/gui/SGuiDialog.java -text
 forge-gui/src/main/java/forge/util/gui/SOptionPane.java -text
 forge-gui/src/main/java/forge/util/package-info.java -text
-forge-gui/src/main/java/forge/view/Cache.java -text
-forge-gui/src/main/java/forge/view/CardView.java -text
-forge-gui/src/main/java/forge/view/CombatView.java -text
-forge-gui/src/main/java/forge/view/GameEntityView.java -text
-forge-gui/src/main/java/forge/view/IGameView.java -text
-forge-gui/src/main/java/forge/view/LocalGameView.java -text
-forge-gui/src/main/java/forge/view/PlayerView.java -text
-forge-gui/src/main/java/forge/view/SpellAbilityView.java -text
-forge-gui/src/main/java/forge/view/StackItemView.java -text
-forge-gui/src/main/java/forge/view/ViewUtil.java -text
-forge-gui/src/main/java/forge/view/WatchLocalGame.java -text
 forge-gui/src/main/resources/proxy-template.ftl -text
 forge-gui/src/site/apt/index.apt -text
 forge-gui/tools/PerSetTracking.py svneol=native#text/x-python

@@ -24,11 +24,11 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.LoadingCache;
 
 import forge.ImageKeys;
+import forge.game.card.CardView;
 import forge.game.player.IHasIcon;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.properties.ForgeConstants;
-import forge.view.CardView;
 
 import org.apache.commons.lang3.StringUtils;
 

@@ -2,9 +2,9 @@ package forge.match.input;
 
 import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.util.ITriggerEvent;
-import forge.view.PlayerView;
 
 public interface Input {
     PlayerView getOwner();

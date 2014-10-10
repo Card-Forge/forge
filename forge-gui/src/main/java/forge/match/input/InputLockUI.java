@@ -6,11 +6,11 @@ import forge.FThreads;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.match.MatchUtil;
 import forge.util.ITriggerEvent;
 import forge.util.ThreadUtil;
-import forge.view.PlayerView;
 
 public class InputLockUI implements Input {
     private final AtomicInteger iCall = new AtomicInteger();

@@ -87,6 +87,21 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @version $Id$
  */
 public class Card extends GameEntity implements Comparable<Card>, IIdentifiable {
+    private static HashMap<Integer, Card> cardCache = new HashMap<Integer, Card>();
+    public static Card get(CardView cardView) {
+        return cardCache.get(cardView.getId());
+    }
+    public static List<Card> getList(Iterable<CardView> cardViews) {
+        List<Card> list = new ArrayList<Card>();
+        for (CardView cv : cardViews) {
+            list.add(get(cv));
+        }
+        return list;
+    }
+    public static void clearCache() {
+        cardCache.clear();
+    }
+
     private final IPaperCard paperCard;
 
     private final Map<CardCharacteristicName, CardCharacteristics> characteristicsMap
@@ -254,10 +269,15 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     public Card(final int id0, final IPaperCard paperCard0) {
         super(id0);
 
+        if (id0 >= 0) {
+            cardCache.put(id0, this);
+        }
         paperCard = paperCard0;
-        characteristicsMap.put(CardCharacteristicName.Original, new CardCharacteristics());
-        characteristicsMap.put(CardCharacteristicName.FaceDown, CardUtil.getFaceDownCharacteristic());
         view = new CardView(id0);
+        characteristicsMap.put(CardCharacteristicName.Original, new CardCharacteristics(view.getOriginal()));
+        characteristicsMap.put(CardCharacteristicName.FaceDown, CardUtil.getFaceDownCharacteristic(this));
+        view.updateChangedColorWords(this);
+        view.updateChangedTypes(this);
     }
 
     public boolean changeToState(final CardCharacteristicName state) {
@@ -337,7 +357,6 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             preTFDCharacteristic = curCharacteristics;
             return setState(CardCharacteristicName.FaceDown);
         }
-
         return false;
     }
 
@@ -359,7 +378,6 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             }
             return result;
         }
-
         return false;
     }
 
@@ -372,10 +390,17 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
 
     public final void addAlternateState(final CardCharacteristicName state, final boolean updateView) {
-        characteristicsMap.put(state, new CardCharacteristics());
+        characteristicsMap.put(state, new CardCharacteristics(view.createAlternateState()));
         if (updateView) {
             view.updateState(this, false);
         }
+    }
+
+    public void updateAttackingForView() {
+        view.updateAttacking(this);
+    }
+    public void updateBlockingForView() {
+        view.updateBlocking(this);
     }
 
     @Override
@@ -2363,7 +2388,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
 
     public final void setType(final List<String> a) {
-        getCharacteristics().setType(new ArrayList<String>(a));
+        getCharacteristics().setType(new HashSet<String>(a));
     }
 
     public final void addType(final String a) {

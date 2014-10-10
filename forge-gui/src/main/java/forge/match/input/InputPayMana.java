@@ -18,6 +18,7 @@ import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
@@ -54,13 +55,13 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
         //if player is floating mana, show mana pool to make it easier to use that mana
         wasFloatingMana = !player.getManaPool().isEmpty();
-        zoneToRestore = wasFloatingMana ? MatchUtil.getController().showManaPool(getController().getPlayerView(player)) : null;
+        zoneToRestore = wasFloatingMana ? MatchUtil.getController().showManaPool(PlayerView.get(player)) : null;
     }
 
     @Override
     protected void onStop() {
         if (wasFloatingMana) { //hide mana pool if it was shown due to floating mana
-            MatchUtil.getController().hideManaPool(getController().getPlayerView(player), zoneToRestore);
+            MatchUtil.getController().hideManaPool(PlayerView.get(player), zoneToRestore);
         }
     }
 

@@ -25,7 +25,9 @@ import forge.control.GuiTimer;
 import forge.deck.CardPool;
 import forge.error.BugReportDialog;
 import forge.game.GameEntity;
+import forge.game.GameEntityView;
 import forge.game.GameObject;
+import forge.game.card.CardView;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
 import forge.gui.BoxedProductCardListViewer;
@@ -51,8 +53,6 @@ import forge.toolbox.FSkin.SkinImage;
 import forge.util.BuildInfo;
 import forge.util.FileUtil;
 import forge.util.gui.SGuiChoose;
-import forge.view.CardView;
-import forge.view.GameEntityView;
 
 public class GuiDesktop implements IGuiBase {
     @Override
@@ -194,7 +194,7 @@ public class GuiDesktop implements IGuiBase {
             delayedReveal.reveal(controller); //TODO: Merge this into search dialog
         }
         controller.tempShow(optionList);
-        List<GameEntityView> gameEntityViews = controller.getGameView().getGameEntityViews(optionList, false);
+        List<GameEntityView> gameEntityViews = GameEntityView.getEntityCollection(optionList);
         if (isOptional) {
             return SGuiChoose.oneOrNone(title, gameEntityViews);
         }

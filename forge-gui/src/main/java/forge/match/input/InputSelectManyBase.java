@@ -6,6 +6,7 @@ import com.google.common.collect.Iterables;
 
 import forge.game.GameEntity;
 import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.match.MatchUtil;
 import forge.player.PlayerControllerHuman;
 
@@ -75,14 +76,14 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
 
     protected void onSelectStateChanged(final GameEntity c, final boolean newState) {
         if (c instanceof Card) {
-            MatchUtil.setUsedToPay(getController().getCardView((Card) c), newState); // UI supports card highlighting though this abstraction-breaking mechanism
+            MatchUtil.setUsedToPay(CardView.get((Card) c), newState); // UI supports card highlighting though this abstraction-breaking mechanism
         }
     }
 
     private void resetUsedToPay() {
         for (final GameEntity c : getSelected()) {
             if (c instanceof Card) {
-                MatchUtil.setUsedToPay(getController().getCardView((Card) c), false);
+                MatchUtil.setUsedToPay(CardView.get((Card) c), false);
             }
         }
     }

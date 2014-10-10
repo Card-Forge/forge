@@ -3,13 +3,14 @@ package forge.game.card;
 import java.util.Set;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
+import forge.ImageKeys;
 import forge.card.CardCharacteristicName;
+import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardType;
 import forge.card.ColorSet;
@@ -17,6 +18,7 @@ import forge.card.mana.ManaCost;
 import forge.game.GameEntityView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
+import forge.item.IPaperCard;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
@@ -25,6 +27,10 @@ import forge.trackable.TrackableProperty;
 public class CardView extends GameEntityView {
     public static CardView get(Card c) {
         return c == null ? null : c.getView();
+    }
+
+    public static CardView getCardForUi(IPaperCard pc) {
+        return Card.getCardForUi(pc).getView();
     }
 
     public static TrackableCollection<CardView> getCollection(Iterable<Card> cards) {
@@ -38,9 +44,29 @@ public class CardView extends GameEntityView {
         return collection;
     }
 
+    public static boolean mayViewAny(Iterable<CardView> cards) {
+        if (cards == null) { return false; }
+
+        for (CardView cv : cards) {
+            if (cv.mayBeShown) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public CardView(int id0) {
         super(id0);
         set(TrackableProperty.Original, new CardStateView(id0));
+    }
+    public CardView(int id0, String name0) {
+        this(id0);
+        getOriginal().setName(name0);
+    }
+    public CardView(int id0, String name0, PlayerView ownerAndController, String imageKey) {
+        this(id0, name0);
+        set(TrackableProperty.Owner, ownerAndController);
+        set(TrackableProperty.Controller, ownerAndController);
     }
 
     public PlayerView getOwner() {
@@ -153,8 +179,19 @@ public class CardView extends GameEntityView {
     public Map<CounterType, Integer> getCounters() {
         return get(TrackableProperty.Counters);
     }
+    public boolean hasSameCounters(CardView otherCard) {
+        Map<CounterType, Integer> counters = getCounters();
+        if (counters == null) {
+            return otherCard.getCounters() == null;
+        }
+        return counters.equals(otherCard.getCounters());
+    }
     void updateCounters(Card c) {
         set(TrackableProperty.Counters, c.getCounters());
+        CardStateView state = getOriginal();
+        state.updatePower(c);
+        state.updateToughness(c);
+        state.updateLoyalty(c);
     }
 
     public int getDamage() {
@@ -284,12 +321,32 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.PairedWith);
     }
 
+    public Map<String, String> getChangedColorWords() {
+        return get(TrackableProperty.ChangedColorWords);
+    }
+    void updateChangedColorWords(Card c) {
+        set(TrackableProperty.ChangedColorWords, c.getChangedTextColorWords());
+    }
+
+    public Map<String, String> getChangedTypes() {
+        return get(TrackableProperty.ChangedTypes);
+    }
+    void updateChangedTypes(Card c) {
+        set(TrackableProperty.ChangedTypes, c.getChangedTextTypeWords());
+    }
+
     public CardStateView getOriginal() {
         return get(TrackableProperty.Original);
     }
 
+    public boolean hasAltState() {
+        return getAlternate() != null;
+    }
     public CardStateView getAlternate() {
         return get(TrackableProperty.Alternate);
+    }
+    CardStateView createAlternateState() {
+        return new CardStateView(getId());
     }
 
     public CardStateView getState(final boolean alternate0) {
@@ -304,7 +361,6 @@ public class CardView extends GameEntityView {
         boolean isTransformed = c.getCurState() == CardCharacteristicName.Transformed;
         boolean hasAltState = isDoubleFaced || isFlipCard || isSplitCard || (isFaceDown/* && mayShowCardFace*/);
 
-        set(TrackableProperty.Alternate, hasAltState ? new CardStateView(getId()) : null);
         set(TrackableProperty.Cloned, c.isCloned());
         set(TrackableProperty.FaceDown, isFaceDown);
         set(TrackableProperty.SplitCard, isSplitCard);
@@ -328,53 +384,23 @@ public class CardView extends GameEntityView {
                 orig = CardCharacteristicName.LeftSplit;
                 alt = CardCharacteristicName.RightSplit;
             }
-            updateState(c, getOriginal(), orig);
-            updateState(c, getAlternate(), alt);
-            return;
+            set(TrackableProperty.Original, c.getState(orig).getView());
+            set(TrackableProperty.Alternate, c.getState(alt).getView());
         }
-
-        final CardStateView origView = getOriginal();
-        origView.updateName(c);
-        origView.updateColors(c);
-        origView.updateImageKey(c);
-        origView.updateType(c);
-        origView.updateManaCost(c);
-        origView.updatePower(c);
-        origView.updateToughness(c);
-        origView.updateLoyalty(c);
-        origView.updateText(c);
-        origView.updateChangedColorWords(c);
-        origView.updateChangedTypes(c);
-        origView.updateManaCost(c);
-        origView.updateKeywords(c);
-        origView.updateFoilIndex(c);
-
-        if (hasAltState) {
+        else if (hasAltState) {
             if (isFlipCard && !isFlipped) {
-                updateState(c, getAlternate(), CardCharacteristicName.Flipped);
+                set(TrackableProperty.Alternate, c.getState(CardCharacteristicName.Flipped).getView());
             }
             else if (isDoubleFaced && !isTransformed) {
-                updateState(c, getAlternate(), CardCharacteristicName.Transformed);
+                set(TrackableProperty.Alternate, c.getState(CardCharacteristicName.Transformed).getView());
             }
             else {
-                updateState(c, getAlternate(), CardCharacteristicName.Original);
+                set(TrackableProperty.Alternate, c.getState(CardCharacteristicName.Original).getView());
             }
         }
-    }
-    private void updateState(Card c, CardStateView view, CardCharacteristicName state) {
-        final CardCharacteristics chars = c.getState(state);
-        if (chars == null) { return; } //can happen when split card initialized before both sides have been initialized
-
-        view.updateName(chars);
-        view.updateColors(chars);
-        view.updateImageKey(chars);
-        view.updateType(chars);
-        view.updateManaCost(chars);
-        view.updatePower(chars);
-        view.updateToughness(chars);
-        view.updateLoyalty(chars); 
-        view.updateText(chars);
-        view.updateFoilIndex(chars);
+        else {
+            set(TrackableProperty.Alternate, null);
+        }
     }
 
     @Override
@@ -422,10 +448,13 @@ public class CardView extends GameEntityView {
             return get(TrackableProperty.Name);
         }
         void updateName(Card c) {
-            set(TrackableProperty.Name, c.getName());
+            setName(c.getName());
         }
         void updateName(CardCharacteristics c) {
-            set(TrackableProperty.Name, c.getName());
+            setName(c.getName());
+        }
+        private void setName(String name0) {
+            set(TrackableProperty.Name, name0);
         }
 
         public ColorSet getColors() {
@@ -438,8 +467,11 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.Colors, c.determineColor());
         }
 
-        public String getImageKey() {
-            return get(TrackableProperty.ImageKey);
+        public String getImageKey(boolean ignoreMayBeShown) {
+            if (mayBeShown || ignoreMayBeShown) {
+                return get(TrackableProperty.ImageKey);
+            }
+            return ImageKeys.HIDDEN_CARD;
         }
         void updateImageKey(Card c) {
             set(TrackableProperty.ImageKey, c.getImageKey());
@@ -451,18 +483,12 @@ public class CardView extends GameEntityView {
         public Set<String> getType() {
             return get(TrackableProperty.Type);
         }
-        void updateType(Card c) {
-            set(TrackableProperty.Type, c.getType());
-        }
         void updateType(CardCharacteristics c) {
             set(TrackableProperty.Type, c.getType());
         }
 
         public ManaCost getManaCost() {
             return get(TrackableProperty.ManaCost);
-        }
-        void updateManaCost(Card c) {
-            set(TrackableProperty.ManaCost, c.getManaCost());
         }
         void updateManaCost(CardCharacteristics c) {
             set(TrackableProperty.ManaCost, c.getManaCost());
@@ -475,7 +501,13 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.Power, c.getNetAttack());
         }
         void updatePower(CardCharacteristics c) {
-            set(TrackableProperty.Power, c.getBaseAttack());
+            Card card = Card.get(CardView.this);
+            if (card != null) {
+                updatePower(card); //TODO: find a better way to do this
+            }
+            else {
+                set(TrackableProperty.Power, c.getBaseAttack());
+            }
         }
 
         public int getToughness() {
@@ -485,7 +517,13 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.Toughness, c.getNetDefense());
         }
         void updateToughness(CardCharacteristics c) {
-            set(TrackableProperty.Toughness, c.getBaseDefense());
+            Card card = Card.get(CardView.this);
+            if (card != null) {
+                updateToughness(card); //TODO: find a better way to do this
+            }
+            else {
+                set(TrackableProperty.Toughness, c.getBaseDefense());
+            }
         }
 
         public int getLoyalty() {
@@ -495,7 +533,13 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.Loyalty, c.getCurrentLoyalty());
         }
         void updateLoyalty(CardCharacteristics c) {
-            set(TrackableProperty.Loyalty, 0); // Q why is loyalty not a property of CardCharacteristic? A: because no alt states have a base loyalty (only candidate is Garruk Relentless).
+            Card card = Card.get(CardView.this);
+            if (card != null) {
+                updateLoyalty(card); //TODO: find a better way to do this
+            }
+            else {
+                set(TrackableProperty.Loyalty, 0);
+            }
         }
 
         public String getText() {
@@ -505,31 +549,33 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.Text, c.getText());
         }
         void updateText(CardCharacteristics c) {
-            set(TrackableProperty.Text, c.getOracleText());
+            Card card = Card.get(CardView.this);
+            if (card != null) {
+                updateText(card); //TODO: find a better way to do this
+            }
+            else {
+                set(TrackableProperty.Text, c.getOracleText());
+            }
         }
 
+        private int foilIndexOverride = -1;
         public int getFoilIndex() {
+            if (foilIndexOverride >= 0) {
+                return foilIndexOverride;
+            }
             return get(TrackableProperty.FoilIndex);
         }
         void updateFoilIndex(Card c) {
-            set(TrackableProperty.FoilIndex, c.getCharacteristics().getFoil());
+            updateFoilIndex(c.getCharacteristics());
         }
         void updateFoilIndex(CardCharacteristics c) {
             set(TrackableProperty.FoilIndex, c.getFoil());
         }
-
-        public Map<String, String> getChangedColorWords() {
-            return get(TrackableProperty.ChangedColorWords);
-        }
-        void updateChangedColorWords(Card c) {
-            set(TrackableProperty.ChangedColorWords, c.getChangedTextColorWords());
-        }
-
-        public Map<String, String> getChangedTypes() {
-            return get(TrackableProperty.ChangedTypes);
-        }
-        void updateChangedTypes(Card c) {
-            set(TrackableProperty.ChangedTypes, c.getChangedTextTypeWords());
+        public void setFoilIndexOverride(int index0) {
+            if (index0 < 0) {
+                index0 = CardEdition.getRandomFoil(getSetCode());
+            }
+            foilIndexOverride = index0;
         }
 
         public boolean hasDeathtouch() {
@@ -689,5 +735,14 @@ public class CardView extends GameEntityView {
             set(key, null);
         }
         return null;
+    }
+
+    //below are properties not shared across game instances
+    private boolean mayBeShown = true; //TODO: Make may be shown get updated
+    public boolean mayBeShown() {
+        return mayBeShown;
+    }
+    public void setMayBeShown(boolean mayBeShown0) {
+        //mayBeShown = mayBeShown0;
     }
 }

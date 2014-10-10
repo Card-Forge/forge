@@ -5,13 +5,13 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
+import forge.game.card.CardView;
+import forge.game.card.CardView.CardStateView;
+import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.ForgeAction;
 import forge.gui.GuiChoose;
 import forge.match.MatchConstants;
-import forge.view.CardView;
-import forge.view.CardView.CardStateView;
-import forge.view.PlayerView;
 
 /**
  * Receives click and programmatic requests for viewing data stacks in the

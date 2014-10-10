@@ -22,8 +22,9 @@ import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
 import forge.game.Game;
+import forge.game.player.Player;
 import forge.match.MatchUtil;
-import forge.view.IGameView;
+import forge.player.PlayerControllerHuman;
 
 /**
  * <p>
@@ -60,16 +61,9 @@ public class InputQueue extends Observable {
         updateObservers();
     }
 
-    /**
-     * <p>
-     * updateInput.
-     * </p>
-     * 
-     * @return a {@link forge.gui.input.InputBase} object.
-     */
-    public final Input getActualInput(final IGameView gameView) {
+    public final Input getActualInput(final PlayerControllerHuman controller) {
         Input topMost = inputStack.peek(); // incoming input to Control
-        if (topMost != null && !gameView.isGameOver()) {
+        if (topMost != null && !controller.getGame().isGameOver()) {
             return topMost;
         }
         return inputLock;
@@ -82,7 +76,7 @@ public class InputQueue extends Observable {
 
     public void setInput(final InputSynchronized input) {
         if (MatchUtil.getHumanCount() > 1) { //update current player if needed
-            MatchUtil.setCurrentPlayer(MatchUtil.players.getKey(input.getOwner().getId()));
+            MatchUtil.setCurrentPlayer(Player.get(input.getOwner()));
         }
         inputStack.push(input);
         InputBase.waitForOtherPlayer();
@@ -96,9 +90,6 @@ public class InputQueue extends Observable {
         }
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     */
     public void onGameOver(boolean releaseAllInputs) {
         for (InputSynchronized inp : inputStack) {
             inp.relaseLatchWhenGameIsOver();
@@ -107,4 +98,4 @@ public class InputQueue extends Observable {
             }
         }
     }
-} // InputControl
+}

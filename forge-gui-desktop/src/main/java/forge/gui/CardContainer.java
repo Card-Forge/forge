@@ -18,7 +18,8 @@
 
 package forge.gui;
 
-import forge.view.CardView;
+import forge.game.card.CardView;
+
 
 /**
  * The class CardContainer. A card container is an object that references a
@@ -28,23 +29,6 @@ import forge.view.CardView;
  * @version V0.0 17.02.2010
  */
 public interface CardContainer {
-    /**
-     * <p>
-     * setCard.
-     * </p>
-     * 
-     * @param card
-     *            a {@link CardView} object.
-     */
-    void setCard(CardView card);
-
-    /**
-     * <p>
-     * getCard.
-     * </p>
-     * 
-     * @return a {@link CardView} object.
-     */
     CardView getCard();
-
+    void setCard(CardView card);
 }

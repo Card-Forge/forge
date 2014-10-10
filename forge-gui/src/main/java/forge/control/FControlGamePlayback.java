@@ -9,6 +9,7 @@ import com.google.common.eventbus.Subscribe;
 import forge.FThreads;
 import forge.GuiBase;
 import forge.game.Game;
+import forge.game.card.CardView;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventBlockersDeclared;
 import forge.game.event.GameEventGameFinished;
@@ -19,9 +20,10 @@ import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventTurnPhase;
 import forge.game.event.IGameEventVisitor;
+import forge.game.player.PlayerView;
 import forge.match.MatchUtil;
 import forge.match.input.InputPlaybackControl;
-import forge.view.LocalGameView;
+import forge.player.PlayerControllerHuman;
 
 public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
     private InputPlaybackControl inputPlayback;
@@ -29,9 +31,9 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
 
     private final CyclicBarrier gameThreadPauser = new CyclicBarrier(2);
 
-    private final LocalGameView gameView;
-    public FControlGamePlayback(final LocalGameView gameView0) {
-        gameView = gameView0;
+    private final PlayerControllerHuman humanController;
+    public FControlGamePlayback(final PlayerControllerHuman humanController0) {
+        humanController = humanController0;
     }
 
     private Game game;
@@ -75,8 +77,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
      */
     @Override
     public Void visit(GameEventTurnPhase ev) {
-        boolean isUiToStop = MatchUtil.getController().stopAtPhase(
-                gameView.getPlayerView(ev.playerTurn, true), ev.phase);
+        boolean isUiToStop = MatchUtil.getController().stopAtPhase(PlayerView.get(ev.playerTurn), ev.phase);
 
         switch(ev.phase) {
             case COMBAT_END:
@@ -101,13 +102,13 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
      */
     @Override
     public Void visit(GameEventGameFinished event) {
-        gameView.getInputQueue().removeInput(inputPlayback);
+        humanController.getInputQueue().removeInput(inputPlayback);
         return null;
     }
 
     @Override
     public Void visit(GameEventGameStarted event) {
-        gameView.getInputQueue().setInput(inputPlayback);
+        humanController.getInputQueue().setInput(inputPlayback);
         return null;
     }
 
@@ -122,7 +123,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override
             public void run() {
-                GuiBase.getInterface().setCard(gameView.getCardView(event.spell.getHostCard(), true));
+                GuiBase.getInterface().setCard(CardView.get(event.spell.getHostCard()));
             }
         });
         pauseForEvent(resolveDelay);
@@ -137,7 +138,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override
             public void run() {
-                GuiBase.getInterface().setCard(gameView.getCardView(event.sa.getHostCard(), true));
+                GuiBase.getInterface().setCard(CardView.get(event.sa.getHostCard()));
             }
         });
         pauseForEvent(castDelay);

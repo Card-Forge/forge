@@ -1,12 +1,12 @@
 package forge.screens.match.views;
 
-import java.util.List;
-
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
+import forge.game.card.CardView;
+import forge.game.player.PlayerView;
 import forge.match.MatchUtil;
 import forge.menu.FDropDown;
 import forge.model.FModel;
@@ -16,8 +16,6 @@ import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FList;
 import forge.util.Utils;
-import forge.view.CardView;
-import forge.view.PlayerView;
 
 public class VPlayers extends FDropDown {
     public VPlayers() {
@@ -79,13 +77,15 @@ public class VPlayers extends FDropDown {
                 builder.append("  |  " + player.getKeywords().toString());
             }
             if (FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
-                List<CardView> list = player.getAnteCards();
+                Iterable<CardView> list = player.getAnte();
                 builder.append("  |  Ante'd: ");
-                for (int i = 0; i < list.size(); i++) {
-                    builder.append(list.get(i));
-                    if (i < (list.size() - 1)) {
+                boolean needDelim = false;
+                for (CardView cv : list) {
+                    if (needDelim) {
                         builder.append(", ");
                     }
+                    else { needDelim = true; }
+                    builder.append(cv);
                 }
             }
             if (MatchUtil.getGameView().isCommander()) {

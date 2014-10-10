@@ -32,6 +32,8 @@ import javax.swing.Timer;
 
 import net.miginfocom.swing.MigLayout;
 import forge.assets.FSkinProp;
+import forge.game.card.CardView;
+import forge.game.card.CardView.CardStateView;
 import forge.gui.SOverlayUtils;
 import forge.toolbox.FOverlay;
 import forge.toolbox.FSkin;
@@ -39,8 +41,6 @@ import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.imaging.FImagePanel;
 import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
-import forge.view.CardView;
-import forge.view.CardView.CardStateView;
 
 /** 
  * Displays card image at its original size and correct orientation.
@@ -201,7 +201,7 @@ public enum CardZoomer {
      * Displays a graphical indicator that shows whether the current card can be flipped or transformed.
      */
     private void setFlipIndicator() {
-        if (thisCard.hasAltState()) {
+        if (thisCard.getAlternate() != null) {
             imagePanel.setLayout(new MigLayout("insets 0, w 100%!, h 100%!"));        
             imagePanel.add(lblFlipcard, "pos (100% - 100px) 0");
         }
@@ -276,7 +276,7 @@ public enum CardZoomer {
      * Toggles between primary and alternate image associated with card if applicable.
      */
     private void toggleCardImage() {
-        if (thisCard.hasAltState()) {
+        if (thisCard.getAlternate() != null) {
             toggleFlipCard();
         }
     }

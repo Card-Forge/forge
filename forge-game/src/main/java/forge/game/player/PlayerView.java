@@ -1,12 +1,16 @@
 package forge.game.player;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.apache.commons.lang3.NotImplementedException;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
+import forge.LobbyPlayer;
 import forge.card.MagicColor;
 import forge.game.GameEntityView;
 import forge.game.card.Card;
@@ -97,7 +101,7 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.NumDrawnThisTurn, p.getNumDrawnThisTurn());
     }
 
-    public Iterable<String> getKeywords() {
+    public List<String> getKeywords() {
         return get(TrackableProperty.Keywords);
     }
     void updateKeywords(Player p) {
@@ -122,36 +126,64 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.CommanderDamage, map);
     }
 
+    public String getCommanderInfo() {
+        throw new NotImplementedException("Not implemented");
+    }
+
     public Iterable<CardView> getAnte() {
         return get(TrackableProperty.Ante);
+    }
+    public int getAnteSize() {
+        return getZoneSize(TrackableProperty.Ante);
     }
 
     public Iterable<CardView> getBattlefield() {
         return get(TrackableProperty.Battlefield);
     }
+    public int getBattlefieldSize() {
+        return getZoneSize(TrackableProperty.Battlefield);
+    }
 
     public Iterable<CardView> getCommand() {
         return get(TrackableProperty.Command);
+    }
+    public int getCommandSize() {
+        return getZoneSize(TrackableProperty.Command);
     }
 
     public Iterable<CardView> getExile() {
         return get(TrackableProperty.Exile);
     }
+    public int getExileSize() {
+        return getZoneSize(TrackableProperty.Exile);
+    }
 
     public Iterable<CardView> getFlashback() {
         return get(TrackableProperty.Flashback);
+    }
+    public int getFlashbackSize() {
+        return getZoneSize(TrackableProperty.Flashback);
     }
 
     public Iterable<CardView> getGraveyard() {
         return get(TrackableProperty.Graveyard);
     }
+    public int getGraveyardSize() {
+        return getZoneSize(TrackableProperty.Graveyard);
+    }
 
     public Iterable<CardView> getHand() {
         return get(TrackableProperty.Hand);
     }
+    public int getHandSize() {
+        return getZoneSize(TrackableProperty.Hand);
+    }
 
     public Iterable<CardView> getLibrary() {
         return get(TrackableProperty.Library);
+    }
+    public int getLibrarySize() {
+        return getZoneSize(TrackableProperty.Library);
     }
 
     public Iterable<CardView> getCards(final ZoneType zone) {
@@ -160,6 +192,10 @@ public class PlayerView extends GameEntityView {
             return get(prop);
         }
         return null;
+    }
+    private int getZoneSize(TrackableProperty zoneProp) {
+        TrackableCollection<CardView> cards = get(zoneProp);
+        return cards == null ? 0 : cards.size();
     }
     private TrackableProperty getZoneProp(final ZoneType zone) {
         switch (zone) {
@@ -200,5 +236,10 @@ public class PlayerView extends GameEntityView {
             mana.put(b, p.getManaPool().getAmountOfColor(b));
         }
         set(TrackableProperty.Mana, mana);
+    }
+
+    //TODO: Find better way to do this
+    public LobbyPlayer getLobbyPlayer() {
+        return Player.get(this).getLobbyPlayer();
     }
 }

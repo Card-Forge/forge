@@ -14,6 +14,7 @@ import com.google.common.eventbus.Subscribe;
 import forge.GuiBase;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventAnteCardsSelected;
 import forge.game.event.GameEventAttackersDeclared;
@@ -44,6 +45,7 @@ import forge.game.event.GameEventTurnPhase;
 import forge.game.event.GameEventZone;
 import forge.game.event.IGameEventVisitor;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -52,18 +54,14 @@ import forge.match.MatchUtil;
 import forge.match.input.ButtonUtil;
 import forge.match.input.InputBase;
 import forge.model.FModel;
+import forge.player.PlayerControllerHuman;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Lang;
 import forge.util.gui.SGuiChoose;
 import forge.util.maps.MapOfLists;
-import forge.view.CardView;
-import forge.view.LocalGameView;
-import forge.view.PlayerView;
 
 public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
-    private final LocalGameView gameView;
-    private final HashSet<CardView> cardsProcessed = new HashSet<CardView>();
-    private final HashSet<PlayerView> playersProcessed = new HashSet<PlayerView>();
+    private final PlayerControllerHuman humanController;
     private final HashSet<CardView> cardsUpdate = new HashSet<CardView>();
     private final HashSet<CardView> cardsRefreshDetails = new HashSet<CardView>();
     private final HashSet<PlayerView> livesUpdate = new HashSet<PlayerView>();
@@ -74,32 +72,14 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private boolean gameOver, gameFinished;
     private PlayerView turnUpdate;
 
-    public FControlGameEventHandler(final LocalGameView gameView0) {
-        gameView = gameView0;
-
-        // aggressively cache a view for each player (also caches cards)
-        for (Player player : gameView.getGame().getRegisteredPlayers()) {
-            gameView.getPlayerView(player, true);
-        }
+    public FControlGameEventHandler(final PlayerControllerHuman humanController0) {
+        humanController = humanController0;
     }
 
     private final Runnable processEvents = new Runnable() {
         @Override
         public void run() {
             processEventsQueued = false;
-
-            synchronized (cardsProcessed) {
-                if (!cardsProcessed.isEmpty()) {
-                    gameView.updateCards(cardsProcessed);
-                    cardsProcessed.clear();
-                }
-            }
-            synchronized (playersProcessed) {
-                if (!playersProcessed.isEmpty()) {
-                    gameView.updatePlayers(playersProcessed);
-                    playersProcessed.clear();
-                }
-            }
 
             IMatchController controller = MatchUtil.getController();
             synchronized (livesUpdate) {
@@ -124,8 +104,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             }
             if (needCombatUpdate) {
                 needCombatUpdate = false;
-                gameView.refreshCombat();
-                controller.showCombat(gameView.getCombat());
+                controller.showCombat();
             }
             if (needStackUpdate) {
                 needStackUpdate = false;
@@ -155,16 +134,16 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             }
             if (gameOver) {
                 gameOver = false;
-                gameView.getInputQueue().onGameOver(true); // this will unlock any game threads waiting for inputs to complete
+                humanController.getInputQueue().onGameOver(true); // this will unlock any game threads waiting for inputs to complete
             }
             if (gameFinished) {
                 gameFinished = false;
-                PlayerView localPlayer = gameView.getLocalPlayerView();
+                PlayerView localPlayer = humanController.getLocalPlayerView();
                 InputBase.cancelAwaitNextInput(); //ensure "Waiting for opponent..." doesn't appear behind WinLo
                 controller.showPromptMessage(localPlayer, ""); //clear prompt behind WinLose overlay
                 ButtonUtil.update(localPlayer, "", "", false, false, false);
                 controller.finishGame();
-                gameView.updateAchievements();
+                humanController.updateAchievements();
             }
         }
     };
@@ -182,38 +161,24 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     private Void processCard(Card card, HashSet<CardView> list) {
-        CardView view = gameView.getCardView(card, null); //delay update until later to avoid duplicating updates
         synchronized (list) {
-            list.add(view);
-        }
-        synchronized (cardsProcessed) {
-            cardsProcessed.add(view);
+            list.add(card.getView());
         }
         return processEvent();
     }
     private Void processCards(Collection<Card> cards, HashSet<CardView> list) {
         if (cards.isEmpty()) { return null; }
 
-        List<CardView> views = gameView.getCardViews(cards, null); //delay update until later to avoid duplicating updates
         synchronized (list) {
-            list.addAll(views);
-        }
-        synchronized (cardsProcessed) {
-            cardsProcessed.addAll(views);
+            for (Card c : cards) {
+                list.add(c.getView());
+            }
         }
         return processEvent();
     }
-    private PlayerView processPlayer(Player player) {
-        PlayerView view = gameView.getPlayerView(player, null); //delay update until later to avoid duplicating updates
-        synchronized (playersProcessed) {
-            playersProcessed.add(view);
-        }
-        return view;
-    }
     private Void processPlayer(Player player, HashSet<PlayerView> list) {
-        PlayerView view = processPlayer(player);
         synchronized (list) {
-            list.add(view);
+            list.add(player.getView());
         }
         return processEvent();
     }
@@ -225,14 +190,13 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private Void updateZone(Player p, ZoneType z) {
         if (p == null || z == null) { return null; }
 
-        PlayerView view = processPlayer(p);
         synchronized (zonesUpdate) {
             for (Pair<PlayerView, ZoneType> pair : zonesUpdate) {
-                if (pair.getLeft() == view && pair.getRight() == z) {
+                if (pair.getLeft() == p.getView() && pair.getRight() == z) {
                     return null; //avoid adding the same pair multiple times
                 }
             }
-            zonesUpdate.add(Pair.of(view, z));
+            zonesUpdate.add(Pair.of(p.getView(), z));
         }
         return processEvent();
     }
@@ -251,8 +215,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventTurnBegan event) {
-        turnUpdate = processPlayer(event.turnOwner);
-
+        turnUpdate = event.turnOwner.getView();
         if (FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES) && event.turnOwner != null) {
             // anything except stack will get here
             updateZone(event.turnOwner, ZoneType.Battlefield);
@@ -264,10 +227,10 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(GameEventAnteCardsSelected ev) {
         final List<CardView> options = Lists.newArrayList();
         for (final Entry<Player, Card> kv : ev.cards.entries()) {
-            final CardView fakeCard = new CardView(-1); //use fake card so real cards appear with proper formatting
-            fakeCard.getOriginal().setName("  -- From " + Lang.getPossesive(kv.getKey().getName()) + " deck --");
+            //use fake card so real cards appear with proper formatting
+            final CardView fakeCard = new CardView(-1, "  -- From " + Lang.getPossesive(kv.getKey().getName()) + " deck --");
             options.add(fakeCard);
-            options.add(gameView.getCardView(kv.getValue(), true));
+            options.add(kv.getValue().getView());
         }
         SGuiChoose.reveal("These cards were chosen to ante", options);
         return null;

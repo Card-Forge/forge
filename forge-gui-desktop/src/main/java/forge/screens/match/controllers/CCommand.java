@@ -18,9 +18,9 @@
 package forge.screens.match.controllers;
 
 import forge.UiCommand;
+import forge.game.player.PlayerView;
 import forge.gui.framework.ICDoc;
 import forge.screens.match.views.VCommand;
-import forge.view.PlayerView;
 
 /**
  * Controls Swing components of a player's command instance.

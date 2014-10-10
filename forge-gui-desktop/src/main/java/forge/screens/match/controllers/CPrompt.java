@@ -28,16 +28,16 @@ import javax.swing.JButton;
 
 import forge.FThreads;
 import forge.UiCommand;
+import forge.game.GameView;
+import forge.game.card.CardView;
+import forge.game.player.PlayerView;
+import forge.game.spellability.SpellAbility;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
 import forge.match.MatchUtil;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FSkin;
 import forge.util.ITriggerEvent;
-import forge.view.CardView;
-import forge.view.IGameView;
-import forge.view.PlayerView;
-import forge.view.SpellAbilityView;
 
 /**
  * Controls the prompt panel in the match UI.
@@ -45,7 +45,6 @@ import forge.view.SpellAbilityView;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
 public enum CPrompt implements ICDoc {
-    /** */
     SINGLETON_INSTANCE;
 
     private Component lastFocusedButton = null;
@@ -89,34 +88,33 @@ public enum CPrompt implements ICDoc {
     }
 
     public void selectButtonOk() {
-        MatchUtil.getGameView().selectButtonOk();
+        MatchUtil.getHumanController().selectButtonOk();
     }
 
     public void selectButtonCancel() {
-        MatchUtil.getGameView().selectButtonCancel();
+        MatchUtil.getHumanController().selectButtonCancel();
     }
 
     public boolean passPriority() {
-        return MatchUtil.getGameView().passPriority();
+        return MatchUtil.getHumanController().passPriority();
     }
 
     public boolean passPriorityUntilEndOfTurn() {
-        return MatchUtil.getGameView().passPriorityUntilEndOfTurn();
+        return MatchUtil.getHumanController().passPriorityUntilEndOfTurn();
     }
 
     public void selectPlayer(final PlayerView player, final ITriggerEvent triggerEvent) {
-        MatchUtil.getGameView().selectPlayer(player, triggerEvent);
+        MatchUtil.getHumanController().selectPlayer(player, triggerEvent);
     }
 
     public void selectCard(final CardView card, final ITriggerEvent triggerEvent) {
-        MatchUtil.getGameView().selectCard(card, triggerEvent);
+        MatchUtil.getHumanController().selectCard(card, triggerEvent);
     }
 
-    public void selectAbility(final SpellAbilityView sa) {
-        MatchUtil.getGameView().selectAbility(sa);
+    public void selectAbility(final SpellAbility sa) {
+        MatchUtil.getHumanController().selectAbility(sa);
     }
 
-    /** @param s0 &emsp; {@link java.lang.String} */
     public void setMessage(String s0) {
         view.getTarMessage().setText(FSkin.encodeSymbols(s0, false));
     }
@@ -126,17 +124,11 @@ public enum CPrompt implements ICDoc {
         SDisplayUtil.remind(view);
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
     @Override
     public UiCommand getCommandOnSelect() {
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
-     */
     @Override
     public void update() {
         // set focus back to button that last had it
@@ -147,9 +139,9 @@ public enum CPrompt implements ICDoc {
 
     public void updateText() {
         FThreads.assertExecutedByEdt(true);
-        final IGameView game = MatchUtil.getGameView();
-        final String text = String.format("T:%d G:%d/%d [%s]", game.getTurnNumber(), game.getNumPlayedGamesInMatch() + 1, game.getNumGamesInMatch(), game.getGameType());
+        final GameView game = MatchUtil.getGameView();
+        final String text = String.format("T:%d G:%d/%d [%s]", game.getTurn(), game.getNumPlayedGamesInMatch() + 1, game.getNumGamesInMatch(), game.getGameType());
         view.getLblGames().setText(text);
-        view.getLblGames().setToolTipText(String.format("%s: Game #%d of %d, turn %d", game.getGameType(), game.getNumPlayedGamesInMatch() + 1, game.getNumGamesInMatch(), game.getTurnNumber()));
+        view.getLblGames().setToolTipText(String.format("%s: Game #%d of %d, turn %d", game.getGameType(), game.getNumPlayedGamesInMatch() + 1, game.getNumGamesInMatch(), game.getTurn()));
     }
 }

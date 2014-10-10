@@ -26,8 +26,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.util.List;
-
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.ScrollPaneConstants;
@@ -38,11 +36,16 @@ import net.miginfocom.swing.MigLayout;
 import forge.ImageCache;
 import forge.card.CardDetailUtil;
 import forge.card.CardDetailUtil.DetailColors;
+import forge.game.GameView;
+import forge.game.card.CardView;
+import forge.game.player.PlayerView;
+import forge.game.spellability.StackItemView;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.match.MatchUtil;
+import forge.player.PlayerControllerHuman;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CPrompt;
 import forge.screens.match.controllers.CStack;
@@ -50,11 +53,7 @@ import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedTextArea;
-import forge.view.CardView;
-import forge.view.IGameView;
-import forge.view.LocalGameView;
-import forge.view.PlayerView;
-import forge.view.StackItemView;
+import forge.util.FCollection;
 import forge.view.arcane.CardPanel;
 
 /** 
@@ -63,7 +62,6 @@ import forge.view.arcane.CardPanel;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
 public enum VStack implements IVDoc<CStack> {
-    /** */
     SINGLETON_INSTANCE;
 
     // Fields used with interface IVDoc
@@ -80,65 +78,40 @@ public enum VStack implements IVDoc<CStack> {
     private VStack() {
     }
 
-    //========= Overridden methods
-
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#populate()
-     */
     @Override
     public void populate() {
         parentCell.getBody().setLayout(new MigLayout("insets 3px, gap 0"));
         parentCell.getBody().add(scroller, "grow, push");
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#setParentCell()
-     */
     @Override
     public void setParentCell(final DragCell cell0) {
-        this.parentCell = cell0;
+        parentCell = cell0;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#getParentCell()
-     */
     @Override
     public DragCell getParentCell() {
-        return this.parentCell;
+        return parentCell;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#getDocumentID()
-     */
     @Override
     public EDocID getDocumentID() {
         return EDocID.REPORT_STACK;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#getTabLabel()
-     */
     @Override
     public DragTab getTabLabel() {
         return tab;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#getLayoutControl()
-     */
     @Override
     public CStack getLayoutControl() {
         return CStack.SINGLETON_INSTANCE;
     }
 
-    //========== Observer update methods
-
-    /**
-     * @param models
-     * @param viewer */
     public void updateStack() {
-        final LocalGameView model = MatchUtil.getGameView();
-        final List<StackItemView> items = model.getStack();
+        final GameView model = MatchUtil.getGameView();
+        final FCollection<StackItemView>.FCollectionView items = model.getStack();
         tab.setText("Stack : " + items.size());
 
         // No need to update the rest unless it's showing
@@ -155,7 +128,7 @@ public enum VStack implements IVDoc<CStack> {
             //update the Card Picture/Detail when the spell is added to the stack
             if (isFirst) {
                 isFirst = false;
-                CMatchUI.SINGLETON_INSTANCE.setCard(item.getSource());
+                CMatchUI.SINGLETON_INSTANCE.setCard(item.getSourceCard());
             }
         }
 
@@ -178,10 +151,10 @@ public enum VStack implements IVDoc<CStack> {
 
         private final CardView sourceCard;
 
-        public StackInstanceTextArea(final LocalGameView gameView, final StackItemView item) {
-            sourceCard = item.getSource();
+        public StackInstanceTextArea(final GameView gameView, final StackItemView item) {
+            sourceCard = item.getSourceCard();
 
-            final PlayerView localPlayer = gameView.getPlayerView(MatchUtil.getCurrentPlayer(), false);
+            final PlayerView localPlayer = PlayerView.get(MatchUtil.getCurrentPlayer());
             final String txt = (item.isOptionalTrigger() && item.getActivatingPlayer().equals(localPlayer)
                     ? "(OPTIONAL) " : "") + item.getText();
 
@@ -200,7 +173,7 @@ public enum VStack implements IVDoc<CStack> {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
                     if (!txt.startsWith("Morph ")) {
-                        CMatchUI.SINGLETON_INSTANCE.setCard(item.getSource());
+                        CMatchUI.SINGLETON_INSTANCE.setCard(item.getSourceCard());
                     }
                 }
             });
@@ -216,13 +189,13 @@ public enum VStack implements IVDoc<CStack> {
                         onClick(e);
                     }
                     private void onClick(MouseEvent e) {
-                        abilityMenu.setStackInstance(gameView, item, localPlayer);
+                        abilityMenu.setStackInstance(MatchUtil.getHumanController(), item, localPlayer);
                         abilityMenu.show(e.getComponent(), e.getX(), e.getY());
                     }
                 });
             }
 
-            final DetailColors color = CardDetailUtil.getBorderColor(item.getSource().getOriginal());
+            final DetailColors color = CardDetailUtil.getBorderColor(item.getSourceCard().getOriginal());
             setBackground(new Color(color.r, color.g, color.b));
             setForeground(FSkin.getHighContrastColor(getBackground()));
         }
@@ -248,7 +221,7 @@ public enum VStack implements IVDoc<CStack> {
         private final JCheckBoxMenuItem jmiAutoYield;
         private final JCheckBoxMenuItem jmiAlwaysYes;
         private final JCheckBoxMenuItem jmiAlwaysNo;
-        private IGameView game;
+        private PlayerControllerHuman humanController;
         private StackItemView item;
 
         private Integer triggerID = 0;
@@ -259,9 +232,9 @@ public enum VStack implements IVDoc<CStack> {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
                     final String key = item.getKey();
-                    final boolean autoYield = game.shouldAutoYield(key);
-                    game.setShouldAutoYield(key, !autoYield);
-                    if (!autoYield && game.peekStack() == item) {
+                    final boolean autoYield = humanController.shouldAutoYield(key);
+                    humanController.setShouldAutoYield(key, !autoYield);
+                    if (!autoYield && MatchUtil.getGameView().peekStack() == item) {
                         //auto-pass priority if ability is on top of stack
                         CPrompt.SINGLETON_INSTANCE.passPriority();
                     }
@@ -273,14 +246,14 @@ public enum VStack implements IVDoc<CStack> {
             jmiAlwaysYes.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    if (game.shouldAlwaysAcceptTrigger(triggerID)) {
-                        game.setShouldAlwaysAskTrigger(triggerID);
+                    if (humanController.shouldAlwaysAcceptTrigger(triggerID)) {
+                        humanController.setShouldAlwaysAskTrigger(triggerID);
                     }
                     else {
-                        game.setShouldAlwaysAcceptTrigger(triggerID);
-                        if (game.peekStack() == item) {
+                        humanController.setShouldAlwaysAcceptTrigger(triggerID);
+                        if (MatchUtil.getGameView().peekStack() == item) {
                             //auto-yes if ability is on top of stack
-                            game.confirm();
+                            humanController.confirm();
                         }
                     }
                 }
@@ -291,14 +264,14 @@ public enum VStack implements IVDoc<CStack> {
             jmiAlwaysNo.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    if (game.shouldAlwaysDeclineTrigger(triggerID)) {
-                        game.setShouldAlwaysAskTrigger(triggerID);
+                    if (humanController.shouldAlwaysDeclineTrigger(triggerID)) {
+                        humanController.setShouldAlwaysAskTrigger(triggerID);
                     }
                     else {
-                        game.setShouldAlwaysDeclineTrigger(triggerID);
-                        if (game.peekStack() == item) {
+                        humanController.setShouldAlwaysDeclineTrigger(triggerID);
+                        if (MatchUtil.getGameView().peekStack() == item) {
                             //auto-no if ability is on top of stack
-                            game.confirm();
+                            humanController.confirm();
                         }
                     }
                 }
@@ -306,16 +279,16 @@ public enum VStack implements IVDoc<CStack> {
             add(jmiAlwaysNo);
         }
 
-        public void setStackInstance(final IGameView game, final StackItemView item, final PlayerView localPlayer) {
-            this.game = game;
-            this.item = item;
+        public void setStackInstance(final PlayerControllerHuman humanController0, final StackItemView item0, final PlayerView localPlayer0) {
+            humanController = humanController0;
+            item = item0;
             triggerID = Integer.valueOf(item.getSourceTrigger());
 
-            jmiAutoYield.setSelected(game.shouldAutoYield(item.getKey()));
+            jmiAutoYield.setSelected(humanController.shouldAutoYield(item.getKey()));
 
-            if (item.isOptionalTrigger() && item.getActivatingPlayer().equals(localPlayer)) {
-                jmiAlwaysYes.setSelected(game.shouldAlwaysAcceptTrigger(triggerID));
-                jmiAlwaysNo.setSelected(game.shouldAlwaysDeclineTrigger(triggerID));
+            if (item.isOptionalTrigger() && item.getActivatingPlayer().equals(localPlayer0)) {
+                jmiAlwaysYes.setSelected(humanController.shouldAlwaysAcceptTrigger(triggerID));
+                jmiAlwaysNo.setSelected(humanController.shouldAlwaysDeclineTrigger(triggerID));
                 jmiAlwaysYes.setVisible(true);
                 jmiAlwaysNo.setVisible(true);
             }

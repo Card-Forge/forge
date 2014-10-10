@@ -11,14 +11,16 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Sets;
 
+import forge.game.GameView;
 import forge.game.card.CardUtil;
+import forge.game.card.CardView;
+import forge.game.card.CardView.CardStateView;
 import forge.game.card.CounterType;
 import forge.item.InventoryItemFromSet;
 import forge.item.PreconDeck;
 import forge.item.SealedProduct;
+import forge.match.MatchUtil;
 import forge.util.Lang;
-import forge.view.CardView;
-import forge.view.CardView.CardStateView;
 
 public class CardDetailUtil {
     private CardDetailUtil() {
@@ -272,8 +274,8 @@ public class CardDetailUtil {
         }
 
         // text changes
-        final Map<String, String> changedColorWords = state.getChangedColorWords(),
-                changedTypes = state.getChangedTypes();
+        final Map<String, String> changedColorWords = card.getChangedColorWords();
+        final Map<String, String> changedTypes = card.getChangedTypes();
         if (!(changedColorWords.isEmpty() && changedTypes.isEmpty())) {
             if (area.length() != 0) {
                 area.append("\n");
@@ -302,13 +304,15 @@ public class CardDetailUtil {
         }
 
         // counter text
-        for (final Entry<CounterType, Integer> c : card.getCounters().entrySet()) {
-            if (c.getValue().intValue() != 0) {
-                if (area.length() != 0) {
-                    area.append("\n");
+        if (card.getCounters() != null) {
+            for (final Entry<CounterType, Integer> c : card.getCounters().entrySet()) {
+                if (c.getValue().intValue() != 0) {
+                    if (area.length() != 0) {
+                        area.append("\n");
+                    }
+                    area.append(c.getKey().getName() + " counters: ");
+                    area.append(c.getValue());
                 }
-                area.append(c.getKey().getName() + " counters: ");
-                area.append(c.getValue());
             }
         }
 
@@ -332,7 +336,7 @@ public class CardDetailUtil {
         }
 
         // Regeneration Shields
-        final int regenShields = card.getRegenerationShields();
+        final int regenShields = card.getShieldCount();
         if (regenShields > 0) {
             if (area.length() != 0) {
                 area.append("\n");
@@ -359,7 +363,7 @@ public class CardDetailUtil {
         }
 
         // chosen color
-        if (!card.getChosenColors().isEmpty()) {
+        if (card.getChosenColors() != null) {
             if (area.length() != 0) {
                 area.append("\n");
             }
@@ -397,7 +401,7 @@ public class CardDetailUtil {
         }
 
         // equipped by
-        if (card.getEquippedBy().iterator().hasNext()) {
+        if (card.isEquipped()) {
             if (area.length() != 0) {
                 area.append("\n");
             }
@@ -426,7 +430,7 @@ public class CardDetailUtil {
         }
 
         // enchanted by
-        if (card.getEnchantedBy().iterator().hasNext()) {
+        if (card.isEnchanted()) {
             if (area.length() != 0) {
                 area.append("\n");
             }
@@ -441,7 +445,7 @@ public class CardDetailUtil {
         }
 
         // controlling
-        if (card.getGainControlTargets().iterator().hasNext()) {
+        if (card.getGainControlTargets() != null) {
             if (area.length() != 0) {
                 area.append("\n");
             }
@@ -466,12 +470,12 @@ public class CardDetailUtil {
         }
 
         // Imprint
-        if (card.getImprinted().iterator().hasNext()) {
+        if (card.getImprintedCards() != null) {
             if (area.length() != 0) {
                 area.append("\n");
             }
             area.append("Imprinting: ");
-            for (final Iterator<CardView> it = card.getImprinted().iterator(); it.hasNext();) {
+            for (final Iterator<CardView> it = card.getImprintedCards().iterator(); it.hasNext();) {
                 area.append(it.next());
                 if (it.hasNext()) {
                     area.append(", ");
@@ -480,7 +484,7 @@ public class CardDetailUtil {
         }
 
         // Haunt
-        if (card.getHauntedBy().iterator().hasNext()) {
+        if (card.getHauntedBy() != null) {
             if (area.length() != 0) {
                 area.append("\n");
             }
@@ -500,25 +504,24 @@ public class CardDetailUtil {
         }
 
         // must block
-        if (card.getMustBlock().iterator().hasNext()) {
+        if (card.getMustBlockCards() != null) {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            final String mustBlockThese = Lang.joinHomogenous(card.getMustBlock());
+            final String mustBlockThese = Lang.joinHomogenous(card.getMustBlockCards());
             area.append("Must block " + mustBlockThese);
         }
 
-        /*show current storm count for storm cards
+        //show current storm count for storm cards
         if (state.hasStorm()) {
-            Game game = GuiBase.getInterface().getGame();
-            if (game != null) {
+            GameView gameView = MatchUtil.getGameView();
+            if (gameView != null) {
                 if (area.length() != 0) {
                     area.append("\n\n");
                 }
-                area.append("Current Storm Count: " + game.getStack().getCardsCastThisTurn().size());
+                area.append("Current Storm Count: " + gameView.getStormCount());
             }
-        }*/
+        }
         return area.toString();
     }
-
 }

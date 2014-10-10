@@ -28,6 +28,8 @@ import javax.swing.ScrollPaneConstants;
 import com.google.common.collect.Lists;
 
 import net.miginfocom.swing.MigLayout;
+import forge.game.card.CardView;
+import forge.game.player.PlayerView;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -39,8 +41,6 @@ import forge.screens.match.controllers.CPlayers;
 import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
-import forge.view.CardView;
-import forge.view.PlayerView;
 
 /** 
  * Assembles Swing components of players report.
@@ -165,14 +165,16 @@ public enum VPlayers implements IVDoc<CPlayers> {
                 temp[5].setText("");
             }
             if (FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
-                final List<CardView> list = p0.getAnteCards();
+                final Iterable<CardView> list = p0.getAnte();
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Ante'd: ");
-                for (int i = 0; i < list.size(); i++) {
-                    sb.append(list.get(i));
-                    if (i < (list.size() - 1)) {
+                boolean needDelim = false;
+                for (CardView cv : list) {
+                    if (needDelim) {
                         sb.append(", ");
                     }
+                    else { needDelim = true; }
+                    sb.append(cv);
                 }
                 temp[6].setText(sb.toString());
             }

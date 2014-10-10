@@ -103,7 +103,7 @@ public enum TrackableProperty {
     Key(TrackableTypes.StringType),
     SourceTrigger(TrackableTypes.IntegerType),
     SourceCard(TrackableTypes.CardViewType),
-    Activator(TrackableTypes.PlayerViewType),
+    ActivatingPlayer(TrackableTypes.PlayerViewType),
     TargetCards(TrackableTypes.CardViewCollectionType),
     TargetPlayers(TrackableTypes.PlayerViewCollectionType),
     SubInstance(TrackableTypes.StackItemViewType),
@@ -111,13 +111,14 @@ public enum TrackableProperty {
     OptionalTrigger(TrackableTypes.BooleanType),
 
     //Combat
-    AttackersWithDefenders(null), //TODO
-    AttackersWithBlockers(null),
-    BandsWithDefenders(null),
-    BandsWithBlockers(null),
-    AttackersWithPlannedBlockers(null),
-    BandsWithPlannedBlockers(null),
+    AttackersWithDefenders(TrackableTypes.CardViewCollectionType), //TODO: change out for proper types when serialization needed
+    AttackersWithBlockers(TrackableTypes.CardViewCollectionType),
+    BandsWithDefenders(TrackableTypes.CardViewCollectionType),
+    BandsWithBlockers(TrackableTypes.CardViewCollectionType),
+    AttackersWithPlannedBlockers(TrackableTypes.CardViewCollectionType),
+    BandsWithPlannedBlockers(TrackableTypes.CardViewCollectionType),
 
+    //Game
     GameType(TrackableTypes.EnumType(GameType.class)),
     Turn(TrackableTypes.IntegerType),
     WinningTeam(TrackableTypes.IntegerType),

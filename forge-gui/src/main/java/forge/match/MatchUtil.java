@@ -26,21 +26,24 @@ import forge.ai.LobbyPlayerAi;
 import forge.card.CardCharacteristicName;
 import forge.control.FControlGameEventHandler;
 import forge.control.FControlGamePlayback;
+import forge.control.WatchLocalGame;
 import forge.events.IUiEventVisitor;
 import forge.events.UiEvent;
 import forge.events.UiEventAttackerDeclared;
 import forge.events.UiEventBlockerAssigned;
 import forge.game.Game;
+import forge.game.GameEntityView;
 import forge.game.GameRules;
 import forge.game.GameType;
+import forge.game.GameView;
 import forge.game.Match;
 import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.game.card.CounterType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.match.input.InputPlaybackControl;
@@ -56,33 +59,12 @@ import forge.sound.SoundSystem;
 import forge.util.GuiDisplayUtil;
 import forge.util.NameGenerator;
 import forge.util.gui.SOptionPane;
-import forge.view.Cache;
-import forge.view.CardView;
-import forge.view.CombatView;
-import forge.view.GameEntityView;
-import forge.view.LocalGameView;
-import forge.view.PlayerView;
-import forge.view.SpellAbilityView;
-import forge.view.StackItemView;
-import forge.view.WatchLocalGame;
 
 public class MatchUtil {
     private static IMatchController controller;
     private static Game game;
     private static Player currentPlayer;
-    private static final List<LocalGameView> gameViews = new ArrayList<LocalGameView>();
-
-    /** Cache of players. */
-    public static final Cache<Player, PlayerView> players = new Cache<>();
-    /** Cache of cards. */
-    public static final Cache<Card, CardView> cards = new Cache<>();
-    /** Cache of spellabilities. */
-    public static final Cache<SpellAbility, SpellAbilityView> spabs = new Cache<>();
-    /** Cache of stack items. */
-    public static final Cache<SpellAbilityStackInstance, StackItemView> stackItems = new Cache<>();
-    /** Cache of combat. */
-    public static CombatView cachedCombatView = null;
-
+    private static final List<PlayerControllerHuman> humanControllers = new ArrayList<PlayerControllerHuman>();
     private static int humanCount;
     private static final EventBus uiEvents;
     private static FControlGamePlayback playbackControl;
@@ -177,23 +159,21 @@ public class MatchUtil {
             p.getLobbyPlayer().setAvatarIndex(avatarIndex);
 
             if (p.getController() instanceof PlayerControllerHuman) {
-                final PlayerControllerHuman controller = (PlayerControllerHuman) p.getController();
-                LocalGameView gameView = controller.getGameView();
+                final PlayerControllerHuman humanController = (PlayerControllerHuman) p.getController();
                 if (humanCount == 0) {
                     currentPlayer = p;
-                    game.subscribeToEvents(new FControlGameEventHandler(gameView));
+                    game.subscribeToEvents(new FControlGameEventHandler(humanController));
                 }
-                gameViews.add(gameView);
+                humanControllers.add(humanController);
                 humanCount++;
             }
         }
 
         if (humanCount == 0) { //watch game but do not participate
-            LocalGameView gameView = new WatchLocalGame(game);
             currentPlayer = sortedPlayers.get(0);
-            gameView.setLocalPlayer(currentPlayer);
-            game.subscribeToEvents(new FControlGameEventHandler(gameView));
-            gameViews.add(gameView);
+            PlayerControllerHuman humanController = new WatchLocalGame(game, currentPlayer, currentPlayer.getLobbyPlayer());
+            game.subscribeToEvents(new FControlGameEventHandler(humanController));
+            humanControllers.add(humanController);
         }
         else if (humanCount == sortedPlayers.size() && controller.hotSeatMode()) {
             //if there are no AI's, allow all players to see all cards (hotseat mode).
@@ -205,14 +185,9 @@ public class MatchUtil {
         controller.openView(sortedPlayers);
 
         if (humanCount == 0) {
-            playbackControl = new FControlGamePlayback(getGameView());
+            playbackControl = new FControlGamePlayback(getHumanController());
             playbackControl.setGame(game);
             game.subscribeToEvents(playbackControl);
-        }
-
-        //ensure opponents set properly
-        for (PlayerView pv : gameViews.get(0).getPlayers()) {
-            pv.setOpponents(gameViews.get(0).getPlayerViews(players.getKey(pv.getId()).getOpponents(), false));
         }
 
         // It's important to run match in a different thread to allow GUI inputs to be invoked from inside game. 
@@ -236,18 +211,21 @@ public class MatchUtil {
     public static Game getGame() {
         return game;
     }
-
-    public static LocalGameView getGameView() {
-        return getGameView(currentPlayer);
+    public static GameView getGameView() {
+        return game == null ? null : game.getView();
     }
-    public static LocalGameView getGameView(Player player) {
-        switch (gameViews.size()) {
+
+    public static PlayerControllerHuman getHumanController() {
+        return getHumanController(currentPlayer);
+    }
+    public static PlayerControllerHuman getHumanController(Player player) {
+        switch (humanControllers.size()) {
         case 1:
-            return gameViews.get(0);
+            return humanControllers.get(0);
         case 0:
             return null;
         default:
-            return gameViews.get(player.getId());
+            return humanControllers.get(player.getId());
         }
     }
 
@@ -255,28 +233,28 @@ public class MatchUtil {
         return humanCount;
     }
 
-    public static LocalGameView getOtherGameView() {
+    public static PlayerControllerHuman getOtherHumanController() {
         //return other game view besides current game view
-        if (gameViews.size() < 2) {
+        if (humanControllers.size() < 2) {
             return null;
         }
-        LocalGameView gameView = getGameView();
-        if (gameView == gameViews.get(0)) {
-            return gameViews.get(1);
+        PlayerControllerHuman humanController = getHumanController();
+        if (humanController == humanControllers.get(0)) {
+            return humanControllers.get(1);
         }
-        return gameViews.get(0);
+        return humanControllers.get(0);
     }
 
     public static InputQueue getInputQueue() {
-        LocalGameView gameView = getGameView();
-        if (gameView != null) {
-            return gameView.getInputQueue();
+        PlayerControllerHuman humanController = getHumanController();
+        if (humanController != null) {
+            return humanController.getInputQueue();
         }
         return null;
     }
 
     public static void endCurrentTurn() {
-        getGameView().passPriorityUntilEndOfTurn();
+        getHumanController().passPriorityUntilEndOfTurn();
     }
 
     public static Player getCurrentPlayer() {
@@ -285,13 +263,13 @@ public class MatchUtil {
     public static void setCurrentPlayer(Player currentPlayer0) {
         if (currentPlayer == currentPlayer0) { return; }
         currentPlayer = currentPlayer0;
-        if (gameViews.size() > 1) {
-            gameViews.get(0).updateAllCards(); //ensure card views updated when current player changes to account for changes in card visibility
+        if (humanControllers.size() > 1) {
+            //TODO: ensure card views updated when current player changes to account for changes in card visibility
         }
     }
 
     public static void alphaStrike() {
-        getGameView().alphaStrike();
+        getHumanController().alphaStrike();
     }
 
     public static Map<CardView, Integer> getDamageToAssign(final CardView attacker, final List<CardView> blockers, final int damage, final GameEntityView defender, final boolean overrideOrder) {
@@ -380,11 +358,7 @@ public class MatchUtil {
 
         game = null;
         currentPlayer = null;
-        gameViews.clear();
-        players.clear();
-        cards.clear();
-        spabs.clear();
-        stackItems.clear();
+        humanControllers.clear();
 
         controller.afterGameEnd();
     }

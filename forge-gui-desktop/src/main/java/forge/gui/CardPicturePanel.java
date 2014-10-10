@@ -25,13 +25,13 @@ import javax.swing.JPanel;
 
 import forge.ImageCache;
 import forge.ImageKeys;
+import forge.game.card.CardView.CardStateView;
 import forge.item.InventoryItem;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.imaging.FImagePanel;
 import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
-import forge.view.CardView.CardStateView;
 
 /**
  * Displays image associated with a card or inventory item.

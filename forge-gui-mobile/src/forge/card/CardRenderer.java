@@ -23,6 +23,8 @@ import forge.assets.ImageCache;
 import forge.assets.TextRenderer;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.mana.ManaCost;
+import forge.game.card.CardView;
+import forge.game.card.CardView.CardStateView;
 import forge.item.IPaperCard;
 import forge.match.MatchUtil;
 import forge.model.FModel;
@@ -31,9 +33,6 @@ import forge.toolbox.FCardPanel;
 import forge.toolbox.FDialog;
 import forge.toolbox.FList;
 import forge.util.Utils;
-import forge.view.CardView;
-import forge.view.CardView.CardStateView;
-import forge.view.ViewUtil;
 
 public class CardRenderer {
     public enum CardStackPosition {
@@ -284,7 +283,7 @@ public class CardRenderer {
         }
     }
     public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, IPaperCard pc, int count, String suffix, float x, float y, float w, float h, boolean compactMode) {
-        final CardView card = ViewUtil.getCardForUi(pc);
+        final CardView card = CardView.getCardForUi(pc);
         final CardStateView state = card.getOriginal();
         drawCardListItem(g, font, foreColor, getCardArt(pc), card, pc.getEdition(),
                 pc.getRarity(), state.getPower(), state.getToughness(),
@@ -372,7 +371,7 @@ public class CardRenderer {
         float cardArtHeight = getCardListItemHeight(compactMode);
         float cardArtWidth = cardArtHeight * CARD_ART_RATIO;
         if (x <= cardArtWidth && y <= cardArtHeight) {
-            CardZoom.show(ViewUtil.getCardForUi(pc));
+            CardZoom.show(CardView.getCardForUi(pc));
             return true;
         }
         return false;
@@ -489,15 +488,15 @@ public class CardRenderer {
         Texture image = ImageCache.getImage(pc);
         if (image != null) {
             if (image == ImageCache.defaultImage) {
-                CardImageRenderer.drawCardImage(g, ViewUtil.getCardForUi(pc), x, y, w, h, pos);
+                CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), x, y, w, h, pos);
             }
             else {
                 g.drawImage(image, x, y, w, h);
             }
             if (pc.isFoil()) { //draw foil effect if needed
-                final CardView card = ViewUtil.getCardForUi(pc);
+                final CardView card = CardView.getCardForUi(pc);
                 if (card.getOriginal().getFoilIndex() == 0) { //if foil finish not yet established, assign a random one
-                    card.getOriginal().setRandomFoil();
+                    card.getOriginal().setFoilIndexOverride(-1);
                 }
                 drawFoilEffect(g, card, x, y, w, h);
             }
@@ -564,8 +563,10 @@ public class CardRenderer {
         }
 
         int number = 0;
-        for (final Integer i : card.getCounters().values()) {
-            number += i.intValue();
+        if (card.getCounters() != null) {
+            for (final Integer i : card.getCounters().values()) {
+                number += i.intValue();
+            }
         }
 
         final int counters = number;

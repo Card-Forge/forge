@@ -17,8 +17,8 @@ package forge.screens.match.winlose;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import forge.game.GameView;
 import forge.limited.LimitedWinLoseController;
-import forge.view.IGameView;
 
 /**
  * The Win/Lose handler for 'gauntlet' type tournament
@@ -33,7 +33,7 @@ public class LimitedWinLose extends ControlWinLose {
      * @param view0 {@link forge.gui.match.ViewWinLose}
      * @param match {@link forge.game.Match}
      */
-    public LimitedWinLose(final ViewWinLose view0, IGameView lastGame) {
+    public LimitedWinLose(final ViewWinLose view0, GameView lastGame) {
         super(view0, lastGame);
         controller = new LimitedWinLoseController(view0, lastGame) {
             @Override

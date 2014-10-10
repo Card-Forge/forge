@@ -22,6 +22,7 @@ import java.util.List;
 import javax.swing.SwingConstants;
 
 import forge.assets.FSkinProp;
+import forge.game.GameView;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
@@ -33,7 +34,6 @@ import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinIcon;
 import forge.toolbox.FSkin.SkinnedLabel;
-import forge.view.IGameView;
 
 /**
  * <p>
@@ -61,7 +61,7 @@ public class QuestWinLose extends ControlWinLose {
      * @param view0 ViewWinLose object
      * @param match2
      */
-    public QuestWinLose(final ViewWinLose view0, final IGameView game0) {
+    public QuestWinLose(final ViewWinLose view0, final GameView game0) {
         super(view0, game0);
         view = view0;
         controller = new QuestWinLoseController(game0) {

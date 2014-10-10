@@ -1,5 +1,6 @@
 package forge.screens.match;
 
+import forge.game.GameView;
 import forge.gui.framework.*;
 import forge.match.MatchUtil;
 import forge.properties.ForgePreferences;
@@ -8,7 +9,6 @@ import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FButton;
 import forge.view.FView;
-import forge.view.IGameView;
 
 import javax.swing.*;
 
@@ -23,7 +23,6 @@ import java.util.List;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
 public enum VMatchUI implements IVTopLevelUI {
-    /** */
     SINGLETON_INSTANCE;
 
     private List<VCommand> lstCommands = new ArrayList<VCommand>();
@@ -45,12 +44,10 @@ public enum VMatchUI implements IVTopLevelUI {
         for (int i = 0; i < 8; i++) EDocID.Hands[i].setDoc(new VEmptyDoc(EDocID.Hands[i]));
     }
 
-    /** */
     @Override
     public void instantiate() {
     }
 
-    /** */
     @Override
     public void populate() {
         // Dev mode disabled? Remove from parent cell if exists.
@@ -95,23 +92,12 @@ public enum VMatchUI implements IVTopLevelUI {
             }
         }
 
-        if (MatchUtil.getGameView().isCommandZoneNeeded()) {
-            // Add extra players alternatively to existing user/AI field panels.
-            for (int i = 2; i < lstCommands.size(); i++) {
-                // If already in layout, no need to add again.
-                VCommand cmdView = lstCommands.get(i);
-                if (cmdView.getParentCell() == null) {
-                    lstCommands.get(i % 2).getParentCell().addDoc(cmdView);
-                }
-            }
-        }
-        else {
-            //If game goesn't need command zone, remove it from existing field panels
-            for (int i = 0; i < 2; i++) {
-                VCommand cmdView = lstCommands.get(i);
-                if (cmdView.getParentCell() != null) {
-                    cmdView.getParentCell().removeDoc(cmdView);
-                }
+        // Add extra players alternatively to existing user/AI field panels.
+        for (int i = 2; i < lstCommands.size(); i++) {
+            // If already in layout, no need to add again.
+            VCommand cmdView = lstCommands.get(i);
+            if (cmdView.getParentCell() == null) {
+                lstCommands.get(i % 2).getParentCell().addDoc(cmdView);
             }
         }
 
@@ -147,24 +133,18 @@ public enum VMatchUI implements IVTopLevelUI {
         });
     }
 
-    //========== Retrieval methods
-
-    /** @return {@link forge.screens.match.CMatchUI} */
     public CMatchUI getControl() {
         return this.control;
     }
 
-    /** @param lst0 List<VField> */
     public void setFieldViews(final List<VField> lst0) {
         this.lstFields = lst0;
     }
 
-    /** @return {@link java.util.List}<{@link forge.screens.match.views.VHand}> */
     public List<VField> getFieldViews() {
         return lstFields;
     }
 
-    /** @param lst0 List<VField> */
     public void setHandViews(final List<VHand> lst0) {
         this.lstHands = lst0;
     }
@@ -177,16 +157,10 @@ public enum VMatchUI implements IVTopLevelUI {
         return VPrompt.SINGLETON_INSTANCE.getBtnOK();
     }
 
-    /**
-     * @return the lstCommands
-     */
     public List<VCommand> getCommandViews() {
         return lstCommands;
     }
 
-    /**
-     * @param lstCommands0 the lstCommands to set
-     */
     public void setCommandViews(List<VCommand> lstCommands0) {
         this.lstCommands = lstCommands0;
     }
@@ -195,20 +169,14 @@ public enum VMatchUI implements IVTopLevelUI {
         return lstHands;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVTopLevelUI#onSwitching(forge.gui.framework.FScreen)
-     */
     @Override
     public boolean onSwitching(FScreen fromScreen, FScreen toScreen) {
         return true;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVTopLevelUI#onClosing(forge.control.FControl.Screens)
-     */
     @Override
     public boolean onClosing(FScreen screen) {
-        final IGameView gameView = MatchUtil.getGameView();
+        final GameView gameView = MatchUtil.getGameView();
         if (gameView != null && !gameView.isGameOver()) {
             MatchUtil.concede();
             return false; //delay hiding tab even if concede successful

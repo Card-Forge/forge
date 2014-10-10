@@ -21,6 +21,10 @@ import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import forge.game.card.Card;
+import forge.game.card.CardView;
+import forge.game.card.CardView.CardStateView;
+import forge.game.spellability.SpellAbilityView;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.screens.match.CMatchUI;
@@ -29,11 +33,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FList;
 import forge.toolbox.FPanel;
 import forge.toolbox.FScrollPane;
-import forge.view.CardView;
-import forge.view.CardView.CardStateView;
 import forge.view.FDialog;
-import forge.view.SpellAbilityView;
-import forge.view.ViewUtil;
 
 // An input box for handling the order of choices.
 // Left box has the original choices
@@ -334,7 +334,7 @@ public class DualListBox<T> extends FDialog {
         } else if (obj instanceof SpellAbilityView) {
             card = ((SpellAbilityView) obj).getHostCard();
         } else if (obj instanceof PaperCard) {
-            card = ViewUtil.getCardForUi((IPaperCard) obj);
+            card = Card.getCardForUi((IPaperCard) obj).getView();
         }
 
         GuiUtils.clearPanelSelections();

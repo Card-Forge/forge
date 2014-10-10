@@ -20,6 +20,7 @@ package forge.screens.match.views;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
+import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -28,7 +29,6 @@ import forge.gui.framework.IVDoc;
 import forge.screens.match.controllers.CCommand;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
-import forge.view.PlayerView;
 import forge.view.arcane.PlayArea;
 
 /** 

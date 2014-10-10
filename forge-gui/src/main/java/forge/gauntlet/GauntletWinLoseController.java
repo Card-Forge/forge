@@ -8,19 +8,19 @@ import forge.LobbyPlayer;
 import forge.assets.FSkinProp;
 import forge.deck.Deck;
 import forge.game.GameType;
+import forge.game.GameView;
 import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IButton;
 import forge.interfaces.IWinLoseView;
 import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
-import forge.view.IGameView;
 
 public abstract class GauntletWinLoseController {
-    private final IGameView lastGame;
+    private final GameView lastGame;
     private final IWinLoseView<? extends IButton> view;
 
-    public GauntletWinLoseController(IWinLoseView<? extends IButton> view0, final IGameView game0) {
+    public GauntletWinLoseController(IWinLoseView<? extends IButton> view0, final GameView game0) {
         view = view0;
         lastGame = game0;
     }

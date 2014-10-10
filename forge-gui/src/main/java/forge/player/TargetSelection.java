@@ -30,6 +30,7 @@ import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
+import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
@@ -39,9 +40,6 @@ import forge.match.MatchUtil;
 import forge.match.input.InputSelectTargets;
 import forge.util.Aggregates;
 import forge.util.gui.SGuiChoose;
-import forge.view.CardView;
-import forge.view.PlayerView;
-import forge.view.StackItemView;
 
 /**
  * <p>
@@ -65,13 +63,6 @@ public class TargetSelection {
     }
 
     private boolean bTargetingDone = false;
-
-
-    /**
-     * <p>
-     * resetTargets.
-     * </p>
-     */
 
     public final boolean chooseTargets(Integer numTargets) {
         final TargetRestrictions tgt = getTgt();
@@ -140,7 +131,7 @@ public class TargetSelection {
             }
             final Map<PlayerView, Object> playersWithValidTargets = Maps.newHashMap();
             for (Card card : validTargets) {
-                playersWithValidTargets.put(controller.getPlayerView(card.getController()), null);
+                playersWithValidTargets.put(PlayerView.get(card.getController()), null);
             }
             if (MatchUtil.getController().openZones(zone, playersWithValidTargets)) {
                 InputSelectTargets inp = new InputSelectTargets(controller, validTargets, ability, mandatory);
@@ -162,13 +153,6 @@ public class TargetSelection {
     // parameters for target selection.
     // however, due to the changes necessary for SA_Requirements this is much
     // different than the original
-
-    /**
-     * <p>
-     * chooseValidInput.
-     * </p>
-     * @return 
-     */
     private final List<Card> getValidCardsToTarget() {
         final TargetRestrictions tgt = this.getTgt();
         final Game game = ability.getActivatingPlayer().getGame();
@@ -217,37 +201,24 @@ public class TargetSelection {
         return choices;
     }
 
-    /**
-     * <p>
-     * chooseCardFromList.
-     * </p>
-     * 
-     * @param choices
-     *            a {@link forge.CardList} object.
-     * @param targeted
-     *            a boolean.
-     * @param mandatory
-     *            a boolean.
-     */
     private final boolean chooseCardFromList(final List<Card> choices, final boolean targeted, final boolean mandatory) {
         // Send in a list of valid cards, and popup a choice box to target
         final Game game = ability.getActivatingPlayer().getGame();
 
-        final List<CardView> crdsBattle  = Lists.newArrayList();
-        final List<CardView> crdsExile   = Lists.newArrayList();
-        final List<CardView> crdsGrave   = Lists.newArrayList();
-        final List<CardView> crdsLibrary = Lists.newArrayList();
-        final List<CardView> crdsStack   = Lists.newArrayList();
-        final List<CardView> crdsAnte    = Lists.newArrayList();
+        final List<Card> crdsBattle  = Lists.newArrayList();
+        final List<Card> crdsExile   = Lists.newArrayList();
+        final List<Card> crdsGrave   = Lists.newArrayList();
+        final List<Card> crdsLibrary = Lists.newArrayList();
+        final List<Card> crdsStack   = Lists.newArrayList();
+        final List<Card> crdsAnte    = Lists.newArrayList();
         for (final Card inZone : choices) {
-            final CardView view = controller.getCardView(inZone);
             Zone zz = game.getZoneOf(inZone);
-            if (zz.is(ZoneType.Battlefield))    crdsBattle.add(view);
-            else if (zz.is(ZoneType.Exile))     crdsExile.add(view);
-            else if (zz.is(ZoneType.Graveyard)) crdsGrave.add(view);
-            else if (zz.is(ZoneType.Library))   crdsLibrary.add(view);
-            else if (zz.is(ZoneType.Stack))     crdsStack.add(view);
-            else if (zz.is(ZoneType.Ante))      crdsAnte.add(view);
+            if (zz.is(ZoneType.Battlefield))    crdsBattle.add(inZone);
+            else if (zz.is(ZoneType.Exile))     crdsExile.add(inZone);
+            else if (zz.is(ZoneType.Graveyard)) crdsGrave.add(inZone);
+            else if (zz.is(ZoneType.Library))   crdsLibrary.add(inZone);
+            else if (zz.is(ZoneType.Stack))     crdsStack.add(inZone);
+            else if (zz.is(ZoneType.Ante))      crdsAnte.add(inZone);
         }
         List<Object> choicesFiltered = new ArrayList<Object>();
         if (!crdsBattle.isEmpty()) {
@@ -284,7 +255,8 @@ public class TargetSelection {
         Object chosen = null;
         if (!choices.isEmpty() && mandatory) {
             chosen = SGuiChoose.one(getTgt().getVTSelection(), choicesFiltered);
-        } else {
+        }
+        else {
             chosen = SGuiChoose.oneOrNone(getTgt().getVTSelection(), choicesFiltered);
         }
         if (chosen == null) {
@@ -295,21 +267,12 @@ public class TargetSelection {
             return true;
         }
 
-        if (chosen instanceof CardView) {
-            final Card chosenCard = controller.getCard((CardView) chosen);
-            ability.getTargets().add(chosenCard);
+        if (chosen instanceof Card) {
+            ability.getTargets().add((Card) chosen);
         }
         return true;
     }
 
-    /**
-     * <p>
-     * chooseCardFromStack.
-     * </p>
-     * 
-     * @param mandatory
-     *            a boolean.
-     */
     private final boolean chooseCardFromStack(final boolean mandatory) {
         final TargetRestrictions tgt = this.getTgt();
         final String message = tgt.getVTSelection();
@@ -322,8 +285,9 @@ public class TargetSelection {
             if (ability.equals(abilityOnStack)) {
                 // By peeking at stack item, target is set to its SI state. So set it back before adding targets
                 ability.resetTargets();
-            } else if (ability.canTargetSpellAbility(abilityOnStack)) {
-                selectOptions.add(controller.getStackItemView(si));
+            }
+            else if (ability.canTargetSpellAbility(abilityOnStack)) {
+                selectOptions.add(si);
             }
         }
 
@@ -340,15 +304,18 @@ public class TargetSelection {
             if (selectOptions.isEmpty()) {
                 // Not enough targets, cancel targeting
                 return false;
-            } else {
+            }
+            else {
                 final Object madeChoice = SGuiChoose.oneOrNone(message, selectOptions);
                 if (madeChoice == null) {
                     return false;
                 }
-                if (madeChoice instanceof StackItemView) {
-                    ability.getTargets().add(controller.getStackItem((StackItemView)madeChoice).getSpellAbility(true));
-                } else // 'FINISH TARGETING' chosen 
+                if (madeChoice instanceof SpellAbilityStackInstance) {
+                    ability.getTargets().add(((SpellAbilityStackInstance)madeChoice).getSpellAbility(true));
+                }
+                else {// 'FINISH TARGETING' chosen 
                     bTargetingDone = true;
+                }
             }
         }
         return true;

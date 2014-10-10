@@ -28,6 +28,8 @@ import forge.deck.FDeckViewer;
 import forge.deck.FSideboardDialog;
 import forge.error.BugReportDialog;
 import forge.game.GameEntity;
+import forge.game.GameEntityView;
+import forge.game.card.CardView;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
 import forge.interfaces.IGuiBase;
@@ -49,8 +51,6 @@ import forge.util.ThreadUtil;
 import forge.util.WaitCallback;
 import forge.util.WaitRunnable;
 import forge.util.gui.SGuiChoose;
-import forge.view.CardView;
-import forge.view.GameEntityView;
 
 public class GuiMobile implements IGuiBase {
     private final String assetsDir;
@@ -215,7 +215,7 @@ public class GuiMobile implements IGuiBase {
     @Override
     public GameEntityView chooseSingleEntityForEffect(final String title, final Collection<? extends GameEntity> optionList, final DelayedReveal delayedReveal, final boolean isOptional, final PlayerControllerHuman controller) {
         controller.tempShow(optionList);
-        final List<GameEntityView> choiceList = controller.getGameView().getGameEntityViews(optionList, false);
+        final List<GameEntityView> choiceList = GameEntityView.getEntityCollection(optionList);
 
         if (delayedReveal == null || Iterables.isEmpty(delayedReveal.getCards())) {
             if (isOptional) {
@@ -225,7 +225,7 @@ public class GuiMobile implements IGuiBase {
         }
 
         controller.tempShow(delayedReveal.getCards());
-        final List<CardView> revealList = controller.getGameView().getCardViews(delayedReveal.getCards(), false);
+        final List<CardView> revealList = CardView.getCollection(delayedReveal.getCards());
         final String revealListCaption = StringUtils.capitalize(MessageUtil.formatMessage("{player's} " + delayedReveal.getZone().name(), controller.getPlayer(), delayedReveal.getOwner()));
         final FImage revealListImage = MatchController.getView().getPlayerPanels().values().iterator().next().getZoneTab(delayedReveal.getZone()).getIcon();
 

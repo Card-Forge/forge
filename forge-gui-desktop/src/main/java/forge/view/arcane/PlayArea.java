@@ -28,14 +28,14 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import forge.FThreads;
+import forge.game.card.CardView;
+import forge.game.card.CardView.CardStateView;
+import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CPrompt;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.MouseTriggerEvent;
-import forge.view.CardView;
-import forge.view.CardView.CardStateView;
-import forge.view.PlayerView;
 import forge.view.arcane.util.Animation;
 import forge.view.arcane.util.CardPanelMouseListener;
 
@@ -124,7 +124,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         break;
                     }
                     if (!panel.getAttachedPanels().isEmpty()
-                            || !panel.getCard().getCounters().equals(firstPanel.getCard().getCounters())
+                            || !panel.getCard().hasSameCounters(firstPanel.getCard())
                             || firstPanel.getCard().isEnchanted() || (stack.size() == this.landStackMax)) {
                         // If this land has attachments or the stack is full,
                         // put it to the right.
@@ -180,7 +180,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     final String firstText = firstState.getText();
 
                     if (!panel.getAttachedPanels().isEmpty()
-                            || !card.getCounters().equals(firstPanel.getCard().getCounters())
+                            || !card.hasSameCounters(firstPanel.getCard())
                             || (card.isSick() != firstCard.isSick())
                             || (state.getPower() != firstState.getPower())
                             || (state.getToughness() != firstState.getToughness())
@@ -670,27 +670,33 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
         toPanel.getAttachedPanels().clear();
 
-        final Iterable<CardView> enchants = card.getEnchantedBy();
-        for (final CardView e : enchants) {
-            final CardPanel cardE = getCardPanel(e.getId());
-            if (cardE != null) {
-                toPanel.getAttachedPanels().add(cardE);
+        if (card.isEnchanted()) {
+            final Iterable<CardView> enchants = card.getEnchantedBy();
+            for (final CardView e : enchants) {
+                final CardPanel cardE = getCardPanel(e.getId());
+                if (cardE != null) {
+                    toPanel.getAttachedPanels().add(cardE);
+                }
             }
         }
 
-        final Iterable<CardView> equips = card.getEquippedBy();
-        for (final CardView e : equips) {
-            final CardPanel cardE = getCardPanel(e.getId());
-            if (cardE != null) {
-                toPanel.getAttachedPanels().add(cardE);
+        if (card.isEquipped()) {
+            final Iterable<CardView> equips = card.getEquippedBy();
+            for (final CardView e : equips) {
+                final CardPanel cardE = getCardPanel(e.getId());
+                if (cardE != null) {
+                    toPanel.getAttachedPanels().add(cardE);
+                }
             }
         }
 
-        final Iterable<CardView> fortifications = card.getFortifiedBy();
-        for (final CardView f : fortifications) {
-            final CardPanel cardE = getCardPanel(f.getId());
-            if (cardE != null) {
-                toPanel.getAttachedPanels().add(cardE);
+        if (card.isFortified()) {
+            final Iterable<CardView> fortifications = card.getFortifiedBy();
+            for (final CardView f : fortifications) {
+                final CardPanel cardE = getCardPanel(f.getId());
+                if (cardE != null) {
+                    toPanel.getAttachedPanels().add(cardE);
+                }
             }
         }
 
@@ -773,7 +779,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     final CardStateView thisState = thisCard.getOriginal();
                     if (otherState.getName().equals(thisState.getName()) && s.size() < othersStackMax) {
                         if (panel.getAttachedPanels().isEmpty()
-                            && thisCard.getCounters().equals(otherCard.getCounters())
+                            && thisCard.hasSameCounters(otherCard)
                             && (thisCard.isSick() == otherCard.isSick())
                             && (thisCard.isCloned() == otherCard.isCloned())) {
                             s.add(panel);

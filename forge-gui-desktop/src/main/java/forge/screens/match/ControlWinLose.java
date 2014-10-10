@@ -6,10 +6,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import forge.Singletons;
+import forge.game.GameView;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.FScreen;
 import forge.match.MatchUtil;
-import forge.view.IGameView;
 
 /** 
  * Default controller for a ViewWinLose object. This class can
@@ -19,11 +19,11 @@ import forge.view.IGameView;
  */
 public class ControlWinLose {
     private final ViewWinLose view;
-    protected final IGameView lastGame;
+    protected final GameView lastGame;
 
     /** @param v &emsp; ViewWinLose
      * @param match */
-    public ControlWinLose(final ViewWinLose v, final IGameView game0) {
+    public ControlWinLose(final ViewWinLose v, final GameView game0) {
         this.view = v;
         this.lastGame = game0;
         addListeners();

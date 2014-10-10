@@ -1,10 +1,10 @@
 package forge.screens.match.winlose;
 
+import forge.game.GameView;
 import forge.match.MatchUtil;
 import forge.screens.match.MatchController;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.view.IGameView;
 
 /** 
  * Default controller for a ViewWinLose object. This class can
@@ -14,11 +14,11 @@ import forge.view.IGameView;
  */
 public class ControlWinLose {
     private final ViewWinLose view;
-    protected final IGameView lastGame;
+    protected final GameView lastGame;
 
     /** @param v &emsp; ViewWinLose
      * @param match */
-    public ControlWinLose(final ViewWinLose v, IGameView game) {
+    public ControlWinLose(final ViewWinLose v, GameView game) {
         view = v;
         lastGame = game;
         addListeners();

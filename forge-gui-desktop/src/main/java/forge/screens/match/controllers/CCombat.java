@@ -5,14 +5,14 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.Iterables;
 
 import forge.UiCommand;
+import forge.game.GameEntityView;
+import forge.game.card.CardView;
+import forge.game.card.CardView.CardStateView;
+import forge.game.combat.CombatView;
+import forge.game.player.PlayerView;
 import forge.gui.framework.ICDoc;
 import forge.screens.match.views.VCombat;
 import forge.util.Lang;
-import forge.view.CardView;
-import forge.view.CardView.CardStateView;
-import forge.view.CombatView;
-import forge.view.GameEntityView;
-import forge.view.PlayerView;
 
 /** 
  * Controls the combat panel in the match UI.

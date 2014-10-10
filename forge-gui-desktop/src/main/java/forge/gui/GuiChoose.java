@@ -20,16 +20,13 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 
 import forge.FThreads;
+import forge.game.card.CardView;
+import forge.game.card.CardView.CardStateView;
 import forge.item.InventoryItem;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FOptionPane;
-import forge.view.CardView;
-import forge.view.CardView.CardStateView;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
+
 public class GuiChoose {
 
     /**
@@ -210,9 +207,11 @@ public class GuiChoose {
                         final CardView card;
                         if (sel instanceof CardStateView) {
                             card = ((CardStateView) sel).getCard();
-                        } else if (sel instanceof CardView) {
+                        }
+                        else if (sel instanceof CardView) {
                             card = (CardView) sel;
-                        } else {
+                        }
+                        else {
                             card = null;
                         }
                         if (card != null) {

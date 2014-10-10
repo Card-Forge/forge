@@ -2,18 +2,34 @@ package forge.game.spellability;
 
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
+import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 
 
 public class StackItemView extends TrackableObject {
+    public static StackItemView get(SpellAbilityStackInstance si) {
+        return si == null ? null : si.getView();
+    }
+
+    public static TrackableCollection<StackItemView> getCollection(Iterable<SpellAbilityStackInstance> instances) {
+        if (instances == null) {
+            return null;
+        }
+        TrackableCollection<StackItemView> collection = new TrackableCollection<StackItemView>();
+        for (SpellAbilityStackInstance si : instances) {
+            collection.add(si.getView());
+        }
+        return collection;
+    }
+
     public StackItemView(SpellAbilityStackInstance si) {
         super(si.getId());
         updateKey(si);
         updateSourceTrigger(si);
         updateText(si);
         updateSourceCard(si);
-        updateActivator(si);
+        updateActivatingPlayer(si);
         updateTargetCards(si);
         updateTargetPlayers(si);
         updateAbility(si);
@@ -46,14 +62,14 @@ public class StackItemView extends TrackableObject {
         return get(TrackableProperty.SourceCard);
     }
     void updateSourceCard(SpellAbilityStackInstance si) {
-        set(TrackableProperty.SourceCard, si.getSourceCard());
+        set(TrackableProperty.SourceCard, CardView.get(si.getSourceCard()));
     }
 
-    public PlayerView getActivator() {
-        return get(TrackableProperty.Activator);
+    public PlayerView getActivatingPlayer() {
+        return get(TrackableProperty.ActivatingPlayer);
     }
-    void updateActivator(SpellAbilityStackInstance si) {
-        set(TrackableProperty.Activator, PlayerView.get(si.getActivator()));
+    void updateActivatingPlayer(SpellAbilityStackInstance si) {
+        set(TrackableProperty.ActivatingPlayer, PlayerView.get(si.getActivatingPlayer()));
     }
 
     public Iterable<CardView> getTargetCards() {

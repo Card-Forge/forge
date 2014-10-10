@@ -30,11 +30,11 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 
 import forge.FThreads;
+import forge.game.card.CardView;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.special.CardZoomer;
-import forge.view.CardView;
 import forge.view.arcane.util.CardPanelMouseListener;
 
 /**

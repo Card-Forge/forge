@@ -25,6 +25,7 @@ import javax.swing.JLabel;
 
 import forge.UiCommand;
 import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.gui.CardPicturePanel;
 import forge.gui.framework.ICDoc;
 import forge.item.IPaperCard;
@@ -32,8 +33,6 @@ import forge.item.InventoryItem;
 import forge.screens.match.views.VPicture;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.special.CardZoomer;
-import forge.view.CardView;
-import forge.view.ViewUtil;
 
 /**
  * Singleton controller for VPicture.
@@ -83,18 +82,20 @@ public enum CPicture implements ICDoc {
     public void showImage(final InventoryItem item) {
         if (item instanceof IPaperCard) {
             final IPaperCard paperCard = ((IPaperCard)item);
-            final CardView c = ViewUtil.getCardForUi(paperCard);
+            final CardView c = CardView.getCardForUi(paperCard);
             if (paperCard.isFoil() && c.getOriginal().getFoilIndex() == 0) {
                 // FIXME should assign a random foil here in all cases
                 // (currently assigns 1 for the deck editors where foils "flicker" otherwise)
                 if (item instanceof Card) {
-                    c.getOriginal().setRandomFoil(); 
-                } else if (item instanceof IPaperCard) {
-                    c.getOriginal().setFoilIndex(1);
+                    c.getOriginal().setFoilIndexOverride(-1); //-1 to choose random
+                }
+                else if (item instanceof IPaperCard) {
+                    c.getOriginal().setFoilIndexOverride(1);
                 }
             }
             showCard(c, false);
-        } else {
+        }
+        else {
             currentView = null;
             isDisplayAlt = false;
             flipIndicator.setVisible(false);
@@ -177,5 +178,4 @@ public enum CPicture implements ICDoc {
             CDetail.SINGLETON_INSTANCE.showCard(currentView, isDisplayAlt);
         }
     }
-
 }

@@ -23,6 +23,7 @@ import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
+import forge.game.card.CardView.CardStateView;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
@@ -36,10 +37,7 @@ import java.util.TreeMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-/**
- * TODO: Write javadoc for this type.
- * 
- */
+
 public class CardCharacteristics {
     private String name = "";
     private Set<String> type = new CopyOnWriteArraySet<String>();
@@ -61,439 +59,57 @@ public class CardCharacteristics {
 
     private CardRarity rarity = CardRarity.Unknown;
     private String curSetCode = CardEdition.UNKNOWN.getCode();
-
-    /**
-     * Gets the name.
-     * 
-     * @return the name
-     */
-    public final String getName() {
-        return this.name;
-    }
-
-    /**
-     * Sets the name.
-     * 
-     * @param name0
-     *            the name to set
-     */
-    public final void setName(final String name0) {
-        this.name = name0;
-    }
-
-    /**
-     * Gets the type.
-     * 
-     * @return the type
-     */
-    public final Set<String> getType() {
-        return this.type;
-    }
-
-    /**
-     * Sets the type.
-     * 
-     * @param type0
-     *            the type to set
-     */
-    public final void setType(final ArrayList<String> type0) {
-        this.type.clear();
-        this.type.addAll(type0);
-    }
-
-    /**
-     * Gets the mana cost.
-     * 
-     * @return the manaCost
-     */
-    public final ManaCost getManaCost() {
-        return this.manaCost;
-    }
-
-    /**
-     * Sets the mana cost.
-     * 
-     * @param manaCost0
-     *            the manaCost to set
-     */
-    public final void setManaCost(final ManaCost manaCost0) {
-        this.manaCost = manaCost0;
-    }
-
-    /**
-     * Gets the card color.
-     * 
-     * @return the cardColor
-     */
-    public final List<CardColor> getCardColor() {
-        return this.cardColor;
-    }
-
-    /**
-     * Sets the card color.
-     * 
-     * @param cardColor0
-     *            the cardColor to set
-     */
-    public final void setCardColor(final Iterable<CardColor> cardColor0) {
-        this.cardColor = Lists.newArrayList(cardColor0);
-    }
     
-    /**
-     * Resets the card color.
-     */
+    private final CardStateView view;
+
+    public CardCharacteristics(CardStateView view0) {
+        view = view0;
+    }
+
+    public CardStateView getView() {
+        return view;
+    }
+
+    public final String getName() {
+        return name;
+    }
+    public final void setName(final String name0) {
+        name = name0;
+        view.updateName(this);
+    }
+
+    public final Set<String> getType() {
+        return type;
+    }
+    public final void setType(final Set<String> type0) {
+        type.clear();
+        type.addAll(type0);
+        view.updateType(this);
+    }
+
+    public final ManaCost getManaCost() {
+        return manaCost;
+    }
+    public final void setManaCost(final ManaCost manaCost0) {
+        manaCost = manaCost0;
+        view.updateManaCost(this);
+    }
+
+    public final List<CardColor> getCardColor() {
+        return cardColor;
+    }
+    public final void setCardColor(final Iterable<CardColor> cardColor0) {
+        cardColor = Lists.newArrayList(cardColor0);
+        view.updateColors(this);
+    }
     public final void resetCardColor() {
-        if (!this.cardColor.isEmpty()) {
-            this.cardColor = Lists.newArrayList(this.cardColor.subList(0, 1));
-        }
+        if (cardColor.isEmpty()) { return; }
+
+        cardColor = Lists.newArrayList(cardColor.subList(0, 1));
+        view.updateColors(this);
     }
-
-    /**
-     * @return the oracleText
-     */
-    public String getOracleText() {
-        return oracleText;
-    }
-
-    /**
-     * @param oracleText the oracleText to set
-     */
-    public void setOracleText(final String oracleText) {
-        this.oracleText = oracleText;
-    }
-
-    /**
-     * Gets the base attack.
-     * 
-     * @return the baseAttack
-     */
-    public final int getBaseAttack() {
-        return this.baseAttack;
-    }
-
-    /**
-     * Sets the base attack.
-     * 
-     * @param baseAttack0
-     *            the baseAttack to set
-     */
-    public final void setBaseAttack(final int baseAttack0) {
-        this.baseAttack = baseAttack0;
-    }
-
-    /**
-     * Gets the base defense.
-     * 
-     * @return the baseDefense
-     */
-    public final int getBaseDefense() {
-        return this.baseDefense;
-    }
-
-    /**
-     * Sets the base defense.
-     * 
-     * @param baseDefense0
-     *            the baseDefense to set
-     */
-    public final void setBaseDefense(final int baseDefense0) {
-        this.baseDefense = baseDefense0;
-    }
-
-    /**
-     * Gets the intrinsic keyword.
-     * 
-     * @return the intrinsicKeyword
-     */
-    public final List<String> getIntrinsicKeyword() {
-        return this.intrinsicKeyword;
-    }
-
-    /**
-     * Sets the intrinsic keyword.
-     * 
-     * @param intrinsicKeyword0
-     *            the intrinsicKeyword to set
-     */
-    public final void setIntrinsicKeyword(final ArrayList<String> intrinsicKeyword0) {
-        this.intrinsicKeyword = intrinsicKeyword0;
-    }
-
-    /**
-     * Gets the spell ability.
-     * 
-     * @return the spellAbility
-     */
-    public final List<SpellAbility> getSpellAbility() {
-        return this.spellAbility;
-    }
-
-    public final void setSpellAbility(SpellAbility sa) {
-    	this.spellAbility.clear();
-    	if (sa != null) {
-    	    this.spellAbility.add(sa);
-    	}
-    }
-
-    /**
-     * Gets the intrinsic ability.
-     * 
-     * @return the intrinsicAbility
-     */
-    public final List<String> getUnparsedAbilities() {
-        return this.unparsedAbilities;
-    }
-
-    /**
-     * Sets the intrinsic ability.
-     * 
-     * @param list
-     *            the intrinsicAbility to set
-     */
-    public final void setUnparsedAbilities(final List<String> list) {
-        this.unparsedAbilities = list;
-    }
-
-    /**
-     * Gets the mana ability.
-     * 
-     * @return the manaAbility
-     */
-    public final List<SpellAbility> getManaAbility() {
-        return this.manaAbility;
-    }
-
-    /**
-     * Gets the triggers.
-     * 
-     * @return the triggers
-     */
-    public final List<Trigger> getTriggers() {
-        return this.triggers;
-    }
-
-    /**
-     * Sets the triggers.
-     * 
-     * @param triggers0
-     *            the triggers to set
-     */
-    public final void setTriggers(final List<Trigger> triggers0) {
-        this.triggers = triggers0;
-    }
-
-    /**
-     * Gets the static abilities.
-     * 
-     * @return the staticAbilities
-     */
-    public final List<StaticAbility> getStaticAbilities() {
-        return this.staticAbilities;
-    }
-
-    /**
-     * Sets the static abilities.
-     * 
-     * @param staticAbilities0
-     *            the staticAbilities to set
-     */
-    public final void setStaticAbilities(final ArrayList<StaticAbility> staticAbilities0) {
-        this.staticAbilities = new ArrayList<StaticAbility>(staticAbilities0);
-    }
-
-    /**
-     * Gets the image filename.
-     * 
-     * @return the imageFilename
-     */
-    public final String getImageKey() {
-        return this.imageKey;
-    }
-
-    /**
-     * Sets the image filename.
-     * 
-     * @param imageFilename0
-     *            the imageFilename to set
-     */
-    public final void setImageKey(final String imageFilename0) {
-        this.imageKey = imageFilename0;
-    }
-
-    /**
-     * Gets the static ability strings.
-     * 
-     * @return the staticAbilityStrings
-     */
-    public final List<String> getStaticAbilityStrings() {
-        return this.staticAbilityStrings;
-    }
-
-    /**
-     * Sets the static ability strings.
-     * 
-     * @param staticAbilityStrings0
-     *            the staticAbilityStrings to set
-     */
-    public final void setStaticAbilityStrings(final ArrayList<String> staticAbilityStrings0) {
-        this.staticAbilityStrings = staticAbilityStrings0;
-    }
-
-    /**
-     * @return the replacementEffects
-     */
-    public List<ReplacementEffect> getReplacementEffects() {
-        return replacementEffects;
-    }
-
-    /**
-     * <p>
-     * getSVar.
-     * </p>
-     * 
-     * @param var
-     *            a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
-     */
-    public final String getSVar(final String var) {
-        if (this.sVars.containsKey(var)) {
-            return this.sVars.get(var);
-        } else {
-            return "";
-        }
-    }
-
-    /**
-     * <p>
-     * hasSVar.
-     * </p>
-     * 
-     * @param var
-     *            a {@link java.lang.String} object.
-     */
-    public final boolean hasSVar(final String var) {
-        return this.sVars.containsKey(var);
-    }
-
-    /**
-     * <p>
-     * setSVar.
-     * </p>
-     * 
-     * @param var
-     *            a {@link java.lang.String} object.
-     * @param str
-     *            a {@link java.lang.String} object.
-     */
-    public final void setSVar(final String var, final String str) {
-        this.sVars.put(var, str);
-    }
-
-    /**
-     * <p>
-     * getSVars.
-     * </p>
-     * 
-     * @return a Map object.
-     */
-    public final Map<String, String> getSVars() {
-        return this.sVars;
-    }
-
-    /**
-     * <p>
-     * setSVars.
-     * </p>
-     * 
-     * @param newSVars
-     *            a Map object.
-     */
-    public final void setSVars(final Map<String, String> newSVars) {
-        this.sVars = newSVars;
-    }
-
-    /**
-     * 
-     * TODO Write javadoc for this method.
-     * 
-     * @return an int
-     */
-    public final int getFoil() {
-        final String foil = this.getSVar("Foil");
-        if (!foil.isEmpty()) {
-            return Integer.parseInt(foil);
-        }
-        return 0;
-    }
-
-    /**
-     * <p>
-     * copy.
-     * </p>
-     * 
-     * @param source
-     *            a Map object.
-     */
-    public final void copyFrom(final CardCharacteristics source) {
-        // Makes a "deeper" copy of a CardCharacteristics object
-
-        // String name : just copy reference
-        this.name = source.getName();
-        // ArrayList<String> type : list of String objects so use copy constructor
-        this.type = new CopyOnWriteArraySet<String>(source.getType());
-        // CardManaCost manaCost : not sure if a deep copy is needed
-        this.manaCost = source.getManaCost();
-        // ArrayList<CardColor> cardColor : not sure if a deep copy is needed
-        this.cardColor = new ArrayList<CardColor>(source.getCardColor());
-        // int baseAttack : set value
-        this.baseAttack = source.getBaseAttack();
-        // int baseDefense : set value
-        this.baseDefense = source.getBaseDefense();
-        // ArrayList<String> intrinsicKeyword : list of String objects so use copy constructor
-        this.intrinsicKeyword =  new ArrayList<String>(source.getIntrinsicKeyword());
-        // ArrayList<String> intrinsicAbility : list of String objects so use copy constructor
-        this.unparsedAbilities = new ArrayList<String>(source.getUnparsedAbilities());
-        // ArrayList<String> staticAbilityStrings : list of String objects so use copy constructor
-        this.staticAbilityStrings = new ArrayList<String>(source.getStaticAbilityStrings());
-        // String imageFilename = copy reference
-        this.imageKey = source.getImageKey();
-        this.rarity = source.rarity;
-        this.curSetCode = source.curSetCode;
-        // Map<String, String> sVars
-        this.sVars = new TreeMap<String, String>(source.getSVars());
-        this.replacementEffects = new ArrayList<ReplacementEffect>();
-        for (ReplacementEffect RE : source.getReplacementEffects()) {
-            this.replacementEffects.add(RE.getCopy());
-        }
-    }
-
-    public CardRarity getRarity() {
-        return rarity;
-    }
-
-
-    public void setRarity(CardRarity rarity) {
-        this.rarity = rarity;
-    }
-
-
-    public String getCurSetCode() {
-        return curSetCode;
-    }
-
-
-    public void setCurSetCode(String curSetCode) {
-        this.curSetCode = curSetCode; 
-    }
-
-
-    /**
-     * Determine the colors.
-     * 
-     * @return a {@link ColorSet}.
-     */
     public final ColorSet determineColor() {
-        final List<CardColor> colorList = this.getCardColor();
+        final List<CardColor> colorList = getCardColor();
         byte colors = 0;
         for (int i = colorList.size() - 1;i >= 0;i--) {
             final CardColor cc = colorList.get(i);
@@ -503,5 +119,158 @@ public class CardCharacteristics {
             }
         }
         return ColorSet.fromMask(colors);
+    }
+
+    public String getOracleText() {
+        return oracleText;
+    }
+    public void setOracleText(final String oracleText0) {
+        oracleText = oracleText0;
+        view.updateText(this);
+    }
+
+    public final int getBaseAttack() {
+        return baseAttack;
+    }
+    public final void setBaseAttack(final int baseAttack0) {
+        if (baseAttack == baseAttack0) { return; }
+        baseAttack = baseAttack0;
+        view.updatePower(this);
+    }
+
+    public final int getBaseDefense() {
+        return baseDefense;
+    }
+    public final void setBaseDefense(final int baseDefense0) {
+        if (baseDefense == baseDefense0) { return; }
+        baseDefense = baseDefense0;
+        view.updateToughness(this);
+    }
+
+    public final List<String> getIntrinsicKeyword() {
+        return intrinsicKeyword;
+    }
+    public final void setIntrinsicKeyword(final ArrayList<String> intrinsicKeyword0) {
+        intrinsicKeyword = intrinsicKeyword0;
+    }
+
+    public final List<SpellAbility> getSpellAbility() {
+        return spellAbility;
+    }
+    public final void setSpellAbility(SpellAbility sa) {
+    	spellAbility.clear();
+    	if (sa != null) {
+    	    spellAbility.add(sa);
+    	}
+    }
+
+    public final List<String> getUnparsedAbilities() {
+        return unparsedAbilities;
+    }
+    public final void setUnparsedAbilities(final List<String> list) {
+        unparsedAbilities = list;
+    }
+
+    public final List<SpellAbility> getManaAbility() {
+        return manaAbility;
+    }
+
+    public final List<Trigger> getTriggers() {
+        return triggers;
+    }
+    public final void setTriggers(final List<Trigger> triggers0) {
+        triggers = triggers0;
+    }
+
+    public final List<StaticAbility> getStaticAbilities() {
+        return staticAbilities;
+    }
+    public final void setStaticAbilities(final ArrayList<StaticAbility> staticAbilities0) {
+        staticAbilities = new ArrayList<StaticAbility>(staticAbilities0);
+    }
+
+    public final String getImageKey() {
+        return imageKey;
+    }
+    public final void setImageKey(final String imageFilename0) {
+        imageKey = imageFilename0;
+        view.updateImageKey(this);
+    }
+
+    public final List<String> getStaticAbilityStrings() {
+        return staticAbilityStrings;
+    }
+    public final void setStaticAbilityStrings(final ArrayList<String> staticAbilityStrings0) {
+        staticAbilityStrings = staticAbilityStrings0;
+    }
+
+    public List<ReplacementEffect> getReplacementEffects() {
+        return replacementEffects;
+    }
+
+    public final Map<String, String> getSVars() {
+        return sVars;
+    }
+    public final String getSVar(final String var) {
+        if (sVars.containsKey(var)) {
+            return sVars.get(var);
+        } else {
+            return "";
+        }
+    }
+    public final boolean hasSVar(final String var) {
+        return sVars.containsKey(var);
+    }
+    public final void setSVar(final String var, final String str) {
+        sVars.put(var, str);
+        view.updateFoilIndex(this);
+    }
+    public final void setSVars(final Map<String, String> newSVars) {
+        sVars = newSVars;
+        view.updateFoilIndex(this);
+    }
+
+    public final int getFoil() {
+        final String foil = getSVar("Foil");
+        if (!foil.isEmpty()) {
+            return Integer.parseInt(foil);
+        }
+        return 0;
+    }
+
+    public final void copyFrom(final CardCharacteristics source) {
+        // Makes a "deeper" copy of a CardCharacteristics object
+
+        setName(source.getName());
+        setType(source.getType());
+        setManaCost(source.getManaCost());
+        setCardColor(source.getCardColor());
+        setBaseAttack(source.getBaseAttack());
+        setBaseDefense(source.getBaseDefense());
+        intrinsicKeyword = new ArrayList<String>(source.getIntrinsicKeyword());
+        unparsedAbilities = new ArrayList<String>(source.getUnparsedAbilities());
+        staticAbilityStrings = new ArrayList<String>(source.getStaticAbilityStrings());
+        setImageKey(source.getImageKey());
+        setRarity(source.rarity);
+        setCurSetCode(source.curSetCode);
+        setSVars(new TreeMap<String, String>(source.getSVars()));
+        replacementEffects = new ArrayList<ReplacementEffect>();
+        for (ReplacementEffect RE : source.getReplacementEffects()) {
+            replacementEffects.add(RE.getCopy());
+        }
+    }
+
+    public CardRarity getRarity() {
+        return rarity;
+    }
+    public void setRarity(CardRarity rarity0) {
+        rarity = rarity0;
+    }
+
+    public String getCurSetCode() {
+        return curSetCode;
+    }
+    public void setCurSetCode(String curSetCode0) {
+        curSetCode = curSetCode0;
     }
 }

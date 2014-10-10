@@ -1,9 +1,8 @@
 package forge.events;
 
-import forge.view.CardView;
+import forge.game.card.CardView;
 
 public class UiEventBlockerAssigned extends UiEvent {
-
     public final CardView blocker;
     public final CardView attackerBeingBlocked; 
 
@@ -16,6 +15,4 @@ public class UiEventBlockerAssigned extends UiEvent {
     public <T> T visit(final IUiEventVisitor<T> visitor) {
         return visitor.visit(this);
     }
-    
-
 }

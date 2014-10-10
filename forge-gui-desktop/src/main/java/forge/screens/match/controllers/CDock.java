@@ -236,7 +236,7 @@ public enum CDock implements ICDoc {
         VDock.SINGLETON_INSTANCE.getBtnAlphaStrike().setCommand(new UiCommand() {
             @Override
             public void run() {
-                MatchUtil.getGameView().alphaStrike();
+                MatchUtil.getHumanController().alphaStrike();
             }
         });
         VDock.SINGLETON_INSTANCE.getBtnTargeting().setCommand(new UiCommand() {

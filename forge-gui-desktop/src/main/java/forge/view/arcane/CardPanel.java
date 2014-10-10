@@ -37,6 +37,8 @@ import javax.swing.SwingUtilities;
 import forge.ImageCache;
 import forge.card.CardEdition;
 import forge.card.mana.ManaCost;
+import forge.game.card.CardView;
+import forge.game.card.CardView.CardStateView;
 import forge.gui.CardContainer;
 import forge.match.MatchUtil;
 import forge.model.FModel;
@@ -44,8 +46,6 @@ import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.CardFaceSymbols;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.IDisposable;
-import forge.view.CardView;
-import forge.view.CardView.CardStateView;
 import forge.view.arcane.util.OutlinedLabel;
 
 /**
@@ -117,21 +117,21 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      *            a {@link forge.game.card.Card} object.
      */
     public CardPanel(final CardView card0) {
-        this.setBackground(Color.black);
-        this.setOpaque(false);
+        setBackground(Color.black);
+        setOpaque(false);
 
         createCardNameOverlay();
         createPTOverlay();
         createCardIdOverlay();
         createScaleImagePanel();
 
-        this.setCard(card0);
+        setCard(card0);
     }
 
     private void createScaleImagePanel() {
-        this.imagePanel = new ScaledImagePanel();
-        this.add(this.imagePanel);
-        this.addComponentListener(new ComponentAdapter() {
+        imagePanel = new ScaledImagePanel();
+        add(imagePanel);
+        addComponentListener(new ComponentAdapter() {
             @Override
             public void componentShown(final ComponentEvent e) {
                 CardPanel.this.setCard(CardPanel.this.getCard());
@@ -144,224 +144,157 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     }
 
     private void createCardNameOverlay() {
-        this.titleText = new OutlinedLabel();
-        this.titleText.setFont(this.getFont().deriveFont(Font.BOLD, 13f));
-        this.titleText.setForeground(Color.white);
-        this.titleText.setGlow(Color.black);
-        this.titleText.setWrap(true);
-        this.add(this.titleText);
+        titleText = new OutlinedLabel();
+        titleText.setFont(getFont().deriveFont(Font.BOLD, 13f));
+        titleText.setForeground(Color.white);
+        titleText.setGlow(Color.black);
+        titleText.setWrap(true);
+        add(titleText);
     }
 
     private void createPTOverlay() {
         // Power/Toughness
-        this.ptText = new OutlinedLabel();
-        this.ptText.setFont(this.getFont().deriveFont(Font.BOLD, 13f));
-        this.ptText.setForeground(Color.white);
-        this.ptText.setGlow(Color.black);
-        this.add(this.ptText);
+        ptText = new OutlinedLabel();
+        ptText.setFont(getFont().deriveFont(Font.BOLD, 13f));
+        ptText.setForeground(Color.white);
+        ptText.setGlow(Color.black);
+        add(ptText);
 
         // Damage
-        this.damageText = new OutlinedLabel();
-        this.damageText.setFont(this.getFont().deriveFont(Font.BOLD, 15f));
-        this.damageText.setForeground(new Color(160,0,0));
-        this.damageText.setGlow(Color.white);
-        this.add(this.damageText);
+        damageText = new OutlinedLabel();
+        damageText.setFont(getFont().deriveFont(Font.BOLD, 15f));
+        damageText.setForeground(new Color(160,0,0));
+        damageText.setGlow(Color.white);
+        add(damageText);
     }
 
     private void createCardIdOverlay() {
-        this.cardIdText = new OutlinedLabel();
-        this.cardIdText.setFont(this.getFont().deriveFont(Font.BOLD, 11f));
-        this.cardIdText.setForeground(Color.LIGHT_GRAY);
-        this.cardIdText.setGlow(Color.black);
-        this.add(this.cardIdText);
+        cardIdText = new OutlinedLabel();
+        cardIdText.setFont(getFont().deriveFont(Font.BOLD, 11f));
+        cardIdText.setForeground(Color.LIGHT_GRAY);
+        cardIdText.setGlow(Color.black);
+        add(cardIdText);
     }
 
-    /**
-     * <p>
-     * setImage.
-     * </p>
-     * 
-     * @param srcImage
-     *            a {@link java.awt.Image} object.
-     * @param srcImageBlurred
-     *            a {@link java.awt.Image} object.
-     * @param srcImageBlurred
-     *            a {@link java.awt.Image} object.
-     */
     private void setImage(final BufferedImage srcImage) {
-        synchronized (this.imagePanel) {
-            this.imagePanel.setImage(srcImage);
-            this.repaint();
-            for (final CardPanel cardPanel : this.imageLoadListeners) {
+        synchronized (imagePanel) {
+            imagePanel.setImage(srcImage);
+            repaint();
+            for (final CardPanel cardPanel : imageLoadListeners) {
                 cardPanel.setImage(srcImage);
                 cardPanel.repaint();
             }
-            this.imageLoadListeners.clear();
+            imageLoadListeners.clear();
         }
-        this.doLayout();
+        doLayout();
     }
 
-    /**
-     * <p>
-     * setImage.
-     * </p>
-     * 
-     * @param panel
-     *            a {@link forge.view.arcane.CardPanel} object.
-     */
     public final void setImage(final CardPanel panel) {
         if (panel == this) {
             throw new IllegalArgumentException("Can't pass 'this' as argument to CardPanel#setImage");
         }
         synchronized (panel.imagePanel) {
             if (panel.imagePanel.hasImage()) {
-                this.setImage(panel.imagePanel.getSrcImage());
+                setImage(panel.imagePanel.getSrcImage());
             } else {
                 panel.imageLoadListeners.add(this);
             }
         }
     }
 
-    /**
-     * <p>
-     * Setter for the field <code>displayEnabled</code>.
-     * </p>
-     * 
-     * @param displayEnabled
-     *            a boolean.
-     */
-    public final void setDisplayEnabled(final boolean displayEnabled) {
-        this.displayEnabled = displayEnabled;
-    }
-
-    /**
-     * <p>
-     * isDisplayEnabled.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean isDisplayEnabled() {
-        return this.displayEnabled;
+        return displayEnabled;
+    }
+    public final void setDisplayEnabled(final boolean displayEnabled0) {
+        displayEnabled = displayEnabled0;
     }
 
-    /**
-     * <p>
-     * setAnimationPanel.
-     * </p>
-     * 
-     * @param isAnimationPanel
-     *            a boolean.
-     */
-    public final void setAnimationPanel(final boolean isAnimationPanel) {
-        this.isAnimationPanel = isAnimationPanel;
+    public final void setAnimationPanel(final boolean isAnimationPanel0) {
+        isAnimationPanel = isAnimationPanel0;
     }
 
-    /**
-     * <p>
-     * setSelected.
-     * </p>
-     * 
-     * @param isSelected
-     *            a boolean.
-     */
-    public final void setSelected(final boolean isSelected) {
-        this.isSelected = isSelected;
-        this.repaint();
-    }
-
-    /**
-     * <p>
-     * isSelected.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean isSelected() {
-        return this.isSelected;
+        return isSelected;
+    }
+    public final void setSelected(final boolean isSelected0) {
+        isSelected = isSelected0;
+        repaint();
     }
 
-    /** {@inheritDoc} */
+
     @Override
     public final void paint(final Graphics g) {
-        if (!this.displayEnabled) {
+        if (!displayEnabled) {
             return;
         }
-        if (!this.isValid()) {
+        if (!isValid()) {
             super.validate();
         }
         Graphics2D g2d = (Graphics2D) g;
-        if (this.getTappedAngle() > 0) {
+        if (getTappedAngle() > 0) {
             g2d = (Graphics2D) g2d.create();
-            final float edgeOffset = this.cardWidth / 2f;
-            g2d.rotate(this.getTappedAngle(), this.cardXOffset + edgeOffset, (this.cardYOffset + this.cardHeight)
+            final float edgeOffset = cardWidth / 2f;
+            g2d.rotate(getTappedAngle(), cardXOffset + edgeOffset, (cardYOffset + cardHeight)
                     - edgeOffset);
         }
         super.paint(g2d);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected final void paintComponent(final Graphics g) {
         final Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        final int cornerSize = Math.max(4, Math.round(this.cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
-        final int offset = this.isTapped() ? 1 : 0;
+        final int cornerSize = Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
+        final int offset = isTapped() ? 1 : 0;
 
         // Magenta outline for when card was chosen to pay
-        if (MatchUtil.isUsedToPay(this.getCard())) {
+        if (MatchUtil.isUsedToPay(getCard())) {
             g2d.setColor(Color.magenta);
-            final int n2 = Math.max(1, Math.round(2 * this.cardWidth * CardPanel.SELECTED_BORDER_SIZE));
-            g2d.fillRoundRect(this.cardXOffset - n2, (this.cardYOffset - n2) + offset, this.cardWidth + (n2 * 2), this.cardHeight + (n2 * 2), cornerSize + n2, cornerSize + n2);
+            final int n2 = Math.max(1, Math.round(2 * cardWidth * CardPanel.SELECTED_BORDER_SIZE));
+            g2d.fillRoundRect(cardXOffset - n2, (cardYOffset - n2) + offset, cardWidth + (n2 * 2), cardHeight + (n2 * 2), cornerSize + n2, cornerSize + n2);
         }
 
         // Green outline for hover
-        if (this.isSelected) {
+        if (isSelected) {
             g2d.setColor(Color.green);
-            final int n = Math.max(1, Math.round(this.cardWidth * CardPanel.SELECTED_BORDER_SIZE));
-            g2d.fillRoundRect(this.cardXOffset - n, (this.cardYOffset - n) + offset, this.cardWidth + (n * 2), this.cardHeight + (n * 2), cornerSize + n , cornerSize + n);
+            final int n = Math.max(1, Math.round(cardWidth * CardPanel.SELECTED_BORDER_SIZE));
+            g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n , cornerSize + n);
         }
 
         // Black fill - (will become outline for white bordered cards)
         final int n = 0;
         g2d.setColor(Color.black);
-        g2d.fillRoundRect(this.cardXOffset - n, (this.cardYOffset - n) + offset, this.cardWidth + (n * 2), this.cardHeight + (n * 2), cornerSize + n , cornerSize + n);
+        g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n , cornerSize + n);
 
         // White border if card is known to have it.
-        if (this.getCard() != null) {
-            CardEdition ed = FModel.getMagicDb().getEditions().get(this.getCard().getSetCode());
-            if (ed != null && ed.isWhiteBorder() && this.getCard().getOriginal().getFoilIndex() == 0) {
+        if (getCard() != null) {
+            CardEdition ed = FModel.getMagicDb().getEditions().get(getCard().getSetCode());
+            if (ed != null && ed.isWhiteBorder() && getCard().getOriginal().getFoilIndex() == 0) {
                 g2d.setColor(Color.white);
                 int ins = 1;
-                g2d.fillRoundRect(this.cardXOffset + ins, this.cardYOffset + ins, this.cardWidth - ins*2, this.cardHeight - ins*2, cornerSize-ins, cornerSize-ins);
+                g2d.fillRoundRect(cardXOffset + ins, cardYOffset + ins, cardWidth - ins*2, cardHeight - ins*2, cornerSize-ins, cornerSize-ins);
             }
         }
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param g
-     * @param manaCost
-     */
     private void drawManaCost(final Graphics g, ManaCost cost, int deltaY) {
         int width = CardFaceSymbols.getWidth(cost);
         int height = CardFaceSymbols.getHeight();
-        CardFaceSymbols.draw(g, cost, (this.cardXOffset + (this.cardWidth / 2)) - (width / 2), deltaY + this.cardYOffset + (this.cardHeight / 2) - height/2);
+        CardFaceSymbols.draw(g, cost, (cardXOffset + (cardWidth / 2)) - (width / 2), deltaY + cardYOffset + (cardHeight / 2) - height/2);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected final void paintChildren(final Graphics g) {
         super.paintChildren(g);
 
-        if (this.isAnimationPanel || this.card == null) {
+        if (isAnimationPanel || card == null) {
             return;
         }
 
         displayIconOverlay(g);
-        drawFoilEffect(g, card, this.cardXOffset, this.cardYOffset,
-                this.cardWidth, this.cardHeight, Math.round(this.cardWidth * BLACK_BORDER_SIZE));
+        drawFoilEffect(g, card, cardXOffset, cardYOffset,
+                cardWidth, cardHeight, Math.round(cardWidth * BLACK_BORDER_SIZE));
     }
 
     public static void drawFoilEffect(final Graphics g, final CardView card2, final int x, final int y, final int width, final int height, final int borderSize) {
@@ -376,15 +309,15 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     @Override
     public final void doLayout() {
-        final int borderSize = Math.round(this.cardWidth * CardPanel.BLACK_BORDER_SIZE);
+        final int borderSize = Math.round(cardWidth * CardPanel.BLACK_BORDER_SIZE);
 
-        final Point imgPos = new Point(this.cardXOffset + borderSize, this.cardYOffset + borderSize);
-        final Dimension imgSize = new Dimension(this.cardWidth - (borderSize * 2), this.cardHeight - (borderSize * 2));
+        final Point imgPos = new Point(cardXOffset + borderSize, cardYOffset + borderSize);
+        final Dimension imgSize = new Dimension(cardWidth - (borderSize * 2), cardHeight - (borderSize * 2));
 
-        this.imagePanel.setLocation(imgPos);
-        this.imagePanel.setSize(imgSize);
+        imagePanel.setLocation(imgPos);
+        imagePanel.setSize(imgSize);
 
-        boolean showText = !this.imagePanel.hasImage() || !this.isAnimationPanel;
+        boolean showText = !imagePanel.hasImage() || !isAnimationPanel;
 
         displayCardNameOverlay(showText && showCardNameOverlay(), imgSize, imgPos);
         displayPTOverlay(showText && showCardPowerOverlay(), imgSize, imgPos);
@@ -393,33 +326,33 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     private void displayCardIdOverlay(boolean isVisible, Dimension imgSize, Point imgPos) {
         if (isVisible) {
-            final Dimension idSize = this.cardIdText.getPreferredSize();
-            this.cardIdText.setSize(idSize.width, idSize.height);
+            final Dimension idSize = cardIdText.getPreferredSize();
+            cardIdText.setSize(idSize.width, idSize.height);
             final int idX = Math.round(imgSize.width * (24f / 480));
             final int idY = Math.round(imgSize.height * (650f / 680)) - 8;
-            this.cardIdText.setLocation(imgPos.x + idX, imgPos.y + idY);
+            cardIdText.setLocation(imgPos.x + idX, imgPos.y + idY);
         }
-        this.cardIdText.setVisible(isVisible);
+        cardIdText.setVisible(isVisible);
     }
 
     private void displayPTOverlay(boolean isVisible, Dimension imgSize, Point imgPos) {
         if (isVisible) {
             final int rightLine = Math.round(imgSize.width * (412f / 480)) + 3;
             // Power
-            final Dimension ptSize = this.ptText.getPreferredSize();
-            this.ptText.setSize(ptSize.width, ptSize.height);
+            final Dimension ptSize = ptText.getPreferredSize();
+            ptText.setSize(ptSize.width, ptSize.height);
             final int ptX = rightLine - ptSize.width/2;
             final int ptY = Math.round(imgSize.height * (650f / 680)) - 10;
-            this.ptText.setLocation(imgPos.x + ptX, imgPos.y + ptY);
+            ptText.setLocation(imgPos.x + ptX, imgPos.y + ptY);
             // Toughness
-            final Dimension dmgSize = this.damageText.getPreferredSize();
-            this.damageText.setSize(dmgSize.width, dmgSize.height);
+            final Dimension dmgSize = damageText.getPreferredSize();
+            damageText.setSize(dmgSize.width, dmgSize.height);
             final int dmgX = rightLine - dmgSize.width / 2;
             final int dmgY =  ptY - 16;
-            this.damageText.setLocation(imgPos.x + dmgX, imgPos.y + dmgY);
+            damageText.setLocation(imgPos.x + dmgX, imgPos.y + dmgY);
         }
-        this.ptText.setVisible(isVisible);
-        this.damageText.setVisible(isVisible);
+        ptText.setVisible(isVisible);
+        damageText.setVisible(isVisible);
     }
 
     private void displayCardNameOverlay(boolean isVisible, Dimension imgSize, Point imgPos) {
@@ -427,13 +360,13 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             final int titleX = Math.round(imgSize.width * (24f / 480));
             final int titleY = Math.round(imgSize.height * (54f / 640)) - 15;
             final int titleH = Math.round(imgSize.height * (360f / 640));
-            this.titleText.setBounds(imgPos.x + titleX, imgPos.y + titleY + 2, imgSize.width - 2 * titleX, titleH - titleY);
+            titleText.setBounds(imgPos.x + titleX, imgPos.y + titleY + 2, imgSize.width - 2 * titleX, titleH - titleY);
         }
-        this.titleText.setVisible(isVisible);
+        titleText.setVisible(isVisible);
     }
 
     private void displayIconOverlay(final Graphics g) {
-        if (showCardManaCostOverlay() && this.cardWidth < 200) {
+        if (showCardManaCostOverlay() && cardWidth < 200) {
             final boolean showSplitMana = card.isSplitCard();
             if (!showSplitMana) {
                 drawManaCost(g, card.getOriginal().getManaCost(), 0);
@@ -444,26 +377,28 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
 
         int number = 0;
-        for (final Integer i : card.getCounters().values()) {
-            number += i.intValue();
+        if (card.getCounters() != null) {
+            for (final Integer i : card.getCounters().values()) {
+                number += i.intValue();
+            }
         }
 
         final int counters = number;
-        final int yCounters = (this.cardYOffset + this.cardHeight) - (this.cardHeight / 3) - 40;
+        final int yCounters = (cardYOffset + cardHeight) - (cardHeight / 3) - 40;
 
         if (counters == 1) {
-            CardFaceSymbols.drawSymbol("counters1", g, this.cardXOffset - 15, yCounters);
+            CardFaceSymbols.drawSymbol("counters1", g, cardXOffset - 15, yCounters);
         } else if (counters == 2) {
-            CardFaceSymbols.drawSymbol("counters2", g, this.cardXOffset - 15, yCounters);
+            CardFaceSymbols.drawSymbol("counters2", g, cardXOffset - 15, yCounters);
         } else if (counters == 3) {
-            CardFaceSymbols.drawSymbol("counters3", g, this.cardXOffset - 15, yCounters);
+            CardFaceSymbols.drawSymbol("counters3", g, cardXOffset - 15, yCounters);
         } else if (counters > 3) {
-            CardFaceSymbols.drawSymbol("countersMulti", g, this.cardXOffset - 15, yCounters);
+            CardFaceSymbols.drawSymbol("countersMulti", g, cardXOffset - 15, yCounters);
         }
 
-        final int combatXSymbols = (this.cardXOffset + (this.cardWidth / 4)) - 16;
-        final int stateXSymbols = (this.cardXOffset + (this.cardWidth / 2)) - 16;
-        final int ySymbols = (this.cardYOffset + this.cardHeight) - (this.cardHeight / 8) - 16;
+        final int combatXSymbols = (cardXOffset + (cardWidth / 4)) - 16;
+        final int stateXSymbols = (cardXOffset + (cardWidth / 2)) - 16;
+        final int ySymbols = (cardYOffset + cardHeight) - (cardHeight / 8) - 16;
 
         if (card.isAttacking()) {
             CardFaceSymbols.drawSymbol("attack", g, combatXSymbols, ySymbols);
@@ -481,131 +416,70 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
 
         if (MatchUtil.isUsedToPay(card)) {
-            CardFaceSymbols.drawSymbol("sacrifice", g, (this.cardXOffset + (this.cardWidth / 2)) - 20,
-                    (this.cardYOffset + (this.cardHeight / 2)) - 20);
+            CardFaceSymbols.drawSymbol("sacrifice", g, (cardXOffset + (cardWidth / 2)) - 20,
+                    (cardYOffset + (cardHeight / 2)) - 20);
         }
     }
 
     @Override
     public final String toString() {
-        return this.getCard().toString();
+        return getCard().toString();
     }
 
-    /**
-     * <p>
-     * setCardBounds.
-     * </p>
-     * 
-     * @param x
-     *            a int.
-     * @param y
-     *            a int.
-     * @param width
-     *            a int.
-     * @param height
-     *            a int.
-     */
     public final void setCardBounds(final int x, final int y, int width, int height) {
-        this.cardWidth = width;
-        this.cardHeight = height;
+        cardWidth = width;
+        cardHeight = height;
         final int rotCenterX = Math.round(width / 2f);
         final int rotCenterY = height - rotCenterX;
         final int rotCenterToTopCorner = Math.round(width * CardPanel.ROT_CENTER_TO_TOP_CORNER);
         final int rotCenterToBottomCorner = Math.round(width * CardPanel.ROT_CENTER_TO_BOTTOM_CORNER);
         final int xOffset = rotCenterX - rotCenterToBottomCorner;
         final int yOffset = rotCenterY - rotCenterToTopCorner;
-        this.cardXOffset = -xOffset;
-        this.cardYOffset = -yOffset;
+        cardXOffset = -xOffset;
+        cardYOffset = -yOffset;
         width = -xOffset + rotCenterX + rotCenterToTopCorner;
         height = -yOffset + rotCenterY + rotCenterToBottomCorner;
-        this.setBounds(x + xOffset, y + yOffset, width, height);
+        setBounds(x + xOffset, y + yOffset, width, height);
     }
 
-    /**
-     * <p>
-     * repaint.
-     * </p>
-     */
     @Override
     public final void repaint() {
-        final Rectangle b = this.getBounds();
+        final Rectangle b = getBounds();
         final JRootPane rootPane = SwingUtilities.getRootPane(this);
         if (rootPane == null) {
             return;
         }
-        final Point p = SwingUtilities.convertPoint(this.getParent(), b.x, b.y, rootPane);
+        final Point p = SwingUtilities.convertPoint(getParent(), b.x, b.y, rootPane);
         rootPane.repaint(p.x, p.y, b.width, b.height);
     }
 
-    /**
-     * <p>
-     * getCardX.
-     * </p>
-     * 
-     * @return a int.
-     */
     public final int getCardX() {
-        return this.getX() + this.cardXOffset;
+        return getX() + cardXOffset;
     }
 
-    /**
-     * <p>
-     * getCardY.
-     * </p>
-     * 
-     * @return a int.
-     */
     public final int getCardY() {
-        return this.getY() + this.cardYOffset;
+        return getY() + cardYOffset;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>cardWidth</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
     public final int getCardWidth() {
-        return this.cardWidth;
+        return cardWidth;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>cardHeight</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
     public final int getCardHeight() {
-        return this.cardHeight;
+        return cardHeight;
     }
 
-    /**
-     * <p>
-     * getCardLocation.
-     * </p>
-     * 
-     * @return a {@link java.awt.Point} object.
-     */
     public final Point getCardLocation() {
-        final Point p = this.getLocation();
-        p.x += this.cardXOffset;
-        p.y += this.cardYOffset;
+        final Point p = getLocation();
+        p.x += cardXOffset;
+        p.y += cardYOffset;
         return p;
     }
 
-    /**
-     * <p>
-     * getCardLocationOnScreen.
-     * </p>
-     * 
-     * @return a {@link java.awt.Point} object.
-     */
     public final Point getCardLocationOnScreen() {
-        final Point p = this.getLocationOnScreen();
-        p.x += this.cardXOffset;
-        p.y += this.cardYOffset;
+        final Point p = getLocationOnScreen();
+        p.x += cardXOffset;
+        p.y += cardYOffset;
         return p;
     }
 
@@ -615,13 +489,13 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
 
         // Card name overlay
-        this.titleText.setText(card.getOriginal().getName());
+        titleText.setText(card.getOriginal().getName());
 
         int damage = card.getDamage();
-        this.damageText.setText(damage > 0 ? "\u00BB " + String.valueOf(damage) + " \u00AB" : "");
+        damageText.setText(damage > 0 ? "\u00BB " + String.valueOf(damage) + " \u00AB" : "");
 
         // Card Id overlay
-        this.cardIdText.setText(Integer.toString(card.getId()));
+        cardIdText.setText(Integer.toString(card.getId()));
     } 
 
     public final void updatePTOverlay() {
@@ -637,46 +511,41 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         else if (state.isPlaneswalker()) {
             sPt = String.valueOf(state.getLoyalty());
         }
-        this.ptText.setText(sPt);
+        ptText.setText(sPt);
     }
 
-    /**
-     * Gets the card.
-     * 
-     * @return the card
-     */
     @Override
     public final CardView getCard() {
-        return this.card;
+        return card;
     }
 
     /** {@inheritDoc} */
     @Override
     public final void setCard(final CardView cardView) {
-        if ((this.getCard() != null) && this.getCard().equals(cardView) && this.isAnimationPanel
-                && this.imagePanel.hasImage()) {
+        if ((getCard() != null) && getCard().equals(cardView) && isAnimationPanel
+                && imagePanel.hasImage()) {
             return;
         }
 
-        this.card = cardView;
+        card = cardView;
 
-        if (this.imagePanel == null) {
+        if (imagePanel == null) {
             return;
         }
 
         final BufferedImage image = cardView == null ? null : ImageCache.getImage(cardView, imagePanel.getWidth(), imagePanel.getHeight());
-        this.updateText();
-        this.updatePTOverlay();
+        updateText();
+        updatePTOverlay();
 
-        this.setImage(image);
+        setImage(image);
     }
 
     public void dispose() {
-        this.attachedToPanel = null;
-        this.attachedPanels = null;
-        this.imagePanel.setImage(null);
-        this.imagePanel = null;
-        this.card = null;
+        attachedToPanel = null;
+        attachedPanels = null;
+        imagePanel.setImage(null);
+        imagePanel = null;
+        card = null;
     }
 
     /**
@@ -704,7 +573,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      * @return the attachedToPanel
      */
     public final CardPanel getAttachedToPanel() {
-        return this.attachedToPanel;
+        return attachedToPanel;
     }
 
     /**
@@ -714,7 +583,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      *            the attachedToPanel to set
      */
     public final void setAttachedToPanel(final CardPanel attachedToPanel0) {
-        this.attachedToPanel = attachedToPanel0;
+        attachedToPanel = attachedToPanel0;
     }
 
     /**
@@ -723,7 +592,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      * @return the attachedPanels
      */
     public final List<CardPanel> getAttachedPanels() {
-        return this.attachedPanels;
+        return attachedPanels;
     }
 
     /**
@@ -733,7 +602,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      *            the attachedPanels to set
      */
     public final void setAttachedPanels(final List<CardPanel> attachedPanels0) {
-        this.attachedPanels = attachedPanels0;
+        attachedPanels = attachedPanels0;
     }
 
     /**
@@ -742,7 +611,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      * @return the tapped
      */
     public final boolean isTapped() {
-        return this.tapped;
+        return tapped;
     }
 
     /**
@@ -752,7 +621,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      *            the tapped to set
      */
     public final void setTapped(final boolean tapped0) {
-        this.tapped = tapped0;
+        tapped = tapped0;
     }
 
     /**
@@ -761,7 +630,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      * @return the tappedAngle
      */
     public final double getTappedAngle() {
-        return this.tappedAngle;
+        return tappedAngle;
     }
 
     /**
@@ -771,7 +640,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      *            the tappedAngle to set
      */
     public final void setTappedAngle(final double tappedAngle0) {
-        this.tappedAngle = tappedAngle0;
+        tappedAngle = tappedAngle0;
     }
 
     /**
@@ -788,7 +657,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     }
 
     private boolean isShowingOverlays() {
-        return isPreferenceEnabled(FPref.UI_SHOW_CARD_OVERLAYS) && this.card != null;
+        return isPreferenceEnabled(FPref.UI_SHOW_CARD_OVERLAYS) && card != null;
     }
 
     private boolean showCardNameOverlay() {

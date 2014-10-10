@@ -15,14 +15,14 @@ import forge.assets.FSkinColor.Colors;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.card.CardRenderer.CardStackPosition;
+import forge.game.card.CardView;
+import forge.game.player.PlayerView;
+import forge.game.spellability.SpellAbilityView;
 import forge.item.PaperCard;
 import forge.screens.match.MatchController;
 import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VStack;
 import forge.util.Utils;
-import forge.view.CardView;
-import forge.view.PlayerView;
-import forge.view.SpellAbilityView;
 
 public class FChoiceList<T> extends FList<T> {
     public static final FSkinColor ITEM_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);

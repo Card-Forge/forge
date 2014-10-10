@@ -1,30 +1,24 @@
 /**
  * 
  */
-package forge.view;
+package forge.control;
 
+import forge.LobbyPlayer;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardView;
+import forge.game.player.Player;
+import forge.game.player.PlayerView;
+import forge.game.spellability.SpellAbility;
 import forge.match.input.Input;
 import forge.match.input.InputPlaybackControl;
-import forge.match.input.InputQueue;
-import forge.player.PlayerControllerHuman.DevModeCheats;
+import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 
-/**
- * @author elcnesh
- *
- */
-public class WatchLocalGame extends LocalGameView {
-    /**
-     * @param game
-     *            the @{link Game} to attach to.
-     * @param inputQueue
-     *            the {@link InputQueue} of the game to enable playback
-     *            controls, or {@code null} to disallow them.
-     */
-    public WatchLocalGame(Game game0) {
-        super(game0);
+
+public class WatchLocalGame extends PlayerControllerHuman {
+    public WatchLocalGame(Game game0, Player p, LobbyPlayer lp) {
+        super(game0, p, lp);
     }
 
     @Override
@@ -42,7 +36,7 @@ public class WatchLocalGame extends LocalGameView {
 
     @Override
     public void selectButtonOk() {
-        if (this.inputQueue == null) {
+        if (inputQueue == null) {
             return;
         }
         final Input i = inputQueue.getInput();
@@ -53,7 +47,7 @@ public class WatchLocalGame extends LocalGameView {
 
     @Override
     public void selectButtonCancel() {
-        if (this.inputQueue == null) {
+        if (inputQueue == null) {
             return;
         }
         final Input i = inputQueue.getInput();
@@ -90,7 +84,7 @@ public class WatchLocalGame extends LocalGameView {
     }
 
     @Override
-    public void selectAbility(final SpellAbilityView sa) {
+    public void selectAbility(final SpellAbility sa) {
     }
 
     @Override
@@ -145,11 +139,6 @@ public class WatchLocalGame extends LocalGameView {
 
     @Override
     public boolean canPlayUnlimitedLands() {
-        return false;
-    }
-
-    @Override
-    public boolean canViewAllCards() {
         return false;
     }
 

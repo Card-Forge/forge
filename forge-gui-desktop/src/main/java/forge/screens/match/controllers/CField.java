@@ -25,6 +25,8 @@ import com.google.common.base.Function;
 
 import forge.Singletons;
 import forge.UiCommand;
+import forge.game.card.CardView;
+import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.ICDoc;
 import forge.match.MatchConstants;
@@ -32,8 +34,6 @@ import forge.match.MatchUtil;
 import forge.screens.match.ZoneAction;
 import forge.screens.match.views.VField;
 import forge.toolbox.MouseTriggerEvent;
-import forge.view.CardView;
-import forge.view.PlayerView;
 
 /**
  * Controls Swing components of a player's field instance.
@@ -79,21 +79,20 @@ public class CField implements ICDoc {
             }
             @Override
             protected Iterable<CardView> getCardsAsIterable() {
-                return player.getFlashbackCards();
+                return player.getFlashback();
             }
         };
 
         Function<Byte, Void> manaAction = new Function<Byte, Void>() {
             public Void apply(Byte colorCode) {
                 if (CField.this.player.getLobbyPlayer() == Singletons.getControl().getGuiPlayer()) {
-                    MatchUtil.getGameView().useMana(colorCode.byteValue());
+                    MatchUtil.getHumanController().useMana(colorCode.byteValue());
                 }
                 return null;
             }
         };
-        
+
         view.getDetailsPanel().setupMouseActions(handAction, libraryAction, exileAction, graveAction, flashBackAction, manaAction);
-        
     }
 
     @Override

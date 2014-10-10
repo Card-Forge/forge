@@ -8,6 +8,8 @@ import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.game.GameEntityView;
+import forge.game.card.CardView;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FChoiceList;
 import forge.toolbox.FDialog;
@@ -16,8 +18,6 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
-import forge.view.CardView;
-import forge.view.GameEntityView;
 
 public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
     private final FOptionPane optionPane;

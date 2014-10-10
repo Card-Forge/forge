@@ -33,6 +33,9 @@ import org.apache.commons.lang3.StringUtils;
 import forge.card.CardDetailUtil;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.CardEdition;
+import forge.game.card.Card;
+import forge.game.card.CardView;
+import forge.game.card.CardView.CardStateView;
 import forge.item.IPaperCard;
 import forge.item.InventoryItemFromSet;
 import forge.model.FModel;
@@ -41,9 +44,6 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
-import forge.view.CardView;
-import forge.view.CardView.CardStateView;
-import forge.view.ViewUtil;
 
 /**
  * The class CardDetailPanel. Shows the details of a card.
@@ -130,7 +130,7 @@ public class CardDetailPanel extends SkinnedPanel {
         powerToughnessLabel.setVisible(false);
         idLabel.setText("");
         cdArea.setText(CardDetailUtil.getItemDescription(item));
-        this.updateBorder(item instanceof IPaperCard ? ViewUtil.getCardForUi((IPaperCard)item).getOriginal() : null);
+        this.updateBorder(item instanceof IPaperCard ? Card.getCardForUi((IPaperCard)item).getView().getOriginal() : null);
 
         String set = item.getEdition();
         setInfoLabel.setText(set);
@@ -185,7 +185,7 @@ public class CardDetailPanel extends SkinnedPanel {
             this.nameCostLabel.setText(CardDetailUtil.formatCardName(state));
         } else {
             final String manaCost;
-            if (card.isSplitCard() && card.hasAltState()) {
+            if (card.isSplitCard() && card.getAlternate() != null) {
                 manaCost = card.getOriginal().getManaCost() + " // " + card.getAlternate().getManaCost();
             } else {
                 manaCost = state.getManaCost().toString();

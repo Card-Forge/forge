@@ -18,6 +18,7 @@ import forge.LobbyPlayer;
 import forge.UiCommand;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
+import forge.game.GameView;
 import forge.gui.SOverlayUtils;
 import forge.interfaces.IWinLoseView;
 import forge.model.FModel;
@@ -29,7 +30,6 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.FTextArea;
-import forge.view.IGameView;
 
 public class ViewWinLose implements IWinLoseView<FButton> {
     private final FButton btnContinue, btnRestart, btnQuit;
@@ -39,10 +39,10 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     private final SkinnedLabel lblStats = new SkinnedLabel("WinLoseFrame > lblStats needs updating.");
     private final JPanel pnlOutcomes = new JPanel(new MigLayout("wrap, align center"));
 
-    private final IGameView game;
+    private final GameView game;
     
     @SuppressWarnings("serial")
-    public ViewWinLose(final IGameView game0) {
+    public ViewWinLose(final GameView game0) {
 
         this.game = game0;
 
@@ -107,7 +107,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
 
         // Assemble game log scroller.
         final FTextArea txtLog = new FTextArea();
-        txtLog.setText(StringUtils.join(game.getLogEntries(null), "\r\n").replace("[COMPUTER]", "[AI]"));
+        txtLog.setText(StringUtils.join(game.getGameLog().getLogEntries(null), "\r\n").replace("[COMPUTER]", "[AI]"));
         txtLog.setFont(FSkin.getFont(14));
         txtLog.setFocusable(true); // allow highlighting and copying of log
 
@@ -187,7 +187,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
 
     }
 
-    private String composeTitle(final IGameView game) {
+    private String composeTitle(final GameView game) {
         final LobbyPlayer winner = game.getWinningPlayer();
         final int winningTeam = game.getWinningTeam();
         if (winner == null) {
@@ -220,12 +220,12 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     }
 
     private void showGameOutcomeSummary() {
-        for (final GameLogEntry o : game.getLogEntriesExact(GameLogEntryType.GAME_OUTCOME))
+        for (final GameLogEntry o : game.getGameLog().getLogEntriesExact(GameLogEntryType.GAME_OUTCOME))
             pnlOutcomes.add(new FLabel.Builder().text(o.message).fontSize(14).build(), "h 20!");
     }
 
     private void showPlayerScores() {
-        for (final GameLogEntry o : game.getLogEntriesExact(GameLogEntryType.MATCH_RESULTS)) {
+        for (final GameLogEntry o : game.getGameLog().getLogEntriesExact(GameLogEntryType.MATCH_RESULTS)) {
             lblStats.setText(removePlayerTypeFromLogMessage(o.message));
         }
     }

@@ -45,7 +45,7 @@ public class VLog extends FDropDown {
         clear();
 
         GameLogEntryType logVerbosityFilter = GameLogEntryType.valueOf(FModel.getPreferences().getPref(FPref.DEV_LOG_ENTRY_TYPE));
-        List<GameLogEntry> logEntrys = MatchUtil.getGameView().getLogEntries(logVerbosityFilter);
+        List<GameLogEntry> logEntrys = MatchUtil.getGameView().getGameLog().getLogEntries(logVerbosityFilter);
 
         LogEntryDisplay logEntryDisplay;
         float width = maxWidth - getMenuTab().screenPos.x; //stretch from tab to edge of screen

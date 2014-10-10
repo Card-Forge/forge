@@ -28,19 +28,21 @@ import com.google.common.collect.Sets;
 
 import forge.events.UiEventAttackerDeclared;
 import forge.game.GameEntity;
+import forge.game.GameEntityView;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.card.CardView;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.match.MatchUtil;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
-import forge.view.CardView;
 
 /**
  * <p>
@@ -51,7 +53,6 @@ import forge.view.CardView;
  * @version $Id: InputAttack.java 24769 2014-02-09 13:56:04Z Hellfish $
  */
 public class InputAttack extends InputSyncronizedBase {
-    /** Constant <code>serialVersionUID=7849903731842214245L</code>. */
     private static final long serialVersionUID = 7849903731842214245L;
 
     private final Combat combat;
@@ -67,7 +68,6 @@ public class InputAttack extends InputSyncronizedBase {
         defenders = combat.getDefenders();
     }
 
-    /** {@inheritDoc} */
     @Override
     public final void showMessage() {
         // TODO still seems to have some issues with multiple planeswalkers
@@ -83,8 +83,8 @@ public class InputAttack extends InputSyncronizedBase {
         for (Pair<Card, GameEntity> attacker : mandatoryAttackers) {
             combat.addAttacker(attacker.getLeft(), attacker.getRight());
             MatchUtil.fireEvent(new UiEventAttackerDeclared(
-                    getController().getCardView(attacker.getLeft()),
-                    getController().getGameEntityView(attacker.getRight())));
+                    CardView.get(attacker.getLeft()),
+                    GameEntityView.get(attacker.getRight())));
         }
         updateMessage();
     }
@@ -108,7 +108,6 @@ public class InputAttack extends InputSyncronizedBase {
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     protected final void onOk() {
         // TODO Add check to see if each must attack creature is attacking
@@ -118,7 +117,6 @@ public class InputAttack extends InputSyncronizedBase {
         stop();
     }
 
-    /** {@inheritDoc} */
     @Override
     protected final void onCancel() {
         //either alpha strike or undeclare all attackers based on whether any attackers have been declared
@@ -128,14 +126,15 @@ public class InputAttack extends InputSyncronizedBase {
             for (Card c : attackers) {
                 undeclareAttacker(c);
             }
-        } else {
+        }
+        else {
             alphaStrike();
         }
         updateMessage();
     }
 
     void alphaStrike() {
-      //alpha strike
+        //alpha strike
         final List<Player> defenders = playerAttacks.getOpponents();
         final Set<CardView> refreshCards = Sets.newHashSet();
 
@@ -147,7 +146,7 @@ public class InputAttack extends InputSyncronizedBase {
             for (Player defender : defenders) {
                 if (CombatUtil.canAttack(c, defender, combat)) {
                     combat.addAttacker(c, defender);
-                    refreshCards.add(getController().getCardView(c));
+                    refreshCards.add(CardView.get(c));
                     break;
                 }
             }
@@ -166,7 +165,6 @@ public class InputAttack extends InputSyncronizedBase {
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     protected final boolean onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
         final List<Card> att = combat.getAttackers();
@@ -240,8 +238,8 @@ public class InputAttack extends InputSyncronizedBase {
         activateBand(activeBand);
 
         MatchUtil.fireEvent(new UiEventAttackerDeclared(
-                getController().getCardView(card),
-                getController().getGameEntityView(currentDefender)));
+                CardView.get(card),
+                GameEntityView.get(currentDefender)));
     }
 
     private boolean canUndeclareAttacker(Card card) {
@@ -255,12 +253,12 @@ public class InputAttack extends InputSyncronizedBase {
         if (canUndeclareAttacker(card)) {
             // TODO Is there no way to attacks each turn cards to attack Planeswalkers?
             combat.removeFromCombat(card);
-            MatchUtil.setUsedToPay(getController().getCardView(card), false);
+            MatchUtil.setUsedToPay(CardView.get(card), false);
             // When removing an attacker clear the attacking band
             activateBand(null);
 
             MatchUtil.fireEvent(new UiEventAttackerDeclared(
-                    getController().getCardView(card), null));
+                    CardView.get(card), null));
             return true;
         }
         return false;
@@ -270,10 +268,10 @@ public class InputAttack extends InputSyncronizedBase {
         currentDefender = def;
         for (final GameEntity ge : defenders) {
             if (ge instanceof Card) {
-                MatchUtil.setUsedToPay(getController().getCardView((Card) ge), ge == def);
+                MatchUtil.setUsedToPay(CardView.get((Card) ge), ge == def);
             }
             else if (ge instanceof Player) {
-                MatchUtil.setHighlighted(getController().getPlayerView((Player) ge), ge == def);
+                MatchUtil.setHighlighted(PlayerView.get((Player) ge), ge == def);
             }
         }
 
@@ -283,14 +281,14 @@ public class InputAttack extends InputSyncronizedBase {
     private final void activateBand(final AttackingBand band) {
         if (activeBand != null) {
             for (final Card card : activeBand.getAttackers()) {
-                MatchUtil.setUsedToPay(getController().getCardView(card), false);
+                MatchUtil.setUsedToPay(CardView.get(card), false);
             }
         }
         activeBand = band;
 
         if (activeBand != null) {
             for (final Card card : activeBand.getAttackers()) {
-                MatchUtil.setUsedToPay(getController().getCardView(card), true);
+                MatchUtil.setUsedToPay(CardView.get(card), true);
             }
         }
     }
@@ -314,6 +312,6 @@ public class InputAttack extends InputSyncronizedBase {
         showMessage(message);
 
         updatePrompt();
-        MatchUtil.getController().showCombat(getController().getCombat()); // redraw sword icons
+        MatchUtil.getController().showCombat(); // redraw sword icons
     }
 }

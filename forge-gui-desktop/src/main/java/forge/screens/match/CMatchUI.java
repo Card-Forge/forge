@@ -39,9 +39,15 @@ import forge.ImageCache;
 import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.UiCommand;
+import forge.game.GameEntityView;
+import forge.game.GameView;
 import forge.game.Match;
+import forge.game.card.CardView;
+import forge.game.combat.CombatView;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.FNetOverlay;
 import forge.gui.GuiChoose;
@@ -82,13 +88,6 @@ import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PhaseLabel;
 import forge.util.ITriggerEvent;
-import forge.view.CardView;
-import forge.view.CombatView;
-import forge.view.GameEntityView;
-import forge.view.LocalGameView;
-import forge.view.PlayerView;
-import forge.view.SpellAbilityView;
-import forge.view.ViewUtil;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.PlayArea;
 
@@ -169,7 +168,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
 
         int i = 0;
         for (final PlayerView p : sortedPlayers) {
-            if (allHands || p.getLobbyPlayer() instanceof LobbyPlayerHuman || ViewUtil.mayViewAny(p.getHandCards())) {
+            if (allHands || p.getLobbyPlayer() instanceof LobbyPlayerHuman || CardView.mayViewAny(p.getHand())) {
                 VHand newHand = new VHand(EDocID.Hands[i], p);
                 newHand.getLayoutControl().initialize();
                 hands.add(newHand);
@@ -247,7 +246,9 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
         return sortedPlayers.indexOf(player);
     }
 
-    public void showCombat(final CombatView combat) {
+    @Override
+    public void showCombat() {
+        CombatView combat = MatchUtil.getGameView().getCombat();
         if (combat != null && combat.getNumAttackers() > 0 && MatchUtil.getGameView().peekStack() == null) {
             if (selectedDocBeforeCombat == null) {
                 IVDoc<? extends ICDoc> combatDoc = EDocID.REPORT_COMBAT.getDoc();
@@ -427,7 +428,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
 
     @Override
     public void updatePhase() {
-        LocalGameView gameView = MatchUtil.getGameView();
+        GameView gameView = MatchUtil.getGameView();
         final PlayerView p = gameView.getPlayerTurn();
         final PhaseType ph = gameView.getPhase();
         final CMatchUI matchUi = CMatchUI.SINGLETON_INSTANCE;
@@ -486,26 +487,25 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
     }
 
     @Override
-    public int getAbilityToPlay(List<SpellAbilityView> abilities, ITriggerEvent triggerEvent) {
+    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, ITriggerEvent triggerEvent) {
         if (triggerEvent == null) {
             if (abilities.isEmpty()) {
-                return -1;
+                return null;
             }
             if (abilities.size() == 1) {
-                return abilities.get(0).getId();
+                return abilities.get(0);
             }
-            final SpellAbilityView choice = GuiChoose.oneOrNone("Choose ability to play", abilities);
-            return choice == null ? -1 : choice.getId();
+            return GuiChoose.oneOrNone("Choose ability to play", abilities);
         }
 
         if (abilities.isEmpty()) {
-            return -1;
+            return null;
         }
-        if (abilities.size() == 1 && !abilities.get(0).isPromptIfOnlyPossibleAbility()) {
+        if (abilities.size() == 1 && !abilities.get(0).promptIfOnlyPossibleAbility()) {
             if (abilities.get(0).canPlay()) {
-                return abilities.get(0).getId(); //only return ability if it's playable, otherwise return null
+                return abilities.get(0); //only return ability if it's playable, otherwise return null
             }
-            return -1;
+            return null;
         }
 
         //show menu if mouse was trigger for ability
@@ -514,7 +514,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
         boolean enabled;
         boolean hasEnabled = false;
         int shortcut = KeyEvent.VK_1; //use number keys as shortcuts for abilities 1-9
-        for (final SpellAbilityView ab : abilities) {
+        for (final SpellAbility ab : abilities) {
             enabled = ab.canPlay();
             if (enabled) {
                 hasEnabled = true;
@@ -544,7 +544,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
             menu.show(mouseEvent.getComponent(), mouseEvent.getX(), mouseEvent.getY());
         }
 
-        return -1; //delay ability until choice made
+        return null; //delay ability until choice made
     }
 
     @Override
@@ -615,7 +615,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
     public void openView(List<Player> sortedPlayers) {
         List<PlayerView> sortedPlayerViews = new ArrayList<PlayerView>();
         for (Player p : sortedPlayers) {
-            sortedPlayerViews.add(MatchUtil.getGameView().getPlayerView(p, false));
+            sortedPlayerViews.add(PlayerView.get(p));
         }
         CMatchUI.SINGLETON_INSTANCE.initMatch(sortedPlayerViews, MatchUtil.getHumanCount() != 1);
 

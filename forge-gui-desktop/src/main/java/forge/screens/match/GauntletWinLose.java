@@ -26,11 +26,11 @@ import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
 import forge.assets.FSkinProp;
+import forge.game.GameView;
 import forge.gauntlet.GauntletWinLoseController;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
-import forge.view.IGameView;
 
 /**
  * The Win/Lose handler for 'gauntlet' type tournament
@@ -45,7 +45,7 @@ public class GauntletWinLose extends ControlWinLose {
      * @param view0 ViewWinLose object
      * @param match
      */
-    public GauntletWinLose(final ViewWinLose view0, final IGameView game0) {
+    public GauntletWinLose(final ViewWinLose view0, final GameView game0) {
         super(view0, game0);
         controller = new GauntletWinLoseController(view0, game0) {
             @Override

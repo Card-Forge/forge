@@ -13,6 +13,7 @@ import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
+import forge.game.GameOutcome.AnteResult;
 import forge.game.GameType;
 import forge.game.card.Card;
 import forge.game.card.CardShields;
@@ -136,13 +137,13 @@ public abstract class PlayerController {
     // Triggers preliminary choice: ask, decline or play
     private Map<Integer, Boolean> triggersAlwaysAccept = new HashMap<Integer, Boolean>();
 
-    public final boolean shouldAlwaysAcceptTrigger(Integer trigger) { return Boolean.TRUE.equals(triggersAlwaysAccept.get(trigger)); }
-    public final boolean shouldAlwaysDeclineTrigger(Integer trigger) { return Boolean.FALSE.equals(triggersAlwaysAccept.get(trigger)); }
-    public final boolean shouldAlwaysAskTrigger(Integer trigger) { return !triggersAlwaysAccept.containsKey(trigger); }
+    public boolean shouldAlwaysAcceptTrigger(Integer trigger) { return Boolean.TRUE.equals(triggersAlwaysAccept.get(trigger)); }
+    public boolean shouldAlwaysDeclineTrigger(Integer trigger) { return Boolean.FALSE.equals(triggersAlwaysAccept.get(trigger)); }
+    public boolean shouldAlwaysAskTrigger(Integer trigger) { return !triggersAlwaysAccept.containsKey(trigger); }
 
-    public final void setShouldAlwaysAcceptTrigger(Integer trigger) { triggersAlwaysAccept.put(trigger, true); }
-    public final void setShouldAlwaysDeclineTrigger(Integer trigger) { triggersAlwaysAccept.put(trigger, false); }
-    public final void setShouldAlwaysAskTrigger(Integer trigger) { triggersAlwaysAccept.remove(trigger); }
+    public void setShouldAlwaysAcceptTrigger(Integer trigger) { triggersAlwaysAccept.put(trigger, true); }
+    public void setShouldAlwaysDeclineTrigger(Integer trigger) { triggersAlwaysAccept.put(trigger, false); }
+    public void setShouldAlwaysAskTrigger(Integer trigger) { triggersAlwaysAccept.remove(trigger); }
 
     // End of Triggers preliminary choice
 
@@ -292,5 +293,9 @@ public abstract class PlayerController {
 
     public boolean canPlayUnlimitedLands() {
         return false;
+    }
+
+    public AnteResult getAnteResult() {
+        return game.getOutcome().anteResult.get(player);
     }
 }

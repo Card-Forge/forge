@@ -74,11 +74,11 @@ public class ControlSpellEffect extends SpellAbilityEffect {
                         continue;
                     }
 
-                    if (!c.canBeControlledBy(si.getActivator())) {
+                    if (!c.canBeControlledBy(si.getActivatingPlayer())) {
                         continue;
                     }
 
-                    if (c.getController().equals(si.getActivator())) {
+                    if (c.getController().equals(si.getActivatingPlayer())) {
                         // Controllers are already the same, no exchange needed
                         continue;
                     }
@@ -86,7 +86,7 @@ public class ControlSpellEffect extends SpellAbilityEffect {
                     if (remember) {
                         source.addRemembered(c);
                     }
-                    c.setController(si.getActivator(), tStamp);
+                    c.setController(si.getActivatingPlayer(), tStamp);
                 }
             }
 
@@ -98,7 +98,7 @@ public class ControlSpellEffect extends SpellAbilityEffect {
                 source.addRemembered(tgtC);
             }
             tgtC.setController(newController, tStamp);
-            si.setActivator(newController);
+            si.setActivatingPlayer(newController);
         }
     }
 }
