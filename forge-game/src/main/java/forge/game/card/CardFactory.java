@@ -225,7 +225,7 @@ public class CardFactory {
      */
     
     public final static Card getCard(final IPaperCard cp, final Player owner) {
-        return getCard(cp, owner, owner == null ? 0 : owner.getGame().nextCardId());
+        return getCard(cp, owner, owner == null ? -1 : owner.getGame().nextCardId());
     }
     public final static Card getCard(final IPaperCard cp, final Player owner, final int cardId) {
         //System.out.println(cardName);
@@ -377,7 +377,7 @@ public class CardFactory {
             card.setState(CardCharacteristicName.Original);
         }
 
-        if ( st == CardSplitType.Split ) {
+        if (st == CardSplitType.Split) {
             card.setName(rules.getName());
 
             // Combined mana cost
@@ -400,7 +400,6 @@ public class CardFactory {
             //String combinedText = String.format("%s: %s\n%s: %s", rules.getMainPart().getName(), rules.getMainPart().getOracleText(), rules.getOtherPart().getName(), rules.getOtherPart().getOracleText());
             //card.setText(combinedText);
         }
-
         return card;
     }
 
