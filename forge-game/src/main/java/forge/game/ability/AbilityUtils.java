@@ -164,7 +164,7 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("Remembered")) {
-            if (hostCard.getRemembered().isEmpty()) {
+            if (!hostCard.hasRemembered()) {
                 final Card newCard = game.getCardState(hostCard);
                 for (final Object o : newCard.getRemembered()) {
                     if (o instanceof Card) {
@@ -180,7 +180,7 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("DirectRemembered")) {
-            if (hostCard.getRemembered().isEmpty()) {
+            if (!hostCard.hasRemembered()) {
                 final Card newCard = game.getCardState(hostCard);
                 for (final Object o : newCard.getRemembered()) {
                     if (o instanceof Card) {
@@ -456,7 +456,7 @@ public class AbilityUtils {
             // Add whole Remembered list to handlePaid
             final List<Card> list = new ArrayList<Card>();
             Card newCard = card;
-            if (card.getRemembered().isEmpty()) {
+            if (!card.hasRemembered()) {
                 newCard = game.getCardState(card);
             }
 
@@ -1287,11 +1287,12 @@ public class AbilityUtils {
             }
         }
         else if (unlessCost.equals("RememberedCostMinus2")) {
-            if (source.getRemembered().isEmpty() || !(source.getRemembered().get(0) instanceof Card)) {
+            Card rememberedCard = (Card) source.getFirstRemembered();
+            if (rememberedCard == null) {
                 sa.resolve();
                 resolveSubAbilities(sa, game);
+                return;
             }
-            Card rememberedCard = (Card) source.getRemembered().get(0);
             ManaCostBeingPaid newCost = new ManaCostBeingPaid(rememberedCard.getManaCost());
             newCost.decreaseColorlessMana(2);
             cost = new Cost(newCost.toManaCost(), true);
@@ -1355,7 +1356,7 @@ public class AbilityUtils {
 
         if (sa.hasParam("RememberCostMana")) {
             host.clearRemembered();
-            host.getRemembered().addAll(sa.getPayingMana());
+            host.addRemembered(sa.getPayingMana());
         }
 
         if (sa.hasParam("RememberCostCards") && !sa.getPaidHash().isEmpty()) {

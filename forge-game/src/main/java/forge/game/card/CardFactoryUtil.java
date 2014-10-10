@@ -951,7 +951,7 @@ public class CardFactoryUtil {
         }
 
         if (l[0].startsWith("RememberedSize")) {
-            return doXMath(c.getRemembered().size(), m, c);
+            return doXMath(c.getRememberedCount(), m, c);
         }
 
         if (l[0].startsWith("RememberedNumber")) {
@@ -1253,7 +1253,7 @@ public class CardFactoryUtil {
                 ce = c.getEquipping();
             }
             else if (sq[0].contains("Remembered")) {
-                ce = (Card) c.getRemembered().get(0);
+                ce = (Card) c.getFirstRemembered();
             }
             else {
                 ce = c;

@@ -174,31 +174,30 @@ public class CloneEffect extends SpellAbilityEffect {
                 @Override
                 public void run() {
                     if (cloneCard.isCloned()) {
-                      cloneCard.switchStates(CardCharacteristicName.Cloner, CardCharacteristicName.Original);
-                      cloneCard.setState(CardCharacteristicName.Original);
-                      cloneCard.clearStates(CardCharacteristicName.Cloner);
+                        cloneCard.switchStates(CardCharacteristicName.Cloner, CardCharacteristicName.Original);
+                        cloneCard.setState(CardCharacteristicName.Original);
+                        cloneCard.clearStates(CardCharacteristicName.Cloner);
                     }
                 }
             };
 
-            
             String duration = sa.getParam("Duration");
             if (duration.equals("UntilEndOfTurn")) {
                 game.getEndOfTurn().addUntil(unclone);
-            } else if (duration.equals("UntilYourNextTurn")) {
+            }
+            else if (duration.equals("UntilYourNextTurn")) {
                 game.getCleanup().addUntil(host.getController(), unclone);
             }
         }
-
         game.fireEvent(new GameEventCardStatsChanged(tgtCard));
     } // cloneResolve
 
     private void addExtraCharacteristics(final Card tgtCard, final SpellAbility sa, final Map<String, String> origSVars) {
         // additional types to clone
         if (sa.hasParam("AddTypes")) {
-           for (final String type : Arrays.asList(sa.getParam("AddTypes").split(","))) {
-               tgtCard.addType(type);
-           }
+            for (final String type : Arrays.asList(sa.getParam("AddTypes").split(","))) {
+                tgtCard.addType(type);
+            }
         }
 
         // triggers to add to clone

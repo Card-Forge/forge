@@ -267,7 +267,7 @@ public class CardImageRenderer {
             g.drawImage(image, x + (w - iconSize) / 2, y + (h - iconSize) / 2, iconSize, iconSize);
         }
         else {
-            final String text = card.getOriginal().getText();
+            final String text = card.getText();
             if (StringUtils.isEmpty(text)) { return; }
 
             float padding = TEXT_FONT.getCapHeight() * 0.75f;

@@ -127,7 +127,7 @@ public class CounterEffect extends SpellAbilityEffect {
 
             if (sa.hasParam("RememberSplicedOntoCounteredSpell")) {
                 if (tgtSA.getSplicedCards() != null) {
-                    sa.getHostCard().getRemembered().addAll(tgtSA.getSplicedCards());
+                    sa.getHostCard().addRemembered(tgtSA.getSplicedCards());
                 }
             }
         }

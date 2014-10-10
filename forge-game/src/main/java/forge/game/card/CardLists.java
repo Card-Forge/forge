@@ -81,8 +81,8 @@ public class CardLists {
     public static final Comparator<Card> TextLenComparator = new Comparator<Card>() {
         @Override
         public int compare(final Card a, final Card b) {
-            final int aLen = a.getText().length();
-            final int bLen = b.getText().length();
+            final int aLen = a.getView().getText().length();
+            final int bLen = b.getView().getText().length();
             return aLen - bLen;
         }
     };

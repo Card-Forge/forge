@@ -126,7 +126,7 @@ public class CardCharacteristics {
     }
     public void setOracleText(final String oracleText0) {
         oracleText = oracleText0;
-        view.updateText(this);
+        view.updateOracleText(this);
     }
 
     public final int getBaseAttack() {

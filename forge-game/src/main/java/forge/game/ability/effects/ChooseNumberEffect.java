@@ -138,7 +138,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                     card.clearRemembered();
                 }
                 if (sa.hasParam("RememberHighest")) {
-                    card.getRemembered().addAll(highestNum);
+                    card.addRemembered(highestNum);
                 }
             }
         }

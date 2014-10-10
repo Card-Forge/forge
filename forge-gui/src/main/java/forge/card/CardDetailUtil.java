@@ -250,7 +250,7 @@ public class CardDetailUtil {
         if (area.length() != 0) {
             area.append("\n");
         }
-        String text = state.getText();
+        String text = card.getText();
         // LEVEL [0-9]+-[0-9]+
         // LEVEL [0-9]+\+
 

@@ -3,6 +3,7 @@ package forge.game.card;
 import java.util.Set;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicates;
@@ -15,7 +16,9 @@ import forge.card.CardRarity;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
+import forge.game.Direction;
 import forge.game.GameEntityView;
+import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
@@ -240,6 +243,45 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.ChosenPlayer, c.getChosenPlayer());
     }
 
+    public Direction getChosenDirection() {
+        return get(TrackableProperty.ChosenDirection);
+    }
+    void updateChosenDirection(Card c) {
+        set(TrackableProperty.ChosenDirection, c.getChosenDirection());
+    }
+
+    private String getRemembered() {
+        return get(TrackableProperty.Remembered);
+    }
+    void updateRemembered(Card c) {
+        if (c.getRemembered() == null) {
+            set(TrackableProperty.Remembered, null);
+            return;
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("\r\nRemembered: \r\n");
+        for (final Object o : c.getRemembered()) {
+            if (o instanceof Card) {
+                final Card card = (Card) o;
+                if (card.isFaceDown()) {
+                    sb.append("Face Down");
+                    // face-down cards don't show unique number to avoid cheating
+                }
+                else {
+                    sb.append(card.getName());
+                    sb.append(" (");
+                    sb.append(card.getId());
+                    sb.append(")");
+                }
+            }
+            else if (o != null) {
+                sb.append(o.toString());
+            }
+            sb.append("\r\n");
+        }
+        set(TrackableProperty.Remembered, sb.toString());
+    }
+
     public String getNamedCard() {
         return get(TrackableProperty.NamedCard);
     }
@@ -335,6 +377,93 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.ChangedTypes, c.getChangedTextTypeWords());
     }
 
+    public String getText() {
+        final Card card = Card.get(this); //TODO: Avoid needing this
+        final CardStateView state = getOriginal();
+        if (card == null) {
+            return state.getOracleText().trim();
+        }
+
+        final StringBuilder sb = new StringBuilder();
+
+        // Vanguard Modifiers
+        if (card.isType("Vanguard")) {
+            sb.append("Hand Modifier: ").append(card.getRules().getHand());
+            sb.append("\r\nLife Modifier: ").append(card.getRules().getLife());
+            sb.append("\r\n\r\n");
+        }
+        if (card.isCommander()) {
+            sb.append(getOwner()).append("'s Commander\r\n");
+            sb.append(CardFactoryUtil.getCommanderInfo(Player.get(getOwner()))).append("\r\n");
+        }
+        sb.append(card.getAbilityText());
+
+        String nonAbilityText = card.getNonAbilityText();
+        if (card.getAmountOfKeyword("CARDNAME can block an additional creature.") > 1) {
+            final StringBuilder ab = new StringBuilder();
+            ab.append("CARDNAME can block an additional ");
+            ab.append(card.getAmountOfKeyword("CARDNAME can block an additional creature."));
+            ab.append(" creatures.");
+            nonAbilityText = nonAbilityText.replaceFirst("CARDNAME can block an additional creature.", ab.toString());
+            nonAbilityText = nonAbilityText.replaceAll("CARDNAME can block an additional creature.", "");
+            nonAbilityText = nonAbilityText.replaceAll("\r\n\r\n\r\n", "");
+        }
+        if (nonAbilityText.length() > 0) {
+            sb.append("\r\n \r\nNon ability features: \r\n");
+            sb.append(nonAbilityText.replaceAll("CARDNAME", getName()));
+        }
+
+        sb.append(getRemembered());
+
+        PlayerView chosenPlayer = getChosenPlayer();
+        if (chosenPlayer != null) {
+            sb.append("\r\n[Chosen player: ");
+            sb.append(chosenPlayer);
+            sb.append("]\r\n");
+        }
+
+        Direction chosenDirection = getChosenDirection();
+        if (chosenDirection != null) {
+            sb.append("\r\n[Chosen direction: ");
+            sb.append(chosenDirection);
+            sb.append("]\r\n");
+        }
+
+        Iterable<CardView> hauntedBy = getHauntedBy();
+        if (hauntedBy != null) {
+            sb.append("Haunted by: ");
+            boolean needDelim = false;
+            for (final CardView c : hauntedBy) {
+                if (needDelim) {
+                    sb.append(",");
+                }
+                else { needDelim = false; }
+                sb.append(c);
+            }
+            sb.append("\r\n");
+        }
+
+        CardView haunting = getHaunting();
+        if (haunting != null) {
+            sb.append("Haunting: ").append(haunting);
+            sb.append("\r\n");
+        }
+
+        CardView pairedWith = getPairedWith();
+        if (pairedWith != null) {
+            sb.append("\r\n \r\nPaired With: ").append(pairedWith);
+            sb.append("\r\n");
+        }
+
+        CardCharacteristics cloner = card.getState(CardCharacteristicName.Cloner);
+        if (cloner != null) {
+            sb.append("\r\nCloned by: ").append(cloner.getView().getName());
+            sb.append(" (").append(cloner.getView().getId()).append(")");
+        }
+
+        return sb.toString().trim();
+    }
+
     public CardStateView getOriginal() {
         return get(TrackableProperty.Original);
     }
@@ -409,9 +538,9 @@ public class CardView extends GameEntityView {
             return getOriginal().getName();
         }
 
-        /*if (!mayBeShown) {
+        if (!mayBeShown) {
             return "(Unknown card)";
-        }*/
+        }
 
         if (StringUtils.isEmpty(getOriginal().getName())) {
             CardStateView alternate = getAlternate();
@@ -501,13 +630,14 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.Power, c.getNetAttack());
         }
         void updatePower(CardCharacteristics c) {
-            Card card = Card.get(CardView.this);
-            if (card != null) {
-                updatePower(card); //TODO: find a better way to do this
+            if (CardView.this.getOriginal() == this) {
+                Card card = Card.get(CardView.this);
+                if (card != null) {
+                    updatePower(card); //TODO: find a better way to do this
+                    return;
+                }
             }
-            else {
-                set(TrackableProperty.Power, c.getBaseAttack());
-            }
+            set(TrackableProperty.Power, c.getBaseAttack());
         }
 
         public int getToughness() {
@@ -517,13 +647,14 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.Toughness, c.getNetDefense());
         }
         void updateToughness(CardCharacteristics c) {
-            Card card = Card.get(CardView.this);
-            if (card != null) {
-                updateToughness(card); //TODO: find a better way to do this
+            if (CardView.this.getOriginal() == this) {
+                Card card = Card.get(CardView.this);
+                if (card != null) {
+                    updateToughness(card); //TODO: find a better way to do this
+                    return;
+                }
             }
-            else {
-                set(TrackableProperty.Toughness, c.getBaseDefense());
-            }
+            set(TrackableProperty.Toughness, c.getBaseDefense());
         }
 
         public int getLoyalty() {
@@ -533,29 +664,21 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.Loyalty, c.getCurrentLoyalty());
         }
         void updateLoyalty(CardCharacteristics c) {
-            Card card = Card.get(CardView.this);
-            if (card != null) {
-                updateLoyalty(card); //TODO: find a better way to do this
+            if (CardView.this.getOriginal() == this) {
+                Card card = Card.get(CardView.this);
+                if (card != null) {
+                    updateLoyalty(card); //TODO: find a better way to do this
+                    return;
+                }
             }
-            else {
-                set(TrackableProperty.Loyalty, 0);
-            }
+            set(TrackableProperty.Loyalty, 0); //alternates don't need loyalty
         }
 
-        public String getText() {
-            return get(TrackableProperty.Text);
+        public String getOracleText() {
+            return get(TrackableProperty.OracleText);
         }
-        void updateText(Card c) {
-            set(TrackableProperty.Text, c.getText());
-        }
-        void updateText(CardCharacteristics c) {
-            Card card = Card.get(CardView.this);
-            if (card != null) {
-                updateText(card); //TODO: find a better way to do this
-            }
-            else {
-                set(TrackableProperty.Text, c.getOracleText());
-            }
+        void updateOracleText(CardCharacteristics c) {
+            set(TrackableProperty.OracleText, c.getOracleText());
         }
 
         private int foilIndexOverride = -1;

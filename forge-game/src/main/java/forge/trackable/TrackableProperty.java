@@ -1,6 +1,7 @@
 package forge.trackable;
 
 import forge.card.CardRarity;
+import forge.game.Direction;
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
@@ -38,6 +39,8 @@ public enum TrackableProperty {
     ChosenType(TrackableTypes.StringType),
     ChosenColors(TrackableTypes.CardViewCollectionType),
     ChosenPlayer(TrackableTypes.PlayerViewType),
+    ChosenDirection(TrackableTypes.EnumType(Direction.class)),
+    Remembered(TrackableTypes.StringType),
     NamedCard(TrackableTypes.StringType),
     Equipping(TrackableTypes.CardViewType),
     EquippedBy(TrackableTypes.CardViewCollectionType),
@@ -60,6 +63,7 @@ public enum TrackableProperty {
     ImageKey(TrackableTypes.StringType),
     Type(TrackableTypes.StringSetType),
     ManaCost(TrackableTypes.ManaCostType),
+    OracleText(TrackableTypes.StringType),
     Power(TrackableTypes.IntegerType),
     Toughness(TrackableTypes.IntegerType),
     Loyalty(TrackableTypes.IntegerType),

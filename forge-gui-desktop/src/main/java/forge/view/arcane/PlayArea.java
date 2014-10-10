@@ -176,15 +176,12 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         break;
                     }
 
-                    final String text = state.getText();
-                    final String firstText = firstState.getText();
-
                     if (!panel.getAttachedPanels().isEmpty()
                             || !card.hasSameCounters(firstPanel.getCard())
                             || (card.isSick() != firstCard.isSick())
                             || (state.getPower() != firstState.getPower())
                             || (state.getToughness() != firstState.getToughness())
-                            || !(text.equals(firstText))
+                            || !(card.getText().equals(firstCard.getText()))
                             || (stack.size() == tokenStackMax)) {
                         // If this token has attachments or the stack is full,
                         // put it to the right.

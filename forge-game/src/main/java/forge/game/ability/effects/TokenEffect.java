@@ -334,9 +334,7 @@ public class TokenEffect extends SpellAbilityEffect {
                         final Card token = game.getCardState(c);
                         final String remembered = sa.getParam("TokenRemembered");
                         for (final Object o : AbilityUtils.getDefinedObjects(host, remembered, sa)) {
-                            if (!token.getRemembered().contains(o)) {
-                                token.addRemembered(o);
-                            }
+                            token.addRemembered(o);
                         }
                     }
                 }

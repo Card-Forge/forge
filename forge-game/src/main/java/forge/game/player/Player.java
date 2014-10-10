@@ -1790,11 +1790,11 @@ public class Player extends GameEntity implements Comparable<Player> {
                 return false;
             }
         } else if (property.equals("IsRemembered")) {
-            if (!source.getRemembered().contains(this)) {
+            if (!source.isRemembered(this)) {
                 return false;
             }
         } else if (property.equals("IsNotRemembered")) {
-            if (source.getRemembered().contains(this)) {
+            if (source.isRemembered(this)) {
                 return false;
             }
         } else if (property.startsWith("EnchantedBy")) {

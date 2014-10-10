@@ -23,7 +23,7 @@ public class CleanUpEffect extends SpellAbilityEffect {
         }
         if (sa.hasParam("ForgetDefined")) {
             for (final Card card : AbilityUtils.getDefinedCards(source, sa.getParam("ForgetDefined"), sa)) {
-                source.getRemembered().remove(card);
+                source.removeRemembered(card);
             }
         }
         if (sa.hasParam("ClearImprinted")) {

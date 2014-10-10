@@ -129,11 +129,11 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 }
             }
 
-            if (remember && !sa.getHostCard().getRemembered().contains(tgtC)) {
+            if (remember && !sa.getHostCard().isRemembered(tgtC)) {
                 sa.getHostCard().addRemembered(tgtC);
             }
 
-            if (forget && sa.getHostCard().getRemembered().contains(tgtC)) {
+            if (forget && sa.getHostCard().isRemembered(tgtC)) {
                 sa.getHostCard().removeRemembered(tgtC);
             }
 

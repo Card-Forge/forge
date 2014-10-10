@@ -250,8 +250,9 @@ public class PumpEffect extends SpellAbilityEffect {
             final String targets = Lang.joinHomogenous(tgtCards);
             final String message = sa.hasParam("OptionQuestion") ? sa.getParam("OptionQuestion").replace("TARGETS", targets) : "Apply pump to " + targets + "?";
 
-            if ( !sa.getActivatingPlayer().getController().confirmAction(sa, null, message) )
+            if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message)) {
                 return;
+            }
         }
 
         if (sa.hasParam("RememberObjects")) {
@@ -260,9 +261,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
         if (pumpRemembered != null) {
             for (final Object o : AbilityUtils.getDefinedObjects(host, pumpRemembered, sa)) {
-                if (!host.getRemembered().contains(o)) {
-                    host.addRemembered(o);
-                }
+                host.addRemembered(o);
             }
         }
 
@@ -272,9 +271,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
         if (pumpForget != null) {
             for (final Object o : AbilityUtils.getDefinedObjects(host, pumpForget, sa)) {
-                if (host.getRemembered().contains(o)) {
-                    host.removeRemembered(o);
-                }
+                host.removeRemembered(o);
             }
         }
         if (sa.hasParam("ImprintCards")) {
@@ -283,17 +280,13 @@ public class PumpEffect extends SpellAbilityEffect {
 
         if (pumpImprint != null) {
             for (final Card c : AbilityUtils.getDefinedCards(host, pumpImprint, sa)) {
-                if (!host.getImprintedCards().contains(c)) {
-                    host.addImprintedCard(c);
-                }
+                host.addImprintedCard(c);
             }
         }
 
         if (sa.hasParam("ForgetImprinted")) {
             for (final Card c : AbilityUtils.getDefinedCards(host, sa.getParam("ForgetImprinted"), sa)) {
-                if (host.getImprintedCards().contains(c)) {
-                    host.removeImprintedCard(c);
-                }
+                host.removeImprintedCard(c);
             }
         }
 

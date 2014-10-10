@@ -141,7 +141,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     /** Original values of SVars changed by text changes. */
     private Map<String, String> originalSVars = Maps.newHashMap();
 
-    private final ArrayList<Object> rememberedObjects = new ArrayList<Object>();
+    private final Set<Object> rememberedObjects = new LinkedHashSet<Object>();
     private final MapOfLists<GameEntity, Object> rememberMap = new HashMapOfLists<GameEntity, Object>(CollectionSuppliers.<Object>arrayLists());
     private Map<Player, String> flipResult;
 
@@ -463,17 +463,46 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         rememberMap.addAll(e, o);
     }
 
-    public final ArrayList<Object> getRemembered() {
+    public final Iterable<Object> getRemembered() {
         return rememberedObjects;
     }
-    public final void addRemembered(final Object o) {
-        rememberedObjects.add(o);
+    public final boolean hasRemembered() {
+        return !rememberedObjects.isEmpty();
     }
-    public final void removeRemembered(final Object o) {
-        rememberedObjects.remove(o);
+    public final int getRememberedCount() {
+        return rememberedObjects.size();
+    }
+    public final Object getFirstRemembered() {
+        return Iterables.getFirst(rememberedObjects, null);
+    }
+    public final <T> boolean isRemembered(T o) {
+        return rememberedObjects.contains(o);
+    }
+    public final <T> void addRemembered(final T o) {
+        if (rememberedObjects.add(o)) {
+            view.updateRemembered(this);
+        }
+    }
+    public final <T> void addRemembered(final Iterable<T> objects) {
+        boolean changed = false;
+        for (T o : objects) {
+            if (rememberedObjects.add(o)) {
+                changed = true;
+            }
+        }
+        if (changed) {
+            view.updateRemembered(this);
+        }
+    }
+    public final <T> void removeRemembered(final T o) {
+        if (rememberedObjects.remove(o)) {
+            view.updateRemembered(this);
+        }
     }
     public final void clearRemembered() {
+        if (rememberedObjects.isEmpty()) { return; }
         rememberedObjects.clear();
+        view.updateRemembered(this);
     }
 
     public final CardCollectionView getImprintedCards() {
@@ -1062,7 +1091,9 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return chosenDirection;
     }
     public void setChosenDirection(Direction chosenDirection0) {
+        if (chosenDirection == chosenDirection0) { return; }
         chosenDirection = chosenDirection0;
+        view.updateChosenDirection(this);
     }
 
     // used for cards like Meddling Mage...
@@ -1104,98 +1135,6 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     public final void setText(final String t) {
         originalText = t;
         text = originalText;
-    }
-
-    // get the text that should be displayed
-    public String getText() {
-        final StringBuilder sb = new StringBuilder();
-
-        // Vanguard Modifiers
-        if (isType("Vanguard")) {
-            sb.append("Hand Modifier: ").append(getRules().getHand());
-            sb.append("\r\nLife Modifier: ").append(getRules().getLife());
-            sb.append("\r\n\r\n");
-        }
-        if (isCommander) {
-            sb.append(getOwner()).append("'s Commander\r\n");
-            sb.append(CardFactoryUtil.getCommanderInfo(getOwner())).append("\r\n");
-        }
-        sb.append(getAbilityText());
-
-        String nonAbilityText = getNonAbilityText();
-        if (getAmountOfKeyword("CARDNAME can block an additional creature.") > 1) {
-            final StringBuilder ab = new StringBuilder();
-            ab.append("CARDNAME can block an additional ");
-            ab.append(getAmountOfKeyword("CARDNAME can block an additional creature."));
-            ab.append(" creatures.");
-            nonAbilityText = nonAbilityText.replaceFirst("CARDNAME can block an additional creature.", ab.toString());
-            nonAbilityText = nonAbilityText.replaceAll("CARDNAME can block an additional creature.", "");
-            nonAbilityText = nonAbilityText.replaceAll("\r\n\r\n\r\n", "");
-        }
-        if (nonAbilityText.length() > 0) {
-            sb.append("\r\n \r\nNon ability features: \r\n");
-            sb.append(nonAbilityText.replaceAll("CARDNAME", getName()));
-        }
-
-        // Remembered cards
-        if (rememberedObjects.size() > 0) {
-            sb.append("\r\nRemembered: \r\n");
-            for (final Object o : rememberedObjects) {
-                if (o instanceof Card) {
-                    final Card c = (Card) o;
-                    if (c.isFaceDown()) {
-                        sb.append("Face Down");
-                        // face-down cards don't show unique number to avoid cheating
-                    } else {
-                        sb.append(c.getName());
-                        sb.append(" (");
-                        sb.append(c.getId());
-                        sb.append(")");
-                    }
-                } else if (o != null) {
-                    sb.append(o.toString());
-                }
-                sb.append("\r\n");
-            }
-        }
-
-        if (chosenPlayer != null) {
-            sb.append("\r\n[Chosen player: ");
-            sb.append(getChosenPlayer());
-            sb.append("]\r\n");
-        }
-
-        if (chosenDirection != null) {
-            sb.append("\r\n[Chosen direction: ");
-            sb.append(getChosenDirection());
-            sb.append("]\r\n");
-        }
-
-        if (isHaunted()) {
-            sb.append("Haunted by: ");
-            for (final Card c : hauntedBy) {
-                sb.append(c).append(",");
-            }
-            sb.deleteCharAt(sb.length() - 1);
-            sb.append("\r\n");
-        }
-
-        if (haunting != null) {
-            sb.append("Haunting: ").append(haunting);
-            sb.append("\r\n");
-        }
-
-        if (pairedWith != null) {
-            sb.append("\r\n \r\nPaired With: ").append(pairedWith);
-            sb.append("\r\n");
-        }
-
-        if (characteristicsMap.get(CardCharacteristicName.Cloner) != null) {
-            sb.append("\r\nCloned by: ").append(characteristicsMap.get(CardCharacteristicName.Cloner).getName()).append(" (")
-                    .append(id).append(")");
-        }
-
-        return sb.toString();
     }
 
     // get the text that does not belong to a cards abilities (and is not really
@@ -3433,9 +3372,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     // Takes one argument like Permanent.Blue+withFlying
     @Override
     public final boolean isValid(final String restriction, final Player sourceController, final Card source) {
-
-        if (isImmutable()
-                && !source.getRemembered().contains(this)) { // special case exclusion
+        if (isImmutable() && !source.isRemembered(this)) { // special case exclusion
             return false;
         }
 
@@ -3494,7 +3431,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 return false;
             }
         } else if (property.equals("NamedByRememberedPlayer")) {
-            if (source.getRemembered().isEmpty()) {
+            if (!source.hasRemembered()) {
                 final Card newCard = game.getCardState(source);
                 for (final Object o : newCard.getRemembered()) {
                     if (o instanceof Player) {
@@ -3587,11 +3524,10 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 return false;
             }
             if (property.endsWith("ForRemembered")) {
-                if (source.getRemembered().isEmpty()) {
+                if (!source.hasRemembered()) {
                     return false;
                 }
-                if (getGame().getCombat().getDefendingPlayerRelatedTo((Card) source.getRemembered().get(0))
-                        != getController()) {
+                if (getGame().getCombat().getDefendingPlayerRelatedTo((Card) source.getFirstRemembered()) != getController()) {
                     return false;
                 }
             } else {
@@ -3626,7 +3562,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             }
         } else if (property.startsWith("RememberedPlayer")) {
             Player p = property.endsWith("Ctrl") ? getController() : getOwner();
-            if (source.getRemembered().isEmpty()) {
+            if (!source.hasRemembered()) {
                 final Card newCard = game.getCardState(source);
                 for (final Object o : newCard.getRemembered()) {
                     if (o instanceof Player) {
@@ -3645,14 +3581,14 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 }
             }
         } else if (property.startsWith("nonRememberedPlayerCtrl")) {
-            if (source.getRemembered().isEmpty()) {
+            if (!source.hasRemembered()) {
                 final Card newCard = game.getCardState(source);
-                if (newCard.getRemembered().contains(getController())) {
+                if (newCard.isRemembered(getController())) {
                     return false;
                 }
             }
 
-            if (source.getRemembered().contains(getController())) {
+            if (source.isRemembered(getController())) {
                 return false;
             }
         } else if (property.equals("TargetedPlayerCtrl")) {
@@ -4935,11 +4871,11 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             }
             return false;
         } else if (property.equals("IsRemembered")) {
-            if (!source.getRemembered().contains(this)) {
+            if (!source.isRemembered(this)) {
                 return false;
             }
         } else if (property.equals("IsNotRemembered")) {
-            if (source.getRemembered().contains(this)) {
+            if (source.isRemembered(this)) {
                 return false;
             }
         } else if (property.equals("IsImprinted")) {
