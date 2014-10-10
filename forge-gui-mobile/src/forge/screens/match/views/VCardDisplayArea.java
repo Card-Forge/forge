@@ -46,12 +46,14 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         clear();
 
         CardAreaPanel newCardPanel = null;
-        for (CardView card : model) {
-            CardAreaPanel cardPanel = CardAreaPanel.get(card);
-            addCardPanelToDisplayArea(cardPanel);
-            cardPanels.add(cardPanel);
-            if (newCardPanel == null && !orderedCards.contains(card)) {
-                newCardPanel = cardPanel;
+        if (model != null) {
+            for (CardView card : model) {
+                CardAreaPanel cardPanel = CardAreaPanel.get(card);
+                addCardPanelToDisplayArea(cardPanel);
+                cardPanels.add(cardPanel);
+                if (newCardPanel == null && !orderedCards.contains(card)) {
+                    newCardPanel = cardPanel;
+                }
             }
         }
         revalidate();

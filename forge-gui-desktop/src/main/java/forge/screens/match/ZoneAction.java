@@ -48,7 +48,7 @@ public class ZoneAction extends ForgeAction {
     @Override
     public void actionPerformed(final ActionEvent e) {
         final Iterable<CardView> choices = this.getCardsAsIterable();
-        if (!choices.iterator().hasNext()) {
+        if (choices == null || !choices.iterator().hasNext()) {
             GuiChoose.reveal(this.title, "no cards");
             return;
         } 

@@ -598,7 +598,13 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private void recalculateCardPanels(final PlayerView model, final ZoneType zone) {
         final List<CardView> modelCopy;
         synchronized (model) {
-            modelCopy = Lists.newArrayList(model.getCards(zone));
+            Iterable<CardView> cards = model.getCards(zone);
+            if (cards != null) {
+                modelCopy = Lists.newArrayList(cards);
+            }
+            else {
+                modelCopy = Lists.newArrayList();
+            }
         }
 
         final List<CardView> oldCards = Lists.newArrayList();
@@ -620,7 +626,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
         if (toDelete.size() == getCardPanels().size()) {
             clear();
-        } else {
+        }
+        else {
             for (final CardView card : toDelete) {
                 removeCardPanel(getCardPanel(card.getId()));
             }
