@@ -31,6 +31,11 @@ public class CardView extends GameEntityView {
     public static CardView get(Card c) {
         return c == null ? null : c.getView();
     }
+    public static CardStateView getState(Card c, CardCharacteristicName state) {
+        if (c == null) { return null; }
+        CardCharacteristics s = c.getState(state);
+        return s == null ? null : s.getView();
+    }
 
     public static CardView getCardForUi(IPaperCard pc) {
         return Card.getCardForUi(pc).getView();
@@ -513,18 +518,18 @@ public class CardView extends GameEntityView {
                 orig = CardCharacteristicName.LeftSplit;
                 alt = CardCharacteristicName.RightSplit;
             }
-            set(TrackableProperty.Original, c.getState(orig).getView());
-            set(TrackableProperty.Alternate, c.getState(alt).getView());
+            set(TrackableProperty.Original, CardView.getState(c, orig));
+            set(TrackableProperty.Alternate, CardView.getState(c, alt));
         }
         else if (hasAltState) {
             if (isFlipCard && !isFlipped) {
-                set(TrackableProperty.Alternate, c.getState(CardCharacteristicName.Flipped).getView());
+                set(TrackableProperty.Alternate, CardView.getState(c, CardCharacteristicName.Flipped));
             }
             else if (isDoubleFaced && !isTransformed) {
-                set(TrackableProperty.Alternate, c.getState(CardCharacteristicName.Transformed).getView());
+                set(TrackableProperty.Alternate, CardView.getState(c, CardCharacteristicName.Transformed));
             }
             else {
-                set(TrackableProperty.Alternate, c.getState(CardCharacteristicName.Original).getView());
+                set(TrackableProperty.Alternate, CardView.getState(c, CardCharacteristicName.Original));
             }
         }
         else {
