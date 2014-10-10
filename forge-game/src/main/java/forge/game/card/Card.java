@@ -278,6 +278,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         characteristicsMap.put(CardCharacteristicName.FaceDown, CardUtil.getFaceDownCharacteristic(this));
         view.updateChangedColorWords(this);
         view.updateChangedTypes(this);
+        view.updateSickness(this);
     }
 
     public boolean changeToState(final CardCharacteristicName state) {

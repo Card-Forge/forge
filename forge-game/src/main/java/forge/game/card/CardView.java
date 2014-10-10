@@ -156,10 +156,10 @@ public class CardView extends GameEntityView {
         return isFirstTurnControlled() && !getOriginal().hasHaste();
     }
     public boolean isSick() {
-        return getZone() == ZoneType.Battlefield && hasSickness();
+        return getZone() == ZoneType.Battlefield && getOriginal().isCreature() && hasSickness();
     }
     void updateSickness(Card c) {
-        set(TrackableProperty.Sickness, c.isInPlay() && c.isSick());
+        set(TrackableProperty.Sickness, c.isFirstTurnControlled());
     }
 
     public boolean isTapped() {
