@@ -234,10 +234,10 @@ public class QuestPreferencesHandler extends SkinnedPanel {
         pnlShop.add(new FLabel.Builder().text("Rare Singles").build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_SINGLES_RARE, ErrType.SHOP), constraints1);
 
-        pnlShop.add(new FLabel.Builder().text("Card Selling Price Limit").build(), constraints2);
+        pnlShop.add(new FLabel.Builder().text("Card Sale Price Cap").build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_MAX_SELLING_PRICE, ErrType.SHOP), constraints1);
 
-        pnlShop.add(new FLabel.Builder().text("Wins for No Sell Price Limit").build(), constraints2);
+        pnlShop.add(new FLabel.Builder().text("Wins to Uncap Sale Price").build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_WINS_FOR_NO_SELL_LIMIT, ErrType.SHOP), constraints1);
 
         pnlShop.add(new FLabel.Builder().text("Item Level Restriction").build(), constraints2);
