@@ -110,7 +110,13 @@ public enum Keyword {
         for (Keyword kw : Keyword.values()) {
             if (enumName.startsWith(kw.name())) {
                 keyword = kw;
-                details = k.substring(kw.name().length() + 1);
+                int idx = kw.name().length() + 1;
+                if (idx < k.length()) {
+                    details = k.substring(idx);
+                }
+                else {
+                    details = "";
+                }
                 break;
             }
         }
@@ -120,7 +126,14 @@ public enum Keyword {
             String firstWord = idx == -1 ? enumName : enumName.substring(0, idx);
             if (firstWord.endsWith("CYCLING")) {
                 //handle special case of Typecycling
-                return new Cycling(firstWord.substring(0, firstWord.length() - 7), k.substring(firstWord.length() + 1));
+                idx = firstWord.length() + 1;
+                if (idx < k.length()) {
+                    details = k.substring(idx);
+                }
+                else {
+                    details = "";
+                }
+                return new Cycling(firstWord.substring(0, firstWord.length() - 7), details);
             }
             else if (firstWord.endsWith("WALK")) {
                 keyword = Keyword.LANDWALK;
