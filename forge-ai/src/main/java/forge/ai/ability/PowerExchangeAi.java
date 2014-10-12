@@ -1,10 +1,12 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
+
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -43,9 +45,9 @@ public class PowerExchangeAi extends SpellAbilityAi {
         c1 = list.isEmpty() ? null : list.get(0);
         if (sa.hasParam("Defined")) {
             c2 = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).get(0);
-        } else if (tgt.getMinTargets(sa.getHostCard(), sa) > 1) {
-            List<Card> list2 = ai.getCardsIn(ZoneType.Battlefield);
-            list2 = CardLists.getValidCards(list2, tgt.getValidTgts(), ai, sa.getHostCard());
+        }
+        else if (tgt.getMinTargets(sa.getHostCard(), sa) > 1) {
+            CardCollection list2 = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getHostCard());
             CardLists.sortByPowerAsc(list2);
             Collections.reverse(list2);
             c2 = list2.isEmpty() ? null : list2.get(0);

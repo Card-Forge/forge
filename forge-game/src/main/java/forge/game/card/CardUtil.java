@@ -27,6 +27,7 @@ import com.google.common.collect.ImmutableList;
 
 import forge.ImageKeys;
 import forge.card.CardCharacteristicName;
+import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -145,21 +146,20 @@ public final class CardUtil {
      * @param from  zone coming from
      * @param valid a isValid expression
      * @param src   a Card object
-     * @return a List<Card> that matches the given criteria
+     * @return a CardCollection that matches the given criteria
      */
-    public static List<Card> getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src) {
-        List<Card> res = new ArrayList<Card>();
+    public static CardCollection getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src) {
+        CardCollection res = new CardCollection();
         final Game game = src.getGame();
         if (to != ZoneType.Stack) {
             for (Player p : game.getPlayers()) {
                 res.addAll(p.getZone(to).getCardsAddedThisTurn(from));
             }
-        } else {
+        }
+        else {
             res.addAll(game.getStackZone().getCardsAddedThisTurn(from));
         }
-
         res = CardLists.getValidCards(res, valid, src.getController(), src);
-
         return res;
     }
 
@@ -170,26 +170,25 @@ public final class CardUtil {
      * @param from  zone coming from
      * @param valid a isValid expression
      * @param src   a Card object
-     * @return a List<Card> that matches the given criteria
+     * @return a CardCollection that matches the given criteria
      */
-    public static List<Card> getLastTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src) {
-        List<Card> res = new ArrayList<Card>();
+    public static CardCollection getLastTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src) {
+        CardCollection res = new CardCollection();
         final Game game = src.getGame();
         if (to != ZoneType.Stack) {
             for (Player p : game.getPlayers()) {
                 res.addAll(p.getZone(to).getCardsAddedLastTurn(from));
             }
-        } else {
+        }
+        else {
             res.addAll(game.getStackZone().getCardsAddedLastTurn(from));
         }
-
         res = CardLists.getValidCards(res, valid, src.getController(), src);
-
         return res;
     }
 
-    public static List<Card> getThisTurnCast(final String valid, final Card src) {
-        List<Card> res = new ArrayList<Card>();
+    public static CardCollection getThisTurnCast(final String valid, final Card src) {
+        CardCollection res = new CardCollection();
         final Game game = src.getGame();
         res.addAll(game.getStack().getSpellsCastThisTurn());
 
@@ -198,8 +197,8 @@ public final class CardUtil {
         return res;
     }
 
-    public static List<Card> getLastTurnCast(final String valid, final Card src) {
-        List<Card> res = new ArrayList<Card>();
+    public static CardCollection getLastTurnCast(final String valid, final Card src) {
+        CardCollection res = new CardCollection();
         final Game game = src.getGame();
         res.addAll(game.getStack().getSpellsCastLastTurn());
 
@@ -221,7 +220,7 @@ public final class CardUtil {
         if (in.isCloned()) {
             newCopy.addAlternateState(CardCharacteristicName.Cloner, false);
         }
-        newCopy.setType(new ArrayList<String>(in.getType()));
+        newCopy.setType(new CardType(in.getType()));
         newCopy.setToken(in.isToken());
         newCopy.setTriggers(in.getTriggers(), false);
         for (SpellAbility sa : in.getManaAbility()) {
@@ -263,8 +262,8 @@ public final class CardUtil {
         return newCopy;
     }
 
-    public static List<Card> getRadiance(final Card source, final Card origin, final String[] valid) {
-        final List<Card> res = new ArrayList<Card>();
+    public static CardCollection getRadiance(final Card source, final Card origin, final String[] valid) {
+        final CardCollection res = new CardCollection();
 
         final Game game = source.getGame();
         ColorSet cs = CardUtil.getColors(origin);
@@ -282,28 +281,27 @@ public final class CardUtil {
     }
 
     public static CardCharacteristics getFaceDownCharacteristic(Card c) {
-        final HashSet<String> types = new HashSet<String>();
-        types.add("Creature");
+        final CardType type = new CardType();
+        type.add("Creature");
 
         final CardCharacteristics ret = new CardCharacteristics(c.getView().createAlternateState());
         ret.setBaseAttack(2);
         ret.setBaseDefense(2);
 
         ret.setName("");
-        ret.setType(types);
+        ret.setType(type);
 
         ret.setImageKey(ImageKeys.getTokenKey(ImageKeys.MORPH_IMAGE));
-
         return ret;
     }
 
     // a nice entry point with minimum parameters
     public static Set<String> getReflectableManaColors(final SpellAbility sa) {
-        return getReflectableManaColors(sa, sa, new HashSet<String>(), new ArrayList<Card>());
+        return getReflectableManaColors(sa, sa, new HashSet<String>(), new CardCollection());
     }
     
     private static Set<String> getReflectableManaColors(final SpellAbility abMana, final SpellAbility sa,
-            Set<String> colors, final List<Card> parents) {
+            Set<String> colors, final CardCollection parents) {
         // Here's the problem with reflectable Mana. If more than one is out,
         // they need to Reflect each other,
         // so we basically need to have a recursive list that send the parents
@@ -329,7 +327,7 @@ public final class CardUtil {
             maxChoices++;
         }
 
-        List<Card> cards = null;
+        CardCollection cards = null;
 
         // Reuse AF_Defined in a slightly different way
         if (validCard.startsWith("Defined.")) {

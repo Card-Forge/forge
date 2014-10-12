@@ -19,10 +19,10 @@ package forge.game.zone;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventZone;
 import forge.game.player.Player;
@@ -32,7 +32,6 @@ import forge.util.maps.MapOfLists;
 
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * <p>
@@ -45,8 +44,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Zone implements java.io.Serializable, Iterable<Card> {
     private static final long serialVersionUID = -5687652485777639176L;
 
-    private final transient List<Card> cardList = new CopyOnWriteArrayList<Card>();
-    protected final transient List<Card> roCardList;
+    private final CardCollection cardList = new CardCollection();
     protected final ZoneType zoneType;
     protected final Game game;
 
@@ -56,7 +54,6 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     public Zone(final ZoneType zone0, Game game0) {
         zoneType = zone0;
         game = game0;
-        roCardList = Collections.unmodifiableList(cardList);
     }
 
     protected void onChanged() {
@@ -139,12 +136,12 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         return cardList.get(index);
     }
 
-    public final List<Card> getCards() {
+    public final CardCollectionView getCards() {
         return getCards(true);
     }
 
-    public List<Card> getCards(final boolean filter) {
-        return roCardList; // Non-Battlefield PlayerZones don't care about the filter
+    public CardCollectionView getCards(final boolean filter) {
+        return cardList; // Non-Battlefield PlayerZones don't care about the filter
     }
 
     public final boolean isEmpty() {
@@ -159,24 +156,24 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         return cardsAddedLastTurn;
     }
 
-    public final List<Card> getCardsAddedThisTurn(final ZoneType origin) {
+    public final CardCollectionView getCardsAddedThisTurn(final ZoneType origin) {
         //System.out.print("Request cards put into " + getZoneType() + " from " + origin + ".Amount: ");
         return getCardsAdded(cardsAddedThisTurn, origin);
     }
 
-    public final List<Card> getCardsAddedLastTurn(final ZoneType origin) {
+    public final CardCollectionView getCardsAddedLastTurn(final ZoneType origin) {
         //System.out.print("Last turn - Request cards put into " + getZoneType() + " from " + origin + ".Amount: ");
         return getCardsAdded(cardsAddedLastTurn, origin);
     }
 
-    private final List<Card> getCardsAdded(final MapOfLists<ZoneType, Card> cardsAdded, final ZoneType origin) {
+    private final CardCollectionView getCardsAdded(final MapOfLists<ZoneType, Card> cardsAdded, final ZoneType origin) {
         if (origin != null) {
             Collection<Card> cards = cardsAdded.get(origin);
-            return cards == null ? Lists.<Card>newArrayList() : Lists.newArrayList(cards);
+            return cards == null ? CardCollection.EMPTY : new CardCollection(cards);
         }
 
         // all cards if key == null
-        final List<Card> ret = new ArrayList<Card>();
+        final CardCollection ret = new CardCollection();
         for (Collection<Card> kv : cardsAdded.values()) {
             ret.addAll(kv);
         }
@@ -193,7 +190,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
 
     @Override
     public Iterator<Card> iterator() {
-        return roCardList.iterator();
+        return cardList.iterator();
     }
 
     public void shuffle() {

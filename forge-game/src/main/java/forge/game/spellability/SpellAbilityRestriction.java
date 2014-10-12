@@ -20,6 +20,7 @@ package forge.game.spellability;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.phase.PhaseType;
@@ -29,7 +30,6 @@ import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -335,7 +335,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         }
         if (this.getIsPresent() != null) {
-            List<Card> list = game.getCardsIn(this.getPresentZone());
+            CardCollectionView list = game.getCardsIn(this.getPresentZone());
 
             list = CardLists.getValidCards(list, this.getIsPresent().split(","), activator, c);
 

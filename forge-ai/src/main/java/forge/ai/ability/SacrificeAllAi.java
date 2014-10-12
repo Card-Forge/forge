@@ -5,6 +5,7 @@ import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
@@ -12,7 +13,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-import java.util.List;
 import java.util.Random;
 
 public class SacrificeAllAi extends SpellAbilityAi {
@@ -37,10 +37,10 @@ public class SacrificeAllAi extends SpellAbilityAi {
             valid = valid.replace("X", Integer.toString(xPay));
         }
 
-        List<Card> humanlist =
+        CardCollection humanlist =
                 CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
-        List<Card> computerlist =
-                CardLists.getValidCards(computerlist = ai.getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
+        CardCollection computerlist =
+                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
 
         if (abCost != null) {
             // AI currently disabled for some costs

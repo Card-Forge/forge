@@ -13,6 +13,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.event.GameEventCombatChanged;
@@ -24,6 +25,7 @@ import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
+import forge.util.FCollectionView;
 import forge.util.PredicateString.StringOp;
 
 import org.apache.commons.lang3.StringUtils;
@@ -133,9 +135,9 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
 
         Player controller = null;
         if (sa.hasParam("Controller")) {
-            List<Player> defined = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("Controller"), sa);
+            FCollectionView<Player> defined = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("Controller"), sa);
             if (!defined.isEmpty()) {
-                controller = defined.get(0);
+                controller = defined.getFirst();
             }
         }
         if (controller == null) {
@@ -196,8 +198,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     }
 
                     if (sa.hasParam("AttachedTo")) {
-                        List<Card> list = AbilityUtils.getDefinedCards(hostCard,
-                                sa.getParam("AttachedTo"), sa);
+                        CardCollectionView list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("AttachedTo"), sa);
                         if (list.isEmpty()) {
                             list = copyInPlay.getController().getGame().getCardsIn(ZoneType.Battlefield);
                             list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), copyInPlay.getController(), copyInPlay);

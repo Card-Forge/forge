@@ -4,6 +4,7 @@ import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -15,10 +16,6 @@ import java.util.List;
 import java.util.Random;
 
 public class PhasesAi extends SpellAbilityAi {
-
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
-     */
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         // This still needs to be fleshed out
@@ -83,21 +80,6 @@ public class PhasesAi extends SpellAbilityAi {
         return randomReturn;
     }
 
-    /**
-     * <p>
-     * phasesPrefTargeting.
-     * </p>
-     * 
-     * @param tgt
-     *            a {@link forge.game.spellability.TargetRestrictions} object.
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     private boolean phasesPrefTargeting(final TargetRestrictions tgt, final SpellAbility sa,
             final boolean mandatory) {
         // Card source = sa.getHostCard();
@@ -120,24 +102,11 @@ public class PhasesAi extends SpellAbilityAi {
         return false;
     }
 
-    /**
-     * <p>
-     * phasesUnpreferredTargeting.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     private boolean phasesUnpreferredTargeting(final Game game, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getHostCard();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        List<Card> list = game.getCardsIn(ZoneType.Battlefield);
+        CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
         list = CardLists.getTargetableCards(CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source), sa);
 
         return false;

@@ -23,8 +23,6 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
-import java.util.Collection;
-
 /**
  * <p>
  * AbilityFactoryBond class.
@@ -52,7 +50,7 @@ public final class BondAi extends SpellAbilityAi {
     
 
     @Override
-    protected Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional, Player targetedPlayer) {
+    protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
         return ComputerUtilCard.getBestCreatureAI(options);
     }
 }

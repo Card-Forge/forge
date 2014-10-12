@@ -19,6 +19,7 @@ package forge.game.spellability;
 
 import forge.game.IIdentifiable;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -58,7 +59,7 @@ public class SpellAbilityStackInstance implements IIdentifiable {
 
     // When going to a SubAbility that SA has a Instance Choice object
     private TargetChoices tc = new TargetChoices();
-    private List<Card> splicedCards = null;
+    private CardCollection splicedCards = null;
 
     private String stackDescription = null;
 
@@ -72,7 +73,7 @@ public class SpellAbilityStackInstance implements IIdentifiable {
     private int xManaPaid = 0;
 
     // Other Paid things
-    private final HashMap<String, List<Card>> paidHash;
+    private final HashMap<String, CardCollection> paidHash;
 
     // Additional info
     // is Kicked, is Buyback
@@ -94,7 +95,7 @@ public class SpellAbilityStackInstance implements IIdentifiable {
         ability = sa;
         stackDescription = sa.getStackDescription();
         activatingPlayer = sa.getActivatingPlayer();
-        
+
         // Payment info
         paidHash = ability.getPaidHash();
         ability.resetPaidHash();

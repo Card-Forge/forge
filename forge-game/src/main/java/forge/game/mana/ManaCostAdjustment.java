@@ -7,13 +7,13 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.collect.Lists;
-
 import forge.card.CardCharacteristicName;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -39,8 +39,8 @@ public class ManaCostAdjustment {
         if (sa.isSpell()) {
             if (sa.isDelve()) {
                 final Player pc = originalCard.getController();
-                final List<Card> mutableGrave = new ArrayList<Card>(pc.getCardsIn(ZoneType.Graveyard));
-                final List<Card> toExile = pc.getController().chooseCardsToDelve(cost.getUnpaidShards(ManaCostShard.COLORLESS), mutableGrave);
+                final CardCollection mutableGrave = new CardCollection(pc.getCardsIn(ZoneType.Graveyard));
+                final CardCollectionView toExile = pc.getController().chooseCardsToDelve(cost.getUnpaidShards(ManaCostShard.COLORLESS), mutableGrave);
                 for (final Card c : toExile) {
                     cost.decreaseColorlessMana(1);
                     if (!test) {
@@ -57,7 +57,7 @@ public class ManaCostAdjustment {
             }
         } // isSpell
     
-        List<Card> cardsOnBattlefield = Lists.newArrayList(game.getCardsIn(ZoneType.Battlefield));
+        CardCollection cardsOnBattlefield = new CardCollection(game.getCardsIn(ZoneType.Battlefield));
         cardsOnBattlefield.addAll(game.getCardsIn(ZoneType.Stack));
         cardsOnBattlefield.addAll(game.getCardsIn(ZoneType.Command));
         if (!cardsOnBattlefield.contains(originalCard)) {
@@ -139,11 +139,10 @@ public class ManaCostAdjustment {
         if (mode.equals("SetCost")) { //Set cost is only used by Trinisphere
             applyRaiseCostAbility(stAb, sa, originalCost);
         }
-    }    
-    
+    }
+
     private static void adjustCostByConvoke(ManaCostBeingPaid cost, final SpellAbility sa, boolean test) {
-    
-        List<Card> untappedCreats = CardLists.filter(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+        CardCollectionView untappedCreats = CardLists.filter(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
         untappedCreats = CardLists.filter(untappedCreats, CardPredicates.Presets.UNTAPPED);
     
         Map<Card, ManaCostShard> convokedCards = sa.getActivatingPlayer().getController().chooseCardsForConvoke(sa, cost.toManaCost(), untappedCreats);
@@ -171,14 +170,13 @@ public class ManaCostAdjustment {
         }
     
         Card toSac = null;
-        List<Card> canOffer = CardLists.filter(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield),
+        CardCollectionView canOffer = CardLists.filter(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield),
                 CardPredicates.isType(offeringType));
-    
-        final List<Card> toSacList = sa.getHostCard().getController().getController().choosePermanentsToSacrifice(sa, 0, 1, canOffer,
-                offeringType);
-    
+
+        final CardCollectionView toSacList = sa.getHostCard().getController().getController().choosePermanentsToSacrifice(sa, 0, 1, canOffer, offeringType);
+
         if (!toSacList.isEmpty()) {
-            toSac = toSacList.get(0);
+            toSac = toSacList.getFirst();
         }
         else {
             return;

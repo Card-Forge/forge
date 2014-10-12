@@ -6,6 +6,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
@@ -47,7 +48,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         if (sa.hasParam("ChoiceZone")) {
             choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
         }
-        List<Card> choices = game.getCardsIn(choiceZone);
+        CardCollectionView choices = game.getCardsIn(choiceZone);
         if (sa.hasParam("Choices")) {
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host);
         }
@@ -77,7 +78,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 
                 // Choose one of each BasicLand given special place
                 for (final String type : CardType.getBasicTypes()) {
-                    final List<Card> cl = CardLists.getType(land, type);
+                    final CardCollectionView cl = CardLists.getType(land, type);
                     if (!cl.isEmpty()) {
                         final String prompt = "Choose " + Lang.nounWithAmount(1, type);
                         Card c = p.getController().chooseSingleEntityForEffect(cl, sa, prompt, false);

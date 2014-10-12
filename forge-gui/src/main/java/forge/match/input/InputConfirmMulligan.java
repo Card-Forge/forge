@@ -17,11 +17,10 @@
  */
 package forge.match.input;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardView;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -47,7 +46,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
     boolean keepHand = false;
     final boolean isCommander;
 
-    private final List<Card> selected = new ArrayList<Card>();
+    private final CardCollection selected = new CardCollection();
     private final Player player;
     private final Player startingPlayer;
 
@@ -125,7 +124,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
             cardSelectLocked = true;
             ThreadUtil.invokeInGameThread(new Runnable() {
                 public void run() {
-                    List<Card> hand = new ArrayList<Card>(c0.getController().getCardsIn(ZoneType.Hand));
+                    CardCollection hand = new CardCollection(c0.getController().getCardsIn(ZoneType.Hand));
                     for (Card c : hand) {
                         player.getGame().getAction().exile(c);
                     }
@@ -154,7 +153,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
         return keepHand;
     }
 
-    public List<Card> getSelectedCards() {
+    public CardCollectionView getSelectedCards() {
         return selected;
     }
 }

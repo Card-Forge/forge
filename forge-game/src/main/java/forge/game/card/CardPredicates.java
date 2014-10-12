@@ -20,12 +20,12 @@ package forge.game.card;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+
 import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.FCollectionView;
 import forge.util.PredicateString;
-
-import java.util.List;
 
 
 /**
@@ -46,7 +46,7 @@ public final class CardPredicates {
             }
         };
     }
-    public static final Predicate<Card> isControlledByAnyOf(final List<Player> pList) {
+    public static final Predicate<Card> isControlledByAnyOf(final FCollectionView<Player> pList) {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -67,7 +67,7 @@ public final class CardPredicates {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return c.isType(cardType);
+                return c.getType().hasStringType(cardType);
             }
         };
     }

@@ -1,9 +1,11 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
+
 import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
@@ -12,12 +14,9 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class  DamageAllAi extends SpellAbilityAi {
-
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
@@ -31,7 +30,6 @@ public class  DamageAllAi extends SpellAbilityAi {
         final String damage = sa.getParam("NumDmg");
         int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
 
-
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
@@ -43,14 +41,14 @@ public class  DamageAllAi extends SpellAbilityAi {
         }
 
         Player opp = ai.getOpponent();
-        final List<Card> humanList = this.getKillableCreatures(sa, opp, dmg);
-        List<Card> computerList = this.getKillableCreatures(sa, ai, dmg);
+        final CardCollection humanList = getKillableCreatures(sa, opp, dmg);
+        CardCollection computerList = getKillableCreatures(sa, ai, dmg);
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null && sa.canTarget(opp)) {
             sa.resetTargets();
             sa.getTargets().add(opp);
-            computerList = new ArrayList<Card>();
+            computerList.clear();
         }
 
         // abCost stuff that should probably be centralized...
@@ -124,8 +122,8 @@ public class  DamageAllAi extends SpellAbilityAi {
 
         // Evaluate creatures getting killed
         Player enemy = ai.getOpponent();
-        final List<Card> humanList = this.getKillableCreatures(sa, enemy, dmg);
-        List<Card> computerList = this.getKillableCreatures(sa, ai, dmg);
+        final CardCollection humanList = getKillableCreatures(sa, enemy, dmg);
+        CardCollection computerList = getKillableCreatures(sa, ai, dmg);
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         if (tgt != null && sa.canTarget(enemy)) {
@@ -167,12 +165,12 @@ public class  DamageAllAi extends SpellAbilityAi {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    private List<Card> getKillableCreatures(final SpellAbility sa, final Player player, final int dmg) {
+    private CardCollection getKillableCreatures(final SpellAbility sa, final Player player, final int dmg) {
         final Card source = sa.getHostCard();
         String validC = sa.hasParam("ValidCards") ? sa.getParam("ValidCards") : "";
 
         // TODO: X may be something different than X paid
-        List<Card> list =
+        CardCollection list =
                 CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), validC.split(","), source.getController(), source);
 
         final Predicate<Card> filterKillable = new Predicate<Card>() {
@@ -208,8 +206,8 @@ public class  DamageAllAi extends SpellAbilityAi {
 
         // Evaluate creatures getting killed
         Player enemy = ai.getOpponent();
-        final List<Card> humanList = this.getKillableCreatures(sa, enemy, dmg);
-        List<Card> computerList = this.getKillableCreatures(sa, ai, dmg);
+        final CardCollection humanList = getKillableCreatures(sa, enemy, dmg);
+        CardCollection computerList = getKillableCreatures(sa, ai, dmg);
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         if (tgt != null && sa.canTarget(enemy)) {

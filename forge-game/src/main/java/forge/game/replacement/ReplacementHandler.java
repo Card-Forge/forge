@@ -23,6 +23,7 @@ import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -279,7 +280,7 @@ public class ReplacementHandler {
     }
 
     public void cleanUpTemporaryReplacements() {
-        final List<Card> absolutelyAllCards = game.getCardsInGame();
+        final CardCollectionView absolutelyAllCards = game.getCardsInGame();
         for (final Card c : absolutelyAllCards) {
             for (int i = 0; i < c.getReplacementEffects().size(); i++) {
                 if (c.getReplacementEffects().get(i).isTemporary()) {

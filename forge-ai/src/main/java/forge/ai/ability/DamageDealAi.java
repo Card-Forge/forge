@@ -8,6 +8,7 @@ import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
@@ -277,7 +278,7 @@ public class DamageDealAi extends DamageAiBase {
         }
         if ("Polukranos".equals(sa.getParam("AILogic"))) {
             int dmgTaken = 0;
-            List<Card> humCreatures = ai.getOpponent().getCreaturesInPlay();
+            CardCollection humCreatures = ai.getOpponent().getCreaturesInPlay();
             Card lastTgt = null;
             humCreatures = CardLists.getTargetableCards(humCreatures, sa);
             ComputerUtilCard.sortByEvaluateCreature(humCreatures);

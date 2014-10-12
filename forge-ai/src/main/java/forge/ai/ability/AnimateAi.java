@@ -6,11 +6,14 @@ import com.google.common.collect.Lists;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
+import forge.card.CardType;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -67,7 +70,7 @@ public class AnimateAi extends SpellAbilityAi {
                 String num = topStack.getParam("Amount");
                 num = (num == null) ? "1" : num;
                 final int nToSac = AbilityUtils.calculateAmount(topStack.getHostCard(), num, topStack);
-                List<Card> list =
+                CardCollection list =
                         CardLists.getValidCards(aiPlayer.getCardsIn(ZoneType.Battlefield), valid.split(","), aiPlayer.getOpponent(), topStack.getHostCard());
                 list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
                 ComputerUtilCard.sortByEvaluateCreature(list);
@@ -190,8 +193,6 @@ public class AnimateAi extends SpellAbilityAi {
         return true;
     }
 
-    // end animateCanPlayAI()
-
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         if (sa.usesTargeting()) {
@@ -204,22 +205,8 @@ public class AnimateAi extends SpellAbilityAi {
         return true;
     }
 
-    /**
-     * <p>
-     * animateTriggerAI.
-     * </p>
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
-     * 
-     * @return a boolean.
-     */
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-
         if (sa.usesTargeting() && !animateTgtAI(sa) && !mandatory) {
             return false;
         }
@@ -233,27 +220,15 @@ public class AnimateAi extends SpellAbilityAi {
         if (sa.hasParam("AITgts")) {
         	final TargetRestrictions tgt = sa.getTargetRestrictions();
             final Card animateSource = sa.getHostCard();
-            List<Card> list = aiPlayer.getGame().getCardsIn(tgt.getZone());
+            CardCollectionView list = aiPlayer.getGame().getCardsIn(tgt.getZone());
             list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), animateSource);
-        	List<Card> prefList = CardLists.getValidCards(list, sa.getParam("AITgts"), sa.getActivatingPlayer(), animateSource);
+            CardCollection prefList = CardLists.getValidCards(list, sa.getParam("AITgts"), sa.getActivatingPlayer(), animateSource);
         	CardLists.shuffle(prefList);
-        	sa.getTargets().add(prefList.get(0));
+        	sa.getTargets().add(prefList.getFirst());
         }
-
         return true;
     }
 
-    /**
-     * <p>
-     * animateTgtAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     private boolean animateTgtAI(final SpellAbility sa) {
         // This is reasonable for now. Kamahl, Fist of Krosa and a sorcery or
         // two are the only things
@@ -281,18 +256,18 @@ public class AnimateAi extends SpellAbilityAi {
             toughness = AbilityUtils.calculateAmount(source, sa.getParam("Toughness"), sa);
         }
 
-        final ArrayList<String> types = new ArrayList<String>();
+        final CardType types = new CardType();
         if (sa.hasParam("Types")) {
             types.addAll(Arrays.asList(sa.getParam("Types").split(",")));
         }
 
-        final ArrayList<String> removeTypes = new ArrayList<String>();
+        final CardType removeTypes = new CardType();
         if (sa.hasParam("RemoveTypes")) {
             removeTypes.addAll(Arrays.asList(sa.getParam("RemoveTypes").split(",")));
         }
 
         // allow ChosenType - overrides anything else specified
-        if (types.contains("ChosenType")) {
+        if (types.hasSubtype("ChosenType")) {
             types.clear();
             types.add(source.getChosenType());
         }

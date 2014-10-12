@@ -8,6 +8,7 @@ import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.phase.PhaseType;
@@ -18,15 +19,10 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 public class CopyPermanentAi extends SpellAbilityAi {
-
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
-     */
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         // Card source = sa.getHostCard();
@@ -61,8 +57,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
 
         if (abTgt != null) {
             sa.resetTargets();
-            List<Card> list = aiPlayer.getGame().getCardsIn(ZoneType.Battlefield);
-            list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
+            CardCollection list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield), abTgt.getValidTgts(), source.getController(), source);
             list = CardLists.getTargetableCards(list, sa);
             list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
@@ -87,7 +82,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        return !c.isType("Legendary") || c.getController().isOpponentOf(aiPlayer);
+                        return !c.getType().isLegendary() || c.getController().isOpponentOf(aiPlayer);
                     }
                 });
                 Card choice;
@@ -134,13 +129,13 @@ public class CopyPermanentAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#chooseSingleCard(forge.game.player.Player, forge.card.spellability.SpellAbility, java.util.List, boolean)
      */
     @Override
-    public Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional, Player targetedPlayer) {
+    public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
         // Select a card to attach to
         return ComputerUtilCard.getBestAI(options);
     }
 
     @Override
-    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Collection<Player> options) {
+    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
         final List<Card> cards = new ArrayList<Card>();
         for (Player p : options) {
             cards.addAll(p.getCreaturesInPlay());

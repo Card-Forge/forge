@@ -23,6 +23,7 @@ import com.google.common.collect.Iterables;
 
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.FCollectionView;
 import forge.util.MyRandom;
 
 import java.util.Collections;
@@ -50,7 +51,7 @@ public class CardLists {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public static CardCollection filterToughness(final List<Card> in, final int atLeastToughness) {
+    public static CardCollection filterToughness(final Iterable<Card> in, final int atLeastToughness) {
         return CardLists.filter(in, new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {
@@ -149,10 +150,6 @@ public class CardLists {
         return subList;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param cardList
-     */
     public static void shuffle(List<Card> list) {
         // reseed Random each time we want to Shuffle
         // MyRandom.random = MyRandom.random;
@@ -165,16 +162,22 @@ public class CardLists {
         return CardLists.filter(cardList, CardPredicates.isController(player));
     }
 
-    public static CardCollection filterControlledBy(Iterable<Card> cardList, List<Player> player) {
+    public static CardCollection filterControlledBy(Iterable<Card> cardList, FCollectionView<Player> player) {
         return CardLists.filter(cardList, CardPredicates.isControlledByAnyOf(player));
     }
 
     public static CardCollection getValidCards(Iterable<Card> cardList, String[] restrictions, Player sourceController, Card source) {
         return CardLists.filter(cardList, CardPredicates.restriction(restrictions, sourceController, source));
     }
+    public static int getValidCardCount(Iterable<Card> cardList, String[] restrictions, Player sourceController, Card source) {
+        return CardLists.count(cardList, CardPredicates.restriction(restrictions, sourceController, source));
+    }
 
     public static CardCollection getValidCards(Iterable<Card> cardList, String restriction, Player sourceController, Card source) {
         return CardLists.filter(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source));
+    }
+    public static int getValidCardCount(Iterable<Card> cardList, String restriction, Player sourceController, Card source) {
+        return CardLists.count(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source));
     }
 
     public static CardCollection getTargetableCards(Iterable<Card> cardList, SpellAbility source) {
@@ -222,8 +225,20 @@ public class CardLists {
 
     public static CardCollection filter(Iterable<Card> cardList, Predicate<Card> f1, Predicate<Card> f2) {
         return new CardCollection(Iterables.filter(Iterables.filter(cardList, f1), f2));
-    }    
-    
+    }
+
+    public static int count(Iterable<Card> cardList, Predicate<Card> filt) {
+        if (cardList == null) { return 0; }
+
+        int count = 0;
+        for (Card c : cardList) {
+            if (filt.apply(c)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     /**
      * Given a CardCollection cardList, return a CardCollection that are tied for having the highest CMC.
      * 

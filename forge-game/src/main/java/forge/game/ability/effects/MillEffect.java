@@ -4,6 +4,7 @@ import forge.card.CardCharacteristicName;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -38,7 +39,7 @@ public class MillEffect extends SpellAbilityEffect {
                         continue;
                     }
                 }
-                final List<Card> milled = p.mill(numCards, destination, bottom);
+                final CardCollectionView milled = p.mill(numCards, destination, bottom);
                 if (destination.equals(ZoneType.Exile) && sa.hasParam("ExileFaceDown")) {
                     for (final Card c : milled) {
                         c.setState(CardCharacteristicName.FaceDown);

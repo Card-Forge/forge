@@ -9,6 +9,8 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
@@ -22,6 +24,7 @@ import forge.game.zone.ZoneType;
 import forge.match.input.InputSelectCardsFromList;
 import forge.match.input.InputSelectManyBase;
 import forge.util.Aggregates;
+import forge.util.FCollectionView;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.gui.SGuiChoose;
@@ -65,7 +68,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostChooseCreatureType cost) {
-        String choice = controller.chooseSomeType("Creature", ability, new ArrayList<String>(CardType.getCreatureTypes()), new ArrayList<String>(), true);
+        String choice = controller.chooseSomeType("Creature", ability, new ArrayList<String>(CardType.Constant.CREATURE_TYPES), new ArrayList<String>(), true);
         if (null == choice)
             return null;
         return PaymentDecision.type(choice);
@@ -73,21 +76,21 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostDiscard cost) {
-        List<Card> handList = new ArrayList<Card>(player.getCardsIn(ZoneType.Hand));
+        CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
         String discardType = cost.getType();
         final String amount = cost.getAmount();
 
         if (cost.payCostFromSource()) {
-            return handList.contains(source) ? PaymentDecision.card(source) : null;
+            return hand.contains(source) ? PaymentDecision.card(source) : null;
         }
 
         if (discardType.equals("Hand")) {
-            return PaymentDecision.card(handList);
+            return PaymentDecision.card(hand);
         }
 
         if (discardType.equals("LastDrawn")) {
             final Card lastDrawn = player.getLastDrawnCard();
-            return handList.contains(lastDrawn) ? PaymentDecision.card(lastDrawn) : null;
+            return hand.contains(lastDrawn) ? PaymentDecision.card(lastDrawn) : null;
         }
 
         Integer c = cost.convertAmount();
@@ -97,20 +100,20 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 final String sVar = ability.getSVar(amount);
                 // Generalize this
                 if (sVar.equals("XChoice")) {
-                    c = chooseXValue(handList.size());
+                    c = chooseXValue(hand.size());
                 }
                 else {
                     c = AbilityUtils.calculateAmount(source, amount, ability);
                 }
             }
 
-            return PaymentDecision.card(Aggregates.random(handList, c));
+            return PaymentDecision.card(Aggregates.random(hand, c, new CardCollection()));
         }
         if (discardType.contains("+WithSameName")) {
             String type = discardType.replace("+WithSameName", "");
-            handList = CardLists.getValidCards(handList, type.split(";"), player, source);
-            final List<Card> landList2 = handList;
-            handList = CardLists.filter(handList, new Predicate<Card>() {
+            hand = CardLists.getValidCards(hand, type.split(";"), player, source);
+            final CardCollectionView landList2 = hand;
+            hand = CardLists.filter(hand, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     for (Card card : landList2) {
@@ -121,10 +124,12 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                     return false;
                 }
             });
-            if (c == 0) { return PaymentDecision.card(Lists.<Card>newArrayList()); }
-            List<Card> discarded = new ArrayList<Card>();
+            if (c == 0) {
+                return PaymentDecision.card(new CardCollection());
+            }
+            CardCollection discarded = new CardCollection();
             while (c > 0) {
-                InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, handList);
+                InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, hand);
                 inp.setMessage("Select one of the cards with the same name to discard. Already chosen: " + discarded);
                 inp.setCancelAllowed(true);
                 inp.showAndWait();
@@ -133,8 +138,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 }
                 final Card first = inp.getFirstSelected();
                 discarded.add(first);
-                handList = CardLists.filter(handList, CardPredicates.nameEquals(first.getName()));
-                handList.remove(first);
+                CardCollection filteredHand = CardLists.filter(hand, CardPredicates.nameEquals(first.getName()));
+                filteredHand.remove(first);
+                hand = filteredHand;
                 c--;
             }
             return PaymentDecision.card(discarded);
@@ -142,20 +148,20 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         
         String type = new String(discardType);
         final String[] validType = type.split(";");
-        handList = CardLists.getValidCards(handList, validType, player, source);
+        hand = CardLists.getValidCards(hand, validType, player, source);
 
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             // Generalize this
             if (sVar.equals("XChoice")) {
-                c = chooseXValue(handList.size());
+                c = chooseXValue(hand.size());
             }
             else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
 
-        InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, handList);
+        InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, hand);
         inp.setMessage("Select %d more " + cost.getDescriptiveType() + " to discard.");
         inp.setCancelAllowed(true);
         inp.showAndWait();
@@ -163,7 +169,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
-        return PaymentDecision.card(inp.getSelected());
+        return PaymentDecision.card((CardCollection)inp.getSelected());
     }
 
     @Override
@@ -218,23 +224,22 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             fromTopGrave = true;
         }
 
-        List<Card> list;
+        CardCollection list;
         if (cost.getFrom().equals(ZoneType.Stack)) {
-            list = new ArrayList<Card>();
+            list = new CardCollection();
             for (SpellAbilityStackInstance si : game.getStack()) {
                 list.add(si.getSourceCard());
             }
         }
         else if (cost.sameZone) {
-            list = new ArrayList<Card>(game.getCardsIn(cost.from));
+            list = new CardCollection(game.getCardsIn(cost.from));
         }
         else {
-            list = new ArrayList<Card>(player.getCardsIn(cost.from));
+            list = new CardCollection(player.getCardsIn(cost.from));
         }
 
         if (cost.payCostFromSource()) {
             return source.getZone() == player.getZone(cost.from) && player.getController().confirmPayment(cost, "Exile " + source.getName() + "?") ? PaymentDecision.card(source) : null;
-
         }
 
         if (type.equals("All")) {
@@ -257,19 +262,19 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             inp.setMessage("Exile %d card(s) from your" + cost.from);
             inp.setCancelAllowed(true);
             inp.showAndWait();
-            return inp.hasCancelled() ? null : PaymentDecision.card(inp.getSelected());
+            return inp.hasCancelled() ? null : PaymentDecision.card(new CardCollection(inp.getSelected()));
         }
 
         if (cost.from == ZoneType.Library) { return exileFromTop(cost, ability, player, c); }
         if (fromTopGrave) { return exileFromTopGraveType(ability, c, list); }
         if (!cost.sameZone) { return exileFromMiscZone(cost, ability, c, list); }
 
-        List<Player> players = game.getPlayers();
+        FCollectionView<Player> players = game.getPlayers();
         List<Player> payableZone = new ArrayList<Player>();
         for (Player p : players) {
-            List<Card> enoughType = CardLists.filter(list, CardPredicates.isOwner(p));
+            CardCollection enoughType = CardLists.filter(list, CardPredicates.isOwner(p));
             if (enoughType.size() < c) {
-                list.removeAll(enoughType);
+                list.removeAll((CardCollectionView)enoughType);
             }
             else {
                 payableZone.add(p);
@@ -288,7 +293,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     // ExileFromTop<Num/Type{/TypeDescription}> (of library)
     // ExileSameGrave<Num/Type{/TypeDescription}>
 
-    private PaymentDecision exileFromSame(CostExile cost, List<Card> list, int nNeeded, List<Player> payableZone) {
+    private PaymentDecision exileFromSame(CostExile cost, CardCollectionView list, int nNeeded, List<Player> payableZone) {
         if (nNeeded == 0) {
             return PaymentDecision.number(0);
         }
@@ -297,14 +302,14 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
-        List<Card> typeList = CardLists.filter(list, CardPredicates.isOwner(p));
+        CardCollection typeList = CardLists.filter(list, CardPredicates.isOwner(p));
         int count = typeList.size();
         if (count < nNeeded) {
             return null;
         }
-        
+
         List<Card> toExile = SGuiChoose.many("Exile from " + cost.getFrom(), "To be exiled", count - nNeeded, typeList, null);
-        return PaymentDecision.card(toExile);
+        return PaymentDecision.card(new CardCollection(toExile));
     }
     
     @Override
@@ -370,7 +375,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     private PaymentDecision exileFromTop(final CostExile cost, final SpellAbility sa, final Player player, final int nNeeded) {
         final StringBuilder sb = new StringBuilder();
         sb.append("Exile ").append(nNeeded).append(" cards from the top of your library?");
-        final List<Card> list = player.getCardsIn(ZoneType.Library, nNeeded);
+        final CardCollectionView list = player.getCardsIn(ZoneType.Library, nNeeded);
 
         if (list.size() > nNeeded || !player.getController().confirmPayment(cost, "Exile " + Lang.nounWithAmount(nNeeded, "card") + " from the top of your library?")) {
             return null;
@@ -378,10 +383,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         return PaymentDecision.card(list);
     }
 
-    private PaymentDecision exileFromMiscZone(CostExile cost, SpellAbility sa, int nNeeded, List<Card> typeList) {
+    private PaymentDecision exileFromMiscZone(CostExile cost, SpellAbility sa, int nNeeded, CardCollection typeList) {
         if (typeList.size() < nNeeded) { return null; }
 
-        List<Card> exiled = new ArrayList<Card>();
+        CardCollection exiled = new CardCollection();
         for (int i = 0; i < nNeeded; i++) {
             final Card c = SGuiChoose.oneOrNone("Exile from " + cost.getFrom(), typeList);
             if (c == null) { return null; }
@@ -392,11 +397,11 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         return PaymentDecision.card(exiled);
     }
 
-    private PaymentDecision exileFromTopGraveType(SpellAbility sa, int nNeeded, List<Card> typeList) {
+    private PaymentDecision exileFromTopGraveType(SpellAbility sa, int nNeeded, CardCollection typeList) {
         if (typeList.size() < nNeeded) { return null; }
 
         Collections.reverse(typeList);
-        return PaymentDecision.card(Lists.newArrayList(Iterables.limit(typeList, nNeeded)));
+        return PaymentDecision.card(new CardCollection(Iterables.limit(typeList, nNeeded)));
     }    
 
     @Override
@@ -407,14 +412,13 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         final Player activator = ability.getActivatingPlayer();
-        List<Card> list = activator.getGame().getCardsIn(ZoneType.Exile);
-        list = CardLists.getValidCards(list, cost.getType().split(";"), activator, source);
+        CardCollection list = CardLists.getValidCards(activator.getGame().getCardsIn(ZoneType.Exile), cost.getType().split(";"), activator, source);
 
         if (list.size() < c) {
             return null;
         }
         final List<Card> choice = SGuiChoose.many("Choose an exiled card to put into graveyard", "To graveyard", c, list, CardView.get(source));
-        return PaymentDecision.card(choice);
+        return PaymentDecision.card(new CardCollection(choice));
     }
 
     @Override
@@ -442,8 +446,8 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (c == null) {
             c = AbilityUtils.calculateAmount(source, amount, ability);
         }
-        final List<Card> list = player.getCardsIn(ZoneType.Battlefield);
-        List<Card> validCards = CardLists.getValidCards(list, cost.getType().split(";"), player, source);
+        final CardCollectionView list = player.getCardsIn(ZoneType.Battlefield);
+        CardCollectionView validCards = CardLists.getValidCards(list, cost.getType().split(";"), player, source);
 
         InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, validCards);
         final String desc = cost.getTypeDescription() == null ? cost.getType() : cost.getTypeDescription();
@@ -452,7 +456,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (inp.hasCancelled()) {
             return null;
         }
-        return PaymentDecision.card(inp.getSelected());
+        return PaymentDecision.card(new CardCollection(inp.getSelected()));
     }
 
     @Override
@@ -551,8 +555,6 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         final String amount = cost.getAmount();
         Integer c = cost.convertAmount();
 
-        List<Card> list = cost.sameZone ? player.getGame().getCardsIn(cost.getFrom()) : player.getCardsIn(cost.getFrom());
-
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             // Generalize this
@@ -562,22 +564,22 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
-        
-        list = CardLists.getValidCards(list, cost.getType().split(";"), player, source);
-        
+
+        CardCollection list = CardLists.getValidCards(cost.sameZone ? player.getGame().getCardsIn(cost.getFrom()) : player.getCardsIn(cost.getFrom()), cost.getType().split(";"), player, source);
+
         if (cost.from == ZoneType.Hand) {
             InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, list);
             inp.setMessage("Put %d card(s) from your " + cost.from);
             inp.setCancelAllowed(true);
             inp.showAndWait();
-            return inp.hasCancelled() ? null : PaymentDecision.card(inp.getSelected());
+            return inp.hasCancelled() ? null : PaymentDecision.card(new CardCollection(inp.getSelected()));
         }
         
         if (cost.sameZone){
-            List<Player> players = player.getGame().getPlayers();
+            FCollectionView<Player> players = player.getGame().getPlayers();
             List<Player> payableZone = new ArrayList<Player>();
             for (Player p : players) {
-                List<Card> enoughType = CardLists.filter(list, CardPredicates.isOwner(p));
+                CardCollectionView enoughType = CardLists.filter(list, CardPredicates.isOwner(p));
                 if (enoughType.size() < c) {
                     list.removeAll(enoughType);
                 } else {
@@ -590,12 +592,12 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
     }
 
-    private PaymentDecision putFromMiscZone(SpellAbility sa, int nNeeded, List<Card> typeList, ZoneType fromZone) {
+    private PaymentDecision putFromMiscZone(SpellAbility sa, int nNeeded, CardCollection typeList, ZoneType fromZone) {
         if (typeList.size() < nNeeded) {
             return null;
         }
 
-        List<Card> chosen = new ArrayList<Card>();
+        CardCollection chosen = new CardCollection();
         for (int i = 0; i < nNeeded; i++) {
             final Card c = SGuiChoose.oneOrNone("Put from " + fromZone + " to library", typeList);
             if (c == null) {
@@ -607,7 +609,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         return PaymentDecision.card(chosen);
     }
 
-    private PaymentDecision putFromSame(List<Card> list, int nNeeded, List<Player> payableZone, ZoneType fromZone) {
+    private PaymentDecision putFromSame(CardCollectionView list, int nNeeded, List<Player> payableZone, ZoneType fromZone) {
         if (nNeeded == 0) {
             return PaymentDecision.number(0);
         }
@@ -617,12 +619,12 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return null;
         }
     
-        List<Card> typeList = CardLists.filter(list, CardPredicates.isOwner(p));
+        CardCollection typeList = CardLists.filter(list, CardPredicates.isOwner(p));
         if (typeList.size() < nNeeded) {
             return null;
         }
 
-        List<Card> chosen = new ArrayList<Card>();
+        CardCollection chosen = new CardCollection();
         for (int i = 0; i < nNeeded; i++) {
             final Card c = SGuiChoose.oneOrNone("Put cards from " + fromZone + " to Library", typeList);
             if (c == null) {
@@ -644,7 +646,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         } 
 
         // Cards to use this branch: Scarscale Ritual, Wandering Mage - each adds only one counter 
-        List<Card> typeList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), player, ability.getHostCard());
+        CardCollectionView typeList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), player, ability.getHostCard());
         
         InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, typeList);
         inp.setMessage("Put " + Lang.nounWithAmount(c, cost.getCounter().getName() + " counter") + " on " + cost.getDescriptiveType());
@@ -654,7 +656,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (inp.hasCancelled())
             return null;
 
-        return PaymentDecision.card(inp.getSelected());
+        return PaymentDecision.card(new CardCollection(inp.getSelected()));
     }
 
     @Override
@@ -662,7 +664,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         final String amount = cost.getAmount();
         Integer c = cost.convertAmount();
 
-        final List<Card> list = player.getCardsIn(ZoneType.Battlefield);
+        final CardCollectionView list = player.getCardsIn(ZoneType.Battlefield);
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             // Generalize this
@@ -680,7 +682,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             }
         }
         else {
-            List<Card> validCards = CardLists.getValidCards(ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), ability.getActivatingPlayer(), ability.getHostCard());
+            CardCollectionView validCards = CardLists.getValidCards(ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), ability.getActivatingPlayer(), ability.getHostCard());
 
             InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, validCards);
             inp.setMessage("Return %d " + cost.getType() + " " + cost.getType() + " card(s) to hand");
@@ -688,7 +690,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             if (inp.hasCancelled()) {
                 return null;
             }
-            return PaymentDecision.card(inp.getSelected());
+            return PaymentDecision.card(new CardCollection(inp.getSelected()));
        }
        return null;
     }
@@ -706,12 +708,12 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         InputSelectCardsFromList inp = null;
         if (cost.getType().equals("SameColor")) {
             Integer num = cost.convertAmount();
-            List<Card> handList = player.getCardsIn(ZoneType.Hand);
-            final List<Card> handList2 = handList;
-            handList = CardLists.filter(handList, new Predicate<Card>() {
+            CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
+            final CardCollectionView hand2 = hand;
+            hand = CardLists.filter(hand, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    for (Card card : handList2) {
+                    for (Card card : hand2) {
                         if (!card.equals(c) && card.sharesColorWith(c)) {
                             return true;
                         }
@@ -722,7 +724,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             if (num == 0) {
                 return PaymentDecision.number(0);
             }
-            inp = new InputSelectCardsFromList(controller, num, handList) {
+            inp = new InputSelectCardsFromList(controller, num, hand) {
                 private static final long serialVersionUID = 8338626212893374798L;
 
                 @Override
@@ -739,13 +741,13 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         else {
             Integer num = cost.convertAmount();
 
-            List<Card> handList = player.getCardsIn(ZoneType.Hand);
-            handList = CardLists.getValidCards(handList, cost.getType().split(";"), player, ability.getHostCard());
+            CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
+            hand = CardLists.getValidCards(hand, cost.getType().split(";"), player, ability.getHostCard());
 
             if (num == null) {
                 final String sVar = ability.getSVar(amount);
                 if (sVar.equals("XChoice")) {
-                    num = chooseXValue(handList.size());
+                    num = chooseXValue(hand.size());
                 } else {
                     num = AbilityUtils.calculateAmount(source, amount, ability);
                 }
@@ -753,7 +755,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             if (num == 0)
                 return PaymentDecision.number(0);;
                 
-            inp = new InputSelectCardsFromList(controller, num, num, handList);
+            inp = new InputSelectCardsFromList(controller, num, num, hand);
             inp.setMessage("Select %d more " + cost.getDescriptiveType() + " card(s) to reveal.");
         }
         inp.setCancelAllowed(true);
@@ -761,7 +763,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (inp.hasCancelled())
             return null;
         
-        return PaymentDecision.card(inp.getSelected());
+        return PaymentDecision.card(new CardCollection(inp.getSelected()));
     }
 
     @Override
@@ -773,7 +775,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
 
-        List<Card> list = new ArrayList<Card>(player.getCardsIn(ZoneType.Battlefield));
+        CardCollectionView list = new CardCollection(player.getCardsIn(ZoneType.Battlefield));
         list = CardLists.getValidCards(list, type.split(";"), player, source);
 
 
@@ -807,9 +809,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         private final Map<Card,Integer> cardsChosen;
         private final CounterType counterType;
-        private final List<Card> validChoices;
+        private final CardCollectionView validChoices;
 
-        public InputSelectCardToRemoveCounter(final PlayerControllerHuman controller, int cntCounters, CounterType cType, List<Card> validCards) {
+        public InputSelectCardToRemoveCounter(final PlayerControllerHuman controller, int cntCounters, CounterType cType, CardCollectionView validCards) {
             super(controller, cntCounters, cntCounters);
             this.validChoices = validCards;
             counterType = cType;
@@ -912,7 +914,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.card(ability.getOriginalHost(), cntRemoved >= 0 ? cntRemoved : maxCounters);
         }
 
-        List<Card> validCards = CardLists.getValidCards(player.getCardsIn(cost.zone), type.split(";"), player, source);
+        CardCollectionView validCards = CardLists.getValidCards(player.getCardsIn(cost.zone), type.split(";"), player, source);
         if (cost.zone.equals(ZoneType.Battlefield)) {
             final InputSelectCardToRemoveCounter inp = new InputSelectCardToRemoveCounter(controller, cntRemoved, cost.counter, validCards);
             inp.setMessage("Remove %d " + cost.counter.getName() + " counters from " + cost.getDescriptiveType());
@@ -933,7 +935,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 int oldVal = crd.getCounters().get(cost.counter).intValue();
                 crd.getCounters().put(cost.counter, Integer.valueOf(oldVal - removed + 1));
             }
-            return PaymentDecision.card(inp.getSelected(), 1);
+            return PaymentDecision.card(new CardCollection(inp.getSelected()), 1);
         } 
 
         // Rift Elemental only - always removes 1 counter, so there will be no code for N counters.
@@ -954,7 +956,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         final String amount = cost.getAmount();
         final String type = cost.getType();
 
-        List<Card> list = new ArrayList<Card>(player.getCardsIn(ZoneType.Battlefield));
+        CardCollectionView list = player.getCardsIn(ZoneType.Battlefield);
         list = CardLists.getValidCards(list, type.split(";"), player, source);
         if (player.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
             list = CardLists.getNotType(list, "Creature");
@@ -963,14 +965,16 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (cost.payCostFromSource()) {
             if (source.getController() == ability.getActivatingPlayer() && source.isInPlay()) {
                 return player.getController().confirmPayment(cost, "Sacrifice " + source.getName() + "?") ? PaymentDecision.card(source) : null;
-            } else 
+            }
+            else {
                 return null;
+            }
         }
-        
-        if (amount.equals("All"))
+
+        if (amount.equals("All")) {
             return PaymentDecision.card(list);
-        
-    
+        }      
+
         Integer c = cost.convertAmount();
         if (c == null) {
             // Generalize this
@@ -993,7 +997,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (inp.hasCancelled())
             return null;
 
-        return PaymentDecision.card(inp.getSelected());
+        return PaymentDecision.card(new CardCollection(inp.getSelected()));
 
     }
 
@@ -1007,7 +1011,6 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostTapType cost) {
-        List<Card> typeList = new ArrayList<Card>(player.getCardsIn(ZoneType.Battlefield));
         String type = cost.getType();
         final String amount = cost.getAmount();
         Integer c = cost.convertAmount();
@@ -1026,7 +1029,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             type = type.replace("+withTotalPowerGE" + totalP, "");
         }
 
-        typeList = CardLists.getValidCards(typeList, type.split(";"), player, ability.getHostCard());
+        CardCollection typeList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), player, ability.getHostCard());
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
         if (c == null && !amount.equals("Any")) {
             final String sVar = ability.getSVar(amount);
@@ -1039,11 +1042,11 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         if (sameType) {
-            final List<Card> List2 = typeList;
+            final CardCollection list2 = typeList;
             typeList = CardLists.filter(typeList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    for (Card card : List2) {
+                    for (Card card : list2) {
                         if (!card.equals(c) && card.sharesCreatureTypeWith(c)) {
                             return true;
                         }
@@ -1052,7 +1055,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 }
             });
             if (c == 0) return PaymentDecision.number(0);
-            List<Card> tapped = new ArrayList<Card>();
+            CardCollection tapped = new CardCollection();
             while (c > 0) {
                 InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, typeList);
                 inp.setMessage("Select one of the cards to tap. Already chosen: " + tapped);
@@ -1084,22 +1087,22 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             if (inp.hasCancelled() || CardLists.getTotalPower(inp.getSelected()) < i) {
                 return null;
             } else {
-                return PaymentDecision.card(inp.getSelected());
+                return PaymentDecision.card(new CardCollection(inp.getSelected()));
             }
         }
-        
+
         InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, typeList);
         inp.setMessage("Select a " + cost.getDescriptiveType() + " to tap (%d left)");
         inp.showAndWait();
-        if (inp.hasCancelled())
+        if (inp.hasCancelled()) {
             return null;
-
-        return PaymentDecision.card(inp.getSelected());
+        }
+        return PaymentDecision.card(new CardCollection(inp.getSelected()));
     }
 
     @Override
     public PaymentDecision visit(CostUntapType cost) {
-        List<Card> typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"),
+        CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"),
                 player, ability.getHostCard());
         typeList = CardLists.filter(typeList, Presets.TAPPED);
         if (!cost.canUntapSource) {
@@ -1121,7 +1124,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         inp.showAndWait();
         if (inp.hasCancelled() || inp.getSelected().size() != c)
             return null;
-        return PaymentDecision.card(inp.getSelected());
+        return PaymentDecision.card(new CardCollection(inp.getSelected()));
     }
 
     @Override

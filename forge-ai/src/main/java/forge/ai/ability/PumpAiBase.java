@@ -11,6 +11,7 @@ import forge.ai.SpellAbilityAi;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -630,9 +631,8 @@ public abstract class PumpAiBase extends SpellAbilityAi {
      * 
      * @return a {@link forge.CardList} object.
      */
-    protected List<Card> getPumpCreatures(final Player ai, final SpellAbility sa, final int defense, final int attack, final List<String> keywords) {
-
-        List<Card> list = ai.getCreaturesInPlay();
+    protected CardCollection getPumpCreatures(final Player ai, final SpellAbility sa, final int defense, final int attack, final List<String> keywords) {
+        CardCollection list = ai.getCreaturesInPlay();
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -655,8 +655,8 @@ public abstract class PumpAiBase extends SpellAbilityAi {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    protected List<Card> getCurseCreatures(final Player ai, final SpellAbility sa, final int defense, final int attack, final List<String> keywords) {
-        List<Card> list = ai.getOpponent().getCreaturesInPlay();
+    protected CardCollection getCurseCreatures(final Player ai, final SpellAbility sa, final int defense, final int attack, final List<String> keywords) {
+        CardCollection list = ai.getOpponent().getCreaturesInPlay();
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
         list = CardLists.getTargetableCards(list, sa);
@@ -682,9 +682,9 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             if (isMyTurn) {
                 if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
                     // TODO: Curse creatures that will block AI's creatures, if AI is going to attack.
-                    list = new ArrayList<Card>();
+                    list = new CardCollection();
                 } else {
-                    list = new ArrayList<Card>();
+                    list = new CardCollection();
                 }
             } else {
                 // Human active, only curse attacking creatures
@@ -706,7 +706,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                         }
                     });
                 } else {
-                    list = new ArrayList<Card>();
+                    list = new CardCollection();
                 }
             }
         } // -X/0 end
@@ -721,7 +721,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 });
             } else if (sa.hasParam("NumAtt") || sa.hasParam("NumDef")) { 
                 // X is zero
-                list = new ArrayList<Card>();
+                list = new CardCollection();
             }
         }
 
@@ -777,9 +777,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         }
         final long timestamp2 = c.getGame().getNextTimestamp(); //is this necessary or can the timestamp be re-used?
         pumped.addChangedCardKeywords(toCopy, new ArrayList<String>(), false, timestamp2);
-        List<Card> exclude = new ArrayList<Card>();
-        exclude.add(c);
-        ComputerUtilCard.applyStaticContPT(ai.getGame(), pumped, exclude);
+        ComputerUtilCard.applyStaticContPT(ai.getGame(), pumped, new CardCollection(c));
         return pumped;
     }
 }

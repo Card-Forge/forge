@@ -19,7 +19,7 @@ import forge.game.zone.MagicStack;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
-import forge.util.FCollection;
+import forge.util.FCollectionView;
 
 public class GameView extends TrackableObject {
     /*private final TrackableIndex<CardView> cards = new TrackableIndex<CardView>();
@@ -47,8 +47,8 @@ public class GameView extends TrackableObject {
         players = PlayerView.getCollection(game.getPlayers());
     }
 
-    public FCollection<PlayerView>.FCollectionView getPlayers() {
-        return players.getView();
+    public FCollectionView<PlayerView> getPlayers() {
+        return players;
     }
 
     public boolean isCommander() {
@@ -161,8 +161,8 @@ public class GameView extends TrackableObject {
 
     //TODO: Find better ways to make this information available to all GUIs without using the Game class
 
-    public FCollection<StackItemView>.FCollectionView getStack() {
-        return StackItemView.getCollection(game.getStack()).getView();
+    public FCollectionView<StackItemView> getStack() {
+        return StackItemView.getCollection(game.getStack());
     }
 
     public boolean isMatchWonBy(LobbyPlayer questPlayer) {

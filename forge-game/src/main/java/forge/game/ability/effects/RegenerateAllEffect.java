@@ -4,12 +4,11 @@ import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardShields;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-
-import java.util.List;
 
 public class RegenerateAllEffect extends SpellAbilityEffect {
 
@@ -28,7 +27,7 @@ public class RegenerateAllEffect extends SpellAbilityEffect {
             valid = sa.getParam("ValidCards");
         }
 
-        List<Card> list = game.getCardsIn(ZoneType.Battlefield);
+        CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
         list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
 
         for (final Card c : list) {

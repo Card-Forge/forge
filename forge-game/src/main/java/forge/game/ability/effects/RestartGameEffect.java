@@ -5,6 +5,7 @@ import forge.game.GameAction;
 import forge.game.GameStage;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.player.Player;
@@ -13,18 +14,16 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.FCollectionView;
 
 import java.util.*;
 
 public class RestartGameEffect extends SpellAbilityEffect {
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
-     */
     @Override
     public void resolve(SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
-        List<Player> players = game.getPlayers();
+        FCollectionView<Player> players = game.getPlayers();
         Map<Player, List<Card>> playerLibraries = new HashMap<Player, List<Card>>();
 
         // Don't grab Ante Zones
@@ -36,7 +35,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
         String leaveRestriction = sa.hasParam("RestrictFromValid") ? sa.getParam("RestrictFromValid") : "Card";
 
         for (Player p : players) {
-            List<Card> newLibrary = new ArrayList<Card>(p.getCardsIn(restartZones));
+            CardCollection newLibrary = new CardCollection(p.getCardsIn(restartZones));
             List<Card> filteredCards = null;
             if (leaveZone != null) {
                 filteredCards = CardLists.filter(p.getCardsIn(leaveZone),

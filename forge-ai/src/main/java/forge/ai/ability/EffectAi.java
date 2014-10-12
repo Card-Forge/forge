@@ -12,6 +12,8 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
@@ -129,17 +131,18 @@ public class EffectAi extends SpellAbilityAi {
                     }
                 }
                 randomReturn = threatened;
-            } else if (logic.equals("Fight")) {
-            	List<Card> humCreatures = ai.getOpponent().getCreaturesInPlay();
+            }
+            else if (logic.equals("Fight")) {
+                CardCollection humCreatures = ai.getOpponent().getCreaturesInPlay();
                 humCreatures = CardLists.getTargetableCards(humCreatures, sa);
                 ComputerUtilCard.sortByEvaluateCreature(humCreatures);
-                
+
                 final AbilitySub tgtFight = sa.getSubAbility();
-                List<Card> aiCreatures = ai.getCreaturesInPlay();
+                CardCollection aiCreatures = ai.getCreaturesInPlay();
                 aiCreatures = CardLists.getTargetableCards(aiCreatures, tgtFight);
-                aiCreatures =  ComputerUtil.getSafeTargets(ai, tgtFight, aiCreatures);
+                aiCreatures = ComputerUtil.getSafeTargets(ai, tgtFight, aiCreatures);
                 ComputerUtilCard.sortByEvaluateCreature(aiCreatures);
-                
+
                 if (humCreatures.isEmpty() || aiCreatures.isEmpty()) {
                 	return false;
                 }
@@ -182,7 +185,7 @@ public class EffectAi extends SpellAbilityAi {
             if (name == null) {
                 name = sa.getHostCard().getName() + "'s Effect";
             }
-            final List<Card> list = sa.getActivatingPlayer().getCardsIn(ZoneType.Command, name);
+            final CardCollectionView list = sa.getActivatingPlayer().getCardsIn(ZoneType.Command, name);
             if (!list.isEmpty()) {
                 return false;
             }

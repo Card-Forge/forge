@@ -18,6 +18,7 @@
 package forge.ai;
 
 import com.google.common.base.Predicate;
+
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -26,6 +27,8 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
@@ -176,7 +179,7 @@ public class ComputerUtilCombat {
      *            a {@link forge.game.player.Player} object.
      * @return a int.
      */
-    public static int sumDamageIfUnblocked(final List<Card> attackers, final Player attacked) {
+    public static int sumDamageIfUnblocked(final Iterable<Card> attackers, final Player attacked) {
         int sum = 0;
         for (final Card attacker : attackers) {
             sum += ComputerUtilCombat.damageIfUnblocked(attacker, attacked, null, false);
@@ -794,8 +797,7 @@ public class ComputerUtilCombat {
         final Game game = attacker.getGame();
         // look out for continuous static abilities that only care for blocking
         // creatures
-        final List<Card> cardList = game.getCardsIn(ZoneType.Battlefield);
-        cardList.addAll(game.getCardsIn(ZoneType.Command));
+        final CardCollectionView cardList = CardCollection.combine(game.getCardsIn(ZoneType.Battlefield), game.getCardsIn(ZoneType.Command));
         for (final Card card : cardList) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
                 final Map<String, String> params = stAb.getMapParams();
@@ -1112,8 +1114,7 @@ public class ComputerUtilCombat {
 
         // look out for continuous static abilities that only care for attacking
         // creatures
-        final List<Card> cardList = game.getCardsIn(ZoneType.Battlefield);
-        cardList.addAll(game.getCardsIn(ZoneType.Command));
+        final CardCollectionView cardList = CardCollection.combine(game.getCardsIn(ZoneType.Battlefield), game.getCardsIn(ZoneType.Command));
         for (final Card card : cardList) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
                 final Map<String, String> params = stAb.getMapParams();
@@ -1286,7 +1287,7 @@ public class ComputerUtilCombat {
 
         // look out for continuous static abilities that only care for attacking
         // creatures
-        final List<Card> cardList = game.getCardsIn(ZoneType.Battlefield);
+        final CardCollectionView cardList = game.getCardsIn(ZoneType.Battlefield);
         for (final Card card : cardList) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
                 final Map<String, String> params = stAb.getMapParams();
@@ -1872,7 +1873,7 @@ public class ComputerUtilCombat {
      * @param defender 
      * @param overrideOrder overriding combatant order
      */
-    public static Map<Card, Integer> distributeAIDamage(final Card attacker, final List<Card> block, int dmgCanDeal, GameEntity defender, boolean overrideOrder) {
+    public static Map<Card, Integer> distributeAIDamage(final Card attacker, final CardCollectionView block, int dmgCanDeal, GameEntity defender, boolean overrideOrder) {
         // TODO: Distribute defensive Damage (AI controls how damage is dealt to own cards) for Banding and Defensive Formation
         Map<Card, Integer> damageMap = new HashMap<Card, Integer>();
         
@@ -1887,9 +1888,8 @@ public class ComputerUtilCombat {
         final boolean hasTrample = attacker.hasKeyword("Trample");
     
         if (block.size() == 1) {
-    
-            final Card blocker = block.get(0);
-    
+            final Card blocker = block.getFirst();
+
             // trample
             if (hasTrample) {
     

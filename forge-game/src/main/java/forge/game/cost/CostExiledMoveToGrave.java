@@ -19,55 +19,35 @@ package forge.game.cost;
 
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-
-import java.util.List;
 
 /**
  * This is for the "ExiledMoveToGrave" Cost.
  */
 public class CostExiledMoveToGrave extends CostPartWithList {
     // ExiledMoveToGrave<Num/Type{/TypeDescription}>
-
-    /**
-     * Instantiates a new cost CostExiledMoveToGrave.
-     *
-     * @param amount
-     *            the amount
-     * @param type
-     *            the type
-     * @param description
-     *            the description
-     */
     public CostExiledMoveToGrave(final String amount, final String type, final String description) {
         super(amount, type, description);
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see forge.card.cost.CostPart#toString()
-     */
     @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
-        final Integer i = this.convertAmount();
+        final Integer i = convertAmount();
         sb.append("Put ");
 
-        final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
-        sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
+        final String desc = getTypeDescription() == null ? getType() : getTypeDescription();
+        sb.append(Cost.convertAmountTypeToWords(i, getAmount(), desc));
 
         sb.append(" into its owner's graveyard");
 
         return sb.toString();
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPartWithList#getHashForList()
-     */
     @Override
     public String getHashForLKIList() {
         return "MovedToGrave";
@@ -77,39 +57,26 @@ public class CostExiledMoveToGrave extends CostPartWithList {
     	return "MovedToGraveCards";
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.Player, forge.card.cost.Cost)
-     */
     @Override
     public final boolean canPay(final SpellAbility ability) {
         final Player activator = ability.getActivatingPlayer();
         final Card source = ability.getHostCard();
 
-        Integer i = this.convertAmount();
+        Integer i = convertAmount();
 
         if (i == null) {
-            i = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
+            i = AbilityUtils.calculateAmount(source, getAmount(), ability);
         }
 
+        CardCollectionView typeList = activator.getGame().getCardsIn(ZoneType.Exile);
 
-        List<Card> typeList = activator.getGame().getCardsIn(ZoneType.Exile);
-
-        typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
+        typeList = CardLists.getValidCards(typeList, getType().split(";"), activator, source);
         if (typeList.size() < i) {
             return false;
         }
-
         return true;
-
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
-     */
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard) {
         return targetCard.getGame().getAction().moveToGraveyard(targetCard);
@@ -118,5 +85,4 @@ public class CostExiledMoveToGrave extends CostPartWithList {
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }
-
 }

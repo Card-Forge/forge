@@ -20,14 +20,13 @@ package forge.game.cost;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-
-import java.util.ArrayList;
-import java.util.List;
+import forge.util.FCollectionView;
 
 /**
  * This is for the "PutCardToLib" Cost. 
@@ -40,87 +39,54 @@ public class CostPutCardToLib extends CostPartWithList {
     public final ZoneType from;
     public final boolean sameZone;
     private String libPosition = "0";
-    
-    /**
-     * Gets the from.
-     * 
-     * @return the from
-     */
+
     public final ZoneType getFrom() {
-        return this.from;
+        return from;
     }
-    
-    /**
-     * Gets the libposition.
-     * 
-     * @return the libposition
-     */
+
     public final String getLibPos() {
-        return this.libPosition;
+        return libPosition;
     }
 
-    /**
-     * isSameZone.
-     * 
-     * @return a boolean
-     */
     public final boolean isSameZone() {
-        return this.sameZone;
+        return sameZone;
     }
 
-    /**
-     * Instantiates a new cost CostPutCardToLib.
-     * 
-     * @param amount
-     *            the amount
-     * @param type
-     *            the type
-     * @param description
-     *            the description
-     * @param from
-     *            the from
-     */
     public CostPutCardToLib(final String amount, final String libpos, final String type, final String description, final ZoneType from) {
         this(amount, libpos, type, description, from, false);
     }
     
-    public CostPutCardToLib(final String amount, final String libpos, final String type, final String description, final ZoneType from, final boolean sameZone) {
+    public CostPutCardToLib(final String amount, final String libpos, final String type, final String description, final ZoneType from0, final boolean sameZone0) {
         super(amount, type, description);
-        this.from = from == null ? ZoneType.Hand : from;
-        this.libPosition = libpos;
-        this.sameZone = sameZone;
+        from = from0 == null ? ZoneType.Hand : from0;
+        libPosition = libpos;
+        sameZone = sameZone0;
     }
-    
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.card.cost.CostPart#toString()
-     */
     @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
-        final Integer i = this.convertAmount();
+        final Integer i = convertAmount();
         sb.append("Put ");
         
-        final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
-        sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
+        final String desc = getTypeDescription() == null ? getType() : getTypeDescription();
+        sb.append(Cost.convertAmountTypeToWords(i, getAmount(), desc));
 
-        if (this.sameZone) {
+        if (sameZone) {
             sb.append(" from the same ");
         } else {
             sb.append(" from your ");
         }
 
-        sb.append(this.from).append(" on ");
+        sb.append(from).append(" on ");
         
-        if (this.libPosition.equals("0")) {
+        if (libPosition.equals("0")) {
             sb.append("top of");
         } else {
             sb.append("the bottom of");
         }
         
-        if (this.sameZone) {
+        if (sameZone) {
             sb.append(" their owner's library");
         } else {
             sb.append(" your library");
@@ -129,9 +95,6 @@ public class CostPutCardToLib extends CostPartWithList {
         return sb.toString();
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPartWithList#getHashForList()
-     */
     @Override
     public String getHashForLKIList() {
         return "CardPutToLib";
@@ -141,45 +104,39 @@ public class CostPutCardToLib extends CostPartWithList {
     	return "CardPutToLibCards";
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.Player, forge.card.cost.Cost)
-     */
     @Override
     public final boolean canPay(final SpellAbility ability) {
         final Player activator = ability.getActivatingPlayer();
         final Card source = ability.getHostCard();
         final Game game = activator.getGame();
 
-        Integer i = this.convertAmount();
+        Integer i = convertAmount();
 
         if (i == null) {
-            final String sVar = ability.getSVar(this.getAmount());
+            final String sVar = ability.getSVar(getAmount());
             if (sVar.equals("XChoice")) {
                 return true;
             }
-            i = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-        }
-        
-        List<Card> typeList = new ArrayList<Card>();
-        if (this.sameZone) {
-            typeList = new ArrayList<Card>(game.getCardsIn(this.getFrom()));
-        } else {
-            typeList = new ArrayList<Card>(activator.getCardsIn(this.getFrom()));
+            i = AbilityUtils.calculateAmount(source, getAmount(), ability);
         }
 
-        typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
+        CardCollectionView typeList;
+        if (sameZone) {
+            typeList = game.getCardsIn(getFrom());
+        }
+        else {
+            typeList = activator.getCardsIn(getFrom());
+        }
+
+        typeList = CardLists.getValidCards(typeList, getType().split(";"), activator, source);
         
         if (typeList.size() < i) {
             return false;
         }
 
-        if (this.sameZone) {
+        if (sameZone) {
             boolean foundPayable = false;
-            List<Player> players = game.getPlayers();
+            FCollectionView<Player> players = game.getPlayers();
             for (Player p : players) {
                 if (CardLists.filter(typeList, CardPredicates.isController(p)).size() >= i) {
                     foundPayable = true;
@@ -190,22 +147,15 @@ public class CostPutCardToLib extends CostPartWithList {
                 return false;
             }
         }
-
         return true;
-
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
-     */
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard) {
         return targetCard.getGame().getAction().moveToLibrary(targetCard, Integer.parseInt(getLibPos()));
     }
 
-
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }
-
 }

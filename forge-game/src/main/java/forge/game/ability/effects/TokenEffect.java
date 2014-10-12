@@ -34,6 +34,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.item.PaperToken;
+import forge.util.FCollectionView;
 import forge.util.MyRandom;
 
 import java.util.ArrayList;
@@ -303,7 +304,7 @@ public class TokenEffect extends SpellAbilityEffect {
                 for (final Card c : tokens) {
                     if (this.tokenAttacking && game.getPhaseHandler().inCombat()) {
                         Combat combat = game.getPhaseHandler().getCombat();
-                        final List<GameEntity> defs = combat.getDefenders();
+                        final FCollectionView<GameEntity> defs = combat.getDefenders();
                         final GameEntity defender = c.getController().getController().chooseSingleEntityForEffect(defs, sa, "Choose which defender to attack with " + c, false);
                         combat.addAttacker(c, defender);
                         combatChanged = true;

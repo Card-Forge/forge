@@ -5,6 +5,7 @@ import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.*;
@@ -78,17 +79,17 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public void setPaidHash(final HashMap<String, List<Card>> hash) {
+    public void setPaidHash(final HashMap<String, CardCollection> hash) {
         sa.setPaidHash(hash);
     }
 
     @Override
-    public HashMap<String, List<Card>> getPaidHash() {
+    public HashMap<String, CardCollection> getPaidHash() {
         return sa.getPaidHash();
     }
 
     @Override
-    public List<Card> getPaidList(final String str) {
+    public CardCollection getPaidList(final String str) {
         return sa.getPaidList(str);
     }
 
@@ -401,7 +402,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
                 }
             }
         }
-        // TODO: List<Card>
+        // TODO: CardCollection
         
         getActivatingPlayer().getController().playSpellAbilityNoStack(sa, false);
 

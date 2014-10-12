@@ -38,7 +38,7 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
-import forge.util.FCollection;
+import forge.util.FCollectionView;
 import forge.util.Utils;
 
 public class VStack extends FDropDown {
@@ -93,7 +93,7 @@ public class VStack extends FDropDown {
         activeStackInstance = null; //reset before updating stack
         restoreOldZones();
 
-        final FCollection<StackItemView>.FCollectionView stack = MatchUtil.getGameView().getStack();
+        final FCollectionView<StackItemView> stack = MatchUtil.getGameView().getStack();
         if (stackSize != stack.size()) {
             int oldStackSize = stackSize;
             stackSize = stack.size();
@@ -124,7 +124,7 @@ public class VStack extends FDropDown {
         float totalWidth = maxWidth - MatchController.getView().getTopPlayerPanel().getTabs().iterator().next().getRight(); //keep avatar, life total, and hand tab visible to left of stack
         float width = totalWidth - 2 * MARGINS;
 
-        final FCollection<StackItemView>.FCollectionView stack = MatchUtil.getGameView().getStack();
+        final FCollectionView<StackItemView> stack = MatchUtil.getGameView().getStack();
         if (stack.isEmpty()) { //show label if stack empty
             FLabel label = add(new FLabel.Builder().text("[Empty]").font(FONT).align(HAlignment.CENTER).build());
 

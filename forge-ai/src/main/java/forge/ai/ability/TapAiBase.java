@@ -2,11 +2,13 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
@@ -37,7 +39,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
      *            a boolean.
      * @return a boolean.
      */
-    private boolean tapTargetList(final Player ai, final SpellAbility sa, final List<Card> tapList, final boolean mandatory) {
+    private boolean tapTargetList(final Player ai, final SpellAbility sa, final CardCollection tapList, final boolean mandatory) {
         final Card source = sa.getHostCard();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
@@ -114,8 +116,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
     protected boolean tapPrefTargeting(final Player ai, final Card source, final TargetRestrictions tgt, final SpellAbility sa, final boolean mandatory) {
         final Player opp = ai.getOpponent();
         final Game game = ai.getGame();
-        List<Card> tapList = game.getCardsIn(ZoneType.Battlefield);
-        tapList = CardLists.filterControlledBy(tapList, ai.getOpponents());
+        CardCollection tapList = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponents());
         tapList = CardLists.filter(tapList, Presets.UNTAPPED);
         tapList = CardLists.getValidCards(tapList, tgt.getValidTgts(), source.getController(), source);
         tapList = CardLists.getTargetableCards(tapList, sa);
@@ -137,8 +138,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
 
         //use broader approach when the cost is a positive thing
         if (tapList.isEmpty() && ComputerUtil.activateForCost(sa, ai)) { 
-        	tapList = game.getCardsIn(ZoneType.Battlefield);
-    		tapList = CardLists.filterControlledBy(tapList, ai.getOpponents());
+    		tapList = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponents());
             tapList = CardLists.getValidCards(tapList, tgt.getValidTgts(), source.getController(), source);
             tapList = CardLists.getTargetableCards(tapList, sa);
     		tapList = CardLists.filter(tapList, new Predicate<Card>() {
@@ -262,12 +262,11 @@ public abstract class TapAiBase extends SpellAbilityAi  {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Game game = ai.getGame();
 
-        List<Card> list = game.getCardsIn(ZoneType.Battlefield);
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
+        CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), source.getController(), source);
         list = CardLists.getTargetableCards(list, sa);
         
         // try to tap anything controlled by the computer
-        List<Card> tapList = CardLists.filterControlledBy(list, ai.getOpponents());
+        CardCollection tapList = CardLists.filterControlledBy(list, ai.getOpponents());
         if (tapTargetList(ai, sa, tapList, mandatory)) {
             return true;
         }

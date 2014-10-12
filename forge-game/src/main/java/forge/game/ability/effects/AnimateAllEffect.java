@@ -1,10 +1,12 @@
 package forge.game.ability.effects;
 
 import forge.GameCommand;
+import forge.card.CardType;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
@@ -50,18 +52,18 @@ public class AnimateAllEffect extends AnimateEffectBase {
 
         final boolean permanent = sa.hasParam("Permanent");
 
-        final ArrayList<String> types = new ArrayList<String>();
+        final CardType types = new CardType();
         if (sa.hasParam("Types")) {
             types.addAll(Arrays.asList(sa.getParam("Types").split(",")));
         }
 
-        final ArrayList<String> removeTypes = new ArrayList<String>();
+        final CardType removeTypes = new CardType();
         if (sa.hasParam("RemoveTypes")) {
             removeTypes.addAll(Arrays.asList(sa.getParam("RemoveTypes").split(",")));
         }
 
         // allow ChosenType - overrides anything else specified
-        if (types.contains("ChosenType")) {
+        if (types.hasSubtype("ChosenType")) {
             types.clear();
             types.add(host.getChosenType());
         }
@@ -124,19 +126,19 @@ public class AnimateAllEffect extends AnimateEffectBase {
             valid = sa.getParam("ValidCards");
         }
 
-        List<Card> list;
+        CardCollectionView list;
         List<Player> tgtPlayers = getTargetPlayers(sa);
         
         if (!sa.usesTargeting() && !sa.hasParam("Defined")) {
             list = game.getCardsIn(ZoneType.Battlefield);
-        } else {
-            list = new ArrayList<Card>(tgtPlayers.get(0).getCardsIn(ZoneType.Battlefield));
+        }
+        else {
+            list = tgtPlayers.get(0).getCardsIn(ZoneType.Battlefield);
         }
 
         list = CardLists.getValidCards(list, valid.split(","), host.getController(), host);
 
         for (final Card c : list) {
-
             final long colorTimestamp = doAnimate(c, sa, power, toughness, types, removeTypes,
                     finalDesc, keywords, null, hiddenKeywords, timestamp);
 

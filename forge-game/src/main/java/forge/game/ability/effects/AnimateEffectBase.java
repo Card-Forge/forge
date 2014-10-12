@@ -17,6 +17,7 @@
  */
 package forge.game.ability.effects;
 
+import forge.card.CardType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.replacement.ReplacementEffect;
@@ -27,30 +28,8 @@ import forge.game.trigger.Trigger;
 import java.util.ArrayList;
 
 public abstract class AnimateEffectBase extends SpellAbilityEffect {
-
-    /**
-     * <p>
-     * doAnimate.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
-     * @param power
-     *            a int.
-     * @param toughness
-     *            a int.
-     * @param types
-     *            a {@link java.util.ArrayList} object.
-     * @param colors
-     *            a {@link java.lang.String} object.
-     * @param keywords
-     *            a {@link java.util.ArrayList} object.
-     * @return a long.
-     */
     long doAnimate(final Card c, final SpellAbility sa, final int power, final int toughness,
-            final ArrayList<String> types, final ArrayList<String> removeTypes, final String colors,
+            final CardType addType, final CardType removeType, final String colors,
             final ArrayList<String> keywords, final ArrayList<String> removeKeywords,
             final ArrayList<String> hiddenKeywords, final long timestamp) {
 
@@ -94,8 +73,8 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             c.addNewPT(power, toughness, timestamp);
         }
 
-        if (!types.isEmpty() || !removeTypes.isEmpty() || removeCreatureTypes) {
-            c.addChangedCardTypes(types, removeTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
+        if (!addType.isEmpty() || !removeType.isEmpty() || removeCreatureTypes) {
+            c.addChangedCardTypes(addType, removeType, removeSuperTypes, removeCardTypes, removeSubTypes,
                     removeCreatureTypes, timestamp);
         }
 

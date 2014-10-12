@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import forge.GameCommand;
+import forge.card.CardType;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.Game;
@@ -60,22 +61,20 @@ public class AnimateEffect extends AnimateEffectBase {
         // Every Animate event needs a unique time stamp
         final long timestamp = game.getNextTimestamp();
 
-
-
         final boolean permanent = sa.hasParam("Permanent");
 
-        final ArrayList<String> types = new ArrayList<String>();
+        final CardType types = new CardType();
         if (sa.hasParam("Types")) {
             types.addAll(Arrays.asList(sa.getParam("Types").split(",")));
         }
 
-        final ArrayList<String> removeTypes = new ArrayList<String>();
+        final CardType removeTypes = new CardType();
         if (sa.hasParam("RemoveTypes")) {
             removeTypes.addAll(Arrays.asList(sa.getParam("RemoveTypes").split(",")));
         }
 
         // allow ChosenType - overrides anything else specified
-        if (types.contains("ChosenType")) {
+        if (types.hasSubtype("ChosenType")) {
             types.clear();
             types.add(source.getChosenType());
         }
@@ -149,7 +148,6 @@ public class AnimateEffect extends AnimateEffectBase {
         List<Card> tgts = getTargetCards(sa);
 
         for (final Card c : tgts) {
-
             final long colorTimestamp = doAnimate(c, sa, power, toughness, types, removeTypes,
                     finalDesc, keywords, removeKeywords, hiddenKeywords, timestamp);
 

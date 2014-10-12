@@ -25,6 +25,8 @@ import forge.card.mana.ManaCost;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
@@ -167,7 +169,7 @@ public class PhaseHandler implements java.io.Serializable {
             game.fireEvent(new GameEventTurnBegan(playerTurn, turn));
 
             // Tokens starting game in play should suffer from Sum. Sickness
-            final List<Card> list = playerTurn.getCardsIncludePhasingIn(ZoneType.Battlefield);
+            final CardCollectionView list = playerTurn.getCardsIncludePhasingIn(ZoneType.Battlefield);
             for (final Card c : list) {
                 if (playerTurn.getTurn() > 0 || !c.isStartsGameInPlay()) {
                     c.setSickness(false);
@@ -752,9 +754,9 @@ public class PhaseHandler implements java.io.Serializable {
         }
 
         // TODO: This shouldn't filter by Time Vault, just in case Time Vault doesn't have it's normal ability.
-        List<Card> vaults = CardLists.filter(nextPlayer.getCardsIn(ZoneType.Battlefield, "Time Vault"), Presets.TAPPED);
-        if(!vaults.isEmpty()) {
-            Card crd = vaults.get(0);
+        CardCollection vaults = CardLists.filter(nextPlayer.getCardsIn(ZoneType.Battlefield, "Time Vault"), Presets.TAPPED);
+        if (!vaults.isEmpty()) {
+            Card crd = vaults.getFirst();
             SpellAbility fakeSA = new SpellAbility.EmptySa(crd, nextPlayer);
             boolean untapTimeVault = nextPlayer.getController().chooseBinary(fakeSA, "Skip a turn to untap a Time Vault?", BinaryChoiceType.UntapTimeVault, false);
             if (untapTimeVault) {
@@ -764,8 +766,9 @@ public class PhaseHandler implements java.io.Serializable {
                         crd = c;
                 }
                 crd.untap();
-                if( null == extraTurn ) 
+                if (extraTurn == null) {
                     setPlayerTurn(nextPlayer);
+                }
                 return getNextActivePlayer();
             }
         }

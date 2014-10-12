@@ -14,6 +14,7 @@ import forge.deck.DeckSection;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
+import forge.game.card.CardCollectionView;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
@@ -34,27 +35,10 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.*;
 import java.util.Map.Entry;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
-public class ComputerUtilCard {
 
-    /**
-     * <p>
-     * getMostExpensivePermanentAI.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     * @param spell
-     *            a {@link forge.game.card.Card} object.
-     * @param targeted
-     *            a boolean.
-     * @return a {@link forge.game.card.Card} object.
-     */
-    public static Card getMostExpensivePermanentAI(final List<Card> list, final SpellAbility spell, final boolean targeted) {
-        List<Card> all = list;
+public class ComputerUtilCard {
+    public static Card getMostExpensivePermanentAI(final CardCollectionView list, final SpellAbility spell, final boolean targeted) {
+        CardCollectionView all = list;
         if (targeted) {
             all = CardLists.filter(all, new Predicate<Card>() {
                 @Override
@@ -63,11 +47,9 @@ public class ComputerUtilCard {
                 }
             });
         }
-    
         return ComputerUtilCard.getMostExpensivePermanentAI(all);
     }
 
-    
     /**
      * <p>
      * Sorts a List<Card> by "best" using the EvaluateCreature function.
@@ -77,7 +59,7 @@ public class ComputerUtilCard {
      * @param list
      *            a {@link forge.CardList} object.
      */
-    public static void sortByEvaluateCreature(final List<Card> list) {
+    public static void sortByEvaluateCreature(final CardCollection list) {
         Collections.sort(list, ComputerUtilCard.EvaluateCreatureComparator);
     } // sortByEvaluateCreature()
     
@@ -139,7 +121,7 @@ public class ComputerUtilCard {
      *            a {@link forge.CardList} object.
      * @return a {@link forge.game.card.Card} object.
      */
-    public static Card getBestLandAI(final Collection<Card> list) {
+    public static Card getBestLandAI(final Iterable<Card> list) {
         final List<Card> land = CardLists.filter(list, CardPredicates.Presets.LANDS);
         if (land.isEmpty()) {
             return null;
@@ -195,7 +177,7 @@ public class ComputerUtilCard {
      *            a boolean.
      * @return a {@link forge.game.card.Card} object.
      */
-    public static Card getCheapestPermanentAI(Collection<Card> all, final SpellAbility spell, final boolean targeted) {
+    public static Card getCheapestPermanentAI(Iterable<Card> all, final SpellAbility spell, final boolean targeted) {
         if (targeted) {
             all = CardLists.filter(all, new Predicate<Card>() {
                 @Override
@@ -204,7 +186,7 @@ public class ComputerUtilCard {
                 }
             });
         }
-        if (all.isEmpty()) {
+        if (Iterables.isEmpty(all)) {
             return null;
         }
     
@@ -231,15 +213,15 @@ public class ComputerUtilCard {
      *            a {@link forge.CardList} object.
      * @return a {@link forge.game.card.Card} object.
      */
-    public static Card getBestAI(final Collection<Card> list) {
+    public static Card getBestAI(final Iterable<Card> list) {
         // Get Best will filter by appropriate getBest list if ALL of the list
         // is of that type
-        if (Iterables.all(list, CardPredicates.Presets.CREATURES))
+        if (Iterables.all(list, CardPredicates.Presets.CREATURES)) {
             return ComputerUtilCard.getBestCreatureAI(list);
-    
-        if (Iterables.all(list, CardPredicates.Presets.LANDS))
+        }
+        if (Iterables.all(list, CardPredicates.Presets.LANDS)) {
             return getBestLandAI(list);
-    
+        }
         // TODO - Once we get an EvaluatePermanent this should call
         // getBestPermanent()
         return ComputerUtilCard.getMostExpensivePermanentAI(list);
@@ -252,7 +234,7 @@ public class ComputerUtilCard {
      *            the list
      * @return the card
      */
-    public static Card getBestCreatureAI(final Collection<Card> list) {
+    public static Card getBestCreatureAI(final Iterable<Card> list) {
         return Aggregates.itemWithMax(Iterables.filter(list, CardPredicates.Presets.CREATURES), ComputerUtilCard.fnEvaluateCreature);
     }
 
@@ -265,7 +247,7 @@ public class ComputerUtilCard {
      *            a {@link forge.CardList} object.
      * @return a {@link forge.game.card.Card} object.
      */
-    public static Card getWorstCreatureAI(final Collection<Card> list) {
+    public static Card getWorstCreatureAI(final Iterable<Card> list) {
         return Aggregates.itemWithMin(Iterables.filter(list, CardPredicates.Presets.CREATURES), ComputerUtilCard.fnEvaluateCreature);
     }
 
@@ -279,12 +261,12 @@ public class ComputerUtilCard {
      *            a {@link forge.CardList} object.
      * @return a {@link forge.game.card.Card} object.
      */
-    public static Card getBestCreatureToBounceAI(final List<Card> list) {
+    public static Card getBestCreatureToBounceAI(final CardCollectionView list) {
         final int tokenBonus = 60;
         Card biggest = null;
         int biggestvalue = -1;
 
-        for(Card card : CardLists.filter(list, CardPredicates.Presets.CREATURES)) {
+        for (Card card : CardLists.filter(list, CardPredicates.Presets.CREATURES)) {
             int newvalue = ComputerUtilCard.evaluateCreature(card);
             newvalue += card.isToken() ? tokenBonus : 0; // raise the value of tokens
 
@@ -305,7 +287,7 @@ public class ComputerUtilCard {
      *            a {@link forge.CardList} object.
      * @return a {@link forge.game.card.Card} object.
      */
-    public static Card getWorstAI(final Collection<Card> list) {
+    public static Card getWorstAI(final Iterable<Card> list) {
         return ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
     }
 
@@ -326,9 +308,9 @@ public class ComputerUtilCard {
      *            a boolean.
      * @return a {@link forge.game.card.Card} object.
      */
-    public static Card getWorstPermanentAI(final Collection<Card> list, final boolean biasEnch, final boolean biasLand,
+    public static Card getWorstPermanentAI(final Iterable<Card> list, final boolean biasEnch, final boolean biasLand,
             final boolean biasArt, final boolean biasCreature) {
-        if (list.size() == 0) {
+        if (Iterables.isEmpty(list)) {
             return null;
         }
         
@@ -571,57 +553,25 @@ public class ComputerUtilCard {
         if (c.isPaired()) {
             value += 14;
         }
-        
+
         if (!c.getEncodedCards().isEmpty()) {
             value += 24;
         }
-    
         return value;
-    
-    } // evaluateCreature
+    }
 
-    /**
-     * <p>
-     * evaluatePermanentList.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     * @return a int.
-     */
-    public static int evaluatePermanentList(final List<Card> list) {
+    public static int evaluatePermanentList(final CardCollectionView list) {
         int value = 0;
         for (int i = 0; i < list.size(); i++) {
             value += list.get(i).getCMC() + 1;
         }
-    
         return value;
     }
 
-    /**
-     * <p>
-     * evaluateCreatureList.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     * @return a int.
-     */
-    public static int evaluateCreatureList(final List<Card> list) {
+    public static int evaluateCreatureList(final CardCollectionView list) {
         return Aggregates.sum(list, fnEvaluateCreature);
     }
 
-    /**
-     * <p>
-     * doesCreatureAttackAI.
-     * </p>
-     * 
-     * @param ai
-     *            the AI player
-     * @param card
-     *            a {@link forge.game.card.Card} object.
-     * @return a boolean.
-     */
     public static boolean doesCreatureAttackAI(final Player ai, final Card card) {
         AiAttackController aiAtk = new AiAttackController(ai);
         Combat combat = new Combat(ai);
@@ -649,7 +599,7 @@ public class ComputerUtilCard {
      * @param blockers list of additional blockers to be considered
      * @return list of creatures assigned to block in the simulation
      */
-    public static List<Card> getLikelyBlockers(final Player ai, final List<Card> blockers) {
+    public static CardCollectionView getLikelyBlockers(final Player ai, final CardCollectionView blockers) {
         AiBlockController aiBlk = new AiBlockController(ai);
         final Player opp = ai.getOpponent();
         Combat combat = new Combat(opp);
@@ -680,9 +630,7 @@ public class ComputerUtilCard {
      * @return creature will be a blocker
      */
     public static boolean doesSpecifiedCreatureBlock(final Player ai, Card blocker) {
-        List<Card> blockers = new ArrayList<Card>();
-        blockers.add(blocker);
-        return getLikelyBlockers(ai, blockers).contains(blocker);
+        return getLikelyBlockers(ai, new CardCollection(blocker)).contains(blocker);
     }
 
     /**
@@ -708,7 +656,7 @@ public class ComputerUtilCard {
      *            the all
      * @return the card
      */
-    public static Card getMostExpensivePermanentAI(final Collection<Card> all) {
+    public static Card getMostExpensivePermanentAI(final Iterable<Card> all) {
         Card biggest = null;
     
         int bigCMC = -1;
@@ -730,17 +678,7 @@ public class ComputerUtilCard {
         return biggest;
     }
 
-    /**
-     * <p>
-     * getMostProminentCardName.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     * @return a {@link java.lang.String} object.
-     */
-    public static String getMostProminentCardName(final List<Card> list) {
-    
+    public static String getMostProminentCardName(final CardCollectionView list) {
         if (list.size() == 0) {
             return "";
         }
@@ -777,14 +715,13 @@ public class ComputerUtilCard {
      *            a {@link forge.CardList} object.
      * @return a {@link java.lang.String} object.
      */
-    public static String getMostProminentCreatureType(final List<Card> list) {
-    
+    public static String getMostProminentCreatureType(final CardCollectionView list) {
         if (list.size() == 0) {
             return "";
         }
-    
+
         final Map<String, Integer> map = new HashMap<String, Integer>();
-    
+
         for (final Card c : list) {
             for (final String var : c.getType()) {
                 if (CardType.isACreatureType(var)) {
@@ -822,7 +759,7 @@ public class ComputerUtilCard {
      *            a {@link forge.CardList} object.
      * @return a {@link java.lang.String} object.
      */
-    public static String getMostProminentColor(final List<Card> list) {
+    public static String getMostProminentColor(final Iterable<Card> list) {
         byte colors = CardFactoryUtil.getMostProminentColors(list);
         for(byte c : MagicColor.WUBRG) {
             if ( (colors & c) != 0 )
@@ -831,7 +768,7 @@ public class ComputerUtilCard {
         return MagicColor.Constant.WHITE; // no difference, there was no prominent color
     }
 
-    public static String getMostProminentColor(final List<Card> list, final List<String> restrictedToColors) {
+    public static String getMostProminentColor(final CardCollectionView list, final List<String> restrictedToColors) {
         byte colors = CardFactoryUtil.getMostProminentColorsFromList(list, restrictedToColors);
         for (byte c : MagicColor.WUBRG) {
             if ((colors & c) != 0) {
@@ -930,7 +867,7 @@ public class ComputerUtilCard {
                 chosen.add(ComputerUtilCard.getMostProminentColor(game.getCardsInGame(), colorChoices));
             }
             else if (logic.equals("MostProminentHumanCreatures")) {
-                List<Card> list = opp.getCreaturesInPlay();
+                CardCollectionView list = opp.getCreaturesInPlay();
                 if (list.isEmpty()) {
                     list = CardLists.filter(CardLists.filterControlledBy(game.getCardsInGame(), opp), CardPredicates.Presets.CREATURES);
                 }
@@ -943,8 +880,7 @@ public class ComputerUtilCard {
                 chosen.add(ComputerUtilCard.getMostProminentColor(ai.getOpponent().getCardsIn(ZoneType.Battlefield), colorChoices));
             }
             else if (logic.equals("MostProminentPermanent")) {
-                final List<Card> list = game.getCardsIn(ZoneType.Battlefield);
-                chosen.add(ComputerUtilCard.getMostProminentColor(list, colorChoices));
+                chosen.add(ComputerUtilCard.getMostProminentColor(game.getCardsIn(ZoneType.Battlefield), colorChoices));
             }
             else if (logic.equals("MostProminentAttackers") && game.getPhaseHandler().inCombat()) {
                 chosen.add(ComputerUtilCard.getMostProminentColor(game.getCombat().getAttackers(), colorChoices));
@@ -953,7 +889,7 @@ public class ComputerUtilCard {
                 chosen.add(ComputerUtilCard.getMostProminentColor(game.getPhaseHandler().getPlayerTurn().getCardsIn(ZoneType.Hand), colorChoices));
             }
             else if (logic.equals("MostProminentKeywordInComputerDeck")) {
-                List<Card> list = ai.getAllCards();
+                CardCollectionView list = ai.getAllCards();
                 int m1 = 0;
                 String chosenColor = MagicColor.Constant.WHITE;
 
@@ -988,7 +924,7 @@ public class ComputerUtilCard {
             if (currCombat != null && !currCombat.getAllBlockers().isEmpty() && currCombat.getAllBlockers().contains(c)) {
                 for (Card attacker : currCombat.getAttackersBlockedBy(c)) {
                     if (attacker.getShieldCount() == 0 && ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, currCombat)) {
-                        List<Card> blockers = currCombat.getBlockers(attacker);
+                        CardCollection blockers = currCombat.getBlockers(attacker);
                         ComputerUtilCard.sortByEvaluateCreature(blockers);
                         Combat combat = new Combat(ai);
                         combat.addAttacker(attacker, opp);
@@ -1113,11 +1049,11 @@ public class ComputerUtilCard {
      * @param vCard creature to work with
      * @param exclude list of cards to exclude when considering ability sources, accepts null
      */
-    public static void applyStaticContPT(final Game game, Card vCard, final List<Card> exclude) {
+    public static void applyStaticContPT(final Game game, Card vCard, final CardCollectionView exclude) {
         if (!vCard.isCreature()) {
             return;
         }
-        final List<Card> list = game.getCardsIn(ZoneType.Battlefield);
+        final CardCollection list = new CardCollection(game.getCardsIn(ZoneType.Battlefield));
         list.addAll(game.getCardsIn(ZoneType.Command));
         if (exclude != null) {
             list.removeAll(exclude);

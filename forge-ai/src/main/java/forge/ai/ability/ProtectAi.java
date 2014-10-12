@@ -9,6 +9,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.ProtectEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
@@ -97,13 +98,13 @@ public class ProtectAi extends SpellAbilityAi {
      *            a {@link forge.game.ability.AbilityFactory} object.
      * @return a {@link forge.CardList} object.
      */
-    private static List<Card> getProtectCreatures(final Player ai, final SpellAbility sa) {
+    private static CardCollection getProtectCreatures(final Player ai, final SpellAbility sa) {
         final List<String> gains = ProtectEffect.getProtectionList(sa);
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
         final PhaseHandler ph = game.getPhaseHandler();
         
-        List<Card> list = ai.getCreaturesInPlay();
+        CardCollection list = ai.getCreaturesInPlay();
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -132,7 +133,7 @@ public class ProtectAi extends SpellAbilityAi {
     
                     //creature is attacking and would be destroyed itself
                     if (combat.isAttacking(c) && combat.isBlocked(c) && ComputerUtilCombat.attackerWouldBeDestroyed(ai, c, combat)) {
-                        List<Card> threats = combat.getBlockers(c);
+                        CardCollection threats = combat.getBlockers(c);
                         if (threats != null && !threats.isEmpty()) {
                         	ComputerUtilCard.sortByEvaluateCreature(threats);
                         	return ProtectAi.toProtectFrom(threats.get(0), sa) != null;
@@ -245,7 +246,7 @@ public class ProtectAi extends SpellAbilityAi {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         sa.resetTargets();
-        List<Card> list = getProtectCreatures(ai, sa);
+        CardCollection list = getProtectCreatures(ai, sa);
 
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard());
 
@@ -300,9 +301,8 @@ public class ProtectAi extends SpellAbilityAi {
     private static boolean protectMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Game game = ai.getGame();
 
-        List<Card> list = game.getCardsIn(ZoneType.Battlefield);
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard());
+        CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard());
 
         if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             sa.resetTargets();
@@ -314,14 +314,14 @@ public class ProtectAi extends SpellAbilityAi {
             list.remove(c);
         }
 
-        List<Card> pref = CardLists.filterControlledBy(list, ai);
+        CardCollection pref = CardLists.filterControlledBy(list, ai);
         pref = CardLists.filter(pref, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return !hasProtectionFromAll(c, ProtectEffect.getProtectionList(sa));
             }
         });
-        final List<Card> pref2 = CardLists.filterControlledBy(list, ai);
+        final CardCollection pref2 = CardLists.filterControlledBy(list, ai);
         pref = CardLists.filter(pref, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {

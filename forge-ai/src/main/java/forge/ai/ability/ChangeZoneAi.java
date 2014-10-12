@@ -13,6 +13,8 @@ import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
@@ -29,7 +31,6 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class ChangeZoneAi extends SpellAbilityAi {
@@ -189,9 +190,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
             //Ninjutsu
             if (sa.hasParam("Ninjutsu")) {
-                if (source.isType("Legendary")
+                if (source.getType().isLegendary()
                         && !ai.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
-                    final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
+                    final CardCollectionView list = ai.getCardsIn(ZoneType.Battlefield);
                     if (Iterables.any(list, CardPredicates.nameEquals(source.getName()))) {
                         return false;
                     }
@@ -257,7 +258,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         for (final Player p : pDefined) {
-            List<Card> list = p.getCardsIn(origin);
+            CardCollectionView list = p.getCardsIn(origin);
 
             if (type != null && p == ai) {
                 // AI only "knows" about his information
@@ -265,7 +266,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        if (c.isType("Legendary")) {
+                        if (c.getType().isLegendary()) {
                             if (!ai.getCardsIn(ZoneType.Battlefield, c.getName()).isEmpty()) {
                                 return false;
                             }
@@ -408,7 +409,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         for (final Player p : pDefined) {
-            List<Card> list = p.getCardsIn(origin);
+            CardCollectionView list = p.getCardsIn(origin);
 
             // Computer should "know" his deck
             if (p == ai) {
@@ -419,7 +420,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return false;
             }
         }
-
         return true;
     }
 
@@ -435,10 +435,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @return a {@link forge.game.card.Card} object.
      */
     private static Card basicManaFixing(final Player ai, final List<Card> list) { // Search for a Basic Land
-
-        final List<Card> combined = new ArrayList<Card>(ai.getCardsIn(ZoneType.Battlefield));
-        combined.addAll(ai.getCardsIn(ZoneType.Hand));
-
+        final CardCollectionView combined = CardCollection.combine(ai.getCardsIn(ZoneType.Battlefield), ai.getCardsIn(ZoneType.Hand));
         final ArrayList<String> basics = new ArrayList<String>();
 
         // what types can I go get?
@@ -498,7 +495,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @param list
      * @return Card
      */
-    private static Card chooseCreature(final Player ai, List<Card> list) {
+    private static Card chooseCreature(final Player ai, CardCollection list) {
         // Creating a new combat for testing purposes. 
         Combat combat = new Combat(ai.getOpponent());
         for (Card att : ai.getOpponent().getCreaturesInPlay()) {
@@ -706,7 +703,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         sa.resetTargets();
-        List<Card> list = CardLists.getValidCards(game.getCardsIn(origin), tgt.getValidTgts(), ai, source);
+        CardCollection list = CardLists.getValidCards(game.getCardsIn(origin), tgt.getValidTgts(), ai, source);
         list = CardLists.getTargetableCards(list, sa);
         if (sa.hasParam("AITgts")) {
             list = CardLists.getValidCards(list, sa.getParam("AITgts"), sa.getActivatingPlayer(), source);
@@ -722,7 +719,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // Narrow down the list:
         if (origin.equals(ZoneType.Battlefield)) {
             // filter out untargetables
-            List<Card> aiPermanents = CardLists.filterControlledBy(list, ai);
+            CardCollectionView aiPermanents = CardLists.filterControlledBy(list, ai);
 
             // Don't blink cards that will die.
             aiPermanents = ComputerUtil.getSafeTargets(ai, sa, aiPermanents);
@@ -731,10 +728,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (tgt.getMinTargets(sa.getHostCard(), sa) <= 1) {
                 if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                     Combat currCombat = game.getCombat();
-                    List<Card> attackers =  currCombat.getAttackers();
+                    CardCollection attackers = currCombat.getAttackers();
                     ComputerUtilCard.sortByEvaluateCreature(attackers);
                     for (Card attacker : attackers) {
-                        List<Card> blockers = currCombat.getBlockers(attacker);
+                        CardCollection blockers = currCombat.getBlockers(attacker);
                         // Save my attacker by bouncing a blocker
                         if (attacker.getController().equals(ai) && attacker.getShieldCount() == 0
                         		&& ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, currCombat) 
@@ -795,7 +792,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 // Save combatants
                 else if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                     Combat combat = game.getCombat();
-                    final List<Card> combatants = CardLists.filter(aiPermanents, CardPredicates.Presets.CREATURES);
+                    final CardCollection combatants = CardLists.filter(aiPermanents, CardPredicates.Presets.CREATURES);
                     ComputerUtilCard.sortByEvaluateCreature(combatants);
 
                     for (final Card c : combatants) {
@@ -984,21 +981,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return true;
     }
 
-    /**
-     * <p>
-     * changeKnownUnpreferredTarget.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
-    private static boolean isUnpreferredTarget(final Player ai, final SpellAbility sa,
-            final boolean mandatory) {
+    private static boolean isUnpreferredTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
         if (!mandatory) {
             return false;
         }
@@ -1008,7 +991,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        List<Card> list = CardLists.getValidCards(ai.getGame().getCardsIn(origin), tgt.getValidTgts(), ai, source);
+        CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(origin), tgt.getValidTgts(), ai, source);
 
         // Narrow down the list:
         if (origin.equals(ZoneType.Battlefield)) {
@@ -1019,9 +1002,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // or save my about to die stuff
 
             // if Destination is exile, filter out my cards
-        } else if (origin.equals(ZoneType.Graveyard)) {
+        }
+        else if (origin.equals(ZoneType.Graveyard)) {
             // Retrieve from Graveyard to:
-
         }
 
         for (final Card c : sa.getTargets().getTargetCards()) {
@@ -1130,11 +1113,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return true;
     }
 
-    public static Card chooseCardToHiddenOriginChangeZone(ZoneType destination, List<ZoneType> origin, SpellAbility sa, List<Card> fetchList, Player player, final Player decider) {
-
-        if( fetchList.isEmpty() )
+    public static Card chooseCardToHiddenOriginChangeZone(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, Player player, final Player decider) {
+        if (fetchList.isEmpty()) {
             return null;
-
+        }
         if (sa.hasParam("AILogic") && sa.getParam("AILogic").equals("NeverBounceItself")) {
             Card source = sa.getHostCard();
             if (fetchList.contains(source)) {
@@ -1158,7 +1140,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    if (c.isType("Legendary")) {
+                    if (c.getType().isLegendary()) {
                         if (!decider.getCardsIn(ZoneType.Battlefield, c.getName()).isEmpty()) {
                             return false;
                         }
@@ -1198,13 +1180,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         } else {
             // Don't fetch another tutor with the same name
-            List<Card> sameNamed = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(sa.getHostCard().getName())));
+            CardCollection sameNamed = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(sa.getHostCard().getName())));
             if (origin.contains(ZoneType.Library) && !sameNamed.isEmpty()) {
                 fetchList = sameNamed;
             }
 
             // Does AI need a land?
-            List<Card> hand = decider.getCardsIn(ZoneType.Hand);
+            CardCollectionView hand = decider.getCardsIn(ZoneType.Hand);
             if (CardLists.filter(hand, Presets.LANDS).isEmpty() && CardLists.filter(decider.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() < 4) {
                 boolean canCastSomething = false;
                 for (Card cardInHand : hand) {
@@ -1256,7 +1238,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
     
 
     @Override
-    public Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional, Player targetedPlayer) {
+    public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
         // Called when looking for creature to attach aura or equipment
         return ComputerUtilCard.getBestAI(options);
     }
@@ -1265,7 +1247,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#chooseSinglePlayer(forge.game.player.Player, forge.card.spellability.SpellAbility, java.util.List)
      */
     @Override
-    public Player chooseSinglePlayer(Player ai, SpellAbility sa, Collection<Player> options) {
+    public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
         // Currently only used by Curse of Misfortunes, so this branch should never get hit
         // But just in case it does, just select the first option
         return Iterables.getFirst(options, null);

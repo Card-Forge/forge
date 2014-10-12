@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 
 import forge.ai.*;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
@@ -11,8 +12,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.game.combat.Combat;
-
-import java.util.List;
 
 public class DestroyAllAi extends SpellAbilityAi {
 
@@ -36,8 +35,8 @@ public class DestroyAllAi extends SpellAbilityAi {
         if (sa.hasParam("ValidCards")) {
             valid = sa.getParam("ValidCards");
         }
-        List<Card> humanlist =  CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
-        List<Card> computerlist = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
+        CardCollection humanlist = CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
+        CardCollection computerlist = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
         
         if (sa.usesTargeting()) {
             sa.resetTargets();
@@ -91,8 +90,8 @@ public class DestroyAllAi extends SpellAbilityAi {
             valid = valid.replace("X", Integer.toString(xPay));
         }
 
-        List<Card> humanlist = CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
-        List<Card> computerlist = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
+        CardCollection humanlist = CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
+        CardCollection computerlist = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
         if (sa.usesTargeting()) {
             sa.resetTargets();
             sa.getTargets().add(ai.getOpponent());

@@ -29,6 +29,7 @@ import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -42,6 +43,7 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+import forge.util.FCollectionView;
 import forge.util.Lang;
 import forge.util.TextUtil;
 
@@ -275,7 +277,7 @@ public class CombatUtil {
         }
 
         String valid = StringUtils.join(walkTypes, ",");
-        List<Card> defendingLands = defendingPlayer.getCardsIn(ZoneType.Battlefield);
+        CardCollectionView defendingLands = defendingPlayer.getCardsIn(ZoneType.Battlefield);
         for (Card c : defendingLands) {
             if (c.isValid(valid.split(","), defendingPlayer, attacker)) {
                 return true;
@@ -437,7 +439,7 @@ public class CombatUtil {
         final List<Card> attackersWithLure = new ArrayList<Card>();
         for (final Card attacker : attackers) {
             if (attacker.hasStartOfKeyword("All creatures able to block CARDNAME do so.")
-                    || (attacker.hasStartOfKeyword("All Walls able to block CARDNAME do so.") && blocker.isType("Wall"))
+                    || (attacker.hasStartOfKeyword("All Walls able to block CARDNAME do so.") && blocker.getType().hasSubtype("Wall"))
                     || (attacker.hasStartOfKeyword("All creatures with flying able to block CARDNAME do so.") && blocker.hasKeyword("Flying"))
                     || (attacker.hasStartOfKeyword("CARDNAME must be blocked if able.")
                             && combat.getBlockers(attacker).isEmpty())) {
@@ -545,7 +547,7 @@ public class CombatUtil {
         // if the attacker has no lure effect, but the blocker can block another
         // attacker with lure, the blocker can't block the former
         if (!attacker.hasKeyword("All creatures able to block CARDNAME do so.")
-                && !(attacker.hasStartOfKeyword("All Walls able to block CARDNAME do so.") && blocker.isType("Wall"))
+                && !(attacker.hasStartOfKeyword("All Walls able to block CARDNAME do so.") && blocker.getType().hasSubtype("Wall"))
                 && !(attacker.hasStartOfKeyword("All creatures with flying able to block CARDNAME do so.") && blocker.hasKeyword("Flying"))
                 && !(attacker.hasKeyword("CARDNAME must be blocked if able.") && combat.getBlockers(attacker).isEmpty())
                 && !(blocker.getMustBlockCards() != null && blocker.getMustBlockCards().contains(attacker))
@@ -1044,9 +1046,9 @@ public class CombatUtil {
         }
     }
 
-    public static List<Pair<Card, GameEntity>> getMandatoryAttackers(Player attackingPlayer, Combat combat, List<GameEntity> defenders) {
+    public static List<Pair<Card, GameEntity>> getMandatoryAttackers(Player attackingPlayer, Combat combat, FCollectionView<GameEntity> defenders) {
         List<Pair<Card, GameEntity>> attackers = new ArrayList<Pair<Card, GameEntity>>();
-        List<Card> possibleAttackers = attackingPlayer.getCardsIn(ZoneType.Battlefield);
+        CardCollectionView possibleAttackers = attackingPlayer.getCardsIn(ZoneType.Battlefield);
         for (Card c : Iterables.filter(possibleAttackers, CardPredicates.Presets.CREATURES)) {
             GameEntity mustAttack = c.getController().getMustAttackEntity() ;
             if (c.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {

@@ -4,19 +4,16 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TapAllEffect extends SpellAbilityEffect {
-
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
-     */
     @Override
     protected String getStackDescription(SpellAbility sa) {
         if (sa instanceof AbilitySub) {
@@ -36,17 +33,18 @@ public class TapAllEffect extends SpellAbilityEffect {
             card.clearRemembered();
         }
 
-        List<Card> cards = null;
+        CardCollectionView cards;
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         if (!sa.usesTargeting() && !sa.hasParam("Defined")) {
             cards = game.getCardsIn(ZoneType.Battlefield);
         } else {
-            cards = new ArrayList<Card>();
+            CardCollection cards2 = new CardCollection();
             for (final Player p : tgtPlayers) {
-                cards.addAll(p.getCardsIn(ZoneType.Battlefield));
+                cards2.addAll(p.getCardsIn(ZoneType.Battlefield));
             }
+            cards = cards2;
         }
 
         cards = AbilityUtils.filterListByType(cards, sa.getParam("ValidCards"), sa);

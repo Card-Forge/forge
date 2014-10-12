@@ -32,6 +32,8 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -58,6 +60,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.util.Aggregates;
+import forge.util.FCollection;
 import forge.util.Lang;
 import forge.util.MyRandom;
 
@@ -119,7 +122,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     /** A list of tokens not in play, but on their way.
      * This list is kept in order to not break ETB-replacement
      * on tokens. */
-    private List<Card> inboundTokens = new ArrayList<Card>();
+    private CardCollection inboundTokens = new CardCollection();
 
     private KeywordCollection keywords = new KeywordCollection();
     private Map<Long, KeywordsChange> changedKeywords = new ConcurrentSkipListMap<Long, KeywordsChange>();
@@ -131,7 +134,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private final Map<ZoneType, PlayerZone> zones = new EnumMap<ZoneType, PlayerZone>(ZoneType.class);
 
-    private List<Card> currentPlanes = new ArrayList<Card>();
+    private CardCollection currentPlanes = new CardCollection();
     private ArrayList<String> prowl = new ArrayList<String>();
 
     private PlayerStatistics stats = new PlayerStatistics();
@@ -145,8 +148,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     private final Game game;
     private boolean triedToDrawFromEmptyLibrary = false;
     private boolean isPlayingExtraTrun = false;
-    private List<Card> lostOwnership = new ArrayList<Card>();
-    private List<Card> gainedOwnership = new ArrayList<Card>();
+    private CardCollection lostOwnership = new CardCollection();
+    private CardCollection gainedOwnership = new CardCollection();
     private int numManaConversion = 0;
 
     private final AchievementTracker achievementTracker = new AchievementTracker();
@@ -260,8 +263,8 @@ public class Player extends GameEntity implements Comparable<Player> {
      * returns all opponents.
      * Should keep player relations somewhere in the match structure
      */
-    public final List<Player> getOpponents() {
-        List<Player> result = new ArrayList<Player>();
+    public final FCollection<Player> getOpponents() {
+        FCollection<Player> result = new FCollection<Player>();
         for (Player p : game.getPlayers()) {
             if (p.isOpponentOf(this)) {
                 result.add(p);
@@ -308,8 +311,8 @@ public class Player extends GameEntity implements Comparable<Player> {
      * returns allied players.
      * Should keep player relations somewhere in the match structure
      */
-    public final List<Player> getAllies() {
-        List<Player> result = new ArrayList<Player>();
+    public final FCollection<Player> getAllies() {
+        FCollection<Player> result = new FCollection<Player>();
         for (Player p : game.getPlayers()) {
             if (!p.isOpponentOf(this)) {
                 result.add(p);
@@ -322,8 +325,8 @@ public class Player extends GameEntity implements Comparable<Player> {
      * returns all other players.
      * Should keep player relations somewhere in the match structure
      */
-    public final List<Player> getAllOtherPlayers() {
-        List<Player> result = new ArrayList<Player>(game.getPlayers());
+    public final FCollection<Player> getAllOtherPlayers() {
+        FCollection<Player> result = new FCollection<Player>(game.getPlayers());
         result.remove(this);
         return result;
     }
@@ -694,7 +697,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         boolean DEBUGShieldsWithEffects = false;
         while (!getPreventNextDamageWithEffect().isEmpty() && restDamage != 0) {
             TreeMap<Card, Map<String, String>> shieldMap = getPreventNextDamageWithEffect();
-            List<Card> preventionEffectSources = new ArrayList<Card>(shieldMap.keySet());
+            CardCollection preventionEffectSources = new CardCollection(shieldMap.keySet());
             Card shieldSource = preventionEffectSources.get(0);
             if (preventionEffectSources.size() > 1) {
                 Map<String, Card> choiceMap = new TreeMap<String, Card>();
@@ -736,14 +739,14 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
 
             boolean apiIsEffect = (shieldSA.getApi() == ApiType.Effect);
-            List<Card> cardsInCommand = null;
+            CardCollectionView cardsInCommand = null;
             if (apiIsEffect) {
                 cardsInCommand = getGame().getCardsIn(ZoneType.Command);
             }
 
             getController().playSpellAbilityNoStack(shieldSA, true);
             if (apiIsEffect) {
-                List<Card> newCardsInCommand = getGame().getCardsIn(ZoneType.Command);
+                CardCollection newCardsInCommand = new CardCollection(getGame().getCardsIn(ZoneType.Command));
                 newCardsInCommand.removeAll(cardsInCommand);
                 if (!newCardsInCommand.isEmpty()) {
                     newCardsInCommand.get(0).setSVar("PreventedDamage", "Number$" + Integer.toString(dmgToBePrevented));
@@ -803,7 +806,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final int getAssignedDamage(final String type) {
         final Map<Card, Integer> valueMap = new HashMap<Card, Integer>();
         for (final Card c : assignedDamage.keySet()) {
-            if (c.isType(type)) {
+            if (c.getType().hasStringType(type)) {
                 valueMap.put(c, assignedDamage.get(c));
             }
         }
@@ -1026,7 +1029,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         return true;
     }
 
-    public final List<Card> drawCard() {
+    public final CardCollectionView drawCard() {
         return drawCards(1);
     }
 
@@ -1034,9 +1037,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         return !getZone(ZoneType.Hand).isEmpty();
     }
 
-    public final List<Card> drawCards(final int n) {
-        final List<Card> drawn = new ArrayList<Card>();
-
+    public final CardCollectionView drawCards(final int n) {
+        final CardCollection drawn = new CardCollection();
         for (int i = 0; i < n; i++) {
             if (!canDraw()) {
                 return drawn;
@@ -1047,10 +1049,10 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     /**
-     * @return a List<Card> of cards actually drawn
+     * @return a CardCollectionView of cards actually drawn
      */
-    private List<Card> doDraw() {
-        final List<Card> drawn = new ArrayList<Card>();
+    private CardCollectionView doDraw() {
+        final CardCollection drawn = new CardCollection();
         final PlayerZone library = getZone(ZoneType.Library);
 
         // Replacement effects
@@ -1069,7 +1071,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
             if (numDrawnThisTurn == 0) {
                 boolean reveal = false;
-                final List<Card> cards = getCardsIn(ZoneType.Battlefield);
+                final CardCollectionView cards = getCardsIn(ZoneType.Battlefield);
                 for (final Card card : cards) {
                     if (card.hasKeyword("Reveal the first card you draw each turn")
                             || (card.hasKeyword("Reveal the first card you draw on each of your turns") && game.getPhaseHandler().isPlayerTurn(this))) {
@@ -1118,53 +1120,51 @@ public class Player extends GameEntity implements Comparable<Player> {
         view.updateZone(zone);
     }
 
-    public final List<Card> getCardsIn(final ZoneType zoneType) {
+    public final CardCollectionView getCardsIn(final ZoneType zoneType) {
         return getCardsIn(zoneType, true);
     }
 
     /**
-     * gets a list of all cards in the requested zone. This function makes a List<Card> from Card[].
+     * gets a list of all cards in the requested zone. This function makes a CardCollectionView from Card[].
      */
-    public final List<Card> getCardsIn(final ZoneType zoneType, boolean filterOutPhasedOut) {
-        List<Card> result;
+    public final CardCollectionView getCardsIn(final ZoneType zoneType, boolean filterOutPhasedOut) {
         if (zoneType == ZoneType.Stack) {
-            result = new ArrayList<Card>();
+            CardCollection cards = new CardCollection();
             for (Card c : game.getStackZone().getCards()) {
                 if (c.getOwner().equals(this)) {
-                    result.add(c);
+                    cards.add(c);
                 }
             }
+            return cards;
         }
-        else {
-            PlayerZone zone = getZone(zoneType);
-            result = zone == null ? null : zone.getCards(filterOutPhasedOut);
-        }
-        return result;
+
+        PlayerZone zone = getZone(zoneType);
+        return zone == null ? CardCollection.EMPTY : zone.getCards(filterOutPhasedOut);
     }
 
-    public final List<Card> getCardsIncludePhasingIn(final ZoneType zone) {
+    public final CardCollectionView getCardsIncludePhasingIn(final ZoneType zone) {
         return getCardsIn(zone, false);
     }
 
     /**
-     * gets a list of first N cards in the requested zone. This function makes a List<Card> from Card[].
+     * gets a list of first N cards in the requested zone. This function makes a CardCollectionView from Card[].
      */
-    public final List<Card> getCardsIn(final ZoneType zone, final int n) {
-        return Lists.newArrayList(Iterables.limit(getCardsIn(zone), n));
+    public final CardCollectionView getCardsIn(final ZoneType zone, final int n) {
+        return new CardCollection(Iterables.limit(getCardsIn(zone), n));
     }
 
     /**
      * gets a list of all cards in a given player's requested zones.
      */
-    public final List<Card> getCardsIn(final Iterable<ZoneType> zones) {
-        final List<Card> result = new ArrayList<Card>();
+    public final CardCollectionView getCardsIn(final Iterable<ZoneType> zones) {
+        final CardCollection result = new CardCollection();
         for (final ZoneType z : zones) {
             result.addAll(getCardsIn(z));
         }
         return result;
     }
-    public final List<Card> getCardsIn(final ZoneType[] zones) {
-        final List<Card> result = new ArrayList<Card>();
+    public final CardCollectionView getCardsIn(final ZoneType[] zones) {
+        final CardCollection result = new CardCollection();
         for (final ZoneType z : zones) {
             result.addAll(getCardsIn(z));
         }
@@ -1173,14 +1173,14 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     /**
      * gets a list of all cards with requested cardName in a given player's
-     * requested zone. This function makes a List<Card> from Card[].
+     * requested zone. This function makes a CardCollectionView from Card[].
      */
-    public final List<Card> getCardsIn(final ZoneType zone, final String cardName) {
+    public final CardCollectionView getCardsIn(final ZoneType zone, final String cardName) {
         return CardLists.filter(getCardsIn(zone), CardPredicates.nameEquals(cardName));
     }
 
-    public List<Card> getCardsActivableInExternalZones(boolean includeCommandZone) {
-        final List<Card> cl = new ArrayList<Card>();
+    public CardCollectionView getCardsActivableInExternalZones(boolean includeCommandZone) {
+        final CardCollection cl = new CardCollection();
 
         cl.addAll(getZone(ZoneType.Graveyard).getCardsPlayerCanActivate(this));
         cl.addAll(getZone(ZoneType.Exile).getCardsPlayerCanActivate(this));
@@ -1202,15 +1202,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         return cl;
     }
 
-    public final List<Card> getAllCards() {
-        List<Card> allExcStack = getCardsIn(Player.ALL_ZONES);
-        allExcStack.addAll(getCardsIn(ZoneType.Stack));
-        allExcStack.addAll(inboundTokens);
-        return allExcStack;
+    public final CardCollectionView getAllCards() {
+        return CardCollection.combine(getCardsIn(Player.ALL_ZONES), getCardsIn(ZoneType.Stack), inboundTokens);
     }
 
-    protected final List<Card> getDredge() {
-        final List<Card> dredge = new ArrayList<Card>();
+    protected final CardCollectionView getDredge() {
+        final CardCollection dredge = new CardCollection();
         int cntLibrary = getCardsIn(ZoneType.Library).size();
         for (final Card c : getCardsIn(ZoneType.Graveyard)) {
             int nDr = getDredgeNumber(c);
@@ -1307,12 +1304,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         numCardsInHandStartedThisTurnWith = num;
     }
 
-    public final List<Card> mill(final int n) {
+    public final CardCollectionView mill(final int n) {
         return mill(n, ZoneType.Graveyard, false);
     }
-    public final List<Card> mill(final int n, final ZoneType zone, final boolean bottom) {
-        final List<Card> lib = new ArrayList<Card>(getCardsIn(ZoneType.Library));
-        final List<Card> milled = new ArrayList<Card>();
+    public final CardCollectionView mill(final int n, final ZoneType zone, final boolean bottom) {
+        final CardCollectionView lib = getCardsIn(ZoneType.Library);
+        final CardCollection milled = new CardCollection();
 
         final int max = Math.min(n, lib.size());
 
@@ -1330,7 +1327,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final void shuffle(final SpellAbility sa) {
-        final List<Card> list = Lists.newArrayList(getCardsIn(ZoneType.Library));
+        final CardCollection list = new CardCollection(getCardsIn(ZoneType.Library));
 
         if (list.size() <= 1) {
             return;
@@ -1607,7 +1604,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasMetalcraft() {
-        final List<Card> list = CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.ARTIFACTS);
+        final CardCollectionView list = CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.ARTIFACTS);
         return list.size() >= 3;
     }
 
@@ -1620,7 +1617,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasLandfall() {
-        final List<Card> list = getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null);
+        final CardCollectionView list = getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null);
         return Iterables.any(list, CardPredicates.Presets.LANDS);
     }
 
@@ -1634,8 +1631,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public boolean hasFerocious() {
-        final List<Card> list = getCreaturesInPlay();
-        final List<Card> ferocious = CardLists.filter(list, new Predicate<Card>() {
+        final CardCollectionView list = getCreaturesInPlay();
+        final CardCollectionView ferocious = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return c.getNetAttack() > 3;
@@ -1817,8 +1814,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         } else if (property.startsWith("withMore")) {
             final String cardType = property.split("sThan")[0].substring(8);
             final Player controller = "Active".equals(property.split("sThan")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
-            final List<Card> oppList = CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
-            final List<Card> yourList = CardLists.filter(controller.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
+            final CardCollectionView oppList = CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
+            final CardCollectionView yourList = CardLists.filter(controller.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
             if (oppList.size() <= yourList.size()) {
                 return false;
             }
@@ -1826,8 +1823,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             final String cardType = property.split("More")[1].split("sThan")[0];
             final int amount = Integer.parseInt(property.substring(11, 12));
             final Player controller = "Active".equals(property.split("sThan")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
-            final List<Card> oppList = CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
-            final List<Card> yourList = CardLists.filter(controller.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
+            final CardCollectionView oppList = CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
+            final CardCollectionView yourList = CardLists.filter(controller.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
             System.out.println(yourList.size());
             if (oppList.size() < yourList.size() + amount) {
                 return false;
@@ -1843,8 +1840,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         } else if (property.startsWith("hasFewer")) {
             final Player controller = "Active".equals(property.split("Than")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
             if (property.substring(8).startsWith("CreaturesInYard")) {
-                final List<Card> oppList = CardLists.filter(getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
-                final List<Card> yourList = CardLists.filter(controller.getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
+                final CardCollectionView oppList = CardLists.filter(getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
+                final CardCollectionView yourList = CardLists.filter(controller.getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
                 if (oppList.size() >= yourList.size()) {
                     return false;
                 }
@@ -2122,14 +2119,14 @@ public class Player extends GameEntity implements Comparable<Player> {
     /**
      * use to get a list of creatures in play for a given player.
      */
-    public List<Card> getCreaturesInPlay() {
+    public CardCollection getCreaturesInPlay() {
         return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
     }
 
     /**
      * use to get a list of all lands a given player has on the battlefield.
      */
-    public List<Card> getLandsInPlay() {
+    public CardCollection getLandsInPlay() {
         return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.LANDS);
     }
 
@@ -2141,7 +2138,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         return getZone(ZoneType.Command).contains(CardPredicates.nameEquals(cardName));
     }
 
-    public List<Card> getColoredCardsInPlay(final String color) {
+    public CardCollectionView getColoredCardsInPlay(final String color) {
         return CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.isColor(MagicColor.fromName(color)));
     }
 
@@ -2251,14 +2248,14 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Then runs triggers.
      */
     public void planeswalk() {
-        planeswalkTo(Arrays.asList(getZone(ZoneType.PlanarDeck).get(0)));
+        planeswalkTo(new CardCollection(getZone(ZoneType.PlanarDeck).get(0)));
     }
 
     /**
      * Puts the planes in the argument and puts them face up in the command zone.
      * Then runs triggers.
      */
-    public void planeswalkTo(final List<Card> destinations) {
+    public void planeswalkTo(final CardCollectionView destinations) {
         System.out.println(getName() + ": planeswalk to " + destinations.toString());
         currentPlanes.addAll(destinations);
 
@@ -2286,7 +2283,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (!currentPlanes.isEmpty()) {
             //Run PlaneswalkedFrom triggers here.
             HashMap<String,Object> runParams = new HashMap<String,Object>();
-            runParams.put("Card", new ArrayList<Card>(currentPlanes));
+            runParams.put("Card", new CardCollection(currentPlanes));
             game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedFrom, runParams,false);
 
             for (Card c : currentPlanes) {
@@ -2311,7 +2308,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         while (true) {
             firstPlane = getZone(ZoneType.PlanarDeck).get(0);
             getZone(ZoneType.PlanarDeck).remove(firstPlane);
-            if (firstPlane.getType().contains("Phenomenon")) {
+            if (firstPlane.getType().isPhenomenon()) {
                 getZone(ZoneType.PlanarDeck).add(firstPlane);
             }
             else {
@@ -2325,7 +2322,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final void resetAttackedThisCombat() {
         // resets the status of attacked/blocked this phase
-        List<Card> list = CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+        CardCollectionView list = CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
 
         for (int i = 0; i < list.size(); i++) {
             final Card c = list.get(i);
@@ -2448,7 +2445,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
     
         // Schemes
-        List<Card> sd = new ArrayList<Card>();
+        CardCollection sd = new CardCollection();
         for (IPaperCard cp : registeredPlayer.getSchemes()) {
             sd.add(Card.fromPaperCard(cp, this));
         }
@@ -2460,7 +2457,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Planes
-        List<Card> l = new ArrayList<Card>();
+        CardCollection l = new CardCollection();
         for (IPaperCard cp : registeredPlayer.getPlanes()) {
             l.add(Card.fromPaperCard(cp, this));
         }
@@ -2530,11 +2527,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
     }
 
-    public List<Card> getLostOwnership() {
+    public CardCollectionView getLostOwnership() {
         return lostOwnership;
     }
 
-    public List<Card> getGainedOwnership() {
+    public CardCollectionView getGainedOwnership() {
         return gainedOwnership;
     }
 

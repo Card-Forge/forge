@@ -7,7 +7,6 @@ import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
-import java.util.Collection;
 import java.util.List;
 
 public class HauntAi extends SpellAbilityAi {
@@ -22,7 +21,7 @@ public class HauntAi extends SpellAbilityAi {
     
 
     @Override
-    public Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> creats, boolean isOptional, Player targetedPlayer) {
+    public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> creats, boolean isOptional, Player targetedPlayer) {
         final List<Card> oppCreats = CardLists.filterControlledBy(creats, ai.getOpponents());
         return ComputerUtilCard.getWorstCreatureAI(oppCreats.isEmpty() ? creats : oppCreats);
     }

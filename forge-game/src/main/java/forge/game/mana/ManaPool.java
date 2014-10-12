@@ -208,7 +208,7 @@ public class ManaPool implements Iterable<Mana> {
                 continue;
             }
 
-            if (StringUtils.isNotBlank(restriction) && !mana.getSourceCard().isType(restriction)) {
+            if (StringUtils.isNotBlank(restriction) && !mana.getSourceCard().getType().hasStringType(restriction)) {
                 continue;
             }
 
@@ -235,7 +235,7 @@ public class ManaPool implements Iterable<Mana> {
         if (sa.isSpell() && sa.getHostCard() != null) {
             final Card host = sa.getHostCard();
             if (mana.addsKeywords(sa) && mana.addsKeywordsType()
-                    && host.isType(mana.getManaAbility().getAddsKeyowrdsType())) {
+                    && host.getType().hasStringType(mana.getManaAbility().getAddsKeyowrdsType())) {
                 final long timestamp = sa.getHostCard().getGame().getNextTimestamp();
                 final List<String> kws = Arrays.asList(mana.getAddedKeywords().split(" & "));
                 host.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);

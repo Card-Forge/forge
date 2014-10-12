@@ -53,6 +53,8 @@ import forge.game.GameType;
 import forge.game.PlanarDice;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardShields;
@@ -103,6 +105,8 @@ import forge.match.input.InputSelectEntitiesFromList;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.FCollection;
+import forge.util.FCollectionView;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.MessageUtil;
@@ -274,7 +278,7 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public Map<Card, Integer> assignCombatDamage(final Card attacker,
-            final List<Card> blockers, final int damageDealt,
+            final CardCollectionView blockers, final int damageDealt,
             final GameEntity defender, final boolean overrideOrder) {
         // Attacker is a poor name here, since the creature assigning damage
         // could just as easily be the blocker.
@@ -313,19 +317,19 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public List<Card> choosePermanentsToSacrifice(SpellAbility sa, int min, int max, List<Card> valid, String message) {
+    public CardCollectionView choosePermanentsToSacrifice(SpellAbility sa, int min, int max, CardCollectionView valid, String message) {
         return choosePermanentsTo(min, max, valid, message, "sacrifice");
     }
 
     @Override
-    public List<Card> choosePermanentsToDestroy(SpellAbility sa, int min, int max, List<Card> valid, String message) {
+    public CardCollectionView choosePermanentsToDestroy(SpellAbility sa, int min, int max, CardCollectionView valid, String message) {
         return choosePermanentsTo(min, max, valid, message, "destroy");
     }
 
-    private List<Card> choosePermanentsTo(int min, int max, List<Card> valid, String message, String action) {
+    private CardCollectionView choosePermanentsTo(int min, int max, CardCollectionView valid, String message, String action) {
         max = Math.min(max, valid.size());
         if (max <= 0) {
-            return new ArrayList<Card>();
+            return CardCollection.EMPTY;
         }
 
         StringBuilder builder = new StringBuilder("Select ");
@@ -338,21 +342,17 @@ public class PlayerControllerHuman extends PlayerController {
         inp.setMessage(builder.toString());
         inp.setCancelAllowed(min == 0);
         inp.showAndWait();
-        return Lists.newArrayList(inp.getSelected());
+        return new CardCollection(inp.getSelected());
     }
 
-
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#chooseCardsForEffect(java.util.Collection, forge.card.spellability.SpellAbility, java.lang.String, int, boolean)
-     */
     @Override
-    public List<Card> chooseCardsForEffect(List<Card> sourceList, SpellAbility sa, String title, int min, int max, boolean isOptional) {
+    public CardCollectionView chooseCardsForEffect(CardCollectionView sourceList, SpellAbility sa, String title, int min, int max, boolean isOptional) {
         // If only one card to choose, use a dialog box.
         // Otherwise, use the order dialog to be able to grab multiple cards in one shot
-        
+
         if (max == 1) {
             Card singleChosen = chooseSingleEntityForEffect(sourceList, sa, title, isOptional);
-            return singleChosen == null ?  Lists.<Card>newArrayList() : Lists.newArrayList(singleChosen);
+            return singleChosen == null ? CardCollection.EMPTY : new CardCollection(singleChosen);
         }
 
         MatchUtil.getController().setPanelSelection(CardView.get(sa.getHostCard()));
@@ -373,7 +373,7 @@ public class PlayerControllerHuman extends PlayerController {
             sc.setMessage(title);
             sc.setCancelAllowed(isOptional);
             sc.showAndWait();
-            return Lists.newArrayList(sc.getSelected());
+            return new CardCollection(sc.getSelected());
         }
 
         tempShowCards(sourceList);
@@ -385,7 +385,7 @@ public class PlayerControllerHuman extends PlayerController {
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T extends GameEntity> T chooseSingleEntityForEffect(Collection<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer) {
+    public <T extends GameEntity> T chooseSingleEntityForEffect(FCollectionView<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer) {
         // Human is supposed to read the message and understand from it what to choose
         if (optionList.isEmpty()) {
             if (delayedReveal != null) {
@@ -519,7 +519,7 @@ public class PlayerControllerHuman extends PlayerController {
         else {
             final String prompt = String.format("%s, you %s\n\nWho would you like to start this game?", 
                     player.getName(), isFirstGame ? " have won the coin toss." : " lost the last game.");
-            final InputSelectEntitiesFromList<Player> input = new InputSelectEntitiesFromList<>(this, 1, 1, game.getPlayersInTurnOrder());
+            final InputSelectEntitiesFromList<Player> input = new InputSelectEntitiesFromList<Player>(this, 1, 1, new FCollection<Player>(game.getPlayersInTurnOrder()));
             input.setMessage(prompt);
             input.showAndWait();
             return input.getFirstSelected();
@@ -527,7 +527,7 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public List<Card> orderBlockers(final Card attacker, final List<Card> blockers) {
+    public CardCollection orderBlockers(final Card attacker, final CardCollection blockers) {
         final CardView vAttacker = CardView.get(attacker);
         MatchUtil.getController().setPanelSelection(vAttacker);
         final List<CardView> choices = SGuiChoose.order("Choose Damage Order for " + vAttacker, "Damaged First", CardView.getCollection(blockers), vAttacker);
@@ -535,7 +535,7 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public List<Card> orderBlocker(final Card attacker, final Card blocker, final List<Card> oldBlockers) {
+    public CardCollection orderBlocker(final Card attacker, final Card blocker, final CardCollection oldBlockers) {
         final CardView vAttacker = CardView.get(attacker);
         MatchUtil.getController().setPanelSelection(vAttacker);
         final List<CardView> choices = SGuiChoose.insertInList("Choose blocker after which to place " + vAttacker + " in damage order; cancel to place it first", CardView.get(blocker), CardView.getCollection(oldBlockers));
@@ -543,18 +543,15 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public List<Card> orderAttackers(final Card blocker, final List<Card> attackers) {
+    public CardCollection orderAttackers(final Card blocker, final CardCollection attackers) {
         final CardView vBlocker = CardView.get(blocker);
         MatchUtil.getController().setPanelSelection(vBlocker);
         final List<CardView> choices = SGuiChoose.order("Choose Damage Order for " + vBlocker, "Damaged First", CardView.getCollection(attackers), vBlocker);
         return Card.getList(choices);
     }
 
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#reveal(java.lang.String, java.util.List, forge.game.zone.ZoneType, forge.game.player.Player)
-     */
     @Override
-    public void reveal(Collection<Card> cards, ZoneType zone, Player owner, String message) {
+    public void reveal(CardCollectionView cards, ZoneType zone, Player owner, String message) {
         if (StringUtils.isBlank(message)) {
             message = "Looking at cards in {player's} " + zone.name().toLowerCase();
         }
@@ -574,9 +571,9 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public ImmutablePair<List<Card>, List<Card>> arrangeForScry(List<Card> topN) {
-        List<Card> toBottom = null;
-        List<Card> toTop = null;
+    public ImmutablePair<CardCollection, CardCollection> arrangeForScry(CardCollection topN) {
+        CardCollection toBottom = null;
+        CardCollection toTop = null;
 
         tempShowCards(topN);
         if (topN.size() == 1) {
@@ -588,8 +585,8 @@ public class PlayerControllerHuman extends PlayerController {
             }
         }
         else {
-            toBottom = SGuiChoose.many("Select cards to be put on the bottom of your library", "Cards to put on the bottom", -1, topN, null); 
-            topN.removeAll(toBottom);
+            toBottom = new CardCollection(SGuiChoose.many("Select cards to be put on the bottom of your library", "Cards to put on the bottom", -1, topN, null));
+            topN.removeAll((Collection<?>)toBottom);
             if (topN.isEmpty()) {
                 toTop = null;
             }
@@ -597,7 +594,7 @@ public class PlayerControllerHuman extends PlayerController {
                 toTop = topN;
             }
             else {
-                toTop = SGuiChoose.order("Arrange cards to be put on top of your library", "Cards arranged", topN, null); 
+                toTop = new CardCollection(SGuiChoose.order("Arrange cards to be put on top of your library", "Cards arranged", topN, null)); 
             }
         }
         endTempShowCards();
@@ -613,7 +610,7 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public List<Card> orderMoveToZoneList(List<Card> cards, ZoneType destinationZone) {
+    public CardCollectionView orderMoveToZoneList(CardCollectionView cards, ZoneType destinationZone) {
         List<CardView> choices;
         tempShowCards(cards);
         switch (destinationZone) {
@@ -645,7 +642,7 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> valid, int min, int max) {
+    public CardCollectionView chooseCardsToDiscardFrom(Player p, SpellAbility sa, CardCollection valid, int min, int max) {
         if (p != player) {
             tempShowCards(valid);
             final List<CardView> choices = SGuiChoose.many("Choose " + min + " card" + (min != 1 ? "s" : "") + " to discard",
@@ -657,7 +654,7 @@ public class PlayerControllerHuman extends PlayerController {
         InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid);
         inp.setMessage(sa.hasParam("AnyNumber") ? "Discard up to %d card(s)" : "Discard %d card(s)");
         inp.showAndWait();
-        return Lists.newArrayList(inp.getSelected());
+        return new CardCollection(inp.getSelected());
     }
 
     @Override
@@ -669,8 +666,8 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public List<Card> chooseCardsToDelve(int colorLessAmount, List<Card> grave) {
-        List<Card> toExile = new ArrayList<Card>();
+    public CardCollectionView chooseCardsToDelve(int colorLessAmount, CardCollection grave) {
+        CardCollection toExile = new CardCollection();
         int cardsInGrave = Math.min(colorLessAmount, grave.size());
         final Integer[] cntChoice = new Integer[cardsInGrave + 1];
         for (int i = 0; i <= cardsInGrave; i++) {
@@ -720,14 +717,14 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.game.player.PlayerController#chooseCardsToDiscardUnlessType(int, java.lang.String, forge.card.spellability.SpellAbility)
      */
     @Override
-    public List<Card> chooseCardsToDiscardUnlessType(int num, List<Card> hand, final String uType, SpellAbility sa) {
+    public CardCollectionView chooseCardsToDiscardUnlessType(int num, CardCollectionView hand, final String uType, SpellAbility sa) {
         final InputSelectEntitiesFromList<Card> target = new InputSelectEntitiesFromList<Card>(this, num, num, hand) {
             private static final long serialVersionUID = -5774108410928795591L;
 
             @Override
             protected boolean hasAllTargets() {
                 for (Card c : selected) {
-                    if (c.isType(uType)) {
+                    if (c.getType().hasStringType(uType)) {
                         return true;
                     }
                 }
@@ -736,7 +733,7 @@ public class PlayerControllerHuman extends PlayerController {
         };
         target.setMessage("Select %d card(s) to discard, unless you discard a " + uType + ".");
         target.showAndWait();
-        return Lists.newArrayList(target.getSelected());
+        return (CardCollectionView)target.getSelected();
     }
 
     /* (non-Javadoc)
@@ -783,7 +780,7 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public List<Card> getCardsToMulligan(boolean isCommander, Player firstPlayer) {
+    public CardCollectionView getCardsToMulligan(boolean isCommander, Player firstPlayer) {
         final InputConfirmMulligan inp = new InputConfirmMulligan(this, player, firstPlayer, isCommander);
         inp.showAndWait();
         return inp.isKeepHand() ? null : isCommander ? inp.getSelectedCards() : player.getCardsIn(ZoneType.Hand);
@@ -911,7 +908,7 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public List<Card> chooseCardsToDiscardToMaximumHandSize(int nDiscard) {
+    public CardCollection chooseCardsToDiscardToMaximumHandSize(int nDiscard) {
         final int max = player.getMaxHandSize();
 
         InputSelectCardsFromList inp = new InputSelectCardsFromList(this, nDiscard, nDiscard, player.getZone(ZoneType.Hand).getCards());
@@ -920,25 +917,19 @@ public class PlayerControllerHuman extends PlayerController {
         inp.setMessage(message);
         inp.setCancelAllowed(false);
         inp.showAndWait();
-        return Lists.newArrayList(inp.getSelected());
+        return new CardCollection(inp.getSelected());
     }
 
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#chooseCardsToRevealFromHand(int, int, java.util.List)
-     */
     @Override
-    public List<Card> chooseCardsToRevealFromHand(int min, int max, List<Card> valid) {
+    public CardCollectionView chooseCardsToRevealFromHand(int min, int max, CardCollectionView valid) {
         max = Math.min(max, valid.size());
         min = Math.min(min, max);
         InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid);
         inp.setMessage("Choose Which Cards to Reveal");
         inp.showAndWait();
-        return Lists.newArrayList(inp.getSelected());
+        return new CardCollection(inp.getSelected());
     }
 
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#payManaOptional(forge.Card, forge.card.cost.Cost)
-     */
     @Override
     public boolean payManaOptional(Card c, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose) {
         if (sa == null && cost.isOnlyManaCost() && cost.getTotalMana().isZero() 
@@ -948,12 +939,9 @@ public class PlayerControllerHuman extends PlayerController {
         return HumanPlay.payCostDuringAbilityResolve(this, player, c, cost, sa, prompt);
     }
 
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#chooseSaToActivateFromOpeningHand(java.util.List)
-     */
     @Override
     public List<SpellAbility> chooseSaToActivateFromOpeningHand(List<SpellAbility> usableFromOpeningHand) {
-        List<Card> srcCards = new ArrayList<Card>();
+        CardCollection srcCards = new CardCollection();
         for (SpellAbility sa : usableFromOpeningHand) {
             srcCards.add(sa.getHostCard());
         }
@@ -974,11 +962,6 @@ public class PlayerControllerHuman extends PlayerController {
         return result;
     }
 
-    // end of not related candidates for move.
-
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#chooseBinary(java.lang.String, boolean)
-     */
     @Override
     public boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice, Boolean defaultVal) {
         String[] labels = new String[]{"Option1", "Option2"};
@@ -1163,7 +1146,7 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, List<Player> allPayers) {
+    public boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, FCollectionView<Player> allPayers) {
         // if it's paid by the AI already the human can pay, but it won't change anything
         return HumanPlay.payCostDuringAbilityResolve(this, player, sa.getHostCard(), cost, sa, null);
     }
@@ -1215,7 +1198,7 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public boolean chooseCardsPile(SpellAbility sa, List<Card> pile1, List<Card> pile2, boolean faceUp) {
+    public boolean chooseCardsPile(SpellAbility sa, CardCollectionView pile1, CardCollectionView pile2, boolean faceUp) {
         if (!faceUp) {
             final String p1Str = String.format("Pile 1 (%s cards)", pile1.size());
             final String p2Str = String.format("Pile 2 (%s cards)", pile2.size());
@@ -1283,7 +1266,7 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public Map<Card, ManaCostShard> chooseCardsForConvoke(SpellAbility sa, ManaCost manaCost, List<Card> untappedCreats) {
+    public Map<Card, ManaCostShard> chooseCardsForConvoke(SpellAbility sa, ManaCost manaCost, CardCollectionView untappedCreats) {
         InputSelectCardsForConvoke inp = new InputSelectCardsForConvoke(this, player, manaCost, untappedCreats);
         inp.showAndWait();
         return inp.getConvokeMap();
@@ -1301,7 +1284,7 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public Card chooseSingleCardForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, List<Card> fetchList, DelayedReveal delayedReveal, String selectPrompt, boolean isOptional, Player decider) {
+    public Card chooseSingleCardForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, DelayedReveal delayedReveal, String selectPrompt, boolean isOptional, Player decider) {
         return chooseSingleEntityForEffect(fetchList, delayedReveal, sa, selectPrompt, isOptional, decider);
     }
 
@@ -1576,13 +1559,13 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         private void setupPlayerState(int life, Map<ZoneType, String> cardTexts, final Player p) {
-            Map<ZoneType, List<Card>> humanCards = new EnumMap<ZoneType, List<Card>>(ZoneType.class);
+            Map<ZoneType, CardCollectionView> humanCards = new EnumMap<ZoneType, CardCollectionView>(ZoneType.class);
             for(Entry<ZoneType, String> kv : cardTexts.entrySet()) {
                 humanCards.put(kv.getKey(), processCardsForZone(kv.getValue().split(";"), p));
             }
 
             if (life > 0) p.setLife(life, null);
-            for (Entry<ZoneType, List<Card>> kv : humanCards.entrySet()) {
+            for (Entry<ZoneType, CardCollectionView> kv : humanCards.entrySet()) {
                 if (kv.getKey() == ZoneType.Battlefield) {
                     for (final Card c : kv.getValue()) {
                         p.getZone(ZoneType.Hand).add(c);
@@ -1606,8 +1589,8 @@ public class PlayerControllerHuman extends PlayerController {
          *            a {@link forge.game.player.Player} object.
          * @return a {@link forge.CardList} object.
          */
-        private List<Card> processCardsForZone(final String[] data, final Player player) {
-            final List<Card> cl = new ArrayList<Card>();
+        private CardCollectionView processCardsForZone(final String[] data, final Player player) {
+            final CardCollection cl = new CardCollection();
             for (final String element : data) {
                 final String[] cardinfo = element.trim().split("\\|");
 
@@ -1641,13 +1624,6 @@ public class PlayerControllerHuman extends PlayerController {
             return cl;
         }
 
-        /**
-         * <p>
-         * Tutor.
-         * </p>
-         * 
-         * @since 1.0.15
-         */
         public void tutorForCard() {
             Player pPriority = game.getPhaseHandler().getPriorityPlayer();
             if (pPriority == null) {
@@ -1655,7 +1631,7 @@ public class PlayerControllerHuman extends PlayerController {
                 return;
             }
 
-            final List<Card> lib = pPriority.getCardsIn(ZoneType.Library);
+            final CardCollection lib = (CardCollection)pPriority.getCardsIn(ZoneType.Library);
             final List<ZoneType> origin = new ArrayList<ZoneType>();
             origin.add(ZoneType.Library);
             SpellAbility sa = new SpellAbility.EmptySa(new Card(-1));
@@ -1670,15 +1646,8 @@ public class PlayerControllerHuman extends PlayerController {
             });
         }
 
-        /**
-         * <p>
-         * AddCounter.
-         * </p>
-         * 
-         * @since 1.0.15
-         */
         public void addCountersToPermanent() {
-            final List<Card> cards = game.getCardsIn(ZoneType.Battlefield);
+            final CardCollectionView cards = game.getCardsIn(ZoneType.Battlefield);
             final CardView cardView = SGuiChoose.oneOrNone("Add counters to which card?", CardView.getCollection(cards));
             final Card card = Card.get(cardView);
             if (card == null) { return; }
@@ -1696,7 +1665,7 @@ public class PlayerControllerHuman extends PlayerController {
             game.getAction().invoke(new Runnable() {
                 @Override
                 public void run() {
-                    final List<Card> untapped = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Predicates.not(CardPredicates.Presets.TAPPED));
+                    final CardCollectionView untapped = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Predicates.not(CardPredicates.Presets.TAPPED));
                     InputSelectCardsFromList inp = new InputSelectCardsFromList(PlayerControllerHuman.this, 0, Integer.MAX_VALUE, untapped);
                     inp.setCancelAllowed(true);
                     inp.setMessage("Choose permanents to tap");
@@ -1714,20 +1683,22 @@ public class PlayerControllerHuman extends PlayerController {
             game.getAction().invoke(new Runnable() {
                 @Override
                 public void run() {
-                    final List<Card> tapped = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.TAPPED);
+                    final CardCollectionView tapped = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.TAPPED);
                     InputSelectCardsFromList inp = new InputSelectCardsFromList(PlayerControllerHuman.this, 0, Integer.MAX_VALUE, tapped);
                     inp.setCancelAllowed(true);
                     inp.setMessage("Choose permanents to untap");
                     inp.showAndWait();
-                    if( !inp.hasCancelled() )
-                        for(Card c : inp.getSelected())
+                    if (!inp.hasCancelled()) {
+                        for (Card c : inp.getSelected()) {
                             c.untap();
+                        }
+                    }
                 }
             });
         }
 
         public void setPlayerLife() {
-            final Player player = SGuiChoose.oneOrNone("Set life for which player?", game.getPlayers());
+            final Player player = SGuiChoose.oneOrNone("Set life for which player?", (FCollection<Player>)game.getPlayers());
             if (player == null) { return; }
 
             final Integer life = SGuiChoose.getInteger("Set life to what?", 0);
@@ -1745,7 +1716,7 @@ public class PlayerControllerHuman extends PlayerController {
 
             //set life of all other players to 0
             final LobbyPlayer guiPlayer = getLobbyPlayer();
-            final List<Player> players = game.getPlayers();
+            final FCollectionView<Player> players = game.getPlayers();
             for (Player player : players) {
                 if (player.getLobbyPlayer() != guiPlayer) {
                     player.setLife(0, null);
@@ -1757,7 +1728,7 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         public void addCardToHand() {
-            final Player p = SGuiChoose.oneOrNone("Put card in hand for which player?", game.getPlayers());
+            final Player p = SGuiChoose.oneOrNone("Put card in hand for which player?", (FCollection<Player>)game.getPlayers());
             if (p == null) {
                 return;
             }
@@ -1777,7 +1748,7 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         public void addCardToBattlefield() {
-            final Player p = SGuiChoose.oneOrNone("Put card in play for which player?", game.getPlayers());
+            final Player p = SGuiChoose.oneOrNone("Put card in play for which player?", (FCollection<Player>)game.getPlayers());
             if (p == null) {
                 return;
             }
@@ -1825,7 +1796,7 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         public void riggedPlanarRoll() {
-            final Player player = SGuiChoose.oneOrNone("Which player should roll?", game.getPlayers());
+            final Player player = SGuiChoose.oneOrNone("Which player should roll?", (FCollection<Player>)game.getPlayers());
             if (player == null) { return; }
 
             final PlanarDice res = SGuiChoose.oneOrNone("Choose result", PlanarDice.values());

@@ -68,7 +68,7 @@ public class ChangeTextEffect extends SpellAbilityEffect {
                     validTypes.addAll(CardType.getBasicTypes());
                     kindOfType = "basic land";
                 } else if (changedTypeWordsArray[0].equals("ChooseCreatureType")) {
-                    validTypes.addAll(CardType.getCreatureTypes());
+                    validTypes.addAll(CardType.Constant.CREATURE_TYPES);
                     kindOfType = "creature";
                 }
                 changedTypeWordOriginal = sa.getActivatingPlayer().getController().chooseSomeType(kindOfType, sa, validTypes, Lists.<String>newArrayList());
@@ -84,7 +84,7 @@ public class ChangeTextEffect extends SpellAbilityEffect {
                     validTypes.addAll(CardType.getBasicTypes());
                     kindOfType = "basic land";
                 } else if (changedTypeWordsArray[0].equals("ChooseCreatureType")) {
-                    validTypes.addAll(CardType.getCreatureTypes());
+                    validTypes.addAll(CardType.Constant.CREATURE_TYPES);
                     kindOfType = "creature";
                 }
                 changedTypeWordNew = sa.getActivatingPlayer().getController().chooseSomeType(kindOfType, sa, validTypes, forbiddenTypes);

@@ -1,10 +1,13 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
+
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -42,7 +45,7 @@ public class ControlExchangeAi extends SpellAbilityAi {
         if (sa.hasParam("Defined")) {
             object2 = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).get(0);
         } else if (tgt.getMinTargets(sa.getHostCard(), sa) > 1) {
-            List<Card> list2 = ai.getCardsIn(ZoneType.Battlefield);
+            CardCollectionView list2 = ai.getCardsIn(ZoneType.Battlefield);
             list2 = CardLists.getValidCards(list2, tgt.getValidTgts(), ai, sa.getHostCard());
             object2 = ComputerUtilCard.getWorstAI(list2);
             sa.getTargets().add(object2);
@@ -57,9 +60,6 @@ public class ControlExchangeAi extends SpellAbilityAi {
         return false;
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
-     */
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -69,8 +69,7 @@ public class ControlExchangeAi extends SpellAbilityAi {
             }
         } else {
             if (mandatory) {
-                List<Card> list2 = aiPlayer.getGame().getCardsIn(ZoneType.Battlefield);
-                list2 = CardLists.getValidCards(list2, tgt.getValidTgts(), aiPlayer, sa.getHostCard());
+                CardCollection list2 = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), aiPlayer, sa.getHostCard());
                 while (!list2.isEmpty()) {
                     Card best = ComputerUtilCard.getBestAI(list2);
                     if (sa.canTarget(best)) {

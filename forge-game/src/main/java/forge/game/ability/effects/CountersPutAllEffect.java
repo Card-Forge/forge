@@ -4,14 +4,13 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-
-import java.util.List;
 
 public class CountersPutAllEffect extends SpellAbilityEffect  {
 
@@ -45,7 +44,7 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         final ZoneType zone = sa.hasParam("ValidZone") ? ZoneType.smartValueOf(sa.getParam("ValidZone")) : ZoneType.Battlefield;
         final Game game = sa.getActivatingPlayer().getGame();
 
-        List<Card> cards = game.getCardsIn(zone);
+        CardCollectionView cards = game.getCardsIn(zone);
         cards = CardLists.getValidCards(cards, valid, sa.getHostCard().getController(), sa.getHostCard());
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();

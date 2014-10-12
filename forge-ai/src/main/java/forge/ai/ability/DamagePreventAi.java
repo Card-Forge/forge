@@ -5,6 +5,8 @@ import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.combat.Combat;
@@ -126,14 +128,14 @@ public class DamagePreventAi extends SpellAbilityAi {
                 chance = true;
             } else {
                 // filter AIs battlefield by what I can target
-                List<Card> targetables = ai.getCardsIn(ZoneType.Battlefield);
+                CardCollectionView targetables = ai.getCardsIn(ZoneType.Battlefield);
                 targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, hostCard);
                 targetables = CardLists.getTargetableCards(targetables, sa);
 
                 if (targetables.isEmpty()) {
                     return false;
                 }
-                final List<Card> combatants = CardLists.filter(targetables, CardPredicates.Presets.CREATURES);
+                final CardCollection combatants = CardLists.filter(targetables, CardPredicates.Presets.CREATURES);
                 ComputerUtilCard.sortByEvaluateCreature(combatants);
 
                 for (final Card c : combatants) {
@@ -183,7 +185,7 @@ public class DamagePreventAi extends SpellAbilityAi {
         sa.resetTargets();
         // filter AIs battlefield by what I can target
         final Game game = ai.getGame();
-        List<Card> targetables = game.getCardsIn(ZoneType.Battlefield);
+        CardCollectionView targetables = game.getCardsIn(ZoneType.Battlefield);
         targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, sa.getHostCard());
         final List<Card> compTargetables = CardLists.filterControlledBy(targetables, ai);
         Card target = null;
@@ -197,7 +199,7 @@ public class DamagePreventAi extends SpellAbilityAi {
         }
 
         if (!compTargetables.isEmpty()) {
-            final List<Card> combatants = CardLists.filter(compTargetables, CardPredicates.Presets.CREATURES);
+            final CardCollection combatants = CardLists.filter(compTargetables, CardPredicates.Presets.CREATURES);
             ComputerUtilCard.sortByEvaluateCreature(combatants);
             if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 Combat combat = game.getCombat();

@@ -27,15 +27,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-
 import forge.card.CardType;
 import forge.card.MagicColor;
+import forge.card.CardType.Supertype;
 import forge.card.mana.ManaCost;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -50,6 +50,8 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellApiBased;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -138,8 +140,8 @@ public class AiController {
      * 
      * @return a {@link forge.CardList} object.
      */
-    private List<Card> getAvailableCards() {
-        List<Card> all = new ArrayList<Card>(player.getCardsIn(ZoneType.Hand));
+    private CardCollection getAvailableCards() {
+        CardCollection all = new CardCollection(player.getCardsIn(ZoneType.Hand));
 
         all.addAll(player.getCardsIn(ZoneType.Graveyard));
         all.addAll(player.getCardsIn(ZoneType.Command));
@@ -161,9 +163,8 @@ public class AiController {
      * @return a {@link java.util.ArrayList} object.
      */
     private ArrayList<SpellAbility> getPossibleETBCounters() {
-
         final Player opp = player.getOpponent();
-        List<Card> all = new ArrayList<Card>(player.getCardsIn(ZoneType.Hand));
+        CardCollection all = new CardCollection(player.getCardsIn(ZoneType.Hand));
         all.addAll(player.getCardsIn(ZoneType.Exile));
         all.addAll(player.getCardsIn(ZoneType.Graveyard));
         if (!player.getCardsIn(ZoneType.Library).isEmpty()) {
@@ -232,8 +233,8 @@ public class AiController {
                 } else if (params.get("ValidCard").contains("kicked")) {
                     if (params.get("ValidCard").contains("kicked ")) { // want a specific kicker
                         String s = params.get("ValidCard").split("kicked ")[1];
-                        if ( "1".equals(s) && !sa.isOptionalCostPaid(OptionalCost.Kicker1)) continue;
-                        if ( "2".equals(s) && !sa.isOptionalCostPaid(OptionalCost.Kicker2)) continue;
+                        if ("1".equals(s) && !sa.isOptionalCostPaid(OptionalCost.Kicker1)) continue;
+                        if ("2".equals(s) && !sa.isOptionalCostPaid(OptionalCost.Kicker2)) continue;
                     } else if (!sa.isKicked()) { 
                         continue;
                     }
@@ -312,8 +313,8 @@ public class AiController {
                 } else if (params.get("ValidCard").contains("kicked")) {
                     if (params.get("ValidCard").contains("kicked ")) { // want a specific kicker
                         String s = params.get("ValidCard").split("kicked ")[1];
-                        if ( "1".equals(s) && !sa.isOptionalCostPaid(OptionalCost.Kicker1)) continue;
-                        if ( "2".equals(s) && !sa.isOptionalCostPaid(OptionalCost.Kicker2)) continue;
+                        if ("1".equals(s) && !sa.isOptionalCostPaid(OptionalCost.Kicker1)) continue;
+                        if ("2".equals(s) && !sa.isOptionalCostPaid(OptionalCost.Kicker2)) continue;
                     } else if (!sa.isKicked()) { // otherwise just any must be present
                         continue;
                     }
@@ -374,7 +375,7 @@ public class AiController {
      *            a {@link forge.CardList} object.
      * @return an array of {@link forge.game.spellability.SpellAbility} objects.
      */
-    private ArrayList<SpellAbility> getSpellAbilities(final List<Card> l) {
+    private ArrayList<SpellAbility> getSpellAbilities(final CardCollectionView l) {
         final ArrayList<SpellAbility> spellAbilities = new ArrayList<SpellAbility>();
         for (final Card c : l) {
             for (final SpellAbility sa : c.getSpellAbilities()) {
@@ -393,7 +394,7 @@ public class AiController {
      *            a {@link forge.CardList} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    private ArrayList<SpellAbility> getPlayableCounters(final List<Card> l) {
+    private ArrayList<SpellAbility> getPlayableCounters(final CardCollection l) {
         final ArrayList<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
         for (final Card c : l) {
             for (final SpellAbility sa : c.getNonManaSpellAbilities()) {
@@ -415,12 +416,12 @@ public class AiController {
      * 
      * @return a boolean.
      */
-    public List<Card> getLandsToPlay() {
+    public CardCollection getLandsToPlay() {
     
-        final List<Card> hand = new ArrayList<Card>(player.getCardsIn(ZoneType.Hand));
+        final CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
         hand.addAll(player.getCardsIn(ZoneType.Exile));
-        List<Card> landList = CardLists.filter(hand, Presets.LANDS);
-        List<Card> nonLandList = CardLists.filter(hand, Predicates.not(CardPredicates.Presets.LANDS));
+        CardCollection landList = CardLists.filter(hand, Presets.LANDS);
+        CardCollection nonLandList = CardLists.filter(hand, Predicates.not(CardPredicates.Presets.LANDS));
         
         //filter out cards that can't be played
         landList = CardLists.filter(landList, new Predicate<Card>() {
@@ -428,9 +429,7 @@ public class AiController {
             public boolean apply(final Card c) {
                 if (!c.getSVar("NeedsToPlay").isEmpty()) {
                     final String needsToPlay = c.getSVar("NeedsToPlay");
-                    List<Card> list = game.getCardsIn(ZoneType.Battlefield);
-
-                    list = CardLists.getValidCards(list, needsToPlay.split(","), c.getController(), c);
+                    CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), needsToPlay.split(","), c.getController(), c);
                     if (list.isEmpty()) {
                         return false;
                     }
@@ -439,7 +438,7 @@ public class AiController {
             }
         });
     
-        final List<Card> landsNotInHand = new ArrayList<Card>(player.getCardsIn(ZoneType.Graveyard));
+        final CardCollection landsNotInHand = new CardCollection(player.getCardsIn(ZoneType.Graveyard));
         if (!player.getCardsIn(ZoneType.Library).isEmpty()) {
             landsNotInHand.add(player.getCardsIn(ZoneType.Library).get(0));
         }
@@ -452,9 +451,9 @@ public class AiController {
             return null;
         }
         if (landList.size() == 1 && nonLandList.size() < 3) {
-            List<Card> cardsInPlay = player.getCardsIn(ZoneType.Battlefield);
-            List<Card> landsInPlay = CardLists.filter(cardsInPlay, Presets.LANDS);
-            List<Card> allCards = new ArrayList<Card>(player.getCardsIn(ZoneType.Graveyard));
+            CardCollectionView cardsInPlay = player.getCardsIn(ZoneType.Battlefield);
+            CardCollection landsInPlay = CardLists.filter(cardsInPlay, Presets.LANDS);
+            CardCollection allCards = new CardCollection(player.getCardsIn(ZoneType.Graveyard));
             allCards.addAll(player.getCardsIn(ZoneType.Command));
             allCards.addAll(cardsInPlay);
             int maxCmcInHand = Aggregates.max(hand, CardPredicates.Accessors.fnGetCmc);
@@ -479,19 +478,19 @@ public class AiController {
             @Override
             public boolean apply(final Card c) {
                 canPlaySpellBasic(c);
-                if (c.isType("Legendary") && !c.getName().equals("Flagstones of Trokair")) {
-                    final List<Card> list = player.getCardsIn(ZoneType.Battlefield);
+                if (c.getType().isLegendary() && !c.getName().equals("Flagstones of Trokair")) {
+                    final CardCollectionView list = player.getCardsIn(ZoneType.Battlefield);
                     if (Iterables.any(list, CardPredicates.nameEquals(c.getName()))) {
                         return false;
                     }
                 }
-    
+
                 // don't play the land if it has cycling and enough lands are
                 // available
                 final List<SpellAbility> spellAbilities = c.getSpellAbilities();
-    
-                final List<Card> hand = player.getCardsIn(ZoneType.Hand);
-                List<Card> lands = player.getCardsIn(ZoneType.Battlefield);
+
+                final CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
+                CardCollection lands = new CardCollection(player.getCardsIn(ZoneType.Battlefield));
                 lands.addAll(hand);
                 lands = CardLists.filter(lands, CardPredicates.Presets.LANDS);
                 int maxCmcInHand = Aggregates.max(hand, CardPredicates.Accessors.fnGetCmc);
@@ -509,13 +508,13 @@ public class AiController {
         return landList;
     }
 
-    public Card chooseBestLandToPlay(List<Card> landList)
+    public Card chooseBestLandToPlay(CardCollection landList)
     {
         if (landList.isEmpty())
             return null;
     
         //Skip reflected lands.
-        List<Card> unreflectedLands = new ArrayList<Card>(landList);
+        CardCollection unreflectedLands = new CardCollection(landList);
         for (Card l : landList) {
             if (l.isReflectedLand()) {
                 unreflectedLands.remove(l);
@@ -528,7 +527,7 @@ public class AiController {
 
         // Choose first land to be able to play a one drop
         if (player.getLandsInPlay().isEmpty()) {
-            List<Card> oneDrops = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.hasCMC(1));
+            CardCollection oneDrops = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.hasCMC(1));
             for (int i = 0; i < MagicColor.WUBRG.length; i++) {
                 byte color = MagicColor.WUBRG[i];
                 if (!CardLists.filter(oneDrops, CardPredicates.isColor(color)).isEmpty()) {
@@ -544,9 +543,9 @@ public class AiController {
                             continue;
                         }
 
-                        if (land.isType(MagicColor.Constant.BASIC_LANDS.get(i)))
+                        if (land.getType().hasSubtype(MagicColor.Constant.BASIC_LANDS.get(i))) {
                             return land;
-                        
+                        }
                         for (final SpellAbility m : ComputerUtilMana.getAIPlayableMana(land)) {
                             AbilityManaPart mp = m.getManaPart();
                             if (mp.canProduce(MagicColor.toShortString(color), m)) {
@@ -560,8 +559,8 @@ public class AiController {
 
         //play basic lands that are needed the most
         if (Iterables.any(landList, CardPredicates.Presets.BASIC_LANDS)) {
-            final List<Card> combined = player.getCardsIn(ZoneType.Battlefield);
-    
+            final CardCollectionView combined = player.getCardsIn(ZoneType.Battlefield);
+
             final ArrayList<String> basics = new ArrayList<String>();
     
             // what types can I go get?
@@ -603,7 +602,7 @@ public class AiController {
      * @return a boolean.
      */
     private SpellAbility chooseCounterSpell(final ArrayList<SpellAbility> possibleCounters) {
-        if ( possibleCounters == null || possibleCounters.isEmpty())
+        if (possibleCounters == null || possibleCounters.isEmpty())
             return null;;
         
         SpellAbility bestSA = null;
@@ -649,7 +648,7 @@ public class AiController {
             return null;
         }
 
-        final List<Card> cards = handOnly ? player.getCardsIn(ZoneType.Hand) : getAvailableCards();
+        final CardCollectionView cards = handOnly ? player.getCardsIn(ZoneType.Hand) : getAvailableCards();
     
         ArrayList<SpellAbility> all = getSpellAbilities(cards);
         Collections.sort(all, saComparator); // put best spells first
@@ -662,7 +661,7 @@ public class AiController {
             // TODO: this currently only works as a limited prediction of permanent spells.
             // Ideally this should cast canPlaySa to determine that the AI is truly able/willing to cast a spell,
             // but that is currently difficult to implement due to various side effects leading to stack overflow.
-            if (!ComputerUtil.castPermanentInMain1(player, sa) && sa.getHostCard() != null && !sa.getHostCard().getType().contains("Land") && ComputerUtilCost.canPayCost(sa, player)) {
+            if (!ComputerUtil.castPermanentInMain1(player, sa) && sa.getHostCard() != null && !sa.getHostCard().isLand() && ComputerUtilCost.canPayCost(sa, player)) {
                 if (sa instanceof SpellPermanent) {
                     return sa;
                 }
@@ -674,7 +673,7 @@ public class AiController {
 
     public void reserveManaSourcesForMain2(SpellAbility sa) {
         ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, true, 0);
-        ArrayList<Card> manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player);
+        CardCollection manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player);
         for (Card c : manaSources) {
             ((PlayerControllerAi)player.getController()).getAi().getCardMemory().rememberCard(c, AiCardMemory.MemorySet.HELD_MANA_SOURCES);
         }
@@ -695,12 +694,12 @@ public class AiController {
     
     public AiPlayDecision canPlaySa(SpellAbility sa) {
         final Card card = sa.getHostCard();
-        if ( sa instanceof WrappedAbility ) {
+        if (sa instanceof WrappedAbility) {
             return canPlaySa(((WrappedAbility) sa).getWrappedAbility());
         }
-        if( sa.getApi() != null ) {
+        if (sa.getApi() != null) {
             boolean canPlay = SpellApiToAi.Converter.get(sa.getApi()).canPlayAIWithSubs(player, sa);
-            if(!canPlay) 
+            if (!canPlay) 
                 return AiPlayDecision.CantPlayAi;
         } else if (sa.getPayCosts() != null){
             Cost payCosts = sa.getPayCosts();
@@ -717,7 +716,7 @@ public class AiController {
         if (checkCurseEffects(sa)) {
             return AiPlayDecision.CurseEffects;
         }
-        if( sa instanceof SpellPermanent ) {
+        if (sa instanceof SpellPermanent) {
             ManaCost mana = sa.getPayCosts().getTotalMana();
             if (mana.countX() > 0) {
                 // Set PayX here to maximum value.
@@ -733,8 +732,8 @@ public class AiController {
                 SpellAbility effectExile = AbilityFactory.getAbility(card.getSVar("TrigExile"), card);
                 final ZoneType origin = ZoneType.listValueOf(effectExile.getParam("Origin")).get(0);
                 final TargetRestrictions tgt = effectExile.getTargetRestrictions();
-                final List<Card> list = CardLists.getValidCards(game.getCardsIn(origin), tgt.getValidTgts(), player, card);
-                List<Card> targets = CardLists.getTargetableCards(list, sa);
+                final CardCollection list = CardLists.getValidCards(game.getCardsIn(origin), tgt.getValidTgts(), player, card);
+                CardCollection targets = CardLists.getTargetableCards(list, sa);
                 if (sa.getHostCard().getName().equals("Suspension Field")) {
                     //existing "exile until leaves" enchantments only target opponent's permanents
                     final Player ai = sa.getActivatingPlayer();
@@ -796,7 +795,7 @@ public class AiController {
             }
 
             return canPlayFromEffectAI((SpellPermanent)sa, false, true);
-        } else if( sa instanceof Spell ) {
+        } else if (sa instanceof Spell) {
             return canPlaySpellBasic(card);
         }
         return AiPlayDecision.WillPlay;
@@ -805,7 +804,7 @@ public class AiController {
     private AiPlayDecision canPlaySpellBasic(final Card card) {
         if (card.hasSVar("NeedsToPlay")) {
             final String needsToPlay = card.getSVar("NeedsToPlay");
-            List<Card> list = game.getCardsIn(ZoneType.Battlefield);
+            CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
 
             list = CardLists.getValidCards(list, needsToPlay.split(","), card.getController(), card);
             if (list.isEmpty()) {
@@ -913,26 +912,23 @@ public class AiController {
      *            no restrictions.
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
-     * @return a List<Card> of discarded cards.
+     * @return a CardCollection of discarded cards.
      */
-    public List<Card> getCardsToDiscard(final int numDiscard, final String[] uTypes, final SpellAbility sa) {
-        List<Card> hand = new ArrayList<Card>(player.getCardsIn(ZoneType.Hand));
-
-    
+    public CardCollection getCardsToDiscard(final int numDiscard, final String[] uTypes, final SpellAbility sa) {
+        CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
         if ((uTypes != null) && (sa != null)) {
             hand = CardLists.getValidCards(hand, uTypes, sa.getActivatingPlayer(), sa.getHostCard());
         }
         return getCardsToDiscard(numDiscard, numDiscard, hand, sa);
     }
-    
-    public List<Card> getCardsToDiscard(final int min, final int max, final List<Card> validCards, final SpellAbility sa) {
-        
+
+    public CardCollection getCardsToDiscard(final int min, final int max, final CardCollection validCards, final SpellAbility sa) {
         if (validCards.size() < min) {
             return null;
         }
 
         Card sourceCard = null;
-        final List<Card> discardList = new ArrayList<Card>();
+        final CardCollection discardList = new CardCollection();
         int count = 0;
         if (sa != null) {
             sourceCard = sa.getHostCard();
@@ -958,20 +954,21 @@ public class AiController {
                 discardList.add(prefCard);
                 validCards.remove(prefCard);
                 count++;
-            } else {
+            }
+            else {
                 break;
             }
         }
-    
+
         final int discardsLeft = min - count;
-    
+
         // choose rest
         for (int i = 0; i < discardsLeft; i++) {
             if (validCards.isEmpty()) {
                 continue;
             }
             final int numLandsInPlay = Iterables.size(Iterables.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS));
-            final List<Card> landsInHand = CardLists.filter(validCards, CardPredicates.Presets.LANDS);
+            final CardCollection landsInHand = CardLists.filter(validCards, CardPredicates.Presets.LANDS);
             final int numLandsInHand = landsInHand.size();
     
             // Discard a land
@@ -998,7 +995,6 @@ public class AiController {
                 }
             }
         }
-    
         return discardList;
     }
 
@@ -1007,8 +1003,8 @@ public class AiController {
         ApiType api = sa.getApi();
 
         // Abilities without api may also use this routine, However they should provide a unique mode value
-        if ( null == api ) {
-            if( mode != null ) switch (mode) {
+        if (null == api) {
+            if (mode != null) switch (mode) {
                 // case BraidOfFire: return true;
                 // case Ripple: return true;
             }
@@ -1091,7 +1087,7 @@ public class AiController {
                 }
             }
             
-            if ( withoutPayingManaCost )
+            if (withoutPayingManaCost)
                 ComputerUtil.playSpellAbilityWithoutPayingManaCost(player, sa, game);
             else if (!ComputerUtilCost.canPayCost(sa, player)) 
                 continue;
@@ -1105,7 +1101,7 @@ public class AiController {
     public AiPlayDecision canPlayFromEffectAI(Spell spell, boolean mandatory, boolean withoutPayingManaCost) {
         
         final Card card = spell.getHostCard();
-        if( spell instanceof SpellApiBased )
+        if (spell instanceof SpellApiBased)
         {
             boolean chance = false;
             if (withoutPayingManaCost) {
@@ -1119,7 +1115,7 @@ public class AiController {
             return canPlaySpellBasic(card);
         }
         
-        if ( spell instanceof SpellPermanent) {
+        if (spell instanceof SpellPermanent) {
             if (mandatory) {
                 return AiPlayDecision.WillPlay;
             }
@@ -1146,41 +1142,34 @@ public class AiController {
             }
     
             // check on legendary
-            if (card.isType("Legendary")
-                    && !game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
-                final List<Card> list = player.getCardsIn(ZoneType.Battlefield);
-                if (Iterables.any(list, CardPredicates.nameEquals(card.getName()))) {
+            if (card.getType().isLegendary() && !game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
+                if (Iterables.any(player.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(card.getName()))) {
                     return AiPlayDecision.WouldDestroyLegend;
                 }
             }
             if (card.isPlaneswalker()) {
-                List<Card> list = player.getCardsIn(ZoneType.Battlefield);
-                list = CardLists.filter(list, CardPredicates.Presets.PLANEWALKERS);
-
-                for (String type : card.getType()) { //determine planewalker subtype
-                    if (!type.equals("Planeswalker")) {
-                        final List<Card> cl = CardLists.getType(list, type);
-                        if (!cl.isEmpty()) {
-                            return AiPlayDecision.WouldDestroyOtherPlaneswalker;
-                        }
-                        break;
+                CardCollection list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
+                for (String type : card.getType().getSubtypes()) { //determine planewalker subtype
+                    final CardCollection cl = CardLists.getType(list, type);
+                    if (!cl.isEmpty()) {
+                        return AiPlayDecision.WouldDestroyOtherPlaneswalker;
                     }
+                    break;
                 }
             }
-            if (card.isType("World")) {
-                List<Card> list = player.getCardsIn(ZoneType.Battlefield);
-                list = CardLists.getType(list, "World");
+            if (card.getType().hasSupertype(Supertype.World)) {
+                CardCollection list = CardLists.getType(player.getCardsIn(ZoneType.Battlefield), "World");
                 if (!list.isEmpty()) {
                     return AiPlayDecision.WouldDestroyWorldEnchantment;
                 }
             }
-    
+
             if (card.isCreature() && (card.getNetDefense() <= 0) && !card.hasStartOfKeyword("etbCounter")
                     && mana.countX() == 0 && !card.hasETBTrigger()
                     && !card.hasETBReplacement()) {
                 return AiPlayDecision.WouldBecomeZeroToughnessCreature;
             }
-    
+
             if (!checkETBEffects(card, spell, null)) {
                 return AiPlayDecision.BadEtbEffects;
             }
@@ -1196,8 +1185,8 @@ public class AiController {
 
         if (game.getStack().isEmpty() && phase.isMain()) {
             Log.debug("Computer " + phase.nameForUi);
-            List<Card> landsWannaPlay = getLandsToPlay();
-            if(landsWannaPlay != null && !landsWannaPlay.isEmpty() && player.canPlayLand(null)) {
+            CardCollection landsWannaPlay = getLandsToPlay();
+            if (landsWannaPlay != null && !landsWannaPlay.isEmpty() && player.canPlayLand(null)) {
                 Card land = chooseBestLandToPlay(landsWannaPlay);
                 if (ComputerUtil.damageFromETB(player, land) < player.getLife() || !player.canLoseLife()) {
                     Ability.PLAY_LAND_SURROGATE.setHostCard(land);
@@ -1239,25 +1228,25 @@ public class AiController {
             // probably should let my stuff resolve
             return null;
         }
-        final List<Card> cards = getAvailableCards();
+        final CardCollection cards = getAvailableCards();
     
-        if ( !game.getStack().isEmpty() ) {
+        if (!game.getStack().isEmpty()) {
             SpellAbility counter = chooseCounterSpell(getPlayableCounters(cards));
-            if( counter != null ) return counter;
+            if (counter != null) return counter;
     
             SpellAbility counterETB = chooseSpellAbilityToPlay(this.getPossibleETBCounters(), false);
-            if( counterETB != null )
+            if (counterETB != null)
                 return counterETB;
         }
     
         SpellAbility result = chooseSpellAbilityToPlay(getSpellAbilities(cards), true);
-        if( null == result) 
+        if (null == result) 
             return null;
         return result;
     }
     
     private SpellAbility chooseSpellAbilityToPlay(final ArrayList<SpellAbility> all, boolean skipCounter) {
-        if ( all == null || all.isEmpty() )
+        if (all == null || all.isEmpty())
             return null;
 
         Collections.sort(all, saComparator); // put best spells first
@@ -1282,8 +1271,8 @@ public class AiController {
         return null;
     }     
 
-    public List<Card> chooseCardsToDelve(int colorlessCost, List<Card> grave) {
-        List<Card> toExile = new ArrayList<Card>();
+    public CardCollection chooseCardsToDelve(int colorlessCost, CardCollection grave) {
+        CardCollection toExile = new CardCollection();
         int numToExile = Math.min(grave.size(), colorlessCost);
         
         for (int i = 0; i < numToExile; i++) {
@@ -1315,9 +1304,9 @@ public class AiController {
     
     public boolean doTrigger(SpellAbility spell, boolean mandatory) {
         
-        if ( spell.getApi() != null )
+        if (spell.getApi() != null)
             return SpellApiToAi.Converter.get(spell.getApi()).doTriggerAI(player, spell, mandatory);
-        if ( spell instanceof WrappedAbility )
+        if (spell instanceof WrappedAbility)
             return doTrigger(((WrappedAbility)spell).getWrappedAbility(), mandatory);
         
         return false;
@@ -1392,13 +1381,13 @@ public class AiController {
             SpellAbility sa = result.get(i);
             
             String srcName = sa.getHostCard().getName();
-            if("Gemstone Caverns".equals(srcName)) {
-                if(saGemstones == null)
+            if ("Gemstone Caverns".equals(srcName)) {
+                if (saGemstones == null)
                     saGemstones = sa;
                 else
                     result.remove(i--);
             } else if ("Leyline of Singularity".equals(srcName)) {
-                if(!hasLeyline1)
+                if (!hasLeyline1)
                     hasLeyline1 = true;
                 else
                     result.remove(i--);
@@ -1406,7 +1395,7 @@ public class AiController {
         }
         
         // Play them last
-        if( saGemstones != null ) {
+        if (saGemstones != null) {
             result.remove(saGemstones);
             result.add(saGemstones);
         }
@@ -1481,7 +1470,7 @@ public class AiController {
 
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
             CounterType ct = predProliferate.apply(c);
-            if( ct != null)
+            if (ct != null)
                 result.put(c, ct);
         }
         
@@ -1494,12 +1483,12 @@ public class AiController {
         return result;
     }
 
-    public List<Card> chooseCardsForEffect(List<Card> pool, SpellAbility sa, int min, int max, boolean isOptional) {
-        if( sa == null || sa.getApi() == null ) {
+    public CardCollection chooseCardsForEffect(CardCollectionView pool, SpellAbility sa, int min, int max, boolean isOptional) {
+        if (sa == null || sa.getApi() == null) {
             throw new UnsupportedOperationException();
         }
-        List<Card> result = new ArrayList<>();
-        switch( sa.getApi()) {
+        CardCollection result = new CardCollection();
+        switch(sa.getApi()) {
             case TwoPiles:
                 // TODO: improve AI
                 Card biggest = null;
@@ -1525,17 +1514,16 @@ public class AiController {
                 result.addAll(pool);
                 break;
             default:
+                CardCollection editablePool = new CardCollection(pool);
                 for (int i = 0; i < max; i++) {
-                    Card c = player.getController().chooseSingleEntityForEffect(pool, sa, null, isOptional);
+                    Card c = player.getController().chooseSingleEntityForEffect(editablePool, sa, null, isOptional);
                     if (c != null) {
                         result.add(c);
-                        pool.remove(c);
+                        editablePool.remove(c);
                     } else {
                         break;
                     }
                 }
-                
-        
         }
         return result;
         
@@ -1543,9 +1531,9 @@ public class AiController {
 
     public Collection<? extends PaperCard> complainCardsCantPlayWell(Deck myDeck) {
         List<PaperCard> result = new ArrayList<PaperCard>();
-        for ( Entry<DeckSection, CardPool> ds : myDeck ) {
+        for (Entry<DeckSection, CardPool> ds : myDeck) {
             for (Entry<PaperCard, Integer> cp : ds.getValue()) {
-                if ( cp.getKey().getRules().getAiHints().getRemAIDecks() ) 
+                if (cp.getKey().getRules().getAiHints().getRemAIDecks()) 
                     result.add(cp.getKey());
             }
         }
@@ -1565,15 +1553,16 @@ public class AiController {
      *            an array of {@link forge.game.card.Card} objects.
      * @return an array of {@link forge.game.card.Card} objects.
      */
-    public List<Card> cheatShuffle(List<Card> in) {
-        if( in.size() < 20 || !canCheatShuffle() )
+    public CardCollectionView cheatShuffle(CardCollectionView in) {
+        if (in.size() < 20 || !canCheatShuffle()) {
             return in;
-        
-        final List<Card> library = Lists.newArrayList(in);
+        }
+
+        final CardCollection library = new CardCollection(in);
         CardLists.shuffle(library);
     
         // remove all land, keep non-basicland in there, shuffled
-        List<Card> land = CardLists.filter(library, CardPredicates.Presets.LANDS);
+        CardCollection land = CardLists.filter(library, CardPredicates.Presets.LANDS);
         for (Card c : land) {
             if (c.isLand()) {
                 library.remove(c);
@@ -1630,16 +1619,16 @@ public class AiController {
     }
 
     public boolean chooseDirection(SpellAbility sa) {
-        if( sa == null || sa.getApi() == null ) {
+        if (sa == null || sa.getApi() == null) {
             throw new UnsupportedOperationException();
         }
         // Left:True; Right:False
         if ("GainControl".equals(sa.getParam("AILogic")) && game.getPlayers().size() > 2) {
-            List<Card> creats = CardLists.getType(game.getCardsIn(ZoneType.Battlefield), "Creature");
-            List<Card> left = CardLists.filterControlledBy(creats, game.getNextPlayerAfter(player, Direction.Left));
-            List<Card> right = CardLists.filterControlledBy(creats, game.getNextPlayerAfter(player, Direction.Right));
+            CardCollection creats = CardLists.getType(game.getCardsIn(ZoneType.Battlefield), "Creature");
+            CardCollection left = CardLists.filterControlledBy(creats, game.getNextPlayerAfter(player, Direction.Left));
+            CardCollection right = CardLists.filterControlledBy(creats, game.getNextPlayerAfter(player, Direction.Right));
             if (!left.isEmpty() || !right.isEmpty()) {
-                List<Card> all = new ArrayList<Card>(left);
+                CardCollection all = new CardCollection(left);
                 all.addAll(right);
                 return left.contains(ComputerUtilCard.getBestCreatureAI(all));
             }

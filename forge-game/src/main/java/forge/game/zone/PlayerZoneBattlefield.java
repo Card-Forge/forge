@@ -17,15 +17,12 @@
  */
 package forge.game.zone;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.ZCTrigger;
-
-import java.util.List;
 
 /**
  * <p>
@@ -55,7 +52,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
 
         super.add(c, position);
 
-        if (this.trigger) {
+        if (trigger) {
             if (c.hasKeyword("Hideaway")) {
                 // it enters the battlefield this way, and should not fire
                 // triggers
@@ -74,7 +71,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
             }
         }
 
-        if (this.trigger) {
+        if (trigger) {
             c.setSickness(true); // summoning sickness
             c.executeTrigger(ZCTrigger.ENTERFIELD);
             
@@ -87,35 +84,44 @@ public class PlayerZoneBattlefield extends PlayerZone {
     public final void remove(final Card c) {
         super.remove(c);
 
-        if (this.leavesTrigger) {
+        if (leavesTrigger) {
             c.executeTrigger(ZCTrigger.LEAVEFIELD);
         }
-
     }
-
 
     public final void setTriggers(final boolean b) {
-        this.trigger = b;
-        this.leavesTrigger = b;
+        trigger = b;
+        leavesTrigger = b;
     }
 
-    private static Predicate<Card> isNotPhased = new Predicate<Card>() {
-        @Override
-        public boolean apply(Card crd) {
-            return !crd.isPhasedOut();
-        }
-    };
-
-
     @Override
-    public final List<Card> getCards(final boolean filter) {
+    public final CardCollectionView getCards(final boolean filter) {
         // Battlefield filters out Phased Out cards by default. Needs to call
         // getCards(false) to get Phased Out cards
 
+        CardCollectionView cards = super.getCards(false);
         if (!filter) {
-            return super.getCards(false);
+            return cards;
         }
-        return Lists.newArrayList(Iterables.filter(roCardList, isNotPhased));
 
+        boolean hasFilteredCard = false;
+        for (Card c : cards) {
+            if (c.isPhasedOut()) {
+                hasFilteredCard = true;
+                break;
+            }
+        }
+
+        if (hasFilteredCard) {
+            CardCollection filteredCollection = new CardCollection();
+            for (Card c : cards) {
+                if (!c.isPhasedOut()) {
+                    filteredCollection.add(c);
+                    break;
+                }
+            }
+            cards = filteredCollection;
+        }
+        return cards;
     }
 }

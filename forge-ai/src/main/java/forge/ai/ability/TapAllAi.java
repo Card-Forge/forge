@@ -7,6 +7,7 @@ import forge.ai.ComputerUtil;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.CombatUtil;
@@ -21,10 +22,6 @@ import java.util.List;
 import java.util.Random;
 
 public class TapAllAi extends SpellAbilityAi {
-
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
-     */
     @Override
     protected boolean canPlayAI(final Player ai, SpellAbility sa) {
         // If tapping all creatures do it either during declare attackers of AIs
@@ -44,7 +41,7 @@ public class TapAllAi extends SpellAbilityAi {
             valid = sa.getParam("ValidCards");
         }
 
-        List<Card> validTappables = game.getCardsIn(ZoneType.Battlefield);
+        CardCollectionView validTappables = game.getCardsIn(ZoneType.Battlefield);
 
         if (sa.usesTargeting()) {
             sa.resetTargets();
@@ -95,20 +92,9 @@ public class TapAllAi extends SpellAbilityAi {
         return true;
     }
 
-    /**
-     * <p>
-     * getTapAllTargets.
-     * </p>
-     * 
-     * @param valid
-     *            a {@link java.lang.String} object.
-     * @param source
-     *            a {@link forge.game.card.Card} object.
-     * @return a {@link forge.CardList} object.
-     */
-    private List<Card> getTapAllTargets(final String valid, final Card source) {
+    private CardCollectionView getTapAllTargets(final String valid, final Card source) {
         final Game game = source.getGame();
-        List<Card> tmpList = game.getCardsIn(ZoneType.Battlefield);
+        CardCollectionView tmpList = game.getCardsIn(ZoneType.Battlefield);
         tmpList = CardLists.getValidCards(tmpList, valid, source.getController(), source);
         tmpList = CardLists.filter(tmpList, Presets.UNTAPPED);
         return tmpList;
@@ -123,7 +109,7 @@ public class TapAllAi extends SpellAbilityAi {
             valid = sa.getParam("ValidCards");
         }
 
-        List<Card> validTappables = getTapAllTargets(valid, source);
+        CardCollectionView validTappables = getTapAllTargets(valid, source);
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
@@ -160,7 +146,6 @@ public class TapAllAi extends SpellAbilityAi {
                 return rr;
             }
         }
-
         return false;
     }
 }

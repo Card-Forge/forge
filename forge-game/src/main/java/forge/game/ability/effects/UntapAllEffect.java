@@ -2,27 +2,23 @@ package forge.game.ability.effects;
 
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UntapAllEffect extends SpellAbilityEffect {
-
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
-     */
     @Override
     protected String getStackDescription(SpellAbility sa) {
         if (sa instanceof AbilitySub) {
             return "Untap all valid cards.";
-        } else {
-            return sa.getParam("SpellDescription");
         }
+        return sa.getParam("SpellDescription");
     }
 
     @Override
@@ -30,7 +26,7 @@ public class UntapAllEffect extends SpellAbilityEffect {
         final Card card = sa.getHostCard();
 
         String valid = "";
-        List<Card> list = null;
+        CardCollectionView list;
 
         List<Player> tgtPlayers = getTargetPlayers(sa);
 
@@ -41,10 +37,11 @@ public class UntapAllEffect extends SpellAbilityEffect {
         if (!sa.usesTargeting() && !sa.hasParam("Defined")) {
             list = sa.getActivatingPlayer().getGame().getCardsIn(ZoneType.Battlefield);
         } else {
-            list = new ArrayList<Card>();
+            CardCollection list2 = new CardCollection();
             for (final Player p : tgtPlayers) {
-                list.addAll(p.getCardsIn(ZoneType.Battlefield));
+                list2.addAll(p.getCardsIn(ZoneType.Battlefield));
             }
+            list = list2;
         }
         list = CardLists.getValidCards(list, valid.split(","), card.getController(), card);
 
@@ -56,5 +53,4 @@ public class UntapAllEffect extends SpellAbilityEffect {
             }
         }
     }
-
 }

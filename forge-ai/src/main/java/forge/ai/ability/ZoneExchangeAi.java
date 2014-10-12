@@ -4,14 +4,12 @@ import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ZoneExchangeAi extends SpellAbilityAi {
 
@@ -31,7 +29,7 @@ public class ZoneExchangeAi extends SpellAbilityAi {
         }
         final ZoneType zone1 = sa.hasParam("Zone1") ? ZoneType.smartValueOf(sa.getParam("Zone1")) : ZoneType.Battlefield;
         final ZoneType zone2 = sa.hasParam("Zone2") ? ZoneType.smartValueOf(sa.getParam("Zone2")) : ZoneType.Hand;
-        List<Card> list = new ArrayList<Card>(ai.getCardsIn(zone2));
+        CardCollection list = new CardCollection(ai.getCardsIn(zone2));
         if (type != null) {
             list = CardLists.getValidCards(list, type, ai, source);
         }

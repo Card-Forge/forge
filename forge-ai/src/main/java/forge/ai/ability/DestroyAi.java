@@ -9,6 +9,7 @@ import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
 import forge.game.cost.Cost;
@@ -20,21 +21,12 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class DestroyAi extends SpellAbilityAi {
-
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
-     */
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         return canPlayAI(ai, sa);
     }
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
-     */
+
     @Override
     protected boolean canPlayAI(final Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
@@ -44,7 +36,7 @@ public class DestroyAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final boolean noRegen = sa.hasParam("NoRegen");
         final String logic = sa.getParam("AILogic");
-        List<Card> list;
+        CardCollection list;
 
         if (abCost != null) {
             if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source)) {
@@ -151,9 +143,11 @@ public class DestroyAi extends SpellAbilityAi {
                             return false;
                         }
                     }
-                } else if (CardLists.getNotType(list, "Land").isEmpty()) {
+                }
+                else if (CardLists.getNotType(list, "Land").isEmpty()) {
                     choice = ComputerUtilCard.getBestLandAI(list);
-                } else {
+                }
+                else {
                     choice = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, true);
                 }
                 //option to hold removal instead only applies for single targeted removal
@@ -187,25 +181,23 @@ public class DestroyAi extends SpellAbilityAi {
                 list.remove(choice);
                 sa.getTargets().add(choice);
             }
-        } else {
-            if (sa.hasParam("Defined")) {
-                list = new ArrayList<Card>(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
-                if ("WillSkipTurn".equals(logic) && (sa.getHostCard().getController().equals(ai)
-                        || ai.getCreaturesInPlay().size() < ai.getOpponent().getCreaturesInPlay().size()
-                        || !source.getGame().getPhaseHandler().isPlayerTurn(ai)
-                        || ai.getLife() <= 5)) {
-                    // Basic ai logic for Lethal Vapors
-                    return false;
-                }
+        }
+        else if (sa.hasParam("Defined")) {
+            list = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
+            if ("WillSkipTurn".equals(logic) && (sa.getHostCard().getController().equals(ai)
+                    || ai.getCreaturesInPlay().size() < ai.getOpponent().getCreaturesInPlay().size()
+                    || !source.getGame().getPhaseHandler().isPlayerTurn(ai)
+                    || ai.getLife() <= 5)) {
+                // Basic ai logic for Lethal Vapors
+                return false;
+            }
 
-                if (list.isEmpty()
-                        || !CardLists.filterControlledBy(list, ai).isEmpty()
-                        || CardLists.getNotKeyword(list, "Indestructible").isEmpty()) {
-                    return false;
-                }
+            if (list.isEmpty()
+                    || !CardLists.filterControlledBy(list, ai).isEmpty()
+                    || CardLists.getNotKeyword(list, "Indestructible").isEmpty()) {
+                return false;
             }
         }
-
         return true;
     }
 
@@ -215,9 +207,7 @@ public class DestroyAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final boolean noRegen = sa.hasParam("NoRegen");
         if (tgt != null) {
-            List<Card> list;
-            list = ai.getGame().getCardsIn(ZoneType.Battlefield);
-            list = CardLists.getTargetableCards(list, sa);
+            CardCollection list = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
             list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
 
             if (list.isEmpty() || list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
@@ -226,7 +216,7 @@ public class DestroyAi extends SpellAbilityAi {
 
             sa.resetTargets();
 
-            List<Card> preferred = CardLists.getNotKeyword(list, "Indestructible");
+            CardCollection preferred = CardLists.getNotKeyword(list, "Indestructible");
             preferred = CardLists.filterControlledBy(preferred, ai.getOpponents());
 
             // If NoRegen is not set, filter out creatures that have a

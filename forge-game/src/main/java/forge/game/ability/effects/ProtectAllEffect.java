@@ -7,6 +7,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
@@ -78,7 +79,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
             valid = sa.getParam("ValidCards");
         }
         if (!valid.equals("")) {
-            List<Card> list = game.getCardsIn(ZoneType.Battlefield);
+            CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
             list = CardLists.getValidCards(list, valid, sa.getActivatingPlayer(), host);
 
             for (final Card tgtC : list) {

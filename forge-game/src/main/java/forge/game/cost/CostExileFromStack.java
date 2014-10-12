@@ -19,14 +19,12 @@ package forge.game.cost;
 
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The Class CostExile.
@@ -85,7 +83,7 @@ public class CostExileFromStack extends CostPart {
             return true; // this will always work
         }
 
-        List<Card> list = new ArrayList<Card>(activator.getCardsIn(ZoneType.Stack));
+        CardCollectionView list = activator.getCardsIn(ZoneType.Stack);
 
         list = CardLists.getValidCards(list, type.split(";"), activator, source);
 

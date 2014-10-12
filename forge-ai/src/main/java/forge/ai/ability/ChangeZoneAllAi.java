@@ -5,6 +5,8 @@ import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
@@ -14,14 +16,9 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-import java.util.List;
 import java.util.Random;
 
 public class ChangeZoneAllAi extends SpellAbilityAi {
-
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
-     */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // Change Zone All, can be any type moving from one zone to another
@@ -39,7 +36,6 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
                 return false;
             }
-
         }
 
         final Random r = MyRandom.getRandom();
@@ -54,8 +50,8 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         // ex. "Return all blocking/blocked by target creature"
 
         final Player opp = ai.getOpponent();
-        final List<Card> humanType = AbilityUtils.filterListByType(opp.getCardsIn(origin), sa.getParam("ChangeType"), sa);
-        List<Card> computerType = ai.getCardsIn(origin);
+        final CardCollectionView humanType = AbilityUtils.filterListByType(opp.getCardsIn(origin), sa.getParam("ChangeType"), sa);
+        CardCollectionView computerType = ai.getCardsIn(origin);
         computerType = AbilityUtils.filterListByType(computerType, sa.getParam("ChangeType"), sa);
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
@@ -84,7 +80,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 }
                 sa.resetTargets();
                 sa.getTargets().add(opp);
-                computerType.clear();
+                computerType = new CardCollection();
             }
             if ((CardLists.getNotType(humanType, "Creature").size() == 0) && (CardLists.getNotType(computerType, "Creature").size() == 0)) {
                 if ((ComputerUtilCard.evaluateCreatureList(computerType) + 200) >= ComputerUtilCard
@@ -182,8 +178,8 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         final ZoneType origin = ZoneType.smartValueOf(sa.getParam("Origin"));
 
         final Player opp = ai.getOpponent();
-        final List<Card> humanType = AbilityUtils.filterListByType(opp.getCardsIn(origin), sa.getParam("ChangeType"), sa);
-        List<Card> computerType = ai.getCardsIn(origin);
+        final CardCollectionView humanType = AbilityUtils.filterListByType(opp.getCardsIn(origin), sa.getParam("ChangeType"), sa);
+        CardCollectionView computerType = ai.getCardsIn(origin);
         computerType = AbilityUtils.filterListByType(computerType, sa.getParam("ChangeType"), sa);
 
         // TODO improve restrictions on when the AI would want to use this

@@ -4,12 +4,12 @@ import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -118,15 +118,15 @@ public class DamageDealEffect extends SpellAbilityEffect {
             if (players.isEmpty()) {
                 return;
             }
-            
-            List<Card> assigneeCards = new ArrayList<Card>();
+
+            CardCollection assigneeCards = new CardCollection();
             // Do we have a way of doing this in a better fashion?
-            for(GameObject obj : tgts) {
+            for (GameObject obj : tgts) {
                 if (obj instanceof Card) {
                     assigneeCards.add((Card)obj);
                 }
             }
-            
+
             Player assigningPlayer = players.get(0);
             Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(source, assigneeCards, dmg, null, true);
             for (Entry<Card, Integer> dt : map.entrySet()) {

@@ -9,6 +9,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.Ability;
@@ -30,7 +31,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
         sb.append(newController).append(" gains control of");
 
-        final List<Card> tgts = getDefinedCards(sa);
+        final CardCollectionView tgts = getDefinedCards(sa);
         if (tgts.isEmpty()) {
         	sb.append(" (nothing)");
         } else {
@@ -88,7 +89,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
         final Player newController = controllers.isEmpty() ? sa.getActivatingPlayer() : controllers.get(0);
         final Game game = newController.getGame();
 
-        List<Card> tgtCards = this.getDefinedCards(sa);
+        CardCollectionView tgtCards = getDefinedCards(sa);
 
         if (sa.hasParam("ControlledByTarget")) {
         	tgtCards = CardLists.filterControlledBy(tgtCards, getTargetPlayers(sa));
@@ -139,40 +140,39 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
             if (lose != null) {
                 if (lose.contains("LeavesPlay")) {
-                    sa.getHostCard().addLeavesPlayCommand(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
+                    sa.getHostCard().addLeavesPlayCommand(getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
                 }
                 if (lose.contains("Untap")) {
-                    sa.getHostCard().addUntapCommand(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
+                    sa.getHostCard().addUntapCommand(getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
                 }
                 if (lose.contains("LoseControl")) {
-                    sa.getHostCard().addChangeControllerCommand(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
+                    sa.getHostCard().addChangeControllerCommand(getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
                 }
                 if (lose.contains("EOT")) {
-                    game.getEndOfTurn().addUntil(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
+                    game.getEndOfTurn().addUntil(getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
                     tgtC.setSVar("SacMe", "6");
                 }
                 if (lose.contains("StaticCommandCheck")) {
                     String leftVar = sa.getSVar(sa.getParam("StaticCommandCheckSVar"));
                     String rightVar = sa.getParam("StaticCommandSVarCompare");
                     sa.getHostCard().addStaticCommandList(new Object[]{leftVar, rightVar, tgtC,
-                            this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws)});
+                            getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws)});
                 }
             }
 
             if (destroyOn != null) {
                 if (destroyOn.contains("LeavesPlay")) {
-                    sa.getHostCard().addLeavesPlayCommand(this.getDestroyCommand(tgtC, source, bNoRegen));
+                    sa.getHostCard().addLeavesPlayCommand(getDestroyCommand(tgtC, source, bNoRegen));
                 }
                 if (destroyOn.contains("Untap")) {
-                    sa.getHostCard().addUntapCommand(this.getDestroyCommand(tgtC, source, bNoRegen));
+                    sa.getHostCard().addUntapCommand(getDestroyCommand(tgtC, source, bNoRegen));
                 }
                 if (destroyOn.contains("LoseControl")) {
-                    sa.getHostCard().addChangeControllerCommand(this.getDestroyCommand(tgtC, source, bNoRegen));
+                    sa.getHostCard().addChangeControllerCommand(getDestroyCommand(tgtC, source, bNoRegen));
                 }
             }
 
             game.getAction().controllerChangeZoneCorrection(tgtC);
-
         } // end foreach target
     }
 
@@ -242,13 +242,12 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
         return loseControl;
     }
-    
-    private List<Card> getDefinedCards(final SpellAbility sa) {
+
+    private CardCollectionView getDefinedCards(final SpellAbility sa) {
         final Game game = sa.getHostCard().getGame();
         if (sa.hasParam("AllValid")) {
             return AbilityUtils.filterListByType(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AllValid"), sa);
         }
         return getTargetCards(sa);
     }
-
 }

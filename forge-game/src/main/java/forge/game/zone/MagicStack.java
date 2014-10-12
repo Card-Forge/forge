@@ -30,6 +30,8 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -73,8 +75,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     private boolean frozen = false;
     private boolean bResolving = false;
 
-    private final List<Card> thisTurnCast = new ArrayList<Card>();
-    private List<Card> lastTurnCast = new ArrayList<Card>();
+    private final CardCollection thisTurnCast = new CardCollection();
+    private CardCollection lastTurnCast = new CardCollection();
     private Card curResolvingCard = null;
     private final HashMap<String, List<GameCommand>> commandList = new HashMap<String, List<GameCommand>>();
 
@@ -477,7 +479,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     private void handleHauntForNonPermanents(final SpellAbility sa) {
         final Card source = sa.getHostCard();
-        final List<Card> creats = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+        final CardCollection creats = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
         final Ability haunterDiesWork = new Ability(source, ManaCost.ZERO) {
             @Override
             public void resolve() {
@@ -747,21 +749,21 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return false;
     }
 
-    public final List<Card> getSpellsCastThisTurn() {
+    public final CardCollectionView getSpellsCastThisTurn() {
         return thisTurnCast;
     }
 
     public final void onNextTurn() {
         if (thisTurnCast.isEmpty()) {
-            lastTurnCast = new ArrayList<Card>();
+            lastTurnCast = new CardCollection();
             return;
         }
-        lastTurnCast = new ArrayList<Card>(thisTurnCast);
+        lastTurnCast = new CardCollection(thisTurnCast);
         thisTurnCast.clear();
         game.updateStackForView();
     }
 
-    public final List<Card> getSpellsCastLastTurn() {
+    public final CardCollectionView getSpellsCastLastTurn() {
         return lastTurnCast;
     }
 
@@ -776,7 +778,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     private void executeCastCommand(final Card cast) {
         for (Entry<String, List<GameCommand>> ev : commandList.entrySet()) {
-            if (cast.isType(ev.getKey())) {
+            if (cast.getType().hasStringType(ev.getKey())) {
                 execute(ev.getValue());
             }
         }

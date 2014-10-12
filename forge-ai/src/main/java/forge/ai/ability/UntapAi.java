@@ -6,6 +6,7 @@ import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
@@ -14,14 +15,9 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
-import java.util.Collection;
 import java.util.List;
 
 public class UntapAi extends SpellAbilityAi {
-
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
-     */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -123,8 +119,7 @@ public class UntapAi extends SpellAbilityAi {
             targetController = ai.getOpponent();
         }
 
-        List<Card> untapList = targetController.getCardsIn(ZoneType.Battlefield);
-        untapList = CardLists.getTargetableCards(untapList, sa);
+        CardCollection untapList = CardLists.getTargetableCards(targetController.getCardsIn(ZoneType.Battlefield), sa);
         untapList = CardLists.getValidCards(untapList, tgt.getValidTgts(), source.getController(), source);
 
         untapList = CardLists.filter(untapList, Presets.TAPPED);
@@ -189,15 +184,13 @@ public class UntapAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        List<Card> list = sa.getActivatingPlayer().getGame().getCardsIn(ZoneType.Battlefield);
-
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
+        CardCollection list = CardLists.getValidCards(sa.getActivatingPlayer().getGame().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), source.getController(), source);
         list = CardLists.getTargetableCards(list, sa);
 
         // filter by enchantments and planeswalkers, their tapped state doesn't
         // matter.
         final String[] tappablePermanents = { "Enchantment", "Planeswalker" };
-        List<Card> tapList = CardLists.getValidCards(list, tappablePermanents, source.getController(), source);
+        CardCollection tapList = CardLists.getValidCards(list, tappablePermanents, source.getController(), source);
 
         if (untapTargetList(source, tgt, sa, mandatory, tapList)) {
             return true;
@@ -220,27 +213,7 @@ public class UntapAi extends SpellAbilityAi {
         return false;
     }
 
-    /**
-     * <p>
-     * untapTargetList.
-     * </p>
-     * 
-     * @param source
-     *            a {@link forge.game.card.Card} object.
-     * @param tgt
-     *            a {@link forge.game.spellability.TargetRestrictions} object.
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @param tapList
-     *            a {@link forge.CardList} object.
-     * @return a boolean.
-     */
-    private boolean untapTargetList(final Card source, final TargetRestrictions tgt, final SpellAbility sa, final boolean mandatory, final List<Card> tapList) {
-        
+    private boolean untapTargetList(final Card source, final TargetRestrictions tgt, final SpellAbility sa, final boolean mandatory, final CardCollection tapList) {
         for (final Card c : sa.getTargets().getTargetCards()) {
             tapList.remove(c);
         }
@@ -294,7 +267,7 @@ public class UntapAi extends SpellAbilityAi {
     }
     
     @Override
-    public Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> list, boolean isOptional, Player targetedPlayer) {
+    public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> list, boolean isOptional, Player targetedPlayer) {
         return ComputerUtilCard.getBestAI(CardLists.filterControlledBy(list, ai.getAllies()));
     }
 }

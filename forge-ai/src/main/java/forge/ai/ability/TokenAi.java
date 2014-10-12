@@ -14,6 +14,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -190,7 +191,7 @@ public class TokenAi extends SpellAbilityAi {
             String num = sa.getParam("Amount");
             num = (num == null) ? "1" : num;
             final int nToSac = AbilityUtils.calculateAmount(topStack.getHostCard(), num, topStack);
-            List<Card> list =
+            CardCollection list =
                     CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), opp, topStack.getHostCard());
             list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
             if (!list.isEmpty() && nTokens > 0 && list.size() == nToSac) { //only care about saving single creature for now

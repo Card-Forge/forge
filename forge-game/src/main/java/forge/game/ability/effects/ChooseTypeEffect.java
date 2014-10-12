@@ -40,7 +40,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
         if (type.equals("Card")) {
             if (validTypes.isEmpty()) validTypes.addAll(CardType.Constant.CARD_TYPES);
         } else if (type.equals("Creature")) {
-            if (validTypes.isEmpty()) validTypes.addAll(CardType.getCreatureTypes());
+            if (validTypes.isEmpty()) validTypes.addAll(CardType.Constant.CREATURE_TYPES);
         } else if (type.equals("Basic Land")) {
             if (validTypes.isEmpty()) validTypes.addAll(CardType.getBasicTypes());
         } else if (type.equals("Land")) {

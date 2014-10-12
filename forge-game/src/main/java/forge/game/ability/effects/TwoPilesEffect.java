@@ -1,11 +1,11 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
@@ -13,7 +13,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TwoPilesEffect extends SpellAbilityEffect {
@@ -78,30 +77,30 @@ public class TwoPilesEffect extends SpellAbilityEffect {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                List<Card> pool0 = new ArrayList<Card>();
+                CardCollectionView pool0;
                 if (sa.hasParam("DefinedCards")) {
-                    pool0 = new ArrayList<Card>(AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedCards"), sa));
+                    pool0 = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedCards"), sa);
                 } else {
                     pool0 = p.getCardsIn(zone);
                 }
-                List<Card> pool = CardLists.getValidCards(pool0, valid, card.getController(), card);
+                CardCollection pool = CardLists.getValidCards(pool0, valid, card.getController(), card);
                 int size = pool.size();
                 if (size == 0) {
                     return;
                 }
 
                 // first, separate the cards into piles
-                final List<Card> pile1 = separator.getController().chooseCardsForEffect(pool, sa, "Divide cards into two piles", 0, size, false);
-                final List<Card> pile2 = Lists.newArrayList(pool);
-                Iterables.removeAll(pile2, pile1);
+                final CardCollectionView pile1 = separator.getController().chooseCardsForEffect(pool, sa, "Divide cards into two piles", 0, size, false);
+                final CardCollection pile2 = new CardCollection(pool);
+                pile2.removeAll(pile1);
 
                 System.out.println("Pile 1:" + pile1);
                 System.out.println("Pile 2:" + pile2);
                 card.clearRemembered();
 
                 pile1WasChosen = chooser.getController().chooseCardsPile(sa, pile1, pile2, !sa.hasParam("FaceDown"));
-                List<Card> chosenPile = pile1WasChosen ? pile1 : pile2;
-                List<Card> unchosenPile = !pile1WasChosen ? pile1 : pile2;
+                CardCollectionView chosenPile = pile1WasChosen ? pile1 : pile2;
+                CardCollectionView unchosenPile = !pile1WasChosen ? pile1 : pile2;
                 
                 p.getGame().getAction().nofityOfValue(sa, chooser, chooser + " chooses Pile " + (pile1WasChosen ? "1" : "2"), chooser);
 

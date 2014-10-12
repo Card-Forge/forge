@@ -4,12 +4,13 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DamageAllEffect extends SpellAbilityEffect {
@@ -53,14 +54,17 @@ public class DamageAllEffect extends SpellAbilityEffect {
         Player targetPlayer = sa.getTargets().getFirstTargetedPlayer();
 
         String players = "";
-        List<Card> list = new ArrayList<Card>();
 
         if (sa.hasParam("ValidPlayers")) {
             players = sa.getParam("ValidPlayers");
         }
 
+        CardCollectionView list;
         if (sa.hasParam("ValidCards")) {
             list = game.getCardsIn(ZoneType.Battlefield);
+        }
+        else {
+            list = CardCollection.EMPTY;
         }
 
         if (targetPlayer != null) {

@@ -3,12 +3,14 @@ package forge.game.ability.effects;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -74,14 +76,16 @@ public class UntapEffect extends SpellAbilityEffect {
         final List<Player> definedPlayers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
 
         for (final Player p : definedPlayers) {
-            List<Card> list = CardLists.getValidCards(p.getGame().getCardsIn(ZoneType.Battlefield),
+            CardCollectionView list = CardLists.getValidCards(p.getGame().getCardsIn(ZoneType.Battlefield),
                     valid, sa.getActivatingPlayer(), sa.getHostCard());
             list = CardLists.filter(list, Presets.TAPPED);
-            
-            List<Card> selected = p.getController().chooseCardsForEffect(list, sa, "Select cards to untap", 0, num, true);
-            if( selected != null )
-                for( Card c : selected ) 
+
+            CardCollectionView selected = p.getController().chooseCardsForEffect(list, sa, "Select cards to untap", 0, num, true);
+            if (selected != null) {
+                for (Card c : selected) { 
                     c.untap();
+                }
+            }
         }
     }
 

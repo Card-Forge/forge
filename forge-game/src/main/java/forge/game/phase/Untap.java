@@ -19,11 +19,13 @@ package forge.game.phase;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+
 import forge.card.CardType.Constant;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
@@ -31,6 +33,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.FCollection;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -105,16 +108,16 @@ public class Untap extends Phase {
         final Player player = game.getPhaseHandler().getPlayerTurn();
         final Predicate<Card> tappedCanUntap = Predicates.and(Presets.TAPPED, CANUNTAP);
 
-        List<Card> list = new ArrayList<Card>(player.getCardsIn(ZoneType.Battlefield));
+        CardCollection list = new CardCollection(player.getCardsIn(ZoneType.Battlefield));
         for (Card c : list) {
             c.setStartedTheTurnUntapped(c.isUntapped());
         }
 
-        List<Card> bounceList = CardLists.getKeyword(list, "During your next untap step, as you untap your permanents, return CARDNAME to its owner's hand.");
+        CardCollection bounceList = CardLists.getKeyword(list, "During your next untap step, as you untap your permanents, return CARDNAME to its owner's hand.");
         for (final Card c : bounceList) {
             game.getAction().moveToHand(c);
         }
-        list.removeAll(bounceList);
+        list.removeAll((Collection<?>)bounceList);
 
         final Map<String, Integer> restrictUntap = new HashMap<String, Integer>();
         boolean hasChosen = false;
@@ -135,7 +138,7 @@ public class Untap extends Phase {
                 hasChosen = true;
             }
         }
-        final List<Card> untapList = new ArrayList<Card>(list);
+        final CardCollection untapList = new CardCollection(list);
         final String[] restrict = restrictUntap.keySet().toArray(new String[restrictUntap.keySet().size()]);
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
@@ -157,7 +160,7 @@ public class Untap extends Phase {
         // other players untapping during your untap phase
         List<Card> cardsWithKW = CardLists.getKeyword(game.getCardsIn(ZoneType.Battlefield),
                 "CARDNAME untaps during each other player's untap step.");
-        final List<Player> otherPlayers = new ArrayList<Player>(game.getPlayers());
+        final FCollection<Player> otherPlayers = new FCollection<Player>(game.getPlayers());
         otherPlayers.remove(player);
         cardsWithKW = CardLists.filter(cardsWithKW, CardPredicates.isControlledByAnyOf(otherPlayers));
         for (final Card cardWithKW : cardsWithKW) {
@@ -165,15 +168,15 @@ public class Untap extends Phase {
         }
         // end other players untapping during your untap phase
 
-        List<Card> restrictUntapped = new ArrayList<Card>();
-        List<Card> cardList = CardLists.filter(untapList, tappedCanUntap);
+        CardCollection restrictUntapped = new CardCollection();
+        CardCollection cardList = CardLists.filter(untapList, tappedCanUntap);
         cardList = CardLists.getValidCards(cardList, restrict, player, null);
 
         while (!cardList.isEmpty()) {
             Map<String, Integer> remaining = new HashMap<String, Integer>(restrictUntap);
             for (Entry<String, Integer> entry : remaining.entrySet()) {
                 if (entry.getValue() == 0) {
-                    cardList.removeAll(CardLists.getValidCards(cardList, entry.getKey(), player, null));
+                    cardList.removeAll((Collection<?>)CardLists.getValidCards(cardList, entry.getKey(), player, null));
                     restrictUntap.remove(entry.getKey());
                 }
             }
@@ -194,8 +197,7 @@ public class Untap extends Phase {
         }
 
         // Remove temporary keywords
-        list = player.getCardsIn(ZoneType.Battlefield);
-        for (final Card c : list) {
+        for (final Card c : player.getCardsIn(ZoneType.Battlefield)) {
             c.removeAllExtrinsicKeyword("This card doesn't untap during your next untap step.");
             c.removeAllExtrinsicKeyword("HIDDEN This card doesn't untap during your next untap step.");
             if (c.hasKeyword("This card doesn't untap during your next two untap steps.")) {

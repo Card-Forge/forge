@@ -6,6 +6,7 @@ import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -15,18 +16,14 @@ import java.util.List;
 import java.util.Random;
 
 public class FightAi extends SpellAbilityAi {
-
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
-     */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         sa.resetTargets();
         final Card source = sa.getHostCard();
 
-        List<Card> aiCreatures = ai.getCreaturesInPlay();
+        CardCollectionView aiCreatures = ai.getCreaturesInPlay();
         aiCreatures = CardLists.getTargetableCards(aiCreatures, sa);
-        aiCreatures =  ComputerUtil.getSafeTargets(ai, sa, aiCreatures);
+        aiCreatures = ComputerUtil.getSafeTargets(ai, sa, aiCreatures);
 
         List<Card> humCreatures = ai.getOpponent().getCreaturesInPlay();
         humCreatures = CardLists.getTargetableCards(humCreatures, sa);
@@ -35,7 +32,7 @@ public class FightAi extends SpellAbilityAi {
         if (r.nextFloat() > Math.pow(.6667, sa.getActivationsThisTurn())) {
             return false;
         }
-        
+
         //assumes the triggered card belongs to the ai
         if (sa.hasParam("Defined")) {
             Card fighter1 = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).get(0);
@@ -90,13 +87,9 @@ public class FightAi extends SpellAbilityAi {
                 }
             }
         }
-
         return false;
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
-     */
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (canPlayAI(ai, sa)) {
@@ -132,7 +125,6 @@ public class FightAi extends SpellAbilityAi {
             sa.getTargets().add(humCreatures.get(0));
             return true;
         }
-        
         return true;
     }
     public static boolean shouldFight(Card fighter, Card opponent, int pumpAttack, int pumpDefense) {

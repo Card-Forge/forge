@@ -6,6 +6,7 @@ import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -13,8 +14,6 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-
-import java.util.List;
 
 public class MillAi extends SpellAbilityAi {
 
@@ -96,7 +95,7 @@ public class MillAi extends SpellAbilityAi {
 
             final int numCards = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
 
-            final List<Card> pLibrary = opp.getCardsIn(ZoneType.Library);
+            final CardCollectionView pLibrary = opp.getCardsIn(ZoneType.Library);
 
             if (pLibrary.isEmpty()) { // deck already empty, no need to mill
                 if (!mandatory) {

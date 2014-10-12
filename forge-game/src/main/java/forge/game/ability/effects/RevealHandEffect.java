@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -43,7 +44,7 @@ public class RevealHandEffect extends SpellAbilityEffect {
                 if (optional && !p.getController().confirmAction(sa, null, "Do you want to reveal your hand?")) {
                     continue;
                 }
-                final List<Card> hand = p.getCardsIn(ZoneType.Hand);
+                final CardCollectionView hand = p.getCardsIn(ZoneType.Hand);
                 sa.getActivatingPlayer().getController().reveal(hand, ZoneType.Hand, p);
                 if (sa.hasParam("RememberRevealed")) {
                     for (final Card c : hand) {

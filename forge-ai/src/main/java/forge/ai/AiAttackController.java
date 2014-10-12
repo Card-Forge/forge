@@ -25,6 +25,7 @@ import forge.game.GameEntity;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.ProtectEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
@@ -35,6 +36,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.FCollectionView;
 import forge.util.MyRandom;
 
 import java.util.ArrayList;
@@ -206,7 +208,7 @@ public class AiAttackController {
             return true;
         }
 
-        final List<Card> controlledByCompy = ai.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
+        final CardCollectionView controlledByCompy = ai.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
         for (final Card c : controlledByCompy) {
             for (final Trigger trigger : c.getTriggers()) {
                 if (ComputerUtilCombat.combatTriggerWillTrigger(attacker, null, trigger, combat)) {
@@ -214,21 +216,9 @@ public class AiAttackController {
                 }
             }
         }
-
         return false;
     }
 
-    /**
-     * <p>
-     * getPossibleBlockers.
-     * </p>
-     * 
-     * @param blockers
-     *            a {@link forge.CardList} object.
-     * @param attackers
-     *            a {@link forge.CardList} object.
-     * @return a {@link forge.CardList} object.
-     */
     public final List<Card> getPossibleBlockers(final List<Card> blockers, final List<Card> attackers) {
         List<Card> possibleBlockers = new ArrayList<Card>(blockers);
         possibleBlockers = CardLists.filter(possibleBlockers, new Predicate<Card>() {
@@ -238,19 +228,8 @@ public class AiAttackController {
             }
         });
         return possibleBlockers;
-    } // getPossibleBlockers()
+    }
 
-    /**
-     * <p>
-     * canBlockAnAttacker.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param attackers
-     *            a {@link forge.CardList} object.
-     * @return a boolean.
-     */
     public final boolean canBlockAnAttacker(final Card c, final List<Card> attackers) {
         final List<Card> attackerList = new ArrayList<Card>(attackers);
         if (!c.isCreature()) {
@@ -262,22 +241,11 @@ public class AiAttackController {
             }
         }
         return false;
-    } // getPossibleBlockers()
+    }
 
     // this checks to make sure that the computer player
     // doesn't lose when the human player attacks
     // this method is used by getAttackers()
-    /**
-     * <p>
-     * notNeededAsBlockers.
-     * </p>
-     * 
-     * @param attackers
-     *            a {@link forge.CardList} object.
-     * @param combat
-     *            a {@link forge.game.combat.Combat} object.
-     * @return a {@link forge.CardList} object.
-     */
     public final List<Card> notNeededAsBlockers(final Player ai, final List<Card> attackers) {
         final List<Card> notNeededAsBlockers = new ArrayList<Card>(attackers);
         int fixedBlockers = 0;
@@ -375,15 +343,6 @@ public class AiAttackController {
     }
 
     // this uses a global variable, which isn't perfect
-    /**
-     * <p>
-     * doesHumanAttackAndWin.
-     * </p>
-     * 
-     * @param nBlockingCreatures
-     *            a int.
-     * @return a boolean.
-     */
     public final boolean doesHumanAttackAndWin(final Player ai, final int nBlockingCreatures) {
         int totalAttack = 0;
         int totalPoison = 0;
@@ -412,18 +371,11 @@ public class AiAttackController {
         return ai.getPoisonCounters() + totalPoison > 9;
     }
 
-    /**
-     * <p>
-     * doAssault.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     private boolean doAssault(final Player ai) {
         // Beastmaster Ascension
         if (ai.isCardInPlay("Beastmaster Ascension")
                 && (this.attackers.size() > 1)) {
-            final List<Card> beastions = ai.getCardsIn(ZoneType.Battlefield, "Beastmaster Ascension");
+            final CardCollectionView beastions = ai.getCardsIn(ZoneType.Battlefield, "Beastmaster Ascension");
             int minCreatures = 7;
             for (final Card beastion : beastions) {
                 final int counters = beastion.getCounters(CounterType.QUEST);
@@ -505,22 +457,12 @@ public class AiAttackController {
         }
 
         return false;
-    } // doAssault()
+    }
 
-    /**
-     * <p>
-     * chooseDefender.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.combat.Combat} object.
-     * @param bAssault
-     *            a boolean.
-     */
     private final GameEntity chooseDefender(final Combat c, final boolean bAssault) {
-        final List<GameEntity> defs = c.getDefenders();
+        final FCollectionView<GameEntity> defs = c.getDefenders();
         if (defs.size() == 1) {
-            return defs.get(0);
+            return defs.getFirst();
         }
         Player prefDefender = (Player) (defs.contains(this.defendingOpponent) ? this.defendingOpponent : defs.get(0));
 

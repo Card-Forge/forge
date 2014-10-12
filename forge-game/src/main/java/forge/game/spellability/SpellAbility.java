@@ -17,10 +17,7 @@
  */
 package forge.game.spellability;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-
 import forge.card.mana.ManaCost;
 import forge.game.CardTraitBase;
 import forge.game.Game;
@@ -31,6 +28,8 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPartMana;
 import forge.game.mana.Mana;
@@ -80,7 +79,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private Card grantorCard = null; // card which grants the ability (equipment or owner of static ability that gave this one)
 
-    private List<Card> splicedCards = null;
+    private CardCollection splicedCards = null;
 
     private boolean basicSpell = true;
     private boolean trigger = false;
@@ -109,14 +108,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private final ArrayList<Mana> payingMana = new ArrayList<Mana>();
     private final List<SpellAbility> paidAbilities = new ArrayList<SpellAbility>();
 
-    private HashMap<String, List<Card>> paidLists = new HashMap<String, List<Card>>();
+    private HashMap<String, CardCollection> paidLists = new HashMap<String, CardCollection>();
 
     private HashMap<String, Object> triggeringObjects = new HashMap<String, Object>();
 
     private HashMap<String, Object> replacingObjects = new HashMap<String, Object>();
 
     private List<AbilitySub> chosenList = null;
-    private List<Card> tappedForConvoke = new ArrayList<Card>();
+    private CardCollection tappedForConvoke = new CardCollection();
     private Card sacrificedAsOffering = null;
     private int conspireInstances = 0;
 
@@ -357,24 +356,24 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     // Combined PaidLists
-    public HashMap<String, List<Card>> getPaidHash() {
+    public HashMap<String, CardCollection> getPaidHash() {
         return paidLists;
     }
-    public void setPaidHash(final HashMap<String, List<Card>> hash) {
+    public void setPaidHash(final HashMap<String, CardCollection> hash) {
         paidLists = hash;
     }
 
-    public List<Card> getPaidList(final String str) {
+    public CardCollection getPaidList(final String str) {
         return paidLists.get(str);
     }
     public void addCostToHashList(final Card c, final String str) {
         if (!paidLists.containsKey(str)) {
-            paidLists.put(str, new ArrayList<Card>());
+            paidLists.put(str, new CardCollection());
         }
         paidLists.get(str).add(c);
     }
     public void resetPaidHash() {
-        paidLists = new HashMap<String, List<Card>>();
+        paidLists = new HashMap<String, CardCollection>();
     }
 
     public Iterable<OptionalCost> getOptionalCosts() {
@@ -619,7 +618,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
             if (hasParam("TargetsWithSharedCardType") && entity instanceof Card) {
                 final Card c = (Card) entity;
-                List<Card> pl = AbilityUtils.getDefinedCards(getHostCard(), getParam("TargetsWithSharedCardType"), this);
+                CardCollection pl = AbilityUtils.getDefinedCards(getHostCard(), getParam("TargetsWithSharedCardType"), this);
                 for (final Card crd : pl) {
                     if (!c.sharesCardTypeWith(crd)) {
                         return false;
@@ -635,7 +634,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 }
                 boolean flag = false;
                 for (final String type : getParam("TargetsWithSharedTypes").split(",")) {
-                    if (c.isType(type) && parentTargeted.isType(type)) {
+                    if (c.getType().hasStringType(type) && parentTargeted.getType().hasStringType(type)) {
                         flag = true;
                         break;
                     }
@@ -694,12 +693,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         delve = isDelve0;
     }
 
-    public List<Card> getTappedForConvoke() {
+    public CardCollection getTappedForConvoke() {
         return tappedForConvoke;
     }
     public void addTappedForConvoke(final Card c) {
         if (tappedForConvoke == null) {
-            tappedForConvoke = new ArrayList<Card>();
+            tappedForConvoke = new CardCollection();
         }
         tappedForConvoke.add(c);
     }
@@ -726,22 +725,22 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         sacrificedAsOffering = null;
     }
 
-    public List<Card> getSplicedCards() {
+    public CardCollection getSplicedCards() {
         return splicedCards;
     }
-    public void setSplicedCards(List<Card> splicedCards0) {
+    public void setSplicedCards(CardCollection splicedCards0) {
         splicedCards = splicedCards0;
     }
     public void addSplicedCards(Card splicedCard) {
         if (splicedCards == null) {
-            splicedCards = new ArrayList<Card>();
+            splicedCards = new CardCollection();
         }
         splicedCards.add(splicedCard);
     }
 
-    public List<Card> knownDetermineDefined(final String defined) {
-        final List<Card> ret = new ArrayList<Card>();
-        final List<Card> list = AbilityUtils.getDefinedCards(getHostCard(), defined, this);
+    public CardCollection knownDetermineDefined(final String defined) {
+        final CardCollection ret = new CardCollection();
+        final CardCollection list = AbilityUtils.getDefinedCards(getHostCard(), defined, this);
         final Game game = getActivatingPlayer().getGame();
 
         for (final Card c : list) {
@@ -954,15 +953,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
      * 
      * @return a {@link forge.game.spellability.SpellAbility} object.
      */
-    public List<Card> findTargetedCards() {
+    public CardCollectionView findTargetedCards() {
         // First search for targeted cards associated with current ability
         if (targetChosen.isTargetingAnyCard()) {
-            return Lists.newArrayList(targetChosen.getTargetCards());
+            return targetChosen.getTargetCards();
         }
 
         // Next search for source cards of targeted SAs associated with current ability
         if (targetChosen.isTargetingAnySpell()) {
-            List<Card> res = Lists.newArrayList();
+            CardCollection res = new CardCollection();
             for (final SpellAbility ability : targetChosen.getTargetSpells()) {
                 res.add(ability.getHostCard());
             }
@@ -981,7 +980,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return parent.findTargetedCards();
         }
 
-        return ImmutableList.<Card>of();
+        return CardCollection.EMPTY;
     }
 
     public SpellAbility getSATargetingCard() {

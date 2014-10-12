@@ -19,6 +19,7 @@ package forge.game.spellability;
 
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
 import forge.game.player.Player;
@@ -26,7 +27,6 @@ import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <p>
@@ -110,7 +110,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         Player activator = getActivatingPlayer();
         final Game game = activator.getGame();
         // CantBeCast static abilities
-        final List<Card> allp = new ArrayList<Card>(game.getCardsIn(ZoneType.listValueOf("Battlefield,Command")));
+        final CardCollection allp = new CardCollection(game.getCardsIn(ZoneType.listValueOf("Battlefield,Command")));
         allp.add(source);
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();

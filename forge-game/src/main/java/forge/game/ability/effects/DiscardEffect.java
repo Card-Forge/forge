@@ -6,6 +6,8 @@ import com.google.common.collect.Lists;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
@@ -184,17 +186,20 @@ public class DiscardEffect extends SpellAbilityEffect {
                             list.remove(disc);
                         }
                     }
-                } else if (mode.equals("TgtChoose") && sa.hasParam("UnlessType")) {
+                }
+                else if (mode.equals("TgtChoose") && sa.hasParam("UnlessType")) {
                     if( numCardsInHand > 0 ) {
-                        List<Card> hand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
+                        CardCollectionView hand = p.getCardsIn(ZoneType.Hand);
                         hand = CardLists.filter(hand, Presets.NON_TOKEN);
-                        List<Card> toDiscard = p.getController().chooseCardsToDiscardUnlessType(Math.min(numCards, numCardsInHand), hand, sa.getParam("UnlessType"), sa);
-                        for(Card c : toDiscard)
+                        CardCollectionView toDiscard = p.getController().chooseCardsToDiscardUnlessType(Math.min(numCards, numCardsInHand), hand, sa.getParam("UnlessType"), sa);
+                        for (Card c : toDiscard) {
                             c.getController().discard(c, sa);
+                        }
                     }
-                } else if (mode.equals("RevealDiscardAll")) {
+                }
+                else if (mode.equals("RevealDiscardAll")) {
                     // Reveal
-                    final List<Card> dPHand = p.getCardsIn(ZoneType.Hand);
+                    final CardCollectionView dPHand = p.getCardsIn(ZoneType.Hand);
 
                     for (final Player opp : p.getOpponents()) {
                     	opp.getController().reveal(dPHand, ZoneType.Hand, p, "Reveal ");
@@ -214,7 +219,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                         discarded.add(c);
                     }
                 } else if (mode.equals("RevealYouChoose") || mode.equals("RevealTgtChoose") || mode.equals("TgtChoose")) {
-                    List<Card> dPHand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
+                    CardCollectionView dPHand = p.getCardsIn(ZoneType.Hand);
                     dPHand = CardLists.filter(dPHand, Presets.NON_TOKEN);
                     if (dPHand.isEmpty())
                         continue; // for loop over players
@@ -226,7 +231,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                     }
                     final String valid = sa.hasParam("DiscardValid") ? sa.getParam("DiscardValid") : "Card";
                     String[] dValid = valid.split(",");
-                    List<Card> validCards = CardLists.getValidCards(dPHand, dValid, source.getController(), source);
+                    CardCollection validCards = CardLists.getValidCards(dPHand, dValid, source.getController(), source);
 
                     Player chooser = p;
                     if (mode.equals("RevealYouChoose")) {
@@ -241,7 +246,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                     int min = sa.hasParam("AnyNumber") || sa.hasParam("Optional") ? 0 : Math.min(validCards.size(), numCards);
                     int max = sa.hasParam("AnyNumber") ? validCards.size() : Math.min(validCards.size(), numCards);
 
-                    List<Card> toBeDiscarded = validCards.isEmpty() ? null : chooser.getController().chooseCardsToDiscardFrom(p, sa, validCards, min, max);
+                    CardCollectionView toBeDiscarded = validCards.isEmpty() ? null : chooser.getController().chooseCardsToDiscardFrom(p, sa, validCards, min, max);
 
                     if (toBeDiscarded != null) {
                         if (mode.startsWith("Reveal") ) {

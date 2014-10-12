@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
+import forge.card.CardTypeView;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.game.GameEntityView;
@@ -163,6 +164,28 @@ public class TrackableTypes {
             }
             else {
                 value.serialize(ts); //serialize card state views here since they won't be stored in an index
+            }
+        }
+    };
+    public static final TrackableType<CardTypeView> CardTypeCollectionViewType = new TrackableType<CardTypeView>() {
+        @Override
+        protected CardTypeView getDefaultValue() {
+            return null;
+        }
+
+        @Override
+        protected CardTypeView deserialize(TrackableDeserializer td, CardTypeView oldValue) {
+            //TODO deserialize this
+            return oldValue;
+        }
+
+        @Override
+        protected void serialize(TrackableSerializer ts, CardTypeView value) {
+            if (value == null) {
+                ts.write(-1);
+            }
+            else {
+                //TODO serialize this
             }
         }
     };

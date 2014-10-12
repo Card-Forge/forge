@@ -3,14 +3,13 @@ package forge.game.ability.effects;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
-
-import java.util.List;
 
 public class EncodeEffect extends SpellAbilityEffect {
     @Override
@@ -32,7 +31,7 @@ public class EncodeEffect extends SpellAbilityEffect {
         final Game game = player.getGame();
 
         // make list of creatures that controller has on Battlefield
-        List<Card> choices = game.getCardsIn(ZoneType.Battlefield);
+        CardCollectionView choices = game.getCardsIn(ZoneType.Battlefield);
         choices = CardLists.getValidCards(choices, "Creature.YouCtrl", host.getController(), host);
 
         // if no creatures on battlefield, cannot encoded

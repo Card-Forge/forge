@@ -5,16 +5,17 @@ import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
 public class UnattachAllEffect extends SpellAbilityEffect {
-
     private void handleUnattachment(final GameEntity o, final Card cardToUnattach) {
         if (o instanceof Card) {
             final Card c = (Card) o;
@@ -134,9 +135,6 @@ public class UnattachAllEffect extends SpellAbilityEffect {
     }
     */
 
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
-     */
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -146,9 +144,6 @@ public class UnattachAllEffect extends SpellAbilityEffect {
         return sb.toString();
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
-     */
     @Override
     public void resolve(SpellAbility sa) {
         Card source = sa.getHostCard();
@@ -162,7 +157,7 @@ public class UnattachAllEffect extends SpellAbilityEffect {
             }
 
             String valid = sa.getParam("UnattachValid");
-            List<Card> unattachList = game.getCardsIn(ZoneType.Battlefield);
+            CardCollectionView unattachList = game.getCardsIn(ZoneType.Battlefield);
             unattachList = CardLists.getValidCards(unattachList, valid.split(","), source.getController(), source);
             for (final Card c : unattachList) {
                 handleUnattachment((GameEntity) o, c);

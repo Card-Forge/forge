@@ -26,6 +26,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.ScrollPaneConstants;
@@ -53,7 +54,7 @@ import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedTextArea;
-import forge.util.FCollection;
+import forge.util.FCollectionView;
 import forge.view.arcane.CardPanel;
 
 /** 
@@ -111,7 +112,7 @@ public enum VStack implements IVDoc<CStack> {
 
     public void updateStack() {
         final GameView model = MatchUtil.getGameView();
-        final FCollection<StackItemView>.FCollectionView items = model.getStack();
+        final FCollectionView<StackItemView> items = model.getStack();
         tab.setText("Stack : " + items.size());
 
         // No need to update the rest unless it's showing

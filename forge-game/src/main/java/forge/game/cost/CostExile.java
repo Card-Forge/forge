@@ -19,14 +19,13 @@ package forge.game.cost;
 
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-
-import java.util.ArrayList;
-import java.util.List;
+import forge.util.FCollectionView;
 
 /**
  * The Class CostExile.
@@ -38,35 +37,13 @@ public class CostExile extends CostPartWithList {
     // ExileFromTop<Num/Type{/TypeDescription}> (of library)
     // ExileSameGrave<Num/Type{/TypeDescription}>
 
-        /** 
-     * TODO: Write javadoc for this type.
-     *
-     */
-
     public final ZoneType from;
     public final boolean sameZone;
 
-    /**
-     * Gets the from.
-     * 
-     * @return the from
-     */
     public final ZoneType getFrom() {
         return this.from;
     }
 
-    /**
-     * Instantiates a new cost exile.
-     * 
-     * @param amount
-     *            the amount
-     * @param type
-     *            the type
-     * @param description
-     *            the description
-     * @param from
-     *            the from
-     */
     public CostExile(final String amount, final String type, final String description, final ZoneType from) {
         this(amount, type, description, from, false);
     }
@@ -77,11 +54,6 @@ public class CostExile extends CostPartWithList {
         this.sameZone = sameZone;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.card.cost.CostPart#toString()
-     */
     @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
@@ -133,13 +105,6 @@ public class CostExile extends CostPartWithList {
         return sb.toString();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.Player, forge.card.cost.Cost)
-     */
     @Override
     public final boolean canPay(final SpellAbility ability) {
         final Player activator = ability.getActivatingPlayer();
@@ -154,12 +119,12 @@ public class CostExile extends CostPartWithList {
             type = type.replace("FromTopGrave", "");
         }
 
-        List<Card> list;
+        CardCollectionView list;
         if (this.sameZone) {
-            list = new ArrayList<Card>(game.getCardsIn(this.from));
+            list = game.getCardsIn(this.from);
         }
         else {
-            list = new ArrayList<Card>(activator.getCardsIn(this.from));
+            list = activator.getCardsIn(this.from);
         }
 
         if (this.payCostFromSource()) {
@@ -175,7 +140,7 @@ public class CostExile extends CostPartWithList {
 
         if (this.sameZone && amount != null) {
             boolean foundPayable = false;
-            List<Player> players = game.getPlayers();
+            FCollectionView<Player> players = game.getPlayers();
             for (Player p : players) {
                 if (CardLists.filter(list, CardPredicates.isController(p)).size() >= amount) {
                     foundPayable = true;
@@ -189,10 +154,6 @@ public class CostExile extends CostPartWithList {
         return true;
     }
 
-
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
-     */
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard) {
         final Game game = targetCard.getGame();
@@ -201,9 +162,7 @@ public class CostExile extends CostPartWithList {
 
     public static final String HashLKIListKey = "Exiled";
     public static final String HashCardListKey = "ExiledCards";
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPartWithList#getHashForList()
-     */
+
     @Override
     public String getHashForLKIList() {
         return HashLKIListKey;
@@ -216,5 +175,4 @@ public class CostExile extends CostPartWithList {
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }
-    
 }

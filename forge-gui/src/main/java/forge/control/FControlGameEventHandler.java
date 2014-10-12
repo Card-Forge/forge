@@ -14,6 +14,7 @@ import com.google.common.eventbus.Subscribe;
 import forge.GuiBase;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardView;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventAnteCardsSelected;
@@ -368,7 +369,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(GameEventPlayerStatsChanged event) {
-        HashSet<Card> cards = new HashSet<Card>();
+        CardCollection cards = new CardCollection();
         for (final Player p : event.players) {
             cards.addAll(p.getAllCards());
         }

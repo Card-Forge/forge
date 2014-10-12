@@ -21,7 +21,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.GameCommand;
-import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
@@ -30,6 +29,8 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
@@ -225,13 +226,7 @@ public class StaticAbilityContinuous {
                 se.setChosenType(chosenType);
             } else if (addTypes[0].equals("ImprintedCreatureType")) {
                 if (hostCard.hasImprintedCard()) {
-                    final Set<String> imprint = hostCard.getImprintedCards().getFirst().getType();
-                    ArrayList<String> imprinted = new ArrayList<String>();
-                    for (String t : imprint) {
-                        if (CardType.isACreatureType(t) || t.equals("AllCreatureTypes")) {
-                            imprinted.add(t);
-                        }
-                    }
+                    final Set<String> imprinted = hostCard.getImprintedCards().getFirst().getType().getCreatureTypes();
                     addTypes = imprinted.toArray(new String[imprinted.size()]);
                 }
             }
@@ -310,11 +305,10 @@ public class StaticAbilityContinuous {
                 }
             }
 
-            List<Card> cardsIGainedAbilitiesFrom = game.getCardsIn(validZones);
+            CardCollectionView cardsIGainedAbilitiesFrom = game.getCardsIn(validZones);
             cardsIGainedAbilitiesFrom = CardLists.getValidCards(cardsIGainedAbilitiesFrom, valids, hostCard.getController(), hostCard);
 
             if (cardsIGainedAbilitiesFrom.size() > 0) {
-
                 addFullAbs = new ArrayList<SpellAbility>();
 
                 for (Card c : cardsIGainedAbilitiesFrom) {
@@ -642,23 +636,23 @@ public class StaticAbilityContinuous {
         }
 
         // non - CharacteristicDefining
-        List<Card> affectedCards = new ArrayList<Card>();
+        CardCollection affectedCards;
 
         if (params.containsKey("AffectedZone")) {
-            affectedCards.addAll(game.getCardsIn(ZoneType.listValueOf(params.get("AffectedZone"))));
+            affectedCards = new CardCollection(game.getCardsIn(ZoneType.listValueOf(params.get("AffectedZone"))));
         } else {
-            affectedCards = game.getCardsIn(ZoneType.Battlefield);
+            affectedCards = new CardCollection(game.getCardsIn(ZoneType.Battlefield));
         }
 
         if (params.containsKey("Affected") && !params.get("Affected").contains(",")) {
             if (params.get("Affected").contains("Self")) {
-                affectedCards = Lists.newArrayList(hostCard);
+                affectedCards = new CardCollection(hostCard);
             } else if (params.get("Affected").contains("EnchantedBy")) {
-                affectedCards = Lists.newArrayList(hostCard.getEnchantingCard());
+                affectedCards = new CardCollection(hostCard.getEnchantingCard());
             } else if (params.get("Affected").contains("EquippedBy")) {
-                affectedCards = Lists.newArrayList(hostCard.getEquipping());
+                affectedCards = new CardCollection(hostCard.getEquipping());
             } else if (params.get("Affected").equals("EffectSource")) {
-                affectedCards = new ArrayList<Card>(AbilityUtils.getDefinedCards(hostCard, params.get("Affected"), null));
+                affectedCards = new CardCollection(AbilityUtils.getDefinedCards(hostCard, params.get("Affected"), null));
                 return affectedCards;
             }
         }
@@ -666,7 +660,7 @@ public class StaticAbilityContinuous {
         if (params.containsKey("Affected")) {
             affectedCards = CardLists.getValidCards(affectedCards, params.get("Affected").split(","), controller, hostCard);
         }
-        affectedCards.removeAll(stAb.getIgnoreEffectCards());
+        affectedCards.removeAll((List<?>)stAb.getIgnoreEffectCards());
         return affectedCards;
     }
 }

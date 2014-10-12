@@ -2,17 +2,15 @@ package forge.game.combat;
 
 import forge.game.GameEntity;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
 public class AttackingBand {
-    private List<Card> attackers = new ArrayList<Card>();
+    private CardCollection attackers = new CardCollection();
     private Boolean blocked = null; // even if all blockers were killed before FS or CD, band remains blocked
     
     public AttackingBand(List<Card> band, GameEntity def) {
@@ -22,9 +20,9 @@ public class AttackingBand {
     public AttackingBand(Card card, GameEntity def) {
         attackers.add(card);
     }
-    
-    public List<Card> getAttackers() { return this.attackers; }
-    
+
+    public CardCollectionView getAttackers() { return attackers; }
+
     public void addAttacker(Card card) { attackers.add(card); }
     public void removeAttacker(Card card) { attackers.remove(card); }
     

@@ -19,6 +19,7 @@ import forge.item.PaperCard;
 import forge.player.PlayerControllerHuman;
 import forge.sound.IAudioClip;
 import forge.sound.IAudioMusic;
+import forge.util.FCollectionView;
 
 public interface IGuiBase {
     boolean isRunningOnDesktop();
@@ -40,7 +41,7 @@ public interface IGuiBase {
     <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode);
     List<PaperCard> sideboard(CardPool sideboard, CardPool main);
-    GameEntityView chooseSingleEntityForEffect(String title, Collection<? extends GameEntity> optionList, DelayedReveal delayedReveal, boolean isOptional, PlayerControllerHuman controller);
+    GameEntityView chooseSingleEntityForEffect(String title, FCollectionView<? extends GameEntity> optionList, DelayedReveal delayedReveal, boolean isOptional, PlayerControllerHuman controller);
     String showFileDialog(String title, String defaultDir);
     File getSaveFile(File defaultFile);
     void showCardList(final String title, final String message, final List<PaperCard> list);

@@ -30,6 +30,7 @@ import forge.events.UiEventAttackerDeclared;
 import forge.game.GameEntity;
 import forge.game.GameEntityView;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
@@ -42,6 +43,7 @@ import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.match.MatchUtil;
 import forge.player.PlayerControllerHuman;
+import forge.util.FCollectionView;
 import forge.util.ITriggerEvent;
 
 /**
@@ -56,7 +58,7 @@ public class InputAttack extends InputSyncronizedBase {
     private static final long serialVersionUID = 7849903731842214245L;
 
     private final Combat combat;
-    private final List<GameEntity> defenders;
+    private final FCollectionView<GameEntity> defenders;
     private GameEntity currentDefender;
     private final Player playerAttacks;
     private AttackingBand activeBand = null;
@@ -71,9 +73,9 @@ public class InputAttack extends InputSyncronizedBase {
     @Override
     public final void showMessage() {
         // TODO still seems to have some issues with multiple planeswalkers
-        setCurrentDefender(defenders.isEmpty() ? null : defenders.get(0));
+        setCurrentDefender(defenders.getFirst());
 
-        if (null == currentDefender) {
+        if (currentDefender == null) {
             System.err.println("InputAttack has no potential defenders!");
             updatePrompt();
             return; // should even throw here!
@@ -295,7 +297,7 @@ public class InputAttack extends InputSyncronizedBase {
 
     //only enable banding message and actions if a creature that can attack has banding
     private boolean isBandingPossible() {
-        final List<Card> possibleAttackers = playerAttacks.getCardsIn(ZoneType.Battlefield);
+        final CardCollectionView possibleAttackers = playerAttacks.getCardsIn(ZoneType.Battlefield);
         for (final Card c : Iterables.filter(possibleAttackers, CardPredicates.hasKeyword("Banding"))) {
             if (c.isCreature() && CombatUtil.canAttack(c, currentDefender, combat)) {
                 return true;

@@ -18,34 +18,22 @@
 package forge.game.cost;
 
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-import java.util.List;
-
 /**
  * The Class CostUntapType.
  */
 public class CostUntapType extends CostPartWithList {
-
     public final boolean canUntapSource;
-    
-    /**
-     * Instantiates a new cost untap type.
-     * 
-     * @param amount
-     *            the amount
-     * @param type
-     *            the type
-     * @param description
-     *            the description
-     */
+
     public CostUntapType(final String amount, final String type, final String description, boolean hasUntapInPrice) {
         super(amount, type, description);
-        this.canUntapSource = !hasUntapInPrice;
+        canUntapSource = !hasUntapInPrice;
     }
 
     @Override
@@ -53,84 +41,59 @@ public class CostUntapType extends CostPartWithList {
 
     @Override
     public boolean isRenewable() { return true; }
-    
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.card.cost.CostPart#toString()
-     */
+
     @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("Untap ");
 
-        final Integer i = this.convertAmount();
-        final String desc = this.getDescriptiveType();
+        final Integer i = convertAmount();
+        final String desc = getDescriptiveType();
 
-        sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), " tapped " + desc));
+        sb.append(Cost.convertAmountTypeToWords(i, getAmount(), " tapped " + desc));
 
-        if (this.getType().contains("OppCtrl")) {
+        if (getType().contains("OppCtrl")) {
             sb.append(" an opponent controls");
-        } else if (this.getType().contains("YouCtrl")) {
+        }
+        else if (getType().contains("YouCtrl")) {
             sb.append(" you control");
         }
-
         return sb.toString();
     }
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.card.cost.CostPart#refund(forge.Card)
-     */
+
     @Override
     public final void refund(final Card source) {
-        for (final Card c : this.getCardList()) {
+        for (final Card c : getCardList()) {
             c.setTapped(true);
         }
-
-        this.resetLists();
+        resetLists();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.Player, forge.card.cost.Cost)
-     */
     @Override
     public final boolean canPay(final SpellAbility ability) {
         final Player activator = ability.getActivatingPlayer();
         final Card source = ability.getHostCard();
-        List<Card> typeList = activator.getGame().getCardsIn(ZoneType.Battlefield);
 
-        typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
+        CardCollection typeList = CardLists.getValidCards(activator.getGame().getCardsIn(ZoneType.Battlefield), getType().split(";"), activator, source);
 
         if (!canUntapSource) {
             typeList.remove(source);
         }
         typeList = CardLists.filter(typeList, Presets.TAPPED);
 
-        final Integer amount = this.convertAmount();
+        final Integer amount = convertAmount();
         if ((typeList.size() == 0) || ((amount != null) && (typeList.size() < amount))) {
             return false;
         }
-
         return true;
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
-     */
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard) {
         targetCard.untap();
         return targetCard;
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPartWithList#getHashForList()
-     */
     @Override
     public String getHashForLKIList() {
         return "Untapped";
@@ -143,6 +106,4 @@ public class CostUntapType extends CostPartWithList {
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }
-
-
 }

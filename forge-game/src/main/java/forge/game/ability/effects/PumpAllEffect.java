@@ -5,6 +5,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
@@ -120,7 +121,6 @@ public class PumpAllEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        List<Card> list;
         final List<Player> tgtPlayers = getTargetPlayers(sa);
         final ArrayList<ZoneType> affectedZones = new ArrayList<ZoneType>();
         final Game game = sa.getActivatingPlayer().getGame();
@@ -133,7 +133,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
             affectedZones.add(ZoneType.Battlefield);
         }
 
-        list = new ArrayList<Card>();
+        CardCollection list = new CardCollection();
         if (!sa.usesTargeting() && !sa.hasParam("Defined")) {
             for (final ZoneType zone : affectedZones) {
                 list.addAll(game.getCardsIn(zone));
@@ -151,7 +151,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
             valid = sa.getParam("ValidCards");
         }
 
-        list = AbilityUtils.filterListByType(list, valid, sa);
+        list = (CardCollection)AbilityUtils.filterListByType(list, valid, sa);
 
         List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
         final int a = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumAtt"), sa);

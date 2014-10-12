@@ -876,7 +876,7 @@ public class AttachAi extends SpellAbilityAi {
             }
         }
 
-        List<Card> prefList = new ArrayList<Card>(list);
+        CardCollection prefList = new CardCollection(list);
         if (totToughness < 0) {
             // Don't kill my own stuff with Negative toughness Auras
             final int tgh = totToughness;
@@ -1002,8 +1002,7 @@ public class AttachAi extends SpellAbilityAi {
             return null;
         }
 
-        List<Card> list = aiPlayer.getGame().getCardsIn(tgt.getZone());
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource);
+        CardCollection list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource);
 
         // TODO If Attaching without casting, don't need to actually target.
         // I believe this is the only case where mandatory will be true, so just
@@ -1018,7 +1017,7 @@ public class AttachAi extends SpellAbilityAi {
         if (list.isEmpty()) {
             return null;
         }
-        List<Card> prefList = list;
+        CardCollection prefList = list;
         if (sa.hasParam("AITgts")) {
             prefList = CardLists.getValidCards(list, sa.getParam("AITgts"), sa.getActivatingPlayer(), attachSource);
         }
@@ -1026,7 +1025,7 @@ public class AttachAi extends SpellAbilityAi {
         Card c = attachGeneralAI(aiPlayer, sa, prefList, mandatory, attachSource, sa.getParam("AILogic"));
 
         AiController aic = ((PlayerControllerAi)aiPlayer.getController()).getAi();
-        if (c != null && attachSource.getType().contains("Equipment") 
+        if (c != null && attachSource.isEquipment() 
                 && attachSource.isEquipping()
                 && attachSource.getEquipping().getController() == aiPlayer) {
             if (c.equals(attachSource.getEquipping())) {
@@ -1065,11 +1064,10 @@ public class AttachAi extends SpellAbilityAi {
         
         aic.getCardMemory().rememberCard(sa.getHostCard(), AiCardMemory.MemorySet.ATTACHED_THIS_TURN);
 
-        if ((c == null) && mandatory) {
+        if (c == null && mandatory) {
             CardLists.shuffle(list);
-            c = list.get(0);
+            c = list.getFirst();
         }
-
         return c;
     }
 
@@ -1338,7 +1336,7 @@ public class AttachAi extends SpellAbilityAi {
             return true;
         }
 
-        if (sa.getHostCard().getType().contains("Equipment") && isUselessCreature(ai, c)) {
+        if (sa.getHostCard().isEquipment() && isUselessCreature(ai, c)) {
             // useless to equip a creature that can't attack or block.
             return false;
         }
@@ -1366,12 +1364,12 @@ public class AttachAi extends SpellAbilityAi {
     }
     
     @Override
-    protected Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional, Player targetedPlayer) {
+    protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
         return attachToCardAIPreferences(ai, sa, true);
     }
     
     @Override
-    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Collection<Player> options) {
+    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
         return attachToPlayerAIPreferences(ai, sa, true);
     }
 }

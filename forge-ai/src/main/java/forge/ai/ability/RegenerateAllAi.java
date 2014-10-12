@@ -7,6 +7,7 @@ import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.combat.Combat;
@@ -48,7 +49,7 @@ public class RegenerateAllAi extends SpellAbilityAi {
             valid = sa.getParam("ValidCards");
         }
 
-        List<Card> list = game.getCardsIn(ZoneType.Battlefield);
+        CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
         list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
         list = CardLists.filter(list, CardPredicates.isController(ai));
 

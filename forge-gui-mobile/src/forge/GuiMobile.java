@@ -45,6 +45,7 @@ import forge.sound.IAudioClip;
 import forge.sound.IAudioMusic;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.GuiChoose;
+import forge.util.FCollectionView;
 import forge.util.FileUtil;
 import forge.util.MessageUtil;
 import forge.util.ThreadUtil;
@@ -213,7 +214,7 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public GameEntityView chooseSingleEntityForEffect(final String title, final Collection<? extends GameEntity> optionList, final DelayedReveal delayedReveal, final boolean isOptional, final PlayerControllerHuman controller) {
+    public GameEntityView chooseSingleEntityForEffect(final String title, final FCollectionView<? extends GameEntity> optionList, final DelayedReveal delayedReveal, final boolean isOptional, final PlayerControllerHuman controller) {
         controller.tempShow(optionList);
         final List<GameEntityView> choiceList = GameEntityView.getEntityCollection(optionList);
 

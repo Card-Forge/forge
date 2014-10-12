@@ -20,7 +20,7 @@ package forge.game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardView;
-import forge.game.card.CardCollection.CardCollectionView;
+import forge.game.card.CardCollectionView;
 import forge.game.event.GameEventCardAttachment;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
 import forge.game.player.Player;

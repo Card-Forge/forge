@@ -5,6 +5,7 @@ import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -12,25 +13,21 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
-import java.util.List;
-
 public class BecomesBlockedAi extends SpellAbilityAi {
-
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Game game = aiPlayer.getGame();
-        
+
         if (!game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)
                 || !game.getPhaseHandler().getPlayerTurn().isOpponentOf(aiPlayer)) {
             return false;
         }
-        
+
         if (tgt != null) {
         	sa.resetTargets();
-	        List<Card> list = game.getCardsIn(ZoneType.Battlefield);
-	        list = CardLists.filterControlledBy(list, aiPlayer.getOpponents());
+	        CardCollection list = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), aiPlayer.getOpponents());
 	        list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
 	        list = CardLists.getTargetableCards(list, sa);
 	        list = CardLists.getNotKeyword(list, "Trample");
@@ -57,14 +54,10 @@ public class BecomesBlockedAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-
         // TODO - implement AI
         return false;
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
-     */
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         boolean chance;

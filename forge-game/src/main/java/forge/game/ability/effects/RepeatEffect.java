@@ -5,6 +5,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
@@ -12,9 +13,6 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class RepeatEffect extends SpellAbilityEffect {
 
@@ -72,22 +70,21 @@ public class RepeatEffect extends SpellAbilityEffect {
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
 
-
         if (sa.hasParam("RepeatPresent")) {
             final String repeatPresent = sa.getParam("RepeatPresent");
-            List<Card> list = new ArrayList<Card>();
 
             String repeatCompare = "GE1";
             if (sa.hasParam("RepeatCompare")) {
                 repeatCompare = sa.getParam("RepeatCompare");
             }
 
+            CardCollectionView list;
             if (sa.hasParam("RepeatDefined")) {
-                list.addAll(AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("RepeatDefined"), sa));
-            } else {
+                list = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("RepeatDefined"), sa);
+            }
+            else {
                 list = game.getCardsIn(ZoneType.Battlefield);
             }
-
             list = CardLists.getValidCards(list, repeatPresent.split(","), sa.getActivatingPlayer(), sa.getHostCard());
 
             int right;

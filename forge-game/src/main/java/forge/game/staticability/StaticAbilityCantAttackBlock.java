@@ -19,13 +19,13 @@ package forge.game.staticability;
 
 import forge.game.GameEntity;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
-import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Iterables;
@@ -62,14 +62,14 @@ public class StaticAbilityCantAttackBlock {
 
         if (params.containsKey("UnlessDefenderControls")) {
             String type = params.get("UnlessDefenderControls");
-            List<Card> list = defender.getCardsIn(ZoneType.Battlefield);
+            CardCollectionView list = defender.getCardsIn(ZoneType.Battlefield);
             if (Iterables.any(list, CardPredicates.restriction(type.split(","), hostCard.getController(), hostCard))) {
                 return false;
             }
         }
         if (params.containsKey("IfDefenderControls")) {
             String type = params.get("IfDefenderControls");
-            List<Card> list = defender.getCardsIn(ZoneType.Battlefield);
+            CardCollectionView list = defender.getCardsIn(ZoneType.Battlefield);
             if (!Iterables.any(list, CardPredicates.restriction(type.split(","), hostCard.getController(), hostCard))) {
                 return false;
             }

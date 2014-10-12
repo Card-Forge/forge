@@ -21,6 +21,7 @@ import forge.ImageKeys;
 import forge.card.CardCharacteristicName;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
+import forge.card.CardType;
 import forge.card.ICardFace;
 import forge.card.mana.ManaCost;
 import forge.game.ability.AbilityFactory;
@@ -309,12 +310,12 @@ public class CardFactory {
 
         if (card.isPlaneswalker()) {
             buildPlaneswalkerAbilities(card);
-        } else if (card.isType("Plane")) {
+        }
+        else if (card.isPlane()) {
             buildPlaneAbilities(card);
         }
-
         CardFactoryUtil.setupKeywordedAbilities(card);
-    } // getCard2
+    }
 
     private static void buildPlaneAbilities(Card card) {
         StringBuilder triggerSB = new StringBuilder();
@@ -390,11 +391,7 @@ public class CardFactory {
             ArrayList<CardColor> combinedCardColorArr = new ArrayList<CardColor>();
             combinedCardColorArr.add(combinedCardColor);
             card.setColor(combinedCardColorArr);
-
-            // Super and 'middle' types should use enums.
-            List<String> coreTypes = rules.getType().getTypesBeforeDash();
-            coreTypes.addAll(rules.getType().getSubTypes());
-            card.setType(coreTypes);
+            card.setType(new CardType(rules.getType()));
 
             // Combined text based on Oracle text - might not be necessary, temporarily disabled.
             //String combinedText = String.format("%s: %s\n%s: %s", rules.getMainPart().getName(), rules.getMainPart().getOracleText(), rules.getOtherPart().getName(), rules.getOtherPart().getOracleText());
@@ -419,9 +416,7 @@ public class CardFactory {
         c.getCharacteristics().setOracleText(face.getOracleText().replace("\\n", "\r\n"));
 
         // Super and 'middle' types should use enums.
-        List<String> coreTypes = face.getType().getTypesBeforeDash();
-        coreTypes.addAll(face.getType().getSubTypes());
-        c.setType(coreTypes);
+        c.setType(new CardType(face.getType()));
 
         // What a perverted color code we have!
         CardColor col1 = new CardColor(face.getColor().getColor());

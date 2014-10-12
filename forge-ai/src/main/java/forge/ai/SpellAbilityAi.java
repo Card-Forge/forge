@@ -151,26 +151,27 @@ public abstract class SpellAbilityAi extends SaTargetRoutines {
     public <T extends GameEntity> T chooseSingleEntity(Player ai, SpellAbility sa, Collection<T> options, boolean isOptional, Player targetedPlayer) {
         T firstOption = Iterables.getFirst(options, null);
         
-        if( firstOption instanceof Card)
+        if (firstOption instanceof Card) {
             return (T) chooseSingleCard(ai, sa, (Collection<Card>) options, isOptional, targetedPlayer);
-        else if ( firstOption instanceof Player)
+        }
+        if (firstOption instanceof Player) {
             return (T) chooseSinglePlayer(ai, sa, (Collection<Player>) options);
-        else
-            return null;
+        }
+        return null;
     }
-    
+
     public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSingleSpellAbility is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return spells.get(0);
     }
 
-    protected Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional, Player targetedPlayer) {
+    protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSingleEntity is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return Iterables.getFirst(options, null);
 
     }
     
-    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Collection<Player> options) {
+    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSingleEntity is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return Iterables.getFirst(options, null);
     }

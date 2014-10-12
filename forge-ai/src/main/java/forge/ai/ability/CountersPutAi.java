@@ -7,6 +7,7 @@ import forge.ai.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
 import forge.game.combat.CombatUtil;
@@ -24,8 +25,6 @@ import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -40,7 +39,7 @@ public class CountersPutAi extends SpellAbilityAi {
         final Cost abCost = sa.getPayCosts();
         final TargetRestrictions abTgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
-        List<Card> list;
+        CardCollection list;
         Card choice = null;
         final String type = sa.getParam("CounterType");
         final String amountStr = sa.getParam("CounterNum");
@@ -97,12 +96,12 @@ public class CountersPutAi extends SpellAbilityAi {
         		nPump = amount;
         	}
         	final AbilitySub tgtFight = sa.getSubAbility();
-            List<Card> aiCreatures = ai.getCreaturesInPlay();
+            CardCollection aiCreatures = ai.getCreaturesInPlay();
             aiCreatures = CardLists.getTargetableCards(aiCreatures, sa);
             aiCreatures =  ComputerUtil.getSafeTargets(ai, sa, aiCreatures);
             ComputerUtilCard.sortByEvaluateCreature(aiCreatures);
 
-            List<Card> humCreatures = ai.getOpponent().getCreaturesInPlay();
+            CardCollection humCreatures = ai.getOpponent().getCreaturesInPlay();
             humCreatures = CardLists.getTargetableCards(humCreatures, tgtFight);
             ComputerUtilCard.sortByEvaluateCreature(humCreatures);
             if (humCreatures.isEmpty() || aiCreatures.isEmpty()) {
@@ -271,7 +270,7 @@ public class CountersPutAi extends SpellAbilityAi {
         }
 
         return true;
-    } // putCanPlayAI
+    }
 
     @Override
     public boolean chkAIDrawback(final SpellAbility sa, Player ai) {
@@ -287,7 +286,7 @@ public class CountersPutAi extends SpellAbilityAi {
         final Player player = sa.isCurse() ? ai.getOpponent() : ai;
 
         if (abTgt != null) {
-            List<Card> list =
+            CardCollection list =
                     CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), abTgt.getValidTgts(), source.getController(), source);
 
             if (list.size() == 0) {
@@ -339,7 +338,7 @@ public class CountersPutAi extends SpellAbilityAi {
         }
 
         return chance;
-    } // putPlayDrawbackAI
+    }
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
@@ -347,7 +346,7 @@ public class CountersPutAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         // boolean chance = true;
         boolean preferred = true;
-        List<Card> list;
+        CardCollection list;
         boolean isCurse = sa.isCurse();
         final Player player = isCurse ? ai.getOpponent() : ai;
         final String type = sa.getParam("CounterType");
@@ -357,7 +356,7 @@ public class CountersPutAi extends SpellAbilityAi {
         
         if (abTgt == null) {
             // No target. So must be defined
-            list = new ArrayList<Card>(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
+            list = new CardCollection(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
             
             if (amountStr.equals("X") && ((sa.hasParam(amountStr) && sa.getSVar(amountStr).equals("Count$xPaid")) || source.getSVar(amountStr).equals("Count$xPaid") )) {
                 // Spend all remaining mana to add X counters (eg. Hero of Leina Tower)
@@ -376,8 +375,7 @@ public class CountersPutAi extends SpellAbilityAi {
             if (list.isEmpty() && mandatory) {
                 // If there isn't any prefered cards to target, gotta choose
                 // non-preferred ones
-                list = player.getOpponent().getCardsIn(ZoneType.Battlefield);
-                list = CardLists.getTargetableCards(list, sa);
+                list = CardLists.getTargetableCards(player.getOpponent().getCardsIn(ZoneType.Battlefield), sa);
                 list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
                 preferred = false;
             }
@@ -403,11 +401,11 @@ public class CountersPutAi extends SpellAbilityAi {
                         choice = Aggregates.random(list);
                     }
                 }
-            } else {
+            }
+            else {
                 if (preferred) {
                     choice = CountersAi.chooseBoonTarget(list, type);
                 }
-
                 else {
                     if (type.equals("P1P1")) {
                         choice = ComputerUtilCard.getWorstCreatureAI(list);
@@ -424,13 +422,9 @@ public class CountersPutAi extends SpellAbilityAi {
             // addTarget()?
             sa.getTargets().add(choice);
         }
-
         return true;
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
-     */
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         final Card source = sa.getHostCard();
@@ -475,14 +469,10 @@ public class CountersPutAi extends SpellAbilityAi {
         }
         return MyRandom.getRandom().nextBoolean();
     }
-    
-    /* (non-Javadoc)
-     * @see forge.card.ability.SpellAbilityAi#chooseSinglePlayer(Player, SpellAbility, Collection<Player>)
-     */
+
     @Override
-    public Player chooseSinglePlayer(Player ai, SpellAbility sa, Collection<Player> options) {
+    public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
         // logic?
         return Iterables.getFirst(options, null);
     }
-
 }

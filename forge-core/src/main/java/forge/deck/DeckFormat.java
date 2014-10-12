@@ -201,7 +201,7 @@ public enum DeckFormat {
     	}
     	int phenoms = 0;
     	for (Entry<PaperCard, Integer> cp : planes) {
-    		if (cp.getKey().getRules().getType().typeContains(CardType.CoreType.Phenomenon)) {
+    		if (cp.getKey().getRules().getType().hasType(CardType.CoreType.Phenomenon)) {
     			phenoms++;
     		}
     		if (cp.getValue() > 1) {

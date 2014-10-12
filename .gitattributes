@@ -159,6 +159,7 @@ forge-core/src/main/java/forge/StaticData.java -text
 forge-core/src/main/java/forge/card/BoosterGenerator.java svneol=native#text/plain
 forge-core/src/main/java/forge/card/BoosterSlots.java -text
 forge-core/src/main/java/forge/card/CardAiHints.java -text
+forge-core/src/main/java/forge/card/CardChangedType.java -text
 forge-core/src/main/java/forge/card/CardCharacteristicName.java -text
 forge-core/src/main/java/forge/card/CardDb.java -text
 forge-core/src/main/java/forge/card/CardEdition.java -text
@@ -168,6 +169,7 @@ forge-core/src/main/java/forge/card/CardRules.java -text
 forge-core/src/main/java/forge/card/CardRulesPredicates.java -text
 forge-core/src/main/java/forge/card/CardSplitType.java -text
 forge-core/src/main/java/forge/card/CardType.java -text
+forge-core/src/main/java/forge/card/CardTypeView.java -text
 forge-core/src/main/java/forge/card/ColorSet.java -text
 forge-core/src/main/java/forge/card/DeckHints.java -text
 forge-core/src/main/java/forge/card/ICardCharacteristics.java -text
@@ -224,6 +226,7 @@ forge-core/src/main/java/forge/util/BuildInfo.java -text
 forge-core/src/main/java/forge/util/CollectionSuppliers.java -text
 forge-core/src/main/java/forge/util/ComparableOp.java -text
 forge-core/src/main/java/forge/util/FCollection.java -text
+forge-core/src/main/java/forge/util/FCollectionView.java -text
 forge-core/src/main/java/forge/util/FileSection.java -text
 forge-core/src/main/java/forge/util/FileSectionManual.java -text
 forge-core/src/main/java/forge/util/FileUtil.java svneol=native#text/plain
@@ -434,6 +437,7 @@ forge-game/src/main/java/forge/game/card/CardChangedWord.java -text
 forge-game/src/main/java/forge/game/card/CardChangedWords.java -text
 forge-game/src/main/java/forge/game/card/CardCharacteristics.java -text
 forge-game/src/main/java/forge/game/card/CardCollection.java -text
+forge-game/src/main/java/forge/game/card/CardCollectionView.java -text
 forge-game/src/main/java/forge/game/card/CardColor.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardDamageHistory.java -text
 forge-game/src/main/java/forge/game/card/CardFactory.java svneol=native#text/plain
@@ -442,7 +446,6 @@ forge-game/src/main/java/forge/game/card/CardLists.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardPowerToughness.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardPredicates.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardShields.java -text
-forge-game/src/main/java/forge/game/card/CardType.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardUtil.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardView.java -text
 forge-game/src/main/java/forge/game/card/CounterType.java svneol=native#text/plain

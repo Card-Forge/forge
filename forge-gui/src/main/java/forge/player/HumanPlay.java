@@ -26,6 +26,7 @@ import forge.match.input.InputPayMana;
 import forge.match.input.InputPayManaOfCostPayment;
 import forge.match.input.InputPayManaSimple;
 import forge.match.input.InputSelectCardsFromList;
+import forge.util.FCollectionView;
 import forge.util.Lang;
 import forge.util.gui.SGuiChoose;
 
@@ -324,12 +325,12 @@ public class HumanPlay {
             }
             else if (part instanceof CostMill) {
                 final int amount = getAmountFromPart(part, source, sourceAbility);
-                final List<Card> list = p.getCardsIn(ZoneType.Library);
+                final CardCollectionView list = p.getCardsIn(ZoneType.Library);
                 if (list.size() < amount) { return false; }
                 if (!p.getController().confirmPayment(part, "Do you want to mill " + amount + " card" + (amount == 1 ? "" : "s") + "?" + orString)) {
                     return false;
                 }
-                List<Card> listmill = p.getCardsIn(ZoneType.Library, amount);
+                CardCollectionView listmill = p.getCardsIn(ZoneType.Library, amount);
                 ((CostMill) part).executePayment(sourceAbility, listmill);
             }
             else if (part instanceof CostFlipCoin) {
@@ -371,7 +372,7 @@ public class HumanPlay {
                     source.addCounter(counterType, amount, false);
                 }
                 else {
-                    List<Card> list = p.getGame().getCardsIn(ZoneType.Battlefield);
+                    CardCollectionView list = p.getGame().getCardsIn(ZoneType.Battlefield);
                     list = CardLists.getValidCards(list, part.getType().split(";"), p, source);
                     if (list.isEmpty()) { return false; }
                     if (!p.getController().confirmPayment(part, "Do you want to put " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " on " + part.getTypeDescription() + "?")) {
@@ -407,7 +408,7 @@ public class HumanPlay {
             }
             else if (part instanceof CostRemoveAnyCounter) {
                 int amount = getAmountFromPartX(part, source, sourceAbility);
-                List<Card> list = new ArrayList<Card>(p.getCardsIn(ZoneType.Battlefield));
+                CardCollectionView list = p.getCardsIn(ZoneType.Battlefield);
                 int allCounters = 0;
                 for (Card c : list) {
                     final Map<CounterType, Integer> tgtCounters = c.getCounters();
@@ -462,7 +463,7 @@ public class HumanPlay {
                         return false;
                     }
 
-                    List<Card> cards = new ArrayList<Card>(p.getCardsIn(ZoneType.Graveyard));
+                    CardCollection cards = new CardCollection(p.getCardsIn(ZoneType.Graveyard));
                     for (final Card card : cards) {
                         p.getGame().getAction().exile(card);
                     }
@@ -502,20 +503,20 @@ public class HumanPlay {
                 int amount = Integer.parseInt(((CostPutCardToLib) part).getAmount());
                 final ZoneType from = ((CostPutCardToLib) part).getFrom();
                 final boolean sameZone = ((CostPutCardToLib) part).isSameZone();
-                List<Card> list;
+                CardCollectionView listView;
                 if (sameZone) {
-                    list = p.getGame().getCardsIn(from);
+                    listView = p.getGame().getCardsIn(from);
                 }
                 else {
-                    list = p.getCardsIn(from);
+                    listView = p.getCardsIn(from);
                 }
-                list = CardLists.getValidCards(list, part.getType().split(";"), p, source);
+                CardCollection list = CardLists.getValidCards(listView, part.getType().split(";"), p, source);
 
                 if (sameZone) { // Jotun Grunt
-                    List<Player> players = p.getGame().getPlayers();
+                    FCollectionView<Player> players = p.getGame().getPlayers();
                     List<Player> payableZone = new ArrayList<Player>();
                     for (Player player : players) {
-                        List<Card> enoughType = CardLists.filter(list, CardPredicates.isOwner(player));
+                        CardCollectionView enoughType = CardLists.filter(list, CardPredicates.isOwner(player));
                         if (enoughType.size() < amount) {
                             list.removeAll(enoughType);
                         } else {
@@ -555,18 +556,18 @@ public class HumanPlay {
             }
             else if (part instanceof CostSacrifice) {
                 int amount = Integer.parseInt(((CostSacrifice)part).getAmount());
-                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
+                CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
                 boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "sacrifice." + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostGainControl) {
                 int amount = Integer.parseInt(((CostGainControl)part).getAmount());
-                List<Card> list = CardLists.getValidCards(p.getGame().getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
+                CardCollectionView list = CardLists.getValidCards(p.getGame().getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
                 boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "gain control." + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostReturn) {
-                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
+                CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
                 boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "return to hand." + orString);
                 if (!hasPaid) { return false; }
@@ -577,25 +578,25 @@ public class HumanPlay {
                         return false;
                     }
 
-                    List<Card> cards = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
+                    CardCollection cards = new CardCollection(p.getCardsIn(ZoneType.Hand));
                     for (final Card card : cards) {
                         p.discard(card, sourceAbility);
                     }
                 } else {
-                    List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source);
+                    CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source);
                     int amount = getAmountFromPartX(part, source, sourceAbility);
                     boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "discard." + orString);
                     if (!hasPaid) { return false; }
                 }
             }
             else if (part instanceof CostReveal) {
-                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source);
+                CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
                 boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "reveal." + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostTapType) {
-                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
+                CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
                 list = CardLists.filter(list, Presets.UNTAPPED);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
                 boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "tap." + orString);
@@ -642,7 +643,7 @@ public class HumanPlay {
         return paid;
     }
 
-    private static boolean payCostPart(final PlayerControllerHuman controller, SpellAbility sourceAbility, CostPartWithList cpl, int amount, List<Card> list, String actionName) {
+    private static boolean payCostPart(final PlayerControllerHuman controller, SpellAbility sourceAbility, CostPartWithList cpl, int amount, CardCollectionView list, String actionName) {
         if (list.size() < amount) { return false; } // unable to pay (not enough cards)
 
         InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, amount, amount, list);

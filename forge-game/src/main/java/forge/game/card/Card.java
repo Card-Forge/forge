@@ -30,13 +30,14 @@ import forge.GameCommand;
 import forge.StaticData;
 import forge.card.*;
 import forge.card.CardDb.SetPreference;
+import forge.card.CardType.CoreType;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.CardCollection.CardCollectionView;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardView;
 import forge.game.combat.AttackingBand;
@@ -62,6 +63,7 @@ import forge.item.PaperCard;
 import forge.trackable.TrackableProperty;
 import forge.util.CollectionSuppliers;
 import forge.util.Expressions;
+import forge.util.FCollectionView;
 import forge.util.Lang;
 import forge.util.TextUtil;
 import forge.util.maps.HashMapOfLists;
@@ -91,8 +93,8 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     public static Card get(CardView cardView) {
         return cardCache.get(cardView.getId());
     }
-    public static List<Card> getList(Iterable<CardView> cardViews) {
-        List<Card> list = new ArrayList<Card>();
+    public static CardCollection getList(Iterable<CardView> cardViews) {
+        CardCollection list = new CardCollection();
         for (CardView cv : cardViews) {
             list.add(get(cv));
         }
@@ -130,7 +132,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     private GameEntity enchanting = null;
 
     // changes by AF animate and continuous static effects - timestamp is the key of maps
-    private Map<Long, CardType> changedCardTypes = new ConcurrentSkipListMap<Long, CardType>();
+    private Map<Long, CardChangedType> changedCardTypes = new ConcurrentSkipListMap<Long, CardChangedType>();
     private Map<Long, KeywordsChange> changedCardKeywords = new ConcurrentSkipListMap<Long, KeywordsChange>();
 
     // changes that say "replace each instance of one [color,type] by another - timestamp is the key of maps
@@ -2327,73 +2329,54 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         getGame().fireEvent(new GameEventCardAttachment(this, entity, null, AttachMethod.Enchant));
     }
 
-    public final void setType(final List<String> a) {
-        getCharacteristics().setType(new HashSet<String>(a));
+    public final void setType(final CardType type0) {
+        getCharacteristics().setType(type0);
     }
 
-    public final void addType(final String a) {
-        getCharacteristics().getType().add(a);
+    public final void addType(final String type0) {
+        getCharacteristics().addType(type0);
     }
 
-    public final HashSet<String> getType() {
-        // see if type changes are in effect
-        final HashSet<String> newType = new HashSet<String>(getCharacteristics().getType());
-        for (final CardType ct : changedCardTypes.values()) {
-            final ArrayList<String> removeTypes = new ArrayList<String>();
-            if (ct.getRemoveType() != null) {
-                removeTypes.addAll(ct.getRemoveType());
-            }
-            // remove old types
-            for (String t : newType) {
-                if (ct.isRemoveSuperTypes() && forge.card.CardType.isASuperType(t)) {
-                    removeTypes.add(t);
-                }
-                if (ct.isRemoveCardTypes() && forge.card.CardType.isACardType(t)) {
-                    removeTypes.add(t);
-                }
-                if (ct.isRemoveSubTypes() && forge.card.CardType.isASubType(t)) {
-                    removeTypes.add(t);
-                }
-                if (ct.isRemoveCreatureTypes() && (forge.card.CardType.isACreatureType(t) || t.equals("AllCreatureTypes"))) {
-                    removeTypes.add(t);
-                }
-            }
-            newType.removeAll(removeTypes);
-            // add new types
-            if (ct.getType() != null) {
-                newType.addAll(ct.getType());
-            }
+    public final CardTypeView getType() {
+        if (changedCardTypes.isEmpty()) {
+            return getCharacteristics().getType();
         }
-
-        return newType;
+        //return view's type since that already has cached changes from changedCardTypes
+        return getCharacteristics().getView().getType();
     }
 
-    public final void addChangedCardTypes(final ArrayList<String> types, final ArrayList<String> removeTypes,
+    public Map<Long, CardChangedType> getChangedCardTypes() {
+        return changedCardTypes;
+    }
+
+    public final void addChangedCardTypes(final CardType addType, final CardType removeType,
             final boolean removeSuperTypes, final boolean removeCardTypes, final boolean removeSubTypes,
             final boolean removeCreatureTypes, final long timestamp) {
 
-        changedCardTypes.put(timestamp, new CardType(types, removeTypes, removeSuperTypes, removeCardTypes, removeSubTypes, removeCreatureTypes));
+        changedCardTypes.put(timestamp, new CardChangedType(addType, removeType, removeSuperTypes, removeCardTypes, removeSubTypes, removeCreatureTypes));
+        view.getOriginal().updateType(getCharacteristics());
     }
 
     public final void addChangedCardTypes(final String[] types, final String[] removeTypes,
             final boolean removeSuperTypes, final boolean removeCardTypes, final boolean removeSubTypes,
             final boolean removeCreatureTypes, final long timestamp) {
-        ArrayList<String> typeList = null;
-        ArrayList<String> removeTypeList = null;
+        CardType addType = null;
+        CardType removeType = null;
         if (types != null) {
-            typeList = new ArrayList<String>(Arrays.asList(types));
+            addType = new CardType(Arrays.asList(types));
         }
 
         if (removeTypes != null) {
-            removeTypeList = new ArrayList<String>(Arrays.asList(removeTypes));
+            removeType = new CardType(Arrays.asList(removeTypes));
         }
 
-        addChangedCardTypes(typeList, removeTypeList, removeSuperTypes, removeCardTypes, removeSubTypes,
+        addChangedCardTypes(addType, removeType, removeSuperTypes, removeCardTypes, removeSubTypes,
                 removeCreatureTypes, timestamp);
     }
 
     public final void removeChangedCardTypes(final long timestamp) {
         changedCardTypes.remove(Long.valueOf(timestamp));
+        view.getOriginal().updateType(getCharacteristics());
     }
 
     // values that are printed on card
@@ -2808,8 +2791,8 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
      */
     public final void addChangedTextTypeWord(final String originalWord, final String newWord, final Long timestamp) {
         changedTextTypes.add(timestamp, originalWord, newWord);
-        if (getType().contains(originalWord)) {
-            addChangedCardTypes(Lists.newArrayList(newWord), Lists.newArrayList(originalWord), false, false, false, false, timestamp);
+        if (getType().hasSubtype(originalWord)) {
+            addChangedCardTypes(CardType.parse(newWord), CardType.parse(originalWord), false, false, false, false, timestamp);
         }
         updateKeywordsChangedText(timestamp);
         updateChangedText();
@@ -3034,45 +3017,37 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
 
     public final boolean isPermanent() {
-        return !(isInstant() || isSorcery() || isImmutable());
+        if (isImmutable) {
+            return false;
+        }
+        return getType().isPermanent();
     }
 
     public final boolean isSpell() {
         return (isInstant() || isSorcery() || (isAura() && !isInZone((ZoneType.Battlefield))));
     }
 
-    public final boolean isEmblem()     { return typeContains("Emblem"); }
+    public final boolean isEmblem()     { return getType().isEmblem(); }
 
-    public final boolean isLand()       { return typeContains("Land"); }
-    public final boolean isBasicLand()  { return typeContains("Basic"); }
-    public final boolean isSnow()       { return typeContains("Snow"); }
+    public final boolean isLand()       { return getType().isLand(); }
+    public final boolean isBasicLand()  { return getType().isBasicLand(); }
+    public final boolean isSnow()       { return getType().isSnow(); }
 
-    public final boolean isTribal()     { return typeContains("Tribal"); }
-    public final boolean isSorcery()    { return typeContains("Sorcery"); }
-    public final boolean isInstant()    { return typeContains("Instant"); }
+    public final boolean isTribal()     { return getType().isTribal(); }
+    public final boolean isSorcery()    { return getType().isSorcery(); }
+    public final boolean isInstant()    { return getType().isInstant(); }
 
-    public final boolean isCreature()   { return typeContains("Creature"); }
-    public final boolean isArtifact()   { return typeContains("Artifact"); }
-    public final boolean isEquipment()  { return typeContains("Equipment"); }
-    public final boolean isFortification()  { return typeContains("Fortification"); }
-    public final boolean isPlaneswalker()   { return typeContains("Planeswalker"); }
-    public final boolean isEnchantment()    { return typeContains("Enchantment"); }
-    public final boolean isAura()           { return typeContains("Aura"); }
+    public final boolean isCreature()   { return getType().isCreature(); }
+    public final boolean isArtifact()   { return getType().isArtifact(); }
+    public final boolean isEquipment()  { return getType().hasSubtype("Equipment"); }
+    public final boolean isFortification()  { return getType().hasSubtype("Fortification"); }
+    public final boolean isPlaneswalker()   { return getType().isPlaneswalker(); }
+    public final boolean isEnchantment()    { return getType().isEnchantment(); }
+    public final boolean isAura()           { return getType().hasSubtype("Aura"); }
 
-    public final boolean isScheme()     { return typeContains("Scheme"); }
-    public final boolean isPhenomenon() { return typeContains("Phenomenon"); }
-    public final boolean isPlane()      { return typeContains("Plane"); }
-
-    private boolean typeContains(final String s) {
-        final Iterator<String> it = getType().iterator();
-        while (it.hasNext()) {
-            if (it.next().equals(s)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
+    public final boolean isScheme()     { return getType().isScheme(); }
+    public final boolean isPhenomenon() { return getType().isPhenomenon(); }
+    public final boolean isPlane()      { return getType().isPlane(); }
 
     /** {@inheritDoc} */
     @Override
@@ -3336,39 +3311,6 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return count;
     }
 
-    private String toMixedCase(final String s) {
-        if (s.equals("")) {
-            return s;
-        }
-        final StringBuilder sb = new StringBuilder();
-        // to handle hyphenated Types
-        final String[] types = s.split("-");
-        for (int i = 0; i < types.length; i++) {
-            if (i != 0) {
-                sb.append("-");
-            }
-            sb.append(types[i].substring(0, 1).toUpperCase());
-            sb.append(types[i].substring(1).toLowerCase());
-        }
-        return sb.toString();
-    }
-
-    // usable to check for changelings
-    public final boolean isType(String type) {
-        if (type == null) {
-            return false;
-        }
-
-        type = toMixedCase(type);
-
-        if (typeContains(type)
-                || ((isCreature() || isTribal()) && forge.card.CardType.isACreatureType(type) && this
-                        .typeContains("AllCreatureTypes"))) {
-            return true;
-        }
-        return false;
-    }
-
     // Takes one argument like Permanent.Blue+withFlying
     @Override
     public final boolean isValid(final String restriction, final Player sourceController, final Card source) {
@@ -3392,7 +3334,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             return testFailed;
         }
         if (!incR[0].equals("card") && !incR[0].equals("Card") && !incR[0].equals("Spell")
-                && !incR[0].equals("Permanent") && !(isType(incR[0]))) {
+                && !incR[0].equals("Permanent") && !getType().hasStringType(incR[0])) {
             return testFailed; // Check for wrong type
         }
 
@@ -3604,7 +3546,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             }
         } else if (property.equals("TargetedControllerCtrl")) {
             for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
-                final List<Card> cards = AbilityUtils.getDefinedCards(source, "Targeted", sa);
+                final CardCollectionView cards = AbilityUtils.getDefinedCards(source, "Targeted", sa);
                 final List<SpellAbility> sas = AbilityUtils.getDefinedSpellAbilities(source, "Targeted", sa);
                 for (final Card c : cards) {
                     final Player p = c.getController();
@@ -3663,13 +3605,13 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             final String type = property.substring(18);
             if (type.startsWith("AtLeastAsMany")) {
                 String realType = type.split("AtLeastAsMany")[1];
-                List<Card> cards = CardLists.getType(getController().getCardsIn(ZoneType.Battlefield), realType);
-                List<Card> yours = CardLists.getType(sourceController.getCardsIn(ZoneType.Battlefield), realType);
+                CardCollectionView cards = CardLists.getType(getController().getCardsIn(ZoneType.Battlefield), realType);
+                CardCollectionView yours = CardLists.getType(sourceController.getCardsIn(ZoneType.Battlefield), realType);
                 if (cards.size() < yours.size()) {
                     return false;
                 }
             } else {
-                final List<Card> cards = getController().getCardsIn(ZoneType.Battlefield);
+                final CardCollectionView cards = getController().getCardsIn(ZoneType.Battlefield);
                 if (CardLists.getType(cards, type).isEmpty()) {
                     return false;
                 }
@@ -3696,7 +3638,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 if (!source.getCharacteristics().getTriggers().isEmpty()) {
                     for (final Trigger t : source.getCharacteristics().getTriggers()) {
                         final SpellAbility sa = t.getTriggeredSA();
-                        final List<Card> cards = AbilityUtils.getDefinedCards(source, "Targeted", sa);
+                        final CardCollectionView cards = AbilityUtils.getDefinedCards(source, "Targeted", sa);
                         for (final Card c : cards) {
                             if (equipping != c && !c.equals(enchanting)) {
                                 return false;
@@ -3705,7 +3647,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                     }
                 } else {
                     for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
-                        final List<Card> cards = AbilityUtils.getDefinedCards(source, "Targeted", sa);
+                        final CardCollectionView cards = AbilityUtils.getDefinedCards(source, "Targeted", sa);
                         for (final Card c : cards) {
                             if (equipping == c || c.equals(enchanting)) { // handle multiple targets
                                 return true;
@@ -3890,28 +3832,28 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 }
             }
         } else if (property.startsWith("Above")) { // "Are Above" Source
-            final List<Card> cards = getOwner().getCardsIn(ZoneType.Graveyard);
+            final CardCollectionView cards = getOwner().getCardsIn(ZoneType.Graveyard);
             if (cards.indexOf(source) >= cards.indexOf(this)) {
                 return false;
             }
         } else if (property.startsWith("DirectlyAbove")) { // "Are Directly Above" Source
-            final List<Card> cards = getOwner().getCardsIn(ZoneType.Graveyard);
+            final CardCollectionView cards = getOwner().getCardsIn(ZoneType.Graveyard);
             if (cards.indexOf(this) - cards.indexOf(source) != 1) {
                 return false;
             }
         } else if (property.startsWith("TopGraveyardCreature")) {
-            List<Card> cards = CardLists.filter(getOwner().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
+            CardCollection cards = CardLists.filter(getOwner().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
             Collections.reverse(cards);
             if (cards.isEmpty() || !equals(cards.get(0))) {
                 return false;
             }
         } else if (property.startsWith("TopGraveyard")) {
-            final List<Card> cards = new ArrayList<Card>(getOwner().getCardsIn(ZoneType.Graveyard));
+            final CardCollection cards = new CardCollection(getOwner().getCardsIn(ZoneType.Graveyard));
             Collections.reverse(cards);
             if (property.substring(12).matches("[0-9][0-9]?")) {
                 int n = Integer.parseInt(property.substring(12));
                 int num = Math.min(n, cards.size());
-                final List<Card> newlist = new ArrayList<Card>();
+                final CardCollection newlist = new CardCollection();
                 for (int i = 0; i < num; i++) {
                     newlist.add(cards.get(i));
                 }
@@ -3924,12 +3866,12 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 }
             }
         } else if (property.startsWith("BottomGraveyard")) {
-            final List<Card> cards = getOwner().getCardsIn(ZoneType.Graveyard);
+            final CardCollectionView cards = getOwner().getCardsIn(ZoneType.Graveyard);
             if (cards.isEmpty() || !equals(cards.get(0))) {
                 return false;
             }
         } else if (property.startsWith("TopLibrary")) {
-            final List<Card> cards = getOwner().getCardsIn(ZoneType.Library);
+            final CardCollectionView cards = getOwner().getCardsIn(ZoneType.Library);
             if (cards.isEmpty() || !equals(cards.get(0))) {
                 return false;
             }
@@ -3965,7 +3907,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             } else {
                 final String restriction = property.split("SharesColorWith ")[1];
                 if (restriction.equals("TopCardOfLibrary")) {
-                    final List<Card> cards = sourceController.getCardsIn(ZoneType.Library);
+                    final CardCollectionView cards = sourceController.getCardsIn(ZoneType.Library);
                     if (cards.isEmpty() || !sharesColorWith(cards.get(0))) {
                         return false;
                     }
@@ -3991,7 +3933,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                     if (!CardUtil.getColors(this).hasAnyColor(mask))
                         return false;
                 } else if (restriction.equals("LastCastThisTurn")) {
-                    final List<Card> c = game.getStack().getSpellsCastThisTurn();
+                    final CardCollectionView c = game.getStack().getSpellsCastThisTurn();
                     if (c.isEmpty() || !sharesColorWith(c.get(c.size() - 1))) {
                         return false;
                     }
@@ -4042,7 +3984,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             } else {
                 final String restriction = property.split("sharesCreatureTypeWith ")[1];
                 if (restriction.equals("TopCardOfLibrary")) {
-                    final List<Card> cards = sourceController.getCardsIn(ZoneType.Library);
+                    final CardCollectionView cards = sourceController.getCardsIn(ZoneType.Library);
                     if (cards.isEmpty() || !sharesCreatureTypeWith(cards.get(0))) {
                         return false;
                     }
@@ -4117,7 +4059,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                     }
                     return false;
                 } else if (restriction.equals("EachTopLibrary")) {
-                    final List<Card> cards = new ArrayList<Card>();
+                    final CardCollection cards = new CardCollection();
                     for (Player p : game.getPlayers()) {
                         final Card top = p.getCardsIn(ZoneType.Library).get(0);
                         cards.add(top);
@@ -4195,7 +4137,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                         final SpellAbility root = sa.getRootAbility();
                         if (root != null && (root.getPaidList("MovedToGrave") != null)
                                 && !root.getPaidList("MovedToGrave").isEmpty()) {
-                            final List<Card> cards = root.getPaidList("MovedToGrave");
+                            final CardCollectionView cards = root.getPaidList("MovedToGrave");
                             for (final Card card : cards) {
                                 String name = card.getName();
                                 if (StringUtils.isEmpty(name)) {
@@ -4209,7 +4151,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                     }
                     return false;
                 } else if (restriction.equals("NonToken")) {
-                    final List<Card> cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield),
+                    final CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield),
                             Presets.NON_TOKEN);
                     for (final Card card : cards) {
                         if (getName().equals(card.getName())) {
@@ -4280,7 +4222,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 }
             }
         } else if (property.startsWith("SecondSpellCastThisTurn")) {
-            final List<Card> cards = CardUtil.getThisTurnCast("Card", source);
+            final CardCollectionView cards = CardUtil.getThisTurnCast("Card", source);
             if (cards.size() < 2)  {
                 return false;
             }
@@ -4302,7 +4244,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             if (res.length > 1 && res[1].equals("from")) {
                 origin = ZoneType.smartValueOf(res[2]);
             }
-            List<Card> cards = CardUtil.getThisTurnEntered(destination,
+            CardCollectionView cards = CardUtil.getThisTurnEntered(destination,
                     origin, "Card", source);
             if (!cards.contains(this)) {
                 return false;
@@ -4495,9 +4437,9 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 return false;
             }
         } else if (property.startsWith("greatestPower")) {
-            List<Card> cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             if (property.contains("ControlledBy")) {
-                List<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], null);
+                FCollectionView<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], null);
                 cards = CardLists.filterControlledBy(cards, p);
                 if (!cards.contains(this)) {
                     return false;
@@ -4509,30 +4451,30 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 }
             }
         } else if (property.startsWith("yardGreatestPower")) {
-            final List<Card> cards = CardLists.filter(sourceController.getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
+            final CardCollectionView cards = CardLists.filter(sourceController.getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
             for (final Card crd : cards) {
                 if (crd.getNetAttack() > getNetAttack()) {
                     return false;
                 }
             }
         } else if (property.startsWith("leastPower")) {
-            final List<Card> cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            final CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             for (final Card crd : cards) {
                 if (crd.getNetAttack() < getNetAttack()) {
                     return false;
                 }
             }
         } else if (property.startsWith("leastToughness")) {
-            final List<Card> cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            final CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             for (final Card crd : cards) {
                 if (crd.getNetDefense() < getNetDefense()) {
                     return false;
                 }
             }
         } else if (property.startsWith("greatestCMC")) {
-            List<Card> cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             if (property.contains("ControlledBy")) {
-                List<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], null);
+                FCollectionView<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], null);
                 cards = CardLists.filterControlledBy(cards, p);
                 if (!cards.contains(this)) {
                     return false;
@@ -4564,7 +4506,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 return false;
             }
         } else if (property.startsWith("lowestRememberedCMC")) {
-            List<Card> cards = new CardCollection();
+            CardCollection cards = new CardCollection();
             for (final Object o : source.getRemembered()) {
                 if (o instanceof Card) {
                     cards.add(game.getCardState((Card) o));
@@ -4579,7 +4521,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             }
         }
         else if (property.startsWith("lowestCMC")) {
-            final List<Card> cards = game.getCardsIn(ZoneType.Battlefield);
+            final CardCollectionView cards = game.getCardsIn(ZoneType.Battlefield);
             for (final Card crd : cards) {
                 if (!crd.isLand() && !crd.isImmutable()) {
                     if (crd.isSplitCard()) {
@@ -4754,8 +4696,8 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             if (null == combat) { return false; }
             if (null == combat.getAttackersBlockedBy(source) || null == combat.getAttackersBlockedBy(this)) { return false; }
 
-            List<Card> sourceBlocking = new CardCollection(combat.getAttackersBlockedBy(source));
-            List<Card> thisBlocking = new CardCollection(combat.getAttackersBlockedBy(this));
+            CardCollection sourceBlocking = new CardCollection(combat.getAttackersBlockedBy(source));
+            CardCollection thisBlocking = new CardCollection(combat.getAttackersBlockedBy(this));
             if (Collections.disjoint(sourceBlocking, thisBlocking)) {
                 return false;
             }
@@ -4852,7 +4794,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             }
         } else if (property.startsWith("non")) {
             // ... Other Card types
-            if (isType(property.substring(3))) {
+            if (getType().hasStringType(property.substring(3))) {
                 return false;
             }
         } else if (property.equals("CostsPhyrexianMana")) {
@@ -4946,11 +4888,11 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 return false;
             }
         } else if (property.equals("ChosenType")) {
-            if (!isType(source.getChosenType())) {
+            if (!getType().hasStringType(source.getChosenType())) {
                 return false;
             }
         } else if (property.equals("IsNotChosenType")) {
-            if (isType(source.getChosenType())) {
+            if (getType().hasStringType(source.getChosenType())) {
                 return false;
             }
         } else if (property.equals("IsCommander")) {
@@ -4963,7 +4905,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 return false;
             }
         } else {
-            if (!isType(property)) {
+            if (!getType().hasStringType(property)) {
                 return false;
             }
         }
@@ -5004,11 +4946,11 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             return false;
         }
 
-        for (final String type : getType()) {
+        for (final String type : getType().getCreatureTypes()) {
             if (type.equals("AllCreatureTypes") && c1.hasACreatureType()) {
                 return true;
             }
-            if (forge.card.CardType.isACreatureType(type) && c1.isType(type)) {
+            if (c1.getType().hasCreatureType(type)) {
                 return true;
             }
         }
@@ -5020,8 +4962,8 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             return false;
         }
 
-        for (final String type : getType()) {
-            if (forge.card.CardType.CoreType.isAPermanentType(type) && c1.isType(type)) {
+        for (final CoreType type : getType().getCoreTypes()) {
+            if (type.isPermanent && c1.getType().hasType(type)) {
                 return true;
             }
         }
@@ -5029,8 +4971,8 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
 
     public final boolean sharesCardTypeWith(final Card c1) {
-        for (final String type : getType()) {
-            if (forge.card.CardType.isACardType(type) && c1.isType(type)) {
+        for (final CoreType type : getType().getCoreTypes()) {
+            if (c1.getType().hasType(type)) {
                 return true;
             }
         }
@@ -5039,7 +4981,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
     public final boolean sharesTypeWith(final Card c1) {
         for (final String type : getType()) {
-            if (c1.isType(type)) {
+            if (c1.getType().hasStringType(type)) {
                 return true;
             }
         }
@@ -5054,7 +4996,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
 
     public final boolean hasACreatureType() {
-        for (final String type : getType()) {
+        for (final String type : getType().getSubtypes()) {
             if (forge.card.CardType.isACreatureType(type) ||  type.equals("AllCreatureTypes")) {
                 return true;
             }
@@ -5180,7 +5122,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
 
     public final void addCombatDamage(final Map<Card, Integer> map) {
-        final List<Card> cards = new CardCollection();
+        final CardCollection cards = new CardCollection();
 
         for (final Entry<Card, Integer> entry : map.entrySet()) {
             final Card source = entry.getKey();
@@ -5322,7 +5264,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         boolean DEBUGShieldsWithEffects = false;
         while (!getPreventNextDamageWithEffect().isEmpty() && restDamage != 0) {
             TreeMap<Card, Map<String, String>> shieldMap = getPreventNextDamageWithEffect();
-            List<Card> preventionEffectSources = new CardCollection(shieldMap.keySet());
+            CardCollectionView preventionEffectSources = new CardCollection(shieldMap.keySet());
             Card shieldSource = preventionEffectSources.get(0);
             if (preventionEffectSources.size() > 1) {
                 Map<String, Card> choiceMap = new TreeMap<String, Card>();
@@ -5364,14 +5306,14 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             }
 
             boolean apiIsEffect = (shieldSA.getApi() == ApiType.Effect);
-            List<Card> cardsInCommand = null;
+            CardCollectionView cardsInCommand = null;
             if (apiIsEffect) {
                 cardsInCommand = getGame().getCardsIn(ZoneType.Command);
             }
 
             getController().getController().playSpellAbilityNoStack(shieldSA, true);
             if (apiIsEffect) {
-                List<Card> newCardsInCommand = getGame().getCardsIn(ZoneType.Command);
+                CardCollection newCardsInCommand = (CardCollection)getGame().getCardsIn(ZoneType.Command);
                 newCardsInCommand.removeAll(cardsInCommand);
                 if (!newCardsInCommand.isEmpty()) {
                     newCardsInCommand.get(0).setSVar("PreventedDamage", "Number$" + Integer.toString(dmgToBePrevented));
@@ -5632,8 +5574,8 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
     public final void animateBestow() {
         bestowTimestamp = getGame().getNextTimestamp();
-        addChangedCardTypes(new ArrayList<String>(Arrays.asList("Aura")),
-                new ArrayList<String>(Arrays.asList("Creature")), false, false, false, true, bestowTimestamp);
+        addChangedCardTypes(new CardType(Arrays.asList("Aura")),
+                new CardType(Arrays.asList("Creature")), false, false, false, true, bestowTimestamp);
         addChangedCardKeywords(Arrays.asList("Enchant creature"), new ArrayList<String>(), false, bestowTimestamp);
     }
 
@@ -5812,7 +5754,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                     }
                 } else if (kw.startsWith("Protection from ")) {
                     final String protectType = CardUtil.getSingularType(kw.substring("Protection from ".length()));
-                    if (source.isType(protectType)) {
+                    if (source.getType().hasStringType(protectType)) {
                         return true;
                     }
                 }

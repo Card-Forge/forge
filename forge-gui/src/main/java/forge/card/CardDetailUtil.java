@@ -5,8 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Sets;
@@ -170,46 +168,7 @@ public class CardDetailUtil {
     }
 
     public static String formatCardType(final CardStateView card) {
-        final Set<String> list = card.getType();
-        final StringBuilder sb = new StringBuilder();
-    
-        final List<String> superTypes = new ArrayList<String>();
-        final List<String> cardTypes = new ArrayList<String>();
-        final List<String> subTypes = new ArrayList<String>();
-        final boolean allCreatureTypes = list.contains("AllCreatureTypes");
-    
-        for (final String t : list) {
-            if (allCreatureTypes && t.equals("AllCreatureTypes")) {
-                continue;
-            }
-            if (CardType.isASuperType(t) && !superTypes.contains(t)) {
-                superTypes.add(t);
-            }
-            if (CardType.isACardType(t) && !cardTypes.contains(t)) {
-                cardTypes.add(t);
-            }
-            if (CardType.isASubType(t) && !subTypes.contains(t) && (!allCreatureTypes || !CardType.isACreatureType(t))) {
-                subTypes.add(t);
-            }
-        }
-    
-        for (final String type : superTypes) {
-            sb.append(type).append(" ");
-        }
-        for (final String type : cardTypes) {
-            sb.append(type).append(" ");
-        }
-        if (!subTypes.isEmpty() || allCreatureTypes) {
-            sb.append("- ");
-        }
-        if (allCreatureTypes) {
-            sb.append("All creature types ");
-        }
-        for (final String type : subTypes) {
-            sb.append(type).append(" ");
-        }
-    
-        return sb.toString().trim();
+        return card.getType().toString();
     }
 
     public static String formatPowerToughness(final CardStateView card) {

@@ -35,11 +35,11 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.Zone;
+import forge.util.FCollection;
 
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <p>
@@ -153,7 +153,7 @@ public class HumanPlaySpellAbility {
                 clearTargets(currentAbility);
                 Player targetingPlayer;
                 if (currentAbility.hasParam("TargetingPlayer")) {
-                    List<Player> candidates = AbilityUtils.getDefinedPlayers(source, currentAbility.getParam("TargetingPlayer"), currentAbility);
+                    FCollection<Player> candidates = AbilityUtils.getDefinedPlayers(source, currentAbility.getParam("TargetingPlayer"), currentAbility);
                     // activator chooses targeting player
                     targetingPlayer = ability.getActivatingPlayer().getController().chooseSingleEntityForEffect(
                             candidates, currentAbility, "Choose the targeting player");
@@ -255,7 +255,7 @@ public class HumanPlaySpellAbility {
             for (String aVar : announce.split(",")) {
                 String varName = aVar.trim();
                 if ("CreatureType".equals(varName)) {
-                    String choice = pc.chooseSomeType("Creature", ability, CardType.getCreatureTypes(), new ArrayList<String>());
+                    String choice = pc.chooseSomeType("Creature", ability, CardType.Constant.CREATURE_TYPES, new ArrayList<String>());
                     ability.getHostCard().setChosenType(choice);
                 }
                 if ("ChooseNumber".equals(varName)) {

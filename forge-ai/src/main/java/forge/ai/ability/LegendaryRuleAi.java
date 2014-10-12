@@ -6,8 +6,6 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
-import java.util.Collection;
-
 /** 
  * TODO: Write javadoc for this type.
  *
@@ -24,7 +22,7 @@ public class LegendaryRuleAi extends SpellAbilityAi {
     
 
     @Override
-    public Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional, Player targetedPlayer) {
+    public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
         // Choose a single legendary/planeswalker card to keep
         Card firstOption = Iterables.getFirst(options, null);
         boolean choosingFromPlanewalkers = firstOption.isPlaneswalker();

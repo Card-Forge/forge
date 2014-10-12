@@ -21,14 +21,13 @@ import com.google.common.base.Predicate;
 
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -88,7 +87,7 @@ public class CostRemoveAnyCounter extends CostPartWithList {
     public final boolean canPay(final SpellAbility ability) {
         final Player activator = ability.getActivatingPlayer();
         final Card source = ability.getHostCard();
-        List<Card> validCards = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
+        CardCollectionView validCards = activator.getCardsIn(ZoneType.Battlefield);
         validCards = CardLists.getValidCards(validCards, this.getType().split(";"), activator, source);
         validCards = CardLists.filter(validCards, new Predicate<Card>() {
             @Override

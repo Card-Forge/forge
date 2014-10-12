@@ -7,6 +7,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
@@ -15,13 +16,10 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class ChangeZoneAllEffect extends SpellAbilityEffect {
-
-
     @Override
     protected String getStackDescription(SpellAbility sa) {
         // TODO build Stack Description will need expansion as more cards are added
@@ -40,15 +38,15 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final List<ZoneType> origin = ZoneType.listValueOf(sa.getParam("Origin"));
 
-        List<Card> cards = new ArrayList<Card>();
-
+        CardCollection cards;
         List<Player> tgtPlayers = getTargetPlayers(sa);
         final Game game = sa.getActivatingPlayer().getGame();
         final Card source = sa.getHostCard();
 
         if ((!sa.usesTargeting() && !sa.hasParam("Defined")) || sa.hasParam("UseAllOriginZones")) {
-            cards = game.getCardsIn(origin);
+            cards = new CardCollection(game.getCardsIn(origin));
         } else {
+            cards = new CardCollection();
             for (final Player p : tgtPlayers) {
                 cards.addAll(p.getCardsIn(origin));
             }
@@ -69,8 +67,8 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         }
 
         if (origin.contains(ZoneType.Library) && sa.hasParam("Search") && !sa.getActivatingPlayer().hasKeyword("CantSearchLibrary")) {
-            List<Card> libCards = CardLists.getValidCards(cards, "Card.inZoneLibrary", sa.getActivatingPlayer(), source);
-            List<Card> libCardsYouOwn = CardLists.filterControlledBy(libCards, sa.getActivatingPlayer());
+            CardCollection libCards = CardLists.getValidCards(cards, "Card.inZoneLibrary", sa.getActivatingPlayer(), source);
+            CardCollection libCardsYouOwn = CardLists.filterControlledBy(libCards, sa.getActivatingPlayer());
             if (!libCardsYouOwn.isEmpty()) { // Only searching one's own library would fire Archive Trap's altcost
                 sa.getActivatingPlayer().incLibrarySearched();
             }
@@ -80,7 +78,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             runParams.put("Target", tgtPlayers);
             game.getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
         }
-        cards = AbilityUtils.filterListByType(cards, sa.getParam("ChangeType"), sa);
+        cards = (CardCollection)AbilityUtils.filterListByType(cards, sa.getParam("ChangeType"), sa);
 
         if (sa.hasParam("ForgetOtherRemembered")) {
             sa.getHostCard().clearRemembered();
@@ -96,7 +94,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         if ((destination == ZoneType.Library || destination == ZoneType.PlanarDeck)
         		&& !sa.hasParam("Shuffle") && cards.size() >= 2 && !random) {
-            cards = sa.getActivatingPlayer().getController().orderMoveToZoneList(cards, destination);
+            cards = (CardCollection)sa.getActivatingPlayer().getController().orderMoveToZoneList(cards, destination);
         }
 
         if (destination.equals(ZoneType.Library) && random) {

@@ -18,14 +18,12 @@
 package forge.game.cost;
 
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The Class CostDiscard.
@@ -101,7 +99,7 @@ public class CostDiscard extends CostPartWithList {
         final Player activator = ability.getActivatingPlayer();
         final Card source = ability.getHostCard();
 
-        List<Card> handList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Hand));
+        CardCollectionView handList = activator.getCardsIn(ZoneType.Hand);
         String type = this.getType();
         final Integer amount = this.convertAmount();
 

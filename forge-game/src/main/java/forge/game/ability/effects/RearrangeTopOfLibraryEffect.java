@@ -3,6 +3,8 @@ package forge.game.ability.effects;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -10,7 +12,6 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.collect.Iterables;
@@ -113,13 +114,13 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
         if (maxCards == 0) {
             return;
         }
-        final List<Card> topCards = new ArrayList<Card>();
+        final CardCollection topCards = new CardCollection();
         // show top n cards:
         for (int j = 0; j < maxCards; j++) {
             topCards.add(lib.get(j));
         }
 
-        List<Card> orderedCards = activator.getController().orderMoveToZoneList(topCards, ZoneType.Library);
+        CardCollectionView orderedCards = activator.getController().orderMoveToZoneList(topCards, ZoneType.Library);
         for (int i = maxCards - 1; i >= 0; i--) {
             Card next = orderedCards.get(i);
             player.getGame().getAction().moveToLibrary(next, 0);

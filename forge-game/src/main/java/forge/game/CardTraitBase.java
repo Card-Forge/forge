@@ -3,6 +3,7 @@ package forge.game;
 import forge.card.MagicColor;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
@@ -223,7 +224,7 @@ public abstract class CardTraitBase extends GameObject {
             if (params.containsKey("PresentPlayer")) {
                 presentPlayer = params.get("PresentPlayer");
             }
-            List<Card> list = new ArrayList<Card>();
+            CardCollection list = new CardCollection();
             if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
                 list.addAll(this.getHostCard().getController().getCardsIn(presentZone));
             }
@@ -264,7 +265,7 @@ public abstract class CardTraitBase extends GameObject {
             if (params.containsKey("PresentPlayer2")) {
                 presentPlayer = params.get("PresentPlayer2");
             }
-            List<Card> list = new ArrayList<Card>();
+            CardCollection list = new CardCollection();
             if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
                 list.addAll(this.getHostCard().getController().getCardsIn(presentZone));
             }

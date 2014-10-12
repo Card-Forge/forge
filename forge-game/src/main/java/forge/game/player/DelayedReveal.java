@@ -1,23 +1,22 @@
 package forge.game.player;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.zone.ZoneType;
 
 //Stores information to reveal cards after a delay unless those cards can be revealed in the same dialog as cards being selected
 public class DelayedReveal {
-    private final Collection<Card> cards;
+    private final CardCollection cards;
     private final ZoneType zone;
     private final Player owner;
     private final String messagePrefix;
     private boolean revealed;
 
-    public DelayedReveal(Collection<Card> cards0, ZoneType zone0, Player owner0) {
+    public DelayedReveal(Iterable<Card> cards0, ZoneType zone0, Player owner0) {
         this(cards0, zone0, owner0, null);
     }
-    public DelayedReveal(Collection<Card> cards0, ZoneType zone0, Player owner0, String messagePrefix0) {
-        cards = new ArrayList<Card>(cards0); //create copy of list to allow modification
+    public DelayedReveal(Iterable<Card> cards0, ZoneType zone0, Player owner0, String messagePrefix0) {
+        cards = new CardCollection(cards0); //create copy of list to allow modification
         zone = zone0;
         owner = owner0;
         messagePrefix = messagePrefix0;

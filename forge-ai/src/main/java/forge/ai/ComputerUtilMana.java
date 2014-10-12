@@ -12,6 +12,8 @@ import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardColor;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
@@ -200,8 +202,8 @@ public class ComputerUtilMana {
         }
     }
 
-    public static ArrayList<Card> getManaSourcesToPayCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai) {
-        ArrayList<Card> manaSources = new ArrayList<>();
+    public static CardCollection getManaSourcesToPayCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai) {
+        CardCollection manaSources = new CardCollection();
 
         adjustManaCostToAvoidNegEffects(cost, sa.getHostCard(), ai);
         List<Mana> manaSpentToPay = new ArrayList<>();
@@ -260,7 +262,7 @@ public class ComputerUtilMana {
                     }
 
                     final String typeRes = cost.getSourceRestriction();
-                    if (StringUtils.isNotBlank(typeRes) && !ma.getHostCard().isType(typeRes)) {
+                    if (StringUtils.isNotBlank(typeRes) && !ma.getHostCard().getType().hasStringType(typeRes)) {
                         continue;
                     }
 
@@ -353,7 +355,7 @@ public class ComputerUtilMana {
                     }
 
                     final String typeRes = cost.getSourceRestriction();
-                    if (StringUtils.isNotBlank(typeRes) && !ma.getHostCard().isType(typeRes)) {
+                    if (StringUtils.isNotBlank(typeRes) && !ma.getHostCard().getType().hasStringType(typeRes)) {
                         continue;
                     }
 
@@ -561,7 +563,7 @@ public class ComputerUtilMana {
                 continue;
             }
 
-            if (StringUtils.isNotBlank(restriction) && !thisMana.getSourceCard().isType(restriction)) {
+            if (StringUtils.isNotBlank(restriction) && !thisMana.getSourceCard().getType().hasStringType(restriction)) {
                 continue;
             }
 
@@ -954,10 +956,8 @@ public class ComputerUtilMana {
     }
 
     //This method is currently used by AI to estimate available mana
-    public static ArrayList<Card> getAvailableMana(final Player ai, final boolean checkPlayable) {
-        final ArrayList<Card> list = new ArrayList<>();
-        list.addAll(ai.getCardsIn(ZoneType.Battlefield));
-        list.addAll(ai.getCardsIn(ZoneType.Hand));
+    public static CardCollection getAvailableMana(final Player ai, final boolean checkPlayable) {
+        final CardCollectionView list = CardCollection.combine(ai.getCardsIn(ZoneType.Battlefield), ai.getCardsIn(ZoneType.Hand));
         final List<Card> manaSources = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -971,15 +971,15 @@ public class ComputerUtilMana {
             }
         }); // CardListFilter
 
-        final ArrayList<Card> sortedManaSources = new ArrayList<>();
-        final ArrayList<Card> otherManaSources = new ArrayList<>();
-        final ArrayList<Card> colorlessManaSources = new ArrayList<>();
-        final ArrayList<Card> oneManaSources = new ArrayList<>();
-        final ArrayList<Card> twoManaSources = new ArrayList<>();
-        final ArrayList<Card> threeManaSources = new ArrayList<>();
-        final ArrayList<Card> fourManaSources = new ArrayList<>();
-        final ArrayList<Card> fiveManaSources = new ArrayList<>();
-        final ArrayList<Card> anyColorManaSources = new ArrayList<>();
+        final CardCollection sortedManaSources = new CardCollection();
+        final CardCollection otherManaSources = new CardCollection();
+        final CardCollection colorlessManaSources = new CardCollection();
+        final CardCollection oneManaSources = new CardCollection();
+        final CardCollection twoManaSources = new CardCollection();
+        final CardCollection threeManaSources = new CardCollection();
+        final CardCollection fourManaSources = new CardCollection();
+        final CardCollection fiveManaSources = new CardCollection();
+        final CardCollection anyColorManaSources = new CardCollection();
 
         // Sort mana sources
         // 1. Use lands that can only produce colorless mana without

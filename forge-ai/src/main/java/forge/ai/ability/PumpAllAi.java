@@ -9,6 +9,7 @@ import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
@@ -48,14 +49,14 @@ public class PumpAllAi extends PumpAiBase {
         }
 
         final Player opp = ai.getOpponent();
-        List<Card> comp = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source);
-        List<Card> human = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source);
+        CardCollection comp = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source);
+        CardCollection human = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source);
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null && sa.canTarget(opp) && sa.hasParam("IsCurse")) {
             sa.resetTargets();
             sa.getTargets().add(opp);
-            comp = new ArrayList<Card>();
+            comp.clear();
         }
 
         if (!game.getStack().isEmpty() && !sa.isCurse()) {

@@ -5,6 +5,8 @@ import com.google.common.base.Predicate;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CounterType;
@@ -12,14 +14,9 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
+
 public class RepeatEachAi extends SpellAbilityAi {
 
     /* (non-Javadoc)
@@ -44,7 +41,7 @@ public class RepeatEachAi extends SpellAbilityAi {
         } else if ("DoubleCounters".equals(logic)) {
             // TODO Improve this logic, double Planeswalker counters first, then +1/+1 on Useful creatures
             // Then Charge Counters, then -1/-1 on Opposing Creatures
-            List<Card> perms = new ArrayList<Card>(aiPlayer.getCardsIn(ZoneType.Battlefield));
+            CardCollection perms = new CardCollection(aiPlayer.getCardsIn(ZoneType.Battlefield));
             perms = CardLists.filter(CardLists.getTargetableCards(perms, sa), new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
@@ -58,7 +55,7 @@ public class RepeatEachAi extends SpellAbilityAi {
             sa.setTargetCard(perms.get(0));
         } else if ("RemoveAllCounters".equals(logic)) {
             // Break Dark Depths
-            List<Card> depthsList = aiPlayer.getCardsIn(ZoneType.Battlefield, "Dark Depths");
+            CardCollectionView depthsList = aiPlayer.getCardsIn(ZoneType.Battlefield, "Dark Depths");
             depthsList = CardLists.filter(depthsList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card crd) {
@@ -67,12 +64,12 @@ public class RepeatEachAi extends SpellAbilityAi {
             });
 
             if (depthsList.size() > 0) {
-                sa.getTargets().add(depthsList.get(0));
+                sa.getTargets().add(depthsList.getFirst());
                 return true;
             }
 
             // Get rid of Planeswalkers:
-            List<Card> list = new ArrayList<Card>(aiPlayer.getOpponent().getCardsIn(ZoneType.Battlefield));
+            CardCollectionView list = aiPlayer.getOpponent().getCardsIn(ZoneType.Battlefield);
             list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card crd) {
@@ -84,7 +81,7 @@ public class RepeatEachAi extends SpellAbilityAi {
                 return false;
             }
 
-            sa.getTargets().add(list.get(0));
+            sa.getTargets().add(list.getFirst());
         } else if ("BalanceLands".equals(logic)) {
             if (CardLists.filter(aiPlayer.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() >= 5) {
                 return false;
@@ -126,7 +123,7 @@ public class RepeatEachAi extends SpellAbilityAi {
     }
 
     @Override
-    protected Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional, Player targetedPlayer) {
+    protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
         return ComputerUtilCard.getBestCreatureAI(options);
     }
 }

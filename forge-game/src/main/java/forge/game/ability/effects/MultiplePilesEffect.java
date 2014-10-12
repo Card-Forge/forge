@@ -1,10 +1,13 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Iterables;
+
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
@@ -54,7 +57,7 @@ public class MultiplePilesEffect extends SpellAbilityEffect {
         final ZoneType zone = sa.hasParam("Zone") ? ZoneType.smartValueOf(sa.getParam("Zone")) : ZoneType.Battlefield;
         final boolean randomChosen = sa.hasParam("RandomChosen");
         final int piles = Integer.parseInt(sa.getParam("Piles"));
-        final Map<Player, List<List<Card>>> record = new HashMap<Player, List<List<Card>>>();
+        final Map<Player, List<CardCollectionView>> record = new HashMap<Player, List<CardCollectionView>>();
 
         String valid = "";
         if (sa.hasParam("ValidCards")) {
@@ -72,19 +75,19 @@ public class MultiplePilesEffect extends SpellAbilityEffect {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                List<Card> pool;
+                CardCollection pool;
                 if (sa.hasParam("DefinedCards")) {
-                    pool = new ArrayList<Card>(AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa));
+                    pool = new CardCollection(AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa));
                 } else {
-                    pool = p.getCardsIn(zone);
+                    pool = new CardCollection(p.getCardsIn(zone));
                 }
                 pool = CardLists.getValidCards(pool, valid, source.getController(), source);
 
-                List<List<Card>> pileList = new ArrayList<List<Card>>();
+                List<CardCollectionView> pileList = new ArrayList<CardCollectionView>();
 
                 for (int i = 1; i < piles; i++) {
                     int size = pool.size();
-                    List<Card> pile = p.getController().chooseCardsForEffect(pool, sa, "Choose cards in Pile " + i, 0, size, false);
+                    CardCollectionView pile = p.getController().chooseCardsForEffect(pool, sa, "Choose cards in Pile " + i, 0, size, false);
                     pileList.add(pile);
                     pool.removeAll(pile);
                 }
@@ -95,8 +98,8 @@ public class MultiplePilesEffect extends SpellAbilityEffect {
             }
         }
         if (randomChosen) {
-            for (Entry<Player, List<List<Card>>> ev : record.entrySet()) {
-                List<Card> chosen = Aggregates.random(ev.getValue());
+            for (Entry<Player, List<CardCollectionView>> ev : record.entrySet()) {
+                CardCollectionView chosen = Aggregates.random(ev.getValue());
                 for (Card c : chosen) {
                     source.addRemembered(c);
                 }

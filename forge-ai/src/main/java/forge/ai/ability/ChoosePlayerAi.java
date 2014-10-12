@@ -8,14 +8,9 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-import java.util.Collection;
 import java.util.List;
 
 public class ChoosePlayerAi extends SpellAbilityAi {
-
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
-     */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         return true;
@@ -31,11 +26,8 @@ public class ChoosePlayerAi extends SpellAbilityAi {
         return canPlayAI(ai, sa);
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.ability.SpellAbilityAi#chooseSinglePlayer(forge.game.player.Player, forge.card.spellability.SpellAbility, java.util.List)
-     */
     @Override
-    public Player chooseSinglePlayer(Player ai, SpellAbility sa, Collection<Player> choices) {
+    public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> choices) {
         Player chosen = null;
         if ("Curse".equals(sa.getParam("AILogic"))) {
             for (Player pc : choices) {
@@ -48,9 +40,11 @@ public class ChoosePlayerAi extends SpellAbilityAi {
                 chosen = Iterables.getFirst(choices, null);
                 System.out.println("No good curse choices. Picking first available: " + chosen);
             }
-        } else if ("Pump".equals(sa.getParam("AILogic"))) {
-            chosen = choices.contains(ai) ? ai : Iterables.getFirst(choices, null);
-        } else if ("BestAllyBoardPosition".equals(sa.getParam("AILogic"))) {
+        }
+        else if ("Pump".equals(sa.getParam("AILogic"))) {
+            chosen = Iterables.contains(choices, ai) ? ai : Iterables.getFirst(choices, null);
+        }
+        else if ("BestAllyBoardPosition".equals(sa.getParam("AILogic"))) {
             List<Player> prefChoices = Lists.newArrayList(choices);
             prefChoices.removeAll(ai.getOpponents());
             if (!prefChoices.isEmpty()) {
@@ -80,7 +74,7 @@ public class ChoosePlayerAi extends SpellAbilityAi {
             }
         } else {
             System.out.println("Default player choice logic.");
-            chosen = choices.contains(ai) ? ai : Iterables.getFirst(choices, null);
+            chosen = Iterables.contains(choices, ai) ? ai : Iterables.getFirst(choices, null);
         }
         return chosen;
     }

@@ -18,8 +18,11 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
+
 import forge.ai.ComputerUtilCard;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
 import forge.util.Aggregates;
@@ -51,7 +54,7 @@ public abstract class CountersAi {
      *            a int.
      * @return a {@link forge.game.card.Card} object.
      */
-    public static Card chooseCursedTarget(final List<Card> list, final String type, final int amount) {
+    public static Card chooseCursedTarget(final CardCollectionView list, final String type, final int amount) {
         Card choice;
         if (type.equals("M1M1")) {
             // try to kill the best killable creature, or reduce the best one
@@ -84,12 +87,12 @@ public abstract class CountersAi {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.game.card.Card} object.
      */
-    public static Card chooseBoonTarget(final List<Card> list, final String type) {
+    public static Card chooseBoonTarget(final CardCollectionView list, final String type) {
         Card choice;
         if (type.equals("P1P1")) {
             choice = ComputerUtilCard.getBestCreatureAI(list);
         } else if (type.equals("DIVINITY")) {
-            final List<Card> boon = CardLists.filter(list, new Predicate<Card>() {
+            final CardCollection boon = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return c.getCounters(CounterType.DIVINITY) == 0;

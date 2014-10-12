@@ -19,14 +19,12 @@ package forge.game.zone;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
-
-import java.util.List;
 
 /**
  * <p>
@@ -100,20 +98,21 @@ public class PlayerZone extends Zone {
         return String.format("%s %s", Lang.getPossesive(player.toString()), zoneType);
     }
 
-    public List<Card> getCardsPlayerCanActivate(Player who) {
-        Iterable<Card> cl = roCardList; // copy to new AL won't help here
-
-        // Only check the top card of the library
-        if (is(ZoneType.Library)) {
-            cl = Iterables.limit(cl, 1);
-        }
-
+    public CardCollectionView getCardsPlayerCanActivate(Player who) {
+        CardCollectionView cl = getCards(false);
         boolean checkingForOwner = who == player;
 
         if (checkingForOwner && (is(ZoneType.Battlefield) || is(ZoneType.Hand))) {
-            return roCardList;
+            return cl;
         }
+
+        // Only check the top card of the library
+        Iterable<Card> cards = cl;
+        if (is(ZoneType.Library)) {
+            cards = Iterables.limit(cards, 1);
+        }
+
         final Predicate<Card> filterPredicate = checkingForOwner ? new OwnCardsActivationFilter() : new AlienCardsActivationFilter();
-        return Lists.newArrayList(cl = Iterables.filter(cl, filterPredicate));
+        return CardLists.filter(cl, filterPredicate);
     }
 }

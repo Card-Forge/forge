@@ -27,6 +27,7 @@ import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
@@ -132,7 +133,7 @@ public final class GameActionUtil {
             String color = MagicColor.toShortString(MagicColor.WUBRG[i]);
             String abString = "AB$ Mana | Cost$ T | Produced$ " + color + " | SpellDescription$ Add {" + color + "} to your mana pool.";
             for (final Card land : lands) {
-                if (land.isType(landType)) {
+                if (land.getType().hasSubtype(landType)) {
                     final SpellAbility sa = AbilityFactory.getAbility(abString, land);
                     sa.setBasicLandAbility(true);
                     land.getCharacteristics().getManaAbility().add(sa);
@@ -392,7 +393,7 @@ public final class GameActionUtil {
         // Splice
         final List<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
         for (SpellAbility sa : abilities) {
-            if (sa.isSpell() && sa.getHostCard().isType("Arcane") && sa.getApi() != null ) {
+            if (sa.isSpell() && sa.getHostCard().getType().hasStringType("Arcane") && sa.getApi() != null ) {
                 newAbilities.addAll(GameActionUtil.getSpliceAbilities(sa));
             }
         }
@@ -472,31 +473,13 @@ public final class GameActionUtil {
         return newSAs;
     }
 
-    /**
-     * <p>
-     * hasUrzaLands.
-     * </p>
-     * 
-     * @param p
-     *            a {@link forge.game.player.Player} object.
-     * @return a boolean.
-     */
     private static boolean hasUrzaLands(final Player p) {
-        final List<Card> landsControlled = p.getCardsIn(ZoneType.Battlefield);
+        final CardCollectionView landsControlled = p.getCardsIn(ZoneType.Battlefield);
         return Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Mine")))
                 && Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Power-Plant")))
                 && Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Tower")));
     }
 
-    /**
-     * <p>
-     * generatedMana.
-     * </p>
-     *
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
     public static String generatedMana(final SpellAbility sa) {
         // Calculate generated mana here for stack description and resolving
 

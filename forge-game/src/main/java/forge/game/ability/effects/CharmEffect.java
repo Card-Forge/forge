@@ -6,6 +6,7 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.util.FCollection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +55,7 @@ public class CharmEffect extends SpellAbilityEffect {
             // Two of these also reference the chosen player during the spell effect
             
             //String choosers = sa.getParam("Chooser"); 
-            List<Player> opponents = activator.getOpponents(); // all cards have Choser$ Opponent, so it's hardcoded here
+            FCollection<Player> opponents = activator.getOpponents(); // all cards have Choser$ Opponent, so it's hardcoded here
             chooser = activator.getController().chooseSingleEntityForEffect(opponents, sa, "Choose an opponent");
             source.setChosenPlayer(chooser);
         }

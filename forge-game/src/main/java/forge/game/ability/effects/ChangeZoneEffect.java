@@ -23,6 +23,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.FCollectionView;
 import forge.util.Lang;
 import forge.util.MessageUtil;
 
@@ -454,10 +455,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
                     if (sa.hasParam("AttachedTo")) {
-                        List<Card> list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("AttachedTo"), sa);
+                        CardCollection list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("AttachedTo"), sa);
                         if (list.isEmpty()) {
-                            list = game.getCardsIn(ZoneType.Battlefield);
-                            list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), tgtC.getController(), tgtC);
+                            list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AttachedTo"), tgtC.getController(), tgtC);
                         }
                         if (!list.isEmpty()) {
                             Card attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, tgtC + " - Select a card to attach to.");
@@ -509,10 +509,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("Ninjutsu") || sa.hasParam("Attacking")) {
                         // What should they attack?
                         // TODO Ninjutsu needs to actually select the Defender, instead of auto selecting player
-                        List<GameEntity> defenders = game.getCombat().getDefenders();
+                        FCollectionView<GameEntity> defenders = game.getCombat().getDefenders();
                         if (!defenders.isEmpty()) { 
                             // Blockeres are already declared, set this to unblocked
-                            game.getCombat().addAttacker(tgtC, defenders.get(0));
+                            game.getCombat().addAttacker(tgtC, defenders.getFirst());
                             game.getCombat().getBandOfAttacker(tgtC).setBlocked(false);
                             game.fireEvent(new GameEventCombatChanged());
                         }
@@ -619,8 +619,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             // Currently only used for Mishra, but may be used by other things
             // Improve how this message reacts for other cards
             final List<ZoneType> alt = ZoneType.listValueOf(sa.getParam("OriginAlternative"));
-            List<Card> altFetchList = player.getCardsIn(alt);
-            altFetchList = AbilityUtils.filterListByType(altFetchList, sa.getParam("ChangeType"), sa);
+            CardCollectionView altFetchList = AbilityUtils.filterListByType(player.getCardsIn(alt), sa.getParam("ChangeType"), sa);
 
             final StringBuilder sb = new StringBuilder();
             sb.append(sa.getParam("AlternativeMessage")).append(" ");
@@ -654,28 +653,32 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         String changeType = sa.getParam("ChangeType"); 
 
-        List<Card> fetchList;
+        CardCollection fetchList;
         boolean shuffleMandatory = true;
         boolean searchedLibrary = false;
         if (defined) {
-            fetchList = new ArrayList<Card>(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
+            fetchList = new CardCollection(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
             if (!sa.hasParam("ChangeNum")) {
                 changeNum = fetchList.size();
             }
-        } else if (!origin.contains(ZoneType.Library) && !origin.contains(ZoneType.Hand)
+        }
+        else if (!origin.contains(ZoneType.Library) && !origin.contains(ZoneType.Hand)
                 && !sa.hasParam("DefinedPlayer")) {
-            fetchList = player.getGame().getCardsIn(origin);
-        } else {
-            fetchList = player.getCardsIn(origin);
+            fetchList = new CardCollection(player.getGame().getCardsIn(origin));
+        }
+        else {
+            fetchList = new CardCollection(player.getCardsIn(origin));
             if (origin.contains(ZoneType.Library) && !sa.hasParam("NoLooking")) {
                 searchedLibrary = true;
                 if (decider.hasKeyword("LimitSearchLibrary")) { // Aven Mindcensor
                     fetchList.removeAll(player.getCardsIn(ZoneType.Library));
                     final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
-                    if (fetchNum == 0)
+                    if (fetchNum == 0) {
                         searchedLibrary = false;
-                    else
+                    }
+                    else {
                         fetchList.addAll(player.getCardsIn(ZoneType.Library, fetchNum));
+                    }
                 }
                 if (decider.hasKeyword("CantSearchLibrary")) {
                     fetchList.removeAll(player.getCardsIn(ZoneType.Library));
@@ -692,7 +695,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         if (!defined) {
             if (origin.contains(ZoneType.Library) && searchedLibrary) {
                 final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
-                List<Card> shown = !decider.hasKeyword("LimitSearchLibrary") ? player.getCardsIn(ZoneType.Library) : player.getCardsIn(ZoneType.Library, fetchNum);
+                CardCollectionView shown = !decider.hasKeyword("LimitSearchLibrary") ? player.getCardsIn(ZoneType.Library) : player.getCardsIn(ZoneType.Library, fetchNum);
                 // Look at whole library before moving onto choosing a card
                 delayedReveal = new DelayedReveal(shown, ZoneType.Library, player, source.getName() + " - Looking at cards in ");
             }
@@ -706,7 +709,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 // should only count the number of searching player's own library
                 decider.incLibrarySearched();
                 // Panglacial Wurm
-                List<Card> canCastWhileSearching = CardLists.getKeyword(fetchList,
+                CardCollection canCastWhileSearching = CardLists.getKeyword(fetchList,
                         "While you're searching your library, you may cast CARDNAME from your library.");
                 for (final Card tgtCard : canCastWhileSearching) {
                     List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(tgtCard, decider);
@@ -730,7 +733,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         if (!defined && changeType != null) {
-            fetchList = AbilityUtils.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
+            fetchList = (CardCollection)AbilityUtils.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
         }
 
         if (sa.hasParam("NoShuffle")) {
@@ -750,7 +753,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final String totalcmc = sa.getParam("WithTotalCMC");
         int totcmc = AbilityUtils.calculateAmount(source, totalcmc, sa);
 
-        List<Card> chosenCards = new ArrayList<Card>();
+        CardCollection chosenCards = new CardCollection();
         for (int i = 0; i < changeNum && destination != null; i++) {
             if (sa.hasParam("DifferentNames")) {
                 for (Card c : chosenCards) {
@@ -812,7 +815,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             player.shuffle(sa);
         }
 
-        List<Card> movedCards = new ArrayList<Card>();
+        CardCollection movedCards = new CardCollection();
         long ts = game.getNextTimestamp();
         for (Card c : chosenCards) {
             Card movedCard = null;
@@ -832,10 +835,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
 
                 if (sa.hasParam("AttachedTo")) {
-                    List<Card> list = AbilityUtils.getDefinedCards(source, sa.getParam("AttachedTo"), sa);
+                    CardCollection list = AbilityUtils.getDefinedCards(source, sa.getParam("AttachedTo"), sa);
                     if (list.isEmpty()) {
-                        list = game.getCardsIn(ZoneType.Battlefield);
-                        list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), c.getController(), c);
+                        list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AttachedTo"), c.getController(), c);
                     }
                     if (!list.isEmpty()) {
                         Card attachedTo = null;
@@ -877,7 +879,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
 
                 if (sa.hasParam("AttachedToPlayer")) {
-                    List<Player> list = AbilityUtils.getDefinedPlayers(source, sa.getParam("AttachedToPlayer"), sa);
+                    FCollectionView<Player> list = AbilityUtils.getDefinedPlayers(source, sa.getParam("AttachedToPlayer"), sa);
                     if (!list.isEmpty()) {
                         Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, c + " - Select a player to attach to.");
                         if (c.isAura()) {
@@ -898,7 +900,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (sa.hasParam("Attacking")) {
                     final Combat combat = game.getCombat();
                     if ( null != combat ) {
-                        final List<GameEntity> e = combat.getDefenders();
+                        final FCollectionView<GameEntity> e = combat.getDefenders();
                         final GameEntity defender = player.getController().chooseSingleEntityForEffect(e, sa, "Declare " + c);
                         combat.addAttacker(c, defender);
                         game.fireEvent(new GameEventCombatChanged());
@@ -907,7 +909,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (sa.hasParam("Blocking")) {
                     final Combat combat = game.getCombat();
                     if ( null != combat ) {
-                        List<Card> attackers = AbilityUtils.getDefinedCards(source, sa.getParam("Blocking"), sa);
+                        CardCollection attackers = AbilityUtils.getDefinedCards(source, sa.getParam("Blocking"), sa);
                         if (!attackers.isEmpty()) {
                             Card attacker = attackers.get(0);
                             if (combat.isAttacking(attacker)) {

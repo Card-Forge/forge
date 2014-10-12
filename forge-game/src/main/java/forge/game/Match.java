@@ -7,6 +7,7 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.event.GameEventAnteCardsSelected;
 import forge.game.event.GameEventGameFinished;
 import forge.game.player.Player;
@@ -15,6 +16,7 @@ import forge.game.trigger.Trigger;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
+import forge.util.FCollectionView;
 import forge.util.MyRandom;
 
 import java.util.*;
@@ -175,7 +177,7 @@ public class Match {
         boolean isFirstGame = game.getMatch().getPlayedGames().isEmpty();
         boolean canSideBoard = !isFirstGame && rules.getGameType().isSideboardingAllowed();
 
-        final List<Player> players = game.getPlayers();
+        final FCollectionView<Player> players = game.getPlayers();
         final List<RegisteredPlayer> playersConditions = game.getMatch().getPlayers();
         for (int i = 0; i < playersConditions.size(); i++) {
             final Player player = players.get(i);
@@ -251,8 +253,8 @@ public class Match {
         for (int i = 0; i < cntPlayers; i++) {
             Player fromGame = lastGame.getRegisteredPlayers().get(i);
             // Add/Remove Cards lost via ChangeOwnership cards like Darkpact
-            List<Card> lostOwnership = fromGame.getLostOwnership();
-            List<Card> gainedOwnership = fromGame.getGainedOwnership();
+            CardCollectionView lostOwnership = fromGame.getLostOwnership();
+            CardCollectionView gainedOwnership = fromGame.getGainedOwnership();
 
             if (!lostOwnership.isEmpty()) {
                 List<PaperCard> lostPaperOwnership = new ArrayList<>();

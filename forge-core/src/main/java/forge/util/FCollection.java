@@ -1,5 +1,6 @@
 package forge.util;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -10,10 +11,9 @@ import java.util.Random;
 import java.util.Set;
 
 //base class for a collection with quick lookup and that maintains order
-public class FCollection<T> implements List<T>, Set<T>, Cloneable {
+public class FCollection<T> implements List<T>, Set<T>, FCollectionView<T>, Cloneable {
     private final HashSet<T> set = new HashSet<T>();
     private final LinkedList<T> list = new LinkedList<T>();
-    protected FCollectionView view;
 
     public FCollection() {
     }
@@ -78,13 +78,6 @@ public class FCollection<T> implements List<T>, Set<T>, Cloneable {
         return changed;
     }
 
-    public FCollectionView getView() {
-        if (view == null) {
-            view = new FCollectionView();
-        }
-        return view;
-    }
-
     @Override
     public int size() {
         return set.size();
@@ -138,6 +131,9 @@ public class FCollection<T> implements List<T>, Set<T>, Cloneable {
     }
     @Override
     public boolean addAll(Collection<? extends T> c) {
+        return addAll(c);
+    }
+    public boolean addAll(Iterable<? extends T> c) {
         boolean changed = false;
         for (T e : c) {
             if (add(e)) {
@@ -146,9 +142,24 @@ public class FCollection<T> implements List<T>, Set<T>, Cloneable {
         }
         return changed;
     }
+    @SuppressWarnings("unchecked")
     @Override
     public boolean addAll(int index, Collection<? extends T> c) {
-        return false;
+        if (c == null) { return false; }
+        List<T> list;
+        if (c instanceof List) {
+            list = (List<T>)c;
+        }
+        else {
+            list = new ArrayList<T>(c);
+        }
+        boolean changed = false;
+        for (int i = list.size() - 1; i >= 0; i--) { //must add in reverse order so they show up in the right place
+            if (insert(index, list.get(i))) {
+                changed = true;
+            }
+        }
+        return changed;
     }
     @Override
     public boolean removeAll(Collection<?> c) {
@@ -157,6 +168,16 @@ public class FCollection<T> implements List<T>, Set<T>, Cloneable {
             return true;
         }
         return false;
+    }
+    public boolean removeAll(Iterable<T> c) {
+        boolean changed = false;
+        for (T o : c) {
+            if (set.remove(o)) {
+                list.remove(o);
+                changed = true;
+            }
+        }
+        return changed;
     }
     @Override
     public boolean retainAll(Collection<?> c) {
@@ -193,19 +214,23 @@ public class FCollection<T> implements List<T>, Set<T>, Cloneable {
     }
     @Override
     public void add(int index, T element) {
+        insert(index, element);
+    }
+    private boolean insert(int index, T element) {
         if (set.add(element)) {
             list.add(index, element);
+            return true;
         }
-        else { //re-position in list if needed
-            int oldIndex = list.indexOf(element);
-            if (index != oldIndex) {
-                if (index > oldIndex) {
-                    index--; //account for being removed
-                }
-                list.remove(oldIndex);
-                list.add(index, element);
-            }
+        //re-position in list if needed
+        int oldIndex = list.indexOf(element);
+        if (index == oldIndex) { return false; }
+
+        if (index > oldIndex) {
+            index--; //account for being removed
         }
+        list.remove(oldIndex);
+        list.add(index, element);
+        return true;
     }
     @Override
     public T remove(int index) {
@@ -238,37 +263,5 @@ public class FCollection<T> implements List<T>, Set<T>, Cloneable {
             subList.add(list.get(i));
         }
         return subList;
-    }
-
-    public class FCollectionView implements Iterable<T> {
-        protected FCollectionView() {
-        }
-
-        public boolean isEmpty() {
-            return set.isEmpty();
-        }
-
-        public int size() {
-            return set.size();
-        }
-
-        public T getFirst() {
-            return list.getFirst();
-        }
-        public T getLast() {
-            return list.getLast();
-        }
-        public T get(int index) {
-            return list.get(index);
-        }
-
-        public boolean contains(T e) {
-            return set.contains(e);
-        }
-
-        @Override
-        public Iterator<T> iterator() {
-            return list.iterator();
-        }
     }
 }

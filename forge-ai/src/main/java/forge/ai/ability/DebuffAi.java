@@ -10,6 +10,7 @@ import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
@@ -125,7 +126,7 @@ public class DebuffAi extends SpellAbilityAi {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         sa.resetTargets();
-        List<Card> list = getCurseCreatures(ai, sa, kws == null ? Lists.<String>newArrayList() : kws);
+        CardCollection list = getCurseCreatures(ai, sa, kws == null ? Lists.<String>newArrayList() : kws);
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard());
 
         // several uses here:
@@ -178,11 +179,9 @@ public class DebuffAi extends SpellAbilityAi {
      *            a {@link java.util.ArrayList} object.
      * @return a {@link forge.CardList} object.
      */
-    private List<Card> getCurseCreatures(final Player ai, final SpellAbility sa, final List<String> kws) {
+    private CardCollection getCurseCreatures(final Player ai, final SpellAbility sa, final List<String> kws) {
         final Player opp = ai.getOpponent();
-        List<Card> list = opp.getCreaturesInPlay();
-        list = CardLists.getTargetableCards(list, sa);
-
+        CardCollection list = CardLists.getTargetableCards(opp.getCreaturesInPlay(), sa);
         if (!list.isEmpty()) {
             list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
@@ -192,7 +191,6 @@ public class DebuffAi extends SpellAbilityAi {
                 }
             });
         }
-
         return list;
     } // getCurseCreatures()
 
@@ -210,9 +208,8 @@ public class DebuffAi extends SpellAbilityAi {
      * @return a boolean.
      */
     private boolean debuffMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        List<Card> list = ai.getGame().getCardsIn(ZoneType.Battlefield);
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard());
+        CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard());
 
         if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             sa.resetTargets();
@@ -224,8 +221,8 @@ public class DebuffAi extends SpellAbilityAi {
             list.remove(c);
         }
 
-        final List<Card> pref = CardLists.filterControlledBy(list, ai.getOpponent());
-        final List<Card> forced = CardLists.filterControlledBy(list, ai);
+        final CardCollection pref = CardLists.filterControlledBy(list, ai.getOpponent());
+        final CardCollection forced = CardLists.filterControlledBy(list, ai);
         final Card source = sa.getHostCard();
 
         while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {

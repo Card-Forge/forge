@@ -3,6 +3,8 @@ package forge.game.ability.effects;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
@@ -10,7 +12,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /** 
@@ -42,13 +43,13 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
         for(Player libraryToPeek : libraryPlayers) {
             final PlayerZone library = libraryToPeek.getZone(ZoneType.Library);
             numPeek = Math.min(numPeek, library.size());
-            
-            List<Card> peekCards = new ArrayList<Card>();
+
+            CardCollection peekCards = new CardCollection();
             for(int i = 0; i < numPeek; i++) {
                 peekCards.add(library.get(i));
             }
-            
-            List<Card> revealableCards = CardLists.getValidCards(peekCards, revealValid, sa.getActivatingPlayer(), sa.getHostCard());
+
+            CardCollectionView revealableCards = CardLists.getValidCards(peekCards, revealValid, sa.getActivatingPlayer(), sa.getHostCard());
             boolean doReveal = !sa.hasParam("NoReveal") && !revealableCards.isEmpty();
             if (!sa.hasParam("NoPeek")) {
                 peekingPlayer.getController().reveal(peekCards, ZoneType.Library, peekingPlayer, source + " - Revealing cards from ");

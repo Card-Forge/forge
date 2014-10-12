@@ -12,7 +12,8 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardCollection.CardCollectionView;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -66,20 +67,19 @@ public class PlayEffect extends SpellAbilityEffect {
         }
 
         final Player controller = activator;
-        List<Card> tgtCards = new ArrayList<Card>();
+        CardCollection tgtCards;
 
         if (sa.hasParam("Valid")) {
             ZoneType zone = ZoneType.Hand;
             if (sa.hasParam("ValidZone")) {
                 zone = ZoneType.smartValueOf(sa.getParam("ValidZone"));
             }
-            tgtCards = game.getCardsIn(zone);
-            tgtCards = AbilityUtils.filterListByType(tgtCards, sa.getParam("Valid"), sa);
+            tgtCards = (CardCollection)AbilityUtils.filterListByType(game.getCardsIn(zone), sa.getParam("Valid"), sa);
         }
         else if (sa.hasParam("Encoded")) {
             final CardCollectionView encodedCards = source.getEncodedCards();
             final int encodedIndex = Integer.parseInt(sa.getParam("Encoded")) - 1;
-            tgtCards.add(encodedCards.get(encodedIndex));
+            tgtCards = new CardCollection(encodedCards.get(encodedIndex));
             useEncoded = true;
         }
         else if (sa.hasParam("AnySupportedCard")) {
@@ -95,7 +95,7 @@ public class PlayEffect extends SpellAbilityEffect {
             }
             if (sa.hasParam("RandomCopied")) {
                 List<PaperCard> copysource = new ArrayList<PaperCard>(cards);
-                List<Card> choice = new ArrayList<Card>();
+                CardCollection choice = new CardCollection();
                 final String num = sa.hasParam("RandomNum") ? sa.getParam("RandomNum") : "1";
                 int ncopied = AbilityUtils.calculateAmount(source, num, sa);
                 while(ncopied > 0) {
@@ -112,11 +112,14 @@ public class PlayEffect extends SpellAbilityEffect {
                 }
                 if (sa.hasParam("ChoiceNum")) {
                     final int choicenum = AbilityUtils.calculateAmount(source, sa.getParam("ChoiceNum"), sa);
-                    tgtCards = activator.getController().chooseCardsForEffect(choice, sa, source + " - Choose up to " + Lang.nounWithNumeral(choicenum, "card"), 0, choicenum, true);
-                } else {
+                    tgtCards = (CardCollection)activator.getController().chooseCardsForEffect(choice, sa, source + " - Choose up to " + Lang.nounWithNumeral(choicenum, "card"), 0, choicenum, true);
+                }
+                else {
                     tgtCards = choice;
                 }
-
+            }
+            else {
+                return;
             }
         }
         else {

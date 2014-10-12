@@ -5,6 +5,8 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.DelayedReveal;
 import forge.game.player.Player;
@@ -16,6 +18,7 @@ import forge.util.Lang;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -102,9 +105,8 @@ public class DigEffect extends SpellAbilityEffect {
             if (tgt != null && !p.canBeTargetedBy(sa)) {
                 continue;
             }
-            final List<Card> top = new ArrayList<Card>();
-            List<Card> valid = new ArrayList<Card>();
-            final List<Card> rest = new ArrayList<Card>();
+            final CardCollection top = new CardCollection();
+            final CardCollection rest = new CardCollection();
             final PlayerZone sourceZone = p.getZone(srcZone);
 
             numToDig = Math.min(numToDig, sourceZone.size());
@@ -129,7 +131,7 @@ public class DigEffect extends SpellAbilityEffect {
                 }
                 else if (sa.hasParam("RevealValid")) {
                     final String revealValid = sa.getParam("RevealValid");
-                    final List<Card> toReveal = CardLists.getValidCards(top, revealValid, host.getController(), host);
+                    final CardCollection toReveal = CardLists.getValidCards(top, revealValid, host.getController(), host);
                     if (!toReveal.isEmpty()) {
                         game.getAction().reveal(toReveal, host.getController());
                         if (sa.hasParam("RememberRevealed")) {
@@ -153,13 +155,15 @@ public class DigEffect extends SpellAbilityEffect {
                 }
 
                 if (!noMove) {
-                    List<Card> movedCards = new ArrayList<Card>();
-                    List<Card> andOrCards = new ArrayList<Card>();
+                    CardCollection movedCards;
+                    CardCollection andOrCards;
                     for (final Card c : top) {
                         rest.add(c);
                     }
+                    CardCollection valid;
                     if (mitosis) {
                         valid = sharesNameWithCardOnBattlefield(game, top);
+                        andOrCards = new CardCollection();
                     }
                     else if (!changeValid.isEmpty()) {
                         if (changeValid.contains("ChosenType")) {
@@ -168,23 +172,27 @@ public class DigEffect extends SpellAbilityEffect {
                         valid = CardLists.getValidCards(top, changeValid.split(","), host.getController(), host);
                         if (!andOrValid.equals("")) {
                             andOrCards = CardLists.getValidCards(top, andOrValid.split(","), host.getController(), host);
-                            andOrCards.removeAll(valid);
+                            andOrCards.removeAll((Collection<?>)valid);
                             valid.addAll(andOrCards);
+                        }
+                        else {
+                            andOrCards = new CardCollection();
                         }
                     }
                     else {
                         valid = top;
+                        andOrCards = new CardCollection();
                     }
 
                     if (changeAll) {
-                        movedCards.addAll(valid);
+                        movedCards = new CardCollection(valid);
                     }
                     else if (sa.hasParam("RandomChange")) {
                         int numChanging = Math.min(destZone1ChangeNum, valid.size());
                         movedCards = CardLists.getRandomSubList(valid, numChanging);
                     }
                     else if (allButOne) {
-                        movedCards.addAll(valid);
+                        movedCards = new CardCollection(valid);
                         String prompt;
                         if (destZone2.equals(ZoneType.Library) && (libraryPosition2 == 0)) {
                             prompt = "Choose a card to leave on top of {player's} library";
@@ -211,6 +219,7 @@ public class DigEffect extends SpellAbilityEffect {
                             }
                         }
 
+                        movedCards = new CardCollection();
                         while ((j < destZone1ChangeNum) || (anyNumber && (j < numToDig))) {
                             // let user get choice
                             Card chosen = null;
@@ -230,10 +239,10 @@ public class DigEffect extends SpellAbilityEffect {
                             if (!andOrValid.equals("")) {
                                 andOrCards.remove(chosen);
                                 if (!chosen.isValid(andOrValid.split(","), host.getController(), host)) {
-                                    valid = new ArrayList<Card>(andOrCards);
+                                    valid = new CardCollection(andOrCards);
                                 }
                                 else if (!chosen.isValid(changeValid.split(","), host.getController(), host)) {
-                                    valid.removeAll(andOrCards);
+                                    valid.removeAll((Collection<?>)andOrCards);
                                 }
                             }
                             j++;
@@ -286,11 +295,12 @@ public class DigEffect extends SpellAbilityEffect {
 
                     // now, move the rest to destZone2
                     if (destZone2 == ZoneType.Library || destZone2 == ZoneType.PlanarDeck || destZone2 == ZoneType.SchemeDeck) {
-                        List<Card> afterOrder = rest;
+                        CardCollection afterOrder = rest;
                         if (sa.hasParam("RestRandomOrder")) {
                             CardLists.shuffle(afterOrder);
-                        } else if (!skipReorder && rest.size() > 1) {
-                            afterOrder = chooser.getController().orderMoveToZoneList(rest, destZone2);
+                        }
+                        else if (!skipReorder && rest.size() > 1) {
+                            afterOrder = (CardCollection)chooser.getController().orderMoveToZoneList(rest, destZone2);
                         }
                         if (libraryPosition2 != -1) {
                             // Closest to top
@@ -320,23 +330,14 @@ public class DigEffect extends SpellAbilityEffect {
                     }
                 }
             }
-        } // end foreach player
-    } // end resolve
+        }
+    }
 
     // returns a List<Card> that is a subset of list with cards that share a name
     // with a permanent on the battlefield
-    /**
-     * <p>
-     * sharesNameWithCardOnBattlefield.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     * @return a {@link forge.CardList} object.
-     */
-    private List<Card> sharesNameWithCardOnBattlefield(final Game game, final List<Card> list) {
-        final List<Card> toReturn = new ArrayList<Card>();
-        final List<Card> play = game.getCardsIn(ZoneType.Battlefield);
+    private CardCollection sharesNameWithCardOnBattlefield(final Game game, final List<Card> list) {
+        final CardCollection toReturn = new CardCollection();
+        final CardCollectionView play = game.getCardsIn(ZoneType.Battlefield);
         for (final Card c : list) {
             for (final Card p : play) {
                 if (p.getName().equals(c.getName()) && !toReturn.contains(c)) {
@@ -346,5 +347,4 @@ public class DigEffect extends SpellAbilityEffect {
         }
         return toReturn;
     }
-
 }

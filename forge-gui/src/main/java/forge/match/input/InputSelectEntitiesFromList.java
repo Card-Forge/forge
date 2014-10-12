@@ -1,22 +1,21 @@
 package forge.match.input;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.player.PlayerControllerHuman;
+import forge.util.FCollection;
+import forge.util.FCollectionView;
 import forge.util.ITriggerEvent;
 
 public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSelectManyBase<T> {
     private static final long serialVersionUID = -6609493252672573139L;
 
-    private final Collection<T> validChoices;
-    protected final List<T> selected = new ArrayList<T>();
+    private final FCollectionView<T> validChoices;
+    protected final FCollection<T> selected = new FCollection<T>();
 
-    public InputSelectEntitiesFromList(final PlayerControllerHuman controller, final int min, final int max, final Collection<T> validChoices) {
+    public InputSelectEntitiesFromList(final PlayerControllerHuman controller, final int min, final int max, final FCollectionView<T> validChoices) {
         super(controller, Math.min(min, validChoices.size()), Math.min(max, validChoices.size()));
         this.validChoices = validChoices;
 
@@ -44,7 +43,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
 
     public final Collection<T> getSelected() {
         return selected;
-    }    
+    }
 
     @SuppressWarnings("unchecked")
     protected boolean selectEntity(GameEntity c) {

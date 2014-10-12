@@ -1,19 +1,15 @@
 package forge.game.card;
 
-import java.util.Set;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-
 import forge.ImageKeys;
 import forge.card.CardCharacteristicName;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
-import forge.card.CardType;
+import forge.card.CardTypeView;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.game.Direction;
@@ -392,7 +388,7 @@ public class CardView extends GameEntityView {
         final StringBuilder sb = new StringBuilder();
 
         // Vanguard Modifiers
-        if (card.isType("Vanguard")) {
+        if (card.getType().isVanguard()) {
             sb.append("Hand Modifier: ").append(card.getRules().getHand());
             sb.append("\r\nLife Modifier: ").append(card.getRules().getLife());
             sb.append("\r\n\r\n");
@@ -614,11 +610,18 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.ImageKey, c.getImageKey());
         }
 
-        public Set<String> getType() {
+        public CardTypeView getType() {
             return get(TrackableProperty.Type);
         }
         void updateType(CardCharacteristics c) {
-            set(TrackableProperty.Type, c.getType());
+            CardTypeView type = c.getType();
+            if (CardView.this.getOriginal() == this) {
+                Card card = Card.get(CardView.this);
+                if (card != null) {
+                    type = type.getTypeWithChanges(card.getChangedCardTypes()); //TODO: find a better way to do this
+                }
+            }
+            set(TrackableProperty.Type, type);
         }
 
         public ManaCost getManaCost() {
@@ -730,22 +733,22 @@ public class CardView extends GameEntityView {
         }
 
         public boolean isBasicLand() {
-            return isLand() && Iterables.any(getType(), Predicates.in(CardType.getBasicTypes()));
+            return getType().isBasicLand();
         }
         public boolean isCreature() {
-            return getType().contains("Creature");
+            return getType().isCreature();
         }
         public boolean isLand() {
-            return getType().contains("Land");
+            return getType().isLand();
         }
         public boolean isPlane() {
-            return getType().contains("Plane");
+            return getType().isPlane();
         }
         public boolean isPhenomenon() {
-            return getType().contains("Phenomenon");
+            return getType().isPhenomenon();
         }
         public boolean isPlaneswalker() {
-            return getType().contains("Planeswalker");
+            return getType().isPlaneswalker();
         }
     }
 

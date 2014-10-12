@@ -4,20 +4,14 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class ZoneExchangeEffect extends SpellAbilityEffect {
-
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
-     */
     @Override
     protected String getStackDescription(SpellAbility sa) {
         Card object1;
@@ -53,13 +47,13 @@ public class ZoneExchangeEffect extends SpellAbilityEffect {
             return;
         }
 
-        List<Card> list = new ArrayList<Card>(p.getCardsIn(zone2));
+        CardCollection list = new CardCollection(p.getCardsIn(zone2));
 
         String filter;
 
         if (type != null) {
             // If Type was declared, both objects need to match the type
-            if (!object1.isType(type)) {
+            if (!object1.getType().hasStringType(type)) {
                 return;
             }
             filter = type;
@@ -76,7 +70,7 @@ public class ZoneExchangeEffect extends SpellAbilityEffect {
         }
 
         Card object2 = p.getController().chooseSingleEntityForEffect(list, sa, "Choose a card", !sa.hasParam("Mandatory"));
-        if (object2 == null || !object2.isInZone(zone2) || (type != null && !object2.isType(type))) {
+        if (object2 == null || !object2.isInZone(zone2) || (type != null && !object2.getType().hasStringType(type))) {
             return;
         }
         // if the aura can't enchant, nothing happened.

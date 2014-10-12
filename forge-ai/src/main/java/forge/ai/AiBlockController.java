@@ -19,11 +19,12 @@ package forge.ai;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.collect.Lists;
 
 import forge.game.CardTraitBase;
 import forge.game.GameEntity;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;
@@ -32,6 +33,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
+import forge.util.FCollectionView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,24 +120,21 @@ public class AiBlockController {
         return blockers;
     }
 
-
-
-    private List<List<Card>> sortAttackerByDefender(final Combat combat) {
-        List<GameEntity> defenders = combat.getDefenders();
-        final ArrayList<List<Card>> attackers = new ArrayList<List<Card>>(defenders.size());
+    private List<CardCollection> sortAttackerByDefender(final Combat combat) {
+        FCollectionView<GameEntity> defenders = combat.getDefenders();
+        final ArrayList<CardCollection> attackers = new ArrayList<CardCollection>(defenders.size());
         for (GameEntity defender : defenders) {
             attackers.add(combat.getAttackersOf(defender));
         }
         return attackers;
     }
-    
+
     private List<Card> sortPotentialAttackers(final Combat combat) {
-        final List<List<Card>> attackerLists = sortAttackerByDefender(combat);
-        final List<Card> sortedAttackers = new ArrayList<Card>();
-        final List<Card> firstAttacker = attackerLists.get(0);
+        final List<CardCollection> attackerLists = sortAttackerByDefender(combat);
+        final CardCollection sortedAttackers = new CardCollection();
+        final CardCollection firstAttacker = attackerLists.get(0);
 
-        final List<GameEntity> defenders = combat.getDefenders();
-
+        final FCollectionView<GameEntity> defenders = combat.getDefenders();
 
         // Begin with the attackers that pose the biggest threat
         ComputerUtilCard.sortByEvaluateCreature(firstAttacker);
@@ -691,7 +690,7 @@ public class AiBlockController {
      * @param combat combat instance
      * @param blockers blockers to add in addition to creatures already in play
      */
-    public void assignAdditionalBlockers(final Combat combat, List<Card> blockers) {
+    public void assignAdditionalBlockers(final Combat combat, CardCollectionView blockers) {
         List<Card> possibleBlockers = ai.getCreaturesInPlay();
         for (Card c : blockers) {
             if (!possibleBlockers.contains(c)) {
@@ -858,12 +857,12 @@ public class AiBlockController {
         }
     }
 
-    public static List<Card> orderBlockers(Card attacker, List<Card> blockers) {
+    public static CardCollection orderBlockers(Card attacker, CardCollection blockers) {
         // ordering of blockers, sort by evaluate, then try to kill the best
         int damage = attacker.getNetCombatDamage();
         ComputerUtilCard.sortByEvaluateCreature(blockers);
-        final List<Card> first = new ArrayList<Card>();
-        final List<Card> last = new ArrayList<Card>();
+        final CardCollection first = new CardCollection();
+        final CardCollection last = new CardCollection();
         for (Card blocker : blockers) {
             int lethal = ComputerUtilCombat.getEnoughDamageToKill(blocker, damage, attacker, true);
             if (lethal > damage) {
@@ -885,18 +884,18 @@ public class AiBlockController {
      * Orders a blocker that put onto the battlefield blocking. Depends heavily
      * on the implementation of orderBlockers().
      */
-    public static List<Card> orderBlocker(final Card attacker, final Card blocker, final List<Card> oldBlockers) {
+    public static CardCollection orderBlocker(final Card attacker, final Card blocker, final CardCollection oldBlockers) {
     	// add blocker to existing ordering
     	// sort by evaluate, then insert it appropriately
     	// relies on current implementation of orderBlockers()
-        final List<Card> allBlockers = Lists.newArrayList(oldBlockers);
+        final CardCollection allBlockers = new CardCollection(oldBlockers);
         allBlockers.add(blocker);
         ComputerUtilCard.sortByEvaluateCreature(allBlockers);
         final int newBlockerIndex = allBlockers.indexOf(blocker);
 
         int damage = attacker.getNetCombatDamage();
 
-        final List<Card> result = Lists.newArrayListWithExpectedSize(oldBlockers.size());
+        final CardCollection result = new CardCollection();
         boolean newBlockerIsAdded = false;
         // The new blocker comes right after this one
         final Card newBlockerRightAfter = (newBlockerIndex == 0 ? null : allBlockers.get(newBlockerIndex - 1));
@@ -923,13 +922,13 @@ public class AiBlockController {
         return result;
     }
 
-    public static List<Card> orderAttackers(Card blocker, List<Card> attackers) {
+    public static CardCollection orderAttackers(Card blocker, CardCollection attackers) {
         // This shouldn't really take trample into account, but otherwise should be pretty similar to orderBlockers
         // ordering of blockers, sort by evaluate, then try to kill the best
         int damage = blocker.getNetCombatDamage();
         ComputerUtilCard.sortByEvaluateCreature(attackers);
-        final List<Card> first = new ArrayList<Card>();
-        final List<Card> last = new ArrayList<Card>();
+        final CardCollection first = new CardCollection();
+        final CardCollection last = new CardCollection();
         for (Card attacker : attackers) {
             int lethal = ComputerUtilCombat.getEnoughDamageToKill(attacker, damage, blocker, true);
             if (lethal > damage) {

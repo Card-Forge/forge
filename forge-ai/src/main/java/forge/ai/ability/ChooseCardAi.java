@@ -7,6 +7,8 @@ import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CounterType;
@@ -18,15 +20,9 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
-import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 public class ChooseCardAi extends SpellAbilityAi {
-
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
-     */
     @Override
     protected boolean canPlayAI(final Player ai, SpellAbility sa) {
         final Card host = sa.getHostCard();
@@ -47,7 +43,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             if (sa.hasParam("ChoiceZone")) {
                 choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
             }
-            List<Card> choices = ai.getGame().getCardsIn(choiceZone);
+            CardCollectionView choices = ai.getGame().getCardsIn(choiceZone);
             if (sa.hasParam("Choices")) {
                 choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host);
             }
@@ -106,8 +102,8 @@ public class ChooseCardAi extends SpellAbilityAi {
                     return false;
                 }
             } else if (logic.equals("Duneblast")) {
-            	List<Card> aiCreatures = ai.getCreaturesInPlay();
-            	List<Card> oppCreatures = ai.getOpponent().getCreaturesInPlay();
+                CardCollection aiCreatures = ai.getCreaturesInPlay();
+                CardCollection oppCreatures = ai.getOpponent().getCreaturesInPlay();
             	aiCreatures = CardLists.getNotKeyword(aiCreatures, "Indestructible");
             	oppCreatures = CardLists.getNotKeyword(oppCreatures, "Indestructible");
             	
@@ -115,18 +111,17 @@ public class ChooseCardAi extends SpellAbilityAi {
             	if (aiCreatures.isEmpty() && ComputerUtilCombat.sumDamageIfUnblocked(oppCreatures, ai) >= ai.getLife()) {
             		return true;
             	}
-            	
+
             	Card chosen = ComputerUtilCard.getBestCreatureAI(aiCreatures);
             	aiCreatures.remove(chosen);
             	int minGain = 200;
-            	
+
             	if ((ComputerUtilCard.evaluateCreatureList(aiCreatures) + minGain) >= ComputerUtilCard
                         .evaluateCreatureList(oppCreatures)) {
                     return false;
                 }
             }
         }
-
         return true;
     }
 
@@ -139,7 +134,7 @@ public class ChooseCardAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#chooseSingleCard(forge.card.spellability.SpellAbility, java.util.List, boolean)
      */
     @Override
-    public Card chooseSingleCard(final Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional, Player targetedPlayer) {
+    public Card chooseSingleCard(final Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
         final Card host = sa.getHostCard();
         final String logic = sa.getParam("AILogic");
         Card choice = null;
@@ -169,7 +164,7 @@ public class ChooseCardAi extends SpellAbilityAi {
         } else if (logic.equals("NeedsPrevention")) {
             final Game game = ai.getGame();
             final Combat combat = game.getCombat();
-            List<Card> better =  CardLists.filter(options, new Predicate<Card>() {
+            CardCollectionView better =  CardLists.filter(options, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     if (combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
@@ -185,15 +180,15 @@ public class ChooseCardAi extends SpellAbilityAi {
                 choice = ComputerUtilCard.getBestAI(options);
             }
         } else if ("OppPreferred".equals(logic)) {
-            List<Card> oppControlled = CardLists.filterControlledBy(options, ai.getOpponents());
+            CardCollectionView oppControlled = CardLists.filterControlledBy(options, ai.getOpponents());
             if (!oppControlled.isEmpty()) {
                 choice = ComputerUtilCard.getBestAI(oppControlled);
             } else {
-                List<Card> aiControlled = CardLists.filterControlledBy(options, ai);
+                CardCollectionView aiControlled = CardLists.filterControlledBy(options, ai);
                 choice = ComputerUtilCard.getWorstAI(aiControlled);
             }
         } else if ("LowestCMCCreature".equals(logic)) {
-            List<Card> creats = CardLists.filter(options, Presets.CREATURES);
+            CardCollection creats = CardLists.filter(options, Presets.CREATURES);
             creats = CardLists.filterToughness(creats, 1);
             if (creats.isEmpty()) {
                 choice = ComputerUtilCard.getWorstAI(options);
@@ -203,7 +198,7 @@ public class ChooseCardAi extends SpellAbilityAi {
                 choice = creats.get(0);
             }
         } else if ("TangleWire".equals(logic)) {
-            List<Card> betterList = CardLists.filter(options, new Predicate<Card>() {
+            CardCollectionView betterList = CardLists.filter(options, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     if (c.isCreature()) {
@@ -224,7 +219,7 @@ public class ChooseCardAi extends SpellAbilityAi {
                 choice = ComputerUtilCard.getWorstPermanentAI(options, false, false, false, false);
             }
         } else if (logic.equals("Duneblast")) {
-        	List<Card> aiCreatures = ai.getCreaturesInPlay();
+        	CardCollectionView aiCreatures = ai.getCreaturesInPlay();
         	aiCreatures = CardLists.getNotKeyword(aiCreatures, "Indestructible");
         	
         	if (aiCreatures.isEmpty()) {

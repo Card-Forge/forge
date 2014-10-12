@@ -51,6 +51,7 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.util.BuildInfo;
+import forge.util.FCollectionView;
 import forge.util.FileUtil;
 import forge.util.gui.SGuiChoose;
 
@@ -189,7 +190,7 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public GameEntityView chooseSingleEntityForEffect(String title, Collection<? extends GameEntity> optionList, DelayedReveal delayedReveal, boolean isOptional, PlayerControllerHuman controller) {
+    public GameEntityView chooseSingleEntityForEffect(String title, FCollectionView<? extends GameEntity> optionList, DelayedReveal delayedReveal, boolean isOptional, PlayerControllerHuman controller) {
         if (delayedReveal != null) {
             delayedReveal.reveal(controller); //TODO: Merge this into search dialog
         }

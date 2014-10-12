@@ -19,6 +19,7 @@ package forge.game;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -31,12 +32,14 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.eventbus.EventBus;
 
 import forge.card.CardRarity;
+import forge.card.CardType.Supertype;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.combat.Combat;
@@ -60,16 +63,16 @@ import forge.game.zone.MagicStack;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.FCollection;
+import forge.util.FCollectionView;
 
 /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
  */
 public class Game {
     private final GameRules rules;
-    private List<Player> roIngamePlayers;
-    private List<Player> roIngamePlayersReversed;
-    private final List<Player> allPlayers;
-    private final List<Player> ingamePlayers = new ArrayList<Player>();
+    private final FCollection<Player> allPlayers = new FCollection<Player>();
+    private final FCollection<Player> ingamePlayers = new FCollection<Player>();
 
     private List<Card> activePlanes = null;
 
@@ -105,10 +108,6 @@ public class Game {
 
         rules = rules0;
         match = match0;
-        List<Player> players = new ArrayList<Player>();
-        allPlayers = Collections.unmodifiableList(players);
-        roIngamePlayers = Collections.unmodifiableList(ingamePlayers);
-        roIngamePlayersReversed = Lists.reverse(roIngamePlayers); // reverse of unmodifiable list is also unmodifiable
 
         int highestTeam = -1;
         for (RegisteredPlayer psc : players0) {
@@ -123,7 +122,7 @@ public class Game {
         for (RegisteredPlayer psc : players0) {
         	IGameEntitiesFactory factory = (IGameEntitiesFactory)psc.getPlayer();
             Player pl = factory.createIngamePlayer(this, plId++);
-            players.add(pl);
+            allPlayers.add(pl);
             ingamePlayers.add(pl);
 
             pl.setStartingLife(psc.getStartingLife());
@@ -162,18 +161,20 @@ public class Game {
     /**
      * Gets the players who are still fighting to win.
      */
-    public final List<Player> getPlayers() {
-        return roIngamePlayers;
+    public final FCollectionView<Player> getPlayers() {
+        return ingamePlayers;
     }
 
     /**
      * Gets the players who are still fighting to win, in turn order.
      */
-    public final List<Player> getPlayersInTurnOrder() {
+    public final FCollectionView<Player> getPlayersInTurnOrder() {
     	if (turnOrder.isDefaultDirection()) {
-    		return roIngamePlayers;
+    		return ingamePlayers;
     	}
-    	return roIngamePlayersReversed;
+    	FCollection<Player> players = new FCollection<Player>(ingamePlayers);
+    	Collections.reverse(players);
+    	return players;
     }
 
     /**
@@ -246,9 +247,8 @@ public class Game {
         return stackZone;
     }
 
-    public List<Card> getCardsPlayerCanActivateInStack() {
-        List<Card> list = stackZone.getCards();
-        list = CardLists.filter(list, new Predicate<Card>() {
+    public CardCollectionView getCardsPlayerCanActivateInStack() {
+        return CardLists.filter(stackZone.getCards(), new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 for (final SpellAbility sa : c.getSpellAbilities()) {
@@ -260,7 +260,6 @@ public class Game {
                 return false;
             }
         });
-        return list;
     }
     
     /**
@@ -325,12 +324,12 @@ public class Game {
         return card.getZone();
     }
 
-    public synchronized List<Card> getCardsIn(final ZoneType zone) {
+    public synchronized CardCollectionView getCardsIn(final ZoneType zone) {
         if (zone == ZoneType.Stack) {
             return getStackZone().getCards();
         }
         else {
-            List<Card> cards = new ArrayList<Card>();
+            CardCollection cards = new CardCollection();
             for (final Player p : getPlayers()) {
                 cards.addAll(p.getZone(zone).getCards());
             }
@@ -338,12 +337,12 @@ public class Game {
         }
     }
 
-    public List<Card> getCardsIncludePhasingIn(final ZoneType zone) {
+    public CardCollectionView getCardsIncludePhasingIn(final ZoneType zone) {
         if (zone == ZoneType.Stack) {
             return getStackZone().getCards();
         }
         else {
-            List<Card> cards = new ArrayList<Card>();
+            CardCollection cards = new CardCollection();
             for (final Player p : getPlayers()) {
                 cards.addAll(p.getCardsIncludePhasingIn(zone));
             }
@@ -351,8 +350,8 @@ public class Game {
         }
     }
 
-    public List<Card> getCardsIn(final Iterable<ZoneType> zones) {
-        final List<Card> cards = new ArrayList<Card>();
+    public CardCollectionView getCardsIn(final Iterable<ZoneType> zones) {
+        CardCollection cards = new CardCollection();
         for (final ZoneType z : zones) {
             cards.addAll(getCardsIn(z));
         }
@@ -381,8 +380,8 @@ public class Game {
         return false;
     }
 
-    public List<Card> getColoredCardsInPlay(final String color) {
-        final List<Card> cards = new ArrayList<Card>();
+    public CardCollectionView getColoredCardsInPlay(final String color) {
+        final CardCollection cards = new CardCollection();
         for (Player p : getPlayers()) {
             cards.addAll(p.getColoredCardsInPlay(color));
         }
@@ -398,8 +397,8 @@ public class Game {
         return card;
     }
 
-    public List<Card> getCardsInGame() {
-        final List<Card> all = new ArrayList<Card>();
+    public CardCollectionView getCardsInGame() {
+        final CardCollection all = new CardCollection();
         for (final Player player : getPlayers()) {
             all.addAll(player.getZone(ZoneType.Graveyard).getCards());
             all.addAll(player.getZone(ZoneType.Hand).getCards());
@@ -440,9 +439,9 @@ public class Game {
      * {@code null} if there are no players in the game.
      */
     public Player getNextPlayerAfter(final Player playerTurn, final Direction turnOrder) {
-        int iPlayer = roIngamePlayers.indexOf(playerTurn);
+        int iPlayer = ingamePlayers.indexOf(playerTurn);
 
-        if (roIngamePlayers.isEmpty()) {
+        if (ingamePlayers.isEmpty()) {
             return null;
         }
 
@@ -456,24 +455,24 @@ public class Game {
                 if (iPlayer < 0) {
                 	iPlayer += totalNumPlayers;
                 }
-                iAlive = roIngamePlayers.indexOf(allPlayers.get(iPlayer));
+                iAlive = ingamePlayers.indexOf(allPlayers.get(iPlayer));
             } while (iAlive < 0);
             iPlayer = iAlive;
         }
         else { // for the case playerTurn hasn't died
-        	final int numPlayersInGame = roIngamePlayers.size();
+        	final int numPlayersInGame = ingamePlayers.size();
         	iPlayer = (iPlayer + shift) % numPlayersInGame;
         	if (iPlayer < 0) {
         		iPlayer += numPlayersInGame;
         	}
         }
 
-        return roIngamePlayers.get(iPlayer);
+        return ingamePlayers.get(iPlayer);
     }
 
     public int getPosition(Player player, Player startingPlayer) {
-        int startPosition = roIngamePlayers.indexOf(startingPlayer);
-        int position = (roIngamePlayers.indexOf(player) + startPosition) % roIngamePlayers.size() + 1;
+        int startPosition = ingamePlayers.indexOf(startingPlayer);
+        int position = (ingamePlayers.indexOf(player) + startPosition) % ingamePlayers.size() + 1;
         return position;
     }
 
@@ -521,7 +520,7 @@ public class Game {
 
         for (int i = 0; i < getCardsIn(ZoneType.Command).size(); i++) {
             Card c = getCardsIn(ZoneType.Command).get(i);
-            if (c.isScheme() && !c.isType("Ongoing")) {
+            if (c.isScheme() && !c.getType().hasSupertype(Supertype.Ongoing)) {
                 boolean foundonstack = false;
                 for (SpellAbilityStackInstance si : stack) {
                     if (si.getSourceCard().equals(c)) {
@@ -599,9 +598,8 @@ public class Game {
             System.out.println("Rarity chosen for ante: " + anteRarity.name());
             
             for (final Player player : getPlayers()) {
-                
-                List<Card> library = new ArrayList<>(player.getCardsIn(ZoneType.Library));
-                List<Card> toRemove = new ArrayList<>();
+                CardCollection library = new CardCollection(player.getCardsIn(ZoneType.Library));
+                CardCollection toRemove = new CardCollection();
                 
                 //Remove all cards that aren't of the chosen rarity
                 for (Card card : library) {
@@ -622,7 +620,7 @@ public class Game {
                     }
                 }
                 
-                library.removeAll(toRemove);
+                library.removeAll((Collection<?>)toRemove);
                 
                 if (library.size() > 0) { //Make sure that matches were found. If not, use the original method to choose antes
                     Card ante = library.get(new Random().nextInt(library.size()));
@@ -642,7 +640,7 @@ public class Game {
     }
 
     private void chooseRandomCardsForAnte(final Player player, final Multimap<Player, Card> anteed) {
-        final List<Card> lib = player.getCardsIn(ZoneType.Library);
+        final CardCollectionView lib = player.getCardsIn(ZoneType.Library);
         Predicate<Card> goodForAnte = Predicates.not(CardPredicates.Presets.BASIC_LANDS);
         Card ante = Aggregates.random(Iterables.filter(lib, goodForAnte));
         if (ante == null) {

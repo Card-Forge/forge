@@ -103,7 +103,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         }
 
         final String typeRes = manaCost.getSourceRestriction();
-        if (StringUtils.isNotBlank(typeRes) && !card.isType(typeRes)) {
+        if (StringUtils.isNotBlank(typeRes) && !card.getType().hasStringType(typeRes)) {
             return abilities;
         }
 
@@ -173,7 +173,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         // you can't remove unneeded abilities inside a for (am:abilities) loop :(
 
         final String typeRes = manaCost.getSourceRestriction();
-        if (StringUtils.isNotBlank(typeRes) && !card.isType(typeRes)) {
+        if (StringUtils.isNotBlank(typeRes) && !card.getType().hasStringType(typeRes)) {
             return false;
         }
 

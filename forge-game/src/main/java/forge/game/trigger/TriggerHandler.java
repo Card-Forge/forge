@@ -25,6 +25,8 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -32,6 +34,7 @@ import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+
 import java.util.*;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -45,16 +48,12 @@ public class TriggerHandler {
     private final List<TriggerWaiting> waitingTriggers = new ArrayList<TriggerWaiting>();
     private final Game game;
 
-    /**
-     * TODO: Write javadoc for Constructor.
-     * @param gameState
-     */
     public TriggerHandler(Game gameState) {
         game = gameState;
     }
 
     public final void cleanUpTemporaryTriggers() {
-        final List<Card> absolutelyAllCards = game.getCardsInGame();
+        final CardCollectionView absolutelyAllCards = game.getCardsInGame();
         for (final Card c : absolutelyAllCards) {
             for (int i = 0; i < c.getTriggers().size(); i++) {
                 if (c.getTriggers().get(i).isTemporary()) {
@@ -166,7 +165,7 @@ public class TriggerHandler {
 
     public final void resetActiveTriggers() {
         activeTriggers.clear();
-        List<Card> allCards = new ArrayList<Card>();
+        CardCollection allCards = new CardCollection();
         for(Player p : game.getPlayers()) {
             allCards.addAll(p.getAllCards());
         }

@@ -21,6 +21,8 @@ import com.google.common.collect.Lists;
 
 import forge.card.CardEdition;
 import forge.card.CardRarity;
+import forge.card.CardType;
+import forge.card.CardTypeView;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.game.card.CardView.CardStateView;
@@ -32,15 +34,13 @@ import forge.game.trigger.Trigger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 
 public class CardCharacteristics {
     private String name = "";
-    private Set<String> type = new CopyOnWriteArraySet<String>();
+    private CardType type = new CardType();
     private ManaCost manaCost = ManaCost.NO_COST;
     private List<CardColor> cardColor = new ArrayList<CardColor>();
     private String oracleText = "";
@@ -78,10 +78,16 @@ public class CardCharacteristics {
         view.updateName(this);
     }
 
-    public final Set<String> getType() {
+    public final CardTypeView getType() {
         return type;
     }
-    public final void setType(final Set<String> type0) {
+    public final void addType(String type0) {
+        if (type.add(type0)) {
+            view.updateType(this);
+        }
+    }
+    public final void setType(final CardType type0) {
+        if (type0.isEmpty() && type.isEmpty()) { return; }
         type.clear();
         type.addAll(type0);
         view.updateType(this);
@@ -242,7 +248,7 @@ public class CardCharacteristics {
         // Makes a "deeper" copy of a CardCharacteristics object
 
         setName(source.getName());
-        setType(source.getType());
+        setType(source.type);
         setManaCost(source.getManaCost());
         setCardColor(source.getCardColor());
         setBaseAttack(source.getBaseAttack());
