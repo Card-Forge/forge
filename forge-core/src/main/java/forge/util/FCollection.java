@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Random;
 import java.util.Set;
 
 //base class for a collection with quick lookup and that maintains order
@@ -57,25 +56,6 @@ public class FCollection<T> implements List<T>, Set<T>, FCollectionView<T>, Clon
     }
     public T getLast() {
         return list.getLast();
-    }
-
-    public T getRandom() {
-        int i = 0;
-        int index = new Random().nextInt(size());
-        for (T item : this) {
-            if (i++ == index) { return item; }
-        }
-        return null;
-    }
-
-    public boolean add(Iterable<T> items) {
-        boolean changed = false;
-        for (T item : items) {
-            if (add(item)) {
-                changed = true;
-            }
-        }
-        return changed;
     }
 
     @Override
@@ -131,7 +111,13 @@ public class FCollection<T> implements List<T>, Set<T>, FCollectionView<T>, Clon
     }
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        return addAll(c);
+        boolean changed = false;
+        for (T e : c) {
+            if (add(e)) {
+                changed = true;
+            }
+        }
+        return changed;
     }
     public boolean addAll(Iterable<? extends T> c) {
         boolean changed = false;
@@ -163,17 +149,18 @@ public class FCollection<T> implements List<T>, Set<T>, FCollectionView<T>, Clon
     }
     @Override
     public boolean removeAll(Collection<?> c) {
-        if (set.removeAll(c)) {
-            list.removeAll(c);
-            return true;
+        boolean changed = false;
+        for (Object o : c) {
+            if (remove(o)) {
+                changed = true;
+            }
         }
-        return false;
+        return changed;
     }
     public boolean removeAll(Iterable<T> c) {
         boolean changed = false;
         for (T o : c) {
-            if (set.remove(o)) {
-                list.remove(o);
+            if (remove(o)) {
                 changed = true;
             }
         }

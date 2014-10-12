@@ -551,7 +551,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         if (encodedCards == null) {
             encodedCards = new CardCollection();
         }
-        encodedCards.add(cards);
+        encodedCards.addAll(cards);
     }
     public final void removeEncodedCard(final Card c) {
         if (encodedCards.remove(c)) {
