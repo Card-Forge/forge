@@ -561,7 +561,7 @@ public class PlayerControllerHuman extends PlayerController {
         String fm = MessageUtil.formatMessage(message, player, owner);
         if (!cards.isEmpty()) {
             tempShowCards(cards);
-            SGuiChoose.reveal(fm, cards);
+            SGuiChoose.reveal(fm, CardView.getCollection(cards));
             endTempShowCards();
         }
         else {
@@ -733,7 +733,7 @@ public class PlayerControllerHuman extends PlayerController {
         };
         target.setMessage("Select %d card(s) to discard, unless you discard a " + uType + ".");
         target.showAndWait();
-        return (CardCollectionView)target.getSelected();
+        return new CardCollection(target.getSelected());
     }
 
     /* (non-Javadoc)
