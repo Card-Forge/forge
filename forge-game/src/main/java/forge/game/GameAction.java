@@ -66,12 +66,6 @@ import java.util.Map.Entry;
  * @version $Id$
  */
 public class GameAction {
-    /**
-     * <p>
-     * resetActivationsPerTurn.
-     * </p>
-     */
-
     private final Game game;
 
     public GameAction(Game game0) {
@@ -89,20 +83,6 @@ public class GameAction {
         }
     }
 
-    /**
-     * <p>
-     * changeZone.
-     * </p>
-     * 
-     * @param zoneFrom
-     *            a {@link forge.game.zone.PlayerZone} object.
-     * @param zoneTo
-     *            a {@link forge.game.zone.PlayerZone} object.
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param position TODO
-     * @return a {@link forge.game.card.Card} object.
-     */
     public Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position) {
         if (c.isCopiedSpell() || (c.isImmutable() && zoneTo.is(ZoneType.Exile))) {
             // Remove Effect from command immediately, this is essential when some replacement
@@ -329,11 +309,6 @@ public class GameAction {
         return copied;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param c
-     * @param copied
-     */
     private void unattachCardLeavingBattlefield(Card copied) {
         // Handle unequipping creatures
         if (copied.isEquipped()) {
@@ -377,21 +352,9 @@ public class GameAction {
         }
     }
 
-    /**
-     * <p>
-     * moveTo.
-     * </p>
-     * 
-     * @param zoneTo
-     *            a {@link forge.game.zone.PlayerZone} object.
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a {@link forge.game.card.Card} object.
-     */
     public final Card moveTo(final Zone zoneTo, Card c) {
        // FThreads.assertExecutedByEdt(false); // This code must never be executed from EDT,
                                              // use FThreads.invokeInNewThread to run code in a pooled thread
-
         return moveTo(zoneTo, c, null);
     }
 
@@ -431,12 +394,6 @@ public class GameAction {
         return c;
     }
 
-    /**
-     * Controller change zone correction.
-     * 
-     * @param c
-     *            a Card object
-     */
     public final void controllerChangeZoneCorrection(final Card c) {
         System.out.println("Correcting zone for " + c.toString());
         final Zone oldBattlefield = game.getZoneOf(c);
@@ -481,29 +438,11 @@ public class GameAction {
         c.runChangeControllerCommands();
     }
 
-    /**
-     * <p>
-     * moveToStack.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a {@link forge.game.card.Card} object.
-     */
     public final Card moveToStack(final Card c) {
         final Zone stack = game.getStackZone();
         return moveTo(stack, c);
     }
 
-    /**
-     * <p>
-     * moveToGraveyard.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a {@link forge.game.card.Card} object.
-     */
     public final Card moveToGraveyard(Card c) {
         final Player owner = c.getOwner();
         final PlayerZone grave = owner.getZone(ZoneType.Graveyard);
@@ -514,116 +453,41 @@ public class GameAction {
         }
 
         // must put card in OWNER's graveyard not controller's
-        c = moveTo(grave, c);
-
-        return c;
+        return moveTo(grave, c);
     }
 
-
-    /**
-     * <p>
-     * moveToHand.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a {@link forge.game.card.Card} object.
-     */
     public final Card moveToHand(final Card c) {
         final PlayerZone hand = c.getOwner().getZone(ZoneType.Hand);
         return moveTo(hand, c);
     }
 
-    /**
-     * <p>
-     * moveToPlay.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a {@link forge.game.card.Card} object.
-     */
     public final Card moveToPlay(final Card c) {
         final PlayerZone play = c.getController().getZone(ZoneType.Battlefield);
         return moveTo(play, c);
     }
 
-    /**
-     * <p>
-     * moveToPlay.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param p
-     *            a {@link forge.game.player.Player} object.
-     * @return a {@link forge.game.card.Card} object.
-     */
     public final Card moveToPlay(final Card c, final Player p) {
         // move to a specific player's Battlefield
         final PlayerZone play = p.getZone(ZoneType.Battlefield);
         return moveTo(play, c);
     }
 
-    /**
-     * <p>
-     * moveToBottomOfLibrary.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a {@link forge.game.card.Card} object.
-     */
     public final Card moveToBottomOfLibrary(final Card c) {
         return moveToLibrary(c, -1);
     }
 
-    /**
-     * <p>
-     * moveToLibrary.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a {@link forge.game.card.Card} object.
-     */
     public final Card moveToLibrary(final Card c) {
         return moveToLibrary(c, 0);
     }
 
-    /**
-     * <p>
-     * moveToLibrary.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param libPosition
-     *            a int.
-     * @return a {@link forge.game.card.Card} object.
-     */
     public final Card moveToLibrary(Card c, int libPosition) {
         final PlayerZone library = c.getOwner().getZone(ZoneType.Library);
-
         if (libPosition == -1 || libPosition > library.size()) {
             libPosition = library.size();
         }
         return changeZone(game.getZoneOf(c), library, c, libPosition);
     }
 
-    /**
-     * <p>
-     * moveToVariantDeck.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param zone
-     *            a {@link forge.game.card.Card} object.
-     * @param deckPosition
-     *            a int.
-     * @return a {@link forge.game.card.Card} object.
-     */
     public final Card moveToVariantDeck(Card c, ZoneType zone, int deckPosition) {
         final PlayerZone deck = c.getOwner().getZone(zone);
         if (deckPosition == -1 || deckPosition > deck.size()) {
@@ -632,15 +496,6 @@ public class GameAction {
         return changeZone(game.getZoneOf(c), deck, c, deckPosition);
     }
 
-    /**
-     * <p>
-     * exile.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a {@link forge.game.card.Card} object.
-     */
     public final Card exile(final Card c) {
         if (game.isCardExiled(c)) {
             return c;
@@ -649,32 +504,10 @@ public class GameAction {
         return moveTo(removed, c);
     }
 
-    /**
-     * Move to.
-     * 
-     * @param name
-     *            the name
-     * @param c
-     *            the c
-     * @return the card
-     */
     public final Card moveTo(final ZoneType name, final Card c) {
         return moveTo(name, c, 0);
     }
 
-    /**
-     * <p>
-     * moveTo.
-     * </p>
-     * 
-     * @param name
-     *            a {@link java.lang.String} object.
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param libPosition
-     *            a int.
-     * @return a {@link forge.game.card.Card} object.
-     */
     public final Card moveTo(final ZoneType name, final Card c, final int libPosition) {
         // Call specific functions to set PlayerZone, then move onto moveTo
         switch(name) {
@@ -691,13 +524,6 @@ public class GameAction {
         }
     }
 
-    /**
-     * @param fireEvents
-     *            {@code true} to have this method fire events about changed
-     *            cards.
-     * @return the cards that are affected by static abilities, or {@code null}
-     *         if no cards were affected.
-     */
     public final Set<Card> checkStaticAbilities(final boolean fireEvents) {
         if (game.isGameOver()) {
             return null;
@@ -808,16 +634,6 @@ public class GameAction {
         return affectedCards;
     }
 
-    /**
-     * <p>
-     * checkStateEffects.
-     * </p>
-     * 
-     * @param runEvents
-     *            {@code true} to have this method run
-     *            {@link GameEventCardStatsChanged} events.
-     * @return a set of affected cards.
-     */
     public final Set<Card> checkStateEffects(final boolean runEvents) {
         // sol(10/29) added for Phase updates, state effects shouldn't be
         // checked during Spell Resolution (except when persist-returning
@@ -947,13 +763,8 @@ public class GameAction {
         }
 
         return allAffectedCards;
-    } // checkStateEffects()
+    }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param c
-     * @return
-     */
     private boolean stateBasedAction704_5n(Card c) {
         boolean checkAgain = false;
         if (!c.isAura()) {
@@ -1019,7 +830,7 @@ public class GameAction {
                     checkAgain = true;
                 }
             }
-        } // if isEquipped()
+        }
 
         if (c.isFortified()) {
             for (final Card f : c.getFortifiedBy(true)) {
@@ -1028,7 +839,7 @@ public class GameAction {
                     checkAgain = true;
                 }
             }
-        } // if isFortified()
+        }
 
         if (c.isEquipping()) {
             final Card equippedCreature = c.getEquipping();
@@ -1044,7 +855,7 @@ public class GameAction {
                 c.unEquipCard(equippedCreature);
                 checkAgain = true;
             }
-        } // if isEquipping()
+        }
 
         if (c.isFortifying()) {
             final Card fortifiedLand = c.getFortifying();
@@ -1058,7 +869,7 @@ public class GameAction {
                 c.unFortifyCard(fortifiedLand);
                 checkAgain = true;
             }
-        } // if isFortifying()
+        }
         return checkAgain;
     }
 
@@ -1168,11 +979,6 @@ public class GameAction {
         game.getStack().clearSimultaneousStack();
     }
 
-    /**
-     * <p>
-     * destroyPlaneswalkers.
-     * </p>
-     */
     private boolean handlePlaneswalkerRule(Player p) {
         // get all Planeswalkers
         final List<Card> list = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
@@ -1213,11 +1019,6 @@ public class GameAction {
         return recheck;
     }
 
-    /**
-     * <p>
-     * destroyLegendaryCreatures.
-     * </p>
-     */
     private boolean handleLegendRule(Player p) {
         final List<Card> a = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), "Legendary");
         if (a.isEmpty() || game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
@@ -1253,7 +1054,7 @@ public class GameAction {
         }
 
         return recheck;
-    } // destroyLegendaryCreatures()
+    }
 
     private boolean handleWorldRule() {
         final List<Card> worlds = CardLists.getType(game.getCardsIn(ZoneType.Battlefield), "World");
@@ -1305,15 +1106,6 @@ public class GameAction {
         return newCard;
     }
 
-    /**
-     * <p>
-     * destroy.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a boolean.
-     */
     public final boolean destroy(final Card c, final SpellAbility sa) {
         if (!c.canBeDestroyed()) {
             return false;
@@ -1334,19 +1126,9 @@ public class GameAction {
 
             return false;
         }
-
         return destroyNoRegeneration(c, sa);
     }
 
-    /**
-     * <p>
-     * destroyNoRegeneration.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a boolean.
-     */
     public final boolean destroyNoRegeneration(final Card c, final SpellAbility sa) {
         Player activator = null;
         if (!c.canBeDestroyed()) {
@@ -1388,15 +1170,6 @@ public class GameAction {
         return sacrificed != null;
     }
 
-    /**
-     * <p>
-     * addSuspendTriggers.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a {@link forge.game.card.Card} object.
-     */
     private static Card addSuspendTriggers(final Card c) {
         if (c.getSVar("HasteFromSuspend").equals("True")) {
             return c;
@@ -1434,12 +1207,6 @@ public class GameAction {
     }
 
     /**
-     * <p>
-     * sacrificeDestroy.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
      * @return the sacrificed Card in its new location, or {@code null} if the
      * sacrifice wasn't successful.
      */
@@ -1493,7 +1260,7 @@ public class GameAction {
             game.getStack().addSimultaneousStackEntry(undyingAb);
         }
         return newCard;
-    } // sacrificeDestroy()
+    }
 
     public void reveal(CardCollectionView cards, Player cardOwner) {
         reveal(cards, cardOwner, true);
