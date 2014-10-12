@@ -1253,7 +1253,7 @@ public class AiController {
         
         for (final SpellAbility sa : getOriginalAndAltCostAbilities(all)) {
             // Don't add Counterspells to the "normal" playcard lookups
-            if (sa.getApi() == ApiType.Counter && skipCounter) {
+            if (skipCounter && sa.getApi() == ApiType.Counter) {
                 continue;
             }
             sa.setActivatingPlayer(player);

@@ -796,7 +796,7 @@ public class PlayerControllerAi extends PlayerController {
             if (!ai.getGame().getStack().isEmpty()) {
                 final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), null);
                 for (Card c : blockers) {
-                    if (objects.contains(c) && blockers.contains(c)) {
+                    if (objects.contains(c)) {
                         untappedCreats.add(c);
                     }
                 }

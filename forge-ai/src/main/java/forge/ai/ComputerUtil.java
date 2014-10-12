@@ -1019,18 +1019,6 @@ public class ComputerUtil {
         int defense = 0;
         boolean grantIndestructible = false;
         boolean grantShroud = false;
-        if (saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) {
-            defense = saviour.hasParam("NumDef") ? 
-                    AbilityUtils.calculateAmount(saviour.getHostCard(), saviour.getParam("NumDef"), saviour) : 0;
-            final List<String> keywords = saviour.hasParam("KW") ? 
-                            Arrays.asList(saviour.getParam("KW").split(" & ")) : new ArrayList<String>();
-            if (keywords.contains("Indestructible")) {
-                grantIndestructible = true;
-            }
-            if (keywords.contains("Hexproof") || keywords.contains("Shroud")) {
-                grantShroud = true;
-            }
-        }
     
         if (topStack == null) {
             return objects;
@@ -1051,20 +1039,36 @@ public class ComputerUtil {
             } else if (topStack.hasParam("ValidCards")) {
                 CardCollectionView battleField = aiPlayer.getCardsIn(ZoneType.Battlefield);
                 objects = CardLists.getValidCards(battleField, topStack.getParam("ValidCards").split(","), source.getController(), source);
+            } else {
+            	return threatened;
             }
         } else {
             objects = topStack.getTargets().getTargets();
-            if (tgt != null) {
-                final ArrayList<GameObject> canBeTargeted = new ArrayList<GameObject>();
-                for (Object o : objects) {
-                    if (o instanceof Card) {
-                        final Card c = (Card) o;
-                        if (c.canBeTargetedBy(topStack)) {
-                            canBeTargeted.add(c);
-                        }
+            final ArrayList<GameObject> canBeTargeted = new ArrayList<GameObject>();
+            for (Object o : objects) {
+                if (o instanceof Card) {
+                    final Card c = (Card) o;
+                    if (c.canBeTargetedBy(topStack)) {
+                        canBeTargeted.add(c);
                     }
                 }
-                objects = canBeTargeted;
+            }
+            if (canBeTargeted.isEmpty()) {
+            	return threatened;
+            }
+            objects = canBeTargeted;
+        }
+        
+        if (saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) {
+            defense = saviour.hasParam("NumDef") ? 
+                    AbilityUtils.calculateAmount(saviour.getHostCard(), saviour.getParam("NumDef"), saviour) : 0;
+            final List<String> keywords = saviour.hasParam("KW") ? 
+                            Arrays.asList(saviour.getParam("KW").split(" & ")) : new ArrayList<String>();
+            if (keywords.contains("Indestructible")) {
+                grantIndestructible = true;
+            }
+            if (keywords.contains("Hexproof") || keywords.contains("Shroud")) {
+                grantShroud = true;
             }
         }
 
@@ -1274,7 +1278,7 @@ public class ComputerUtil {
                 }
             }
         }
-    
+
         Iterables.addAll(threatened, ComputerUtil.predictThreatenedObjects(aiPlayer, saviour, topStack.getSubAbility()));
         return threatened;
     }
