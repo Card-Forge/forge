@@ -43,6 +43,7 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.FCollection;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -823,7 +824,7 @@ public class ComputerUtilCombat {
             }
         }
 
-        final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
+        final FCollection<Trigger> theTriggers = new FCollection<Trigger>();
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
@@ -944,7 +945,7 @@ public class ComputerUtilCombat {
 
         toughness += blocker.getKeywordMagnitude("Bushido");
         final Game game = attacker.getGame();
-        final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
+        final FCollection<Trigger> theTriggers = new FCollection<Trigger>();
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
@@ -1093,7 +1094,7 @@ public class ComputerUtilCombat {
         }
 
         final Game game = attacker.getGame();
-        final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
+        final FCollection<Trigger> theTriggers = new FCollection<Trigger>();
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
@@ -1273,7 +1274,7 @@ public class ComputerUtilCombat {
         }
 
         final Game game = attacker.getGame();
-        final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
+        final FCollection<Trigger> theTriggers = new FCollection<Trigger>();
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
@@ -1448,7 +1449,7 @@ public class ComputerUtilCombat {
      */
     public static boolean checkDestroyBlockerTrigger(final Card attacker, final Card defender) {
         final Game game = attacker.getGame();
-        final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
+        final FCollection<Trigger> theTriggers = new FCollection<Trigger>();
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
@@ -1503,7 +1504,7 @@ public class ComputerUtilCombat {
      * @return a boolean.
      */
     public static boolean checkDestroyAttackerTrigger(final Card attacker, final Card defender) {
-        final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
+        final FCollection<Trigger> theTriggers = new FCollection<Trigger>();
         for (Card card : attacker.getGame().getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }

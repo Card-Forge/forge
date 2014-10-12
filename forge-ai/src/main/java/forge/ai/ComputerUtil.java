@@ -33,7 +33,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.*;
-import forge.game.card.CardCollectionView;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -50,6 +49,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.FCollection;
 import forge.util.MyRandom;
 
 import org.apache.commons.lang3.StringUtils;
@@ -1599,7 +1599,7 @@ public class ComputerUtil {
     public static int damageFromETB(final Player player, final Card permanent) {
         int damage = 0;
         final Game game = player.getGame();
-        final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
+        final FCollection<Trigger> theTriggers = new FCollection<Trigger>();
 
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());

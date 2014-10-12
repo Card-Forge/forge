@@ -68,7 +68,7 @@ public class ManaCostAdjustment {
     
         // Sort abilities to apply them in proper order
         for (Card c : cardsOnBattlefield) {
-            final ArrayList<StaticAbility> staticAbilities = c.getStaticAbilities();
+            final Iterable<StaticAbility> staticAbilities = c.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 if (stAb.getMapParams().get("Mode").equals("RaiseCost")) {
                     raiseAbilities.add(stAb);

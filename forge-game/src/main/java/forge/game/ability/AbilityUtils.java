@@ -1114,9 +1114,9 @@ public class AbilityUtils {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<SpellAbility> getDefinedSpellAbilities(final Card card, final String def,
+    public static FCollection<SpellAbility> getDefinedSpellAbilities(final Card card, final String def,
             final SpellAbility sa) {
-        final ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
+        final FCollection<SpellAbility> sas = new FCollection<SpellAbility>();
         final String defined = (def == null) ? "Self" : applyAbilityTextChangeEffects(def, sa); // default to Self
         final Game game = sa.getActivatingPlayer().getGame();
 

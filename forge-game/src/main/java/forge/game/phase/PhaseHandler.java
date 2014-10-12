@@ -42,6 +42,7 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.CollectionSuppliers;
+import forge.util.FCollectionView;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
 
@@ -677,7 +678,7 @@ public class PhaseHandler implements java.io.Serializable {
         boolean noCost = true;
         List<ZoneType> checkZones = ZoneType.listValueOf("Battlefield,Command");
         for (Card card : game.getCardsIn(checkZones)) {
-            final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
+            final FCollectionView<StaticAbility> staticAbilities = card.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 Cost c1 = stAb.getBlockCost(blocker, attacker);
                 if (c1 != null) {

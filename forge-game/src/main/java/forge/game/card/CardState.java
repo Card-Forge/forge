@@ -17,6 +17,7 @@
  */
 package forge.game.card;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.card.CardEdition;
@@ -30,12 +31,15 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
+import forge.util.FCollection;
+import forge.util.FCollectionView;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.concurrent.CopyOnWriteArrayList;
+
+import org.apache.commons.lang3.StringUtils;
 
 
 public class CardState {
@@ -47,12 +51,12 @@ public class CardState {
     private int baseAttack = 0;
     private int baseDefense = 0;
     private List<String> intrinsicKeywords = new ArrayList<String>();
-    private final List<SpellAbility> nonManaAbilities = new ArrayList<SpellAbility>();
-    private final List<SpellAbility> manaAbilities = new ArrayList<SpellAbility>();
+    private final FCollection<SpellAbility> nonManaAbilities = new FCollection<SpellAbility>();
+    private final FCollection<SpellAbility> manaAbilities = new FCollection<SpellAbility>();
     private List<String> unparsedAbilities = new ArrayList<String>();
-    private List<Trigger> triggers = new CopyOnWriteArrayList<Trigger>();
-    private List<ReplacementEffect> replacementEffects = new ArrayList<ReplacementEffect>();
-    private List<StaticAbility> staticAbilities = new ArrayList<StaticAbility>();
+    private FCollection<Trigger> triggers = new FCollection<Trigger>();
+    private FCollection<ReplacementEffect> replacementEffects = new FCollection<ReplacementEffect>();
+    private FCollection<StaticAbility> staticAbilities = new FCollection<StaticAbility>();
     private List<String> staticAbilityStrings = new ArrayList<String>();
     private String imageKey = "";
     private Map<String, String> sVars = new TreeMap<String, String>();
@@ -160,22 +164,52 @@ public class CardState {
         view.updateToughness(this);
     }
 
-    public final List<String> getIntrinsicKeywords() {
+    public final Iterable<String> getIntrinsicKeywords() {
         return intrinsicKeywords;
+    }
+    public final boolean hasIntrinsicKeyword(String k) {
+        return intrinsicKeywords.contains(k);
     }
     public final void setIntrinsicKeywords(final ArrayList<String> intrinsicKeyword0) {
         intrinsicKeywords = intrinsicKeyword0;
     }
 
-    /*public final List<SpellAbility> getSpellAbilities() {
-        final ArrayList<SpellAbility> res = new ArrayList<SpellAbility>(manaAbilities);
-        res.addAll(nonManaAbilities);
-        return res;
-    }*/
-    public final List<SpellAbility> getManaAbilities() {
+    public final boolean addIntrinsicKeyword(final String s) {
+        return s.trim().length() != 0 && intrinsicKeywords.add(s);
+    }
+    public final boolean addIntrinsicKeywords(final Iterable<String> keywords) {
+        boolean changed = false;
+        for (String k : keywords) {
+            if (addIntrinsicKeyword(k)) {
+                changed = false;
+            }
+        }
+        return changed;
+    }
+
+    public final boolean addIntrinsicAbility(final String s) {
+        return s.trim().length() != 0 && unparsedAbilities.add(s);
+    }
+
+    public final boolean removeIntrinsicKeyword(final String s) {
+        return intrinsicKeywords.remove(s);
+    }
+
+    public final FCollectionView<SpellAbility> getSpellAbilities() {
+        if (manaAbilities.isEmpty()) {
+            return nonManaAbilities;
+        }
+        if (nonManaAbilities.isEmpty()) {
+            return manaAbilities;
+        }
+        FCollection<SpellAbility> newCol = new FCollection<SpellAbility>(manaAbilities);
+        newCol.addAll(nonManaAbilities);
+        return newCol;
+    }
+    public final FCollectionView<SpellAbility> getManaAbilities() {
         return manaAbilities;
     }
-    public final List<SpellAbility> getNonManaAbilities() {
+    public final FCollectionView<SpellAbility> getNonManaAbilities() {
         return nonManaAbilities;
     }
     public final void setNonManaAbilities(SpellAbility sa) {
@@ -185,25 +219,87 @@ public class CardState {
     	}
     }
 
-    public final List<String> getUnparsedAbilities() {
+    public final boolean addSpellAbility(final SpellAbility a) {
+        if (a.isManaAbility()) {
+            return manaAbilities.add(a);
+        }
+        return nonManaAbilities.add(a);
+    }
+    public final boolean removeSpellAbility(final SpellAbility a) {
+        if (a.isManaAbility()) {
+            // if (!a.isExtrinsic()) { return false; } //never remove intrinsic mana abilities, is this the way to go??
+            return manaAbilities.remove(a);
+        }
+        return nonManaAbilities.remove(a);
+    }
+    public final boolean addManaAbility(final SpellAbility a) {
+        return manaAbilities.add(a);
+    }
+    public final boolean addManaAbilities(final Iterable<SpellAbility> a) {
+        return manaAbilities.addAll(a);
+    }
+    public final boolean removeManaAbility(final SpellAbility a) {
+        return manaAbilities.remove(a);
+    }
+    public final boolean addNonManaAbility(final SpellAbility a) {
+        return nonManaAbilities.add(a);
+    }
+    public final boolean addNonManaAbilities(final Iterable<SpellAbility> a) {
+        return nonManaAbilities.addAll(a);
+    }
+    public final boolean removeNonManaAbility(final SpellAbility a) {
+        return nonManaAbilities.remove(a);
+    }
+
+    public final void clearFirstSpell() {
+        for (int i = 0; i < nonManaAbilities.size(); i++) {
+            if (nonManaAbilities.get(i).isSpell()) {
+                nonManaAbilities.remove(i);
+                return;
+            }
+        }
+    }
+
+    public final Iterable<String> getUnparsedAbilities() {
         return unparsedAbilities;
+    }
+    public final String getFirstUnparsedAbility() {
+        return Iterables.getFirst(unparsedAbilities, null);
+    }
+    public final boolean addUnparsedAbility(String a) {
+        return unparsedAbilities.add(a);
     }
     public final void setUnparsedAbilities(final List<String> list) {
         unparsedAbilities = list;
     }
 
-    public final List<Trigger> getTriggers() {
+    public final FCollectionView<Trigger> getTriggers() {
         return triggers;
     }
-    public final void setTriggers(final List<Trigger> triggers0) {
+    public final void setTriggers(final FCollection<Trigger> triggers0) {
         triggers = triggers0;
     }
+    public final boolean addTrigger(final Trigger t) {
+        return triggers.add(t);
+    }
+    public final boolean removeTrigger(final Trigger t) {
+        return triggers.remove(t);
+    }
+    public final void clearTriggers() {
+        triggers.clear();
+    }
 
-    public final List<StaticAbility> getStaticAbilities() {
+    public final FCollectionView<StaticAbility> getStaticAbilities() {
         return staticAbilities;
     }
-    public final void setStaticAbilities(final ArrayList<StaticAbility> staticAbilities0) {
-        staticAbilities = new ArrayList<StaticAbility>(staticAbilities0);
+    public final boolean addStaticAbility(StaticAbility stab) {
+        return staticAbilities.add(stab);
+    }
+    public final boolean removeStaticAbility(StaticAbility stab) {
+        return staticAbilities.remove(stab);
+    }
+    public final void setStaticAbilities(final Iterable<StaticAbility> staticAbilities0) {
+        staticAbilities = new FCollection<StaticAbility>(staticAbilities0);
     }
 
     public final String getImageKey() {
@@ -214,15 +310,28 @@ public class CardState {
         view.updateImageKey(this);
     }
 
-    public final List<String> getStaticAbilityStrings() {
+    public final Iterable<String> getStaticAbilityStrings() {
         return staticAbilityStrings;
     }
     public final void setStaticAbilityStrings(final ArrayList<String> staticAbilityStrings0) {
         staticAbilityStrings = staticAbilityStrings0;
     }
+    public boolean addStaticAbilityString(String s) {
+        if (StringUtils.isBlank(s)) { return false; }
+        return staticAbilityStrings.add(s);
+    }
 
-    public List<ReplacementEffect> getReplacementEffects() {
+    public FCollectionView<ReplacementEffect> getReplacementEffects() {
         return replacementEffects;
+    }
+    public boolean addReplacementEffect(final ReplacementEffect replacementEffect) {
+        return replacementEffects.add(replacementEffect);
+    }
+    public boolean removeReplacementEffect(final ReplacementEffect replacementEffect) {
+        return replacementEffects.remove(replacementEffect);
+    }
+    public void clearReplacementEffects() {
+        replacementEffects.clear();
     }
 
     public final Map<String, String> getSVars() {
@@ -257,21 +366,20 @@ public class CardState {
 
     public final void copyFrom(final Card c, final CardState source) {
         // Makes a "deeper" copy of a CardCharacteristics object
-
         setName(source.getName());
         setType(source.type);
         setManaCost(source.getManaCost());
         setCardColor(source.getCardColor());
         setBaseAttack(source.getBaseAttack());
         setBaseDefense(source.getBaseDefense());
-        intrinsicKeywords = new ArrayList<String>(source.getIntrinsicKeywords());
-        unparsedAbilities = new ArrayList<String>(source.getUnparsedAbilities());
-        staticAbilityStrings = new ArrayList<String>(source.getStaticAbilityStrings());
+        intrinsicKeywords = new ArrayList<String>(source.intrinsicKeywords);
+        unparsedAbilities = new ArrayList<String>(source.unparsedAbilities);
+        staticAbilityStrings = new ArrayList<String>(source.staticAbilityStrings);
         setImageKey(source.getImageKey());
         setRarity(source.rarity);
         setSetCode(source.setCode);
         setSVars(new TreeMap<String, String>(source.getSVars()));
-        replacementEffects = new ArrayList<ReplacementEffect>();
+        replacementEffects = new FCollection<ReplacementEffect>();
         for (ReplacementEffect RE : source.getReplacementEffects()) {
             replacementEffects.add(RE.getCopy());
         }

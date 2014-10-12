@@ -118,11 +118,10 @@ public final class GameActionUtil {
         // remove all abilities granted by this Command
         for (final Card land : lands) {
             List<SpellAbility> origManaAbs = Lists.newArrayList(land.getManaAbility());
-            List<SpellAbility> manaAbs = land.getCurrentState().getManaAbilities();
             // will get comodification exception without a different list
             for (final SpellAbility sa : origManaAbs) {
                 if (sa.isBasicLandAbility()) {
-                    manaAbs.remove(sa);
+                    land.getCurrentState().removeManaAbility(sa);
                 }
             }
         }
@@ -136,7 +135,7 @@ public final class GameActionUtil {
                 if (land.getType().hasSubtype(landType)) {
                     final SpellAbility sa = AbilityFactory.getAbility(abString, land);
                     sa.setBasicLandAbility(true);
-                    land.getCurrentState().getManaAbilities().add(sa);
+                    land.getCurrentState().addManaAbility(sa);
                 }
             }
         }
@@ -433,7 +432,7 @@ public final class GameActionUtil {
             if (spliceKwCost == null)
                 continue;
 
-            Map<String, String> params = AbilityFactory.getMapParams(c.getCurrentState().getUnparsedAbilities().get(0));
+            Map<String, String> params = AbilityFactory.getMapParams(c.getCurrentState().getFirstUnparsedAbility());
             AbilityRecordType rc = AbilityRecordType.getRecordType(params);
             ApiType api = rc.getApiTypeOf(params);
             AbilitySub subAbility = (AbilitySub) AbilityFactory.getAbility(AbilityRecordType.SubAbility, api, params, null, c);

@@ -18,6 +18,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
+import forge.util.FCollectionView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -206,7 +207,7 @@ public class AnimateEffect extends AnimateEffectBase {
             // suppress triggers from the animated card
             final ArrayList<Trigger> removedTriggers = new ArrayList<Trigger>();
             if (sa.hasParam("OverwriteTriggers") || removeAll) {
-                final List<Trigger> triggersToRemove = c.getTriggers();
+                final FCollectionView<Trigger> triggersToRemove = c.getTriggers();
                 for (final Trigger trigger : triggersToRemove) {
                     trigger.setSuppressed(true);
                     removedTriggers.add(trigger);
@@ -239,7 +240,7 @@ public class AnimateEffect extends AnimateEffectBase {
             // suppress static abilities from the animated card
             final ArrayList<StaticAbility> removedStatics = new ArrayList<StaticAbility>();
             if (sa.hasParam("OverwriteStatics") || removeAll) {
-                final ArrayList<StaticAbility> staticsToRemove = c.getStaticAbilities();
+                final FCollectionView<StaticAbility> staticsToRemove = c.getStaticAbilities();
                 for (final StaticAbility stAb : staticsToRemove) {
                     stAb.setTemporarilySuppressed(true);
                     removedStatics.add(stAb);

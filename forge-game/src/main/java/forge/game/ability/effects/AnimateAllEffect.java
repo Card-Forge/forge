@@ -18,6 +18,7 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
+import forge.util.FCollectionView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -185,7 +186,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
             // suppress triggers from the animated card
             final ArrayList<Trigger> removedTriggers = new ArrayList<Trigger>();
             if (sa.hasParam("OverwriteTriggers") || sa.hasParam("RemoveAllAbilities")) {
-                final List<Trigger> triggersToRemove = c.getTriggers();
+                final FCollectionView<Trigger> triggersToRemove = c.getTriggers();
                 for (final Trigger trigger : triggersToRemove) {
                     trigger.setSuppressed(true);
                     removedTriggers.add(trigger);
@@ -195,7 +196,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
             // suppress static abilities from the animated card
             final ArrayList<StaticAbility> removedStatics = new ArrayList<StaticAbility>();
             if (sa.hasParam("OverwriteStatics") || sa.hasParam("RemoveAllAbilities")) {
-                final ArrayList<StaticAbility> staticsToRemove = c.getStaticAbilities();
+                final FCollectionView<StaticAbility> staticsToRemove = c.getStaticAbilities();
                 for (final StaticAbility stAb : staticsToRemove) {
                     stAb.setTemporarilySuppressed(true);
                     removedStatics.add(stAb);
@@ -205,7 +206,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
             // suppress static abilities from the animated card
             final List<ReplacementEffect> removedReplacements = new ArrayList<ReplacementEffect>();
             if (sa.hasParam("OverwriteReplacements") || sa.hasParam("RemoveAllAbilities")) {
-                final List<ReplacementEffect> replacementsToRemove = c.getReplacementEffects();
+                final FCollectionView<ReplacementEffect> replacementsToRemove = c.getReplacementEffects();
                 for (final ReplacementEffect re : replacementsToRemove) {
                     re.setTemporarilySuppressed(true);
                     removedReplacements.add(re);

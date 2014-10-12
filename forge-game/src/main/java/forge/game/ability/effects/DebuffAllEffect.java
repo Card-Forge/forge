@@ -56,7 +56,7 @@ public class DebuffAllEffect extends SpellAbilityEffect {
             final ArrayList<String> hadIntrinsic = new ArrayList<String>();
             if (tgtC.isInPlay() && tgtC.canBeTargetedBy(sa)) {
                 for (final String kw : kws) {
-                    if (tgtC.getCurrentState().getIntrinsicKeywords().contains(kw)) {
+                    if (tgtC.getCurrentState().hasIntrinsicKeyword(kw)) {
                         hadIntrinsic.add(kw);
                     }
                     tgtC.removeIntrinsicKeyword(kw);

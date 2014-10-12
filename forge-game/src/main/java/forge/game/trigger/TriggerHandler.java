@@ -56,8 +56,9 @@ public class TriggerHandler {
         final CardCollectionView absolutelyAllCards = game.getCardsInGame();
         for (final Card c : absolutelyAllCards) {
             for (int i = 0; i < c.getTriggers().size(); i++) {
-                if (c.getTriggers().get(i).isTemporary()) {
-                    c.getTriggers().remove(i);
+                Trigger trigger = c.getTriggers().get(i);
+                if (trigger.isTemporary()) {
+                    c.removeTrigger(trigger);
                     i--;
                 }
             }
@@ -503,7 +504,7 @@ public class TriggerHandler {
                 Player p = regtrig.getHostCard().getController();
                 p.getZone(ZoneType.Command).remove(regtrig.getHostCard());
             } else {
-                regtrig.getHostCard().getTriggers().remove(regtrig);
+                regtrig.getHostCard().removeTrigger(regtrig);
             }
         }
     }

@@ -283,8 +283,9 @@ public class ReplacementHandler {
         final CardCollectionView absolutelyAllCards = game.getCardsInGame();
         for (final Card c : absolutelyAllCards) {
             for (int i = 0; i < c.getReplacementEffects().size(); i++) {
-                if (c.getReplacementEffects().get(i).isTemporary()) {
-                    c.getReplacementEffects().remove(i);
+                ReplacementEffect rep = c.getReplacementEffects().get(i);
+                if (rep.isTemporary()) {
+                    c.removeReplacementEffect(rep);
                     i--;
                 }
             }

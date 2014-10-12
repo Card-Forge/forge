@@ -296,8 +296,8 @@ public class CardFactory {
 
             if (state == CardStateName.LeftSplit || state == CardStateName.RightSplit) {
                 CardState original = card.getState(CardStateName.Original);
-                original.getNonManaAbilities().addAll(card.getCurrentState().getNonManaAbilities());
-                original.getIntrinsicKeywords().addAll(card.getCurrentState().getIntrinsicKeywords()); // Copy 'Fuse' to original side
+                original.addNonManaAbilities(card.getCurrentState().getNonManaAbilities());
+                original.addIntrinsicKeywords(card.getCurrentState().getIntrinsicKeywords()); // Copy 'Fuse' to original side
                 original.getSVars().putAll(card.getCurrentState().getSVars()); // Unfortunately need to copy these to (Effect looks for sVars on execute)
             }
         }

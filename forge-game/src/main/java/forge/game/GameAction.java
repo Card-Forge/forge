@@ -545,12 +545,12 @@ public class GameAction {
         final List<Card> staticList = new ArrayList<Card>();
         for (final Card c : allCards) {
             for (int i = 0; i < c.getStaticAbilities().size(); i++) {
-               StaticAbility stAb = c.getCurrentState().getStaticAbilities().get(i);
+               StaticAbility stAb = c.getStaticAbilities().get(i);
                if (stAb.getMapParams().get("Mode").equals("Continuous")) {
                    staticAbilities.add(stAb);
                }
                if (stAb.isTemporary()) {
-                   c.getCurrentState().getStaticAbilities().remove(i);
+                   c.removeStaticAbility(stAb);
                    i--;
                }
             }

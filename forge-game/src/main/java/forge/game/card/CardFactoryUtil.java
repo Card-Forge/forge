@@ -2133,7 +2133,7 @@ public class CardFactoryUtil {
                 card.getFirstSpellAbility().addAnnounceVar("Replicate");
             }
             else if (keyword.startsWith("Fuse")) {
-                card.getState(CardStateName.Original).getNonManaAbilities().add(AbilityFactory.buildFusedAbility(card));
+                card.getState(CardStateName.Original).addNonManaAbility(AbilityFactory.buildFusedAbility(card));
             }
             else if (keyword.startsWith("Evoke")) {
                 card.addSpellAbility(makeEvokeSpell(card, keyword));
@@ -2155,7 +2155,7 @@ public class CardFactoryUtil {
 
                 card.addSpellAbility(AbilityFactory.getAbility(effect, card));
                 // add ability to instrinic strings so copies/clones create the ability also
-                card.getUnparsedAbilities().add(effect);
+                card.getCurrentState().addUnparsedAbility(effect);
             }
             else if (keyword.startsWith("Unearth")) {
                 card.removeIntrinsicKeyword(keyword);
@@ -2184,7 +2184,7 @@ public class CardFactoryUtil {
                 card.setSVar("UnearthTrueDeath", truedeath);
                 card.addSpellAbility(AbilityFactory.getAbility(effect, card));
                 // add ability to instrinic strings so copies/clones create the ability also
-                card.getUnparsedAbilities().add(effect);
+                card.getCurrentState().addUnparsedAbility(effect);
             }
             else if (keyword.startsWith("Level up")) {
                 final String strMaxLevel = card.getSVar("maxLevel");
@@ -2202,7 +2202,7 @@ public class CardFactoryUtil {
 
                 card.addSpellAbility(AbilityFactory.getAbility(effect, card));
                 // add ability to instrinic strings so copies/clones create the ability also
-                card.getUnparsedAbilities().add(effect);
+                card.getCurrentState().addUnparsedAbility(effect);
             }
             else if (keyword.startsWith("Cycling")) {
                 card.removeIntrinsicKeyword(keyword);
@@ -2234,7 +2234,7 @@ public class CardFactoryUtil {
                         + "only any time you could cast a sorcery.)";
                 final SpellAbility abTransmute = AbilityFactory.getAbility(sbTransmute, card);
                 card.addSpellAbility(abTransmute);
-                card.getUnparsedAbilities().add(sbTransmute);
+                card.getCurrentState().addUnparsedAbility(sbTransmute);
             }
             else if (keyword.startsWith("Soulshift")) {
                 final String[] k = keyword.split(" ");
@@ -2572,7 +2572,7 @@ public class CardFactoryUtil {
                 final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
                 card.addSpellAbility(sa);
                 // add ability to instrinic strings so copies/clones create the ability also
-                card.getUnparsedAbilities().add(abilityStr.toString());
+                card.getCurrentState().addUnparsedAbility(abilityStr.toString());
             }
             else if (keyword.startsWith("Outlast")) {
                 final String outlastString = keyword.substring(7);
@@ -2603,7 +2603,7 @@ public class CardFactoryUtil {
                 final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
                 card.addSpellAbility(sa);
                 // add ability to instrinic strings so copies/clones create the ability also
-                card.getUnparsedAbilities().add(abilityStr.toString());
+                card.getCurrentState().addUnparsedAbility(abilityStr.toString());
             }
             else if (keyword.startsWith("Fortify")) {
                 final String equipString = keyword.substring(7);
@@ -2636,7 +2636,7 @@ public class CardFactoryUtil {
                 final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
                 card.addSpellAbility(sa);
                 // add ability to intrinsic strings so copies/clones create the ability also
-                card.getUnparsedAbilities().add(abilityStr.toString());
+                card.getCurrentState().addUnparsedAbility(abilityStr.toString());
             }
             else if (keyword.startsWith("Bestow")) {
                 final String[] params = keyword.split(":");
@@ -2656,7 +2656,7 @@ public class CardFactoryUtil {
                 bestow.setStackDescription("Bestow - " + card.getName());
                 bestow.setBasicSpell(false);
                 card.addSpellAbility(bestow);
-                card.getUnparsedAbilities().add(sbAttach.toString());
+                card.getCurrentState().addUnparsedAbility(sbAttach.toString());
             }
         }
 
@@ -3369,16 +3369,17 @@ public class CardFactoryUtil {
         } // Prowess
     }
 
-
     public final static void refreshTotemArmor(Card c) {
         boolean hasKw = c.hasKeyword("Totem armor");
 
-        List<ReplacementEffect> res = c.getReplacementEffects();
+        CardState state = c.getCurrentState();
+        FCollectionView<ReplacementEffect> res = state.getReplacementEffects();
         for (int ix = 0; ix < res.size(); ix++) {
             ReplacementEffect re = res.get(ix);
             if (re.getMapParams().containsKey("TotemArmor")) {
-                if (hasKw) return; // has re and kw - nothing to do here 
-                res.remove(ix--);
+                if (hasKw) { return; } // has re and kw - nothing to do here
+                state.removeReplacementEffect(re);
+                ix--;
             }
         }
 
@@ -3386,8 +3387,7 @@ public class CardFactoryUtil {
             ReplacementEffect re = ReplacementHandler.parseReplacement("Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.EnchantedBy | ReplaceWith$ RegenTA | Secondary$ True | TotemArmor$ True | Description$ Totem armor - " + c, c, true);
             c.getSVars().put("RegenTA", "AB$ DealDamage | Cost$ 0 | Defined$ ReplacedCard | Remove$ All | SubAbility$ DestroyMe");
             c.getSVars().put("DestroyMe", "DB$ Destroy | Defined$ Self");
-            c.getReplacementEffects().add(re);
+            state.addReplacementEffect(re);
         }
     }
-
-} // end class CardFactoryUtil
+}

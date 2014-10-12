@@ -63,6 +63,7 @@ import forge.item.PaperCard;
 import forge.trackable.TrackableProperty;
 import forge.util.CollectionSuppliers;
 import forge.util.Expressions;
+import forge.util.FCollection;
 import forge.util.FCollectionView;
 import forge.util.Lang;
 import forge.util.TextUtil;
@@ -612,11 +613,11 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         flipResult = null;
     }
 
-    public final List<Trigger> getTriggers() {
+    public final FCollectionView<Trigger> getTriggers() {
         return currentState.getTriggers();
     }
-    public final void setTriggers(final List<Trigger> trigs, boolean intrinsicOnly) {
-        final List<Trigger> copyList = new CopyOnWriteArrayList<Trigger>();
+    public final void setTriggers(final Iterable<Trigger> trigs, boolean intrinsicOnly) {
+        final FCollection<Trigger> copyList = new FCollection<Trigger>();
         for (final Trigger t : trigs) {
             if (!intrinsicOnly || t.isIntrinsic()) {
                 copyList.add(t.getCopyForHostCard(this));
@@ -626,24 +627,21 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
     public final Trigger addTrigger(final Trigger t) {
         final Trigger newtrig = t.getCopyForHostCard(this);
-        currentState.getTriggers().add(newtrig);
+        currentState.addTrigger(newtrig);
         return newtrig;
     }
     public final void moveTrigger(final Trigger t) {
         t.setHostCard(this);
-        if (!currentState.getTriggers().contains(t)) {
-            currentState.getTriggers().add(t);
-        }
+        currentState.addTrigger(t);
     }
     public final void removeTrigger(final Trigger t) {
-        currentState.getTriggers().remove(t);
+        currentState.removeTrigger(t);
     }
     public final void removeTrigger(final Trigger t, final CardStateName state) {
-        CardState stateCharacteristics = getState(state);
-        stateCharacteristics.getTriggers().remove(t);
+        getState(state).removeTrigger(t);
     }
     public final void clearTriggersNew() {
-        currentState.getTriggers().clear();
+        currentState.clearTriggers();
     }
 
     public final Object getTriggeringObject(final String typeIn) {
@@ -1793,12 +1791,12 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return sb;
     }
 
-    public final List<SpellAbility> getManaAbility() {
-        return Collections.unmodifiableList(currentState.getManaAbilities());
+    public final FCollectionView<SpellAbility> getManaAbility() {
+        return currentState.getManaAbilities();
     }
 
     public final boolean canProduceSameManaTypeWith(final Card c) {
-        final List<SpellAbility> manaAb = getManaAbility();
+        final FCollectionView<SpellAbility> manaAb = getManaAbility();
         if (manaAb.isEmpty()) {
             return false;
         }
@@ -1828,17 +1826,11 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
 
     public final void clearFirstSpell() {
-        for (int i = 0; i < currentState.getNonManaAbilities().size(); i++) {
-            if (currentState.getNonManaAbilities().get(i).isSpell()) {
-                currentState.getNonManaAbilities().remove(i);
-                return;
-            }
-        }
+        currentState.clearFirstSpell();
     }
 
     public final SpellAbility getFirstSpellAbility() {
-        final List<SpellAbility> sas = currentState.getNonManaAbilities();
-        return sas.isEmpty() ? null : sas.get(0);
+        return currentState.getNonManaAbilities().getFirst();
     }
 
     /**
@@ -1867,36 +1859,24 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
     public final void addSpellAbility(final SpellAbility a) {
         a.setHostCard(this);
-        if (a.isManaAbility()) {
-            currentState.getManaAbilities().add(a);
-        }
-        else {
-            currentState.getNonManaAbilities().add(a);
-        }
+        currentState.addSpellAbility(a);
     }
 
     public final void removeSpellAbility(final SpellAbility a) {
-        if (a.isManaAbility()) {
-            // if (a.isExtrinsic()) //never remove intrinsic mana abilities, is
-            // this the way to go??
-            currentState.getManaAbilities().remove(a);
-        }
-        else {
-            currentState.getNonManaAbilities().remove(a);
-        }
+        currentState.removeSpellAbility(a);
     }
 
-    public final List<SpellAbility> getManaAbilities() {
+    public final FCollectionView<SpellAbility> getManaAbilities() {
         return currentState.getManaAbilities();
     }
-    public final List<SpellAbility> getNonManaAbilities() {
+    public final FCollectionView<SpellAbility> getNonManaAbilities() {
         return currentState.getNonManaAbilities();
     }
-    public final List<String> getUnparsedAbilities() {
+    public final Iterable<String> getUnparsedAbilities() {
         return currentState.getUnparsedAbilities();
     }
-    public final ArrayList<SpellAbility> getAllSpellAbilities() {
-        final ArrayList<SpellAbility> res = new ArrayList<SpellAbility>();
+    public final FCollectionView<SpellAbility> getAllSpellAbilities() {
+        final FCollection<SpellAbility> res = new FCollection<SpellAbility>();
         for (final CardStateName key : states.keySet()) {
             res.addAll(getState(key).getNonManaAbilities());
             res.addAll(getState(key).getManaAbilities());
@@ -1904,8 +1884,8 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return res;
     }
 
-    public final List<SpellAbility> getSpells() {
-        final List<SpellAbility> res = new ArrayList<SpellAbility>();
+    public final FCollectionView<SpellAbility> getSpells() {
+        final FCollection<SpellAbility> res = new FCollection<SpellAbility>();
         for (final SpellAbility sa : currentState.getNonManaAbilities()) {
             if (!sa.isSpell()) {
                 continue;
@@ -1915,8 +1895,8 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return res;
     }
 
-    public final List<SpellAbility> getBasicSpells() {
-        final ArrayList<SpellAbility> res = new ArrayList<SpellAbility>();
+    public final FCollectionView<SpellAbility> getBasicSpells() {
+        final FCollection<SpellAbility> res = new FCollection<SpellAbility>();
         for (final SpellAbility sa : currentState.getNonManaAbilities()) {
             if (sa.isSpell() && sa.isBasicSpell()) {
                 res.add(sa);
@@ -2780,7 +2760,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
     public final ArrayList<String> getUnhiddenKeywords(CardState state) {
         final ArrayList<String> keywords = new ArrayList<String>();
-        keywords.addAll(state.getIntrinsicKeywords());
+        Iterables.addAll(keywords, state.getIntrinsicKeywords());
         keywords.addAll(extrinsicKeyword);
 
         // see if keyword changes are in effect
@@ -2934,21 +2914,17 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
 
     public final void addIntrinsicKeyword(final String s) {
-        if (s.trim().length() != 0) {
-            if (currentState.getIntrinsicKeywords().add(s)) {
-                currentState.getView().updateKeywords(this, currentState);
-            }
+        if (currentState.addIntrinsicKeyword(s)) {
+            currentState.getView().updateKeywords(this, currentState);
         }
     }
 
     public final void addIntrinsicAbility(final String s) {
-        if (s.trim().length() != 0) {
-            currentState.getUnparsedAbilities().add(s);
-        }
+        currentState.addIntrinsicAbility(s);
     }
 
     public final void removeIntrinsicKeyword(final String s) {
-        if (currentState.getIntrinsicKeywords().remove(s)) {
+        if (currentState.removeIntrinsicKeyword(s)) {
             currentState.getView().updateKeywords(this, currentState);
         }
     }
@@ -3038,28 +3014,29 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         currentState.setStaticAbilityStrings(new ArrayList<String>(a));
     }
 
-    public final List<String> getStaticAbilityStrings() {
+    public final Iterable<String> getStaticAbilityStrings() {
         return currentState.getStaticAbilityStrings();
     }
     public final void setStaticAbilities(final ArrayList<StaticAbility> a) {
         currentState.setStaticAbilities(new ArrayList<StaticAbility>(a));
     }
     public final void addStaticAbilityString(final String s) {
-        if (StringUtils.isNotBlank(s)) {
-            currentState.getStaticAbilityStrings().add(s);
-        }
+        currentState.addStaticAbilityString(s);
     }
 
-    public final ArrayList<StaticAbility> getStaticAbilities() {
-        return new ArrayList<StaticAbility>(currentState.getStaticAbilities());
+    public final FCollectionView<StaticAbility> getStaticAbilities() {
+        return currentState.getStaticAbilities();
     }
     public final StaticAbility addStaticAbility(final String s) {
         if (s.trim().length() != 0) {
             final StaticAbility stAb = new StaticAbility(s, this);
-            currentState.getStaticAbilities().add(stAb);
+            currentState.addStaticAbility(stAb);
             return stAb;
         }
         return null;
+    }
+    public final void removeStaticAbility(StaticAbility stAb) {
+        currentState.removeStaticAbility(stAb);
     }
 
     public final boolean isPermanent() {
@@ -5296,8 +5273,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
         // Prevent Damage static abilities
         for (final Card ca : getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
-            final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
-            for (final StaticAbility stAb : staticAbilities) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage, isCombat, isTest);
             }
         }
@@ -5837,7 +5813,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
         // CantTarget static abilities
         for (final Card ca : getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
-            final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
+            final Iterable<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 if (stAb.applyAbility("CantTarget", this, sa)) {
                     return false;
@@ -5984,12 +5960,12 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return true;
     }
 
-    public List<ReplacementEffect> getReplacementEffects() {
+    public FCollectionView<ReplacementEffect> getReplacementEffects() {
         return currentState.getReplacementEffects();
     }
 
-    public void setReplacementEffects(final List<ReplacementEffect> res) {
-        currentState.getReplacementEffects().clear();
+    public void setReplacementEffects(final Iterable<ReplacementEffect> res) {
+        currentState.clearReplacementEffects();
         for (final ReplacementEffect replacementEffect : res) {
             if (replacementEffect.isIntrinsic()) {
                 addReplacementEffect(replacementEffect);
@@ -6000,8 +5976,11 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     public ReplacementEffect addReplacementEffect(final ReplacementEffect replacementEffect) {
         final ReplacementEffect replacementEffectCopy = replacementEffect.getCopy(); // doubtful - every caller provides a newly parsed instance, why copy?
         replacementEffectCopy.setHostCard(this);
-        currentState.getReplacementEffects().add(replacementEffectCopy);
+        currentState.addReplacementEffect(replacementEffectCopy);
         return replacementEffectCopy;
+    }
+    public void removeReplacementEffect(ReplacementEffect replacementEffect) {
+        currentState.removeReplacementEffect(replacementEffect);
     }
 
     /**

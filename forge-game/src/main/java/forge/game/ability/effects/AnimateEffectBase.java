@@ -151,7 +151,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         }
 
         for (final ReplacementEffect rep : addedReplacements) {
-            c.getReplacementEffects().remove(rep);
+            c.removeReplacementEffect(rep);
         }
 
         // any other unanimate cleanup

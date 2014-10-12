@@ -1769,7 +1769,7 @@ public class PlayerControllerHuman extends PlayerController {
                     if (c.getRules().getType().isLand()) {
                         game.getAction().moveToPlay(forgeCard);
                     } else {
-                        final List<SpellAbility> choices = forgeCard.getBasicSpells();
+                        final FCollectionView<SpellAbility> choices = forgeCard.getBasicSpells();
                         if (choices.isEmpty()) {
                             return; // when would it happen?
                         }
@@ -1779,7 +1779,7 @@ public class PlayerControllerHuman extends PlayerController {
                             sa = choices.iterator().next();
                         }
                         else {
-                            sa = SGuiChoose.oneOrNone("Choose", choices);
+                            sa = SGuiChoose.oneOrNone("Choose", (FCollection<SpellAbility>)choices);
                         }
                         if (sa == null) {
                             return; // happens if cancelled

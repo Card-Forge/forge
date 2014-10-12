@@ -357,7 +357,7 @@ public final class AbilityFactory {
         if(!card.isSplitCard()) 
             throw new IllegalStateException("Fuse ability may be built only on split cards");
         
-        final String strLeftAbility = card.getState(CardStateName.LeftSplit).getUnparsedAbilities().get(0);
+        final String strLeftAbility = card.getState(CardStateName.LeftSplit).getFirstUnparsedAbility();
         Map<String, String> leftMap = getMapParams(strLeftAbility);
         AbilityRecordType leftType = AbilityRecordType.getRecordType(leftMap);
         ApiType leftApi = leftType.getApiTypeOf(leftMap);
@@ -365,7 +365,7 @@ public final class AbilityFactory {
         leftMap.put("SpellDescription", "Fuse (you may cast both halves of this card from your hand).");
         leftMap.put("ActivationZone", "Hand");
     
-        final String strRightAbility = card.getState(CardStateName.RightSplit).getUnparsedAbilities().get(0);
+        final String strRightAbility = card.getState(CardStateName.RightSplit).getFirstUnparsedAbility();
         Map<String, String> rightMap = getMapParams(strRightAbility);
         AbilityRecordType rightType = AbilityRecordType.getRecordType(leftMap);
         ApiType rightApi = leftType.getApiTypeOf(rightMap);

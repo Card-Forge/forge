@@ -38,6 +38,7 @@ import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.FCollection;
 
 public final class CardUtil {
     // disable instantiation
@@ -376,7 +377,7 @@ public final class CardUtil {
                 colors.add(MagicColor.Constant.COLORLESS);
             }
         } else if (reflectProperty.equals("Produce")) {
-            final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
+            final FCollection<SpellAbility> abilities = new FCollection<SpellAbility>();
             for (final Card c : cards) {
                 abilities.addAll(c.getManaAbility());
             }

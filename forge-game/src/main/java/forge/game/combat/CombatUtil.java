@@ -886,7 +886,7 @@ public class CombatUtil {
         final Game game = c.getGame();
         // CantBeActivated static abilities
         for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
-            final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
+            final FCollectionView<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 if (stAb.applyAbility("CantAttack", c, defender)) {
                     return false;
@@ -911,11 +911,12 @@ public class CombatUtil {
         Cost attackCost = new Cost(ManaCost.ZERO, true);
         // Sort abilities to apply them in proper order
         for (Card card : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
-            final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
+            final Iterable<StaticAbility> staticAbilities = card.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 Cost additionalCost = stAb.getAttackCost(c, combat.getDefenderByAttacker(c));
-                if ( null != additionalCost )
+                if (additionalCost != null) {
                     attackCost.add(additionalCost);
+                }
             }
         }
 

@@ -74,7 +74,7 @@ public class DebuffEffect extends SpellAbilityEffect {
                     }
                 }
                 for (final String kw : kws) {
-                    if (tgtC.getCurrentState().getIntrinsicKeywords().contains(kw)) {
+                    if (tgtC.getCurrentState().hasIntrinsicKeyword(kw)) {
                         hadIntrinsic.add(kw);
                     }
                     tgtC.removeIntrinsicKeyword(kw);

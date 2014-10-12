@@ -30,6 +30,7 @@ import forge.game.staticability.StaticAbilityContinuous;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
+import forge.util.FCollectionView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -444,7 +445,7 @@ public class AnimateAi extends SpellAbilityAi {
         // suppress triggers from the animated card
         final ArrayList<Trigger> removedTriggers = new ArrayList<Trigger>();
         if (sa.hasParam("OverwriteTriggers") || removeAll) {
-            final List<Trigger> triggersToRemove = card.getTriggers();
+            final FCollectionView<Trigger> triggersToRemove = card.getTriggers();
             for (final Trigger trigger : triggersToRemove) {
                 trigger.setSuppressed(true);
                 removedTriggers.add(trigger);
@@ -480,7 +481,7 @@ public class AnimateAi extends SpellAbilityAi {
         // suppress static abilities from the animated card
         final ArrayList<StaticAbility> removedStatics = new ArrayList<StaticAbility>();
         if (sa.hasParam("OverwriteStatics") || removeAll) {
-            final ArrayList<StaticAbility> staticsToRemove = card.getStaticAbilities();
+            final FCollectionView<StaticAbility> staticsToRemove = card.getStaticAbilities();
             for (final StaticAbility stAb : staticsToRemove) {
                 stAb.setTemporarilySuppressed(true);
                 removedStatics.add(stAb);

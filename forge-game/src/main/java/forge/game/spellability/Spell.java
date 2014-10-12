@@ -25,8 +25,7 @@ import forge.game.cost.CostPayment;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
-
-import java.util.ArrayList;
+import forge.util.FCollectionView;
 
 /**
  * <p>
@@ -113,7 +112,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         final CardCollection allp = new CardCollection(game.getCardsIn(ZoneType.listValueOf("Battlefield,Command")));
         allp.add(source);
         for (final Card ca : allp) {
-            final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
+            final FCollectionView<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 if (stAb.applyAbility("CantBeCast", source, activator)) {
                     return false;

@@ -25,8 +25,7 @@ import forge.game.cost.CostPayment;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
-
-import java.util.ArrayList;
+import forge.util.FCollectionView;
 
 /**
  * <p>
@@ -94,7 +93,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
 
         // CantBeActivated static abilities
         for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
-            final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
+            final FCollectionView<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 if (stAb.applyAbility("CantBeActivated", c, this)) {
                     return false;

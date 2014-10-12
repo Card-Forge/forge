@@ -33,6 +33,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.CardType.Supertype;
@@ -83,6 +84,7 @@ import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.Expressions;
+import forge.util.FCollectionView;
 import forge.util.MyRandom;
 
 /**
@@ -485,9 +487,8 @@ public class AiController {
                     }
                 }
 
-                // don't play the land if it has cycling and enough lands are
-                // available
-                final List<SpellAbility> spellAbilities = c.getNonManaAbilities();
+                // don't play the land if it has cycling and enough lands are available
+                final FCollectionView<SpellAbility> spellAbilities = c.getNonManaAbilities();
 
                 final CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
                 CardCollection lands = new CardCollection(player.getCardsIn(ZoneType.Battlefield));
