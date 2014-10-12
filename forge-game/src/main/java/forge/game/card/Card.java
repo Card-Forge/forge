@@ -2063,6 +2063,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         if (owner == owner0) { return; }
         owner = owner0;
         view.updateOwner(this);
+        view.updateController(this);
     }
 
     public final Player getController() {
