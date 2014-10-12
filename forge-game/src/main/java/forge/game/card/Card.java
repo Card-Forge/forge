@@ -1791,17 +1791,13 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return sb;
     }
 
-    public final FCollectionView<SpellAbility> getManaAbility() {
-        return currentState.getManaAbilities();
-    }
-
     public final boolean canProduceSameManaTypeWith(final Card c) {
-        final FCollectionView<SpellAbility> manaAb = getManaAbility();
+        final FCollectionView<SpellAbility> manaAb = getManaAbilities();
         if (manaAb.isEmpty()) {
             return false;
         }
         Set<String> colors = new HashSet<String>();
-        for (final SpellAbility ab : c.getManaAbility()) {
+        for (final SpellAbility ab : c.getManaAbilities()) {
             if (ab.getApi() == ApiType.ManaReflected) {
                 colors.addAll(CardUtil.getReflectableManaColors(ab));
             } else {

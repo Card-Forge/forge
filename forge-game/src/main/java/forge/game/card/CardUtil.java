@@ -224,7 +224,7 @@ public final class CardUtil {
         newCopy.setType(new CardType(in.getType()));
         newCopy.setToken(in.isToken());
         newCopy.setTriggers(in.getTriggers(), false);
-        for (SpellAbility sa : in.getManaAbility()) {
+        for (SpellAbility sa : in.getManaAbilities()) {
             newCopy.addSpellAbility(sa);
             sa.setHostCard(in);
         }
@@ -379,7 +379,7 @@ public final class CardUtil {
         } else if (reflectProperty.equals("Produce")) {
             final FCollection<SpellAbility> abilities = new FCollection<SpellAbility>();
             for (final Card c : cards) {
-                abilities.addAll(c.getManaAbility());
+                abilities.addAll(c.getManaAbilities());
             }
 
             final List<SpellAbility> reflectAbilities = new ArrayList<SpellAbility>();

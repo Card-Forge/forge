@@ -117,7 +117,7 @@ public final class GameActionUtil {
     public static void grantBasicLandsManaAbilities(List<Card> lands) {
         // remove all abilities granted by this Command
         for (final Card land : lands) {
-            List<SpellAbility> origManaAbs = Lists.newArrayList(land.getManaAbility());
+            List<SpellAbility> origManaAbs = Lists.newArrayList(land.getManaAbilities());
             // will get comodification exception without a different list
             for (final SpellAbility sa : origManaAbs) {
                 if (sa.isBasicLandAbility()) {

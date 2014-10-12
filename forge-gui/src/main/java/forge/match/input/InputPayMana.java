@@ -67,7 +67,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     @Override
     protected boolean onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
-        if (card.getManaAbility().isEmpty()) {
+        if (card.getManaAbilities().isEmpty()) {
             flashIncorrectAction();
             return false;
         }
@@ -107,7 +107,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             return abilities;
         }
 
-        for (SpellAbility ma : card.getManaAbility()) {
+        for (SpellAbility ma : card.getManaAbilities()) {
             ma.setActivatingPlayer(player);
             AbilityManaPart m = ma.getManaPartRecursive();
             if (m == null || !ma.canPlay())                                 { continue; }
@@ -178,7 +178,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         }
 
         boolean guessAbilityWithRequiredColors = true;
-        for (SpellAbility ma : card.getManaAbility()) {
+        for (SpellAbility ma : card.getManaAbilities()) {
             ma.setActivatingPlayer(player);
 
             AbilityManaPart m = ma.getManaPartRecursive();

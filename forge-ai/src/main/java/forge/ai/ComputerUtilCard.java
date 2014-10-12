@@ -541,7 +541,7 @@ public class ComputerUtilCard {
                 value += 10;
             }
         }
-        if (!c.getManaAbility().isEmpty()) {
+        if (!c.getManaAbilities().isEmpty()) {
             value += 10;
         }
     
@@ -1030,7 +1030,7 @@ public class ComputerUtilCard {
             }
             //TODO:add threat from triggers and other abilities (ie. Bident of Thassa)
         }
-        if (!c.getManaAbility().isEmpty()) {
+        if (!c.getManaAbilities().isEmpty()) {
             threat += 0.5f * costTarget / opp.getLandsInPlay().size();   //set back opponent's mana
         }
         

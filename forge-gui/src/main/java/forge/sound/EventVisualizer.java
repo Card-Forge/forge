@@ -154,7 +154,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
             return SoundEffectType.ScriptedEffect;
         }
 
-        for (SpellAbility sa : event.land.getManaAbility()) {
+        for (SpellAbility sa : event.land.getManaAbilities()) {
             String manaColors = sa.getManaPartRecursive().getOrigProduced();
 
             if (manaColors.contains("B")) return SoundEffectType.BlackLand;

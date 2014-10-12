@@ -1186,7 +1186,7 @@ public class ComputerUtilMana {
      */
     public static ArrayList<SpellAbility> getAIPlayableMana(Card c) {
         final ArrayList<SpellAbility> res = new ArrayList<>();
-        for (final SpellAbility a : c.getManaAbility()) {
+        for (final SpellAbility a : c.getManaAbilities()) {
             // if a mana ability has a mana cost the AI will miscalculate
             // if there is a parent ability the AI can't use it
             final Cost cost = a.getPayCosts();

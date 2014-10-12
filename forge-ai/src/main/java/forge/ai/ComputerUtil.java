@@ -1317,22 +1317,19 @@ public class ComputerUtil {
         final CardCollection nonLands = CardLists.getValidCards(handList, "Card.nonLand", ai, null);
         CardLists.sortByCmcDesc(nonLands);
         
-        if (lands.size() >= 3 && lands.size() <= 4)
+        if (lands.size() >= 3 && lands.size() <= 4) {
             return candidates;
-        
-        if (lands.size() < 3)
-        {
+        }
+        if (lands.size() < 3) {
             //Not enough lands!
             int tgtCandidates = Math.max(Math.abs(lands.size()-nonLands.size()), 3);
             System.out.println("Partial Paris: " + ai.getName() + " lacks lands, aiming to exile " + tgtCandidates + " cards.");
             
-            for(int i=0;i<tgtCandidates;i++)
-            {
+            for(int i=0;i<tgtCandidates;i++) {
                 candidates.add(nonLands.get(i));
             }
         }
-        else
-        {
+        else {
             //Too many lands!
             //Init
             int cntColors = MagicColor.WUBRG.length;
@@ -1340,12 +1337,9 @@ public class ComputerUtil {
             for(byte col : MagicColor.WUBRG) {
                 numProducers.add(col, new CardCollection());
             }
-            
-            
-            for(Card c : lands)
-            {
-                for(SpellAbility sa : c.getManaAbility())
-                {
+
+            for(Card c : lands) {
+                for(SpellAbility sa : c.getManaAbilities()) {
                     AbilityManaPart abmana = sa.getManaPart();
                     for(byte col : MagicColor.WUBRG) {
                         if (abmana.canProduce(MagicColor.toLongString(col))) {
@@ -1357,14 +1351,14 @@ public class ComputerUtil {
         }
 
         System.out.print("Partial Paris: " + ai.getName() + " may exile ");
-        for(Card c : candidates)
-        {
+        for(Card c : candidates) {
             System.out.print(c.toString() + ", ");
         }
         System.out.println();
         
-        if (candidates.size() < 2)
+        if (candidates.size() < 2) {
             candidates.clear();
+        }
         return candidates;
     }
 

@@ -778,7 +778,7 @@ public class PlayerControllerAi extends PlayerController {
         CardCollection untappedCreats = CardLists.filter(untappedCreats0, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return c.getManaAbility().isEmpty();
+                return c.getManaAbilities().isEmpty();
             }
         });
         

@@ -44,7 +44,7 @@ public class ActivateAbilityEffect extends SpellAbilityEffect {
                 for (Card c : list) {
                     List<SpellAbility> possibleAb = Lists.newArrayList(c.getAllPossibleAbilities(p, true));
                     if (isManaAb) {
-                        possibleAb.retainAll((FCollection<SpellAbility>)c.getManaAbility());
+                        possibleAb.retainAll((FCollection<SpellAbility>)c.getManaAbilities());
                     }
                     if (possibleAb.isEmpty()) {
                         continue;
