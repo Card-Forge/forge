@@ -14,6 +14,7 @@ import forge.game.GameEntityView;
 import forge.game.card.CardView;
 import forge.game.card.CounterType;
 import forge.game.card.CardView.CardStateView;
+import forge.game.keyword.KeywordCollection.KeywordCollectionView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
 
@@ -455,6 +456,22 @@ public class TrackableTypes {
                 ts.write(entry.getKey().name());
                 ts.write(entry.getValue());
             }
+        }
+    };
+    public static final TrackableType<KeywordCollectionView> KeywordCollectionViewType = new TrackableType<KeywordCollectionView>() {
+        @Override
+        protected KeywordCollectionView getDefaultValue() {
+            return null;
+        }
+
+        @Override
+        protected KeywordCollectionView deserialize(TrackableDeserializer td, KeywordCollectionView oldValue) {
+            return oldValue; //TODO
+        }
+
+        @Override
+        protected void serialize(TrackableSerializer ts, KeywordCollectionView value) {
+          //TODO
         }
     };
 }

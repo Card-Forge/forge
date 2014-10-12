@@ -1,13 +1,11 @@
 package forge.game.player;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.NotImplementedException;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
 import forge.LobbyPlayer;
@@ -15,6 +13,7 @@ import forge.card.MagicColor;
 import forge.game.GameEntityView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
+import forge.game.keyword.KeywordCollection.KeywordCollectionView;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.trackable.TrackableCollection;
@@ -101,11 +100,11 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.NumDrawnThisTurn, p.getNumDrawnThisTurn());
     }
 
-    public List<String> getKeywords() {
+    public KeywordCollectionView getKeywords() {
         return get(TrackableProperty.Keywords);
     }
     void updateKeywords(Player p) {
-        set(TrackableProperty.Keywords, ImmutableList.of(p.getKeywords()));
+        set(TrackableProperty.Keywords, p.getKeywords());
     }
 
     public CardView getCommander() {

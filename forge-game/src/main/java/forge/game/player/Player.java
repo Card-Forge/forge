@@ -166,6 +166,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         view = new PlayerView(id0);
         view.updateMaxHandSize(this);
+        view.updateKeywords(this);
         setName(chooseName(name0));
         if (id0 >= 0) {
             playerCache.put(id0, this);
