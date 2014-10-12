@@ -764,9 +764,9 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         if (c.isTapped()) {
             pumped.setTapped(true);
         }
-        final List<String> copiedKeywords = pumped.getKeyword();
+        final List<String> copiedKeywords = pumped.getKeywords();
         List<String> toCopy = new ArrayList<String>();
-        for (String kw : c.getKeyword()) {
+        for (String kw : c.getKeywords()) {
             if (!copiedKeywords.contains(kw)) {
                 if (kw.startsWith("HIDDEN")) {
                     pumped.addHiddenExtrinsicKeyword(kw);

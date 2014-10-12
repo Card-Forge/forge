@@ -102,9 +102,9 @@ public class VAssignDamage extends FDialog {
         callback = waitCallback;
         totalDamageToAssign = damage0;
         defender = defender0;
-        attackerHasDeathtouch = attacker.getOriginal().hasDeathtouch();
-        attackerHasInfect = attacker.getOriginal().hasInfect();
-        attackerHasTrample = defender != null && attacker.getOriginal().hasTrample();
+        attackerHasDeathtouch = attacker.getCurrentState().hasDeathtouch();
+        attackerHasInfect = attacker.getCurrentState().hasInfect();
+        attackerHasTrample = defender != null && attacker.getCurrentState().hasTrample();
         overrideCombatantOrder = overrideOrder;
 
         pnlAttacker = add(new AttDefCardPanel(attacker));
@@ -461,7 +461,7 @@ public class VAssignDamage extends FDialog {
             }
             else if (defender instanceof CardView) { // planeswalker
                 CardView pw = (CardView)defender;
-                lethalDamage = pw.getOriginal().getLoyalty();
+                lethalDamage = pw.getCurrentState().getLoyalty();
             }
         }
         else {

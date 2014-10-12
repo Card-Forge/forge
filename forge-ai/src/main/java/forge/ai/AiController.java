@@ -174,7 +174,7 @@ public class AiController {
 
         final ArrayList<SpellAbility> spellAbilities = new ArrayList<SpellAbility>();
         for (final Card c : all) {
-            for (final SpellAbility sa : c.getNonManaSpellAbilities()) {
+            for (final SpellAbility sa : c.getNonManaAbilities()) {
                 if (sa instanceof SpellPermanent) {
                     sa.setActivatingPlayer(player);
                     if (checkETBEffects(c, sa, ApiType.Counter)) {
@@ -378,7 +378,7 @@ public class AiController {
     private ArrayList<SpellAbility> getSpellAbilities(final CardCollectionView l) {
         final ArrayList<SpellAbility> spellAbilities = new ArrayList<SpellAbility>();
         for (final Card c : l) {
-            for (final SpellAbility sa : c.getSpellAbilities()) {
+            for (final SpellAbility sa : c.getNonManaAbilities()) {
                 spellAbilities.add(sa);
             }
         }
@@ -397,7 +397,7 @@ public class AiController {
     private ArrayList<SpellAbility> getPlayableCounters(final CardCollection l) {
         final ArrayList<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
         for (final Card c : l) {
-            for (final SpellAbility sa : c.getNonManaSpellAbilities()) {
+            for (final SpellAbility sa : c.getNonManaAbilities()) {
                 // Check if this AF is a Counterpsell
                 if (sa.getApi() == ApiType.Counter) {
                     spellAbility.add(sa);
@@ -461,7 +461,7 @@ public class AiController {
             // consider not playing lands if there are enough already and an ability with a discard cost is present
             if (landsInPlay.size() + landList.size() > max) {
                 for (Card c : allCards) {
-                    for (SpellAbility sa : c.getSpellAbilities()) {
+                    for (SpellAbility sa : c.getNonManaAbilities()) {
                         if (sa.getPayCosts() != null) {
                             for (CostPart part : sa.getPayCosts().getCostParts()) {
                                 if (part instanceof CostDiscard) {
@@ -487,7 +487,7 @@ public class AiController {
 
                 // don't play the land if it has cycling and enough lands are
                 // available
-                final List<SpellAbility> spellAbilities = c.getSpellAbilities();
+                final List<SpellAbility> spellAbilities = c.getNonManaAbilities();
 
                 final CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
                 CardCollection lands = new CardCollection(player.getCardsIn(ZoneType.Battlefield));
@@ -781,7 +781,7 @@ public class AiController {
             }
             
             // don't play cards without being able to pay the upkeep for
-            for (String ability : card.getKeyword()) {
+            for (String ability : card.getKeywords()) {
                 if (ability.startsWith("At the beginning of your upkeep, sacrifice CARDNAME unless you pay")) {
                     final String[] k = ability.split(" pay ");
                     final String costs = k[1].replaceAll("[{]", "").replaceAll("[}]", " ");

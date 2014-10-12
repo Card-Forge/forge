@@ -4,7 +4,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.card.CardCharacteristicName;
+import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
@@ -504,7 +504,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         movedCard.setUnearthed(true);
                     }
                     if (sa.hasParam("FaceDown")) {
-                        movedCard.setState(CardCharacteristicName.FaceDown, true);
+                        movedCard.setState(CardStateName.FaceDown, true);
                     }
                     if (sa.hasParam("Ninjutsu") || sa.hasParam("Attacking")) {
                         // What should they attack?
@@ -525,7 +525,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     movedCard = game.getAction().moveTo(destination, tgtC);
                     // If a card is Exiled from the stack, remove its spells from the stack
                     if (sa.hasParam("Fizzle")) {
-                        final List<SpellAbility> spells = tgtC.getSpellAbilities();
+                        final List<SpellAbility> spells = tgtC.getNonManaAbilities();
                         for (SpellAbility spell : spells) {
                             if (tgtC.isInZone(ZoneType.Exile) || tgtC.isInZone(ZoneType.Hand)) {
                                 final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spell);
@@ -536,7 +536,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
                     if (sa.hasParam("ExileFaceDown")) {
-                        movedCard.setState(CardCharacteristicName.FaceDown, true);
+                        movedCard.setState(CardStateName.FaceDown, true);
                     }
                 }
             }
@@ -925,14 +925,14 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     movedCard.setTapped(true);
                 }
                 if (sa.hasParam("FaceDown")) {
-                    movedCard.setState(CardCharacteristicName.FaceDown, true);
+                    movedCard.setState(CardStateName.FaceDown, true);
                 }
                 movedCard.setTimestamp(ts);
             }
             else if (destination.equals(ZoneType.Exile)) {
                 movedCard = game.getAction().exile(c);
                 if (sa.hasParam("ExileFaceDown")) {
-                    movedCard.setState(CardCharacteristicName.FaceDown, true);
+                    movedCard.setState(CardStateName.FaceDown, true);
                 }
             }
             else {

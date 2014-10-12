@@ -196,7 +196,7 @@ public enum VStack implements IVDoc<CStack> {
                 });
             }
 
-            final DetailColors color = CardDetailUtil.getBorderColor(item.getSourceCard().getOriginal());
+            final DetailColors color = CardDetailUtil.getBorderColor(item.getSourceCard().getCurrentState());
             setBackground(new Color(color.r, color.g, color.b));
             setForeground(FSkin.getHighContrastColor(getBackground()));
         }

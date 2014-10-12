@@ -2,7 +2,7 @@ package forge.game.ability.effects;
 
 import com.google.common.collect.Iterables;
 
-import forge.card.CardCharacteristicName;
+import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -122,7 +122,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             } else {
                 movedCard = game.getAction().moveTo(destination, c, libraryPos);
                 if (sa.hasParam("ExileFaceDown")) {
-                    movedCard.setState(CardCharacteristicName.FaceDown, true);
+                    movedCard.setState(CardStateName.FaceDown, true);
                 }
                 if (sa.hasParam("Tapped")) {
                     movedCard.setTapped(true);

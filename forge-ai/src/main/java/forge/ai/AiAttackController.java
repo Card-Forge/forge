@@ -121,7 +121,7 @@ public class AiAttackController {
         	if (c.isToken() && c.getCopiedPermanent() == null) {
         		continue;
         	}
-            for (SpellAbility sa : c.getSpellAbilities()) {
+            for (SpellAbility sa : c.getNonManaAbilities()) {
                 if (sa.getApi() == ApiType.Animate) {
                     if (ComputerUtilCost.canPayCost(sa, defender) 
                     		&& sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
@@ -534,7 +534,7 @@ public class AiAttackController {
                 continue;
             }
             boolean mustAttack = false;
-            for (String s : attacker.getKeyword()) {
+            for (String s : attacker.getKeywords()) {
                 if (s.equals("CARDNAME attacks each turn if able.")
                         || s.startsWith("CARDNAME attacks specific player each combat if able")
                         || s.equals("CARDNAME attacks each combat if able.")) {
@@ -926,7 +926,7 @@ public class AiAttackController {
         // is there a gain in attacking even when the blocker is not killed (Lifelink, Wither,...)
         boolean hasCombatEffect = attacker.getSVar("HasCombatEffect").equals("TRUE");
         if (!hasCombatEffect) {
-            for (String keyword : attacker.getKeyword()) {
+            for (String keyword : attacker.getKeywords()) {
                 if (keyword.equals("Wither") || keyword.equals("Infect") || keyword.equals("Lifelink")) {
                     hasCombatEffect = true;
                     break;
@@ -963,7 +963,7 @@ public class AiAttackController {
                     if (defender.getSVar("HasCombatEffect").equals("TRUE") || defender.getSVar("HasBlockEffect").equals("TRUE")) {
                         canKillAllDangerous = false;
                     } else {
-                        for (String keyword : defender.getKeyword()) {
+                        for (String keyword : defender.getKeywords()) {
                             if (keyword.equals("Wither") || keyword.equals("Infect") || keyword.equals("Lifelink")) {
                                 canKillAllDangerous = false;
                                 break;

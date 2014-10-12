@@ -156,7 +156,7 @@ public enum VAntes implements IVDoc<CAntes> {
                 .fontAlign(SwingConstants.CENTER).build(), "w 160px, h 20px");
             CardPicturePanel picPanel = new CardPicturePanel();
             add(picPanel, "w 160px, h 230px");
-            picPanel.setCard(c.getOriginal());
+            picPanel.setCard(c.getCurrentState());
         }
 
         @Override

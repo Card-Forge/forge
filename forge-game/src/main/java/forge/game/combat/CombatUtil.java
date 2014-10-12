@@ -253,7 +253,7 @@ public class CombatUtil {
             }
         }
 
-        for (String keyword : attacker.getKeyword()) {
+        for (String keyword : attacker.getKeywords()) {
             if (keyword.equals("Legendary landwalk")) {
                 walkTypes.add("Land.Legendary");
             } else if (keyword.equals("Desertwalk")) {
@@ -623,7 +623,7 @@ public class CombatUtil {
 
         if (attacker.hasStartOfKeyword("CantBeBlockedBy ")) {
             final int keywordPosition = attacker.getKeywordPosition("CantBeBlockedBy ");
-            final String parse = attacker.getKeyword().get(keywordPosition).toString();
+            final String parse = attacker.getKeywords().get(keywordPosition).toString();
             final String[] k = parse.split(" ", 2);
             final String[] restrictions = k[1].split(",");
             if (blocker.isValid(restrictions, attacker.getController(), attacker)) {
@@ -633,7 +633,7 @@ public class CombatUtil {
 
         if (blocker.hasStartOfKeyword("CantBlock")) {
             final int keywordPosition = blocker.getKeywordPosition("CantBlock");
-            final String parse = blocker.getKeyword().get(keywordPosition).toString();
+            final String parse = blocker.getKeywords().get(keywordPosition).toString();
             if (parse.startsWith("CantBlockCardUID")) {
                 final String[] k = parse.split("_", 2);
                 if (attacker.getId() == Integer.parseInt(k[1])) {
@@ -747,7 +747,7 @@ public class CombatUtil {
 
         if (cntAttackers > 0) {
             for (final Card card : game.getCardsIn(ZoneType.Battlefield)) {
-                for (final String keyword : card.getKeyword()) {
+                for (final String keyword : card.getKeywords()) {
                     if (cntAttackers > 1) {
                         if (keyword.equals("No more than two creatures can attack each combat.")) {
                             return false;
@@ -771,7 +771,7 @@ public class CombatUtil {
         final int cntAttackersToDef = combat.getAttackersOf(def).size();
         if (cntAttackersToDef > 1) {
             for (final Card card : game.getCardsIn(ZoneType.Battlefield)) {
-                for (final String keyword : card.getKeyword()) {
+                for (final String keyword : card.getKeywords()) {
                 	 if (keyword.equals("No more than two creatures can attack you each combat.") &&
                              card.getController().equals(def)) {
                          return false;
@@ -822,7 +822,7 @@ public class CombatUtil {
             return false; // no block
 
         List<String> restrictions = Lists.newArrayList();
-        for ( String kw : attacker.getKeyword() ) {
+        for ( String kw : attacker.getKeywords() ) {
             if ( kw.startsWith("CantBeBlockedByAmount") )
                 restrictions.add(TextUtil.split(kw, ' ', 2)[1]);
         }
@@ -860,7 +860,7 @@ public class CombatUtil {
             return false;
         }
 
-        for (String keyword : c.getKeyword()) {
+        for (String keyword : c.getKeywords()) {
             if (keyword.equals("CARDNAME can't attack.") || keyword.equals("CARDNAME can't attack or block.")) {
                 return false;
             } else if (keyword.equals("CARDNAME can't attack if you cast a spell this turn.") && c.getController().getSpellsCastThisTurn() > 0) {
@@ -949,7 +949,7 @@ public class CombatUtil {
 
         // Annihilator: can be copied by Strionic Resonator now
         if (!c.getDamageHistory().getCreatureAttackedThisCombat()) {
-            for (final String key : c.getKeyword()) {
+            for (final String key : c.getKeywords()) {
                 if (!key.startsWith("Annihilator ")) continue;
                 final String[] k = key.split(" ", 2);
 
@@ -975,7 +975,7 @@ public class CombatUtil {
 
 
     public static void handleRampage(final Game game, final Card a, final List<Card> blockers) {
-        for (final String keyword : a.getKeyword()) {
+        for (final String keyword : a.getKeywords()) {
             int idx = keyword.indexOf("Rampage ");
             if ( idx < 0)
                 continue;
@@ -993,7 +993,7 @@ public class CombatUtil {
             if (attacker.hasKeyword("Flanking") && !blocker.hasKeyword("Flanking")) {
                 int flankingMagnitude = 0;
 
-                for (String kw : attacker.getKeyword()) {
+                for (String kw : attacker.getKeywords()) {
                     if (kw.equals("Flanking")) {
                         flankingMagnitude++;
                     }
@@ -1053,7 +1053,7 @@ public class CombatUtil {
             GameEntity mustAttack = c.getController().getMustAttackEntity() ;
             if (c.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
                 final int i = c.getKeywordPosition("CARDNAME attacks specific player each combat if able");
-                final String defined = c.getKeyword().get(i).split(":")[1];
+                final String defined = c.getKeywords().get(i).split(":")[1];
                 mustAttack = AbilityUtils.getDefinedPlayers(c, defined, null).get(0);
             }
             if (mustAttack != null && CombatUtil.canAttack(c, mustAttack, combat)) {

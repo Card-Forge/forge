@@ -26,7 +26,7 @@ import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableList;
 
 import forge.ImageKeys;
-import forge.card.CardCharacteristicName;
+import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -213,12 +213,12 @@ public final class CardUtil {
      */
     public static Card getLKICopy(final Card in) {
         final Card newCopy = new Card(in.getId(), in.getPaperCard());
-        newCopy.setCurSetCode(in.getCurSetCode());
+        newCopy.setSetCode(in.getSetCode());
         newCopy.setOwner(in.getOwner());
         newCopy.setController(in.getController(), 0);
-        newCopy.getCharacteristics().copyFrom(in.getState(in.getCurState()));
+        newCopy.getCurrentState().copyFrom(in, in.getState(in.getCurrentStateName()));
         if (in.isCloned()) {
-            newCopy.addAlternateState(CardCharacteristicName.Cloner, false);
+            newCopy.addAlternateState(CardStateName.Cloner, false);
         }
         newCopy.setType(new CardType(in.getType()));
         newCopy.setToken(in.isToken());
@@ -280,11 +280,11 @@ public final class CardUtil {
         return res;
     }
 
-    public static CardCharacteristics getFaceDownCharacteristic(Card c) {
+    public static CardState getFaceDownCharacteristic(Card c) {
         final CardType type = new CardType();
         type.add("Creature");
 
-        final CardCharacteristics ret = new CardCharacteristics(c.getView().createAlternateState());
+        final CardState ret = new CardState(c.getView().createAlternateState(CardStateName.FaceDown));
         ret.setBaseAttack(2);
         ret.setBaseDefense(2);
 

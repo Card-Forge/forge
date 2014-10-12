@@ -89,7 +89,7 @@ public class ComputerUtilMana {
         public ManaProducingCard(final Card card) {
             score = 0;
 
-            for (SpellAbility ability : card.getSpellAbilities()) {
+            for (SpellAbility ability : card.getNonManaAbilities()) {
                 if (ability.isManaAbility()) {
                     if (ability.getManaPart() == null) {
                         score++; //Assume a mana ability can generate at least 1 mana if the amount of mana can't be determined now.

@@ -230,7 +230,7 @@ public class PumpEffect extends SpellAbilityEffect {
             List<String> choice = new ArrayList<String>();
             List<String> total = new ArrayList<String>(keywords);
             if (sa.hasParam("NoRepetition")) {
-                final List<String> tgtCardskws = tgtCards.get(0).getKeyword();
+                final List<String> tgtCardskws = tgtCards.get(0).getKeywords();
                 for (String kws : tgtCardskws) {
                     if (total.contains(kws)) {
                         total.remove(kws);

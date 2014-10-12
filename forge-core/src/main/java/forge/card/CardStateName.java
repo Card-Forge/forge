@@ -1,10 +1,7 @@
 package forge.card;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
-public enum CardCharacteristicName {
+
+public enum CardStateName {
     Original,
     FaceDown,
     Flipped,
@@ -19,7 +16,7 @@ public enum CardCharacteristicName {
      * @param substring
      * @return
      */
-    public static CardCharacteristicName smartValueOf(String value) {
+    public static CardStateName smartValueOf(String value) {
         if (value == null) {
             return null;
         }
@@ -27,16 +24,16 @@ public enum CardCharacteristicName {
             return null;
         }
         final String valToCompate = value.trim();
-        for (final CardCharacteristicName v : CardCharacteristicName.values()) {
+        for (final CardStateName v : CardStateName.values()) {
             if (v.name().compareToIgnoreCase(valToCompate) == 0) {
                 return v;
             }
         }
         if ("Flip".equalsIgnoreCase(value)) {
-            return CardCharacteristicName.Flipped;
+            return CardStateName.Flipped;
         }
         if ("DoubleFaced".equalsIgnoreCase(value)) {
-            return CardCharacteristicName.Transformed;
+            return CardStateName.Transformed;
         }
 
         throw new IllegalArgumentException("No element named " + value + " in enum CardCharactersticName");

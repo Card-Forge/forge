@@ -81,7 +81,7 @@ public class ImageCache {
      * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.
      */
     public static BufferedImage getImage(final CardView card, final int width, final int height) {
-        final String key = card.getOriginal().getImageKey(false);
+        final String key = card.getCurrentState().getImageKey(false);
         return scaleImage(key, width, height, true);
     }
 

@@ -1101,13 +1101,13 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 IPaperCard paperCard = (IPaperCard)item;
                 if (paperCard.isFoil()) {
                     final CardView card = CardView.getCardForUi(paperCard);
-                    if (card.getOriginal().getFoilIndex() == 0) { //if foil finish not yet established, assign a random one
+                    if (card.getCurrentState().getFoilIndex() == 0) { //if foil finish not yet established, assign a random one
                         // FIXME should assign a random foil here in all cases
                         // (currently assigns 1 for the deck editors where foils "flicker" otherwise)
                         if (item instanceof Card) {
-                            card.getOriginal().setFoilIndexOverride(-1); //-1 to set random foil
+                            card.getCurrentState().setFoilIndexOverride(-1); //-1 to set random foil
                         } else if (item instanceof IPaperCard) {
-                            card.getOriginal().setFoilIndexOverride(1);
+                            card.getCurrentState().setFoilIndexOverride(1);
                         }
                     }
                     CardPanel.drawFoilEffect(g, card, bounds.x, bounds.y, bounds.width, bounds.height, borderSize);

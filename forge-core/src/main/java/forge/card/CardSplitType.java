@@ -5,11 +5,11 @@ import forge.card.CardFace.FaceSelectionMethod;
 public enum CardSplitType
 {
     None(FaceSelectionMethod.USE_PRIMARY_FACE, null),
-    Transform(FaceSelectionMethod.USE_ACTIVE_FACE, CardCharacteristicName.Transformed),
-    Split(FaceSelectionMethod.COMBINE, CardCharacteristicName.RightSplit),
-    Flip(FaceSelectionMethod.USE_PRIMARY_FACE, CardCharacteristicName.Flipped);
+    Transform(FaceSelectionMethod.USE_ACTIVE_FACE, CardStateName.Transformed),
+    Split(FaceSelectionMethod.COMBINE, CardStateName.RightSplit),
+    Flip(FaceSelectionMethod.USE_PRIMARY_FACE, CardStateName.Flipped);
 
-    private CardSplitType(FaceSelectionMethod calcMode, CardCharacteristicName stateName) {
+    private CardSplitType(FaceSelectionMethod calcMode, CardStateName stateName) {
         method = calcMode;
         this.changedStateName = stateName;
     }
@@ -19,7 +19,7 @@ public enum CardSplitType
     }
 
     private final FaceSelectionMethod method;
-    private final CardCharacteristicName changedStateName;
+    private final CardStateName changedStateName;
     
     public static CardSplitType smartValueOf(String text) {
         if ("DoubleFaced".equals(text)) return Transform;
@@ -28,7 +28,7 @@ public enum CardSplitType
         return res;
     }
 
-    public CardCharacteristicName getChangedStateName() {
+    public CardStateName getChangedStateName() {
         return changedStateName;
     }
 }

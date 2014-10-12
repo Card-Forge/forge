@@ -21,7 +21,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
 import forge.GameCommand;
-import forge.card.CardCharacteristicName;
+import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -92,15 +92,16 @@ public class CardFactoryUtil {
             @Override
             public void resolve() {
                 Card c = sourceCard.getGame().getAction().moveToPlay(sourceCard);
-                c.setPreFaceDownCharacteristic(CardCharacteristicName.Original);
+                c.setPreFaceDownState(CardStateName.Original);
             }
 
             @Override
             public boolean canPlay() {
-            	sourceCard.setState(CardCharacteristicName.FaceDown, false);
+                CardStateName stateBackup = sourceCard.getCurrentStateName();
+                sourceCard.setState(CardStateName.FaceDown, false);
                 boolean success = super.canPlay();
-            	sourceCard.setState(CardCharacteristicName.Original, false);
-            	return success;
+                sourceCard.setState(stateBackup, false);
+                return success;
             }
         };
 
@@ -1062,7 +1063,7 @@ public class CardFactoryUtil {
 
         //  Count$TargetedLifeTotal (targeted player's life total)
         if (sq[0].contains("TargetedLifeTotal")) {
-            for (final SpellAbility sa : c.getCharacteristics().getSpellAbility()) {
+            for (final SpellAbility sa : c.getCurrentState().getNonManaAbilities()) {
                 final SpellAbility saTargeting = sa.getSATargetingPlayer();
                 if (saTargeting != null) {
                     for (final Player tgtP : saTargeting.getTargets().getTargetPlayers()) {
@@ -1518,7 +1519,7 @@ public class CardFactoryUtil {
 
         //  Count$InTargetedHand (targeted player's cards in hand)
         if (sq[0].contains("InTargetedHand")) {
-            for (final SpellAbility sa : c.getCharacteristics().getSpellAbility()) {
+            for (final SpellAbility sa : c.getCurrentState().getNonManaAbilities()) {
                 final SpellAbility saTargeting = sa.getSATargetingPlayer();
                 if (saTargeting != null) {
                     for (final Player tgtP : saTargeting.getTargets().getTargetPlayers()) {
@@ -1903,7 +1904,7 @@ public class CardFactoryUtil {
         
         cardlist = CardLists.getValidCards(cardlist, restrictions, p, host);
         for (Card c : cardlist) {
-            for (String k : c.getKeyword()) {
+            for (String k : c.getKeywords()) {
                 if (k.endsWith("walk")) {
                     if (!landkw.contains(k)) {
                         landkw.add(k);
@@ -2003,7 +2004,7 @@ public class CardFactoryUtil {
      */
     public static ArrayList<SpellAbility> getBushidoEffects(final Card c) {
         final ArrayList<SpellAbility> list = new ArrayList<SpellAbility>();
-        for (final String kw : c.getKeyword()) {
+        for (final String kw : c.getKeywords()) {
             if (kw.contains("Bushido")) {
                 final String[] parse = kw.split(" ");
                 final String s = parse[1];
@@ -2120,7 +2121,7 @@ public class CardFactoryUtil {
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
 
-        for (String keyword : card.getKeyword()) {
+        for (String keyword : card.getKeywords()) {
             if (keyword.startsWith("Multikicker")) {
                 final String[] k = keyword.split("kicker ");
 
@@ -2132,7 +2133,7 @@ public class CardFactoryUtil {
                 card.getFirstSpellAbility().addAnnounceVar("Replicate");
             }
             else if (keyword.startsWith("Fuse")) {
-                card.getState(CardCharacteristicName.Original).getSpellAbility().add(AbilityFactory.buildFusedAbility(card));
+                card.getState(CardStateName.Original).getNonManaAbilities().add(AbilityFactory.buildFusedAbility(card));
             }
             else if (keyword.startsWith("Evoke")) {
                 card.addSpellAbility(makeEvokeSpell(card, keyword));
@@ -2374,7 +2375,7 @@ public class CardFactoryUtil {
                 card.addTrigger(parsedSacTrigger);
             }
             else if (keyword.equals("Delve")) {
-                card.getSpellAbilities().get(0).setDelve(true);
+                card.getNonManaAbilities().get(0).setDelve(true);
             }
             else if (keyword.startsWith("Haunt")) {
                 setupHauntSpell(card);
@@ -2507,7 +2508,7 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Amplify")) {
                 // find position of Amplify keyword
                 final int ampPos = card.getKeywordPosition("Amplify");
-                final String[] ampString = card.getKeyword().get(ampPos).split(":");
+                final String[] ampString = card.getKeywords().get(ampPos).split(":");
                 final String amplifyMagnitude = ampString[1];
                 final String suffix = !amplifyMagnitude.equals("1") ? "s" : "";
                 final String ampTypes = ampString[2];
@@ -2684,7 +2685,7 @@ public class CardFactoryUtil {
      * @param card
      */
     private static void setupEtbKeywords(final Card card) {
-        for (String kw : card.getKeyword()) {
+        for (String kw : card.getKeywords()) {
 
             if (kw.startsWith("ETBReplacement")) {
                 String[] splitkw = kw.split(":");
@@ -2791,7 +2792,7 @@ public class CardFactoryUtil {
                 + "At the beginning of each of your upkeeps, copy " + card.toString() + " except for its epic ability.");
         card.setSVar("EpicCopy", "DB$ CopySpellAbility | Defined$ EffectSource");
         
-        final SpellAbility origSA = card.getSpellAbilities().get(0);
+        final SpellAbility origSA = card.getNonManaAbilities().get(0);
         
         SpellAbility child = origSA;
         while (child.getSubAbility() != null) {
@@ -2807,7 +2808,7 @@ public class CardFactoryUtil {
      */
     private static void setupHauntSpell(final Card card) {
         final int hauntPos = card.getKeywordPosition("Haunt");
-        final String[] splitKeyword = card.getKeyword().get(hauntPos).split(":");
+        final String[] splitKeyword = card.getKeywords().get(hauntPos).split(":");
         final String hauntSVarName = splitKeyword[1];
         final String abilityDescription = splitKeyword[2];
         final String hauntAbilityDescription = abilityDescription.substring(0, 1).toLowerCase()
@@ -2826,7 +2827,7 @@ public class CardFactoryUtil {
             hauntDescription = sb.toString();
         }
 
-        card.getKeyword().remove(hauntPos);
+        card.getKeywords().remove(hauntPos);
 
         // First, create trigger that runs when the haunter goes to the
         // graveyard
@@ -3024,7 +3025,7 @@ public class CardFactoryUtil {
      * @return a int.
      */
     private static final int hasKeyword(final Card c, final String k, final int startPos) {
-        final List<String> a = c.getKeyword();
+        final List<String> a = c.getKeywords();
         for (int i = startPos; i < a.size(); i++) {
             if (a.get(i).startsWith(k)) {
                 return i;
@@ -3080,7 +3081,7 @@ public class CardFactoryUtil {
             final int n = hasKeyword(card, "Morph");
             if (n != -1) {
 
-                final String parse = card.getKeyword().get(n).toString();
+                final String parse = card.getKeywords().get(n).toString();
                 Map<String, String> sVars = card.getSVars();
 
                 final String[] k = parse.split(":");
@@ -3088,12 +3089,12 @@ public class CardFactoryUtil {
 
                 card.addSpellAbility(abilityMorphDown(card));
 
-                card.setState(CardCharacteristicName.FaceDown, false);
+                card.setState(CardStateName.FaceDown, false);
 
                 card.addSpellAbility(abilityMorphUp(card, cost));
                 card.setSVars(sVars); // for Warbreak Trumpeter.
 
-                card.setState(CardCharacteristicName.Original, false);
+                card.setState(CardStateName.Original, false);
             }
         } // Morph
 
@@ -3112,7 +3113,7 @@ public class CardFactoryUtil {
                 card.setSVar("DiscardMadness", sVarMadness);
 
                 // Set Madness Triggers
-                final String parse = card.getKeyword().get(n).toString();
+                final String parse = card.getKeywords().get(n).toString();
                 // card.removeIntrinsicKeyword(parse);
                 final String[] k = parse.split(":");
                 String trigStr = "Mode$ Discarded | ValidCard$ Card.Self | IsMadness$ True | " +
@@ -3135,7 +3136,7 @@ public class CardFactoryUtil {
         if (hasKeyword(card, "Miracle") != -1) {
             final int n = hasKeyword(card, "Miracle");
             if (n != -1) {
-                final String parse = card.getKeyword().get(n).toString();
+                final String parse = card.getKeywords().get(n).toString();
                 // card.removeIntrinsicKeyword(parse);
 
                 final String[] k = parse.split(":");
@@ -3147,7 +3148,7 @@ public class CardFactoryUtil {
             final int n = hasKeyword(card, "Devour");
             if (n != -1) {
 
-                final String parse = card.getKeyword().get(n).toString();
+                final String parse = card.getKeywords().get(n).toString();
                 // card.removeIntrinsicKeyword(parse);
 
                 final String[] k = parse.split(":");
@@ -3181,8 +3182,8 @@ public class CardFactoryUtil {
         if (hasKeyword(card, "Modular") != -1) {
             final int n = hasKeyword(card, "Modular");
             if (n != -1) {
-                final String parse = card.getKeyword().get(n).toString();
-                card.getKeyword().remove(parse);
+                final String parse = card.getKeywords().get(n).toString();
+                card.getKeywords().remove(parse);
 
                 final int m = Integer.parseInt(parse.substring(8));
 
@@ -3210,7 +3211,7 @@ public class CardFactoryUtil {
          */
         final int graft = hasKeyword(card, "Graft");
         if (graft != -1) {
-            final String parse = card.getKeyword().get(graft).toString();
+            final String parse = card.getKeywords().get(graft).toString();
 
             final int m = Integer.parseInt(parse.substring(6));
             final String abStr = "AB$ MoveCounter | Cost$ 0 | Source$ Self | "
@@ -3232,7 +3233,7 @@ public class CardFactoryUtil {
 
         final int bloodthirst = hasKeyword(card, "Bloodthirst");
         if (bloodthirst != -1) {
-            final String numCounters = card.getKeyword().get(bloodthirst).split(" ")[1];
+            final String numCounters = card.getKeywords().get(bloodthirst).split(" ")[1];
             String desc = "Bloodthirst "
                     + numCounters + " (If an opponent was dealt damage this turn, this creature enters the battlefield with "
                     + numCounters + " +1/+1 counters on it.)";
@@ -3284,7 +3285,7 @@ public class CardFactoryUtil {
         } // Cascade
 
         if (hasKeyword(card, "Recover") != -1) {
-            final String recoverCost = card.getKeyword().get(card.getKeywordPosition("Recover")).split(":")[1];
+            final String recoverCost = card.getKeywords().get(card.getKeywordPosition("Recover")).split(":")[1];
             final String abStr = "AB$ ChangeZone | Cost$ 0 | Defined$ Self"
             		+ " | Origin$ Graveyard | Destination$ Hand | UnlessCost$ "
                     + recoverCost + " | UnlessPayer$ You | UnlessSwitched$ True"
@@ -3309,7 +3310,7 @@ public class CardFactoryUtil {
         int ripplePos = hasKeyword(card, "Ripple");
         while (ripplePos != -1) {
             final int n = ripplePos;
-            final String parse = card.getKeyword().get(n);
+            final String parse = card.getKeywords().get(n);
             final String[] k = parse.split(":");
             final int num = Integer.parseInt(k[1]);
             UUID triggerSvar = UUID.randomUUID();

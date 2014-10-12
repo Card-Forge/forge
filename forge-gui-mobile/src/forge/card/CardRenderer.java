@@ -82,7 +82,7 @@ public class CardRenderer {
         float w = width - 2 * x;
         float h = height - 2 * y;
 
-        final Texture image = ImageCache.getImage(card.getOriginal().getImageKey(false), true);
+        final Texture image = ImageCache.getImage(card.getCurrentState().getImageKey(false), true);
         if (image == ImageCache.defaultImage) { //support drawing card image manually if card image not found
             float ratio = h / w;
             if (ratio > FCardPanel.ASPECT_RATIO) {
@@ -162,7 +162,7 @@ public class CardRenderer {
         h -= 2 * blackBorderThickness;
 
         //determine colors for borders
-        List<DetailColors> borderColors = CardDetailUtil.getBorderColors(card.getOriginal());
+        List<DetailColors> borderColors = CardDetailUtil.getBorderColors(card.getCurrentState());
         DetailColors borderColor = borderColors.get(0);
         Color color1 = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
         Color color2 = null;
@@ -220,7 +220,7 @@ public class CardRenderer {
         return getCardArt(ImageKeys.getImageKey(pc, false), pc.getRules().getSplitType() == CardSplitType.Split);
     }
     public static FImageComplex getCardArt(CardView card) {
-        return getCardArt(card.getOriginal().getImageKey(true), card.isSplitCard());
+        return getCardArt(card.getCurrentState().getImageKey(true), card.isSplitCard());
     }
     public static FImageComplex getCardArt(String imageKey, boolean isSplitCard) {
         FImageComplex cardArt = cardArtCache.get(imageKey);
@@ -265,10 +265,10 @@ public class CardRenderer {
     }
 
     public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, CardView card, int count, String suffix, float x, float y, float w, float h, boolean compactMode) {
-        final CardStateView state = card.getOriginal();
+        final CardStateView state = card.getCurrentState();
         if (card.getId() > 0) {
-            drawCardListItem(g, font, foreColor, getCardArt(card), card, card.getSetCode(),
-                    card.getRarity(), state.getPower(), state.getToughness(),
+            drawCardListItem(g, font, foreColor, getCardArt(card), card, state.getSetCode(),
+                    state.getRarity(), state.getPower(), state.getToughness(),
                     state.getLoyalty(), count, suffix, x, y, w, h, compactMode);
         }
         else { //if fake card, just draw card name centered
@@ -284,7 +284,7 @@ public class CardRenderer {
     }
     public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, IPaperCard pc, int count, String suffix, float x, float y, float w, float h, boolean compactMode) {
         final CardView card = CardView.getCardForUi(pc);
-        final CardStateView state = card.getOriginal();
+        final CardStateView state = card.getCurrentState();
         drawCardListItem(g, font, foreColor, getCardArt(pc), card, pc.getEdition(),
                 pc.getRarity(), state.getPower(), state.getToughness(),
                 state.getLoyalty(), count, suffix, x, y, w, h, compactMode);
@@ -312,10 +312,10 @@ public class CardRenderer {
 
         //render card name and mana cost on first line
         float manaCostWidth = 0;
-        ManaCost mainManaCost = card.getOriginal().getManaCost();
+        ManaCost mainManaCost = card.getCurrentState().getManaCost();
         if (card.isSplitCard()) {
             //handle rendering both parts of split card
-            ManaCost otherManaCost = card.getAlternate().getManaCost();
+            ManaCost otherManaCost = card.getAlternateState().getManaCost();
             manaCostWidth = CardFaceSymbols.getWidth(otherManaCost, MANA_SYMBOL_SIZE) + MANA_COST_PADDING;
             CardFaceSymbols.drawManaCost(g, otherManaCost, x + w - manaCostWidth + MANA_COST_PADDING, y, MANA_SYMBOL_SIZE);
             //draw "//" between two parts of mana cost
@@ -326,7 +326,7 @@ public class CardRenderer {
         CardFaceSymbols.drawManaCost(g, mainManaCost, x + w - manaCostWidth, y, MANA_SYMBOL_SIZE);
 
         x += cardArtWidth;
-        String name = card.getOriginal().getName();
+        String name = card.getCurrentState().getName();
         if (count > 0) { //preface name with count if applicable
             name = count + " " + name;
         }
@@ -350,11 +350,11 @@ public class CardRenderer {
             availableTypeWidth -= setWidth;
             drawSetLabel(g, typeFont, set, rarity, x + availableTypeWidth + SET_BOX_MARGIN, y - SET_BOX_MARGIN, setWidth, lineHeight + 2 * SET_BOX_MARGIN);
         }
-        String type = CardDetailUtil.formatCardType(card.getOriginal());
-        if (card.getOriginal().isCreature()) { //include P/T or Loyalty at end of type
+        String type = CardDetailUtil.formatCardType(card.getCurrentState());
+        if (card.getCurrentState().isCreature()) { //include P/T or Loyalty at end of type
             type += " (" + power + " / " + toughness + ")";
         }
-        else if (card.getOriginal().isPlaneswalker()) {
+        else if (card.getCurrentState().isPlaneswalker()) {
             type += " (" + loyalty + ")";
         }
         g.drawText(type, typeFont, foreColor, x, y, availableTypeWidth, lineHeight, false, HAlignment.LEFT, true);
@@ -387,7 +387,7 @@ public class CardRenderer {
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
         float padding = h / 8;
-        final CardStateView state = card.getOriginal();
+        final CardStateView state = card.getCurrentState();
 
         //make sure name/mana cost row height is tall enough for both
         h = Math.max(MANA_SYMBOL_SIZE + 2 * MANA_COST_PADDING, 2 * NAME_FONT.getCapHeight());
@@ -395,10 +395,10 @@ public class CardRenderer {
         //draw mana cost for card
         float manaCostWidth = 0;
         ManaCost mainManaCost = state.getManaCost();
-        if (card.isSplitCard() && card.hasAltState()) {
+        if (card.isSplitCard() && card.hasAlternateState()) {
             //handle rendering both parts of split card
             mainManaCost = state.getManaCost();
-            ManaCost otherManaCost = card.getAlternate().getManaCost();
+            ManaCost otherManaCost = card.getAlternateState().getManaCost();
             manaCostWidth = CardFaceSymbols.getWidth(otherManaCost, MANA_SYMBOL_SIZE) + MANA_COST_PADDING;
             CardFaceSymbols.drawManaCost(g, otherManaCost, x + w - manaCostWidth, y + (h - MANA_SYMBOL_SIZE) / 2, MANA_SYMBOL_SIZE);
             //draw "//" between two parts of mana cost
@@ -417,10 +417,10 @@ public class CardRenderer {
         y += h;
         h = 2 * TYPE_FONT.getCapHeight();
 
-        String set = card.getSetCode();
+        String set = state.getSetCode();
         if (!StringUtils.isEmpty(set)) {
             float setWidth = getSetWidth(SET_FONT, set);
-            drawSetLabel(g, SET_FONT, set, card.getRarity(), x + w + padding - setWidth - SET_BOX_MARGIN, y + SET_BOX_MARGIN, setWidth, h - SET_BOX_MARGIN);
+            drawSetLabel(g, SET_FONT, set, state.getRarity(), x + w + padding - setWidth - SET_BOX_MARGIN, y + SET_BOX_MARGIN, setWidth, h - SET_BOX_MARGIN);
             w -= setWidth; //reduce available width for type
         }
 
@@ -456,11 +456,11 @@ public class CardRenderer {
         y += padY;
         w -= 2 * padX;
         h -= 2 * padY;
-        cardTextRenderer.drawText(g, CardDetailUtil.composeCardText(card.getOriginal()), TEXT_FONT, Color.BLACK, x, y, w, h, y, h, true, HAlignment.LEFT, false);
+        cardTextRenderer.drawText(g, CardDetailUtil.composeCardText(card.getCurrentState()), TEXT_FONT, Color.BLACK, x, y, w, h, y, h, true, HAlignment.LEFT, false);
     }
 
     private static void drawCardIdAndPtBox(Graphics g, CardView card, Color idForeColor, Color color1, Color color2, float x, float y, float w, float h) {
-        final CardStateView state = card.getOriginal();
+        final CardStateView state = card.getCurrentState();
 
         String idText = CardDetailUtil.formatCardId(state);
         g.drawText(idText, ID_FONT, idForeColor, x, y + ID_FONT.getCapHeight() / 2, w, h, false, HAlignment.LEFT, false);
@@ -495,8 +495,8 @@ public class CardRenderer {
             }
             if (pc.isFoil()) { //draw foil effect if needed
                 final CardView card = CardView.getCardForUi(pc);
-                if (card.getOriginal().getFoilIndex() == 0) { //if foil finish not yet established, assign a random one
-                    card.getOriginal().setFoilIndexOverride(-1);
+                if (card.getCurrentState().getFoilIndex() == 0) { //if foil finish not yet established, assign a random one
+                    card.getCurrentState().setFoilIndexOverride(-1);
                 }
                 drawFoilEffect(g, card, x, y, w, h);
             }
@@ -530,7 +530,7 @@ public class CardRenderer {
         w -= 2 * padding;
         h -= 2 * padding;
 
-        CardStateView details = card.getOriginal();
+        CardStateView details = card.getCurrentState();
         DetailColors borderColor = CardDetailUtil.getBorderColor(details);
         Color color = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
         color = FSkinColor.tintColor(Color.WHITE, color, CardRenderer.PT_BOX_TINT);
@@ -542,13 +542,13 @@ public class CardRenderer {
             }
             if (showCardManaCostOverlay(card)) {
                 float manaSymbolSize = w / 4;
-                if (card.isSplitCard() && card.hasAltState()) {
+                if (card.isSplitCard() && card.hasAlternateState()) {
                     float dy = manaSymbolSize / 2 + Utils.scale(5);
-                    drawManaCost(g, card.getOriginal().getManaCost(), x, y + dy, w, h, manaSymbolSize);
-                    drawManaCost(g, card.getAlternate().getManaCost(), x, y - dy, w, h, manaSymbolSize);
+                    drawManaCost(g, card.getCurrentState().getManaCost(), x, y + dy, w, h, manaSymbolSize);
+                    drawManaCost(g, card.getAlternateState().getManaCost(), x, y - dy, w, h, manaSymbolSize);
                 }
                 else {
-                    drawManaCost(g, card.getOriginal().getManaCost(), x, y, w, h, manaSymbolSize);
+                    drawManaCost(g, card.getCurrentState().getManaCost(), x, y, w, h, manaSymbolSize);
                 }
             }
         }
@@ -677,7 +677,7 @@ public class CardRenderer {
 
     public static void drawFoilEffect(Graphics g, CardView card, float x, float y, float w, float h) {
         if (isPreferenceEnabled(FPref.UI_OVERLAY_FOIL_EFFECT) && card.mayBeShown()) {
-            int foil = card.getOriginal().getFoilIndex();
+            int foil = card.getCurrentState().getFoilIndex();
             if (foil > 0) {
                 CardFaceSymbols.drawOther(g, String.format("foil%02d", foil), x, y, w, h);
             }

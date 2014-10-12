@@ -6,9 +6,10 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.ImageKeys;
-import forge.card.CardCharacteristicName;
+import forge.card.CardStateName;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
+import forge.card.CardRules;
 import forge.card.CardTypeView;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
@@ -27,9 +28,9 @@ public class CardView extends GameEntityView {
     public static CardView get(Card c) {
         return c == null ? null : c.getView();
     }
-    public static CardStateView getState(Card c, CardCharacteristicName state) {
+    public static CardStateView getState(Card c, CardStateName state) {
         if (c == null) { return null; }
-        CardCharacteristics s = c.getState(state);
+        CardState s = c.getState(state);
         return s == null ? null : s.getView();
     }
 
@@ -63,11 +64,11 @@ public class CardView extends GameEntityView {
 
     public CardView(int id0) {
         super(id0);
-        set(TrackableProperty.Original, new CardStateView(id0));
+        set(TrackableProperty.CurrentState, new CardStateView(id0, CardStateName.Original));
     }
     public CardView(int id0, String name0) {
         this(id0);
-        getOriginal().setName(name0);
+        getCurrentState().setName(name0);
     }
     public CardView(int id0, String name0, PlayerView ownerAndController, String imageKey) {
         this(id0, name0);
@@ -101,7 +102,7 @@ public class CardView extends GameEntityView {
     }
 
     public boolean isFaceDown() {
-        return get(TrackableProperty.FaceDown);
+        return getCurrentState().getState() == CardStateName.FaceDown;
     }
 
     public boolean isFlipCard() {
@@ -109,7 +110,7 @@ public class CardView extends GameEntityView {
     }
 
     public boolean isFlipped() {
-        return get(TrackableProperty.Flipped);
+        return getCurrentState().getState() == CardStateName.Flipped;
     }
 
     public boolean isSplitCard() {
@@ -117,21 +118,7 @@ public class CardView extends GameEntityView {
     }
 
     public boolean isTransformed() {
-        return get(TrackableProperty.Transformed);
-    }
-
-    public String getSetCode() {
-        return get(TrackableProperty.SetCode);
-    }
-    void updateSetCode(Card c) {
-        set(TrackableProperty.SetCode, c.getCurSetCode());
-    }
-
-    public CardRarity getRarity() {
-        return get(TrackableProperty.Rarity);
-    }
-    void updateRarity(Card c) {
-        set(TrackableProperty.Rarity, c.getRarity());
+        return getCurrentState().getState() == CardStateName.Transformed;
     }
 
     public boolean isAttacking() {
@@ -159,10 +146,10 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.Sickness);
     }
     public boolean hasSickness() {
-        return isFirstTurnControlled() && !getOriginal().hasHaste();
+        return isFirstTurnControlled() && !getCurrentState().hasHaste();
     }
     public boolean isSick() {
-        return getZone() == ZoneType.Battlefield && getOriginal().isCreature() && hasSickness();
+        return getZone() == ZoneType.Battlefield && getCurrentState().isCreature() && hasSickness();
     }
     void updateSickness(Card c) {
         set(TrackableProperty.Sickness, c.isFirstTurnControlled());
@@ -182,6 +169,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Token, c.isToken());
     }
 
+    public boolean isCommander() {
+        return get(TrackableProperty.IsCommander);
+    }
+    void updateCommander(Card c) {
+        set(TrackableProperty.IsCommander, c.isCommander());
+    }
+
     public Map<CounterType, Integer> getCounters() {
         return get(TrackableProperty.Counters);
     }
@@ -194,7 +188,7 @@ public class CardView extends GameEntityView {
     }
     void updateCounters(Card c) {
         set(TrackableProperty.Counters, c.getCounters());
-        CardStateView state = getOriginal();
+        CardStateView state = getCurrentState();
         state.updatePower(c);
         state.updateToughness(c);
         state.updateLoyalty(c);
@@ -215,7 +209,7 @@ public class CardView extends GameEntityView {
     }
 
     public int getLethalDamage() {
-        return getOriginal().getToughness() - getDamage() - getAssignedDamage();
+        return getCurrentState().getToughness() - getDamage() - getAssignedDamage();
     }
 
     public int getShieldCount() {
@@ -380,38 +374,52 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.ChangedTypes, c.getChangedTextTypeWords());
     }
 
+    void updateRulesText(CardRules rules, CardTypeView type) {
+        String rulesText = null;
+
+        if (type.isVanguard()) {
+            rulesText = "Hand Modifier: " + rules.getHand() + 
+                    "\r\nLife Modifier: " + rules.getLife();
+        }
+        set(TrackableProperty.RulesText, rulesText);
+    }
+
+    void updateNonAbilityText(Card c) {
+        set(TrackableProperty.NonAbilityText, c.getNonAbilityText());
+    }
+
     public String getText() {
-        final Card card = Card.get(this); //TODO: Avoid needing this
-        final CardStateView state = getOriginal();
-        if (card == null) {
+        return getText(getCurrentState());
+    }
+    public String getText(CardStateView state) {
+        if (getId() < 0) {
             return state.getOracleText().trim();
         }
 
         final StringBuilder sb = new StringBuilder();
 
-        // Vanguard Modifiers
-        if (card.getType().isVanguard()) {
-            sb.append("Hand Modifier: ").append(card.getRules().getHand());
-            sb.append("\r\nLife Modifier: ").append(card.getRules().getLife());
-            sb.append("\r\n\r\n");
+        String rulesText = get(TrackableProperty.RulesText);
+        if (!rulesText.isEmpty()) {
+            sb.append(rulesText).append("\r\n\r\n");
         }
-        if (card.isCommander()) {
+        if (isCommander()) {
             sb.append(getOwner()).append("'s Commander\r\n");
             sb.append(CardFactoryUtil.getCommanderInfo(Player.get(getOwner()))).append("\r\n");
         }
-        sb.append(card.getAbilityText());
+        sb.append(state.getAbilityText());
 
-        String nonAbilityText = card.getNonAbilityText();
-        if (card.getAmountOfKeyword("CARDNAME can block an additional creature.") > 1) {
+        String nonAbilityText = get(TrackableProperty.NonAbilityText);
+        int blockAdditional = state.getBlockAdditional();
+        if (blockAdditional > 1) {
             final StringBuilder ab = new StringBuilder();
             ab.append("CARDNAME can block an additional ");
-            ab.append(card.getAmountOfKeyword("CARDNAME can block an additional creature."));
+            ab.append(blockAdditional);
             ab.append(" creatures.");
             nonAbilityText = nonAbilityText.replaceFirst("CARDNAME can block an additional creature.", ab.toString());
             nonAbilityText = nonAbilityText.replaceAll("CARDNAME can block an additional creature.", "");
             nonAbilityText = nonAbilityText.replaceAll("\r\n\r\n\r\n", "");
         }
-        if (nonAbilityText.length() > 0) {
+        if (!nonAbilityText.isEmpty()) {
             sb.append("\r\n \r\nNon ability features: \r\n");
             sb.append(nonAbilityText.replaceAll("CARDNAME", getName()));
         }
@@ -458,113 +466,86 @@ public class CardView extends GameEntityView {
             sb.append("\r\n");
         }
 
-        CardCharacteristics cloner = card.getState(CardCharacteristicName.Cloner);
-        if (cloner != null) {
-            sb.append("\r\nCloned by: ").append(cloner.getView().getName());
-            sb.append(" (").append(cloner.getView().getId()).append(")");
+        String cloner = get(TrackableProperty.Cloner);
+        if (!cloner.isEmpty()) {
+            sb.append("\r\nCloned by: ").append(cloner);
         }
 
         return sb.toString().trim();
     }
 
-    public CardStateView getOriginal() {
-        return get(TrackableProperty.Original);
+    public CardStateView getCurrentState() {
+        return get(TrackableProperty.CurrentState);
     }
 
-    public boolean hasAltState() {
-        return getAlternate() != null;
+    public boolean hasAlternateState() {
+        return getAlternateState() != null;
     }
-    public CardStateView getAlternate() {
-        return get(TrackableProperty.Alternate);
+    public CardStateView getAlternateState() {
+        return get(TrackableProperty.AlternateState);
     }
-    CardStateView createAlternateState() {
-        return new CardStateView(getId());
+    CardStateView createAlternateState(CardStateName state0) {
+        return new CardStateView(getId(), state0);
     }
 
     public CardStateView getState(final boolean alternate0) {
-        return alternate0 ? getAlternate() : getOriginal();
+        return alternate0 ? getAlternateState() : getCurrentState();
     }
-    void updateState(Card c, boolean fromCurStateChange) {
-        boolean isDoubleFaced = c.isDoubleFaced();
-        boolean isFaceDown = c.isFaceDown();
-        boolean isFlipCard = c.isFlipCard();
-        boolean isFlipped = c.getCurState() == CardCharacteristicName.Flipped;
-        boolean isSplitCard = c.isSplitCard();
-        boolean isTransformed = c.getCurState() == CardCharacteristicName.Transformed;
-        boolean hasAltState = isDoubleFaced || isFlipCard || isSplitCard || (isFaceDown/* && mayShowCardFace*/);
-
+    void updateState(Card c) {
         set(TrackableProperty.Cloned, c.isCloned());
-        set(TrackableProperty.FaceDown, isFaceDown);
-        set(TrackableProperty.SplitCard, isSplitCard);
-        set(TrackableProperty.FlipCard, isFlipCard);
+        set(TrackableProperty.SplitCard, c.isSplitCard());
+        set(TrackableProperty.FlipCard, c.isFlipCard());
 
-        if (fromCurStateChange) {
-            set(TrackableProperty.Flipped, isFlipped);
-            set(TrackableProperty.Transformed, isTransformed);
-            updateRarity(c); //rarity and set based on current state
-            updateSetCode(c);
-        }
+        CardStateView cloner = CardView.getState(c, CardStateName.Cloner);
+        set(TrackableProperty.Cloner, cloner == null ? null : cloner.getName() + " (" + cloner.getId() + ")");
 
-        if (isSplitCard) {
-            final CardCharacteristicName orig, alt;
-            if (c.getCurState() == CardCharacteristicName.RightSplit) {
-                // If right half on stack, place it first
-                orig = CardCharacteristicName.RightSplit;
-                alt = CardCharacteristicName.LeftSplit;
-            }
-            else {
-                orig = CardCharacteristicName.LeftSplit;
-                alt = CardCharacteristicName.RightSplit;
-            }
-            set(TrackableProperty.Original, CardView.getState(c, orig));
-            set(TrackableProperty.Alternate, CardView.getState(c, alt));
-        }
-        else if (hasAltState) {
-            if (isFlipCard && !isFlipped) {
-                set(TrackableProperty.Alternate, CardView.getState(c, CardCharacteristicName.Flipped));
-            }
-            else if (isDoubleFaced && !isTransformed) {
-                set(TrackableProperty.Alternate, CardView.getState(c, CardCharacteristicName.Transformed));
-            }
-            else {
-                set(TrackableProperty.Alternate, CardView.getState(c, CardCharacteristicName.Original));
-            }
+        CardState currentState = c.getCurrentState();
+        set(TrackableProperty.CurrentState, currentState.getView());
+        currentState.getView().updateKeywords(c, currentState);
+
+        CardState alternateState = c.getAlternateState();
+        if (alternateState == null) {
+            set(TrackableProperty.AlternateState, null);
         }
         else {
-            set(TrackableProperty.Alternate, null);
+            set(TrackableProperty.AlternateState, alternateState.getView());
+            alternateState.getView().updateKeywords(c, alternateState);
         }
     }
 
     @Override
     public String toString() {
         if (getId() <= 0) { //if fake card, just return name
-            return getOriginal().getName();
+            return getCurrentState().getName();
         }
 
         if (!mayBeShown) {
             return "(Unknown card)";
         }
 
-        if (StringUtils.isEmpty(getOriginal().getName())) {
-            CardStateView alternate = getAlternate();
+        if (StringUtils.isEmpty(getCurrentState().getName())) {
+            CardStateView alternate = getAlternateState();
             if (alternate != null) {
-                return "Face-down card (" + getAlternate().getName() + ")";
+                return "Face-down card (" + getAlternateState().getName() + ")";
             }
             return "(" + getId() + ")";
         }
-        return getOriginal().getName() + " (" + getId() + ")";
+        return getCurrentState().getName() + " (" + getId() + ")";
     }
 
     public String determineName(final CardStateView state) {
-        if (state == getOriginal()) {
+        if (state == getCurrentState()) {
             return toString();
         }
-        return getAlternate().getName() + " (" + getId() + ")";
+        return getAlternateState().getName() + " (" + getId() + ")";
     }
 
     public class CardStateView extends TrackableObject {
-        public CardStateView(int id0) {
+        private final CardStateName state;
+
+        public CardStateView(int id0, CardStateName state0) {
             super(id0);
+            state = state0;
         }
 
         @Override
@@ -576,13 +557,17 @@ public class CardView extends GameEntityView {
             return CardView.this;
         }
 
+        public CardStateName getState() {
+            return state;
+        }
+
         public String getName() {
             return get(TrackableProperty.Name);
         }
         void updateName(Card c) {
             setName(c.getName());
         }
-        void updateName(CardCharacteristics c) {
+        void updateName(CardState c) {
             setName(c.getName());
         }
         private void setName(String name0) {
@@ -595,7 +580,7 @@ public class CardView extends GameEntityView {
         void updateColors(Card c) {
             set(TrackableProperty.Colors, c.determineColor());
         }
-        void updateColors(CardCharacteristics c) {
+        void updateColors(CardState c) {
             set(TrackableProperty.Colors, c.determineColor());
         }
 
@@ -608,19 +593,20 @@ public class CardView extends GameEntityView {
         void updateImageKey(Card c) {
             set(TrackableProperty.ImageKey, c.getImageKey());
         }
-        void updateImageKey(CardCharacteristics c) {
+        void updateImageKey(CardState c) {
             set(TrackableProperty.ImageKey, c.getImageKey());
         }
 
         public CardTypeView getType() {
             return get(TrackableProperty.Type);
         }
-        void updateType(CardCharacteristics c) {
+        void updateType(CardState c) {
             CardTypeView type = c.getType();
-            if (CardView.this.getOriginal() == this) {
+            if (CardView.this.getCurrentState() == this) {
                 Card card = Card.get(CardView.this);
                 if (card != null) {
                     type = type.getTypeWithChanges(card.getChangedCardTypes()); //TODO: find a better way to do this
+                    CardView.this.updateRulesText(card.getRules(), type);
                 }
             }
             set(TrackableProperty.Type, type);
@@ -629,7 +615,7 @@ public class CardView extends GameEntityView {
         public ManaCost getManaCost() {
             return get(TrackableProperty.ManaCost);
         }
-        void updateManaCost(CardCharacteristics c) {
+        void updateManaCost(CardState c) {
             set(TrackableProperty.ManaCost, c.getManaCost());
         }
 
@@ -639,8 +625,8 @@ public class CardView extends GameEntityView {
         void updatePower(Card c) {
             set(TrackableProperty.Power, c.getNetAttack());
         }
-        void updatePower(CardCharacteristics c) {
-            if (CardView.this.getOriginal() == this) {
+        void updatePower(CardState c) {
+            if (CardView.this.getCurrentState() == this) {
                 Card card = Card.get(CardView.this);
                 if (card != null) {
                     updatePower(card); //TODO: find a better way to do this
@@ -656,8 +642,8 @@ public class CardView extends GameEntityView {
         void updateToughness(Card c) {
             set(TrackableProperty.Toughness, c.getNetDefense());
         }
-        void updateToughness(CardCharacteristics c) {
-            if (CardView.this.getOriginal() == this) {
+        void updateToughness(CardState c) {
+            if (CardView.this.getCurrentState() == this) {
                 Card card = Card.get(CardView.this);
                 if (card != null) {
                     updateToughness(card); //TODO: find a better way to do this
@@ -673,8 +659,8 @@ public class CardView extends GameEntityView {
         void updateLoyalty(Card c) {
             set(TrackableProperty.Loyalty, c.getCurrentLoyalty());
         }
-        void updateLoyalty(CardCharacteristics c) {
-            if (CardView.this.getOriginal() == this) {
+        void updateLoyalty(CardState c) {
+            if (CardView.this.getCurrentState() == this) {
                 Card card = Card.get(CardView.this);
                 if (card != null) {
                     updateLoyalty(card); //TODO: find a better way to do this
@@ -687,8 +673,22 @@ public class CardView extends GameEntityView {
         public String getOracleText() {
             return get(TrackableProperty.OracleText);
         }
-        void updateOracleText(CardCharacteristics c) {
+        void updateOracleText(CardState c) {
             set(TrackableProperty.OracleText, c.getOracleText());
+        }
+
+        public String getSetCode() {
+            return get(TrackableProperty.SetCode);
+        }
+        void updateSetCode(CardState c) {
+            set(TrackableProperty.SetCode, c.getSetCode());
+        }
+
+        public CardRarity getRarity() {
+            return get(TrackableProperty.Rarity);
+        }
+        void updateRarity(CardState c) {
+            set(TrackableProperty.Rarity, c.getRarity());
         }
 
         private int foilIndexOverride = -1;
@@ -699,9 +699,9 @@ public class CardView extends GameEntityView {
             return get(TrackableProperty.FoilIndex);
         }
         void updateFoilIndex(Card c) {
-            updateFoilIndex(c.getCharacteristics());
+            updateFoilIndex(c.getCurrentState());
         }
-        void updateFoilIndex(CardCharacteristics c) {
+        void updateFoilIndex(CardState c) {
             set(TrackableProperty.FoilIndex, c.getFoil());
         }
         public void setFoilIndexOverride(int index0) {
@@ -726,12 +726,23 @@ public class CardView extends GameEntityView {
         public boolean hasTrample() {
             return get(TrackableProperty.HasTrample);
         }
-        void updateKeywords(Card c) {
-            set(TrackableProperty.HasDeathtouch, c.hasKeyword("Deathtouch"));
-            set(TrackableProperty.HasHaste, c.hasKeyword("Haste"));
-            set(TrackableProperty.HasInfect, c.hasKeyword("Infect"));
-            set(TrackableProperty.HasStorm, c.hasKeyword("Storm"));
-            set(TrackableProperty.HasTrample, c.hasKeyword("Trample"));
+        public int getBlockAdditional() {
+            return get(TrackableProperty.BlockAdditional);
+        }
+        public String getAbilityText() {
+            return get(TrackableProperty.AbilityText);
+        }
+        void updateAbilityText(Card c, CardState state) {
+            set(TrackableProperty.AbilityText, c.getAbilityText(state));
+        }
+        void updateKeywords(Card c, CardState state) {
+            set(TrackableProperty.HasDeathtouch, c.hasKeyword("Deathtouch", state));
+            set(TrackableProperty.HasHaste, c.hasKeyword("Haste", state));
+            set(TrackableProperty.HasInfect, c.hasKeyword("Infect", state));
+            set(TrackableProperty.HasStorm, c.hasKeyword("Storm", state));
+            set(TrackableProperty.HasTrample, c.hasKeyword("Trample", state));
+            set(TrackableProperty.BlockAdditional, c.getAmountOfKeyword("CARDNAME can block an additional creature.", state));
+            updateAbilityText(c, state);
         }
 
         public boolean isBasicLand() {

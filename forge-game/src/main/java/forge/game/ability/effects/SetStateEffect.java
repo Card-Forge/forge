@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.card.CardCharacteristicName;
+import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -67,33 +67,33 @@ public class SetStateEffect extends SpellAbilityEffect {
 
     private boolean changeCardState(final Card tgt, final String mode, final String customState) {
         if (mode == null)
-            return tgt.changeToState(CardCharacteristicName.smartValueOf(customState));
+            return tgt.changeToState(CardStateName.smartValueOf(customState));
 
         // flip and face-down don't overlap. That is there is no chance to turn face down a flipped permanent
         // and then any effect have it turn upface again and demand its former flip state to be restored
         // Proof: Morph cards never have ability that makes them flip, Ixidron does not suppose cards to be turned face up again, 
         // Illusionary Mask affects cards in hand.
-        CardCharacteristicName oldState = tgt.getCurState();
+        CardStateName oldState = tgt.getCurrentStateName();
         if (mode.equals("Transform") && tgt.isDoubleFaced()) {
             if (tgt.hasKeyword("CARDNAME can't transform")) {
                 return false;
             }
-            CardCharacteristicName destState = oldState == CardCharacteristicName.Transformed ? CardCharacteristicName.Original : CardCharacteristicName.Transformed;
+            CardStateName destState = oldState == CardStateName.Transformed ? CardStateName.Original : CardStateName.Transformed;
             return tgt.changeToState(destState);
             
         } else if (mode.equals("Flip") && tgt.isFlipCard()) {
-            CardCharacteristicName destState = oldState == CardCharacteristicName.Flipped ? CardCharacteristicName.Original : CardCharacteristicName.Flipped;
+            CardStateName destState = oldState == CardStateName.Flipped ? CardStateName.Original : CardStateName.Flipped;
             return tgt.changeToState(destState);
         } else if (mode.equals("TurnFace")) {
-            if (oldState == CardCharacteristicName.Original) {
+            if (oldState == CardStateName.Original) {
                 // Reset cloned state if Vesuvan Shapeshifter
-                if (tgt.isCloned() && tgt.getState(CardCharacteristicName.Cloner).getName().equals("Vesuvan Shapeshifter")) {
-                    tgt.switchStates(CardCharacteristicName.Cloner, CardCharacteristicName.Original, false);
-                    tgt.setState(CardCharacteristicName.Original, false);
-                    tgt.clearStates(CardCharacteristicName.Cloner, false);
+                if (tgt.isCloned() && tgt.getState(CardStateName.Cloner).getName().equals("Vesuvan Shapeshifter")) {
+                    tgt.switchStates(CardStateName.Cloner, CardStateName.Original, false);
+                    tgt.setState(CardStateName.Original, false);
+                    tgt.clearStates(CardStateName.Cloner, false);
                 }
                 return tgt.turnFaceDown();
-            } else if (oldState == CardCharacteristicName.FaceDown) {
+            } else if (oldState == CardStateName.FaceDown) {
                 return tgt.turnFaceUp();
             }
         }

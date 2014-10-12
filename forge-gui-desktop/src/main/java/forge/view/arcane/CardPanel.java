@@ -269,8 +269,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         // White border if card is known to have it.
         if (getCard() != null) {
-            CardEdition ed = FModel.getMagicDb().getEditions().get(getCard().getSetCode());
-            if (ed != null && ed.isWhiteBorder() && getCard().getOriginal().getFoilIndex() == 0) {
+            CardStateView state = getCard().getCurrentState();
+            CardEdition ed = FModel.getMagicDb().getEditions().get(state.getSetCode());
+            if (ed != null && ed.isWhiteBorder() && state.getFoilIndex() == 0) {
                 g2d.setColor(Color.white);
                 int ins = 1;
                 g2d.fillRoundRect(cardXOffset + ins, cardYOffset + ins, cardWidth - ins*2, cardHeight - ins*2, cornerSize-ins, cornerSize-ins);
@@ -299,7 +300,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     public static void drawFoilEffect(final Graphics g, final CardView card2, final int x, final int y, final int width, final int height, final int borderSize) {
         if (isPreferenceEnabled(FPref.UI_OVERLAY_FOIL_EFFECT)) {
-            int foil = card2.getOriginal().getFoilIndex();
+            int foil = card2.getCurrentState().getFoilIndex();
             if (foil > 0) {
                 CardFaceSymbols.drawOther(g, String.format("foil%02d", foil),
                         x + borderSize, y + borderSize, width - 2 * borderSize, height - 2 * borderSize);
@@ -369,10 +370,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         if (showCardManaCostOverlay() && cardWidth < 200) {
             final boolean showSplitMana = card.isSplitCard();
             if (!showSplitMana) {
-                drawManaCost(g, card.getOriginal().getManaCost(), 0);
+                drawManaCost(g, card.getCurrentState().getManaCost(), 0);
             } else {
-                drawManaCost(g, card.getOriginal().getManaCost(), +12);
-                drawManaCost(g, card.getAlternate().getManaCost(), -12);
+                drawManaCost(g, card.getCurrentState().getManaCost(), +12);
+                drawManaCost(g, card.getAlternateState().getManaCost(), -12);
             }
         }
 
@@ -489,7 +490,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
 
         // Card name overlay
-        titleText.setText(card.getOriginal().getName());
+        titleText.setText(card.getCurrentState().getName());
 
         int damage = card.getDamage();
         damageText.setText(damage > 0 ? "\u00BB " + String.valueOf(damage) + " \u00AB" : "");
@@ -500,7 +501,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     public final void updatePTOverlay() {
         // P/T overlay
-        final CardStateView state = card.getOriginal();
+        final CardStateView state = card.getCurrentState();
         String sPt = "";
         if (state.isCreature() && state.isPlaneswalker()) {
             sPt = String.format("%d/%d (%d)", state.getPower(), state.getToughness(), state.getLoyalty());

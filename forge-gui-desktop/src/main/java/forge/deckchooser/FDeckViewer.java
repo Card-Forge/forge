@@ -65,7 +65,7 @@ public class FDeckViewer extends FDialog {
                         if (card == null) { return; }
 
                         cardDetail.setCard(card);
-                        cardPicture.setCard(card.getOriginal());
+                        cardPicture.setCard(card.getCurrentState());
                     }
                 };
             }
@@ -81,7 +81,7 @@ public class FDeckViewer extends FDialog {
                 if (card == null) { return; }
 
                 cardDetail.setCard(card);
-                cardPicture.setCard(card.getOriginal());
+                cardPicture.setCard(card.getCurrentState());
             }
         });
 

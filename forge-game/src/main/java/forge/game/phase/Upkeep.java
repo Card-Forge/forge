@@ -114,7 +114,7 @@ public class Upkeep extends Phase {
         for (int i = 0; i < list.size(); i++) {
             final Card c = list.get(i);
             final Player controller = c.getController();
-            for (String ability : c.getKeyword()) {
+            for (String ability : c.getKeywords()) {
                 // sacrifice
                 if (ability.startsWith("At the beginning of your upkeep, sacrifice")) {
 

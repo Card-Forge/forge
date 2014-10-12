@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.card.CardCharacteristicName;
+import forge.card.CardStateName;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -41,7 +41,7 @@ public class MillEffect extends SpellAbilityEffect {
                 final CardCollectionView milled = p.mill(numCards, destination, bottom);
                 if (destination.equals(ZoneType.Exile) && sa.hasParam("ExileFaceDown")) {
                     for (final Card c : milled) {
-                        c.setState(CardCharacteristicName.FaceDown, true);
+                        c.setState(CardStateName.FaceDown, true);
                     }
                 }
                 if (sa.hasParam("RememberMilled")) {

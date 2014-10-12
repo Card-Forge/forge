@@ -158,7 +158,7 @@ public class AnimateEffect extends AnimateEffectBase {
             boolean removeAll = sa.hasParam("RemoveAllAbilities");
 
             if (clearAbilities || clearSpells || removeAll) {
-                for (final SpellAbility ab : c.getSpellAbilities()) {
+                for (final SpellAbility ab : c.getNonManaAbilities()) {
                     if (removeAll || (ab.isAbility() && clearAbilities)
                             || (ab.isSpell() && clearSpells)) {
                         c.removeSpellAbility(ab);

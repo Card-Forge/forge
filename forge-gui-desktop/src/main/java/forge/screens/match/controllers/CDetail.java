@@ -48,7 +48,7 @@ public enum CDetail implements ICDoc {
     }
 
     public void showCard(final CardView c, final boolean isInAltState) {
-        view.getLblFlipcard().setVisible(c != null && c.hasAltState());
+        view.getLblFlipcard().setVisible(c != null && c.hasAlternateState());
         view.getPnlDetail().setCard(c, isInAltState);
         if (view.getParentCell() != null) {
             view.getParentCell().repaintSelf();

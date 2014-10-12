@@ -60,7 +60,7 @@ public class PlayerZone extends Zone {
                 return true;
             }
    
-            for (final SpellAbility sa : c.getSpellAbilities()) {
+            for (final SpellAbility sa : c.getNonManaAbilities()) {
                 final ZoneType restrictZone = sa.getRestrictions().getZone();
                 if (PlayerZone.this.is(restrictZone)) {
                     return true;

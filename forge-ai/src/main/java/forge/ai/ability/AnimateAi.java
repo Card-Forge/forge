@@ -401,7 +401,7 @@ public class AnimateAi extends SpellAbilityAi {
         boolean removeAll = sa.hasParam("RemoveAllAbilities");
 
         if (clearAbilities || clearSpells || removeAll) {
-            for (final SpellAbility ab : card.getSpellAbilities()) {
+            for (final SpellAbility ab : card.getNonManaAbilities()) {
                 if (removeAll || (ab.isAbility() && clearAbilities)
                         || (ab.isSpell() && clearSpells)) {
                     card.removeSpellAbility(ab);

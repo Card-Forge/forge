@@ -24,7 +24,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 
 import forge.GameCommand;
-import forge.card.CardCharacteristicName;
+import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -114,7 +114,7 @@ public class GameAction {
         Card lastKnownInfo = null;
 
         if (c.isSplitCard() && !zoneTo.is(ZoneType.Stack)) {
-            c.setState(CardCharacteristicName.Original, true);
+            c.setState(CardStateName.Original, true);
         }
 
         // Don't copy Tokens, copy only cards leaving the battlefield
@@ -126,11 +126,11 @@ public class GameAction {
 
             if (!c.isToken()) {
                 if (c.isCloned()) {
-                    c.switchStates(CardCharacteristicName.Cloner, CardCharacteristicName.Original, false);
-                    c.setState(CardCharacteristicName.Original, false);
-                    c.clearStates(CardCharacteristicName.Cloner, false);
+                    c.switchStates(CardStateName.Cloner, CardStateName.Original, false);
+                    c.setState(CardStateName.Original, false);
+                    c.clearStates(CardStateName.Cloner, false);
                     if (c.isFlipCard()) {
-                        c.clearStates(CardCharacteristicName.Flipped, false);
+                        c.clearStates(CardStateName.Flipped, false);
                     }
                     c.updateStateForView();
                 }
@@ -253,14 +253,14 @@ public class GameAction {
         }
 
         if (!c.isToken() && !toBattlefield) {
-            copied.getCharacteristics().resetCardColor();
+            copied.getCurrentState().resetCardColor();
             copied.clearDevoured();
         }
 
         if (fromBattlefield) {
             if (!c.isToken()) {
                 copied.setSuspendCast(false);
-                copied.setState(CardCharacteristicName.Original, true);
+                copied.setState(CardStateName.Original, true);
             }
             // Soulbond unpairing
             if (c.isPaired()) {
@@ -271,16 +271,16 @@ public class GameAction {
             }
             // Reveal if face-down
             if (c.isFaceDown()) {
-            	c.setState(CardCharacteristicName.Original, true);
+            	c.setState(CardStateName.Original, true);
             	reveal(new CardCollection(c), c.getOwner(), true, "Face-down card leaves the battlefield");
-            	c.setState(CardCharacteristicName.FaceDown, true);
-            	copied.setState(CardCharacteristicName.Original, true);
+            	c.setState(CardStateName.FaceDown, true);
+            	copied.setState(CardStateName.Original, true);
             }
             unattachCardLeavingBattlefield(copied);
         } else if (toBattlefield) {
             // reset timestamp in changezone effects so they have same timestamp if ETB simutaneously 
             copied.setTimestamp(game.getNextTimestamp());
-            for (String s : copied.getKeyword()) {
+            for (String s : copied.getKeywords()) {
                 if (s.startsWith("May be played") || s.startsWith("You may look at this card.")
                         || s.startsWith("Your opponent may look at this card.")) {
                     copied.removeAllExtrinsicKeyword(s);
@@ -294,7 +294,7 @@ public class GameAction {
             }
         } else if (zoneTo.is(ZoneType.Graveyard) || zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library)) {
             copied.setTimestamp(game.getNextTimestamp());
-            for (String s : copied.getKeyword()) {
+            for (String s : copied.getKeywords()) {
                 if (s.startsWith("May be played") || s.startsWith("You may look at this card.")
                         || s.startsWith("Your opponent may look at this card.")) {
                     copied.removeAllExtrinsicKeyword(s);
@@ -303,7 +303,7 @@ public class GameAction {
             }
             copied.clearOptionalCostsPaid();
             if (copied.isFaceDown()) {
-                copied.setState(CardCharacteristicName.Original, true);
+                copied.setState(CardStateName.Original, true);
             }
         }
 
@@ -545,12 +545,12 @@ public class GameAction {
         final List<Card> staticList = new ArrayList<Card>();
         for (final Card c : allCards) {
             for (int i = 0; i < c.getStaticAbilities().size(); i++) {
-               StaticAbility stAb = c.getCharacteristics().getStaticAbilities().get(i);
+               StaticAbility stAb = c.getCurrentState().getStaticAbilities().get(i);
                if (stAb.getMapParams().get("Mode").equals("Continuous")) {
                    staticAbilities.add(stAb);
                }
                if (stAb.isTemporary()) {
-                   c.getCharacteristics().getStaticAbilities().remove(i);
+                   c.getCurrentState().getStaticAbilities().remove(i);
                    i--;
                }
             }
@@ -776,7 +776,7 @@ public class GameAction {
         final GameEntity entity = c.getEnchanting();
         SpellAbility sa = c.getFirstAttachSpell();
         if (c.isBestowed()) {
-            for (SpellAbility s : c.getSpellAbilities()) {
+            for (SpellAbility s : c.getNonManaAbilities()) {
                 if (s.getApi() == ApiType.Attach && s.hasParam("Bestow")) {
                     sa = s;
                     break;
@@ -1459,7 +1459,7 @@ public class GameAction {
 
             // Select what can be activated from a given hand
             for (final Card c : takesAction.getCardsIn(ZoneType.Hand)) {
-                for (String kw : c.getKeyword()) {
+                for (String kw : c.getKeywords()) {
                     if (kw.startsWith("MayEffectFromOpeningHand")) {
                         String[] split = kw.split(":");
                         final String effName = split[1];

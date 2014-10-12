@@ -160,7 +160,6 @@ forge-core/src/main/java/forge/card/BoosterGenerator.java svneol=native#text/pla
 forge-core/src/main/java/forge/card/BoosterSlots.java -text
 forge-core/src/main/java/forge/card/CardAiHints.java -text
 forge-core/src/main/java/forge/card/CardChangedType.java -text
-forge-core/src/main/java/forge/card/CardCharacteristicName.java -text
 forge-core/src/main/java/forge/card/CardDb.java -text
 forge-core/src/main/java/forge/card/CardEdition.java -text
 forge-core/src/main/java/forge/card/CardFace.java -text
@@ -168,6 +167,7 @@ forge-core/src/main/java/forge/card/CardRarity.java -text
 forge-core/src/main/java/forge/card/CardRules.java -text
 forge-core/src/main/java/forge/card/CardRulesPredicates.java -text
 forge-core/src/main/java/forge/card/CardSplitType.java -text
+forge-core/src/main/java/forge/card/CardStateName.java -text
 forge-core/src/main/java/forge/card/CardType.java -text
 forge-core/src/main/java/forge/card/CardTypeView.java -text
 forge-core/src/main/java/forge/card/ColorSet.java -text
@@ -435,7 +435,6 @@ forge-game/src/main/java/forge/game/ability/package-info.java svneol=native#text
 forge-game/src/main/java/forge/game/card/Card.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardChangedWord.java -text
 forge-game/src/main/java/forge/game/card/CardChangedWords.java -text
-forge-game/src/main/java/forge/game/card/CardCharacteristics.java -text
 forge-game/src/main/java/forge/game/card/CardCollection.java -text
 forge-game/src/main/java/forge/game/card/CardCollectionView.java -text
 forge-game/src/main/java/forge/game/card/CardColor.java svneol=native#text/plain
@@ -446,6 +445,7 @@ forge-game/src/main/java/forge/game/card/CardLists.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardPowerToughness.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardPredicates.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardShields.java -text
+forge-game/src/main/java/forge/game/card/CardState.java -text
 forge-game/src/main/java/forge/game/card/CardUtil.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardView.java -text
 forge-game/src/main/java/forge/game/card/CounterType.java svneol=native#text/plain

@@ -180,7 +180,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
 
                     // when copying something stolen:
                     copyInPlay.setController(controller, 0);
-                    copyInPlay.setCurSetCode(c.getCurSetCode());
+                    copyInPlay.setSetCode(c.getSetCode());
 
                     copyInPlay.setCloneOrigin(hostCard);
                     sa.getHostCard().addClone(copyInPlay);

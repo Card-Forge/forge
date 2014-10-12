@@ -562,7 +562,7 @@ public class ComputerUtil {
         final Game game = controller.getGame();
         final CardCollectionView l = controller.getCardsIn(ZoneType.Battlefield);
         for (final Card c : l) {
-            for (final SpellAbility sa : c.getSpellAbilities()) {
+            for (final SpellAbility sa : c.getNonManaAbilities()) {
                 // This try/catch should fix the "computer is thinking" bug
                 try {
 
@@ -616,7 +616,7 @@ public class ComputerUtil {
 
         final CardCollectionView l = controller.getCardsIn(ZoneType.Battlefield);
         for (final Card c : l) {
-            for (final SpellAbility sa : c.getSpellAbilities()) {
+            for (final SpellAbility sa : c.getNonManaAbilities()) {
                 // if SA is from AF_Counter don't add to getPlayable
                 // This try/catch should fix the "computer is thinking" bug
                 try {
@@ -955,7 +955,7 @@ public class ComputerUtil {
         all.addAll(ai.getCardsIn(ZoneType.Hand));
     
         for (final Card c : all) {
-            for (final SpellAbility sa : c.getSpellAbilities()) {
+            for (final SpellAbility sa : c.getNonManaAbilities()) {
                 if (sa.getApi() == ApiType.Pump && sa.hasParam("KW") && sa.getParam("KW").contains("Haste")) {
                     return true;
                 }
@@ -971,7 +971,7 @@ public class ComputerUtil {
         all.addAll(ai.getCardsIn(ZoneType.Hand));
     
         for (final Card c : all) {
-            for (final SpellAbility sa : c.getSpellAbilities()) {
+            for (final SpellAbility sa : c.getNonManaAbilities()) {
                 if (sa.getApi() != ApiType.DealDamage) {
                     continue;
                 }

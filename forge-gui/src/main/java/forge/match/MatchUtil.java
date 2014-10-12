@@ -23,7 +23,7 @@ import com.google.common.eventbus.Subscribe;
 
 import forge.LobbyPlayer;
 import forge.ai.LobbyPlayerAi;
-import forge.card.CardCharacteristicName;
+import forge.card.CardStateName;
 import forge.control.FControlGameEventHandler;
 import forge.control.FControlGamePlayback;
 import forge.control.WatchLocalGame;
@@ -279,7 +279,7 @@ public class MatchUtil {
 
         // If the first blocker can absorb all of the damage, don't show the Assign Damage dialog
         CardView firstBlocker = blockers.get(0);
-        if (!overrideOrder && !attacker.getOriginal().hasDeathtouch() && firstBlocker.getLethalDamage() >= damage) {
+        if (!overrideOrder && !attacker.getCurrentState().hasDeathtouch() && firstBlocker.getLethalDamage() >= damage) {
             Map<CardView, Integer> res = new HashMap<CardView, Integer>();
             res.put(firstBlocker, damage);
             return res;
@@ -531,7 +531,7 @@ public class MatchUtil {
             boolean hasSetCurSet = false;
             for (final String info : cardinfo) {
                 if (info.startsWith("Set:")) {
-                    c.setCurSetCode(info.substring(info.indexOf(':') + 1));
+                    c.setSetCode(info.substring(info.indexOf(':') + 1));
                     hasSetCurSet = true;
                 }
                 else if (info.equalsIgnoreCase("Tapped:True")) {
@@ -547,12 +547,12 @@ public class MatchUtil {
                     c.setSickness(true);
                 }
                 else if (info.equalsIgnoreCase("FaceDown:True")) {
-                    c.setState(CardCharacteristicName.FaceDown, true);
+                    c.setState(CardStateName.FaceDown, true);
                 }
             }
 
             if (!hasSetCurSet) {
-                c.setCurSetCode(c.getMostRecentSet());
+                c.setSetCode(c.getMostRecentSet());
             }
 
             cl.add(c);

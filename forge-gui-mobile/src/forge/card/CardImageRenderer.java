@@ -59,7 +59,7 @@ public class CardImageRenderer {
 
     public static void drawCardImage(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos) {
         updateStaticFields(w, h);
-        final CardStateView state = card.getOriginal();
+        final CardStateView state = card.getCurrentState();
 
         float blackBorderThickness = w * CardRenderer.BLACK_BORDER_THICKNESS_RATIO;
         g.fillRect(Color.BLACK, x, y, w, h);
@@ -69,7 +69,7 @@ public class CardImageRenderer {
         h -= 2 * blackBorderThickness;
 
         //determine colors for borders
-        final List<DetailColors> borderColors = CardDetailUtil.getBorderColors(card.getOriginal());
+        final List<DetailColors> borderColors = CardDetailUtil.getBorderColors(card.getCurrentState());
         DetailColors borderColor = borderColors.get(0);
         Color color1 = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
         Color color2 = null;
@@ -162,14 +162,14 @@ public class CardImageRenderer {
 
         float padding = h / 8;
 
-        final CardStateView state = card.getOriginal();
+        final CardStateView state = card.getCurrentState();
         //draw mana cost for card
         float manaCostWidth = 0;
         ManaCost mainManaCost = state.getManaCost();
-        if (card.isSplitCard() && card.getAlternate() != null) {
+        if (card.isSplitCard() && card.getAlternateState() != null) {
             //handle rendering both parts of split card
             mainManaCost = state.getManaCost();
-            ManaCost otherManaCost = card.getAlternate().getManaCost();
+            ManaCost otherManaCost = card.getAlternateState().getManaCost();
             manaCostWidth = CardFaceSymbols.getWidth(otherManaCost, MANA_SYMBOL_SIZE) + HEADER_PADDING;
             CardFaceSymbols.drawManaCost(g, otherManaCost, x + w - manaCostWidth, y + (h - MANA_SYMBOL_SIZE) / 2, MANA_SYMBOL_SIZE);
             //draw "//" between two parts of mana cost
@@ -221,14 +221,14 @@ public class CardImageRenderer {
         float iconSize = h * 0.55f;
         float iconPadding = (h - iconSize) / 2;
         w -= iconSize + iconPadding * 2;
-        g.fillRect(CardRenderer.getRarityColor(card.getRarity()), x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+        g.fillRect(CardRenderer.getRarityColor(card.getCurrentState().getRarity()), x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
 
         //draw type
         x += padding;
-        g.drawText(CardDetailUtil.formatCardType(card.getOriginal()), TYPE_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
+        g.drawText(CardDetailUtil.formatCardType(card.getCurrentState()), TYPE_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
     }
 
-    //use text g to handle mana symbols and reminder text
+    //use text renderer to handle mana symbols and reminder text
     private static final TextRenderer cardTextRenderer = new TextRenderer(true);
 
     private static void drawTextBox(Graphics g, CardView card, Color color1, Color color2, float x, float y, float w, float h, boolean onTop) {
@@ -242,7 +242,7 @@ public class CardImageRenderer {
 
         if (!onTop) { return; } //remaining rendering only needed if card on top
 
-        final CardStateView state = card.getOriginal();
+        final CardStateView state = card.getCurrentState();
         if (state.isBasicLand()) {
             //draw icons for basic lands
             FSkinImage image;
@@ -267,7 +267,7 @@ public class CardImageRenderer {
             g.drawImage(image, x + (w - iconSize) / 2, y + (h - iconSize) / 2, iconSize, iconSize);
         }
         else {
-            final String text = card.getText();
+            final String text = card.getText(state);
             if (StringUtils.isEmpty(text)) { return; }
 
             float padding = TEXT_FONT.getCapHeight() * 0.75f;
@@ -280,7 +280,7 @@ public class CardImageRenderer {
     }
 
     private static void drawPtBox(Graphics g, CardView card, Color color1, Color color2, float x, float y, float w, float h) {
-        final CardStateView state = card.getOriginal();
+        final CardStateView state = card.getCurrentState();
         List<String> pieces = new ArrayList<String>();
         if (state.isCreature()) {
             pieces.add(String.valueOf(state.getPower()));

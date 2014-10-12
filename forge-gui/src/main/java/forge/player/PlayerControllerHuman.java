@@ -34,7 +34,7 @@ import forge.FThreads;
 import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.achievement.AchievementCollection;
-import forge.card.CardCharacteristicName;
+import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -1599,7 +1599,7 @@ public class PlayerControllerHuman extends PlayerController {
                 boolean hasSetCurSet = false;
                 for (final String info : cardinfo) {
                     if (info.startsWith("Set:")) {
-                        c.setCurSetCode(info.substring(info.indexOf(':') + 1));
+                        c.setSetCode(info.substring(info.indexOf(':') + 1));
                         hasSetCurSet = true;
                     } else if (info.equalsIgnoreCase("Tapped:True")) {
                         c.tap();
@@ -1611,12 +1611,12 @@ public class PlayerControllerHuman extends PlayerController {
                     } else if (info.equalsIgnoreCase("SummonSick:True")) {
                         c.setSickness(true);
                     } else if (info.equalsIgnoreCase("FaceDown:True")) {
-                        c.setState(CardCharacteristicName.FaceDown, true);
+                        c.setState(CardStateName.FaceDown, true);
                     }
                 }
 
                 if (!hasSetCurSet) {
-                    c.setCurSetCode(c.getMostRecentSet());
+                    c.setSetCode(c.getMostRecentSet());
                 }
 
                 cl.add(c);

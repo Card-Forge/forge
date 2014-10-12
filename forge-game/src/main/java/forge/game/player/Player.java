@@ -562,7 +562,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         int restDamage = damage;
 
-        for (String kw : source.getKeyword()) {
+        for (String kw : source.getKeywords()) {
             if (isCombat) {
                 if (kw.equals("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) {
                     return 0;
@@ -1219,7 +1219,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     protected final int getDredgeNumber(final Card c) {
-        for (String s : c.getKeyword()) {
+        for (String s : c.getKeywords()) {
             if (s.startsWith("Dredge")) {
                 return Integer.parseInt("" + s.charAt(s.length() - 1));
             }

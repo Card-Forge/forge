@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.card.CardCharacteristicName;
+import forge.card.CardStateName;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -51,7 +51,7 @@ public class ManaCostAdjustment {
                 adjustCostByConvoke(cost, sa, test);
             } else if (((Spell) sa).isCastFaceDown()) {
             	// Turn face down to apply cost modifiers correctly
-            	originalCard.setState(CardCharacteristicName.FaceDown, false);
+            	originalCard.setState(CardStateName.FaceDown, false);
             	isStateChangeToFaceDown = true;
             }
         } // isSpell
@@ -101,7 +101,7 @@ public class ManaCostAdjustment {
         
         // Reset card state (if changed)
         if (isStateChangeToFaceDown) {
-        	originalCard.setState(CardCharacteristicName.Original, false);
+        	originalCard.setState(CardStateName.Original, false);
         }
     }
   // GetSpellCostChange
@@ -161,7 +161,7 @@ public class ManaCostAdjustment {
 
     private static void adjustCostByOffering(final ManaCostBeingPaid cost, final SpellAbility sa) {
         String offeringType = "";
-        for (String kw : sa.getHostCard().getKeyword()) {
+        for (String kw : sa.getHostCard().getKeywords()) {
             if (kw.endsWith(" offering")) {
                 offeringType = kw.split(" ")[0];
                 break;

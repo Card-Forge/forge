@@ -6,7 +6,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.StaticData;
-import forge.card.CardCharacteristicName;
+import forge.card.CardStateName;
 import forge.card.CardRulesPredicates;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -141,14 +141,14 @@ public class PlayEffect extends SpellAbilityEffect {
             }
 
             if (tgtCard.isFaceDown()) {
-                tgtCard.setState(CardCharacteristicName.Original, false);
+                tgtCard.setState(CardStateName.Original, false);
                 wasFaceDown = true;
             }
             
             if (optional && !controller.getController().confirmAction(sa, null, "Do you want to play " + tgtCard + "?")) {
                 // i--;  // This causes an infinite loop (ArsenalNut)
                 if (wasFaceDown) {
-                    tgtCard.setState(CardCharacteristicName.FaceDown, false);
+                    tgtCard.setState(CardStateName.FaceDown, false);
                 }
                 continue;
             }

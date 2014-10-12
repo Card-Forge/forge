@@ -85,7 +85,7 @@ public final class CardPredicates {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return Iterables.any(c.getKeyword(), PredicateString.contains(keyword));
+                return Iterables.any(c.getKeywords(), PredicateString.contains(keyword));
             }
         };
     }

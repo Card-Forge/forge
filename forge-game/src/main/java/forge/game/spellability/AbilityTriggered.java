@@ -18,10 +18,10 @@
 package forge.game.spellability;
 
 import forge.GameCommand;
-import forge.card.CardCharacteristicName;
+import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
-import forge.game.card.CardCharacteristics;
+import forge.game.card.CardState;
 import forge.game.trigger.ZCTrigger;
 
 import java.util.Arrays;
@@ -94,7 +94,7 @@ public class AbilityTriggered extends Ability implements GameCommand {
                 this.restrictions = new String[] { "named " + sourceCard.getName() };
             }
             else {
-                CardCharacteristics origChar = sourceCard.getState(CardCharacteristicName.Original);
+                CardState origChar = sourceCard.getState(CardStateName.Original);
                 this.restrictions = new String[] { "named " + origChar.getName() };
             }
         }

@@ -10,7 +10,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.StaticData;
-import forge.card.CardCharacteristicName;
+import forge.card.CardStateName;
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -75,12 +75,12 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
         }
 
         String imageFileName = game.getRules().canCloneUseTargetsImage ? source.getImageKey() : random.getImageKey();
-        source.addAlternateState(CardCharacteristicName.Cloner, false);
-        source.switchStates(CardCharacteristicName.Original, CardCharacteristicName.Cloner, false);
-        source.setState(CardCharacteristicName.Original, false);
+        source.addAlternateState(CardStateName.Cloner, false);
+        source.switchStates(CardStateName.Original, CardStateName.Cloner, false);
+        source.setState(CardStateName.Original, false);
         source.updateStateForView();
-        CardCharacteristicName stateToCopy = random.getCurState();
-        CardFactory.copyState(random, stateToCopy, source, source.getCurState());
+        CardStateName stateToCopy = random.getCurrentStateName();
+        CardFactory.copyState(random, stateToCopy, source, source.getCurrentStateName());
         source.setImageKey(imageFileName);
         
         source.setController(activator, 0);

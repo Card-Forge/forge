@@ -1,13 +1,13 @@
 package forge.game.ability.effects;
 
 import forge.GameCommand;
-import forge.card.CardCharacteristicName;
+import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardCharacteristics;
+import forge.game.card.CardState;
 import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardUtil;
@@ -101,27 +101,27 @@ public class CloneEffect extends SpellAbilityEffect {
 
         if (!copyingSelf) {
             if (tgtCard.isCloned()) { // cloning again
-                tgtCard.switchStates(CardCharacteristicName.Cloner, CardCharacteristicName.Original, false);
-                tgtCard.setState(CardCharacteristicName.Original, false);
-                tgtCard.clearStates(CardCharacteristicName.Cloner, false);
+                tgtCard.switchStates(CardStateName.Cloner, CardStateName.Original, false);
+                tgtCard.setState(CardStateName.Original, false);
+                tgtCard.clearStates(CardStateName.Cloner, false);
             }
             // add "Cloner" state to clone
-            tgtCard.addAlternateState(CardCharacteristicName.Cloner, false);
-            tgtCard.switchStates(CardCharacteristicName.Original, CardCharacteristicName.Cloner, false);
-            tgtCard.setState(CardCharacteristicName.Original, false);
+            tgtCard.addAlternateState(CardStateName.Cloner, false);
+            tgtCard.switchStates(CardStateName.Original, CardStateName.Cloner, false);
+            tgtCard.setState(CardStateName.Original, false);
         }
         else {
             //copy Original state to Cloned
-            tgtCard.addAlternateState(CardCharacteristicName.Cloned, false);
-            tgtCard.switchStates(CardCharacteristicName.Original, CardCharacteristicName.Cloned, false);
+            tgtCard.addAlternateState(CardStateName.Cloned, false);
+            tgtCard.switchStates(CardStateName.Original, CardStateName.Cloned, false);
             if (tgtCard.isFlipCard()) {
-                tgtCard.setState(CardCharacteristicName.Original, false);
+                tgtCard.setState(CardStateName.Original, false);
             }
         }
         
-        final CardCharacteristicName origState = cardToCopy.getCurState();
+        final CardStateName origState = cardToCopy.getCurrentStateName();
         if (copyingSelf) {
-        	cardToCopy.setState(CardCharacteristicName.Cloned, false);
+        	cardToCopy.setState(CardStateName.Cloned, false);
         }
         CardFactory.copyCopiableCharacteristics(cardToCopy, tgtCard);
         if (copyingSelf) {
@@ -142,7 +142,7 @@ public class CloneEffect extends SpellAbilityEffect {
         // If target is a flip card, also set characteristics of the flipped
         // state.
         if (cardToCopy.isFlipCard()) {
-        	final CardCharacteristics flippedState = tgtCard.getState(CardCharacteristicName.Flipped);
+        	final CardState flippedState = tgtCard.getState(CardStateName.Flipped);
             if (keepName) {
                 flippedState.setName(originalName);
             }
@@ -152,7 +152,7 @@ public class CloneEffect extends SpellAbilityEffect {
 
         //Clean up copy of cloned state
         if (copyingSelf) {
-            tgtCard.clearStates(CardCharacteristicName.Cloned, false);
+            tgtCard.clearStates(CardStateName.Cloned, false);
         }
         tgtCard.updateStateForView();
 
@@ -176,9 +176,9 @@ public class CloneEffect extends SpellAbilityEffect {
                 @Override
                 public void run() {
                     if (cloneCard.isCloned()) {
-                        cloneCard.switchStates(CardCharacteristicName.Cloner, CardCharacteristicName.Original, false);
-                        cloneCard.setState(CardCharacteristicName.Original, false);
-                        cloneCard.clearStates(CardCharacteristicName.Cloner, false);
+                        cloneCard.switchStates(CardStateName.Cloner, CardStateName.Original, false);
+                        cloneCard.setState(CardStateName.Original, false);
+                        cloneCard.clearStates(CardStateName.Cloner, false);
                         cloneCard.updateStateForView();
                     }
                 }

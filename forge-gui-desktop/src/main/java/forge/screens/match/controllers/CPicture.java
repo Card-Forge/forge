@@ -68,9 +68,9 @@ public enum CPicture implements ICDoc {
 
         currentView = c;
         isDisplayAlt = showAlt;
-        flipIndicator.setVisible(c.hasAltState());
+        flipIndicator.setVisible(c.hasAlternateState());
         picturePanel.setCard(c.getState(showAlt));
-        if (showAlt && c.hasAltState()) {
+        if (showAlt && c.hasAlternateState()) {
             flipCard();
         }
     }
@@ -83,14 +83,14 @@ public enum CPicture implements ICDoc {
         if (item instanceof IPaperCard) {
             final IPaperCard paperCard = ((IPaperCard)item);
             final CardView c = CardView.getCardForUi(paperCard);
-            if (paperCard.isFoil() && c.getOriginal().getFoilIndex() == 0) {
+            if (paperCard.isFoil() && c.getCurrentState().getFoilIndex() == 0) {
                 // FIXME should assign a random foil here in all cases
                 // (currently assigns 1 for the deck editors where foils "flicker" otherwise)
                 if (item instanceof Card) {
-                    c.getOriginal().setFoilIndexOverride(-1); //-1 to choose random
+                    c.getCurrentState().setFoilIndexOverride(-1); //-1 to choose random
                 }
                 else if (item instanceof IPaperCard) {
-                    c.getOriginal().setFoilIndexOverride(1);
+                    c.getCurrentState().setFoilIndexOverride(1);
                 }
             }
             showCard(c, false);
@@ -172,7 +172,7 @@ public enum CPicture implements ICDoc {
     }
 
     public void flipCard() {
-        if (currentView.hasAltState()) {
+        if (currentView.hasAlternateState()) {
             isDisplayAlt = !isDisplayAlt;
             picturePanel.setCard(currentView.getState(isDisplayAlt));
             CDetail.SINGLETON_INSTANCE.showCard(currentView, isDisplayAlt);

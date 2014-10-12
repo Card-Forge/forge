@@ -164,7 +164,7 @@ public class CardDetailUtil {
 
     public static String formatCardName(final CardStateView card) {
         final String name = card.getName();
-        return StringUtils.isEmpty(name) ? "(no name)" : name.trim();
+        return StringUtils.isEmpty(name) ? "???" : name.trim();
     }
 
     public static String formatCardType(final CardStateView card) {
@@ -209,7 +209,7 @@ public class CardDetailUtil {
         if (area.length() != 0) {
             area.append("\n");
         }
-        String text = card.getText();
+        String text = card.getText(state);
         // LEVEL [0-9]+-[0-9]+
         // LEVEL [0-9]+\+
 
@@ -424,7 +424,7 @@ public class CardDetailUtil {
                 area.append("\n");
             }
             area.append("^Cloned via: ");
-            area.append(card.getCloneOrigin().getOriginal().getName());
+            area.append(card.getCloneOrigin().getCurrentState().getName());
             area.append("^");
         }
 

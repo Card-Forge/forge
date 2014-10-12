@@ -55,7 +55,7 @@ public class ZoneAction extends ForgeAction {
 
         final List<CardStateView> choices2 = Lists.newLinkedList();
         for (final CardView crd : choices) {
-            final CardStateView toAdd = crd.getOriginal();
+            final CardStateView toAdd = crd.getCurrentState();
             choices2.add(toAdd);
         }
 

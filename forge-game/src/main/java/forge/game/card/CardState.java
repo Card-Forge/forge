@@ -38,7 +38,7 @@ import java.util.TreeMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 
-public class CardCharacteristics {
+public class CardState {
     private String name = "";
     private CardType type = new CardType();
     private ManaCost manaCost = ManaCost.NO_COST;
@@ -46,9 +46,9 @@ public class CardCharacteristics {
     private String oracleText = "";
     private int baseAttack = 0;
     private int baseDefense = 0;
-    private List<String> intrinsicKeyword = new ArrayList<String>();
-    private final List<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
-    private final List<SpellAbility> manaAbility = new ArrayList<SpellAbility>();
+    private List<String> intrinsicKeywords = new ArrayList<String>();
+    private final List<SpellAbility> nonManaAbilities = new ArrayList<SpellAbility>();
+    private final List<SpellAbility> manaAbilities = new ArrayList<SpellAbility>();
     private List<String> unparsedAbilities = new ArrayList<String>();
     private List<Trigger> triggers = new CopyOnWriteArrayList<Trigger>();
     private List<ReplacementEffect> replacementEffects = new ArrayList<ReplacementEffect>();
@@ -58,12 +58,14 @@ public class CardCharacteristics {
     private Map<String, String> sVars = new TreeMap<String, String>();
 
     private CardRarity rarity = CardRarity.Unknown;
-    private String curSetCode = CardEdition.UNKNOWN.getCode();
-    
+    private String setCode = CardEdition.UNKNOWN.getCode();
+
     private final CardStateView view;
 
-    public CardCharacteristics(CardStateView view0) {
+    public CardState(CardStateView view0) {
         view = view0;
+        view.updateRarity(this);
+        view.updateSetCode(this);
     }
 
     public CardStateView getView() {
@@ -76,6 +78,11 @@ public class CardCharacteristics {
     public final void setName(final String name0) {
         name = name0;
         view.updateName(this);
+    }
+
+    @Override
+    public String toString() {
+        return name + " (" + view.getState() + ")";
     }
 
     public final CardTypeView getType() {
@@ -153,20 +160,28 @@ public class CardCharacteristics {
         view.updateToughness(this);
     }
 
-    public final List<String> getIntrinsicKeyword() {
-        return intrinsicKeyword;
+    public final List<String> getIntrinsicKeywords() {
+        return intrinsicKeywords;
     }
-    public final void setIntrinsicKeyword(final ArrayList<String> intrinsicKeyword0) {
-        intrinsicKeyword = intrinsicKeyword0;
+    public final void setIntrinsicKeywords(final ArrayList<String> intrinsicKeyword0) {
+        intrinsicKeywords = intrinsicKeyword0;
     }
 
-    public final List<SpellAbility> getSpellAbility() {
-        return spellAbility;
+    /*public final List<SpellAbility> getSpellAbilities() {
+        final ArrayList<SpellAbility> res = new ArrayList<SpellAbility>(manaAbilities);
+        res.addAll(nonManaAbilities);
+        return res;
+    }*/
+    public final List<SpellAbility> getManaAbilities() {
+        return manaAbilities;
     }
-    public final void setSpellAbility(SpellAbility sa) {
-    	spellAbility.clear();
+    public final List<SpellAbility> getNonManaAbilities() {
+        return nonManaAbilities;
+    }
+    public final void setNonManaAbilities(SpellAbility sa) {
+    	nonManaAbilities.clear();
     	if (sa != null) {
-    	    spellAbility.add(sa);
+    	    nonManaAbilities.add(sa);
     	}
     }
 
@@ -175,10 +190,6 @@ public class CardCharacteristics {
     }
     public final void setUnparsedAbilities(final List<String> list) {
         unparsedAbilities = list;
-    }
-
-    public final List<SpellAbility> getManaAbility() {
-        return manaAbility;
     }
 
     public final List<Trigger> getTriggers() {
@@ -244,7 +255,7 @@ public class CardCharacteristics {
         return 0;
     }
 
-    public final void copyFrom(final CardCharacteristics source) {
+    public final void copyFrom(final Card c, final CardState source) {
         // Makes a "deeper" copy of a CardCharacteristics object
 
         setName(source.getName());
@@ -253,17 +264,18 @@ public class CardCharacteristics {
         setCardColor(source.getCardColor());
         setBaseAttack(source.getBaseAttack());
         setBaseDefense(source.getBaseDefense());
-        intrinsicKeyword = new ArrayList<String>(source.getIntrinsicKeyword());
+        intrinsicKeywords = new ArrayList<String>(source.getIntrinsicKeywords());
         unparsedAbilities = new ArrayList<String>(source.getUnparsedAbilities());
         staticAbilityStrings = new ArrayList<String>(source.getStaticAbilityStrings());
         setImageKey(source.getImageKey());
         setRarity(source.rarity);
-        setCurSetCode(source.curSetCode);
+        setSetCode(source.setCode);
         setSVars(new TreeMap<String, String>(source.getSVars()));
         replacementEffects = new ArrayList<ReplacementEffect>();
         for (ReplacementEffect RE : source.getReplacementEffects()) {
             replacementEffects.add(RE.getCopy());
         }
+        view.updateKeywords(c, this);
     }
 
     public CardRarity getRarity() {
@@ -271,12 +283,14 @@ public class CardCharacteristics {
     }
     public void setRarity(CardRarity rarity0) {
         rarity = rarity0;
+        view.updateRarity(this);
     }
 
-    public String getCurSetCode() {
-        return curSetCode;
+    public String getSetCode() {
+        return setCode;
     }
-    public void setCurSetCode(String curSetCode0) {
-        curSetCode = curSetCode0;
+    public void setSetCode(String setCode0) {
+        setCode = setCode0;
+        view.updateSetCode(this);
     }
 }

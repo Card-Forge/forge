@@ -80,7 +80,7 @@ public class ImageCache {
     }
 
     public static Texture getImage(CardView card) {
-        final String key = card.getOriginal().getImageKey(false);
+        final String key = card.getCurrentState().getImageKey(false);
         return getImage(key, true);
     }
 

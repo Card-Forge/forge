@@ -78,7 +78,7 @@ public final class GameActionUtil {
             return;
         }
 
-        for (final String key : c.getKeyword()) {
+        for (final String key : c.getKeywords()) {
             if (!key.startsWith("Poisonous ")) continue;
             final String[] k = key.split(" ", 2);
             final int poison = Integer.parseInt(k[1]);
@@ -118,7 +118,7 @@ public final class GameActionUtil {
         // remove all abilities granted by this Command
         for (final Card land : lands) {
             List<SpellAbility> origManaAbs = Lists.newArrayList(land.getManaAbility());
-            List<SpellAbility> manaAbs = land.getCharacteristics().getManaAbility();
+            List<SpellAbility> manaAbs = land.getCurrentState().getManaAbilities();
             // will get comodification exception without a different list
             for (final SpellAbility sa : origManaAbs) {
                 if (sa.isBasicLandAbility()) {
@@ -136,7 +136,7 @@ public final class GameActionUtil {
                 if (land.getType().hasSubtype(landType)) {
                     final SpellAbility sa = AbilityFactory.getAbility(abString, land);
                     sa.setBasicLandAbility(true);
-                    land.getCharacteristics().getManaAbility().add(sa);
+                    land.getCurrentState().getManaAbilities().add(sa);
                 }
             }
         }
@@ -158,7 +158,7 @@ public final class GameActionUtil {
         if (!sa.isBasicSpell()) {
             return alternatives;
         }
-        for (final String keyword : source.getKeyword()) {
+        for (final String keyword : source.getKeywords()) {
             if (sa.isSpell() && keyword.startsWith("Flashback")) {
                 final SpellAbility flashback = sa.copy();
                 flashback.setFlashBackAbility(true);
@@ -285,7 +285,7 @@ public final class GameActionUtil {
         }
 
         // Buyback, Kicker
-        for (String keyword : source.getKeyword()) {
+        for (String keyword : source.getKeywords()) {
             if (keyword.startsWith("AlternateAdditionalCost")) {
                 final List<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
                 String[] costs = TextUtil.split(keyword, ':');
@@ -423,7 +423,7 @@ public final class GameActionUtil {
             }
 
             String spliceKwCost = null;
-            for (String keyword : c.getKeyword()) {
+            for (String keyword : c.getKeywords()) {
                 if (keyword.startsWith("Splice")) {
                     spliceKwCost = keyword.substring(19);
                     break;
@@ -433,7 +433,7 @@ public final class GameActionUtil {
             if (spliceKwCost == null)
                 continue;
 
-            Map<String, String> params = AbilityFactory.getMapParams(c.getCharacteristics().getUnparsedAbilities().get(0));
+            Map<String, String> params = AbilityFactory.getMapParams(c.getCurrentState().getUnparsedAbilities().get(0));
             AbilityRecordType rc = AbilityRecordType.getRecordType(params);
             ApiType api = rc.getApiTypeOf(params);
             AbilitySub subAbility = (AbilitySub) AbilityFactory.getAbility(AbilityRecordType.SubAbility, api, params, null, c);

@@ -60,7 +60,7 @@ public class VField extends FContainer {
 
             for (CardView card : model) {
                 CardAreaPanel cardPanel = CardAreaPanel.get(card);
-                CardStateView details = card.getOriginal();
+                CardStateView details = card.getCurrentState();
                 if (cardPanel.getAttachedToPanel() == null) { //skip attached panels
                     if (details.isCreature()) {
                         if (!tryStackCard(card, creatures)) {
@@ -96,13 +96,13 @@ public class VField extends FContainer {
         if (card.isEnchanted() || card.isEquipped()) {
             return false; //can stack with enchanted or equipped card
         }
-        if (card.getOriginal().isCreature() && !card.isToken()) {
+        if (card.getCurrentState().isCreature() && !card.isToken()) {
             return false; //don't stack non-token creatures
         }
-        final String cardName = card.getOriginal().getName();
+        final String cardName = card.getCurrentState().getName();
         for (CardView c : cardsOfType) {
             if (!c.isEnchanted() && !c.isEquipped() &&
-                    cardName.equals(c.getOriginal().getName()) &&
+                    cardName.equals(c.getCurrentState().getName()) &&
                     card.hasSameCounters(c) &&
                     card.isToken() == c.isToken()) { //don't stack tokens on top of non-tokens
                 CardAreaPanel cPanel = CardAreaPanel.get(c);

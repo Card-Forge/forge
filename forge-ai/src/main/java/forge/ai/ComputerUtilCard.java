@@ -381,7 +381,7 @@ public class ComputerUtilCard {
         }
         int power = c.getNetCombatDamage();
         final int toughness = c.getNetDefense();
-        for (String keyword : c.getKeyword()) {
+        for (String keyword : c.getKeywords()) {
             if (keyword.equals("Prevent all combat damage that would be dealt by CARDNAME.")
                     || keyword.equals("Prevent all damage that would be dealt by CARDNAME.")
                     || keyword.equals("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")
@@ -536,7 +536,7 @@ public class ComputerUtilCard {
             value -= 25;
         }
     
-        for (final SpellAbility sa : c.getSpellAbilities()) {
+        for (final SpellAbility sa : c.getNonManaAbilities()) {
             if (sa.isAbility()) {
                 value += 10;
             }

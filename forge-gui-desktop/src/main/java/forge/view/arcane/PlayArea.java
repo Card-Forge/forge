@@ -104,7 +104,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         //
         for (final CardPanel panel : this.getCardPanels()) {
             final CardView card = panel.getCard();
-            final CardStateView state = card.getOriginal();
+            final CardStateView state = card.getCurrentState();
 
             if (!state.isLand() || state.isCreature()) {
                 continue;
@@ -116,7 +116,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             for (int i = 0, n = allLands.size(); i < n; i++) {
                 final CardStack stack = allLands.get(i);
                 final CardPanel firstPanel = stack.get(0);
-                if (firstPanel.getCard().getOriginal().getName().equals(state.getName())) {
+                if (firstPanel.getCard().getCurrentState().getName().equals(state.getName())) {
                     if (!firstPanel.getAttachedPanels().isEmpty() || firstPanel.getCard().isEnchanted()) {
                         // Put this land to the left of lands with the same name
                         // and attachments.
@@ -153,7 +153,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         //
         for (final CardPanel panel : this.getCardPanels()) {
             final CardView card = panel.getCard();
-            final CardStateView state = card.getOriginal();
+            final CardStateView state = card.getCurrentState();
 
             if (!card.isToken()) {
                 continue;
@@ -166,9 +166,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 final CardStack stack = allTokens.get(i);
                 final CardPanel firstPanel = stack.get(0);
                 final CardView firstCard = firstPanel.getCard();
-                final CardStateView firstState = firstCard.getOriginal();
+                final CardStateView firstState = firstCard.getCurrentState();
 
-                if (firstPanel.getCard().getOriginal().getName().equals(state.getName())) {
+                if (firstPanel.getCard().getCurrentState().getName().equals(state.getName())) {
                     if (!firstPanel.getAttachedPanels().isEmpty()) {
                         // Put this token to the left of tokens with the same
                         // name and attachments.
@@ -348,7 +348,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             for (int stackIndex = 0, stackCount = row.size(); stackIndex < stackCount; stackIndex++) {
                 final CardStack stack = row.get(stackIndex);
                 // Align others to the right.
-                if (RowType.Other.isGoodFor(stack.get(0).getCard().getOriginal())) {
+                if (RowType.Other.isGoodFor(stack.get(0).getCard().getCurrentState())) {
                     x = (this.playAreaWidth - PlayArea.GUTTER_X) + this.extraCardSpacingX;
                     for (int i = stackIndex, n = row.size(); i < n; i++) {
                         CardStack r = row.get(i);
@@ -755,7 +755,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
         private void addAll(final List<CardPanel> cardPanels, final RowType type) {
             for (final CardPanel panel : cardPanels) {
-                if (!type.isGoodFor(panel.getCard().getOriginal()) || (panel.getAttachedToPanel() != null)) {
+                if (!type.isGoodFor(panel.getCard().getCurrentState()) || (panel.getAttachedToPanel() != null)) {
                     continue;
                 }
                 final CardStack stack = new CardStack();
@@ -772,15 +772,15 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
          */
         private void addAllOthers(final List<CardPanel> cardPanels, final RowType type) {
             for (final CardPanel panel : cardPanels) {
-                if (!type.isGoodFor(panel.getCard().getOriginal()) || (panel.getAttachedToPanel() != null)) {
+                if (!type.isGoodFor(panel.getCard().getCurrentState()) || (panel.getAttachedToPanel() != null)) {
                     continue;
                 }
                 boolean stackable = false;
                 for (final CardStack s : this) {
                     final CardView otherCard = s.get(0).getCard();
-                    final CardStateView otherState = otherCard.getOriginal();
+                    final CardStateView otherState = otherCard.getCurrentState();
                     final CardView thisCard = panel.getCard();
-                    final CardStateView thisState = thisCard.getOriginal();
+                    final CardStateView thisState = thisCard.getCurrentState();
                     if (otherState.getName().equals(thisState.getName()) && s.size() < othersStackMax) {
                         if (panel.getAttachedPanels().isEmpty()
                             && thisCard.hasSameCounters(otherCard)

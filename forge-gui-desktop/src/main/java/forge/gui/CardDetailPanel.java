@@ -130,7 +130,7 @@ public class CardDetailPanel extends SkinnedPanel {
         powerToughnessLabel.setVisible(false);
         idLabel.setText("");
         cdArea.setText(CardDetailUtil.getItemDescription(item));
-        this.updateBorder(item instanceof IPaperCard ? Card.getCardForUi((IPaperCard)item).getView().getOriginal() : null);
+        this.updateBorder(item instanceof IPaperCard ? Card.getCardForUi((IPaperCard)item).getView().getCurrentState() : null);
 
         String set = item.getEdition();
         setInfoLabel.setText(set);
@@ -185,8 +185,8 @@ public class CardDetailPanel extends SkinnedPanel {
             this.nameCostLabel.setText(CardDetailUtil.formatCardName(state));
         } else {
             final String manaCost;
-            if (card.isSplitCard() && card.getAlternate() != null) {
-                manaCost = card.getOriginal().getManaCost() + " // " + card.getAlternate().getManaCost();
+            if (card.isSplitCard() && card.getAlternateState() != null) {
+                manaCost = card.getCurrentState().getManaCost() + " // " + card.getAlternateState().getManaCost();
             } else {
                 manaCost = state.getManaCost().toString();
             }
@@ -194,21 +194,21 @@ public class CardDetailPanel extends SkinnedPanel {
         }
         this.typeLabel.setText(CardDetailUtil.formatCardType(state));
             
-        String set = card.getSetCode();
+        String set = state.getSetCode();
         this.setInfoLabel.setText(set);
         if (null != set && !set.isEmpty()) {
             CardEdition edition = FModel.getMagicDb().getEditions().get(set);
             if (null == edition) {
-                setInfoLabel.setToolTipText(card.getRarity().name());
+                setInfoLabel.setToolTipText(state.getRarity().name());
             }
             else {
-                setInfoLabel.setToolTipText(String.format("%s (%s)", edition.getName(), card.getRarity().name()));
+                setInfoLabel.setToolTipText(String.format("%s (%s)", edition.getName(), state.getRarity().name()));
             }
 
             this.setInfoLabel.setOpaque(true);
 
             Color backColor;
-            switch(card.getRarity()) {
+            switch(state.getRarity()) {
             case Uncommon:
                 backColor = fromDetailColor(DetailColors.UNCOMMON);
                 break;

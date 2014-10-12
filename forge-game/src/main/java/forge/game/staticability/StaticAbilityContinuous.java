@@ -312,7 +312,7 @@ public class StaticAbilityContinuous {
                 addFullAbs = new ArrayList<SpellAbility>();
 
                 for (Card c : cardsIGainedAbilitiesFrom) {
-                    for (SpellAbility sa : c.getSpellAbilities()) {
+                    for (SpellAbility sa : c.getNonManaAbilities()) {
                         if (sa instanceof AbilityActivated) {
                             SpellAbility newSA = ((AbilityActivated) sa).getCopy();
                             newSA.setIntrinsic(false);
@@ -544,7 +544,7 @@ public class StaticAbilityContinuous {
 
             // remove activated and static abilities
             if (removeAllAbilities) {
-                for (final SpellAbility ab : affectedCard.getSpellAbilities()) {
+                for (final SpellAbility ab : affectedCard.getNonManaAbilities()) {
                     ab.setTemporarilySuppressed(true);
                 }
                 for (final StaticAbility stA : affectedCard.getStaticAbilities()) {
