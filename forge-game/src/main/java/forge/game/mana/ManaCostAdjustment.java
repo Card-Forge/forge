@@ -26,7 +26,6 @@ import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 
 public class ManaCostAdjustment {
-
     public static final void adjust(ManaCostBeingPaid cost, final SpellAbility sa, boolean test) {
         final Game game = sa.getActivatingPlayer().getGame();
         final Card originalCard = sa.getHostCard();
@@ -52,7 +51,7 @@ public class ManaCostAdjustment {
                 adjustCostByConvoke(cost, sa, test);
             } else if (((Spell) sa).isCastFaceDown()) {
             	// Turn face down to apply cost modifiers correctly
-            	originalCard.setState(CardCharacteristicName.FaceDown);
+            	originalCard.setState(CardCharacteristicName.FaceDown, false);
             	isStateChangeToFaceDown = true;
             }
         } // isSpell
@@ -102,7 +101,7 @@ public class ManaCostAdjustment {
         
         // Reset card state (if changed)
         if (isStateChangeToFaceDown) {
-        	originalCard.setState(CardCharacteristicName.Original);
+        	originalCard.setState(CardCharacteristicName.Original, false);
         }
     }
   // GetSpellCostChange

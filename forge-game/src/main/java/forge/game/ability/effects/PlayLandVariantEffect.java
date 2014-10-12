@@ -76,8 +76,9 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
 
         String imageFileName = game.getRules().canCloneUseTargetsImage ? source.getImageKey() : random.getImageKey();
         source.addAlternateState(CardCharacteristicName.Cloner, false);
-        source.switchStates(CardCharacteristicName.Original, CardCharacteristicName.Cloner);
-        source.setState(CardCharacteristicName.Original);
+        source.switchStates(CardCharacteristicName.Original, CardCharacteristicName.Cloner, false);
+        source.setState(CardCharacteristicName.Original, false);
+        source.updateStateForView();
         CardCharacteristicName stateToCopy = random.getCurState();
         CardFactory.copyState(random, stateToCopy, source, source.getCurState());
         source.setImageKey(imageFileName);

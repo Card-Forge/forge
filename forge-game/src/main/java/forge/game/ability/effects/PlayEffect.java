@@ -141,16 +141,19 @@ public class PlayEffect extends SpellAbilityEffect {
             }
 
             if (tgtCard.isFaceDown()) {
-                tgtCard.setState(CardCharacteristicName.Original);
+                tgtCard.setState(CardCharacteristicName.Original, false);
                 wasFaceDown = true;
             }
             
             if (optional && !controller.getController().confirmAction(sa, null, "Do you want to play " + tgtCard + "?")) {
                 // i--;  // This causes an infinite loop (ArsenalNut)
                 if (wasFaceDown) {
-                    tgtCard.setState(CardCharacteristicName.FaceDown);
+                    tgtCard.setState(CardCharacteristicName.FaceDown, false);
                 }
                 continue;
+            }
+            if (wasFaceDown) {
+                tgtCard.updateStateForView();
             }
             if (sa.hasParam("ForgetRemembered")) {
                 source.clearRemembered();

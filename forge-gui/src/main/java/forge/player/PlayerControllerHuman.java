@@ -1611,7 +1611,7 @@ public class PlayerControllerHuman extends PlayerController {
                     } else if (info.equalsIgnoreCase("SummonSick:True")) {
                         c.setSickness(true);
                     } else if (info.equalsIgnoreCase("FaceDown:True")) {
-                        c.setState(CardCharacteristicName.FaceDown);
+                        c.setState(CardCharacteristicName.FaceDown, true);
                     }
                 }
 

@@ -114,7 +114,7 @@ public class GameAction {
         Card lastKnownInfo = null;
 
         if (c.isSplitCard() && !zoneTo.is(ZoneType.Stack)) {
-            c.setState(CardCharacteristicName.Original);
+            c.setState(CardCharacteristicName.Original, true);
         }
 
         // Don't copy Tokens, copy only cards leaving the battlefield
@@ -126,12 +126,13 @@ public class GameAction {
 
             if (!c.isToken()) {
                 if (c.isCloned()) {
-                    c.switchStates(CardCharacteristicName.Cloner, CardCharacteristicName.Original);
-                    c.setState(CardCharacteristicName.Original);
-                    c.clearStates(CardCharacteristicName.Cloner);
+                    c.switchStates(CardCharacteristicName.Cloner, CardCharacteristicName.Original, false);
+                    c.setState(CardCharacteristicName.Original, false);
+                    c.clearStates(CardCharacteristicName.Cloner, false);
                     if (c.isFlipCard()) {
-                        c.clearStates(CardCharacteristicName.Flipped);
+                        c.clearStates(CardCharacteristicName.Flipped, false);
                     }
+                    c.updateStateForView();
                 }
 
                 copied = CardFactory.copyCard(c, false);
@@ -259,7 +260,7 @@ public class GameAction {
         if (fromBattlefield) {
             if (!c.isToken()) {
                 copied.setSuspendCast(false);
-                copied.setState(CardCharacteristicName.Original);
+                copied.setState(CardCharacteristicName.Original, true);
             }
             // Soulbond unpairing
             if (c.isPaired()) {
@@ -270,10 +271,10 @@ public class GameAction {
             }
             // Reveal if face-down
             if (c.isFaceDown()) {
-            	c.setState(CardCharacteristicName.Original);
+            	c.setState(CardCharacteristicName.Original, true);
             	reveal(new CardCollection(c), c.getOwner(), true, "Face-down card leaves the battlefield");
-            	c.setState(CardCharacteristicName.FaceDown);
-            	copied.setState(CardCharacteristicName.Original);
+            	c.setState(CardCharacteristicName.FaceDown, true);
+            	copied.setState(CardCharacteristicName.Original, true);
             }
             unattachCardLeavingBattlefield(copied);
         } else if (toBattlefield) {
@@ -302,7 +303,7 @@ public class GameAction {
             }
             copied.clearOptionalCostsPaid();
             if (copied.isFaceDown()) {
-                copied.setState(CardCharacteristicName.Original);
+                copied.setState(CardCharacteristicName.Original, true);
             }
         }
 

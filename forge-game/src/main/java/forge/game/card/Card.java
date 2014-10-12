@@ -286,7 +286,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     public boolean changeToState(final CardCharacteristicName state) {
         CardCharacteristicName cur = curCharacteristics;
 
-        if (!setState(state)) {
+        if (!setState(state, true)) {
             return false;
         }
 
@@ -304,7 +304,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return true;
     }
 
-    public boolean setState(final CardCharacteristicName state) {
+    public boolean setState(final CardCharacteristicName state, boolean updateView) {
         if (state == CardCharacteristicName.FaceDown && isDoubleFaced()) {
             return false; // Doublefaced cards can't be turned face-down.
         }
@@ -320,11 +320,13 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
         curCharacteristics = state;
 
-        view.updateState(this, true);
-
-        Game game = getGame();
-        if (game != null) {
-            game.fireEvent(new GameEventCardStatsChanged(this)); //ensure stats updated for new characteristics
+        if (updateView) {
+            view.updateState(this, true);
+    
+            Game game = getGame();
+            if (game != null) {
+                game.fireEvent(new GameEventCardStatsChanged(this)); //ensure stats updated for new characteristics
+            }
         }
 
         return true;
@@ -338,17 +340,23 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return curCharacteristics;
     }
 
-    public void switchStates(final CardCharacteristicName from, final CardCharacteristicName to) {
+    public void switchStates(final CardCharacteristicName from, final CardCharacteristicName to, boolean updateView) {
         final CardCharacteristics tmp = characteristicsMap.get(from);
         characteristicsMap.put(from, characteristicsMap.get(to));
         characteristicsMap.put(to, tmp);
-        view.updateState(this, false);
-    }
-
-    public void clearStates(final CardCharacteristicName state) {
-        if (characteristicsMap.remove(state) != null) {
+        if (updateView) {
             view.updateState(this, false);
         }
+    }
+
+    public void clearStates(final CardCharacteristicName state, boolean updateView) {
+        if (characteristicsMap.remove(state) != null && updateView) {
+            view.updateState(this, false);
+        }
+    }
+
+    public void updateStateForView() {
+        view.updateState(this, false);
     }
 
     public void setPreFaceDownCharacteristic(CardCharacteristicName preCharacteristic) {
@@ -358,14 +366,14 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     public boolean turnFaceDown() {
         if (!isDoubleFaced()) {
             preTFDCharacteristic = curCharacteristics;
-            return setState(CardCharacteristicName.FaceDown);
+            return setState(CardCharacteristicName.FaceDown, true);
         }
         return false;
     }
 
     public boolean turnFaceUp() {
         if (curCharacteristics == CardCharacteristicName.FaceDown) {
-            boolean result = setState(preTFDCharacteristic);
+            boolean result = setState(preTFDCharacteristic, true);
             if (result) {
                 getGame().getTriggerHandler().registerActiveTrigger(this, false);
                 // Run replacement effects
@@ -6191,13 +6199,13 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         // Split card support
         for (SpellAbility a : getState(CardCharacteristicName.LeftSplit).getSpellAbility()) {
             if (sa == a || sa.getDescription().equals(String.format("%s (without paying its mana cost)", a.getDescription()))) {
-                setState(CardCharacteristicName.LeftSplit);
+                setState(CardCharacteristicName.LeftSplit, true);
                 return;
             }
         }
         for (SpellAbility a : getState(CardCharacteristicName.RightSplit).getSpellAbility()) {
             if (sa == a || sa.getDescription().equals(String.format("%s (without paying its mana cost)", a.getDescription()))) {
-                setState(CardCharacteristicName.RightSplit);
+                setState(CardCharacteristicName.RightSplit, true);
                 return;
             }
         }

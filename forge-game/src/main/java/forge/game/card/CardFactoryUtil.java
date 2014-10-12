@@ -97,9 +97,9 @@ public class CardFactoryUtil {
 
             @Override
             public boolean canPlay() {
-            	sourceCard.setState(CardCharacteristicName.FaceDown);
+            	sourceCard.setState(CardCharacteristicName.FaceDown, false);
                 boolean success = super.canPlay();
-            	sourceCard.setState(CardCharacteristicName.Original);
+            	sourceCard.setState(CardCharacteristicName.Original, false);
             	return success;
             }
         };
@@ -3088,12 +3088,12 @@ public class CardFactoryUtil {
 
                 card.addSpellAbility(abilityMorphDown(card));
 
-                card.turnFaceDown();
+                card.setState(CardCharacteristicName.FaceDown, false);
 
                 card.addSpellAbility(abilityMorphUp(card, cost));
                 card.setSVars(sVars); // for Warbreak Trumpeter.
 
-                card.setState(CardCharacteristicName.Original);
+                card.setState(CardCharacteristicName.Original, false);
             }
         } // Morph
 

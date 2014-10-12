@@ -504,7 +504,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         movedCard.setUnearthed(true);
                     }
                     if (sa.hasParam("FaceDown")) {
-                        movedCard.setState(CardCharacteristicName.FaceDown);
+                        movedCard.setState(CardCharacteristicName.FaceDown, true);
                     }
                     if (sa.hasParam("Ninjutsu") || sa.hasParam("Attacking")) {
                         // What should they attack?
@@ -536,7 +536,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
                     if (sa.hasParam("ExileFaceDown")) {
-                        movedCard.setState(CardCharacteristicName.FaceDown);
+                        movedCard.setState(CardCharacteristicName.FaceDown, true);
                     }
                 }
             }
@@ -925,14 +925,14 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     movedCard.setTapped(true);
                 }
                 if (sa.hasParam("FaceDown")) {
-                    movedCard.setState(CardCharacteristicName.FaceDown);
+                    movedCard.setState(CardCharacteristicName.FaceDown, true);
                 }
                 movedCard.setTimestamp(ts);
             }
             else if (destination.equals(ZoneType.Exile)) {
                 movedCard = game.getAction().exile(c);
                 if (sa.hasParam("ExileFaceDown")) {
-                    movedCard.setState(CardCharacteristicName.FaceDown);
+                    movedCard.setState(CardCharacteristicName.FaceDown, true);
                 }
             }
             else {

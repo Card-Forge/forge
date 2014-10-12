@@ -91,7 +91,7 @@ public class CardFactory {
         for (final CardCharacteristicName state : in.getStates()) {
         	CardFactory.copyState(in, state, out, state);
         }
-        out.setState(in.getCurState());
+        out.setState(in.getCurState(), true);
 
         // I'm not sure if we really should be copying enchant/equip stuff over.
         out.setEquipping(in.getEquipping());
@@ -247,25 +247,25 @@ public class CardFactory {
 
         if (c.hasAlternateState()) {
             if (c.isFlipCard()) {
-                c.setState(CardCharacteristicName.Flipped);
+                c.setState(CardCharacteristicName.Flipped, false);
                 c.setImageKey(ImageKeys.getImageKey(cp, true));
             }
             else if (c.isDoubleFaced() && cp instanceof PaperCard) {
-                c.setState(CardCharacteristicName.Transformed);
+                c.setState(CardCharacteristicName.Transformed, false);
                 c.setImageKey(ImageKeys.getImageKey(cp, true));
             }
             else if (c.isSplitCard()) {
-                c.setState(CardCharacteristicName.LeftSplit);
+                c.setState(CardCharacteristicName.LeftSplit, false);
                 c.setImageKey(originalPicture);
                 c.setCurSetCode(cp.getEdition());
                 c.setRarity(cp.getRarity());
-                c.setState(CardCharacteristicName.RightSplit);
+                c.setState(CardCharacteristicName.RightSplit, false);
                 c.setImageKey(originalPicture);
             }
 
             c.setCurSetCode(cp.getEdition());
             c.setRarity(cp.getRarity());
-            c.setState(CardCharacteristicName.Original);
+            c.setState(CardCharacteristicName.Original, false);
         }
         
         return c;
@@ -287,15 +287,14 @@ public class CardFactory {
             if (card.isDoubleFaced() && state == CardCharacteristicName.FaceDown) {
                 continue; // Ignore FaceDown for DFC since they have none.
             }
-            card.setState(state);
+            card.setState(state, false);
             CardFactoryUtil.addAbilityFactoryAbilities(card);
             for (String stAb : card.getStaticAbilityStrings()) {
                 final StaticAbility s = card.addStaticAbility(stAb);
                 s.setIntrinsic(true);
             }
 
-            if (state == CardCharacteristicName.LeftSplit || state == CardCharacteristicName.RightSplit)
-            {
+            if (state == CardCharacteristicName.LeftSplit || state == CardCharacteristicName.RightSplit) {
                 CardCharacteristics original = card.getState(CardCharacteristicName.Original);
                 original.getSpellAbility().addAll(card.getCharacteristics().getSpellAbility());
                 original.getIntrinsicKeyword().addAll(card.getIntrinsicKeyword()); // Copy 'Fuse' to original side
@@ -303,7 +302,7 @@ public class CardFactory {
             }
         }
 
-        card.setState(CardCharacteristicName.Original);
+        card.setState(CardCharacteristicName.Original, false);
 
         // ******************************************************************
         // ************** Link to different CardFactories *******************
@@ -363,19 +362,19 @@ public class CardFactory {
         CardSplitType st = rules.getSplitType();
         if (st == CardSplitType.Split) {
             card.addAlternateState(CardCharacteristicName.LeftSplit, false);
-            card.setState(CardCharacteristicName.LeftSplit);
+            card.setState(CardCharacteristicName.LeftSplit, false);
         } 
 
         readCardFace(card, rules.getMainPart());
 
         if (st != CardSplitType.None) {
             card.addAlternateState(st.getChangedStateName(), false);
-            card.setState(st.getChangedStateName());
+            card.setState(st.getChangedStateName(), false);
             readCardFace(card, rules.getOtherPart());
         }
         
         if (card.isInAlternateState()) {
-            card.setState(CardCharacteristicName.Original);
+            card.setState(CardCharacteristicName.Original, false);
         }
 
         if (st == CardSplitType.Split) {
@@ -462,9 +461,9 @@ public class CardFactory {
     	final boolean toIsFaceDown = to.isFaceDown();
     	if (toIsFaceDown) {
     		// If to is face down, copy to its front side
-    		to.setState(CardCharacteristicName.Original);
+    		to.setState(CardCharacteristicName.Original, false);
     		copyCopiableCharacteristics(from, to);
-    		to.setState(CardCharacteristicName.FaceDown);
+    		to.setState(CardCharacteristicName.FaceDown, false);
     		return;
     	}
 
@@ -492,9 +491,9 @@ public class CardFactory {
     	final boolean toIsFaceDown = to.isFaceDown();
     	if (toIsFaceDown) {
     		// If to is face down, copy to its front side
-    		to.setState(CardCharacteristicName.Original);
+    		to.setState(CardCharacteristicName.Original, false);
     		copyCopiableAbilities(from, to);
-    		to.setState(CardCharacteristicName.FaceDown);
+    		to.setState(CardCharacteristicName.FaceDown, false);
     		return;
     	}
 
@@ -535,7 +534,7 @@ public class CardFactory {
             CardFactory.copyState(in, state, c, state);
         }
     
-        c.setState(in.getCurState());
+        c.setState(in.getCurState(), false);
         c.setRules(in.getRules());
     
         return c;
@@ -586,7 +585,7 @@ public class CardFactory {
         	to.addAlternateState(toState, false);
         }
 
-        to.setState(toState);
+        to.setState(toState, false);
         // handle triggers and replacement effect through Card class interface
         to.setTriggers(fromCharacteristics.getTriggers(), true);
         to.setReplacementEffects(fromCharacteristics.getReplacementEffects());
@@ -596,7 +595,7 @@ public class CardFactory {
         	to.addStaticAbility(staticAbility);
         }
         // reset state
-        to.setState(oldToState);
+        to.setState(oldToState, false);
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to) {

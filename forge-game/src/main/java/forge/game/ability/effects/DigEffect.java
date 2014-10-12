@@ -279,7 +279,7 @@ public class DigEffect extends SpellAbilityEffect {
                         }
 
                         if (sa.hasParam("ExileFaceDown")) {
-                            c.setState(CardCharacteristicName.FaceDown);
+                            c.setState(CardCharacteristicName.FaceDown, true);
                         }
                         if (sa.hasParam("Imprint")) {
                             host.addImprintedCard(c);

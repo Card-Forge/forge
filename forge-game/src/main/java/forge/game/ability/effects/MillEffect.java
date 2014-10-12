@@ -13,7 +13,6 @@ import forge.game.zone.ZoneType;
 import java.util.List;
 
 public class MillEffect extends SpellAbilityEffect {
-
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
@@ -42,7 +41,7 @@ public class MillEffect extends SpellAbilityEffect {
                 final CardCollectionView milled = p.mill(numCards, destination, bottom);
                 if (destination.equals(ZoneType.Exile) && sa.hasParam("ExileFaceDown")) {
                     for (final Card c : milled) {
-                        c.setState(CardCharacteristicName.FaceDown);
+                        c.setState(CardCharacteristicName.FaceDown, true);
                     }
                 }
                 if (sa.hasParam("RememberMilled")) {

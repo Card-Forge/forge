@@ -88,9 +88,9 @@ public class SetStateEffect extends SpellAbilityEffect {
             if (oldState == CardCharacteristicName.Original) {
                 // Reset cloned state if Vesuvan Shapeshifter
                 if (tgt.isCloned() && tgt.getState(CardCharacteristicName.Cloner).getName().equals("Vesuvan Shapeshifter")) {
-                    tgt.switchStates(CardCharacteristicName.Cloner, CardCharacteristicName.Original);
-                    tgt.setState(CardCharacteristicName.Original);
-                    tgt.clearStates(CardCharacteristicName.Cloner);
+                    tgt.switchStates(CardCharacteristicName.Cloner, CardCharacteristicName.Original, false);
+                    tgt.setState(CardCharacteristicName.Original, false);
+                    tgt.clearStates(CardCharacteristicName.Cloner, false);
                 }
                 return tgt.turnFaceDown();
             } else if (oldState == CardCharacteristicName.FaceDown) {

@@ -547,7 +547,7 @@ public class MatchUtil {
                     c.setSickness(true);
                 }
                 else if (info.equalsIgnoreCase("FaceDown:True")) {
-                    c.setState(CardCharacteristicName.FaceDown);
+                    c.setState(CardCharacteristicName.FaceDown, true);
                 }
             }
 
