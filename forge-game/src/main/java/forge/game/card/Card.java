@@ -3076,18 +3076,6 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
     /** {@inheritDoc} */
     @Override
-    public final boolean equals(final Object o) {
-        if (o instanceof Card) {
-            final Card c = (Card) o;
-            final int a = id;
-            final int b = c.id;
-            return (a == b);
-        }
-        return false;
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final int hashCode() {
         return id;
     }

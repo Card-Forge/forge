@@ -22,15 +22,13 @@ public abstract class GameObject {
      * @return true, if is valid
      */
     public boolean isValid(final String[] restrictions, final Player sourceController, final Card source) {
-
         for (final String restriction : restrictions) {
             if (this.isValid(restriction, sourceController, source)) {
                 return true;
             }
         }
         return false;
-
-    } // isValid
+    }
 
     /**
      * Checks if is valid.

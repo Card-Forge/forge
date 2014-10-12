@@ -34,6 +34,7 @@ public class CardCollection extends FCollection<Card> implements CardCollectionV
                 }
                 else if (newCol == null) { //if multiple views have cards, we need to create a new collection
                     newCol = new CardCollection(viewWithCards);
+                    newCol.addAll(v);
                     viewWithCards = newCol;
                 }
                 else {

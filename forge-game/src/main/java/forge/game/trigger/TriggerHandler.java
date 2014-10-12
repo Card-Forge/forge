@@ -70,41 +70,41 @@ public class TriggerHandler {
     }
 
     public final boolean hasDelayedTriggers() {
-        return !this.delayedTriggers.isEmpty();
+        return !delayedTriggers.isEmpty();
     }
 
     public final void registerDelayedTrigger(final Trigger trig) {
-        this.delayedTriggers.add(trig);
+        delayedTriggers.add(trig);
     }
 
     public final void clearDelayedTrigger() {
-        this.delayedTriggers.clear();
+        delayedTriggers.clear();
     }
 
     public final void clearDelayedTrigger(Card card) {
-        ArrayList<Trigger> deltrigs = new ArrayList<Trigger>(this.delayedTriggers);
+        ArrayList<Trigger> deltrigs = new ArrayList<Trigger>(delayedTriggers);
 
         for (Trigger trigger : deltrigs) {
             if (trigger.getHostCard().equals(card)) {
-                this.delayedTriggers.remove(trigger);
+                delayedTriggers.remove(trigger);
             }
         }
     }
 
     public final void registerPlayerDefinedDelayedTrigger(final Player player, final Trigger trig) {
-        this.playerDefinedDelayedTriggers.put(player, trig);
+        playerDefinedDelayedTriggers.put(player, trig);
     }
 
     public final void handlePlayerDefinedDelTriggers(final Player player) {
-        this.delayedTriggers.addAll(this.playerDefinedDelayedTriggers.removeAll(player));
+        delayedTriggers.addAll(playerDefinedDelayedTriggers.removeAll(player));
     }
 
     public final void suppressMode(final TriggerType mode) {
-        this.suppressedModes.add(mode);
+        suppressedModes.add(mode);
     }
 
     public final void clearSuppression(final TriggerType mode) {
-        this.suppressedModes.remove(mode);
+        suppressedModes.remove(mode);
     }
 
     public static Trigger parseTrigger(final String trigParse, final Card host, final boolean intrinsic) {
@@ -166,7 +166,7 @@ public class TriggerHandler {
     public final void resetActiveTriggers() {
         activeTriggers.clear();
         CardCollection allCards = new CardCollection();
-        for(Player p : game.getPlayers()) {
+        for (Player p : game.getPlayers()) {
             allCards.addAll(p.getAllCards());
         }
 
@@ -191,13 +191,13 @@ public class TriggerHandler {
             }
         }
 
-        for(Trigger removed : toBeRemoved) {
+        for (Trigger removed : toBeRemoved) {
             activeTriggers.remove(removed);
         }
     }
 
     public final void registerActiveTrigger(Card c, boolean onlyExtrinsic) {
-        for(final Trigger t: c.getTriggers()) {
+        for (final Trigger t: c.getTriggers()) {
             if (!onlyExtrinsic || c.isCloned() || !t.isIntrinsic() || t instanceof TriggerAlways) {
                 if (isTriggerActive(t)) {
                     activeTriggers.add(t);
@@ -207,7 +207,7 @@ public class TriggerHandler {
     }
 
     public final void runTrigger(final TriggerType mode, final Map<String, Object> runParams, boolean holdTrigger) {
-        if (this.suppressedModes.contains(mode)) {
+        if (suppressedModes.contains(mode)) {
             return;
         }
 
@@ -226,9 +226,9 @@ public class TriggerHandler {
         boolean checkStatics = false;
         // only cards in play can run state triggers
 
-        for(final Trigger t: this.activeTriggers) {
+        for (final Trigger t: activeTriggers) {
             if (canRunTrigger(t, TriggerType.Always, runParams)) {
-                this.runSingleTrigger(t, runParams);
+                runSingleTrigger(t, runParams);
                 checkStatics = true;
             }
         }
@@ -261,14 +261,14 @@ public class TriggerHandler {
         }
 
         // Copy triggers here, so things can be modified just in case
-        final ArrayList<Trigger> delayedTriggersWorkingCopy = new ArrayList<Trigger>(this.delayedTriggers);
+        final ArrayList<Trigger> delayedTriggersWorkingCopy = new ArrayList<Trigger>(delayedTriggers);
 
         boolean checkStatics = false;
 
         // Static triggers
-        for (final Trigger t : this.activeTriggers) {
+        for (final Trigger t : activeTriggers) {
             if (t.isStatic() && canRunTrigger(t, mode, runParams)) {
-                this.runSingleTrigger(t, runParams);
+                runSingleTrigger(t, runParams);
                 checkStatics = true;
             }
         }
@@ -297,7 +297,7 @@ public class TriggerHandler {
         boolean checkStatics = false;
 
         Card card = null;
-        for (final Trigger t : this.activeTriggers) {
+        for (final Trigger t : activeTriggers) {
             if (!t.isStatic() && t.getHostCard().getController().equals(player)
                     && canRunTrigger(t, mode, runParams)) {
 
@@ -311,16 +311,16 @@ public class TriggerHandler {
                     }
                 }
 
-                this.runSingleTrigger(t, runParams);
+                runSingleTrigger(t, runParams);
                 checkStatics = true;
             }
         }
 
         for (Trigger deltrig : delayedTriggersWorkingCopy) {
             if (deltrig.getHostCard().getController().equals(player)) {
-                if (this.isTriggerActive(deltrig) && this.canRunTrigger(deltrig, mode, runParams)) {
-                    this.runSingleTrigger(deltrig, runParams);
-                    this.delayedTriggers.remove(deltrig);
+                if (isTriggerActive(deltrig) && canRunTrigger(deltrig, mode, runParams)) {
+                    runSingleTrigger(deltrig, runParams);
+                    delayedTriggers.remove(deltrig);
                 }
             }
         }

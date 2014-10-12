@@ -57,7 +57,8 @@ public class PlayerZoneBattlefield extends PlayerZone {
                 // it enters the battlefield this way, and should not fire
                 // triggers
                 c.setTapped(true);
-            } else {
+            }
+            else {
                 // ETBTapped static abilities
                 for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
                     for (final StaticAbility stAb : ca.getStaticAbilities()) {
@@ -74,10 +75,8 @@ public class PlayerZoneBattlefield extends PlayerZone {
         if (trigger) {
             c.setSickness(true); // summoning sickness
             c.executeTrigger(ZCTrigger.ENTERFIELD);
-            
         }
-
-    } // end add()
+    }
 
     /** {@inheritDoc} */
     @Override
