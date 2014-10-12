@@ -1234,7 +1234,7 @@ public class ComputerUtil {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     // give Shroud to targeted creatures
-                    if (saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll && tgt == null || !grantShroud) {
+                    if ((saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll && tgt == null) && !grantShroud) {
                         continue;
                     }
                     if (saviourApi == ApiType.Protection) {
@@ -1254,14 +1254,15 @@ public class ComputerUtil {
             }
         }
         //GainControl
-        else if (threatApi == ApiType.GainControl
+        else if ((threatApi == ApiType.GainControl 
+        			|| (threatApi == ApiType.Attach && topStack.hasParam("AILogic") && topStack.getParam("AILogic").equals("GainControl") ))
                 && (saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll 
                 || saviourApi == ApiType.Protection || saviourApi == null)) {
             for (final Object o : objects) {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     // give Shroud to targeted creatures
-                    if (saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll && tgt == null || !grantShroud) {
+                    if ((saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll && tgt == null) && !grantShroud) {
                         continue;
                     }
                     if (saviourApi == ApiType.Protection) {
