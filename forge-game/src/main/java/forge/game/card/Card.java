@@ -3105,7 +3105,11 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     /** {@inheritDoc} */
     @Override
     public final String toString() {
-        return getName() + " (" + id + ")";
+        String name = getName();
+        if (StringUtils.isEmpty(name) && paperCard != null) {
+            name = paperCard.getName(); //make it possible to see likely card name before it's set
+        }
+        return name + " (" + id + ")";
     }
 
     public final boolean isUnearthed() {
