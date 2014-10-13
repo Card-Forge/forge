@@ -24,6 +24,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
@@ -90,6 +91,7 @@ import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PhaseLabel;
 import forge.util.ITriggerEvent;
 import forge.view.arcane.CardPanel;
+import forge.view.arcane.HandArea;
 import forge.view.arcane.PlayArea;
 
 /**
@@ -315,9 +317,21 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
     }
 
     public void updateSingleCard(final CardView c) {
-        if (ZoneType.Battlefield.equals(c.getZone())) {
+        switch (c.getZone()) {
+        case Battlefield:
             final PlayArea pa = getFieldViewFor(c.getController()).getTabletop();
             pa.updateCard(c, false);
+            break;
+        case Hand:
+            final HandArea ha = getHandFor(c.getController()).getHandArea();
+            ha.getCardPanel(c.getId()).repaintOverlays();
+            break;
+        case Command:
+            final PlayArea ca = getCommandFor(c.getController()).getTabletop();
+            ca.updateCard(c, false);
+            break;
+        default:
+            break;
         }
     }
 
