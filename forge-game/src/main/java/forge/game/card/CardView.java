@@ -15,6 +15,7 @@ import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.game.Direction;
 import forge.game.GameEntityView;
+import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
@@ -125,14 +126,16 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.Attacking);
     }
     void updateAttacking(Card c) {
-        set(TrackableProperty.Attacking, c.getGame().getCombat().isAttacking(c));
+        Combat combat = c.getGame().getCombat();
+        set(TrackableProperty.Attacking, combat == null ? false : combat.isAttacking(c));
     }
 
     public boolean isBlocking() {
         return get(TrackableProperty.Blocking);
     }
     void updateBlocking(Card c) {
-        set(TrackableProperty.Blocking, c.getGame().getCombat().isBlocking(c));
+        Combat combat = c.getGame().getCombat();
+        set(TrackableProperty.Blocking, combat == null ? false : combat.isBlocking(c));
     }
 
     public boolean isPhasedOut() {
