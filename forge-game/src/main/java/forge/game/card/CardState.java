@@ -365,7 +365,7 @@ public class CardState {
     }
 
     public final void copyFrom(final Card c, final CardState source) {
-        // Makes a "deeper" copy of a CardCharacteristics object
+        // Makes a "deeper" copy of a CardState object
         setName(source.getName());
         setType(source.type);
         setManaCost(source.getManaCost());

@@ -224,12 +224,12 @@ public final class CardUtil {
         newCopy.setType(new CardType(in.getType()));
         newCopy.setToken(in.isToken());
         newCopy.setTriggers(in.getTriggers(), false);
-        for (SpellAbility sa : in.getManaAbilities()) {
+        for (SpellAbility sa : in.getSpellAbilities()) {
             newCopy.addSpellAbility(sa);
             sa.setHostCard(in);
         }
-        
-        // lock in the current P/T without boni from counters
+
+        // lock in the current P/T without bonus from counters
         newCopy.setBaseAttack(in.getCurrentPower() + in.getTempAttackBoost() + in.getSemiPermanentAttackBoost());
         newCopy.setBaseDefense(in.getCurrentToughness() + in.getTempDefenseBoost() + in.getSemiPermanentDefenseBoost());
 
