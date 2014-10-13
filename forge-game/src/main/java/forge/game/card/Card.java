@@ -6271,7 +6271,6 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
     public List<SpellAbility> getAllPossibleAbilities(Player player, boolean removeUnplayable) {
         // this can only be called by the Human
-
         final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
         for (SpellAbility sa : getSpellAbilities()) {
             //add alternative costs as additional spell abilities

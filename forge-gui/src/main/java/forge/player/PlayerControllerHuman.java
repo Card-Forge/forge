@@ -1744,7 +1744,7 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         public void addCardToBattlefield() {
-            final Player p = SGuiChoose.oneOrNone("Put card in play for which player?", (FCollection<Player>)game.getPlayers());
+            final Player p = Player.get(SGuiChoose.oneOrNone("Put card in play for which player?", PlayerView.getCollection(game.getPlayers())));
             if (p == null) {
                 return;
             }
