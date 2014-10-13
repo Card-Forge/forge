@@ -1886,10 +1886,9 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     public final FCollectionView<SpellAbility> getSpells() {
         final FCollection<SpellAbility> res = new FCollection<SpellAbility>();
         for (final SpellAbility sa : currentState.getNonManaAbilities()) {
-            if (!sa.isSpell()) {
-                continue;
+            if (sa.isSpell()) {
+                res.add(sa);
             }
-            res.add(sa);
         }
         return res;
     }
@@ -6226,7 +6225,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
 
     public void setSplitStateToPlayAbility(SpellAbility sa) {
-        if (!isSplitCard()) return; // just in case
+        if (!isSplitCard()) { return; } // just in case
         // Split card support
         for (SpellAbility a : getState(CardStateName.LeftSplit).getNonManaAbilities()) {
             if (sa == a || sa.getDescription().equals(String.format("%s (without paying its mana cost)", a.getDescription()))) {
@@ -6240,9 +6239,9 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 return;
             }
         }
-        if (sa.getHostCard().hasKeyword("Fuse")) // it's ok that such card won't change its side
+        if (sa.getHostCard().hasKeyword("Fuse")) { // it's ok that such card won't change its side
             return;
-
+        }
         throw new RuntimeException("Not found which part to choose for ability " + sa + " from card " + this);
     }
 

@@ -535,7 +535,7 @@ public class GameAction {
         game.getTriggerHandler().cleanUpTemporaryTriggers();
         game.getReplacementHandler().cleanUpTemporaryReplacements();
 
-        for(Player p : game.getPlayers()) {
+        for (Player p : game.getPlayers()) {
             p.getManaPool().restoreColorReplacements();
         }
 

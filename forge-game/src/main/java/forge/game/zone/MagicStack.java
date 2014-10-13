@@ -504,7 +504,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     private final void finishResolving(final SpellAbility sa, final boolean fizzle) {
-    
         // remove SA and card from the stack
         removeCardFromStack(sa, fizzle);
         // SpellAbility is removed from the stack here
@@ -544,7 +543,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     private final void removeCardFromStack(final SpellAbility sa, final boolean fizzle) {
         Card source = sa.getHostCard();
 
-        
         if (sa.getHostCard().isCopiedSpell() || sa.isAbility()) {
             // do nothing
         }

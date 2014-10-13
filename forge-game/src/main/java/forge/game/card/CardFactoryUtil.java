@@ -19,9 +19,11 @@ package forge.game.card;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 
 import forge.GameCommand;
 import forge.card.CardStateName;
+import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -1931,77 +1933,14 @@ public class CardFactoryUtil {
         return filteredkw;
     }
 
-    /**
-     * <p>
-     * getCardTypesFromList.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     * @return a int.
-     */
     public static int getCardTypesFromList(final CardCollectionView list) {
-        int count = 0;
+        EnumSet<CardType.CoreType> types = EnumSet.noneOf(CardType.CoreType.class);
         for (Card c1 : list) {
-            if (c1.isCreature()) {
-                count++;
-                break;
-            }
+            Iterables.addAll(types, c1.getType().getCoreTypes());
         }
-        for (Card c1 : list) {
-            if (c1.isSorcery()) {
-                count++;
-                break;
-            }
-        }
-        for (Card c1 : list) {
-            if (c1.isInstant()) {
-                count++;
-                break;
-            }
-        }
-        for (Card c1 : list) {
-            if (c1.isArtifact()) {
-                count++;
-                break;
-            }
-        }
-        for (Card c1 : list) {
-            if (c1.isEnchantment()) {
-                count++;
-                break;
-            }
-        }
-        for (Card c1 : list) {
-            if (c1.isLand()) {
-                count++;
-                break;
-            }
-        }
-        for (Card c1 : list) {
-            if (c1.isPlaneswalker()) {
-                count++;
-                break;
-            }
-        }
-        for (Card c1 : list) {
-            if (c1.isTribal()) {
-                count++;
-                break;
-            }
-        }
-        return count;
+        return types.size();
     }
 
-    /**
-     * <p>
-     * getBushidoEffects.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a {@link java.util.ArrayList} object.
-     */
     public static ArrayList<SpellAbility> getBushidoEffects(final Card c) {
         final ArrayList<SpellAbility> list = new ArrayList<SpellAbility>();
         for (final String kw : c.getKeywords()) {
