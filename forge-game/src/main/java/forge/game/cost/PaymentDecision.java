@@ -2,7 +2,6 @@ package forge.game.cost;
 
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
 import forge.game.card.CounterType;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
@@ -26,7 +25,7 @@ public class PaymentDecision {
         c = cnt;
     }
 
-    private PaymentDecision(CardCollectionView chosen, List<Mana> manaProduced, List<Player> players,
+    private PaymentDecision(Iterable<Card> chosen, List<Mana> manaProduced, List<Player> players,
                 List<SpellAbility> sp) {
         if (chosen != null) {
             cards.addAll(chosen);
@@ -61,11 +60,11 @@ public class PaymentDecision {
         return new PaymentDecision(c);
     }
 
-    public static PaymentDecision card(CardCollectionView chosen) {
+    public static PaymentDecision card(Iterable<Card> chosen) {
         return new PaymentDecision(chosen, null, null, null);
     }
     
-    public static PaymentDecision card(CardCollectionView chosen, int n) {
+    public static PaymentDecision card(Iterable<Card> chosen, int n) {
         PaymentDecision res = new PaymentDecision(chosen, null, null, null);
         res.c = n;
         return res;

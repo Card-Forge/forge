@@ -169,8 +169,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (inp.hasCancelled() || inp.getSelected().size() != c) {
             return null;
         }
-
-        return PaymentDecision.card((CardCollection)inp.getSelected());
+        return PaymentDecision.card(inp.getSelected());
     }
 
     @Override
@@ -263,7 +262,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             inp.setMessage("Exile %d card(s) from your" + cost.from);
             inp.setCancelAllowed(true);
             inp.showAndWait();
-            return inp.hasCancelled() ? null : PaymentDecision.card(new CardCollection(inp.getSelected()));
+            return inp.hasCancelled() ? null : PaymentDecision.card(inp.getSelected());
         }
 
         if (cost.from == ZoneType.Library) { return exileFromTop(cost, ability, player, c); }
@@ -402,7 +401,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (typeList.size() < nNeeded) { return null; }
 
         Collections.reverse(typeList);
-        return PaymentDecision.card(new CardCollection(Iterables.limit(typeList, nNeeded)));
+        return PaymentDecision.card(Iterables.limit(typeList, nNeeded));
     }    
 
     @Override
@@ -457,7 +456,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (inp.hasCancelled()) {
             return null;
         }
-        return PaymentDecision.card(new CardCollection(inp.getSelected()));
+        return PaymentDecision.card(inp.getSelected());
     }
 
     @Override
@@ -573,7 +572,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             inp.setMessage("Put %d card(s) from your " + cost.from);
             inp.setCancelAllowed(true);
             inp.showAndWait();
-            return inp.hasCancelled() ? null : PaymentDecision.card(new CardCollection(inp.getSelected()));
+            return inp.hasCancelled() ? null : PaymentDecision.card(inp.getSelected());
         }
         
         if (cost.sameZone){
@@ -657,7 +656,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (inp.hasCancelled())
             return null;
 
-        return PaymentDecision.card(new CardCollection(inp.getSelected()));
+        return PaymentDecision.card(inp.getSelected());
     }
 
     @Override
@@ -691,7 +690,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             if (inp.hasCancelled()) {
                 return null;
             }
-            return PaymentDecision.card(new CardCollection(inp.getSelected()));
+            return PaymentDecision.card(inp.getSelected());
        }
        return null;
     }
@@ -761,10 +760,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
         inp.setCancelAllowed(true);
         inp.showAndWait();
-        if (inp.hasCancelled())
+        if (inp.hasCancelled()) {
             return null;
-        
-        return PaymentDecision.card(new CardCollection(inp.getSelected()));
+        }
+        return PaymentDecision.card(inp.getSelected());
     }
 
     @Override
@@ -936,7 +935,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 int oldVal = crd.getCounters().get(cost.counter).intValue();
                 crd.getCounters().put(cost.counter, Integer.valueOf(oldVal - removed + 1));
             }
-            return PaymentDecision.card(new CardCollection(inp.getSelected()), 1);
+            return PaymentDecision.card(inp.getSelected(), 1);
         } 
 
         // Rift Elemental only - always removes 1 counter, so there will be no code for N counters.
@@ -997,7 +996,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (inp.hasCancelled())
             return null;
 
-        return PaymentDecision.card(new CardCollection(inp.getSelected()));
+        return PaymentDecision.card(inp.getSelected());
 
     }
 
@@ -1086,9 +1085,8 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
             if (inp.hasCancelled() || CardLists.getTotalPower(inp.getSelected()) < i) {
                 return null;
-            } else {
-                return PaymentDecision.card(new CardCollection(inp.getSelected()));
             }
+            return PaymentDecision.card(inp.getSelected());
         }
 
         InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, typeList);
@@ -1097,7 +1095,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (inp.hasCancelled()) {
             return null;
         }
-        return PaymentDecision.card(new CardCollection(inp.getSelected()));
+        return PaymentDecision.card(inp.getSelected());
     }
 
     @Override
@@ -1122,9 +1120,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, typeList);
         inp.setMessage("Select a " + cost.getDescriptiveType() + " to untap (%d left)");
         inp.showAndWait();
-        if (inp.hasCancelled() || inp.getSelected().size() != c)
+        if (inp.hasCancelled() || inp.getSelected().size() != c) {
             return null;
-        return PaymentDecision.card(new CardCollection(inp.getSelected()));
+        }
+        return PaymentDecision.card(inp.getSelected());
     }
 
     @Override
