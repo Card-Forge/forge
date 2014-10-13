@@ -18,6 +18,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableProperty;
+import forge.util.FCollectionView;
 
 
 public class PlayerView extends GameEntityView {
@@ -49,15 +50,15 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.AvatarIndex, p.getLobbyPlayer().getAvatarIndex());
     }
 
-    public Iterable<PlayerView> getOpponents() {
+    public FCollectionView<PlayerView> getOpponents() {
         return get(TrackableProperty.Opponents);
     }
-    private TrackableCollection<PlayerView> getOpponentCollection() {
-        return get(TrackableProperty.Opponents);
+    void updateOpponents(Player p) {
+        set(TrackableProperty.Opponents, PlayerView.getCollection(p.getOpponents()));
     }
 
     public boolean isOpponentOf(final PlayerView other) {
-        return getOpponentCollection().contains(other);
+        return getOpponents().contains(other);
     }
 
     @Override

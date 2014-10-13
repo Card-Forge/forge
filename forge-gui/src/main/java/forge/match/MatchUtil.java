@@ -190,6 +190,11 @@ public class MatchUtil {
             game.subscribeToEvents(playbackControl);
         }
 
+        //ensure opponents set properly
+        for (Player p : sortedPlayers) {
+            p.updateOpponentsForView();
+        }
+
         // It's important to run match in a different thread to allow GUI inputs to be invoked from inside game. 
         // Game is set on pause while gui player takes decisions
         game.getAction().invoke(new Runnable() {
