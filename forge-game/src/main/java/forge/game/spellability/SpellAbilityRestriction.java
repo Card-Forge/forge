@@ -292,7 +292,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
     }
     
     public final boolean checkOtherRestrictions(final Card c, final SpellAbility sa, final Player activator) {
-
         final Game game = activator.getGame();
 
         if (this.getCardsInHand() != -1) {
@@ -398,7 +397,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             if (!Expressions.compare(svarValue, this.getsVarOperator(), operandValue)) {
                 return false;
             }
-
         }
 
         if (this.getsVarToCheck() != null) {
@@ -408,7 +406,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             if (!Expressions.compare(svarValue, this.getsVarOperator(), operandValue)) {
                 return false;
             }
-
         }
     	return true;
     }

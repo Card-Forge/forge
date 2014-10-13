@@ -199,6 +199,10 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (subtypes.contains(t)) {
             return true;
         }
+        char firstChar = t.charAt(0);
+        if (Character.isLowerCase(firstChar)) {
+            t = Character.toUpperCase(firstChar) + t.substring(1); //ensure string is proper case for enum types
+        }
         CoreType type = stringToCoreType.get(t);
         if (type != null) {
             return hasType(type);

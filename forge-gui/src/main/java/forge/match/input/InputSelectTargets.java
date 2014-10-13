@@ -104,9 +104,8 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         if (!tgt.isUniqueTargets() && targetDepth.containsKey(card)) {
             return false;
         }
-        
-        // leave this in temporarily, there some seriously wrong things going on here
-        // Can be targeted doesn't check if the target is a valid type, only if a card is generally "targetable"
+
+        //If the card is not a valid target
         if (!card.canBeTargetedBy(sa)) {
             showMessage(sa.getHostCard() + " - Cannot target this card (Shroud? Protection? Restrictions).");
             return false;
