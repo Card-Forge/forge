@@ -92,12 +92,16 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Card extends GameEntity implements Comparable<Card>, IIdentifiable {
     private static HashMap<Integer, Card> cardCache = new HashMap<Integer, Card>();
     public static Card get(CardView cardView) {
+        if (cardView == null) { return null; }
         return cardCache.get(cardView.getId());
     }
     public static CardCollection getList(Iterable<CardView> cardViews) {
         CardCollection list = new CardCollection();
         for (CardView cv : cardViews) {
-            list.add(get(cv));
+            Card c = get(cv);
+            if (c != null) {
+                list.add(c);
+            }
         }
         return list;
     }

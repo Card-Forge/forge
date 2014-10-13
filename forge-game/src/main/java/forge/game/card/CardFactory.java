@@ -399,17 +399,17 @@ public class CardFactory {
     }
 
     private static void readCardFace(Card c, ICardFace face) {
-        for(String a : face.getAbilities())                 c.addIntrinsicAbility(a);
-        for(String k : face.getKeywords())                  c.addIntrinsicKeyword(k);
-        for(String r : face.getReplacements())              c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true));
-        for(String s : face.getStaticAbilities())           c.addStaticAbilityString(s);
-        for(String t : face.getTriggers())                  c.addTrigger(TriggerHandler.parseTrigger(t, c, true));
-        for(Entry<String, String> v : face.getVariables())  c.setSVar(v.getKey(), v.getValue());
+        for (String a : face.getAbilities())                 c.addIntrinsicAbility(a);
+        for (String k : face.getKeywords())                  c.addIntrinsicKeyword(k);
+        for (String r : face.getReplacements())              c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true));
+        for (String s : face.getStaticAbilities())           c.addStaticAbilityString(s);
+        for (String t : face.getTriggers())                  c.addTrigger(TriggerHandler.parseTrigger(t, c, true));
+        for (Entry<String, String> v : face.getVariables())  c.setSVar(v.getKey(), v.getValue());
 
         c.setName(face.getName());
         c.setManaCost(face.getManaCost());
         c.setText(face.getNonAbilityText());
-        if( face.getInitialLoyalty() > 0 ) c.setBaseLoyalty(face.getInitialLoyalty());
+        if (face.getInitialLoyalty() > 0) c.setBaseLoyalty(face.getInitialLoyalty());
 
         c.getCurrentState().setOracleText(face.getOracleText().replace("\\n", "\r\n"));
 
@@ -422,11 +422,11 @@ public class CardFactory {
         ccc.add(col1);
         c.setColor(ccc);
 
-        if ( face.getIntPower() >= 0 ) {
+        if (face.getIntPower() >= 0) {
             c.setBasePower(face.getIntPower());
             c.setBasePowerString(face.getPower());
         }
-        if ( face.getIntToughness() >= 0 ) {
+        if (face.getIntToughness() >= 0) {
             c.setBaseToughness(face.getIntToughness());
             c.setBaseToughnessString(face.getToughness());
         }

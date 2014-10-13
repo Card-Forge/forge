@@ -83,12 +83,16 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private static HashMap<Integer, Player> playerCache = new HashMap<Integer, Player>();
     public static Player get(PlayerView playerView) {
+        if (playerView == null) { return null; }
         return playerCache.get(playerView.getId());
     }
     public static List<Player> getList(Iterable<PlayerView> playerViews) {
         List<Player> list = new ArrayList<Player>();
         for (PlayerView pv : playerViews) {
-            list.add(get(pv));
+            Player p = get(pv);
+            if (p != null) {
+                list.add(p);
+            }
         }
         return list;
     }
