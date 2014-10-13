@@ -232,8 +232,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                             || panel.getCard().isCopiedSpell()
                             || !panel.getCard().getCounters().equals(firstPanel.getCard().getCounters())
                             || (panel.getCard().isSick() != firstPanel.getCard().isSick())
-                            || (panel.getCard().getNetAttack() != firstPanel.getCard().getNetAttack())
-                            || (panel.getCard().getNetDefense() != firstPanel.getCard().getNetDefense())
+                            || (panel.getCard().getNetPower() != firstPanel.getCard().getNetPower())
+                            || (panel.getCard().getNetToughness() != firstPanel.getCard().getNetToughness())
                             || (stack.size() == creatureStackMax)) {
                         // If this creature has attachments or the stack is full,
                         // put it to the right.

@@ -48,8 +48,8 @@ public class SpellPermanent extends Spell {
 
         if (sourceCard.isCreature()) {
             final StringBuilder sb = new StringBuilder();
-            sb.append(sourceCard.getName()).append(" - Creature ").append(sourceCard.getNetAttack());
-            sb.append(" / ").append(sourceCard.getNetDefense());
+            sb.append(sourceCard.getName()).append(" - Creature ").append(sourceCard.getNetPower());
+            sb.append(" / ").append(sourceCard.getNetToughness());
             this.setStackDescription(sb.toString());
         } else {
             this.setStackDescription(sourceCard.getName());

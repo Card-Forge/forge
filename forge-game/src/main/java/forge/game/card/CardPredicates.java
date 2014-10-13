@@ -355,14 +355,14 @@ public final class CardPredicates {
         public static final Function<Card, Integer> fnGetDefense = new Function<Card, Integer>() {
             @Override
             public Integer apply(Card a) {
-                return a.getNetDefense();
+                return a.getNetToughness();
             }
         };
 
-        public static final Function<Card, Integer> fnGetNetAttack = new Function<Card, Integer>() {
+        public static final Function<Card, Integer> fnGetNetPower = new Function<Card, Integer>() {
             @Override
             public Integer apply(Card a) {
-                return a.getNetAttack();
+                return a.getNetPower();
             }
         };
 

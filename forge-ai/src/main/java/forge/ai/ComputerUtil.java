@@ -487,8 +487,8 @@ public class ComputerUtil {
             remaining = CardLists.filter(remaining, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    if ((c.getCMC() <= 1 && c.getNetAttack() < 3)
-                            || c.getNetAttack() + c.getNetDefense() <= 3) {
+                    if ((c.getCMC() <= 1 && c.getNetPower() < 3)
+                            || c.getNetPower() + c.getNetToughness() <= 3) {
                         return true;
                     }
                     return false;
@@ -693,7 +693,7 @@ public class ComputerUtil {
                     return true;
                 }
                 if (buffedcard.hasKeyword("Evolve")) {
-                    if (buffedcard.getNetAttack() < card.getNetAttack() || buffedcard.getNetDefense() < card.getNetDefense()) {
+                    if (buffedcard.getNetPower() < card.getNetPower() || buffedcard.getNetToughness() < card.getNetToughness()) {
                         return true;
                     }
                 }
@@ -1155,13 +1155,13 @@ public class ComputerUtil {
             for (final Object o : objects) {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
-                    final boolean canRemove = (c.getNetDefense() <= dmg)
+                    final boolean canRemove = (c.getNetToughness() <= dmg)
                             || (!c.hasKeyword("Indestructible") && c.getShieldCount() == 0 && (dmg >= ComputerUtilCombat.getDamageToKill(c)));
                     if (!canRemove) {
                         continue;
                     }
                     if (saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) {
-                        final boolean cantSave = c.getNetDefense() + defense <= dmg
+                        final boolean cantSave = c.getNetToughness() + defense <= dmg
                                 || (!c.hasKeyword("Indestructible") && c.getShieldCount() == 0 && !grantIndestructible 
                                         && (dmg >= defense + ComputerUtilCombat.getDamageToKill(c)));
                         if (cantSave && (tgt == null || !grantShroud)) {

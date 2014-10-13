@@ -230,8 +230,8 @@ public final class CardUtil {
         }
 
         // lock in the current P/T without bonus from counters
-        newCopy.setBaseAttack(in.getCurrentPower() + in.getTempAttackBoost() + in.getSemiPermanentAttackBoost());
-        newCopy.setBaseDefense(in.getCurrentToughness() + in.getTempDefenseBoost() + in.getSemiPermanentDefenseBoost());
+        newCopy.setBasePower(in.getCurrentPower() + in.getTempPowerBoost() + in.getSemiPermanentPowerBoost());
+        newCopy.setBaseToughness(in.getCurrentToughness() + in.getTempToughnessBoost() + in.getSemiPermanentToughnessBoost());
 
         newCopy.setCounters(in.getCounters());
         newCopy.setExtrinsicKeyword(in.getExtrinsicKeyword());
@@ -286,8 +286,8 @@ public final class CardUtil {
         type.add("Creature");
 
         final CardState ret = new CardState(c.getView().createAlternateState(CardStateName.FaceDown));
-        ret.setBaseAttack(2);
-        ret.setBaseDefense(2);
+        ret.setBasePower(2);
+        ret.setBaseToughness(2);
 
         ret.setName("");
         ret.setType(type);

@@ -380,7 +380,7 @@ public class ComputerUtilCard {
             value = 80; // tokens should be worth less than actual cards
         }
         int power = c.getNetCombatDamage();
-        final int toughness = c.getNetDefense();
+        final int toughness = c.getNetToughness();
         for (String keyword : c.getKeywords()) {
             if (keyword.equals("Prevent all combat damage that would be dealt by CARDNAME.")
                     || keyword.equals("Prevent all damage that would be dealt by CARDNAME.")
@@ -948,7 +948,7 @@ public class ComputerUtilCard {
             if (sa.getDescription().contains("would die, exile it instead")) {
                 destination = ZoneType.Exile;
             }
-            valueBurn = 1.0f * c.getNetDefense() / dmg;
+            valueBurn = 1.0f * c.getNetToughness() / dmg;
             valueBurn *= valueBurn;
             if (sa.getTargetRestrictions().canTgtPlayer()) {
                 valueBurn /= 2;     //preserve option to burn to the face
@@ -1079,7 +1079,7 @@ public class ComputerUtilCard {
                     } else {
                         att = AbilityUtils.calculateAmount(c, addP, stAb);
                     }
-                    vCard.addTempAttackBoost(att);
+                    vCard.addTempPowerBoost(att);
                 }
                 if (params.containsKey("AddToughness")) {
                     String addT = params.get("AddToughness");
@@ -1089,7 +1089,7 @@ public class ComputerUtilCard {
                     } else {
                         def = AbilityUtils.calculateAmount(c, addT, stAb);
                     }
-                    vCard.addTempDefenseBoost(def);
+                    vCard.addTempToughnessBoost(def);
                 }
             }
         }

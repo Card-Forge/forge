@@ -381,7 +381,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 return false;
             }
         } else if (keyword.equals("Persist")) {
-            if (card.getBaseDefense() <= 1 || card.hasKeyword("Undying")) {
+            if (card.getBaseToughness() <= 1 || card.hasKeyword("Undying")) {
                 return false;
             }
         } else if (keyword.equals("Islandwalk")) {
@@ -436,7 +436,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             return false;
         }
 
-        if ((c.getNetDefense() + defense) <= 0) {
+        if ((c.getNetToughness() + defense) <= 0) {
             return false;
         }
 
@@ -487,7 +487,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 if (CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(pumped)).isEmpty()) {
                     threat *= 2;
                 }
-                if (c.getNetAttack() == 0 && c == sa.getHostCard() && attack > 0 ) {
+                if (c.getNetPower() == 0 && c == sa.getHostCard() && attack > 0 ) {
                     threat *= 4;    //over-value self +attack for 0 power creatures which may be pumped further after attacking 
                 }
                 chance += threat;
@@ -669,7 +669,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    if (c.getNetDefense() <= -defense) {
+                    if (c.getNetToughness() <= -defense) {
                         return true; // can kill indestructible creatures
                     }
                     return ((ComputerUtilCombat.getDamageToKill(c) <= -defense) && !c.hasKeyword("Indestructible"));
@@ -695,11 +695,11 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                             if (combat == null || !combat.isAttacking(c)) {
                                 return false;
                             }
-                            if (c.getNetAttack() > 0 && ai.getLife() < 5) {
+                            if (c.getNetPower() > 0 && ai.getLife() < 5) {
                                 return true;
                             }
                             //Don't waste a -7/-0 spell on a 1/1 creature
-                            if (c.getNetAttack() + attack > -2 || c.getNetAttack() > 3) {
+                            if (c.getNetPower() + attack > -2 || c.getNetPower() > 3) {
                                 return true;
                             }
                             return false;
@@ -753,8 +753,8 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 kws.add(kw);
             }
         }
-        pumped.addTempAttackBoost(c.getTempAttackBoost() + a);
-        pumped.addTempDefenseBoost(c.getTempDefenseBoost() + d);
+        pumped.addTempPowerBoost(c.getTempPowerBoost() + a);
+        pumped.addTempToughnessBoost(c.getTempToughnessBoost() + d);
         pumped.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);
         Set<CounterType> types = c.getCounters().keySet();
         for(CounterType ct : types) {

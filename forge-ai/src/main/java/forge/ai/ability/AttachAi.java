@@ -452,7 +452,7 @@ public class AttachAi extends SpellAbilityAi {
                     @Override
                     public boolean apply(final Card c) {
                         // Don't enchant creatures that can survive
-                        if (!c.canBeDestroyed() || c.getNetCombatDamage() < c.getNetDefense() || c.isEnchantedBy("Guilty Conscience")) {
+                        if (!c.canBeDestroyed() || c.getNetCombatDamage() < c.getNetToughness() || c.isEnchantedBy("Guilty Conscience")) {
                             return false;
                         }
                         return true;
@@ -590,7 +590,7 @@ public class AttachAi extends SpellAbilityAi {
                         return true;
                     }
 
-                    return c.getNetDefense() <= Math.abs(tgh);
+                    return c.getNetToughness() <= Math.abs(tgh);
                 }
             });
         }
@@ -616,7 +616,7 @@ public class AttachAi extends SpellAbilityAi {
             prefList = CardLists.filter(prefList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return ComputerUtil.canAttackNextTurn(c) && c.getNetAttack() > 0;
+                    return ComputerUtil.canAttackNextTurn(c) && c.getNetPower() > 0;
                 }
             });
         }
@@ -953,7 +953,7 @@ public class AttachAi extends SpellAbilityAi {
                     	if (!c.isCreature()) {
                     		return true;
                     	}
-                        return ComputerUtil.canAttackNextTurn(c) && powerBonus + c.getNetAttack() > 0;
+                        return ComputerUtil.canAttackNextTurn(c) && powerBonus + c.getNetPower() > 0;
                     }
                 });
             }

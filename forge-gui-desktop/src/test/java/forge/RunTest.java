@@ -35,8 +35,8 @@ public class RunTest {
         this.check("2.2", c.isType("Elf"));
         this.check("2.3", c.isType("Warrior"));
         this.check("3", c.getText().equals(""));
-        this.check("4", c.getNetAttack() == 2);
-        this.check("5", c.getNetDefense() == 3);
+        this.check("4", c.getNetPower() == 2);
+        this.check("5", c.getNetToughness() == 3);
         this.check("6", c.getKeyword().isEmpty());
 
         c = cf.getCard("Shock", null);

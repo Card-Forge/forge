@@ -891,8 +891,8 @@ public class CardFactoryUtil {
             CardCollection list = CardLists.getValidCards(cc.getGame().getCardsIn(ZoneType.Battlefield), rest, cc, c);
             int highest = 0;
             for (final Card crd : list) {
-                if (crd.getNetAttack() > highest) {
-                    highest = crd.getNetAttack();
+                if (crd.getNetPower() > highest) {
+                    highest = crd.getNetPower();
                 }
             }
             return highest;
@@ -904,8 +904,8 @@ public class CardFactoryUtil {
             CardCollection list = CardLists.getValidCards(cc.getGame().getCardsIn(ZoneType.Battlefield), rest, cc, c);
             int highest = 0;
             for (final Card crd : list) {
-                if (crd.getNetDefense() > highest) {
-                    highest = crd.getNetDefense();
+                if (crd.getNetToughness() > highest) {
+                    highest = crd.getNetToughness();
                 }
             }
             return highest;
@@ -1224,13 +1224,13 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].contains("CardPower")) {
-            return doXMath(c.getNetAttack(), m, c);
+            return doXMath(c.getNetPower(), m, c);
         }
         if (sq[0].contains("CardToughness")) {
-            return doXMath(c.getNetDefense(), m, c);
+            return doXMath(c.getNetToughness(), m, c);
         }
         if (sq[0].contains("CardSumPT")) {
-            return doXMath((c.getNetAttack() + c.getNetDefense()), m, c);
+            return doXMath((c.getNetPower() + c.getNetToughness()), m, c);
         }
 
         // Count$SumPower_valid
@@ -1238,7 +1238,7 @@ public class CardFactoryUtil {
             final String[] restrictions = l[0].split("_");
             final String[] rest = restrictions[1].split(",");
             CardCollection filteredCards = CardLists.getValidCards(cc.getGame().getCardsIn(ZoneType.Battlefield), rest, cc, c);
-            return doXMath(Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetNetAttack), m, c);
+            return doXMath(Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetNetPower), m, c);
         }
         // Count$CardManaCost
         if (sq[0].contains("CardManaCost")) {
@@ -1977,7 +1977,7 @@ public class CardFactoryUtil {
         int neededDamage = -1;
 
         if ((target != null)) {
-            neededDamage = target.getNetDefense() - target.getDamage();
+            neededDamage = target.getNetToughness() - target.getDamage();
         }
 
         return neededDamage;

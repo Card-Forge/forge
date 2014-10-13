@@ -213,7 +213,7 @@ public class AiBlockController {
                                     || ComputerUtilCombat.canDestroyBlocker(ai, blocker, other, combat, false)) {
                                 continue;
                             }
-                            int damageNext = other.getNetAttack();
+                            int damageNext = other.getNetPower();
                             if (other.hasKeyword("Trample")) {
                                 damageNext -= blocker.getLethalDamage();
                             }

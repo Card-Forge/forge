@@ -61,7 +61,7 @@ public abstract class CountersAi {
             final List<Card> killable = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return c.getNetDefense() <= amount;
+                    return c.getNetToughness() <= amount;
                 }
             });
             if (killable.size() > 0) {

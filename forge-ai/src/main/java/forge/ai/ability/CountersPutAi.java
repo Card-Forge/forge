@@ -437,7 +437,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 @Override
                 public boolean apply(Card c) {
                     return CombatUtil.canBlock(source, c, !isHaste) 
-                            && (c.getNetDefense() > source.getNetAttack() + tributeAmount || c.hasKeyword("DeathTouch"));
+                            && (c.getNetToughness() > source.getNetPower() + tributeAmount || c.hasKeyword("DeathTouch"));
                 }
             });
             if (!threatening.isEmpty()) {
@@ -454,7 +454,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     List<Card> canBlock = CardLists.filter(creats, new Predicate<Card>() {
                         @Override
                         public boolean apply(Card c) {
-                            return CombatUtil.canBlock(source, c) && (c.getNetDefense() > source.getNetAttack() || c.hasKeyword("DeathTouch"));
+                            return CombatUtil.canBlock(source, c) && (c.getNetToughness() > source.getNetPower() || c.hasKeyword("DeathTouch"));
                         }
                     });
                     if (!canBlock.isEmpty()) {

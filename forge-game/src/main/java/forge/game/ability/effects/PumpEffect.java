@@ -47,8 +47,8 @@ public class PumpEffect extends SpellAbilityEffect {
             }
         }
 
-        applyTo.addTempAttackBoost(a);
-        applyTo.addTempDefenseBoost(d);
+        applyTo.addTempPowerBoost(a);
+        applyTo.addTempToughnessBoost(d);
         applyTo.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);
 
         if (!sa.hasParam("Permanent")) {
@@ -58,8 +58,8 @@ public class PumpEffect extends SpellAbilityEffect {
 
                 @Override
                 public void run() {
-                    applyTo.addTempAttackBoost(-1 * a);
-                    applyTo.addTempDefenseBoost(-1 * d);
+                    applyTo.addTempPowerBoost(-1 * a);
+                    applyTo.addTempToughnessBoost(-1 * d);
 
                     if (keywords.size() > 0) {
                         for (String kw : keywords) {

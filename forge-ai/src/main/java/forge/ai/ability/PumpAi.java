@@ -515,10 +515,10 @@ public class PumpAi extends PumpAiBase {
         if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
             if (source.isCreature()) {
                 if (!source.hasKeyword("Indestructible")
-                        && ((source.getNetDefense() + defense) <= source.getDamage())) {
+                        && ((source.getNetToughness() + defense) <= source.getDamage())) {
                     return false;
                 }
-                if ((source.getNetDefense() + defense) <= 0) {
+                if ((source.getNetToughness() + defense) <= 0) {
                     return false;
                 }
             }

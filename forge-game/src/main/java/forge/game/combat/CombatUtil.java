@@ -617,7 +617,7 @@ public class CombatUtil {
             return false;
         }
 
-        if (attacker.hasKeyword("Creatures with power less than CARDNAME's power can't block it.") && attacker.getNetAttack() > blocker.getNetAttack()) {
+        if (attacker.hasKeyword("Creatures with power less than CARDNAME's power can't block it.") && attacker.getNetPower() > blocker.getNetPower()) {
             return false;
         }
 

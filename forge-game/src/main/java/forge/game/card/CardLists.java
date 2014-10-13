@@ -55,7 +55,7 @@ public class CardLists {
         return CardLists.filter(in, new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {
-                return c.getNetDefense() <= atLeastToughness;
+                return c.getNetToughness() <= atLeastToughness;
             }
         });
     }
@@ -63,7 +63,7 @@ public class CardLists {
     public static final Comparator<Card> ToughnessComparator = new Comparator<Card>() {
         @Override
         public int compare(final Card a, final Card b) {
-            return a.getNetDefense() - b.getNetDefense();
+            return a.getNetToughness() - b.getNetToughness();
         }
     };
     public static final Comparator<Card> PowerComparator = new Comparator<Card>() {
@@ -291,7 +291,7 @@ public class CardLists {
     public static int getTotalPower(Iterable<Card> cardList) {
         int total = 0;
         for (final Card crd : cardList) {
-            total += crd.getNetAttack();
+            total += crd.getNetPower();
         }
         return total;
     }

@@ -39,8 +39,8 @@ public class FightEffect extends SpellAbilityEffect {
             return;
         }
 
-        int dmg2 = fighters.get(1).getNetAttack();
-        fighters.get(1).addDamage(fighters.get(0).getNetAttack(), fighters.get(0));
+        int dmg2 = fighters.get(1).getNetPower();
+        fighters.get(1).addDamage(fighters.get(0).getNetPower(), fighters.get(0));
         fighters.get(0).addDamage(dmg2, fighters.get(1));
     }
 

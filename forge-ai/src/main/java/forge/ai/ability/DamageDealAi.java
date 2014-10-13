@@ -68,7 +68,7 @@ public class DamageDealAi extends DamageAiBase {
         } else if ("WildHunt".equals(logic)) {
             // This dummy ability will just deal 0 damage, but holds the logic for the AI for Master of Wild Hunt
             List<Card> wolves = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), "Creature.Wolf+untapped+YouCtrl+Other", ai, source);
-            dmg = Aggregates.sum(wolves, CardPredicates.Accessors.fnGetNetAttack);
+            dmg = Aggregates.sum(wolves, CardPredicates.Accessors.fnGetNetPower);
         }
 
         if (dmg <= 0) {
@@ -295,7 +295,7 @@ public class DamageDealAi extends DamageAiBase {
                     dmg -= assignedDamage;
                 }
                 if (!source.hasProtectionFrom(humanCreature)) {
-                    dmgTaken += humanCreature.getNetAttack();
+                    dmgTaken += humanCreature.getNetPower();
                 }
                 if (dmg == 0) {
                     return true;

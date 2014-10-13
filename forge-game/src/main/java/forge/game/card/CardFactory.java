@@ -423,12 +423,12 @@ public class CardFactory {
         c.setColor(ccc);
 
         if ( face.getIntPower() >= 0 ) {
-            c.setBaseAttack(face.getIntPower());
-            c.setBaseAttackString(face.getPower());
+            c.setBasePower(face.getIntPower());
+            c.setBasePowerString(face.getPower());
         }
         if ( face.getIntToughness() >= 0 ) {
-            c.setBaseDefense(face.getIntToughness());
-            c.setBaseDefenseString(face.getToughness());
+            c.setBaseToughness(face.getIntToughness());
+            c.setBaseToughnessString(face.getToughness());
         }
     }
     
@@ -555,8 +555,8 @@ public class CardFactory {
     public static void copyState(final Card from, final CardStateName fromState, final Card to, final CardStateName toState) {
         // copy characteristics not associated with a state
         to.setBaseLoyalty(from.getBaseLoyalty());
-        to.setBaseAttackString(from.getBaseAttackString());
-        to.setBaseDefenseString(from.getBaseDefenseString());
+        to.setBasePowerString(from.getBasePowerString());
+        to.setBaseToughnessString(from.getBaseToughnessString());
         to.setText(from.getSpellText());
     
         // get CardCharacteristics for desired state
@@ -617,7 +617,7 @@ public class CardFactory {
     }
 
     public static List<Card> makeToken(final String name, final String imageName, final Player controller,
-            final String manaCost, final String[] types, final int baseAttack, final int baseDefense,
+            final String manaCost, final String[] types, final int basePower, final int baseToughness,
             final String[] intrinsicKeywords) {
         final List<Card> list = new ArrayList<Card>();
         final Card c = new Card(controller.getGame().nextCardId());
@@ -633,8 +633,8 @@ public class CardFactory {
             c.addType(t);
         }
     
-        c.setBaseAttack(baseAttack);
-        c.setBaseDefense(baseDefense);
+        c.setBasePower(basePower);
+        c.setBaseToughness(baseToughness);
     
         final int multiplier = controller.getTokenDoublersMagnitude();
         for (int i = 0; i < multiplier; i++) {

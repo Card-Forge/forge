@@ -1636,7 +1636,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         final CardCollectionView ferocious = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return c.getNetAttack() > 3;
+                return c.getNetPower() > 3;
             }
         });
         return !ferocious.isEmpty();

@@ -267,7 +267,7 @@ public class CloneEffect extends SpellAbilityEffect {
             } catch (final NumberFormatException e) {
                 power = CardFactoryUtil.xCount(tgtCard, tgtCard.getSVar(rhs));
             }
-            tgtCard.setBaseAttack(power);
+            tgtCard.setBasePower(power);
         }
 
         // set toughness of clone
@@ -279,7 +279,7 @@ public class CloneEffect extends SpellAbilityEffect {
             } catch (final NumberFormatException e) {
                 toughness = CardFactoryUtil.xCount(tgtCard, tgtCard.getSVar(rhs));
             }
-            tgtCard.setBaseDefense(toughness);
+            tgtCard.setBaseToughness(toughness);
         }
 
         // colors to be added or changed to

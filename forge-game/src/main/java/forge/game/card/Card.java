@@ -191,8 +191,8 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     // stack of set power/toughness
     private ArrayList<CardPowerToughness> newPT = new ArrayList<CardPowerToughness>();
     private int baseLoyalty = 0;
-    private String baseAttackString = null;
-    private String baseDefenseString = null;
+    private String basePowerString = null;
+    private String baseToughnessString = null;
 
     private int damage;
 
@@ -202,11 +202,11 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
     private int turnInZone;
 
-    private int tempAttackBoost = 0;
-    private int tempDefenseBoost = 0;
+    private int tempPowerBoost = 0;
+    private int tempToughnessBoost = 0;
 
-    private int semiPermanentAttackBoost = 0;
-    private int semiPermanentDefenseBoost = 0;
+    private int semiPermanentPowerBoost = 0;
+    private int semiPermanentToughnessBoost = 0;
 
     private int xManaCostPaid = 0;
     private Map<String, Integer> xManaCostPaidByColor;
@@ -2404,39 +2404,39 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
 
     // values that are printed on card
-    public final int getBaseAttack() {
-        return currentState.getBaseAttack();
+    public final int getBasePower() {
+        return currentState.getBasePower();
     }
 
-    public final int getBaseDefense() {
-        return currentState.getBaseDefense();
-    }
-
-    // values that are printed on card
-    public final void setBaseAttack(final int n) {
-        currentState.setBaseAttack(n);
-    }
-
-    public final void setBaseDefense(final int n) {
-        currentState.setBaseDefense(n);
+    public final int getBaseToughness() {
+        return currentState.getBaseToughness();
     }
 
     // values that are printed on card
-    public final String getBaseAttackString() {
-        return (null == baseAttackString) ? "" + getBaseAttack() : baseAttackString;
+    public final void setBasePower(final int n) {
+        currentState.setBasePower(n);
     }
 
-    public final String getBaseDefenseString() {
-        return (null == baseDefenseString) ? "" + getBaseDefense() : baseDefenseString;
+    public final void setBaseToughness(final int n) {
+        currentState.setBaseToughness(n);
     }
 
     // values that are printed on card
-    public final void setBaseAttackString(final String s) {
-        baseAttackString = s;
+    public final String getBasePowerString() {
+        return (null == basePowerString) ? "" + getBasePower() : basePowerString;
     }
 
-    public final void setBaseDefenseString(final String s) {
-        baseDefenseString = s;
+    public final String getBaseToughnessString() {
+        return (null == baseToughnessString) ? "" + getBaseToughness() : baseToughnessString;
+    }
+
+    // values that are printed on card
+    public final void setBasePowerString(final String s) {
+        basePowerString = s;
+    }
+
+    public final void setBaseToughnessString(final String s) {
+        baseToughnessString = s;
     }
 
     public final int getSetPower() {
@@ -2504,7 +2504,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
 
     public final int getCurrentPower() {
-        int total = getBaseAttack();
+        int total = getBasePower();
         final int setPower = getSetPower();
         if (setPower != -1) {
             total = setPower;
@@ -2513,7 +2513,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
 
     public final int getUnswitchedPower() {
-        return getCurrentPower() + getTempAttackBoost() + getSemiPermanentAttackBoost() + getPowerBonusFromCounters();
+        return getCurrentPower() + getTempPowerBoost() + getSemiPermanentPowerBoost() + getPowerBonusFromCounters();
     }
 
     public final int getPowerBonusFromCounters() {
@@ -2522,7 +2522,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 - 2 * getCounters(CounterType.M2M2) - getCounters(CounterType.M1M0) + 2 * getCounters(CounterType.P2P0);
     }
 
-    public final int getNetAttack() {
+    public final int getNetPower() {
         if (getAmountOfKeyword("CARDNAME's power and toughness are switched") % 2 != 0) {
             return getUnswitchedToughness();
         }
@@ -2530,7 +2530,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
 
     public final int getCurrentToughness() {
-        int total = getBaseDefense();
+        int total = getBaseToughness();
         final int setToughness = getSetToughness();
         if (setToughness != -1) {
             total = setToughness;
@@ -2539,7 +2539,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
 
     public final int getUnswitchedToughness() {
-        return getCurrentToughness() + getTempDefenseBoost() + getSemiPermanentDefenseBoost() + getToughnessBonusFromCounters();
+        return getCurrentToughness() + getTempToughnessBoost() + getSemiPermanentToughnessBoost() + getToughnessBonusFromCounters();
     }
 
     public final int getToughnessBonusFromCounters() {
@@ -2549,7 +2549,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 + 2 * getCounters(CounterType.P0P2);
     }
 
-    public final int getNetDefense() {
+    public final int getNetToughness() {
         if (getAmountOfKeyword("CARDNAME's power and toughness are switched") % 2 != 0) {
             return getUnswitchedPower();
         }
@@ -2563,9 +2563,9 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         }
 
         if (getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.toughnessAssignsDamage)) {
-            return getNetDefense();
+            return getNetToughness();
         }
-        return getNetAttack();
+        return getNetPower();
     }
 
     private int multiKickerMagnitude = 0;
@@ -2585,56 +2585,56 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     public final int getPseudoKickerMagnitude() { return pseudoKickerMagnitude; }
 
     // for cards like Giant Growth, etc.
-    public final int getTempAttackBoost() {
-        return tempAttackBoost;
+    public final int getTempPowerBoost() {
+        return tempPowerBoost;
     }
 
-    public final int getTempDefenseBoost() {
-        return tempDefenseBoost;
+    public final int getTempToughnessBoost() {
+        return tempToughnessBoost;
     }
 
-    public final void addTempAttackBoost(final int n) {
+    public final void addTempPowerBoost(final int n) {
         if (n == 0) { return; }
-        tempAttackBoost += n;
+        tempPowerBoost += n;
         currentState.getView().updatePower(this);
     }
 
-    public final void addTempDefenseBoost(final int n) {
+    public final void addTempToughnessBoost(final int n) {
         if (n == 0) { return; }
-        tempDefenseBoost += n;
+        tempToughnessBoost += n;
         currentState.getView().updateToughness(this);
     }
 
     // for cards like Glorious Anthem, etc.
-    public final int getSemiPermanentAttackBoost() {
-        return semiPermanentAttackBoost;
+    public final int getSemiPermanentPowerBoost() {
+        return semiPermanentPowerBoost;
     }
 
-    public final int getSemiPermanentDefenseBoost() {
-        return semiPermanentDefenseBoost;
+    public final int getSemiPermanentToughnessBoost() {
+        return semiPermanentToughnessBoost;
     }
 
-    public final void addSemiPermanentAttackBoost(final int n) {
+    public final void addSemiPermanentPowerBoost(final int n) {
         if (n == 0) { return; }
-        semiPermanentAttackBoost += n;
+        semiPermanentPowerBoost += n;
         currentState.getView().updatePower(this);
     }
 
-    public final void addSemiPermanentDefenseBoost(final int n) {
+    public final void addSemiPermanentToughnessBoost(final int n) {
         if (n == 0) { return; }
-        semiPermanentDefenseBoost += n;
+        semiPermanentToughnessBoost += n;
         currentState.getView().updateToughness(this);
     }
 
-    public final void setSemiPermanentAttackBoost(final int n) {
-        if (semiPermanentAttackBoost == n) { return; }
-        semiPermanentAttackBoost = n;
+    public final void setSemiPermanentPowerBoost(final int n) {
+        if (semiPermanentPowerBoost == n) { return; }
+        semiPermanentPowerBoost = n;
         currentState.getView().updatePower(this);
     }
 
-    public final void setSemiPermanentDefenseBoost(final int n) {
-        if (semiPermanentDefenseBoost == n) { return; }
-        semiPermanentDefenseBoost = n;
+    public final void setSemiPermanentToughnessBoost(final int n) {
+        if (semiPermanentToughnessBoost == n) { return; }
+        semiPermanentToughnessBoost = n;
         currentState.getView().updateToughness(this);
     }
 
@@ -4474,28 +4474,28 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 }
             }
             for (final Card crd : cards) {
-                if (crd.getNetAttack() > getNetAttack()) {
+                if (crd.getNetPower() > getNetPower()) {
                     return false;
                 }
             }
         } else if (property.startsWith("yardGreatestPower")) {
             final CardCollectionView cards = CardLists.filter(sourceController.getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
             for (final Card crd : cards) {
-                if (crd.getNetAttack() > getNetAttack()) {
+                if (crd.getNetPower() > getNetPower()) {
                     return false;
                 }
             }
         } else if (property.startsWith("leastPower")) {
             final CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             for (final Card crd : cards) {
-                if (crd.getNetAttack() < getNetAttack()) {
+                if (crd.getNetPower() < getNetPower()) {
                     return false;
                 }
             }
         } else if (property.startsWith("leastToughness")) {
             final CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             for (final Card crd : cards) {
-                if (crd.getNetDefense() < getNetDefense()) {
+                if (crd.getNetToughness() < getNetToughness()) {
                     return false;
                 }
             }
@@ -4615,10 +4615,10 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
             if (property.startsWith("power")) {
                 rhs = property.substring(7);
-                y = getNetAttack();
+                y = getNetPower();
             } else if (property.startsWith("toughness")) {
                 rhs = property.substring(11);
-                y = getNetDefense();
+                y = getNetToughness();
             } else if (property.startsWith("cmc")) {
                 rhs = property.substring(5);
                 if (isSplitCard() && getCurrentStateName() == CardStateName.Original) {
@@ -4629,7 +4629,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 }
             } else if (property.startsWith("totalPT")) {
                 rhs = property.substring(10);
-                y = getNetAttack() + getNetDefense();
+                y = getNetPower() + getNetToughness();
             }
             try {
                 x = Integer.parseInt(rhs);
@@ -5103,7 +5103,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
     // this is the minimal damage a trampling creature has to assign to a blocker
     public final int getLethalDamage() {
-        return getNetDefense() - getDamage() - getTotalAssignedDamage();
+        return getNetToughness() - getDamage() - getTotalAssignedDamage();
     }
 
     public final int getDamage() {
@@ -5801,7 +5801,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
 
     public final boolean canBeDestroyed() {
-        return isInPlay() && (!hasKeyword("Indestructible") || (isCreature() && getNetDefense() <= 0));
+        return isInPlay() && (!hasKeyword("Indestructible") || (isCreature() && getNetToughness() <= 0));
     }
 
     @Override

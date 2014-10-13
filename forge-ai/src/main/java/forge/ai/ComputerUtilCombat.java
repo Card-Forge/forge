@@ -497,10 +497,10 @@ public class ComputerUtilCombat {
 
             flankingMagnitude = attacker.getAmountOfKeyword("Flanking");
 
-            if (flankingMagnitude >= defender.getNetDefense()) {
+            if (flankingMagnitude >= defender.getNetToughness()) {
                 return 0;
             }
-            if ((flankingMagnitude >= (defender.getNetDefense() - defender.getDamage()))
+            if ((flankingMagnitude >= (defender.getNetToughness() - defender.getDamage()))
                     && !defender.hasKeyword("Indestructible")) {
                 return 0;
             }
@@ -510,9 +510,9 @@ public class ComputerUtilCombat {
             return 0;
         }
 
-        int defenderDamage = defender.getNetAttack() + ComputerUtilCombat.predictPowerBonusOfBlocker(attacker, defender, true);
+        int defenderDamage = defender.getNetPower() + ComputerUtilCombat.predictPowerBonusOfBlocker(attacker, defender, true);
         if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.toughnessAssignsDamage)) {
-            defenderDamage = defender.getNetDefense() + ComputerUtilCombat.predictToughnessBonusOfBlocker(attacker, defender, true);
+            defenderDamage = defender.getNetToughness() + ComputerUtilCombat.predictToughnessBonusOfBlocker(attacker, defender, true);
         }
 
         // consider static Damage Prevention
@@ -564,10 +564,10 @@ public class ComputerUtilCombat {
 
             flankingMagnitude = attacker.getAmountOfKeyword("Flanking");
 
-            if (flankingMagnitude >= defender.getNetDefense()) {
+            if (flankingMagnitude >= defender.getNetToughness()) {
                 return 0;
             }
-            if ((flankingMagnitude >= (defender.getNetDefense() - defender.getDamage()))
+            if ((flankingMagnitude >= (defender.getNetToughness() - defender.getDamage()))
                     && !defender.hasKeyword("Indestructible")) {
                 return 0;
             }
@@ -779,9 +779,9 @@ public class ComputerUtilCombat {
         
         // Serene Master switches power with attacker
         if (blocker.getName().equals("Serene Master")) {
-            power += attacker.getNetAttack() - blocker.getNetAttack();
+            power += attacker.getNetPower() - blocker.getNetPower();
         } else if (blocker.getName().equals("Shape Stealer")) {
-            power += attacker.getNetAttack() - blocker.getNetAttack();
+            power += attacker.getNetPower() - blocker.getNetPower();
         } 
 
         // if the attacker has first strike and wither the blocker will deal
@@ -940,7 +940,7 @@ public class ComputerUtilCombat {
         }
         
         if (blocker.getName().equals("Shape Stealer")) {
-            toughness += attacker.getNetDefense() - blocker.getNetDefense();
+            toughness += attacker.getNetToughness() - blocker.getNetToughness();
         } 
 
         toughness += blocker.getKeywordMagnitude("Bushido");
@@ -1088,9 +1088,9 @@ public class ComputerUtilCombat {
 
         // Serene Master switches power with attacker
         if (blocker!= null && blocker.getName().equals("Serene Master")) {
-            power += blocker.getNetAttack() - attacker.getNetAttack();
+            power += blocker.getNetPower() - attacker.getNetPower();
         } else if (blocker != null && attacker.getName().equals("Shape Stealer")) {
-            power += blocker.getNetAttack() - attacker.getNetAttack();
+            power += blocker.getNetPower() - attacker.getNetPower();
         }
 
         final Game game = attacker.getGame();
@@ -1270,7 +1270,7 @@ public class ComputerUtilCombat {
         }
 
         if (blocker != null && attacker.getName().equals("Shape Stealer")) {
-            toughness += blocker.getNetDefense() - attacker.getNetDefense();
+            toughness += blocker.getNetToughness() - attacker.getNetToughness();
         }
 
         final Game game = attacker.getGame();
@@ -1583,10 +1583,10 @@ public class ComputerUtilCombat {
 
             flankingMagnitude = attacker.getAmountOfKeyword("Flanking");
 
-            if (flankingMagnitude >= defender.getNetDefense()) {
+            if (flankingMagnitude >= defender.getNetToughness()) {
                 return false;
             }
-            if ((flankingMagnitude >= (defender.getNetDefense() - defender.getDamage()))
+            if ((flankingMagnitude >= (defender.getNetToughness() - defender.getDamage()))
                     && !defender.hasKeyword("Indestructible")) {
                 return false;
             }
@@ -1616,14 +1616,14 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        int defenderDamage = defender.getNetAttack()
+        int defenderDamage = defender.getNetPower()
                 + ComputerUtilCombat.predictPowerBonusOfBlocker(attacker, defender, withoutAbilities);
-        int attackerDamage = attacker.getNetAttack()
+        int attackerDamage = attacker.getNetPower()
                 + ComputerUtilCombat.predictPowerBonusOfAttacker(attacker, defender, combat, withoutAbilities);
         if (ai.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.toughnessAssignsDamage)) {
-            defenderDamage = defender.getNetDefense()
+            defenderDamage = defender.getNetToughness()
                     + ComputerUtilCombat.predictToughnessBonusOfBlocker(attacker, defender, withoutAbilities);
-            attackerDamage = attacker.getNetDefense()
+            attackerDamage = attacker.getNetToughness()
                     + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, defender, combat, withoutAbilities);
         }
 
@@ -1749,7 +1749,7 @@ public class ComputerUtilCombat {
 
             flankingMagnitude = attacker.getAmountOfKeyword("Flanking");
 
-            if (flankingMagnitude >= defender.getNetDefense()) {
+            if (flankingMagnitude >= defender.getNetToughness()) {
                 return true;
             }
             if ((flankingMagnitude >= ComputerUtilCombat.getDamageToKill(defender)) && !defender.hasKeyword("Indestructible")) {
@@ -1778,14 +1778,14 @@ public class ComputerUtilCombat {
             }
         }
 
-        int defenderDamage = defender.getNetAttack()
+        int defenderDamage = defender.getNetPower()
                 + ComputerUtilCombat.predictPowerBonusOfBlocker(attacker, defender, withoutAbilities);
-        int attackerDamage = attacker.getNetAttack()
+        int attackerDamage = attacker.getNetPower()
                 + ComputerUtilCombat.predictPowerBonusOfAttacker(attacker, defender, combat, withoutAbilities);
         if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.toughnessAssignsDamage)) {
-            defenderDamage = defender.getNetDefense()
+            defenderDamage = defender.getNetToughness()
                     + ComputerUtilCombat.predictToughnessBonusOfBlocker(attacker, defender, withoutAbilities);
-            attackerDamage = attacker.getNetDefense()
+            attackerDamage = attacker.getNetToughness()
                     + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, defender, combat, withoutAbilities);
         }
 

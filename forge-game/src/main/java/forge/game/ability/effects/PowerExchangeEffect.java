@@ -52,11 +52,11 @@ public class PowerExchangeEffect extends SpellAbilityEffect {
         if (!c1.isInPlay() || !c2.isInPlay()) {
             return;
         }
-        final int power1 = c1.getNetAttack();
-        final int power2 = c2.getNetAttack();
+        final int power1 = c1.getNetPower();
+        final int power2 = c2.getNetPower();
 
-        c1.addTempAttackBoost(power2 - power1);
-        c2.addTempAttackBoost(power1 - power2);
+        c1.addTempPowerBoost(power2 - power1);
+        c2.addTempPowerBoost(power1 - power2);
 
         game.fireEvent(new GameEventCardStatsChanged(c1));
         game.fireEvent(new GameEventCardStatsChanged(c2));
@@ -69,8 +69,8 @@ public class PowerExchangeEffect extends SpellAbilityEffect {
 
                 @Override
                 public void run() {
-                    c1.addTempAttackBoost(power1 - power2);
-                    c2.addTempAttackBoost(power2 - power1);
+                    c1.addTempPowerBoost(power1 - power2);
+                    c2.addTempPowerBoost(power2 - power1);
                     game.fireEvent(new GameEventCardStatsChanged(c1));
                     game.fireEvent(new GameEventCardStatsChanged(c2));
                 }

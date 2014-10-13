@@ -270,8 +270,8 @@ public abstract class Trigger extends TriggerReplacementBase {
                 // sb.append(this.getHostCard().getName());
                 // throw new RuntimeException(sb.toString());
             }
-            if (moved.getNetAttack() <= this.getHostCard().getNetAttack()
-                    && moved.getNetDefense() <= this.getHostCard().getNetDefense()) {
+            if (moved.getNetPower() <= this.getHostCard().getNetPower()
+                    && moved.getNetToughness() <= this.getHostCard().getNetToughness()) {
                 return false;
             }
         }

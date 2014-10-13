@@ -48,8 +48,8 @@ public class CardState {
     private ManaCost manaCost = ManaCost.NO_COST;
     private List<CardColor> cardColor = new ArrayList<CardColor>();
     private String oracleText = "";
-    private int baseAttack = 0;
-    private int baseDefense = 0;
+    private int basePower = 0;
+    private int baseToughness = 0;
     private List<String> intrinsicKeywords = new ArrayList<String>();
     private final FCollection<SpellAbility> nonManaAbilities = new FCollection<SpellAbility>();
     private final FCollection<SpellAbility> manaAbilities = new FCollection<SpellAbility>();
@@ -146,21 +146,21 @@ public class CardState {
         view.updateOracleText(this);
     }
 
-    public final int getBaseAttack() {
-        return baseAttack;
+    public final int getBasePower() {
+        return basePower;
     }
-    public final void setBaseAttack(final int baseAttack0) {
-        if (baseAttack == baseAttack0) { return; }
-        baseAttack = baseAttack0;
+    public final void setBasePower(final int basePower0) {
+        if (basePower == basePower0) { return; }
+        basePower = basePower0;
         view.updatePower(this);
     }
 
-    public final int getBaseDefense() {
-        return baseDefense;
+    public final int getBaseToughness() {
+        return baseToughness;
     }
-    public final void setBaseDefense(final int baseDefense0) {
-        if (baseDefense == baseDefense0) { return; }
-        baseDefense = baseDefense0;
+    public final void setBaseToughness(final int baseToughness0) {
+        if (baseToughness == baseToughness0) { return; }
+        baseToughness = baseToughness0;
         view.updateToughness(this);
     }
 
@@ -370,8 +370,8 @@ public class CardState {
         setType(source.type);
         setManaCost(source.getManaCost());
         setCardColor(source.getCardColor());
-        setBaseAttack(source.getBaseAttack());
-        setBaseDefense(source.getBaseDefense());
+        setBasePower(source.getBasePower());
+        setBaseToughness(source.getBaseToughness());
         intrinsicKeywords = new ArrayList<String>(source.intrinsicKeywords);
         unparsedAbilities = new ArrayList<String>(source.unparsedAbilities);
         staticAbilityStrings = new ArrayList<String>(source.staticAbilityStrings);

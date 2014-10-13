@@ -193,7 +193,7 @@ public class AiAttackController {
     public final boolean isEffectiveAttacker(final Player ai, final Card attacker, final Combat combat) {
 
         // if the attacker will die when attacking don't attack
-        if ((attacker.getNetDefense() + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, null, combat, true)) <= 0) {
+        if ((attacker.getNetToughness() + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, null, combat, true)) <= 0) {
             return false;
         }
 
@@ -316,14 +316,14 @@ public class AiAttackController {
                 //
                 // total attack = biggest creature + exalted, *2 if Rafiq is in
                 // play
-                int humanBaseAttack = this.getAttack(this.oppList.get(0)) + humanExaltedBonus;
+                int humanBasePower = this.getAttack(this.oppList.get(0)) + humanExaltedBonus;
                 if (nFinestHours > 0) {
                     // For Finest Hour, one creature could attack and get the
                     // bonus TWICE
-                    humanBaseAttack = humanBaseAttack + humanExaltedBonus;
+                    humanBasePower = humanBasePower + humanExaltedBonus;
                 }
-                final int totalExaltedAttack = opp.isCardInPlay("Rafiq of the Many") ? 2 * humanBaseAttack
-                        : humanBaseAttack;
+                final int totalExaltedAttack = opp.isCardInPlay("Rafiq of the Many") ? 2 * humanBasePower
+                        : humanBasePower;
                 if (ai.getLife() - 3 <= totalExaltedAttack) {
                     // We will lose if there is an Exalted attack -- keep one
                     // blocker

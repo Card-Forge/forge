@@ -396,10 +396,10 @@ public class StaticAbilityContinuous {
             // set P/T
             if (params.containsKey("CharacteristicDefining")) {
                 if (setPower != -1) {
-                    affectedCard.setBaseAttack(setPower);
+                    affectedCard.setBasePower(setPower);
                 }
                 if (setToughness != -1) {
-                    affectedCard.setBaseDefense(setToughness);
+                    affectedCard.setBaseToughness(setToughness);
                 }
             } else // non CharacteristicDefining
             if ((setPower != -1) || (setToughness != -1)) {
@@ -421,8 +421,8 @@ public class StaticAbilityContinuous {
                 toughnessBonus = CardFactoryUtil.xCount(affectedCard, AbilityUtils.getSVar(stAb, addT));
                 se.addXMapValue(affectedCard, toughnessBonus);
             }
-            affectedCard.addSemiPermanentAttackBoost(powerBonus);
-            affectedCard.addSemiPermanentDefenseBoost(toughnessBonus);
+            affectedCard.addSemiPermanentPowerBoost(powerBonus);
+            affectedCard.addSemiPermanentToughnessBoost(toughnessBonus);
 
             // add keywords
             // TODO regular keywords currently don't try to use keyword multiplier

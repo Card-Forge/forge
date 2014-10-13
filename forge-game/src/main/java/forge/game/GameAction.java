@@ -684,12 +684,12 @@ public class GameAction {
             for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
                 if (c.isCreature()) {
                     // Rule 704.5f - Put into grave (no regeneration) for toughness <= 0
-                    if (c.getNetDefense() <= 0) {
+                    if (c.getNetToughness() <= 0) {
                         noRegCreats.add(c);
                         checkAgain = true;
                     } else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
                         for (final Integer dmg : c.getReceivedDamageFromThisTurn().values()) {
-                            if (c.getNetDefense() <= dmg.intValue()) {
+                            if (c.getNetToughness() <= dmg.intValue()) {
                                 desCreats.add(c);
                                 checkAgain = true;
                                 break;
@@ -697,7 +697,7 @@ public class GameAction {
                         }
                     }
                     // Rule 704.5g - Destroy due to lethal damage
-                    else if (c.getNetDefense() <= c.getDamage()) {
+                    else if (c.getNetToughness() <= c.getDamage()) {
                         desCreats.add(c);
                         checkAgain = true;
                     }
@@ -1112,7 +1112,7 @@ public class GameAction {
             return false;
         }
 
-        if (c.canBeShielded() && (!c.isCreature() || c.getNetDefense() > 0)
+        if (c.canBeShielded() && (!c.isCreature() || c.getNetToughness() > 0)
                 && (c.getShieldCount() > 0 || c.hasKeyword("If CARDNAME would be destroyed, regenerate it."))) {
             c.subtractShield(c.getController().getController().chooseRegenerationShield(c));
             c.setDamage(0);

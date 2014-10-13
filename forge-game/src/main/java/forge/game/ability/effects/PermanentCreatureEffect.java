@@ -27,8 +27,8 @@ public class PermanentCreatureEffect extends SpellAbilityEffect {
     public String getStackDescription(final SpellAbility sa) {
         final Card sourceCard = sa.getHostCard();
         final StringBuilder sb = new StringBuilder();
-        sb.append(sourceCard.getName()).append(" - Creature ").append(sourceCard.getNetAttack());
-        sb.append(" / ").append(sourceCard.getNetDefense());
+        sb.append(sourceCard.getName()).append(" - Creature ").append(sourceCard.getNetPower());
+        sb.append(" / ").append(sourceCard.getNetToughness());
         return sb.toString();
     }
 }

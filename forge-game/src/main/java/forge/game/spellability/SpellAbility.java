@@ -658,7 +658,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 }
                 switch (related) {
                     case "LEPower" :
-                        return c.getNetAttack() <= parentTarget.getNetAttack();
+                        return c.getNetPower() <= parentTarget.getNetPower();
                     case "LECMC" :
                         return c.getCMC() <= parentTarget.getCMC();
                 }

@@ -67,7 +67,7 @@ public class PumpAllAi extends PumpAiBase {
                 comp = CardLists.filter(comp, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        if (c.getNetDefense() <= -defense) {
+                        if (c.getNetToughness() <= -defense) {
                             return true; // can kill indestructible creatures
                         }
                         return ((ComputerUtilCombat.getDamageToKill(c) <= -defense) && !c.hasKeyword("Indestructible"));
@@ -76,7 +76,7 @@ public class PumpAllAi extends PumpAiBase {
                 human = CardLists.filter(human, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        if (c.getNetDefense() <= -defense) {
+                        if (c.getNetToughness() <= -defense) {
                             return true; // can kill indestructible creatures
                         }
                         return ((ComputerUtilCombat.getDamageToKill(c) <= -defense) && !c.hasKeyword("Indestructible"));
@@ -95,12 +95,12 @@ public class PumpAllAi extends PumpAiBase {
                     if (combat == null || !combat.isAttacking(c)) {
                         continue;
                     }
-                    totalPower += Math.min(c.getNetAttack(), power * -1);
+                    totalPower += Math.min(c.getNetPower(), power * -1);
                     if (phase == PhaseType.COMBAT_DECLARE_BLOCKERS && combat.isUnblocked(c)) {
                         if (ComputerUtilCombat.lifeInDanger(sa.getActivatingPlayer(), combat)) {
                             return true;
                         }
-                        totalPower += Math.min(c.getNetAttack(), power * -1);
+                        totalPower += Math.min(c.getNetPower(), power * -1);
                     }
                     if (totalPower >= power * -2) {
                         return true;

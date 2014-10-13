@@ -37,8 +37,8 @@ public class FightAi extends SpellAbilityAi {
         if (sa.hasParam("Defined")) {
             Card fighter1 = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).get(0);
             for (Card humanCreature : humCreatures) {
-                if (ComputerUtilCombat.getDamageToKill(humanCreature) <= fighter1.getNetAttack()
-                        && humanCreature.getNetAttack() < ComputerUtilCombat.getDamageToKill(fighter1)) {
+                if (ComputerUtilCombat.getDamageToKill(humanCreature) <= fighter1.getNetPower()
+                        && humanCreature.getNetPower() < ComputerUtilCombat.getDamageToKill(fighter1)) {
                     // todo: check min/max targets; see if we picked the best matchup
                     sa.getTargets().add(humanCreature);
                     return true;
@@ -53,8 +53,8 @@ public class FightAi extends SpellAbilityAi {
             if (!(humCreatures.isEmpty() && aiCreatures.isEmpty())) {
                 for (Card humanCreature : humCreatures) {
                     for (Card aiCreature : aiCreatures) {
-                        if (ComputerUtilCombat.getDamageToKill(humanCreature) <= aiCreature.getNetAttack()
-                                && humanCreature.getNetAttack() < ComputerUtilCombat.getDamageToKill(aiCreature)) {
+                        if (ComputerUtilCombat.getDamageToKill(humanCreature) <= aiCreature.getNetPower()
+                                && humanCreature.getNetPower() < ComputerUtilCombat.getDamageToKill(aiCreature)) {
                             // todo: check min/max targets; see if we picked the best matchup
                             sa.getTargets().add(humanCreature);
                             sa.getTargets().add(aiCreature);
@@ -78,8 +78,8 @@ public class FightAi extends SpellAbilityAi {
                         && creature1.sharesCreatureTypeWith(creature2)) {
                     continue;
                 }
-                if (ComputerUtilCombat.getDamageToKill(creature1) <= creature2.getNetAttack()
-                        && creature1.getNetAttack() >= ComputerUtilCombat.getDamageToKill(creature2)) {
+                if (ComputerUtilCombat.getDamageToKill(creature1) <= creature2.getNetPower()
+                        && creature1.getNetPower() >= ComputerUtilCombat.getDamageToKill(creature2)) {
                     // todo: check min/max targets; see if we picked the best matchup
                     sa.getTargets().add(creature1);
                     sa.getTargets().add(creature2);
@@ -110,14 +110,14 @@ public class FightAi extends SpellAbilityAi {
         if (sa.hasParam("Defined")) {
             Card aiCreature = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).get(0);
             for (Card humanCreature : humCreatures) {
-                if (ComputerUtilCombat.getDamageToKill(humanCreature) <= aiCreature.getNetAttack()
+                if (ComputerUtilCombat.getDamageToKill(humanCreature) <= aiCreature.getNetPower()
                         && ComputerUtilCard.evaluateCreature(humanCreature) > ComputerUtilCard.evaluateCreature(aiCreature)) {
                     sa.getTargets().add(humanCreature);
                     return true;
                 }
             }
             for (Card humanCreature : humCreatures) {
-                if (ComputerUtilCombat.getDamageToKill(aiCreature) > humanCreature.getNetAttack()) {
+                if (ComputerUtilCombat.getDamageToKill(aiCreature) > humanCreature.getNetPower()) {
                     sa.getTargets().add(humanCreature);
                     return true;
                 }
@@ -148,7 +148,7 @@ public class FightAi extends SpellAbilityAi {
     	        || opponent.getShieldCount() > 0 || ComputerUtil.canRegenerate(opponent.getController(), opponent)) {
     		return false;
     	}
-    	if (fighter.hasKeyword("Deathtouch") || ComputerUtilCombat.getDamageToKill(opponent) <= fighter.getNetAttack() + pumpAttack) {
+    	if (fighter.hasKeyword("Deathtouch") || ComputerUtilCombat.getDamageToKill(opponent) <= fighter.getNetPower() + pumpAttack) {
     		return true;
     	}
     	return false;

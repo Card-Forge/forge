@@ -201,8 +201,8 @@ public class StaticEffects {
             if (addT.startsWith("AffectedX")) {
                 toughnessBonus = se.getXMapValue(affectedCard);
             }
-            affectedCard.addSemiPermanentAttackBoost(powerBonus * -1);
-            affectedCard.addSemiPermanentDefenseBoost(toughnessBonus * -1);
+            affectedCard.addSemiPermanentPowerBoost(powerBonus * -1);
+            affectedCard.addSemiPermanentToughnessBoost(toughnessBonus * -1);
 
             // remove keywords
             // TODO regular keywords currently don't try to use keyword multiplier

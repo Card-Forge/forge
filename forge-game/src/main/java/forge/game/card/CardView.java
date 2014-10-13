@@ -638,7 +638,7 @@ public class CardView extends GameEntityView {
             return get(TrackableProperty.Power);
         }
         void updatePower(Card c) {
-            set(TrackableProperty.Power, c.getNetAttack());
+            set(TrackableProperty.Power, c.getNetPower());
         }
         void updatePower(CardState c) {
             if (CardView.this.getCurrentState() == this) {
@@ -648,14 +648,14 @@ public class CardView extends GameEntityView {
                     return;
                 }
             }
-            set(TrackableProperty.Power, c.getBaseAttack());
+            set(TrackableProperty.Power, c.getBasePower());
         }
 
         public int getToughness() {
             return get(TrackableProperty.Toughness);
         }
         void updateToughness(Card c) {
-            set(TrackableProperty.Toughness, c.getNetDefense());
+            set(TrackableProperty.Toughness, c.getNetToughness());
         }
         void updateToughness(CardState c) {
             if (CardView.this.getCurrentState() == this) {
@@ -665,7 +665,7 @@ public class CardView extends GameEntityView {
                     return;
                 }
             }
-            set(TrackableProperty.Toughness, c.getBaseDefense());
+            set(TrackableProperty.Toughness, c.getBaseToughness());
         }
 
         public int getLoyalty() {
