@@ -503,15 +503,27 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Cloner, cloner == null ? null : cloner.getName() + " (" + cloner.getId() + ")");
 
         CardState currentState = c.getCurrentState();
-        set(TrackableProperty.CurrentState, currentState.getView());
-        currentState.getView().updateKeywords(c, currentState);
+        CardStateView currentStateView = currentState.getView();
+        if (getCurrentState() != currentStateView) {
+            set(TrackableProperty.CurrentState, currentStateView);
+            currentStateView.updatePower(c); //ensure power, toughness, and loyalty updated when current state changes
+            currentStateView.updateToughness(c);
+            currentStateView.updateLoyalty(c);
+        }
+        currentState.getView().updateKeywords(c, currentState); //update keywords even if state doesn't change
 
         CardState alternateState = c.getAlternateState();
         if (alternateState == null) {
             set(TrackableProperty.AlternateState, null);
         }
         else {
-            set(TrackableProperty.AlternateState, alternateState.getView());
+            CardStateView alternateStateView = currentState.getView();
+            if (getAlternateState() != alternateStateView) {
+                set(TrackableProperty.AlternateState, alternateStateView);
+                alternateStateView.updatePower(c); //ensure power, toughness, and loyalty updated when current state changes
+                alternateStateView.updateToughness(c);
+                alternateStateView.updateLoyalty(c);
+            }
             alternateState.getView().updateKeywords(c, alternateState);
         }
     }

@@ -2443,7 +2443,6 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         if (newPT.isEmpty()) {
             return -1;
         }
-
         return getLatestPT().getLeft();
     }
 
@@ -2451,7 +2450,6 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         if (newPT.isEmpty()) {
             return -1;
         }
-
         return getLatestPT().getRight();
     }
 
@@ -2489,13 +2487,18 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
     public final void addNewPT(final int power, final int toughness, final long timestamp) {
         newPT.add(new CardPowerToughness(power, toughness, timestamp));
+        currentState.getView().updatePower(this);
+        currentState.getView().updateToughness(this);
     }
 
     public final void removeNewPT(final long timestamp) {
         for (int i = 0; i < newPT.size(); i++) {
             final CardPowerToughness cardPT = newPT.get(i);
             if (cardPT.getTimestamp() == timestamp) {
-                newPT.remove(cardPT);
+                if (newPT.remove(cardPT)) {
+                    currentState.getView().updatePower(this);
+                    currentState.getView().updateToughness(this);
+                }
             }
         }
     }
@@ -2506,24 +2509,17 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         if (setPower != -1) {
             total = setPower;
         }
-
         return total;
     }
 
     public final int getUnswitchedPower() {
-        int total = getCurrentPower();
-
-        total += getTempAttackBoost() + getSemiPermanentAttackBoost() + getPowerBonusFromCounters();
-        return total;
+        return getCurrentPower() + getTempAttackBoost() + getSemiPermanentAttackBoost() + getPowerBonusFromCounters();
     }
 
     public final int getPowerBonusFromCounters() {
-        int total = 0;
-
-        total += getCounters(CounterType.P1P1) + getCounters(CounterType.P1P2) + getCounters(CounterType.P1P0)
+        return getCounters(CounterType.P1P1) + getCounters(CounterType.P1P2) + getCounters(CounterType.P1P0)
                 - getCounters(CounterType.M1M1) + 2 * getCounters(CounterType.P2P2) - 2 * getCounters(CounterType.M2M1)
                 - 2 * getCounters(CounterType.M2M2) - getCounters(CounterType.M1M0) + 2 * getCounters(CounterType.P2P0);
-        return total;
     }
 
     public final int getNetAttack() {
@@ -2535,30 +2531,22 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
     public final int getCurrentToughness() {
         int total = getBaseDefense();
-
         final int setToughness = getSetToughness();
         if (setToughness != -1) {
             total = setToughness;
         }
-
         return total;
     }
 
     public final int getUnswitchedToughness() {
-        int total = getCurrentToughness();
-
-        total += getTempDefenseBoost() + getSemiPermanentDefenseBoost() + getToughnessBonusFromCounters();
-        return total;
+        return getCurrentToughness() + getTempDefenseBoost() + getSemiPermanentDefenseBoost() + getToughnessBonusFromCounters();
     }
 
     public final int getToughnessBonusFromCounters() {
-        int total = 0;
-
-        total += getCounters(CounterType.P1P1) + 2 * getCounters(CounterType.P1P2) - getCounters(CounterType.M1M1)
+        return getCounters(CounterType.P1P1) + 2 * getCounters(CounterType.P1P2) - getCounters(CounterType.M1M1)
                 + getCounters(CounterType.P0P1) - 2 * getCounters(CounterType.M0M2) + 2 * getCounters(CounterType.P2P2)
                 - getCounters(CounterType.M0M1) - getCounters(CounterType.M2M1) - 2 * getCounters(CounterType.M2M2)
                 + 2 * getCounters(CounterType.P0P2);
-        return total;
     }
 
     public final int getNetDefense() {
@@ -2606,11 +2594,15 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
 
     public final void addTempAttackBoost(final int n) {
+        if (n == 0) { return; }
         tempAttackBoost += n;
+        currentState.getView().updatePower(this);
     }
 
     public final void addTempDefenseBoost(final int n) {
+        if (n == 0) { return; }
         tempDefenseBoost += n;
+        currentState.getView().updateToughness(this);
     }
 
     // for cards like Glorious Anthem, etc.
@@ -2623,19 +2615,27 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
 
     public final void addSemiPermanentAttackBoost(final int n) {
+        if (n == 0) { return; }
         semiPermanentAttackBoost += n;
+        currentState.getView().updatePower(this);
     }
 
     public final void addSemiPermanentDefenseBoost(final int n) {
+        if (n == 0) { return; }
         semiPermanentDefenseBoost += n;
+        currentState.getView().updateToughness(this);
     }
 
     public final void setSemiPermanentAttackBoost(final int n) {
+        if (semiPermanentAttackBoost == n) { return; }
         semiPermanentAttackBoost = n;
+        currentState.getView().updatePower(this);
     }
 
     public final void setSemiPermanentDefenseBoost(final int n) {
+        if (semiPermanentDefenseBoost == n) { return; }
         semiPermanentDefenseBoost = n;
+        currentState.getView().updateToughness(this);
     }
 
     public final boolean isUntapped() {
