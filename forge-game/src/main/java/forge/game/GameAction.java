@@ -48,6 +48,7 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
+import forge.trackable.TrackableObject;
 import forge.util.Aggregates;
 import forge.util.CollectionSuppliers;
 import forge.util.Expressions;
@@ -659,6 +660,7 @@ public class GameAction {
 
         final boolean refreeze = game.getStack().isFrozen();
         game.getStack().setFrozen(true);
+        TrackableObject.freeze(); //prevent views flickering during while updating for state-based effects
 
         // do this multiple times, sometimes creatures/permanents will survive
         // when they shouldn't
@@ -750,14 +752,16 @@ public class GameAction {
             }
         } // for q=0;q<9
 
+        TrackableObject.unfreeze();
+
         if (runEvents) {
             game.fireEvent(new GameEventCardStatsChanged(allAffectedCards));
         }
 
         checkGameOverCondition();
-        if (game.getAge() != GameStage.Play)
+        if (game.getAge() != GameStage.Play) {
             return Collections.emptySet();
-
+        }
         game.getTriggerHandler().resetActiveTriggers();
         if (!refreeze) {
             game.getStack().unfreezeStack();

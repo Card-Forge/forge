@@ -52,7 +52,7 @@ public enum TrackableProperty {
     Haunting(TrackableTypes.CardViewType),
     MustBlockCards(TrackableTypes.CardViewCollectionType),
     PairedWith(TrackableTypes.CardViewType),
-    CurrentState(TrackableTypes.CardStateViewType),
+    CurrentState(TrackableTypes.CardStateViewType, false), //can't respect freeze, otherwise card constructor can crash
     AlternateState(TrackableTypes.CardStateViewType),
 
     //Card State
@@ -140,9 +140,18 @@ public enum TrackableProperty {
     Phase(TrackableTypes.EnumType(PhaseType.class));
 
     private final TrackableType<?> type;
+    private final boolean respectFreeze;
 
     private TrackableProperty(TrackableType<?> type0) {
+        this(type0, true);
+    }
+    private TrackableProperty(TrackableType<?> type0, boolean respectFreeze0) {
         type = type0;
+        respectFreeze = respectFreeze0;
+    }
+
+    public boolean respectFreeze() {
+        return respectFreeze;
     }
 
     @SuppressWarnings("unchecked")
