@@ -437,6 +437,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
     public void updateBlockingForView() {
         view.updateBlocking(this);
+        getGame().updateCombatForView(); //ensure blocking arrow shown/hidden as needed
     }
 
     @Override
