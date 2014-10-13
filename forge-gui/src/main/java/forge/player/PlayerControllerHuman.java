@@ -377,10 +377,10 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         tempShowCards(sourceList);
-        final List<CardView> choices = SGuiChoose.many(title, "Chosen Cards", min, max, CardView.getCollection(sourceList), CardView.get(sa.getHostCard()));
+        final CardCollection choices = Card.getList(SGuiChoose.many(title, "Chosen Cards", min, max, CardView.getCollection(sourceList), CardView.get(sa.getHostCard())));
         endTempShowCards();
 
-        return Card.getList(choices);
+        return choices;
     }
 
     @SuppressWarnings("unchecked")
@@ -530,24 +530,21 @@ public class PlayerControllerHuman extends PlayerController {
     public CardCollection orderBlockers(final Card attacker, final CardCollection blockers) {
         final CardView vAttacker = CardView.get(attacker);
         MatchUtil.getController().setPanelSelection(vAttacker);
-        final List<CardView> choices = SGuiChoose.order("Choose Damage Order for " + vAttacker, "Damaged First", CardView.getCollection(blockers), vAttacker);
-        return Card.getList(choices);
+        return Card.getList(SGuiChoose.order("Choose Damage Order for " + vAttacker, "Damaged First", CardView.getCollection(blockers), vAttacker));
     }
 
     @Override
     public CardCollection orderBlocker(final Card attacker, final Card blocker, final CardCollection oldBlockers) {
         final CardView vAttacker = CardView.get(attacker);
         MatchUtil.getController().setPanelSelection(vAttacker);
-        final List<CardView> choices = SGuiChoose.insertInList("Choose blocker after which to place " + vAttacker + " in damage order; cancel to place it first", CardView.get(blocker), CardView.getCollection(oldBlockers));
-        return Card.getList(choices);
+        return Card.getList(SGuiChoose.insertInList("Choose blocker after which to place " + vAttacker + " in damage order; cancel to place it first", CardView.get(blocker), CardView.getCollection(oldBlockers)));
     }
 
     @Override
     public CardCollection orderAttackers(final Card blocker, final CardCollection attackers) {
         final CardView vBlocker = CardView.get(blocker);
         MatchUtil.getController().setPanelSelection(vBlocker);
-        final List<CardView> choices = SGuiChoose.order("Choose Damage Order for " + vBlocker, "Damaged First", CardView.getCollection(attackers), vBlocker);
-        return Card.getList(choices);
+        return Card.getList(SGuiChoose.order("Choose Damage Order for " + vBlocker, "Damaged First", CardView.getCollection(attackers), vBlocker));
     }
 
     @Override
@@ -585,7 +582,7 @@ public class PlayerControllerHuman extends PlayerController {
             }
         }
         else {
-            toBottom = new CardCollection(SGuiChoose.many("Select cards to be put on the bottom of your library", "Cards to put on the bottom", -1, topN, null));
+            toBottom = Card.getList(SGuiChoose.many("Select cards to be put on the bottom of your library", "Cards to put on the bottom", -1, CardView.getCollection(topN), null));
             topN.removeAll((Collection<?>)toBottom);
             if (topN.isEmpty()) {
                 toTop = null;
@@ -594,7 +591,7 @@ public class PlayerControllerHuman extends PlayerController {
                 toTop = topN;
             }
             else {
-                toTop = new CardCollection(SGuiChoose.order("Arrange cards to be put on top of your library", "Cards arranged", topN, null)); 
+                toTop = Card.getList(SGuiChoose.order("Arrange cards to be put on top of your library", "Cards arranged", CardView.getCollection(topN), null)); 
             }
         }
         endTempShowCards();
@@ -645,10 +642,10 @@ public class PlayerControllerHuman extends PlayerController {
     public CardCollectionView chooseCardsToDiscardFrom(Player p, SpellAbility sa, CardCollection valid, int min, int max) {
         if (p != player) {
             tempShowCards(valid);
-            final List<CardView> choices = SGuiChoose.many("Choose " + min + " card" + (min != 1 ? "s" : "") + " to discard",
-                    "Discarded", min, min, CardView.getCollection(valid), null);
+            final CardCollection choices = Card.getList(SGuiChoose.many("Choose " + min + " card" + (min != 1 ? "s" : "") + " to discard",
+                    "Discarded", min, min, CardView.getCollection(valid), null));
             endTempShowCards();
-            return Card.getList(choices);
+            return choices;
         }
 
         InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid);
@@ -1648,8 +1645,7 @@ public class PlayerControllerHuman extends PlayerController {
 
         public void addCountersToPermanent() {
             final CardCollectionView cards = game.getCardsIn(ZoneType.Battlefield);
-            final CardView cardView = SGuiChoose.oneOrNone("Add counters to which card?", CardView.getCollection(cards));
-            final Card card = Card.get(cardView);
+            final Card card = Card.get(SGuiChoose.oneOrNone("Add counters to which card?", CardView.getCollection(cards)));
             if (card == null) { return; }
 
             final CounterType counter = SGuiChoose.oneOrNone("Which type of counter?", CounterType.values());
@@ -1698,7 +1694,7 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         public void setPlayerLife() {
-            final Player player = SGuiChoose.oneOrNone("Set life for which player?", (FCollection<Player>)game.getPlayers());
+            final Player player = Player.get(SGuiChoose.oneOrNone("Set life for which player?", PlayerView.getCollection(game.getPlayers())));
             if (player == null) { return; }
 
             final Integer life = SGuiChoose.getInteger("Set life to what?", 0);
@@ -1728,7 +1724,7 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         public void addCardToHand() {
-            final Player p = SGuiChoose.oneOrNone("Put card in hand for which player?", (FCollection<Player>)game.getPlayers());
+            final Player p = Player.get(SGuiChoose.oneOrNone("Put card in hand for which player?", PlayerView.getCollection(game.getPlayers())));
             if (p == null) {
                 return;
             }
@@ -1796,7 +1792,7 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         public void riggedPlanarRoll() {
-            final Player player = SGuiChoose.oneOrNone("Which player should roll?", (FCollection<Player>)game.getPlayers());
+            final Player player = Player.get(SGuiChoose.oneOrNone("Which player should roll?", PlayerView.getCollection(game.getPlayers())));
             if (player == null) { return; }
 
             final PlanarDice res = SGuiChoose.oneOrNone("Choose result", PlanarDice.values());

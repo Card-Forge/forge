@@ -18,6 +18,7 @@ import forge.game.cost.*;
 import forge.game.mana.ManaCostAdjustment;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -489,7 +490,7 @@ public class HumanPlay {
                     }
                     // replace this with input
                     for (int i = 0; i < nNeeded; i++) {
-                        final Card c = SGuiChoose.oneOrNone("Exile from " + from, list);
+                        final Card c = Card.get(SGuiChoose.oneOrNone("Exile from " + from, CardView.getCollection(list)));
                         if (c == null) {
                             return false;
                         }
@@ -523,7 +524,7 @@ public class HumanPlay {
                             payableZone.add(player);
                         }
                     }
-                    Player chosen = SGuiChoose.oneOrNone(String.format("Put cards from whose %s?", from), payableZone);
+                    Player chosen = Player.get(SGuiChoose.oneOrNone(String.format("Put cards from whose %s?", from), PlayerView.getCollection(payableZone)));
                     if (chosen == null) {
                         return false;
                     }
@@ -535,7 +536,7 @@ public class HumanPlay {
                             return false;
                         }
 
-                        final Card c = SGuiChoose.oneOrNone("Put cards to Library", typeList);
+                        final Card c = Card.get(SGuiChoose.oneOrNone("Put cards to Library", CardView.getCollection(typeList)));
 
                         if (c != null) {
                             typeList.remove(c);
