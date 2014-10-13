@@ -267,8 +267,7 @@ public class PhaseHandler implements java.io.Serializable {
 
                         if (combat != null && combat.getAttackers().isEmpty()
                                 && !game.getTriggerHandler().hasDelayedTriggers()) {
-                            combat = null;
-                            game.updateCombatForView();
+                            endCombat();
                         }
                     }
 
@@ -431,7 +430,7 @@ public class PhaseHandler implements java.io.Serializable {
                     List<Card> blockers = combat.getAllBlockers();
                     eventEndCombat = new GameEventCombatEnded(attackers, blockers);
                 }
-                combat = null;
+                endCombat();
                 playerTurn.resetAttackedThisCombat();
 
                 if (eventEndCombat != null) {
@@ -963,11 +962,11 @@ public class PhaseHandler implements java.io.Serializable {
         }
 
         game.fireEvent(new GameEventTurnPhase(playerTurn, phase, ""));
-        combat = null; // not-null can be created only when declare attackers phase begins
+        endCombat(); // not-null can be created only when declare attackers phase begins
     }
 
     public final void endTurnByEffect() {
-        combat = null;
+        endCombat();
         extraPhases.clear();
         setPhase(PhaseType.CLEANUP);
         onPhaseBegin();
@@ -1002,6 +1001,8 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public void endCombat() {
+        if (combat == null) { return; }
         combat = null;
+        game.updateCombatForView();
     }
 }
