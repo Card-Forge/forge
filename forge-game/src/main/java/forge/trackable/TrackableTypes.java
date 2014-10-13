@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
+import forge.card.CardType;
 import forge.card.CardTypeView;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
@@ -168,10 +169,10 @@ public class TrackableTypes {
             }
         }
     };
-    public static final TrackableType<CardTypeView> CardTypeCollectionViewType = new TrackableType<CardTypeView>() {
+    public static final TrackableType<CardTypeView> CardTypeViewType = new TrackableType<CardTypeView>() {
         @Override
         protected CardTypeView getDefaultValue() {
-            return null;
+            return CardType.EMPTY;
         }
 
         @Override

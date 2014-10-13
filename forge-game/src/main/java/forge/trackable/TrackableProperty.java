@@ -59,7 +59,7 @@ public enum TrackableProperty {
     Name(TrackableTypes.StringType),
     Colors(TrackableTypes.ColorSetType),
     ImageKey(TrackableTypes.StringType),
-    Type(TrackableTypes.CardTypeCollectionViewType),
+    Type(TrackableTypes.CardTypeViewType),
     ManaCost(TrackableTypes.ManaCostType),
     OracleText(TrackableTypes.StringType),
     SetCode(TrackableTypes.StringType),
