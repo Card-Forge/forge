@@ -24,7 +24,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
@@ -39,6 +38,7 @@ import forge.ImageCache;
 import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.UiCommand;
+import forge.game.Game;
 import forge.game.GameEntityView;
 import forge.game.GameView;
 import forge.game.Match;
@@ -71,6 +71,7 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.controllers.CAntes;
 import forge.screens.match.controllers.CCombat;
 import forge.screens.match.controllers.CDetail;
+import forge.screens.match.controllers.CLog;
 import forge.screens.match.controllers.CPicture;
 import forge.screens.match.controllers.CPrompt;
 import forge.screens.match.controllers.CStack;
@@ -613,6 +614,9 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
 
     @Override
     public void openView(List<Player> sortedPlayers) {
+        Game game = MatchUtil.getGame();
+        game.getGameLog().addObserver(CLog.SINGLETON_INSTANCE);
+
         List<PlayerView> sortedPlayerViews = new ArrayList<PlayerView>();
         for (Player p : sortedPlayers) {
             sortedPlayerViews.add(PlayerView.get(p));

@@ -64,7 +64,6 @@ public class GameWrapper {
 		rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
 		Match match = new Match(rules, registeredPlayers);
 		game = match.createGame();
-		game.subscribeToEvents( new GameLogFormatter( gameLog ) );
 		
 		//GameNew.newGame( game, false, false ) does a bit of internal setup, then prepares libraries etc
 		Trigger.resetIDs();

@@ -55,5 +55,4 @@ public enum CLog implements ICDoc, Observer {
     public void update() {
         FThreads.invokeInEdtNowOrLater(r);
     }
-
 }

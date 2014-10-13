@@ -32,16 +32,11 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         return generateSummary(ev.history);
     }
 
-
-    /* (non-Javadoc)
-     * @see forge.game.event.IGameEventVisitor.Base#visit(forge.game.event.GameEventSpellResolved)
-     */
     @Override
     public GameLogEntry visit(GameEventSpellResolved ev) {
         String messageForLog = ev.hasFizzled ? ev.spell.getHostCard().getName() + " ability fizzles." : ev.spell.getStackDescription();
         return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, messageForLog);
     }
-
 
     @Override
     public GameLogEntry visit(GameEventSpellAbilityCast event) {
@@ -66,7 +61,6 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     }
 
     private GameLogEntry generateSummary(List<GameOutcome> gamesPlayed) {
-
         GameOutcome outcome1 = gamesPlayed.get(0);
         List<Player> players = outcome1.getPlayers();
 
@@ -84,12 +78,11 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         }
 
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < wins.length; i++) {
+        for (int i = 0; i < wins.length; i++) {
             Player player = players.get(i);
             String playerName = player.getName();
             sb.append(playerName).append(": ").append(wins[i]).append(" ");
         }
-
         return new GameLogEntry(GameLogEntryType.MATCH_RESULTS, sb.toString());
     }
 
@@ -100,11 +93,12 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         Player p = event.player;
 
         final String message;
-        if( newController == null )
+        if (newController == null) {
             message = p.getName() + " has restored control over themself";
-        else
+        }
+        else {
             message =  String.format("%s is controlled by %s", p.getName(), newController.getName());
-
+        }
         return new GameLogEntry(GameLogEntryType.PLAYER_CONROL, message);
     }
 
@@ -114,14 +108,18 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         return new GameLogEntry(GameLogEntryType.PHASE, ev.phaseDesc + Lang.getPossesive(p.getName()) + " " + ev.phase.nameForUi);
     }
 
-
     @Override
     public GameLogEntry visit(GameEventCardDamaged event) {
         String additionalLog = "";
-        if( event.type == DamageType.Deathtouch ) additionalLog = "(Deathtouch)";
-        if( event.type == DamageType.M1M1Counters ) additionalLog = "(As -1/-1 Counters)";
-        if( event.type == DamageType.LoyaltyLoss ) additionalLog = "(Removing " + Lang.nounWithAmount(event.amount, "loyalty counter") + ")";
-
+        if (event.type == DamageType.Deathtouch) {
+            additionalLog = "(Deathtouch)";
+        }
+        if (event.type == DamageType.M1M1Counters) {
+            additionalLog = "(As -1/-1 Counters)";
+        }
+        if (event.type == DamageType.LoyaltyLoss) {
+            additionalLog = "(Removing " + Lang.nounWithAmount(event.amount, "loyalty counter") + ")";
+        }
         String message = String.format("%s deals %d damage %s to %s.", event.source, event.amount, additionalLog, event.card);
         return new GameLogEntry(GameLogEntryType.DAMAGE, message);
     }
@@ -137,14 +135,14 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventTurnBegan event) {
-        String message = String.format( "Turn %d (%s)", event.turnNumber, event.turnOwner);
+        String message = String.format("Turn %d (%s)", event.turnNumber, event.turnOwner);
         return new GameLogEntry(GameLogEntryType.TURN, message);
     }
 
     @Override
     public GameLogEntry visit(GameEventPlayerDamaged ev) {
         String extra = ev.infect ? " (as poison counters)" : "";
-        String message = String.format("%s deals %d %s damage to %s%s.", ev.source, ev.amount, ev.combat ? "combat" : "non-combat", ev.target, extra );
+        String message = String.format("%s deals %d %s damage to %s%s.", ev.source, ev.amount, ev.combat ? "combat" : "non-combat", ev.target, extra);
         return new GameLogEntry(GameLogEntryType.DAMAGE, message);
     }
 
@@ -163,18 +161,17 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
         // Not a big fan of the triple nested loop here
         for (GameEntity k : ev.attackersMap.keySet()) {
-
             Collection<Card> attackers = ev.attackersMap.get(k);
             if (attackers == null || attackers.isEmpty()) {
                 continue;
             }
-            if ( sb.length() > 0 ) sb.append("\n");
+            if (sb.length() > 0) sb.append("\n");
             sb.append(ev.player + " assigned " + Lang.joinHomogenous(attackers));
             sb.append(" to attack " + k + ".");
         }
-        if ( sb.length() == 0 )
+        if (sb.length() == 0) {
             sb.append(ev.player + " didn't attack this turn.");
-
+        }
         return new GameLogEntry(GameLogEntryType.COMBAT, sb.toString());
     }
 
@@ -194,17 +191,20 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             if (attackers == null || attackers.isEmpty()) {
                 continue;
             }
-            if ( sb.length() > 0 ) sb.append("\n");
+            if (sb.length() > 0) {
+                sb.append("\n");
+            }
 
             String controllerName = defender instanceof Card ? ((Card)defender).getController().getName() : defender.getName();
             boolean firstAttacker = true;
             for (final Entry<Card, Collection<Card>> att : attackers.entrySet()) {
-                if ( !firstAttacker ) sb.append("\n");
+                if (!firstAttacker) sb.append("\n");
 
                 blockers = att.getValue();
-                if ( blockers.isEmpty() ) {
+                if (blockers.isEmpty()) {
                     sb.append(controllerName + " didn't block ");
-                } else {
+                }
+                else {
                     sb.append(controllerName + " assigned " + Lang.joinHomogenous(blockers) + " to block ");
                 }
 
@@ -218,16 +218,15 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventMulligan ev) {
-        String message = String.format( "%s has mulliganed down to %d cards.", ev.player, ev.player.getZone(ZoneType.Hand).size());
+        String message = String.format("%s has mulliganed down to %d cards.", ev.player, ev.player.getZone(ZoneType.Hand).size());
         return new GameLogEntry(GameLogEntryType.MULLIGAN, message);
     }
-
 
     @Subscribe
     public void recieve(GameEvent ev) {
         GameLogEntry le = ev.visit(this);
-        if ( le != null )
+        if (le != null) {
             log.add(le);
+        }
     }
-
 } // end class GameLog

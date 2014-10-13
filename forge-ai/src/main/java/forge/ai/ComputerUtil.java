@@ -511,7 +511,7 @@ public class ComputerUtil {
     // Precondition it wants: remaining are reverse-sorted by CMC
     private static Card chooseCardToSacrifice(final CardCollection remaining, final Player ai, final boolean destroy) {
         // If somehow ("Drop of Honey") they suggest to destroy opponent's card - use the chance!
-        for(Card c : remaining) { // first compare is fast, second is precise
+        for (Card c : remaining) { // first compare is fast, second is precise
             if (c.getController() != ai && ai.getOpponents().contains(c.getController()))
                 return c;
         }
@@ -1325,7 +1325,7 @@ public class ComputerUtil {
             int tgtCandidates = Math.max(Math.abs(lands.size()-nonLands.size()), 3);
             System.out.println("Partial Paris: " + ai.getName() + " lacks lands, aiming to exile " + tgtCandidates + " cards.");
             
-            for(int i=0;i<tgtCandidates;i++) {
+            for (int i=0;i<tgtCandidates;i++) {
                 candidates.add(nonLands.get(i));
             }
         }
@@ -1334,14 +1334,14 @@ public class ComputerUtil {
             //Init
             int cntColors = MagicColor.WUBRG.length;
             List<CardCollection> numProducers = new ArrayList<CardCollection>(cntColors);
-            for(byte col : MagicColor.WUBRG) {
+            for (byte col : MagicColor.WUBRG) {
                 numProducers.add(col, new CardCollection());
             }
 
-            for(Card c : lands) {
-                for(SpellAbility sa : c.getManaAbilities()) {
+            for (Card c : lands) {
+                for (SpellAbility sa : c.getManaAbilities()) {
                     AbilityManaPart abmana = sa.getManaPart();
-                    for(byte col : MagicColor.WUBRG) {
+                    for (byte col : MagicColor.WUBRG) {
                         if (abmana.canProduce(MagicColor.toLongString(col))) {
                             numProducers.get(col).add(c);
                         }
@@ -1351,7 +1351,7 @@ public class ComputerUtil {
         }
 
         System.out.print("Partial Paris: " + ai.getName() + " may exile ");
-        for(Card c : candidates) {
+        for (Card c : candidates) {
             System.out.print(c.toString() + ", ");
         }
         System.out.println();

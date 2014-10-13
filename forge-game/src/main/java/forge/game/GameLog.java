@@ -67,8 +67,9 @@ public class GameLog extends Observable {
     
         for (int i = log.size() - 1; i >= 0; i--) {
             GameLogEntry le = log.get(i);
-            if(logLevel == null || le.type.compareTo(logLevel) <= 0 )
+            if (logLevel == null || le.type.compareTo(logLevel) <= 0) {
                 result.add(le);
+            }
         }
         return result;
     }
@@ -78,8 +79,9 @@ public class GameLog extends Observable {
     
         for (int i = log.size() - 1; i >= 0; i--) {
             GameLogEntry le = log.get(i);
-            if(logLevel == null || le.type.compareTo(logLevel) == 0 )
+            if (logLevel == null || le.type.compareTo(logLevel) == 0) {
                 result.add(le);
+            }
         }
         return result;
     }
