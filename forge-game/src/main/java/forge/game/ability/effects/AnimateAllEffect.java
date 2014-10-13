@@ -157,7 +157,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
             // remove abilities
             final ArrayList<SpellAbility> removedAbilities = new ArrayList<SpellAbility>();
             if (sa.hasParam("OverwriteAbilities") || sa.hasParam("RemoveAllAbilities")) {
-                for (final SpellAbility ab : c.getNonManaAbilities()) {
+                for (final SpellAbility ab : c.getSpellAbilities()) {
                     if (ab.isAbility()) {
                         c.removeSpellAbility(ab);
                         removedAbilities.add(ab);

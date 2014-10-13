@@ -55,12 +55,12 @@ public class PlayerZone extends Zone {
             if (c.hasKeyword("You may look at this card.")) {
                 return true;
             }
-   
+
             if (c.isLand() && (c.hasKeyword("May be played") || c.hasKeyword("May be played without paying its mana cost"))) {
                 return true;
             }
-   
-            for (final SpellAbility sa : c.getNonManaAbilities()) {
+
+            for (final SpellAbility sa : c.getSpellAbilities()) {
                 final ZoneType restrictZone = sa.getRestrictions().getZone();
                 if (PlayerZone.this.is(restrictZone)) {
                     return true;

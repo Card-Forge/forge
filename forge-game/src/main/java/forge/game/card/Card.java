@@ -1540,7 +1540,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         boolean primaryCost = true;
         boolean isNonAura = !type.hasSubtype("Aura");
 
-        for (final SpellAbility sa : state.getNonManaAbilities()) {
+        for (final SpellAbility sa : state.getSpellAbilities()) {
             // only add abilities not Spell portions of cards
             if (sa == null || !state.getType().isPermanent()) {
                 continue;
@@ -1610,7 +1610,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
         // I think SpellAbilities should be displayed after Keywords
         // Add SpellAbilities
-        for (final SpellAbility element : state.getNonManaAbilities()) {
+        for (final SpellAbility element : state.getSpellAbilities()) {
             String elementText = element.toString();
 
             //Determine if a card has multiple choices, then format it in an easier to read list.
@@ -1862,6 +1862,9 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         currentState.removeSpellAbility(a);
     }
 
+    public final FCollectionView<SpellAbility> getSpellAbilities() {
+        return currentState.getSpellAbilities();
+    }
     public final FCollectionView<SpellAbility> getManaAbilities() {
         return currentState.getManaAbilities();
     }
@@ -2852,7 +2855,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     private final void updateChangedText() {
         resetChangedSVars();
         final List<CardTraitBase> allAbs = ImmutableList.<CardTraitBase>builder()
-            .addAll(getNonManaAbilities())
+            .addAll(getSpellAbilities())
             .addAll(getStaticAbilities())
             .addAll(getReplacementEffects())
             .addAll(getTriggers())
@@ -4324,7 +4327,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             if (hasStartOfUnHiddenKeyword("Flashback")) {
                 fb = true;
             }
-            for (final SpellAbility sa : getNonManaAbilities()) {
+            for (final SpellAbility sa : getSpellAbilities()) {
                 if (sa.isFlashBackAbility()) {
                     fb = true;
                 }
@@ -4357,7 +4360,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 return false;
             }
         } else if (property.startsWith("hasLevelUp")) {
-            for (final SpellAbility sa : getNonManaAbilities()) {
+            for (final SpellAbility sa : getSpellAbilities()) {
                 if (sa.getApi() == ApiType.PutCounter && sa.hasParam("LevelUp")) {
                     return true;
                 }
@@ -4828,7 +4831,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             }
         } else if (property.startsWith("RememberMap")) {
             System.out.println(source.getRememberMap());
-            for (SpellAbility sa : source.getNonManaAbilities()) {
+            for (SpellAbility sa : source.getSpellAbilities()) {
                 if (sa.getActivatingPlayer() == null) continue;
                 for (Player p : AbilityUtils.getDefinedPlayers(source, property.split("RememberMap_")[1], sa)) {
                     if (source.getRememberMap().get(p).contains(this)) {
@@ -4854,28 +4857,28 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
                 return false;
             }
         } else if (property.equals("hasActivatedAbilityWithTapCost")) {
-            for (final SpellAbility sa : getNonManaAbilities()) {
+            for (final SpellAbility sa : getSpellAbilities()) {
                 if (sa.isAbility() && (sa.getPayCosts() != null) && sa.getPayCosts().hasTapCost()) {
                     return true;
                 }
             }
             return false;
         } else if (property.equals("hasActivatedAbility")) {
-            for (final SpellAbility sa : getNonManaAbilities()) {
+            for (final SpellAbility sa : getSpellAbilities()) {
                 if (sa.isAbility()) {
                     return true;
                 }
             }
             return false;
         } else if (property.equals("hasManaAbility")) {
-            for (final SpellAbility sa : getNonManaAbilities()) {
+            for (final SpellAbility sa : getSpellAbilities()) {
                 if (sa.isManaAbility()) {
                     return true;
                 }
             }
             return false;
         } else if (property.equals("hasNonManaActivatedAbility")) {
-            for (final SpellAbility sa : getNonManaAbilities()) {
+            for (final SpellAbility sa : getSpellAbilities()) {
                 if (sa.isAbility() && !sa.isManaAbility()) {
                     return true;
                 }
@@ -5916,7 +5919,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     public final boolean canBeEnchantedBy(final Card aura, final boolean checkSBA) {
         SpellAbility sa = aura.getFirstAttachSpell();
         if (aura.isBestowed()) {
-            for (SpellAbility s : aura.getNonManaAbilities()) {
+            for (SpellAbility s : aura.getSpellAbilities()) {
                 if (s.getApi() == ApiType.Attach && s.hasParam("Bestow")) {
                     sa = s;
                     break;
@@ -6270,7 +6273,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         // this can only be called by the Human
 
         final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
-        for (SpellAbility sa : getNonManaAbilities()) {
+        for (SpellAbility sa : getSpellAbilities()) {
             //add alternative costs as additional spell abilities
             abilities.add(sa);
             abilities.addAll(GameActionUtil.getAlternativeCosts(sa));

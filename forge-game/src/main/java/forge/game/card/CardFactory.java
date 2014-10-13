@@ -163,16 +163,14 @@ public class CardFactory {
         c.setCopiedSpell(true);
 
         final SpellAbility copySA;
-        if(sa instanceof AbilityActivated)
-        {
+        if (sa instanceof AbilityActivated) {
             copySA = ((AbilityActivated)sa).getCopy();
             copySA.setHostCard(original);
         }
         else if (sa.isTrigger()) {
             copySA = getCopiedTriggeredAbility(sa);
         }
-        else
-        {
+        else {
             copySA = sa.copy();
             copySA.setHostCard(c);
             SpellAbility parentSA = copySA;

@@ -380,7 +380,7 @@ public class AiController {
     private ArrayList<SpellAbility> getSpellAbilities(final CardCollectionView l) {
         final ArrayList<SpellAbility> spellAbilities = new ArrayList<SpellAbility>();
         for (final Card c : l) {
-            for (final SpellAbility sa : c.getNonManaAbilities()) {
+            for (final SpellAbility sa : c.getSpellAbilities()) {
                 spellAbilities.add(sa);
             }
         }
@@ -463,7 +463,7 @@ public class AiController {
             // consider not playing lands if there are enough already and an ability with a discard cost is present
             if (landsInPlay.size() + landList.size() > max) {
                 for (Card c : allCards) {
-                    for (SpellAbility sa : c.getNonManaAbilities()) {
+                    for (SpellAbility sa : c.getSpellAbilities()) {
                         if (sa.getPayCosts() != null) {
                             for (CostPart part : sa.getPayCosts().getCostParts()) {
                                 if (part instanceof CostDiscard) {
@@ -488,7 +488,7 @@ public class AiController {
                 }
 
                 // don't play the land if it has cycling and enough lands are available
-                final FCollectionView<SpellAbility> spellAbilities = c.getNonManaAbilities();
+                final FCollectionView<SpellAbility> spellAbilities = c.getSpellAbilities();
 
                 final CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
                 CardCollection lands = new CardCollection(player.getCardsIn(ZoneType.Battlefield));

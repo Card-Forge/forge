@@ -776,7 +776,7 @@ public class GameAction {
         final GameEntity entity = c.getEnchanting();
         SpellAbility sa = c.getFirstAttachSpell();
         if (c.isBestowed()) {
-            for (SpellAbility s : c.getNonManaAbilities()) {
+            for (SpellAbility s : c.getSpellAbilities()) {
                 if (s.getApi() == ApiType.Attach && s.hasParam("Bestow")) {
                     sa = s;
                     break;

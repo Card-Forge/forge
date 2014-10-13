@@ -536,7 +536,7 @@ public class ComputerUtilCard {
             value -= 25;
         }
     
-        for (final SpellAbility sa : c.getNonManaAbilities()) {
+        for (final SpellAbility sa : c.getSpellAbilities()) {
             if (sa.isAbility()) {
                 value += 10;
             }

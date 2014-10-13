@@ -525,7 +525,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     movedCard = game.getAction().moveTo(destination, tgtC);
                     // If a card is Exiled from the stack, remove its spells from the stack
                     if (sa.hasParam("Fizzle")) {
-                        final FCollectionView<SpellAbility> spells = tgtC.getNonManaAbilities();
+                        final FCollectionView<SpellAbility> spells = tgtC.getSpellAbilities();
                         for (SpellAbility spell : spells) {
                             if (tgtC.isInZone(ZoneType.Exile) || tgtC.isInZone(ZoneType.Hand)) {
                                 final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spell);

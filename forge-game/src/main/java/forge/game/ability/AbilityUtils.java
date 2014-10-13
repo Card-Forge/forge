@@ -1160,18 +1160,18 @@ public class AbilityUtils {
             for (final Object o : card.getRemembered()) {
                 if (o instanceof Card) {
                     final Card rem = (Card) o;
-                    sas.addAll(game.getCardState(rem).getNonManaAbilities());
+                    sas.addAll(game.getCardState(rem).getSpellAbilities());
                 }
             }
         }
         else if (defined.equals("Imprinted")) {
             for (final Card imp : card.getImprintedCards()) {
-                sas.addAll(imp.getNonManaAbilities());
+                sas.addAll(imp.getSpellAbilities());
             }
         }
         else if (defined.equals("EffectSource")) {
             if (card.getEffectSource() != null) {
-                sas.addAll(card.getEffectSource().getNonManaAbilities());
+                sas.addAll(card.getEffectSource().getSpellAbilities());
             }
         }
         else if (defined.equals("SourceFirstSpell")) {

@@ -127,7 +127,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
                     return true;
                 }
 
-                for (final SpellAbility sa : c.getNonManaAbilities()) {
+                for (final SpellAbility sa : c.getSpellAbilities()) {
                     if (sa.isAbility() && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
                         return true;
                     }
@@ -148,7 +148,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
                         return true;
                     }
 
-                    for (final SpellAbility sa : c.getNonManaAbilities()) {
+                    for (final SpellAbility sa : c.getSpellAbilities()) {
                         if (sa.isAbility() && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
                             return true;
                         }

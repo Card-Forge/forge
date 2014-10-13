@@ -2375,7 +2375,7 @@ public class CardFactoryUtil {
                 card.addTrigger(parsedSacTrigger);
             }
             else if (keyword.equals("Delve")) {
-                card.getNonManaAbilities().get(0).setDelve(true);
+                card.getSpellAbilities().getFirst().setDelve(true);
             }
             else if (keyword.startsWith("Haunt")) {
                 setupHauntSpell(card);
@@ -2792,7 +2792,7 @@ public class CardFactoryUtil {
                 + "At the beginning of each of your upkeeps, copy " + card.toString() + " except for its epic ability.");
         card.setSVar("EpicCopy", "DB$ CopySpellAbility | Defined$ EffectSource");
         
-        final SpellAbility origSA = card.getNonManaAbilities().get(0);
+        final SpellAbility origSA = card.getSpellAbilities().getFirst();
         
         SpellAbility child = origSA;
         while (child.getSubAbility() != null) {

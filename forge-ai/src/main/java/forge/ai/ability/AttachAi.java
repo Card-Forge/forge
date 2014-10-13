@@ -362,7 +362,7 @@ public class AttachAi extends SpellAbilityAi {
         	evenBetterList = CardLists.filter(betterList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    for (final SpellAbility sa : c.getNonManaAbilities()) {
+                    for (final SpellAbility sa : c.getSpellAbilities()) {
                         if (sa.isAbility() && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
                             return false;
                         }
@@ -1294,7 +1294,7 @@ public class AttachAi extends SpellAbilityAi {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME's activated abilities can't be activated.")) {
-            for (SpellAbility ability : card.getNonManaAbilities()) {
+            for (SpellAbility ability : card.getSpellAbilities()) {
                 if (ability.isAbility()) {
                     return true;
                 }

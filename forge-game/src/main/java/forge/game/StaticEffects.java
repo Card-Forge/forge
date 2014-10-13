@@ -163,7 +163,7 @@ public class StaticEffects {
         }
 
         if (params.containsKey("IgnoreEffectCost")) {
-            for (final SpellAbility s : se.getSource().getNonManaAbilities()) {
+            for (final SpellAbility s : se.getSource().getSpellAbilities()) {
                 if (s instanceof AbilityStatic && s.isTemporary()) {
                     se.getSource().removeSpellAbility(s);
                 }
@@ -214,7 +214,7 @@ public class StaticEffects {
 
             // remove abilities
             if (params.containsKey("AddAbility") || params.containsKey("GainsAbilitiesOf")) {
-                for (final SpellAbility s : affectedCard.getNonManaAbilities()) {
+                for (final SpellAbility s : affectedCard.getSpellAbilities()) {
                     if (s.isTemporary()) {
                         affectedCard.removeSpellAbility(s);
                     }
@@ -231,7 +231,7 @@ public class StaticEffects {
 
             // remove abilities
             if (params.containsKey("RemoveAllAbilities")) {
-                for (final SpellAbility ab : affectedCard.getNonManaAbilities()) {
+                for (final SpellAbility ab : affectedCard.getSpellAbilities()) {
                     ab.setTemporarilySuppressed(false);
                 }
                 for (final StaticAbility stA : affectedCard.getStaticAbilities()) {

@@ -251,7 +251,7 @@ public class Game {
         return CardLists.filter(stackZone.getCards(), new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                for (final SpellAbility sa : c.getNonManaAbilities()) {
+                for (final SpellAbility sa : c.getSpellAbilities()) {
                     final ZoneType restrictZone = sa.getRestrictions().getZone();
                     if (ZoneType.Stack == restrictZone) {
                         return true;

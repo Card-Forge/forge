@@ -66,7 +66,7 @@ public class AiAttackController {
     private List<Card> myList; // holds computer creatures
     
     private final Player ai;
-	private Player defendingOpponent;
+    private Player defendingOpponent;
     
     private int aiAggression = 0; // added by Masher, how aggressive the ai is
                                   // attack will be depending on circumstances
@@ -118,13 +118,13 @@ public class AiAttackController {
             }
         };
         for (Card c : CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), canAnimate)) {
-        	if (c.isToken() && c.getCopiedPermanent() == null) {
-        		continue;
-        	}
-            for (SpellAbility sa : c.getNonManaAbilities()) {
+            if (c.isToken() && c.getCopiedPermanent() == null) {
+                continue;
+            }
+            for (SpellAbility sa : c.getSpellAbilities()) {
                 if (sa.getApi() == ApiType.Animate) {
                     if (ComputerUtilCost.canPayCost(sa, defender) 
-                    		&& sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
+                            && sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
                         Card animatedCopy = CardFactory.copyCard(c, true);
                         AnimateAi.becomeAnimated(animatedCopy, c.hasSickness(), sa);
                         defenders.add(animatedCopy);
@@ -142,7 +142,7 @@ public class AiAttackController {
         if (defender.getLife() < 8) { //Concentrate on opponent within easy kill range
             return defender;
         } else { //Otherwise choose a random opponent to ensure no ganging up on players
-        	defender = ai.getOpponents().get(MyRandom.getRandom().nextInt(ai.getOpponents().size()));
+            defender = ai.getOpponents().get(MyRandom.getRandom().nextInt(ai.getOpponents().size()));
         }
         return defender;
     }
@@ -420,7 +420,7 @@ public class AiAttackController {
                 break;
             }
             if (blocker.hasKeyword("CARDNAME can block an additional creature.")) {
-            	blockedAttackers.add(remainingAttackers.get(0));
+                blockedAttackers.add(remainingAttackers.get(0));
                 remainingAttackers.remove(0);
                 if (remainingAttackers.isEmpty()) {
                     break;
@@ -433,21 +433,21 @@ public class AiAttackController {
         
         int trampleDamage = 0;
         for (Card attacker : blockedAttackers) {
-        	if (attacker.hasKeyword("Trample")) {
-        		int damage = ComputerUtilCombat.getAttack(attacker);
-        		for (Card blocker : this.blockers) {
-        			if (CombatUtil.canBlock(attacker, blocker)) {
-        				damage -= ComputerUtilCombat.shieldDamage(attacker, blocker);
-        			}
-        		}
-        		if (damage > 0) {
-        			trampleDamage += damage;
-        		}
-        	}
+            if (attacker.hasKeyword("Trample")) {
+                int damage = ComputerUtilCombat.getAttack(attacker);
+                for (Card blocker : this.blockers) {
+                    if (CombatUtil.canBlock(attacker, blocker)) {
+                        damage -= ComputerUtilCombat.shieldDamage(attacker, blocker);
+                    }
+                }
+                if (damage > 0) {
+                    trampleDamage += damage;
+                }
+            }
         }
 
         if (ComputerUtilCombat.sumDamageIfUnblocked(unblockedAttackers, opp) + ComputerUtil.possibleNonCombatDamage(ai) 
-        		+ trampleDamage>= opp.getLife()
+                + trampleDamage>= opp.getLife()
                 && !((opp.cantLoseForZeroOrLessLife() || ai.cantWin()) && (opp.getLife() < 1))) {
             return true;
         }
@@ -989,8 +989,8 @@ public class AiAttackController {
         }
 
         if (numberOfPossibleBlockers > 2 
-        		|| (numberOfPossibleBlockers >= 1 && CombatUtil.canAttackerBeBlockedWithAmount(attacker, 1, combat))
-        		|| (numberOfPossibleBlockers == 2 && CombatUtil.canAttackerBeBlockedWithAmount(attacker, 2, combat))) {
+                || (numberOfPossibleBlockers >= 1 && CombatUtil.canAttackerBeBlockedWithAmount(attacker, 1, combat))
+                || (numberOfPossibleBlockers == 2 && CombatUtil.canAttackerBeBlockedWithAmount(attacker, 2, combat))) {
             canBeBlocked = true;
         }
         /*System.out.println(attacker + " canBeKilledByOne: " + canBeKilledByOne + " canKillAll: "
@@ -1066,40 +1066,40 @@ public class AiAttackController {
         if (!choices.contains(color)) {
             color = null;
         }
-    	for (Card c : oppList) {   //find a blocker that ignores the currently selected protection
-    		if (artifact != null && !c.isArtifact()) {
-    			artifact = null;
-    		}
-    		if (color != null) {
-        		switch (color) {
-        		case "black":
-        			if (!c.isBlack()) {
-        				color = null;
-        			}
-        			break;
-        		case "blue":
-        			if (!c.isBlue()) {
-        				color = null;
-        			}
-        			break;
-        		case "green":
-        			if (!c.isGreen()) {
-        				color = null;
-        			}
-        			break;
-        		case "red":
-        			if (!c.isRed()) {
-        				color = null;
-        			}
-        			break;
-        		case "white":
-        			if (!c.isWhite()) {
-        				color = null;
-        			}
-        			break;
-        		}
-        	}
-    		if (color == null && artifact == null) {  //nothing can make the attacker unblockable
+        for (Card c : oppList) {   //find a blocker that ignores the currently selected protection
+            if (artifact != null && !c.isArtifact()) {
+                artifact = null;
+            }
+            if (color != null) {
+                switch (color) {
+                case "black":
+                    if (!c.isBlack()) {
+                        color = null;
+                    }
+                    break;
+                case "blue":
+                    if (!c.isBlue()) {
+                        color = null;
+                    }
+                    break;
+                case "green":
+                    if (!c.isGreen()) {
+                        color = null;
+                    }
+                    break;
+                case "red":
+                    if (!c.isRed()) {
+                        color = null;
+                    }
+                    break;
+                case "white":
+                    if (!c.isWhite()) {
+                        color = null;
+                    }
+                    break;
+                }
+            }
+            if (color == null && artifact == null) {  //nothing can make the attacker unblockable
                 return null;
             }
         }

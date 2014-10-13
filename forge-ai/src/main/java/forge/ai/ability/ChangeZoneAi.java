@@ -849,7 +849,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        for (SpellAbility attach : c.getNonManaAbilities()) {
+                        for (SpellAbility attach : c.getSpellAbilities()) {
                             if ("Pump".equals(attach.getParam("AILogic"))) {
                                 return true; //only use good auras
                             }
