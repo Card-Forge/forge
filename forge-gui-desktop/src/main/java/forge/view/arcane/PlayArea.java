@@ -59,9 +59,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     /** Constant <code>CARD_SPACING_Y=0.06f</code>. */
     private static final float CARD_SPACING_Y = 0.06f;
     /** Constant <code>STACK_SPACING_X=0.07f</code>. */
-    private static final float STACK_SPACING_X = 0.1f;
+    private static final float STACK_SPACING_X = 0.12f;
     /** Constant <code>STACK_SPACING_Y=0.07f</code>. */
-    private static final float STACK_SPACING_Y = 0.1f;
+    private static final float STACK_SPACING_Y = 0.12f;
 
     //private final int creatureStackMax = 4;
     private final int landStackMax = 5;
