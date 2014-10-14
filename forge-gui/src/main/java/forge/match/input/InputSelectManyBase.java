@@ -88,5 +88,7 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
         }
     }
 
-    public final void setCancelAllowed(boolean allow) { this.allowCancel = allow ; }
+    public final void setCancelAllowed(boolean allow) {
+        this.allowCancel = allow ;
+    }
 }
