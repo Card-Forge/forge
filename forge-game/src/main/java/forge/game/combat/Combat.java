@@ -201,11 +201,12 @@ public class Combat {
     // takes LKI into consideration, should use it at all times (though a single iteration over multimap seems faster)
     public final AttackingBand getBandOfAttacker(final Card c) {
         for (AttackingBand ab : attackedByBands.values()) {
-            if (ab.contains(c))
+            if (ab.contains(c)) {
                 return ab;
+            }
         }
         CombatLki lki = lkiCache.get(c); 
-        return lki == null || lki.isAttacker ? null : lki.getFirstBand();
+        return lki == null || !lki.isAttacker ? null : lki.getFirstBand();
     }
 
     public final List<AttackingBand> getAttackingBands() {
@@ -439,7 +440,7 @@ public class Combat {
         }
         
         // remove card from map
-        while(blockedBands.values().remove(c));
+        while (blockedBands.values().remove(c));
         c.updateBlockingForView();
     }
 
