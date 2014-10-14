@@ -24,6 +24,7 @@ import java.awt.image.ColorModel;
 
 import forge.ImageCache;
 import forge.game.card.CardView.CardStateView;
+import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.toolbox.CardFaceSymbols;
@@ -48,7 +49,7 @@ public final class FImageUtil {
      * For flip cards, returns the un-flipped image. 
      */
     public static BufferedImage getImage(final CardStateView card) {
-        BufferedImage image = ImageCache.getOriginalImage(card.getImageKey(false), true);
+        BufferedImage image = ImageCache.getOriginalImage(MatchUtil.getCardImageKey(card), true);
         final int foilIndex = card.getFoilIndex();
         if (image != null && foilIndex > 0) { 
             image = getImageWithFoilEffect(image, foilIndex);

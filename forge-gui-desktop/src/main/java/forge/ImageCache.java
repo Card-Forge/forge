@@ -36,6 +36,7 @@ import forge.assets.FSkinProp;
 import forge.assets.ImageUtil;
 import forge.game.card.CardView;
 import forge.item.InventoryItem;
+import forge.match.MatchUtil;
 import forge.properties.ForgeConstants;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;
@@ -81,7 +82,7 @@ public class ImageCache {
      * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.
      */
     public static BufferedImage getImage(final CardView card, final int width, final int height) {
-        final String key = card.getCurrentState().getImageKey(false);
+        final String key = MatchUtil.getCardImageKey(card.getCurrentState());
         return scaleImage(key, width, height, true);
     }
 

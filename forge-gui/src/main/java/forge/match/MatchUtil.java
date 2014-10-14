@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.eventbus.EventBus;
@@ -29,6 +30,7 @@ import forge.game.GameType;
 import forge.game.GameView;
 import forge.game.Match;
 import forge.game.card.CardView;
+import forge.game.card.CardView.CardStateView;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
@@ -277,6 +279,18 @@ public class MatchUtil {
         }
 
         return controller.assignDamage(attacker, blockers, damage, defender, overrideOrder);
+    }
+
+    public static String getCardImageKey(CardStateView csv) {
+        return csv.getImageKey(getCurrentPlayer().getView());
+    }
+
+    public static boolean canCardBeShown(CardView cv) {
+        return cv.canBeShownTo(getCurrentPlayer().getView());
+    }
+
+    public static boolean canFaceDownCardBeShown(CardView cv) {
+        return cv.hasAlternateState() && cv.canFaceDownBeShownTo(getCurrentPlayer().getView());
     }
 
     private static Set<PlayerView> highlightedPlayers = new HashSet<PlayerView>();

@@ -23,6 +23,7 @@ import forge.item.IPaperCard;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
+import forge.util.FCollectionView;
 
 
 public class CardView extends GameEntityView {
@@ -52,11 +53,11 @@ public class CardView extends GameEntityView {
         return collection;
     }
 
-    public static boolean mayViewAny(Iterable<CardView> cards) {
+    public static boolean mayViewAny(Iterable<CardView> cards, PlayerView viewer) {
         if (cards == null) { return false; }
 
         for (CardView cv : cards) {
-            if (cv.mayBeShown) {
+            if (cv.canBeShownTo(viewer)) {
                 return true;
             }
         }
@@ -289,11 +290,120 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.NamedCard, c.getNamedCard());
     }
 
+    public boolean mayPlayerLook(PlayerView pv) {
+        TrackableCollection<PlayerView> col = get(TrackableProperty.PlayerMayLook);
+        if (col != null && col.contains(pv)) {
+            return true;
+        }
+        col = get(TrackableProperty.PlayerMayLookTemp);
+        if (col != null && col.contains(pv)) {
+            return true;
+        }
+        return false;
+    }
+    void setPlayerMayLook(Player p, boolean mayLook, boolean temp) {
+        TrackableProperty prop = temp ? TrackableProperty.PlayerMayLookTemp : TrackableProperty.PlayerMayLook;
+        TrackableCollection<PlayerView> col = get(prop);
+        if (mayLook) {
+            if (col == null) {
+                col = new TrackableCollection<PlayerView>(p.getView());
+                set(prop, col);
+            }
+            else if (col.add(p.getView())) {
+                flagAsChanged(prop);
+            }
+        }
+        else if (col != null) {
+            if (col.remove(p.getView())) {
+                if (col.isEmpty()) {
+                    set(prop, null);
+                }
+                else {
+                    flagAsChanged(prop);
+                }
+            }
+        }
+    }
+    public boolean canBeShownTo(final PlayerView viewer) {
+        if (viewer == null) { return false; }
+
+        ZoneType zone = getZone();
+        if (zone == null) { return true; } //cards outside any zone are visible to all
+
+        final PlayerView controller = getController();
+        switch (zone) {
+        case Ante:
+        case Command:
+        case Exile:
+        case Battlefield:
+        case Graveyard:
+        case Stack:
+            //cards in these zones are visible to all
+            return true;
+        case Hand:
+            if (controller.hasKeyword("Play with your hand revealed.")) {
+                return true;
+            }
+            //fall through
+        case Sideboard:
+            //face-up cards in these zones are hidden to opponents unless they specify otherwise
+            if (controller.isOpponentOf(viewer) && !getCurrentState().getOpponentMayLook()) {
+                break;
+            }
+            return true;
+        case Library:
+        case PlanarDeck:
+            //cards in these zones are hidden to all unless they specify otherwise
+            if (controller == viewer && getCurrentState().getYouMayLook()) {
+                return true;
+            }
+            if (controller.isOpponentOf(viewer) && getCurrentState().getOpponentMayLook()) {
+                return true;
+            }
+            break;
+        case SchemeDeck:
+            // true for now, to actually see the Scheme cards (can't see deck anyway)
+            return true;
+        }
+
+        // special viewing permissions for viewer
+        if (mayPlayerLook(viewer)) {
+            return true;
+        }
+
+        //if viewer is controlled by another player, also check if card can be shown to that player
+        PlayerView mindSlaveMaster = controller.getMindSlaveMaster();
+        if (mindSlaveMaster != null && mindSlaveMaster == viewer) {
+            return canBeShownTo(controller);
+        }
+        return false;
+    }
+    public boolean canFaceDownBeShownTo(final PlayerView viewer) {
+        if (!isFaceDown()) {
+            return true;
+        }
+        if (viewer.hasKeyword("CanSeeOpponentsFaceDownCards")) {
+            return true;
+        }
+
+        // special viewing permissions for viewer
+        if (mayPlayerLook(viewer)) {
+            return true;
+        }
+
+        //if viewer is controlled by another player, also check if face can be shown to that player
+        PlayerView mindSlaveMaster = viewer.getMindSlaveMaster();
+        if (mindSlaveMaster != null && canFaceDownBeShownTo(mindSlaveMaster)) {
+            return true;
+        }
+        return !getController().isOpponentOf(viewer) || getCurrentState().getOpponentMayLook();
+    }
+
     public CardView getEquipping() {
         return get(TrackableProperty.Equipping);
     }
 
-    public Iterable<CardView> getEquippedBy() {
+    public FCollectionView<CardView> getEquippedBy() {
         return get(TrackableProperty.EquippedBy);
     }
 
@@ -327,7 +437,7 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.Fortifying);
     }
 
-    public Iterable<CardView> getFortifiedBy() {
+    public FCollectionView<CardView> getFortifiedBy() {
         return get(TrackableProperty.FortifiedBy);
     }
 
@@ -335,7 +445,7 @@ public class CardView extends GameEntityView {
         return getFortifiedBy() != null;
     }
 
-    public Iterable<CardView> getGainControlTargets() {
+    public FCollectionView<CardView> getGainControlTargets() {
         return get(TrackableProperty.GainControlTargets);
     }
 
@@ -343,11 +453,11 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.CloneOrigin);
     }
 
-    public Iterable<CardView> getImprintedCards() {
+    public FCollectionView<CardView> getImprintedCards() {
         return get(TrackableProperty.ImprintedCards);
     }
 
-    public Iterable<CardView> getHauntedBy() {
+    public FCollectionView<CardView> getHauntedBy() {
         return get(TrackableProperty.HauntedBy);
     }
 
@@ -355,7 +465,7 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.Haunting);
     }
 
-    public Iterable<CardView> getMustBlockCards() {
+    public FCollectionView<CardView> getMustBlockCards() {
         return get(TrackableProperty.MustBlockCards);
     }
 
@@ -534,9 +644,9 @@ public class CardView extends GameEntityView {
             return getCurrentState().getName();
         }
 
-        if (!mayBeShown) {
-            return "(Unknown card)";
-        }
+        /*if (!mayBeShown) {
+            return "???";
+        }*/
 
         if (StringUtils.isEmpty(getCurrentState().getName())) {
             CardStateView alternate = getAlternateState();
@@ -599,8 +709,8 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.Colors, c.determineColor());
         }
 
-        public String getImageKey(boolean ignoreMayBeShown) {
-            if (mayBeShown || ignoreMayBeShown) {
+        public String getImageKey(PlayerView viewer) {
+            if (viewer == null || canBeShownTo(viewer)) {
                 return get(TrackableProperty.ImageKey);
             }
             return ImageKeys.HIDDEN_CARD;
@@ -741,6 +851,12 @@ public class CardView extends GameEntityView {
         public boolean hasTrample() {
             return get(TrackableProperty.HasTrample);
         }
+        public boolean getYouMayLook() {
+            return get(TrackableProperty.YouMayLook);
+        }
+        public boolean getOpponentMayLook() {
+            return get(TrackableProperty.OpponentMayLook);
+        }
         public int getBlockAdditional() {
             return get(TrackableProperty.BlockAdditional);
         }
@@ -756,6 +872,7 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.HasInfect, c.hasKeyword("Infect", state));
             set(TrackableProperty.HasStorm, c.hasKeyword("Storm", state));
             set(TrackableProperty.HasTrample, c.hasKeyword("Trample", state));
+            set(TrackableProperty.OpponentMayLook, c.hasKeyword("Your opponent may look at this card."));
             set(TrackableProperty.BlockAdditional, c.getAmountOfKeyword("CARDNAME can block an additional creature.", state));
             updateAbilityText(c, state);
         }
@@ -894,14 +1011,5 @@ public class CardView extends GameEntityView {
             set(key, null);
         }
         return null;
-    }
-
-    //below are properties not shared across game instances
-    private boolean mayBeShown = true; //TODO: Make may be shown get updated
-    public boolean mayBeShown() {
-        return mayBeShown;
-    }
-    public void setMayBeShown(boolean mayBeShown0) {
-        //mayBeShown = mayBeShown0;
     }
 }

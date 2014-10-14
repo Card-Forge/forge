@@ -5,7 +5,6 @@ package forge.control;
 
 import forge.LobbyPlayer;
 import forge.game.Game;
-import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -89,16 +88,6 @@ public class WatchLocalGame extends PlayerControllerHuman {
 
     @Override
     public void alphaStrike() {
-    }
-
-    @Override
-    public boolean mayShowCard(final Card c) {
-        return true;
-    }
-
-    @Override
-    public boolean mayShowCardFace(final Card c) {
-        return true;
     }
 
     @Override

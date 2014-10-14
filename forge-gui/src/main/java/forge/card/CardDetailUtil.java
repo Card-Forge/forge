@@ -54,7 +54,7 @@ public class CardDetailUtil {
         if (card == null) {
             return getBorderColors(null, false, false, false).iterator().next();
         }
-        return getBorderColors(card.getColors(), card.isLand(), card.getCard().mayBeShown(), false).iterator().next();
+        return getBorderColors(card.getColors(), card.isLand(), MatchUtil.canCardBeShown(card.getCard()), false).iterator().next();
     }
     public static DetailColors getBorderColor(final ColorSet cardColors, final boolean isLand, boolean canShow) {
         return getBorderColors(cardColors, isLand, canShow, false).get(0);
@@ -63,7 +63,7 @@ public class CardDetailUtil {
         if (card == null) {
             return getBorderColors(null, false, false, true);
         }
-        return getBorderColors(card.getColors(), card.isLand(), card.getCard().mayBeShown(), true);
+        return getBorderColors(card.getColors(), card.isLand(), MatchUtil.canCardBeShown(card.getCard()), true);
     }
     private static List<DetailColors> getBorderColors(final ColorSet cardColors, final boolean isLand, boolean canShow, boolean supportMultiple) {
         List<DetailColors> borderColors = new ArrayList<DetailColors>();

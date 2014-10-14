@@ -176,12 +176,7 @@ public class PlayerControllerHuman extends PlayerController {
     }
     private void tempShowCard(Card c) {
         if (c == null) { return; }
-
-        CardView cv = c.getView();
-        if (!cv.mayBeShown()) {
-            cv.setMayBeShown(true);
-            tempShownCards.add(c);
-        }
+        c.setMayLookAt(player, true, true);
     }
     private void tempShowCards(Iterable<Card> cards) {
         if (mayLookAtAllCards) { return; } //no needed if this is set
@@ -194,7 +189,7 @@ public class PlayerControllerHuman extends PlayerController {
         if (tempShownCards.isEmpty()) { return; }
 
         for (Card c : tempShownCards) {
-            c.getView().setMayBeShown(false);
+            c.setMayLookAt(player, false, true);
         }
         tempShownCards.clear();
     }
@@ -1379,27 +1374,6 @@ public class PlayerControllerHuman extends PlayerController {
 
     public void alphaStrike() {
         inputProxy.alphaStrike();
-    }
-
-    /**
-     * Check whether a card may be shown. If {@code mayLookAtAllCards} is
-     * {@code true}, any card may be shown.
-     * 
-     * @param c a card.
-     * @return whether the card may be shown.
-     * @see GameView#mayShowCardNoRedirect(CardView)
-     */
-    public boolean mayShowCard(final Card c) {
-        if (mayLookAtAllCards) {
-            return true;
-        }
-        return c == null || tempShownCards.contains(c) || c.canBeShownTo(player);
-    }
-    public boolean mayShowCardFace(final Card c) {
-        if (mayLookAtAllCards) {
-            return true;
-        }
-        return c == null || !c.isFaceDown() || c.canCardFaceBeShownTo(player);
     }
 
     @Override

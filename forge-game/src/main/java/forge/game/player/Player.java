@@ -2080,6 +2080,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return;
         }
         mindSlaveMaster = mindSlaveMaster0;
+        view.updateMindSlaveMaster(this);
 
         if (mindSlaveMaster != null) {
             LobbyPlayer oldLobbyPlayer = getLobbyPlayer();

@@ -30,6 +30,7 @@ import forge.gui.CardPicturePanel;
 import forge.gui.framework.ICDoc;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.match.MatchUtil;
 import forge.screens.match.views.VPicture;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.special.CardZoomer;
@@ -62,15 +63,17 @@ public enum CPicture implements ICDoc {
      * 
      */
     public void showCard(final CardView c, boolean showAlt) {
-        if (null == c) {
+        if (c == null) {
             return;
         }
 
+        boolean canFlip = MatchUtil.canFaceDownCardBeShown(c);
+
         currentView = c;
         isDisplayAlt = showAlt;
-        flipIndicator.setVisible(c.hasAlternateState());
+        flipIndicator.setVisible(canFlip);
         picturePanel.setCard(c.getState(showAlt));
-        if (showAlt && c.hasAlternateState()) {
+        if (showAlt && canFlip) {
             flipCard();
         }
     }
@@ -172,7 +175,7 @@ public enum CPicture implements ICDoc {
     }
 
     public void flipCard() {
-        if (currentView.hasAlternateState()) {
+        if (MatchUtil.canFaceDownCardBeShown(currentView)) {
             isDisplayAlt = !isDisplayAlt;
             picturePanel.setCard(currentView.getState(isDisplayAlt));
             CDetail.SINGLETON_INSTANCE.showCard(currentView, isDisplayAlt);

@@ -82,7 +82,7 @@ public class CardRenderer {
         float w = width - 2 * x;
         float h = height - 2 * y;
 
-        final Texture image = ImageCache.getImage(card.getCurrentState().getImageKey(false), true);
+        final Texture image = ImageCache.getImage(MatchUtil.getCardImageKey(card.getCurrentState()), true);
         if (image == ImageCache.defaultImage) { //support drawing card image manually if card image not found
             float ratio = h / w;
             if (ratio > FCardPanel.ASPECT_RATIO) {
@@ -220,7 +220,7 @@ public class CardRenderer {
         return getCardArt(ImageKeys.getImageKey(pc, false), pc.getRules().getSplitType() == CardSplitType.Split);
     }
     public static FImageComplex getCardArt(CardView card) {
-        return getCardArt(card.getCurrentState().getImageKey(true), card.isSplitCard());
+        return getCardArt(card.getCurrentState().getImageKey(null), card.isSplitCard());
     }
     public static FImageComplex getCardArt(String imageKey, boolean isSplitCard) {
         FImageComplex cardArt = cardArtCache.get(imageKey);
@@ -535,8 +535,10 @@ public class CardRenderer {
         Color color = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
         color = FSkinColor.tintColor(Color.WHITE, color, CardRenderer.PT_BOX_TINT);
 
+        boolean canShow = MatchUtil.canCardBeShown(card);
+
         //draw name and mana cost overlays if card is small or default card image being used
-        if (h <= NAME_COST_THRESHOLD && card.mayBeShown()) {
+        if (h <= NAME_COST_THRESHOLD && canShow) {
             if (showCardNameOverlay(card)) {
                 g.drawOutlinedText(details.getName(), FSkinFont.forHeight(h * 0.18f), Color.WHITE, Color.BLACK, x + padding, y + padding, w - 2 * padding, h * 0.4f, true, HAlignment.LEFT, false);
             }
@@ -614,7 +616,7 @@ public class CardRenderer {
             CardFaceSymbols.drawSymbol("sacrifice", g, (x + (w / 2)) - sacSymbolSize / 2, (y + (h / 2)) - sacSymbolSize / 2, otherSymbolsSize, otherSymbolsSize);
         }
 
-        if (onTop && showCardPowerOverlay(card) && (card.mayBeShown() || card.isFaceDown())) { //make sure card p/t box appears on top
+        if (onTop && showCardPowerOverlay(card) && (canShow || card.isFaceDown())) { //make sure card p/t box appears on top
             //only needed if on top since otherwise P/T will be hidden
             drawPtBox(g, card, details, color, x, y, w, h);
         }
@@ -676,7 +678,7 @@ public class CardRenderer {
     }
 
     public static void drawFoilEffect(Graphics g, CardView card, float x, float y, float w, float h) {
-        if (isPreferenceEnabled(FPref.UI_OVERLAY_FOIL_EFFECT) && card.mayBeShown()) {
+        if (isPreferenceEnabled(FPref.UI_OVERLAY_FOIL_EFFECT) && MatchUtil.canCardBeShown(card)) {
             int foil = card.getCurrentState().getFoilIndex();
             if (foil > 0) {
                 CardFaceSymbols.drawOther(g, String.format("foil%02d", foil), x, y, w, h);

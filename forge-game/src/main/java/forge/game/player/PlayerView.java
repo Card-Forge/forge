@@ -104,6 +104,9 @@ public class PlayerView extends GameEntityView {
     public KeywordCollectionView getKeywords() {
         return get(TrackableProperty.Keywords);
     }
+    public boolean hasKeyword(String keyword) {
+        return getKeywords().contains(keyword);
+    }
     void updateKeywords(Player p) {
         set(TrackableProperty.Keywords, p.getKeywords());
     }
@@ -128,6 +131,13 @@ public class PlayerView extends GameEntityView {
 
     public String getCommanderInfo() {
         throw new NotImplementedException("Not implemented");
+    }
+
+    public PlayerView getMindSlaveMaster() {
+        return get(TrackableProperty.Commander);
+    }
+    void updateMindSlaveMaster(Player p) {
+        set(TrackableProperty.Commander, PlayerView.get(p.getMindSlaveMaster()));
     }
 
     public Iterable<CardView> getAnte() {

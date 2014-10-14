@@ -222,7 +222,6 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     private Player controller = null;
     private long controllerTimestamp = 0;
     private TreeMap<Long, Player> tempControllers = new TreeMap<Long, Player>();
-    private final Set<Player> mayLookAt = Sets.newHashSet();
 
     private String originalText = "", text = "";
     private String echoCost = "";
@@ -2120,13 +2119,11 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         view.updateController(this);
     }
 
-    public final void setMayLookAt(final Player player, final boolean mayLookAt0) {
-        if (mayLookAt0) {
-            mayLookAt.add(player);
-        }
-        else {
-            mayLookAt.remove(player);
-        }
+    public final void setMayLookAt(final Player player, final boolean mayLookAt) {
+        setMayLookAt(player, mayLookAt, false);
+    }
+    public final void setMayLookAt(final Player player, final boolean mayLookAt, final boolean temp) {
+        view.setPlayerMayLook(player, mayLookAt, temp);
     }
 
     public final CardCollectionView getEquippedBy(boolean allowModify) {
@@ -6062,81 +6059,6 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             return true;
         }
         return false;
-    }
-
-    public boolean canBeShownTo(final Player viewer) {
-        if (viewer == null) { return false; }
-
-        Zone zone = getZone();
-        if (zone == null) { return true; } //cards outside any zone are visible to all
-
-        final Player controller = getController();
-        switch (zone.getZoneType()) {
-        case Ante:
-        case Command:
-        case Exile:
-        case Battlefield:
-        case Graveyard:
-        case Stack:
-            //cards in these zones are visible to all
-            return true;
-        case Hand:
-            if (controller.hasKeyword("Play with your hand revealed.")) {
-                return true;
-            }
-            //fall through
-        case Sideboard:
-            //face-up cards in these zones are hidden to opponents unless they specify otherwise
-            if (controller.isOpponentOf(viewer) && !hasKeyword("Your opponent may look at this card.")) {
-                break;
-            }
-            return true;
-        case Library:
-        case PlanarDeck:
-            //cards in these zones are hidden to all unless they specify otherwise
-            if (controller == viewer && hasKeyword("You may look at this card.")) {
-                return true;
-            }
-            if (controller.isOpponentOf(viewer) && hasKeyword("Your opponent may look at this card.")) {
-                return true;
-            }
-            break;
-        case SchemeDeck:
-            // true for now, to actually see the Scheme cards (can't see deck anyway)
-            return true;
-        }
-
-        // special viewing permissions for viewer
-        if (mayLookAt.contains(viewer)) {
-            return true;
-        }
-
-        //if viewer is controlled by another player, also check if card can be shown to that player
-        if (controller.isMindSlaved() && viewer == controller.getMindSlaveMaster()) {
-            return canBeShownTo(controller);
-        }
-
-        return false;
-    }
-
-    public boolean canCardFaceBeShownTo(final Player viewer) {
-        if (!isFaceDown()) {
-            return true;
-        }
-        if (viewer.hasKeyword("CanSeeOpponentsFaceDownCards")) {
-            return true;
-        }
-
-        // special viewing permissions for viewer
-        if (mayLookAt.contains(viewer)) {
-            return true;
-        }
-
-        //if viewer is controlled by another player, also check if face can be shown to that player
-        if (viewer.isMindSlaved() && canCardFaceBeShownTo(viewer.getMindSlaveMaster())) {
-            return true;
-        }
-        return !getController().isOpponentOf(viewer) || hasKeyword("Your opponent may look at this card.");
     }
 
     public int getCMC() {

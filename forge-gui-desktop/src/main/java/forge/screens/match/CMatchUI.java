@@ -169,7 +169,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
 
         int i = 0;
         for (final PlayerView p : sortedPlayers) {
-            if (allHands || p.getLobbyPlayer() instanceof LobbyPlayerHuman || CardView.mayViewAny(p.getHand())) {
+            if (allHands || p.getLobbyPlayer() instanceof LobbyPlayerHuman || CardView.mayViewAny(p.getHand(), p)) {
                 VHand newHand = new VHand(EDocID.Hands[i], p);
                 newHand.getLayoutControl().initialize();
                 hands.add(newHand);
