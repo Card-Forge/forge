@@ -319,16 +319,25 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
     public void updateSingleCard(final CardView c) {
         switch (c.getZone()) {
         case Battlefield:
-            final PlayArea pa = getFieldViewFor(c.getController()).getTabletop();
-            pa.updateCard(c, false);
+            VField battlefield = getFieldViewFor(c.getController());
+            if (battlefield != null) {
+                battlefield.getTabletop().updateCard(c, false);
+            }
             break;
         case Hand:
-            final HandArea ha = getHandFor(c.getController()).getHandArea();
-            ha.getCardPanel(c.getId()).repaintOverlays();
+            final VHand hand = getHandFor(c.getController());
+            if (hand != null) {
+                CardPanel cp = hand.getHandArea().getCardPanel(c.getId());
+                if (cp != null) {
+                    cp.repaintOverlays();
+                }
+            }
             break;
         case Command:
-            final PlayArea ca = getCommandFor(c.getController()).getTabletop();
-            ca.updateCard(c, false);
+            VCommand command = getCommandFor(c.getController());
+            if (command != null) {
+                command.getTabletop().updateCard(c, false);
+            }
             break;
         default:
             break;
