@@ -653,9 +653,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         inp.setCancelAllowed(true);
         inp.showAndWait();
 
-        if (inp.hasCancelled())
+        if (inp.hasCancelled()) {
             return null;
-
+        }
         return PaymentDecision.card(inp.getSelected());
     }
 
@@ -1090,6 +1090,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, typeList);
+        inp.setCancelAllowed(true);
         inp.setMessage("Select a " + cost.getDescriptiveType() + " to tap (%d left)");
         inp.showAndWait();
         if (inp.hasCancelled()) {
