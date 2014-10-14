@@ -59,9 +59,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     /** Constant <code>CARD_SPACING_Y=0.06f</code>. */
     private static final float CARD_SPACING_Y = 0.06f;
     /** Constant <code>STACK_SPACING_X=0.07f</code>. */
-    private static final float STACK_SPACING_X = 0.07f;
+    private static final float STACK_SPACING_X = 0.1f;
     /** Constant <code>STACK_SPACING_Y=0.07f</code>. */
-    private static final float STACK_SPACING_Y = 0.07f;
+    private static final float STACK_SPACING_Y = 0.1f;
 
     //private final int creatureStackMax = 4;
     private final int landStackMax = 5;
@@ -312,7 +312,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             }
         }
         setCardWidth(lastGoodCardWidth);
-        if ( null == lastTemplate ) 
+        if (null == lastTemplate) 
             lastTemplate = tryArrangePilesOfWidth(lands, tokens, creatures, others);
 
         this.rows = lastTemplate;
@@ -341,7 +341,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         int x = 0;
         int y = PlayArea.GUTTER_Y;
 
-        //System.out.println("-------- " + (mirror ? "^" : "_") + " (Positioning ) Card width = " + cardWidth + ". Playarea = " + playAreaWidth + " x " + playAreaHeight );
+        //System.out.println("-------- " + (mirror ? "^" : "_") + " (Positioning) Card width = " + cardWidth + ". Playarea = " + playAreaWidth + " x " + playAreaHeight);
         for (final CardStackRow row : template) {
             int rowBottom = 0;
             x = PlayArea.GUTTER_X;
@@ -361,7 +361,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     this.setComponentZOrder(panel, panelIndex);
                     final int panelX = x + (stackPosition * this.stackSpacingX);
                     final int panelY = y + (stackPosition * this.stackSpacingY);
-                    //System.out.println("... placinng " + panel.getCard() + " @ (" + panelX + ", " + panelY + ")" );
+                    //System.out.println("... placinng " + panel.getCard() + " @ (" + panelX + ", " + panelY + ")");
                     panel.setCardBounds(panelX, panelY, this.getCardWidth(), this.cardHeight);
                 }
                 rowBottom = Math.max(rowBottom, y + stack.getHeight());
@@ -376,7 +376,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         
         int afterFirstRow;
 
-        //System.out.println( "======== "  + ( mirror ? "^" : "_" ) + " (try arrange) Card width = " + cardWidth + ". PlayArea = " + playAreaWidth + " x " + playAreaHeight + " ========");
+        //System.out.println("======== "  + (mirror ? "^" : "_") + " (try arrange) Card width = " + cardWidth + ". PlayArea = " + playAreaWidth + " x " + playAreaHeight + " ========");
         boolean landsFit, tokensFit, creaturesFit;
         if (this.mirror) {
             // Wrap all creatures and lands.
@@ -392,9 +392,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             landsFit = this.planRow(lands, template, template.size());
         }
 
-        if ( !landsFit || !creaturesFit || !tokensFit ) 
+        if (!landsFit || !creaturesFit || !tokensFit) { 
             return null;
-        
+        }
         // Other cards may be stored at end of usual rows or on their own row.
         int cntOthers = others.size();
 
@@ -408,13 +408,13 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         int nextOther = 0;
         for (final CardStackRow row : template) {
             nextOther = this.planOthersRow(others, nextOther, template, row);
-            if ( nextOther == cntOthers )
+            if (nextOther == cntOthers)
                 return template; // everything was successfully placed
         }
 
         template = templateCopy;
         // Try to put others on their own row(s)
-        if ( this.planRow(others, template, afterFirstRow) ) 
+        if (this.planRow(others, template, afterFirstRow)) 
             return template;
         
         
@@ -444,13 +444,13 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         for (final CardStack stack : sourceRow) {
             final int rowWidth = currentRow.getWidth();
             final int stackWidth = stack.getWidth();
-            //System.out.printf("Adding %s (+%dpx), current row is %dpx and has %s \n", stack, stackWidth, rowWidth, currentRow ); 
+            //System.out.printf("Adding %s (+%dpx), current row is %dpx and has %s \n", stack, stackWidth, rowWidth, currentRow); 
             // If the row is not empty and this stack doesn't fit, add the row.
             if (rowWidth + stackWidth > this.playAreaWidth && !currentRow.isEmpty()) {
 
                 // Stop processing if the row is too wide or tall.
                 if (rowWidth > this.playAreaWidth || this.getRowsHeight(template) + sourceRow.getHeight() > this.playAreaHeight) {
-                    if ( !isMinimalSize ) 
+                    if (!isMinimalSize) 
                         return false;
                 }
 
@@ -468,7 +468,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         if (!currentRow.isEmpty()) {
             final int rowWidth = currentRow.getWidth();
             if (isMinimalSize || rowWidth <= this.playAreaWidth && this.getRowsHeight(template) + sourceRow.getHeight() <= this.playAreaHeight) {
-                if ( insertIndex == -1)
+                if (insertIndex == -1)
                     template.add(currentRow);
                 else 
                     template.add(insertIndex, currentRow);
@@ -496,8 +496,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private int planOthersRow(final List<CardStack> sourceRow, final int firstPile, final List<CardStackRow> template, final CardStackRow rowToFill) {
         int rowWidth = rowToFill.getWidth();
 
-        //System.out.println("This row has:" + rowToFill + "; want to add:" + sourceRow );
-        for (int i = firstPile; i < sourceRow.size(); i++ ) {
+        //System.out.println("This row has:" + rowToFill + "; want to add:" + sourceRow);
+        for (int i = firstPile; i < sourceRow.size(); i++) {
             CardStack stack = sourceRow.get(i);
 
             rowWidth += stack.getWidth();
@@ -505,8 +505,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             
             if (stack.getHeight() > rowToFill.getHeight()) { // if row becomes taller
                 int newAllRowsHeight = this.getRowsHeight(template) - rowToFill.getHeight() + stack.getHeight();
-                if ( newAllRowsHeight > this.playAreaHeight) 
+                if (newAllRowsHeight > this.playAreaHeight) {
                     return i; // refuse to add here because it won't fit in height
+                }
             }
             rowToFill.add(stack);
         }
