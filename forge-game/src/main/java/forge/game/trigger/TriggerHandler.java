@@ -285,23 +285,21 @@ public class TriggerHandler {
 
         // NAPs
         for (Player nap : game.getPlayers()) {
-            if (!nap.equals(playerAP))
+            if (!nap.equals(playerAP)) {
                 checkStatics |= runNonStaticTriggersForPlayer(nap, mode, runParams, delayedTriggersWorkingCopy);
+            }
         }
-
         return checkStatics;
     }
 
     private boolean runNonStaticTriggersForPlayer(final Player player, final TriggerType mode, 
             final Map<String, Object> runParams, final ArrayList<Trigger> delayedTriggersWorkingCopy ) {
-        
-        boolean checkStatics = false;
 
         Card card = null;
-        for (final Trigger t : activeTriggers) {
-            if (!t.isStatic() && t.getHostCard().getController().equals(player)
-                    && canRunTrigger(t, mode, runParams)) {
+        boolean checkStatics = false;
 
+        for (final Trigger t : activeTriggers) {
+            if (!t.isStatic() && t.getHostCard().getController().equals(player) && canRunTrigger(t, mode, runParams)) {
                 if (runParams.containsKey("Card")) {
                     card = (Card) runParams.get("Card");
                     if (runParams.containsKey("Destination") && !ZoneType.Battlefield.name().equals(runParams.get("Destination"))) {
@@ -352,10 +350,8 @@ public class TriggerHandler {
         if (!regtrig.requirementsCheck(game)) {
             return false; // Conditions aren't right.
         }
-
         return true;
     }
-
 
     private boolean canRunTrigger(final Trigger regtrig, final TriggerType mode, final Map<String, Object> runParams) {
         if (regtrig.getMode() != mode) {
@@ -395,8 +391,7 @@ public class TriggerHandler {
         } // Torpor Orb check
         return true;
     }
-    
-    
+
     // Checks if the conditions are right for a single trigger to go off, and
     // runs it if so.
     // Return true if the trigger went off, false otherwise.
@@ -419,7 +414,8 @@ public class TriggerHandler {
 
         if (trigCard != null && (host.getId() == trigCard.getId())) {
             host = trigCard;
-        } else {
+        }
+        else {
             host = game.getCardState(regtrig.getHostCard());
         }
 
@@ -431,7 +427,8 @@ public class TriggerHandler {
                     public void resolve() {
                     }
                 };
-            } else {
+            }
+            else {
                 sa = AbilityFactory.getAbility(host.getSVar(triggerParams.get("Execute")), host);
             }
         }
@@ -494,7 +491,8 @@ public class TriggerHandler {
 
         if (regtrig.isStatic()) {
             wrapperAbility.getActivatingPlayer().getController().playTrigger(host, wrapperAbility, isMandatory);
-        } else {
+        }
+        else {
             game.getStack().addSimultaneousStackEntry(wrapperAbility);
         }
         regtrig.setTriggeredSA(wrapperAbility);
@@ -503,7 +501,8 @@ public class TriggerHandler {
             if (regtrig.getHostCard().isImmutable()) {
                 Player p = regtrig.getHostCard().getController();
                 p.getZone(ZoneType.Command).remove(regtrig.getHostCard());
-            } else {
+            }
+            else {
                 regtrig.getHostCard().removeTrigger(regtrig);
             }
         }

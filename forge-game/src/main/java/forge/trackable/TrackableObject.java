@@ -53,6 +53,12 @@ public abstract class TrackableObject implements IIdentifiable {
         return id;
     }
 
+    @Override
+    public final boolean equals(Object o) {
+        if (o == null) { return false; }
+        return o.hashCode() == id && o.getClass().equals(getClass());
+    }
+
     @SuppressWarnings("unchecked")
     protected <T> T get(TrackableProperty key) {
         T value = (T)props.get(key);

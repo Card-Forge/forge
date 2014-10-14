@@ -2005,34 +2005,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         mustAttackEntity = o;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final boolean equals(final Object o) {
-        if (o instanceof Player) {
-            final Player p1 = (Player) o;
-            return p1.getName().equals(getName());
-        } else {
-            return false;
-        }
-    }
-
     @Override
     public int compareTo(Player o) {
         if (o == null) {
-            return +1;
+            return 1;
         }
-        int subtractedHash = o.hashCode() - hashCode();
-        if (subtractedHash == 0) {
-            return 0;
-        }
-
-        return Math.abs(subtractedHash) / subtractedHash;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public int hashCode() {
-        return (41 * (41 + getName().hashCode()));
+        return getName().compareTo(o.getName());
     }
 
     public static class Predicates {

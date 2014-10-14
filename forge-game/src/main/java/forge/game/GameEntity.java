@@ -219,6 +219,17 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
 
     @Override
+    public final boolean equals(Object o) {
+        if (o == null) { return false; }
+        return o.hashCode() == id && o.getClass().equals(getClass());
+    }
+
+    @Override
+    public final int hashCode() {
+        return id;
+    }
+
+    @Override
     public String toString() {
         return name;
     }

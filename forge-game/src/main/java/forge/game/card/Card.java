@@ -3078,11 +3078,6 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     /** {@inheritDoc} */
     @Override
     public final int compareTo(final Card that) {
-        /*
-         * Return a negative integer of this < that, a positive integer if this
-         * > that, and zero otherwise.
-         */
-
         if (that == null) {
             /*
              * "Here we can arbitrarily decide that all non-null Cards are
@@ -3090,20 +3085,9 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
              * return in this case, as long as it is consistent. I rather think
              * of null as being lowly." --Braids
              */
-            return +1;
-        } else if (id > that.id) {
-            return +1;
-        } else if (id < that.id) {
-            return -1;
-        } else {
-            return 0;
+            return 1;
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final int hashCode() {
-        return id;
+        return Integer.compare(id, that.id);
     }
 
     /** {@inheritDoc} */
