@@ -178,23 +178,13 @@ public class PlayerDetailsPanel extends JPanel {
     public void setupMouseActions(final ForgeAction handAction, final ForgeAction libraryAction, final ForgeAction exileAction,
                                   final ForgeAction graveAction, final ForgeAction flashBackAction, final Function<Byte, Void> manaAction) {
         // Detail label listeners
-        lblGraveyard.setHoverable(true);
         lblGraveyard.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { graveAction.actionPerformed(null); } } );
-
-        lblExile.setHoverable(true);
         lblExile.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { exileAction.actionPerformed(null); } } );
-
-        lblLibrary.setHoverable(true);
         lblLibrary.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { libraryAction.actionPerformed(null); } } );
-
-        lblHand.setHoverable(true);
         lblHand.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { handAction.actionPerformed(null); } } );
-
-        lblFlashback.setHoverable(true);
         lblFlashback.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { flashBackAction.actionPerformed(null); } } );
 
         for (final Pair<DetailLabel, Byte> labelPair : manaLabels) {
-            labelPair.getLeft().setHoverable(true);
             labelPair.getLeft().addMouseListener(new MouseAdapter() { @Override
                 public void mousePressed(final MouseEvent e) {
                 manaAction.apply(labelPair.getRight()); } }
@@ -206,7 +196,7 @@ public class PlayerDetailsPanel extends JPanel {
     private class DetailLabel extends FLabel {
         private DetailLabel(FSkinProp p0, String s0, String s1) {
             super(new FLabel.Builder().icon(FSkin.getImage(p0))
-            .opaque(false).fontSize(14)
+            .opaque(false).fontSize(14).hoverable()
             .fontStyle(Font.BOLD).iconInBackground()
             .text(s0).tooltip(s1).fontAlign(SwingConstants.RIGHT));
         }
