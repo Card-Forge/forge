@@ -305,7 +305,7 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.Enchanting);
     }
     void updateEnchanting(Card c) {
-        set(TrackableProperty.Owner, GameEntityView.get(c.getEnchanting()));
+        set(TrackableProperty.Enchanting, GameEntityView.get(c.getEnchanting()));
     }
 
     public CardView getEnchantingCard() {
