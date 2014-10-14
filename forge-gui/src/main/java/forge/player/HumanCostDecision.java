@@ -685,6 +685,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             CardCollectionView validCards = CardLists.getValidCards(ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), ability.getActivatingPlayer(), ability.getHostCard());
 
             InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, validCards);
+            inp.setCancelAllowed(true);
             inp.setMessage("Return %d " + cost.getType() + " " + cost.getType() + " card(s) to hand");
             inp.showAndWait();
             if (inp.hasCancelled()) {
@@ -873,7 +874,6 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     
     @Override
     public PaymentDecision visit(CostRemoveCounter cost) {
-
         final String amount = cost.getAmount();
         Integer c = cost.convertAmount();
         final String type = cost.getType();
@@ -1060,8 +1060,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 inp.setMessage("Select one of the cards to tap. Already chosen: " + tapped);
                 inp.setCancelAllowed(true);
                 inp.showAndWait();
-                if (inp.hasCancelled())
+                if (inp.hasCancelled()) {
                     return null;
+                }
                 final Card first = inp.getFirstSelected();
                 tapped.add(first);
                 typeList = CardLists.filter(typeList, new Predicate<Card>() {
@@ -1119,6 +1120,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             }
         }
         InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, typeList);
+        inp.setCancelAllowed(true);
         inp.setMessage("Select a " + cost.getDescriptiveType() + " to untap (%d left)");
         inp.showAndWait();
         if (inp.hasCancelled() || inp.getSelected().size() != c) {
