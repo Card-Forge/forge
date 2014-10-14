@@ -17,7 +17,7 @@ import forge.card.CardZoom;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
-import forge.game.spellability.SpellAbilityView;
+import forge.game.spellability.SpellAbility;
 import forge.item.PaperCard;
 import forge.screens.match.MatchController;
 import forge.screens.match.views.VAvatar;
@@ -61,7 +61,7 @@ public class FChoiceList<T> extends FList<T> {
         else if (item instanceof CardView) {
             renderer = new CardItemRenderer();
         }
-        else if (item instanceof SpellAbilityView) {
+        else if (item instanceof SpellAbility) {
             renderer = new SpellAbilityItemRenderer();
         }
         else if (item instanceof PlayerView) {
@@ -379,7 +379,7 @@ public class FChoiceList<T> extends FList<T> {
         @Override
         public boolean tap(T value, float x, float y, int count) {
             if (x <= VStack.CARD_WIDTH + 2 * FList.PADDING) {
-                CardZoom.show(((SpellAbilityView)value).getHostCard());
+                CardZoom.show(((SpellAbility)value).getView().getHostCard());
                 return true;
             }
             return false;
@@ -387,14 +387,14 @@ public class FChoiceList<T> extends FList<T> {
 
         @Override
         public boolean longPress(T value, float x, float y) {
-            CardZoom.show(((SpellAbilityView)value).getHostCard());
+            CardZoom.show(((SpellAbility)value).getView().getHostCard());
             return true;
         }
 
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            SpellAbilityView spellAbility = (SpellAbilityView)value;
-            CardRenderer.drawCardWithOverlays(g, spellAbility.getHostCard(), x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT, CardStackPosition.Top);
+            SpellAbility spellAbility = (SpellAbility)value;
+            CardRenderer.drawCardWithOverlays(g, spellAbility.getView().getHostCard(), x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT, CardStackPosition.Top);
 
             float dx = VStack.CARD_WIDTH + FList.PADDING;
             x += dx;
