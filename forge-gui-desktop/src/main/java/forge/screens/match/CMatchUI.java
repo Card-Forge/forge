@@ -91,7 +91,6 @@ import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PhaseLabel;
 import forge.util.ITriggerEvent;
 import forge.view.arcane.CardPanel;
-import forge.view.arcane.HandArea;
 import forge.view.arcane.PlayArea;
 
 /**
