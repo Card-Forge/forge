@@ -31,30 +31,23 @@ public class PlayerDetailsPanel extends JPanel {
     private PlayerView player;
     
     // Info labels
-    private FLabel lblHand = getBuiltFLabel(FSkinProp.IMG_ZONE_HAND, "99", "Cards in hand");
-    private FLabel lblGraveyard = getBuiltFLabel(FSkinProp.IMG_ZONE_GRAVEYARD, "99", "Cards in graveyard");
-    private FLabel lblLibrary = getBuiltFLabel(FSkinProp.IMG_ZONE_LIBRARY, "99", "Cards in library");
-    private FLabel lblExile = getBuiltFLabel(FSkinProp.IMG_ZONE_EXILE, "99", "Exiled cards");
-    private FLabel lblFlashback = getBuiltFLabel(FSkinProp.IMG_ZONE_FLASHBACK, "99", "Flashback cards");
-    private FLabel lblPoison = getBuiltFLabel(FSkinProp.IMG_ZONE_POISON, "99", "Poison counters");
-    private final List<Pair<FLabel, Byte>> manaLabels = new ArrayList<Pair<FLabel,Byte>>();
-
-    private FLabel getBuiltFLabel(FSkinProp p0, String s0, String s1) {
-        return new FLabel.Builder().icon(FSkin.getImage(p0))
-            .opaque(false).fontSize(14)
-            .fontStyle(Font.BOLD).iconInBackground()
-            .text(s0).tooltip(s1).fontAlign(SwingConstants.RIGHT).build();
-    }
+    private FLabel lblHand = new DetailLabel(FSkinProp.IMG_ZONE_HAND, "99", "Cards in hand");
+    private FLabel lblGraveyard = new DetailLabel(FSkinProp.IMG_ZONE_GRAVEYARD, "99", "Cards in graveyard");
+    private FLabel lblLibrary = new DetailLabel(FSkinProp.IMG_ZONE_LIBRARY, "99", "Cards in library");
+    private FLabel lblExile = new DetailLabel(FSkinProp.IMG_ZONE_EXILE, "99", "Exiled cards");
+    private FLabel lblFlashback = new DetailLabel(FSkinProp.IMG_ZONE_FLASHBACK, "99", "Flashback cards");
+    private FLabel lblPoison = new DetailLabel(FSkinProp.IMG_ZONE_POISON, "99", "Poison counters");
+    private final List<Pair<DetailLabel, Byte>> manaLabels = new ArrayList<Pair<DetailLabel, Byte>>();
 
     public PlayerDetailsPanel(final PlayerView player) {
         this.player = player;
         
-        manaLabels.add(Pair.of(getBuiltFLabel(FSkinProp.IMG_MANA_B, "99", "Black mana"), MagicColor.BLACK));
-        manaLabels.add(Pair.of(getBuiltFLabel(FSkinProp.IMG_MANA_U, "99", "Blue mana"), MagicColor.BLUE));
-        manaLabels.add(Pair.of(getBuiltFLabel(FSkinProp.IMG_MANA_G, "99", "Green mana"), MagicColor.GREEN));
-        manaLabels.add(Pair.of(getBuiltFLabel(FSkinProp.IMG_MANA_R, "99", "Red mana"), MagicColor.RED));
-        manaLabels.add(Pair.of(getBuiltFLabel(FSkinProp.IMG_MANA_W, "99", "White mana"), MagicColor.WHITE));
-        manaLabels.add(Pair.of(getBuiltFLabel(FSkinProp.IMG_MANA_COLORLESS, "99", "Colorless mana"), (byte)0));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_B, "99", "Black mana"), MagicColor.BLACK));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_U, "99", "Blue mana"), MagicColor.BLUE));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_G, "99", "Green mana"), MagicColor.GREEN));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_R, "99", "Red mana"), MagicColor.RED));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_W, "99", "White mana"), MagicColor.WHITE));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_COLORLESS, "99", "Colorless mana"), (byte)0));
 
         setOpaque(false);
         setLayout(new MigLayout("insets 0, gap 0, wrap"));
@@ -64,8 +57,6 @@ public class PlayerDetailsPanel extends JPanel {
         updateManaPool();
         //updateDetails();
     }
-    
-
 
     /** Adds various labels to pool area JPanel container. */
     private void populateDetails() {
@@ -84,7 +75,7 @@ public class PlayerDetailsPanel extends JPanel {
         row6.setOpaque(false);
 
         // Hand, library, graveyard, exile, flashback, poison labels
-        final String constraintsCell = "w 45%!, h 100%!, gap 0 5% 2px 2px";
+        final String constraintsCell = "w 50%-4px!, h 100%!, gapleft 2px, gapright 2px";
 
         row1.add(lblHand, constraintsCell);
         row1.add(lblLibrary, constraintsCell);
@@ -105,7 +96,7 @@ public class PlayerDetailsPanel extends JPanel {
         row6.add(manaLabels.get(5).getLeft(), constraintsCell);
 
         final String constraintsRow = "w 100%!, h 16%!";
-        this.add(row1, constraintsRow + ", gap 0 0 4% 0");
+        this.add(row1, constraintsRow + ", gap 0 0 2% 0");
         this.add(row2, constraintsRow);
         this.add(row3, constraintsRow);
         this.add(row4, constraintsRow);
@@ -129,7 +120,6 @@ public class PlayerDetailsPanel extends JPanel {
         this.getLblExile().setText("" + player.getExileSize());
     }
 
-    
     /**
      * Handles observer update of non-Zone details - life, poison, etc. Also
      * updates "players" panel in tabber for this player.
@@ -156,8 +146,9 @@ public class PlayerDetailsPanel extends JPanel {
      * @param p0 &emsp; {@link forge.game.player.Player}
      */
     public void updateManaPool() {
-        for (final Pair<FLabel, Byte> label : manaLabels)
+        for (final Pair<DetailLabel, Byte> label : manaLabels) {
             label.getKey().setText(Integer.toString(player.getMana(label.getRight())));
+        }
     }
 
     public FLabel getLblHand() {
@@ -166,10 +157,6 @@ public class PlayerDetailsPanel extends JPanel {
 
     public FLabel getLblLibrary() {
         return this.lblLibrary;
-    }
-    
-    public final Iterable<Pair<FLabel, Byte>> getManaLabels() {
-        return manaLabels;
     }
 
     public FLabel getLblGraveyard() {
@@ -188,41 +175,58 @@ public class PlayerDetailsPanel extends JPanel {
         return this.lblPoison;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param handAction
-     * @param libraryAction
-     * @param exileAction
-     * @param graveAction
-     * @param flashBackAction
-     * @param manaAction 
-     */
     public void setupMouseActions(final ForgeAction handAction, final ForgeAction libraryAction, final ForgeAction exileAction,
                                   final ForgeAction graveAction, final ForgeAction flashBackAction, final Function<Byte, Void> manaAction) {
-
         // Detail label listeners
         lblGraveyard.setHoverable(true);
         lblGraveyard.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { graveAction.actionPerformed(null); } } );
-    
+
         lblExile.setHoverable(true);
         lblExile.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { exileAction.actionPerformed(null); } } );
-    
+
         lblLibrary.setHoverable(true);
         lblLibrary.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { libraryAction.actionPerformed(null); } } );
-    
+
         lblHand.setHoverable(true);
         lblHand.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { handAction.actionPerformed(null); } } );
-    
+
         lblFlashback.setHoverable(true);
         lblFlashback.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { flashBackAction.actionPerformed(null); } } );
-    
-        for(final Pair<FLabel, Byte> labelPair : getManaLabels()) {
+
+        for (final Pair<DetailLabel, Byte> labelPair : manaLabels) {
             labelPair.getLeft().setHoverable(true);
             labelPair.getLeft().addMouseListener(new MouseAdapter() { @Override
                 public void mousePressed(final MouseEvent e) {
                 manaAction.apply(labelPair.getRight()); } }
             );
         }
-        
+    }
+
+    @SuppressWarnings("serial")
+    private class DetailLabel extends FLabel {
+        private DetailLabel(FSkinProp p0, String s0, String s1) {
+            super(new FLabel.Builder().icon(FSkin.getImage(p0))
+            .opaque(false).fontSize(14)
+            .fontStyle(Font.BOLD).iconInBackground()
+            .text(s0).tooltip(s1).fontAlign(SwingConstants.RIGHT));
+        }
+
+        @Override
+        public void setText(String text0) {
+            super.setText(text0);
+
+            //adjust font size based on the text length to prevent it overlapping icon
+            switch (text0.length()) {
+            case 1:
+                setFontSize(14);
+                break;
+            case 2:
+                setFontSize(10);
+                break;
+            case 3:
+                setFontSize(8);
+                break;
+            }
+        }
     }
 }
