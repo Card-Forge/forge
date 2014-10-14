@@ -345,13 +345,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
 
     public void refreshCardDetails(final Iterable<CardView> cards) {
         for (final CardView c : cards) {
-            if (ZoneType.Battlefield.equals(c.getZone())) {
-                PlayArea pa = getFieldViewFor(c.getController()).getTabletop();
-                CardPanel pnl = pa.getCardPanel(c.getId());
-                if (pnl != null) {
-                    pnl.updatePTOverlay();
-                }
-            }
+            updateSingleCard(c);
         }
     }
 

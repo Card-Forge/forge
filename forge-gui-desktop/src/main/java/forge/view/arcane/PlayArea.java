@@ -645,30 +645,37 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             newPanels.add(placeholder);
         }
 
-        if (!newPanels.isEmpty()) {
+        boolean needLayoutRefresh = !newPanels.isEmpty();
+        for (final CardView card : modelCopy) {
+            if (updateCard(card, true)) {
+                needLayoutRefresh = true;
+            }
+        }
+        if (needLayoutRefresh) {
             doLayout();
+        }
 
+        if (!newPanels.isEmpty()) {
             for (final CardPanel toPanel : newPanels) {
                 scrollRectToVisible(new Rectangle(toPanel.getCardX(), toPanel.getCardY(), toPanel.getCardWidth(), toPanel.getCardHeight()));
                 Animation.moveCard(toPanel);
             }
         }
-    
-        for (final CardView card : modelCopy) {
-            updateCard(card, true);
-        }
+
         invalidate();
         repaint();
     }
 
-    public void updateCard(final CardView card, boolean fromRefresh) {
+    public boolean updateCard(final CardView card, boolean fromRefresh) {
         final CardPanel toPanel = getCardPanel(card.getId());
-        if (null == toPanel) { return; }
+        if (toPanel == null) { return false; }
 
+        boolean needLayoutRefresh = false;
         if (card.isTapped()) {
             toPanel.setTapped(true);
             toPanel.setTappedAngle(forge.view.arcane.CardPanel.TAPPED_ANGLE);
-        } else {
+        }
+        else {
             toPanel.setTapped(false);
             toPanel.setTappedAngle(0);
         }
@@ -679,6 +686,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             for (final CardView e : enchants) {
                 final CardPanel cardE = getCardPanel(e.getId());
                 if (cardE != null) {
+                    if (cardE.getAttachedToPanel() != toPanel) {
+                        cardE.setAttachedToPanel(toPanel);
+                        needLayoutRefresh = true; //ensure layout refreshed if any attachments change
+                    }
                     toPanel.getAttachedPanels().add(cardE);
                 }
             }
@@ -689,6 +700,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             for (final CardView e : equips) {
                 final CardPanel cardE = getCardPanel(e.getId());
                 if (cardE != null) {
+                    if (cardE.getAttachedToPanel() != toPanel) {
+                        cardE.setAttachedToPanel(toPanel);
+                        needLayoutRefresh = true; //ensure layout refreshed if any attachments change
+                    }
                     toPanel.getAttachedPanels().add(cardE);
                 }
             }
@@ -699,25 +714,42 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             for (final CardView f : fortifications) {
                 final CardPanel cardE = getCardPanel(f.getId());
                 if (cardE != null) {
+                    if (cardE.getAttachedToPanel() != toPanel) {
+                        cardE.setAttachedToPanel(toPanel);
+                        needLayoutRefresh = true; //ensure layout refreshed if any attachments change
+                    }
                     toPanel.getAttachedPanels().add(cardE);
                 }
             }
         }
 
+        CardPanel attachedToPanel;
         if (card.getEnchantingCard() != null) {
-            toPanel.setAttachedToPanel(getCardPanel(card.getEnchantingCard().getId()));
-        } else if (card.getEquipping() != null) {
-            toPanel.setAttachedToPanel(getCardPanel(card.getEquipping().getId()));
-        } else if (card.getFortifying() != null) {
-            toPanel.setAttachedToPanel(getCardPanel(card.getFortifying().getId()));
-        } else {
-            toPanel.setAttachedToPanel(null);
+            attachedToPanel = getCardPanel(card.getEnchantingCard().getId());
         }
-   
+        else if (card.getEquipping() != null) {
+            attachedToPanel = getCardPanel(card.getEquipping().getId());
+        }
+        else if (card.getFortifying() != null) {
+            attachedToPanel = getCardPanel(card.getFortifying().getId());
+        }
+        else {
+            attachedToPanel = null;
+        }
+        if (toPanel.getAttachedToPanel() != attachedToPanel) {
+            toPanel.setAttachedToPanel(attachedToPanel);
+            needLayoutRefresh = true; //ensure layout refreshed if any attachments change
+        }
+
         toPanel.setCard(card);
         if (fromRefresh) {
             toPanel.updatePTOverlay(); //ensure PT Overlay updated on refresh
         }
+
+        if (needLayoutRefresh && !fromRefresh) {
+            doLayout(); //ensure layout refreshed here if not being called from a full refresh
+        }
+        return needLayoutRefresh;
     }
 
     private static enum RowType {
