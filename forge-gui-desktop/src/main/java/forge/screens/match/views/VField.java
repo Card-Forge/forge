@@ -102,8 +102,8 @@ public class VField implements IVDoc<CField> {
         avatarArea.setOpaque(false);
         avatarArea.setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
         avatarArea.setLayout(new MigLayout("insets 0, gap 0"));
-        avatarArea.add(lblAvatar, "w 100%!, h 70%!, wrap, gaptop 4%");
-        avatarArea.add(lblLife, "w 100%!, h 30%!, gaptop 4%");
+        avatarArea.add(lblAvatar, "w 100%-6px!, h 100%-23px!, wrap, gap 3 3 3 0");
+        avatarArea.add(lblLife, "w 100%!, h 20px!");
 
         // Player area hover effect
         avatarArea.addMouseListener(new MouseAdapter() {
@@ -142,10 +142,10 @@ public class VField implements IVDoc<CField> {
         final JPanel pnl = parentCell.getBody();
         pnl.setLayout(new MigLayout("insets 0, gap 0"));
 
-        pnl.add(avatarArea, "w 10%!, h 30%!");
+        pnl.add(avatarArea, "w 10%!, h 35%!");
         pnl.add(phaseIndicator, "w 5%!, h 100%!, span 1 2");
         pnl.add(scroller, "w 85%!, h 100%!, span 1 2, wrap");
-        pnl.add(detailsPanel, "w 10%!, h 69%!, gapleft 1px");
+        pnl.add(detailsPanel, "w 10%!, h 64%!, gapleft 1px");
     }
 
     /* (non-Javadoc)
