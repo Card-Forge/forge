@@ -315,7 +315,10 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
     }
 
     public void updateSingleCard(final CardView c) {
-        switch (c.getZone()) {
+        ZoneType zone = c.getZone();
+        if (zone == null) { return; }
+
+        switch (zone) {
         case Battlefield:
             VField battlefield = getFieldViewFor(c.getController());
             if (battlefield != null) {
