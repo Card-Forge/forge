@@ -12,6 +12,7 @@ import forge.game.combat.CombatView;
 import forge.game.player.PlayerView;
 import forge.gui.framework.ICDoc;
 import forge.screens.match.views.VCombat;
+import forge.util.FCollection;
 import forge.util.Lang;
 
 /** 
@@ -70,7 +71,7 @@ public enum CCombat implements ICDoc {
     private static String getCombatDescription(final CombatView localCombat, final GameEntityView defender) {
         final StringBuilder display = new StringBuilder();
 
-        Iterable<Iterable<CardView>> bands = localCombat.getAttackingBandsOf(defender);
+        Iterable<FCollection<CardView>> bands = localCombat.getAttackingBandsOf(defender);
         if (bands == null || Iterables.isEmpty(bands)) {
             return StringUtils.EMPTY;
         }
@@ -86,7 +87,7 @@ public enum CCombat implements ICDoc {
 
         // Associate Bands, Attackers Blockers
         boolean previousBand = false;
-        for (final Iterable<CardView> band : bands) {
+        for (final FCollection<CardView> band : bands) {
             final int bandSize = Iterables.size(band);
             if (bandSize == 0) {
                 continue;
@@ -97,7 +98,7 @@ public enum CCombat implements ICDoc {
                 display.append("\n");
             }
 
-            final Iterable<CardView> blockers = localCombat.getBlockers(band); 
+            final FCollection<CardView> blockers = localCombat.getBlockers(band); 
             final boolean blocked = (blockers != null);
             final boolean isBand = bandSize > 1;
             if (isBand) {
