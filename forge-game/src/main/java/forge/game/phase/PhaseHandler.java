@@ -745,11 +745,12 @@ public class PhaseHandler implements java.io.Serializable {
         else {
             nextPlayer.setExtraTurn(false);
         }
-        
+
         if (nextPlayer.hasKeyword("Skip your next turn.")) {
             nextPlayer.removeKeyword("Skip your next turn.");
-            if( null == extraTurn ) 
+            if (extraTurn == null) { 
                 setPlayerTurn(nextPlayer);
+            }
             return getNextActivePlayer();
         }
 
@@ -853,7 +854,6 @@ public class PhaseHandler implements java.io.Serializable {
 
         // MAIN GAME LOOP
         while (!game.isGameOver()) {
-            
             if (givePriorityToPlayer) {
                 if (DEBUG_PHASES) {
                     sw.start();
@@ -869,11 +869,11 @@ public class PhaseHandler implements java.io.Serializable {
                     do { 
                         // Rule 704.3  Whenever a player would get priority, the game checks ... for state-based actions,
                         allAffectedCards.addAll(game.getAction().checkStateEffects(false));
-                        if (game.isGameOver())
+                        if (game.isGameOver()) {
                             return; // state-based effects check could lead to game over
-    
+                        }
                         addedAnythingToStack = game.getStack().addAllTriggeredAbilitiesToStack();
-                    } while(addedAnythingToStack);
+                    } while (addedAnythingToStack);
 
                     game.fireEvent(new GameEventCardStatsChanged(allAffectedCards));
 
@@ -885,12 +885,12 @@ public class PhaseHandler implements java.io.Serializable {
                     }
 
                     chosenSa = pPlayerPriority.getController().chooseSpellAbilityToPlay();
-                    if( null == chosenSa )
+                    if (chosenSa == null) {
                         break; // that means 'I pass'
-
-                    if (DEBUG_PHASES)
+                    }
+                    if (DEBUG_PHASES) {
                         System.out.print("... " + pPlayerPriority + " plays " + chosenSa);
-
+                    }
                     pFirstPriority = pPlayerPriority; // all opponents have to pass before stack is allowed to resolve
                     pPlayerPriority.getController().playChosenSpellAbility(chosenSa);
                     loopCount++;
@@ -918,13 +918,15 @@ public class PhaseHandler implements java.io.Serializable {
 
             if (game.isGameOver() || nextPlayer == null) { return; } // conceded?
 
-            if( DEBUG_PHASES )
+            if (DEBUG_PHASES) {
                 System.out.println(String.format("%s %s: %s is active, previous was %s", playerTurn, phase, pPlayerPriority, nextPlayer));
+            }
             if (pFirstPriority == nextPlayer) {
                 if (game.getStack().isEmpty()) {
                     if (playerTurn.hasLost()) {
                         setPriority(game.getNextPlayerAfter(playerTurn));
-                    } else {
+                    }
+                    else {
                         setPriority(playerTurn);
                     }
 
@@ -933,8 +935,10 @@ public class PhaseHandler implements java.io.Serializable {
                     onPhaseEnd();
                     advanceToNextPhase();
                     onPhaseBegin();
-                } else if (!game.getStack().hasSimultaneousStackEntries())
+                }
+                else if (!game.getStack().hasSimultaneousStackEntries()) {
                     game.getStack().resolveStack();
+                }
             }
             else {
                 // pass the priority to other player
