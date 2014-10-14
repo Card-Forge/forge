@@ -50,6 +50,8 @@ public class VField extends FContainer {
             clear();
 
             Iterable<CardView> model = player.getBattlefield();
+            if (model == null) { return; }
+
             for (CardView card : model) {
                 updateCard(card);
             }
