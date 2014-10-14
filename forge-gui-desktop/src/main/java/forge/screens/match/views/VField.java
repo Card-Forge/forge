@@ -132,11 +132,6 @@ public class VField implements IVDoc<CField> {
         updateDetails();
     }
 
-    //========= Overridden methods
-
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#populate()
-     */
     @Override
     public void populate() {
         final JPanel pnl = parentCell.getBody();
@@ -148,98 +143,55 @@ public class VField implements IVDoc<CField> {
         pnl.add(detailsPanel, "w 10%!, h 64%!, gapleft 1px");
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#getDocumentID()
-     */
     @Override
     public EDocID getDocumentID() {
         return docID;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#getTabLabel()
-     */
     @Override
     public DragTab getTabLabel() {
         return tab;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#getLayoutControl()
-     */
     @Override
     public CField getLayoutControl() {
         return control;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#setParentCell()
-     */
     @Override
     public void setParentCell(final DragCell cell0) {
         this.parentCell = cell0;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#getParentCell()
-     */
     @Override
     public DragCell getParentCell() {
         return this.parentCell;
     }
 
-    //========= Populate helper methods
-
-
-    // ========== Observer update methods
-
-    //========= Retrieval methods
-    /**
-     * Gets the player currently associated with this field.
-     * @return {@link forge.game.player.Player}
-     */
     public PlayerView getPlayer() {
         return this.player;
     }
 
-    /**
-     * Gets the tabletop.
-     *
-     * @return PlayArea where cards for this field are in play
-     */
     public PlayArea getTabletop() {
         return this.tabletop;
     }
 
-    /**
-     * Gets the avatar area.
-     *
-     * @return JPanel containing avatar pic and life label
-     */
     public JPanel getAvatarArea() {
         return this.avatarArea;
     }
 
-    /** @return {@link javax.swing.JLabel} */
     public FLabel getLblAvatar() {
         return this.lblAvatar;
     }
 
-    /** @return {@link javax.swing.JLabel} */
     public FLabel getLblLife() {
         return this.lblLife;
     }
 
-    /**
-     * @return the phase indicator
-     */
     public PhaseIndicator getPhaseIndicator() {
         return phaseIndicator;
     }
 
-    /**
-     * @return the detailsPanel
-     */
     public PlayerDetailsPanel getDetailsPanel() {
         return detailsPanel;
     }
@@ -248,10 +200,6 @@ public class VField implements IVDoc<CField> {
         return MatchUtil.isHighlighted(player);
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param player2
-     */
     public void updateDetails() {
         detailsPanel.updateDetails();
 

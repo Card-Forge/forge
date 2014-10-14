@@ -2,6 +2,7 @@ package forge.toolbox.special;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
@@ -23,6 +25,7 @@ import forge.gui.ForgeAction;
 import forge.screens.match.controllers.CPlayers;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
+import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinnedPanel;
 
 public class PlayerDetailsPanel extends JPanel {
@@ -39,9 +42,9 @@ public class PlayerDetailsPanel extends JPanel {
     private FLabel lblPoison = new DetailLabel(FSkinProp.IMG_ZONE_POISON, "99", "Poison counters");
     private final List<Pair<DetailLabel, Byte>> manaLabels = new ArrayList<Pair<DetailLabel, Byte>>();
 
-    public PlayerDetailsPanel(final PlayerView player) {
-        this.player = player;
-        
+    public PlayerDetailsPanel(final PlayerView player0) {
+        player = player0;
+
         manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_B, "99", "Black mana"), MagicColor.BLACK));
         manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_U, "99", "Blue mana"), MagicColor.BLUE));
         manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_G, "99", "Green mana"), MagicColor.GREEN));
@@ -52,10 +55,9 @@ public class PlayerDetailsPanel extends JPanel {
         setOpaque(false);
         setLayout(new MigLayout("insets 0, gap 0, wrap"));
         populateDetails();
-        
+
         updateZones();
         updateManaPool();
-        //updateDetails();
     }
 
     /** Adds various labels to pool area JPanel container. */
@@ -96,12 +98,12 @@ public class PlayerDetailsPanel extends JPanel {
         row6.add(manaLabels.get(5).getLeft(), constraintsCell);
 
         final String constraintsRow = "w 100%!, h 16%!";
-        this.add(row1, constraintsRow + ", gap 0 0 2% 0");
-        this.add(row2, constraintsRow);
-        this.add(row3, constraintsRow);
-        this.add(row4, constraintsRow);
-        this.add(row5, constraintsRow);
-        this.add(row6, constraintsRow);
+        add(row1, constraintsRow + ", gap 0 0 2% 0");
+        add(row2, constraintsRow);
+        add(row3, constraintsRow);
+        add(row4, constraintsRow);
+        add(row5, constraintsRow);
+        add(row6, constraintsRow);
     }
     
     /**
@@ -110,14 +112,14 @@ public class PlayerDetailsPanel extends JPanel {
      * @param p0 &emsp; {@link forge.game.player.Player}
      */
     public void updateZones() {
-        this.getLblHand().setText("" + player.getHandSize());
+        getLblHand().setText("" + player.getHandSize());
         final String handMaxToolTip = player.hasUnlimitedHandSize()
                 ? "no maximum hand size" : String.valueOf(player.getMaxHandSize());
-        this.getLblHand().setToolTipText("Cards in hand (max: " + handMaxToolTip + ")");
-        this.getLblGraveyard().setText("" + player.getGraveyardSize());
-        this.getLblLibrary().setText("" + player.getLibrarySize());
-        this.getLblFlashback().setText("" + player.getFlashbackSize());
-        this.getLblExile().setText("" + player.getExileSize());
+        getLblHand().setToolTipText("Cards in hand (max: " + handMaxToolTip + ")");
+        getLblGraveyard().setText("" + player.getGraveyardSize());
+        getLblLibrary().setText("" + player.getLibrarySize());
+        getLblFlashback().setText("" + player.getFlashbackSize());
+        getLblExile().setText("" + player.getExileSize());
     }
 
     /**
@@ -131,12 +133,12 @@ public class PlayerDetailsPanel extends JPanel {
         CPlayers.SINGLETON_INSTANCE.update();
 
         // Poison/life
-        this.getLblPoison().setText("" + player.getPoisonCounters());
+        getLblPoison().setText("" + player.getPoisonCounters());
         if (player.getPoisonCounters() < 8) {
-            this.getLblPoison().setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            getLblPoison().setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         }
         else {
-            this.getLblPoison().setForeground(Color.red);
+            getLblPoison().setForeground(Color.red);
         }
     }
 
@@ -152,27 +154,27 @@ public class PlayerDetailsPanel extends JPanel {
     }
 
     public FLabel getLblHand() {
-        return this.lblHand;
+        return lblHand;
     }
 
     public FLabel getLblLibrary() {
-        return this.lblLibrary;
+        return lblLibrary;
     }
 
     public FLabel getLblGraveyard() {
-        return this.lblGraveyard;
+        return lblGraveyard;
     }
 
     public FLabel getLblExile() {
-        return this.lblExile;
+        return lblExile;
     }
 
     public FLabel getLblFlashback() {
-        return this.lblFlashback;
+        return lblFlashback;
     }
 
     public FLabel getLblPoison() {
-        return this.lblPoison;
+        return lblPoison;
     }
 
     public void setupMouseActions(final ForgeAction handAction, final ForgeAction libraryAction, final ForgeAction exileAction,
@@ -201,21 +203,34 @@ public class PlayerDetailsPanel extends JPanel {
             .text(s0).tooltip(s1).fontAlign(SwingConstants.RIGHT));
         }
 
-        @Override
         public void setText(String text0) {
             super.setText(text0);
+            autoSizeFont();
+        }
 
-            //adjust font size based on the text length to prevent it overlapping icon
-            switch (text0.length()) {
-            case 1:
-                setFontSize(14);
-                break;
-            case 2:
-                setFontSize(10);
-                break;
-            case 3:
-                setFontSize(8);
-                break;
+        protected void resetIcon() {
+            super.resetIcon();
+            autoSizeFont();
+        }
+
+        private void autoSizeFont() {
+            String text = getText();
+            if (StringUtils.isEmpty(text)) { return; }
+
+            Graphics g = getGraphics();
+            if (g == null) { return; }
+
+            int max = getMaxTextWidth();
+
+            SkinFont font = null;
+            for (int fontSize = 14; fontSize > 5; fontSize--) {
+                font = FSkin.getBoldFont(fontSize);
+                if (font.measureTextWidth(g, text) <= max) {
+                    break;
+                }
+            }
+            if (font != null) {
+                setFont(font);
             }
         }
     }
