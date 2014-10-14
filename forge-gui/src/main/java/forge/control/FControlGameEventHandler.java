@@ -83,6 +83,18 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             processEventsQueued = false;
 
             IMatchController controller = MatchUtil.getController();
+            synchronized (cardsUpdate) {
+                if (!cardsUpdate.isEmpty()) {
+                    MatchUtil.updateCards(cardsUpdate);
+                    cardsUpdate.clear();
+                }
+            }
+            synchronized (cardsRefreshDetails) {
+                if (!cardsRefreshDetails.isEmpty()) {
+                    controller.refreshCardDetails(cardsRefreshDetails);
+                    cardsRefreshDetails.clear();
+                }
+            }
             synchronized (livesUpdate) {
                 if (!livesUpdate.isEmpty()) {
                     controller.updateLives(livesUpdate);
@@ -119,18 +131,6 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                 if (!zonesUpdate.isEmpty()) {
                     controller.updateZones(zonesUpdate);
                     zonesUpdate.clear();
-                }
-            }
-            synchronized (cardsUpdate) {
-                if (!cardsUpdate.isEmpty()) {
-                    MatchUtil.updateCards(cardsUpdate);
-                    cardsUpdate.clear();
-                }
-            }
-            synchronized (cardsRefreshDetails) {
-                if (!cardsRefreshDetails.isEmpty()) {
-                    controller.refreshCardDetails(cardsRefreshDetails);
-                    cardsRefreshDetails.clear();
                 }
             }
             if (gameOver) {
