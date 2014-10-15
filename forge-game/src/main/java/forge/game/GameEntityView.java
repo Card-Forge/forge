@@ -28,21 +28,21 @@ public abstract class GameEntityView extends TrackableObject {
     public String getName() {
         return get(TrackableProperty.Name);
     }
-    void updateName(GameEntity e) {
+    protected void updateName(GameEntity e) {
         set(TrackableProperty.Name, e.getName());
     }
 
     public int getPreventNextDamage() {
         return get(TrackableProperty.PreventNextDamage);
     }
-    void updatePreventNextDamage(GameEntity e) {
+    protected void updatePreventNextDamage(GameEntity e) {
         set(TrackableProperty.PreventNextDamage, e.getPreventNextDamageTotalShields());
     }
 
     public Iterable<CardView> getEnchantedBy() {
         return get(TrackableProperty.EnchantedBy);
     }
-    void updateEnchantedBy(GameEntity e) {
+    protected void updateEnchantedBy(GameEntity e) {
         if (e.isEnchanted()) {
             set(TrackableProperty.EnchantedBy, CardView.getCollection(e.getEnchantedBy(false)));
         }

@@ -3,8 +3,6 @@ package forge.game.card;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
-
 import forge.ImageKeys;
 import forge.card.CardStateName;
 import forge.card.CardEdition;
@@ -612,14 +610,17 @@ public class CardView extends GameEntityView {
         return alternate0 ? getAlternateState() : getCurrentState();
     }
     void updateState(Card c) {
+        updateName(c);
+
+        boolean isSplitCard = c.isSplitCard();
         set(TrackableProperty.Cloned, c.isCloned());
-        set(TrackableProperty.SplitCard, c.isSplitCard());
+        set(TrackableProperty.SplitCard, isSplitCard);
         set(TrackableProperty.FlipCard, c.isFlipCard());
 
         CardStateView cloner = CardView.getState(c, CardStateName.Cloner);
         set(TrackableProperty.Cloner, cloner == null ? null : cloner.getName() + " (" + cloner.getId() + ")");
 
-        CardState currentState = c.getCurrentState();
+        CardState currentState = isSplitCard ? c.getState(CardStateName.LeftSplit) : c.getCurrentState();
         CardStateView currentStateView = currentState.getView();
         if (getCurrentState() != currentStateView) {
             set(TrackableProperty.CurrentState, currentStateView);
@@ -629,7 +630,7 @@ public class CardView extends GameEntityView {
         }
         currentState.getView().updateKeywords(c, currentState); //update keywords even if state doesn't change
 
-        CardState alternateState = c.getAlternateState();
+        CardState alternateState = isSplitCard ? c.getState(CardStateName.RightSplit) : c.getAlternateState();
         if (alternateState == null) {
             set(TrackableProperty.AlternateState, null);
         }
@@ -647,29 +648,19 @@ public class CardView extends GameEntityView {
 
     @Override
     public String toString() {
+        String name = getName();
         if (getId() <= 0) { //if fake card, just return name
-            return getCurrentState().getName();
+            return name;
         }
 
-        /*if (!mayBeShown) {
-            return "???";
-        }*/
-
-        if (StringUtils.isEmpty(getCurrentState().getName())) {
+        if (name.isEmpty()) {
             CardStateView alternate = getAlternateState();
             if (alternate != null) {
                 return "Face-down card (" + getAlternateState().getName() + ")";
             }
             return "(" + getId() + ")";
         }
-        return getCurrentState().getName() + " (" + getId() + ")";
-    }
-
-    public String determineName(final CardStateView state) {
-        if (state == getCurrentState()) {
-            return toString();
-        }
-        return getAlternateState().getName() + " (" + getId() + ")";
+        return name + " (" + getId() + ")";
     }
 
     public class CardStateView extends TrackableObject {
@@ -682,7 +673,7 @@ public class CardView extends GameEntityView {
 
         @Override
         public String toString() {
-            return getCard().determineName(this);
+            return getName() + " (" + getId() + ")";
         }
 
         public CardView getCard() {
