@@ -682,10 +682,9 @@ public class GameAction {
                     }
                 }
             }
-            Iterable<Card> cards = game.getCardsIn(ZoneType.Battlefield).threadSafeIterator();
             List<Card> noRegCreats = null;
             List<Card> desCreats = null;
-            for (Card c : cards) {
+            for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
                 if (c.isCreature()) {
                     // Rule 704.5f - Put into grave (no regeneration) for toughness <= 0
                     if (c.getNetToughness() <= 0) {
