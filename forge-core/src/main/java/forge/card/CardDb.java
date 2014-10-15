@@ -72,7 +72,7 @@ public final class CardDb implements ICardDatabase {
         public int artIndex;
         public boolean isFoil;
         
-        public CardRequest(String name, String edition, int artIndex, boolean isFoil) {
+        private CardRequest(String name, String edition, int artIndex, boolean isFoil) {
             cardName = name;
             this.edition = edition;
             this.artIndex = artIndex;
