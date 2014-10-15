@@ -100,4 +100,8 @@ public class FCardPanel extends FDisplayObject {
             g.endTransform();
         }
     }
+
+    public String toString() {
+        return card == null ? "" : card.toString();
+    }
 }

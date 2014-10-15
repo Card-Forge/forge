@@ -56,10 +56,24 @@ public abstract class VCardDisplayArea extends VDisplayArea {
                 }
             }
         }
-        revalidate();
+        if (isVisible()) { //only revalidate if currently visible
+            revalidate();
+    
+            if (newCardPanel != null) { //if new cards added, ensure first new card is scrolled into view
+                scrollIntoView(newCardPanel);
+            }
+        }
+    }
 
-        if (newCardPanel != null) { //if new cards added, ensure first new card is scrolled into view
-            scrollIntoView(newCardPanel);
+    @Override
+    public void setVisible(boolean b0) {
+        if (isVisible() == b0) { return; }
+        super.setVisible(b0);
+        if (b0) { //when zone becomes visible, ensure display area of panels is updated and panels layed out
+            for (CardAreaPanel pnl : cardPanels) {
+                pnl.displayArea = this;
+            }
+            revalidate();
         }
     }
 
@@ -72,7 +86,9 @@ public abstract class VCardDisplayArea extends VDisplayArea {
             }
         }
 
-        cardPanel.displayArea = this;
+        if (isVisible()) { //only set display area for card if area is visible
+            cardPanel.displayArea = this;
+        }
         add(cardPanel);
 
         if (cardPanel.getNextPanelInStack() != null) {
@@ -192,10 +208,6 @@ public abstract class VCardDisplayArea extends VDisplayArea {
 
         public VCardDisplayArea getDisplayArea() {
             return displayArea;
-        }
-
-        public void setDisplayArea(VCardDisplayArea displayArea0) {
-            displayArea = displayArea0;
         }
 
         public CardAreaPanel getAttachedToPanel() {
