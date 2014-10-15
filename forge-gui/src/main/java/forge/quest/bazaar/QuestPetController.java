@@ -23,6 +23,9 @@ import java.util.List;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
+import forge.GuiBase;
+import forge.assets.FSkinProp;
+import forge.assets.ISkinImage;
 import forge.item.PaperToken;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
@@ -120,10 +123,22 @@ public class QuestPetController implements IQuestBazaarItem {
      * @return a {@link java.lang.String} object.
      */
     @Override
-    public final String getIcon(final QuestAssets qA) {
+    public final ISkinImage getIcon(final QuestAssets qA) {
         final String path = ForgeConstants.CACHE_TOKEN_PICS_DIR;
         final int level = this.getPetLevel(qA);
-        return path + this.levels.get(level < this.maxLevel ? level + 1 : level).getPicture() + ".jpg";
+        try {
+            return GuiBase.getInterface().getUnskinnedIcon(path + this.levels.get(level < this.maxLevel ? level + 1 : level).getPicture() + ".jpg");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            return GuiBase.getInterface().getUnskinnedIcon(ForgeConstants.NO_CARD_FILE);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return GuiBase.getInterface().getSkinIcon(FSkinProp.ICO_UNKNOWN);
     }
 
     /**

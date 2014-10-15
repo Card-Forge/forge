@@ -21,7 +21,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
+import forge.GuiBase;
 import forge.assets.FSkinProp;
+import forge.assets.ISkinImage;
 import forge.quest.QuestController;
 import forge.quest.data.QuestAssets;
 
@@ -171,8 +173,8 @@ public class QuestItemBasic implements IQuestBazaarItem {
      * 
      */
     @Override
-    public String getIcon(final QuestAssets qA) {
-        return icon.name();
+    public ISkinImage getIcon(final QuestAssets qA) {
+        return GuiBase.getInterface().getSkinIcon(icon);
     }
 
     /**
