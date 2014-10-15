@@ -282,15 +282,18 @@ public class MatchUtil {
     }
 
     public static String getCardImageKey(CardStateView csv) {
-        return csv.getImageKey(getCurrentPlayer().getView());
+        if (currentPlayer == null) { return csv.getImageKey(null); } //if not in game, card can be shown
+        return csv.getImageKey(currentPlayer.getView());
     }
 
     public static boolean canCardBeShown(CardView cv) {
-        return cv.canBeShownTo(getCurrentPlayer().getView());
+        if (currentPlayer == null) { return true; } //if not in game, card can be shown
+        return cv.canBeShownTo(currentPlayer.getView());
     }
 
     public static boolean canFaceDownCardBeShown(CardView cv) {
-        return cv.hasAlternateState() && cv.canFaceDownBeShownTo(getCurrentPlayer().getView());
+        if (currentPlayer == null) { return true; } //if not in game, card can be shown
+        return cv.hasAlternateState() && cv.canFaceDownBeShownTo(currentPlayer.getView());
     }
 
     private static Set<PlayerView> highlightedPlayers = new HashSet<PlayerView>();
