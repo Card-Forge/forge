@@ -199,7 +199,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (t.isEmpty()) {
             return false;
         }
-        if (subtypes.contains(t)) {
+        if (hasSubtype(t)) {
             return true;
         }
         char firstChar = t.charAt(0);
@@ -223,6 +223,9 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return supertypes.contains(supertype);
     }
     public boolean hasSubtype(String subtype) {
+        if (forge.card.CardType.isACreatureType(subtype) && subtypes.contains("AllCreatureTypes")) {
+            return true;
+        }
         return subtypes.contains(subtype);
     }
     public boolean hasCreatureType(String creatureType) {
