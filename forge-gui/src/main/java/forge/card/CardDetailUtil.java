@@ -162,8 +162,8 @@ public class CardDetailUtil {
         return item.getName(); 
     }
 
-    public static String formatCardName(final CardView card, final boolean canShow) {
-        final String name = card.getName();
+    public static String formatCardName(final CardView card, final boolean canShow, final boolean forAltState) {
+        final String name = forAltState ? card.getAlternateState().getName() : card.getName();
         return StringUtils.isEmpty(name) || !canShow ? "???" : name.trim();
     }
 

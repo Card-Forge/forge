@@ -186,7 +186,7 @@ public class CardDetailPanel extends SkinnedPanel {
         final CardStateView state = card.getState(isInAltState);
 
         if (state.getManaCost().isNoCost() || !canShow) {
-            nameCostLabel.setText(CardDetailUtil.formatCardName(card, canShow));
+            nameCostLabel.setText(CardDetailUtil.formatCardName(card, canShow, isInAltState));
         }
         else {
             final String manaCost;
@@ -195,7 +195,7 @@ public class CardDetailPanel extends SkinnedPanel {
             } else {
                 manaCost = state.getManaCost().toString();
             }
-            nameCostLabel.setText(FSkin.encodeSymbols(CardDetailUtil.formatCardName(card, canShow) + " - " + manaCost, true));
+            nameCostLabel.setText(FSkin.encodeSymbols(CardDetailUtil.formatCardName(card, canShow, isInAltState) + " - " + manaCost, true));
         }
         typeLabel.setText(CardDetailUtil.formatCardType(state, canShow));
 

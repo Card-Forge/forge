@@ -415,7 +415,7 @@ public class CardRenderer {
         //draw name for card
         x += padding;
         w -= 2 * padding;
-        g.drawText(CardDetailUtil.formatCardName(card, canShow), NAME_FONT, Color.BLACK, x, y, w - manaCostWidth - padding, h, false, HAlignment.LEFT, true);
+        g.drawText(CardDetailUtil.formatCardName(card, canShow, false), NAME_FONT, Color.BLACK, x, y, w - manaCostWidth - padding, h, false, HAlignment.LEFT, true);
 
         //draw type and set label for card
         y += h;
