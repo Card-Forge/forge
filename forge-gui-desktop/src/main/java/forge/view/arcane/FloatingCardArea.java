@@ -57,6 +57,12 @@ public class FloatingCardArea extends CardArea {
         }
         cardArea.showWindow();
     }
+    public static void refresh(PlayerView player, ZoneType zone) {
+        FloatingCardArea cardArea = floatingAreas.get(getKey(player, zone));
+        if (cardArea != null) {
+            cardArea.refresh();
+        }
+    }
 
     private final PlayerView player;
     private final ZoneType zone;
@@ -68,6 +74,16 @@ public class FloatingCardArea extends CardArea {
         public void setLocationRelativeTo(Component c) {
             if (hasBeenShown) { return; } //don't change location this way if dialog has already been shown
             super.setLocationRelativeTo(c);
+        }
+
+        @Override
+        public void setVisible(boolean b0) {
+            if (isVisible() == b0) { return; }
+            super.setVisible(b0);
+            if (b0) {
+                refresh();
+                hasBeenShown = true;
+            }
         }
     };
     private boolean hasBeenShown;
@@ -97,7 +113,6 @@ public class FloatingCardArea extends CardArea {
         player = player0;
         zone = zone0;
         setVertical(true);
-        refresh();
     }
 
     private void showWindow() {
@@ -113,10 +128,11 @@ public class FloatingCardArea extends CardArea {
             });
         }
         window.setVisible(true);
-        hasBeenShown = true;
     }
 
     public void refresh() {
+        if (!window.isVisible()) { return; } //don't refresh while window hidden
+
         List<CardPanel> cardPanels = new ArrayList<CardPanel>();
         FCollectionView<CardView> cards = player.getCards(zone);
         if (cards != null) {

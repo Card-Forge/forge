@@ -91,6 +91,7 @@ import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PhaseLabel;
 import forge.util.ITriggerEvent;
 import forge.view.arcane.CardPanel;
+import forge.view.arcane.FloatingCardArea;
 
 /**
  * Constructs instance of match UI controller, used as a single point of
@@ -278,23 +279,31 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
             PlayerView owner = kv.getKey();
             ZoneType zt = kv.getValue();
 
-            if (zt == ZoneType.Command) {
-                getCommandFor(owner).getTabletop().setupPlayZone();
-            } else if (zt == ZoneType.Hand) {
+            switch (zt) {
+            case Battlefield:
+                getFieldViewFor(owner).getTabletop().setupPlayZone();
+                break;
+            case Hand:
                 VHand vHand = getHandFor(owner);
-                if (null != vHand) {
+                if (vHand != null) {
                     vHand.getLayoutControl().updateHand();
                 }
                 getFieldViewFor(owner).getDetailsPanel().updateZones();
-            } else if (zt == ZoneType.Battlefield) {
-                getFieldViewFor(owner).getTabletop().setupPlayZone();
-            } else if (zt == ZoneType.Ante) {
+                FloatingCardArea.refresh(owner, zt);
+                break;
+            case Command:
+                getCommandFor(owner).getTabletop().setupPlayZone();
+                break;
+            case Ante:
                 CAntes.SINGLETON_INSTANCE.update();
-            } else {
+                break;
+            default:
                 final VField vf = getFieldViewFor(owner);
                 if (vf != null) {
                     vf.getDetailsPanel().updateZones();
                 }
+                FloatingCardArea.refresh(owner, zt);
+                break;
             }
         }
     }
