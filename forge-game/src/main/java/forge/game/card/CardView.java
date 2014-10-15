@@ -406,7 +406,7 @@ public class CardView extends GameEntityView {
     }
 
     public boolean isEquipped() {
-        return getEquippedBy() != null;
+        return getEquippedBy() != null && !getEquippedBy().isEmpty();
     }
 
     public GameEntityView getEnchanting() {
