@@ -268,7 +268,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n , cornerSize + n);
 
         // White border if card is known to have it.
-        if (getCard() != null) {
+        if (getCard() != null && MatchUtil.canCardBeShown(getCard())) {
             CardStateView state = getCard().getCurrentState();
             CardEdition ed = FModel.getMagicDb().getEditions().get(state.getSetCode());
             if (ed != null && ed.isWhiteBorder() && state.getFoilIndex() == 0) {
@@ -318,10 +318,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         imagePanel.setLocation(imgPos);
         imagePanel.setSize(imgSize);
 
+        boolean canShow = MatchUtil.canCardBeShown(card);
         boolean showText = !imagePanel.hasImage() || !isAnimationPanel;
 
-        displayCardNameOverlay(showText && showCardNameOverlay(), imgSize, imgPos);
-        displayPTOverlay(showText && showCardPowerOverlay(), imgSize, imgPos);
+        displayCardNameOverlay(showText && canShow && showCardNameOverlay(), imgSize, imgPos);
+        displayPTOverlay(showText && (canShow || card.isFaceDown()) && showCardPowerOverlay(), imgSize, imgPos);
         displayCardIdOverlay(showText && showCardIdOverlay(), imgSize, imgPos);
     }
 
@@ -367,7 +368,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     }
 
     private void displayIconOverlay(final Graphics g) {
-        if (showCardManaCostOverlay() && cardWidth < 200) {
+        if (showCardManaCostOverlay() && cardWidth < 200 && MatchUtil.canCardBeShown(card)) {
             final boolean showSplitMana = card.isSplitCard();
             if (!showSplitMana) {
                 drawManaCost(g, card.getCurrentState().getManaCost(), 0);
