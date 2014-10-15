@@ -200,6 +200,10 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
         return allowResize;
     }
 
+    public FTitleBar getTitleBar() {
+        return titleBar;
+    }
+
     //relay certain methods to the inner panel if it has been initialized
     @Override
     public void setContentPane(Container contentPane) {

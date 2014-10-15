@@ -24,6 +24,7 @@ import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CPrompt;
+import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.MouseTriggerEvent;
@@ -103,6 +104,13 @@ public class FloatingCardArea extends CardArea {
         if (!hasBeenShown) { //only set size if first time showing window
             FFrame mainFrame = Singletons.getView().getFrame();
             window.setSize(mainFrame.getWidth() / 4, mainFrame.getHeight() * 2 / 3);
+
+            window.getTitleBar().addMouseListener(new FMouseAdapter() {
+                @Override
+                public void onLeftDoubleClick(MouseEvent e) {
+                    window.setVisible(false); //hide window if titlebar double-clicked
+                }
+            });
         }
         window.setVisible(true);
         hasBeenShown = true;
