@@ -196,6 +196,9 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     public boolean hasStringType(String t) {
+        if (t.isEmpty()) {
+            return false;
+        }
         if (subtypes.contains(t)) {
             return true;
         }
