@@ -506,7 +506,7 @@ public class CardView extends GameEntityView {
     }
     public String getText(CardStateView state) {
         if (getId() < 0) {
-            return state.getOracleText().trim();
+            return getOracleText();
         }
 
         final StringBuilder sb = new StringBuilder();
@@ -585,6 +585,13 @@ public class CardView extends GameEntityView {
         }
 
         return sb.toString().trim();
+    }
+
+    public String getOracleText() {
+        return get(TrackableProperty.OracleText);
+    }
+    void updateOracleText(Card c) {
+        set(TrackableProperty.OracleText, c.getOracleText().replace("\\n", "\r\n").trim());
     }
 
     public CardStateView getCurrentState() {
@@ -793,13 +800,6 @@ public class CardView extends GameEntityView {
                 }
             }
             set(TrackableProperty.Loyalty, 0); //alternates don't need loyalty
-        }
-
-        public String getOracleText() {
-            return get(TrackableProperty.OracleText);
-        }
-        void updateOracleText(CardState c) {
-            set(TrackableProperty.OracleText, c.getOracleText());
         }
 
         public String getSetCode() {

@@ -197,6 +197,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     private int baseLoyalty = 0;
     private String basePowerString = null;
     private String baseToughnessString = null;
+    private String oracleText = "";
 
     private int damage;
 
@@ -1967,7 +1968,9 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return copiedPermanent;
     }
     public final void setCopiedPermanent(final Card c) {
+        if (copiedPermanent == c) { return; }
         copiedPermanent = c;
+        view.updateOracleText(this);
     }
 
     public final boolean isCopiedSpell() {
@@ -6131,6 +6134,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     public void setRules(CardRules r) {
         cardRules = r;
         view.updateRulesText(r, getType());
+        view.updateOracleText(this);
     }
 
     public boolean isCommander() {
@@ -6282,7 +6286,11 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         if (copiedPermanent != null) { //return oracle text of copied permanent if applicable
             rules = copiedPermanent.getRules();
         }
-        return rules != null ? rules.getOracleText() : "";
+        return rules != null ? rules.getOracleText() : oracleText;
+    }
+    public void setOracleText(final String oracleText0) {
+        oracleText = oracleText0;
+        view.updateOracleText(this);
     }
 
     @Override

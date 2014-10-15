@@ -47,7 +47,6 @@ public class CardState {
     private CardType type = new CardType();
     private ManaCost manaCost = ManaCost.NO_COST;
     private List<CardColor> cardColor = new ArrayList<CardColor>();
-    private String oracleText = "";
     private int basePower = 0;
     private int baseToughness = 0;
     private List<String> intrinsicKeywords = new ArrayList<String>();
@@ -136,14 +135,6 @@ public class CardState {
             }
         }
         return ColorSet.fromMask(colors);
-    }
-
-    public String getOracleText() {
-        return oracleText;
-    }
-    public void setOracleText(final String oracleText0) {
-        oracleText = oracleText0;
-        view.updateOracleText(this);
     }
 
     public final int getBasePower() {
