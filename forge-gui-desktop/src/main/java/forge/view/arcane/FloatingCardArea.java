@@ -32,9 +32,8 @@ import forge.util.Lang;
 import forge.view.FDialog;
 import forge.view.FFrame;
 
+import java.awt.Component;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,17 +53,23 @@ public class FloatingCardArea extends CardArea {
         if (cardArea == null) {
             cardArea = new FloatingCardArea(player, zone);
             floatingAreas.put(key, cardArea);
-            cardArea.showWindow();
         }
-        else {
-            cardArea.window.requestFocusInWindow();
-        }
+        cardArea.showWindow();
     }
 
-    private PlayerView player;
+    private final PlayerView player;
     private final ZoneType zone;
     private final String title;
-    private final FDialog window = new FDialog(false, true, "0");
+
+    @SuppressWarnings("serial")
+    private final FDialog window = new FDialog(false, true, "0") {
+        @Override
+        public void setLocationRelativeTo(Component c) {
+            if (hasBeenShown) { return; } //don't change location this way if dialog has already been shown
+            super.setLocationRelativeTo(c);
+        }
+    };
+    private boolean hasBeenShown;
 
     private FloatingCardArea(PlayerView player0, ZoneType zone0) {
         super(new FScrollPane(false));
@@ -88,22 +93,19 @@ public class FloatingCardArea extends CardArea {
             break;
         }
         title = Lang.getPossessedObject(player0.getName(), zone0.name()) + " (%d)";
-        window.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(final WindowEvent e) {
-                floatingAreas.remove(getKey(player, zone));
-            }
-        });
         player = player0;
         zone = zone0;
         setVertical(true);
         refresh();
     }
-    
+
     private void showWindow() {
-        FFrame mainFrame = Singletons.getView().getFrame();
-        window.setSize(mainFrame.getWidth() / 4, mainFrame.getHeight() * 2 / 3);
+        if (!hasBeenShown) { //only set size if first time showing window
+            FFrame mainFrame = Singletons.getView().getFrame();
+            window.setSize(mainFrame.getWidth() / 4, mainFrame.getHeight() * 2 / 3);
+        }
         window.setVisible(true);
+        hasBeenShown = true;
     }
 
     public void refresh() {
