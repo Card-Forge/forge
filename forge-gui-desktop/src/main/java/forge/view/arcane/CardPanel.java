@@ -293,9 +293,12 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             return;
         }
 
-        displayIconOverlay(g);
-        drawFoilEffect(g, card, cardXOffset, cardYOffset,
-                cardWidth, cardHeight, Math.round(cardWidth * BLACK_BORDER_SIZE));
+        boolean canShow = MatchUtil.canCardBeShown(card);
+        displayIconOverlay(g, canShow);
+        if (canShow) {
+            drawFoilEffect(g, card, cardXOffset, cardYOffset,
+                    cardWidth, cardHeight, Math.round(cardWidth * BLACK_BORDER_SIZE));
+        }
     }
 
     public static void drawFoilEffect(final Graphics g, final CardView card2, final int x, final int y, final int width, final int height, final int borderSize) {
@@ -367,8 +370,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         titleText.setVisible(isVisible);
     }
 
-    private void displayIconOverlay(final Graphics g) {
-        if (showCardManaCostOverlay() && cardWidth < 200 && MatchUtil.canCardBeShown(card)) {
+    private void displayIconOverlay(final Graphics g, final boolean canShow) {
+        if (canShow && showCardManaCostOverlay() && cardWidth < 200) {
             final boolean showSplitMana = card.isSplitCard();
             if (!showSplitMana) {
                 drawManaCost(g, card.getCurrentState().getManaCost(), 0);

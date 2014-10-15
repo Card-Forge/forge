@@ -231,7 +231,7 @@ public class VStack extends FDropDown {
                 text = "(OPTIONAL) " + text;
             }
 
-            DetailColors color = CardDetailUtil.getBorderColor(card.getCurrentState());
+            DetailColors color = CardDetailUtil.getBorderColor(card.getCurrentState(), true);
             backColor = FSkinColor.fromRGB(color.r, color.g, color.b);
             foreColor = FSkinColor.getHighContrastColor(backColor);
 

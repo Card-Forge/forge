@@ -20,6 +20,7 @@ import forge.card.CardRenderer.CardStackPosition;
 import forge.card.mana.ManaCost;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.match.MatchUtil;
 import forge.screens.FScreen;
 
 public class CardImageRenderer {
@@ -68,8 +69,10 @@ public class CardImageRenderer {
         w -= 2 * blackBorderThickness;
         h -= 2 * blackBorderThickness;
 
+        boolean canShow = MatchUtil.canCardBeShown(card);
+
         //determine colors for borders
-        final List<DetailColors> borderColors = CardDetailUtil.getBorderColors(card.getCurrentState());
+        final List<DetailColors> borderColors = CardDetailUtil.getBorderColors(card.getCurrentState(), canShow);
         DetailColors borderColor = borderColors.get(0);
         Color color1 = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
         Color color2 = null;
@@ -133,7 +136,7 @@ public class CardImageRenderer {
         }
 
         //draw type line
-        drawTypeLine(g, card, headerColor1, headerColor2, x, y, w, typeBoxHeight);
+        drawTypeLine(g, card, canShow, headerColor1, headerColor2, x, y, w, typeBoxHeight);
         y += typeBoxHeight;
 
         //draw text box
@@ -206,7 +209,7 @@ public class CardImageRenderer {
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
     }
 
-    private static void drawTypeLine(Graphics g, CardView card, Color color1, Color color2, float x, float y, float w, float h) {
+    private static void drawTypeLine(Graphics g, CardView card, boolean canShow, Color color1, Color color2, float x, float y, float w, float h) {
         if (color2 == null) {
             g.fillRect(color1, x, y, w, h);
         }
@@ -225,7 +228,7 @@ public class CardImageRenderer {
 
         //draw type
         x += padding;
-        g.drawText(CardDetailUtil.formatCardType(card.getCurrentState()), TYPE_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
+        g.drawText(CardDetailUtil.formatCardType(card.getCurrentState(), canShow), TYPE_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
     }
 
     //use text renderer to handle mana symbols and reminder text

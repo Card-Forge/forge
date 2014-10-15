@@ -50,20 +50,20 @@ public class CardDetailUtil {
         }
     }
 
-    public static DetailColors getBorderColor(final CardStateView card) {
+    public static DetailColors getBorderColor(final CardStateView card, final boolean canShow) {
         if (card == null) {
             return getBorderColors(null, false, false, false).iterator().next();
         }
-        return getBorderColors(card.getColors(), card.isLand(), MatchUtil.canCardBeShown(card.getCard()), false).iterator().next();
+        return getBorderColors(card.getColors(), card.isLand(), canShow, false).iterator().next();
     }
     public static DetailColors getBorderColor(final ColorSet cardColors, final boolean isLand, boolean canShow) {
         return getBorderColors(cardColors, isLand, canShow, false).get(0);
     }
-    public static List<DetailColors> getBorderColors(final CardStateView card) {
+    public static List<DetailColors> getBorderColors(final CardStateView card, final boolean canShow) {
         if (card == null) {
             return getBorderColors(null, false, false, true);
         }
-        return getBorderColors(card.getColors(), card.isLand(), MatchUtil.canCardBeShown(card.getCard()), true);
+        return getBorderColors(card.getColors(), card.isLand(), canShow, true);
     }
     private static List<DetailColors> getBorderColors(final ColorSet cardColors, final boolean isLand, boolean canShow, boolean supportMultiple) {
         List<DetailColors> borderColors = new ArrayList<DetailColors>();
@@ -162,16 +162,19 @@ public class CardDetailUtil {
         return item.getName(); 
     }
 
-    public static String formatCardName(final CardStateView card) {
+    public static String formatCardName(final CardStateView card, final boolean canShow) {
         final String name = card.getName();
-        return StringUtils.isEmpty(name) ? "???" : name.trim();
+        return StringUtils.isEmpty(name) || !canShow ? "???" : name.trim();
     }
 
-    public static String formatCardType(final CardStateView card) {
-        return card.getType().toString();
+    public static String formatCardType(final CardStateView card, final boolean canShow) {
+        return canShow ? card.getType().toString() : (card.getState() == CardStateName.FaceDown ? "Creature" : "---");
     }
 
-    public static String formatPowerToughness(final CardStateView card) {
+    public static String formatPowerToughness(final CardStateView card, final boolean canShow) {
+        if (!canShow && card.getState() != CardStateName.FaceDown) {
+            return "";
+        }
         StringBuilder ptText = new StringBuilder();
         if (card.isCreature()) {
             ptText.append(card.getPower()).append(" / ").append(card.getToughness());
@@ -196,7 +199,9 @@ public class CardDetailUtil {
         return id > 0 ? "[" + id + "]" : "";
     }
 
-    public static String composeCardText(final CardStateView state) {
+    public static String composeCardText(final CardStateView state, final boolean canShow) {
+        if (!canShow) { return ""; }
+
         final CardView card = state.getCard();
         final StringBuilder area = new StringBuilder();
 
