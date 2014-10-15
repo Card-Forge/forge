@@ -1079,6 +1079,7 @@ forge-gui-desktop/src/main/java/forge/view/SplashFrame.java -text
 forge-gui-desktop/src/main/java/forge/view/arcane/CardArea.java -text
 forge-gui-desktop/src/main/java/forge/view/arcane/CardPanel.java -text
 forge-gui-desktop/src/main/java/forge/view/arcane/CardPanelContainer.java -text
+forge-gui-desktop/src/main/java/forge/view/arcane/FloatingCardArea.java -text
 forge-gui-desktop/src/main/java/forge/view/arcane/HandArea.java -text
 forge-gui-desktop/src/main/java/forge/view/arcane/PlayArea.java -text
 forge-gui-desktop/src/main/java/forge/view/arcane/ScaledImagePanel.java -text

@@ -246,7 +246,6 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         };
         this.addMouseMotionListener(mml);
         return mml;
-
     }
 
     /**

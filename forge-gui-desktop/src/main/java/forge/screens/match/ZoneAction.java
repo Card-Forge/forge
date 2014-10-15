@@ -1,17 +1,12 @@
 package forge.screens.match;
 
 import java.awt.event.ActionEvent;
-import java.util.List;
-
-import com.google.common.collect.Lists;
-
 import forge.game.card.CardView;
-import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.ForgeAction;
-import forge.gui.GuiChoose;
 import forge.match.MatchConstants;
+import forge.view.arcane.FloatingCardArea;
 
 /**
  * Receives click and programmatic requests for viewing data stacks in the
@@ -22,47 +17,36 @@ public class ZoneAction extends ForgeAction {
     private static final long serialVersionUID = -5822976087772388839L;
     private final PlayerView player;
     private final ZoneType zone;
-    private final String title;
 
     /**
      * Receives click and programmatic requests for viewing data stacks in
      * the "zones" of a player field: hand, graveyard, etc. The library
      * "zone" is an exception to the rule; it's handled in DeckListAction.
-     * 
-     * @param zone
-     *            &emsp; PlayerZone obj
-     * @param property
-     *            &emsp; String obj
      */
-    public ZoneAction(final PlayerView player, final ZoneType zone, final MatchConstants property) {
+    public ZoneAction(final PlayerView player0, final ZoneType zone0, final MatchConstants property) {
         super(property);
-        this.title = property.title;
-        this.player = player;
-        this.zone = zone;
+        player = player0;
+        zone = zone0;
     }
 
-    /**
-     * @param e
-     *            &emsp; ActionEvent obj
-     */
     @Override
     public void actionPerformed(final ActionEvent e) {
-        final Iterable<CardView> choices = this.getCardsAsIterable();
+        FloatingCardArea.show(player, zone);
+        /*final Iterable<CardView> choices = getCardsAsIterable();
         if (choices == null || !choices.iterator().hasNext()) {
-            GuiChoose.reveal(this.title, "no cards");
+            GuiChoose.reveal(title, "no cards");
             return;
-        } 
+        }
 
         final List<CardStateView> choices2 = Lists.newLinkedList();
-        for (final CardView crd : choices) {
-            final CardStateView toAdd = crd.getCurrentState();
-            choices2.add(toAdd);
+        for (final CardView cv : choices) {
+            choices2.add(cv.getCurrentState());
         }
 
-        final CardStateView choice = GuiChoose.oneOrNone(this.title, choices2);
+        final CardStateView choice = GuiChoose.oneOrNone(title, choices2);
         if (choice != null) {
-            this.doAction(choice.getCard());
-        }
+            doAction(choice.getCard());
+        }*/
     }
 
     protected Iterable<CardView> getCardsAsIterable() {
@@ -71,4 +55,4 @@ public class ZoneAction extends ForgeAction {
 
     protected void doAction(final CardView c) {
     }
-} // End ZoneAction
+}

@@ -1786,6 +1786,8 @@ public class FSkin {
     public static class SkinnedDialog extends JDialog implements ISkinnedComponent<JDialog> {
         private static final long serialVersionUID = -1086360770925335844L;
 
+        private SkinBorder border;
+
         private WindowSkin<JDialog> skin;
         public WindowSkin<JDialog> getSkin() {
             if (skin == null) { skin = new WindowSkin<JDialog>(); }
@@ -1810,9 +1812,15 @@ public class FSkin {
         public void setIconImage(SkinImage skinImage) { getSkin().setIconImage(this, skinImage); }
         @Override public void setIconImage(Image image) { getSkin().resetIconImage(); super.setIconImage(image); }
 
+        //relay border to root pane
+        public void setBorder(SkinBorder skinBorder) { getRootPane().setBorder(skinBorder != null ? skinBorder.createBorder() : null); this.border = skinBorder; }
+        public void setBorder(Border border) { getRootPane().setBorder(border); this.border = null; }
+
         @Override
         public void paint(Graphics g) {
-            getSkin().update(this);
+            if (getSkin().update(this)) {
+                if (this.border != null) { setBorder(this.border); }
+            }
             super.paint(g);
         }
     }

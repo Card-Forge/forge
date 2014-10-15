@@ -32,7 +32,7 @@ public class VAutoYields extends FDialog {
     private final List<String> autoYields;
 
     public VAutoYields(final PlayerControllerHuman humanController) {
-        super(true);
+        super();
         setTitle("Auto-Yields");
 
         autoYields = new ArrayList<String>();

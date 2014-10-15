@@ -140,63 +140,63 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.Commander, PlayerView.get(p.getMindSlaveMaster()));
     }
 
-    public Iterable<CardView> getAnte() {
+    public FCollectionView<CardView> getAnte() {
         return get(TrackableProperty.Ante);
     }
     public int getAnteSize() {
         return getZoneSize(TrackableProperty.Ante);
     }
 
-    public Iterable<CardView> getBattlefield() {
+    public FCollectionView<CardView> getBattlefield() {
         return get(TrackableProperty.Battlefield);
     }
     public int getBattlefieldSize() {
         return getZoneSize(TrackableProperty.Battlefield);
     }
 
-    public Iterable<CardView> getCommand() {
+    public FCollectionView<CardView> getCommand() {
         return get(TrackableProperty.Command);
     }
     public int getCommandSize() {
         return getZoneSize(TrackableProperty.Command);
     }
 
-    public Iterable<CardView> getExile() {
+    public FCollectionView<CardView> getExile() {
         return get(TrackableProperty.Exile);
     }
     public int getExileSize() {
         return getZoneSize(TrackableProperty.Exile);
     }
 
-    public Iterable<CardView> getFlashback() {
+    public FCollectionView<CardView> getFlashback() {
         return get(TrackableProperty.Flashback);
     }
     public int getFlashbackSize() {
         return getZoneSize(TrackableProperty.Flashback);
     }
 
-    public Iterable<CardView> getGraveyard() {
+    public FCollectionView<CardView> getGraveyard() {
         return get(TrackableProperty.Graveyard);
     }
     public int getGraveyardSize() {
         return getZoneSize(TrackableProperty.Graveyard);
     }
 
-    public Iterable<CardView> getHand() {
+    public FCollectionView<CardView> getHand() {
         return get(TrackableProperty.Hand);
     }
     public int getHandSize() {
         return getZoneSize(TrackableProperty.Hand);
     }
 
-    public Iterable<CardView> getLibrary() {
+    public FCollectionView<CardView> getLibrary() {
         return get(TrackableProperty.Library);
     }
     public int getLibrarySize() {
         return getZoneSize(TrackableProperty.Library);
     }
 
-    public Iterable<CardView> getCards(final ZoneType zone) {
+    public FCollectionView<CardView> getCards(final ZoneType zone) {
         TrackableProperty prop = getZoneProp(zone);
         if (prop != null) {
             return get(prop);

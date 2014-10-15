@@ -6,6 +6,9 @@ import forge.match.input.InputBase;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FPanel;
 import forge.toolbox.FSkin;
+import forge.toolbox.FSkin.Colors;
+import forge.toolbox.FSkin.CompoundSkinBorder;
+import forge.toolbox.FSkin.LineSkinBorder;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedDialog;
 import forge.util.OperatingSystem;
@@ -21,6 +24,7 @@ import java.util.Stack;
 
 @SuppressWarnings("serial")
 public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDispatcher {
+    private static final int borderThickness = 3;
     private static final SkinColor borderColor = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
     private static final int cornerDiameter = 20;
     private static final boolean isSetShapeSupported;
@@ -36,32 +40,43 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
     }
 
     private Point locBeforeMove;
+    private Dimension sizeBeforeResize;
     private Point mouseDownLoc;
+    private int resizeCursor;
     private final FTitleBar titleBar;
     private final FPanel innerPanel;
     private JComponent defaultFocus;
+    private final boolean allowResize;
 
     public FDialog() {
-        this(true);
+        this(true, false, "dialog");
     }
 
-    public FDialog(boolean modal0) {
+    public FDialog(boolean modal0, boolean allowResize0, String insets) {
         super(JOptionPane.getRootFrame(), modal0);
-        this.setUndecorated(true);
-        this.setIconImage(FSkin.getIcon(FSkinProp.ICO_FAVICON)); //use Forge icon by default
+        setUndecorated(true);
+        setIconImage(FSkin.getIcon(FSkinProp.ICO_FAVICON)); //use Forge icon by default
 
-        this.innerPanel = new FPanel(new MigLayout("insets dialog, gap 0, center, fill"));
-        this.innerPanel.setBackgroundTexture(FSkin.getIcon(FSkinProp.BG_TEXTURE));
-        this.innerPanel.setBackgroundTextureOverlay(FSkin.getColor(FSkin.Colors.CLR_THEME)); //use theme color as overlay to reduce background texture opacity
-        this.innerPanel.setBorderToggle(false);
-        this.innerPanel.setOpaque(false);
-        super.setContentPane(this.innerPanel);
+        innerPanel = new FPanel(new MigLayout("insets " + insets + ", gap 0, center, fill"));
+        innerPanel.setBackgroundTexture(FSkin.getIcon(FSkinProp.BG_TEXTURE));
+        innerPanel.setBackgroundTextureOverlay(FSkin.getColor(FSkin.Colors.CLR_THEME)); //use theme color as overlay to reduce background texture opacity
+        innerPanel.setBorderToggle(false);
+        innerPanel.setOpaque(false);
+        super.setContentPane(innerPanel);
 
-        this.titleBar = new FTitleBar(this);
-        this.titleBar.setVisible(true);
+        titleBar = new FTitleBar(this);
+        titleBar.setVisible(true);
         addMoveSupport();
 
-        this.addWindowFocusListener(new WindowFocusListener() {
+        allowResize = allowResize0;
+        if (allowResize) {
+            this.setBorder(new CompoundSkinBorder(
+                    BorderFactory.createLineBorder(Color.BLACK, 1),
+                    new LineSkinBorder(FSkin.getColor(Colors.CLR_BORDERS), borderThickness - 1)));
+            addResizeSupport();
+        }
+
+        addWindowFocusListener(new WindowFocusListener() {
             @Override
             public void windowGainedFocus(final WindowEvent e) {
                 if (FDialog.this.defaultFocus != null) {
@@ -75,8 +90,8 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
             }
         });
 
-        if (isSetShapeSupported) { //if possible, set rounded rectangle shape for dialog
-            this.addComponentListener(new ComponentAdapter() {
+        if (isSetShapeSupported && !allowResize) { //if possible, set rounded rectangle shape for dialog
+            addComponentListener(new ComponentAdapter() {
                 @Override
                 public void componentResized(final ComponentEvent e) { //must update shape whenever dialog is resized
                     int arc = cornerDiameter - 4; //leave room for border aliasing
@@ -102,6 +117,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+        if (allowResize) { return; }
 
         //draw rounded border
         final Graphics2D g2d = (Graphics2D) g.create();
@@ -110,10 +126,10 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
         }
         FSkin.setGraphicsColor(g2d, borderColor);
         if (isSetShapeSupported) {
-            g2d.drawRoundRect(0, 0, this.getWidth() - 1, this.getHeight() - 1, cornerDiameter, cornerDiameter);
+            g2d.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, cornerDiameter, cornerDiameter);
         }
         else { //draw non-rounded border instead if setShape isn't supported
-            g2d.drawRect(0, 0, this.getWidth() - 1, this.getHeight() - 1);
+            g2d.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
         }
         g2d.dispose();
     }
@@ -126,7 +142,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
 
     @Override
     public void setVisible(boolean visible) {
-        if (this.isVisible() == visible) { return; }
+        if (isVisible() == visible) { return; }
 
         if (visible) {
             FMouseAdapter.forceMouseUp(); //ensure mouse up handled if dialog shown between mouse down and mouse up
@@ -161,22 +177,22 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
     }
 
     public void setDefaultFocus(JComponent comp) {
-        this.defaultFocus = comp;
+        defaultFocus = comp;
     }
 
     @Override
     public void setTitle(String title) {
         super.setTitle(title);
-        if (this.titleBar != null) {
-            this.titleBar.setTitle(title);
+        if (titleBar != null) {
+            titleBar.setTitle(title);
         }
     }
 
     @Override
     public void setIconImage(Image image) {
         super.setIconImage(image);
-        if (this.titleBar != null) {
-            this.titleBar.setIconImage(image);
+        if (titleBar != null) {
+            titleBar.setIconImage(image);
         }
     }
 
@@ -245,7 +261,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
     }
 
     private void addMoveSupport() {
-        this.titleBar.addMouseListener(new MouseAdapter() {
+        titleBar.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
@@ -263,7 +279,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
                 }
             }
         });
-        this.titleBar.addMouseMotionListener(new MouseMotionAdapter() {
+        titleBar.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
                 if (mouseDownLoc != null) {
@@ -272,6 +288,163 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
                     final int dy = loc.y - mouseDownLoc.y;
                     setLocation(locBeforeMove.x + dx, locBeforeMove.y + dy);
                 }
+            }
+        });
+    }
+
+    private void setResizeCursor(int resizeCursor0) {
+        resizeCursor = resizeCursor0;
+        getRootPane().setCursor(Cursor.getPredefinedCursor(resizeCursor0));
+    }
+
+    private void addResizeSupport() {
+        final JRootPane resizeBorders = getRootPane();
+        resizeBorders.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (resizeCursor != Cursor.DEFAULT_CURSOR && SwingUtilities.isLeftMouseButton(e)) {
+                    locBeforeMove = getLocation();
+                    sizeBeforeResize = getSize();
+                    mouseDownLoc = e.getLocationOnScreen();
+                }
+            }
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if (SwingUtilities.isLeftMouseButton(e)) {
+                    locBeforeMove = null;
+                    sizeBeforeResize = null;
+                    mouseDownLoc = null;
+                    setResizeCursor(Cursor.DEFAULT_CURSOR);
+                }
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                if (mouseDownLoc == null) {
+                    setResizeCursor(Cursor.DEFAULT_CURSOR);
+                }
+            }
+        });
+        resizeBorders.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                if (mouseDownLoc == null) {
+                    final int grabArea = borderThickness * 2;
+                    final Point loc = e.getPoint();
+                    if (loc.x < grabArea) {
+                        if (loc.y < grabArea) {
+                            setResizeCursor(Cursor.NW_RESIZE_CURSOR);
+                        }
+                        else if (loc.y >= getHeight() - grabArea) {
+                            setResizeCursor(Cursor.SW_RESIZE_CURSOR);
+                        }
+                        else {
+                            setResizeCursor(Cursor.W_RESIZE_CURSOR);
+                        }
+                    }
+                    else if (loc.x >= getWidth() - grabArea) {
+                        if (loc.y < grabArea) {
+                            setResizeCursor(Cursor.NE_RESIZE_CURSOR);
+                        }
+                        else if (loc.y >= getHeight() - grabArea) {
+                            setResizeCursor(Cursor.SE_RESIZE_CURSOR);
+                        }
+                        else {
+                            setResizeCursor(Cursor.E_RESIZE_CURSOR);
+                        }
+                    }
+                    else if (loc.y < grabArea) {
+                        setResizeCursor(Cursor.N_RESIZE_CURSOR);
+                    }
+                    else if (loc.y >= getHeight() - grabArea) {
+                        setResizeCursor(Cursor.S_RESIZE_CURSOR);
+                    }
+                    else {
+                        setResizeCursor(Cursor.DEFAULT_CURSOR);
+                    }
+                }
+            }
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                if (mouseDownLoc == null) { return; }
+
+                final Point loc = e.getLocationOnScreen();
+                int dx = loc.x - mouseDownLoc.x;
+                int dy = loc.y - mouseDownLoc.y;
+
+                //determine new size based on resize direction
+                int width = sizeBeforeResize.width;
+                int height = sizeBeforeResize.height;
+                switch (resizeCursor) {
+                    case Cursor.E_RESIZE_CURSOR:
+                        width += dx;
+                        break;
+                    case Cursor.W_RESIZE_CURSOR:
+                        width -= dx;
+                        break;
+                    case Cursor.S_RESIZE_CURSOR:
+                        height += dy;
+                        break;
+                    case Cursor.N_RESIZE_CURSOR:
+                        height -= dy;
+                        break;
+                    case Cursor.SE_RESIZE_CURSOR:
+                        width += dx;
+                        height += dy;
+                        break;
+                    case Cursor.NE_RESIZE_CURSOR:
+                        width += dx;
+                        height -= dy;
+                        break;
+                    case Cursor.SW_RESIZE_CURSOR:
+                        width -= dx;
+                        height += dy;
+                        break;
+                    case Cursor.NW_RESIZE_CURSOR:
+                        width -= dx;
+                        height -= dy;
+                        break;
+                }
+
+                //ensure new size in bounds
+                Dimension minSize = getMinimumSize();
+                Dimension maxSize = getMaximumSize();
+                if (width < minSize.width) {
+                    dx += (width - minSize.width);
+                    width = minSize.width;
+                }
+                else if (width > maxSize.width) {
+                    dx -= (width - maxSize.width);
+                    width = maxSize.width;
+                }
+                if (height < minSize.height) {
+                    dy += (height - minSize.height);
+                    height = minSize.height;
+                }
+                else if (height > maxSize.height) {
+                    dy -= (height - maxSize.height);
+                    height = maxSize.height;
+                }
+
+                //determine new location based on resize direction
+                int x = locBeforeMove.x;
+                int y = locBeforeMove.y;
+                switch (resizeCursor) {
+                    case Cursor.W_RESIZE_CURSOR:
+                    case Cursor.SW_RESIZE_CURSOR:
+                        x += dx;
+                        break;
+                    case Cursor.N_RESIZE_CURSOR:
+                    case Cursor.NE_RESIZE_CURSOR:
+                        y += dy;
+                        break;
+                    case Cursor.NW_RESIZE_CURSOR:
+                        x += dx;
+                        y += dy;
+                        break;
+                }
+
+                //set bounds based on new size and location
+                setBounds(x, y, width, height);
             }
         });
     }
@@ -341,7 +514,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
         public void paintComponent(final Graphics g) {
             super.paintComponent(g);
             FSkin.setGraphicsColor(g, backColor);
-            g.fillRect(0, 0, this.getWidth(), this.getHeight());
+            g.fillRect(0, 0, getWidth(), getHeight());
         }
     }
 }
