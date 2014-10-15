@@ -627,7 +627,7 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.AlternateState, null);
         }
         else {
-            CardStateView alternateStateView = currentState.getView();
+            CardStateView alternateStateView = alternateState.getView();
             if (getAlternateState() != alternateStateView) {
                 set(TrackableProperty.AlternateState, alternateStateView);
                 alternateStateView.updatePower(c); //ensure power, toughness, and loyalty updated when current state changes
