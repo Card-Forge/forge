@@ -67,7 +67,7 @@ public enum CPicture implements ICDoc {
             return;
         }
 
-        boolean canFlip = MatchUtil.canFaceDownCardBeShown(c);
+        boolean canFlip = MatchUtil.canCardBeFlipped(c);
 
         currentView = c;
         isDisplayAlt = showAlt;
@@ -175,7 +175,7 @@ public enum CPicture implements ICDoc {
     }
 
     public void flipCard() {
-        if (MatchUtil.canFaceDownCardBeShown(currentView)) {
+        if (MatchUtil.canCardBeFlipped(currentView)) {
             isDisplayAlt = !isDisplayAlt;
             picturePanel.setCard(currentView.getState(isDisplayAlt));
             CDetail.SINGLETON_INSTANCE.showCard(currentView, isDisplayAlt);

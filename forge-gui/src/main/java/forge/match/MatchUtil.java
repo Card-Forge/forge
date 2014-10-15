@@ -16,6 +16,7 @@ import com.google.common.eventbus.Subscribe;
 
 import forge.LobbyPlayer;
 import forge.ai.LobbyPlayerAi;
+import forge.card.CardStateName;
 import forge.control.FControlGameEventHandler;
 import forge.control.FControlGamePlayback;
 import forge.control.WatchLocalGame;
@@ -291,9 +292,23 @@ public class MatchUtil {
         return cv.canBeShownTo(currentPlayer.getView());
     }
 
-    public static boolean canFaceDownCardBeShown(CardView cv) {
-        if (currentPlayer == null) { return true; } //if not in game, card can be shown
-        return cv.hasAlternateState() && cv.canFaceDownBeShownTo(currentPlayer.getView());
+    public static boolean canCardBeFlipped(CardView cv) {
+        CardStateView altState = cv.getAlternateState();
+        if (altState == null) { return false; }
+
+        switch (altState.getState()) {
+        case Original:
+            CardStateView currentState = cv.getCurrentState();
+            if (currentState.getState() == CardStateName.FaceDown) {
+                return currentPlayer == null || cv.canFaceDownBeShownTo(currentPlayer.getView());
+            }
+            return true; //original can always be shown if not a face down that can't be shown
+        case Flipped:
+        case Transformed:
+            return true;
+        default:
+            return false;
+        }
     }
 
     private static Set<PlayerView> highlightedPlayers = new HashSet<PlayerView>();

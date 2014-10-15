@@ -25,6 +25,7 @@ import forge.gui.framework.ICDoc;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.InventoryItemFromSet;
+import forge.match.MatchUtil;
 import forge.screens.match.views.VDetail;
 import forge.toolbox.FMouseAdapter;
 
@@ -48,7 +49,7 @@ public enum CDetail implements ICDoc {
     }
 
     public void showCard(final CardView c, final boolean isInAltState) {
-        view.getLblFlipcard().setVisible(c != null && c.hasAlternateState());
+        view.getLblFlipcard().setVisible(c != null && MatchUtil.canCardBeFlipped(c));
         view.getPnlDetail().setCard(c, isInAltState);
         if (view.getParentCell() != null) {
             view.getParentCell().repaintSelf();
