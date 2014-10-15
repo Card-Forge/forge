@@ -406,7 +406,7 @@ public class CardView extends GameEntityView {
     }
 
     public boolean isEquipped() {
-        return getEquippedBy() != null && !getEquippedBy().isEmpty();
+        return getEquippedBy() != null; //isEmpty check not needed since we won't keep an empty collection around
     }
 
     public GameEntityView getEnchanting() {
@@ -896,6 +896,10 @@ public class CardView extends GameEntityView {
         return newCard;
     }
     CardCollection setCards(CardCollection oldCards, CardCollection newCards, TrackableProperty key) {
+        if (newCards == null || newCards.isEmpty()) { //avoid storing empty collections
+            set(key, null);
+            return null;
+        }
         set(key, CardView.getCollection(newCards)); //TODO prevent overwriting list if not necessary
         return newCards;
     }
