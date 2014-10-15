@@ -213,7 +213,7 @@ public final class CardUtil {
      * @return a copy of C with LastKnownInfo stuff retained.
      */
     public static Card getLKICopy(final Card in) {
-        final Card newCopy = new Card(in.getId(), in.getPaperCard());
+        final Card newCopy = new Card(in.getId(), in.getPaperCard(), false);
         newCopy.setSetCode(in.getSetCode());
         newCopy.setOwner(in.getOwner());
         newCopy.setController(in.getController(), 0);

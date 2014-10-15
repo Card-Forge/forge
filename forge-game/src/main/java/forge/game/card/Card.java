@@ -261,7 +261,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
      * @param id the unique id of the new card.
      */
     public Card(final int id0) {
-        this(id0, null);
+        this(id0, null, true);
     }
 
     /**
@@ -273,9 +273,12 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
      * @see IPaperCard
      */
     public Card(final int id0, final IPaperCard paperCard0) {
+        this(id0, paperCard0, true);
+    }
+    public Card(final int id0, final IPaperCard paperCard0, final boolean allowCache) {
         super(id0);
 
-        if (id0 >= 0) {
+        if (id0 >= 0 && allowCache) {
             cardCache.put(id0, this);
         }
         paperCard = paperCard0;
