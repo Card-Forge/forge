@@ -675,23 +675,32 @@ public class GameAction {
                     if (zt == ZoneType.Battlefield) {
                         continue;
                     }
-                    for (Card c : p.getCardsIn(zt)) {
+                    Iterable<Card> cards = p.getCardsIn(zt).threadSafeIterator();
+                    for (Card c : cards) {
                         // If a token is in a zone other than the battlefield, it ceases to exist.
                         checkAgain |= stateBasedAction704_5d(c);
                     }
                 }
             }
-            List<Card> noRegCreats = new ArrayList<Card>();
-            List<Card> desCreats = new ArrayList<Card>();
-            for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
+            Iterable<Card> cards = game.getCardsIn(ZoneType.Battlefield).threadSafeIterator();
+            List<Card> noRegCreats = null;
+            List<Card> desCreats = null;
+            for (Card c : cards) {
                 if (c.isCreature()) {
                     // Rule 704.5f - Put into grave (no regeneration) for toughness <= 0
                     if (c.getNetToughness() <= 0) {
+                        if (noRegCreats == null) {
+                            noRegCreats = new LinkedList<Card>();
+                        }
                         noRegCreats.add(c);
                         checkAgain = true;
-                    } else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
+                    }
+                    else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
                         for (final Integer dmg : c.getReceivedDamageFromThisTurn().values()) {
                             if (c.getNetToughness() <= dmg.intValue()) {
+                                if (desCreats == null) {
+                                    desCreats = new LinkedList<Card>();
+                                }
                                 desCreats.add(c);
                                 checkAgain = true;
                                 break;
@@ -700,6 +709,9 @@ public class GameAction {
                     }
                     // Rule 704.5g - Destroy due to lethal damage
                     else if (c.getNetToughness() <= c.getDamage()) {
+                        if (desCreats == null) {
+                            desCreats = new LinkedList<Card>();
+                        }
                         desCreats.add(c);
                         checkAgain = true;
                     }
@@ -721,11 +733,15 @@ public class GameAction {
                 }
             }
 
-            for (Card c : noRegCreats) {
-                sacrificeDestroy(c);
+            if (noRegCreats != null) {
+                for (Card c : noRegCreats) {
+                    sacrificeDestroy(c);
+                }
             }
-            for (Card c : desCreats) {
-                destroy(c, null);
+            if (desCreats != null) {
+                for (Card c : desCreats) {
+                    destroy(c, null);
+                }
             }
 
             if (game.getTriggerHandler().runWaitingTriggers()) {

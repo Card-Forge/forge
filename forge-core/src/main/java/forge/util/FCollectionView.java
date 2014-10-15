@@ -13,4 +13,5 @@ public interface FCollectionView<T> extends Iterable<T> {
     int lastIndexOf(Object o);
     boolean contains(Object o);
     List<T> subList(int fromIndex, int toIndex);
+    Iterable<T> threadSafeIterator();
 }

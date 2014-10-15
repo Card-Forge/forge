@@ -251,4 +251,10 @@ public class FCollection<T> implements List<T>, Set<T>, FCollectionView<T>, Clon
         }
         return subList;
     }
+
+    @Override
+    public Iterable<T> threadSafeIterator() {
+        //create a new linked list for iterating to make it thread safe and avoid concurrent modification exceptions
+        return new LinkedList<T>(list);
+    }
 }
