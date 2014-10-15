@@ -1253,7 +1253,6 @@ forge-gui-mobile/src/forge/screens/match/views/VCardDisplayArea.java -text
 forge-gui-mobile/src/forge/screens/match/views/VDevMenu.java -text
 forge-gui-mobile/src/forge/screens/match/views/VDisplayArea.java -text
 forge-gui-mobile/src/forge/screens/match/views/VField.java -text
-forge-gui-mobile/src/forge/screens/match/views/VFlashbackZone.java -text
 forge-gui-mobile/src/forge/screens/match/views/VGameMenu.java -text
 forge-gui-mobile/src/forge/screens/match/views/VLog.java -text
 forge-gui-mobile/src/forge/screens/match/views/VManaPool.java -text

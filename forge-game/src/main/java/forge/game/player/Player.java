@@ -1146,6 +1146,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
             return cards;
         }
+        else if (zoneType == ZoneType.Flashback) {
+            return getCardsActivableInExternalZones(true);
+        }
 
         PlayerZone zone = getZone(zoneType);
         return zone == null ? CardCollection.EMPTY : zone.getCards(filterOutPhasedOut);

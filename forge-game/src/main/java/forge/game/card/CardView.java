@@ -335,6 +335,7 @@ public class CardView extends GameEntityView {
         case Exile:
         case Battlefield:
         case Graveyard:
+        case Flashback:
         case Stack:
             //cards in these zones are visible to all
             return true;

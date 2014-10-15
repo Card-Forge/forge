@@ -62,6 +62,17 @@ public class FloatingCardArea extends CardArea {
         if (cardArea != null) {
             cardArea.refresh();
         }
+
+        //refresh flashback zone when graveyard, library, or exile zones updated
+        switch (zone) {
+        case Graveyard:
+        case Library:
+        case Exile:
+            refresh(player, ZoneType.Flashback);
+            break;
+        default:
+            break;
+        }
     }
 
     private final PlayerView player;

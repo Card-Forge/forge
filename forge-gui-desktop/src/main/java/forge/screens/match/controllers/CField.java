@@ -25,7 +25,6 @@ import com.google.common.base.Function;
 
 import forge.Singletons;
 import forge.UiCommand;
-import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.ICDoc;
@@ -66,22 +65,7 @@ public class CField implements ICDoc {
         final ZoneAction libraryAction   = new ZoneAction(player, ZoneType.Library,   MatchConstants.HUMANLIBRARY);
         final ZoneAction exileAction     = new ZoneAction(player, ZoneType.Exile,     MatchConstants.HUMANEXILED);
         final ZoneAction graveAction     = new ZoneAction(player, ZoneType.Graveyard, MatchConstants.HUMANGRAVEYARD);
-        @SuppressWarnings("serial")
-        final ZoneAction flashBackAction = new ZoneAction(player, null,               MatchConstants.HUMANFLASHBACK) {
-            @Override
-            protected void doAction(final CardView c) {
-                // activate cards only via your own flashback button
-                if (player.getLobbyPlayer() != Singletons.getControl().getGuiPlayer()) {
-                    return;
-                }
-
-                CPrompt.SINGLETON_INSTANCE.selectCard(c, null);
-            }
-            @Override
-            protected Iterable<CardView> getCardsAsIterable() {
-                return player.getFlashback();
-            }
-        };
+        final ZoneAction flashBackAction = new ZoneAction(player, ZoneType.Flashback, MatchConstants.HUMANFLASHBACK);
 
         Function<Byte, Void> manaAction = new Function<Byte, Void>() {
             public Void apply(Byte colorCode) {

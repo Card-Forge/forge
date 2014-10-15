@@ -1,7 +1,6 @@
 package forge.screens.match;
 
 import java.awt.event.ActionEvent;
-import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.ForgeAction;
@@ -32,27 +31,5 @@ public class ZoneAction extends ForgeAction {
     @Override
     public void actionPerformed(final ActionEvent e) {
         FloatingCardArea.show(player, zone);
-        /*final Iterable<CardView> choices = getCardsAsIterable();
-        if (choices == null || !choices.iterator().hasNext()) {
-            GuiChoose.reveal(title, "no cards");
-            return;
-        }
-
-        final List<CardStateView> choices2 = Lists.newLinkedList();
-        for (final CardView cv : choices) {
-            choices2.add(cv.getCurrentState());
-        }
-
-        final CardStateView choice = GuiChoose.oneOrNone(title, choices2);
-        if (choice != null) {
-            doAction(choice.getCard());
-        }*/
-    }
-
-    protected Iterable<CardView> getCardsAsIterable() {
-        return player.getCards(zone);
-    }
-
-    protected void doAction(final CardView c) {
     }
 }

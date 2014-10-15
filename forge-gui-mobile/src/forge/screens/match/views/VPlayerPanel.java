@@ -40,7 +40,6 @@ public class VPlayerPanel extends FContainer {
     private final VZoneDisplay commandZone;
     private final LifeLabel lblLife;
     private final InfoTab tabManaPool;
-    private final InfoTab tabFlashbackZone;
     private final Map<ZoneType, InfoTab> zoneTabs = new HashMap<ZoneType, InfoTab>();
     private final List<InfoTab> tabs = new ArrayList<InfoTab>();
     private InfoTab selectedTab;
@@ -55,10 +54,7 @@ public class VPlayerPanel extends FContainer {
         addZoneDisplay(ZoneType.Hand, FSkinImage.HAND);
         addZoneDisplay(ZoneType.Graveyard, FSkinImage.GRAVEYARD);
         addZoneDisplay(ZoneType.Library, FSkinImage.LIBRARY);
-
-        VFlashbackZone flashbackZone = add(new VFlashbackZone(player0));
-        tabFlashbackZone = add(new InfoTab(FSkinImage.FLASHBACK, flashbackZone));
-        tabs.add(tabFlashbackZone);
+        addZoneDisplay(ZoneType.Flashback, FSkinImage.FLASHBACK);
 
         VManaPool manaPool = add(new VManaPool(player));
         tabManaPool = add(new InfoTab(FSkinImage.MANA_X, manaPool));
@@ -186,7 +182,7 @@ public class VPlayerPanel extends FContainer {
             case Graveyard:
             case Library:
             case Exile:
-                tabFlashbackZone.update();
+                zoneTabs.get(ZoneType.Flashback).update();
                 break;
             default:
                 break;

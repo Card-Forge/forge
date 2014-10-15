@@ -223,6 +223,8 @@ public class PlayerView extends GameEntityView {
             return TrackableProperty.Hand;
         case Library:
             return TrackableProperty.Library;
+        case Flashback:
+            return TrackableProperty.Flashback;
         default:
             return null; //other zones not represented
         }
@@ -231,6 +233,17 @@ public class PlayerView extends GameEntityView {
         TrackableProperty prop = getZoneProp(zone.getZoneType());
         if (prop == null) { return; }
         set(prop, CardView.getCollection(zone.getCards()));
+
+        //update flashback zone when graveyard, library, or exile zones updated
+        switch (zone.getZoneType()) {
+        case Graveyard:
+        case Library:
+        case Exile:
+            set(TrackableProperty.Flashback, CardView.getCollection(zone.getPlayer().getCardsIn(ZoneType.Flashback)));
+            break;
+        default:
+            break;
+        }
     }
 
     public int getMana(final byte color) {
