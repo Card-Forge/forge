@@ -352,12 +352,18 @@ public class MatchUtil {
             }
             else {
                 game.isGameOver(); // this is synchronized method - it's used to make Game-0 thread see changes made here
-                getInputQueue().onGameOver(false); //release any waiting input, effectively passing priority
+                onGameOver(false); //release any waiting input, effectively passing priority
             }
 
             if (playbackControl != null) {
                 playbackControl.onGameStopRequested();
             }
+        }
+    }
+
+    public static void onGameOver(boolean releaseAllInputs) {
+        for (PlayerControllerHuman humanController : humanControllers) {
+            humanController.getInputQueue().onGameOver(releaseAllInputs);
         }
     }
 

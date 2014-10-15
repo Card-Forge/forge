@@ -135,7 +135,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             }
             if (gameOver) {
                 gameOver = false;
-                humanController.getInputQueue().onGameOver(true); // this will unlock any game threads waiting for inputs to complete
+                MatchUtil.onGameOver(true); // this will unlock any game threads waiting for inputs to complete
             }
             if (gameFinished) {
                 gameFinished = false;
