@@ -2085,7 +2085,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (mindSlaveMaster != null) {
             LobbyPlayer oldLobbyPlayer = getLobbyPlayer();
             IGameEntitiesFactory master = (IGameEntitiesFactory)mindSlaveMaster.getLobbyPlayer();
-            controller = master.createControllerFor(this);
+            controller = master.createMindSlaveController(mindSlaveMaster, this);
             game.fireEvent(new GameEventPlayerControl(this, oldLobbyPlayer, getLobbyPlayer()));
         }
         else {

@@ -17,42 +17,45 @@ import java.util.Map;
  * Test-specific behaviour can easily be added by mocking (parts of) this class.
  */
 public class LobbyPlayerForTests extends LobbyPlayer implements IGameEntitiesFactory {
-	private final Map<Player, PlayerControllerForTests> playerControllers;
-	private final PlayerActions playerActions;
-	
-	public LobbyPlayerForTests( String name, PlayerActions playerActions ) {
-		super( name );
-		playerControllers = new HashMap<Player, PlayerControllerForTests>();
-		this.playerActions = playerActions;
-	}
-	
+    private final Map<Player, PlayerControllerForTests> playerControllers;
+    private final PlayerActions playerActions;
+    
+    public LobbyPlayerForTests(String name, PlayerActions playerActions) {
+        super(name);
+        playerControllers = new HashMap<Player, PlayerControllerForTests>();
+        this.playerActions = playerActions;
+    }
 
-	@Override
-	public Player createIngamePlayer(Game gameState, final int id) {
-		Player dummyPlayer = new Player(getName(), gameState, id);
-		dummyPlayer.setFirstController( createControllerFor( dummyPlayer ) );
-		return dummyPlayer;
-	}
+    private PlayerController createControllerFor(Player player) {
+        if (!playerControllers.containsKey(player)) {
+            PlayerControllerForTests dummyPlayerControllerForTests = new PlayerControllerForTests(player.getGame(), player, this);
+            dummyPlayerControllerForTests.setPlayerActions(playerActions);
+            playerControllers.put(player, dummyPlayerControllerForTests);
+        }
+        return playerControllers.get(player);
+    }
 
-	@Override
-	public PlayerController createControllerFor( Player player ) {
-		if( !playerControllers.containsKey( player ) ) {
-			PlayerControllerForTests dummyPlayerControllerForTests = new PlayerControllerForTests( player.getGame(), player, this );
-			dummyPlayerControllerForTests.setPlayerActions( playerActions );
-			playerControllers.put( player, dummyPlayerControllerForTests );
-		}
-		return playerControllers.get( player );
-	}
+    @Override
+    public Player createIngamePlayer(Game gameState, final int id) {
+        Player dummyPlayer = new Player(getName(), gameState, id);
+        dummyPlayer.setFirstController(createControllerFor(dummyPlayer));
+        return dummyPlayer;
+    }
 
-	@Override
-	public void hear( LobbyPlayer player, String message ) {
-		//Do nothing
-	}
-	
-	public PlayerControllerForTests getPlayerController() {
-		if( playerControllers.size() == 1 ) {
-			return playerControllers.values().iterator().next();
-		}
-		throw new IllegalStateException( "Can't determine correct controller " + StringUtils.join( playerControllers.entrySet(), ", " ) );
-	}
+    @Override
+    public PlayerController createMindSlaveController(Player master, Player slave) {
+        return createControllerFor(slave);
+    }
+
+    @Override
+    public void hear(LobbyPlayer player, String message) {
+        //Do nothing
+    }
+    
+    public PlayerControllerForTests getPlayerController() {
+        if (playerControllers.size() == 1) {
+            return playerControllers.values().iterator().next();
+        }
+        throw new IllegalStateException("Can't determine correct controller " + StringUtils.join(playerControllers.entrySet(), ", "));
+    }
 }

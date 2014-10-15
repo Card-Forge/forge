@@ -14,8 +14,8 @@ public class LobbyPlayerHuman extends LobbyPlayer implements IGameEntitiesFactor
     }
 
     @Override
-    public PlayerController createControllerFor(Player human) {
-        return new PlayerControllerHuman(human.getGame(), human, this);
+    public PlayerController createMindSlaveController(Player master, Player slave) {
+        return new PlayerControllerHuman(slave, this, (PlayerControllerHuman)master.getController());
     }
 
     @Override

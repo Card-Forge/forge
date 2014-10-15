@@ -4,6 +4,7 @@ import forge.LobbyPlayer;
 import forge.game.Game;
 import forge.game.player.IGameEntitiesFactory;
 import forge.game.player.Player;
+import forge.game.player.PlayerController;
 
 public class LobbyPlayerAi extends LobbyPlayer implements IGameEntitiesFactory {
     public LobbyPlayerAi(String name) {
@@ -35,13 +36,17 @@ public class LobbyPlayerAi extends LobbyPlayer implements IGameEntitiesFactory {
         this.rotateProfileEachGame = rotateProfileEachGame;
     }
 
-    @Override
-    public PlayerControllerAi createControllerFor(Player ai) {
+    private PlayerControllerAi createControllerFor(Player ai) {
         PlayerControllerAi result = new PlayerControllerAi(ai.getGame(), ai, this);
         result.allowCheatShuffle(allowCheatShuffle);
         return result;
     }
-    
+
+    @Override
+    public PlayerController createMindSlaveController(Player master, Player slave) {
+        return createControllerFor(slave);
+    }
+
     @Override
     public Player createIngamePlayer(Game game, final int id) {
         Player ai = new Player(getName(), game, id);
