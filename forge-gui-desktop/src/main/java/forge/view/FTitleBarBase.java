@@ -63,8 +63,9 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
             layout.putConstraint(SpringLayout.SOUTH, btnLockTitleBar, 0, SpringLayout.SOUTH, btnMinimize);
         }
         else {
+            int offset = owner instanceof FDialog && ((FDialog)owner).allowResize() ? 0 : -1;
             add(btnClose);
-            layout.putConstraint(SpringLayout.EAST, btnClose, -1, SpringLayout.EAST, this);
+            layout.putConstraint(SpringLayout.EAST, btnClose, offset, SpringLayout.EAST, this);
             layout.putConstraint(SpringLayout.SOUTH, btnClose, 0, SpringLayout.SOUTH, this);
         }
     }
@@ -165,7 +166,7 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
         @Override
         public void repaintSelf() {
             final Container window = FTitleBarBase.this.getParent().getParent().getParent();
-            if (window instanceof FDialog) { //prevent hover effect coverring up rounded border
+            if (window instanceof FDialog && !((FDialog)window).allowResize()) { //prevent hover effect covering up rounded border
                 window.repaint(this.getX(), this.getY(), this.getWidth(), this.getHeight());
             }
             else {

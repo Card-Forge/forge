@@ -54,6 +54,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
 
     public FDialog(boolean modal0, boolean allowResize0, String insets) {
         super(JOptionPane.getRootFrame(), modal0);
+        allowResize = allowResize0;
         setUndecorated(true);
         setIconImage(FSkin.getIcon(FSkinProp.ICO_FAVICON)); //use Forge icon by default
 
@@ -68,7 +69,6 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
         titleBar.setVisible(true);
         addMoveSupport();
 
-        allowResize = allowResize0;
         if (allowResize) {
             this.setBorder(new CompoundSkinBorder(
                     BorderFactory.createLineBorder(Color.BLACK, 1),
@@ -194,6 +194,10 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
         if (titleBar != null) {
             titleBar.setIconImage(image);
         }
+    }
+
+    public boolean allowResize() {
+        return allowResize;
     }
 
     //relay certain methods to the inner panel if it has been initialized

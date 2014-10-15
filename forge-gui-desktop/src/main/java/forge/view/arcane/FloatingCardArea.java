@@ -63,6 +63,7 @@ public class FloatingCardArea extends CardArea {
 
     private PlayerView player;
     private final ZoneType zone;
+    private final String title;
     private final FDialog window = new FDialog(false, true, "0");
 
     private FloatingCardArea(PlayerView player0, ZoneType zone0) {
@@ -86,7 +87,7 @@ public class FloatingCardArea extends CardArea {
         default:
             break;
         }
-        window.setTitle(Lang.getPossessedObject(player0.getName(), zone0.name()));
+        title = Lang.getPossessedObject(player0.getName(), zone0.name()) + " (%d)";
         window.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent e) {
@@ -102,7 +103,6 @@ public class FloatingCardArea extends CardArea {
     private void showWindow() {
         FFrame mainFrame = Singletons.getView().getFrame();
         window.setSize(mainFrame.getWidth() / 4, mainFrame.getHeight() * 2 / 3);
-        window.setLocationRelativeTo(mainFrame);
         window.setVisible(true);
     }
 
@@ -120,6 +120,7 @@ public class FloatingCardArea extends CardArea {
             }
         }
         setCardPanels(cardPanels);
+        window.setTitle(String.format(title, cardPanels.size()));
     }
 
     @Override
