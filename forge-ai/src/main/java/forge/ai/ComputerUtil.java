@@ -286,11 +286,11 @@ public class ComputerUtil {
             // Sac lands
             final CardCollection landsInPlay = CardLists.getType(typeList, "Land");
             if (!landsInPlay.isEmpty()) {
-                final CardCollection landsInHand = CardLists.getType(ai.getCardsIn(ZoneType.Hand), "Land");
+                final int landsInHand = Math.min(2, CardLists.getType(ai.getCardsIn(ZoneType.Hand), "Land").size());
                 final CardCollection nonLandsInHand = CardLists.getNotType(ai.getCardsIn(ZoneType.Hand), "Land");
                 nonLandsInHand.addAll(ai.getCardsIn(ZoneType.Library));
                 final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
-                if (landsInPlay.size() + landsInHand.size() >= highestCMC) {
+                if (landsInPlay.size() + landsInHand >= highestCMC) {
                     // Don't need more land.
                     return ComputerUtilCard.getWorstLand(landsInPlay);
                 }

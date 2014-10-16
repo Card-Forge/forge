@@ -918,6 +918,10 @@ public class ComputerUtilCard {
         final int costRemoval = sa.getHostCard().getCMC();
         final int costTarget = c.getCMC();
         
+        if (!sa.isSpell()) {
+        	return true;
+        }
+        
         //interrupt 1:remove blocker to save my attacker
         if (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             Combat currCombat = game.getCombat();
