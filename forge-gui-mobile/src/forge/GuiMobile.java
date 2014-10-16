@@ -137,6 +137,8 @@ public class GuiMobile implements IGuiBase {
                     }
                     catch (Exception e) {}
                 }
+
+                Gdx.graphics.requestRendering(); //ensure image appears right away
             }
         };
     }
