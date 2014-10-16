@@ -24,8 +24,9 @@ public class ImageUtil {
         }
 
         PaperCard cp = StaticData.instance().getCommonCards().getCard(key);
-        if ( cp == null )
+        if (cp == null) {
             cp = StaticData.instance().getVariantCards().getCard(key);
+        }
         return cp;
     }
 

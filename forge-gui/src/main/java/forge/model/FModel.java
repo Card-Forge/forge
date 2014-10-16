@@ -20,6 +20,7 @@ package forge.model;
 import forge.CardStorageReader;
 import forge.CardStorageReader.ProgressObserver;
 import forge.FThreads;
+import forge.ImageKeys;
 import forge.StaticData;
 import forge.achievement.AchievementCollection;
 import forge.achievement.ConstructedAchievements;
@@ -86,6 +87,11 @@ public class FModel {
     private static GameFormat.Collection formats;
 
     public static void initialize(final IProgressBar progressBar) {
+        ImageKeys.initializeDirs(ForgeConstants.CACHE_CARD_PICS_DIR,
+                ForgeConstants.CACHE_TOKEN_PICS_DIR, ForgeConstants.CACHE_ICON_PICS_DIR,
+                ForgeConstants.CACHE_BOOSTER_PICS_DIR, ForgeConstants.CACHE_FATPACK_PICS_DIR,
+                ForgeConstants.CACHE_BOOSTERBOX_PICS_DIR, ForgeConstants.CACHE_PRECON_PICS_DIR,
+                ForgeConstants.CACHE_TOURNAMENTPACK_PICS_DIR);
 
 		// Instantiate preferences: quest and regular
 		//Preferences are initialized first so that the splash screen can be translated.
