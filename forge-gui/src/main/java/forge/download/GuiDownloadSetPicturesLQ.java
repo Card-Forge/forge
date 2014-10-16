@@ -19,11 +19,11 @@ package forge.download;
 
 import com.google.common.collect.Iterables;
 
-import forge.assets.ImageUtil;
 import forge.card.CardEdition;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
+import forge.util.ImageUtil;
 
 import org.apache.commons.lang3.StringUtils;
 

@@ -110,10 +110,13 @@ public final class CardDb implements ICardDatabase {
             return new CardRequest(cardName, setName, artIndex, isFoil);
         }
     }
-    
-    public CardDb(Map<String, CardRules> rules, CardEdition.Collection editions0, boolean logMissingPerEdition, boolean logMissingSummary) {
+
+    public CardDb(Map<String, CardRules> rules, CardEdition.Collection editions0) {
         this.rulesByName = rules;
         this.editions = editions0;
+    }
+
+    public void initialize(boolean logMissingPerEdition, boolean logMissingSummary) {
         Set<String> allMissingCards = new LinkedHashSet<String>();
         List<String> missingCards = new ArrayList<String>();
         for (CardEdition e : editions.getOrderedEditions()) {
@@ -176,9 +179,22 @@ public final class CardDb implements ICardDatabase {
         uniqueCardsByName.clear();
         allCards.clear();
         for (Entry<String, Collection<PaperCard>> kv : allCardsByName.asMap().entrySet()) {
-            uniqueCardsByName.put(kv.getKey(), Iterables.getFirst(kv.getValue(), null));
+            uniqueCardsByName.put(kv.getKey(), getFirstWithImage(kv.getValue()));
             allCards.addAll(kv.getValue());
         }
+    }
+
+    private PaperCard getFirstWithImage(Collection<PaperCard> cards) {
+        //NOTE: this is written this way to avoid checking final card in list
+        Iterator<PaperCard> iterator = cards.iterator();
+        PaperCard pc = iterator.next();
+        while (iterator.hasNext()) {
+            if (pc.hasImage()) {
+                return pc;
+            }
+            pc = iterator.next();
+        }
+        return pc;
     }
 
     public boolean setPreferredArt(String cardName, String preferredArt) {
@@ -236,7 +252,7 @@ public final class CardDb implements ICardDatabase {
         if (request.artIndex <= 0) { // this stands for 'random art'
             Collection<PaperCard> candidates;
             if (reqEdition == null) {
-                candidates = cards;
+                candidates = new ArrayList<PaperCard>(cards);
             }
             else {
                 candidates = new ArrayList<PaperCard>();
@@ -250,6 +266,12 @@ public final class CardDb implements ICardDatabase {
                 return null;
             }
             result = Aggregates.random(candidates);
+
+            //if card image doesn't exist for chosen candidate, try another one if possible
+            while (candidates.size() > 1 && !result.hasImage()) {
+                candidates.remove(result);
+                result = Aggregates.random(candidates);
+            }
         }
         else {
             for (PaperCard pc : cards) {

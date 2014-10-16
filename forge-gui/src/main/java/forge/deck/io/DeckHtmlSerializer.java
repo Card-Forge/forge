@@ -1,9 +1,9 @@
 package forge.deck.io;
 
-import forge.assets.ImageUtil;
 import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.properties.ForgeConstants;
+import forge.util.ImageUtil;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;

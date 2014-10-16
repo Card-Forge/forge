@@ -7,10 +7,11 @@ import forge.itemmanager.filters.*;
 import forge.model.FModel;
 import forge.quest.QuestWorld;
 import forge.screens.home.quest.DialogChooseSets;
-
 import javax.swing.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 /** 
  * ItemManager for cards
@@ -35,6 +36,20 @@ public class CardManager extends ItemManager<PaperCard> {
     @Override
     protected void buildAddFilterMenu(JMenu menu) {
         buildAddFilterMenu(menu, this);
+    }
+
+    @Override
+    protected Iterable<Entry<PaperCard, Integer>> getUnique(Iterable<Entry<PaperCard, Integer>> items) {
+        //use special technique for getting unique cards so that cards without art aren't shown
+        HashMap<String, Entry<PaperCard, Integer>> map = new HashMap<String, Entry<PaperCard, Integer>>();
+        for (Entry<PaperCard, Integer> item : items) {
+            final String key = item.getKey().getName();
+            final Entry<PaperCard, Integer> oldValue = map.get(key);
+            if (oldValue == null || !oldValue.getKey().hasImage()) { //only replace in map if old value doesn't have image
+                map.put(key, item);
+            }
+        }
+        return map.values();
     }
 
     /* Static overrides shared with SpellShopManager*/

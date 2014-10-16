@@ -30,6 +30,7 @@ import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.match.MatchUtil;
 import forge.properties.ForgeConstants;
+import forge.util.ImageUtil;
 
 import org.apache.commons.lang3.StringUtils;
 

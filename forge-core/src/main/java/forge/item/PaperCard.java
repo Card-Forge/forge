@@ -19,6 +19,7 @@ package forge.item;
 
 import com.google.common.base.Function;
 
+import forge.ImageKeys;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 
@@ -39,6 +40,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
     private final String edition;
     private final int artIndex;
     private final boolean foil;
+    private Boolean hasImage;
 
     // Calculated fields are below:
     private final transient CardRarity rarity; // rarity is given in ctor when set is assigned
@@ -86,6 +88,13 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
     @Override
     public String getItemType() {
         return "Card";
+    }
+
+    public boolean hasImage() {
+        if (hasImage == null) { //cache value since it's not free to calculate
+            hasImage = ImageKeys.hasImage(this);
+        }
+        return hasImage;
     }
 
     /**

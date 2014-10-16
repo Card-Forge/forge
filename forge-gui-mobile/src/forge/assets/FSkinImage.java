@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import forge.Graphics;
 import forge.properties.ForgeConstants;
+import forge.util.ImageUtil;
 
 /** Properties of various components that make up the skin.
  * This interface allows all enums to be under the same roof.

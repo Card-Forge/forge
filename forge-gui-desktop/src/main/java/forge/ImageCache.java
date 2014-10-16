@@ -33,13 +33,15 @@ import com.google.common.cache.LoadingCache;
 import com.mortennobel.imagescaling.ResampleOp;
 
 import forge.assets.FSkinProp;
-import forge.assets.ImageUtil;
 import forge.game.card.CardView;
 import forge.item.InventoryItem;
 import forge.match.MatchUtil;
+import forge.model.FModel;
 import forge.properties.ForgeConstants;
+import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;
+import forge.util.ImageUtil;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -170,7 +172,7 @@ public class ImageCache {
         double scaleX = (-1 == width ? 1 : (double)width / original.getWidth());
         double scaleY = (-1 == height? 1 : (double)height / original.getHeight());
         double bestFitScale = Math.min(scaleX, scaleY);
-        if ((bestFitScale > 1) && !ImageUtil.mayEnlarge()) {
+        if ((bestFitScale > 1) && !FModel.getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER)) {
             bestFitScale = 1;
         }
 

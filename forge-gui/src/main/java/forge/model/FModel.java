@@ -87,7 +87,8 @@ public class FModel {
     private static GameFormat.Collection formats;
 
     public static void initialize(final IProgressBar progressBar) {
-        ImageKeys.initializeDirs(ForgeConstants.CACHE_CARD_PICS_DIR,
+        ImageKeys.initializeDirs(
+                ForgeConstants.CACHE_CARD_PICS_DIR, ForgeConstants.CACHE_CARD_PICS_SUBDIR,
                 ForgeConstants.CACHE_TOKEN_PICS_DIR, ForgeConstants.CACHE_ICON_PICS_DIR,
                 ForgeConstants.CACHE_BOOSTER_PICS_DIR, ForgeConstants.CACHE_FATPACK_PICS_DIR,
                 ForgeConstants.CACHE_BOOSTERBOX_PICS_DIR, ForgeConstants.CACHE_PRECON_PICS_DIR,

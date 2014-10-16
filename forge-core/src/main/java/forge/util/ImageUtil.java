@@ -1,15 +1,13 @@
-package forge.assets;
+package forge.util;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.item.PaperCard;
-import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgePreferences.FPref;
 import forge.util.Base64Coder;
 
 public class ImageUtil {
@@ -32,9 +30,9 @@ public class ImageUtil {
 
     public static String getImageRelativePath(PaperCard cp, boolean backFace, boolean includeSet, boolean isDownloadUrl) {
         final String nameToUse = cp == null ? null : getNameToUse(cp, backFace);
-        if ( null == nameToUse )
+        if (nameToUse == null) {
             return null;
-        
+        }
         StringBuilder s = new StringBuilder();
         
         CardRules card = cp.getRules();
@@ -43,7 +41,7 @@ public class ImageUtil {
         
         final int cntPictures;
         final boolean hasManyPictures;
-        final CardDb db =  !card.isVariant() ? FModel.getMagicDb().getCommonCards() : FModel.getMagicDb().getVariantCards();
+        final CardDb db =  !card.isVariant() ? StaticData.instance().getCommonCards() : StaticData.instance().getVariantCards();
         if (includeSet) {
             cntPictures = db.getPrintCount(card.getName(), edition); 
             hasManyPictures = cntPictures > 1;
@@ -78,26 +76,16 @@ public class ImageUtil {
         }
         
         if (includeSet) {
-            String editionAliased = isDownloadUrl ? FModel.getMagicDb().getEditions().getCode2ByCode(edition) : getSetFolder(edition);
+            String editionAliased = isDownloadUrl ? StaticData.instance().getEditions().getCode2ByCode(edition) : ImageKeys.getSetFolder(edition);
             return String.format("%s/%s", editionAliased, fname);
         } else {
             return fname;
         }
     }
 
-    public static boolean mayEnlarge() {
-        return FModel.getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER);        
-    }
-
     public static boolean hasBackFacePicture(PaperCard cp) {
         CardSplitType cst = cp.getRules().getSplitType();
         return cst == CardSplitType.Transform || cst == CardSplitType.Flip; 
-    }
-    
-    public static String getSetFolder(String edition) {
-        return  !ForgeConstants.CACHE_CARD_PICS_SUBDIR.containsKey(edition)
-                ? FModel.getMagicDb().getEditions().getCode2ByCode(edition) // by default 2-letter codes from MWS are used
-                : ForgeConstants.CACHE_CARD_PICS_SUBDIR.get(edition); // may use custom paths though
     }
 
     public static String getNameToUse(PaperCard cp, boolean backFace) {

@@ -1,11 +1,13 @@
 package forge;
 
 import java.io.File;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardDb;
 import forge.item.*;
+import forge.util.ImageUtil;
 
 public class ImageKeys {
     public static final String CARD_PREFIX           = "c:";
@@ -24,10 +26,12 @@ public class ImageKeys {
 
     private static String CACHE_CARD_PICS_DIR, CACHE_TOKEN_PICS_DIR, CACHE_ICON_PICS_DIR, CACHE_BOOSTER_PICS_DIR,
         CACHE_FATPACK_PICS_DIR, CACHE_BOOSTERBOX_PICS_DIR, CACHE_PRECON_PICS_DIR, CACHE_TOURNAMENTPACK_PICS_DIR;
+    private static Map<String, String> CACHE_CARD_PICS_SUBDIR;
 
-    public static void initializeDirs(String cards, String tokens, String icons, String boosters,
+    public static void initializeDirs(String cards, Map<String, String> cardsSub, String tokens, String icons, String boosters,
             String fatPacks, String boosterBoxes, String precons, String tournamentPacks) {
         CACHE_CARD_PICS_DIR = cards;
+        CACHE_CARD_PICS_SUBDIR = cardsSub;
         CACHE_TOKEN_PICS_DIR = tokens;
         CACHE_ICON_PICS_DIR = icons;
         CACHE_BOOSTER_PICS_DIR = boosters;
@@ -115,12 +119,12 @@ public class ImageKeys {
         File file = findFile(dir, filename);
 
         // some S00 cards are really part of 6ED
-        /*if (file == null) { //TODO: Uncomment this
-            String s2kAlias = ImageUtil.getSetFolder("S00");
+        if (file == null) {
+            String s2kAlias = getSetFolder("S00");
             if (filename.startsWith(s2kAlias)) {
-                file = findFile(dir, filename.replace(s2kAlias, ImageUtil.getSetFolder("6ED")));
+                file = findFile(dir, filename.replace(s2kAlias, getSetFolder("6ED")));
             }
-        }*/
+        }
 
         // try without set prefix
         String setlessFilename = null;
@@ -141,6 +145,12 @@ public class ImageKeys {
         return file;
     }
 
+    public static String getSetFolder(String edition) {
+        return  !CACHE_CARD_PICS_SUBDIR.containsKey(edition)
+                ? StaticData.instance().getEditions().getCode2ByCode(edition) // by default 2-letter codes from MWS are used
+                : CACHE_CARD_PICS_SUBDIR.get(edition); // may use custom paths though
+    }
+
     private static File findFile(String dir, String filename) {
         for (String ext : FILE_EXTENSIONS) {
             File file = new File(dir, filename + ext);
@@ -151,8 +161,9 @@ public class ImageKeys {
         return null;
     }
 
-    //shortcut for determine if a card image exists
-    public static boolean doesCardImageExist(String filename) {
-        return findFile(CACHE_CARD_PICS_DIR, filename) != null;
+    //shortcut for determining if a card image exists for a given card
+    //should only be called from PaperCard.hasImage()
+    public static boolean hasImage(PaperCard pc) {
+        return findFile(CACHE_CARD_PICS_DIR, ImageUtil.getImageKey(pc, false, true)) != null;
     }
 }

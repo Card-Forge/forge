@@ -17,11 +17,11 @@
  */
 package forge.download;
 
-import forge.assets.ImageUtil;
 import forge.card.CardRules;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
+import forge.util.ImageUtil;
 
 import org.apache.commons.lang3.StringUtils;
 

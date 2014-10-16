@@ -222,6 +222,7 @@ forge-core/src/main/java/forge/item/SealedProduct.java -text
 forge-core/src/main/java/forge/item/TournamentPack.java -text
 forge-core/src/main/java/forge/item/package-info.java -text
 forge-core/src/main/java/forge/util/Aggregates.java -text
+forge-core/src/main/java/forge/util/Base64Coder.java -text
 forge-core/src/main/java/forge/util/BinaryUtil.java -text
 forge-core/src/main/java/forge/util/BuildInfo.java -text
 forge-core/src/main/java/forge/util/CollectionSuppliers.java -text
@@ -235,6 +236,7 @@ forge-core/src/main/java/forge/util/IHasName.java -text
 forge-core/src/main/java/forge/util/IItemReader.java -text
 forge-core/src/main/java/forge/util/IItemSerializer.java -text
 forge-core/src/main/java/forge/util/ITriggerEvent.java -text
+forge-core/src/main/java/forge/util/ImageUtil.java -text
 forge-core/src/main/java/forge/util/ItemPool.java -text
 forge-core/src/main/java/forge/util/ItemPoolSorter.java -text
 forge-core/src/main/java/forge/util/Lang.java -text
@@ -16958,7 +16960,6 @@ forge-gui/src/main/java/forge/achievement/TotalMatchWins.java -text
 forge-gui/src/main/java/forge/achievement/VariantWins.java -text
 forge-gui/src/main/java/forge/assets/FSkinProp.java -text
 forge-gui/src/main/java/forge/assets/ISkinImage.java -text
-forge-gui/src/main/java/forge/assets/ImageUtil.java -text
 forge-gui/src/main/java/forge/card/CardDetailUtil.java -text
 forge-gui/src/main/java/forge/card/CardPreferences.java -text
 forge-gui/src/main/java/forge/card/CardReaderExperiments.java -text
@@ -17142,7 +17143,6 @@ forge-gui/src/main/java/forge/sound/MusicPlaylist.java -text
 forge-gui/src/main/java/forge/sound/NoSoundClip.java -text
 forge-gui/src/main/java/forge/sound/SoundEffectType.java -text
 forge-gui/src/main/java/forge/sound/SoundSystem.java -text
-forge-gui/src/main/java/forge/util/Base64Coder.java svneol=native#text/plain
 forge-gui/src/main/java/forge/util/Callback.java -text
 forge-gui/src/main/java/forge/util/Evaluator.java -text
 forge-gui/src/main/java/forge/util/GuiDisplayUtil.java -text
