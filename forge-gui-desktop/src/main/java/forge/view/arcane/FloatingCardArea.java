@@ -55,11 +55,15 @@ public class FloatingCardArea extends CardArea {
             cardArea = new FloatingCardArea(player, zone);
             floatingAreas.put(key, cardArea);
         }
+        else {
+            cardArea.setPlayer(player); //ensure player is updated if needed
+        }
         cardArea.showWindow();
     }
     public static void refresh(PlayerView player, ZoneType zone) {
         FloatingCardArea cardArea = floatingAreas.get(getKey(player, zone));
         if (cardArea != null) {
+            cardArea.setPlayer(player); //ensure player is updated if needed
             cardArea.refresh();
         }
 
@@ -74,10 +78,18 @@ public class FloatingCardArea extends CardArea {
             break;
         }
     }
+    public static void closeAll() {
+        for (FloatingCardArea cardArea : floatingAreas.values()) {
+            cardArea.clear();
+            cardArea.player = null; //avoid keeping around reference to player between games
+            cardArea.title = null;
+            cardArea.window.setVisible(false);
+        }
+    }
 
-    private final PlayerView player;
     private final ZoneType zone;
-    private final String title;
+    private PlayerView player;
+    private String title;
 
     @SuppressWarnings("serial")
     private final FDialog window = new FDialog(false, true, "0") {
@@ -120,10 +132,15 @@ public class FloatingCardArea extends CardArea {
         default:
             break;
         }
-        title = Lang.getPossessedObject(player0.getName(), zone0.name()) + " (%d)";
-        player = player0;
         zone = zone0;
+        setPlayer(player0);
         setVertical(true);
+    }
+
+    private void setPlayer(PlayerView player0) {
+        if (player == player0) { return; }
+        player = player0;
+        title = Lang.getPossessedObject(player0.getName(), zone.name()) + " (%d)";
     }
 
     private void showWindow() {

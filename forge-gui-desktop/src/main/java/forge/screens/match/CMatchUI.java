@@ -498,6 +498,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
 
     @Override
     public void finishGame() {
+        FloatingCardArea.closeAll(); //ensure floating card areas cleared and closed after the game
         new ViewWinLose(MatchUtil.getGameView());
         if (showOverlay) {
             SOverlayUtils.showOverlay();

@@ -43,7 +43,6 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     
     @SuppressWarnings("serial")
     public ViewWinLose(final GameView game0) {
-
         this.game = game0;
 
         final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
