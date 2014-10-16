@@ -99,6 +99,9 @@ public class VField implements IVDoc<CField> {
 
         control = new CField(player, this);
 
+        lblAvatar.setFocusable(false);
+        lblLife.setFocusable(false);
+
         avatarArea.setOpaque(false);
         avatarArea.setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
         avatarArea.setLayout(new MigLayout("insets 0, gap 0"));

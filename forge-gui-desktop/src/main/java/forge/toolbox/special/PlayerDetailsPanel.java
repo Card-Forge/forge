@@ -201,6 +201,8 @@ public class PlayerDetailsPanel extends JPanel {
             .opaque(false).fontSize(14).hoverable()
             .fontStyle(Font.BOLD).iconInBackground()
             .text(s0).tooltip(s1).fontAlign(SwingConstants.RIGHT));
+
+            setFocusable(false);
         }
 
         public void setText(String text0) {
