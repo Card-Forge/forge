@@ -77,43 +77,43 @@ public class BoosterDraftAI {
         List<Pair<PaperCard, Double>> rankedCards = rankCards(chooseFrom);
         
         for(Pair<PaperCard, Double> p : rankedCards) {
+            double valueBoost = 0;
+
             // If a card is not ai playable, somewhat decrease its rating
             if( p.getKey().getRules().getAiHints().getRemAIDecks() )
-                p.setValue(p.getValue() + TAKE_BEST_THRESHOLD);
+                valueBoost = TAKE_BEST_THRESHOLD;
 
             // if I cannot choose more colors, and the card cannot be played with chosen colors, decrease its rating.
             if( !canAddMoreColors && !p.getKey().getRules().getManaCost().canBePaidWithAvaliable(currentChoice.getColor()))
-                p.setValue(p.getValue() + 10);
+                valueBoost = TAKE_BEST_THRESHOLD * 3;
+
+            if (valueBoost > 0) {
+                p.setValue(p.getValue() + valueBoost);
+                //System.out.println(p.getKey() + " is now " + p.getValue());
+            }
         }
 
         int cntBestCards = 0;
         double bestRanking = Double.MAX_VALUE;
         PaperCard bestPick = null;
+        final List<PaperCard> possiblePick = new ArrayList<PaperCard>();
         for(Pair<PaperCard, Double> p : rankedCards) { 
             double rating = p.getValue();
-            if( rating < bestRanking )
-            {
+            if( rating <= bestRanking + .01 ) {
+                if (rating == bestRanking) {
+                    possiblePick.clear();
+                }
                 bestRanking = rating;
-                bestPick = p.getKey();
-                cntBestCards = 1;
-            } else if ( rating == bestRanking ) {
-                cntBestCards++;
+                possiblePick.add(p.getKey());
             }
         }
 
-        if (cntBestCards > 1) {
-            final List<PaperCard> possiblePick = new ArrayList<PaperCard>();
-            for(Pair<PaperCard, Double> p : rankedCards) {
-                if ( p.getValue() == bestRanking )
-                    possiblePick.add(p.getKey());
-            }
-            bestPick = Aggregates.random(possiblePick);
-        }
+        bestPick = Aggregates.random(possiblePick);
 
         if (canAddMoreColors)
             deckCols.addColorsOf(bestPick);
         
-        System.out.println("Player[" + player + "] picked: " + bestPick);
+        System.out.println("Player[" + player + "] picked: " + bestPick + " ranking of " + bestRanking);
         this.deck.get(player).add(bestPick);
         
         return bestPick;
