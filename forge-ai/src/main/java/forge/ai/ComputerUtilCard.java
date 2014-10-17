@@ -826,7 +826,14 @@ public class ComputerUtilCard {
         for (Card tmp : lands) {
             int score = tmp.isTapped() ? 2 : 0;
             score += tmp.isBasicLand() ? 1 : 0;
-            score += tmp.isCreature() ? 4 : 0;
+            score -= tmp.isCreature() ? 4 : 0;
+            for (Card aura : tmp.getEnchantedBy(false)) {
+            	if (aura.getController().isOpponentOf(tmp.getController())) {
+            		score += 5;
+            	} else {
+            		score -= 5;
+            	}
+            }
             if (score >= maxScore) {
                 worstLand = tmp;
                 maxScore = score;
