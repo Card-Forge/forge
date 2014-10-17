@@ -267,7 +267,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     @Override
                     public boolean apply(final Card c) {
                         if (c.getType().isLegendary()) {
-                            if (!ai.getCardsIn(ZoneType.Battlefield, c.getName()).isEmpty()) {
+                            if (ai.isCardInPlay(c.getName())) {
                                 return false;
                             }
                         }
@@ -1141,7 +1141,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 @Override
                 public boolean apply(final Card c) {
                     if (c.getType().isLegendary()) {
-                        if (!decider.getCardsIn(ZoneType.Battlefield, c.getName()).isEmpty()) {
+                        if (decider.isCardInPlay(c.getName())) {
                             return false;
                         }
                     }

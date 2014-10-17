@@ -96,7 +96,7 @@ public class TokenAi extends SpellAbilityAi {
         for (final String type : this.tokenTypes) {
             if (type.equals("Legendary")) {
                 // Don't kill AIs Legendary tokens
-                if (!ai.getCardsIn(ZoneType.Battlefield, this.tokenName).isEmpty()) {
+                if (ai.isCardInPlay(this.tokenName)) {
                     return false;
                 }
             }

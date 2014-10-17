@@ -310,14 +310,14 @@ public class AiAttackController {
         final int humanExaltedBonus = this.countExaltedBonus(opp);
 
         if (humanExaltedBonus > 0) {
-            final int nFinestHours = opp.getCardsIn(ZoneType.Battlefield, "Finest Hour").size();
+            final boolean finestHour = opp.isCardInPlay("Finest Hour");
 
-            if (((blockersNeeded == 0) || (nFinestHours > 0)) && (this.oppList.size() > 0)) {
+            if ((blockersNeeded == 0 || finestHour) && !this.oppList.isEmpty()) {
                 //
                 // total attack = biggest creature + exalted, *2 if Rafiq is in
                 // play
                 int humanBasePower = this.getAttack(this.oppList.get(0)) + humanExaltedBonus;
-                if (nFinestHours > 0) {
+                if (finestHour) {
                     // For Finest Hour, one creature could attack and get the
                     // bonus TWICE
                     humanBasePower = humanBasePower + humanExaltedBonus;
@@ -325,15 +325,13 @@ public class AiAttackController {
                 final int totalExaltedAttack = opp.isCardInPlay("Rafiq of the Many") ? 2 * humanBasePower
                         : humanBasePower;
                 if (ai.getLife() - 3 <= totalExaltedAttack) {
-                    // We will lose if there is an Exalted attack -- keep one
-                    // blocker
-                    if ((blockersNeeded == 0) && (notNeededAsBlockers.size() > 0)) {
+                    // We will lose if there is an Exalted attack -- keep one blocker
+                    if ((blockersNeeded == 0) && !notNeededAsBlockers.isEmpty()) {
                         notNeededAsBlockers.remove(0);
                     }
 
-                    // Finest Hour allows a second Exalted attack: keep a
-                    // blocker for that too
-                    if ((nFinestHours > 0) && (notNeededAsBlockers.size() > 0)) {
+                    // Finest Hour allows a second Exalted attack: keep a blocker for that too
+                    if (finestHour && !notNeededAsBlockers.isEmpty()) {
                         notNeededAsBlockers.remove(0);
                     }
                 }
