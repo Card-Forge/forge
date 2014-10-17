@@ -61,6 +61,7 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
                 for (ManaCostShard shard : remainingCost.getDistinctShards()) {
                     if (shard.canBePaidWithManaOfColor(chosenColor)) {
                         registerConvoked(card, shard, chosenColor);
+                        refresh();
                         return true;
                     }
                 }
