@@ -844,7 +844,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             final Integer oldValue = counters.get(counterType);
             final Integer newValue = addAmount + (oldValue == null ? 0 : oldValue.intValue());
 
-            if (newValue != oldValue) {
+            if (!newValue.equals(oldValue)) {
                 final int powerBonusBefore = getPowerBonusFromCounters();
                 final int toughnessBonusBefore = getToughnessBonusFromCounters();
                 final int loyaltyBefore = getCurrentLoyalty();
