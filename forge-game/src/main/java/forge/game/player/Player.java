@@ -1329,10 +1329,10 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         for (int i = 0; i < max; i++) {
             if (bottom) {
-                milled.add(game.getAction().moveTo(destination, lib.get(lib.size() - 1)));
+                milled.add(game.getAction().moveTo(destination, lib.getLast()));
             }
             else {
-                milled.add(game.getAction().moveTo(destination, lib.get(i)));
+                milled.add(game.getAction().moveTo(destination, lib.getFirst()));
             }
         }
         return milled;
