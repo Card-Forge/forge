@@ -37,6 +37,7 @@ import forge.card.CardEdition;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.InventoryItemFromSet;
 import forge.match.MatchUtil;
@@ -190,9 +191,10 @@ public class CardDetailPanel extends SkinnedPanel {
         }
         else {
             final String manaCost;
-            if (card.isSplitCard() && card.getAlternateState() != null) {
+            if (card.isSplitCard() && card.hasAlternateState() && card.getZone() != ZoneType.Stack) { //only display current state's mana cost when on stack
                 manaCost = card.getCurrentState().getManaCost() + " // " + card.getAlternateState().getManaCost();
-            } else {
+            }
+            else {
                 manaCost = state.getManaCost().toString();
             }
             nameCostLabel.setText(FSkin.encodeSymbols(CardDetailUtil.formatCardName(card, canShow, isInAltState) + " - " + manaCost, true));

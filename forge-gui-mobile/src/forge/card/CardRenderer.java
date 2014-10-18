@@ -25,6 +25,7 @@ import forge.card.CardDetailUtil.DetailColors;
 import forge.card.mana.ManaCost;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.match.MatchUtil;
 import forge.model.FModel;
@@ -398,7 +399,7 @@ public class CardRenderer {
         float manaCostWidth = 0;
         if (canShow) {
             ManaCost mainManaCost = state.getManaCost();
-            if (card.isSplitCard() && card.hasAlternateState()) {
+            if (card.isSplitCard() && card.hasAlternateState() && card.getZone() != ZoneType.Stack) { //only display current state's mana cost when on stack
                 //handle rendering both parts of split card
                 mainManaCost = state.getManaCost();
                 ManaCost otherManaCost = card.getAlternateState().getManaCost();

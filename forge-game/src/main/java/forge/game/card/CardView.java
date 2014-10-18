@@ -520,6 +520,11 @@ public class CardView extends GameEntityView {
         }
         sb.append(state.getAbilityText());
 
+        if (state.getState() == CardStateName.LeftSplit && getZone() != ZoneType.Stack) {
+            //ensure ability text for right half of split card is included unless spell is on stack
+            sb.append("\r\n\r\n").append(getAlternateState().getAbilityText());
+        }
+
         String nonAbilityText = get(TrackableProperty.NonAbilityText);
         int blockAdditional = state.getBlockAdditional();
         if (blockAdditional > 1) {
