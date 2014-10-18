@@ -93,7 +93,6 @@ public class BoosterDraftAI {
             }
         }
 
-        int cntBestCards = 0;
         double bestRanking = Double.MAX_VALUE;
         PaperCard bestPick = null;
         final List<PaperCard> possiblePick = new ArrayList<PaperCard>();

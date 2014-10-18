@@ -89,7 +89,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     private final EnumSet<CoreType> coreTypes = EnumSet.noneOf(CoreType.class);
     private final EnumSet<Supertype> supertypes = EnumSet.noneOf(Supertype.class);
-    private final HashSet<String> subtypes = new HashSet<String>();
+    private final LinkedHashSet<String> subtypes = new LinkedHashSet<String>();
     private String calculatedType = null;
 
     public CardType() {
