@@ -384,6 +384,9 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         final CardState tmp = states.get(from);
         states.put(from, states.get(to));
         states.put(to, tmp);
+        if (currentStateName == from) {
+            setState(to, false);
+        }
         if (updateView) {
             view.updateState(this);
         }

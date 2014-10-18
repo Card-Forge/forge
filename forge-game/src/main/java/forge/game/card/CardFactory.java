@@ -558,7 +558,7 @@ public class CardFactory {
         to.setBasePowerString(from.getBasePowerString());
         to.setBaseToughnessString(from.getBaseToughnessString());
         to.setText(from.getSpellText());
-    
+
         // get CardCharacteristics for desired state
         if (!to.getStates().contains(toState)) {
         	to.addAlternateState(toState, true);
