@@ -1,12 +1,14 @@
 package forge;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardDb;
 import forge.item.*;
+import forge.util.FileUtil;
 import forge.util.ImageUtil;
 
 public class ImageKeys {
@@ -27,6 +29,8 @@ public class ImageKeys {
     private static String CACHE_CARD_PICS_DIR, CACHE_TOKEN_PICS_DIR, CACHE_ICON_PICS_DIR, CACHE_BOOSTER_PICS_DIR,
         CACHE_FATPACK_PICS_DIR, CACHE_BOOSTERBOX_PICS_DIR, CACHE_PRECON_PICS_DIR, CACHE_TOURNAMENTPACK_PICS_DIR;
     private static Map<String, String> CACHE_CARD_PICS_SUBDIR;
+
+    private static HashMap<String, Boolean> editionImageLookup = new HashMap<String, Boolean>();
 
     public static void initializeDirs(String cards, Map<String, String> cardsSub, String tokens, String icons, String boosters,
             String fatPacks, String boosterBoxes, String precons, String tournamentPacks) {
@@ -162,6 +166,13 @@ public class ImageKeys {
     //shortcut for determining if a card image exists for a given card
     //should only be called from PaperCard.hasImage()
     public static boolean hasImage(PaperCard pc) {
-        return findFile(CACHE_CARD_PICS_DIR, ImageUtil.getImageKey(pc, false, true)) != null;
+        Boolean editionHasImage = editionImageLookup.get(pc.getEdition());
+        if (editionHasImage == null) {
+            String setFolder = getSetFolder(pc.getEdition());
+            editionHasImage = FileUtil.isDirectoryWithFiles(CACHE_CARD_PICS_DIR + setFolder);
+            editionImageLookup.put(pc.getEdition(), editionHasImage);
+        }
+        //avoid checking for file if edition doesn't have any images
+        return editionHasImage && findFile(CACHE_CARD_PICS_DIR, ImageUtil.getImageKey(pc, false, true)) != null;
     }
 }
