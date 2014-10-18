@@ -313,11 +313,11 @@ public class ComputerUtilMana {
     private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable) {
         adjustManaCostToAvoidNegEffects(cost, sa.getHostCard(), ai);
         List<Mana> manaSpentToPay = test ? new ArrayList<Mana>() : sa.getPayingMana();
-        
+
         if (payManaCostFromPool(cost, sa, ai, test, manaSpentToPay)) {
             return true;
         }
-        
+
         // arrange all mana abilities by color produced.
         final ArrayListMultimap<Integer, SpellAbility> manaAbilityMap = ComputerUtilMana.groupSourcesByManaColor(ai, checkPlayable);
         if (manaAbilityMap.isEmpty()) {
@@ -484,9 +484,6 @@ public class ComputerUtilMana {
             // refund any mana taken from mana pool when test
             if (test) {
                 refundMana(manaSpentToPay, ai, sa);
-            }
-            else {
-                manaSpentToPay.clear(); //prevent mana spent to pay sticking around such that it can cause an improper refund later
             }
             handleOfferingsAI(sa, test, cost.isPaid());
             return true;
