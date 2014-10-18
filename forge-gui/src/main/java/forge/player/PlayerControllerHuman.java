@@ -176,6 +176,7 @@ public class PlayerControllerHuman extends PlayerController {
     }
     private void tempShowCard(Card c) {
         if (c == null) { return; }
+        tempShownCards.add(c);
         c.setMayLookAt(player, true, true);
     }
     private void tempShowCards(Iterable<Card> cards) {
