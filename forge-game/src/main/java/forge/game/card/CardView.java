@@ -869,6 +869,7 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.HasInfect, c.hasKeyword("Infect", state));
             set(TrackableProperty.HasStorm, c.hasKeyword("Storm", state));
             set(TrackableProperty.HasTrample, c.hasKeyword("Trample", state));
+            set(TrackableProperty.YouMayLook, c.hasKeyword("You may look at this card."));
             set(TrackableProperty.OpponentMayLook, c.hasKeyword("Your opponent may look at this card."));
             set(TrackableProperty.BlockAdditional, c.getAmountOfKeyword("CARDNAME can block an additional creature.", state));
             updateAbilityText(c, state);
