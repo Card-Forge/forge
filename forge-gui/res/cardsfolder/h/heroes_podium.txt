@@ -1,7 +1,7 @@
 Name:Heroes' Podium
 ManaCost:5
 Types:Legendary Artifact
-S:Mode$ Continuous | Affected$ Creature.Legendary | AddPower$ AffectedX | AddToughness$ AffectedX | Description$ Each legendary creature you control gets +1/+1 for each other legendary creature you control.
+S:Mode$ Continuous | Affected$ Creature.Legendary+YouCtrl | AddPower$ AffectedX | AddToughness$ AffectedX | Description$ Each legendary creature you control gets +1/+1 for each other legendary creature you control.
 SVar:AffectedX:Count$Valid Creature.Legendary+Other+YouCtrl
 A:AB$ Dig | Cost$ X T | DigNum$ X | ChangeNum$ 1 | ChangeValid$ Creature.Legendary | DestinationZone$ Hand | DestinationZone2$ Library | LibraryPosition$ -1 | RestRandomOrder$ True | References$ X | SpellDescription$ Look at the top X cards of your library. You may reveal a legendary creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
 SVar:X:Count$xPaid
