@@ -252,7 +252,7 @@ public class CardDetailPanel extends SkinnedPanel {
 
         powerToughnessLabel.setText(CardDetailUtil.formatPowerToughness(state, canShow));
 
-        idLabel.setText(CardDetailUtil.formatCardId(state));
+        idLabel.setText(canShow ? CardDetailUtil.formatCardId(state) : "");
 
         // fill the card text
         cdArea.setText(FSkin.encodeSymbols(CardDetailUtil.composeCardText(state, canShow), true));

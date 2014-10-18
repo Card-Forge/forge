@@ -471,15 +471,19 @@ public class CardRenderer {
     private static void drawCardIdAndPtBox(Graphics g, CardView card, boolean canShow, Color idForeColor, Color color1, Color color2, float x, float y, float w, float h) {
         final CardStateView state = card.getCurrentState();
 
-        String idText = CardDetailUtil.formatCardId(state);
-        g.drawText(idText, ID_FONT, idForeColor, x, y + ID_FONT.getCapHeight() / 2, w, h, false, HAlignment.LEFT, false);
+        float idWidth = 0;
+        if (canShow) {
+            String idText = CardDetailUtil.formatCardId(state);
+            g.drawText(idText, ID_FONT, idForeColor, x, y + ID_FONT.getCapHeight() / 2, w, h, false, HAlignment.LEFT, false);
+            idWidth = ID_FONT.getBounds(idText).width;
+        }
 
         String ptText = CardDetailUtil.formatPowerToughness(state, canShow);
         if (StringUtils.isEmpty(ptText)) { return; }
 
         float padding = PT_FONT.getCapHeight() / 2;
         float boxWidth = Math.min(PT_FONT.getBounds(ptText).width + 2 * padding,
-                w - ID_FONT.getBounds(idText).width - padding); //prevent box overlapping ID
+                w - idWidth - padding); //prevent box overlapping ID
         x += w - boxWidth;
         w = boxWidth;
 
@@ -567,7 +571,7 @@ public class CardRenderer {
         if (pos == CardStackPosition.BehindVert) { return; } //remaining rendering not needed if card is behind another card in a vertical stack
         boolean onTop = (pos == CardStackPosition.Top);
 
-        if (showCardIdOverlay(card)) {
+        if (canShow && showCardIdOverlay(card)) {
             FSkinFont idFont = FSkinFont.forHeight(h * 0.12f);
             float idHeight = idFont.getCapHeight();
             g.drawOutlinedText(String.valueOf(card.getId()), idFont, Color.WHITE, Color.BLACK, x + padding, y + h - idHeight - padding, w, h, false, HAlignment.LEFT, false);
