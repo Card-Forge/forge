@@ -177,15 +177,22 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     }
 
     public void updateImage() {
-        synchronized (imagePanel) {
-            final BufferedImage image = card == null ? null : ImageCache.getImage(card, imagePanel.getWidth(), imagePanel.getHeight());
-            if (imagePanel.getSrcImage() == image) {
-                return; 
-            }
-            imagePanel.setImage(image);
-            repaint();
+        updateImage(false);
+    }
+    private void updateImage(boolean fromSetCard) {
+        final BufferedImage image = card == null ? null : ImageCache.getImage(card, imagePanel.getWidth(), imagePanel.getHeight());
+        if (fromSetCard) {
+            setImage(image);
         }
-        doLayout();
+        else {
+            synchronized (imagePanel) {
+                if (imagePanel.getSrcImage() == image) {
+                    return; 
+                }
+                imagePanel.setImage(image);
+                repaint();
+            }
+        }
     }
 
     private void setImage(final BufferedImage srcImage) {
@@ -552,7 +559,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         updateText();
         updatePTOverlay();
-        updateImage();
+        updateImage(true);
     }
 
     public void dispose() {
