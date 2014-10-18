@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import forge.ai.ComputerUtil;
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -15,6 +16,10 @@ public class FlipACoinAi extends SpellAbilityAi {
         if (sa.hasParam("AILogic")) {
             if (sa.getParam("AILogic").equals("Never")) {
                 return false;
+            } else if (sa.getParam("AILogic").equals("PhaseOut")) {
+            	if (!ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa).contains(sa.getHostCard())) {
+            		return false;
+            	}
             }
         }
         return true;
