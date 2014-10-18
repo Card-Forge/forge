@@ -471,16 +471,16 @@ public class TriggerHandler {
             decider = AbilityUtils.getDefinedPlayers(host, triggerParams.get("OptionalDecider"), sa).get(0);
         } else {
             mand = true;
+        }
 
-            SpellAbility ability = sa;
-            while (ability != null) {
-                final TargetRestrictions tgt = ability.getTargetRestrictions();
+        SpellAbility ability = sa;
+        while (ability != null) {
+            final TargetRestrictions tgt = ability.getTargetRestrictions();
 
-                if (tgt != null) {
-                    tgt.setMandatory(true);
-                }
-                ability = ability.getSubAbility();
+            if (tgt != null) {
+                tgt.setMandatory(true);
             }
+            ability = ability.getSubAbility();
         }
         final boolean isMandatory = mand;
 
