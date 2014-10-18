@@ -2410,7 +2410,9 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
     // values that are printed on card
     public final void setBaseLoyalty(final int n) {
+        if (baseLoyalty == n) { return; }
         baseLoyalty = n;
+        currentState.getView().updateLoyalty(this);
     }
 
     // values that are printed on card
