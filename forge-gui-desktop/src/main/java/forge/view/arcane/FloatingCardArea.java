@@ -170,6 +170,9 @@ public class FloatingCardArea extends CardArea {
                     cardPanel = new CardPanel(card);
                     cardPanel.setDisplayEnabled(true);
                 }
+                else {
+                    cardPanel.updateImage(); //ensure image updated in case visibility changed
+                }
                 cardPanels.add(cardPanel);
             }
         }
