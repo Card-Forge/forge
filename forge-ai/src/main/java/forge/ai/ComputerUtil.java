@@ -676,10 +676,19 @@ public class ComputerUtil {
         if ("True".equals(card.getSVar("NonStackingEffect")) && card.getController().isCardInPlay(card.getName())) {
             return false;
         }
-        if (card.getSVar("PlayMain1").equals("TRUE") && (!card.getController().getCreaturesInPlay().isEmpty() || sa.getPayCosts().hasNoManaCost() 
-        		|| card.isPlaneswalker())) {
-            return true;
+        if (card.hasSVar("PlayMain1")) {
+        	if (card.getSVar("PlayMain1").equals("ALWAYS") || sa.getPayCosts().hasNoManaCost()) {
+        		return true;
+        	} else if (card.getSVar("PlayMain1").equals("OPPONENTCREATURES")) {
+        		//Only play these main1 when the opponent has creatures (stealing and giving them haste)
+        		if (!card.getController().getOpponent().getCreaturesInPlay().isEmpty()) {
+        			return true;
+        		}
+        	} else if (!card.getController().getCreaturesInPlay().isEmpty()) {
+        		return true;
+        	}
         }
+
         if ((card.isCreature() && (ComputerUtil.hasACardGivingHaste(ai)
                 || card.hasKeyword("Haste"))) || card.hasKeyword("Exalted")) {
             return true;

@@ -6,7 +6,7 @@ K:Trample
 K:Tribute 3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+notTributed | Execute$ TrigNotTribute | TriggerDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, it gains haste until end of turn.
 SVar:TrigNotTribute:AB$ Pump | Cost$ 0 | KW$ Haste | Defined$ Self
-SVar:PlayMain1:TRUE
+SVar:PlayMain1:ALWAYS
 SVar:TributeAILogic:CanBlockThisTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunder_brute.jpg
 Oracle:Trample\nTribute 3 (As this creature enters the battlefield, an opponent of your choice may place three +1/+1 counters on it.)\nWhen Thunder Brute enters the battlefield, if tribute wasn't paid, it gains haste until end of turn.
