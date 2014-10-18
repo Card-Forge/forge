@@ -2970,10 +2970,15 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     public void removeAllExtrinsicKeyword(final String s) {
         final ArrayList<String> strings = new ArrayList<String>();
         strings.add(s);
+        boolean needKeywordUpdate = false;
         if (hiddenExtrinsicKeyword.removeAll(strings)) {
             view.updateNonAbilityText(this);
+            needKeywordUpdate = true;
         }
         if (extrinsicKeyword.removeAll(strings)) {
+            needKeywordUpdate = true;
+        }
+        if (needKeywordUpdate) {
             currentState.getView().updateKeywords(this, currentState);
         }
     }
@@ -3002,12 +3007,14 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     public final void addHiddenExtrinsicKeyword(final String s) {
         if (hiddenExtrinsicKeyword.add(s)) {
             view.updateNonAbilityText(this);
+            currentState.getView().updateKeywords(this, currentState);
         }
     }
 
     public final void removeHiddenExtrinsicKeyword(final String s) {
         if (hiddenExtrinsicKeyword.remove(s)) {
             view.updateNonAbilityText(this);
+            currentState.getView().updateKeywords(this, currentState);
         }
     }
 
