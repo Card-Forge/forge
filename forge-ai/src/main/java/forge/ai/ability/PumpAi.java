@@ -277,12 +277,14 @@ public class PumpAi extends PumpAiBase {
                 		if (sa.getParam("AILogic").equals("PowerDmg")) {
                 			if (FightAi.canKill(aiCreature, humanCreature, buffedAtk)) {
 	                			sa.getTargets().add(aiCreature);
+	                			tgtFight.resetTargets();
 	                			tgtFight.getTargets().add(humanCreature);
 	                			return true;
 	                		}
                 		} else {
 	                		if (FightAi.shouldFight(aiCreature, humanCreature, buffedAtk, buffedDef)) {
 	                			sa.getTargets().add(aiCreature);
+	                			tgtFight.resetTargets();
 	                			tgtFight.getTargets().add(humanCreature);
 	                			return true;
 	                		}
