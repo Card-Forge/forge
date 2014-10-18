@@ -117,32 +117,30 @@ public class ImageKeys {
         }
 
         File file = findFile(dir, filename);
+        if (file != null) { return file; }
 
         // some S00 cards are really part of 6ED
-        if (file == null) {
-            String s2kAlias = getSetFolder("S00");
-            if (filename.startsWith(s2kAlias)) {
-                file = findFile(dir, filename.replace(s2kAlias, getSetFolder("6ED")));
-            }
+        String s2kAlias = getSetFolder("S00");
+        if (filename.startsWith(s2kAlias)) {
+            file = findFile(dir, filename.replace(s2kAlias, getSetFolder("6ED")));
+            if (file != null) { return file; }
         }
 
         // try without set prefix
-        String setlessFilename = null;
-        if (file == null && filename.contains("/")) {
-            setlessFilename = filename.substring(filename.indexOf('/') + 1);
+        if (filename.contains("/")) {
+            String setlessFilename = filename.substring(filename.indexOf('/') + 1);
             file = findFile(dir, setlessFilename);
+            if (file != null) { return file; }
 
             // try lowering the art index to the minimum for regular cards
-            if (file == null && setlessFilename.contains(".full")) {
+            if (setlessFilename.contains(".full")) {
                 file = findFile(dir, setlessFilename.replaceAll("[0-9]*[.]full", "1.full"));
+                if (file != null) { return file; }
             }
         }
 
-        if (file == null) {
-            System.out.println("File not found, no image created: " + key);
-        }
-
-        return file;
+        System.out.println("File not found, no image created: " + key);
+        return null;
     }
 
     public static String getSetFolder(String edition) {
