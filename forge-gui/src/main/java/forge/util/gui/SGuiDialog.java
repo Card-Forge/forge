@@ -29,14 +29,6 @@ public class SGuiDialog {
         return answer == 0;
     }
 
-    /**
-     * <p>
-     * showInfoDialg.
-     * </p>
-     * 
-     * @param message
-     *            a {@link java.lang.String} object.
-     */
     public static void message(final String message) {
         message(message, "Forge");
     }
