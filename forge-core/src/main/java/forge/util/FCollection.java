@@ -185,19 +185,8 @@ public class FCollection<T> implements List<T>, Set<T>, FCollectionView<T>, Clon
         return list.get(index);
     }
     @Override
-    public T set(int index, T element) {
-        if (element == null) {
-            return remove(index);
-        }
-
-        T oldItem = list.set(index, element);
-        if (element != oldItem) {
-            if (oldItem != null) {
-                set.remove(oldItem);
-            }
-            set.add(element);
-        }
-        return oldItem;
+    public T set(int index, T element) { //assume this isn't called except when changing list order, so don't worry about updating set
+        return list.set(index, element);
     }
     @Override
     public void add(int index, T element) {
