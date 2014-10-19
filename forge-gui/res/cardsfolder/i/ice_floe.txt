@@ -2,8 +2,10 @@ Name:Ice Floe
 ManaCost:no cost
 Types:Land
 K:You may choose not to untap CARDNAME during your untap step.
-A:AB$ Tap | Cost$ T | ValidTgts$ Creature.withoutFlying+attackingYou | TgtPrompt$ Select target creature without flying that's attacking you | SubAbility$ DBPump | SpellDescription$ Tap target creature without flying that's attacking you. It doesn't untap during its controller's untap step for as long as CARDNAME remains tapped.
-SVar:DBPump:DB$ Pump | Defined$ ParentTarget | UntilUntaps$ True | KW$ HIDDEN CARDNAME doesn't untap during your untap step.
+A:AB$ Tap | Cost$ T | ValidTgts$ Creature.withoutFlying+attackingYou | TgtPrompt$ Select target creature without flying that's attacking you | RememberTapped$ True | SpellDescription$ Tap target creature without flying that's attacking you. It doesn't untap during its controller's untap step for as long as CARDNAME remains tapped. | StackDescription$ SpellDescription
+S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step.
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ ClearRemembered | Static$ True
+SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ice_floe.jpg
 Oracle:You may choose not to untap Ice Floe during your untap step.\n{T}: Tap target creature without flying that's attacking you. It doesn't untap during its controller's untap step for as long as Ice Floe remains tapped.

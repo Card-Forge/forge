@@ -2,8 +2,10 @@ Name:Amber Prison
 ManaCost:4
 Types:Artifact
 K:You may choose not to untap CARDNAME during your untap step.
-A:AB$ Tap | Cost$ 4 T | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | SubAbility$ DBPump | SpellDescription$ Tap target artifact, creature, or land. That permanent doesn't untap during its controller's untap step for as long as CARDNAME remains tapped.
-SVar:DBPump:DB$ Pump | Defined$ ParentTarget | UntilUntaps$ True | KW$ HIDDEN CARDNAME doesn't untap during your untap step.
+A:AB$ Tap | Cost$ 4 T | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | RememberTapped$ True |  SpellDescription$ Tap target artifact, creature, or land. That permanent doesn't untap during its controller's untap step for as long as CARDNAME remains tapped. | StackDescription$ SpellDescription
+S:Mode$ Continuous | Affected$ Card.IsRemembered | AddHiddenKeyword$ HIDDEN CARDNAME doesn't untap during your untap step.
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ ClearRemembered | Static$ True
+SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/amber_prison.jpg
 Oracle:You may choose not to untap Amber Prison during your untap step.\n{4}, {T}: Tap target artifact, creature, or land. That permanent doesn't untap during its controller's untap step for as long as Amber Prison remains tapped.
