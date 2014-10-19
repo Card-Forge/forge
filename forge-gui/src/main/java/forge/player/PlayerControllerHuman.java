@@ -1523,7 +1523,7 @@ public class PlayerControllerHuman extends PlayerController {
 
                     game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
-                    game.getAction().checkStaticAbilities(true);
+                    game.getAction().checkStaticAbilities(false);
 
                     game.getAction().checkStateEffects(true); //ensure state based effects and triggers are updated
                 }

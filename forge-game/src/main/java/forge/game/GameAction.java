@@ -95,7 +95,7 @@ public class GameAction {
         }
         if (zoneFrom == null && !c.isToken()) {
             zoneTo.add(c, position);
-            checkStaticAbilities(true);
+            checkStaticAbilities(false);
             game.getTriggerHandler().registerActiveTrigger(c, true);
             game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
             return c;
@@ -219,7 +219,7 @@ public class GameAction {
         }
 
         // Need to apply any static effects to produce correct triggers
-        checkStaticAbilities(true);
+        checkStaticAbilities(false);
         game.getTriggerHandler().registerActiveTrigger(c, true);
 
         // play the change zone sound
@@ -667,7 +667,7 @@ public class GameAction {
         final Set<Card> allAffectedCards = Sets.newHashSet();
         for (int q = 0; q < 9; q++) {
             final Set<Card> affectedCards = checkStaticAbilities(false);
-            boolean checkAgain = affectedCards != null;
+            boolean checkAgain = false;
             allAffectedCards.addAll(affectedCards);
 
             for (Player p : game.getPlayers()) {
