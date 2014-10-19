@@ -22,8 +22,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.*;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -71,12 +69,8 @@ public final class FileUtil {
     }
 
     public static boolean isDirectoryWithFiles(final String path) {
-        try {
-            return Files.newDirectoryStream(Paths.get(path)).iterator().hasNext();
-        }
-        catch (Exception e) {
-            return false;
-        }
+        final File f = new File(path);
+        return f.exists() && f.isDirectory() && f.list().length > 0;
     }
 
     /**
