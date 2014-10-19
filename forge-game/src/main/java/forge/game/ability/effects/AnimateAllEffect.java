@@ -74,6 +74,11 @@ public class AnimateAllEffect extends AnimateEffectBase {
             keywords.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
         }
 
+        final ArrayList<String> removeKeywords = new ArrayList<String>();
+        if (sa.hasParam("RemoveKeywords")) {
+            removeKeywords.addAll(Arrays.asList(sa.getParam("RemoveKeywords").split(" & ")));
+        }
+
         final ArrayList<String> hiddenKeywords = new ArrayList<String>();
         if (sa.hasParam("HiddenKeywords")) {
             hiddenKeywords.addAll(Arrays.asList(sa.getParam("HiddenKeywords").split(" & ")));
@@ -141,7 +146,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
 
         for (final Card c : list) {
             final long colorTimestamp = doAnimate(c, sa, power, toughness, types, removeTypes,
-                    finalDesc, keywords, null, hiddenKeywords, timestamp);
+                    finalDesc, keywords, removeKeywords, hiddenKeywords, timestamp);
 
             // give abilities
             final ArrayList<SpellAbility> addedAbilities = new ArrayList<SpellAbility>();

@@ -76,7 +76,6 @@ forge-ai/src/main/java/forge/ai/ability/DamageEachAi.java -text
 forge-ai/src/main/java/forge/ai/ability/DamagePreventAi.java -text
 forge-ai/src/main/java/forge/ai/ability/DamagePreventAllAi.java -text
 forge-ai/src/main/java/forge/ai/ability/DebuffAi.java -text
-forge-ai/src/main/java/forge/ai/ability/DebuffAllAi.java -text
 forge-ai/src/main/java/forge/ai/ability/DelayedTriggerAi.java -text
 forge-ai/src/main/java/forge/ai/ability/DestroyAi.java -text
 forge-ai/src/main/java/forge/ai/ability/DestroyAllAi.java -text
@@ -354,7 +353,6 @@ forge-game/src/main/java/forge/game/ability/effects/DamageDealEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/DamageEachEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/DamagePreventAllEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/DamagePreventEffect.java -text
-forge-game/src/main/java/forge/game/ability/effects/DebuffAllEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/DebuffEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/DeclareCombatantsEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/DelayedTriggerEffect.java -text

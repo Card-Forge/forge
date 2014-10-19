@@ -47,7 +47,6 @@ public enum ApiType {
     DamageAll (DamageAllEffect.class),
     DealDamage (DamageDealEffect.class),
     Debuff (DebuffEffect.class),
-    DebuffAll (DebuffAllEffect.class),
     DeclareCombatants (DeclareCombatantsEffect.class),
     DelayedTrigger (DelayedTriggerEffect.class),
     Destroy (DestroyEffect.class),

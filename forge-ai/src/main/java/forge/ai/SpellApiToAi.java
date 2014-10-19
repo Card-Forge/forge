@@ -49,7 +49,6 @@ public enum SpellApiToAi {
 
         apiToClass.put(ApiType.DealDamage, DamageDealAi.class);
         apiToClass.put(ApiType.Debuff, DebuffAi.class);
-        apiToClass.put(ApiType.DebuffAll, DebuffAllAi.class);
         apiToClass.put(ApiType.DeclareCombatants, CannotPlayAi.class);
         apiToClass.put(ApiType.DelayedTrigger, DelayedTriggerAi.class);
         apiToClass.put(ApiType.Destroy, DestroyAi.class);
