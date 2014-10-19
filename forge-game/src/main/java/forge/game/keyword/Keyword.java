@@ -1,7 +1,7 @@
 package forge.game.keyword;
 
 public enum Keyword {
-    UNDEFINED(KeywordWithAmount.class, false, ""),
+    UNDEFINED(SimpleKeyword.class, false, ""),
     ABSORB(KeywordWithAmount.class, false, "If a source would deal damage to this creature, prevent %d of that damage."),
     AFFINITY(KeywordWithType.class, false, "This spell costs you {1} less to cast for each %s you control."),
     AMPLIFY(KeywordWithAmount.class, false, "As this card enters the battlefield, reveal any number of cards from your hand that share a creature type with it. This permanent enters the battlefield with %d +1/+1 counters on it for each card revealed this way. You can't reveal this card or any other cards that are entering the battlefield at the same time as this card."),
