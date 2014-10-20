@@ -12,6 +12,8 @@ import forge.game.card.CardLists;
 import forge.game.card.CounterType;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostRemoveCounter;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -65,8 +67,25 @@ public class CountersPutAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source)) {
-                return false;
+            // disable moving counters
+            for (final CostPart part : abCost.getCostParts()) {
+                if (part instanceof CostRemoveCounter) {
+                    final CostRemoveCounter remCounter = (CostRemoveCounter) part;
+                    final CounterType counterType = remCounter.counter;
+                    if (counterType.name().equals(type)) {
+                        return false;
+                    }
+                    if (!part.payCostFromSource()) {
+                        if (counterType.name().equals("P1P1")) {
+                            return false;
+                        }
+                        continue;
+                    }
+                    //don't kill the creature
+                    if (counterType.name().equals("P1P1") && source.getLethalDamage() <= 1) {
+                        return false;
+                    }
+                }
             }
         }
         
