@@ -863,9 +863,11 @@ public class ComputerUtilCard {
             final String logic = sa.getParam("AILogic");
             if (logic.equals("MostProminentInHumanDeck")) {
                 chosen.add(ComputerUtilCard.getMostProminentColor(CardLists.filterControlledBy(game.getCardsInGame(), opp), colorChoices));
-            } else if (logic.equals("MostProminentInComputerDeck")) {
+            }
+            else if (logic.equals("MostProminentInComputerDeck")) {
                 chosen.add(ComputerUtilCard.getMostProminentColor(CardLists.filterControlledBy(game.getCardsInGame(), ai), colorChoices));
-            } else if (logic.equals("MostProminentDualInComputerDeck")) {
+            }
+            else if (logic.equals("MostProminentDualInComputerDeck")) {
                 List<String> prominence = ComputerUtilCard.getColorByProminence(CardLists.filterControlledBy(game.getCardsInGame(), ai));
                 chosen.add(prominence.get(0));
                 chosen.add(prominence.get(1));
@@ -895,6 +897,14 @@ public class ComputerUtilCard {
             else if (logic.equals("MostProminentInActivePlayerHand")) {
                 chosen.add(ComputerUtilCard.getMostProminentColor(game.getPhaseHandler().getPlayerTurn().getCardsIn(ZoneType.Hand), colorChoices));
             }
+            else if (logic.equals("MostProminentInComputerDeckButGreen")) {
+            	List<String> prominence = ComputerUtilCard.getColorByProminence(CardLists.filterControlledBy(game.getCardsInGame(), ai));
+            	if (prominence.get(0) == MagicColor.Constant.GREEN) {
+                    chosen.add(prominence.get(1));
+            	} else {
+                    chosen.add(prominence.get(0));
+            	}
+            }
             else if (logic.equals("MostProminentKeywordInComputerDeck")) {
                 CardCollectionView list = ai.getAllCards();
                 int m1 = 0;
@@ -910,7 +920,7 @@ public class ComputerUtilCard {
                 chosen.add(chosenColor);
             }
         }
-        if (chosen.size() == 0) {
+        if (chosen.isEmpty()) {
             chosen.add(MagicColor.Constant.GREEN);
         }
         return chosen;
