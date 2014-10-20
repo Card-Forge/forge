@@ -1,5 +1,6 @@
 package forge.game.card;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -69,6 +70,10 @@ public class CardView extends GameEntityView {
     public CardView(int id0, String name0) {
         this(id0);
         getCurrentState().setName(name0);
+        set(TrackableProperty.Name, name0);
+        set(TrackableProperty.ChangedColorWords, new HashMap<String, String>());
+        set(TrackableProperty.ChangedTypes, new HashMap<String, String>());
+        set(TrackableProperty.Sickness, true);
     }
     public CardView(int id0, String name0, PlayerView ownerAndController, String imageKey) {
         this(id0, name0);
