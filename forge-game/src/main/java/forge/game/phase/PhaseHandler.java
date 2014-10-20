@@ -19,8 +19,6 @@ package forge.game.phase;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Sets;
-
 import forge.card.mana.ManaCost;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
@@ -852,6 +850,8 @@ public class PhaseHandler implements java.io.Serializable {
         // don't even offer priority, because it's untap of 1st turn now
         givePriorityToPlayer = false;
 
+        final Set<Card> allAffectedCards = new HashSet<Card>();
+
         // MAIN GAME LOOP
         while (!game.isGameOver()) {
             if (givePriorityToPlayer) {
@@ -864,18 +864,18 @@ public class PhaseHandler implements java.io.Serializable {
 
                 int loopCount = 0;
                 do {
-                    final Set<Card> allAffectedCards = Sets.newHashSet();
-                    boolean addedAnythingToStack = false;
-                    do { 
+                    do {
                         // Rule 704.3  Whenever a player would get priority, the game checks ... for state-based actions,
-                        allAffectedCards.addAll(game.getAction().checkStateEffects(false));
+                        game.getAction().checkStateEffects(false, allAffectedCards);
                         if (game.isGameOver()) {
                             return; // state-based effects check could lead to game over
                         }
-                        addedAnythingToStack = game.getStack().addAllTriggeredAbilitiesToStack();
-                    } while (addedAnythingToStack);
+                    } while (game.getStack().addAllTriggeredAbilitiesToStack()); //loop so long as something was added to stack
 
-                    game.fireEvent(new GameEventCardStatsChanged(allAffectedCards));
+                    if (!allAffectedCards.isEmpty()) {
+                        game.fireEvent(new GameEventCardStatsChanged(allAffectedCards));
+                        allAffectedCards.clear();
+                    }
 
                     if (playerTurn.hasLost() && pPlayerPriority.equals(playerTurn) && pFirstPriority.equals(playerTurn)) {
                         // If the active player has lost, and they have priority, set the next player to have priority

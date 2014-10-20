@@ -21,8 +21,6 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Sets;
-
 import forge.GameCommand;
 import forge.card.CardStateName;
 import forge.card.CardType;
@@ -636,11 +634,14 @@ public class GameAction {
         return affectedCards;
     }
 
-    public final Set<Card> checkStateEffects(final boolean runEvents) {
+    public final void checkStateEffects(final boolean runEvents) {
+        checkStateEffects(runEvents, new HashSet<Card>());
+    }
+    public final void checkStateEffects(final boolean runEvents, final Set<Card> allAffectedCards) {
         // sol(10/29) added for Phase updates, state effects shouldn't be
         // checked during Spell Resolution (except when persist-returning
         if (game.getStack().isResolving()) {
-            return Collections.emptySet();
+            return;
         }
 
         // final JFrame frame = Singletons.getView().getFrame();
@@ -649,7 +650,7 @@ public class GameAction {
         // }
 
         if (game.isGameOver()) {
-            return Collections.emptySet();
+            return;
         }
 
         // Max: I don't know where to put this! - but since it's a state based action, it must be in check state effects
@@ -662,9 +663,7 @@ public class GameAction {
         game.getStack().setFrozen(true);
         TrackableObject.freeze(); //prevent views flickering during while updating for state-based effects
 
-        // do this multiple times, sometimes creatures/permanents will survive
-        // when they shouldn't
-        final Set<Card> allAffectedCards = Sets.newHashSet();
+        // do this multiple times, sometimes creatures/permanents will survive when they shouldn't
         for (int q = 0; q < 9; q++) {
             final Set<Card> affectedCards = checkStaticAbilities(false);
             boolean checkAgain = false;
@@ -775,14 +774,12 @@ public class GameAction {
 
         checkGameOverCondition();
         if (game.getAge() != GameStage.Play) {
-            return Collections.emptySet();
+            return;
         }
         game.getTriggerHandler().resetActiveTriggers();
         if (!refreeze) {
             game.getStack().unfreezeStack();
         }
-
-        return allAffectedCards;
     }
 
     private boolean stateBasedAction704_5n(Card c) {
