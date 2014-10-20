@@ -524,13 +524,16 @@ public class GameAction {
         }
     }
 
-    public final Set<Card> checkStaticAbilities(final boolean fireEvents) {
+    public final void checkStaticAbilities(final boolean fireEvents) {
+        checkStaticAbilities(fireEvents, new HashSet<Card>());
+    }
+    public final void checkStaticAbilities(final boolean fireEvents, final Set<Card> affectedCards) {
         if (game.isGameOver()) {
-            return null;
+            return;
         }
 
         // remove old effects
-        Set<Card> affectedCards = game.getStaticEffects().clearStaticEffects();
+        game.getStaticEffects().clearStaticEffects(affectedCards);
         game.getTriggerHandler().cleanUpTemporaryTriggers();
         game.getReplacementHandler().cleanUpTemporaryReplacements();
 
@@ -624,20 +627,18 @@ public class GameAction {
             }
         }
 
-        if (fireEvents && affectedCards != null && !affectedCards.isEmpty()) {
+        if (fireEvents && !affectedCards.isEmpty()) {
             game.fireEvent(new GameEventCardStatsChanged(affectedCards));
         }
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
-
-        return affectedCards;
     }
 
     public final void checkStateEffects(final boolean runEvents) {
         checkStateEffects(runEvents, new HashSet<Card>());
     }
-    public final void checkStateEffects(final boolean runEvents, final Set<Card> allAffectedCards) {
+    public final void checkStateEffects(final boolean runEvents, final Set<Card> affectedCards) {
         // sol(10/29) added for Phase updates, state effects shouldn't be
         // checked during Spell Resolution (except when persist-returning
         if (game.getStack().isResolving()) {
@@ -665,9 +666,8 @@ public class GameAction {
 
         // do this multiple times, sometimes creatures/permanents will survive when they shouldn't
         for (int q = 0; q < 9; q++) {
-            final Set<Card> affectedCards = checkStaticAbilities(false);
+            checkStaticAbilities(false, affectedCards);
             boolean checkAgain = false;
-            allAffectedCards.addAll(affectedCards);
 
             for (Player p : game.getPlayers()) {
                 for (ZoneType zt : ZoneType.values()) {
@@ -768,8 +768,8 @@ public class GameAction {
 
         TrackableObject.unfreeze();
 
-        if (runEvents) {
-            game.fireEvent(new GameEventCardStatsChanged(allAffectedCards));
+        if (runEvents && !affectedCards.isEmpty()) {
+            game.fireEvent(new GameEventCardStatsChanged(affectedCards));
         }
 
         checkGameOverCondition();

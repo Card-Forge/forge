@@ -41,18 +41,15 @@ public class StaticEffects {
     private final ArrayList<StaticEffect> staticEffects = new ArrayList<StaticEffect>();
     //Global rule changes
     private final EnumSet<GlobalRuleChange> ruleChanges = EnumSet.noneOf(GlobalRuleChange.class);
-    
-    public final Set<Card> clearStaticEffects() {
+
+    public final void clearStaticEffects(Set<Card> affectedCards) {
         ruleChanges.clear();
-        Set<Card> clearedCards = new HashSet<Card>();
 
         // remove all static effects
         for (StaticEffect se : staticEffects) {
-            clearedCards.addAll(this.removeStaticEffect(se));
+            affectedCards.addAll(this.removeStaticEffect(se));
         }
         this.staticEffects.clear();
-
-        return clearedCards;
     }
 
     public void setGlobalRuleChange(GlobalRuleChange change) {
