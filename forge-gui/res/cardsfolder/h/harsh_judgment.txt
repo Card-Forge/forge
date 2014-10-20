@@ -2,11 +2,10 @@ Name:Harsh Judgment
 ManaCost:2 W W
 Types:Enchantment
 K:ETBReplacement:Other:ChooseColor
-SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentInHumanDeck
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInHumanDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
 R:Event$ DamageDone | ValidTarget$ You | ActiveZones$ Battlefield | ValidSource$ Instant.ChosenColor,Sorcery.ChosenColor | IsCombat$ False | ReplaceWith$ HarshDmg | Description$ If an instant or sorcery spell of the chosen color would deal damage to you, it deals that damage to its controller instead.
 SVar:HarshDmg:AB$ DealDamage | Cost$ 0 | Defined$ ReplacedSourceController | DamageSource$ ReplacedSource | NumDmg$ HarshX | References$ HarshX
 SVar:HarshX:ReplaceCount$DamageAmount
 SVar:RemRandomDeck:True
-SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harsh_judgment.jpg
 Oracle:As Harsh Judgment enters the battlefield, choose a color.\nIf an instant or sorcery spell of the chosen color would deal damage to you, it deals that damage to its controller instead.

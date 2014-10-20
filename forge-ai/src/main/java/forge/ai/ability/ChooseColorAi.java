@@ -9,6 +9,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 public class ChooseColorAi extends SpellAbilityAi {
@@ -34,6 +35,14 @@ public class ChooseColorAi extends SpellAbilityAi {
             // Set PayX here to maximum value.
             int x = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(x));
+            return true;
+        }
+        
+        if ("Addle".equals(sa.getHostCard().getName())) {
+            PhaseHandler ph = game.getPhaseHandler();
+        	if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) || ai.getOpponent().getCardsIn(ZoneType.Hand).isEmpty()) {
+        		return false;
+        	}
             return true;
         }
         boolean chance = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
