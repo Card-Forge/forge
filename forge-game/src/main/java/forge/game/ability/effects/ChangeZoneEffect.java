@@ -645,7 +645,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         final boolean optional = sa.hasParam("Optional");
         if (optional) {
-            String message = MessageUtil.formatMessage(defined ? "Put that card from {player's} " + Lang.joinHomogenous(origin).toLowerCase() + "to " + destination.name().toLowerCase() : "Search {player's} " + Lang.joinHomogenous(origin).toLowerCase() + "?", player, decider);
+            String message = MessageUtil.formatMessage(defined ? "Put that card from {player's} " + Lang.joinHomogenous(origin).toLowerCase() + "to " + destination.name().toLowerCase() : "Search {player's} " + Lang.joinHomogenous(origin).toLowerCase() + "?", decider, player);
             if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, message)) {
                 return;
             }
@@ -749,7 +749,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final boolean champion = sa.hasParam("Champion");
         final boolean forget = sa.hasParam("ForgetChanged");
         final boolean imprint = sa.hasParam("Imprint");
-        final String selectPrompt = sa.hasParam("SelectPrompt") ? sa.getParam("SelectPrompt") : MessageUtil.formatMessage("Select a card from {player's} " + Lang.joinHomogenous(origin).toLowerCase(), player, decider);
+        final String selectPrompt = sa.hasParam("SelectPrompt") ? sa.getParam("SelectPrompt") : MessageUtil.formatMessage("Select a card from {player's} " + Lang.joinHomogenous(origin).toLowerCase(), decider, player);
         final String totalcmc = sa.getParam("WithTotalCMC");
         int totcmc = AbilityUtils.calculateAmount(source, totalcmc, sa);
 
