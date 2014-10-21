@@ -98,11 +98,12 @@ public class BoosterDraftAI {
         final List<PaperCard> possiblePick = new ArrayList<PaperCard>();
         for(Pair<PaperCard, Double> p : rankedCards) { 
             double rating = p.getValue();
-            if( rating <= bestRanking + .01 ) {
-                if (rating <= bestRanking) {
+            if(rating <= bestRanking + .01) {
+                if (rating < bestRanking) {
+                	// found a better card start a new list
                     possiblePick.clear();
+                    bestRanking = rating;
                 }
-                bestRanking = rating;
                 possiblePick.add(p.getKey());
             }
         }
