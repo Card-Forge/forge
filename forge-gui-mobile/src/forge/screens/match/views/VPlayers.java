@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
+import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.match.MatchUtil;
@@ -89,7 +90,7 @@ public class VPlayers extends FDropDown {
                 }
             }
             if (MatchUtil.getGameView().isCommander()) {
-                builder.append("  |  " + player.getCommanderInfo());
+                builder.append("  |  " + CardFactoryUtil.getCommanderInfo(player));
             }
 
             g.drawText(builder.toString(), FONT, FList.FORE_COLOR, x, y, getWidth() - PADDING - x, h, true, HAlignment.LEFT, true);

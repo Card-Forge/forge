@@ -521,7 +521,7 @@ public class CardView extends GameEntityView {
         }
         if (isCommander()) {
             sb.append(getOwner()).append("'s Commander\r\n");
-            sb.append(CardFactoryUtil.getCommanderInfo(Player.get(getOwner()))).append("\r\n");
+            sb.append(CardFactoryUtil.getCommanderInfo(getOwner())).append("\r\n");
         }
         sb.append(state.getAbilityText());
 

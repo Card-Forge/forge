@@ -28,6 +28,7 @@ import javax.swing.ScrollPaneConstants;
 import com.google.common.collect.Lists;
 
 import net.miginfocom.swing.MigLayout;
+import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.gui.framework.DragCell;
@@ -179,7 +180,7 @@ public enum VPlayers implements IVDoc<CPlayers> {
                 temp[6].setText(sb.toString());
             }
             if (isCommander) {
-                temp[7].setText(p0.getCommanderInfo());
+                temp[7].setText(CardFactoryUtil.getCommanderInfo(p0));
             }
         }
     }

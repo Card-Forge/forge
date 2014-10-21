@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang3.NotImplementedException;
-
 import com.google.common.collect.Maps;
 
 import forge.LobbyPlayer;
@@ -118,8 +116,11 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.Commander, PlayerView.get(p.getCommander()));
     }
 
-    public Map<Integer, Integer> getCommanderDamage() {
-        return get(TrackableProperty.CommanderDamage);
+    public int getCommanderDamage(CardView commander) {
+        Map<Integer, Integer> map = get(TrackableProperty.CommanderDamage);
+        if (map == null) { return 0; }
+        Integer damage = map.get(commander.getId());
+        return damage == null ? 0 : damage.intValue();
     }
     void updateCommanderDamage(Player p) {
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
@@ -127,10 +128,6 @@ public class PlayerView extends GameEntityView {
             map.put(entry.getKey().getId(), entry.getValue());
         }
         set(TrackableProperty.CommanderDamage, map);
-    }
-
-    public String getCommanderInfo() {
-        throw new NotImplementedException("Not implemented");
     }
 
     public PlayerView getMindSlaveMaster() {

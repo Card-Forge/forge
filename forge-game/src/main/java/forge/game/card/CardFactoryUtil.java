@@ -32,6 +32,7 @@ import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameLogEntryType;
+import forge.game.GameView;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -42,6 +43,7 @@ import forge.game.cost.CostPayment;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
@@ -1984,7 +1986,6 @@ public class CardFactoryUtil {
     }
 
     public static void correctAbilityChainSourceCard(final SpellAbility sa, final Card card) {
-
         sa.setHostCard(card);
 
         if (sa.getSubAbility() != null) {
@@ -2027,9 +2028,10 @@ public class CardFactoryUtil {
         cmd.addStaticAbility("Mode$ RaiseCost | Amount$ CommanderCostRaise | Type$ Spell | ValidCard$ Card.Self+wasCastFromCommand | EffectZone$ All | AffectedZone$ Stack");
     }
     */
-    public static final String getCommanderInfo(final Player originPlayer) {
+
+    public static final String getCommanderInfo(final PlayerView originPlayer) {
         StringBuilder sb = new StringBuilder();
-        for (Player p : originPlayer.getGame().getPlayers()) {
+        for (PlayerView p : GameView.getCurrentGame().getPlayers()) {
         	final String text;
             if (p.equals(originPlayer)) {
             	text = "Commander Damage from own Commander: ";

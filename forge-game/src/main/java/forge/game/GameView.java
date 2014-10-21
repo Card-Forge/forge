@@ -22,6 +22,12 @@ import forge.trackable.TrackableProperty;
 import forge.util.FCollectionView;
 
 public class GameView extends TrackableObject {
+    private static GameView currentGame;
+
+    public static GameView getCurrentGame() {
+        return currentGame;
+    }
+
     /*private final TrackableIndex<CardView> cards = new TrackableIndex<CardView>();
     private final TrackableIndex<PlayerView> players = new TrackableIndex<PlayerView>();
     private final TrackableIndex<SpellAbilityView> spellAbilities = new TrackableIndex<SpellAbilityView>();
@@ -32,6 +38,7 @@ public class GameView extends TrackableObject {
 
     public GameView(Game game0) {
         super(-1); //ID not needed
+        currentGame = this;
         game = game0;
         set(TrackableProperty.WinningTeam, -1);
 
@@ -110,6 +117,9 @@ public class GameView extends TrackableObject {
         set(TrackableProperty.GameOver, game.isGameOver());
         set(TrackableProperty.MatchOver, game.getMatch().isMatchOver());
         set(TrackableProperty.WinningTeam, game.getOutcome() == null ? -1 : game.getOutcome().getWinningTeam());
+        if (game.isGameOver()) {
+            currentGame = null;
+        }
     }
 
     public GameLog getGameLog() {
