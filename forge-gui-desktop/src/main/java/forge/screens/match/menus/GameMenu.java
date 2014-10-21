@@ -179,12 +179,12 @@ public final class GameMenu {
                 prefs.setPref(FPref.UI_TARGETING_OVERLAY, String.valueOf(arcState));
                 prefs.save();
                 controller.setArcState(arcState);
-                setTargetingArcMenuIcon((SkinnedMenuItem)e.getSource());
+                setTargetingArcMenuIcon((SkinnedRadioButtonMenuItem)e.getSource());
             }
         };
     }
 
-    private static void setTargetingArcMenuIcon(SkinnedMenuItem item) {
+    private static void setTargetingArcMenuIcon(SkinnedRadioButtonMenuItem item) {
         JPopupMenu pop = (JPopupMenu)item.getParent();
         JMenu menu = (JMenu)pop.getInvoker();
         menu.setIcon(item.getIcon());
