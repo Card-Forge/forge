@@ -93,7 +93,7 @@ public class GameAction {
         }
         if (zoneFrom == null && !c.isToken()) {
             zoneTo.add(c, position);
-            checkStaticAbilities(false);
+            checkStaticAbilities();
             game.getTriggerHandler().registerActiveTrigger(c, true);
             game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
             return c;
@@ -217,7 +217,7 @@ public class GameAction {
         }
 
         // Need to apply any static effects to produce correct triggers
-        checkStaticAbilities(false);
+        checkStaticAbilities();
         game.getTriggerHandler().registerActiveTrigger(c, true);
 
         // play the change zone sound
@@ -524,10 +524,10 @@ public class GameAction {
         }
     }
 
-    public final void checkStaticAbilities(final boolean fireEvents) {
-        checkStaticAbilities(fireEvents, new HashSet<Card>());
+    public final void checkStaticAbilities() {
+        checkStaticAbilities(new HashSet<Card>());
     }
-    public final void checkStaticAbilities(final boolean fireEvents, final Set<Card> affectedCards) {
+    public final void checkStaticAbilities(final Set<Card> affectedCards) {
         if (game.isGameOver()) {
             return;
         }
@@ -627,10 +627,6 @@ public class GameAction {
             }
         }
 
-        if (fireEvents && !affectedCards.isEmpty()) {
-            game.fireEvent(new GameEventCardStatsChanged(affectedCards));
-        }
-
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
     }
@@ -666,7 +662,7 @@ public class GameAction {
 
         // do this multiple times, sometimes creatures/permanents will survive when they shouldn't
         for (int q = 0; q < 9; q++) {
-            checkStaticAbilities(false, affectedCards);
+            checkStaticAbilities(affectedCards);
             boolean checkAgain = false;
 
             for (Player p : game.getPlayers()) {
