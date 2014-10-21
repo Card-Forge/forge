@@ -611,7 +611,7 @@ public class GameAction {
         }
 
         for (Player p : game.getPlayers()) {
-            for (Card c : p.getCardsIn(ZoneType.Battlefield)) {
+            for (Card c : p.getCardsIn(ZoneType.Battlefield).threadSafeIterator()) {
                 if (!c.getController().equals(p)) {
                     controllerChangeZoneCorrection(c);
                     affectedCards.add(c);
