@@ -698,11 +698,15 @@ public class CardView extends GameEntityView {
         public String getName() {
             return get(TrackableProperty.Name);
         }
-        void updateName(Card c) {
-            setName(c.getName());
-        }
         void updateName(CardState c) {
             setName(c.getName());
+
+            if (CardView.this.getCurrentState() == this) {
+                Card card = Card.get(CardView.this);
+                if (card != null) {
+                    CardView.this.updateName(card);
+                }
+            }
         }
         private void setName(String name0) {
             set(TrackableProperty.Name, name0);
