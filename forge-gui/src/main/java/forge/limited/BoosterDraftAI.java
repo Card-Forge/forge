@@ -99,7 +99,7 @@ public class BoosterDraftAI {
         for(Pair<PaperCard, Double> p : rankedCards) { 
             double rating = p.getValue();
             if( rating <= bestRanking + .01 ) {
-                if (rating == bestRanking) {
+                if (rating <= bestRanking) {
                     possiblePick.clear();
                 }
                 bestRanking = rating;
