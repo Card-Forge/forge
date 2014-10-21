@@ -88,7 +88,7 @@ public enum CCombat implements ICDoc {
         // Associate Bands, Attackers Blockers
         boolean previousBand = false;
         for (final FCollection<CardView> band : bands) {
-            final int bandSize = Iterables.size(band);
+            final int bandSize = band.size();
             if (bandSize == 0) {
                 continue;
             }
@@ -99,7 +99,7 @@ public enum CCombat implements ICDoc {
             }
 
             final FCollection<CardView> blockers = localCombat.getBlockers(band); 
-            final boolean blocked = (blockers != null);
+            final boolean blocked = blockers != null && !blockers.isEmpty();
             final boolean isBand = bandSize > 1;
             if (isBand) {
                 // Only print Band data if it's actually a band
@@ -117,18 +117,20 @@ public enum CCombat implements ICDoc {
                 if (blocked) {
                     // if single creature is blocked, but no longer has blockers, tell the user!
                     display.append("     (blocked)\n");
-                } else {
+                }
+                else {
                     display.append("     >>>\n");
                 }
             }
 
-            if (blockers != null) {
+            if (blocked) {
                 for (final CardView blocker : blockers) {
                     display.append("     < ")
                            .append(combatantToString(blocker))
                            .append("\n");
                 }
             }
+
             previousBand = isBand;
         }
 

@@ -2,6 +2,7 @@ package forge.game.combat;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -56,7 +57,7 @@ public class CombatView extends TrackableObject {
     }
 
     public Iterable<GameEntityView> getDefenders() {
-        return getAttackersWithDefenders().values();
+        return new HashSet<GameEntityView>(getAttackersWithDefenders().values());
     }
 
     public GameEntityView getDefender(final CardView attacker) {
