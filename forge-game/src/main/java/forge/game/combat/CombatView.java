@@ -53,7 +53,7 @@ public class CombatView extends TrackableObject {
     }
 
     public Iterable<CardView> getAttackers() {
-        return getAttackersWithDefenders().keySet();
+        return new HashSet<CardView>(getAttackersWithDefenders().keySet());
     }
 
     public Iterable<GameEntityView> getDefenders() {

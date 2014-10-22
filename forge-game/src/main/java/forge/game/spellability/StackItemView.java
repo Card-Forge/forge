@@ -5,6 +5,7 @@ import forge.game.player.PlayerView;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
+import forge.util.FCollectionView;
 
 
 public class StackItemView extends TrackableObject {
@@ -72,14 +73,14 @@ public class StackItemView extends TrackableObject {
         set(TrackableProperty.ActivatingPlayer, PlayerView.get(si.getActivatingPlayer()));
     }
 
-    public Iterable<CardView> getTargetCards() {
+    public FCollectionView<CardView> getTargetCards() {
         return get(TrackableProperty.TargetCards);
     }
     void updateTargetCards(SpellAbilityStackInstance si) {
         set(TrackableProperty.TargetCards, CardView.getCollection(si.getTargetChoices().getTargetCards()));
     }
 
-    public Iterable<PlayerView> getTargetPlayers() {
+    public FCollectionView<PlayerView> getTargetPlayers() {
         return get(TrackableProperty.TargetPlayers);
     }
     void updateTargetPlayers(SpellAbilityStackInstance si) {

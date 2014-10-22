@@ -265,8 +265,7 @@ public enum TargetingOverlay {
                 addArc(endpoints.get(defender.getId()), endpoints.get(c.getId()), true);
             }
             // if c is a planeswalker that's being attacked
-            final Iterable<CardView> attackers = combat.getAttackersOf(c);
-            for (final CardView pwAttacker : attackers) {
+            for (final CardView pwAttacker : combat.getAttackersOf(c)) {
                 addArc(endpoints.get(c.getId()), endpoints.get(pwAttacker.getId()), true);
             }
             for (final CardView attackingCard : combat.getAttackers()) {
