@@ -172,12 +172,20 @@ public enum TargetingOverlay {
                 for (CardView c : instance.getTargetCards()) {
                     addArc(endpoints.get(c.getId()), itemLocOnScreen, activator.isOpponentOf(c.getController()));
                 }
-                /*for (PlayerView p : instance.getTargetPlayers()) {
-                    addArc(itemLocOnScreen, endpoints.get(p.getId()), activator.isOpponentOf(p));
-                }*/
+                for (PlayerView p : instance.getTargetPlayers()) {
+                    addArc(getPlayerTargetingArrowPoint(p, locOnScreen), itemLocOnScreen, activator.isOpponentOf(p));
+                }
                 instance = instance.getSubInstance();
             }
         }
+    }
+
+    private Point getPlayerTargetingArrowPoint(PlayerView p, Point locOnScreen) {
+        JPanel avatarArea = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(p).getAvatarArea();
+        Point point = avatarArea.getLocationOnScreen();
+        point.x += avatarArea.getWidth() / 2 - locOnScreen.x;
+        point.y += avatarArea.getHeight() / 2 - locOnScreen.y;
+        return point;
     }
 
     private void addArc(Point end, Point start, boolean connectsFoes) {
