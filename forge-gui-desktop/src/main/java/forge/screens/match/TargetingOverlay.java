@@ -163,19 +163,21 @@ public enum TargetingOverlay {
         StackInstanceTextArea activeStackItem = VStack.SINGLETON_INSTANCE.getHoveredItem();
         if (activeStackItem != null) {
             Point itemLocOnScreen = activeStackItem.getLocationOnScreen();
-            itemLocOnScreen.x += StackInstanceTextArea.CARD_WIDTH * CardPanel.TARGET_ORIGIN_FACTOR_X + StackInstanceTextArea.PADDING - locOnScreen.getX();
-            itemLocOnScreen.y += StackInstanceTextArea.CARD_HEIGHT * CardPanel.TARGET_ORIGIN_FACTOR_Y + StackInstanceTextArea.PADDING - locOnScreen.getY();
-
-            StackItemView instance = activeStackItem.getItem();
-            PlayerView activator = instance.getActivatingPlayer();
-            while (instance != null) {
-                for (CardView c : instance.getTargetCards()) {
-                    addArc(endpoints.get(c.getId()), itemLocOnScreen, activator.isOpponentOf(c.getController()));
+            if (itemLocOnScreen != null) {
+                itemLocOnScreen.x += StackInstanceTextArea.CARD_WIDTH * CardPanel.TARGET_ORIGIN_FACTOR_X + StackInstanceTextArea.PADDING - locOnScreen.getX();
+                itemLocOnScreen.y += StackInstanceTextArea.CARD_HEIGHT * CardPanel.TARGET_ORIGIN_FACTOR_Y + StackInstanceTextArea.PADDING - locOnScreen.getY();
+    
+                StackItemView instance = activeStackItem.getItem();
+                PlayerView activator = instance.getActivatingPlayer();
+                while (instance != null) {
+                    for (CardView c : instance.getTargetCards()) {
+                        addArc(endpoints.get(c.getId()), itemLocOnScreen, activator.isOpponentOf(c.getController()));
+                    }
+                    for (PlayerView p : instance.getTargetPlayers()) {
+                        addArc(getPlayerTargetingArrowPoint(p, locOnScreen), itemLocOnScreen, activator.isOpponentOf(p));
+                    }
+                    instance = instance.getSubInstance();
                 }
-                for (PlayerView p : instance.getTargetPlayers()) {
-                    addArc(getPlayerTargetingArrowPoint(p, locOnScreen), itemLocOnScreen, activator.isOpponentOf(p));
-                }
-                instance = instance.getSubInstance();
             }
         }
     }

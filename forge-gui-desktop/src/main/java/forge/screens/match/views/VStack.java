@@ -21,6 +21,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -123,6 +124,7 @@ public enum VStack implements IVDoc<CStack> {
         // No need to update the rest unless it's showing
         if (!parentCell.getSelected().equals(this)) { return; }
 
+        hoveredItem = null;
         scroller.removeAll();
 
         boolean isFirst = true;
@@ -159,6 +161,20 @@ public enum VStack implements IVDoc<CStack> {
 
         public StackItemView getItem() {
             return item;
+        }
+
+        @Override
+        public Point getLocationOnScreen() {
+            try {
+                return super.getLocationOnScreen();
+            }
+            catch (Exception e) {
+                //suppress exception that can occur if stack hidden while over an item
+                if (hoveredItem == this) {
+                    hoveredItem = null; //reset this if this happens
+                }
+                return null;
+            }
         }
 
         public StackInstanceTextArea(final GameView gameView, final StackItemView item0) {
