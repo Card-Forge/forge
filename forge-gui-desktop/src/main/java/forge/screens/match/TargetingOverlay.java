@@ -27,22 +27,25 @@ import java.awt.geom.Area;
 import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
 import javax.swing.JPanel;
-
-import com.google.common.collect.Lists;
 
 import forge.Singletons;
 import forge.game.GameEntityView;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.combat.CombatView;
+import forge.game.player.PlayerView;
+import forge.game.spellability.StackItemView;
 import forge.gui.framework.FScreen;
 import forge.match.MatchUtil;
 import forge.screens.match.controllers.CDock;
 import forge.screens.match.views.VField;
+import forge.screens.match.views.VStack;
+import forge.screens.match.views.VStack.StackInstanceTextArea;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.view.FView;
@@ -54,14 +57,25 @@ import forge.view.arcane.CardPanel;
  */
 @SuppressWarnings("serial")
 public enum TargetingOverlay {
-    /** */
     SINGLETON_INSTANCE;
 
     private final OverlayPanel pnl = new OverlayPanel();
     private final List<CardPanel> cardPanels = new ArrayList<CardPanel>();
-    private final List<Point[]> arcsCombat = new ArrayList<Point[]>();
-    private final List<Point[]> arcsOther = new ArrayList<Point[]>();
+    private final List<Arc> arcsFoe = new ArrayList<Arc>();
+    private final List<Arc> arcsFriend = new ArrayList<Arc>();
 
+    private static class Arc {
+        private final int x1, y1, x2, y2;
+
+        private Arc(Point end, Point start) {
+            x1 = start.x;
+            y1 = start.y;
+            x2 = end.x;
+            y2 = end.y;
+        }
+    }
+
+    private HashSet<CardView> cardsVisualized = new HashSet<CardView>();
     private CardPanel activePanel = null;
 
     /**
@@ -84,10 +98,11 @@ public enum TargetingOverlay {
     // it checked for a state change.  Doublestrike 28-09-12
     private void assembleArcs(final CombatView combat) {
         //List<VField> fields = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
-        arcsCombat.clear();
-        arcsOther.clear();
+        arcsFoe.clear();
+        arcsFriend.clear();
         cardPanels.clear();
-            
+        cardsVisualized.clear();
+
         switch (CDock.SINGLETON_INSTANCE.getArcState()) {
             case 0:
                 return;
@@ -124,33 +139,60 @@ public enum TargetingOverlay {
             if (c.isShowing()) {
 	            cardLocOnScreen = c.getCardLocationOnScreen();
 	            endpoints.put(c.getCard().getId(), new Point(
-	                (int) (cardLocOnScreen.getX() - locOnScreen.getX() + c.getWidth() / 4),
-	                (int) (cardLocOnScreen.getY() - locOnScreen.getY() + c.getHeight() / 2)
+	                (int) (cardLocOnScreen.getX() - locOnScreen.getX() + (float)c.getWidth() * CardPanel.TARGET_ORIGIN_FACTOR_X),
+	                (int) (cardLocOnScreen.getY() - locOnScreen.getY() + (float)c.getHeight() * CardPanel.TARGET_ORIGIN_FACTOR_Y)
 	            ));
             }
         }
 
         if (CDock.SINGLETON_INSTANCE.getArcState() == 1) {
             // Only work with the active panel
-            final CardView c = activePanel.getCard();
-            addArcsForCard(c, endpoints, combat);
-        } else {
+            addArcsForCard(activePanel.getCard(), endpoints, combat);
+        }
+        else {
             // Work with all card panels currently visible
-            final List<CardView> visualized = Lists.newArrayList();
             for (final CardPanel c : cardPanels) {
                 if (!c.isShowing()) {
                     continue;
                 }
-                final CardView card = c.getCard();
-                if (visualized.contains(card)) { continue; }
+                addArcsForCard(c.getCard(), endpoints, combat);
+            }
+        }
 
-                visualized.addAll(addArcsForCard(card, endpoints, combat));
+        //draw arrow connecting active item on stack
+        StackInstanceTextArea activeStackItem = VStack.SINGLETON_INSTANCE.getHoveredItem();
+        if (activeStackItem != null) {
+            Point itemLocOnScreen = activeStackItem.getLocationOnScreen();
+            itemLocOnScreen.x += StackInstanceTextArea.CARD_WIDTH * CardPanel.TARGET_ORIGIN_FACTOR_X + StackInstanceTextArea.PADDING - locOnScreen.getX();
+            itemLocOnScreen.y += StackInstanceTextArea.CARD_HEIGHT * CardPanel.TARGET_ORIGIN_FACTOR_Y + StackInstanceTextArea.PADDING - locOnScreen.getY();
+
+            StackItemView instance = activeStackItem.getItem();
+            PlayerView activator = instance.getActivatingPlayer();
+            while (instance != null) {
+                for (CardView c : instance.getTargetCards()) {
+                    addArc(endpoints.get(c.getId()), itemLocOnScreen, activator.isOpponentOf(c.getController()));
+                }
+                /*for (PlayerView p : instance.getTargetPlayers()) {
+                    addArc(itemLocOnScreen, endpoints.get(p.getId()), activator.isOpponentOf(p));
+                }*/
+                instance = instance.getSubInstance();
             }
         }
     }
 
-    private List<CardView> addArcsForCard(final CardView c, final Map<Integer, Point> endpoints, final CombatView combat) {
-        final List<CardView> cardsVisualized = Lists.newArrayList(c);
+    private void addArc(Point end, Point start, boolean connectsFoes) {
+        if (start == null || end == null) { return; }
+
+        if (connectsFoes) {
+            arcsFoe.add(new Arc(end, start));
+        }
+        else {
+            arcsFriend.add(new Arc(end, start));
+        }
+    }
+
+    private void addArcsForCard(final CardView c, final Map<Integer, Point> endpoints, final CombatView combat) {
+        if (!cardsVisualized.add(c)) { return; } //don't add arcs for cards if card already visualized
 
         final CardView enchanting = c.getEnchantingCard();
         final CardView equipping = c.getEquipping();
@@ -162,38 +204,26 @@ public enum TargetingOverlay {
 
         if (null != enchanting) {
             if (enchanting.getController() != null && !enchanting.getController().equals(c.getController())) {
-                arcsOther.add(new Point[] {
-                    endpoints.get(enchanting.getId()),
-                    endpoints.get(c.getId())
-                });
+                addArc(endpoints.get(enchanting.getId()), endpoints.get(c.getId()), false);
                 cardsVisualized.add(enchanting);
             }
         }
         if (null != equipping) {
             if (equipping.getController() != null && !equipping.getController().equals(c.getController())) {
-                arcsOther.add(new Point[] {
-                    endpoints.get(equipping.getId()),
-                    endpoints.get(c.getId())
-                });
+                addArc(endpoints.get(equipping.getId()), endpoints.get(c.getId()), false);
                 cardsVisualized.add(equipping);
             }
         }
         if (null != fortifying) {
             if (fortifying.getController() != null && !fortifying.getController().equals(c.getController())) {
-                arcsOther.add(new Point[] {
-                    endpoints.get(fortifying.getId()),
-                    endpoints.get(c.getId())
-                });
+                addArc(endpoints.get(fortifying.getId()), endpoints.get(c.getId()), false);
                 cardsVisualized.add(fortifying);
             }
         }
         if (null != enchantedBy) {
             for (final CardView enc : enchantedBy) {
                 if (enc.getController() != null && !enc.getController().equals(c.getController())) {
-                    arcsOther.add(new Point[] {
-                        endpoints.get(c.getId()),
-                        endpoints.get(enc.getId())
-                    });
+                    addArc(endpoints.get(c.getId()), endpoints.get(enc.getId()), false);
                     cardsVisualized.add(enc);
                 }
             }
@@ -201,10 +231,7 @@ public enum TargetingOverlay {
         if (null != equippedBy) {
             for (final CardView eq : equippedBy) {
                 if (eq.getController() != null && !eq.getController().equals(c.getController())) {
-                    arcsOther.add(new Point[] {
-                        endpoints.get(c.getId()),
-                        endpoints.get(eq.getId())
-                    });
+                    addArc(endpoints.get(c.getId()), endpoints.get(eq.getId()), false);
                     cardsVisualized.add(eq);
                 }
             }
@@ -212,54 +239,37 @@ public enum TargetingOverlay {
         if (null != fortifiedBy) {
             for (final CardView eq : fortifiedBy) {
                 if (eq.getController() != null && !eq.getController().equals(c.getController())) {
-                    arcsOther.add(new Point[] {
-                        endpoints.get(c.getId()),
-                        endpoints.get(eq.getId())
-                    });
+                    addArc(endpoints.get(c.getId()), endpoints.get(eq.getId()), false);
                     cardsVisualized.add(eq);
                 }
             }
         }
         if (null != paired) {
-            arcsOther.add(new Point[] {
-                endpoints.get(paired.getId()),
-                endpoints.get(c.getId())
-            });
+            addArc(endpoints.get(paired.getId()), endpoints.get(c.getId()), false);
             cardsVisualized.add(paired);
         }
         if (null != combat) {
             final GameEntityView defender = combat.getDefender(c);
             // if c is attacking a planeswalker
             if (defender instanceof CardView) {
-                arcsCombat.add(new Point[] {
-                        endpoints.get(((CardView)defender).getId()),
-                        endpoints.get(c.getId())
-                    });
+                addArc(endpoints.get(defender.getId()), endpoints.get(c.getId()), true);
             }
             // if c is a planeswalker that's being attacked
             final Iterable<CardView> attackers = combat.getAttackersOf(c);
             for (final CardView pwAttacker : attackers) {
-                arcsCombat.add(new Point[] {
-                    endpoints.get(c.getId()),
-                    endpoints.get(pwAttacker.getId())
-                });
+                addArc(endpoints.get(c.getId()), endpoints.get(pwAttacker.getId()), true);
             }
             for (final CardView attackingCard : combat.getAttackers()) {
                 final Iterable<CardView> cards = combat.getPlannedBlockers(attackingCard);
                 if (cards == null) continue;
                 for (final CardView blockingCard : cards) {
                     if (!attackingCard.equals(c) && !blockingCard.equals(c)) { continue; }
-                    arcsCombat.add(new Point[] {
-                        endpoints.get(attackingCard.getId()),
-                        endpoints.get(blockingCard.getId())
-                    });
+                    addArc(endpoints.get(attackingCard.getId()), endpoints.get(blockingCard.getId()), true);
                     cardsVisualized.add(blockingCard);
                 }
                 cardsVisualized.add(attackingCard);
             }
         }
-
-        return cardsVisualized;
     }
 
     private class OverlayPanel extends SkinnedPanel {
@@ -328,20 +338,10 @@ public enum TargetingOverlay {
             g2d.setTransform(af);
         }
 
-        public void drawArcs(Graphics2D g2d, Color color, List<Point[]> arcs) {
-            for (Point[] p : arcs) {
-                if (p[0] == null || p[1] == null) {
-                    continue;
-                }
-
-                int endX = (int) p[0].getX();
-                int endY = (int) p[0].getY();
-                int startX = (int) p[1].getX();
-                int startY = (int) p[1].getY();
-
-                drawArrow(g2d, startX, startY, endX, endY, color);
+        public void drawArcs(Graphics2D g2d, Color color, List<Arc> arcs) {
+            for (Arc arc : arcs) {
+                drawArrow(g2d, arc.x1, arc.y1, arc.x2, arc.y2, color);
             }
-
         }
 
         /**
@@ -369,7 +369,7 @@ public enum TargetingOverlay {
                 assembleArcs(gameView.getCombat());
             }
 
-            if (arcsCombat.isEmpty() && arcsOther.isEmpty()) { return; }
+            if (arcsFoe.isEmpty() && arcsFriend.isEmpty()) { return; }
 
             Graphics2D g2d = (Graphics2D) g;
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -384,12 +384,10 @@ public enum TargetingOverlay {
                 colorCombat = new Color(255, 0, 0, 153); 
             }
 
-            drawArcs(g2d, colorOther, arcsOther);
-            drawArcs(g2d, colorCombat, arcsCombat);
+            drawArcs(g2d, colorOther, arcsFriend);
+            drawArcs(g2d, colorCombat, arcsFoe);
 
             FView.SINGLETON_INSTANCE.getFrame().repaint(); // repaint the match UI
-            
         }
-
     }
 }

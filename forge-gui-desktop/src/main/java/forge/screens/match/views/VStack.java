@@ -38,7 +38,6 @@ import forge.ImageCache;
 import forge.card.CardDetailUtil;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.game.GameView;
-import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
 import forge.gui.framework.DragCell;
@@ -75,6 +74,12 @@ public enum VStack implements IVDoc<CStack> {
 
     // Other fields
     private static AbilityMenu abilityMenu = new AbilityMenu();
+
+    private static StackInstanceTextArea hoveredItem;
+
+    public StackInstanceTextArea getHoveredItem() {
+        return hoveredItem;
+    }
 
     private VStack() {
     }
@@ -145,15 +150,19 @@ public enum VStack implements IVDoc<CStack> {
     }
 
     @SuppressWarnings("serial")
-    private static class StackInstanceTextArea extends SkinnedTextArea {
-        private static final int PADDING = 3;
-        private static final int CARD_WIDTH = 50;
-        private static final int CARD_HEIGHT = Math.round((float)CARD_WIDTH * CardPanel.ASPECT_RATIO);
+    public static class StackInstanceTextArea extends SkinnedTextArea {
+        public static final int PADDING = 3;
+        public static final int CARD_WIDTH = 50;
+        public static final int CARD_HEIGHT = Math.round((float)CARD_WIDTH * CardPanel.ASPECT_RATIO);
 
-        private final CardView sourceCard;
+        private final StackItemView item;
 
-        public StackInstanceTextArea(final GameView gameView, final StackItemView item) {
-            sourceCard = item.getSourceCard();
+        public StackItemView getItem() {
+            return item;
+        }
+
+        public StackInstanceTextArea(final GameView gameView, final StackItemView item0) {
+            item = item0;
 
             final PlayerView localPlayer = PlayerView.get(MatchUtil.getCurrentPlayer());
             final String txt = (item.isOptionalTrigger() && item.getActivatingPlayer().equals(localPlayer)
@@ -173,8 +182,16 @@ public enum VStack implements IVDoc<CStack> {
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
+                    hoveredItem = StackInstanceTextArea.this;
                     if (!txt.startsWith("Morph ")) {
                         CMatchUI.SINGLETON_INSTANCE.setCard(item.getSourceCard());
+                    }
+                }
+
+                @Override
+                public void mouseExited(final MouseEvent e) {
+                    if (hoveredItem == StackInstanceTextArea.this) {
+                        hoveredItem = null;
                     }
                 }
             });
@@ -208,7 +225,7 @@ public enum VStack implements IVDoc<CStack> {
             final Graphics2D g2d = (Graphics2D) g;
 
             //draw image for source card
-            final BufferedImage img = ImageCache.getImage(sourceCard, CARD_WIDTH, CARD_HEIGHT);
+            final BufferedImage img = ImageCache.getImage(item.getSourceCard(), CARD_WIDTH, CARD_HEIGHT);
             if (img != null) {
                 g2d.drawImage(img, null, PADDING, PADDING);
             }

@@ -67,6 +67,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      * Constant <code>ASPECT_RATIO=3.5f / 2.5f</code>.
      */
     public static final float ASPECT_RATIO = 3.5f / 2.5f;
+    public static final float TARGET_ORIGIN_FACTOR_X = 0.25f;
+    public static final float TARGET_ORIGIN_FACTOR_Y = 0.5f;
 
     /**
      * Constant <code>dragAnimationPanel</code>.
