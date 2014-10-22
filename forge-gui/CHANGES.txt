@@ -15,6 +15,11 @@ You can click cards in these windows to activate them the same way you do with c
 If you close the floating window and later reopen it, it should remember its location and size.
 
 
+- Targeting Arrows for Stack -
+When hovering over items on the stack, arrows will now be displayed between that item and all of its targets (both cards and players)
+The arrow will be red if the spell/ability's activator is an opponent of the target or its controller, and blue if targeting an ally of the target or its controller
+
+
 - Smarter Card Edition Selection -
 When generating random decks or viewing unique cards only in the deck editor catalog, Forge will no longer pick an edition of the card which you don't have the image for if there's an edition of the card you do have the image for.
 
