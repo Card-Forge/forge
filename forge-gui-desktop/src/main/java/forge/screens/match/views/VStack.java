@@ -169,7 +169,6 @@ public enum VStack implements IVDoc<CStack> {
                     ? "(OPTIONAL) " : "") + item.getText();
 
             setText(txt);
-            setToolTipText(txt);
             setOpaque(true);
             setBorder(new EmptyBorder(PADDING, CARD_WIDTH + 2 * PADDING, PADDING, PADDING));
             setFocusable(false);
