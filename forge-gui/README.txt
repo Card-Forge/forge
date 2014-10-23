@@ -1293,6 +1293,28 @@ These examples should get you started with this powerful-now-that-it's-finished 
 The long awaited fixes to Blood Artist/Deathgreeter triggering with multiple other creatures is finally here. There may be some residual oddness with other triggers, so please report those if you see them so we can get that worked out. 
 
 
+- New Floating Zone Windows -
+Instead of getting a modal list view when clicking on zone icons like Graveyard or Flashback, you'll now get a modeless floating window with actual cards.
+This floating window can be moved and resized as desired and can remain open while playing.
+You can click cards in these windows to activate them the same way you do with cards in your hand, so long as there's an action you can take with them.
+If you close the floating window and later reopen it, it should remember its location and size.
+
+
+- Targeting Arrows for Stack -
+When hovering over items on the stack, arrows will now be displayed between that item and all of its targets (both cards and players).
+The arrow will be red if the spell/ability's activator is an opponent of the target or its controller, and blue if targeting an ally of the target or its controller.
+
+
+- Smarter Card Edition Selection -
+When generating random decks or viewing unique cards only in the deck editor catalog, Forge will no longer pick an edition of the card which you don't have the image for if there's an edition of the card you do have the image for.
+
+
+- Improved Player Panel Display -
+Players' avatars will no display larger.
+Players' life totals will no longer get cut off.
+Players' zone/mana counts will no longer overlap the icon, instead shrinking to fit if needed.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 
