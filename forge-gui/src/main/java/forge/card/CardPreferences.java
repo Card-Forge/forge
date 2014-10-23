@@ -52,9 +52,6 @@ public class CardPreferences {
         catch (FileNotFoundException e) {
             //ok if file not found
         }
-        catch (MalformedURLException e) {
-            //ok if file not found
-        }
         catch (Exception e) {
             e.printStackTrace();
         }

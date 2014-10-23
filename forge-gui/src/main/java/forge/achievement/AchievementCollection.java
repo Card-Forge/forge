@@ -1,7 +1,6 @@
 package forge.achievement;
 
 import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -128,9 +127,6 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
             }
         }
         catch (FileNotFoundException e) {
-            //ok if file not found
-        }
-        catch (MalformedURLException e) {
             //ok if file not found
         }
         catch (Exception e) {
