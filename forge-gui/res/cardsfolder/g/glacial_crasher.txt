@@ -5,6 +5,7 @@ PT:5/5
 K:Trample
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack. | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME can't attack unless there is a Mountain on the battlefield.
 SVar:X:Count$Valid Mountain
+SVar:RemRandomDeck:True
 DeckNeeds:Color$Red
 SVar:BuffedBy:Mountain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glacial_crasher.jpg
