@@ -2067,7 +2067,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final RegisteredPlayer getRegisteredPlayer() {
-        return game.getMatch().getPlayers().get(game.getPlayers().indexOf(this));
+        return game.getMatch().getPlayers().get(game.getRegisteredPlayers().indexOf(this));
     }
 
     public final boolean isMindSlaved() {
