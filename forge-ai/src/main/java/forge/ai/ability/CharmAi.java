@@ -24,7 +24,8 @@ public class CharmAi extends SpellAbilityAi {
         final int min = sa.hasParam("MinCharmNum") ? Integer.parseInt(sa.getParam("MinCharmNum")) : num;
         boolean timingRight = sa.isTrigger(); //is there a reason to play the charm now?
 
-        
+        // reset the chosen list. Otherwise it will be locked in forever
+        sa.setChosenList(null);
         List<AbilitySub> chosenList = chooseOptionsAi(sa, ai, timingRight, num, min, false);
 
         if (chosenList.isEmpty()) {
@@ -51,7 +52,7 @@ public class CharmAi extends SpellAbilityAi {
             return choices.subList(1, choices.size());
         }
         
-        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+        AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         for (int i = 0; i < num; i++) {
             AbilitySub thisPick = null;
             for (SpellAbility sub : choices) {
