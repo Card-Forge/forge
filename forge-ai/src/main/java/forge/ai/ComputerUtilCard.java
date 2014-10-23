@@ -8,13 +8,13 @@ import com.google.common.collect.Iterables;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.MagicColor.Constant;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
-import forge.game.card.CardCollectionView;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
@@ -904,6 +904,24 @@ public class ComputerUtilCard {
             	} else {
                     chosen.add(prominence.get(0));
             	}
+            }
+            else if (logic.equals("MostExcessOpponentControls")) {
+            	int maxExcess = 0;
+            	String bestColor = Constant.GREEN;
+            	for (byte color : MagicColor.WUBRG) {
+            		CardCollectionView ailist = ai.getCardsIn(ZoneType.Battlefield);
+            		CardCollectionView opplist = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
+            		
+            		ailist = CardLists.filter(ailist, CardPredicates.isColor(color));
+            		opplist = CardLists.filter(opplist, CardPredicates.isColor(color));
+
+                    int excess = evaluatePermanentList(opplist) - evaluatePermanentList(ailist);
+                    if (excess > maxExcess) {
+                    	maxExcess = excess;
+                    	bestColor = MagicColor.toLongString(color);
+                    }
+                }
+                chosen.add(bestColor);
             }
             else if (logic.equals("MostProminentKeywordInComputerDeck")) {
                 CardCollectionView list = ai.getAllCards();

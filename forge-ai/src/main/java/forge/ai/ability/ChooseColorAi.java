@@ -1,10 +1,16 @@
 package forge.ai.ability;
 
 import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
+import forge.card.MagicColor;
+import forge.card.MagicColor.Constant;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -22,6 +28,7 @@ public class ChooseColorAi extends SpellAbilityAi {
         if (!sa.hasParam("AILogic")) {
             return false;
         }
+        final String logic = sa.getParam("AILogic");
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;
@@ -44,6 +51,22 @@ public class ChooseColorAi extends SpellAbilityAi {
         		return false;
         	}
             return true;
+        }
+        
+        if (logic.equals("MostExcessOpponentControls")) {
+        	for (byte color : MagicColor.WUBRG) {
+        		CardCollectionView ailist = ai.getCardsIn(ZoneType.Battlefield);
+        		CardCollectionView opplist = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
+        		
+        		ailist = CardLists.filter(ailist, CardPredicates.isColor(color));
+        		opplist = CardLists.filter(opplist, CardPredicates.isColor(color));
+
+                int excess = ComputerUtilCard.evaluatePermanentList(opplist) - ComputerUtilCard.evaluatePermanentList(ailist);
+                if (excess > 4) {
+                	return true;
+                }
+            }
+        	return false;
         }
         boolean chance = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
         return chance;
