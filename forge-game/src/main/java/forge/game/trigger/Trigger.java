@@ -214,7 +214,7 @@ public abstract class Trigger extends TriggerReplacementBase {
     public final boolean requirementsCheck(Game game) {
 
         if (this.mapParams.containsKey("APlayerHasMoreLifeThanEachOther")) {
-            int highestLife = -50; // Negative base just in case a few Lich's or Platinum Angels are running around
+            int highestLife = Integer.MIN_VALUE; // Negative base just in case a few Lich's or Platinum Angels are running around
             final List<Player> healthiest = new ArrayList<Player>();
             for (final Player p : game.getPlayers()) {
                 if (p.getLife() > highestLife) {
