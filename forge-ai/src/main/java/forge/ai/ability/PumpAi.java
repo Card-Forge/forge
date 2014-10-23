@@ -164,7 +164,7 @@ public class PumpAi extends PumpAiBase {
             final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(),
                     sa.getParam("Defined"), sa);
 
-            if (cards.size() == 0) {
+            if (cards.isEmpty()) {
                 return false;
             }
 
@@ -550,6 +550,12 @@ public class PumpAi extends PumpAiBase {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         if (tgt == null) {
+        	final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+        	for (final Card card : cards) {
+        		if (objects.contains(card)) {
+        			return true;
+        		}
+        	}
             // For pumps without targeting restrictions, just return immediately until this is fleshed out.
             return false;
         }
