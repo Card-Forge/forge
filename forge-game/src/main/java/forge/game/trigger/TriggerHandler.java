@@ -300,7 +300,7 @@ public class TriggerHandler {
 
         for (final Trigger t : activeTriggers) {
             if (!t.isStatic() && t.getHostCard().getController().equals(player) && canRunTrigger(t, mode, runParams)) {
-                if (runParams.containsKey("Card")) {
+                if (runParams.containsKey("Card") && runParams.get("Card") instanceof Card) {
                     card = (Card) runParams.get("Card");
                     if (runParams.containsKey("Destination") && !ZoneType.Battlefield.name().equals(runParams.get("Destination"))) {
                         card = CardUtil.getLKICopy(card);
