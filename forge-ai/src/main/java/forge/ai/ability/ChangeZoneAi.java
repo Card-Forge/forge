@@ -205,6 +205,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 for (Card attacker : attackers) {
                     if (attacker.getCMC() < source.getCMC()) {
                         lowerCMC = true;
+                        break;
                     }
                 }
                 if (!lowerCMC) {
@@ -231,7 +232,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         Iterable<Player> pDefined = Lists.newArrayList(source.getController());
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        if ((tgt != null) && tgt.canTgtPlayer()) {
+        if (tgt != null && tgt.canTgtPlayer()) {
             boolean isCurse = sa.isCurse();
             if (isCurse && sa.canTarget(opponent)) {
                 sa.getTargets().add(opponent);
@@ -280,6 +281,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 list = CardLists.getValidCards(list, type, source.getController(), source);
             }
 
+            if (!activateForCost && list.isEmpty()) {
+                return false;
+            }
+
             String num = sa.getParam("ChangeNum");
             if (num != null) {
                 if (num.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
@@ -288,10 +293,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     xPay = Math.min(xPay, list.size());
                     source.setSVar("PayX", Integer.toString(xPay));
                 }
-            }
-
-            if (!activateForCost && list.isEmpty()) {
-                return false;
             }
         }
 
@@ -450,8 +451,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         int minSize = Integer.MAX_VALUE;
         String minType = null;
 
-        for (int i = 0; i < basics.size(); i++) {
-            final String b = basics.get(i);
+        for (String b : basics) {
             final int num = CardLists.getType(combined, b).size();
             if (num < minSize) {
                 minType = b;
@@ -574,7 +574,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // non-targeted retrieval
             final List<Card> retrieval = sa.knownDetermineDefined(sa.getParam("Defined"));
 
-            if ((retrieval == null) || retrieval.isEmpty()) {
+            if (retrieval == null || retrieval.isEmpty()) {
                 return false;
             }
 
@@ -608,6 +608,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 for (final Card c : retrieval) {
                     if (objects.contains(c)) {
                         contains = true;
+                        break;
                     }
                 }
                 if (!contains) {
@@ -621,12 +622,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN1)) {
                 return false;
             }
-            if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                    && handSize > 1) {
+            if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && handSize > 1) {
                 return false;
             }
-            if (ai.getGame().getPhaseHandler().isPlayerTurn(ai)
-                    && handSize >= ai.getMaxHandSize()) {
+            if (ai.getGame().getPhaseHandler().isPlayerTurn(ai) && handSize >= ai.getMaxHandSize()) {
                 return false;
             }
         }
@@ -796,7 +795,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     ComputerUtilCard.sortByEvaluateCreature(combatants);
 
                     for (final Card c : combatants) {
-                        if (c.getShieldCount() == 0 && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) && c.getOwner() == ai && !c.isToken()) {
+                        if (c.getShieldCount() == 0 && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) 
+                        		&& c.getOwner() == ai && !c.isToken()) {
                             sa.getTargets().add(c);
                             return true;
                         }
@@ -1058,7 +1058,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
             if (choice == null) { // can't find anything left
-                if ((sa.getTargets().getNumTargeted() == 0) || (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa))) {
+                if ((sa.getTargets().getNumTargeted() == 0) || sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
                     sa.resetTargets();
                     return false;
                 } else {
@@ -1089,8 +1089,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean knownOriginTriggerAI(final Player ai, final SpellAbility sa,
-            final boolean mandatory) {
+    private static boolean knownOriginTriggerAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
 
         if (sa.getTargetRestrictions() == null) {
             // Just in case of Defined cases
@@ -1124,7 +1123,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 fetchList.remove(source);
             }
         }
-        
+        if (fetchList.isEmpty()) {
+            return null;
+        }
         String type = sa.getParam("ChangeType");
         if (type == null) {
             type = "Card";
