@@ -1837,7 +1837,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
 
     public final SpellAbility getFirstSpellAbility() {
-        return currentState.getNonManaAbilities().getFirst();
+        return currentState.getNonManaAbilities().isEmpty() ? null : currentState.getNonManaAbilities().getFirst();
     }
 
     /**
