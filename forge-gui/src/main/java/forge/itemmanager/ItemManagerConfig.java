@@ -6,8 +6,8 @@ import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.XmlUtil;
 
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -211,7 +211,7 @@ public enum ItemManagerConfig {
     public static void load() {
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            final Document document = builder.parse(ForgeConstants.ITEM_VIEW_PREFS_FILE);
+            final Document document = builder.parse(new File(ForgeConstants.ITEM_VIEW_PREFS_FILE));
             final NodeList configs = document.getElementsByTagName("config");
             for (int i = 0; i < configs.getLength(); i++) {
                 try { //capture enum parse errors without losing other preferences

@@ -1,5 +1,6 @@
 package forge.achievement;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -116,7 +117,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
     public void load() {
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            final Document document = builder.parse(filename);
+            final Document document = builder.parse(new File(filename));
             final NodeList nodes = document.getElementsByTagName("a");
             for (int i = 0; i < nodes.getLength(); i++) {
                 final Element el = (Element)nodes.item(i);

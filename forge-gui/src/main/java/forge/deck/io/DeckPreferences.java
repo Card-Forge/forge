@@ -4,8 +4,8 @@ import forge.deck.DeckProxy;
 import forge.properties.ForgeConstants;
 import forge.util.XmlUtil;
 
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -93,7 +93,7 @@ public class DeckPreferences {
 
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            final Document document = builder.parse(ForgeConstants.DECK_PREFS_FILE);
+            final Document document = builder.parse(new File(ForgeConstants.DECK_PREFS_FILE));
 
             final Element root = (Element)document.getElementsByTagName("preferences").item(0);
             currentDeck = root.getAttribute("currentDeck");

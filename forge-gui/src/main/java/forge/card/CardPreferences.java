@@ -5,8 +5,8 @@ import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.util.XmlUtil;
 
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +39,7 @@ public class CardPreferences {
 
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            final Document document = builder.parse(ForgeConstants.CARD_PREFS_FILE);
+            final Document document = builder.parse(new File(ForgeConstants.CARD_PREFS_FILE));
             final NodeList cards = document.getElementsByTagName("card");
             for (int i = 0; i < cards.getLength(); i++) {
                 final Element el = (Element)cards.item(i);
