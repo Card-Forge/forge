@@ -103,6 +103,8 @@ public enum TargetingOverlay {
         cardPanels.clear();
         cardsVisualized.clear();
 
+        StackInstanceTextArea activeStackItem = VStack.SINGLETON_INSTANCE.getHoveredItem();
+
         switch (CDock.SINGLETON_INSTANCE.getArcState()) {
             case 0:
                 return;
@@ -119,7 +121,7 @@ public enum TargetingOverlay {
                         }
                     }
                 }
-                if (activePanel == null) { return; }
+                if (activePanel == null && activeStackItem == null) { return; }
                 break;
             default:
                 // Draw all
@@ -147,7 +149,9 @@ public enum TargetingOverlay {
 
         if (CDock.SINGLETON_INSTANCE.getArcState() == 1) {
             // Only work with the active panel
-            addArcsForCard(activePanel.getCard(), endpoints, combat);
+            if (activePanel != null) {
+                addArcsForCard(activePanel.getCard(), endpoints, combat);
+            }
         }
         else {
             // Work with all card panels currently visible
@@ -160,7 +164,6 @@ public enum TargetingOverlay {
         }
 
         //draw arrow connecting active item on stack
-        StackInstanceTextArea activeStackItem = VStack.SINGLETON_INSTANCE.getHoveredItem();
         if (activeStackItem != null) {
             Point itemLocOnScreen = activeStackItem.getLocationOnScreen();
             if (itemLocOnScreen != null) {
