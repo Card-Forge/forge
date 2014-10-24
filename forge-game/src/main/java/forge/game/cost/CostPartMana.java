@@ -30,6 +30,7 @@ public class CostPartMana extends CostPart {
     private final ManaCost cost;
     private boolean xCantBe0 = false;
     private boolean isExiledCreatureCost = false;
+    private boolean isEnchantedCreatureCost = false;
     private final String restriction;
 
     public boolean shouldPayLast() {
@@ -48,7 +49,8 @@ public class CostPartMana extends CostPart {
         this.cost = cost;
         this.xCantBe0 = "XCantBe0".equals(restriction);
         this.isExiledCreatureCost = "Exiled".equalsIgnoreCase(restriction);
-        this.restriction = xCantBe0 || isExiledCreatureCost ? null : restriction;
+        this.isEnchantedCreatureCost = "EnchantedCost".equalsIgnoreCase(restriction);
+        this.restriction = xCantBe0 || isExiledCreatureCost || isEnchantedCreatureCost? null : restriction;
     }
 
     /**
@@ -87,6 +89,11 @@ public class CostPartMana extends CostPart {
     public boolean isExiledCreatureCost() {
         return isExiledCreatureCost;
     }
+    
+    public boolean isEnchantedCreatureCost() {
+        return isEnchantedCreatureCost;
+    }
+    
     @Override
     public boolean isReusable() { return true; }
 
@@ -119,8 +126,10 @@ public class CostPartMana extends CostPart {
         if (isExiledCreatureCost() && sa.getPaidList(CostExile.HashLKIListKey)!= null && !sa.getPaidList(CostExile.HashLKIListKey).isEmpty()) {
             // back from the brink
             return sa.getPaidList(CostExile.HashLKIListKey).get(0).getManaCost();
+        } if (isEnchantedCreatureCost() && sa.getHostCard().getEnchantingCard() != null) {
+            return sa.getHostCard().getEnchantingCard().getManaCost();
         } else {
-            return getManaToPay();
+        	return getManaToPay();
         }
     }
     

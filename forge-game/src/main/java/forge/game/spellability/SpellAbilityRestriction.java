@@ -121,6 +121,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setOpponentOnly(true);
         }
 
+        if (params.containsKey("EnchantedControllerActivator")) {
+            this.setEnchantedControllerOnly(true);
+        }
+
         if (params.containsKey("OwnerOnly")) {
             this.setOwnerOnly(true);
         }
@@ -277,13 +281,18 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             return activator.equals(c.getOwner());
         }
 
-        if (activator.equals(c.getController()) && !this.isOpponentOnly()) {
+        if (activator.equals(c.getController()) && !this.isOpponentOnly() && !isEnchantedControllerOnly()) {
             return true;
         }
 
         if (activator.isOpponentOf(c.getController()) && this.isOpponentOnly()) {
             return true;
         }
+        
+        if (c.getEnchantingCard() != null && activator.equals(c.getEnchantingCard().getController()) && this.isEnchantedControllerOnly()) {
+        	return true;
+        }
+
         if (sa.isSpell() && activator.isOpponentOf(c.getController()) && c.hasKeyword("May be played by your opponent")) {
             return true;
         }
