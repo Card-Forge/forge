@@ -494,7 +494,7 @@ public class CardView extends GameEntityView {
     void updateRulesText(CardRules rules, CardTypeView type) {
         String rulesText = null;
 
-        if (type.isVanguard()) {
+        if (type.isVanguard() && rules != null) {
             rulesText = "Hand Modifier: " + rules.getHand() + 
                     "\r\nLife Modifier: " + rules.getLife();
         }
