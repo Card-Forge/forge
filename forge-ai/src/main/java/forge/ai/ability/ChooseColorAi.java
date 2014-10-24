@@ -5,7 +5,6 @@ import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.card.MagicColor;
-import forge.card.MagicColor.Constant;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
