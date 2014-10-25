@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -24,10 +25,14 @@ public class FlipCoinEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Player player = host.getController();
+        final List<GameObject> tgts = getTargets(sa);
 
         final StringBuilder sb = new StringBuilder();
 
         sb.append(player).append(" flips a coin.");
+        if (tgts != null && !tgts.isEmpty()) {
+        	sb.append(" Targeting: " + tgts + ".");
+        }
         return sb.toString();
     }
 
