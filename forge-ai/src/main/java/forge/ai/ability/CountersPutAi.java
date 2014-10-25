@@ -194,12 +194,18 @@ public class CountersPutAi extends SpellAbilityAi {
 
         // Targeting
         if (abTgt != null) {
-            sa.resetTargets();
-            // target loop
+            sa.resetTargets();            
+            
+            final boolean sacSelf = ComputerUtilCost.isSacrificeSelfCost(abCost);
 
             list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
+                	
+                	// don't put the counter on the dead creature
+                	if (sacSelf && c.equals(source)) {
+                		return false;
+                	}
                     return c.canBeTargetedBy(sa) && c.canReceiveCounters(CounterType.valueOf(type));
                 }
             });
@@ -209,6 +215,8 @@ public class CountersPutAi extends SpellAbilityAi {
             if (list.size() < abTgt.getMinTargets(source, sa)) {
                 return false;
             }
+
+            // target loop
             while (sa.getTargets().getNumTargeted() < abTgt.getMaxTargets(sa.getHostCard(), sa)) {
                 if (list.isEmpty()) {
                     if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getHostCard(), sa))
@@ -228,8 +236,8 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
 
                 if (choice == null) { // can't find anything left
-                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getHostCard(), sa))
-                            || (sa.getTargets().getNumTargeted() == 0)) {
+                    if (sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getHostCard(), sa)
+                            || sa.getTargets().getNumTargeted() == 0) {
                         sa.resetTargets();
                         return false;
                     } else {

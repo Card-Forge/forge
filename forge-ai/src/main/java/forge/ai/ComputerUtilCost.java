@@ -260,6 +260,19 @@ public class ComputerUtilCost {
         return true;
     }
     
+    public static boolean isSacrificeSelfCost(final Cost cost) {
+    	 if (cost == null) {
+             return false;
+         }
+         for (final CostPart part : cost.getCostParts()) {
+             if (part instanceof CostSacrifice) {
+                 if ("CARDNAME".equals(part.getType())) {
+                	 return true;
+                 }
+             }
+         }
+         return false;
+    }
 
     /**
      * Check creature sacrifice cost.
