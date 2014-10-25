@@ -7,10 +7,11 @@ package forge.screens.home;
  * 
  * <br><br><i>(E at beginning of class name denotes an enum.)</i>
  */
-public enum EMenuGroup { /** */
-    SANCTIONED ("Sanctioned Formats"), /** */
-    QUEST ("Quest Mode"), /** */
-    GAUNTLET ("Gauntlets"), /** */
+public enum EMenuGroup {
+    SANCTIONED ("Sanctioned Formats"),
+    ONLINE ("Online Multiplayer"),
+    QUEST ("Quest Mode"),
+    GAUNTLET ("Gauntlets"),
     SETTINGS ("Game Settings");
 
     private final String strTitle;

@@ -88,8 +88,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
 
         SUBMENU_CURRENTMENU ("CONSTRUCTED"),
         SUBMENU_SANCTIONED ("true"),
+        SUBMENU_ONLINE ("false"),
         SUBMENU_GAUNTLET ("false"),
-        SUBMENU_VARIANT ("false"),
         SUBMENU_QUEST ("false"),
         SUBMENU_SETTINGS ("false"),
         SUBMENU_UTILITIES ("false"),

@@ -8,6 +8,7 @@ import forge.screens.home.gauntlet.VSubmenuGauntletBuild;
 import forge.screens.home.gauntlet.VSubmenuGauntletContests;
 import forge.screens.home.gauntlet.VSubmenuGauntletLoad;
 import forge.screens.home.gauntlet.VSubmenuGauntletQuick;
+import forge.screens.home.online.VSubmenuOnlineLobby;
 import forge.screens.home.quest.*;
 import forge.screens.home.sanctioned.VSubmenuConstructed;
 import forge.screens.home.sanctioned.VSubmenuDraft;
@@ -29,79 +30,80 @@ import forge.screens.workshop.views.VWorkshopCatalog;
  * 
  * <br><br><i>(E at beginning of class name denotes an enum.)</i>
  */
-public enum EDocID { /** */
-    CARD_PICTURE (VPicture.SINGLETON_INSTANCE), /** */
-    CARD_DETAIL (VDetail.SINGLETON_INSTANCE), /** */
-    CARD_ANTES (VAntes.SINGLETON_INSTANCE), /** */
+public enum EDocID {
+    CARD_PICTURE (VPicture.SINGLETON_INSTANCE),
+    CARD_DETAIL (VDetail.SINGLETON_INSTANCE),
+    CARD_ANTES (VAntes.SINGLETON_INSTANCE),
 
-    EDITOR_ALLDECKS (VAllDecks.SINGLETON_INSTANCE), /** */
-    EDITOR_STATISTICS (VStatistics.SINGLETON_INSTANCE), /** */
-    EDITOR_PROBABILITIES (VProbabilities.SINGLETON_INSTANCE), /** */
-    EDITOR_CATALOG (VCardCatalog.SINGLETON_INSTANCE), /** */
-    EDITOR_CURRENTDECK (VCurrentDeck.SINGLETON_INSTANCE), /** */
-    EDITOR_DECKGEN (VDeckgen.SINGLETON_INSTANCE), /** */
+    EDITOR_ALLDECKS (VAllDecks.SINGLETON_INSTANCE),
+    EDITOR_STATISTICS (VStatistics.SINGLETON_INSTANCE),
+    EDITOR_PROBABILITIES (VProbabilities.SINGLETON_INSTANCE),
+    EDITOR_CATALOG (VCardCatalog.SINGLETON_INSTANCE),
+    EDITOR_CURRENTDECK (VCurrentDeck.SINGLETON_INSTANCE),
+    EDITOR_DECKGEN (VDeckgen.SINGLETON_INSTANCE),
     
-    WORKSHOP_CATALOG (VWorkshopCatalog.SINGLETON_INSTANCE), /** */
-    WORKSHOP_CARDDESIGNER (VCardDesigner.SINGLETON_INSTANCE), /** */
-    WORKSHOP_CARDSCRIPT (VCardScript.SINGLETON_INSTANCE), /** */
+    WORKSHOP_CATALOG (VWorkshopCatalog.SINGLETON_INSTANCE),
+    WORKSHOP_CARDDESIGNER (VCardDesigner.SINGLETON_INSTANCE),
+    WORKSHOP_CARDSCRIPT (VCardScript.SINGLETON_INSTANCE),
 
-    HOME_QUESTDRAFTS (VSubmenuQuestDraft.SINGLETON_INSTANCE), /** */
-    HOME_QUESTCHALLENGES (VSubmenuChallenges.SINGLETON_INSTANCE), /** */
-    HOME_QUESTDUELS (VSubmenuDuels.SINGLETON_INSTANCE), /** */
-    HOME_QUESTDATA (VSubmenuQuestData.SINGLETON_INSTANCE), /** */
-    HOME_QUESTDECKS (VSubmenuQuestDecks.SINGLETON_INSTANCE), /** */
-    HOME_QUESTPREFS (VSubmenuQuestPrefs.SINGLETON_INSTANCE), /** */
-    HOME_GAUNTLETBUILD (VSubmenuGauntletBuild.SINGLETON_INSTANCE), /** */
-    HOME_GAUNTLETLOAD (VSubmenuGauntletLoad.SINGLETON_INSTANCE), /** */
-    HOME_GAUNTLETQUICK (VSubmenuGauntletQuick.SINGLETON_INSTANCE), /** */
-    HOME_GAUNTLETCONTESTS (VSubmenuGauntletContests.SINGLETON_INSTANCE), /** */
-    HOME_PREFERENCES (VSubmenuPreferences.SINGLETON_INSTANCE), /** */
-    HOME_ACHIEVEMENTS (VSubmenuAchievements.SINGLETON_INSTANCE), /** */
-    HOME_AVATARS (VSubmenuAvatars.SINGLETON_INSTANCE), /** */
-    HOME_UTILITIES (VSubmenuDownloaders.SINGLETON_INSTANCE), /** */
-    HOME_CONSTRUCTED (VSubmenuConstructed.SINGLETON_INSTANCE), /** */
-    HOME_DRAFT (VSubmenuDraft.SINGLETON_INSTANCE), /** */
-    HOME_SEALED (VSubmenuSealed.SINGLETON_INSTANCE), /** */
-    HOME_WINSTON (VSubmenuWinston.SINGLETON_INSTANCE), /** */
+    HOME_QUESTDRAFTS (VSubmenuQuestDraft.SINGLETON_INSTANCE),
+    HOME_QUESTCHALLENGES (VSubmenuChallenges.SINGLETON_INSTANCE),
+    HOME_QUESTDUELS (VSubmenuDuels.SINGLETON_INSTANCE),
+    HOME_QUESTDATA (VSubmenuQuestData.SINGLETON_INSTANCE),
+    HOME_QUESTDECKS (VSubmenuQuestDecks.SINGLETON_INSTANCE),
+    HOME_QUESTPREFS (VSubmenuQuestPrefs.SINGLETON_INSTANCE),
+    HOME_GAUNTLETBUILD (VSubmenuGauntletBuild.SINGLETON_INSTANCE),
+    HOME_GAUNTLETLOAD (VSubmenuGauntletLoad.SINGLETON_INSTANCE),
+    HOME_GAUNTLETQUICK (VSubmenuGauntletQuick.SINGLETON_INSTANCE),
+    HOME_GAUNTLETCONTESTS (VSubmenuGauntletContests.SINGLETON_INSTANCE),
+    HOME_PREFERENCES (VSubmenuPreferences.SINGLETON_INSTANCE),
+    HOME_ACHIEVEMENTS (VSubmenuAchievements.SINGLETON_INSTANCE),
+    HOME_AVATARS (VSubmenuAvatars.SINGLETON_INSTANCE),
+    HOME_UTILITIES (VSubmenuDownloaders.SINGLETON_INSTANCE),
+    HOME_CONSTRUCTED (VSubmenuConstructed.SINGLETON_INSTANCE),
+    HOME_DRAFT (VSubmenuDraft.SINGLETON_INSTANCE),
+    HOME_SEALED (VSubmenuSealed.SINGLETON_INSTANCE),
+    HOME_WINSTON (VSubmenuWinston.SINGLETON_INSTANCE),
+    HOME_LOBBY (VSubmenuOnlineLobby.SINGLETON_INSTANCE),
     HOME_RELEASE_NOTES (VSubmenuReleaseNotes.SINGLETON_INSTANCE),
 
-    REPORT_MESSAGE (VPrompt.SINGLETON_INSTANCE), /** */
-    REPORT_STACK (VStack.SINGLETON_INSTANCE), /** */
-    REPORT_COMBAT (VCombat.SINGLETON_INSTANCE), /** */
-    REPORT_LOG (VLog.SINGLETON_INSTANCE), /** */
-    REPORT_PLAYERS (VPlayers.SINGLETON_INSTANCE), /** */
+    REPORT_MESSAGE (VPrompt.SINGLETON_INSTANCE),
+    REPORT_STACK (VStack.SINGLETON_INSTANCE),
+    REPORT_COMBAT (VCombat.SINGLETON_INSTANCE),
+    REPORT_LOG (VLog.SINGLETON_INSTANCE),
+    REPORT_PLAYERS (VPlayers.SINGLETON_INSTANCE),
 
-    DEV_MODE (VDev.SINGLETON_INSTANCE), /** */
-    BUTTON_DOCK (VDock.SINGLETON_INSTANCE), /** */
+    DEV_MODE (VDev.SINGLETON_INSTANCE),
+    BUTTON_DOCK (VDock.SINGLETON_INSTANCE),
 
     // Non-user battlefields (AI or teammate), use setDoc to register.
-    FIELD_0 (null), /** */
-    FIELD_1 (null), /** */
-    FIELD_2 (null), /** */
-    FIELD_3 (null), /** */
-    FIELD_4 (null), /** */
-    FIELD_5 (null), /** */
-    FIELD_6 (null), /** */
-    FIELD_7 (null), /** */
+    FIELD_0 (null),
+    FIELD_1 (null),
+    FIELD_2 (null),
+    FIELD_3 (null),
+    FIELD_4 (null),
+    FIELD_5 (null),
+    FIELD_6 (null),
+    FIELD_7 (null),
 
     // Non-user hands (AI or teammate), use setDoc to register.
-    HAND_0 (null), /** */
-    HAND_1 (null), /** */
-    HAND_2 (null), /** */
-    HAND_3 (null), /** */
-    HAND_4 (null), /** */
-    HAND_5 (null), /** */
-    HAND_6 (null), /** */
-    HAND_7 (null), /** */
+    HAND_0 (null),
+    HAND_1 (null),
+    HAND_2 (null),
+    HAND_3 (null),
+    HAND_4 (null),
+    HAND_5 (null),
+    HAND_6 (null),
+    HAND_7 (null),
 
-    COMMAND_0 (null), /** */
-    COMMAND_1 (null), /** */
-    COMMAND_2 (null), /** */
-    COMMAND_3 (null), /** */
-    COMMAND_4 (null), /** */
-    COMMAND_5 (null), /** */
-    COMMAND_6 (null), /** */
-    COMMAND_7 (null); /** */
+    COMMAND_0 (null),
+    COMMAND_1 (null),
+    COMMAND_2 (null),
+    COMMAND_3 (null),
+    COMMAND_4 (null),
+    COMMAND_5 (null),
+    COMMAND_6 (null),
+    COMMAND_7 (null);
 
     public final static EDocID[] Commands = new EDocID[] {COMMAND_0, COMMAND_1, COMMAND_2, COMMAND_3, COMMAND_4, COMMAND_5, COMMAND_6, COMMAND_7};
     public final static EDocID[] Fields = new EDocID[] {FIELD_0, FIELD_1, FIELD_2, FIELD_3, FIELD_4, FIELD_5, FIELD_6, FIELD_7};
