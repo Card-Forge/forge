@@ -19,7 +19,6 @@ import java.util.concurrent.CopyOnWriteArraySet;
 
 
 public class NetServer {
-
     private final Server srv = new Server();
     private final Set<ClientSocket> _openSockets = new CopyOnWriteArraySet<ClientSocket>();
 
@@ -42,21 +41,17 @@ public class NetServer {
     }
     
     @SuppressWarnings("serial")
-    public class GameServlet extends WebSocketServlet
-    {
+    public class GameServlet extends WebSocketServlet {
         @Override
         public WebSocket doWebSocketConnect(HttpServletRequest request, String protocol) {
             System.out.printf("Connection from %s recieved%n", request.getRemoteAddr());
             return new ClientSocket();
         }
     }
-    
-    
-    public class ClientSocket implements WebSocket.OnTextMessage, IClientSocket
-    {
+
+    public class ClientSocket implements WebSocket.OnTextMessage, IClientSocket {
         private Connection _connection;
         private IConnectionObserver _client;
-        
 
         @Override
         public void onClose(int closeCode, String message) {
@@ -64,7 +59,7 @@ public class NetServer {
             _openSockets.remove(_client);
             _client.onConnectionClosed();
         }
-        
+
         public void send(String data)  {
             try {
                 _connection.sendMessage(data);
@@ -78,11 +73,11 @@ public class NetServer {
         public void onMessage(String data) {
             _client.onMessage(data);
         }
-        
+
         public boolean isOpen() {
             return _connection.isOpen();
         }
-             
+
         @Override
         public void onOpen(Connection connection) {
             _connection = connection;
@@ -95,10 +90,9 @@ public class NetServer {
             _connection.close(1000, farewell);
         }
     }
-    
+
     public void listen(int port) {
-        if (!srv.isStarted())
-        {
+        if (!srv.isStarted()) {
             portNumber = port;
             URI serverUri = null;
             try {
@@ -108,10 +102,10 @@ public class NetServer {
 
                 String host = connector.getHost();
                 serverUri = new URI(String.format("ws://%s:%d/", host == null ? "localhost" : host ,port));
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
             	throw new RuntimeException(e);
             }
-            
             System.out.println("Server started @ " + serverUri);
         }
         else {
@@ -123,9 +117,9 @@ public class NetServer {
         try {
             srv.stop();
             portNumber = -1;
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
         	throw new RuntimeException(e);
         }
     }
-    
 }

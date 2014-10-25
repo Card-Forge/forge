@@ -77,7 +77,6 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
      */
     @Override
     public void initialize() {
-
         Singletons.getControl().getForgeMenu().setProvider(this);
 
         selectPrevious();
