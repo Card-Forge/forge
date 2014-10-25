@@ -975,7 +975,7 @@ public class PlayerControllerHuman extends PlayerController {
         for (int i = 0; i < results.length; i++) {
             strResults[i] = labelsSrc[results[i] ? 0 : 1];
         }
-        return SGuiChoose.one(sa.getHostCard().getName() + " - Choose a result", strResults) == labelsSrc[0];
+        return SGuiChoose.one(sa.getHostCard().getName() + " - Choose a result", strResults).equals(labelsSrc[0]);
     }
 
     @Override
