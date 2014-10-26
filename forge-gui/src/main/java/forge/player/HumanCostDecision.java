@@ -308,7 +308,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
-        CardCollection toExile = Card.getList(SGuiChoose.many("Exile from " + cost.getFrom(), "To be exiled", count - nNeeded, CardView.getCollection(typeList), null));
+        CardCollection toExile = Card.getList(SGuiChoose.many("Exile from " + cost.getFrom(), "To be exiled", nNeeded, CardView.getCollection(typeList), null));
         return PaymentDecision.card(toExile);
     }
     
