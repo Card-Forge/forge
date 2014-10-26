@@ -999,6 +999,26 @@ public class ComputerUtil {
         return false;
     }
 
+    public static boolean hasAFogEffect(final Player ai) {
+        final CardCollection all = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
+        
+        all.addAll(ai.getCardsActivableInExternalZones(true));
+        all.addAll(ai.getCardsIn(ZoneType.Hand));
+    
+        for (final Card c : all) {
+            for (final SpellAbility sa : c.getSpellAbilities()) {
+                if (sa.getApi() != ApiType.Fog) {
+                    continue;
+                }
+                if (!ComputerUtilCost.canPayCost(sa, ai)) {
+                    continue;
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static int possibleNonCombatDamage(Player ai) {
         int damage = 0;
         final CardCollection all = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));

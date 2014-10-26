@@ -754,65 +754,69 @@ public class AiBlockController {
         // == 1. choose best blocks first ==
         makeGoodBlocks(combat);
         makeGangBlocks(combat);
-        if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
-            makeTradeBlocks(combat); // choose necessary trade blocks
-        }
-        // if life is in danger
-        if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
-            makeChumpBlocks(combat); // choose necessary chump blocks
-        }
-        // if life is still in danger
-        // Reinforce blockers blocking attackers with trample if life is still
-        // in danger
-        if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
-            reinforceBlockersAgainstTrample(combat);
-        }
-        // Support blockers not destroying the attacker with more blockers to
-        // try to kill the attacker
-        if (!ComputerUtilCombat.lifeInDanger(ai, combat)) {
-            reinforceBlockersToKill(combat);
-        }
-
-        // == 2. If the AI life would still be in danger make a safer approach ==
-        if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
-            lifeInDanger = true;
-            clearBlockers(combat, possibleBlockers); // reset every block assignment
-            makeTradeBlocks(combat); // choose necessary trade blocks
-            // if life is in danger
-            makeGoodBlocks(combat);
-            // choose necessary chump blocks if life is still in danger
-            if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
-                makeChumpBlocks(combat);
-            }
-            // Reinforce blockers blocking attackers with trample if life is
-            // still in danger
-            if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
-                reinforceBlockersAgainstTrample(combat);
-            }
-            makeGangBlocks(combat);
-            reinforceBlockersToKill(combat);
-        }
-
-        // == 3. If the AI life would be in serious danger make an even safer approach ==
-        if (lifeInDanger && ComputerUtilCombat.lifeInSeriousDanger(ai, combat)) {
-            clearBlockers(combat, possibleBlockers); // reset every block assignment
-            makeChumpBlocks(combat); // choose chump blocks
-            if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
-                makeTradeBlocks(combat); // choose necessary trade
-            }
-
-            if (!ComputerUtilCombat.lifeInDanger(ai, combat)) {
-                makeGoodBlocks(combat);
-            }
-            // Reinforce blockers blocking attackers with trample if life is
-            // still in danger
-            else {
-                reinforceBlockersAgainstTrample(combat);
-            }
-            makeGangBlocks(combat);
-            // Support blockers not destroying the attacker with more blockers
-            // to try to kill the attacker
-            reinforceBlockersToKill(combat);
+        
+        // When the AI holds some Fog effect, don't bother about lifeInDanger 
+        if (!ComputerUtil.hasAFogEffect(ai)) {     
+	        if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
+	            makeTradeBlocks(combat); // choose necessary trade blocks
+	        }
+	        // if life is in danger
+	        if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
+	            makeChumpBlocks(combat); // choose necessary chump blocks
+	        }
+	        // if life is still in danger
+	        // Reinforce blockers blocking attackers with trample if life is still
+	        // in danger
+	        if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
+	            reinforceBlockersAgainstTrample(combat);
+	        }
+	        // Support blockers not destroying the attacker with more blockers to
+	        // try to kill the attacker
+	        if (!ComputerUtilCombat.lifeInDanger(ai, combat)) {
+	            reinforceBlockersToKill(combat);
+	        }
+	
+	        // == 2. If the AI life would still be in danger make a safer approach ==
+	        if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
+	            lifeInDanger = true;
+	            clearBlockers(combat, possibleBlockers); // reset every block assignment
+	            makeTradeBlocks(combat); // choose necessary trade blocks
+	            // if life is in danger
+	            makeGoodBlocks(combat);
+	            // choose necessary chump blocks if life is still in danger
+	            if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
+	                makeChumpBlocks(combat);
+	            }
+	            // Reinforce blockers blocking attackers with trample if life is
+	            // still in danger
+	            if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
+	                reinforceBlockersAgainstTrample(combat);
+	            }
+	            makeGangBlocks(combat);
+	            reinforceBlockersToKill(combat);
+	        }
+	
+	        // == 3. If the AI life would be in serious danger make an even safer approach ==
+	        if (lifeInDanger && ComputerUtilCombat.lifeInSeriousDanger(ai, combat)) {
+	            clearBlockers(combat, possibleBlockers); // reset every block assignment
+	            makeChumpBlocks(combat); // choose chump blocks
+	            if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
+	                makeTradeBlocks(combat); // choose necessary trade
+	            }
+	
+	            if (!ComputerUtilCombat.lifeInDanger(ai, combat)) {
+	                makeGoodBlocks(combat);
+	            }
+	            // Reinforce blockers blocking attackers with trample if life is
+	            // still in danger
+	            else {
+	                reinforceBlockersAgainstTrample(combat);
+	            }
+	            makeGangBlocks(combat);
+	            // Support blockers not destroying the attacker with more blockers
+	            // to try to kill the attacker
+	            reinforceBlockersToKill(combat);
+	        }
         }
 
         // assign blockers that have to block
