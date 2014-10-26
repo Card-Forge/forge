@@ -114,7 +114,7 @@ public class DigEffect extends SpellAbilityEffect {
                 top.add(sourceZone.get(i));
             }
 
-            if (top.size() > 0) {
+            if (!top.isEmpty()) {
                 DelayedReveal delayedReveal = null;
                 boolean hasRevealed = true;
                 if (sa.hasParam("Reveal")) {
@@ -148,7 +148,7 @@ public class DigEffect extends SpellAbilityEffect {
                     delayedReveal = new DelayedReveal(top, srcZone, p);
                 }
 
-                if ((sa.hasParam("RememberRevealed")) && !sa.hasParam("RevealValid") && hasRevealed) {
+                if (sa.hasParam("RememberRevealed") && !sa.hasParam("RevealValid") && hasRevealed) {
                     for (final Card one : top) {
                         host.addRemembered(one);
                     }
@@ -194,7 +194,7 @@ public class DigEffect extends SpellAbilityEffect {
                     else if (allButOne) {
                         movedCards = new CardCollection(valid);
                         String prompt;
-                        if (destZone2.equals(ZoneType.Library) && (libraryPosition2 == 0)) {
+                        if (destZone2.equals(ZoneType.Library) && libraryPosition2 == 0) {
                             prompt = "Choose a card to leave on top of {player's} library";
                         }
                         else {
@@ -220,7 +220,7 @@ public class DigEffect extends SpellAbilityEffect {
                         }
 
                         movedCards = new CardCollection();
-                        while ((j < destZone1ChangeNum) || (anyNumber && (j < numToDig))) {
+                        while (j < destZone1ChangeNum || (anyNumber && j < numToDig)) {
                             // let user get choice
                             Card chosen = null;
                             if (!valid.isEmpty()) {
@@ -248,7 +248,7 @@ public class DigEffect extends SpellAbilityEffect {
                             j++;
                         }
 
-                        if (changeValid.length() > 0) {
+                        if (!changeValid.isEmpty()) {
                             game.getAction().reveal(movedCards, chooser, true,
                                     chooser + " picked " + (movedCards.size() == 1 ? "this card" : "these cards") + " from ");
                         }
