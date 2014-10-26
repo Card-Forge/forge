@@ -29,7 +29,7 @@ public class FlipACoinAi extends SpellAbilityAi {
             	}
             	sa.resetTargets();
             	for (Card c : ai.getOpponent().getCreaturesInPlay()) {
-            		if (c.canBeTargetedBy(sa)) {
+            		if (sa.canTarget(c)) {
             			sa.getTargets().add(c);
             			return true;
             		}
