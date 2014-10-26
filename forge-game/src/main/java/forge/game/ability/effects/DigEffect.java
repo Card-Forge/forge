@@ -119,7 +119,7 @@ public class DigEffect extends SpellAbilityEffect {
                 boolean hasRevealed = true;
                 if (sa.hasParam("Reveal")) {
                     delayedReveal = new DelayedReveal(top, srcZone, p);
-                    game.getAction().reveal(top, p);
+                    game.getAction().reveal(top, p, false);
                 }
                 else if (sa.hasParam("RevealOptional")) {
                     String question = "Reveal: " + Lang.joinHomogenous(top) +"?";
