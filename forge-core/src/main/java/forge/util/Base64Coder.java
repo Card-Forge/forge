@@ -31,6 +31,12 @@
 
 package forge.util;
 
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.spec.PBEParameterSpec;
+
 /**
  * A Base64 encoder/decoder.
  * <p/>
@@ -360,6 +366,28 @@ public final class Base64Coder {
         return out;
     }
 
+    private static final char[] PASSWORD = "enfldsgbnlsngdlksdsgm".toCharArray();
+    private static final byte[] SALT = {
+        (byte) 0xde, (byte) 0x33, (byte) 0x10, (byte) 0x12,
+        (byte) 0xde, (byte) 0x33, (byte) 0x10, (byte) 0x12,
+    };
+
+    public static String encrypt(String value) throws Exception {
+        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBEWithMD5AndDES");
+        SecretKey key = keyFactory.generateSecret(new PBEKeySpec(PASSWORD));
+        Cipher pbeCipher = Cipher.getInstance("PBEWithMD5AndDES");
+        pbeCipher.init(Cipher.ENCRYPT_MODE, key, new PBEParameterSpec(SALT, 20));
+        return String.valueOf(encode(pbeCipher.doFinal(value.getBytes("UTF-8"))));
+    }
+
+    public static String decrypt(String value) throws Exception {
+        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBEWithMD5AndDES");
+        SecretKey key = keyFactory.generateSecret(new PBEKeySpec(PASSWORD));
+        Cipher pbeCipher = Cipher.getInstance("PBEWithMD5AndDES");
+        pbeCipher.init(Cipher.DECRYPT_MODE, key, new PBEParameterSpec(SALT, 20));
+        return new String(pbeCipher.doFinal(decode(value)), "UTF-8");
+    }
+
     // Dummy constructor.
     /**
      * <p>
@@ -368,5 +396,4 @@ public final class Base64Coder {
      */
     private Base64Coder() {
     }
-
 } // end class Base64Coder

@@ -22,7 +22,7 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                
+                LoginDialog.login();
             }
         });
     }

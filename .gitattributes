@@ -916,6 +916,7 @@ forge-gui-desktop/src/main/java/forge/screens/home/gauntlet/VSubmenuGauntletCont
 forge-gui-desktop/src/main/java/forge/screens/home/gauntlet/VSubmenuGauntletLoad.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/gauntlet/VSubmenuGauntletQuick.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/online/CSubmenuOnlineLobby.java -text
+forge-gui-desktop/src/main/java/forge/screens/home/online/LoginDialog.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/online/VSubmenuOnlineLobby.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/package-info.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/CSubmenuChallenges.java -text
@@ -17212,4 +17213,7 @@ forge-net/src/main/java/forge/net/protocol/toserver/EchoPacketSrv.java -text
 forge-net/src/main/java/forge/net/protocol/toserver/IPacketSrv.java -text
 forge-net/src/main/java/forge/net/protocol/toserver/IncorrectPacketSrv.java -text
 forge-net/src/main/java/forge/net/protocol/toserver/package-info.java -text
+forge-net/src/main/java/forge/server/ServerUtil.java -text
+forge-net/src/main/php/login.php -text
+forge-net/src/main/php/logout.php -text
 /pom.xml svneol=native#text/xml

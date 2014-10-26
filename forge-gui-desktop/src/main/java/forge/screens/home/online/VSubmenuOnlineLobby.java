@@ -26,11 +26,12 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby> {
 
     private final StartButton btnStart  = new StartButton();
     private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
-    private final JPanel constructedFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2")); // Main content frame
+    private final JPanel frame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2")); // Main content frame
 
     private VSubmenuOnlineLobby() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        constructedFrame.setOpaque(false);
+
+        frame.setOpaque(false);
         pnlStart.setOpaque(false);
         pnlStart.add(btnStart, "align center");
     }
@@ -43,7 +44,7 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby> {
         container.setLayout(new MigLayout("insets 0, gap 0, wrap 1, ax right"));
         container.add(lblTitle, "w 80%, h 40px!, gap 0 0 15px 15px, span 2, al right, pushx");
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(constructedFrame, "gap 20px 20px 20px 0px, push, grow");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(frame, "gap 20px 20px 20px 0px, push, grow");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "gap 0 0 3.5%! 3.5%!, ax center");
 
         if (container.isShowing()) {

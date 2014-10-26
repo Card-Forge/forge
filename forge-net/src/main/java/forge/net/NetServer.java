@@ -22,14 +22,14 @@ public class NetServer {
     private final Server srv = new Server();
     private final Set<ClientSocket> _openSockets = new CopyOnWriteArraySet<ClientSocket>();
 
-    public int portNumber;
+    private int portNumber;
     
     public final int getPortNumber() {
         return portNumber;
     }
 
     public NetServer() {
-        SelectChannelConnector connector= new SelectChannelConnector();
+        SelectChannelConnector connector = new SelectChannelConnector();
         connector.setMaxIdleTime(1200000); // 20 minutes
         srv.addConnector(connector);
         

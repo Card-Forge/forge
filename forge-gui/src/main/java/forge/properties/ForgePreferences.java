@@ -25,6 +25,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
      * Preference identifiers, and their default values.
      */
     public static enum FPref {
+        ONLINE_USERNAME(""),
+        ONLINE_PASSWORD(""),
         PLAYER_NAME (""),
         CONSTRUCTED_P1_DECK_STATE(""),
         CONSTRUCTED_P2_DECK_STATE(""),
