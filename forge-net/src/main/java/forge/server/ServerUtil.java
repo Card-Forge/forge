@@ -22,15 +22,6 @@ public class ServerUtil {
         }*/
     }
 
-    public static boolean login(String username, String password) throws Exception {
-        String ip = Inet4Address.getLocalHost().getHostAddress();
-        String result = post("login.php",
-                new Argument("username", username),
-                new Argument("password", password),
-                new Argument("ip", ip));
-        return false;
-    }
-
     private static class Argument {
         private final String name;
         private final String value;
