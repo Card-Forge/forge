@@ -1,7 +1,8 @@
 package forge.screens.home.online;
 
 import java.awt.Dimension;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
@@ -16,6 +17,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FPasswordField;
 import forge.toolbox.FTextField;
+import forge.util.Base64Coder;
 import forge.view.FDialog;
 
 @SuppressWarnings("serial")
@@ -57,36 +59,29 @@ public class LoginDialog extends FDialog {
 
         txtUsername.setText(username);
 
+        txtUsername.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!txtUsername.isEmpty()) {
+                    txtPassword.selectAll();
+                    txtPassword.requestFocusInWindow();
+                }
+            }
+        });
+        txtPassword.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!txtPassword.isEmpty()) {
+                    tryLogin();
+                }
+            }
+        });
         btnLogin.setCommand(new UiCommand() {
             @Override
             public void run() {
-                String username = txtUsername.getText();
-                if (username.isEmpty()) {
-                    FOptionPane.showErrorDialog("You must enter a username", "Login Failed");
-                    txtUsername.requestFocusInWindow();
-                    return;
-                }
-                char[] password = txtPassword.getPassword();
-                if (password == null || password.length == 0) {
-                    FOptionPane.showErrorDialog("You must enter a password", "Login Failed");
-                    txtPassword.requestFocusInWindow();
-                    return;
-                }
-                try {
-                    String passwordStr = String.valueOf(password);
-                    if (ServerUtil.login(username, passwordStr)) {
-                        FModel.getPreferences().setPref(FPref.ONLINE_USERNAME, username);
-                        FModel.getPreferences().setPref(FPref.ONLINE_PASSWORD, cbRememberMe.isSelected() ? passwordStr : "");
-                        FModel.getPreferences().save();
-                        setVisible(false);
-                        return;
-                    }
-                    FOptionPane.showErrorDialog("Could not login with entered username and password.", "Login Failed");
-                    txtUsername.requestFocusInWindow();
-                }
-                catch (Exception e) {
-                    BugReporter.reportException(e, "Login Failed");
-                }
+                tryLogin();
             }
         });
         btnCancel.setCommand(new UiCommand() {
@@ -115,6 +110,36 @@ public class LoginDialog extends FDialog {
 
         if (!username.isEmpty()) {
             setDefaultFocus(txtPassword);
+        }
+    }
+
+    private void tryLogin() {
+        String username = txtUsername.getText();
+        if (username.isEmpty()) {
+            FOptionPane.showErrorDialog("You must enter a username", "Login Failed");
+            txtUsername.requestFocusInWindow();
+            return;
+        }
+        char[] password = txtPassword.getPassword();
+        if (password == null || password.length == 0) {
+            FOptionPane.showErrorDialog("You must enter a password", "Login Failed");
+            txtPassword.requestFocusInWindow();
+            return;
+        }
+        try {
+            String encryptedPassword = Base64Coder.encrypt(String.valueOf(password));
+            if (ServerUtil.login(username, encryptedPassword)) {
+                FModel.getPreferences().setPref(FPref.ONLINE_USERNAME, username);
+                FModel.getPreferences().setPref(FPref.ONLINE_PASSWORD, cbRememberMe.isSelected() ? encryptedPassword : "");
+                FModel.getPreferences().save();
+                setVisible(false);
+                return;
+            }
+            FOptionPane.showErrorDialog("Could not login with entered username and password.", "Login Failed");
+            txtUsername.requestFocusInWindow();
+        }
+        catch (Exception e) {
+            BugReporter.reportException(e, "Login Failed");
         }
     }
 }
