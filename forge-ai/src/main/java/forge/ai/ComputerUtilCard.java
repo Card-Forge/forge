@@ -14,6 +14,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -591,6 +592,35 @@ public class ComputerUtilCard {
         Combat combat = new Combat(ai);
         aiAtk.declareAttackers(combat);
         return combat.isAttacking(card);
+    }
+
+    public static boolean canBeKilledByRoyalAssassin(final Player ai, final Card card) {
+    	boolean wasTapped = card.isTapped();
+    	for (Player opp : ai.getOpponents()) {
+    		for (Card c : opp.getCardsIn(ZoneType.Battlefield)) {
+    			for (SpellAbility sa : c.getSpellAbilities()) {
+                    if (sa.getApi() != ApiType.Destroy) {
+                        continue;
+                    }
+                    if (!ComputerUtilCost.canPayCost(sa, opp)) {
+                        continue;
+                    }
+                    sa.setActivatingPlayer(opp);
+                    if (sa.canTarget(card)) {
+                    	continue;
+                    }
+                    // check whether the ability can only target tapped creatures
+                	card.setTapped(true);
+                    if (!sa.canTarget(card)) {
+                    	card.setTapped(wasTapped);
+                    	continue;
+                    }
+                	card.setTapped(wasTapped);
+                    return true;
+    			}
+    		}
+    	}
+    	return false;
     }
     
     /**

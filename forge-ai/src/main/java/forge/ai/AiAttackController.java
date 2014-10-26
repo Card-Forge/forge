@@ -973,10 +973,18 @@ public class AiAttackController {
                 }
             }
         }
-        if (ComputerUtilCard.canBeBlockedProfitably(defendingOpponent, attacker)) {
+        
+        if (!attacker.hasKeyword("vigilance") && ComputerUtilCard.canBeKilledByRoyalAssassin(ai, attacker)) {
             canKillAllDangerous = false;
             canBeKilled = true;
+            canBeKilledByOne = true;
+            isWorthLessThanAllKillers = false;
+            hasCombatEffect = false;
         }
+        else if (ComputerUtilCard.canBeBlockedProfitably(defendingOpponent, attacker)) {
+            canKillAllDangerous = false;
+            canBeKilled = true;
+        } 
 
         // if the creature cannot block and can kill all opponents they might as
         // well attack, they do nothing staying back
