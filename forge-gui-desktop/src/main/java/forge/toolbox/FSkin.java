@@ -2505,6 +2505,41 @@ public class FSkin {
             super.paintComponent(g);
         }
     }
+    public static class SkinnedPasswordField extends JPasswordField implements ISkinnedComponent<JTextField> {
+        private static final long serialVersionUID = 1557674285031452868L;
+
+        private JTextComponentSkin<JTextField> skin;
+        public JTextComponentSkin<JTextField> getSkin() {
+            if (skin == null) { skin = new JTextComponentSkin<JTextField>(); }
+            return skin;
+        }
+
+        public SkinnedPasswordField() { super(); }
+
+        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+
+        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+
+        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+
+        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+
+        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+
+        public void setCaretColor(SkinColor skinColor) { getSkin().setCaretColor(this, skinColor); }
+        @Override public void setCaretColor(Color color) { getSkin().resetCaretColor(); super.setCaretColor(color); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(this);
+            super.paintComponent(g);
+        }
+    }
     public static class SkinnedTextArea extends JTextArea implements ISkinnedComponent<JTextArea> {
         private static final long serialVersionUID = 4191648156716570907L;
 

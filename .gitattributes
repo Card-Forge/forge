@@ -1039,6 +1039,7 @@ forge-gui-desktop/src/main/java/forge/toolbox/FMouseAdapter.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/FOptionPane.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/FOverlay.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/FPanel.java -text
+forge-gui-desktop/src/main/java/forge/toolbox/FPasswordField.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/FProgressBar.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/FRadioButton.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/FScrollPane.java -text
