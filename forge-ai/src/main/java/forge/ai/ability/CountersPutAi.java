@@ -158,6 +158,12 @@ public class CountersPutAi extends SpellAbilityAi {
             amount = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(amount));
         }
+
+        // don't use it if no counters to add
+        if (amount <= 0) {
+            return false;
+        }
+
         if ("Polukranos".equals(sa.getParam("AILogic"))) {
             List<Card> humCreatures = ai.getOpponent().getCreaturesInPlay();
             //TODO how to grab target restrictions from subsequent triggered ability?
@@ -185,11 +191,6 @@ public class CountersPutAi extends SpellAbilityAi {
             } else {
                 return false;
             }
-        }
-
-        // don't use it if no counters to add
-        if (amount <= 0) {
-            return false;
         }
 
         // Targeting
@@ -284,12 +285,15 @@ public class CountersPutAi extends SpellAbilityAi {
             return true;
         }
 
-        // Don't use non P1P1/M1M1 counters before main 2 if possible
-        if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                && !sa.hasParam("ActivationPhases")
-                && !(type.equals("P1P1") || type.equals("M1M1"))
-                && !ComputerUtil.castSpellInMain1(ai, sa)) {
-            return false;
+        if (!type.equals("P1P1") && !type.equals("M1M1") && !sa.hasParam("ActivationPhases")) {
+	        // Don't use non P1P1/M1M1 counters before main 2 if possible
+	        if (ph.getPhase().isBefore(PhaseType.MAIN2)
+	                && !ComputerUtil.castSpellInMain1(ai, sa)) {
+	            return false;
+	        }	        
+	        if (ph.isPlayerTurn(ai) && !isSorcerySpeed(sa)) {
+	            return false;
+	        }
         }
 
         if (ComputerUtil.waitForBlocking(sa)) {
