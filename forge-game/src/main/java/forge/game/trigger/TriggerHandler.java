@@ -468,10 +468,14 @@ public class TriggerHandler {
         boolean mand = false;
         if (triggerParams.containsKey("OptionalDecider")) {
             sa.setOptionalTrigger(true);
-            mand = false;
             decider = AbilityUtils.getDefinedPlayers(host, triggerParams.get("OptionalDecider"), sa).get(0);
-        } else {
-            mand = true;
+        }
+        else if (sa.getPayCosts() == null || sa.getPayCosts().getCostParts().isEmpty()) {
+    		mand = true;
+        }
+        else { // triggers with a cost can't be mandatory
+            sa.setOptionalTrigger(true);
+            decider = sa.getActivatingPlayer();
         }
 
         SpellAbility ability = sa;
