@@ -207,14 +207,14 @@ public class DestroyAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final boolean noRegen = sa.hasParam("NoRegen");
         if (tgt != null) {
+            sa.resetTargets();
+
             CardCollection list = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
             list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
 
             if (list.isEmpty() || list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
                 return false;
             }
-
-            sa.resetTargets();
 
             CardCollection preferred = CardLists.getNotKeyword(list, "Indestructible");
             preferred = CardLists.filterControlledBy(preferred, ai.getOpponents());
@@ -232,14 +232,38 @@ public class DestroyAi extends SpellAbilityAi {
                 });
             }
 
+            if (sa.hasParam("AITgts")) {
+            	if (sa.getParam("AITgts").equals("BetterThanSource")) {
+            		if (source.isEnchanted()) {
+            			if (source.getEnchantedBy(false).get(0).getController().equals(ai)) {
+            				preferred.clear();
+            			}
+            		} else {
+            			final int value = ComputerUtilCard.evaluateCreature(source);
+            			preferred = CardLists.filter(preferred, new Predicate<Card>() {
+                            @Override
+                            public boolean apply(final Card c) {
+                                return ComputerUtilCard.evaluateCreature(c) > value + 30;
+                            }
+                        });
+            		}
+            	} else {
+            		preferred = CardLists.getValidCards(preferred, sa.getParam("AITgts"), sa.getActivatingPlayer(), source);
+            	}
+            }
+
             for (final Card c : preferred) {
                 list.remove(c);
             }
 
+            if (preferred.isEmpty() && !mandatory) {
+            	return false;
+            }
+
             while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
                 if (preferred.isEmpty()) {
-                    if ((sa.getTargets().getNumTargeted() == 0)
-                            || (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa))) {
+                    if (sa.getTargets().getNumTargeted() == 0
+                            || sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
                         if (!mandatory) {
                             sa.resetTargets();
                             return false;
