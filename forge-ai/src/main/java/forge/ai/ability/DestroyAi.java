@@ -67,7 +67,23 @@ public class DestroyAi extends SpellAbilityAi {
             list = CardLists.getTargetableCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), sa);
             list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
             if (sa.hasParam("AITgts")) {
-                list = CardLists.getValidCards(list, sa.getParam("AITgts"), sa.getActivatingPlayer(), source);
+            	if (sa.getParam("AITgts").equals("BetterThanSource")) {
+            		if (source.isEnchanted()) {
+            			if (source.getEnchantedBy(false).get(0).getController().equals(ai)) {
+            				return false;
+            			}
+            		} else {
+            			final int value = ComputerUtilCard.evaluateCreature(source);
+            			list = CardLists.filter(list, new Predicate<Card>() {
+                            @Override
+                            public boolean apply(final Card c) {
+                                return ComputerUtilCard.evaluateCreature(c) > value + 30;
+                            }
+                        });
+            		}
+            	} else {
+            		list = CardLists.getValidCards(list, sa.getParam("AITgts"), sa.getActivatingPlayer(), source);
+            	}
             }
             list = CardLists.getNotKeyword(list, "Indestructible");
             if (!SpellAbilityAi.playReusable(ai, sa)) {
