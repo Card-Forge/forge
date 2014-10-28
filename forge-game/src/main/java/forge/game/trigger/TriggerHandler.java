@@ -31,6 +31,7 @@ import forge.game.card.CardUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.Ability;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
@@ -470,7 +471,7 @@ public class TriggerHandler {
             sa.setOptionalTrigger(true);
             decider = AbilityUtils.getDefinedPlayers(host, triggerParams.get("OptionalDecider"), sa).get(0);
         }
-        else if (sa.getPayCosts() == null || sa.getPayCosts().getCostParts().isEmpty()) {
+        else if (sa instanceof AbilitySub || !sa.hasParam("Cost") || sa.getParam("Cost").equals("0")) {
     		mand = true;
         }
         else { // triggers with a cost can't be mandatory
