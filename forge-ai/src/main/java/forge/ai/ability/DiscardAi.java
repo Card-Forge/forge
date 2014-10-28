@@ -54,8 +54,7 @@ public class DiscardAi extends SpellAbilityAi {
             }
         } else {
             // TODO: Add appropriate restrictions
-            final List<Player> players = AbilityUtils.getDefinedPlayers(sa.getHostCard(),
-                    sa.getParam("Defined"), sa);
+            final List<Player> players = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
 
             if (players.size() == 1) {
                 if (players.get(0) == ai) {
@@ -144,6 +143,14 @@ public class DiscardAi extends SpellAbilityAi {
                 }
             }
         } else {
+            if (sa.hasParam("AILogic")) {
+            	if ("AtLeast2".equals(sa.getParam("AILogic"))) {
+            		final List<Player> players = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
+            		if (players.isEmpty() || players.get(0).getCardsIn(ZoneType.Hand).size() < 2) {
+            			return false;
+            		}
+            	}
+            }
             if ("X".equals(sa.getParam("RevealNumber")) && sa.getHostCard().getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
                 final int cardsToDiscard = Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai), ai.getOpponent()
