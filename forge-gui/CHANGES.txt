@@ -19,6 +19,8 @@ New Commander 2014 branch Cards
 Ghoulcaller Gisa
 Stitcher Geralf
 Teferi, Temporal Archmage
+Angelic Field Marshal
+Feldon of the Third Path
 
 
 ------------
