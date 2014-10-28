@@ -1167,7 +1167,8 @@ public class AiController {
 
             if (card.isCreature() && (card.getNetToughness() <= 0) && !card.hasStartOfKeyword("etbCounter")
                     && mana.countX() == 0 && !card.hasETBTrigger()
-                    && !card.hasETBReplacement()) {
+                    && !card.hasETBReplacement()
+                    && !card.hasSVar("NoZeroToughnessAI")) {
                 return AiPlayDecision.WouldBecomeZeroToughnessCreature;
             }
 
