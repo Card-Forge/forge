@@ -786,9 +786,9 @@ public class ComputerUtilCombat {
 
         // if the attacker has first strike and wither the blocker will deal
         // less damage than expected
-        if (dealsFirstStrikeDamage(attacker, withoutAbilities)
+        if (dealsFirstStrikeDamage(attacker, withoutAbilities, null)
                 && (attacker.hasKeyword("Wither") || attacker.hasKeyword("Infect"))
-                && !dealsFirstStrikeDamage(blocker, withoutAbilities)
+                && !dealsFirstStrikeDamage(blocker, withoutAbilities, null)
                 && !blocker.hasKeyword("CARDNAME can't have counters placed on it.")) {
             power -= attacker.getNetCombatDamage();
         }
@@ -1074,8 +1074,7 @@ public class ComputerUtilCombat {
      *            a {@link forge.game.combat.Combat} object.
      * @return a int.
      */
-    public static int predictPowerBonusOfAttacker(final Card attacker, final Card blocker, final Combat combat
-            , boolean withoutAbilities) {
+    public static int predictPowerBonusOfAttacker(final Card attacker, final Card blocker, final Combat combat , boolean withoutAbilities) {
         int power = 0;
 
         power += attacker.getKeywordMagnitude("Bushido");
@@ -1104,9 +1103,9 @@ public class ComputerUtilCombat {
         // if the defender has first strike and wither the attacker will deal
         // less damage than expected
         if (null != blocker) {
-            if (ComputerUtilCombat.dealsFirstStrikeDamage(blocker, withoutAbilities)
+            if (ComputerUtilCombat.dealsFirstStrikeDamage(blocker, withoutAbilities, combat)
                     && (blocker.hasKeyword("Wither") || blocker.hasKeyword("Infect"))
-                    && !ComputerUtilCombat.dealsFirstStrikeDamage(attacker, withoutAbilities) 
+                    && !ComputerUtilCombat.dealsFirstStrikeDamage(attacker, withoutAbilities, combat) 
                     && !attacker.hasKeyword("CARDNAME can't have counters placed on it.")) {
                 power -= blocker.getNetCombatDamage();
             }
@@ -1644,7 +1643,7 @@ public class ComputerUtilCombat {
                 + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, defender, combat, withoutAbilities);
 
         if (defender.hasKeyword("Double Strike")) {
-            if (defenderDamage > 0 && (hasKeyword(defender, "Deathtouch", withoutAbilities) || attacker.hasSVar("DestroyWhenDamaged"))) {
+            if (defenderDamage > 0 && (hasKeyword(defender, "Deathtouch", withoutAbilities, combat) || attacker.hasSVar("DestroyWhenDamaged"))) {
                 return true;
             }
             if (defenderDamage >= attackerLife) {
@@ -1653,11 +1652,11 @@ public class ComputerUtilCombat {
 
             // Attacker may kill the blocker before he can deal normal
             // (secondary) damage
-            if (dealsFirstStrikeDamage(attacker, withoutAbilities) && !defender.hasKeyword("Indestructible")) {
+            if (dealsFirstStrikeDamage(attacker, withoutAbilities, combat) && !defender.hasKeyword("Indestructible")) {
                 if (attackerDamage >= defenderLife) {
                     return false;
                 }
-                if (attackerDamage > 0 && (hasKeyword(attacker, "Deathtouch", withoutAbilities) || defender.hasSVar("DestroyWhenDamaged"))) {
+                if (attackerDamage > 0 && (hasKeyword(attacker, "Deathtouch", withoutAbilities, combat) || defender.hasSVar("DestroyWhenDamaged"))) {
                     return false;
                 }
             }
@@ -1668,19 +1667,19 @@ public class ComputerUtilCombat {
 
         else { // no double strike for defender
                // Attacker may kill the blocker before he can deal any damage
-            if (dealsFirstStrikeDamage(attacker, withoutAbilities)
+            if (dealsFirstStrikeDamage(attacker, withoutAbilities, combat)
                     && !defender.hasKeyword("Indestructible") 
-                    && !dealsFirstStrikeDamage(defender, withoutAbilities)) {
+                    && !dealsFirstStrikeDamage(defender, withoutAbilities, combat)) {
 
                 if (attackerDamage >= defenderLife) {
                     return false;
                 }
-                if (attackerDamage > 0 && (hasKeyword(attacker, "Deathtouch", withoutAbilities) || defender.hasSVar("DestroyWhenDamaged"))) {
+                if (attackerDamage > 0 && (hasKeyword(attacker, "Deathtouch", withoutAbilities, combat) || defender.hasSVar("DestroyWhenDamaged"))) {
                     return false;
                 }
             }
 
-            if (defenderDamage > 0 && (hasKeyword(defender, "Deathtouch", withoutAbilities) || attacker.hasSVar("DestroyWhenDamaged"))) {
+            if (defenderDamage > 0 && (hasKeyword(defender, "Deathtouch", withoutAbilities, combat) || attacker.hasSVar("DestroyWhenDamaged"))) {
                 return true;
             }
 
@@ -1814,7 +1813,7 @@ public class ComputerUtilCombat {
                 + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, defender, combat, withoutAbilities);
 
         if (attacker.hasKeyword("Double Strike")) {
-            if (attackerDamage > 0 && (hasKeyword(attacker, "Deathtouch", withoutAbilities) || defender.hasSVar("DestroyWhenDamaged"))) {
+            if (attackerDamage > 0 && (hasKeyword(attacker, "Deathtouch", withoutAbilities, combat) || defender.hasSVar("DestroyWhenDamaged"))) {
                 return true;
             }
             if (attackerDamage >= defenderLife) {
@@ -1823,11 +1822,11 @@ public class ComputerUtilCombat {
 
             // Attacker may kill the blocker before he can deal normal
             // (secondary) damage
-            if (dealsFirstStrikeDamage(defender, withoutAbilities) && !attacker.hasKeyword("Indestructible")) {
+            if (dealsFirstStrikeDamage(defender, withoutAbilities, combat) && !attacker.hasKeyword("Indestructible")) {
                 if (defenderDamage >= attackerLife) {
                     return false;
                 }
-                if (defenderDamage > 0 && (hasKeyword(defender, "Deathtouch", withoutAbilities) || attacker.hasSVar("DestroyWhenDamaged"))) {
+                if (defenderDamage > 0 && (hasKeyword(defender, "Deathtouch", withoutAbilities, combat) || attacker.hasSVar("DestroyWhenDamaged"))) {
                     return false;
                 }
             }
@@ -1838,18 +1837,18 @@ public class ComputerUtilCombat {
 
         else { // no double strike for attacker
                // Defender may kill the attacker before he can deal any damage
-            if (dealsFirstStrikeDamage(defender, withoutAbilities) && !attacker.hasKeyword("Indestructible") 
-                    && !dealsFirstStrikeDamage(attacker, withoutAbilities)) {
+            if (dealsFirstStrikeDamage(defender, withoutAbilities, combat) && !attacker.hasKeyword("Indestructible") 
+                    && !dealsFirstStrikeDamage(attacker, withoutAbilities, combat)) {
 
                 if (defenderDamage >= attackerLife) {
                     return false;
                 }
-                if (defenderDamage > 0 && (hasKeyword(defender, "Deathtouch", withoutAbilities) || attacker.hasSVar("DestroyWhenDamaged"))) {
+                if (defenderDamage > 0 && (hasKeyword(defender, "Deathtouch", withoutAbilities, combat) || attacker.hasSVar("DestroyWhenDamaged"))) {
                     return false;
                 }
             }
 
-            if (attackerDamage > 0 && (hasKeyword(attacker, "Deathtouch", withoutAbilities) || defender.hasSVar("DestroyWhenDamaged"))) {
+            if (attackerDamage > 0 && (hasKeyword(attacker, "Deathtouch", withoutAbilities, combat) || defender.hasSVar("DestroyWhenDamaged"))) {
                 return true;
             }
 
@@ -2152,7 +2151,7 @@ public class ComputerUtilCombat {
         return restDamage;
     }
 
-    public final static boolean dealsFirstStrikeDamage(final Card combatant, final boolean withoutAbilities) {
+    public final static boolean dealsFirstStrikeDamage(final Card combatant, final boolean withoutAbilities, final Combat combat) {
         
         if (combatant.hasKeyword("Double Strike") || combatant.hasKeyword("First Strike")) {
             return true;
@@ -2162,7 +2161,7 @@ public class ComputerUtilCombat {
         	List<String> keywords = new ArrayList<String>();
         	keywords.add("Double Strike");
         	keywords.add("First Strike");
-            return canGainKeyword(combatant, keywords);
+            return canGainKeyword(combatant, keywords, combat);
         }
     
         return false;
@@ -2176,41 +2175,56 @@ public class ComputerUtilCombat {
      * @param withoutAbilities flag that determines if activated abilities are to be considered
      * @return
      */
-    public final static boolean hasKeyword(final Card combatant, final String keyword, final boolean withoutAbilities) {
+    public final static boolean hasKeyword(final Card combatant, final String keyword, final boolean withoutAbilities, final Combat combat) {
         if (combatant.hasKeyword(keyword)) {
             return true;
         }
         if (!withoutAbilities) {
         	List<String> keywords = new ArrayList<String>();
         	keywords.add(keyword);
-            return canGainKeyword(combatant, keywords);
+            return canGainKeyword(combatant, keywords, combat);
         } else {
             return false;
         }
     }
 
-    public final static boolean canGainKeyword(final Card combatant, final List<String> keywords) {
-    	for (SpellAbility ability : combatant.getAllSpellAbilities()) {
-            if (!(ability instanceof AbilityActivated) || ability.getPayCosts() == null) {
-                continue;
-            }
-            if (ability.getApi() != ApiType.Pump) {
-                continue;
-            }
+    public final static boolean canGainKeyword(final Card combatant, final List<String> keywords, final Combat combat) {
+    	final Player controller = combatant.getController();
+    	for (Card c : controller.getCardsIn(ZoneType.Battlefield)) {
+	    	for (SpellAbility ability : c.getAllSpellAbilities()) {
+	            if (!(ability instanceof AbilityActivated) || ability.getPayCosts() == null) {
+	                continue;
+	            }
+	            if (ability.getApi() != ApiType.Pump) {
+	                continue;
+	            }
+	
+	            if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed")) {
+	                continue;
+	            }
+	
+	            if (!ability.hasParam("KW") || !ComputerUtilCost.canPayCost(ability, controller)) {
+	                continue;
+	            }
+	            if (c != combatant) {
+	            	if (ability.getTargetRestrictions() == null || !ability.canTarget(combatant)) {
+	            		continue;
+	            	}
+	            	//the AI will will fail to predict tapping of attackers
+	            	if (controller.getGame().getPhaseHandler().isPlayerTurn(controller)) {
+		            	if (combat == null || !combat.isAttacking(combatant) || combat.isAttacking(c)) {
+		            		continue;
+		            	}
+	            	}
 
-            if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed")) {
-                continue;
-            }
-
-            if (!ability.hasParam("KW") || !ComputerUtilCost.canPayCost(ability, combatant.getController())) {
-                continue;
-            }
-            for (String keyword : keywords) {
-            	if (ability.getParam("KW").contains(keyword)) {
-            		return true;
-            	}
-            }
-        }
+	            }
+	            for (String keyword : keywords) {
+	            	if (ability.getParam("KW").contains(keyword)) {
+	            		return true;
+	            	}
+	            }
+	        }
+    	}
     
         return false;
     }

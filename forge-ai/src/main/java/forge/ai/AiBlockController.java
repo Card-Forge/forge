@@ -335,7 +335,7 @@ public class AiBlockController {
 
         // Try to block an attacker without first strike with a gang of first strikers
         for (final Card attacker : attackersLeft) {
-            if (!ComputerUtilCombat.dealsFirstStrikeDamage(attacker, false)) {
+            if (!ComputerUtilCombat.dealsFirstStrikeDamage(attacker, false, combat)) {
                 blockers = getPossibleBlockers(combat, attacker, blockersLeft, false);
                 final List<Card> firstStrikeBlockers = new ArrayList<Card>();
                 final List<Card> blockGang = new ArrayList<Card>();
@@ -391,8 +391,8 @@ public class AiBlockController {
             usableBlockers = CardLists.filter(blockers, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    if (ComputerUtilCombat.dealsFirstStrikeDamage(attacker, false)
-                            && !ComputerUtilCombat.dealsFirstStrikeDamage(c, false)) {
+                    if (ComputerUtilCombat.dealsFirstStrikeDamage(attacker, false, combat)
+                            && !ComputerUtilCombat.dealsFirstStrikeDamage(c, false, combat)) {
                         return false;
                     }
                     return lifeInDanger || (ComputerUtilCard.evaluateCreature(c) + diff) < ComputerUtilCard.evaluateCreature(attacker);
@@ -640,7 +640,7 @@ public class AiBlockController {
             // than the attacker
             // Don't use blockers without First Strike or Double Strike if
             // attacker has it
-            if (ComputerUtilCombat.dealsFirstStrikeDamage(attacker, false)) {
+            if (ComputerUtilCombat.dealsFirstStrikeDamage(attacker, false, combat)) {
                 safeBlockers = CardLists.getKeyword(blockers, "First Strike");
                 safeBlockers.addAll(CardLists.getKeyword(blockers, "Double Strike"));
             } else {
