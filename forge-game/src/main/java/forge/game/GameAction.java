@@ -218,7 +218,8 @@ public class GameAction {
 
         // Need to apply any static effects to produce correct triggers
         checkStaticAbilities();
-        game.getTriggerHandler().registerActiveTrigger(c, true);
+        game.getTriggerHandler().clearInstrinsicActiveTriggers(c);
+        game.getTriggerHandler().registerActiveTrigger(c, false);
 
         // play the change zone sound
         game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
