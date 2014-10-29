@@ -1034,6 +1034,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             CardColor.increaseTimestamp();
         }
         currentState.getCardColor().add(new CardColor(s, addToColors));
+        currentState.getView().updateColors(this);
         return CardColor.getTimestamp();
     }
 
@@ -1047,11 +1048,13 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
         if (removeCol != null) {
             currentState.getCardColor().remove(removeCol);
+            currentState.getView().updateColors(this);
         }
     }
 
     public final void setColor(final Iterable<CardColor> colors) {
         currentState.setCardColor(colors);
+        currentState.getView().updateColors(this);
     }
 
     public final Iterable<CardColor> getColor() {
@@ -1867,10 +1870,12 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     public final void addSpellAbility(final SpellAbility a) {
         a.setHostCard(this);
         currentState.addSpellAbility(a);
+        currentState.getView().updateAbilityText(this, currentState);
     }
 
     public final void removeSpellAbility(final SpellAbility a) {
         currentState.removeSpellAbility(a);
+        currentState.getView().updateAbilityText(this, currentState);
     }
 
     public final FCollectionView<SpellAbility> getSpellAbilities() {

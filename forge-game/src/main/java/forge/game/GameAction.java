@@ -766,9 +766,6 @@ public class GameAction {
         TrackableObject.unfreeze();
 
         if (runEvents && !affectedCards.isEmpty()) {
-        	for (Card c : affectedCards) {
-        		c.updateKeywords();
-        	}
             game.fireEvent(new GameEventCardStatsChanged(affectedCards));
         }
 
