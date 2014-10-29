@@ -2712,6 +2712,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     public final int getKeywordAmount(String keyword) {
         return getKeywordAmount(currentState, keyword);
     }
+
     public final int getKeywordAmount(CardState state, String keyword) {
         int res = 0;
         for (final String k : getKeywords(state)) {
@@ -2720,6 +2721,10 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             }
         }
         return res;
+    }
+
+    public final void updateKeywords() {
+    	currentState.getView().updateKeywords(this, currentState);
     }
 
     public final void addChangedCardKeywords(final List<String> keywords, final List<String> removeKeywords,

@@ -873,6 +873,9 @@ public class PhaseHandler implements java.io.Serializable {
                     } while (game.getStack().addAllTriggeredAbilitiesToStack()); //loop so long as something was added to stack
 
                     if (!allAffectedCards.isEmpty()) {
+                    	for (Card c : allAffectedCards) {
+                    		c.updateKeywords();
+                    	}
                         game.fireEvent(new GameEventCardStatsChanged(allAffectedCards));
                         allAffectedCards.clear();
                     }
