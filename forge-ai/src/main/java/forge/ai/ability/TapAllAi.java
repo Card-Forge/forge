@@ -3,7 +3,7 @@ package forge.ai.ability;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
-import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.card.Card;
@@ -82,7 +82,7 @@ public class TapAllAi extends SpellAbilityAi {
             final boolean any = Iterables.any(validTappables, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return CombatUtil.canAttack(c) && ComputerUtil.canAttackNextTurn(c);
+                    return CombatUtil.canAttack(c) && ComputerUtilCombat.canAttackNextTurn(c);
                 }
             });
             if(!any) {

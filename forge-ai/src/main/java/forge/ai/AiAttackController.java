@@ -17,6 +17,10 @@
  */
 package forge.ai;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
@@ -38,10 +42,6 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.FCollectionView;
 import forge.util.MyRandom;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 
 //doesHumanAttackAndWin() uses the global variable AllZone.getComputerPlayer()
@@ -351,7 +351,7 @@ public class AiAttackController {
         }
 
         for (Card attacker : oppList) {
-            if (!ComputerUtil.canAttackNextTurn(attacker)) {
+            if (!ComputerUtilCombat.canAttackNextTurn(attacker)) {
                 continue;
             }
             if (blockersLeft > 0 && CombatUtil.canBeBlocked(attacker, ai)) {
@@ -528,7 +528,7 @@ public class AiAttackController {
         List<Card> attackersLeft = new ArrayList<Card>(this.attackers);
         // Attackers that don't really have a choice
         for (final Card attacker : this.attackers) {
-            if (!CombatUtil.canAttack(attacker, defender, combat)) {
+            if (!CombatUtil.canAttack(attacker, defender)) {
                 continue;
             }
             boolean mustAttack = false;
@@ -559,7 +559,7 @@ public class AiAttackController {
                 System.out.println("Assault");
             CardLists.sortByPowerDesc(attackersLeft);
             for (Card attacker : attackersLeft) {
-                if (CombatUtil.canAttack(attacker, defender, combat) && this.isEffectiveAttacker(ai, attacker, combat)) {
+                if (CombatUtil.canAttack(attacker, defender) && this.isEffectiveAttacker(ai, attacker, combat)) {
                     combat.addAttacker(attacker, defender);
                 }
             }
@@ -602,7 +602,7 @@ public class AiAttackController {
                     System.out.println("Exalted");
                 this.aiAggression = 6;
                 for (Card attacker : this.attackers) {
-                    if (CombatUtil.canAttack(attacker, defender, combat) && this.shouldAttack(ai, attacker, this.blockers, combat)) {
+                    if (CombatUtil.canAttack(attacker, defender)  && this.shouldAttack(ai, attacker, this.blockers, combat)) {
                         combat.addAttacker(attacker, defender);
                         return;
                     }
@@ -625,7 +625,7 @@ public class AiAttackController {
         for (final Card pCard : this.oppList) {
             // if the creature can attack next turn add it to counter attackers
             // list
-            if (ComputerUtil.canAttackNextTurn(pCard)) {
+            if (ComputerUtilCombat.canAttackNextTurn(pCard)) {
                 nextTurnAttackers.add(pCard);
                 if (pCard.getNetCombatDamage() > 0) {
                     candidateCounterAttackDamage += pCard.getNetCombatDamage();
@@ -652,7 +652,7 @@ public class AiAttackController {
         for (final Card pCard : this.myList) {
             // if the creature can attack then it's a potential attacker this
             // turn, assume summoning sickness creatures will be able to
-            if (ComputerUtil.canAttackNextTurn(pCard)) {
+            if (ComputerUtilCombat.canAttackNextTurn(pCard)) {
                 candidateAttackers.add(pCard);
                 if (pCard.getNetCombatDamage() > 0) {
                     candidateUnblockedDamage += ComputerUtilCombat.damageIfUnblocked(pCard, opp, null, false);
@@ -819,7 +819,7 @@ public class AiAttackController {
                 continue;
             }
 
-            if (this.shouldAttack(ai, attacker, this.blockers, combat) && CombatUtil.canAttack(attacker, defender, combat)) {
+            if (this.shouldAttack(ai, attacker, this.blockers, combat) && CombatUtil.canAttack(attacker, defender)) {
                 combat.addAttacker(attacker, defender);
                 // check if attackers are enough to finish the attacked planeswalker
                 if (defender instanceof Card) {

@@ -180,6 +180,24 @@ public final class CardPredicates {
         };
     }
 
+    public static final Predicate<Card> hasCounter(final CounterType type) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.getCounters(type) > 0;
+            }
+        };
+    }
+
+    public static final Predicate<Card> hasGreaterPowerThan(final int minPower) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.getNetPower() > minPower;
+            }
+        };
+    }
+
     public static class Presets {
 
         /**

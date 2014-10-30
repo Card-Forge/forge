@@ -17,6 +17,10 @@
  */
 package forge.game.card;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -25,11 +29,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.FCollectionView;
 import forge.util.MyRandom;
-
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
 
 /**
  * <p>
@@ -192,6 +191,13 @@ public class CardLists {
         return CardLists.filter(cardList, Predicates.not(CardPredicates.hasKeyword(keyword)));
     }
 
+    public static int getAmountOfKeyword(final Iterable<Card> cardList, final String keyword) {
+        int nKeyword = 0;
+        for (final Card c : cardList) {
+            nKeyword += c.getAmountOfKeyword("If a creature with a magnet counter on it attacks, all creatures with magnet counters on them attack if able.");
+        }
+        return nKeyword;
+    }
     // cardType is like "Land" or "Goblin", returns a new CardCollection that is a
     // subset of current CardList
     public static CardCollection getNotType(Iterable<Card> cardList, String cardType) {

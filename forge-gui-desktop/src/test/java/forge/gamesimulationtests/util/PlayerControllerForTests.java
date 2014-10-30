@@ -317,6 +317,10 @@ public class PlayerControllerForTests extends PlayerController {
 			Card defender = CardSpecificationHandler.INSTANCE.find(game.getCardsInGame(), planeswalkerAttackAssignment.getKey());
 			attack(combat, planeswalkerAttackAssignment.getKey(), defender);
 		}
+
+		if (!CombatUtil.validateAttackers(combat)) {
+		    throw new IllegalStateException("Illegal attack declaration!");
+		}
 	}
 
 	private Player getPlayerBeingAttacked(Game game, Player attacker, PlayerSpecification defenderSpecification) {
@@ -336,7 +340,7 @@ public class PlayerControllerForTests extends PlayerController {
 
 	private void attack(Combat combat, CardSpecification attackerSpecification, GameEntity defender) {
 		Card attacker = CardSpecificationHandler.INSTANCE.find(combat.getAttackingPlayer().getCreaturesInPlay(), attackerSpecification);
-		if (!CombatUtil.canAttack(attacker, defender, combat)) {
+		if (!CombatUtil.canAttack(attacker, defender)) {
 			throw new IllegalStateException(attacker + " can't attack " + defender);
 		}
 		combat.addAttacker(attacker, defender);

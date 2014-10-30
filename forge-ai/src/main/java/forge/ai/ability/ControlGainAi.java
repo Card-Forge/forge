@@ -22,6 +22,7 @@ import com.google.common.collect.Iterables;
 
 import forge.ai.AiCardMemory;
 import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCombat;
 import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -30,7 +31,6 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
-import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -131,7 +131,7 @@ public class ControlGainAi extends SpellAbilityAi {
                 if (sa.isTrigger()) {
                     return true;
                 }
-                if (c.isCreature() && (!CombatUtil.canAttackNextTurn(c, ai.getOpponent()) || c.getNetCombatDamage() == 0)) {
+                if (c.isCreature() && (!ComputerUtilCombat.canAttackNextTurn(c, ai.getOpponent()) || c.getNetCombatDamage() == 0)) {
                     return false;
                 }
                 return !vars.containsKey("RemAIDeck");

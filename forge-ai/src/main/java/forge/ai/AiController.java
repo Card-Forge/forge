@@ -59,6 +59,7 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostPart;
@@ -1211,10 +1212,20 @@ public class AiController {
     }
     
 
-    public Combat declareAttackers(Player attacker, Combat combat) {
+    public void declareAttackers(Player attacker, Combat combat) {
         // 12/2/10(sol) the decision making here has moved to getAttackers()
         AiAttackController aiAtk = new AiAttackController(attacker); 
         aiAtk.declareAttackers(combat);
+
+        // if invalid: just try an attack declaration that we know to be legal
+        if (!CombatUtil.validateAttackers(combat)) {
+            combat.clearAttackers();
+            final Map<Card, GameEntity> legal = combat.getAttackConstraints().getLegalAttackers().getLeft();
+            System.err.println("AI Attack declaration invalid, defaulting to: " + legal);
+            for (final Map.Entry<Card, GameEntity> mandatoryAttacker : legal.entrySet()) {
+                combat.addAttacker(mandatoryAttacker.getKey(), mandatoryAttacker.getValue());
+            }
+        }
 
         for (final Card element : combat.getAttackers()) {
             // tapping of attackers happens after Propaganda is paid for
@@ -1222,7 +1233,6 @@ public class AiController {
             sb.append("Computer just assigned ").append(element.getName()).append(" as an attacker.");
             Log.debug(sb.toString());
         }
-        return combat;
     }
 
     private final SpellAbility getSpellAbilityToPlay() {

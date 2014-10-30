@@ -19,7 +19,7 @@ public class MessageUtil {
 
     // These are not much related to PlayerController
     public static  String formatNotificationMessage(SpellAbility sa, Player player, GameObject target, String value) {
-        if (sa.getApi() == null || sa.getHostCard() == null) {
+        if (sa == null || sa.getApi() == null || sa.getHostCard() == null) {
             return ("Result: " + value);
         }
         switch(sa.getApi()) {
@@ -30,7 +30,7 @@ public class MessageUtil {
                     return value;
                 }
                 final boolean random = sa.hasParam("Random");
-                return String.format(random ? "Randomly chosen number for %s is %s" : "%s choses number: %s", mayBeYou(player, target), value);
+                return String.format(random ? "Randomly chosen number for %s is %s" : "%s chooses number: %s", mayBeYou(player, target), value);
             case FlipACoin:
                 String flipper = StringUtils.capitalize(mayBeYou(player, target));
                 return sa.hasParam("NoCall")

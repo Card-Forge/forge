@@ -1,0 +1,5 @@
+Name:Ekundu Cyclops
+ManaCost:3 R
+Types:Creature Cyclops
+PT:3/4
+K:If a creature you control attacks, CARDNAME also attacks if able.

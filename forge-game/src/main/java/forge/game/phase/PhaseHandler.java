@@ -450,30 +450,54 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     private void declareAttackersTurnBasedAction() {
-        Player whoDeclares = playerDeclaresAttackers == null || playerDeclaresAttackers.hasLost() ? playerTurn : playerDeclaresAttackers;
+        final Player whoDeclares = playerDeclaresAttackers == null || playerDeclaresAttackers.hasLost()
+                ? playerTurn
+                : playerDeclaresAttackers;
 
         if (CombatUtil.canAttack(playerTurn)) {
-            whoDeclares.getController().declareAttackers(playerTurn, combat);
+            boolean success = false;
+            do {
+                if (game.isGameOver()) { // they just like to close window at any moment
+                    return;
+                }
+
+                whoDeclares.getController().declareAttackers(playerTurn, combat);
+                combat.removeAbsentCombatants();
+
+                success = CombatUtil.validateAttackers(combat);
+                if (!success) {
+                    whoDeclares.getController().notifyOfValue(null, null, "Attack declaration invalid");
+                    continue;
+                }
+
+                for (final Card attacker : combat.getAttackers()) {
+                    final boolean shouldTapForAttack = !attacker.hasKeyword("Vigilance") && !attacker.hasKeyword("Attacking doesn't cause CARDNAME to tap.");
+                    if (shouldTapForAttack) {
+                        // set tapped to true without firing triggers because it may affect propaganda costs
+                        attacker.setTapped(true);
+                    }
+
+                    final boolean canAttack = CombatUtil.checkPropagandaEffects(game, attacker, combat);
+                    attacker.setTapped(false);
+
+                    if (canAttack) {
+                        if (shouldTapForAttack) {
+                            attacker.tap();
+                        }
+                    } else {
+                        combat.removeFromCombat(attacker);
+                        success = CombatUtil.validateAttackers(combat);
+                        if (!success) {
+                            break;
+                        }
+                    }
+                }
+
+            } while (!success);
         }
 
         if (game.isGameOver()) { // they just like to close window at any moment
             return;
-        }
-
-        combat.removeAbsentCombatants();
-        CombatUtil.checkAttackOrBlockAlone(combat);
-
-        // TODO move propaganda to happen as the Attacker is Declared
-        for (final Card c2 : combat.getAttackers()) {
-            boolean canAttack = CombatUtil.checkPropagandaEffects(game, c2, combat);
-            if (canAttack) {
-                if (!c2.hasKeyword("Vigilance") && !c2.hasKeyword("Attacking doesn't cause CARDNAME to tap.")) {
-                    c2.tap();
-                }
-            }
-            else {
-                combat.removeFromCombat(c2);
-            }
         }
 
         nCombatsThisTurn++;
@@ -976,7 +1000,7 @@ public class PhaseHandler implements java.io.Serializable {
         onPhaseBegin();
     }
 
-    public final void setPreventCombatDamageThisTurn(final boolean b) {
+    public final void setPreventCombatDamageThisTurn() {
         bPreventCombatDamageThisTurn = true;
     }
 

@@ -17,8 +17,16 @@
  */
 package forge.game.combat;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.card.CardType;
 import forge.card.MagicColor;
@@ -27,15 +35,14 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityFactory;
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
-import forge.game.phase.Untap;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.spellability.SpellAbility;
@@ -43,27 +50,304 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+import forge.util.FCollection;
 import forge.util.FCollectionView;
 import forge.util.Lang;
 import forge.util.TextUtil;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
+import forge.util.maps.MapToAmount;
 
 /**
  * <p>
- * CombatUtil class.
+ * Static class containing utility methods related to combat.
  * </p>
  * 
  * @author Forge
  * @version $Id$
  */
 public class CombatUtil {
+
+    public static FCollectionView<GameEntity> getAllPossibleDefenders(final Player playerWhoAttacks) {
+        final FCollection<GameEntity> defenders = new FCollection<GameEntity>();
+        for (final Player defender : playerWhoAttacks.getOpponents()) {
+            defenders.add(defender);
+            final CardCollection planeswalkers = CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
+            defenders.addAll(planeswalkers);
+        }
+        return defenders;
+    }
+
+    // ////////////////////////////////////
+    // ////////// ATTACK METHODS //////////
+    // ////////////////////////////////////
+
+    public static boolean validateAttackers(final Combat combat) {
+        final AttackConstraints constraints = combat.getAttackConstraints();
+        final Pair<Map<Card, GameEntity>, Integer> bestAttack = constraints.getLegalAttackers();
+        final int myViolations = constraints.countViolations(combat.getAttackersAndDefenders());
+        if (myViolations == -1) {
+            return false;
+        }
+        return myViolations <= bestAttack.getRight().intValue();
+    }
+
+    /**
+     * <p>
+     * Check whether a player should be given the chance to attack this combat.
+     * </p>
+     * 
+     * @param p
+     *            a {@link Player}.
+     * @return {@code true} if and only if the player controls any creatures and
+     *         has any opponents or planeswalkers controlled by opponents to
+     *         attack.
+     */
+    public static boolean canAttack(final Player p) {
+        final CardCollection possibleAttackers = getPossibleAttackers(p);
+        return !possibleAttackers.isEmpty();
+    }
+
+    /**
+     * Obtain a {@link CardCollection} of all creatures a {@link Player}
+     * controls that could attack any possible defending {@link GameEntity}.
+     * Note that this only performs primitive checks (see
+     * {@link #canAttack(Card)}).
+     * 
+     * @param p
+     *            the attacking {@link Player}.
+     * @return a {@link CardCollection}.
+     */
+    public static CardCollection getPossibleAttackers(final Player p) {
+        return CardLists.filter(p.getCreaturesInPlay(), new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card attacker) {
+                return canAttack(attacker);
+            }
+        });
+    }
+
+    /**
+     * Check whether a {@link Card} can attack any {@link GameEntity} that's legal for its controller to attack.
+     * @param attacker
+     *            the attacking {@link Card}.
+     * @return a boolean.
+     * @see #canAttack(Card, GameEntity)
+     */
+    public static boolean canAttack(final Card attacker) {
+        return Iterables.any(getAllPossibleDefenders(attacker.getController()), new Predicate<GameEntity>() {
+            @Override
+            public boolean apply(final GameEntity defender) {
+                return canAttack(attacker, defender);
+            }
+        });
+    }
+
+    /**
+     * <p>
+     * Check whether a {@link Card} is affected by any <i>attacking
+     * restrictions</i>. This is <b>not</b> the case if all of the following are
+     * true:
+     * <ul>
+     * <li>It's a creature.</li>
+     * <li>It's untapped.</li>
+     * <li>It's not phased out.</li>
+     * <li>It's not summoning sick.</li>
+     * <li>It has no abilities or keywords that prevent it from attacking.</li>
+     * <li>It is not affected by any static abilities that prevent it from
+     * attacking.</li>
+     * </ul>
+     * </p>
+     * <p>
+     * This method doesn't check effects related to other creatures attacking
+     * (but see {@link CombatUtil}.{@link #canAttack(Card, GameEntity, Combat)}.
+     * </p>
+     * <p>
+     * Note that a creature affected by any attacking restrictions may never be
+     * declared as an attacker.
+     * </p>
+     * 
+     * @param attacker
+     *            the attacking {@link Card}.
+     * @param defender
+     *            the defending {@link GameEntity}.
+     * @return a boolean.
+     */
+    public static boolean canAttack(final Card attacker, final GameEntity defender) {
+        return canAttack(attacker, defender, false);
+    }
+    public static boolean canAttackNextTurn(final Card attacker, final GameEntity defender) {
+        return canAttack(attacker, defender, true);
+    }
+
+    private static boolean canAttack(final Card attacker, final GameEntity defender, final boolean forNextTurn) {
+        final Game game = attacker.getGame();
+
+        // Basic checks (unless is for next turn)
+        if (!forNextTurn && (
+                   !attacker.isCreature()
+                || attacker.isTapped() || attacker.isPhasedOut()
+                || (attacker.hasSickness() && !attacker.hasKeyword("CARDNAME can attack as though it had haste."))
+                || game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS))) {
+            return false;
+        }
+
+        // Keywords
+        final boolean canAttackWithDefender = attacker.hasKeyword("CARDNAME can attack as though it didn't have defender.");
+        for (final String keyword : attacker.getKeywords()) {
+            switch (keyword) {
+            case "CARDNAME can't attack.":
+            case "CARDNAME can't attack or block.":
+                return false;
+            case "CARDNAME can't attack if you cast a spell this turn.":
+                if (attacker.getController().getSpellsCastThisTurn() > 0) {
+                    return false;
+                }
+            case "Defender":
+                if (!canAttackWithDefender) {
+                    return false;
+                }
+            case "CARDNAME can't attack during extra turns.":
+                if (game.getPhaseHandler().getPlayerTurn().isPlayingExtraTurn()) {
+                    return false;
+                }
+            }
+        }
+
+        // CantAttack static abilities
+        for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+            final FCollectionView<StaticAbility> staticAbilities = ca.getStaticAbilities();
+            for (final StaticAbility stAb : staticAbilities) {
+                if (stAb.applyAbility("CantAttack", attacker, defender)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    } // canAttack(Card, GameEntity)
+
+    /**
+     * <p>
+     * checkPropagandaEffects.
+     * </p>
+     * 
+     * @param attacker
+     *            a {@link forge.game.card.Card} object.
+     * @param bLast
+     *            a boolean.
+     */
+    public static boolean checkPropagandaEffects(final Game game, final Card attacker, final Combat combat) {
+        final Cost attackCost = getAttackCost(game, attacker,  combat.getDefenderByAttacker(attacker));
+        if (attackCost == null) {
+            return true;
+        }
+
+        // Not a great solution, but prevents a crash by passing a fake SA for Propaganda payments
+        // If there's a better way of handling this somewhere deeper in the code, feel free to remove
+        final SpellAbility fakeSA = new SpellAbility.EmptySa(attacker, attacker.getController());
+        return attacker.getController().getController().payManaOptional(attacker, attackCost, fakeSA,
+                "Pay additional cost to declare " + attacker + " an attacker", ManaPaymentPurpose.DeclareAttacker);
+    }
+
+    /**
+     * Get the cost that has to be paid for a creature to attack a certain
+     * defender.
+     * 
+     * @param game
+     *            the {@link Game}.
+     * @param attacker
+     *            the attacking creature.
+     * @param defender
+     *            the defending {@link GameEntity}.
+     * @return the {@link Cost} of attacking, or {@code null} if there is no
+     *         cost.
+     */
+    static Cost getAttackCost(final Game game, final Card attacker, final GameEntity defender) {
+        final Cost attackCost = new Cost(ManaCost.ZERO, true);
+        boolean hasCost = false;
+        // Sort abilities to apply them in proper order
+        for (final Card card : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+            final FCollectionView<StaticAbility> staticAbilities = card.getStaticAbilities();
+            for (final StaticAbility stAb : staticAbilities) {
+                final Cost additionalCost = stAb.getAttackCost(attacker, defender);
+                if (null != additionalCost) {
+                    attackCost.add(additionalCost);
+                    hasCost = true;
+                }
+            }
+        }
+
+        if (!hasCost) {
+            return null;
+        }
+        return attackCost;
+    }
+
+    /**
+     * <p>
+     * This method checks triggered effects of attacking creatures, right before
+     * defending player declares blockers.
+     * </p>
+     * @param game
+     * 
+     * @param c
+     *            a {@link forge.game.card.Card} object.
+     */
+    public static void checkDeclaredAttacker(final Game game, final Card c, final Combat combat) {
+        // Run triggers
+        final Map<String, Object> runParams = Maps.newHashMap();
+        runParams.put("Attacker", c);
+        final List<Card> otherAttackers = combat.getAttackers();
+        otherAttackers.remove(c);
+        runParams.put("OtherAttackers", otherAttackers);
+        runParams.put("Attacked", combat.getDefenderByAttacker(c));
+        game.getTriggerHandler().runTrigger(TriggerType.Attacks, runParams, false);
+
+        // Annihilator: can be copied by Strionic Resonator now
+        if (!c.getDamageHistory().getCreatureAttackedThisCombat()) {
+            for (final String key : c.getKeywords()) {
+                if (!key.startsWith("Annihilator ")) continue;
+                final String[] k = key.split(" ", 2);
+
+                final String sb = "Annihilator - Defending player sacrifices " + k[1] + " permanents.";
+                final String effect = "AB$ Sacrifice | Cost$ 0 | Defined$ DefendingPlayer | SacValid$ Permanent | Amount$ " + k[1];
+
+                final SpellAbility ability = AbilityFactory.getAbility(effect, c);
+                ability.setActivatingPlayer(c.getController());
+                ability.setDescription(sb);
+                ability.setStackDescription(sb);
+                ability.setTrigger(true);
+
+                game.getStack().addSimultaneousStackEntry(ability);
+
+            }
+        }
+
+        c.getDamageHistory().setCreatureAttackedThisCombat(true);
+        c.getDamageHistory().clearNotAttackedSinceLastUpkeepOf();
+        c.getController().setAttackedWithCreatureThisTurn(true);
+        c.getController().incrementAttackersDeclaredThisTurn();
+    } // checkDeclareAttackers
+
+    /**
+     * Create a {@link Map} mapping each possible attacker for the attacking
+     * {@link Player} this {@link Combat} (see
+     * {@link #getPossibleAttackers(Player)}) to a {@link MapToAmount}. This map
+     * then maps each {@link GameEntity}, for which an attack requirement
+     * exists, to the number of requirements on attacking that entity. Absent
+     * entries, including an empty map, indicate no requirements exist.
+     * 
+     * @param combat
+     *            a {@link Combat}.
+     * @return a {@link Map}.
+     * @see #getRequirementsPerDefender(Card, FCollectionView, Combat, int)
+     */
+    public static AttackConstraints getAllRequirements(final Combat combat) {
+        return new AttackConstraints(combat);
+    }
+
+    // ///////////////////////////////////
+    // ////////// BLOCK METHODS //////////
+    // ///////////////////////////////////
 
     // can the creature block given the combat state?
     /**
@@ -148,7 +432,7 @@ public class CombatUtil {
         return true;
     }
 
-    public static boolean canBlockMoreCreatures(final Card blocker, final List<Card> blockedBy) {
+    public static boolean canBlockMoreCreatures(final Card blocker, final CardCollectionView blockedBy) {
         // TODO(sol) expand this for the additional blocking keyword
         if (blockedBy.isEmpty() || blocker.hasKeyword("CARDNAME can block any number of creatures.")) {
             return true;
@@ -180,7 +464,7 @@ public class CombatUtil {
                 return false;
             }
 
-            // Rule 802.4a: A player can block only creatures attacking him or a planeswalker he controls
+            // Rule 802.4a: A player can block only creatures attacking him/her or a planeswalker he/she controls
             Player attacked = combat.getDefendingPlayerRelatedTo(attacker);
             if (attacked != null && attacked != defendingPlayer) {
                 return false;
@@ -199,7 +483,7 @@ public class CombatUtil {
      *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
-    public static boolean canBeBlocked(final Card attacker, Player defender) {
+    public static boolean canBeBlocked(final Card attacker, final Player defender) {
         if (attacker == null) {
             return true;
         }
@@ -217,29 +501,29 @@ public class CombatUtil {
     }
 
 
-    public static boolean isUnblockableFromLandwalk(final Card attacker, Player defendingPlayer) {
+    public static boolean isUnblockableFromLandwalk(final Card attacker, final Player defendingPlayer) {
         //May be blocked as though it doesn't have landwalk. (Staff of the Ages)
         if (attacker.hasKeyword("May be blocked as though it doesn't have landwalk.")) {
             return false;
         }
 
-        ArrayList<String> walkTypes = new ArrayList<String>();
+        List<String> walkTypes = Lists.newArrayList();
 
-        for (String basic : MagicColor.Constant.BASIC_LANDS) {
-            StringBuilder sbLand = new StringBuilder();
+        for (final String basic : MagicColor.Constant.BASIC_LANDS) {
+            final StringBuilder sbLand = new StringBuilder();
             sbLand.append(basic);
             sbLand.append("walk");
-            String landwalk = sbLand.toString();
+            final String landwalk = sbLand.toString();
 
             StringBuilder sbSnow = new StringBuilder();
             sbSnow.append("Snow ");
             sbSnow.append(landwalk.toLowerCase());
-            String snowwalk = sbSnow.toString();
+            final String snowwalk = sbSnow.toString();
 
             sbLand.insert(0, "May be blocked as though it doesn't have "); //Deadfall, etc.
             sbLand.append(".");
 
-            String mayBeBlocked = sbLand.toString();
+            final String mayBeBlocked = sbLand.toString();
 
             if (attacker.hasKeyword(landwalk) && !attacker.hasKeyword(mayBeBlocked)) {
                 walkTypes.add(basic);
@@ -253,7 +537,7 @@ public class CombatUtil {
             }
         }
 
-        for (String keyword : attacker.getKeywords()) {
+        for (final String keyword : attacker.getKeywords()) {
             if (keyword.equals("Legendary landwalk")) {
                 walkTypes.add("Land.Legendary");
             } else if (keyword.equals("Desertwalk")) {
@@ -276,9 +560,9 @@ public class CombatUtil {
             return false;
         }
 
-        String valid = StringUtils.join(walkTypes, ",");
-        CardCollectionView defendingLands = defendingPlayer.getCardsIn(ZoneType.Battlefield);
-        for (Card c : defendingLands) {
+        final String valid = StringUtils.join(walkTypes, ",");
+        final CardCollectionView defendingLands = defendingPlayer.getCardsIn(ZoneType.Battlefield);
+        for (final Card c : defendingLands) {
             if (c.isValid(valid.split(","), defendingPlayer, attacker)) {
                 return true;
             }
@@ -366,9 +650,9 @@ public class CombatUtil {
         // if a creature does not block but should, return false
         for (final Card blocker : defendersArmy) {
             if (blocker.getMustBlockCards() != null) {
-                int mustBlockAmt = blocker.getMustBlockCards().size();
-                List<Card> blockedSoFar = combat.getAttackersBlockedBy(blocker);
-                List<Card> remainingBlockables = new ArrayList<Card>();
+                final int mustBlockAmt = blocker.getMustBlockCards().size();
+                final CardCollectionView blockedSoFar = combat.getAttackersBlockedBy(blocker);
+                final CardCollection remainingBlockables = new CardCollection();
                 for (final Card attacker : attackers) {
                     if (!blockedSoFar.contains(attacker) && CombatUtil.canBlock(attacker, blocker)) {
                         remainingBlockables.add(attacker);
@@ -435,8 +719,8 @@ public class CombatUtil {
             return false;
         }
 
-        final List<Card> attackers = combat.getAttackers();
-        final List<Card> attackersWithLure = new ArrayList<Card>();
+        final CardCollectionView attackers = combat.getAttackers();
+        final CardCollection attackersWithLure = new CardCollection();
         for (final Card attacker : attackers) {
             if (attacker.hasStartOfKeyword("All creatures able to block CARDNAME do so.")
                     || (attacker.hasStartOfKeyword("All Walls able to block CARDNAME do so.") && blocker.getType().hasSubtype("Wall"))
@@ -558,7 +842,7 @@ public class CombatUtil {
         return CombatUtil.canBlock(attacker, blocker);
     }
 
- // can the blocker block the attacker?
+    // can the blocker block the attacker?
     /**
      * <p>
      * canBlock.
@@ -672,151 +956,6 @@ public class CombatUtil {
         return true;
     } // canBlock()
 
-    public static void checkAttackOrBlockAlone(Combat combat) {
-        // Handles removing cards like Mogg Flunkies from combat if group attack
-        // didn't occur
-        for (Card c1 : combat.getAttackers()) {
-            if (c1.hasKeyword("CARDNAME can't attack or block alone.")
-                    || c1.hasKeyword("CARDNAME can't attack alone.")) {
-                if (combat.getAttackers().size() < 2) {
-                    combat.removeFromCombat(c1);
-                }
-            }
-        }
-    }
-
-    // can a player attack with one or more creatures at the moment?
-    /**
-     * <p>
-     * canAttack.
-     * </p>
-     * 
-     * @param p
-     *            a {@link forge.game.player} object.
-     * @return a boolean.
-     */
-    public static boolean canAttack(Player p) {
-        List<Card> creatures = p.getCreaturesInPlay();
-        if (creatures.isEmpty()) { return false; }
-
-        List<Player> defenders = p.getOpponents();
-        if (defenders.isEmpty()) { return false; }
-
-        boolean foundCreatureThatCantAttackAlone = false;
-
-        for (Card c : creatures) {
-            if (CombatUtil.canAttack(c)) {
-                for (Player def : defenders) {
-                    if (CombatUtil.canAttackNextTurn(c, def)) {
-                        if (c.hasKeyword("CARDNAME can't attack or block alone.")
-                                || c.hasKeyword("CARDNAME can't attack alone.")) {
-                            //ensure another possible attacker is found
-                            //if the first one found can't attack alone
-                            if (!foundCreatureThatCantAttackAlone) {
-                                foundCreatureThatCantAttackAlone = true;
-                                break;
-                            }
-                        }
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    // can a creature attack given the combat state
-    /**
-     * <p>
-     * canAttack.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param combat
-     *            a {@link forge.game.combat.Combat} object.
-     * @return a boolean.
-     */
-    public static boolean canAttack(final Card c, final GameEntity def, final Combat combat) {
-        final int cntAttackers = combat.getAttackers().size();
-        final Game game = c.getGame();
-
-        if (c.getController().getMustAttackEntity() != null && c.getController().getMustAttackEntity() != def) {
-            return false;
-        }
-
-        if (cntAttackers > 0) {
-            for (final Card card : game.getCardsIn(ZoneType.Battlefield)) {
-                for (final String keyword : card.getKeywords()) {
-                    if (cntAttackers > 1) {
-                        if (keyword.equals("No more than two creatures can attack each combat.")) {
-                            return false;
-                        }
-                    }
-                    if (keyword.equals("CARDNAME can only attack alone.") && combat.isAttacking(card)) {
-                        return false;
-                    }
-                }
-            }
-
-            if (c.hasKeyword("CARDNAME can only attack alone.")) {
-                return false;
-            }
-
-            if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneAttackerACombat)) {
-                return false;
-            }
-        }
-
-        final int cntAttackersToDef = combat.getAttackersOf(def).size();
-        if (cntAttackersToDef > 1) {
-            for (final Card card : game.getCardsIn(ZoneType.Battlefield)) {
-                for (final String keyword : card.getKeywords()) {
-                	 if (keyword.equals("No more than two creatures can attack you each combat.") &&
-                             card.getController().equals(def)) {
-                         return false;
-                     }
-                }
-            }
-        }
-
-        if ((c.hasKeyword("CARDNAME can't attack or block alone.") || c.hasKeyword("CARDNAME can't attack alone."))
-                && c.getController().getCreaturesInPlay().size() < 2) {
-            return false;
-        }
-
-        if ((cntAttackers > 0 || c.getController().getAttackedWithCreatureThisTurn()) &&
-                game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneAttackerATurn)) {
-            return false;
-        }
-
-        return CombatUtil.canAttack(c, def);
-    }
-
-    // can a creature attack at the moment?
-    /**
-     * <p>
-     * canAttack.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a boolean.
-     */
-    public static boolean canAttack(final Card c, final GameEntity defender) {
-        return canAttack(c) && canAttackNextTurn(c, defender);
-    }
-
-    public static boolean canAttack(final Card c) {
-        final Game game = c.getGame();
-        if (c.isTapped() || c.isPhasedOut()
-                || (c.hasSickness() && !c.hasKeyword("CARDNAME can attack as though it had haste."))
-                || game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-            return false;
-        }
-        return true;
-    }
-
     public static boolean canAttackerBeBlockedWithAmount(Card attacker, int amount, Combat combat) {
         if( amount == 0 )
             return false; // no block
@@ -843,180 +982,16 @@ public class CombatUtil {
         return true;
     }
 
-    // can a creature attack if untapped and without summoning sickness?
-    /**
-     * <p>
-     * canAttackNextTurn.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param def
-     *            the defending {@link GameEntity}.
-     * @return a boolean.
-     */
-    public static boolean canAttackNextTurn(final Card c, final GameEntity defender) {
-        if (!c.isCreature()) {
-            return false;
-        }
-
-        for (String keyword : c.getKeywords()) {
-            if (keyword.equals("CARDNAME can't attack.") || keyword.equals("CARDNAME can't attack or block.")) {
-                return false;
-            } else if (keyword.equals("CARDNAME can't attack if you cast a spell this turn.") && c.getController().getSpellsCastThisTurn() > 0) {
-                return false;
-            } else if (keyword.equals("Defender") && !c.hasKeyword("CARDNAME can attack as though it didn't have defender.")) {
-                return false;
-            } else if (keyword.equals("CARDNAME can't attack during extra turns.")) {
-                if (c.getGame().getPhaseHandler().getPlayerTurn().isPlayingExtraTurn())
-                    return false;
-            } else if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
-                final String defined = keyword.split(":")[1];
-                final Player player = AbilityUtils.getDefinedPlayers(c, defined, null).get(0);
-                if (!defender.equals(player)) {
-                    return false;
-                }
-            }
-        }
-
-        // The creature won't untap next turn
-        if (c.isTapped() && !Untap.canUntap(c)) {
-            return false;
-        }
-        final Game game = c.getGame();
-        // CantBeActivated static abilities
-        for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
-            final FCollectionView<StaticAbility> staticAbilities = ca.getStaticAbilities();
-            for (final StaticAbility stAb : staticAbilities) {
-                if (stAb.applyAbility("CantAttack", c, defender)) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    } // canAttack()
-
-    /**
-     * <p>
-     * checkPropagandaEffects.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param bLast
-     *            a boolean.
-     */
-    public static boolean checkPropagandaEffects(final Game game, final Card c, final Combat combat) {
-        Cost attackCost = new Cost(ManaCost.ZERO, true);
-        // Sort abilities to apply them in proper order
-        for (Card card : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
-            final Iterable<StaticAbility> staticAbilities = card.getStaticAbilities();
-            for (final StaticAbility stAb : staticAbilities) {
-                Cost additionalCost = stAb.getAttackCost(c, combat.getDefenderByAttacker(c));
-                if (additionalCost != null) {
-                    attackCost.add(additionalCost);
-                }
-            }
-        }
-
-        // Not a great solution, but prevents a crash by passing a fake SA for Propaganda payments
-        // If there's a better way of handling this somewhere deeper in the code, feel free to remove
-        SpellAbility fakeSA = new SpellAbility.EmptySa(c, c.getController());
-
-        boolean isFree = attackCost.getTotalMana().isZero() && attackCost.isOnlyManaCost(); // true if needless to pay
-        return isFree || c.getController().getController().payManaOptional(c, attackCost, fakeSA, "Pay additional cost to declare " + c + " an attacker", ManaPaymentPurpose.DeclareAttacker);
-    }
-
-    /**
-     * <p>
-     * This method checks triggered effects of attacking creatures, right before
-     * defending player declares blockers.
-     * </p>
-     * @param game
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     */
-    public static void checkDeclaredAttacker(final Game game, final Card c, final Combat combat) {
-        // Run triggers
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
-        runParams.put("Attacker", c);
-        final List<Card> otherAttackers = combat.getAttackers();
-        otherAttackers.remove(c);
-        runParams.put("OtherAttackers", otherAttackers);
-        runParams.put("Attacked", combat.getDefenderByAttacker(c));
-        game.getTriggerHandler().runTrigger(TriggerType.Attacks, runParams, false);
-
-        // Annihilator: can be copied by Strionic Resonator now
-        if (!c.getDamageHistory().getCreatureAttackedThisCombat()) {
-            for (final String key : c.getKeywords()) {
-                if (!key.startsWith("Annihilator ")) continue;
-                final String[] k = key.split(" ", 2);
-
-                String sb = "Annihilator - Defending player sacrifices " + k[1] + " permanents.";
-                String effect = "AB$ Sacrifice | Cost$ 0 | Defined$ DefendingPlayer | SacValid$ Permanent | Amount$ " + k[1];
-
-                SpellAbility ability = AbilityFactory.getAbility(effect, c);
-                ability.setActivatingPlayer(c.getController());
-                ability.setDescription(sb);
-                ability.setStackDescription(sb);
-                ability.setTrigger(true);
-
-                game.getStack().addSimultaneousStackEntry(ability);
-
-            }
-        }
-
-        c.getDamageHistory().setCreatureAttackedThisCombat(true);
-        c.getDamageHistory().clearNotAttackedSinceLastUpkeepOf();
-        c.getController().setAttackedWithCreatureThisTurn(true);
-        c.getController().incrementAttackersDeclaredThisTurn();
-    } // checkDeclareAttackers
-
-
     public static void handleRampage(final Game game, final Card a, final List<Card> blockers) {
         for (final String keyword : a.getKeywords()) {
-            int idx = keyword.indexOf("Rampage ");
-            if ( idx < 0)
+            final int idx = keyword.indexOf("Rampage ");
+            if (idx < 0)
                 continue;
 
             final int numBlockers = blockers.size();
-            if (numBlockers > 1) {
-                final int magnitude = Integer.valueOf(keyword.substring(idx + "Rampage ".length()));
-                CombatUtil.executeRampageAbility(game, a, magnitude, numBlockers);
-            }
+            final int magnitude = Integer.valueOf(keyword.substring(idx + "Rampage ".length()));
+            CombatUtil.executeRampageAbility(game, a, magnitude, numBlockers);
         } // end Rampage
-    }
-
-    public static void handleFlankingKeyword(final Game game, final Card attacker, final List<Card> blockers) {
-        for (Card blocker : blockers) {
-            if (attacker.hasKeyword("Flanking") && !blocker.hasKeyword("Flanking")) {
-                int flankingMagnitude = 0;
-
-                for (String kw : attacker.getKeywords()) {
-                    if (kw.equals("Flanking")) {
-                        flankingMagnitude++;
-                    }
-                }
-
-                // Rule 702.23b:  If a creature has multiple instances of flanking, each triggers separately.
-                for( int i = 0; i < flankingMagnitude; i++ ) {
-                    String effect = String.format("AB$ Pump | Cost$ 0 | Defined$ CardUID_%d | NumAtt$ -1 | NumDef$ -1 | ", blocker.getId());
-                    String desc = String.format("StackDescription$ Flanking (The blocking %s gets -1/-1 until end of turn)", blocker.getName());
-
-                    SpellAbility ability = AbilityFactory.getAbility(effect + desc, attacker);
-                    ability.setActivatingPlayer(attacker.getController());
-                    ability.setDescription(ability.getStackDescription());
-                    ability.setTrigger(true);
-
-                    game.getStack().addSimultaneousStackEntry(ability);
-                }
-            } // flanking
-
-            blocker.addBlockedThisTurn(attacker);
-            attacker.addBlockedByThisTurn(blocker);
-        }
     }
 
     /**
@@ -1032,46 +1007,42 @@ public class CombatUtil {
      *            - the number of creatures blocking this rampaging creature
      */
     private static void executeRampageAbility(final Game game, final Card c, final int magnitude, final int numBlockers) {
-        // numBlockers starts with 1 since it is for every creature beyond the first
-        for (int i = 1; i < numBlockers; i++) {
-            String effect = "AB$ Pump | Cost$ 0 | " + c.getId() + " | NumAtt$ " + magnitude + " | NumDef$ " + magnitude + " | ";
-            String desc = "StackDescription$ Rampage " + magnitude + " (Whenever CARDNAME becomes blocked, it gets +" + magnitude + "/+"
-                    + magnitude + " until end of turn for each creature blocking it beyond the first.)";
+        final int totalBonus = Math.max(0, (numBlockers - 1) * magnitude);
+        final String effect = "AB$ Pump | Cost$ 0 | " + c.getId() + " | NumAtt$ " + totalBonus + " | NumDef$ " + totalBonus + " | ";
+        final String desc = "StackDescription$ Rampage " + magnitude + " (Whenever CARDNAME becomes blocked, it gets +" + magnitude + "/+"
+                + magnitude + " until end of turn for each creature blocking it beyond the first.)";
 
-            SpellAbility ability = AbilityFactory.getAbility(effect + desc, c);
-            ability.setActivatingPlayer(c.getController());
-            ability.setDescription(ability.getStackDescription());
-            ability.setTrigger(true);
+        final SpellAbility ability = AbilityFactory.getAbility(effect + desc, c);
+        ability.setActivatingPlayer(c.getController());
+        ability.setDescription(ability.getStackDescription());
+        ability.setTrigger(true);
 
-            game.getStack().addSimultaneousStackEntry(ability);
-        }
+        game.getStack().addSimultaneousStackEntry(ability);
     }
 
-    public static List<Pair<Card, GameEntity>> getMandatoryAttackers(Player attackingPlayer, Combat combat, FCollectionView<GameEntity> defenders) {
-        List<Pair<Card, GameEntity>> attackers = new ArrayList<Pair<Card, GameEntity>>();
-        CardCollectionView possibleAttackers = attackingPlayer.getCardsIn(ZoneType.Battlefield);
-        for (Card c : Iterables.filter(possibleAttackers, CardPredicates.Presets.CREATURES)) {
-            GameEntity mustAttack = c.getController().getMustAttackEntity() ;
-            if (c.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
-                final int i = c.getKeywordPosition("CARDNAME attacks specific player each combat if able");
-                final String defined = c.getKeywords().get(i).split(":")[1];
-                mustAttack = AbilityUtils.getDefinedPlayers(c, defined, null).get(0);
-            }
-            if (mustAttack != null && CombatUtil.canAttack(c, mustAttack, combat)) {
-                attackers.add(Pair.of(c, mustAttack));
-                continue;
-            }
-            if (c.hasKeyword("CARDNAME attacks each combat if able.") || 
-                    (c.hasKeyword("CARDNAME attacks each turn if able.") && !c.getDamageHistory().getCreatureAttackedThisTurn())) {
-                for (GameEntity def : defenders) {
-                    if (CombatUtil.canAttack(c, def, combat)) {
-                        attackers.add(Pair.of(c, def));
-                        break;
-                    }
+    public static void handleFlankingKeyword(final Game game, final Card attacker, final List<Card> blockers) {
+        for (final Card blocker : blockers) {
+            if (attacker.hasKeyword("Flanking") && !blocker.hasKeyword("Flanking")) {
+                final int flankingMagnitude = attacker.getKeywordAmount("Flanking");
+
+                // Rule 702.23b:  If a creature has multiple instances of flanking, each triggers separately.
+                for (int i = 0; i < flankingMagnitude; i++) {
+                    final String effect = String.format("AB$ Pump | Cost$ 0 | Defined$ CardUID_%d | NumAtt$ -1 | NumDef$ -1 | ", blocker.getId());
+                    final String desc = String.format("StackDescription$ Flanking (The blocker %s (%d) gets -1/-1 until end of turn)", blocker.getName(), blocker.getId());
+
+                    final SpellAbility ability = AbilityFactory.getAbility(effect + desc, attacker);
+                    ability.setActivatingPlayer(attacker.getController());
+                    ability.setDescription(ability.getStackDescription());
+                    ability.setTrigger(true);
+
+                    game.getStack().addSimultaneousStackEntry(ability);
                 }
-            }
+            } // flanking
+
+            // TODO what are these lines doing here?
+            blocker.addBlockedThisTurn(attacker);
+            attacker.addBlockedByThisTurn(blocker);
         }
-        return attackers;
     }
 
 } // end class CombatUtil

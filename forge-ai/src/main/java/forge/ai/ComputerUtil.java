@@ -701,7 +701,7 @@ public class ComputerUtil {
                     playNow = false;
                     break;
                 }
-                if (!playNow && c.isCreature() && ComputerUtil.canAttackNextTurn(c) && c.canBeEquippedBy(card)) {
+                if (!playNow && c.isCreature() && ComputerUtilCombat.canAttackNextTurn(c) && c.canBeEquippedBy(card)) {
                     playNow = true;
                 }
             }
@@ -782,7 +782,7 @@ public class ComputerUtil {
             Combat combat = new Combat(ai.getOpponent());
             CardCollectionView attackers = ai.getOpponent().getCreaturesInPlay();
             for (Card att : attackers) {
-                if (CombatUtil.canAttackNextTurn(att, ai)) {
+                if (ComputerUtilCombat.canAttackNextTurn(att, ai)) {
                     combat.addAttacker(att, att.getController().getOpponent());
                 }
             }
@@ -1745,7 +1745,4 @@ public class ComputerUtil {
         return bestBoardPosition;
     }
 
-    public static boolean canAttackNextTurn(final Card c) {
-        return CombatUtil.canAttackNextTurn(c, c.getController().getOpponent());
-    }
 }

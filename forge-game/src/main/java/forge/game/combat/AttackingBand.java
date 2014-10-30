@@ -1,23 +1,22 @@
 package forge.game.combat;
 
-import forge.game.GameEntity;
+import java.util.ArrayList;
+import java.util.List;
+
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class AttackingBand {
     private CardCollection attackers = new CardCollection();
     private Boolean blocked = null; // even if all blockers were killed before FS or CD, band remains blocked
     
-    public AttackingBand(List<Card> band, GameEntity def) {
+    public AttackingBand(final List<Card> band) {
         attackers.addAll(band);
     }
     
-    public AttackingBand(Card card, GameEntity def) {
+    public AttackingBand(final Card card) {
         attackers.add(card);
     }
 

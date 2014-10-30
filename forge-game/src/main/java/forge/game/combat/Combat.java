@@ -17,8 +17,19 @@
  */
 package forge.game.combat;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.apache.commons.lang3.tuple.Pair;
+
+import com.google.common.base.Function;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 
@@ -26,18 +37,10 @@ import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
-import forge.game.zone.ZoneType;
 import forge.util.FCollection;
 import forge.util.FCollectionView;
-
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * <p>
@@ -49,6 +52,7 @@ import java.util.Map.Entry;
  */
 public class Combat {
     private final Player playerWhoAttacks;
+    private final AttackConstraints attackConstraints;
     // Defenders, as they are attacked by hostile forces
     private final FCollection<GameEntity> attackableEntries = new FCollection<GameEntity>();
 
@@ -65,17 +69,15 @@ public class Combat {
     // List holds creatures who have dealt 1st strike damage to disallow them deal damage on regular basis (unless they have double-strike KW) 
     private CardCollection combatantsThatDealtFirstStrikeDamage = new CardCollection();
 
-    public Combat(Player attacker) {
+    public Combat(final Player attacker) {
         playerWhoAttacks = attacker;
 
         // Create keys for all possible attack targets
-        for (Player defender : playerWhoAttacks.getOpponents()) {
+        for (final GameEntity defender : CombatUtil.getAllPossibleDefenders(playerWhoAttacks)) {
             attackableEntries.add(defender);
-            CardCollection planeswalkers = CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
-            for (final Card pw : planeswalkers) {
-                attackableEntries.add(pw);
-            }
         }
+
+        attackConstraints = new AttackConstraints(this);
     }
 
     public void endCombat() {
@@ -102,10 +104,17 @@ public class Combat {
         }
     }
 
+    public final void clearAttackers() {
+        attackedByBands.clear();
+    }
+
     public final Player getAttackingPlayer() {
         return playerWhoAttacks;
     }
 
+    public final AttackConstraints getAttackConstraints() {
+        return attackConstraints;
+    }
     public final FCollectionView<GameEntity> getDefenders() {
         return attackableEntries;
     }
@@ -129,6 +138,15 @@ public class Combat {
             }
         }
         return pwDefending;
+    }
+
+    public final Map<Card, GameEntity> getAttackersAndDefenders() {
+        return Maps.asMap(getAttackers(), new Function<Card, GameEntity>() {
+            @Override
+            public GameEntity apply(final Card attacker) {
+                return getDefenderByAttacker(attacker);
+            }
+        });
     }
 
     public final List<AttackingBand> getAttackingBandsOf(GameEntity defender) {
@@ -161,7 +179,7 @@ public class Combat {
         }
 
         if (band == null || !attackersOfDefender.contains(band)) {
-            band = new AttackingBand(c, defender);
+            band = new AttackingBand(c);
             attackersOfDefender.add(band);
         }
         else {
@@ -305,8 +323,8 @@ public class Combat {
         return blocked;
     }
 
-    public final List<AttackingBand> getAttackingBandsBlockedBy(Card blocker) {
-        List<AttackingBand> bands = Lists.newArrayList();
+    public final FCollectionView<AttackingBand> getAttackingBandsBlockedBy(Card blocker) {
+        FCollection<AttackingBand> bands = new FCollection<AttackingBand>();
         for (Entry<AttackingBand, Card> kv : blockedBands.entries()) {
             if (kv.getValue().equals(blocker)) {
                 bands.add(kv.getKey());
@@ -445,7 +463,7 @@ public class Combat {
     }
 
     public final boolean removeAbsentCombatants() {
-        // iterate all attackers and remove them
+        // iterate all attackers and remove illegal declarations
         CardCollection missingCombatants = new CardCollection();
         for (Entry<GameEntity, AttackingBand> ee : attackedByBands.entries()) {
             CardCollectionView atk = ee.getValue().getAttackers();
@@ -748,16 +766,16 @@ public class Combat {
     }
 
     public void saveLKI(Card lastKnownInfo) {
-        List<AttackingBand> attackersBlocked = null;
-        AttackingBand attackingBand = getBandOfAttacker(lastKnownInfo);
-        boolean isAttacker = attackingBand != null;
+        FCollectionView<AttackingBand> attackersBlocked = null;
+        final AttackingBand attackingBand = getBandOfAttacker(lastKnownInfo);
+        final boolean isAttacker = attackingBand != null;
         if (!isAttacker) {
-            attackersBlocked= getAttackingBandsBlockedBy(lastKnownInfo);
+            attackersBlocked = getAttackingBandsBlockedBy(lastKnownInfo);
             if (attackersBlocked.isEmpty()) {
                 return; // card was not even in combat
             }
         }
-        List<AttackingBand> relatedBands = isAttacker ? Lists.newArrayList(attackingBand) : attackersBlocked;
+        final FCollectionView<AttackingBand> relatedBands = isAttacker ? new FCollection<AttackingBand>(attackingBand) : attackersBlocked;
         lkiCache.put(lastKnownInfo, new CombatLki(isAttacker, relatedBands));
     }
 }

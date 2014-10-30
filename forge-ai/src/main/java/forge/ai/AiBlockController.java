@@ -838,7 +838,7 @@ public class AiBlockController {
                         combat.addBlocker(attacker, blocker);
                         if (blocker.getMustBlockCards() != null) {
                             int mustBlockAmt = blocker.getMustBlockCards().size();
-                            List<Card> blockedSoFar = combat.getAttackersBlockedBy(blocker);
+                            final CardCollectionView blockedSoFar = combat.getAttackersBlockedBy(blocker);
                             boolean canBlockAnother = CombatUtil.canBlockMoreCreatures(blocker, blockedSoFar);
                             if (!canBlockAnother || mustBlockAmt == blockedSoFar.size()) {
                                 blockersLeft.remove(blocker);

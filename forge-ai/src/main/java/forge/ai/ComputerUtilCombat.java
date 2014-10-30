@@ -18,6 +18,7 @@
 package forge.ai;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.game.CardTraitBase;
 import forge.game.Game;
@@ -34,6 +35,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.phase.Untap;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilityActivated;
@@ -60,6 +62,63 @@ import java.util.Map;
  * @version $Id: ComputerUtil.java 19179 2013-01-25 18:48:29Z Max mtg  $
  */
 public class ComputerUtilCombat {
+
+    /**
+     * <p>
+     * canAttackNextTurn.
+     * </p>
+     * 
+     * @param attacker
+     *            a {@link forge.game.card.Card} object.
+     * @param def
+     *            the defending {@link GameEntity}.
+     * @return a boolean.
+     */
+    public static boolean canAttackNextTurn(final Card attacker) {
+        final Iterable<GameEntity> defenders = CombatUtil.getAllPossibleDefenders(attacker.getController());
+        return Iterables.any(defenders, new Predicate<GameEntity>() {
+            @Override public boolean apply(final GameEntity input) {
+                return ComputerUtilCombat.canAttackNextTurn(attacker, input);
+            };
+        });
+    } // canAttackNextTurn(Card)
+
+    /**
+     * <p>
+     * canAttackNextTurn.
+     * </p>
+     * 
+     * @param atacker
+     *            a {@link forge.game.card.Card} object.
+     * @param def
+     *            the defending {@link GameEntity}.
+     * @return a boolean.
+     */
+    public static boolean canAttackNextTurn(final Card atacker, final GameEntity defender) {
+        if (!atacker.isCreature()) {
+            return false;
+        }
+        if (!CombatUtil.canAttackNextTurn(atacker, defender)) {
+            return false;
+        }
+
+        for (final String keyword : atacker.getKeywords()) {
+            if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
+                final String defined = keyword.split(":")[1];
+                final Player player = AbilityUtils.getDefinedPlayers(atacker, defined, null).get(0);
+                if (!defender.equals(player)) {
+                    return false;
+                }
+            }
+        }
+
+        // The creature won't untap next turn
+        if (atacker.isTapped() && !Untap.canUntap(atacker)) {
+            return false;
+        }
+
+        return true;
+    } // canAttackNextTurn(Card, GameEntity)
 
     /**
      * <p>

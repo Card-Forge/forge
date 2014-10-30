@@ -83,15 +83,11 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
 
     // This should be also usable by the AI to forecast an effect (so it must
     // not change the game state)
-    public int staticDamagePrevention(final int damage, final Card source, final boolean isCombat, final boolean isTest) {
-        return 0;
-    }
+    public abstract int staticDamagePrevention(final int damage, final Card source, final boolean isCombat, final boolean isTest);
 
     // This should be also usable by the AI to forecast an effect (so it must
     // not change the game state)
-    public int staticReplaceDamage(final int damage, final Card source, final boolean isCombat) {
-        return 0;
-    }
+    public abstract int staticReplaceDamage(final int damage, final Card source, final boolean isCombat);
 
     public abstract int replaceDamage(final int damage, final Card source, final boolean isCombat);
 
@@ -151,9 +147,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         preventionShieldsWithEffects = new TreeMap<Card, Map<String, String>>();
     }
 
-    public boolean hasKeyword(final String keyword) {
-        return false;
-    }
+    public abstract boolean hasKeyword(final String keyword);
 
     // GameEntities can now be Enchanted
     public final CardCollectionView getEnchantedBy(boolean allowModify) {
@@ -214,9 +208,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         }
     }
 
-    public boolean hasProtectionFrom(final Card source) {
-        return false;
-    }
+    public abstract boolean hasProtectionFrom(final Card source);
 
     @Override
     public final boolean equals(Object o) {

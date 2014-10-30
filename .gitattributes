@@ -250,8 +250,10 @@ forge-core/src/main/java/forge/util/ThreadUtil.java -text
 forge-core/src/main/java/forge/util/maps/EnumMapOfLists.java -text
 forge-core/src/main/java/forge/util/maps/EnumMapToAmount.java -text
 forge-core/src/main/java/forge/util/maps/HashMapOfLists.java -text
+forge-core/src/main/java/forge/util/maps/LinkedHashMapToAmount.java -text
 forge-core/src/main/java/forge/util/maps/MapOfLists.java -text
 forge-core/src/main/java/forge/util/maps/MapToAmount.java -text
+forge-core/src/main/java/forge/util/maps/MapToAmountUtil.java -text
 forge-core/src/main/java/forge/util/maps/package-info.java -text
 forge-core/src/main/java/forge/util/storage/IStorage.java -text
 forge-core/src/main/java/forge/util/storage/StorageBase.java -text
@@ -450,11 +452,16 @@ forge-game/src/main/java/forge/game/card/CardUtil.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardView.java -text
 forge-game/src/main/java/forge/game/card/CounterType.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/package-info.java -text
+forge-game/src/main/java/forge/game/combat/AttackConstraints.java -text
+forge-game/src/main/java/forge/game/combat/AttackRequirement.java -text
+forge-game/src/main/java/forge/game/combat/AttackRestriction.java -text
+forge-game/src/main/java/forge/game/combat/AttackRestrictionType.java -text
 forge-game/src/main/java/forge/game/combat/AttackingBand.java -text
 forge-game/src/main/java/forge/game/combat/Combat.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/combat/CombatLki.java -text
 forge-game/src/main/java/forge/game/combat/CombatUtil.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/combat/CombatView.java -text
+forge-game/src/main/java/forge/game/combat/GlobalAttackRestrictions.java -text
 forge-game/src/main/java/forge/game/cost/Cost.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/cost/CostAddMana.java -text
 forge-game/src/main/java/forge/game/cost/CostChooseCreatureType.java -text
@@ -4811,6 +4818,7 @@ forge-gui/res/cardsfolder/e/eiganjo_free_riders.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/eight_and_a_half_tails.txt -text
 forge-gui/res/cardsfolder/e/eight_and_a_half_tails_avatar.txt -text
 forge-gui/res/cardsfolder/e/eightfold_maze.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/e/ekundu_cyclops.txt -text
 forge-gui/res/cardsfolder/e/ekundu_griffin.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/el_hajjaj.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/eladamri.txt -text
@@ -11733,6 +11741,7 @@ forge-gui/res/cardsfolder/s/scare_tactics.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/scarecrone.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/scarecrow.txt -text
 forge-gui/res/cardsfolder/s/scarland_thrinax.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/scarred_puma.txt -text
 forge-gui/res/cardsfolder/s/scarred_vinebreeder.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/scars_of_the_veteran.txt -text
 forge-gui/res/cardsfolder/s/scarscale_ritual.txt svneol=native#text/plain
@@ -14720,6 +14729,7 @@ forge-gui/res/cardsfolder/v/vexing_shusher.txt -text
 forge-gui/res/cardsfolder/v/vexing_sphinx.txt -text
 forge-gui/res/cardsfolder/v/vhati_il_dal.txt -text
 forge-gui/res/cardsfolder/v/vial_of_poison.txt -text
+forge-gui/res/cardsfolder/v/viashino_bey.txt -text
 forge-gui/res/cardsfolder/v/viashino_bladescout.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/viashino_cutthroat.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/viashino_fangtail.txt svneol=native#text/plain
@@ -15087,6 +15097,7 @@ forge-gui/res/cardsfolder/w/warriors_honor.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/warriors_lesson.txt -text
 forge-gui/res/cardsfolder/w/warriors_oath.txt -text
 forge-gui/res/cardsfolder/w/warriors_stand.txt -text
+forge-gui/res/cardsfolder/w/wars_toll.txt -text
 forge-gui/res/cardsfolder/w/warstorm_surge.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/warthog.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wash_out.txt -text

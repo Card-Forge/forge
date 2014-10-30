@@ -17,7 +17,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.combat.Combat;
-import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -636,7 +635,7 @@ public class ComputerUtilCard {
         //Use actual attackers if available, else consider all possible attackers
         if (ai.getGame().getCombat() == null) {
             for (Card c : opp.getCreaturesInPlay()) {
-                if (CombatUtil.canAttackNextTurn(c, ai)) {
+                if (ComputerUtilCombat.canAttackNextTurn(c, ai)) {
                     combat.addAttacker(c, ai);
                 }
             }

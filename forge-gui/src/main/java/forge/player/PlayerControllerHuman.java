@@ -43,7 +43,6 @@ import forge.control.FControlGamePlayback;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.events.UiEventAttackerDeclared;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameEntityView;
@@ -780,22 +779,11 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public void declareAttackers(Player attackingPlayer, Combat combat) {
         if (mayAutoPass()) {
-            List<Pair<Card, GameEntity>> mandatoryAttackers = CombatUtil.getMandatoryAttackers(attackingPlayer, combat, combat.getDefenders());
-            if (!mandatoryAttackers.isEmpty()) {
-                //even if auto-passing attack phase, if there are any mandatory attackers,
-                //ensure they're declared and then delay slightly so user can see as much
-                for (Pair<Card, GameEntity> attacker : mandatoryAttackers) {
-                    combat.addAttacker(attacker.getLeft(), attacker.getRight());
-                    MatchUtil.fireEvent(new UiEventAttackerDeclared(CardView.get(attacker.getLeft()), CardView.get(attacker.getRight())));
-                }
-                try {
-                    Thread.sleep(FControlGamePlayback.combatDelay);
-                }
-                catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            if (CombatUtil.validateAttackers(combat)) {
+                return; //don't prompt to declare attackers if user chose to end the turn and not attacking is legal
+            } else {
+                autoPassCancel(); //otherwise: cancel auto pass because of this unexpected attack
             }
-            return; //don't prompt to declare attackers if user chose to end the turn
         }
 
         // This input should not modify combat object itself, but should return user choice
@@ -1022,11 +1010,10 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public void notifyOfValue(SpellAbility sa, GameObject realtedTarget, String value) {
         String message = MessageUtil.formatNotificationMessage(sa, player, realtedTarget, value);
-        if (sa.isManaAbility()) {
+        if (sa != null && sa.isManaAbility()) {
             game.getGameLog().add(GameLogEntryType.LAND, message);
-        }
-        else {
-            SGuiDialog.message(message, sa.getHostCard() == null ? "" : CardView.get(sa.getHostCard()).toString());
+        } else {
+            SGuiDialog.message(message, sa == null || sa.getHostCard() == null ? "" : CardView.get(sa.getHostCard()).toString());
         }
     }
 
