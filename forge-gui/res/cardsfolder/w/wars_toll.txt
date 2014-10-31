@@ -5,3 +5,4 @@ T:Mode$ TapsForMana | ValidCard$ Land.OppCtrl | TriggerZones$ Battlefield | Exec
 SVar:TrigTapAll:DB$ TapAll | Defined$ TriggeredPlayer | ValidCards$ Land
 S:Mode$ Continuous | Affected$ Creature.OppCtrl | AddKeyword$ If CARDNAME attacks, all creatures you control attack if able. | Description$ If a creature an opponent controls attacks, all creatures that player controls attack if able.
 SVar:NonStackingEffect:True
+Oracle:Whenever an opponent taps a land for mana, tap all lands that player controls.\nIf a creature an opponent controls attacks, all creatures that opponent controls attack if able.
