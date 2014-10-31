@@ -289,6 +289,9 @@ public class MatchUtil {
 
     public static boolean canCardBeShown(CardView cv) {
         if (currentPlayer == null) { return true; } //if not in game, card can be shown
+        if (currentPlayer.getController() instanceof PlayerControllerHuman && ((PlayerControllerHuman) currentPlayer.getController()).mayLookAtAllCards()) {
+        	return true;
+        }
         return cv.canBeShownTo(currentPlayer.getView());
     }
 
