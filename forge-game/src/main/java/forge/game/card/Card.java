@@ -4909,6 +4909,10 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             if (!hasCounters()) {
                 return false;
             }
+        } else if (property.startsWith("wasNotCast")) {
+            if (null != getCastFrom()) {
+                return false;
+            }
         } else if (property.startsWith("wasCastFrom")) {
             final String strZone = property.substring(11);
             final ZoneType realZone = ZoneType.smartValueOf(strZone);
