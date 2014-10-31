@@ -276,8 +276,10 @@ Ashiok
 Bolas
 Chandra
 Dack
+Daretti
 Domri
 Elspeth
+Freyalise
 Garruk
 Gideon
 Jace
@@ -285,7 +287,9 @@ Karn
 Kiora
 Koth
 Liliana
+Nahiri
 Nissa
+Nixilis
 Ral
 Sarkhan
 Sorin
