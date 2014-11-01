@@ -477,6 +477,11 @@ public class PlayerControllerHuman extends PlayerController {
             return false;
         }
 
+        // triggers with costs can always be declined by not paying the cost
+        if (sa.hasParam("Cost") && !sa.getParam("Cost").equals("0")) {
+        	return true;
+        }
+        
         final StringBuilder buildQuestion = new StringBuilder("Use triggered ability of ");
         buildQuestion.append(regtrig.getHostCard().toString()).append("?");
         if (!FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_PROMPT)) {

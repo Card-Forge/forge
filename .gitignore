@@ -214,6 +214,7 @@ forge-gui/tools/PerSetTrackingResults
 forge-gui/tools/oracleScript.log
 forge-net/target
 /forge.profile.properties
+/jgv.txt
 /nbactions.xml
 /pom.xml.next
 /pom.xml.releaseBackup
