@@ -6,5 +6,7 @@ K:Flash
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRemove | TriggerDescription$ When CARDNAME enters the battlefield, remove target attacking or blocking creature from combat.
 SVar:TrigRemove:AB$ RemoveFromCombat | Cost$ 0 | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature
+SVar:RemAIDeck:True
+SVar:AmbushAI:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hollowhenge_spirit.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying\nWhen Hollowhenge Spirit enters the battlefield, remove target attacking or blocking creature from combat.

@@ -777,8 +777,8 @@ public class AiController {
                     && (player.isUnlimitedHandSize() || player.getCardsIn(ZoneType.Hand).size() <= player.getMaxHandSize())
                     && player.getManaPool().totalMana() <= 0
                     && (game.getPhaseHandler().isPlayerTurn(player)
-                            || game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                    && !card.hasETBTrigger())
+                            || game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS))
+                    && (!card.hasETBTrigger() || card.hasSVar("AmbushAI"))
                     && !ComputerUtil.castPermanentInMain1(player, sa)) {
                 return AiPlayDecision.AnotherTime;
             }
