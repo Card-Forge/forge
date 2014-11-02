@@ -12,6 +12,17 @@ Release Notes
 We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
 
 
+- Refactor attack declarations -
+The game now correctly calculates whether an attack declaration is legal, based upon the restrictions and requirements present on the possible attacking creatures. AI support is not yet fully implemented, but the AI can always default to a legal attack declaration.
+
+
+---------
+New Cards
+---------
+
+Magnetic Web
+
+
 -------------------------------
 New Commander 2014 branch Cards
 -------------------------------
@@ -21,6 +32,34 @@ Stitcher Geralf
 Teferi, Temporal Archmage
 Angelic Field Marshal
 Feldon of the Third Path
+Reef Worm
+Containment Priest
+Flesh Carver
+Spoils of Blood
+Commander's Sphere
+Dualcaster Mage
+Overseer of the Damned
+Raving Dead
+Unstable Obelisk
+Warmonger Hellkite
+Titania, Protector of Argoth
+Jazal Goldmane
+Angel of the Dire Hour
+Scrap Mastery
+Flamekin Village
+Masterwork of Ingenuity
+AEther Gale
+Deploy to the Front
+Hallowed Spiritkeeper
+Daretti, Scrap Savant
+Freyalise, Llanowar's Fury
+Breaching Leviathan
+Wake the Dead
+Well of Ideas
+Creeperhulk
+Lifeblood Hydra
+Song of the Dryads
+Ob Nixilis of the Black Oath
 
 
 ------------
