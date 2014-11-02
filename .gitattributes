@@ -8522,6 +8522,7 @@ forge-gui/res/cardsfolder/m/magnetic_flux.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/magnetic_mine.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/magnetic_mountain.txt -text
 forge-gui/res/cardsfolder/m/magnetic_theft.txt -text
+forge-gui/res/cardsfolder/m/magnetic_web.txt -text
 forge-gui/res/cardsfolder/m/magnify.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/magnigoth_treefolk.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/magnivore.txt svneol=native#text/plain

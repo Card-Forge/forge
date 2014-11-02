@@ -54,7 +54,7 @@ public class AttackConstraints {
 
         // Number of "must attack" constraints on each creature with a magnet counter (equal to the number of permanents requiring that constraint).
         int nMagnetRequirements = 0;
-        final CardCollectionView magnetAttackers = CardLists.filter(combat.getAttackers(), CardPredicates.hasCounter(CounterType.MAGNET));
+        final CardCollectionView magnetAttackers = CardLists.filter(possibleAttackers, CardPredicates.hasCounter(CounterType.MAGNET));
         // Only require if a creature with a magnet counter on it attacks.
         if (!magnetAttackers.isEmpty()) {
             nMagnetRequirements = CardLists.getAmountOfKeyword(
