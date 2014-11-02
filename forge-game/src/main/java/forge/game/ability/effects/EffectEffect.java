@@ -116,6 +116,14 @@ public class EffectEffect extends SpellAbilityEffect {
 
         final Card e = eff;
 
+        // Grant SVars first in order to give references to granted abilities
+        if (effectSVars != null) {
+            for (final String s : effectSVars) {
+                final String actualSVar = hostCard.getSVar(s);
+                eff.setSVar(s, actualSVar);
+            }
+        }
+
         // Abilities, triggers and SVars work the same as they do for Token
         // Grant abilities
         if (effectAbilities != null) {
@@ -155,14 +163,6 @@ public class EffectEffect extends SpellAbilityEffect {
                 final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement, eff, true);
                 final ReplacementEffect addedReplacement = eff.addReplacementEffect(parsedReplacement);
                 addedReplacement.setIntrinsic(true);
-            }
-        }
-
-        // Grant SVars
-        if (effectSVars != null) {
-            for (final String s : effectSVars) {
-                final String actualSVar = hostCard.getSVar(s);
-                eff.setSVar(s, actualSVar);
             }
         }
 
