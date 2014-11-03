@@ -36,20 +36,7 @@ public class ManaCostAdjustment {
     
         boolean isStateChangeToFaceDown = false;
         if (sa.isSpell()) {
-            if (sa.isDelve()) {
-                final Player pc = originalCard.getController();
-                final CardCollection mutableGrave = new CardCollection(pc.getCardsIn(ZoneType.Graveyard));
-                final CardCollectionView toExile = pc.getController().chooseCardsToDelve(cost.getUnpaidShards(ManaCostShard.COLORLESS), mutableGrave);
-                for (final Card c : toExile) {
-                    cost.decreaseColorlessMana(1);
-                    if (!test) {
-                        pc.getGame().getAction().exile(c);
-                    }
-                }
-            }
-            else if (sa.getHostCard().hasKeyword("Convoke")) {
-                adjustCostByConvoke(cost, sa, test);
-            } else if (((Spell) sa).isCastFaceDown()) {
+            if (((Spell) sa).isCastFaceDown()) {
             	// Turn face down to apply cost modifiers correctly
             	originalCard.setState(CardStateName.FaceDown, false);
             	isStateChangeToFaceDown = true;
@@ -98,6 +85,23 @@ public class ManaCostAdjustment {
         for (final StaticAbility stAb : setAbilities) {
             applyAbility(stAb, "SetCost", sa, cost);
         }
+
+        if (sa.isSpell()) {
+            if (sa.isDelve()) {
+                final Player pc = originalCard.getController();
+                final CardCollection mutableGrave = new CardCollection(pc.getCardsIn(ZoneType.Graveyard));
+                final CardCollectionView toExile = pc.getController().chooseCardsToDelve(cost.getUnpaidShards(ManaCostShard.COLORLESS), mutableGrave);
+                for (final Card c : toExile) {
+                    cost.decreaseColorlessMana(1);
+                    if (!test) {
+                        pc.getGame().getAction().exile(c);
+                    }
+                }
+            }
+            else if (sa.getHostCard().hasKeyword("Convoke")) {
+                adjustCostByConvoke(cost, sa, test);
+            }
+        } // isSpell
         
         // Reset card state (if changed)
         if (isStateChangeToFaceDown) {
