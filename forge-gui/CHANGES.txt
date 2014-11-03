@@ -20,7 +20,11 @@ The game now correctly calculates whether an attack declaration is legal, based 
 New Cards
 ---------
 
+Ekundu Cyclops
 Magnetic Web
+Scarred Puma
+Viashino Bey
+War's Toll
 
 
 -------------------------------
