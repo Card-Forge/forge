@@ -29,7 +29,6 @@ public class AttachAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
 
@@ -43,8 +42,15 @@ public class AttachAi extends SpellAbilityAi {
             }
         }
 
+        if (ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                && !"Curse".equals(sa.getParam("AILogic"))) {
+            return false;
+        }
+
         // prevent run-away activations - first time will always return true
-        final boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
+        	return false;
+        }
 
         // Attach spells always have a target
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -67,12 +73,7 @@ public class AttachAi extends SpellAbilityAi {
             source.setSVar("PayX", Integer.toString(xPay));
         }
 
-        if (ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                && !"Curse".equals(sa.getParam("AILogic"))) {
-            return false;
-        }
-
-        return chance;
+        return true;
     }
 
     /**
@@ -166,8 +167,7 @@ public class AttachAi extends SpellAbilityAi {
             type = "Island";
         }
 
-        list = CardLists.getNotType(list, type); // Filter out Basic Lands that have the
-                                      // same type as the changing type
+        list = CardLists.getNotType(list, type); // Filter out Basic Lands that have the same type as the changing type
 
         final Card c = ComputerUtilCard.getBestAI(list);
 
