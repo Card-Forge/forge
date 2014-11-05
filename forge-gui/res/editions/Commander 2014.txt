@@ -1,0 +1,345 @@
+[metadata]
+Code=C14
+Date=2014-11-07
+Name=Commander 2014
+Code2=C14
+Type=Other
+
+[cards]
+R Angel of the Dire Hour
+R Angelic Field Marshal
+R Benevolent Offering
+R Comeuppance
+R Containment Priest
+R Deploy to the Front
+R Fell the Mighty
+R Hallowed Spiritkeeper
+M Jazal Goldmane
+M Nahiri, the Lithomancer
+R AEther Gale
+R Breaching Leviathan
+R Domineering Will
+R Dulcet Sirens
+R Intellectual Offering
+R Reef Worm
+M Stitcher Geralf
+R Stormsurge Kraken
+M Teferi, Temporal Archmage
+R Well of Ideas
+R Demon of Wailing Agonies
+R Flesh Carver
+M Ghoulcaller Gisa
+R Infernal Offering
+R Malicious Affliction
+R Necromantic Selection
+M Ob Nixilis of the Black Oath
+R Overseer of the Damned
+R Raving Dead
+R Spoils of Blood
+R Wake the Dead
+R Bitter Feud
+M Daretti, Scrap Savant
+R Dualcaster Mage
+M Feldon of the Third Path
+R Impact Resonance
+R Incite Rebellion
+R Scrap Mastery
+R Tyrant's Familiar
+R Volcanic Offering
+R Warmonger Hellkite
+R Creeperhulk
+M Freyalise, Llanowar's Fury
+R Grave Sifter
+R Lifeblood Hydra
+R Siege Behemoth
+R Song of the Dryads
+R Sylvan Offering
+R Thunderfoot Baloth
+M Titania, Protector of Argoth
+R Wave of Vitriol
+R Wolfcaller's Howl
+U Assault Suit
+C Commander's Sphere
+R Crown of Doom
+U Loreseeker's Stone
+R Masterwork of Ingenuity
+U Unstable Obelisk
+U Arcane Lighthouse
+R Flamekin Village
+U Myriad Landscape
+U Artisan of Kozilek
+R Adarkar Valkyrie
+U Afterlife
+R Armistice
+U Brave the Elements
+R Cathars' Crusade
+U Celestial Crusader
+U Condemn
+R Decree of Justice
+U Flickerwisp
+R Geist-Honored Monk
+U Gift of Estates
+R Grand Abolisher
+R Kemba, Kha Regent
+C Kor Sanctifiers
+R Marshal's Anthem
+R Martial Coup
+R Mentor of the Meek
+U Midnight Haunting
+R Mobilization
+R Nomads' Assembly
+R Oblation
+R Requiem Angel
+U Return to Dust
+R Sacred Mesa
+M Serra Avatar
+R Silverblade Paladin
+U Skyhunter Skirmisher
+U Spectral Procession
+M Sun Titan
+R Sunblast Angel
+R True Conviction
+R Twilight Shepherd
+R White Sun's Zenith
+C Whitemane Lion
+U Wing Shards
+U Azure Mage
+U Brine Elemental
+R Cackling Counterpart
+U Call to Mind
+C Compulsive Research
+U Concentrate
+R Cyclonic Rift
+R Deep-Sea Kraken
+U Dismiss
+R Distorting Wake
+C Exclude
+C Fathom Seer
+U Fog Bank
+U Fool's Demise
+M Frost Titan
+R Hoverguard Sweepers
+R Infinite Reflection
+C Into the Roil
+R Ixidron
+M Lorthos, the Tidemaker
+C Mulldrifter
+R Phyrexian Ingester
+U Pongify
+U Riptide Survivor
+R Rite of Replication
+C Rush of Knowledge
+C Sea Gate Oracle
+C Shaper Parasite
+R Sphinx of Jwar Isle
+R Sphinx of Magosi
+R Sphinx of Uthuun
+R Stroke of Genius
+U Turn to Frog
+U Willbender
+M Abyssal Persecutor
+R AEther Snap
+U Annihilate
+R Bad Moon
+R Black Sun's Zenith
+R Bloodgift Demon
+R Butcher of Malakir
+R Crypt Ghast
+R Disciple of Bolas
+R Drana, Kalastria Bloodchief
+U Dread Return
+R Dregs of Sorrow
+U Evernight Shade
+M Grave Titan
+C Gray Merchant of Asphodel
+R Liliana's Reaver
+R Magus of the Coffers
+U Morkrut Banshee
+R Mutilate
+R Nantuko Shade
+U Nekrataal
+R Pestilence Demon
+U Phyrexian Gargantua
+R Pontiff of Blight
+R Profane Command
+R Promise of Power
+C Read the Bones
+M Reaper from the Abyss
+U Shriekmaw
+C Sign in Blood
+U Skeletal Scrying
+R Skirsdag High Priest
+R Sudden Spoiling
+C Syphon Mind
+C Tendrils of Corruption
+C Tragic Slip
+U Vampire Hexmage
+U Victimize
+M Xathrid Demon
+U Beetleback Chief
+R Blasphemous Act
+M Bogardan Hellkite
+R Chaos Warp
+C Faithless Looting
+U Flametongue Kavu
+R Goblin Welder
+R Hoard-Smelter Dragon
+C Ingot Chewer
+R Magmaquake
+U Spitebellows
+R Starstorm
+R Tuktuk the Explorer
+U Whipflare
+R Word of Seizing
+R Beastmaster Ascension
+R Collective Unconscious
+U Desert Twister
+U Drove of Elves
+R Elvish Archdruid
+C Elvish Mystic
+C Elvish Skysweeper
+C Elvish Visionary
+C Essence Warden
+R Ezuri, Renegade Leader
+C Farhaven Elf
+R Fresh Meat
+U Grim Flowering
+C Harrow
+U Hunting Triad
+R Immaculate Magistrate
+U Imperious Perfect
+R Joraga Warcaller
+C Llanowar Elves
+C Lys Alana Huntmaster
+R Masked Admirers
+U Overrun
+R Overwhelming Stampede
+M PrAEtor's Counsel
+C Priest of Titania
+R Primordial Sage
+M Rampaging Baloths
+U Reclamation Sage
+R Silklash Spider
+R Soul of the Harvest
+C Sylvan Ranger
+R Sylvan Safekeeper
+R Terastodon
+C Thornweald Archer
+C Timberwatch Elf
+U Titania's Chosen
+R Tornado Elemental
+C Wellwisher
+R Whirlwind
+R Wolfbriar Elemental
+C Wood Elves
+R Wren's Run Packmaster
+R Argentum Armor
+R Bonehoard
+R Bosh, Iron Golem
+U Bottle Gnomes
+U Burnished Hart
+R Caged Sun
+U Cathodion
+U Charcoal Diamond
+U Dreamstone Hedron
+R Emerald Medallion
+R Epochrasite
+U Everflowing Chalice
+U Fire Diamond
+C Ichor Wellspring
+R Jalum Tome
+R Jet Medallion
+R Junk Diver
+R Lashwrithe
+U Liquimetal Coating
+R Loxodon Warhammer
+U Marble Diamond
+U Mask of Memory
+U Mind Stone
+R Moonsilver Spear
+U Moss Diamond
+C Mycosynth Wellspring
+R Myr Battlesphere
+U Myr Retriever
+C Myr Sire
+R Nevinyrral's Disk
+U Palladium Myr
+C Panic Spellbomb
+R Pearl Medallion
+R Pentavus
+C Pilgrim's Eye
+R Predator, Flagship
+C Pristine Talisman
+R Ruby Medallion
+R Sapphire Medallion
+R Seer's Sundial
+U Skullclamp
+U Sky Diamond
+U Sol Ring
+R Solemn Simulacrum
+R Spine of Ish Sah
+R Steel Hellkite
+R Strata Scythe
+U Swiftfoot Boots
+R Sword of Vengeance
+U Thran Dynamo
+U Tormod's Crypt
+R Trading Post
+U Ur-Golem's Eye
+C Wayfarer's Bauble
+U Worn Powerstone
+M Wurmcoil Engine
+C Barren Moor
+C Bojuka Bog
+U Buried Ruin
+U Coral Atoll
+R Crypt of Agadeem
+U Crystal Vein
+U Darksteel Citadel
+U Dormant Volcano
+C Drifting Meadow
+R Emeria, the Sky Ruin
+U Everglades
+C Evolving Wilds
+C Forgotten Cave
+R Gargoyle Castle
+U Ghost Quarter
+C Great Furnace
+C Haunted Fengraf
+U Havenwood Battleground
+U Jungle Basin
+U Karoo
+C Lonely Sandbar
+R Oran-Rief, the Vastwood
+U Phyrexia's Core
+C Polluted Mire
+U Reliquary Tower
+C Remote Isle
+C Secluded Steppe
+C Slippery Karst
+C Smoldering Crater
+U Tectonic Edge
+U Temple of the False God
+C Terramorphic Expanse
+C Tranquil Thicket
+U Zoetic Cavern
+L Plains
+L Plains
+L Plains
+L Plains
+L Island
+L Island
+L Island
+L Island
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Forest
+L Forest
+L Forest
+L Forest
