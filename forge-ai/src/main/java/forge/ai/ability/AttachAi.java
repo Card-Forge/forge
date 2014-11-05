@@ -263,7 +263,7 @@ public class AttachAi extends SpellAbilityAi {
                 targetable.removeAll(aiPlayer.getAllies());
                 targetable.remove(aiPlayer);
             }
-            if (targetable.size() > 0) {
+            if (!targetable.isEmpty()) {
                 // first try get weakest opponent to reduce opponents faster
                 if (targetable.contains(aiPlayer.getWeakestOpponent())) {
                     return aiPlayer.getWeakestOpponent();
@@ -282,7 +282,7 @@ public class AttachAi extends SpellAbilityAi {
             if (!mandatory) {
                 targetable.removeAll(aiPlayer.getOpponents());
             }
-            if (targetable.size() > 0) {
+            if (!targetable.isEmpty()) {
                 // first try self
                 if (targetable.contains(aiPlayer)) {
                     return aiPlayer;
@@ -826,14 +826,16 @@ public class AttachAi extends SpellAbilityAi {
                 // Always choose something from the Magnet List.
                 // Probably want to "weight" the list by amount of Enchantments and
                 // choose the "lightest"
-    
-                magnetList = CardLists.filter(magnetList, new Predicate<Card>() {
+
+            	List<Card> betterList = CardLists.filter(magnetList, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return CombatUtil.canAttack(c, ai.getWeakestOpponent());
                     }
                 });
-    
+            	if (!betterList.isEmpty()) {
+            		return ComputerUtilCard.getBestAI(betterList);
+            	}
                 return ComputerUtilCard.getBestAI(magnetList);
             }
         }
@@ -1104,7 +1106,7 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         // If there are no preferred cards, and not mandatory bail out
-        if (prefList.size() == 0) {
+        if (prefList.isEmpty()) {
             return chooseUnpreferred(mandatory, list);
         }
 
@@ -1210,7 +1212,8 @@ public class AttachAi extends SpellAbilityAi {
                 return false;
             }
         } else if (keyword.equals("First Strike")) {
-            if (card.getNetCombatDamage() + powerBonus <= 0 || card.hasKeyword("Double Strike")) {
+            if (card.getNetCombatDamage() + powerBonus <= 0 || card.hasKeyword("Double Strike")
+            		|| (!ComputerUtilCombat.canAttackNextTurn(card) && !CombatUtil.canBlock(card, true))) {
                 return false;
             }
         } else if (keyword.startsWith("Flanking")) {
