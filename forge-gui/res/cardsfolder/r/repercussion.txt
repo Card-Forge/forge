@@ -4,5 +4,6 @@ Types:Enchantment
 T:Mode$ DamageDone | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature is dealt damage, CARDNAME deals that much damage to that creature's controller.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredTargetController | NumDmg$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/repercussion.jpg
 Oracle:Whenever a creature is dealt damage, Repercussion deals that much damage to that creature's controller.
