@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Edward Scissorhands 3
+Title=Edward Scissorhands
+Difficulty=hard
+Description=Mono U Portcullis deck with Ensoul Artifact and Wind Zendikon
+Icon=Edward Scissorhands.jpg
+Deck Type=constructed
+[main]
+13 Island
+4 Seat of the Synod
+4 Darksteel Citadel
+2 Mystifying Maze
+4 Wind Zendikon
+4 Ensoul Artifact
+4 Portcullis
+2 Treachery
+2 Control Magic
+1 Frozen AEther
+1 Quiet Contemplation
+1 Spreading Seas
+1 Hoodwink
+2 Sun Droplet
+1 Forcefield
+4 Negate
+2 Spell Pierce
+1 Stubborn Denial
+1 Turn Aside
+1 Weave Fate
+1 Inspiration
+4 Think Twice
+[sideboard]
