@@ -9,7 +9,7 @@ package forge.screens.home;
  */
 public enum EMenuGroup {
     SANCTIONED ("Sanctioned Formats"),
-    ONLINE ("Online Multiplayer"),
+    //ONLINE ("Online Multiplayer"),
     QUEST ("Quest Mode"),
     GAUNTLET ("Gauntlets"),
     SETTINGS ("Game Settings");

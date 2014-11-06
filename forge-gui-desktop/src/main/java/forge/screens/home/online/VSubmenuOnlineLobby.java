@@ -59,7 +59,7 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby> {
 
     @Override
     public EMenuGroup getGroupEnum() {
-        return EMenuGroup.ONLINE;
+        return null; //EMenuGroup.ONLINE;
     }
 
     @Override

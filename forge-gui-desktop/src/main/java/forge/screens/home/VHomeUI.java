@@ -27,7 +27,6 @@ import forge.screens.home.gauntlet.VSubmenuGauntletBuild;
 import forge.screens.home.gauntlet.VSubmenuGauntletContests;
 import forge.screens.home.gauntlet.VSubmenuGauntletLoad;
 import forge.screens.home.gauntlet.VSubmenuGauntletQuick;
-import forge.screens.home.online.VSubmenuOnlineLobby;
 import forge.screens.home.quest.*;
 import forge.screens.home.sanctioned.VSubmenuConstructed;
 import forge.screens.home.sanctioned.VSubmenuDraft;
@@ -119,7 +118,7 @@ public enum VHomeUI implements IVTopLevelUI {
         allSubmenus.add(VSubmenuSealed.SINGLETON_INSTANCE);
         //allSubmenus.add(VSubmenuWinston.SINGLETON_INSTANCE);
 
-        allSubmenus.add(VSubmenuOnlineLobby.SINGLETON_INSTANCE);
+        //allSubmenus.add(VSubmenuOnlineLobby.SINGLETON_INSTANCE);
 
         allSubmenus.add(VSubmenuDuels.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuChallenges.SINGLETON_INSTANCE);
