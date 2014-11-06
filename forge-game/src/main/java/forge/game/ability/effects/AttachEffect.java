@@ -8,6 +8,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
@@ -18,6 +19,8 @@ import forge.util.FCollection;
 import forge.util.Lang;
 
 import java.util.List;
+
+import com.google.common.collect.Iterables;
 
 public class AttachEffect extends SpellAbilityEffect {
     @Override
@@ -38,14 +41,22 @@ public class AttachEffect extends SpellAbilityEffect {
 
         final List<GameObject> targets = getTargets(sa);
 
-        if (sa.hasParam("Object")) {
-            card = AbilityUtils.getDefinedCards(source, sa.getParam("Object"), sa).get(0);
-        }
-
         final Player p = sa.getActivatingPlayer();
         String message = "Do you want to attach " + card + " to " + targets + "?";
         if ( sa.hasParam("Optional") && !p.getController().confirmAction(sa, null, message) )
             return;
+
+        if (sa.hasParam("Object")) {
+            CardCollection lists = AbilityUtils.getDefinedCards(source, sa.getParam("Object"), sa);
+            if (sa.hasParam("ChooseAnObject")) {
+                card = p.getController().chooseSingleEntityForEffect(lists, sa, sa.getParam("ChooseAnObject"));
+            } else {
+                card = Iterables.getFirst(lists, null);
+            }
+            if (card == null) {
+                return;
+            }
+        }
 
         // If Cast Targets will be checked on the Stack
         for (final Object o : targets) {
