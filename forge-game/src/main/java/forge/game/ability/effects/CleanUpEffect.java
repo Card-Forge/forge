@@ -41,5 +41,8 @@ public class CleanUpEffect extends SpellAbilityEffect {
         if (sa.hasParam("ClearChosenCard")) {
             source.setChosenCards(null);
         }
+        if (sa.hasParam("ClearChosenType")) {
+            source.setChosenType("");
+        }
     }
 }
