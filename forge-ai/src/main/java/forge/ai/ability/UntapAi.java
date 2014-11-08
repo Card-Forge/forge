@@ -5,11 +5,13 @@ import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -38,7 +40,7 @@ public class UntapAi extends SpellAbilityAi {
 
         if (tgt == null) {
             final List<Card> pDefined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
-            if ((pDefined != null) && pDefined.get(0).isUntapped() && pDefined.get(0).getController() == ai) {
+            if (pDefined != null && pDefined.get(0).isUntapped() && pDefined.get(0).getController() == ai) {
                 return false;
             }
         } else {
@@ -61,7 +63,7 @@ public class UntapAi extends SpellAbilityAi {
 
             // TODO: use Defined to determine, if this is an unfavorable result
             final List<Card> pDefined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
-            if ((pDefined != null) && pDefined.get(0).isUntapped() && pDefined.get(0).getController() == ai) {
+            if (pDefined != null && pDefined.get(0).isUntapped() && pDefined.get(0).getController() == ai) {
                 return false;
             }
 
@@ -119,40 +121,48 @@ public class UntapAi extends SpellAbilityAi {
             targetController = ai.getOpponent();
         }
 
-        CardCollection untapList = CardLists.getTargetableCards(targetController.getCardsIn(ZoneType.Battlefield), sa);
-        untapList = CardLists.getValidCards(untapList, tgt.getValidTgts(), source.getController(), source);
+        CardCollection list = CardLists.getTargetableCards(targetController.getCardsIn(ZoneType.Battlefield), sa);
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
 
-        untapList = CardLists.filter(untapList, Presets.TAPPED);
+        if (list.isEmpty()) {
+            return false;
+        }
+
+        CardCollection untapList = CardLists.filter(list, Presets.TAPPED);
         // filter out enchantments and planeswalkers, their tapped state doesn't
         // matter.
         final String[] tappablePermanents = { "Creature", "Land", "Artifact" };
         untapList = CardLists.getValidCards(untapList, tappablePermanents, source.getController(), source);
 
-        if (untapList.isEmpty()) {
-            return false;
-        }
-
         while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
             Card choice = null;
 
             if (untapList.isEmpty()) {
-                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
-                    sa.resetTargets();
-                    return false;
-                } else {
-                    // TODO is this good enough? for up to amounts?
-                    break;
+            	// Animate untapped lands (Koth of the Hamer)
+                if (sa.getSubAbility() != null && sa.getSubAbility().getApi() == ApiType.Animate && !list.isEmpty()
+                		&& ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                	choice = ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
                 }
-            }
-
-            if (CardLists.getNotType(untapList, "Creature").isEmpty()) {
-                choice = ComputerUtilCard.getBestCreatureAI(untapList); // if only creatures take the best
-            } else {
-                choice = ComputerUtilCard.getMostExpensivePermanentAI(untapList, sa, false);
+                else {
+	                if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa) || sa.getTargets().getNumTargeted() == 0) {
+	                    sa.resetTargets();
+	                    return false;
+	                } else {
+	                    // TODO is this good enough? for up to amounts?
+	                    break;
+	                }
+                }
+            } 
+            else {
+	            if (CardLists.getNotType(untapList, "Creature").isEmpty()) {
+	                choice = ComputerUtilCard.getBestCreatureAI(untapList); // if only creatures take the best
+	            } else {
+	                choice = ComputerUtilCard.getMostExpensivePermanentAI(untapList, sa, false);
+	            }
             }
 
             if (choice == null) { // can't find anything left
-                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
+                if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa) || sa.getTargets().getNumTargeted() == 0) {
                     sa.resetTargets();
                     return false;
                 } else {
@@ -162,6 +172,7 @@ public class UntapAi extends SpellAbilityAi {
             }
 
             untapList.remove(choice);
+            list.remove(choice);
             sa.getTargets().add(choice);
         }
         return true;
@@ -213,20 +224,21 @@ public class UntapAi extends SpellAbilityAi {
         return false;
     }
 
-    private boolean untapTargetList(final Card source, final TargetRestrictions tgt, final SpellAbility sa, final boolean mandatory, final CardCollection tapList) {
+    private boolean untapTargetList(final Card source, final TargetRestrictions tgt, final SpellAbility sa, final boolean mandatory, 
+    		final CardCollection tapList) {
         for (final Card c : sa.getTargets().getTargetCards()) {
             tapList.remove(c);
         }
 
-        if (tapList.size() == 0) {
+        if (tapList.isEmpty()) {
             return false;
         }
 
         while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             Card choice = null;
 
-            if (tapList.size() == 0) {
-                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) || (sa.getTargets().getNumTargeted() == 0)) {
+            if (tapList.isEmpty()) {
+                if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa) || sa.getTargets().getNumTargeted() == 0) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
@@ -237,18 +249,14 @@ public class UntapAi extends SpellAbilityAi {
                 }
             }
 
-            if (CardLists.getNotType(tapList, "Creature").size() == 0) {
-                choice = ComputerUtilCard.getBestCreatureAI(tapList); // if only
-                                                                     // creatures
-                                                                     // take
-                                                                     // the
-                                                                     // best
+            if (CardLists.getNotType(tapList, "Creature").isEmpty()) {
+                choice = ComputerUtilCard.getBestCreatureAI(tapList); // if only creatures take the best
             } else {
                 choice = ComputerUtilCard.getMostExpensivePermanentAI(tapList, sa, false);
             }
 
             if (choice == null) { // can't find anything left
-                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
+                if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa) || sa.getTargets().getNumTargeted() == 0) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
