@@ -1,0 +1,9 @@
+Name:Jazal Goldmane
+ManaCost:2 W W
+Types:Legendary Creature Cat Warrior
+PT:4/4
+K:First Strike
+A:AB$ PumpAll | Cost$ 3 W W | ValidCards$ Creature.YouCtrl+attacking | NumAtt$ X | NumDef$ X | References$ X | SpellDescription$ Attacking creatures you control get +X/+X until end of turn, where X is the number of attacking creatures.
+SVar:X:Count$Valid Creature.attacking
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jazal_goldmane.jpg
+Oracle:First strike\n{3}{W}{W}: Attacking creatures you control get +X/+X until end of turn, where X is the number of attacking creatures.

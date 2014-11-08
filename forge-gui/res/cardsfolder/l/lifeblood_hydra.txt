@@ -1,0 +1,13 @@
+Name:Lifeblood Hydra
+ManaCost:X G G G
+Types:Creature Hydra
+PT:0/0
+K:Trample
+K:etbCounter:P1P1:X
+SVar:X:Count$xPaid
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSac | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you gain life and draw cards equal to its power.
+SVar:TrigSac:AB$GainLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ XPower | References$ XPower | SubAbility$ DBDrawCards
+SVar:DBDrawCards:DB$Draw | Cost$ 0 | NumCards$ XPower | References$ XPower
+SVar:XPower:TriggeredCard$CardPower
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lifeblood_hydra.jpg
+Oracle:Trample\nLifeblood Hydra enters the battlefield with X +1/+1 counters on it.\nWhen Lifeblood Hydra dies, you gain life and draw cards equal to its power.

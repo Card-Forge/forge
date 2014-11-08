@@ -1,0 +1,7 @@
+Name:Spoils of Blood
+ManaCost:B
+Types:Instant
+A:SP$ Token | Cost$ B | TokenAmount$ 1 | TokenName$ Horror | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | References$ X | TokenTypes$ Creature,Horror | TokenColors$ Black | SpellDescription$ Put an X/X black Horror creature token onto the battlefield, where X is the number of creatures that died this turn.
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spoils_of_blood.jpg
+Oracle:Put an X/X black Horror creature token onto the battlefield, where X is the number of creatures that died this turn.

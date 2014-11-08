@@ -1,0 +1,8 @@
+Name:Commander's Sphere
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo ColorIdentity | SpellDescription$ Add to your mana pool one mana of any color in your commander's color identity.
+A:AB$ Draw | Cost$ Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/commanders_sphere.jpg
+Oracle:{T}: Add to your mana pool one mana of any color in your commander's color identity.\nSacrifice Commander's Sphere: Draw a card.

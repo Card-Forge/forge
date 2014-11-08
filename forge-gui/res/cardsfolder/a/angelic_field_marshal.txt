@@ -1,0 +1,11 @@
+Name:Angelic Field Marshal
+ManaCost:2 W W
+Types:Creature Angel
+PT:3/3
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Vigilance | CheckSVar$ X | SVarCompare$ GE1 | Description$ Lieutenant - As long as you control your commander, CARDNAME gets +2/+2 and creatures you control have vigilance.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Vigilance | CheckSVar$ X | SVarCompare$ GE1
+SVar:X:Count$Valid Card.IsCommander+YouOwn+YouCtrl
+SVar:BuffedBy:Card.IsCommander
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_field_marshal.jpg

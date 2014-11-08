@@ -1,0 +1,9 @@
+Name:Warmonger Hellkite
+ManaCost:4 R R
+Types:Creature Dragon
+PT:5/5
+K:Flying
+S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ CARDNAME attacks each combat if able.  | Description$ All creatures attack each combat if able.
+A:AB$ PumpAll | Cost$ 1 R | ValidCards$ Creature.attacking | NumAtt$ +1 | SpellDescription$ Attacking creatures get +1/+0 until end of turn.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/warmonger_hellkite.jpg
+Oracle:Flying\nAll creatures attack each combat if able.\n{1}{R}: Attacking creatures get +1/+0 until end of turn.

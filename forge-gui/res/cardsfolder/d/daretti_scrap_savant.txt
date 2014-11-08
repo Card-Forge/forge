@@ -1,0 +1,18 @@
+Name:Daretti, Scrap Savant
+ManaCost:3 R
+Types:Planeswalker Daretti
+Loyalty:3
+Text:CARDNAME can be your commander.
+A:AB$ Discard | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | NumCards$ 2 | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Discard up to two cards, then draw that many cards.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+A:AB$ Sacrifice | Cost$ SubCounter<2/LOYALTY> | SacValid$ Artifact | RememberSacrificed$ True | StackDescription$ SpellDescription | Planeswalker$ True | SubAbility$ DBChangeZone | SpellDescription$ Sacrifice an artifact. If you do, return target artifact card from your graveyard to the battlefield.
+SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Select target artifact card in your graveyard | Origin$ Graveyard | Destination$ Battlefield | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X | StackDescription$ None | SubAbility$ DBCleanup
+A:AB$ Effect | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Daretti, Scrap Savant emblem | Image$ daretti_scrap_savant_emblem | Stackable$ False | Triggers$ TrigChangesZone | SVars$ DelTrigReturn,DBReturn | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever an artifact is put into your graveyard from the battlefield, return that card to the battlefield at the beginning of the next end step."
+SVar:TrigChangesZone:Mode$ ChangesZone | ValidCard$ Artifact.YouOwn | Origin$ Battlefield | Destination$ Graveyard | DelayedTrigger$ DelTrigReturn | TriggerZones$ Command | TriggerDescription$ Whenever an artifact is put into your graveyard from the battlefield, return that card to the battlefield at the beginning of the next end step.
+SVar:DelTrigReturn:Mode$ Phase | Phase$ End Of Turn | Execute$ DBReturn | TriggerDescription$ Return that card to the battlefield at the beginning of the next end step.
+SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/daretti_scrap_savant.jpg
+Oracle:[+2] Discard up to two cards, then draw that many cards.\n[-2] Sacrifice an artifact. If you do, return target artifact card from your graveyard to the battlefield.\n[-10] You get an emblem with "Whenever an artifact is put into your graveyard from the battlefield, return that card to the battlefield at the beginning of the next end step."\nDaretti, Scrap Savant can be your commander.

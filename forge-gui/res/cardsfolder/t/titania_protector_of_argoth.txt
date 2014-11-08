@@ -1,0 +1,10 @@
+Name:Titania, Protector of Argoth
+ManaCost:3 G G
+Types:Legendary Creature Elemental
+PT:5/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target land card from your graveyard to the battlefield.
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Land.YouCtrl
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a land you control is put into a graveyard from the battlefield, put a 5/3 green Elemental creature token onto the battlefield.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Green | TokenPower$ 5 | TokenToughness$ 3 | TokenImage$ g 5 3 elemental
+SVar:Picture:http://www.wizards.com/global/images/magic/general/titania_protector_of_argoth.jpg
+Oracle:When Titania, Protector of Argoth enters the battlefield, return target land card from your graveyard to the battlefield.\nWhenever a land you control is put into a graveyard from the battlefield, put a 5/3 green Elemental creature token onto the battlefield.

@@ -1,0 +1,7 @@
+Name:Deploy to the Front
+ManaCost:5 W W
+Types:Sorcery
+A:SP$ Token | Cost$ 5 W W | TokenAmount$ X | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | References$ X | TokenImage$ w_1_1_soldier_c14 | SpellDescription$ Put X 1/1 white Soldier creature tokens onto the battlefield, where X is the number of creatures on the battlefield.
+SVar:X:Count$TypeOnBattlefield.Creature
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deploy_to_the_front.jpg
+Oracle:Put X 1/1 white Soldier creature tokens onto the battlefield, where X is the number of creatures on the battlefield.

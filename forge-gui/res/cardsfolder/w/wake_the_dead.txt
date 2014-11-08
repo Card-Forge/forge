@@ -1,0 +1,12 @@
+Name:Wake the Dead
+ManaCost:X B B
+Types:Instant
+Text:Cast CARDNAME only during combat on an opponent's turn.
+A:SP$ ChangeZone | Cost$ X B B | TargetMin$ 0 | TargetMax$ MaxTgts | OpponentTurn$ True | ActivationPhases$ BeginCombat->EndCombat | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creatures in your graveyard | GainControl$ True | SubAbility$ DBDelay | References$ X,MaxTgts | SpellDescription$ Return X target creature cards from your graveyard to the battlefield. Sacrifice those creatures at the beginning of the next end step.
+SVar:X:Targeted$Amount
+SVar:MaxTgts:Count$TypeInYourYard.Creature
+SVar:DBDelay:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigSac | RememberObjects$ Targeted | TriggerDescription$ CARDNAME - Sacrifice the creatures at the beginning of the next end step. | AILogic$ Always
+SVar:TrigSac:AB$ SacrificeAll | Cost$ 0 | Defined$ DelayTriggerRemembered | Controller$ You
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wake_the_dead.jpg
+Oracle:Cast Wake the Dead only during combat on an opponent's turn.\nReturn X target creature cards from your graveyard to the battlefield. Sacrifice those creatures at the beginning of the next end step.

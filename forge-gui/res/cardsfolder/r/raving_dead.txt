@@ -1,0 +1,13 @@
+Name:Raving Dead
+ManaCost:4 B
+Types:Creature Zombie
+PT:2/6
+K:Deathtouch
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, choose an opponent at random. CARDNAME attacks that player this combat if able.
+SVar:TrigChoose:AB$ ChoosePlayer | Cost$ 0 | Defined$ You | Choices$ Player.Opponent | Random$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME attacks specific player each combat if able:ChosenPlayer | UntilEndOfCombat$ True
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigLoseLifeOpp | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player loses half his or her life, rounded up.
+SVar:TrigLoseLifeOpp:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredTarget | LifeAmount$ RavingXOpp | References$ RavingXOpp
+SVar:RavingXOpp:TriggeredTarget$LifeTotal/HalfUp
+SVar:Picture:http://www.wizards.com/global/images/magic/general/raving_dead.jpg
+Oracle:Deathtouch\nAt the beginning of combat on your turn, choose an opponent at random. Raving Dead attacks that player this combat if able.\nWhenever Raving Dead deals combat damage to a player, that player loses half his or her life, rounded down.

@@ -1,0 +1,12 @@
+Name:Overseer of the Damned
+ManaCost:5 B B
+Types:Creature Demon
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may destroy target creature.
+SVar:TrigDestroy:DB$ Destroy | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Choose target creature.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl+nonToken | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a nontoken creature an opponent controls dies, put a 2/2 black Zombie creature token onto the battlefield tapped.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ b 2 2 zombie C14 | TokenTapped$ True
+SVar:PlayMain1:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/overseer_of_the_damned.jpg
+Oracle:Flying\nWhen Overseer of the Damned enters the battlefield, you may destroy target creature.\nWhenever a nontoken creature an opponent controls dies, put a 2/2 black Zombie creature token onto the battlefield tapped.
