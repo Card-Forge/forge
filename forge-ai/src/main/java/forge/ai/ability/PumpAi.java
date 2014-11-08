@@ -331,7 +331,10 @@ public class PumpAi extends PumpAiBase {
         }
 
         if (list.isEmpty()) {
-            return mandatory && pumpMandatoryTarget(ai, sa, mandatory);
+        	if (ComputerUtil.activateForCost(sa, ai)) {
+        		return pumpMandatoryTarget(ai, sa);
+        	}
+            return mandatory && pumpMandatoryTarget(ai, sa);
         }
 
         if (!sa.isCurse()) {
@@ -346,7 +349,7 @@ public class PumpAi extends PumpAiBase {
             if (list.isEmpty()) {
                 if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) || (sa.getTargets().getNumTargeted() == 0)) {
                     if (mandatory) {
-                        return pumpMandatoryTarget(ai, sa, mandatory);
+                        return pumpMandatoryTarget(ai, sa);
                     }
 
                     sa.resetTargets();
@@ -371,7 +374,7 @@ public class PumpAi extends PumpAiBase {
         return true;
     } // pumpTgtAI()
 
-    private boolean pumpMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
+    private boolean pumpMandatoryTarget(final Player ai, final SpellAbility sa) {
         final Game game = ai.getGame();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Player opp = ai.getOpponent();
@@ -516,11 +519,10 @@ public class PumpAi extends PumpAiBase {
 
         if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
             if (source.isCreature()) {
-                if (!source.hasKeyword("Indestructible")
-                        && ((source.getNetToughness() + defense) <= source.getDamage())) {
+                if (!source.hasKeyword("Indestructible") && source.getNetToughness() + defense <= source.getDamage()) {
                     return false;
                 }
-                if ((source.getNetToughness() + defense) <= 0) {
+                if (source.getNetToughness() + defense <= 0) {
                     return false;
                 }
             }
