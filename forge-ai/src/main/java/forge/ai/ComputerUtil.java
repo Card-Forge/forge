@@ -673,9 +673,11 @@ public class ComputerUtil {
 
     public static boolean castPermanentInMain1(final Player ai, final SpellAbility sa) {
         final Card card = sa.getHostCard();
+
         if ("True".equals(card.getSVar("NonStackingEffect")) && card.getController().isCardInPlay(card.getName())) {
             return false;
         }
+
         if (card.hasSVar("PlayMain1")) {
         	if (card.getSVar("PlayMain1").equals("ALWAYS") || sa.getPayCosts().hasNoManaCost()) {
         		return true;
@@ -688,11 +690,19 @@ public class ComputerUtil {
         		return true;
         	}
         }
+        
+        if (card.getManaCost().isZero()) {
+        	return true;
+        }
 
-        if ((card.isCreature() && (ComputerUtil.hasACardGivingHaste(ai)
-                || card.hasKeyword("Haste"))) || card.hasKeyword("Exalted")) {
+        if (card.isCreature() && (ComputerUtil.hasACardGivingHaste(ai) || card.hasKeyword("Haste"))) {
             return true;
         }
+        
+        if (card.hasKeyword("Exalted")) {
+        	return true;
+        }
+
         //cast equipments in Main1 when there are creatures to equip and no other unequipped equipment
         if (card.isEquipment()) {
             boolean playNow = false;
@@ -750,6 +760,7 @@ public class ComputerUtil {
                 }
             }
         } // AntiBuffedBy
+
         final CardCollectionView vengevines = ai.getCardsIn(ZoneType.Graveyard, "Vengevine");
         if (!vengevines.isEmpty()) {
             final CardCollectionView creatures = ai.getCardsIn(ZoneType.Hand);

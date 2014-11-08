@@ -150,7 +150,6 @@ public class AnimateAi extends SpellAbilityAi {
                 }
             } else {
             	boolean givesHaste = sa.hasParam("Keywords") && sa.getParam("Keywords").contains("Haste");
-            	System.out.println("animateAI : haste = " + givesHaste);
             	for (final Card c : defined) {
 	                bFlag |= !c.isCreature() && !c.isTapped()
 	                        && (c.getTurnInZone() != game.getPhaseHandler().getTurn() || givesHaste)
