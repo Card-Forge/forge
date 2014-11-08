@@ -7,6 +7,8 @@ import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
+import forge.card.CardType;
+import forge.card.CardType.Constant;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -81,6 +83,12 @@ public class EffectAi extends SpellAbilityAi {
                         return false;
                     }
                     sa.getTargets().add(target);
+                }
+                randomReturn = true;
+            } else if (logic.equals("ChainVeil")) {
+                if (!phase.isPlayerTurn(ai) || !phase.getPhase().equals(PhaseType.MAIN2) 
+                		|| CardLists.getType(ai.getCardsIn(ZoneType.Battlefield), "Planeswalker").isEmpty()) {
+                    return false;
                 }
                 randomReturn = true;
             } else if (logic.equals("Always")) {
