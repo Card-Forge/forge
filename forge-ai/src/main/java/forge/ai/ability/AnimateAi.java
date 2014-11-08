@@ -125,7 +125,7 @@ public class AnimateAi extends SpellAbilityAi {
         // don't use instant speed animate abilities outside humans
         // Combat_Declare_Attackers_InstantAbility step
         if (ph.getPlayerTurn().isOpponentOf(aiPlayer) &&
-                (!ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, opponent) || (game.getCombat() != null && game.getCombat().getAttackersOf(aiPlayer).isEmpty()))) {
+                (!ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, opponent) || game.getCombat() != null && game.getCombat().getAttackersOf(aiPlayer).isEmpty())) {
             return false;
         }
 
@@ -148,36 +148,40 @@ public class AnimateAi extends SpellAbilityAi {
                 } if ("Never".equals(sa.getParam("AILogic"))) {
                     return false;
                 }
-            } else for (final Card c : defined) {
-                bFlag |= !c.isCreature() && !c.isTapped()
-                        && !(c.getTurnInZone() == game.getPhaseHandler().getTurn())
-                        && !c.isEquipping();
+            } else {
+            	boolean givesHaste = sa.hasParam("Keywords") && sa.getParam("Keywords").contains("Haste");
+            	System.out.println("animateAI : haste = " + givesHaste);
+            	for (final Card c : defined) {
+	                bFlag |= !c.isCreature() && !c.isTapped()
+	                        && (c.getTurnInZone() != game.getPhaseHandler().getTurn() || givesHaste)
+	                        && !c.isEquipping();
+	                
+	                // for creatures that could be improved (like Figure of Destiny)
+	                if (!bFlag && c.isCreature() && (sa.hasParam("Permanent") || (!c.isTapped() && !c.isSick()))) {
+	                    int power = -5;
+	                    if (sa.hasParam("Power")) {
+	                        power = AbilityUtils.calculateAmount(source, sa.getParam("Power"), sa);
+	                    }
+	                    int toughness = -5;
+	                    if (sa.hasParam("Toughness")) {
+	                        toughness = AbilityUtils.calculateAmount(source, sa.getParam("Toughness"), sa);
+	                    }
+	                    if ((power + toughness) > (c.getCurrentPower() + c.getCurrentToughness())) {
+	                        bFlag = true;
+	                    }
+	                }
 
-                // for creatures that could be improved (like Figure of Destiny)
-                if (!bFlag && c.isCreature() && (sa.hasParam("Permanent") || (!c.isTapped() && !c.isSick()))) {
-                    int power = -5;
-                    if (sa.hasParam("Power")) {
-                        power = AbilityUtils.calculateAmount(source, sa.getParam("Power"), sa);
-                    }
-                    int toughness = -5;
-                    if (sa.hasParam("Toughness")) {
-                        toughness = AbilityUtils.calculateAmount(source, sa.getParam("Toughness"), sa);
-                    }
-                    if ((power + toughness) > (c.getCurrentPower() + c.getCurrentToughness())) {
-                        bFlag = true;
-                    }
-                }
-
-                if (!SpellAbilityAi.isSorcerySpeed(sa)) {
-                    Card animatedCopy = CardFactory.getCard(c.getPaperCard(), aiPlayer);
-                    AnimateAi.becomeAnimated(animatedCopy, c.hasSickness(), sa);
-                    if (ph.isPlayerTurn(aiPlayer) && !ComputerUtilCard.doesSpecifiedCreatureAttackAI(aiPlayer, animatedCopy)) {
-                        return false;
-                    }
-                    if (ph.getPlayerTurn().isOpponentOf(aiPlayer) && !ComputerUtilCard.doesSpecifiedCreatureBlock(aiPlayer, animatedCopy)) {
-                        return false;
-                    }
-                }
+	                if (!SpellAbilityAi.isSorcerySpeed(sa)) {
+	                    Card animatedCopy = CardFactory.getCard(c.getPaperCard(), aiPlayer);
+	                    AnimateAi.becomeAnimated(animatedCopy, c.hasSickness(), sa);
+	                    if (ph.isPlayerTurn(aiPlayer) && !ComputerUtilCard.doesSpecifiedCreatureAttackAI(aiPlayer, animatedCopy)) {
+	                        return false;
+	                    }
+	                    if (ph.getPlayerTurn().isOpponentOf(aiPlayer) && !ComputerUtilCard.doesSpecifiedCreatureBlock(aiPlayer, animatedCopy)) {
+	                        return false;
+	                    }
+	                }
+            	}
             }
 
             if (!bFlag) { // All of the defined stuff is animated, not very
@@ -224,8 +228,10 @@ public class AnimateAi extends SpellAbilityAi {
             CardCollectionView list = aiPlayer.getGame().getCardsIn(tgt.getZone());
             list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), animateSource);
             CardCollection prefList = CardLists.getValidCards(list, sa.getParam("AITgts"), sa.getActivatingPlayer(), animateSource);
-        	CardLists.shuffle(prefList);
-        	sa.getTargets().add(prefList.getFirst());
+            if (!prefList.isEmpty()){
+	        	CardLists.shuffle(prefList);
+	        	sa.getTargets().add(prefList.getFirst());
+            }
         }
         return true;
     }
