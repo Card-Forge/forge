@@ -8,8 +8,8 @@ Forge Beta: 10-#-2014 ver 1.5.30
 Release Notes
 -------------
 
-- New Commander 2014 cards -
-We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
+- Commander 2014 cards -
+Forge now includes many of the new Commander 2014 cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
 
 
 - Refactor attack declarations -
@@ -20,51 +20,53 @@ The game now correctly calculates whether an attack declaration is legal, based 
 New Cards
 ---------
 
-Ekundu Cyclops
-Magnetic Web
-Merseine
-Scarred Puma
-Viashino Bey
-War's Toll
-
-
--------------------------------
-New Commander 2014 branch Cards
--------------------------------
-
-Ghoulcaller Gisa
-Stitcher Geralf
-Teferi, Temporal Archmage
+AEther Gale
+Angel of the Dire Hour
 Angelic Field Marshal
-Feldon of the Third Path
-Reef Worm
-Containment Priest
-Flesh Carver
-Spoils of Blood
+Breaching Leviathan
 Commander's Sphere
+Containment Priest
+Creeperhulk
+Daretti, Scrap Savant
+Demon of Wailing Agonies
+Deploy to the Front
 Dualcaster Mage
+Ekundu Cyclops
+Feldon of the Third Path
+Flamekin Village
+Flesh Carver
+Freyalise, Llanowar's Fury
+Ghoulcaller Gisa
+Grave Sifter
+Hallowed Spiritkeeper
+Jazal Goldmane
+Lifeblood Hydra
+Magnetic Web
+Malicious Affliction
+Masterwork of Ingenuity
+Merseine
+Nahiri, the Lithomancer
+Necromantic Selection
+Ob Nixilis of the Black Oath
 Overseer of the Damned
 Raving Dead
-Unstable Obelisk
-Warmonger Hellkite
-Titania, Protector of Argoth
-Jazal Goldmane
-Angel of the Dire Hour
+Reef Worm
+Scarred Puma
 Scrap Mastery
-Flamekin Village
-Masterwork of Ingenuity
-AEther Gale
-Deploy to the Front
-Hallowed Spiritkeeper
-Daretti, Scrap Savant
-Freyalise, Llanowar's Fury
-Breaching Leviathan
-Wake the Dead
-Well of Ideas
-Creeperhulk
-Lifeblood Hydra
 Song of the Dryads
-Ob Nixilis of the Black Oath
+Spoils of Blood
+Stitcher Geralf
+Stormsurge Kraken
+Teferi, Temporal Archmage
+Thunderfoot Baloth
+Titania, Protector of Argoth
+Tyrant's Familiar
+Unstable Obelisk
+Viashino Bey
+Wake the Dead
+War's Toll
+Warmonger Hellkite
+Well of Ideas
 
 
 ------------
