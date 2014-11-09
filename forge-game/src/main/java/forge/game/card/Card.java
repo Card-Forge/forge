@@ -2981,11 +2981,12 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         final ArrayList<String> strings = new ArrayList<String>();
         strings.add(s);
         boolean needKeywordUpdate = false;
-        if (hiddenExtrinsicKeyword.removeAll(strings)) {
-            view.updateNonAbilityText(this);
+        if (extrinsicKeyword.removeAll(strings)) {
             needKeywordUpdate = true;
         }
-        if (extrinsicKeyword.removeAll(strings)) {
+        strings.add("HIDDEN " + s);
+        if (hiddenExtrinsicKeyword.removeAll(strings)) {
+            view.updateNonAbilityText(this);
             needKeywordUpdate = true;
         }
         if (needKeywordUpdate) {
