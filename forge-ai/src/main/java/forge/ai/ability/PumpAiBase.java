@@ -656,7 +656,8 @@ public abstract class PumpAiBase extends SpellAbilityAi {
      * @return a {@link forge.CardList} object.
      */
     protected CardCollection getCurseCreatures(final Player ai, final SpellAbility sa, final int defense, final int attack, final List<String> keywords) {
-        CardCollection list = ai.getOpponent().getCreaturesInPlay();
+        CardCollection list = new CardCollection();
+        list.addAll(ai.getOpponent().getCardsIn(ZoneType.Battlefield));
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
         list = CardLists.getTargetableCards(list, sa);
@@ -711,7 +712,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             }
         } // -X/0 end
         else {
-            final boolean addsKeywords = keywords.size() > 0;
+            final boolean addsKeywords = !keywords.isEmpty();
             if (addsKeywords) {
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
