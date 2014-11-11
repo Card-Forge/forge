@@ -7387,6 +7387,7 @@ forge-gui/res/cardsfolder/i/instill_infection.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/insubordination.txt -text
 forge-gui/res/cardsfolder/i/insurrection.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/intangible_virtue.txt -text
+forge-gui/res/cardsfolder/i/intellectual_offering.txt -text
 forge-gui/res/cardsfolder/i/interdict.txt -text
 forge-gui/res/cardsfolder/i/interplanar_tunnel.txt -text
 forge-gui/res/cardsfolder/i/interpret_the_signs.txt -text
@@ -13546,6 +13547,7 @@ forge-gui/res/cardsfolder/s/sylvan_hierophant.txt -text
 forge-gui/res/cardsfolder/s/sylvan_library.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sylvan_messenger.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sylvan_might.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/sylvan_offering.txt -text
 forge-gui/res/cardsfolder/s/sylvan_paradise.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sylvan_primordial.txt -text
 forge-gui/res/cardsfolder/s/sylvan_ranger.txt svneol=native#text/plain
