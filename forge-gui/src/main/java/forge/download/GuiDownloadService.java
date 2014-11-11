@@ -21,14 +21,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
@@ -232,7 +231,10 @@ public abstract class GuiDownloadService implements Runnable {
             }
         }
 
+        int bufferLength;
         int iCard = 0;
+        byte[] buffer = new byte[1024];
+
         for (Entry<String, String> kv : files.entrySet()) {
             if (cancel) { break; }
 
@@ -240,8 +242,7 @@ public abstract class GuiDownloadService implements Runnable {
             final File fileDest = new File(kv.getKey());
             final File base = fileDest.getParentFile();
 
-            ReadableByteChannel rbc = null;
-            FileOutputStream    fos = null;
+            FileOutputStream fos = null;
             try {
                 // test for folder existence
                 if (!base.exists() && !base.mkdir()) { // create folder if not found
@@ -262,9 +263,11 @@ public abstract class GuiDownloadService implements Runnable {
                     continue;
                 }
 
-                rbc = Channels.newChannel(conn.getInputStream());
                 fos = new FileOutputStream(fileDest);
-                fos.getChannel().transferFrom(rbc, 0, 1 << 24);
+                InputStream inputStream = conn.getInputStream();
+                while ((bufferLength = inputStream.read(buffer)) > 0) {
+                    fos.write(buffer, 0, bufferLength);
+                }
             }
             catch (final ConnectException ce) {
                 System.out.println("Connection refused for url: " + url);
@@ -280,11 +283,13 @@ public abstract class GuiDownloadService implements Runnable {
                 Log.error("LQ Pictures", "Error downloading pictures", ex);
             }
             finally {
-                if (null != rbc) {
-                    try { rbc.close(); } catch (IOException e) { System.out.println("error closing input stream"); }
-                }
-                if (null != fos) {
-                    try { fos.close(); } catch (IOException e) { System.out.println("error closing output stream"); }
+                if (fos != null) {
+                    try {
+                        fos.close();
+                    }
+                    catch (IOException e) {
+                        System.out.println("error closing output stream");
+                    }
                 }
             }
 
