@@ -3791,6 +3791,7 @@ forge-gui/res/cardsfolder/c/crowds_favor.txt -text
 forge-gui/res/cardsfolder/c/crown_of_ascension.txt -text
 forge-gui/res/cardsfolder/c/crown_of_awe.txt -text
 forge-gui/res/cardsfolder/c/crown_of_convergence.txt -text svneol=unset#text/plain
+forge-gui/res/cardsfolder/c/crown_of_doom.txt -text
 forge-gui/res/cardsfolder/c/crown_of_empires.txt -text
 forge-gui/res/cardsfolder/c/crown_of_flames.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/crown_of_fury.txt -text

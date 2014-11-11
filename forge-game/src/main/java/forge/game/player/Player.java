@@ -1766,6 +1766,10 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (equals(sourceController)) {
                 return false;
             }
+        } else if (property.equals("OtherThanSourceOwner")) {
+            if (equals(source.getOwner())) {
+                return false;
+            }
         } else if (property.equals("wasDealtDamageBySourceThisGame")) {
             if (!source.getDamageHistory().getThisGameDamaged().contains(this)) {
                 return false;
