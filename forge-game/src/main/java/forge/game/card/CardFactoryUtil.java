@@ -677,6 +677,17 @@ public class CardFactoryUtil {
             return doXMath(players.size(), m, source);
         }
 
+        if (sq[0].startsWith("HasProperty")) {
+            int totPlayer = 0;
+            String property = sq[0].substring(11);
+            for (Player p : players) {
+                if (p.hasProperty(property, source.getController(), source)) {
+                    totPlayer++;
+                }
+            }
+            return doXMath(totPlayer, m, source);
+        }
+
         if (sq[0].contains("DamageThisTurn")) {
             int totDmg = 0;
             for (Player p : players) {

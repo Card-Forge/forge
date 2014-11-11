@@ -1802,6 +1802,13 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (numCardsInHandStartedThisTurnWith <= 0) {
                 return false;
             }
+        } else if (property.startsWith("WithCardsInHand")) {
+            if (property.contains("AtLeast")) {
+                int amount = Integer.parseInt(property.split("AtLeast")[1]);
+                if (getCardsIn(ZoneType.Hand).size() < amount) {
+                    return false;
+                }
+            }
         } else if (property.equals("IsRemembered")) {
             if (!source.isRemembered(this)) {
                 return false;
