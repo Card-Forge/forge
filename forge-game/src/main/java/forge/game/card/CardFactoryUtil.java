@@ -2030,8 +2030,11 @@ public class CardFactoryUtil {
     */
 
     public static final String getCommanderInfo(final PlayerView originPlayer) {
+        GameView game = GameView.getCurrentGame();
+        if (game == null) { return ""; }
+
         StringBuilder sb = new StringBuilder();
-        for (PlayerView p : GameView.getCurrentGame().getPlayers()) {
+        for (PlayerView p : game.getPlayers()) {
         	final String text;
             if (p.equals(originPlayer)) {
             	text = "Commander Damage from own Commander: ";

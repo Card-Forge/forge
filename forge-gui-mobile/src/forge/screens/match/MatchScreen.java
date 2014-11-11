@@ -20,6 +20,7 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinTexture;
 import forge.game.GameEntityView;
+import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.combat.CombatView;
 import forge.game.phase.PhaseType;
@@ -299,6 +300,9 @@ public class MatchScreen extends FScreen {
 
     @Override
     protected void drawOverlay(Graphics g) {
+        GameView game = MatchUtil.getGameView();
+        if (game == null) { return; }
+
         //draw arrows for paired cards
         HashSet<CardView> pairedCards = new HashSet<CardView>();
         for (VPlayerPanel playerPanel : playerPanels.values()) {
@@ -313,7 +317,7 @@ public class MatchScreen extends FScreen {
         }
 
         //draw arrows for combat
-        final CombatView combat = MatchUtil.getGameView().getCombat();
+        final CombatView combat = game.getCombat();
         if (combat != null) {
             for (final CardView attacker : combat.getAttackers()) {
                 //connect each attacker with planeswalker it's attacking if applicable
