@@ -2380,6 +2380,7 @@ forge-gui/res/cardsfolder/b/bend_or_break.txt -text
 forge-gui/res/cardsfolder/b/benediction_of_moons.txt -text
 forge-gui/res/cardsfolder/b/benevolent_ancestor.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/benevolent_bodyguard.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/b/benevolent_offering.txt -text
 forge-gui/res/cardsfolder/b/benevolent_unicorn.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/benthic_behemoth.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/benthic_djinn.txt svneol=native#text/plain

@@ -1053,6 +1053,13 @@ public class AbilityUtils {
                 players.add(p);
             }
         }
+        else if (defined.equals("ChosenAndYou")) {
+            players.add(sa.getActivatingPlayer());
+            final Player p = card.getChosenPlayer();
+            if (!players.contains(p)) {
+                players.add(p);
+            }
+        }
         else if (defined.equals("SourceController")) {
             final Player p = sa.getHostCard().getController();
             if (!players.contains(p)) {
