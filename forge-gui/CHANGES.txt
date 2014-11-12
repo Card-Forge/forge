@@ -68,6 +68,13 @@ War's Toll
 Warmonger Hellkite
 Well of Ideas
 
+Crown of Doom
+Wolfcaller's Howl
+Benevolent Offering
+Intellectual Offering
+Sylvan Offering
+Fell the Mighty
+
 
 ------------
 Known Issues
