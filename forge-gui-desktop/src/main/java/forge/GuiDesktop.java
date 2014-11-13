@@ -26,7 +26,6 @@ import forge.deck.CardPool;
 import forge.error.BugReportDialog;
 import forge.game.GameEntity;
 import forge.game.GameEntityView;
-import forge.game.GameObject;
 import forge.game.card.CardView;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
