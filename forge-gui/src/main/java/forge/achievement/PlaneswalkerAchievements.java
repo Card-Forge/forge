@@ -69,7 +69,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Tezzeret, Agent of Bolas", "Tezzeret's Drain", "Technological superiority for the win!");
         add("Tibalt, the Fiend-Blooded", "Tibalt's Treason", "My side is the winning side!");
         add("Venser, the Sojourner", "Venser's Oblivion", "Let's just clean this up a bit...");
-        add("Vraska, the Unseen", "Vraska's Crew", "Say hello to my little friends!");
+        add("Vraska the Unseen", "Vraska's Crew", "Say hello to my little friends!");
         add("Xenagos, the Reveler", "Xenagos's Reveal", "Mwahahaha! Now I'm a god!");
     }
 
