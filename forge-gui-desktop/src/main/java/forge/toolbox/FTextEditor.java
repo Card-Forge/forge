@@ -1,5 +1,6 @@
 package forge.toolbox;
 
+import forge.gui.MouseUtil;
 import forge.toolbox.FSkin.SkinnedScrollPane;
 import forge.toolbox.FSkin.SkinnedTextArea;
 
@@ -51,6 +52,10 @@ public class FTextEditor extends SkinnedScrollPane {
         this.setViewportView(tarEditor);
         this.setBorder((Border)null);
         this.setOpaque(false);
+
+        if (this.isEditable()) {
+            MouseUtil.setComponentCursor(tarEditor, Cursor.TEXT_CURSOR);
+        }
 	}
 	
 	//Mapped functions to JTextArea
