@@ -4,7 +4,7 @@ Types:Planeswalker Gideon
 Loyalty:6
 A:AB$ MustAttack | Cost$ AddCounter<2/LOYALTY> | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Defender$ Self | Planeswalker$ True | SpellDescription$ During target opponent's next turn, creatures that player controls attack CARDNAME if able.
 A:AB$ Destroy | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | Planeswalker$ True | SpellDescription$ Destroy target tapped creature.
-A:AB$ Animate | Cost$ AddCounter<0/LOYALTY> | Defined$ Self | Power$ 6 | Toughness$ 6 | Types$ Creature,Human,Soldier | SubAbility$ DBPrevent | Planeswalker$ True | SpellDescription$ Until end of turn, CARDNAME becomes a 6/6 Human Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
+A:AB$ Animate | Cost$ AddCounter<0/LOYALTY> | Defined$ Self | Power$ 6 | Toughness$ 6 | Types$ Creature,Human,Soldier | SubAbility$ DBPrevent | Planeswalker$ True | Ultimate$ True | SpellDescription$ Until end of turn, CARDNAME becomes a 6/6 Human Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
 SVar:DBPrevent:DB$ Pump | Defined$ Self | KW$ HIDDEN Prevent all damage that would be dealt to CARDNAME.
 #restriction logic will need to be added to Human declare attackers for this to be OK for the AI to use
 SVar:RemAIDeck:True
