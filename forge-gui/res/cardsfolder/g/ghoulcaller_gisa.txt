@@ -6,3 +6,4 @@ A:AB$ Token | Cost$ B T Sac<1/Creature.Other/another creature> | TokenAmount$ X 
 SVar:X:Sacrificed$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghoulcaller_gisa.jpg
+Oracle:{B}, {T}, Sacrifice another creature: Put X 2/2 black Zombie creature tokens onto the battlefield, where X is the sacrificed creature's power.

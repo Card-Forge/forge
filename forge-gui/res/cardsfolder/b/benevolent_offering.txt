@@ -11,3 +11,4 @@ SVar:Y:Count$Valid Creature.ChosenCtrl/Twice
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/benevolent_offering.jpg
+Oracle:Choose an opponent. You and that player each put three 1/1 white Spirit creature tokens with flying onto the battlefield.\nChoose an opponent. You gain 2 life for each creature you control and that player gains 2 life for each creature he or she controls.

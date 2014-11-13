@@ -9,3 +9,4 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_offering.jpg
+Oracle:Choose an opponent. You and that player each put an X/X green Treefolk creature token onto the battlefield.\nChoose an opponent. You and that player each put X 1/1 green Elf Warrior creature tokens onto the battlefield.

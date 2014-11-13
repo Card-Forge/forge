@@ -11,3 +11,4 @@ SVar:X:Count$Valid Card.IsCommander+YouOwn+YouCtrl
 SVar:BuffedBy:Card.IsCommander
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tyrants_familiar.jpg
+Oracle:Flying, haste\nLieutenant - As long as you control your commander, Tyrant's Familiar gets +2/+2 and has "Whenever Tyrant's Familiar attacks, it deals 7 damage to target creature defending player controls."

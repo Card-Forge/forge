@@ -9,3 +9,4 @@ SVar:X:Count$Valid Card.IsCommander+YouOwn+YouCtrl
 SVar:BuffedBy:Card.IsCommander
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_field_marshal.jpg
+Oracle:Flying\nLieutenant - As long as you control your commander, Angelic Field Marshal gets +2/+2 and creatures you control have vigilance.

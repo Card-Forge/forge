@@ -6,3 +6,4 @@ SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Creature.powerGTX | References$ X
 SVar:X:ParentTargeted$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fell_the_mighty.jpg
+Oracle:Destroy all creatures with power greater than target creature's power.

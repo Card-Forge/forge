@@ -6,3 +6,4 @@ T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCopy | CheckSVar$ Morbid
 SVar:TrigCopy:AB$ CopySpellAbility | Cost$ 0 | Defined$ TriggeredSpellAbility
 SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/malicious_affliction.jpg
+Oracle:Morbid - When you cast Malicious Affliction, if a creature died this turn, you may copy Malicious Affliction and may choose a new target for the copy.\nDestroy target nonblack creature.

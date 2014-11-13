@@ -6,3 +6,4 @@ SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ G 2 2 Wolf C14 | TokenAmount$ X
 SVar:X:PlayerCountOpponents$HasPropertyWithCardsInHandAtLeast4
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wolfcallers_howl.jpg
+Oracle:At the beginning of your upkeep, put X 2/2 green Wolf creature tokens onto the battlefield, where X is the number of your opponents with four or more cards in hand.

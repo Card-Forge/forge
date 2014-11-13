@@ -7,3 +7,4 @@ SVar:DBZombify:DB$ Animate | Defined$ Remembered | Types$ Zombie | Colors$ Black
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBChange
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necromantic_selection.jpg
+Oracle:Destroy all creatures, then return a creature card put into a graveyard this way to the battlefield under your control. It's a black Zombie in addition to its other colors and types. Exile Necromantic Selection.
