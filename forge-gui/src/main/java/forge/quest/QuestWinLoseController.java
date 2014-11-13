@@ -54,7 +54,7 @@ public abstract class QuestWinLoseController {
         final QuestController qc = FModel.getQuest();
 
         // After the first game, reset the card shop pool to be able to buy back anted cards
-        if (lastGame.getNumPlayedGamesInMatch() == 1) {
+        if (lastGame.getNumPlayedGamesInMatch() == 0) {
             qc.getCards().clearShopList();
             qc.getCards().getShopList();
         }
