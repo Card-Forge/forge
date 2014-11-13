@@ -154,6 +154,8 @@ public class CloneEffect extends SpellAbilityEffect {
         if (copyingSelf) {
             tgtCard.clearStates(CardStateName.Cloned, false);
         }
+
+        //game.getTriggerHandler().registerActiveTrigger(tgtCard, false);
         tgtCard.updateStateForView();
 
         //Clear Remembered and Imprint lists
