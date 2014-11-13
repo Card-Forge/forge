@@ -37,9 +37,8 @@ public class SFilterUtil {
         if (text.isEmpty()) {
             return Predicates.alwaysTrue();
         }
-        
-        if (BooleanExpression.isExpression(text)) {
 
+        if (BooleanExpression.isExpression(text)) {
             BooleanExpression expression = new BooleanExpression(text, inName, inType, inText, inCost);
             
             try {
@@ -47,15 +46,14 @@ public class SFilterUtil {
                 if (filter != null) {
                     return Predicates.compose(invert ? Predicates.not(filter) : filter, PaperCard.FN_GET_RULES);
                 }
-            } catch (Exception ignored) {
+            }
+            catch (Exception ignored) {
                 ignored.printStackTrace();
                 //Continue with standard filtering if the expression is not valid.
             }
-            
         }
-        
-        String[] splitText = text.replaceAll(",", "").replaceAll("  ", " ").split(" ");
 
+        List<String> splitText = getSplitText(text);
         List<Predicate<CardRules>> terms = new ArrayList<>();
         for (String s : splitText) {
             List<Predicate<CardRules>> subands = new ArrayList<>();
@@ -72,6 +70,45 @@ public class SFilterUtil {
         return Predicates.compose(textFilter, PaperCard.FN_GET_RULES);
     }
 
+    private static List<String> getSplitText(String text) {
+        boolean inQuotes = false;
+        String entry = "";
+        List<String> splitText = new ArrayList<String>();
+        for (int i = 0; i < text.length(); i++) {
+            char ch = text.charAt(i);
+            switch (ch) {
+            case ' ':
+                if (!inQuotes) { //if not in quotes, end current entry
+                    if (entry.length() > 0) {
+                        splitText.add(entry);
+                        entry = "";
+                    }
+                    continue;
+                }
+                break;
+            case '"':
+                inQuotes = !inQuotes;
+                continue; //don't append quotation character itself
+            case '\\':
+                if (i < text.length() - 1 && text.charAt(i + 1) == '"') {
+                    ch = '"'; //allow appending escaped quotation character
+                    i++; //prevent chaging inQuotes for that character
+                }
+                break;
+            case ',':
+                if (!inQuotes) { //ignore commas outside quotes
+                    continue;
+                }
+                break;
+            }
+            entry += ch;
+        }
+        if (entry.length() > 0) {
+            splitText.add(entry);
+        }
+        return splitText;
+    }
+
     public static <T extends InventoryItem> Predicate<T> buildItemTextFilter(String text) {
         if (text.trim().isEmpty()) {
             return Predicates.alwaysTrue();
@@ -81,12 +118,12 @@ public class SFilterUtil {
     }
 
     private static class ItemTextPredicate<T extends InventoryItem> implements Predicate<T> {
-        private final String[] splitText;
+        private final List<String> splitText;
 
         private ItemTextPredicate(String text) {
-            splitText = text.toLowerCase().replaceAll(",", "").replaceAll("  ", " ").split(" ");
+            splitText = getSplitText(text.toLowerCase());
         }
-        
+
         @Override
         public boolean apply(T input) {
             String name = input.getName().toLowerCase();
