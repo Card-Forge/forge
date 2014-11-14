@@ -1,7 +1,7 @@
-Forge Beta: 10-#-2014 ver 1.5.30
+Forge Beta: 11-14-2014 ver 1.5.30
 
 
-# cards in total.
+14330 cards in total.
 
 
 -------------
@@ -32,22 +32,26 @@ New Cards
 AEther Gale
 Angel of the Dire Hour
 Angelic Field Marshal
+Benevolent Offering
 Breaching Leviathan
 Commander's Sphere
 Containment Priest
 Creeperhulk
+Crown of Doom
 Daretti, Scrap Savant
 Demon of Wailing Agonies
 Deploy to the Front
 Dualcaster Mage
 Ekundu Cyclops
 Feldon of the Third Path
+Fell the Mighty
 Flamekin Village
 Flesh Carver
 Freyalise, Llanowar's Fury
 Ghoulcaller Gisa
 Grave Sifter
 Hallowed Spiritkeeper
+Intellectual Offering
 Jazal Goldmane
 Lifeblood Hydra
 Magnetic Web
@@ -66,6 +70,7 @@ Song of the Dryads
 Spoils of Blood
 Stitcher Geralf
 Stormsurge Kraken
+Sylvan Offering
 Teferi, Temporal Archmage
 Thunderfoot Baloth
 Titania, Protector of Argoth
@@ -76,13 +81,7 @@ Wake the Dead
 War's Toll
 Warmonger Hellkite
 Well of Ideas
-
-Crown of Doom
 Wolfcaller's Howl
-Benevolent Offering
-Intellectual Offering
-Sylvan Offering
-Fell the Mighty
 
 
 ------------
@@ -132,7 +131,17 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Agetian
+DrDev
+elcnesh
+Gos
+Hanmac
+Marek14
+Sloth
+Sol
+Swordshine
+Zirbert
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
