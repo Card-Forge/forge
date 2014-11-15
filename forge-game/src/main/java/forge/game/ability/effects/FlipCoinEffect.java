@@ -158,8 +158,8 @@ public class FlipCoinEffect extends SpellAbilityEffect {
      */
     public static boolean flipCoinCall(final Player caller, final SpellAbility sa, final int multiplier) {
         boolean [] results = new boolean [multiplier];
+        final boolean choice = caller.getController().chooseBinary(sa, sa.getHostCard().getName() + " - Call coin flip", PlayerController.BinaryChoiceType.HeadsOrTails);
         for (int i = 0; i < multiplier; i++) {
-            final boolean choice = caller.getController().chooseBinary(sa, sa.getHostCard().getName() + " - Call coin flip", PlayerController.BinaryChoiceType.HeadsOrTails);
             // Play the Flip A Coin sound
             caller.getGame().fireEvent(new GameEventFlipCoin());
             final boolean flip = MyRandom.getRandom().nextBoolean();
