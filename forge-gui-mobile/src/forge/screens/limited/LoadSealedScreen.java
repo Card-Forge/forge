@@ -1,9 +1,9 @@
-package forge.screens.sealed;
+package forge.screens.limited;
 
-import forge.FThreads;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+
 import forge.Forge;
 import forge.assets.FSkinFont;
-import forge.deck.DeckGroup;
 import forge.deck.DeckProxy;
 import forge.deck.FDeckChooser;
 import forge.deck.FDeckEditor;
@@ -13,55 +13,26 @@ import forge.game.GameType;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.filters.ItemFilter;
-import forge.limited.SealedCardPoolGenerator;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.LaunchScreen;
-import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
+import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.util.ThreadUtil;
 
-public class SealedScreen extends LaunchScreen {
+public class LoadSealedScreen extends LaunchScreen {
     private final DeckManager lstDecks = add(new DeckManager(GameType.Draft));
-    private final FButton btnNewDeck = add(new FButton("New Deck"));
-    private final FButton btnEditDeck = add(new FButton("Edit Deck"));
+    private final FLabel lblTip = add(new FLabel.Builder()
+        .text("Double-tap to edit deck (Long-press to view)")
+        .textColor(FLabel.INLINE_LABEL_COLOR)
+        .align(HAlignment.CENTER).font(FSkinFont.get(12)).build());
 
-    public SealedScreen() {
+    public LoadSealedScreen() {
         super("Sealed Deck");
 
         lstDecks.setup(ItemManagerConfig.SEALED_DECKS);
         lstDecks.setItemActivateHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                editSelectedDeck();
-            }
-        });
-
-        btnNewDeck.setFont(FSkinFont.get(16));
-        btnNewDeck.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                ThreadUtil.invokeInGameThread(new Runnable() { //must run in game thread to prevent blocking UI thread
-                    @Override
-                    public void run() {
-                        final DeckGroup sealed = SealedCardPoolGenerator.generateSealedDeck(false);
-                        if (sealed == null) { return; }
-
-                        FThreads.invokeInEdtLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                DeckPreferences.setSealedDeck(sealed.getName());
-                                Forge.openScreen(new FDeckEditor(EditorType.Sealed, sealed.getName(), false));
-                            }
-                        });
-                    }
-                });
-            }
-        });
-        btnEditDeck.setFont(btnNewDeck.getFont());
-        btnEditDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 editSelectedDeck();
@@ -88,14 +59,12 @@ public class SealedScreen extends LaunchScreen {
         float x = ItemFilter.PADDING;
         float y = startY;
         float w = width - 2 * x;
-        float buttonWidth = (w - FDeckChooser.PADDING) / 2;
-        float buttonHeight = btnNewDeck.getAutoSizeBounds().height * 1.2f;
-        float listHeight = height - buttonHeight - y - FDeckChooser.PADDING;
+        float labelHeight = lblTip.getAutoSizeBounds().height;
+        float listHeight = height - labelHeight - y - FDeckChooser.PADDING;
 
         lstDecks.setBounds(x, y, w, listHeight);
         y += listHeight + FDeckChooser.PADDING;
-        btnNewDeck.setBounds(x, y, buttonWidth, buttonHeight);
-        btnEditDeck.setBounds(x + buttonWidth + FDeckChooser.PADDING, y, buttonWidth, buttonHeight);
+        lblTip.setBounds(x, y, w, labelHeight);
     }
 
     @Override

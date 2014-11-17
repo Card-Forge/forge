@@ -1,15 +1,16 @@
-package forge.screens.draft;
+package forge.screens.limited;
+
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.FThreads;
 import forge.Forge;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.LaunchScreen;
 import forge.screens.LoadingOverlay;
-import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
-import forge.util.ThreadUtil;
 import forge.assets.FSkinFont;
 import forge.deck.DeckProxy;
 import forge.deck.FDeckChooser;
@@ -20,57 +21,21 @@ import forge.game.GameType;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.filters.ItemFilter;
-import forge.limited.BoosterDraft;
-import forge.limited.LimitedPoolType;
 import forge.model.FModel;
 import forge.util.gui.SGuiChoose;
 
-public class DraftScreen extends LaunchScreen {
+public class LoadDraftScreen extends LaunchScreen {
     private final DeckManager lstDecks = add(new DeckManager(GameType.Draft));
-    private final FButton btnNewDraft = add(new FButton("New Draft"));
-    private final FButton btnEditDeck = add(new FButton("Edit Deck"));
+    private final FLabel lblTip = add(new FLabel.Builder()
+        .text("Double-tap to edit deck (Long-press to view)")
+        .textColor(FLabel.INLINE_LABEL_COLOR)
+        .align(HAlignment.CENTER).font(FSkinFont.get(12)).build());
 
-    public DraftScreen() {
-        super("Booster Draft");
+    public LoadDraftScreen() {
+        super("Load Booster Draft");
 
         lstDecks.setup(ItemManagerConfig.DRAFT_DECKS);
         lstDecks.setItemActivateHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                editSelectedDeck();
-            }
-        });
-
-        btnNewDraft.setFont(FSkinFont.get(16));
-        btnNewDraft.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                ThreadUtil.invokeInGameThread(new Runnable() { //must run in game thread to prevent blocking UI thread
-                    @Override
-                    public void run() {
-                        final LimitedPoolType poolType = SGuiChoose.oneOrNone("Choose Draft Format", LimitedPoolType.values());
-                        if (poolType == null) { return; }
-
-                        final BoosterDraft draft = BoosterDraft.createDraft(poolType);
-                        if (draft == null) { return; }
-
-                        FThreads.invokeInEdtLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                LoadingOverlay.show("Loading new draft...", new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Forge.openScreen(new DraftingProcessScreen(draft));
-                                    }
-                                });
-                            }
-                        });
-                    }
-                });
-            }
-        });
-        btnEditDeck.setFont(btnNewDraft.getFont());
-        btnEditDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 editSelectedDeck();
@@ -97,14 +62,12 @@ public class DraftScreen extends LaunchScreen {
         float x = ItemFilter.PADDING;
         float y = startY;
         float w = width - 2 * x;
-        float buttonWidth = (w - FDeckChooser.PADDING) / 2;
-        float buttonHeight = btnNewDraft.getAutoSizeBounds().height * 1.2f;
-        float listHeight = height - buttonHeight - y - FDeckChooser.PADDING;
+        float labelHeight = lblTip.getAutoSizeBounds().height;
+        float listHeight = height - labelHeight - y - FDeckChooser.PADDING;
 
         lstDecks.setBounds(x, y, w, listHeight);
         y += listHeight + FDeckChooser.PADDING;
-        btnNewDraft.setBounds(x, y, buttonWidth, buttonHeight);
-        btnEditDeck.setBounds(x + buttonWidth + FDeckChooser.PADDING, y, buttonWidth, buttonHeight);
+        lblTip.setBounds(x, y, w, labelHeight);
     }
 
     @Override

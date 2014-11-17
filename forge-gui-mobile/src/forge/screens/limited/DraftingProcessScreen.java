@@ -1,4 +1,4 @@
-package forge.screens.draft;
+package forge.screens.limited;
 
 import org.apache.commons.lang3.StringUtils;
 

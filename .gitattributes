@@ -1249,10 +1249,12 @@ forge-gui-mobile/src/forge/screens/SplashScreen.java -text
 forge-gui-mobile/src/forge/screens/TabPageScreen.java -text
 forge-gui-mobile/src/forge/screens/constructed/AvatarSelector.java -text
 forge-gui-mobile/src/forge/screens/constructed/ConstructedScreen.java -text
-forge-gui-mobile/src/forge/screens/draft/DraftScreen.java -text
-forge-gui-mobile/src/forge/screens/draft/DraftingProcessScreen.java -text
 forge-gui-mobile/src/forge/screens/gauntlet/GauntletScreen.java -text
 forge-gui-mobile/src/forge/screens/home/HomeScreen.java -text
+forge-gui-mobile/src/forge/screens/limited/DraftingProcessScreen.java -text
+forge-gui-mobile/src/forge/screens/limited/LimitedScreen.java -text
+forge-gui-mobile/src/forge/screens/limited/LoadDraftScreen.java -text
+forge-gui-mobile/src/forge/screens/limited/LoadSealedScreen.java -text
 forge-gui-mobile/src/forge/screens/match/MatchController.java -text
 forge-gui-mobile/src/forge/screens/match/MatchScreen.java -text
 forge-gui-mobile/src/forge/screens/match/TargetingOverlay.java -text
@@ -1291,7 +1293,6 @@ forge-gui-mobile/src/forge/screens/quest/QuestPrefsScreen.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestSpellShopScreen.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestStatsScreen.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestTournamentsScreen.java -text
-forge-gui-mobile/src/forge/screens/sealed/SealedScreen.java -text
 forge-gui-mobile/src/forge/screens/settings/AchievementsPage.java -text
 forge-gui-mobile/src/forge/screens/settings/FilesPage.java -text
 forge-gui-mobile/src/forge/screens/settings/GuiDownloader.java -text
@@ -1311,6 +1312,7 @@ forge-gui-mobile/src/forge/toolbox/FDisplayObject.java -text
 forge-gui-mobile/src/forge/toolbox/FEvent.java -text
 forge-gui-mobile/src/forge/toolbox/FFileChooser.java -text
 forge-gui-mobile/src/forge/toolbox/FGestureAdapter.java -text
+forge-gui-mobile/src/forge/toolbox/FGroupBox.java -text
 forge-gui-mobile/src/forge/toolbox/FGroupList.java -text
 forge-gui-mobile/src/forge/toolbox/FLabel.java -text
 forge-gui-mobile/src/forge/toolbox/FList.java -text

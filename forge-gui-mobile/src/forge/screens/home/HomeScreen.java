@@ -7,11 +7,10 @@ import forge.screens.LoadingOverlay;
 import forge.Forge;
 import forge.assets.FSkinImage;
 import forge.screens.constructed.ConstructedScreen;
-import forge.screens.draft.DraftScreen;
 import forge.screens.gauntlet.GauntletScreen;
+import forge.screens.limited.LimitedScreen;
 import forge.screens.quest.QuestMenu;
 import forge.screens.quest.QuestMenu.LaunchReason;
-import forge.screens.sealed.SealedScreen;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
@@ -34,16 +33,15 @@ public class HomeScreen extends FScreen {
                 Forge.openScreen(new ConstructedScreen());
             }
         });
-        addButton("Booster Draft", new FEventHandler() {
+        addButton("Draft / Sealed", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                Forge.openScreen(new DraftScreen());
+                Forge.openScreen(new LimitedScreen());
             }
         });
-        addButton("Sealed Deck", new FEventHandler() {
+        addButton("Planar Conquest", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                Forge.openScreen(new SealedScreen());
             }
         });
         addButton("Quest Mode", new FEventHandler() {
