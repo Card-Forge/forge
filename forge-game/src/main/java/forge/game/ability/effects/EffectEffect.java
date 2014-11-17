@@ -239,9 +239,9 @@ public class EffectEffect extends SpellAbilityEffect {
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         Card cmdEffect = game.getAction().moveTo(ZoneType.Command, eff);
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-        if (effectTriggers != null) {
-            game.getTriggerHandler().registerActiveTrigger(cmdEffect, false);
-        }
+        //if (effectTriggers != null) {
+        //    game.getTriggerHandler().registerActiveTrigger(cmdEffect, false);
+        //}
     }
 
 }
