@@ -158,6 +158,14 @@ public class Forge implements ApplicationListener {
         });
     }
 
+    //set screen that will be gone to on pressing Back before going to current Back screen
+    public static void setBackScreen(final FScreen screen0) {
+        int index = screens.size() - 1;
+        if (index > 0 && screens.get(index) != screen0) {
+            screens.add(index, screen0);
+        }
+    }
+
     public static void exit(boolean silent) {
         if (exited) { return; } //don't allow exiting multiple times
 

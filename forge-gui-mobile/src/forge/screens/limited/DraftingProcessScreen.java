@@ -2,6 +2,7 @@ package forge.screens.limited;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.Forge;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.FDeckEditor;
@@ -85,6 +86,8 @@ public class DraftingProcessScreen extends FDeckEditor {
         FModel.getDecks().getDraft().add(finishedDraft);
         getEditorType().getController().load("", name);
         DeckPreferences.setDraftDeck(name);
+
+        Forge.setBackScreen(new LoadDraftScreen()); //set load draft screen to be opened when user done editing deck
 
         //show header for main deck and sideboard when finished drafting
         deckHeader.setVisible(true);

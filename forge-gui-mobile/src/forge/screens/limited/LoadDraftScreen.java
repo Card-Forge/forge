@@ -32,7 +32,7 @@ public class LoadDraftScreen extends LaunchScreen {
         .align(HAlignment.CENTER).font(FSkinFont.get(12)).build());
 
     public LoadDraftScreen() {
-        super("Load Booster Draft");
+        super("Booster Draft");
 
         lstDecks.setup(ItemManagerConfig.DRAFT_DECKS);
         lstDecks.setItemActivateHandler(new FEventHandler() {
