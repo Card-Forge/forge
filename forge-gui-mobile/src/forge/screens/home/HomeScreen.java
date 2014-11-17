@@ -39,7 +39,7 @@ public class HomeScreen extends FScreen {
                 Forge.openScreen(new LimitedScreen());
             }
         });
-        addButton("Planar Conquest", new FEventHandler() {
+        addButton("???", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
             }
