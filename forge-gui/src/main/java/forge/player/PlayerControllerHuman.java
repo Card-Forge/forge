@@ -591,7 +591,7 @@ public class PlayerControllerHuman extends PlayerController {
                 toTop = topN;
             }
             else {
-                toTop = Card.getList(SGuiChoose.order("Arrange cards to be put on top of your library", "Cards arranged", CardView.getCollection(topN), null)); 
+                toTop = Card.getList(SGuiChoose.order("Arrange cards to be put on top of your library", "Top of Library", CardView.getCollection(topN), null));
             }
         }
         endTempShowCards();
