@@ -13,7 +13,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.5.30-SNAPSHOT</version>
+        <version>1.5.31-SNAPSHOT</version>
     </parent>
 
     <artifactId>forge-gui-android</artifactId>
