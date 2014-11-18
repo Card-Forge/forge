@@ -311,9 +311,6 @@ public class PhaseHandler implements java.io.Serializable {
                     game.getEndOfCombat().executeUntil();
                     game.getEndOfCombat().executeAt();
 
-                    if (combat != null) {
-                        combat.endCombat();
-                    }
                     //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
                     break;
 
@@ -1029,8 +1026,10 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public void endCombat() {
-        if (combat == null) { return; }
-        combat = null;
+        if (combat != null) {
+            combat.endCombat();
+            combat = null;
+        }
         game.updateCombatForView();
     }
 }
