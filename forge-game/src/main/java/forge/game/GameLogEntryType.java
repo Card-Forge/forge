@@ -8,6 +8,7 @@ public enum GameLogEntryType {
     ANTE("Ante"),
     PLAYER_CONROL("Player contol"),
     COMBAT("Combat"),
+    DISCARD("Discard"),
     EFFECT_REPLACED("Replacement Effect"),
     LAND("Land"),
     STACK_RESOLVE("Resolve stack"),
