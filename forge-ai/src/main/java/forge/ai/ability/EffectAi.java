@@ -7,8 +7,6 @@ import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
-import forge.card.CardType;
-import forge.card.CardType.Constant;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -114,14 +112,18 @@ public class EffectAi extends SpellAbilityAi {
                         return CombatUtil.canAttack(c, opp);
                     }
                 });
+                if (comp.size() < 2) {
+                	return false;
+                }
+                final List<Card> attackers = comp;
                 human = CardLists.filter(human, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        return CombatUtil.canBlock(c);
+                        return CombatUtil.canBlockAtLeastOne(c, attackers);
                     }
                 });
-                if (comp.size() < 2 || human.size() < 1) {
-                    randomReturn = false;
+                if (human.isEmpty()) {
+                	return false;
                 }
             } else if (logic.equals("RedirectSpellDamageFromPlayer")) {
                 if (game.getStack().isEmpty()) {
@@ -193,8 +195,7 @@ public class EffectAi extends SpellAbilityAi {
             if (name == null) {
                 name = sa.getHostCard().getName() + "'s Effect";
             }
-            final CardCollectionView list = sa.getActivatingPlayer().getCardsIn(ZoneType.Command, name);
-            if (!list.isEmpty()) {
+            if (sa.getActivatingPlayer().isCardInCommand(name)) {
                 return false;
             }
         }
