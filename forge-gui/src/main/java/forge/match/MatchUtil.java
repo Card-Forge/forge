@@ -398,9 +398,11 @@ public class MatchUtil {
     public static void pause() {
         SoundSystem.instance.pause();
         //pause playback if needed
-        InputQueue inputQueue = getInputQueue();
-        if (inputQueue != null && inputQueue.getInput() instanceof InputPlaybackControl) {
-            ((InputPlaybackControl)inputQueue.getInput()).pause();
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_PAUSE_WHILE_MINIMIZED)) {
+            InputQueue inputQueue = getInputQueue();
+            if (inputQueue != null && inputQueue.getInput() instanceof InputPlaybackControl) {
+                ((InputPlaybackControl) inputQueue.getInput()).pause();
+            }
         }
     }
 

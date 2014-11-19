@@ -79,6 +79,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbUiForTouchScreen = new OptionsCheckBox("Enchance UI for Touchscreens");
     private final JCheckBox cbCompactMainMenu = new OptionsCheckBox("Use Compact Main Sidebar Menu");
     private final JCheckBox cbPromptFreeBlocks = new OptionsCheckBox("Free Block Handling");
+    private final JCheckBox cbPauseWhileMinimized = new OptionsCheckBox("Pause While Minimized");
     private final JCheckBox cbCompactPrompt = new OptionsCheckBox("Compact Prompt");
     private final JCheckBox cbHideReminderText = new OptionsCheckBox("Hide Reminder Text");
     private final JCheckBox cbOpenPacksIndiv = new OptionsCheckBox("Open Packs Individually");
@@ -158,6 +159,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbPromptFreeBlocks, regularConstraints);
         pnlPrefs.add(new NoteLabel("When enabled, if you would have to pay 0 to block, pay automatically without prompt."), regularConstraints);
+
+        pnlPrefs.add(cbPauseWhileMinimized, regularConstraints);
+        pnlPrefs.add(new NoteLabel("When enabled, Forge pauses when minimized (primarily for AI vs AI)."), regularConstraints);
 
         // Deck building options
         pnlPrefs.add(new SectionLabel("Random Deck Generation"), sectionConstraints);
@@ -507,6 +511,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbPromptFreeBlocks() {
         return cbPromptFreeBlocks;
+    }
+
+    public JCheckBox getCbPauseWhileMinimized() {
+        return cbPauseWhileMinimized;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
