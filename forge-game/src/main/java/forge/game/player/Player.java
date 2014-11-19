@@ -242,8 +242,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         activeScheme = getZone(ZoneType.SchemeDeck).get(0);
         // gameAction moveTo ?
-        getZone(ZoneType.SchemeDeck).remove(activeScheme);
-        getZone(ZoneType.Command).add(activeScheme);
+        game.getAction().moveTo(ZoneType.Command, activeScheme);
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
         // Run triggers
