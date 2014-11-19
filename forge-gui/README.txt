@@ -1315,6 +1315,19 @@ Players' life totals will no longer get cut off.
 Players' zone/mana counts will no longer overlap the icon, instead shrinking to fit if needed.
 
 
+- Refactor attack declarations -
+The game now correctly calculates whether an attack declaration is legal, based upon the restrictions and requirements present on the possible attacking creatures. AI support is not yet fully implemented, but the AI can always default to a legal attack declaration.
+
+
+- Support for surrounding search expressions with quotations -
+You can now wrap all or part of a search expression in the Deck Editor or other ItemManagers in quotations to prevent matching on anything that doesn't contain all words within the quotes in order.
+For example, while searching for this expression:
+    creatures you don't control
+will match on any cards that contains all 4 of those words in any configuration (24/14330 implemented), this expression:
+    "creatures you don't control"
+will only match on cards that contain those exact words in that exact order with no other words in between (4/14330 implemented).
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 
