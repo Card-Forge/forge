@@ -41,39 +41,7 @@ public enum ConquestPlane {
     }, new String[] {
             
     }),
-    Azoria("Azoria", new String[] {
-            
-    }, new Region[] {
-            new Region("", "", null,
-                    new String[] { })
-    }, new String[] {
-            
-    }),
-    BolasMeditationRealm("Bolas's Meditation Realm", new String[] {
-            
-    }, new Region[] {
-            new Region("", "", null,
-                    new String[] { })
-    }, new String[] {
-            
-    }),
     Dominaria("Dominaria", new String[] {
-            
-    }, new Region[] {
-            new Region("", "", null,
-                    new String[] { })
-    }, new String[] {
-            
-    }),
-    Equilor("Equilor", new String[] {
-            
-    }, new Region[] {
-            new Region("", "", null,
-                    new String[] { })
-    }, new String[] {
-            
-    }),
-    Gastal("Gastal", new String[] {
             
     }, new Region[] {
             new Region("", "", null,
