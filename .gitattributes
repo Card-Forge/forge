@@ -8659,7 +8659,6 @@ forge-gui/res/cardsfolder/m/marble_chalice.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/marble_diamond.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/marble_priest.txt -text
 forge-gui/res/cardsfolder/m/marble_titan.txt svneol=native#text/plain
-forge-gui/res/cardsfolder/m/marcadian_bazaar.txt -text
 forge-gui/res/cardsfolder/m/march_of_souls.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/march_of_the_machines.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/march_of_the_returned.txt -text
@@ -8851,6 +8850,7 @@ forge-gui/res/cardsfolder/m/mephidross_vampire.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mephitic_ooze.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mer_ek_nightblade.txt -text
 forge-gui/res/cardsfolder/m/mercadian_atlas.txt -text
+forge-gui/res/cardsfolder/m/mercadian_bazaar.txt -text
 forge-gui/res/cardsfolder/m/mercadian_lift.txt -text
 forge-gui/res/cardsfolder/m/mercadias_downfall.txt -text
 forge-gui/res/cardsfolder/m/mercenary_informer.txt svneol=native#text/plain
