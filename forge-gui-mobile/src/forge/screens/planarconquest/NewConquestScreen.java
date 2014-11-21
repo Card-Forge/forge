@@ -31,7 +31,7 @@ public class NewConquestScreen extends FScreen {
     private final FLabel lblDifficulty = add(new FLabel.Builder().text("Difficulty:").build());
     private final FComboBox<String> cbxDifficulty = add(new FComboBox<String>(new String[]{ "Easy", "Medium", "Hard", "Expert" }));
 
-    private final FLabel lblStartingPlane = add(new FLabel.Builder().text("Starting world:").build());
+    private final FLabel lblStartingPlane = add(new FLabel.Builder().text("Starting plane:").build());
     private final FComboBox<ConquestPlane> cbxStartingPlane = add(new FComboBox<ConquestPlane>(ConquestPlane.values()));
 
     private final FLabel lblStartingCommander = add(new FLabel.Builder().text("Starting commander:").build());

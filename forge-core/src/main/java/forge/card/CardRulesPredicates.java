@@ -310,11 +310,11 @@ public final class CardRulesPredicates {
         return new LeafColor(LeafColor.ColorOperator.CountColorsGreaterOrEqual, cntColors);
     }
 
-    public static Predicate<CardRules> hasColorIdentity(final byte colors) {
+    public static Predicate<CardRules> hasColorIdentity(final int colormask) {
         return new Predicate<CardRules>() {
             @Override
             public boolean apply(CardRules rules) {
-                return rules.getColorIdentity().hasAllColors(colors);
+                return rules.getColorIdentity().hasNoColorsExcept(colormask);
             }
         };
     }

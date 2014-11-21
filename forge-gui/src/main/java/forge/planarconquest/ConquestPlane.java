@@ -36,49 +36,56 @@ public enum ConquestPlane {
     Alara("Alara", new String[] {
             "ALA", "CON", "ARB"
     }, new Region[] {
-            
+            new Region("", "", null,
+                    new String[] { })
     }, new String[] {
             
     }),
     Azoria("Azoria", new String[] {
             
     }, new Region[] {
-            
+            new Region("", "", null,
+                    new String[] { })
     }, new String[] {
             
     }),
     BolasMeditationRealm("Bolas's Meditation Realm", new String[] {
             
     }, new Region[] {
-            
+            new Region("", "", null,
+                    new String[] { })
     }, new String[] {
             
     }),
     Dominaria("Dominaria", new String[] {
             
     }, new Region[] {
-            
+            new Region("", "", null,
+                    new String[] { })
     }, new String[] {
             
     }),
     Equilor("Equilor", new String[] {
             
     }, new Region[] {
-            
+            new Region("", "", null,
+                    new String[] { })
     }, new String[] {
             
     }),
     Gastal("Gastal", new String[] {
             
     }, new Region[] {
-            
+            new Region("", "", null,
+                    new String[] { })
     }, new String[] {
             
     }),
     Innistrad("Innistrad", new String[] {
             "ISD", "DKA", "AVR"
     }, new Region[] {
-            
+            new Region("", "", null,
+                    new String[] { })
     }, new String[] {
             
     }),
@@ -98,10 +105,21 @@ public enum ConquestPlane {
     }, new String[] {
             
     }),
-    Lorwyn("Lorwyn", new String[] {
-            
+    LorwynShadowmoor("Lorwyn-Shadowmoor", new String[] {
+            "LRW", "MOR", "SHM", "EVE"
     }, new Region[] {
-            
+            new Region("Gilt Leaf Wood {B}{G}", "", CardRulesPredicates.hasCreatureType("Elf"),
+                    new String[] { "Gilt Leaf", "Wood", "Elf", "Elves" }),
+            new Region("Glen Elendra {U}{B}", "", CardRulesPredicates.hasCreatureType("Faerie"),
+                    new String[] { "Glen", "Elendra", "Oona", "Fae" }),
+            new Region("Mount Tanufel {W}{U}{B}{R}{G}", "", CardRulesPredicates.hasCreatureType("Elemental"),
+                    new String[] { "Elemental", "Flamekin" }),
+            new Region("Murmuring Bosk {W}{B}{G}", "", CardRulesPredicates.hasCreatureType("Treefolk"),
+                    new String[] { "Treefolk" }),
+            new Region("Gilt Leaf Wood", "", null,
+                    new String[] { }),
+            new Region("Gilt Leaf Wood", "", null,
+                    new String[] { }),
     }, new String[] {
             
     }),
@@ -144,63 +162,72 @@ public enum ConquestPlane {
     Rabiah("Rabiah", new String[] {
             "ARN"
     }, new Region[] {
-            
+            new Region("", "", null,
+                    new String[] { })
     }, new String[] {
             
     }),
     Rath("Rath", new String[] {
             "TMP", "STH", "EXO"
     }, new Region[] {
-            
+            new Region("", "", null,
+                    new String[] { })
     }, new String[] {
             
     }),
     Ravnica("Ravnica", new String[] {
             "RAV", "GPT", "DIS", "RTR", "GTC", "DGM"
     }, new Region[] {
-            
-    }, new String[] {
-            
-    }),
-    Segovia("Segovia", new String[] {
-            
-    }, new Region[] {
-            
-    }, new String[] {
-            
-    }),
-    SerraRealm("Serra's Realm", new String[] {
-            
-    }, new Region[] {
-            
+            new Region("", "", null,
+                    new String[] { })
     }, new String[] {
             
     }),
     Shandalar("Shandalar", new String[] {
             "2ED", "ARN", "ATQ", "3ED", "LEG", "DRK", "4ED"
     }, new Region[] {
-            
+            new Region("", "", null,
+                    new String[] { })
     }, new String[] {
             
     }),
-    Ulgrotha("Ulgrotha", new String[] {
-            
+    Tarkir("Tarkir", new String[] {
+            "KTK", "FRF", "DTK"
     }, new Region[] {
-            
+            new Region("Abzan Houses {W}{B}{G}", "Sandsteppe Citadel", CardRulesPredicates.hasColorIdentity(MagicColor.WHITE | MagicColor.BLACK | MagicColor.GREEN),
+                    new String[] { "Abzan", "House", "Citadel", "Arashin", "Wastes", "Mer-Ek" }),
+            new Region("Jeskai Way {U}{R}{W}", "Mystic Monastery", CardRulesPredicates.hasColorIdentity(MagicColor.BLUE | MagicColor.RED | MagicColor.WHITE),
+                    new String[] { "Jeskai", "Way", "Mystic", "Monastery", "Stronghold", "Purugir" }),
+            new Region("Mardu Horde {R}{W}{B}", "Nomad Outpost", CardRulesPredicates.hasColorIdentity(MagicColor.RED | MagicColor.WHITE | MagicColor.BLACK),
+                    new String[] { "Mardu", "Horde", "Nomad", "Outpost", "Wingthrone", "Goldengrave", "Scour", "Screamreach" }),
+            new Region("Sultai Brood {B}{G}{U}", "Opulent Palace", CardRulesPredicates.hasColorIdentity(MagicColor.BLACK | MagicColor.GREEN | MagicColor.BLUE),
+                    new String[] { "Sultai", "Brood", "Opulent", "Palace", "Sagu", "Jungle", "Kheru", "Gudul", "Gurmag", "Marang" }),
+            new Region("Temur Frontier {G}{U}{R}", "Frontier Bivouac", CardRulesPredicates.hasColorIdentity(MagicColor.GREEN | MagicColor.BLUE | MagicColor.RED),
+                    new String[] { "Temur", "Frontier", "Bivouac", "Qal Sisma", "Dragon's Throat", "Karakyk Valley", "Staircase of Bones" })
     }, new String[] {
             
     }),
     Theros("Theros", new String[] {
-            
+            "THS", "BNG", "JOU"
     }, new Region[] {
+            new Region("", "", null,
+                    new String[] { }),
+    }, new String[] {
             
+    }),
+    Ulgrotha("Ulgrotha", new String[] {
+            "HML"
+    }, new Region[] {
+            new Region("", "", null,
+                    new String[] { }),
     }, new String[] {
             
     }),
     Zendikar("Zendikar", new String[] {
             "ZEN", "WWK", "ROE"
     }, new Region[] {
-            
+            new Region("", "", null,
+                    new String[] { }),
     }, new String[] {
             
     });
@@ -325,6 +352,10 @@ public enum ConquestPlane {
 
         public FCollectionView<PaperCard> getCommanders() {
             return commanders;
+        }
+
+        public String toString() {
+            return name;
         }
     }
 }
