@@ -60,16 +60,16 @@ public enum ConquestPlane {
     Kamigawa("Kamigawa", new String[] {
             "CHK", "BOK", "SOK"
     }, new Region[] {
-            new Region("Towabara", "", CardRulesPredicates.hasColorIdentity(MagicColor.WHITE),
-                    new String[] { "Towabara", "Plains" }),
-            new Region("Minamo Academy", "", CardRulesPredicates.hasColorIdentity(MagicColor.BLUE),
-                    new String[] { "Minamo", "Academy", "Island" }),
-            new Region("Takenuma", "", CardRulesPredicates.hasColorIdentity(MagicColor.BLACK),
-                    new String[] { "Takenuma", "Swamp" }),
-            new Region("Sokenzan Mountains", "", CardRulesPredicates.hasColorIdentity(MagicColor.RED),
-                    new String[] { "Sokenzan", "Mountain" }),
-            new Region("Jukai Forest", "", CardRulesPredicates.hasColorIdentity(MagicColor.GREEN),
-                    new String[] { "Jukai", "Forest" })
+            new Region("Towabara {W}", "Eiganjo Castle", CardRulesPredicates.hasColorIdentity(MagicColor.WHITE),
+                    new String[] { "Towabara", "Eiganjo", "Plains" }),
+            new Region("Minamo Academy {U}", "Minamo, School at Water's Edge", CardRulesPredicates.hasColorIdentity(MagicColor.BLUE),
+                    new String[] { "Minamo", "Water", "Island" }),
+            new Region("Takenuma {B}", "Shizo, Death's Storehouse", CardRulesPredicates.hasColorIdentity(MagicColor.BLACK),
+                    new String[] { "Takenuma", "Shizo", "Swamp" }),
+            new Region("Sokenzan Mountains {R}", "Shinka, the Bloodsoaked Keep", CardRulesPredicates.hasColorIdentity(MagicColor.RED),
+                    new String[] { "Sokenzan", "Shinka", "Mountain" }),
+            new Region("Jukai Forest {G}", "Okina, Temple to the Grandfathers", CardRulesPredicates.hasColorIdentity(MagicColor.GREEN),
+                    new String[] { "Jukai", "Okina", "Forest" })
     }, new String[] {
             
     }),
@@ -98,16 +98,16 @@ public enum ConquestPlane {
     Mercadia("Mercadia", new String[] {
             "MMQ", "NEM", "PCY"
     }, new Region[] {
-            new Region("Deepwood", "", CardRulesPredicates.hasCreatureType("Zombie", "Ghoul", "Dryad"),
-                    new String[] { }),
-            new Region("Mercadia City", "", CardRulesPredicates.hasCreatureType("Goblin"),
-                    new String[] { }),
-            new Region("Rishada", "", CardRulesPredicates.hasCreatureType("Pirate", "Rebel", "Mercenary"),
-                    new String[] { }),
-            new Region("Rushwood", "", CardRulesPredicates.hasCreatureType("Beast", "Troll"),
-                    new String[] { }),
-            new Region("Saprazzo", "", CardRulesPredicates.hasCreatureType("Merfolk", "Human"),
-                    new String[] { })
+            new Region("Fountain of Cho", "", CardRulesPredicates.hasColorIdentity(MagicColor.WHITE),
+                    new String[] { "Cho" }),
+            new Region("Saprazzan Cove", "Saprazzan Cove", CardRulesPredicates.hasColorIdentity(MagicColor.BLUE),
+                    new String[] { "Saprazzan", "Saprazzo" }),
+            new Region("Subterranean Hangar", "Subterranean Hangar", CardRulesPredicates.hasColorIdentity(MagicColor.BLACK),
+                    new String[] { "Subterranean" }),
+            new Region("Mercadian Bazaar", "Mercadian Bazaar", CardRulesPredicates.hasColorIdentity(MagicColor.RED),
+                    new String[] { "Mercadian" }),
+            new Region("Rushwood Grove", "Rushwood Grove", CardRulesPredicates.hasColorIdentity(MagicColor.GREEN),
+                    new String[] { "Rushwood" })
     }, new String[] {
             
     }),
