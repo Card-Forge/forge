@@ -108,18 +108,22 @@ public enum ConquestPlane {
     LorwynShadowmoor("Lorwyn-Shadowmoor", new String[] {
             "LRW", "MOR", "SHM", "EVE"
     }, new Region[] {
-            new Region("Gilt Leaf Wood {B}{G}", "", CardRulesPredicates.hasCreatureType("Elf"),
-                    new String[] { "Gilt Leaf", "Wood", "Elf", "Elves" }),
-            new Region("Glen Elendra {U}{B}", "", CardRulesPredicates.hasCreatureType("Faerie"),
-                    new String[] { "Glen", "Elendra", "Oona", "Fae" }),
-            new Region("Mount Tanufel {W}{U}{B}{R}{G}", "", CardRulesPredicates.hasCreatureType("Elemental"),
-                    new String[] { "Elemental", "Flamekin" }),
-            new Region("Murmuring Bosk {W}{B}{G}", "", CardRulesPredicates.hasCreatureType("Treefolk"),
-                    new String[] { "Treefolk" }),
-            new Region("Gilt Leaf Wood", "", null,
+            new Region("Ancient Amphitheater {R}{W}", "Ancient Amphitheater", CardRulesPredicates.hasCreatureType("Giant"),
                     new String[] { }),
-            new Region("Gilt Leaf Wood", "", null,
-                    new String[] { }),
+            new Region("Auntie's Hovel {B}{R}", "Auntie's Hovel", CardRulesPredicates.hasCreatureType("Goblin"),
+                    new String[] { "Auntie", "Boggart", "Hobgoblin", "Redcap", "Spriggan" }),
+            new Region("Gilt-Leaf Palace {B}{G}", "", CardRulesPredicates.hasCreatureType("Elf"),
+                    new String[] { "Gilt-Leaf", "Elves", "Wilt-Leaf" }),
+            new Region("Murmuring Bosk {W}{B}{G}", "Murmuring Bosk", CardRulesPredicates.hasCreatureType("Treefolk"),
+                    new String[] { "Bosk", "Treefolk" }),
+            new Region("Primal Beyond {W}{U}{B}{R}{G}", "Primal Beyond", CardRulesPredicates.hasCreatureType("Elemental"),
+                    new String[] { "Elemental", "Flamekin", "Tanufel", "Cinder", "Kulrath" }),
+            new Region("Rustic Clachan {W}", "Rustic Clachan", CardRulesPredicates.hasCreatureType("Kithkin"),
+                    new String[] { "Ballynock", "Ballyrush", "Barrenton", "Burrenton", "Cloverdell", "Goldmeadow", "Kinsbaile", "Kinscaer", "Mistmeadow" }),
+            new Region("Secluded Glen {U}{B}", "Secluded Glen", CardRulesPredicates.hasCreatureType("Faerie"),
+                    new String[] { "Glen", "Oona", "Fae" }),
+            new Region("Wanderwine Hub {W}{U}", "Wanderwine Hub", CardRulesPredicates.hasCreatureType("Merfolk"),
+                    new String[] { "Merrow", "Selkie", "Pirate" }),
     }, new String[] {
             
     }),
