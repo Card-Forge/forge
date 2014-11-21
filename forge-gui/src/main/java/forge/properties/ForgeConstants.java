@@ -100,6 +100,7 @@ public final class ForgeConstants {
 
     // data that is only in the profile dirs
     public static final String USER_QUEST_DIR       = USER_DIR + "quest/";
+    public static final String USER_CONQUEST_DIR    = USER_DIR + "conquest/";
     public static final String USER_PREFS_DIR       = USER_DIR + "preferences/";
     public static final String USER_GAMES_DIR       = USER_DIR + "games/";
     public static final String LOG_FILE             = USER_DIR + "forge.log";
@@ -113,10 +114,12 @@ public final class ForgeConstants {
     public static final String DECK_PLANE_DIR       = DECK_BASE_DIR + "planar/";
     public static final String DECK_COMMANDER_DIR   = DECK_BASE_DIR + "commander/";
     public static final String QUEST_SAVE_DIR       = USER_QUEST_DIR + "saves/";
+    public static final String CONQUEST_SAVE_DIR    = USER_CONQUEST_DIR + "saves/";
     public static final String MAIN_PREFS_FILE      = USER_PREFS_DIR + "forge.preferences";
     public static final String CARD_PREFS_FILE      = USER_PREFS_DIR + "card.preferences";
     public static final String DECK_PREFS_FILE      = USER_PREFS_DIR + "deck.preferences";
     public static final String QUEST_PREFS_FILE     = USER_PREFS_DIR + "quest.preferences";
+    public static final String CONQUEST_PREFS_FILE  = USER_PREFS_DIR + "conquest.preferences";
     public static final String ITEM_VIEW_PREFS_FILE = USER_PREFS_DIR + "item_view.preferences";
 
     // data that has defaults in the program dir but overrides/additions in the user dir

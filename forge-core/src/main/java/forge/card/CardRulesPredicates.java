@@ -10,6 +10,7 @@ import forge.util.PredicateString.StringOp;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Filtering conditions specific for CardRules class, defined here along with
@@ -147,6 +148,23 @@ public final class CardRulesPredicates {
      */
     public static Predicate<CardRules> joinedType(final PredicateString.StringOp op, final String what) {
         return new LeafString(LeafString.CardField.JOINED_TYPE, op, what);
+    }
+
+    public static Predicate<CardRules> hasCreatureType(final String... creatureTypes) {
+        return new Predicate<CardRules>() {
+            @Override
+            public boolean apply(final CardRules card) {
+                if (!card.getType().isCreature()) { return false; }
+
+                Set<String> set = card.getType().getCreatureTypes();
+                for (String creatureType : creatureTypes) {
+                    if (set.contains(creatureType)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        };
     }
 
     /**
@@ -290,6 +308,15 @@ public final class CardRulesPredicates {
      */
     public static Predicate<CardRules> hasAtLeastCntColors(final byte cntColors) {
         return new LeafColor(LeafColor.ColorOperator.CountColorsGreaterOrEqual, cntColors);
+    }
+
+    public static Predicate<CardRules> hasColorIdentity(final byte colors) {
+        return new Predicate<CardRules>() {
+            @Override
+            public boolean apply(CardRules rules) {
+                return rules.getColorIdentity().hasAllColors(colors);
+            }
+        };
     }
 
     private static class LeafString extends PredicateString<CardRules> {

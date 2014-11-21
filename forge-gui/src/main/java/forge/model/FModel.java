@@ -38,6 +38,8 @@ import forge.gauntlet.GauntletData;
 import forge.interfaces.IProgressBar;
 import forge.itemmanager.ItemManagerConfig;
 import forge.limited.GauntletMini;
+import forge.planarconquest.ConquestController;
+import forge.planarconquest.ConquestPreferences;
 import forge.player.GamePlayerUtil;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
@@ -70,6 +72,7 @@ public class FModel {
     private static StaticData magicDb;
 
     private static QuestPreferences questPreferences;
+    private static ConquestPreferences conquestPreferences;
     private static ForgePreferences preferences;
 
     private static Map<GameType, AchievementCollection> achievements;
@@ -79,6 +82,7 @@ public class FModel {
     private static GauntletMini gauntlet;
 
     private static QuestController quest;
+    private static ConquestController conquest;
     private static CardCollections decks;
 
     private static IStorage<CardBlock> blocks;
@@ -153,6 +157,7 @@ public class FModel {
         formats = new GameFormat.Collection(new GameFormat.Reader(new File(ForgeConstants.BLOCK_DATA_DIR + "formats.txt")));
         blocks = new StorageBase<CardBlock>("Block definitions", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "blocks.txt", magicDb.getEditions()));
         questPreferences = new QuestPreferences();
+        conquestPreferences = new ConquestPreferences();
         fantasyBlocks = new StorageBase<CardBlock>("Custom blocks", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "fantasyblocks.txt", magicDb.getEditions()));
         worlds = new StorageBase<QuestWorld>("Quest worlds", new QuestWorld.Reader(ForgeConstants.QUEST_WORLD_DIR + "worlds.txt"));
 
@@ -169,6 +174,7 @@ public class FModel {
 
         decks = new CardCollections();
         quest = new QuestController();
+        conquest = new ConquestController();
 
         CardPreferences.load();
         DeckPreferences.load();
@@ -187,7 +193,11 @@ public class FModel {
     public static QuestController getQuest() {
         return quest;
     }
-    
+
+    public static ConquestController getConquest() {
+        return conquest;
+    }
+
     private static boolean keywordsLoaded = false;
     
     /**
@@ -292,10 +302,14 @@ public class FModel {
 
     public static IStorage<CardBlock> getBlocks() {
         return blocks;
-    }    
+    }
 
     public static QuestPreferences getQuestPreferences() {
         return questPreferences;
+    }
+
+    public static ConquestPreferences getConquestPreferences() {
+        return conquestPreferences;
     }
 
     public static GauntletData getGauntletData() {

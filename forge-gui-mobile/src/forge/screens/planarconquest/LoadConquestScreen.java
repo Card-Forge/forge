@@ -1,0 +1,310 @@
+package forge.screens.planarconquest;
+
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+
+import forge.FThreads;
+import forge.Forge;
+import forge.Graphics;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinColor.Colors;
+import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
+import forge.card.CardRenderer;
+import forge.model.FModel;
+import forge.planarconquest.ConquestController;
+import forge.planarconquest.ConquestData;
+import forge.planarconquest.ConquestDataIO;
+import forge.planarconquest.ConquestPreferences.CQPref;
+import forge.properties.ForgeConstants;
+import forge.quest.QuestUtil;
+import forge.screens.FScreen;
+import forge.screens.settings.SettingsScreen;
+import forge.toolbox.FButton;
+import forge.toolbox.FEvent;
+import forge.toolbox.FList;
+import forge.toolbox.FEvent.FEventHandler;
+import forge.util.ThreadUtil;
+import forge.util.Utils;
+import forge.util.gui.SOptionPane;
+
+public class LoadConquestScreen extends FScreen {
+    private static final float PADDING = Utils.AVG_FINGER_HEIGHT * 0.1f;
+    private static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
+
+    private final ConquestFileLister lstConquests = add(new ConquestFileLister());
+    private final FButton btnNewConquest = add(new FButton("New"));
+    private final FButton btnRenameConquest = add(new FButton("Rename"));
+    private final FButton btnDeleteConquest = add(new FButton("Delete"));
+
+    public LoadConquestScreen() {
+        super("Load Planar Conquest");
+
+        btnNewConquest.setFont(FSkinFont.get(16));
+        btnNewConquest.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                Forge.openScreen(new NewConquestScreen());
+            }
+        });
+        btnRenameConquest.setFont(btnNewConquest.getFont());
+        btnRenameConquest.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                renameConquest(lstConquests.getSelectedConquest());
+            }
+        });
+        btnDeleteConquest.setFont(btnNewConquest.getFont());
+        btnDeleteConquest.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                deleteConquest(lstConquests.getSelectedConquest());
+            }
+        });
+
+        FThreads.invokeInBackgroundThread(new Runnable() {
+            @Override
+            public void run() {
+                final File dirConquests = new File(ForgeConstants.CONQUEST_SAVE_DIR);
+                final ConquestController qc = FModel.getConquest();
+
+                // Iterate over files and load quest data for each.
+                FilenameFilter takeDatFiles = new FilenameFilter() {
+                    @Override
+                    public boolean accept(final File dir, final String name) {
+                        return name.endsWith(".dat");
+                    }
+                };
+                File[] arrFiles = dirConquests.listFiles(takeDatFiles);
+                Map<String, ConquestData> arrConquests = new HashMap<String, ConquestData>();
+                for (File f : arrFiles) {
+                    arrConquests.put(f.getName(), ConquestDataIO.loadData(f));
+                }
+
+                // Populate list with available quest data.
+                lstConquests.setConquests(new ArrayList<ConquestData>(arrConquests.values()));
+
+                // If there are quests available, force select.
+                if (arrConquests.size() > 0) {
+                    final String questname = FModel.getConquestPreferences().getPref(CQPref.CURRENT_CONQUEST);
+
+                    // Attempt to select previous quest.
+                    if (arrConquests.get(questname) != null) {
+                        lstConquests.setSelectedConquest(arrConquests.get(questname));
+                    }
+                    else {
+                        lstConquests.setSelectedIndex(0);
+                    }
+
+                    // Drop into AllZone.
+                    qc.load(lstConquests.getSelectedConquest());
+                }
+                else {
+                    qc.load(null);
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void drawOverlay(Graphics g) {
+        float y = lstConquests.getTop();
+        g.drawLine(1, FList.LINE_COLOR, 0, y, getWidth(), y); //draw top border for list
+    }
+
+    @Override
+    protected void doLayout(float startY, float width, float height) {
+        float buttonWidth = (width - 2 * PADDING) / 3;
+        float buttonHeight = btnNewConquest.getAutoSizeBounds().height * 1.2f;
+
+        float y = startY + 2 * PADDING;
+        lstConquests.setBounds(0, y, width, height - y - buttonHeight - 2 * PADDING);
+        y += lstConquests.getHeight() + PADDING;
+
+        float x = 0;
+        btnNewConquest.setBounds(x, y, buttonWidth, buttonHeight);
+        x += buttonWidth + PADDING;
+        btnRenameConquest.setBounds(x, y, buttonWidth, buttonHeight);
+        x += buttonWidth + PADDING;
+        btnDeleteConquest.setBounds(x, y, buttonWidth, buttonHeight);
+    }
+
+    private void changeConquest() {
+        FModel.getConquestPreferences().setPref(CQPref.CURRENT_CONQUEST,
+                lstConquests.getSelectedConquest().getName() + ".dat");
+        FModel.getConquestPreferences().save();
+    }
+
+    private void renameConquest(final ConquestData quest) {
+        if (quest == null) { return; }
+
+        ThreadUtil.invokeInGameThread(new Runnable() {
+            @Override
+            public void run() {
+                String questName;
+                String oldConquestName = quest.getName();
+                while (true) {
+                    questName = SOptionPane.showInputDialog("Enter new name for quest:", "Rename Conquest", null, oldConquestName);
+                    if (questName == null) { return; }
+
+                    questName = QuestUtil.cleanString(questName);
+                    if (questName.equals(oldConquestName)) { return; } //quit if chose same name
+
+                    if (questName.isEmpty()) {
+                        SOptionPane.showMessageDialog("Please specify a quest name.");
+                        continue;
+                    }
+
+                    boolean exists = false;
+                    for (ConquestData questData : lstConquests) {
+                        if (questData.getName().equalsIgnoreCase(questName)) {
+                            exists = true;
+                            break;
+                        }
+                    }
+                    if (exists) {
+                        SOptionPane.showMessageDialog("A quest already exists with that name. Please pick another quest name.");
+                        continue;
+                    }
+                    break;
+                }
+
+                quest.rename(questName);
+            }
+        });
+    }
+
+    private void deleteConquest(final ConquestData quest) {
+        if (quest == null) { return; }
+
+        ThreadUtil.invokeInGameThread(new Runnable() {
+            @Override
+            public void run() {
+                if (!SOptionPane.showConfirmDialog(
+                        "Are you sure you want to delete '" + quest.getName() + "'?",
+                        "Delete Conquest", "Delete", "Cancel")) {
+                    return;
+                }
+
+                new File(ForgeConstants.CONQUEST_SAVE_DIR, quest.getName() + ".dat").delete();
+
+                lstConquests.removeConquest(quest);
+            }
+        });
+    }
+
+    private class ConquestFileLister extends FList<ConquestData> {
+        private int selectedIndex = 0;
+        
+        private ConquestFileLister() {
+            setListItemRenderer(new ListItemRenderer<ConquestData>() {
+                @Override
+                public boolean tap(Integer index, ConquestData value, float x, float y, int count) {
+                    if (count == 2) {
+                        changeConquest();
+                    }
+                    else {
+                        selectedIndex = index;
+                    }
+                    return true;
+                }
+
+                @Override
+                public float getItemHeight() {
+                    return CardRenderer.getCardListItemHeight(false);
+                }
+
+                @Override
+                public void drawValue(Graphics g, Integer index, ConquestData value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
+                    float offset = w * SettingsScreen.INSETS_FACTOR - FList.PADDING; //increase padding for settings items
+                    x += offset;
+                    y += offset;
+                    w -= 2 * offset;
+                    h -= 2 * offset;
+
+                    float totalHeight = h;
+                    String name = value.getName();
+                    h = font.getMultiLineBounds(name).height + SettingsScreen.SETTING_PADDING;
+
+                    String winRatio = value.getWins() + "W / " + value.getLosses() + "L";
+                    float winRatioWidth = font.getBounds(winRatio).width + SettingsScreen.SETTING_PADDING;
+
+                    g.drawText(name, font, foreColor, x, y, w - winRatioWidth, h, false, HAlignment.LEFT, false);
+                    g.drawText(winRatio, font, foreColor, x, y, w, h, false, HAlignment.RIGHT, false);
+
+                    h += SettingsScreen.SETTING_PADDING;
+                    y += h;
+                    h = totalHeight - h + w * SettingsScreen.INSETS_FACTOR;
+                    float iconSize = h + Utils.scale(1);
+                    float iconOffset = SettingsScreen.SETTING_PADDING - Utils.scale(2);
+
+                    String cards = String.valueOf(value.getCardPool().countAll());
+                    font = FSkinFont.get(12);
+                    float cardsWidth = font.getBounds(cards).width + iconSize + SettingsScreen.SETTING_PADDING;
+                    g.drawImage(FSkinImage.HAND, x + w - cardsWidth + iconOffset, y - SettingsScreen.SETTING_PADDING, iconSize, iconSize);
+                    g.drawText(cards, font, SettingsScreen.DESC_COLOR, x + w - cardsWidth + iconSize + SettingsScreen.SETTING_PADDING, y, w, h, false, HAlignment.LEFT, false);
+                    g.drawImage(FSkinImage.QUEST_COINSTACK, x + w + iconOffset, y - SettingsScreen.SETTING_PADDING, iconSize, iconSize);
+                }
+            });
+        }
+
+        @Override
+        protected FSkinColor getItemFillColor(int index) {
+            if (index == selectedIndex) {
+                return SEL_COLOR;
+            }
+            return null;
+        }
+
+        public void setConquests(List<ConquestData> qd0) {
+            List<ConquestData> sorted = new ArrayList<ConquestData>();
+            for (ConquestData qd : qd0) {
+                sorted.add(qd);
+            }
+            Collections.sort(sorted, new Comparator<ConquestData>() {
+                @Override
+                public int compare(final ConquestData x, final ConquestData y) {
+                    return x.getName().toLowerCase().compareTo(y.getName().toLowerCase());
+                }
+            });
+            setListData(sorted);
+        }
+
+        public void removeConquest(ConquestData qd) {
+            removeItem(qd);
+            if (selectedIndex == getCount()) {
+                selectedIndex--;
+            }
+            revalidate();
+        }
+
+        public boolean setSelectedIndex(int i0) {
+            if (i0 >= getCount()) { return false; }
+            selectedIndex = i0;
+            return true;
+        }
+
+        public ConquestData getSelectedConquest() {
+            if (selectedIndex == -1) { return null; }
+            return getItemAt(selectedIndex);
+        }
+
+        public boolean setSelectedConquest(ConquestData qd0) {
+            for (int i = 0; i < getCount(); i++) {
+                if (getItemAt(i) == qd0) {
+                    selectedIndex = i;
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+}

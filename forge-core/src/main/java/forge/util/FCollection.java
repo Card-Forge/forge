@@ -19,6 +19,11 @@ public class FCollection<T> implements List<T>, Set<T>, FCollectionView<T>, Clon
     public FCollection(T e) {
         add(e);
     }
+    public FCollection(T[] c) {
+        for (T e : c) {
+            add(e);
+        }
+    }
     public FCollection(Collection<T> c) {
         for (T e : c) {
             add(e);

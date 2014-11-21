@@ -9,8 +9,8 @@ import forge.assets.FSkinImage;
 import forge.screens.constructed.ConstructedScreen;
 import forge.screens.gauntlet.GauntletScreen;
 import forge.screens.limited.LimitedScreen;
+import forge.screens.planarconquest.ConquestMenu;
 import forge.screens.quest.QuestMenu;
-import forge.screens.quest.QuestMenu.LaunchReason;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
@@ -39,15 +39,16 @@ public class HomeScreen extends FScreen {
                 Forge.openScreen(new LimitedScreen());
             }
         });
-        addButton("???", new FEventHandler() {
+        addButton("Planar Conquest", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
+                ConquestMenu.launchPlanarConquest(ConquestMenu.LaunchReason.StartPlanarConquest);
             }
         });
         addButton("Quest Mode", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                QuestMenu.launchQuestMode(LaunchReason.StartQuestMode);
+                QuestMenu.launchQuestMode(QuestMenu.LaunchReason.StartQuestMode);
             }
         });
         addButton("Gauntlets", new FEventHandler() {

@@ -106,6 +106,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             public Deck get() {
                 return new Deck();
             }
+        })),
+        PlanarConquest(new DeckController<Deck>(null, new Supplier<Deck>() { //delay setting root folder until conquest loaded
+            @Override
+            public Deck get() {
+                return new Deck();
+            }
         }));
 
         private final DeckController<? extends DeckBase> controller;
