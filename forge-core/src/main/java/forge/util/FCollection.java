@@ -2,6 +2,8 @@ package forge.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -244,6 +246,18 @@ public class FCollection<T> implements List<T>, Set<T>, FCollectionView<T>, Clon
             subList.add(list.get(i));
         }
         return subList;
+    }
+
+    public void sort() {
+        sort(new Comparator<T>() {
+            @Override
+            public int compare(T o1, T o2) {
+                return o1.toString().compareTo(o2.toString());
+            }
+        });
+    }
+    public void sort(Comparator<T> comparator) {
+        Collections.sort(list, comparator);
     }
 
     @Override

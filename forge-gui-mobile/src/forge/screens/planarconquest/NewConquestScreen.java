@@ -58,6 +58,9 @@ public class NewConquestScreen extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 lstCommanders.setListData(cbxStartingPlane.getSelectedItem().getCommanders());
+                if (lstCommanders.getCount() > 0) {
+                    lstCommanders.setSelectedIndex(0);
+                }
             }
         });
     }
@@ -93,8 +96,8 @@ public class NewConquestScreen extends FScreen {
 
         lblStartingCommander.setBounds(x, y, w, h);
         y += h;
-        lstCommanders.setBounds(x, y, w, height - EMBARK_BTN_HEIGHT - gapY - PADDING - y);
-        y += lstCommanders.getHeight() + gapY;
+        lstCommanders.setBounds(x, y, w, height - EMBARK_BTN_HEIGHT - 2 * PADDING - y);
+        y += lstCommanders.getHeight() + PADDING;
 
         btnEmbark.setBounds(x, y, w, EMBARK_BTN_HEIGHT);
     }

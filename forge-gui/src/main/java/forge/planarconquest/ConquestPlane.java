@@ -257,6 +257,7 @@ public enum ConquestPlane {
                 }
             }
         }
+        commanders.sort(); //sort main commanders list for the sake of UI
     }
 
     public String getName() {
