@@ -184,8 +184,26 @@ public enum ConquestPlane {
     Ravnica("Ravnica", new String[] {
             "RAV", "GPT", "DIS", "RTR", "GTC", "DGM"
     }, new Region[] {
-            new Region("", "", null,
-                    new String[] { })
+            new Region("Azorius Chancery {W}{U}", "Azorius Chancery", CardRulesPredicates.hasColorIdentity(MagicColor.WHITE | MagicColor.BLUE),
+                    new String[] { "Azorius" }),
+            new Region("Boros Garrison {R}{W}", "Boros Garrison", CardRulesPredicates.hasColorIdentity(MagicColor.RED | MagicColor.WHITE),
+                    new String[] { "Boros" }),
+            new Region("Dimir Aqueduct {U}{B}", "Dimir Aqueduct", CardRulesPredicates.hasColorIdentity(MagicColor.BLUE | MagicColor.BLACK),
+                    new String[] { "Dimir" }),
+            new Region("Golgari Rot Farm {B}{G}", "Golgari Rot Farm", CardRulesPredicates.hasColorIdentity(MagicColor.BLACK | MagicColor.GREEN),
+                    new String[] { "Golgari" }),
+            new Region("Gruul Turf {R}{G}", "Gruul Turf", CardRulesPredicates.hasColorIdentity(MagicColor.RED | MagicColor.GREEN),
+                    new String[] { "Gruul" }),
+            new Region("Izzet Boilerworks {U}{R}", "Izzet Boilerworks", CardRulesPredicates.hasColorIdentity(MagicColor.BLUE | MagicColor.RED),
+                    new String[] { "Izzet" }),
+            new Region("Orzhov Basilica {W}{B}", "Orzhov Basilica", CardRulesPredicates.hasColorIdentity(MagicColor.WHITE | MagicColor.BLACK),
+                    new String[] { "Orzhov" }),
+            new Region("Rakdos Carnarium {R}{B}", "Rakdos Carnarium", CardRulesPredicates.hasColorIdentity(MagicColor.BLACK | MagicColor.RED),
+                    new String[] { "Rakdos" }),
+            new Region("Selesnya Sanctuary {G}{W}", "Selesnya Sanctuary", CardRulesPredicates.hasColorIdentity(MagicColor.GREEN | MagicColor.WHITE),
+                    new String[] { "Selesnya" }),
+            new Region("Simic Growth Chamber {G}{U}", "Simic Growth Chamber", CardRulesPredicates.hasColorIdentity(MagicColor.GREEN | MagicColor.BLUE),
+                    new String[] { "Simic" })
     }, new String[] {
             
     }),
