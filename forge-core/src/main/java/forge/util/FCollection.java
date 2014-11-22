@@ -135,6 +135,15 @@ public class FCollection<T> implements List<T>, Set<T>, FCollectionView<T>, Clon
         }
         return changed;
     }
+    public boolean addAll(T[] c) {
+        boolean changed = false;
+        for (T e : c) {
+            if (add(e)) {
+                changed = true;
+            }
+        }
+        return changed;
+    }
     @SuppressWarnings("unchecked")
     @Override
     public boolean addAll(int index, Collection<? extends T> c) {

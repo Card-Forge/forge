@@ -46,8 +46,6 @@ public enum ConquestPlane {
                     new String[] { "Jund" }),
             new Region("Naya {R}{G}{W}", "Jungle Shrine", CardRulesPredicates.hasColorIdentity(MagicColor.RED | MagicColor.GREEN | MagicColor.WHITE),
                     new String[] { "Naya" })
-    }, new String[] {
-            
     }),
     Dominaria("Dominaria", new String[] {
             "ICE", "ALL", "CSP",
@@ -57,14 +55,12 @@ public enum ConquestPlane {
             "ONS", "LGN", "SCG",
             "TSP", "TSB", "PLC", "FUT"
     }, new Region[] {
-            new Region("Ice Age", "", inSet("ICE", "ALL", "CSP")),
-            new Region("Urza's Saga", "", inSet("USG", "ULG", "UDS")),
-            new Region("Invasion", "", inSet("INV", "PLS", "APC")),
-            new Region("Odyssey", "", inSet("ODY", "TOR", "JUD")),
-            new Region("Onslaught", "", inSet("ONS", "LGN", "SCG")),
-            new Region("Time Spiral", "", inSet("TSP", "TSB", "PLC", "FUT"))
-    }, new String[] {
-            
+            new Region("Ice Age", "Dark Depths", inSet("ICE", "ALL", "CSP")),
+            new Region("Urza's Saga", "Tolarian Academy", inSet("USG", "ULG", "UDS")),
+            new Region("Invasion", "Legacy Weapon", inSet("INV", "PLS", "APC")),
+            new Region("Odyssey", "Cabal Coffers", inSet("ODY", "TOR", "JUD")),
+            new Region("Onslaught", "Grand Coliseum", inSet("ONS", "LGN", "SCG")),
+            new Region("Time Spiral", "Vesuva", inSet("TSP", "TSB", "PLC", "FUT"))
     }),
     Innistrad("Innistrad", new String[] {
             "ISD", "DKA", "AVR"
@@ -79,16 +75,12 @@ public enum ConquestPlane {
                     new String[] { "Kessig" }),
             new Region("Gavony {G}{W}", "Gavony Township", CardRulesPredicates.hasColorIdentity(MagicColor.GREEN | MagicColor.WHITE),
                     new String[] { "Gavony" })
-    }, new String[] {
-            
     }),
     Jamuraa("Jamuraa", new String[] {
-            "5ED", "ARN", "MIR", "VIS", "WTH"
+            "MIR", "VIS", "WTH"
     }, new Region[] {
             new Region("", "", null,
-                    new String[] { })
-    }, new String[] {
-            
+                    new String[] {  }),
     }),
     Kamigawa("Kamigawa", new String[] {
             "CHK", "BOK", "SOK"
@@ -103,8 +95,6 @@ public enum ConquestPlane {
                     new String[] { "Sokenzan", "Shinka", "Mountain" }),
             new Region("Jukai Forest {G}", "Okina, Temple to the Grandfathers", CardRulesPredicates.hasColorIdentity(MagicColor.GREEN),
                     new String[] { "Jukai", "Okina", "Forest" })
-    }, new String[] {
-            
     }),
     LorwynShadowmoor("Lorwyn-Shadowmoor", new String[] {
             "LRW", "MOR", "SHM", "EVE"
@@ -125,24 +115,20 @@ public enum ConquestPlane {
                     new String[] { "Glen", "Oona", "Fae" }),
             new Region("Wanderwine Hub {W}{U}", "Wanderwine Hub", CardRulesPredicates.hasCreatureType("Merfolk"),
                     new String[] { "Merrow", "Selkie", "Pirate" }),
-    }, new String[] {
-            
     }),
     Mercadia("Mercadia", new String[] {
             "MMQ", "NEM", "PCY"
     }, new Region[] {
-            new Region("Fountain of Cho", "", CardRulesPredicates.hasColorIdentity(MagicColor.WHITE),
+            new Region("Fountain of Cho {W}", "Fountain of Cho", CardRulesPredicates.hasColorIdentity(MagicColor.WHITE),
                     new String[] { "Cho" }),
-            new Region("Saprazzan Cove", "Saprazzan Cove", CardRulesPredicates.hasColorIdentity(MagicColor.BLUE),
+            new Region("Saprazzan Cove {U}", "Saprazzan Cove", CardRulesPredicates.hasColorIdentity(MagicColor.BLUE),
                     new String[] { "Saprazzan", "Saprazzo" }),
-            new Region("Subterranean Hangar", "Subterranean Hangar", CardRulesPredicates.hasColorIdentity(MagicColor.BLACK),
+            new Region("Subterranean Hangar {B}", "Subterranean Hangar", CardRulesPredicates.hasColorIdentity(MagicColor.BLACK),
                     new String[] { "Subterranean" }),
-            new Region("Mercadian Bazaar", "Mercadian Bazaar", CardRulesPredicates.hasColorIdentity(MagicColor.RED),
+            new Region("Mercadian Bazaar {R}", "Mercadian Bazaar", CardRulesPredicates.hasColorIdentity(MagicColor.RED),
                     new String[] { "Mercadian" }),
-            new Region("Rushwood Grove", "Rushwood Grove", CardRulesPredicates.hasColorIdentity(MagicColor.GREEN),
+            new Region("Rushwood Grove {G}", "Rushwood Grove", CardRulesPredicates.hasColorIdentity(MagicColor.GREEN),
                     new String[] { "Rushwood" })
-    }, new String[] {
-            
     }),
     Mirrodin("Mirrodin", new String[] {
             "MRD", "DST", "5DN", "SOM", "MBS", "NPH"
@@ -161,8 +147,6 @@ public enum ConquestPlane {
                     new String[] { "Razor", "Fields", "Plains" }),
             new Region("The Tangle", "", CardRulesPredicates.hasColorIdentity(MagicColor.GREEN),
                     new String[] { "Tangle", "Forest" })
-    }, new String[] {
-            
     }),
     Rath("Rath", new String[] {
             "TMP", "STH", "EXO"
@@ -187,8 +171,6 @@ public enum ConquestPlane {
                     new String[] { "Thalakos" }),
             new Region("Vec Townships {G}{W}", "Vec Townships", CardRulesPredicates.hasColorIdentity(MagicColor.GREEN | MagicColor.WHITE),
                     new String[] { "Vec" })
-    }, new String[] {
-            
     }),
     Ravnica("Ravnica", new String[] {
             "RAV", "GPT", "DIS", "RTR", "GTC", "DGM"
@@ -213,16 +195,15 @@ public enum ConquestPlane {
                     new String[] { "Selesnya" }),
             new Region("Simic Growth Chamber {G}{U}", "Simic Growth Chamber", CardRulesPredicates.hasColorIdentity(MagicColor.GREEN | MagicColor.BLUE),
                     new String[] { "Simic" })
-    }, new String[] {
-            
     }),
     Shandalar("Shandalar", new String[] {
-            "2ED", "ATQ", "3ED", "LEG", "DRK", "4ED"
+            "2ED", "3ED", "4ED", "ARN", "ATQ", "LEG", "DRK"
     }, new Region[] {
-            new Region("", "", null,
-                    new String[] { })
-    }, new String[] {
-            
+            new Region("Core", "Black Lotus", inSet("2ED", "3ED", "4ED")),
+            new Region("Arabian Nights", "Library of Alexandria", inSet("ARN")),
+            new Region("Antiquities", "Mishra's Workshop", inSet("ATQ")),
+            new Region("Legends", "Karakas", inSet("LEG")),
+            new Region("The Dark", "City of Shadows", inSet("DRK"))
     }),
     Tarkir("Tarkir", new String[] {
             "KTK", "FRF", "DTK"
@@ -237,45 +218,42 @@ public enum ConquestPlane {
                     new String[] { "Sultai", "Brood", "Opulent", "Palace", "Sagu", "Jungle", "Kheru", "Gudul", "Gurmag", "Marang" }),
             new Region("Temur Frontier {G}{U}{R}", "Frontier Bivouac", CardRulesPredicates.hasColorIdentity(MagicColor.GREEN | MagicColor.BLUE | MagicColor.RED),
                     new String[] { "Temur", "Frontier", "Bivouac", "Qal Sisma", "Dragon's Throat", "Karakyk Valley", "Staircase of Bones" })
-    }, new String[] {
-            
     }),
     Theros("Theros", new String[] {
             "THS", "BNG", "JOU"
     }, new Region[] {
             new Region("", "", null,
                     new String[] { }),
-    }, new String[] {
-            
     }),
     Ulgrotha("Ulgrotha", new String[] {
             "HML"
     }, new Region[] {
             new Region("", "", null,
                     new String[] { }),
-    }, new String[] {
-            
     }),
     Zendikar("Zendikar", new String[] {
             "ZEN", "WWK", "ROE"
     }, new Region[] {
             new Region("", "", null,
                     new String[] { }),
-    }, new String[] {
-            
     });
 
     private final String name;
     private final FCollection<CardEdition> editions = new FCollection<CardEdition>();
     private final FCollection<Region> regions;
-    private final FCollection<String> bannedCards;
+    private final FCollection<String> bannedCards = new FCollection<String>();
     private final CardPool cardPool = new CardPool();
     private final FCollection<PaperCard> commanders = new FCollection<PaperCard>();
 
+    private ConquestPlane(String name0, String[] setCodes0, Region[] regions0) {
+        this(name0, setCodes0, regions0, null);
+    }
     private ConquestPlane(String name0, String[] setCodes0, Region[] regions0, String[] bannedCards0) {
         name = name0;
         regions = new FCollection<Region>(regions0);
-        bannedCards = new FCollection<String>(bannedCards0);
+        if (bannedCards0 != null) {
+            bannedCards.addAll(bannedCards0);
+        }
         for (String setCode : setCodes0) {
             CardEdition edition = FModel.getMagicDb().getEditions().get(setCode);
             if (edition != null) {
