@@ -52,8 +52,16 @@ public enum ConquestPlane {
     Innistrad("Innistrad", new String[] {
             "ISD", "DKA", "AVR"
     }, new Region[] {
-            new Region("", "", null,
-                    new String[] { })
+            new Region("Moorland {W}{U}", "Moorland Haunt", CardRulesPredicates.hasColorIdentity(MagicColor.WHITE | MagicColor.BLUE),
+                    new String[] { "Moorland" }),
+            new Region("Nephalia {U}{B}", "Nephalia Drownyard", CardRulesPredicates.hasColorIdentity(MagicColor.BLUE | MagicColor.BLACK),
+                    new String[] { "Nephalia" }),
+            new Region("Stensia {B}{R}", "Stensia Bloodhall", CardRulesPredicates.hasColorIdentity(MagicColor.BLACK | MagicColor.RED),
+                    new String[] { "Stensia" }),
+            new Region("Kessig {R}{G}", "Kessig Wolf Run", CardRulesPredicates.hasColorIdentity(MagicColor.RED | MagicColor.GREEN),
+                    new String[] { "Kessig" }),
+            new Region("Gavony {G}{W}", "Gavony Township", CardRulesPredicates.hasColorIdentity(MagicColor.GREEN | MagicColor.WHITE),
+                    new String[] { "Gavony Township" })
     }, new String[] {
             
     }),
