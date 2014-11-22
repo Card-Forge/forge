@@ -53,7 +53,7 @@ public enum ConquestPlane {
             "INV", "PLS", "APC",
             "ODY", "TOR", "JUD",
             "ONS", "LGN", "SCG",
-            "TSP", "TSB", "PLC", "FUT"
+            "TSP", "PLC", "FUT"
     }, new Region[] {
             new Region("Ice Age", "Dark Depths", inSet("ICE", "ALL", "CSP")),
             new Region("Urza's Saga", "Tolarian Academy", inSet("USG", "ULG", "UDS")),
@@ -79,8 +79,16 @@ public enum ConquestPlane {
     Jamuraa("Jamuraa", new String[] {
             "MIR", "VIS", "WTH"
     }, new Region[] {
-            new Region("", "", null,
-                    new String[] {  }),
+            new Region("Karoo {W}", "Karoo", CardRulesPredicates.hasColorIdentity(MagicColor.WHITE),
+                    new String[] { "Karoo" }),
+            new Region("Coral Atoll {U}", "Coral Atoll", CardRulesPredicates.hasColorIdentity(MagicColor.BLUE),
+                    new String[] { "Coral" }),
+            new Region("Everglades {B}", "Everglades", CardRulesPredicates.hasColorIdentity(MagicColor.BLACK),
+                    new String[] { "Everglades" }),
+            new Region("Dormant Volcano {R}", "Dormant Volcano", CardRulesPredicates.hasColorIdentity(MagicColor.RED),
+                    new String[] { "Volcano" }),
+            new Region("Jungle Basin {G}", "Jungle Basin", CardRulesPredicates.hasColorIdentity(MagicColor.GREEN),
+                    new String[] { "Jungle" })
     }),
     Kamigawa("Kamigawa", new String[] {
             "CHK", "BOK", "SOK"
