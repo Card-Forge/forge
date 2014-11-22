@@ -50,10 +50,19 @@ public enum ConquestPlane {
             
     }),
     Dominaria("Dominaria", new String[] {
-            
+            "ICE", "ALL", "CSP",
+            "USG", "ULG", "UDS",
+            "INV", "PLS", "APC",
+            "ODY", "TOR", "JUD",
+            "ONS", "LGN", "SCG",
+            "TSP", "TSB", "PLC", "FUT"
     }, new Region[] {
-            new Region("", "", null,
-                    new String[] { })
+            new Region("Ice Age", "", inSet("ICE", "ALL", "CSP")),
+            new Region("Urza's Saga", "", inSet("USG", "ULG", "UDS")),
+            new Region("Invasion", "", inSet("INV", "PLS", "APC")),
+            new Region("Odyssey", "", inSet("ODY", "TOR", "JUD")),
+            new Region("Onslaught", "", inSet("ONS", "LGN", "SCG")),
+            new Region("Time Spiral", "", inSet("TSP", "TSB", "PLC", "FUT"))
     }, new String[] {
             
     }),
@@ -70,6 +79,14 @@ public enum ConquestPlane {
                     new String[] { "Kessig" }),
             new Region("Gavony {G}{W}", "Gavony Township", CardRulesPredicates.hasColorIdentity(MagicColor.GREEN | MagicColor.WHITE),
                     new String[] { "Gavony" })
+    }, new String[] {
+            
+    }),
+    Jamuraa("Jamuraa", new String[] {
+            "5ED", "ARN", "MIR", "VIS", "WTH"
+    }, new Region[] {
+            new Region("", "", null,
+                    new String[] { })
     }, new String[] {
             
     }),
@@ -147,14 +164,6 @@ public enum ConquestPlane {
     }, new String[] {
             
     }),
-    Rabiah("Rabiah", new String[] {
-            "ARN"
-    }, new Region[] {
-            new Region("Bazaar of Baghdad", "Bazaar of Baghdad", null,
-                    new String[] { })
-    }, new String[] {
-            
-    }),
     Rath("Rath", new String[] {
             "TMP", "STH", "EXO"
     }, new Region[] {
@@ -208,7 +217,7 @@ public enum ConquestPlane {
             
     }),
     Shandalar("Shandalar", new String[] {
-            "2ED", "ARN", "ATQ", "3ED", "LEG", "DRK", "4ED"
+            "2ED", "ATQ", "3ED", "LEG", "DRK", "4ED"
     }, new Region[] {
             new Region("", "", null,
                     new String[] { })
@@ -346,11 +355,13 @@ public enum ConquestPlane {
         private final CardPool cardPool = new CardPool();
         private final FCollection<PaperCard> commanders = new FCollection<PaperCard>();
 
-        private Region(String name0, String artCardName0, final Predicate<CardRules> rulesPred, final String[] keywords) {
+        private Region(String name0, String artCardName0, Predicate<PaperCard> pred0) {
             name = name0;
             artCardName = artCardName0;
-
-            pred = new Predicate<PaperCard>() {
+            pred = pred0;
+        }
+        private Region(String name0, String artCardName0, final Predicate<CardRules> rulesPred, final String[] keywords) {
+            this(name0, artCardName0, new Predicate<PaperCard>() {
                 @Override
                 public boolean apply(PaperCard pc) {
                     if (rulesPred != null && rulesPred.apply(pc.getRules())) {
@@ -363,7 +374,7 @@ public enum ConquestPlane {
                     }
                     return false;
                 }
-            };
+            });
         }
 
         public String getName() {
@@ -381,5 +392,19 @@ public enum ConquestPlane {
         public String toString() {
             return name;
         }
+    }
+
+    private static Predicate<PaperCard> inSet(final String... sets) {
+        return new Predicate<PaperCard>() {
+            @Override
+            public boolean apply(PaperCard pc) {
+                for (String set : sets) {
+                    if (pc.getEdition().equals(set)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        };
     }
 }
