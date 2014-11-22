@@ -36,8 +36,16 @@ public enum ConquestPlane {
     Alara("Alara", new String[] {
             "ALA", "CON", "ARB"
     }, new Region[] {
-            new Region("", "", null,
-                    new String[] { })
+            new Region("Bant {G}{W}{U}", "Seaside Citadel", CardRulesPredicates.hasColorIdentity(MagicColor.GREEN | MagicColor.WHITE | MagicColor.BLUE),
+                    new String[] { "Bant" }),
+            new Region("Esper {W}{U}{B}", "Arcane Sanctum", CardRulesPredicates.hasColorIdentity(MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK),
+                    new String[] { "Esper" }),
+            new Region("Grixis {U}{B}{R}", "Crumbling Necropolis", CardRulesPredicates.hasColorIdentity(MagicColor.BLUE | MagicColor.BLACK | MagicColor.RED),
+                    new String[] { "Grixis" }),
+            new Region("Jund {B}{R}{G}", "Savage Lands", CardRulesPredicates.hasColorIdentity(MagicColor.BLACK | MagicColor.RED | MagicColor.GREEN),
+                    new String[] { "Jund" }),
+            new Region("Naya {R}{G}{W}", "Jungle Shrine", CardRulesPredicates.hasColorIdentity(MagicColor.RED | MagicColor.GREEN | MagicColor.WHITE),
+                    new String[] { "Naya" })
     }, new String[] {
             
     }),
@@ -61,7 +69,7 @@ public enum ConquestPlane {
             new Region("Kessig {R}{G}", "Kessig Wolf Run", CardRulesPredicates.hasColorIdentity(MagicColor.RED | MagicColor.GREEN),
                     new String[] { "Kessig" }),
             new Region("Gavony {G}{W}", "Gavony Township", CardRulesPredicates.hasColorIdentity(MagicColor.GREEN | MagicColor.WHITE),
-                    new String[] { "Gavony Township" })
+                    new String[] { "Gavony" })
     }, new String[] {
             
     }),
