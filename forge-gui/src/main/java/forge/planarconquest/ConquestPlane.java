@@ -150,7 +150,7 @@ public enum ConquestPlane {
     Rabiah("Rabiah", new String[] {
             "ARN"
     }, new Region[] {
-            new Region("", "", null,
+            new Region("Bazaar of Baghdad", "Bazaar of Baghdad", null,
                     new String[] { })
     }, new String[] {
             
@@ -158,8 +158,26 @@ public enum ConquestPlane {
     Rath("Rath", new String[] {
             "TMP", "STH", "EXO"
     }, new Region[] {
-            new Region("", "", null,
-                    new String[] { })
+            new Region("Caldera Lake {U}{R}", "Caldera Lake", CardRulesPredicates.hasColorIdentity(MagicColor.BLUE | MagicColor.RED),
+                    new String[] { "Caldera" }),
+            new Region("Cinder Marsh {B}{R}", "Cinder Marsh", CardRulesPredicates.hasColorIdentity(MagicColor.BLACK | MagicColor.RED),
+                    new String[] { "Cinder", "Marsh" }),
+            new Region("Mogg Hollows {R}{G}", "Mogg Hollows", CardRulesPredicates.hasColorIdentity(MagicColor.RED | MagicColor.GREEN),
+                    new String[] { "Mogg", "Hollow" }),
+            new Region("Pine Barrens {B}{G}", "Pine Barrens", CardRulesPredicates.hasColorIdentity(MagicColor.BLACK | MagicColor.GREEN),
+                    new String[] { "Barrens" }),
+            new Region("Rootwater Depths {U}{B}", "Rootwater Depths", CardRulesPredicates.hasColorIdentity(MagicColor.BLUE | MagicColor.BLACK),
+                    new String[] { "Rootwater" }),
+            new Region("Salt Flats {W}{B}", "Salt Flats", CardRulesPredicates.hasColorIdentity(MagicColor.WHITE | MagicColor.BLACK),
+                    new String[] { "Salt Flat" }),
+            new Region("Scabland {R}{W}", "Scabland", CardRulesPredicates.hasColorIdentity(MagicColor.RED | MagicColor.WHITE),
+                    new String[] { "Scabland" }),
+            new Region("Skyshroud Forest {G}{U}", "Skyshroud Forest", CardRulesPredicates.hasColorIdentity(MagicColor.GREEN | MagicColor.BLUE),
+                    new String[] { "Skyshroud" }),
+            new Region("Thalakos Lowlands {W}{U}", "Thalakos Lowlands", CardRulesPredicates.hasColorIdentity(MagicColor.WHITE | MagicColor.BLUE),
+                    new String[] { "Thalakos" }),
+            new Region("Vec Townships {G}{W}", "Vec Townships", CardRulesPredicates.hasColorIdentity(MagicColor.GREEN | MagicColor.WHITE),
+                    new String[] { "Vec" })
     }, new String[] {
             
     }),
