@@ -25,7 +25,7 @@ import forge.card.CardRulesPredicates;
 import forge.card.CardEdition.CardInSet;
 import forge.card.CardType;
 import forge.card.MagicColor;
-import forge.deck.CardPool;
+import forge.deck.generation.DeckGenPool;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.util.FCollection;
@@ -250,7 +250,7 @@ public enum ConquestPlane {
     private final FCollection<CardEdition> editions = new FCollection<CardEdition>();
     private final FCollection<Region> regions;
     private final FCollection<String> bannedCards = new FCollection<String>();
-    private final CardPool cardPool = new CardPool();
+    private final DeckGenPool cardPool = new DeckGenPool();
     private final FCollection<PaperCard> commanders = new FCollection<PaperCard>();
 
     private ConquestPlane(String name0, String[] setCodes0, Region[] regions0) {
@@ -271,30 +271,28 @@ public enum ConquestPlane {
                         PaperCard pc = FModel.getMagicDb().getCommonCards().getCard(card.name, setCode);
                         if (pc != null) {
                             CardType type = pc.getRules().getType();
-                            if (!type.isBasicLand()) { //don't include basic lands
-                                boolean isCommander = type.isLegendary() && type.isCreature();
-                                cardPool.add(pc);
-                                if (isCommander) {
-                                    commanders.add(pc);
-                                }
-                                int count = 0;
-                                for (Region region : regions) {
-                                    if (region.pred.apply(pc)) {
-                                        region.cardPool.add(pc);
-                                        if (isCommander) {
-                                            region.commanders.add(pc);
-                                        }
-                                        count++;
+                            boolean isCommander = type.isLegendary() && type.isCreature();
+                            cardPool.add(pc);
+                            if (isCommander) {
+                                commanders.add(pc);
+                            }
+                            int count = 0;
+                            for (Region region : regions) {
+                                if (region.pred.apply(pc)) {
+                                    region.cardPool.add(pc);
+                                    if (isCommander) {
+                                        region.commanders.add(pc);
                                     }
+                                    count++;
                                 }
-                                //if card doesn't match any region's predicate,
-                                //make card available to all regions
-                                if (count == 0) {
-                                    for (Region region : regions) {
-                                        region.cardPool.add(pc);
-                                        if (isCommander) {
-                                            region.commanders.add(pc);
-                                        }
+                            }
+                            //if card doesn't match any region's predicate,
+                            //make card available to all regions
+                            if (count == 0) {
+                                for (Region region : regions) {
+                                    region.cardPool.add(pc);
+                                    if (isCommander) {
+                                        region.commanders.add(pc);
                                     }
                                 }
                             }
@@ -322,7 +320,7 @@ public enum ConquestPlane {
         return regions;
     }
 
-    public CardPool getCardPool() {
+    public DeckGenPool getCardPool() {
         return cardPool;
     }
 
@@ -338,7 +336,7 @@ public enum ConquestPlane {
         private final String name;
         private final String artCardName;
         private final Predicate<PaperCard> pred;
-        private final CardPool cardPool = new CardPool();
+        private final DeckGenPool cardPool = new DeckGenPool();
         private final FCollection<PaperCard> commanders = new FCollection<PaperCard>();
 
         private Region(String name0, String artCardName0, Predicate<PaperCard> pred0) {
@@ -367,7 +365,7 @@ public enum ConquestPlane {
             return name;
         }
 
-        public CardPool getCardPool() {
+        public DeckGenPool getCardPool() {
             return cardPool;
         }
 

@@ -18,10 +18,11 @@
 package forge.deck.generation;
 
 import com.google.common.collect.Lists;
+
 import forge.card.ColorSet;
-import forge.card.ICardDatabase;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
+
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.Arrays;
@@ -55,18 +56,8 @@ public class DeckGenerator2Color extends DeckGeneratorBase {
     // 4x 7 - 20
     // = 52x - card pool (before further random filtering)
 
-    /**
-     * <p>
-     * Constructor for Generate2ColorDeck.
-     * </p>
-     * 
-     * @param clr1
-     *            a {@link java.lang.String} object.
-     * @param clr2
-     *            a {@link java.lang.String} object.
-     */
-    public DeckGenerator2Color(ICardDatabase cardDb, final String clr1, final String clr2) {
-        super(cardDb);
+    public DeckGenerator2Color(IDeckGenPool pool, final String clr1, final String clr2) {
+        super(pool);
         int c1 = MagicColor.fromName(clr1);
         int c2 = MagicColor.fromName(clr2);
         

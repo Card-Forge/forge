@@ -18,11 +18,12 @@
 package forge.deck.generation;
 
 import com.google.common.collect.Lists;
+
 import forge.card.ColorSet;
-import forge.card.ICardDatabase;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.util.MyRandom;
+
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.List;
@@ -43,20 +44,8 @@ public class DeckGenerator3Color extends DeckGeneratorBase {
         ImmutablePair.of(new FilterCMC(6, 20), 3)
     );
 
-    /**
-     * <p>
-     * Constructor for Generate3ColorDeck.
-     * </p>
-     * 
-     * @param clr1
-     *            a {@link java.lang.String} object.
-     * @param clr2
-     *            a {@link java.lang.String} object.
-     * @param clr3
-     *            a {@link java.lang.String} object.
-     */
-    public DeckGenerator3Color(ICardDatabase cardDb, final String clr1, final String clr2, final String clr3) {
-        super(cardDb);
+    public DeckGenerator3Color(IDeckGenPool pool, final String clr1, final String clr2, final String clr3) {
+        super(pool);
         int c1 = MagicColor.fromName(clr1);
         int c2 = MagicColor.fromName(clr2);
         int c3 = MagicColor.fromName(clr3);

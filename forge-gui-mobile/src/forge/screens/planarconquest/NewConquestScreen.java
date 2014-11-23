@@ -9,20 +9,17 @@ import forge.planarconquest.ConquestController;
 import forge.planarconquest.ConquestData;
 import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestPreferences.CQPref;
-import forge.properties.ForgeConstants;
-import forge.quest.QuestUtil;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
+import forge.screens.planarconquest.ConquestMenu.LaunchReason;
 import forge.toolbox.FChoiceList;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
-import forge.util.FileUtil;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
-import forge.util.gui.SOptionPane;
 
 public class NewConquestScreen extends FScreen {
     private static final float EMBARK_BTN_HEIGHT = 2 * Utils.AVG_FINGER_HEIGHT;
@@ -103,23 +100,8 @@ public class NewConquestScreen extends FScreen {
     }
 
     private void newConquest() {
-        String conquestName;
-        while (true) {
-            conquestName = SOptionPane.showInputDialog("Historians will recall your conquest as:", "Conquest Name");
-            if (conquestName == null) { return; }
-
-            conquestName = QuestUtil.cleanString(conquestName);
-
-            if (conquestName.isEmpty()) {
-                SOptionPane.showMessageDialog("Please specify a conquest name.");
-                continue;
-            }
-            if (FileUtil.doesFileExist(ForgeConstants.CONQUEST_SAVE_DIR + conquestName + ".dat")) {
-                SOptionPane.showMessageDialog("A quest already exists with that name. Please pick another quest name.");
-                continue;
-            }
-            break;
-        }
+        String conquestName = FModel.getConquest().promptForName();
+        if (conquestName == null) { return; }
         startNewConquest(conquestName);
     }
 
@@ -127,7 +109,7 @@ public class NewConquestScreen extends FScreen {
         FThreads.invokeInEdtLater(new Runnable() {
             @Override
             public void run() {
-                LoadingOverlay.show("Creating new quest...", new Runnable() {
+                LoadingOverlay.show("Starting new conquest...", new Runnable() {
                     @Override
                     public void run() {
                         ConquestController qc = FModel.getConquest();
@@ -137,6 +119,8 @@ public class NewConquestScreen extends FScreen {
                         // Save in preferences.
                         FModel.getConquestPreferences().setPref(CQPref.CURRENT_CONQUEST, conquestName + ".dat");
                         FModel.getConquestPreferences().save();
+
+                        ConquestMenu.launchPlanarConquest(LaunchReason.NewConquest); //launch quest mode for new quest
                     }
                 });
             }

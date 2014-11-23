@@ -42,7 +42,7 @@ public final class ConquestData {
     private int winStreakCurrent = 0;
     private int difficulty;
     private ConquestPlane startingPlane, currentPlane;
-    private List<PaperCard> commanders = new ArrayList<PaperCard>();
+    private List<ConquestCommander> commanders = new ArrayList<ConquestCommander>();
 
     private final CardPool cardPool = new CardPool();
     private final HashMap<String, Deck> decks = new HashMap<String, Deck>();
@@ -55,7 +55,7 @@ public final class ConquestData {
         difficulty = difficulty0;
         startingPlane = startingPlane0;
         currentPlane = startingPlane0;
-        commanders.add(startingCommander0);
+        commanders.add(new ConquestCommander(startingCommander0, startingPlane.getCardPool()));
     }
 
     public String getName() {

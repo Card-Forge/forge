@@ -22,6 +22,10 @@ import com.google.common.eventbus.Subscribe;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.game.event.GameEvent;
+import forge.properties.ForgeConstants;
+import forge.quest.QuestUtil;
+import forge.util.FileUtil;
+import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
 
 public class ConquestController {
@@ -54,6 +58,27 @@ public class ConquestController {
         if (model != null) {
             model.saveData();
         }
+    }
+
+    public String promptForName() {
+        String name;
+        while (true) {
+            name = SOptionPane.showInputDialog("Historians will recall your conquest as:", "Conquest Name");
+            if (name == null) { return null; }
+    
+            name = QuestUtil.cleanString(name);
+    
+            if (name.isEmpty()) {
+                SOptionPane.showMessageDialog("Please specify a conquest name.");
+                continue;
+            }
+            if (FileUtil.doesFileExist(ForgeConstants.CONQUEST_SAVE_DIR + name + ".dat")) {
+                SOptionPane.showMessageDialog("A conquest already exists with that name. Please pick another quest name.");
+                continue;
+            }
+            break;
+        }
+        return name;
     }
 
     @Subscribe

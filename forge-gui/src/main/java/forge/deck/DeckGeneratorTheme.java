@@ -17,9 +17,9 @@
  */
 package forge.deck;
 
-import forge.card.ICardDatabase;
 import forge.deck.CardPool;
 import forge.deck.generation.DeckGeneratorBase;
+import forge.deck.generation.IDeckGenPool;
 import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.MyRandom;
@@ -47,8 +47,8 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
      * Constructor for ThemeDeckGenerator.
      * </p>
      */
-    public DeckGeneratorTheme(ICardDatabase cardDb) {
-        super(cardDb);
+    public DeckGeneratorTheme(IDeckGenPool pool) {
+        super(pool);
         this.maxDuplicates = 4;
     }
 
@@ -133,10 +133,12 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
                 }
 
                 final int n = cardCounts.get(ss[0]);
-                if(ss.length == 1)
-                	tDeck.add(cardDb.getCard(ss[0]));
-                else
-                	tDeck.add(cardDb.getCard(ss[0],ss[1]));
+                if (ss.length == 1) {
+                	tDeck.add(pool.getCard(ss[0]));
+                }
+                else {
+                	tDeck.add(pool.getCard(ss[0],ss[1]));
+                }
                 cardCounts.put(ss[0], n + 1);
                 errorBuilder.append(s + "\n");
             }

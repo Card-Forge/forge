@@ -49,7 +49,7 @@ public abstract class DeckGeneratorBase {
 
     protected ColorSet colors;
     protected final CardPool tDeck = new CardPool();
-    protected final ICardDatabase cardDb;
+    protected final IDeckGenPool pool;
 
     // 2-colored deck generator has its own constants. The rest works fine with these ones
     protected float getLandsPercentage() { return 0.44f; }
@@ -58,8 +58,8 @@ public abstract class DeckGeneratorBase {
 
     StringBuilder tmpDeck = new StringBuilder();
 
-    public DeckGeneratorBase(ICardDatabase cardDb) {
-        this.cardDb =  cardDb;
+    public DeckGeneratorBase(IDeckGenPool pool) {
+        this.pool = pool;
     }
 
     public void setSingleton(boolean singleton){
@@ -107,7 +107,7 @@ public abstract class DeckGeneratorBase {
                 throw new RuntimeException("Generate2ColorDeck : get2ColorDeck -- looped too much, please try again -- Cr12");
             }
 
-            tDeck.add(cardDb.getCard(cp.getName(),cp.getEdition()));
+            tDeck.add(pool.getCard(cp.getName(), cp.getEdition()));
 
             final int n = this.cardCounts.get(cp.getName());
             this.cardCounts.put(cp.getName(), n + 1);
@@ -132,7 +132,7 @@ public abstract class DeckGeneratorBase {
             	break;
             }
             
-            tDeck.add(cardDb.getCard(s));
+            tDeck.add(pool.getCard(s));
 
             final int n = this.cardCounts.get(s);
             this.cardCounts.put(s, n + 1);
@@ -175,13 +175,13 @@ public abstract class DeckGeneratorBase {
 
             PaperCard cp;
             if(edition != null)
-            	cp = cardDb.getCard(basicLandName, edition);
+            	cp = pool.getCard(basicLandName, edition);
             else
-            	cp = cardDb.getCard(basicLandName);
+            	cp = pool.getCard(basicLandName);
             String basicLandSet = cp.getEdition();
 
             for (int i=0; i < nLand; i++) {
-                tDeck.add(cardDb.getCard(cp.getName(), basicLandSet, -1), 1);
+                tDeck.add(pool.getCard(cp.getName(), basicLandSet, -1), 1);
             }
 
             landsLeft -= nLand;
@@ -233,7 +233,7 @@ public abstract class DeckGeneratorBase {
             final List<PaperCard> curvedRandomized = Lists.newArrayList();
             for (PaperCard c : curved) {
                 this.cardCounts.put(c.getName(), 0);
-                curvedRandomized.add(cardDb.getCard(c.getName()));
+                curvedRandomized.add(pool.getCard(c.getName()));
             }
 
             addSome(addOfThisCmc, curvedRandomized);
@@ -250,7 +250,7 @@ public abstract class DeckGeneratorBase {
         if (useArtifacts) {
             hasColor = Predicates.or(hasColor, COLORLESS_CARDS);
         }
-        return Iterables.filter(cardDb.getAllCards(), Predicates.compose(Predicates.and(canPlay, hasColor), PaperCard.FN_GET_RULES));
+        return Iterables.filter(pool.getAllCards(), Predicates.compose(Predicates.and(canPlay, hasColor), PaperCard.FN_GET_RULES));
     }
 
     protected static Map<String, Integer> countLands(ItemPool<PaperCard> outList) {

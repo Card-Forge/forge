@@ -25,6 +25,7 @@ import com.google.common.collect.Multimaps;
 
 import forge.card.CardEdition.CardInSet;
 import forge.card.CardEdition.Type;
+import forge.deck.generation.IDeckGenPool;
 import forge.item.PaperCard;
 import forge.util.*;
 
@@ -34,7 +35,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.*;
 import java.util.Map.Entry;
 
-public final class CardDb implements ICardDatabase {
+public final class CardDb implements ICardDatabase, IDeckGenPool {
     public final static String foilSuffix = "+";
     public final static char NameSetSeparator = '|';
     
