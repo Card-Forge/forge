@@ -55,7 +55,13 @@ public final class ConquestData {
         difficulty = difficulty0;
         startingPlane = startingPlane0;
         currentPlane = startingPlane0;
-        commanders.add(new ConquestCommander(startingCommander0, startingPlane.getCardPool()));
+        addCommander(startingCommander0);
+    }
+
+    private void addCommander(PaperCard card) {
+        ConquestCommander commander = new ConquestCommander(card, currentPlane.getCardPool());
+        commanders.add(commander);
+        decks.put(commander.getDeck().getName(), commander.getDeck());
     }
 
     public String getName() {

@@ -40,6 +40,10 @@ public class ConquestController {
         return model == null ? null : model.getName();
     }
 
+    public String getCurrentPlane() {
+        return model == null ? null : model.getCurrentPlane().getName();
+    }
+
     public CardPool getCardPool() {
         return cardPool;
     }

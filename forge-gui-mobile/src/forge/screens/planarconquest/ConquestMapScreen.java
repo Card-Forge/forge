@@ -1,6 +1,7 @@
 package forge.screens.planarconquest;
 
 import forge.FThreads;
+import forge.model.FModel;
 import forge.quest.QuestUtil;
 import forge.screens.LaunchScreen;
 import forge.screens.LoadingOverlay;
@@ -47,7 +48,7 @@ public class ConquestMapScreen extends LaunchScreen {
     }
 
     public void update() {
-        
+        setHeaderCaption(FModel.getConquest().getName() + "\n" + FModel.getConquest().getCurrentPlane());
     }
 
     @Override
