@@ -22,10 +22,6 @@ import com.google.common.eventbus.Subscribe;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.game.event.GameEvent;
-import forge.properties.ForgeConstants;
-import forge.quest.QuestUtil;
-import forge.util.FileUtil;
-import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
 
 public class ConquestController {
