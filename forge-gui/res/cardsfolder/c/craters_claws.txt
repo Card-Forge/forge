@@ -1,6 +1,6 @@
 Name:Crater's Claws
 ManaCost:X R
-Types:Instant
+Types:Sorcery
 A:SP$ DealDamage | Cost$ X R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ Y | References$ X,Y,Z,W | SpellDescription$ CARDNAME deals X damage to target creature or player. Ferocious - CARDNAME deals X plus 2 damage to that creature or player instead if you control a creature with power 4 or greater.
 SVar:X:Count$xPaid
 SVar:W:Count$xPaid/Plus.2
