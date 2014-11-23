@@ -210,6 +210,7 @@ public class GameAction {
         if (fromBattlefield) {
             c.setZone(zoneTo);
             c.setDamage(0); //clear damage after a card leaves the battlefield
+            c.setHasBeenDealtDeathtouchDamage(false);
             if (c.isTapped()) {
                 c.setTapped(false); //untap card after it leaves the battlefield if needed
                 game.fireEvent(new GameEventCardTapped(c, false));
@@ -703,7 +704,8 @@ public class GameAction {
                         }
                     }
                     // Rule 704.5g - Destroy due to lethal damage
-                    else if (c.getNetToughness() <= c.getDamage()) {
+                    // Rule 704.5h - Destroy due to deathtouch
+                    else if (c.getNetToughness() <= c.getDamage() || c.hasBeenDealtDeathtouchDamage()) {
                         if (desCreats == null) {
                             desCreats = new LinkedList<Card>();
                         }
@@ -1129,6 +1131,7 @@ public class GameAction {
                 && (c.getShieldCount() > 0 || c.hasKeyword("If CARDNAME would be destroyed, regenerate it."))) {
             c.subtractShield(c.getController().getController().chooseRegenerationShield(c));
             c.setDamage(0);
+            c.setHasBeenDealtDeathtouchDamage(false);
             c.tap();
             c.addRegeneratedThisTurn();
             if (game.getCombat() != null) {

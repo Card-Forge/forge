@@ -200,6 +200,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     private String oracleText = "";
 
     private int damage;
+    private boolean hasBeenDealtDeathtouchDamage = false;
 
     // regeneration
     private List<CardShields> shields = new ArrayList<CardShields>();
@@ -5138,6 +5139,13 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         getGame().fireEvent(new GameEventCardStatsChanged(this));
     }
 
+    public final boolean hasBeenDealtDeathtouchDamage() {
+        return hasBeenDealtDeathtouchDamage;
+    }
+    public final void setHasBeenDealtDeathtouchDamage(final boolean hasBeenDealtDeatchtouchDamage) {
+        this.hasBeenDealtDeathtouchDamage = hasBeenDealtDeatchtouchDamage;
+    }
+
     public final Map<Card, Integer> getAssignedDamageMap() {
         return assignedDamageMap;
     }
@@ -5545,7 +5553,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             }
 
             if (source.hasKeyword("Deathtouch") && isCreature()) {
-                game.getAction().destroy(this, null);
+                setHasBeenDealtDeathtouchDamage(true);
                 damageType = DamageType.Deathtouch;
             }
 
@@ -6038,6 +6046,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
     public void onCleanupPhase(final Player turn) {
         setDamage(0);
+        setHasBeenDealtDeathtouchDamage(false);
         resetPreventNextDamage();
         resetPreventNextDamageWithEffect();
         resetReceivedDamageFromThisTurn();

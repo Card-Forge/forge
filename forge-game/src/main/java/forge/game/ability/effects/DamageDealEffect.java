@@ -143,6 +143,7 @@ public class DamageDealEffect extends SpellAbilityEffect {
                 if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {
                     if (removeDamage) {
                         c.setDamage(0);
+                        c.setHasBeenDealtDeathtouchDamage(false);
                         c.clearAssignedDamage();
                     }
                     else if (noPrevention) {
