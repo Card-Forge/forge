@@ -20,6 +20,7 @@ package forge.planarconquest;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.item.PaperCard;
+import forge.planarconquest.ConquestPlane.Region;
 import forge.properties.ForgeConstants;
 
 import java.io.File;
@@ -42,6 +43,7 @@ public final class ConquestData {
     private int winStreakCurrent = 0;
     private int difficulty;
     private ConquestPlane startingPlane, currentPlane;
+    private int currentRegionIndex;
     private List<ConquestCommander> commanders = new ArrayList<ConquestCommander>();
 
     private final CardPool collection = new CardPool();
@@ -80,6 +82,25 @@ public final class ConquestData {
 
     public ConquestPlane getCurrentPlane() {
         return currentPlane;
+    }
+
+    public Region getCurrentRegion() {
+        return currentPlane.getRegions().get(currentRegionIndex);
+    }
+
+    public void incrementRegion(int dir) {
+        if (dir > 0) {
+            currentRegionIndex++;
+            if (currentRegionIndex >= currentPlane.getRegions().size()) {
+                currentRegionIndex = 0;
+            }
+        }
+        else {
+            currentRegionIndex--;
+            if (currentRegionIndex < 0) {
+                currentRegionIndex = currentPlane.getRegions().size() - 1;
+            }
+        }
     }
 
     public CardPool getCollection() {

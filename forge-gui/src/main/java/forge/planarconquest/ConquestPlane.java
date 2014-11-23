@@ -19,6 +19,8 @@ package forge.planarconquest;
 
 import com.google.common.base.Predicate;
 
+import forge.GuiBase;
+import forge.assets.ISkinImage;
 import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
@@ -339,6 +341,8 @@ public enum ConquestPlane {
         private final DeckGenPool cardPool = new DeckGenPool();
         private final FCollection<PaperCard> commanders = new FCollection<PaperCard>();
 
+        private ISkinImage art;
+
         private Region(String name0, String artCardName0, Predicate<PaperCard> pred0) {
             name = name0;
             artCardName = artCardName0;
@@ -363,6 +367,13 @@ public enum ConquestPlane {
 
         public String getName() {
             return name;
+        }
+
+        public ISkinImage getArt() {
+            if (art == null) {
+                art = GuiBase.getInterface().getCardArt(cardPool.getCard(artCardName));
+            }
+            return art;
         }
 
         public DeckGenPool getCardPool() {

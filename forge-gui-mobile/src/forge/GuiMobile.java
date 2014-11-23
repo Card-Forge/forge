@@ -21,6 +21,7 @@ import forge.assets.FSkinProp;
 import forge.assets.FTextureImage;
 import forge.assets.ISkinImage;
 import forge.assets.ImageCache;
+import forge.card.CardRenderer;
 import forge.card.GameEntityPicker;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -119,6 +120,11 @@ public class GuiMobile implements IGuiBase {
 
         //use a delay load image to avoid an error if called from background thread
         return new FDelayLoadImage(path);
+    }
+
+    @Override
+    public ISkinImage getCardArt(PaperCard card) {
+        return CardRenderer.getCardArt(card);
     }
 
     @Override

@@ -36,8 +36,8 @@ public class ConquestController {
         return model == null ? null : model.getName();
     }
 
-    public String getCurrentPlane() {
-        return model == null ? null : model.getCurrentPlane().getName();
+    public ConquestData getModel() {
+        return model;
     }
 
     public CardPool getCardPool() {
