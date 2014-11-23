@@ -14,7 +14,11 @@ import forge.deck.generation.DeckGeneratorBase;
 import forge.deck.generation.DeckGeneratorMonoColor;
 import forge.deck.generation.IDeckGenPool;
 import forge.item.PaperCard;
+import forge.properties.ForgeConstants;
+import forge.quest.QuestUtil;
 import forge.util.Aggregates;
+import forge.util.FileUtil;
+import forge.util.gui.SOptionPane;
 
 public class ConquestUtil {
     private ConquestUtil() {}
@@ -64,5 +68,26 @@ public class ConquestUtil {
         deck.getOrCreate(DeckSection.Commander).add(commander);
 
         return deck;
+    }
+
+    public static String promptForName() {
+        String name;
+        while (true) {
+            name = SOptionPane.showInputDialog("Historians will recall your conquest as:", "Conquest Name");
+            if (name == null) { return null; }
+    
+            name = QuestUtil.cleanString(name);
+    
+            if (name.isEmpty()) {
+                SOptionPane.showMessageDialog("Please specify a conquest name.");
+                continue;
+            }
+            if (FileUtil.doesFileExist(ForgeConstants.CONQUEST_SAVE_DIR + name + ".dat")) {
+                SOptionPane.showMessageDialog("A conquest already exists with that name. Please pick another quest name.");
+                continue;
+            }
+            break;
+        }
+        return name;
     }
 }

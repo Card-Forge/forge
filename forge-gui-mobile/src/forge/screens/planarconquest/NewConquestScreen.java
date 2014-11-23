@@ -9,6 +9,7 @@ import forge.planarconquest.ConquestController;
 import forge.planarconquest.ConquestData;
 import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestPreferences.CQPref;
+import forge.planarconquest.ConquestUtil;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
 import forge.screens.planarconquest.ConquestMenu.LaunchReason;
@@ -100,7 +101,7 @@ public class NewConquestScreen extends FScreen {
     }
 
     private void newConquest() {
-        String conquestName = FModel.getConquest().promptForName();
+        String conquestName = ConquestUtil.promptForName();
         if (conquestName == null) { return; }
         startNewConquest(conquestName);
     }

@@ -64,27 +64,6 @@ public class ConquestController {
         }
     }
 
-    public String promptForName() {
-        String name;
-        while (true) {
-            name = SOptionPane.showInputDialog("Historians will recall your conquest as:", "Conquest Name");
-            if (name == null) { return null; }
-    
-            name = QuestUtil.cleanString(name);
-    
-            if (name.isEmpty()) {
-                SOptionPane.showMessageDialog("Please specify a conquest name.");
-                continue;
-            }
-            if (FileUtil.doesFileExist(ForgeConstants.CONQUEST_SAVE_DIR + name + ".dat")) {
-                SOptionPane.showMessageDialog("A conquest already exists with that name. Please pick another quest name.");
-                continue;
-            }
-            break;
-        }
-        return name;
-    }
-
     @Subscribe
     public void receiveGameEvent(GameEvent ev) { // Receives events only during planar conquest games
 
