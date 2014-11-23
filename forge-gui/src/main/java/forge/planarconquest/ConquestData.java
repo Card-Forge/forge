@@ -44,7 +44,7 @@ public final class ConquestData {
     private ConquestPlane startingPlane, currentPlane;
     private List<ConquestCommander> commanders = new ArrayList<ConquestCommander>();
 
-    private final CardPool cardPool = new CardPool();
+    private final CardPool collection = new CardPool();
     private final HashMap<String, Deck> decks = new HashMap<String, Deck>();
 
     public ConquestData() { //needed for XML serialization
@@ -62,6 +62,8 @@ public final class ConquestData {
         ConquestCommander commander = new ConquestCommander(card, currentPlane.getCardPool());
         commanders.add(commander);
         decks.put(commander.getDeck().getName(), commander.getDeck());
+        collection.addAll(commander.getDeck().getMain());
+        collection.add(card);
     }
 
     public String getName() {
@@ -80,8 +82,8 @@ public final class ConquestData {
         return currentPlane;
     }
 
-    public CardPool getCardPool() {
-        return cardPool;
+    public CardPool getCollection() {
+        return collection;
     }
 
     public ConquestDeckMap getDeckStorage() {

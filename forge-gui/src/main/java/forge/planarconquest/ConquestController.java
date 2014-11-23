@@ -50,7 +50,7 @@ public class ConquestController {
 
     public void load(final ConquestData model0) {
         model = model0;
-        cardPool = model == null ? null : model.getCardPool();
+        cardPool = model == null ? null : model.getCollection();
         decks = model == null ? null : model.getDeckStorage();
     }
 
