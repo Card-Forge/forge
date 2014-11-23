@@ -1579,8 +1579,8 @@ public class ComputerUtil {
             if (logic != null) {
                 if (logic.equals("ChosenLandwalk")) {
                     for (Card c : ai.getOpponent().getLandsInPlay()) {
-                        for (String t : c.getType()) {
-                            if (!invalidTypes.contains(t) && CardType.isALandType(t)) {
+                        for (String t : c.getType().getLandTypes()) {
+                            if (!invalidTypes.contains(t)) {
                                 chosen = t;
                                 break;
                             }

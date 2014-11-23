@@ -5008,6 +5008,19 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return false;
     }
 
+    public final boolean sharesLandTypeWith(final Card c1) {
+        if (c1 == null) {
+            return false;
+        }
+
+        for (final String type : getType().getLandTypes()) {
+            if (c1.getType().hasSubtype(type)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public final boolean sharesPermanentTypeWith(final Card c1) {
         if (c1 == null) {
             return false;

@@ -194,6 +194,17 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         }
         return creatureTypes;
     }
+    public Set<String> getLandTypes() {
+        Set<String> landTypes = new HashSet<String>();
+        if (isLand()) {
+            for (String t : subtypes) {
+                if (isALandType(t) || isABasicLandType(t)) {
+                	landTypes.add(t);
+                }
+            }
+        }
+        return landTypes;
+    }
 
     public boolean hasStringType(String t) {
         if (t.isEmpty()) {
@@ -523,7 +534,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return types;
     }
 
-    public static ArrayList<String> getLandTypes() {
+    public static ArrayList<String> getAllLandTypes() {
         final ArrayList<String> types = new ArrayList<String>();
     
         types.addAll(Constant.BASIC_TYPES);

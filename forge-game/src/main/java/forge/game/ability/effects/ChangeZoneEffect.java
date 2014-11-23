@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -758,6 +759,18 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (sa.hasParam("DifferentNames")) {
                 for (Card c : chosenCards) {
                     fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(c.getName())));
+                }
+            }
+            if (sa.hasParam("ShareLandType")) {
+                for (final Card card : chosenCards) {
+                	
+                    fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
+                    	 @Override
+                         public boolean apply(final Card c) {
+                    		return  c.sharesLandTypeWith(card);
+                    	 }
+                    	
+                    });
                 }
             }
             if (totalcmc != null) {

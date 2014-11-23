@@ -14,6 +14,7 @@ public interface CardTypeView extends Iterable<String> {
     Iterable<Supertype> getSupertypes();
     Iterable<String> getSubtypes();
     Set<String> getCreatureTypes();
+    Set<String> getLandTypes();
     boolean hasStringType(String t);
     boolean hasType(CoreType type);
     boolean hasSupertype(Supertype supertype);
