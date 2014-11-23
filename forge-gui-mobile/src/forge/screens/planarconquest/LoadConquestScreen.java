@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.FThreads;
@@ -31,6 +32,7 @@ import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
 import forge.toolbox.FList;
+import forge.toolbox.FTextArea;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
@@ -38,8 +40,10 @@ import forge.util.gui.SOptionPane;
 
 public class LoadConquestScreen extends FScreen {
     private static final float PADDING = Utils.AVG_FINGER_HEIGHT * 0.1f;
+    private static final FSkinColor OLD_CONQUESTS_BACK_COLOR = FSkinColor.get(Colors.CLR_INACTIVE).getContrastColor(20);
     private static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
 
+    private final FTextArea lblOldConquests = add(new FTextArea(false, "Loading Existing Conquests..."));
     private final ConquestFileLister lstConquests = add(new ConquestFileLister());
     private final FButton btnNewConquest = add(new FButton("New"));
     private final FButton btnRenameConquest = add(new FButton("Rename"));
@@ -47,6 +51,9 @@ public class LoadConquestScreen extends FScreen {
 
     public LoadConquestScreen() {
         super("Load Planar Conquest");
+
+        lblOldConquests.setFont(FSkinFont.get(12));
+        lblOldConquests.setAlignment(HAlignment.CENTER);
 
         btnNewConquest.setFont(FSkinFont.get(16));
         btnNewConquest.setCommand(new FEventHandler() {
@@ -110,8 +117,23 @@ public class LoadConquestScreen extends FScreen {
                 else {
                     qc.load(null);
                 }
+                Gdx.app.postRunnable(new Runnable() {
+                    @Override
+                    public void run() {
+                        lblOldConquests.setText("Old conquest data? Put into \""
+                                + ForgeConstants.CONQUEST_SAVE_DIR.replace('\\', '/') + "\" and restart Forge.");
+                        revalidate();
+                    }
+                });
             }
         });
+    }
+
+    @Override
+    protected void drawBackground(Graphics g) {
+        super.drawBackground(g);
+        float y = getHeader().getBottom();
+        g.fillRect(OLD_CONQUESTS_BACK_COLOR, 0, y, getWidth(), lstConquests.getTop() - y);
     }
 
     @Override
@@ -126,6 +148,8 @@ public class LoadConquestScreen extends FScreen {
         float buttonHeight = btnNewConquest.getAutoSizeBounds().height * 1.2f;
 
         float y = startY + 2 * PADDING;
+        lblOldConquests.setBounds(0, y, width, lblOldConquests.getPreferredHeight(width));
+        y += lblOldConquests.getHeight() + PADDING;
         lstConquests.setBounds(0, y, width, height - y - buttonHeight - 2 * PADDING);
         y += lstConquests.getHeight() + PADDING;
 
@@ -152,14 +176,14 @@ public class LoadConquestScreen extends FScreen {
                 String questName;
                 String oldConquestName = quest.getName();
                 while (true) {
-                    questName = SOptionPane.showInputDialog("Enter new name for quest:", "Rename Conquest", null, oldConquestName);
+                    questName = SOptionPane.showInputDialog("Enter new name for conquest:", "Rename Conquest", null, oldConquestName);
                     if (questName == null) { return; }
 
                     questName = QuestUtil.cleanString(questName);
                     if (questName.equals(oldConquestName)) { return; } //quit if chose same name
 
                     if (questName.isEmpty()) {
-                        SOptionPane.showMessageDialog("Please specify a quest name.");
+                        SOptionPane.showMessageDialog("Please specify a conquest name.");
                         continue;
                     }
 
@@ -171,7 +195,7 @@ public class LoadConquestScreen extends FScreen {
                         }
                     }
                     if (exists) {
-                        SOptionPane.showMessageDialog("A quest already exists with that name. Please pick another quest name.");
+                        SOptionPane.showMessageDialog("A conquest already exists with that name. Please pick another quest name.");
                         continue;
                     }
                     break;
@@ -251,7 +275,6 @@ public class LoadConquestScreen extends FScreen {
                     float cardsWidth = font.getBounds(cards).width + iconSize + SettingsScreen.SETTING_PADDING;
                     g.drawImage(FSkinImage.HAND, x + w - cardsWidth + iconOffset, y - SettingsScreen.SETTING_PADDING, iconSize, iconSize);
                     g.drawText(cards, font, SettingsScreen.DESC_COLOR, x + w - cardsWidth + iconSize + SettingsScreen.SETTING_PADDING, y, w, h, false, HAlignment.LEFT, false);
-                    g.drawImage(FSkinImage.QUEST_COINSTACK, x + w + iconOffset, y - SettingsScreen.SETTING_PADDING, iconSize, iconSize);
                 }
             });
         }

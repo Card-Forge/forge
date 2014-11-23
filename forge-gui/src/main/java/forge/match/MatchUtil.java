@@ -41,6 +41,7 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.player.LobbyPlayerHuman;
 import forge.player.PlayerControllerHuman;
+import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
 import forge.sound.MusicPlaylist;
@@ -396,9 +397,12 @@ public class MatchUtil {
     }
 
     public static void pause() {
+        ForgePreferences prefs = FModel.getPreferences();
+        if (prefs == null) { return; } //do nothing if prefs haven't been initialized yet
+
         SoundSystem.instance.pause();
         //pause playback if needed
-        if (FModel.getPreferences().getPrefBoolean(FPref.UI_PAUSE_WHILE_MINIMIZED)) {
+        if (prefs.getPrefBoolean(FPref.UI_PAUSE_WHILE_MINIMIZED)) {
             InputQueue inputQueue = getInputQueue();
             if (inputQueue != null && inputQueue.getInput() instanceof InputPlaybackControl) {
                 ((InputPlaybackControl) inputQueue.getInput()).pause();

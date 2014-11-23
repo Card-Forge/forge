@@ -48,7 +48,7 @@ public class ConquestMapScreen extends LaunchScreen {
     }
 
     public void update() {
-        setHeaderCaption(FModel.getConquest().getName() + "\n" + FModel.getConquest().getCurrentPlane());
+        setHeaderCaption(FModel.getConquest().getName() + " - " + FModel.getConquest().getCurrentPlane());
     }
 
     @Override
