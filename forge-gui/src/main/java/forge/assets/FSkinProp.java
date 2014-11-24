@@ -208,6 +208,7 @@ public enum FSkinProp {
     ICO_LOGO            (new int[] {480, 0, 200, 200}, PropType.ICON),
     ICO_FLIPCARD        (new int[] {400, 0, 80, 120}, PropType.ICON),
     ICO_FAVICON         (new int[] {0, 640, 80, 80}, PropType.ICON),
+    ICO_LOCK            (new int[] {620, 800, 48, 48}, PropType.ICON),
 
     //layout images
     IMG_HANDLE  (new int[] {320, 450, 80, 20}, PropType.IMAGE),

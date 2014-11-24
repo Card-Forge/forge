@@ -163,6 +163,7 @@ public enum FSkinImage implements FImage {
     LOGO            (FSkinProp.ICO_LOGO, SourceFile.ICONS),
     FLIPCARD        (FSkinProp.ICO_FLIPCARD, SourceFile.ICONS),
     FAVICON         (FSkinProp.ICO_FAVICON, SourceFile.ICONS),
+    LOCK            (FSkinProp.ICO_LOCK, SourceFile.ICONS),
 
     //Layout images
     HANDLE  (FSkinProp.IMG_HANDLE, SourceFile.ICONS),

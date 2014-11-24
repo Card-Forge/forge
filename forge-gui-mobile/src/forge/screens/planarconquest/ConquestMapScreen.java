@@ -8,6 +8,7 @@ import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
 import forge.assets.TextRenderer;
 import forge.assets.FSkinColor.Colors;
 import forge.card.CardRenderer;
@@ -40,7 +41,7 @@ public class ConquestMapScreen extends FScreen {
     private static final float ARROW_ICON_THICKNESS = Utils.scale(3);
     private static final float REGION_SLIDER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.7f);
     private static final FSkinFont REGION_NAME_FONT = FSkinFont.get(15);
-    private static final FSkinFont UNLOCK_WINS_FONT = FSkinFont.get(20);
+    private static final FSkinFont UNLOCK_WINS_FONT = FSkinFont.get(18);
     private static final float COMMANDER_ROW_HEIGHT = 2 * Utils.AVG_FINGER_HEIGHT;
 
     private final RegionDisplay regionDisplay = add(new RegionDisplay());
@@ -225,7 +226,12 @@ public class ConquestMapScreen extends FScreen {
                 else {
                     int winsToUnlock = index * FModel.getConquestPreferences().getPrefInt(CQPref.WINS_TO_UNLOCK_COMMANDER);
                     if (planeData.getWins() < winsToUnlock) {
-                        g.drawText(String.valueOf(winsToUnlock), UNLOCK_WINS_FONT, FORE_COLOR, 0, 0, w, h, false, HAlignment.CENTER, true);
+                        g.setAlphaComposite(0.25f);
+                        float imageSize = w * 0.75f;
+                        g.drawImage(FSkinImage.LOCK, (w - imageSize) / 2, (h - imageSize) / 2, imageSize, imageSize);
+                        g.resetAlphaComposite();
+                        float y = (h + imageSize) / 2;
+                        g.drawText(String.valueOf(winsToUnlock), UNLOCK_WINS_FONT, FORE_COLOR, 0, y, w, h - y, false, HAlignment.CENTER, true);
                     }
                     else {
                         
