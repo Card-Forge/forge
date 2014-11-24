@@ -710,6 +710,7 @@ public class GameAction {
                             desCreats = new LinkedList<Card>();
                         }
                         desCreats.add(c);
+                        c.setHasBeenDealtDeathtouchDamage(false);
                         checkAgain = true;
                     }
                 }
