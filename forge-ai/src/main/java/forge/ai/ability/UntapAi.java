@@ -37,6 +37,11 @@ public class UntapAi extends SpellAbilityAi {
         if (ComputerUtil.preventRunAwayActivations(sa)) {
         	return false;
         }
+        
+        if ("EOT".equals(sa.getParam("AILogic")) && (source.getGame().getPhaseHandler().getNextTurn() != ai 
+        		|| !source.getGame().getPhaseHandler().getPhase().equals(PhaseType.END_OF_TURN))) {
+        	return false;
+        }
 
         if (tgt == null) {
             final List<Card> pDefined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
