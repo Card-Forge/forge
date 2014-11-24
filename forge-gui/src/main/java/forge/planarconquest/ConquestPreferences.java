@@ -28,7 +28,8 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
      * Preference identifiers, and their default values.
      */
     public static enum CQPref {
-        CURRENT_CONQUEST("DEFAULT");
+        CURRENT_CONQUEST("DEFAULT"),
+        WINS_TO_UNLOCK_COMMANDER("10");
 
         private final String strDefaultVal;
 

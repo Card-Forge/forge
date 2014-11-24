@@ -18,6 +18,8 @@ import forge.model.FModel;
 import forge.planarconquest.ConquestCommander;
 import forge.planarconquest.ConquestData;
 import forge.planarconquest.ConquestPlane.Region;
+import forge.planarconquest.ConquestPlaneData;
+import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.screens.FScreen;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
@@ -37,7 +39,9 @@ public class ConquestMapScreen extends FScreen {
     private static final float LINE_THICKNESS = Utils.scale(1);
     private static final float ARROW_ICON_THICKNESS = Utils.scale(3);
     private static final float REGION_SLIDER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.7f);
-    private static final FSkinFont FONT = FSkinFont.get(15);
+    private static final FSkinFont REGION_NAME_FONT = FSkinFont.get(15);
+    private static final FSkinFont UNLOCK_WINS_FONT = FSkinFont.get(20);
+    private static final float COMMANDER_ROW_HEIGHT = 2 * Utils.AVG_FINGER_HEIGHT;
 
     private final RegionDisplay regionDisplay = add(new RegionDisplay());
     private final CommanderRow commanderRow = add(new CommanderRow());
@@ -63,7 +67,7 @@ public class ConquestMapScreen extends FScreen {
         float y = startY;
         regionDisplay.setBounds(0, y, width, width / CardRenderer.CARD_ART_RATIO + REGION_SLIDER_HEIGHT);
         y += regionDisplay.getHeight() + PADDING;
-        commanderRow.setBounds(0, y, width, 2 * Utils.AVG_FINGER_HEIGHT);
+        commanderRow.setBounds(0, y, width, COMMANDER_ROW_HEIGHT);
     }
 
     private class RegionDisplay extends FContainer {
@@ -148,7 +152,7 @@ public class ConquestMapScreen extends FScreen {
             if (model != null) {
                 Region region = model.getCurrentRegion();
                 g.drawImage((FImage)region.getArt(), 0, 0, w, y);
-                textRenderer.drawText(g, region.getName(), FONT, FORE_COLOR, REGION_SLIDER_HEIGHT, y, w - 2 * REGION_SLIDER_HEIGHT, REGION_SLIDER_HEIGHT, y, REGION_SLIDER_HEIGHT, false, HAlignment.CENTER, true);
+                textRenderer.drawText(g, region.getName(), REGION_NAME_FONT, FORE_COLOR, REGION_SLIDER_HEIGHT, y, w - 2 * REGION_SLIDER_HEIGHT, REGION_SLIDER_HEIGHT, y, REGION_SLIDER_HEIGHT, false, HAlignment.CENTER, true);
             }
         }
 
@@ -208,14 +212,24 @@ public class ConquestMapScreen extends FScreen {
                 float h = getHeight();
                 g.drawRect(LINE_THICKNESS, BORDER_COLOR, -LINE_THICKNESS, -LINE_THICKNESS, w + 2 * LINE_THICKNESS, h + 2 * LINE_THICKNESS);
 
+                ConquestPlaneData planeData = model.getCurrentPlaneData();
                 if (card == null) {
-                    List<ConquestCommander> commanders = model.getCurrentPlaneData().getCommanders();
+                    List<ConquestCommander> commanders = planeData.getCommanders();
                     if (index < commanders.size()) {
                         card = Card.getCardForUi(commanders.get(index).getCard()).getView();
                     }
                 }
                 if (card != null) {
                     CardRenderer.drawCardWithOverlays(g, card, 0, 0, w, h, CardStackPosition.Top);
+                }
+                else {
+                    int winsToUnlock = index * FModel.getConquestPreferences().getPrefInt(CQPref.WINS_TO_UNLOCK_COMMANDER);
+                    if (planeData.getWins() < winsToUnlock) {
+                        g.drawText(String.valueOf(winsToUnlock), UNLOCK_WINS_FONT, FORE_COLOR, 0, 0, w, h, false, HAlignment.CENTER, true);
+                    }
+                    else {
+                        
+                    }
                 }
             }
         }

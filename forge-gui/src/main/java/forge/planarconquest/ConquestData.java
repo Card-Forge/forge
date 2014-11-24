@@ -24,10 +24,8 @@ import forge.planarconquest.ConquestPlane.Region;
 import forge.properties.ForgeConstants;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
-import java.util.List;
 
 public final class ConquestData {
     /** Holds the latest version of the Conquest Data. */
@@ -124,7 +122,8 @@ public final class ConquestData {
     public void addWin() {
         wins++;
         winStreakCurrent++;
-        
+        getCurrentPlaneData().addWin();
+
         if (winStreakCurrent > winStreakBest) {
             winStreakBest = winStreakCurrent;
         }
@@ -133,6 +132,7 @@ public final class ConquestData {
     public void addLoss() {
         losses++;
         winStreakCurrent = 0;
+        getCurrentPlaneData().addLoss();
     }
 
     public int getWins() {
