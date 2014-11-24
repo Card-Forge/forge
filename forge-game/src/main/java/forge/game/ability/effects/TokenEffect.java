@@ -17,6 +17,12 @@
  */
 package forge.game.ability.effects;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import com.google.common.collect.ImmutableMap.Builder;
 import com.google.common.collect.Iterables;
 
 import forge.game.Game;
@@ -33,13 +39,10 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
+import forge.game.trigger.TriggerType;
 import forge.item.PaperToken;
 import forge.util.FCollectionView;
 import forge.util.MyRandom;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class TokenEffect extends SpellAbilityEffect {
 
@@ -303,22 +306,28 @@ public class TokenEffect extends SpellAbilityEffect {
                 final Game game = controller.getGame();
                 for (final Card c : tokens) {
                     if (this.tokenAttacking && game.getPhaseHandler().inCombat()) {
-                        Combat combat = game.getPhaseHandler().getCombat();
+                        final Combat combat = game.getPhaseHandler().getCombat();
                         final FCollectionView<GameEntity> defs = combat.getDefenders();
                         final GameEntity defender = c.getController().getController().chooseSingleEntityForEffect(defs, sa, "Choose which defender to attack with " + c, false);
                         combat.addAttacker(c, defender);
                         combatChanged = true;
                     }
                     if (this.tokenBlocking != null && game.getPhaseHandler().inCombat()) {
-                        Combat combat = game.getPhaseHandler().getCombat();
+                        final Combat combat = game.getPhaseHandler().getCombat();
                         final Card attacker = Iterables.getFirst(AbilityUtils.getDefinedCards(host, this.tokenBlocking, sa), null);
                         if (attacker != null) {
-                            if (combat.isBlocked(attacker)) {
-                                combat.addBlocker(attacker, c);
-                                combat.orderAttackersForDamageAssignment(c);
-                            } else {
-                                // TODO Flash Foliage: set blocked; attackerBlocked trigger; damage 
+                            final boolean wasBlocked = combat.isBlocked(attacker);
+                            combat.addBlocker(attacker, c);
+                            combat.orderAttackersForDamageAssignment(c);
+
+                            // Run triggers for new blocker and add it to damage assignment order
+                            if (!wasBlocked) {
+                                combat.setBlocked(attacker, true);
+                                combat.addBlockerToDamageAssignmentOrder(attacker, c);
+                                game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, new Builder<String, Object>().put("Attacker", attacker).put("Blockers", Collections.singleton(c)).put("NumBlockers", 1).build(), true);
                             }
+                            game.getTriggerHandler().runTrigger(TriggerType.AttackerBlockedByCreature, new Builder<String, Object>().put("Attacker", attacker).put("Blocker", c).build(), true);
+
                             combatChanged = true;
                         }
                     }
@@ -341,6 +350,7 @@ public class TokenEffect extends SpellAbilityEffect {
                 }
 
                 if (combatChanged) {
+                    game.updateCombatForView();
                     game.fireEvent(new GameEventCombatChanged());
                 }
             }
