@@ -1,5 +1,7 @@
 package forge.screens.planarconquest;
 
+import java.util.List;
+
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Graphics;
@@ -9,27 +11,36 @@ import forge.assets.FSkinFont;
 import forge.assets.TextRenderer;
 import forge.assets.FSkinColor.Colors;
 import forge.card.CardRenderer;
+import forge.card.CardRenderer.CardStackPosition;
+import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.model.FModel;
+import forge.planarconquest.ConquestCommander;
 import forge.planarconquest.ConquestData;
 import forge.planarconquest.ConquestPlane.Region;
 import forge.screens.FScreen;
+import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
+import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FLabel;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Utils;
 
 public class ConquestMapScreen extends FScreen {
+    private static final float PADDING = Utils.scale(5);
     private static final FSkinColor BTN_PRESSED_COLOR = FSkinColor.get(Colors.CLR_THEME2);
     private static final FSkinColor LINE_COLOR = BTN_PRESSED_COLOR.stepColor(-40);
     private static final FSkinColor BACK_COLOR = BTN_PRESSED_COLOR.stepColor(-80);
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    private static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
     private static final float LINE_THICKNESS = Utils.scale(1);
     private static final float ARROW_ICON_THICKNESS = Utils.scale(3);
     private static final float REGION_SLIDER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.7f);
     private static final FSkinFont FONT = FSkinFont.get(15);
 
-    private final RegionArt regionArt = add(new RegionArt());
+    private final RegionDisplay regionDisplay = add(new RegionDisplay());
+    private final CommanderRow commanderRow = add(new CommanderRow());
 
     private ConquestData model;
 
@@ -49,14 +60,17 @@ public class ConquestMapScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
-        regionArt.setBounds(0, startY, width, width / CardRenderer.CARD_ART_RATIO + REGION_SLIDER_HEIGHT);
+        float y = startY;
+        regionDisplay.setBounds(0, y, width, width / CardRenderer.CARD_ART_RATIO + REGION_SLIDER_HEIGHT);
+        y += regionDisplay.getHeight() + PADDING;
+        commanderRow.setBounds(0, y, width, 2 * Utils.AVG_FINGER_HEIGHT);
     }
 
-    private class RegionArt extends FContainer {
+    private class RegionDisplay extends FContainer {
         private final FLabel btnPrev, btnNext;
         private final TextRenderer textRenderer = new TextRenderer();
 
-        public RegionArt() {
+        public RegionDisplay() {
             btnPrev = add(new FLabel.Builder().icon(new ArrowIcon(REGION_SLIDER_HEIGHT, REGION_SLIDER_HEIGHT, false)).pressedColor(BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
@@ -153,6 +167,57 @@ public class ConquestMapScreen extends FScreen {
             float size = REGION_SLIDER_HEIGHT;
             btnPrev.setBounds(0, y, size, size);
             btnNext.setBounds(width - REGION_SLIDER_HEIGHT, y, size, size);
+        }
+    }
+
+    private class CommanderRow extends FContainer {
+        private CommanderPanel[] panels = new CommanderPanel[4];
+
+        private CommanderRow() {
+            for (int i = 0; i < panels.length; i++) {
+                panels[i] = add(new CommanderPanel(i));
+            }
+        }
+
+        @Override
+        protected void doLayout(float width, float height) {
+            float panelHeight = height;
+            float panelWidth = panelHeight / FCardPanel.ASPECT_RATIO;
+            float extraSpace = width - panelWidth * panels.length;
+            float gap = extraSpace / (panels.length + 3);
+            float dx = panelWidth + gap;
+            float x = 2 * gap;
+
+            for (int i = 0; i < panels.length; i++) {
+                panels[i].setBounds(x, 0, panelWidth, panelHeight);
+                x += dx;
+            }
+        }
+
+        private class CommanderPanel extends FDisplayObject {
+            private final int index;
+            private CardView card;
+
+            private CommanderPanel(int index0) {
+                index = index0;
+            }
+
+            @Override
+            public void draw(Graphics g) {
+                float w = getWidth();
+                float h = getHeight();
+                g.drawRect(LINE_THICKNESS, BORDER_COLOR, -LINE_THICKNESS, -LINE_THICKNESS, w + 2 * LINE_THICKNESS, h + 2 * LINE_THICKNESS);
+
+                if (card == null) {
+                    List<ConquestCommander> commanders = model.getCurrentPlaneData().getCommanders();
+                    if (index < commanders.size()) {
+                        card = Card.getCardForUi(commanders.get(index).getCard()).getView();
+                    }
+                }
+                if (card != null) {
+                    CardRenderer.drawCardWithOverlays(g, card, 0, 0, w, h, CardStackPosition.Top);
+                }
+            }
         }
     }
 }

@@ -33,8 +33,11 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import com.thoughtworks.xstream.XStream;
+
 import forge.deck.CardPool;
 import forge.properties.ForgeConstants;
+import forge.quest.io.QuestDataIO.DeckToXml;
+import forge.quest.io.QuestDataIO.ItemPoolToXml;
 import forge.util.FileUtil;
 import forge.util.IgnoringXStream;
 import forge.util.ItemPool;
@@ -47,6 +50,8 @@ public class ConquestDataIO {
 
     protected static XStream getSerializer(final boolean isIgnoring) {
         final XStream xStream = isIgnoring ? new IgnoringXStream() : new XStream();
+        xStream.registerConverter(new ItemPoolToXml());
+        xStream.registerConverter(new DeckToXml());
         xStream.autodetectAnnotations(true);
         xStream.alias("CardPool", ItemPool.class);
         xStream.alias("DeckSection", CardPool.class);

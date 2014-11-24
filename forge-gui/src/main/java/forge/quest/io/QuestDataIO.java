@@ -675,12 +675,10 @@ public class QuestDataIO {
             }
             
             return output;
-            
         }
-        
     }
 
-    private static class DeckToXml extends ItemPoolToXml {
+    public static class DeckToXml extends ItemPoolToXml {
     
         /* (non-Javadoc)
          * @see com.thoughtworks.xstream.converters.ConverterMatcher#canConvert(java.lang.Class)
@@ -748,7 +746,7 @@ public class QuestDataIO {
         }
     }
 
-    private static class ItemPoolToXml implements Converter {
+    public static class ItemPoolToXml implements Converter {
         @SuppressWarnings("rawtypes")
         @Override
         public boolean canConvert(final Class clasz) {

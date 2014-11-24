@@ -25,6 +25,7 @@ import forge.properties.ForgeConstants;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public final class ConquestData {
     private int difficulty;
     private ConquestPlane startingPlane, currentPlane;
     private int currentRegionIndex;
-    private List<ConquestCommander> commanders = new ArrayList<ConquestCommander>();
+    private EnumMap<ConquestPlane, ConquestPlaneData> planeDataMap = new EnumMap<ConquestPlane, ConquestPlaneData>(ConquestPlane.class);
 
     private final CardPool collection = new CardPool();
     private final HashMap<String, Deck> decks = new HashMap<String, Deck>();
@@ -62,7 +63,7 @@ public final class ConquestData {
 
     private void addCommander(PaperCard card) {
         ConquestCommander commander = new ConquestCommander(card, currentPlane.getCardPool());
-        commanders.add(commander);
+        getCurrentPlaneData().getCommanders().add(commander);
         decks.put(commander.getDeck().getName(), commander.getDeck());
         collection.addAll(commander.getDeck().getMain());
         collection.add(card);
@@ -82,6 +83,15 @@ public final class ConquestData {
 
     public ConquestPlane getCurrentPlane() {
         return currentPlane;
+    }
+
+    public ConquestPlaneData getCurrentPlaneData() {
+        ConquestPlaneData planeData = planeDataMap.get(currentPlane);
+        if (planeData == null) {
+            planeData = new ConquestPlaneData();
+            planeDataMap.put(currentPlane, planeData);
+        }
+        return planeData;
     }
 
     public Region getCurrentRegion() {
