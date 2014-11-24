@@ -143,20 +143,20 @@ public enum ConquestPlane {
     Mirrodin("Mirrodin", new String[] {
             "MRD", "DST", "5DN", "SOM", "MBS", "NPH"
     }, new Region[] {
-            new Region("Mirrodin's Core", "Mirrodin's Core", null,
-                    new String[] { "Core", "Mycosynth", "Memnarch" }),
-            new Region("The Glimmervoid", "Glimmervoid", CardRulesPredicates.hasKeyword("Sunburst"),
-                    new String[] { "Glimmervoid" }),
-            new Region("Mephidross", "", CardRulesPredicates.hasColorIdentity(MagicColor.BLACK),
-                    new String[] { "Dross", "Mephidross" }),
-            new Region("The Oxidda Chain", "", CardRulesPredicates.hasColorIdentity(MagicColor.RED),
-                    new String[] { "Oxidda", "Chain", "Mountain" }),
-            new Region("The Quicksilver Sea", "", CardRulesPredicates.hasColorIdentity(MagicColor.BLUE),
-                    new String[] { "Quicksilver", "Sea", "Island" }),
-            new Region("The Razor Fields", "", CardRulesPredicates.hasColorIdentity(MagicColor.WHITE),
+            new Region("Panopticon {X}", "Darksteel Citadel", CardRulesPredicates.Presets.IS_ARTIFACT,
+                    new String[] { "Darksteel"  }),
+            new Region("Taj-Nar {W}", "Ancient Den", CardRulesPredicates.hasColorIdentity(MagicColor.WHITE),
                     new String[] { "Razor", "Fields", "Plains" }),
-            new Region("The Tangle", "", CardRulesPredicates.hasColorIdentity(MagicColor.GREEN),
-                    new String[] { "Tangle", "Forest" })
+            new Region("Lumengrid {U}", "Seat of the Synod", CardRulesPredicates.hasColorIdentity(MagicColor.BLUE),
+                    new String[] { "Quicksilver", "Sea", "Island" }),
+            new Region("Ish Sah {B}", "Vault of Whispers", CardRulesPredicates.hasColorIdentity(MagicColor.BLACK),
+                    new String[] { "Dross", "Mephidross" }),
+            new Region("Kuldotha {R}", "Great Furnace", CardRulesPredicates.hasColorIdentity(MagicColor.RED),
+                    new String[] { "Oxidda", "Chain", "Mountain" }),
+            new Region("Tel-Jilad {G}", "Tree of Tales", CardRulesPredicates.hasColorIdentity(MagicColor.GREEN),
+                    new String[] { "Tangle", "Forest" }),
+            new Region("Glimmervoid {W}{U}{B}{R}{G}", "Glimmervoid", CardRulesPredicates.hasKeyword("Sunburst"),
+                    new String[] { "Glimmervoid" }),
     }),
     Rath("Rath", new String[] {
             "TMP", "STH", "EXO"
