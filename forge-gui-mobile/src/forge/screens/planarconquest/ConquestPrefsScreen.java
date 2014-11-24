@@ -22,7 +22,7 @@ public class ConquestPrefsScreen extends FScreen {
     private static final float PADDING = Utils.scale(5);
 
     private enum PrefsGroup {
-        TODO
+        BASIC
     }
 
     private FScrollPane scroller = add(new FScrollPane() {
@@ -48,7 +48,8 @@ public class ConquestPrefsScreen extends FScreen {
     public ConquestPrefsScreen() {
         super("Conquest Preferences", ConquestMenu.getMenu());
 
-        scroller.add(new PrefsHeader("TODO", FSkinImage.QUEST_COIN, PrefsGroup.TODO));
+        scroller.add(new PrefsHeader("Basic Settings", FSkinImage.SETTINGS, PrefsGroup.BASIC));
+        scroller.add(new PrefsOption("Wins per commander unlock", CQPref.WINS_TO_UNLOCK_COMMANDER, PrefsGroup.BASIC));
     }
 
     @Override
