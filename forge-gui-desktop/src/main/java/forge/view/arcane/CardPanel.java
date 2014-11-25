@@ -290,11 +290,20 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         // White border if card is known to have it.
         if (getCard() != null && MatchUtil.canCardBeShown(getCard())) {
-            CardStateView state = getCard().getCurrentState();
-            CardEdition ed = FModel.getMagicDb().getEditions().get(state.getSetCode());
-            if (ed != null && ed.isWhiteBorder() && state.getFoilIndex() == 0) {
-                g2d.setColor(Color.white);
-                int ins = 1;
+            final CardStateView state = getCard().getCurrentState();
+            final CardEdition ed = FModel.getMagicDb().getEditions().get(state.getSetCode());
+            boolean colorIsSet = false;
+            if (state.getType().hasStringType("Effect")) {
+                // Effects are drawn with orange border
+                g2d.setColor(Color.ORANGE);
+                colorIsSet = true;
+            } else if (ed != null && ed.isWhiteBorder() && state.getFoilIndex() == 0) {
+                // Non-foil cards from white-bordered sets are drawn with white border
+                g2d.setColor(Color.WHITE);
+                colorIsSet = true;
+            }
+            if (colorIsSet) {
+                final int ins = 1;
                 g2d.fillRoundRect(cardXOffset + ins, cardYOffset + ins, cardWidth - ins*2, cardHeight - ins*2, cornerSize-ins, cornerSize-ins);
             }
         }
