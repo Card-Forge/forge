@@ -48,7 +48,7 @@ public class ConquestMenu extends FPopupMenu {
         final File dirConquests = new File(ForgeConstants.CONQUEST_SAVE_DIR);
         final String questname = FModel.getConquestPreferences().getPref(CQPref.CURRENT_CONQUEST);
         final File data = new File(dirConquests.getPath(), questname);
-        if (data.exists()) {
+        if (data.exists() || ConquestDataIO.TEST_MODE) {
             LoadingOverlay.show("Loading current conquest...", new Runnable() {
                 @Override
                 @SuppressWarnings("unchecked")

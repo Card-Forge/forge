@@ -224,7 +224,19 @@ public class ConquestMapScreen extends FScreen {
                     CardRenderer.drawCardWithOverlays(g, card, 0, 0, w, h, CardStackPosition.Top);
                 }
                 else {
-                    int winsToUnlock = index * FModel.getConquestPreferences().getPrefInt(CQPref.WINS_TO_UNLOCK_COMMANDER);
+                    CQPref unlockPref;
+                    switch (index) {
+                    case 1:
+                        unlockPref = CQPref.WINS_TO_UNLOCK_COMMANDER_2;
+                        break;
+                    case 2:
+                        unlockPref = CQPref.WINS_TO_UNLOCK_COMMANDER_3;
+                        break;
+                    default:
+                        unlockPref = CQPref.WINS_TO_UNLOCK_COMMANDER_4;
+                        break;
+                    }
+                    int winsToUnlock = FModel.getConquestPreferences().getPrefInt(unlockPref);
                     if (planeData.getWins() < winsToUnlock) {
                         g.setAlphaComposite(0.25f);
                         float imageSize = w * 0.75f;

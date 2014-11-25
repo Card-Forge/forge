@@ -21,16 +21,12 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -43,6 +39,14 @@ import forge.util.IgnoringXStream;
 import forge.util.ItemPool;
 
 public class ConquestDataIO {
+    public static boolean TEST_MODE = true;
+    private static ConquestData createTestData() {
+        ConquestData temp = new ConquestData("My Conquest", 0,
+                ConquestPlane.Alara,
+                ConquestPlane.Alara.getCardPool().getCard("Rafiq of the Many"));
+        return temp;
+    }
+
     static {
         //ensure save directory exists if this class is used
         FileUtil.ensureDirectoryExists(ForgeConstants.CONQUEST_SAVE_DIR);
@@ -59,6 +63,10 @@ public class ConquestDataIO {
     }
 
     public static ConquestData loadData(final File xmlSaveFile) {
+        if (TEST_MODE) {
+            return createTestData();
+        }
+
         try {
             ConquestData data = null;
 
@@ -92,12 +100,11 @@ public class ConquestDataIO {
             return data;
         }
         catch (final Exception ex) {
-            //BugReporter.reportException(ex, "Error loading Conquest Data");
             throw new RuntimeException(ex);
         }
     }
 
-    private static void updateSaveFile(final ConquestData newData, final String input, String filename) throws ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException {
+    private static void updateSaveFile(final ConquestData newData, final String input, String filename) throws Exception {
         //final DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         final InputSource is = new InputSource();
         is.setCharacterStream(new StringReader(input));
@@ -126,12 +133,11 @@ public class ConquestDataIO {
             // ConquestDataIO.saveUnpacked(f + ".xml", xStream, qd);
         }
         catch (final Exception ex) {
-            //BugReporter.reportException(ex, "Error saving Conquest Data.");
             throw new RuntimeException(ex);
         }
     }
 
-    private static void savePacked(final String f, final XStream xStream, final ConquestData qd) throws IOException {
+    private static void savePacked(final String f, final XStream xStream, final ConquestData qd) throws Exception {
         final BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(f));
         final GZIPOutputStream zout = new GZIPOutputStream(bout);
         xStream.toXML(qd, zout);
@@ -140,7 +146,7 @@ public class ConquestDataIO {
     }
 
     @SuppressWarnings("unused") // used only for debug purposes
-    private static void saveUnpacked(final String f, final XStream xStream, final ConquestData qd) throws IOException {
+    private static void saveUnpacked(final String f, final XStream xStream, final ConquestData qd) throws Exception {
         final BufferedOutputStream boutUnp = new BufferedOutputStream(new FileOutputStream(f));
         xStream.toXML(qd, boutUnp);
         boutUnp.flush();

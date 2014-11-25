@@ -29,7 +29,16 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
      */
     public static enum CQPref {
         CURRENT_CONQUEST("DEFAULT"),
-        WINS_TO_UNLOCK_COMMANDER("10");
+
+        WINS_TO_UNLOCK_COMMANDER_2("5"),
+        WINS_TO_UNLOCK_COMMANDER_3("10"),
+        WINS_TO_UNLOCK_COMMANDER_4("20"),
+        WINS_TO_UNLOCK_PORTAL("25"),
+
+        PERCENT_NORMAL("25"),
+        PERCENT_COMMANDER("25"),
+        PERCENT_PLANECHASE("25"),
+        PERCENT_DOUBLE_VARIANT("25");
 
         private final String strDefaultVal;
 
