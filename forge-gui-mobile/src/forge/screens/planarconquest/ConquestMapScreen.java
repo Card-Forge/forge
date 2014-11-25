@@ -31,7 +31,7 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Utils;
 
 public class ConquestMapScreen extends FScreen {
-    private static final float PADDING = Utils.scale(5);
+    private static final float PADDING = Utils.scale(10);
     private static final FSkinColor BTN_PRESSED_COLOR = FSkinColor.get(Colors.CLR_THEME2);
     private static final FSkinColor LINE_COLOR = BTN_PRESSED_COLOR.stepColor(-40);
     private static final FSkinColor BACK_COLOR = BTN_PRESSED_COLOR.stepColor(-80);
@@ -69,8 +69,10 @@ public class ConquestMapScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
-        float y = startY;
-        regionDisplay.setBounds(0, y, width, width / CardRenderer.CARD_ART_RATIO + REGION_SLIDER_HEIGHT);
+        float x = PADDING;
+        float y = startY + PADDING;
+        float w = width - 2 * x;
+        regionDisplay.setBounds(x, y, w, w / CardRenderer.CARD_ART_RATIO + REGION_SLIDER_HEIGHT);
         y += regionDisplay.getHeight() + PADDING;
         commanderRow.setBounds(0, y, width, COMMANDER_ROW_HEIGHT);
 
