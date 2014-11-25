@@ -56,7 +56,6 @@ public class ConquestPrefsScreen extends FScreen {
         scroller.add(new PrefsOption("Wins to unlock planar portal", CQPref.WINS_TO_UNLOCK_PORTAL, PrefsGroup.WINS_TO_UNLOCK));
 
         scroller.add(new PrefsHeader("Variant Frequency", FSkinImage.PLANESWALKER, PrefsGroup.VARIANT_FREQUENCY));
-        scroller.add(new PrefsOption("Normal Game (%)", CQPref.PERCENT_NORMAL, PrefsGroup.VARIANT_FREQUENCY));
         scroller.add(new PrefsOption("Commander Game (%)", CQPref.PERCENT_COMMANDER, PrefsGroup.VARIANT_FREQUENCY));
         scroller.add(new PrefsOption("Planechase Game (%)", CQPref.PERCENT_PLANECHASE, PrefsGroup.VARIANT_FREQUENCY));
         scroller.add(new PrefsOption("Commander & Planechase Game (%)", CQPref.PERCENT_DOUBLE_VARIANT, PrefsGroup.VARIANT_FREQUENCY));
@@ -123,9 +122,14 @@ public class ConquestPrefsScreen extends FScreen {
                     if (validationError != null) {
                         String prefType;
                         switch (group) {
-                        default:
-                            prefType = "TODO";
+                        case WINS_TO_UNLOCK:
+                            prefType = "Wins to Unlock";
                             break;
+                        case VARIANT_FREQUENCY:
+                            prefType = "Variant Frequency";
+                            break;
+                        default:
+                            prefType = "";
                         }
                         FOptionPane.showErrorDialog(validationError, "Save Failed - " + prefType);
                         return false;

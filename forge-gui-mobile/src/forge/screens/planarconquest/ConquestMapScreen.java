@@ -60,7 +60,7 @@ public class ConquestMapScreen extends FScreen {
 
     public void update() {
         model = FModel.getConquest().getModel();
-        setHeaderCaption(model.getName() + " - " + model.getCurrentPlane());
+        setHeaderCaption(model.getName());
     }
 
     @Override

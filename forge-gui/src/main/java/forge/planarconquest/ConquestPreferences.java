@@ -35,7 +35,6 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
         WINS_TO_UNLOCK_COMMANDER_4("20"),
         WINS_TO_UNLOCK_PORTAL("25"),
 
-        PERCENT_NORMAL("25"),
         PERCENT_COMMANDER("25"),
         PERCENT_PLANECHASE("25"),
         PERCENT_DOUBLE_VARIANT("25");
@@ -129,6 +128,25 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
     }
 
     public String validatePreference(CQPref qpref, int val) {
+        switch (qpref) {
+        case PERCENT_COMMANDER:
+            if (val + getPrefInt(CQPref.PERCENT_PLANECHASE) + getPrefInt(CQPref.PERCENT_DOUBLE_VARIANT) > 100) {
+                return "Variant Frequency values must add up to 100 or less.";
+            }
+            break;
+        case PERCENT_PLANECHASE:
+            if (val + getPrefInt(CQPref.PERCENT_COMMANDER) + getPrefInt(CQPref.PERCENT_DOUBLE_VARIANT) > 100) {
+                return "Variant Frequency values must add up to 100 or less.";
+            }
+            break;
+        case PERCENT_DOUBLE_VARIANT:
+            if (val + getPrefInt(CQPref.PERCENT_COMMANDER) + getPrefInt(CQPref.PERCENT_PLANECHASE) > 100) {
+                return "Variant Frequency values must add up to 100 or less.";
+            }
+            break;
+        default:
+            break;
+        }
         return null;
     }
 }
