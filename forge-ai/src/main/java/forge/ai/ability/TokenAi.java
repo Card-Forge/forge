@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.common.base.Predicate;
+
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
@@ -160,7 +162,29 @@ public class TokenAi extends SpellAbilityAi {
                 if (sa.canTarget(ai)) {
                     sa.getTargets().add(ai);
                 } else {
-                    return false;
+                	//Flash Foliage
+        	        CardCollection list = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponents());
+        	        list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
+        	        list = CardLists.getTargetableCards(list, sa);
+        	        CardCollection betterList = CardLists.filter(list, new Predicate<Card>() {
+        	            @Override
+        	            public boolean apply(Card c) {
+        	                return c.getLethalDamage() == 1;
+        	            }
+        	        });
+        	        if (!betterList.isEmpty()) {
+        	        	list = betterList;
+        	        }
+        	        betterList = CardLists.getNotKeyword(list, "Trample");
+        	        if (!betterList.isEmpty()) {
+        	        	list = betterList;
+        	        }
+        	        if (!list.isEmpty()) {
+        	        	sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(list));
+        	        } else {
+        	        	return false;
+        	        }
+                    
                 }
             }
         }
