@@ -46,6 +46,8 @@ public class ConquestMapScreen extends FScreen {
 
     private final RegionDisplay regionDisplay = add(new RegionDisplay());
     private final CommanderRow commanderRow = add(new CommanderRow());
+    private final FLabel lblCurrentPlane = add(new FLabel.Builder().font(FSkinFont.get(16)).align(HAlignment.CENTER).build());
+    private final FLabel btnEndDay = add(new FLabel.ButtonBuilder().font(FSkinFont.get(14)).build());
 
     private ConquestData model;
 
@@ -60,7 +62,9 @@ public class ConquestMapScreen extends FScreen {
 
     public void update() {
         model = FModel.getConquest().getModel();
-        setHeaderCaption(model.getName());
+        setHeaderCaption(model.getName() + " - Map");
+        lblCurrentPlane.setText(model.getCurrentPlane().getName());
+        btnEndDay.setText("End Day " + model.getDay());
     }
 
     @Override
@@ -69,6 +73,12 @@ public class ConquestMapScreen extends FScreen {
         regionDisplay.setBounds(0, y, width, width / CardRenderer.CARD_ART_RATIO + REGION_SLIDER_HEIGHT);
         y += regionDisplay.getHeight() + PADDING;
         commanderRow.setBounds(0, y, width, COMMANDER_ROW_HEIGHT);
+
+        btnEndDay.setSize(width / 2, btnEndDay.getAutoSizeBounds().height);
+        btnEndDay.setPosition((width - btnEndDay.getWidth()) / 2, height - btnEndDay.getHeight());
+
+        lblCurrentPlane.setSize(btnEndDay.getWidth(), lblCurrentPlane.getAutoSizeBounds().height);
+        lblCurrentPlane.setPosition(btnEndDay.getLeft(), btnEndDay.getTop() - lblCurrentPlane.getHeight());
     }
 
     private class RegionDisplay extends FContainer {
