@@ -305,6 +305,10 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
         getRootPane().setCursor(Cursor.getPredefinedCursor(resizeCursor0));
     }
 
+    public boolean isResizing() {
+        return sizeBeforeResize != null;
+    }
+
     private void addResizeSupport() {
         final JRootPane resizeBorders = getRootPane();
         resizeBorders.addMouseListener(new MouseAdapter() {

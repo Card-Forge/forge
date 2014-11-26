@@ -41,12 +41,14 @@ import forge.view.FFrame;
 import java.awt.Component;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import javax.swing.ScrollPaneConstants;
+import javax.swing.Timer;
 
 
 public class FloatingCardArea extends CardArea {
@@ -282,6 +284,29 @@ public class FloatingCardArea extends CardArea {
         if (hadCardPanels && cardPanels.size() == 0) {
             window.setVisible(false);
         }
+    }
+
+    @Override
+    public void doLayout() {
+        if (window.isResizing()) {
+            //delay layout slightly to reduce flicker during window resize
+            layoutTimer.restart();
+        }
+        else {
+            finishDoLayout();
+        }
+    }
+
+    final Timer layoutTimer = new Timer(250, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent arg0) {
+            layoutTimer.stop();
+            finishDoLayout();
+        }
+    });
+
+    private void finishDoLayout() {
+        super.doLayout();
     }
 
     @Override

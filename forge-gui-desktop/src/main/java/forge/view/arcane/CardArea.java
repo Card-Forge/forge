@@ -97,7 +97,7 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
     }
 
     @Override
-    public final void doLayout() {
+    public void doLayout() {
         if (this.getCardPanels().isEmpty()) {
             return;
         }
