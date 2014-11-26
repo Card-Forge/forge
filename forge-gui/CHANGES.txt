@@ -19,6 +19,8 @@ You can still customize these by clicking on the phase stop indicator, and your 
 - Zone Window Improvements -
 Popup windows for zones (Hand, Library, Graveyard, Exile, Flashback) will now remember their position and size between sessions. Human and AI zones will each be remembered separately.
 Clicking the zone icon under a player's avatar will now hide the zone window if its currently open.
+After the last card is removed from a zone window, that window will now automatically be hidden. An example of this would be casting the last card in the Flashback zone.
+Default size of zone windows has been slightly reduced.
 
 ---------
 New Cards

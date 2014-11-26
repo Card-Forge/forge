@@ -249,7 +249,7 @@ public class FloatingCardArea extends CardArea {
         }
         //fallback default size
         FFrame mainFrame = Singletons.getView().getFrame();
-        window.setSize(mainFrame.getWidth() / 4, mainFrame.getHeight() * 2 / 3);
+        window.setSize(mainFrame.getWidth() / 5, mainFrame.getHeight() / 2);
     }
 
     public void refresh() {
@@ -270,8 +270,16 @@ public class FloatingCardArea extends CardArea {
                 cardPanels.add(cardPanel);
             }
         }
+
+        boolean hadCardPanels = getCardPanels().size() > 0;
         setCardPanels(cardPanels);
         window.setTitle(String.format(title, cardPanels.size()));
+
+        //if window had cards and now doesn't, hide window
+        //(e.g. cast final card from Flashback zone)
+        if (hadCardPanels && cardPanels.size() == 0) {
+            window.setVisible(false);
+        }
     }
 
     @Override
