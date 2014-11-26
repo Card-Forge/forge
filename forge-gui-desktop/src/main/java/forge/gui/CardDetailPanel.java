@@ -177,14 +177,14 @@ public class CardDetailPanel extends SkinnedPanel {
         setInfoLabel.setOpaque(false);
         setInfoLabel.setBorder(null);
         cdArea.setText("");
-        if (card == null) {
+
+        final CardStateView state = card.getState(isInAltState);
+        if (card == null || state == null) {
             updateBorder(null, false);
             return;
         }
 
         boolean canShow = MatchUtil.canCardBeShown(card);
-
-        final CardStateView state = card.getState(isInAltState);
 
         if (state.getManaCost().isNoCost() || !canShow) {
             nameCostLabel.setText(CardDetailUtil.formatCardName(card, canShow, isInAltState));

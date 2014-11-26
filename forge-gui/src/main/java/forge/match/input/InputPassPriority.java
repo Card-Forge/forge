@@ -17,6 +17,7 @@
  */
 package forge.match.input;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import forge.game.Game;
@@ -131,9 +132,36 @@ public class InputPassPriority extends InputSyncronizedBase {
             return false;
     	}
 
-    	return selectAbility(player.getController().getAbilityToPlay(abilities, triggerEvent));
+        final SpellAbility ability = player.getController().getAbilityToPlay(abilities, triggerEvent);
+    	if (selectAbility(ability)) {
+            if (otherCardsToSelect != null && ability.isManaAbility()) {
+                //if mana ability activated, activate same ability on other cards to select if possible
+                String abStr = ability.toUnsuppressedString();
+                final List<SpellAbility> otherAbilitiesToPlay = new ArrayList<SpellAbility>();
+                for (Card c : otherCardsToSelect) {
+                    for (SpellAbility ab : c.getAllPossibleAbilities(player, true)) {
+                        if (ab.toUnsuppressedString().equals(abStr)) {
+                            otherAbilitiesToPlay.add(ab);
+                            break;
+                        }
+                    }
+                }
+                if (otherAbilitiesToPlay.size() > 0) {
+                    ThreadUtil.invokeInGameThread(new Runnable() { //must execute other abilities on game thread
+                        @Override
+                        public void run() {
+                            for (SpellAbility ab : otherAbilitiesToPlay) {
+                                player.getController().playChosenSpellAbility(ab);
+                            }
+                        }
+                    });
+                }
+            }
+    	    return true;
+    	}
+    	return false;
     }
-    
+
     @Override
     public boolean selectAbility(final SpellAbility ab) {
     	if (ab != null) {

@@ -542,7 +542,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         if (selectOtherCardsInStack) {
             if (stack != null) {
                 for (CardPanel p : stack) {
-                    if (p != panel && p.getCard() != null) {
+                    if (p != panel && p.getCard() != null && p.getStack() == stack) {
                         if (otherCardViewsToSelect == null) {
                             otherCardViewsToSelect = new ArrayList<CardView>();
                         }
