@@ -32,7 +32,6 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Utils;
 
 public class ConquestMapScreen extends FScreen {
-    private static final float PADDING = Utils.scale(10);
     private static final FSkinColor BTN_PRESSED_COLOR = FSkinColor.get(Colors.CLR_THEME2);
     private static final FSkinColor LINE_COLOR = BTN_PRESSED_COLOR.stepColor(-40);
     private static final FSkinColor BACK_COLOR = BTN_PRESSED_COLOR.stepColor(-80);
@@ -43,7 +42,8 @@ public class ConquestMapScreen extends FScreen {
     private static final float REGION_SLIDER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.7f);
     private static final FSkinFont REGION_NAME_FONT = FSkinFont.get(15);
     private static final FSkinFont UNLOCK_WINS_FONT = FSkinFont.get(18);
-    private static final float COMMANDER_ROW_HEIGHT = 2 * Utils.AVG_FINGER_HEIGHT;
+    private static final float COMMANDER_ROW_PADDING = Utils.scale(16);
+    private static final float COMMANDER_ROW_HEIGHT = 2 * Utils.AVG_FINGER_HEIGHT + COMMANDER_ROW_PADDING;
 
     private final RegionDisplay regionDisplay = add(new RegionDisplay());
     private final CommanderRow commanderRow = add(new CommanderRow());
@@ -70,23 +70,23 @@ public class ConquestMapScreen extends FScreen {
 
     @Override
     public void drawBackground(Graphics g) {
-        g.drawImage(FSkinTexture.BG_PLANAR_MAP, 0, 0, getWidth(), getHeight());
+        FImage background = FSkinTexture.BG_PLANAR_MAP;
+        float w = getWidth();
+        float h = w * background.getHeight() / background.getWidth();
+        g.drawImage(background, 0, getHeight() - h, w, h); //retain proportions, should cover enough to reach region border
     }
 
     @Override
     protected void doLayout(float startY, float width, float height) {
-        float x = PADDING;
-        float y = startY + PADDING;
-        float w = width - 2 * x;
-        regionDisplay.setBounds(x, y, w, w / CardRenderer.CARD_ART_RATIO + REGION_SLIDER_HEIGHT);
-        y += regionDisplay.getHeight() + PADDING;
-        commanderRow.setBounds(0, y, width, COMMANDER_ROW_HEIGHT);
-
         btnEndDay.setSize(width / 2, btnEndDay.getAutoSizeBounds().height);
         btnEndDay.setPosition((width - btnEndDay.getWidth()) / 2, height - btnEndDay.getHeight());
 
         lblCurrentPlane.setSize(btnEndDay.getWidth(), lblCurrentPlane.getAutoSizeBounds().height);
         lblCurrentPlane.setPosition(btnEndDay.getLeft(), btnEndDay.getTop() - lblCurrentPlane.getHeight());
+
+        commanderRow.setBounds(0, lblCurrentPlane.getTop() - COMMANDER_ROW_HEIGHT, width, COMMANDER_ROW_HEIGHT);
+
+        regionDisplay.setBounds(0, startY, width, commanderRow.getTop() - startY);
     }
 
     private class RegionDisplay extends FContainer {
@@ -204,15 +204,16 @@ public class ConquestMapScreen extends FScreen {
 
         @Override
         protected void doLayout(float width, float height) {
-            float panelHeight = height;
+            float panelHeight = height - 2 * COMMANDER_ROW_PADDING;
             float panelWidth = panelHeight / FCardPanel.ASPECT_RATIO;
             float extraSpace = width - panelWidth * panels.length;
             float gap = extraSpace / (panels.length + 3);
             float dx = panelWidth + gap;
             float x = 2 * gap;
+            float y = COMMANDER_ROW_PADDING;
 
             for (int i = 0; i < panels.length; i++) {
-                panels[i].setBounds(x, 0, panelWidth, panelHeight);
+                panels[i].setBounds(x, y, panelWidth, panelHeight);
                 x += dx;
             }
         }
