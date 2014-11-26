@@ -36,33 +36,13 @@ import java.awt.event.MouseEvent;
  * @version $Id: CardArea.java 24769 2014-02-09 13:56:04Z Hellfish $
  */
 public class CardArea extends CardPanelContainer implements CardPanelMouseListener {
-    /**
-     *
-     */
     private static final long serialVersionUID = -5836122075999621592L;
-    /**
-     * Constant <code>GUTTER_Y=5</code>.
-     */
+
     public static final int GUTTER_Y = 5;
-    /**
-     * Constant <code>GUTTER_X=5</code>.
-     */
     public static final int GUTTER_X = 5;
-    /**
-     *
-     */
     private static final float HORIZ_CARD_SPACING_X = 0.04f;
-    /**
-     *
-     */
     private static final float HORIZ_CARD_SPACING_Y = 0.06f;
-    /**
-     *
-     */
     private static final float VERT_CARD_SPACING_X = 0.06f;
-    /**
-     *
-     */
     private static final float VERT_CARD_SPACING_Y = 0.10f;
 
     private float maxCoverage = 0.5f;
@@ -76,19 +56,11 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
     private boolean isVertical;
     private boolean hasScrollbars;
 
-    /**
-     * <p>
-     * Constructor for CardArea.
-     * </p>
-     * 
-     * @param scrollPane
-     */
     public CardArea(final FScrollPane scrollPane) {
         super(scrollPane);
         this.setBackground(Color.white);
     }
 
-    /** {@inheritDoc} */
     @Override
     public final CardPanel getCardPanel(final int x, final int y) {
         if (this.isVertical) {
@@ -101,12 +73,12 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
                 if ((x > panelX) && (x < (panelX + panelWidth)) && (y > panelY) && (y < (panelY + panelHeight))) {
                     if (!panel.isDisplayEnabled()) {
                         return null;
-                    } else {
-                        return panel;
                     }
+                    return panel;
                 }
             }
-        } else {
+        }
+        else {
             for (int i = 0, n = this.getCardPanels().size(); i < n; i++) {
                 final CardPanel panel = this.getCardPanels().get(i);
                 final int panelX = panel == this.getMouseDragPanel() ? this.mouseDragStartX : panel.getCardX();
@@ -116,22 +88,14 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
                 if ((x > panelX) && (x < (panelX + panelWidth)) && (y > panelY) && (y < (panelY + panelHeight))) {
                     if (!panel.isDisplayEnabled()) {
                         return null;
-                    } else {
-                        return panel;
                     }
+                    return panel;
                 }
             }
         }
         return null;
     }
 
-    /**
-     * <p>
-     * doLayout.
-     * </p>
-     * 
-     * @since 1.0.15
-     */
     @Override
     public final void doLayout() {
         if (this.getCardPanels().isEmpty()) {
@@ -209,7 +173,8 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
                     y = CardArea.GUTTER_Y;
                 }
             }
-        } else {
+        }
+        else {
             while (true) {
                 cardHeight = Math.round(cardWidth * CardPanel.ASPECT_RATIO);
                 final int extraCardSpacingX = Math.round(cardWidth * CardArea.HORIZ_CARD_SPACING_X);
@@ -271,7 +236,6 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public final void paint(final Graphics g) {
         final boolean hasScrollbars = this.getScrollPane().getVerticalScrollBar().isVisible();
@@ -279,11 +243,9 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
             this.revalidate();
         }
         this.hasScrollbars = hasScrollbars;
-
         super.paint(g);
     }
 
-    /** {@inheritDoc} */
     @Override
     public final void mouseDragStart(final CardPanel dragPanel, final MouseEvent evt) {
         super.mouseDragStart(dragPanel, evt);
@@ -302,7 +264,6 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
         CardPanel.getDragAnimationPanel().setCardBounds(p.x, p.y, dragPanel.getCardWidth(), dragPanel.getCardHeight());
     }
 
-    /** {@inheritDoc} */
     @Override
     public final void mouseDragged(final CardPanel dragPanel, final int dragOffsetX, final int dragOffsetY,
             final MouseEvent evt) {
@@ -333,7 +294,6 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
         this.revalidate();
     }
 
-    /** {@inheritDoc} */
     @Override
     public final void mouseDragEnd(final CardPanel dragPanel, final MouseEvent evt) {
         super.mouseDragEnd(dragPanel, evt);
@@ -348,72 +308,24 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
                 dragPanel, layeredPane, 200);
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>maxCoverage</code>.
-     * </p>
-     * 
-     * @return a float.
-     */
     public final float getMaxCoverage() {
         return this.maxCoverage;
     }
-
-    /**
-     * <p>
-     * Setter for the field <code>maxCoverage</code>.
-     * </p>
-     * 
-     * @param maxCoverage
-     *            a float.
-     */
     public final void setMaxCoverage(final float maxCoverage) {
         this.maxCoverage = maxCoverage;
     }
 
-    /**
-     * <p>
-     * Setter for the field <code>maxRows</code>.
-     * </p>
-     * 
-     * @param maxRows
-     *            a int.
-     */
+    public final int getMaxRows() {
+        return this.maxRows;
+    }
     public final void setMaxRows(final int maxRows) {
         this.maxRows = maxRows;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>maxRows</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getMaxRows() {
-        return this.maxRows;
-    }
-
-    /**
-     * <p>
-     * setVertical.
-     * </p>
-     * 
-     * @param isVertical
-     *            a boolean.
-     */
-    public final void setVertical(final boolean isVertical) {
-        this.isVertical = isVertical;
-    }
-
-    /**
-     * <p>
-     * isVertical.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean isVertical() {
         return this.isVertical;
+    }
+    public final void setVertical(final boolean isVertical) {
+        this.isVertical = isVertical;
     }
 }
