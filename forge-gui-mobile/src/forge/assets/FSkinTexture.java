@@ -5,10 +5,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
 
 import forge.Graphics;
+import forge.properties.ForgeConstants;
 
 public enum FSkinTexture implements FImage {
-    BG_TEXTURE("bg_texture.jpg", true),
-    BG_MATCH("bg_match.jpg", false);
+    BG_TEXTURE(ForgeConstants.TEXTURE_BG_FILE, true),
+    BG_MATCH(ForgeConstants.MATCH_BG_FILE, false),
+    BG_PLANAR_MAP(ForgeConstants.PLANAR_MAP_BG_FILE, false);
 
     private final String filename;
     private final boolean repeat;

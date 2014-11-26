@@ -1169,6 +1169,7 @@ public class FSkin {
         // Exceptions handled inside method.
         SkinIcon.setIcon(FSkinProp.BG_TEXTURE, preferredDir + ForgeConstants.TEXTURE_BG_FILE);
         SkinIcon.setIcon(FSkinProp.BG_MATCH, preferredDir + ForgeConstants.MATCH_BG_FILE);
+        SkinIcon.setIcon(FSkinProp.BG_PLANAR_MAP, preferredDir + ForgeConstants.PLANAR_MAP_BG_FILE);
 
         // Run through enums and load their coords.
         Colors.updateAll();

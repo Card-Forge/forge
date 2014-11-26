@@ -9,6 +9,7 @@ import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.assets.FSkinTexture;
 import forge.assets.TextRenderer;
 import forge.assets.FSkinColor.Colors;
 import forge.card.CardRenderer;
@@ -63,8 +64,13 @@ public class ConquestMapScreen extends FScreen {
     public void update() {
         model = FModel.getConquest().getModel();
         setHeaderCaption(model.getName() + " - Map");
-        lblCurrentPlane.setText(model.getCurrentPlane().getName());
+        lblCurrentPlane.setText("Plane - " + model.getCurrentPlane().getName());
         btnEndDay.setText("End Day " + model.getDay());
+    }
+
+    @Override
+    public void drawBackground(Graphics g) {
+        g.drawImage(FSkinTexture.BG_PLANAR_MAP, 0, 0, getWidth(), getHeight());
     }
 
     @Override

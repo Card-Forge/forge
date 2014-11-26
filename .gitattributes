@@ -15859,7 +15859,6 @@ forge-gui/res/music/menus/Evil[!!-~]March.mp3 -text
 forge-gui/res/music/menus/Heroic[!!-~]Age.mp3 -text
 forge-gui/res/music/menus/Lord[!!-~]of[!!-~]the[!!-~]Land.mp3 -text
 forge-gui/res/music/menus/The[!!-~]Pyre.mp3 -text
-forge-gui/res/planar_conquest/images/ColorTiles.png -text
 forge-gui/res/quest/bazaar/ape_pet_l1.txt -text
 forge-gui/res/quest/bazaar/ape_pet_l2.txt -text
 forge-gui/res/quest/bazaar/ape_pet_l3.txt -text
@@ -16864,6 +16863,7 @@ forge-gui/res/skins/dark_ascension/font1.ttf -text
 forge-gui/res/skins/dark_ascension/sprite_icons.png -text
 forge-gui/res/skins/default/bg_draft_deck.png -text
 forge-gui/res/skins/default/bg_match.jpg -text
+forge-gui/res/skins/default/bg_planar_map.png -text
 forge-gui/res/skins/default/bg_splash.png -text
 forge-gui/res/skins/default/bg_texture.jpg -text
 forge-gui/res/skins/default/font1.ttf -text
