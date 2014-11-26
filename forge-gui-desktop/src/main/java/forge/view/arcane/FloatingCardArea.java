@@ -46,6 +46,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.swing.ScrollPaneConstants;
+
 
 public class FloatingCardArea extends CardArea {
     private static final long serialVersionUID = 1927906492186378596L;
@@ -131,7 +133,7 @@ public class FloatingCardArea extends CardArea {
     };
 
     private FloatingCardArea(PlayerView player0, ZoneType zone0) {
-        super(new FScrollPane(false));
+        super(new FScrollPane(false, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER));
         window.add(getScrollPane(), "grow, push");
         getScrollPane().setViewportView(this);
         setOpaque(false);

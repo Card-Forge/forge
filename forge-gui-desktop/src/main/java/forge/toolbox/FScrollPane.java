@@ -23,6 +23,9 @@ public class FScrollPane extends SkinnedScrollPane {
     public FScrollPane(boolean showBorder0) {
         this(null, showBorder0);
     }
+    public FScrollPane(boolean showBorder0, final int vertical0, final int horizontal0) {
+        this(null, showBorder0, false, vertical0, horizontal0);
+    }
     public FScrollPane(final Component c0, boolean showBorder0) {
         this(c0, showBorder0, false, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     }
