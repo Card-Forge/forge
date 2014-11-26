@@ -22,7 +22,7 @@ Clicking the zone icon under a player's avatar will now hide the zone window if 
 After the last card is removed from a zone window, that window will now automatically be hidden. An example of this would be casting the last card in the Flashback zone.
 Default size of zone windows has been slightly reduced.
 Prevent horizontal scrollbar appearing in zone windows.
-Reduce flicker when resizing zone windows 
+Reduce flicker when resizing zone windows.
 
 ---------
 New Cards
