@@ -43,7 +43,7 @@ public class ConquestMapScreen extends FScreen {
     private static final FSkinFont REGION_NAME_FONT = FSkinFont.get(15);
     private static final FSkinFont UNLOCK_WINS_FONT = FSkinFont.get(18);
     private static final float COMMANDER_ROW_PADDING = Utils.scale(16);
-    private static final float COMMANDER_ROW_HEIGHT = 2 * Utils.AVG_FINGER_HEIGHT + COMMANDER_ROW_PADDING;
+    private static final float COMMANDER_GAP = Utils.scale(12);
 
     private final RegionDisplay regionDisplay = add(new RegionDisplay());
     private final CommanderRow commanderRow = add(new CommanderRow());
@@ -84,7 +84,10 @@ public class ConquestMapScreen extends FScreen {
         lblCurrentPlane.setSize(btnEndDay.getWidth(), lblCurrentPlane.getAutoSizeBounds().height);
         lblCurrentPlane.setPosition(btnEndDay.getLeft(), btnEndDay.getTop() - lblCurrentPlane.getHeight());
 
-        commanderRow.setBounds(0, lblCurrentPlane.getTop() - COMMANDER_ROW_HEIGHT, width, COMMANDER_ROW_HEIGHT);
+        float numCommanders = commanderRow.panels.length;
+        float commanderWidth = (width - (numCommanders + 3) * COMMANDER_GAP) / numCommanders;
+        float commanderRowHeight = commanderWidth * FCardPanel.ASPECT_RATIO + 2 * COMMANDER_ROW_PADDING;
+        commanderRow.setBounds(0, lblCurrentPlane.getTop() - commanderRowHeight, width, commanderRowHeight);
 
         regionDisplay.setBounds(0, startY, width, commanderRow.getTop() - startY);
     }
@@ -206,10 +209,8 @@ public class ConquestMapScreen extends FScreen {
         protected void doLayout(float width, float height) {
             float panelHeight = height - 2 * COMMANDER_ROW_PADDING;
             float panelWidth = panelHeight / FCardPanel.ASPECT_RATIO;
-            float extraSpace = width - panelWidth * panels.length;
-            float gap = extraSpace / (panels.length + 3);
-            float dx = panelWidth + gap;
-            float x = 2 * gap;
+            float dx = panelWidth + COMMANDER_GAP;
+            float x = 2 * COMMANDER_GAP;
             float y = COMMANDER_ROW_PADDING;
 
             for (int i = 0; i < panels.length; i++) {
