@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Graphics;
 import forge.assets.FImage;
+import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
@@ -29,6 +30,7 @@ import forge.toolbox.FLabel;
 import forge.util.Utils;
 
 public class ConquestMapScreen extends FScreen {
+    private static final Color BACK_COLOR = FSkinColor.fromRGB(1, 2, 2);
     private static final float BORDER_THICKNESS = Utils.scale(1);
     private static final FSkinFont REGION_NAME_FONT = FSkinFont.get(15);
     private static final FSkinFont UNLOCK_WINS_FONT = FSkinFont.get(18);
@@ -63,7 +65,8 @@ public class ConquestMapScreen extends FScreen {
         FImage background = FSkinTexture.BG_PLANAR_MAP;
         float w = getWidth();
         float h = w * background.getHeight() / background.getWidth();
-        g.drawImage(background, 0, getHeight() - h, w, h); //retain proportions, should cover enough to reach region border
+        g.fillRect(BACK_COLOR, 0, 0, w, getHeight());
+        g.drawImage(background, 0, getHeight() - h, w, h); //retain proportions, remaining area will be covered by back color
     }
 
     @Override
