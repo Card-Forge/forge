@@ -8,7 +8,12 @@ Forge Beta: 11-#-2014 ver 1.5.31
 Release Notes
 -------------
 
-
+- Optimized Default Phase Stops -
+The default phase stops have been reduced from all 24 to just 6:
+- Player: Main Phase 1, Declare Blockers, Main Phase 2 (M1, DB, M2)
+- Opponent: Beginning of Combat, Declare Blockers, End of Turn (BC, DB, ET)
+This should optimize the out-of-the-box experience for users and help new users figure out when the optimal time to cast instant-speed effects is.
+You can still customize these by clicking on the phase stop indicator, and your customizations will be remembered.
 
 
 ---------

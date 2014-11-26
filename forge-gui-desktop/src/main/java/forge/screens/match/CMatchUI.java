@@ -126,9 +126,6 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
         view.getLblAvatar().getResizeTimer().start();
     }
 
-    /**
-     * Instantiates at a match.
-     */
     public void initMatch(final List<PlayerView> sortedPlayers0, final boolean allHands0) {
         sortedPlayers = sortedPlayers0;
         allHands = allHands0;
@@ -185,15 +182,12 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
      * Resets all phase buttons in all fields to "inactive", so highlight won't
      * be drawn on them. "Enabled" state remains the same.
      */
-    // This method is in the top-level controller because it affects ALL fields
-    // (not just one).
     public void resetAllPhaseButtons() {
         for (final VField v : view.getFieldViews()) {
             v.getPhaseIndicator().resetPhaseButtons();
         }
     }
 
-    /** @param s0 &emsp; {@link java.lang.String} */
     public void showMessage(final String s0) {
         CPrompt.SINGLETON_INSTANCE.setMessage(s0);
     }
@@ -360,33 +354,21 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
         }
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.menubar.IMenuProvider#getMenus()
-     */
     @Override
     public List<JMenu> getMenus() {
         return new CMatchUIMenus().getMenus();
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
     @Override
     public UiCommand getCommandOnSelect() {
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#initialize()
-     */
     @Override
     public void initialize() {
         Singletons.getControl().getForgeMenu().setProvider(this);
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#update()
-     */
     @Override
     public void update() { }
 
@@ -671,8 +653,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
     }
 
     /**
-     * TODO: Needs to be reworked for efficiency with rest of prefs saves in
-     * codebase.
+     * TODO: Needs to be reworked for efficiency with rest of prefs saves in codebase.
      */
     public void writeMatchPreferences() {
         final ForgePreferences prefs = FModel.getPreferences();
@@ -712,8 +693,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
     }
 
     /**
-     * TODO: Needs to be reworked for efficiency with rest of prefs saves in
-     * codebase.
+     * TODO: Needs to be reworked for efficiency with rest of prefs saves in codebase.
      */
     private void actuateMatchPreferences() {
         final ForgePreferences prefs = FModel.getPreferences();
