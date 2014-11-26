@@ -119,7 +119,7 @@ public class ConquestMapScreen extends FScreen {
             float regionFrameBaseHeight = 25f / 317f * h;
 
             g.startClip(x + regionFrameThickness, y + regionFrameThickness, w - 2 * regionFrameThickness, h - regionFrameThickness - regionFrameBaseHeight);
-            g.drawImage((FImage)region.getArt(), x, y, w, h);
+            g.drawImage((FImage)region.getArt(), x, y, w, h); //TODO: Maximize in frame while retaining proportions
             g.endClip();
 
             g.drawImage(FSkinTexture.BG_MONITOR, x, y, w, h);

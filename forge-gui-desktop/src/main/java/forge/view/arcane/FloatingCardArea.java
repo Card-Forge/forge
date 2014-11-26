@@ -155,7 +155,7 @@ public class FloatingCardArea extends CardArea {
                 }
             });
         }
-        window.setVisible(true);
+        window.setVisible(!window.isVisible());
     }
 
     public void refresh() {
