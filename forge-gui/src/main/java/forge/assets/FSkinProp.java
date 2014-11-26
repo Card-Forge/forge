@@ -28,6 +28,7 @@ public enum FSkinProp {
     BG_TEXTURE (null, PropType.BACKGROUND),
     BG_MATCH (null, PropType.BACKGROUND),
     BG_PLANAR_MAP (null, PropType.BACKGROUND),
+    BG_MONITOR (null, PropType.BACKGROUND),
 
     //colors
     CLR_THEME                   (new int[] {70, 10}, PropType.COLOR),

@@ -10,7 +10,8 @@ import forge.properties.ForgeConstants;
 public enum FSkinTexture implements FImage {
     BG_TEXTURE(ForgeConstants.TEXTURE_BG_FILE, true),
     BG_MATCH(ForgeConstants.MATCH_BG_FILE, false),
-    BG_PLANAR_MAP(ForgeConstants.PLANAR_MAP_BG_FILE, false);
+    BG_PLANAR_MAP(ForgeConstants.PLANAR_MAP_BG_FILE, false),
+    BG_MONITOR(ForgeConstants.MONITOR_BG_FILE, false);
 
     private final String filename;
     private final boolean repeat;

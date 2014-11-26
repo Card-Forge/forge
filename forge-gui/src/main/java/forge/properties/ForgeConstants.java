@@ -80,8 +80,9 @@ public final class ForgeConstants {
     public static final String FONT_FILE              = "font1.ttf";
     public static final String SPLASH_BG_FILE         = "bg_splash.png";
     public static final String MATCH_BG_FILE          = "bg_match.jpg";
-    public static final String PLANAR_MAP_BG_FILE     = "bg_planar_map.png";
     public static final String TEXTURE_BG_FILE        = "bg_texture.jpg";
+    public static final String PLANAR_MAP_BG_FILE     = "bg_planar_map.png";
+    public static final String MONITOR_BG_FILE        = "bg_monitor.png";
     public static final String DRAFT_DECK_IMG_FILE    = "bg_draft_deck.png";
 
     // data tree roots
