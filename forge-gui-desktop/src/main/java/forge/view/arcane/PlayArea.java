@@ -556,9 +556,11 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
         //if panel can't do anything with card selection, try selecting previous panel in stack
         if (stack != null) {
-            int index = stack.indexOf(panel);
-            if (index < stack.size() - 1 && selectCard(stack.get(index + 1), triggerEvent, selectOtherCardsInStack)) {
-                return true;
+            for (int i = stack.indexOf(panel) + 1; i < stack.size(); i++) { //looping forward since panels stored in reverse order
+                CardPanel p = stack.get(i);
+                if (p.getStack() == stack && selectCard(stack.get(i), triggerEvent, selectOtherCardsInStack)) {
+                    return true;
+                }
             }
         }
         //as a last resort try to select attached panels not in stack
