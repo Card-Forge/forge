@@ -45,29 +45,15 @@ import forge.view.arcane.util.CardPanelMouseListener;
  * @version $Id: CardPanelContainer.java 24793 2014-02-10 08:04:02Z Max mtg $
  */
 public abstract class CardPanelContainer extends SkinnedPanel {
-    /** Constant <code>serialVersionUID=-6400018234895548306L</code>. */
     private static final long serialVersionUID = -6400018234895548306L;
-
-    /** Constant <code>DRAG_SMUDGE=10</code>. */
     private static final int DRAG_SMUDGE = 10;
 
-    /**
-     * 
-     */
     private final List<CardPanel> cardPanels = new ArrayList<CardPanel>();
-    /**
-     * 
-     */
     private FScrollPane scrollPane;
-    /**
-     * 
-     */
-    private int cardWidthMin = 50;
 
+    private int cardWidthMin = 50;
     private int cardWidthMax = 300;
-    /**
-     * 
-     */
+
     private CardPanel hoveredPanel;
     private CardPanel mouseDownPanel;
     private CardPanel mouseDragPanel;
@@ -77,13 +63,6 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     private int intialMouseDragX = -1, intialMouseDragY;
     private boolean dragEnabled;
 
-    /**
-     * <p>
-     * Constructor for CardPanelContainer.
-     * </p>
-     * 
-     * @param scrollPane
-     */
     public CardPanelContainer(final FScrollPane scrollPane) {
         this.scrollPane = scrollPane;
         this.setOpaque(true);
@@ -100,7 +79,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         this.addMouseWheelListener(new MouseWheelListener() {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
-                final CardPanel hitPanel = CardPanelContainer.this.getCardPanel(e.getX(), e.getY());
+                final CardPanel hitPanel = getCardPanel(e.getX(), e.getY());
                 if (hitPanel != null) {
                     if (e.getWheelRotation() < 0) {
                         CardZoomer.SINGLETON_INSTANCE.doMouseWheelZoom(hitPanel.getCard());
@@ -121,12 +100,12 @@ public abstract class CardPanelContainer extends SkinnedPanel {
                     return;
                 }
                 this.buttonsDown[button] = true;
-                CardPanelContainer.this.mouseDownPanel = CardPanelContainer.this.getCardPanel(evt.getX(), evt.getY());
+                mouseDownPanel = getCardPanel(evt.getX(), evt.getY());
 
-                if (CardPanelContainer.this.mouseDownPanel != null && CardPanelContainer.this.getMouseDragPanel() == null &&
+                if (mouseDownPanel != null && getMouseDragPanel() == null &&
                         (this.buttonsDown[2] || (this.buttonsDown[1] && this.buttonsDown[3]))) {
                     //zoom card when middle mouse button down or both left and right mouse buttons down
-                    CardZoomer.SINGLETON_INSTANCE.doMouseButtonZoom(CardPanelContainer.this.mouseDownPanel.getCard());
+                    CardZoomer.SINGLETON_INSTANCE.doMouseButtonZoom(mouseDownPanel.getCard());
                 }
             }
 
@@ -138,12 +117,12 @@ public abstract class CardPanelContainer extends SkinnedPanel {
                 }
 
                 boolean zoomed = CardZoomer.SINGLETON_INSTANCE.isZoomerOpen();
-                if (!zoomed && CardPanelContainer.this.dragEnabled) {
-                    CardPanelContainer.this.intialMouseDragX = -1;
-                    if (CardPanelContainer.this.getMouseDragPanel() != null) {
-                        final CardPanel panel = CardPanelContainer.this.getMouseDragPanel();
-                        CardPanelContainer.this.setMouseDragPanel(null);
-                        CardPanelContainer.this.mouseDragEnd(panel, evt);
+                if (!zoomed && dragEnabled) {
+                    intialMouseDragX = -1;
+                    if (getMouseDragPanel() != null) {
+                        final CardPanel panel = getMouseDragPanel();
+                        setMouseDragPanel(null);
+                        mouseDragEnd(panel, evt);
                     }
                 }
 
@@ -160,12 +139,12 @@ public abstract class CardPanelContainer extends SkinnedPanel {
                     return; //don't raise click events if zoom was open
                 }
 
-                final CardPanel panel = CardPanelContainer.this.getCardPanel(evt.getX(), evt.getY());
-                if (panel != null && CardPanelContainer.this.mouseDownPanel == panel) {
+                final CardPanel panel = getCardPanel(evt.getX(), evt.getY());
+                if (panel != null && mouseDownPanel == panel) {
                     if (SwingUtilities.isLeftMouseButton(evt)) {
-                        CardPanelContainer.this.mouseLeftClicked(panel, evt);
+                        mouseLeftClicked(panel, evt);
                     } else if (SwingUtilities.isRightMouseButton(evt)) {
-                        CardPanelContainer.this.mouseRightClicked(panel, evt);
+                        mouseRightClicked(panel, evt);
                     }
                 } else {
                     // reeval cursor hover
@@ -175,7 +154,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
 
             @Override
             public void mouseExited(final MouseEvent evt) {
-                CardPanelContainer.this.mouseOutPanel(evt);
+                mouseOutPanel(evt);
             }
         });
     }
@@ -187,58 +166,58 @@ public abstract class CardPanelContainer extends SkinnedPanel {
                 if (CardZoomer.SINGLETON_INSTANCE.isZoomerOpen() || !SwingUtilities.isLeftMouseButton(evt)) {
                     return; //don't support dragging while zoomed or with mouse button besides left
                 }
-                if (!CardPanelContainer.this.dragEnabled) {
-                    CardPanelContainer.this.mouseOutPanel(evt);
+                if (!dragEnabled) {
+                    mouseOutPanel(evt);
                     return;
                 }
-                if (CardPanelContainer.this.getMouseDragPanel() != null) {
-                    CardPanelContainer.this.mouseDragged(CardPanelContainer.this.getMouseDragPanel(),
-                            CardPanelContainer.this.mouseDragOffsetX, CardPanelContainer.this.mouseDragOffsetY, evt);
+                if (getMouseDragPanel() != null) {
+                    CardPanelContainer.this.mouseDragged(getMouseDragPanel(),
+                            mouseDragOffsetX, mouseDragOffsetY, evt);
                     return;
                 }
                 final int x = evt.getX();
                 final int y = evt.getY();
-                final CardPanel panel = CardPanelContainer.this.getCardPanel(x, y);
+                final CardPanel panel = getCardPanel(x, y);
                 if (panel == null) {
                     return;
                 }
-                if (panel != CardPanelContainer.this.mouseDownPanel) {
+                if (panel != mouseDownPanel) {
                     return;
                 }
-                if (CardPanelContainer.this.intialMouseDragX == -1) {
-                    CardPanelContainer.this.intialMouseDragX = x;
-                    CardPanelContainer.this.intialMouseDragY = y;
+                if (intialMouseDragX == -1) {
+                    intialMouseDragX = x;
+                    intialMouseDragY = y;
                     return;
                 }
-                if ((Math.abs(x - CardPanelContainer.this.intialMouseDragX) < CardPanelContainer.DRAG_SMUDGE)
-                        && (Math.abs(y - CardPanelContainer.this.intialMouseDragY) < CardPanelContainer.DRAG_SMUDGE)) {
+                if ((Math.abs(x - intialMouseDragX) < CardPanelContainer.DRAG_SMUDGE)
+                        && (Math.abs(y - intialMouseDragY) < CardPanelContainer.DRAG_SMUDGE)) {
                     return;
                 }
-                CardPanelContainer.this.mouseDownPanel = null;
-                CardPanelContainer.this.setMouseDragPanel(panel);
-                CardPanelContainer.this.mouseDragOffsetX = panel.getX() - CardPanelContainer.this.intialMouseDragX;
-                CardPanelContainer.this.mouseDragOffsetY = panel.getY() - CardPanelContainer.this.intialMouseDragY;
-                CardPanelContainer.this.mouseDragStart(CardPanelContainer.this.getMouseDragPanel(), evt);
+                mouseDownPanel = null;
+                setMouseDragPanel(panel);
+                mouseDragOffsetX = panel.getX() - intialMouseDragX;
+                mouseDragOffsetY = panel.getY() - intialMouseDragY;
+                mouseDragStart(getMouseDragPanel(), evt);
             }
 
             @Override
             public void mouseMoved(final MouseEvent evt) {
-                final CardPanel hitPanel = CardPanelContainer.this.getCardPanel(evt.getX(), evt.getY());
+                final CardPanel hitPanel = getCardPanel(evt.getX(), evt.getY());
 
-                if (CardPanelContainer.this.hoveredPanel == hitPanel) { // no big change
+                if (hoveredPanel == hitPanel) { // no big change
                     return;
                 }
 
-                if (CardPanelContainer.this.hoveredPanel != null) {
-                    CardPanelContainer.this.mouseOutPanel(evt); // hovered <= null is inside
+                if (hoveredPanel != null) {
+                    mouseOutPanel(evt); // hovered <= null is inside
                 }
 
                 if (hitPanel != null) {
                     CMatchUI.SINGLETON_INSTANCE.setCard(hitPanel.getCard());
 
-                    CardPanelContainer.this.hoveredPanel = hitPanel;
-                    CardPanelContainer.this.hoveredPanel.setSelected(true);
-                    CardPanelContainer.this.mouseOver(hitPanel, evt);
+                    hoveredPanel = hitPanel;
+                    hoveredPanel.setSelected(true);
+                    mouseOver(hitPanel, evt);
                 }
 
                 // System.err.format("%d %d over %s%n", evt.getX(), evt.getY(), hitPanel == null ? null : hitPanel.getCard().getName());
@@ -248,14 +227,6 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         return mml;
     }
 
-    /**
-     * <p>
-     * mouseOutPanel.
-     * </p>
-     * 
-     * @param evt
-     *            a {@link java.awt.event.MouseEvent} object.
-     */
     private void mouseOutPanel(final MouseEvent evt) {
         if (this.hoveredPanel == null) {
             return;
@@ -265,30 +236,8 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         this.hoveredPanel = null;
     }
 
-    /*
-     * public void resetDrag(){ mouseDragPanel = null; invalidate(); };
-     */
-    /**
-     * <p>
-     * getCardPanel.
-     * </p>
-     * 
-     * @param x
-     *            a int.
-     * @param y
-     *            a int.
-     * @return a {@link forge.view.arcane.CardPanel} object.
-     */
     protected abstract CardPanel getCardPanel(int x, int y);
 
-    /**
-<<<<<<< .mine
-     * Must call from the Swing event thread.
-     * 
-     * @param card
-     *            a {@link forge.game.card.Card} object.
-     * @return a {@link forge.view.arcane.CardPanel} object.
-     */
     public CardPanel addCard(final CardView card) {
         final CardPanel placeholder = new CardPanel(card);
         placeholder.setDisplayEnabled(false);
@@ -302,17 +251,6 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         return placeholder;
     }
 
-    /**
-=======
->>>>>>> .r27195
-     * <p>
-     * getCardPanel.
-     * </p>
-     * 
-     * @param gameCardID
-     *            a int.
-     * @return a {@link forge.view.arcane.CardPanel} object.
-     */
     public final CardPanel getCardPanel(final int gameCardID) {
         for (final CardPanel panel : this.getCardPanels()) {
             if (panel.getCard().getId() == gameCardID) {
@@ -322,38 +260,23 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         return null;
     }
 
-    /**
-     * <p>
-     * removeCardPanel.
-     * </p>
-     * 
-     * @param fromPanel
-     *            a {@link forge.view.arcane.CardPanel} object.
-     */
     public final void removeCardPanel(final CardPanel fromPanel) {
         FThreads.assertExecutedByEdt(true);
-        if (CardPanelContainer.this.getMouseDragPanel() != null) {
+        if (getMouseDragPanel() != null) {
             CardPanel.getDragAnimationPanel().setVisible(false);
             CardPanel.getDragAnimationPanel().repaint();
-            CardPanelContainer.this.getCardPanels().remove(CardPanel.getDragAnimationPanel());
-            CardPanelContainer.this.remove(CardPanel.getDragAnimationPanel());
-            CardPanelContainer.this.setMouseDragPanel(null);
+            getCardPanels().remove(CardPanel.getDragAnimationPanel());
+            remove(CardPanel.getDragAnimationPanel());
+            setMouseDragPanel(null);
         }
-        CardPanelContainer.this.hoveredPanel = null;
+        hoveredPanel = null;
         fromPanel.dispose();
-        CardPanelContainer.this.getCardPanels().remove(fromPanel);
-        CardPanelContainer.this.remove(fromPanel);
-        CardPanelContainer.this.invalidate();
-        CardPanelContainer.this.repaint();
+        getCardPanels().remove(fromPanel);
+        remove(fromPanel);
+        invalidate();
+        repaint();
     }
 
-    /**
-     * <p>
-     * setCardPanels.
-     * </p>
-     * 
-     * @param cardPanels
-     */
     public final void setCardPanels(List<CardPanel> cardPanels) {
         if (cardPanels.size() == 0) {
             clear();
@@ -377,240 +300,93 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         this.repaint();
     }
 
-    /**
-     * <p>
-     * clear.
-     * </p>
-     */
     public final void clear() {
         FThreads.assertExecutedByEdt(true);
-        for (CardPanel p : CardPanelContainer.this.getCardPanels()) {
+        for (CardPanel p : getCardPanels()) {
             p.dispose();
         }
-        CardPanelContainer.this.getCardPanels().clear();
-        CardPanelContainer.this.removeAll();
-        CardPanelContainer.this.setPreferredSize(new Dimension(0, 0));
-        CardPanelContainer.this.invalidate();
-        CardPanelContainer.this.getParent().validate();
-        CardPanelContainer.this.repaint();
+        getCardPanels().clear();
+        removeAll();
+        setPreferredSize(new Dimension(0, 0));
+        invalidate();
+        getParent().validate();
+        repaint();
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>scrollPane</code>.
-     * </p>
-     * 
-     * @return a {@link forge.toolbox.FScrollPane} object.
-     */
     public final FScrollPane getScrollPane() {
         return this.scrollPane;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>cardWidthMin</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
     public final int getCardWidthMin() {
         return this.cardWidthMin;
     }
 
-    /**
-     * <p>
-     * Setter for the field <code>cardWidthMin</code>.
-     * </p>
-     * 
-     * @param cardWidthMin
-     *            a int.
-     */
     public final void setCardWidthMin(final int cardWidthMin) {
         this.cardWidthMin = cardWidthMin;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>cardWidthMax</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
     public final int getCardWidthMax() {
         return this.cardWidthMax;
     }
 
-    /**
-     * <p>
-     * Setter for the field <code>cardWidthMax</code>.
-     * </p>
-     * 
-     * @param cardWidthMax
-     *            a int.
-     */
     public final void setCardWidthMax(final int cardWidthMax) {
         this.cardWidthMax = cardWidthMax;
     }
 
-    /**
-     * <p>
-     * isDragEnabled.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean isDragEnabled() {
         return this.dragEnabled;
     }
 
-    /**
-     * <p>
-     * Setter for the field <code>dragEnabled</code>.
-     * </p>
-     * 
-     * @param dragEnabled
-     *            a boolean.
-     */
     public final void setDragEnabled(final boolean dragEnabled) {
         this.dragEnabled = dragEnabled;
     }
 
-    /**
-     * <p>
-     * addCardPanelMouseListener.
-     * </p>
-     * 
-     * @param listener
-     *            a {@link forge.view.arcane.util.CardPanelMouseListener} object.
-     */
     public final void addCardPanelMouseListener(final CardPanelMouseListener listener) {
         this.listeners.add(listener);
     }
 
-    /**
-     * <p>
-     * mouseLeftClicked.
-     * </p>
-     * 
-     * @param panel
-     *            a {@link forge.view.arcane.CardPanel} object.
-     * @param evt
-     *            a {@link java.awt.event.MouseEvent} object.
-     */
     public void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
         for (final CardPanelMouseListener listener : this.listeners) {
             listener.mouseLeftClicked(panel, evt);
         }
     }
 
-    /**
-     * <p>
-     * mouseRightClicked.
-     * </p>
-     * 
-     * @param panel
-     *            a {@link forge.view.arcane.CardPanel} object.
-     * @param evt
-     *            a {@link java.awt.event.MouseEvent} object.
-     */
     public void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
         for (final CardPanelMouseListener listener : this.listeners) {
             listener.mouseRightClicked(panel, evt);
         }
     }
 
-    /**
-     * <p>
-     * mouseDragEnd.
-     * </p>
-     * 
-     * @param dragPanel
-     *            a {@link forge.view.arcane.CardPanel} object.
-     * @param evt
-     *            a {@link java.awt.event.MouseEvent} object.
-     */
     public void mouseDragEnd(final CardPanel dragPanel, final MouseEvent evt) {
         for (final CardPanelMouseListener listener : this.listeners) {
             listener.mouseDragEnd(dragPanel, evt);
         }
     }
 
-    /**
-     * <p>
-     * mouseDragged.
-     * </p>
-     * 
-     * @param dragPanel
-     *            a {@link forge.view.arcane.CardPanel} object.
-     * @param dragOffsetX
-     *            a int.
-     * @param dragOffsetY
-     *            a int.
-     * @param evt
-     *            a {@link java.awt.event.MouseEvent} object.
-     */
-    public void mouseDragged(final CardPanel dragPanel, final int dragOffsetX, final int dragOffsetY,
-            final MouseEvent evt) {
+    public void mouseDragged(final CardPanel dragPanel, final int dragOffsetX, final int dragOffsetY, final MouseEvent evt) {
         for (final CardPanelMouseListener listener : this.listeners) {
             listener.mouseDragged(this.getMouseDragPanel(), this.mouseDragOffsetX, this.mouseDragOffsetY, evt);
         }
     }
 
-    /**
-     * <p>
-     * mouseDragStart.
-     * </p>
-     * 
-     * @param dragPanel
-     *            a {@link forge.view.arcane.CardPanel} object.
-     * @param evt
-     *            a {@link java.awt.event.MouseEvent} object.
-     */
     public void mouseDragStart(final CardPanel dragPanel, final MouseEvent evt) {
         for (final CardPanelMouseListener listener : this.listeners) {
             listener.mouseDragStart(this.getMouseDragPanel(), evt);
         }
     }
 
-    /**
-     * <p>
-     * mouseOut.
-     * </p>
-     * 
-     * @param panel
-     *            a {@link forge.view.arcane.CardPanel} object.
-     * @param evt
-     *            a {@link java.awt.event.MouseEvent} object.
-     */
     public final void mouseOut(final CardPanel panel, final MouseEvent evt) {
         for (final CardPanelMouseListener listener : this.listeners) {
             listener.mouseOut(this.hoveredPanel, evt);
         }
     }
 
-    /**
-     * <p>
-     * mouseOver.
-     * </p>
-     * 
-     * @param panel
-     *            a {@link forge.view.arcane.CardPanel} object.
-     * @param evt
-     *            a {@link java.awt.event.MouseEvent} object.
-     */
     public void mouseOver(final CardPanel panel, final MouseEvent evt) {
         for (final CardPanelMouseListener listener : this.listeners) {
             listener.mouseOver(panel, evt);
         }
     }
 
-    /**
-     * <p>
-     * getCardFromMouseOverPanel.
-     * </p>
-     * 
-     * @return a {@link forge.game.card.Card} object.
-     */
     public final CardView getHoveredCard(final MouseEvent e) {
         // re-evaluate cursor position so if we hovered over a card, alt-tabbed out of the application, then
         // clicked back on the application somewhere else, the last hovered card won't register the click
@@ -627,31 +403,14 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         return (null == p || p != hoveredPanel) ? null : p.getCard();
     }
 
-
-    /**
-     * Gets the card panels.
-     * 
-     * @return the cardPanels
-     */
     public final List<CardPanel> getCardPanels() {
         return this.cardPanels;
     }
 
-    /**
-     * Gets the mouse drag panel.
-     * 
-     * @return the mouseDragPanel
-     */
     public CardPanel getMouseDragPanel() {
         return this.mouseDragPanel;
     }
 
-    /**
-     * Sets the mouse drag panel.
-     * 
-     * @param mouseDragPanel0
-     *            the mouseDragPanel to set
-     */
     public void setMouseDragPanel(final CardPanel mouseDragPanel0) {
         this.mouseDragPanel = mouseDragPanel0;
     }
