@@ -20,8 +20,13 @@ package forge.view.arcane;
 import forge.Singletons;
 import forge.assets.FSkinProp;
 import forge.game.card.CardView;
+import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
+import forge.gui.framework.SDisplayUtil;
+import forge.model.FModel;
+import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CPrompt;
 import forge.toolbox.FMouseAdapter;
@@ -34,6 +39,8 @@ import forge.view.FDialog;
 import forge.view.FFrame;
 
 import java.awt.Component;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,6 +50,9 @@ import java.util.List;
 public class FloatingCardArea extends CardArea {
     private static final long serialVersionUID = 1927906492186378596L;
 
+    private static final String COORD_DELIM = ","; 
+
+    private static final ForgePreferences prefs = FModel.getPreferences();
     private static final HashMap<Integer, FloatingCardArea> floatingAreas = new HashMap<Integer, FloatingCardArea>();
 
     private static int getKey(PlayerView player, ZoneType zone) {
@@ -90,18 +100,28 @@ public class FloatingCardArea extends CardArea {
     private final ZoneType zone;
     private PlayerView player;
     private String title;
+    private FPref locPref;
+    private boolean hasBeenShown, locLoaded;
 
     @SuppressWarnings("serial")
     private final FDialog window = new FDialog(false, true, "0") {
         @Override
         public void setLocationRelativeTo(Component c) {
-            if (hasBeenShown) { return; } //don't change location this way if dialog has already been shown
+            //don't change location this way if dialog has already been shown or location was loaded from preferences
+            if (hasBeenShown || locLoaded) { return; }
             super.setLocationRelativeTo(c);
         }
 
         @Override
         public void setVisible(boolean b0) {
             if (isVisible() == b0) { return; }
+            if (!b0 && hasBeenShown && locPref != null) {
+                //update preference before hiding window, as otherwise its location will be 0,0
+                prefs.setPref(locPref,
+                        getX() + COORD_DELIM + getY() + COORD_DELIM +
+                        getWidth() + COORD_DELIM + getHeight());
+                //don't call prefs.save(), instead allowing them to be saved when match ends
+            }
             super.setVisible(b0);
             if (b0) {
                 refresh();
@@ -109,7 +129,6 @@ public class FloatingCardArea extends CardArea {
             }
         }
     };
-    private boolean hasBeenShown;
 
     private FloatingCardArea(PlayerView player0, ZoneType zone0) {
         super(new FScrollPane(false));
@@ -129,7 +148,11 @@ public class FloatingCardArea extends CardArea {
         case Library:
             window.setIconImage(FSkin.getImage(FSkinProp.IMG_ZONE_LIBRARY));
             break;
+        case Flashback:
+            window.setIconImage(FSkin.getImage(FSkinProp.IMG_ZONE_FLASHBACK));
+            break;
         default:
+            locPref = null;
             break;
         }
         zone = zone0;
@@ -141,13 +164,33 @@ public class FloatingCardArea extends CardArea {
         if (player == player0) { return; }
         player = player0;
         title = Lang.getPossessedObject(player0.getName(), zone.name()) + " (%d)";
+
+        boolean isAi = Player.get(player0).getController().isAI();
+        switch (zone) {
+        case Exile:
+            locPref = isAi ? FPref.ZONE_LOC_AI_EXILE : FPref.ZONE_LOC_HUMAN_EXILE;
+            break;
+        case Graveyard:
+            locPref = isAi ? FPref.ZONE_LOC_AI_GRAVEYARD : FPref.ZONE_LOC_HUMAN_GRAVEYARD;
+            break;
+        case Hand:
+            locPref = isAi ? FPref.ZONE_LOC_AI_HAND : FPref.ZONE_LOC_HUMAN_HAND;
+            break;
+        case Library:
+            locPref = isAi ? FPref.ZONE_LOC_AI_LIBRARY : FPref.ZONE_LOC_HUMAN_LIBRARY;
+            break;
+        case Flashback:
+            locPref = isAi ? FPref.ZONE_LOC_AI_FLASHBACK : FPref.ZONE_LOC_HUMAN_FLASHBACK;
+            break;
+        default:
+            locPref = null;
+            break;
+        }
     }
 
     private void showWindow() {
-        if (!hasBeenShown) { //only set size if first time showing window
-            FFrame mainFrame = Singletons.getView().getFrame();
-            window.setSize(mainFrame.getWidth() / 4, mainFrame.getHeight() * 2 / 3);
-
+        if (!hasBeenShown) {
+            loadLocation();
             window.getTitleBar().addMouseListener(new FMouseAdapter() {
                 @Override
                 public void onLeftDoubleClick(MouseEvent e) {
@@ -156,6 +199,57 @@ public class FloatingCardArea extends CardArea {
             });
         }
         window.setVisible(!window.isVisible());
+    }
+
+    private void loadLocation() {
+        if (locPref != null) {
+            String value = prefs.getPref(locPref);
+            if (value.length() > 0) {
+                String[] coords = value.split(COORD_DELIM);
+                if (coords.length == 4) {
+                    try {
+                        int x = Integer.parseInt(coords[0]);
+                        int y = Integer.parseInt(coords[1]);
+                        int w = Integer.parseInt(coords[2]);
+                        int h = Integer.parseInt(coords[3]);
+    
+                        //ensure the window is accessible
+                        int centerX = x + w / 2;
+                        int centerY = y + h / 2;
+                        Rectangle screenBounds = SDisplayUtil.getScreenBoundsForPoint(new Point(centerX, centerY)); 
+                        if (centerX < screenBounds.x) {
+                            x = screenBounds.x;
+                        }
+                        else if (centerX > screenBounds.x + screenBounds.width) {
+                            x = screenBounds.x + screenBounds.width - w;
+                            if (x < screenBounds.x) {
+                                x = screenBounds.x;
+                            }
+                        }
+                        if (centerY < screenBounds.y) {
+                            y = screenBounds.y;
+                        }
+                        else if (centerY > screenBounds.y + screenBounds.height) {
+                            y = screenBounds.y + screenBounds.height - h;
+                            if (y < screenBounds.y) {
+                                y = screenBounds.y;
+                            }
+                        }
+                        window.setBounds(x, y, w, h);
+                        locLoaded = true;
+                        return;
+                    }
+                    catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+                prefs.setPref(locPref, ""); //clear value if invalid
+                prefs.save();
+            }
+        }
+        //fallback default size
+        FFrame mainFrame = Singletons.getView().getFrame();
+        window.setSize(mainFrame.getWidth() / 4, mainFrame.getHeight() * 2 / 3);
     }
 
     public void refresh() {

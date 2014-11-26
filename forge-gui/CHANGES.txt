@@ -16,6 +16,10 @@ This should optimize the out-of-the-box experience for users and help new users 
 You can still customize these by clicking on the phase stop indicator, and your customizations will be remembered.
 
 
+- Zone Window Improvements -
+Popup windows for zones (Hand, Library, Graveyard, Exile, Flashback) will now remember their position and size between sessions. Human and AI zones will each be remembered separately.
+Clicking the zone icon under a player's avatar will now hide the zone window if its currently open.
+
 ---------
 New Cards
 ---------

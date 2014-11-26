@@ -131,6 +131,18 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         PHASE_HUMAN_EOT ("false"),
         PHASE_HUMAN_CLEANUP ("false"),
 
+        ZONE_LOC_HUMAN_HAND(""),
+        ZONE_LOC_HUMAN_LIBRARY(""),
+        ZONE_LOC_HUMAN_GRAVEYARD(""),
+        ZONE_LOC_HUMAN_EXILE(""),
+        ZONE_LOC_HUMAN_FLASHBACK(""),
+
+        ZONE_LOC_AI_HAND(""),
+        ZONE_LOC_AI_LIBRARY(""),
+        ZONE_LOC_AI_GRAVEYARD(""),
+        ZONE_LOC_AI_EXILE(""),
+        ZONE_LOC_AI_FLASHBACK(""),
+
         SHORTCUT_SHOWSTACK ("83"),
         SHORTCUT_SHOWCOMBAT ("67"),
         SHORTCUT_SHOWCONSOLE ("76"),
