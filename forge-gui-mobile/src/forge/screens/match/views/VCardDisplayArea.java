@@ -260,11 +260,11 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         @Override
         public boolean tap(float x, float y, int count) {
             if (renderedCardContains(x, y)) {
-                final boolean isDoubleTap = (count % 2 == 0);
+                final boolean selectOtherCardsInStack = (count % 2 == 0);
                 ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread in case a dialog needs to be shown
                     @Override
                     public void run() {
-                        if (!selectCard(isDoubleTap)) {
+                        if (!selectCard(selectOtherCardsInStack)) {
                             //if no cards in stack can be selected, just show zoom/details for card
                             CardZoom.show(getCard());
                         }
@@ -275,17 +275,17 @@ public abstract class VCardDisplayArea extends VDisplayArea {
             return false;
         }
 
-        public boolean selectCard(boolean isDoubleTap) {
-            if (MatchUtil.getHumanController().selectCard(getCard(), getOtherCardsToSelect(isDoubleTap), null)) {
+        public boolean selectCard(boolean selectOtherCardsInStack) {
+            if (MatchUtil.getHumanController().selectCard(getCard(), getOtherCardsToSelect(selectOtherCardsInStack), null)) {
                 return true;
             }
             //if panel can't do anything with card selection, try selecting previous panel in stack
-            if (prevPanelInStack != null && prevPanelInStack.selectCard(isDoubleTap)) {
+            if (prevPanelInStack != null && prevPanelInStack.selectCard(selectOtherCardsInStack)) {
                 return true;
             }
             //as a last resort try to select attached panels
             for (CardAreaPanel panel : attachedPanels) {
-                if (panel.selectCard(isDoubleTap)) {
+                if (panel.selectCard(selectOtherCardsInStack)) {
                     return true;
                 }
             }
@@ -315,8 +315,8 @@ public abstract class VCardDisplayArea extends VDisplayArea {
             }
         }
 
-        private List<CardView> getOtherCardsToSelect(boolean isDoubleTap) {
-            if (!isDoubleTap) { return null; }
+        private List<CardView> getOtherCardsToSelect(boolean selectOtherCardsInStack) {
+            if (!selectOtherCardsInStack) { return null; }
 
             //on double-tap select all other cards in stack if any
             if (prevPanelInStack == null && nextPanelInStack == null) { return null; }
@@ -333,7 +333,6 @@ public abstract class VCardDisplayArea extends VDisplayArea {
                 cards.add(panel.getCard());
                 panel = panel.prevPanelInStack;
             }
-
             return cards;
         }
 

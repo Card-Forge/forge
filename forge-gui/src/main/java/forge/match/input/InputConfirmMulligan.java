@@ -117,7 +117,6 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
         boolean isSerumPowder = c0.getName().equals("Serum Powder");
         boolean isLegalChoice = fromHand && (isCommander || isSerumPowder);
         if (!isLegalChoice || cardSelectLocked) {
-            flashIncorrectAction();
             return false;
         }
 

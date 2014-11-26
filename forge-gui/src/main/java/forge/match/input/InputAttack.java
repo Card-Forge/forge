@@ -147,7 +147,7 @@ public class InputAttack extends InputSyncronizedBase {
             setCurrentDefender(selected);
         }
         else {
-            flashIncorrectAction(); // cannot attack that player
+            MatchUtil.getController().flashIncorrectAction(); // cannot attack that player
         }
     }
 
@@ -176,7 +176,6 @@ public class InputAttack extends InputSyncronizedBase {
                         declareAttacker(card);
                     }
                     else {
-                        flashIncorrectAction();
                         validAction = false;
                     }
                 }
@@ -201,7 +200,6 @@ public class InputAttack extends InputSyncronizedBase {
             if (activeBand != null && !activeBand.canJoinBand(card)) {
                 activateBand(null);
                 updateMessage();
-                flashIncorrectAction();
                 return false;
             }
 
@@ -214,7 +212,6 @@ public class InputAttack extends InputSyncronizedBase {
             return true;
         }
 
-        flashIncorrectAction();
         return false;
     }
 

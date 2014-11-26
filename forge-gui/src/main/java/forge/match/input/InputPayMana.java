@@ -68,7 +68,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     @Override
     protected boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
         if (card.getManaAbilities().isEmpty()) {
-            flashIncorrectAction();
             return false;
         }
         // only tap card if the mana is needed
@@ -76,10 +75,11 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     }
 
     @Override
-    public void selectAbility(final SpellAbility ab) {
+    public boolean selectAbility(final SpellAbility ab) {
         if (ab != null && ab.isManaAbility()) {
-            activateManaAbility(ab.getHostCard(), manaCost, ab);
+            return activateManaAbility(ab.getHostCard(), manaCost, ab);
         }
+        return false;
     }
 
     public List<SpellAbility> getUsefulManaAbilities(Card card) {

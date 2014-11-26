@@ -74,7 +74,8 @@ public class InputLockUI implements Input {
         return false;
     }
     @Override
-    public void selectAbility(SpellAbility ab) {
+    public boolean selectAbility(SpellAbility ab) {
+        return false;
     }
     @Override
     public void selectPlayer(Player player, ITriggerEvent triggerEvent) {

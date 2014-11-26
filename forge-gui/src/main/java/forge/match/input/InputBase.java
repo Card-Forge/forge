@@ -141,7 +141,9 @@ public abstract class InputBase implements java.io.Serializable, Input {
     }
 
     @Override
-    public void selectAbility(final SpellAbility ab) { }
+    public boolean selectAbility(final SpellAbility ab) {
+        return false;
+    }
 
     @Override
     public final void selectButtonCancel() {
@@ -171,10 +173,6 @@ public abstract class InputBase implements java.io.Serializable, Input {
     // to remove need for CMatchUI dependence
     protected final void showMessage(final String message) {
         MatchUtil.getController().showPromptMessage(getOwner(), message);
-    }
-
-    protected final void flashIncorrectAction() {
-        MatchUtil.getController().flashIncorrectAction();
     }
 
     protected String getTurnPhasePriorityMessage(final Game game) {

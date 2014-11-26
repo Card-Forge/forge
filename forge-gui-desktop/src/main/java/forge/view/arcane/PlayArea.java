@@ -32,6 +32,7 @@ import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
+import forge.match.MatchUtil;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CPrompt;
 import forge.toolbox.FScrollPane;
@@ -530,22 +531,46 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     }
 
     private void selectCard(final CardPanel panel, final MouseEvent evt) {
+        //on left double-click or Shift+left, select all other cards in stack if any
+        selectCard(panel, new MouseTriggerEvent(evt),
+                evt.getButton() == 1 && (evt.isShiftDown() || evt.getClickCount() == 2));
+    }
+
+    private boolean selectCard(final CardPanel panel, final MouseTriggerEvent triggerEvent, final boolean selectOtherCardsInStack) {
         List<CardView> otherCardViewsToSelect = null;
-        if (evt.getButton() == 1 && (evt.isShiftDown() || evt.getClickCount() == 2)) {
-            //on left double-click or Shift+left, select all other cards in stack if any
-            List<CardPanel> stack = panel.getStack();
+        List<CardPanel> stack = panel.getStack();
+        if (selectOtherCardsInStack) {
             if (stack != null) {
-                stack = new ArrayList<CardPanel>(stack);
-                stack.remove(panel);
-                if (stack.size() > 0) {
-                    otherCardViewsToSelect = new ArrayList<CardView>();
-                    for (CardPanel p : stack) {
+                for (CardPanel p : stack) {
+                    if (p != panel && p.getCard() != null) {
+                        if (otherCardViewsToSelect == null) {
+                            otherCardViewsToSelect = new ArrayList<CardView>();
+                        }
                         otherCardViewsToSelect.add(p.getCard());
                     }
                 }
             }
         }
-        CPrompt.SINGLETON_INSTANCE.selectCard(panel.getCard(), otherCardViewsToSelect, new MouseTriggerEvent(evt));
+        if (CPrompt.SINGLETON_INSTANCE.selectCard(panel.getCard(), otherCardViewsToSelect, triggerEvent)) {
+            return true;
+        }
+        //if panel can't do anything with card selection, try selecting previous panel in stack
+        if (stack != null) {
+            int index = stack.indexOf(panel);
+            if (index < stack.size() - 1 && selectCard(stack.get(index + 1), triggerEvent, selectOtherCardsInStack)) {
+                return true;
+            }
+        }
+        //as a last resort try to select attached panels not in stack
+        for (CardPanel p : panel.getAttachedPanels()) {
+            if (p.getStack() != stack) { //ensure same panel not checked more than once
+                if (selectCard(p, triggerEvent, selectOtherCardsInStack)) {
+                    return true;
+                }
+            }
+        }
+        MatchUtil.getController().flashIncorrectAction();
+        return false;
     }
 
     public void setupPlayZone() {
@@ -837,6 +862,12 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 return true;
             }
             return false;
+        }
+
+        @Override
+        public void add(final int index, final CardPanel panel) {
+            super.add(index, panel);
+            panel.setStack(this);
         }
 
         private void addAttachedPanels(final CardPanel panel) {

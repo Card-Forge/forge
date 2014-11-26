@@ -41,7 +41,6 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
     protected boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
         if (!availableCreatures.contains(card)) {
             // Not in untapped creatures list provided. Not a legal Convoke selection.
-            flashIncorrectAction();
             return false;
         }
 
@@ -52,7 +51,6 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
             onSelectStateChanged(card, false);
         }
         else {
-
             byte chosenColor = player.getController().chooseColorAllowColorless("Convoke " + card.toString() + "  for which color?", card, CardUtil.getColors(card));
             
             if (remainingCost.getColorlessManaAmount() > 0 && (chosenColor == 0 || !remainingCost.needsColor(chosenColor, player.getManaPool()))) {
@@ -67,7 +65,7 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
                     }
                 }
                 showMessage("The colors provided by " + card.toString() + " you've chosen cannot be used to decrease the manacost of " + remainingCost.toString());
-                flashIncorrectAction();
+                return false;
             }
         }
 

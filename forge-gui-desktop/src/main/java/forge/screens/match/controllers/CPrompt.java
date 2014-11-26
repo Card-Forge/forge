@@ -108,8 +108,8 @@ public enum CPrompt implements ICDoc {
         MatchUtil.getHumanController().selectPlayer(playerView, triggerEvent);
     }
 
-    public void selectCard(final CardView cardView, final List<CardView> otherCardViewsToSelect, final ITriggerEvent triggerEvent) {
-        MatchUtil.getHumanController().selectCard(cardView, otherCardViewsToSelect, triggerEvent);
+    public boolean selectCard(final CardView cardView, final List<CardView> otherCardViewsToSelect, final ITriggerEvent triggerEvent) {
+        return MatchUtil.getHumanController().selectCard(cardView, otherCardViewsToSelect, triggerEvent);
     }
 
     public void selectAbility(final SpellAbility sa) {
