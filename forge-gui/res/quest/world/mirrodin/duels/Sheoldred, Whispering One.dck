@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Sheoldred, Whispering One
+Title=Sheoldred, Whispering One
+Difficulty=medium
+Description=Black & Red mana once again unite, resulting in a plethora of removal
+Icon=Sheoldred.jpg
+Deck Type=constructed
+[Main]
+3 Blistergrub|SOM
+2 Blisterstick Shaman|MBS
+2 Caustic Hound|MBS
+1 Chancellor of the Dross|NPH
+2 Despise|NPH
+2 Enslave|NPH
+2 Entomber Exarch|NPH
+2 Flameborn Viron|NPH
+2 Furnace Scamp|NPH
+1 Geth's Verdict|NPH
+1 Go for the Throat|MBS
+2 Morbid Plunder|MBS
+11 Mountain|SOM|1
+2 Parasitic Implant|NPH
+2 Phyrexian Rager|MBS
+2 Scoria Elemental|SOM
+1 Sheoldred, Whispering One|NPH
+2 Shrine of Burning Rage|NPH
+13 Swamp|SOM|1
+2 Tormentor Exarch|NPH
+1 Tower of Calamities|SOM
+2 Whipflare|NPH
+[sideboard]

@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Arcboundless
+Title=Arcboundless
+Difficulty=medium
+Description=The opponent plays an Arcbound deck where the dying pass on their strength to the living 
+Icon=Arcboundless.jpg
+Deck Type=constructed
+[Main]
+4 Arcbound Bruiser|DST
+2 Arcbound Crusher|DST
+3 Arcbound Hybrid|DST
+1 Arcbound Lancer|DST
+1 Arcbound Overseer|DST
+4 Arcbound Slith|DST
+4 Arcbound Stinger|DST
+4 Arcbound Worker|DST
+2 Cobalt Golem|MRD
+2 Dragon Blood|MRD
+2 Dross Scorpion|MRD
+23 Island|MRD|1
+1 Juggernaut|LEA
+3 Neurok Familiar|MRD
+1 Spire Golem|DST
+1 Ur-Golem's Eye
+2 Vedalken Engineer|DST
+[sideboard]

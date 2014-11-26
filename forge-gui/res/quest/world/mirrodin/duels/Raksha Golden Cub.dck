@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Raksha Golden Cub
+Title=Raksha Golden Cub
+Difficulty=medium
+Description=“Some believe that Raksha, youngest of the kha, is the reincarnation of Dakan, the first and mightiest of leonin leaders.”
+Icon=Raksha.jpg
+Deck Type=constructed
+[Main]
+2 Accorder's Shield|SOM
+1 Argentum Armor|SOM
+4 Cloudpost|MRD
+4 Glimmerpost|SOM
+2 Heartseeker|DST
+2 Kemba's Skyguard|SOM
+1 Leonin Abunas|MRD
+2 Leonin Den-Guard|MRD
+2 Leonin Elder|MRD
+2 Leonin Relic-Warder|MBS
+3 Leonin Scimitar|MRD
+1 Leonin Shikari|DST
+1 Leonin Skyhunter|MBS
+16 Plains|MRD|1
+4 Raksha Golden Cub|5DN
+2 Scythe of the Wretched|MRD
+2 Skyhunter Cub|MRD
+2 Skyhunter Patrol
+1 Skyhunter Skirmisher|5DN
+1 Steelshaper's Gift|5DN
+2 Sunspear Shikari|SOM
+1 Taj-Nar Swordsmith|MRD
+2 Worldslayer|MRD
+[sideboard]

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Wall-E
+Title=Wall-E
+Difficulty=easy
+Description=Wall-E's aRMY
+Icon=Wall-E.jpg
+Deck Type=constructed
+[Main]
+2 Alpha Myr|MRD
+2 Arrest|MRD
+1 Auriok Edgewright|SOM
+2 Darksteel Myr|SOM
+1 Darksteel Sentinel|SOM
+1 Dispense Justice|SOM
+2 Ghalma's Warden|SOM
+1 Gold Myr|SOM
+2 Hovermyr|NPH
+1 Indomitable Archangel|SOM
+2 Kemba's Skyguard|SOM
+1 Myr Galvanizer|SOM
+3 Myr Moonvessel|DST
+2 Myrsmith|SOM
+2 Omega Myr|MRD
+3 Origin Spellbomb|SOM
+1 Palladium Myr|SOM
+1 Perilous Myr|SOM
+24 Plains|MRD|1
+1 Razor Hippogriff|SOM
+1 Revoke Existence|SOM
+2 Seize the Initiative|SOM
+1 Shimmer Myr|MBS
+1 Sunblast Angel|SOM
+[sideboard]

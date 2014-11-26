@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Daenerys the Unburnt
+Title=Daenerys the Unburnt
+Difficulty=hard
+Description="Zaldrizes buzdari iksos daor"
+Icon=Daenerys.jpg
+Deck Type=constructed
+[Main]
+4 Auriok Champion|5DN
+4 Flamebreak|DST
+1 Furnace Dragon|DST
+1 Furnace Whelp|5DN
+1 Hellkite Igniter|MBS
+1 Hoard-Smelter Dragon|SOM
+1 Magma Giant|5DN
+1 Moltensteel Dragon|NPH
+11 Mountain|SOM|1
+2 Mycosynth Wellspring|NPH
+11 Plains|SOM|1
+4 Slagstorm|MBS
+3 Spellskite|NPH
+4 Sphere of the Suns|MBS
+1 Steel Hellkite|SOM
+4 Sun Droplet|MRD
+1 Sword of Fire and Ice|DST
+1 Sword of War and Peace|NPH
+4 Vulshok Refugee|NPH
+[sideboard]

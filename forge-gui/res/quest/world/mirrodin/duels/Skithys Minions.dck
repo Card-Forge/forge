@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Skithy's Minions
+Title=Skithy's Minions
+Difficulty=hard
+Description=“Every outbreak across the globe today stems from a descendant of the medieval plague.”
+Icon=Skithiryx.jpg
+Deck Type=constructed
+[Main]
+3 Despise|NPH
+2 Dismember|NPH
+2 Grasp of Darkness|SOM
+4 Ichorclaw Myr|SOM
+4 Inkmoth Nexus|MBS
+4 Mutagenic Growth|NPH
+4 Phyrexian Crusader|MBS
+2 Phyrexian Vatmother|MBS
+4 Piston Sledge|MBS
+4 Plague Stinger|SOM
+19 Swamp|SOM|1
+4 Virulent Wound|MBS
+4 Whispering Specter|NPH
+[sideboard]

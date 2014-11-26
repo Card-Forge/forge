@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Clockwork
+Title=Clockwork
+Difficulty=medium
+Description="It's time for some good-old ultra-violence."
+Icon=Clockwork.jpg
+Deck Type=constructed
+[Main]
+4 Arcbound Stinger|DST
+4 Arcbound Worker|DST
+4 Clockwork Beetle|MRD
+3 Clockwork Condor|MRD
+2 Clockwork Dragon|MRD
+2 Clockwork Vorrac|MRD
+2 Contagion Clasp|SOM
+2 Contagion Engine|SOM
+26 Island|KTK|1
+3 Steady Progress|SOM
+3 Tezzeret's Gambit|NPH
+3 Thrummingbird|SOM
+2 Trinket Mage|SOM
+[sideboard]

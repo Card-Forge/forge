@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Wall-E 2
+Title=Wall-E
+Difficulty=medium
+Description=Wall-E's aRMY
+Icon=Wall-E.jpg
+Deck Type=constructed
+[Main]
+4 Glimmerpost|SOM
+4 Gold Myr|SOM
+3 Hovermyr|NPH
+2 Master's Call|MBS
+3 Myr Battlesphere|SOM
+4 Myr Galvanizer|SOM
+1 Myr Propagator|SOM
+2 Myr Reservoir|SOM
+2 Myr Sire|MBS
+1 Myr Turbine|MBS
+2 Myrsmith|SOM
+3 Palladium Myr|SOM
+4 Perilous Myr|SOM
+20 Plains|SOM|1
+1 Shimmer Myr|MBS
+2 Shrine of Loyal Legions|NPH
+2 Tempered Steel|SOM
+[sideboard]

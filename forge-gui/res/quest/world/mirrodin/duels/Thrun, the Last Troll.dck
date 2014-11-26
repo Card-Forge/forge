@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Thrun, the Last Troll
+Title=Thrun, the Last Troll
+Difficulty=hard
+Description=“Most believe the trolls have gone extinct. As long as I live, they're wrong.”
+Icon=Thrun.jpg
+Deck Type=constructed
+[Main]
+1 Beacon of Creation|5DN
+4 Creeping Corrosion|MBS
+2 Deconstruct|MRD
+1 Fangren Firstborn|DST
+24 Forest|MRD|1
+2 Glissa's Scorn|NPH
+1 Green Sun's Zenith|MBS
+2 wurmcoil engine|SOM
+2 Predator's Strike|MRD
+1 Stand Together|DST
+4 Tel-Jilad Chosen|MRD
+3 Thrun, the Last Troll|MBS
+1 Tornado Elemental|5DN
+4 Troll Ascetic|MRD
+2 Viridian Emissary|MBS
+2 Viridian Revel|SOM
+4 Viridian Shaman|MRD
+[sideboard]

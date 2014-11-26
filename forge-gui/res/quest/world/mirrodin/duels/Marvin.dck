@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Marvin
+Title=Marvin
+Difficulty=hard
+Description="I am at a rough estimate thirty billion times more intelligent than you. Let me give you an example. Think of a number, any number." "Er, five." "Wrong. You see?"
+Icon=Marvin.jpg
+Deck Type=constructed
+[Main]
+3 Blade Splicer|NPH
+4 Dispatch|NPH
+4 Glint Hawk Idol|SOM
+4 Hero of Bladehold|MBS
+4 Inkmoth Nexus|MBS
+4 Leonin Relic-Warder|MBS
+4 Memnite|SOM
+2 Mox Opal|SOM
+4 Origin Spellbomb|SOM
+18 Plains|SOM|1
+4 Signal Pest|MBS
+4 Tempered Steel|SOM
+1 Vault Skirge|NPH
+[sideboard]

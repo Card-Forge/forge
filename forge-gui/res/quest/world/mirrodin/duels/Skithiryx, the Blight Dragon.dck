@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Skithiryx, the Blight Dragon
+Title=Skithiryx, the Blight Dragon
+Difficulty=hard
+Description="...such terror was struck into the hearts of men and women by this plague, that brother abandoned brother, and the uncle his nephew, and the sister her brother, and very often the wife her husband. What is even worse and nearly incredible is that fathers and mothers refused to see and tend their children, as if they had not been theirs."
+Icon=Skithiryx.jpg
+Deck Type=constructed
+[Main]
+4 Blighted Agent|NPH
+2 Contagion Clasp|SOM
+4 Corpse Cur|SOM
+4 Corrupted Conscience|MBS
+4 Darkslick Shores|SOM
+4 Dismember|NPH
+2 Go for the Throat|MBS
+2 Hand of the Praetors|SOM
+10 Island|SOM|1
+4 Necropede|SOM
+2 Phyrexian Vatmother|MBS
+4 Plague Myr|MBS
+2 Skithiryx, the Blight Dragon|SOM
+12 Swamp|SOM|1
+[sideboard]

@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Platoon
+Title=Platoon
+Difficulty=easy
+Description=Some cover the front, others the back; together they make an unbeatable team specialized in both offense and defense
+Icon=Platoon.jpg
+Deck Type=constructed
+[Main]
+1 Acquire|5DN
+2 Annul|MRD
+2 Arachnoid|5DN
+2 Devour in Shadow|5DN
+3 Dross Crocodile|5DN
+1 Ebon Drake|5DN
+2 Emissary of Despair|DST
+1 Ensouled Scimitar|5DN
+8 Island|MRD|1
+3 Leaden Myr|MRD
+1 Loxodon Warhammer|MRD
+2 Murderous Spoils|DST
+2 Pewter Golem|MRD
+2 Plasma Elemental|5DN
+1 Shattered Dreams|5DN
+1 Silver Myr|MRD
+2 Slagwurm Armor|MRD
+3 Steel Wall|MRD
+16 Swamp|MRD|1
+1 Vulshok Gauntlets|MRD
+1 Whispersilk Cloak|DST
+3 Yotian Soldier|AQ
+[sideboard]

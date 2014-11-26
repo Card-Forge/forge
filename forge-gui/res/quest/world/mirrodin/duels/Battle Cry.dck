@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Battle Cry
+Title=Battle Cry
+Difficulty=easy
+Description=The "Battle Cries" deck hits fast and hard, swarming your opponents with an army of ragtag Mirran rebels 
+Icon=Battle Cry.jpg
+Deck Type=constructed
+[Main]
+2 Accorder Paladin|MBS
+2 Ardent Recruit|MBS
+2 Arrest|SOM
+1 Concussive Bolt|MBS
+2 Galvanic Blast|SOM
+1 Gold Myr|SOM
+2 Iron Myr|SOM
+3 Kuldotha Ringleader|MBS
+1 Leonin Relic-Warder|MBS
+2 Leonin Skyhunter|MBS
+2 Master's Call|MBS
+2 Memnite|SOM
+8 Mountain|SOM|1
+1 Myrsmith|SOM
+2 Origin Spellbomb|SOM
+2 Peace Strider|MBS
+16 Plains|SOM|1
+2 Razorfield Rhino|MBS
+2 Signal Pest|MBS
+1 Tower of Eons|MRD
+1 Victory's Herald|MBS
+1 Viridian Claw|MBS
+1 Whispersilk Cloak|DST
+1 White Sun's Zenith|MBS
+[sideboard]

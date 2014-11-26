@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Iconoclasm
+Title=Iconoclasm
+Difficulty=easy
+Description=This world is rich with artifacts, and the green & red mages are out to crush them all
+Icon=Iconoclasm.jpg
+Deck Type=constructed
+[Main]
+2 Battlegrowth|MRD
+2 Brown Ouphe|MRD
+4 Copper Myr|SOM
+2 Creeping Mold|MRD
+2 Deconstruct|MRD
+4 Fangren Hunter|MRD
+24 Forest|MRD|1
+1 Living Hive|MRD
+2 Needlebug|MRD
+1 One Dozen Eyes|MRD
+1 Plated Slagwurm|MRD
+3 Predator's Strike|MRD
+1 Slith Predator|MRD
+2 Tel-Jilad Archers|MRD
+2 Tel-Jilad Chosen|MRD
+2 Tel-Jilad Exile|MRD
+1 Tower of Champions|MRD
+2 Trolls of Tel-Jilad|MRD
+2 Viridian Shaman|MRD
+[sideboard]

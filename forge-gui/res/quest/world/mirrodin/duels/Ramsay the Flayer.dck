@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Ramsay the Flayer
+Title=Ramsay the Flayer
+Difficulty=easy
+Description=“If you think this has a happy ending, you haven't been paying attention” (Ramsay will flay you with -1/-1 counters)
+Icon=Ramsay.jpg
+Deck Type=constructed
+[Main]
+1 Bonehoard|MBS
+1 Carnifex Demon|SOM
+1 Caustic Hound|MBS
+2 Contagion Clasp|SOM
+1 Contagion Engine|SOM
+1 Darkslick Drake|SOM
+1 Flayer Husk|MBS
+1 Horrifying Revelation|MBS
+2 Instill Infection|SOM
+13 Island|SOM|1
+1 Leaden Myr|SOM
+2 Moriok Reaver|SOM
+1 Myr Sire|MBS
+2 Necrogen Censer|SOM
+1 Oculus|MBS
+2 Phyrexian Rager|MBS
+1 Pierce Strider|MBS
+1 Silver Myr|SOM
+1 Skinrender|SOM
+1 Skinwing|MBS
+1 Spread the Sickness|MBS
+2 Steady Progress|SOM
+1 Steel Sabotage|MBS
+1 Strandwalker|MBS
+13 Swamp|SOM|1
+2 Thrummingbird|SOM
+1 Trigon of Corruption|SOM
+1 Trigon of Thought|SOM
+1 Vedalken Anatomist|MBS
+[sideboard]

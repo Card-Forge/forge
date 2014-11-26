@@ -3,3 +3,4 @@ Name:Shandalar|Dir:shandalar|Sets:2ED, ARN, ATQ, 3ED, LEG, DRK, 4ED|Banned:Chaos
 Name:Jamuraa|Dir:jamuraa|Sets:5ED, ARN, MIR, VIS, WTH|Banned:Chaos Orb; Falling Star
 Name:Ravnica|Dir:ravnica|Sets:RAV, GPT, DIS, RTR, GTC, DGM|Banned:Chaos Orb; Falling Star
 Name:Zendikar|Dir:zendikar|Sets:ZEN, WWK, ROE|Banned:Chaos Orb; Falling Star
+Name:Mirrodin|Dir:mirrodin|Sets:MRD, DST, 5DN, SOM, MBS, NPH|Banned:Chaos Orb; Falling Star

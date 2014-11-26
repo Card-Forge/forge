@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Careless Whispers
+Title=Careless Whispers
+Difficulty=medium
+Description="There's no comfort in the truth
+Pain is all you'll find" 
+Icon=Whispers.jpg
+Deck Type=constructed
+[Main]
+4 Altar of Shadows|MRD
+2 Batterskull|NPH
+1 Darksteel Myr|SOM
+4 Devour in Shadow|5DN
+2 Dismember|NPH
+4 Endless Whispers|5DN
+3 Essence Drain|DST
+3 Flayer Husk|MBS
+4 Geth's Verdict|NPH
+2 Go for the Throat|MBS
+1 Murderous Spoils|DST
+4 Night's Whisper|5DN
+1 Spread the Sickness|MBS
+24 Swamp|MRD|1
+1 Terror|LEA
+[sideboard]

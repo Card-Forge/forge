@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=InCystious 3
+Title=InCystious
+Difficulty=hard
+Description="Thus far I find you rather detestable, may I say that without hurting your feelings?"
+Icon=InCystious.jpg
+Deck Type=constructed
+[Main]
+4 Blighted Agent|NPH
+4 Bonesplitter|MRD
+3 Corpse Cur|SOM
+3 Cystbearer|SOM
+12 Forest|SOM|1
+4 Glistener Elf|NPH
+4 Ichorclaw Myr|SOM
+12 Island|SOM|1
+2 Grafted Wargear|5DN
+4 Mutagenic Growth|NPH
+4 Vapor Snag|NPH
+4 Viridian Betrayers|NPH
+[sideboard]

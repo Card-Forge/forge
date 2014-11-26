@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Tezzeret, Agent of Bolas 4
+Title=Tezzeret, Agent of Bolas
+Difficulty=very hard
+Description=“I tolerate Phyrexians because the dragon requires it. But I have no patience for uninvited guests.”
+Icon=Tezzeret.jpg
+Deck Type=constructed
+[Main]
+4 Cranial Plating|5DN
+4 Darkslick Shores|SOM
+4 Darksteel Citadel|DST
+4 Dismember|NPH
+4 Etched Champion|SOM
+4 Frogmite|MRD
+4 Memnite|SOM
+4 Mox Opal|SOM
+4 Myr Enforcer|MRD
+4 Ornithopter|AQ
+4 Seat of the Synod|MRD
+4 Signal Pest|MBS
+4 Tezzeret, Agent of Bolas|MBS
+4 Thoughtcast|MRD
+4 Vault of Whispers|MRD
+[sideboard]

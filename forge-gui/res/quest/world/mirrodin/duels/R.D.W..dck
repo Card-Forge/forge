@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=R.D.W.
+Title=R.D.W.
+Difficulty=hard
+Description=“It's better to burn out, than to fade away.”
+Icon=RDW.jpg
+Deck Type=constructed
+[Main]
+2 Arc Trail|SOM
+1 Beacon of Destruction|5DN
+2 Blisterstick Shaman|MBS
+3 Burn the Impure|MBS
+2 Detonate|MRD
+3 Electrostatic Bolt|MRD
+1 Fireball|LEA
+2 Goblin Charbelcher|MRD
+3 Gut Shot|NPH
+3 Magma Jet|5DN
+20 Mountain|MRD|1
+2 Shatter|LEA
+4 Shrine of Burning Rage|NPH
+4 Slag Fiend|NPH
+4 Slith Firewalker|MRD
+4 Spark Elemental|5DN
+[sideboard]
