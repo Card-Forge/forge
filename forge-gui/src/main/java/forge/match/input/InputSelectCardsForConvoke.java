@@ -2,6 +2,7 @@ package forge.match.input;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -37,7 +38,7 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
     }
 
     @Override
-    protected boolean onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
+    protected boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
         if (!availableCreatures.contains(card)) {
             // Not in untapped creatures list provided. Not a legal Convoke selection.
             flashIncorrectAction();

@@ -17,6 +17,8 @@
  */
 package forge.match.input;
 
+import java.util.List;
+
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -110,7 +112,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
     volatile boolean cardSelectLocked = false;
 
     @Override
-    protected boolean onCardSelected(final Card c0, final ITriggerEvent triggerEvent) { // the only place that would cause troubles - input is supposed only to confirm, not to fire abilities
+    protected boolean onCardSelected(final Card c0, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) { // the only place that would cause troubles - input is supposed only to confirm, not to fire abilities
         boolean fromHand = player.getZone(ZoneType.Hand).contains(c0);
         boolean isSerumPowder = c0.getName().equals("Serum Powder");
         boolean isLegalChoice = fromHand && (isCommander || isSerumPowder);

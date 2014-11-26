@@ -1,5 +1,6 @@
 package forge.match.input;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import forge.FThreads;
@@ -69,7 +70,7 @@ public class InputLockUI implements Input {
     }
 
     @Override
-    public boolean selectCard(Card c, ITriggerEvent triggerEvent) {
+    public boolean selectCard(Card c, final List<Card> otherCardsToSelect, ITriggerEvent triggerEvent) {
         return false;
     }
     @Override

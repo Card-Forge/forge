@@ -48,19 +48,13 @@ import forge.view.arcane.util.CardPanelMouseListener;
  * @version $Id: PlayArea.java 24769 2014-02-09 13:56:04Z Hellfish $
  */
 public class PlayArea extends CardPanelContainer implements CardPanelMouseListener {
-    /** Constant <code>serialVersionUID=8333013579724492513L</code>. */
     private static final long serialVersionUID = 8333013579724492513L;
-    /** Constant <code>GUTTER_Y=5</code>. */
+
     private static final int GUTTER_Y = 5;
-    /** Constant <code>GUTTER_X=5</code>. */
     private static final int GUTTER_X = 5;
-    /** Constant <code>EXTRA_CARD_SPACING_X=0.04f</code>. */
     static final float EXTRA_CARD_SPACING_X = 0.04f;
-    /** Constant <code>CARD_SPACING_Y=0.06f</code>. */
     private static final float CARD_SPACING_Y = 0.06f;
-    /** Constant <code>STACK_SPACING_X=0.07f</code>. */
     private static final float STACK_SPACING_X = 0.12f;
-    /** Constant <code>STACK_SPACING_Y=0.07f</code>. */
     private static final float STACK_SPACING_Y = 0.12f;
 
     //private final int creatureStackMax = 4;
@@ -80,15 +74,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private final PlayerView model;
     private final ZoneType zone;
 
-    /**
-     * <p>
-     * Constructor for PlayArea.
-     * </p>
-     * 
-     * @param scrollPane
-     * @param mirror
-     * @param player 
-     */
     public PlayArea(final FScrollPane scrollPane, final boolean mirror, final PlayerView player, final ZoneType zone) {
         super(scrollPane);
         this.setBackground(Color.white);
@@ -335,9 +320,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         positionAllCards(lastTemplate);
     }
 
+    // Position all card panels
     private void positionAllCards(List<CardStackRow> template)  {
-
-        // Position all card panels.
         int x = 0;
         int y = PlayArea.GUTTER_Y;
 
@@ -408,32 +392,19 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         int nextOther = 0;
         for (final CardStackRow row : template) {
             nextOther = this.planOthersRow(others, nextOther, template, row);
-            if (nextOther == cntOthers)
+            if (nextOther == cntOthers) {
                 return template; // everything was successfully placed
+            }
         }
 
         template = templateCopy;
         // Try to put others on their own row(s)
-        if (this.planRow(others, template, afterFirstRow)) 
+        if (this.planRow(others, template, afterFirstRow)) {
             return template;
-        
-        
+        }
         return null; // Cannot fit everything with that width;
     }
 
-    /**
-     * <p>
-     * wrap.
-     * </p>
-     * 
-     * @param sourceRow
-     *            a {@link forge.view.arcane.PlayArea.CardStackRow} object.
-     * @param template
-     *            a {@link java.util.List} object.
-     * @param insertIndex
-     *            a int.
-     * @return a int.
-     */
     // Won't modify the first parameter
     private boolean planRow(final CardStackRow sourceRow, final List<CardStackRow> template, final int insertIndex) {
         // The cards are sure to fit (with vertical scrolling) at the minimum
@@ -478,21 +449,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         return true;
     }
 
-
-    /**
-     * <p>
-     * fillRow.
-     * </p>
-     * 
-     * @param sourceRow
-     *            a {@link forge.view.arcane.PlayArea.CardStackRow} object.
-     * @param template
-     *            a {@link java.util.List} object.
-     * @param template
-     *            a {@link java.util.List} object.
-     * @param rowToFill
-     *            a {@link forge.view.arcane.PlayArea.CardStackRow} object.
-     */
     private int planOthersRow(final List<CardStack> sourceRow, final int firstPile, final List<CardStackRow> template, final CardStackRow rowToFill) {
         int rowWidth = rowToFill.getWidth();
 
@@ -514,15 +470,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         return sourceRow.size();
     }
 
-    /**
-     * <p>
-     * getRowsHeight.
-     * </p>
-     * 
-     * @param rows
-     *            a {@link java.util.List} object.
-     * @return a int.
-     */
     private int getRowsHeight(final List<CardStackRow> rows) {
         int height = 0;
         for (final CardStackRow row : rows) {
@@ -531,7 +478,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         return (height - this.cardSpacingY) + (PlayArea.GUTTER_Y * 2);
     }
 
-    /** {@inheritDoc} */
     @Override
     public final CardPanel getCardPanel(final int x, final int y) {
         for (final CardStackRow row : this.rows) {
@@ -562,35 +508,46 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public final void mouseOver(final CardPanel panel, final MouseEvent evt) {
         CMatchUI.SINGLETON_INSTANCE.setCard(panel.getCard(), evt.isShiftDown());
         super.mouseOver(panel, evt);
     }
 
-    /** {@inheritDoc} */
     @Override
     public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
-        CPrompt.SINGLETON_INSTANCE.selectCard(panel.getCard(), new MouseTriggerEvent(evt));
+        selectCard(panel, evt);
         if ((panel.getTappedAngle() != 0) && (panel.getTappedAngle() != CardPanel.TAPPED_ANGLE)) {
             return;
         }
         super.mouseLeftClicked(panel, evt);
     }
 
-    /** {@inheritDoc} */
     @Override
     public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
-        CPrompt.SINGLETON_INSTANCE.selectCard(panel.getCard(), new MouseTriggerEvent(evt));
+        selectCard(panel, evt);
         super.mouseRightClicked(panel, evt);
     }
 
-    /**
-     * <p>
-     * setupPlayZone.
-     * </p>
-     */
+    private void selectCard(final CardPanel panel, final MouseEvent evt) {
+        List<CardView> otherCardViewsToSelect = null;
+        if (evt.getButton() == 1 && (evt.isShiftDown() || evt.getClickCount() == 2)) {
+            //on left double-click or Shift+left, select all other cards in stack if any
+            List<CardPanel> stack = panel.getStack();
+            if (stack != null) {
+                stack = new ArrayList<CardPanel>(stack);
+                stack.remove(panel);
+                if (stack.size() > 0) {
+                    otherCardViewsToSelect = new ArrayList<CardView>();
+                    for (CardPanel p : stack) {
+                        otherCardViewsToSelect.add(p.getCard());
+                    }
+                }
+            }
+        }
+        CPrompt.SINGLETON_INSTANCE.selectCard(panel.getCard(), otherCardViewsToSelect, new MouseTriggerEvent(evt));
+    }
+
     public void setupPlayZone() {
         FThreads.assertExecutedByEdt(true);
         recalculateCardPanels(model, zone);
@@ -874,11 +831,20 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             if (panel.getCard() == null) {
                 return false;
             }
-            final boolean appended = super.add(panel);
-            for (final CardPanel attachedPanel : panel.getAttachedPanels()) {
-                this.add(attachedPanel);
+            if (super.add(panel)) {
+                panel.setStack(this);
+                addAttachedPanels(panel);
+                return true;
             }
-            return appended;
+            return false;
+        }
+
+        private void addAttachedPanels(final CardPanel panel) {
+            for (final CardPanel attachedPanel : panel.getAttachedPanels()) {
+                if (panel.getCard() != null && super.add(attachedPanel)) {
+                    addAttachedPanels(attachedPanel);
+                }
+            }
         }
 
         private int getWidth() {

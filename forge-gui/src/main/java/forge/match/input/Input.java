@@ -1,5 +1,7 @@
 package forge.match.input;
 
+import java.util.List;
+
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -11,7 +13,7 @@ public interface Input {
 
     void showMessageInitial();
 
-    boolean selectCard(Card card, ITriggerEvent triggerEvent);
+    boolean selectCard(Card card, final List<Card> otherCardsToSelect, ITriggerEvent triggerEvent);
 
     void selectAbility(SpellAbility ab);
 

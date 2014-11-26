@@ -3,6 +3,8 @@
  */
 package forge.control;
 
+import java.util.List;
+
 import forge.LobbyPlayer;
 import forge.game.Game;
 import forge.game.card.CardView;
@@ -78,7 +80,7 @@ public class WatchLocalGame extends PlayerControllerHuman {
     }
 
     @Override
-    public boolean selectCard(final CardView card, final ITriggerEvent triggerEvent) {
+    public boolean selectCard(final CardView card, final List<CardView> otherCardViewsToSelect, final ITriggerEvent triggerEvent) {
         return false;
     }
 

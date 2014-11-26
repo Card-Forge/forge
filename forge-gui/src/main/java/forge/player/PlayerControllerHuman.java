@@ -1351,12 +1351,12 @@ public class PlayerControllerHuman extends PlayerController {
         }
     }
 
-    public void selectPlayer(final PlayerView player, final ITriggerEvent triggerEvent) {
-        inputProxy.selectPlayer(player, triggerEvent);
+    public void selectPlayer(final PlayerView playerView, final ITriggerEvent triggerEvent) {
+        inputProxy.selectPlayer(playerView, triggerEvent);
     }
 
-    public boolean selectCard(final CardView card, final ITriggerEvent triggerEvent) {
-        return inputProxy.selectCard(card, triggerEvent);
+    public boolean selectCard(final CardView cardView, final List<CardView> otherCardViewsToSelect, final ITriggerEvent triggerEvent) {
+        return inputProxy.selectCard(cardView, otherCardViewsToSelect, triggerEvent);
     }
 
     public void selectAbility(final SpellAbility sa) {

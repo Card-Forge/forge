@@ -66,7 +66,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     }
 
     @Override
-    protected boolean onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
+    protected boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
         if (card.getManaAbilities().isEmpty()) {
             flashIncorrectAction();
             return false;

@@ -1,6 +1,8 @@
 package forge.match.input;
 
 import java.util.Collection;
+import java.util.List;
+
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -25,7 +27,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
     }
 
     @Override
-    protected boolean onCardSelected(final Card c, final ITriggerEvent triggerEvent) {
+    protected boolean onCardSelected(final Card c, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
         if (!selectEntity(c)) {
             return false;
         }

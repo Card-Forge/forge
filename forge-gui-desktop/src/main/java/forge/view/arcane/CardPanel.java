@@ -57,45 +57,23 @@ import forge.view.arcane.util.OutlinedLabel;
  * @version $Id: CardPanel.java 25264 2014-03-27 01:59:18Z drdev $
  */
 public class CardPanel extends SkinnedPanel implements CardContainer, IDisposable {
-    /** Constant <code>serialVersionUID=2361907095724263295L</code>. */
     private static final long serialVersionUID = 2361907095724263295L;
-    /**
-     * Constant <code>TAPPED_ANGLE=Math.PI / 2</code>.
-     */
+
     public static final double TAPPED_ANGLE = Math.PI / 2;
-    /**
-     * Constant <code>ASPECT_RATIO=3.5f / 2.5f</code>.
-     */
     public static final float ASPECT_RATIO = 3.5f / 2.5f;
     public static final float TARGET_ORIGIN_FACTOR_X = 0.25f;
     public static final float TARGET_ORIGIN_FACTOR_Y = 0.5f;
-
-    /**
-     * Constant <code>dragAnimationPanel</code>.
-     */
     private static CardPanel dragAnimationPanel;
-
-    /** Constant <code>ROUNDED_CORNER_SIZE=0.1f</code>. */
     public static final float ROUNDED_CORNER_SIZE = 0.1f;
-    /** Constant <code>SELECTED_BORDER_SIZE=0.01f</code>. */
     public static final float SELECTED_BORDER_SIZE = 0.01f;
-    /** Constant <code>BLACK_BORDER_SIZE=0.03f</code>. */
     public static final float BLACK_BORDER_SIZE = 0.03f;
-
-    /**
-     * Constant
-     * <code>rotCenterToTopCorner=1.0295630140987000315797369464196f</code>.
-     */
     private static final float ROT_CENTER_TO_TOP_CORNER = 1.0295630140987000315797369464196f;
-    /**
-     * Constant
-     * <code>rotCenterToBottomCorner=0.7071067811865475244008443621048f</code>.
-     */
     private static final float ROT_CENTER_TO_BOTTOM_CORNER = 0.7071067811865475244008443621048f;
 
     private CardView card;
     private CardPanel attachedToPanel;
     private List<CardPanel> attachedPanels = new ArrayList<CardPanel>();
+    private List<CardPanel> stack;
     private boolean tapped;
     private double tappedAngle = 0;
     private ScaledImagePanel imagePanel;
@@ -110,14 +88,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private int cardXOffset, cardYOffset, cardWidth, cardHeight;
     private boolean isSelected;
 
-    /**
-     * <p>
-     * Constructor for CardPanel.
-     * </p>
-     * 
-     * @param newCard
-     *            a {@link forge.game.card.Card} object.
-     */
     public CardPanel(final CardView card0) {
         setBackground(Color.black);
         setOpaque(false);
@@ -241,7 +211,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         isSelected = isSelected0;
         repaint();
     }
-
 
     @Override
     public final void paint(final Graphics g) {
@@ -576,111 +545,51 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     public void dispose() {
         attachedToPanel = null;
         attachedPanels = null;
+        stack = null;
         imagePanel.setImage(null);
         imagePanel = null;
         card = null;
     }
 
-    /**
-     * Gets the drag animation panel.
-     * 
-     * @return the dragAnimationPanel
-     */
     public static CardPanel getDragAnimationPanel() {
         return CardPanel.dragAnimationPanel;
     }
-
-    /**
-     * Sets the drag animation panel.
-     * 
-     * @param dragAnimationPanel0
-     *            the dragAnimationPanel to set
-     */
     public static void setDragAnimationPanel(final CardPanel dragAnimationPanel0) {
         CardPanel.dragAnimationPanel = dragAnimationPanel0;
     }
 
-    /**
-     * Gets the attached to panel.
-     * 
-     * @return the attachedToPanel
-     */
     public final CardPanel getAttachedToPanel() {
         return attachedToPanel;
     }
-
-    /**
-     * Sets the attached to panel.
-     * 
-     * @param attachedToPanel0
-     *            the attachedToPanel to set
-     */
     public final void setAttachedToPanel(final CardPanel attachedToPanel0) {
         attachedToPanel = attachedToPanel0;
     }
 
-    /**
-     * Gets the attached panels.
-     * 
-     * @return the attachedPanels
-     */
     public final List<CardPanel> getAttachedPanels() {
         return attachedPanels;
     }
 
-    /**
-     * Sets the attached panels.
-     * 
-     * @param attachedPanels0
-     *            the attachedPanels to set
-     */
-    public final void setAttachedPanels(final List<CardPanel> attachedPanels0) {
-        attachedPanels = attachedPanels0;
+    public final List<CardPanel> getStack() {
+        return stack;
+    }
+    public final void setStack(final List<CardPanel> stack0) {
+        stack = stack0;
     }
 
-    /**
-     * Checks if is tapped.
-     * 
-     * @return the tapped
-     */
     public final boolean isTapped() {
         return tapped;
     }
-
-    /**
-     * Sets the tapped.
-     * 
-     * @param tapped0
-     *            the tapped to set
-     */
     public final void setTapped(final boolean tapped0) {
         tapped = tapped0;
     }
 
-    /**
-     * Gets the tapped angle.
-     * 
-     * @return the tappedAngle
-     */
     public final double getTappedAngle() {
         return tappedAngle;
     }
-
-    /**
-     * Sets the tapped angle.
-     * 
-     * @param tappedAngle0
-     *            the tappedAngle to set
-     */
     public final void setTappedAngle(final double tappedAngle0) {
         tappedAngle = tappedAngle0;
     }
 
-    /**
-     * Gets the border size constant.
-     * 
-     * @return BLACK_BORDER_SIZE
-     */
     public static final float getBorderSize() {
         return BLACK_BORDER_SIZE;
     }

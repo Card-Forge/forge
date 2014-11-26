@@ -152,7 +152,7 @@ public class InputAttack extends InputSyncronizedBase {
     }
 
     @Override
-    protected final boolean onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
+    protected final boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
         final List<Card> att = combat.getAttackers();
         if (triggerEvent != null && triggerEvent.getButton() == 3 && att.contains(card)) {
             undeclareAttacker(card);

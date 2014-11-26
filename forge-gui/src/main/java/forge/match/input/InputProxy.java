@@ -17,6 +17,8 @@
  */
 package forge.match.input;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.concurrent.atomic.AtomicReference;
@@ -105,12 +107,24 @@ public class InputProxy implements Observer {
         }
     }
 
-    public final boolean selectCard(final CardView cardView, final ITriggerEvent triggerEvent) {
+    public final boolean selectCard(final CardView cardView, final List<CardView> otherCardViewsToSelect, final ITriggerEvent triggerEvent) {
         final Input inp = getInput();
         if (inp != null) {
             final Card card = Card.get(cardView);
             if (card != null) {
-                return inp.selectCard(card, triggerEvent);
+                List<Card> otherCardsToSelect = null;
+                if (otherCardViewsToSelect != null) {
+                    for (CardView cv : otherCardViewsToSelect) {
+                        final Card c = Card.get(cv);
+                        if (c != null) {
+                            if (otherCardsToSelect == null) {
+                                otherCardsToSelect = new ArrayList<Card>();
+                            }
+                            otherCardsToSelect.add(c);
+                        }
+                    }
+                }
+                return inp.selectCard(card, otherCardsToSelect, triggerEvent);
             }
         }
         return false;

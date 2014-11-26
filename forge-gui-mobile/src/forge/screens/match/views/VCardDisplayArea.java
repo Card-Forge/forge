@@ -260,10 +260,11 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         @Override
         public boolean tap(float x, float y, int count) {
             if (renderedCardContains(x, y)) {
+                final boolean isDoubleTap = (count % 2 == 0);
                 ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread in case a dialog needs to be shown
                     @Override
                     public void run() {
-                        if (!selectCard()) {
+                        if (!selectCard(isDoubleTap)) {
                             //if no cards in stack can be selected, just show zoom/details for card
                             CardZoom.show(getCard());
                         }
@@ -274,17 +275,17 @@ public abstract class VCardDisplayArea extends VDisplayArea {
             return false;
         }
 
-        public boolean selectCard() {
-            if (MatchUtil.getHumanController().selectCard(getCard(), null)) {
+        public boolean selectCard(boolean isDoubleTap) {
+            if (MatchUtil.getHumanController().selectCard(getCard(), getOtherCardsToSelect(isDoubleTap), null)) {
                 return true;
             }
             //if panel can't do anything with card selection, try selecting previous panel in stack
-            if (prevPanelInStack != null && prevPanelInStack.selectCard()) {
+            if (prevPanelInStack != null && prevPanelInStack.selectCard(isDoubleTap)) {
                 return true;
             }
             //as a last resort try to select attached panels
             for (CardAreaPanel panel : attachedPanels) {
-                if (panel.selectCard()) {
+                if (panel.selectCard(isDoubleTap)) {
                     return true;
                 }
             }
@@ -312,6 +313,28 @@ public abstract class VCardDisplayArea extends VDisplayArea {
             if (nextPanelInStack != null) {
                 nextPanelInStack.buildCardPanelList(list);
             }
+        }
+
+        private List<CardView> getOtherCardsToSelect(boolean isDoubleTap) {
+            if (!isDoubleTap) { return null; }
+
+            //on double-tap select all other cards in stack if any
+            if (prevPanelInStack == null && nextPanelInStack == null) { return null; }
+
+            List<CardView> cards = new ArrayList<CardView>();
+
+            CardAreaPanel panel = nextPanelInStack;
+            while (panel != null) {
+                cards.add(panel.getCard());
+                panel = panel.nextPanelInStack;
+            }
+            panel = prevPanelInStack;
+            while (panel != null) {
+                cards.add(panel.getCard());
+                panel = panel.prevPanelInStack;
+            }
+
+            return cards;
         }
 
         public Vector2 getTargetingArrowOrigin() {

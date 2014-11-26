@@ -23,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.List;
 
 import javax.swing.JButton;
 
@@ -103,12 +104,12 @@ public enum CPrompt implements ICDoc {
         return MatchUtil.getHumanController().passPriorityUntilEndOfTurn();
     }
 
-    public void selectPlayer(final PlayerView player, final ITriggerEvent triggerEvent) {
-        MatchUtil.getHumanController().selectPlayer(player, triggerEvent);
+    public void selectPlayer(final PlayerView playerView, final ITriggerEvent triggerEvent) {
+        MatchUtil.getHumanController().selectPlayer(playerView, triggerEvent);
     }
 
-    public void selectCard(final CardView card, final ITriggerEvent triggerEvent) {
-        MatchUtil.getHumanController().selectCard(card, triggerEvent);
+    public void selectCard(final CardView cardView, final List<CardView> otherCardViewsToSelect, final ITriggerEvent triggerEvent) {
+        MatchUtil.getHumanController().selectCard(cardView, otherCardViewsToSelect, triggerEvent);
     }
 
     public void selectAbility(final SpellAbility sa) {

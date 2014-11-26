@@ -316,12 +316,12 @@ public class FloatingCardArea extends CardArea {
     }
     @Override
     public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
-        CPrompt.SINGLETON_INSTANCE.selectCard(panel.getCard(), new MouseTriggerEvent(evt));
+        CPrompt.SINGLETON_INSTANCE.selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
         super.mouseLeftClicked(panel, evt);
     }
     @Override
     public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
-        CPrompt.SINGLETON_INSTANCE.selectCard(panel.getCard(), new MouseTriggerEvent(evt));
+        CPrompt.SINGLETON_INSTANCE.selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
         super.mouseRightClicked(panel, evt);
     }
 }

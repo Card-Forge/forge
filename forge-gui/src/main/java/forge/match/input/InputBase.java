@@ -17,6 +17,7 @@
  */
 package forge.match.input;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -155,12 +156,12 @@ public abstract class InputBase implements java.io.Serializable, Input {
     }
 
     @Override
-    public final boolean selectCard(final Card c, final ITriggerEvent triggerEvent) {
+    public final boolean selectCard(final Card c, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
         if (isFinished()) { return false; }
-        return onCardSelected(c, triggerEvent);
+        return onCardSelected(c, otherCardsToSelect, triggerEvent);
     }
 
-    protected boolean onCardSelected(final Card c, final ITriggerEvent triggerEvent) {
+    protected boolean onCardSelected(final Card c, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
         return false;
     }
     protected void onPlayerSelected(final Player player, final ITriggerEvent triggerEvent) {}
