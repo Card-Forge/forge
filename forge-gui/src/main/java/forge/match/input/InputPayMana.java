@@ -127,19 +127,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         showMessage();
     }
 
-    /**
-     * <p>
-     * activateManaAbility.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param card
-     *            a {@link forge.game.card.Card} object.
-     * @param manaCost
-     *            a {@link forge.game.mana.ManaCostBeingPaid} object.
-     * @return a {@link forge.game.mana.ManaCostBeingPaid} object.
-     */
     protected boolean activateManaAbility(final Card card, ManaCostBeingPaid manaCost) {
         return activateManaAbility(card, manaCost, null);
     }
@@ -168,7 +155,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         if (colorCanUse == 0) { // no mana cost or something 
             return false;
         }
-        
+
         List<SpellAbility> abilities = new ArrayList<SpellAbility>();
         // you can't remove unneeded abilities inside a for (am:abilities) loop :(
 
@@ -232,7 +219,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                         colorMatches.add(sa);
                     }
                 }
-    
+
                 if (colorMatches.isEmpty()) {
                     // can only match colorless just grab the first and move on.
                     // This is wrong. Sometimes all abilities aren't created equal
@@ -256,32 +243,21 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         chosen.getManaPartRecursive().setExpressChoice(colors);
 
         // System.out.println("Chosen sa=" + chosen + " of " + chosen.getHostCard() + " to pay mana");
-        Runnable proc = new Runnable() {
+
+        locked = true;
+        game.getAction().invoke(new Runnable() {
             @Override
             public void run() {
                 HumanPlay.playSpellAbility(getController(), chosen.getActivatingPlayer(), chosen);
                 player.getManaPool().payManaFromAbility(saPaidFor, InputPayMana.this.manaCost, chosen);
-                
+
                 onManaAbilityPaid();
                 onStateChanged();
             }
-        };
-        locked = true;
-        game.getAction().invoke(proc);
+        });
         return true;
     }
 
-    /**
-     * <p>
-     * canMake.  color is like "G", returns "Green".
-     * </p>
-     * 
-     * @param am
-     *            a {@link forge.card.spellability.AbilityMana} object.
-     * @param mana
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
     private static boolean abilityProducesManaColor(final SpellAbility am, AbilityManaPart m, final byte neededColor) {
         if (0 != (neededColor & ManaAtom.COLORLESS)) {
             return true;
@@ -349,7 +325,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         player.runWithController(proc, new PlayerControllerAi(game, player, player.getOriginalLobbyPlayer()));
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void onOk() {
         if (supportAutoPay()) {
@@ -401,7 +376,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         showMessage(getMessage());
     }
 
-    /** {@inheritDoc} */
     @Override
     public void showMessage() {
         if (isFinished()) { return; }
