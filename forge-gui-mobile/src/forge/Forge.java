@@ -373,13 +373,16 @@ public class Forge implements ApplicationListener {
     private static class MainInputProcessor extends FGestureAdapter {
         private static final ArrayList<FDisplayObject> potentialListeners = new ArrayList<FDisplayObject>();
         private static char lastKeyTyped;
-        private static boolean keyTyped;
+        private static boolean keyTyped, shiftKeyDown;
 
         @Override
         public boolean keyDown(int keyCode) {
             if (keyCode == Keys.MENU) {
                 showMenu();
                 return true;
+            }
+            if (keyCode == Keys.SHIFT_LEFT || keyCode == Keys.SHIFT_RIGHT) {
+                shiftKeyDown = true;
             }
             if (keyInputAdapter == null) {
                 if (KeyInputAdapter.isModifierKey(keyCode)) {
@@ -401,6 +404,9 @@ public class Forge implements ApplicationListener {
         @Override
         public boolean keyUp(int keyCode) {
             keyTyped = false; //reset on keyUp
+            if (keyCode == Keys.SHIFT_LEFT || keyCode == Keys.SHIFT_RIGHT) {
+                shiftKeyDown = false;
+            }
             if (keyInputAdapter != null) {
                 return keyInputAdapter.keyUp(keyCode);
             }
@@ -496,9 +502,28 @@ public class Forge implements ApplicationListener {
 
         @Override
         public boolean tap(float x, float y, int count) {
+            if (shiftKeyDown && twoFingerTap(x, y, count)) {
+                return true; //give two finger tap logic a chance to handle Shift+click
+            }
             try {
                 for (FDisplayObject listener : potentialListeners) {
                     if (listener.tap(listener.screenToLocalX(x), listener.screenToLocalY(y), count)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch (Exception ex) {
+                BugReporter.reportException(ex);
+                return true;
+            }
+        }
+
+        @Override
+        public boolean twoFingerTap(float x, float y, int count) {
+            try {
+                for (FDisplayObject listener : potentialListeners) {
+                    if (listener.twoFingerTap(listener.screenToLocalX(x), listener.screenToLocalY(y), count)) {
                         return true;
                     }
                 }

@@ -517,7 +517,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     @Override
     public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
-        selectCard(panel, evt);
+        selectCard(panel, new MouseTriggerEvent(evt), evt.isShiftDown()); //select entire stack if shift key down
         if ((panel.getTappedAngle() != 0) && (panel.getTappedAngle() != CardPanel.TAPPED_ANGLE)) {
             return;
         }
@@ -526,19 +526,14 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     @Override
     public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
-        selectCard(panel, evt);
+        selectCard(panel, new MouseTriggerEvent(evt), false);
         super.mouseRightClicked(panel, evt);
     }
 
-    private void selectCard(final CardPanel panel, final MouseEvent evt) {
-        //on Shift+left-click, select all other cards in stack if any
-        selectCard(panel, new MouseTriggerEvent(evt), evt.getButton() == 1 && evt.isShiftDown());
-    }
-
-    private boolean selectCard(final CardPanel panel, final MouseTriggerEvent triggerEvent, final boolean selectOtherCardsInStack) {
+    private boolean selectCard(final CardPanel panel, final MouseTriggerEvent triggerEvent, final boolean selectEntireStack) {
         List<CardView> otherCardViewsToSelect = null;
         List<CardPanel> stack = panel.getStack();
-        if (selectOtherCardsInStack) {
+        if (selectEntireStack) {
             if (stack != null) {
                 for (CardPanel p : stack) {
                     if (p != panel && p.getCard() != null && p.getStack() == stack) {
@@ -557,7 +552,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         if (stack != null) {
             for (int i = stack.indexOf(panel) + 1; i < stack.size(); i++) { //looping forward since panels stored in reverse order
                 CardPanel p = stack.get(i);
-                if (p.getStack() == stack && selectCard(stack.get(i), triggerEvent, selectOtherCardsInStack)) {
+                if (p.getStack() == stack && selectCard(stack.get(i), triggerEvent, selectEntireStack)) {
                     return true;
                 }
             }
@@ -565,7 +560,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         //as a last resort try to select attached panels not in stack
         for (CardPanel p : panel.getAttachedPanels()) {
             if (p.getStack() != stack) { //ensure same panel not checked more than once
-                if (selectCard(p, triggerEvent, selectOtherCardsInStack)) {
+                if (selectCard(p, triggerEvent, selectEntireStack)) {
                     return true;
                 }
             }

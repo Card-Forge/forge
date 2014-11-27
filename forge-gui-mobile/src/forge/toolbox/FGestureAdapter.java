@@ -15,6 +15,7 @@ public abstract class FGestureAdapter extends InputAdapter {
     public abstract boolean longPress(float x, float y);
     public abstract boolean release(float x, float y);
     public abstract boolean tap(float x, float y, int count);
+    public abstract boolean twoFingerTap(float x, float y, int count);
     public abstract boolean fling(float velocityX, float velocityY);
     public abstract boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical);
     public abstract boolean panStop(float x, float y);
