@@ -24,6 +24,13 @@ Default size of zone windows has been slightly reduced.
 Prevent horizontal scrollbar appearing in zone windows.
 Reduce flicker when resizing zone windows.
 
+
+- Card Stack Activation Improvements -
+Allow tapping multiple lands in a stack by continuing to tap on the top land of that stack
+Allow tapping all lands in a stack using Shift+click on any land in the stack
+Allow attacking with all tokens in a stack using Shift+click on any token in the stack
+
+
 ---------
 New Cards
 ---------
