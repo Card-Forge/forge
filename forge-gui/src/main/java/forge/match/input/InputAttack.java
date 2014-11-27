@@ -180,7 +180,9 @@ public class InputAttack extends InputSyncronizedBase {
                         declareAttacker(card);
                         if (otherCardsToSelect != null) {
                             for (Card c : otherCardsToSelect) {
-                                declareAttacker(c);
+                                if (activeBand.canJoinBand(c)) {
+                                    declareAttacker(c);
+                                }
                             }
                         }
                     }
@@ -220,7 +222,9 @@ public class InputAttack extends InputSyncronizedBase {
             declareAttacker(card);
             if (otherCardsToSelect != null) {
                 for (Card c : otherCardsToSelect) {
-                    declareAttacker(c);
+                    if (CombatUtil.canAttack(c, currentDefender)) {
+                        declareAttacker(c);
+                    }
                 }
             }
 
