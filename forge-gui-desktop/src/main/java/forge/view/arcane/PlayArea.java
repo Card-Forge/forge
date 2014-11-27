@@ -531,9 +531,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     }
 
     private void selectCard(final CardPanel panel, final MouseEvent evt) {
-        //on left double-click or Shift+left, select all other cards in stack if any
-        selectCard(panel, new MouseTriggerEvent(evt),
-                evt.getButton() == 1 && (evt.isShiftDown() || evt.getClickCount() == 2));
+        //on Shift+left-click, select all other cards in stack if any
+        selectCard(panel, new MouseTriggerEvent(evt), evt.getButton() == 1 && evt.isShiftDown());
     }
 
     private boolean selectCard(final CardPanel panel, final MouseTriggerEvent triggerEvent, final boolean selectOtherCardsInStack) {
