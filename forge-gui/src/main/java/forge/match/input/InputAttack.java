@@ -156,6 +156,11 @@ public class InputAttack extends InputSyncronizedBase {
         final List<Card> att = combat.getAttackers();
         if (triggerEvent != null && triggerEvent.getButton() == 3 && att.contains(card)) {
             undeclareAttacker(card);
+            if (otherCardsToSelect != null) {
+                for (Card c : otherCardsToSelect) {
+                    undeclareAttacker(c);
+                }
+            }
             updateMessage();
             return true;
         }
@@ -172,8 +177,12 @@ public class InputAttack extends InputSyncronizedBase {
                 }
                 else { // Join a band by selecting a non-active band member after activating a band
                     if (activeBand.canJoinBand(card)) {
-                        combat.removeFromCombat(card);
                         declareAttacker(card);
+                        if (otherCardsToSelect != null) {
+                            for (Card c : otherCardsToSelect) {
+                                declareAttacker(c);
+                            }
+                        }
                     }
                     else {
                         validAction = false;
@@ -183,6 +192,11 @@ public class InputAttack extends InputSyncronizedBase {
             else {
                 //if banding not possible, just undeclare attacker
                 undeclareAttacker(card);
+                if (otherCardsToSelect != null) {
+                    for (Card c : otherCardsToSelect) {
+                        undeclareAttacker(c);
+                    }
+                }
             }
 
             updateMessage();
@@ -203,11 +217,13 @@ public class InputAttack extends InputSyncronizedBase {
                 return false;
             }
 
-            if (combat.isAttacking(card)) {
-                combat.removeFromCombat(card);
+            declareAttacker(card);
+            if (otherCardsToSelect != null) {
+                for (Card c : otherCardsToSelect) {
+                    declareAttacker(c);
+                }
             }
 
-            declareAttacker(card);
             updateMessage();
             return true;
         }
@@ -216,6 +232,7 @@ public class InputAttack extends InputSyncronizedBase {
     }
 
     private void declareAttacker(final Card card) {
+        combat.removeFromCombat(card);
         combat.addAttacker(card, currentDefender, activeBand);
         activateBand(activeBand);
 
