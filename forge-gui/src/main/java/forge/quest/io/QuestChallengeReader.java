@@ -49,8 +49,13 @@ public class QuestChallengeReader extends StorageReaderFolder<QuestEventChalleng
 
         String humanDeck = sectionQuest.get("HumanDeck", null);
         if (humanDeck != null) {
-            File humanFile = new File(ForgeConstants.DEFAULT_CHALLENGES_DIR, humanDeck); // Won't work in other worlds!
-            qc.setHumanDeck(DeckSerializer.fromFile(humanFile));
+            // Defined human decks must live in the same directory as each other
+            try {
+                File humanFile = new File(file.getParent(), humanDeck);
+                qc.setHumanDeck(DeckSerializer.fromFile(humanFile));
+            } catch (Exception e) {
+                System.out.println("Defined human deck couldn't be loaded from " + file.getParent());
+            }
         }
 
         // Common properties
