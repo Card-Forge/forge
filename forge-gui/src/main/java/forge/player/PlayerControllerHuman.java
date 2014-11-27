@@ -834,7 +834,7 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public SpellAbility chooseSpellAbilityToPlay() {
+    public List<SpellAbility> chooseSpellAbilityToPlay() {
         MagicStack stack = game.getStack();
 
         if (mayAutoPass()) {

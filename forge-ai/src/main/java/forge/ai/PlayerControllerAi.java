@@ -381,7 +381,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public SpellAbility chooseSpellAbilityToPlay() {
+    public List<SpellAbility> chooseSpellAbilityToPlay() {
         return brains.chooseSpellAbilityToPlay();
     }
     

@@ -44,9 +44,9 @@ public class InputPassPriority extends InputSyncronizedBase {
     /** Constant <code>serialVersionUID=-581477682214137181L</code>. */
     private static final long serialVersionUID = -581477682214137181L;
     private final Player player;
-    
-    private SpellAbility chosenSa;
-    
+
+    private List<SpellAbility> chosenSa;
+
     public InputPassPriority(final PlayerControllerHuman controller, final Player human) {
         super(controller);
         player = human;
@@ -122,7 +122,7 @@ public class InputPassPriority extends InputSyncronizedBase {
         runnable.run(); //just pass priority immediately if no mana floating that would be lost
     }
 
-    public SpellAbility getChosenSa() { return chosenSa; }
+    public List<SpellAbility> getChosenSa() { return chosenSa; }
 
     @Override
     protected boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
@@ -133,30 +133,22 @@ public class InputPassPriority extends InputSyncronizedBase {
     	}
 
         final SpellAbility ability = player.getController().getAbilityToPlay(abilities, triggerEvent);
-    	if (selectAbility(ability)) {
+    	if (ability != null) {
+            chosenSa = new ArrayList<SpellAbility>();
+            chosenSa.add(ability);
             if (otherCardsToSelect != null && ability.isManaAbility()) {
                 //if mana ability activated, activate same ability on other cards to select if possible
                 String abStr = ability.toUnsuppressedString();
-                final List<SpellAbility> otherAbilitiesToPlay = new ArrayList<SpellAbility>();
                 for (Card c : otherCardsToSelect) {
                     for (SpellAbility ab : c.getAllPossibleAbilities(player, true)) {
                         if (ab.toUnsuppressedString().equals(abStr)) {
-                            otherAbilitiesToPlay.add(ab);
+                            chosenSa.add(ab);
                             break;
                         }
                     }
                 }
-                if (otherAbilitiesToPlay.size() > 0) {
-                    ThreadUtil.invokeInGameThread(new Runnable() { //must execute other abilities on game thread
-                        @Override
-                        public void run() {
-                            for (SpellAbility ab : otherAbilitiesToPlay) {
-                                player.getController().playChosenSpellAbility(ab);
-                            }
-                        }
-                    });
-                }
             }
+            stop();
     	    return true;
     	}
     	return false;
@@ -165,7 +157,8 @@ public class InputPassPriority extends InputSyncronizedBase {
     @Override
     public boolean selectAbility(final SpellAbility ab) {
     	if (ab != null) {
-            chosenSa = ab;
+    	    chosenSa = new ArrayList<SpellAbility>();
+            chosenSa.add(ab);
             stop();
             return true;
         }

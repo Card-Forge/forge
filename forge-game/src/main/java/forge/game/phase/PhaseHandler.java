@@ -19,6 +19,7 @@ package forge.game.phase;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
+
 import forge.card.mana.ManaCost;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
@@ -881,7 +882,7 @@ public class PhaseHandler implements java.io.Serializable {
                 }
 
                 game.fireEvent(new GameEventPlayerPriority(playerTurn, phase, getPriorityPlayer()));
-                SpellAbility chosenSa = null;
+                List<SpellAbility> chosenSa = null;
 
                 int loopCount = 0;
                 do {
@@ -913,7 +914,9 @@ public class PhaseHandler implements java.io.Serializable {
                         System.out.print("... " + pPlayerPriority + " plays " + chosenSa);
                     }
                     pFirstPriority = pPlayerPriority; // all opponents have to pass before stack is allowed to resolve
-                    pPlayerPriority.getController().playChosenSpellAbility(chosenSa);
+                    for (SpellAbility sa : chosenSa) {
+                        pPlayerPriority.getController().playChosenSpellAbility(sa);
+                    }
                     loopCount++;
                 } while (chosenSa != null && (loopCount < 999 || !pPlayerPriority.getController().isAI()));
 

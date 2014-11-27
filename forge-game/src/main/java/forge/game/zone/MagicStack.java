@@ -130,7 +130,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 ability.setHostCard(game.getAction().moveToStack(source));
             }
         }
-        
+
         // Always add the ability here and always unfreeze the stack
         add(ability);
         unfreezeStack();

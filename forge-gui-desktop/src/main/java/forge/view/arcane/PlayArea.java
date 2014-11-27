@@ -526,7 +526,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     @Override
     public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
-        selectCard(panel, new MouseTriggerEvent(evt), false);
+        selectCard(panel, new MouseTriggerEvent(evt), evt.isShiftDown()); //select entire stack if shift key down
         super.mouseRightClicked(panel, evt);
     }
 

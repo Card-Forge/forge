@@ -97,7 +97,6 @@ import forge.util.MyRandom;
  * @version $Id$
  */
 public class AiController {
-
     private final Player player;
     private final Game game;
     private final AiCardMemory memory;
@@ -111,13 +110,11 @@ public class AiController {
         this.bCheatShuffle = canCheatShuffle;
     }
 
-    public Game getGame()
-    {
+    public Game getGame() {
         return game;
     }
 
-    public Player getPlayer()
-    {
+    public Player getPlayer() {
         return player;
     }
 
@@ -125,24 +122,12 @@ public class AiController {
         return memory;
     }
 
-    /**
-     * <p>
-     * Constructor for ComputerAI_General.
-     * </p>
-     */
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
         game = game0;
         memory = new AiCardMemory();
     }
 
-    /**
-     * <p>
-     * getAvailableSpellAbilities.
-     * </p>
-     * 
-     * @return a {@link forge.CardList} object.
-     */
     private CardCollection getAvailableCards() {
         CardCollection all = new CardCollection(player.getCardsIn(ZoneType.Hand));
 
@@ -158,13 +143,6 @@ public class AiController {
         return all;
     }
 
-    /**
-     * <p>
-     * getPossibleETBCounters.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     */
     private ArrayList<SpellAbility> getPossibleETBCounters() {
         final Player opp = player.getOpponent();
         CardCollection all = new CardCollection(player.getCardsIn(ZoneType.Hand));
@@ -348,13 +326,10 @@ public class AiController {
                 return false;
             }
         }
-
         return true;
     }
-    
-    
-    private ArrayList<SpellAbility> getOriginalAndAltCostAbilities(final ArrayList<SpellAbility> originList)
-    {
+
+    private ArrayList<SpellAbility> getOriginalAndAltCostAbilities(final ArrayList<SpellAbility> originList) {
         final ArrayList<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
         for (SpellAbility sa : originList) {
             sa.setActivatingPlayer(player);
@@ -371,13 +346,6 @@ public class AiController {
         return result;
     }
 
-    /**
-     * Returns the spellAbilities from the card list.
-     * 
-     * @param l
-     *            a {@link forge.CardList} object.
-     * @return an array of {@link forge.game.spellability.SpellAbility} objects.
-     */
     private ArrayList<SpellAbility> getSpellAbilities(final CardCollectionView l) {
         final ArrayList<SpellAbility> spellAbilities = new ArrayList<SpellAbility>();
         for (final Card c : l) {
@@ -388,15 +356,6 @@ public class AiController {
         return spellAbilities;
     }
 
-    /**
-     * <p>
-     * getPlayableCounters.
-     * </p>
-     * 
-     * @param l
-     *            a {@link forge.CardList} object.
-     * @return a {@link java.util.ArrayList} object.
-     */
     private ArrayList<SpellAbility> getPlayableCounters(final CardCollection l) {
         final ArrayList<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
         for (final Card c : l) {
@@ -407,20 +366,11 @@ public class AiController {
                 }
             }
         }
-
         return spellAbility;
     }
 
     // plays a land if one is available
-    /**
-     * <p>
-     * chooseLandsToPlay.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public CardCollection getLandsToPlay() {
-    
         final CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
         hand.addAll(player.getCardsIn(ZoneType.Exile));
         CardCollection landList = CardLists.filter(hand, Presets.LANDS);
@@ -506,15 +456,13 @@ public class AiController {
                 return true;
             }
         });
-    
         return landList;
     }
 
-    public Card chooseBestLandToPlay(CardCollection landList)
-    {
-        if (landList.isEmpty())
+    public Card chooseBestLandToPlay(CardCollection landList) {
+        if (landList.isEmpty()) {
             return null;
-    
+        }
         //Skip reflected lands.
         CardCollection unreflectedLands = new CardCollection(landList);
         for (Card l : landList) {
@@ -594,22 +542,12 @@ public class AiController {
     }
 
     // if return true, go to next phase
-    /**
-     * <p>
-     * playCounterSpell.
-     * </p>
-     * 
-     * @param possibleCounters
-     *            a {@link java.util.ArrayList} object.
-     * @return a boolean.
-     */
     private SpellAbility chooseCounterSpell(final ArrayList<SpellAbility> possibleCounters) {
-        if (possibleCounters == null || possibleCounters.isEmpty())
-            return null;;
-        
+        if (possibleCounters == null || possibleCounters.isEmpty()) {
+            return null;
+        }
         SpellAbility bestSA = null;
         int bestRestriction = Integer.MIN_VALUE;
-
 
         for (final SpellAbility sa : getOriginalAndAltCostAbilities(possibleCounters)) {
             SpellAbility currentSA = sa;
@@ -639,7 +577,7 @@ public class AiController {
         // TODO - "Look" at Targeted SA and "calculate" the threshold
         // if (bestRestriction < targetedThreshold) return false;
         return bestSA;
-    } // playCounterSpell()
+    }
 
     public SpellAbility predictSpellToCastInMain2(ApiType exceptSA) {
         return predictSpellToCastInMain2(exceptSA, true);
@@ -651,10 +589,10 @@ public class AiController {
         }
 
         final CardCollectionView cards = handOnly ? player.getCardsIn(ZoneType.Hand) : getAvailableCards();
-    
+
         ArrayList<SpellAbility> all = getSpellAbilities(cards);
         Collections.sort(all, saComparator); // put best spells first
-        
+
         for (final SpellAbility sa : getOriginalAndAltCostAbilities(all)) {
             if (sa.getApi() == ApiType.Counter || sa.getApi() == exceptSA) {
                 continue;
@@ -669,7 +607,6 @@ public class AiController {
                 }
             }
         }
-
         return null;
     }
 
@@ -680,7 +617,7 @@ public class AiController {
             ((PlayerControllerAi)player.getController()).getAi().getCardMemory().rememberCard(c, AiCardMemory.MemorySet.HELD_MANA_SOURCES);
         }
     }
-    
+
     // This is for playing spells regularly (no Cascade/Ripple etc.)
     private AiPlayDecision canPlayAndPayFor(final SpellAbility sa) {
         if (!sa.canPlay()) {
@@ -693,7 +630,7 @@ public class AiController {
         }
         return ComputerUtilCost.canPayCost(sa, player) ? AiPlayDecision.WillPlay : AiPlayDecision.CantAfford;
     }
-    
+
     public AiPlayDecision canPlaySa(SpellAbility sa) {
         final Card card = sa.getHostCard();
         if (sa instanceof WrappedAbility) {
@@ -701,9 +638,11 @@ public class AiController {
         }
         if (sa.getApi() != null) {
             boolean canPlay = SpellApiToAi.Converter.get(sa.getApi()).canPlayAIWithSubs(player, sa);
-            if (!canPlay) 
+            if (!canPlay) {
                 return AiPlayDecision.CantPlayAi;
-        } else if (sa.getPayCosts() != null){
+            }
+        }
+        else if (sa.getPayCosts() != null){
             Cost payCosts = sa.getPayCosts();
             ManaCost mana = payCosts.getTotalMana();
             if (mana!= null && mana.countX() > 0) {
@@ -796,9 +735,9 @@ public class AiController {
                     }
                 }
             }
-
             return canPlayFromEffectAI((SpellPermanent)sa, false, true);
-        } else if (sa instanceof Spell) {
+        }
+        if (sa instanceof Spell) {
             return canPlaySpellBasic(card);
         }
         return AiPlayDecision.WillPlay;
@@ -901,22 +840,8 @@ public class AiController {
 
             return p;
         }
-    }; // Comparator
-    
-    /**
-     * <p>
-     * AI_discardNumType.
-     * </p>
-     * 
-     * @param numDiscard
-     *            a int.
-     * @param uTypes
-     *            an array of {@link java.lang.String} objects. May be null for
-     *            no restrictions.
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @return a CardCollection of discarded cards.
-     */
+    };
+
     public CardCollection getCardsToDiscard(final int numDiscard, final String[] uTypes, final SpellAbility sa) {
         CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
         if ((uTypes != null) && (sa != null)) {
@@ -981,7 +906,8 @@ public class AiController {
             if (canDiscardLands) {
                 discardList.add(landsInHand.get(0));
                 validCards.remove(landsInHand.get(0));
-            } else { // Discard other stuff
+            }
+            else { // Discard other stuff
                 CardLists.sortByCmcDesc(validCards);
                 int numLandsAvailable = numLandsInPlay;
                 if (numLandsInHand > 0) {
@@ -991,7 +917,8 @@ public class AiController {
                 if (validCards.get(0).getCMC() > numLandsAvailable) {
                     discardList.add(validCards.get(0));
                     validCards.remove(validCards.get(0));
-                } else { //Discard worst card
+                }
+                else { //Discard worst card
                     Card worst = ComputerUtilCard.getWorstAI(validCards);
                     discardList.add(worst);
                     validCards.remove(worst);
@@ -1006,41 +933,37 @@ public class AiController {
         ApiType api = sa.getApi();
 
         // Abilities without api may also use this routine, However they should provide a unique mode value
-        if (null == api) {
+        if (api == null) {
             if (mode != null) switch (mode) {
                 // case BraidOfFire: return true;
                 // case Ripple: return true;
             }
-
             String exMsg = String.format("AI confirmAction does not know what to decide about %s mode (api is null).", mode);
             throw new IllegalArgumentException(exMsg);
-
-        } else 
-            return SpellApiToAi.Converter.get(api).confirmAction(player, sa, mode, message);
+        }
+        return SpellApiToAi.Converter.get(api).confirmAction(player, sa, mode, message);
     }
 
-    public boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode mode, String message,
-            int bid, Player winner) {
+    public boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, int bid, Player winner) {
         if (mode != null) switch (mode) {
             case BidLife:
                 if (sa.hasParam("AIBidMax")) {
                     return !player.equals(winner) && bid < Integer.parseInt(sa.getParam("AIBidMax")) && player.getLife() > bid + 5;
-                } else {
-                    return false;
                 }
+                return false;
             default:
                 return false;
         } 
         return false;
     }
-    
 
     public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
         if (logic.equalsIgnoreCase("ProtectFriendly")) {
             final Player controller = hostCard.getController();
             if (affected instanceof Player) {
                 return !((Player) affected).isOpponentOf(controller);
-            } else if (affected instanceof Card) {
+            }
+            if (affected instanceof Card) {
                 return !((Card) affected).getController().isOpponentOf(controller);
             }
         }
@@ -1084,28 +1007,30 @@ public class AiController {
                 if (AiPlayDecision.WillPlay != canPlayFromEffectAI((Spell) sa, mandatory, withoutPayingManaCost)) {
                     continue;
                 }
-            } else {
+            }
+            else {
                 if (AiPlayDecision.WillPlay == canPlaySa(sa)) {
                     continue;
                 }
             }
-            
-            if (withoutPayingManaCost)
+
+            if (withoutPayingManaCost) {
                 ComputerUtil.playSpellAbilityWithoutPayingManaCost(player, sa, game);
-            else if (!ComputerUtilCost.canPayCost(sa, player)) 
+            }
+            else if (!ComputerUtilCost.canPayCost(sa, player)) {
                 continue;
-            else
+            }
+            else {
                 ComputerUtil.playStack(sa, player, game);
+            }
             return sa;
         }
         return null;
     }
-    
+
     public AiPlayDecision canPlayFromEffectAI(Spell spell, boolean mandatory, boolean withoutPayingManaCost) {
-        
         final Card card = spell.getHostCard();
-        if (spell instanceof SpellApiBased)
-        {
+        if (spell instanceof SpellApiBased) {
             boolean chance = false;
             if (withoutPayingManaCost) {
                 chance = SpellApiToAi.Converter.get(spell.getApi()).doTriggerNoCostWithSubs(player, spell, mandatory);
@@ -1184,7 +1109,7 @@ public class AiController {
         return canPlaySpellBasic(card);
     }
 
-    public SpellAbility chooseSpellAbilityToPlay() {
+    public List<SpellAbility> chooseSpellAbilityToPlay() {
         final PhaseType phase = game.getPhaseHandler().getPhase();
 
         if (game.getStack().isEmpty() && phase.isMain()) {
@@ -1194,14 +1119,21 @@ public class AiController {
                 Card land = chooseBestLandToPlay(landsWannaPlay);
                 if (ComputerUtil.damageFromETB(player, land) < player.getLife() || !player.canLoseLife()) {
                     Ability.PLAY_LAND_SURROGATE.setHostCard(land);
-                    return Ability.PLAY_LAND_SURROGATE;
+                    final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
+                    abilities.add(Ability.PLAY_LAND_SURROGATE);
+                    return abilities;
                 }
             }
         }
 
         SpellAbility sa = getSpellAbilityToPlay();
+        if (sa == null) { return null; }
+
         // System.out.println("Chosen to play: " + sa);
-        return sa;
+
+        final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
+        abilities.add(sa);
+        return abilities;
     }
 
     // declares blockers for given defender in a given combat
