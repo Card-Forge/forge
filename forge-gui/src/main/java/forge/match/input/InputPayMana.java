@@ -2,7 +2,9 @@ package forge.match.input;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -41,6 +43,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     protected final SpellAbility saPaidFor;
     private final boolean wasFloatingMana;
     private final Object zoneToRestore;
+    private final Queue<Card> delaySelectCards = new LinkedList<Card>();
 
     private boolean bPaid = false;
     protected Boolean canPayManaCost = null;
@@ -67,11 +70,34 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     @Override
     protected boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
-        if (card.getManaAbilities().isEmpty()) {
+        if (otherCardsToSelect != null) {
+            for (Card c : otherCardsToSelect) {
+                for (SpellAbility sa : c.getManaAbilities()) {
+                    if (sa.canPlay()) {
+                        delaySelectCards.add(c);
+                        break;
+                    }
+                }
+            }
+        }
+        if (!card.getManaAbilities().isEmpty() && activateManaAbility(card, manaCost)) {
+            return true;
+        }
+        return activateDelayedCard();
+    }
+
+    private boolean activateDelayedCard() {
+        if (delaySelectCards.isEmpty()) {
             return false;
         }
-        // only tap card if the mana is needed
-        return activateManaAbility(card, manaCost);
+        if (manaCost.isPaid()) {
+            delaySelectCards.clear(); //clear delayed cards if mana cost already paid
+            return false;
+        }
+        if (activateManaAbility(delaySelectCards.poll(), manaCost)) {
+            return true;
+        }
+        return activateDelayedCard();
     }
 
     @Override
@@ -357,6 +383,9 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     protected final void updateMessage() {
         locked = false;
+        if (activateDelayedCard()) {
+            return;
+        }
         if (supportAutoPay()) {
             if (canPayManaCost == null) {
                 //use AI utility to determine if mana cost can be paid if that hasn't been determined yet
