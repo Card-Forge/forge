@@ -6,7 +6,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.5.31-SNAPSHOT</version>
+        <version>1.5.31</version>
     </parent>
 
     <artifactId>forge-net</artifactId>
