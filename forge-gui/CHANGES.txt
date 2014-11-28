@@ -1,7 +1,7 @@
-Forge Beta: 11-#-2014 ver 1.5.31
+Forge Beta: 11-28-2014 ver 1.5.31
 
 
-# cards in total.
+14333 cards in total.
 
 
 -------------
@@ -26,9 +26,9 @@ Reduce flicker when resizing zone windows.
 
 
 - Card Stack Activation Improvements -
-Allow tapping multiple lands in a stack by continuing to tap on the top land of that stack
-Allow tapping all lands in a stack using Shift+click on any land in the stack
-Allow attacking with all tokens in a stack using Shift+click on any token in the stack
+Allow tapping multiple lands in a stack by continuing to tap on the top land of that stack.
+Allow tapping all lands in a stack using Shift+click on any land in the stack.
+Allow attacking with all tokens in a stack using Shift+click on any token in the stack.
 
 
 ---------
@@ -90,7 +90,16 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+DrDev
+elcnesh
+Gos
+Nordos
+serrasmurf
+Sloth
+Sol
+Swordshine
+tojammot
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
