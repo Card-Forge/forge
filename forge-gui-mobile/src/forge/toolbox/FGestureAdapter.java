@@ -21,10 +21,10 @@ public abstract class FGestureAdapter extends InputAdapter {
     public abstract boolean panStop(float x, float y);
     public abstract boolean zoom(float x, float y, float amount);
 
-    private float tapSquareSize, longPressDelay, lastTapX, lastTapY, tapSquareCenterX, tapSquareCenterY;
-    private long tapCountInterval, flingDelay, lastTapTime, gestureStartTime;
-    private int tapCount, lastTapButton, lastTapPointer;
-    private boolean inTapSquare, pressed, longPressed, longPressHandled, pinching, panning;
+    private float tapSquareSize, longPressDelay, lastTapX, lastTapY, lastTwoFingerTapX, lastTwoFingerTapY, tapSquareCenterX, tapSquareCenterY;
+    private long tapCountInterval, flingDelay, lastTapTime, gestureStartTime, lastTwoFingerTapTime;
+    private int tapCount, lastTapButton, lastTapPointer, twoFingerTapCount, lastTwoFingerTapButton;
+    private boolean inTapSquare, pressed, longPressed, longPressHandled, pinching, panning, inTwoFingerTapSquare;
 
     private final VelocityTracker tracker = new VelocityTracker();
     private final Vector2 pointer1 = new Vector2();
@@ -83,16 +83,10 @@ public abstract class FGestureAdapter extends InputAdapter {
             gestureStartTime = Gdx.input.getCurrentEventTime();
             tracker.start(x, y, gestureStartTime);
             if (Gdx.input.isTouched(1)) {
-                // Start pinch.
-                inTapSquare = false;
-                pinching = true;
-                prevPointer1.set(pointer1);
-                prevPointer2.set(pointer2);
-                focalPoint.set(Utils.getMidpoint(pointer1, pointer2));
+                startPinch();
                 endPress(x, y);
             }
             else {
-                // Normal touch down.
                 inTapSquare = true;
                 pinching = false;
                 tapSquareCenterX = x;
@@ -101,13 +95,8 @@ public abstract class FGestureAdapter extends InputAdapter {
             }
         }
         else {
-            // Start pinch.
             pointer2.set(x, y);
-            inTapSquare = false;
-            pinching = true;
-            prevPointer1.set(pointer1);
-            prevPointer2.set(pointer2);
-            focalPoint.set(Utils.getMidpoint(pointer1, pointer2));
+            startPinch();
             endPress(pointer1.x, pointer1.y);
         }
         return true;
@@ -129,8 +118,15 @@ public abstract class FGestureAdapter extends InputAdapter {
             pointer2.set(x, y);
         }
 
-        // handle pinch zoom
+        // handle pinch zoom if not two finger tapping
         if (pinching) {
+            if (inTwoFingerTapSquare) {
+                Vector2 p = pointer == 0 ? pointer1 : pointer2;
+                if (isWithinTapSquare(x, y, p.x, p.y)) {
+                    return false;
+                }
+                inTwoFingerTapSquare = false;
+            }
             return zoom(focalPoint.x, focalPoint.y, pointer1.dst(pointer2) - prevPointer1.dst(prevPointer2));
         }
 
@@ -165,7 +161,7 @@ public abstract class FGestureAdapter extends InputAdapter {
             return false;
         }
 
-        // check if we are still tapping.
+        // check if we are still tapping
         if (inTapSquare && !isWithinTapSquare(x, y, tapSquareCenterX, tapSquareCenterY)) {
             inTapSquare = false;
         }
@@ -197,6 +193,34 @@ public abstract class FGestureAdapter extends InputAdapter {
                 return tap(x, y, tapCount);
             }
             return false;
+        }
+
+        if (inTwoFingerTapSquare) {
+            Vector2 p = pointer == 0 ? pointer1 : pointer2;
+            if (isWithinTapSquare(x, y, p.x, p.y)) {
+                if (!pinching) { //don't raise two finger tap until both fingers up
+                    x = focalPoint.x;
+                    y = focalPoint.y;
+                    long time = Gdx.input.getCurrentEventTime();
+                    if (twoFingerTapCount == 2 //treat 3rd tap as a first tap, and 4th as a double tap
+                            || lastTwoFingerTapButton != button
+                            || time - lastTwoFingerTapTime > tapCountInterval
+                            || !isWithinTapSquare(x, y, lastTwoFingerTapX, lastTwoFingerTapY)) {
+                        twoFingerTapCount = 0;
+                    }
+                    twoFingerTapCount++;
+                    lastTwoFingerTapTime = time;
+                    lastTwoFingerTapX = x;
+                    lastTwoFingerTapY = y;
+                    lastTwoFingerTapButton = button;
+                    gestureStartTime = 0;
+                    inTwoFingerTapSquare = false;
+                    return twoFingerTap(x, y, twoFingerTapCount);
+                }
+            }
+            else {
+                inTwoFingerTapSquare = false;
+            }
         }
 
         if (pinching) {
@@ -254,6 +278,17 @@ public abstract class FGestureAdapter extends InputAdapter {
 
     private boolean isWithinTapSquare(float x, float y, float centerX, float centerY) {
         return Math.abs(x - centerX) < tapSquareSize && Math.abs(y - centerY) < tapSquareSize;
+    }
+
+    private void startPinch() {
+        if (inTapSquare && pointer2.dst(pointer1) < Utils.AVG_FINGER_WIDTH * 3) {
+            inTwoFingerTapSquare = true;
+        }
+        inTapSquare = false;
+        pinching = true;
+        prevPointer1.set(pointer1);
+        prevPointer2.set(pointer2);
+        focalPoint.set(Utils.getMidpoint(pointer1, pointer2));
     }
 
     private static class VelocityTracker {
