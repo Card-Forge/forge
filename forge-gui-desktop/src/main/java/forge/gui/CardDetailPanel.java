@@ -178,8 +178,13 @@ public class CardDetailPanel extends SkinnedPanel {
         setInfoLabel.setBorder(null);
         cdArea.setText("");
 
+        if (card == null) {
+            updateBorder(null, false);
+            return;
+        }
+
         final CardStateView state = card.getState(isInAltState);
-        if (card == null || state == null) {
+        if (state == null) {
             updateBorder(null, false);
             return;
         }
