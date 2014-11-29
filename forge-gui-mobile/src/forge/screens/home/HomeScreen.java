@@ -45,6 +45,7 @@ public class HomeScreen extends FScreen {
                 ConquestMenu.launchPlanarConquest(ConquestMenu.LaunchReason.StartPlanarConquest);
             }
         });
+        buttons.get(buttons.size() - 1).setEnabled(false);
         addButton("Quest Mode", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
