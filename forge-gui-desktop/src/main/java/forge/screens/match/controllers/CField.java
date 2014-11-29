@@ -67,12 +67,12 @@ public class CField implements ICDoc {
         final ZoneAction graveAction     = new ZoneAction(player, ZoneType.Graveyard, MatchConstants.HUMANGRAVEYARD);
         final ZoneAction flashBackAction = new ZoneAction(player, ZoneType.Flashback, MatchConstants.HUMANFLASHBACK);
 
-        Function<Byte, Void> manaAction = new Function<Byte, Void>() {
-            public Void apply(Byte colorCode) {
+        Function<Byte, Boolean> manaAction = new Function<Byte, Boolean>() {
+            public Boolean apply(Byte colorCode) {
                 if (CField.this.player.getLobbyPlayer() == Singletons.getControl().getGuiPlayer()) {
-                    MatchUtil.getHumanController().useMana(colorCode.byteValue());
+                    return MatchUtil.getHumanController().useMana(colorCode.byteValue());
                 }
-                return null;
+                return false;
             }
         };
 

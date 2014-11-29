@@ -3,7 +3,6 @@ package forge.toolbox.special;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +23,7 @@ import forge.game.player.PlayerView;
 import forge.gui.ForgeAction;
 import forge.screens.match.controllers.CPlayers;
 import forge.toolbox.FLabel;
+import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinnedPanel;
@@ -178,19 +178,47 @@ public class PlayerDetailsPanel extends JPanel {
     }
 
     public void setupMouseActions(final ForgeAction handAction, final ForgeAction libraryAction, final ForgeAction exileAction,
-                                  final ForgeAction graveAction, final ForgeAction flashBackAction, final Function<Byte, Void> manaAction) {
+                                  final ForgeAction graveAction, final ForgeAction flashBackAction, final Function<Byte, Boolean> manaAction) {
         // Detail label listeners
-        lblGraveyard.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { graveAction.actionPerformed(null); } } );
-        lblExile.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { exileAction.actionPerformed(null); } } );
-        lblLibrary.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { libraryAction.actionPerformed(null); } } );
-        lblHand.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { handAction.actionPerformed(null); } } );
-        lblFlashback.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { flashBackAction.actionPerformed(null); } } );
+        lblGraveyard.addMouseListener(new FMouseAdapter() {
+            @Override
+            public void onLeftClick(final MouseEvent e) {
+                graveAction.actionPerformed(null);
+            }
+        });
+        lblExile.addMouseListener(new FMouseAdapter() {
+            @Override
+            public void onLeftClick(final MouseEvent e) {
+                exileAction.actionPerformed(null);
+            }
+        });
+        lblLibrary.addMouseListener(new FMouseAdapter() {
+            @Override
+            public void onLeftClick(final MouseEvent e) {
+                libraryAction.actionPerformed(null);
+            }
+        });
+        lblHand.addMouseListener(new FMouseAdapter() {
+            @Override
+            public void onLeftClick(final MouseEvent e) {
+                handAction.actionPerformed(null);
+            }
+        });
+        lblFlashback.addMouseListener(new FMouseAdapter() {
+            @Override
+            public void onLeftClick(final MouseEvent e) {
+                flashBackAction.actionPerformed(null);
+            }
+        });
 
         for (final Pair<DetailLabel, Byte> labelPair : manaLabels) {
-            labelPair.getLeft().addMouseListener(new MouseAdapter() { @Override
-                public void mousePressed(final MouseEvent e) {
-                manaAction.apply(labelPair.getRight()); } }
-            );
+            labelPair.getLeft().addMouseListener(new FMouseAdapter() {
+                @Override
+                public void onLeftClick(final MouseEvent e) {
+                    //if shift key down, keep using mana until it runs out or no longer can be put towards the cost
+                    while (manaAction.apply(labelPair.getRight()) && e.isShiftDown()) {}
+                }
+            });
         }
     }
 

@@ -72,7 +72,8 @@ public class WatchLocalGame extends PlayerControllerHuman {
     }
 
     @Override
-    public void useMana(final byte mana) {
+    public boolean useMana(final byte mana) {
+        return false;
     }
 
     @Override

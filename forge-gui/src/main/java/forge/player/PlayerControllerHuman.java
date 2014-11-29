@@ -1344,11 +1344,12 @@ public class PlayerControllerHuman extends PlayerController {
         return false;
     }
 
-    public void useMana(final byte mana) {
+    public boolean useMana(final byte mana) {
         final Input input = inputQueue.getInput();
         if (input instanceof InputPayMana) {
-            ((InputPayMana) input).useManaFromPool(mana);
+            return ((InputPayMana) input).useManaFromPool(mana);
         }
+        return false;
     }
 
     public void selectPlayer(final PlayerView playerView, final ITriggerEvent triggerEvent) {

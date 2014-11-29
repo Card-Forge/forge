@@ -8,6 +8,10 @@ Forge Beta: 11-28-2014 ver 1.5.31
 Release Notes
 -------------
 
+- Add Shift+click support for Mana Pool icons -
+You can now hold the Shift key when clicking on mana pool icons to use as much of that mana type as possible towards the cost.
+
+
 - Optimized Default Phase Stops -
 The default phase stops have been reduced from all 24 to just 6:
 - Player: Main Phase 1, Declare Blockers, Main Phase 2 (M1, DB, M2)
