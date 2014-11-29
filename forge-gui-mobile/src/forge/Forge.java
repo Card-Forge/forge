@@ -502,8 +502,8 @@ public class Forge implements ApplicationListener {
 
         @Override
         public boolean tap(float x, float y, int count) {
-            if (shiftKeyDown && twoFingerTap(x, y, count)) {
-                return true; //give two finger tap logic a chance to handle Shift+click
+            if (shiftKeyDown && flick(x, y)) {
+                return true; //give flick logic a chance to handle Shift+click
             }
             try {
                 for (FDisplayObject listener : potentialListeners) {
@@ -520,10 +520,10 @@ public class Forge implements ApplicationListener {
         }
 
         @Override
-        public boolean twoFingerTap(float x, float y, int count) {
+        public boolean flick(float x, float y) {
             try {
                 for (FDisplayObject listener : potentialListeners) {
-                    if (listener.twoFingerTap(listener.screenToLocalX(x), listener.screenToLocalY(y), count)) {
+                    if (listener.flick(listener.screenToLocalX(x), listener.screenToLocalY(y))) {
                         return true;
                     }
                 }

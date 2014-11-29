@@ -88,7 +88,7 @@ public class VManaPool extends VDisplayArea {
         }
 
         @Override
-        public boolean twoFingerTap(float x, float y, int count) {
+        public boolean flick(float x, float y) {
             if (player.getLobbyPlayer() == GamePlayerUtil.getGuiPlayer()) {
                 //on two finger tap, keep using mana until it runs out or no longer can be put towards the cost
                 while (MatchUtil.getHumanController().useMana(colorCode)) {}

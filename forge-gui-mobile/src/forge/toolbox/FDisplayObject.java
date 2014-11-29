@@ -131,7 +131,7 @@ public abstract class FDisplayObject {
         return false;
     }
 
-    public boolean twoFingerTap(float x, float y, int count) {
+    public boolean flick(float x, float y) {
         return false;
     }
 

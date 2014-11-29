@@ -275,7 +275,7 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         }
 
         @Override
-        public boolean twoFingerTap(float x, float y, int count) {
+        public boolean flick(float x, float y) {
             if (renderedCardContains(x, y)) {
                 ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread in case a dialog needs to be shown
                     @Override

@@ -15,7 +15,7 @@ public abstract class FGestureAdapter extends InputAdapter {
     public abstract boolean longPress(float x, float y);
     public abstract boolean release(float x, float y);
     public abstract boolean tap(float x, float y, int count);
-    public abstract boolean twoFingerTap(float x, float y, int count);
+    public abstract boolean flick(float x, float y);
     public abstract boolean fling(float velocityX, float velocityY);
     public abstract boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical);
     public abstract boolean panStop(float x, float y);
@@ -221,9 +221,16 @@ public abstract class FGestureAdapter extends InputAdapter {
 
             gestureStartTime = 0;
             long time = Gdx.input.getCurrentEventTime();
-            if (time - tracker.lastTime < flingDelay) { // handle fling if needed
+            if (time - tracker.lastTime < flingDelay) { // handle flick/fling if needed
                 tracker.update(x, y, time);
-                handled = fling(tracker.getVelocityX(), tracker.getVelocityY()) || handled;
+                float velocityX = tracker.getVelocityX();
+                float velocityY = tracker.getVelocityY();
+                if (velocityY < 0 && Math.abs(velocityY) > Math.abs(velocityX)) {
+                    if (flick(tracker.startX, tracker.startY)) { //flick is a special case for flinging towards the top of the screen
+                        return true;
+                    }
+                }
+                handled = fling(velocityX, velocityY) || handled;
             }
         }
         return handled;
