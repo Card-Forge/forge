@@ -324,7 +324,7 @@ public class PumpAi extends PumpAiBase {
                     list.remove(sa.getHostCard());
                 }
                 if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                        && game.getPhaseHandler().isPlayerTurn(opp)) {
+                        && game.getPhaseHandler().getPlayerTurn().isOpponentOf(ai)) {
                     list.remove(sa.getHostCard());
                 }
             }

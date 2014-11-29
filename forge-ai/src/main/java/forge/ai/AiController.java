@@ -794,9 +794,9 @@ public class AiController {
             }
     
             // cast 0 mana cost spells first (might be a Mox)
-            if (a1 == 0 && b1 > 0) {
+            if (a1 == 0 && b1 > 0 && ApiType.Mana != a.getApi()) {
                 return -1;
-            } else if (a1 > 0 && b1 == 0) {
+            } else if (a1 > 0 && b1 == 0 && ApiType.Mana != b.getApi()) {
                 return 1;
             }
             
@@ -836,6 +836,9 @@ public class AiController {
     
             if (ApiType.DestroyAll == sa.getApi()) {
                 p += 4;
+            } 
+            else if (ApiType.Mana == sa.getApi()) {
+            	p -= 9;
             }
 
             return p;

@@ -436,7 +436,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             return false;
         }
 
-        if ((c.getNetToughness() + defense) <= 0) {
+        if (c.getNetToughness() + defense <= 0) {
             return false;
         }
 
@@ -754,6 +754,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 kws.add(kw);
             }
         }
+        pumped.addNewPT(c.getCurrentPower(), c.getCurrentPower(), timestamp);
         pumped.addTempPowerBoost(c.getTempPowerBoost() + a);
         pumped.addTempToughnessBoost(c.getTempToughnessBoost() + d);
         pumped.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);

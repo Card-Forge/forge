@@ -152,7 +152,7 @@ public class AnimateAi extends SpellAbilityAi {
             	boolean givesHaste = sa.hasParam("Keywords") && sa.getParam("Keywords").contains("Haste");
             	for (final Card c : defined) {
 	                bFlag |= !c.isCreature() && !c.isTapped()
-	                        && (c.getTurnInZone() != game.getPhaseHandler().getTurn() || givesHaste)
+	                        && (c.getTurnInZone() != ph.getTurn() || givesHaste || ph.getPlayerTurn().isOpponentOf(aiPlayer))
 	                        && !c.isEquipping();
 	                
 	                // for creatures that could be improved (like Figure of Destiny)
