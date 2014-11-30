@@ -1328,6 +1328,29 @@ will match on any cards that contains all 4 of those words in any configuration 
 will only match on cards that contain those exact words in that exact order with no other words in between (4/14330 implemented).
 
 
+- Optimized Default Phase Stops -
+The default phase stops have been reduced from all 24 to just 6:
+- Player: Main Phase 1, Declare Blockers, Main Phase 2 (M1, DB, M2)
+- Opponent: Beginning of Combat, Declare Blockers, End of Turn (BC, DB, ET)
+This should optimize the out-of-the-box experience for users and help new users figure out when the optimal time to cast instant-speed effects is.
+You can still customize these by clicking on the phase stop indicator, and your customizations will be remembered.
+
+
+- Zone Window Improvements -
+Popup windows for zones (Hand, Library, Graveyard, Exile, Flashback) will now remember their position and size between sessions. Human and AI zones will each be remembered separately.
+Clicking the zone icon under a player's avatar will now hide the zone window if its currently open.
+After the last card is removed from a zone window, that window will now automatically be hidden. An example of this would be casting the last card in the Flashback zone.
+Default size of zone windows has been slightly reduced.
+Prevent horizontal scrollbar appearing in zone windows.
+Reduce flicker when resizing zone windows.
+
+
+- Card Stack Activation Improvements -
+Allow tapping multiple lands in a stack by continuing to tap on the top land of that stack.
+Allow tapping all lands in a stack using Shift+click on any land in the stack.
+Allow attacking with all tokens in a stack using Shift+click on any token in the stack.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 
