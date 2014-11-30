@@ -11,13 +11,13 @@ import forge.FThreads;
 import forge.Graphics;
 import forge.card.CardZoom;
 import forge.card.CardRenderer.CardStackPosition;
+import forge.card.CardZoom.ActivateHandler;
 import forge.game.card.CardView;
 import forge.match.MatchUtil;
 import forge.toolbox.FCardPanel;
-import forge.util.Callback;
 import forge.util.ThreadUtil;
 
-public abstract class VCardDisplayArea extends VDisplayArea {
+public abstract class VCardDisplayArea extends VDisplayArea implements ActivateHandler {
     private static final float CARD_STACK_OFFSET = 0.2f;
 
     protected final List<CardView> orderedCards = new ArrayList<CardView>();
@@ -174,6 +174,16 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         g.startClip(0, -h, getWidth(), 3 * h);
     }
 
+    @Override
+    public String getActivateAction(int index) {
+        return "activate card";
+    }
+
+    @Override
+    public void activate(int index) {
+        CardAreaPanel.get(orderedCards.get(index)).selectCard(false);
+    }
+
     public static class CardAreaPanel extends FCardPanel {
         private static final Map<Integer, CardAreaPanel> allCardPanels = new HashMap<Integer, CardAreaPanel>();
 
@@ -317,12 +327,7 @@ public abstract class VCardDisplayArea extends VDisplayArea {
 
         private void showZoom() {
             final List<CardView> cards = displayArea.orderedCards;
-            CardZoom.show(cards, cards.indexOf(getCard()), new Callback<Integer>() {
-                @Override
-                public void run(Integer result) {
-                    CardAreaPanel.get(cards.get(result)).selectCard(false);
-                }
-            });
+            CardZoom.show(cards, cards.indexOf(getCard()), displayArea);
         }
 
         public void buildCardPanelList(List<? super FCardPanel> list) {

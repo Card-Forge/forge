@@ -14,11 +14,9 @@ import forge.itemmanager.filters.CardSearchFilter;
 import forge.itemmanager.filters.CardTypeFilter;
 import forge.itemmanager.filters.TextSearchFilter;
 import forge.toolbox.FList.CompactModeHandler;
-import forge.util.Callback;
 
 /** 
  * ItemManager for cards
- *
  */
 public class CardManager extends ItemManager<PaperCard> {
     public CardManager(boolean wantUnique0) {
@@ -62,24 +60,12 @@ public class CardManager extends ItemManager<PaperCard> {
 
             @Override
             public boolean tap(Integer index, Entry<PaperCard, Integer> value, float x, float y, int count) {
-                return CardRenderer.cardListItemTap(model.getOrderedList(), index, new Callback<Integer>() {
-                    @Override
-                    public void run(Integer result) {
-                        setSelectedIndex(result);
-                        showMenu(true);
-                    }
-                }, x, y, count, compactModeHandler.isCompactMode());
+                return CardRenderer.cardListItemTap(model.getOrderedList(), index, CardManager.this, x, y, count, compactModeHandler.isCompactMode());
             }
 
             @Override
             public boolean longPress(Integer index, Entry<PaperCard, Integer> value, float x, float y) {
-                CardZoom.show(model.getOrderedList(), index, new Callback<Integer>() {
-                    @Override
-                    public void run(Integer result) {
-                        setSelectedIndex(result);
-                        showMenu(true);
-                    }
-                });
+                CardZoom.show(model.getOrderedList(), index, CardManager.this);
                 return true;
             }
         };

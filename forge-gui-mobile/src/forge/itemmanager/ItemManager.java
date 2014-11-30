@@ -30,6 +30,7 @@ import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.card.CardZoom.ActivateHandler;
 import forge.item.InventoryItem;
 import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.filters.TextSearchFilter;
@@ -53,7 +54,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 
-public abstract class ItemManager<T extends InventoryItem> extends FContainer implements IItemManager<T> {
+public abstract class ItemManager<T extends InventoryItem> extends FContainer implements IItemManager<T>, ActivateHandler {
     private ItemPool<T> pool;
     protected final ItemManagerModel<T> model;
     private Predicate<? super T> filterPredicate = null;
@@ -1071,6 +1072,22 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             }
 
             setBounds(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+        }
+    }
+
+    @Override
+    public String getActivateAction(int index) {
+        if (contextMenuBuilder != null) {
+            return "select card";
+        }
+        return null;
+    }
+
+    @Override
+    public void activate(int index) {
+        if (contextMenuBuilder != null) {
+            setSelectedIndex(index);
+            showMenu(true);
         }
     }
 }

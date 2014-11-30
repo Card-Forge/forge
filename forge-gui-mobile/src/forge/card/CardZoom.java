@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Graphics;
@@ -17,7 +19,6 @@ import forge.item.InventoryItem;
 import forge.screens.FScreen;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FOverlay;
-import forge.util.Callback;
 import forge.util.FCollectionView;
 
 public class CardZoom extends FOverlay {
@@ -30,19 +31,19 @@ public class CardZoom extends FOverlay {
     private static int currentIndex;
     private static CardView currentCard, prevCard, nextCard;
     private static boolean zoomMode = true;
-    private static Callback<Integer> onActivate;
+    private static ActivateHandler activateHandler;
 
     public static void show(Object item) {
         List<Object> items0 = new ArrayList<Object>();
         items0.add(item);
         show(items0, 0, null);
     }
-    public static void show(FCollectionView<?> items0, int currentIndex0, Callback<Integer> onActivate0) {
-        show((List<?>)items0, currentIndex0, onActivate0);
+    public static void show(FCollectionView<?> items0, int currentIndex0, ActivateHandler activateHandler0) {
+        show((List<?>)items0, currentIndex0, activateHandler0);
     }
-    public static void show(final List<?> items0, int currentIndex0, Callback<Integer> onActivate0) {
+    public static void show(final List<?> items0, int currentIndex0, ActivateHandler activateHandler0) {
         items = items0;
-        onActivate = onActivate0;
+        activateHandler = activateHandler0;
         currentIndex = currentIndex0;
         currentCard = getCardView(items.get(currentIndex));
         prevCard = currentIndex > 0 ? getCardView(items.get(currentIndex - 1)) : null;
@@ -114,9 +115,9 @@ public class CardZoom extends FOverlay {
             zoomMode = !zoomMode;
             return true;
         }
-        if (onActivate != null) {
+        if (activateHandler != null) {
             hide();
-            onActivate.run(currentIndex);
+            activateHandler.activate(currentIndex);
             return true;
         }
         return false;
@@ -146,9 +147,12 @@ public class CardZoom extends FOverlay {
         }
 
         float messageHeight = MSG_FONT.getCapHeight() * 2.5f;
-        if (onActivate != null) {
-            g.fillRect(MSG_BACK_COLOR, 0, 0, w, messageHeight);
-            g.drawText("Swipe up to activate card", MSG_FONT, MSG_FORE_COLOR, 0, 0, w, messageHeight, false, HAlignment.CENTER, true);
+        if (activateHandler != null) {
+            String action = activateHandler.getActivateAction(currentIndex);
+            if (StringUtils.isNotEmpty(action)) {
+                g.fillRect(MSG_BACK_COLOR, 0, 0, w, messageHeight);
+                g.drawText("Swipe up to " + action, MSG_FONT, MSG_FORE_COLOR, 0, 0, w, messageHeight, false, HAlignment.CENTER, true);
+            }
         }
         g.fillRect(MSG_BACK_COLOR, 0, h - messageHeight, w, messageHeight);
         g.drawText("Swipe down to switch to " + (zoomMode ? "detail" : "picture") + " view", MSG_FONT, MSG_FORE_COLOR, 0, h - messageHeight, w, messageHeight, false, HAlignment.CENTER, true);
@@ -156,5 +160,10 @@ public class CardZoom extends FOverlay {
 
     @Override
     protected void doLayout(float width, float height) {
+    }
+
+    public static interface ActivateHandler {
+        String getActivateAction(int index);
+        void activate(int index);
     }
 }

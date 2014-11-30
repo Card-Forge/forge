@@ -30,7 +30,6 @@ import forge.toolbox.FTextField;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
-import forge.util.Callback;
 import forge.util.Utils;
 
 import java.util.*;
@@ -873,13 +872,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         public boolean longPress(float x, float y) {
             ItemInfo item = getItemAtPoint(x + getLeft(), y + getTop());
             if (item != null) {
-                CardZoom.show(orderedItems, orderedItems.indexOf(item), new Callback<Integer>() {
-                    @Override
-                    public void run(Integer result) {
-                        setSelectedIndex(result);
-                        itemManager.showMenu(true);
-                    }
-                });
+                CardZoom.show(orderedItems, orderedItems.indexOf(item), itemManager);
                 return true;
             }
             return false;

@@ -21,6 +21,7 @@ import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
 import forge.assets.ImageCache;
 import forge.card.CardDetailUtil.DetailColors;
+import forge.card.CardZoom.ActivateHandler;
 import forge.card.mana.ManaCost;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
@@ -29,7 +30,6 @@ import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FList;
-import forge.util.Callback;
 import forge.util.Utils;
 
 public class CardRenderer {
@@ -239,18 +239,18 @@ public class CardRenderer {
         g.drawText(type, typeFont, foreColor, x, y, availableTypeWidth, lineHeight, false, HAlignment.LEFT, true);
     }
 
-    public static boolean cardListItemTap(List<?> cards, int selectedIndex, Callback<Integer> onActivate0, float x, float y, int count, boolean compactMode) {
+    public static boolean cardListItemTap(List<?> cards, int selectedIndex, ActivateHandler activateHandler, float x, float y, int count, boolean compactMode) {
         if (x <= getCardListItemHeight(compactMode) * CARD_ART_RATIO) {
-            CardZoom.show(cards, selectedIndex, onActivate0);
+            CardZoom.show(cards, selectedIndex, activateHandler);
             return true;
         }
         return false;
     }
-    public static boolean paperCardListItemTap(List<?> cards, int selectedIndex, Callback<Integer> onActivate0, float x, float y, int count, boolean compactMode) {
+    public static boolean paperCardListItemTap(List<?> cards, int selectedIndex, ActivateHandler activateHandler, float x, float y, int count, boolean compactMode) {
         float cardArtHeight = getCardListItemHeight(compactMode);
         float cardArtWidth = cardArtHeight * CARD_ART_RATIO;
         if (x <= cardArtWidth && y <= cardArtHeight) {
-            CardZoom.show(cards, selectedIndex, onActivate0);
+            CardZoom.show(cards, selectedIndex, activateHandler);
             return true;
         }
         return false;

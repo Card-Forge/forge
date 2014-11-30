@@ -14,6 +14,7 @@ import forge.assets.FSkinColor.Colors;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.card.CardRenderer.CardStackPosition;
+import forge.card.CardZoom.ActivateHandler;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
@@ -21,10 +22,9 @@ import forge.item.PaperCard;
 import forge.screens.match.MatchController;
 import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VStack;
-import forge.util.Callback;
 import forge.util.Utils;
 
-public class FChoiceList<T> extends FList<T> {
+public class FChoiceList<T> extends FList<T> implements ActivateHandler {
     public static final FSkinColor ITEM_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);
     public static final FSkinColor ALT_ITEM_COLOR = ITEM_COLOR.getContrastColor(-20);
     public static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
@@ -321,22 +321,12 @@ public class FChoiceList<T> extends FList<T> {
 
         @Override
         public boolean tap(Integer index, T value, float x, float y, int count) {
-            return CardRenderer.cardListItemTap(items, index, new Callback<Integer>() {
-                @Override
-                public void run(Integer result) {
-                    setSelectedIndex(result);
-                }
-            }, x, y, count, compactModeHandler.isCompactMode());
+            return CardRenderer.cardListItemTap(items, index, FChoiceList.this, x, y, count, compactModeHandler.isCompactMode());
         }
 
         @Override
         public boolean longPress(Integer index, T value, float x, float y) {
-            CardZoom.show(items, index, new Callback<Integer>() {
-                @Override
-                public void run(Integer result) {
-                    setSelectedIndex(result);
-                }
-            });
+            CardZoom.show(items, index, FChoiceList.this);
             return true;
         }
 
@@ -359,22 +349,12 @@ public class FChoiceList<T> extends FList<T> {
 
         @Override
         public boolean tap(Integer index, T value, float x, float y, int count) {
-            return CardRenderer.cardListItemTap(items, index, new Callback<Integer>() {
-                @Override
-                public void run(Integer result) {
-                    setSelectedIndex(result);
-                }
-            }, x, y, count, compactModeHandler.isCompactMode());
+            return CardRenderer.cardListItemTap(items, index, FChoiceList.this, x, y, count, compactModeHandler.isCompactMode());
         }
 
         @Override
         public boolean longPress(Integer index, T value, float x, float y) {
-            CardZoom.show(items, index, new Callback<Integer>() {
-                @Override
-                public void run(Integer result) {
-                    setSelectedIndex(result);
-                }
-            });
+            CardZoom.show(items, index, FChoiceList.this);
             return true;
         }
 
@@ -451,6 +431,21 @@ public class FChoiceList<T> extends FList<T> {
             x += VAvatar.WIDTH;
             w -= VAvatar.WIDTH;
             g.drawText(player.getName() + " (" + player.getLife() + ")", font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
+        }
+    }
+
+    @Override
+    public String getActivateAction(int index) {
+        if (maxChoices > 0) {
+            return "select card";
+        }
+        return null;
+    }
+
+    @Override
+    public void activate(int index) {
+        if (maxChoices > 0) {
+            setSelectedIndex(index);
         }
     }
 }

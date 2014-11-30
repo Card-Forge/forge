@@ -19,7 +19,6 @@ import forge.itemmanager.filters.TextSearchFilter;
 import forge.quest.QuestSpellShop;
 import forge.toolbox.FList;
 import forge.toolbox.FList.CompactModeHandler;
-import forge.util.Callback;
 
 
 public final class SpellShopManager extends ItemManager<InventoryItem> {
@@ -89,13 +88,7 @@ public final class SpellShopManager extends ItemManager<InventoryItem> {
             @Override
             public boolean tap(Integer index, Entry<InventoryItem, Integer> value, float x, float y, int count) {
                 if (value.getKey() instanceof PaperCard) {
-                    return CardRenderer.cardListItemTap(model.getOrderedList(), index, new Callback<Integer>() {
-                        @Override
-                        public void run(Integer result) {
-                            setSelectedIndex(result);
-                            showMenu(true);
-                        }
-                    }, x, y, count, compactModeHandler.isCompactMode());
+                    return CardRenderer.cardListItemTap(model.getOrderedList(), index, SpellShopManager.this, x, y, count, compactModeHandler.isCompactMode());
                 }
                 return false;
             }
@@ -103,13 +96,7 @@ public final class SpellShopManager extends ItemManager<InventoryItem> {
             @Override
             public boolean longPress(Integer index, Entry<InventoryItem, Integer> value, float x, float y) {
                 if (value.getKey() instanceof PaperCard) {
-                    CardZoom.show(model.getOrderedList(), index, new Callback<Integer>() {
-                        @Override
-                        public void run(Integer result) {
-                            setSelectedIndex(result);
-                            showMenu(true);
-                        }
-                    });
+                    CardZoom.show(model.getOrderedList(), index, SpellShopManager.this);
                     return true;
                 }
                 return false;
