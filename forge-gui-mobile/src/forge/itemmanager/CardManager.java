@@ -60,13 +60,13 @@ public class CardManager extends ItemManager<PaperCard> {
             }
 
             @Override
-            public boolean tap(Entry<PaperCard, Integer> value, float x, float y, int count) {
-                return CardRenderer.cardListItemTap(value.getKey(), x, y, count, compactModeHandler.isCompactMode());
+            public boolean tap(Integer index, Entry<PaperCard, Integer> value, float x, float y, int count) {
+                return CardRenderer.cardListItemTap(model.getOrderedList(), index, x, y, count, compactModeHandler.isCompactMode());
             }
 
             @Override
-            public boolean longPress(Entry<PaperCard, Integer> value, float x, float y) {
-                CardZoom.show(value.getKey());
+            public boolean longPress(Integer index, Entry<PaperCard, Integer> value, float x, float y) {
+                CardZoom.show(getFilteredItems().toFlatList(), index);
                 return true;
             }
         };

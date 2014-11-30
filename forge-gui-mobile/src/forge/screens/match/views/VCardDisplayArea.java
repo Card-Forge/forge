@@ -265,7 +265,8 @@ public abstract class VCardDisplayArea extends VDisplayArea {
                     public void run() {
                         if (!selectCard(false)) {
                             //if no cards in stack can be selected, just show zoom/details for card
-                            CardZoom.show(getCard());
+                            List<CardView> cards = displayArea.orderedCards;
+                            CardZoom.show(cards, cards.indexOf(getCard()));
                         }
                     }
                 });
@@ -308,7 +309,8 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         @Override
         public boolean longPress(float x, float y) {
             if (renderedCardContains(x, y)) {
-                CardZoom.show(getCard());
+                List<CardView> cards = displayArea.orderedCards;
+                CardZoom.show(cards, cards.indexOf(getCard()));
                 return true;
             }
             return false;

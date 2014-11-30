@@ -363,18 +363,18 @@ public class CardRenderer {
         g.drawText(type, typeFont, foreColor, x, y, availableTypeWidth, lineHeight, false, HAlignment.LEFT, true);
     }
 
-    public static boolean cardListItemTap(CardView card, float x, float y, int count, boolean compactMode) {
+    public static boolean cardListItemTap(List<?> cards, int selectedIndex, float x, float y, int count, boolean compactMode) {
         if (x <= getCardListItemHeight(compactMode) * CARD_ART_RATIO) {
-            CardZoom.show(card);
+            CardZoom.show(cards, selectedIndex);
             return true;
         }
         return false;
     }
-    public static boolean cardListItemTap(IPaperCard pc, float x, float y, int count, boolean compactMode) {
+    public static boolean paperCardListItemTap(List<?> cards, int selectedIndex, float x, float y, int count, boolean compactMode) {
         float cardArtHeight = getCardListItemHeight(compactMode);
         float cardArtWidth = cardArtHeight * CARD_ART_RATIO;
         if (x <= cardArtWidth && y <= cardArtHeight) {
-            CardZoom.show(CardView.getCardForUi(pc));
+            CardZoom.show(cards, selectedIndex);
             return true;
         }
         return false;

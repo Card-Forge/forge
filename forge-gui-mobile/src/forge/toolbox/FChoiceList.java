@@ -95,7 +95,7 @@ public class FChoiceList<T> extends FList<T> {
                     selectedIndices.add(index);
                     onSelectionChange();
                 }
-                if (renderer.tap(value, x, y, count)) {
+                if (renderer.tap(index, value, x, y, count)) {
                     prevTapIndex = index;
                     return true; //don't activate if renderer handles tap
                 }
@@ -108,7 +108,7 @@ public class FChoiceList<T> extends FList<T> {
 
             @Override
             public boolean showMenu(Integer index, T value, FDisplayObject owner, float x, float y) {
-                return renderer.longPress(value, x, y);
+                return renderer.longPress(index, value, x, y);
             }
 
             @Override
@@ -272,8 +272,8 @@ public class FChoiceList<T> extends FList<T> {
     protected abstract class ItemRenderer {
         public abstract FSkinFont getDefaultFont();
         public abstract float getItemHeight();
-        public abstract boolean tap(T value, float x, float y, int count);
-        public abstract boolean longPress(T value, float x, float y);
+        public abstract boolean tap(Integer index, T value, float x, float y, int count);
+        public abstract boolean longPress(Integer index, T value, float x, float y);
         public abstract void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h);
     }
     protected class DefaultItemRenderer extends ItemRenderer {
@@ -291,12 +291,12 @@ public class FChoiceList<T> extends FList<T> {
         }
 
         @Override
-        public boolean tap(T value, float x, float y, int count) {
+        public boolean tap(Integer index, T value, float x, float y, int count) {
             return false;
         }
 
         @Override
-        public boolean longPress(T value, float x, float y) {
+        public boolean longPress(Integer index, T value, float x, float y) {
             return false;
         }
 
@@ -318,13 +318,13 @@ public class FChoiceList<T> extends FList<T> {
         }
 
         @Override
-        public boolean tap(T value, float x, float y, int count) {
-            return CardRenderer.cardListItemTap((PaperCard)value, x, y, count, compactModeHandler.isCompactMode());
+        public boolean tap(Integer index, T value, float x, float y, int count) {
+            return CardRenderer.cardListItemTap(items, index, x, y, count, compactModeHandler.isCompactMode());
         }
 
         @Override
-        public boolean longPress(T value, float x, float y) {
-            CardZoom.show((PaperCard)value);
+        public boolean longPress(Integer index, T value, float x, float y) {
+            CardZoom.show(items, index);
             return true;
         }
 
@@ -346,13 +346,13 @@ public class FChoiceList<T> extends FList<T> {
         }
 
         @Override
-        public boolean tap(T value, float x, float y, int count) {
-            return CardRenderer.cardListItemTap((CardView)value, x, y, count, compactModeHandler.isCompactMode());
+        public boolean tap(Integer index, T value, float x, float y, int count) {
+            return CardRenderer.cardListItemTap(items, index, x, y, count, compactModeHandler.isCompactMode());
         }
 
         @Override
-        public boolean longPress(T value, float x, float y) {
-            CardZoom.show((CardView)value);
+        public boolean longPress(Integer index, T value, float x, float y) {
+            CardZoom.show(items, index);
             return true;
         }
 
@@ -376,7 +376,7 @@ public class FChoiceList<T> extends FList<T> {
         }
 
         @Override
-        public boolean tap(T value, float x, float y, int count) {
+        public boolean tap(Integer index, T value, float x, float y, int count) {
             if (x <= VStack.CARD_WIDTH + 2 * FList.PADDING) {
                 CardZoom.show(((SpellAbility)value).getView().getHostCard());
                 return true;
@@ -385,7 +385,7 @@ public class FChoiceList<T> extends FList<T> {
         }
 
         @Override
-        public boolean longPress(T value, float x, float y) {
+        public boolean longPress(Integer index, T value, float x, float y) {
             CardZoom.show(((SpellAbility)value).getView().getHostCard());
             return true;
         }
@@ -413,12 +413,12 @@ public class FChoiceList<T> extends FList<T> {
         }
 
         @Override
-        public boolean tap(T value, float x, float y, int count) {
+        public boolean tap(Integer index, T value, float x, float y, int count) {
             return false;
         }
 
         @Override
-        public boolean longPress(T value, float x, float y) {
+        public boolean longPress(Integer index, T value, float x, float y) {
             return false;
         }
 

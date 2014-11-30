@@ -12,8 +12,6 @@ import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardZoom;
 import forge.deck.DeckProxy;
-import forge.game.card.CardView;
-import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.ColumnDef;
@@ -873,8 +871,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         @Override
         public boolean longPress(float x, float y) {
             ItemInfo item = getItemAtPoint(x + getLeft(), y + getTop());
-            if (item != null && item.item instanceof IPaperCard) {
-                CardZoom.show(CardView.getCardForUi((IPaperCard) item.item));
+            if (item != null) {
+                CardZoom.show(orderedItems, orderedItems.indexOf(item));
                 return true;
             }
             return false;

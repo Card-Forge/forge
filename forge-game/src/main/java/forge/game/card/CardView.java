@@ -79,6 +79,7 @@ public class CardView extends GameEntityView {
         this(id0, name0);
         set(TrackableProperty.Owner, ownerAndController);
         set(TrackableProperty.Controller, ownerAndController);
+        set(TrackableProperty.ImageKey, imageKey);
     }
 
     public PlayerView getOwner() {

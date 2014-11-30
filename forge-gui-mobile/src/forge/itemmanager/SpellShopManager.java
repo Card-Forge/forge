@@ -86,17 +86,17 @@ public final class SpellShopManager extends ItemManager<InventoryItem> {
             }
 
             @Override
-            public boolean tap(Entry<InventoryItem, Integer> value, float x, float y, int count) {
+            public boolean tap(Integer index, Entry<InventoryItem, Integer> value, float x, float y, int count) {
                 if (value.getKey() instanceof PaperCard) {
-                    return CardRenderer.cardListItemTap((PaperCard)value.getKey(), x, y, count, compactModeHandler.isCompactMode());
+                    return CardRenderer.cardListItemTap(model.getOrderedList(), index, x, y, count, compactModeHandler.isCompactMode());
                 }
                 return false;
             }
 
             @Override
-            public boolean longPress(Entry<InventoryItem, Integer> value, float x, float y) {
+            public boolean longPress(Integer index, Entry<InventoryItem, Integer> value, float x, float y) {
                 if (value.getKey() instanceof PaperCard) {
-                    CardZoom.show((PaperCard)value.getKey());
+                    CardZoom.show(model.getOrderedList(), index);
                     return true;
                 }
                 return false;

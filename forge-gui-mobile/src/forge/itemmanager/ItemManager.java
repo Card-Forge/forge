@@ -55,7 +55,7 @@ import java.util.Map.Entry;
 
 public abstract class ItemManager<T extends InventoryItem> extends FContainer implements IItemManager<T> {
     private ItemPool<T> pool;
-    private final ItemManagerModel<T> model;
+    protected final ItemManagerModel<T> model;
     private Predicate<? super T> filterPredicate = null;
     private final List<ItemFilter<? extends T>> filters = new ArrayList<ItemFilter<? extends T>>();
     private boolean hideFilters = false;
@@ -254,8 +254,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     public abstract class ItemRenderer {
         public abstract float getItemHeight();
-        public abstract boolean tap(Entry<T, Integer> value, float x, float y, int count);
-        public abstract boolean longPress(Entry<T, Integer> value, float x, float y);
+        public abstract boolean tap(Integer index, Entry<T, Integer> value, float x, float y, int count);
+        public abstract boolean longPress(Integer index, Entry<T, Integer> value, float x, float y);
         public abstract void drawValue(Graphics g, Entry<T, Integer> value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h);
     }
     public abstract ItemRenderer getListItemRenderer(final CompactModeHandler compactModeHandler);

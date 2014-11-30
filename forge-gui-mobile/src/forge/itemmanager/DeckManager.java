@@ -92,7 +92,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
             }
 
             @Override
-            public boolean tap(Entry<DeckProxy, Integer> value, float x, float y, int count) {
+            public boolean tap(Integer index, Entry<DeckProxy, Integer> value, float x, float y, int count) {
                 float bottomRight = IMAGE_SIZE + 2 * FList.PADDING;
                 if (x <= bottomRight && y <= bottomRight) {
                     DeckPreferences prefs = DeckPreferences.getPrefs(value.getKey());
@@ -103,7 +103,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
             }
 
             @Override
-            public boolean longPress(Entry<DeckProxy, Integer> value, float x, float y) {
+            public boolean longPress(Integer index, Entry<DeckProxy, Integer> value, float x, float y) {
                 FDeckViewer.show(value.getKey().getDeck());
                 return true;
             }
