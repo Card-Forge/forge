@@ -87,28 +87,7 @@ public class CardZoom extends FOverlay {
 
     @Override
     public boolean tap(float x, float y, int count) {
-        float w = getWidth();
-        float h = getHeight();
-
-        if (y >= h - TAB_HEIGHT && zoomMode != (x < w / 2)) {
-            zoomMode = !zoomMode; //handle toggling between zoom and details
-            return true;
-        }
-
-        float visibleHeight = FCardPanel.ASPECT_RATIO * w * 0.5f;
-        if (y >= (h - visibleHeight) / 2 && y < (h + visibleHeight) / 2) {
-            float visibleWidth = w * 0.2f;
-            if (x < visibleWidth) {
-                incrementCard(-1);
-                return true;
-            }
-            else if (x >= w - visibleWidth) {
-                incrementCard(1);
-                return true;
-            }
-        }
-
-        hide(); //hide if uncovered area tapped
+        hide();
         return true;
     }
 
@@ -116,8 +95,16 @@ public class CardZoom extends FOverlay {
     public boolean fling(float velocityX, float velocityY) {
         //toggle between Zoom and Details with a quick horizontal fling action
         if (Math.abs(velocityX) > Math.abs(velocityY)) {
-            zoomMode = !zoomMode;
+            incrementCard(velocityX > 0 ? -1 : 1);
             return true;
+        }
+        else {
+            if (velocityY > 0) {
+                zoomMode = !zoomMode;
+            }
+            else {
+                
+            }
         }
         return false;
     }
