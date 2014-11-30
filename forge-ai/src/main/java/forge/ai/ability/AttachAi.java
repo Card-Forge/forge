@@ -18,8 +18,6 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
-import forge.util.MyRandom;
-
 import java.util.*;
 
 public class AttachAi extends SpellAbilityAi {

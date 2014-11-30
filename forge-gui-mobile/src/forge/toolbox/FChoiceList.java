@@ -21,6 +21,7 @@ import forge.item.PaperCard;
 import forge.screens.match.MatchController;
 import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VStack;
+import forge.util.Callback;
 import forge.util.Utils;
 
 public class FChoiceList<T> extends FList<T> {
@@ -319,12 +320,22 @@ public class FChoiceList<T> extends FList<T> {
 
         @Override
         public boolean tap(Integer index, T value, float x, float y, int count) {
-            return CardRenderer.cardListItemTap(items, index, x, y, count, compactModeHandler.isCompactMode());
+            return CardRenderer.cardListItemTap(items, index, new Callback<Integer>() {
+                @Override
+                public void run(Integer result) {
+                    setSelectedIndex(result);
+                }
+            }, x, y, count, compactModeHandler.isCompactMode());
         }
 
         @Override
         public boolean longPress(Integer index, T value, float x, float y) {
-            CardZoom.show(items, index);
+            CardZoom.show(items, index, new Callback<Integer>() {
+                @Override
+                public void run(Integer result) {
+                    setSelectedIndex(result);
+                }
+            });
             return true;
         }
 
@@ -347,12 +358,22 @@ public class FChoiceList<T> extends FList<T> {
 
         @Override
         public boolean tap(Integer index, T value, float x, float y, int count) {
-            return CardRenderer.cardListItemTap(items, index, x, y, count, compactModeHandler.isCompactMode());
+            return CardRenderer.cardListItemTap(items, index, new Callback<Integer>() {
+                @Override
+                public void run(Integer result) {
+                    setSelectedIndex(result);
+                }
+            }, x, y, count, compactModeHandler.isCompactMode());
         }
 
         @Override
         public boolean longPress(Integer index, T value, float x, float y) {
-            CardZoom.show(items, index);
+            CardZoom.show(items, index, new Callback<Integer>() {
+                @Override
+                public void run(Integer result) {
+                    setSelectedIndex(result);
+                }
+            });
             return true;
         }
 

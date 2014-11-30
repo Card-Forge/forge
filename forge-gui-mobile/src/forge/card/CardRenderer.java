@@ -30,6 +30,7 @@ import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FList;
+import forge.util.Callback;
 import forge.util.Utils;
 
 public class CardRenderer {
@@ -280,18 +281,18 @@ public class CardRenderer {
         g.drawText(type, typeFont, foreColor, x, y, availableTypeWidth, lineHeight, false, HAlignment.LEFT, true);
     }
 
-    public static boolean cardListItemTap(List<?> cards, int selectedIndex, float x, float y, int count, boolean compactMode) {
+    public static boolean cardListItemTap(List<?> cards, int selectedIndex, Callback<Integer> onActivate0, float x, float y, int count, boolean compactMode) {
         if (x <= getCardListItemHeight(compactMode) * CARD_ART_RATIO) {
-            CardZoom.show(cards, selectedIndex);
+            CardZoom.show(cards, selectedIndex, onActivate0);
             return true;
         }
         return false;
     }
-    public static boolean paperCardListItemTap(List<?> cards, int selectedIndex, float x, float y, int count, boolean compactMode) {
+    public static boolean paperCardListItemTap(List<?> cards, int selectedIndex, Callback<Integer> onActivate0, float x, float y, int count, boolean compactMode) {
         float cardArtHeight = getCardListItemHeight(compactMode);
         float cardArtWidth = cardArtHeight * CARD_ART_RATIO;
         if (x <= cardArtWidth && y <= cardArtHeight) {
-            CardZoom.show(cards, selectedIndex);
+            CardZoom.show(cards, selectedIndex, onActivate0);
             return true;
         }
         return false;

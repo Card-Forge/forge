@@ -3,7 +3,6 @@ package forge.quest.io;
 import forge.ImageKeys;
 import forge.deck.io.DeckSerializer;
 import forge.deck.io.DeckStorage;
-import forge.properties.ForgeConstants;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestEventDifficulty;
 import forge.util.FileSection;

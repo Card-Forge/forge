@@ -13,7 +13,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;

@@ -14,6 +14,7 @@ import forge.card.CardRenderer.CardStackPosition;
 import forge.game.card.CardView;
 import forge.match.MatchUtil;
 import forge.toolbox.FCardPanel;
+import forge.util.Callback;
 import forge.util.ThreadUtil;
 
 public abstract class VCardDisplayArea extends VDisplayArea {
@@ -265,8 +266,7 @@ public abstract class VCardDisplayArea extends VDisplayArea {
                     public void run() {
                         if (!selectCard(false)) {
                             //if no cards in stack can be selected, just show zoom/details for card
-                            List<CardView> cards = displayArea.orderedCards;
-                            CardZoom.show(cards, cards.indexOf(getCard()));
+                            showZoom();
                         }
                     }
                 });
@@ -309,11 +309,20 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         @Override
         public boolean longPress(float x, float y) {
             if (renderedCardContains(x, y)) {
-                List<CardView> cards = displayArea.orderedCards;
-                CardZoom.show(cards, cards.indexOf(getCard()));
+                showZoom();
                 return true;
             }
             return false;
+        }
+
+        private void showZoom() {
+            final List<CardView> cards = displayArea.orderedCards;
+            CardZoom.show(cards, cards.indexOf(getCard()), new Callback<Integer>() {
+                @Override
+                public void run(Integer result) {
+                    CardAreaPanel.get(cards.get(result)).selectCard(false);
+                }
+            });
         }
 
         public void buildCardPanelList(List<? super FCardPanel> list) {
