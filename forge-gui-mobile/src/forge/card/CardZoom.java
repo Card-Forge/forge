@@ -32,9 +32,10 @@ public class CardZoom extends FOverlay {
     private static boolean zoomMode = true;
     private static Callback<Integer> onActivate;
 
-    public static void show(Object card) {
-        List<Object> cards0 = new ArrayList<Object>();
-        show(cards0, 0, null);
+    public static void show(Object item) {
+        List<Object> items0 = new ArrayList<Object>();
+        items0.add(item);
+        show(items0, 0, null);
     }
     public static void show(FCollectionView<?> items0, int currentIndex0, Callback<Integer> onActivate0) {
         show((List<?>)items0, currentIndex0, onActivate0);
