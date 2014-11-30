@@ -207,6 +207,7 @@ public class FChoiceList<T> extends FList<T> {
     public void setSelectedIndex(int index) {
         selectedIndices.clear();
         selectedIndices.add(index);
+        scrollIntoView(index);
         onSelectionChange();
     }
 
