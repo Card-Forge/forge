@@ -21,7 +21,7 @@ import forge.util.FCollectionView;
 
 public class CardZoom extends FOverlay {
     private static final FSkinFont MSG_FONT = FSkinFont.get(12);
-    private static final FSkinColor MSG_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    private static final FSkinColor MSG_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.9f);
     private static final FSkinColor MSG_BACK_COLOR = FScreen.Header.BACK_COLOR.alphaColor(0.75f);
 
     private static final CardZoom cardZoom = new CardZoom();
