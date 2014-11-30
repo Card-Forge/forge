@@ -4,18 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+
 import forge.Graphics;
 import forge.ImageKeys;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
+import forge.assets.FSkinColor.Colors;
 import forge.game.card.CardView;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.screens.FScreen;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FOverlay;
 import forge.util.FCollectionView;
-import forge.util.Utils;
 
 public class CardZoom extends FOverlay {
-    private static final float TAB_HEIGHT = Utils.AVG_FINGER_HEIGHT;
+    private static final FSkinFont MSG_FONT = FSkinFont.get(12);
+    private static final FSkinColor MSG_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    private static final FSkinColor MSG_BACK_COLOR = FScreen.Header.BACK_COLOR.alphaColor(0.75f);
+
     private static final CardZoom cardZoom = new CardZoom();
     private static List<?> items;
     private static int currentIndex;
@@ -131,6 +139,12 @@ public class CardZoom extends FOverlay {
         else {
             CardImageRenderer.drawDetails(g, currentCard, (w - cardWidth) / 2, (h - cardHeight) / 2, cardWidth, cardHeight);
         }
+
+        float messageHeight = MSG_FONT.getCapHeight() * 2.5f;
+        g.fillRect(MSG_BACK_COLOR, 0, 0, w, messageHeight);
+        g.drawText("Swipe up to activate card", MSG_FONT, MSG_FORE_COLOR, 0, 0, w, messageHeight, false, HAlignment.CENTER, true);
+        g.fillRect(MSG_BACK_COLOR, 0, h - messageHeight, w, messageHeight);
+        g.drawText("Swipe down to switch to " + (zoomMode ? "detail" : "picture") + " view", MSG_FONT, MSG_FORE_COLOR, 0, h - messageHeight, w, messageHeight, false, HAlignment.CENTER, true);
     }
 
     @Override
