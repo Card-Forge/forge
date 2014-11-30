@@ -973,12 +973,23 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         contextMenuBuilder = contextMenuBuilder0;
     }
 
-    public void showMenu() {
+    public void showMenu(boolean delay) {
         if (contextMenuBuilder != null && getSelectionCount() > 0) {
             if (contextMenu == null) {
                 contextMenu = new ContextMenu();
             }
-            contextMenu.show();
+            if (delay) { //delay showing menu to prevent it hiding right away
+                FThreads.delayInEDT(50, new Runnable() {
+                    @Override
+                    public void run() {
+                        contextMenu.show();
+                        Gdx.graphics.requestRendering();
+                    }
+                });
+            }
+            else {
+                contextMenu.show();
+            }
         }
     }
 

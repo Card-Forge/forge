@@ -551,7 +551,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         ItemInfo item = getItemAtPoint(x, y);
         if (count == 1) {
             selectItem(item);
-            itemManager.showMenu();
+            itemManager.showMenu(false);
         }
         else if (count == 2) {
             if (item != null && item.selected) {
@@ -876,8 +876,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 CardZoom.show(orderedItems, orderedItems.indexOf(item), new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
-                        selectItem(orderedItems.get(result));
-                        itemManager.showMenu();
+                        setSelectedIndex(result);
+                        itemManager.showMenu(true);
                     }
                 });
                 return true;

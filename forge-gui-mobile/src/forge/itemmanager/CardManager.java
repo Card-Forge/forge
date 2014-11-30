@@ -66,7 +66,7 @@ public class CardManager extends ItemManager<PaperCard> {
                     @Override
                     public void run(Integer result) {
                         setSelectedIndex(result);
-                        showMenu();
+                        showMenu(true);
                     }
                 }, x, y, count, compactModeHandler.isCompactMode());
             }
@@ -77,7 +77,7 @@ public class CardManager extends ItemManager<PaperCard> {
                     @Override
                     public void run(Integer result) {
                         setSelectedIndex(result);
-                        showMenu();
+                        showMenu(true);
                     }
                 });
                 return true;

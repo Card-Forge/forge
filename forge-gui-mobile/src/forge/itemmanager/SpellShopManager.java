@@ -93,7 +93,7 @@ public final class SpellShopManager extends ItemManager<InventoryItem> {
                         @Override
                         public void run(Integer result) {
                             setSelectedIndex(result);
-                            showMenu();
+                            showMenu(true);
                         }
                     }, x, y, count, compactModeHandler.isCompactMode());
                 }
@@ -107,7 +107,7 @@ public final class SpellShopManager extends ItemManager<InventoryItem> {
                         @Override
                         public void run(Integer result) {
                             setSelectedIndex(result);
-                            showMenu();
+                            showMenu(true);
                         }
                     });
                     return true;
