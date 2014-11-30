@@ -28,7 +28,6 @@ import forge.item.IPaperCard;
 import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
-import forge.toolbox.FCardPanel;
 import forge.toolbox.FList;
 import forge.util.Callback;
 import forge.util.Utils;
@@ -77,53 +76,12 @@ public class CardRenderer {
         }
 
         if (image == ImageCache.defaultImage) { //support drawing card image manually if card image not found
-            float ratio = h / w;
-            if (ratio > FCardPanel.ASPECT_RATIO) {
-                float oldHeight = h;
-                h = w * FCardPanel.ASPECT_RATIO;
-                y += (oldHeight - h) / 2;
-            }
-            else {
-                float oldWidth = w;
-                w = h / FCardPanel.ASPECT_RATIO;
-                x += (oldWidth - w) / 2;
-            }
             CardImageRenderer.drawCardImage(g, card, x, y, w, h, CardStackPosition.Top);
-            drawFoilEffect(g, card, x, y, w, h);
-            return;
-        }
-
-        float imageWidth = image.getWidth();
-        float imageHeight = image.getHeight();
-
-        if (imageWidth > w || imageHeight > h) {
-            //scale down until image fits on screen
-            float widthRatio = w / imageWidth;
-            float heightRatio = h / imageHeight;
-
-            if (widthRatio < heightRatio) {
-                imageWidth *= widthRatio;
-                imageHeight *= widthRatio;
-            }
-            else {
-                imageWidth *= heightRatio;
-                imageHeight *= heightRatio;
-            }
         }
         else {
-            //scale up as long as image fits on screen
-            float minWidth = w / 2;
-            float minHeight = h / 2;
-            while (imageWidth < minWidth && imageHeight < minHeight) {
-                imageWidth *= 2;
-                imageHeight *= 2;
-            }
+            g.drawImage(image, x, y, w, h);
         }
-
-        x += (w - imageWidth) / 2;
-        y += (h - imageHeight) / 2;
-        g.drawImage(image, x, y, imageWidth, imageHeight);
-        drawFoilEffect(g, card, x, y, imageWidth, imageHeight);
+        drawFoilEffect(g, card, x, y, w, y);
     }
 
     public static float getCardListItemHeight(boolean compactMode) {

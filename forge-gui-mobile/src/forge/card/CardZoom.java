@@ -135,7 +135,7 @@ public class CardZoom extends FOverlay {
             CardRenderer.drawZoom(g, nextCard, w - cardWidth, (h - cardHeight) / 2, cardWidth, cardHeight);
         }
 
-        cardWidth = w * 0.75f;
+        cardWidth = w * 0.7f;
         cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
         if (zoomMode) {
             CardRenderer.drawZoom(g, currentCard, (w - cardWidth) / 2, (h - cardHeight) / 2, cardWidth, cardHeight);
