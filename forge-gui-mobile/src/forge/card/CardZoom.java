@@ -4,23 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-
 import forge.Graphics;
 import forge.ImageKeys;
-import forge.assets.FSkinColor;
-import forge.assets.FSkinFont;
 import forge.game.card.CardView;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
-import forge.toolbox.FList;
+import forge.toolbox.FCardPanel;
 import forge.toolbox.FOverlay;
 import forge.util.FCollectionView;
 import forge.util.Utils;
 
 public class CardZoom extends FOverlay {
     private static final float TAB_HEIGHT = Utils.AVG_FINGER_HEIGHT;
-    private static final FSkinFont FONT = FSkinFont.get(14);
     private static final CardZoom cardZoom = new CardZoom();
     private static List<?> items;
     private static int currentIndex;
@@ -37,7 +32,9 @@ public class CardZoom extends FOverlay {
     public static <T> void show(final List<?> items0, int currentIndex0) {
         items = items0;
         currentIndex = currentIndex0;
-        updateVisibleCards();
+        currentCard = getCardView(items.get(currentIndex));
+        prevCard = currentIndex > 0 ? getCardView(items.get(currentIndex - 1)) : null;
+        nextCard = currentIndex < items.size() - 1 ? getCardView(items.get(currentIndex + 1)) : null;
         cardZoom.show();
     }
 
@@ -52,10 +49,23 @@ public class CardZoom extends FOverlay {
     private CardZoom() {
     }
 
-    private static void updateVisibleCards() {
-        currentCard = getCardView(items.get(currentIndex));
-        prevCard = currentIndex > 0 ? getCardView(items.get(currentIndex - 1)) : null;
-        nextCard = currentIndex < items.size() - 1 ? getCardView(items.get(currentIndex + 1)) : null;
+    private static void incrementCard(int dir) {
+        if (dir > 0) {
+            if (currentIndex == items.size() - 1) { return; }
+            currentIndex++;
+
+            prevCard = currentCard;
+            currentCard = nextCard;
+            nextCard = currentIndex < items.size() - 1 ? getCardView(items.get(currentIndex + 1)) : null;
+        }
+        else {
+            if (currentIndex == 0) { return; }
+            currentIndex--;
+
+            nextCard = currentCard;
+            currentCard = prevCard;
+            prevCard = currentIndex > 0 ? getCardView(items.get(currentIndex - 1)) : null;
+        }
     }
 
     private static CardView getCardView(Object item) {
@@ -77,10 +87,27 @@ public class CardZoom extends FOverlay {
 
     @Override
     public boolean tap(float x, float y, int count) {
-        if (y >= getHeight() - TAB_HEIGHT && zoomMode != (x < getWidth() / 2)) {
+        float w = getWidth();
+        float h = getHeight();
+
+        if (y >= h - TAB_HEIGHT && zoomMode != (x < w / 2)) {
             zoomMode = !zoomMode; //handle toggling between zoom and details
             return true;
         }
+
+        float visibleHeight = FCardPanel.ASPECT_RATIO * w * 0.5f;
+        if (y >= (h - visibleHeight) / 2 && y < (h + visibleHeight) / 2) {
+            float visibleWidth = w * 0.2f;
+            if (x < visibleWidth) {
+                incrementCard(-1);
+                return true;
+            }
+            else if (x >= w - visibleWidth) {
+                incrementCard(1);
+                return true;
+            }
+        }
+
         hide(); //hide if uncovered area tapped
         return true;
     }
@@ -98,38 +125,25 @@ public class CardZoom extends FOverlay {
     @Override
     public void drawOverlay(Graphics g) {
         float w = getWidth();
-        float h = TAB_HEIGHT;
-        float x = w / 2;
-        float y = getHeight() - h;
+        float h = getHeight();
 
-        //draw zoom/details options
-        FSkinColor foreColor;
+        float cardWidth = w * 0.5f;
+        float cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
+        if (prevCard != null) {
+            CardRenderer.drawZoom(g, prevCard, 0, (h - cardHeight) / 2, cardWidth, cardHeight);
+        }
+        if (nextCard != null) {
+            CardRenderer.drawZoom(g, nextCard, w - cardWidth, (h - cardHeight) / 2, cardWidth, cardHeight);
+        }
+
+        cardWidth = w * 0.75f;
+        cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
         if (zoomMode) {
-            if (!CardRenderer.drawZoom(g, currentCard, w, y)) {
-                CardRenderer.drawDetails(g, currentCard, w, y); //draw details if can't draw zoom
-            }
-            g.fillRect(FList.PRESSED_COLOR, 0, y, x, h);
-            foreColor = FList.FORE_COLOR;
+            CardRenderer.drawZoom(g, currentCard, (w - cardWidth) / 2, (h - cardHeight) / 2, cardWidth, cardHeight);
         }
         else {
-            foreColor = FList.FORE_COLOR.alphaColor(ALPHA_COMPOSITE);
+            CardImageRenderer.drawDetails(g, currentCard, (w - cardWidth) / 2, (h - cardHeight) / 2, cardWidth, cardHeight);
         }
-        g.drawText("Zoom", FONT, foreColor, 0, y, x, h, false, HAlignment.CENTER, true);
-
-        if (!zoomMode) {
-            CardRenderer.drawDetails(g, currentCard, w, y);
-            g.fillRect(FList.PRESSED_COLOR, x, y, w - x, h);
-            foreColor = FList.FORE_COLOR;
-        }
-        else {
-            foreColor = FList.FORE_COLOR.alphaColor(ALPHA_COMPOSITE);
-        }
-        g.drawText("Details", FONT, foreColor, x, y, w - x, h, false, HAlignment.CENTER, true);
-
-        g.drawLine(1, FList.LINE_COLOR, 0, y, w, y);
-        g.drawLine(1, FList.LINE_COLOR, x, y, x, y + h);
-        y += h;
-        g.drawLine(1, FList.LINE_COLOR, 0, y, w, y);
     }
 
     @Override

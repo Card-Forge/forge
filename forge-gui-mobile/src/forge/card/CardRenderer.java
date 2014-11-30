@@ -20,18 +20,15 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
 import forge.assets.ImageCache;
-import forge.assets.TextRenderer;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.mana.ManaCost;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
-import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FCardPanel;
-import forge.toolbox.FDialog;
 import forge.toolbox.FList;
 import forge.util.Utils;
 
@@ -43,19 +40,13 @@ public class CardRenderer {
     }
 
     private static final FSkinFont NAME_FONT = FSkinFont.get(16);
-    private static final FSkinFont TYPE_FONT = FSkinFont.get(14);
-    private static final FSkinFont SET_FONT = TYPE_FONT;
-    private static final FSkinFont TEXT_FONT = TYPE_FONT;
-    private static final FSkinFont ID_FONT = TEXT_FONT;
-    private static final FSkinFont PT_FONT = NAME_FONT;
     public static final float NAME_BOX_TINT = 0.2f;
     public static final float TEXT_BOX_TINT = 0.1f;
     public static final float PT_BOX_TINT = 0.2f;
-    public static final float MANA_COST_PADDING = Utils.scale(3);
+    private static final float MANA_COST_PADDING = Utils.scale(3);
     public static final float SET_BOX_MARGIN = Utils.scale(1);
     public static final float MANA_SYMBOL_SIZE = FSkinImage.MANA_1.getNearestHQWidth(2 * (NAME_FONT.getCapHeight() - MANA_COST_PADDING));
     private static final float NAME_COST_THRESHOLD = Utils.scale(200);
-    public static final float BLACK_BORDER_THICKNESS_RATIO = 0.021f;
     private static final float BORDER_THICKNESS = Utils.scale(1);
 
     private static Color fromDetailColor(DetailColors detailColor) {
@@ -77,13 +68,13 @@ public class CardRenderer {
         }
     }
 
-    public static boolean drawZoom(Graphics g, CardView card, float width, float height) {
-        float x = FDialog.INSETS;
-        float y = FDialog.INSETS;
-        float w = width - 2 * x;
-        float h = height - 2 * y;
-
+    public static void drawZoom(Graphics g, CardView card, float x, float y, float w, float h) {
         final Texture image = ImageCache.getImage(MatchUtil.getCardImageKey(card.getCurrentState()), true);
+        if (image == null) { //draw details if can't draw zoom
+            CardImageRenderer.drawDetails(g, card, x, y, w, h);
+            return;
+        }
+
         if (image == ImageCache.defaultImage) { //support drawing card image manually if card image not found
             float ratio = h / w;
             if (ratio > FCardPanel.ASPECT_RATIO) {
@@ -98,10 +89,8 @@ public class CardRenderer {
             }
             CardImageRenderer.drawCardImage(g, card, x, y, w, h, CardStackPosition.Top);
             drawFoilEffect(g, card, x, y, w, h);
-            return true;
+            return;
         }
-
-        if (image == null || image == ImageCache.defaultImage) { return false; } //don't support drawing zoom for null or default textures
 
         float imageWidth = image.getWidth();
         float imageHeight = image.getHeight();
@@ -130,82 +119,10 @@ public class CardRenderer {
             }
         }
 
-        x = (width - imageWidth) / 2;
-        y = (height - imageHeight) / 2;
+        x += (w - imageWidth) / 2;
+        y += (h - imageHeight) / 2;
         g.drawImage(image, x, y, imageWidth, imageHeight);
-        drawFoilEffect(g, card, x, y, w, h);
-        return true;
-    }
-
-    public static void drawDetails(Graphics g, CardView card, float width, float height) {
-        float x = FDialog.INSETS;
-        float y = FDialog.INSETS;
-        float w = width - 2 * x;
-        float h = height - 2 * y;
-
-        float ratio = h / w;
-        if (ratio > FCardPanel.ASPECT_RATIO) {
-            float oldHeight = h;
-            h = w * FCardPanel.ASPECT_RATIO;
-            y += (oldHeight - h) / 2;
-        }
-        else {
-            float oldWidth = w;
-            w = h / FCardPanel.ASPECT_RATIO;
-            x += (oldWidth - w) / 2;
-        }
-
-        float blackBorderThickness = w * BLACK_BORDER_THICKNESS_RATIO;
-        g.fillRect(Color.BLACK, x, y, w, h);
-        x += blackBorderThickness;
-        y += blackBorderThickness;
-        w -= 2 * blackBorderThickness;
-        h -= 2 * blackBorderThickness;
-
-        boolean canShow = MatchUtil.canCardBeShown(card);
-
-        //determine colors for borders
-        List<DetailColors> borderColors = CardDetailUtil.getBorderColors(card.getCurrentState(), canShow);
-        DetailColors borderColor = borderColors.get(0);
-        Color color1 = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
-        Color color2 = null;
-        if (borderColors.size() > 1) {
-            borderColor = borderColors.get(1);
-            color2 = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
-        }
-        if (color2 == null) {
-            g.fillRect(color1, x, y, w, h);
-        }
-        else {
-            g.fillGradientRect(color1, color2, false, x, y, w, h);
-        }
-
-        Color idForeColor = FSkinColor.getHighContrastColor(color1);
-
-        float outerBorderThickness = 2 * blackBorderThickness;
-        x += outerBorderThickness;
-        y += outerBorderThickness;
-        w -= 2 * outerBorderThickness;
-        float cardNameBoxHeight = Math.max(MANA_SYMBOL_SIZE + 2 * MANA_COST_PADDING, 2 * NAME_FONT.getCapHeight()) + 2 * TYPE_FONT.getCapHeight() + 2;
-
-        //draw name/type box
-        Color nameBoxColor1 = FSkinColor.tintColor(Color.WHITE, color1, NAME_BOX_TINT);
-        Color nameBoxColor2 = color2 == null ? null : FSkinColor.tintColor(Color.WHITE, color2, NAME_BOX_TINT);
-        drawCardNameBox(g, card, canShow, nameBoxColor1, nameBoxColor2, x, y, w, cardNameBoxHeight);
-
-        float innerBorderThickness = outerBorderThickness / 2;
-        float ptBoxHeight = 2 * PT_FONT.getCapHeight();
-        float textBoxHeight = h - cardNameBoxHeight - ptBoxHeight - outerBorderThickness - 3 * innerBorderThickness; 
-
-        y += cardNameBoxHeight + innerBorderThickness;
-        Color textBoxColor1 = FSkinColor.tintColor(Color.WHITE, color1, TEXT_BOX_TINT);
-        Color textBoxColor2 = color2 == null ? null : FSkinColor.tintColor(Color.WHITE, color2, TEXT_BOX_TINT);
-        drawCardTextBox(g, card, canShow, textBoxColor1, textBoxColor2, x, y, w, textBoxHeight);
-
-        y += textBoxHeight + innerBorderThickness;
-        Color ptColor1 = FSkinColor.tintColor(Color.WHITE, color1, PT_BOX_TINT);
-        Color ptColor2 = color2 == null ? null : FSkinColor.tintColor(Color.WHITE, color2, PT_BOX_TINT);
-        drawCardIdAndPtBox(g, card, canShow, idForeColor, ptColor1, ptColor2, x, y, w, ptBoxHeight);
+        drawFoilEffect(g, card, x, y, imageWidth, imageHeight);
     }
 
     public static float getCardListItemHeight(boolean compactMode) {
@@ -380,63 +297,6 @@ public class CardRenderer {
         return false;
     }
 
-    private static void drawCardNameBox(Graphics g, CardView card, boolean canShow, Color color1, Color color2, float x, float y, float w, float h) {
-        if (color2 == null) {
-            g.fillRect(color1, x, y, w, h);
-        }
-        else {
-            g.fillGradientRect(color1, color2, false, x, y, w, h);
-        }
-        g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
-
-        float padding = h / 8;
-        final CardStateView state = card.getCurrentState();
-
-        //make sure name/mana cost row height is tall enough for both
-        h = Math.max(MANA_SYMBOL_SIZE + 2 * MANA_COST_PADDING, 2 * NAME_FONT.getCapHeight());
-
-        //draw mana cost for card
-        float manaCostWidth = 0;
-        if (canShow) {
-            ManaCost mainManaCost = state.getManaCost();
-            if (card.isSplitCard() && card.hasAlternateState() && card.getZone() != ZoneType.Stack) { //only display current state's mana cost when on stack
-                //handle rendering both parts of split card
-                mainManaCost = state.getManaCost();
-                ManaCost otherManaCost = card.getAlternateState().getManaCost();
-                manaCostWidth = CardFaceSymbols.getWidth(otherManaCost, MANA_SYMBOL_SIZE) + MANA_COST_PADDING;
-                CardFaceSymbols.drawManaCost(g, otherManaCost, x + w - manaCostWidth, y + (h - MANA_SYMBOL_SIZE) / 2, MANA_SYMBOL_SIZE);
-                //draw "//" between two parts of mana cost
-                manaCostWidth += NAME_FONT.getBounds("//").width + MANA_COST_PADDING;
-                g.drawText("//", NAME_FONT, Color.BLACK, x + w - manaCostWidth, y, w, h, false, HAlignment.LEFT, true);
-            }
-            manaCostWidth += CardFaceSymbols.getWidth(mainManaCost, MANA_SYMBOL_SIZE) + MANA_COST_PADDING;
-            CardFaceSymbols.drawManaCost(g, mainManaCost, x + w - manaCostWidth, y + (h - MANA_SYMBOL_SIZE) / 2, MANA_SYMBOL_SIZE);
-        }
-
-        //draw name for card
-        x += padding;
-        w -= 2 * padding;
-        g.drawText(CardDetailUtil.formatCardName(card, canShow, false), NAME_FONT, Color.BLACK, x, y, w - manaCostWidth - padding, h, false, HAlignment.LEFT, true);
-
-        //draw type and set label for card
-        y += h;
-        h = 2 * TYPE_FONT.getCapHeight();
-
-        String set = state.getSetCode();
-        CardRarity rarity = state.getRarity();
-        if (!canShow) {
-            set = CardEdition.UNKNOWN.getCode();
-            rarity = CardRarity.Unknown;
-        }
-        if (!StringUtils.isEmpty(set)) {
-            float setWidth = getSetWidth(SET_FONT, set);
-            drawSetLabel(g, SET_FONT, set, rarity, x + w + padding - setWidth - SET_BOX_MARGIN, y + SET_BOX_MARGIN, setWidth, h - SET_BOX_MARGIN);
-            w -= setWidth; //reduce available width for type
-        }
-
-        g.drawText(CardDetailUtil.formatCardType(state, canShow), TYPE_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
-    }
-
     public static float getSetWidth(FSkinFont font, String set) {
         return font.getBounds(set).width + font.getCapHeight();
     }
@@ -446,56 +306,6 @@ public class CardRenderer {
         Color foreColor = FSkinColor.getHighContrastColor(backColor);
         g.fillRect(backColor, x, y, w, h);
         g.drawText(set, font, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
-    }
-
-    //use text renderer to handle mana symbols and reminder text
-    private static final TextRenderer cardTextRenderer = new TextRenderer(true);
-
-    private static void drawCardTextBox(Graphics g, CardView card, boolean canShow, Color color1, Color color2, float x, float y, float w, float h) {
-        if (color2 == null) {
-            g.fillRect(color1, x, y, w, h);
-        }
-        else {
-            g.fillGradientRect(color1, color2, false, x, y, w, h);
-        }
-        g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
-
-        float padX = TEXT_FONT.getCapHeight() / 2;
-        float padY = padX + Utils.scale(2); //add a little more vertical padding
-        x += padX;
-        y += padY;
-        w -= 2 * padX;
-        h -= 2 * padY;
-        cardTextRenderer.drawText(g, CardDetailUtil.composeCardText(card.getCurrentState(), canShow), TEXT_FONT, Color.BLACK, x, y, w, h, y, h, true, HAlignment.LEFT, false);
-    }
-
-    private static void drawCardIdAndPtBox(Graphics g, CardView card, boolean canShow, Color idForeColor, Color color1, Color color2, float x, float y, float w, float h) {
-        final CardStateView state = card.getCurrentState();
-
-        float idWidth = 0;
-        if (canShow) {
-            String idText = CardDetailUtil.formatCardId(state);
-            g.drawText(idText, ID_FONT, idForeColor, x, y + ID_FONT.getCapHeight() / 2, w, h, false, HAlignment.LEFT, false);
-            idWidth = ID_FONT.getBounds(idText).width;
-        }
-
-        String ptText = CardDetailUtil.formatPowerToughness(state, canShow);
-        if (StringUtils.isEmpty(ptText)) { return; }
-
-        float padding = PT_FONT.getCapHeight() / 2;
-        float boxWidth = Math.min(PT_FONT.getBounds(ptText).width + 2 * padding,
-                w - idWidth - padding); //prevent box overlapping ID
-        x += w - boxWidth;
-        w = boxWidth;
-
-        if (color2 == null) {
-            g.fillRect(color1, x, y, w, h);
-        }
-        else {
-            g.fillGradientRect(color1, color2, false, x, y, w, h);
-        }
-        g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
-        g.drawText(ptText, PT_FONT, Color.BLACK, x, y, w, h, false, HAlignment.CENTER, true);
     }
 
     public static void drawCard(Graphics g, IPaperCard pc, float x, float y, float w, float h, CardStackPosition pos) {

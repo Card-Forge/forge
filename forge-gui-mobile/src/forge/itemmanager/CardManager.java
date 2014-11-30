@@ -66,7 +66,7 @@ public class CardManager extends ItemManager<PaperCard> {
 
             @Override
             public boolean longPress(Integer index, Entry<PaperCard, Integer> value, float x, float y) {
-                CardZoom.show(getFilteredItems().toFlatList(), index);
+                CardZoom.show(model.getOrderedList(), index);
                 return true;
             }
         };
