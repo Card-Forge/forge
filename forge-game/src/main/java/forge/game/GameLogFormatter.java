@@ -12,6 +12,7 @@ import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.maps.MapOfLists;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
@@ -49,7 +50,12 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
         if (event.sa.getTargetRestrictions() != null) {
             sb.append(" targeting ");
-            for (TargetChoices ch : event.sa.getAllTargetChoices()) {
+
+            ArrayList<TargetChoices> targets = event.sa.getAllTargetChoices();
+            // Include the TargetChoices from the stack instance, since the real target choices
+            // are on that object at this point (see SpellAbilityStackInstance constructor).
+            targets.add(event.si.getTargetChoices());
+            for (TargetChoices ch : targets) {
                 if (null != ch) {
                     sb.append(ch.getTargetedString());
                 }

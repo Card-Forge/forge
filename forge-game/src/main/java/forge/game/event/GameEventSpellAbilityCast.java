@@ -1,6 +1,7 @@
 package forge.game.event;
 
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -9,10 +10,12 @@ import forge.game.spellability.SpellAbility;
 public class GameEventSpellAbilityCast extends GameEvent {
 
     public final SpellAbility sa; 
+    public final SpellAbilityStackInstance si;
     public final boolean replicate;
     
-    public GameEventSpellAbilityCast(SpellAbility sp, boolean replicate) {
+    public GameEventSpellAbilityCast(SpellAbility sp, SpellAbilityStackInstance si, boolean replicate) {
         sa = sp;
+        this.si = si;
         this.replicate = replicate;
     }
 
