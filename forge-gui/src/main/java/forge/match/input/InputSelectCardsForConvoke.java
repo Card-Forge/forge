@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.game.card.Card;
@@ -51,7 +52,15 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
             onSelectStateChanged(card, false);
         }
         else {
-            byte chosenColor = player.getController().chooseColorAllowColorless("Convoke " + card.toString() + "  for which color?", card, CardUtil.getColors(card));
+            byte chosenColor;
+            ColorSet colors = CardUtil.getColors(card);
+            if (colors.isMonoColor()) {
+                // Since the convoke mana logic can use colored mana as colorless if needed,
+                // there is no need to prompt the user when convoking with a mono-color creature.
+                chosenColor = colors.getColor();
+            } else {
+                chosenColor = player.getController().chooseColorAllowColorless("Convoke " + card.toString() + "  for which color?", card, colors);
+            }
             ManaCostShard shard = remainingCost.payManaViaConvoke(chosenColor);
             if (shard != null) {
                 chosenCards.put(card, ImmutablePair.of(chosenColor, shard));
