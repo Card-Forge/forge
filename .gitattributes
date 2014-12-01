@@ -702,6 +702,7 @@ forge-game/src/main/java/forge/trackable/TrackableSerializer.java -text
 forge-game/src/main/java/forge/trackable/TrackableTypes.java -text
 forge-game/src/main/java/forge/util/Expressions.java -text
 forge-game/src/main/java/forge/util/MessageUtil.java -text
+forge-game/src/test/java/forge/game/mana/ManaCostBeingPaidTest.java -text
 forge-gui-android/.classpath -text
 forge-gui-android/.project -text
 forge-gui-android/.settings/org.eclipse.core.resources.prefs -text

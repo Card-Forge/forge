@@ -52,18 +52,12 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
         }
         else {
             byte chosenColor = player.getController().chooseColorAllowColorless("Convoke " + card.toString() + "  for which color?", card, CardUtil.getColors(card));
-            
-            if (remainingCost.getColorlessManaAmount() > 0 && (chosenColor == 0 || !remainingCost.needsColor(chosenColor, player.getManaPool()))) {
-                registerConvoked(card, ManaCostShard.COLORLESS, chosenColor);
+            ManaCostShard shard = remainingCost.payManaViaConvoke(chosenColor);
+            if (shard != null) {
+                chosenCards.put(card, ImmutablePair.of(chosenColor, shard));
+                onSelectStateChanged(card, true);
             }
             else {
-                for (ManaCostShard shard : remainingCost.getDistinctShards()) {
-                    if (shard.canBePaidWithManaOfColor(chosenColor)) {
-                        registerConvoked(card, shard, chosenColor);
-                        refresh();
-                        return true;
-                    }
-                }
                 showMessage("The colors provided by " + card.toString() + " you've chosen cannot be used to decrease the manacost of " + remainingCost.toString());
                 return false;
             }
@@ -72,13 +66,6 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
         refresh();
         return true;
     }
-
-    private void registerConvoked(Card card, ManaCostShard shard, byte chosenColor) {
-        remainingCost.decreaseShard(shard, 1);
-        chosenCards.put(card, ImmutablePair.of(chosenColor, shard));
-        onSelectStateChanged(card, true);
-    }
-
 
     @Override
     protected final void onPlayerSelected(Player player, final ITriggerEvent triggerEvent) {

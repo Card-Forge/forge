@@ -321,7 +321,7 @@ public class ManaCostBeingPaid {
             }
         };
 
-        return tryPayMana(colorMask, Iterables.filter(unpaidShards.keySet(), predCanBePaid), pool.getPossibleColorUses(colorMask));
+        return tryPayMana(colorMask, Iterables.filter(unpaidShards.keySet(), predCanBePaid), pool.getPossibleColorUses(colorMask)) != null;
     }
 
     /**
@@ -347,10 +347,20 @@ public class ManaCostBeingPaid {
 
         byte inColor = mana.getColor();
         byte outColor = pool.getPossibleColorUses(inColor);
-        return tryPayMana(inColor, Iterables.filter(unpaidShards.keySet(), predCanBePaid), outColor);
+        return tryPayMana(inColor, Iterables.filter(unpaidShards.keySet(), predCanBePaid), outColor) != null;
+    }
+    
+    public final ManaCostShard payManaViaConvoke(final byte color) {
+        Predicate<ManaCostShard> predCanBePaid = new Predicate<ManaCostShard>() {
+            @Override
+            public boolean apply(ManaCostShard ms) {
+                return ms.canBePaidWithManaOfColor(color);
+            }
+        };
+        return tryPayMana(color, Iterables.filter(unpaidShards.keySet(), predCanBePaid), (byte)0xFF);
     }
 
-    private boolean tryPayMana(final byte colorMask, Iterable<ManaCostShard> payableShards, byte possibleUses) {
+    private ManaCostShard tryPayMana(final byte colorMask, Iterable<ManaCostShard> payableShards, byte possibleUses) {
         Set<ManaCostShard> choice = EnumSet.noneOf(ManaCostShard.class);
         int priority = Integer.MIN_VALUE;
         for (ManaCostShard toPay : payableShards) {
@@ -365,7 +375,7 @@ public class ManaCostBeingPaid {
             }
         }
         if (choice.isEmpty()) {
-            return false;
+            return null;
         }
 
         ManaCostShard chosenShard = Iterables.getFirst(choice, null);
@@ -391,7 +401,7 @@ public class ManaCostBeingPaid {
         }
 
         this.sunburstMap |= colorMask;
-        return true;
+        return chosenShard;
     }
 
     private int getPayPriority(ManaCostShard bill, byte paymentColor) {
