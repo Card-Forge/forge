@@ -35,6 +35,7 @@ import forge.Singletons;
 import forge.UiCommand;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
+import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VField;
@@ -100,6 +101,11 @@ public class CHand implements ICDoc {
         // Animation starts from the library label and runs to the hand panel.
         // This check prevents animation running if label hasn't been realized yet.
         if (rctLibraryLabel.isEmpty()) {
+            return;
+        }
+
+        // Don't perform animations if the user's in another tab.
+        if (!FScreen.MATCH_SCREEN.equals(Singletons.getControl().getCurrentScreen())) {
             return;
         }
 
