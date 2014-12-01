@@ -1085,9 +1085,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     @Override
     public void activate(int index) {
-        if (contextMenuBuilder != null) {
-            setSelectedIndex(index);
-            showMenu(true);
-        }
+        setSelectedIndex(index);
+        showMenu(true);
     }
 }

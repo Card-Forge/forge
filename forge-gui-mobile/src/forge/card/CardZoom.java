@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Graphics;
@@ -32,6 +30,7 @@ public class CardZoom extends FOverlay {
     private static CardView currentCard, prevCard, nextCard;
     private static boolean zoomMode = true;
     private static ActivateHandler activateHandler;
+    private static String currentActivateAction;
 
     public static void show(Object item) {
         List<Object> items0 = new ArrayList<Object>();
@@ -48,6 +47,9 @@ public class CardZoom extends FOverlay {
         currentCard = getCardView(items.get(currentIndex));
         prevCard = currentIndex > 0 ? getCardView(items.get(currentIndex - 1)) : null;
         nextCard = currentIndex < items.size() - 1 ? getCardView(items.get(currentIndex + 1)) : null;
+        if (activateHandler != null) {
+            currentActivateAction = activateHandler.getActivateAction(currentIndex);
+        }
         cardZoom.show();
     }
 
@@ -78,6 +80,9 @@ public class CardZoom extends FOverlay {
             nextCard = currentCard;
             currentCard = prevCard;
             prevCard = currentIndex > 0 ? getCardView(items.get(currentIndex - 1)) : null;
+        }
+        if (activateHandler != null) {
+            currentActivateAction = activateHandler.getActivateAction(currentIndex);
         }
     }
 
@@ -115,7 +120,7 @@ public class CardZoom extends FOverlay {
             zoomMode = !zoomMode;
             return true;
         }
-        if (activateHandler != null) {
+        if (currentActivateAction != null) {
             hide();
             activateHandler.activate(currentIndex);
             return true;
@@ -147,12 +152,9 @@ public class CardZoom extends FOverlay {
         }
 
         float messageHeight = MSG_FONT.getCapHeight() * 2.5f;
-        if (activateHandler != null) {
-            String action = activateHandler.getActivateAction(currentIndex);
-            if (StringUtils.isNotEmpty(action)) {
-                g.fillRect(MSG_BACK_COLOR, 0, 0, w, messageHeight);
-                g.drawText("Swipe up to " + action, MSG_FONT, MSG_FORE_COLOR, 0, 0, w, messageHeight, false, HAlignment.CENTER, true);
-            }
+        if (currentActivateAction != null) {
+            g.fillRect(MSG_BACK_COLOR, 0, 0, w, messageHeight);
+            g.drawText("Swipe up to " + currentActivateAction, MSG_FONT, MSG_FORE_COLOR, 0, 0, w, messageHeight, false, HAlignment.CENTER, true);
         }
         g.fillRect(MSG_BACK_COLOR, 0, h - messageHeight, w, messageHeight);
         g.drawText("Swipe down to switch to " + (zoomMode ? "detail" : "picture") + " view", MSG_FONT, MSG_FORE_COLOR, 0, h - messageHeight, w, messageHeight, false, HAlignment.CENTER, true);

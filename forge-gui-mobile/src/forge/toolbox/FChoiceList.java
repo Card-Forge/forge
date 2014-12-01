@@ -444,8 +444,6 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
 
     @Override
     public void activate(int index) {
-        if (maxChoices > 0) {
-            setSelectedIndex(index);
-        }
+        setSelectedIndex(index);
     }
 }

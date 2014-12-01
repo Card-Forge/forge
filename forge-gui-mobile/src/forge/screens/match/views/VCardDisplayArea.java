@@ -176,7 +176,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
     @Override
     public String getActivateAction(int index) {
-        return "activate card";
+        return "activate card"; //TODO: make this more specific to the current input and the zone location
     }
 
     @Override
