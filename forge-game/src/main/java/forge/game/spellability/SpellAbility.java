@@ -935,15 +935,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
         resetTargets();
         targetChosen.add(card);
-
-        final String desc;
-        if (!card.isFaceDown()) {
-            desc = getHostCard().getName() + " - targeting " + card;
-        }
-        else {
-            desc = getHostCard().getName() + " - targeting Morph(" + card.getId() + ")";
-        }
-        setStackDescription(desc);
+        setStackDescription(getHostCard().getName() + " - targeting " + card);
     }
 
     /**

@@ -26,12 +26,7 @@ public class SetStateEffect extends SpellAbilityEffect {
 
         final Iterator<Card> it = tgtCards.iterator();
         while (it.hasNext()) {
-            final Card tgtC = it.next();
-            if (tgtC.isFaceDown()) {
-                sb.append("Morph ").append("(").append(tgtC.getId()).append(")");
-            } else {
-                sb.append(tgtC);
-            }
+            sb.append(it.next());
 
             if (it.hasNext()) {
                 sb.append(", ");
