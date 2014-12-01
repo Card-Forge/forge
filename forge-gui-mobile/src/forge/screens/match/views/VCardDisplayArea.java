@@ -181,7 +181,13 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
     @Override
     public void activate(int index) {
-        CardAreaPanel.get(orderedCards.get(index)).selectCard(false);
+        final CardAreaPanel cardPanel = CardAreaPanel.get(orderedCards.get(index));
+        ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread in case a dialog needs to be shown
+            @Override
+            public void run() {
+                cardPanel.selectCard(false);
+            }
+        });
     }
 
     public static class CardAreaPanel extends FCardPanel {
