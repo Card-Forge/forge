@@ -149,9 +149,8 @@ public class InputPassPriority extends InputSyncronizedBase {
                 }
             }
             stop();
-    	    return true;
     	}
-    	return false;
+        return true; //still return true if user cancelled selecting an ability to prevent selecting another card
     }
 
     @Override
