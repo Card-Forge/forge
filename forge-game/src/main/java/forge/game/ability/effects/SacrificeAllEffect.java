@@ -6,6 +6,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -59,9 +60,10 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
             card.clearRemembered();
         }
 
-        for (int i = 0; i < list.size(); i++) {
-            if (game.getAction().sacrifice(list.get(i), sa) != null && remSacrificed) {
-                card.addRemembered(list.get(i));
+        for (Card sac : list) {
+            final Card lKICopy = CardUtil.getLKICopy(sac);
+            if (game.getAction().sacrifice(sac, sa) != null && remSacrificed) {
+                card.addRemembered(lKICopy);
             }
         }
     }

@@ -55,9 +55,17 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         }
         else if (sa.hasParam("DefinedCards")) {
             repeatCards = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
+            if (sa.hasParam("AdditionalRestriction")) { // lki cards might not be in game
+                repeatCards = CardLists.getValidCards(repeatCards,
+                        sa.getParam("AdditionalRestriction"), source.getController(), source);
+            }
             if (!repeatCards.isEmpty()) {
                 loopOverCards = true;
             }
+        }
+
+        if (sa.hasParam("ClearRemembered")) {
+            source.clearRemembered();
         }
 
         if (loopOverCards) {

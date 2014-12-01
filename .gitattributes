@@ -15185,6 +15185,7 @@ forge-gui/res/cardsfolder/w/wave_elemental.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wave_of_indifference.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wave_of_reckoning.txt -text
 forge-gui/res/cardsfolder/w/wave_of_terror.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/w/wave_of_vitriol.txt -text
 forge-gui/res/cardsfolder/w/wavecrash_triton.txt -text
 forge-gui/res/cardsfolder/w/waves_of_aggression.txt -text
 forge-gui/res/cardsfolder/w/waveskimmer_aven.txt svneol=native#text/plain
