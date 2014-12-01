@@ -153,7 +153,11 @@ public enum CCombat implements ICDoc {
         final String name = state.getName();
 
         sb.append("( ").append(state.getPower()).append(" / ").append(state.getToughness()).append(" ) ... ");
-        sb.append(name);
+        if (c.isFaceDown()) {
+            sb.append("Morph");
+        }  else {
+            sb.append(name);
+        }
         sb.append(" [").append(c.getId()).append("] ");
 
         return sb.toString();
