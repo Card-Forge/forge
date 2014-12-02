@@ -4505,6 +4505,7 @@ forge-gui/res/cardsfolder/d/dominarias_judgment.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dominate.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dominating_licid.txt -text
 forge-gui/res/cardsfolder/d/domineer.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/d/domineering_will.txt -text
 forge-gui/res/cardsfolder/d/dominus_of_fealty.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/domri_rade.txt -text
 forge-gui/res/cardsfolder/d/donate.txt svneol=native#text/plain
@@ -7334,6 +7335,7 @@ forge-gui/res/cardsfolder/i/infernal_genesis.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/infernal_harvest.txt -text
 forge-gui/res/cardsfolder/i/infernal_kirin.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/infernal_medusa.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/i/infernal_offering.txt -text
 forge-gui/res/cardsfolder/i/infernal_plunge.txt -text
 forge-gui/res/cardsfolder/i/infernal_tribute.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/infernal_tutor.txt -text

@@ -1049,14 +1049,14 @@ public class AbilityUtils {
         }
         else if (defined.equals("ChosenPlayer")) {
             final Player p = card.getChosenPlayer();
-            if (!players.contains(p)) {
+            if (p != null && !players.contains(p)) {
                 players.add(p);
             }
         }
         else if (defined.equals("ChosenAndYou")) {
             players.add(sa.getActivatingPlayer());
             final Player p = card.getChosenPlayer();
-            if (!players.contains(p)) {
+            if (p != null && !players.contains(p)) {
                 players.add(p);
             }
         }
