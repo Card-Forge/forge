@@ -265,7 +265,7 @@ public class FCollection<T> implements List<T>, Set<T>, FCollectionView<T>, Clon
             }
         });
     }
-    public void sort(Comparator<T> comparator) {
+    public void sort(final Comparator<? super T> comparator) {
         Collections.sort(list, comparator);
     }
 
