@@ -7292,6 +7292,7 @@ forge-gui/res/cardsfolder/i/incendiary_command.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/incinerate.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/incite.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/incite_hysteria.txt -text
+forge-gui/res/cardsfolder/i/incite_rebellion.txt -text
 forge-gui/res/cardsfolder/i/incite_war.txt -text
 forge-gui/res/cardsfolder/i/increasing_ambition.txt -text
 forge-gui/res/cardsfolder/i/increasing_confusion.txt -text
