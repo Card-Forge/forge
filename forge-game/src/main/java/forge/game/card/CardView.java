@@ -492,16 +492,6 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.ChangedTypes, c.getChangedTextTypeWords());
     }
 
-    void updateRulesText(CardRules rules, CardTypeView type) {
-        String rulesText = null;
-
-        if (type.isVanguard() && rules != null) {
-            rulesText = "Hand Modifier: " + rules.getHand() + 
-                    "\r\nLife Modifier: " + rules.getLife();
-        }
-        set(TrackableProperty.RulesText, rulesText);
-    }
-
     void updateNonAbilityText(Card c) {
         set(TrackableProperty.NonAbilityText, c.getNonAbilityText());
     }
@@ -511,12 +501,12 @@ public class CardView extends GameEntityView {
     }
     public String getText(CardStateView state) {
         if (getId() < 0) {
-            return getOracleText();
+            return state.getOracleText();
         }
 
         final StringBuilder sb = new StringBuilder();
 
-        String rulesText = get(TrackableProperty.RulesText);
+        String rulesText = state.getRulesText();
         if (!rulesText.isEmpty()) {
             sb.append(rulesText).append("\r\n\r\n");
         }
@@ -595,13 +585,6 @@ public class CardView extends GameEntityView {
         }
 
         return sb.toString().trim();
-    }
-
-    public String getOracleText() {
-        return get(TrackableProperty.OracleText);
-    }
-    void updateOracleText(Card c) {
-        set(TrackableProperty.OracleText, c.getOracleText().replace("\\n", "\r\n").trim());
     }
 
     public CardStateView getCurrentState() {
@@ -745,7 +728,7 @@ public class CardView extends GameEntityView {
                 Card card = Card.get(CardView.this);
                 if (card != null) {
                     type = type.getTypeWithChanges(card.getChangedCardTypes()); //TODO: find a better way to do this
-                    CardView.this.updateRulesText(card.getRules(), type);
+                    updateRulesText(card.getRules(), type);
                 }
             }
             set(TrackableProperty.Type, type);
@@ -756,6 +739,26 @@ public class CardView extends GameEntityView {
         }
         void updateManaCost(CardState c) {
             set(TrackableProperty.ManaCost, c.getManaCost());
+        }
+
+        public String getOracleText() {
+            return get(TrackableProperty.OracleText);
+        }
+        void updateOracleText(Card c) {
+            set(TrackableProperty.OracleText, c.getOracleText().replace("\\n", "\r\n").trim());
+        }
+
+        public String getRulesText() {
+            return get(TrackableProperty.RulesText);
+        }
+        void updateRulesText(CardRules rules, CardTypeView type) {
+            String rulesText = null;
+
+            if (type.isVanguard() && rules != null) {
+                rulesText = "Hand Modifier: " + rules.getHand() + 
+                        "\r\nLife Modifier: " + rules.getLife();
+            }
+            set(TrackableProperty.RulesText, rulesText);
         }
 
         public int getPower() {

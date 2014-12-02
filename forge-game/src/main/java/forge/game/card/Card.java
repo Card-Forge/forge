@@ -1979,7 +1979,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     public final void setCopiedPermanent(final Card c) {
         if (copiedPermanent == c) { return; }
         copiedPermanent = c;
-        view.updateOracleText(this);
+        currentState.getView().updateOracleText(this);
     }
 
     public final boolean isCopiedSpell() {
@@ -6185,8 +6185,8 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
     public void setRules(CardRules r) {
         cardRules = r;
-        view.updateRulesText(r, getType());
-        view.updateOracleText(this);
+        currentState.getView().updateRulesText(r, getType());
+        currentState.getView().updateOracleText(this);
     }
 
     public boolean isCommander() {
@@ -6342,7 +6342,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
     public void setOracleText(final String oracleText0) {
         oracleText = oracleText0;
-        view.updateOracleText(this);
+        currentState.getView().updateOracleText(this);
     }
 
     @Override
