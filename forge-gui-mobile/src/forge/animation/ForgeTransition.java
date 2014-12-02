@@ -39,18 +39,18 @@ public class ForgeTransition extends ForgeAnimation {
     }
 
     private final TransitionObject obj;
-    private final Rectangle destBounds;
+    /*private final Rectangle destBounds;
     private final float duration;
     private final float arcAmount;
-    private final boolean arcOriginBelow;
+    private final boolean arcOriginBelow;*/
     private final Runnable onFinished;
 
     private ForgeTransition(TransitionObject obj0, Rectangle destBounds0, float duration0, float arcAmount0, boolean arcOriginBelow0, Runnable onFinished0) {
         obj = obj0;
-        destBounds = destBounds0;
+        /*destBounds = destBounds0;
         duration = duration0;
         arcAmount = arcAmount0;
-        arcOriginBelow = arcOriginBelow0;
+        arcOriginBelow = arcOriginBelow0;*/
         onFinished = onFinished0;
     }
 
