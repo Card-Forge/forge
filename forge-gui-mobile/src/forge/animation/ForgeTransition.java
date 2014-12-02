@@ -19,10 +19,10 @@ public class ForgeTransition extends ForgeAnimation {
     };
     private static final Map<FDisplayObject, TransitionObject> transitionLookup = new LinkedHashMap<FDisplayObject, TransitionObject>();
 
-    public static void queue(FDisplayObject obj, Rectangle destBounds, float duration) {
-        queue(obj, destBounds, duration, 0, false);
+    public static void queue(FDisplayObject obj, Rectangle destBounds, float duration, Runnable onFinished) {
+        queue(obj, destBounds, duration, 0, false, onFinished);
     }
-    public static void queue(FDisplayObject obj, Rectangle destBounds, float duration, float arcAmount, boolean arcOriginBelow) {
+    public static void queue(FDisplayObject obj, Rectangle destBounds, float duration, float arcAmount, boolean arcOriginBelow, Runnable onFinished) {
         TransitionObject transitionObj = transitionLookup.get(obj);
         if (transitionObj == null) {
             transitionObj = new TransitionObject(obj);
@@ -30,7 +30,7 @@ public class ForgeTransition extends ForgeAnimation {
             overlay.add(transitionObj);
             obj.setVisible(false); //hide original object while transition in progress
         }
-        ForgeTransition transition = new ForgeTransition(transitionObj, destBounds, duration, arcAmount, arcOriginBelow);
+        ForgeTransition transition = new ForgeTransition(transitionObj, destBounds, duration, arcAmount, arcOriginBelow, onFinished);
         transitionObj.transitions.add(transition);
         if (transitionObj.transitions.size() == 1) {
             transition.start(); //start transition right away if first transition added
@@ -43,13 +43,15 @@ public class ForgeTransition extends ForgeAnimation {
     private final float duration;
     private final float arcAmount;
     private final boolean arcOriginBelow;
+    private final Runnable onFinished;
 
-    private ForgeTransition(TransitionObject obj0, Rectangle destBounds0, float duration0, float arcAmount0, boolean arcOriginBelow0) {
+    private ForgeTransition(TransitionObject obj0, Rectangle destBounds0, float duration0, float arcAmount0, boolean arcOriginBelow0, Runnable onFinished0) {
         obj = obj0;
         destBounds = destBounds0;
         duration = duration0;
         arcAmount = arcAmount0;
         arcOriginBelow = arcOriginBelow0;
+        onFinished = onFinished0;
     }
 
     @Override
@@ -59,6 +61,10 @@ public class ForgeTransition extends ForgeAnimation {
 
     @Override
     protected void onEnd(boolean endingAll) {
+        if (onFinished != null) {
+            onFinished.run();
+        }
+
         if (endingAll) {
             transitionLookup.clear();
             return;
