@@ -16,6 +16,7 @@ import forge.assets.FSkinImage;
 import forge.game.card.CardView;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.match.MatchUtil;
 import forge.screens.FScreen;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FOverlay;
@@ -90,7 +91,12 @@ public class CardZoom extends FOverlay {
         if (activateHandler != null) {
             currentActivateAction = activateHandler.getActivateAction(currentIndex);
         }
-        flipIconBounds = null;
+        if (MatchUtil.canCardBeFlipped(currentCard)) {
+            flipIconBounds = new Rectangle();
+        }
+        else {
+            flipIconBounds = null;
+        }
         showAltState = false;
     }
 
@@ -166,14 +172,11 @@ public class CardZoom extends FOverlay {
             CardImageRenderer.drawDetails(g, currentCard, showAltState, x, y, cardWidth, cardHeight);
         }
 
-        if (currentCard.hasAlternateState()) {
+        if (flipIconBounds != null) {
             float imageWidth = cardWidth / 2;
             float imageHeight = imageWidth * FSkinImage.FLIPCARD.getHeight() / FSkinImage.FLIPCARD.getWidth();
-            flipIconBounds = new Rectangle(x + (cardWidth - imageWidth) / 2, y + (cardHeight - imageHeight) / 2, imageWidth, imageHeight);
+            flipIconBounds.set(x + (cardWidth - imageWidth) / 2, y + (cardHeight - imageHeight) / 2, imageWidth, imageHeight);
             g.drawImage(FSkinImage.FLIPCARD, flipIconBounds.x, flipIconBounds.y, flipIconBounds.width, flipIconBounds.height);
-        }
-        else {
-            flipIconBounds = null;
         }
 
         float messageHeight = MSG_FONT.getCapHeight() * 2.5f;
