@@ -130,8 +130,15 @@ public class ImageKeys {
             if (file != null) { return file; }
         }
 
-        // try without set prefix
-        if (filename.contains("/")) {
+        // try without set name
+        if (dir == CACHE_TOKEN_PICS_DIR) {
+            int index = filename.lastIndexOf('_');
+            if (index != -1) {
+                String setlessFilename = filename.substring(0, index);
+                file = findFile(dir, setlessFilename);
+                if (file != null) { return file; }
+            }
+        } else if (filename.contains("/")) {
             String setlessFilename = filename.substring(filename.indexOf('/') + 1);
             file = findFile(dir, setlessFilename);
             if (file != null) { return file; }
