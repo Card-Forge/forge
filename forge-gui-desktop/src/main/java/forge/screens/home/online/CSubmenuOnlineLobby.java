@@ -13,7 +13,7 @@ import java.util.List;
 public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
     SINGLETON_INSTANCE;
 
-    private final VSubmenuOnlineLobby view = VSubmenuOnlineLobby.SINGLETON_INSTANCE;
+    //private final VSubmenuOnlineLobby view = VSubmenuOnlineLobby.SINGLETON_INSTANCE;
 
     @Override
     public void update() {

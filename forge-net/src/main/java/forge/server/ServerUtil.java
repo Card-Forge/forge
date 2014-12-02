@@ -1,12 +1,5 @@
 package forge.server;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-
 public class ServerUtil {
     public static final int PORT = 51764; //FRGE encoded on 0-25 number scale
     public static final String SERVER_DIR = "http://cardforge.org/server/";
@@ -21,7 +14,7 @@ public class ServerUtil {
         }*/
     }
 
-    private static class Argument {
+    /*private static class Argument {
         private final String name;
         private final String value;
 
@@ -58,5 +51,5 @@ public class ServerUtil {
             sb.append(line);
         }
         return sb.toString();
-    }
+    }*/
 }
