@@ -1999,6 +1999,7 @@ forge-gui/res/cardsfolder/a/assassins_strike.txt -text
 forge-gui/res/cardsfolder/a/assault_battery.txt -text
 forge-gui/res/cardsfolder/a/assault_griffin.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/assault_strobe.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/a/assault_suit.txt -text
 forge-gui/res/cardsfolder/a/assault_zeppelid.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/assemble_the_legion.txt -text
 forge-gui/res/cardsfolder/a/assembly_hall.txt -text

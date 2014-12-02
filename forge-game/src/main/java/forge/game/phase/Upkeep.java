@@ -154,7 +154,7 @@ public class Upkeep extends Phase {
                             runParams.put("PayingMana", StringUtils.join(this.getPayingMana(), ""));
                             game.getTriggerHandler().runTrigger(TriggerType.PayCumulativeUpkeep, runParams, false);
                             if (!isPaid) {
-                                game.getAction().sacrifice(c, null);
+                                game.getAction().sacrifice(c, this);
                             }
                         }
                     };

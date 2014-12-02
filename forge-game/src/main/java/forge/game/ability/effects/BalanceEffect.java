@@ -53,6 +53,7 @@ public class BalanceEffect extends SpellAbilityEffect {
                     p.discard(card, sa);
                 }
             } else { // Battlefield
+                // TODO: "can'e be sacrificed"
                 for(Card card : p.getController().choosePermanentsToSacrifice(sa, numToBalance, numToBalance,  validCards.get(i), valid)) {
                     if ( null == card ) continue; 
                     game.getAction().sacrifice(card, sa);

@@ -151,7 +151,7 @@ public class ManaEffect extends SpellAbilityEffect {
         // Only clear express choice after mana has been produced
         abMana.clearExpressChoice();
 
-        // convert these to SubAbilities when appropriate
+        // TODO: convert these to SubAbilities when appropriate
         if (sa.hasParam("Stuck")) {
             sa.setUndoable(false);
             card.addHiddenExtrinsicKeyword("This card doesn't untap during your next untap step.");

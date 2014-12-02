@@ -963,7 +963,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         final String amount = cost.getAmount();
         final String type = cost.getType();
 
-        CardCollectionView list = player.getCardsIn(ZoneType.Battlefield);
+        CardCollectionView list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.canBeSacrificedBy(ability));
         list = CardLists.getValidCards(list, type.split(";"), player, source);
         if (player.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
             list = CardLists.getNotType(list, "Creature");

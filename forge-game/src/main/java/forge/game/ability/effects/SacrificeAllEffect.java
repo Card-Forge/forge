@@ -6,6 +6,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -54,6 +55,7 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
         if (sa.hasParam("Controller")) {
             list = CardLists.filterControlledBy(list, AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Controller"), sa));
         }
+        list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(sa));
 
         final boolean remSacrificed = sa.hasParam("RememberSacrificed");
         if (remSacrificed) {

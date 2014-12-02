@@ -174,7 +174,7 @@ public class ManaCostAdjustment {
     
         Card toSac = null;
         CardCollectionView canOffer = CardLists.filter(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield),
-                CardPredicates.isType(offeringType));
+                CardPredicates.isType(offeringType), CardPredicates.canBeSacrificedBy(sa));
 
         final CardCollectionView toSacList = sa.getHostCard().getController().getController().choosePermanentsToSacrifice(sa, 0, 1, canOffer, offeringType);
 

@@ -5850,6 +5850,10 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return isInPlay() && (!hasKeyword("Indestructible") || (isCreature() && getNetToughness() <= 0));
     }
 
+    public final boolean canBeSacrificed() {
+        return isInPlay() && !this.isPhasedOut() && !hasKeyword("CARDNAME can't be sacrificed.");
+    }
+
     @Override
     public final boolean canBeTargetedBy(final SpellAbility sa) {
         if (sa == null) {
@@ -6170,7 +6174,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             System.out.println("Trying to sacrifice immutables: " + this);
             return false;
         }
-        if (isPhasedOut()) {
+        if (!canBeSacrificed()) {
             return false;
         }
         if (source != null && getController().isOpponentOf(source.getActivatingPlayer())
