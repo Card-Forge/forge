@@ -8,7 +8,6 @@ import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CounterType;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
@@ -150,21 +149,6 @@ public class ManaEffect extends SpellAbilityEffect {
 
         // Only clear express choice after mana has been produced
         abMana.clearExpressChoice();
-
-        // TODO: convert these to SubAbilities when appropriate
-        if (sa.hasParam("Stuck")) {
-            sa.setUndoable(false);
-            card.addHiddenExtrinsicKeyword("This card doesn't untap during your next untap step.");
-        }
-
-        final String deplete = sa.getParam("Deplete");
-        if (deplete != null) {
-            final int num = card.getCounters(CounterType.getType(deplete));
-            if (num == 0) {
-                sa.setUndoable(false);
-                game.getAction().sacrifice(card, null);
-            }
-        }
 
         //resolveDrawback(sa);
     }
