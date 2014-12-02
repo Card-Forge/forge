@@ -762,15 +762,18 @@ public class CardView extends GameEntityView {
             return get(TrackableProperty.Power);
         }
         void updatePower(Card c) {
-            set(TrackableProperty.Power, c.getNetPower());
+            if (c.getCurrentState().getView() == this) {
+                set(TrackableProperty.Power, c.getNetPower());
+            }
+            else {
+                set(TrackableProperty.Power, c.getNetPower() - c.getBasePower() + c.getAlternateState().getBasePower());
+            }
         }
         void updatePower(CardState c) {
-            if (CardView.this.getCurrentState() == this) {
-                Card card = Card.get(CardView.this);
-                if (card != null) {
-                    updatePower(card); //TODO: find a better way to do this
-                    return;
-                }
+            Card card = Card.get(CardView.this);
+            if (card != null) {
+                updatePower(card); //TODO: find a better way to do this
+                return;
             }
             set(TrackableProperty.Power, c.getBasePower());
         }
@@ -779,15 +782,18 @@ public class CardView extends GameEntityView {
             return get(TrackableProperty.Toughness);
         }
         void updateToughness(Card c) {
-            set(TrackableProperty.Toughness, c.getNetToughness());
+            if (c.getCurrentState().getView() == this) {
+                set(TrackableProperty.Toughness, c.getNetToughness());
+            }
+            else {
+                set(TrackableProperty.Toughness, c.getNetToughness() - c.getBaseToughness() + c.getAlternateState().getBaseToughness());
+            }
         }
         void updateToughness(CardState c) {
-            if (CardView.this.getCurrentState() == this) {
-                Card card = Card.get(CardView.this);
-                if (card != null) {
-                    updateToughness(card); //TODO: find a better way to do this
-                    return;
-                }
+            Card card = Card.get(CardView.this);
+            if (card != null) {
+                updateToughness(card); //TODO: find a better way to do this
+                return;
             }
             set(TrackableProperty.Toughness, c.getBaseToughness());
         }

@@ -364,7 +364,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
         if (updateView) {
             view.updateState(this);
-    
+
             Game game = getGame();
             if (game != null) {
                 game.fireEvent(new GameEventCardStatsChanged(this)); //ensure stats updated for new characteristics
