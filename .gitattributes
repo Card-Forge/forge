@@ -1177,6 +1177,7 @@ forge-gui-mobile/src/forge/Graphics.java -text
 forge-gui-mobile/src/forge/GuiMobile.java -text
 forge-gui-mobile/src/forge/animation/AbilityEffect.java -text
 forge-gui-mobile/src/forge/animation/ForgeAnimation.java -text
+forge-gui-mobile/src/forge/animation/ForgeTransition.java -text
 forge-gui-mobile/src/forge/animation/GifAnimation.java -text
 forge-gui-mobile/src/forge/animation/GifDecoder.java -text
 forge-gui-mobile/src/forge/animation/GuiTimer.java -text

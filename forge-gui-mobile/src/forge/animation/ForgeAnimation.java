@@ -23,7 +23,7 @@ public abstract class ForgeAnimation {
         float dt = Gdx.graphics.getDeltaTime();
         for (int i = 0; i < activeAnimations.size(); i++) {
             if (!activeAnimations.get(i).advance(dt)) {
-                activeAnimations.remove(i);
+                activeAnimations.remove(i).onEnd(false);
                 i--;
             }
         }
@@ -36,10 +36,14 @@ public abstract class ForgeAnimation {
     public static void endAll() {
         if (activeAnimations.isEmpty()) { return; }
 
+        for (ForgeAnimation animation : activeAnimations) {
+            animation.onEnd(true);
+        }
         activeAnimations.clear();
         Gdx.graphics.setContinuousRendering(false);
     }
 
     //return true if animation should continue, false to stop the animation
     protected abstract boolean advance(float dt);
+    protected abstract void onEnd(boolean endingAll);
 }

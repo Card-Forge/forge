@@ -84,7 +84,7 @@ public abstract class FOverlay extends FContainer {
             if (overlays.get(overlays.size() - 1) == this) {
                 //after removing the top overlay, delay hiding overlay for a brief period
                 //to prevent back color flickering if another popup immediately follows
-                if (tempOverlay != this) {
+                if (tempOverlay != this && backColor != null) {
                     tempOverlay = this;
                     Timer.schedule(hideTempOverlayTask, 0.025f);
                     return;
@@ -104,6 +104,8 @@ public abstract class FOverlay extends FContainer {
 
     @Override
     protected void drawBackground(Graphics g) {
+        if (backColor == null) { return; }
+
         g.fillRect(backColor, 0, 0, this.getWidth(), this.getHeight());
     }
 

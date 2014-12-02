@@ -238,8 +238,12 @@ public abstract class FScrollPane extends FContainer {
             }
 
             //end fling animation if can't scroll anymore or physics object is no longer moving
-            activeFlingAnimation = null;
             return false;
+        }
+
+        @Override
+        protected void onEnd(boolean endingAll) {
+            activeFlingAnimation = null;
         }
     }
 

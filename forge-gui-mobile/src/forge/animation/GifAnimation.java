@@ -34,4 +34,8 @@ public class GifAnimation extends ForgeAnimation {
             g.drawImage(currentFrame, x, y, w, h);
         }
     }
+
+    @Override
+    protected void onEnd(boolean endingAll) {
+    }
 }
