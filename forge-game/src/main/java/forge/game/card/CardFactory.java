@@ -210,19 +210,6 @@ public class CardFactory {
         return copySA;
     }
 
-    /**
-     * <p>
-     * getCard.
-     * </p>
-     * 
-     * @param cardName
-     *            a {@link java.lang.String} object.
-     * @param owner
-     *            a {@link forge.game.player.Player} object.
-     * @return a {@link forge.game.card.Card} instance, owned by owner; or the special
-     *         blankCard
-     */
-    
     public final static Card getCard(final IPaperCard cp, final Player owner) {
         return getCard(cp, owner, owner == null ? -1 : owner.getGame().nextCardId());
     }
@@ -431,7 +418,7 @@ public class CardFactory {
             c.setBaseToughnessString(face.getToughness());
         }
     }
-    
+
     /**
      * Create a copy of a card, including its copiable characteristics (but not
      * abilities).
