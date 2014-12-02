@@ -119,7 +119,10 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         super.clear();
         if (!cardPanels.isEmpty()) {
             for (CardAreaPanel panel : cardPanels) {
-                panel.reset();
+                if (panel.displayArea == null || panel.displayArea == this ||
+                        !panel.displayArea.cardPanels.contains(panel)) { //don't reset if panel's displayed in another area already
+                    panel.reset();
+                }
             }
             cardPanels.clear();
         }
@@ -332,6 +335,8 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         }
 
         private void showZoom() {
+            if (displayArea == null) { return; }
+
             final List<CardView> cards = displayArea.orderedCards;
             CardZoom.show(cards, cards.indexOf(getCard()), displayArea);
         }
