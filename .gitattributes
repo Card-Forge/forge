@@ -8415,6 +8415,7 @@ forge-gui/res/cardsfolder/l/lord_of_the_void.txt -text
 forge-gui/res/cardsfolder/l/lord_of_tresserhorn.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/lore_broker.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/lorescale_coatl.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/l/loreseekers_stone.txt -text
 forge-gui/res/cardsfolder/l/lorthos_the_tidemaker.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/lose_hope.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/lost_auramancers.txt svneol=native#text/plain

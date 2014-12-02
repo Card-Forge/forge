@@ -249,6 +249,10 @@ public class ManaCostAdjustment {
                 if (!sa.isMorphUp()) {
                     return;
                 }
+            } else if (params.get("Type").equals("SelfIntrinsicAbility")) {
+                if (!(sa instanceof AbilityActivated) || sa.isReplacementAbility() || sa.isTemporary()) {
+                    return;
+                }
             }
         }
         if (params.containsKey("AffectedZone")) {
