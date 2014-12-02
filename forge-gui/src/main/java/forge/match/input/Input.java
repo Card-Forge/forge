@@ -15,6 +15,8 @@ public interface Input {
 
     boolean selectCard(Card card, final List<Card> otherCardsToSelect, ITriggerEvent triggerEvent);
 
+    String getActivateAction(Card card);
+
     boolean selectAbility(SpellAbility ab);
 
     void selectPlayer(Player player, ITriggerEvent triggerEvent);

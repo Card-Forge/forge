@@ -77,6 +77,14 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
     }
 
     @Override
+    public String getActivateAction(Card card) {
+        if (availableCreatures.contains(card)) {
+            return "tap creature for Convoke";
+        }
+        return null;
+    }
+
+    @Override
     protected final void onPlayerSelected(Player player, final ITriggerEvent triggerEvent) {
     }
 
@@ -88,13 +96,11 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
         return result;
     }
 
-
     @Override
     protected boolean hasEnoughTargets() { return true; }
 
     @Override
     protected boolean hasAllTargets() { return false; }
-
 
     @Override
     public Collection<Card> getSelected() {

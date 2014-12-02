@@ -235,6 +235,26 @@ public class InputAttack extends InputSyncronizedBase {
         return false;
     }
 
+    @Override
+    public String getActivateAction(Card card) {
+        if (combat.isAttacking(card, currentDefender)) {
+            if (isBandingPossible()) {
+                return "activate band with card";
+            }
+            return "remove card from combat";
+        }
+        if (card.getController().isOpponentOf(playerAttacks)) {
+            if (defenders.contains(card)) {
+                return "declare attackers for card";
+            }
+            return null;
+        }
+        if (playerAttacks.getZone(ZoneType.Battlefield).contains(card) && CombatUtil.canAttack(card, currentDefender)) {
+            return "attack with card";
+        }
+        return null;
+    }
+
     private void declareAttacker(final Card card) {
         combat.removeFromCombat(card);
         combat.addAttacker(card, currentDefender, activeBand);

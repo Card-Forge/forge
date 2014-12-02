@@ -831,7 +831,15 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             onSelectStateChanged(c, true);
             refresh();
             return true;
-        };
+        }
+
+        @Override
+        public String getActivateAction(Card c) {
+            if (!isValidChoice(c) || c.getCounters(counterType) <= getTimesSelected(c)) {
+                return null;
+            }
+            return "remove counter from card";
+        }
 
         @Override
         protected boolean hasEnoughTargets() {

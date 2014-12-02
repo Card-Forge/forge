@@ -90,4 +90,9 @@ public class InputLockUI implements Input {
             player.getController().autoPassCancel();
         }
     }
+
+    @Override
+    public String getActivateAction(Card card) {
+        return null;
+    }
 }

@@ -70,6 +70,14 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
     }
 
     @Override
+    public String getActivateAction(Card card) {
+        if (card.hasCounters() && !chosenCounters.containsKey(card)) {
+            return "add counter to card";
+        }
+        return null;
+    }
+
+    @Override
     protected final void onPlayerSelected(Player player, final ITriggerEvent triggerEvent) {
         if (player.getPoisonCounters() == 0 || player.hasKeyword("You can't get poison counters")) {
             return;

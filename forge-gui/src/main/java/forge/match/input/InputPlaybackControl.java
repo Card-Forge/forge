@@ -2,6 +2,7 @@ package forge.match.input;
 
 import forge.control.FControlGamePlayback;
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.PlayerView;
 import forge.match.MatchUtil;
@@ -86,5 +87,10 @@ public class InputPlaybackControl extends InputSyncronizedBase implements InputS
             control.setSpeed(isFast);
             setPause(isPaused); // update message
         }
+    }
+
+    @Override
+    public String getActivateAction(Card card) {
+        return null;
     }
 }

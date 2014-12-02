@@ -159,6 +159,22 @@ public class InputBlock extends InputSyncronizedBase {
         return isCorrectAction;
     }
 
+    @Override
+    public String getActivateAction(Card card) {
+        if (combat.isAttacking(card)) {
+            return "declare blockers for card";
+        }
+        if (currentAttacker != null && card.isCreature() && defender.getZone(ZoneType.Battlefield).contains(card)) {
+            if (combat.isBlocking(card, currentAttacker)) {
+                return "remove card from combat";
+            }
+            if (CombatUtil.canBlock(currentAttacker, card, combat)) {
+                return "block with card";
+            }
+        }
+        return null;
+    }
+
     private void setCurrentAttacker(final Card card) {
         currentAttacker = card;
         for (final Card c : combat.getAttackers()) {

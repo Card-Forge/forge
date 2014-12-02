@@ -146,7 +146,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             }
             return false;
         }
-        
+
         if (tgt.isDividedAsYouChoose()) {
             final int stillToDivide = tgt.getStillToDivide();
             int allocatedPortion = 0;
@@ -160,9 +160,11 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 String apiBasedMessage = "Distribute how much to ";
                 if (sa.getApi() == ApiType.DealDamage) {
                     apiBasedMessage = "Select how much damage to deal to ";
-                } else if (sa.getApi() == ApiType.PreventDamage) {
+                }
+                else if (sa.getApi() == ApiType.PreventDamage) {
                     apiBasedMessage = "Select how much damage to prevent to ";
-                } else if (sa.getApi() == ApiType.PutCounter) {
+                }
+                else if (sa.getApi() == ApiType.PutCounter) {
                     apiBasedMessage = "Select how many counters to distribute to ";
                 }
                 final StringBuilder sb = new StringBuilder();
@@ -173,7 +175,8 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                     return true; //still return true since there was a valid choice
                 }
                 allocatedPortion = chosen;
-            } else { // otherwise assign the rest of the damage/protection
+            }
+            else { // otherwise assign the rest of the damage/protection
                 allocatedPortion = stillToDivide;
             }
             tgt.setStillToDivide(stillToDivide - allocatedPortion);
@@ -181,7 +184,18 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         }
         addTarget(card);
         return true;
-    } // selectCard()
+    }
+
+    @Override
+    public String getActivateAction(Card card) {
+        if (!tgt.isUniqueTargets() && targetDepth.containsKey(card)) {
+            return null;
+        }
+        if (choices.contains(card)) {
+            return "select card as target";
+        }
+        return null;
+    }
 
     @Override
     protected final void onPlayerSelected(Player player, final ITriggerEvent triggerEvent) {

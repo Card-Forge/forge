@@ -17,6 +17,7 @@
  */
 package forge.match.input;
 
+import forge.game.card.Card;
 import forge.player.PlayerControllerHuman;
 
  /**
@@ -80,5 +81,10 @@ public class InputConfirm extends InputSyncronizedBase {
 
     public final boolean getResult() {
         return result;
+    }
+
+    @Override
+    public String getActivateAction(Card card) {
+        return null;
     }
 }

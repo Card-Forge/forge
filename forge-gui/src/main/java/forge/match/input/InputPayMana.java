@@ -86,6 +86,16 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         return activateDelayedCard();
     }
 
+    @Override
+    public String getActivateAction(Card card) {
+        for (SpellAbility sa : card.getManaAbilities()) {
+            if (sa.canPlay()) {
+                return "pay mana with card";
+            }
+        }
+        return null;
+    }
+
     private boolean activateDelayedCard() {
         if (delaySelectCards.isEmpty()) {
             return false;

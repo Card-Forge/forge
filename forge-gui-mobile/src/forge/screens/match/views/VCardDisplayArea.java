@@ -179,7 +179,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
     @Override
     public String getActivateAction(int index) {
-        return "activate card"; //TODO: make this more specific to the current input and the zone location
+        return MatchUtil.getHumanController().getInputProxy().getActivateAction(orderedCards.get(index));
     }
 
     @Override

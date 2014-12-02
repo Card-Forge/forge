@@ -157,4 +157,9 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
     public CardCollectionView getSelectedCards() {
         return selected;
     }
+
+    @Override
+    public String getActivateAction(Card card) {
+        return null;
+    }
 }

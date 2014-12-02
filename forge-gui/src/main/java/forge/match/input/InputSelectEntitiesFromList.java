@@ -17,9 +17,9 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
     private final FCollectionView<T> validChoices;
     protected final FCollection<T> selected = new FCollection<T>();
 
-    public InputSelectEntitiesFromList(final PlayerControllerHuman controller, final int min, final int max, final FCollectionView<T> validChoices) {
-        super(controller, Math.min(min, validChoices.size()), Math.min(max, validChoices.size()));
-        this.validChoices = validChoices;
+    public InputSelectEntitiesFromList(final PlayerControllerHuman controller, final int min, final int max, final FCollectionView<T> validChoices0) {
+        super(controller, Math.min(min, validChoices0.size()), Math.min(max, validChoices0.size()));
+        validChoices = validChoices0;
 
         if (min > validChoices.size()) {
             System.out.println(String.format("Trying to choose at least %d cards from a list with only %d cards!", min, validChoices.size()));
@@ -33,6 +33,17 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         }
         refresh();
         return true;
+    }
+
+    @Override
+    public String getActivateAction(Card card) {
+        if (validChoices.contains(card)) {
+            if (selected.contains(card)) {
+                return "unselect card";
+            }
+            return "select card";
+        }
+        return null;
     }
 
     @Override
@@ -55,10 +66,10 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
 
         boolean entityWasSelected = selected.contains(c);
         if (entityWasSelected) {
-            this.selected.remove(c);
+            selected.remove(c);
         }
         else {
-            this.selected.add((T)c);
+            selected.add((T)c);
         }
         onSelectStateChanged(c, !entityWasSelected);
 

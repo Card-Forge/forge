@@ -23,6 +23,7 @@ import java.util.List;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -151,6 +152,22 @@ public class InputPassPriority extends InputSyncronizedBase {
             stop();
     	}
         return true; //still return true if user cancelled selecting an ability to prevent selecting another card
+    }
+
+    @Override
+    public String getActivateAction(Card card) {
+        List<SpellAbility> abilities = card.getAllPossibleAbilities(player, true); 
+        if (abilities.isEmpty()) {
+            return null;
+        }
+        SpellAbility sa = abilities.get(0);
+        if (sa.isSpell()) {
+            return "cast spell";
+        }
+        if (sa == Ability.PLAY_LAND_SURROGATE) {
+            return "play land";
+        }
+        return "activate ability";
     }
 
     @Override
