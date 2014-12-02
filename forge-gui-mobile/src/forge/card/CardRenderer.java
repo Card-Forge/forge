@@ -68,22 +68,6 @@ public class CardRenderer {
         }
     }
 
-    public static void drawZoom(Graphics g, CardView card, float x, float y, float w, float h) {
-        final Texture image = ImageCache.getImage(MatchUtil.getCardImageKey(card.getCurrentState()), true);
-        if (image == null) { //draw details if can't draw zoom
-            CardImageRenderer.drawDetails(g, card, x, y, w, h);
-            return;
-        }
-
-        if (image == ImageCache.defaultImage) { //support drawing card image manually if card image not found
-            CardImageRenderer.drawCardImage(g, card, x, y, w, h, CardStackPosition.Top);
-        }
-        else {
-            g.drawImage(image, x, y, w, h);
-        }
-        drawFoilEffect(g, card, x, y, w, y);
-    }
-
     public static float getCardListItemHeight(boolean compactMode) {
         if (compactMode) {
             return MANA_SYMBOL_SIZE + 2 * FList.PADDING;
@@ -271,7 +255,7 @@ public class CardRenderer {
         Texture image = ImageCache.getImage(pc);
         if (image != null) {
             if (image == ImageCache.defaultImage) {
-                CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), x, y, w, h, pos);
+                CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos);
             }
             else {
                 g.drawImage(image, x, y, w, h);
@@ -292,7 +276,7 @@ public class CardRenderer {
         Texture image = ImageCache.getImage(card);
         if (image != null) {
             if (image == ImageCache.defaultImage) {
-                CardImageRenderer.drawCardImage(g, card, x, y, w, h, pos);
+                CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos);
             }
             else {
                 g.drawImage(image, x, y, w, h);

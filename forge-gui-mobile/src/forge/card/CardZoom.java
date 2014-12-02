@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.math.Rectangle;
 
 import forge.Graphics;
 import forge.ImageKeys;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
+import forge.assets.FSkinImage;
 import forge.game.card.CardView;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
@@ -31,6 +33,8 @@ public class CardZoom extends FOverlay {
     private static boolean zoomMode = true;
     private static ActivateHandler activateHandler;
     private static String currentActivateAction;
+    private static Rectangle flipIconBounds;
+    private static boolean showAltState;
 
     public static void show(Object item) {
         List<Object> items0 = new ArrayList<Object>();
@@ -47,9 +51,7 @@ public class CardZoom extends FOverlay {
         currentCard = getCardView(items.get(currentIndex));
         prevCard = currentIndex > 0 ? getCardView(items.get(currentIndex - 1)) : null;
         nextCard = currentIndex < items.size() - 1 ? getCardView(items.get(currentIndex + 1)) : null;
-        if (activateHandler != null) {
-            currentActivateAction = activateHandler.getActivateAction(currentIndex);
-        }
+        onCardChanged();
         cardZoom.show();
     }
 
@@ -81,9 +83,15 @@ public class CardZoom extends FOverlay {
             currentCard = prevCard;
             prevCard = currentIndex > 0 ? getCardView(items.get(currentIndex - 1)) : null;
         }
+        onCardChanged();
+    }
+
+    private static void onCardChanged() {
         if (activateHandler != null) {
             currentActivateAction = activateHandler.getActivateAction(currentIndex);
         }
+        flipIconBounds = null;
+        showAltState = false;
     }
 
     private static CardView getCardView(Object item) {
@@ -105,6 +113,10 @@ public class CardZoom extends FOverlay {
 
     @Override
     public boolean tap(float x, float y, int count) {
+        if (flipIconBounds != null && flipIconBounds.contains(x, y)) {
+            showAltState = !showAltState;
+            return true;
+        }
         hide();
         return true;
     }
@@ -135,20 +147,33 @@ public class CardZoom extends FOverlay {
 
         float cardWidth = w * 0.5f;
         float cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
+        float y = (h - cardHeight) / 2;
         if (prevCard != null) {
-            CardRenderer.drawZoom(g, prevCard, 0, (h - cardHeight) / 2, cardWidth, cardHeight);
+            CardImageRenderer.drawZoom(g, prevCard, false, 0, y, cardWidth, cardHeight);
         }
         if (nextCard != null) {
-            CardRenderer.drawZoom(g, nextCard, w - cardWidth, (h - cardHeight) / 2, cardWidth, cardHeight);
+            CardImageRenderer.drawZoom(g, nextCard, false, w - cardWidth, y, cardWidth, cardHeight);
         }
 
         cardWidth = w * 0.7f;
         cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
+        float x = (w - cardWidth) / 2;
+        y = (h - cardHeight) / 2;
         if (zoomMode) {
-            CardRenderer.drawZoom(g, currentCard, (w - cardWidth) / 2, (h - cardHeight) / 2, cardWidth, cardHeight);
+            CardImageRenderer.drawZoom(g, currentCard, showAltState, x, y, cardWidth, cardHeight);
         }
         else {
-            CardImageRenderer.drawDetails(g, currentCard, (w - cardWidth) / 2, (h - cardHeight) / 2, cardWidth, cardHeight);
+            CardImageRenderer.drawDetails(g, currentCard, showAltState, x, y, cardWidth, cardHeight);
+        }
+
+        if (currentCard.hasAlternateState()) {
+            float imageWidth = cardWidth / 2;
+            float imageHeight = imageWidth * FSkinImage.FLIPCARD.getHeight() / FSkinImage.FLIPCARD.getWidth();
+            flipIconBounds = new Rectangle(x + (cardWidth - imageWidth) / 2, y + (cardHeight - imageHeight) / 2, imageWidth, imageHeight);
+            g.drawImage(FSkinImage.FLIPCARD, flipIconBounds.x, flipIconBounds.y, flipIconBounds.width, flipIconBounds.height);
+        }
+        else {
+            flipIconBounds = null;
         }
 
         float messageHeight = MSG_FONT.getCapHeight() * 2.5f;

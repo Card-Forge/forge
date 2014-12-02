@@ -201,7 +201,7 @@ public enum CardZoomer {
      * Displays a graphical indicator that shows whether the current card can be flipped or transformed.
      */
     private void setFlipIndicator() {
-        if (thisCard.getAlternateState() != null) {
+        if (thisCard.hasAlternateState()) {
             imagePanel.setLayout(new MigLayout("insets 0, w 100%!, h 100%!"));        
             imagePanel.add(lblFlipcard, "pos (100% - 100px) 0");
         }

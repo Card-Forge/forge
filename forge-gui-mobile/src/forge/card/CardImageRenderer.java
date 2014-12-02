@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Graphics;
@@ -14,6 +15,7 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
+import forge.assets.ImageCache;
 import forge.assets.TextRenderer;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.CardRenderer.CardStackPosition;
@@ -61,9 +63,8 @@ public class CardImageRenderer {
         prevImageHeight = h;
     }
 
-    public static void drawCardImage(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos) {
+    public static void drawCardImage(Graphics g, CardView card, boolean altState, float x, float y, float w, float h, CardStackPosition pos) {
         updateStaticFields(w, h);
-        final CardStateView state = card.getCurrentState();
 
         float blackBorderThickness = w * BLACK_BORDER_THICKNESS_RATIO;
         g.fillRect(Color.BLACK, x, y, w, h);
@@ -72,10 +73,11 @@ public class CardImageRenderer {
         w -= 2 * blackBorderThickness;
         h -= 2 * blackBorderThickness;
 
+        CardStateView state = altState ? card.getAlternateState() : card.getCurrentState();
         boolean canShow = MatchUtil.canCardBeShown(card);
 
         //determine colors for borders
-        final List<DetailColors> borderColors = CardDetailUtil.getBorderColors(card.getCurrentState(), canShow);
+        final List<DetailColors> borderColors = CardDetailUtil.getBorderColors(state, canShow);
         DetailColors borderColor = borderColors.get(0);
         Color color1 = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
         Color color2 = null;
@@ -100,7 +102,7 @@ public class CardImageRenderer {
         //draw header containing name and mana cost
         Color headerColor1 = FSkinColor.tintColor(Color.WHITE, color1, CardRenderer.NAME_BOX_TINT);
         Color headerColor2 = color2 == null ? null : FSkinColor.tintColor(Color.WHITE, color2, CardRenderer.NAME_BOX_TINT);
-        drawHeader(g, card, headerColor1, headerColor2, x, y, w, headerHeight);
+        drawHeader(g, card, state, headerColor1, headerColor2, x, y, w, headerHeight);
 
         if (pos == CardStackPosition.BehindVert) { return; } //remaining rendering not needed if card is behind another card in a vertical stack
         boolean onTop = (pos == CardStackPosition.Top);
@@ -139,13 +141,13 @@ public class CardImageRenderer {
         }
 
         //draw type line
-        drawTypeLine(g, card, canShow, headerColor1, headerColor2, x, y, w, typeBoxHeight);
+        drawTypeLine(g, card, state, canShow, headerColor1, headerColor2, x, y, w, typeBoxHeight);
         y += typeBoxHeight;
 
         //draw text box
         Color textBoxColor1 = FSkinColor.tintColor(Color.WHITE, color1, CardRenderer.TEXT_BOX_TINT);
         Color textBoxColor2 = color2 == null ? null : FSkinColor.tintColor(Color.WHITE, color2, CardRenderer.TEXT_BOX_TINT);
-        drawTextBox(g, card, textBoxColor1, textBoxColor2, x + artInset, y, w - 2 * artInset, textBoxHeight, onTop);
+        drawTextBox(g, card, state, textBoxColor1, textBoxColor2, x + artInset, y, w - 2 * artInset, textBoxHeight, onTop);
         y += textBoxHeight;
 
         //draw P/T box
@@ -153,11 +155,11 @@ public class CardImageRenderer {
             //only needed if on top since otherwise P/T will be hidden
             Color ptColor1 = FSkinColor.tintColor(Color.WHITE, color1, CardRenderer.PT_BOX_TINT);
             Color ptColor2 = color2 == null ? null : FSkinColor.tintColor(Color.WHITE, color2, CardRenderer.PT_BOX_TINT);
-            drawPtBox(g, card, ptColor1, ptColor2, x, y - 2 * artInset, w, ptBoxHeight);
+            drawPtBox(g, card, state, ptColor1, ptColor2, x, y - 2 * artInset, w, ptBoxHeight);
         }
     }
 
-    private static void drawHeader(Graphics g, CardView card, Color color1, Color color2, float x, float y, float w, float h) {
+    private static void drawHeader(Graphics g, CardView card, CardStateView state, Color color1, Color color2, float x, float y, float w, float h) {
         if (color2 == null) {
             g.fillRect(color1, x, y, w, h);
         }
@@ -168,7 +170,6 @@ public class CardImageRenderer {
 
         float padding = h / 8;
 
-        final CardStateView state = card.getCurrentState();
         //draw mana cost for card
         float manaCostWidth = 0;
         ManaCost mainManaCost = state.getManaCost();
@@ -212,7 +213,7 @@ public class CardImageRenderer {
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
     }
 
-    private static void drawTypeLine(Graphics g, CardView card, boolean canShow, Color color1, Color color2, float x, float y, float w, float h) {
+    private static void drawTypeLine(Graphics g, CardView card, CardStateView state, boolean canShow, Color color1, Color color2, float x, float y, float w, float h) {
         if (color2 == null) {
             g.fillRect(color1, x, y, w, h);
         }
@@ -227,17 +228,17 @@ public class CardImageRenderer {
         float iconSize = h * 0.55f;
         float iconPadding = (h - iconSize) / 2;
         w -= iconSize + iconPadding * 2;
-        g.fillRect(CardRenderer.getRarityColor(card.getCurrentState().getRarity()), x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+        g.fillRect(CardRenderer.getRarityColor(state.getRarity()), x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
 
         //draw type
         x += padding;
-        g.drawText(CardDetailUtil.formatCardType(card.getCurrentState(), canShow), TYPE_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
+        g.drawText(CardDetailUtil.formatCardType(state, canShow), TYPE_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
     }
 
     //use text renderer to handle mana symbols and reminder text
     private static final TextRenderer cardTextRenderer = new TextRenderer(true);
 
-    private static void drawTextBox(Graphics g, CardView card, Color color1, Color color2, float x, float y, float w, float h, boolean onTop) {
+    private static void drawTextBox(Graphics g, CardView card, CardStateView state, Color color1, Color color2, float x, float y, float w, float h, boolean onTop) {
         if (color2 == null) {
             g.fillRect(color1, x, y, w, h);
         }
@@ -248,7 +249,6 @@ public class CardImageRenderer {
 
         if (!onTop) { return; } //remaining rendering only needed if card on top
 
-        final CardStateView state = card.getCurrentState();
         if (state.isBasicLand()) {
             //draw icons for basic lands
             FSkinImage image;
@@ -285,8 +285,7 @@ public class CardImageRenderer {
         }
     }
 
-    private static void drawPtBox(Graphics g, CardView card, Color color1, Color color2, float x, float y, float w, float h) {
-        final CardStateView state = card.getCurrentState();
+    private static void drawPtBox(Graphics g, CardView card, CardStateView state, Color color1, Color color2, float x, float y, float w, float h) {
         List<String> pieces = new ArrayList<String>();
         if (state.isCreature()) {
             pieces.add(String.valueOf(state.getPower()));
@@ -329,7 +328,23 @@ public class CardImageRenderer {
         }
     }
 
-    public static void drawDetails(Graphics g, CardView card, float x, float y, float w, float h) {
+    public static void drawZoom(Graphics g, CardView card, boolean altState, float x, float y, float w, float h) {
+        final Texture image = ImageCache.getImage(MatchUtil.getCardImageKey(altState ? card.getAlternateState() : card.getCurrentState()), true);
+        if (image == null) { //draw details if can't draw zoom
+            drawDetails(g, card, altState, x, y, w, h);
+            return;
+        }
+
+        if (image == ImageCache.defaultImage) { //support drawing card image manually if card image not found
+            drawCardImage(g, card, altState, x, y, w, h, CardStackPosition.Top);
+        }
+        else {
+            g.drawImage(image, x, y, w, h);
+        }
+        CardRenderer.drawFoilEffect(g, card, x, y, w, y);
+    }
+
+    public static void drawDetails(Graphics g, CardView card, boolean altState, float x, float y, float w, float h) {
         updateStaticFields(w, h);
 
         float blackBorderThickness = w * BLACK_BORDER_THICKNESS_RATIO;
@@ -339,10 +354,11 @@ public class CardImageRenderer {
         w -= 2 * blackBorderThickness;
         h -= 2 * blackBorderThickness;
 
+        CardStateView state = altState ? card.getAlternateState() : card.getCurrentState();
         boolean canShow = MatchUtil.canCardBeShown(card);
 
         //determine colors for borders
-        List<DetailColors> borderColors = CardDetailUtil.getBorderColors(card.getCurrentState(), canShow);
+        List<DetailColors> borderColors = CardDetailUtil.getBorderColors(state, canShow);
         DetailColors borderColor = borderColors.get(0);
         Color color1 = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
         Color color2 = null;
@@ -368,7 +384,7 @@ public class CardImageRenderer {
         //draw name/type box
         Color nameBoxColor1 = FSkinColor.tintColor(Color.WHITE, color1, CardRenderer.NAME_BOX_TINT);
         Color nameBoxColor2 = color2 == null ? null : FSkinColor.tintColor(Color.WHITE, color2, CardRenderer.NAME_BOX_TINT);
-        drawDetailsNameBox(g, card, canShow, nameBoxColor1, nameBoxColor2, x, y, w, cardNameBoxHeight);
+        drawDetailsNameBox(g, card, state, canShow, nameBoxColor1, nameBoxColor2, x, y, w, cardNameBoxHeight);
 
         float innerBorderThickness = outerBorderThickness / 2;
         float ptBoxHeight = 2 * PT_FONT.getCapHeight();
@@ -377,15 +393,15 @@ public class CardImageRenderer {
         y += cardNameBoxHeight + innerBorderThickness;
         Color textBoxColor1 = FSkinColor.tintColor(Color.WHITE, color1, CardRenderer.TEXT_BOX_TINT);
         Color textBoxColor2 = color2 == null ? null : FSkinColor.tintColor(Color.WHITE, color2, CardRenderer.TEXT_BOX_TINT);
-        drawDetailsTextBox(g, card, canShow, textBoxColor1, textBoxColor2, x, y, w, textBoxHeight);
+        drawDetailsTextBox(g, card, state, canShow, textBoxColor1, textBoxColor2, x, y, w, textBoxHeight);
 
         y += textBoxHeight + innerBorderThickness;
         Color ptColor1 = FSkinColor.tintColor(Color.WHITE, color1, CardRenderer.PT_BOX_TINT);
         Color ptColor2 = color2 == null ? null : FSkinColor.tintColor(Color.WHITE, color2, CardRenderer.PT_BOX_TINT);
-        drawDetailsIdAndPtBox(g, card, canShow, idForeColor, ptColor1, ptColor2, x, y, w, ptBoxHeight);
+        drawDetailsIdAndPtBox(g, card, state, canShow, idForeColor, ptColor1, ptColor2, x, y, w, ptBoxHeight);
     }
 
-    private static void drawDetailsNameBox(Graphics g, CardView card, boolean canShow, Color color1, Color color2, float x, float y, float w, float h) {
+    private static void drawDetailsNameBox(Graphics g, CardView card, CardStateView state, boolean canShow, Color color1, Color color2, float x, float y, float w, float h) {
         if (color2 == null) {
             g.fillRect(color1, x, y, w, h);
         }
@@ -395,7 +411,6 @@ public class CardImageRenderer {
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
         float padding = h / 8;
-        final CardStateView state = card.getCurrentState();
 
         //make sure name/mana cost row height is tall enough for both
         h = Math.max(MANA_SYMBOL_SIZE + 2 * HEADER_PADDING, 2 * NAME_FONT.getCapHeight());
@@ -421,7 +436,7 @@ public class CardImageRenderer {
         //draw name for card
         x += padding;
         w -= 2 * padding;
-        g.drawText(CardDetailUtil.formatCardName(card, canShow, false), NAME_FONT, Color.BLACK, x, y, w - manaCostWidth - padding, h, false, HAlignment.LEFT, true);
+        g.drawText(CardDetailUtil.formatCardName(card, canShow, state == card.getAlternateState()), NAME_FONT, Color.BLACK, x, y, w - manaCostWidth - padding, h, false, HAlignment.LEFT, true);
 
         //draw type and set label for card
         y += h;
@@ -442,7 +457,7 @@ public class CardImageRenderer {
         g.drawText(CardDetailUtil.formatCardType(state, canShow), TYPE_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
     }
 
-    private static void drawDetailsTextBox(Graphics g, CardView card, boolean canShow, Color color1, Color color2, float x, float y, float w, float h) {
+    private static void drawDetailsTextBox(Graphics g, CardView card, CardStateView state, boolean canShow, Color color1, Color color2, float x, float y, float w, float h) {
         if (color2 == null) {
             g.fillRect(color1, x, y, w, h);
         }
@@ -457,12 +472,10 @@ public class CardImageRenderer {
         y += padY;
         w -= 2 * padX;
         h -= 2 * padY;
-        cardTextRenderer.drawText(g, CardDetailUtil.composeCardText(card.getCurrentState(), canShow), TEXT_FONT, Color.BLACK, x, y, w, h, y, h, true, HAlignment.LEFT, false);
+        cardTextRenderer.drawText(g, CardDetailUtil.composeCardText(state, canShow), TEXT_FONT, Color.BLACK, x, y, w, h, y, h, true, HAlignment.LEFT, false);
     }
 
-    private static void drawDetailsIdAndPtBox(Graphics g, CardView card, boolean canShow, Color idForeColor, Color color1, Color color2, float x, float y, float w, float h) {
-        final CardStateView state = card.getCurrentState();
-
+    private static void drawDetailsIdAndPtBox(Graphics g, CardView card, CardStateView state, boolean canShow, Color idForeColor, Color color1, Color color2, float x, float y, float w, float h) {
         float idWidth = 0;
         if (canShow) {
             String idText = CardDetailUtil.formatCardId(state);
