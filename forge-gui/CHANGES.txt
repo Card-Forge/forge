@@ -16,12 +16,13 @@ You can now hold the Shift key when clicking on mana pool icons to use as much o
 New Cards
 ---------
 
-Wave of Vitriol
 Assault Suit
-Incite Rebellion
 Domineering Will
+Incite Rebellion
 Infernal Offering
 Loreseeker's Stone
+Shared Fate
+Wave of Vitriol
 
 
 ------------
