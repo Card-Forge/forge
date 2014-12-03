@@ -7,9 +7,8 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigExile:AB$ Mill | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X | SubAbility$ DBEffect
 SVar:X:Remembered$CardManaCost
-SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay,STPlay2 | Triggers$ TriggerCastDoM | SVars$ TrigRemoveSelf | RememberObjects$ Remembered | SubAbility$ DBCleanup
-SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand+YouOwn | AddHiddenKeyword$ May be played & May spend mana as though it were mana of any color to cast CARDNAME | AffectedZone$ Exile | Description$ Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it.
-SVar:STPlay2:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand+OppOwn | AddHiddenKeyword$ May be played by your opponent & May spend mana as though it were mana of any color to cast CARDNAME | AffectedZone$ Exile
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | Triggers$ TriggerCastDoM | SVars$ TrigRemoveSelf | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreColor$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it.
 SVar:TriggerCastDoM:Mode$ SpellCast | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Execute$ TrigRemoveSelf | Static$ True
 SVar:TrigRemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

@@ -29,6 +29,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardPlayOption;
 import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
 import forge.game.mana.ManaCostBeingPaid;
@@ -143,20 +144,37 @@ public final class GameActionUtil {
 
     /**
      * <p>
-     * getAlternativeCosts.
+     * Find the alternative costs to a {@link SpellAbility}.
      * </p>
      * 
      * @param sa
-     *            a SpellAbility.
-     * @return an ArrayList<SpellAbility>.
-     * get alternative costs as additional spell abilities
+     *            a {@link SpellAbility}.
+     * @param activator
+     *            the {@link Player} for which to calculate available
+     * @return a {@link List} of {@link SpellAbility} objects, each representing
+     *         a possible alternative cost the provided activator can use to pay
+     *         the provided {@link SpellAbility}.
      */
-    public static final ArrayList<SpellAbility> getAlternativeCosts(SpellAbility sa) {
-        ArrayList<SpellAbility> alternatives = new ArrayList<SpellAbility>();
-        Card source = sa.getHostCard();
+    public static final List<SpellAbility> getAlternativeCosts(final SpellAbility sa, final Player activator) {
+        final List<SpellAbility> alternatives = new ArrayList<SpellAbility>();
         if (!sa.isBasicSpell()) {
             return alternatives;
         }
+
+        final Card source = sa.getHostCard();
+        final CardPlayOption playOption = source.mayPlay(activator);
+        if (sa.isSpell() && playOption != null && playOption.isWithoutManaCost()) {
+            final SpellAbility newSA = sa.copy();
+            final SpellAbilityRestriction sar = new SpellAbilityRestriction();
+            sar.setVariables(sa.getRestrictions());
+            sar.setZone(null);
+            newSA.setRestrictions(sar);
+            newSA.setBasicSpell(false);
+            newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
+            newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
+            alternatives.add(newSA);
+        }
+
         for (final String keyword : source.getKeywords()) {
             if (sa.isSpell() && keyword.startsWith("Flashback")) {
                 final SpellAbility flashback = sa.copy();
@@ -177,18 +195,6 @@ public final class GameActionUtil {
                 SpellAbilityRestriction sar = new SpellAbilityRestriction();
                 sar.setVariables(sa.getRestrictions());
                 sar.setZone(null);
-                newSA.setRestrictions(sar);
-                newSA.setBasicSpell(false);
-                newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
-                newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
-                alternatives.add(newSA);
-            }
-            if (sa.isSpell() && keyword.equals("May be played by your opponent without paying its mana cost")) {
-                final SpellAbility newSA = sa.copy();
-                SpellAbilityRestriction sar = new SpellAbilityRestriction();
-                sar.setVariables(sa.getRestrictions());
-                sar.setZone(null);
-                sar.setOpponentOnly(true);
                 newSA.setRestrictions(sar);
                 newSA.setBasicSpell(false);
                 newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());

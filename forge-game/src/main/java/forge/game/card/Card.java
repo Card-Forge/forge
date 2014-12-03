@@ -136,6 +136,8 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     // if this card is an Aura, what Entity is it enchanting?
     private GameEntity enchanting = null;
 
+    private final Map<Player, CardPlayOption> mayPlay = Maps.newTreeMap();
+
     // changes by AF animate and continuous static effects - timestamp is the key of maps
     private Map<Long, CardChangedType> changedCardTypes = new ConcurrentSkipListMap<Long, CardChangedType>();
     private Map<Long, KeywordsChange> changedCardKeywords = new ConcurrentSkipListMap<Long, KeywordsChange>();
@@ -1503,10 +1505,22 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     public String getAbilityText() {
         return getAbilityText(currentState);
     }
-    public String getAbilityText(CardState state) {
+    public String getAbilityText(final CardState state) {
         final CardTypeView type = state.getType();
+
+        final StringBuilder sb = new StringBuilder();
+        if (!mayPlay.isEmpty()) {
+            sb.append("May be played by: ");
+            sb.append(Lang.joinHomogenous(mayPlay.entrySet(), new Function<Entry<Player, CardPlayOption>, String>() {
+                @Override public String apply(final Entry<Player, CardPlayOption> entry) {
+                    return entry.getKey().toString() + entry.getValue().toString();
+                }
+            }));
+            sb.append("\r\n");
+        }
+
         if (type.isInstant() || type.isSorcery()) {
-            final StringBuilder sb = abilityTextInstantSorcery(state);
+            sb.append(abilityTextInstantSorcery(state));
 
             if (haunting != null) {
                 sb.append("Haunting: ").append(haunting);
@@ -1519,8 +1533,6 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
 
             return sb.toString().replaceAll("CARDNAME", state.getName());
         }
-
-        final StringBuilder sb = new StringBuilder();
 
         if (monstrous) {
             sb.append("Monstrous\r\n");
@@ -2139,6 +2151,17 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
     }
     public final void setMayLookAt(final Player player, final boolean mayLookAt, final boolean temp) {
         view.setPlayerMayLook(player, mayLookAt, temp);
+    }
+
+    public final CardPlayOption mayPlay(final Player player) {
+        return mayPlay.get(player);
+    }
+    public final void setMayPlay(final Player player, final boolean withoutManaCost, final boolean ignoreColor) {
+        final CardPlayOption option = this.mayPlay.get(player);
+        this.mayPlay.put(player, option == null ? new CardPlayOption(withoutManaCost, ignoreColor) : option.add(withoutManaCost, ignoreColor));
+    }
+    public final void removeMayPlay(final Player player) {
+        this.mayPlay.remove(player);
     }
 
     public final CardCollectionView getEquippedBy(boolean allowModify) {
@@ -6246,13 +6269,18 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return null;
     }
 
-    public List<SpellAbility> getAllPossibleAbilities(Player player, boolean removeUnplayable) {
+    public List<SpellAbility> getAllPossibleAbilities(final Player player, final boolean removeUnplayable) {
         // this can only be called by the Human
         final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
         for (SpellAbility sa : getSpellAbilities()) {
             //add alternative costs as additional spell abilities
             abilities.add(sa);
-            abilities.addAll(GameActionUtil.getAlternativeCosts(sa));
+            abilities.addAll(GameActionUtil.getAlternativeCosts(sa, player));
+        }
+        if (isFaceDown() && isInZone(ZoneType.Exile) && mayPlay(player) != null) {
+            for (final SpellAbility sa : getState(CardStateName.Original).getSpellAbilities()) {
+                abilities.add(sa);
+            }
         }
 
         for (int i = abilities.size() - 1; i >= 0; i--) {
@@ -6266,7 +6294,7 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             }
         }
 
-        if (isLand() && player.canPlayLand(this)) {
+        if (getState(CardStateName.Original).getType().isLand() && player.canPlayLand(this)) {
             Ability.PLAY_LAND_SURROGATE.setHostCard(this);
             abilities.add(Ability.PLAY_LAND_SURROGATE);
         }

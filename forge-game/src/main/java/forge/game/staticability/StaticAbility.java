@@ -257,9 +257,8 @@ public class StaticAbility extends CardTraitBase {
         return in;
     }
 
-    // apply the ability if it has the right mode
     /**
-     * Apply ability.
+     * Apply ability if it has the right mode.
      * 
      * @param mode
      *            the mode

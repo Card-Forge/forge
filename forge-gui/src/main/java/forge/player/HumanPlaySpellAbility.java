@@ -17,14 +17,20 @@
  */
 package forge.player;
 
+import java.util.Collections;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.Iterables;
 
+import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardPlayOption;
 import forge.game.cost.CostPartMana;
 import forge.game.cost.CostPayment;
 import forge.game.mana.ManaPool;
@@ -36,10 +42,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.Zone;
 import forge.util.FCollection;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
 
 /**
  * <p>
@@ -66,17 +68,26 @@ public class HumanPlaySpellAbility {
 
         // used to rollback
         Zone fromZone = null;
+        CardStateName fromState = null;
         int zonePosition = 0;
         final ManaPool manapool = human.getManaPool();
 
         final Card c = ability.getHostCard();
-        boolean manaConversion = (ability.isSpell() && c.hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME"));
+        final CardPlayOption option = c.mayPlay(human);
+
+        boolean manaConversion = (ability.isSpell() && (c.hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME")
+                || (option != null && option.isIgnoreManaCostColor())));
         boolean playerManaConversion = human.hasManaConversion()
                 && human.getController().confirmAction(ability, null, "Do you want to spend mana as though it were mana of any color to pay the cost?");
         if (ability instanceof Spell && !c.isCopiedSpell()) {
             fromZone = game.getZoneOf(c);
+            fromState = c.getCurrentStateName();
             if (fromZone != null) {
-            	zonePosition = fromZone.getCards().indexOf(c);
+                zonePosition = fromZone.getCards().indexOf(c);
+            }
+            // Turn face-down card face up (except case of morph spell)
+            if (ability instanceof Spell && !((Spell) ability).isCastFaceDown() && fromState == CardStateName.FaceDown) {
+                c.turnFaceUp();
             }
             ability.setHostCard(game.getAction().moveToStack(c));
         }
@@ -100,7 +111,7 @@ public class HumanPlaySpellAbility {
 
         if (!prerequisitesMet) {
             if (!ability.isTrigger()) {
-                rollbackAbility(fromZone, zonePosition);
+                rollbackAbility(fromZone, fromState, zonePosition);
                 if (ability.getHostCard().isMadness()) {
                     // if a player failed to play madness cost, move the card to graveyard
                     game.getAction().moveToGraveyard(c);
@@ -125,8 +136,7 @@ public class HumanPlaySpellAbility {
 
             if (skipStack) {
                 AbilityUtils.resolve(ability);
-            }
-            else {
+            } else {
                 enusureAbilityHasDescription(ability);
                 game.getStack().addAndUnfreeze(ability);
             }
@@ -182,13 +192,14 @@ public class HumanPlaySpellAbility {
         }
     }
 
-    private void rollbackAbility(Zone fromZone, int zonePosition) { 
+    private void rollbackAbility(final Zone fromZone, final CardStateName fromState, final int zonePosition) { 
         // cancel ability during target choosing
         final Game game = ability.getActivatingPlayer().getGame();
 
         if (fromZone != null) { // and not a copy
             // add back to where it came from
             game.getAction().moveTo(fromZone, ability.getHostCard(), zonePosition >= 0 ? Integer.valueOf(zonePosition) : null);
+            ability.getHostCard().setState(fromState, true);
         }
 
         clearTargets(ability);
@@ -255,7 +266,7 @@ public class HumanPlaySpellAbility {
             for (String aVar : announce.split(",")) {
                 String varName = aVar.trim();
                 if ("CreatureType".equals(varName)) {
-                    String choice = pc.chooseSomeType("Creature", ability, CardType.Constant.CREATURE_TYPES, new ArrayList<String>());
+                    final String choice = pc.chooseSomeType("Creature", ability, CardType.Constant.CREATURE_TYPES, Collections.<String>emptyList());
                     ability.getHostCard().setChosenType(choice);
                 }
                 if ("ChooseNumber".equals(varName)) {

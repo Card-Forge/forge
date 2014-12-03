@@ -216,9 +216,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         if (sp.isSpell()) {
             source.setController(activator, 0);
-            Spell spell = (Spell) sp;
+            final Spell spell = (Spell) sp;
             if (spell.isCastFaceDown()) {
                 source.turnFaceDown();
+            } else if (source.isFaceDown()) {
+                source.turnFaceUp();
             }
         }
 

@@ -1,8 +1,11 @@
 package forge.game.card;
 
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.google.common.collect.Iterables;
 
 import forge.ImageKeys;
 import forge.card.CardStateName;
@@ -101,6 +104,9 @@ public class CardView extends GameEntityView {
     }
     void updateZone(Card c) {
         set(TrackableProperty.Zone, c.getZone() == null ? null : c.getZone().getZoneType());
+    }
+    public boolean isInZone(final Iterable<ZoneType> zones) {
+        return Iterables.contains(zones, getZone());
     }
 
     public boolean isCloned() {
@@ -397,11 +403,17 @@ public class CardView extends GameEntityView {
         }
 
         //if viewer is controlled by another player, also check if face can be shown to that player
-        PlayerView mindSlaveMaster = viewer.getMindSlaveMaster();
+        final PlayerView mindSlaveMaster = viewer.getMindSlaveMaster();
         if (mindSlaveMaster != null && canFaceDownBeShownTo(mindSlaveMaster)) {
             return true;
         }
-        return !getController().isOpponentOf(viewer) || getCurrentState().getOpponentMayLook();
+        if (isInZone(EnumSet.of(ZoneType.Battlefield, ZoneType.Stack, ZoneType.Sideboard)) && getController().equals(viewer)) {
+            return true;
+        }
+        if (getController().isOpponentOf(viewer) && getCurrentState().getOpponentMayLook()) { 
+            return true;
+        }
+        return false;
     }
 
     public CardView getEquipping() {

@@ -1386,6 +1386,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         // Dakkon Blackblade Avatar will use a similar effect
         if (canPlayLand(land, ignoreZoneAndTiming)) {
             land.setController(this, 0);
+            if (land.isFaceDown()) {
+                land.turnFaceUp();
+            }
             game.getAction().moveTo(getZone(ZoneType.Battlefield), land);
 
             // play a sound
@@ -1407,7 +1410,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final boolean canPlayLand(final Card land) {
         return canPlayLand(land, false);
     }
-    public final boolean canPlayLand(Card land, final boolean ignoreZoneAndTiming) {
+    public final boolean canPlayLand(final Card land, final boolean ignoreZoneAndTiming) {
         if (!ignoreZoneAndTiming && !canCastSorcery()) {
             return false;
         }
@@ -1423,14 +1426,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         if (land != null && !ignoreZoneAndTiming) {
-            if (land.getOwner() != this && !land.hasKeyword("May be played by your opponent"))
+            final boolean mayPlay = land.mayPlay(this) != null;
+            if (land.getOwner() != this && !mayPlay) {
                 return false;
-            
-            if (land.getOwner() == this && land.hasKeyword("May be played by your opponent") && !land.hasKeyword("May be played"))
-                return false;
+            }
 
             final Zone zone = game.getZoneOf(land);
-            if (zone != null && (zone.is(ZoneType.Battlefield) || (!zone.is(ZoneType.Hand) && !land.hasStartOfKeyword("May be played")))) {
+            if (zone != null && (zone.is(ZoneType.Battlefield) || (!zone.is(ZoneType.Hand) && !(mayPlay || land.hasStartOfKeyword("May be played"))))) {
                 return false;
             }
         }

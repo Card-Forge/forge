@@ -446,6 +446,7 @@ forge-game/src/main/java/forge/game/card/CardDamageHistory.java -text
 forge-game/src/main/java/forge/game/card/CardFactory.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardFactoryUtil.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardLists.java svneol=native#text/plain
+forge-game/src/main/java/forge/game/card/CardPlayOption.java -text
 forge-game/src/main/java/forge/game/card/CardPowerToughness.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardPredicates.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardShields.java -text
@@ -12181,6 +12182,7 @@ forge-gui/res/cardsfolder/s/sharding_sphinx.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shardless_agent.txt -text
 forge-gui/res/cardsfolder/s/shared_animosity.txt -text
 forge-gui/res/cardsfolder/s/shared_discovery.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/shared_fate.txt -text
 forge-gui/res/cardsfolder/s/shared_trauma.txt -text
 forge-gui/res/cardsfolder/s/shared_triumph.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sharpened_pitchfork.txt -text

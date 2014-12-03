@@ -200,9 +200,8 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             return true;
         }
 
-        Player activator = sa.getActivatingPlayer();
-
-        Zone cardZone = activator.getGame().getZoneOf(c);
+        final Player activator = sa.getActivatingPlayer();
+        final Zone cardZone = activator.getGame().getZoneOf(c);
         if (cardZone == null || !cardZone.is(this.getZone())) {
             // If Card is not in the default activating zone, do some additional checks
             // Not a Spell, or on Battlefield, return false
@@ -211,12 +210,12 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 return false;
             }
             if (cardZone.is(ZoneType.Stack)) {
-            	return false;
+                return false;
             }
-            if (c.hasKeyword("May be played") && activator.equals(c.getController())) {
+            if (c.mayPlay(activator) != null) {
                 return true;
             }
-            if (c.hasKeyword("May be played by your opponent") && !activator.equals(c.getController())) {
+            if (c.hasKeyword("May be played") && activator.equals(c.getController())) {
                 return true;
             }
             return false;
@@ -296,7 +295,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         	return true;
         }
 
-        if (sa.isSpell() && activator.isOpponentOf(c.getController()) && c.hasKeyword("May be played by your opponent")) {
+        if (sa.isSpell() && c.mayPlay(activator) != null) {
             return true;
         }
         

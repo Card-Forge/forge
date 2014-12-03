@@ -34,6 +34,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
+import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.CardType.Supertype;
@@ -335,7 +336,7 @@ public class AiController {
             sa.setActivatingPlayer(player);
             //add alternative costs as additional spell abilities
             newAbilities.add(sa);
-            newAbilities.addAll(GameActionUtil.getAlternativeCosts(sa));
+            newAbilities.addAll(GameActionUtil.getAlternativeCosts(sa, player));
         }
     
         final ArrayList<SpellAbility> result = new ArrayList<SpellAbility>();
@@ -351,6 +352,11 @@ public class AiController {
         for (final Card c : l) {
             for (final SpellAbility sa : c.getSpellAbilities()) {
                 spellAbilities.add(sa);
+            }
+            if (c.isFaceDown() && c.isInZone(ZoneType.Exile) && c.mayPlay(player) != null) {
+                for (final SpellAbility sa : c.getState(CardStateName.Original).getSpellAbilities()) {
+                    spellAbilities.add(sa);
+                }
             }
         }
         return spellAbilities;
@@ -392,11 +398,15 @@ public class AiController {
         });
     
         final CardCollection landsNotInHand = new CardCollection(player.getCardsIn(ZoneType.Graveyard));
+        landsNotInHand.addAll(game.getCardsIn(ZoneType.Exile));
         if (!player.getCardsIn(ZoneType.Library).isEmpty()) {
             landsNotInHand.add(player.getCardsIn(ZoneType.Library).get(0));
         }
         for (final Card crd : landsNotInHand) {
-            if (crd.isLand() && crd.hasKeyword("May be played")) {
+            if (!(crd.isLand() || (crd.isFaceDown() && crd.getState(CardStateName.Original).getType().isLand()))) {
+                continue;
+            }
+            if (crd.hasKeyword("May be played") || crd.mayPlay(player) != null) {
                 landList.add(crd);
             }
         }

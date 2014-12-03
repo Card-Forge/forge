@@ -5,9 +5,8 @@ PT:3/3
 K:Morph:4 U U
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard. You may cast that card without paying its mana cost as long as it remains exiled.
 SVar:TrigCounter:AB$ Counter | Cost$ 0 | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | RememberCountered$ True | ForgetOtherTargets$ True | Destination$ Exile | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | Name$ Kheru Spellsnatcher Effect | RememberObjects$ Remembered | StaticAbilities$ PlayOpp,PlayYou | Duration$ Permanent | Triggers$ TrigCleanup | SVars$ DBCleanup | References$ PlayOpp,PlayYou,TrigCleanup,DBCleanup
-SVar:PlayOpp:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered+OppOwn | AffectedZone$ Exile | AddHiddenKeyword$ May be played by your opponent without paying its mana cost | Description$ You may play cards exiled with Kheru Spellsnatcher.
-SVar:PlayYou:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered+YouOwn | AffectedZone$ Exile | AddHiddenKeyword$ May be played without paying its mana cost
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STPlay | Duration$ Permanent | Triggers$ TrigCleanup | SVars$ DBCleanup | References$ PlayOpp,PlayYou,TrigCleanup,DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may cast cards without paying their mana cost as long as they remain exiled.
 SVar:TrigCleanup:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | TriggerZones$ Command | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemAIDeck:True

@@ -4,8 +4,11 @@ Types:Creature Vampire Wizard
 PT:3/3
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player exiles a card from his or her hand. You may play that card for as long as it remains exiled.
-SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Exile | DefinedPlayer$ TriggeredTarget | Chooser$ TriggeredTarget | ChangeType$ Card | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ May be played by your opponent | PumpZone$ Exile | Permanent$ True | SubAbility$ DBCleanup
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ TriggeredTarget | Chooser$ TriggeredTarget | ChangeType$ Card | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | Triggers$ TCleanup | RememberObjects$ Remembered | SVars$ DBExileSelf | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play a card for as long as it remains exiled.
+SVar:TCleanup:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | Execute$ DBExileSelf | Static$ True
+SVar:DBExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Regenerate | Cost$ Sac<1/Human> | SpellDescription$ Regenerate CARDNAME.
 SVar:RemAIDeck:True

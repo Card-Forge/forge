@@ -6,9 +6,9 @@ SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Instant.IsRemembered,Sorcery.I
 SVar:DBForgetOther:DB$ Cleanup | ClearRemembered$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ MischiefPlay | Triggers$ TrigEOT,TrigChangesZone | SVars$ MischiefCleanup,MischiefReturn | RememberObjects$ Remembered | Permanent$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:MischiefPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered+OppOwn | AffectedZone$ Exile | AddHiddenKeyword$ May be played by your opponent without paying its mana cost | Description$ You may play that exiled card.
+SVar:MischiefPlay:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered+OppOwn | AffectedZone$ Exile | Description$ You may cast a card without paying its mana cost as long as it remains exiled.
 SVar:TrigEOT:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ MischiefReturn | TriggerDescription$ At the beginning of the next end step, if you haven't cast it, return it to its owner's hand.
-SVar:MischiefReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand |
+SVar:MischiefReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand
 SVar:TrigChangesZone:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ MischiefCleanup
 SVar:MischiefCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:X:Count$ValidExile Instant.IsRemembered,Sorcery.IsRemembered

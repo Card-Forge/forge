@@ -92,7 +92,7 @@ public class StaticEffects {
         boolean setPT = false;
         String[] addHiddenKeywords = null;
         String addColors = null;
-        boolean removeMayLookAt = false;
+        boolean removeMayLookAt = false, removeMayPlay = false;
 
         if (params.containsKey("ChangeColorWordsTo")) {
             changeColorWordsTo = params.get("ChangeColorWordsTo");
@@ -157,6 +157,9 @@ public class StaticEffects {
 
         if (params.containsKey("MayLookAt")) {
             removeMayLookAt = true;
+        }
+        if (params.containsKey("MayPlay")) {
+            removeMayPlay = true;
         }
 
         if (params.containsKey("IgnoreEffectCost")) {
@@ -253,6 +256,9 @@ public class StaticEffects {
             // remove may look at
             if (removeMayLookAt) {
                 affectedCard.setMayLookAt(controller, false);
+            }
+            if (removeMayPlay) {
+                affectedCard.removeMayPlay(controller);
             }
         }
         se.clearTimestamps();

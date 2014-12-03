@@ -39,14 +39,17 @@ import forge.game.zone.ZoneType;
 import java.util.*;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Multimaps;
 
 public class TriggerHandler {
-    private final ArrayList<TriggerType> suppressedModes = new ArrayList<TriggerType>();
-    private final ArrayList<Trigger> activeTriggers = new ArrayList<Trigger>();
+    private final List<TriggerType> suppressedModes = Collections.synchronizedList(new ArrayList<TriggerType>());
+    private final List<Trigger> activeTriggers = Collections.synchronizedList(new ArrayList<Trigger>());
 
-    private final ArrayList<Trigger> delayedTriggers = new ArrayList<Trigger>();
-    private final ArrayListMultimap<Player, Trigger> playerDefinedDelayedTriggers = ArrayListMultimap.create();
-    private final List<TriggerWaiting> waitingTriggers = new ArrayList<TriggerWaiting>();
+    private final List<Trigger> delayedTriggers = Collections.synchronizedList(new ArrayList<Trigger>());
+    private final ListMultimap<Player, Trigger> playerDefinedDelayedTriggers = Multimaps.synchronizedListMultimap(ArrayListMultimap.<Player, Trigger>create());
+    private final List<TriggerWaiting> waitingTriggers = Collections.synchronizedList(new ArrayList<TriggerWaiting>());
     private final Game game;
 
     public TriggerHandler(Game gameState) {
@@ -268,7 +271,7 @@ public class TriggerHandler {
         boolean checkStatics = false;
 
         // Static triggers
-        for (final Trigger t : activeTriggers) {
+        for (final Trigger t : Lists.newArrayList(activeTriggers)) {
             if (t.isStatic() && canRunTrigger(t, mode, runParams)) {
                 runSingleTrigger(t, runParams);
                 checkStatics = true;

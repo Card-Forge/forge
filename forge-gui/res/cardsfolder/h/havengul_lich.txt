@@ -5,7 +5,8 @@ PT:4/4
 A:AB$ Pump | Cost$ 1 | ValidTgts$ Creature | TgtZone$ Graveyard | TgtPrompt$ Select target creature card | PumpZone$ Graveyard | SubAbility$ PumpYour | RememberObjects$ Targeted | SpellDescription$ You may cast target creature card in a graveyard this turn. When you cast that card this turn, CARDNAME gains all activated abilities of that card until end of turn.
 SVar:PumpYour:DB$ Pump | Defined$ Remembered | ConditionCheckSVar$ SelectKW | ConditionSVarCompare$ EQ1 | KW$ HIDDEN May be played | PumpZone$ Graveyard | SubAbility$ PumpTheir | References$ SelectKW
 SVar:PumpTheir:DB$ Pump | Defined$ Remembered | ConditionCheckSVar$ SelectKW | ConditionSVarCompare$ EQ0 | KW$ HIDDEN May be played by your opponent | PumpZone$ Graveyard | SubAbility$ FXCast | References$ SelectKW
-SVar:FXCast:DB$ Effect | Name$ Havengul Lich Delayed Trigger | Triggers$ DTCast | SVars$ StealAbs,STSteal,CleanupDT | RememberObjects$ Targeted
+SVar:FXCast:DB$ Effect | Name$ Havengul Lich Delayed Trigger | StaticAbilities$ STPlay | Triggers$ DTCast | SVars$ StealAbs,STSteal,CleanupDT | RememberObjects$ Targeted
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Graveyard | Description$ Until end of turn, you may cast a creature card in a graveyard.
 SVar:DTCast:Mode$ SpellCast | ValidCard$ Card.IsRemembered | Execute$ StealAbs | TriggerDescription$ When you cast that card this turn, Havengul Lich gains all activated abilities of that card until end of turn.
 SVar:StealAbs:DB$ Effect | Name$ Havengul Lich effect | RememberObjects$ TriggeredCard | StaticAbilities$ STSteal | SubAbility$ CleanupDT
 SVar:STSteal:Mode$ Continuous | Affected$ EffectSource | EffectZone$ Command | GainsAbilitiesOf$ Creature.IsRemembered | GainsAbilitiesOfZones$ Library,Hand,Stack,Battlefield,Graveyard,Exile,Command

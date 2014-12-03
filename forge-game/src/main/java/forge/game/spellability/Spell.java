@@ -17,6 +17,7 @@
  */
 package forge.game.spellability;
 
+import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -91,7 +92,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         }
 
         // for uncastables like lotus bloom, check if manaCost is blank (except for morph spells)
-        if (!isCastFaceDown() && isBasicSpell() && card.getManaCost().isNoCost()) {
+        if (!isCastFaceDown() && isBasicSpell() && card.getState(card.isFaceDown() ? CardStateName.Original : card.getCurrentStateName()).getManaCost().isNoCost()) {
             return false;
         }
 

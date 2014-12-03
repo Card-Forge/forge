@@ -113,6 +113,7 @@ public class StaticAbilityContinuous {
         boolean removeSubTypes = false;
         boolean removeCreatureTypes = false;
         boolean controllerMayLookAt = false;
+        boolean controllerMayPlay = false, mayPlayWithoutManaCost = false, mayPlayIgnoreColor = false;
 
         //Global rules changes
         if (params.containsKey("GlobalRule")) {
@@ -327,6 +328,14 @@ public class StaticAbilityContinuous {
 
         if (params.containsKey("MayLookAt")) {
             controllerMayLookAt = true;
+        }
+        if (params.containsKey("MayPlay")) {
+            controllerMayPlay = true;
+            if (params.containsKey("MayPlayWithoutManaCost")) {
+                mayPlayWithoutManaCost = true;
+            } else if (params.containsKey("MayPlayIgnoreColor")) {
+                mayPlayIgnoreColor = true;
+            }
         }
 
         if (params.containsKey("IgnoreEffectCost")) {
@@ -558,8 +567,11 @@ public class StaticAbilityContinuous {
             if (controllerMayLookAt) {
                 affectedCard.setMayLookAt(controller, true);
             }
+            if (controllerMayPlay) {
+                affectedCard.setMayPlay(controller, mayPlayWithoutManaCost, mayPlayIgnoreColor);
+            }
         }
-        
+
         return affectedCards;
     }
 

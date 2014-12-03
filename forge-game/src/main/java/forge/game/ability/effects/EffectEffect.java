@@ -112,8 +112,6 @@ public class EffectEffect extends SpellAbilityEffect {
         eff.setImmutable(true);
         eff.setEffectSource(hostCard);
 
-        // Effects should be Orange or something probably
-
         final Card e = eff;
 
         // Grant SVars first in order to give references to granted abilities
