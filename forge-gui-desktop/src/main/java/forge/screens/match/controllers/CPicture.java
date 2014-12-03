@@ -56,7 +56,7 @@ public enum CPicture implements ICDoc {
     private final CardZoomer zoomer = CardZoomer.SINGLETON_INSTANCE;
 
     private CardView currentView = null;
-    private boolean isDisplayAlt = false;
+    private boolean isDisplayAlt = false, alwaysDisplayAlt = false;
 
     /**
      * Shows card details and/or picture in sidebar cardview tabber.
@@ -71,8 +71,9 @@ public enum CPicture implements ICDoc {
 
         currentView = c;
         isDisplayAlt = showAlt;
+        alwaysDisplayAlt = canFlip && c.isFaceDown();
         flipIndicator.setVisible(canFlip);
-        picturePanel.setCard(c.getState(showAlt));
+        picturePanel.setCard(c.getState(isDisplayAlt || alwaysDisplayAlt));
         if (showAlt && canFlip) {
             flipCard();
         }
@@ -97,10 +98,10 @@ public enum CPicture implements ICDoc {
                 }
             }
             showCard(c, false);
-        }
-        else {
+        } else {
             currentView = null;
             isDisplayAlt = false;
+            alwaysDisplayAlt = false;
             flipIndicator.setVisible(false);
             picturePanel.setCard(item);
         }
@@ -177,7 +178,7 @@ public enum CPicture implements ICDoc {
     public void flipCard() {
         if (MatchUtil.canCardBeFlipped(currentView)) {
             isDisplayAlt = !isDisplayAlt;
-            picturePanel.setCard(currentView.getState(isDisplayAlt));
+            picturePanel.setCard(currentView.getState(isDisplayAlt || alwaysDisplayAlt));
             CDetail.SINGLETON_INSTANCE.showCard(currentView, isDisplayAlt);
         }
     }

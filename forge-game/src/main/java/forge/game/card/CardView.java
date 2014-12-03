@@ -12,6 +12,7 @@ import forge.card.CardStateName;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
+import forge.card.CardType;
 import forge.card.CardTypeView;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
@@ -732,6 +733,9 @@ public class CardView extends GameEntityView {
         }
 
         public CardTypeView getType() {
+            if (isFaceDown() && !isInZone(EnumSet.of(ZoneType.Battlefield, ZoneType.Stack))) {
+                return CardType.EMPTY;
+            }
             return get(TrackableProperty.Type);
         }
         void updateType(CardState c) {
