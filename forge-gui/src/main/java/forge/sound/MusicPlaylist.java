@@ -25,7 +25,7 @@ public enum MusicPlaylist {
                 FilenameFilter filter = new FilenameFilter(){
                     @Override
                     public boolean accept(File file, String name) {
-                        return file.isFile();
+                        return name.endsWith(".mp3") || name.endsWith(".wav");
                     }
                 };
                 filenames = new File(ForgeConstants.MUSIC_DIR + subDir).list(filter);
