@@ -297,6 +297,8 @@ public class MatchUtil {
     }
 
     public static boolean canCardBeFlipped(CardView cv) {
+        if (cv == null) { return false; }
+
         CardStateView altState = cv.getAlternateState();
         if (altState == null) { return false; }
 
