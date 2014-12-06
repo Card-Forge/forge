@@ -263,7 +263,14 @@ public final class ConquestData {
     public Region getCurrentRegion() {
         return currentPlane.getRegions().get(currentRegionIndex);
     }
-
+    public boolean setCurrentRegion(Region region) {
+        int index = currentPlane.getRegions().indexOf(region);
+        if (index != -1 && currentRegionIndex != index) {
+            currentRegionIndex = index;
+            return true;
+        }
+        return false;
+    }
     public void incrementRegion(int dir) {
         if (dir > 0) {
             currentRegionIndex++;

@@ -249,6 +249,12 @@ public class CommandCenterScreen extends FScreen implements IVConquestBase {
         if (index >= 0) { //commander row panel
             if (panel.card != null) {
                 commanderRow.selectedIndex = index;
+                ConquestCommander commander = commanderRow.panels[commanderRow.selectedIndex].commander;
+                if (commander.getDeployedRegion() != null) {
+                    if (model.setCurrentRegion(commander.getDeployedRegion())) {
+                        regionDisplay.onRegionChanged();
+                    }
+                }
             }
         }
         else if (index >= -regionDisplay.opponents.length) { //opponent panel
