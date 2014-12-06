@@ -287,24 +287,24 @@ public class ConquestMapScreen extends FScreen {
             }
         }
         else { //deploy panel - toggle whether selected commander is deployed to current region
-            if (commanderRow.selectedIndex != -1) {
-                ConquestCommander commander = commanderRow.panels[commanderRow.selectedIndex].commander;
+            ConquestCommander commander = regionDisplay.deployedCommander.commander;
+            if (commander == null) {
+                commander = commanderRow.panels[commanderRow.selectedIndex].commander;
                 if (commander.getCurrentDayAction() == null) {
-                    if (regionDisplay.deployedCommander.commander == null) {
-                        regionDisplay.deployedCommander.setCommander(commander);
-                        regionDisplay.data.setDeployedCommander(commander);
-                        commander.setCurrentDayAction(ConquestAction.Deploy);
-                        commander.setDeployedRegion(regionDisplay.data.getRegion());
-                    }
+                    regionDisplay.deployedCommander.setCommander(commander);
+                    regionDisplay.data.setDeployedCommander(commander);
+                    commander.setCurrentDayAction(ConquestAction.Deploy);
+                    commander.setDeployedRegion(regionDisplay.data.getRegion());
                 }
-                else if (commander.getCurrentDayAction() == ConquestAction.Deploy) {
-                    if (regionDisplay.deployedCommander.commander == commander) {
-                        regionDisplay.deployedCommander.setCommander(null);
-                        regionDisplay.data.setDeployedCommander(null);
-                        commander.setCurrentDayAction(null);
-                        commander.setDeployedRegion(null);
-                    }
-                }
+            }
+            else if (commander.getCurrentDayAction() == ConquestAction.Deploy) {
+                regionDisplay.deployedCommander.setCommander(null);
+                regionDisplay.data.setDeployedCommander(null);
+                commander.setCurrentDayAction(null);
+                commander.setDeployedRegion(null);
+            }
+            else {
+                commander.setCurrentDayAction(null);
             }
         }
     }
