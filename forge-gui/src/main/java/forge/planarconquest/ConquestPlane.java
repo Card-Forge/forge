@@ -17,6 +17,8 @@
  */
 package forge.planarconquest;
 
+import java.util.HashSet;
+
 import com.google.common.base.Predicate;
 
 import forge.GuiBase;
@@ -30,6 +32,7 @@ import forge.card.MagicColor;
 import forge.deck.generation.DeckGenPool;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.util.Aggregates;
 import forge.util.FCollection;
 import forge.util.FCollectionView;
 
@@ -279,13 +282,15 @@ public enum ConquestPlane {
                                 commanders.add(pc);
                             }
                             int count = 0;
-                            for (Region region : regions) {
-                                if (region.pred.apply(pc)) {
-                                    region.cardPool.add(pc);
-                                    if (isCommander) {
-                                        region.commanders.add(pc);
+                            if (!type.isBasicLand()) { //add all basic lands to all regions below
+                                for (Region region : regions) {
+                                    if (region.pred.apply(pc)) {
+                                        region.cardPool.add(pc);
+                                        if (isCommander) {
+                                            region.commanders.add(pc);
+                                        }
+                                        count++;
                                     }
-                                    count++;
                                 }
                             }
                             //if card doesn't match any region's predicate,
@@ -382,6 +387,16 @@ public enum ConquestPlane {
 
         public FCollectionView<PaperCard> getCommanders() {
             return commanders;
+        }
+
+        public ConquestCommander getRandomOpponent(ConquestCommander[] used) {
+            HashSet<PaperCard> cards = new HashSet<PaperCard>(commanders);
+            for (int i = 0; i < used.length; i++) {
+                if (used[i] != null) {
+                    cards.remove(used[i]);
+                }
+            }
+            return new ConquestCommander(Aggregates.random(cards), cardPool, true);
         }
 
         public String toString() {

@@ -7,11 +7,11 @@ public enum ConquestAction {
     AttackNE(FSkinProp.IMG_ATTACK),
     AttackE(FSkinProp.IMG_ATTACK),
     Defend(FSkinProp.IMG_DEFEND),
-    Recruit(FSkinProp.IMG_ATTACK),
-    Study(FSkinProp.ICO_QUEST_ZEP),
+    Recruit(FSkinProp.IMG_PHASING),
+    Study(FSkinProp.IMG_COSTRESERVED),
     Deploy(FSkinProp.IMG_SUMMONSICK),
-    ReturnToBase(FSkinProp.ICO_QUEST_ZEP),
-    Travel(FSkinProp.ICO_QUEST_ZEP);
+    ReturnToBase(FSkinProp.IMG_SUMMONSICK),
+    Travel(FSkinProp.IMG_SUMMONSICK);
 
     private final FSkinProp icon;
 

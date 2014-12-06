@@ -16,20 +16,13 @@ import forge.deck.generation.IDeckGenPool;
 import forge.item.PaperCard;
 import forge.properties.ForgeConstants;
 import forge.quest.QuestUtil;
-import forge.util.Aggregates;
 import forge.util.FileUtil;
 import forge.util.gui.SOptionPane;
 
 public class ConquestUtil {
     private ConquestUtil() {}
 
-    public static Deck generateHumanDeck(PaperCard commander, IDeckGenPool pool) {
-        return generateDeck(commander, pool, false);
-    }
-    public static Deck generateAiDeck(Iterable<PaperCard> commanderOptions, IDeckGenPool pool) {
-        return generateDeck(Aggregates.random(commanderOptions), pool, true);
-    }
-    private static Deck generateDeck(PaperCard commander, IDeckGenPool pool, boolean forAi) {
+    public static Deck generateDeck(PaperCard commander, IDeckGenPool pool, boolean forAi) {
         ColorSet colorID = commander.getRules().getColorIdentity();
 
         List<String> colors = new ArrayList<String>();

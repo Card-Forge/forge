@@ -10,9 +10,9 @@ public class ConquestCommander {
 
     private ConquestAction currentDayAction;
 
-    public ConquestCommander(PaperCard card0, DeckGenPool cardPool0) {
+    public ConquestCommander(PaperCard card0, DeckGenPool cardPool0, boolean forAi) {
         card = card0;
-        deck = ConquestUtil.generateHumanDeck(card0, cardPool0);
+        deck = ConquestUtil.generateDeck(card0, cardPool0, forAi);
     }
 
     public PaperCard getCard() {

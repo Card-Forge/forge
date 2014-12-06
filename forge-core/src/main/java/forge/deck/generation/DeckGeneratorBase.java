@@ -165,22 +165,24 @@ public abstract class DeckGeneratorBase {
         for (Entry<String, Integer> c : clrCnts.entrySet()) {
             String basicLandName = c.getKey();
 
-
             // calculate number of lands for each color
             final int nLand = Math.min(landsLeft, Math.round(cnt * c.getValue() / totalColor));
             tmpDeck.append("nLand-").append(basicLandName).append(":").append(nLand).append("\n");
 
             // just to prevent a null exception by the deck size fixing code
-            this.cardCounts.put(basicLandName, nLand);
+            cardCounts.put(basicLandName, nLand);
 
             PaperCard cp;
-            if(edition != null)
+            if (edition != null) {
             	cp = pool.getCard(basicLandName, edition);
-            else
+            }
+            else {
             	cp = pool.getCard(basicLandName);
+            }
+
             String basicLandSet = cp.getEdition();
 
-            for (int i=0; i < nLand; i++) {
+            for (int i = 0; i < nLand; i++) {
                 tDeck.add(pool.getCard(cp.getName(), basicLandSet, -1), 1);
             }
 
