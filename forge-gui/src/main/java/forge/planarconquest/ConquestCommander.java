@@ -9,6 +9,7 @@ public class ConquestCommander {
     private final PaperCard card;
     private final Deck deck;
 
+    private int stars; //think 1-star/4-star general
     private Region deployedRegion;
     private ConquestAction currentDayAction;
 
@@ -41,6 +42,10 @@ public class ConquestCommander {
     }
     public void setCurrentDayAction(ConquestAction currentDayAction0) {
         currentDayAction = currentDayAction0;
+    }
+
+    public int getStars() {
+        return stars;
     }
 
     public String toString() {

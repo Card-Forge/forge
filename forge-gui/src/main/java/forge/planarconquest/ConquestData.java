@@ -94,7 +94,7 @@ public final class ConquestData {
         return day;
     }
 
-    public void endDay(final IVConquestBase base) {
+    public void endDay(final IVCommandCenter base) {
         FThreads.invokeInBackgroundThread(new Runnable() {
             @Override
             public void run() {

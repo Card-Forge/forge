@@ -29,7 +29,7 @@ import forge.planarconquest.ConquestPlane.Region;
 import forge.planarconquest.ConquestPlaneData;
 import forge.planarconquest.ConquestPlaneData.RegionData;
 import forge.planarconquest.ConquestPreferences.CQPref;
-import forge.planarconquest.IVConquestBase;
+import forge.planarconquest.IVCommandCenter;
 import forge.screens.FScreen;
 import forge.screens.match.TargetingOverlay;
 import forge.toolbox.FCardPanel;
@@ -40,7 +40,7 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.util.Utils;
 
-public class CommandCenterScreen extends FScreen implements IVConquestBase {
+public class CommandCenterScreen extends FScreen implements IVCommandCenter {
     private static final Color BACK_COLOR = FSkinColor.fromRGB(1, 2, 2);
     private static final float BORDER_THICKNESS = Utils.scale(1);
     private static final FSkinFont REGION_NAME_FONT = FSkinFont.get(15);

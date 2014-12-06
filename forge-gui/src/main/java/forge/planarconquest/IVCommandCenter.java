@@ -1,5 +1,5 @@
 package forge.planarconquest;
 
-public interface IVConquestBase {
+public interface IVCommandCenter {
     void updateCurrentDay();
 }
