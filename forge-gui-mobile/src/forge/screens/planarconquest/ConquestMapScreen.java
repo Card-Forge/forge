@@ -1,5 +1,6 @@
 package forge.screens.planarconquest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.Color;
@@ -14,7 +15,9 @@ import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
 import forge.assets.TextRenderer;
 import forge.card.CardRenderer;
+import forge.card.CardZoom;
 import forge.card.CardRenderer.CardStackPosition;
+import forge.card.CardZoom.ActivateHandler;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.model.FModel;
@@ -54,7 +57,6 @@ public class ConquestMapScreen extends FScreen {
     @Override
     public final void onActivate() {
         update();
-        regionDisplay.revalidate();
     }
 
     public void update() {
@@ -205,6 +207,54 @@ public class ConquestMapScreen extends FScreen {
         private void setCommander(ConquestCommander commander0) {
             commander = commander0;
             card = commander != null ? Card.getCardForUi(commander.getCard()).getView() : null;
+        }
+
+        @Override
+        public boolean longPress(float x, float y) {
+            if (index >= 0) {
+                List<CardView> cards = new ArrayList<CardView>();
+                for (CommanderPanel panel : commanderRow.panels) {
+                    if (panel.card == null) {
+                        break;
+                    }
+                    cards.add(panel.card);
+                }
+                CardZoom.show(cards, index, new ActivateHandler() {
+                    @Override
+                    public String getActivateAction(int idx) {
+                        return "select commander";
+                    }
+
+                    @Override
+                    public void activate(int idx) {
+                        
+                    }
+                });
+            }
+            else if (index > -4) {
+                List<CardView> cards = new ArrayList<CardView>();
+                cards.add(regionDisplay.opponent1.card);
+                cards.add(regionDisplay.opponent2.card);
+                cards.add(regionDisplay.opponent3.card);
+                CardZoom.show(cards, -index - 1, new ActivateHandler() {
+                    @Override
+                    public String getActivateAction(int idx) {
+                        if (regionDisplay.deployedCommander.card == null) {
+                            return null;
+                        }
+                        return "play against opponent";
+                    }
+
+                    @Override
+                    public void activate(int idx) {
+                        
+                    }
+                });
+            }
+            else {
+                CardZoom.show(card);
+            }
+            return true;
         }
 
         @Override
