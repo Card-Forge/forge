@@ -276,7 +276,7 @@ public class CommandCenterScreen extends FScreen implements IVConquestBase {
             ConquestCommander commander = regionDisplay.deployedCommander.commander;
             if (commander == null) {
                 commander = commanderRow.panels[commanderRow.selectedIndex].commander;
-                if (commander.getCurrentDayAction() == null) {
+                if (commander.getCurrentDayAction() == null && commander.getDeployedRegion() == null) {
                     regionDisplay.deployedCommander.setCommander(commander);
                     regionDisplay.data.setDeployedCommander(commander);
                     commander.setCurrentDayAction(ConquestAction.Deploy);
