@@ -94,10 +94,12 @@ public abstract class DeckGeneratorBase {
     }
 
     protected void addSome(int cnt, List<PaperCard> source) {
+        int srcLen = source.size();
+        if (srcLen == 0) { return; }
+
         for (int i = 0; i < cnt; i++) {
             PaperCard cp;
             int lc = 0;
-            int srcLen = source.size();
             do {
                 cp = source.get(this.r.nextInt(srcLen));
                 lc++;
@@ -111,8 +113,12 @@ public abstract class DeckGeneratorBase {
 
             final int n = this.cardCounts.get(cp.getName());
             this.cardCounts.put(cp.getName(), n + 1);
-            if( n + 1 == this.maxDuplicates )
-                source.remove(cp);
+            if (n + 1 == this.maxDuplicates) {
+                if (source.remove(cp)) {
+                    srcLen--;
+                    if (srcLen == 0) { return; }
+                }
+            }
             tmpDeck.append(String.format("(%d) %s [%s]%n", cp.getRules().getManaCost().getCMC(), cp.getName(), cp.getRules().getManaCost()));
         }
     }
