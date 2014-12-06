@@ -1343,8 +1343,6 @@ forge-gui-mobile/src/forge/toolbox/ListChooser.java -text
 forge-gui-mobile/src/forge/util/LayoutHelper.java -text
 forge-gui-mobile/src/forge/util/PhysicsObject.java -text
 forge-gui-mobile/src/forge/util/Utils.java -text
-forge-gui-mobile/src/forge/util/WaitCallback.java -text
-forge-gui-mobile/src/forge/util/WaitRunnable.java -text
 forge-gui/.classpath -text
 forge-gui/.project -text
 forge-gui/.settings/org.eclipse.core.resources.prefs -text
@@ -17306,6 +17304,8 @@ forge-gui/src/main/java/forge/util/IgnoringXStream.java -text
 forge-gui/src/main/java/forge/util/LineReader.java -text
 forge-gui/src/main/java/forge/util/MultiplexOutputStream.java svneol=native#text/plain
 forge-gui/src/main/java/forge/util/OperatingSystem.java -text
+forge-gui/src/main/java/forge/util/WaitCallback.java -text
+forge-gui/src/main/java/forge/util/WaitRunnable.java -text
 forge-gui/src/main/java/forge/util/XmlUtil.java -text
 forge-gui/src/main/java/forge/util/gui/SGuiChoose.java -text
 forge-gui/src/main/java/forge/util/gui/SGuiDialog.java -text
