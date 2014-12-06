@@ -251,7 +251,7 @@ public class ConquestMapScreen extends FScreen implements IVConquestBase {
                 commanderRow.selectedIndex = index;
             }
         }
-        else if (index > -4) { //opponent panel
+        else if (index >= -regionDisplay.opponents.length) { //opponent panel
             ConquestCommander commander = regionDisplay.deployedCommander.commander;
             if (commander != null && commander.getCurrentDayAction() != ConquestAction.Deploy) {
                 ConquestAction action;
@@ -363,7 +363,7 @@ public class ConquestMapScreen extends FScreen implements IVConquestBase {
                     }
                 });
             }
-            else if (index > -4) {
+            else if (index >= -regionDisplay.opponents.length) {
                 List<CardView> cards = new ArrayList<CardView>();
                 for (CommanderPanel panel : regionDisplay.opponents) {
                     if (panel.card == null) {
@@ -410,7 +410,37 @@ public class ConquestMapScreen extends FScreen implements IVConquestBase {
                 }
             }
             if (card != null) {
-                boolean needAlpha = index >= 0 && commander.getDeployedRegion() != null;
+                boolean needAlpha;
+                if (index >= 0) {
+                    //fade out card in commander row if its deployed and not in the process of being undeployed
+                    needAlpha = commander.getDeployedRegion() != null && commander.getCurrentDayAction() != ConquestAction.Undeploy;
+                }
+                else if (index >= -regionDisplay.opponents.length) {
+                    //fade out opponent if another opponent is being attacked
+                    if (regionDisplay.deployedCommander.commander == null || regionDisplay.deployedCommander.commander.getCurrentDayAction() == null) {
+                        needAlpha = false;
+                    }
+                    else {
+                        switch (regionDisplay.deployedCommander.commander.getCurrentDayAction()) {
+                        case Attack1:
+                            needAlpha = (index != -1);
+                            break;
+                        case Attack2:
+                            needAlpha = (index != -2);
+                            break;
+                        case Attack3:
+                            needAlpha = (index != -3);
+                            break;
+                        default:
+                            needAlpha = false;
+                            break;
+                        }
+                    }
+                }
+                else {
+                    //fade out card in deployed commander spot if its being undeployed
+                    needAlpha = commander.getCurrentDayAction() == ConquestAction.Undeploy;
+                }
                 if (needAlpha) {
                     g.setAlphaComposite(0.7f); //use alpha composite if commander deployed
                 }
