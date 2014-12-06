@@ -3,9 +3,9 @@ package forge.planarconquest;
 import forge.assets.FSkinProp;
 
 public enum ConquestAction {
-    AttackN(FSkinProp.IMG_ATTACK),
-    AttackNE(FSkinProp.IMG_ATTACK),
-    AttackE(FSkinProp.IMG_ATTACK),
+    Attack1(FSkinProp.IMG_ATTACK),
+    Attack2(FSkinProp.IMG_ATTACK),
+    Attack3(FSkinProp.IMG_ATTACK),
     Defend(FSkinProp.IMG_DEFEND),
     Recruit(FSkinProp.IMG_PHASING),
     Study(FSkinProp.IMG_COSTRESERVED),

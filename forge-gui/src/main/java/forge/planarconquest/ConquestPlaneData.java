@@ -58,11 +58,15 @@ public class ConquestPlaneData {
             return region;
         }
 
-        public ConquestCommander getCommander(int index) {
-            if (index < opponents.length) {
-                return opponents[index];
-            }
+        public ConquestCommander getOpponent(int index) {
+            return opponents[index];
+        }
+
+        public ConquestCommander getDeployedCommander() {
             return deployedCommander;
+        }
+        public void setDeployedCommander(ConquestCommander commander) {
+            deployedCommander = commander;
         }
     }
 }

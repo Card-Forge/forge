@@ -14,6 +14,7 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
 import forge.assets.TextRenderer;
+import forge.card.CardRarity;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.card.CardRenderer.CardStackPosition;
@@ -21,10 +22,12 @@ import forge.card.CardZoom.ActivateHandler;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.model.FModel;
+import forge.planarconquest.ConquestAction;
 import forge.planarconquest.ConquestCommander;
 import forge.planarconquest.ConquestData;
 import forge.planarconquest.ConquestPlane.Region;
 import forge.planarconquest.ConquestPlaneData;
+import forge.planarconquest.ConquestPlaneData.RegionData;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.screens.FScreen;
 import forge.toolbox.FCardPanel;
@@ -64,6 +67,7 @@ public class ConquestMapScreen extends FScreen {
         setHeaderCaption(model.getName());
         lblCurrentPlane.setText("Plane - " + model.getCurrentPlane().getName());
         btnEndDay.setText("End Day " + model.getDay());
+        regionDisplay.onRegionChanged();
     }
 
     @Override
@@ -93,12 +97,15 @@ public class ConquestMapScreen extends FScreen {
 
     private class RegionDisplay extends FContainer {
         private final TextRenderer textRenderer = new TextRenderer();
-        private final CommanderPanel opponent1 = add(new CommanderPanel(-1)); //use negative indices to represent opponents
-        private final CommanderPanel opponent2 = add(new CommanderPanel(-2));
-        private final CommanderPanel opponent3 = add(new CommanderPanel(-3));
-        private final CommanderPanel deployedCommander = add(new CommanderPanel(-4));
+        private final CommanderPanel[] opponents = new CommanderPanel[3];
+        private final CommanderPanel deployedCommander;
+        private RegionData data;
 
         private RegionDisplay() {
+            opponents[0] = add(new CommanderPanel(-1)); //use negative indices to represent cards in region
+            opponents[1] = add(new CommanderPanel(-2));
+            opponents[2] = add(new CommanderPanel(-3));
+            deployedCommander = add(new CommanderPanel(-4));
         }
 
         @Override
@@ -118,10 +125,11 @@ public class ConquestMapScreen extends FScreen {
         }
 
         private void onRegionChanged() {
-            opponent1.commander = null; //reset these so they're updated on the next render
-            opponent2.commander = null;
-            opponent3.commander = null;
-            deployedCommander.commander = null;
+            data = model.getCurrentPlaneData().getRegionData(model.getCurrentRegion());
+            for (int i = 0; i < opponents.length; i++) {
+                opponents[i].setCommander(data.getOpponent(i));
+            }
+            deployedCommander.setCommander(data.getDeployedCommander());
         }
 
         @Override
@@ -141,9 +149,9 @@ public class ConquestMapScreen extends FScreen {
             float panelHeight = (h - 5 * padding) / 2;
             float panelWidth = panelHeight / FCardPanel.ASPECT_RATIO;
 
-            opponent1.setBounds(x + padding, y + padding,  panelWidth, panelHeight);
-            opponent2.setBounds(x + (w - panelWidth) / 2, y + padding,  panelWidth, panelHeight);
-            opponent3.setBounds(x + w - padding - panelWidth, y + padding,  panelWidth, panelHeight);
+            opponents[0].setBounds(x + padding, y + padding,  panelWidth, panelHeight);
+            opponents[1].setBounds(x + (w - panelWidth) / 2, y + padding,  panelWidth, panelHeight);
+            opponents[2].setBounds(x + w - padding - panelWidth, y + padding,  panelWidth, panelHeight);
             deployedCommander.setBounds(x + (w - panelWidth) / 2, y + h - padding - panelHeight,  panelWidth, panelHeight);
         }
 
@@ -171,7 +179,40 @@ public class ConquestMapScreen extends FScreen {
         }
     }
 
+    private void activate(CommanderPanel panel) {
+        int index = panel.index;
+        if (index >= 0) { //commander row panel
+            if (panel.card != null) {
+                commanderRow.selectedIndex = index;
+            }
+        }
+        else if (index > -4) { //opponent panel
+            ConquestCommander commander = regionDisplay.deployedCommander.commander;
+            if (commander != null && commander.getCurrentDayAction() == null) {
+                //TODO: Attack opponent
+            }
+        }
+        else { //deploy panel - toggle whether selected commander is deployed to current region
+            if (commanderRow.selectedIndex != -1) {
+                ConquestCommander commander = commanderRow.panels[commanderRow.selectedIndex].commander;
+                if (commander.getCurrentDayAction() == null) {
+                    regionDisplay.deployedCommander.setCommander(commander);
+                    regionDisplay.data.setDeployedCommander(commander);
+                    commander.setCurrentDayAction(ConquestAction.Deploy);
+                    commander.setDeployedRegion(regionDisplay.data.getRegion());
+                }
+                else if (commander.getCurrentDayAction() == ConquestAction.Deploy) {
+                    regionDisplay.deployedCommander.setCommander(null);
+                    regionDisplay.data.setDeployedCommander(null);
+                    commander.setCurrentDayAction(null);
+                    commander.setDeployedRegion(null);
+                }
+            }
+        }
+    }
+
     private class CommanderRow extends FContainer {
+        private int selectedIndex;
         private CommanderPanel[] panels = new CommanderPanel[4];
 
         private CommanderRow() {
@@ -205,12 +246,21 @@ public class ConquestMapScreen extends FScreen {
         }
 
         private void setCommander(ConquestCommander commander0) {
+            if (commander == commander0) { return; }
             commander = commander0;
             card = commander != null ? Card.getCardForUi(commander.getCard()).getView() : null;
         }
 
         @Override
+        public boolean tap(float x, float y, int count) {
+            activate(this);
+            return true;
+        }
+
+        @Override
         public boolean longPress(float x, float y) {
+            if (card == null) { return false; }
+
             if (index >= 0) {
                 List<CardView> cards = new ArrayList<CardView>();
                 for (CommanderPanel panel : commanderRow.panels) {
@@ -227,15 +277,18 @@ public class ConquestMapScreen extends FScreen {
 
                     @Override
                     public void activate(int idx) {
-                        
+                        ConquestMapScreen.this.activate(commanderRow.panels[idx]);
                     }
                 });
             }
             else if (index > -4) {
                 List<CardView> cards = new ArrayList<CardView>();
-                cards.add(regionDisplay.opponent1.card);
-                cards.add(regionDisplay.opponent2.card);
-                cards.add(regionDisplay.opponent3.card);
+                for (CommanderPanel panel : regionDisplay.opponents) {
+                    if (panel.card == null) {
+                        break;
+                    }
+                    cards.add(panel.card);
+                }
                 CardZoom.show(cards, -index - 1, new ActivateHandler() {
                     @Override
                     public String getActivateAction(int idx) {
@@ -247,7 +300,7 @@ public class ConquestMapScreen extends FScreen {
 
                     @Override
                     public void activate(int idx) {
-                        
+                        ConquestMapScreen.this.activate(regionDisplay.opponents[idx]);
                     }
                 });
             }
@@ -261,7 +314,9 @@ public class ConquestMapScreen extends FScreen {
         public void draw(Graphics g) {
             float w = getWidth();
             float h = getHeight();
-            g.drawRect(BORDER_THICKNESS, Color.WHITE, -BORDER_THICKNESS, -BORDER_THICKNESS, w + 2 * BORDER_THICKNESS, h + 2 * BORDER_THICKNESS);
+
+            float borderThickness = BORDER_THICKNESS;
+            Color color = Color.WHITE;
 
             ConquestPlaneData planeData = model.getCurrentPlaneData();
             if (commander == null) {
@@ -271,11 +326,12 @@ public class ConquestMapScreen extends FScreen {
                         setCommander(commanders.get(index));
                     }
                 }
-                else { //negative index means region opponent
-                    setCommander(planeData.getRegionData(model.getCurrentRegion()).getCommander(-index - 1));
-                }
             }
             if (card != null) {
+                boolean needAlpha = index >= 0 && commander.getDeployedRegion() != null;
+                if (needAlpha) {
+                    g.setAlphaComposite(0.7f); //use alpha composite if commander deployed
+                }
                 CardRenderer.drawCardWithOverlays(g, card, 0, 0, w, h, CardStackPosition.Top);
 
                 if (commander.getCurrentDayAction() != null) {
@@ -286,6 +342,15 @@ public class ConquestMapScreen extends FScreen {
                     float x = (padding + (w / 4)) - actionIconSize / 2;
                     float y = (padding + h) - (h / 8) - actionIconSize / 2;
                     g.drawImage(FSkin.getImages().get(commander.getCurrentDayAction().getIcon()), x, y, actionIconSize, actionIconSize);
+                }
+
+                if (needAlpha) {
+                    g.resetAlphaComposite();
+                }
+
+                if (index == commanderRow.selectedIndex) {
+                    borderThickness *= 2;
+                    color = Color.GREEN;
                 }
             }
             else if (index > 0) {
@@ -311,9 +376,12 @@ public class ConquestMapScreen extends FScreen {
                     g.drawText(String.valueOf(winsToUnlock), UNLOCK_WINS_FONT, Color.WHITE, 0, y, w, h - y, false, HAlignment.CENTER, true);
                 }
                 else {
-                    
+                    borderThickness *= 2; //double border thickness and make it gold to indicate it's been unlocked
+                    color = CardRenderer.getRarityColor(CardRarity.Rare);
                 }
             }
+
+            g.drawRect(borderThickness, color, -borderThickness, -borderThickness, getWidth() + 2 * borderThickness, getHeight() + 2 * borderThickness);
         }
     }
 }
