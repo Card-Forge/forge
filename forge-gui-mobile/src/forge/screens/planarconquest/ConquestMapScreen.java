@@ -112,7 +112,7 @@ public class ConquestMapScreen extends FScreen {
     @Override
     protected void drawOverlay(Graphics g) {
         ConquestCommander commander = regionDisplay.deployedCommander.commander;
-        if (commander == null) { return; }
+        if (commander == null || commander.getCurrentDayAction() == null) { return; }
 
         int idx;
         switch (commander.getCurrentDayAction()) {
@@ -126,12 +126,16 @@ public class ConquestMapScreen extends FScreen {
             TargetingOverlay.drawArrow(g, regionDisplay.deployedCommander, regionDisplay.opponents[2], true);
             break;
         case Deploy:
-            idx = model.getCurrentPlane().getCommanders().indexOf(regionDisplay.deployedCommander.commander);
-            TargetingOverlay.drawArrow(g, commanderRow.panels[idx], regionDisplay.deployedCommander, false);
+            idx = model.getCurrentPlaneData().getCommanders().indexOf(regionDisplay.deployedCommander.commander);
+            if (idx != -1) {
+                TargetingOverlay.drawArrow(g, commanderRow.panels[idx], regionDisplay.deployedCommander, false);
+            }
             break;
         case Undeploy:
-            idx = model.getCurrentPlane().getCommanders().indexOf(regionDisplay.deployedCommander.commander);
-            TargetingOverlay.drawArrow(g, regionDisplay.deployedCommander, commanderRow.panels[idx], false);
+            idx = model.getCurrentPlaneData().getCommanders().indexOf(regionDisplay.deployedCommander.commander);
+            if (idx != -1) {
+                TargetingOverlay.drawArrow(g, regionDisplay.deployedCommander, commanderRow.panels[idx], false);
+            }
             break;
         default:
             break;
