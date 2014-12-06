@@ -58,15 +58,15 @@ public abstract class DeckGeneratorBase {
 
     StringBuilder tmpDeck = new StringBuilder();
 
-    public DeckGeneratorBase(IDeckGenPool pool) {
-        this.pool = pool;
+    public DeckGeneratorBase(IDeckGenPool pool0) {
+        pool = pool0;
     }
 
     public void setSingleton(boolean singleton){
-        this.maxDuplicates = singleton ? 1 : 4;
+        maxDuplicates = singleton ? 1 : 4;
     }
     public void setUseArtifacts(boolean value) {
-        this.useArtifacts = value;
+        useArtifacts = value;
     }
 
     protected void addCreaturesAndSpells(int size, List<ImmutablePair<FilterCMC, Integer>> cmcLevels, boolean forAi) {
@@ -93,34 +93,35 @@ public abstract class DeckGeneratorBase {
         return null; // all but theme deck do override this method
     }
 
-    protected void addSome(int cnt, List<PaperCard> source) {
+    protected boolean addSome(int cnt, List<PaperCard> source) {
         int srcLen = source.size();
-        if (srcLen == 0) { return; }
+        if (srcLen == 0) { return false; }
 
         for (int i = 0; i < cnt; i++) {
             PaperCard cp;
             int lc = 0;
             do {
-                cp = source.get(this.r.nextInt(srcLen));
+                cp = source.get(r.nextInt(srcLen));
                 lc++;
-            } while (this.cardCounts.get(cp.getName()) > this.maxDuplicates - 1 && lc <= 100);
+            } while (cardCounts.get(cp.getName()) > maxDuplicates - 1 && lc <= 100);
 
             if (lc > 100) {
-                throw new RuntimeException("Generate2ColorDeck : get2ColorDeck -- looped too much, please try again -- Cr12");
+                return false;
             }
 
             tDeck.add(pool.getCard(cp.getName(), cp.getEdition()));
 
-            final int n = this.cardCounts.get(cp.getName());
-            this.cardCounts.put(cp.getName(), n + 1);
-            if (n + 1 == this.maxDuplicates) {
+            final int n = cardCounts.get(cp.getName());
+            cardCounts.put(cp.getName(), n + 1);
+            if (n + 1 == maxDuplicates) {
                 if (source.remove(cp)) {
                     srcLen--;
-                    if (srcLen == 0) { return; }
+                    if (srcLen == 0) { return false; }
                 }
             }
             tmpDeck.append(String.format("(%d) %s [%s]%n", cp.getRules().getManaCost().getCMC(), cp.getName(), cp.getRules().getManaCost()));
         }
+        return true;
     }
 
     protected int addSomeStr(int cnt, List<String> source) {
@@ -129,9 +130,9 @@ public abstract class DeckGeneratorBase {
             String s;
             int lc = 0;
             do {
-                s = source.get(this.r.nextInt(source.size()));
+                s = source.get(r.nextInt(source.size()));
                 lc++;
-            } while ((this.cardCounts.get(s) >= maxDuplicates) && (lc <= 50));
+            } while ((cardCounts.get(s) >= maxDuplicates) && (lc <= 50));
             // not an error if looped too much - could play singleton mode, with 6 slots for 3 non-basic lands.
 
             if (lc > 50) {
@@ -140,8 +141,8 @@ public abstract class DeckGeneratorBase {
             
             tDeck.add(pool.getCard(s));
 
-            final int n = this.cardCounts.get(s);
-            this.cardCounts.put(s, n + 1);
+            final int n = cardCounts.get(s);
+            cardCounts.put(s, n + 1);
             tmpDeck.append(s + "\n");
             res++;
         }
@@ -200,10 +201,9 @@ public abstract class DeckGeneratorBase {
         // fix under-sized or over-sized decks, due to integer arithmetic
         int actualSize = tDeck.countAll();
         if (actualSize < targetSize) {
-            final int diff = targetSize - actualSize;
-            addSome(diff, tDeck.toFlatList());
-        } else if (actualSize > targetSize) {
-
+            addSome(targetSize - actualSize, tDeck.toFlatList());
+        }
+        else if (actualSize > targetSize) {
             Predicate<PaperCard> exceptBasicLand = Predicates.not(Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES));
 
             for (int i = 0; i < 3 && actualSize > targetSize; i++) {
@@ -229,7 +229,7 @@ public abstract class DeckGeneratorBase {
         float desiredWeight = (float)cnt / ( maxDuplicates * variability ); 
         float desiredOverTotal = desiredWeight / totalWeight;
         float requestedOverTotal = (float)cnt / totalWeight;
-        
+
         for (ImmutablePair<FilterCMC, Integer> pair : cmcLevels) {
             Iterable<PaperCard> matchingCards = Iterables.filter(source, Predicates.compose(pair.getLeft(), PaperCard.FN_GET_RULES));
             int cmcCountForPool = (int) Math.ceil(pair.getRight().intValue() * desiredOverTotal);
@@ -240,7 +240,7 @@ public abstract class DeckGeneratorBase {
             final List<PaperCard> curved = Aggregates.random(matchingCards, cmcCountForPool);
             final List<PaperCard> curvedRandomized = Lists.newArrayList();
             for (PaperCard c : curved) {
-                this.cardCounts.put(c.getName(), 0);
+                cardCounts.put(c.getName(), 0);
                 curvedRandomized.add(pool.getCard(c.getName()));
             }
 
