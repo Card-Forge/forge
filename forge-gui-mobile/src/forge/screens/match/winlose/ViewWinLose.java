@@ -1,19 +1,24 @@
 package forge.screens.match.winlose;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
+import forge.FThreads;
 import forge.Forge;
 import forge.LobbyPlayer;
 import forge.assets.FSkinColor;
+import forge.assets.FSkinProp;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
 import forge.game.GameView;
 import forge.interfaces.IWinLoseView;
+import forge.item.PaperCard;
 import forge.menu.FMagnifyView;
 import forge.model.FModel;
 import forge.toolbox.FButton;
@@ -25,6 +30,8 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FOverlay;
 import forge.toolbox.FTextArea;
 import forge.util.Utils;
+import forge.util.gui.SGuiChoose;
+import forge.util.gui.SOptionPane;
 
 public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
     private static final float INSETS_FACTOR = 0.025f;
@@ -207,5 +214,21 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
             return true;
         }
         return super.keyDown(keyCode);
+    }
+
+    @Override
+    public void showRewards(Runnable runnable) {
+        //invoke reward logic in background thread so dialogs can be shown
+        FThreads.invokeInBackgroundThread(runnable);
+    }
+
+    @Override
+    public void showCards(String title, List<PaperCard> cards) {
+        SGuiChoose.reveal(title, cards);
+    }
+
+    @Override
+    public void showMessage(String message, String title, FSkinProp icon) {
+        SOptionPane.showMessageDialog(message, title, icon);
     }
 }

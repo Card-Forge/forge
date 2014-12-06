@@ -34,22 +34,24 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map.Entry;
 
-public abstract class QuestWinLoseController {
+public class QuestWinLoseController {
     private final GameView lastGame;
+    private final IWinLoseView<? extends IButton> view;
     private final transient boolean wonMatch;
     private final transient boolean isAnte;
     private final transient QuestController qData;
     private final transient QuestEvent qEvent;
 
-    public QuestWinLoseController(final GameView game0) {
+    public QuestWinLoseController(final GameView game0, final IWinLoseView<? extends IButton> view0) {
         lastGame = game0;
+        view = view0;
         qData = FModel.getQuest();
         qEvent = qData.getCurrentEvent();
         wonMatch = lastGame.isMatchWonBy(GamePlayerUtil.getQuestPlayer());
         isAnte = FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE);
     }
 
-    public void showRewards(final IWinLoseView<? extends IButton> view) {
+    public void showRewards() {
         view.getBtnRestart().setVisible(false);
         final QuestController qc = FModel.getQuest();
 
@@ -83,7 +85,7 @@ public abstract class QuestWinLoseController {
         }
 
         //give controller a chance to run remaining logic on a separate thread
-        showRewards(new Runnable() {
+        view.showRewards(new Runnable() {
             @Override
             public void run() {
                 if (isAnte) {
@@ -158,10 +160,10 @@ public abstract class QuestWinLoseController {
     private void anteReport(final List<PaperCard> cardsWon, List<PaperCard> cardsLost, boolean hasWon) {
         // Generate Swing components and attach.
         if (cardsWon != null && !cardsWon.isEmpty()) {
-            showCards("Spoils! Cards won from ante.", cardsWon);
+            view.showCards("Spoils! Cards won from ante.", cardsWon);
         }
         if (cardsLost != null && !cardsLost.isEmpty()) {
-            showCards("Looted! Cards lost to ante.", cardsLost);
+            view.showCards("Looted! Cards lost to ante.", cardsLost);
         }
     }
 
@@ -375,7 +377,7 @@ public abstract class QuestWinLoseController {
         sb.append(String.format("%s %d credits in total.", congrats, credTotal));
         qData.getAssets().addCredits(credTotal);
 
-        showMessage(sb.toString(), "Gameplay Results", FSkinProp.ICO_QUEST_GOLD);
+        view.showMessage(sb.toString(), "Gameplay Results", FSkinProp.ICO_QUEST_GOLD);
     }
 
     /**
@@ -390,7 +392,7 @@ public abstract class QuestWinLoseController {
         final List<PaperCard> cardsWon = new ArrayList<PaperCard>();
         cardsWon.add(c);
 
-        showCards(message, cardsWon);
+        view.showCards(message, cardsWon);
     }
     
     /**
@@ -458,12 +460,12 @@ public abstract class QuestWinLoseController {
         }
 
         if (addDraftToken) {
-            showMessage("For achieving a 25 win streak, you have been awarded a draft token!\nUse these tokens to generate new tournaments.", "Bonus Draft Token Reward", FSkinProp.ICO_QUEST_COIN);
+            view.showMessage("For achieving a 25 win streak, you have been awarded a draft token!\nUse these tokens to generate new tournaments.", "Bonus Draft Token Reward", FSkinProp.ICO_QUEST_COIN);
             qData.getAchievements().addDraftToken();
         }
 
         if (cardsWon.size() > 0) {
-            showCards("You have achieved a " + (currentStreak == 0 ? "50" : currentStreak) + " win streak and won " + cardsWon.size() + " " + typeWon + " card" + ((cardsWon.size() != 1) ? "s" : "") + "!", cardsWon);
+            view.showCards("You have achieved a " + (currentStreak == 0 ? "50" : currentStreak) + " win streak and won " + cardsWon.size() + " " + typeWon + " card" + ((cardsWon.size() != 1) ? "s" : "") + "!", cardsWon);
         }
     }
 
@@ -476,7 +478,7 @@ public abstract class QuestWinLoseController {
      */
     private void awardJackpot() {
         final List<PaperCard> cardsWon = qData.getCards().addRandomRare(10);
-        showCards("You just won 10 random rares!", cardsWon);
+        view.showCards("You just won 10 random rares!", cardsWon);
     }
 
     /**
@@ -569,7 +571,7 @@ public abstract class QuestWinLoseController {
                     return c2.getRarity().compareTo(c1.getRarity());
                 }
             });
-            showCards(title, cardsWon);
+            view.showCards(title, cardsWon);
         }
     }
 
@@ -589,7 +591,7 @@ public abstract class QuestWinLoseController {
 
         qData.getAssets().addCredits(questRewardCredits);
 
-        showMessage(sb.toString(), "Challenge Rewards for \"" + ((QuestEventChallenge) qEvent).getTitle() + "\"", FSkinProp.ICO_QUEST_BOX);
+        view.showMessage(sb.toString(), "Challenge Rewards for \"" + ((QuestEventChallenge) qEvent).getTitle() + "\"", FSkinProp.ICO_QUEST_BOX);
 
         awardSpecialReward(null);
     }
@@ -627,7 +629,7 @@ public abstract class QuestWinLoseController {
                 }
                 if (!boosterCards.isEmpty()) {
                     qData.getCards().addAllCards(boosterCards);
-                    showCards("Extra " + ii.getName() + "!", boosterCards);
+                    view.showCards("Extra " + ii.getName() + "!", boosterCards);
                 }
             }
             else if (ii instanceof IQuestRewardCard) {
@@ -642,14 +644,14 @@ public abstract class QuestWinLoseController {
             if (message == null) {
                 message = "Cards Won";
             }
-            showCards(message, cardsWon);
+            view.showCards(message, cardsWon);
             qData.getCards().addAllCards(cardsWon);
         }
     }
 
     private void penalizeLoss() {
         final int x = FModel.getQuestPreferences().getPrefInt(QPref.PENALTY_LOSS);
-        showMessage("You lose! You have lost " + x + " credits.", "Gameplay Results", FSkinProp.ICO_QUEST_HEART);
+        view.showMessage("You lose! You have lost " + x + " credits.", "Gameplay Results", FSkinProp.ICO_QUEST_HEART);
     }
 
     /**
@@ -725,8 +727,4 @@ public abstract class QuestWinLoseController {
 
         return credits;
     }
-
-    protected abstract void showRewards(Runnable runnable);
-    protected abstract void showCards(String title, List<PaperCard> cards);
-    protected abstract void showMessage(String message, String title, FSkinProp icon);
 }

@@ -1,10 +1,12 @@
 package forge.screens.match;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
+import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -16,17 +18,23 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.LobbyPlayer;
 import forge.UiCommand;
+import forge.assets.FSkinProp;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
 import forge.game.GameView;
 import forge.gui.SOverlayUtils;
 import forge.interfaces.IWinLoseView;
+import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOverlay;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
+import forge.toolbox.FSkin.Colors;
+import forge.toolbox.FSkin.SkinColor;
+import forge.toolbox.FSkin.SkinIcon;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.FTextArea;
@@ -38,6 +46,13 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     private final SkinnedLabel lblTitle = new SkinnedLabel("WinLoseFrame > lblTitle needs updating.");
     private final SkinnedLabel lblStats = new SkinnedLabel("WinLoseFrame > lblStats needs updating.");
     private final JPanel pnlOutcomes = new JPanel(new MigLayout("wrap, align center"));
+
+    /** String constraint parameters for title blocks and cardviewer blocks. */
+    private static final SkinColor FORE_COLOR = FSkin.getColor(Colors.CLR_TEXT);
+    private static final String CONSTRAINTS_TITLE = "w 95%!, gap 0 0 20px 10px";
+    private static final String CONSTRAINTS_TEXT = "w 95%!, h 220px!, gap 0 0 0 20px";
+    private static final String CONSTRAINTS_CARDS = "w 95%!, h 330px!, gap 0 0 0 20px";
+    private static final String CONSTRAINTS_CARDS_LARGE = "w 95%!, h 600px!, gap 0 0 0 20px";
 
     private final GameView game;
     
@@ -236,5 +251,56 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     @Override
     public void hide() {
         SOverlayUtils.hideOverlay();
+    }
+
+    @Override
+    public void showRewards(Runnable runnable) {
+        runnable.run(); //just run on GUI thread
+    }
+
+    @Override
+    public void showCards(String title, List<PaperCard> cards) {
+        final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cards);
+        getPnlCustom().add(new TitleLabel(title), CONSTRAINTS_TITLE);
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_LARGE_CARD_VIEWERS)) {
+            getPnlCustom().add(cv, CONSTRAINTS_CARDS_LARGE);
+        }
+        else {
+            getPnlCustom().add(cv, CONSTRAINTS_CARDS);
+        }
+    }
+
+    @Override
+    public void showMessage(String message, String title, FSkinProp icon) {
+        SkinIcon icoTemp = FSkin.getIcon(icon).scale(0.5);
+
+        if (message.contains("\n")) { //ensure new line characters are encoded
+            message = "<html>" + message.replace("\n", "<br>") + "</html>";
+        }
+        SkinnedLabel lblMessage = new SkinnedLabel(message);
+        lblMessage.setFont(FSkin.getFont(14));
+        lblMessage.setForeground(FORE_COLOR);
+        lblMessage.setHorizontalAlignment(SwingConstants.CENTER);
+        lblMessage.setIconTextGap(50);
+        lblMessage.setIcon(icoTemp);
+
+        getPnlCustom().add(new TitleLabel(title), CONSTRAINTS_TITLE);
+        getPnlCustom().add(lblMessage, CONSTRAINTS_TEXT);
+    }
+
+    /**
+     * JLabel header between reward sections.
+     * 
+     */
+    @SuppressWarnings("serial")
+    private class TitleLabel extends SkinnedLabel {
+        TitleLabel(final String msg) {
+            super(msg);
+            setFont(FSkin.getFont(16));
+            setPreferredSize(new Dimension(200, 40));
+            setHorizontalAlignment(SwingConstants.CENTER);
+            setForeground(FORE_COLOR);
+            setBorder(new FSkin.MatteSkinBorder(1, 0, 1, 0, FORE_COLOR));
+        }
     }
 }

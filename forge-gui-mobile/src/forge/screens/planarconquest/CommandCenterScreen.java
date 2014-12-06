@@ -63,7 +63,7 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
         btnEndDay.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                model.endDay(CommandCenterScreen.this);
+                FModel.getConquest().endDay(CommandCenterScreen.this);
             }
         });
     }

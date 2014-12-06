@@ -12,6 +12,8 @@ public class ConquestPlaneData {
     private final Map<Region, RegionData> regionDataLookup = new HashMap<Region, RegionData>();
 
     private int wins, losses;
+    private int winStreakBest = 0;
+    private int winStreakCurrent = 0;
 
     public List<ConquestCommander> getCommanders() {
         return commanders;
@@ -19,6 +21,10 @@ public class ConquestPlaneData {
 
     public void addWin() {
         wins++;
+        winStreakCurrent++;
+        if (winStreakCurrent > winStreakBest) {
+            winStreakBest = winStreakCurrent;
+        }
     }
 
     public void addLoss() {
@@ -31,6 +37,14 @@ public class ConquestPlaneData {
 
     public int getLosses() {
         return losses;
+    }
+
+    public int getWinStreakBest() {
+        return winStreakBest;
+    }
+
+    public int getWinStreakCurrent() {
+        return winStreakCurrent;
     }
 
     public RegionData getRegionData(Region region) {

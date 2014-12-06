@@ -16,15 +16,8 @@
  */
 package forge.screens.match.winlose;
 
-import java.util.List;
-
-import forge.FThreads;
-import forge.assets.FSkinProp;
 import forge.game.GameView;
-import forge.item.PaperCard;
 import forge.quest.QuestWinLoseController;
-import forge.util.gui.SGuiChoose;
-import forge.util.gui.SOptionPane;
 
 /**
  * <p>
@@ -46,28 +39,12 @@ public class QuestWinLose extends ControlWinLose {
      */
     public QuestWinLose(final ViewWinLose view0, GameView lastGame) {
         super(view0, lastGame);
-        controller = new QuestWinLoseController(lastGame) {
-            @Override
-            protected void showRewards(Runnable runnable) {
-                //invoke reward logic in background thread so dialogs can be shown
-                FThreads.invokeInBackgroundThread(runnable);
-            }
-
-            @Override
-            protected void showCards(String title, List<PaperCard> cards) {
-                SGuiChoose.reveal(title, cards);
-            }
-
-            @Override
-            protected void showMessage(String message, String title, FSkinProp icon) {
-                SOptionPane.showMessageDialog(message, title, icon);
-            }
-        };
+        controller = new QuestWinLoseController(lastGame, view0);
     }
 
     @Override
     public final void showRewards() {
-        controller.showRewards(getView());
+        controller.showRewards();
     }
 
     /**
