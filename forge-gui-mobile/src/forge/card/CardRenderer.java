@@ -314,11 +314,11 @@ public class CardRenderer {
                 float manaSymbolSize = w / 4;
                 if (card.isSplitCard() && card.hasAlternateState()) {
                     float dy = manaSymbolSize / 2 + Utils.scale(5);
-                    drawManaCost(g, card.getCurrentState().getManaCost(), x, y + dy, w, h, manaSymbolSize);
-                    drawManaCost(g, card.getAlternateState().getManaCost(), x, y - dy, w, h, manaSymbolSize);
+                    drawManaCost(g, card.getCurrentState().getManaCost(), x - padding, y + dy, w + 2 * padding, h, manaSymbolSize);
+                    drawManaCost(g, card.getAlternateState().getManaCost(), x - padding, y - dy, w + 2 * padding, h, manaSymbolSize);
                 }
                 else {
-                    drawManaCost(g, card.getCurrentState().getManaCost(), x, y, w, h, manaSymbolSize);
+                    drawManaCost(g, card.getCurrentState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
                 }
             }
         }
@@ -442,6 +442,10 @@ public class CardRenderer {
 
     private static void drawManaCost(Graphics g, ManaCost cost, float x, float y, float w, float h, float manaSymbolSize) {
         float manaCostWidth = CardFaceSymbols.getWidth(cost, manaSymbolSize);
+        if (manaCostWidth > w) {
+            manaCostWidth = w;
+            manaSymbolSize = w / cost.getGlyphCount();
+        }
         CardFaceSymbols.drawManaCost(g, cost, x + (w - manaCostWidth) / 2, y + (h - manaSymbolSize) / 2, manaSymbolSize);
     }
 

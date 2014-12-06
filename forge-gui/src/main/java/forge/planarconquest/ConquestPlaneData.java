@@ -44,14 +44,14 @@ public class ConquestPlaneData {
 
     public class RegionData {
         private final Region region;
-        private final ConquestCommander[] commanders = new ConquestCommander[4];
+        private final ConquestCommander[] opponents = new ConquestCommander[3];
+        private ConquestCommander deployedCommander;
 
         private RegionData(Region region0) {
             region = region0;
-            commanders[0] = region.getRandomOpponent(commanders);
-            commanders[1] = region.getRandomOpponent(commanders);
-            commanders[2] = region.getRandomOpponent(commanders);
-            //leave commanders[3] open for deployed commander
+            opponents[0] = region.getRandomOpponent(opponents);
+            opponents[1] = region.getRandomOpponent(opponents);
+            opponents[2] = region.getRandomOpponent(opponents);
         }
 
         public Region getRegion() {
@@ -59,7 +59,10 @@ public class ConquestPlaneData {
         }
 
         public ConquestCommander getCommander(int index) {
-            return commanders[index];
+            if (index < opponents.length) {
+                return opponents[index];
+            }
+            return deployedCommander;
         }
     }
 }
