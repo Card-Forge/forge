@@ -66,7 +66,13 @@ public class ConquestPlaneData {
             return deployedCommander;
         }
         public void setDeployedCommander(ConquestCommander commander) {
+            if (deployedCommander != null && deployedCommander.getDeployedRegion() == region) {
+                deployedCommander.setDeployedRegion(null);
+            }
             deployedCommander = commander;
+            if (deployedCommander != null) {
+                deployedCommander.setDeployedRegion(region);
+            }
         }
     }
 }

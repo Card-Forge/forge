@@ -17221,6 +17221,7 @@ forge-gui/src/main/java/forge/planarconquest/ConquestPlane.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestPlaneData.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestPreferences.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestUtil.java -text
+forge-gui/src/main/java/forge/planarconquest/IVConquestBase.java -text
 forge-gui/src/main/java/forge/player/GamePlayerUtil.java -text
 forge-gui/src/main/java/forge/player/HumanCostDecision.java -text
 forge-gui/src/main/java/forge/player/HumanPlay.java -text

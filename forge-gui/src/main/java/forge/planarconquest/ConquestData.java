@@ -22,7 +22,6 @@ import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.deck.CardPool;
 import forge.deck.Deck;
-import forge.interfaces.IButton;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.planarconquest.ConquestPlane.Region;
@@ -95,12 +94,12 @@ public final class ConquestData {
         return day;
     }
 
-    public void endDay(final IButton btnEndDay) {
+    public void endDay(final IVConquestBase base) {
         FThreads.invokeInBackgroundThread(new Runnable() {
             @Override
             public void run() {
                 //prompt user if any commander hasn't taken an action
-                List<ConquestCommander> commanders = getCurrentPlaneData().getCommanders();
+                final List<ConquestCommander> commanders = getCurrentPlaneData().getCommanders();
                 for (ConquestCommander commander : commanders) {
                     if (commander.getCurrentDayAction() == null) {
                         if (!SOptionPane.showConfirmDialog(commander.getName() + " has not taken an action today. End day anyway?", "Action Not Taken", "End Day", "Cancel")) {
@@ -129,20 +128,22 @@ public final class ConquestData {
                     case Study:
                         if (!study(commander)) { return; }
                         break;
+                    case Undeploy:
+                        getCurrentPlaneData().getRegionData(commander.getDeployedRegion()).setDeployedCommander(null);
+                        break;
                     default: //remaining actions don't need to do anything more
                         break;
                     }
                 }
-                //increment day and reset actions
-                day++;
-                for (ConquestCommander commander : commanders) {
-                    commander.setCurrentDayAction(null);
-                }
-                //update UI for new day
+                //increment day and reset actions, then update UI for new day
                 FThreads.invokeInEdtLater(new Runnable() {
                     @Override
                     public void run() {
-                        btnEndDay.setText("End Day " + day);
+                        day++;
+                        for (ConquestCommander commander : commanders) {
+                            commander.setCurrentDayAction(null);
+                        }
+                        base.updateCurrentDay();
                     }
                 });
             }

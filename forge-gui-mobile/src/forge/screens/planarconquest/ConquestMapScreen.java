@@ -29,6 +29,7 @@ import forge.planarconquest.ConquestPlane.Region;
 import forge.planarconquest.ConquestPlaneData;
 import forge.planarconquest.ConquestPlaneData.RegionData;
 import forge.planarconquest.ConquestPreferences.CQPref;
+import forge.planarconquest.IVConquestBase;
 import forge.screens.FScreen;
 import forge.screens.match.TargetingOverlay;
 import forge.toolbox.FCardPanel;
@@ -39,7 +40,7 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.util.Utils;
 
-public class ConquestMapScreen extends FScreen {
+public class ConquestMapScreen extends FScreen implements IVConquestBase {
     private static final Color BACK_COLOR = FSkinColor.fromRGB(1, 2, 2);
     private static final float BORDER_THICKNESS = Utils.scale(1);
     private static final FSkinFont REGION_NAME_FONT = FSkinFont.get(15);
@@ -62,7 +63,7 @@ public class ConquestMapScreen extends FScreen {
         btnEndDay.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                model.endDay(btnEndDay);
+                model.endDay(ConquestMapScreen.this);
             }
         });
     }
@@ -75,9 +76,14 @@ public class ConquestMapScreen extends FScreen {
     public void update() {
         model = FModel.getConquest().getModel();
         setHeaderCaption(model.getName());
+        updateCurrentDay();
+    }
+
+    @Override
+    public void updateCurrentDay() {
         lblCurrentPlane.setText("Plane - " + model.getCurrentPlane().getName());
         btnEndDay.setText("End Day " + model.getDay());
-        regionDisplay.onRegionChanged();
+        regionDisplay.onRegionChanged(); //simulate region change when day changes to ensure everything is updated
     }
 
     @Override
@@ -274,14 +280,12 @@ public class ConquestMapScreen extends FScreen {
                     regionDisplay.deployedCommander.setCommander(commander);
                     regionDisplay.data.setDeployedCommander(commander);
                     commander.setCurrentDayAction(ConquestAction.Deploy);
-                    commander.setDeployedRegion(regionDisplay.data.getRegion());
                 }
             }
             else if (commander.getCurrentDayAction() == ConquestAction.Deploy) {
                 regionDisplay.deployedCommander.setCommander(null);
                 regionDisplay.data.setDeployedCommander(null);
                 commander.setCurrentDayAction(null);
-                commander.setDeployedRegion(null);
             }
             else {
                 commander.setCurrentDayAction(null);
