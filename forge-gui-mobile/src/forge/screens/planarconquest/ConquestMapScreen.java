@@ -109,9 +109,17 @@ public class ConquestMapScreen extends FScreen {
                 else {
                     model.incrementRegion(-1);
                 }
+                onRegionChanged();
                 return true;
             }
             return false;
+        }
+
+        private void onRegionChanged() {
+            opponent1.commander = null; //reset these so they're updated on the next render
+            opponent2.commander = null;
+            opponent3.commander = null;
+            deployedCommander.commander = null;
         }
 
         @Override

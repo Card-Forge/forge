@@ -393,7 +393,7 @@ public enum ConquestPlane {
             HashSet<PaperCard> cards = new HashSet<PaperCard>(commanders);
             for (int i = 0; i < used.length; i++) {
                 if (used[i] != null) {
-                    cards.remove(used[i]);
+                    cards.remove(used[i].getCard());
                 }
             }
             return new ConquestCommander(Aggregates.random(cards), cardPool, true);
