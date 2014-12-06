@@ -40,7 +40,7 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.util.Utils;
 
-public class ConquestMapScreen extends FScreen implements IVConquestBase {
+public class CommandCenterScreen extends FScreen implements IVConquestBase {
     private static final Color BACK_COLOR = FSkinColor.fromRGB(1, 2, 2);
     private static final float BORDER_THICKNESS = Utils.scale(1);
     private static final FSkinFont REGION_NAME_FONT = FSkinFont.get(15);
@@ -57,13 +57,13 @@ public class ConquestMapScreen extends FScreen implements IVConquestBase {
 
     private ConquestData model;
 
-    public ConquestMapScreen() {
+    public CommandCenterScreen() {
         super("", ConquestMenu.getMenu());
 
         btnEndDay.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                model.endDay(ConquestMapScreen.this);
+                model.endDay(CommandCenterScreen.this);
             }
         });
     }
@@ -359,7 +359,7 @@ public class ConquestMapScreen extends FScreen implements IVConquestBase {
 
                     @Override
                     public void activate(int idx) {
-                        ConquestMapScreen.this.activate(commanderRow.panels[idx]);
+                        CommandCenterScreen.this.activate(commanderRow.panels[idx]);
                     }
                 });
             }
@@ -382,7 +382,7 @@ public class ConquestMapScreen extends FScreen implements IVConquestBase {
 
                     @Override
                     public void activate(int idx) {
-                        ConquestMapScreen.this.activate(regionDisplay.opponents[idx]);
+                        CommandCenterScreen.this.activate(regionDisplay.opponents[idx]);
                     }
                 });
             }

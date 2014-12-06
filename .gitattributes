@@ -1284,7 +1284,7 @@ forge-gui-mobile/src/forge/screens/match/winlose/GauntletWinLose.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/LimitedWinLose.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/QuestWinLose.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/ViewWinLose.java -text
-forge-gui-mobile/src/forge/screens/planarconquest/ConquestMapScreen.java -text
+forge-gui-mobile/src/forge/screens/planarconquest/CommandCenterScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestMenu.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestPrefsScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/LoadConquestScreen.java -text
