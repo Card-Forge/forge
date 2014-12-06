@@ -80,6 +80,13 @@ public final class ConquestData {
         return day;
     }
 
+    public void endDay() {
+        day++;
+        for (ConquestCommander commander : getCurrentPlaneData().getCommanders()) {
+            commander.setCurrentDayAction(null);
+        }
+    }
+
     public ConquestPlane getStartingPlane() {
         return startingPlane;
     }

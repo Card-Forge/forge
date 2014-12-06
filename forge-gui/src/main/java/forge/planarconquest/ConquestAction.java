@@ -10,7 +10,7 @@ public enum ConquestAction {
     Recruit(FSkinProp.IMG_PHASING),
     Study(FSkinProp.IMG_COSTRESERVED),
     Deploy(FSkinProp.IMG_SUMMONSICK),
-    ReturnToBase(FSkinProp.IMG_SUMMONSICK),
+    Undeploy(FSkinProp.IMG_SUMMONSICK),
     Travel(FSkinProp.IMG_SUMMONSICK);
 
     private final FSkinProp icon;

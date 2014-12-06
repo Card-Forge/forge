@@ -6,6 +6,7 @@ import java.util.List;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
+import forge.FThreads;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkin;
@@ -33,8 +34,11 @@ import forge.screens.FScreen;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
+import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.util.Utils;
+import forge.util.gui.SOptionPane;
 
 public class ConquestMapScreen extends FScreen {
     private static final Color BACK_COLOR = FSkinColor.fromRGB(1, 2, 2);
@@ -55,6 +59,31 @@ public class ConquestMapScreen extends FScreen {
 
     public ConquestMapScreen() {
         super("", ConquestMenu.getMenu());
+
+        btnEndDay.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                FThreads.invokeInBackgroundThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (ConquestCommander commander : model.getCurrentPlaneData().getCommanders()) {
+                            if (commander.getCurrentDayAction() == null) {
+                                if (!SOptionPane.showConfirmDialog(commander.toString() + " has not taken an action today. End day anyway?", "Action Not Taken", "End Day", "Cancel")) {
+                                    return;
+                                }
+                            }
+                        }
+                        FThreads.invokeInEdtLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                model.endDay();
+                                btnEndDay.setText("End Day " + model.getDay());
+                            }
+                        });
+                    }
+                });
+            }
+        });
     }
 
     @Override
@@ -99,6 +128,7 @@ public class ConquestMapScreen extends FScreen {
         private final TextRenderer textRenderer = new TextRenderer();
         private final CommanderPanel[] opponents = new CommanderPanel[3];
         private final CommanderPanel deployedCommander;
+        private final ActionPanel[] actions = new ActionPanel[4];
         private RegionData data;
 
         private RegionDisplay() {
@@ -106,6 +136,10 @@ public class ConquestMapScreen extends FScreen {
             opponents[1] = add(new CommanderPanel(-2));
             opponents[2] = add(new CommanderPanel(-3));
             deployedCommander = add(new CommanderPanel(-4));
+            actions[0] = add(new ActionPanel(ConquestAction.Undeploy));
+            actions[1] = add(new ActionPanel(ConquestAction.Defend));
+            actions[2] = add(new ActionPanel(ConquestAction.Recruit));
+            actions[3] = add(new ActionPanel(ConquestAction.Study));
         }
 
         @Override
@@ -153,6 +187,17 @@ public class ConquestMapScreen extends FScreen {
             opponents[1].setBounds(x + (w - panelWidth) / 2, y + padding,  panelWidth, panelHeight);
             opponents[2].setBounds(x + w - padding - panelWidth, y + padding,  panelWidth, panelHeight);
             deployedCommander.setBounds(x + (w - panelWidth) / 2, y + h - padding - panelHeight,  panelWidth, panelHeight);
+
+            float actionPanelSize = (w - panelWidth - 6 * padding) / 4;
+            x += padding;
+            y += h - padding - actionPanelSize;
+            actions[0].setBounds(x, y, actionPanelSize, actionPanelSize);
+            x += actionPanelSize + padding;
+            actions[1].setBounds(x, y, actionPanelSize, actionPanelSize);
+            x = deployedCommander.getRight() + padding;
+            actions[2].setBounds(x, y, actionPanelSize, actionPanelSize);
+            x += actionPanelSize + padding;
+            actions[3].setBounds(x, y, actionPanelSize, actionPanelSize);
         }
 
         @Override
@@ -382,6 +427,58 @@ public class ConquestMapScreen extends FScreen {
             }
 
             g.drawRect(borderThickness, color, -borderThickness, -borderThickness, getWidth() + 2 * borderThickness, getHeight() + 2 * borderThickness);
+        }
+    }
+
+    private class ActionPanel extends FDisplayObject {
+        private final ConquestAction action;
+
+        public ActionPanel(ConquestAction action0) {
+            action = action0;
+        }
+
+        @Override
+        public boolean tap(float x, float y, int count) {
+            ConquestCommander commander = regionDisplay.deployedCommander.commander;
+            if (commander == null || commander.getCurrentDayAction() == ConquestAction.Deploy) {
+                return false; //don't draw if commander just deployed or not deployed in current region
+            }
+
+            if (action == commander.getCurrentDayAction()) {
+                commander.setCurrentDayAction(null);
+            }
+            else {
+                commander.setCurrentDayAction(action);
+            }
+            return true;
+        }
+
+        @Override
+        public void draw(Graphics g) {
+            ConquestCommander commander = regionDisplay.deployedCommander.commander;
+            if (commander == null || commander.getCurrentDayAction() == ConquestAction.Deploy) {
+                return; //don't draw if commander just deployed or not deployed in current region
+            }
+
+            float w = getWidth();
+            float h = getHeight();
+
+            boolean needAlpha = commander.getCurrentDayAction() != action && commander.getCurrentDayAction() != null;
+            if (needAlpha) {
+                g.setAlphaComposite(0.4f); //use alpha composite if another action was selected
+            }
+
+            float iconSize = w * 0.8f;
+            g.drawImage(FSkin.getImages().get(action.getIcon()), (w - iconSize) / 2, (h - iconSize) / 2, iconSize, iconSize);
+
+            if (needAlpha) {
+                g.resetAlphaComposite();
+                return; //don't draw border if another action was selected
+            }
+
+            float borderThickness = BORDER_THICKNESS;
+            Color color = Color.WHITE;
+            g.drawRect(borderThickness, color, -borderThickness, -borderThickness, w + 2 * borderThickness, h + 2 * borderThickness);
         }
     }
 }
