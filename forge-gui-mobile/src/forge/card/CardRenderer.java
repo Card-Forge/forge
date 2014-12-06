@@ -48,6 +48,7 @@ public class CardRenderer {
     public static final float MANA_SYMBOL_SIZE = FSkinImage.MANA_1.getNearestHQWidth(2 * (NAME_FONT.getCapHeight() - MANA_COST_PADDING));
     private static final float NAME_COST_THRESHOLD = Utils.scale(200);
     private static final float BORDER_THICKNESS = Utils.scale(1);
+    public static final float PADDING_MULTIPLIER = 0.021f;
 
     private static Color fromDetailColor(DetailColors detailColor) {
         return FSkinColor.fromRGB(detailColor.r, detailColor.g, detailColor.b);
@@ -291,7 +292,7 @@ public class CardRenderer {
     public static void drawCardWithOverlays(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos) {
         drawCard(g, card, x, y, w, h, pos);
 
-        float padding = w * 0.021f; //adjust for card border
+        float padding = w * PADDING_MULTIPLIER; //adjust for card border
         x += padding;
         y += padding;
         w -= 2 * padding;

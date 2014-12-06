@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Graphics;
 import forge.assets.FImage;
+import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -17,6 +18,7 @@ import forge.card.CardRenderer.CardStackPosition;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.model.FModel;
+import forge.planarconquest.ConquestAction;
 import forge.planarconquest.ConquestCommander;
 import forge.planarconquest.ConquestData;
 import forge.planarconquest.ConquestPlane.Region;
@@ -156,6 +158,7 @@ public class ConquestMapScreen extends FScreen {
         private class CommanderPanel extends FDisplayObject {
             private final int index;
             private CardView card;
+            private ConquestCommander commander;
 
             private CommanderPanel(int index0) {
                 index = index0;
@@ -168,14 +171,25 @@ public class ConquestMapScreen extends FScreen {
                 g.drawRect(BORDER_THICKNESS, Color.WHITE, -BORDER_THICKNESS, -BORDER_THICKNESS, w + 2 * BORDER_THICKNESS, h + 2 * BORDER_THICKNESS);
 
                 ConquestPlaneData planeData = model.getCurrentPlaneData();
-                if (card == null) {
+                if (commander == null) {
                     List<ConquestCommander> commanders = planeData.getCommanders();
                     if (index < commanders.size()) {
-                        card = Card.getCardForUi(commanders.get(index).getCard()).getView();
+                        commander = commanders.get(index);
+                        card = Card.getCardForUi(commander.getCard()).getView();
                     }
                 }
                 if (card != null) {
                     CardRenderer.drawCardWithOverlays(g, card, 0, 0, w, h, CardStackPosition.Top);
+
+                    if (commander.getCurrentDayAction() != null) {
+                        float padding = w * CardRenderer.PADDING_MULTIPLIER; //adjust for card border
+                        w -= 2 * padding;
+                        h -= 2 * padding;
+                        float actionIconSize = w / 2;
+                        float x = (padding + (w / 4)) - actionIconSize / 2;
+                        float y = (padding + h) - (h / 8) - actionIconSize / 2;
+                        g.drawImage(FSkin.getImages().get(commander.getCurrentDayAction().getIcon()), x, y, actionIconSize, actionIconSize);
+                    }
                 }
                 else {
                     CQPref unlockPref;

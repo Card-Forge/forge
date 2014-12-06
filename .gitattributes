@@ -17213,6 +17213,7 @@ forge-gui/src/main/java/forge/model/MetaSet.java -text
 forge-gui/src/main/java/forge/model/MultipleForgeJarsFoundError.java -text
 forge-gui/src/main/java/forge/model/UnOpenedMeta.java -text
 forge-gui/src/main/java/forge/model/package-info.java svneol=native#text/plain
+forge-gui/src/main/java/forge/planarconquest/ConquestAction.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestCommander.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestController.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestData.java -text
