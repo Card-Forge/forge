@@ -15,6 +15,7 @@ import forge.card.CardZoom.ActivateHandler;
 import forge.game.card.CardView;
 import forge.match.MatchUtil;
 import forge.toolbox.FCardPanel;
+import forge.toolbox.FDisplayObject;
 import forge.util.ThreadUtil;
 
 public abstract class VCardDisplayArea extends VDisplayArea implements ActivateHandler {
@@ -376,21 +377,18 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             return cards;
         }
 
-        public Vector2 getTargetingArrowOrigin() {
-            //don't show targeting arrow unless in display area that's visible
-            if (displayArea == null || !displayArea.isVisible()) { return null; }
-
-            Vector2 origin = new Vector2(screenPos.x, screenPos.y);
+        public static Vector2 getTargetingArrowOrigin(FDisplayObject cardDisplay, boolean isTapped) {
+            Vector2 origin = new Vector2(cardDisplay.screenPos.x, cardDisplay.screenPos.y);
 
             float left = PADDING;
             float top = PADDING;
-            float w = getWidth() - 2 * PADDING;
-            float h = getHeight() - 2 * PADDING;
+            float w = cardDisplay.getWidth() - 2 * PADDING;
+            float h = cardDisplay.getHeight() - 2 * PADDING;
             if (w == h) { //adjust width if needed to make room for tapping
                 w = h / ASPECT_RATIO;
             }
 
-            if (isTapped()) { //rotate box if tapped
+            if (isTapped) { //rotate box if tapped
                 top += h - w;
                 float temp = w;
                 w = h;
@@ -401,6 +399,13 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             origin.y += top + h * TARGET_ORIGIN_FACTOR_Y;
 
             return origin;
+        }
+
+        public Vector2 getTargetingArrowOrigin() {
+            //don't show targeting arrow unless in display area that's visible
+            if (displayArea == null || !displayArea.isVisible()) { return null; }
+
+            return getTargetingArrowOrigin(this, isTapped());
         }
 
         @Override

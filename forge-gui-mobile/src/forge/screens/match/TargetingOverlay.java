@@ -23,6 +23,7 @@ import forge.assets.FSkinColor.Colors;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
+import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
 
 import com.badlogic.gdx.graphics.Color;
@@ -62,6 +63,11 @@ public class TargetingOverlay {
     public static void drawArrow(Graphics g, Vector2 start, PlayerView targetPlayer, boolean connectsFoes) {
         drawArrow(g, start,
                 MatchController.getView().getPlayerPanel(targetPlayer).getAvatar().getTargetingArrowOrigin(),
+                connectsFoes);
+    }
+    public static void drawArrow(Graphics g, FDisplayObject startCardDisplay, FDisplayObject endCardDisplay, boolean connectsFoes) {
+        drawArrow(g, CardAreaPanel.getTargetingArrowOrigin(startCardDisplay, false),
+                CardAreaPanel.getTargetingArrowOrigin(endCardDisplay, false),
                 connectsFoes);
     }
     public static void drawArrow(Graphics g, Vector2 start, Vector2 end, boolean connectsFoes) {

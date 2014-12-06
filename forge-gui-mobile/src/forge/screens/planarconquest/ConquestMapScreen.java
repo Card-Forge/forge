@@ -31,6 +31,7 @@ import forge.planarconquest.ConquestPlaneData;
 import forge.planarconquest.ConquestPlaneData.RegionData;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.screens.FScreen;
+import forge.screens.match.TargetingOverlay;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
@@ -106,6 +107,35 @@ public class ConquestMapScreen extends FScreen {
         float h = w * background.getHeight() / background.getWidth();
         g.fillRect(BACK_COLOR, 0, 0, w, getHeight());
         g.drawImage(background, 0, getHeight() - h, w, h); //retain proportions, remaining area will be covered by back color
+    }
+
+    @Override
+    protected void drawOverlay(Graphics g) {
+        ConquestCommander commander = regionDisplay.deployedCommander.commander;
+        if (commander == null) { return; }
+
+        int idx;
+        switch (commander.getCurrentDayAction()) {
+        case Attack1:
+            TargetingOverlay.drawArrow(g, regionDisplay.deployedCommander, regionDisplay.opponents[0], true);
+            break;
+        case Attack2:
+            TargetingOverlay.drawArrow(g, regionDisplay.deployedCommander, regionDisplay.opponents[1], true);
+            break;
+        case Attack3:
+            TargetingOverlay.drawArrow(g, regionDisplay.deployedCommander, regionDisplay.opponents[2], true);
+            break;
+        case Deploy:
+            idx = model.getCurrentPlane().getCommanders().indexOf(regionDisplay.deployedCommander.commander);
+            TargetingOverlay.drawArrow(g, commanderRow.panels[idx], regionDisplay.deployedCommander, false);
+            break;
+        case Undeploy:
+            idx = model.getCurrentPlane().getCommanders().indexOf(regionDisplay.deployedCommander.commander);
+            TargetingOverlay.drawArrow(g, regionDisplay.deployedCommander, commanderRow.panels[idx], false);
+            break;
+        default:
+            break;
+        }
     }
 
     @Override
@@ -233,24 +263,43 @@ public class ConquestMapScreen extends FScreen {
         }
         else if (index > -4) { //opponent panel
             ConquestCommander commander = regionDisplay.deployedCommander.commander;
-            if (commander != null && commander.getCurrentDayAction() == null) {
-                //TODO: Attack opponent
+            if (commander != null && commander.getCurrentDayAction() != ConquestAction.Deploy) {
+                ConquestAction action;
+                switch (index) {
+                case -1:
+                    action = ConquestAction.Attack1;
+                    break;
+                case -2:
+                    action = ConquestAction.Attack2;
+                    break;
+                default:
+                    action = ConquestAction.Attack3;
+                    break;
+                }
+                if (commander.getCurrentDayAction() == action) {
+                    action = null; //toggle off set to attack this opponent
+                }
+                commander.setCurrentDayAction(action);
             }
         }
         else { //deploy panel - toggle whether selected commander is deployed to current region
             if (commanderRow.selectedIndex != -1) {
                 ConquestCommander commander = commanderRow.panels[commanderRow.selectedIndex].commander;
                 if (commander.getCurrentDayAction() == null) {
-                    regionDisplay.deployedCommander.setCommander(commander);
-                    regionDisplay.data.setDeployedCommander(commander);
-                    commander.setCurrentDayAction(ConquestAction.Deploy);
-                    commander.setDeployedRegion(regionDisplay.data.getRegion());
+                    if (regionDisplay.deployedCommander.commander == null) {
+                        regionDisplay.deployedCommander.setCommander(commander);
+                        regionDisplay.data.setDeployedCommander(commander);
+                        commander.setCurrentDayAction(ConquestAction.Deploy);
+                        commander.setDeployedRegion(regionDisplay.data.getRegion());
+                    }
                 }
                 else if (commander.getCurrentDayAction() == ConquestAction.Deploy) {
-                    regionDisplay.deployedCommander.setCommander(null);
-                    regionDisplay.data.setDeployedCommander(null);
-                    commander.setCurrentDayAction(null);
-                    commander.setDeployedRegion(null);
+                    if (regionDisplay.deployedCommander.commander == commander) {
+                        regionDisplay.deployedCommander.setCommander(null);
+                        regionDisplay.data.setDeployedCommander(null);
+                        commander.setCurrentDayAction(null);
+                        commander.setDeployedRegion(null);
+                    }
                 }
             }
         }
