@@ -19,7 +19,6 @@ package forge.planarconquest;
 
 import forge.properties.ForgeConstants;
 import forge.properties.PreferencesStore;
-
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
@@ -37,7 +36,15 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
 
         PERCENT_COMMANDER("25"),
         PERCENT_PLANECHASE("25"),
-        PERCENT_DOUBLE_VARIANT("25");
+        PERCENT_DOUBLE_VARIANT("25"),
+
+        // How many of each rarity comes in a won booster pack
+        BOOSTER_COMMONS("11"),
+        BOOSTER_UNCOMMONS("3"),
+        BOOSTER_RARES("1"),
+
+        RECRUIT_BONUS_CARD_ODDS("25"),
+        STUDY_BONUS_CARD_ODDS("25");
 
         private final String strDefaultVal;
 
@@ -142,6 +149,21 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
         case PERCENT_DOUBLE_VARIANT:
             if (val + getPrefInt(CQPref.PERCENT_COMMANDER) + getPrefInt(CQPref.PERCENT_PLANECHASE) > 100) {
                 return "Variant Frequency values must add up to 100 or less.";
+            }
+            break;
+        case BOOSTER_COMMONS:
+            if (val + getPrefInt(CQPref.BOOSTER_UNCOMMONS) + getPrefInt(CQPref.BOOSTER_RARES) > 15) {
+                return "Booster packs must have maximum 15 cards.";
+            }
+            break;
+        case BOOSTER_UNCOMMONS:
+            if (val + getPrefInt(CQPref.BOOSTER_COMMONS) + getPrefInt(CQPref.BOOSTER_RARES) > 15) {
+                return "Booster packs must have maximum 15 cards.";
+            }
+            break;
+        case BOOSTER_RARES:
+            if (val + getPrefInt(CQPref.BOOSTER_COMMONS) + getPrefInt(CQPref.BOOSTER_UNCOMMONS) > 15) {
+                return "Booster packs must have maximum 15 cards.";
             }
             break;
         default:

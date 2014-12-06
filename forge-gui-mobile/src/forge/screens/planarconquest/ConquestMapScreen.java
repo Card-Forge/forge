@@ -6,7 +6,6 @@ import java.util.List;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
-import forge.FThreads;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkin;
@@ -39,7 +38,6 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.util.Utils;
-import forge.util.gui.SOptionPane;
 
 public class ConquestMapScreen extends FScreen {
     private static final Color BACK_COLOR = FSkinColor.fromRGB(1, 2, 2);
@@ -64,25 +62,7 @@ public class ConquestMapScreen extends FScreen {
         btnEndDay.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                FThreads.invokeInBackgroundThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        for (ConquestCommander commander : model.getCurrentPlaneData().getCommanders()) {
-                            if (commander.getCurrentDayAction() == null) {
-                                if (!SOptionPane.showConfirmDialog(commander.toString() + " has not taken an action today. End day anyway?", "Action Not Taken", "End Day", "Cancel")) {
-                                    return;
-                                }
-                            }
-                        }
-                        FThreads.invokeInEdtLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                model.endDay();
-                                btnEndDay.setText("End Day " + model.getDay());
-                            }
-                        });
-                    }
-                });
+                model.endDay(btnEndDay);
             }
         });
     }

@@ -17,6 +17,10 @@ public class ConquestCommander {
         deck = ConquestUtil.generateDeck(card0, cardPool0, forAi);
     }
 
+    public String getName() {
+        return card.getName();
+    }
+
     public PaperCard getCard() {
         return card;
     }
