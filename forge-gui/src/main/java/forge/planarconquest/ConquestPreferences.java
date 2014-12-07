@@ -38,10 +38,14 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
         PERCENT_PLANECHASE("25"),
         PERCENT_DOUBLE_VARIANT("25"),
 
-        // How many of each rarity comes in a won booster pack
         BOOSTER_COMMONS("11"),
         BOOSTER_UNCOMMONS("3"),
         BOOSTER_RARES("1"),
+        BOOSTERS_PER_MYTHIC("8"),
+        BOOSTER_COMMON_REROLL("10"),
+        BOOSTER_UNCOMMON_REROLL("25"),
+        BOOSTER_RARE_REROLL("50"),
+        BOOSTER_MYTHIC_REROLL("100"),
 
         RECRUIT_BONUS_CARD_ODDS("25"),
         STUDY_BONUS_CARD_ODDS("25"),
@@ -167,9 +171,22 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
                 return "Booster packs must have maximum 15 cards.";
             }
             break;
+        case BOOSTERS_PER_MYTHIC:
+            if (val + getPrefInt(CQPref.BOOSTER_COMMONS) + getPrefInt(CQPref.BOOSTER_UNCOMMONS) > 15) {
+                return "Booster packs must have maximum 15 cards.";
+            }
+            break;
+        case BOOSTER_COMMON_REROLL:
+        case BOOSTER_UNCOMMON_REROLL:
+        case BOOSTER_RARE_REROLL:
+        case BOOSTER_MYTHIC_REROLL:
+            if (val > 100) {
+                return "Booster reroll chance must be between 0% and 100%.";
+            }
+            break;
         case RECRUIT_BONUS_CARD_ODDS:
         case STUDY_BONUS_CARD_ODDS:
-            if (val > 50) {
+            if (val > 100) {
                 return "Bonus card odds must be between 0% and 50%.";
             }
             break;

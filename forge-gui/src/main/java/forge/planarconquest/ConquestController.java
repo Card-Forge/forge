@@ -529,5 +529,93 @@ public class ConquestController {
     }
 
     private void awardBooster(final IWinLoseView<? extends IButton> view) {
+        Iterable<PaperCard> cardPool = gameRunner.commander.getDeployedRegion().getCardPool().getAllCards();
+
+        int newCommonCount = 0;
+        int newUncommonCount = 0;
+        int newRareCount = 0;
+        int newMythicCount = 0;
+        List<PaperCard> commons = new ArrayList<PaperCard>();
+        List<PaperCard> uncommons = new ArrayList<PaperCard>();
+        List<PaperCard> rares = new ArrayList<PaperCard>();
+        List<PaperCard> mythics = new ArrayList<PaperCard>();
+
+        for (PaperCard c : cardPool) {
+            switch (c.getRarity()) {
+            case Common:
+                commons.add(c);
+                break;
+            case Uncommon:
+                uncommons.add(c);
+                break;
+            case Rare:
+                rares.add(c);
+                break;
+            case MythicRare:
+                mythics.add(c);
+                break;
+            default:
+                break;
+            }
+        }
+
+        ConquestPreferences prefs = FModel.getConquestPreferences();
+
+        int boostersPerMythic = prefs.getPrefInt(CQPref.BOOSTERS_PER_MYTHIC);
+        int count = prefs.getPrefInt(CQPref.BOOSTER_RARES);
+        for (int i = 0; i < count; i++) {
+            if (Aggregates.randomInt(1, boostersPerMythic) == 1) {
+                
+            }
+            else {
+                
+            }
+        }
+
+        int uncommonCount = prefs.getPrefInt(CQPref.BOOSTER_UNCOMMONS);
+
+        count = prefs.getPrefInt(CQPref.BOOSTER_COMMONS);
+        int commonReroll = prefs.getPrefInt(CQPref.BOOSTER_COMMON_REROLL);
+        int uncommonReroll = prefs.getPrefInt(CQPref.BOOSTER_COMMON_REROLL);
+        int rareReroll = prefs.getPrefInt(CQPref.BOOSTER_COMMON_REROLL);
+        int mythicReroll = prefs.getPrefInt(CQPref.BOOSTER_MYTHIC_REROLL);
+        
+    }
+
+    private class BoosterPool {
+        private final int rerollChance;
+        private int newCount = 0;
+        private final List<PaperCard> cards = new ArrayList<PaperCard>();
+
+        private BoosterPool(int rerollChance0) {
+            rerollChance = rerollChance0;
+        }
+
+        private boolean isEmpty() {
+            return cards.isEmpty();
+        }
+
+        private void add(PaperCard c) {
+            if (!model.getCollection().contains(c)) {
+                newCount++;
+            }
+            cards.add(c);
+        }
+
+        private PaperCard rewardCard() {
+            PaperCard c;
+            while (true) {
+                int index = Aggregates.randomInt(0, cards.size() - 1);
+                c = cards.get(index);
+
+                //break out if new, if no new remaining, or if reroll chance fails
+                if (newCount == 0 || !model.getCollection().contains(c) ||
+                        Aggregates.randomInt(1, 100) > rerollChance) {
+                    break;
+                }
+            }
+            cards.remove(c);
+            return c;
+        }
     }
 }

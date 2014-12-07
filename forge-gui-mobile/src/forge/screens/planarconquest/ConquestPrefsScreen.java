@@ -62,10 +62,14 @@ public class ConquestPrefsScreen extends FScreen {
         scroller.add(new PrefsOption("Planechase Game (%)", CQPref.PERCENT_PLANECHASE, PrefsGroup.VARIANT_FREQUENCY));
         scroller.add(new PrefsOption("Commander & Planechase Game (%)", CQPref.PERCENT_DOUBLE_VARIANT, PrefsGroup.VARIANT_FREQUENCY));
 
-        scroller.add(new PrefsHeader("Booster Pack Ratios", FSkinImage.PACK, PrefsGroup.BOOSTER));
-        scroller.add(new PrefsOption("Common", CQPref.BOOSTER_COMMONS, PrefsGroup.BOOSTER));
-        scroller.add(new PrefsOption("Uncommon", CQPref.BOOSTER_UNCOMMONS, PrefsGroup.BOOSTER));
-        scroller.add(new PrefsOption("Rare", CQPref.BOOSTER_RARES, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsHeader("Booster Packs", FSkinImage.PACK, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsOption("Commons", CQPref.BOOSTER_COMMONS, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsOption("Uncommons", CQPref.BOOSTER_UNCOMMONS, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsOption("Rares", CQPref.BOOSTER_RARES, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsOption("Common Reroll Duplicate (%)", CQPref.BOOSTER_COMMON_REROLL, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsOption("Uncommon Reroll Duplicate (%)", CQPref.BOOSTER_UNCOMMON_REROLL, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsOption("Rare Reroll Duplicate (%)", CQPref.BOOSTER_RARE_REROLL, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsOption("Mythic Reroll Duplicate (%)", CQPref.BOOSTER_MYTHIC_REROLL, PrefsGroup.BOOSTER));
 
         scroller.add(new PrefsHeader("Actions", FSkinImage.ALPHASTRIKE, PrefsGroup.ACTIONS));
         scroller.add(new PrefsOption("Defend - Bonus Life", CQPref.DEFEND_BONUS_LIFE, PrefsGroup.ACTIONS));
