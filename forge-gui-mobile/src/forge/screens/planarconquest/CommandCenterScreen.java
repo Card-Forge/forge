@@ -25,12 +25,14 @@ import forge.model.FModel;
 import forge.planarconquest.ConquestAction;
 import forge.planarconquest.ConquestCommander;
 import forge.planarconquest.ConquestData;
+import forge.planarconquest.ConquestController.GameRunner;
 import forge.planarconquest.ConquestPlane.Region;
 import forge.planarconquest.ConquestPlaneData;
 import forge.planarconquest.ConquestPlaneData.RegionData;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.planarconquest.IVCommandCenter;
 import forge.screens.FScreen;
+import forge.screens.LoadingOverlay;
 import forge.screens.match.TargetingOverlay;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
@@ -84,6 +86,16 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
         lblCurrentPlane.setText("Plane - " + model.getCurrentPlane().getName());
         btnEndDay.setText("End Day " + model.getDay());
         regionDisplay.onRegionChanged(); //simulate region change when day changes to ensure everything is updated
+    }
+
+    @Override
+    public void startGame(final GameRunner gameRunner) {
+        LoadingOverlay.show("Loading new game...", new Runnable() {
+            @Override
+            public void run() {
+                gameRunner.finishStartingGame();
+            }
+        });
     }
 
     @Override

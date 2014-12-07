@@ -34,15 +34,15 @@ import java.util.Map.Entry;
  * GameType is an enum to determine the type of current game. :)
  */
 public enum DeckFormat {
-    
-    //            Main board: allowed size             SB: restriction   Max distinct non basic cards
-    Constructed ( Range.between(60, Integer.MAX_VALUE), Range.between(0, 15), 4),
-    QuestDeck   ( Range.between(40, Integer.MAX_VALUE), Range.between(0, 15), 4),
-    Limited     ( Range.between(40, Integer.MAX_VALUE), null, Integer.MAX_VALUE),
-    Commander   ( Range.is(99),                         Range.between(0, 10), 1),
-    Vanguard    ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
-    Planechase  ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
-    Archenemy   ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4);
+    //               Main board: allowed size             SB: restriction   Max distinct non basic cards
+    Constructed    ( Range.between(60, Integer.MAX_VALUE), Range.between(0, 15), 4),
+    QuestDeck      ( Range.between(40, Integer.MAX_VALUE), Range.between(0, 15), 4),
+    Limited        ( Range.between(40, Integer.MAX_VALUE), null, Integer.MAX_VALUE),
+    Commander      ( Range.is(99),                         Range.between(0, 10), 1),
+    PlanarConquest ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 1),
+    Vanguard       ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
+    Planechase     ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
+    Archenemy      ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4);
 
     private final Range<Integer> mainRange;
     private final Range<Integer> sideRange; // null => no check

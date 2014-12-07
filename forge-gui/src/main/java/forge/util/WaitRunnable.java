@@ -8,7 +8,7 @@ public abstract class WaitRunnable implements Runnable {
 
     private final Lock lock = new Lock();
 
-    public void invokeAndWait() {
+    public final void invokeAndWait() {
         FThreads.assertExecutedByEdt(false); //not supported if on UI thread
         FThreads.invokeInEdtLater(new Runnable() {
             @Override

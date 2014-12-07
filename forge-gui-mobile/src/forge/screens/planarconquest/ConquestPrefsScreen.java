@@ -25,7 +25,7 @@ public class ConquestPrefsScreen extends FScreen {
         WINS_TO_UNLOCK,
         VARIANT_FREQUENCY,
         BOOSTER,
-        REWARDS
+        ACTIONS
     }
 
     private FScrollPane scroller = add(new FScrollPane() {
@@ -67,9 +67,10 @@ public class ConquestPrefsScreen extends FScreen {
         scroller.add(new PrefsOption("Uncommon", CQPref.BOOSTER_UNCOMMONS, PrefsGroup.BOOSTER));
         scroller.add(new PrefsOption("Rare", CQPref.BOOSTER_RARES, PrefsGroup.BOOSTER));
 
-        scroller.add(new PrefsHeader("Rewards", FSkinImage.QUEST_COIN, PrefsGroup.REWARDS));
-        scroller.add(new PrefsOption("Recruit Bonus Card Odds (%)", CQPref.RECRUIT_BONUS_CARD_ODDS, PrefsGroup.REWARDS));
-        scroller.add(new PrefsOption("Study Bonus Card Odds (%)", CQPref.STUDY_BONUS_CARD_ODDS, PrefsGroup.REWARDS));
+        scroller.add(new PrefsHeader("Actions", FSkinImage.ALPHASTRIKE, PrefsGroup.ACTIONS));
+        scroller.add(new PrefsOption("Defend - Bonus Life", CQPref.DEFEND_BONUS_LIFE, PrefsGroup.ACTIONS));
+        scroller.add(new PrefsOption("Recruit - Bonus Card Odds (%)", CQPref.RECRUIT_BONUS_CARD_ODDS, PrefsGroup.ACTIONS));
+        scroller.add(new PrefsOption("Study - Bonus Card Odds (%)", CQPref.STUDY_BONUS_CARD_ODDS, PrefsGroup.ACTIONS));
     }
 
     @Override

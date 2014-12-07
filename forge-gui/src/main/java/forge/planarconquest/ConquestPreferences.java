@@ -44,7 +44,8 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
         BOOSTER_RARES("1"),
 
         RECRUIT_BONUS_CARD_ODDS("25"),
-        STUDY_BONUS_CARD_ODDS("25");
+        STUDY_BONUS_CARD_ODDS("25"),
+        DEFEND_BONUS_LIFE("5");
 
         private final String strDefaultVal;
 
@@ -164,6 +165,17 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
         case BOOSTER_RARES:
             if (val + getPrefInt(CQPref.BOOSTER_COMMONS) + getPrefInt(CQPref.BOOSTER_UNCOMMONS) > 15) {
                 return "Booster packs must have maximum 15 cards.";
+            }
+            break;
+        case RECRUIT_BONUS_CARD_ODDS:
+        case STUDY_BONUS_CARD_ODDS:
+            if (val > 50) {
+                return "Bonus card odds must be between 0% and 50%.";
+            }
+            break;
+        case DEFEND_BONUS_LIFE:
+            if (val > 10) {
+                return "Bonus life must be between 0 and 10.";
             }
             break;
         default:

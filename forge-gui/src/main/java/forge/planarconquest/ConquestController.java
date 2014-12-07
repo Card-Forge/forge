@@ -24,20 +24,27 @@ import com.google.common.base.Predicate;
 import com.google.common.eventbus.Subscribe;
 
 import forge.FThreads;
+import forge.LobbyPlayer;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.game.GameRules;
+import forge.game.GameType;
 import forge.game.GameView;
+import forge.game.Match;
 import forge.game.event.GameEvent;
+import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IButton;
 import forge.interfaces.IWinLoseView;
 import forge.item.PaperCard;
+import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.planarconquest.ConquestPlaneData.RegionData;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.player.GamePlayerUtil;
+import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.gui.SGuiChoose;
@@ -48,6 +55,7 @@ public class ConquestController {
     private ConquestData model;
     private CardPool cardPool;
     private transient IStorage<Deck> decks;
+    private transient GameRunner gameRunner;
 
     public ConquestController() {
     }
@@ -102,16 +110,16 @@ public class ConquestController {
                 for (ConquestCommander commander : commanders) {
                     switch (commander.getCurrentDayAction()) {
                     case Attack1:
-                        playGame(commander, 0, false);
+                        playGame(commander, 0, false, commandCenter);
                         break;
                     case Attack2:
-                        playGame(commander, 1, false);
+                        playGame(commander, 1, false, commandCenter);
                         break;
                     case Attack3:
-                        playGame(commander, 2, false);
+                        playGame(commander, 2, false, commandCenter);
                         break;
                     case Defend:
-                        playGame(commander, Aggregates.randomInt(0, 2), true); //defend against random opponent
+                        playGame(commander, Aggregates.randomInt(0, 2), true, commandCenter); //defend against random opponent
                         break;
                     case Recruit:
                         if (!recruit(commander)) { return; }
@@ -141,10 +149,90 @@ public class ConquestController {
         });
     }
 
-    private void playGame(ConquestCommander commander, int opponentIndex, boolean isHumanDefending) {
-        RegionData regionData = model.getCurrentPlaneData().getRegionData(commander.getDeployedRegion());
-        ConquestCommander opponent = regionData.getOpponent(opponentIndex);
-        //TODO
+    private void playGame(final ConquestCommander commander, final int opponentIndex, final boolean isHumanDefending, final IVCommandCenter commandCenter) {
+        gameRunner = new GameRunner(commander, opponentIndex, isHumanDefending, commandCenter);
+        gameRunner.invokeAndWait();
+
+        //after game finished
+        if (gameRunner.wonGame) {
+            RegionData regionData = model.getCurrentPlaneData().getRegionData(commander.getDeployedRegion());
+            regionData.replaceOpponent(opponentIndex);
+        }
+        gameRunner = null;
+    }
+
+    public class GameRunner {
+        private class Lock {
+        }
+        private final Lock lock = new Lock();
+
+        public final ConquestCommander commander;
+        public final ConquestCommander opponent;
+        public final boolean isHumanDefending;
+        private final IVCommandCenter commandCenter;
+        private boolean wonGame;
+
+        private GameRunner(final ConquestCommander commander0, final int opponentIndex, final boolean isHumanDefending0, final IVCommandCenter commandCenter0) {
+            commander = commander0;
+            RegionData regionData = model.getCurrentPlaneData().getRegionData(commander.getDeployedRegion());
+            opponent = regionData.getOpponent(opponentIndex);
+            isHumanDefending = isHumanDefending0;
+            commandCenter = commandCenter0;
+        }
+
+        public final void invokeAndWait() {
+            FThreads.assertExecutedByEdt(false); //not supported if on UI thread
+            FThreads.invokeInEdtLater(new Runnable() {
+                @Override
+                public void run() {
+                    commandCenter.startGame(GameRunner.this);
+                }
+            });
+            try {
+                synchronized(lock) {
+                    lock.wait();
+                }
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public void finishStartingGame() {
+            RegisteredPlayer humanStart = new RegisteredPlayer(commander.getDeck());
+            RegisteredPlayer aiStart = new RegisteredPlayer(opponent.getDeck());
+
+            humanStart.setStartingLife(30 + (isHumanDefending ? FModel.getConquestPreferences().getPrefInt(CQPref.DEFEND_BONUS_LIFE) : 0));
+            aiStart.setStartingLife(30);
+
+            List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
+            starter.add(humanStart.setPlayer(getConquestPlayer()));
+
+            LobbyPlayer aiPlayer = GamePlayerUtil.createAiPlayer();
+            starter.add(aiStart.setPlayer(aiPlayer));
+
+            boolean useRandomFoil = FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
+            for(RegisteredPlayer rp : starter) {
+                rp.setRandomFoil(useRandomFoil);
+            }
+            GameRules rules = new GameRules(GameType.PlanarConquest);
+            rules.setGamesPerMatch(1); //only play one game at a time
+            rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
+            rules.canCloneUseTargetsImage = FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE);
+            final Match mc = new Match(rules, starter);
+            FThreads.invokeInEdtNowOrLater(new Runnable(){
+                @Override
+                public void run() {
+                    MatchUtil.startGame(mc);
+                }
+            });
+        }
+
+        private void finish() {
+            synchronized(lock) { //release game lock once game finished
+                lock.notify();
+            }
+        }
     }
 
     private boolean recruit(ConquestCommander commander) {
@@ -161,10 +249,12 @@ public class ConquestController {
                 CardRulesPredicates.Presets.IS_NON_CREATURE_SPELL, bonusCard ? 2 : 1);
     }
 
+    private LobbyPlayer getConquestPlayer() {
+        return GamePlayerUtil.getGuiPlayer(); //TODO: Should this be a separate player?
+    }
+
     public void showGameRewards(final GameView game, final IWinLoseView<? extends IButton> view) {
-        view.getBtnRestart().setVisible(false);
-        view.getBtnContinue().setVisible(false);
-        if (game.isMatchWonBy(GamePlayerUtil.getGuiPlayer())) { //TODO: Should this be smarter
+        if (game.isMatchWonBy(getConquestPlayer())) {
             view.getBtnQuit().setText("Great!");
 
             //give controller a chance to run remaining logic on a separate thread
@@ -182,8 +272,9 @@ public class ConquestController {
     }
 
     public void onGameFinished(final GameView game) {
-        if (game.isMatchWonBy(GamePlayerUtil.getGuiPlayer())) {
+        if (game.isMatchWonBy(getConquestPlayer())) {
             model.addWin();
+            gameRunner.wonGame = true;
         }
         else {
             model.addLoss();
@@ -191,6 +282,8 @@ public class ConquestController {
 
         FModel.getConquest().save();
         FModel.getConquestPreferences().save();
+
+        gameRunner.finish();
     }
 
     private void awardWinStreakBonus(final IWinLoseView<? extends IButton> view) {

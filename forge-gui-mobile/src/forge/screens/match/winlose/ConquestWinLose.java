@@ -17,47 +17,23 @@
 package forge.screens.match.winlose;
 
 import forge.game.GameView;
-import forge.quest.QuestWinLoseController;
+import forge.model.FModel;
 
-/**
- * <p>
- * QuestWinLose.
- * </p>
- * Processes win/lose presentation for Quest events. This presentation is
- * displayed by WinLoseFrame. Components to be added to pnlCustom in
- * WinLoseFrame should use MigLayout.
- * 
- */
-public class QuestWinLose extends ControlWinLose {
-    private final QuestWinLoseController controller;
-
-    /**
-     * Instantiates a new quest win lose handler.
-     * 
-     * @param view0 ViewWinLose object
-     * @param match2
-     */
-    public QuestWinLose(final ViewWinLose view0, GameView lastGame0) {
+public class ConquestWinLose extends ControlWinLose {
+    public ConquestWinLose(final ViewWinLose view0, GameView lastGame0) {
         super(view0, lastGame0);
-        controller = new QuestWinLoseController(lastGame0, view0);
+        view0.getBtnContinue().setVisible(false);
+        view0.getBtnRestart().setVisible(false);
     }
 
     @Override
     public final void showRewards() {
-        controller.showRewards();
+        FModel.getConquest().showGameRewards(lastGame, getView());
     }
 
-    /**
-     * <p>
-     * actionOnQuit.
-     * </p>
-     * When "quit" button is pressed, this method adjusts quest data as
-     * appropriate and saves.
-     * 
-     */
     @Override
     public final void actionOnQuit() {
-        controller.actionOnQuit();
         super.actionOnQuit();
+        FModel.getConquest().onGameFinished(lastGame);
     }
 }

@@ -19,6 +19,7 @@ public enum GameType {
     Gauntlet        (DeckFormat.Limited, true, true, true, "Gauntlet", "", null),
     Quest           (DeckFormat.QuestDeck, true, true, false, "Quest", "", null),
     QuestDraft      (DeckFormat.Limited, true, true, true, "Quest Draft", "", null),
+    PlanarConquest  (DeckFormat.PlanarConquest, true, false, false, "Planar Conquest", "", null),
     Constructed     (DeckFormat.Constructed, false, true, true, "Constructed", "", null),
     Vanguard        (DeckFormat.Vanguard, true, true, true, "Vanguard", "Each player has a special \"Avatar\" card that affects the game.", null),
     Commander       (DeckFormat.Commander, false, false, false, "Commander", "Each player has a legendary \"General\" card which can be cast at any time and determines deck colors.", null),

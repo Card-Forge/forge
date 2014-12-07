@@ -1279,6 +1279,7 @@ forge-gui-mobile/src/forge/screens/match/views/VPlayers.java -text
 forge-gui-mobile/src/forge/screens/match/views/VPrompt.java -text
 forge-gui-mobile/src/forge/screens/match/views/VStack.java -text
 forge-gui-mobile/src/forge/screens/match/views/VZoneDisplay.java -text
+forge-gui-mobile/src/forge/screens/match/winlose/ConquestWinLose.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/ControlWinLose.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/GauntletWinLose.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/LimitedWinLose.java -text

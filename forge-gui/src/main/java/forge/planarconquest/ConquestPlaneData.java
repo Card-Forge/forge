@@ -76,6 +76,10 @@ public class ConquestPlaneData {
             return opponents[index];
         }
 
+        public void replaceOpponent(int index) {
+            opponents[index] = region.getRandomOpponent(opponents);
+        }
+
         public ConquestCommander getDeployedCommander() {
             return deployedCommander;
         }
