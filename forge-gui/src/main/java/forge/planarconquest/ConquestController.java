@@ -19,6 +19,7 @@ package forge.planarconquest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import com.google.common.base.Predicate;
 import com.google.common.eventbus.Subscribe;
@@ -52,6 +53,8 @@ import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
 
 public class ConquestController {
+    private static final int STARTING_LIFE = 30;
+
     private ConquestData model;
     private CardPool cardPool;
     private transient IStorage<Deck> decks;
@@ -202,8 +205,8 @@ public class ConquestController {
             RegisteredPlayer humanStart = new RegisteredPlayer(commander.getDeck());
             RegisteredPlayer aiStart = new RegisteredPlayer(opponent.getDeck());
 
-            humanStart.setStartingLife(30 + (isHumanDefending ? FModel.getConquestPreferences().getPrefInt(CQPref.DEFEND_BONUS_LIFE) : 0));
-            aiStart.setStartingLife(30);
+            humanStart.setStartingLife(STARTING_LIFE + (isHumanDefending ? FModel.getConquestPreferences().getPrefInt(CQPref.DEFEND_BONUS_LIFE) : 0));
+            aiStart.setStartingLife(STARTING_LIFE);
 
             List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
             starter.add(humanStart.setPlayer(getConquestPlayer()));
@@ -262,7 +265,32 @@ public class ConquestController {
                 @Override
                 public void run() {
                     awardWinStreakBonus(view);
-                    awardBooster(view);
+
+                    if (SOptionPane.showConfirmDialog("Choose one \u2014\n\n" +
+                            "\u2022 Booster: open a random booster pack with at least one new card\n\n" +
+                            "\u2022 Card: choose a card from your opponent's deck",
+                            "Spoils of Victory", "Booster", "Card")) {
+                        awardBooster(view);
+                    }
+                    else {
+                        List<PaperCard> cards = new ArrayList<PaperCard>();
+                        for (Entry<PaperCard, Integer> entry : gameRunner.opponent.getDeck().getMain()) {
+                            PaperCard c = entry.getKey();
+                            if (!c.getRules().getType().isBasicLand() && !getModel().getCollection().contains(c)) {
+                                cards.add(c);
+                            }
+                        }
+                        if (cards.isEmpty()) { //if there are no new cards, show all cards
+                            for (Entry<PaperCard, Integer> entry : gameRunner.opponent.getDeck().getMain()) {
+                                PaperCard c = entry.getKey();
+                                if (!c.getRules().getType().isBasicLand()) {
+                                    cards.add(c);
+                                }
+                            }
+                        }
+                        PaperCard card = SGuiChoose.one("Choose a card from your opponent's deck", cards);
+                        model.getCollection().add(card);
+                    }
                 }
             });
         }
@@ -470,6 +498,5 @@ public class ConquestController {
     }
 
     private void awardBooster(final IWinLoseView<? extends IButton> view) {
-        //TODO
     }
 }
