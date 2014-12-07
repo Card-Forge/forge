@@ -385,11 +385,6 @@ public class ConquestController {
             return false;
         }
 
-        ConquestPreferences prefs = FModel.getConquestPreferences();
-        int rareThreshold = prefs.getPrefInt(CQPref.BOOSTER_RARES);
-        int uncommonThreshold = rareThreshold + prefs.getPrefInt(CQPref.BOOSTER_UNCOMMONS);
-        int cardsPerPack = uncommonThreshold + prefs.getPrefInt(CQPref.BOOSTER_COMMONS);
-
         List<PaperCard> rewardPool = null;
         if (rarity != null) {
             switch (rarity) {
@@ -462,22 +457,55 @@ public class ConquestController {
         for (int i = 0; i < count; i++) {
             //determine which rarity card to get based on pack ratios if no rarity passed in
             if (rarity == null) {
-                int value = Aggregates.randomInt(1, cardsPerPack);
-                if (value <= rareThreshold) {
-                    if (mythics.size() > 0 && Aggregates.randomInt(1, 8) == 1) {
-                        rewardPool = mythics;
-                    }
-                    else {
-                        rewardPool = rares;
-                    }
-                }
-                else if (value <= uncommonThreshold) {
-                    rewardPool = uncommons;
-                }
-                else {
+                int value = Aggregates.randomInt(1, 15);
+                if (value <= 8) { //reward common about 50% of the time
                     rewardPool = commons;
+                    if (rewardPool.isEmpty()) {
+                        rewardPool = uncommons;
+                        if (rewardPool.isEmpty()) {
+                            rewardPool = rares;
+                            if (rewardPool.isEmpty()) {
+                                rewardPool = mythics;
+                            }
+                        }
+                    }
                 }
-                if (rewardPool.isEmpty()) { continue; } //if no cards in selected pool, determine random pool again
+                else if (value <= 12) { //reward uncommon about 25% of the time
+                    rewardPool = uncommons;
+                    if (rewardPool.isEmpty()) {
+                        rewardPool = commons;
+                        if (rewardPool.isEmpty()) {
+                            rewardPool = rares;
+                            if (rewardPool.isEmpty()) {
+                                rewardPool = mythics;
+                            }
+                        }
+                    }
+                }
+                else if (value <= 14) { //reward rare about 12.5% of the time
+                    rewardPool = rares;
+                    if (rewardPool.isEmpty()) {
+                        rewardPool = uncommons;
+                        if (rewardPool.isEmpty()) {
+                            rewardPool = commons;
+                            if (rewardPool.isEmpty()) {
+                                rewardPool = mythics;
+                            }
+                        }
+                    }
+                }
+                else { //reward mythic about 6.75% of the time
+                    rewardPool = mythics;
+                    if (rewardPool.isEmpty()) {
+                        rewardPool = rares;
+                        if (rewardPool.isEmpty()) {
+                            rewardPool = uncommons;
+                            if (rewardPool.isEmpty()) {
+                                rewardPool = commons;
+                            }
+                        }
+                    }
+                }
             }
 
             int index = Aggregates.randomInt(0, rewardPool.size() - 1);
