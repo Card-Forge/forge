@@ -36,6 +36,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 // The BoosterPack generates cards for the Card Pool in Quest Mode
@@ -331,5 +332,27 @@ public final class BoosterUtils {
         }
 
         return rewards;
+    }
+
+    public static void sort(List<PaperCard> cards) {
+        //sort cards alphabetically so colors appear together and rares appear on top
+        Collections.sort(cards, new Comparator<PaperCard>() {
+            @Override
+            public int compare(PaperCard c1, PaperCard c2) {
+                return c1.getName().compareTo(c2.getName());
+            }
+        });
+        Collections.sort(cards, new Comparator<PaperCard>() {
+            @Override
+            public int compare(PaperCard c1, PaperCard c2) {
+                return c1.getRules().getColor().compareTo(c2.getRules().getColor());
+            }
+        });
+        Collections.sort(cards, new Comparator<PaperCard>() {
+            @Override
+            public int compare(PaperCard c1, PaperCard c2) {
+                return c2.getRarity().compareTo(c1.getRarity());
+            }
+        });
     }
 }

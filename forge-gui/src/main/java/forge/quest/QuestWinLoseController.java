@@ -30,7 +30,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -552,25 +551,7 @@ public class QuestWinLoseController {
         }
 
         if (cardsWon != null) {
-            //sort cards alphabetically so colors appear together and rares appear on top
-            Collections.sort(cardsWon, new Comparator<PaperCard>() {
-                @Override
-                public int compare(PaperCard c1, PaperCard c2) {
-                    return c1.getName().compareTo(c2.getName());
-                }
-            });
-            Collections.sort(cardsWon, new Comparator<PaperCard>() {
-                @Override
-                public int compare(PaperCard c1, PaperCard c2) {
-                    return c1.getRules().getColor().compareTo(c2.getRules().getColor());
-                }
-            });
-            Collections.sort(cardsWon, new Comparator<PaperCard>() {
-                @Override
-                public int compare(PaperCard c1, PaperCard c2) {
-                    return c2.getRarity().compareTo(c1.getRarity());
-                }
-            });
+            BoosterUtils.sort(cardsWon);
             view.showCards(title, cardsWon);
         }
     }

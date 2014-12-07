@@ -46,6 +46,7 @@ import forge.planarconquest.ConquestPlaneData.RegionData;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
+import forge.quest.BoosterUtils;
 import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.gui.SGuiChoose;
@@ -266,10 +267,11 @@ public class ConquestController {
                 public void run() {
                     awardWinStreakBonus(view);
 
-                    if (SOptionPane.showConfirmDialog("Choose one \u2014\n\n" +
-                            "\u2022 Booster: open a random booster pack with at least one new card\n\n" +
-                            "\u2022 Card: choose a card from your opponent's deck",
-                            "Spoils of Victory", "Booster", "Card")) {
+                    String[] options = {"Booster", "Card"};
+                    if (SOptionPane.showOptionDialog("Choose one \u2014\n\n" +
+                            "\u2022 Open a random booster pack\n" +
+                            "\u2022 Choose a card from your opponent's deck",
+                            "Spoils of Victory", null, options) == 0) {
                         awardBooster(view);
                     }
                     else {
@@ -288,6 +290,7 @@ public class ConquestController {
                                 }
                             }
                         }
+                        BoosterUtils.sort(cards);
                         PaperCard card = SGuiChoose.one("Choose a card from your opponent's deck", cards);
                         model.getCollection().add(card);
                     }
