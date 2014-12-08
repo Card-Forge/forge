@@ -47,13 +47,6 @@ public class TriggerAttackersDeclared extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final Map<String, Object> runParams2) {
-        if (this.mapParams.containsKey("SingleAttacker")) {
-            @SuppressWarnings("unchecked")
-            final List<Card> attackers = (List<Card>) runParams2.get("Attackers");
-            if (attackers.size() != 1) {
-                return false;
-            }
-        }
         if (this.mapParams.containsKey("AttackingPlayer")) {
             if (!matchesValid(runParams2.get("AttackingPlayer"),
                     this.mapParams.get("AttackingPlayer").split(","), this.getHostCard())) {
