@@ -267,6 +267,13 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
                     if (model.setCurrentRegion(commander.getDeployedRegion())) {
                         regionDisplay.onRegionChanged();
                     }
+                    else if (commander.getCurrentDayAction() != ConquestAction.Undeploy) {
+                        //if already on commander's region, change action to undeploy
+                        commander.setCurrentDayAction(ConquestAction.Undeploy);
+                    }
+                    else {
+                        commander.setCurrentDayAction(null);
+                    }
                 }
             }
             else if (model.getCurrentPlaneData().getWins() >= panel.getWinsToUnlock()) {
