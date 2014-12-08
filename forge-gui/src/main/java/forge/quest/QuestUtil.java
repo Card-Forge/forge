@@ -17,11 +17,6 @@
  */
 package forge.quest;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
 import forge.FThreads;
 import forge.GuiBase;
 import forge.LobbyPlayer;
@@ -50,6 +45,10 @@ import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -66,12 +65,10 @@ public class QuestUtil {
      * getComputerStartingCards.
      * </p>
      * 
-     * @param qd
-     *            a {@link forge.quest.data.QuestData} object.
-     * @return a {@link forge.CardList} object.
+     * @return a {@link java.util.List} object.
      */
     public static List<Card> getComputerStartingCards() {
-        return new ArrayList<Card>();
+        return new ArrayList<>();
     }
 
     /**
@@ -80,14 +77,12 @@ public class QuestUtil {
      * </p>
      * Returns new card instances of extra AI cards in play at start of event.
      * 
-     * @param qd
-     *            a {@link forge.quest.data.QuestData} object.
      * @param qe
      *            a {@link forge.quest.QuestEvent} object.
-     * @return a {@link forge.CardList} object.
+     * @return a {@link java.util.List} object.
      */
     public static List<IPaperCard> getComputerStartingCards(final QuestEvent qe) {
-        final List<IPaperCard> list = new ArrayList<IPaperCard>();
+        final List<IPaperCard> list = new ArrayList<>();
 
         for (final String s : qe.getAiExtraCards()) {
             list.add(QuestUtil.readExtraCard(s));
@@ -101,14 +96,12 @@ public class QuestUtil {
      * getHumanStartingCards.
      * </p>
      * Returns list of current plant/pet configuration only.
-     * @param human 
-     * 
-     * @param qd
-     *            a {@link forge.quest.data.QuestData} object.
-     * @return a {@link forge.CardList} object.
+     * @param qc
+     *            a {@link forge.quest.QuestController} object.
+     * @return a {@link java.util.List} object.
      */
     public static List<IPaperCard> getHumanStartingCards(final QuestController qc) {
-        final List<IPaperCard> list = new ArrayList<IPaperCard>();
+        final List<IPaperCard> list = new ArrayList<>();
 
         for (int iSlot = 0; iSlot < QuestController.MAX_PET_SLOTS; iSlot++) {
             String petName = qc.getSelectedPet(iSlot);
@@ -131,11 +124,11 @@ public class QuestUtil {
      * Returns new card instances of extra human cards, including current
      * plant/pet configuration, and cards in play at start of quest.
      * 
-     * @param qd
-     *            a {@link forge.quest.data.QuestData} object.
+     * @param qc
+     *            a {@link forge.quest.QuestController} object.
      * @param qe
      *            a {@link forge.quest.QuestEvent} object.
-     * @return a {@link forge.CardList} object.
+     * @return a {@link java.util.List} object.
      */
     public static List<IPaperCard> getHumanStartingCards(final QuestController qc, final QuestEvent qe) {
         final List<IPaperCard> list = QuestUtil.getHumanStartingCards(qc);
@@ -159,15 +152,14 @@ public class QuestUtil {
     public static PaperToken createToken(final String s) {
         final String[] properties = s.split(";", 6);
 
-        List<String> script = new ArrayList<String>();
+        List<String> script = new ArrayList<>();
         script.add("Name:" + properties[4]);
         script.add("Colors:" + properties[1]);
         script.add("PT:"+ properties[2] + "/" + properties[3]);
         script.add("Types:" + properties[5].replace(';', ' '));
         script.add("Oracle:"); // tokens don't have texts yet
         String fileName = PaperToken.makeTokenFileName(properties[1], properties[2], properties[3], properties[4]);
-        final PaperToken c = new PaperToken(CardRules.fromScript(script), CardEdition.UNKNOWN, fileName);
-        return c;
+        return new PaperToken(CardRules.fromScript(script), CardEdition.UNKNOWN, fileName);
     }
 
     /**
@@ -178,8 +170,6 @@ public class QuestUtil {
      * 
      * @param name
      *            the name
-     * @param owner
-     *            the owner
      * @return the card
      */
     public static IPaperCard readExtraCard(final String name) {
@@ -197,7 +187,7 @@ public class QuestUtil {
         if (!checkActiveQuest("Travel between worlds.")) {
             return;
         }
-        List<QuestWorld> worlds = new ArrayList<QuestWorld>();
+        List<QuestWorld> worlds = new ArrayList<>();
         final QuestController qCtrl = FModel.getQuest();
 
         for (QuestWorld qw : FModel.getWorlds()) {
@@ -362,7 +352,7 @@ public class QuestUtil {
      * - Current deck info<br>
      * - "Challenge In" info<br>
      * 
-     * @param view0 {@link forge.screens.home.quest.IVQuestStats}
+     * @param view0 {@link forge.quest.IVQuestStats}
      */
     public static void updateQuestView(final IVQuestStats view0) {
         final QuestController qCtrl = FModel.getQuest();
@@ -565,7 +555,7 @@ public class QuestUtil {
             aiStart.setCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
         }
 
-        List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
+        List<RegisteredPlayer> starter = new ArrayList<>();
         starter.add(humanStart.setPlayer(GamePlayerUtil.getQuestPlayer()));
 
         LobbyPlayer aiPlayer = GamePlayerUtil.createAiPlayer(event.getOpponent() == null ? event.getTitle() : event.getOpponent());
@@ -579,7 +569,7 @@ public class QuestUtil {
         boolean useAnte = FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE);
         boolean matchAnteRarity = FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_MATCH_RARITY);
         if(forceAnte != null)
-            useAnte = forceAnte.booleanValue();
+            useAnte = forceAnte;
         GameRules rules = new GameRules(GameType.Quest);
         rules.setPlayForAnte(useAnte);
         rules.setMatchAnteRarity(matchAnteRarity);
@@ -610,7 +600,7 @@ public class QuestUtil {
 
     /**
      * Checks to see if a game can be started and displays relevant dialogues.
-     * @return
+     * @return True if a game can be started.
      */
     public static boolean canStartGame() {
         if (!checkActiveQuest("Start a duel.") || null == event) {
@@ -639,17 +629,17 @@ public class QuestUtil {
     /** Duplicate in DeckEditorQuestMenu and
      * probably elsewhere...can streamline at some point
      * (probably shouldn't be here).
-     * 
+     *
      * @param in &emsp; {@link java.lang.String}
      * @return {@link java.lang.String}
      */
     public static String cleanString(final String in) {
-        final StringBuffer out = new StringBuffer();
+        final StringBuilder out = new StringBuilder();
         final char[] c = in.toCharArray();
 
-        for (int i = 0; (i < c.length) && (i < 20); i++) {
-            if (Character.isLetterOrDigit(c[i]) || (c[i] == '-') || (c[i] == '_') || (c[i] == ' ')) {
-                out.append(c[i]);
+        for (char aC : c) {
+            if (Character.isLetterOrDigit(aC) || (aC == '-') || (aC == '_') || (aC == ' ')) {
+                out.append(aC);
             }
         }
 
