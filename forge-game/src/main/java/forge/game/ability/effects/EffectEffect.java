@@ -52,6 +52,7 @@ public class EffectEffect extends SpellAbilityEffect {
         String effectRemembered = null;
         String effectImprinted = null;
         Player ownerEff = null;
+        boolean imprintOnHost = false;
 
         if (sa.hasParam("Abilities")) {
             effectAbilities = sa.getParam("Abilities").split(",");
@@ -85,7 +86,6 @@ public class EffectEffect extends SpellAbilityEffect {
             effectImprinted = sa.getParam("ImprintCards");
         }
 
-        // Effect eff = new Effect();
         String name = sa.getParam("Name");
         if (name == null) {
             name = sa.getHostCard().getName() + "'s Effect";
@@ -97,8 +97,12 @@ public class EffectEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("EffectOwner")) {
-            List<Player> effectOwner = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("EffectOwner"), sa);
+            final List<Player> effectOwner = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("EffectOwner"), sa);
             ownerEff = effectOwner.get(0);
+        }
+
+        if (sa.hasParam("ImprintOnHost")) {
+            imprintOnHost = true;
         }
 
         final Player controller = sa.hasParam("EffectOwner") ? ownerEff : sa.getActivatingPlayer();
@@ -111,8 +115,6 @@ public class EffectEffect extends SpellAbilityEffect {
         eff.setColor(hostCard.getColor());
         eff.setImmutable(true);
         eff.setEffectSource(hostCard);
-
-        final Card e = eff;
 
         // Grant SVars first in order to give references to granted abilities
         if (effectSVars != null) {
@@ -211,7 +213,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
                 @Override
                 public void run() {
-                    game.getAction().exile(e);
+                    game.getAction().exile(eff);
                 }
             };
 
@@ -231,6 +233,10 @@ public class EffectEffect extends SpellAbilityEffect {
             else if (duration.equals("UntilEndOfCombat")) {
                 game.getEndOfCombat().addUntil(endEffect);
             }
+        }
+
+        if (imprintOnHost) {
+            hostCard.addImprintedCard(eff);
         }
 
         // TODO: Add targeting to the effect so it knows who it's dealing with

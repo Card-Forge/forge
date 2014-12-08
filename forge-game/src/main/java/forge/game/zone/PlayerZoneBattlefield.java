@@ -30,6 +30,7 @@ import forge.game.trigger.ZCTrigger;
  * </p>
  * 
  * @author Forge
+
  * @version $Id$
  */
 public class PlayerZoneBattlefield extends PlayerZone {
@@ -53,20 +54,13 @@ public class PlayerZoneBattlefield extends PlayerZone {
         super.add(c, position);
 
         if (trigger) {
-            if (c.hasKeyword("Hideaway")) {
-                // it enters the battlefield this way, and should not fire
-                // triggers
-                c.setTapped(true);
-            }
-            else {
-                // ETBTapped static abilities
-                for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
-                    for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                        if (stAb.applyAbility("ETBTapped", c)) {
-                            // it enters the battlefield this way, and should
-                            // not fire triggers
-                            c.setTapped(true);
-                        }
+            // ETBTapped static abilities
+            for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+                for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                    if (stAb.applyAbility("ETBTapped", c)) {
+                        // it enters the battlefield this way, and should
+                        // not fire triggers
+                        c.setTapped(true);
                     }
                 }
             }
