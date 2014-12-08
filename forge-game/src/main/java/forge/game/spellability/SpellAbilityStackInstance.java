@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * <p>
@@ -86,6 +87,7 @@ public class SpellAbilityStackInstance implements IIdentifiable {
 
     private final List<ZoneType> zonesToOpen;
     private final Map<Player, Object> playersWithValidTargets;
+    private final Set<Card> oncePerEffectTriggers = new HashSet<Card>();
 
     private final StackItemView view;
 
@@ -234,6 +236,10 @@ public class SpellAbilityStackInstance implements IIdentifiable {
 
     public final Map<Player, Object> getPlayersWithValidTargets() {
         return playersWithValidTargets;
+    }
+
+    public final boolean attemptOncePerEffectTrigger(Card hostCard) {
+        return oncePerEffectTriggers.add(hostCard);
     }
 
     public void updateTarget(TargetChoices target) {

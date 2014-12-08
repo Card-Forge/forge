@@ -15627,6 +15627,7 @@ forge-gui/res/cardsfolder/y/yuan_shao_the_indecisive.txt svneol=native#text/plai
 forge-gui/res/cardsfolder/y/yuan_shaos_infantry.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/y/yuki_onna.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/y/yukora_the_prisoner.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/z/sidisi_brood_tyrant.txt -text
 forge-gui/res/cardsfolder/z/zameck_guildmage.txt -text
 forge-gui/res/cardsfolder/z/zanam_djinn.txt -text
 forge-gui/res/cardsfolder/z/zanikev_locust.txt -text

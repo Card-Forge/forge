@@ -229,6 +229,7 @@ public class GameAction {
         runParams.put("Card", lastKnownInfo);
         runParams.put("Origin", zoneFrom != null ? zoneFrom.getZoneType().name() : null);
         runParams.put("Destination", zoneTo.getZoneType().name());
+        runParams.put("SpellAbilityStackInstance", game.stack.peek());
         game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, false);
         if (zoneFrom != null && zoneFrom.is(ZoneType.Battlefield)) {
             final HashMap<String, Object> runParams2 = new HashMap<String, Object>();
