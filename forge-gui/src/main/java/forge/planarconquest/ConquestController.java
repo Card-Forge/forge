@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import com.google.common.base.Predicate;
+
 import forge.FThreads;
 import forge.LobbyPlayer;
 import forge.card.CardRarity;
@@ -122,6 +123,15 @@ public class ConquestController {
                 }
                 //perform all commander actions
                 for (ConquestCommander commander : commanders) {
+                    if (commandCenter.setSelectedCommander(commander)) {
+                        try {
+                            //sleep if selection changed so user can see it take effect
+                            Thread.sleep(500);
+                        }
+                        catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     switch (commander.getCurrentDayAction()) {
                     case Attack1:
                         playGame(commander, 0, false, commandCenter);
@@ -136,10 +146,10 @@ public class ConquestController {
                         playGame(commander, Aggregates.randomInt(0, 2), true, commandCenter); //defend against random opponent
                         break;
                     case Recruit:
-                        if (!recruit(commander)) { return; }
+                        recruit(commander);
                         break;
                     case Study:
-                        if (!study(commander)) { return; }
+                        study(commander);
                         break;
                     case Undeploy:
                         model.getCurrentPlaneData().getRegionData(commander.getDeployedRegion()).setDeployedCommander(null);
@@ -147,15 +157,19 @@ public class ConquestController {
                     default: //remaining actions don't need to do anything more
                         break;
                     }
+                    commander.setCurrentDayAction(null);
+                    try {
+                        Thread.sleep(500);
+                    }
+                    catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
-                //increment day and reset actions, then update UI for new day
+                //update UI for new day
                 FThreads.invokeInEdtLater(new Runnable() {
                     @Override
                     public void run() {
                         model.incrementDay();
-                        for (ConquestCommander commander : commanders) {
-                            commander.setCurrentDayAction(null);
-                        }
                         commandCenter.updateCurrentDay();
                     }
                 });

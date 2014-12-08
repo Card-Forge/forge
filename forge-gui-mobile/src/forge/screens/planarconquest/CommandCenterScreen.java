@@ -86,7 +86,27 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
     public void updateCurrentDay() {
         lblCurrentPlane.setText("Plane - " + model.getCurrentPlane().getName());
         btnEndDay.setText("End Day " + model.getDay());
-        regionDisplay.onRegionChanged(); //simulate region change when day changes to ensure everything is updated
+
+        commanderRow.selectedIndex = 0; //select first commander at the beginning of each day
+        ConquestCommander commander = commanderRow.panels[0].commander;
+        if (commander != null && commander.getDeployedRegion() != null) {
+            model.setCurrentRegion(commander.getDeployedRegion());
+        }
+        regionDisplay.onRegionChanged(); //simulate region change when day changes to ensure everything is updated, even if region didn't change
+    }
+
+    @Override
+    public boolean setSelectedCommander(ConquestCommander commander) {
+        int newIndex = model.getCurrentPlaneData().getCommanders().indexOf(commander);
+        boolean changed = commanderRow.selectedIndex != newIndex; 
+        commanderRow.selectedIndex = newIndex;
+        if (commander.getDeployedRegion() != null) {
+            if (model.setCurrentRegion(commander.getDeployedRegion())) {
+                regionDisplay.onRegionChanged();
+                changed = true; //if region changed, always return true
+            }
+        }
+        return changed;
     }
 
     @Override
@@ -267,11 +287,11 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
                     if (model.setCurrentRegion(commander.getDeployedRegion())) {
                         regionDisplay.onRegionChanged();
                     }
-                    else if (commander.getCurrentDayAction() != ConquestAction.Undeploy) {
-                        //if already on commander's region, change action to undeploy
+                    else if (commander.getCurrentDayAction() == null) {
+                        //if already on commander's region, change action to undeploy if no action currently set
                         commander.setCurrentDayAction(ConquestAction.Undeploy);
                     }
-                    else {
+                    else if (commander.getCurrentDayAction() == ConquestAction.Undeploy) {
                         commander.setCurrentDayAction(null);
                     }
                 }
