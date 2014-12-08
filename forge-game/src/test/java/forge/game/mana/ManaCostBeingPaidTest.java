@@ -11,7 +11,7 @@ public class ManaCostBeingPaidTest extends TestCase {
         runConvokeTest("1 W W", new byte[] { WHITE, COLORLESS, WHITE }, new String[] {"{1}{W}{W}", "{1}{W}", "{W}"});
         runConvokeTest("1 W W", new byte[] { COLORLESS, WHITE, WHITE }, new String[] {"{1}{W}{W}", "{W}{W}", "{W}"});
         runConvokeTest("1 W W", new byte[] { GREEN, WHITE, WHITE }, new String[] {"{1}{W}{W}", "{W}{W}", "{W}"});
-        runConvokeTest("1 G W", new byte[] { GREEN, RED, WHITE }, new String[] {"{1}{G}{W}", "{1}{W}", "{W}"});
+        runConvokeTest("1 W G", new byte[] { GREEN, RED, WHITE }, new String[] {"{1}{W}{G}", "{1}{W}", "{W}"});
     }
 
     private void runConvokeTest(String initialCost, byte[] colorsToPay, String[] expectedRemainder) {

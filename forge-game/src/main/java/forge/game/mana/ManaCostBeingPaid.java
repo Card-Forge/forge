@@ -476,33 +476,33 @@ public class ManaCostBeingPaid {
 
         int nGeneric = getColorlessManaAmount();
         if (nGeneric > 0) {
-        	if (nGeneric <= 20) {
+            if (nGeneric <= 20) {
                 sb.append("{" + nGeneric + "}");
-        	}
-        	else { //if no mana symbol exists for colorless amount, use combination of symbols for each digit
-        		String genericStr = String.valueOf(nGeneric);
-        		for (int i = 0; i < genericStr.length(); i++) {
-        			sb.append("{" + genericStr.charAt(i) + "}");
-        		}
-        	}
+            }
+            else { //if no mana symbol exists for colorless amount, use combination of symbols for each digit
+                String genericStr = String.valueOf(nGeneric);
+                for (int i = 0; i < genericStr.length(); i++) {
+                    sb.append("{" + genericStr.charAt(i) + "}");
+                }
+            }
         }
 
-        for (Entry<ManaCostShard, ShardCount> s : unpaidShards.entrySet()) {
-            if (s.getKey() == ManaCostShard.COLORLESS) {
+        // Sort the keys to get a deterministic ordering.
+        ArrayList<ManaCostShard> shards = new ArrayList<ManaCostShard>(unpaidShards.keySet());
+        Collections.sort(shards);
+        for (ManaCostShard shard : shards) {
+            if (shard == ManaCostShard.COLORLESS) {
                 continue;
             }
-            for (int i = 0; i < s.getValue().totalCount; i++) {
-                sb.append(s.getKey().toString());
+            
+            final String str = shard.toString();
+            final int count = unpaidShards.get(shard).totalCount;
+            for (int i = 0; i < count; i++) {
+                sb.append(str);
             }
         }
 
-        final String str = sb.toString();
-
-        if (str.equals("")) {
-            return "0";
-        }
-
-        return str;
+        return sb.length() == 0 ? "0"  : sb.toString();
     }
 
     /** {@inheritDoc} */
