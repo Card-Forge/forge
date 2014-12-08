@@ -18,24 +18,21 @@
 package forge.planarconquest;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
 
 import com.google.common.base.Predicate;
-import com.google.common.eventbus.Subscribe;
-
 import forge.FThreads;
 import forge.LobbyPlayer;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
-import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.GameView;
 import forge.game.Match;
-import forge.game.event.GameEvent;
 import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IButton;
 import forge.interfaces.IWinLoseView;
@@ -57,7 +54,6 @@ public class ConquestController {
     private static final int STARTING_LIFE = 30;
 
     private ConquestData model;
-    private CardPool cardPool;
     private transient IStorage<Deck> decks;
     private transient GameRunner gameRunner;
 
@@ -72,17 +68,12 @@ public class ConquestController {
         return model;
     }
 
-    public CardPool getCardPool() {
-        return cardPool;
-    }
-
     public IStorage<Deck> getDecks() {
         return decks;
     }
 
     public void load(final ConquestData model0) {
         model = model0;
-        cardPool = model == null ? null : model.getCollection();
         decks = model == null ? null : model.getDeckStorage();
     }
 
@@ -92,9 +83,28 @@ public class ConquestController {
         }
     }
 
-    @Subscribe
-    public void receiveGameEvent(GameEvent ev) { // Receives events only during planar conquest games
+    public void unlockCommander() {
+        ConquestPlaneData planeData = model.getCurrentPlaneData();
+        List<PaperCard> options = new ArrayList<PaperCard>();
+        for (PaperCard pc : model.getCurrentPlane().getCommanders()) {
+            if (planeData.getWinsAgainst(pc) > 0 && !planeData.hasCommander(pc)) {
+                options.add(pc); //only add commanders that you've beaten and don't already have on your roster
+            }
+        }
 
+        if (options.isEmpty()) {
+            SOptionPane.showMessageDialog("No defeated foes are available to join your cause");
+            return;
+        }
+
+        Collections.sort(options);
+
+        PaperCard commander = SGuiChoose.oneOrNone("Select a defeated foe to join your cause", options);
+        if (commander == null) { return; }
+
+        List<PaperCard> newCards = model.addCommander(commander);
+        BoosterUtils.sort(newCards);
+        SGuiChoose.reveal(commander.getName() + " brought along " + Lang.nounWithAmount(newCards.size(), "new card"), newCards);
     }
 
     public void endDay(final IVCommandCenter commandCenter) {
@@ -290,11 +300,11 @@ public class ConquestController {
 
     public void onGameFinished(final GameView game) {
         if (game.isMatchWonBy(getConquestPlayer())) {
-            model.addWin();
+            model.addWin(gameRunner.opponent);
             gameRunner.wonGame = true;
         }
         else {
-            model.addLoss();
+            model.addLoss(gameRunner.opponent);
         }
 
         FModel.getConquest().save();
@@ -502,7 +512,7 @@ public class ConquestController {
             }
         }
 
-        model.getCollection().add(rewards);
+        model.getCollection().addAll(rewards);
 
         String message = messagePrefix;
         if (messageSuffix != null) {
@@ -576,7 +586,7 @@ public class ConquestController {
         }
 
         BoosterUtils.sort(rewards);
-        model.getCollection().add(rewards);
+        model.getCollection().addAll(rewards);
         view.showCards("Booster contained " + count + " new card" + (count != 1 ? "s" : ""), rewards);
     }
 

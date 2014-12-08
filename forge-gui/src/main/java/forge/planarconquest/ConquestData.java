@@ -17,14 +17,18 @@
  */
 package forge.planarconquest;
 
-import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.planarconquest.ConquestPlane.Region;
 import forge.properties.ForgeConstants;
+
 import java.io.File;
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map.Entry;
 
 public final class ConquestData {
     /** Holds the latest version of the Conquest Data. */
@@ -45,7 +49,7 @@ public final class ConquestData {
     private int currentRegionIndex;
     private EnumMap<ConquestPlane, ConquestPlaneData> planeDataMap = new EnumMap<ConquestPlane, ConquestPlaneData>(ConquestPlane.class);
 
-    private final CardPool collection = new CardPool();
+    private final HashSet<PaperCard> collection = new HashSet<PaperCard>();
     private final HashMap<String, Deck> decks = new HashMap<String, Deck>();
 
     public ConquestData() { //needed for XML serialization
@@ -59,12 +63,25 @@ public final class ConquestData {
         addCommander(startingCommander0);
     }
 
-    private void addCommander(PaperCard card) {
+    public List<PaperCard> addCommander(PaperCard card) {
         ConquestCommander commander = new ConquestCommander(card, currentPlane.getCardPool(), false);
         getCurrentPlaneData().getCommanders().add(commander);
         decks.put(commander.getDeck().getName(), commander.getDeck());
-        collection.addAll(commander.getDeck().getMain());
-        collection.add(card);
+
+        List<PaperCard> newCards = new ArrayList<PaperCard>();
+        for (Entry<PaperCard, Integer> entry : commander.getDeck().getMain()) {
+            addCard(entry.getKey(), newCards);
+        }
+        addCard(card, newCards);
+        return newCards;
+    }
+
+    private void addCard(PaperCard pc, List<PaperCard> newCards) {
+        if (pc.getRules().getType().isBasicLand()) { return; } //ignore basic lands
+
+        if (collection.add(pc)) {
+            newCards.add(pc);
+        }
     }
 
     public String getName() {
@@ -125,7 +142,7 @@ public final class ConquestData {
         }
     }
 
-    public CardPool getCollection() {
+    public HashSet<PaperCard> getCollection() {
         return collection;
     }
 
@@ -133,20 +150,20 @@ public final class ConquestData {
         return new ConquestDeckMap(decks);
     }
 
-    public void addWin() {
+    public void addWin(ConquestCommander opponent) {
         wins++;
         winStreakCurrent++;
-        getCurrentPlaneData().addWin();
+        getCurrentPlaneData().addWin(opponent);
 
         if (winStreakCurrent > winStreakBest) {
             winStreakBest = winStreakCurrent;
         }
     }
 
-    public void addLoss() {
+    public void addLoss(ConquestCommander opponent) {
         losses++;
         winStreakCurrent = 0;
-        getCurrentPlaneData().addLoss();
+        getCurrentPlaneData().addLoss(opponent);
     }
 
     public int getWins() {

@@ -270,7 +270,7 @@ public class LoadConquestScreen extends FScreen {
                     float iconSize = h + Utils.scale(1);
                     float iconOffset = SettingsScreen.SETTING_PADDING - Utils.scale(2);
 
-                    String cards = String.valueOf(value.getCollection().countAll());
+                    String cards = String.valueOf(value.getCollection().size());
                     font = FSkinFont.get(12);
                     float cardsWidth = font.getBounds(cards).width + iconSize + SettingsScreen.SETTING_PADDING;
                     g.drawImage(FSkinImage.HAND, x + w - cardsWidth + iconOffset, y - SettingsScreen.SETTING_PADDING, iconSize, iconSize);

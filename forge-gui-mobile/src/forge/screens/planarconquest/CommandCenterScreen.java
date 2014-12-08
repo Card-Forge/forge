@@ -6,6 +6,7 @@ import java.util.List;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
+import forge.FThreads;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkin;
@@ -268,6 +269,14 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
                     }
                 }
             }
+            else if (model.getCurrentPlaneData().getWins() >= panel.getWinsToUnlock()) {
+                FThreads.invokeInBackgroundThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        FModel.getConquest().unlockCommander();
+                    }
+                });
+            }
         }
         else if (index >= -regionDisplay.opponents.length) { //opponent panel
             ConquestCommander commander = regionDisplay.deployedCommander.commander;
@@ -484,19 +493,7 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
                 }
             }
             else if (index > 0) {
-                CQPref unlockPref;
-                switch (index) {
-                case 1:
-                    unlockPref = CQPref.WINS_TO_UNLOCK_COMMANDER_2;
-                    break;
-                case 2:
-                    unlockPref = CQPref.WINS_TO_UNLOCK_COMMANDER_3;
-                    break;
-                default:
-                    unlockPref = CQPref.WINS_TO_UNLOCK_COMMANDER_4;
-                    break;
-                }
-                int winsToUnlock = FModel.getConquestPreferences().getPrefInt(unlockPref);
+                int winsToUnlock = getWinsToUnlock();
                 if (planeData.getWins() < winsToUnlock) {
                     g.setAlphaComposite(0.25f);
                     float imageSize = w * 0.75f;
@@ -512,6 +509,22 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
             }
 
             g.drawRect(borderThickness, color, -borderThickness, -borderThickness, getWidth() + 2 * borderThickness, getHeight() + 2 * borderThickness);
+        }
+
+        private int getWinsToUnlock() {
+            CQPref unlockPref;
+            switch (index) {
+            case 1:
+                unlockPref = CQPref.WINS_TO_UNLOCK_COMMANDER_2;
+                break;
+            case 2:
+                unlockPref = CQPref.WINS_TO_UNLOCK_COMMANDER_3;
+                break;
+            default:
+                unlockPref = CQPref.WINS_TO_UNLOCK_COMMANDER_4;
+                break;
+            }
+            return FModel.getConquestPreferences().getPrefInt(unlockPref);
         }
     }
 
