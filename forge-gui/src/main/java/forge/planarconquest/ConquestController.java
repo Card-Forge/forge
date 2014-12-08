@@ -275,24 +275,10 @@ public class ConquestController {
                         awardBooster(view);
                     }
                     else {
-                        List<PaperCard> cards = new ArrayList<PaperCard>();
-                        for (Entry<PaperCard, Integer> entry : gameRunner.opponent.getDeck().getMain()) {
-                            PaperCard c = entry.getKey();
-                            if (!c.getRules().getType().isBasicLand() && !getModel().getCollection().contains(c)) {
-                                cards.add(c);
-                            }
+                        if (!awardOpponentsCard(view)) {
+                            SOptionPane.showMessageDialog("Opponent had no new cards, so you can open a random booster pack instead.");
+                            awardBooster(view);
                         }
-                        if (cards.isEmpty()) { //if there are no new cards, show all cards
-                            for (Entry<PaperCard, Integer> entry : gameRunner.opponent.getDeck().getMain()) {
-                                PaperCard c = entry.getKey();
-                                if (!c.getRules().getType().isBasicLand()) {
-                                    cards.add(c);
-                                }
-                            }
-                        }
-                        BoosterUtils.sort(cards);
-                        PaperCard card = SGuiChoose.one("Choose a card from your opponent's deck", cards);
-                        model.getCollection().add(card);
                     }
                 }
             });
@@ -518,7 +504,10 @@ public class ConquestController {
 
         model.getCollection().add(rewards);
 
-        String message = messagePrefix + " " + Lang.nounWithAmount(rewards.size(), messageSuffix);
+        String message = messagePrefix;
+        if (messageSuffix != null) {
+            message += " " + Lang.nounWithAmount(rewards.size(), messageSuffix);
+        }
         if (view == null) {
             SGuiChoose.reveal(message, rewards);
         }
@@ -531,14 +520,12 @@ public class ConquestController {
     private void awardBooster(final IWinLoseView<? extends IButton> view) {
         Iterable<PaperCard> cardPool = gameRunner.commander.getDeployedRegion().getCardPool().getAllCards();
 
-        int newCommonCount = 0;
-        int newUncommonCount = 0;
-        int newRareCount = 0;
-        int newMythicCount = 0;
-        List<PaperCard> commons = new ArrayList<PaperCard>();
-        List<PaperCard> uncommons = new ArrayList<PaperCard>();
-        List<PaperCard> rares = new ArrayList<PaperCard>();
-        List<PaperCard> mythics = new ArrayList<PaperCard>();
+        ConquestPreferences prefs = FModel.getConquestPreferences();
+
+        BoosterPool commons = new BoosterPool(prefs.getPrefInt(CQPref.BOOSTER_COMMON_REROLL));
+        BoosterPool uncommons = new BoosterPool(prefs.getPrefInt(CQPref.BOOSTER_UNCOMMON_REROLL));
+        BoosterPool rares = new BoosterPool(prefs.getPrefInt(CQPref.BOOSTER_RARE_REROLL));
+        BoosterPool mythics = new BoosterPool(prefs.getPrefInt(CQPref.BOOSTER_MYTHIC_REROLL));
 
         for (PaperCard c : cardPool) {
             switch (c.getRarity()) {
@@ -559,27 +546,55 @@ public class ConquestController {
             }
         }
 
-        ConquestPreferences prefs = FModel.getConquestPreferences();
-
+        List<PaperCard> rewards = new ArrayList<PaperCard>();
         int boostersPerMythic = prefs.getPrefInt(CQPref.BOOSTERS_PER_MYTHIC);
         int count = prefs.getPrefInt(CQPref.BOOSTER_RARES);
         for (int i = 0; i < count; i++) {
-            if (Aggregates.randomInt(1, boostersPerMythic) == 1) {
-                
+            if (mythics.isEmpty() || Aggregates.randomInt(1, boostersPerMythic) > 1) {
+                rares.rewardCard(rewards);
             }
             else {
-                
+                mythics.rewardCard(rewards);
             }
         }
 
-        int uncommonCount = prefs.getPrefInt(CQPref.BOOSTER_UNCOMMONS);
+        count = prefs.getPrefInt(CQPref.BOOSTER_UNCOMMONS);
+        for (int i = 0; i < count; i++) {
+            uncommons.rewardCard(rewards);
+        }
 
         count = prefs.getPrefInt(CQPref.BOOSTER_COMMONS);
-        int commonReroll = prefs.getPrefInt(CQPref.BOOSTER_COMMON_REROLL);
-        int uncommonReroll = prefs.getPrefInt(CQPref.BOOSTER_COMMON_REROLL);
-        int rareReroll = prefs.getPrefInt(CQPref.BOOSTER_COMMON_REROLL);
-        int mythicReroll = prefs.getPrefInt(CQPref.BOOSTER_MYTHIC_REROLL);
-        
+        for (int i = 0; i < count; i++) {
+            commons.rewardCard(rewards);
+        }
+
+        count = rewards.size();
+        if (count == 0) {
+            //if no new cards in booster, pretend it contained a random card
+            awardNewCards(cardPool, "Booster contained ", "new card", null, view, null, 1);
+            return;
+        }
+
+        BoosterUtils.sort(rewards);
+        model.getCollection().add(rewards);
+        view.showCards("Booster contained " + count + " new card" + (count != 1 ? "s" : ""), rewards);
+    }
+
+    private boolean awardOpponentsCard(IWinLoseView<? extends IButton> view) {
+        List<PaperCard> cards = new ArrayList<PaperCard>();
+        for (Entry<PaperCard, Integer> entry : gameRunner.opponent.getDeck().getMain()) {
+            PaperCard c = entry.getKey();
+            if (!c.getRules().getType().isBasicLand() && !getModel().getCollection().contains(c)) {
+                cards.add(c);
+            }
+        }
+
+        if (cards.isEmpty()) { return false; }
+
+        BoosterUtils.sort(cards);
+        PaperCard card = SGuiChoose.one("Choose a card from your opponent's deck", cards);
+        model.getCollection().add(card);
+        return true;
     }
 
     private class BoosterPool {
@@ -602,20 +617,27 @@ public class ConquestController {
             cards.add(c);
         }
 
-        private PaperCard rewardCard() {
+        private void rewardCard(List<PaperCard> rewards) {
+            if (newCount == 0) {
+                return;
+            }
+
             PaperCard c;
             while (true) {
                 int index = Aggregates.randomInt(0, cards.size() - 1);
                 c = cards.get(index);
 
-                //break out if new, if no new remaining, or if reroll chance fails
-                if (newCount == 0 || !model.getCollection().contains(c) ||
-                        Aggregates.randomInt(1, 100) > rerollChance) {
-                    break;
+                if (!model.getCollection().contains(c)) {
+                    newCount--;
+                    cards.remove(c);
+                    rewards.add(c);
+                    return; //return if new
+                }
+
+                if (Aggregates.randomInt(1, 100) > rerollChance) {
+                    return; //return if reroll chance fails
                 }
             }
-            cards.remove(c);
-            return c;
         }
     }
 }
