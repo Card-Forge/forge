@@ -1339,6 +1339,9 @@ public class Player extends GameEntity implements Comparable<Player> {
                 milled.add(game.getAction().moveTo(destination, lib.getFirst()));
             }
         }
+        // Reveal the milled cards, so players don't have to manually inspect the
+        // graveyard to figure out which ones were milled.
+        game.getAction().reveal(milled, this, false);
         return milled;
     }
 
