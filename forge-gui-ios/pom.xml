@@ -1,0 +1,85 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <properties>
+        <maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
+        <packaging.type>jar</packaging.type>
+        <build.min.memory>-Xms128m</build.min.memory>
+        <build.max.memory>-Xmx2048m</build.max.memory>
+        <alpha-version>1.5.32.005</alpha-version>
+    </properties>
+
+    <parent>
+        <artifactId>forge</artifactId>
+        <groupId>forge</groupId>
+        <version>1.5.32-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>forge-gui-ios</artifactId>
+    <packaging>${packaging.type}</packaging>
+    <name>Forge iOS</name>
+
+    <build>
+        <sourceDirectory>src</sourceDirectory>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>filters</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <finalName>forge-ios-${alpha-version}</finalName>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>forge</groupId>
+            <artifactId>forge-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>forge</groupId>
+            <artifactId>forge-game</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>forge</groupId>
+            <artifactId>forge-ai</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>forge</groupId>
+            <artifactId>forge-net</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>forge</groupId>
+            <artifactId>forge-gui</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>forge</groupId>
+            <artifactId>forge-gui-mobile</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode</groupId>
+            <artifactId>minlog</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-backend-robovm</artifactId>
+            <version>1.4.1</version>
+        </dependency>
+    </dependencies>
+</project>

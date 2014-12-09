@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>forge-gui-ios</name>
+	<comment></comment>
+	<projects>
+		<project>forge</project>
+		<project>forge-ai</project>
+		<project>forge-core</project>
+		<project>forge-game</project>
+		<project>forge-gui</project>
+		<project>forge-gui-mobile</project>
+		<project>forge-net</project>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.robovm.eclipse.RoboVMClassBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.m2e.core.maven2Builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.m2e.core.maven2Nature</nature>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.robovm.eclipse.RoboVMNature</nature>
+	</natures>
+</projectDescription>
