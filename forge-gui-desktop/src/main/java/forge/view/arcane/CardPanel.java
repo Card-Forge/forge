@@ -325,7 +325,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         displayCardNameOverlay(showText && canShow && showCardNameOverlay(), imgSize, imgPos);
         displayPTOverlay(showText && (canShow || card.isFaceDown()) && showCardPowerOverlay(), imgSize, imgPos);
-        displayCardIdOverlay(showText && canShow && showCardIdOverlay(), imgSize, imgPos);
+        displayCardIdOverlay(showText && showCardIdOverlay(), imgSize, imgPos);
     }
 
     private void displayCardIdOverlay(boolean isVisible, Dimension imgSize, Point imgPos) {
@@ -495,11 +495,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         // Card name overlay
         titleText.setText(card.getCurrentState().getName());
 
-        int damage = card.getDamage();
+        final int damage = card.getDamage();
         damageText.setText(damage > 0 ? "\u00BB " + String.valueOf(damage) + " \u00AB" : "");
 
         // Card Id overlay
-        cardIdText.setText(Integer.toString(card.getId()));
+        cardIdText.setText(card.getCurrentState().getDisplayId());
     } 
 
     public final void updatePTOverlay() {

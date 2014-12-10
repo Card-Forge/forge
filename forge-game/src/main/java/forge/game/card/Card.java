@@ -367,8 +367,11 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         if (updateView) {
             view.updateState(this);
 
-            Game game = getGame();
+            final Game game = getGame();
             if (game != null) {
+                if (state == CardStateName.FaceDown) {
+                    view.updateHiddenId(game.nextHiddenCardId());
+                }
                 game.fireEvent(new GameEventCardStatsChanged(this)); //ensure stats updated for new characteristics
             }
         }
@@ -443,6 +446,10 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
             return result;
         }
         return false;
+    }
+
+    public int getHiddenId() {
+        return view.getHiddenId();
     }
 
     public void updateAttackingForView() {

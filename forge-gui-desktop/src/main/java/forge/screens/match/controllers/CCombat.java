@@ -158,7 +158,7 @@ public enum CCombat implements ICDoc {
         }  else {
             sb.append(name);
         }
-        sb.append(" [").append(c.getId()).append("] ");
+        sb.append(" [").append(state.getDisplayId()).append("] ");
 
         return sb.toString();
     }

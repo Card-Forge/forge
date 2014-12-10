@@ -28,6 +28,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
@@ -130,14 +131,12 @@ public class Combat {
         return res;
     }
 
+    public final FCollectionView<Player> getDefendingPlayers() {
+        return new FCollection<Player>(Iterables.filter(attackableEntries, Player.class));
+    }
+
     public final CardCollection getDefendingPlaneswalkers() {
-        final CardCollection pwDefending = new CardCollection();
-        for (final GameEntity o : attackableEntries) {
-            if (o instanceof Card) {
-                pwDefending.add((Card) o);
-            }
-        }
-        return pwDefending;
+        return new CardCollection(Iterables.filter(attackableEntries, Card.class));
     }
 
     public final Map<Card, GameEntity> getAttackersAndDefenders() {

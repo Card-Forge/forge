@@ -195,8 +195,8 @@ public class CardDetailUtil {
     }
 
     public static String formatCardId(final CardStateView card) {
-        final int id = card.getCard().getId();
-        return id > 0 ? "[" + id + "]" : "";
+        final String id = card.getDisplayId();
+        return id.isEmpty() ? id : "[" + id + "]";
     }
 
     public static String composeCardText(final CardStateView state, final boolean canShow) {

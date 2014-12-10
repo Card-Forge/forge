@@ -55,6 +55,7 @@ public enum TrackableProperty {
     PairedWith(TrackableTypes.CardViewType),
     CurrentState(TrackableTypes.CardStateViewType, false), //can't respect freeze, otherwise card constructor can crash
     AlternateState(TrackableTypes.CardStateViewType),
+    HiddenId(TrackableTypes.IntegerType),
 
     //Card State
     Name(TrackableTypes.StringType),

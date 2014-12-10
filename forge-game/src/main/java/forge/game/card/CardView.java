@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.Iterables;
 
 import forge.ImageKeys;
@@ -27,7 +29,6 @@ import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.util.FCollectionView;
-
 
 public class CardView extends GameEntityView {
     public static CardView get(Card c) {
@@ -654,6 +655,17 @@ public class CardView extends GameEntityView {
         }
     }
 
+    public int getHiddenId() {
+        final Integer hiddenId = get(TrackableProperty.HiddenId);
+        if (hiddenId == null) {
+            return getId();
+        }
+        return hiddenId.intValue();
+    }
+    void updateHiddenId(final int hiddenId) {
+        set(TrackableProperty.HiddenId, hiddenId);
+    }
+
     @Override
     public String toString() {
         String name = getName();
@@ -664,11 +676,10 @@ public class CardView extends GameEntityView {
         if (name.isEmpty()) {
             CardStateView alternate = getAlternateState();
             if (alternate != null) {
-                return "Face-down card (" + getAlternateState().getName() + ")";
+                return "Face-down card (" + getId() + ", " + getAlternateState().getName() + ")";
             }
-            return "(" + getId() + ")";
         }
-        return name + " (" + getId() + ")";
+        return (name + " (" + getId() + ")").trim();
     }
 
     public class CardStateView extends TrackableObject {
@@ -679,9 +690,20 @@ public class CardView extends GameEntityView {
             state = state0;
         }
 
+        public String getDisplayId() {
+            if (getState().equals(CardStateName.FaceDown)) {
+                return "H" + getHiddenId();
+            }
+            final int id = getId();
+            if (id > 0) {
+                return String.valueOf(getId());
+            }
+            return StringUtils.EMPTY;
+        }
+
         @Override
         public String toString() {
-            return getName() + " (" + getId() + ")";
+            return (getName() + " (" + getDisplayId() + ")").trim();
         }
 
         public CardView getCard() {

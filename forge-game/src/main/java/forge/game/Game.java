@@ -548,10 +548,12 @@ public class Game {
         age = value;
     }
 
-    private int cardIdCounter;
+    private int cardIdCounter = 0, hiddenCardIdCounter = 0;
     public int nextCardId() {
-        // TODO Auto-generated method stub
         return ++cardIdCounter;
+    }
+    public int nextHiddenCardId() {
+        return ++hiddenCardIdCounter;
     }
 
     public boolean getDisableAutoYields() {
