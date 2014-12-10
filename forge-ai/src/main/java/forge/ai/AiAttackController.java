@@ -93,7 +93,7 @@ public class AiAttackController {
                 attackers.add(c);
             }
         }
-        this.blockers = this.getPossibleBlockers(oppList, this.attackers);
+        this.blockers = getPossibleBlockers(oppList, this.attackers);
     } // constructor
 
     public AiAttackController(final Player ai, Card attacker) {
@@ -105,7 +105,7 @@ public class AiAttackController {
         if (CombatUtil.canAttack(attacker, this.defendingOpponent)) {
             attackers.add(attacker);
         }
-        this.blockers = this.getPossibleBlockers(oppList, this.attackers);
+        this.blockers = getPossibleBlockers(oppList, this.attackers);
     } // overloaded constructor to evaluate single specified attacker
     
     public static List<Card> getOpponentCreatures(final Player defender) {
@@ -156,7 +156,7 @@ public class AiAttackController {
      *            a {@link forge.CardList} object.
      * @return a {@link forge.CardList} object.
      */
-    public final List<Card> sortAttackers(final List<Card> in) {
+    public final static List<Card> sortAttackers(final List<Card> in) {
         final List<Card> list = new ArrayList<Card>();
 
         // Cards with triggers should come first (for Battle Cry)
@@ -219,7 +219,7 @@ public class AiAttackController {
         return false;
     }
 
-    public final List<Card> getPossibleBlockers(final List<Card> blockers, final List<Card> attackers) {
+    public final static List<Card> getPossibleBlockers(final List<Card> blockers, final List<Card> attackers) {
         List<Card> possibleBlockers = new ArrayList<Card>(blockers);
         possibleBlockers = CardLists.filter(possibleBlockers, new Predicate<Card>() {
             @Override
@@ -230,7 +230,7 @@ public class AiAttackController {
         return possibleBlockers;
     }
 
-    public final boolean canBlockAnAttacker(final Card c, final List<Card> attackers) {
+    public final static boolean canBlockAnAttacker(final Card c, final List<Card> attackers) {
         final List<Card> attackerList = new ArrayList<Card>(attackers);
         if (!c.isCreature()) {
             return false;
@@ -277,7 +277,7 @@ public class AiAttackController {
         int blockersNeeded = this.oppList.size();
 
         // don't hold back creatures that can't block any of the human creatures
-        final List<Card> list = this.getPossibleBlockers(attackers, this.oppList);
+        final List<Card> list = getPossibleBlockers(attackers, this.oppList);
 
         //Calculate the amount of creatures necessary
         for (int i = 0; i < list.size(); i++) {
@@ -307,7 +307,7 @@ public class AiAttackController {
         // In addition, if the computer guesses it needs no blockers, make sure
         // that
         // it won't be surprised by Exalted
-        final int humanExaltedBonus = this.countExaltedBonus(opp);
+        final int humanExaltedBonus = countExaltedBonus(opp);
 
         if (humanExaltedBonus > 0) {
             final boolean finestHour = opp.isCardInPlay("Finest Hour");
@@ -316,7 +316,7 @@ public class AiAttackController {
                 //
                 // total attack = biggest creature + exalted, *2 if Rafiq is in
                 // play
-                int humanBasePower = this.getAttack(this.oppList.get(0)) + humanExaltedBonus;
+                int humanBasePower = getAttack(this.oppList.get(0)) + humanExaltedBonus;
                 if (finestHour) {
                     // For Finest Hour, one creature could attack and get the
                     // bonus TWICE
@@ -490,18 +490,6 @@ public class AiAttackController {
 
     final boolean LOG_AI_ATTACKS = false;
 
-
-    public final List<Player> getDefendingPlayers(Combat combat) {
-        final List<Player> defending = new ArrayList<Player>();
-        for (final GameEntity o : combat.getDefenders()) {
-            if (o instanceof Player) {
-                defending.add((Player) o);
-            }
-        }
-        return defending;
-    }
-
-    
     /**
      * <p>
      * Getter for the field <code>attackers</code>.
@@ -806,7 +794,7 @@ public class AiAttackController {
             System.out.println("Normal attack");
 
         attackersLeft = this.notNeededAsBlockers(ai, attackersLeft);
-        attackersLeft = this.sortAttackers(attackersLeft);
+        attackersLeft = sortAttackers(attackersLeft);
 
         if ( LOG_AI_ATTACKS )
             System.out.println("attackersLeft = " + attackersLeft);
@@ -849,7 +837,7 @@ public class AiAttackController {
                             }
                         }
                         if (!found) {
-                            defender = getDefendingPlayers(combat).get(0);
+                            defender = combat.getDefendingPlayers().get(0);
                         }
                     }
                 }
@@ -866,7 +854,7 @@ public class AiAttackController {
      *            a {@link forge.game.player.Player} object.
      * @return a int.
      */
-    public final int countExaltedBonus(final Player player) {
+    public final static int countExaltedBonus(final Player player) {
         int bonus = 0;
         for (Card c : player.getCardsIn(ZoneType.Battlefield)) {
             bonus += c.getKeywordAmount("Exalted");
@@ -884,7 +872,7 @@ public class AiAttackController {
      *            a {@link forge.game.card.Card} object.
      * @return a int.
      */
-    public final int getAttack(final Card c) {
+    public final static int getAttack(final Card c) {
         int n = c.getNetCombatDamage();
 
         if (c.hasKeyword("Double Strike")) {

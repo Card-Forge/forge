@@ -185,9 +185,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
     }
 
-    private PaperCard getFirstWithImage(Collection<PaperCard> cards) {
+    private static PaperCard getFirstWithImage(final Collection<PaperCard> cards) {
         //NOTE: this is written this way to avoid checking final card in list
-        Iterator<PaperCard> iterator = cards.iterator();
+        final Iterator<PaperCard> iterator = cards.iterator();
         PaperCard pc = iterator.next();
         while (iterator.hasNext()) {
             if (pc.hasImage()) {

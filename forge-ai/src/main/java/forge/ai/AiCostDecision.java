@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AiCostDecision extends CostDecisionMakerBase implements ICostVisitor<PaymentDecision> {
+public class AiCostDecision extends CostDecisionMakerBase {
     private final SpellAbility ability;
     private final Card source;
     
@@ -593,7 +593,7 @@ public class AiCostDecision extends CostDecisionMakerBase implements ICostVisito
 
     @Override
     public PaymentDecision visit(CostUnattach cost) {
-        Card cardToUnattach = cost.findCardToUnattach(source, (Player) player, ability);
+        final Card cardToUnattach = cost.findCardToUnattach(source, player, ability);
         if (cardToUnattach == null) {
             // We really shouldn't be able to get here if there's nothing to unattach
             return null;

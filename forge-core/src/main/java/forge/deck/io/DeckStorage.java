@@ -88,7 +88,7 @@ public class DeckStorage extends StorageReaderFolder<Deck> implements IItemSeria
         return result;
     }
 
-    private void adjustFileLocation(final File file, final Deck result) {
+    private static void adjustFileLocation(final File file, final Deck result) {
         if (result == null) {
             file.delete();
         } else {

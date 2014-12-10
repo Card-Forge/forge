@@ -248,7 +248,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
         return subtypes.contains(creatureType) || subtypes.contains("AllCreatureTypes");
     }
-    private String toMixedCase(final String s) {
+    private static String toMixedCase(final String s) {
         if (s.equals("")) {
             return s;
         }

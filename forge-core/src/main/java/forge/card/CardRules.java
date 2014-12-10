@@ -17,13 +17,13 @@
  */
 package forge.card;
 
+import java.util.StringTokenizer;
+
+import org.apache.commons.lang3.StringUtils;
+
 import forge.card.mana.IParserManaCost;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.List;
-import java.util.StringTokenizer;
 
 /**
  * A collection of methods containing full
@@ -65,7 +65,7 @@ public final class CardRules implements ICardCharacteristics {
         colorIdentity = newRules.colorIdentity;
     }
 
-    private byte calculateColorIdentity(ICardFace face) {
+    private static byte calculateColorIdentity(final ICardFace face) {
         byte res = face.getColor().getColor();
         boolean isReminder = false;
         boolean isSymbol = false;
@@ -154,7 +154,7 @@ public final class CardRules implements ICardCharacteristics {
         }
     }
 
-    private boolean canCastFace(ICardFace face, byte colorCode) {
+    private static boolean canCastFace(final ICardFace face, final byte colorCode) {
         if (face.getManaCost().isNoCost()) {
             //if card face has no cost, assume castable only by mana of its defined color
             return face.getColor().hasNoColorsExcept(colorCode);
@@ -213,22 +213,6 @@ public final class CardRules implements ICardCharacteristics {
     private String dlUrlOtherSide;
     public String getPictureUrl(boolean backface ) { return backface ? dlUrlOtherSide : dlUrl; }
     public void setDlUrls(String[] dlUrls) { this.dlUrl = dlUrls[0]; this.dlUrlOtherSide = dlUrls[1]; }
-
-    public final List<String> getReplacements() {
-        return null;
-    }
-
-    public final List<String> getTriggers() {
-        return null;
-    }
-
-    public final List<String> getStaticAbilities() {
-        return null;
-    }
-
-    public final List<String> getAbilities() {
-        return null;
-    }
 
     public ColorSet getColorIdentity() {
         return colorIdentity;

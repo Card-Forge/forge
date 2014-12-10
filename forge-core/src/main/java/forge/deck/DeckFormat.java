@@ -194,7 +194,7 @@ public enum DeckFormat {
         return null;
     }
 
-    public String getPlaneSectionConformanceProblem(CardPool planes) {
+    public static String getPlaneSectionConformanceProblem(final CardPool planes) {
     	//Must contain at least 10 planes/phenomenons, but max 2 phenomenons. Singleton.
     	if (planes == null || planes.countAll() < 10) {
     		return "should have at least 10 planes";
@@ -214,7 +214,7 @@ public enum DeckFormat {
         return null;
     }
 
-    public String getSchemeSectionConformanceProblem(CardPool schemes) {
+    public static String getSchemeSectionConformanceProblem(final CardPool schemes) {
         //Must contain at least 20 schemes, max 2 of each.
         if (schemes == null || schemes.countAll() < 20) {
             return "must contain at least 20 schemes";

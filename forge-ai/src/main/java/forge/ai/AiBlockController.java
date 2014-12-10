@@ -77,7 +77,7 @@ public class AiBlockController {
     }
     
     // finds the creatures able to block the attacker
-    private List<Card> getPossibleBlockers(final Combat combat, final Card attacker, final List<Card> blockersLeft, final boolean solo) {
+    private static List<Card> getPossibleBlockers(final Combat combat, final Card attacker, final List<Card> blockersLeft, final boolean solo) {
         final List<Card> blockers = new ArrayList<Card>();
 
         for (final Card blocker : blockersLeft) {
@@ -120,7 +120,7 @@ public class AiBlockController {
         return blockers;
     }
 
-    private List<CardCollection> sortAttackerByDefender(final Combat combat) {
+    private static List<CardCollection> sortAttackerByDefender(final Combat combat) {
         FCollectionView<GameEntity> defenders = combat.getDefenders();
         final ArrayList<CardCollection> attackers = new ArrayList<CardCollection>(defenders.size());
         for (GameEntity defender : defenders) {

@@ -362,7 +362,7 @@ public class AiController {
         return spellAbilities;
     }
 
-    private ArrayList<SpellAbility> getPlayableCounters(final CardCollection l) {
+    private static ArrayList<SpellAbility> getPlayableCounters(final CardCollection l) {
         final ArrayList<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
         for (final Card c : l) {
             for (final SpellAbility sa : c.getNonManaAbilities()) {

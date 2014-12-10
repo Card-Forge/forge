@@ -272,7 +272,7 @@ public final class NameGenerator {
 	}
 
 	/** Generates a specified number of random names. */
-	public List<String> getRandomNames(int generateAmount, final List<String> excludeNames) {
+	public static List<String> getRandomNames(final int generateAmount, final List<String> excludeNames) {
 		usedNames = excludeNames;
 		final List<String> names = new ArrayList<String>(generateAmount);
         for (int i = 0; i < generateAmount; i++) {
