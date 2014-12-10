@@ -44,7 +44,9 @@ public class UntapEffect extends SpellAbilityEffect {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         if (sa.hasParam("UntapUpTo")) {
-            untapChooseUpTo(sa);
+            untapChoose(sa, false);
+        } else if (sa.hasParam("UntapExactly")) {
+            untapChoose(sa, true);
         } else {
 
             final List<Card> tgtCards = getTargetCards(sa);
@@ -59,17 +61,15 @@ public class UntapEffect extends SpellAbilityEffect {
 
     /**
      * <p>
-     * untapChooseUpTo.
+     * Choose cards to untap.
      * </p>
      * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
      * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param sa
-     *            a {@link java.util.HashMap} object.
+     *            a {@link SpellAbility}.
+     * @param mandatory
+     *            whether the untapping is mandatory.
      */
-    private void untapChooseUpTo(final SpellAbility sa) {
+    private static void untapChoose(final SpellAbility sa, final boolean mandatory) {
         final int num = Integer.parseInt(sa.getParam("Amount"));
         final String valid = sa.getParam("UntapType");
 
@@ -80,9 +80,9 @@ public class UntapEffect extends SpellAbilityEffect {
                     valid, sa.getActivatingPlayer(), sa.getHostCard());
             list = CardLists.filter(list, Presets.TAPPED);
 
-            CardCollectionView selected = p.getController().chooseCardsForEffect(list, sa, "Select cards to untap", 0, num, true);
+            final CardCollectionView selected = p.getController().chooseCardsForEffect(list, sa, "Select cards to untap", mandatory ? num : 0, num, !mandatory);
             if (selected != null) {
-                for (Card c : selected) { 
+                for (final Card c : selected) { 
                     c.untap();
                 }
             }
