@@ -19,10 +19,13 @@ import forge.item.InventoryItem;
 import forge.match.MatchUtil;
 import forge.screens.FScreen;
 import forge.toolbox.FCardPanel;
+import forge.toolbox.FOptionPane;
 import forge.toolbox.FOverlay;
 import forge.util.FCollectionView;
+import forge.util.Utils;
 
 public class CardZoom extends FOverlay {
+    private static final float REQ_AMOUNT = Utils.AVG_FINGER_WIDTH;
     private static final FSkinFont MSG_FONT = FSkinFont.get(12);
     private static final FSkinColor MSG_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.9f);
     private static final FSkinColor MSG_BACK_COLOR = FScreen.Header.BACK_COLOR.alphaColor(0.75f);
@@ -32,6 +35,8 @@ public class CardZoom extends FOverlay {
     private static int currentIndex;
     private static CardView currentCard, prevCard, nextCard;
     private static boolean zoomMode = true;
+    private static boolean oneCardView = false;
+    private float totalZoomAmount;
     private static ActivateHandler activateHandler;
     private static String currentActivateAction;
     private static Rectangle flipIconBounds;
@@ -147,22 +152,46 @@ public class CardZoom extends FOverlay {
     }
 
     @Override
+    public boolean zoom(float x, float y, float amount) {
+        totalZoomAmount += amount;
+
+        if (totalZoomAmount >= REQ_AMOUNT) {
+            oneCardView = true;
+            totalZoomAmount = 0;
+            return true;
+        }
+        if (totalZoomAmount <= -REQ_AMOUNT) {
+            oneCardView = false;
+            totalZoomAmount = 0;
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public void drawOverlay(Graphics g) {
         float w = getWidth();
         float h = getHeight();
 
-        float cardWidth = w * 0.5f;
-        float cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
-        float y = (h - cardHeight) / 2;
-        if (prevCard != null) {
-            CardImageRenderer.drawZoom(g, prevCard, false, 0, y, cardWidth, cardHeight);
+        float cardWidth, cardHeight, y;
+        if (oneCardView) {
+            cardWidth = w - 2 * FOptionPane.PADDING;
+            cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
         }
-        if (nextCard != null) {
-            CardImageRenderer.drawZoom(g, nextCard, false, w - cardWidth, y, cardWidth, cardHeight);
+        else {
+            cardWidth = w * 0.5f;
+            cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
+            y = (h - cardHeight) / 2;
+            if (prevCard != null) {
+                CardImageRenderer.drawZoom(g, prevCard, false, 0, y, cardWidth, cardHeight);
+            }
+            if (nextCard != null) {
+                CardImageRenderer.drawZoom(g, nextCard, false, w - cardWidth, y, cardWidth, cardHeight);
+            }
+            cardWidth = w * 0.7f;
+            cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
         }
 
-        cardWidth = w * 0.7f;
-        cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
         float x = (w - cardWidth) / 2;
         y = (h - cardHeight) / 2;
         if (zoomMode) {
