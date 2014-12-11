@@ -178,6 +178,8 @@ public class CardZoom extends FOverlay {
     public void drawOverlay(Graphics g) {
         float w = getWidth();
         float h = getHeight();
+        float messageHeight = MSG_FONT.getCapHeight() * 2.5f;
+        float maxCardHeight = h - 2 * messageHeight;
 
         float cardWidth, cardHeight, y;
         if (oneCardView) {
@@ -198,6 +200,10 @@ public class CardZoom extends FOverlay {
             cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
         }
 
+        if (cardHeight > maxCardHeight) { //prevent card overlapping message bars
+            cardHeight = maxCardHeight;
+            cardWidth = cardHeight / FCardPanel.ASPECT_RATIO;
+        }
         float x = (w - cardWidth) / 2;
         y = (h - cardHeight) / 2;
         if (zoomMode) {
@@ -214,7 +220,6 @@ public class CardZoom extends FOverlay {
             g.drawImage(FSkinImage.FLIPCARD, flipIconBounds.x, flipIconBounds.y, flipIconBounds.width, flipIconBounds.height);
         }
 
-        float messageHeight = MSG_FONT.getCapHeight() * 2.5f;
         if (currentActivateAction != null) {
             g.fillRect(MSG_BACK_COLOR, 0, 0, w, messageHeight);
             g.drawText("Swipe up to " + currentActivateAction, MSG_FONT, MSG_FORE_COLOR, 0, 0, w, messageHeight, false, HAlignment.CENTER, true);
