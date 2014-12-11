@@ -169,6 +169,12 @@ public class CardZoom extends FOverlay {
     }
 
     @Override
+    public boolean longPress(float x, float y) {
+        oneCardView = !oneCardView;
+        return true;
+    }
+
+    @Override
     public void drawOverlay(Graphics g) {
         float w = getWidth();
         float h = getHeight();
