@@ -274,7 +274,7 @@ public class GameAction {
             // Reveal if face-down
             if (c.isFaceDown()) {
             	c.setState(CardStateName.Original, true);
-            	reveal(new CardCollection(c), c.getOwner(), true, "Face-down card leaves the battlefield");
+            	reveal(new CardCollection(c), c.getOwner(), true, "Face-down card leaves the battlefield: ");
             	c.setState(CardStateName.FaceDown, true);
             	copied.setState(CardStateName.Original, true);
             }
