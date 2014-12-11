@@ -681,7 +681,6 @@ public class CardView extends GameEntityView {
                 } else {
                     return getAlternateState().getName();
                 }
-                //return "Face-down card (" + getId() + ", " + getAlternateState().getName() + ")";
             }
         }
         return (name + " (" + getId() + ")").trim();
