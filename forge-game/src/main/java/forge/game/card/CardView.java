@@ -679,7 +679,7 @@ public class CardView extends GameEntityView {
                 if (this.getCurrentState().getState() == CardStateName.FaceDown) {
                     return "Face-down card (H" + getHiddenId() + ")";
                 } else {
-                    return getAlternateState().getName();
+                    return getAlternateState().getName() + " (" + getId() + ")";
                 }
             }
         }
