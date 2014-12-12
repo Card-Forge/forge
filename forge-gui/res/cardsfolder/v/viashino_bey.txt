@@ -1,5 +1,5 @@
 Name:Viashino Bey
-ManaCost:2 R
+ManaCost:2 R R
 Types:Creature Viashino
 PT:4/3
 K:If CARDNAME attacks, all creatures you control attack if able.
