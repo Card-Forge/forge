@@ -41,12 +41,12 @@ public class Main extends IOSApplication.Delegate {
     private static final class IOSClipboard implements com.badlogic.gdx.utils.Clipboard {
         @Override
         public String getContents() {
-            return UIPasteboard.getGeneral().getString();
+            return UIPasteboard.getGeneralPasteboard().getString();
         }
 
         @Override
         public void setContents(final String contents0) {
-            UIPasteboard.getGeneral().setString(contents0);
+            UIPasteboard.getGeneralPasteboard().setString(contents0);
         }
     }
 

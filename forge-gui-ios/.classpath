@@ -23,5 +23,8 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="minlog-1.2.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-backend-robovm.jar"/>
+	<classpathentry kind="lib" path="/forge-gui-mobile/libs/gdx-freetype.jar"/>
+	<classpathentry kind="lib" path="/forge-gui-mobile/libs/gdx.jar" sourcepath="/forge-gui-mobile/libs/gdx-sources.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

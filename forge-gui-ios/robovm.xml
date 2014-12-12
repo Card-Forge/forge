@@ -31,6 +31,7 @@
     <pattern>org.apache.xalan.processor.TransformerFactoryImpl</pattern>
     <pattern>java.util.logging.**</pattern>
     <pattern>com.esotericsoftware.minlog.Log</pattern>
+    <pattern>com.badlogic.gdx.**</pattern>
   </forceLinkClasses>
   <libs>
     <lib>libs/libgdx.a</lib>
