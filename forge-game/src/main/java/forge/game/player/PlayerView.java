@@ -204,7 +204,7 @@ public class PlayerView extends GameEntityView {
         TrackableCollection<CardView> cards = get(zoneProp);
         return cards == null ? 0 : cards.size();
     }
-    private TrackableProperty getZoneProp(final ZoneType zone) {
+    private static TrackableProperty getZoneProp(final ZoneType zone) {
         switch (zone) {
         case Ante:
             return TrackableProperty.Ante;

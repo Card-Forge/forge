@@ -13,7 +13,7 @@ import java.util.List;
 public class SetStateEffect extends SpellAbilityEffect {
 
     @Override
-    protected String getStackDescription(SpellAbility sa) {
+    protected String getStackDescription(final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
         final List<Card> tgtCards = getTargetCards(sa);
@@ -37,7 +37,7 @@ public class SetStateEffect extends SpellAbilityEffect {
     }
 
     @Override
-    public void resolve(SpellAbility sa) {
+    public void resolve(final SpellAbility sa) {
 
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
@@ -60,7 +60,7 @@ public class SetStateEffect extends SpellAbilityEffect {
         }
     }
 
-    private boolean changeCardState(final Card tgt, final String mode, final String customState) {
+    private static boolean changeCardState(final Card tgt, final String mode, final String customState) {
         if (mode == null)
             return tgt.changeToState(CardStateName.smartValueOf(customState));
 

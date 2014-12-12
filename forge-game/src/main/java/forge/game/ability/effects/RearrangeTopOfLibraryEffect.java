@@ -101,7 +101,9 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
      * @param mayshuffle
      *            a boolean.
      */
-    private void rearrangeTopOfLibrary(final Card src, final Player player, final int numCards, final boolean mayshuffle, final SpellAbility sa) {
+    private static void rearrangeTopOfLibrary(final Card src,
+            final Player player, final int numCards, final boolean mayshuffle,
+            final SpellAbility sa) {
         final Player activator = sa.hasParam("RearrangePlayer") ? Iterables.getFirst(AbilityUtils.getDefinedPlayers(src, sa.getParam("RearrangePlayer"), sa), null)
                 : sa.getActivatingPlayer();
         if (activator == null) {

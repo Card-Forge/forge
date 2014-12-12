@@ -54,20 +54,20 @@ public class ScryEffect extends SpellAbilityEffect {
         }
     }
 
-    public final void scry(Player p, int numScry) {
+    private static void scry(final Player p, final int numScry) {
         final CardCollection topN = new CardCollection();
         final PlayerZone library = p.getZone(ZoneType.Library);
-        numScry = Math.min(numScry, library.size());
+        final int actualNumScry = Math.min(numScry, library.size());
 
-        if (numScry == 0) { return; }
+        if (actualNumScry == 0) { return; }
 
-        for (int i = 0; i < numScry; i++) {
+        for (int i = 0; i < actualNumScry; i++) {
             topN.add(library.get(i));
         }
 
-        ImmutablePair<CardCollection, CardCollection> lists = p.getController().arrangeForScry(topN);
-        CardCollection toTop = lists.getLeft();
-        CardCollection toBottom = lists.getRight();
+        final ImmutablePair<CardCollection, CardCollection> lists = p.getController().arrangeForScry(topN);
+        final CardCollection toTop = lists.getLeft();
+        final CardCollection toBottom = lists.getRight();
 
         if (toBottom != null) {
             for(Card c : toBottom) {

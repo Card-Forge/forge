@@ -216,7 +216,7 @@ public class AttachEffect extends SpellAbilityEffect {
 
             final Card o = p.getController().chooseSingleEntityForEffect(list, aura, source + " - Select a card to attach to.");
             if (o != null) {
-                handleAura(source, (Card) o);
+                handleAura(source, o);
                 //source.enchantEntity((Card) o);
                 return true;
             }

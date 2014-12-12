@@ -166,15 +166,15 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         return getCardsAdded(cardsAddedLastTurn, origin);
     }
 
-    private final CardCollectionView getCardsAdded(final MapOfLists<ZoneType, Card> cardsAdded, final ZoneType origin) {
+    private static CardCollectionView getCardsAdded(final MapOfLists<ZoneType, Card> cardsAdded, final ZoneType origin) {
         if (origin != null) {
-            Collection<Card> cards = cardsAdded.get(origin);
+            final Collection<Card> cards = cardsAdded.get(origin);
             return cards == null ? CardCollection.EMPTY : new CardCollection(cards);
         }
 
         // all cards if key == null
         final CardCollection ret = new CardCollection();
-        for (Collection<Card> kv : cardsAdded.values()) {
+        for (final Collection<Card> kv : cardsAdded.values()) {
             ret.addAll(kv);
         }
         return ret;
@@ -182,7 +182,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
 
     public final void resetCardsAddedThisTurn() {
         cardsAddedLastTurn.clear();
-        for (Entry<ZoneType, Collection<Card>> entry : cardsAddedThisTurn.entrySet()) {
+        for (final Entry<ZoneType, Collection<Card>> entry : cardsAddedThisTurn.entrySet()) {
             cardsAddedLastTurn.addAll(entry.getKey(), entry.getValue());
         }
         cardsAddedThisTurn.clear();

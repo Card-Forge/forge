@@ -16,7 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.List;
 
 public class UnattachAllEffect extends SpellAbilityEffect {
-    private void handleUnattachment(final GameEntity o, final Card cardToUnattach) {
+    private static void handleUnattachment(final GameEntity o, final Card cardToUnattach) {
         if (o instanceof Card) {
             final Card c = (Card) o;
             if (cardToUnattach.isAura()) {
@@ -136,7 +136,7 @@ public class UnattachAllEffect extends SpellAbilityEffect {
     */
 
     @Override
-    protected String getStackDescription(SpellAbility sa) {
+    protected String getStackDescription(final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         sb.append("Unattach all valid Equipment and Auras from ");
         final List<GameObject> targets = getTargets(sa);
@@ -145,7 +145,7 @@ public class UnattachAllEffect extends SpellAbilityEffect {
     }
 
     @Override
-    public void resolve(SpellAbility sa) {
+    public void resolve(final SpellAbility sa) {
         Card source = sa.getHostCard();
         final Game game = sa.getActivatingPlayer().getGame();
         final List<GameObject> targets = getTargets(sa);

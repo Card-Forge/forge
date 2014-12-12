@@ -32,7 +32,7 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
             ma.produceMana(generated, player, sa);
         }
 
-        resolveDrawback(sa);
+        resolveSubAbility(sa);
     }
 
 
@@ -53,7 +53,7 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
      *            a {@link forge.game.player.Player} object.
      * @return a {@link java.lang.String} object.
      */
-    private String generatedReflectedMana(final SpellAbility sa, final Collection<String> colors, final Player player) {
+    private static String generatedReflectedMana(final SpellAbility sa, final Collection<String> colors, final Player player) {
         // Calculate generated mana here for stack description and resolving
         final int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa) : 1;
 

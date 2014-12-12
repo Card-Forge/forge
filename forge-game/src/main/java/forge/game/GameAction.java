@@ -312,7 +312,7 @@ public class GameAction {
         return copied;
     }
 
-    private void unattachCardLeavingBattlefield(Card copied) {
+    private static void unattachCardLeavingBattlefield(final Card copied) {
         // Handle unequipping creatures
         if (copied.isEquipped()) {
             for (final Card equipment : copied.getEquippedBy(true)) {

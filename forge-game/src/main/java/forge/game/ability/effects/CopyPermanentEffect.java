@@ -235,7 +235,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         } // end foreach Card
     } // end resolve
 
-    private void registerDelayedTrigger(final SpellAbility sa, final String location, final List<Card> crds) {
+    private static void registerDelayedTrigger(final SpellAbility sa, final String location, final List<Card> crds) {
         String delTrig = "Mode$ Phase | Phase$ End Of Turn | TriggerDescription$ "
                 + location + " " + crds + " at the beginning of the next end step.";
         final Trigger trig = TriggerHandler.parseTrigger(delTrig, sa.getHostCard(), true);

@@ -37,7 +37,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
                     sa, "Pay Echo", ManaPaymentPurpose.Echo);
             }
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
-            runParams.put("EchoPaid", (Boolean) isPaid);
+            runParams.put("EchoPaid", Boolean.valueOf(isPaid));
             runParams.put("Card", card);
             game.getTriggerHandler().runTrigger(TriggerType.PayEcho, runParams, false);
             if (isPaid || !card.getController().equals(activator)) {

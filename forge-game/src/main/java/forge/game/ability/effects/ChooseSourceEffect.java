@@ -62,7 +62,7 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
             if (siSpellAbility.getTriggeringObjects() != null) {
                 for (Object c : siSpellAbility.getTriggeringObjects().values()) {
                     if (c instanceof Card) {
-                        if (!stackSources.contains((Card) c)) {
+                        if (!stackSources.contains(c)) {
                             referencedSources.add((Card) c);
                         }
                     }
@@ -75,7 +75,7 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
             if (siSpellAbility.getReplacingObjects() != null) {
                 for (Object c : siSpellAbility.getReplacingObjects().values()) {
                     if (c instanceof Card) {
-                        if (!stackSources.contains((Card) c)) {
+                        if (!stackSources.contains(c)) {
                             referencedSources.add((Card) c);
                         }
                     }

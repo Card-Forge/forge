@@ -49,8 +49,9 @@ public class ControlGainEffect extends SpellAbilityEffect {
         return sb.toString();
     }
 
-    private void doLoseControl(final Card c, final Card host, final boolean tapOnLose,
-            final List<String> addedKeywords, final long tStamp) {
+    private static void doLoseControl(final Card c, final Card host,
+            final boolean tapOnLose, final List<String> addedKeywords,
+            final long tStamp) {
         if (null == c || c.hasKeyword("Other players can't gain control of CARDNAME.")) {
             return;
         }
@@ -185,7 +186,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
      *            a int.
      * @return a {@link forge.GameCommand} object.
      */
-    private GameCommand getDestroyCommand(final Card c, final Card hostCard, final boolean bNoRegen) {
+    private static GameCommand getDestroyCommand(final Card c, final Card hostCard, final boolean bNoRegen) {
         final GameCommand destroy = new GameCommand() {
             private static final long serialVersionUID = 878543373519872418L;
 
@@ -228,8 +229,9 @@ public class ControlGainEffect extends SpellAbilityEffect {
      *            a {@link forge.game.player.Player} object.
      * @return a {@link forge.GameCommand} object.
      */
-    private GameCommand getLoseControlCommand(final Card c, final long tStamp,
-            final boolean bTapOnLose, final Card hostCard, final List<String> kws) {
+    private static GameCommand getLoseControlCommand(final Card c,
+            final long tStamp, final boolean bTapOnLose, final Card hostCard,
+            final List<String> kws) {
         final GameCommand loseControl = new GameCommand() {
             private static final long serialVersionUID = 878543373519872418L;
 

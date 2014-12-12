@@ -172,7 +172,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         // Run triggers
         HashMap<String,Object> runParams = new HashMap<String,Object>();
         runParams.put("Player", caller);
-        runParams.put("Result", (Boolean) result);
+        runParams.put("Result", Boolean.valueOf(result));
         caller.getGame().getTriggerHandler().runTrigger(TriggerType.FlippedCoin, runParams, false);
         return result;
     }

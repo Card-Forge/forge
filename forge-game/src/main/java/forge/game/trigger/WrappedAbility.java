@@ -23,7 +23,7 @@ import com.google.common.collect.Lists;
 // possible corner cases.
 // (The trigger can have a hardcoded OverridingAbility which can make
 // use of any of the methods)
-public class WrappedAbility extends Ability implements ISpellAbility {
+public class WrappedAbility extends Ability {
 
     private final SpellAbility sa;
     private final Trigger regtrig;

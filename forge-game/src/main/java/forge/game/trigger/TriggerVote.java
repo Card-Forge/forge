@@ -20,9 +20,8 @@ package forge.game.trigger;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.FCollection;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -56,7 +55,7 @@ public class TriggerVote extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<String, Object> runParams2) {
         return true;
     }
 
@@ -64,22 +63,20 @@ public class TriggerVote extends Trigger {
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
         @SuppressWarnings("unchecked")
-        ArrayListMultimap<Object, Player> votes = (ArrayListMultimap<Object, Player>) this.getRunParams().get("AllVotes");
+        final ArrayListMultimap<Object, Player> votes = (ArrayListMultimap<Object, Player>) this.getRunParams().get("AllVotes");
         sa.setTriggeringObject("OtherVoters", getVoters(this.getHostCard().getController(), votes, true, true));
     }
 
-    private List<Player> getVoters(Player player, ArrayListMultimap<Object, Player> votes,
-            boolean isOpponent, boolean votedOtherchoice) {
-        List<Player> voters = new ArrayList<Player>();
-        for (Object voteType : votes.keySet()) {
-            List<Player> players = votes.get(voteType);
+    private static FCollection<Player> getVoters(final Player player,
+            final ArrayListMultimap<Object, Player> votes,
+            final boolean isOpponent, final boolean votedOtherchoice) {
+        final FCollection<Player> voters = new FCollection<Player>();
+        for (final Object voteType : votes.keySet()) {
+            final List<Player> players = votes.get(voteType);
             if (votedOtherchoice ^ players.contains(player)) {
                 voters.addAll(players);
             }
         }
-        HashSet<Player> set = new HashSet<Player>(voters);
-        voters.clear();
-        voters.addAll(set); // clear duplicated players, sometime a player votes more than once
         if (isOpponent) {
             voters.retainAll(player.getOpponents());
         }

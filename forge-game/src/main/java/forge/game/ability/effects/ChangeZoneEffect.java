@@ -563,7 +563,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
-    private void changeHiddenOriginResolve(final SpellAbility sa) {
+    private static void changeHiddenOriginResolve(final SpellAbility sa) {
         List<Player> fetchers;
 
         if (sa.hasParam("DefinedPlayer")) {
@@ -595,8 +595,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             changeZonePlayerInvariant(decider, sa, player);
         }
     }
-    
-    private void changeZonePlayerInvariant(Player decider, SpellAbility sa, Player player) {
+
+    private static void changeZonePlayerInvariant(Player decider, SpellAbility sa, Player player) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             final List<Player> players = Lists.newArrayList(sa.getTargets().getTargetPlayers());

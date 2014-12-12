@@ -198,7 +198,7 @@ public class CloneEffect extends SpellAbilityEffect {
         game.fireEvent(new GameEventCardStatsChanged(tgtCard));
     } // cloneResolve
 
-    private void addExtraCharacteristics(final Card tgtCard, final SpellAbility sa, final Map<String, String> origSVars) {
+    private static void addExtraCharacteristics(final Card tgtCard, final SpellAbility sa, final Map<String, String> origSVars) {
         // additional types to clone
         if (sa.hasParam("AddTypes")) {
             for (final String type : Arrays.asList(sa.getParam("AddTypes").split(","))) {

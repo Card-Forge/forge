@@ -89,7 +89,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @author Forge
  * @version $Id$
  */
-public class Card extends GameEntity implements Comparable<Card>, IIdentifiable {
+public class Card extends GameEntity implements Comparable<Card> {
     private static HashMap<Integer, Card> cardCache = new HashMap<Integer, Card>();
     public static Card get(CardView cardView) {
         if (cardView == null) { return null; }
@@ -1398,24 +1398,24 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         return sb.toString();
     }
 
-    private String getTextForKwCantBeBlockedByAmount(String keyword) {
-        String restriction = keyword.split(" ", 2)[1];
-        boolean isLT = "LT".equals(restriction.substring(0,2));
+    private static String getTextForKwCantBeBlockedByAmount(final String keyword) {
+        final String restriction = keyword.split(" ", 2)[1];
+        final boolean isLT = "LT".equals(restriction.substring(0,2));
         final String byClause = isLT ? "except by " : "by more than ";
-        int cnt = Integer.parseInt(restriction.substring(2));
+        final int cnt = Integer.parseInt(restriction.substring(2));
         return byClause + Lang.nounWithNumeral(cnt, isLT ? "or more creature" : "creature");
     }
 
-    private String getTextForKwCantBeBlockedByType(String keyword) {
+    private static String getTextForKwCantBeBlockedByType(final String keyword) {
         boolean negative = true;
-        List<String> subs = Lists.newArrayList(TextUtil.split(keyword.split(" ", 2)[1], ','));
-        List<List<String>> subsAnd = Lists.newArrayList();
-        List<String> orClauses = new ArrayList<String>();
+        final List<String> subs = Lists.newArrayList(TextUtil.split(keyword.split(" ", 2)[1], ','));
+        final List<List<String>> subsAnd = Lists.newArrayList();
+        final List<String> orClauses = new ArrayList<String>();
         for (int iOr = 0; iOr < subs.size(); iOr++) {
-            String expession = subs.get(iOr);
-            List<String> parts = Lists.newArrayList(expession.split("[.+]"));
+            final String expession = subs.get(iOr);
+            final List<String> parts = Lists.newArrayList(expession.split("[.+]"));
             for (int p = 0; p < parts.size(); p++) {
-                String part = parts.get(p);
+                final String part = parts.get(p);
                 if (part.equalsIgnoreCase("creature")) {
                     parts.remove(p--);
                     continue;
@@ -1438,9 +1438,9 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         };
 
         for (int iOr = 0; iOr < subsAnd.size(); iOr++) {
-            List<String> andOperands = subsAnd.get(iOr);
-            List<Pair<Boolean, String>> prependedAdjectives = Lists.newArrayList();
-            List<Pair<Boolean, String>> postponedAdjectives = Lists.newArrayList();
+            final List<String> andOperands = subsAnd.get(iOr);
+            final List<Pair<Boolean, String>> prependedAdjectives = Lists.newArrayList();
+            final List<Pair<Boolean, String>> postponedAdjectives = Lists.newArrayList();
             String creatures = null;
 
             for (String part : andOperands) {
@@ -4747,10 +4747,8 @@ public class Card extends GameEntity implements Comparable<Card>, IIdentifiable 
         } else if (property.equals("attackedBySourceThisCombat")) {
             if (null == combat) return false;
             final GameEntity defender = combat.getDefenderByAttacker(source);
-            if (defender instanceof Card) {
-                if (!equals((Card) defender)) {
-                    return false;
-                }
+            if (defender instanceof Card && !equals(defender)) {
+                return false;
             }
         } else if (property.startsWith("blocking")) {
             if (null == combat) return false;

@@ -17,6 +17,13 @@
  */
 package forge.game;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
@@ -24,8 +31,6 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
-
-import java.util.*;
 
 /**
  * <p>
@@ -38,16 +43,16 @@ import java.util.*;
 public class StaticEffects {
 
     // **************** StaticAbility system **************************
-    private final ArrayList<StaticEffect> staticEffects = new ArrayList<StaticEffect>();
+    private final List<StaticEffect> staticEffects = new ArrayList<StaticEffect>();
     //Global rule changes
-    private final EnumSet<GlobalRuleChange> ruleChanges = EnumSet.noneOf(GlobalRuleChange.class);
+    private final Set<GlobalRuleChange> ruleChanges = EnumSet.noneOf(GlobalRuleChange.class);
 
-    public final void clearStaticEffects(Set<Card> affectedCards) {
+    public final void clearStaticEffects(final Set<Card> affectedCards) {
         ruleChanges.clear();
 
         // remove all static effects
-        for (StaticEffect se : staticEffects) {
-            affectedCards.addAll(this.removeStaticEffect(se));
+        for (final StaticEffect se : staticEffects) {
+            affectedCards.addAll(removeStaticEffect(se));
         }
         this.staticEffects.clear();
     }
@@ -61,22 +66,22 @@ public class StaticEffects {
     }
 
     /**
-     * addStaticEffect. TODO Write javadoc for this method.
+     * Add a static effect to the list of static effects.
      * 
      * @param staticEffect
-     *            a StaticEffect
+     *            a {@link StaticEffect}.
      */
     public final void addStaticEffect(final StaticEffect staticEffect) {
         this.staticEffects.add(staticEffect);
     }
 
     /**
-     * removeStaticEffect TODO Write javadoc for this method.
+     * Remove a static effect from the list of static effects and undo everything that was changed by the effect.
      * 
      * @param se
-     *            a StaticEffect
+     *            a {@link StaticEffect}.
      */
-    private final List<Card> removeStaticEffect(final StaticEffect se) {
+    private static final List<Card> removeStaticEffect(final StaticEffect se) {
         final List<Card> affectedCards = se.getAffectedCards();
         final ArrayList<Player> affectedPlayers = se.getAffectedPlayers();
         final Map<String, String> params = se.getParams();

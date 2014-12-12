@@ -335,7 +335,7 @@ public class DigEffect extends SpellAbilityEffect {
 
     // returns a List<Card> that is a subset of list with cards that share a name
     // with a permanent on the battlefield
-    private CardCollection sharesNameWithCardOnBattlefield(final Game game, final List<Card> list) {
+    private static CardCollection sharesNameWithCardOnBattlefield(final Game game, final List<Card> list) {
         final CardCollection toReturn = new CardCollection();
         final CardCollectionView play = game.getCardsIn(ZoneType.Battlefield);
         for (final Card c : list) {

@@ -169,12 +169,25 @@ public class Game {
      * Gets the players who are still fighting to win, in turn order.
      */
     public final FCollectionView<Player> getPlayersInTurnOrder() {
-    	if (turnOrder.isDefaultDirection()) {
-    		return ingamePlayers;
-    	}
-    	FCollection<Player> players = new FCollection<Player>(ingamePlayers);
-    	Collections.reverse(players);
-    	return players;
+        if (turnOrder.isDefaultDirection()) {
+            return ingamePlayers;
+        }
+        final FCollection<Player> players = new FCollection<Player>(ingamePlayers);
+        Collections.reverse(players);
+        return players;
+    }
+
+    /**
+     * Gets the nonactive players who are still fighting to win, in turn order.
+     */
+    public final FCollectionView<Player> getNonactivePlayers() {
+        // Don't use getPlayersInTurnOrder to prevent copying the player collection twice
+        final FCollection<Player> players = new FCollection<Player>(ingamePlayers);;
+        players.remove(phaseHandler.getPlayerTurn());
+        if (!turnOrder.isDefaultDirection()) {
+            Collections.reverse(players);
+        }
+        return players;
     }
 
     /**
@@ -572,7 +585,7 @@ public class Game {
             
             List<CardRarity> validRarities = new ArrayList<>(Arrays.asList(CardRarity.values()));
             for (final Player player : getPlayers()) {
-                Set<CardRarity> playerRarity = getValidRarities(player.getCardsIn(ZoneType.Library));
+                final Set<CardRarity> playerRarity = getValidRarities(player.getCardsIn(ZoneType.Library));
                 if (onePlayerHasTimeShifted == false) {
                     onePlayerHasTimeShifted = playerRarity.contains(CardRarity.Special);
                 }
@@ -652,9 +665,9 @@ public class Game {
         anteed.put(player, ante);
     }
 
-    private Set<CardRarity> getValidRarities(final Iterable<Card> cards) {
-        Set<CardRarity> rarities = new HashSet<>();
-        for (Card card : cards) {
+    private static Set<CardRarity> getValidRarities(final Iterable<Card> cards) {
+        final Set<CardRarity> rarities = new HashSet<>();
+        for (final Card card : cards) {
             if (card.getRarity() == CardRarity.Rare || card.getRarity() == CardRarity.MythicRare) {
                 //Since both rare and mythic rare are considered the same, adding both rarities
                 //massively increases the odds chances of the game picking rare cards to ante.

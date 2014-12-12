@@ -28,8 +28,8 @@ public class VoteEffect extends SpellAbilityEffect {
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected String getStackDescription(SpellAbility sa) {
-        StringBuilder sb = new StringBuilder();
+    protected String getStackDescription(final SpellAbility sa) {
+        final StringBuilder sb = new StringBuilder();
         sb.append(StringUtils.join(getDefinedPlayersOrTargeted(sa), ", "));
         sb.append(" vote ");
         if (sa.hasParam("VoteType")) {
@@ -44,7 +44,7 @@ public class VoteEffect extends SpellAbilityEffect {
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void resolve(SpellAbility sa) {
+    public void resolve(final SpellAbility sa) {
         final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
         final List<Object> voteType = new ArrayList<Object>();
         final Card host = sa.getHostCard();
@@ -107,11 +107,11 @@ public class VoteEffect extends SpellAbilityEffect {
         }
     }
 
-    private List<Object> getMostVotes(ArrayListMultimap<Object, Player> votes) {
-        List<Object> most = Lists.newArrayList();
+    private static List<Object> getMostVotes(final ArrayListMultimap<Object, Player> votes) {
+        final List<Object> most = Lists.newArrayList();
         int amount = 0;
-        for (Object voteType : votes.keySet()) {
-            int voteAmount = votes.get(voteType).size();
+        for (final Object voteType : votes.keySet()) {
+            final int voteAmount = votes.get(voteType).size();
             if (voteAmount == amount) {
                 most.add(voteType);
             } else if (voteAmount > amount) {

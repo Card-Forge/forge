@@ -66,14 +66,14 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         return new GameLogEntry(GameLogEntryType.STACK_ADD, sb.toString());
     }
 
-    private GameLogEntry generateSummary(List<GameOutcome> gamesPlayed) {
-        GameOutcome outcome1 = gamesPlayed.get(0);
-        List<Player> players = outcome1.getPlayers();
+    private static GameLogEntry generateSummary(final List<GameOutcome> gamesPlayed) {
+        final GameOutcome outcome1 = gamesPlayed.get(0);
+        final List<Player> players = outcome1.getPlayers();
 
         final int[] wins = new int[players.size()];
 
         // Calculate total games each player has won.
-        for (GameOutcome game : gamesPlayed) {
+        for (final GameOutcome game : gamesPlayed) {
             int i = 0;
             for (Player p : game.getPlayers()) {
                 if (p.getOutcome().hasWon()) {
@@ -83,26 +83,24 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             }
         }
 
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         for (int i = 0; i < wins.length; i++) {
-            Player player = players.get(i);
-            String playerName = player.getName();
+            final Player player = players.get(i);
+            final String playerName = player.getName();
             sb.append(playerName).append(": ").append(wins[i]).append(" ");
         }
         return new GameLogEntry(GameLogEntryType.MATCH_RESULTS, sb.toString());
     }
 
     @Override
-    public GameLogEntry visit(GameEventPlayerControl event) {
-        // TODO Auto-generated method stub
-        LobbyPlayer newController = event.newController;
-        Player p = event.player;
+    public GameLogEntry visit(final GameEventPlayerControl event) {
+        final LobbyPlayer newController = event.newController;
+        final Player p = event.player;
 
         final String message;
         if (newController == null) {
             message = p.getName() + " has restored control over themself";
-        }
-        else {
+        } else {
             message =  String.format("%s is controlled by %s", p.getName(), newController.getName());
         }
         return new GameLogEntry(GameLogEntryType.PLAYER_CONROL, message);

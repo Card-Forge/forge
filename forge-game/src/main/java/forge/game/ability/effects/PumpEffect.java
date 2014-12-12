@@ -25,7 +25,9 @@ import com.google.common.collect.ImmutableList;
 
 public class PumpEffect extends SpellAbilityEffect {
 
-    private void applyPump(final SpellAbility sa, final Card applyTo, final int a, final int d, final List<String> keywords, final long timestamp) {
+    private static void applyPump(final SpellAbility sa, final Card applyTo,
+            final int a, final int d, final List<String> keywords,
+            final long timestamp) {
         //if host is not on the battlefield don't apply
         if (sa.hasParam("UntilLoseControlOfHost")
                 && !sa.getHostCard().isInPlay()) {
@@ -96,7 +98,8 @@ public class PumpEffect extends SpellAbilityEffect {
         game.fireEvent(new GameEventCardStatsChanged(applyTo));
     }
 
-    private void applyPump(final SpellAbility sa, final Player p, final List<String> keywords, final long timestamp) {
+    private static void applyPump(final SpellAbility sa, final Player p,
+            final List<String> keywords, final long timestamp) {
         final Game game = p.getGame();
         p.addChangedKeywords(keywords, ImmutableList.<String>of(), timestamp);
 
@@ -126,7 +129,7 @@ public class PumpEffect extends SpellAbilityEffect {
     }
 
     @Override
-    protected String getStackDescription(SpellAbility sa) {
+    protected String getStackDescription(final SpellAbility sa) {
 
         final StringBuilder sb = new StringBuilder();
         List<GameEntity> tgts = new ArrayList<GameEntity>();
@@ -181,7 +184,7 @@ public class PumpEffect extends SpellAbilityEffect {
     } // pumpStackDescription()
 
     @Override
-    public void resolve(SpellAbility sa) {
+    public void resolve(final SpellAbility sa) {
 
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -314,7 +317,7 @@ public class PumpEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            this.applyPump(sa, tgtC, a, d, keywords, timestamp);
+            applyPump(sa, tgtC, a, d, keywords, timestamp);
         }
 
         for (final Card tgtC : untargetedCards) {
@@ -323,7 +326,7 @@ public class PumpEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            this.applyPump(sa, tgtC, a, d, keywords, timestamp);
+            applyPump(sa, tgtC, a, d, keywords, timestamp);
         }
 
         for (Player p : tgtPlayers) {
@@ -331,7 +334,7 @@ public class PumpEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            this.applyPump(sa, p, keywords, timestamp);
+            applyPump(sa, p, keywords, timestamp);
         }
     } // pumpResolve()
 }

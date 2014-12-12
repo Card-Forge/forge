@@ -56,7 +56,7 @@ public class StaticAbility extends CardTraitBase {
      *            a {@link forge.game.card.Card} object.
      * @return a {@link java.util.HashMap} object.
      */
-    public final HashMap<String, String> parseParams(final String abString, final Card hostCard) {
+    private static HashMap<String, String> parseParams(final String abString, final Card hostCard) {
         final HashMap<String, String> mapParameters = new HashMap<String, String>();
 
         if (!(abString.length() > 0)) {
@@ -174,7 +174,7 @@ public class StaticAbility extends CardTraitBase {
      *            the host
      */
     public StaticAbility(final String params, final Card host) {
-        final Map<String, String> parsedParams = this.parseParams(params, host);
+        final Map<String, String> parsedParams = parseParams(params, host);
         this.originalMapParams.putAll(parsedParams);
         this.mapParams.putAll(parsedParams);
         this.hostCard = host;

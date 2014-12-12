@@ -64,7 +64,7 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         if (sa.hasParam("RememberNumber")) {
             for (final Object o : sa.getHostCard().getRemembered()) {
                 if (o instanceof Integer) {
-                    delTrig.addRemembered((Integer) o);
+                    delTrig.addRemembered(o);
                 }
             }
         }

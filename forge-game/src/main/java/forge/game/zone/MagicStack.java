@@ -54,7 +54,6 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.LinkedBlockingDeque;
 
-
 /**
  * <p>
  * MagicStack class.
@@ -784,7 +783,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
     }
 
-    private void execute(final List<GameCommand> c) {
+    private static void execute(final List<GameCommand> c) {
         final int length = c.size();
         for (int i = 0; i < length; i++) {
             c.remove(0).run();

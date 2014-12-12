@@ -17,12 +17,12 @@ import forge.util.Expressions;
 public class RepeatEffect extends SpellAbilityEffect {
 
     @Override
-    protected String getStackDescription(SpellAbility sa) {
+    protected String getStackDescription(final SpellAbility sa) {
         return "Repeat something. Somebody should really write a better StackDescription!";
     } // end repeatStackDescription()
 
     @Override
-    public void resolve(SpellAbility sa) {
+    public void resolve(final SpellAbility sa) {
         Card source = sa.getHostCard();
 
         // setup subability to repeat
@@ -65,7 +65,7 @@ public class RepeatEffect extends SpellAbilityEffect {
      * @param SA
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
-    private boolean checkRepeatConditions(final SpellAbility sa) {
+    private static boolean checkRepeatConditions(final SpellAbility sa) {
         //boolean doAgain = false;
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();

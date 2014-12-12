@@ -1229,8 +1229,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         return dredge;
     }
 
-    protected final int getDredgeNumber(final Card c) {
-        for (String s : c.getKeywords()) {
+    private static int getDredgeNumber(final Card c) {
+        for (final String s : c.getKeywords()) {
             if (s.startsWith("Dredge")) {
                 return Integer.parseInt("" + s.charAt(s.length() - 1));
             }
@@ -1300,7 +1300,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         runParams.put("Player", this);
         runParams.put("Card", c);
         runParams.put("Cause", cause);
-        runParams.put("IsMadness", (Boolean) discardMadness);
+        runParams.put("IsMadness", Boolean.valueOf(discardMadness));
         game.getTriggerHandler().runTrigger(TriggerType.Discarded, runParams, false);
         game.getGameLog().add(GameLogEntryType.DISCARD, sb.toString());
         return newCard;

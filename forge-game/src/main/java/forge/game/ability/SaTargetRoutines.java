@@ -19,7 +19,7 @@ public class SaTargetRoutines {
     protected CardCollection getDefinedCardsOrTargeted(SpellAbility sa) {                       return getCards(true, "Defined", sa); }
     protected CardCollection getDefinedCardsOrTargeted(SpellAbility sa, String definedParam) {  return getCards(true, definedParam, sa); }
 
-    private CardCollection getCards(boolean definedFirst, String definedParam, SpellAbility sa) {
+    private static CardCollection getCards(boolean definedFirst, String definedParam, SpellAbility sa) {
         boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam))
                 && sa.getTargets() != null && (sa.getTargets().isTargetingAnyCard() || sa.getTargets().getTargets().isEmpty());
         return useTargets ? new CardCollection(sa.getTargets().getTargetCards()) 
@@ -32,7 +32,7 @@ public class SaTargetRoutines {
     protected FCollection<Player> getDefinedPlayersOrTargeted(SpellAbility sa ) {                      return getPlayers(true, "Defined", sa); }
     protected FCollection<Player> getDefinedPlayersOrTargeted(SpellAbility sa, String definedParam) {  return getPlayers(true, definedParam, sa); }
 
-    private FCollection<Player> getPlayers(boolean definedFirst, String definedParam, SpellAbility sa) {
+    private static FCollection<Player> getPlayers(boolean definedFirst, String definedParam, SpellAbility sa) {
         boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
         return useTargets ? new FCollection<Player>(sa.getTargets().getTargetPlayers()) 
                 : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam(definedParam), sa);
@@ -43,7 +43,7 @@ public class SaTargetRoutines {
     protected List<SpellAbility> getTargetSpells(SpellAbility sa, String definedParam) {             return getSpells(false, definedParam, sa); }
     protected List<SpellAbility> getDefinedSpellsOrTargeted(SpellAbility sa, String definedParam) {  return getSpells(true, definedParam, sa); }
     
-    private List<SpellAbility> getSpells(boolean definedFirst, String definedParam, SpellAbility sa) {
+    private static List<SpellAbility> getSpells(boolean definedFirst, String definedParam, SpellAbility sa) {
         boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
         return useTargets ? Lists.newArrayList(sa.getTargets().getTargetSpells()) 
                 : AbilityUtils.getDefinedSpellAbilities(sa.getHostCard(), sa.getParam(definedParam), sa);
@@ -54,7 +54,7 @@ public class SaTargetRoutines {
     protected List<GameObject> getTargets(SpellAbility sa, String definedParam) {              return getTargetables(false, definedParam, sa); }
     protected List<GameObject> getDefinedOrTargeted(SpellAbility sa, String definedParam) {  return getTargetables(true, definedParam, sa); }
 
-    private List<GameObject> getTargetables(boolean definedFirst, String definedParam, SpellAbility sa) {
+    private static List<GameObject> getTargetables(boolean definedFirst, String definedParam, SpellAbility sa) {
         boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
         return useTargets ? Lists.newArrayList(sa.getTargets().getTargets()) 
                 : AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam(definedParam), sa);

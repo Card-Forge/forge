@@ -17,8 +17,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PumpAllEffect extends SpellAbilityEffect {
-    private void applyPumpAll(final SpellAbility sa, final List<Card> list, final int a, 
-            final int d, final List<String> keywords, final ArrayList<ZoneType> affectedZones) {
+    private static void applyPumpAll(final SpellAbility sa,
+            final List<Card> list, final int a, final int d,
+            final List<String> keywords, final ArrayList<ZoneType> affectedZones) {
         
         final Game game = sa.getActivatingPlayer().getGame();
         final long timestamp = game.getNextTimestamp();
@@ -103,8 +104,9 @@ public class PumpAllEffect extends SpellAbilityEffect {
             game.fireEvent(new GameEventCardStatsChanged(tgtC));
         }
     }
+
     @Override
-    protected String getStackDescription(SpellAbility sa) {
+    protected String getStackDescription(final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
         String desc = "";
@@ -120,7 +122,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
     } // pumpAllStackDescription()
 
     @Override
-    public void resolve(SpellAbility sa) {
+    public void resolve(final SpellAbility sa) {
         final List<Player> tgtPlayers = getTargetPlayers(sa);
         final ArrayList<ZoneType> affectedZones = new ArrayList<ZoneType>();
         final Game game = sa.getActivatingPlayer().getGame();
@@ -162,7 +164,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
             String[] restrictions = sa.hasParam("SharedRestrictions") ? sa.getParam("SharedRestrictions").split(",") : new String[] {"Card"};
             keywords = CardFactoryUtil.sharedKeywords(sa.getParam("KW").split(" & "), restrictions, zones, sa.getHostCard());
         }
-        this.applyPumpAll(sa, list, a, d, keywords, affectedZones);
+        applyPumpAll(sa, list, a, d, keywords, affectedZones);
     } // pumpAllResolve()
 
 }

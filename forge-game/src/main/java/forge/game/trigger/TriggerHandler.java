@@ -52,7 +52,7 @@ public class TriggerHandler {
     private final List<TriggerWaiting> waitingTriggers = Collections.synchronizedList(new ArrayList<TriggerWaiting>());
     private final Game game;
 
-    public TriggerHandler(Game gameState) {
+    public TriggerHandler(final Game gameState) {
         game = gameState;
     }
 
@@ -86,10 +86,10 @@ public class TriggerHandler {
         delayedTriggers.clear();
     }
 
-    public final void clearDelayedTrigger(Card card) {
-        ArrayList<Trigger> deltrigs = new ArrayList<Trigger>(delayedTriggers);
+    public final void clearDelayedTrigger(final Card card) {
+        final List<Trigger> deltrigs = new ArrayList<Trigger>(delayedTriggers);
 
-        for (Trigger trigger : deltrigs) {
+        for (final Trigger trigger : deltrigs) {
             if (trigger.getHostCard().equals(card)) {
                 delayedTriggers.remove(trigger);
             }
@@ -184,25 +184,25 @@ public class TriggerHandler {
         }
     }
 
-    public final void clearInstrinsicActiveTriggers(Card c) {
-        Iterator<?> itr = activeTriggers.iterator();
+    public final void clearInstrinsicActiveTriggers(final Card c) {
+        final Iterator<Trigger> itr = activeTriggers.iterator();
         Trigger t;
-        ArrayList<Trigger> toBeRemoved = new ArrayList<>();
+        final List<Trigger> toBeRemoved = new ArrayList<Trigger>();
 
         while(itr.hasNext()) {
-            t = (Trigger)itr.next();
+            t = itr.next();
             if (c.getId() == t.getHostCard().getId() && t.isIntrinsic()) {
                 toBeRemoved.add(t);
             }
         }
 
-        for (Trigger removed : toBeRemoved) {
+        for (final Trigger removed : toBeRemoved) {
             activeTriggers.remove(removed);
         }
     }
 
-    public final void registerActiveTrigger(Card c, boolean onlyExtrinsic) {
-        for (final Trigger t: c.getTriggers()) {
+    public final void registerActiveTrigger(final Card c, final boolean onlyExtrinsic) {
+        for (final Trigger t : c.getTriggers()) {
             if (!onlyExtrinsic || c.isCloned() || !t.isIntrinsic() || t instanceof TriggerAlways) {
                 if (isTriggerActive(t)) {
                     activeTriggers.add(t);
@@ -241,21 +241,21 @@ public class TriggerHandler {
     }
 
     public final boolean runWaitingTriggers() {
-        ArrayList<TriggerWaiting> waiting = new ArrayList<TriggerWaiting>(waitingTriggers);
+        final List<TriggerWaiting> waiting = new ArrayList<TriggerWaiting>(waitingTriggers);
         waitingTriggers.clear();
         if (waiting.isEmpty()) {
             return false;
         }
 
         boolean haveWaiting = false;
-        for (TriggerWaiting wt : waiting) {
+        for (final TriggerWaiting wt : waiting) {
             haveWaiting |= runWaitingTrigger(wt);
         }
 
         return haveWaiting;
     }
 
-    public final boolean runWaitingTrigger(TriggerWaiting wt) {
+    public final boolean runWaitingTrigger(final TriggerWaiting wt) {
         final TriggerType mode = wt.getMode();
         final Map<String, Object> runParams = wt.getParams();
 
@@ -266,7 +266,7 @@ public class TriggerHandler {
         }
 
         // Copy triggers here, so things can be modified just in case
-        final ArrayList<Trigger> delayedTriggersWorkingCopy = new ArrayList<Trigger>(delayedTriggers);
+        final List<Trigger> delayedTriggersWorkingCopy = new ArrayList<Trigger>(delayedTriggers);
 
         boolean checkStatics = false;
 
@@ -280,7 +280,7 @@ public class TriggerHandler {
 
         if (runParams.containsKey("Destination")) {
             // Check static abilities when a card enters the battlefield
-            String type = (String) runParams.get("Destination");
+            final String type = (String) runParams.get("Destination");
             checkStatics |= type.equals("Battlefield");
         }
 
@@ -288,16 +288,14 @@ public class TriggerHandler {
         checkStatics |= runNonStaticTriggersForPlayer(playerAP, mode, runParams, delayedTriggersWorkingCopy);
 
         // NAPs
-        for (Player nap : game.getPlayers()) {
-            if (!nap.equals(playerAP)) {
-                checkStatics |= runNonStaticTriggersForPlayer(nap, mode, runParams, delayedTriggersWorkingCopy);
-            }
+        for (final Player nap : game.getNonactivePlayers()) {
+            checkStatics |= runNonStaticTriggersForPlayer(nap, mode, runParams, delayedTriggersWorkingCopy);
         }
         return checkStatics;
     }
 
     private boolean runNonStaticTriggersForPlayer(final Player player, final TriggerType mode, 
-            final Map<String, Object> runParams, final ArrayList<Trigger> delayedTriggersWorkingCopy ) {
+            final Map<String, Object> runParams, final List<Trigger> delayedTriggersWorkingCopy ) {
 
         Card card = null;
         boolean checkStatics = false;
@@ -319,7 +317,7 @@ public class TriggerHandler {
             }
         }
 
-        for (Trigger deltrig : delayedTriggersWorkingCopy) {
+        for (final Trigger deltrig : delayedTriggersWorkingCopy) {
             if (deltrig.getHostCard().getController().equals(player)) {
                 if (isTriggerActive(deltrig) && canRunTrigger(deltrig, mode, runParams)) {
                     runSingleTrigger(deltrig, runParams);
@@ -385,9 +383,9 @@ public class TriggerHandler {
         if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers)
                 && !regtrig.isStatic() && mode.equals(TriggerType.ChangesZone)) {
             if (runParams.get("Destination") instanceof String) {
-                String dest = (String) runParams.get("Destination");
+                final String dest = (String) runParams.get("Destination");
                 if (dest.equals("Battlefield") && runParams.get("Card") instanceof Card) {
-                    Card card = (Card) runParams.get("Card");
+                    final Card card = (Card) runParams.get("Card");
                     if (card.isCreature()) {
                         return false;
                     }
@@ -415,7 +413,7 @@ public class TriggerHandler {
 
         SpellAbility sa = null;
         Card host = regtrig.getHostCard();
-        Card trigCard = regtrig.getRunParams().containsKey("Card") ? (Card)regtrig.getRunParams().get("Card") : null;
+        final Card trigCard = regtrig.getRunParams().containsKey("Card") ? (Card)regtrig.getRunParams().get("Card") : null;
 
         if (trigCard != null && (host.getId() == trigCard.getId())) {
             host = trigCard;
@@ -493,7 +491,7 @@ public class TriggerHandler {
         }
         final boolean isMandatory = mand;
 
-        WrappedAbility wrapperAbility = new WrappedAbility(regtrig, sa, decider);
+        final WrappedAbility wrapperAbility = new WrappedAbility(regtrig, sa, decider);
         wrapperAbility.setTrigger(true);
         wrapperAbility.setMandatory(isMandatory);
         wrapperAbility.setDescription(wrapperAbility.getStackDescription());
@@ -505,7 +503,7 @@ public class TriggerHandler {
             game.getStack().addSimultaneousStackEntry(wrapperAbility);
         }
         regtrig.setTriggeredSA(wrapperAbility);
-        
+
         if (triggerParams.containsKey("OneOff")) {
             if (regtrig.getHostCard().isImmutable()) {
                 Player p = regtrig.getHostCard().getController();

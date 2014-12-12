@@ -134,8 +134,8 @@ public class AbilityUtils {
                 final Object crd = root.getTriggeringObject(defined.substring(9));
                 if (crd instanceof Card) {
                     c = game.getCardState((Card) crd);
-                } else if (crd instanceof List<?>) {
-                    for (final Card cardItem : (CardCollection) crd) {
+                } else if (crd instanceof Iterable) {
+                    for (final Card cardItem : Iterables.filter((Iterable<?>) crd, Card.class)) {
                         cards.add(cardItem);
                     }
                 }
@@ -956,13 +956,13 @@ public class AbilityUtils {
                         players.add(p);
                     }
                 }
-                if (o instanceof List<?>) {
-                    @SuppressWarnings("unchecked")
-                    final List<Player> pList = (List<Player>) o;
+                if (o instanceof List) {
+                    final List<?> pList = (List<?>)o;
                     if (!pList.isEmpty() && pList.get(0) instanceof Player) {
-                        for (final Player p : pList) {
+                        for (final Object p : pList) {
                             if (!players.contains(p)) {
-                                players.add(p);
+                                // We now know each p in o to be an instance of Player, so cast is safe
+                                players.add((Player) p);
                             }
                         }
                     }

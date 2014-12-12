@@ -40,7 +40,7 @@ import org.apache.commons.lang3.StringUtils;
  * @version $Id$
  */
 public class ManaCostBeingPaid {
-    private class ManaCostBeingPaidIterator implements IParserManaCost, Iterator<ManaCostShard> {
+    private class ManaCostBeingPaidIterator implements IParserManaCost {
         private Iterator<ManaCostShard> mch;
         private ManaCostShard nextShard = null;
         private int remainingShards = 0;
@@ -404,7 +404,7 @@ public class ManaCostBeingPaid {
         return chosenShard;
     }
 
-    private int getPayPriority(ManaCostShard bill, byte paymentColor) {
+    private static int getPayPriority(final ManaCostShard bill, final byte paymentColor) {
         if (bill == ManaCostShard.COLORLESS) {
             return 0;
         }
@@ -421,7 +421,7 @@ public class ManaCostBeingPaid {
         return 5;
     }
 
-    private boolean canBePaidWith(ManaCostShard shard, Mana mana, ManaPool pool) {
+    private static boolean canBePaidWith(final ManaCostShard shard, final Mana mana, final ManaPool pool) {
         if (shard.isSnow() && !mana.isSnow()) {
             return false;
         }

@@ -96,7 +96,7 @@ public class CounterEffect extends SpellAbilityEffect {
             final Card tgtSACard = tgtSA.getHostCard();
             // should remember even that spell cannot be countered, e.g. Dovescape
             if (sa.hasParam("RememberCounteredCMC")) {
-                sa.getHostCard().addRemembered((Integer) tgtSACard.getCMC());
+                sa.getHostCard().addRemembered(Integer.valueOf(tgtSACard.getCMC()));
             }
 
             if (tgtSA.isSpell() && !CardFactoryUtil.isCounterableBy(tgtSACard, sa)) {
@@ -112,7 +112,7 @@ public class CounterEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            this.removeFromStack(tgtSA, sa, si);
+            removeFromStack(tgtSA, sa, si);
 
             // Destroy Permanent may be able to be turned into a SubAbility
             if (tgtSA.isAbility() && sa.hasParam("DestroyPermanent")) {
@@ -147,7 +147,8 @@ public class CounterEffect extends SpellAbilityEffect {
      *            object.
      * @param sa
      */
-    private void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si) {
+    private static void removeFromStack(final SpellAbility tgtSA,
+            final SpellAbility srcSA, final SpellAbilityStackInstance si) {
         final Game game = tgtSA.getActivatingPlayer().getGame();
         // Run any applicable replacement effects. 
         final HashMap<String, Object> repParams = new HashMap<String, Object>();
