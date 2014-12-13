@@ -25,6 +25,7 @@ import java.util.Map.Entry;
 import com.google.common.base.Predicate;
 
 import forge.FThreads;
+import forge.ImageKeys;
 import forge.LobbyPlayer;
 import forge.card.CardRarity;
 import forge.card.CardRules;
@@ -43,6 +44,7 @@ import forge.model.FModel;
 import forge.planarconquest.ConquestPlaneData.RegionData;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.player.GamePlayerUtil;
+import forge.player.LobbyPlayerHuman;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.BoosterUtils;
 import forge.util.Aggregates;
@@ -57,6 +59,7 @@ public class ConquestController {
     private ConquestData model;
     private transient IStorage<Deck> decks;
     private transient GameRunner gameRunner;
+    private LobbyPlayerHuman humanPlayer;
 
     public ConquestController() {
     }
@@ -233,10 +236,19 @@ public class ConquestController {
             humanStart.setStartingLife(STARTING_LIFE + (isHumanDefending ? FModel.getConquestPreferences().getPrefInt(CQPref.DEFEND_BONUS_LIFE) : 0));
             aiStart.setStartingLife(STARTING_LIFE);
 
-            List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
-            starter.add(humanStart.setPlayer(getConquestPlayer()));
+            String humanPlayerName = commander.getPlayerName();
+            String aiPlayerName = opponent.getPlayerName();
+            if (humanPlayerName.equals(aiPlayerName)) {
+                aiPlayerName += " (AI)"; //ensure player names are distinct
+            }
 
-            LobbyPlayer aiPlayer = GamePlayerUtil.createAiPlayer();
+            List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
+            humanPlayer = new LobbyPlayerHuman(humanPlayerName);
+            humanPlayer.setAvatarCardImageKey(ImageKeys.getImageKey(commander.getCard(), false));
+            starter.add(humanStart.setPlayer(humanPlayer));
+
+            LobbyPlayer aiPlayer = GamePlayerUtil.createAiPlayer(aiPlayerName, -1);
+            aiPlayer.setAvatarCardImageKey(ImageKeys.getImageKey(opponent.getCard(), false));
             starter.add(aiStart.setPlayer(aiPlayer));
 
             boolean useRandomFoil = FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
@@ -277,12 +289,8 @@ public class ConquestController {
                 CardRulesPredicates.Presets.IS_NON_CREATURE_SPELL, bonusCard ? 2 : 1);
     }
 
-    private LobbyPlayer getConquestPlayer() {
-        return GamePlayerUtil.getGuiPlayer(); //TODO: Should this be a separate player?
-    }
-
     public void showGameRewards(final GameView game, final IWinLoseView<? extends IButton> view) {
-        if (game.isMatchWonBy(getConquestPlayer())) {
+        if (game.isMatchWonBy(humanPlayer)) {
             view.getBtnQuit().setText("Great!");
 
             //give controller a chance to run remaining logic on a separate thread
@@ -313,7 +321,7 @@ public class ConquestController {
     }
 
     public void onGameFinished(final GameView game) {
-        if (game.isMatchWonBy(getConquestPlayer())) {
+        if (game.isMatchWonBy(humanPlayer)) {
             model.addWin(gameRunner.opponent);
             gameRunner.wonGame = true;
         }

@@ -13,8 +13,10 @@ import forge.Forge;
 import forge.Graphics;
 import forge.LobbyPlayer;
 import forge.assets.FImage;
+import forge.assets.FImageComplex;
 import forge.assets.FSkin;
 import forge.assets.FTextureRegionImage;
+import forge.card.CardRenderer;
 import forge.game.GameEntityView;
 import forge.game.GameView;
 import forge.game.Match;
@@ -60,7 +62,12 @@ public class MatchController implements IMatchController {
         LobbyPlayer lp = p.getLobbyPlayer();
         FImage avatar = avatarImages.get(lp);
         if (avatar == null) {
-            avatar = new FTextureRegionImage(FSkin.getAvatars().get(lp.getAvatarIndex()));
+            if (lp.getAvatarCardImageKey() == null) {
+                avatar = new FTextureRegionImage(FSkin.getAvatars().get(lp.getAvatarIndex()));
+            }
+            else { //handle lobby players with art from cards
+                avatar = CardRenderer.getCardArt(lp.getAvatarCardImageKey(), false);
+            }
         }
         return avatar;
     }
