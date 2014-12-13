@@ -38,6 +38,7 @@ import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
+import forge.planarconquest.ConquestUtil;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.TabPageScreen;
@@ -781,11 +782,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 cardManager.setPool(cardpool);
                 break;
             case PlanarConquest:
-                final ItemPool<PaperCard> pool = new ItemPool<PaperCard>(PaperCard.class);
-                pool.addAllFlat(FModel.getConquest().getModel().getCollection());
-                pool.removeAll(parentScreen.getDeck().getMain());
-                pool.removeAll(parentScreen.getDeck().get(DeckSection.Commander));
-                cardManager.setPool(pool);
+                cardManager.setPool(ConquestUtil.getAvailablePool(parentScreen.getDeck()));
                 break;
             default:
                 if (cardManager.getWantUnique()) {
