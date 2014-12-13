@@ -17,6 +17,7 @@ import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckFormat;
 import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
 import forge.deck.DeckType;
@@ -335,7 +336,7 @@ public class ConstructedScreen extends LaunchScreen {
                     Deck schemeDeck = playerPanel.lstSchemeDecks.getDeck();
                     CardPool schemePool = schemeDeck.get(DeckSection.Schemes);
                     if (checkLegality) {
-                        String errMsg = GameType.Archenemy.getDeckFormat().getSchemeSectionConformanceProblem(schemePool);
+                        String errMsg = DeckFormat.getSchemeSectionConformanceProblem(schemePool);
                         if (errMsg != null) {
                             FOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Scheme Deck");
                             return false;
@@ -349,7 +350,7 @@ public class ConstructedScreen extends LaunchScreen {
                     Deck planarDeck = playerPanel.lstPlanarDecks.getDeck();
                     CardPool planePool = planarDeck.get(DeckSection.Planes);
                     if (checkLegality) {
-                        String errMsg = GameType.Planechase.getDeckFormat().getPlaneSectionConformanceProblem(planePool);
+                        String errMsg = DeckFormat.getPlaneSectionConformanceProblem(planePool);
                         if (null != errMsg) {
                             FOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Planar Deck");
                             return false;

@@ -4,6 +4,7 @@ import forge.LobbyPlayer;
 import forge.UiCommand;
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.deck.DeckType;
 import forge.deck.DeckgenUtil;
@@ -300,7 +301,7 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
                         schemePool = DeckgenUtil.generateSchemePool();
                     }
                     if (checkLegality) {
-                        String errMsg = GameType.Archenemy.getDeckFormat().getSchemeSectionConformanceProblem(schemePool);
+                        String errMsg = DeckFormat.getSchemeSectionConformanceProblem(schemePool);
                         if (null != errMsg) {
                             FOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Scheme Deck");
                             return;
@@ -333,7 +334,7 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
                         planePool = DeckgenUtil.generatePlanarPool();
                     }
                     if (checkLegality) {
-                        String errMsg = GameType.Planechase.getDeckFormat().getPlaneSectionConformanceProblem(planePool);
+                        String errMsg = DeckFormat.getPlaneSectionConformanceProblem(planePool);
                         if (null != errMsg) {
                             FOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Planar Deck");
                             return;
