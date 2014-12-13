@@ -1,6 +1,7 @@
 package forge.game.player;
 
 import forge.LobbyPlayer;
+import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameType;
@@ -102,11 +103,13 @@ public class RegisteredPlayer {
     public Iterable<PaperCard> getPlanes() {
         return planes == null ? EmptyList : planes;
     }
+    public void setPlanes(Iterable<PaperCard> planes0) {
+        planes = planes0;
+    }
 
     public Iterable<PaperCard> getConspiracies() {
         return conspiracies == null ? EmptyList : conspiracies;
     }
-
     public void assignConspiracies() {
         if (currentDeck.has(DeckSection.Conspiracy))
             conspiracies = currentDeck.get(DeckSection.Conspiracy).toFlatList();
@@ -119,7 +122,7 @@ public class RegisteredPlayer {
     public void setTeamNumber(int teamNumber0) {
         this.teamNumber = teamNumber0;
     }
-    
+
     public static RegisteredPlayer forCommander(final Deck deck) {
         RegisteredPlayer start = new RegisteredPlayer(deck);
         start.commander = deck.get(DeckSection.Commander).get(0);
@@ -166,12 +169,12 @@ public class RegisteredPlayer {
         return this;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
     public IPaperCard getCommander() {
         return commander;
+    }
+    public void assignCommander() {
+        CardPool section = currentDeck.get(DeckSection.Commander);
+        commander = section == null ? null : section.get(0);
     }
 
     public void restoreDeck() {

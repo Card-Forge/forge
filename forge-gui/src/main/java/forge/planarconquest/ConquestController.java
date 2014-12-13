@@ -19,8 +19,10 @@ package forge.planarconquest;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import com.google.common.base.Predicate;
 
@@ -30,6 +32,7 @@ import forge.LobbyPlayer;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
+import forge.card.CardType;
 import forge.deck.Deck;
 import forge.game.GameRules;
 import forge.game.GameType;
@@ -54,8 +57,6 @@ import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
 
 public class ConquestController {
-    private static final int STARTING_LIFE = 30;
-
     private ConquestData model;
     private transient IStorage<Deck> decks;
     private transient GameRunner gameRunner;
@@ -230,11 +231,42 @@ public class ConquestController {
         }
 
         public void finishStartingGame() {
+            ConquestPreferences prefs = FModel.getConquestPreferences();
+
+            //determine game variants
+            Set<GameType> variants = new HashSet<GameType>();
+            int rng = Aggregates.randomInt(1, 100);
+            int commanderThreshold = prefs.getPrefInt(CQPref.PERCENT_COMMANDER);
+            int planechaseThreshold = commanderThreshold + prefs.getPrefInt(CQPref.PERCENT_PLANECHASE);
+            int doubleVariantThreshold = planechaseThreshold + prefs.getPrefInt(CQPref.PERCENT_DOUBLE_VARIANT);
+            if (rng <= commanderThreshold) {
+                variants.add(GameType.Commander);
+            }
+            else if (rng <= planechaseThreshold) {
+                variants.add(GameType.Planechase);
+            }
+            else if (rng <= doubleVariantThreshold) {
+                variants.add(GameType.Commander);
+                variants.add(GameType.Planechase);
+            }
+
             RegisteredPlayer humanStart = new RegisteredPlayer(commander.getDeck());
             RegisteredPlayer aiStart = new RegisteredPlayer(opponent.getDeck());
 
-            humanStart.setStartingLife(STARTING_LIFE + (isHumanDefending ? FModel.getConquestPreferences().getPrefInt(CQPref.DEFEND_BONUS_LIFE) : 0));
-            aiStart.setStartingLife(STARTING_LIFE);
+            if (isHumanDefending) { //give human a small life bonus if defending
+                humanStart.setStartingLife(humanStart.getStartingLife() + prefs.getPrefInt(CQPref.DEFEND_BONUS_LIFE));
+            }
+            if (variants.contains(GameType.Commander)) { //add 10 starting life for both players if playing a Commander game
+                humanStart.setStartingLife(humanStart.getStartingLife() + 10);
+                aiStart.setStartingLife(aiStart.getStartingLife() + 10);
+                humanStart.assignCommander();
+                aiStart.assignCommander();
+            }
+            if (variants.contains(GameType.Planechase)) { //create planar deck if planechase variant being applied
+                List<PaperCard> planes = generatePlanarPool();
+                humanStart.setPlanes(planes);
+                aiStart.setPlanes(planes);
+            }
 
             String humanPlayerName = commander.getPlayerName();
             String aiPlayerName = opponent.getPlayerName();
@@ -272,6 +304,40 @@ public class ConquestController {
             synchronized(lock) { //release game lock once game finished
                 lock.notify();
             }
+        }
+
+        private List<PaperCard> generatePlanarPool() {
+            String planeName = model.getCurrentPlane().getName();
+            List<PaperCard> pool = new ArrayList<PaperCard>();
+            List<PaperCard> otherPlanes = new ArrayList<PaperCard>();
+            List<PaperCard> phenomenons = new ArrayList<PaperCard>();
+
+            for (PaperCard c : FModel.getMagicDb().getVariantCards().getAllCards()) {
+                CardType type = c.getRules().getType();
+                if (type.isPlane()) {
+                    if (type.hasSubtype(planeName)) {
+                        pool.add(c); //always include card in pool if it matches the current plane
+                    }
+                    else {
+                        otherPlanes.add(c);
+                    }
+                }
+                else if (type.isPhenomenon()) {
+                    phenomenons.add(c);
+                }
+            }
+
+            //add between 0 and 2 phenomenons (where 2 is the most supported)
+            int numPhenomenons = Aggregates.randomInt(0, 2);
+            for (int i = 0; i < numPhenomenons; i++) {
+                pool.add(Aggregates.removeRandom(phenomenons));
+            }
+
+            //add enough additional plane cards to reach a minimum 10 card deck
+            while (pool.size() < 10) {
+                pool.add(Aggregates.removeRandom(otherPlanes));
+            }
+            return pool;
         }
     }
 

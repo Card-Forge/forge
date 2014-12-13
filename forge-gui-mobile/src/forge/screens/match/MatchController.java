@@ -13,7 +13,6 @@ import forge.Forge;
 import forge.Graphics;
 import forge.LobbyPlayer;
 import forge.assets.FImage;
-import forge.assets.FImageComplex;
 import forge.assets.FSkin;
 import forge.assets.FTextureRegionImage;
 import forge.card.CardRenderer;

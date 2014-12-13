@@ -128,6 +128,19 @@ public class Aggregates {
         return list;
     }
 
+    public static final <T> T removeRandom(final List<T> source) {
+        if (source == null || source.isEmpty()) { return null; }
+
+        int index;
+        if (source.size() > 1) {
+            index = MyRandom.getRandom().nextInt(source.size());
+        }
+        else {
+            index = 0;
+        }
+        return source.remove(index);
+    }
+
     public static int randomInt(int min, int max) {
         Random rnd = MyRandom.getRandom();
         return rnd.nextInt(max - min + 1) + min;

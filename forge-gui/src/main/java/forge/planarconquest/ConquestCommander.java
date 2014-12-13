@@ -22,6 +22,18 @@ public class ConquestCommander {
         return card.getName();
     }
 
+    public String getPlayerName() {
+        String name = card.getName();
+        int idx = name.indexOf(' ');
+        if (idx != -1) {
+            name = name.substring(0, idx);
+        }
+        if (name.endsWith(",") || name.endsWith("-")) {
+            name = name.substring(0, name.length() - 1).trim();
+        }
+        return name;
+    }
+
     public PaperCard getCard() {
         return card;
     }
