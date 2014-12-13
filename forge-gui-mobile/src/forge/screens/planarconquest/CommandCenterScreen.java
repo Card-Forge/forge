@@ -35,10 +35,13 @@ import forge.planarconquest.IVCommandCenter;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
 import forge.screens.match.TargetingOverlay;
+import forge.screens.match.views.VPrompt;
+import forge.toolbox.FButton;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
+import forge.toolbox.FButton.Corner;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.util.Utils;
@@ -57,6 +60,8 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
     private final CommanderRow commanderRow = add(new CommanderRow());
     private final FLabel lblCurrentPlane = add(new FLabel.Builder().font(FSkinFont.get(16)).align(HAlignment.CENTER).build());
     private final FLabel btnEndDay = add(new FLabel.ButtonBuilder().font(FSkinFont.get(14)).build());
+    private final FButton btnEditDeck = add(new FButton("Deck"));
+    private final FButton btnPortal = add(new FButton("Portal"));
 
     private ConquestData model;
 
@@ -69,6 +74,8 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
                 FModel.getConquest().endDay(CommandCenterScreen.this);
             }
         });
+        btnEditDeck.setCorner(Corner.BottomLeft);
+        btnPortal.setCorner(Corner.BottomRight);
     }
 
     @Override
@@ -92,7 +99,7 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
         if (commander != null && commander.getDeployedRegion() != null) {
             model.setCurrentRegion(commander.getDeployedRegion());
         }
-        regionDisplay.onRegionChanged(); //simulate region change when day changes to ensure everything is updated, even if region didn't change
+        regionDisplay.onRegionChanged(); //simulate region change when day changes to ensure everything is updated, even if region didn't changed
     }
 
     @Override
@@ -168,6 +175,9 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
 
         lblCurrentPlane.setSize(btnEndDay.getWidth(), lblCurrentPlane.getAutoSizeBounds().height);
         lblCurrentPlane.setPosition(btnEndDay.getLeft(), btnEndDay.getTop() - lblCurrentPlane.getHeight());
+
+        btnEditDeck.setBounds(0, height - VPrompt.HEIGHT, VPrompt.BTN_WIDTH, VPrompt.HEIGHT);
+        btnPortal.setBounds(width - VPrompt.BTN_WIDTH, height - VPrompt.HEIGHT, VPrompt.BTN_WIDTH, VPrompt.HEIGHT);
 
         float numCommanders = commanderRow.panels.length;
         float commanderWidth = (width - (numCommanders + 3) * COMMANDER_GAP) / numCommanders;
