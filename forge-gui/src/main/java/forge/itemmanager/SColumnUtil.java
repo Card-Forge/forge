@@ -170,6 +170,21 @@ public final class SColumnUtil {
         return columns;
     }
 
+    public static Map<ColumnDef, ItemColumnConfig> getConquestCollectionDefaultColumns() {
+        Map<ColumnDef, ItemColumnConfig> columns = getCardColumns(null, false, false, false, true, true);
+        columns.get(ColumnDef.NEW).setSortPriority(1);
+        columns.get(ColumnDef.NAME).setSortPriority(2);
+        return columns;
+    }
+
+    public static Map<ColumnDef, ItemColumnConfig> getConquestDeckEditorDefaultColumns() {
+        Map<ColumnDef, ItemColumnConfig> columns = getCardColumns(ColumnDef.DECK_QUANTITY, false, false, false, true, true);
+        columns.get(ColumnDef.CMC).setSortPriority(1);
+        columns.get(ColumnDef.TYPE).setSortPriority(2);
+        columns.get(ColumnDef.NAME).setSortPriority(3);
+        return columns;
+    }
+
     public static Map<ColumnDef, ItemColumnConfig> getDecksDefaultColumns(boolean allowEdit, boolean includeFolder) {
         ArrayList<ColumnDef> colDefs = new ArrayList<ColumnDef>();
         colDefs.add(ColumnDef.DECK_FAVORITE);

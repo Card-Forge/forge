@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.FThreads;
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkin;
@@ -75,7 +76,18 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
             }
         });
         btnEditDeck.setCorner(Corner.BottomLeft);
+        btnEditDeck.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                Forge.openScreen(new ConquestDeckEditor(getSelectedCommander()));
+            }
+        });
         btnPortal.setCorner(Corner.BottomRight);
+        btnPortal.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+            }
+        });
     }
 
     @Override
@@ -100,6 +112,10 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
             model.setCurrentRegion(commander.getDeployedRegion());
         }
         regionDisplay.onRegionChanged(); //simulate region change when day changes to ensure everything is updated, even if region didn't changed
+    }
+
+    public ConquestCommander getSelectedCommander() {
+        return model.getCurrentPlaneData().getCommanders().get(commanderRow.selectedIndex);
     }
 
     @Override

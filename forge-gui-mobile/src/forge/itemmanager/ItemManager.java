@@ -20,6 +20,7 @@ package forge.itemmanager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Rectangle;
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -38,7 +39,6 @@ import forge.itemmanager.views.ImageView;
 import forge.itemmanager.views.ItemListView;
 import forge.itemmanager.views.ItemView;
 import forge.menu.FDropDownMenu;
-import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FContainer;
@@ -66,7 +66,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private ContextMenu contextMenu;
     private final Class<T> genericType;
     private ItemManagerConfig config;
-    private boolean hasNewColumn;
+    private Function<Entry<? extends InventoryItem, Integer>, Object> fnNewGet;
     private boolean viewUpdating, needSecondUpdate;
     private List<ItemColumn> sortCols = new ArrayList<ItemColumn>();
 
@@ -242,7 +242,13 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         }
         setViewIndex(config0.getViewIndex());
         setHideFilters(config0.getHideFilters());
-        hasNewColumn = config.getCols().containsKey(ColumnDef.NEW);
+
+        if (colOverrides == null || !colOverrides.containsKey(ColumnDef.NEW)) {
+            fnNewGet = null;
+        }
+        else {
+            fnNewGet = colOverrides.get(ColumnDef.NEW).getFnDisplay();
+        }
     }
 
     protected boolean allowSortChange() {
@@ -250,7 +256,13 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     }
 
     protected String getItemSuffix(Entry<T, Integer> item) {
-        return hasNewColumn && FModel.getQuest().getCards().isNew(item.getKey()) ? " *NEW*" : null;
+        if (fnNewGet != null) {
+            String suffix = fnNewGet.apply(item).toString();
+            if (!suffix.isEmpty()) {
+                return " *" + suffix + "*";
+            }
+        }
+        return null;
     }
 
     public abstract class ItemRenderer {

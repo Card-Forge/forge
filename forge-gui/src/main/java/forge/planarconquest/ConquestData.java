@@ -18,9 +18,12 @@
 package forge.planarconquest;
 
 import forge.deck.Deck;
+import forge.item.InventoryItem;
 import forge.item.PaperCard;
+import forge.model.FModel;
 import forge.planarconquest.ConquestPlane.Region;
 import forge.properties.ForgeConstants;
+import forge.util.ItemPool;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -29,6 +32,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
+
+import com.google.common.base.Function;
 
 public final class ConquestData {
     /** Holds the latest version of the Conquest Data. */
@@ -51,6 +56,8 @@ public final class ConquestData {
 
     private final HashSet<PaperCard> collection = new HashSet<PaperCard>();
     private final HashMap<String, Deck> decks = new HashMap<String, Deck>();
+    private final ItemPool<InventoryItem> decksUsingMyCards = new ItemPool<InventoryItem>(InventoryItem.class);
+    private final HashSet<PaperCard> newCards = new HashSet<PaperCard>();
 
     public ConquestData() { //needed for XML serialization
     }
@@ -207,4 +214,46 @@ public final class ConquestData {
         name = newName;
         saveData();
     }
+
+    public void updateDecksForEachCard() {
+        decksUsingMyCards.clear();
+        for (final Deck deck : FModel.getConquest().getDecks()) {
+            for (final Entry<PaperCard, Integer> e : deck.getMain()) {
+                decksUsingMyCards.add(e.getKey());
+            }
+        }
+    }
+
+    public HashSet<PaperCard> getNewCards() {
+        return newCards;
+    }
+
+    public final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare =
+            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+        @Override
+        public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+            return newCards.contains(from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
+        }
+    };
+    public final Function<Entry<? extends InventoryItem, Integer>, Object> fnNewGet =
+            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+        @Override
+        public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+            return newCards.contains(from.getKey()) ? "NEW" : "";
+        }
+    };
+    public final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+        @Override
+        public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+            final Integer iValue = decksUsingMyCards.count(from.getKey());
+            return iValue == null ? Integer.valueOf(0) : iValue;
+        }
+    };
+    public final Function<Entry<? extends InventoryItem, Integer>, Object> fnDeckGet = new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+        @Override
+        public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+            final Integer iValue = decksUsingMyCards.count(from.getKey());
+            return iValue == null ? "" : iValue.toString();
+        }
+    };
 }

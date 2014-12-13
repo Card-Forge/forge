@@ -125,6 +125,9 @@ public class ConquestController {
                         }
                     }
                 }
+
+                model.getNewCards().clear(); //reset new cards list before more new cards unlocked
+
                 //perform all commander actions
                 for (ConquestCommander commander : commanders) {
                     if (commandCenter.setSelectedCommander(commander)) {
@@ -600,6 +603,7 @@ public class ConquestController {
         }
 
         model.getCollection().addAll(rewards);
+        model.getNewCards().addAll(rewards);
 
         String message = messagePrefix;
         if (messageSuffix != null) {
@@ -674,6 +678,7 @@ public class ConquestController {
 
         BoosterUtils.sort(rewards);
         model.getCollection().addAll(rewards);
+        model.getNewCards().addAll(rewards);
         view.showCards("Booster contained " + count + " new card" + (count != 1 ? "s" : ""), rewards);
     }
 
@@ -691,6 +696,7 @@ public class ConquestController {
         BoosterUtils.sort(cards);
         PaperCard card = SGuiChoose.one("Choose a card from your opponent's deck", cards);
         model.getCollection().add(card);
+        model.getNewCards().add(card);
         return true;
     }
 
