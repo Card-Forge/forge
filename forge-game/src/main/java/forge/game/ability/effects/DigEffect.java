@@ -118,7 +118,6 @@ public class DigEffect extends SpellAbilityEffect {
                 DelayedReveal delayedReveal = null;
                 boolean hasRevealed = true;
                 if (sa.hasParam("Reveal")) {
-                    delayedReveal = new DelayedReveal(top, srcZone, p);
                     game.getAction().reveal(top, p, false);
                 }
                 else if (sa.hasParam("RevealOptional")) {
