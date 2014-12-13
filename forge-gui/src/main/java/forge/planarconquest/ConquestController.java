@@ -262,10 +262,9 @@ public class ConquestController {
                 humanStart.assignCommander();
                 aiStart.assignCommander();
             }
-            if (variants.contains(GameType.Planechase)) { //create planar deck if planechase variant being applied
-                List<PaperCard> planes = generatePlanarPool();
-                humanStart.setPlanes(planes);
-                aiStart.setPlanes(planes);
+            if (variants.contains(GameType.Planechase)) { //generate planar decks if planechase variant being applied
+                humanStart.setPlanes(generatePlanarPool());
+                aiStart.setPlanes(generatePlanarPool());
             }
 
             String humanPlayerName = commander.getPlayerName();
