@@ -290,11 +290,15 @@ public enum CSubmenuQuestDraft implements ICDoc {
         if (achievements != null) {
 
             final CardBlock block = GuiChoose.oneOrNone("Choose Draft Format", QuestEventDraft.getAvailableBlocks(FModel.getQuest()));
-            
-            achievements.spendDraftToken(block);
-            
-            update();
-            VSubmenuQuestDraft.SINGLETON_INSTANCE.populate();
+
+            if (block != null) {
+
+                achievements.spendDraftToken(block);
+
+                update();
+                VSubmenuQuestDraft.SINGLETON_INSTANCE.populate();
+
+            }
             
         }
         
