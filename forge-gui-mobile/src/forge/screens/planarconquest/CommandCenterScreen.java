@@ -418,7 +418,7 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
 
         @Override
         public boolean tap(float x, float y, int count) {
-            if (count == 2 && index >= 0) {
+            if (count == 2 && index >= 0 && commander != null) {
                 Forge.openScreen(new ConquestDeckEditor(commander));
                 return true;
             }
