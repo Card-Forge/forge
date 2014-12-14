@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -17,11 +18,14 @@ public class LookAtEffect extends SpellAbilityEffect {
         final Player activator = sa.getActivatingPlayer();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
+        final CardCollection targets = new CardCollection();
         for (final Card tgtCard : getTargetCards(sa)) {
             if (tgt == null || tgtCard.canBeTargetedBy(sa)) {
-                game.getAction().revealTo(tgtCard, activator);
+                targets.add(tgtCard);
             }
         }
+
+        game.getAction().revealTo(targets, activator);
     }
 
     @Override
