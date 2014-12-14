@@ -2247,6 +2247,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         return false;
     }
 
+    public boolean isSkippingMain() {
+        return hasKeyword("Skip your main phase.");
+    }
+
     public int getStartingHandSize() {
         return startingHandSize;
     }

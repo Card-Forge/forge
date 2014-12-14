@@ -1,0 +1,11 @@
+Name:Fatespinner
+ManaCost:1 U U
+Types:Creature Human Wizard
+PT:1/2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Execute$ TrigSkipPhase | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's upkeep, that player chooses draw step, main phase, or combat phase. The player skips each instance of the chosen step or phase this turn.
+SVar:TrigSkipPhase:DB$ GenericChoice | Defined$ TriggeredPlayer | Choices$ FatespinnerSkipDraw,FatespinnerSkipMain,FatespinnerSkipCombat | ShowChoice$ True | AILogic$ Random
+SVar:FatespinnerSkipDraw:DB$ Pump | Defined$ TriggeredPlayer | KW$ Skip your draw step. | SpellDescription$ Draw step
+SVar:FatespinnerSkipMain:DB$ Pump | Defined$ TriggeredPlayer | KW$ Skip your main phase. | SpellDescription$ Main phase
+SVar:FatespinnerSkipCombat:DB$ Pump | Defined$ TriggeredPlayer | KW$ Skip your combat phase. | SpellDescription$ Combat phase
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fatespinner.jpg
+Oracle:At the beginning of each opponent's upkeep, that player chooses draw step, main phase, or combat phase. The player skips each instance of the chosen step or phase this turn.

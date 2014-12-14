@@ -186,9 +186,9 @@ public class PhaseHandler implements java.io.Serializable {
         game.fireEvent(new GameEventTurnPhase(playerTurn, phase, phaseType));
     }
 
-    private boolean isSkippingPhase(PhaseType phase) {
+    private boolean isSkippingPhase(final PhaseType phase) {
         // TODO: Refactor this method to replacement effect
-        switch(phase) {
+        switch (phase) {
             case UNTAP:
                 if (playerTurn.hasKeyword("Skip your next untap step.")) {
                     playerTurn.removeKeyword("Skip your next untap step.");
@@ -201,6 +201,10 @@ public class PhaseHandler implements java.io.Serializable {
 
             case DRAW:
                 return playerTurn.isSkippingDraw() || turn == 1 && game.getPlayers().size() == 2;
+
+            case MAIN1:
+            case MAIN2:
+                return playerTurn.isSkippingMain();
 
             case COMBAT_BEGIN:
             case COMBAT_DECLARE_ATTACKERS:
