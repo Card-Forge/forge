@@ -72,6 +72,7 @@ public enum ApiType {
     GainLife (LifeGainEffect.class),
     GainOwnership (OwnershipGainEffect.class),
     GenericChoice (ChooseGenericEffect.class),
+    LookAt (LookAtEffect.class),
     LoseLife (LifeLoseEffect.class),
     LosesGame (GameLossEffect.class),
     Mana (ManaEffect.class),

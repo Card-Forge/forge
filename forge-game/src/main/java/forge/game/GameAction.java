@@ -21,6 +21,7 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
+
 import forge.GameCommand;
 import forge.card.CardStateName;
 import forge.card.CardType;
@@ -1279,6 +1280,27 @@ public class GameAction {
             game.getStack().addSimultaneousStackEntry(undyingAb);
         }
         return newCard;
+    }
+
+    public void revealTo(final Card card, final Player to) {
+        revealTo(card, Collections.singleton(to));
+    }
+    public void revealTo(final CardCollectionView cards, final Player to) {
+        revealTo(cards, Collections.singleton(to));
+    }
+    public void revealTo(final Card card, final Iterable<Player> to) {
+        revealTo(new CardCollection(card), to);
+    }
+    public void revealTo(final CardCollectionView cards, final Iterable<Player> to) {
+        if (cards.isEmpty()) {
+            return;
+        }
+
+        final ZoneType zone = cards.getFirst().getZone().getZoneType();
+        final Player owner = cards.getFirst().getOwner();
+        for (final Player p : to) {
+            p.getController().reveal(cards, zone, owner);
+        }
     }
 
     public void reveal(CardCollectionView cards, Player cardOwner) {

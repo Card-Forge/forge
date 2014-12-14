@@ -381,6 +381,7 @@ forge-game/src/main/java/forge/game/ability/effects/LifeExchangeEffect.java -tex
 forge-game/src/main/java/forge/game/ability/effects/LifeGainEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/LifeLoseEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/LifeSetEffect.java -text
+forge-game/src/main/java/forge/game/ability/effects/LookAtEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ManaEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ManaReflectedEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/MillEffect.java -text
@@ -2116,6 +2117,7 @@ forge-gui/res/cardsfolder/a/aven_redeemer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/aven_riftwatcher.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/aven_shrine.txt -text
 forge-gui/res/cardsfolder/a/aven_smokeweaver.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/a/aven_soulgazer.txt -text
 forge-gui/res/cardsfolder/a/aven_squire.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/aven_trailblazer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/aven_trooper.txt svneol=native#text/plain
@@ -12675,6 +12677,7 @@ forge-gui/res/cardsfolder/s/smite_the_monstrous.txt -text
 forge-gui/res/cardsfolder/s/smog_elemental.txt -text
 forge-gui/res/cardsfolder/s/smogsteed_rider.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/smoke.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/smoke_teller.txt -text
 forge-gui/res/cardsfolder/s/smokebraider.txt -text
 forge-gui/res/cardsfolder/s/smokespew_invoker.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/smokestack.txt svneol=native#text/plain
