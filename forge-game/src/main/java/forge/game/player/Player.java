@@ -20,6 +20,7 @@ package forge.game.player;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -2291,19 +2292,18 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Puts my currently active planes, if any, at the bottom of my planar deck.
      */
     public void leaveCurrentPlane() {
-        if (!currentPlanes.isEmpty()) {
+        for (final Card plane : currentPlanes) {
             //Run PlaneswalkedFrom triggers here.
-            HashMap<String,Object> runParams = new HashMap<String,Object>();
-            runParams.put("Card", new CardCollection(currentPlanes));
+            final Map<String, Object> runParams = new ImmutableMap.Builder<String, Object>().put("Card", plane).build();
             game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedFrom, runParams,false);
-
-            for (Card c : currentPlanes) {
-                game.getZoneOf(c).remove(c);
-                c.clearControllers();
-                getZone(ZoneType.PlanarDeck).add(c);
-            }
-            currentPlanes.clear();
         }
+
+        for (final Card plane : currentPlanes) {
+            game.getZoneOf(plane).remove(plane);
+            plane.clearControllers();
+            getZone(ZoneType.PlanarDeck).add(plane);
+        }
+        currentPlanes.clear();
 
         //DBG
         //System.out.println("CurrentPlanes: " + currentPlanes);
