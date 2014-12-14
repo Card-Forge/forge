@@ -21,6 +21,7 @@ import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardZoom.ActivateHandler;
+import forge.deck.FDeckViewer;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.model.FModel;
@@ -431,24 +432,7 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
             if (card == null) { return false; }
 
             if (index >= 0) {
-                List<CardView> cards = new ArrayList<CardView>();
-                for (CommanderPanel panel : commanderRow.panels) {
-                    if (panel.card == null) {
-                        break;
-                    }
-                    cards.add(panel.card);
-                }
-                CardZoom.show(cards, index, new ActivateHandler() {
-                    @Override
-                    public String getActivateAction(int idx) {
-                        return "select commander";
-                    }
-
-                    @Override
-                    public void activate(int idx) {
-                        CommandCenterScreen.this.activate(commanderRow.panels[idx]);
-                    }
-                });
+                FDeckViewer.show(commander.getDeck());
             }
             else if (index >= -regionDisplay.opponents.length) {
                 List<CardView> cards = new ArrayList<CardView>();
