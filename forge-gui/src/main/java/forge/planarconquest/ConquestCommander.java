@@ -13,9 +13,10 @@ public class ConquestCommander {
     private Region deployedRegion;
     private ConquestAction currentDayAction;
 
-    public ConquestCommander(PaperCard card0, DeckGenPool cardPool0, boolean forAi) {
+    public ConquestCommander(PaperCard card0, DeckGenPool cardPool0, boolean forAi, Region deployedRegion0) {
         card = card0;
         deck = ConquestUtil.generateDeck(card0, cardPool0, forAi);
+        deployedRegion = deployedRegion0;
     }
 
     public String getName() {

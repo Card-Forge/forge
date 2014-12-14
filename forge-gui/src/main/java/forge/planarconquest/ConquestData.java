@@ -71,7 +71,7 @@ public final class ConquestData {
     }
 
     public List<PaperCard> addCommander(PaperCard card) {
-        ConquestCommander commander = new ConquestCommander(card, currentPlane.getCardPool(), false);
+        ConquestCommander commander = new ConquestCommander(card, currentPlane.getCardPool(), false, null);
         getCurrentPlaneData().getCommanders().add(commander);
         decks.put(commander.getDeck().getName(), commander.getDeck());
 
@@ -117,7 +117,7 @@ public final class ConquestData {
     public ConquestPlaneData getCurrentPlaneData() {
         ConquestPlaneData planeData = planeDataMap.get(currentPlane);
         if (planeData == null) {
-            planeData = new ConquestPlaneData();
+            planeData = new ConquestPlaneData(currentPlane);
             planeDataMap.put(currentPlane, planeData);
         }
         return planeData;

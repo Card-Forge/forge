@@ -399,7 +399,7 @@ public enum ConquestPlane {
             if (cards.isEmpty()) { //if all commanders are used, we can't prevent duplicates
                 cards.addAll(commanders);
             }
-            return new ConquestCommander(Aggregates.random(cards), cardPool, true);
+            return new ConquestCommander(Aggregates.random(cards), cardPool, true, this);
         }
 
         public String toString() {

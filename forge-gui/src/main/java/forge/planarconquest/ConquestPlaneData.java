@@ -2,10 +2,12 @@ package forge.planarconquest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
 import forge.item.PaperCard;
+import forge.model.FModel;
 import forge.planarconquest.ConquestPlane.Region;
 
 public class ConquestPlaneData {
@@ -13,10 +15,15 @@ public class ConquestPlaneData {
     private final Map<Region, RegionData> regionDataLookup = new HashMap<Region, RegionData>();
     private final Map<String, Integer> winsPerOpponent = new HashMap<String, Integer>();
     private final Map<String, Integer> lossesPerOpponent = new HashMap<String, Integer>();
+    private final ConquestPlane plane;
 
     private int wins, losses;
     private int winStreakBest = 0;
     private int winStreakCurrent = 0;
+
+    public ConquestPlaneData(ConquestPlane plane0) {
+        plane = plane0;
+    }
 
     public List<ConquestCommander> getCommanders() {
         return commanders;
@@ -47,12 +54,14 @@ public class ConquestPlaneData {
         if (winStreakCurrent > winStreakBest) {
             winStreakBest = winStreakCurrent;
         }
+        getRegionData(opponent.getDeployedRegion()).wins++;
         winsPerOpponent.put(opponent.getName(), getWinsAgainst(opponent.getCard()) + 1);
     }
 
     public void addLoss(ConquestCommander opponent) {
         losses++;
         winStreakCurrent = 0;
+        getRegionData(opponent.getDeployedRegion()).losses++;
         lossesPerOpponent.put(opponent.getName(), getLossesAgainst(opponent.getCard()) + 1);
     }
 
@@ -72,6 +81,17 @@ public class ConquestPlaneData {
         return winStreakCurrent;
     }
 
+    public int getUnlockedCount() {
+        int count = 0;
+        HashSet<PaperCard> collection = FModel.getConquest().getModel().getCollection();
+        for (PaperCard pc : plane.getCardPool().getAllCards()) {
+            if (collection.contains(pc)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public RegionData getRegionData(Region region) {
         RegionData regionData = regionDataLookup.get(region);
         if (regionData == null) {
@@ -85,6 +105,7 @@ public class ConquestPlaneData {
         private final Region region;
         private final ConquestCommander[] opponents = new ConquestCommander[3];
         private ConquestCommander deployedCommander;
+        private int wins, losses;
 
         private RegionData(Region region0) {
             region = region0;
@@ -95,6 +116,14 @@ public class ConquestPlaneData {
 
         public Region getRegion() {
             return region;
+        }
+
+        public int getWins() {
+            return wins;
+        }
+
+        public int getLosses() {
+            return losses;
         }
 
         public ConquestCommander getOpponent(int index) {
@@ -116,6 +145,17 @@ public class ConquestPlaneData {
             if (deployedCommander != null) {
                 deployedCommander.setDeployedRegion(region);
             }
+        }
+
+        public int getUnlockedCount() {
+            int count = 0;
+            HashSet<PaperCard> collection = FModel.getConquest().getModel().getCollection();
+            for (PaperCard pc : region.getCardPool().getAllCards()) {
+                if (collection.contains(pc)) {
+                    count++;
+                }
+            }
+            return count;
         }
     }
 }

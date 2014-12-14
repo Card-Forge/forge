@@ -50,6 +50,7 @@ import forge.util.Utils;
 public class CommandCenterScreen extends FScreen implements IVCommandCenter {
     private static final Color BACK_COLOR = FSkinColor.fromRGB(1, 2, 2);
     private static final float BORDER_THICKNESS = Utils.scale(1);
+    private static final FSkinFont REGION_STATS_FONT = FSkinFont.get(12);
     private static final FSkinFont REGION_NAME_FONT = FSkinFont.get(15);
     private static final FSkinFont UNLOCK_WINS_FONT = FSkinFont.get(18);
     private static final float COMMANDER_ROW_PADDING = Utils.scale(16);
@@ -208,6 +209,7 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
         private final CommanderPanel[] opponents = new CommanderPanel[3];
         private final CommanderPanel deployedCommander;
         private final ActionPanel[] actions = new ActionPanel[4];
+        private String unlockRatio, winRatio;
         private RegionData data;
 
         private RegionDisplay() {
@@ -243,6 +245,8 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
                 opponents[i].setCommander(data.getOpponent(i));
             }
             deployedCommander.setCommander(data.getDeployedCommander());
+            unlockRatio = data.getUnlockedCount() + "/" + data.getRegion().getCardPool().size();
+            winRatio = data.getWins() + "-" + data.getLosses();
         }
 
         @Override
@@ -299,7 +303,9 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
 
             y += h - regionFrameBaseHeight;
             h = regionFrameBaseHeight * 0.9f;
+            g.drawText(unlockRatio, REGION_STATS_FONT, Color.BLACK, 2 * x, y, w, h, false, HAlignment.LEFT, true);
             textRenderer.drawText(g, region.getName(), REGION_NAME_FONT, Color.BLACK, x, y, w, h, y, h, false, HAlignment.CENTER, true);
+            g.drawText(winRatio, REGION_STATS_FONT, Color.BLACK, x, y, w - x, h, false, HAlignment.RIGHT, true);
         }
     }
 

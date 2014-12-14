@@ -16,6 +16,10 @@ public class DeckGenPool implements IDeckGenPool {
         }
     }
 
+    public int size() {
+        return cards.size();
+    }
+
     @Override
     public PaperCard getCard(String name) {
         return cards.get(name);
