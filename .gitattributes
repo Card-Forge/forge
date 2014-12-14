@@ -1156,6 +1156,8 @@ forge-gui-ios/.classpath -text
 forge-gui-ios/.project -text
 forge-gui-ios/Info.plist.xml -text
 forge-gui-ios/libs/gdx-backend-robovm.jar -text
+forge-gui-ios/libs/gdx-sources.jar -text
+forge-gui-ios/libs/gdx.jar -text
 forge-gui-ios/libs/libObjectAL.a -text
 forge-gui-ios/libs/libgdx-freetype.a -text
 forge-gui-ios/libs/libgdx.a -text
