@@ -146,11 +146,12 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
         //draw stats and name for current plane above buttons
         float x = COMMANDER_GAP / 3;
         float y = commanderRow.getBottom();
-        h = btnEndDay.getTop() - y;
+        float h1 = btnEndDay.getTop() - y;
+        float h2 = getHeight() - y;
         w -= 2 * x;
-        g.drawText(unlockRatio, PLANE_STATS_FONT, Color.WHITE, x, y, w, h, false, HAlignment.LEFT, true);
-        g.drawText("Plane - " + model.getCurrentPlane().getName(), PLANE_NAME_FONT, Color.WHITE, x, y, w, h, false, HAlignment.CENTER, true);
-        g.drawText(winRatio, PLANE_STATS_FONT, Color.WHITE, x, y, w, h, false, HAlignment.RIGHT, true);
+        g.drawText(unlockRatio, PLANE_STATS_FONT, Color.WHITE, x, y, w, h2, false, HAlignment.LEFT, true);
+        g.drawText("Plane - " + model.getCurrentPlane().getName(), PLANE_NAME_FONT, Color.WHITE, x, y, w, h1, false, HAlignment.CENTER, true);
+        g.drawText(winRatio, PLANE_STATS_FONT, Color.WHITE, x, y, w, h2, false, HAlignment.RIGHT, true);
     }
 
     @Override
