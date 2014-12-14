@@ -28,6 +28,7 @@ import forge.planarconquest.ConquestAction;
 import forge.planarconquest.ConquestCommander;
 import forge.planarconquest.ConquestData;
 import forge.planarconquest.ConquestController.GameRunner;
+import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestPlane.Region;
 import forge.planarconquest.ConquestPlaneData;
 import forge.planarconquest.ConquestPlaneData.RegionData;
@@ -66,6 +67,7 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
     private final FButton btnPortal = add(new FButton("Portal"));
 
     private ConquestData model;
+    private String unlockRatio, winRatio;
 
     public CommandCenterScreen() {
         super("", ConquestMenu.getMenu());
@@ -104,8 +106,15 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
 
     @Override
     public void updateCurrentDay() {
-        lblCurrentPlane.setText("Plane - " + model.getCurrentPlane().getName());
+        ConquestPlane plane = model.getCurrentPlane();
+        ConquestPlaneData planeData = model.getCurrentPlaneData();
+
+        lblCurrentPlane.setText("Plane - " + plane.getName());
         btnEndDay.setText("End Day " + model.getDay());
+
+        //update unlock and win ratios for plane
+        unlockRatio = planeData.getUnlockedCount() + "/" + plane.getCardPool().size();
+        winRatio = planeData.getWins() + "-" + planeData.getLosses();
 
         commanderRow.selectedIndex = 0; //select first commander at the beginning of each day
         ConquestCommander commander = commanderRow.panels[0].commander;
@@ -150,6 +159,14 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
         float h = w * background.getHeight() / background.getWidth();
         g.fillRect(BACK_COLOR, 0, 0, w, getHeight());
         g.drawImage(background, 0, getHeight() - h, w, h); //retain proportions, remaining area will be covered by back color
+
+        //draw stats for current plane above buttons
+        float x = COMMANDER_GAP / 3;
+        h = REGION_STATS_FONT.getLineHeight();
+        float y = btnEditDeck.getTop() - h;
+        w -= 2 * x;
+        g.drawText(unlockRatio, REGION_STATS_FONT, Color.WHITE, x, y, w, h, false, HAlignment.LEFT, true);
+        g.drawText(winRatio, REGION_STATS_FONT, Color.WHITE, x, y, w, h, false, HAlignment.RIGHT, true);
     }
 
     @Override
