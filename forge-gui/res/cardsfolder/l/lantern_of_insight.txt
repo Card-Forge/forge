@@ -1,7 +1,7 @@
 Name:Lantern of Insight
 ManaCost:1
 Types:Artifact
-K:Players play with the top card of their libraries revealed.
+S:Mode$ Continuous | Affected$ Card.TopLibrary | AffectedZone$ Library | AddHiddenKeyword$ You may look at this card. & Your opponent may look at this card. | Description$ Players play with the top card of their libraries revealed.
 A:AB$ Shuffle | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player shuffles his or her library.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lantern_of_insight.jpg
