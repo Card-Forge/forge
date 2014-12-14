@@ -158,14 +158,12 @@ public class CardZoom extends FOverlay {
         if (totalZoomAmount >= REQ_AMOUNT) {
             oneCardView = true;
             totalZoomAmount = 0;
-            return true;
         }
-        if (totalZoomAmount <= -REQ_AMOUNT) {
+        else if (totalZoomAmount <= -REQ_AMOUNT) {
             oneCardView = false;
             totalZoomAmount = 0;
-            return true;
         }
-        return false;
+        return true;
     }
 
     @Override
