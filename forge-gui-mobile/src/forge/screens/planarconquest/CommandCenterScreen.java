@@ -37,13 +37,10 @@ import forge.planarconquest.IVCommandCenter;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
 import forge.screens.match.TargetingOverlay;
-import forge.screens.match.views.VPrompt;
-import forge.toolbox.FButton;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
-import forge.toolbox.FButton.Corner;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.util.Utils;
@@ -52,7 +49,9 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
     private static final Color BACK_COLOR = FSkinColor.fromRGB(1, 2, 2);
     private static final float BORDER_THICKNESS = Utils.scale(1);
     private static final FSkinFont REGION_STATS_FONT = FSkinFont.get(12);
+    private static final FSkinFont PLANE_STATS_FONT = FSkinFont.get(14);
     private static final FSkinFont REGION_NAME_FONT = FSkinFont.get(15);
+    private static final FSkinFont PLANE_NAME_FONT = FSkinFont.get(16);
     private static final FSkinFont UNLOCK_WINS_FONT = FSkinFont.get(18);
     private static final float COMMANDER_ROW_PADDING = Utils.scale(16);
     private static final float COMMANDER_GAP = Utils.scale(12);
@@ -61,10 +60,7 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
 
     private final RegionDisplay regionDisplay = add(new RegionDisplay());
     private final CommanderRow commanderRow = add(new CommanderRow());
-    private final FLabel lblCurrentPlane = add(new FLabel.Builder().font(FSkinFont.get(16)).align(HAlignment.CENTER).build());
     private final FLabel btnEndDay = add(new FLabel.ButtonBuilder().font(FSkinFont.get(14)).build());
-    private final FButton btnEditDeck = add(new FButton("Deck"));
-    private final FButton btnPortal = add(new FButton("Portal"));
 
     private ConquestData model;
     private String unlockRatio, winRatio;
@@ -76,19 +72,6 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
             @Override
             public void handleEvent(FEvent e) {
                 FModel.getConquest().endDay(CommandCenterScreen.this);
-            }
-        });
-        btnEditDeck.setCorner(Corner.BottomLeft);
-        btnEditDeck.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                Forge.openScreen(new ConquestDeckEditor(getSelectedCommander()));
-            }
-        });
-        btnPortal.setCorner(Corner.BottomRight);
-        btnPortal.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
             }
         });
     }
@@ -109,7 +92,6 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
         ConquestPlane plane = model.getCurrentPlane();
         ConquestPlaneData planeData = model.getCurrentPlaneData();
 
-        lblCurrentPlane.setText("Plane - " + plane.getName());
         btnEndDay.setText("End Day " + model.getDay());
 
         //update unlock and win ratios for plane
@@ -160,13 +142,14 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
         g.fillRect(BACK_COLOR, 0, 0, w, getHeight());
         g.drawImage(background, 0, getHeight() - h, w, h); //retain proportions, remaining area will be covered by back color
 
-        //draw stats for current plane above buttons
+        //draw stats and name for current plane above buttons
         float x = COMMANDER_GAP / 3;
-        h = REGION_STATS_FONT.getLineHeight();
-        float y = btnEditDeck.getTop() - h;
+        float y = commanderRow.getBottom();
+        h = btnEndDay.getTop() - y;
         w -= 2 * x;
-        g.drawText(unlockRatio, REGION_STATS_FONT, Color.WHITE, x, y, w, h, false, HAlignment.LEFT, true);
-        g.drawText(winRatio, REGION_STATS_FONT, Color.WHITE, x, y, w, h, false, HAlignment.RIGHT, true);
+        g.drawText(unlockRatio, PLANE_STATS_FONT, Color.WHITE, x, y, w, h, false, HAlignment.LEFT, true);
+        g.drawText("Plane - " + model.getCurrentPlane().getName(), PLANE_NAME_FONT, Color.WHITE, x, y, w, h, false, HAlignment.CENTER, true);
+        g.drawText(winRatio, PLANE_STATS_FONT, Color.WHITE, x, y, w, h, false, HAlignment.RIGHT, true);
     }
 
     @Override
@@ -207,16 +190,13 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
         btnEndDay.setSize(width / 2, btnEndDay.getAutoSizeBounds().height);
         btnEndDay.setPosition((width - btnEndDay.getWidth()) / 2, height - btnEndDay.getHeight());
 
-        lblCurrentPlane.setSize(btnEndDay.getWidth(), lblCurrentPlane.getAutoSizeBounds().height);
-        lblCurrentPlane.setPosition(btnEndDay.getLeft(), btnEndDay.getTop() - lblCurrentPlane.getHeight());
-
-        btnEditDeck.setBounds(0, height - VPrompt.HEIGHT, VPrompt.BTN_WIDTH, VPrompt.HEIGHT);
-        btnPortal.setBounds(width - VPrompt.BTN_WIDTH, height - VPrompt.HEIGHT, VPrompt.BTN_WIDTH, VPrompt.HEIGHT);
+        //btnEditDeck.setBounds(0, height - VPrompt.HEIGHT, VPrompt.BTN_WIDTH, VPrompt.HEIGHT);
+        //btnPortal.setBounds(width - VPrompt.BTN_WIDTH, height - VPrompt.HEIGHT, VPrompt.BTN_WIDTH, VPrompt.HEIGHT);
 
         float numCommanders = commanderRow.panels.length;
         float commanderWidth = (width - (numCommanders + 3) * COMMANDER_GAP) / numCommanders;
         float commanderRowHeight = commanderWidth * FCardPanel.ASPECT_RATIO + 2 * COMMANDER_ROW_PADDING;
-        commanderRow.setBounds(0, lblCurrentPlane.getTop() - commanderRowHeight, width, commanderRowHeight);
+        commanderRow.setBounds(0, btnEndDay.getTop() - PLANE_NAME_FONT.getLineHeight() - 2 * FLabel.DEFAULT_INSETS - commanderRowHeight, width, commanderRowHeight);
 
         regionDisplay.setBounds(0, startY, width, commanderRow.getTop() - startY);
     }
@@ -438,6 +418,10 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
 
         @Override
         public boolean tap(float x, float y, int count) {
+            if (count == 2 && index >= 0) {
+                Forge.openScreen(new ConquestDeckEditor(commander));
+                return true;
+            }
             activate(this);
             return true;
         }

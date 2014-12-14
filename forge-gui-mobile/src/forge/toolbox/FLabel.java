@@ -17,13 +17,15 @@ import forge.toolbox.FEvent.FEventType;
 import forge.util.Utils;
 
 public class FLabel extends FDisplayObject implements IButton {
+    public static final float DEFAULT_INSETS = Utils.scale(3);
+
     public static class Builder {
         //========== Default values for FLabel are set here.
         private float      bldIconScaleFactor = 0.8f;
         private FSkinFont  bldFont            = FSkinFont.get(14);
         private float      bldAlphaComposite  = 0.7f;
         private HAlignment bldAlignment       = HAlignment.LEFT;
-        private Vector2    bldInsets          = new Vector2(Utils.scale(3), Utils.scale(3));
+        private Vector2    bldInsets          = new Vector2(DEFAULT_INSETS, DEFAULT_INSETS);
 
         private boolean bldSelectable       = false;
         private boolean bldSelected         = false;
