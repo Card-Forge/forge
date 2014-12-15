@@ -118,6 +118,11 @@ public enum VStack implements IVDoc<CStack> {
 
     public void updateStack() {
         final GameView model = MatchUtil.getGameView();
+
+        if (model == null) {
+            return;
+        }
+
         final FCollectionView<StackItemView> items = model.getStack();
         tab.setText("Stack : " + items.size());
 

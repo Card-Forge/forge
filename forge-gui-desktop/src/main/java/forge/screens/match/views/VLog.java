@@ -18,6 +18,7 @@
 package forge.screens.match.views;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -176,10 +177,13 @@ public enum VLog implements IVDoc<CLog> {
     private List<GameLogEntry> getNewGameLogEntries(final GameView model) {
         String logEntryType = FModel.getPreferences().getPref(FPref.DEV_LOG_ENTRY_TYPE);
         GameLogEntryType logVerbosityFilter = GameLogEntryType.valueOf(logEntryType);
-        List<GameLogEntry> logEntries = model.getGameLog().getLogEntries(logVerbosityFilter);
-        // Set subtraction - remove all log entries from new list which are already displayed.
-        logEntries.removeAll(this.displayedLogEntries);
-        return logEntries;
+        if (model != null && model.getGameLog() != null) {
+            List<GameLogEntry> logEntries = model.getGameLog().getLogEntries(logVerbosityFilter);
+            // Set subtraction - remove all log entries from new list which are already displayed.
+            logEntries.removeAll(this.displayedLogEntries);
+            return logEntries;
+        }
+        return new ArrayList<GameLogEntry>();
     }
 
     private void addNewLogEntriesToJPanel(List<GameLogEntry> newLogEntries) {
