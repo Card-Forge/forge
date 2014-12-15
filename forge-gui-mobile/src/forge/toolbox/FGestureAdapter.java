@@ -24,7 +24,7 @@ public abstract class FGestureAdapter extends InputAdapter {
     private float tapSquareSize, longPressDelay, lastTapX, lastTapY, tapSquareCenterX, tapSquareCenterY;
     private long tapCountInterval, flingDelay, lastTapTime;
     private int tapCount, lastTapButton, lastTapPointer;
-    private boolean inTapSquare, pressed, longPressed, longPressHandled, pinching, panning;
+    private boolean inTapSquare, pressed, longPressed, longPressHandled, pinching, panning, disablePanning;
 
     private final VelocityTracker tracker = new VelocityTracker();
     private final Vector2 pointer1 = new Vector2();
@@ -131,6 +131,10 @@ public abstract class FGestureAdapter extends InputAdapter {
             return zoom(focalPoint.x, focalPoint.y, pointer1.dst(pointer2) - prevPointer1.dst(prevPointer2));
         }
 
+        if (disablePanning) {
+            return false; //avoid updating tracker or panning if second finger just came up but first hasn't yet
+        }
+
         // update tracker
         tracker.update(x, y, Gdx.input.getCurrentEventTime());
 
@@ -196,8 +200,11 @@ public abstract class FGestureAdapter extends InputAdapter {
 
         if (pinching) { //don't pan after finishing a pinch
             pinching = false;
+            disablePanning = true; //disable panning until after you release both fingers, otherwise unintentional fling can result
             return false;
         }
+
+        disablePanning = false; //once both fingers come off, allow panning again
 
         boolean handled = false;
         if (wasPanning) { // handle no longer panning
