@@ -443,10 +443,12 @@ public class Forge implements ApplicationListener {
 
         @Override
         public boolean touchDown(int x, int y, int pointer, int button) {
-            updatePotentialListeners(x, y);
-            if (keyInputAdapter != null) {
-                if (!keyInputAdapter.allowTouchInput() || !potentialListeners.contains(keyInputAdapter.getOwner())) {
-                    endKeyInput(); //end key input if needed
+            if (pointer == 0) { //don't change listeners when second finger goes down for zoom
+                updatePotentialListeners(x, y);
+                if (keyInputAdapter != null) {
+                    if (!keyInputAdapter.allowTouchInput() || !potentialListeners.contains(keyInputAdapter.getOwner())) {
+                        endKeyInput(); //end key input if needed
+                    }
                 }
             }
             return super.touchDown(x, y, pointer, button);

@@ -22,7 +22,7 @@ public abstract class FGestureAdapter extends InputAdapter {
     public abstract boolean zoom(float x, float y, float amount);
 
     private float tapSquareSize, longPressDelay, lastTapX, lastTapY, tapSquareCenterX, tapSquareCenterY;
-    private long tapCountInterval, flingDelay, lastTapTime, gestureStartTime;
+    private long tapCountInterval, flingDelay, lastTapTime;
     private int tapCount, lastTapButton, lastTapPointer;
     private boolean inTapSquare, pressed, longPressed, longPressHandled, pinching, panning;
 
@@ -80,36 +80,33 @@ public abstract class FGestureAdapter extends InputAdapter {
 
         if (pointer == 0) {
             pointer1.set(x, y);
-            gestureStartTime = Gdx.input.getCurrentEventTime();
-            tracker.start(x, y, gestureStartTime);
-            if (Gdx.input.isTouched(1)) {
-                // Start pinch.
-                inTapSquare = false;
-                pinching = true;
-                prevPointer1.set(pointer1);
-                prevPointer2.set(pointer2);
-                focalPoint.set(Utils.getMidpoint(pointer1, pointer2));
-                endPress(x, y);
-            }
-            else {
-                // Normal touch down.
+            if (!Gdx.input.isTouched(1)) {
+                // handle single finger press
+                tracker.start(x, y, Gdx.input.getCurrentEventTime());
                 inTapSquare = true;
+                panning = false;
                 pinching = false;
                 tapSquareCenterX = x;
                 tapSquareCenterY = y;
                 startPress();
+                return true;
             }
         }
         else {
-            // Start pinch.
             pointer2.set(x, y);
-            inTapSquare = false;
-            pinching = true;
-            prevPointer1.set(pointer1);
-            prevPointer2.set(pointer2);
-            focalPoint.set(Utils.getMidpoint(pointer1, pointer2));
-            endPress(pointer1.x, pointer1.y);
+            if (!Gdx.input.isTouched(0)) {
+                return true;
+            }
         }
+
+        // start pinch if two fingers down
+        inTapSquare = false;
+        panning = false;
+        pinching = true;
+        prevPointer1.set(pointer1);
+        prevPointer2.set(pointer2);
+        focalPoint.set(Utils.getMidpoint(pointer1, pointer2));
+        endPress(pointer1.x, pointer1.y);
         return true;
     }
 
@@ -149,7 +146,6 @@ public abstract class FGestureAdapter extends InputAdapter {
             boolean moreVertical = Math.abs(tracker.startY - y) > Math.abs(tracker.startX - x);
             return pan(x, y, tracker.deltaX, tracker.deltaY, moreVertical);
         }
-
         return false;
     }
 
@@ -192,26 +188,14 @@ public abstract class FGestureAdapter extends InputAdapter {
             lastTapY = y;
             lastTapButton = button;
             lastTapPointer = pointer;
-            gestureStartTime = 0;
             if (wasPressed) {
                 return tap(x, y, tapCount);
             }
             return false;
         }
 
-        if (pinching) {
-            // handle pinch end
+        if (pinching) { //don't pan after finishing a pinch
             pinching = false;
-            panning = true;
-            // we are in pan mode again, reset velocity tracker
-            if (pointer == 0) {
-                // first pointer has lifted off, set up panning to use the second pointer...
-                tracker.start(pointer2.x, pointer2.y, Gdx.input.getCurrentEventTime());
-            }
-            else {
-                // second pointer has lifted off, set up panning to use the first pointer...
-                tracker.start(pointer1.x, pointer1.y, Gdx.input.getCurrentEventTime());
-            }
             return false;
         }
 
@@ -219,7 +203,6 @@ public abstract class FGestureAdapter extends InputAdapter {
         if (wasPanning) { // handle no longer panning
             handled = panStop(x, y);
 
-            gestureStartTime = 0;
             long time = Gdx.input.getCurrentEventTime();
             if (time - tracker.lastTime < flingDelay) { // handle flick/fling if needed
                 tracker.update(x, y, time);
