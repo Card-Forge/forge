@@ -86,8 +86,8 @@ public enum VDev implements IVDoc<CDev> {
         viewport.add(this.lblCardToBattlefield, halfConstraints);
         viewport.add(this.lblSetLife, halfConstraintsLeft);
         viewport.add(this.lblWinGame, halfConstraints);
-        viewport.add(this.lblSetupGame, constraints);
-        viewport.add(this.lblDumpGame, constraints);
+        viewport.add(this.lblSetupGame, halfConstraintsLeft);
+        viewport.add(this.lblDumpGame, halfConstraints);
         viewport.add(this.lblUnlimitedLands, constraints);
         viewport.add(this.lblCounterPermanent, constraints);
         viewport.add(this.lblTapPermanent, halfConstraintsLeft);
