@@ -82,25 +82,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante,
             ZoneType.Sideboard, ZoneType.PlanarDeck, ZoneType.SchemeDeck));
 
-    private static HashMap<Integer, Player> playerCache = new HashMap<Integer, Player>();
-    public static Player get(PlayerView playerView) {
-        if (playerView == null) { return null; }
-        return playerCache.get(playerView.getId());
-    }
-    public static List<Player> getList(Iterable<PlayerView> playerViews) {
-        List<Player> list = new ArrayList<Player>();
-        for (PlayerView pv : playerViews) {
-            Player p = get(pv);
-            if (p != null) {
-                list.add(p);
-            }
-        }
-        return list;
-    }
-    public static void clearCache() {
-        playerCache.clear();
-    }
-
     private final Map<Card, Integer> commanderDamage = new HashMap<Card, Integer>();
 
     private int poisonCounters = 0;
@@ -174,7 +155,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         view.updateKeywords(this);
         setName(chooseName(name0));
         if (id0 >= 0) {
-            playerCache.put(id0, this);
+            game.addPlayer(id, this);
         }
     }
 
@@ -2214,6 +2195,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         controllerCreator = ctrlr;
         controller = ctrlr;
         view.updateAvatarIndex(this);
+        view.updateIsAI(this);
+        view.updateLobbyPlayerName(this);
     }
 
     /**

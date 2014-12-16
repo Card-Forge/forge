@@ -53,6 +53,7 @@ import forge.game.phase.Untap;
 import forge.game.phase.Upkeep;
 import forge.game.player.IGameEntitiesFactory;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.SpellAbility;
@@ -102,9 +103,16 @@ public class Game {
 
     private final GameView view; 
 
+    private GameEntityCache<Player, PlayerView> playerCache = new GameEntityCache<>();
+    public Player getPlayer(PlayerView playerView) {
+        return playerCache.get(playerView);
+    }
+    public void addPlayer(Integer id, Player player) {
+        playerCache.put(id, player);
+    }
+
     public Game(List<RegisteredPlayer> players0, GameRules rules0, Match match0) { /* no more zones to map here */
         Card.clearCache();
-        Player.clearCache();
 
         rules = rules0;
         match = match0;

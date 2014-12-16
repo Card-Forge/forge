@@ -41,6 +41,23 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.Mana, Maps.newHashMapWithExpectedSize(MagicColor.NUMBER_OR_COLORS + 1));
     }
 
+    public boolean isAI()   {
+        return get(TrackableProperty.IsAI);
+    }
+    void updateIsAI(Player p) {
+        set(TrackableProperty.IsAI, p.getController().isAI());
+    }
+
+    public String getLobbyPlayerName() {
+        return get(TrackableProperty.LobbyPlayerName);
+    }
+    void updateLobbyPlayerName(Player p) {
+        set(TrackableProperty.LobbyPlayerName, p.getLobbyPlayer().getName());
+    }
+    public boolean isLobbyPlayer(LobbyPlayer p) {
+        return getLobbyPlayerName().equals(p.getName());
+    }
+
     public int getAvatarIndex() {
         return get(TrackableProperty.AvatarIndex);
     }
@@ -256,10 +273,5 @@ public class PlayerView extends GameEntityView {
             mana.put(b, p.getManaPool().getAmountOfColor(b));
         }
         set(TrackableProperty.Mana, mana);
-    }
-
-    //TODO: Find better way to do this
-    public LobbyPlayer getLobbyPlayer() {
-        return Player.get(this).getLobbyPlayer();
     }
 }

@@ -297,7 +297,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (nNeeded == 0) {
             return PaymentDecision.number(0);
         }
-        final Player p = Player.get(SGuiChoose.oneOrNone(String.format("Exile from whose %s?", cost.getFrom()), PlayerView.getCollection(payableZone)));
+        final Player p = controller.getGame().getPlayer(SGuiChoose.oneOrNone(String.format("Exile from whose %s?", cost.getFrom()), PlayerView.getCollection(payableZone)));
         if (p == null) {
             return null;
         }
@@ -489,7 +489,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         final StringBuilder sb = new StringBuilder();
         sb.append(source.getName()).append(" - Choose an opponent to gain ").append(c).append(" life:");
 
-        final Player chosenToGain = Player.get(SGuiChoose.oneOrNone(sb.toString(), PlayerView.getCollection(oppsThatCanGainLife)));
+        final Player chosenToGain = controller.getGame().getPlayer(SGuiChoose.oneOrNone(sb.toString(), PlayerView.getCollection(oppsThatCanGainLife)));
         if (chosenToGain == null) {
             return null;
         }
@@ -614,7 +614,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.number(0);
         }
 
-        final Player p = Player.get(SGuiChoose.oneOrNone(String.format("Put cards from whose %s?", fromZone), PlayerView.getCollection(payableZone)));
+        final Player p = controller.getGame().getPlayer(SGuiChoose.oneOrNone(String.format("Put cards from whose %s?", fromZone), PlayerView.getCollection(payableZone)));
         if (p == null) {
             return null;
         }

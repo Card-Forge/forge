@@ -69,7 +69,7 @@ public class CField implements ICDoc {
 
         Function<Byte, Boolean> manaAction = new Function<Byte, Boolean>() {
             public Boolean apply(Byte colorCode) {
-                if (CField.this.player.getLobbyPlayer() == Singletons.getControl().getGuiPlayer()) {
+                if (CField.this.player.isLobbyPlayer(Singletons.getControl().getGuiPlayer())) {
                     return MatchUtil.getHumanController().useMana(colorCode.byteValue());
                 }
                 return false;

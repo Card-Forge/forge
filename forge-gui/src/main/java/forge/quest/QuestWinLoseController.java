@@ -63,7 +63,7 @@ public class QuestWinLoseController {
         final LobbyPlayer questLobbyPlayer = GamePlayerUtil.getQuestPlayer();
         PlayerView player = null;
         for (final PlayerView p : lastGame.getPlayers()) {
-            if (p.getLobbyPlayer().equals(questLobbyPlayer)) {
+            if (p.isLobbyPlayer(questLobbyPlayer)) {
                 player = p;
             }
         }
@@ -97,7 +97,7 @@ public class QuestWinLoseController {
                         if (anteResult.lostCards != null) {
                             qc.getCards().loseCards(anteResult.lostCards);
                         }
-                        anteReport(anteResult.wonCards, anteResult.lostCards, questPlayer.getLobbyPlayer().equals(lastGame.getWinningPlayer()));
+                        anteReport(anteResult.wonCards, anteResult.lostCards, questPlayer.isLobbyPlayer(lastGame.getWinningPlayer()));
                     }
                 }
 

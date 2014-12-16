@@ -418,7 +418,13 @@ public class PlayerControllerHuman extends PlayerController {
 
         final GameEntityView result = GuiBase.getInterface().chooseSingleEntityForEffect(title, optionList, delayedReveal, isOptional, this);
         endTempShowCards(); //assume tempShow called by GuiBase.getInterface().chooseSingleEntityForEffect
-        return (T) GameEntity.get(result);
+        if (result instanceof CardView) {
+            return (T) Card.get((CardView)result);
+        }
+        if (result instanceof PlayerView) {
+            return (T) game.getPlayer((PlayerView)result);
+        }
+        return null;
     }
 
     @Override
@@ -1539,7 +1545,7 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         public void setPlayerLife() {
-            final Player player = Player.get(SGuiChoose.oneOrNone("Set life for which player?", PlayerView.getCollection(game.getPlayers())));
+            final Player player = game.getPlayer(SGuiChoose.oneOrNone("Set life for which player?", PlayerView.getCollection(game.getPlayers())));
             if (player == null) { return; }
 
             final Integer life = SGuiChoose.getInteger("Set life to what?", 0);
@@ -1569,7 +1575,7 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         public void addCardToHand() {
-            final Player p = Player.get(SGuiChoose.oneOrNone("Put card in hand for which player?", PlayerView.getCollection(game.getPlayers())));
+            final Player p = game.getPlayer(SGuiChoose.oneOrNone("Put card in hand for which player?", PlayerView.getCollection(game.getPlayers())));
             if (p == null) {
                 return;
             }
@@ -1589,7 +1595,7 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         public void addCardToBattlefield() {
-            final Player p = Player.get(SGuiChoose.oneOrNone("Put card in play for which player?", PlayerView.getCollection(game.getPlayers())));
+            final Player p = game.getPlayer(SGuiChoose.oneOrNone("Put card in play for which player?", PlayerView.getCollection(game.getPlayers())));
             if (p == null) {
                 return;
             }
@@ -1637,7 +1643,7 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         public void riggedPlanarRoll() {
-            final Player player = Player.get(SGuiChoose.oneOrNone("Which player should roll?", PlayerView.getCollection(game.getPlayers())));
+            final Player player = game.getPlayer(SGuiChoose.oneOrNone("Which player should roll?", PlayerView.getCollection(game.getPlayers())));
             if (player == null) { return; }
 
             final PlanarDice res = SGuiChoose.oneOrNone("Choose result", PlanarDice.values());

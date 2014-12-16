@@ -80,7 +80,7 @@ public class QuestDraftWinLose extends ControlWinLose {
         final Iterable<PlayerView> players = lastGame.getPlayers();
         boolean gameHadHumanPlayer = false;
         for (final PlayerView p : players) {
-            if (p.getLobbyPlayer().equals(questLobbyPlayer)) {
+            if (p.isLobbyPlayer(questLobbyPlayer)) {
                 gameHadHumanPlayer = true;
                 break;
             }

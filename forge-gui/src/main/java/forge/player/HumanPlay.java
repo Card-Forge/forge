@@ -524,7 +524,7 @@ public class HumanPlay {
                             payableZone.add(player);
                         }
                     }
-                    Player chosen = Player.get(SGuiChoose.oneOrNone(String.format("Put cards from whose %s?", from), PlayerView.getCollection(payableZone)));
+                    Player chosen = controller.getGame().getPlayer(SGuiChoose.oneOrNone(String.format("Put cards from whose %s?", from), PlayerView.getCollection(payableZone)));
                     if (chosen == null) {
                         return false;
                     }

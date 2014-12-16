@@ -22,7 +22,6 @@ import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
 import forge.game.Game;
-import forge.game.player.Player;
 import forge.match.MatchUtil;
 import forge.player.PlayerControllerHuman;
 
@@ -37,9 +36,11 @@ import forge.player.PlayerControllerHuman;
 public class InputQueue extends Observable {
     private final BlockingDeque<InputSynchronized> inputStack = new LinkedBlockingDeque<InputSynchronized>();
     private final InputLockUI inputLock;
+    private final Game game;
 
     public InputQueue(final Game game, final InputProxy inputProxy) {
         inputLock = new InputLockUI(game, this);
+        this.game = game;
         addObserver(inputProxy);
     }
 
@@ -76,7 +77,7 @@ public class InputQueue extends Observable {
 
     public void setInput(final InputSynchronized input) {
         if (MatchUtil.getHumanCount() > 1) { //update current player if needed
-            MatchUtil.setCurrentPlayer(Player.get(input.getOwner()));
+            MatchUtil.setCurrentPlayer(game.getPlayer(input.getOwner()));
         }
         inputStack.push(input);
         InputBase.waitForOtherPlayer();

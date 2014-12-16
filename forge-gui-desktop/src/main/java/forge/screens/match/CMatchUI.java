@@ -66,7 +66,6 @@ import forge.match.IMatchController;
 import forge.match.MatchUtil;
 import forge.menus.IMenuProvider;
 import forge.model.FModel;
-import forge.player.LobbyPlayerHuman;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.controllers.CAntes;
@@ -110,11 +109,11 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
     private boolean showOverlay = true;
 
     private IVDoc<? extends ICDoc> selectedDocBeforeCombat;
-    public final Map<LobbyPlayer, String> avatarImages = new HashMap<LobbyPlayer, String>();
-
-    private SkinImage getPlayerAvatar(final LobbyPlayer p, final int defaultIndex) {
-         if (avatarImages.containsKey(p)) {
-            return ImageCache.getIcon(avatarImages.get(p));
+    public final Map<String, String> avatarImages = new HashMap<String, String>();
+  
+    private SkinImage getPlayerAvatar(final PlayerView p, final int defaultIndex) {
+         if (avatarImages.containsKey(p.getLobbyPlayerName())) {
+            return ImageCache.getIcon(avatarImages.get(p.getLobbyPlayerName()));
         }
 
         int avatarIdx = p.getAvatarIndex();
@@ -147,7 +146,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
             commands.add(c);
 
             //setAvatar(f, new ImageIcon(FSkin.getAvatars().get()));
-            setAvatar(f, getPlayerAvatar(p.getLobbyPlayer(), Integer.parseInt(indices[i > 2 ? 1 : 0])));
+            setAvatar(f, getPlayerAvatar(p, Integer.parseInt(indices[i > 2 ? 1 : 0])));
             f.getLayoutControl().initialize();
             c.getLayoutControl().initialize();
             i++;
@@ -167,7 +166,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider, IMatchController {
 
         int i = 0;
         for (final PlayerView p : sortedPlayers) {
-            if (allHands || p.getLobbyPlayer() instanceof LobbyPlayerHuman || CardView.mayViewAny(p.getHand(), p)) {
+            if (allHands || !p.isAI() || CardView.mayViewAny(p.getHand(), p)) {
                 VHand newHand = new VHand(EDocID.Hands[i], p);
                 newHand.getLayoutControl().initialize();
                 hands.add(newHand);

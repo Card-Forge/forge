@@ -280,6 +280,7 @@ forge-game/src/main/java/forge/game/GameAction.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/GameActionUtil.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/GameEndReason.java -text
 forge-game/src/main/java/forge/game/GameEntity.java -text
+forge-game/src/main/java/forge/game/GameEntityCache.java -text
 forge-game/src/main/java/forge/game/GameEntityView.java -text
 forge-game/src/main/java/forge/game/GameFormat.java -text
 forge-game/src/main/java/forge/game/GameLog.java -text

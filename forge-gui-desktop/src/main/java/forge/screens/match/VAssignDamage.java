@@ -199,7 +199,7 @@ public class VAssignDamage {
             }
             else if (defender instanceof PlayerView) { 
                 final PlayerView p = (PlayerView)defender;
-                fakeCard = new CardView(-1, defender.toString(), p, CMatchUI.SINGLETON_INSTANCE.avatarImages.get(p.getLobbyPlayer()));
+                fakeCard = new CardView(-1, defender.toString(), p, CMatchUI.SINGLETON_INSTANCE.avatarImages.get(p.getLobbyPlayerName()));
             }
             addPanelForDefender(pnlDefenders, fakeCard);
         }        

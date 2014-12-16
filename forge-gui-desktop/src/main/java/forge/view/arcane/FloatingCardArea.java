@@ -20,7 +20,6 @@ package forge.view.arcane;
 import forge.Singletons;
 import forge.assets.FSkinProp;
 import forge.game.card.CardView;
-import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.SDisplayUtil;
@@ -169,7 +168,7 @@ public class FloatingCardArea extends CardArea {
         player = player0;
         title = Lang.getPossessedObject(player0.getName(), zone.name()) + " (%d)";
 
-        boolean isAi = Player.get(player0).getController().isAI();
+        boolean isAi = player0.isAI();
         switch (zone) {
         case Exile:
             locPref = isAi ? FPref.ZONE_LOC_AI_EXILE : FPref.ZONE_LOC_HUMAN_EXILE;

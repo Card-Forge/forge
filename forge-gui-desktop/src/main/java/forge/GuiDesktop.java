@@ -304,6 +304,6 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public void setPlayerAvatar(LobbyPlayer player, IHasIcon ihi) {
-        CMatchUI.SINGLETON_INSTANCE.avatarImages.put(player, ihi.getIconImageKey());
+        CMatchUI.SINGLETON_INSTANCE.avatarImages.put(player.getName(), ihi.getIconImageKey());
     }
 }

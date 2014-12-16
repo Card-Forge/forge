@@ -100,7 +100,7 @@ public class InputProxy implements Observer {
     public final void selectPlayer(final PlayerView playerView, final ITriggerEvent triggerEvent) {
         final Input inp = getInput();
         if (inp != null) {
-            final Player player = Player.get(playerView);
+            final Player player = controller.getGame().getPlayer(playerView);
             if (player != null) {
                 inp.selectPlayer(player, triggerEvent);
             }
