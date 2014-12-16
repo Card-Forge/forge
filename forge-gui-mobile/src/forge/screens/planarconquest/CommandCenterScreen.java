@@ -9,12 +9,11 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import forge.FThreads;
 import forge.Forge;
 import forge.Graphics;
+import forge.achievement.PlaneswalkerAchievements;
 import forge.assets.FImage;
 import forge.assets.FSkin;
-import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
-import forge.assets.FSkinTexture;
 import forge.assets.TextRenderer;
 import forge.card.CardRarity;
 import forge.card.CardRenderer;
@@ -42,15 +41,15 @@ import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
+import forge.toolbox.FScrollPane;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FScrollPane.ScrollBounds;
 import forge.toolbox.FLabel;
 import forge.util.Utils;
 
 public class CommandCenterScreen extends FScreen implements IVCommandCenter {
-    private static final Color BACK_COLOR = FSkinColor.fromRGB(1, 2, 2);
     private static final float BORDER_THICKNESS = Utils.scale(1);
     private static final FSkinFont REGION_STATS_FONT = FSkinFont.get(12);
-    private static final FSkinFont PLANE_STATS_FONT = FSkinFont.get(14);
     private static final FSkinFont REGION_NAME_FONT = FSkinFont.get(15);
     private static final FSkinFont PLANE_NAME_FONT = FSkinFont.get(16);
     private static final FSkinFont UNLOCK_WINS_FONT = FSkinFont.get(18);
@@ -59,6 +58,7 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
     private static final float REGION_FRAME_THICKNESS_MULTIPLIER = 15f / 443f;
     private static final float REGION_FRAME_BASE_HEIGHT_MULTIPLIER = 25f / 317f;
 
+    private final PlaneMap map = add(new PlaneMap());
     private final RegionDisplay regionDisplay = add(new RegionDisplay());
     private final CommanderRow commanderRow = add(new CommanderRow());
     private final FLabel btnEndDay = add(new FLabel.ButtonBuilder().font(FSkinFont.get(14)).build());
@@ -136,25 +136,6 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
     }
 
     @Override
-    public void drawBackground(Graphics g) {
-        FImage background = FSkinTexture.BG_PLANAR_MAP;
-        float w = getWidth();
-        float h = w * background.getHeight() / background.getWidth();
-        g.fillRect(BACK_COLOR, 0, 0, w, getHeight());
-        g.drawImage(background, 0, getHeight() - h, w, h); //retain proportions, remaining area will be covered by back color
-
-        //draw stats and name for current plane above buttons
-        float x = COMMANDER_GAP / 3;
-        float y = commanderRow.getBottom();
-        float h1 = btnEndDay.getTop() - y;
-        float h2 = getHeight() - y;
-        w -= 2 * x;
-        g.drawText(unlockRatio, PLANE_STATS_FONT, Color.WHITE, x, y, w, h2, false, HAlignment.LEFT, true);
-        g.drawText("Plane - " + model.getCurrentPlane().getName(), PLANE_NAME_FONT, Color.WHITE, x, y, w, h1, false, HAlignment.CENTER, true);
-        g.drawText(winRatio, PLANE_STATS_FONT, Color.WHITE, x, y, w, h2, false, HAlignment.RIGHT, true);
-    }
-
-    @Override
     protected void drawOverlay(Graphics g) {
         ConquestCommander commander = regionDisplay.deployedCommander.commander;
         if (commander == null || commander.getCurrentDayAction() == null) { return; }
@@ -200,7 +181,39 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
         float commanderRowHeight = commanderWidth * FCardPanel.ASPECT_RATIO + 2 * COMMANDER_ROW_PADDING;
         commanderRow.setBounds(0, btnEndDay.getTop() - PLANE_NAME_FONT.getLineHeight() - 2 * FLabel.DEFAULT_INSETS - commanderRowHeight, width, commanderRowHeight);
 
-        regionDisplay.setBounds(0, startY, width, commanderRow.getTop() - startY);
+        map.setBounds(0, startY, width, commanderRow.getTop() - startY);
+    }
+
+    private class PlaneMap extends FScrollPane {
+        private float zoom = 1;
+        private FImage walker = (FImage)PlaneswalkerAchievements.getTrophyImage("Ajani Goldmane");
+
+        public PlaneMap() {
+        }
+
+        @Override
+        protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+            return new ScrollBounds(visibleWidth, visibleHeight);
+        }
+
+        protected void drawBackground(Graphics g) {
+            float w = getWidth();
+            float h = getHeight();
+            float tileWidth = w / 4 * zoom;
+            float tileHeight = tileWidth * FSkinImage.HEXAGON_TILE.getHeight() / FSkinImage.HEXAGON_TILE.getWidth();
+
+            float x = (w - tileWidth) / 2;
+            float y = (h - tileHeight) / 2;
+            drawTile(g, x, y, tileWidth, tileHeight);
+        }
+
+        private void drawTile(Graphics g, float x, float y, float w, float h) {
+            g.drawImage(FSkinImage.HEXAGON_TILE, x, y, w, h);
+
+            float pedestalWidth = w * 0.8f;
+            float pedestalHeight = pedestalWidth * walker.getHeight() / walker.getWidth();
+            g.drawImage(walker, x + (w - pedestalWidth) / 2, y + h / 2 - pedestalHeight * 0.8f, pedestalWidth, pedestalHeight);
+        }
     }
 
     private class RegionDisplay extends FContainer {
@@ -250,7 +263,7 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
 
         @Override
         protected void doLayout(float width, float height) {
-            float x = COMMANDER_GAP / 2;
+            /*float x = COMMANDER_GAP / 2;
             float y = COMMANDER_GAP;
             float w = width - 2 * x;
             float h = height - y;
@@ -279,7 +292,7 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
             x = deployedCommander.getRight() + padding;
             actions[2].setBounds(x, y, actionPanelSize, actionPanelSize);
             x += actionPanelSize + padding;
-            actions[3].setBounds(x, y, actionPanelSize, actionPanelSize);
+            actions[3].setBounds(x, y, actionPanelSize, actionPanelSize);*/
         }
 
         @Override
@@ -297,8 +310,6 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
             g.startClip(x + regionFrameThickness, y + regionFrameThickness, w - 2 * regionFrameThickness, h - regionFrameThickness - regionFrameBaseHeight);
             g.drawImage((FImage)region.getArt(), x, y, w, h); //TODO: Maximize in frame while retaining proportions
             g.endClip();
-
-            g.drawImage(FSkinTexture.BG_MONITOR, x, y, w, h);
 
             y += h - regionFrameBaseHeight;
             h = regionFrameBaseHeight * 0.9f;

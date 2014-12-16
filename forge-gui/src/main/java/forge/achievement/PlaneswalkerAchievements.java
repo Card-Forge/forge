@@ -1,5 +1,8 @@
 package forge.achievement;
 
+import forge.GuiBase;
+import forge.assets.FSkinProp;
+import forge.assets.ISkinImage;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.item.IPaperCard;
@@ -8,6 +11,10 @@ import forge.properties.ForgeConstants;
 
 public class PlaneswalkerAchievements extends AchievementCollection {
     public static final PlaneswalkerAchievements instance = new PlaneswalkerAchievements();
+
+    public static ISkinImage getTrophyImage(String planeswalkerName) {
+        return GuiBase.getInterface().createLayeredImage(FSkinProp.IMG_SPECIAL_TROPHY, ForgeConstants.CACHE_ACHIEVEMENTS_DIR + "/" + planeswalkerName + ".png", 1);
+    }
 
     private PlaneswalkerAchievements() {
         super("Planeswalker Ultimates", ForgeConstants.ACHIEVEMENTS_DIR + "planeswalkers.xml", false);

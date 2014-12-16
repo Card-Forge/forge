@@ -27,8 +27,6 @@ public enum FSkinProp {
     BG_SPLASH (null, PropType.BACKGROUND),
     BG_TEXTURE (null, PropType.BACKGROUND),
     BG_MATCH (null, PropType.BACKGROUND),
-    BG_PLANAR_MAP (null, PropType.BACKGROUND),
-    BG_MONITOR (null, PropType.BACKGROUND),
 
     //colors
     CLR_THEME                   (new int[] {70, 10}, PropType.COLOR),
@@ -243,6 +241,9 @@ public enum FSkinProp {
     IMG_TROPHY_CASE_TOP   (new int[] {0, 185, 798, 38}, PropType.TROPHY),
     IMG_TROPHY_SHELF      (new int[] {0, 223, 798, 257}, PropType.TROPHY),
 
+    //planar conquest images
+    IMG_HEXAGON_TILE      (new int[] {0, 0, 220, 192}, PropType.PLANAR_CONQUEST),
+
     //button images
     IMG_BTN_START_UP        (new int[] {480, 200, 160, 80}, PropType.ICON),
     IMG_BTN_START_OVER      (new int[] {480, 280, 160, 80}, PropType.ICON),
@@ -299,5 +300,6 @@ public enum FSkinProp {
         FOIL,
         OLD_FOIL,
         TROPHY,
+        PLANAR_CONQUEST
     }
 }

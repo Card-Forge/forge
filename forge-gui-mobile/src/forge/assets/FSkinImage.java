@@ -116,6 +116,9 @@ public enum FSkinImage implements FImage {
     TROPHY_CASE_TOP  (FSkinProp.IMG_TROPHY_CASE_TOP, SourceFile.TROPHIES),
     TROPHY_SHELF     (FSkinProp.IMG_TROPHY_SHELF, SourceFile.TROPHIES),
 
+    //Achievement Trophies
+    HEXAGON_TILE    (FSkinProp.IMG_HEXAGON_TILE, SourceFile.PLANAR_CONQUEST),
+
     //Quest Icons
     QUEST_ZEP         (FSkinProp.ICO_QUEST_ZEP, SourceFile.ICONS),
     QUEST_GEAR        (FSkinProp.ICO_QUEST_GEAR, SourceFile.ICONS),
@@ -237,7 +240,8 @@ public enum FSkinImage implements FImage {
         ICONS(ForgeConstants.SPRITE_ICONS_FILE),
         FOILS(ForgeConstants.SPRITE_FOILS_FILE),
         OLD_FOILS(ForgeConstants.SPRITE_OLD_FOILS_FILE),
-        TROPHIES(ForgeConstants.SPRITE_TROPHIES_FILE);
+        TROPHIES(ForgeConstants.SPRITE_TROPHIES_FILE),
+        PLANAR_CONQUEST(ForgeConstants.SPRITE_PLANAR_CONQUEST_FILE);
 
         private final String filename;
 

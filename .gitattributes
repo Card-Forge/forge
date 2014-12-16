@@ -16951,8 +16951,6 @@ forge-gui/res/skins/dark_ascension/font1.ttf -text
 forge-gui/res/skins/dark_ascension/sprite_icons.png -text
 forge-gui/res/skins/default/bg_draft_deck.png -text
 forge-gui/res/skins/default/bg_match.jpg -text
-forge-gui/res/skins/default/bg_monitor.png -text
-forge-gui/res/skins/default/bg_planar_map.png -text
 forge-gui/res/skins/default/bg_splash.png -text
 forge-gui/res/skins/default/bg_texture.jpg -text
 forge-gui/res/skins/default/font1.ttf -text
@@ -16962,6 +16960,7 @@ forge-gui/res/skins/default/sprite_avatars.png -text
 forge-gui/res/skins/default/sprite_foils.png -text
 forge-gui/res/skins/default/sprite_icons.png -text
 forge-gui/res/skins/default/sprite_old_foils.png -text
+forge-gui/res/skins/default/sprite_planar_conquest.png -text
 forge-gui/res/skins/default/sprite_trophies.png -text
 forge-gui/res/skins/firebloom/bg_match.jpg -text
 forge-gui/res/skins/firebloom/bg_splash.png -text
@@ -17243,6 +17242,7 @@ forge-gui/src/main/java/forge/planarconquest/ConquestDataIO.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestDeckMap.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestPlane.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestPlaneData.java -text
+forge-gui/src/main/java/forge/planarconquest/ConquestPlaneMap.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestPreferences.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestUtil.java -text
 forge-gui/src/main/java/forge/planarconquest/IVCommandCenter.java -text

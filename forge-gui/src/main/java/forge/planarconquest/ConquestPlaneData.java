@@ -16,6 +16,7 @@ public class ConquestPlaneData {
     private final Map<String, Integer> winsPerOpponent = new HashMap<String, Integer>();
     private final Map<String, Integer> lossesPerOpponent = new HashMap<String, Integer>();
     private final ConquestPlane plane;
+    private final ConquestPlaneMap map;
 
     private int wins, losses;
     private int winStreakBest = 0;
@@ -23,6 +24,7 @@ public class ConquestPlaneData {
 
     public ConquestPlaneData(ConquestPlane plane0) {
         plane = plane0;
+        map = new ConquestPlaneMap(plane0);
     }
 
     public List<ConquestCommander> getCommanders() {
@@ -90,6 +92,10 @@ public class ConquestPlaneData {
             }
         }
         return count;
+    }
+
+    public ConquestPlaneMap getMap() {
+        return map;
     }
 
     public RegionData getRegionData(Region region) {
