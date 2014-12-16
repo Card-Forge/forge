@@ -201,7 +201,26 @@ public class ComputerUtilMana {
             manaAbilityMap.replaceValues(shard, newAbilities);
         }
     }
+ 
+    public static SpellAbility chooseManaAbility(ManaCostBeingPaid cost, SpellAbility sa, Player ai, ManaCostShard toPay,
+            Collection<SpellAbility> saList, boolean checkCosts) {
+        for (final SpellAbility ma : saList) {
+            if (ma.getHostCard() == sa.getHostCard()) {
+                continue;
+            }
 
+            final String typeRes = cost.getSourceRestriction();
+            if (StringUtils.isNotBlank(typeRes) && !ma.getHostCard().getType().hasStringType(typeRes)) {
+                continue;
+            }
+
+            if (canPayShardWithSpellAbility(toPay, ai, ma, sa, checkCosts)) {
+                return ma;
+            }
+        }
+        return null;
+    }
+    
     public static CardCollection getManaSourcesToPayCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai) {
         CardCollection manaSources = new CardCollection();
 
@@ -254,29 +273,11 @@ public class ComputerUtilMana {
             toPay = getNextShardToPay(cost);
 
             Collection<SpellAbility> saList = sourcesForShards.get(toPay);
-            SpellAbility saPayment = null;
-            if (saList != null) {
-                for (final SpellAbility ma : saList) {
-                    if (ma.getHostCard() == sa.getHostCard()) {
-                        continue;
-                    }
-
-                    final String typeRes = cost.getSourceRestriction();
-                    if (StringUtils.isNotBlank(typeRes) && !ma.getHostCard().getType().hasStringType(typeRes)) {
-                        continue;
-                    }
-
-                    if (canPayShardWithSpellAbility(toPay, ai, ma, sa, true)) {
-                        saPayment = ma;
-                        manaSources.add(saPayment.getHostCard());
-                        break;
-                    }
-                }
-            }
-            else {
+            if (saList == null) {
                 break;
             }
 
+            SpellAbility saPayment = chooseManaAbility(cost, sa, ai, toPay, saList, true);
             if (saPayment == null) {
                 if (!toPay.isPhyrexian() || !ai.canPayLife(2)) {
                     break; // cannot pay
@@ -286,6 +287,7 @@ public class ComputerUtilMana {
                 continue;
             }
 
+            manaSources.add(saPayment.getHostCard());
             setExpressColorChoice(sa, ai, cost, toPay, saPayment);
 
             String manaProduced = toPay.isSnow() ? "S" : GameActionUtil.generatedMana(saPayment);
@@ -347,28 +349,11 @@ public class ComputerUtilMana {
             toPay = getNextShardToPay(cost);
 
             Collection<SpellAbility> saList = sourcesForShards.get(toPay);
-            SpellAbility saPayment = null;
-            if (saList != null) {
-                for (final SpellAbility ma : saList) {
-                    if (ma.getHostCard() == sa.getHostCard()) {
-                        continue;
-                    }
-
-                    final String typeRes = cost.getSourceRestriction();
-                    if (StringUtils.isNotBlank(typeRes) && !ma.getHostCard().getType().hasStringType(typeRes)) {
-                        continue;
-                    }
-
-                    if (canPayShardWithSpellAbility(toPay, ai, ma, sa, checkPlayable || !test)) {
-                        saPayment = ma;
-                        break;
-                    }
-                }
-            }
-            else {
+            if (saList == null) {
                 break;
             }
 
+            SpellAbility saPayment = chooseManaAbility(cost, sa, ai, toPay, saList, checkPlayable || !test);
             if (saPayment == null) {
                 if (!toPay.isPhyrexian() || !ai.canPayLife(2)) {
                     break; // cannot pay
