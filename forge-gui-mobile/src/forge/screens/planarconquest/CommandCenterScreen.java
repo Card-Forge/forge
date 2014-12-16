@@ -173,15 +173,15 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
-        btnEndDay.setSize(width / 2, btnEndDay.getAutoSizeBounds().height);
-        btnEndDay.setPosition((width - btnEndDay.getWidth()) / 2, height - btnEndDay.getHeight());
+        //btnEndDay.setSize(width / 2, btnEndDay.getAutoSizeBounds().height);
+        //btnEndDay.setPosition((width - btnEndDay.getWidth()) / 2, height - btnEndDay.getHeight());
 
         //float numCommanders = commanderRow.panels.length;
         //float commanderWidth = (width - (numCommanders + 3) * COMMANDER_GAP) / numCommanders;
         //float commanderRowHeight = commanderWidth * FCardPanel.ASPECT_RATIO + 2 * COMMANDER_ROW_PADDING;
         //commanderRow.setBounds(0, btnEndDay.getTop() - PLANE_NAME_FONT.getLineHeight() - 2 * FLabel.DEFAULT_INSETS - commanderRowHeight, width, commanderRowHeight);
 
-        map.setBounds(0, startY, width, btnEndDay.getTop() - startY);
+        map.setBounds(0, startY, width, height - startY);
     }
 
     private class PlaneMap extends FScrollPane implements IPlaneMapRenderer {
@@ -200,19 +200,19 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
                 return new ScrollBounds(visibleWidth, visibleHeight);
             }
             mapData = model.getCurrentPlaneData().getMap();
-            mapData.setTileWidth(visibleWidth / 4 * zoom);
+            mapData.setTileWidth(Math.round(visibleWidth / 4 * zoom));
             return new ScrollBounds(mapData.getWidth(), mapData.getHeight());
         }
 
         protected void drawBackground(Graphics g0) {
             if (mapData == null) { return; }
             g = g0;
-            mapData.draw(this, getScrollLeft(), getScrollTop(), getWidth(), getHeight());
+            mapData.draw(this, Math.round(getScrollLeft()), Math.round(getScrollTop()), Math.round(getWidth()), Math.round(getHeight()));
             g = null;
         }
 
         @Override
-        public void draw(HexagonTile tile, float x, float y, float w, float h) {
+        public void draw(HexagonTile tile, int x, int y, int w, int h) {
             g.drawImage(FSkinImage.HEXAGON_TILE, x, y, w, h);
 
             float pedestalWidth = w * 0.2f;//0.8f;

@@ -11,7 +11,7 @@ public class ConquestPlaneMap {
     private final int gridSize;
     private final HexagonTile[][] grid;
     private int tileCount;
-    private float tileWidth, tileHeight;
+    private int tileWidth, tileHeight;
 
     public ConquestPlaneMap(ConquestPlane plane) {
         int size = (int)Math.round(Math.sqrt(plane.getCardPool().size() / 3)); //use card pool size to determine grid size
@@ -23,16 +23,16 @@ public class ConquestPlaneMap {
         generateRandomGrid();
     }
 
-    public void setTileWidth(float tileWidth0) {
+    public void setTileWidth(int tileWidth0) {
         if (tileWidth == tileWidth0) { return; }
         tileWidth = tileWidth0;
-        tileHeight = tileWidth * (float)FSkinProp.IMG_HEXAGON_TILE.getHeight() / (float)FSkinProp.IMG_HEXAGON_TILE.getWidth();
+        tileHeight = Math.round((float)tileWidth * (float)FSkinProp.IMG_HEXAGON_TILE.getHeight() / (float)FSkinProp.IMG_HEXAGON_TILE.getWidth());
     }
 
-    public float getWidth() {
-        return tileWidth * 0.75f * (gridSize - 1) + tileWidth;
+    public int getWidth() {
+        return tileWidth * 3 / 4 * (gridSize - 1) + tileWidth;
     }
-    public float getHeight() {
+    public int getHeight() {
         return tileHeight * gridSize + tileHeight / 2;
     }
 
@@ -52,16 +52,16 @@ public class ConquestPlaneMap {
         return grid[q][r];
     }
 
-    public void draw(IPlaneMapRenderer renderer, float scrollLeft, float scrollTop, float visibleWidth, float visibleHeight) {
-        float dx = tileWidth * 0.75f;
-        int startQ = getIndexInRange((int)Math.floor((scrollLeft - tileWidth) / dx) + 1);
-        int startR = getIndexInRange((int)Math.floor((scrollTop - tileHeight * 1.5f) / tileHeight) + 1);
-        int endQ = getIndexInRange((int)Math.floor((scrollLeft + visibleWidth - tileWidth) / dx) + 2);
-        int endR = getIndexInRange((int)Math.floor((scrollTop + visibleHeight - tileHeight * 1.5f) / tileHeight) + 2);
+    public void draw(IPlaneMapRenderer renderer, int scrollLeft, int scrollTop, int visibleWidth, int visibleHeight) {
+        int dx = tileWidth * 3 / 4;
+        int startQ = getIndexInRange((int)Math.floor((float)(scrollLeft - tileWidth) / (float)dx) + 1);
+        int startR = getIndexInRange((int)Math.floor((float)(scrollTop - tileHeight * 1.5f) / (float)tileHeight) + 1);
+        int endQ = getIndexInRange((int)Math.floor((float)(scrollLeft + visibleWidth - tileWidth) / (float)dx) + 2);
+        int endR = getIndexInRange((int)Math.floor((float)(scrollTop + visibleHeight - tileHeight * 1.5f) / (float)tileHeight) + 2);
 
-        float y;
-        float x = startQ * dx - scrollLeft;
-        float startY = startR * tileHeight - scrollTop;
+        int y;
+        int x = startQ * dx - scrollLeft;
+        int startY = startR * tileHeight - scrollTop;
         for (int q = startQ; q <= endQ; q++) {
             y = startY;
             if (q % 2 == 1) {
@@ -89,7 +89,7 @@ public class ConquestPlaneMap {
     }
 
     public static interface IPlaneMapRenderer {
-        void draw(HexagonTile tile, float x, float y, float w, float h);
+        void draw(HexagonTile tile, int x, int y, int w, int h);
     }
 
     private void generateRandomGrid() {
