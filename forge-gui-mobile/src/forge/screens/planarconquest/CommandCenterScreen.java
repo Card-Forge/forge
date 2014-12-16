@@ -215,9 +215,11 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
         public void draw(HexagonTile tile, int x, int y, int w, int h) {
             g.drawImage(FSkinImage.HEXAGON_TILE, x, y, w, h);
 
-            float pedestalWidth = w * 0.2f;//0.8f;
-            float pedestalHeight = pedestalWidth * walker.getHeight() / walker.getWidth();
-            g.drawImage(walker, x + (w - pedestalWidth) / 2, y + h / 2 - pedestalHeight * 0.8f, pedestalWidth, pedestalHeight);
+            if (x < getWidth() / 2 && x + w > getWidth() / 2 && y < getHeight() / 2 && y + h > getHeight() / 2) {
+                float pedestalWidth = w * 0.8f;
+                float pedestalHeight = pedestalWidth * walker.getHeight() / walker.getWidth();
+                g.drawImage(walker, x + (w - pedestalWidth) / 2, y + h / 2 - pedestalHeight * 0.8f, pedestalWidth, pedestalHeight);
+            }
         }
     }
 
