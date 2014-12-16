@@ -98,7 +98,7 @@ public class ConquestPlaneMap {
         addTile(startQ, startR);
 
         int max = gridSize - 1;
-        int minCount = Math.round(gridSize * gridSize * 0.8f); //ensure at least 80% of the grid has tiles
+        int minCount = Math.round(gridSize * gridSize * 0.75f); //ensure at least 75% of the grid has tiles
         while (tileCount < minCount) {
             //add a tile in a random location and then ensure it can be reached from start tile
             int q = Aggregates.randomInt(0, max);
