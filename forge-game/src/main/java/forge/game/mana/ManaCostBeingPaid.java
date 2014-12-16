@@ -360,7 +360,7 @@ public class ManaCostBeingPaid {
         return tryPayMana(color, Iterables.filter(unpaidShards.keySet(), predCanBePaid), (byte)0xFF);
     }
 
-    private ManaCostShard tryPayMana(final byte colorMask, Iterable<ManaCostShard> payableShards, byte possibleUses) {
+    public ManaCostShard getShardToPayByPriority(Iterable<ManaCostShard> payableShards, byte possibleUses) {
         Set<ManaCostShard> choice = EnumSet.noneOf(ManaCostShard.class);
         int priority = Integer.MIN_VALUE;
         for (ManaCostShard toPay : payableShards) {
@@ -378,8 +378,14 @@ public class ManaCostBeingPaid {
             return null;
         }
 
-        ManaCostShard chosenShard = Iterables.getFirst(choice, null);
+       return Iterables.getFirst(choice, null);
+    }
 
+    private ManaCostShard tryPayMana(final byte colorMask, Iterable<ManaCostShard> payableShards, byte possibleUses) {
+        ManaCostShard chosenShard = getShardToPayByPriority(payableShards, possibleUses);
+        if (chosenShard == null) {
+            return null;
+        }
         ShardCount sc = unpaidShards.get(chosenShard);
         if (sc != null && sc.xCount > 0) {
             //if there's any X part of the cost for the chosen shard, pay it off first and track what color was spent to pay X

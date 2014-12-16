@@ -697,11 +697,7 @@ public class ComputerUtilMana {
         // * pay hybrids
         // * pay phyrexian, keep mana for colorless
         // * pay colorless
-        Iterator<ManaCostShard> shards = cost.getDistinctShards().iterator();
-        if (shards.hasNext()) {
-            return shards.next();
-        }
-        return null;
+        return cost.getShardToPayByPriority(cost.getDistinctShards(), MagicColor.ALL_COLORS);
     }
 
     private static void adjustManaCostToAvoidNegEffects(ManaCostBeingPaid cost, final Card card, Player ai) {
