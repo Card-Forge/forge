@@ -30,6 +30,7 @@ public class DevModeMenu implements ActionListener {
         SET_PLAYER_LIFE("Set Player Life"),
         WIN_GAME("Win Game"),
         SETUP_GAME_STATE("Setup Game State"),
+        DUMP_GAME_STATE("Dump Game State"),
         PLAY_UNLIMITED_LANDS("Play Unlimited Lands"),
         VIEW_ALL("View All Cards"),
         ADD_COUNTER("Add Counters to Permanent"),
@@ -67,6 +68,8 @@ public class DevModeMenu implements ActionListener {
         menu.add(getMenuItem(DevMenuItem.WIN_GAME));
         menu.addSeparator();
         menu.add(getMenuItem(DevMenuItem.SETUP_GAME_STATE));
+        menu.add(getMenuItem(DevMenuItem.DUMP_GAME_STATE));
+        menu.addSeparator();
         menu.add(getCheckboxMenuItem(DevMenuItem.PLAY_UNLIMITED_LANDS, MatchUtil.getHumanController().canPlayUnlimitedLands()));
         menu.add(getCheckboxMenuItem(DevMenuItem.VIEW_ALL, MatchUtil.getHumanController().mayLookAtAllCards()));
         menu.add(getMenuItem(DevMenuItem.ADD_COUNTER));
@@ -107,6 +110,7 @@ public class DevModeMenu implements ActionListener {
         case SET_PLAYER_LIFE:   { controller.setPlayerLife(); break; }
         case WIN_GAME:          { controller.winGame(); break; }
         case SETUP_GAME_STATE:  { controller.setupGameState(); break; }
+        case DUMP_GAME_STATE:   { controller.dumpGameState(); break; }
         case PLAY_UNLIMITED_LANDS:   { controller.togglePlayManyLandsPerTurn(); break; }
         case VIEW_ALL:          { controller.toggleViewAllCards(); break; }
         case ADD_COUNTER:       { controller.addCounterToPermanent(); break; }
