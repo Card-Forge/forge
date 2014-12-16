@@ -189,9 +189,12 @@ public class GameState {
             if (kv.getKey() == ZoneType.Battlefield) {
                 p.getZone(kv.getKey()).setCards(new ArrayList<Card>());
                 for (final Card c : kv.getValue()) {
+                    boolean tapped = c.isTapped();
+                    boolean sickness = c.hasSickness();
                     p.getZone(ZoneType.Hand).add(c);
                     p.getGame().getAction().moveToPlay(c);
-                    c.setSickness(false);
+                    c.setTapped(tapped);
+                    c.setSickness(sickness);
                 }
             } else {
                 p.getZone(kv.getKey()).setCards(kv.getValue());
