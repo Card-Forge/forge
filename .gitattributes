@@ -17247,6 +17247,7 @@ forge-gui/src/main/java/forge/planarconquest/ConquestPreferences.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestUtil.java -text
 forge-gui/src/main/java/forge/planarconquest/IVCommandCenter.java -text
 forge-gui/src/main/java/forge/player/GamePlayerUtil.java -text
+forge-gui/src/main/java/forge/player/GameState.java -text
 forge-gui/src/main/java/forge/player/HumanCostDecision.java -text
 forge-gui/src/main/java/forge/player/HumanPlay.java -text
 forge-gui/src/main/java/forge/player/HumanPlaySpellAbility.java -text
