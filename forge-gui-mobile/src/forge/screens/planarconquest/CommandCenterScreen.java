@@ -32,6 +32,9 @@ import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestPlane.Region;
 import forge.planarconquest.ConquestPlaneData;
 import forge.planarconquest.ConquestPlaneData.RegionData;
+import forge.planarconquest.ConquestPlaneMap;
+import forge.planarconquest.ConquestPlaneMap.HexagonTile;
+import forge.planarconquest.ConquestPlaneMap.IPlaneMapRenderer;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.planarconquest.IVCommandCenter;
 import forge.screens.FScreen;
@@ -43,7 +46,6 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FScrollPane.ScrollBounds;
 import forge.toolbox.FLabel;
 import forge.util.Utils;
 
@@ -85,6 +87,7 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
     public void update() {
         model = FModel.getConquest().getModel();
         setHeaderCaption(model.getName());
+        map.revalidate();
         updateCurrentDay();
     }
 
@@ -173,44 +176,46 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
         btnEndDay.setSize(width / 2, btnEndDay.getAutoSizeBounds().height);
         btnEndDay.setPosition((width - btnEndDay.getWidth()) / 2, height - btnEndDay.getHeight());
 
-        //btnEditDeck.setBounds(0, height - VPrompt.HEIGHT, VPrompt.BTN_WIDTH, VPrompt.HEIGHT);
-        //btnPortal.setBounds(width - VPrompt.BTN_WIDTH, height - VPrompt.HEIGHT, VPrompt.BTN_WIDTH, VPrompt.HEIGHT);
+        //float numCommanders = commanderRow.panels.length;
+        //float commanderWidth = (width - (numCommanders + 3) * COMMANDER_GAP) / numCommanders;
+        //float commanderRowHeight = commanderWidth * FCardPanel.ASPECT_RATIO + 2 * COMMANDER_ROW_PADDING;
+        //commanderRow.setBounds(0, btnEndDay.getTop() - PLANE_NAME_FONT.getLineHeight() - 2 * FLabel.DEFAULT_INSETS - commanderRowHeight, width, commanderRowHeight);
 
-        float numCommanders = commanderRow.panels.length;
-        float commanderWidth = (width - (numCommanders + 3) * COMMANDER_GAP) / numCommanders;
-        float commanderRowHeight = commanderWidth * FCardPanel.ASPECT_RATIO + 2 * COMMANDER_ROW_PADDING;
-        commanderRow.setBounds(0, btnEndDay.getTop() - PLANE_NAME_FONT.getLineHeight() - 2 * FLabel.DEFAULT_INSETS - commanderRowHeight, width, commanderRowHeight);
-
-        map.setBounds(0, startY, width, commanderRow.getTop() - startY);
+        map.setBounds(0, startY, width, btnEndDay.getTop() - startY);
     }
 
-    private class PlaneMap extends FScrollPane {
+    private class PlaneMap extends FScrollPane implements IPlaneMapRenderer {
         private float zoom = 1;
         private FImage walker = (FImage)PlaneswalkerAchievements.getTrophyImage("Ajani Goldmane");
+        private Graphics g;
+        private ConquestPlaneMap mapData;
 
         public PlaneMap() {
         }
 
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-            return new ScrollBounds(visibleWidth, visibleHeight);
+            if (model == null) {
+                mapData = null;
+                return new ScrollBounds(visibleWidth, visibleHeight);
+            }
+            mapData = model.getCurrentPlaneData().getMap();
+            mapData.setTileWidth(visibleWidth / 4 * zoom);
+            return new ScrollBounds(mapData.getWidth(), mapData.getHeight());
         }
 
-        protected void drawBackground(Graphics g) {
-            float w = getWidth();
-            float h = getHeight();
-            float tileWidth = w / 4 * zoom;
-            float tileHeight = tileWidth * FSkinImage.HEXAGON_TILE.getHeight() / FSkinImage.HEXAGON_TILE.getWidth();
-
-            float x = (w - tileWidth) / 2;
-            float y = (h - tileHeight) / 2;
-            drawTile(g, x, y, tileWidth, tileHeight);
+        protected void drawBackground(Graphics g0) {
+            if (mapData == null) { return; }
+            g = g0;
+            mapData.draw(this, getScrollLeft(), getScrollTop(), getWidth(), getHeight());
+            g = null;
         }
 
-        private void drawTile(Graphics g, float x, float y, float w, float h) {
+        @Override
+        public void draw(HexagonTile tile, float x, float y, float w, float h) {
             g.drawImage(FSkinImage.HEXAGON_TILE, x, y, w, h);
 
-            float pedestalWidth = w * 0.8f;
+            float pedestalWidth = w * 0.2f;//0.8f;
             float pedestalHeight = pedestalWidth * walker.getHeight() / walker.getWidth();
             g.drawImage(walker, x + (w - pedestalWidth) / 2, y + h / 2 - pedestalHeight * 0.8f, pedestalWidth, pedestalHeight);
         }
