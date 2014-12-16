@@ -3,6 +3,7 @@ package forge.player;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
@@ -186,6 +187,7 @@ public class GameState {
         if (life > 0) p.setLife(life, null);
         for (Entry<ZoneType, CardCollectionView> kv : humanCards.entrySet()) {
             if (kv.getKey() == ZoneType.Battlefield) {
+                p.getZone(kv.getKey()).setCards(new ArrayList<Card>());
                 for (final Card c : kv.getValue()) {
                     p.getZone(ZoneType.Hand).add(c);
                     p.getGame().getAction().moveToPlay(c);
