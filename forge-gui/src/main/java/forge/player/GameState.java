@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -18,8 +19,18 @@ import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.model.FModel;
+import forge.util.FCollectionView;
 
 public class GameState {
+    private static final Map<ZoneType, String> ZONES = new HashMap<ZoneType, String>();
+    static {
+        ZONES.put(ZoneType.Battlefield, "play");
+        ZONES.put(ZoneType.Hand, "hand");
+        ZONES.put(ZoneType.Graveyard, "graveyard");
+        ZONES.put(ZoneType.Library, "library");
+        ZONES.put(ZoneType.Exile, "exile");
+    }
+
     private int humanLife = -1;
     private int computerLife = -1;
     private final Map<ZoneType, String> humanCardTexts = new EnumMap<ZoneType, String>(ZoneType.class);
@@ -30,6 +41,85 @@ public class GameState {
     public GameState() {
     }
  
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("humanlife=%d\n", humanLife));
+        sb.append(String.format("ailife=%d\n", computerLife));
+        sb.append(String.format("activeplayer=%s\n", tChangePlayer));
+        sb.append(String.format("activephase=%s\n", tChangePhase));
+        appendCards(humanCardTexts, "human", sb);
+        appendCards(aiCardTexts, "ai", sb);
+        return sb.toString();
+    }
+
+    private void appendCards(Map<ZoneType, String> cardTexts, String categoryPrefix, StringBuilder sb) {
+        for (Entry<ZoneType, String> kv : cardTexts.entrySet()) {
+            sb.append(String.format("%scardsin%s=%s\n", categoryPrefix, ZONES.get(kv.getKey()), kv.getValue()));
+        }
+    }
+
+    public void initFromGame(Game game) throws Exception {
+        FCollectionView<Player> players = game.getPlayers();
+        // Can only serialized a two player game with one AI and one human.
+        if (players.size() != 2) {
+            throw new Exception("Game not supported");
+        }
+        final Player human = game.getPlayers().get(0);
+        final Player ai = game.getPlayers().get(1);
+        if (!human.getController().isGuiPlayer() || !ai.getController().isAI()) {
+            throw new Exception("Game not supported");
+        }
+        humanLife = human.getLife();
+        computerLife = ai.getLife();
+        tChangePlayer = game.getPhaseHandler().getPlayerTurn() == ai ? "ai" : "human";
+        tChangePhase = game.getPhaseHandler().getPhase().toString();
+        aiCardTexts.clear();
+        humanCardTexts.clear();
+        for (ZoneType zone : ZONES.keySet()) {
+            for (Card card : game.getCardsIn(zone)) {
+                addCard(zone, card.getOwner() == ai ? aiCardTexts : humanCardTexts, card);
+            }
+        }
+    }
+
+    private void addCard(ZoneType zoneType, Map<ZoneType, String> cardTexts, Card c) {
+        String value = cardTexts.get(zoneType);
+        String newText = c.getName();
+        if (zoneType == ZoneType.Battlefield) {
+            if (c.isTapped()) {
+                newText += "|Tapped:True";
+            }
+            if (c.isSick()) {
+                newText += "|SummonSick:True";
+            }
+            if (c.isFaceDown()) {
+                newText += "|FaceDown:True";
+            }
+            Map<CounterType, Integer> counters = c.getCounters();
+            if (!counters.isEmpty()) {
+                newText += "|Counters:";
+                boolean start = true;
+                for(Entry<CounterType, Integer> kv : counters.entrySet()) {
+                    String str = kv.getKey().toString();
+                    int count = kv.getValue();
+                    for (int i = 0; i < count; i++) {
+                        if (!start) {
+                            newText += ",";
+                        }
+                        newText += str;
+                        start = false;
+                    }
+                }
+            }
+        }
+        if (value == null) {
+            value = newText;
+        } else {
+            value += ";" + newText;
+        }
+        cardTexts.put(zoneType, value);
+    }
+
     public void parse(InputStream in) throws Exception {
         final BufferedReader br = new BufferedReader(new InputStreamReader(in));
 

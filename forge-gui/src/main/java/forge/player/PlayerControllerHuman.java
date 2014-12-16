@@ -1,8 +1,10 @@
 package forge.player;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -1414,6 +1416,22 @@ public class PlayerControllerHuman extends PlayerController {
             game.getAction().invoke(new Runnable() {
                 @Override public void run() { abMana.produceMana(null); }
             });
+        }
+
+        public void dumpGameState() {
+            final GameState state = new GameState();
+            try {
+                state.initFromGame(game);
+                File f = GuiBase.getInterface().getSaveFile(new File(ForgeConstants.USER_GAMES_DIR, "state.txt"));
+                if (f != null) {
+                    final BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+                    bw.write(state.toString());
+                    bw.close();
+                }
+            } catch (Exception e) {
+                SOptionPane.showErrorDialog(e.getMessage());
+                e.printStackTrace();
+            }
         }
 
         public void setupGameState() {

@@ -61,6 +61,16 @@ public enum CDev implements ICDoc {
     public void setupGameState() {
         MatchUtil.getHumanController().cheat().setupGameState();
     }
+    
+    private final MouseListener madDump = new MouseAdapter() {
+        @Override
+        public void mousePressed(final MouseEvent e) {
+            dumpGameState();
+        }
+    };
+    public void dumpGameState() {
+        MatchUtil.getHumanController().cheat().dumpGameState();
+    }
 
     private final MouseListener madTutor = new MouseAdapter() {
         @Override
@@ -181,6 +191,7 @@ public enum CDev implements ICDoc {
         VDev.SINGLETON_INSTANCE.getLblViewAll().addMouseListener(madViewAll);
         VDev.SINGLETON_INSTANCE.getLblGenerateMana().addMouseListener(madMana);
         VDev.SINGLETON_INSTANCE.getLblSetupGame().addMouseListener(madSetup);
+        VDev.SINGLETON_INSTANCE.getLblDumpGame().addMouseListener(madDump);
         VDev.SINGLETON_INSTANCE.getLblTutor().addMouseListener(madTutor);
         VDev.SINGLETON_INSTANCE.getLblCardToHand().addMouseListener(madCardToHand);
         VDev.SINGLETON_INSTANCE.getLblCounterPermanent().addMouseListener(madCounter);
