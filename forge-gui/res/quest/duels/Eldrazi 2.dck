@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Eldrazi 2
+Title=Eldrazi
+Difficulty=medium
+Description=GU Eldrazi deck
+Icon=Eldrazi.jpg
+Deck Type=constructed
+[main]
+4 Nest Invader
+1 Awakening Zone
+2 Growth Spasm
+4 Kozilek's Predator
+2 Ulamog's Crusher
+2 Artisan of Kozilek
+2 Hand of Emrakul
+1 Kozilek, Butcher of Truth
+1 Pathrazer of Ulamog
+1 Ulamog, the Infinite Gyre
+1 It That Betrays
+1 Emrakul, the Aeons Torn
+2 Urza's Incubator
+3 Call to the Kindred
+1 Spell Snare
+1 Mental Misstep
+4 Fog Bank
+2 Forest
+4 Cloudpost
+4 Glimmerpost
+4 Tropical Island
+4 Misty Rainforest
+2 Wooded Foothills
+2 Thornwood Falls
+1 Grim Monolith
+2 Chromatic Lantern
+2 Thran Dynamo
+[sideboard]

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Waylon Smithers 3
+Title=Waylon Smithers
+Difficulty=hard
+Description=WU Control deck with Azor's Elocutors and lots of enchantments for protection
+Icon=Waylon Smithers.jpg
+Deck Type=constructed
+[main]
+7 Island
+7 Plains
+4 Tundra
+4 Flooded Strand
+1 Polluted Delta
+4 Glacial Fortress
+2 Azor's Elocutors
+4 Fog Bank
+2 Nyx-Fleece Ram
+2 Guard Gomazoa
+1 Plumeveil
+3 Ghostly Prison
+2 Greater Auramancy
+2 Hindering Light
+2 Negate
+1 Intervene
+2 Martial Law
+3 Moat
+3 Propaganda
+4 Rebuff the Wicked
+2 Reverence
+3 Sphere of Safety
+2 Web of Inertia
+1 Force Bubble
+1 Blind Obedience
+1 Leyline of Sanctity
+[sideboard]

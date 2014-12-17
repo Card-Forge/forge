@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Trostani 2
+Title=Trostani
+Difficulty=medium
+Description=GW Populate deck
+Icon=Trostani.jpg
+Deck Type=constructed
+[main]
+2 Plains
+2 Forest
+1 Elfhame Palace
+1 Savannah
+2 Graypelt Refuge
+1 Arctic Flats
+2 Windswept Heath
+2 Blossoming Sands
+3 Razorverge Thicket
+1 Selesnya Guildgate
+3 Sunpetal Grove
+3 Temple of Plenty
+1 Advent of the Wurm
+1 Baloth Cage Trap
+1 Beast Attack
+1 Bestial Menace
+1 Blade Splicer
+2 Call of the Conclave
+2 Call of the Herd
+1 Fated Intervention
+1 Feral Incarnation
+1 Pulse of the Tangle
+1 Trostani's Summoner
+1 Precursor Golem
+1 Twilight Drover
+1 Voice of Resurgence
+3 Coursers' Accord
+3 Eyes in the Skies
+3 Scion of Vitu-Ghazi
+1 Horncaller's Chant
+2 Vitu-Ghazi Guildmage
+1 Emmara Tandris
+1 Trostani, Selesnya's Voice
+1 Wayfaring Temple
+2 Growing Ranks
+2 Sundering Growth
+2 Trostani's Judgment
+[sideboard]
