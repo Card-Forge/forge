@@ -1,0 +1,9 @@
+Name:Arcane Lighthouse
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add {1} to your mana pool.
+A:AB$ Effect | Cost$ 1 T | StaticAbilities$ STLoseAB | SpellDescription$ Until end of turn, creatures your opponents control lose hexproof and shroud and can't have hexproof or shroud.
+SVar:STLoseAB:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.OppCtrl | RemoveKeyword$ Hexproof & Shroud | AddHiddenKeyword$ CARDNAME can't have or gain Hexproof & CARDNAME can't have or gain Shroud | Description$ Until end of turn, creatures your opponents control lose hexproof and shroud and can't have hexproof or shroud.
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/arcane_lighthouse.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{1}, {T}: Until end of turn, creatures your opponents control lose hexproof and shroud and can't have hexproof or shroud.

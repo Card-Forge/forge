@@ -1843,6 +1843,7 @@ forge-gui/res/cardsfolder/a/arc_trail.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arcades_sabboth.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arcane_denial.txt -text
 forge-gui/res/cardsfolder/a/arcane_laboratory.txt -text
+forge-gui/res/cardsfolder/a/arcane_lighthouse.txt -text
 forge-gui/res/cardsfolder/a/arcane_melee.txt -text
 forge-gui/res/cardsfolder/a/arcane_sanctum.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arcane_spyglass.txt svneol=native#text/plain
