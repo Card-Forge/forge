@@ -24,7 +24,6 @@ import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.combat.CombatView;
 import forge.game.phase.PhaseType;
-import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.match.MatchUtil;
@@ -231,7 +230,7 @@ public class MatchScreen extends FScreen {
     }
 
     public boolean isTopHumanPlayerActive() {
-        return topPlayerPrompt != null && Player.get(topPlayerPanel.getPlayer()) == MatchUtil.getCurrentPlayer();
+        return topPlayerPrompt != null && topPlayerPanel.getPlayer() == MatchUtil.getCurrentPlayer().getView();
     }
 
     public VPrompt getActivePrompt() {

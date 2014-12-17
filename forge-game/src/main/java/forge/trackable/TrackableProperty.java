@@ -88,6 +88,7 @@ public enum TrackableProperty {
     IsAI(TrackableTypes.BooleanType),
     LobbyPlayerName(TrackableTypes.StringType),
     AvatarIndex(TrackableTypes.IntegerType),
+    AvatarCardImageKey(TrackableTypes.StringType),
     Opponents(TrackableTypes.PlayerViewCollectionType),
     Life(TrackableTypes.IntegerType),
     PoisonCounters(TrackableTypes.IntegerType),

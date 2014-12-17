@@ -299,7 +299,7 @@ public class VPlayerPanel extends FContainer {
             }
 
             //when gui player loses life, vibrate device for a length of time based on amount of life lost
-            if (vibrateDuration > 0 && player.getLobbyPlayer() == MatchUtil.getGuiPlayer() &&
+            if (vibrateDuration > 0 && player.isLobbyPlayer(MatchUtil.getGuiPlayer()) &&
                     FModel.getPreferences().getPrefBoolean(FPref.UI_VIBRATE_ON_LIFE_LOSS)) {
                 //never vibrate more than two seconds regardless of life lost or poison counters gained
                 Gdx.input.vibrate(Math.min(vibrateDuration, 2000)); 

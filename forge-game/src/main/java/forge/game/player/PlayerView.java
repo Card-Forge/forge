@@ -65,6 +65,13 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.AvatarIndex, p.getLobbyPlayer().getAvatarIndex());
     }
 
+    public String getAvatarCardImageKey() {
+        return get(TrackableProperty.AvatarCardImageKey);
+    }
+    void updateAvatarCardImageKey(Player p) {
+        set(TrackableProperty.AvatarCardImageKey, p.getLobbyPlayer().getAvatarCardImageKey());
+    }
+
     public FCollectionView<PlayerView> getOpponents() {
         return get(TrackableProperty.Opponents);
     }

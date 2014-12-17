@@ -49,7 +49,7 @@ public class MatchController implements IMatchController {
     private MatchController() { }
     public static final MatchController instance = new MatchController();
 
-    private static final Map<LobbyPlayer, FImage> avatarImages = new HashMap<LobbyPlayer, FImage>();
+    private static final Map<String, FImage> avatarImages = new HashMap<String, FImage>();
 
     private static MatchScreen view;
 
@@ -58,21 +58,21 @@ public class MatchController implements IMatchController {
     }
 
     public static FImage getPlayerAvatar(final PlayerView p) {
-        LobbyPlayer lp = p.getLobbyPlayer();
+        String lp = p.getLobbyPlayerName();
         FImage avatar = avatarImages.get(lp);
         if (avatar == null) {
-            if (lp.getAvatarCardImageKey() == null) {
-                avatar = new FTextureRegionImage(FSkin.getAvatars().get(lp.getAvatarIndex()));
+            if (p.getAvatarCardImageKey() == null) {
+                avatar = new FTextureRegionImage(FSkin.getAvatars().get(p.getAvatarIndex()));
             }
             else { //handle lobby players with art from cards
-                avatar = CardRenderer.getCardArt(lp.getAvatarCardImageKey(), false);
+                avatar = CardRenderer.getCardArt(p.getAvatarCardImageKey(), false);
             }
         }
         return avatar;
     }
 
     public static void setPlayerAvatar(final LobbyPlayer lp, final FImage avatarImage) {
-        avatarImages.put(lp, avatarImage);
+        avatarImages.put(lp.getName(), avatarImage);
     }
 
     public void refreshCardDetails(Iterable<CardView> cards) {
@@ -176,7 +176,7 @@ public class MatchController implements IMatchController {
     public void updatePlayerControl() {
         //show/hide hand for top player based on whether the opponent is controlled
         if (MatchUtil.getHumanCount() == 1) {
-            Player player = Player.get(view.getTopPlayerPanel().getPlayer());
+            PlayerView player = view.getTopPlayerPanel().getPlayer();
             if (player.getMindSlaveMaster() != null) {
                 view.getTopPlayerPanel().setSelectedZone(ZoneType.Hand);
             }
