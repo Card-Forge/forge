@@ -11,7 +11,7 @@ public class ConquestPlaneMap {
     private final int gridSize;
     private final HexagonTile[][] grid;
     private int tileCount;
-    private int tileWidth, tileHeight;
+    private int tileWidth, tileHeight, padding;
 
     public ConquestPlaneMap(ConquestPlane plane) {
         int size = (int)Math.round(Math.sqrt(plane.getCardPool().size() / 3)); //use card pool size to determine grid size
@@ -27,18 +27,19 @@ public class ConquestPlaneMap {
         if (tileWidth == tileWidth0) { return; }
         tileWidth = tileWidth0;
         tileHeight = Math.round((float)tileWidth * (float)FSkinProp.IMG_HEXAGON_TILE.getHeight() / (float)FSkinProp.IMG_HEXAGON_TILE.getWidth());
+        padding = tileHeight / 2;
     }
 
     public int getWidth() {
-        return tileWidth * 3 / 4 * (gridSize - 1) + tileWidth;
+        return tileWidth * 3 / 4 * (gridSize - 1) + tileWidth + 2 * padding;
     }
     public int getHeight() {
-        return tileHeight * gridSize + tileHeight / 2;
+        return tileHeight * gridSize + tileHeight / 2 + 2 * padding;
     }
 
     public HexagonTile getTileAtPoint(float x, float y) {
         //convert pixel to axial coordinates
-        x = (x - tileWidth / 2) / tileWidth;
+        x = (x - tileWidth / 2) / tileWidth - padding;
         double t1 = y / (tileWidth / 2), t2 = Math.floor(x + t1);
         int r = (int)Math.floor((Math.floor(t1 - x) + t2) / 3); 
         int q = (int)Math.floor((Math.floor(2 * x + 1) + t2) / 3) - r;
@@ -53,6 +54,9 @@ public class ConquestPlaneMap {
     }
 
     public void draw(IPlaneMapRenderer renderer, int scrollLeft, int scrollTop, int visibleWidth, int visibleHeight) {
+        scrollLeft -= padding;
+        scrollTop -= padding;
+
         int dx = tileWidth * 3 / 4;
         int startQ = getIndexInRange((int)Math.floor((float)(scrollLeft - tileWidth) / (float)dx) + 1);
         int startR = getIndexInRange((int)Math.floor((float)(scrollTop - tileHeight * 1.5f) / (float)tileHeight) + 1);
