@@ -204,6 +204,42 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
             return new ScrollBounds(mapData.getWidth(), mapData.getHeight());
         }
 
+        @Override
+        public boolean zoom(float x, float y, float amount) {
+            float oldScrollLeft = getScrollLeft();
+            float oldScrollTop = getScrollTop();
+            float oldScrollWidth = getScrollWidth();
+            float oldScrollHeight = getScrollHeight();
+
+            x += oldScrollLeft;
+            y += oldScrollTop;
+
+            if (amount > 0) {
+                zoom *= 1.1f;
+                if (zoom > 4f) {
+                    zoom = 4f;
+                }
+            }
+            else {
+                zoom /= 1.1f;
+                if (zoom < 0.25f) {
+                    zoom = 0.25f;
+                }
+            }
+            revalidate(); //apply change in height to all scroll panes
+
+            //adjust scroll positions to keep x, y in the same spot
+            float newScrollWidth = getScrollWidth();
+            float xAfter = x * newScrollWidth / oldScrollWidth;
+            setScrollLeft(oldScrollLeft + xAfter - x);
+
+            float newScrollHeight = getScrollHeight();
+            float yAfter = y * newScrollHeight / oldScrollHeight;
+            setScrollTop(oldScrollTop + yAfter - y);
+            return true;
+        }
+
+        @Override
         protected void drawBackground(Graphics g0) {
             if (mapData == null) { return; }
             g = g0;
