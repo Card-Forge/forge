@@ -99,7 +99,8 @@ public class ConquestPlaneMap {
     private void generateRandomGrid() {
         int startQ = gridSize / 2; //player will start at center of grid always
         int startR = startQ;
-        addTile(startQ, startR);
+        int colorIndex = 0; //TODO: Determine initial color index from planeswalker
+        addTile(startQ, startR, colorIndex);
 
         int max = gridSize - 1;
         int minCount = Math.round(gridSize * gridSize * 0.75f); //ensure at least 75% of the grid has tiles
@@ -107,7 +108,7 @@ public class ConquestPlaneMap {
             //add a tile in a random location and then ensure it can be reached from start tile
             int q = Aggregates.randomInt(0, max);
             int r = Aggregates.randomInt(0, max);
-            while (addTile(q, r)) {
+            while (addTile(q, r, colorIndex)) {
                 //alternate which coordinate is incremented as we move towards center
                 if (tileCount % 2 == 0 && r != startR) {
                     if (r > startR) {
@@ -130,12 +131,13 @@ public class ConquestPlaneMap {
                     r++;
                 }
             }
+            colorIndex = Aggregates.randomInt(0, 4); //pick a random color for the next set of tiles
         }
     }
 
-    private boolean addTile(int q, int r) {
+    private boolean addTile(int q, int r, int colorIndex) {
         if (grid[q][r] == null) {
-            grid[q][r] = new HexagonTile(q, r);
+            grid[q][r] = new HexagonTile(q, r, colorIndex);
             tileCount++;
             return true;
         }
@@ -143,11 +145,17 @@ public class ConquestPlaneMap {
     }
 
     public class HexagonTile {
-        private int q, r;
+        private final int q, r;
+        private final int colorIndex;
 
-        private HexagonTile(int q0, int r0) {
+        private HexagonTile(int q0, int r0, int colorIndex0) {
             q = q0;
             r = r0;
+            colorIndex = colorIndex0;
+        }
+
+        public int getColorIndex() {
+            return colorIndex;
         }
 
         public List<HexagonTile> getNeighbors() {

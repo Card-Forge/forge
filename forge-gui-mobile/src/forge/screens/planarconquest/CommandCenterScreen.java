@@ -249,6 +249,27 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
 
         @Override
         public void draw(HexagonTile tile, int x, int y, int w, int h) {
+            FSkinImage manaIcon;
+            switch (tile.getColorIndex()) {
+            case 0:
+                manaIcon = FSkinImage.MANA_W;
+                break;
+            case 1:
+                manaIcon = FSkinImage.MANA_U;
+                break;
+            case 2:
+                manaIcon = FSkinImage.MANA_B;
+                break;
+            case 3:
+                manaIcon = FSkinImage.MANA_R;
+                break;
+            default:
+                manaIcon = FSkinImage.MANA_G;
+                break;
+            }
+            float manaIconSize = w / 2;
+            g.drawImage(manaIcon, x + (w - manaIconSize) / 2, y + (h - manaIconSize) / 2, manaIconSize, manaIconSize);
+
             g.drawImage(FSkinImage.HEXAGON_TILE, x, y, w, h);
 
             if (x < getWidth() / 2 && x + w > getWidth() / 2 && y < getHeight() / 2 && y + h > getHeight() / 2) {
