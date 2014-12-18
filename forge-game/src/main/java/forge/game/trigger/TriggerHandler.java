@@ -48,6 +48,7 @@ public class TriggerHandler {
     private final List<Trigger> activeTriggers = Collections.synchronizedList(new ArrayList<Trigger>());
 
     private final List<Trigger> delayedTriggers = Collections.synchronizedList(new ArrayList<Trigger>());
+    private final List<Trigger> thisTurnDelayedTriggers = Collections.synchronizedList(new ArrayList<Trigger>());
     private final ListMultimap<Player, Trigger> playerDefinedDelayedTriggers = Multimaps.synchronizedListMultimap(ArrayListMultimap.<Player, Trigger>create());
     private final List<TriggerWaiting> waitingTriggers = Collections.synchronizedList(new ArrayList<TriggerWaiting>());
     private final Game game;
@@ -84,6 +85,16 @@ public class TriggerHandler {
 
     public final void clearDelayedTrigger() {
         delayedTriggers.clear();
+    }
+
+    public final void registerThisTurnDelayedTrigger(final Trigger trig) {
+        thisTurnDelayedTriggers.add(trig);
+        delayedTriggers.add(trig);
+    }
+
+    public final void clearThisTurnDelayedTrigger() {
+        delayedTriggers.removeAll(thisTurnDelayedTriggers);
+        thisTurnDelayedTriggers.clear();
     }
 
     public final void clearDelayedTrigger(final Card card) {

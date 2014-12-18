@@ -45,7 +45,6 @@ import forge.game.card.CardPredicates;
 import forge.game.combat.Combat;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventGameOutcome;
-import forge.game.phase.EndOfTurn;
 import forge.game.phase.Phase;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -78,8 +77,8 @@ public class Game {
     private List<Card> activePlanes = null;
 
     public final Phase cleanup;
-    public final EndOfTurn endOfTurn;
     public final Phase endOfCombat;
+    public final Phase endOfTurn;
     public final Untap untap;
     public final Upkeep upkeep;
     public final MagicStack stack;
@@ -154,8 +153,8 @@ public class Game {
         untap = new Untap(this);
         upkeep = new Upkeep(this);
         cleanup = new Phase(PhaseType.CLEANUP);
-        endOfTurn = new EndOfTurn(this);
         endOfCombat = new Phase(PhaseType.COMBAT_END);
+        endOfTurn = new Phase(PhaseType.END_OF_TURN);
 
         view = new GameView(this);
 
@@ -215,7 +214,7 @@ public class Game {
     public final Phase getEndOfCombat() {
         return endOfCombat;
     }
-    public final EndOfTurn getEndOfTurn() {
+    public final Phase getEndOfTurn() {
         return endOfTurn;
     }
     public final Phase getCleanup() {

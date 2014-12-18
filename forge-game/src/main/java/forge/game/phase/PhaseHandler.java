@@ -38,6 +38,7 @@ import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
+import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.CollectionSuppliers;
@@ -720,6 +721,8 @@ public class PhaseHandler implements java.io.Serializable {
 
     private Player handleNextTurn() {
         game.getStack().onNextTurn();
+        // reset mustAttackEntity
+        playerTurn.setMustAttackEntity(null);
 
         for (final Player p1 : game.getPlayers()) {
             for (final ZoneType z : Player.ALL_ZONES) {
@@ -735,10 +738,11 @@ public class PhaseHandler implements java.io.Serializable {
             p.setLibrarySearched(0);
             p.setNumManaConversion(0);
 
-            p.removeKeyword("At the beginning of this turn's end step, you lose the game.");
             p.removeKeyword("Skip the untap step of this turn.");
             p.removeKeyword("Schemes can't be set in motion this turn.");
         }
+
+        game.getTriggerHandler().clearThisTurnDelayedTrigger();
 
         Player next = getNextActivePlayer();
 
@@ -764,6 +768,9 @@ public class PhaseHandler implements java.io.Serializable {
             nextPlayer.setExtraTurn(!extraTurns.isEmpty());
             if (nextPlayer.hasKeyword("If you would begin an extra turn, skip that turn instead.")) {
                 return getNextActivePlayer();
+            }
+            for (Trigger deltrig : extraTurn.getDelayedTriggers()) {
+                game.getTriggerHandler().registerThisTurnDelayedTrigger(deltrig);
             }
         }
         else {
@@ -799,9 +806,6 @@ public class PhaseHandler implements java.io.Serializable {
         }
         
         if (extraTurn != null) {
-            if (extraTurn.isLoseAtEndStep()) {
-                nextPlayer.addKeyword("At the beginning of this turn's end step, you lose the game.");
-            }
             if (extraTurn.isSkipUntap()) {
                 nextPlayer.addKeyword("Skip the untap step of this turn.");
             }
