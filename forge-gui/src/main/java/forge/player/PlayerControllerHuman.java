@@ -32,6 +32,7 @@ import forge.FThreads;
 import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.achievement.AchievementCollection;
+import forge.ai.GameState;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -1424,8 +1425,17 @@ public class PlayerControllerHuman extends PlayerController {
             });
         }
 
+        private GameState createGameStateObject() {
+            return new GameState() {
+                @Override
+                public IPaperCard getPaperCard(String cardName) {
+                    return FModel.getMagicDb().getCommonCards().getCard(cardName);
+                }
+            };
+        }
+
         public void dumpGameState() {
-            final GameState state = new GameState();
+            final GameState state = createGameStateObject();
             try {
                 state.initFromGame(game);
                 File f = GuiBase.getInterface().getSaveFile(new File(ForgeConstants.USER_GAMES_DIR, "state.txt"));
@@ -1451,7 +1461,7 @@ public class PlayerControllerHuman extends PlayerController {
                 return;
             }
 
-            final GameState state = new GameState();
+            final GameState state = createGameStateObject();
             try {
                 final FileInputStream fstream = new FileInputStream(filename);
                 state.parse(fstream);

@@ -1,4 +1,4 @@
-package forge.player;
+package forge.ai;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -19,10 +19,10 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.model.FModel;
+import forge.item.IPaperCard;
 import forge.util.FCollectionView;
 
-public class GameState {
+public abstract class GameState {
     private static final Map<ZoneType, String> ZONES = new HashMap<ZoneType, String>();
     static {
         ZONES.put(ZoneType.Battlefield, "play");
@@ -41,7 +41,9 @@ public class GameState {
     
     public GameState() {
     }
- 
+
+    public abstract IPaperCard getPaperCard(String cardName);
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("humanlife=%d\n", humanLife));
@@ -218,7 +220,8 @@ public class GameState {
         for (final String element : data) {
             final String[] cardinfo = element.trim().split("\\|");
 
-            final Card c = Card.fromPaperCard(FModel.getMagicDb().getCommonCards().getCard(cardinfo[0]), player);
+            //System.out.println("paper card "  + cardinfo[0]);
+            final Card c = Card.fromPaperCard(getPaperCard(cardinfo[0]), player);
 
             boolean hasSetCurSet = false;
             for (final String info : cardinfo) {

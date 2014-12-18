@@ -26,6 +26,7 @@ forge-ai/src/main/java/forge/ai/ComputerUtilCard.java -text
 forge-ai/src/main/java/forge/ai/ComputerUtilCombat.java -text
 forge-ai/src/main/java/forge/ai/ComputerUtilCost.java -text
 forge-ai/src/main/java/forge/ai/ComputerUtilMana.java -text
+forge-ai/src/main/java/forge/ai/GameState.java -text
 forge-ai/src/main/java/forge/ai/LobbyPlayerAi.java -text
 forge-ai/src/main/java/forge/ai/PlayerControllerAi.java -text
 forge-ai/src/main/java/forge/ai/SpellAbilityAi.java -text
@@ -17253,7 +17254,6 @@ forge-gui/src/main/java/forge/planarconquest/ConquestPreferences.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestUtil.java -text
 forge-gui/src/main/java/forge/planarconquest/IVCommandCenter.java -text
 forge-gui/src/main/java/forge/player/GamePlayerUtil.java -text
-forge-gui/src/main/java/forge/player/GameState.java -text
 forge-gui/src/main/java/forge/player/HumanCostDecision.java -text
 forge-gui/src/main/java/forge/player/HumanPlay.java -text
 forge-gui/src/main/java/forge/player/HumanPlaySpellAbility.java -text
