@@ -14013,6 +14013,7 @@ forge-gui/res/cardsfolder/t/threaten.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/three_dreams.txt -text
 forge-gui/res/cardsfolder/t/three_tragedies.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/three_visits.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/t/three_wishes.txt -text
 forge-gui/res/cardsfolder/t/thresher_beast.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thrill_kill_assassin.txt -text
 forge-gui/res/cardsfolder/t/thrill_of_the_hunt.txt svneol=native#text/plain

@@ -18,6 +18,7 @@ public class MillEffect extends SpellAbilityEffect {
         final Card source = sa.getHostCard();
         final int numCards = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
         final boolean bottom = sa.hasParam("FromBottom");
+        final boolean facedown = sa.hasParam("ExileFaceDown");
 
         if (sa.hasParam("ForgetOtherRemembered")) {
             source.clearRemembered();
@@ -38,8 +39,8 @@ public class MillEffect extends SpellAbilityEffect {
                         continue;
                     }
                 }
-                final CardCollectionView milled = p.mill(numCards, destination, bottom);
-                if (destination.equals(ZoneType.Exile) && sa.hasParam("ExileFaceDown")) {
+                final CardCollectionView milled = p.mill(numCards, destination, bottom, facedown);
+                if (destination.equals(ZoneType.Exile) && facedown) {
                     for (final Card c : milled) {
                         c.setState(CardStateName.FaceDown, true);
                     }
