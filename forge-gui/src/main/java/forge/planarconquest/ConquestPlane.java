@@ -20,7 +20,6 @@ package forge.planarconquest;
 import java.util.HashSet;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 
 import forge.GuiBase;
 import forge.assets.ISkinImage;

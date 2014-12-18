@@ -15,7 +15,6 @@ public class ConquestPlaneMap {
     //use 2 dimensional array to represent tile grid
     private final int gridSize;
     private final HexagonTile[][] grid;
-    private int tileCount;
     private int tileWidth, tileHeight, padding;
 
     public ConquestPlaneMap(ConquestPlane plane) {
@@ -103,7 +102,6 @@ public class ConquestPlaneMap {
 
     private void generateRandomGrid(ConquestPlane plane) {
         int center = gridSize / 2; //player will start at center of grid always
-        addTile(center, center, null);
 
         //divide the grid into regions
         FCollectionView<Region> regions = plane.getRegions();
@@ -131,18 +129,9 @@ public class ConquestPlaneMap {
                 if (regionIndex >= regionCount) {
                     regionIndex = 0;
                 }
-                addTile(q, r, regions.get(regionIndex));
+                grid[q][r] = new HexagonTile(q, r, regions.get(regionIndex));
             }
         }
-    }
-
-    private boolean addTile(int q, int r, Region region) {
-        if (grid[q][r] == null) {
-            grid[q][r] = new HexagonTile(q, r, region);
-            tileCount++;
-            return true;
-        }
-        return false;
     }
 
     public class HexagonTile {

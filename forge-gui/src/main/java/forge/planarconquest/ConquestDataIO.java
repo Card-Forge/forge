@@ -41,9 +41,12 @@ import forge.util.ItemPool;
 public class ConquestDataIO {
     public static boolean TEST_MODE = true;
     private static ConquestData createTestData() {
-        ConquestData temp = new ConquestData("My Conquest", 0,
+        /*ConquestData temp = new ConquestData("My Conquest", 0,
                 ConquestPlane.Alara,
-                ConquestPlane.Alara.getCardPool().getCard("Rafiq of the Many"));
+                ConquestPlane.Alara.getCardPool().getCard("Rafiq of the Many"));*/
+        ConquestData temp = new ConquestData("My Conquest", 0,
+                ConquestPlane.Kamigawa,
+                ConquestPlane.Kamigawa.getCardPool().getCard("Meloku the Clouded Mirror"));
         return temp;
     }
 
