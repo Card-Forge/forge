@@ -79,6 +79,10 @@ public abstract class GameState {
         aiCardTexts.clear();
         humanCardTexts.clear();
         for (ZoneType zone : ZONES.keySet()) {
+            // Init texts to empty, so that restoring will clear the state
+            // if the zone had no cards in it (e.g. empty hand).
+            aiCardTexts.put(zone, "");
+            humanCardTexts.put(zone, "");
             for (Card card : game.getCardsIn(zone)) {
                 addCard(zone, card.getOwner() == ai ? aiCardTexts : humanCardTexts, card);
             }
@@ -86,56 +90,67 @@ public abstract class GameState {
     }
 
     private void addCard(ZoneType zoneType, Map<ZoneType, String> cardTexts, Card c) {
-        String value = cardTexts.get(zoneType);
-        String newText = c.getName();
+        StringBuilder newText = new StringBuilder(cardTexts.get(zoneType));
+        if (newText.length() > 0) {
+            newText.append(";");
+        }
+        newText.append(c.getName());
         if (zoneType == ZoneType.Battlefield) {
             if (c.isTapped()) {
-                newText += "|Tapped:True";
+                newText.append("|Tapped:True");
             }
             if (c.isSick()) {
-                newText += "|SummonSick:True";
+                newText.append("|SummonSick:True");
             }
             if (c.isFaceDown()) {
-                newText += "|FaceDown:True";
+                newText.append("|FaceDown:True");
             }
             Map<CounterType, Integer> counters = c.getCounters();
             if (!counters.isEmpty()) {
-                newText += "|Counters:";
+                newText.append("|Counters:");
                 boolean start = true;
                 for(Entry<CounterType, Integer> kv : counters.entrySet()) {
                     String str = kv.getKey().toString();
                     int count = kv.getValue();
                     for (int i = 0; i < count; i++) {
                         if (!start) {
-                            newText += ",";
+                            newText.append(",");
                         }
-                        newText += str;
+                        newText.append(str);
                         start = false;
                     }
                 }
             }
         }
-        if (value == null) {
-            value = newText;
-        } else {
-            value += ";" + newText;
+        cardTexts.put(zoneType, newText.toString());
+    }
+
+    private String[] parseLine(String line) {
+        if (line.charAt(0) == '#') {
+            return null;
         }
-        cardTexts.put(zoneType, value);
+        final String[] tempData = line.split("=");
+        if (tempData.length >= 2) {
+            return tempData;
+        }
+        if (tempData.length == 1 && line.endsWith("=")) {
+            // Empty value.
+            return new String[] {tempData[0], ""};
+        }
+        return null;
     }
 
     public void parse(InputStream in) throws Exception {
         final BufferedReader br = new BufferedReader(new InputStreamReader(in));
 
-        String temp = "";
-        while ((temp = br.readLine()) != null) {
-
-            final String[] tempData = temp.split("=");
-            if (tempData.length < 2 || temp.charAt(0) == '#') {
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] keyValue = parseLine(line);
+            if (keyValue == null) {
                 continue;
             }
-
-            final String categoryName = tempData[0].toLowerCase();
-            final String categoryValue = tempData[1];
+            final String categoryName = keyValue[0].toLowerCase();
+            final String categoryValue = keyValue[1];
 
             if (categoryName.equals("humanlife"))                   humanLife = Integer.parseInt(categoryValue);
             else if (categoryName.equals("ailife"))                 computerLife = Integer.parseInt(categoryValue);
@@ -153,6 +168,7 @@ public abstract class GameState {
             else if (categoryName.equals("aicardsinlibrary"))       aiCardTexts.put(ZoneType.Library, categoryValue);
             else if (categoryName.equals("humancardsinexile"))      humanCardTexts.put(ZoneType.Exile, categoryValue);
             else if (categoryName.equals("aicardsinexile"))         aiCardTexts.put(ZoneType.Exile, categoryValue);
+            else System.out.println("Unknown key: " + categoryName);
         }
     }
 
@@ -181,13 +197,14 @@ public abstract class GameState {
     }
 
     private void setupPlayerState(int life, Map<ZoneType, String> cardTexts, final Player p) {
-        Map<ZoneType, CardCollectionView> humanCards = new EnumMap<ZoneType, CardCollectionView>(ZoneType.class);
+        Map<ZoneType, CardCollectionView> playerCards = new EnumMap<ZoneType, CardCollectionView>(ZoneType.class);
         for(Entry<ZoneType, String> kv : cardTexts.entrySet()) {
-            humanCards.put(kv.getKey(), processCardsForZone(kv.getValue().split(";"), p));
+            String value = kv.getValue();
+            playerCards.put(kv.getKey(), processCardsForZone(value.isEmpty() ? new String[0] : value.split(";"), p));
         }
 
         if (life > 0) p.setLife(life, null);
-        for (Entry<ZoneType, CardCollectionView> kv : humanCards.entrySet()) {
+        for (Entry<ZoneType, CardCollectionView> kv : playerCards.entrySet()) {
             if (kv.getKey() == ZoneType.Battlefield) {
                 p.getZone(kv.getKey()).setCards(new ArrayList<Card>());
                 for (final Card c : kv.getValue()) {
