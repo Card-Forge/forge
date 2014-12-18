@@ -20,6 +20,7 @@ package forge.planarconquest;
 import java.util.HashSet;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.GuiBase;
 import forge.assets.ISkinImage;
@@ -330,6 +331,9 @@ public enum ConquestPlane {
             }
             if (cards.isEmpty()) { //if all commanders are used, we can't prevent duplicates
                 cards.addAll(commanders);
+                if (cards.isEmpty()) {
+                    Iterables.addAll(cards, FModel.getConquest().getModel().getCurrentPlane().getCommanders());
+                }
             }
             return new ConquestCommander(Aggregates.random(cards), cardPool, true, this);
         }

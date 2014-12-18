@@ -143,11 +143,8 @@ public class ConquestPlaneMap {
             q = q0;
             r = r0;
             region = region0;
-            if (region == null) {
-                colorIndex = 0;
-            }
-            else if (region.getColorSet().isColorless()) {
-                colorIndex = 0;
+            if (region.getColorSet().isColorless()) {
+                colorIndex = -1;
             }
             else if (region.getColorSet().isMonoColor()) {
                 int index;

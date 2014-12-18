@@ -263,8 +263,11 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
             case 3:
                 manaIcon = FSkinImage.MANA_R;
                 break;
-            default:
+            case 4:
                 manaIcon = FSkinImage.MANA_G;
+                break;
+            default:
+                manaIcon = FSkinImage.MANA_COLORLESS;
                 break;
             }
             float manaIconSize = w / 2;
