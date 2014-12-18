@@ -1439,7 +1439,7 @@ public class PlayerControllerHuman extends PlayerController {
             try {
                 state.initFromGame(game);
                 File f = GuiBase.getInterface().getSaveFile(new File(ForgeConstants.USER_GAMES_DIR, "state.txt"));
-                if (f != null) {
+                if (f != null && (!f.exists() || SOptionPane.showConfirmDialog("Overwrite existing file?"))) {
                     final BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                     bw.write(state.toString());
                     bw.close();
