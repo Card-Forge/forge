@@ -47,9 +47,12 @@ public class ConquestDataIO {
         /*ConquestData temp = new ConquestData("My Conquest", 0,
                 ConquestPlane.Kamigawa,
                 ConquestPlane.Kamigawa.getCardPool().getCard("Meloku the Clouded Mirror"));*/
-        ConquestData temp = new ConquestData("My Conquest", 0,
+        /*ConquestData temp = new ConquestData("My Conquest", 0,
                 ConquestPlane.Mirrodin,
-                ConquestPlane.Mirrodin.getCardPool().getCard("Glissa Sunseeker"));
+                ConquestPlane.Mirrodin.getCardPool().getCard("Glissa Sunseeker"));*/
+        ConquestData temp = new ConquestData("My Conquest", 0,
+                ConquestPlane.Ravnica,
+                ConquestPlane.Ravnica.getCardPool().getCard("Savra, Queen of the Golgari"));
         return temp;
     }
 
