@@ -1445,7 +1445,11 @@ public class PlayerControllerHuman extends PlayerController {
                     bw.close();
                 }
             } catch (Exception e) {
-                SOptionPane.showErrorDialog(e.getMessage());
+                String err = e.getClass().getName();
+                if (e.getMessage() != null) {
+                    err += ": " + e.getMessage();
+                }
+                SOptionPane.showErrorDialog(err);
                 e.printStackTrace();
             }
         }
@@ -1478,6 +1482,7 @@ public class PlayerControllerHuman extends PlayerController {
             Player pPriority = game.getPhaseHandler().getPriorityPlayer();
             if (pPriority == null) {
                 SGuiDialog.message("No player has priority at the moment, so game state cannot be setup.");
+                return;
             }
             state.applyToGame(game);
         }
