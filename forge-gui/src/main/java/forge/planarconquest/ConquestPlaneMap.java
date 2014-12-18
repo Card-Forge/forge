@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.assets.FSkinProp;
+import forge.card.MagicColor;
+import forge.planarconquest.ConquestPlane.Region;
 import forge.util.Aggregates;
+import forge.util.FCollectionView;
 
 public class ConquestPlaneMap {
+    private static final double sqrt3 = (float)Math.sqrt(3);
+
     //use 2 dimensional array to represent tile grid
     private final int gridSize;
     private final HexagonTile[][] grid;
@@ -14,13 +19,13 @@ public class ConquestPlaneMap {
     private int tileWidth, tileHeight, padding;
 
     public ConquestPlaneMap(ConquestPlane plane) {
-        int size = (int)Math.round(Math.sqrt(plane.getCardPool().size() / 3)); //use card pool size to determine grid size
+        int size = (int)Math.round(Math.sqrt(plane.getCardPool().size() / 2)); //use card pool size to determine grid size
         if (size % 2 == 0) {
             size++; //ensure grid size is an odd number
         }
         gridSize = size;
         grid = new HexagonTile[gridSize][gridSize];
-        generateRandomGrid();
+        generateRandomGrid(plane);
     }
 
     public void setTileWidth(int tileWidth0) {
@@ -96,48 +101,44 @@ public class ConquestPlaneMap {
         void draw(HexagonTile tile, int x, int y, int w, int h);
     }
 
-    private void generateRandomGrid() {
-        int startQ = gridSize / 2; //player will start at center of grid always
-        int startR = startQ;
-        int colorIndex = 0; //TODO: Determine initial color index from planeswalker
-        addTile(startQ, startR, colorIndex);
+    private void generateRandomGrid(ConquestPlane plane) {
+        int center = gridSize / 2; //player will start at center of grid always
+        addTile(center, center, null);
 
-        int max = gridSize - 1;
-        int minCount = Math.round(gridSize * gridSize * 0.75f); //ensure at least 75% of the grid has tiles
-        while (tileCount < minCount) {
-            //add a tile in a random location and then ensure it can be reached from start tile
-            int q = Aggregates.randomInt(0, max);
-            int r = Aggregates.randomInt(0, max);
-            while (addTile(q, r, colorIndex)) {
-                //alternate which coordinate is incremented as we move towards center
-                if (tileCount % 2 == 0 && r != startR) {
-                    if (r > startR) {
-                        r--;
-                    }
-                    else {
-                        r++;
-                    }
+        //divide the grid into regions
+        FCollectionView<Region> regions = plane.getRegions();
+        int regionCount = regions.size();
+        double regionAngle = 2 * Math.PI / regionCount;
+
+        //these assume a tile width of 2, radius of 1
+        double centerX = 1.5 * center;
+        double centerY = sqrt3 * (center + 0.5f * (center & 1));
+        double maxDist = (centerX + centerY) / 2;
+
+        //create a circular map, divided into regions
+        for (int q = 0; q < gridSize; q++) {
+            for (int r = 0; r < gridSize; r++) {
+                double x = 1.5 * q;
+                double y = sqrt3 * (r + 0.5f * (q & 1));
+                double dx = x - centerX;
+                double dy = y - centerY;
+                double dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist > maxDist) {
+                    continue;
                 }
-                else if (q > startQ) {
-                    q--;
+                double angle = Math.atan2(dy, dx) + Math.PI;
+                int regionIndex = (int)Math.floor(angle / regionAngle);
+                if (regionIndex >= regionCount) {
+                    regionIndex = 0;
                 }
-                else if (q < startQ) {
-                    q++;
-                }
-                else if (r > startR) {
-                    r--;
-                }
-                else {
-                    r++;
-                }
+                addTile(q, r, regions.get(regionIndex));
             }
-            colorIndex = Aggregates.randomInt(0, 4); //pick a random color for the next set of tiles
         }
     }
 
-    private boolean addTile(int q, int r, int colorIndex) {
+    private boolean addTile(int q, int r, Region region) {
         if (grid[q][r] == null) {
-            grid[q][r] = new HexagonTile(q, r, colorIndex);
+            grid[q][r] = new HexagonTile(q, r, region);
             tileCount++;
             return true;
         }
@@ -146,12 +147,39 @@ public class ConquestPlaneMap {
 
     public class HexagonTile {
         private final int q, r;
+        private final Region region;
         private final int colorIndex;
 
-        private HexagonTile(int q0, int r0, int colorIndex0) {
+        private HexagonTile(int q0, int r0, Region region0) {
             q = q0;
             r = r0;
-            colorIndex = colorIndex0;
+            region = region0;
+            if (region == null) {
+                colorIndex = 0;
+            }
+            else if (region.getColorSet().isColorless()) {
+                colorIndex = 0;
+            }
+            else if (region.getColorSet().isMonoColor()) {
+                int index;
+                byte color = region.getColorSet().getColor();
+                for (index = 0; index < 5; index++) {
+                    if (MagicColor.WUBRG[index] == color) {
+                        break;
+                    }
+                }
+                colorIndex = index;
+            }
+            else { //for multicolor regions, choose one of the colors at random
+                int index;
+                while (true) {
+                    index = Aggregates.randomInt(0, 4);
+                    if (region.getColorSet().hasAnyColor(MagicColor.WUBRG[index])) {
+                        break;
+                    }
+                }
+                colorIndex = index;
+            }
         }
 
         public int getColorIndex() {
