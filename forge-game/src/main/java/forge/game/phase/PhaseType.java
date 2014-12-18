@@ -66,7 +66,7 @@ public enum PhaseType {
         }
         final String valToCompate = value.trim();
         for (final PhaseType v : PhaseType.values()) {
-            if (v.nameForScripts.compareToIgnoreCase(valToCompate) == 0) {
+            if (v.nameForScripts.equalsIgnoreCase(valToCompate)|| v.name().equalsIgnoreCase(valToCompate)) {
                 return v;
             }
         }
