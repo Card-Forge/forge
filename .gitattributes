@@ -1895,6 +1895,7 @@ forge-gui/res/cardsfolder/a/arctic_wolves.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arcum_dagsson.txt -text
 forge-gui/res/cardsfolder/a/arcums_sleigh.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arcums_weathervane.txt -text
+forge-gui/res/cardsfolder/a/arcums_whistle.txt -text
 forge-gui/res/cardsfolder/a/ardent_militia.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/ardent_plea.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/ardent_recruit.txt svneol=native#text/plain
