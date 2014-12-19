@@ -7373,6 +7373,7 @@ forge-gui/res/cardsfolder/i/infiltrate.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/infiltration_lens.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/infiltrator_il_kor.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/infiltrators_magemark.txt -text
+forge-gui/res/cardsfolder/i/infinite_authority.txt -text
 forge-gui/res/cardsfolder/i/infinite_hourglass.txt -text
 forge-gui/res/cardsfolder/i/infinite_reflection.txt -text
 forge-gui/res/cardsfolder/i/inflame.txt svneol=native#text/plain

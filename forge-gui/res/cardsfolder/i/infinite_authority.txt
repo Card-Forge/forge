@@ -1,0 +1,17 @@
+Name:Infinite Authority
+ManaCost:W W W
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ W W W | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature.EnchantedBy | ValidBlocker$ Creature.toughnessLE3 | DelayedTrigger$ DelTrigBlocker | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked by a creature with toughness 3 or less, destroy the other creature at end of combat. At the beginning of the next end step, if that creature was destroyed this way, put a +1/+1 counter on the first creature.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature.toughnessLE3 | ValidBlocker$ Creature.EnchantedBy | DelayedTrigger$ DelTrigBlocked | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked by a creature with toughness 3 or less, destroy the other creature at end of combat. At the beginning of the next end step, if that creature was destroyed this way, put a +1/+1 counter on the first creature.
+SVar:DelTrigBlocked:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroyBlocked | TriggerDescription$ Destroy blocked creature at end of combat.
+SVar:DelTrigBlocker:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroyBlocker | TriggerDescription$ Destroy blocking creature at end of combat.
+SVar:TrigDestroyBlocked:AB$ Destroy | Cost$ 0 | Defined$ TriggeredAttacker | RememberDestroyed$ True | SubAbility$ DBDelTrigAttacker
+SVar:DBDelTrigAttacker:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ DBPutCounter | RememberObjects$ TriggeredBlocker | TriggerDescription$ At the beginning of the next end step, if that creature was destroyed this way, put a +1/+1 counter on the first creature. | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBPutCounter:DB$ PutCounter | Defined$ DelayTriggerRemembered | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigDestroyBlocker:AB$ Destroy | Cost$ 0 | Defined$ TriggeredBlocker | RememberDestroyed$ True | SubAbility$ DBDelTrigBlocker
+SVar:DBDelTrigBlocker:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ DBPutCounter | RememberObjects$ TriggeredAttacker | TriggerDescription$ At the beginning of the next end step, if that creature was destroyed this way, put a +1/+1 counter on the first creature. | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/infinite_authority.jpg
+Oracle:Enchant creature\nWhenever enchanted creature blocks or becomes blocked by a creature with toughness 3 or less, destroy the other creature at end of combat. At the beginning of the next end step, if that creature was destroyed this way, put a +1/+1 counter on the first creature.
