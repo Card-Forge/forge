@@ -1395,6 +1395,20 @@ public class GameAction {
             }
         }
 
+        // Power Play - Each player with a Power Play in the CommandZone becomes the Starting Player
+        CardCollectionView commandCards = game.getCardsIn(ZoneType.Command);
+        if (commandCards.size() > 0) {
+            CardCollection powerPlays = CardLists.getValidCards(commandCards, "Card.namedPower Play", game.getPlayers().getFirst(), commandCards.getFirst());
+            Set<Player> powerPlayers = new HashSet<>();
+            for (Card c : powerPlays) {
+                powerPlayers.add(c.getOwner());
+            }
+
+            ArrayList<Player> players = Lists.newArrayList(powerPlayers);
+            Collections.shuffle(players);
+            return players.get(0);
+        }
+
         boolean isFirstGame = lastGameOutcome == null;
         if (isFirstGame) {
             game.fireEvent(new GameEventFlipCoin()); // Play the Flip Coin sound

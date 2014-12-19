@@ -10526,6 +10526,7 @@ forge-gui/res/cardsfolder/p/power_artifact.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/power_conduit.txt -text
 forge-gui/res/cardsfolder/p/power_matrix.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/power_of_fire.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/p/power_play.txt -text
 forge-gui/res/cardsfolder/p/power_sink.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/power_surge.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/power_taint.txt -text
