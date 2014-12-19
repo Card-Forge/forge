@@ -1404,9 +1404,11 @@ public class GameAction {
                 powerPlayers.add(c.getOwner());
             }
 
-            ArrayList<Player> players = Lists.newArrayList(powerPlayers);
-            Collections.shuffle(players);
-            return players.get(0);
+            if (powerPlayers.size() > 0) {
+                ArrayList<Player> players = Lists.newArrayList(powerPlayers);
+                Collections.shuffle(players);
+                return players.get(0);
+            }
         }
 
         boolean isFirstGame = lastGameOutcome == null;
