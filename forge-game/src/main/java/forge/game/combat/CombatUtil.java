@@ -548,7 +548,9 @@ public class CombatUtil {
                 walkTypes.add("Land.Snow");
             } else if (keyword.endsWith("walk")) {
                 final String landtype = keyword.replace("walk", "");
-                if (CardType.isALandType(landtype)) {
+                if (landtype.startsWith("Snow ")) {
+                    walkTypes.add(landtype.substring(5) + ".Snow");
+                } else if (CardType.isALandType(landtype)) {
                     if (!walkTypes.contains(landtype)) {
                         walkTypes.add(landtype);
                     }

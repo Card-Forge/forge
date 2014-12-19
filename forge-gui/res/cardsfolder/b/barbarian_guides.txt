@@ -1,0 +1,12 @@
+Name:Barbarian Guides
+ManaCost:2 R
+Types:Creature Human Barbarian
+PT:1/2
+A:AB$ ChooseType | Cost$ 2 R T | Defined$ You | Type$ Land | SubAbility$ DBPump | StackDescription$ SpellDescription | SpellDescription$  Choose a land type. Target creature you control gains snow landwalk of the chosen type until end of turn. Return that creature to its owner's hand at the beginning of the next end step.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Snow ChosenTypewalk | DefinedKW$ ChosenType | StackDescription$ None | SubAbility$ DBDelTrig
+SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | RememberObjects$ ParentTarget | Execute$ TrigReturn | SpellDescription$ Return that creature to its owner's hand at the beginning of the next end step.
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Hand
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/barbarian_guides.jpg
+Oracle:{2}{R}, {T}: Choose a land type. Target creature you control gains snow landwalk of the chosen type until end of turn. Return that creature to its owner's hand at the beginning of the next end step.
