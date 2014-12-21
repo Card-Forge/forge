@@ -514,11 +514,21 @@ public class CardView extends GameEntityView {
         return getText(getCurrentState());
     }
     public String getText(CardStateView state) {
-        if (getId() < 0) {
-            return state.getOracleText();
-        }
-
         final StringBuilder sb = new StringBuilder();
+        //final boolean isSplitCard = (state.getState() == CardStateName.LeftSplit);
+
+        if (getId() < 0) {
+            if (isSplitCard()) {
+                sb.append("(").append(state.getName()).append(") ");
+                sb.append(state.getOracleText());
+                sb.append("\r\n\r\n");
+                sb.append("(").append(getAlternateState().getName()).append(") ");
+                sb.append(getAlternateState().getOracleText());
+                return sb.toString().trim();
+            } else {
+                return state.getOracleText();
+            }
+        }
 
         String rulesText = state.getRulesText();
         if (!rulesText.isEmpty()) {
@@ -528,11 +538,22 @@ public class CardView extends GameEntityView {
             sb.append(getOwner()).append("'s Commander\r\n");
             sb.append(CardFactoryUtil.getCommanderInfo(getOwner())).append("\r\n");
         }
-        sb.append(state.getAbilityText());
 
-        if (state.getState() == CardStateName.LeftSplit && getZone() != ZoneType.Stack) {
+        if (isSplitCard()) {
+            CardStateView view = state.getState() == CardStateName.LeftSplit ? state : getAlternateState();
+            if (getZone() != ZoneType.Stack) {
+                sb.append("(");
+                sb.append(view.getName());
+                sb.append(") ");
+            }
+            sb.append(view.getAbilityText());
+        } else {
+            sb.append(state.getAbilityText());
+        }
+
+        if (isSplitCard() && getZone() != ZoneType.Stack) {
             //ensure ability text for right half of split card is included unless spell is on stack
-            sb.append("\r\n\r\n").append(getAlternateState().getAbilityText());
+            sb.append("\r\n\r\n").append("(").append(getAlternateState().getName()).append(") ").append(getAlternateState().getAbilityText());
         }
 
         String nonAbilityText = get(TrackableProperty.NonAbilityText);
@@ -629,7 +650,13 @@ public class CardView extends GameEntityView {
         CardStateView cloner = CardView.getState(c, CardStateName.Cloner);
         set(TrackableProperty.Cloner, cloner == null ? null : cloner.getName() + " (" + cloner.getId() + ")");
 
-        CardState currentState = isSplitCard ? c.getState(CardStateName.LeftSplit) : c.getCurrentState();
+        CardState currentState = c.getCurrentState();
+        if (isSplitCard) {
+            if (c.getCurrentStateName() != CardStateName.LeftSplit && c.getCurrentStateName() != CardStateName.RightSplit) {
+                currentState = c.getState(CardStateName.LeftSplit);
+            }
+        }
+
         CardStateView currentStateView = currentState.getView();
         if (getCurrentState() != currentStateView) {
             set(TrackableProperty.CurrentState, currentStateView);
