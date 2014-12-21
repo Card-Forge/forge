@@ -267,7 +267,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                         }
                     } while (hasPaid);
                     if (source.getPseudoKickerMagnitude() > 0) {
-                        String abStr = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ "
+                        String abStr = "DB$ PutCounter | Defined$ Self | ETB$ True | CounterType$ P1P1 | CounterNum$ "
                                 + source.getPseudoKickerMagnitude() + " | SubAbility$ ChorusDBETBCounters";
                         String dbStr = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield"
                                 + "| Defined$ ReplacedCard";

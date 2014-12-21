@@ -8,9 +8,9 @@ SVar:DBExile:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Graveyard | Destinat
 SVar:Movetoyard:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Graveyard | Defined$ Self | ConditionCheckSVar$ CheckExiled | ConditionSVarCompare$ LTX | References$ CheckExiled,X | Imprint$ True | SubAbility$ ChooseCounters
 SVar:ChooseCounters:DB$ Repeat | MaxRepeat$ X | RepeatSubAbility$ DBChooseCounter | ConditionCheckSVar$ CheckExiled | ConditionSVarCompare$ EQX | References$ CheckExiled,X | SubAbility$ MovetoPlay
 SVar:DBChooseCounter:DB$ GenericChoice | Choices$ SVarP1P1,SVarP2P0,SVarP0P2
-SVar:SVarP1P1:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ +1/+1
-SVar:SVarP2P0:DB$ PutCounter | CounterType$ P2P0 | CounterNum$ 1 | SpellDescription$ +2/+0
-SVar:SVarP0P2:DB$ PutCounter | CounterType$ P0P2 | CounterNum$ 1 | SpellDescription$ +0/+2
+SVar:SVarP1P1:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | ETB$ True | SpellDescription$ +1/+1
+SVar:SVarP2P0:DB$ PutCounter | CounterType$ P2P0 | CounterNum$ 1 | ETB$ True | SpellDescription$ +2/+0
+SVar:SVarP0P2:DB$ PutCounter | CounterType$ P0P2 | CounterNum$ 1 | ETB$ True | SpellDescription$ +0/+2
 SVar:MovetoPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ Self | ConditionDefined$ Imprinted | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:X:Count$xPaid

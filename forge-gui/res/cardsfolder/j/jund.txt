@@ -9,7 +9,7 @@ SVar:JundETB:AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination
 SVar:JundSacX:Count$Valid Creature.YouCtrl+Other
 SVar:JundCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:JundRememberedX:Count$RememberedSize/Times.5
-SVar:JundCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ JundRememberedX | References$ JundRememberedX | SubAbility$ JundCleanup
+SVar:JundCounters:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ JundRememberedX | References$ JundRememberedX | SubAbility$ JundCleanup
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {C}, put two 1/1 red Goblin creature tokens onto the battlefield.
 SVar:RolledChaos:AB$ Token | Cost$ 0 | TokenAmount$ 2 | TokenPower$ 1 | TokenName$ Goblin | TokenToughness$ 1 | TokenColors$ Red | TokenTypes$ Creature,Goblin | TokenOwner$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jund.jpg

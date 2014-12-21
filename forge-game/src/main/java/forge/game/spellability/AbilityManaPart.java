@@ -242,7 +242,7 @@ public class AbilityManaPart implements java.io.Serializable {
         // Convert random SVars if there are other cards with this effect
         if (c.isValid(parse[0], c.getController(), c)) {
             String abStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + parse[1]
-                    + " | CounterNum$ " + parse[2] + " | SubAbility$ ManaDBETBCounters";
+                    + " | ETB$ True | CounterNum$ " + parse[2] + " | SubAbility$ ManaDBETBCounters";
             String dbStr = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield"
                     + " | Defined$ ReplacedCard";
             try {

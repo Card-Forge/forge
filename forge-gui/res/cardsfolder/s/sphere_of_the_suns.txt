@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ SphereTapped | Description$ CARDNAME enters the battlefield tapped and with three charge counters on it.
 SVar:SphereTapped:AB$ Tap | Cost$ 0 | Defined$ Self | ETB$ True | SubAbility$ DBAddCounter
-SVar:DBAddCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 3 | SubAbility$ MoveToPlay
+SVar:DBAddCounter:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ CHARGE | CounterNum$ 3 | SubAbility$ MoveToPlay
 SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
 A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphere_of_the_suns.jpg

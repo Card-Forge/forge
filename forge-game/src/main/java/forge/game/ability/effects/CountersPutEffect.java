@@ -75,6 +75,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             return;
         }
 
+        final boolean etbcounter = sa.hasParam("ETB");
         final boolean remember = sa.hasParam("RememberCounters");
         int counterAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
         final int max = sa.hasParam("MaxFromEffect") ? Integer.parseInt(sa.getParam("MaxFromEffect")) : -1;
@@ -121,7 +122,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     }
                 } else {
                     // adding counters to something like re-suspend cards
-                    tgtCard.addCounter(counterType, counterAmount, false);
+                    // etbcounter should apply multiplier
+                    tgtCard.addCounter(counterType, counterAmount, etbcounter);
                 }
             }
         }

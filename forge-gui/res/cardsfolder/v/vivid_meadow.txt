@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | Description$ CARDNAME enters the battlefield tapped with two charge counters on it.
 SVar:LandTapped:AB$ Tap | Cost$ 0 | Defined$ Self | ETB$ True | SubAbility$ DBAddCounter
-SVar:DBAddCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 2 | SubAbility$ MoveToPlay
+SVar:DBAddCounter:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ CHARGE | CounterNum$ 2 | SubAbility$ MoveToPlay
 SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W} to your mana pool.
 A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.

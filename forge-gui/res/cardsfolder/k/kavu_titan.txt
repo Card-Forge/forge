@@ -4,7 +4,7 @@ Types:Creature Kavu
 PT:2/2
 K:Kicker 2 G
 R:Event$ Moved | ValidCard$ Card.Self+kicked | Destination$ Battlefield | ReplaceWith$ DBPutCounter | Description$ If CARDNAME was kicked, it enters the battlefield with three +1/+1 counters on it and with trample.
-SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 3 | SubAbility$ Dustwalk
+SVar:DBPutCounter:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ 3 | SubAbility$ Dustwalk
 SVar:Dustwalk:DB$ Animate | Defined$ Self | Keywords$ Trample | Permanent$ True | SubAbility$ DBMoveToPlay
 SVar:DBMoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_titan.jpg

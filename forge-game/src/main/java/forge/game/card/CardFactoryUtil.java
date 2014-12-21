@@ -2453,7 +2453,7 @@ public class CardFactoryUtil {
                         + " choice may place " + tributeAmount + " +1/+1 counter on it.)";
                 final String abString = "DB$ PutCounter | Defined$ ReplacedCard | Tribute$ True | "
                         + "CounterType$ P1P1 | CounterNum$ " + tributeAmount
-                        + " | SubAbility$ TributeMoveToPlay";
+                        + " | ETB$ True | SubAbility$ TributeMoveToPlay";
                 final String moveToPlay = "DB$ ChangeZone | Origin$ All | Destination$ Battlefield | "
                         + "Defined$ ReplacedCard | Hidden$ True";
                 card.setSVar("TributeAddCounter", abString);
@@ -2485,7 +2485,7 @@ public class CardFactoryUtil {
                         + types.toString() + " | RememberRevealed$ True | SubAbility$ Amplify";
                 final String dbString = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | "
                         + "CounterNum$ AmpMagnitude | References$ Revealed,AmpMagnitude | SubAbility$"
-                        + " AmplifyMoveToPlay";
+                        + " AmplifyMoveToPlay | ETB$ True";
                 final String moveToPlay = "DB$ ChangeZone | Origin$ All | Destination$ Battlefield | "
                         + "Defined$ ReplacedCard | Hidden$ True | SubAbility$ DBCleanup";
                 card.addReplacementEffect(ReplacementHandler.parseReplacement(actualRep, card, true));
@@ -2706,7 +2706,7 @@ public class CardFactoryUtil {
                     desc = !splitkw[4].equals("no desc") ? splitkw[4] : "";
                 }
                 String abStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + splitkw[1]
-                        + " | CounterNum$ " + amount +  " | SubAbility$ ETBCounterDBSVar";
+                        + " | ETB$ True | CounterNum$ " + amount +  " | SubAbility$ ETBCounterDBSVar";
                 String dbStr = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield"
                         + "| Defined$ ReplacedCard";
                 try {
@@ -3133,7 +3133,7 @@ public class CardFactoryUtil {
                         + "RememberSacrificed$ True | Optional$ True | "
                         + "Devour$ True | SubAbility$ DevourCounters";
                 String counterStr = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ DevourX"
-                        + " | References$ DevourX,DevourSize | SubAbility$ DevourETB";
+                        + " | ETB$ True | References$ DevourX,DevourSize | SubAbility$ DevourETB";
 
                 card.setSVar("DevourETB", abStr);
                 card.setSVar("DevourSac", dbStr);
