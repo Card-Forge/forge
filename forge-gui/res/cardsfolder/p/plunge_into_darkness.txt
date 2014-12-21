@@ -12,7 +12,7 @@ SVar:DBChooseNumber:DB$ ChooseNumber | Defined$ You | ListTitle$ Pay X life? | M
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ Y | References$ Y | SubAbility$ DBDig
 SVar:DBDig:DB$ Dig | DigNum$ AFLifeLost | DestinationZone2$ Exile
 SVar:Y:Count$ChosenNumber
-SVar:LifeAmountX:Count$YourLifeTotal
+SVar:LifeAmountX:Count$YourLifeTotal/LimitMin.0
 SVar:AFLifeLost:Number$0
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plunge_into_darkness.jpg
