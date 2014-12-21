@@ -430,6 +430,9 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public int chooseNumber(SpellAbility sa, String title, int min, int max) {
+    	if (min >= max) {
+    		return min;
+    	}
         final Integer[] choices = new Integer[max + 1 - min];
         for (int i = 0; i <= max - min; i++) {
             choices[i] = Integer.valueOf(i + min);
