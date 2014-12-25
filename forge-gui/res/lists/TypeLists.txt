@@ -297,6 +297,7 @@ Tamiyo
 Teferi
 Tezzeret
 Tibalt
+Ugin
 Venser
 Vraska
 Xenagos
