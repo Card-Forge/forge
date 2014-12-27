@@ -315,6 +315,11 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
+    public void setTargets(TargetChoices targets) {
+        sa.setTargets(targets);
+    }
+
+    @Override
     public void setTargetCard(final Card card) {
         sa.setTargetCard(card);
     }
