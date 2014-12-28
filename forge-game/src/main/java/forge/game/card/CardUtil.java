@@ -213,7 +213,7 @@ public final class CardUtil {
      * @return a copy of C with LastKnownInfo stuff retained.
      */
     public static Card getLKICopy(final Card in) {
-        final Card newCopy = new Card(in.getId(), in.getPaperCard(), false);
+        final Card newCopy = new Card(in.getId(), in.getPaperCard(), false, in.getGame());
         newCopy.setSetCode(in.getSetCode());
         newCopy.setOwner(in.getOwner());
         newCopy.setController(in.getController(), 0);
@@ -285,7 +285,7 @@ public final class CardUtil {
         final CardType type = new CardType();
         type.add("Creature");
 
-        final CardState ret = new CardState(c.getView().createAlternateState(CardStateName.FaceDown));
+        final CardState ret = new CardState(c.getView().createAlternateState(CardStateName.FaceDown), c);
         ret.setBasePower(2);
         ret.setBaseToughness(2);
 

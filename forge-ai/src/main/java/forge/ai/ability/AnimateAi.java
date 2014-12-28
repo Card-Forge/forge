@@ -171,7 +171,7 @@ public class AnimateAi extends SpellAbilityAi {
 	                }
 
 	                if (!SpellAbilityAi.isSorcerySpeed(sa)) {
-	                    Card animatedCopy = CardFactory.getCard(c.getPaperCard(), aiPlayer);
+	                    Card animatedCopy = CardFactory.getCard(c.getPaperCard(), aiPlayer, c.getGame());
 	                    AnimateAi.becomeAnimated(animatedCopy, c.hasSickness(), sa);
 	                    if (ph.isPlayerTurn(aiPlayer) && !ComputerUtilCard.doesSpecifiedCreatureAttackAI(aiPlayer, animatedCopy)) {
 	                        return false;

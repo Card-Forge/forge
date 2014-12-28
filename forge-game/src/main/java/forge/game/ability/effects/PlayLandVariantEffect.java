@@ -65,13 +65,13 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
         cards = Lists.newArrayList(Iterables.filter(cards, cp));
         // get a random basic land
         PaperCard ran = Aggregates.random(cards);
-        Card random = CardFactory.getCard(ran, activator);
+        Card random = CardFactory.getCard(ran, activator, source.getGame());
         // if activator cannot play the random land, loop
         while (!activator.canPlayLand(random, false) && !cards.isEmpty()) {
             cards.remove(ran);
             if (cards.isEmpty()) return;
             ran = Aggregates.random(cards);
-            random = CardFactory.getCard(ran, activator);
+            random = CardFactory.getCard(ran, activator, game);
         }
 
         String imageFileName = game.getRules().canCloneUseTargetsImage ? source.getImageKey() : random.getImageKey();

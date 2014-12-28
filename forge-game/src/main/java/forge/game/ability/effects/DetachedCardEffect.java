@@ -8,7 +8,7 @@ public class DetachedCardEffect extends Card {
     private Card card; //card linked to effect
 
     public DetachedCardEffect(Card card0, String name0) {
-        super(card0.getOwner().getGame().nextCardId(), card0.getPaperCard());
+        super(card0.getOwner().getGame().nextCardId(), card0.getPaperCard(), card0.getOwner().getGame());
         card = card0;
 
         setName(name0);

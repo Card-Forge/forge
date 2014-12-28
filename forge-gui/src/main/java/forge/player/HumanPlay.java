@@ -490,7 +490,7 @@ public class HumanPlay {
                     }
                     // replace this with input
                     for (int i = 0; i < nNeeded; i++) {
-                        final Card c = Card.get(SGuiChoose.oneOrNone("Exile from " + from, CardView.getCollection(list)));
+                        final Card c = p.getGame().getCard(SGuiChoose.oneOrNone("Exile from " + from, CardView.getCollection(list)));
                         if (c == null) {
                             return false;
                         }
@@ -536,7 +536,7 @@ public class HumanPlay {
                             return false;
                         }
 
-                        final Card c = Card.get(SGuiChoose.oneOrNone("Put cards to Library", CardView.getCollection(typeList)));
+                        final Card c = p.getGame().getCard(SGuiChoose.oneOrNone("Put cards to Library", CardView.getCollection(typeList)));
 
                         if (c != null) {
                             typeList.remove(c);

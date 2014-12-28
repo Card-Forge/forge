@@ -64,15 +64,21 @@ public class CardState {
     private String setCode = CardEdition.UNKNOWN.getCode();
 
     private final CardStateView view;
+    private final Card card;
 
-    public CardState(CardStateView view0) {
+    public CardState(CardStateView view0, Card card0) {
         view = view0;
+        card = card0;
         view.updateRarity(this);
         view.updateSetCode(this);
     }
 
     public CardStateView getView() {
         return view;
+    }
+
+    public Card getCard() {
+        return card;
     }
 
     public final String getName() {

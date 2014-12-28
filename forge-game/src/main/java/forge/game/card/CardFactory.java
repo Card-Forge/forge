@@ -24,6 +24,7 @@ import forge.card.CardSplitType;
 import forge.card.CardType;
 import forge.card.ICardFace;
 import forge.card.mana.ManaCost;
+import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -75,10 +76,11 @@ public class CardFactory {
     public final static Card copyCard(final Card in, boolean assignNewId) {
         Card out;
         if (!(in.isToken() || in.getCopiedPermanent() != null)) {
-            out = assignNewId ? getCard(in.getPaperCard(), in.getOwner()) 
-                              : getCard(in.getPaperCard(), in.getOwner(), in.getId());
+            out = assignNewId ? getCard(in.getPaperCard(), in.getOwner(), in.getGame()) 
+                              : getCard(in.getPaperCard(), in.getOwner(), in.getId(), in.getGame());
         } else { // token
-            out = assignNewId ? new Card(in.getGame().nextCardId(), in.getPaperCard()) : new Card(in.getId(), in.getPaperCard());
+            int id = assignNewId ? in.getGame().nextCardId() : in.getId();
+            out = new Card(id, in.getPaperCard(), in.getGame());
             out = CardFactory.copyStats(in, in.getController());
             out.setToken(true);
 
@@ -89,7 +91,7 @@ public class CardFactory {
         }
 
         for (final CardStateName state : in.getStates()) {
-        	CardFactory.copyState(in, state, out, state);
+            CardFactory.copyState(in, state, out, state);
         }
         out.setState(in.getCurrentStateName(), true);
 
@@ -210,13 +212,13 @@ public class CardFactory {
         return copySA;
     }
 
-    public final static Card getCard(final IPaperCard cp, final Player owner) {
-        return getCard(cp, owner, owner == null ? -1 : owner.getGame().nextCardId());
+    public final static Card getCard(final IPaperCard cp, final Player owner, final Game game) {
+        return getCard(cp, owner, owner == null ? -1 : owner.getGame().nextCardId(), game);
     }
-    public final static Card getCard(final IPaperCard cp, final Player owner, final int cardId) {
+    public final static Card getCard(final IPaperCard cp, final Player owner, final int cardId, final Game game) {
         //System.out.println(cardName);
         CardRules cardRules = cp.getRules();
-        final Card c = readCard(cardRules, cp, cardId);
+        final Card c = readCard(cardRules, cp, cardId, game);
         c.setRules(cardRules);
         c.setOwner(owner);
         buildAbilities(c);
@@ -341,8 +343,8 @@ public class CardFactory {
         card.setSVar("DamagePWY", "Count$YourLifeTotal");
     }
 
-    private static Card readCard(final CardRules rules, final IPaperCard paperCard, int cardId) {
-        final Card card = new Card(cardId, paperCard);
+    private static Card readCard(final CardRules rules, final IPaperCard paperCard, int cardId, Game game) {
+        final Card card = new Card(cardId, paperCard, game);
 
         // 1. The states we may have:
         CardSplitType st = rules.getSplitType();
@@ -428,7 +430,7 @@ public class CardFactory {
      */
     public static Card copyCopiableCharacteristics(final Card from, final Player newOwner) {
         int id = newOwner == null ? 0 : newOwner.getGame().nextCardId();
-        final Card c = new Card(id, from.getPaperCard());
+        final Card c = new Card(id, from.getPaperCard(), from.getGame());
         c.setOwner(newOwner);
         c.setSetCode(from.getSetCode());
         
@@ -511,7 +513,7 @@ public class CardFactory {
      */
     public static Card copyStats(final Card in, final Player newOwner) {
         int id = newOwner == null ? 0 : newOwner.getGame().nextCardId();
-        final Card c = new Card(id, in.getPaperCard());
+        final Card c = new Card(id, in.getPaperCard(), in.getGame());
     
         c.setOwner(newOwner);
         c.setSetCode(in.getSetCode());
@@ -607,7 +609,7 @@ public class CardFactory {
             final String manaCost, final String[] types, final int basePower, final int baseToughness,
             final String[] intrinsicKeywords) {
         final List<Card> list = new ArrayList<Card>();
-        final Card c = new Card(controller.getGame().nextCardId());
+        final Card c = new Card(controller.getGame().nextCardId(), controller.getGame());
         c.setName(name);
         c.setImageKey(ImageKeys.getTokenKey(imageName));
     

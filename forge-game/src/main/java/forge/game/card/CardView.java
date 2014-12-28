@@ -752,7 +752,7 @@ public class CardView extends GameEntityView {
             setName(c.getName());
 
             if (CardView.this.getCurrentState() == this) {
-                Card card = Card.get(CardView.this);
+                Card card = c.getCard();
                 if (card != null) {
                     CardView.this.updateName(card);
                 }
@@ -794,7 +794,7 @@ public class CardView extends GameEntityView {
         void updateType(CardState c) {
             CardTypeView type = c.getType();
             if (CardView.this.getCurrentState() == this) {
-                Card card = Card.get(CardView.this);
+                Card card = c.getCard();
                 if (card != null) {
                     type = type.getTypeWithChanges(card.getChangedCardTypes()); //TODO: find a better way to do this
                     updateRulesText(card.getRules(), type);
@@ -842,7 +842,7 @@ public class CardView extends GameEntityView {
             }
         }
         void updatePower(CardState c) {
-            Card card = Card.get(CardView.this);
+            Card card = c.getCard();
             if (card != null) {
                 updatePower(card); //TODO: find a better way to do this
                 return;
@@ -862,7 +862,7 @@ public class CardView extends GameEntityView {
             }
         }
         void updateToughness(CardState c) {
-            Card card = Card.get(CardView.this);
+            Card card = c.getCard();
             if (card != null) {
                 updateToughness(card); //TODO: find a better way to do this
                 return;
@@ -878,7 +878,7 @@ public class CardView extends GameEntityView {
         }
         void updateLoyalty(CardState c) {
             if (CardView.this.getCurrentState() == this) {
-                Card card = Card.get(CardView.this);
+                Card card = c.getCard();
                 if (card != null) {
                     updateLoyalty(card); //TODO: find a better way to do this
                     return;

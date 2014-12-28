@@ -234,15 +234,15 @@ public class RunTest {
          * false);
          */
 
-        c = new Card(1);
-        Card c2 = new Card(2);
+        c = new Card(1, null);
+        Card c2 = new Card(2, null);
         c.addIntrinsicKeyword("Flying");
         c2.addIntrinsicKeyword("Flying");
         // check("107", CombatUtil.canBlock(c, c2));
         // check("108", CombatUtil.canBlock(c2, c));
 
-        c = new Card(1);
-        c2 = new Card(2);
+        c = new Card(1, null);
+        c2 = new Card(2, null);
         c2.addIntrinsicKeyword("Flying");
         this.check("109", CombatUtil.canBlock(c, c2));
         this.check("110", !CombatUtil.canBlock(c2, c));

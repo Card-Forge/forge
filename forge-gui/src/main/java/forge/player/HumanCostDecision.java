@@ -297,7 +297,8 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (nNeeded == 0) {
             return PaymentDecision.number(0);
         }
-        final Player p = controller.getGame().getPlayer(SGuiChoose.oneOrNone(String.format("Exile from whose %s?", cost.getFrom()), PlayerView.getCollection(payableZone)));
+        final Game game = controller.getGame();
+        final Player p = game.getPlayer(SGuiChoose.oneOrNone(String.format("Exile from whose %s?", cost.getFrom()), PlayerView.getCollection(payableZone)));
         if (p == null) {
             return null;
         }
@@ -308,7 +309,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
-        CardCollection toExile = Card.getList(SGuiChoose.many("Exile from " + cost.getFrom(), "To be exiled", nNeeded, CardView.getCollection(typeList), null));
+        CardCollection toExile = game.getCardList(SGuiChoose.many("Exile from " + cost.getFrom(), "To be exiled", nNeeded, CardView.getCollection(typeList), null));
         return PaymentDecision.card(toExile);
     }
     
@@ -382,13 +383,17 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
         return PaymentDecision.card(list);
     }
+    
+    private Card getCard(CardView cardView) {
+        return controller.getGame().getCard(cardView);
+    }
 
     private PaymentDecision exileFromMiscZone(CostExile cost, SpellAbility sa, int nNeeded, CardCollection typeList) {
         if (typeList.size() < nNeeded) { return null; }
 
         CardCollection exiled = new CardCollection();
         for (int i = 0; i < nNeeded; i++) {
-            final Card c = Card.get(SGuiChoose.oneOrNone("Exile from " + cost.getFrom(), CardView.getCollection(typeList)));
+            final Card c = getCard(SGuiChoose.oneOrNone("Exile from " + cost.getFrom(), CardView.getCollection(typeList)));
             if (c == null) { return null; }
 
             typeList.remove(c);
@@ -417,7 +422,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (list.size() < c) {
             return null;
         }
-        final CardCollection choice = Card.getList(SGuiChoose.many("Choose an exiled card to put into graveyard", "To graveyard", c, CardView.getCollection(list), CardView.get(source)));
+        final CardCollection choice = controller.getGame().getCardList(SGuiChoose.many("Choose an exiled card to put into graveyard", "To graveyard", c, CardView.getCollection(list), CardView.get(source)));
         return PaymentDecision.card(choice);
     }
 
@@ -599,7 +604,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         CardCollection chosen = new CardCollection();
         for (int i = 0; i < nNeeded; i++) {
-            final Card c = Card.get(SGuiChoose.oneOrNone("Put from " + fromZone + " to library", CardView.getCollection(typeList)));
+            final Card c = getCard(SGuiChoose.oneOrNone("Put from " + fromZone + " to library", CardView.getCollection(typeList)));
             if (c == null) {
                 return null;
             }
@@ -626,7 +631,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         CardCollection chosen = new CardCollection();
         for (int i = 0; i < nNeeded; i++) {
-            final Card c = Card.get(SGuiChoose.oneOrNone("Put cards from " + fromZone + " to Library", CardView.getCollection(typeList)));
+            final Card c = getCard(SGuiChoose.oneOrNone("Put cards from " + fromZone + " to Library", CardView.getCollection(typeList)));
             if (c == null) {
                 return null;
             }
@@ -954,7 +959,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             }
         }
 
-        final Card card = Card.get(SGuiChoose.oneOrNone("Remove counter(s) from a card in " + cost.zone, suspended));
+        final Card card = getCard(SGuiChoose.oneOrNone("Remove counter(s) from a card in " + cost.zone, suspended));
         return null == card ? null : PaymentDecision.card(card, c);
     }
 

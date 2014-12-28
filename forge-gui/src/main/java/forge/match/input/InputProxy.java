@@ -107,10 +107,14 @@ public class InputProxy implements Observer {
         }
     }
 
+    private Card getCard(final CardView cardView) {
+        return controller.getGame().getCard(cardView);
+    }
+
     public final String getActivateAction(final CardView cardView) {
         final Input inp = getInput();
         if (inp != null) {
-            final Card card = Card.get(cardView);
+            final Card card = getCard(cardView);
             if (card != null) {
                 return inp.getActivateAction(card);
             }
@@ -120,13 +124,14 @@ public class InputProxy implements Observer {
 
     public final boolean selectCard(final CardView cardView, final List<CardView> otherCardViewsToSelect, final ITriggerEvent triggerEvent) {
         final Input inp = getInput();
+        System.out.println("Selectcard " +cardView + " input: "  +inp);
         if (inp != null) {
-            final Card card = Card.get(cardView);
+            final Card card = getCard(cardView);
             if (card != null) {
                 List<Card> otherCardsToSelect = null;
                 if (otherCardViewsToSelect != null) {
                     for (CardView cv : otherCardViewsToSelect) {
-                        final Card c = Card.get(cv);
+                        final Card c = getCard(cv);
                         if (c != null) {
                             if (otherCardsToSelect == null) {
                                 otherCardsToSelect = new ArrayList<Card>();

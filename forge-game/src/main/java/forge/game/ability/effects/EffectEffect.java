@@ -106,7 +106,7 @@ public class EffectEffect extends SpellAbilityEffect {
         }
 
         final Player controller = sa.hasParam("EffectOwner") ? ownerEff : sa.getActivatingPlayer();
-        final Card eff = new Card(controller.getGame().nextCardId());
+        final Card eff = new Card(game.nextCardId(), game);
         eff.setName(name);
         eff.addType("Effect"); // Or Emblem
         eff.setToken(true); // Set token to true, so when leaving play it gets nuked

@@ -90,25 +90,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @version $Id$
  */
 public class Card extends GameEntity implements Comparable<Card> {
-    private static HashMap<Integer, Card> cardCache = new HashMap<Integer, Card>();
-    public static Card get(CardView cardView) {
-        if (cardView == null) { return null; }
-        return cardCache.get(cardView.getId());
-    }
-    public static CardCollection getList(Iterable<CardView> cardViews) {
-        CardCollection list = new CardCollection();
-        for (CardView cv : cardViews) {
-            Card c = get(cv);
-            if (c != null) {
-                list.add(c);
-            }
-        }
-        return list;
-    }
-    public static void clearCache() {
-        cardCache.clear();
-    }
-
+    private final Game game;
     private final IPaperCard paperCard;
 
     private final Map<CardStateName, CardState> states = new EnumMap<CardStateName, CardState>(CardStateName.class);
@@ -264,8 +246,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * Instantiates a new card not associated to any paper card.
      * @param id the unique id of the new card.
      */
-    public Card(final int id0) {
-        this(id0, null, true);
+    public Card(final int id0, final Game game0) {
+        this(id0, null, true, game0);
     }
 
     /**
@@ -276,18 +258,19 @@ public class Card extends GameEntity implements Comparable<Card> {
      * card.
      * @see IPaperCard
      */
-    public Card(final int id0, final IPaperCard paperCard0) {
-        this(id0, paperCard0, true);
+    public Card(final int id0, final IPaperCard paperCard0, final Game game0) {
+        this(id0, paperCard0, true, game0);
     }
-    public Card(final int id0, final IPaperCard paperCard0, final boolean allowCache) {
+    public Card(final int id0, final IPaperCard paperCard0, final boolean allowCache, final Game game0) {
         super(id0);
-
-        if (id0 >= 0 && allowCache) {
-            cardCache.put(id0, this);
+        
+        game = game0;
+        if (id0 >= 0 && allowCache && game != null) {
+            game.addCard(id0, this);
         }
         paperCard = paperCard0;
         view = new CardView(id0);
-        currentState = new CardState(view.getCurrentState());
+        currentState = new CardState(view.getCurrentState(), this);
         states.put(CardStateName.Original, currentState);
         states.put(CardStateName.FaceDown, CardUtil.getFaceDownCharacteristic(this));
         view.updateChangedColorWords(this);
@@ -399,7 +382,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final void addAlternateState(final CardStateName state, final boolean updateView) {
-        states.put(state, new CardState(view.createAlternateState(state)));
+        states.put(state, new CardState(view.createAlternateState(state), this));
         if (updateView) {
             view.updateState(this);
         }
@@ -2103,6 +2086,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public final void setOwner(final Player owner0) {
         if (owner == owner0) { return; }
+        if (owner != null && owner.getGame() != this.getGame()) {
+            // Sanity check.
+            throw new RuntimeException();
+        }
         owner = owner0;
         view.updateOwner(this);
         view.updateController(this);
@@ -6258,20 +6245,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     public Iterable<OptionalCost> getOptionalCostsPaid() { return costsPaid; }
     public boolean isOptionalCostPaid(OptionalCost cost) { return costsPaid.contains(cost); }
 
-    /**
-     * Fetch GameState for this card from references to players who may own or control this card.
-     */
     @Override
     public Game getGame() {
-        Player controller = getController();
-        if (controller != null) {
-            return controller.getGame();
-        }
-        Player owner = getOwner();
-        if (owner != null) {
-            return owner.getGame();
-        }
-        return null;
+        return game;
     }
 
     public List<SpellAbility> getAllPossibleAbilities(final Player player, final boolean removeUnplayable) {
@@ -6308,7 +6284,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public static Card fromPaperCard(IPaperCard pc, Player owner) {
-        return CardFactory.getCard(pc, owner);
+        return CardFactory.getCard(pc, owner, owner == null ? null : owner.getGame());
     }
 
     private static final Map<PaperCard, Card> cp2card = new HashMap<PaperCard, Card>();

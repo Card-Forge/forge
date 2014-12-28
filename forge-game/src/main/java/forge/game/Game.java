@@ -42,6 +42,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CardView;
 import forge.game.combat.Combat;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventGameOutcome;
@@ -110,9 +111,20 @@ public class Game {
         playerCache.put(id, player);
     }
 
-    public Game(List<RegisteredPlayer> players0, GameRules rules0, Match match0) { /* no more zones to map here */
-        Card.clearCache();
+    public GameEntityCache<Card, CardView> cardCache = new GameEntityCache<>();
+    public Card getCard(CardView cardView) {
+        return cardCache.get(cardView);
+    }
+    public void addCard(Integer id, Card card) {
+        cardCache.put(id, card);
+    }
+    public CardCollection getCardList(Iterable<CardView> cardViews) {
+        CardCollection list = new CardCollection();
+        cardCache.addToList(cardViews, list);
+        return list;
+    }
 
+    public Game(List<RegisteredPlayer> players0, GameRules rules0, Match match0) { /* no more zones to map here */
         rules = rules0;
         match = match0;
 
@@ -127,7 +139,7 @@ public class Game {
 
         int plId = 0;
         for (RegisteredPlayer psc : players0) {
-        	IGameEntitiesFactory factory = (IGameEntitiesFactory)psc.getPlayer();
+            IGameEntitiesFactory factory = (IGameEntitiesFactory)psc.getPlayer();
             Player pl = factory.createIngamePlayer(this, plId++);
             allPlayers.add(pl);
             ingamePlayers.add(pl);
