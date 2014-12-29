@@ -81,21 +81,21 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
     //support adding card panel and attached panels to display area recursively
     private void addCardPanelToDisplayArea(CardAreaPanel cardPanel) {
-        List<CardAreaPanel> attachedPanels = cardPanel.getAttachedPanels();
-        if (!attachedPanels.isEmpty()) {
-            for (int i = attachedPanels.size() - 1; i >= 0; i--) {
-                addCardPanelToDisplayArea(attachedPanels.get(i));
+        do {
+            List<CardAreaPanel> attachedPanels = cardPanel.getAttachedPanels();
+            if (!attachedPanels.isEmpty()) {
+                for (int i = attachedPanels.size() - 1; i >= 0; i--) {
+                    addCardPanelToDisplayArea(attachedPanels.get(i));
+                }
             }
-        }
 
-        if (isVisible()) { //only set display area for card if area is visible
-            cardPanel.displayArea = this;
-        }
-        add(cardPanel);
+            if (isVisible()) { //only set display area for card if area is visible
+                cardPanel.displayArea = this;
+            }
+            add(cardPanel);
 
-        if (cardPanel.getNextPanelInStack() != null) {
-            addCardPanelToDisplayArea(cardPanel.getNextPanelInStack());
-        }
+            cardPanel = cardPanel.getNextPanelInStack();
+        } while (cardPanel != null);
     }
 
     public final void removeCardPanel(final CardAreaPanel fromPanel) {
