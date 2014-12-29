@@ -417,6 +417,9 @@ public final class CardUtil {
     
     public static Set<String> canProduce(final int maxChoices, final AbilityManaPart ab,
             final Set<String> colors) {
+        if (ab == null) {
+            return colors;
+        }
         for (final String col : MagicColor.Constant.ONLY_COLORS) {
             final String s = MagicColor.toShortString(col);
             if (ab.canProduce(s)) {
