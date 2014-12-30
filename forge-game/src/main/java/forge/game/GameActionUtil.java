@@ -54,7 +54,16 @@ import java.util.Map;
  * @version $Id$
  */
 public final class GameActionUtil {
-
+    // Cache these instead of generating them on the fly, to avoid excessive allocations every time
+    // static abilities are checked.
+    private static final String[] BASIC_LAND_ABILITIES = new String[MagicColor.WUBRG.length];
+    static {
+        for (int i = 0; i < MagicColor.WUBRG.length; i++ ) {
+            String color = MagicColor.toShortString(MagicColor.WUBRG[i]);
+            BASIC_LAND_ABILITIES[i] = "AB$ Mana | Cost$ T | Produced$ " + color +
+                    " | SpellDescription$ Add {" + color + "} to your mana pool.";
+        }
+    }
 
     private GameActionUtil() {
         throw new AssertionError();
@@ -130,8 +139,7 @@ public final class GameActionUtil {
         // add all appropriate mana abilities based on current types
         for (int i = 0; i < MagicColor.WUBRG.length; i++ ) {
             String landType = MagicColor.Constant.BASIC_LANDS.get(i);
-            String color = MagicColor.toShortString(MagicColor.WUBRG[i]);
-            String abString = "AB$ Mana | Cost$ T | Produced$ " + color + " | SpellDescription$ Add {" + color + "} to your mana pool.";
+            String abString = BASIC_LAND_ABILITIES[i];
             for (final Card land : lands) {
                 if (land.getType().hasSubtype(landType)) {
                     final SpellAbility sa = AbilityFactory.getAbility(abString, land);
