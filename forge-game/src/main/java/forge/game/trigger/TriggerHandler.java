@@ -25,7 +25,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardUtil;
 import forge.game.phase.PhaseType;
@@ -181,12 +180,7 @@ public class TriggerHandler {
 
     public final void resetActiveTriggers() {
         activeTriggers.clear();
-        CardCollection allCards = new CardCollection();
-        for (Player p : game.getPlayers()) {
-            allCards.addAll(p.getAllCards());
-        }
-
-        for (final Card c : allCards) {
+        for (final Card c : game.getCardsInGame()) {
             for (final Trigger t : c.getTriggers()) {
                 if (isTriggerActive(t)) {
                     activeTriggers.add(t);
