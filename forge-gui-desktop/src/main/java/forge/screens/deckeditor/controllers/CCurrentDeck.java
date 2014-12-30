@@ -4,7 +4,6 @@ import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
-import forge.deck.io.DeckHtmlSerializer;
 import forge.deck.io.DeckSerializer;
 import forge.deck.io.DeckStorage;
 import forge.gui.framework.ICDoc;

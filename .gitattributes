@@ -899,6 +899,7 @@ forge-gui-desktop/src/main/java/forge/screens/deckeditor/controllers/CEditorWins
 forge-gui-desktop/src/main/java/forge/screens/deckeditor/controllers/CProbabilities.java -text
 forge-gui-desktop/src/main/java/forge/screens/deckeditor/controllers/CStatistics.java -text
 forge-gui-desktop/src/main/java/forge/screens/deckeditor/controllers/DeckController.java -text
+forge-gui-desktop/src/main/java/forge/screens/deckeditor/controllers/DeckHtmlSerializer.java -text
 forge-gui-desktop/src/main/java/forge/screens/deckeditor/menus/CDeckEditorUIMenus.java -text
 forge-gui-desktop/src/main/java/forge/screens/deckeditor/menus/DeckFileMenu.java -text
 forge-gui-desktop/src/main/java/forge/screens/deckeditor/package-info.java -text
@@ -17152,7 +17153,6 @@ forge-gui/src/main/java/forge/deck/DeckProxy.java -text
 forge-gui/src/main/java/forge/deck/DeckType.java -text
 forge-gui/src/main/java/forge/deck/DeckgenUtil.java -text
 forge-gui/src/main/java/forge/deck/RandomDeckGenerator.java -text
-forge-gui/src/main/java/forge/deck/io/DeckHtmlSerializer.java -text
 forge-gui/src/main/java/forge/deck/io/DeckPreferences.java -text
 forge-gui/src/main/java/forge/deck/io/OldDeckParser.java -text
 forge-gui/src/main/java/forge/download/GuiDownloadPicturesLQ.java -text

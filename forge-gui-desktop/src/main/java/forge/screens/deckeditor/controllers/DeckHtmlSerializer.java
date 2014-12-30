@@ -1,4 +1,4 @@
-package forge.deck.io;
+package forge.screens.deckeditor.controllers;
 
 import forge.deck.Deck;
 import forge.item.PaperCard;
@@ -48,7 +48,7 @@ public class DeckHtmlSerializer {
             /* Create and adjust the configuration */
             final Configuration cfg = new Configuration();
             try {
-                cfg.setClassForTemplateLoading(d.getClass(), "/");
+                cfg.setClassForTemplateLoading(DeckHtmlSerializer.class, "/");
                 cfg.setObjectWrapper(new DefaultObjectWrapper());
     
                 /*
