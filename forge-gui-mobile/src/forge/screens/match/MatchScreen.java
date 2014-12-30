@@ -438,19 +438,18 @@ public class MatchScreen extends FScreen {
     }
 
     public void updateSingleCard(final CardView card) {
+        final CardAreaPanel pnl = CardAreaPanel.get(card);
+        if (pnl == null) { return; }
         final ZoneType zone = card.getZone();
         if (zone != null && zone == ZoneType.Battlefield) {
-            getPlayerPanel(card.getController()).getField().updateCard(card);
+            pnl.updateCard(card);
         }
         else { //ensure card not on battlefield is reset such that it no longer thinks it's on the battlefield
-            final CardAreaPanel pnl = CardAreaPanel.get(card);
-            if (pnl != null) {
-                pnl.setTapped(false);
-                pnl.getAttachedPanels().clear();
-                pnl.setAttachedToPanel(null);
-                pnl.setPrevPanelInStack(null);
-                pnl.setNextPanelInStack(null);
-            }
+            pnl.setTapped(false);
+            pnl.getAttachedPanels().clear();
+            pnl.setAttachedToPanel(null);
+            pnl.setPrevPanelInStack(null);
+            pnl.setNextPanelInStack(null);
         }
     }
 

@@ -264,6 +264,55 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             return CardStackPosition.BehindHorz;
         }
 
+        public void updateCard(final CardView card) {
+            setTapped(card.isTapped());
+
+            attachedPanels.clear();
+
+            if (card.isEnchanted()) {
+                final Iterable<CardView> enchants = card.getEnchantedBy();
+                for (final CardView e : enchants) {
+                    final CardAreaPanel cardE = CardAreaPanel.get(e);
+                    if (cardE != null) {
+                        attachedPanels.add(cardE);
+                    }
+                }
+            }
+       
+            if (card.isEquipped()) {
+                final Iterable<CardView> enchants = card.getEquippedBy();
+                for (final CardView e : enchants) {
+                    final CardAreaPanel cardE = CardAreaPanel.get(e);
+                    if (cardE != null) {
+                        attachedPanels.add(cardE);
+                    }
+                }
+            }
+
+            if (card.isFortified()) {
+                final Iterable<CardView> fortifications = card.getFortifiedBy();
+                for (final CardView e : fortifications) {
+                    final CardAreaPanel cardE = CardAreaPanel.get(e);
+                    if (cardE != null) {
+                        attachedPanels.add(cardE);
+                    }
+                }
+            }
+
+            if (card.getEnchantingCard() != null) {
+                setAttachedToPanel(CardAreaPanel.get(card.getEnchantingCard()));
+            }
+            else if (card.getEquipping() != null) {
+                setAttachedToPanel(CardAreaPanel.get(card.getEquipping()));
+            }
+            else if (card.getFortifying() != null) {
+                setAttachedToPanel(CardAreaPanel.get(card.getFortifying()));
+            }
+            else {
+                setAttachedToPanel(null);
+            }
+        }
+
         //clear and reset all pointers from this panel
         public void reset() {
             if (!attachedPanels.isEmpty()) {

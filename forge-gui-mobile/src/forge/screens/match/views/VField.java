@@ -53,7 +53,8 @@ public class VField extends FContainer {
             if (model == null) { return; }
 
             for (CardView card : model) {
-                updateCard(card);
+                CardAreaPanel cardPanel = CardAreaPanel.get(card);
+                cardPanel.updateCard(card);
             }
 
             List<CardView> creatures = new ArrayList<CardView>();
@@ -118,60 +119,6 @@ public class VField extends FContainer {
             }
         }
         return false;
-    }
-
-    public void updateCard(final CardView card) {
-        final CardAreaPanel toPanel = CardAreaPanel.get(card);
-        if (toPanel == null) { return; }
-
-        toPanel.setTapped(card.isTapped());
-
-        toPanel.getAttachedPanels().clear();
-
-        if (card.isEnchanted()) {
-            final Iterable<CardView> enchants = card.getEnchantedBy();
-            for (final CardView e : enchants) {
-                final CardAreaPanel cardE = CardAreaPanel.get(e);
-                if (cardE != null) {
-                    toPanel.getAttachedPanels().add(cardE);
-                }
-            }
-        }
-   
-        if (card.isEquipped()) {
-            final Iterable<CardView> enchants = card.getEquippedBy();
-            for (final CardView e : enchants) {
-                final CardAreaPanel cardE = CardAreaPanel.get(e);
-                if (cardE != null) {
-                    toPanel.getAttachedPanels().add(cardE);
-                }
-            }
-        }
-
-        if (card.isFortified()) {
-            final Iterable<CardView> fortifications = card.getFortifiedBy();
-            for (final CardView e : fortifications) {
-                final CardAreaPanel cardE = CardAreaPanel.get(e);
-                if (cardE != null) {
-                    toPanel.getAttachedPanels().add(cardE);
-                }
-            }
-        }
-
-        if (card.getEnchantingCard() != null) {
-            toPanel.setAttachedToPanel(CardAreaPanel.get(card.getEnchantingCard()));
-        }
-        else if (card.getEquipping() != null) {
-            toPanel.setAttachedToPanel(CardAreaPanel.get(card.getEquipping()));
-        }
-        else if (card.getFortifying() != null) {
-            toPanel.setAttachedToPanel(CardAreaPanel.get(card.getFortifying()));
-        }
-        else {
-            toPanel.setAttachedToPanel(null);
-        }
-
-        toPanel.setCard(toPanel.getCard());
     }
 
     public FieldRow getRow1() {
