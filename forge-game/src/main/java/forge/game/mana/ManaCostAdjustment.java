@@ -94,6 +94,7 @@ public class ManaCostAdjustment {
                 for (final Card c : toExile) {
                     cost.decreaseColorlessMana(1);
                     if (!test) {
+                        sa.getHostCard().addDelved(c);
                         pc.getGame().getAction().exile(c);
                     }
                 }

@@ -108,7 +108,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final CopyOnWriteArrayList<String> hiddenExtrinsicKeyword = new CopyOnWriteArrayList<String>();
 
     // cards attached or otherwise linked to this card
-    private CardCollection equippedBy, fortifiedBy, hauntedBy, devouredCards, imprintedCards, encodedCards;
+    private CardCollection equippedBy, fortifiedBy, hauntedBy, devouredCards, delvedCards, imprintedCards, encodedCards;
     private CardCollection mustBlockCards, clones, gainControlTargets, chosenCards, blockedThisTurn, blockedByThisTurn;
 
     // if this card is attached or linked to something, what card is it currently attached to
@@ -491,8 +491,23 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         devouredCards.add(c);
     }
+    
     public final void clearDevoured() {
         devouredCards = null;
+    }
+
+    public final CardCollectionView getDelved() {
+        return CardCollection.getView(delvedCards);
+    }
+    public final void addDelved(final Card c) {
+        if (delvedCards == null) {
+            delvedCards = new CardCollection();
+        }
+        delvedCards.add(c);
+    }
+    
+    public final void clearDelved() {
+        delvedCards = null;
     }
 
     public MapOfLists<GameEntity, Object> getRememberMap() {
@@ -4644,7 +4659,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || !(getCounters(CounterType.getType("TIME")) >= 1)) {
                 return false;
             }
-
+        } else if (property.startsWith("delved")) {
+            if (!source.getDelved().contains(this)) {
+                return false;
+            }
         } else if (property.startsWith("power") || property.startsWith("toughness")
                 || property.startsWith("cmc") || property.startsWith("totalPT")) {
             int x = 0;
