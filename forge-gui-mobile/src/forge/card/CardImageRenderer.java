@@ -299,10 +299,10 @@ public class CardImageRenderer {
 
         float padding = Math.round(PT_FONT.getCapHeight() / 4);
         float totalPieceWidth = -padding;
-        List<Float> pieceWidths = new ArrayList<Float>();
-        for (String piece : pieces) {
-            float pieceWidth = PT_FONT.getBounds(piece).width + padding;
-            pieceWidths.add(pieceWidth);
+        float[] pieceWidths = new float[pieces.size()];
+        for (int i = 0; i < pieces.size(); i++) {
+            float pieceWidth = PT_FONT.getBounds(pieces.get(i)).width + padding;
+            pieceWidths[i] = pieceWidth;
             totalPieceWidth += pieceWidth;
         }
         float boxHeight = PT_FONT.getCapHeight() + PT_FONT.getAscent() + 3 * padding;
@@ -324,7 +324,7 @@ public class CardImageRenderer {
         x += (boxWidth - totalPieceWidth) / 2;
         for (int i = 0; i < pieces.size(); i++) {
             g.drawText(pieces.get(i), PT_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
-            x += pieceWidths.get(i);
+            x += pieceWidths[i];
         }
     }
 
