@@ -2093,6 +2093,9 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Evoke")) {
                 card.addSpellAbility(makeEvokeSpell(card, keyword));
             }
+            else if (keyword.startsWith("Dash")) {
+                card.addSpellAbility(makeDashSpell(card, keyword));
+            }
             else if (keyword.startsWith("Monstrosity")) {
                 final String[] k = keyword.split(":");
                 final String magnitude = k[0].substring(12);
@@ -2966,6 +2969,43 @@ public class CardFactoryUtil {
     public static void setupETBReplacementAbility(SpellAbility sa) {
         sa.appendSubAbility(new AbilitySub(ApiType.InternalEtbReplacement, sa.getHostCard(), null, emptyMap));
         // ETBReplacementMove(sa.getHostCard(), null));
+    }
+
+    /**
+     * make Dash keyword
+     * @param card
+     * @param dashKeyword
+     * @return
+     */
+    private static SpellAbility makeDashSpell(final Card card, final String dashKeyword) {
+        final String[] k = dashKeyword.split(":");
+        final Cost dashCost = new Cost(k[1], false);
+        card.removeIntrinsicKeyword(dashKeyword);
+        final String dashString = "SP$ PermanentCreature | Cost$ " + k[1] + " | SubAbility$"
+                + " DashPump";
+        final String dbHaste = "DB$ Pump | Defined$ Self | KW$ Haste | Permanent$ True"
+                + " | SubAbility$ DashDelayedTrigger";
+        final String dbDelayTrigger = "DB$ DelayedTrigger | Mode$ Phase | Phase$"
+                + " End of Turn | Execute$ DashReturnSelf | RememberObjects$ Self"
+                + " | TriggerDescription$ Return CARDNAME from the battlefield to"
+                + " its owner's hand.";
+        final String dbReturn = "DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand"
+                + " | Defined$ DelayTriggerRemembered";
+        card.setSVar("DashPump", dbHaste);
+        card.setSVar("DashDelayedTrigger", dbDelayTrigger);
+        card.setSVar("DashReturnSelf", dbReturn);
+
+        final SpellAbility dashSpell = AbilityFactory.getAbility(dashString, card);
+        String desc = "Dash " + dashCost.toSimpleString() + " (You may cast this "
+                + "spell for its dash cost. If you do, it gains haste, and it's "
+                + "returned from the battlefield to its owner's hand at the beginning"
+                + " of the next end step.)";
+        dashSpell.setStackDescription(card.getName() + " (Dash)");
+        dashSpell.setDescription(desc);
+        dashSpell.setBasicSpell(false);
+        dashSpell.setPayCosts(dashCost);
+        dashSpell.setDash(true);
+        return dashSpell;
     }
 
     /**

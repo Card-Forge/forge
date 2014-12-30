@@ -695,7 +695,7 @@ public class ComputerUtil {
         	return true;
         }
 
-        if (card.isCreature() && (ComputerUtil.hasACardGivingHaste(ai) || card.hasKeyword("Haste"))) {
+        if (card.isCreature() && (ComputerUtil.hasACardGivingHaste(ai) || card.hasKeyword("Haste") || sa.isDash())) {
             return true;
         }
         

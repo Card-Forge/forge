@@ -91,6 +91,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean flashBackAbility = false;
     private boolean cycling = false;
     private boolean delve = false;
+    private boolean dash = false;
     private boolean offering = false;
     private boolean morphup = false;
     private boolean cumulativeupkeep = false;
@@ -691,6 +692,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public final void setDelve(final boolean isDelve0) {
         delve = isDelve0;
+    }
+
+    public final boolean isDash() {
+        return dash;
+    }
+    public final void setDash(final boolean isDash) {
+        dash = isDash;
     }
 
     public CardCollection getTappedForConvoke() {
