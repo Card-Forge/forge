@@ -3,13 +3,18 @@ package forge.game.ability.effects;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -24,6 +29,10 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
         final CounterType cType = CounterType.valueOf(sa.getParam("CounterType"));
         final int amount = AbilityUtils.calculateAmount(card, sa.getParam("CounterNum"), sa);
+        if (sa.hasParam("Bolster")) {
+            sb.append("Bolster ").append(amount);
+            return sb.toString();
+        }
         if (dividedAsYouChoose) {
             sb.append("Distribute ");
         } else {
@@ -84,7 +93,14 @@ public class CountersPutEffect extends SpellAbilityEffect {
             counterAmount = activator.getController().chooseNumber(sa, "How many counters?", 0, counterAmount);
         }
 
-        List<Card> tgtCards = getDefinedCardsOrTargeted(sa);
+        CardCollection tgtCards = new CardCollection();
+        if (sa.hasParam("Bolster")) {
+            CardCollection creatsYouCtrl = CardLists.filter(activator.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            CardCollection leastToughness = new CardCollection(Aggregates.listWithMin(creatsYouCtrl, CardPredicates.Accessors.fnGetDefense));
+            tgtCards.addAll(activator.getController().chooseCardsForEffect(leastToughness, sa, "Choose a creature with the least toughness", 1, 1, false));
+        } else {
+            tgtCards.addAll(getDefinedCardsOrTargeted(sa));
+        }
 
         for (final Card tgtCard : tgtCards) {
             counterAmount = sa.usesTargeting() && sa.hasParam("DividedAsYouChoose") ? sa.getTargetRestrictions().getDividedValue(tgtCard) : counterAmount;

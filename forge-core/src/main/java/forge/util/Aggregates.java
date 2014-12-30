@@ -1,6 +1,7 @@
 package forge.util;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -46,6 +47,24 @@ public class Aggregates {
             if (value > max) {
                 max = value;
                 result = c;
+            }
+        }
+        return result;
+    }
+
+    public static final <T> List<T> listWithMin(final Iterable<T> source, final Function<T, Integer> valueAccessor) {
+        if (source == null) { return null; }
+        int min = Integer.MAX_VALUE;
+        List<T> result = Lists.newArrayList();
+        for (final T c : source) {
+            int value = valueAccessor.apply(c);
+            if (value == min) {
+                result.add(c);
+            }
+            if (value < min) {
+                min = value;
+                result.clear();
+                result.add(c);
             }
         }
         return result;
