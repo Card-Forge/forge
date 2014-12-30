@@ -500,7 +500,24 @@ public class CombatUtil {
         return true;
     }
 
-
+    // Cache landwalk ability strings instead of generating them each time.
+    private static final String[] LANDWALK_KEYWORDS;
+    private static final String[] SNOW_LANDWALK_KEYWORDS;
+    private static final String[] IGNORE_LANDWALK_KEYWORDS;
+    static {
+        final int size = MagicColor.Constant.BASIC_LANDS.size();
+        LANDWALK_KEYWORDS = new String[size];
+        SNOW_LANDWALK_KEYWORDS = new String[size];
+        IGNORE_LANDWALK_KEYWORDS = new String[size];
+        for (int i = 0; i < size; i++) {
+            final String basic = MagicColor.Constant.BASIC_LANDS.get(i);
+            final String landwalk = basic + "walk";;
+            LANDWALK_KEYWORDS[i] = landwalk;
+            SNOW_LANDWALK_KEYWORDS[i] = "Snow " + landwalk.toLowerCase();
+            IGNORE_LANDWALK_KEYWORDS[i] = "May be blocked as though it doesn't have " + landwalk + ".";
+        }
+    }
+ 
     public static boolean isUnblockableFromLandwalk(final Card attacker, final Player defendingPlayer) {
         //May be blocked as though it doesn't have landwalk. (Staff of the Ages)
         if (attacker.hasKeyword("May be blocked as though it doesn't have landwalk.")) {
@@ -509,31 +526,18 @@ public class CombatUtil {
 
         List<String> walkTypes = Lists.newArrayList();
 
-        for (final String basic : MagicColor.Constant.BASIC_LANDS) {
-            final StringBuilder sbLand = new StringBuilder();
-            sbLand.append(basic);
-            sbLand.append("walk");
-            final String landwalk = sbLand.toString();
-
-            StringBuilder sbSnow = new StringBuilder();
-            sbSnow.append("Snow ");
-            sbSnow.append(landwalk.toLowerCase());
-            final String snowwalk = sbSnow.toString();
-
-            sbLand.insert(0, "May be blocked as though it doesn't have "); //Deadfall, etc.
-            sbLand.append(".");
-
-            final String mayBeBlocked = sbLand.toString();
+        for (int i = 0; i < LANDWALK_KEYWORDS.length; i++) {
+            final String basic = MagicColor.Constant.BASIC_LANDS.get(i);
+            final String landwalk = LANDWALK_KEYWORDS[i];
+            final String snowwalk = SNOW_LANDWALK_KEYWORDS[i];
+            final String mayBeBlocked = IGNORE_LANDWALK_KEYWORDS[i];
 
             if (attacker.hasKeyword(landwalk) && !attacker.hasKeyword(mayBeBlocked)) {
                 walkTypes.add(basic);
             }
 
             if (attacker.hasKeyword(snowwalk)) {
-                StringBuilder sbSnowType = new StringBuilder();
-                sbSnowType.append(basic);
-                sbSnowType.append(".Snow");
-                walkTypes.add(sbSnowType.toString());
+                walkTypes.add(basic + ".Snow");
             }
         }
 
