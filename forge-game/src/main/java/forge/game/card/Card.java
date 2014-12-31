@@ -67,6 +67,7 @@ import forge.util.FCollection;
 import forge.util.FCollectionView;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import forge.util.Visitor;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
 
@@ -2746,7 +2747,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         visitKeywords(state, visitor);
         return visitor.getKeywords();
     }
-    public final void visitKeywords(CardState state, KeywordVisitor visitor) {
+    // Allows traversing the card's keywords without needing to concat a bunch
+    // of lists. Optimizes common operations such as hasKeyword().
+    public final void visitKeywords(CardState state, Visitor<String> visitor) {
         visitUnhiddenKeywords(state, visitor);
         visitHiddenExtreinsicKeywords(visitor);
     }
@@ -2847,7 +2850,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         return keywords;
     }
-    private void visitUnhiddenKeywords(CardState state, KeywordVisitor visitor) {
+    private void visitUnhiddenKeywords(CardState state, Visitor<String> visitor) {
         if (changedCardKeywords.isEmpty()) {
             // Fast path that doesn't involve temp allocations.
             for (String kw : state.getIntrinsicKeywords()) {
@@ -3063,7 +3066,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         visitHiddenExtreinsicKeywords(visitor);
         return visitor.getKeywords();
     }
-    private void visitHiddenExtreinsicKeywords(KeywordVisitor visitor) {
+    private void visitHiddenExtreinsicKeywords(Visitor<String> visitor) {
         for (String keyword : hiddenExtrinsicKeyword) {
             if (keyword == null) {
                 continue;
@@ -6397,14 +6400,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         return view;
     }
 
-    // Interface that allows traversing the card's keywords without needing to
-    // concat a bunch of lists. Optimizes common operations such as hasKeyword().
-    private interface KeywordVisitor {
-        public void visit(String keyword);
-    }
-
     // Counts number of instances of a given keyword.
-    private static final class CountKeywordVisitor implements KeywordVisitor {
+    private static final class CountKeywordVisitor extends Visitor<String> {
         private String keyword;
         private int count;
 
@@ -6426,7 +6423,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     // Collects all the keywords into a list.
-    private static final class ListKeywordVisitor implements KeywordVisitor {
+    private static final class ListKeywordVisitor extends Visitor<String> {
         private ArrayList<String> keywords = new ArrayList<>();
 
         @Override

@@ -23,11 +23,11 @@ import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
+import forge.util.Visitor;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -280,20 +280,25 @@ public class ReplacementHandler {
     }
 
     public void cleanUpTemporaryReplacements() {
-        final CardCollectionView absolutelyAllCards = game.getCardsInGame();
-        for (final Card c : absolutelyAllCards) {
-            for (int i = 0; i < c.getReplacementEffects().size(); i++) {
-                ReplacementEffect rep = c.getReplacementEffects().get(i);
-                if (rep.isTemporary()) {
-                    c.removeReplacementEffect(rep);
-                    i--;
+        game.forEachCardInGame(new Visitor<Card>() {
+            @Override
+            public void visit(Card c) {
+                for (int i = 0; i < c.getReplacementEffects().size(); i++) {
+                    ReplacementEffect rep = c.getReplacementEffects().get(i);
+                    if (rep.isTemporary()) {
+                        c.removeReplacementEffect(rep);
+                        i--;
+                    }
                 }
             }
-        }
-        for (final Card c : absolutelyAllCards) {
-            for (int i = 0; i < c.getReplacementEffects().size(); i++) {
-                c.getReplacementEffects().get(i).setTemporarilySuppressed(false);
+        });
+        game.forEachCardInGame(new Visitor<Card>() {
+            @Override
+            public void visit(Card c) {
+                for (int i = 0; i < c.getReplacementEffects().size(); i++) {
+                    c.getReplacementEffects().get(i).setTemporarilySuppressed(false);
+                }
             }
-        }
+        });
     }
 }

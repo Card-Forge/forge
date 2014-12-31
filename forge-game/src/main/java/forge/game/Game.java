@@ -66,6 +66,7 @@ import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.FCollection;
 import forge.util.FCollectionView;
+import forge.util.Visitor;
 
 /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
@@ -429,17 +430,27 @@ public class Game {
         return card;
     }
 
+    // Allows visiting cards in game without allocating a temporary list.
+    public void forEachCardInGame(Visitor<Card> visitor) {
+        for (final Player player : getPlayers()) {
+            visitor.visitAll(player.getZone(ZoneType.Graveyard).getCards());
+            visitor.visitAll(player.getZone(ZoneType.Hand).getCards());
+            visitor.visitAll(player.getZone(ZoneType.Library).getCards());
+            visitor.visitAll(player.getZone(ZoneType.Battlefield).getCards(false));
+            visitor.visitAll(player.getZone(ZoneType.Exile).getCards());
+            visitor.visitAll(player.getZone(ZoneType.Command).getCards());
+        }
+        visitor.visitAll(getStackZone().getCards());
+    }
     public CardCollectionView getCardsInGame() {
         final CardCollection all = new CardCollection();
-        for (final Player player : getPlayers()) {
-            all.addAll(player.getZone(ZoneType.Graveyard).getCards());
-            all.addAll(player.getZone(ZoneType.Hand).getCards());
-            all.addAll(player.getZone(ZoneType.Library).getCards());
-            all.addAll(player.getZone(ZoneType.Battlefield).getCards(false));
-            all.addAll(player.getZone(ZoneType.Exile).getCards());
-            all.addAll(player.getZone(ZoneType.Command).getCards());
-        }
-        all.addAll(getStackZone().getCards());
+        Visitor<Card> visitor = new Visitor<Card>() {
+            @Override
+            public void visit(Card card) {
+                all.add(card);
+            }
+        };
+        forEachCardInGame(visitor);
         return all;
     }
 

@@ -250,6 +250,7 @@ forge-core/src/main/java/forge/util/PredicateString.java -text
 forge-core/src/main/java/forge/util/ReflectionUtil.java -text
 forge-core/src/main/java/forge/util/TextUtil.java -text
 forge-core/src/main/java/forge/util/ThreadUtil.java -text
+forge-core/src/main/java/forge/util/Visitor.java -text
 forge-core/src/main/java/forge/util/maps/EnumMapOfLists.java -text
 forge-core/src/main/java/forge/util/maps/EnumMapToAmount.java -text
 forge-core/src/main/java/forge/util/maps/HashMapOfLists.java -text

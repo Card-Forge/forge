@@ -25,7 +25,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
 import forge.game.card.CardUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -34,6 +33,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.Visitor;
 
 import java.util.*;
 
@@ -57,21 +57,26 @@ public class TriggerHandler {
     }
 
     public final void cleanUpTemporaryTriggers() {
-        final CardCollectionView absolutelyAllCards = game.getCardsInGame();
-        for (final Card c : absolutelyAllCards) {
-            for (int i = 0; i < c.getTriggers().size(); i++) {
-                Trigger trigger = c.getTriggers().get(i);
-                if (trigger.isTemporary()) {
-                    c.removeTrigger(trigger);
-                    i--;
+        game.forEachCardInGame(new Visitor<Card>() {
+            @Override
+            public void visit(Card c) {
+                for (int i = 0; i < c.getReplacementEffects().size(); i++) {
+                    Trigger trigger = c.getTriggers().get(i);
+                    if (trigger.isTemporary()) {
+                        c.removeTrigger(trigger);
+                        i--;
+                    }
                 }
             }
-        }
-        for (final Card c : absolutelyAllCards) {
-            for (int i = 0; i < c.getTriggers().size(); i++) {
-                c.getTriggers().get(i).setTemporarilySuppressed(false);
+        });
+        game.forEachCardInGame(new Visitor<Card>() {
+            @Override
+            public void visit(Card c) {
+                for (int i = 0; i < c.getReplacementEffects().size(); i++) {
+                    c.getTriggers().get(i).setTemporarilySuppressed(false);
+                }
             }
-        }
+        });
     }
 
     public final boolean hasDelayedTriggers() {

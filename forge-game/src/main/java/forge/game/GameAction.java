@@ -53,6 +53,7 @@ import forge.util.CollectionSuppliers;
 import forge.util.Expressions;
 import forge.util.FCollectionView;
 import forge.util.ThreadUtil;
+import forge.util.Visitor;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
 
@@ -547,24 +548,26 @@ public class GameAction {
         }
 
         // search for cards with static abilities
-        final CardCollectionView allCards = game.getCardsInGame();
         final ArrayList<StaticAbility> staticAbilities = new ArrayList<StaticAbility>();
         final List<Card> staticList = new ArrayList<Card>();
-        for (final Card c : allCards) {
-            for (int i = 0; i < c.getStaticAbilities().size(); i++) {
-               StaticAbility stAb = c.getStaticAbilities().get(i);
-               if (stAb.getMapParams().get("Mode").equals("Continuous")) {
-                   staticAbilities.add(stAb);
-               }
-               if (stAb.isTemporary()) {
-                   c.removeStaticAbility(stAb);
-                   i--;
-               }
+        game.forEachCardInGame(new Visitor<Card>() {
+            @Override
+            public void visit(Card c) {
+                for (int i = 0; i < c.getStaticAbilities().size(); i++) {
+                    StaticAbility stAb = c.getStaticAbilities().get(i);
+                    if (stAb.getMapParams().get("Mode").equals("Continuous")) {
+                        staticAbilities.add(stAb);
+                    }
+                    if (stAb.isTemporary()) {
+                        c.removeStaticAbility(stAb);
+                        i--;
+                    }
+                 }
+                 if (!c.getStaticCommandList().isEmpty()) {
+                     staticList.add(c);
+                 }
             }
-            if (!c.getStaticCommandList().isEmpty()) {
-                staticList.add(c);
-            }
-        }
+        });
 
         final Comparator<StaticAbility> comp = new Comparator<StaticAbility>() {
             @Override
