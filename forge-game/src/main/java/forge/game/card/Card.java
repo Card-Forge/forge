@@ -2754,16 +2754,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         visitHiddenExtreinsicKeywords(visitor);
     }
 
-    public final int getKeywordAmount(String keyword) {
-        return getKeywordAmount(currentState, keyword);
-    }
-
-    public final int getKeywordAmount(CardState state, String keyword) {
-        CountKeywordVisitor visitor = new CountKeywordVisitor(keyword);
-        visitKeywords(state, visitor);
-        return visitor.getCount();
-    }
-
     @Override
     public final boolean hasKeyword(String keyword) {
         return hasKeyword(keyword, currentState);
@@ -3334,26 +3324,18 @@ public class Card extends GameEntity implements Comparable<Card> {
         return hasStartOfKeyword(keyword, currentState);
     }
     public final boolean hasStartOfKeyword(String keyword, CardState state) {
-        final List<String> a = getKeywords(state);
-        for (int i = 0; i < a.size(); i++) {
-            if (a.get(i).toString().startsWith(keyword)) {
-                return true;
-            }
-        }
-        return false;
+        CountKeywordVisitor visitor = new CountKeywordVisitor(keyword, true); 
+        visitKeywords(state, visitor);
+        return visitor.getCount() > 0;
     }
 
     public final boolean hasStartOfUnHiddenKeyword(String keyword) {
         return hasStartOfUnHiddenKeyword(keyword, currentState);
     }
     public final boolean hasStartOfUnHiddenKeyword(String keyword, CardState state) {
-        final List<String> a = getUnhiddenKeywords(state);
-        for (int i = 0; i < a.size(); i++) {
-            if (a.get(i).toString().startsWith(keyword)) {
-                return true;
-            }
-        }
-        return false;
+        CountKeywordVisitor visitor = new CountKeywordVisitor(keyword, true); 
+        visitUnhiddenKeywords(state, visitor);
+        return visitor.getCount() > 0;
     }
 
     public final int getKeywordPosition(String k) {
@@ -3386,13 +3368,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         return getAmountOfKeyword(k, currentState);
     }
     public final int getAmountOfKeyword(final String k, CardState state) {
-        int count = 0;
-        for (String kw : getKeywords(state)) {
-            if (kw.equals(k)) {
-                count++;
-            }
-        }
-        return count;
+        CountKeywordVisitor visitor = new CountKeywordVisitor(k); 
+        visitKeywords(state, visitor);
+        return visitor.getCount();
     }
 
     // This is for keywords with a number like Bushido, Annihilator and Rampage.
@@ -6404,15 +6382,22 @@ public class Card extends GameEntity implements Comparable<Card> {
     private static final class CountKeywordVisitor extends Visitor<String> {
         private String keyword;
         private int count;
+        private boolean startOf;
 
         public CountKeywordVisitor(String keyword) {
             this.keyword = keyword;
             this.count = 0;
+            this.startOf = false;
+        }
+
+        public CountKeywordVisitor(String keyword, boolean startOf) {
+            this(keyword);
+            this.startOf = startOf;
         }
 
         @Override
         public void visit(String kw) {
-            if (kw.equals(keyword)) {
+            if ((startOf && kw.startsWith(keyword)) || kw.equals(keyword)) {
                 count++;
             }
         }

@@ -1140,7 +1140,7 @@ public class ComputerUtilCombat {
         //check Exalted only for the first attacker
         if (combat != null && combat.getAttackers().isEmpty()) {
             for (Card card : attacker.getController().getCardsIn(ZoneType.Battlefield)) {
-                power += card.getKeywordAmount("Exalted");
+                power += card.getAmountOfKeyword("Exalted");
             }
         }
 
@@ -1323,7 +1323,7 @@ public class ComputerUtilCombat {
         //check Exalted only for the first attacker
         if (combat != null && combat.getAttackers().isEmpty()) {
             for (Card card : attacker.getController().getCardsIn(ZoneType.Battlefield)) {
-                toughness += card.getKeywordAmount("Exalted");
+                toughness += card.getAmountOfKeyword("Exalted");
             }
         }
 

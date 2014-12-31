@@ -857,7 +857,7 @@ public class AiAttackController {
     public final static int countExaltedBonus(final Player player) {
         int bonus = 0;
         for (Card c : player.getCardsIn(ZoneType.Battlefield)) {
-            bonus += c.getKeywordAmount("Exalted");
+            bonus += c.getAmountOfKeyword("Exalted");
         }
 
         return bonus;

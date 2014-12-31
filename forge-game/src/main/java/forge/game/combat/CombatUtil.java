@@ -437,8 +437,8 @@ public class CombatUtil {
         if (blockedBy.isEmpty() || blocker.hasKeyword("CARDNAME can block any number of creatures.")) {
             return true;
         }
-        int canBlockMore = blocker.getKeywordAmount("CARDNAME can block an additional creature.")
-                + blocker.getKeywordAmount("CARDNAME can block an additional ninety-nine creatures.") * 99;
+        int canBlockMore = blocker.getAmountOfKeyword("CARDNAME can block an additional creature.")
+                + blocker.getAmountOfKeyword("CARDNAME can block an additional ninety-nine creatures.") * 99;
         return canBlockMore >= blockedBy.size();
     }
 
@@ -1029,7 +1029,7 @@ public class CombatUtil {
     public static void handleFlankingKeyword(final Game game, final Card attacker, final List<Card> blockers) {
         for (final Card blocker : blockers) {
             if (attacker.hasKeyword("Flanking") && !blocker.hasKeyword("Flanking")) {
-                final int flankingMagnitude = attacker.getKeywordAmount("Flanking");
+                final int flankingMagnitude = attacker.getAmountOfKeyword("Flanking");
 
                 // Rule 702.23b:  If a creature has multiple instances of flanking, each triggers separately.
                 for (int i = 0; i < flankingMagnitude; i++) {
