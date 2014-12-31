@@ -6,7 +6,7 @@
         <maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
         <packaging.type>jar</packaging.type>
         <build.min.memory>-Xms128m</build.min.memory>
-        <build.max.memory>-Xmx2048m</build.max.memory>
+        <build.max.memory>-Xmx1024m</build.max.memory>
         <alpha-version>1.5.32.007</alpha-version>
     </properties>
 
@@ -116,7 +116,7 @@
                     <plugin>
                         <groupId>com.jayway.maven.plugins.android.generation2</groupId>
                         <artifactId>android-maven-plugin</artifactId>
-                        <version>3.9.0-rc.1</version>
+                        <version>3.9.0-rc.2</version>
                         <extensions>true</extensions>
                         <configuration>
                             <sign>
@@ -161,7 +161,7 @@
                     <plugin>
                         <groupId>com.jayway.maven.plugins.android.generation2</groupId>
                         <artifactId>android-maven-plugin</artifactId>
-                        <version>3.9.0-rc.1</version>
+                        <version>3.9.0-rc.2</version>
                         <extensions>true</extensions>
                         <configuration>
                             <sign>
@@ -243,7 +243,7 @@
                     <plugin>
                         <groupId>com.jayway.maven.plugins.android.generation2</groupId>
                         <artifactId>android-maven-plugin</artifactId>
-                        <version>3.9.0-rc.1</version>
+                        <version>3.9.0-rc.2</version>
                         <inherited>true</inherited>
                         <configuration>
                             <sign>
