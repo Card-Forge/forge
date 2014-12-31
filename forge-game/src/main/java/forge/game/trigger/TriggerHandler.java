@@ -60,7 +60,7 @@ public class TriggerHandler {
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
             public void visit(Card c) {
-                for (int i = 0; i < c.getReplacementEffects().size(); i++) {
+                for (int i = 0; i < c.getTriggers().size(); i++) {
                     Trigger trigger = c.getTriggers().get(i);
                     if (trigger.isTemporary()) {
                         c.removeTrigger(trigger);
@@ -72,7 +72,7 @@ public class TriggerHandler {
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
             public void visit(Card c) {
-                for (int i = 0; i < c.getReplacementEffects().size(); i++) {
+                for (int i = 0; i < c.getTriggers().size(); i++) {
                     c.getTriggers().get(i).setTemporarilySuppressed(false);
                 }
             }
