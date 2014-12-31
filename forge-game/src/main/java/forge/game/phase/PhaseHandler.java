@@ -517,7 +517,7 @@ public class PhaseHandler implements java.io.Serializable {
             final Player attackingPlayer = combat.getAttackingPlayer();
             final Card attacker = combat.getAttackers().get(0);
             for (Card card : attackingPlayer.getCardsIn(ZoneType.Battlefield)) {
-                int exaltedMagnitude = card.getKeywordAmount("Exalted");
+                int exaltedMagnitude = card.getAmountOfKeyword("Exalted");
 
                 for (int i = 0; i < exaltedMagnitude; i++) {
                     String abScript = String.format("AB$ Pump | Cost$ 0 | Defined$ CardUID_%d | NumAtt$ +1 | NumDef$ +1 | StackDescription$ Exalted for attacker {c:CardUID_%d} (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn).", attacker.getId(), attacker.getId());
