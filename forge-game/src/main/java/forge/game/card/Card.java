@@ -5915,10 +5915,13 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         final Card source = sa.getHostCard();
-        final MutableBoolean result = new MutableBoolean();
+        final MutableBoolean result = new MutableBoolean(true);
         visitKeywords(currentState, new Visitor<String>() {
             @Override
             public void visit(String kw) {
+                if (result.isFalse()) {
+                    return;
+                }
                 if (kw.equals("Shroud")) {
                     result.setFalse();
                 }
@@ -5966,7 +5969,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
         });
-        if (!result.isFalse()) {
+        if (result.isFalse()) {
             return false;
         }
         if (sa.isSpell() && source.hasStartOfKeyword("SpellCantTarget")) {
