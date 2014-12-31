@@ -72,6 +72,7 @@ import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -5914,63 +5915,59 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         final Card source = sa.getHostCard();
-
-        if (getKeywords() != null) {
-            for (String kw : getKeywords()) {
+        final MutableBoolean result = new MutableBoolean();
+        visitKeywords(currentState, new Visitor<String>() {
+            @Override
+            public void visit(String kw) {
                 if (kw.equals("Shroud")) {
-                    return false;
+                    result.setFalse();
                 }
-
-                if (kw.equals("Hexproof")) {
+                else if (kw.equals("Hexproof")) {
                     if (sa.getActivatingPlayer().getOpponents().contains(getController())) {
                         if (!sa.getActivatingPlayer().hasKeyword("Spells and abilities you control can target hexproof creatures")) {
-                            return false;
+                            result.setFalse();
                         }
                     }
                 }
-
-                if (kw.equals("CARDNAME can't be the target of Aura spells.")) {
+                else if (kw.equals("CARDNAME can't be the target of Aura spells.")) {
                     if (source.isAura() && sa.isSpell()) {
-                        return false;
+                        result.setFalse();
                     }
                 }
-
-                if (kw.equals("CARDNAME can't be enchanted.")) {
+                else if (kw.equals("CARDNAME can't be enchanted.")) {
                     if (source.isAura()) {
-                        return false;
+                        result.setFalse();
                     }
                 } //Sets source as invalid enchant target for computer player only.
-
-                if (kw.equals("CARDNAME can't be equipped.")) {
+                else if (kw.equals("CARDNAME can't be equipped.")) {
                     if (source.isEquipment()) {
-                        return false;
+                        result.setFalse();
                     }
                 } //Sets source as invalid equip target for computer player only.
-
-                if (kw.equals("CARDNAME can't be the target of red spells or abilities from red sources.")) {
+                else if (kw.equals("CARDNAME can't be the target of red spells or abilities from red sources.")) {
                     if (source.isRed()) {
-                        return false;
+                        result.setFalse();
                     }
                 }
-
-                if (kw.equals("CARDNAME can't be the target of black spells.")) {
+                else if (kw.equals("CARDNAME can't be the target of black spells.")) {
                     if (source.isBlack() && sa.isSpell()) {
-                        return false;
+                        result.setFalse();
                     }
                 }
-
-                if (kw.equals("CARDNAME can't be the target of blue spells.")) {
+                else if (kw.equals("CARDNAME can't be the target of blue spells.")) {
                     if (source.isBlue() && sa.isSpell()) {
-                        return false;
+                        result.setFalse();
                     }
                 }
-
-                if (kw.equals("CARDNAME can't be the target of spells.")) {
+                else if (kw.equals("CARDNAME can't be the target of spells.")) {
                     if (sa.isSpell()) {
-                        return false;
+                        result.setFalse();
                     }
                 }
             }
+        });
+        if (result.isFalse()) {
+            return false;
         }
         if (sa.isSpell() && source.hasStartOfKeyword("SpellCantTarget")) {
             final int keywordPosition = source.getKeywordPosition("SpellCantTarget");
