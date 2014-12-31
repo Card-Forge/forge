@@ -3258,7 +3258,7 @@ public class CardFactoryUtil {
             card.addIntrinsicKeyword("etbCounter:P1P1:" + numCounters + ":Bloodthirst$ True:" + desc);
         } // bloodthirst
 
-        final int storm = card.getKeywordAmount("Storm");
+        final int storm = card.getAmountOfKeyword("Storm");
         for (int i = 0; i < storm; i++) {
             final StringBuilder trigScript = new StringBuilder(
                     "Mode$ SpellCast | ValidCard$ Card.Self | Execute$ Storm "
@@ -3271,7 +3271,7 @@ public class CardFactoryUtil {
 
             card.addTrigger(stormTrigger);
         } // Storm
-        final int cascade = card.getKeywordAmount("Cascade");
+        final int cascade = card.getAmountOfKeyword("Cascade");
         for (int i = 0; i < cascade; i++) {
             final StringBuilder trigScript = new StringBuilder(
                     "Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCascade | Secondary$ " +
@@ -3349,7 +3349,7 @@ public class CardFactoryUtil {
             ripplePos = hasKeyword(card, "Ripple", n + 1);
         } // Ripple
 
-        final int dethrone = card.getKeywordAmount("Dethrone");
+        final int dethrone = card.getAmountOfKeyword("Dethrone");
         card.removeIntrinsicKeyword("Dethrone");
         for (int i = 0; i < dethrone; i++) {
             final StringBuilder trigScript = new StringBuilder(
@@ -3364,7 +3364,7 @@ public class CardFactoryUtil {
             final Trigger cascadeTrigger = TriggerHandler.parseTrigger(trigScript.toString(), card, true);
             card.addTrigger(cascadeTrigger);
         } // Dethrone
-        final int prowess = card.getKeywordAmount("Prowess");
+        final int prowess = card.getAmountOfKeyword("Prowess");
         card.removeIntrinsicKeyword("Prowess");
         final StringBuilder trigProwess = new StringBuilder(
                 "Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | "
