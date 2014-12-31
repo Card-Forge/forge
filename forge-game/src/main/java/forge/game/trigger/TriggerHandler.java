@@ -185,13 +185,16 @@ public class TriggerHandler {
 
     public final void resetActiveTriggers() {
         activeTriggers.clear();
-        for (final Card c : game.getCardsInGame()) {
-            for (final Trigger t : c.getTriggers()) {
-                if (isTriggerActive(t)) {
-                    activeTriggers.add(t);
+        game.forEachCardInGame(new Visitor<Card>() {
+            @Override
+            public void visit(Card c) {
+                for (final Trigger t : c.getTriggers()) {
+                    if (isTriggerActive(t)) {
+                        activeTriggers.add(t);
+                    }
                 }
             }
-        }
+        });
     }
 
     public final void clearInstrinsicActiveTriggers(final Card c) {
