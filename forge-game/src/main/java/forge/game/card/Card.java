@@ -5966,7 +5966,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
         });
-        if (result.isFalse()) {
+        if (!result.isFalse()) {
             return false;
         }
         if (sa.isSpell() && source.hasStartOfKeyword("SpellCantTarget")) {
