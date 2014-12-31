@@ -1194,7 +1194,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     // get the text that does not belong to a cards abilities (and is not really
     // there rules-wise)
     public final String getNonAbilityText() {
-        return keywordsToText(getHiddenExtrinsicKeyword());
+        return keywordsToText(getHiddenExtrinsicKeywords());
     }
 
     // convert a keyword list to the String that should be displayed in game
@@ -2742,9 +2742,13 @@ public class Card extends GameEntity implements Comparable<Card> {
         return getKeywords(currentState);
     }
     public final List<String> getKeywords(CardState state) {
-        final ArrayList<String> keywords = getUnhiddenKeywords(state);
-        keywords.addAll(getHiddenExtrinsicKeyword());
-        return keywords;
+        ListKeywordVisitor visitor = new ListKeywordVisitor();
+        visitKeywords(state, visitor);
+        return visitor.getKeywords();
+    }
+    public final void visitKeywords(CardState state, KeywordVisitor visitor) {
+        visitUnhiddenKeywords(state, visitor);
+        visitHiddenExtreinsicKeywords(visitor);
     }
 
     public final int getKeywordAmount(String keyword) {
@@ -2752,13 +2756,24 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final int getKeywordAmount(CardState state, String keyword) {
-        int res = 0;
-        for (final String k : getKeywords(state)) {
-            if (k.equals(keyword)) {
-                res++;
-            }
+        CountKeywordVisitor visitor = new CountKeywordVisitor(keyword);
+        visitKeywords(state, visitor);
+        return visitor.getCount();
+    }
+
+    @Override
+    public final boolean hasKeyword(String keyword) {
+        return hasKeyword(keyword, currentState);
+    }
+        
+    public final boolean hasKeyword(String keyword, CardState state) {
+        if (keyword.startsWith("HIDDEN")) {
+            keyword = keyword.substring(7);
         }
-        return res;
+
+        CountKeywordVisitor visitor = new CountKeywordVisitor(keyword);
+        visitKeywords(state, visitor);
+        return visitor.getCount() > 0;
     }
 
     public final void updateKeywords() {
@@ -2831,6 +2846,21 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
         return keywords;
+    }
+    private void visitUnhiddenKeywords(CardState state, KeywordVisitor visitor) {
+        if (changedCardKeywords.isEmpty()) {
+            // Fast path that doesn't involve temp allocations.
+            for (String kw : state.getIntrinsicKeywords()) {
+                visitor.visit(kw);
+            }
+            for (String kw : extrinsicKeyword) {
+                visitor.visit(kw);
+            }
+        } else {
+            for (String kw : getUnhiddenKeywords()) {
+                visitor.visit(kw);
+            }
+        }
     }
 
     /**
@@ -3028,23 +3058,20 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     // Hidden Keywords will be returned without the indicator HIDDEN
-    public final ArrayList<String> getHiddenExtrinsicKeyword() {
-        while (true) {
-            try {
-                final ArrayList<String> keywords = new ArrayList<String>();
-                for (String keyword : hiddenExtrinsicKeyword) {
-                    if (keyword == null) {
-                        continue;
-                    }
-                    if (keyword.startsWith("HIDDEN")) {
-                        keyword = keyword.substring(7);
-                    }
-                    keywords.add(keyword);
-                }
-                return keywords;
-            } catch (IndexOutOfBoundsException ex) {
-                // Do nothing and let the while loop retry
+    public final ArrayList<String> getHiddenExtrinsicKeywords() {
+        ListKeywordVisitor visitor = new ListKeywordVisitor();
+        visitHiddenExtreinsicKeywords(visitor);
+        return visitor.getKeywords();
+    }
+    private void visitHiddenExtreinsicKeywords(KeywordVisitor visitor) {
+        for (String keyword : hiddenExtrinsicKeyword) {
+            if (keyword == null) {
+                continue;
             }
+            if (keyword.startsWith("HIDDEN")) {
+                keyword = keyword.substring(7);
+            }
+            visitor.visit(keyword);
         }
     }
 
@@ -3298,17 +3325,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
         return false;
-    }
-
-    @Override
-    public final boolean hasKeyword(String keyword) {
-        return hasKeyword(keyword, currentState);
-    }
-    public final boolean hasKeyword(String keyword, CardState state) {
-        if (keyword.startsWith("HIDDEN")) {
-            return getKeywords(state).contains(keyword.substring(7));
-        }
-        return getKeywords(state).contains(keyword);
     }
 
     public final boolean hasStartOfKeyword(final String keyword) {
@@ -6379,5 +6395,47 @@ public class Card extends GameEntity implements Comparable<Card> {
     @Override
     public CardView getView() {
         return view;
+    }
+
+    // Interface that allows traversing the card's keywords without needing to
+    // concat a bunch of lists. Optimizes common operations such as hasKeyword().
+    private interface KeywordVisitor {
+        public void visit(String keyword);
+    }
+
+    // Counts number of instances of a given keyword.
+    private static final class CountKeywordVisitor implements KeywordVisitor {
+        private String keyword;
+        private int count;
+
+        public CountKeywordVisitor(String keyword) {
+            this.keyword = keyword;
+            this.count = 0;
+        }
+
+        @Override
+        public void visit(String kw) {
+            if (kw.equals(keyword)) {
+                count++;
+            }
+        }
+ 
+        public int getCount() {
+            return count;
+        }
+    }
+
+    // Collects all the keywords into a list.
+    private static final class ListKeywordVisitor implements KeywordVisitor {
+        private ArrayList<String> keywords = new ArrayList<>();
+
+        @Override
+        public void visit(String kw) {
+            keywords.add(kw);
+        }
+ 
+        public ArrayList<String> getKeywords() {
+            return keywords;
+        }
     }
 }
