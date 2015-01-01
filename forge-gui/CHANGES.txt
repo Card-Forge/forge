@@ -12,6 +12,10 @@ Release Notes
 You can now hold the Shift key when clicking on mana pool icons to use as much of that mana type as possible towards the cost.
 
 
+- New Fate Reforged cards -
+We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
+
+
 ---------
 New Cards
 ---------
@@ -28,6 +32,32 @@ Shared Fate
 Smoke Teller
 Spy Network
 Wave of Vitriol
+Sidisi, Brood Tyrant
+Nature Shields Its Own
+Arcane Lighthouse
+Three Wishes
+Arcum's Whistle
+Infinite Authority
+Barbarian Guides
+Worldknit
+
+
+------------------------------
+New Fate Reforged branch Cards
+------------------------------
+
+Ugin, the Spirit Dragon
+Kolaghan, the Storm's Fury
+Temporal Trespass
+Sandsteppe Mastodon
+Soulflayer
+Honor's Reward
+Goblin Heelcutter
+Goblin Heelcutter
+Crux of Fate
+Gurmag Angler
+Jeskai Sage
+Valorous Stance
 
 
 ------------
