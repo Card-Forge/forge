@@ -55,6 +55,9 @@ public class VField extends FContainer {
             for (CardView card : model) {
                 CardAreaPanel cardPanel = CardAreaPanel.get(card);
                 cardPanel.updateCard(card);
+                // Clear all stacks since they will be rebuilt in the loop below.
+                cardPanel.setNextPanelInStack(null);
+                cardPanel.setPrevPanelInStack(null);
             }
 
             List<CardView> creatures = new ArrayList<CardView>();
