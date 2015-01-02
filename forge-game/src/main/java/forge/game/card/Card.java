@@ -162,6 +162,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean monstrous = false;
     private int monstrosityNum = 0;
 
+    private boolean manifested = false;
+
     private long bestowTimestamp = -1;
     private boolean suspendCast = false;
     private boolean suspend = false;
@@ -334,6 +336,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public boolean setState(final CardStateName state, boolean updateView) {
         if (state == CardStateName.FaceDown && isDoubleFaced()) {
+            // TODO I believe No longer true with Manifest, needs to be tested out
             return false; // Doublefaced cards can't be turned face-down.
         }
 
@@ -344,6 +347,11 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         if (state.equals(currentStateName)) {
             return false;
+        }
+
+        // Cleared tests, about to change states
+        if (currentStateName.equals(CardStateName.FaceDown) && state.equals(CardStateName.Original)) {
+            this.setManifested(false);
         }
 
         currentStateName = state;
@@ -404,16 +412,52 @@ public class Card extends GameEntity implements Comparable<Card> {
         preFaceDownState = preCharacteristic;
     }
 
+    public Card manifest(Player p) {
+        // Turn Face Down (even if it's DFC).
+        ManaCost cost = this.getManaCost();
+
+         // Sometimes cards are manifested while already being face down
+         if (!turnFaceDown(true) && currentStateName != CardStateName.FaceDown) {
+             return null;
+         }
+        // Move to p's battlefield
+        Card c = p.getGame().getAction().moveToPlay(this, p);
+        c.setPreFaceDownState(CardStateName.Original);
+        // Mark this card as "manifested"
+        c.setManifested(true);
+
+        // Add manifest demorph static ability for creatures?
+        c.addSpellAbility(CardFactoryUtil.abilityManifestFaceUp(c, cost));
+
+        return c;
+    }
+
     public boolean turnFaceDown() {
-        if (!isDoubleFaced()) {
+        return turnFaceDown(false);
+    }
+
+    public boolean turnFaceDown(boolean override) {
+        if (override || !isDoubleFaced()) {
             preFaceDownState = currentStateName;
             return setState(CardStateName.FaceDown, true);
         }
         return false;
     }
 
-    public boolean turnFaceUp() {
+	public boolean turnFaceUp() {
+		return turnFaceUp(false);
+	}
+
+    public boolean turnFaceUp(boolean manifestPaid) {
         if (currentStateName == CardStateName.FaceDown) {
+            if (manifestPaid && this.isManifested() && !this.getRules().getType().isCreature()) {
+                // If we've manifested a non-creature and we're demanifesting disallow it
+
+                // Unless this creature also has a Morph ability
+
+                return false;
+            }
+
             boolean result = setState(preFaceDownState, true);
             if (result) {
                 getGame().getTriggerHandler().registerActiveTrigger(this, false);
@@ -1543,6 +1587,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         if (monstrous) {
             sb.append("Monstrous\r\n");
+        }
+        if (manifested) {
+            sb.append("Manifested\r\n");
         }
         sb.append(keywordsToText(getUnhiddenKeywords(state)));
 
@@ -5670,6 +5717,13 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public final void setMonstrosityNum(final int num) {
         monstrosityNum = num;
+    }
+
+    public final boolean isManifested() {
+        return manifested;
+    }
+    public final void setManifested(final boolean manifested) {
+        this.manifested = manifested;
     }
 
     public final void animateBestow() {

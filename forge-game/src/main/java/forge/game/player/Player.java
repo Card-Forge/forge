@@ -1330,6 +1330,21 @@ public class Player extends GameEntity implements Comparable<Player> {
         return milled;
     }
 
+    public final CardCollection getTopXCardsFromLibrary(int amount) {
+        final CardCollection topCards = new CardCollection();
+        final PlayerZone lib = this.getZone(ZoneType.Library);
+        int maxCards = lib.size();
+        // If library is smaller than N, only get that many cards
+        maxCards = Math.min(maxCards, amount);
+
+        // show top n cards:
+        for (int j = 0; j < maxCards; j++) {
+            topCards.add(lib.get(j));
+        }
+
+        return topCards;
+    }
+
     public final void shuffle(final SpellAbility sa) {
         final CardCollection list = new CardCollection(getCardsIn(ZoneType.Library));
 

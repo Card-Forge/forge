@@ -166,6 +166,47 @@ public class CardFactoryUtil {
         return morphUp;
     }
 
+    public static AbilityStatic abilityManifestFaceUp(final Card sourceCard, final ManaCost manaCost) {
+        final Cost cost = new Cost(manaCost, false);
+
+        final AbilityStatic manifestUp = new AbilityStatic(sourceCard, cost, null) {
+
+            @Override
+            public void resolve() {
+                if (sourceCard.turnFaceUp(true)) {
+                    String sb = this.getActivatingPlayer() + " has unmanifested " + sourceCard.getName();
+                    sourceCard.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                    sourceCard.getGame().fireEvent(new GameEventCardStatsChanged(sourceCard));
+                }
+            }
+
+            @Override
+            public boolean canPlay() {
+                return sourceCard.getController().equals(this.getActivatingPlayer()) && sourceCard.isFaceDown()
+                        && sourceCard.isInPlay() && sourceCard.isManifested();
+            }
+
+        }; // morph_up
+
+        String costDesc = cost.toString();
+        // get rid of the ": " at the end
+        costDesc = costDesc.substring(0, costDesc.length() - 2);
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Unmanifest");
+        if (!cost.isOnlyManaCost()) {
+            sb.append(" -");
+        }
+        sb.append(" ").append(costDesc).append(" (Turn this face up any time for its mana cost.)");
+        manifestUp.setDescription(sb.toString());
+
+        final StringBuilder sbStack = new StringBuilder();
+        sbStack.append(sourceCard.getName()).append(" - turn this card face up.");
+        manifestUp.setStackDescription(sbStack.toString());
+        //manifestUp.setIsMorphUp(true);
+
+        return manifestUp;
+    }
+
     public static boolean handleHiddenAgenda(Player player, Card card) {
         SpellAbility sa = new SpellAbility.EmptySa(card);
         sa.getMapParams().put("AILogic", card.getSVar("AgendaLogic"));

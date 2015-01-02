@@ -387,6 +387,7 @@ forge-game/src/main/java/forge/game/ability/effects/LifeSetEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/LookAtEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ManaEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ManaReflectedEffect.java -text
+forge-game/src/main/java/forge/game/ability/effects/ManifestEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/MillEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/MultiplePilesEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/MustAttackEffect.java -text

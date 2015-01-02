@@ -77,6 +77,7 @@ public enum ApiType {
     LosesGame (GameLossEffect.class),
     Mana (ManaEffect.class),
     ManaReflected (ManaReflectedEffect.class),
+    Manifest (ManifestEffect.class),
     Mill (MillEffect.class),
     MoveCounter (CountersMoveEffect.class),
     MultiplePiles (MultiplePilesEffect.class),
