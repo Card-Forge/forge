@@ -22,6 +22,7 @@ import forge.card.CardStateName;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.CardType;
+import forge.card.CardType.CoreType;
 import forge.card.ICardFace;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
@@ -44,6 +45,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
+
+import com.google.common.base.Joiner;
+import com.google.common.collect.Iterables;
 
 /**
  * <p>
@@ -604,32 +608,117 @@ public class CardFactory {
             to.setSVar(sVar, from.getSVar(sVar));
         }
     }
+    
+    public static class TokenInfo {
+        final String name;
+        final String imageName;
+        final String manaCost;
+        final String[] types;
+        final String[] intrinsicKeywords;
+        final int basePower;
+        final int baseToughness;
 
-    public static List<Card> makeToken(final String name, final String imageName, final Player controller,
-            final String manaCost, final String[] types, final int basePower, final int baseToughness,
-            final String[] intrinsicKeywords) {
-        final List<Card> list = new ArrayList<Card>();
-        final Card c = new Card(controller.getGame().nextCardId(), controller.getGame());
-        c.setName(name);
-        c.setImageKey(ImageKeys.getTokenKey(imageName));
-    
-        // TODO - most tokens mana cost is 0, this needs to be fixed
-        // c.setManaCost(manaCost);
-        c.addColor(manaCost);
-        c.setToken(true);
-    
-        for (final String t : types) {
-            c.addType(t);
+        public TokenInfo(String name, String imageName, String manaCost, String[] types,
+                String[] intrinsicKeywords, int basePower, int baseToughness) {
+            this.name = name;
+            this.imageName = imageName;
+            this.manaCost = manaCost;
+            this.types = types;
+            this.intrinsicKeywords = intrinsicKeywords;
+            this.basePower = basePower;
+            this.baseToughness = baseToughness;
         }
-    
-        c.setBasePower(basePower);
-        c.setBaseToughness(baseToughness);
-    
+
+        public TokenInfo(Card c) {
+            this.name = c.getName();
+            this.imageName = ImageKeys.getTokenImageName(c.getImageKey());
+            this.manaCost = c.getManaCost().toString();
+            this.types = getCardTypes(c);
+            this.intrinsicKeywords   = c.getKeywords().toArray(new String[0]);
+            this.basePower = c.getBasePower();
+            this.baseToughness = c.getBaseToughness();
+        }
+
+        private static String[] getCardTypes(Card c) {
+            ArrayList<String> relevantTypes = new ArrayList<String>();
+            for (CoreType t : c.getType().getCoreTypes()) {
+                relevantTypes.add(t.name());
+            }
+            Iterables.addAll(relevantTypes, c.getType().getSubtypes());
+            return  relevantTypes.toArray(new String[relevantTypes.size()]);
+        }
+
+        private Card toCard(Game game) {
+            final Card c = new Card(game.nextCardId(), game);
+            c.setName(name);
+            c.setImageKey(ImageKeys.getTokenKey(imageName));
+
+            // TODO - most tokens mana cost is 0, this needs to be fixed
+            // c.setManaCost(manaCost);
+            c.addColor(manaCost);
+            c.setToken(true);
+
+            for (final String t : types) {
+                c.addType(t);
+            }
+
+            c.setBasePower(basePower);
+            c.setBaseToughness(baseToughness);
+            return c;
+        }
+
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(name).append(',');
+            sb.append("P:").append(basePower).append(',');
+            sb.append("T:").append(baseToughness).append(',');
+            sb.append("Cost:").append(manaCost).append(',');
+            sb.append("Types:").append(Joiner.on('-').join(types)).append(',');
+            sb.append("Keywords:").append(Joiner.on('-').join(intrinsicKeywords)).append(',');
+            sb.append("Image:").append(imageName);
+            return sb.toString();
+        }
+
+        public static TokenInfo fromString(String str) {
+           final String[] tokenInfo = str.split(",");
+           int power = 0;
+           int toughness = 0;
+           String manaCost = "0";
+           String[] types = null;
+           String[] keywords = null;
+           String imageName = null;
+           for (String info : tokenInfo) {
+               int index = info.indexOf(':');
+               if (index == -1) {
+                   continue;
+               }
+               String remainder = info.substring(index + 1);
+               if (info.startsWith("P:")) {
+                   power = Integer.parseInt(remainder);
+               } else if (info.startsWith("T:")) {
+                   toughness = Integer.parseInt(remainder);
+               } else if (info.startsWith("Cost:")) {
+                   manaCost = remainder;
+               } else if (info.startsWith("Types:")) {
+                   types = remainder.split("-");
+               } else if (info.startsWith("Keywords:")) {
+                   keywords = remainder.split("-");
+               } else if (info.startsWith("Image:")) {
+                   imageName = remainder;
+               }
+           }
+           return new TokenInfo(tokenInfo[0], imageName, manaCost, types, keywords, power, toughness);
+        }
+    }
+
+    public static List<Card> makeToken(final TokenInfo tokenInfo, final Player controller) {
+        final List<Card> list = new ArrayList<Card>();
+        final Card c = tokenInfo.toCard(controller.getGame());
         final int multiplier = controller.getTokenDoublersMagnitude();
         for (int i = 0; i < multiplier; i++) {
             Card temp = copyStats(c, controller);
-    
-            for (final String kw : intrinsicKeywords) {
+
+            for (final String kw : tokenInfo.intrinsicKeywords) {
                 temp.addIntrinsicKeyword(kw);
             }
             temp.setOwner(controller);
@@ -640,6 +729,7 @@ public class CardFactory {
         }
         return list;
     }
+
     /**
      * Copy triggered ability
      * 

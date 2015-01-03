@@ -368,9 +368,10 @@ public class TokenAi extends SpellAbilityAi {
             }
         }
         final String substitutedName = tokenName.equals("ChosenType") ? host.getChosenType() : tokenName;
-        final List<Card> tokens = CardFactory.makeToken(substitutedName,
-                imageNames.get(MyRandom.getRandom().nextInt(imageNames.size())),
-                ai, cost, substitutedTypes, finalPower, finalToughness, tokenKeywords);
+        final String imageName = imageNames.get(MyRandom.getRandom().nextInt(imageNames.size()));
+        final CardFactory.TokenInfo tokenInfo = new CardFactory.TokenInfo(substitutedName, imageName,
+                cost, substitutedTypes, tokenKeywords, finalPower, finalToughness);
+        final List<Card> tokens = CardFactory.makeToken(tokenInfo, ai);
         
         // Grant rule changes
         if (tokenHiddenKeywords != null) {

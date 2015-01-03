@@ -14,6 +14,7 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactory;
 import forge.game.card.CounterType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -94,7 +95,11 @@ public abstract class GameState {
         if (newText.length() > 0) {
             newText.append(";");
         }
-        newText.append(c.getName());
+        if (c.isToken()) {
+            newText.append("t:" + new CardFactory.TokenInfo(c).toString());
+        } else {
+            newText.append(c.getName());
+        }
         if (zoneType == ZoneType.Battlefield) {
             if (c.isTapped()) {
                 newText.append("|Tapped:True");
@@ -206,8 +211,17 @@ public abstract class GameState {
         if (life > 0) p.setLife(life, null);
         for (Entry<ZoneType, CardCollectionView> kv : playerCards.entrySet()) {
             if (kv.getKey() == ZoneType.Battlefield) {
-                p.getZone(kv.getKey()).setCards(new ArrayList<Card>());
+                ArrayList<Card> cards = new ArrayList<Card>();
                 for (final Card c : kv.getValue()) {
+                    if (c.isToken()) {
+                        cards.add(c);
+                    }
+                }
+                p.getZone(kv.getKey()).setCards(cards);
+                for (final Card c : kv.getValue()) {
+                    if (c.isToken()) {
+                        continue;
+                    }
                     boolean tapped = c.isTapped();
                     boolean sickness = c.hasSickness();
                     p.getZone(ZoneType.Hand).add(c);
@@ -237,8 +251,15 @@ public abstract class GameState {
         for (final String element : data) {
             final String[] cardinfo = element.trim().split("\\|");
 
-            //System.out.println("paper card "  + cardinfo[0]);
-            final Card c = Card.fromPaperCard(getPaperCard(cardinfo[0]), player);
+            Card c;
+            if (cardinfo[0].startsWith("t:")) {
+                String tokenStr = cardinfo[0].substring(2);
+                // TODO: Use a version of the API that doesn't return a list (i.e. these shouldn't be affected
+                // by doubling season, etc).
+                c = CardFactory.makeToken(CardFactory.TokenInfo.fromString(tokenStr), player).get(0);
+            } else {
+                c = Card.fromPaperCard(getPaperCard(cardinfo[0]), player);
+            }
 
             boolean hasSetCurSet = false;
             for (final String info : cardinfo) {
@@ -259,7 +280,7 @@ public abstract class GameState {
                 }
             }
 
-            if (!hasSetCurSet) {
+            if (!hasSetCurSet && !c.isToken()) {
                 c.setSetCode(c.getMostRecentSet());
             }
 

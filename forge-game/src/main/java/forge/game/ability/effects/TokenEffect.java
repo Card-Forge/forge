@@ -226,10 +226,11 @@ public class TokenEffect extends SpellAbilityEffect {
         final boolean imprint = sa.hasParam("ImprintTokens");
         for (final Player controller : AbilityUtils.getDefinedPlayers(host, this.tokenOwner, sa)) {
             for (int i = 0; i < finalAmount; i++) {
-                final List<Card> tokens = CardFactory.makeToken(substitutedName,
-                		imageNames.get(MyRandom.getRandom().nextInt(imageNames.size())),
-                        controller, cost, substitutedTypes, finalPower, finalToughness, this.tokenKeywords);
-                for(Card tok : tokens) {
+                final String imageName = imageNames.get(MyRandom.getRandom().nextInt(imageNames.size()));
+                final CardFactory.TokenInfo tokenInfo = new CardFactory.TokenInfo(substitutedName, imageName,
+                        cost, substitutedTypes, this.tokenKeywords, finalPower, finalToughness);
+                final List<Card> tokens = CardFactory.makeToken(tokenInfo, controller);
+                for (Card tok : tokens) {
                     if (this.tokenTapped) {
                         tok.setTapped(true);
                     }

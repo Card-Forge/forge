@@ -87,6 +87,13 @@ public class ImageKeys {
         return ImageKeys.TOKEN_PREFIX + tokenName;
     }
 
+    public static String getTokenImageName(String tokenKey) {
+        if (!tokenKey.startsWith(ImageKeys.TOKEN_PREFIX)) {
+            return null;
+        }
+        return tokenKey.substring(ImageKeys.TOKEN_PREFIX.length());
+    }
+
     public static File getImageFile(String key) {
         if (StringUtils.isEmpty(key)) {
             return null;
