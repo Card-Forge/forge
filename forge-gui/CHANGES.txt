@@ -58,6 +58,19 @@ Crux of Fate
 Gurmag Angler
 Jeskai Sage
 Valorous Stance
+Jeskai Infiltrator
+Lightform
+Soul Summons
+Archfiend of Depravity
+Daghatar the Adamant
+Marang River Prowler
+Mardu Shadowspear
+Mardu Strike Leader
+Shu Yun, the Silent Tempest
+Wandering Champion
+Dragonscale General
+Dromoka, the Eternal
+Monastery Mentor
 
 
 ------------
