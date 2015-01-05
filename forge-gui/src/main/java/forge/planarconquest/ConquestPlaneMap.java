@@ -109,9 +109,9 @@ public class ConquestPlaneMap {
         double regionAngle = 2 * Math.PI / regionCount;
 
         //these assume a tile width of 2, radius of 1
-        double centerY = 1.5 * center;
         double centerX = sqrt3 * (center + 0.5f * (center & 1));
-        double maxDist = (centerY + centerX) / 2;
+        double centerY = 1.5 * center;
+        double maxDist = (centerX + centerY) / 2;
 
         //create a circular map, divided into regions
         for (int r = 0; r < gridSize; r++) {
@@ -170,34 +170,6 @@ public class ConquestPlaneMap {
 
         public int getColorIndex() {
             return colorIndex;
-        }
-
-        public float getImageRotation() {
-            return 0;
-        }
-
-        public boolean flipImageX() {
-            /*if (q % 2 == 1) {
-                if (q % 4 == 1) {
-                    return r % 2 == 1;
-                }
-                return r % 2 == 0;
-            }*/
-            return false;
-        }
-
-        public boolean flipImageY() {
-            /*if (q % 2 == 0) {
-                if (q % 4 == 0) {
-                    return r % 2 == 1;
-                }
-                return r % 2 == 0;
-            }
-            if (q % 4 == 1) {
-                return r % 2 == 1;
-            }
-            return r % 2 == 0;*/
-            return false;
         }
 
         public List<HexagonTile> getNeighbors() {

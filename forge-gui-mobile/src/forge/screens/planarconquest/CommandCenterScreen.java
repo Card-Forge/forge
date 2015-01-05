@@ -271,8 +271,7 @@ public class CommandCenterScreen extends FScreen implements IVCommandCenter {
                 break;
             }
 
-            //transform image based on grid coordinates so tiles blend together better
-            g.drawImageWithTransforms(tileImage.getTextureRegion(), x, y, w, h, tile.getImageRotation(), tile.flipImageX(), tile.flipImageY());
+            g.drawImage(tileImage, x, y, w, h);
             g.drawImage(FSkinImage.HEXAGON_TILE, x, y, w, h);
 
             /*if (x < getWidth() / 2 && x + w > getWidth() / 2 && y < getHeight() / 2 && y + h > getHeight() / 2) {
