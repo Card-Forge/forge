@@ -1,7 +1,7 @@
-Forge Beta: 12-#-2014 ver 1.5.32
+Forge Beta: 1-5-2015 ver 1.5.32
 
 
-# cards in total.
+14353 cards in total.
 
 
 -------------
@@ -20,25 +20,25 @@ We have added a branch to our SVN for the new cards that are currently being scr
 New Cards
 ---------
 
+Arcane Lighthouse
+Arcum's Whistle
 Assault Suit
 Aven Soulgazer
+Barbarian Guides
 Domineering Will
 Fatespinner
 Incite Rebellion
 Infernal Offering
+Infinite Authority
 Loreseeker's Stone
+Nature Shields Its Own
 Power Play
 Shared Fate
+Sidisi, Brood Tyrant
 Smoke Teller
 Spy Network
-Wave of Vitriol
-Sidisi, Brood Tyrant
-Nature Shields Its Own
-Arcane Lighthouse
 Three Wishes
-Arcum's Whistle
-Infinite Authority
-Barbarian Guides
+Wave of Vitriol
 Worldknit
 
 
@@ -46,31 +46,31 @@ Worldknit
 New Fate Reforged branch Cards
 ------------------------------
 
-Ugin, the Spirit Dragon
-Kolaghan, the Storm's Fury
-Temporal Trespass
-Sandsteppe Mastodon
-Soulflayer
-Honor's Reward
-Goblin Heelcutter
-Goblin Heelcutter
-Crux of Fate
-Gurmag Angler
-Jeskai Sage
-Valorous Stance
-Jeskai Infiltrator
-Lightform
-Soul Summons
 Archfiend of Depravity
+Crux of Fate
 Daghatar the Adamant
+Dragonscale General
+Dromoka, the Eternal
+Goblin Heelcutter
+Goblin Heelcutter
+Gurmag Angler
+Honor's Reward
+Jeskai Infiltrator
+Jeskai Sage
+Kolaghan, the Storm's Fury
+Lightform
 Marang River Prowler
 Mardu Shadowspear
 Mardu Strike Leader
-Shu Yun, the Silent Tempest
-Wandering Champion
-Dragonscale General
-Dromoka, the Eternal
 Monastery Mentor
+Sandsteppe Mastodon
+Shu Yun, the Silent Tempest
+Soul Summons
+Soulflayer
+Temporal Trespass
+Ugin, the Spirit Dragon
+Valorous Stance
+Wandering Champion
 
 
 ------------
@@ -123,7 +123,20 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Agetian
+DrDev
+elcnesh
+Gos
+KrazyTheFox
+Marek14
+Myrd
+Nordos
+Sloth
+Sol
+Swordshine
+tojammot
+torridus
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
