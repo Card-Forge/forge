@@ -118,6 +118,7 @@ public enum FSkinImage implements FImage {
 
     //Planar Conquest Tiles
     HEXAGON_TILE    (FSkinProp.IMG_HEXAGON_TILE, SourceFile.PLANAR_CONQUEST),
+    COLORLESS_TILE  (FSkinProp.IMG_COLORLESS_TILE, SourceFile.PLANAR_CONQUEST),
     WHITE_TILE      (FSkinProp.IMG_WHITE_TILE, SourceFile.PLANAR_CONQUEST),
     BLUE_TILE       (FSkinProp.IMG_BLUE_TILE, SourceFile.PLANAR_CONQUEST),
     BLACK_TILE      (FSkinProp.IMG_BLACK_TILE, SourceFile.PLANAR_CONQUEST),

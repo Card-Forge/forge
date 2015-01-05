@@ -31,14 +31,14 @@ public class ConquestPlaneMap {
         if (tileWidth == tileWidth0) { return; }
         tileWidth = tileWidth0;
         tileHeight = Math.round((float)tileWidth * (float)FSkinProp.IMG_HEXAGON_TILE.getHeight() / (float)FSkinProp.IMG_HEXAGON_TILE.getWidth());
-        padding = tileHeight / 2;
+        padding = tileWidth / 2;
     }
 
     public int getWidth() {
-        return tileWidth * 3 / 4 * (gridSize - 1) + tileWidth + 2 * padding;
+        return tileWidth * gridSize + tileWidth / 2 + 2 * padding;
     }
     public int getHeight() {
-        return tileHeight * gridSize + tileHeight / 2 + 2 * padding;
+        return tileHeight * 3 / 4 * (gridSize - 1) + tileHeight + 2 * padding;
     }
 
     public HexagonTile getTileAtPoint(float x, float y) {
@@ -61,28 +61,28 @@ public class ConquestPlaneMap {
         scrollLeft -= padding;
         scrollTop -= padding;
 
-        int dx = tileWidth * 3 / 4;
-        int startQ = getIndexInRange((int)Math.floor((float)(scrollLeft - tileWidth) / (float)dx) + 1);
-        int startR = getIndexInRange((int)Math.floor((float)(scrollTop - tileHeight * 1.5f) / (float)tileHeight) + 1);
-        int endQ = getIndexInRange((int)Math.floor((float)(scrollLeft + visibleWidth - tileWidth) / (float)dx) + 2);
-        int endR = getIndexInRange((int)Math.floor((float)(scrollTop + visibleHeight - tileHeight * 1.5f) / (float)tileHeight) + 2);
+        int dy = tileHeight * 3 / 4;
+        int startQ = getIndexInRange((int)Math.floor((float)(scrollLeft - tileWidth * 1.5f) / (float)tileWidth) + 1);
+        int startR = getIndexInRange((int)Math.floor((float)(scrollTop - tileHeight) / (float)dy) + 1);
+        int endQ = getIndexInRange((int)Math.floor((float)(scrollLeft + visibleWidth - tileWidth * 1.5f) / (float)tileWidth) + 2);
+        int endR = getIndexInRange((int)Math.floor((float)(scrollTop + visibleHeight - tileHeight) / (float)dy) + 2);
 
-        int y;
-        int x = startQ * dx - scrollLeft;
-        int startY = startR * tileHeight - scrollTop;
-        for (int q = startQ; q <= endQ; q++) {
-            y = startY;
-            if (q % 2 == 1) {
-                y += tileHeight / 2; //odd columns start lower
+        int x;
+        int y = startR * dy - scrollTop;
+        int startX = startQ * tileWidth - scrollLeft;
+        for (int r = startR; r <= endR; r++) {
+            x = startX;
+            if (r % 2 == 1) {
+                x += tileWidth / 2; //odd columns start lower
             }
-            for (int r = startR; r <= endR; r++) {
+            for (int q = startQ; q <= endQ; q++) {
                 HexagonTile tile = grid[q][r];
                 if (tile != null) {
                     renderer.draw(tile, x, y, tileWidth, tileHeight);
                 }
-                y += tileHeight;
+                x += tileWidth;
             }
-            x += dx;
+            y += dy;
         }
     }
 
@@ -109,15 +109,15 @@ public class ConquestPlaneMap {
         double regionAngle = 2 * Math.PI / regionCount;
 
         //these assume a tile width of 2, radius of 1
-        double centerX = 1.5 * center;
-        double centerY = sqrt3 * (center + 0.5f * (center & 1));
-        double maxDist = (centerX + centerY) / 2;
+        double centerY = 1.5 * center;
+        double centerX = sqrt3 * (center + 0.5f * (center & 1));
+        double maxDist = (centerY + centerX) / 2;
 
         //create a circular map, divided into regions
-        for (int q = 0; q < gridSize; q++) {
-            for (int r = 0; r < gridSize; r++) {
-                double x = 1.5 * q;
-                double y = sqrt3 * (r + 0.5f * (q & 1));
+        for (int r = 0; r < gridSize; r++) {
+            for (int q = 0; q < gridSize; q++) {
+                double x = sqrt3 * (q + 0.5f * (r & 1));
+                double y = 1.5 * r;
                 double dx = x - centerX;
                 double dy = y - centerY;
                 double dist = Math.sqrt(dx * dx + dy * dy);
@@ -170,6 +170,34 @@ public class ConquestPlaneMap {
 
         public int getColorIndex() {
             return colorIndex;
+        }
+
+        public float getImageRotation() {
+            return 0;
+        }
+
+        public boolean flipImageX() {
+            /*if (q % 2 == 1) {
+                if (q % 4 == 1) {
+                    return r % 2 == 1;
+                }
+                return r % 2 == 0;
+            }*/
+            return false;
+        }
+
+        public boolean flipImageY() {
+            /*if (q % 2 == 0) {
+                if (q % 4 == 0) {
+                    return r % 2 == 1;
+                }
+                return r % 2 == 0;
+            }
+            if (q % 4 == 1) {
+                return r % 2 == 1;
+            }
+            return r % 2 == 0;*/
+            return false;
         }
 
         public List<HexagonTile> getNeighbors() {

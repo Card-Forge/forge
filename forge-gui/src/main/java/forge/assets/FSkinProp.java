@@ -242,12 +242,13 @@ public enum FSkinProp {
     IMG_TROPHY_SHELF      (new int[] {0, 223, 798, 257}, PropType.TROPHY),
 
     //planar conquest images
-    IMG_HEXAGON_TILE      (new int[] {0, 0, 220, 192}, PropType.PLANAR_CONQUEST),
-    IMG_WHITE_TILE        (new int[] {0, 192, 80, 70}, PropType.PLANAR_CONQUEST),
-    IMG_BLUE_TILE         (new int[] {80, 192, 80, 70}, PropType.PLANAR_CONQUEST),
-    IMG_BLACK_TILE        (new int[] {160, 192, 80, 70}, PropType.PLANAR_CONQUEST),
-    IMG_RED_TILE          (new int[] {240, 192, 80, 70}, PropType.PLANAR_CONQUEST),
-    IMG_GREEN_TILE        (new int[] {320, 192, 80, 70}, PropType.PLANAR_CONQUEST),
+    IMG_HEXAGON_TILE      (new int[] {354, 0, 151, 173}, PropType.PLANAR_CONQUEST),
+    IMG_COLORLESS_TILE    (new int[] {0, 354, 151, 173}, PropType.PLANAR_CONQUEST),
+    IMG_WHITE_TILE        (new int[] {0, 0, 151, 173}, PropType.PLANAR_CONQUEST),
+    IMG_BLUE_TILE         (new int[] {89, 177, 151, 173}, PropType.PLANAR_CONQUEST),
+    IMG_BLACK_TILE        (new int[] {177, 0, 151, 173}, PropType.PLANAR_CONQUEST),
+    IMG_RED_TILE          (new int[] {266, 177, 151, 173}, PropType.PLANAR_CONQUEST),
+    IMG_GREEN_TILE        (new int[] {177, 354, 151, 173}, PropType.PLANAR_CONQUEST),
 
     //button images
     IMG_BTN_START_UP        (new int[] {480, 200, 160, 80}, PropType.ICON),

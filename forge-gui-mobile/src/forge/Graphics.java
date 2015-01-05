@@ -560,6 +560,12 @@ public class Graphics {
         batch.draw(image, adjustX(x), adjustY(y, h), w, h, 0, 0, image.getWidth(), image.getHeight(), false, true);
     }
 
+    public void drawImageWithTransforms(TextureRegion image, float x, float y, float w, float h, float rotation, boolean flipX, boolean flipY) {
+        float originX = x + w / 2;
+        float originY = y + h / 2;
+        batch.draw(image.getTexture(), adjustX(x), adjustY(y, h), originX - x, h - (originY - y), w, h, 1, 1, rotation, image.getRegionX(), image.getRegionY(), image.getRegionWidth(), image.getRegionHeight(), flipX, flipY);
+    }
+
     public void setProjectionMatrix(Matrix4 matrix) {
         batch.setProjectionMatrix(matrix);
         shapeRenderer.setProjectionMatrix(matrix);
