@@ -18,6 +18,7 @@
 package forge.limited;
 
 import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.properties.ForgePreferences;
@@ -53,6 +54,9 @@ public class BoosterDraftAI {
 
     // roughly equivalent to 25 ranks in a core set, or 15 ranks in a small set
     private static final double TAKE_BEST_THRESHOLD = 0.1;
+
+    // rank worse than any other card available to draft
+    private static final double RANK_UNPICKABLE = 999.0;
 
     /**
      * <p>
@@ -121,8 +125,8 @@ public class BoosterDraftAI {
 
     /**
      * Sort cards by rank. Note that if pack has cards from different editions,
-     * they could have the same rank. In that (hopefully rare) case, only one
-     * will end up in the Map.
+     * they could have the same rank. Basic lands and unrecognised cards are
+     * rated worse than all other possible picks.
      * 
      * @param chooseFrom
      *            List of cards
@@ -131,13 +135,18 @@ public class BoosterDraftAI {
     private List<Pair<PaperCard, Double>> rankCards(final Iterable<PaperCard> chooseFrom) {
         List<Pair<PaperCard, Double>> rankedCards = new ArrayList<Pair<PaperCard,Double>>();
         for (PaperCard card : chooseFrom) {
-            Double rkg = DraftRankCache.getRanking(card.getName(), card.getEdition());
-            if (rkg != null) {
-                rankedCards.add(MutablePair.of(card, rkg));
+            Double rank;
+            if (MagicColor.Constant.BASIC_LANDS.contains(card.getName())) {
+                rank = RANK_UNPICKABLE;
             } else {
-                System.out.println("Draft Rankings - Card Not Found: " + card.getName());
-                rankedCards.add(MutablePair.of(card, 999.0));
+                rank = DraftRankCache.getRanking(card.getName(), card.getEdition());
+                if (rank == null) {
+                    System.out.println("Draft Rankings - Card Not Found: " + card.getName());
+                    rank = RANK_UNPICKABLE;
+                }
             }
+
+            rankedCards.add(MutablePair.of(card, rank));
         }
         return rankedCards;
     }
