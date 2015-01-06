@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Imperial Guard 2
+Title=Imperial Guard
+Difficulty=medium
+Description=Mono W Human deck
+Icon=Imperial Guard.jpg
+Deck Type=constructed
+[main]
+20 Plains
+1 Cavern of Souls
+4 Champion of the Parish
+4 Riders of Gavony
+1 Bladed Bracers
+1 Butcher's Cleaver
+1 Heavy Mattock
+1 Sharpened Pitchfork
+1 Silver-Inlaid Dagger
+1 Avacyn's Collar
+1 Door of Destinies
+1 Accorder Paladin
+1 Alaborn Grenadier
+1 Araba Mothrider
+1 Archetype of Courage
+1 Azorius Arrester
+1 Beloved Chaplain
+1 Benalish Cavalry
+1 Court Street Denizen
+1 Crusader of Odric
+1 Elite Inquisitor
+1 Fiend Hunter
+1 Grand Abolisher
+1 Imposing Sovereign
+1 Intrepid Hero
+1 Knight of the White Orchid
+1 Longbow Archer
+1 Mentor of the Meek
+1 Ranger of Eos
+1 Silverblade Paladin
+1 Soldier of the Pantheon
+1 Unruly Mob
+1 Syndic of Tithes
+1 Thraben Doomsayer
+1 True Believer
+1 Veteran Armorer
+1 War Priest of Thune
+[sideboard]
