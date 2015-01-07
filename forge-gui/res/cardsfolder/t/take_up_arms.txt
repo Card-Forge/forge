@@ -1,6 +1,6 @@
 Name:Take Up Arms
 ManaCost:4 W
 Types:Instant
-A:SP$ Token | Cost$ 4 W | TokenAmount$ 3 | TokenName$ Warrior | TokenTypes$ Creature,Warrior | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ w 1 1 warrior | SpellDescription$ Put three 1/1 white Warrior creature tokens onto the battlefield.
+A:SP$ Token | Cost$ 4 W | TokenAmount$ 3 | TokenName$ Warrior | TokenTypes$ Creature,Warrior | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenAltImages$ w_1_1_warrior2 | SpellDescription$ Put three 1/1 white Warrior creature tokens onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/take_up_arms.jpg
 Oracle:Put three 1/1 white Warrior creature tokens onto the battlefield.
