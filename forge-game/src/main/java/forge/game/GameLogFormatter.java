@@ -34,6 +34,23 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     }
 
     @Override
+    public GameLogEntry visit(GameEventScry ev) {
+        String scryOutcome = "";
+        String toTop = String.format("%s to the top of the library", Lang.nounWithAmount(ev.toTop, "card"));
+        String toBottom = String.format("%s to the bottom of the library", Lang.nounWithAmount(ev.toBottom, "card"));
+
+        if (ev.toTop > 0 && ev.toBottom > 0) {
+            scryOutcome = String.format("%s scried %s and %s.", ev.player, toTop, toBottom);
+        } else if (ev.toBottom == 0) {
+            scryOutcome = String.format("%s scried %s.", ev.player, toTop);
+        } else {
+            scryOutcome = String.format("%s scried %s.", ev.player, toBottom);
+        }
+
+        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, scryOutcome);
+    }
+    
+    @Override
     public GameLogEntry visit(GameEventSpellResolved ev) {
         String messageForLog = ev.hasFizzled ? ev.spell.getHostCard().getName() + " ability fizzles." : ev.spell.getStackDescription();
         return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, messageForLog);

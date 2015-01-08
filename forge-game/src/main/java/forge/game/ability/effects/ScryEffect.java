@@ -4,6 +4,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.event.GameEventScry;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -69,9 +70,13 @@ public class ScryEffect extends SpellAbilityEffect {
         final CardCollection toTop = lists.getLeft();
         final CardCollection toBottom = lists.getRight();
 
+        int numToBottom = 0;
+        int numToTop = 0;
+        
         if (toBottom != null) {
             for(Card c : toBottom) {
                 p.getGame().getAction().moveToBottomOfLibrary(c);
+                numToBottom++;
             }
         }
 
@@ -79,10 +84,15 @@ public class ScryEffect extends SpellAbilityEffect {
             Collections.reverse(toTop); // the last card in list will become topmost in library, have to revert thus.
             for(Card c : toTop) {
                 p.getGame().getAction().moveToLibrary(c);
+                numToTop++;
             }
         }
+
+        p.getGame().fireEvent(new GameEventScry(p, numToTop, numToBottom));
+
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Player", p);
+
         p.getGame().getTriggerHandler().runTrigger(TriggerType.Scry, runParams, false);
     }
 }
