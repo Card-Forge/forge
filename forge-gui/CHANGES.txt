@@ -48,6 +48,14 @@ Temporal Trespass
 Ugin, the Spirit Dragon
 Valorous Stance
 Wandering Champion
+Herald of Anafenza
+Mardu Charm
+Mardu Hordechief
+Take Up Arms
+Wingmate Roc
+Cunning Strike
+Harsh Sustenance
+War Flare
 
 
 ------------
