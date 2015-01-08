@@ -1351,6 +1351,10 @@ Allow tapping all lands in a stack using Shift+click on any land in the stack.
 Allow attacking with all tokens in a stack using Shift+click on any token in the stack.
 
 
+- Add Shift+click support for Mana Pool icons -
+You can now hold the Shift key when clicking on mana pool icons to use as much of that mana type as possible towards the cost.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 
