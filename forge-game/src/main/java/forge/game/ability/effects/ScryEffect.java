@@ -92,7 +92,6 @@ public class ScryEffect extends SpellAbilityEffect {
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Player", p);
-
         p.getGame().getTriggerHandler().runTrigger(TriggerType.Scry, runParams, false);
     }
 }
