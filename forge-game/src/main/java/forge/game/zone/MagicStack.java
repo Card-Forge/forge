@@ -544,11 +544,13 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     private final void removeCardFromStack(final SpellAbility sa, final boolean fizzle) {
         Card source = sa.getHostCard();
 
-        if (sa.getHostCard().isCopiedSpell() || sa.isAbility()) {
+        if (source.isCopiedSpell() || sa.isAbility()) {
             // do nothing
         }
-        else if (sa.isBuyBackAbility() && !fizzle) {
+        else if ((source.hasKeyword("Move CARDNAME to your hand as it resolves") || sa.isBuyBackAbility()) && !fizzle) {
             // Handle cards that need to be moved differently
+            // TODO: replacement effects: Rebound, Buyback and Soulfire Grand Master
+            source.removeAllExtrinsicKeyword("Move CARDNAME to your hand as it resolves");
             game.getAction().moveToHand(source);
         }
         else if (sa.isFlashBackAbility()) {
