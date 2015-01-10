@@ -46,7 +46,9 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
         });
 
         // thread irrelevant
-        getController().getInputQueue().removeInput(InputSyncronizedBase.this);
+        if (getController().getInputQueue().getInput() != null) {
+            getController().getInputQueue().removeInput(InputSyncronizedBase.this);
+        }
         cdlDone.countDown();
     }
 
