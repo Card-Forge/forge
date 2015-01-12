@@ -56,6 +56,24 @@ Wingmate Roc
 Cunning Strike
 Harsh Sustenance
 War Flare
+Silumgar, the Drifting Death
+Abzan Kin-Guard
+Crucible of the Spirit Dragon
+Hero's Blade
+Mardu Scout
+Soulfire Grand Master
+Grim Contest
+Abzan Advantage
+Arashin Cleric
+Aven Skirmisher
+Goblin Boom Keg
+Hewed Stone Retainers
+Pilgrim of the Fires
+Scroll of the Masters
+Ugin's Construct
+Atarka, World Render
+Ethereal Ambush
+Ojutai, Soul of Winter
 
 
 ------------
