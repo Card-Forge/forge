@@ -32,6 +32,10 @@ public class FightAi extends SpellAbilityAi {
         if (r.nextFloat() > Math.pow(.6667, sa.getActivationsThisTurn())) {
             return false;
         }
+        if (sa.hasParam("FightWithToughness")) {
+            // TODO: add ailogic
+            return false;
+        }
 
         //assumes the triggered card belongs to the ai
         if (sa.hasParam("Defined")) {

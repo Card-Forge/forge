@@ -38,9 +38,10 @@ public class FightEffect extends SpellAbilityEffect {
                 || !fighters.get(1).isInPlay()) {
             return;
         }
-
-        int dmg2 = fighters.get(1).getNetPower();
-        fighters.get(1).addDamage(fighters.get(0).getNetPower(), fighters.get(0));
+        boolean fightToughness = sa.hasParam("FightWithToughness");
+        final int dmg1 = fightToughness ? fighters.get(0).getNetToughness() : fighters.get(0).getNetPower();
+        final int dmg2 = fightToughness ? fighters.get(1).getNetToughness() : fighters.get(1).getNetPower();
+        fighters.get(1).addDamage(dmg1, fighters.get(0));
         fighters.get(0).addDamage(dmg2, fighters.get(1));
     }
 
