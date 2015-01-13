@@ -230,13 +230,21 @@ public enum CardZoomer {
 
     private BufferedImage getImageXlhq() {
         String key = MatchUtil.getCardImageKey(getState());
+        if (key.isEmpty() || key.length() < 3) {
+            return null;
+        }
 
-        if (key.indexOf(ImageKeys.CARD_PREFIX) != 0) {
+        String prefix = key.substring(0, 2);
+
+        if (!prefix.equals(ImageKeys.CARD_PREFIX) && !prefix.equals(ImageKeys.TOKEN_PREFIX)) {
             return null;
         }
 
         boolean altState = key.endsWith(ImageKeys.BACKFACE_POSTFIX);
-        String imageKey = ImageUtil.getImageKey(ImageUtil.getPaperCardFromImageKey(key.substring(2)), altState, true);
+        String imageKey = key;
+        if (prefix.equals(ImageKeys.CARD_PREFIX)) {
+            imageKey = ImageUtil.getImageKey(ImageUtil.getPaperCardFromImageKey(key.substring(2)), altState, true);
+        }
         if(altState) {
             imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
             imageKey += "full.jpg";
@@ -246,7 +254,13 @@ public enum CardZoomer {
 
         if (file != null) {
             Path path = file.toPath();
-            String modPath = path.getRoot().toString() + path.subpath(0, path.getNameCount()-2).toString() + File.separator + "XLHQ" + File.separator + path.subpath(path.getNameCount()-2, path.getNameCount());
+            String modPath = "";
+            if (prefix.equals(ImageKeys.CARD_PREFIX)) {
+                modPath = path.getRoot().toString() + path.subpath(0, path.getNameCount()-2).toString() + File.separator + "XLHQ" + File.separator + path.subpath(path.getNameCount()-2, path.getNameCount());
+            } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
+                modPath = path.getRoot().toString() + path.subpath(0, path.getNameCount()-1).toString() + File.separator + "XLHQ" + File.separator + path.subpath(path.getNameCount()-1, path.getNameCount());
+            }
+
             File xlhqFile = new File(modPath.replace(".full.jpg", ".xlhq.jpg"));
 
             if (xlhqFile != null && xlhqFile.exists()) {
