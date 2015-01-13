@@ -23,12 +23,18 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 
 import forge.ImageCache;
+import forge.ImageKeys;
 import forge.game.card.CardView.CardStateView;
 import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.toolbox.CardFaceSymbols;
 import forge.toolbox.FSkin.SkinIcon;
+import forge.util.ImageUtil;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import javax.imageio.ImageIO;
 
 /**
  * Common image-related routines specific to Forge images. 
@@ -57,10 +63,62 @@ public final class FImageUtil {
         return image;
     }
 
+    public static BufferedImage getImageXlhq(final CardStateView state) {
+        String key = MatchUtil.getCardImageKey(state);
+        if (key.isEmpty() || key.length() < 3) {
+            return null;
+        }
+
+        String prefix = key.substring(0, 2);
+
+        if (!prefix.equals(ImageKeys.CARD_PREFIX) && !prefix.equals(ImageKeys.TOKEN_PREFIX)) {
+            return null;
+        }
+
+        boolean altState = key.endsWith(ImageKeys.BACKFACE_POSTFIX);
+        String imageKey = key;
+        if (prefix.equals(ImageKeys.CARD_PREFIX)) {
+            imageKey = ImageUtil.getImageKey(ImageUtil.getPaperCardFromImageKey(key.substring(2)), altState, true);
+        }
+        if(altState) {
+            imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
+            imageKey += "full.jpg";
+        }
+
+        File file = ImageKeys.getImageFile(imageKey);
+        BufferedImage img = null;
+
+        if (file != null) {
+            Path path = file.toPath();
+            String modPath = "";
+            if (prefix.equals(ImageKeys.CARD_PREFIX)) {
+                modPath = path.getRoot().toString() + path.subpath(0, path.getNameCount()-2).toString() + File.separator + "XLHQ" + File.separator + path.subpath(path.getNameCount()-2, path.getNameCount());
+            } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
+                modPath = path.getRoot().toString() + path.subpath(0, path.getNameCount()-1).toString() + File.separator + "XLHQ" + File.separator + path.subpath(path.getNameCount()-1, path.getNameCount());
+            }
+
+            File xlhqFile = new File(modPath.replace(".full.jpg", ".xlhq.jpg"));
+
+            if (xlhqFile != null && xlhqFile.exists()) {
+                try {
+                    img = ImageIO.read(xlhqFile);
+                    final int foilIndex = state.getFoilIndex();
+                    if (img != null && foilIndex > 0) {
+                        img = FImageUtil.getImageWithFoilEffect(img, foilIndex);
+                    }
+                    return img;
+                } catch (IOException ex) {
+                    System.err.println("IO exception caught when trying to open a XLHQ image: " + xlhqFile.getName());
+                }
+            }
+        }
+
+        return null;
+    }
     /**
      * Applies a foil effect to a card image.
      */
-    public static BufferedImage getImageWithFoilEffect(BufferedImage plainImage, int foilIndex) {
+    private static BufferedImage getImageWithFoilEffect(BufferedImage plainImage, int foilIndex) {
         if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_OVERLAY_FOIL_EFFECT)) {
             return plainImage;
         }

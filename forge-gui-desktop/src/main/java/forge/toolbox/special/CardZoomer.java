@@ -27,19 +27,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import javax.imageio.ImageIO;
 
 import net.miginfocom.swing.MigLayout;
 import forge.assets.FSkinProp;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.gui.SOverlayUtils;
-import forge.ImageKeys;
 import forge.match.MatchUtil;
 import forge.toolbox.FOverlay;
 import forge.toolbox.FSkin;
@@ -47,7 +42,6 @@ import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.imaging.FImagePanel;
 import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
-import forge.util.ImageUtil;
 
 /** 
  * Displays card image at its original size and correct orientation.
@@ -219,7 +213,7 @@ public enum CardZoomer {
     private void setImage() {
         imagePanel = new FImagePanel();
 
-        BufferedImage xlhqImage = getImageXlhq();
+        BufferedImage xlhqImage = FImageUtil.getImageXlhq(getState());
         imagePanel.setImage(xlhqImage == null ? FImageUtil.getImage(getState()) : xlhqImage, getInitialRotation(), AutoSizeImageMode.SOURCE);
 
         pnlMain.removeAll();
@@ -228,59 +222,6 @@ public enum CardZoomer {
         setFlipIndicator();
     }
 
-    private BufferedImage getImageXlhq() {
-        String key = MatchUtil.getCardImageKey(getState());
-        if (key.isEmpty() || key.length() < 3) {
-            return null;
-        }
-
-        String prefix = key.substring(0, 2);
-
-        if (!prefix.equals(ImageKeys.CARD_PREFIX) && !prefix.equals(ImageKeys.TOKEN_PREFIX)) {
-            return null;
-        }
-
-        boolean altState = key.endsWith(ImageKeys.BACKFACE_POSTFIX);
-        String imageKey = key;
-        if (prefix.equals(ImageKeys.CARD_PREFIX)) {
-            imageKey = ImageUtil.getImageKey(ImageUtil.getPaperCardFromImageKey(key.substring(2)), altState, true);
-        }
-        if(altState) {
-            imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
-            imageKey += "full.jpg";
-        }
-
-        File file = ImageKeys.getImageFile(imageKey);
-        BufferedImage img = null;
-
-        if (file != null) {
-            Path path = file.toPath();
-            String modPath = "";
-            if (prefix.equals(ImageKeys.CARD_PREFIX)) {
-                modPath = path.getRoot().toString() + path.subpath(0, path.getNameCount()-2).toString() + File.separator + "XLHQ" + File.separator + path.subpath(path.getNameCount()-2, path.getNameCount());
-            } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
-                modPath = path.getRoot().toString() + path.subpath(0, path.getNameCount()-1).toString() + File.separator + "XLHQ" + File.separator + path.subpath(path.getNameCount()-1, path.getNameCount());
-            }
-
-            File xlhqFile = new File(modPath.replace(".full.jpg", ".xlhq.jpg"));
-
-            if (xlhqFile != null && xlhqFile.exists()) {
-                try {
-                    img = ImageIO.read(xlhqFile);
-                    final int foilIndex = thisCard.getCurrentState().getFoilIndex();
-                    if (img != null && foilIndex > 0) {
-                        img = FImageUtil.getImageWithFoilEffect(img, foilIndex);
-                    }
-                    return img;
-                } catch (IOException ex) {
-                    System.err.println("IO exception caught when trying to open a XLHQ image: " + xlhqFile.getName());
-                }
-            }
-        }
-
-        return null;
-    }
-    
     private int getInitialRotation() {
         return (thisCard.isSplitCard() || thisCard.getCurrentState().getType().isPlane() || thisCard.getCurrentState().getType().isPhenomenon() ? 90 : 0);
     }   
