@@ -1114,7 +1114,7 @@ public class FSkin {
             if (preferredName.isEmpty()) { loadLight("default", onInit); }
         }
 
-        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Processing image sprites: ", 6);
+        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Processing image sprites: ", 7);
 
         // Grab and test various sprite files.
         final String defaultDir = ForgeConstants.DEFAULT_SKINS_DIR;
