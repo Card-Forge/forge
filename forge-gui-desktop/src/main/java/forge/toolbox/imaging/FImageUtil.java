@@ -60,7 +60,7 @@ public final class FImageUtil {
     /**
      * Applies a foil effect to a card image.
      */
-    private static BufferedImage getImageWithFoilEffect(BufferedImage plainImage, int foilIndex) {
+    public static BufferedImage getImageWithFoilEffect(BufferedImage plainImage, int foilIndex) {
         if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_OVERLAY_FOIL_EFFECT)) {
             return plainImage;
         }

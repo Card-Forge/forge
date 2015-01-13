@@ -251,6 +251,7 @@ public enum CardZoomer {
         }
 
         File file = ImageKeys.getImageFile(imageKey);
+        BufferedImage img = null;
 
         if (file != null) {
             Path path = file.toPath();
@@ -265,7 +266,12 @@ public enum CardZoomer {
 
             if (xlhqFile != null && xlhqFile.exists()) {
                 try {
-                    return ImageIO.read(xlhqFile);
+                    img = ImageIO.read(xlhqFile);
+                    final int foilIndex = thisCard.getCurrentState().getFoilIndex();
+                    if (img != null && foilIndex > 0) {
+                        img = FImageUtil.getImageWithFoilEffect(img, foilIndex);
+                    }
+                    return img;
                 } catch (IOException ex) {
                     System.err.println("IO exception caught when trying to open a XLHQ image: " + xlhqFile.getName());
                 }
