@@ -18,6 +18,7 @@
 
 package forge.toolbox.special;
 
+import forge.ImageKeys;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -42,6 +43,12 @@ import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.imaging.FImagePanel;
 import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
+import forge.util.ImageUtil;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import javax.imageio.ImageIO;
 
 /** 
  * Displays card image at its original size and correct orientation.
@@ -212,15 +219,51 @@ public enum CardZoomer {
      */
     private void setImage() {
         imagePanel = new FImagePanel();
-        imagePanel.setImage(FImageUtil.getImage(getState()), getInitialRotation(), AutoSizeImageMode.SOURCE);
+
+        BufferedImage xlhqImage = getImageXlhq();
+        imagePanel.setImage(xlhqImage == null ? FImageUtil.getImage(getState()) : xlhqImage, getInitialRotation(), AutoSizeImageMode.SOURCE);
+
         pnlMain.removeAll();
         pnlMain.add(imagePanel, "w 80%!, h 80%!");
         pnlMain.validate();
         setFlipIndicator();
     }
 
+    private BufferedImage getImageXlhq() {
+        String key = MatchUtil.getCardImageKey(getState());
+
+        if (key.indexOf(ImageKeys.CARD_PREFIX) != 0) {
+            return null;
+        }
+
+        boolean altState = key.endsWith(ImageKeys.BACKFACE_POSTFIX);
+        String imageKey = ImageUtil.getImageKey(ImageUtil.getPaperCardFromImageKey(key.substring(2)), altState, true);
+        if(altState) {
+            imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
+            imageKey += "full.jpg";
+        }
+
+        File file = ImageKeys.getImageFile(imageKey);
+
+        if (file != null) {
+            Path path = file.toPath();
+            String modPath = path.getRoot().toString() + path.subpath(0, path.getNameCount()-2).toString() + File.separator + "XLHQ" + File.separator + path.subpath(path.getNameCount()-2, path.getNameCount());
+            File xlhqFile = new File(modPath.replace(".full.jpg", ".xlhq.jpg"));
+
+            if (xlhqFile != null && xlhqFile.exists()) {
+                try {
+                    return ImageIO.read(xlhqFile);
+                } catch (IOException ex) {
+                    System.err.println("IO exception caught when trying to open a XLHQ image: " + xlhqFile.getName());
+                }
+            }
+        }
+
+        return null;
+    }
+    
     private int getInitialRotation() {
-        return (thisCard.isSplitCard() ? 90 : 0);
+        return (thisCard.isSplitCard() || thisCard.getCurrentState().getType().isPlane() || thisCard.getCurrentState().getType().isPhenomenon() ? 90 : 0);
     }   
 
     private void setLayout() {
