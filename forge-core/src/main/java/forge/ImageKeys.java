@@ -95,10 +95,6 @@ public class ImageKeys {
     }
 
     public static File getImageFile(String key) {
-        return getImageFile(key, false);
-    }
-
-    public static File getImageFile(String key, boolean quiet) {
         if (StringUtils.isEmpty(key)) {
             return null;
         }
@@ -161,9 +157,7 @@ public class ImageKeys {
             }
         }
 
-        if (!quiet) {
-            System.out.println("File not found, no image created: " + key);
-        }
+        System.out.println("File not found, no image created: " + key);
 
         return null;
     }

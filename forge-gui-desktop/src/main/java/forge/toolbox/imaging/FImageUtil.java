@@ -85,7 +85,7 @@ public final class FImageUtil {
             imageKey += "full.jpg";
         }
 
-        File file = ImageKeys.getImageFile(imageKey, true);
+        File file = ImageKeys.getImageFile(imageKey);
         BufferedImage img = null;
 
         if (file != null) {
