@@ -1116,11 +1116,16 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (fetchList.isEmpty()) {
             return null;
         }
-        if (sa.hasParam("AILogic") && sa.getParam("AILogic").equals("NeverBounceItself")) {
-            Card source = sa.getHostCard();
-            if (fetchList.contains(source)) {
-                // For cards that should never be bounced back to hand with their own [e.g. triggered] abilities, such as guild lands.
-                fetchList.remove(source);
+        if (sa.hasParam("AILogic")) {
+            String logic = sa.getParam("AILogic");
+            if ("NeverBounceItself".equals(logic)) {
+                Card source = sa.getHostCard();
+                if (fetchList.contains(source)) {
+                    // For cards that should never be bounced back to hand with their own [e.g. triggered] abilities, such as guild lands.
+                    fetchList.remove(source);
+                }
+            } else if ("WorstCard".equals(logic)) {
+                return ComputerUtilCard.getWorstAI(fetchList);
             }
         }
         if (fetchList.isEmpty()) {
