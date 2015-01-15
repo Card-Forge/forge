@@ -300,6 +300,7 @@ public class CombatUtil {
         otherAttackers.remove(c);
         runParams.put("OtherAttackers", otherAttackers);
         runParams.put("Attacked", combat.getDefenderByAttacker(c));
+        runParams.put("DefendingPlayer", combat.getDefenderPlayerByAttacker(c));
         game.getTriggerHandler().runTrigger(TriggerType.Attacks, runParams, false);
 
         // Annihilator: can be copied by Strionic Resonator now
