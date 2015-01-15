@@ -192,7 +192,14 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         copyInPlay.setTapped(true);
                     }
                     if (sa.hasParam("CopyAttacking") && game.getPhaseHandler().inCombat()) {
-                        final GameEntity defender = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("CopyAttacking"), sa).get(0);
+                        final String attacked = sa.getParam("CopyAttacking");
+                        GameEntity defender;
+                        if ("True".equals(attacked)) {
+                            FCollectionView<GameEntity> defs = game.getCombat().getDefenders();
+                            defender = c.getController().getController().chooseSingleEntityForEffect(defs, sa, "Choose which defender to attack with " + c, false);
+                        } else {
+                            defender = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("CopyAttacking"), sa).get(0);
+                        }
                         game.getCombat().addAttacker(copyInPlay, defender);
                         game.fireEvent(new GameEventCombatChanged());
                     }
