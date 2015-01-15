@@ -94,7 +94,9 @@ public class TriggerAttacks extends Trigger {
         }
 
         if (this.mapParams.containsKey("DefendingPlayerPoisoned")) {
-        	if (((Player) runParams2.get("Attacked")).getPoisonCounters() == 0) {
+            Card attacker = (Card) runParams2.get("Attacker");
+            Player defendingPlayer = attacker.getGame().getCombat().getDefenderPlayerByAttacker(attacker);
+        	if (defendingPlayer.getPoisonCounters() == 0) {
         		return false;
         	}
         }
