@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.card.CardStateName;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
+import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -276,7 +277,7 @@ public class ManaCostAdjustment {
                 return;
             }
             boolean targetValid = false;
-            for (Card target : sa.getTargets().getTargetCards()) {
+            for (GameObject target : sa.getTargets().getTargets()) {
                 if (target.isValid(params.get("ValidTarget").split(","), hostCard.getController(), hostCard)) {
                     targetValid = true;
                 }
