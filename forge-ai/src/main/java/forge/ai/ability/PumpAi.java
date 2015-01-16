@@ -196,6 +196,69 @@ public class PumpAi extends PumpAiBase {
         return true;
     } // pumpPlayAI()
 
+    private boolean fightAI(final Player ai, final SpellAbility sa, final int defense, final int attack) {
+        final Card source = sa.getHostCard();
+        final AbilitySub tgtFight = sa.getSubAbility();
+        CardCollection aiCreatures = ai.getCreaturesInPlay();
+        aiCreatures = CardLists.getTargetableCards(aiCreatures, sa);
+        aiCreatures =  ComputerUtil.getSafeTargets(ai, sa, aiCreatures);
+        ComputerUtilCard.sortByEvaluateCreature(aiCreatures);
+        //sort is suboptimal due to conflicting needs depending on game state:
+        //  -deathtouch for deal damage
+        //  -max power for damage to player
+        //  -survivability for generic "fight"
+        //  -no support for "heroic"
+
+        CardCollection humCreatures = ai.getOpponent().getCreaturesInPlay();
+        humCreatures = CardLists.getTargetableCards(humCreatures, tgtFight);
+        ComputerUtilCard.sortByEvaluateCreature(humCreatures);
+        if (humCreatures.isEmpty() || aiCreatures.isEmpty()) {
+            return false;
+        }
+        int buffedAtk = attack, buffedDef = defense;
+        if (source.getName().equals("Savage Punch") && !ai.hasFerocious()) {
+            buffedAtk = 0;
+            buffedDef = 0;
+        }
+        for (Card humanCreature : humCreatures) {
+            for (Card aiCreature : aiCreatures) {
+                if (sa.isSpell()) {   //heroic triggers adding counters
+                    for (Trigger t : aiCreature.getTriggers()) {
+                        if (t.getMode() == TriggerType.SpellCast) {
+                            final Map<String, String> params = t.getMapParams();
+                            if ("Card.Self".equals(params.get("TargetsValid")) && "You".equals(params.get("ValidActivatingPlayer")) 
+                                    && params.containsKey("Execute")) {
+                                SpellAbility heroic = AbilityFactory.getAbility(aiCreature.getSVar(params.get("Execute")),aiCreature);
+                                if ("Self".equals(heroic.getParam("Defined")) && "P1P1".equals(heroic.getParam("CounterType"))) {
+                                    int amount = AbilityUtils.calculateAmount(aiCreature, heroic.getParam("CounterNum"), heroic);
+                                    buffedAtk += amount;
+                                    buffedDef += amount;
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (sa.getParam("AILogic").equals("PowerDmg")) {
+                    if (FightAi.canKill(aiCreature, humanCreature, buffedAtk)) {
+                        sa.getTargets().add(aiCreature);
+                        tgtFight.resetTargets();
+                        tgtFight.getTargets().add(humanCreature);
+                        return true;
+                    }
+                } else {
+                    if (FightAi.shouldFight(aiCreature, humanCreature, buffedAtk, buffedDef)) {
+                        sa.getTargets().add(aiCreature);
+                        tgtFight.resetTargets();
+                        tgtFight.getTargets().add(humanCreature);
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
     private boolean pumpTgtAI(final Player ai, final SpellAbility sa, final int defense, final int attack, final boolean mandatory) {
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
         final Game game = ai.getGame();
@@ -233,65 +296,7 @@ public class PumpAi extends PumpAiBase {
                 }
             }
             if (sa.getParam("AILogic").equals("Fight") || sa.getParam("AILogic").equals("PowerDmg")) {
-                final AbilitySub tgtFight = sa.getSubAbility();
-                CardCollection aiCreatures = ai.getCreaturesInPlay();
-                aiCreatures = CardLists.getTargetableCards(aiCreatures, sa);
-                aiCreatures =  ComputerUtil.getSafeTargets(ai, sa, aiCreatures);
-                ComputerUtilCard.sortByEvaluateCreature(aiCreatures);
-                //sort is suboptimal due to conflicting needs depending on game state:
-                //  -deathtouch for deal damage
-                //  -max power for damage to player
-                //  -survivability for generic "fight"
-                //  -no support for "heroic"
-
-                CardCollection humCreatures = ai.getOpponent().getCreaturesInPlay();
-                humCreatures = CardLists.getTargetableCards(humCreatures, tgtFight);
-                ComputerUtilCard.sortByEvaluateCreature(humCreatures);
-                if (humCreatures.isEmpty() || aiCreatures.isEmpty()) {
-                    return false;
-                }
-                int buffedAtk = attack, buffedDef = defense;
-                if (source.getName().equals("Savage Punch") && !ai.hasFerocious()) {
-                    buffedAtk = 0;
-                    buffedDef = 0;
-                }
-                for (Card humanCreature : humCreatures) {
-                    for (Card aiCreature : aiCreatures) {
-                        if (sa.isSpell()) {   //heroic triggers adding counters
-                            for (Trigger t : aiCreature.getTriggers()) {
-                                if (t.getMode() == TriggerType.SpellCast) {
-                                    final Map<String, String> params = t.getMapParams();
-                                    if ("Card.Self".equals(params.get("TargetsValid")) && "You".equals(params.get("ValidActivatingPlayer")) 
-                                            && params.containsKey("Execute")) {
-                                        SpellAbility heroic = AbilityFactory.getAbility(aiCreature.getSVar(params.get("Execute")),aiCreature);
-                                        if ("Self".equals(heroic.getParam("Defined")) && "P1P1".equals(heroic.getParam("CounterType"))) {
-                                            int amount = AbilityUtils.calculateAmount(aiCreature, heroic.getParam("CounterNum"), heroic);
-                                            buffedAtk += amount;
-                                            buffedDef += amount;
-                                        }
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                        if (sa.getParam("AILogic").equals("PowerDmg")) {
-                            if (FightAi.canKill(aiCreature, humanCreature, buffedAtk)) {
-                                sa.getTargets().add(aiCreature);
-                                tgtFight.resetTargets();
-                                tgtFight.getTargets().add(humanCreature);
-                                return true;
-                            }
-                        } else {
-                            if (FightAi.shouldFight(aiCreature, humanCreature, buffedAtk, buffedDef)) {
-                                sa.getTargets().add(aiCreature);
-                                tgtFight.resetTargets();
-                                tgtFight.getTargets().add(humanCreature);
-                                return true;
-                            }
-                        }
-                    }
-                }
-                return false;
+                return fightAI(ai, sa, defense, attack);
             }
         }
 
