@@ -253,7 +253,7 @@ public class PlayerView extends GameEntityView {
     void updateZone(PlayerZone zone) {
         TrackableProperty prop = getZoneProp(zone.getZoneType());
         if (prop == null) { return; }
-        set(prop, CardView.getCollection(zone.getCards()));
+        set(prop, CardView.getCollection(zone.getCards(false)));
 
         //update flashback zone when graveyard, library, or exile zones updated
         switch (zone.getZoneType()) {

@@ -110,7 +110,6 @@ public class PlayerZoneBattlefield extends PlayerZone {
             for (Card c : cards) {
                 if (!c.isPhasedOut()) {
                     filteredCollection.add(c);
-                    break;
                 }
             }
             cards = filteredCollection;
