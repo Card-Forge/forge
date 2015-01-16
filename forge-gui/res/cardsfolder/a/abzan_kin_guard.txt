@@ -6,3 +6,4 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Lifelink | CheckSVar$ X |
 SVar:X:Count$Valid Permanent.White+YouCtrl,Permanent.Black+YouCtrl
 SVar:BuffedBy:Permanent.White,Permanent.Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abzan_kin_guard.jpg
+Oracle:Abzan Kin-Guard has lifelink as long as you control a white or black permanent.

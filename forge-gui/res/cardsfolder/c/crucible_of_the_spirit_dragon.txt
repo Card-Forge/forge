@@ -7,3 +7,4 @@ A:AB$ Mana | Cost$ T SubCounter<X/STORAGE> | Produced$ Combo W U B R G | Amount$
 SVar:X:XChoice
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crucible_of_the_spirit_dragon.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{1}, {T}: Put a storage counter on Crucible of the Spirit Dragon.\n{T}, Remove X storage counters from Crucible of the Spirit Dragon: Add X mana in any combination of colors to your mana pool. Spend this mana only to cast Dragon spells or activate abilities of Dragons.

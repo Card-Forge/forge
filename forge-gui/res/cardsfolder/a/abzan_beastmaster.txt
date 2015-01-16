@@ -7,3 +7,4 @@ SVar:TrigToughDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1 | ConditionPr
 SVar:YourTough:Count$GreatestToughness_Creature.YouCtrl
 SVar:OppsTough:Count$GreatestToughness_Creature.YouDontCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/triumph_of_ferocity.jpg
+Oracle:At the beginning of your upkeep, draw a card if you control the creature with the greatest toughness or tied for the greatest toughness.
