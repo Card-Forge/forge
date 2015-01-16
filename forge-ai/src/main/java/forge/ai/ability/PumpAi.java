@@ -233,7 +233,7 @@ public class PumpAi extends PumpAiBase {
                 }
             }
             if (sa.getParam("AILogic").equals("Fight") || sa.getParam("AILogic").equals("PowerDmg")) {
-            	final AbilitySub tgtFight = sa.getSubAbility();
+                final AbilitySub tgtFight = sa.getSubAbility();
                 CardCollection aiCreatures = ai.getCreaturesInPlay();
                 aiCreatures = CardLists.getTargetableCards(aiCreatures, sa);
                 aiCreatures =  ComputerUtil.getSafeTargets(ai, sa, aiCreatures);
@@ -248,7 +248,7 @@ public class PumpAi extends PumpAiBase {
                 humCreatures = CardLists.getTargetableCards(humCreatures, tgtFight);
                 ComputerUtilCard.sortByEvaluateCreature(humCreatures);
                 if (humCreatures.isEmpty() || aiCreatures.isEmpty()) {
-                	return false;
+                    return false;
                 }
                 int buffedAtk = attack, buffedDef = defense;
                 if (source.getName().equals("Savage Punch") && !ai.hasFerocious()) {
@@ -256,13 +256,13 @@ public class PumpAi extends PumpAiBase {
                     buffedDef = 0;
                 }
                 for (Card humanCreature : humCreatures) {
-                	for (Card aiCreature : aiCreatures) {
-                	    if (sa.isSpell()) {   //heroic triggers adding counters
+                    for (Card aiCreature : aiCreatures) {
+                        if (sa.isSpell()) {   //heroic triggers adding counters
                             for (Trigger t : aiCreature.getTriggers()) {
                                 if (t.getMode() == TriggerType.SpellCast) {
                                     final Map<String, String> params = t.getMapParams();
                                     if ("Card.Self".equals(params.get("TargetsValid")) && "You".equals(params.get("ValidActivatingPlayer")) 
-                                    		&& params.containsKey("Execute")) {
+                                            && params.containsKey("Execute")) {
                                         SpellAbility heroic = AbilityFactory.getAbility(aiCreature.getSVar(params.get("Execute")),aiCreature);
                                         if ("Self".equals(heroic.getParam("Defined")) && "P1P1".equals(heroic.getParam("CounterType"))) {
                                             int amount = AbilityUtils.calculateAmount(aiCreature, heroic.getParam("CounterNum"), heroic);
@@ -274,27 +274,27 @@ public class PumpAi extends PumpAiBase {
                                 }
                             }
                         }
-                		if (sa.getParam("AILogic").equals("PowerDmg")) {
-                			if (FightAi.canKill(aiCreature, humanCreature, buffedAtk)) {
-	                			sa.getTargets().add(aiCreature);
-	                			tgtFight.resetTargets();
-	                			tgtFight.getTargets().add(humanCreature);
-	                			return true;
-	                		}
-                		} else {
-	                		if (FightAi.shouldFight(aiCreature, humanCreature, buffedAtk, buffedDef)) {
-	                			sa.getTargets().add(aiCreature);
-	                			tgtFight.resetTargets();
-	                			tgtFight.getTargets().add(humanCreature);
-	                			return true;
-	                		}
-                		}
-                	}
+                        if (sa.getParam("AILogic").equals("PowerDmg")) {
+                            if (FightAi.canKill(aiCreature, humanCreature, buffedAtk)) {
+                                sa.getTargets().add(aiCreature);
+                                tgtFight.resetTargets();
+                                tgtFight.getTargets().add(humanCreature);
+                                return true;
+                            }
+                        } else {
+                            if (FightAi.shouldFight(aiCreature, humanCreature, buffedAtk, buffedDef)) {
+                                sa.getTargets().add(aiCreature);
+                                tgtFight.resetTargets();
+                                tgtFight.getTargets().add(humanCreature);
+                                return true;
+                            }
+                        }
+                    }
                 }
                 return false;
             }
         }
-        	
+
         if (sa.isCurse()) {
             if (sa.canTarget(opp)) {
                 sa.getTargets().add(opp);
@@ -331,9 +331,9 @@ public class PumpAi extends PumpAiBase {
         }
 
         if (list.isEmpty()) {
-        	if (ComputerUtil.activateForCost(sa, ai)) {
-        		return pumpMandatoryTarget(ai, sa);
-        	}
+            if (ComputerUtil.activateForCost(sa, ai)) {
+                return pumpMandatoryTarget(ai, sa);
+            }
             return mandatory && pumpMandatoryTarget(ai, sa);
         }
 
@@ -364,7 +364,7 @@ public class PumpAi extends PumpAiBase {
             //option to hold removal instead only applies for single targeted removal
             if (!sa.isTrigger() && tgt.getMaxTargets(source, sa) == 1 && sa.isCurse() && defense < 0) {
                 if (!ComputerUtilCard.useRemovalNow(sa, t, -defense, ZoneType.Graveyard) 
-                		&& !ComputerUtil.activateForCost(sa, ai)) {
+                        && !ComputerUtil.activateForCost(sa, ai)) {
                     return false;
                 }
             }
