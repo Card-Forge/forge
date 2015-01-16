@@ -8,3 +8,4 @@ SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | Refere
 SVar:DBTrigDraw:DB$ Draw | Cost$ 0 | NumCards$ X | References$ X
 SVar:X:TriggeredCard$CardToughness
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fruit_of_the_first_tree.jpg
+Oracle:Enchant creature\nWhen enchanted creature dies, you gain X life and draw X cards, where X is its toughness.

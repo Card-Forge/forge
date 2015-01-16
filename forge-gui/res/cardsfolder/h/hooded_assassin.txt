@@ -7,3 +7,4 @@ SVar:TrigCharm:AB$ Charm | Cost$ 0 | Choices$ DBCounter,DBRemove | SpellDescript
 SVar:DBCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 SVar:DBRemove:DB$ Destroy | ValidTgts$ Creature.wasDealtDamageThisTurn | TgtPrompt$ Select target creature that was dealt damage this turn. | SpellDescription$ Destroy target creature that was dealt damage this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hooded_assassin.jpg
+Oracle:When Hooded Assassin enters the battlefield, choose one -\n- Put a +1/+1 counter on Hooded Assassin.\n- Destroy target creature that was dealt damage this turn.

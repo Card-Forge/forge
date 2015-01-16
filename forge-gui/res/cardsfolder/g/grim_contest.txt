@@ -5,3 +5,4 @@ A:SP$ Pump | Cost$ 1 B G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose targe
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls | FightWithToughness$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grim_contest.jpg
+Oracle:Choose target creature you control and target creature an opponent controls. Each of those creatures deals damage equal to its toughness to the other.

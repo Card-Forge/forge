@@ -9,5 +9,4 @@ SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Remem
 SVar:DBExileTopCard:DB$ Mill | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | ExileFaceDown$ True | SubAbility$ DBManifest
 SVar:DBManifest:DB$ Manifest | Amount$ 2 | Defined$ Remembered | Shuffle$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jeskai_infiltrator.jpg
-
-
+Oracle:Jeskai Infiltrator can't be blocked as long as you control no other creatures.\nWhen Jeskai Infiltrator deals combat damage to a player, exile it and the top card of your library in a face-down pile, shuffle that pile, then manifest those cards. (To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)
