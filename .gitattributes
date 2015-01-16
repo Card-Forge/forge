@@ -6102,6 +6102,7 @@ forge-gui/res/cardsfolder/g/geths_verdict.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/geyser_glider.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/ghalmas_warden.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/ghastlord_of_fugue.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/g/ghastly_conscription.txt -text
 forge-gui/res/cardsfolder/g/ghastly_demise.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/ghastly_discovery.txt -text
 forge-gui/res/cardsfolder/g/ghastly_remains.txt -text

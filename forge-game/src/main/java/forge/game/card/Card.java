@@ -421,7 +421,10 @@ public class Card extends GameEntity implements Comparable<Card> {
              return null;
          }
         // Move to p's battlefield
-        Card c = p.getGame().getAction().moveToPlay(this, p);
+        Game game = p.getGame();
+		// Just in case you aren't the controller, now you are!
+        this.setController(p, game.getNextTimestamp());
+        Card c = game.getAction().moveToPlay(this, p);
         c.setPreFaceDownState(CardStateName.Original);
         // Mark this card as "manifested"
         c.setManifested(true);
