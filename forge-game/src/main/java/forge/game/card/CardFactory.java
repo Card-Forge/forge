@@ -99,13 +99,6 @@ public class CardFactory {
         }
         out.setState(in.getCurrentStateName(), true);
 
-        // I'm not sure if we really should be copying enchant/equip stuff over.
-        out.setEquipping(in.getEquipping());
-        out.setEquippedBy(in.getEquippedBy(false));
-        out.setFortifying(in.getFortifying());
-        out.setFortifiedBy(in.getFortifiedBy(false));
-        out.setEnchantedBy(in.getEnchantedBy(false));
-        out.setEnchanting(in.getEnchanting());
         out.setClones(in.getClones());
         out.setZone(in.getZone());
         for (final Object o : in.getRemembered()) {
