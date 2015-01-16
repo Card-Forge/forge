@@ -194,7 +194,7 @@ public class CardLists {
     public static int getAmountOfKeyword(final Iterable<Card> cardList, final String keyword) {
         int nKeyword = 0;
         for (final Card c : cardList) {
-            nKeyword += c.getAmountOfKeyword("If a creature with a magnet counter on it attacks, all creatures with magnet counters on them attack if able.");
+            nKeyword += c.getAmountOfKeyword(keyword);
         }
         return nKeyword;
     }
