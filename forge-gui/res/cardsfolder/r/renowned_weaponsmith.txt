@@ -7,3 +7,4 @@ A:AB$ ChangeZone | Cost$ U T | Origin$ Library | Destination$ Hand| ChangeType$ 
 DeckHints:Name$Heart-Piercer Bow|Vial of Dragonfire
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/renowned_weaponsmith.jpg
+Oracle:{T}: Add {2} to your mana pool. Spend this mana only to cast artifact spells or activate abilities of artifacts.\n{U}, {T}: Search your library for a card named Heart-Piercer Bow or Vial of Dragonfire, reveal it, put it into your hand, then shuffle your library.

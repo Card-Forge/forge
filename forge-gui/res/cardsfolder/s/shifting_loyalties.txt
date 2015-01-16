@@ -6,3 +6,4 @@ SVar:DBExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Permane
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shifting_loyalties.jpg
+Oracle:Exchange control of two target permanents that share a card type. (Artifact, creature, enchantment, land, and planeswalker are card types.)
