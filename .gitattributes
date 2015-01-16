@@ -1431,6 +1431,7 @@ forge-gui/res/cardsfolder/a/abzan_charm.txt -text
 forge-gui/res/cardsfolder/a/abzan_falconer.txt -text
 forge-gui/res/cardsfolder/a/abzan_guide.txt -text
 forge-gui/res/cardsfolder/a/abzan_kin_guard.txt -text
+forge-gui/res/cardsfolder/a/abzan_runemark.txt -text
 forge-gui/res/cardsfolder/a/abzan_skycaptain.txt -text
 forge-gui/res/cardsfolder/a/academy_at_tolaria_west.txt -text
 forge-gui/res/cardsfolder/a/academy_elite.txt -text
@@ -7666,6 +7667,7 @@ forge-gui/res/cardsfolder/j/jeskai_barricade.txt -text
 forge-gui/res/cardsfolder/j/jeskai_charm.txt -text
 forge-gui/res/cardsfolder/j/jeskai_elder.txt -text
 forge-gui/res/cardsfolder/j/jeskai_infiltrator.txt -text
+forge-gui/res/cardsfolder/j/jeskai_runemark.txt -text
 forge-gui/res/cardsfolder/j/jeskai_sage.txt -text
 forge-gui/res/cardsfolder/j/jeskai_student.txt -text
 forge-gui/res/cardsfolder/j/jeskai_windscout.txt -text
@@ -13567,6 +13569,7 @@ forge-gui/res/cardsfolder/s/sultai_banner.txt -text
 forge-gui/res/cardsfolder/s/sultai_charm.txt -text
 forge-gui/res/cardsfolder/s/sultai_emissary.txt -text
 forge-gui/res/cardsfolder/s/sultai_flayer.txt -text
+forge-gui/res/cardsfolder/s/sultai_runemark.txt -text
 forge-gui/res/cardsfolder/s/sultai_scavenger.txt -text
 forge-gui/res/cardsfolder/s/sultai_skullkeeper.txt -text
 forge-gui/res/cardsfolder/s/sultai_soothsayer.txt -text
