@@ -1,0 +1,11 @@
+Name:Channel Harm
+ManaCost:5 W
+Types:Instant
+A:SP$ Effect | Cost$ 5 W | ValidTgts$ Creature | Name$ Channel Harm Effect | ReplacementEffects$ ChannelHarmRep | Triggers$ OutOfSight | SVars$ DBCleanup,DamageSourceInstead,X | RememberObjects$ Targeted | AILogic$ Fog | SpellDescription$ Prevent all damage that would be dealt to you and permanents you control this turn by sources you don't control. If damage is prevented this way, you may have CARDNAME deal that much damage to target creature.
+SVar:ChannelHarmRep:Event$ DamageDone | ActiveZones$ Command | ValidTarget$ You,Permanent.YouCtrl | ValidSource$ Card.YouDontCtrl | ReplaceWith$ DamageSourceInstead | PreventionEffect$ True | Description$ Prevent all damage that would be dealt to you and permanents you control this turn by sources you don't control. If damage is prevented this way, you may have Channel Harm deal that much damage to target creature.
+SVar:DamageSourceInstead:AB$ DealDamage | Cost$ 0 | NumDmg$ X | Defined$ Remembered | DamageSouce$ EffectSource | References$ X | OptionalDecider$ You
+SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.IsRemembered | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:ReplaceCount$DamageAmount
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/channel_harm.jpg

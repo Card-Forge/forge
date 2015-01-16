@@ -1,0 +1,7 @@
+Name:Sultai Emissary
+ManaCost:1 B
+Types:Creature Zombie Warrior
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigManifest | TriggerDescription$ When CARDNAME dies, manifest the top card of your library. (Put that card onto the battlefield face down as a 2/2 creature. You may turn it face up at any time for its mana cost if it is a creature card.)
+SVar:TrigManifest:DB$ Manifest | Amount$ 1 | Defined$ TopOfLibrary
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sultai_emissary.jpg

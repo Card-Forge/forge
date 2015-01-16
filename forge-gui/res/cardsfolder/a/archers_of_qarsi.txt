@@ -1,0 +1,7 @@
+Name:Archers of Qarsi
+ManaCost:3 G
+Types:Creature Naga Archer
+PT:5/2
+K:Defender
+K:Reach
+SVar:Picture:http://www.wizards.com/global/images/magic/general/archers_of_qarsi.jpg

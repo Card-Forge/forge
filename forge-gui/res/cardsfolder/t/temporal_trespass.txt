@@ -1,0 +1,7 @@
+Name:Temporal Trespass
+ManaCost:8 U U U
+Types:Sorcery
+K:Delve
+A:SP$ AddTurn | Cost$ 8 U U U | NumTurns$ 1 | SubAbility$ DBExile | SpellDescription$ Take an extra turn after this one. Exile CARDNAME.
+SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
+SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_trespass.jpg

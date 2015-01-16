@@ -1,0 +1,9 @@
+Name:Torrent Elemental
+ManaCost:4 U
+Types:Creature Elemental
+PT:3/5
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME attacks, tap all creatures defending player controls.
+SVar:TrigTap:AB$TapAll | Cost$ 0 | ValidCards$ Creature.DefenderCtrl
+A:AB$ ChangeZone | Cost$ 3 BG BG | ActivationZone$ Exile | Origin$ Exile | Destination$ Battlefield | Tapped$ True | SorcerySpeed$ True | SpellDescription$ Put CARDNAME from exile onto the battlefield tapped. Activate this ability only any time you could cast a sorcery.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/torrent_elemental.jpg

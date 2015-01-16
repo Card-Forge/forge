@@ -1,0 +1,9 @@
+Name:Ainok Guide
+ManaCost:1 G
+Types:Creature Hound Scout
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, choose one - Put a +1/+1 counter on CARDNAME; Search your library for a basic land card, reveal it, then shuffle your library and put that card on top of it.
+SVar:TrigCharm:AB$ Charm | Cost$ 0 | Choices$ DBCounter,DBSearch | SpellDescription$ Choose one - Put a +1/+1 counter on CARDNAME; Destroy target creature that was dealt damage this turn.
+SVar:DBCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, reveal it, then shuffle your library and put that card on top of it;
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ainok_guide.jpg

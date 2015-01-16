@@ -1,0 +1,7 @@
+Name:Lotus Path Djinn
+ManaCost:3 U
+Types:Creature Djinn Monk
+PT:2/3
+K:Flying
+K:Prowess
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lotus_path_djinn.jpg

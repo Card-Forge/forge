@@ -1,0 +1,6 @@
+Name:Mardu Scout
+ManaCost:R R
+Types:Creature Goblin Scout
+PT:3/1
+K:Dash:1 R
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mardu_scout.jpg

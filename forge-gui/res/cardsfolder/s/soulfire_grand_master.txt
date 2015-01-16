@@ -1,0 +1,11 @@
+Name:Soulfire Grand Master
+ManaCost:1 W
+Types:Creature Human Monk
+PT:2/2
+K:Lifelink
+S:Mode$ Continuous | AddKeyword$ Lifelink | Affected$ Instant.YouCtrl,Sorcery.YouCtrl | AffectedZone$ Stack | Description$ Instant and sorcery spells you control have lifelink.
+A:AB$ Effect | Cost$ 2 UR UR | Name$ Soulfire Grand Master effect | Triggers$ SpellCastTrig | SVars$ Buybacked,ExileSelf | SpellDescription$ The next time you cast an instant or sorcery spell from your hand this turn, put that card into your hand instead of into your graveyard as it resolves.
+SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Sorcery.YouOwn+wasCastFromHand,Instant.YouOwn+wasCastFromHand | ValidActivatingPlayer$ You | Execute$ Buybacked | Static$ True | TriggerDescription$ The next time you cast an instant or sorcery spell from your hand this turn, put that card into your hand instead of into your graveyard as it resolves.
+SVar:Buybacked:DB$ Pump | Defined$ TriggeredCard | PumpZone$ Stack | KW$ HIDDEN Move CARDNAME to your hand as it resolves | SubAbility$ ExileSelf
+SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soulfire_grand_master.jpg

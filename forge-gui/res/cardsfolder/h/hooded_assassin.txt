@@ -1,0 +1,9 @@
+Name:Hooded Assassin
+ManaCost:2 B
+Types:Creature Human Assassin
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, choose one - Put a +1/+1 counter on CARDNAME; Destroy target creature that was dealt damage this turn.
+SVar:TrigCharm:AB$ Charm | Cost$ 0 | Choices$ DBCounter,DBRemove | SpellDescription$ Choose one - Put a +1/+1 counter on CARDNAME; Destroy target creature that was dealt damage this turn.
+SVar:DBCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+SVar:DBRemove:DB$ Destroy | ValidTgts$ Creature.wasDealtDamageThisTurn | TgtPrompt$ Select target creature that was dealt damage this turn. | SpellDescription$ Destroy target creature that was dealt damage this turn.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hooded_assassin.jpg

@@ -1,0 +1,194 @@
+[metadata]
+Code=FRF
+Date=2015-01-23
+Name=Fate Reforged
+Type=Expansion
+BoosterCovers=3
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand FRF
+
+[cards]
+M Ugin, the Spirit Dragon
+C Abzan Advantage
+C Abzan Runemark
+C Abzan Skycaptain
+C Arashin Cleric
+C Aven Skirmisher
+U Channel Harm
+R Citadel Siege
+R Daghatar the Adamant
+C Dragon Bell Monk
+R Dragonscale General
+U Elite Scaleguard
+C Great-Horn Krushok
+U Honor's Reward
+U Jeskai Barricade
+U Lightform
+U Lotus-Eye Mystics
+U Mardu Woe-Reaper
+R Mastery of the Unseen
+M Monastery Mentor
+C Pressure Point
+R Rally the Ancestors
+U Sage's Reverie
+C Sandblast
+C Sandsteppe Outcast
+C Soul Summons
+M Soulfire Grand Master
+U Valorous Stance
+U Wandering Champion
+U Wardscale Dragon
+C Aven Surveyor
+U Cloudform
+C Enhanced Awareness
+U Fascination
+U Frost Walker
+R Jeskai Infiltrator
+C Jeskai Runemark
+C Jeskai Sage
+C Lotus Path Djinn
+U Marang River Prowler
+U Mindscour Dragon
+U Mistfire Adept
+R Monastery Siege
+U Neutralizing Blast
+C Rakshasa's Disdain
+U Reality Shift
+C Refocus
+U Renowned Weaponsmith
+U Rite of Undoing
+R Sage-Eye Avengers
+U Shifting Loyalties
+R Shu Yun, the Silent Tempest
+C Sultai Skullkeeper
+R Supplant Form
+M Temporal Trespass
+M Torrent Elemental
+C Whisk Away
+C Will of the Naga
+C Write into Being
+C Alesha's Vanguard
+C Ancestral Vengeance
+R Archfiend of Depravity
+U Battle Brawler
+M Brutal Hordechief
+R Crux of Fate
+U Dark Deal
+U Diplomacy of the Wastes
+C Douse in Gloom
+U Fearsome Awakening
+M Ghastly Conscription
+U Grave Strength
+C Gurmag Angler
+C Hooded Assassin
+U Mardu Shadowspear
+R Mardu Strike Leader
+U Merciless Executioner
+U Noxious Dragon
+U Orc Sureshot
+R Palace Siege
+U Qarsi High Priest
+C Reach of Shadows
+C Sibsig Host
+U Sibsig Muckdraggers
+R Soulflayer
+C Sultai Emissary
+C Sultai Runemark
+R Tasigur, the Golden Fang
+C Tasigur's Cruelty
+C Typhoid Rats
+R Alesha, Who Smiles at Death
+R Arcbond
+C Bathe in Dragonfire
+U Bloodfire Enforcers
+U Break Through the Line
+C Collateral Damage
+C Defiant Ogre
+U Dragonrage
+C Fierce Invocation
+R Flamerush Rider
+R Flamewake Phoenix
+U Friendly Fire
+C Goblin Heelcutter
+C Gore Swine
+U Humble Defector
+U Hungering Yeti
+C Lightning Shrieker
+C Mardu Runemark
+C Mardu Scout
+R Mob Rule
+R Outpost Siege
+U Pyrotechnics
+U Rageform
+M Shaman of the Great Hunt
+U Shockmaw Dragon
+C Smoldering Efreet
+C Temur Battle Rage
+U Vaultbreaker
+U Wild Slash
+U Abzan Beastmaster
+U Abzan Kin-Guard
+C Ainok Guide
+C Ambush Krotiq
+U Arashin War Beast
+C Archers of Qarsi
+U Battlefront Krushok
+U Cached Defenses
+U Destructor Dragon
+C Feral Krushok
+C Formless Nurturing
+C Frontier Mastodon
+R Frontier Siege
+U Fruit of the First Tree
+C Hunt the Weak
+C Map the Wastes
+C Return to the Earth
+U Ruthless Instincts
+R Sandsteppe Mastodon
+R Shamanic Revelation
+U Sudden Reclamation
+C Temur Runemark
+U Temur Sabertooth
+R Temur War Shaman
+M Warden of the First Tree
+C Whisperer of the Wilds
+M Whisperwood Elemental
+R Wildcall
+U Winds of Qal Sisma
+R Yasova Dragonclaw
+R Atarka, World Render
+C Cunning Strike
+R Dromoka, the Eternal
+C Ethereal Ambush
+C Grim Contest
+C Harsh Sustenance
+R Kolaghan, the Storm's Fury
+R Ojutai, Soul of Winter
+R Silumgar, the Drifting Death
+C War Flare
+U Goblin Boom Keg
+U Hero's Blade
+U Hewed Stone Retainers
+U Pilgrim of the Fires
+R Scroll of the Masters
+U Ugin's Construct
+C Bloodfell Caves
+C Blossoming Sands
+R Crucible of the Spirit Dragon
+C Dismal Backwater
+C Jungle Hollow
+C Rugged Highlands
+C Scoured Barrens
+C Swiftwater Cliffs
+C Thornwood Falls
+C Tranquil Cove
+C Wind-Scarred Crag
+L Plains
+L Plains
+L Island
+L Island
+L Swamp
+L Swamp
+L Mountain
+L Mountain
+L Forest
+L Forest

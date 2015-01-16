@@ -1,0 +1,8 @@
+Name:Shifting Loyalties
+ManaCost:5 U
+Types:Sorcery
+A:SP$ Pump | Cost$ 5 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SubAbility$ DBExchange | StackDescription$ None | SpellDescription$ Exchange control of two target permanents that share a card type.
+SVar:DBExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Permanent | TgtPrompt$ Select target permanent shares a card type with it | TargetsWithSharedTypes$ Creature,Artifact,Enchantment,Planeswalker,Land | TargetUnique$ True
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shifting_loyalties.jpg

@@ -1,0 +1,8 @@
+Name:Abzan Skycaptain
+ManaCost:3 W
+Types:Creature Bird Soldier
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigBolster | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, bolster 2.
+SVar:TrigBolster:AB$ PutCounter | Bolster$ True | CounterNum$ 2 | CounterType$ P1P1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/abzan_skycaptain.jpg

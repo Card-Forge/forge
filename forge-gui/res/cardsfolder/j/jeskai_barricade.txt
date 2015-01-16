@@ -1,0 +1,9 @@
+Name:Jeskai Barricade
+ManaCost:1 W
+Types:Creature Wall
+PT:0/4
+K:Flash
+K:Defender
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return another target creature you control to its owner's hand.
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another creature you control.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jeskai_barricade.jpg

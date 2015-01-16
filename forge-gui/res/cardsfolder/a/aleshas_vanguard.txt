@@ -1,0 +1,6 @@
+Name:Alesha's Vanguard
+ManaCost:3 B
+Types:Creature Orc Warrior
+PT:3/3
+K:Dash:2 B
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aleshas_vanguard.jpg

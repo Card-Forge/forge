@@ -1,0 +1,9 @@
+Name:Mardu Shadowspear
+ManaCost:B
+Types:Creature Human Warrior
+PT:1/1
+K:Dash:1 B
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ Whenever CARDNAME attacks, each opponent loses 1 life.
+SVar:TrigDrain:AB$ LoseLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmount$ 1
+SVar:HasAttackEffect:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mardu_shadowspear.jpg

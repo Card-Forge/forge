@@ -1,0 +1,9 @@
+Name:Temur War Shaman
+ManaCost:4 G G
+Types:Creature Human Shaman
+PT:4/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigManifest | TriggerDescription$ When CARDNAME enters the battlefield, manifest the top card of your library. (Put that card onto the battlefield face down as a 2/2 creature. You may turn it face up at any time for its mana cost if it is a creature card.)
+SVar:TrigManifest:DB$ Manifest | Amount$ 1 | Defined$ TopOfLibrary
+T:Mode$ TurnFaceUp | ValidCard$ Permanent.Creature+YouCtrl | Execute$ TrigFight | TriggerZones$ Battlefield | TriggerDescription$ Whenever a permanent you control is turned face up, if it is a creature, you may have it fight target creature you don't control.
+SVar:TrigFight:AB$ Fight | Cost$ 0 | Defined$ TriggeredCard | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | ConditionDefined$ TriggeredCard | ConditionPresent$ Creature
+SVar:Picture:http://www.wizards.com/global/images/magic/general/temur_war_shaman.jpg
