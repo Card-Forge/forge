@@ -115,6 +115,7 @@ Mob Rule
 Monastery Mentor
 Monastery Siege
 Neutralizing Blast
+Noxious Dragon
 Ojutai, Soul of Winter
 Orc Sureshot
 Outpost Siege
