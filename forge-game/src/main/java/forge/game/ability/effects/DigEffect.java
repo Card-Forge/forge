@@ -208,13 +208,19 @@ public class DigEffect extends SpellAbilityEffect {
                     }
                     else {
                         int j = 0;
-                        String prompt = "Choose a card to put into " + destZone1.name();
-                        if (destZone1.equals(ZoneType.Library)) {
-                            if (libraryPosition == -1) {
-                                prompt = "Choose a card to put on the bottom of {player's} library";
-                            }
-                            else if (libraryPosition == 0) {
-                                prompt = "Choose a card to put on top of {player's} library";
+                        String prompt;
+
+                        if (sa.hasParam("PrimaryPrompt")) {
+                            prompt = sa.getParam("PrimaryPrompt");
+                        } else {
+                            prompt = "Choose a card to put into " + destZone1.name();
+                            if (destZone1.equals(ZoneType.Library)) {
+                                if (libraryPosition == -1) {
+                                    prompt = "Choose a card to put on the bottom of {player's} library";
+                                }
+                                else if (libraryPosition == 0) {
+                                    prompt = "Choose a card to put on top of {player's} library";
+                                }
                             }
                         }
 

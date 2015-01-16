@@ -4048,6 +4048,7 @@ forge-gui/res/cardsfolder/d/daring_thief.txt -text
 forge-gui/res/cardsfolder/d/dark_banishing.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dark_betrayal.txt -text
 forge-gui/res/cardsfolder/d/dark_confidant.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/d/dark_deal.txt -text
 forge-gui/res/cardsfolder/d/dark_depths.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dark_favor.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dark_hatchling.txt svneol=native#text/plain
@@ -15733,6 +15734,7 @@ forge-gui/res/cardsfolder/w/wretched_banquet.txt -text
 forge-gui/res/cardsfolder/w/wrexial_the_risen_deep.txt -text
 forge-gui/res/cardsfolder/w/wring_flesh.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/writ_of_passage.txt -text
+forge-gui/res/cardsfolder/w/write_into_being.txt -text
 forge-gui/res/cardsfolder/w/wu_admiral.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wu_elite_cavalry.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wu_infantry.txt svneol=native#text/plain
