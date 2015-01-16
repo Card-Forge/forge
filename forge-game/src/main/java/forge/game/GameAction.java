@@ -138,12 +138,6 @@ public class GameAction {
 
                 copied = CardFactory.copyCard(c, false, false);
 
-                // clear any leftover keyword replacements from the card leaving battlefield
-                copied.removeChangedCardKeywords(copied.getTimestamp());
-                copied.removeChangedCardTypes(copied.getTimestamp());
-                copied.removeChangedTextColorWord(copied.getTimestamp());
-                copied.removeChangedTextTypeWord(copied.getTimestamp());
-
                 copied.setUnearthed(c.isUnearthed());
                 copied.setTapped(false);
                 for (final Trigger trigger : copied.getTriggers()) {
@@ -155,6 +149,9 @@ public class GameAction {
                 if (c.getName().equals("Skullbriar, the Walking Grave")) {
                     copied.setCounters(c.getCounters());
                 }
+
+                // ensure that any leftover keyword/type changes are cleared in the state view
+                copied.updateStateForView();
             } else { //Token
                 copied = c;
             }
