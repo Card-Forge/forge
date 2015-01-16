@@ -78,6 +78,10 @@ public class CardFactory {
      * @return a {@link forge.game.card.Card} object.
      */
     public final static Card copyCard(final Card in, boolean assignNewId) {
+        return copyCard(in, assignNewId, true);
+    }
+    
+    public final static Card copyCard(final Card in, boolean assignNewId, boolean copyAttachmentData) {
         Card out;
         if (!(in.isToken() || in.getCopiedPermanent() != null)) {
             out = assignNewId ? getCard(in.getPaperCard(), in.getOwner(), in.getGame()) 
@@ -98,6 +102,16 @@ public class CardFactory {
             CardFactory.copyState(in, state, out, state);
         }
         out.setState(in.getCurrentStateName(), true);
+
+        if (copyAttachmentData) {
+            // I'm not sure if we really should be copying enchant/equip stuff over.
+            out.setEquipping(in.getEquipping());
+            out.setEquippedBy(in.getEquippedBy(false));
+            out.setFortifying(in.getFortifying());
+            out.setFortifiedBy(in.getFortifiedBy(false));
+            out.setEnchantedBy(in.getEnchantedBy(false));
+            out.setEnchanting(in.getEnchanting());
+        }
 
         out.setClones(in.getClones());
         out.setZone(in.getZone());
