@@ -2212,10 +2212,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         controllerCreator = ctrlr;
         controller = ctrlr;
-        view.updateAvatarIndex(this);
-        view.updateAvatarCardImageKey(this);
+        updateAvatar();
         view.updateIsAI(this);
         view.updateLobbyPlayerName(this);
+    }
+
+    public void updateAvatar() {
+        view.updateAvatarIndex(this);
+        view.updateAvatarCardImageKey(this);
     }
 
     /**

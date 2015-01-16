@@ -147,6 +147,7 @@ public class MatchUtil {
                 i++;
             }
             p.getLobbyPlayer().setAvatarIndex(avatarIndex);
+            p.updateAvatar();
 
             if (p.getController() instanceof PlayerControllerHuman) {
                 final PlayerControllerHuman humanController = (PlayerControllerHuman) p.getController();

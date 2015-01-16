@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.LobbyPlayer;
@@ -61,7 +61,7 @@ public class MatchController implements IMatchController {
         String lp = p.getLobbyPlayerName();
         FImage avatar = avatarImages.get(lp);
         if (avatar == null) {
-            if (p.getAvatarCardImageKey() == null) {
+            if (StringUtils.isEmpty(p.getAvatarCardImageKey())) {
                 avatar = new FTextureRegionImage(FSkin.getAvatars().get(p.getAvatarIndex()));
             }
             else { //handle lobby players with art from cards
