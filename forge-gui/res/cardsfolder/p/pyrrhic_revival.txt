@@ -1,12 +1,7 @@
 Name:Pyrrhic Revival
 ManaCost:3 WB WB WB
 Types:Sorcery
-A:SP$ Effect | Cost$ 3 WB WB WB | Name$ Pyrrhic Revival Effect | ReplacementEffects$ PyrrhicEvent | Triggers$ RemoveEffect | SVars$ PyrrhicAddExtraCounter,PyrrhicMoveToBattlefield,PyrrhicCleanup | References$ PyrrhicAddExtraCounter,PyrrhicMoveToBattlefield,PyrrhicCleanup | ImprintCards$ Self | SubAbility$ DBChangeZoneAll | SpellDescription$ Each player returns each creature card from his or her graveyard to the battlefield with an additional -1/-1 counter on it.
-SVar:PyrrhicEvent:Event$ Moved | Origin$ Graveyard | Destination$ Battlefield | ValidCard$ Creature | ReplaceWith$ PyrrhicAddExtraCounter | Description$ Each creature enters the battlefield with an additional -1/-1 counters on it.
-SVar:PyrrhicAddExtraCounter:AB$ PutCounter | Cost$ 0 | ETB$ True | Defined$ ReplacedCard | CounterType$ M1M1 | CounterNum$ 1 | SubAbility$ PyrrhicMoveToBattlefield
-SVar:PyrrhicMoveToBattlefield:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ ReplacedCard
-SVar:RemoveEffect:Mode$ ChangesZone | Origin$ Stack | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted | Execute$ PyrrhicCleanup
-SVar:PyrrhicCleanup:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
-SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature
+A:SP$ ChangeZone | Cost$ 3 WB WB WB | Origin$ Graveyard | Destination$ Battlefield | WithCounters$ M1M1_1 | Defined$ ValidGraveyard Creature | SpellDescription$ Each player returns each creature card from his or her graveyard to the battlefield with an additional -1/-1 counter on it.
+SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyrrhic_revival.jpg
 Oracle:Each player returns each creature card from his or her graveyard to the battlefield with an additional -1/-1 counter on it.

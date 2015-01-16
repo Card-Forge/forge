@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.google.common.collect.Iterables;
+
 public class DamageDealEffect extends SpellAbilityEffect {
 
     /* (non-Javadoc)
@@ -74,6 +76,12 @@ public class DamageDealEffect extends SpellAbilityEffect {
         final boolean divideOnResolution = sa.hasParam("DividerOnResolution");
 
         List<GameObject> tgts = getTargets(sa);
+        if (sa.hasParam("OptionalDecider")) {
+            Player decider = Iterables.getFirst(AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("OptionalDecider"), sa), null);
+            if (decider != null && !decider.getController().confirmAction(sa, null, "Do you want to deal " + dmg + " damage to " + tgts + " ?")) {
+                return;
+            }
+        }
 
         // Right now for Fireball, maybe later for other stuff
         if (sa.hasParam("DivideEvenly")) {

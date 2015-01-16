@@ -275,13 +275,15 @@ public class AbilityUtils {
                 String validDefined = defined.substring("Valid ".length());
                 list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), validDefined.split(","), hostCard.getController(), hostCard);
             }
-            else if (defined.startsWith("ValidHand ")) {
-                String validDefined = defined.substring("ValidHand ".length());
-                list = CardLists.getValidCards(game.getCardsIn(ZoneType.Hand), validDefined.split(","), hostCard.getController(), hostCard);
-            }
             else if (defined.startsWith("ValidAll ")) {
                 String validDefined = defined.substring("ValidAll ".length());
                 list = CardLists.getValidCards(game.getCardsInGame(), validDefined.split(","), hostCard.getController(), hostCard);
+            }
+            else if (defined.startsWith("Valid")) {
+                String[] s = defined.split(" ");
+                String zone = s[0].substring("Valid".length());
+                String validDefined = s[1];
+                list = CardLists.getValidCards(game.getCardsIn(ZoneType.smartValueOf(zone)), validDefined.split(","), hostCard.getController(), hostCard);
             }
             else {
                 return cards;
