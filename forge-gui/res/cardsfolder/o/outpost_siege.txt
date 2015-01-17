@@ -5,7 +5,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:SiegeChoice:DB$ GenericChoice | Choices$ Khans,Dragons | Defined$ You
 SVar:Khans:DB$ Animate | Defined$ Self | Triggers$ KhansTrigger | Permanent$ True | SpellDescription$ Khans
 SVar:KhansTrigger:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ PseudoDraw | TriggerDescription$ At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card.
-SVar:PseudoDraw:AB$ Mill | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBMayBePlay
+SVar:PseudoDraw:DB$ Mill | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBMayBePlay
 SVar:DBMayBePlay:DB$ Pump | Defined$ Remembered | PumpZone$ Exile | KW$ HIDDEN May be played | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Dragons:DB$ Animate | Defined$ Self | Triggers$ DragonsTrigger | Permanent$ True | SpellDescription$ Dragons
