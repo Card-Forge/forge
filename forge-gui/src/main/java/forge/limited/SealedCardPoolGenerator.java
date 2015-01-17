@@ -136,7 +136,7 @@ public class SealedCardPoolGenerator {
             final CardPool aiPool = sd.getCardPool(false);
             if (aiPool == null) { return null; }
 
-            sealed.addAiDeck(new SealedDeckBuilder(aiPool.toFlatList()).buildDeck());
+            sealed.addAiDeck(new SealedDeckBuilder(aiPool.toFlatList()).buildDeck(sd.getLandSetCode()));
         }
 
         // Rank the AI decks

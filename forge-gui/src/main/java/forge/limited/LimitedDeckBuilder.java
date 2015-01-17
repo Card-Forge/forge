@@ -84,6 +84,10 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
         return buildDeck().getMain();
     }
     
+    public Deck buildDeck() {
+        return buildDeck(null);
+    }
+
     /**
      * <p>
      * buildDeck.
@@ -91,7 +95,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
      * 
      * @return the new Deck.
      */
-    public Deck buildDeck() {
+    public Deck buildDeck(String landSetCode) {
         // 1. Prepare
         hasColor = Predicates.or(new MatchColorIdentity(colors), COLORLESS_CARDS);
         colorList = Iterables.filter(aiPlayables, Predicates.compose(hasColor, PaperCard.FN_GET_RULES));
@@ -158,10 +162,10 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
         // 11. Fill up with basic lands.
         final int[] clrCnts = calculateLandNeeds();
         if (landsNeeded > 0) {
-            addLands(clrCnts);
+            addLands(clrCnts, landSetCode);
         }
 
-        fixDeckSize(clrCnts);
+        fixDeckSize(clrCnts, landSetCode);
 
         if (deckList.size() == 40) {
             Deck result = new Deck(generateName());
@@ -218,7 +222,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
      * @param clrCnts
      *            color counts needed
      */
-    private void fixDeckSize(final int[] clrCnts) {
+    private void fixDeckSize(final int[] clrCnts, String landSetCode) {
         while (deckList.size() > 40) {
             System.out.println("WARNING: Fixing deck size, currently " + deckList.size() + " cards.");
             final PaperCard c = deckList.get(MyRandom.getRandom().nextInt(deckList.size() - 1));
@@ -243,7 +247,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
                 // if no playable cards remain fill up with basic lands
                 for (int i = 0; i < 5; i++) {
                     if (clrCnts[i] > 0) {
-                        final PaperCard cp = getBasicLand(i);
+                        final PaperCard cp = getBasicLand(i, landSetCode);
                         deckList.add(cp);
                         System.out.println(" - Added " + cp.getName() + " as last resort.");
                         break;
@@ -274,7 +278,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
      * 
      * @param clrCnts
      */
-    private void addLands(final int[] clrCnts) {
+    private void addLands(final int[] clrCnts, String landSetCode) {
         // basic lands that are available in the deck
         Iterable<PaperCard> basicLands = Iterables.filter(aiPlayables, Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES));
         Set<PaperCard> snowLands = new HashSet<PaperCard>();
@@ -308,7 +312,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
                 }
                 
                 for (int j = 0; j < nLand; j++) {
-                    deckList.add(getBasicLand(i));
+                    deckList.add(getBasicLand(i, landSetCode));
                 }
             }
         }
@@ -323,12 +327,16 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
      * @param basicLand
      * @return card
      */
-    private PaperCard getBasicLand(int basicLand) {
+    private PaperCard getBasicLand(int basicLand, String landSetCode) {
         String set;
-        if (setsWithBasicLands.size() > 1) {
-            set = setsWithBasicLands.get(MyRandom.getRandom().nextInt(setsWithBasicLands.size() - 1));
+        if (landSetCode == null) {
+            if (setsWithBasicLands.size() > 1) {
+                set = setsWithBasicLands.get(MyRandom.getRandom().nextInt(setsWithBasicLands.size() - 1));
+            } else {
+                set = setsWithBasicLands.get(0);
+            }
         } else {
-            set = setsWithBasicLands.get(0);
+            set = landSetCode;
         }
         return FModel.getMagicDb().getCommonCards().getCard(MagicColor.Constant.BASIC_LANDS.get(basicLand), set);
     }
