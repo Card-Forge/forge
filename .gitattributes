@@ -15566,6 +15566,7 @@ forge-gui/res/cardsfolder/w/windreaver.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/windriddle_palaces.txt -text
 forge-gui/res/cardsfolder/w/windrider_eel.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/winds_of_change.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/w/winds_of_qal_sisma.txt -text
 forge-gui/res/cardsfolder/w/winds_of_rath.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/windscouter.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/windseeker_centaur.txt svneol=native#text/plain
