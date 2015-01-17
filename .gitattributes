@@ -15522,6 +15522,7 @@ forge-gui/res/cardsfolder/w/wild_ox.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wild_pair.txt -text
 forge-gui/res/cardsfolder/w/wild_research.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wild_ricochet.txt -text
+forge-gui/res/cardsfolder/w/wild_slash.txt -text
 forge-gui/res/cardsfolder/w/wild_swing.txt -text
 forge-gui/res/cardsfolder/w/wild_wurm.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wildcall.txt -text
