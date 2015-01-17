@@ -5894,6 +5894,7 @@ forge-gui/res/cardsfolder/f/freyalise_supplicant.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/freyalises_charm.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/freyalises_radiance.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/freyalises_winds.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/f/friendly_fire.txt -text
 forge-gui/res/cardsfolder/f/frightcrawler.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/frightful_delusion.txt -text
 forge-gui/res/cardsfolder/f/frightshroud_courier.txt svneol=native#text/plain
