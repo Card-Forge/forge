@@ -16547,6 +16547,7 @@ forge-gui/res/quest/duels/Wyatt[!!-~]Earp[!!-~]3.dck -text
 forge-gui/res/quest/duels/Zapp[!!-~]Brannigan[!!-~]2.dck -text
 forge-gui/res/quest/duels/Zatanna[!!-~]2.dck -text
 forge-gui/res/quest/duels/Zeus[!!-~]3.dck -text
+forge-gui/res/quest/precons/Abzan[!!-~]Siege.dck -text
 forge-gui/res/quest/precons/Air[!!-~]Razers.dck -text
 forge-gui/res/quest/precons/Angelic[!!-~]Might.dck -text
 forge-gui/res/quest/precons/Anthousas[!!-~]Army.dck -text
@@ -16578,8 +16579,10 @@ forge-gui/res/quest/precons/Brute[!!-~]Force.dck -text
 forge-gui/res/quest/precons/Carnival[!!-~]of[!!-~]Blood.dck -text
 forge-gui/res/quest/precons/Cho-Manno's[!!-~]Resolve.dck -text
 forge-gui/res/quest/precons/Code[!!-~]of[!!-~]the[!!-~]Orzhov.dck -text
+forge-gui/res/quest/precons/Conquering[!!-~]Hordes.dck -text
 forge-gui/res/quest/precons/Critical[!!-~]Mass.dck -text
 forge-gui/res/quest/precons/Crusher.dck -text
+forge-gui/res/quest/precons/Cunning[!!-~]Plan.dck -text
 forge-gui/res/quest/precons/Custom[!!-~]Creatures.dck -text
 forge-gui/res/quest/precons/Dark[!!-~]Sacrifice.dck -text
 forge-gui/res/quest/precons/Dead[!!-~]Ahead.dck -text
@@ -16629,6 +16632,7 @@ forge-gui/res/quest/precons/Going[!!-~]Rogue.dck -text
 forge-gui/res/quest/precons/Golgari[!!-~]Deathcreep.dck -text
 forge-gui/res/quest/precons/Golgari[!!-~]Growth.dck -text
 forge-gui/res/quest/precons/Grab[!!-~]for[!!-~]Power.dck -text
+forge-gui/res/quest/precons/Grave[!!-~]Advantage.dck -text
 forge-gui/res/quest/precons/Grave[!!-~]Danger.dck -text
 forge-gui/res/quest/precons/Grave[!!-~]Power.dck -text
 forge-gui/res/quest/precons/Grixis[!!-~]Shambling[!!-~]Army.dck -text
@@ -16647,6 +16651,7 @@ forge-gui/res/quest/precons/Into[!!-~]the[!!-~]Breach.dck -text
 forge-gui/res/quest/precons/Invading[!!-~]Spawn.dck -text
 forge-gui/res/quest/precons/Izzet[!!-~]Gizmometry.dck -text
 forge-gui/res/quest/precons/Izzet[!!-~]Ingenuity.dck -text
+forge-gui/res/quest/precons/Jeskai[!!-~]Monks.dck -text
 forge-gui/res/quest/precons/Jund[!!-~]Appetite[!!-~]for[!!-~]War.dck -text
 forge-gui/res/quest/precons/Kamahl's[!!-~]Temper.dck -text
 forge-gui/res/quest/precons/Kami[!!-~]Reborn.dck -text
@@ -16661,6 +16666,7 @@ forge-gui/res/quest/precons/Lightforce.dck -text
 forge-gui/res/quest/precons/Little[!!-~]Bashers.dck -text
 forge-gui/res/quest/precons/Lofty[!!-~]Heights.dck -text
 forge-gui/res/quest/precons/Manipulative[!!-~]Monstrosities.dck -text
+forge-gui/res/quest/precons/Mardu[!!-~]Raiders.dck -text
 forge-gui/res/quest/precons/Master[!!-~]Blaster.dck -text
 forge-gui/res/quest/precons/Mercenaries.dck -text
 forge-gui/res/quest/precons/Merrow[!!-~]Riverways.dck -text
@@ -16728,11 +16734,13 @@ forge-gui/res/quest/precons/Spirit[!!-~]Flames.dck -text
 forge-gui/res/quest/precons/Spiritcraft.dck -text
 forge-gui/res/quest/precons/Stampede[!!-~]of[!!-~]Beasts.dck -text
 forge-gui/res/quest/precons/Stampede.dck -text
+forge-gui/res/quest/precons/Stampeding[!!-~]Hordes.dck -text
 forge-gui/res/quest/precons/Sunburst.dck -text
 forge-gui/res/quest/precons/Superabundance.dck -text
 forge-gui/res/quest/precons/Suspended[!!-~]Sentence.dck -text
 forge-gui/res/quest/precons/Sweet[!!-~]Revenge.dck -text
 forge-gui/res/quest/precons/Swift[!!-~]Justice.dck -text
+forge-gui/res/quest/precons/Temur[!!-~]Avalanche.dck -text
 forge-gui/res/quest/precons/The[!!-~]Adventurers.dck -text
 forge-gui/res/quest/precons/The[!!-~]Spikes.dck -text
 forge-gui/res/quest/precons/The[!!-~]Swarm.dck -text
@@ -16743,6 +16751,7 @@ forge-gui/res/quest/precons/Totem[!!-~]Power.dck -text
 forge-gui/res/quest/precons/Trounce-O-Matic.dck -text
 forge-gui/res/quest/precons/Truth[!!-~]Seekers.dck -text
 forge-gui/res/quest/precons/Turnabout.dck -text
+forge-gui/res/quest/precons/Unflinching[!!-~]Assault.dck -text
 forge-gui/res/quest/precons/Unnatural[!!-~]Schemes.dck -text
 forge-gui/res/quest/precons/Unstable[!!-~]Terrain.dck -text
 forge-gui/res/quest/precons/Vampire[!!-~]Onslaught.dck -text
