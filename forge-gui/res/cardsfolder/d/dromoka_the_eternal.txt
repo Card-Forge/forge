@@ -1,5 +1,5 @@
 Name:Dromoka, the Eternal
-ManaCost:3 W
+ManaCost:3 G W
 Types:Legendary Creature Dragon
 PT:5/5
 K:Flying
