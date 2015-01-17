@@ -84,6 +84,13 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
         return buildDeck().getMain();
     }
     
+    /**
+     * <p>
+     * buildDeck.
+     * </p>
+     *
+     * @return the new Deck.
+     */
     public Deck buildDeck() {
         return buildDeck(null);
     }
@@ -92,7 +99,9 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
      * <p>
      * buildDeck.
      * </p>
-     * 
+     *
+     * @param landSetCode
+     *             the set to take basic lands from (pass 'null' for random).
      * @return the new Deck.
      */
     public Deck buildDeck(String landSetCode) {
@@ -221,6 +230,8 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
      * 
      * @param clrCnts
      *            color counts needed
+     * @param landSetCode
+     *            the set to take basic lands from (pass 'null' for random).
      */
     private void fixDeckSize(final int[] clrCnts, String landSetCode) {
         while (deckList.size() > 40) {
@@ -277,6 +288,8 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
      * Add lands to fulfill the given color counts.
      * 
      * @param clrCnts
+     * @param landSetCode
+     *             the set to take basic lands from (pass 'null' for random).
      */
     private void addLands(final int[] clrCnts, String landSetCode) {
         // basic lands that are available in the deck
@@ -325,6 +338,8 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
      * Get basic land.
      * 
      * @param basicLand
+     * @param landSetCode
+     *             the set to take basic lands from (pass 'null' for random).
      * @return card
      */
     private PaperCard getBasicLand(int basicLand, String landSetCode) {
