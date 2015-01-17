@@ -1866,6 +1866,7 @@ forge-gui/res/cardsfolder/a/arcane_teachings.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arcanis_the_omnipotent.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arcanis_the_omnipotent_avatar.txt -text
 forge-gui/res/cardsfolder/a/arcanum_wings.txt -text
+forge-gui/res/cardsfolder/a/arcbond.txt -text
 forge-gui/res/cardsfolder/a/arcbound_bruiser.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arcbound_crusher.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arcbound_fiend.txt -text
