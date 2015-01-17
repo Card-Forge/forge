@@ -1,4 +1,185 @@
 //Rank|Name|Rarity|Set
+#1|Warden of the First Tree|M|FRF
+#2|Brutal Hordechief|M|FRF
+#3|Torrent Elemental|M|FRF
+#4|Soulfire Grand Master|M|FRF
+#5|Whisperwood Elemental|M|FRF
+#6|Monastery Mentor|M|FRF
+#7|Ugin the Spirit Dragon|M|FRF
+#8|Shaman of the Great Hunt|M|FRF
+#9|Mardu Strike Leader|R|FRF
+#10|Sage Eye Avengers|R|FRF
+#11|Silumgar the Drifting Death|R|FRF
+#12|Yasova Dragonclaw|R|FRF
+#13|Supplant Form|R|FRF
+#14|Temporal Trespass|M|FRF
+#15|Temur War Shaman|R|FRF
+#16|Daghatar the Adamant|R|FRF
+#17|Atarka World Render|R|FRF
+#18|Palace Siege|R|FRF
+#19|Flamewake Phoenix|R|FRF
+#20|Citadel Siege|R|FRF
+#21|Dromoka the Eternal|R|FRF
+#22|Sandsteppe Mastodon|R|FRF
+#23|Alesha Who Smiles at Death|R|FRF
+#24|Archfiend of Depravity|R|FRF
+#25|Crux of Fate|R|FRF
+#26|Shu Yun the Silent Tempest|R|FRF
+#27|Ojutai Soul of Winter|R|FRF
+#28|Ghastly Conscription|M|FRF
+#29|Monastery Siege|R|FRF
+#30|Kolaghan the Storm's Fury|R|FRF
+#31|Dragonscale General|R|FRF
+#32|Wildcall|R|FRF
+#33|Temur Sabertooth|U|FRF
+#34|Mastery of the Unseen|R|FRF
+#35|Soulflayer|R|FRF
+#36|Tasigur the Golden Fang|R|FRF
+#37|Outpost Siege|R|FRF
+#38|Mob Rule|R|FRF
+#39|Valorous Stance|U|FRF
+#40|Jeskai Infiltrator|R|FRF
+#41|Cloudform|U|FRF
+#42|Mistfire Adept|U|FRF
+#43|Shamanic Revelation|R|FRF
+#44|Wild Slash|U|FRF
+#45|Merciless Executioner|U|FRF
+#46|Pyrotechnics|U|FRF
+#47|Frontier Siege|R|FRF
+#48|Flamerush Rider|R|FRF
+#49|Destructor Dragon|U|FRF
+#50|Wandering Champion|U|FRF
+#51|Battle Brawler|U|FRF
+#52|Noxious Dragon|U|FRF
+#53|Reality Shift|U|FRF
+#54|Marang River Prowler|U|FRF
+#55|Shockmaw Dragon|U|FRF
+#56|Lightform|U|FRF
+#57|Mardu Woe Reaper|U|FRF
+#58|Abzan Beastmaster|U|FRF
+#59|Mardu Shadowspear|U|FRF
+#60|Wardscale Dragon|U|FRF
+#61|Rally the Ancestors|R|FRF
+#62|Vaultbreaker|U|FRF
+#63|Arashin War Beast|U|FRF
+#64|Elite Scaleguard|U|FRF
+#65|Frost Walker|U|FRF
+#66|Orc Sureshot|U|FRF
+#67|Abzan Kin Guard|U|FRF
+#68|Mindscour Dragon|U|FRF
+#69|Arcbond|R|FRF
+#70|Aven Surveyor|C|FRF
+#71|Rageform|U|FRF
+#72|Bloodfire Enforcers|U|FRF
+#73|Bathe in Dragonfire|C|FRF
+#74|Battlefront Krushok|U|FRF
+#75|Sandsteppe Outcast|C|FRF
+#76|Whisk Away|C|FRF
+#77|Channel Harm|U|FRF
+#78|Hunt the Weak|C|FRF
+#79|Mardu Scout|C|FRF
+#80|Lotus Path Djinn|C|FRF
+#81|Lotus Eye Mystics|U|FRF
+#82|Whisperer of the Wilds|C|FRF
+#83|Reach of Shadows|C|FRF
+#84|Sandblast|C|FRF
+#85|Goblin Heelcutter|C|FRF
+#86|Abzan Skycaptain|C|FRF
+#87|Typhoid Rats|C|FRF
+#88|Sultai Emissary|C|FRF
+#89|Jeskai Sage|C|FRF
+#90|Dragon Bell Monk|C|FRF
+#91|Cached Defenses|U|FRF
+#92|Jeskai Barricade|U|FRF
+#93|Soul Summons|C|FRF
+#94|Douse in Gloom|C|FRF
+#95|Pressure Point|C|FRF
+#96|Ainok Guide|C|FRF
+#97|Collateral Damage|C|FRF
+#98|Ethereal Ambush|C|FRF
+#99|Hungering Yeti|U|FRF
+#100|Write into Being|C|FRF
+#101|Lightning Shrieker|C|FRF
+#102|Fearsome Awakening|U|FRF
+#103|Hooded Assassin|C|FRF
+#104|Neutralizing Blast|U|FRF
+#105|Gore Swine|C|FRF
+#106|Frontier Mastodon|C|FRF
+#107|Ruthless Instincts|U|FRF
+#108|Harsh Sustenance|C|FRF
+#109|Scroll of the Masters|R|FRF
+#110|Fruit of the First Tree|U|FRF
+#111|Ancestral Vengeance|C|FRF
+#112|Cunning Strike|C|FRF
+#113|Winds of Qal Sisma|U|FRF
+#114|Will of the Naga|C|FRF
+#115|Ugin's Construct|U|FRF
+#116|Smoldering Efreet|C|FRF
+#117|Honor's Reward|U|FRF
+#118|War Flare|C|FRF
+#119|Humble Defector|U|FRF
+#120|Refocus|C|FRF
+#121|Scoured Barrens|C|FRF
+#122|Sultai Skullkeeper|C|FRF
+#123|Thornwood Falls|C|FRF
+#124|Enhanced Awareness|C|FRF
+#125|Grim Contest|C|FRF
+#126|Jeskai Runemark|C|FRF
+#127|Gurmag Angler|C|FRF
+#128|Sudden Reclamation|U|FRF
+#129|Arashin Cleric|C|FRF
+#130|Feral Krushok|C|FRF
+#131|Alesha's Vanguard|C|FRF
+#132|Formless Nurturing|C|FRF
+#133|Aven Skirmisher|C|FRF
+#134|Ambush Krotiq|C|FRF
+#135|Mardu Runemark|C|FRF
+#136|Temur Battle Rage|C|FRF
+#137|Grave Strength|U|FRF
+#138|Diplomacy of the Wastes|U|FRF
+#139|Swiftwater Cliffs|C|FRF
+#140|Abzan Runemark|C|FRF
+#141|Rugged Highlands|C|FRF
+#142|Blossoming Sands|C|FRF
+#143|Jungle Hollow|C|FRF
+#144|Fierce Invocation|C|FRF
+#145|Map the Wastes|C|FRF
+#146|Hewed Stone Retainers|U|FRF
+#147|Archers of Qarsi|C|FRF
+#148|Return to the Earth|C|FRF
+#149|Hero's Blade|U|FRF
+#150|Sibsig Muckdraggers|U|FRF
+#151|Qarsi High Priest|U|FRF
+#152|Bloodfell Caves|C|FRF
+#153|Temur Runemark|C|FRF
+#154|Defiant Ogre|C|FRF
+#155|Wind Scarred Crag|C|FRF
+#156|Shifting Loyalties|U|FRF
+#157|Abzan Advantage|C|FRF
+#158|Rakshasa's Disdain|C|FRF
+#159|Sultai Runemark|C|FRF
+#160|Great Horn Krushok|C|FRF
+#161|Dismal Backwater|C|FRF
+#162|Pilgrim of the Fires|U|FRF
+#163|Rite of Undoing|U|FRF
+#164|Dragonrage|U|FRF
+#165|Sibsig Host|C|FRF
+#166|Tasigur's Cruelty|C|FRF
+#167|Fascination|U|FRF
+#168|Crucible of the Spirit Dragon|R|FRF
+#169|Tranquil Cove|C|FRF
+#170|Sage's Reverie|U|FRF
+#171|Dark Deal|U|FRF
+#172|Break Through the Line|U|FRF
+#173|Goblin Boom Keg|U|FRF
+#174|Friendly Fire|U|FRF
+#175|Renowned Weaponsmith|U|FRF
+#176|Forest|L|FRF
+#177|Plains|L|FRF
+#178|Swamp|L|FRF
+#179|Island|L|FRF
+#180|Mountain|L|FRF
+//Rank|Name|Rarity|Set
 #1|Sarkhan the Dragonspeaker|M|KTK
 #2|Ashcloud Phoenix|M|KTK
 #3|Wingmate Roc|M|KTK
