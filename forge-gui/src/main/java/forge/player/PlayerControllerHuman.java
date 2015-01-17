@@ -1633,8 +1633,11 @@ public class PlayerControllerHuman extends PlayerController {
                     final Card forgeCard = Card.fromPaperCard(c, p);
 
                     if (c.getRules().getType().isLand()) {
+                        game.getAction().moveToHand(forgeCard); //this is needed to ensure land abilities fire
                         game.getAction().moveToPlay(forgeCard);
-                    } else {
+                        game.getTriggerHandler().runWaitingTriggers(); //ensure triggered abilities fire
+                    }
+                    else {
                         final FCollectionView<SpellAbility> choices = forgeCard.getBasicSpells();
                         if (choices.isEmpty()) {
                             return; // when would it happen?
