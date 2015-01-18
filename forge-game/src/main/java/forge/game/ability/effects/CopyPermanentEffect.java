@@ -80,6 +80,17 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         final int numCopies = sa.hasParam("NumCopies") ? AbilityUtils.calculateAmount(hostCard,
                 sa.getParam("NumCopies"), sa) : 1;
 
+        Player controller = null;
+        if (sa.hasParam("Controller")) {
+            final FCollectionView<Player> defined = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("Controller"), sa);
+            if (!defined.isEmpty()) {
+                controller = defined.getFirst();
+            }
+        }
+        if (controller == null) {
+            controller = sa.getActivatingPlayer();
+        }
+
         List<Card> tgtCards = getTargetCards(sa);
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
@@ -128,22 +139,10 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
 
                 tgtCards.clear();
                 if (!cards.isEmpty()) {
-                    tgtCards.add(Card.fromPaperCard(cards.get(0), sa.getActivatingPlayer()));
+                    tgtCards.add(Card.fromPaperCard(cards.get(0), controller));
                 }
             }
         }
-
-        Player controller = null;
-        if (sa.hasParam("Controller")) {
-            FCollectionView<Player> defined = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("Controller"), sa);
-            if (!defined.isEmpty()) {
-                controller = defined.getFirst();
-            }
-        }
-        if (controller == null) {
-            controller = sa.getActivatingPlayer();
-        }
-
         hostCard.clearClones();
 
         for (final Card c : tgtCards) {
