@@ -3497,7 +3497,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("sameName")) {
-            if (!getName().equals(source.getName())) {
+            if (getName().equals("") || !getName().equals(source.getName())) {
                 return false;
             }
         } else if (property.equals("NamedCard")) {
