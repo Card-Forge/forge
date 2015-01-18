@@ -12,6 +12,8 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.util.FCollectionView;
 import forge.util.maps.LinkedHashMapToAmount;
 import forge.util.maps.MapToAmount;
@@ -52,6 +54,29 @@ public class AttackRequirement {
             } else {
                 defenderSpecific.remove(defender);
             }
+        }
+
+        // Remove GameEntities that are no longer on the battlefield or are
+        // related to Players who have lost the game
+        final List<GameEntity> toRemove = Lists.newArrayListWithCapacity(defenderSpecific.size());
+        for (final GameEntity entity : defenderSpecific.keySet()) {
+            boolean removeThis = false;
+            if (entity instanceof Player) {
+                if (((Player) entity).hasLost()) {
+                    removeThis = true;
+                }
+            } else if (entity instanceof Card) {
+                final Player controller = ((Card) entity).getController();
+                if (controller.hasLost() || !controller.getCardsIn(ZoneType.Battlefield).contains(entity)) {
+                    removeThis = true;
+                }
+            }
+            if (removeThis) {
+                toRemove.add(entity);
+            }
+        }
+        for (final GameEntity entity : toRemove) {
+            defenderSpecific.remove(entity);
         }
     }
 
