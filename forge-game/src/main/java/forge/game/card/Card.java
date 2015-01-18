@@ -4908,11 +4908,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.equals("HasDevoured")) {
-            if (devouredCards.size() == 0) {
+            if (devouredCards == null || devouredCards.size() == 0) {
                 return false;
             }
         } else if (property.equals("HasNotDevoured")) {
-            if (devouredCards.size() != 0) {
+            if (devouredCards != null && devouredCards.size() != 0) {
                 return false;
             }
         } else if (property.equals("IsMonstrous")) {
