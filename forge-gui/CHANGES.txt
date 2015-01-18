@@ -31,6 +31,7 @@ Alesha, Who Smiles at Death
 Ambush Krotiq
 Ancestral Vengeance
 Arashin Cleric
+Arcbond
 Archers of Qarsi
 Archfiend of Depravity
 Atarka, World Render
@@ -70,6 +71,7 @@ Flame Fusillade
 Flamerush Rider
 Flamewake Phoenix
 Formless Nurturing
+Friendly Fire
 Frontier Mastodon
 Frontier Siege
 Frost Walker
@@ -89,6 +91,7 @@ Hewed Stone Retainers
 Honor's Reward
 Hooded Assassin
 Humble Defector
+Hungering Yeti
 Jeskai Barricade
 Jeskai Infiltrator
 Jeskai Runemark
@@ -177,7 +180,9 @@ Whisk Away
 Whisperer of the Wilds
 Whisperwood Elemental
 Wildcall
+Wild Slash
 Will of the Naga
+Winds of Qal Sisma
 Wingmate Roc
 Write Into Being
 Yasova Dragonclaw
