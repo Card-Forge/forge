@@ -5,6 +5,7 @@ import com.google.common.collect.Iterables;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.card.Card;
@@ -65,6 +66,10 @@ public class PermanentCreatureAi extends SpellAbilityAi {
         if (sa.isDash()) {
             //only checks that the dashed creature will attack
             if (ph.isPlayerTurn(aiPlayer) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                if (ComputerUtilCost.canPayCost(sa.getHostCard().getSpellPermanent(),aiPlayer)) {
+                    //do not dash if creature can be played normally
+                    return false;
+                }
                 Card dashed = CardFactory.copyCard(sa.getHostCard(), true);
                 dashed.setSickness(false);
                 return ComputerUtilCard.doesSpecifiedCreatureAttackAI(aiPlayer, dashed);
