@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Enchantment Aura
 K:Enchant artifact
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Artifact | AITgts$ Creature,Card.hasActivatedAbility | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddHiddenKeyword$ CARDNAME's activated abilities can't be activated. | Description$ Enchanted artifact's activated abilities can't be activated. If enchanted artifact is a creature, it can't attack or block.
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddHiddenKeyword$ CARDNAME's activated abilities can't be activated. | Description$ Enchanted artifact can't attack or block, and its activated abilities can't be activated.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stasis_cocoon.jpg
-Oracle:Enchant artifact\nEnchanted artifact's activated abilities can't be activated. If enchanted artifact is a creature, it can't attack or block.
+Oracle:Enchant artifact\nEnchanted artifact can't attack or block, and its activated abilities can't be activated.

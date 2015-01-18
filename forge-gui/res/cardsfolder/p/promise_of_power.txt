@@ -2,11 +2,11 @@ Name:Promise of Power
 ManaCost:2 B B B
 Types:Sorcery
 K:Entwine 4
-A:SP$ Charm | Cost$ 2 B B B | Choices$ DBDraw,DBToken | CharmNum$ 1 | SpellDescription$ Choose one - You draw five cards and you lose 5 life; or put an X/X black Demon creature token with flying onto the battlefield, where X is the number of cards in your hand as the token enters the battlefield.
+A:SP$ Charm | Cost$ 2 B B B | Choices$ DBDraw,DBToken | CharmNum$ 1 | SpellDescription$ Choose one - You draw five cards and you lose 5 life; or put an X/X black Demon creature token with flying onto the battlefield, where X is the number of cards in your hand.
 SVar:DBDraw:DB$ Draw | NumCards$ 5 | SpellDescription$ You draw five cards and you lose 5 life; | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 5
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Demon | TokenTypes$ Creature,Demon | TokenOwner$ You | TokenColors$ Black | TokenKeywords$ Flying | TokenPower$ X | TokenToughness$ X | References$ X | SpellDescription$ Put an X/X black Demon creature token with flying onto the battlefield, where X is the number of cards in your hand as the token enters the battlefield.
 SVar:X:Count$NumCardsInYourHand
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/promise_of_power.jpg
-Oracle:Choose one - You draw five cards and you lose 5 life; or put an X/X black Demon creature token with flying onto the battlefield, where X is the number of cards in your hand as the token enters the battlefield.\nEntwine {4} (Choose both if you pay the entwine cost.)
+Oracle:Choose one - You draw five cards and you lose 5 life; or put an X/X black Demon creature token with flying onto the battlefield, where X is the number of cards in your hand.\nEntwine {4} (Choose both if you pay the entwine cost.)

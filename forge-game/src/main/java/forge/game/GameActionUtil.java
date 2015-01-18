@@ -233,7 +233,7 @@ public final class GameActionUtil {
                 newSA.setDescription(sa.getDescription() + " (by paying " + cost.toSimpleString() + " instead of its mana cost)");
                 alternatives.add(newSA);
             }
-            if (sa.isSpell() && keyword.equals("You may cast CARDNAME any time you could cast an instant if you pay 2 more to cast it.")) {
+            if (sa.isSpell() && keyword.equals("You may cast CARDNAME as though it had flash if you pay 2 more to cast it.")) {
                 final SpellAbility newSA = sa.copy();
                 newSA.setBasicSpell(false);
                 ManaCostBeingPaid newCost = new ManaCostBeingPaid(source.getManaCost());
