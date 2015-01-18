@@ -4,10 +4,14 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactory;
 import forge.game.card.CardPredicates;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -22,6 +26,7 @@ public class PermanentCreatureAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         String logic = sa.getParam("AILogic");
         Game game = aiPlayer.getGame();
+        final PhaseHandler ph = game.getPhaseHandler();
 
         if ("ZeroToughness".equals(logic)) {
             // If Creature has Zero Toughness, make sure some static ability is in play
@@ -55,9 +60,21 @@ public class PermanentCreatureAi extends SpellAbilityAi {
             }
             */
         }
+        
+        // FRF Dash Keyword
+        if (sa.isDash()) {
+            //only checks that the dashed creature will attack
+            if (ph.isPlayerTurn(aiPlayer) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                Card dashed = CardFactory.copyCard(sa.getHostCard(), true);
+                dashed.setSickness(false);
+                return ComputerUtilCard.doesSpecifiedCreatureAttackAI(aiPlayer, dashed);
+            } else {
+                return false;
+            }
+        }
 
         // Wait for Main2 if possible
-        if (game.getPhaseHandler().is(PhaseType.MAIN1)
+        if (ph.is(PhaseType.MAIN1)
                 && !ComputerUtil.castPermanentInMain1(aiPlayer, sa)) {
             return false;
         }
