@@ -88,6 +88,17 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
+        addItem(new FMenuItem("Dump Game State", new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                ThreadUtil.invokeInGameThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        MatchUtil.getHumanController().cheat().dumpGameState();
+                    }
+                });
+            }
+        }));
 
         final boolean unlimitedLands = MatchUtil.getHumanController().canPlayUnlimitedLands();
         addItem(new FCheckBoxMenuItem("Play Unlimited Lands", unlimitedLands,
