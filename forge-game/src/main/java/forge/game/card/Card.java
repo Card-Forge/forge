@@ -416,6 +416,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         // Turn Face Down (even if it's DFC).
         ManaCost cost = this.getManaCost();
 
+        boolean isCreature = this.isCreature();
+
          // Sometimes cards are manifested while already being face down
          if (!turnFaceDown(true) && currentStateName != CardStateName.FaceDown) {
              return null;
@@ -430,7 +432,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         c.setManifested(true);
 
         // Add manifest demorph static ability for creatures?
-        c.addSpellAbility(CardFactoryUtil.abilityManifestFaceUp(c, cost));
+        c.addSpellAbility(CardFactoryUtil.abilityManifestFaceUp(c, cost, isCreature));
 
         return c;
     }

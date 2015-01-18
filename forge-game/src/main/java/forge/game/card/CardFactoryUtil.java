@@ -166,7 +166,7 @@ public class CardFactoryUtil {
         return morphUp;
     }
 
-    public static AbilityStatic abilityManifestFaceUp(final Card sourceCard, final ManaCost manaCost) {
+    public static AbilityStatic abilityManifestFaceUp(final Card sourceCard, final ManaCost manaCost, final boolean canFlip) {
         final Cost cost = new Cost(manaCost, false);
 
         final AbilityStatic manifestUp = new AbilityStatic(sourceCard, cost, null) {
@@ -183,10 +183,10 @@ public class CardFactoryUtil {
             @Override
             public boolean canPlay() {
                 return sourceCard.getController().equals(this.getActivatingPlayer()) && sourceCard.isFaceDown()
-                        && sourceCard.isInPlay() && sourceCard.isManifested();
+                        && sourceCard.isInPlay() && sourceCard.isManifested() && canFlip;
             }
 
-        }; // morph_up
+        }; // manifest_up
 
         String costDesc = cost.toString();
         // get rid of the ": " at the end

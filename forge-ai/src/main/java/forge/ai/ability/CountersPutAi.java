@@ -6,10 +6,7 @@ import com.google.common.collect.Iterables;
 import forge.ai.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
@@ -88,7 +85,16 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
             }
         }
-        
+
+        if (sa.hasParam("Bolster")) {
+            CardCollection creatsYouCtrl = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+            CardCollection leastToughness = new CardCollection(Aggregates.listWithMin(creatsYouCtrl, CardPredicates.Accessors.fnGetDefense));
+            if (leastToughness.isEmpty()) {
+                return false;
+            }
+            // TODO If Creature that would be Bolstered for some reason is useless, also return False
+        }
+
         if (sa.hasParam("Monstrosity") && source.isMonstrous()) {
             return false;
         }
