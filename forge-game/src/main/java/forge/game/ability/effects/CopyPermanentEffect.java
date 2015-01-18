@@ -128,7 +128,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
 
                 tgtCards.clear();
                 if (!cards.isEmpty()) {
-                    tgtCards.add(Card.fromPaperCard(cards.get(0), null));
+                    tgtCards.add(Card.fromPaperCard(cards.get(0), sa.getActivatingPlayer()));
                 }
             }
         }
