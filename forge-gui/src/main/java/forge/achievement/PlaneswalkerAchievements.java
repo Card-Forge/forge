@@ -38,10 +38,12 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Chandra, Pyromaster", "Chandra's Vengeance", "Please file in triplicate!");
         add("Chandra, the Firebrand", "Chandra's Hex", "When burning five is just not enough.");
         add("Dack Fayden", "Dack's Discount", "Do you have any evidence it was me?");
+        add("Daretti, Scrap Savant", "Daretti's Recycler", "Save the environment!");
         add("Domri Rade", "Domri's Surprise", "That's GOTTA get me a date!");
         add("Elspeth Tirel", "Elspeth's Solitude", "Tokens are my only friends...");
         add("Elspeth, Knight-Errant", "Elspeth's Endurance", "Bant will prevail!");
         add("Elspeth, Sun's Champion", "Elspeth's Crusade", "With Heliod on my side, I'm invincible!");
+        add("Freyalise, Llanowar's Fury", "Freyalise's Big Party", "Let's celebrate each and every one of you!");
         add("Garruk, the Veil-Cursed", "Garruk's Graveyard", "The dead shall help the living!");
         add("Garruk Wildspeaker", "Garruk's Overrun", "I speak seven languages, including Wild!");
         add("Garruk, Apex Predator", "Garruk's Prey", "Funny, it's usually a good thing to have an emblem...");
@@ -60,9 +62,11 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Liliana Vess", "Liliana's Bidding", "Stop being lazy and go to work!");
         add("Liliana of the Dark Realms", "Liliana's Ritual", "What do you mean, \"out of character\"?");
         add("Liliana of the Veil", "Liliana's Choice", "Which one of your children do you love best?");
+        add("Nahiri, the Lithomancer", "Nahiri's Gift", "I pulled it out! Now I'm a king!");
         add("Nicol Bolas, Planeswalker", "Bolas's Ultimatum", "Whatever you do, don't call him \"Nicol\"!");
         add("Nissa Revane", "Nissa's Summoning", "The whole village is here!");
         add("Nissa, Worldwaker", "Nissa's Awakening", "The whole country is here!");
+        add("Ob Nixilis of the Black Oath", "Nixilis's Black Oath", "We all have to bring sacrifices sometimes.");
         add("Ral Zarek", "Ral's Long Day", "So much work, so much time!");
         add("Sarkhan Vol", "Sarkhan's Dragons", "Go forth, my minions!");
         add("Sarkhan the Mad", "Sarkhan's Beatdown", "Tag! You're it!");
