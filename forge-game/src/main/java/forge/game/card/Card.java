@@ -2449,8 +2449,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (changedCardTypes.isEmpty()) {
             return currentState.getType();
         }
-        //return view's type since that already has cached changes from changedCardTypes
-        return currentState.getView().getType();
+        return currentState.getType().getTypeWithChanges(changedCardTypes);
     }
 
     public Map<Long, CardChangedType> getChangedCardTypes() {
