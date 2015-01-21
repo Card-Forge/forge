@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact Equipment
 K:Equip 2
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each charge counter on CARDNAME.
-T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage, put a charge counter on CARDNAME.
+T:Mode$ DealtCombatDamageOnce | ValidSource$ Creature.EquippedBy | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage, put a charge counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ 1
 SVar:X:Count$CardCounters.CHARGE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/banshees_blade.jpg
