@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -38,40 +38,40 @@ import java.util.*;
  * <p>
  * BoosterGenerator class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
 public class BoosterGenerator {
 
 
-    private final static Map<String, PrintSheet> cachedSheets = new TreeMap<String, PrintSheet>(String.CASE_INSENSITIVE_ORDER);
-    private static final synchronized PrintSheet getPrintSheet(String key) {
+    private final static Map<String, PrintSheet> cachedSheets = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+    private static synchronized PrintSheet getPrintSheet(String key) {
         if( !cachedSheets.containsKey(key) )
             cachedSheets.put(key, makeSheet(key, StaticData.instance().getCommonCards().getAllCards()));
         return cachedSheets.get(key);
     }
 
-    private static final PaperCard generateFoilCard(PrintSheet sheet) {
+    private static PaperCard generateFoilCard(PrintSheet sheet) {
         return StaticData.instance().getCommonCards().getFoiled(sheet.random(1, true).get(0));
     }
-    
-    public static final List<PaperCard> getBoosterPack(SealedProduct.Template template) {
-        List<PaperCard> result = new ArrayList<PaperCard>();
-        List<PrintSheet> sheetsUsed = new ArrayList<PrintSheet>();
+
+    public static List<PaperCard> getBoosterPack(SealedProduct.Template template) {
+        List<PaperCard> result = new ArrayList<>();
+        List<PrintSheet> sheetsUsed = new ArrayList<>();
 
         CardEdition edition = StaticData.instance().getEditions().get(template.getEdition());
         boolean hasFoil = edition != null && !template.getSlots().isEmpty() && MyRandom.getRandom().nextDouble() < edition.getFoilChanceInBooster() && edition.getFoilType() != FoilType.NOT_SUPPORTED;
         boolean foilAtEndOfPack = hasFoil && edition.getFoilAlwaysInCommonSlot();
         String foilSlot = !hasFoil ? null : foilAtEndOfPack ? BoosterSlots.COMMON : Aggregates.random(template.getSlots()).getKey();
-        
+
         for(Pair<String, Integer> slot : template.getSlots()) {
             String slotType = slot.getLeft(); // add expansion symbol here?
-            int numCards = slot.getRight().intValue();
+            int numCards = slot.getRight();
 
             String[] sType = TextUtil.splitWithParenthesis(slotType, ' ');
             String setCode = sType.length == 1 && template.getEdition() != null ?  template.getEdition() : null;
-            String sheetKey = StaticData.instance().getEditions().contains(setCode) ? slotType.trim() + " " + setCode: slotType.trim(); 
+            String sheetKey = StaticData.instance().getEditions().contains(setCode) ? slotType.trim() + " " + setCode: slotType.trim();
 
             boolean foilInThisSlot = hasFoil && slotType.startsWith(foilSlot);
             if (foilInThisSlot)
@@ -95,12 +95,12 @@ public class BoosterGenerator {
     }
 
     @SuppressWarnings("unchecked")
-    public static final PrintSheet makeSheet(String sheetKey, Iterable<PaperCard> src) {
+    public static PrintSheet makeSheet(String sheetKey, Iterable<PaperCard> src) {
         PrintSheet ps = new PrintSheet(sheetKey);
         String[] sKey = TextUtil.splitWithParenthesis(sheetKey, ' ', 2);
         Predicate<PaperCard> setPred = (Predicate<PaperCard>) (sKey.length > 1 ? IPaperCard.Predicates.printedInSets(sKey[1].split(" ")) : Predicates.alwaysTrue());
 
-        List<String> operators = new LinkedList<String>(Arrays.asList(TextUtil.splitWithParenthesis(sKey[0], ':')));
+        List<String> operators = new LinkedList<>(Arrays.asList(TextUtil.splitWithParenthesis(sKey[0], ':')));
         Predicate<PaperCard> extraPred = buildExtraPredicate(operators);
 
         // source replacement operators - if one is applied setPredicate will be ignored
@@ -115,7 +115,7 @@ public class BoosterGenerator {
             } else if (mainCode.startsWith("promo")) { // get exactly the named cards, that's a tiny inlined print sheet
                 String list = StringUtils.strip(mainCode.substring(5), "() ");
                 String[] cardNames = TextUtil.splitWithParenthesis(list, ',', '"', '"');
-                List<PaperCard> srcList = new ArrayList<PaperCard>();
+                List<PaperCard> srcList = new ArrayList<>();
                 for(String cardName: cardNames)
                     srcList.add(StaticData.instance().getCommonCards().getCard(cardName));
                 src = srcList;
@@ -150,7 +150,7 @@ public class BoosterGenerator {
 
             Predicate<PaperCard> predicateRare = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_RARE, extraPred);
             ps.addAll(Iterables.filter(src, predicateRare), 2);
-        } else 
+        } else
             throw new IllegalArgumentException("Booster generator: operator could not be parsed - " + mainCode);
         return ps;
     }
@@ -159,8 +159,8 @@ public class BoosterGenerator {
      * This method also modifies passed parameter
      */
     private static Predicate<PaperCard> buildExtraPredicate(List<String> operators) {
-        List<Predicate<PaperCard>> conditions = new ArrayList<Predicate<PaperCard>>();
-        
+        List<Predicate<PaperCard>> conditions = new ArrayList<>();
+
         Iterator<String> itOp = operators.iterator();
         while(itOp.hasNext()) {
             String operator = itOp.next();
@@ -168,16 +168,16 @@ public class BoosterGenerator {
                 itOp.remove();
                 continue;
             }
-            
+
             if(operator.endsWith("s"))
                 operator = operator.substring(0, operator.length()-1);
-            
+
             boolean invert = operator.charAt(0) == '!';
             if( invert ) operator = operator.substring(1);
-            
+
             Predicate<PaperCard> toAdd = null;
-            if( operator.equalsIgnoreCase(BoosterSlots.DUAL_FACED_CARD) ) {                toAdd = Predicates.compose(CardRulesPredicates.splitType(CardSplitType.Transform), PaperCard.FN_GET_RULES);
-             } else if ( operator.equalsIgnoreCase(BoosterSlots.LAND) ) {         toAdd = Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard.FN_GET_RULES);
+            if( operator.equalsIgnoreCase(BoosterSlots.DUAL_FACED_CARD) ) {      toAdd = Predicates.compose(CardRulesPredicates.splitType(CardSplitType.Transform), PaperCard.FN_GET_RULES);
+            } else if ( operator.equalsIgnoreCase(BoosterSlots.LAND) ) {         toAdd = Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard.FN_GET_RULES);
             } else if ( operator.equalsIgnoreCase(BoosterSlots.BASIC_LAND)) {    toAdd = IPaperCard.Predicates.Presets.IS_BASIC_LAND;
             } else if ( operator.equalsIgnoreCase(BoosterSlots.TIME_SHIFTED)) {  toAdd = IPaperCard.Predicates.Presets.IS_SPECIAL;
             } else if ( operator.equalsIgnoreCase(BoosterSlots.MYTHIC)) {        toAdd = IPaperCard.Predicates.Presets.IS_MYTHIC_RARE;
@@ -187,14 +187,6 @@ public class BoosterGenerator {
             } else if ( operator.startsWith("name(") ) {
                 operator = StringUtils.strip(operator.substring(4), "() ");
                 String[] cardNames = TextUtil.splitWithParenthesis(operator, ',', '"', '"');
-                toAdd = IPaperCard.Predicates.names(Lists.newArrayList(cardNames));
-            } else if (operator.startsWith("fromSheet(")) {
-                String sheetName = StringUtils.strip(operator.substring(9), "()\" ");
-                Iterable<PaperCard> src = StaticData.instance().getPrintSheets().get(sheetName).toFlatList();
-                ArrayList<String> cardNames = Lists.newArrayList();
-                for (PaperCard card : src) {
-                    cardNames.add(card.getName());
-                }
                 toAdd = IPaperCard.Predicates.names(Lists.newArrayList(cardNames));
             }
 
@@ -208,9 +200,9 @@ public class BoosterGenerator {
             conditions.add(toAdd);
         }
         if( conditions.isEmpty() )
-            return Predicates.alwaysTrue(); 
+            return Predicates.alwaysTrue();
         return Predicates.and(conditions);
     }
-        
+
 
 }

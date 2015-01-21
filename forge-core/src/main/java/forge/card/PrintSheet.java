@@ -14,29 +14,29 @@ import java.util.List;
 import java.util.Map.Entry;
 
 
-/** 
+/**
  * TODO: Write javadoc for this type.
  *
  */
 public class PrintSheet {
-    public static final Function<PrintSheet, String> FN_GET_KEY = new Function<PrintSheet, String>() { 
-        @Override public final String apply(PrintSheet sheet) { return sheet.name; } 
+    public static final Function<PrintSheet, String> FN_GET_KEY = new Function<PrintSheet, String>() {
+        @Override public final String apply(PrintSheet sheet) { return sheet.name; }
     };
 
 
     private final ItemPool<PaperCard> cardsWithWeights;
 
-    
+
     private final String name;
     public PrintSheet(String name0) {
         this(name0, null);
     }
-    
+
     public PrintSheet(String name0, ItemPool<PaperCard> pool) {
         name = name0;
-        cardsWithWeights = pool != null ? pool : new ItemPool<PaperCard>(PaperCard.class);
+        cardsWithWeights = pool != null ? pool : new ItemPool<>(PaperCard.class);
     }
-    
+
     public void add(PaperCard card) {
         add(card,1);
     }
@@ -53,9 +53,9 @@ public class PrintSheet {
         for(PaperCard card : cards)
             cardsWithWeights.add(card, weight);
     }
-    
+
     /** Cuts cards out of a sheet - they won't be printed again.
-    * Please use mutable sheets for cubes only.*/ 
+    * Please use mutable sheets for cubes only.*/
     public void removeAll(Iterable<PaperCard> cards) {
         for(PaperCard card : cards)
             cardsWithWeights.remove(card);
@@ -65,7 +65,7 @@ public class PrintSheet {
         int sum = start;
         boolean isSecondRun = start > 0;
         for(Entry<PaperCard, Integer> cc : cardsWithWeights ) {
-            sum += cc.getValue().intValue();
+            sum += cc.getValue();
             if( sum > roulette ) {
                 if( toSkip != null && toSkip.contains(cc.getKey()))
                     continue;
@@ -74,12 +74,12 @@ public class PrintSheet {
         }
         if( isSecondRun )
             throw new IllegalStateException("Print sheet does not have enough unique cards");
-        
+
         return fetchRoulette(sum + 1, roulette, toSkip); // start over from beginning, in case last cards were to skip
     }
-    
+
     public List<PaperCard> random(int number, boolean wantUnique) {
-        List<PaperCard> result = new ArrayList<PaperCard>();
+        List<PaperCard> result = new ArrayList<>();
 
         int totalWeight = cardsWithWeights.countAll();
         if( totalWeight == 0) {
@@ -96,7 +96,7 @@ public class PrintSheet {
             number -= uniqueCards;
         }
 
-        List<PaperCard> uniques = wantUnique ? new ArrayList<PaperCard>() : null; 
+        List<PaperCard> uniques = wantUnique ? new ArrayList<PaperCard>() : null;
         for(int iC = 0; iC < number; iC++) {
             int index = MyRandom.getRandom().nextInt(totalWeight);
             PaperCard toAdd = fetchRoulette(0, index, wantUnique ? uniques : null);
@@ -124,7 +124,7 @@ public class PrintSheet {
         protected PrintSheet read(String title, Iterable<String> body, int idx) {
             return new PrintSheet(title, CardPool.fromCardList(body));
         }
-        
-    }    
+
+    }
 
 }

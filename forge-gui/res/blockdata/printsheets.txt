@@ -1,6 +1,6 @@
 [DGM Lands]
 10 Azorius Guildgate|DGM
-10 Boros Guildgate|DGM 
+10 Boros Guildgate|DGM
 10 Dimir Guildgate|DGM
 10 Golgari Guildgate|DGM
 10 Gruul Guildgate|DGM
@@ -20,6 +20,28 @@
 2 Stomping Ground|GTC
 2 Watery Grave|GTC
 1 Maze's End|DGM
+
+[FRF Lands]
+2 Bloodstained Mire|KTK
+2 Flooded Strand|KTK
+2 Polluted Delta|KTK
+2 Windswept Heath|KTK
+2 Wooded Foothills|KTK
+15 Bloodfell Caves|FRF
+15 Blossoming Sands|FRF
+15 Dismal Backwater|FRF
+15 Jungle Hollow|FRF
+15 Rugged Highlands|FRF
+15 Scoured Barrens|FRF
+15 Swiftwater Cliffs|FRF
+15 Thornwood Falls|FRF
+15 Tranquil Cove|FRF
+15 Wind-Scarred Crag|FRF
+15 Forest|FRF
+15 Island|FRF
+15 Mountain|FRF
+15 Plains|FRF
+15 Swamp|FRF
 
 [GTC Boros Guild]
 1 Act of Treason|GTC
