@@ -325,7 +325,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         displayCardNameOverlay(showText && canShow && showCardNameOverlay(), imgSize, imgPos);
         displayPTOverlay(showText && (canShow || card.isFaceDown()) && showCardPowerOverlay(), imgSize, imgPos);
-        displayCardIdOverlay(showText && showCardIdOverlay(), imgSize, imgPos);
+        displayCardIdOverlay(showText && canShow && showCardIdOverlay(), imgSize, imgPos);
     }
 
     private void displayCardIdOverlay(boolean isVisible, Dimension imgSize, Point imgPos) {
