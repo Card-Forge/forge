@@ -28,12 +28,12 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
-
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -66,6 +66,8 @@ public class Combat {
     private Map<Card, CardCollection> attackersOrderedForDamageAssignment = new HashMap<Card, CardCollection>();
     private Map<Card, CardCollection> blockersOrderedForDamageAssignment = new HashMap<Card, CardCollection>();
     private Map<GameEntity, CombatLki> lkiCache = new HashMap<GameEntity, CombatLki>();
+    private Multimap<Card, GameEntity> dealtDamageTo = HashMultimap.create();
+    private Multimap<Card, GameEntity> dealtDamageToThisCombat = HashMultimap.create();
     
     // List holds creatures who have dealt 1st strike damage to disallow them deal damage on regular basis (unless they have double-strike KW) 
     private CardCollection combatantsThatDealtFirstStrikeDamage = new CardCollection();
@@ -95,6 +97,7 @@ public class Combat {
         blockersOrderedForDamageAssignment.clear();
         lkiCache.clear();
         combatantsThatDealtFirstStrikeDamage.clear();
+        dealtDamageToThisCombat.clear();
 
         //update view for all attackers and blockers
         for (Card c : attackers) {
@@ -644,6 +647,10 @@ public class Combat {
         return assignedDamage;
     }
 
+    public final void addDealtDamageTo(final Card source, final GameEntity ge) {
+        dealtDamageTo.put(source, ge);
+    }
+
     public void dealAssignedDamage() {
         // This function handles both Regular and First Strike combat assignment
         final HashMap<Card, Integer> defMap = defendingDamageMap;
@@ -713,6 +720,16 @@ public class Combat {
             ge.getGame().getTriggerHandler().runTrigger(TriggerType.CombatDamageDoneOnce, runParams, false);
         }
         // This was deeper before, but that resulted in the stack entry acting like before.
+
+        // when ... deals combat damage to one or more
+        for (final Card damageSource : dealtDamageTo.keySet()) {
+            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            runParams.put("DamageSource", damageSource);
+            runParams.put("DamageTargets", dealtDamageTo.get(damageSource));
+            damageSource.getGame().getTriggerHandler().runTrigger(TriggerType.DealtCombatDamageOnce, runParams, false);
+        }
+        dealtDamageToThisCombat.putAll(dealtDamageTo);
+        dealtDamageTo.clear();
     }
 
     public final boolean isUnblocked(final Card att) {

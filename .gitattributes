@@ -655,6 +655,7 @@ forge-game/src/main/java/forge/game/trigger/TriggerCounterRemoved.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerCountered.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerCycled.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerDamageDone.java svneol=native#text/plain
+forge-game/src/main/java/forge/game/trigger/TriggerDealtCombatDamageOnce.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerDestroyed.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerDevoured.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerDiscarded.java svneol=native#text/plain
@@ -1844,6 +1845,7 @@ forge-gui/res/cardsfolder/a/arachnus_spinner.txt -text
 forge-gui/res/cardsfolder/a/arachnus_web.txt -text
 forge-gui/res/cardsfolder/a/arashi_the_sky_asunder.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arashin_cleric.txt -text
+forge-gui/res/cardsfolder/a/arashin_war_beast.txt -text
 forge-gui/res/cardsfolder/a/arbalest_elite.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arbiter_of_knollridge.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arbiter_of_the_ideal.txt -text
