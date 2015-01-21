@@ -92,8 +92,6 @@ public final class AbilityFactory {
      * @return a {@link forge.game.spellability.SpellAbility} object.
      */
     public static final SpellAbility getAbility(final String abString, final Card hostCard) {
-        
-
         Map<String, String> mapParams;
         try {
             mapParams = AbilityFactory.getMapParams(abString);
@@ -104,9 +102,10 @@ public final class AbilityFactory {
 
         // parse universal parameters
         AbilityRecordType type = AbilityRecordType.getRecordType(mapParams);
-        if( null == type )
-            throw new RuntimeException("AbilityFactory : getAbility -- no API in " + hostCard.getName());
-        
+        if (null == type) {
+            String source = hostCard.getName().isEmpty() ? abString : hostCard.getName();
+            throw new RuntimeException("AbilityFactory : getAbility -- no API in " + source);
+        }
         return getAbility(type, type.getApiTypeOf(mapParams), mapParams, parseAbilityCost(hostCard, mapParams, type), hostCard);
     }
 
