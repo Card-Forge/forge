@@ -820,8 +820,11 @@ public class GameAction {
             final ZoneType tgtZone = tgt.getZone().get(0);
 
             if (!perm.isInZone(tgtZone) || !perm.canBeEnchantedBy(c, true) || (perm.isPhasedOut() && !c.isPhasedOut())) {
+                boolean bestowed = c.isBestowed();
                 c.unEnchantEntity(perm);
-                moveToGraveyard(c);
+                if (!bestowed) {
+                    moveToGraveyard(c);
+                }
                 checkAgain = true;
             }
         } else if (entity instanceof Player) {
