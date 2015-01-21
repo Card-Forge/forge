@@ -815,14 +815,15 @@ public class GameAction {
             tgt = sa.getTargetRestrictions();
         }
 
+        boolean wasBestowed = c.isBestowed();
+
         if (entity instanceof Card) {
             final Card perm = (Card) entity;
             final ZoneType tgtZone = tgt.getZone().get(0);
 
             if (!perm.isInZone(tgtZone) || !perm.canBeEnchantedBy(c, true) || (perm.isPhasedOut() && !c.isPhasedOut())) {
-                boolean bestowed = c.isBestowed();
                 c.unEnchantEntity(perm);
-                if (!bestowed) {
+                if (!wasBestowed) {
                     moveToGraveyard(c);
                 }
                 checkAgain = true;
@@ -844,7 +845,7 @@ public class GameAction {
             }
         }
 
-        if (c.isInPlay() && !c.isEnchanting()) {
+        if (c.isInPlay() && !c.isEnchanting() && !wasBestowed) {
             moveToGraveyard(c);
             checkAgain = true;
         }
