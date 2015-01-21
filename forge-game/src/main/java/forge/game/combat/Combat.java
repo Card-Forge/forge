@@ -505,6 +505,7 @@ public class Combat {
                     final HashMap<String, Object> runParams = new HashMap<String, Object>();
                     runParams.put("Attacker", attacker);
                     runParams.put("Defender",getDefenderByAttacker(attacker));
+                    runParams.put("DefendingPlayer", getDefenderPlayerByAttacker(attacker));
                     attacker.getGame().getTriggerHandler().runTrigger(TriggerType.AttackerUnblocked, runParams, false);
                 }
             }
