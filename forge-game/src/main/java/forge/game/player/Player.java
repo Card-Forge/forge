@@ -1306,10 +1306,10 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final CardCollectionView mill(final int n) {
-        return mill(n, ZoneType.Graveyard, false, false);
+        return mill(n, ZoneType.Graveyard, false);
     }
     public final CardCollectionView mill(final int n, final ZoneType zone, 
-            final boolean bottom, final boolean facedown) {
+            final boolean bottom) {
         final CardCollectionView lib = getCardsIn(ZoneType.Library);
         final CardCollection milled = new CardCollection();
 
@@ -1324,11 +1324,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             else {
                 milled.add(game.getAction().moveTo(destination, lib.getFirst()));
             }
-        }
-        // Reveal the milled cards, so players don't have to manually inspect the
-        // graveyard to figure out which ones were milled.
-        if (!facedown) { // do not reveal when exiling face down
-            game.getAction().reveal(milled, this, false);
         }
         return milled;
     }

@@ -19,6 +19,7 @@ public class MillEffect extends SpellAbilityEffect {
         final int numCards = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
         final boolean bottom = sa.hasParam("FromBottom");
         final boolean facedown = sa.hasParam("ExileFaceDown");
+        final boolean reveal = !sa.hasParam("NoReveal");
 
         if (sa.hasParam("ForgetOtherRemembered")) {
             source.clearRemembered();
@@ -39,7 +40,12 @@ public class MillEffect extends SpellAbilityEffect {
                         continue;
                     }
                 }
-                final CardCollectionView milled = p.mill(numCards, destination, bottom, facedown);
+                final CardCollectionView milled = p.mill(numCards, destination, bottom);
+                // Reveal the milled cards, so players don't have to manually inspect the
+                // graveyard to figure out which ones were milled.
+                if (!facedown && reveal) { // do not reveal when exiling face down
+                    p.getGame().getAction().reveal(milled, p, false);
+                }
                 if (destination.equals(ZoneType.Exile) && facedown) {
                     for (final Card c : milled) {
                         c.setState(CardStateName.FaceDown, true);

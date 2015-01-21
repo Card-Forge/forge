@@ -2,7 +2,7 @@ Name:Uba Mask
 ManaCost:4
 Types:Artifact
 R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ Player | ReplaceWith$ ExileTop | Description$ If a player would draw a card, that player exiles that card face up instead.
-SVar:ExileTop:AB$ Mill | Cost$ 0 | Defined$ ReplacedPlayer | NumCards$ 1 | Destination$ Exile | RememberMilled$ True
+SVar:ExileTop:AB$ Mill | Cost$ 0 | Defined$ ReplacedPlayer | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | NoReveal$ True
 S:Mode$ Continuous | AffectedZone$ Exile | Affected$ Card.IsRemembered | AddHiddenKeyword$ May be played | Description$ Each player may play cards he or she exiled with CARDNAME this turn.
 T:Mode$ Phase | Phase$ Cleanup | Execute$ TrigReset | Static$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReset | Static$ True
