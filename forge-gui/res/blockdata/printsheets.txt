@@ -27,21 +27,21 @@
 2 Polluted Delta|KTK
 2 Windswept Heath|KTK
 2 Wooded Foothills|KTK
-15 Bloodfell Caves|FRF
-15 Blossoming Sands|FRF
-15 Dismal Backwater|FRF
-15 Jungle Hollow|FRF
-15 Rugged Highlands|FRF
-15 Scoured Barrens|FRF
-15 Swiftwater Cliffs|FRF
-15 Thornwood Falls|FRF
-15 Tranquil Cove|FRF
-15 Wind-Scarred Crag|FRF
-15 Forest|FRF
-15 Island|FRF
-15 Mountain|FRF
-15 Plains|FRF
-15 Swamp|FRF
+10 Bloodfell Caves|FRF
+10 Blossoming Sands|FRF
+10 Dismal Backwater|FRF
+10 Jungle Hollow|FRF
+10 Rugged Highlands|FRF
+10 Scoured Barrens|FRF
+10 Swiftwater Cliffs|FRF
+10 Thornwood Falls|FRF
+10 Tranquil Cove|FRF
+10 Wind-Scarred Crag|FRF
+25 Forest|FRF
+25 Island|FRF
+25 Mountain|FRF
+25 Plains|FRF
+25 Swamp|FRF
 
 [GTC Boros Guild]
 1 Act of Treason|GTC
