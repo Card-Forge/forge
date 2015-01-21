@@ -94,7 +94,8 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         if ((destination == ZoneType.Library || destination == ZoneType.PlanarDeck)
         		&& !sa.hasParam("Shuffle") && cards.size() >= 2 && !random) {
-            cards = (CardCollection)sa.getActivatingPlayer().getController().orderMoveToZoneList(cards, destination);
+            Player p = AbilityUtils.getDefinedPlayers(source, sa.getParamOrDefault("DefinedPlayer", "You"), sa).get(0);
+            cards = (CardCollection) p.getController().orderMoveToZoneList(cards, destination);
         }
 
         if (destination.equals(ZoneType.Library) && random) {
