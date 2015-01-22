@@ -221,6 +221,13 @@ public class GameAction {
                 c.setTapped(false); //untap card after it leaves the battlefield if needed
                 game.fireEvent(new GameEventCardTapped(c, false));
             }
+
+            // Make sure bestowed enchantment creatures become creatures again on time
+            for (Card enc : c.getEnchantedBy(false)) {
+                if (enc.isBestowed()) {
+                    enc.unEnchantEntity(c);
+                }
+            }
         }
 
         // Need to apply any static effects to produce correct triggers
