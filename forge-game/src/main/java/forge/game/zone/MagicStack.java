@@ -238,7 +238,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
         int totManaSpent = sp.getPayingMana().size();
 
-        if ((sp instanceof AbilityTriggered) || (sp instanceof AbilityStatic)) {
+        if (sp instanceof AbilityStatic) {
             // TODO: make working triggered ability
             sp.setTotalManaSpent(totManaSpent);
             AbilityUtils.resolve(sp);

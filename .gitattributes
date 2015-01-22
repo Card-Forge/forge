@@ -610,7 +610,6 @@ forge-game/src/main/java/forge/game/spellability/AbilityActivated.java svneol=na
 forge-game/src/main/java/forge/game/spellability/AbilityManaPart.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/spellability/AbilityStatic.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/spellability/AbilitySub.java svneol=native#text/plain
-forge-game/src/main/java/forge/game/spellability/AbilityTriggered.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/spellability/ISpellAbility.java -text
 forge-game/src/main/java/forge/game/spellability/OptionalCost.java -text
 forge-game/src/main/java/forge/game/spellability/Spell.java svneol=native#text/plain
@@ -692,7 +691,6 @@ forge-game/src/main/java/forge/game/trigger/TriggerUntaps.java svneol=native#tex
 forge-game/src/main/java/forge/game/trigger/TriggerVote.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerWaiting.java -text
 forge-game/src/main/java/forge/game/trigger/WrappedAbility.java -text
-forge-game/src/main/java/forge/game/trigger/ZCTrigger.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/package-info.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/zone/MagicStack.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/zone/PlayerZone.java svneol=native#text/plain

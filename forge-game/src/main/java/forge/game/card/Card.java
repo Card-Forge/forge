@@ -55,7 +55,6 @@ import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
-import forge.game.trigger.ZCTrigger;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
@@ -223,7 +222,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private Player chosenPlayer;
     private Direction chosenDirection = null;
 
-    private final List<AbilityTriggered> zcTriggers = new ArrayList<AbilityTriggered>();
+    private final List<GameCommand> leavePlayCommandList = new ArrayList<GameCommand>();
+    private final List<GameCommand> etbCommandList = new ArrayList<GameCommand>();
     private final List<GameCommand> untapCommandList = new ArrayList<GameCommand>();
     private final List<GameCommand> changeControllerCommandList = new ArrayList<GameCommand>();
     private final List<Object[]> staticCommandList = new ArrayList<Object[]>();
@@ -2072,36 +2072,24 @@ public class Card extends GameEntity implements Comparable<Card> {
         return canCounter;
     }
 
-    public final void addTrigger(final GameCommand c, final ZCTrigger typeIn) {
-        zcTriggers.add(new AbilityTriggered(this, c, typeIn));
+    public final void addComesIntoPlayCommand(final GameCommand c) {
+        etbCommandList.add(c);
     }
 
-    public final void removeTrigger(final GameCommand c, final ZCTrigger typeIn) {
-        zcTriggers.remove(new AbilityTriggered(this, c, typeIn));
-    }
-
-    public final void executeTrigger(final ZCTrigger type) {
-        for (final AbilityTriggered t : zcTriggers) {
-            if (t.getTrigger().equals(type) && t.isBasic()) {
-                t.run();
-            }
+    public final void runComesIntoPlayCommands() {
+        for (final GameCommand c : etbCommandList) {
+            c.run();
         }
     }
 
-    public final void clearTriggers() {
-        zcTriggers.clear();
-    }
-
-    public final void addComesIntoPlayCommand(final GameCommand c) {
-        addTrigger(c, ZCTrigger.ENTERFIELD);
-    }
-
-    public final void addDestroyCommand(final GameCommand c) {
-        addTrigger(c, ZCTrigger.DESTROY);
-    }
-
     public final void addLeavesPlayCommand(final GameCommand c) {
-        addTrigger(c, ZCTrigger.LEAVEFIELD);
+        leavePlayCommandList.add(c);
+    }
+
+    public final void runLeavesPlayCommands() {
+        for (final GameCommand c : leavePlayCommandList) {
+            c.run();
+        }
     }
 
     public final void addUntapCommand(final GameCommand c) {
@@ -6059,14 +6047,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final boolean canBeEnchantedBy(final Card aura, final boolean checkSBA) {
         SpellAbility sa = aura.getFirstAttachSpell();
-        if (aura.isBestowed()) {
-            for (SpellAbility s : aura.getSpellAbilities()) {
-                if (s.getApi() == ApiType.Attach && s.hasParam("Bestow")) {
-                    sa = s;
-                    break;
-                }
-            }
-        }
         TargetRestrictions tgt = null;
         if (sa != null) {
             tgt = sa.getTargetRestrictions();

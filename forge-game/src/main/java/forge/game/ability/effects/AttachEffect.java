@@ -136,7 +136,6 @@ public class AttachEffect extends SpellAbilityEffect {
             final GameEntity oldEnchanted = card.getEnchanting();
             oldEnchanted.removeEnchantedBy(card);
             card.removeEnchanting(oldEnchanted);
-            card.clearTriggers(); // not sure if cleartriggers is needed?
         }
 
         final GameCommand onLeavesPlay = new GameCommand() {

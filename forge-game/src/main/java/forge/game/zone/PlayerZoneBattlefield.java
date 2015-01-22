@@ -22,7 +22,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
-import forge.game.trigger.ZCTrigger;
 
 /**
  * <p>
@@ -68,7 +67,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
 
         if (trigger) {
             c.setSickness(true); // summoning sickness
-            c.executeTrigger(ZCTrigger.ENTERFIELD);
+            c.runComesIntoPlayCommands();
         }
     }
 
@@ -78,7 +77,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
         super.remove(c);
 
         if (leavesTrigger) {
-            c.executeTrigger(ZCTrigger.LEAVEFIELD);
+            c.runLeavesPlayCommands();
         }
     }
 

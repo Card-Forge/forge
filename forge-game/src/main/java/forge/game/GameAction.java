@@ -41,7 +41,6 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
-import forge.game.trigger.ZCTrigger;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
@@ -136,7 +135,7 @@ public class GameAction {
                     c.updateStateForView();
                 }
 
-                copied = CardFactory.copyCard(c, false, false);
+                copied = CardFactory.copyCard(c, false);
 
                 copied.setUnearthed(c.isUnearthed());
                 copied.setTapped(false);
@@ -220,13 +219,6 @@ public class GameAction {
             if (c.isTapped()) {
                 c.setTapped(false); //untap card after it leaves the battlefield if needed
                 game.fireEvent(new GameEventCardTapped(c, false));
-            }
-
-            // Make sure bestowed enchantment creatures become creatures again on time
-            for (Card enc : c.getEnchantedBy(false)) {
-                if (enc.isBestowed()) {
-                    enc.unEnchantEntity(c);
-                }
             }
         }
 
@@ -808,21 +800,11 @@ public class GameAction {
         // Check if Card Aura is attached to is a legal target
         final GameEntity entity = c.getEnchanting();
         SpellAbility sa = c.getFirstAttachSpell();
-        if (c.isBestowed()) {
-            for (SpellAbility s : c.getSpellAbilities()) {
-                if (s.getApi() == ApiType.Attach && s.hasParam("Bestow")) {
-                    sa = s;
-                    break;
-                }
-            }
-        }
 
         TargetRestrictions tgt = null;
         if (sa != null) {
             tgt = sa.getTargetRestrictions();
         }
-
-        boolean wasBestowed = c.isBestowed();
 
         if (entity instanceof Card) {
             final Card perm = (Card) entity;
@@ -830,9 +812,7 @@ public class GameAction {
 
             if (!perm.isInZone(tgtZone) || !perm.canBeEnchantedBy(c, true) || (perm.isPhasedOut() && !c.isPhasedOut())) {
                 c.unEnchantEntity(perm);
-                if (!wasBestowed) {
-                    moveToGraveyard(c);
-                }
+                moveToGraveyard(c);
                 checkAgain = true;
             }
         } else if (entity instanceof Player) {
@@ -852,7 +832,7 @@ public class GameAction {
             }
         }
 
-        if (c.isInPlay() && !c.isEnchanting() && !wasBestowed) {
+        if (c.isInPlay() && !c.isEnchanting()) {
             moveToGraveyard(c);
             checkAgain = true;
         }
@@ -1264,9 +1244,6 @@ public class GameAction {
             persist = false;
             undying = false;
         }
-
-        // Destroy needs to be called with Last Known Information
-        c.executeTrigger(ZCTrigger.DESTROY);
 
         // System.out.println("Card " + c.getName() +
         // " is getting sent to GY, and this turn it got damaged by: ");
