@@ -285,7 +285,6 @@ public class GameAction {
             	copied.setState(CardStateName.Original, true);
             }
             unattachCardLeavingBattlefield(copied);
-            copied.clearImprintedCards();
         } else if (toBattlefield) {
             // reset timestamp in changezone effects so they have same timestamp if ETB simutaneously 
             copied.setTimestamp(game.getNextTimestamp());
