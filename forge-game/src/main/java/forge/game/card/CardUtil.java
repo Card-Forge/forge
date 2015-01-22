@@ -22,8 +22,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
 import forge.ImageKeys;
 import forge.card.CardStateName;
@@ -31,12 +33,14 @@ import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.game.Game;
+import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.FCollection;
 
@@ -432,5 +436,56 @@ public final class CardUtil {
         }
 
         return colors;
+    }
+
+    // these have been copied over from CardFactoryUtil as they need two extra
+    // parameters for target selection.
+    // however, due to the changes necessary for SA_Requirements this is much
+    // different than the original
+    public static List<Card> getValidCardsToTarget(TargetRestrictions tgt, SpellAbility ability) {
+        final Game game = ability.getActivatingPlayer().getGame();
+        final List<ZoneType> zone = tgt.getZone();
+
+        final boolean canTgtStack = zone.contains(ZoneType.Stack);
+        List<Card> validCards = CardLists.getValidCards(game.getCardsIn(zone), tgt.getValidTgts(), ability.getActivatingPlayer(), ability.getHostCard());
+        List<Card> choices = CardLists.getTargetableCards(validCards, ability);
+        if (canTgtStack) {
+            // Since getTargetableCards doesn't have additional checks if one of the Zones is stack
+            // Remove the activating card from targeting itself if its on the Stack
+            Card activatingCard = ability.getHostCard();
+            if (activatingCard.isInZone(ZoneType.Stack)) {
+                choices.remove(ability.getHostCard());
+            }
+        }
+        List<GameObject> targetedObjects = ability.getUniqueTargets();
+
+        // Remove cards already targeted
+        final List<Card> targeted = Lists.newArrayList(ability.getTargets().getTargetCards());
+        for (final Card c : targeted) {
+            if (choices.contains(c)) {
+                choices.remove(c);
+            }
+        }
+
+        // If all cards (including subability targets) must have the same controller
+        if (tgt.isSameController() && !targetedObjects.isEmpty()) {
+            final List<Card> list = new ArrayList<Card>();
+            for (final Object o : targetedObjects) {
+                if (o instanceof Card) {
+                    list.add((Card) o);
+                }
+            }
+            if (!list.isEmpty()) {
+                final Card card = list.get(0);
+                choices = CardLists.filter(choices, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        return c.sharesControllerWith(card);
+                    }
+                });
+            }
+        }
+
+        return choices;
     }
 }

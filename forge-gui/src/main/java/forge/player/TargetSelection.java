@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -29,7 +28,7 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.card.Card;
-import forge.game.card.CardLists;
+import forge.game.card.CardUtil;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -89,13 +88,14 @@ public class TargetSelection {
             return true;
         }
 
-        if (!tgt.hasCandidates(this.ability, true) && !hasEnoughTargets) {
+        final boolean hasCandidates = tgt.hasCandidates(this.ability, true);
+        if (!hasCandidates && !hasEnoughTargets) {
             // Cancel ability if there aren't any valid Candidates
             return false;
         }
         
         final List<ZoneType> zone = tgt.getZone();
-        final boolean mandatory = tgt.getMandatory() && tgt.hasCandidates(this.ability, true);
+        final boolean mandatory = tgt.getMandatory() && hasCandidates;
         
         final boolean choiceResult;
         final boolean random = tgt.isRandomTarget();
@@ -110,7 +110,7 @@ public class TargetSelection {
             return this.chooseCardFromStack(mandatory);
         }
         else {
-            final List<Card> validTargets = this.getValidCardsToTarget();
+            final List<Card> validTargets = CardUtil.getValidCardsToTarget(tgt, ability);
             if (validTargets.isEmpty()) {
                 //if no valid cards to target and only one valid non-card, auto-target the non-card
                 //this handles "target opponent" cards, along with any other cards that can only target a single non-card game entity
@@ -147,58 +147,6 @@ public class TargetSelection {
         }
         // some inputs choose cards one-by-one and need to be called again 
         return choiceResult && chooseTargets(numTargets);
-    }
-
-    // these have been copied over from CardFactoryUtil as they need two extra
-    // parameters for target selection.
-    // however, due to the changes necessary for SA_Requirements this is much
-    // different than the original
-    private final List<Card> getValidCardsToTarget() {
-        final TargetRestrictions tgt = this.getTgt();
-        final Game game = ability.getActivatingPlayer().getGame();
-        final List<ZoneType> zone = tgt.getZone();
-
-        final boolean canTgtStack = zone.contains(ZoneType.Stack);
-        List<Card> validCards = CardLists.getValidCards(game.getCardsIn(zone), tgt.getValidTgts(), this.ability.getActivatingPlayer(), this.ability.getHostCard());
-        List<Card> choices = CardLists.getTargetableCards(validCards, this.ability);
-        if (canTgtStack) {
-            // Since getTargetableCards doesn't have additional checks if one of the Zones is stack
-            // Remove the activating card from targeting itself if its on the Stack
-            Card activatingCard = ability.getHostCard();
-            if (activatingCard.isInZone(ZoneType.Stack)) {
-                choices.remove(ability.getHostCard());
-            }
-        }
-        List<GameObject> targetedObjects = this.ability.getUniqueTargets();
-
-        // Remove cards already targeted
-        final List<Card> targeted = Lists.newArrayList(ability.getTargets().getTargetCards());
-        for (final Card c : targeted) {
-            if (choices.contains(c)) {
-                choices.remove(c);
-            }
-        }
-
-        // If all cards (including subability targets) must have the same controller
-        if (tgt.isSameController() && !targetedObjects.isEmpty()) {
-            final List<Card> list = new ArrayList<Card>();
-            for (final Object o : targetedObjects) {
-                if (o instanceof Card) {
-                    list.add((Card) o);
-                }
-            }
-            if (!list.isEmpty()) {
-                final Card card = list.get(0);
-                choices = CardLists.filter(choices, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return c.sharesControllerWith(card);
-                    }
-                });
-            }
-        }
-
-        return choices;
     }
 
     private final boolean chooseCardFromList(final List<Card> choices, final boolean targeted, final boolean mandatory) {
