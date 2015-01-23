@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=He-Man 3
+Title=He-Man
+Difficulty=hard
+Description=RG Warrior deck
+Icon=He-Man.jpg
+Deck Type=constructed
+[main]
+4 Brighthearth Banneret
+4 Winnower Patrol
+1 Mudbutton Clanger
+1 Lovisa Coldeyes
+1 Vengeful Firebrand
+2 Rubblebelt Raiders
+2 Sosuke, Son of Seshiro
+4 Obsidian Battle-Axe
+1 Boggart Ram-Gang
+1 Goblin Wardriver
+4 Bramblewood Paragon
+4 Rip-Clan Crasher
+2 Champion of Lambholt
+1 Shared Animosity
+1 Emblem of the Warmind
+1 Fervor
+1 Gruul War Chant
+3 Lightning Bolt
+4 Taiga
+6 Mountain
+4 Forest
+4 Wooded Foothills
+4 Windswept Heath
+[sideboard]
