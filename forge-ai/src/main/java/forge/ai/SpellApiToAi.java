@@ -78,6 +78,7 @@ public enum SpellApiToAi {
         apiToClass.put(ApiType.LosesGame, GameLossAi.class);
         apiToClass.put(ApiType.Mana, ManaEffectAi.class);
         apiToClass.put(ApiType.ManaReflected, CannotPlayAi.class);
+        apiToClass.put(ApiType.Manifest, ManifestAi.class);
         apiToClass.put(ApiType.Mill, MillAi.class);
         apiToClass.put(ApiType.MoveCounter, CountersMoveAi.class);
         apiToClass.put(ApiType.MultiplePiles, CannotPlayAi.class);

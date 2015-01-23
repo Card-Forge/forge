@@ -100,6 +100,7 @@ forge-ai/src/main/java/forge/ai/ability/LifeGainAi.java -text
 forge-ai/src/main/java/forge/ai/ability/LifeLoseAi.java -text
 forge-ai/src/main/java/forge/ai/ability/LifeSetAi.java -text
 forge-ai/src/main/java/forge/ai/ability/ManaEffectAi.java -text
+forge-ai/src/main/java/forge/ai/ability/ManifestAi.java -text
 forge-ai/src/main/java/forge/ai/ability/MillAi.java -text
 forge-ai/src/main/java/forge/ai/ability/MustAttackAi.java -text
 forge-ai/src/main/java/forge/ai/ability/MustBlockAi.java -text
