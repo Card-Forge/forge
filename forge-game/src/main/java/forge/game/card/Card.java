@@ -37,9 +37,7 @@ import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.CardCollectionView;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CardView;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
@@ -431,8 +429,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         // Mark this card as "manifested"
         c.setManifested(true);
 
-        // Add manifest demorph static ability for creatures?
-        c.addSpellAbility(CardFactoryUtil.abilityManifestFaceUp(c, cost, isCreature));
+        // Add manifest demorph static ability for creatures
+        if (isCreature) {
+            c.addSpellAbility(CardFactoryUtil.abilityManifestFaceUp(c, cost));
+        }
 
         return c;
     }

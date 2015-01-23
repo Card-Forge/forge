@@ -166,7 +166,7 @@ public class CardFactoryUtil {
         return morphUp;
     }
 
-    public static AbilityStatic abilityManifestFaceUp(final Card sourceCard, final ManaCost manaCost, final boolean canFlip) {
+    public static AbilityStatic abilityManifestFaceUp(final Card sourceCard, final ManaCost manaCost) {
         final Cost cost = new Cost(manaCost, false);
 
         final AbilityStatic manifestUp = new AbilityStatic(sourceCard, cost, null) {
@@ -183,7 +183,7 @@ public class CardFactoryUtil {
             @Override
             public boolean canPlay() {
                 return sourceCard.getController().equals(this.getActivatingPlayer()) && sourceCard.isFaceDown()
-                        && sourceCard.isInPlay() && sourceCard.isManifested() && canFlip;
+                        && sourceCard.isInPlay() && sourceCard.isManifested();
             }
 
         }; // manifest_up
