@@ -6,7 +6,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.5.33-SNAPSHOT</version>
+        <version>1.5.33</version>
     </parent>
  
     <artifactId>forge-gui-desktop</artifactId>
