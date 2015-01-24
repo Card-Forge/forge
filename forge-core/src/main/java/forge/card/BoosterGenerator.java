@@ -56,6 +56,11 @@ public class BoosterGenerator {
         return StaticData.instance().getCommonCards().getFoiled(sheet.random(1, true).get(0));
     }
 
+    private static PaperCard generateFoilCard(List<PaperCard> cardList) {
+        Collections.shuffle(cardList);
+        return StaticData.instance().getCommonCards().getFoiled(cardList.get(0));
+    }
+
     public static List<PaperCard> getBoosterPack(SealedProduct.Template template) {
         List<PaperCard> result = new ArrayList<>();
         List<PrintSheet> sheetsUsed = new ArrayList<>();
@@ -87,8 +92,15 @@ public class BoosterGenerator {
         }
 
         if (hasFoil && foilAtEndOfPack) {
-            PrintSheet foilSheet = Aggregates.random(sheetsUsed);
-            result.add(generateFoilCard(foilSheet));
+            List<PaperCard> foilCards = new ArrayList<>();
+            for (PrintSheet printSheet : sheetsUsed) {
+                for (PaperCard card : printSheet.toFlatList()) {
+                    if (!foilCards.contains(card)) {
+                        foilCards.add(card);
+                    }
+                }
+            }
+            result.add(generateFoilCard(foilCards));
         }
 
         return result;

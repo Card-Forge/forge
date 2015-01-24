@@ -38,6 +38,13 @@
 45 Tranquil Cove|FRF
 45 Wind-Scarred Crag|FRF
 
+[FRF Basic Lands]
+1 Swamp|FRF
+1 Plains|FRF
+1 Forest|FRF
+1 Mountain|FRF
+1 Island|FRF
+
 [GTC Boros Guild]
 1 Act of Treason|GTC
 1 Aerial Maneuver|GTC
