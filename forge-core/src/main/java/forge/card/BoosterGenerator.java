@@ -188,6 +188,14 @@ public class BoosterGenerator {
                 operator = StringUtils.strip(operator.substring(4), "() ");
                 String[] cardNames = TextUtil.splitWithParenthesis(operator, ',', '"', '"');
                 toAdd = IPaperCard.Predicates.names(Lists.newArrayList(cardNames));
+            } else if (operator.startsWith("fromSheet(") && invert) {
+                String sheetName = StringUtils.strip(operator.substring(9), "()\" ");
+                Iterable<PaperCard> src = StaticData.instance().getPrintSheets().get(sheetName).toFlatList();
+                ArrayList<String> cardNames = Lists.newArrayList();
+                for (PaperCard card : src) {
+                    cardNames.add(card.getName());
+                }
+                toAdd = IPaperCard.Predicates.names(Lists.newArrayList(cardNames));
             }
 
             if(toAdd == null)
