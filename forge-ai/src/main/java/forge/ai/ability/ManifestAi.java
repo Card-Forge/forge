@@ -1,21 +1,14 @@
 package forge.ai.ability;
 
-import com.google.common.base.Predicate;
 import forge.ai.*;
 import forge.game.Game;
-import forge.game.ability.AbilityUtils;
-import forge.game.ability.ApiType;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
@@ -57,6 +50,11 @@ public class ManifestAi extends SpellAbilityAi {
             } else if (!SpellAbilityAi.isSorcerySpeed(sa)) {
                 return false;
             }
+        } else {
+        	// try to ambush attackers
+        	if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+        		return false;
+        	}
         }
 
         final Card source = sa.getHostCard();
