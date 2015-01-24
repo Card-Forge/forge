@@ -22,26 +22,21 @@
 1 Maze's End|DGM
 
 [FRF Lands]
-2 Bloodstained Mire|KTK
-2 Flooded Strand|KTK
-2 Polluted Delta|KTK
-2 Windswept Heath|KTK
-2 Wooded Foothills|KTK
-10 Bloodfell Caves|FRF
-10 Blossoming Sands|FRF
-10 Dismal Backwater|FRF
-10 Jungle Hollow|FRF
-10 Rugged Highlands|FRF
-10 Scoured Barrens|FRF
-10 Swiftwater Cliffs|FRF
-10 Thornwood Falls|FRF
-10 Tranquil Cove|FRF
-10 Wind-Scarred Crag|FRF
-25 Forest|FRF
-25 Island|FRF
-25 Mountain|FRF
-25 Plains|FRF
-25 Swamp|FRF
+4 Bloodstained Mire|KTK
+4 Flooded Strand|KTK
+4 Polluted Delta|KTK
+4 Windswept Heath|KTK
+4 Wooded Foothills|KTK
+45 Bloodfell Caves|FRF
+45 Blossoming Sands|FRF
+45 Dismal Backwater|FRF
+45 Jungle Hollow|FRF
+45 Rugged Highlands|FRF
+45 Scoured Barrens|FRF
+45 Swiftwater Cliffs|FRF
+45 Thornwood Falls|FRF
+45 Tranquil Cove|FRF
+45 Wind-Scarred Crag|FRF
 
 [GTC Boros Guild]
 1 Act of Treason|GTC

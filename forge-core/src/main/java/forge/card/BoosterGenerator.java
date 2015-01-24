@@ -96,6 +96,7 @@ public class BoosterGenerator {
 
     @SuppressWarnings("unchecked")
     public static PrintSheet makeSheet(String sheetKey, Iterable<PaperCard> src) {
+
         PrintSheet ps = new PrintSheet(sheetKey);
         String[] sKey = TextUtil.splitWithParenthesis(sheetKey, ' ', 2);
         Predicate<PaperCard> setPred = (Predicate<PaperCard>) (sKey.length > 1 ? IPaperCard.Predicates.printedInSets(sKey[1].split(" ")) : Predicates.alwaysTrue());
@@ -106,35 +107,46 @@ public class BoosterGenerator {
         // source replacement operators - if one is applied setPredicate will be ignored
         Iterator<String> itMod = operators.iterator();
         while(itMod.hasNext()) {
+
             String mainCode = itMod.next();
-            if ( mainCode.regionMatches(true, 0, "fromSheet", 0, 9)) { // custom print sheet
+
+            if (mainCode.regionMatches(true, 0, "fromSheet", 0, 9)) { // custom print sheet
+
                 String sheetName = StringUtils.strip(mainCode.substring(9), "()\" ");
                 src = StaticData.instance().getPrintSheets().get(sheetName).toFlatList();
                 setPred = Predicates.alwaysTrue();
 
             } else if (mainCode.startsWith("promo")) { // get exactly the named cards, that's a tiny inlined print sheet
+
                 String list = StringUtils.strip(mainCode.substring(5), "() ");
                 String[] cardNames = TextUtil.splitWithParenthesis(list, ',', '"', '"');
                 List<PaperCard> srcList = new ArrayList<>();
-                for(String cardName: cardNames)
+
+                for(String cardName: cardNames) {
                     srcList.add(StaticData.instance().getCommonCards().getCard(cardName));
+                }
+
                 src = srcList;
                 setPred = Predicates.alwaysTrue();
 
-            } else
+            } else {
                 continue;
+            }
 
             itMod.remove();
+
         }
 
         // only special operators should remain by now - the ones that could not be turned into one predicate
         String mainCode = operators.isEmpty() ? null : operators.get(0).trim();
 
         if( null == mainCode || mainCode.equalsIgnoreCase(BoosterSlots.ANY) ) { // no restriction on rarity
+
             Predicate<PaperCard> predicate = Predicates.and(setPred, extraPred);
             ps.addAll(Iterables.filter(src, predicate));
 
         } else if ( mainCode.equalsIgnoreCase(BoosterSlots.UNCOMMON_RARE) ) { // for sets like ARN, where U1 cards are considered rare and U3 are uncommon
+
             Predicate<PaperCard> predicateRares = Predicates.and(setPred, IPaperCard.Predicates.Presets.IS_RARE, extraPred);
             ps.addAll(Iterables.filter(src, predicateRares));
 
@@ -150,41 +162,48 @@ public class BoosterGenerator {
 
             Predicate<PaperCard> predicateRare = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_RARE, extraPred);
             ps.addAll(Iterables.filter(src, predicateRare), 2);
-        } else
+
+        } else {
             throw new IllegalArgumentException("Booster generator: operator could not be parsed - " + mainCode);
+        }
+
         return ps;
+
     }
 
     /**
      * This method also modifies passed parameter
      */
     private static Predicate<PaperCard> buildExtraPredicate(List<String> operators) {
+
         List<Predicate<PaperCard>> conditions = new ArrayList<>();
 
         Iterator<String> itOp = operators.iterator();
         while(itOp.hasNext()) {
+
             String operator = itOp.next();
             if(StringUtils.isEmpty(operator)) {
                 itOp.remove();
                 continue;
             }
 
-            if(operator.endsWith("s"))
-                operator = operator.substring(0, operator.length()-1);
+            if(operator.endsWith("s")) {
+                operator = operator.substring(0, operator.length() - 1);
+            }
 
             boolean invert = operator.charAt(0) == '!';
-            if( invert ) operator = operator.substring(1);
+            if (invert) { operator = operator.substring(1); }
 
             Predicate<PaperCard> toAdd = null;
-            if( operator.equalsIgnoreCase(BoosterSlots.DUAL_FACED_CARD) ) {      toAdd = Predicates.compose(CardRulesPredicates.splitType(CardSplitType.Transform), PaperCard.FN_GET_RULES);
-            } else if ( operator.equalsIgnoreCase(BoosterSlots.LAND) ) {         toAdd = Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard.FN_GET_RULES);
-            } else if ( operator.equalsIgnoreCase(BoosterSlots.BASIC_LAND)) {    toAdd = IPaperCard.Predicates.Presets.IS_BASIC_LAND;
-            } else if ( operator.equalsIgnoreCase(BoosterSlots.TIME_SHIFTED)) {  toAdd = IPaperCard.Predicates.Presets.IS_SPECIAL;
-            } else if ( operator.equalsIgnoreCase(BoosterSlots.MYTHIC)) {        toAdd = IPaperCard.Predicates.Presets.IS_MYTHIC_RARE;
-            } else if ( operator.equalsIgnoreCase(BoosterSlots.RARE)) {          toAdd = IPaperCard.Predicates.Presets.IS_RARE;
-            } else if ( operator.equalsIgnoreCase(BoosterSlots.UNCOMMON)) {      toAdd = IPaperCard.Predicates.Presets.IS_UNCOMMON;
-            } else if ( operator.equalsIgnoreCase(BoosterSlots.COMMON)) {        toAdd = IPaperCard.Predicates.Presets.IS_COMMON;
-            } else if ( operator.startsWith("name(") ) {
+            if (operator.equalsIgnoreCase(BoosterSlots.DUAL_FACED_CARD)) {      toAdd = Predicates.compose(CardRulesPredicates.splitType(CardSplitType.Transform), PaperCard.FN_GET_RULES);
+            } else if (operator.equalsIgnoreCase(BoosterSlots.LAND)) {          toAdd = Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard.FN_GET_RULES);
+            } else if (operator.equalsIgnoreCase(BoosterSlots.BASIC_LAND)) {    toAdd = IPaperCard.Predicates.Presets.IS_BASIC_LAND;
+            } else if (operator.equalsIgnoreCase(BoosterSlots.TIME_SHIFTED)) {  toAdd = IPaperCard.Predicates.Presets.IS_SPECIAL;
+            } else if (operator.equalsIgnoreCase(BoosterSlots.MYTHIC)) {        toAdd = IPaperCard.Predicates.Presets.IS_MYTHIC_RARE;
+            } else if (operator.equalsIgnoreCase(BoosterSlots.RARE)) {          toAdd = IPaperCard.Predicates.Presets.IS_RARE;
+            } else if (operator.equalsIgnoreCase(BoosterSlots.UNCOMMON)) {      toAdd = IPaperCard.Predicates.Presets.IS_UNCOMMON;
+            } else if (operator.equalsIgnoreCase(BoosterSlots.COMMON)) {        toAdd = IPaperCard.Predicates.Presets.IS_COMMON;
+            } else if (operator.startsWith("name(")) {
                 operator = StringUtils.strip(operator.substring(4), "() ");
                 String[] cardNames = TextUtil.splitWithParenthesis(operator, ',', '"', '"');
                 toAdd = IPaperCard.Predicates.names(Lists.newArrayList(cardNames));
@@ -198,18 +217,25 @@ public class BoosterGenerator {
                 toAdd = IPaperCard.Predicates.names(Lists.newArrayList(cardNames));
             }
 
-            if(toAdd == null)
+            if (toAdd == null) {
                 continue;
-            else
+            } else {
                 itOp.remove();
+            }
 
-            if( invert )
+            if (invert) {
                 toAdd = Predicates.not(toAdd);
+            }
             conditions.add(toAdd);
+
         }
-        if( conditions.isEmpty() )
+
+        if (conditions.isEmpty()) {
             return Predicates.alwaysTrue();
+        }
+
         return Predicates.and(conditions);
+
     }
 
 
