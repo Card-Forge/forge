@@ -53,7 +53,7 @@ public abstract class GuiDownloadService implements Runnable {
     //Components passed from GUI component displaying download
     private ITextField txtAddress;
     private ITextField txtPort;
-    private IProgressBar progressBar;
+    protected IProgressBar progressBar;
     private IButton btnStart;
     private UiCommand cmdClose;
     private Runnable onUpdate;
@@ -73,7 +73,7 @@ public abstract class GuiDownloadService implements Runnable {
 
     // Progress variables
     private Map<String, String> files; // local path -> url
-    private boolean cancel;
+    protected boolean cancel;
     private final long[] times = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private int tptr = 0;
     private int skipped = 0;
@@ -90,27 +90,50 @@ public abstract class GuiDownloadService implements Runnable {
         cmdClose = cmdClose0;
         onUpdate = onUpdate0;
 
-        // Free up the EDT by assembling card list on a background thread
-        FThreads.invokeInBackgroundThread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    files = getNeededFiles();
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-                FThreads.invokeInEdtLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (onReadyToStart != null) {
-                            onReadyToStart.run();
-                        }
-                        readyToStart();
+        String startOverrideDesc = getStartOverrideDesc();
+        if (startOverrideDesc == null) {
+            // Free up the EDT by assembling card list on a background thread
+            FThreads.invokeInBackgroundThread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        files = getNeededFiles();
                     }
-                });
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    FThreads.invokeInEdtLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (onReadyToStart != null) {
+                                onReadyToStart.run();
+                            }
+                            readyToStart();
+                        }
+                    });
+                }
+            });
+        }
+        else {
+            //handle special case of zip service
+            if (onReadyToStart != null) {
+                onReadyToStart.run();
             }
-        });
+            progressBar.setDescription("Click \"Start\" to download and extract " + startOverrideDesc);
+            btnStart.setCommand(cmdStartDownload);
+            btnStart.setEnabled(true);
+
+            FThreads.invokeInEdtLater(new Runnable() {
+                @Override
+                public void run() {
+                    btnStart.requestFocusInWindow();
+                }
+            });
+        }
+    }
+
+    protected String getStartOverrideDesc() {
+        return null;
     }
 
     private void readyToStart() {
@@ -198,10 +221,7 @@ public abstract class GuiDownloadService implements Runnable {
                 else {
                     sb.append(String.format("%d of %d items finished! Skipped " + skipped + " items. Please close!",
                             count, files.size()));
-                    btnStart.setText("OK");
-                    btnStart.setCommand(cmdClose);
-                    btnStart.setEnabled(true);
-                    btnStart.requestFocusInWindow();
+                    finish();
                 }
 
                 progressBar.setValue(count);
@@ -211,25 +231,18 @@ public abstract class GuiDownloadService implements Runnable {
         });
     }
 
+    protected void finish() {
+        btnStart.setText("OK");
+        btnStart.setCommand(cmdClose);
+        btnStart.setEnabled(true);
+        btnStart.requestFocusInWindow();
+    }
+
     @Override
-    public final void run() {
+    public void run() {
         final Random r = MyRandom.getRandom();
         
-        Proxy p = null;
-        if (type == 0) {
-            p = Proxy.NO_PROXY;
-        }
-        else {
-            try {
-                p = new Proxy(TYPES[type], new InetSocketAddress(txtAddress.getText(), Integer.parseInt(txtPort.getText())));
-            }
-            catch (final Exception ex) {
-                BugReporter.reportException(ex,
-                        "Proxy connection could not be established!\nProxy address: %s\nProxy port: %s",
-                        txtAddress.getText(), txtPort.getText());
-                return;
-            }
-        }
+        Proxy p = getProxy();
 
         int bufferLength;
         int iCard = 0;
@@ -302,6 +315,23 @@ public abstract class GuiDownloadService implements Runnable {
                 Log.error("GuiDownloader", "Sleep Error", e);
             }
         }
+    }
+
+    protected Proxy getProxy() {
+        if (type == 0) {
+            return Proxy.NO_PROXY;
+        }
+        else {
+            try {
+                return new Proxy(TYPES[type], new InetSocketAddress(txtAddress.getText(), Integer.parseInt(txtPort.getText())));
+            }
+            catch (final Exception ex) {
+                BugReporter.reportException(ex,
+                        "Proxy connection could not be established!\nProxy address: %s\nProxy port: %s",
+                        txtAddress.getText(), txtPort.getText());
+            }
+        }
+        return null;
     }
 
     public abstract String getTitle();

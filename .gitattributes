@@ -16050,6 +16050,8 @@ forge-gui/res/lists/TypeLists.txt svneol=native#text/plain
 forge-gui/res/lists/booster-images.txt svneol=native#text/plain
 forge-gui/res/lists/boosterbox-images.txt -text
 forge-gui/res/lists/fatpack-images.txt svneol=native#text/plain
+forge-gui/res/lists/net-decks-commander.txt -text
+forge-gui/res/lists/net-decks.txt -text
 forge-gui/res/lists/precon-images.txt svneol=native#text/plain
 forge-gui/res/lists/quest-opponent-icons.txt svneol=native#text/plain
 forge-gui/res/lists/quest-pet-shop-icons.txt svneol=native#text/plain
@@ -17331,6 +17333,7 @@ forge-gui/src/main/java/forge/deck/DeckGeneratorTheme.java -text
 forge-gui/src/main/java/forge/deck/DeckProxy.java -text
 forge-gui/src/main/java/forge/deck/DeckType.java -text
 forge-gui/src/main/java/forge/deck/DeckgenUtil.java -text
+forge-gui/src/main/java/forge/deck/NetDeckCategory.java -text
 forge-gui/src/main/java/forge/deck/RandomDeckGenerator.java -text
 forge-gui/src/main/java/forge/deck/io/DeckPreferences.java -text
 forge-gui/src/main/java/forge/deck/io/OldDeckParser.java -text
@@ -17339,6 +17342,7 @@ forge-gui/src/main/java/forge/download/GuiDownloadPrices.java -text
 forge-gui/src/main/java/forge/download/GuiDownloadQuestImages.java -text
 forge-gui/src/main/java/forge/download/GuiDownloadService.java -text
 forge-gui/src/main/java/forge/download/GuiDownloadSetPicturesLQ.java -text
+forge-gui/src/main/java/forge/download/GuiDownloadZipService.java -text
 forge-gui/src/main/java/forge/error/BugReporter.java -text
 forge-gui/src/main/java/forge/error/ExceptionHandler.java svneol=native#text/plain
 forge-gui/src/main/java/forge/error/package-info.java svneol=native#text/plain

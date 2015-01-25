@@ -27,6 +27,7 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.FDeckViewer;
 import forge.deck.FSideboardDialog;
+import forge.download.GuiDownloadService;
 import forge.error.BugReportDialog;
 import forge.game.GameEntity;
 import forge.game.GameEntityView;
@@ -40,12 +41,14 @@ import forge.player.PlayerControllerHuman;
 import forge.properties.ForgeConstants;
 import forge.screens.match.MatchController;
 import forge.screens.quest.QuestMenu;
+import forge.screens.settings.GuiDownloader;
 import forge.sound.AudioClip;
 import forge.sound.AudioMusic;
 import forge.sound.IAudioClip;
 import forge.sound.IAudioMusic;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.GuiChoose;
+import forge.util.Callback;
 import forge.util.FCollectionView;
 import forge.util.FileUtil;
 import forge.util.MessageUtil;
@@ -289,6 +292,11 @@ public class GuiMobile implements IGuiBase {
     @Override
     public File getSaveFile(File defaultFile) {
         return defaultFile; //TODO: Show dialog
+    }
+
+    @Override
+    public void download(GuiDownloadService service, Callback<Boolean> callback) {
+        new GuiDownloader(service, callback);
     }
 
     @Override

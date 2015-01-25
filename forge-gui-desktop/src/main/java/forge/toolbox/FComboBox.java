@@ -52,7 +52,19 @@ public class FComboBox<E> extends SkinnedComboBox<E> implements IComboBox<E> {
     private Border getDefaultBorder() {
         return UIManager.getBorder("ComboBox.border");
     }
-    
+
+    public String getText() {
+        Object selectedItem = getSelectedItem();
+        if (selectedItem == null) {
+            return "";
+        }
+        return selectedItem.toString();
+    }
+    public void setText(String text0) {
+        setSelectedItem(null);
+        dataModel.setSelectedItem(text0); //use this to get around inability to set selected item that's not in items
+    }
+
     public TextAlignment getTextAlignment() {
         return textAlignment;
     }
@@ -60,7 +72,7 @@ public class FComboBox<E> extends SkinnedComboBox<E> implements IComboBox<E> {
     public void setTextAlignment(TextAlignment align) {
         textAlignment = align;
     }
-    
+
     public SkinFont getSkinFont() {
         return this.skinFont;
     }

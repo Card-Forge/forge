@@ -445,6 +445,14 @@ public class DeckProxy implements InventoryItem {
         return decks;
     }
 
+    public static List<DeckProxy> getNetDecks(NetDeckCategory category) {
+        ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
+        if (category != null) {
+            addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category);
+        }
+        return decks;
+    }
+
     public static final Predicate<DeckProxy> IS_WHITE = new Predicate<DeckProxy>() {
         @Override
         public boolean apply(final DeckProxy deck) {

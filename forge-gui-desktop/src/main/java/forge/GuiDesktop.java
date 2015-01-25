@@ -23,6 +23,8 @@ import forge.assets.FSkinProp;
 import forge.assets.ISkinImage;
 import forge.control.GuiTimer;
 import forge.deck.CardPool;
+import forge.download.GuiDownloadService;
+import forge.download.GuiDownloader;
 import forge.error.BugReportDialog;
 import forge.game.GameEntity;
 import forge.game.GameEntityView;
@@ -50,6 +52,7 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.util.BuildInfo;
+import forge.util.Callback;
 import forge.util.FCollectionView;
 import forge.util.FileUtil;
 import forge.util.gui.SGuiChoose;
@@ -256,6 +259,11 @@ public class GuiDesktop implements IGuiBase {
         fc.setSelectedFile(defaultFile);
         fc.showSaveDialog(null);
         return fc.getSelectedFile();
+    }
+
+    @Override
+    public void download(GuiDownloadService service, Callback<Boolean> callback) {
+        new GuiDownloader(service, callback);
     }
 
     @Override

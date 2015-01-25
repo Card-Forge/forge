@@ -174,10 +174,15 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
     }
 
     @Override
-    protected float getRightPadding() {
+    protected float getLeftPadding() {
         if (getAlignment() == HAlignment.CENTER) {
-            return super.getRightPadding();
+            return getRightPadding(); //match right padding if center aligned
         }
+        return super.getLeftPadding();
+    }
+
+    @Override
+    protected float getRightPadding() {
         return getDivotWidth() + 2 * PADDING;
     }
 

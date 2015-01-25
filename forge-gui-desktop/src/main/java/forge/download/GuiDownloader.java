@@ -23,6 +23,7 @@ import forge.UiCommand;
 import forge.assets.FSkinProp;
 import forge.gui.SOverlayUtils;
 import forge.toolbox.*;
+import forge.util.Callback;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -47,6 +48,10 @@ public class GuiDownloader extends DefaultBoundedRangeModel {
 
             // Kill overlay
             SOverlayUtils.hideOverlay();
+
+            if (callback != null) {
+                callback.run(btnStart.getText() == "OK"); //determine result based on whether download finished
+            }
         }
     };
 
@@ -58,9 +63,14 @@ public class GuiDownloader extends DefaultBoundedRangeModel {
     private final FRadioButton radProxyHTTP = new FRadioButton("HTTP Proxy");
 
     private final GuiDownloadService service;
+    private final Callback<Boolean> callback;
 
     public GuiDownloader(GuiDownloadService service0) {
+        this(service0, null);
+    }
+    public GuiDownloader(GuiDownloadService service0, Callback<Boolean> callback0) {
         service = service0;
+        callback = callback0;
 
         String radConstraints = "w 100%!, h 30px!, gap 2% 0 0 10px";
         JXButtonPanel grpPanel = new JXButtonPanel();

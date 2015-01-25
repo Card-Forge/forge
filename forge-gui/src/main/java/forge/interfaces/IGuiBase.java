@@ -10,6 +10,7 @@ import forge.LobbyPlayer;
 import forge.assets.FSkinProp;
 import forge.assets.ISkinImage;
 import forge.deck.CardPool;
+import forge.download.GuiDownloadService;
 import forge.game.GameEntity;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
@@ -19,6 +20,7 @@ import forge.item.PaperCard;
 import forge.player.PlayerControllerHuman;
 import forge.sound.IAudioClip;
 import forge.sound.IAudioMusic;
+import forge.util.Callback;
 import forge.util.FCollectionView;
 
 public interface IGuiBase {
@@ -45,6 +47,7 @@ public interface IGuiBase {
     GameEntityView chooseSingleEntityForEffect(String title, FCollectionView<? extends GameEntity> optionList, DelayedReveal delayedReveal, boolean isOptional, PlayerControllerHuman controller);
     String showFileDialog(String title, String defaultDir);
     File getSaveFile(File defaultFile);
+    void download(GuiDownloadService service, Callback<Boolean> callback);
     void showCardList(final String title, final String message, final List<PaperCard> list);
     boolean showBoxedProduct(final String title, final String message, final List<PaperCard> list);
     void setCard(CardView card);

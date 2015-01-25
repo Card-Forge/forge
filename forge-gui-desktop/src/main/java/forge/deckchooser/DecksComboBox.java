@@ -33,13 +33,16 @@ public class DecksComboBox extends FComboBoxWrapper<DeckType> {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MouseUtil.setCursor(Cursor.WAIT_CURSOR);
-                DeckType newDeckType = (DeckType)getSelectedItem();
-                if (newDeckType != selectedDeckType) {
-                    notifyDeckTypeSelected(newDeckType);
-                    selectedDeckType = newDeckType;
+                Object selectedItem = getSelectedItem();
+                if (selectedItem instanceof DeckType) {
+                    MouseUtil.setCursor(Cursor.WAIT_CURSOR);
+                    DeckType newDeckType = (DeckType)selectedItem;
+                    if (newDeckType != selectedDeckType) {
+                        selectedDeckType = newDeckType;
+                        notifyDeckTypeSelected(newDeckType);
+                    }
+                    MouseUtil.resetCursor();
                 }
-                MouseUtil.resetCursor();
             }
         };
     }
@@ -67,5 +70,11 @@ public class DecksComboBox extends FComboBoxWrapper<DeckType> {
     public void setDeckType(DeckType valueOf) {
         selectedDeckType = valueOf;
         setSelectedItem(selectedDeckType);
+    }
+
+    @Override
+    public void setText(String text0) {
+        selectedDeckType = null; //ensure selecting current deck type again raises event
+        super.setText(text0);
     }
 }
