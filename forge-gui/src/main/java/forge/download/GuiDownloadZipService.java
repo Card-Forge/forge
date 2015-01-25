@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +24,7 @@ import forge.util.FileUtil;
 
 public class GuiDownloadZipService extends GuiDownloadService {
     private final String name, desc, sourceUrl, destFolder, deleteFolder;
-    private int filesDownloaded;
+    private int filesExtracted;
 
     public GuiDownloadZipService(String name0, String desc0, String sourceUrl0, String destFolder0, String deleteFolder0, IProgressBar progressBar0) {
         name = name0;
@@ -60,7 +59,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
             FThreads.invokeInEdtNowOrLater(new Runnable() {
                 @Override
                 public void run() {
-                    progressBar.setDescription(filesDownloaded + " " + desc + " downloaded");
+                    progressBar.setDescription(filesExtracted + " " + desc + " extracted");
                     finish();
                 }
             });
@@ -68,7 +67,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
     }
 
     public void downloadAndUnzip() {
-        filesDownloaded = 0;
+        filesExtracted = 0;
         String zipFilename = download("temp.zip");
         if (zipFilename == null) { return; }
 
@@ -89,7 +88,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
                 }
             }
 
-            ZipFile zipFile = new ZipFile(zipFilename, Charset.forName("CP866")); //ensure unzip doesn't fail due to non UTF-8 chars
+            ZipFile zipFile = new ZipFile(zipFilename);
             Enumeration<? extends ZipEntry> entries = zipFile.entries();
 
             progressBar.reset();
@@ -100,20 +99,31 @@ public class GuiDownloadZipService extends GuiDownloadService {
             FileUtil.ensureDirectoryExists(destFolder);
 
             int count = 0;
+            int failedCount = 0;
             while (entries.hasMoreElements()) {
                 if (cancel) { break; }
 
-                ZipEntry entry = (ZipEntry)entries.nextElement();
+                try {
+                    ZipEntry entry = (ZipEntry)entries.nextElement();
 
-                String path = destFolder + entry.getName();
-                if (entry.isDirectory()) {
-                    new File(path).mkdir();
+                    String path = destFolder + entry.getName();
+                    if (entry.isDirectory()) {
+                        new File(path).mkdir();
+                        progressBar.setValue(++count);
+                        continue;
+                    }
+                    copyInputStream(zipFile.getInputStream(entry), path);
                     progressBar.setValue(++count);
-                    continue;
+                    filesExtracted++;
                 }
-                copyInputStream(zipFile.getInputStream(entry), path);
-                progressBar.setValue(++count);
-                filesDownloaded++;
+                catch (Exception e) { //don't quit out completely if an entry is not UTF-8
+                    progressBar.setValue(++count);
+                    failedCount++;
+                }
+            }
+
+            if (failedCount > 0) {
+                Log.error("Downloading " + desc, failedCount + " " + desc + " could not be extracted");
             }
 
             zipFile.close();
