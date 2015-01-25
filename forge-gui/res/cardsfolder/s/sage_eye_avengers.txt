@@ -7,5 +7,6 @@ T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigBou
 SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | References$ X,Y
 SVar:Y:Count$CardPower
 SVar:X:Targeted$Valid Creature.powerLEY
+SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sage_eye_avengers.jpg
 Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhenever Sage-Eye Avengers attacks, you may return target creature to its owner's hand if its power is less than Sage-Eye Avengers's power.

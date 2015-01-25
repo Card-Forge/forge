@@ -4,6 +4,7 @@ Types:Artifact Creature Construct
 PT:4/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice a permanent that's one or more colors.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Permanent.nonColorless
-SVar:RemAIDeck:True
+SVar:X:Count$Valid Permanent.nonColorless+YouCtrl
+SVar:NeedsToPlayVar:X LE0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ugins_construct.jpg
 Oracle:When Ugin's Construct enters the battlefield, sacrifice a permanent that's one or more colors.

@@ -6,5 +6,6 @@ A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddKeyword$ Deathtouch | CheckSVar$ X | SVarCompare$ GE1 | Description$ Enchanted creature has deathtouch as long as you control a green or blue permanent.
 SVar:X:Count$Valid Permanent.Green+YouCtrl,Permanent.Blue+YouCtrl
+SVar:BuffedBy:Permanent.Green,Permanent.Blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sultai_runemark.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2.\nEnchanted creature has deathtouch as long as you control a green or blue permanent. (Any amount of damage it deals to a creature is enough to destroy it.)
