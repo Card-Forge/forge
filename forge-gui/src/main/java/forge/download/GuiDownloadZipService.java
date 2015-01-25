@@ -144,7 +144,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
                 return null;
             }
 
-            long contentLength = conn.getContentLengthLong();
+            long contentLength = conn.getContentLength();
             if (contentLength == 0) {
                 return null;
             }
