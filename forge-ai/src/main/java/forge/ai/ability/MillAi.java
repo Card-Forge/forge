@@ -55,9 +55,10 @@ public class MillAi extends SpellAbilityAi {
             return true;
         }
 
-        // Don't use draw abilities before main 2 if possible
+        // Don't use mill abilities before main 2 if possible
         if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
-                && !ComputerUtil.castSpellInMain1(ai, sa)) {
+                && !ComputerUtil.castSpellInMain1(ai, sa)
+                && !"Main1".equals(sa.getParam("AILogic"))) {
             return false;
         }
 

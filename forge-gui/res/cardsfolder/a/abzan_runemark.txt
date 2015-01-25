@@ -6,5 +6,6 @@ A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddKeyword$ Vigilance | CheckSVar$ X | SVarCompare$ GE1 | Description$ Enchanted creature has vigilance as long as you control a black or green permanent.
 SVar:X:Count$Valid Permanent.Black+YouCtrl,Permanent.Green+YouCtrl
+SVar:BuffedBy:Permanent.White,Permanent.Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abzan_runemark.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2.\nEnchanted creature has vigilance as long as you control a black or green permanent.
