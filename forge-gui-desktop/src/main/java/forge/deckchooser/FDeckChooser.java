@@ -224,7 +224,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
     private void updateNetDecks() {
         if (netDeckCategory != null) {
-            decksComboBox.setText(netDeckCategory.toString());
+            decksComboBox.setText(netDeckCategory.getDeckType());
         }
         lstDecks.setAllowMultipleSelections(false);
 
@@ -309,7 +309,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                             if (category == null) {
                                 decksComboBox.setDeckType(selectedDeckType); //restore old selection if user cancels
                                 if (selectedDeckType == DeckType.NET_DECK && netDeckCategory != null) {
-                                    decksComboBox.setText(netDeckCategory.toString());
+                                    decksComboBox.setText(netDeckCategory.getDeckType());
                                 }
                                 return;
                             }

@@ -292,7 +292,7 @@ public class FDeckChooser extends FScreen {
                                         if (category == null) {
                                             cmbDeckTypes.setSelectedItem(selectedDeckType); //restore old selection if user cancels
                                             if (selectedDeckType == DeckType.NET_DECK && netDeckCategory != null) {
-                                                cmbDeckTypes.setText(netDeckCategory.toString());
+                                                cmbDeckTypes.setText(netDeckCategory.getDeckType());
                                             }
                                             return;
                                         }
@@ -528,7 +528,7 @@ public class FDeckChooser extends FScreen {
 
     private void updateNetDecks() {
         if (netDeckCategory != null) {
-            cmbDeckTypes.setText(netDeckCategory.toString());
+            cmbDeckTypes.setText(netDeckCategory.getDeckType());
         }
         lstDecks.setSelectionSupport(1, 1);
 

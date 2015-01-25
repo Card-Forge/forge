@@ -120,8 +120,12 @@ public class NetDeckCategory extends StorageBase<Deck> {
         return url;
     }
 
+    public String getDeckType() {
+        return "Net Decks - " + name;
+    }
+
     @Override
     public String toString() {
-        return "Net Decks - " + name;
+        return name;
     }
 }
