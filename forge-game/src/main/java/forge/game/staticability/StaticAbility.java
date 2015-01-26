@@ -33,7 +33,6 @@ import forge.util.Expressions;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -135,7 +134,8 @@ public class StaticAbility extends CardTraitBase {
 
         if (this.mapParams.containsKey("AddKeyword") || this.mapParams.containsKey("AddAbility")
                 || this.mapParams.containsKey("AddTrigger") || this.mapParams.containsKey("RemoveTriggers")
-                || this.mapParams.containsKey("RemoveKeyword") || this.mapParams.containsKey("AddReplacementEffects")) {
+                || this.mapParams.containsKey("RemoveKeyword") || this.mapParams.containsKey("AddReplacementEffects")
+                || this.mapParams.containsKey("AddHiddenKeyword") || this.mapParams.containsKey("AddSVar")) {
             layers.add(StaticAbilityLayer.ABILITIES2);
         }
 
