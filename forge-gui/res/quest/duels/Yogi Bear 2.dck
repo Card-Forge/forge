@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Yogi Bear 2
+Title=Yogi Bear
+Difficulty=medium
+Description=UG Bear deck
+Icon=Yogi Bear.jpg
+Deck Type=constructed
+[main]
+2 Alpine Grizzly
+2 Awaken the Bear
+2 Beastmaster Ascension
+2 Call to the Kindred
+4 Forest
+4 Hinterland Harbor
+2 Island
+4 Misty Rainforest
+4 Tropical Island
+1 Thornwood Falls
+1 Grizzly Fate
+3 Werebear
+2 Spectral Bears
+3 Phantasmal Bear
+4 Ashcoat Bear
+1 Coat of Arms
+2 Distant Melody
+3 Grizzly Bears
+1 Gaea's Cradle
+2 Bear Umbra
+1 Forest Bear
+1 Gaea's Anthem
+1 Balduvian Bears
+1 Bear Cub
+1 Runeclaw Bear
+1 Alpha Status
+1 Bow of Nylea
+2 Hunt the Weak
+1 Druid's Familiar
+1 Naturalize
+[sideboard]
