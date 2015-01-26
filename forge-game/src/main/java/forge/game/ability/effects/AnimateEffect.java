@@ -80,17 +80,17 @@ public class AnimateEffect extends AnimateEffectBase {
             types.add(source.getChosenType());
         }
 
-        final ArrayList<String> keywords = new ArrayList<String>();
+        final List<String> keywords = new ArrayList<String>();
         if (sa.hasParam("Keywords")) {
             keywords.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
         }
 
-        final ArrayList<String> removeKeywords = new ArrayList<String>();
+        final List<String> removeKeywords = new ArrayList<String>();
         if (sa.hasParam("RemoveKeywords")) {
             removeKeywords.addAll(Arrays.asList(sa.getParam("RemoveKeywords").split(" & ")));
         }
 
-        final ArrayList<String> hiddenKeywords = new ArrayList<String>();
+        final List<String> hiddenKeywords = new ArrayList<String>();
         if (sa.hasParam("HiddenKeywords")) {
             hiddenKeywords.addAll(Arrays.asList(sa.getParam("HiddenKeywords").split(" & ")));
         }
@@ -117,31 +117,31 @@ public class AnimateEffect extends AnimateEffectBase {
         final String finalDesc = tmpDesc;
 
         // abilities to add to the animated being
-        final ArrayList<String> abilities = new ArrayList<String>();
+        final List<String> abilities = new ArrayList<String>();
         if (sa.hasParam("Abilities")) {
             abilities.addAll(Arrays.asList(sa.getParam("Abilities").split(",")));
         }
 
         // replacement effects to add to the animated being
-        final ArrayList<String> replacements = new ArrayList<String>();
+        final List<String> replacements = new ArrayList<String>();
         if (sa.hasParam("Replacements")) {
             replacements.addAll(Arrays.asList(sa.getParam("Replacements").split(",")));
         }
 
         // triggers to add to the animated being
-        final ArrayList<String> triggers = new ArrayList<String>();
+        final List<String> triggers = new ArrayList<String>();
         if (sa.hasParam("Triggers")) {
             triggers.addAll(Arrays.asList(sa.getParam("Triggers").split(",")));
         }
 
         // static abilities to add to the animated being
-        final ArrayList<String> stAbs = new ArrayList<String>();
+        final List<String> stAbs = new ArrayList<String>();
         if (sa.hasParam("staticAbilities")) {
             stAbs.addAll(Arrays.asList(sa.getParam("staticAbilities").split(",")));
         }
 
         // sVars to add to the animated being
-        final ArrayList<String> sVars = new ArrayList<String>();
+        final List<String> sVars = new ArrayList<String>();
         if (sa.hasParam("sVars")) {
             sVars.addAll(Arrays.asList(sa.getParam("sVars").split(",")));
         }
@@ -149,11 +149,11 @@ public class AnimateEffect extends AnimateEffectBase {
         List<Card> tgts = getTargetCards(sa);
 
         for (final Card c : tgts) {
-            final long colorTimestamp = doAnimate(c, sa, power, toughness, types, removeTypes,
-                    finalDesc, keywords, removeKeywords, hiddenKeywords, timestamp);
+            doAnimate(c, sa, power, toughness, types, removeTypes, finalDesc,
+                    keywords, removeKeywords, hiddenKeywords, timestamp);
 
             // remove abilities
-            final ArrayList<SpellAbility> removedAbilities = new ArrayList<SpellAbility>();
+            final List<SpellAbility> removedAbilities = new ArrayList<SpellAbility>();
             boolean clearAbilities = sa.hasParam("OverwriteAbilities");
             boolean clearSpells = sa.hasParam("OverwriteSpells");
             boolean removeAll = sa.hasParam("RemoveAllAbilities");
@@ -174,7 +174,7 @@ public class AnimateEffect extends AnimateEffectBase {
             }
 
             // give abilities
-            final ArrayList<SpellAbility> addedAbilities = new ArrayList<SpellAbility>();
+            final List<SpellAbility> addedAbilities = new ArrayList<SpellAbility>();
             if (abilities.size() > 0) {
                 for (final String s : abilities) {
                     final String actualAbility = source.getSVar(s);
@@ -185,7 +185,7 @@ public class AnimateEffect extends AnimateEffectBase {
             }
 
             // Grant triggers
-            final ArrayList<Trigger> addedTriggers = new ArrayList<Trigger>();
+            final List<Trigger> addedTriggers = new ArrayList<Trigger>();
             if (triggers.size() > 0) {
                 for (final String s : triggers) {
                     final String actualTrigger = source.getSVar(s);
@@ -195,7 +195,7 @@ public class AnimateEffect extends AnimateEffectBase {
             }
 
             // give replacement effects
-            final ArrayList<ReplacementEffect> addedReplacements = new ArrayList<ReplacementEffect>();
+            final List<ReplacementEffect> addedReplacements = new ArrayList<ReplacementEffect>();
             if (replacements.size() > 0) {
                 for (final String s : replacements) {
                     final String actualReplacement = source.getSVar(s);
@@ -205,7 +205,7 @@ public class AnimateEffect extends AnimateEffectBase {
             }
 
             // suppress triggers from the animated card
-            final ArrayList<Trigger> removedTriggers = new ArrayList<Trigger>();
+            final List<Trigger> removedTriggers = new ArrayList<Trigger>();
             if (sa.hasParam("OverwriteTriggers") || removeAll) {
                 final FCollectionView<Trigger> triggersToRemove = c.getTriggers();
                 for (final Trigger trigger : triggersToRemove) {
@@ -238,7 +238,7 @@ public class AnimateEffect extends AnimateEffectBase {
             }
 
             // suppress static abilities from the animated card
-            final ArrayList<StaticAbility> removedStatics = new ArrayList<StaticAbility>();
+            final List<StaticAbility> removedStatics = new ArrayList<StaticAbility>();
             if (sa.hasParam("OverwriteStatics") || removeAll) {
                 final FCollectionView<StaticAbility> staticsToRemove = c.getStaticAbilities();
                 for (final StaticAbility stAb : staticsToRemove) {
@@ -248,7 +248,7 @@ public class AnimateEffect extends AnimateEffectBase {
             }
 
             // suppress static abilities from the animated card
-            final ArrayList<ReplacementEffect> removedReplacements = new ArrayList<ReplacementEffect>();
+            final List<ReplacementEffect> removedReplacements = new ArrayList<ReplacementEffect>();
             if (sa.hasParam("OverwriteReplacements") || removeAll) {
                 for (final ReplacementEffect re : c.getReplacementEffects()) {
                     re.setTemporarilySuppressed(true);
@@ -270,8 +270,9 @@ public class AnimateEffect extends AnimateEffectBase {
 
                 @Override
                 public void run() {
-                    doUnanimate(c, sa, finalDesc, hiddenKeywords, addedAbilities, addedTriggers, addedReplacements,
-                            colorTimestamp, givesStAbs, removedAbilities, timestamp);
+                    doUnanimate(c, sa, finalDesc, hiddenKeywords,
+                            addedAbilities, addedTriggers, addedReplacements,
+                            givesStAbs, removedAbilities, timestamp);
 
                     game.fireEvent(new GameEventCardStatsChanged(c));
                     // give back suppressed triggers
@@ -354,11 +355,11 @@ public class AnimateEffect extends AnimateEffectBase {
         }
 
         final boolean permanent = sa.hasParam("Permanent");
-        final ArrayList<String> types = new ArrayList<String>();
+        final List<String> types = new ArrayList<String>();
         if (sa.hasParam("Types")) {
             types.addAll(Arrays.asList(sa.getParam("Types").split(",")));
         }
-        final ArrayList<String> keywords = new ArrayList<String>();
+        final List<String> keywords = new ArrayList<String>();
         if (sa.hasParam("Keywords")) {
             keywords.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
         }
@@ -370,7 +371,7 @@ public class AnimateEffect extends AnimateEffectBase {
                 keywords.remove(k);
             }
         }
-        final ArrayList<String> colors = new ArrayList<String>();
+        final List<String> colors = new ArrayList<String>();
         if (sa.hasParam("Colors")) {
             colors.addAll(Arrays.asList(sa.getParam("Colors").split(",")));
         }

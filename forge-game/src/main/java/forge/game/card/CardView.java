@@ -28,6 +28,7 @@ import forge.item.IPaperCard;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
+import forge.trackable.Tracker;
 import forge.util.FCollectionView;
 
 public class CardView extends GameEntityView {
@@ -68,20 +69,20 @@ public class CardView extends GameEntityView {
         return false;
     }
 
-    public CardView(int id0) {
-        super(id0);
-        set(TrackableProperty.CurrentState, new CardStateView(id0, CardStateName.Original));
+    public CardView(final int id0, final Tracker tracker) {
+        super(id0, tracker);
+        set(TrackableProperty.CurrentState, new CardStateView(id0, CardStateName.Original, tracker));
     }
-    public CardView(int id0, String name0) {
-        this(id0);
+    public CardView(final int id0, final Tracker tracker, final String name0) {
+        this(id0, tracker);
         getCurrentState().setName(name0);
         set(TrackableProperty.Name, name0);
         set(TrackableProperty.ChangedColorWords, new HashMap<String, String>());
         set(TrackableProperty.ChangedTypes, new HashMap<String, String>());
         set(TrackableProperty.Sickness, true);
     }
-    public CardView(int id0, String name0, PlayerView ownerAndController, String imageKey) {
-        this(id0, name0);
+    public CardView(final int id0, final Tracker tracker, final String name0, final PlayerView ownerAndController, final String imageKey) {
+        this(id0, tracker, name0);
         set(TrackableProperty.Owner, ownerAndController);
         set(TrackableProperty.Controller, ownerAndController);
         set(TrackableProperty.ImageKey, imageKey);
@@ -632,8 +633,8 @@ public class CardView extends GameEntityView {
     public CardStateView getAlternateState() {
         return get(TrackableProperty.AlternateState);
     }
-    CardStateView createAlternateState(CardStateName state0) {
-        return new CardStateView(getId(), state0);
+    CardStateView createAlternateState(final CardStateName state0) {
+        return new CardStateView(getId(), state0, tracker);
     }
 
     public CardStateView getState(final boolean alternate0) {
@@ -716,8 +717,8 @@ public class CardView extends GameEntityView {
     public class CardStateView extends TrackableObject {
         private final CardStateName state;
 
-        public CardStateView(int id0, CardStateName state0) {
-            super(id0);
+        public CardStateView(final int id0, final CardStateName state0, final Tracker tracker) {
+            super(id0, tracker);
             state = state0;
         }
 

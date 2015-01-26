@@ -631,6 +631,7 @@ forge-game/src/main/java/forge/game/staticability/StaticAbilityCantBeCast.java s
 forge-game/src/main/java/forge/game/staticability/StaticAbilityCantTarget.java -text
 forge-game/src/main/java/forge/game/staticability/StaticAbilityContinuous.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/staticability/StaticAbilityETBTapped.java -text
+forge-game/src/main/java/forge/game/staticability/StaticAbilityLayer.java -text
 forge-game/src/main/java/forge/game/staticability/StaticAbilityPreventDamage.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/staticability/package-info.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/Trigger.java svneol=native#text/plain
@@ -706,6 +707,7 @@ forge-game/src/main/java/forge/trackable/TrackableObject.java -text
 forge-game/src/main/java/forge/trackable/TrackableProperty.java -text
 forge-game/src/main/java/forge/trackable/TrackableSerializer.java -text
 forge-game/src/main/java/forge/trackable/TrackableTypes.java -text
+forge-game/src/main/java/forge/trackable/Tracker.java -text
 forge-game/src/main/java/forge/util/Expressions.java -text
 forge-game/src/main/java/forge/util/MessageUtil.java -text
 forge-game/src/test/java/forge/game/mana/ManaCostBeingPaidTest.java -text

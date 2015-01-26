@@ -240,10 +240,7 @@ public final class CardUtil {
         newCopy.setCounters(in.getCounters());
         newCopy.setExtrinsicKeyword(in.getExtrinsicKeyword());
 
-        // Determine the color for LKI copy, not just getColor
-        ArrayList<CardColor> currentColor = new ArrayList<CardColor>();
-        currentColor.add(new CardColor(in.determineColor().getColor()));
-        newCopy.setColor(currentColor);
+        newCopy.setColor(in.determineColor().getColor());
         newCopy.setReceivedDamageFromThisTurn(in.getReceivedDamageFromThisTurn());
         newCopy.getDamageHistory().setCreatureGotBlockedThisTurn(in.getDamageHistory().getCreatureGotBlockedThisTurn());
         newCopy.setEnchanting(in.getEnchanting());

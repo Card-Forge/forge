@@ -145,8 +145,8 @@ public class AnimateAllEffect extends AnimateEffectBase {
         list = CardLists.getValidCards(list, valid.split(","), host.getController(), host);
 
         for (final Card c : list) {
-            final long colorTimestamp = doAnimate(c, sa, power, toughness, types, removeTypes,
-                    finalDesc, keywords, removeKeywords, hiddenKeywords, timestamp);
+            doAnimate(c, sa, power, toughness, types, removeTypes, finalDesc,
+                    keywords, removeKeywords, hiddenKeywords, timestamp);
 
             // give abilities
             final ArrayList<SpellAbility> addedAbilities = new ArrayList<SpellAbility>();
@@ -232,8 +232,9 @@ public class AnimateAllEffect extends AnimateEffectBase {
 
                 @Override
                 public void run() {
-                    doUnanimate(c, sa, finalDesc, hiddenKeywords, addedAbilities, addedTriggers, addedReplacements,
-                            colorTimestamp, false, removedAbilities, timestamp);
+                    doUnanimate(c, sa, finalDesc, hiddenKeywords,
+                            addedAbilities, addedTriggers, addedReplacements,
+                            false, removedAbilities, timestamp);
 
                     // give back suppressed triggers
                     for (final Trigger t : removedTriggers) {

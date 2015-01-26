@@ -26,12 +26,13 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AnimateEffectBase extends SpellAbilityEffect {
-    long doAnimate(final Card c, final SpellAbility sa, final int power, final int toughness,
+    void doAnimate(final Card c, final SpellAbility sa, final int power, final int toughness,
             final CardType addType, final CardType removeType, final String colors,
-            final ArrayList<String> keywords, final ArrayList<String> removeKeywords,
-            final ArrayList<String> hiddenKeywords, final long timestamp) {
+            final List<String> keywords, final List<String> removeKeywords,
+            final List<String> hiddenKeywords, final long timestamp) {
 
         boolean removeSuperTypes = false;
         boolean removeCardTypes = false;
@@ -84,8 +85,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             c.addHiddenExtrinsicKeyword(k);
         }
 
-        final long colorTimestamp = c.addColor(colors, !sa.hasParam("OverwriteColors"), true);
-        return colorTimestamp;
+        c.addColor(colors, !sa.hasParam("OverwriteColors"), timestamp);
     }
 
     /**
@@ -113,10 +113,9 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
      *            a long.
      */
     void doUnanimate(final Card c, SpellAbility sa, final String colorDesc,
-            final ArrayList<String> hiddenKeywords, final ArrayList<SpellAbility> addedAbilities,
-            final ArrayList<Trigger> addedTriggers, final ArrayList<ReplacementEffect> addedReplacements, 
-            final long colorTimestamp, final boolean givesStAbs,
-            final ArrayList<SpellAbility> removedAbilities, final long timestamp) {
+            final List<String> hiddenKeywords, final List<SpellAbility> addedAbilities,
+            final List<Trigger> addedTriggers, final List<ReplacementEffect> addedReplacements, 
+            final boolean givesStAbs, final List<SpellAbility> removedAbilities, final long timestamp) {
 
         c.removeNewPT(timestamp);
 
@@ -132,7 +131,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             c.removeChangedCardTypes(timestamp);
         }
 
-        c.removeColor(colorDesc, c, !sa.hasParam("OverwriteColors"), colorTimestamp);
+        c.removeColor(timestamp);
 
         for (final String k : hiddenKeywords) {
             c.removeHiddenExtrinsicKeyword(k);

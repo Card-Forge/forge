@@ -204,14 +204,17 @@ public class GuiChoose {
                     @Override
                     public void valueChanged(final ListSelectionEvent ev) {
                         final T sel = list.getSelectedValue();
+                        if (sel instanceof InventoryItem) {
+                            CMatchUI.SINGLETON_INSTANCE.setCard((InventoryItem) list.getSelectedValue());
+                            return;
+                        }
+
                         final CardView card;
                         if (sel instanceof CardStateView) {
                             card = ((CardStateView) sel).getCard();
-                        }
-                        else if (sel instanceof CardView) {
+                        } else if (sel instanceof CardView) {
                             card = (CardView) sel;
-                        }
-                        else {
+                        } else {
                             card = null;
                         }
                         if (card != null) {
@@ -219,9 +222,6 @@ public class GuiChoose {
 
                             GuiUtils.clearPanelSelections();
                             GuiUtils.setPanelSelection(card);
-                        }
-                        if (list.getSelectedValue() instanceof InventoryItem) {
-                            CMatchUI.SINGLETON_INSTANCE.setCard((InventoryItem) list.getSelectedValue());
                         }
                     }
                 });

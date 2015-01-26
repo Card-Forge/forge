@@ -36,8 +36,8 @@ public class GameView extends TrackableObject {
     private CombatView combatView;
     private final Game game; //TODO: Remove this when possible before network support added
 
-    public GameView(Game game0) {
-        super(-1); //ID not needed
+    public GameView(final Game game0) {
+        super(-1, game0.getTracker()); //ID not needed
         currentGame = this;
         game = game0;
         set(TrackableProperty.WinningTeam, -1);
@@ -138,7 +138,7 @@ public class GameView extends TrackableObject {
             return;
         }
 
-        combatView = new CombatView();
+        combatView = new CombatView(combat.getAttackingPlayer().getGame().getTracker());
         for (final AttackingBand b : combat.getAttackingBands()) {
             if (b == null) continue;
             final GameEntity defender = combat.getDefenderByAttacker(b);

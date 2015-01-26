@@ -1,50 +1,27 @@
 package forge.trackable;
 
-import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.EnumSet;
+import java.util.Map;
+import java.util.Set;
 
 import forge.game.IIdentifiable;
 
 //base class for objects that can be tracked and synced between game server and GUI
 public abstract class TrackableObject implements IIdentifiable {
-    private static int freezeCounter = 0;
-    public static void freeze() {
-        freezeCounter++;
-    }
-    public static void unfreeze() {
-        if (freezeCounter == 0 || --freezeCounter > 0 || delayedPropChanges.isEmpty()) {
-            return;
-        }
-        //after being unfrozen, ensure all changes delayed during freeze are now applied
-        for (DelayedPropChange change : delayedPropChanges) {
-            change.object.set(change.prop, change.value);
-        }
-        delayedPropChanges.clear();
-    }
-    private static class DelayedPropChange {
-        private final TrackableObject object;
-        private final TrackableProperty prop;
-        private final Object value;
-        private DelayedPropChange(TrackableObject object0, TrackableProperty prop0, Object value0) {
-            object = object0;
-            prop = prop0;
-            value = value0;
-        }
-    }
-    private static final ArrayList<DelayedPropChange> delayedPropChanges = new ArrayList<DelayedPropChange>();
-
     private final int id;
-    private final EnumMap<TrackableProperty, Object> props;
-    private final EnumSet<TrackableProperty> changedProps;
+    protected final transient Tracker tracker;
+    private final Map<TrackableProperty, Object> props;
+    private final Set<TrackableProperty> changedProps;
 
-    protected TrackableObject(int id0) {
+    protected TrackableObject(final int id0, final Tracker tracker) {
         id = id0;
+        this.tracker = tracker;
         props = new EnumMap<TrackableProperty, Object>(TrackableProperty.class);
         changedProps = EnumSet.noneOf(TrackableProperty.class);
     }
 
-    public int getId() {
+    public final int getId() {
         return id;
     }
 
@@ -54,13 +31,13 @@ public abstract class TrackableObject implements IIdentifiable {
     }
 
     @Override
-    public final boolean equals(Object o) {
+    public final boolean equals(final Object o) {
         if (o == null) { return false; }
         return o.hashCode() == id && o.getClass().equals(getClass());
     }
 
     @SuppressWarnings("unchecked")
-    protected <T> T get(TrackableProperty key) {
+    protected final <T> T get(final TrackableProperty key) {
         T value = (T)props.get(key);
         if (value == null) {
             value = key.getDefaultValue();
@@ -68,9 +45,9 @@ public abstract class TrackableObject implements IIdentifiable {
         return value;
     }
 
-    protected <T> void set(TrackableProperty key, T value) {
-        if (freezeCounter > 0 && key.respectFreeze()) { //if trackable objects currently frozen, queue up delayed prop change
-            delayedPropChanges.add(new DelayedPropChange(this, key, value));
+    protected final <T> void set(final TrackableProperty key, final T value) {
+        if (tracker != null && tracker.isFrozen() && key.respectFreeze()) { //if trackable objects currently frozen, queue up delayed prop change
+            tracker.addDelayedPropChange(this, key, value);
             return;
         }
         if (value == null || value.equals(key.getDefaultValue())) {
@@ -84,11 +61,11 @@ public abstract class TrackableObject implements IIdentifiable {
     }
 
     //use when updating collection type properties with using set
-    protected void flagAsChanged(TrackableProperty key) {
+    protected final void flagAsChanged(final TrackableProperty key) {
         changedProps.add(key);
     }
 
-    public void serialize(TrackableSerializer ts) {
+    public final void serialize(final TrackableSerializer ts) {
         ts.write(changedProps.size());
         for (TrackableProperty key : changedProps) {
             ts.write(TrackableProperty.serialize(key));
@@ -97,7 +74,7 @@ public abstract class TrackableObject implements IIdentifiable {
         changedProps.clear();
     }
 
-    public void deserialize(TrackableDeserializer td) {
+    public final void deserialize(final TrackableDeserializer td) {
         int count = td.readInt();
         for (int i = 0; i < count; i++) {
             TrackableProperty key = TrackableProperty.deserialize(td.readInt());

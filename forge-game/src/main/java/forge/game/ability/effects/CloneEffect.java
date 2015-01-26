@@ -290,7 +290,7 @@ public class CloneEffect extends SpellAbilityEffect {
                 shortColors = CardUtil.getShortColorsString(Arrays.asList(colors.split(",")));
             }
         }
-        tgtCard.addColor(shortColors, !sa.hasParam("OverwriteColors"), true);
+        tgtCard.addColor(shortColors, !sa.hasParam("OverwriteColors"), tgtCard.getTimestamp());
     }
 
 }

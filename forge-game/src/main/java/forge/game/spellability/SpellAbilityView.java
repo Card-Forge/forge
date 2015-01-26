@@ -22,8 +22,8 @@ public class SpellAbilityView extends TrackableObject {
         return collection;
     }
 
-    SpellAbilityView(SpellAbility sa) {
-        super(sa.getId());
+    SpellAbilityView(final SpellAbility sa) {
+        super(sa.getId(), sa.getHostCard() == null || sa.getHostCard().getGame() == null ? null : sa.getHostCard().getGame().getTracker());
         updateHostCard(sa);
         updateDescription(sa);
         updatePromptIfOnlyPossibleAbility(sa);

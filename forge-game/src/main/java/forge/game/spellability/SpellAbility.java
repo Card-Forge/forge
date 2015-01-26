@@ -96,6 +96,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean morphup = false;
     private boolean cumulativeupkeep = false;
     private boolean outlast = false;
+    private SplitSide splitSide = null;
+    enum SplitSide { LEFT, RIGHT };
     private int totalManaSpent = 0;
 
     /** The pay costs. */
@@ -543,6 +545,22 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setOutlast(boolean outlast0) {
         outlast = outlast0;
+    }
+
+    public boolean isLeftSplit() {
+        return splitSide == SplitSide.LEFT;
+    }
+    public boolean isRightSplit() {
+        return splitSide == SplitSide.RIGHT;
+    }
+    public void setNoSplit() {
+        splitSide = null;
+    }
+    public void setLeftSplit() {
+        splitSide = SplitSide.LEFT;
+    }
+    public void setRightSplit() {
+        splitSide = SplitSide.RIGHT;
     }
 
     public SpellAbility copy() {

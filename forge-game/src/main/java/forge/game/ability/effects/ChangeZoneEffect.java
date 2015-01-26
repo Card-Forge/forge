@@ -402,9 +402,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             hostCard.clearRemembered();
         }
 
-        boolean optional = sa.hasParam("Optional");
-
-        long ts = game.getNextTimestamp();
+        final boolean optional = sa.hasParam("Optional");
+        final long ts = game.getNextTimestamp();
 
         for (final Card tgtC : tgtCards) {
             if (tgt != null && tgtC.isInPlay() && !tgtC.canBeTargetedBy(sa)) {

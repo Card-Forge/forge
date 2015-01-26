@@ -22,6 +22,8 @@ import forge.game.CardTraitBase;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -30,20 +32,22 @@ import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import com.google.common.collect.Maps;
 
 /**
  * The Class StaticAbility.
  */
 public class StaticAbility extends CardTraitBase {
 
-    private int layer = 0;
-    private List<Card> ignoreEffectCards = new ArrayList<Card>();
-    private List<Player> ignoreEffectPlayers = new ArrayList<Player>();
-
-    // *******************************************************
+    private final Set<StaticAbilityLayer> layers;
+    private CardCollectionView ignoreEffectCards = new CardCollection();
+    private final List<Player> ignoreEffectPlayers = new ArrayList<Player>();
 
     /**
      * <p>
@@ -56,8 +60,8 @@ public class StaticAbility extends CardTraitBase {
      *            a {@link forge.game.card.Card} object.
      * @return a {@link java.util.HashMap} object.
      */
-    private static HashMap<String, String> parseParams(final String abString, final Card hostCard) {
-        final HashMap<String, String> mapParameters = new HashMap<String, String>();
+    private static Map<String, String> parseParams(final String abString, final Card hostCard) {
+        final Map<String, String> mapParameters = Maps.newHashMap();
 
         if (!(abString.length() > 0)) {
             throw new RuntimeException("StaticEffectFactory : getAbility -- abString too short in "
@@ -94,58 +98,63 @@ public class StaticAbility extends CardTraitBase {
         return mapParameters;
     }
 
-    // In which layer should the ability be applied (for continuous effects
-    // only)
     /**
-     * Gets the layer.
+     * Gets the {@link Set} of {@link StaticAbilityLayer}s in which this
+     * {@link StaticAbility} is to be applied.
      * 
-     * @return the layer
+     * @return the applicable layers.
      */
-    public final int generateLayer() {
-
+    private final Set<StaticAbilityLayer> generateLayer() {
         if (!this.mapParams.get("Mode").equals("Continuous")) {
-            return 0;
+            return EnumSet.noneOf(StaticAbilityLayer.class);
         }
 
+        final Set<StaticAbilityLayer> layers = EnumSet.noneOf(StaticAbilityLayer.class);
         if (this.mapParams.containsKey("GainControl")) {
-            return 2;
+            layers.add(StaticAbilityLayer.CONTROL);
         }
 
         if (this.mapParams.containsKey("ChangeColorWordsTo")) {
-            return 3;
+            layers.add(StaticAbilityLayer.TEXT);
         }
 
         if (this.mapParams.containsKey("AddType") || this.mapParams.containsKey("RemoveType")
                 || this.mapParams.containsKey("RemoveCardTypes") || this.mapParams.containsKey("RemoveSubTypes")
                 || this.mapParams.containsKey("RemoveSuperTypes") || this.mapParams.containsKey("RemoveCreatureTypes")) {
-            return 4;
+            layers.add(StaticAbilityLayer.TYPE);
         }
 
         if (this.mapParams.containsKey("AddColor") || this.mapParams.containsKey("RemoveColor")
                 || this.mapParams.containsKey("SetColor")) {
-            return 5;
+            layers.add(StaticAbilityLayer.COLOR);
         }
 
         if (this.mapParams.containsKey("RemoveAllAbilities") || this.mapParams.containsKey("GainsAbilitiesOf")) {
-            return 6; // Layer 6
+            layers.add(StaticAbilityLayer.ABILITIES1);
         }
 
         if (this.mapParams.containsKey("AddKeyword") || this.mapParams.containsKey("AddAbility")
                 || this.mapParams.containsKey("AddTrigger") || this.mapParams.containsKey("RemoveTriggers")
                 || this.mapParams.containsKey("RemoveKeyword") || this.mapParams.containsKey("AddReplacementEffects")) {
-            return 7; // Layer 6 (dependent)
+            layers.add(StaticAbilityLayer.ABILITIES2);
         }
 
         if (this.mapParams.containsKey("CharacteristicDefining")) {
-            return 8; // Layer 7a
+            layers.add(StaticAbilityLayer.CHARACTERISTIC);
         }
 
-        if (this.mapParams.containsKey("AddPower") || this.mapParams.containsKey("AddToughness")
-                || this.mapParams.containsKey("SetPower") || this.mapParams.containsKey("SetToughness")) {
-            return 9; // This is the collection of 7b and 7c
+        if (this.mapParams.containsKey("SetPower") || this.mapParams.containsKey("SetToughness")) {
+            layers.add(StaticAbilityLayer.SETPT);
+        }
+        if (this.mapParams.containsKey("AddPower") || this.mapParams.containsKey("AddToughness")) {
+            layers.add(StaticAbilityLayer.MODIFYPT);
         }
 
-        return 10; // rules change
+        if (layers.isEmpty()) {
+            return EnumSet.of(StaticAbilityLayer.RULES);
+        }
+
+        return layers;
     }
 
     /**
@@ -174,11 +183,7 @@ public class StaticAbility extends CardTraitBase {
      *            the host
      */
     public StaticAbility(final String params, final Card host) {
-        final Map<String, String> parsedParams = parseParams(params, host);
-        this.originalMapParams.putAll(parsedParams);
-        this.mapParams.putAll(parsedParams);
-        this.hostCard = host;
-        this.layer = this.generateLayer();
+        this(parseParams(params, host), host);
     }
 
     /**
@@ -189,37 +194,49 @@ public class StaticAbility extends CardTraitBase {
      * @param host
      *            the host
      */
-    public StaticAbility(final Map<String, String> params, final Card host) {
+    private StaticAbility(final Map<String, String> params, final Card host) {
         this.originalMapParams.putAll(params);
         this.mapParams.putAll(params);
-        this.layer = this.generateLayer();
+        this.layers = this.generateLayer();
         this.hostCard = host;
     }
 
-    // apply the ability if it has the right mode
+    public final CardCollectionView applyContinuousAbility(final StaticAbilityLayer layer) {
+        if (!shouldApplyContinuousAbility(layer, false)) {
+            return null;
+        }
+        return StaticAbilityContinuous.applyContinuousAbility(this, layer);
+    }
+
+    public final CardCollectionView applyContinuousAbility(final StaticAbilityLayer layer, final CardCollectionView affected) {
+        if (!shouldApplyContinuousAbility(layer, true)) {
+            return null;
+        }
+        return StaticAbilityContinuous.applyContinuousAbility(this, affected, layer);
+    }
+
     /**
-     * Apply ability.
+     * Check whether a continuous ability should be applied.
      * 
-     * @param mode
-     *            the mode
-     * @return 
+     * @param layer
+     *            the {@link StaticAbilityLayer} under investigation.
+     * @param ignoreTempSuppression
+     *            whether to ignore temporary suppression of this ability, to be
+     *            used when this ability has already begun applying in another
+     *            layer and has since been removed from its host card by another
+     *            effect (see rule 613.5).
+     * @return {@code true} if and only if this is a continuous ability that
+     *         affects the specified layer, it's not suppressed, and its
+     *         conditions are fulfilled.
      */
-    public final List<Card> applyAbility(final String mode) {
-
-        // don't apply the ability if it hasn't got the right mode
-        if (!this.mapParams.get("Mode").equals(mode)) {
-            return null;
+    private boolean shouldApplyContinuousAbility(final StaticAbilityLayer layer, final boolean ignoreTempSuppression) {
+        final boolean isSuppressed;
+        if (ignoreTempSuppression) {
+            isSuppressed = this.isNonTempSuppressed();
+        } else {
+            isSuppressed = this.isSuppressed();
         }
-
-        if (this.isSuppressed() || !this.checkConditions()) {
-            return null;
-        }
-
-        if (mode.equals("Continuous")) {
-            return StaticAbilityContinuous.applyContinuousAbility(this);
-        }
-        
-        return null;
+        return mapParams.get("Mode").equals("Continuous") && layers.contains(layer) && !isSuppressed && this.checkConditions();
     }
 
     // apply the ability if it has the right mode
@@ -557,15 +574,15 @@ public class StaticAbility extends CardTraitBase {
     /**
      * @return the ignoreEffectCards
      */
-    public List<Card> getIgnoreEffectCards() {
+    public CardCollectionView getIgnoreEffectCards() {
         return ignoreEffectCards;
     }
 
     /**
      * @param c the ignoreEffectCards to set
      */
-    public void setIgnoreEffectCards(List<Card> cards) {
-        this.ignoreEffectCards = cards;
+    public void setIgnoreEffectCards(final CardCollectionView cards) {
+        ignoreEffectCards = cards;
     }
 
     /**
@@ -578,27 +595,20 @@ public class StaticAbility extends CardTraitBase {
     /**
      * @param p the ignoreEffectPlayers to add
      */
-    public void addIgnoreEffectPlayers(Player p) {
-        this.ignoreEffectPlayers.add(p);
+    public void addIgnoreEffectPlayers(final Player p) {
+        ignoreEffectPlayers.add(p);
     }
 
     public void clearIgnoreEffects() {
-        this.ignoreEffectPlayers.clear();
-        this.ignoreEffectCards.clear();
+        ignoreEffectPlayers.clear();
+        ignoreEffectCards = new CardCollection();
     }
 
     /**
      * @return the layer
      */
-    public int getLayer() {
-        return layer;
+    public Set<StaticAbilityLayer> getLayers() {
+        return layers;
     }
 
-    /**
-     * @param layer the layer to set
-     */
-    public void setLayer(int layer) {
-        this.layer = layer;
-    }
-
-} // end class StaticEffectFactory
+} // end class StaticAbility

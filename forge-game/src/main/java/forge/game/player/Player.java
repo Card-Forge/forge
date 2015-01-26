@@ -150,7 +150,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             zones.put(z, toPut);
         }
 
-        view = new PlayerView(id0);
+        view = new PlayerView(id0, game.getTracker());
         view.updateMaxHandSize(this);
         view.updateKeywords(this);
         setName(chooseName(name0));

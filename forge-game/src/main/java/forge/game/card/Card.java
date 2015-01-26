@@ -271,7 +271,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             game.addCard(id0, this);
         }
         paperCard = paperCard0;
-        view = new CardView(id0);
+        view = new CardView(id0, game == null ? null : game.getTracker());
         currentState = new CardState(view.getCurrentState(), this);
         states.put(CardStateName.Original, currentState);
         states.put(CardStateName.FaceDown, CardUtil.getFaceDownCharacteristic(this));
@@ -1080,44 +1080,19 @@ public class Card extends GameEntity implements Comparable<Card> {
         return currentState.getManaCost();
     }
 
-    public final void addColor(String s) {
-        if (s.equals("")) {
-            s = "0";
-        }
-        ManaCost mc = new ManaCost(new ManaCostParser(s));
-        currentState.getCardColor().add(new CardColor(mc.getColorProfile()));
+    public final void addColor(final String s, final boolean addToColors, final long timestamp) {
+        currentState.addColor(s, addToColors, timestamp);
     }
 
-    public final long addColor(final String s, final boolean addToColors, final boolean bIncrease) {
-        if (bIncrease) {
-            CardColor.increaseTimestamp();
-        }
-        currentState.getCardColor().add(new CardColor(s, addToColors));
-        currentState.getView().updateColors(this);
-        return CardColor.getTimestamp();
+    public final void removeColor(final long timestamp) {
+        currentState.removeColor(timestamp);
     }
 
-    public final void removeColor(final String s, final Card c, final boolean addTo, final long timestampIn) {
-        CardColor removeCol = null;
-        for (final CardColor cc : currentState.getCardColor()) {
-            if (cc.equals(s, c, addTo, timestampIn)) {
-                removeCol = cc;
-            }
-        }
-
-        if (removeCol != null) {
-            currentState.getCardColor().remove(removeCol);
-            currentState.getView().updateColors(this);
-        }
+    public final void setColor(final byte color) {
+        currentState.setColor(new CardColor(color));
     }
-
-    public final void setColor(final Iterable<CardColor> colors) {
-        currentState.setCardColor(colors);
-        currentState.getView().updateColors(this);
-    }
-
-    public final Iterable<CardColor> getColor() {
-        return currentState.getCardColor();
+    public final void setColor(final String color) {
+        currentState.setColor(new CardColor(color));
     }
 
     public final ColorSet determineColor() {
@@ -2441,7 +2416,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public Map<Long, CardChangedType> getChangedCardTypes() {
-        return changedCardTypes;
+        return Collections.unmodifiableMap(changedCardTypes);
     }
 
     public final void addChangedCardTypes(final CardType addType, final CardType removeType,
@@ -3212,14 +3187,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     /** {@inheritDoc} */
     @Override
     public final String toString() {
-        String name = "Morph";
-        if (!isFaceDown()) {
-            name = getName();
-            if (StringUtils.isEmpty(name) && paperCard != null) {
-                name = paperCard.getName(); //make it possible to see likely card name before it's set
-            }
+        if (getView() == null) {
+            return getPaperCard().getName();
         }
-        return name + " (" + id + ")";
+        return getView().toString();
     }
 
     public final boolean isUnearthed() {
@@ -6273,25 +6244,16 @@ public class Card extends GameEntity implements Comparable<Card> {
         view.updateCommander(this);
     }
 
-    public void setSplitStateToPlayAbility(SpellAbility sa) {
-        if (!isSplitCard()) { return; } // just in case
+    public void setSplitStateToPlayAbility(final SpellAbility sa) {
+        if (!isSplitCard()) {
+            return; // just in case
+        }
         // Split card support
-        for (SpellAbility a : getState(CardStateName.LeftSplit).getNonManaAbilities()) {
-            if (sa == a || sa.getDescription().equals(String.format("%s (without paying its mana cost)", a.getDescription()))) {
-                setState(CardStateName.LeftSplit, true);
-                return;
-            }
+        if (sa.isLeftSplit()) {
+            setState(CardStateName.LeftSplit, true);
+        } else if (sa.isRightSplit()) {
+            setState(CardStateName.RightSplit, true);
         }
-        for (SpellAbility a : getState(CardStateName.RightSplit).getNonManaAbilities()) {
-            if (sa == a || sa.getDescription().equals(String.format("%s (without paying its mana cost)", a.getDescription()))) {
-                setState(CardStateName.RightSplit, true);
-                return;
-            }
-        }
-        if (sa.getHostCard().hasKeyword("Fuse")) { // it's ok that such card won't change its side
-            return;
-        }
-        throw new RuntimeException("Not found which part to choose for ability " + sa + " from card " + this);
     }
 
     // Optional costs paid

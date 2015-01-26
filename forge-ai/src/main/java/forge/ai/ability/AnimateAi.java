@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
@@ -27,6 +26,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityContinuous;
+import forge.game.staticability.StaticAbilityLayer;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
@@ -396,7 +396,7 @@ public class AnimateAi extends SpellAbilityAi {
             card.addHiddenExtrinsicKeyword(k);
         }
 
-        card.addColor(finalDesc, !sa.hasParam("OverwriteColors"), true);
+        card.addColor(finalDesc, !sa.hasParam("OverwriteColors"), timestamp);
         
         //back to duplicating AnimateEffect.resolve
         //TODO will all these abilities/triggers/replacements/etc. lead to memory leaks or unintended effects?
@@ -462,9 +462,11 @@ public class AnimateAi extends SpellAbilityAi {
         if (stAbs.size() > 0) {
             for (final String s : stAbs) {
                 final String actualAbility = source.getSVar(s);
-                StaticAbility stAb = card.addStaticAbility(actualAbility);
+                final StaticAbility stAb = card.addStaticAbility(actualAbility);
                 if ("Continuous".equals(stAb.getMapParams().get("Mode"))) {
-                    StaticAbilityContinuous.applyContinuousAbility(stAb, Lists.newArrayList(card));
+                    for (final StaticAbilityLayer layer : stAb.getLayers()) {
+                        StaticAbilityContinuous.applyContinuousAbility(stAb, new CardCollection(card), layer);
+                    }
                 } 
             }
         }

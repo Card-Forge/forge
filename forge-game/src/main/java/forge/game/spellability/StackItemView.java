@@ -25,7 +25,7 @@ public class StackItemView extends TrackableObject {
     }
 
     public StackItemView(SpellAbilityStackInstance si) {
-        super(si.getId());
+        super(si.getId(), si.getSourceCard().getGame().getTracker());
         updateKey(si);
         updateSourceTrigger(si);
         updateText(si);

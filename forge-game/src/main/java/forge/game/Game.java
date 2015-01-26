@@ -63,6 +63,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.MagicStack;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.trackable.Tracker;
 import forge.util.Aggregates;
 import forge.util.FCollection;
 import forge.util.FCollectionView;
@@ -103,6 +104,7 @@ public class Game {
     private boolean disableAutoYields;
 
     private final GameView view; 
+    private final Tracker tracker = new Tracker();
 
     private GameEntityCache<Player, PlayerView> playerCache = new GameEntityCache<>();
     public Player getPlayer(PlayerView playerView) {
@@ -176,6 +178,10 @@ public class Game {
 
     public GameView getView() {
         return view;
+    }
+
+    public Tracker getTracker() {
+        return tracker;
     }
 
     /**

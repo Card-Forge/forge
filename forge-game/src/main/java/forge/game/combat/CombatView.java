@@ -12,12 +12,13 @@ import forge.game.GameEntityView;
 import forge.game.card.CardView;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
+import forge.trackable.Tracker;
 import forge.util.FCollection;
 
 
 public class CombatView extends TrackableObject {
-    public CombatView() {
-        super(-1); //ID not needed
+    public CombatView(final Tracker tracker) {
+        super(-1, tracker); //ID not needed
         set(TrackableProperty.AttackersWithDefenders, new HashMap<CardView, GameEntityView>());
         set(TrackableProperty.AttackersWithBlockers, new HashMap<CardView, FCollection<CardView>>());
         set(TrackableProperty.BandsWithDefenders, new HashMap<FCollection<CardView>, GameEntityView>());

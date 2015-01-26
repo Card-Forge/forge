@@ -163,7 +163,7 @@ public class CardFactory {
             }
             final String finalColors = tmp;
 
-            c.addColor(finalColors, !sourceSA.hasParam("OverwriteColors"), true);
+            c.addColor(finalColors, !sourceSA.hasParam("OverwriteColors"), c.getTimestamp());
         }
         
         c.clearControllers();
@@ -288,7 +288,14 @@ public class CardFactory {
             }
 
             if (state == CardStateName.LeftSplit || state == CardStateName.RightSplit) {
-                CardState original = card.getState(CardStateName.Original);
+                for (final SpellAbility sa : card.getSpellAbilities()) {
+                    if (state == CardStateName.LeftSplit) {
+                        sa.setLeftSplit();
+                    } else {
+                        sa.setRightSplit();
+                    }
+                }
+                final CardState original = card.getState(CardStateName.Original);
                 original.addNonManaAbilities(card.getCurrentState().getNonManaAbilities());
                 original.addIntrinsicKeywords(card.getCurrentState().getIntrinsicKeywords()); // Copy 'Fuse' to original side
                 original.getSVars().putAll(card.getCurrentState().getSVars()); // Unfortunately need to copy these to (Effect looks for sVars on execute)
@@ -306,7 +313,7 @@ public class CardFactory {
         else if (card.isPlane()) {
             buildPlaneAbilities(card);
         }
-        CardFactoryUtil.setupKeywordedAbilities(card);
+        CardFactoryUtil.setupKeywordedAbilities(card); // Should happen AFTER setting left/right split abilities to set Fuse ability to both sides
         card.getView().updateState(card);
     }
 
@@ -379,11 +386,8 @@ public class CardFactory {
             card.setManaCost(combinedManaCost);
 
             // Combined card color
-            int combinedColor = rules.getMainPart().getColor().getColor() | rules.getOtherPart().getColor().getColor();
-            CardColor combinedCardColor = new CardColor((byte)combinedColor);
-            ArrayList<CardColor> combinedCardColorArr = new ArrayList<CardColor>();
-            combinedCardColorArr.add(combinedCardColor);
-            card.setColor(combinedCardColorArr);
+            final byte combinedColor = (byte) (rules.getMainPart().getColor().getColor() | rules.getOtherPart().getColor().getColor());
+            card.setColor(combinedColor);
             card.setType(new CardType(rules.getType()));
 
             // Combined text based on Oracle text - might not be necessary, temporarily disabled.
@@ -411,11 +415,7 @@ public class CardFactory {
         // Super and 'middle' types should use enums.
         c.setType(new CardType(face.getType()));
 
-        // What a perverted color code we have!
-        CardColor col1 = new CardColor(face.getColor().getColor());
-        ArrayList<CardColor> ccc = new ArrayList<CardColor>();
-        ccc.add(col1);
-        c.setColor(ccc);
+        c.setColor(face.getColor().getColor());
 
         if (face.getIntPower() >= 0) {
             c.setBasePower(face.getIntPower());
@@ -657,7 +657,7 @@ public class CardFactory {
 
             // TODO - most tokens mana cost is 0, this needs to be fixed
             // c.setManaCost(manaCost);
-            c.addColor(manaCost);
+            c.setColor(manaCost);
             c.setToken(true);
 
             for (final String t : types) {

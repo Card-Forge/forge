@@ -165,6 +165,10 @@ public abstract class CardTraitBase extends GameObject {
         return (this.suppressed || this.temporarilySuppressed);
     }
 
+    protected final boolean isNonTempSuppressed() {
+        return this.suppressed;
+    }
+
     protected boolean meetsCommonRequirements(Map<String, String> params) {
         final Player hostController = this.getHostCard().getController();
         final Game game = hostController.getGame();

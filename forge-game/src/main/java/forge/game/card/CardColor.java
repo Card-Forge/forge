@@ -30,82 +30,35 @@ import forge.card.mana.ManaCostParser;
  * @version $Id$
  */
 public class CardColor  {
-    private static long timeStamp = 0;
-    public static long getTimestamp() { return CardColor.timeStamp; }
-    static void increaseTimestamp() { CardColor.timeStamp++; }
-
-    // takes care of individual card color, for global color change effects use
-    // AllZone.getGameInfo().getColorChanges()
     private final byte colorMask;
-    public final byte getColorMask() { return colorMask; }
+    public final byte getColorMask() {
+        return colorMask;
+    }
 
     private final boolean additional;
     public final boolean isAdditional() {
         return this.additional;
     }
 
-    private long stamp = 0;
-
-    /**
-     * <p>
-     * Getter for the field <code>stamp</code>.
-     * </p>
-     * 
-     * @return a long.
-     */
-    public final long getStamp() {
-        return this.stamp;
+    private final long timestamp;
+    public final long getTimestamp() {
+        return this.timestamp;
     }
 
-    /**
-     * <p>
-     * Constructor for Card_Color.
-     * </p>
-     * 
-     * @param mc
-     *            a {@link forge.game.mana.ManaCostBeingPaid} object.
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param addToColors
-     *            a boolean.
-     * @param baseColor
-     *            a boolean.
-     */
-    CardColor(final String colors, final boolean addToColors) {
-        this.additional = addToColors;
-        ManaCost mc = new ManaCost(new ManaCostParser(colors));
+    CardColor(final String colors) {
+        this(colors, false, 0L);
+    }
+    CardColor(final String colors, final boolean addToColors, final long timestamp) {
+        final ManaCost mc = new ManaCost(new ManaCostParser(colors));
         this.colorMask = mc.getColorProfile();
-        this.stamp = CardColor.timeStamp;
+        this.additional = addToColors;
+        this.timestamp = timestamp;
     }
 
-    public CardColor(byte mask) {
+    CardColor(final byte mask) {
         this.colorMask = mask;
         this.additional = false;
-        this.stamp = 0;
-    }
-
-    
-    public CardColor() {
-        this((byte)0);
-    }
-
-    /**
-     * <p>
-     * equals.
-     * </p>
-     * 
-     * @param cost
-     *            a {@link java.lang.String} object.
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param addToColors
-     *            a boolean.
-     * @param time
-     *            a long.
-     * @return a boolean.
-     */
-    public final boolean equals(final String cost, final Card c, final boolean addToColors, final long time) {
-        return (addToColors == this.additional) && (this.stamp == time);
+        this.timestamp = 0;
     }
 
     public final ColorSet toColorSet() {

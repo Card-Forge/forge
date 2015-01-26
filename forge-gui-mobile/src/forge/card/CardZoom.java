@@ -117,9 +117,9 @@ public class CardZoom extends FOverlay {
         }
         if (item instanceof InventoryItem) {
             InventoryItem ii = (InventoryItem)item;
-            return new CardView(-1, ii.getName(), null, ImageKeys.getImageKey(ii, false));
+            return new CardView(-1, null, ii.getName(), null, ImageKeys.getImageKey(ii, false));
         }
-        return new CardView(-1, item.toString());
+        return new CardView(-1, null, item.toString());
     }
 
     @Override

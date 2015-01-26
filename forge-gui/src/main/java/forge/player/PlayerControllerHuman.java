@@ -1205,11 +1205,11 @@ public class PlayerControllerHuman extends PlayerController {
         tempShowCards(pile2);
 
         final List<CardView> cards = Lists.newArrayListWithCapacity(pile1.size() + pile2.size() + 2);
-        final CardView pileView1 = new CardView(Integer.MIN_VALUE, "--- Pile 1 ---");
+        final CardView pileView1 = new CardView(Integer.MIN_VALUE, null, "--- Pile 1 ---");
         cards.add(pileView1);
         cards.addAll(CardView.getCollection(pile1));
 
-        final CardView pileView2 = new CardView(Integer.MIN_VALUE + 1, "--- Pile 2 ---");
+        final CardView pileView2 = new CardView(Integer.MIN_VALUE + 1, null, "--- Pile 2 ---");
         cards.add(pileView2);
         cards.addAll(CardView.getCollection(pile2));
 

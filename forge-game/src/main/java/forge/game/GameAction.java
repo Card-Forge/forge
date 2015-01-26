@@ -20,6 +20,7 @@ package forge.game;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
 import forge.GameCommand;
@@ -39,6 +40,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityLayer;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
@@ -46,10 +48,10 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
-import forge.trackable.TrackableObject;
 import forge.util.Aggregates;
 import forge.util.CollectionSuppliers;
 import forge.util.Expressions;
+import forge.util.FCollection;
 import forge.util.FCollectionView;
 import forge.util.ThreadUtil;
 import forge.util.Visitor;
@@ -534,9 +536,9 @@ public class GameAction {
     }
 
     public final void checkStaticAbilities() {
-        checkStaticAbilities(new HashSet<Card>());
+        checkStaticAbilities(true, new CardCollection());
     }
-    public final void checkStaticAbilities(final Set<Card> affectedCards) {
+    public final void checkStaticAbilities(final boolean runEvents, final Set<Card> affectedCards) {
         if (game.isGameOver()) {
             return;
         }
@@ -546,18 +548,19 @@ public class GameAction {
         game.getTriggerHandler().cleanUpTemporaryTriggers();
         game.getReplacementHandler().cleanUpTemporaryReplacements();
 
-        for (Player p : game.getPlayers()) {
+        for (final Player p : game.getPlayers()) {
             p.getManaPool().restoreColorReplacements();
         }
 
         // search for cards with static abilities
-        final ArrayList<StaticAbility> staticAbilities = new ArrayList<StaticAbility>();
-        final List<Card> staticList = new ArrayList<Card>();
+        final FCollection<StaticAbility> staticAbilities = new FCollection<StaticAbility>();
+        final CardCollection staticList = new CardCollection();
+
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
-            public void visit(Card c) {
+            public void visit(final Card c) {
                 for (int i = 0; i < c.getStaticAbilities().size(); i++) {
-                    StaticAbility stAb = c.getStaticAbilities().get(i);
+                    final StaticAbility stAb = c.getStaticAbilities().get(i);
                     if (stAb.getMapParams().get("Mode").equals("Continuous")) {
                         staticAbilities.add(stAb);
                     }
@@ -575,23 +578,36 @@ public class GameAction {
         final Comparator<StaticAbility> comp = new Comparator<StaticAbility>() {
             @Override
             public int compare(final StaticAbility a, final StaticAbility b) {
-                int layerDelta = a.getLayer() - b.getLayer();
-                if (layerDelta != 0) return layerDelta;
-
-                long tsDelta = a.getHostCard().getTimestamp() - b.getHostCard().getTimestamp();
-                return tsDelta == 0 ? 0 : tsDelta > 0 ? 1 : -1;
+                return Long.compare(a.getHostCard().getTimestamp(), b.getHostCard().getTimestamp());
             }
         };
         Collections.sort(staticAbilities, comp);
-        for (final StaticAbility stAb : staticAbilities) {
-            List<Card> affectedHere = stAb.applyAbility("Continuous");
-            if (null != affectedHere) {
-                affectedCards.addAll(affectedHere);
+
+        final Map<StaticAbility, CardCollectionView> affectedPerAbility = Maps.newHashMap();
+        for (final StaticAbilityLayer layer : StaticAbilityLayer.CONTINUOUS_LAYERS) {
+            for (final StaticAbility stAb : staticAbilities) {
+                final CardCollectionView previouslyAffected = affectedPerAbility.get(stAb);
+                final CardCollectionView affectedHere;
+                if (previouslyAffected == null) {
+                    affectedHere = stAb.applyContinuousAbility(layer);
+                    if (affectedHere != null) {
+                        affectedPerAbility.put(stAb, affectedHere);
+                    }
+                } else {
+                    affectedHere = previouslyAffected;
+                    stAb.applyContinuousAbility(layer, previouslyAffected);
+                } 
             }
         }
 
-        CardCollectionView lands = game.getCardsIn(ZoneType.Battlefield);
-        GameActionUtil.grantBasicLandsManaAbilities(CardLists.filter(lands, CardPredicates.Presets.LANDS));
+        for (final CardCollectionView affected : affectedPerAbility.values()) {
+            if (affected != null) {
+                Iterables.addAll(affectedCards, affected);
+            }
+        }
+
+        final CardCollection lands = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS);
+        GameActionUtil.grantBasicLandsManaAbilities(lands);
 
         for (final Card c : staticList) {
             for (int i = 0; i < c.getStaticCommandList().size(); i++) {
@@ -640,6 +656,10 @@ public class GameAction {
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
+
+        if (runEvents && !affectedCards.isEmpty()) {
+            game.fireEvent(new GameEventCardStatsChanged(affectedCards));
+        }
     }
 
     public final void checkStateEffects(final boolean runEvents) {
@@ -651,11 +671,6 @@ public class GameAction {
         if (game.getStack().isResolving()) {
             return;
         }
-
-        // final JFrame frame = Singletons.getView().getFrame();
-        // if (!frame.isDisplayable()) {
-        // return;
-        // }
 
         if (game.isGameOver()) {
             return;
@@ -669,11 +684,11 @@ public class GameAction {
 
         final boolean refreeze = game.getStack().isFrozen();
         game.getStack().setFrozen(true);
-        TrackableObject.freeze(); //prevent views flickering during while updating for state-based effects
+        game.getTracker().freeze(); //prevent views flickering during while updating for state-based effects
 
         // do this multiple times, sometimes creatures/permanents will survive when they shouldn't
         for (int q = 0; q < 9; q++) {
-            checkStaticAbilities(affectedCards);
+            checkStaticAbilities(false, affectedCards);
             boolean checkAgain = false;
 
             for (Player p : game.getPlayers()) {
@@ -690,7 +705,7 @@ public class GameAction {
             }
             List<Card> noRegCreats = null;
             List<Card> desCreats = null;
-            for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
+            for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
                 if (c.isCreature()) {
                     // Rule 704.5f - Put into grave (no regeneration) for toughness <= 0
                     if (c.getNetToughness() <= 0) {
@@ -699,8 +714,7 @@ public class GameAction {
                         }
                         noRegCreats.add(c);
                         checkAgain = true;
-                    }
-                    else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
+                    } else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
                         for (final Integer dmg : c.getReceivedDamageFromThisTurn().values()) {
                             if (c.getNetToughness() <= dmg.intValue()) {
                                 if (desCreats == null) {
@@ -775,7 +789,7 @@ public class GameAction {
             }
         } // for q=0;q<9
 
-        TrackableObject.unfreeze();
+        game.getTracker().unfreeze();
 
         if (runEvents && !affectedCards.isEmpty()) {
             game.fireEvent(new GameEventCardStatsChanged(affectedCards));

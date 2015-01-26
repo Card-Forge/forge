@@ -16,6 +16,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableProperty;
+import forge.trackable.Tracker;
 import forge.util.FCollectionView;
 
 
@@ -35,8 +36,8 @@ public class PlayerView extends GameEntityView {
         return collection;
     }
 
-    public PlayerView(int id0) {
-        super(id0);
+    public PlayerView(final int id0, final Tracker tracker) {
+        super(id0, tracker);
 
         set(TrackableProperty.Mana, Maps.newHashMapWithExpectedSize(MagicColor.NUMBER_OR_COLORS + 1));
     }

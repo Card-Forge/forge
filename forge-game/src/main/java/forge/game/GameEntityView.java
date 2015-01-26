@@ -4,6 +4,7 @@ import forge.game.card.CardView;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
+import forge.trackable.Tracker;
 
 public abstract class GameEntityView extends TrackableObject {
     public static GameEntityView get(GameEntity e) {
@@ -21,8 +22,8 @@ public abstract class GameEntityView extends TrackableObject {
         return collection;
     }
 
-    protected GameEntityView(int id0) {
-        super(id0);
+    protected GameEntityView(final int id0, final Tracker tracker) {
+        super(id0, tracker);
     }
 
     public String getName() {

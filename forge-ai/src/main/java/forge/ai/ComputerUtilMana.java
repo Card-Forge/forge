@@ -14,7 +14,6 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardColor;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.combat.CombatUtil;
@@ -40,7 +39,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
-
 
 public class ComputerUtilMana {
     private final static boolean DEBUG_MANA_PAYMENT = false;
@@ -1207,13 +1205,11 @@ public class ComputerUtilMana {
         Card convoked = null;
         for (ManaCostShard toPay : cost) {
             for (Card c : list) {
-                for (CardColor col : c.getColor()) {
-                    final int mask = col.getColorMask() & toPay.getColorMask();
-                    if (mask != 0) {
-                        convoked = c;
-                        convoke.put(c, toPay);
-                        break;
-                    }
+                final int mask = c.determineColor().getColor() & toPay.getColorMask();
+                if (mask != 0) {
+                    convoked = c;
+                    convoke.put(c, toPay);
+                    break;
                 }
                 if (convoked != null){
                     break;

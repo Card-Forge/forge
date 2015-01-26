@@ -17,19 +17,14 @@
  */
 package forge.game;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.EnumSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
+
 import forge.game.card.Card;
-import forge.game.card.CardUtil;
-import forge.game.player.Player;
-import forge.game.replacement.ReplacementEffect;
-import forge.game.spellability.AbilityStatic;
-import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 
 /**
@@ -43,7 +38,7 @@ import forge.game.staticability.StaticAbility;
 public class StaticEffects {
 
     // **************** StaticAbility system **************************
-    private final List<StaticEffect> staticEffects = new ArrayList<StaticEffect>();
+    private final Map<StaticAbility, StaticEffect> staticEffects = Maps.newHashMap();
     //Global rule changes
     private final Set<GlobalRuleChange> ruleChanges = EnumSet.noneOf(GlobalRuleChange.class);
 
@@ -51,17 +46,17 @@ public class StaticEffects {
         ruleChanges.clear();
 
         // remove all static effects
-        for (final StaticEffect se : staticEffects) {
-            affectedCards.addAll(removeStaticEffect(se));
+        for (final StaticEffect se : staticEffects.values()) {
+            Iterables.addAll(affectedCards, se.remove());
         }
         this.staticEffects.clear();
     }
 
-    public void setGlobalRuleChange(GlobalRuleChange change) {
+    public void setGlobalRuleChange(final GlobalRuleChange change) {
         this.ruleChanges.add(change);
     }
 
-    public boolean getGlobalRuleChange(GlobalRuleChange change) {
+    public boolean getGlobalRuleChange(final GlobalRuleChange change) {
         return this.ruleChanges.contains(change);
     }
 
@@ -71,202 +66,15 @@ public class StaticEffects {
      * @param staticEffect
      *            a {@link StaticEffect}.
      */
-    public final void addStaticEffect(final StaticEffect staticEffect) {
-        this.staticEffects.add(staticEffect);
+    public final StaticEffect getStaticEffect(final StaticAbility staticAbility) {
+        final StaticEffect currentEffect = staticEffects.get(staticAbility);
+        if (currentEffect != null) {
+            return currentEffect;
+        }
+
+        final StaticEffect newEffect = new StaticEffect(staticAbility.getHostCard());
+        this.staticEffects.put(staticAbility, newEffect);
+        return newEffect;
     }
 
-    /**
-     * Remove a static effect from the list of static effects and undo everything that was changed by the effect.
-     * 
-     * @param se
-     *            a {@link StaticEffect}.
-     */
-    private static final List<Card> removeStaticEffect(final StaticEffect se) {
-        final List<Card> affectedCards = se.getAffectedCards();
-        final ArrayList<Player> affectedPlayers = se.getAffectedPlayers();
-        final Map<String, String> params = se.getParams();
-        final Player controller = se.getSource().getController();
-
-        String changeColorWordsTo = null;
-
-        int powerBonus = 0;
-        String addP = "";
-        int toughnessBonus = 0;
-        String addT = "";
-        int keywordMultiplier = 1;
-        boolean setPT = false;
-        String[] addHiddenKeywords = null;
-        String addColors = null;
-        boolean removeMayLookAt = false, removeMayPlay = false;
-
-        if (params.containsKey("ChangeColorWordsTo")) {
-            changeColorWordsTo = params.get("ChangeColorWordsTo");
-        }
-
-        if (params.containsKey("SetPower") || params.containsKey("SetToughness")) {
-            setPT = true;
-        }
-
-        if (params.containsKey("AddPower")) {
-            addP = params.get("AddPower");
-            if (addP.matches("[0-9][0-9]?")) {
-                powerBonus = Integer.valueOf(addP);
-            } else if (addP.equals("AffectedX")) {
-                // gets calculated at runtime
-            } else {
-                powerBonus = se.getXValue();
-            }
-        }
-
-        if (params.containsKey("AddToughness")) {
-            addT = params.get("AddToughness");
-            if (addT.matches("[0-9][0-9]?")) {
-                toughnessBonus = Integer.valueOf(addT);
-            } else if (addT.equals("AffectedX")) {
-                // gets calculated at runtime
-            } else {
-                toughnessBonus = se.getYValue();
-            }
-        }
-
-        if (params.containsKey("KeywordMultiplier")) {
-            String multiplier = params.get("KeywordMultiplier");
-            if (multiplier.equals("X")) {
-                keywordMultiplier = se.getXValue();
-            } else {
-                keywordMultiplier = Integer.valueOf(multiplier);
-            }
-        }
-
-        if (params.containsKey("AddHiddenKeyword")) {
-            addHiddenKeywords = params.get("AddHiddenKeyword").split(" & ");
-        }
-
-        if (params.containsKey("AddColor")) {
-            final String colors = params.get("AddColor");
-            if (colors.equals("ChosenColor")) {
-                addColors = CardUtil.getShortColorsString(se.getSource().getChosenColors());
-            } else {
-                addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(colors.split(" & "))));
-            }
-        }
-
-        if (params.containsKey("SetColor")) {
-            final String colors = params.get("SetColor");
-            if (colors.equals("ChosenColor")) {
-                addColors = CardUtil.getShortColorsString(se.getSource().getChosenColors());
-            } else {
-                addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(colors.split(" & "))));
-            }
-        }
-
-        if (params.containsKey("MayLookAt")) {
-            removeMayLookAt = true;
-        }
-        if (params.containsKey("MayPlay")) {
-            removeMayPlay = true;
-        }
-
-        if (params.containsKey("IgnoreEffectCost")) {
-            for (final SpellAbility s : se.getSource().getSpellAbilities()) {
-                if (s instanceof AbilityStatic && s.isTemporary()) {
-                    se.getSource().removeSpellAbility(s);
-                }
-            }
-        }
-
-        // modify players
-        for (final Player p : affectedPlayers) {
-            p.setUnlimitedHandSize(false);
-            p.setMaxHandSize(p.getStartingHandSize());
-            p.removeChangedKeywords(se.getTimestamp());
-        }
-
-        // modify the affected card
-        for (final Card affectedCard : affectedCards) {
-            // Gain control
-            if (params.containsKey("GainControl")) {
-                affectedCard.removeTempController(se.getTimestamp());
-            }
-
-            // Revert changed color words
-            if (changeColorWordsTo != null) {
-                affectedCard.removeChangedTextColorWord(se.getTimestamp());
-            }
-
-            // remove set P/T
-            if (!params.containsKey("CharacteristicDefining") && setPT) {
-                affectedCard.removeNewPT(se.getTimestamp());
-            }
-
-            // remove P/T bonus
-            if (addP.startsWith("AffectedX")) {
-                powerBonus = se.getXMapValue(affectedCard);
-            }
-            if (addT.startsWith("AffectedX")) {
-                toughnessBonus = se.getXMapValue(affectedCard);
-            }
-            affectedCard.addSemiPermanentPowerBoost(powerBonus * -1);
-            affectedCard.addSemiPermanentToughnessBoost(toughnessBonus * -1);
-
-            // remove keywords
-            // TODO regular keywords currently don't try to use keyword multiplier
-            // (Although nothing uses it at this time)
-            if (params.containsKey("AddKeyword") || params.containsKey("RemoveKeyword")
-                    || params.containsKey("RemoveAllAbilities")) {
-                affectedCard.removeChangedCardKeywords(se.getTimestamp());
-            }
-
-            // remove abilities
-            if (params.containsKey("AddAbility") || params.containsKey("GainsAbilitiesOf")) {
-                for (final SpellAbility s : affectedCard.getSpellAbilities().threadSafeIterator()) {
-                    if (s.isTemporary()) {
-                        affectedCard.removeSpellAbility(s);
-                    }
-                }
-            }
-
-            if (addHiddenKeywords != null) {
-                for (final String k : addHiddenKeywords) {
-                    for (int j = 0; j < keywordMultiplier; j++) {
-                        affectedCard.removeHiddenExtrinsicKeyword(k);
-                    }
-                }
-            }
-
-            // remove abilities
-            if (params.containsKey("RemoveAllAbilities")) {
-                for (final SpellAbility ab : affectedCard.getSpellAbilities()) {
-                    ab.setTemporarilySuppressed(false);
-                }
-                for (final StaticAbility stA : affectedCard.getStaticAbilities()) {
-                    stA.setTemporarilySuppressed(false);
-                }
-                for (final ReplacementEffect rE : affectedCard.getReplacementEffects()) {
-                    rE.setTemporarilySuppressed(false);
-                }
-            }
-
-            // remove Types
-            if (params.containsKey("AddType") || params.containsKey("RemoveType")) {
-                affectedCard.removeChangedCardTypes(se.getTimestamp());
-            }
-
-            // remove colors
-            if (addColors != null) {
-                affectedCard.removeColor(addColors, affectedCard, !se.isOverwriteColors(),
-                        se.getTimestamp(affectedCard));
-            }
-
-            // remove may look at
-            if (removeMayLookAt) {
-                affectedCard.setMayLookAt(controller, false);
-            }
-            if (removeMayPlay) {
-                affectedCard.removeMayPlay(controller);
-            }
-        }
-        se.clearTimestamps();
-        return affectedCards;
-    }
 }

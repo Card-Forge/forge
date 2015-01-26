@@ -229,7 +229,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         final List<CardView> options = Lists.newArrayList();
         for (final Entry<Player, Card> kv : ev.cards.entries()) {
             //use fake card so real cards appear with proper formatting
-            final CardView fakeCard = new CardView(-1, "  -- From " + Lang.getPossesive(kv.getKey().getName()) + " deck --");
+            final CardView fakeCard = new CardView(-1, null, "  -- From " + Lang.getPossesive(kv.getKey().getName()) + " deck --");
             options.add(fakeCard);
             options.add(kv.getValue().getView());
         }
