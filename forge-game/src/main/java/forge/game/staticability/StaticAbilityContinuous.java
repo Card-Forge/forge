@@ -259,7 +259,7 @@ public final class StaticAbilityContinuous {
             }
         }
 
-        if (layer == StaticAbilityLayer.ABILITIES2 && params.containsKey("RemoveType")) {
+        if (layer == StaticAbilityLayer.TYPE && params.containsKey("RemoveType")) {
             removeTypes = params.get("RemoveType").split(" & ");
             if (removeTypes[0].equals("ChosenType")) {
                 final String chosenType = hostCard.getChosenType();
