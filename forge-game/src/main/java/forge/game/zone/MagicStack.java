@@ -31,7 +31,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -74,8 +73,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     private boolean frozen = false;
     private boolean bResolving = false;
 
-    private final CardCollection thisTurnCast = new CardCollection();
-    private CardCollection lastTurnCast = new CardCollection();
+    private final List<Card> thisTurnCast = Lists.newArrayList();
+    private List<Card> lastTurnCast = Lists.newArrayList();
     private Card curResolvingCard = null;
     private final HashMap<String, List<GameCommand>> commandList = new HashMap<String, List<GameCommand>>();
 
@@ -754,21 +753,21 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return false;
     }
 
-    public final CardCollectionView getSpellsCastThisTurn() {
+    public final List<Card> getSpellsCastThisTurn() {
         return thisTurnCast;
     }
 
     public final void onNextTurn() {
         if (thisTurnCast.isEmpty()) {
-            lastTurnCast = new CardCollection();
+            lastTurnCast = Lists.newArrayList();
             return;
         }
-        lastTurnCast = new CardCollection(thisTurnCast);
+        lastTurnCast = Lists.newArrayList(thisTurnCast);
         thisTurnCast.clear();
         game.updateStackForView();
     }
 
-    public final CardCollectionView getSpellsCastLastTurn() {
+    public final List<Card> getSpellsCastLastTurn() {
         return lastTurnCast;
     }
 

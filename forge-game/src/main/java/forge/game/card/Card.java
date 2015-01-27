@@ -4041,7 +4041,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     if (!CardUtil.getColors(this).hasAnyColor(mask))
                         return false;
                 } else if (restriction.equals("LastCastThisTurn")) {
-                    final CardCollectionView c = game.getStack().getSpellsCastThisTurn();
+                    final List<Card> c = game.getStack().getSpellsCastThisTurn();
                     if (c.isEmpty() || !sharesColorWith(c.get(c.size() - 1))) {
                         return false;
                     }
