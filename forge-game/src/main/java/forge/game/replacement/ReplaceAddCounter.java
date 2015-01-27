@@ -27,7 +27,7 @@ public class ReplaceAddCounter extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<String, Object> runParams) {
-        if (!runParams.get("Event").equals("AddCounter")) {
+        if (!runParams.get("Event").equals("AddCounter") || ((int) runParams.get("CounterNum")) <= 0) {
             return false;
         }
 
