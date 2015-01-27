@@ -186,7 +186,7 @@ public class PumpEffect extends SpellAbilityEffect {
     @Override
     public void resolve(final SpellAbility sa) {
 
-        final ArrayList<Card> untargetedCards = new ArrayList<Card>();
+        final List<Card> untargetedCards = new ArrayList<Card>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Game game = sa.getActivatingPlayer().getGame();
         final Card host = sa.getHostCard();
