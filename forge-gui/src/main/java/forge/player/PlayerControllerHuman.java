@@ -672,17 +672,18 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public CardCollectionView chooseCardsToDelve(int colorLessAmount, CardCollection grave) {
-        CardCollection toExile = new CardCollection();
-        int cardsInGrave = Math.min(colorLessAmount, grave.size());
+    public CardCollectionView chooseCardsToDelve(final int colorLessAmount, final CardCollection grave) {
+        final int cardsInGrave = Math.min(colorLessAmount, grave.size());
+        if (cardsInGrave == 0) {
+            return CardCollection.EMPTY;
+        }
+        final CardCollection toExile = new CardCollection();
         final Integer[] cntChoice = new Integer[cardsInGrave + 1];
         for (int i = 0; i <= cardsInGrave; i++) {
             cntChoice[i] = Integer.valueOf(i);
         }
 
-        final Integer chosenAmount = SGuiChoose.one("Exile how many cards?", cntChoice);
-        System.out.println("Delve for " + chosenAmount);
-
+        final Integer chosenAmount = SGuiChoose.one("Delve how many cards?", cntChoice);
         for (int i = 0; i < chosenAmount; i++) {
             final CardView nowChosen = SGuiChoose.oneOrNone("Exile which card?", CardView.getCollection(grave));
 
