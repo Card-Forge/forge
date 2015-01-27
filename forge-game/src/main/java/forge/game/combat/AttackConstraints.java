@@ -145,11 +145,11 @@ public class AttackConstraints {
             final Set<AttackRestrictionType> types = restrictions.get(attacker).getTypes();
             if (types.contains(AttackRestrictionType.NEED_BLACK_OR_GREEN)) {
                 // It's insufficient if this attacker is B/G itself, so filter itself out!
-                if (CardLists.filter(myPossibleAttackers, CardPredicates.isColor((byte) (MagicColor.BLACK | MagicColor.GREEN)), Predicates.not(Predicates.equalTo(attacker))).size() == 0) {
+                if (CardLists.filter(myPossibleAttackers, CardPredicates.isColor((byte) (MagicColor.BLACK | MagicColor.GREEN)), Predicates.not(Predicates.equalTo(attacker))).isEmpty()) {
                     attackersToRemove.add(attacker);
                 }
             } else if (types.contains(AttackRestrictionType.NEED_GREATER_POWER)) {
-                if (CardLists.filter(myPossibleAttackers, CardPredicates.hasGreaterPowerThan(attacker.getNetPower())).size() == 0) {
+                if (CardLists.filter(myPossibleAttackers, CardPredicates.hasGreaterPowerThan(attacker.getNetPower())).isEmpty()) {
                     attackersToRemove.add(attacker);
                 }
             }
@@ -291,10 +291,13 @@ public class AttackConstraints {
             toDefender.add(req.defender);
             reqs.removeAll(findAll(reqs, req.attacker));
             reserved.remove(req.attacker);
+            localMaximum--;
 
             // need two other attackers: set that number to the number of attackers we still need (but never < 0)
             if (restrictions.get(req.attacker).getTypes().contains(AttackRestrictionType.NEED_TWO_OTHERS)) {
+                final int previousNeeded = attackersNeeded;
                 attackersNeeded = Ints.max(3 - (myAttackers.size() + reserved.size()), 0);
+                localMaximum -= Ints.max(attackersNeeded - previousNeeded, 0);
             }
         }
 

@@ -109,7 +109,9 @@ public class Combat {
     }
 
     public final void clearAttackers() {
-        attackedByBands.clear();
+        for (final Card attacker : getAttackers()) {
+            removeFromCombat(attacker);
+        }
     }
 
     public final Player getAttackingPlayer() {
