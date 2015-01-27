@@ -770,7 +770,7 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.Colors, c.determineColor());
         }
         void updateColors(CardState c) {
-            set(TrackableProperty.Colors, c.determineColor());
+            set(TrackableProperty.Colors, c.getColor());
         }
 
         public String getImageKey(PlayerView viewer) {

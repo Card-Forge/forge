@@ -120,8 +120,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final Map<Player, CardPlayOption> mayPlay = Maps.newTreeMap();
 
     // changes by AF animate and continuous static effects - timestamp is the key of maps
-    private Map<Long, CardChangedType> changedCardTypes = new ConcurrentSkipListMap<Long, CardChangedType>();
-    private Map<Long, KeywordsChange> changedCardKeywords = new ConcurrentSkipListMap<Long, KeywordsChange>();
+    private final Map<Long, CardChangedType> changedCardTypes = new ConcurrentSkipListMap<Long, CardChangedType>();
+    private final Map<Long, KeywordsChange> changedCardKeywords = new ConcurrentSkipListMap<Long, KeywordsChange>();
+    private final SortedMap<Long, CardColor> changedCardColors = new ConcurrentSkipListMap<Long, CardColor>();
 
     // changes that say "replace each instance of one [color,type] by another - timestamp is the key of maps
     private final CardChangedWords changedTextColors = new CardChangedWords();
@@ -739,7 +740,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         return colorsPaid;
     }
     public final void setColorsPaid(final byte s) {
-        colorsPaid = s; // TODO: Append colors instead of replacing
+        colorsPaid |= s;
     }
 
     public final int getXManaCostPaid() {
@@ -1078,29 +1079,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final ManaCost getManaCost() {
         return currentState.getManaCost();
-    }
-
-    public final void addColor(final String s, final boolean addToColors, final long timestamp) {
-        currentState.addColor(s, addToColors, timestamp);
-    }
-
-    public final void removeColor(final long timestamp) {
-        currentState.removeColor(timestamp);
-    }
-
-    public final void setColor(final byte color) {
-        currentState.setColor(new CardColor(color));
-    }
-    public final void setColor(final String color) {
-        currentState.setColor(new CardColor(color));
-    }
-
-    public final ColorSet determineColor() {
-        if (isImmutable()) {
-            return ColorSet.getNullColor();
-        }
-
-        return currentState.determineColor();
     }
 
     public final Player getChosenPlayer() {
@@ -2449,6 +2427,41 @@ public class Card extends GameEntity implements Comparable<Card> {
         currentState.getView().updateType(currentState);
     }
 
+    public final void addColor(final String s, final boolean addToColors, final long timestamp) {
+        changedCardColors.put(timestamp, new CardColor(s, addToColors, timestamp));
+        currentState.getView().updateColors(this);
+    }
+
+    public final void removeColor(final long timestampIn) {
+        final CardColor removeCol = changedCardColors.remove(timestampIn);
+
+        if (removeCol != null) {
+            currentState.getView().updateColors(this);
+        }
+    }
+
+    public final void setColor(final String color) {
+        currentState.setColor(color);
+        currentState.getView().updateColors(this);
+    }
+    public final void setColor(final byte color) {
+        currentState.setColor(color);
+        currentState.getView().updateColors(this);
+    }
+
+    public final ColorSet determineColor() {
+        final Iterable<CardColor> colorList = changedCardColors.values();
+        byte colors = currentState.getColor();
+        for (final CardColor cc : colorList) {
+            if (cc.isAdditional()) {
+                colors |= cc.getColorMask();
+            } else {
+                colors = cc.getColorMask();
+            }
+        }
+        return ColorSet.fromMask(colors);
+    }
+
     // values that are printed on card
     public final int getBaseLoyalty() {
         return baseLoyalty;
@@ -3685,6 +3698,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (property.startsWith("OwnedBy")) {
             final String valid = property.substring(8);
             if (!getOwner().isValid(valid, sourceController, source)) {
+                return false;
+            }
+        } else if (property.startsWith("ControlledBy")) {
+            final String valid = property.substring(13);
+            if (!getController().isValid(valid, sourceController, source)) {
                 return false;
             }
         } else if (property.startsWith("OwnerDoesntControl")) {
@@ -5588,6 +5606,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         runParams.put("DamageTarget", this);
         runParams.put("DamageAmount", damageToAdd);
         runParams.put("IsCombatDamage", isCombat);
+        // Defending player at the time the damage was dealt
+        runParams.put("DefendingPlayer", game.getCombat() != null ? game.getCombat().getDefendingPlayerRelatedTo(source) : null);
         getGame().getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
 
         GameEventCardDamaged.DamageType damageType = DamageType.Normal;

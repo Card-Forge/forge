@@ -262,7 +262,6 @@ public class GameAction {
         }
 
         if (!c.isToken() && !toBattlefield) {
-            copied.getCurrentState().resetCardColor();
             copied.clearDevoured();
             copied.clearDelved();
         }

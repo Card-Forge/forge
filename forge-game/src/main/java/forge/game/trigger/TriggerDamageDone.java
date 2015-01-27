@@ -104,5 +104,7 @@ public class TriggerDamageDone extends Trigger {
         sa.setTriggeringObject("Source", this.getRunParams().get("DamageSource"));
         sa.setTriggeringObject("Target", this.getRunParams().get("DamageTarget"));
         sa.setTriggeringObject("DamageAmount", this.getRunParams().get("DamageAmount"));
+        // This parameter is here because LKI information related to combat doesn't work properly
+        sa.setTriggeringObject("DefendingPlayer", this.getRunParams().get("DefendingPlayer"));
     }
 }

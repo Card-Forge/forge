@@ -20,21 +20,19 @@ package forge.game.card;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.SortedMap;
 import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
 
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardType;
 import forge.card.CardTypeView;
-import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostParser;
 import forge.game.card.CardView.CardStateView;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
@@ -47,7 +45,7 @@ public class CardState {
     private String name = "";
     private CardType type = new CardType();
     private ManaCost manaCost = ManaCost.NO_COST;
-    private final SortedMap<Long, CardColor> cardColor = Maps.newTreeMap();
+    private byte color = MagicColor.COLORLESS;
     private int basePower = 0;
     private int baseToughness = 0;
     private List<String> intrinsicKeywords = new ArrayList<String>();
@@ -118,52 +116,17 @@ public class CardState {
         view.updateManaCost(this);
     }
 
-    public final void addColor(final CardColor color) {
-        cardColor.put(color.getTimestamp(), color);
-        getView().updateColors(this);
+    public final byte getColor() {
+        return color;
     }
-
-    public final void addColor(final String s, final boolean addToColors, final long timestamp) {
-        addColor(new CardColor(s, addToColors, timestamp));
+    public final void setColor(final String color) {
+        final ManaCostParser parser = new ManaCostParser(color);
+        final ManaCost cost = new ManaCost(parser);
+        setColor(cost.getColorProfile());
     }
-
-    public final void removeColor(final long timestampIn) {
-        final CardColor removeCol = cardColor.remove(timestampIn);
-
-        if (removeCol != null) {
-            getView().updateColors(this);
-        }
-    }
-
-    public final void setColor(final CardColor color) {
-        setColor(ImmutableMap.of(color.getTimestamp(), color));
-    }
-    private final void setColor(final Map<Long, CardColor> cardColor0) {
-        cardColor.clear();
-        cardColor.putAll(cardColor0);
-        view.updateColors(this);
-    }
-    public final void resetCardColor() {
-        if (cardColor.isEmpty()) {
-            return;
-        }
-        final Long firstKey = cardColor.firstKey();
-        final CardColor first = cardColor.get(firstKey);
-        cardColor.clear();
-        cardColor.put(firstKey, first);
-        view.updateColors(this);
-    }
-    public final ColorSet determineColor() {
-        final Iterable<CardColor> colorList = cardColor.values();
-        byte colors = 0;
-        for (final CardColor cc : colorList) {
-            if (cc.isAdditional()) {
-                colors |= cc.getColorMask();
-            } else {
-                colors = cc.getColorMask();
-            }
-        }
-        return ColorSet.fromMask(colors);
+    public final void setColor(final byte color) {
+        this.color = color;
+        view.updateColors(card);
     }
 
     public final int getBasePower() {
@@ -389,7 +352,7 @@ public class CardState {
         setName(source.getName());
         setType(source.type);
         setManaCost(source.getManaCost());
-        setColor(source.cardColor);
+        setColor(source.getColor());
         setBasePower(source.getBasePower());
         setBaseToughness(source.getBaseToughness());
         intrinsicKeywords = new ArrayList<String>(source.intrinsicKeywords);
