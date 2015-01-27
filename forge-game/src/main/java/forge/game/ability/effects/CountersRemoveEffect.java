@@ -100,7 +100,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                         tgtCard.subtractCounter(chosenType, chosenAmount);
                         if (rememberRemoved) {
                             for (int i = 0; i < chosenAmount; i++) {
-                                card.addRemembered(Pair.of(chosenType, 1));
+                                card.addRemembered(Pair.of(chosenType, i));
                             }
                         }
                         cntToRemove -= chosenAmount;
