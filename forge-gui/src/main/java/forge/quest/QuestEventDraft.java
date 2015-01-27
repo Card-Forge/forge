@@ -863,7 +863,7 @@ public class QuestEventDraft {
         List<String> setCombos = new ArrayList<>();
         CardEdition[] sets = block.getSets();
         
-        boolean isBeforeMBS = false; // before Mirrodin Besieged, sets were drafted in the opposite order (old->new instead of new->old)
+        boolean inverseDraftOrder = false; // before Mirrodin Besieged, sets were drafted in the opposite order (old->new instead of new->old)
         for (CardEdition set : sets) {
             Calendar cal = Calendar.getInstance();
             // This is set to Scars of Mirrodin date to account for the fact that MBS is drafted as a part of the Scars of Mirrodin block.
@@ -871,10 +871,10 @@ public class QuestEventDraft {
             cal.set(Calendar.YEAR, 2010); 
             cal.set(Calendar.MONTH, Calendar.OCTOBER);
             cal.set(Calendar.DAY_OF_MONTH, 1);
-            Date MBSDate = cal.getTime();
+            Date SOMDate = cal.getTime();
 
-            if (set.getDate().before(MBSDate)) {
-                isBeforeMBS = true;
+            if (set.getDate().before(SOMDate)) {
+                inverseDraftOrder = true;
             }
         }
 
@@ -893,20 +893,20 @@ public class QuestEventDraft {
         if (sets.length == 2) {
             
             if (sets[0].getCards().length < 200) {
-                if (!isBeforeMBS) {
+                if (!inverseDraftOrder) {
                     setCombos.add(String.format("%s/%s/%s", sets[0].getCode(), sets[1].getCode(), sets[1].getCode()));
                 } else {
                     setCombos.add(String.format("%s/%s/%s", sets[1].getCode(), sets[1].getCode(), sets[0].getCode()));
                 }
             } else if (sets[1].getCards().length < 200) {
-                if (!isBeforeMBS) {
+                if (!inverseDraftOrder) {
                     setCombos.add(String.format("%s/%s/%s", sets[1].getCode(), sets[0].getCode(), sets[0].getCode()));
                 } else {
                     setCombos.add(String.format("%s/%s/%s", sets[0].getCode(), sets[0].getCode(), sets[1].getCode()));
                 }
             } else {
                 setCombos.add(String.format("%s/%s/%s", sets[1].getCode(), sets[1].getCode(), sets[1].getCode()));
-                if (!isBeforeMBS) {
+                if (!inverseDraftOrder) {
                     setCombos.add(String.format("%s/%s/%s", sets[0].getCode(), sets[1].getCode(), sets[1].getCode()));
                     setCombos.add(String.format("%s/%s/%s", sets[0].getCode(), sets[0].getCode(), sets[1].getCode()));
                 } else {
@@ -918,7 +918,7 @@ public class QuestEventDraft {
             
         } else if (sets.length >= 3) {
 
-            if (!isBeforeMBS) {
+            if (!inverseDraftOrder) {
                 setCombos.add(String.format("%s/%s/%s", sets[0].getCode(), sets[1].getCode(), sets[2].getCode()));
             } else {
                 setCombos.add(String.format("%s/%s/%s", sets[2].getCode(), sets[1].getCode(), sets[0].getCode()));
