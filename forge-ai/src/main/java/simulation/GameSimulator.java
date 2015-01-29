@@ -96,7 +96,6 @@ public class GameSimulator {
             aiPlayer.playLand(sa.getHostCard(), false);
         }
         else {
-            // TODO: should simulate all possible targets...
             if (!sa.getAllTargetChoices().isEmpty()) {
                 debugPrint("Targets: ");
                 for (TargetChoices target : sa.getAllTargetChoices()) {

@@ -6,6 +6,8 @@ import java.util.Map.Entry;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
+import forge.LobbyPlayer;
+import forge.ai.LobbyPlayerAi;
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -72,7 +74,10 @@ public class GameCopier {
 
     private RegisteredPlayer clonePlayer(RegisteredPlayer p) {
         RegisteredPlayer clone = new RegisteredPlayer(p.getDeck());
-        clone.setPlayer(p.getPlayer());
+        LobbyPlayer lp = p.getPlayer();
+        if (!(lp instanceof LobbyPlayerAi))
+            lp = new LobbyPlayerAi(p.getPlayer().getName());
+        clone.setPlayer(lp);
         return clone;
     }
 
