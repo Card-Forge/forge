@@ -1,4 +1,4 @@
-Forge Beta: 1-#-2015 ver 1.5.33
+Forge Beta: 1-#-2015 ver 1.5.34
 
 
 # cards in total.
@@ -8,195 +8,22 @@ Forge Beta: 1-#-2015 ver 1.5.33
 Release Notes
 -------------
 
-- Net Decks support -
-On the Constructed screen, you can now select a new Net Decks category from the drop down
-Contains all decks from gos's Forge Decks subforums, broken up by the column/event they were taken from
-Won't cause startup to be slower since they are loaded on the fly
 
-
-- Zoom to a XLHQ card picture -
-Forge now supports showing XLHQ (extra large high quality) card pictures when zooming in on a card if these pictures are available. Forge will look for XLHQ card art in the "XLHQ" subfolder of the "pics/cards" folder in Forge cache. XLHQ pictures should have the ".xlhq.jpg" extension instead of the ".full.jpg" one (CCGHQ XLHQ releases comply with this naming scheme). For example, while the regular 10th edition Blaze will be looked up as "pics/cards/10E/Blaze.full.jpg", the XLHQ version will be looked up as "pics/cards/XLHQ/10E/Blaze.xlhq.jpg". If the XLHQ picture is not available Forge will show you the regular card picture in the zoomed view, as usual. Please note that XLHQ versions of cards are *only* showed in the zoom view, regular card pictures are still used (LQ/HQ, depending on what you're using) on the battlefield and elsewhere in the game because XLHQ art is significantly more taxing in memory consumption even when compared to standard high quality (HQ) releases (and in addition to that, XLHQ card borders are not cropped the way Forge expects them in order to show them properly on the battlefield anyway). XLHQ tokens are also supported, but the naming scheme for them is a little different - they are looked up in "pics/tokens/XLHQ" and have their ordinary names. For example, the 1/1 red Goblin token from the Magic 2015 set is normally looked up at "pics/tokens/r_1_1_goblin_m15.jpg", while its XLHQ version is looked up at "pics/tokens/XLHQ/r_1_1_goblin_m15.jpg".
-
-
-- Fate Reforged cards -
-Forge now includes many of the new CFate Reforged cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
 
 
 ---------
 New Cards
 ---------
 
-Abzan Advantage
-Abzan Beastmaster
-Abzan Kin-Guard
-Abzan Runemark
-Abzan Skycaptain
-Ainok Guide
-Alesha's Vanguard
-Alesha, Who Smiles at Death
-Ambush Krotiq
-Ancestral Vengeance
-Arashin Cleric
-Arcbond
-Archers of Qarsi
-Archfiend of Depravity
-Atarka, World Render
-Aven Skirmisher
-Aven Surveyor
-Bathe in Dragonfire
-Battle Brawler
-Battlefront Krushok
-Bloodfire Enforcers
-Break Through the Line
-Brutal Hordechief
-Cached Defenses
-Channel Harm
-Citadel Siege
-Cloudform
-Collateral Damage
-Crucible of the Spirit Dragon
-Crux of Fate
-Cunning Strike
-Daghatar the Adamant
-Dark Deal
-Defiant Ogre
-Destructor Dragon
-Diplomacy of the Wastes
-Dragon Bell Monk
-Dragonrage
-Dragonscale General
-Dromoka, the Eternal
-Elite Scaleguard
-Enhanced Awareness
-Ethereal Ambush
-Fascination
-Fearsome Awakening
-Feral Krushok
-Fierce Invocation
-Flame Fusillade
-Flamerush Rider
-Flamewake Phoenix
-Formless Nurturing
-Friendly Fire
-Frontier Mastodon
-Frontier Siege
-Frost Walker
-Fruit of the First Tree
-Ghastly Conscription
-Goblin Boom Keg
-Goblin Heelcutter
-Gore Swine
-Grave Strength
-Great-Horn Krushok
-Grim Contest
-Gurmag Angler
-Harsh Sustenance
-Herald of Anafenza
-Hero's Blade
-Hewed Stone Retainers
-Honor's Reward
-Hooded Assassin
-Humble Defector
-Hungering Yeti
-Jeskai Barricade
-Jeskai Infiltrator
-Jeskai Runemark
-Jeskai Sage
-Kolaghan, the Storm's Fury
-Lightform
-Lightning Shrieker
-Lotus Path Djinn
-Lotus-Eye Mystics
-Map the Wastes
-Marang River Prowler
-Mardu Charm
-Mardu Hordechief
-Mardu Runemark
-Mardu Scout
-Mardu Shadowspear
-Mardu Strike Leader
-Mardu Woe-Reaper
-Mastery of the Unseen
-Merciless Executioner
-Mindscour Dragon
-Mistfire Adept
-Mob Rule
-Monastery Mentor
-Monastery Siege
-Neutralizing Blast
-Noxious Dragon
-Ojutai, Soul of Winter
-Orc Sureshot
-Outpost Siege
-Palace Siege
-Pilgrim of the Fires
-Pressure Point
-Qarsi High Priest
-Rageform
-Rakshasa's Disdain
-Rally the Ancestors
-Reach of Shadows
-Reality Shift
-Refocus
-Renowned Weaponsmith
-Return To The Earth
-Rite of Undoing
-Ruthless Instincts
-Sage's Reverie
-Sage-Eye Avengers
-Sandblast
-Sandsteppe Mastodon
-Sandsteppe Outcast
-Scroll of the Masters
-Shaman of the Great Hunt
-Shamanic Revelation
-Shifting Loyalties
-Shockmaw Dragon
-Shu Yun, the Silent Tempest
-Sibsig Host
-Sibsig Muckdraggers
-Silumgar, the Drifting Death
-Smoldering Efreet
-Soul Summons
-Soulfire Grand Master
-Soulflayer
-Sudden Reclamation
-Sultai Emissary
-Sultai Runemark
-Sultai Skullkeeper
-Supplant Form
-Take Up Arms
-Tasigui, the Golden Fang
-Tasigur's Cruelty
-Temporal Trespass
-Temur Battle Rage
-Temur Runemark
-Temur Sabertooth
-Temur War Shaman
-Torrent Elemental
-Ugin's Construct
-Ugin, the Spirit Dragon
-Valorous Stance
-Vaultbreaker
-Wandering Champion
-War Flare
-Warden of the First Tree
-Wardscale Dragon
-Whisk Away
-Whisperer of the Wilds
-Whisperwood Elemental
-Wildcall
-Wild Slash
-Will of the Naga
-Winds of Qal Sisma
-Wingmate Roc
-Write Into Being
-Yasova Dragonclaw
+
 
 
 ------------
 Known Issues
 ------------
+
+- Fate Reforged cards -
+Forge now includes many of the new CFate Reforged cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
 
 - Commander 2014 cards -
 Forge now includes many of the new Commander 2014 cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
