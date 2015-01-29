@@ -104,6 +104,7 @@ public class GameAction {
 
         boolean toBattlefield = zoneTo.is(ZoneType.Battlefield);
         boolean fromBattlefield = zoneFrom != null && zoneFrom.is(ZoneType.Battlefield);
+        boolean toHand = zoneTo.is(ZoneType.Hand);
 
         //Rule 110.5g: A token that has left the battlefield can't move to another zone
         if (c.isToken() && zoneFrom != null && !fromBattlefield && !zoneFrom.is(ZoneType.Command)) {
@@ -120,7 +121,8 @@ public class GameAction {
         }
 
         // Don't copy Tokens, copy only cards leaving the battlefield
-        if (suppress || !fromBattlefield) {
+        // and returning to hand (to recreate their spell ability information)
+        if (suppress || (!fromBattlefield && !toHand)) {
             lastKnownInfo = c;
             copied = c;
         } else {
