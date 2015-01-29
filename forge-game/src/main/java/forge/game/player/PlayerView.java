@@ -81,7 +81,8 @@ public class PlayerView extends GameEntityView {
     }
 
     public boolean isOpponentOf(final PlayerView other) {
-        return getOpponents().contains(other);
+        FCollectionView<PlayerView> opponents = getOpponents();
+        return opponents != null && opponents.contains(other);
     }
 
     @Override
