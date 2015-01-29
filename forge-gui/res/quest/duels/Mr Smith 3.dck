@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Mr Smith 3
+Title=Mr Smith
+Difficulty=hard
+Description=Mono W Opalescence deck
+Icon=Mr Smith.jpg
+Deck Type=constructed
+[main]
+4 Opalescence
+4 Ghostly Prison
+4 Glorious Anthem
+1 Spear of Heliod
+1 Greater Auramancy
+4 Honor of the Pure
+4 Journey to Nowhere
+4 Oblivion Ring
+1 Banishing Light
+2 Replenish
+2 Idyllic Tutor
+1 Mark of Asylum
+3 Mesa Enchantress
+1 Mox Emerald
+1 Mox Jet
+1 Mox Pearl
+1 Mox Ruby
+1 Mox Sapphire
+1 Sol Ring
+19 Plains
+[sideboard]
