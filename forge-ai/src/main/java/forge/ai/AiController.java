@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import simulation.SpellAbilityPicker;
+
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -102,6 +104,7 @@ public class AiController {
     private final Game game;
     private final AiCardMemory memory;
     public boolean bCheatShuffle;
+    private SpellAbilityPicker simPicker;
 
     public boolean canCheatShuffle() {
         return bCheatShuffle;
@@ -127,6 +130,7 @@ public class AiController {
         player = computerPlayer;
         game = game0;
         memory = new AiCardMemory();
+        simPicker = new SpellAbilityPicker(game, player);
     }
 
     private CardCollection getAvailableCards() {
@@ -1206,7 +1210,11 @@ public class AiController {
     private SpellAbility chooseSpellAbilityToPlay(final ArrayList<SpellAbility> all, boolean skipCounter) {
         if (all == null || all.isEmpty())
             return null;
-
+        
+        SpellAbility simSa = simPicker.chooseSpellAbilityToPlay(getOriginalAndAltCostAbilities(all), skipCounter);
+        if (simSa != null)
+            return simSa;
+        
         Collections.sort(all, saComparator); // put best spells first
         
         for (final SpellAbility sa : getOriginalAndAltCostAbilities(all)) {

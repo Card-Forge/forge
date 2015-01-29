@@ -2396,6 +2396,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     public Map<Long, CardChangedType> getChangedCardTypes() {
         return Collections.unmodifiableMap(changedCardTypes);
     }
+    
+    public Map<Long, KeywordsChange> getChangedCardKeywords() {
+        return changedCardKeywords;
+    }
 
     public final void addChangedCardTypes(final CardType addType, final CardType removeType,
             final boolean removeSuperTypes, final boolean removeCardTypes, final boolean removeSubTypes,
@@ -6441,6 +6445,20 @@ public class Card extends GameEntity implements Comparable<Card> {
  
         public ArrayList<String> getKeywords() {
             return keywords;
+        }
+    }
+
+    public void setChangedCardTypes(Map<Long, CardChangedType> changedCardTypes) {
+        this.changedCardTypes.clear();
+        for (Entry<Long, CardChangedType> entry : changedCardTypes.entrySet()) {
+            this.changedCardTypes.put(entry.getKey(), entry.getValue());
+        }
+    }
+
+    public void setChangedCardKeywords(Map<Long, KeywordsChange> changedCardKeywords) {
+        this.changedCardKeywords.clear();
+        for (Entry<Long, KeywordsChange> entry : changedCardKeywords.entrySet()) {
+            this.changedCardKeywords.put(entry.getKey(), entry.getValue());
         }
     }
 }
