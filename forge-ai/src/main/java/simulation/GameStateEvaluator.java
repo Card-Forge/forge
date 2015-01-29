@@ -8,7 +8,7 @@ import forge.game.zone.ZoneType;
 
 public class GameStateEvaluator {
 
-    public int getScoreForGameState(Game game, Player aiPlayer, Player opponent) {
+    public int getScoreForGameState(Game game, Player aiPlayer) {
         if (game.isGameOver()) {
             return game.getOutcome().getWinningPlayer() == aiPlayer ? Integer.MAX_VALUE : Integer.MIN_VALUE;
         }
@@ -43,13 +43,19 @@ public class GameStateEvaluator {
             if (!nonAbilityText.isEmpty()) {
                 GameSimulator.debugPrint("    "+nonAbilityText.replaceAll("CARDNAME", c.getName()));
             }
-
-            
         }
         GameSimulator.debugPrint("  My life: " + aiPlayer.getLife());
         score += aiPlayer.getLife();
-        GameSimulator.debugPrint("  Opponent life: -" + opponent.getLife());
-        score -= opponent.getLife();
+        int opponentIndex = 1;
+        int opponentLife = 0;
+        for (Player opponent : game.getPlayers()) {
+            if (opponent != aiPlayer) {
+                GameSimulator.debugPrint("  Opponent " + opponentIndex + " life: -" + opponent.getLife());
+                opponentLife += opponent.getLife();
+                opponentIndex++;
+            }
+        }
+        score -= opponentLife / (game.getPlayers().size() - 1);
         GameSimulator.debugPrint("Score = " + score);
         return score;
     }

@@ -40,12 +40,11 @@ public class GameSimulator {
         debugPrint = false;
         // TODO: Make this logic more bulletproof.        
         Player origAiPlayer = origGame.getPlayers().get(1);
-        Player origOpponent = origGame.getPlayers().get(0);
-        origScore = eval.getScoreForGameState(origGame, origAiPlayer, origOpponent);
+        origScore = eval.getScoreForGameState(origGame, origAiPlayer);
 
         ArrayList<String> simLines = new ArrayList<String>();
         debugLines = simLines;
-        int simScore = eval.getScoreForGameState(simGame, aiPlayer, opponent);
+        int simScore = eval.getScoreForGameState(simGame, aiPlayer);
         if (simScore != origScore) {
             // Print debug info.
             printDiff(origLines, simLines);
@@ -155,6 +154,7 @@ public class GameSimulator {
             System.err.println("Stack empty: " + sa);
             return Integer.MIN_VALUE;
         }
+        // TODO: This needs to set an AI controller for all opponents, in case of multiplayer.
         opponent.runWithController(new Runnable() {
             @Override
             public void run() {
@@ -181,7 +181,7 @@ public class GameSimulator {
         ArrayList<String> simLines = new ArrayList<String>();
         debugLines = simLines;
         debugPrint = false;
-        int score = eval.getScoreForGameState(simGame, aiPlayer, opponent);
+        int score = eval.getScoreForGameState(simGame, aiPlayer);
         debugLines = null;
         debugPrint = true;
         printDiff(origLines, simLines);
