@@ -28,7 +28,7 @@ public class GameStateEvaluator {
         score += 3 * myCards - 3 * theirCards;
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
             int value = evalCard(c);
-            String str = c.toString();
+            String str = c.getName();
             if (c.isCreature()) {
                 str += " " + c.getNetPower() + "/" + c.getNetToughness();
             }

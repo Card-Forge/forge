@@ -1,6 +1,9 @@
 package simulation;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import forge.ai.ComputerUtil;
@@ -15,36 +18,78 @@ import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 
 public class GameSimulator {
-    private Game origGame;
     private GameCopier copier;
     private Game simGame;
     private Player aiPlayer;
     private Player opponent;
     private GameStateEvaluator eval;
-
+    private ArrayList<String> origLines;
+    private int origScore;
+    
     public GameSimulator(final Game origGame) {
-        this.origGame = origGame;
         copier = new GameCopier(origGame);
         simGame = copier.makeCopy();
         // TODO:
         aiPlayer = simGame.getPlayers().get(1);
         opponent = simGame.getPlayers().get(0);
         eval = new GameStateEvaluator();
+        
+        origLines = new ArrayList<String>();
+        debugLines = origLines;
+
+        debugPrint = false;
+        // TODO: Make this logic more bulletproof.        
+        Player origAiPlayer = origGame.getPlayers().get(1);
+        Player origOpponent = origGame.getPlayers().get(0);
+        origScore = eval.getScoreForGameState(origGame, origAiPlayer, origOpponent);
+
+        ArrayList<String> simLines = new ArrayList<String>();
+        debugLines = simLines;
         int simScore = eval.getScoreForGameState(simGame, aiPlayer, opponent);
-        int origScore = getScoreForOrigGame();
-        debugPrint = true;
         if (simScore != origScore) {
             // Print debug info.
-            eval.getScoreForGameState(simGame, aiPlayer, opponent);
-            getScoreForOrigGame();
+            printDiff(origLines, simLines);
             throw new RuntimeException("Game copy error");
+        }
+        debugPrint = true;
+        debugLines = null;
+    }
+
+    private void printDiff(List<String> lines1, List<String> lines2) {
+        int i = 0;
+        int j = 0;
+        Collections.sort(lines1);
+        Collections.sort(lines2);
+        while (i < lines1.size() && j < lines2.size()) {
+            String left = lines1.get(i);
+            String right = lines2.get(j);
+            int cmp = left.compareTo(right);
+            if (cmp == 0) {
+                i++; j++;
+            } else if (cmp < 0) {
+                System.out.println("-" + left);
+                i++;
+            } else { 
+                System.out.println("+"  + right);
+                j++;
+            }
+        }
+        while (i < lines1.size()) {
+            System.out.println("-" + lines1.get(i++));
+        }
+        while (j < lines2.size()) {
+            System.out.println("+" + lines2.get(j++));
         }
     }
 
     public static boolean debugPrint;
+    public static ArrayList<String> debugLines;
     public static void debugPrint(String str) {
         if (debugPrint) {
             System.out.println(str);
+        }
+        if (debugLines!=null) {
+            debugLines.add(str);
         }
     }
     
@@ -133,18 +178,19 @@ public class GameSimulator {
         // we should simulate how combat will resolve and evaluate that
         // state instead!
         debugPrint("SimGame:");
+        ArrayList<String> simLines = new ArrayList<String>();
+        debugLines = simLines;
+        debugPrint = false;
         int score = eval.getScoreForGameState(simGame, aiPlayer, opponent);
-
+        debugLines = null;
+        debugPrint = true;
+        printDiff(origLines, simLines);
         sa.setActivatingPlayer(origActivatingPlayer);
 
         return score;
     }
 
     public int getScoreForOrigGame() {
-        // TODO: Make this logic more bulletproof.        
-        Player origAiPlayer = origGame.getPlayers().get(1);
-        Player origOpponent = origGame.getPlayers().get(0);
-        return eval.getScoreForGameState(origGame, origAiPlayer, origOpponent);
+        return origScore;
     }
-    
 }

@@ -24,13 +24,15 @@ public class SpellAbilityPicker {
         if (!USE_SIMULATION)
             return null;
 
-        System.out.println("----\nchooseSpellAbilityToPlay game " + game.toString());
-        System.out.println("---- (phase = " +  game.getPhaseHandler().getPhase() + ")");
+        System.out.println("---- choose ability  (phase = " +  game.getPhaseHandler().getPhase() + ")");
 
         ArrayList<SpellAbility> candidateSAs = new ArrayList<>();
         for (final SpellAbility sa : originalAndAltCostAbilities) {
             // Don't add Counterspells to the "normal" playcard lookups
             if (skipCounter && sa.getApi() == ApiType.Counter) {
+                continue;
+            }
+            if (sa.isManaAbility()) {
                 continue;
             }
             sa.setActivatingPlayer(player);
