@@ -1,21 +1,14 @@
-Forge Beta: 1-#-2015 ver 1.5.34
+Forge Beta: 1-30-2015 ver 1.5.34
 
 
-# cards in total.
+14514 cards in total.
 
 
 -------------
 Release Notes
 -------------
 
-
-
-
----------
-New Cards
----------
-
-
+This version includes a few bug fixes..
 
 
 ------------
@@ -71,7 +64,18 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Agetian
+DrDev
+elcnesh
+Gos
+KrazyTheFox
+Max mtg
+Myrd
+Sloth
+Sol
+Swordshine
+tojammot
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
