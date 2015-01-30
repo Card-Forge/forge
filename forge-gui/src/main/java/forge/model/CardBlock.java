@@ -41,8 +41,6 @@ import java.util.TreeMap;
  * This is a CardBlock class.
  */
 public final class CardBlock implements Comparable<CardBlock> {
-    private static final CardEdition[] EMPTY_SET_ARRAY = new CardEdition[] {};
-
     private final int orderNum;
     private final String name;
     private final List<CardEdition> sets;

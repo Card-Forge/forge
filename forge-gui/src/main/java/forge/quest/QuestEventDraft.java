@@ -864,6 +864,11 @@ public class QuestEventDraft {
 
         List<CardEdition> sets = block.getSets();
         final String s0c = sets.get(0).getCode();
+        if (sets.size() == 1) {
+            result.add(String.format("%s/%s/%s", s0c, s0c, s0c));
+            return result;
+        }
+
         final String s1c = sets.get(1).getCode();
         final String s2c = sets.size() > 2 ? sets.get(2).getCode() : null; 
 
@@ -882,9 +887,12 @@ public class QuestEventDraft {
                 result.add(String.format("%s/%s/%s", s0c, s0c, s0c));
             }
         } else {
-            result.add(String.format("%s/%s/%s", s0c, s1c, s2c));
             result.add(String.format("%s/%s/%s", s0c, s0c, s0c));
-            
+            result.add(String.format("%s/%s/%s", s0c, s1c, s2c));
+
+            // allow separate drafts with 3rd large set (ex: ROE, AVR)
+            if( sets.get(2).getCards().length > 200)
+                result.add(String.format("%s/%s/%s", s2c, s2c, s2c));
         }
 
         // This is set to Scars of Mirrodin date to account for the fact that MBS is drafted as a part of the Scars of Mirrodin block.
