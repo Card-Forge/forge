@@ -45,7 +45,7 @@ public final class CardBlock implements Comparable<CardBlock> {
 
     private final int orderNum;
     private final String name;
-    private final CardEdition[] sets;
+    private final List<CardEdition> sets;
     private final Map<String, MetaSet> metaSets = new TreeMap<String, MetaSet>();
     private final CardEdition landSet;
     private final int cntBoostersDraft;
@@ -74,7 +74,7 @@ public final class CardBlock implements Comparable<CardBlock> {
             final CardEdition landSet, final int cntBoostersDraft, final int cntBoostersSealed) {
         this.orderNum = index;
         this.name = name;
-        this.sets = sets.toArray(CardBlock.EMPTY_SET_ARRAY);
+        this.sets = java.util.Collections.unmodifiableList(sets);
         for(MetaSet m : metas) {
             this.metaSets.put(m.getCode(), m);
         }
@@ -97,7 +97,7 @@ public final class CardBlock implements Comparable<CardBlock> {
      * 
      * @return the sets
      */
-    public CardEdition[] getSets() {
+    public List<CardEdition> getSets() {
         return this.sets;
     }
 
@@ -206,7 +206,7 @@ public final class CardBlock implements Comparable<CardBlock> {
      */
     @Override
     public String toString() {
-        if (this.metaSets.isEmpty() && this.sets.length < 1) {
+        if (this.metaSets.isEmpty() && this.sets.isEmpty()) {
             return this.name + " (empty)";
         } else if (this.metaSets.size() + this.getNumberSets() < 2) {
             return this.name + " (set)";
@@ -274,12 +274,7 @@ public final class CardBlock implements Comparable<CardBlock> {
      * @return int, number of sets.
      */
     public int getNumberSets() {
-        if (sets == null || sets.length < 1) {
-            return 0;
-        }
-        else {
-            return sets.length;
-        }
+    	return sets == null ? 0 : sets.size();
     }
 
     public Iterable<String> getMetaSetNames() {

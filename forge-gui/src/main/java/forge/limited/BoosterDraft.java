@@ -98,15 +98,15 @@ public class BoosterDraft implements IBoosterDraft {
             final CardBlock block = SGuiChoose.oneOrNone("Choose Block", blocks);
             if (block == null) { return false; }
 
-            final CardEdition[] cardSets = block.getSets();
-            if (cardSets.length == 0) {
+            final List<CardEdition> cardSets = block.getSets();
+            if (cardSets.isEmpty()) {
                 SOptionPane.showErrorDialog(block.toString() + " does not contain any set combinations.");
                 return false;
             }
 
             final Stack<String> sets = new Stack<String>();
-            for (int k = cardSets.length - 1; k >= 0; k--) {
-                sets.add(cardSets[k].getCode());
+            for (int k = cardSets.size() - 1; k >= 0; k--) {
+                sets.add(cardSets.get(k).getCode());
             }
 
             for (String setCode : block.getMetaSetNames()) {

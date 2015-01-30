@@ -35,6 +35,7 @@ import forge.player.GamePlayerUtil;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.ReadPriceList;
 import forge.util.NameGenerator;
+import forge.util.TextUtil;
 import forge.util.storage.IStorage;
 
 import java.text.SimpleDateFormat;
@@ -770,7 +771,7 @@ public class QuestEventDraft {
         if (block.getNumberSets() == 1) {
             String boosterConfiguration = "";
             for (int i = 0; i < block.getCntBoostersDraft(); i++) {
-                boosterConfiguration += block.getSets()[0].getCode();
+                boosterConfiguration += block.getSets().get(0).getCode();
                 if (i != block.getCntBoostersDraft() - 1) {
                     boosterConfiguration += "/";
                 }
@@ -859,76 +860,47 @@ public class QuestEventDraft {
     }
     
     private static List<String> getSetCombos(final CardBlock block) {
+        List<String> result = new ArrayList<>();
 
-        List<String> setCombos = new ArrayList<>();
-        CardEdition[] sets = block.getSets();
+        List<CardEdition> sets = block.getSets();
+        final String s0c = sets.get(0).getCode();
+        final String s1c = sets.get(1).getCode();
+        final String s2c = sets.size() > 2 ? sets.get(2).getCode() : null; 
+
+        boolean s0isLarge = sets.get(0).getCards().length > 200;
+        boolean s1isLarge = sets.get(1).getCards().length > 200;
         
-        boolean inverseDraftOrder = false; // before Mirrodin Besieged, sets were drafted in the opposite order (old->new instead of new->old)
-        for (CardEdition set : sets) {
-            Calendar cal = Calendar.getInstance();
-            // This is set to Scars of Mirrodin date to account for the fact that MBS is drafted as a part of the Scars of Mirrodin block.
-            // Setting it to the date of Mirrodin Besieged makes it treat all drafts that feature Scars of Mirrodin incorrectly.
-            cal.set(Calendar.YEAR, 2010); 
-            cal.set(Calendar.MONTH, Calendar.OCTOBER);
-            cal.set(Calendar.DAY_OF_MONTH, 1);
-            Date SOMDate = cal.getTime();
-
-            if (set.getDate().before(SOMDate)) {
-                inverseDraftOrder = true;
+        final String largerSet = s0isLarge == s1isLarge ? null : s0isLarge ? s0c : s1c;
+        
+        if (s2c == null) {
+            if (largerSet != null ) {
+                result.add(String.format("%s/%s/%s", s0c, largerSet, s1c));
+            } else {
+                result.add(String.format("%s/%s/%s", s1c, s1c, s1c));
+                result.add(String.format("%s/%s/%s", s0c, s1c, s1c));
+                result.add(String.format("%s/%s/%s", s0c, s0c, s1c));
+                result.add(String.format("%s/%s/%s", s0c, s0c, s0c));
             }
+        } else {
+            result.add(String.format("%s/%s/%s", s0c, s1c, s2c));
+            result.add(String.format("%s/%s/%s", s2c, s2c, s2c));
+            
         }
 
-        Arrays.sort(sets, new Comparator<CardEdition>() {
-            @Override
-            public int compare(CardEdition set1, CardEdition set2) {
-                if (set1.getDate().after(set2.getDate())) {
-                    return -1;
-                } else if (set1.getDate().before(set2.getDate())) {
-                    return 1;
-                }
-                return 0;
-            }
-        });
-        
-        if (sets.length == 2) {
-            
-            if (sets[0].getCards().length < 200) {
-                if (!inverseDraftOrder) {
-                    setCombos.add(String.format("%s/%s/%s", sets[0].getCode(), sets[1].getCode(), sets[1].getCode()));
-                } else {
-                    setCombos.add(String.format("%s/%s/%s", sets[1].getCode(), sets[1].getCode(), sets[0].getCode()));
-                }
-            } else if (sets[1].getCards().length < 200) {
-                if (!inverseDraftOrder) {
-                    setCombos.add(String.format("%s/%s/%s", sets[1].getCode(), sets[0].getCode(), sets[0].getCode()));
-                } else {
-                    setCombos.add(String.format("%s/%s/%s", sets[0].getCode(), sets[0].getCode(), sets[1].getCode()));
-                }
-            } else {
-                setCombos.add(String.format("%s/%s/%s", sets[1].getCode(), sets[1].getCode(), sets[1].getCode()));
-                if (!inverseDraftOrder) {
-                    setCombos.add(String.format("%s/%s/%s", sets[0].getCode(), sets[1].getCode(), sets[1].getCode()));
-                    setCombos.add(String.format("%s/%s/%s", sets[0].getCode(), sets[0].getCode(), sets[1].getCode()));
-                } else {
-                    setCombos.add(String.format("%s/%s/%s", sets[1].getCode(), sets[1].getCode(), sets[0].getCode()));
-                    setCombos.add(String.format("%s/%s/%s", sets[1].getCode(), sets[0].getCode(), sets[0].getCode()));
-                }
-                setCombos.add(String.format("%s/%s/%s", sets[0].getCode(), sets[0].getCode(), sets[0].getCode()));
-            }
-            
-        } else if (sets.length >= 3) {
+        // This is set to Scars of Mirrodin date to account for the fact that MBS is drafted as a part of the Scars of Mirrodin block.
+        // Setting it to the date of Mirrodin Besieged makes it treat all drafts that feature Scars of Mirrodin incorrectly.
+        Date SOMDate = FModel.getMagicDb().getEditions().get("SOM").getDate();
+        boolean openOlderPacksFirst = sets.get(0).getDate().before(SOMDate); // before Mirrodin Besieged, sets were drafted in the opposite order (old->new instead of new->old)
 
-            if (!inverseDraftOrder) {
-                setCombos.add(String.format("%s/%s/%s", sets[0].getCode(), sets[1].getCode(), sets[2].getCode()));
-            } else {
-                setCombos.add(String.format("%s/%s/%s", sets[2].getCode(), sets[1].getCode(), sets[0].getCode()));
+        if( !openOlderPacksFirst ){
+            for(int i = result.size() - 1; i >= 0; i--) {
+                List<String> parts = Arrays.asList(TextUtil.split(result.get(i), '/'));
+                Collections.reverse(parts);
+                result.set(i, TextUtil.join(parts, "/"));
             }
-            setCombos.add(String.format("%s/%s/%s", sets[2].getCode(), sets[2].getCode(), sets[2].getCode()));
-            
         }
         
-        return setCombos;
-        
+        return result;
     }
     
 }
