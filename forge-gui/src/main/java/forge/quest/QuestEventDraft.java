@@ -883,7 +883,7 @@ public class QuestEventDraft {
             }
         } else {
             result.add(String.format("%s/%s/%s", s0c, s1c, s2c));
-            result.add(String.format("%s/%s/%s", s2c, s2c, s2c));
+            result.add(String.format("%s/%s/%s", s0c, s0c, s0c));
             
         }
 
