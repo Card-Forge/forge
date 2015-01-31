@@ -619,6 +619,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 }
             }
         }
+        System.out.println("Chance detected: " + chance);
         //TODO:how to consider repeatable pump abilities? This probably requires the AI to keep track of future decisions and/or
         //plan a sequence of decisions.
         return MyRandom.getRandom().nextFloat() < chance;
@@ -754,7 +755,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 kws.add(kw);
             }
         }
-        pumped.addNewPT(c.getCurrentPower(), c.getCurrentPower(), timestamp);
+        pumped.addNewPT(c.getCurrentPower(), c.getCurrentToughness(), timestamp);
         pumped.addTempPowerBoost(c.getTempPowerBoost() + a);
         pumped.addTempToughnessBoost(c.getTempToughnessBoost() + d);
         pumped.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);
