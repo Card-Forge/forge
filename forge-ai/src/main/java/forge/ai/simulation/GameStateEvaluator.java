@@ -1,4 +1,4 @@
-package simulation;
+package forge.ai.simulation;
 
 import forge.ai.ComputerUtilCard;
 import forge.game.Game;

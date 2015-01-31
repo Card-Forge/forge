@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import simulation.SpellAbilityPicker;
 
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Function;
@@ -36,6 +35,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
+import forge.ai.simulation.SpellAbilityPicker;
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.MagicColor;

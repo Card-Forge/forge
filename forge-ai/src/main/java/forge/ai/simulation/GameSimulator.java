@@ -1,4 +1,4 @@
-package simulation;
+package forge.ai.simulation;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -99,10 +99,8 @@ public class GameSimulator {
             if (!c.getOwner().getController().isAI()) {
                 continue;
             }
-            debugPrint(c.getName()+"->");
             if (c.getName().equals(origHostCard.getName())) {
                 for (SpellAbility cSa : c.getSpellAbilities()) {
-                    debugPrint("    "+cSa);
                     if (cSa.getDescription().equals(sa.getDescription())) {
                         return cSa;
                     }
@@ -159,7 +157,9 @@ public class GameSimulator {
             @Override
             public void run() {
                 final Set<Card> allAffectedCards = new HashSet<Card>();
+                simGame.getStack().addAllTriggeredAbilitiesToStack();
                 do {
+                    debugPrint("Resolving:" + simGame.getStack().peekAbility());
                     // Resolve the top effect on the stack.
                     simGame.getStack().resolveStack();
                     // Evaluate state based effects as a result of resolving stack.

@@ -1,4 +1,4 @@
-package simulation;
+package forge.ai.simulation;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -69,6 +69,8 @@ public class GameCopier {
         newGame.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         newGame.getAction().checkStateEffects(true); //ensure state based effects and triggers are updated
         
+        newGame.getTriggerHandler().resetActiveTriggers();
+
         return newGame;
     }
 
