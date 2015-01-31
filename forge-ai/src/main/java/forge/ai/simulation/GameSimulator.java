@@ -189,6 +189,10 @@ public class GameSimulator {
 
         return score;
     }
+    
+    public Game getSimulatedGameState() {
+        return simGame;
+    }
 
     public int getScoreForOrigGame() {
         return origScore;

@@ -1127,6 +1127,7 @@ forge-gui-desktop/src/test/java/forge/GuiProgressBarWindowTest.java -text
 forge-gui-desktop/src/test/java/forge/PanelTest.java -text
 forge-gui-desktop/src/test/java/forge/RunTest.java -text
 forge-gui-desktop/src/test/java/forge/TinyTest.java -text
+forge-gui-desktop/src/test/java/forge/ai/simulation/GameSimulatorTest.java -text
 forge-gui-desktop/src/test/java/forge/deck/generate/Generate2ColorDeckTest.java -text
 forge-gui-desktop/src/test/java/forge/deck/generate/Generate3ColorDeckTest.java -text
 forge-gui-desktop/src/test/java/forge/deck/generate/Generate5ColorDeckTest.java -text
