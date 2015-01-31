@@ -8,7 +8,7 @@ Forge Beta: 1-30-2015 ver 1.5.34
 Release Notes
 -------------
 
-This version includes a few bug fixes.
+This version includes a few bug fixes..
 
 
 ------------
