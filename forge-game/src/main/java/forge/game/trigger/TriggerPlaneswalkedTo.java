@@ -34,7 +34,7 @@ public class TriggerPlaneswalkedTo extends Trigger {
     @Override
     public boolean performTest(Map<String, Object> runParams2) {
         if (this.mapParams.containsKey("ValidCard")) {
-            for(Card moved : (Iterable<Card>)runParams2.get("Card"))
+            for(Card moved : (Iterable<Card>)runParams2.get("Cards"))
             {
                 if (moved.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
                         this.getHostCard())) {
@@ -52,7 +52,7 @@ public class TriggerPlaneswalkedTo extends Trigger {
      */
     @Override
     public void setTriggeringObjects(SpellAbility sa) {
-        sa.setTriggeringObject("Cards", this.getRunParams().get("Card"));
+        sa.setTriggeringObject("Cards", this.getRunParams().get("Cards"));
     }
 
 }

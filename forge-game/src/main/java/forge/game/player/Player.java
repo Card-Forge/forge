@@ -2282,8 +2282,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         currentPlanes.addAll(destinations);
 
         for (Card c : currentPlanes) {
-            getZone(ZoneType.PlanarDeck).remove(c);
-            getZone(ZoneType.Command).add(c);
+            game.getAction().moveTo(ZoneType.Command,c);
+            //getZone(ZoneType.PlanarDeck).remove(c);
+            //getZone(ZoneType.Command).add(c);
         }
 
         //DBG
@@ -2294,7 +2295,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.setActivePlanes(currentPlanes);
         //Run PlaneswalkedTo triggers here.
         HashMap<String,Object> runParams = new HashMap<String,Object>();
-        runParams.put("Card", currentPlanes);
+        runParams.put("Cards", currentPlanes);
         game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedTo, runParams,false);
     }
 
@@ -2309,9 +2310,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         for (final Card plane : currentPlanes) {
-            game.getZoneOf(plane).remove(plane);
+            //game.getZoneOf(plane).remove(plane);
             plane.clearControllers();
-            getZone(ZoneType.PlanarDeck).add(plane);
+            //getZone(ZoneType.PlanarDeck).add(plane);
+            game.getAction().moveTo(ZoneType.PlanarDeck, plane,-1);
         }
         currentPlanes.clear();
 

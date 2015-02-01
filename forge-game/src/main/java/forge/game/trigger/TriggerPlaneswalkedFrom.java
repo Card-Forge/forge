@@ -1,6 +1,7 @@
 package forge.game.trigger;
 
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.spellability.SpellAbility;
 
 import java.util.Map;
@@ -33,10 +34,12 @@ public class TriggerPlaneswalkedFrom extends Trigger {
     @Override
     public boolean performTest(final Map<String, Object> runParams2) {
         if (this.mapParams.containsKey("ValidCard")) {
-            final Card moved = (Card) runParams2.get("Card");
-            if (moved.isValid(this.mapParams.get("ValidCard").split(","), this
-                    .getHostCard().getController(), this.getHostCard())) {
-                return true;
+            final CardCollection moved = (CardCollection) runParams2.get("Cards");
+            for(Card c : moved) {
+                if (c.isValid(this.mapParams.get("ValidCard").split(","), this
+                        .getHostCard().getController(), this.getHostCard())) {
+                    return true;
+                }
             }
             return false;
         }
@@ -49,7 +52,7 @@ public class TriggerPlaneswalkedFrom extends Trigger {
      */
     @Override
     public void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
+        sa.setTriggeringObject("Cards", this.getRunParams().get("Cards"));
     }
 
 }
