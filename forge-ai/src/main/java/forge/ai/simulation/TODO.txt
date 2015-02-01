@@ -1,0 +1,28 @@
+High-level TODOs for AI simulation code:
+
+ - When copying the game and simulating, copy what's on the stack. This will
+   allow AI to use effects that e.g. sacrifice their creatures that are targeted
+   by removal as well as play counterspells using the simulation framework.
+      
+ - When evaluating permanents with ETB effects (e.g. oblivion ring), simulate
+   all possible targets, just like SA targeting during simulation.
+   
+ - When evaluating what to play during combat, simulate until end of combat, so
+   that the AI takes into account how much life or chump blockers are saved when
+   killing an attacking creature, for example.
+   
+ - When evaluating game state, creature evaluations should take into account the
+   current turn and phase and what creatures the opponent has - so that for e.g.
+   if the opponent can kill you next turn with enough attacking creatures, then
+   effects that produce blockers are rated higher.
+   
+ - AI is too eager to play spells. For example, the AI may want to play an instant
+   during draw phase, since that's the best spell to play at that point, whereas
+   in reality, waiting till MAIN1 and playing a creature or sorcery may be the
+   better decision.
+   
+ - AI needs to ration mana somehow. Right now, it's a "greedy play best spell"
+   system. It fails to take into account situations where playing two cheap
+   spells is a better alternative than playing one expensive spell whose effect
+   is better than each cheap spell, but not than both of them.
+

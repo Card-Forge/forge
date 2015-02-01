@@ -153,6 +153,7 @@ forge-ai/src/main/java/forge/ai/simulation/GameSimulator.java -text
 forge-ai/src/main/java/forge/ai/simulation/GameStateEvaluator.java -text
 forge-ai/src/main/java/forge/ai/simulation/PossibleTargetSelector.java -text
 forge-ai/src/main/java/forge/ai/simulation/SpellAbilityPicker.java -text
+forge-ai/src/main/java/forge/ai/simulation/TODO.txt -text
 forge-core/.classpath -text
 forge-core/.project -text
 forge-core/.settings/org.eclipse.core.resources.prefs -text
