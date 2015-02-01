@@ -11,7 +11,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
 
 public class SpellAbilityPicker {
-    private static boolean USE_SIMULATION = true;
+    private static boolean USE_SIMULATION = false;
     private Game game;
     private Player player;
 
