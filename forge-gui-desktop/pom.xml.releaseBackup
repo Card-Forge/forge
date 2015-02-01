@@ -1,0 +1,528 @@
+ 
+ 
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+ 
+    <parent>
+        <artifactId>forge</artifactId>
+        <groupId>forge</groupId>
+        <version>1.5.34-SNAPSHOT</version>
+    </parent>
+ 
+    <artifactId>forge-gui-desktop</artifactId>
+    <packaging>jar</packaging>
+    <name>Forge</name>
+ 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.google.code.maven-svn-revision-number-plugin</groupId>
+                <artifactId>svn-revision-number-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <failOnError>false</failOnError>
+                    <entries>
+                        <entry>
+                            <prefix>forge</prefix>
+                        </entry>
+                    </entries>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.ant</groupId>
+                        <artifactId>ant-nodeps</artifactId>
+                        <version>1.8.1</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>build-version-string</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <exportAntProperties>true</exportAntProperties>
+                            <target>
+                                <condition property="fullversionstring" value="${project.version}-r${forge.revision}${forge.specialStatus}" else="${project.version}-r${forge.revision}${forge.specialStatus} (mixed revisions detected; please update from the root directory)">
+                                    <contains string="${forge.mixedRevisions}" substring="false" />
+                                </condition>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+ 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Implementation-Version>${fullversionstring}</Implementation-Version>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.2</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <basedir>${basedir}/${configSourceDirectory}</basedir>
+                    <filesToInclude>forge.sh, forge.command</filesToInclude>
+                    <outputBasedir>${project.build.directory}</outputBasedir>
+                    <outputDir>.</outputDir>
+                    <regex>false</regex>
+                    <replacements>
+                        <replacement>
+                            <token>$project.build.finalName$</token>
+                            <value>${project.build.finalName}-jar-with-dependencies.jar</value>
+                        </replacement>
+                    </replacements>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <attach>false</attach>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>forge.view.Main</mainClass>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Implementation-Version>${fullversionstring}</Implementation-Version>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <!-- this is used for inheritance merges -->
+                        <phase>package</phase>
+                        <!-- bind to the packaging phase -->
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>released-version</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>released-version</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>parse-version</id>
+                        <goals>
+                            <goal>parse-version</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+ 
+        </plugins>
+    </build>
+ 
+    <dependencies>
+        <dependency>
+            <groupId>forge</groupId>
+            <artifactId>forge-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>forge</groupId>
+            <artifactId>forge-game</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>forge</groupId>
+            <artifactId>forge-ai</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>forge</groupId>
+            <artifactId>forge-net</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>forge</groupId>
+            <artifactId>forge-gui</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.miglayout</groupId>
+            <artifactId>miglayout</artifactId>
+            <version>3.7.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mortennobel</groupId>
+            <artifactId>java-image-scaling</artifactId>
+            <version>0.8.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>16.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.4.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.8.7</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+	      	<artifactId>powermock-module-testng</artifactId>
+	      	<version>1.5.4</version>
+	      	<scope>test</scope>
+	    </dependency>
+        <dependency>
+	      	<groupId>org.powermock</groupId>
+	      	<artifactId>powermock-api-mockito</artifactId>
+	      	<version>1.5.4</version>
+	      	<scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode</groupId>
+            <artifactId>minlog</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.20</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.soundlibs</groupId>
+            <artifactId>jlayer</artifactId>
+            <version>1.0.1-1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.beust</groupId>
+            <artifactId>jcommander</artifactId>
+            <version>1.27</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
+ 
+    <profiles>
+        <profile>
+            <id>windows-linux</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                        <artifactId>launch4j-maven-plugin</artifactId>
+                        <version>1.5.2</version>
+                        <executions>
+                            <execution>
+                                <id>l4j-gui</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>launch4j</goal>
+                                </goals>
+                                <configuration>
+                                    <headerType>gui</headerType>
+                                    <outfile>${project.build.directory}/forge.exe</outfile>
+                                    <jar>${project.build.finalName}-jar-with-dependencies.jar</jar>
+                                    <dontWrapJar>true</dontWrapJar>
+                                    <errTitle>forge</errTitle>
+                                    <icon>src/main/config/forge.ico</icon>
+                                    <classPath>
+                                        <mainClass>forge.view.Main</mainClass>
+                                        <addDependencies>false</addDependencies>
+                                        <preCp>anything</preCp>
+                                    </classPath>
+                                    <jre>
+                                        <minVersion>1.7.0</minVersion>
+                                        <maxHeapSize>1024</maxHeapSize>
+                                    </jre>
+                                    <versionInfo>
+                                        <fileVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0</fileVersion>
+                                        <txtFileVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0</txtFileVersion>
+                                        <fileDescription>Forge</fileDescription>
+                                        <copyright>Forge</copyright>
+                                        <productVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0</productVersion>
+                                        <txtProductVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0</txtProductVersion>
+                                        <productName>Forge</productName>
+                                        <internalName>forge</internalName>
+                                        <originalFilename>forge.exe</originalFilename>
+                                    </versionInfo>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+ 
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.7</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.ant</groupId>
+                                <artifactId>ant-nodeps</artifactId>
+                                <version>1.8.1</version>
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <execution>
+                                <id>win-linux-app-bundle</id>
+                                <phase>pre-integration-test</phase>
+                                <configuration>
+                                    <target>
+                                        <!-- Windows/Linux archive -->
+                                        <mkdir dir="${project.build.directory}/${project.build.finalName}" />
+                                        <copy todir="${project.build.directory}/${project.build.finalName}">
+                                            <fileset dir="${project.build.directory}" includes="forge.sh" />
+                                            <fileset dir="${project.build.directory}" includes="forge.command" />
+                                            <fileset dir="${basedir}/../forge-gui/" includes="forge.profile.properties.example" />
+                                            <fileset dir="${basedir}/../forge-gui/" includes="LICENSE.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/" includes="README.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/" includes="CHANGES.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/">
+                                                <include name="res/**" />
+                                                <exclude name="res/cardsfolder/**" />
+                                            </fileset>
+                                            <fileset dir="${project.build.directory}" includes="forge.exe" />
+                                            <fileset dir="${project.build.directory}" includes="${project.build.finalName}-jar-with-dependencies.jar" />
+                                        </copy>
+                                        <mkdir dir="${project.build.directory}/${project.build.finalName}/res/cardsfolder" />
+                                        <zip destfile="${project.build.directory}/${project.build.finalName}/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/../forge-gui/res/cardsfolder" level="1" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge.sh" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge.command" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge.exe" perm="a+rx" />
+                                        <tar destfile="${project.build.directory}/${project.build.finalName}.tar.bz2" compression="bzip2">
+                                            <tarfileset filemode="755" dir="${project.build.directory}/${project.build.finalName}">
+                                                <include name="forge.sh" />
+                                                <include name="forge.command" />
+                                                <include name="forge.exe" />
+                                            </tarfileset>
+                                            <tarfileset dir="${project.build.directory}/${project.build.finalName}">
+                                                <include name="**" />
+                                                <exclude name="forge.sh" />
+                                                <exclude name="forge.command" />
+                                                <exclude name="forge.exe" />
+                                            </tarfileset>
+                                        </tar>
+                                    </target>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <version>1.8</version>
+                        <executions>
+                            <execution>
+                                <id>released-version</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>released-version</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>parse-version</id>
+                                <goals>
+                                    <goal>parse-version</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>attach-distribution</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>attach-artifact</goal>
+                                </goals>
+                                <configuration>
+                                    <artifacts>
+                                        <artifact>
+                                            <file>${project.build.directory}/${project.build.finalName}.tar.bz2</file>
+                                            <type>tar.bz2</type>
+                                        </artifact>
+                                    </artifacts>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+ 
+        <profile>
+            <properties>
+                <license.file.name>"LICENSE.txt"</license.file.name>
+                <changes.file.name>"CHANGES.txt"</changes.file.name>
+                <readme.file.name>"README.txt"</readme.file.name>
+                <forge.file.name>"Forge"</forge.file.name>
+                <applications.file.name>"Applications"</applications.file.name>
+            </properties>
+            <id>osx</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.7</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.ant</groupId>
+                                <artifactId>ant-nodeps</artifactId>
+                                <version>1.8.1</version>
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <execution>
+                                <id>osx-appbundle</id>
+                                <phase>pre-integration-test</phase>
+                                <configuration>
+                                    <target>
+                                        <mkdir dir="${project.build.directory}/${project.build.finalName}-osx" />
+                                        <copy todir="${project.build.directory}/${project.build.finalName}-osx">
+                                            <fileset dir="${basedir}/../forge-gui/" includes="LICENSE.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/" includes="README.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/" includes="CHANGES.txt" />
+                                        </copy>
+                                        <taskdef name="bundleapp" classpath="${basedir}/../forge-gui/${configSourceDirectory}/appbundler-1.0-custom.jar" classname="com.oracle.appbundler.AppBundlerTask" />
+                                        <bundleapp outputdirectory="${project.build.directory}/${project.build.finalName}-osx" name="${project.name}" displayname="${project.name}" shortversion="${project.version}" identifier="forge.view.Main" icon="${basedir}/${configSourceDirectory}/Forge.icns" applicationCategory="public.app-category.games" mainclassname="forge.view.Main">
+                                            <classpath file="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar" />
+                                            <classpath file="${basedir}/../forge-gui/forge.profile.properties.example" />
+                                            <option value="-Dapple.laf.useScreenMenuBar=true" />
+                                            <option value="-Dcom.apple.macos.use-file-dialog-packages=true" />
+                                            <option value="-Dcom.apple.macos.useScreenMenuBar=true" />
+                                            <option value="-Dcom.apple.mrj.application.apple.menu.about.name=Forge" />
+                                            <option value="-Dcom.apple.smallTabs=true" />
+                                            <option value="-Xmx1024M" />
+                                            <option value="-Dapp.dir=$APP_ROOT/Contents/Resources/" />
+                                        </bundleapp>
+                                        <copy todir="${project.build.directory}/${project.build.finalName}-osx/Forge.app/Contents/Resources/res">
+                                            <fileset dir="${basedir}/../forge-gui/res" excludes="**/cardsfolder/**" />
+                                        </copy>
+                                        <mkdir dir="${project.build.directory}/${project.build.finalName}-osx/Forge.app/Contents/Resources/res/cardsfolder" />
+                                        <zip destfile="${project.build.directory}/${project.build.finalName}-osx/Forge.app/Contents/Resources/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/../forge-gui/res/cardsfolder" level="1" />
+                                        <symlink link="${project.build.directory}/${project.build.finalName}-osx/Applications" resource="/Applications" />
+                                        <exec executable="${basedir}/../forge-gui/${configSourceDirectory}/create-dmg" failonerror="false">
+                                            <arg line="--volname ${project.name}-${project.version} --background ${basedir}/../forge-gui/${configSourceDirectory}/backgroundImage.jpg --window-size 700 419 --icon-size 64 --icon ${forge.file.name} 141 283 --icon ${applications.file.name} 452 283 --icon ${changes.file.name} 645 80 --icon ${license.file.name} 645 200 --icon ${readme.file.name} 645 320 ${project.build.directory}/${project.build.finalName}.dmg ${project.build.directory}/${project.build.finalName}-osx" />
+                                        </exec>
+                                        <tar basedir="${project.build.directory}" includes="${project.build.finalName}.dmg" destfile="${project.build.directory}/${project.build.finalName}-osx.tar.bz2" compression="bzip2" />
+                                        <!--<symlink link="${project.build.directory}/${project.build.finalName}-osx/Applications" action="delete" /> -->
+                                        <exec executable="rm" failonerror="false">
+                                            <arg line="-f ${project.build.directory}/${project.build.finalName}-osx/Applications" />
+                                        </exec>
+                                    </target>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <version>1.8</version>
+                        <executions>
+                            <execution>
+                                <id>released-version</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>released-version</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>parse-version</id>
+                                <goals>
+                                    <goal>parse-version</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>attach-distribution-osx</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>attach-artifact</goal>
+                                </goals>
+                                <configuration>
+                                    <artifacts>
+                                        <artifact>
+                                            <file>${project.build.directory}/${project.build.finalName}-osx.tar.bz2
+                                            </file>
+                                            <type>tar.bz2</type>
+                                            <classifier>osx</classifier>
+                                        </artifact>
+                                    </artifacts>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+ 
+                </plugins>
+            </build>
+        </profile>
+ 
+        <profile>
+            <id>test-deploy</id>
+            <distributionManagement>
+                <repository>
+                    <id>cardforge-repo-local</id>
+                    <url>ftp://localhost/Users/dhudson/releases</url>
+                </repository>
+                <snapshotRepository>
+                    <id>cardforge-snapshot-repo-local</id>
+                    <url>ftp://localhost/Users/dhudson/snapshots</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+    </profiles>
+</project>

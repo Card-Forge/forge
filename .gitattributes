@@ -13,6 +13,7 @@ forge-ai/.settings/org.eclipse.core.resources.prefs -text
 forge-ai/.settings/org.eclipse.jdt.core.prefs -text
 forge-ai/.settings/org.eclipse.m2e.core.prefs -text
 forge-ai/pom.xml -text
+forge-ai/pom.xml.releaseBackup -text
 forge-ai/src/main/java/forge/ai/AiAttackController.java svneol=native#text/plain
 forge-ai/src/main/java/forge/ai/AiBlockController.java svneol=native#text/plain
 forge-ai/src/main/java/forge/ai/AiCardMemory.java -text
@@ -158,6 +159,7 @@ forge-core/.settings/org.eclipse.core.resources.prefs -text
 forge-core/.settings/org.eclipse.jdt.core.prefs -text
 forge-core/.settings/org.eclipse.m2e.core.prefs -text
 forge-core/pom.xml -text
+forge-core/pom.xml.releaseBackup -text
 forge-core/src/main/java/forge/CardStorageReader.java -text
 forge-core/src/main/java/forge/FTrace.java -text
 forge-core/src/main/java/forge/ImageKeys.java -text
@@ -280,6 +282,7 @@ forge-game/.settings/org.eclipse.core.resources.prefs -text
 forge-game/.settings/org.eclipse.jdt.core.prefs -text
 forge-game/.settings/org.eclipse.m2e.core.prefs -text
 forge-game/pom.xml -text
+forge-game/pom.xml.releaseBackup -text
 forge-game/src/main/java/forge/GameCommand.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/CardTraitBase.java -text
 forge-game/src/main/java/forge/game/Direction.java -text
@@ -758,6 +761,7 @@ forge-gui-desktop/.settings/org.eclipse.core.resources.prefs -text
 forge-gui-desktop/.settings/org.eclipse.jdt.core.prefs -text
 forge-gui-desktop/.settings/org.eclipse.m2e.core.prefs -text
 forge-gui-desktop/pom.xml -text
+forge-gui-desktop/pom.xml.releaseBackup -text
 forge-gui-desktop/src/main/config/Forge.icns -text
 forge-gui-desktop/src/main/config/appbundler-1.0-custom.jar -text
 forge-gui-desktop/src/main/config/backgroundImage.jpg -text
@@ -1384,6 +1388,7 @@ forge-gui/LICENSE.txt -text
 forge-gui/README.txt -text
 forge-gui/forge.profile.properties.example -text
 forge-gui/pom.xml -text
+forge-gui/pom.xml.releaseBackup -text
 forge-gui/res/ai/Default.ai -text
 forge-gui/res/ai/Reckless.ai -text
 forge-gui/res/blockdata/blocks.txt svneol=native#text/plain
@@ -17562,6 +17567,7 @@ forge-net/.settings/org.eclipse.core.resources.prefs -text
 forge-net/.settings/org.eclipse.jdt.core.prefs -text
 forge-net/.settings/org.eclipse.m2e.core.prefs -text
 forge-net/pom.xml -text
+forge-net/pom.xml.releaseBackup -text
 forge-net/src/main/java/forge/net/FServer.java -text
 forge-net/src/main/java/forge/net/IClientSocket.java -text
 forge-net/src/main/java/forge/net/IConnectionObserver.java -text
