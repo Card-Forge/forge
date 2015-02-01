@@ -237,8 +237,6 @@ forge-core/src/main/java/forge/util/BinaryUtil.java -text
 forge-core/src/main/java/forge/util/BuildInfo.java -text
 forge-core/src/main/java/forge/util/CollectionSuppliers.java -text
 forge-core/src/main/java/forge/util/ComparableOp.java -text
-forge-core/src/main/java/forge/util/FCollection.java -text
-forge-core/src/main/java/forge/util/FCollectionView.java -text
 forge-core/src/main/java/forge/util/FileSection.java -text
 forge-core/src/main/java/forge/util/FileSectionManual.java -text
 forge-core/src/main/java/forge/util/FileUtil.java svneol=native#text/plain
@@ -265,7 +263,6 @@ forge-core/src/main/java/forge/util/maps/HashMapOfLists.java -text
 forge-core/src/main/java/forge/util/maps/LinkedHashMapToAmount.java -text
 forge-core/src/main/java/forge/util/maps/MapOfLists.java -text
 forge-core/src/main/java/forge/util/maps/MapToAmount.java -text
-forge-core/src/main/java/forge/util/maps/MapToAmountUtil.java -text
 forge-core/src/main/java/forge/util/maps/package-info.java -text
 forge-core/src/main/java/forge/util/storage/IStorage.java -text
 forge-core/src/main/java/forge/util/storage/StorageBase.java -text
@@ -717,6 +714,9 @@ forge-game/src/main/java/forge/trackable/TrackableSerializer.java -text
 forge-game/src/main/java/forge/trackable/TrackableTypes.java -text
 forge-game/src/main/java/forge/trackable/Tracker.java -text
 forge-game/src/main/java/forge/util/Expressions.java -text
+forge-game/src/main/java/forge/util/FCollection.java -text
+forge-game/src/main/java/forge/util/FCollectionView.java -text
+forge-game/src/main/java/forge/util/MapToAmountUtil.java -text
 forge-game/src/main/java/forge/util/MessageUtil.java -text
 forge-game/src/test/java/forge/game/mana/ManaCostBeingPaidTest.java -text
 forge-gui-android/.classpath -text

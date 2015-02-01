@@ -1,4 +1,4 @@
-package forge.util.maps;
+package forge.util;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -10,8 +10,9 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Lists;
 
-import forge.util.FCollection;
-import forge.util.FCollectionView;
+import forge.util.maps.LinkedHashMapToAmount;
+import forge.util.maps.MapToAmount;
+
 
 public final class MapToAmountUtil {
 

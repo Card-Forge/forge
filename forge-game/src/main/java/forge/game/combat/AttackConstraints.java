@@ -33,9 +33,9 @@ import forge.game.card.CounterType;
 import forge.game.zone.ZoneType;
 import forge.util.FCollection;
 import forge.util.FCollectionView;
+import forge.util.MapToAmountUtil;
 import forge.util.maps.LinkedHashMapToAmount;
 import forge.util.maps.MapToAmount;
-import forge.util.maps.MapToAmountUtil;
 
 public class AttackConstraints {
 

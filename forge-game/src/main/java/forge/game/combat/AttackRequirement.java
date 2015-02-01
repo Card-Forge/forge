@@ -15,9 +15,9 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.FCollectionView;
+import forge.util.MapToAmountUtil;
 import forge.util.maps.LinkedHashMapToAmount;
 import forge.util.maps.MapToAmount;
-import forge.util.maps.MapToAmountUtil;
 
 public class AttackRequirement {
 
