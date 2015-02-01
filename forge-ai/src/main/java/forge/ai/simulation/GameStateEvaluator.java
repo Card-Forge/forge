@@ -3,6 +3,7 @@ package forge.ai.simulation;
 import forge.ai.ComputerUtilCard;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -27,7 +28,14 @@ public class GameStateEvaluator {
         GameSimulator.debugPrint("Their cards in hand: " + theirCards);
         score += 3 * myCards - 3 * theirCards;
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
-            int value = evalCard(c);
+            int value;
+            // Simply way to have the AI hold-off on playing creatures in MAIN1 if they give no other benefits,
+            // so that mana is saved for other effects.
+            if (c.isSick() && c.getController() == aiPlayer && game.getPhaseHandler().getPhase() == PhaseType.MAIN1) {
+                value = 0;
+            } else {
+                value = evalCard(c);
+            }
             String str = c.getName();
             if (c.isCreature()) {
                 str += " " + c.getNetPower() + "/" + c.getNetToughness();

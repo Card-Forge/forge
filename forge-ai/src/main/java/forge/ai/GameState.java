@@ -260,6 +260,7 @@ public abstract class GameState {
             } else {
                 c = Card.fromPaperCard(getPaperCard(cardinfo[0]), player);
             }
+            c.setSickness(false);
 
             boolean hasSetCurSet = false;
             for (final String info : cardinfo) {

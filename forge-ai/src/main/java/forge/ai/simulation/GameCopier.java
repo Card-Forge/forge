@@ -91,6 +91,7 @@ public class GameCopier {
         }
         for (Card card : origGame.getCardsIn(ZoneType.Battlefield)) {
             Card otherCard = cardMap.get(card);
+            otherCard.setSickness(card.hasSickness());
             if (card.isEnchanting()) {
                 otherCard.setEnchanting(cardMap.get(card.getEnchanting()));
             }
@@ -147,9 +148,6 @@ public class GameCopier {
             newCard.setExtrinsicKeyword((ArrayList<String>) c.getExtrinsicKeyword().clone());
             if (c.isTapped()) {
                 newCard.setTapped(true);
-            }
-            if (c.isSick()) {
-                newCard.setSickness(true);
             }
             if (c.isFaceDown()) {
                 newCard.setState(CardStateName.FaceDown, true);

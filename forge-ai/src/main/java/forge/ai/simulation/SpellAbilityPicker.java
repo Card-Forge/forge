@@ -11,7 +11,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
 
 public class SpellAbilityPicker {
-    private static boolean USE_SIMULATION = false;
+    private static boolean USE_SIMULATION = true;
     private Game game;
     private Player player;
 
@@ -68,9 +68,11 @@ public class SpellAbilityPicker {
 
     private AiPlayDecision canPlayAndPayForSim(final SpellAbility sa) {
         if (!sa.canPlay()) {
+            System.out.println("cant2");
             return AiPlayDecision.CantPlaySa;
         }
         if (sa.getConditions() != null && !sa.getConditions().areMet(sa)) {
+            System.out.println("cant2");
             return AiPlayDecision.CantPlaySa;
         }
 
