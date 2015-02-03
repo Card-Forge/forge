@@ -23,6 +23,8 @@ import forge.model.FModel;
 import junit.framework.TestCase;
 
 public class GameSimulatorTest extends TestCase {
+    private static boolean initialized = false;
+    
     private Game initAndCreateGame() {
         List<RegisteredPlayer> players = Lists.newArrayList();
         Deck d1 = new Deck();
@@ -32,8 +34,11 @@ public class GameSimulatorTest extends TestCase {
         Match match = new Match(rules, players);
         Game game = new Game(players, rules, match);
 
-        GuiBase.setInterface(new GuiDesktop());
-        FModel.initialize(null);
+        if (!initialized) {
+            GuiBase.setInterface(new GuiDesktop());
+            FModel.initialize(null);
+            initialized = true;
+        }
         return game;
     }
  
@@ -97,4 +102,32 @@ public class GameSimulatorTest extends TestCase {
         assertEquals(1, warriorToken.getCurrentToughness());
     }
 
+    public void DISABLED_testStaticAbilities() {
+        String sliverCardName = "Sidewinder Sliver";
+        String heraldCardName = "Herald of Anafenza";
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Card sliver = addCard(sliverCardName, p);
+        Card herald = addCard(heraldCardName, p);
+        addCard("Plains", p);
+        addCard("Plains", p);
+        addCard("Plains", p);
+        herald.setSickness(false);
+        sliver.setSickness(false);
+        
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        assertEquals(1, sliver.getAmountOfKeyword("Flanking"));
+
+        SpellAbility outlastSA = findSAWithPrefix(herald, "Outlast");
+        assertNotNull(outlastSA);
+
+        GameSimulator sim = new GameSimulator(game);
+        int score = sim.simulateSpellAbility(outlastSA);
+        assertTrue(score >  0);
+        Game simGame = sim.getSimulatedGameState();
+        Card sliverCopy = findCardWithName(simGame, sliverCardName);
+        assertEquals(1, sliverCopy.getAmountOfKeyword("Flanking"));
+    }
 }
