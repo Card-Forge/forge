@@ -152,27 +152,7 @@ public class GameSimulator {
             System.err.println("Stack empty: " + sa);
             return Integer.MIN_VALUE;
         }
-        // TODO: This needs to set an AI controller for all opponents, in case of multiplayer.
-        opponent.runWithController(new Runnable() {
-            @Override
-            public void run() {
-                final Set<Card> allAffectedCards = new HashSet<Card>();
-                simGame.getStack().addAllTriggeredAbilitiesToStack();
-                do {
-                    debugPrint("Resolving:" + simGame.getStack().peekAbility());
-                    // Resolve the top effect on the stack.
-                    simGame.getStack().resolveStack();
-                    // Evaluate state based effects as a result of resolving stack.
-                    // Note: Needs to happen after resolve stack rather than at the
-                    // top of the loop to ensure state effects are evaluated after the
-                    // last resolved effect
-                    simGame.getAction().checkStateEffects(false, allAffectedCards);
-                    // Add any triggers as a result of resolving the effect.
-                    simGame.getStack().addAllTriggeredAbilitiesToStack();
-                    // Continue until stack is empty.
-                } while (!simGame.getStack().isEmpty() && !simGame.isGameOver());
-            }
-        }, new PlayerControllerAi(simGame, opponent, opponent.getLobbyPlayer()));
+        resolveStack(simGame, opponent);
 
         // TODO: If this is during combat, before blockers are declared,
         // we should simulate how combat will resolve and evaluate that
@@ -188,6 +168,30 @@ public class GameSimulator {
         sa.setActivatingPlayer(origActivatingPlayer);
 
         return score;
+    }
+
+    private static void resolveStack(final Game game, final Player opponent) {
+        // TODO: This needs to set an AI controller for all opponents, in case of multiplayer.
+        opponent.runWithController(new Runnable() {
+            @Override
+            public void run() {
+                final Set<Card> allAffectedCards = new HashSet<Card>();
+                game.getStack().addAllTriggeredAbilitiesToStack();
+                do {
+                    debugPrint("Resolving:" + game.getStack().peekAbility());
+                    // Resolve the top effect on the stack.
+                    game.getStack().resolveStack();
+                    // Evaluate state based effects as a result of resolving stack.
+                    // Note: Needs to happen after resolve stack rather than at the
+                    // top of the loop to ensure state effects are evaluated after the
+                    // last resolved effect
+                    game.getAction().checkStateEffects(false, allAffectedCards);
+                    // Add any triggers as a result of resolving the effect.
+                    game.getStack().addAllTriggeredAbilitiesToStack();
+                    // Continue until stack is empty.
+                } while (!game.getStack().isEmpty() && !game.isGameOver());
+            }
+        }, new PlayerControllerAi(game, opponent, opponent.getLobbyPlayer()));
     }
     
     public Game getSimulatedGameState() {

@@ -11,8 +11,10 @@ import forge.ai.LobbyPlayerAi;
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameObject;
+import forge.game.GameObjectMap;
 import forge.game.GameRules;
 import forge.game.Match;
+import forge.game.StaticEffect;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
@@ -34,6 +36,7 @@ public class GameCopier {
     private Game origGame;
     private BiMap<Player, Player> playerMap = HashBiMap.create();
     private BiMap<Card, Card> cardMap = HashBiMap.create();
+    private CopiedGameObjectMap gameObjectMap;
 
     public GameCopier(Game origGame) {
         this.origGame = origGame;
@@ -67,6 +70,13 @@ public class GameCopier {
         copyGameState(newGame);
         
         newGame.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        
+        // Undo effects first before calculating them below, to avoid them applying twice.
+        gameObjectMap = new CopiedGameObjectMap(newGame);
+        for (StaticEffect effect : origGame.getStaticEffects().getEffects()) {
+            effect.removeMapped(gameObjectMap);
+        }
+
         newGame.getAction().checkStateEffects(true); //ensure state based effects and triggers are updated
         
         newGame.getTriggerHandler().resetActiveTriggers();
@@ -91,6 +101,7 @@ public class GameCopier {
         }
         for (Card card : origGame.getCardsIn(ZoneType.Battlefield)) {
             Card otherCard = cardMap.get(card);
+            otherCard.setTimestamp(card.getTimestamp());
             otherCard.setSickness(card.hasSickness());
             if (card.isEnchanting()) {
                 otherCard.setEnchanting(cardMap.get(card.getEnchanting()));
@@ -137,8 +148,11 @@ public class GameCopier {
             // TODO: Controllers' list with timestamps should be copied.
             zoneOwner = playerMap.get(c.getController());
             newCard.setController(zoneOwner, 0);
+            
             newCard.addTempPowerBoost(c.getTempPowerBoost());
+            newCard.setSemiPermanentPowerBoost(c.getSemiPermanentPowerBoost());
             newCard.addTempToughnessBoost(c.getTempToughnessBoost());
+            newCard.setSemiPermanentToughnessBoost(c.getSemiPermanentToughnessBoost());
             
             newCard.setChangedCardTypes(c.getChangedCardTypes());
             newCard.setChangedCardKeywords(c.getChangedCardKeywords());
@@ -182,7 +196,24 @@ public class GameCopier {
         zoneOwner.getZone(zone).add(newCard);
     }
 
-    
+    private class CopiedGameObjectMap extends GameObjectMap {
+        private Game copiedGame;
+
+        public CopiedGameObjectMap(Game copiedGame) {
+            this.copiedGame = copiedGame;
+        }
+
+        @Override
+        public Game getGame() {
+            return copiedGame;
+        }
+
+        @Override
+        public GameObject map(GameObject o) {
+            return find(o);
+        }
+    }
+ 
     public GameObject find(GameObject o) {
         GameObject result = cardMap.get(o);
         if (result != null)

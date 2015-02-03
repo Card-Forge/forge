@@ -102,23 +102,27 @@ public class GameSimulatorTest extends TestCase {
         assertEquals(1, warriorToken.getCurrentToughness());
     }
 
-    public void DISABLED_testStaticAbilities() {
+    public void testStaticAbilities() {
         String sliverCardName = "Sidewinder Sliver";
         String heraldCardName = "Herald of Anafenza";
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         Card sliver = addCard(sliverCardName, p);
-        Card herald = addCard(heraldCardName, p);
-        addCard("Plains", p);
-        addCard("Plains", p);
-        addCard("Plains", p);
-        herald.setSickness(false);
         sliver.setSickness(false);
+        Card herald = addCard(heraldCardName, p);
+        herald.setSickness(false);
+        addCard("Plains", p);
+        addCard("Plains", p);
+        addCard("Plains", p);
+        addCard("Spear of Heliod", p);
         
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
+        game.getAction().checkStateEffects(true);
 
         assertEquals(1, sliver.getAmountOfKeyword("Flanking"));
+        assertEquals(2, sliver.getNetPower());
+        assertEquals(2, sliver.getNetToughness());
 
         SpellAbility outlastSA = findSAWithPrefix(herald, "Outlast");
         assertNotNull(outlastSA);
@@ -129,5 +133,7 @@ public class GameSimulatorTest extends TestCase {
         Game simGame = sim.getSimulatedGameState();
         Card sliverCopy = findCardWithName(simGame, sliverCardName);
         assertEquals(1, sliverCopy.getAmountOfKeyword("Flanking"));
+        assertEquals(2, sliver.getNetPower());
+        assertEquals(2, sliver.getNetToughness());
     }
 }

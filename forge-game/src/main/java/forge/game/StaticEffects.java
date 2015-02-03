@@ -77,4 +77,7 @@ public class StaticEffects {
         return newEffect;
     }
 
+    public Iterable<StaticEffect> getEffects() {
+        return staticEffects.values();
+    }
 }

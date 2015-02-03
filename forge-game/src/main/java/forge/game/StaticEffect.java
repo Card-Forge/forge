@@ -83,6 +83,32 @@ public class StaticEffect {
         this.source = source;
     }
 
+    private StaticEffect makeMappedCopy(GameObjectMap map) {
+        StaticEffect copy = new StaticEffect(map.map(this.source));
+        copy.keywordNumber = this.keywordNumber;
+        copy.affectedCards = map.mapCollection(this.affectedCards);
+        copy.affectedPlayers  = map.mapList(this.affectedPlayers);
+        copy.xValue = this.xValue;
+        copy.yValue = this.yValue;
+        copy.timestamp = this.timestamp;
+        copy.xValueMap = this.xValueMap;
+        copy.chosenType = this.chosenType;
+        copy.mapParams = this.mapParams;
+        map.fillKeyedMap(copy.originalPT, this.originalPT);
+        copy.overwriteTypes = this.overwriteTypes;
+        copy.keepSupertype = this.keepSupertype;
+        copy.removeSubTypes = this.removeSubTypes;
+        map.fillKeyedMap(this.types, this.types);
+        map.fillKeyedMap(this.originalTypes, this.originalTypes);
+        copy.overwriteKeywords = this.overwriteKeywords;
+        map.fillKeyedMap(this.originalKeywords, this.originalKeywords);
+        copy.overwriteAbilities = this.overwriteAbilities;
+        map.fillKeyedMap(this.originalAbilities, this.originalAbilities);
+        copy.colorDesc = this.colorDesc;
+        copy.overwriteColors = this.overwriteColors;
+        return copy;
+    }
+
     /**
      * setTimestamp TODO Write javadoc for this method.
      * 
@@ -842,8 +868,8 @@ public class StaticEffect {
     final CardCollectionView remove() {
         final CardCollectionView affectedCards = getAffectedCards();
         final List<Player> affectedPlayers = getAffectedPlayers();
-        final Map<String, String> params = getParams();
         final Player controller = getSource().getController();
+        final Map<String, String> params = getParams();
 
         String changeColorWordsTo = null;
 
@@ -1024,6 +1050,10 @@ public class StaticEffect {
             }
         }
         return affectedCards;
+    }
+
+    public void removeMapped(GameObjectMap map) {
+        makeMappedCopy(map).remove();
     }
 
 } // end class StaticEffect

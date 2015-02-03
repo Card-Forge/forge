@@ -297,6 +297,7 @@ forge-game/src/main/java/forge/game/GameLogEntry.java -text
 forge-game/src/main/java/forge/game/GameLogEntryType.java -text
 forge-game/src/main/java/forge/game/GameLogFormatter.java -text
 forge-game/src/main/java/forge/game/GameObject.java -text
+forge-game/src/main/java/forge/game/GameObjectMap.java -text
 forge-game/src/main/java/forge/game/GameOutcome.java -text
 forge-game/src/main/java/forge/game/GameRules.java -text
 forge-game/src/main/java/forge/game/GameStage.java -text
