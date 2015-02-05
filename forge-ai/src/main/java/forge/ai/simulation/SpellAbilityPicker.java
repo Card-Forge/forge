@@ -65,9 +65,16 @@ public class SpellAbilityPicker {
             }
         }
         
-        System.out.println("BEST: " + bestSa + " SCORE: " + bestSaValue);
+        String saString = "N/A";
+        if (bestSa != null) {
+            saString += bestSa.toString();
+            if (bestSa.usesTargeting()) {
+                saString += " (targets: " + bestSa.getTargets().getTargetedString() + ")";
+            }
+        }
+        System.out.println("BEST: " + saString + " SCORE: " + bestSaValue);
         return bestSa;
-    }     
+    }
 
     private boolean shouldWaitForLater(final SpellAbility sa) {
         final PhaseType phase = game.getPhaseHandler().getPhase();
