@@ -109,8 +109,7 @@ public class GameSimulator {
         }
         return null;
     }
-    
-    
+
     public int simulateSpellAbility(SpellAbility origSa) {
         // TODO: optimize: prune identical SA (e.g. two of the same card in hand)
 
@@ -123,7 +122,6 @@ public class GameSimulator {
             return Integer.MIN_VALUE;
         }
 
-        Player origActivatingPlayer = sa.getActivatingPlayer();
         sa.setActivatingPlayer(aiPlayer);
         if (origSa.usesTargeting()) {
             for (GameObject o : origSa.getTargets().getTargets()) {
@@ -165,7 +163,6 @@ public class GameSimulator {
         debugLines = null;
         debugPrint = true;
         printDiff(origLines, simLines);
-        sa.setActivatingPlayer(origActivatingPlayer);
 
         return score;
     }
