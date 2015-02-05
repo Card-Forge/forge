@@ -107,7 +107,7 @@ public class GameCopier {
                 otherCard.setEnchanting(cardMap.get(card.getEnchanting()));
             }
             if (card.isEquipping()) {
-                otherCard.setEquipping(cardMap.get(card.getEquipping()));
+                otherCard.equipCard(cardMap.get(card.getEquipping()));
             }
             if (card.isFortifying()) {
                 otherCard.setFortifying(cardMap.get(card.getFortifying()));

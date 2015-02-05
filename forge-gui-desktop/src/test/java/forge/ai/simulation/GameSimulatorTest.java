@@ -136,4 +136,40 @@ public class GameSimulatorTest extends TestCase {
         assertEquals(2, sliver.getNetPower());
         assertEquals(2, sliver.getNetToughness());
     }
+
+    public void testEquippedAbilities() {
+        String bearCardName = "Runeclaw Bear";
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Card bear = addCard(bearCardName, p);
+        bear.setSickness(false);
+        Card cloak = addCard("Whispersilk Cloak", p);
+        cloak.equipCard(bear);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+        assertEquals(1, bear.getAmountOfKeyword("Unblockable"));
+
+        GameSimulator sim = new GameSimulator(game);
+        Game simGame = sim.getSimulatedGameState();
+        Card bearCopy = findCardWithName(simGame, bearCardName);
+        assertEquals(1, bearCopy.getAmountOfKeyword("Unblockable"));
+    }
+
+    public void testEnchantedAbilities() {
+        String bearCardName = "Runeclaw Bear";
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Card bear = addCard(bearCardName, p);
+        bear.setSickness(false);
+        Card lifelink = addCard("Lifelink", p);
+        lifelink.enchantEntity(bear);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+        assertEquals(1, bear.getAmountOfKeyword("Lifelink"));
+
+        GameSimulator sim = new GameSimulator(game);
+        Game simGame = sim.getSimulatedGameState();
+        Card bearCopy = findCardWithName(simGame, bearCardName);
+        assertEquals(1, bearCopy.getAmountOfKeyword("Lifelink"));
+    }
 }
