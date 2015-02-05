@@ -1,13 +1,16 @@
 package forge.ai.simulation;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilCost;
 import forge.game.Game;
 import forge.game.ability.ApiType;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityCondition;
 import forge.game.spellability.TargetChoices;
 
 public class SpellAbilityPicker {
@@ -66,23 +69,46 @@ public class SpellAbilityPicker {
         return bestSa;
     }     
 
+    private boolean shouldWaitForLater(final SpellAbility sa) {
+        final PhaseType phase = game.getPhaseHandler().getPhase();
+        final boolean isEarlyPhase = phase == PhaseType.UNTAP || phase == PhaseType.UPKEEP || phase == PhaseType.DRAW;
+
+        // Until the AI can be made smarter, hold off playing instants until MAIN1,
+        // so that they can be compared to sorcery-speed spells. Else, the AI is too
+        // eager to play them.
+        if (isEarlyPhase) {
+            // Only hold off if this spell can actually be played in MAIN1.
+            final SpellAbilityCondition conditions = sa.getConditions();
+            if (conditions == null) {
+                return true;
+            }
+            List<PhaseType> phases = conditions.getPhases();
+            if (phases.isEmpty() || phases.contains(PhaseType.MAIN1)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
     private AiPlayDecision canPlayAndPayForSim(final SpellAbility sa) {
         if (!sa.canPlay()) {
-            System.out.println("cant2");
             return AiPlayDecision.CantPlaySa;
         }
-        if (sa.getConditions() != null && !sa.getConditions().areMet(sa)) {
-            System.out.println("cant2");
+        SpellAbilityCondition conditions = sa.getConditions();
+        if (conditions != null && !conditions.areMet(sa)) {
             return AiPlayDecision.CantPlaySa;
         }
 
-        /*
-        AiPlayDecision op = canPlaySa(sa);
-        if (op != AiPlayDecision.WillPlay) {
-            return op;
+        if (!ComputerUtilCost.canPayCost(sa, player)) {
+            return AiPlayDecision.CantAfford;
         }
-        */
-        return ComputerUtilCost.canPayCost(sa, player) ? AiPlayDecision.WillPlay : AiPlayDecision.CantAfford;
+
+        if (shouldWaitForLater(sa)) {
+            return AiPlayDecision.AnotherTime;
+        }
+
+        return AiPlayDecision.WillPlay;
     }
 
     private int evaluateSa(SpellAbility sa) {
