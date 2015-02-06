@@ -26,6 +26,11 @@ public class GameStateEvaluator {
         }
         GameSimulator.debugPrint("My cards in hand: " + myCards);
         GameSimulator.debugPrint("Their cards in hand: " + theirCards);
+        if (myCards > aiPlayer.getMaxHandSize()) {
+            // Count excess cards for less.
+            score += myCards - aiPlayer.getMaxHandSize();
+            myCards = aiPlayer.getMaxHandSize();
+        }
         score += 3 * myCards - 3 * theirCards;
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
             int value;
