@@ -94,6 +94,7 @@ public class GameCopier {
     }
 
     private void copyGameState(Game newGame) {
+        newGame.setAge(origGame.getAge());
         for (ZoneType zone : ZONES) {
             for (Card card : origGame.getCardsIn(zone)) {
                 addCard(newGame, zone, card);

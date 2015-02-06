@@ -10,6 +10,7 @@ import forge.ai.LobbyPlayerAi;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameRules;
+import forge.game.GameStage;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.card.Card;
@@ -33,6 +34,7 @@ public class GameSimulatorTest extends TestCase {
         GameRules rules = new GameRules(GameType.Constructed);
         Match match = new Match(rules, players);
         Game game = new Game(players, rules, match);
+        game.setAge(GameStage.Play);
 
         if (!initialized) {
             GuiBase.setInterface(new GuiDesktop());
@@ -171,5 +173,31 @@ public class GameSimulatorTest extends TestCase {
         Game simGame = sim.getSimulatedGameState();
         Card bearCopy = findCardWithName(simGame, bearCardName);
         assertEquals(1, bearCopy.getAmountOfKeyword("Lifelink"));
+    }
+    
+    public void testEtbTriggers() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        addCard("Black Knight", p);
+        for (int i = 0; i < 5; i++)
+            addCard("Swamp", p);
+
+        String merchantCardName = "Gray Merchant of Asphodel";
+        IPaperCard paperCard = FModel.getMagicDb().getCommonCards().getCard(merchantCardName);
+        Card c = Card.fromPaperCard(paperCard, p);
+        p.getZone(ZoneType.Hand).add(c);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility playMerchantSa = c.getSpellAbilities().get(0);
+        playMerchantSa.setActivatingPlayer(p);
+
+        GameSimulator sim = new GameSimulator(game);
+        int origScore = sim.getScoreForOrigGame();
+        int score = sim.simulateSpellAbility(playMerchantSa);
+        assertTrue(String.format("score=%d vs. origScore=%d",  score, origScore), score > origScore);
+        Game simGame = sim.getSimulatedGameState();
+        assertEquals(24, simGame.getPlayers().get(1).getLife());
+        assertEquals(16, simGame.getPlayers().get(0).getLife());
     }
 }
