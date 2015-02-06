@@ -14,7 +14,6 @@ import forge.game.spellability.SpellAbilityCondition;
 import forge.game.spellability.TargetChoices;
 
 public class SpellAbilityPicker {
-    private static boolean USE_SIMULATION = false;
     private Game game;
     private Player player;
 
@@ -24,9 +23,6 @@ public class SpellAbilityPicker {
     }
 
     public SpellAbility chooseSpellAbilityToPlay(final ArrayList<SpellAbility> originalAndAltCostAbilities, boolean skipCounter) {
-        if (!USE_SIMULATION)
-            return null;
-
         System.out.println("---- choose ability  (phase = " +  game.getPhaseHandler().getPhase() + ")");
 
         ArrayList<SpellAbility> candidateSAs = new ArrayList<>();
@@ -67,7 +63,7 @@ public class SpellAbilityPicker {
         
         String saString = "N/A";
         if (bestSa != null) {
-            saString += bestSa.toString();
+            saString = bestSa.toString();
             if (bestSa.usesTargeting()) {
                 saString += " (targets: " + bestSa.getTargets().getTargetedString() + ")";
             }

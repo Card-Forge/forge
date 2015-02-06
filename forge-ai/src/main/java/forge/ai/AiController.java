@@ -100,6 +100,8 @@ import forge.util.MyRandom;
  * @version $Id$
  */
 public class AiController {
+    private static boolean USE_SIMULATION = false;
+
     private final Player player;
     private final Game game;
     private final AiCardMemory memory;
@@ -1211,9 +1213,9 @@ public class AiController {
         if (all == null || all.isEmpty())
             return null;
         
-        SpellAbility simSa = simPicker.chooseSpellAbilityToPlay(getOriginalAndAltCostAbilities(all), skipCounter);
-        if (simSa != null)
-            return simSa;
+        if (USE_SIMULATION) {
+            return simPicker.chooseSpellAbilityToPlay(getOriginalAndAltCostAbilities(all), skipCounter);
+        }
         
         Collections.sort(all, saComparator); // put best spells first
         
