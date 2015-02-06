@@ -2303,11 +2303,9 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Puts my currently active planes, if any, at the bottom of my planar deck.
      */
     public void leaveCurrentPlane() {
-        for (final Card plane : currentPlanes) {
-            //Run PlaneswalkedFrom triggers here.
-            final Map<String, Object> runParams = new ImmutableMap.Builder<String, Object>().put("Card", plane).build();
-            game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedFrom, runParams,false);
-        }
+
+        final Map<String, Object> runParams = new ImmutableMap.Builder<String, Object>().put("Cards", new CardCollection(currentPlanes)).build();
+        game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedFrom, runParams,false);
 
         for (final Card plane : currentPlanes) {
             //game.getZoneOf(plane).remove(plane);
