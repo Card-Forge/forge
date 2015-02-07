@@ -36,7 +36,6 @@ public class GameSimulator {
         aiPlayer = simGame.getPlayers().get(1);
         opponent = simGame.getPlayers().get(0);
         eval = new GameStateEvaluator();
-        eval.setDebugging(true);
         
         origLines = new ArrayList<String>();
         debugLines = origLines;
@@ -46,10 +45,15 @@ public class GameSimulator {
         Player origAiPlayer = origGame.getPlayers().get(1);
         origScore = eval.getScoreForGameState(origGame, origAiPlayer);
 
+        eval.setDebugging(true);
         ArrayList<String> simLines = new ArrayList<String>();
         debugLines = simLines;
         int simScore = eval.getScoreForGameState(simGame, aiPlayer);
         if (simScore != origScore) {
+            // Re-eval orig with debug printing.
+            origLines = new ArrayList<String>();
+            debugLines = origLines;
+            eval.getScoreForGameState(origGame, origAiPlayer);
             // Print debug info.
             printDiff(origLines, simLines);
             throw new RuntimeException("Game copy error");
