@@ -377,7 +377,7 @@ public class ComputerUtilCard {
         return evaluateCreatureDebug(c, null);
     }
     private static int addValue(int value, Function<String, Void> out, String text) {
-        if (out != null) {
+        if (out != null && value != 0) {
             out.apply(value + " via " + text);
         }
         return value;
