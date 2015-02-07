@@ -29,8 +29,8 @@ public class GameSimulatorTest extends TestCase {
     private Game initAndCreateGame() {
         List<RegisteredPlayer> players = Lists.newArrayList();
         Deck d1 = new Deck();
-        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p2")));
-        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p1")));
+        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p2", null)));
+        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p1", null)));
         GameRules rules = new GameRules(GameType.Constructed);
         Match match = new Match(rules, players);
         Game game = new Game(players, rules, match);

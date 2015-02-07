@@ -1,5 +1,7 @@
 package forge.player;
 
+import java.util.Map;
+
 import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.ai.AiProfileUtil;
@@ -46,7 +48,10 @@ public final class GamePlayerUtil {
         return createAiPlayer(name, avatarCount == 0 ? 0 : MyRandom.getRandom().nextInt(avatarCount));
     }
     public final static LobbyPlayer createAiPlayer(String name, int avatarIndex) {
-        LobbyPlayerAi player = new LobbyPlayerAi(name);
+        return createAiPlayer(name, avatarIndex, null);
+    }
+    public final static LobbyPlayer createAiPlayer(String name, int avatarIndex, Map<String, String> options) {
+        LobbyPlayerAi player = new LobbyPlayerAi(name, options);
 
         // TODO: implement specific AI profiles for quest mode.
         String lastProfileChosen = FModel.getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);

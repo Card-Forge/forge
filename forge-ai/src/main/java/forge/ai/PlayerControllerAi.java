@@ -74,6 +74,9 @@ public class PlayerControllerAi extends PlayerController {
         brains.allowCheatShuffle(value);
     }
     
+    public void setUseSimulation(boolean value) {
+        brains.setUseSimulation(value);
+    }
 
     public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, ITriggerEvent triggerEvent) {
         if (abilities.size() == 0) {

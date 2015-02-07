@@ -228,7 +228,7 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
         for (final int i : view.getParticipants()) {
             String name = view.getPlayerName(i);
             LobbyPlayer lobbyPlayer = view.isPlayerAI(i) 
-                    ? GamePlayerUtil.createAiPlayer(name, view.getPlayerAvatar(i)) 
+                    ? GamePlayerUtil.createAiPlayer(name, view.getPlayerAvatar(i), view.getAiOptions(i)) 
                     : GamePlayerUtil.getGuiPlayer(name, i);
             RegisteredPlayer rp = view.getDeckChooser(i).getPlayer();
 

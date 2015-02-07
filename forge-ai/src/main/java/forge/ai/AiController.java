@@ -100,22 +100,25 @@ import forge.util.MyRandom;
  * @version $Id$
  */
 public class AiController {
-    private static boolean USE_SIMULATION = false;
-
     private final Player player;
     private final Game game;
     private final AiCardMemory memory;
-    public boolean bCheatShuffle;
+    private boolean cheatShuffle;
+    private boolean useSimulation;
     private SpellAbilityPicker simPicker;
 
     public boolean canCheatShuffle() {
-        return bCheatShuffle;
+        return cheatShuffle;
     }
 
     public void allowCheatShuffle(boolean canCheatShuffle) {
-        this.bCheatShuffle = canCheatShuffle;
+        this.cheatShuffle = canCheatShuffle;
     }
 
+    public void setUseSimulation(boolean value) {
+        this.useSimulation = value;
+    }
+    
     public Game getGame() {
         return game;
     }
@@ -1213,7 +1216,7 @@ public class AiController {
         if (all == null || all.isEmpty())
             return null;
         
-        if (USE_SIMULATION) {
+        if (useSimulation) {
             return simPicker.chooseSpellAbilityToPlay(getOriginalAndAltCostAbilities(all), skipCounter);
         }
         

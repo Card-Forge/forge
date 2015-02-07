@@ -12,14 +12,18 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.Vector;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -469,6 +473,15 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         return playerPanels.get(playernum).isAi();
     }
 
+    public Map<String, String> getAiOptions(int playernum) {
+        if (playerPanels.get(playernum).isSimulatedAi()) {
+            Map<String, String> options = new HashMap<String, String>();
+            options.put("UseSimulation", "True");
+            return options;
+        }
+        return null;
+    }
+
     public int getNumPlayers() {
         return activePlayersNum;
     }
@@ -506,6 +519,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         private final FTextField txtPlayerName = new FTextField.Builder().text("Player name").build();
         private FRadioButton radioHuman;
         private FRadioButton radioAi;
+        private JCheckBoxMenuItem radioAiUseSimulation;
 
         private FComboBoxWrapper<Object> teamComboBox = new FComboBoxWrapper<Object>();
         private FComboBoxWrapper<Object> aeTeamComboBox = new FComboBoxWrapper<Object>();
@@ -559,7 +573,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             this.add(radioAi, "wrap");
 
             this.add(newLabel("Team:"), "w 40px, h 30px");
-        	populateTeamsComboBoxes();
+            populateTeamsComboBoxes();
             teamComboBox.addActionListener(teamListener);
             aeTeamComboBox.addActionListener(teamListener);
             teamComboBox.addTo(this, variantBtnConstraints + ", pushx, growx, gaptop 5px");
@@ -742,8 +756,12 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             }
         }
 
-        public Boolean isAi() {
+        public boolean isAi() {
             return radioAi.isSelected();
+        }
+        
+        public boolean isSimulatedAi() {
+            return radioAi.isSelected() && radioAiUseSimulation.isSelected();
         }
 
         public void setVanguardButtonText(String text) {
@@ -906,6 +924,10 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         private void createPlayerTypeOptions() {
             radioHuman = new FRadioButton("Human", index == 0);
             radioAi = new FRadioButton("AI", index != 0);
+            JPopupMenu menu = new  JPopupMenu();
+            radioAiUseSimulation = new JCheckBoxMenuItem("Use Simulation");
+            menu.add(radioAiUseSimulation);
+            radioAi.setComponentPopupMenu(menu);
 
             radioHuman.addMouseListener(radioMouseAdapter);
             radioAi.addMouseListener(radioMouseAdapter);
@@ -1382,15 +1404,15 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
     /** update vanguard list. */
     public void updateVanguardList(int playerIndex) {
-    	FList<Object> vgdList = getVanguardLists().get(playerIndex);
-		Object lastSelection = vgdList.getSelectedValue();
-		vgdList.setListData(isPlayerAI(playerIndex) ? aiListData : humanListData);
-		if (null != lastSelection) {
-			vgdList.setSelectedValue(lastSelection, true);
-		}
+        FList<Object> vgdList = getVanguardLists().get(playerIndex);
+        Object lastSelection = vgdList.getSelectedValue();
+        vgdList.setListData(isPlayerAI(playerIndex) ? aiListData : humanListData);
+        if (null != lastSelection) {
+            vgdList.setSelectedValue(lastSelection, true);
+        }
 
-		if (-1 == vgdList.getSelectedIndex()) {
-			vgdList.setSelectedIndex(0);
-		}
+        if (-1 == vgdList.getSelectedIndex()) {
+            vgdList.setSelectedIndex(0);
+        }
     }
 }

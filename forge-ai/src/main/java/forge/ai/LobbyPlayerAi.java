@@ -1,5 +1,7 @@
 package forge.ai;
 
+import java.util.Map;
+
 import forge.LobbyPlayer;
 import forge.game.Game;
 import forge.game.player.IGameEntitiesFactory;
@@ -7,18 +9,22 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController;
 
 public class LobbyPlayerAi extends LobbyPlayer implements IGameEntitiesFactory {
-    public LobbyPlayerAi(String name) {
-        super(name);
-    }
 
     private String aiProfile = "";
     private boolean rotateProfileEachGame;
     private boolean allowCheatShuffle;
+    private boolean useSimulation;
+    
+    public LobbyPlayerAi(String name, Map<String, String> options) {
+        super(name);
+        if (options != null && "True".equals(options.get("UseSimulation"))) {
+            this.useSimulation = true;
+        }
+    }
     
     public boolean isAllowCheatShuffle() {
         return allowCheatShuffle;
     }
-
 
     public void setAllowCheatShuffle(boolean allowCheatShuffle) {
         this.allowCheatShuffle = allowCheatShuffle;
@@ -38,6 +44,7 @@ public class LobbyPlayerAi extends LobbyPlayer implements IGameEntitiesFactory {
 
     private PlayerControllerAi createControllerFor(Player ai) {
         PlayerControllerAi result = new PlayerControllerAi(ai.getGame(), ai, this);
+        result.setUseSimulation(useSimulation);
         result.allowCheatShuffle(allowCheatShuffle);
         return result;
     }
