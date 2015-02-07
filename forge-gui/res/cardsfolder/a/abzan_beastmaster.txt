@@ -6,5 +6,5 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigToughDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1 | ConditionPresent$ Creature | ConditionCompare$ GE1 | ConditionCheckSVar$ YourTough | ConditionSVarCompare$ GEOppsTough | References$ YourTough,OppsTough
 SVar:YourTough:Count$GreatestToughness_Creature.YouCtrl
 SVar:OppsTough:Count$GreatestToughness_Creature.YouDontCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/triumph_of_ferocity.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/abzan_beastmaster.jpg
 Oracle:At the beginning of your upkeep, draw a card if you control the creature with the greatest toughness or tied for the greatest toughness.
