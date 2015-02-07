@@ -167,7 +167,7 @@ public class CreatureEvaluator {
     
         for (final SpellAbility sa : c.getSpellAbilities()) {
             if (sa.isAbility()) {
-                value += addValue(10, "sa"+sa);
+                value += addValue(10, "sa: " + sa);
             }
         }
         if (!c.getManaAbilities().isEmpty()) {
