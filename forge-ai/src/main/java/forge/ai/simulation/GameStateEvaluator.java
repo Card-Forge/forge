@@ -3,7 +3,6 @@ package forge.ai.simulation;
 import forge.ai.ComputerUtilCard;
 import forge.game.Game;
 import forge.game.card.Card;
-import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -33,14 +32,7 @@ public class GameStateEvaluator {
         }
         score += 3 * myCards - 3 * theirCards;
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
-            int value;
-            // Simply way to have the AI hold-off on playing creatures in MAIN1 if they give no other benefits,
-            // so that mana is saved for other effects.
-            if (c.isSick() && c.getController() == aiPlayer && game.getPhaseHandler().getPhase() == PhaseType.MAIN1) {
-                value = 0;
-            } else {
-                value = evalCard(c);
-            }
+            int value = evalCard(game, aiPlayer, c);
             String str = c.getName();
             if (c.isCreature()) {
                 str += " " + c.getNetPower() + "/" + c.getNetToughness();
@@ -73,7 +65,7 @@ public class GameStateEvaluator {
         return score;
     }
 
-    private static int evalCard(Card c) {
+    protected int evalCard(Game game, Player aiPlayer, Card c) {
         // TODO: These should be based on other considerations - e.g. in relation to opponents state.
         if (c.isCreature()) {
             return ComputerUtilCard.evaluateCreature(c);

@@ -7,6 +7,7 @@ import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilCost;
 import forge.game.Game;
 import forge.game.ability.ApiType;
+import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -52,7 +53,8 @@ public class SpellAbilityPicker {
         System.out.println("Evaluating...");
         GameSimulator simulator = new GameSimulator(game);
         // FIXME: This is wasteful, we should re-use the same simulator...
-        int bestSaValue = simulator.getScoreForOrigGame();        
+        int origGameScore = simulator.getScoreForOrigGame();
+        int bestSaValue = origGameScore;
         for (final SpellAbility sa : candidateSAs) {
             int value = evaluateSa(sa);
             if (value > bestSaValue) {
@@ -61,15 +63,41 @@ public class SpellAbilityPicker {
             }
         }
         
-        String saString = "N/A";
-        if (bestSa != null) {
-            saString = bestSa.toString();
-            if (bestSa.usesTargeting()) {
-                saString += " (targets: " + bestSa.getTargets().getTargetedString() + ")";
+        if (bestSa != null && game.getPhaseHandler().getPhase() == PhaseType.MAIN1) {
+            // To make the AI hold-off on playing creatures in MAIN1 if they give no other benefits,
+            // check the score for the bestSA while counting summon sick creatures for 0.
+            // Do it here on the best SA, rather than for all evaluations, so that if the best SA
+            // is indeed a creature spell, we don't pick something else to play now and then have
+            // no mana to play the truly best SA post-combat.
+            // TODO: This can be done more efficiently by keeping track of both scores during original
+            // evaluation.
+            GameStateEvaluator summonSickEval = new GameStateEvaluator() {
+                @Override
+                protected int evalCard(Game game, Player aiPlayer, Card c) {
+                    if (c.isSick() && c.getController() == aiPlayer) {
+                        return 0;
+                    }
+                    return super.evalCard(game, aiPlayer, c);
+                }
+            };
+            if (simulator.simulateSpellAbility(bestSa,summonSickEval) <= origGameScore) {
+                bestSa = null;
             }
         }
-        System.out.println("BEST: " + saString + " SCORE: " + bestSaValue);
+        
+        System.out.println("BEST: " + abilityToString(bestSa) + " SCORE: " + bestSaValue);
         return bestSa;
+    }
+
+    private String abilityToString(SpellAbility sa) {
+        String saString = "N/A";
+        if (sa != null) {
+            saString = sa.toString();
+            if (sa.usesTargeting()) {
+                saString += " (targets: " + sa.getTargets().getTargetedString() + ")";
+            }
+        }
+        return saString;
     }
 
     private boolean shouldWaitForLater(final SpellAbility sa) {
