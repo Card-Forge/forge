@@ -24,25 +24,21 @@ public class GameSimulator {
     private GameCopier copier;
     private Game simGame;
     private Player aiPlayer;
-    private Player opponent;
     private GameStateEvaluator eval;
     private ArrayList<String> origLines;
     private int origScore;
     
-    public GameSimulator(final Game origGame) {
+    public GameSimulator(final Game origGame, final Player origAiPlayer) {
         copier = new GameCopier(origGame);
         simGame = copier.makeCopy();
-        // TODO:
-        aiPlayer = simGame.getPlayers().get(1);
-        opponent = simGame.getPlayers().get(0);
+
+        aiPlayer = (Player) copier.find(origAiPlayer);
         eval = new GameStateEvaluator();
         
         origLines = new ArrayList<String>();
         debugLines = origLines;
 
         debugPrint = false;
-        // TODO: Make this logic more bulletproof.        
-        Player origAiPlayer = origGame.getPlayers().get(1);
         origScore = eval.getScoreForGameState(origGame, origAiPlayer);
 
         eval.setDebugging(true);
@@ -173,6 +169,14 @@ public class GameSimulator {
         if (simGame.getStack().isEmpty()) {
             System.err.println("Stack empty: " + sa);
             return Integer.MIN_VALUE;
+        }
+        // TODO: Support multiple opponents.
+        Player opponent = null;
+        for (Player p : simGame.getPlayers()) {
+            if (p != aiPlayer) {
+                opponent = p;
+                break;
+            }
         }
         resolveStack(simGame, opponent);
 

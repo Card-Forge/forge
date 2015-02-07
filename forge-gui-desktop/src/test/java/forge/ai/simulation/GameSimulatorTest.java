@@ -85,7 +85,7 @@ public class GameSimulatorTest extends TestCase {
         SpellAbility outlastSA = findSAWithPrefix(herald, "Outlast");
         assertNotNull(outlastSA);
 
-        GameSimulator sim = new GameSimulator(game);
+        GameSimulator sim = new GameSimulator(game, p);
         int score = sim.simulateSpellAbility(outlastSA);
         assertTrue(score >  0);
         Game simGame = sim.getSimulatedGameState();
@@ -129,7 +129,7 @@ public class GameSimulatorTest extends TestCase {
         SpellAbility outlastSA = findSAWithPrefix(herald, "Outlast");
         assertNotNull(outlastSA);
 
-        GameSimulator sim = new GameSimulator(game);
+        GameSimulator sim = new GameSimulator(game, p);
         int score = sim.simulateSpellAbility(outlastSA);
         assertTrue(score >  0);
         Game simGame = sim.getSimulatedGameState();
@@ -151,7 +151,7 @@ public class GameSimulatorTest extends TestCase {
         game.getAction().checkStateEffects(true);
         assertEquals(1, bear.getAmountOfKeyword("Unblockable"));
 
-        GameSimulator sim = new GameSimulator(game);
+        GameSimulator sim = new GameSimulator(game, p);
         Game simGame = sim.getSimulatedGameState();
         Card bearCopy = findCardWithName(simGame, bearCardName);
         assertEquals(1, bearCopy.getAmountOfKeyword("Unblockable"));
@@ -169,7 +169,7 @@ public class GameSimulatorTest extends TestCase {
         game.getAction().checkStateEffects(true);
         assertEquals(1, bear.getAmountOfKeyword("Lifelink"));
 
-        GameSimulator sim = new GameSimulator(game);
+        GameSimulator sim = new GameSimulator(game, p);
         Game simGame = sim.getSimulatedGameState();
         Card bearCopy = findCardWithName(simGame, bearCardName);
         assertEquals(1, bearCopy.getAmountOfKeyword("Lifelink"));
@@ -192,7 +192,7 @@ public class GameSimulatorTest extends TestCase {
         SpellAbility playMerchantSa = c.getSpellAbilities().get(0);
         playMerchantSa.setActivatingPlayer(p);
 
-        GameSimulator sim = new GameSimulator(game);
+        GameSimulator sim = new GameSimulator(game, p);
         int origScore = sim.getScoreForOrigGame();
         int score = sim.simulateSpellAbility(playMerchantSa);
         assertTrue(String.format("score=%d vs. origScore=%d",  score, origScore), score > origScore);
@@ -217,7 +217,7 @@ public class GameSimulatorTest extends TestCase {
         assertTrue(c2.hasStartOfKeyword("(Echo unpaid)"));
         c2.removeAllExtrinsicKeyword("(Echo unpaid)");
 
-        GameSimulator sim = new GameSimulator(game);
+        GameSimulator sim = new GameSimulator(game, p);
         Game simGame = sim.getSimulatedGameState();
         Card c1Copy = findCardWithName(simGame, c1Name);
         assertTrue(c1Copy.hasStartOfKeyword("(Echo unpaid)"));

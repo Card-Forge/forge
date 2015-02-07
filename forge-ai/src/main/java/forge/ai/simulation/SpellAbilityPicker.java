@@ -51,7 +51,7 @@ public class SpellAbilityPicker {
         }
         SpellAbility bestSa = null;
         System.out.println("Evaluating...");
-        GameSimulator simulator = new GameSimulator(game);
+        GameSimulator simulator = new GameSimulator(game, player);
         // FIXME: This is wasteful, we should re-use the same simulator...
         int origGameScore = simulator.getScoreForOrigGame();
         int bestSaValue = origGameScore;
@@ -145,7 +145,7 @@ public class SpellAbilityPicker {
     private int evaluateSa(SpellAbility sa) {
         System.out.println("Evaluate SA: " + sa);
         if (!sa.usesTargeting()) {
-            GameSimulator simulator = new GameSimulator(game);
+            GameSimulator simulator = new GameSimulator(game, player);
             return simulator.simulateSpellAbility(sa);
         }
         PossibleTargetSelector selector = new PossibleTargetSelector(game, player, sa);
@@ -153,7 +153,7 @@ public class SpellAbilityPicker {
         TargetChoices tgt = null;
         while (selector.selectNextTargets()) {
             System.out.println("Trying targets: " + sa.getTargets().getTargetedString());
-            GameSimulator simulator = new GameSimulator(game);
+            GameSimulator simulator = new GameSimulator(game, player);
             int score = simulator.simulateSpellAbility(sa);
             if (score > bestScore) {
                 bestScore = score;
