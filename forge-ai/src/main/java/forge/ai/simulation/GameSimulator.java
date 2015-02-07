@@ -6,8 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.google.common.base.Function;
-
 import forge.ai.ComputerUtil;
 import forge.ai.PlayerControllerAi;
 import forge.game.Game;
@@ -101,13 +99,6 @@ public class GameSimulator {
 
     public static boolean debugPrint;
     public static ArrayList<String> debugLines;
-    public static Function<String, Void> debugPrintFunction = new Function<String, Void>() {
-        @Override
-        public Void apply(String str) {
-            debugPrint(str);
-            return null;
-        }
-    };
     public static void debugPrint(String str) {
         if (debugPrint) {
             System.out.println(str);

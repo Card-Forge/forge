@@ -27,6 +27,7 @@ forge-ai/src/main/java/forge/ai/ComputerUtilCard.java -text
 forge-ai/src/main/java/forge/ai/ComputerUtilCombat.java -text
 forge-ai/src/main/java/forge/ai/ComputerUtilCost.java -text
 forge-ai/src/main/java/forge/ai/ComputerUtilMana.java -text
+forge-ai/src/main/java/forge/ai/CreatureEvaluator.java -text
 forge-ai/src/main/java/forge/ai/GameState.java -text
 forge-ai/src/main/java/forge/ai/LobbyPlayerAi.java -text
 forge-ai/src/main/java/forge/ai/PlayerControllerAi.java -text

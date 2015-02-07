@@ -1,6 +1,6 @@
 package forge.ai.simulation;
 
-import forge.ai.ComputerUtilCard;
+import forge.ai.CreatureEvaluator;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -8,9 +8,12 @@ import forge.game.zone.ZoneType;
 
 public class GameStateEvaluator {
     private boolean debugging = false;
+    private SimulationCreatureEvaluator eval = new SimulationCreatureEvaluator();
+
     public void setDebugging(boolean debugging) {
         this.debugging = debugging;
     }
+
     public int getScoreForGameState(Game game, Player aiPlayer) {
         if (game.isGameOver()) {
             return game.getOutcome().getWinningPlayer() == aiPlayer ? Integer.MAX_VALUE : Integer.MIN_VALUE;
@@ -71,7 +74,7 @@ public class GameStateEvaluator {
     protected int evalCard(Game game, Player aiPlayer, Card c) {
         // TODO: These should be based on other considerations - e.g. in relation to opponents state.
         if (c.isCreature()) {
-            return ComputerUtilCard.evaluateCreatureDebug(c, debugging ? GameSimulator.debugPrintFunction : null);
+            return eval.evaluateCreature(c);
         } else if (c.isLand()) {
             return 100;
         } else if (c.isEnchantingCard()) {
@@ -82,6 +85,16 @@ public class GameStateEvaluator {
         } else {
             // e.g. a 5 CMC permanent results in 200, whereas a 5/5 creature is ~225
             return 50 + 30 * c.getCMC();
+        }
+    }
+
+    private class SimulationCreatureEvaluator extends CreatureEvaluator {
+        @Override
+        protected int addValue(int value, String text) {
+            if (debugging && value != 0) {
+                GameSimulator.debugPrint(value + " via " + text);
+            }
+            return super.addValue(value, text);
         }
     }
 }
