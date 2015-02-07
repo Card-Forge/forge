@@ -22,6 +22,7 @@ import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
 
 public class GameCopier {
@@ -66,9 +67,15 @@ public class GameCopier {
         Player newPlayerTurn = playerMap.get(origGame.getPhaseHandler().getPlayerTurn());
         newGame.getPhaseHandler().devModeSet(origGame.getPhaseHandler().getPhase(), newPlayerTurn);
         newGame.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-
+        for (Player p : newGame.getPlayers()) {
+            ((PlayerZoneBattlefield) p.getZone(ZoneType.Battlefield)).setTriggers(false);
+        }
+        
         copyGameState(newGame);
         
+        for (Player p : newGame.getPlayers()) {
+            ((PlayerZoneBattlefield) p.getZone(ZoneType.Battlefield)).setTriggers(true);
+        }
         newGame.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         
         // Undo effects first before calculating them below, to avoid them applying twice.
