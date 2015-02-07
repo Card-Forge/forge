@@ -21,6 +21,8 @@ import forge.game.card.CardFactoryUtil;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
@@ -32,6 +34,7 @@ public class GameCopier {
         ZoneType.Graveyard,
         ZoneType.Library,
         ZoneType.Exile,
+        ZoneType.Stack,
     };
 
     private Game origGame;
@@ -79,7 +82,6 @@ public class GameCopier {
         newGame.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         
         // Undo effects first before calculating them below, to avoid them applying twice.
-        gameObjectMap = new CopiedGameObjectMap(newGame);
         for (StaticEffect effect : origGame.getStaticEffects().getEffects()) {
             effect.removeMapped(gameObjectMap);
         }
@@ -88,14 +90,42 @@ public class GameCopier {
         
         newGame.getTriggerHandler().resetActiveTriggers();
 
+        if (GameSimulator.COPY_STACK)
+            copyStack(origGame, newGame, gameObjectMap);
+
         return newGame;
+    }
+
+    private  static void copyStack(Game origGame, Game newGame, GameObjectMap map) {
+        for (SpellAbilityStackInstance origEntry : origGame.getStack()) {
+            SpellAbility origSa = origEntry.getSpellAbility(false);
+            Card origHostCard = origSa.getHostCard();
+            Card newCard = map.map(origHostCard);
+            SpellAbility newSa = null;
+            if (origSa.isSpell()) {
+                for (SpellAbility sa : newCard.getAllSpellAbilities()) {
+                    if (sa.getDescription().equals(origSa.getDescription())) {
+                        newSa = sa;
+                        break;
+                    }
+                }
+            }
+            newSa.setActivatingPlayer(map.map(origSa.getActivatingPlayer()));
+            if (origSa.usesTargeting()) {
+                for (GameObject o : origSa.getTargets().getTargets()) {
+                    newSa.getTargets().add(map.map(o));
+                }
+            }
+            newGame.getStack().add(newSa);
+        } 
     }
 
     private RegisteredPlayer clonePlayer(RegisteredPlayer p) {
         RegisteredPlayer clone = new RegisteredPlayer(p.getDeck());
         LobbyPlayer lp = p.getPlayer();
-        if (!(lp instanceof LobbyPlayerAi))
-            lp = new LobbyPlayerAi(p.getPlayer().getName());
+        if (!(lp instanceof LobbyPlayerAi)) {
+            lp = new LobbyPlayerAi(p.getPlayer().getName(), null);
+        }
         clone.setPlayer(lp);
         return clone;
     }
@@ -107,6 +137,7 @@ public class GameCopier {
                 addCard(newGame, zone, card);
             }
         }
+        gameObjectMap = new CopiedGameObjectMap(newGame);
         for (Card card : origGame.getCardsIn(ZoneType.Battlefield)) {
             Card otherCard = cardMap.get(card);
             otherCard.setTimestamp(card.getTimestamp());
@@ -201,7 +232,11 @@ public class GameCopier {
             }
         }
 
-        zoneOwner.getZone(zone).add(newCard);
+        if (zone == ZoneType.Stack) {
+            newGame.getStackZone().add(newCard);
+        } else {
+            zoneOwner.getZone(zone).add(newCard);
+        }
     }
 
     private class CopiedGameObjectMap extends GameObjectMap {
@@ -227,7 +262,12 @@ public class GameCopier {
         if (result != null)
             return result;
         // TODO: Have only one GameObject map?
-        return playerMap.get(o);
+        result = playerMap.get(o);
+        if (result != null)
+            return result;
+        if (o != null)
+            throw new RuntimeException("Couldn't map " + o + "/" + System.identityHashCode(o));
+        return null;
     }
     public GameObject reverseFind(GameObject o) {
         GameObject result = cardMap.inverse().get(o);
