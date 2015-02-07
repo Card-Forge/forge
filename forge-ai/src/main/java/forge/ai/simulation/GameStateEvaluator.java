@@ -7,7 +7,10 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class GameStateEvaluator {
-
+    private boolean debugging = false;
+    public void setDebugging(boolean debugging) {
+        this.debugging = debugging;
+    }
     public int getScoreForGameState(Game game, Player aiPlayer) {
         if (game.isGameOver()) {
             return game.getOutcome().getWinningPlayer() == aiPlayer ? Integer.MAX_VALUE : Integer.MIN_VALUE;
@@ -68,7 +71,7 @@ public class GameStateEvaluator {
     protected int evalCard(Game game, Player aiPlayer, Card c) {
         // TODO: These should be based on other considerations - e.g. in relation to opponents state.
         if (c.isCreature()) {
-            return ComputerUtilCard.evaluateCreature(c);
+            return ComputerUtilCard.evaluateCreatureDebug(c, debugging ? GameSimulator.debugPrintFunction : null);
         } else if (c.isLand()) {
             return 100;
         } else if (c.isEnchantingCard()) {

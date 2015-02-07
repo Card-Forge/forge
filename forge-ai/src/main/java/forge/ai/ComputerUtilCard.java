@@ -374,10 +374,21 @@ public class ComputerUtilCard {
      * @return a int.
      */
     public static int evaluateCreature(final Card c) {
-    
-        int value = 100;
-        if (c.isToken()) {
-            value = 80; // tokens should be worth less than actual cards
+        return evaluateCreatureDebug(c, null);
+    }
+    private static int addValue(int value, Function<String, Void> out, String text) {
+        if (out != null) {
+            out.apply(value + " via " + text);
+        }
+        return value;
+    }
+    private static int subValue(int value, Function<String, Void> out, String text) {
+        return -addValue(-value, out, text);
+    }
+    public static int evaluateCreatureDebug(final Card c, Function<String, Void> out) {
+        int value = 80;
+        if (!c.isToken()) {
+            value += addValue(80, out, "non-token"); // tokens should be worth less than actual cards
         }
         int power = c.getNetCombatDamage();
         final int toughness = c.getNetToughness();
@@ -390,172 +401,171 @@ public class ComputerUtilCard {
                 break;
             }
         }
-        value += power * 15;
-        value += toughness * 10;
-        value += c.getCMC() * 5;
+        value += addValue(power * 15, out, "power");
+        value += addValue(toughness * 10, out, "toughness");
+        value += addValue(c.getCMC() * 5, out, "cmc");
     
         // Evasion keywords
         if (c.hasKeyword("Flying")) {
-            value += power * 10;
+            value += addValue(power * 10, out, "flying");
         }
         if (c.hasKeyword("Horsemanship")) {
-            value += power * 10;
+            value += addValue(power * 10, out, "horses");
         }
         if (c.hasKeyword("Unblockable")) {
-            value += power * 10;
+            value += addValue(power * 10, out, "unblockable");
         } else {
             if (c.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
-                value += power * 6;
+                value += addValue(power * 6, out, "thorns");
             }
             if (c.hasKeyword("Fear")) {
-                value += power * 6;
+                value += addValue(power * 6, out, "fear");
             }
             if (c.hasKeyword("Intimidate")) {
-                value += power * 6;
+                value += addValue(power * 6, out, "intimidate");
             }
             if (c.hasStartOfKeyword("CantBeBlockedBy")) {
-                value += power * 3;
+                value += addValue(power * 3, out, "block-restrict");
             }
         }
     
         // Other good keywords
         if (power > 0) {
             if (c.hasKeyword("Double Strike")) {
-                value += 10 + (power * 15);
+                value += addValue(10 + (power * 15), out, "ds");
             } else if (c.hasKeyword("First Strike")) {
-                value += 10 + (power * 5);
+                value += addValue(10 + (power * 5), out, "fs");
             }
             if (c.hasKeyword("Deathtouch")) {
-                value += 25;
+                value += addValue(25, out, "dt");
             }
             if (c.hasKeyword("Lifelink")) {
-                value += power * 10;
+                value += addValue(power * 10, out, "lifelink");
             }
             if (power > 1 && c.hasKeyword("Trample")) {
-                value += (power - 1) * 5;
+                value += addValue((power - 1) * 5, out, "trample");
             }
             if (c.hasKeyword("Vigilance")) {
-                value += (power * 5) + (toughness * 5);
+                value += addValue((power * 5) + (toughness * 5), out, "vigilance");
             }
             if (c.hasKeyword("Wither")) {
-                value += power * 10;
+                value += addValue(power * 10, out, "Wither");
             }
             if (c.hasKeyword("Infect")) {
-                value += power * 15;
+                value += addValue(power * 15, out, "infect");
             }
-            value += c.getKeywordMagnitude("Rampage");
+            value += addValue(c.getKeywordMagnitude("Rampage"), out, "rampage");
         }
     
-        value += c.getKeywordMagnitude("Bushido") * 16;
-        value += c.getAmountOfKeyword("Flanking") * 15;
-        value += c.getAmountOfKeyword("Exalted") * 15;
-        value += c.getKeywordMagnitude("Annihilator") * 50;
-    
-    
+        value += addValue(c.getKeywordMagnitude("Bushido") * 16, out, "bushido");
+        value += addValue(c.getAmountOfKeyword("Flanking") * 15, out, "flanking");
+        value += addValue(c.getAmountOfKeyword("Exalted") * 15, out, "exalted");
+        value += addValue(c.getKeywordMagnitude("Annihilator") * 50, out, "eldrazi");
+        value += addValue(c.getKeywordMagnitude("Absorb") * 11, out, "absorb");
+
         // Defensive Keywords
         if (c.hasKeyword("Reach") && !c.hasKeyword("Flying")) {
-            value += 5;
+            value += addValue(5, out, "reach");
         }
         if (c.hasKeyword("CARDNAME can block creatures with shadow as though they didn't have shadow.")) {
-            value += 3;
+            value += addValue(3, out, "shadow-block");
         }
     
         // Protection
         if (c.hasKeyword("Indestructible")) {
-            value += 70;
+            value += addValue(70, out, "darksteel");
         }
         if (c.hasKeyword("Prevent all damage that would be dealt to CARDNAME.")) {
-            value += 60;
+            value += addValue(60, out, "cho-manno");
         } else if (c.hasKeyword("Prevent all combat damage that would be dealt to CARDNAME.")) {
-            value += 50;
+            value += addValue(50, out, "fogbank");
         }
         if (c.hasKeyword("Hexproof")) {
-            value += 35;
+            value += addValue(35, out, "hexproof");
         } else if (c.hasKeyword("Shroud")) {
-            value += 30;
+            value += addValue(30, out, "shroud");
         }
         if (c.hasStartOfKeyword("Protection")) {
-            value += 20;
+            value += addValue(20, out, "protection");
         }
         if (c.hasStartOfKeyword("PreventAllDamageBy")) {
-            value += 10;
+            value += addValue(10, out, "prevent-dmg");
         }
-        value += c.getKeywordMagnitude("Absorb") * 11;
     
         // Bad keywords
         if (c.hasKeyword("Defender") || c.hasKeyword("CARDNAME can't attack.")) {
-            value -= (power * 9) + 40;
+            value -= subValue((power * 9) + 40, out, "defender");
         } else if (c.getSVar("SacrificeEndCombat").equals("True")) {
-            value -= 40;
+            value -= subValue(40, out, "sac-end");
         }
         if (c.hasKeyword("CARDNAME can't block.")) {
-            value -= 10;
+            value -= subValue(10, out, "cant-block");
         } else if (c.hasKeyword("CARDNAME attacks each turn if able.")
                 || c.hasKeyword("CARDNAME attacks each combat if able.")) {
-            value -= 10;
+            value -= subValue(10, out, "must-attack");
         } else if (c.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
-            value -= 10;
+            value -= subValue(10, out, "must-attack-player");
         } else if (c.hasKeyword("CARDNAME can block only creatures with flying.")) {
-            value -= toughness * 5;
+            value -= subValue(toughness * 5, out, "reverse-reach");
         }
     
         if (c.hasSVar("DestroyWhenDamaged")) {
-            value -= (toughness - 1) * 9;
+            value -= subValue((toughness - 1) * 9, out, "dies-to-dmg");
         }
     
         if (c.hasKeyword("CARDNAME can't attack or block.")) {
-            value = 50 + (c.getCMC() * 5); // reset everything - useless
+            value = addValue(50 + (c.getCMC() * 5), out, "useless"); // reset everything - useless
         }
         if (c.hasKeyword("CARDNAME doesn't untap during your untap step.")) {
             if (c.isTapped()) {
-                value = 50 + (c.getCMC() * 5); // reset everything - useless
+                value = addValue(50 + (c.getCMC() * 5), out, "tapped-useless"); // reset everything - useless
             } else {
-                value -= 50;
+                value -= subValue(50, out, "doesnt-untap");
             }
         }
         if (c.hasSVar("EndOfTurnLeavePlay")) {
-            value -= 50;
+            value -= subValue(50, out, "eot-leaves");
         } else if (c.hasStartOfKeyword("Cumulative upkeep")) {
-            value -= 30;
+            value -= subValue(30, out, "cupkeep");
         } else if (c.hasStartOfKeyword("At the beginning of your upkeep, sacrifice CARDNAME unless you pay")) {
-            value -= 20;
+            value -= subValue(20, out, "sac-unless");
         } else if (c.hasStartOfKeyword("(Echo unpaid)")) {
-            value -= 10;
+            value -= subValue(10, out, "echo-unpaid");
         }
     
         if (c.hasStartOfKeyword("At the beginning of your upkeep, CARDNAME deals")) {
-            value -= 20;
+            value -= subValue(20, out, "upkeep-dmg");
         } 
         if (c.hasStartOfKeyword("Fading")) {
-            value -= 20;
+            value -= subValue(20, out, "fading");
         }
         if (c.hasStartOfKeyword("Vanishing")) {
-            value -= 20;
+            value -= subValue(20, out, "vanishing");
         }
         if (c.getSVar("Targeting").equals("Dies")) {
-            value -= 25;
+            value -= subValue(25, out, "dies");
         }
     
         for (final SpellAbility sa : c.getSpellAbilities()) {
             if (sa.isAbility()) {
-                value += 10;
+                value += addValue(10, out, "sa"+sa);
             }
         }
         if (!c.getManaAbilities().isEmpty()) {
-            value += 10;
+            value += addValue(10, out, "manadork");
         }
     
         if (c.isUntapped()) {
-            value += 1;
+            value += addValue(1, out, "untapped");
         }
     
         // paired creatures are more valuable because they grant a bonus to the other creature
         if (c.isPaired()) {
-            value += 14;
+            value += addValue(14, out, "paired");
         }
 
         if (!c.getEncodedCards().isEmpty()) {
-            value += 24;
+            value += addValue(24, out, "encoded");
         }
         return value;
     }

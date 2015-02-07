@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.google.common.base.Function;
+
 import forge.ai.ComputerUtil;
 import forge.ai.PlayerControllerAi;
 import forge.game.Game;
@@ -18,6 +20,7 @@ import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 
 public class GameSimulator {
+    public static boolean COPY_STACK = false;
     private GameCopier copier;
     private Game simGame;
     private Player aiPlayer;
@@ -33,6 +36,7 @@ public class GameSimulator {
         aiPlayer = simGame.getPlayers().get(1);
         opponent = simGame.getPlayers().get(0);
         eval = new GameStateEvaluator();
+        eval.setDebugging(true);
         
         origLines = new ArrayList<String>();
         debugLines = origLines;
@@ -50,6 +54,20 @@ public class GameSimulator {
             printDiff(origLines, simLines);
             throw new RuntimeException("Game copy error");
         }
+        eval.setDebugging(false);
+
+        // If the stack on the original game is not empty, resolve it
+        // first and get the updated eval score, since this is what we'll
+        // want to compare to the eval score after simulating.
+        if (COPY_STACK && !origGame.getStackZone().isEmpty()) {
+            origLines = new ArrayList<String>();
+            debugLines = origLines;
+            Game copyOrigGame = copier.makeCopy();
+            Player copyOrigAiPlayer = copyOrigGame.getPlayers().get(1);
+            resolveStack(copyOrigGame, copyOrigGame.getPlayers().get(0));
+            origScore = eval.getScoreForGameState(copyOrigGame, copyOrigAiPlayer);
+        }
+
         debugPrint = true;
         debugLines = null;
     }
@@ -83,6 +101,13 @@ public class GameSimulator {
 
     public static boolean debugPrint;
     public static ArrayList<String> debugLines;
+    public static Function<String, Void> debugPrintFunction = new Function<String, Void>() {
+        @Override
+        public Void apply(String str) {
+            debugPrint(str);
+            return null;
+        }
+    };
     public static void debugPrint(String str) {
         if (debugPrint) {
             System.out.println(str);
@@ -111,13 +136,12 @@ public class GameSimulator {
     }
 
     public int simulateSpellAbility(SpellAbility origSa) {
+        return simulateSpellAbility(origSa, this.eval);
+    }
+    public int simulateSpellAbility(SpellAbility origSa, GameStateEvaluator eval) {
         // TODO: optimize: prune identical SA (e.g. two of the same card in hand)
-
-        boolean found = false;
         SpellAbility sa = findSaInSimGame(origSa);
-        if (sa != null) {
-            found = true;
-        } else {
+        if (sa == null) {
             System.err.println("SA not found! " + sa);
             return Integer.MIN_VALUE;
         }
@@ -125,17 +149,13 @@ public class GameSimulator {
         sa.setActivatingPlayer(aiPlayer);
         if (origSa.usesTargeting()) {
             for (GameObject o : origSa.getTargets().getTargets()) {
-                debugPrint("Copying over target " +o);
-                debugPrint("  found: "+copier.find(o));
                 sa.getTargets().add(copier.find(o));
             }
         }
 
-        debugPrint("Simulating playing sa: " + sa + " found="+found);
         if (sa == Ability.PLAY_LAND_SURROGATE) {
             aiPlayer.playLand(sa.getHostCard(), false);
-        }
-        else {
+        } else {
             if (!sa.getAllTargetChoices().isEmpty()) {
                 debugPrint("Targets: ");
                 for (TargetChoices target : sa.getAllTargetChoices()) {
