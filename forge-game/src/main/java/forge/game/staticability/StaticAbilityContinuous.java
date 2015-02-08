@@ -213,7 +213,7 @@ public final class StaticAbilityContinuous {
             }
         }
 
-        if (layer == StaticAbilityLayer.ABILITIES2 && params.containsKey("AddHiddenKeyword")) {
+        if (layer == StaticAbilityLayer.RULES && params.containsKey("AddHiddenKeyword")) {
             addHiddenKeywords = params.get("AddHiddenKeyword").split(" & ");
         }
 
