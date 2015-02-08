@@ -31,6 +31,7 @@ public abstract class GameState {
         ZONES.put(ZoneType.Graveyard, "graveyard");
         ZONES.put(ZoneType.Library, "library");
         ZONES.put(ZoneType.Exile, "exile");
+        ZONES.put(ZoneType.Command, "command");
     }
 
     private int humanLife = -1;
