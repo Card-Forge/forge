@@ -110,13 +110,15 @@ public class GameCopier {
                     }
                 }
             }
-            newSa.setActivatingPlayer(map.map(origSa.getActivatingPlayer()));
-            if (origSa.usesTargeting()) {
-                for (GameObject o : origSa.getTargets().getTargets()) {
-                    newSa.getTargets().add(map.map(o));
-                }
+            if (newSa != null) {
+	            newSa.setActivatingPlayer(map.map(origSa.getActivatingPlayer()));
+	            if (origSa.usesTargeting()) {
+	                for (GameObject o : origSa.getTargets().getTargets()) {
+	                    newSa.getTargets().add(map.map(o));
+	                }
+	            }
+	            newGame.getStack().add(newSa);
             }
-            newGame.getStack().add(newSa);
         } 
     }
 

@@ -162,13 +162,8 @@ public class GameSimulator {
             return Integer.MIN_VALUE;
         }
         // TODO: Support multiple opponents.
-        Player opponent = null;
-        for (Player p : simGame.getPlayers()) {
-            if (p != aiPlayer) {
-                opponent = p;
-                break;
-            }
-        }
+        Player opponent = aiPlayer.getOpponent();
+
         resolveStack(simGame, opponent);
 
         // TODO: If this is during combat, before blockers are declared,
