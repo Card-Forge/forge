@@ -258,7 +258,6 @@ public abstract class GameState {
                 // by doubling season, etc).
                 c = CardFactory.makeToken(CardFactory.TokenInfo.fromString(tokenStr), player).get(0);
             } else {
-                System.out.println(cardinfo[0]);
                 c = Card.fromPaperCard(getPaperCard(cardinfo[0]), player);
             }
             c.setSickness(false);
