@@ -5662,7 +5662,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final String getMostRecentSet() {
-        return StaticData.instance().getCommonCards().getCard(getName()).getEdition();
+        return StaticData.instance().getCommonCards().getCard(getPaperCard().getName()).getEdition();
     }
 
     public final String getImageKey() {

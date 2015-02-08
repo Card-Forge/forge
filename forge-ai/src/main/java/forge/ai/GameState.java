@@ -98,7 +98,7 @@ public abstract class GameState {
         if (c.isToken()) {
             newText.append("t:" + new CardFactory.TokenInfo(c).toString());
         } else {
-            newText.append(c.getName());
+            newText.append(c.getPaperCard().getName());
         }
         if (zoneType == ZoneType.Battlefield) {
             if (c.isTapped()) {
@@ -258,6 +258,7 @@ public abstract class GameState {
                 // by doubling season, etc).
                 c = CardFactory.makeToken(CardFactory.TokenInfo.fromString(tokenStr), player).get(0);
             } else {
+                System.out.println(cardinfo[0]);
                 c = Card.fromPaperCard(getPaperCard(cardinfo[0]), player);
             }
             c.setSickness(false);
