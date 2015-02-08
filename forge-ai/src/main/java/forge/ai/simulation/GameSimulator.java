@@ -157,10 +157,6 @@ public class GameSimulator {
             ComputerUtil.handlePlayingSpellAbility(aiPlayer, sa, simGame);
         }
 
-        if (simGame.getStack().isEmpty()) {
-            System.err.println("Stack empty: " + sa);
-            return Integer.MIN_VALUE;
-        }
         // TODO: Support multiple opponents.
         Player opponent = aiPlayer.getOpponent();
 
