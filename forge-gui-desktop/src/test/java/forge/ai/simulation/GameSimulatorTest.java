@@ -244,10 +244,34 @@ public class GameSimulatorTest extends TestCase {
         GameSimulator sim = new GameSimulator(game, p);
         Game simGame = sim.getSimulatedGameState();
 
-        Card ripperCopy = findCardWithName(simGame, "");
-        SpellAbility unmorphSA = findSAWithPrefix(ripperCopy, "Morph - Reveal a black card");
+        SpellAbility unmorphSA = findSAWithPrefix(ripper, "Morph - Reveal a black card");
         assertNotNull(unmorphSA);
         sim.simulateSpellAbility(unmorphSA);
         assertEquals(18, simGame.getPlayers().get(0).getLife());
+    }
+    
+    public void testFindingOwnCard() {
+        Game game = initAndCreateGame();
+        Player p0 = game.getPlayers().get(0);
+        Player p1 = game.getPlayers().get(1);
+        Card fractureP0 = createCard("Skull Fracture", p0);
+        p0.getZone(ZoneType.Hand).add(fractureP0);
+        Card creature = createCard("Runeclaw Bear", p0);
+        p0.getZone(ZoneType.Hand).add(creature);
+        Card fractureP1 = createCard("Skull Fracture", p1);
+        p1.getZone(ZoneType.Hand).add(fractureP1);
+        addCard("Swamp", p1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p1);
+        game.getAction().checkStateEffects(true);
+        
+        GameSimulator sim = new GameSimulator(game, p1);
+        Game simGame = sim.getSimulatedGameState();
+
+        SpellAbility fractureSa = fractureP1.getSpellAbilities().get(0);
+        assertNotNull(fractureSa);
+        fractureSa.getTargets().add(p0);
+        sim.simulateSpellAbility(fractureSa);
+        assertEquals(1, simGame.getPlayers().get(0).getCardsIn(ZoneType.Hand).size());
+        assertEquals(0, simGame.getPlayers().get(1).getCardsIn(ZoneType.Hand).size());
     }
 }

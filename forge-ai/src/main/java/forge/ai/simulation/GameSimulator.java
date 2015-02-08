@@ -112,7 +112,7 @@ public class GameSimulator {
         Card origHostCard = sa.getHostCard();
         ZoneType zone = origHostCard.getZone().getZoneType();
         for (Card c : simGame.getCardsIn(zone)) {
-            if (!c.getOwner().getController().isAI()) {
+            if (c.getController() != aiPlayer) {
                 continue;
             }
             if (c.getName().equals(origHostCard.getName())) {
@@ -137,6 +137,7 @@ public class GameSimulator {
             return Integer.MIN_VALUE;
         }
 
+        System.out.println("Found SA " + sa + " on host card " + sa.getHostCard() + " with owner:"+ sa.getHostCard().getOwner());
         sa.setActivatingPlayer(aiPlayer);
         if (origSa.usesTargeting()) {
             for (GameObject o : origSa.getTargets().getTargets()) {
