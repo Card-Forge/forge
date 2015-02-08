@@ -4,13 +4,20 @@ import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
 public class CreatureEvaluator {
+    protected int getEffectivePower(final Card c) {
+        return c.getNetCombatDamage();
+    }
+    protected int getEffectiveToughness(final Card c) {
+        return c.getNetToughness();
+    }
+
     public int evaluateCreature(final Card c) {
         int value = 80;
         if (!c.isToken()) {
             value += addValue(80, "non-token"); // tokens should be worth less than actual cards
         }
-        int power = c.getNetCombatDamage();
-        final int toughness = c.getNetToughness();
+        int power = getEffectivePower(c);
+        final int toughness = getEffectiveToughness(c);
         for (String keyword : c.getKeywords()) {
             if (keyword.equals("Prevent all combat damage that would be dealt by CARDNAME.")
                     || keyword.equals("Prevent all damage that would be dealt by CARDNAME.")

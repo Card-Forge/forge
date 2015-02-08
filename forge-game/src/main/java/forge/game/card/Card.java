@@ -2595,8 +2595,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         return total;
     }
 
+    public final StatBreakdown getUnswitchedPowerBreakdown() {
+        return new StatBreakdown(getCurrentPower(), getTempPowerBoost(), getSemiPermanentPowerBoost(), getPowerBonusFromCounters());
+    }
     public final int getUnswitchedPower() {
-        return getCurrentPower() + getTempPowerBoost() + getSemiPermanentPowerBoost() + getPowerBonusFromCounters();
+        return getUnswitchedPowerBreakdown().getTotal();
     }
 
     public final int getPowerBonusFromCounters() {
@@ -2605,6 +2608,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                 - 2 * getCounters(CounterType.M2M2) - getCounters(CounterType.M1M0) + 2 * getCounters(CounterType.P2P0);
     }
 
+    public final StatBreakdown getNetPowerBreakdown() {
+        if (getAmountOfKeyword("CARDNAME's power and toughness are switched") % 2 != 0) {
+            return getUnswitchedToughnessBreakdown();
+        }
+        return getUnswitchedPowerBreakdown();
+    }
     public final int getNetPower() {
         if (getAmountOfKeyword("CARDNAME's power and toughness are switched") % 2 != 0) {
             return getUnswitchedToughness();
@@ -2621,8 +2630,33 @@ public class Card extends GameEntity implements Comparable<Card> {
         return total;
     }
 
+    public static class StatBreakdown {
+        public final int currentValue;
+        public final int tempBoost;
+        public final int semiPermanentBoost;
+        public final int bonusFromCounters;
+        public StatBreakdown() {
+            this.currentValue = 0;
+            this.tempBoost = 0;
+            this.semiPermanentBoost = 0;
+            this.bonusFromCounters = 0;
+        }
+        public StatBreakdown(int currentValue, int tempBoost, int semiPermanentBoost, int bonusFromCounters){
+            this.currentValue = currentValue;
+            this.tempBoost = tempBoost;
+            this.semiPermanentBoost = semiPermanentBoost;
+            this.bonusFromCounters = bonusFromCounters;
+        }
+        public int getTotal() {
+            return currentValue + tempBoost + semiPermanentBoost + bonusFromCounters;
+        }
+    }
+
+    public final StatBreakdown getUnswitchedToughnessBreakdown() {
+        return new StatBreakdown(getCurrentToughness(), getTempToughnessBoost(), getSemiPermanentToughnessBoost(), getToughnessBonusFromCounters());
+    }
     public final int getUnswitchedToughness() {
-        return getCurrentToughness() + getTempToughnessBoost() + getSemiPermanentToughnessBoost() + getToughnessBonusFromCounters();
+        return getUnswitchedToughnessBreakdown().getTotal();
     }
 
     public final int getToughnessBonusFromCounters() {
@@ -2632,23 +2666,29 @@ public class Card extends GameEntity implements Comparable<Card> {
                 + 2 * getCounters(CounterType.P0P2);
     }
 
-    public final int getNetToughness() {
+    public final StatBreakdown getNetToughnessBreakdown() {
         if (getAmountOfKeyword("CARDNAME's power and toughness are switched") % 2 != 0) {
-            return getUnswitchedPower();
+            return getUnswitchedPowerBreakdown();
         }
-        return getUnswitchedToughness();
+        return getUnswitchedToughnessBreakdown();
+    }
+    public final int getNetToughness() {
+        return getNetToughnessBreakdown().getTotal();
     }
 
     // How much combat damage does the card deal
-    public final int getNetCombatDamage() {
+    public final StatBreakdown getNetCombatDamageBreakdown() {
         if (hasKeyword("CARDNAME assigns no combat damage")) {
-            return 0;
+            return new StatBreakdown();
         }
 
         if (getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.toughnessAssignsDamage)) {
-            return getNetToughness();
+            return getNetToughnessBreakdown();
         }
-        return getNetPower();
+        return getNetPowerBreakdown();
+    }
+    public final int getNetCombatDamage() {
+        return getNetCombatDamageBreakdown().getTotal();
     }
 
     private int multiKickerMagnitude = 0;

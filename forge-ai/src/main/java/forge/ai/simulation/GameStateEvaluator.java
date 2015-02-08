@@ -3,6 +3,7 @@ package forge.ai.simulation;
 import forge.ai.CreatureEvaluator;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -74,7 +75,15 @@ public class GameStateEvaluator {
     protected int evalCard(Game game, Player aiPlayer, Card c) {
         // TODO: These should be based on other considerations - e.g. in relation to opponents state.
         if (c.isCreature()) {
-            return eval.evaluateCreature(c);
+            // Ignore temp boosts post combat, since it's a waste.
+            // TODO: Make this smarter. Temp boosts pre-combat are also useless if there's no plan to attack
+            // with that creature - or if you're just temporarily pumping down.
+            // Also, sometimes temp boosts post combat could be useful - e.g. if you then want to make your
+            // creature fight another, etc.
+            boolean ignoreTempBoosts = game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE);
+            eval.setIgnoreTempBoosts(ignoreTempBoosts);
+            int result = eval.evaluateCreature(c);
+            return result;
         } else if (c.isLand()) {
             return 100;
         } else if (c.isEnchantingCard()) {
@@ -89,12 +98,34 @@ public class GameStateEvaluator {
     }
 
     private class SimulationCreatureEvaluator extends CreatureEvaluator {
+        private boolean ignoreTempBoosts;
+        
+        public void setIgnoreTempBoosts(boolean value) {
+            this.ignoreTempBoosts = value;
+        }
         @Override
         protected int addValue(int value, String text) {
             if (debugging && value != 0) {
                 GameSimulator.debugPrint(value + " via " + text);
             }
             return super.addValue(value, text);
+        }
+
+        @Override
+        protected int getEffectivePower(final Card c) {
+            if (ignoreTempBoosts) {
+                Card.StatBreakdown breakdown = c.getNetToughnessBreakdown();
+                return breakdown.getTotal() - breakdown.tempBoost;
+            }
+            return c.getNetCombatDamage();
+        }
+        @Override
+        protected int getEffectiveToughness(final Card c) {
+            if (ignoreTempBoosts) {
+                Card.StatBreakdown breakdown = c.getNetToughnessBreakdown();
+                return breakdown.getTotal() - breakdown.tempBoost;
+            }
+            return c.getNetToughness();
         }
     }
 }
