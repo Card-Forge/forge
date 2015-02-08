@@ -38,7 +38,7 @@ public class GameStateEvaluator {
             score += myCards - aiPlayer.getMaxHandSize();
             myCards = aiPlayer.getMaxHandSize();
         }
-        score += 3 * myCards - 3 * theirCards;
+        score += 5 * myCards - 4 * theirCards;
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
             int value = evalCard(game, aiPlayer, c);
             String str = c.getName();
@@ -58,7 +58,7 @@ public class GameStateEvaluator {
             }
         }
         GameSimulator.debugPrint("  My life: " + aiPlayer.getLife());
-        score += aiPlayer.getLife();
+        score += 2 * aiPlayer.getLife();
         int opponentIndex = 1;
         int opponentLife = 0;
         for (Player opponent : game.getPlayers()) {
@@ -68,7 +68,7 @@ public class GameStateEvaluator {
                 opponentIndex++;
             }
         }
-        score -= opponentLife / (game.getPlayers().size() - 1);
+        score -= 2* opponentLife / (game.getPlayers().size() - 1);
         GameSimulator.debugPrint("Score = " + score);
         return score;
     }
