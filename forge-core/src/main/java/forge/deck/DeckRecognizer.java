@@ -235,7 +235,7 @@ public class DeckRecognizer {
     }
 
     private static final String[] KNOWN_COMMENTS = new String[] { "land", "lands", "creatures", "creature", "spells",
-            "enchancements", "other spells", "artifacts" };
+            "enchantments", "other spells", "artifacts" };
     private static final String[] KNOWN_COMMENT_PARTS = new String[] { "card" };
 
     private static boolean isDecoration(final String lineAsIs) {
