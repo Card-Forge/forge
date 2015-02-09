@@ -135,7 +135,7 @@ public class StaticAbility extends CardTraitBase {
         if (this.mapParams.containsKey("AddKeyword") || this.mapParams.containsKey("AddAbility")
                 || this.mapParams.containsKey("AddTrigger") || this.mapParams.containsKey("RemoveTriggers")
                 || this.mapParams.containsKey("RemoveKeyword") || this.mapParams.containsKey("AddReplacementEffects")
-                || this.mapParams.containsKey("AddHiddenKeyword") || this.mapParams.containsKey("AddSVar")) {
+                || this.mapParams.containsKey("AddSVar")) {
             layers.add(StaticAbilityLayer.ABILITIES2);
         }
 
@@ -150,7 +150,7 @@ public class StaticAbility extends CardTraitBase {
             layers.add(StaticAbilityLayer.MODIFYPT);
         }
 
-        if (layers.isEmpty()) {
+        if (layers.isEmpty() || this.mapParams.containsKey("AddHiddenKeyword")) {
             return EnumSet.of(StaticAbilityLayer.RULES);
         }
 
