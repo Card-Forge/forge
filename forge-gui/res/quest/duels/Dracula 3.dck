@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Dracula 3
+Title=Dracula
+Difficulty=hard
+Description=BR Vampire deck
+Icon=Dracula.jpg
+Deck Type=constructed
+[main]
+1 Arid Mesa
+4 Badlands
+1 Blood Crypt
+4 Bloodstained Mire
+1 Marsh Flats
+3 Swamp
+7 Mountain
+1 Mox Jet
+1 Mox Ruby
+2 Cover of Darkness
+3 Bloodcrazed Neonate
+1 Bloodline Keeper
+1 Bloodlord of Vaasgoth
+2 Captivating Vampire
+3 Crossway Vampire
+1 Erdwal Ripper
+1 Havengul Vampire
+2 Heirs of Stromkirk
+1 Markov Blademaster
+1 Markov Warlord
+1 Olivia Voldaren
+3 Rakish Heir
+4 Stromkirk Captain
+4 Stromkirk Noble
+1 Vampire Interloper
+2 Urge to Feed
+2 Feast of Blood
+1 Dreadbore
+1 Lightning Bolt
+[sideboard]
