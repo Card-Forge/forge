@@ -151,7 +151,7 @@ public class StaticAbility extends CardTraitBase {
         }
 
         if (layers.isEmpty() || this.mapParams.containsKey("AddHiddenKeyword")) {
-            return EnumSet.of(StaticAbilityLayer.RULES);
+        	layers.add(StaticAbilityLayer.RULES);
         }
 
         return layers;
