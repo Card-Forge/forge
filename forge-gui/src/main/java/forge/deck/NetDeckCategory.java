@@ -107,9 +107,9 @@ public class NetDeckCategory extends StorageBase<Deck> {
 
     private final String url;
 
-    private NetDeckCategory(String name0, String downloadLocation0) {
+    private NetDeckCategory(String name0, String url0) {
         super(name0, new HashMap<String, Deck>());
-        url = downloadLocation0;
+        url = url0;
     }
 
     public String getDownloadLocation() {
