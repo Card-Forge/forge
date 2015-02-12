@@ -144,7 +144,7 @@ public class GameSimulatorTest extends TestCase {
         assertEquals(2, sliver.getNetToughness());
     }
 
-    public void DISABLED_testEquippedAbilities() {
+    public void testEquippedAbilities() {
         String bearCardName = "Runeclaw Bear";
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
