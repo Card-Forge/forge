@@ -89,7 +89,7 @@ public class ManaCostAdjustment {
 
         if (sa.isSpell()) {
             if (sa.isDelve()) {
-                final Player pc = originalCard.getController();
+                final Player pc = sa.getActivatingPlayer();
                 final CardCollection mutableGrave = new CardCollection(pc.getCardsIn(ZoneType.Graveyard));
                 final CardCollectionView toExile = pc.getController().chooseCardsToDelve(cost.getUnpaidShards(ManaCostShard.COLORLESS), mutableGrave);
                 for (final Card c : toExile) {
