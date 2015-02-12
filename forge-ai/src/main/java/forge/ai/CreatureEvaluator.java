@@ -1,14 +1,21 @@
 package forge.ai;
 
+import com.google.common.base.Function;
+
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
-public class CreatureEvaluator {
+public class CreatureEvaluator implements Function<Card, Integer> {
     protected int getEffectivePower(final Card c) {
         return c.getNetCombatDamage();
     }
     protected int getEffectiveToughness(final Card c) {
         return c.getNetToughness();
+    }
+
+    @Override
+    public Integer apply(Card c) {
+        return evaluateCreature(c);
     }
 
     public int evaluateCreature(final Card c) {

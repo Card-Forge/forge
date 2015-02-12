@@ -1,6 +1,5 @@
 package forge.ai;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -235,7 +234,7 @@ public class ComputerUtilCard {
      * @return the card
      */
     public static Card getBestCreatureAI(final Iterable<Card> list) {
-        return Aggregates.itemWithMax(Iterables.filter(list, CardPredicates.Presets.CREATURES), ComputerUtilCard.fnEvaluateCreature);
+        return Aggregates.itemWithMax(Iterables.filter(list, CardPredicates.Presets.CREATURES), ComputerUtilCard.creatureEvaluator);
     }
 
     /**
@@ -248,7 +247,7 @@ public class ComputerUtilCard {
      * @return a {@link forge.game.card.Card} object.
      */
     public static Card getWorstCreatureAI(final Iterable<Card> list) {
-        return Aggregates.itemWithMin(Iterables.filter(list, CardPredicates.Presets.CREATURES), ComputerUtilCard.fnEvaluateCreature);
+        return Aggregates.itemWithMin(Iterables.filter(list, CardPredicates.Presets.CREATURES), ComputerUtilCard.creatureEvaluator);
     }
 
     // This selection rates tokens higher
@@ -352,12 +351,6 @@ public class ComputerUtilCard {
         return getCheapestPermanentAI(list, null, false);
     }
 
-    public static final Function<Card, Integer> fnEvaluateCreature = new Function<Card, Integer>() {
-        @Override
-        public Integer apply(Card a) {
-            return ComputerUtilCard.evaluateCreature(a);
-        }
-    };
     public static final Comparator<Card> EvaluateCreatureComparator = new Comparator<Card>() {
         @Override
         public int compare(final Card a, final Card b) {
@@ -389,7 +382,7 @@ public class ComputerUtilCard {
     }
 
     public static int evaluateCreatureList(final CardCollectionView list) {
-        return Aggregates.sum(list, fnEvaluateCreature);
+        return Aggregates.sum(list, creatureEvaluator);
     }
 
     public static boolean doesCreatureAttackAI(final Player ai, final Card card) {
