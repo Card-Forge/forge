@@ -184,7 +184,7 @@ public class GameSimulator {
         debugPrint = true;
         printDiff(origLines, simLines);
         
-        if (recursionDepth < MAX_DEPTH) {
+        if (recursionDepth < MAX_DEPTH && !simGame.isGameOver()) {
             System.out.println("Recursing DEPTH=" + recursionDepth);
             System.out.println("  With: " + sa);
             SpellAbilityPicker sim = new SpellAbilityPicker(simGame, aiPlayer);
