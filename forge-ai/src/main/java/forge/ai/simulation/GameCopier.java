@@ -213,6 +213,10 @@ public class GameCopier {
                     newCard.addSpellAbility(CardFactoryUtil.abilityManifestFaceUp(newCard, newCard.getManaCost()));
                 }
             }
+            if (c.isMonstrous()) {
+                newCard.setMonstrous(true);
+                newCard.setMonstrosityNum(c.getMonstrosityNum());
+            }
             
             Map<CounterType, Integer> counters = c.getCounters();
             if (!counters.isEmpty()) {

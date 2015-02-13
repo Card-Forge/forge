@@ -144,6 +144,27 @@ public class GameSimulatorTest extends TestCase {
         assertEquals(2, sliver.getNetToughness());
     }
 
+    public void testStaticEffectsMonstrous() {
+        String lionCardName = "Fleecemane Lion";
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Card lion = addCard(lionCardName, p);
+        lion.setSickness(false);
+        lion.setMonstrous(true);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+        assertTrue(lion.isMonstrous());
+        assertEquals(1, lion.getAmountOfKeyword("Hexproof"));
+        assertEquals(1, lion.getAmountOfKeyword("Indestructible"));
+
+        GameSimulator sim = new GameSimulator(game, p);
+        Game simGame = sim.getSimulatedGameState();
+        Card lionCopy = findCardWithName(simGame, lionCardName);
+        assertTrue(lionCopy.isMonstrous());
+        assertEquals(1, lionCopy.getAmountOfKeyword("Hexproof"));
+        assertEquals(1, lionCopy.getAmountOfKeyword("Indestructible"));
+    }
+
     public void testEquippedAbilities() {
         String bearCardName = "Runeclaw Bear";
         Game game = initAndCreateGame();
