@@ -35,6 +35,7 @@ public class GameCopier {
         ZoneType.Library,
         ZoneType.Exile,
         ZoneType.Stack,
+        ZoneType.Command,
     };
 
     private Game origGame;
