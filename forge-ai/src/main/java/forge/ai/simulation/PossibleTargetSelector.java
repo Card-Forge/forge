@@ -40,7 +40,7 @@ public class PossibleTargetSelector {
         }
         sa.resetTargets();
         int index = targetIndex;
-        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getHostCard(), sa) && index < validTargets.size()) {
             sa.getTargets().add(validTargets.get(index++));
         }
         // TODO: smarter about multiple targets, identical targets, etc...
