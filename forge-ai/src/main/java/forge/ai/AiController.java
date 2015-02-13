@@ -46,7 +46,6 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.Direction;
 import forge.game.Game;
-import forge.game.GameActionUtil;
 import forge.game.GameEntity;
 import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityFactory;
@@ -136,21 +135,6 @@ public class AiController {
         game = game0;
         memory = new AiCardMemory();
         simPicker = new SpellAbilityPicker(game, player);
-    }
-
-    private CardCollection getAvailableCards() {
-        CardCollection all = new CardCollection(player.getCardsIn(ZoneType.Hand));
-
-        all.addAll(player.getCardsIn(ZoneType.Graveyard));
-        all.addAll(player.getCardsIn(ZoneType.Command));
-        if (!player.getCardsIn(ZoneType.Library).isEmpty()) {
-            all.add(player.getCardsIn(ZoneType.Library).get(0));
-        }
-        for(Player p : game.getPlayers()) {
-            all.addAll(p.getCardsIn(ZoneType.Exile));
-            all.addAll(p.getCardsIn(ZoneType.Battlefield));
-        }
-        return all;
     }
 
     private ArrayList<SpellAbility> getPossibleETBCounters() {
@@ -337,38 +321,6 @@ public class AiController {
             }
         }
         return true;
-    }
-
-    private ArrayList<SpellAbility> getOriginalAndAltCostAbilities(final ArrayList<SpellAbility> originList) {
-        final ArrayList<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
-        for (SpellAbility sa : originList) {
-            sa.setActivatingPlayer(player);
-            //add alternative costs as additional spell abilities
-            newAbilities.add(sa);
-            newAbilities.addAll(GameActionUtil.getAlternativeCosts(sa, player));
-        }
-    
-        final ArrayList<SpellAbility> result = new ArrayList<SpellAbility>();
-        for (SpellAbility sa : newAbilities) {
-            sa.setActivatingPlayer(player);
-            result.addAll(GameActionUtil.getOptionalCosts(sa));
-        }
-        return result;
-    }
-
-    private ArrayList<SpellAbility> getSpellAbilities(final CardCollectionView l) {
-        final ArrayList<SpellAbility> spellAbilities = new ArrayList<SpellAbility>();
-        for (final Card c : l) {
-            for (final SpellAbility sa : c.getSpellAbilities()) {
-                spellAbilities.add(sa);
-            }
-            if (c.isFaceDown() && c.isInZone(ZoneType.Exile) && c.mayPlay(player) != null) {
-                for (final SpellAbility sa : c.getState(CardStateName.Original).getSpellAbilities()) {
-                    spellAbilities.add(sa);
-                }
-            }
-        }
-        return spellAbilities;
     }
 
     private static ArrayList<SpellAbility> getPlayableCounters(final CardCollection l) {
@@ -568,7 +520,7 @@ public class AiController {
         SpellAbility bestSA = null;
         int bestRestriction = Integer.MIN_VALUE;
 
-        for (final SpellAbility sa : getOriginalAndAltCostAbilities(possibleCounters)) {
+        for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(possibleCounters, player)) {
             SpellAbility currentSA = sa;
             sa.setActivatingPlayer(player);
             // check everything necessary
@@ -607,12 +559,13 @@ public class AiController {
             return null;
         }
 
-        final CardCollectionView cards = handOnly ? player.getCardsIn(ZoneType.Hand) : getAvailableCards();
+        final CardCollectionView cards = handOnly ? player.getCardsIn(ZoneType.Hand) :
+            ComputerUtilAbility.getAvailableCards(game, player);
 
-        ArrayList<SpellAbility> all = getSpellAbilities(cards);
+        ArrayList<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
         Collections.sort(all, saComparator); // put best spells first
 
-        for (final SpellAbility sa : getOriginalAndAltCostAbilities(all)) {
+        for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
             if (sa.getApi() == ApiType.Counter || sa.getApi() == exceptSA) {
                 continue;
             }
@@ -1195,7 +1148,7 @@ public class AiController {
             // probably should let my stuff resolve
             return null;
         }
-        final CardCollection cards = getAvailableCards();
+        final CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
     
         if (!game.getStack().isEmpty()) {
             SpellAbility counter = chooseCounterSpell(getPlayableCounters(cards));
@@ -1206,7 +1159,7 @@ public class AiController {
                 return counterETB;
         }
     
-        SpellAbility result = chooseSpellAbilityToPlay(getSpellAbilities(cards), true);
+        SpellAbility result = chooseSpellAbilityToPlay(ComputerUtilAbility.getSpellAbilities(cards, player), true);
         if (null == result) 
             return null;
         return result;
@@ -1217,12 +1170,12 @@ public class AiController {
             return null;
         
         if (useSimulation) {
-            return simPicker.chooseSpellAbilityToPlay(getOriginalAndAltCostAbilities(all), skipCounter);
+            return simPicker.chooseSpellAbilityToPlay(all, skipCounter);
         }
         
         Collections.sort(all, saComparator); // put best spells first
         
-        for (final SpellAbility sa : getOriginalAndAltCostAbilities(all)) {
+        for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
             // Don't add Counterspells to the "normal" playcard lookups
             if (skipCounter && sa.getApi() == ApiType.Counter) {
                 continue;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.ai.AiPlayDecision;
+import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCost;
 import forge.game.Game;
 import forge.game.ability.ApiType;
@@ -17,17 +18,23 @@ import forge.game.spellability.TargetChoices;
 public class SpellAbilityPicker {
     private Game game;
     private Player player;
+    private int recursionDepth;
+    private int bestScore;
 
     public SpellAbilityPicker(Game game, Player player) {
         this.game = game;
         this.player = player;
     }
+    
+    public void setRecursionDepth(int depth) {
+        recursionDepth = depth;
+    }
 
-    public SpellAbility chooseSpellAbilityToPlay(final ArrayList<SpellAbility> originalAndAltCostAbilities, boolean skipCounter) {
+    public SpellAbility chooseSpellAbilityToPlay(final ArrayList<SpellAbility> all, boolean skipCounter) {
         System.out.println("---- choose ability  (phase = " +  game.getPhaseHandler().getPhase() + ")");
 
         ArrayList<SpellAbility> candidateSAs = new ArrayList<>();
-        for (final SpellAbility sa : originalAndAltCostAbilities) {
+        for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
             // Don't add Counterspells to the "normal" playcard lookups
             if (skipCounter && sa.getApi() == ApiType.Counter) {
                 continue;
@@ -86,7 +93,12 @@ public class SpellAbilityPicker {
         }
         
         System.out.println("BEST: " + abilityToString(bestSa) + " SCORE: " + bestSaValue);
+        this.bestScore = bestSaValue;
         return bestSa;
+    }
+ 
+    public int getScoreForChosenAbility() {
+        return bestScore;
     }
 
     private String abilityToString(SpellAbility sa) {
@@ -154,6 +166,7 @@ public class SpellAbilityPicker {
         while (selector.selectNextTargets()) {
             System.out.println("Trying targets: " + sa.getTargets().getTargetedString());
             GameSimulator simulator = new GameSimulator(game, player);
+            simulator.setRecursionDepth(recursionDepth);
             int score = simulator.simulateSpellAbility(sa);
             if (score > bestScore) {
                 bestScore = score;

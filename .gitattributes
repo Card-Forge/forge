@@ -23,6 +23,7 @@ forge-ai/src/main/java/forge/ai/AiPlayDecision.java -text
 forge-ai/src/main/java/forge/ai/AiProfileUtil.java -text
 forge-ai/src/main/java/forge/ai/AiProps.java -text
 forge-ai/src/main/java/forge/ai/ComputerUtil.java svneol=native#text/plain
+forge-ai/src/main/java/forge/ai/ComputerUtilAbility.java -text
 forge-ai/src/main/java/forge/ai/ComputerUtilCard.java -text
 forge-ai/src/main/java/forge/ai/ComputerUtilCombat.java -text
 forge-ai/src/main/java/forge/ai/ComputerUtilCost.java -text

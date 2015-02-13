@@ -7,10 +7,12 @@ import java.util.List;
 import java.util.Set;
 
 import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilAbility;
 import forge.ai.PlayerControllerAi;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.player.Player;
 import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
@@ -18,11 +20,14 @@ import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 
 public class GameSimulator {
+    private static int MAX_DEPTH = 5;
+    
     public static boolean COPY_STACK = false;
     private GameCopier copier;
     private Game simGame;
     private Player aiPlayer;
     private GameStateEvaluator eval;
+    private int recursionDepth;
     private ArrayList<String> origLines;
     private int origScore;
     
@@ -68,6 +73,10 @@ public class GameSimulator {
 
         debugPrint = true;
         debugLines = null;
+    }
+
+    public void setRecursionDepth(int depth) {
+        this.recursionDepth = depth;
     }
 
     private void printDiff(List<String> lines1, List<String> lines2) {
@@ -174,6 +183,20 @@ public class GameSimulator {
         debugLines = null;
         debugPrint = true;
         printDiff(origLines, simLines);
+        
+        if (recursionDepth < MAX_DEPTH) {
+            System.out.println("Recursing DEPTH=" + recursionDepth);
+            System.out.println("  With: " + sa);
+            SpellAbilityPicker sim = new SpellAbilityPicker(simGame, aiPlayer);
+            sim.setRecursionDepth(recursionDepth + 1);
+            CardCollection cards = ComputerUtilAbility.getAvailableCards(simGame, aiPlayer);
+            ArrayList<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, aiPlayer);
+            SpellAbility nextSa = sim.chooseSpellAbilityToPlay(all, true);
+            if (nextSa != null) {
+                score = sim.getScoreForChosenAbility();
+            }
+            System.out.println("DEPTH"+recursionDepth+" best score " + score + " " + nextSa);
+        }
 
         return score;
     }
