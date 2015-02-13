@@ -208,7 +208,7 @@ public class GameSimulator {
             public void run() {
                 final Set<Card> allAffectedCards = new HashSet<Card>();
                 game.getStack().addAllTriggeredAbilitiesToStack();
-                do {
+                while (!game.getStack().isEmpty() && !game.isGameOver()) {
                     debugPrint("Resolving:" + game.getStack().peekAbility());
                     // Resolve the top effect on the stack.
                     game.getStack().resolveStack();
@@ -220,7 +220,7 @@ public class GameSimulator {
                     // Add any triggers as a result of resolving the effect.
                     game.getStack().addAllTriggeredAbilitiesToStack();
                     // Continue until stack is empty.
-                } while (!game.getStack().isEmpty() && !game.isGameOver());
+                }
             }
         }, new PlayerControllerAi(game, opponent, opponent.getLobbyPlayer()));
     }
