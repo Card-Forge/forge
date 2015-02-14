@@ -585,7 +585,7 @@ public final class StaticAbilityContinuous {
             }
 
             // remove triggers
-            if (layer == StaticAbilityLayer.ABILITIES2 && (params.containsKey("RemoveTriggers") || removeAllAbilities)) {
+            if ((layer == StaticAbilityLayer.ABILITIES2 && (params.containsKey("RemoveTriggers")) || removeAllAbilities)) {
                 for (final Trigger trigger : affectedCard.getTriggers()) {
                     trigger.setTemporarilySuppressed(true);
                 }
