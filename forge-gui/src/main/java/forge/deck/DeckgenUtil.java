@@ -275,7 +275,7 @@ public class DeckgenUtil {
     }
 
     /** Generate a 2-color Commander deck. */
-    public static Deck generateCommanderDeck(boolean forAi) {
+    public static Deck generateCommanderDeck(boolean forAi, boolean tinyLeaders) {
         final Deck deck;
         CardDb cardDb = FModel.getMagicDb().getCommonCards();
         PaperCard commander;
@@ -287,7 +287,11 @@ public class DeckgenUtil {
                 (CardRulesPredicates.Presets.IS_CREATURE, CardRulesPredicates.Presets.IS_LEGENDARY), PaperCard.FN_GET_RULES));
         legends = Iterables.filter(legends, Predicates.compose(Predicates.and
         		(CardRulesPredicates.Presets.IS_MULTICOLOR, canPlay), PaperCard.FN_GET_RULES));
-        
+
+        if (tinyLeaders) {
+            legends = Iterables.filter(legends, Predicates.compose(CardRulesPredicates.IS_TINY_LEADERS_VALID, PaperCard.FN_GET_RULES));
+        }
+
         do {
             commander = Aggregates.random(legends);
             colorID = commander.getRules().getColorIdentity();
@@ -299,7 +303,7 @@ public class DeckgenUtil {
         if (colorID.hasBlack()) {	comColors.add("Black"); }
         if (colorID.hasRed()) {		comColors.add("Red"); }
         if (colorID.hasGreen()) {	comColors.add("Green"); }
-        
+
         DeckGeneratorBase gen = null;
         gen = new DeckGenerator2Color(cardDb, comColors.get(0), comColors.get(1));
         gen.setSingleton(true);
@@ -307,7 +311,7 @@ public class DeckgenUtil {
         CardPool cards = gen == null ? null : gen.getDeck(99, forAi);
 
         // After generating card lists, build deck.
-        deck = new Deck("Generated Commander deck (" + commander.getName() + ")");
+        deck = new Deck("Generated " + (tinyLeaders ? "Tiny Leaders" : "Commander") + " deck (" + commander.getName() + ")");
         deck.getMain().addAll(cards);
         deck.getOrCreate(DeckSection.Commander).add(commander);
 

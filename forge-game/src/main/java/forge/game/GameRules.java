@@ -85,4 +85,8 @@ public class GameRules {
     public boolean hasAppliedVariant(GameType variant) {
         return appliedVariants.contains(variant);
     }
+
+    public boolean hasCommander() {
+        return appliedVariants.contains(GameType.Commander) || appliedVariants.contains(GameType.TinyLeaders);
+    }
 }

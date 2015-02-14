@@ -19,7 +19,6 @@ package forge.game.spellability;
 
 import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.game.GameType;
 import forge.game.card.Card;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaPool;
@@ -134,7 +133,7 @@ public class AbilityManaPart implements java.io.Serializable {
         }
         ColorSet CID = null;
 
-        if (player.getGame().getRules().hasAppliedVariant(GameType.Commander)) {
+        if (player.getGame().getRules().hasCommander()) {
             CID = player.getCommander().getRules().getColorIdentity();
         }
         //clear lastProduced

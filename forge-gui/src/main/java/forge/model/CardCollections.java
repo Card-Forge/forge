@@ -43,92 +43,62 @@ public class CardCollections {
     private final IStorage<Deck> scheme;
     private final IStorage<Deck> plane;
     private final IStorage<Deck> commander;
+    private final IStorage<Deck> tinyLeaders;
 
-    /**
-     * TODO: Write javadoc for Constructor.
-     *
-     * @param file the file
-     */
     public CardCollections() {
         StopWatch sw = new StopWatch();
         sw.start();
-        this.constructed = new StorageImmediatelySerialized<Deck>("Constructed decks", new DeckStorage(new File(ForgeConstants.DECK_CONSTRUCTED_DIR), true), true);
-        this.draft = new StorageImmediatelySerialized<DeckGroup>("Draft deck sets", new DeckGroupSerializer(new File(ForgeConstants.DECK_DRAFT_DIR)));
-        this.sealed = new StorageImmediatelySerialized<DeckGroup>("Sealed deck sets", new DeckGroupSerializer(new File(ForgeConstants.DECK_SEALED_DIR)));
-        this.winston = new StorageImmediatelySerialized<DeckGroup>("Winston draft deck sets", new DeckGroupSerializer(new File(ForgeConstants.DECK_WINSTON_DIR)));
-        this.cube = new StorageImmediatelySerialized<Deck>("Cubes", new DeckStorage(new File(ForgeConstants.DECK_CUBE_DIR)));
-        this.scheme = new StorageImmediatelySerialized<Deck>("Archenemy decks", new DeckStorage(new File(ForgeConstants.DECK_SCHEME_DIR)));
-        this.plane = new StorageImmediatelySerialized<Deck>("Planechase decks", new DeckStorage(new File(ForgeConstants.DECK_PLANE_DIR)));
-        this.commander = new StorageImmediatelySerialized<Deck>("Commander decks", new DeckStorage(new File(ForgeConstants.DECK_COMMANDER_DIR)));
+        constructed = new StorageImmediatelySerialized<Deck>("Constructed decks", new DeckStorage(new File(ForgeConstants.DECK_CONSTRUCTED_DIR), true), true);
+        draft = new StorageImmediatelySerialized<DeckGroup>("Draft deck sets", new DeckGroupSerializer(new File(ForgeConstants.DECK_DRAFT_DIR)));
+        sealed = new StorageImmediatelySerialized<DeckGroup>("Sealed deck sets", new DeckGroupSerializer(new File(ForgeConstants.DECK_SEALED_DIR)));
+        winston = new StorageImmediatelySerialized<DeckGroup>("Winston draft deck sets", new DeckGroupSerializer(new File(ForgeConstants.DECK_WINSTON_DIR)));
+        cube = new StorageImmediatelySerialized<Deck>("Cubes", new DeckStorage(new File(ForgeConstants.DECK_CUBE_DIR)));
+        scheme = new StorageImmediatelySerialized<Deck>("Archenemy decks", new DeckStorage(new File(ForgeConstants.DECK_SCHEME_DIR)));
+        plane = new StorageImmediatelySerialized<Deck>("Planechase decks", new DeckStorage(new File(ForgeConstants.DECK_PLANE_DIR)));
+        commander = new StorageImmediatelySerialized<Deck>("Commander decks", new DeckStorage(new File(ForgeConstants.DECK_COMMANDER_DIR)));
+        tinyLeaders = new StorageImmediatelySerialized<Deck>("Commander decks", new DeckStorage(new File(ForgeConstants.DECK_TINY_LEADERS_DIR)));
         sw.stop();
-        System.out.printf("Read decks (%d ms): %d constructed, %d sealed, %d draft, %d cubes, %d scheme, %d planar, %d commander.%n", sw.getTime(), constructed.size(), sealed.size(), draft.size(), cube.size(), scheme.size(), plane.size(),commander.size());
+        System.out.printf("Read decks (%d ms): %d constructed, %d sealed, %d draft, %d cubes, %d scheme, %d planar, %d commander, %d tiny leaders.%n", sw.getTime(), constructed.size(), sealed.size(), draft.size(), cube.size(), scheme.size(), plane.size(), commander.size(), tinyLeaders.size());
 //        int sum = constructed.size() + sealed.size() + draft.size() + cube.size() + scheme.size() + plane.size();
 //        FSkin.setProgessBarMessage(String.format("Loaded %d decks in %f sec", sum, sw.getTime() / 1000f ));
         // remove this after most people have been switched to new layout
-        final OldDeckParser oldParser = new OldDeckParser(this.constructed, this.draft, this.sealed, this.cube);
+        final OldDeckParser oldParser = new OldDeckParser(constructed, draft, sealed, cube);
         oldParser.tryParse();
     }
 
-    /**
-     * Gets the constructed.
-     *
-     * @return the constructed
-     */
     public final IStorage<Deck> getConstructed() {
-        return this.constructed;
+        return constructed;
     }
 
-    /**
-     * Gets the draft.
-     *
-     * @return the draft
-     */
     public final IStorage<DeckGroup> getDraft() {
-        return this.draft;
+        return draft;
     }
 
     public final IStorage<DeckGroup> getWinston() {
-        return this.winston;
+        return winston;
     }
 
-    /**
-     * Gets the cubes.
-     *
-     * @return the cubes
-     */
     public final IStorage<Deck> getCubes() {
-        return this.cube;
+        return cube;
     }
 
-    /**
-     * Gets the sealed.
-     *
-     * @return the sealed
-     */
     public IStorage<DeckGroup> getSealed() {
-        return this.sealed;
+        return sealed;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
     public IStorage<Deck> getScheme() {
-        return this.scheme;
+        return scheme;
     }
 
-    /**
-     * @return the plane
-     */
     public IStorage<Deck> getPlane() {
         return plane;
     }
-    
-    /**
-     * @return the plane
-     */
+
     public IStorage<Deck> getCommander() {
         return commander;
     }
 
+    public IStorage<Deck> getTinyLeaders() {
+        return tinyLeaders;
+    }
 }

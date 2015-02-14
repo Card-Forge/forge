@@ -116,6 +116,7 @@ public final class ForgeConstants {
     public static final String DECK_SCHEME_DIR      = DECK_BASE_DIR + "scheme/";
     public static final String DECK_PLANE_DIR       = DECK_BASE_DIR + "planar/";
     public static final String DECK_COMMANDER_DIR   = DECK_BASE_DIR + "commander/";
+    public static final String DECK_TINY_LEADERS_DIR = DECK_BASE_DIR + "tiny_leaders/";
     public static final String DECK_NET_DIR         = DECK_BASE_DIR + "net/";
     public static final String QUEST_SAVE_DIR       = USER_QUEST_DIR + "saves/";
     public static final String CONQUEST_SAVE_DIR    = USER_CONQUEST_DIR + "saves/";

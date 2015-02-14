@@ -48,7 +48,15 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
                     return Aggregates.random(decks);
                 }
             }
-            return DeckgenUtil.generateCommanderDeck(isAi);
+            return DeckgenUtil.generateCommanderDeck(isAi, false);
+        case TinyLeaders:
+            if (index == 1) {
+                IStorage<Deck> decks = FModel.getDecks().getTinyLeaders();
+                if (decks.size() > 0) {
+                    return Aggregates.random(decks);
+                }
+            }
+            return DeckgenUtil.generateCommanderDeck(isAi, true);
         case Archenemy:
             if (index == 1) {
                 IStorage<Deck> decks = FModel.getDecks().getScheme();

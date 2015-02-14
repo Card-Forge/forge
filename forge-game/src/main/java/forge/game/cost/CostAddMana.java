@@ -19,7 +19,6 @@ package forge.game.cost;
 
 import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.game.GameType;
 import forge.game.card.Card;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
@@ -71,7 +70,7 @@ public class CostAddMana extends CostPart {
         Card source = sa.getHostCard();
         
         ColorSet cid = null;
-        if (ai.getGame().getRules().hasAppliedVariant(GameType.Commander)) {
+        if (ai.getGame().getRules().hasCommander()) {
             cid = ai.getCommander().getRules().getColorIdentity();
         }
         ArrayList<Mana> manaProduced = new ArrayList<Mana>();

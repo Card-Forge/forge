@@ -117,6 +117,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private final VariantCheckBox vntVanguard = new VariantCheckBox(GameType.Vanguard);
     private final VariantCheckBox vntMomirBasic = new VariantCheckBox(GameType.MomirBasic);
     private final VariantCheckBox vntCommander = new VariantCheckBox(GameType.Commander);
+    private final VariantCheckBox vntTinyLeaders = new VariantCheckBox(GameType.TinyLeaders);
     private final VariantCheckBox vntPlanechase = new VariantCheckBox(GameType.Planechase);
     private final VariantCheckBox vntArchenemy = new VariantCheckBox(GameType.Archenemy);
     private final VariantCheckBox vntArchenemyRumble = new VariantCheckBox(GameType.ArchenemyRumble);
@@ -168,6 +169,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         variantsPanel.add(vntVanguard);
         variantsPanel.add(vntMomirBasic);
         variantsPanel.add(vntCommander);
+        variantsPanel.add(vntTinyLeaders);
         variantsPanel.add(vntPlanechase);
         variantsPanel.add(vntArchenemy);
         variantsPanel.add(vntArchenemyRumble);
@@ -383,7 +385,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             	populateDeckPanel(GameType.Constructed);
             }
         }
-    	else if (GameType.Commander == forGameType) {
+    	else if (GameType.Commander == forGameType || GameType.TinyLeaders == forGameType) {
             decksFrame.add(commanderDeckPanels.get(playerWithFocus), "grow, push");
         }
     	else if (GameType.Planechase == forGameType) {
@@ -708,6 +710,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
                     archenemyVisiblity = true;
                     break;
                 case Commander:
+                case TinyLeaders:
                     isCommanderApplied = true;
                     isDeckBuildingAllowed = false; //Commander deck replaces basic deck, so hide that
                     break;
@@ -865,7 +868,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             cmdDeckSelectorBtn.setCommand(new Runnable() {
             	@Override
             	public void run() {
-            		currentGameMode = GameType.Commander;
+            		currentGameMode = vntTinyLeaders.isSelected() ? GameType.TinyLeaders : GameType.Commander;
             		cmdDeckSelectorBtn.requestFocusInWindow();
             		changePlayerFocus(index, currentGameMode);
             	}
@@ -874,7 +877,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             cmdDeckEditor.setCommand(new UiCommand() {
             	@Override
             	public void run() {
-            		currentGameMode = GameType.Commander;
+            		currentGameMode = vntTinyLeaders.isSelected() ? GameType.TinyLeaders : GameType.Commander;
                     Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_COMMANDER);
                     CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander());
                 }
@@ -1215,6 +1218,11 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
                             vntArchenemy.setSelected(false);
                             break;
                         case Commander:
+                            vntTinyLeaders.setSelected(false);
+                            vntMomirBasic.setSelected(false);
+                            break;
+                        case TinyLeaders:
+                            vntCommander.setSelected(false);
                             vntMomirBasic.setSelected(false);
                             break;
                         case Vanguard:
