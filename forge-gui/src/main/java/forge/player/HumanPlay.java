@@ -98,7 +98,15 @@ public class HumanPlay {
             if (sa.isSpell() && !source.isCopiedSpell()) {
                 sa.setHostCard(p.getGame().getAction().moveToStack(source));
             }
+
             p.getGame().getStack().add(sa);
+        }
+
+        if(sa.isDelve()) {
+            for(Card c : sa.getHostCard().getDelved()) {
+                p.getGame().getAction().exile(c);
+            }
+            sa.getHostCard().clearDelved();
         }
     }
 

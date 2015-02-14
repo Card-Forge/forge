@@ -89,6 +89,7 @@ public class ManaCostAdjustment {
 
         if (sa.isSpell()) {
             if (sa.isDelve()) {
+                sa.getHostCard().clearDelved();
                 final Player pc = sa.getActivatingPlayer();
                 final CardCollection mutableGrave = new CardCollection(pc.getCardsIn(ZoneType.Graveyard));
                 final CardCollectionView toExile = pc.getController().chooseCardsToDelve(cost.getUnpaidShards(ManaCostShard.COLORLESS), mutableGrave);
@@ -96,7 +97,7 @@ public class ManaCostAdjustment {
                     cost.decreaseColorlessMana(1);
                     if (!test) {
                         sa.getHostCard().addDelved(c);
-                        pc.getGame().getAction().exile(c);
+                        //pc.getGame().getAction().exile(c);
                     }
                 }
             }
