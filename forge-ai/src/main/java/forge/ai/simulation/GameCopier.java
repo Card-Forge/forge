@@ -22,6 +22,7 @@ import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZoneBattlefield;
@@ -61,6 +62,10 @@ public class GameCopier {
             Player newPlayer = newGame.getPlayers().get(i);
             newPlayer.setLife(origPlayer.getLife(), null);
             newPlayer.setActivateLoyaltyAbilityThisTurn(origPlayer.getActivateLoyaltyAbilityThisTurn());
+            for (int j = 0; j < origPlayer.getSpellsCastThisTurn(); j++)
+                newPlayer.addSpellCastThisTurn();
+            for (int j = 0; j < origPlayer.getLandsPlayedThisTurn(); j++)
+                newPlayer.addLandPlayedThisTurn();
             newPlayer.setPoisonCounters(origPlayer.getPoisonCounters(), null);
             newPlayer.setLifeLostLastTurn(origPlayer.getLifeLostLastTurn());
             newPlayer.setLifeLostThisTurn(origPlayer.getLifeLostThisTurn());
@@ -97,7 +102,7 @@ public class GameCopier {
         return newGame;
     }
 
-    private  static void copyStack(Game origGame, Game newGame, GameObjectMap map) {
+    private static void copyStack(Game origGame, Game newGame, GameObjectMap map) {
         for (SpellAbilityStackInstance origEntry : origGame.getStack()) {
             SpellAbility origSa = origEntry.getSpellAbility(false);
             Card origHostCard = origSa.getHostCard();
@@ -112,13 +117,13 @@ public class GameCopier {
                 }
             }
             if (newSa != null) {
-	            newSa.setActivatingPlayer(map.map(origSa.getActivatingPlayer()));
-	            if (origSa.usesTargeting()) {
-	                for (GameObject o : origSa.getTargets().getTargets()) {
-	                    newSa.getTargets().add(map.map(o));
-	                }
-	            }
-	            newGame.getStack().add(newSa);
+                newSa.setActivatingPlayer(map.map(origSa.getActivatingPlayer()));
+                if (origSa.usesTargeting()) {
+                    for (GameObject o : origSa.getTargets().getTargets()) {
+                        newSa.getTargets().add(map.map(o));
+                    }
+                }
+                newGame.getStack().add(newSa);
             }
         } 
     }
@@ -217,7 +222,21 @@ public class GameCopier {
                 newCard.setMonstrous(true);
                 newCard.setMonstrosityNum(c.getMonstrosityNum());
             }
-            
+
+            if (c.isPlaneswalker()) {
+                for (SpellAbility sa : c.getAllSpellAbilities()) {
+                    SpellAbilityRestriction restrict = sa.getRestrictions();
+                    if (restrict.isPwAbility() && restrict.getNumberTurnActivations() > 0) {
+                        SpellAbility newSa = findSAInCard(sa, newCard);
+                        if (newSa != null) {
+                            for (int i = 0; i < restrict.getNumberTurnActivations(); i++) {
+                                newSa.getRestrictions().abilityActivated();
+                            }
+                        }
+                    }
+                }
+            }
+
             Map<CounterType, Integer> counters = c.getCounters();
             if (!counters.isEmpty()) {
                 for(Entry<CounterType, Integer> kv : counters.entrySet()) {
@@ -244,6 +263,16 @@ public class GameCopier {
         } else {
             zoneOwner.getZone(zone).add(newCard);
         }
+    }
+    
+    private static SpellAbility findSAInCard(SpellAbility sa, Card c) {
+        String saDesc = sa.getDescription();
+        for (SpellAbility cardSa : c.getAllSpellAbilities()) {
+            if (saDesc.equals(cardSa.getDescription())) {
+                return cardSa;
+            }
+        }
+        return null;
     }
 
     private class CopiedGameObjectMap extends GameObjectMap {

@@ -1,11 +1,13 @@
 package forge.ai.simulation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.collect.Lists;
 
 import forge.GuiBase;
 import forge.GuiDesktop;
+import forge.ai.ComputerUtilAbility;
 import forge.ai.LobbyPlayerAi;
 import forge.card.CardStateName;
 import forge.deck.Deck;
@@ -15,6 +17,8 @@ import forge.game.GameStage;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CounterType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
@@ -55,7 +59,11 @@ public class GameSimulatorTest extends TestCase {
     }
 
     private SpellAbility findSAWithPrefix(Card c, String prefix) {
-        for (SpellAbility sa : c.getSpellAbilities()) {
+        return findSAWithPrefix(c.getSpellAbilities(), prefix);
+    }
+    
+    private SpellAbility findSAWithPrefix(Iterable<SpellAbility> abilities, String prefix) {
+        for (SpellAbility sa : abilities) {
             if (sa.toString().startsWith(prefix)) {
                 return sa;
             }
@@ -294,5 +302,47 @@ public class GameSimulatorTest extends TestCase {
         sim.simulateSpellAbility(fractureSa);
         assertEquals(1, simGame.getPlayers().get(0).getCardsIn(ZoneType.Hand).size());
         assertEquals(0, simGame.getPlayers().get(1).getCardsIn(ZoneType.Hand).size());
+    }
+    
+    public void testPlaneswalkerAbilities() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Card sorin = addCard("Sorin, Solemn Visitor", p);        
+        sorin.addCounter(CounterType.LOYALTY, 5, false);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        CardCollection cards = ComputerUtilAbility.getAvailableCards(game, p);
+        ArrayList<SpellAbility> abilities = ComputerUtilAbility.getSpellAbilities(cards, p);
+        SpellAbility minusTwo = findSAWithPrefix(abilities, "-2: Put a 2/2 black Vampire");
+        assertNotNull(minusTwo);
+        minusTwo.setActivatingPlayer(p);
+        assertTrue(minusTwo.canPlay());
+
+        GameSimulator sim = new GameSimulator(game, p);
+        sim.simulateSpellAbility(minusTwo);
+        Game simGame = sim.getSimulatedGameState();
+        Card vampireToken = findCardWithName(simGame, "Vampire");
+        assertNotNull(vampireToken);
+
+        Player simP = simGame.getPlayers().get(1);
+        cards = ComputerUtilAbility.getAvailableCards(simGame, simP);
+        abilities = ComputerUtilAbility.getSpellAbilities(cards, simP);
+        SpellAbility minusTwoSim = findSAWithPrefix(abilities, "-2: Put a 2/2 black Vampire");
+        assertNotNull(minusTwoSim);
+        minusTwo.setActivatingPlayer(simP);
+        assertFalse(minusTwoSim.canPlay());
+        assertEquals(1, minusTwoSim.getActivationsThisTurn());
+        
+        GameCopier copier = new GameCopier(simGame);
+        Game copy = copier.makeCopy();
+        Player copyP = copy.getPlayers().get(1);
+        cards = ComputerUtilAbility.getAvailableCards(copy, copyP);
+        abilities = ComputerUtilAbility.getSpellAbilities(cards, copyP);
+        SpellAbility minusTwoCopy = findSAWithPrefix(abilities, "-2: Put a 2/2 black Vampire");
+        minusTwoCopy.setActivatingPlayer(copyP);
+        assertFalse(minusTwoCopy.canPlay());
+        assertEquals(1, minusTwoCopy.getActivationsThisTurn());
     }
 }
