@@ -10,15 +10,16 @@ import forge.game.zone.ZoneType;
 
 public class GameStateEvaluator {
     private boolean debugging = false;
+    private boolean ignoreTempBoosts = false;
     private SimulationCreatureEvaluator eval = new SimulationCreatureEvaluator();
 
     public void setDebugging(boolean debugging) {
         this.debugging = debugging;
     }
 
-    public int getScoreForGameState(Game game, Player aiPlayer) {
+    public Score getScoreForGameState(Game game, Player aiPlayer) {
         if (game.isGameOver()) {
-            return game.getOutcome().getWinningPlayer() == aiPlayer ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            return game.getOutcome().getWinningPlayer() == aiPlayer ? new Score(Integer.MAX_VALUE) : new Score(Integer.MIN_VALUE);
         }
         int score = 0;
         // TODO: more than 2 players
@@ -39,24 +40,6 @@ public class GameStateEvaluator {
             myCards = aiPlayer.getMaxHandSize();
         }
         score += 5 * myCards - 4 * theirCards;
-        for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
-            int value = evalCard(game, aiPlayer, c);
-            String str = c.getName();
-            if (c.isCreature()) {
-                str += " " + c.getNetPower() + "/" + c.getNetToughness();
-            }
-            if (c.getController() == aiPlayer) {
-                GameSimulator.debugPrint("  Battlefield: " + str + " = " + value);
-                score += value;
-            } else {
-                GameSimulator.debugPrint("  Battlefield: " + str + " = -" + value);
-                score -= value;
-            }
-            String nonAbilityText = c.getNonAbilityText();
-            if (!nonAbilityText.isEmpty()) {
-                GameSimulator.debugPrint("    "+nonAbilityText.replaceAll("CARDNAME", c.getName()));
-            }
-        }
         GameSimulator.debugPrint("  My life: " + aiPlayer.getLife());
         score += 2 * aiPlayer.getLife();
         int opponentIndex = 1;
@@ -69,8 +52,36 @@ public class GameStateEvaluator {
             }
         }
         score -= 2* opponentLife / (game.getPlayers().size() - 1);
+        int summonSickScore = score;
+        PhaseType gamePhase = game.getPhaseHandler().getPhase();
+        for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
+            int value = evalCard(game, aiPlayer, c);
+            int summonSickValue = value;
+            // To make the AI hold-off on playing creatures in MAIN1 if they give no other benefits,
+            // keep track of the score while treating summon sick creatures as having a value of 0.
+            if (gamePhase == PhaseType.MAIN1 && c.isSick() && c.getController() == aiPlayer) {
+                summonSickValue = 0;
+            }
+            String str = c.getName();
+            if (c.isCreature()) {
+                str += " " + c.getNetPower() + "/" + c.getNetToughness();
+            }
+            if (c.getController() == aiPlayer) {
+                GameSimulator.debugPrint("  Battlefield: " + str + " = " + value);
+                score += value;
+                summonSickScore += summonSickValue;
+            } else {
+                GameSimulator.debugPrint("  Battlefield: " + str + " = -" + value);
+                score -= value;
+                summonSickScore -= summonSickValue;
+            }
+            String nonAbilityText = c.getNonAbilityText();
+            if (!nonAbilityText.isEmpty()) {
+                GameSimulator.debugPrint("    "+nonAbilityText.replaceAll("CARDNAME", c.getName()));
+            }
+        }
         GameSimulator.debugPrint("Score = " + score);
-        return score;
+        return new Score(score, summonSickScore);
     }
 
     protected int evalCard(Game game, Player aiPlayer, Card c) {
@@ -81,8 +92,7 @@ public class GameStateEvaluator {
             // with that creature - or if you're just temporarily pumping down.
             // Also, sometimes temp boosts post combat could be useful - e.g. if you then want to make your
             // creature fight another, etc.
-            boolean ignoreTempBoosts = game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE);
-            eval.setIgnoreTempBoosts(ignoreTempBoosts);
+            ignoreTempBoosts = game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE);
             int result = eval.evaluateCreature(c);
             return result;
         } else if (c.isLand()) {
@@ -103,11 +113,6 @@ public class GameStateEvaluator {
     }
 
     private class SimulationCreatureEvaluator extends CreatureEvaluator {
-        private boolean ignoreTempBoosts;
-        
-        public void setIgnoreTempBoosts(boolean value) {
-            this.ignoreTempBoosts = value;
-        }
         @Override
         protected int addValue(int value, String text) {
             if (debugging && value != 0) {
@@ -131,6 +136,27 @@ public class GameStateEvaluator {
                 return breakdown.getTotal() - breakdown.tempBoost;
             }
             return c.getNetToughness();
+        }
+    }
+
+    public static class Score {
+        public final int value;
+        public final int summonSickValue;
+        
+        public Score(int value) {
+            this.value = value;
+            this.summonSickValue = value;
+        }
+        
+        public Score(int value, int summonSickValue) {
+            this.value = value;
+            this.summonSickValue = summonSickValue;
+        }
+        
+        public boolean equals(Score other) {
+            if (other == null)
+                return false;
+            return value == other.value && summonSickValue == other.summonSickValue;
         }
     }
 }

@@ -91,7 +91,7 @@ public class GameSimulatorTest extends TestCase {
         assertNotNull(outlastSA);
 
         GameSimulator sim = new GameSimulator(game, p);
-        int score = sim.simulateSpellAbility(outlastSA);
+        int score = sim.simulateSpellAbility(outlastSA).value;
         assertTrue(score >  0);
         Game simGame = sim.getSimulatedGameState();
 
@@ -135,7 +135,7 @@ public class GameSimulatorTest extends TestCase {
         assertNotNull(outlastSA);
 
         GameSimulator sim = new GameSimulator(game, p);
-        int score = sim.simulateSpellAbility(outlastSA);
+        int score = sim.simulateSpellAbility(outlastSA).value;
         assertTrue(score >  0);
         Game simGame = sim.getSimulatedGameState();
         Card sliverCopy = findCardWithName(simGame, sliverCardName);
@@ -218,8 +218,8 @@ public class GameSimulatorTest extends TestCase {
         playMerchantSa.setActivatingPlayer(p);
 
         GameSimulator sim = new GameSimulator(game, p);
-        int origScore = sim.getScoreForOrigGame();
-        int score = sim.simulateSpellAbility(playMerchantSa);
+        int origScore = sim.getScoreForOrigGame().value;
+        int score = sim.simulateSpellAbility(playMerchantSa).value;
         assertTrue(String.format("score=%d vs. origScore=%d",  score, origScore), score > origScore);
         Game simGame = sim.getSimulatedGameState();
         assertEquals(24, simGame.getPlayers().get(1).getLife());

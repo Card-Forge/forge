@@ -6,9 +6,9 @@ import java.util.List;
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCost;
+import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -19,7 +19,7 @@ public class SpellAbilityPicker {
     private Game game;
     private Player player;
     private int recursionDepth;
-    private int bestScore;
+    private Score bestScore;
 
     public SpellAbilityPicker(Game game, Player player) {
         this.game = game;
@@ -29,9 +29,15 @@ public class SpellAbilityPicker {
     public void setRecursionDepth(int depth) {
         recursionDepth = depth;
     }
+    
+    private void print(String str) {
+        if (recursionDepth == 0) {
+            System.out.println(str);
+        }
+    }
 
     public SpellAbility chooseSpellAbilityToPlay(final ArrayList<SpellAbility> all, boolean skipCounter) {
-        System.out.println("---- choose ability  (phase = " +  game.getPhaseHandler().getPhase() + ")");
+        print("---- choose ability  (phase = " +  game.getPhaseHandler().getPhase() + ")");
 
         ArrayList<SpellAbility> candidateSAs = new ArrayList<>();
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
@@ -45,7 +51,7 @@ public class SpellAbilityPicker {
             sa.setActivatingPlayer(player);
             
             AiPlayDecision opinion = canPlayAndPayForSim(sa);
-            System.out.println("  " + opinion + ": " + sa);
+            print("  " + opinion + ": " + sa);
             // PhaseHandler ph = game.getPhaseHandler();
             // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
             
@@ -57,51 +63,39 @@ public class SpellAbilityPicker {
             return null;
         }
         SpellAbility bestSa = null;
-        System.out.println("Evaluating...");
+        print("Evaluating...");
         GameSimulator simulator = new GameSimulator(game, player);
         // FIXME: This is wasteful, we should re-use the same simulator...
-        int origGameScore = simulator.getScoreForOrigGame();
-        int bestSaValue = origGameScore;
+        Score origGameScore = simulator.getScoreForOrigGame();
+        Score bestSaValue = origGameScore;
         for (final SpellAbility sa : candidateSAs) {
-            int value = evaluateSa(sa);
-            if (value > bestSaValue) {
+            print(abilityToString(sa));;
+            Score value = evaluateSa(sa);
+            if (value.value > bestSaValue.value) {
                 bestSaValue = value;
                 bestSa = sa;
             }
         }
-        
-        if (bestSa != null && game.getPhaseHandler().getPhase() == PhaseType.MAIN1) {
-            // To make the AI hold-off on playing creatures in MAIN1 if they give no other benefits,
-            // check the score for the bestSA while counting summon sick creatures for 0.
-            // Do it here on the best SA, rather than for all evaluations, so that if the best SA
-            // is indeed a creature spell, we don't pick something else to play now and then have
-            // no mana to play the truly best SA post-combat.
-            // TODO: This can be done more efficiently by keeping track of both scores during original
-            // evaluation.
-            GameStateEvaluator summonSickEval = new GameStateEvaluator() {
-                @Override
-                protected int evalCard(Game game, Player aiPlayer, Card c) {
-                    if (c.isSick() && c.getController() == aiPlayer) {
-                        return 0;
-                    }
-                    return super.evalCard(game, aiPlayer, c);
-                }
-            };
-            if (simulator.simulateSpellAbility(bestSa,summonSickEval) <= origGameScore) {
-                bestSa = null;
-            }
+
+        // To make the AI hold-off on playing creatures in MAIN1 if they give no other benefits,
+        // check the score for the bestSA while counting summon sick creatures for 0.
+        // Do it here on the best SA, rather than for all evaluations, so that if the best SA
+        // is indeed a creature spell, we don't pick something else to play now and then have
+        // no mana to play the truly best SA post-combat.
+        if (bestSa != null && bestSaValue.summonSickValue <= origGameScore.summonSickValue) {
+            bestSa = null;
         }
-        
-        System.out.println("BEST: " + abilityToString(bestSa) + " SCORE: " + bestSaValue);
+
+        print("BEST: " + abilityToString(bestSa) + " SCORE: " + bestSaValue);
         this.bestScore = bestSaValue;
         return bestSa;
     }
  
-    public int getScoreForChosenAbility() {
+    public Score getScoreForChosenAbility() {
         return bestScore;
     }
 
-    private String abilityToString(SpellAbility sa) {
+    public static String abilityToString(SpellAbility sa) {
         String saString = "N/A";
         if (sa != null) {
             saString = sa.toString();
@@ -154,21 +148,23 @@ public class SpellAbilityPicker {
         return AiPlayDecision.WillPlay;
     }
 
-    private int evaluateSa(SpellAbility sa) {
-        System.out.println("Evaluate SA: " + sa);
+    private Score evaluateSa(SpellAbility sa) {
+        GameSimulator.debugPrint("Evaluate SA: " + sa);
         if (!sa.usesTargeting()) {
             GameSimulator simulator = new GameSimulator(game, player);
+            simulator.setRecursionDepth(recursionDepth);
             return simulator.simulateSpellAbility(sa);
         }
+        GameSimulator.debugPrint("Checking out targets");
         PossibleTargetSelector selector = new PossibleTargetSelector(game, player, sa);
-        int bestScore = Integer.MIN_VALUE;
+        Score bestScore = new Score(Integer.MIN_VALUE);
         TargetChoices tgt = null;
         while (selector.selectNextTargets()) {
-            System.out.println("Trying targets: " + sa.getTargets().getTargetedString());
+            GameSimulator.debugPrint("Trying targets: " + sa.getTargets().getTargetedString());
             GameSimulator simulator = new GameSimulator(game, player);
             simulator.setRecursionDepth(recursionDepth);
-            int score = simulator.simulateSpellAbility(sa);
-            if (score > bestScore) {
+            Score score = simulator.simulateSpellAbility(sa);
+            if (score.value > bestScore.value) {
                 bestScore = score;
                 tgt = sa.getTargets();
                 sa.resetTargets();

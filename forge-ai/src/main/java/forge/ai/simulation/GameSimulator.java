@@ -9,6 +9,7 @@ import java.util.Set;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.PlayerControllerAi;
+import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.card.Card;
@@ -29,7 +30,7 @@ public class GameSimulator {
     private GameStateEvaluator eval;
     private int recursionDepth;
     private ArrayList<String> origLines;
-    private int origScore;
+    private Score origScore;
     
     public GameSimulator(final Game origGame, final Player origAiPlayer) {
         copier = new GameCopier(origGame);
@@ -47,8 +48,8 @@ public class GameSimulator {
         eval.setDebugging(true);
         ArrayList<String> simLines = new ArrayList<String>();
         debugLines = simLines;
-        int simScore = eval.getScoreForGameState(simGame, aiPlayer);
-        if (simScore != origScore) {
+        Score simScore = eval.getScoreForGameState(simGame, aiPlayer);
+        if (!simScore.equals(origScore)) {
             // Re-eval orig with debug printing.
             origLines = new ArrayList<String>();
             debugLines = origLines;
@@ -71,7 +72,7 @@ public class GameSimulator {
             origScore = eval.getScoreForGameState(copyOrigGame, copyOrigAiPlayer);
         }
 
-        debugPrint = true;
+        debugPrint = false;
         debugLines = null;
     }
 
@@ -135,18 +136,18 @@ public class GameSimulator {
         return null;
     }
 
-    public int simulateSpellAbility(SpellAbility origSa) {
+    public Score simulateSpellAbility(SpellAbility origSa) {
         return simulateSpellAbility(origSa, this.eval);
     }
-    public int simulateSpellAbility(SpellAbility origSa, GameStateEvaluator eval) {
+    public Score simulateSpellAbility(SpellAbility origSa, GameStateEvaluator eval) {
         // TODO: optimize: prune identical SA (e.g. two of the same card in hand)
         SpellAbility sa = findSaInSimGame(origSa);
         if (sa == null) {
             System.err.println("SA not found! " + sa);
-            return Integer.MIN_VALUE;
+            return new Score(Integer.MIN_VALUE, Integer.MIN_VALUE);
         }
 
-        System.out.println("Found SA " + sa + " on host card " + sa.getHostCard() + " with owner:"+ sa.getHostCard().getOwner());
+        debugPrint("Found SA " + sa + " on host card " + sa.getHostCard() + " with owner:"+ sa.getHostCard().getOwner());
         sa.setActivatingPlayer(aiPlayer);
         if (origSa.usesTargeting()) {
             for (GameObject o : origSa.getTargets().getTargets()) {
@@ -157,7 +158,7 @@ public class GameSimulator {
         if (sa == Ability.PLAY_LAND_SURROGATE) {
             aiPlayer.playLand(sa.getHostCard(), false);
         } else {
-            if (!sa.getAllTargetChoices().isEmpty()) {
+            if (debugPrint && !sa.getAllTargetChoices().isEmpty()) {
                 debugPrint("Targets: ");
                 for (TargetChoices target : sa.getAllTargetChoices()) {
                     System.out.print(target.getTargetedString());
@@ -175,18 +176,25 @@ public class GameSimulator {
         // TODO: If this is during combat, before blockers are declared,
         // we should simulate how combat will resolve and evaluate that
         // state instead!
-        debugPrint("SimGame:");
-        ArrayList<String> simLines = new ArrayList<String>();
-        debugLines = simLines;
-        debugPrint = false;
-        int score = eval.getScoreForGameState(simGame, aiPlayer);
-        debugLines = null;
-        debugPrint = true;
-        printDiff(origLines, simLines);
-        
+        ArrayList<String> simLines = null;
+        if (debugPrint) {
+            debugPrint("SimGame:");
+            simLines = new ArrayList<String>();
+            debugLines = simLines;
+            debugPrint = false;
+        }
+        Score score = eval.getScoreForGameState(simGame, aiPlayer);
+        if (simLines != null) {
+            debugLines = null;
+            debugPrint = true;
+            printDiff(origLines, simLines);
+        }
+        for (int i = 0; i < recursionDepth; i++)
+            System.err.print("  ");
+        System.err.println(recursionDepth + ": [" + score.value + "] from " + SpellAbilityPicker.abilityToString(sa));
         if (recursionDepth < MAX_DEPTH && !simGame.isGameOver()) {
-            System.out.println("Recursing DEPTH=" + recursionDepth);
-            System.out.println("  With: " + sa);
+            debugPrint("Recursing DEPTH=" + recursionDepth);
+            debugPrint("  With: " + sa);
             SpellAbilityPicker sim = new SpellAbilityPicker(simGame, aiPlayer);
             sim.setRecursionDepth(recursionDepth + 1);
             CardCollection cards = ComputerUtilAbility.getAvailableCards(simGame, aiPlayer);
@@ -195,7 +203,7 @@ public class GameSimulator {
             if (nextSa != null) {
                 score = sim.getScoreForChosenAbility();
             }
-            System.out.println("DEPTH"+recursionDepth+" best score " + score + " " + nextSa);
+            debugPrint("DEPTH"+recursionDepth+" best score " + score + " " + nextSa);
         }
 
         return score;
@@ -229,7 +237,7 @@ public class GameSimulator {
         return simGame;
     }
 
-    public int getScoreForOrigGame() {
+    public Score getScoreForOrigGame() {
         return origScore;
     }
 }
