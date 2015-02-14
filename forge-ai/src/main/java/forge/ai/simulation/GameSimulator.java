@@ -191,7 +191,7 @@ public class GameSimulator {
         }
         for (int i = 0; i < recursionDepth; i++)
             System.err.print("  ");
-        System.err.println(recursionDepth + ": [" + score.value + "] from " + SpellAbilityPicker.abilityToString(sa));
+        System.err.println(recursionDepth + ": [" + score.value + "] " + SpellAbilityPicker.abilityToString(origSa));
         if (recursionDepth < MAX_DEPTH && !simGame.isGameOver()) {
             debugPrint("Recursing DEPTH=" + recursionDepth);
             debugPrint("  With: " + sa);
