@@ -116,10 +116,11 @@ public final class AbilityFactory {
     public static Cost parseAbilityCost(final Card hostCard, Map<String, String> mapParams, AbilityRecordType type) {
         Cost abCost = null;
         if (type != AbilityRecordType.SubAbility) {
-            if (!mapParams.containsKey("Cost")) {
+            String cost = mapParams.get("Cost");
+            if (cost == null) {
                 throw new RuntimeException("AbilityFactory : getAbility -- no Cost in " + hostCard.getName());
             }
-            abCost = new Cost(mapParams.get("Cost"), type == AbilityRecordType.Ability);
+            abCost = new Cost(cost, type == AbilityRecordType.Ability);
         }
         return abCost;
     }
