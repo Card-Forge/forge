@@ -2,8 +2,10 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+
 import forge.ai.*;
 import forge.game.GameObject;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
@@ -18,6 +20,8 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.ZoneType;
+
 import java.util.*;
 
 public class AttachAi extends SpellAbilityAi {
@@ -71,6 +75,22 @@ public class AttachAi extends SpellAbilityAi {
             source.setSVar("PayX", Integer.toString(xPay));
         }
 
+        if (sa.getHostCard().getName().equals("Chained to the Rocks")) {
+            final SpellAbility effectExile = AbilityFactory.getAbility(source.getSVar("TrigExile"), source);
+            final ZoneType origin = ZoneType.listValueOf(effectExile.getParam("Origin")).get(0);
+            final TargetRestrictions exile_tgt = effectExile.getTargetRestrictions();
+            final CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(origin), exile_tgt.getValidTgts(), ai, source);
+            final CardCollection targets = CardLists.filter(list, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    return !(c.hasProtectionFrom(source) || c.hasKeyword("Shroud") || c.hasKeyword("Hexproof"));
+                }
+            });
+            if (targets.isEmpty()) {
+                return false;
+            }
+        }
+        
         return true;
     }
 
