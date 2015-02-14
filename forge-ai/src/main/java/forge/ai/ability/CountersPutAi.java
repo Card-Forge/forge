@@ -171,11 +171,16 @@ public class CountersPutAi extends SpellAbilityAi {
         }
 
         if ("Polukranos".equals(sa.getParam("AILogic"))) {
-            List<Card> humCreatures = ai.getOpponent().getCreaturesInPlay();
-            //TODO how to grab target restrictions from subsequent triggered ability?
-            if (!humCreatures.isEmpty()){
+            CardCollection humCreatures = ai.getOpponent().getCreaturesInPlay();
+            final CardCollection targets = CardLists.filter(humCreatures, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    return !(c.hasProtectionFrom(source) || c.hasKeyword("Shroud") || c.hasKeyword("Hexproof"));
+                }
+            });
+            if (!targets.isEmpty()){
                 boolean canSurvive = false;
-                for (Card humanCreature : humCreatures) {
+                for (Card humanCreature : targets) {
                     if (!FightAi.canKill(humanCreature, source, 0)){
                         canSurvive = true;
                     }

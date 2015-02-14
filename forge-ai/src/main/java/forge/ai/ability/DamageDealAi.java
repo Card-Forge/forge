@@ -282,6 +282,7 @@ public class DamageDealAi extends DamageAiBase {
             Card lastTgt = null;
             humCreatures = CardLists.getTargetableCards(humCreatures, sa);
             ComputerUtilCard.sortByEvaluateCreature(humCreatures);
+            // try to kill things without dying
             for (Card humanCreature : humCreatures) {
                 if (FightAi.canKill(humanCreature, source, dmgTaken)) {
                     continue;
@@ -306,7 +307,16 @@ public class DamageDealAi extends DamageAiBase {
                 dmg = 0;
                 return true;
             }
-            //fall back into generic targeting due to failure to restrict targets in CountersPutAi or change in board state
+            // get safe target to dump damage
+            for (Card humanCreature : humCreatures) {
+                if (FightAi.canKill(humanCreature, source, 0)) {
+                    continue;
+                }
+                tcs.add(humanCreature);
+                tgt.addDividedAllocation(humanCreature, dmg);
+                dmg = 0;
+                return true;
+            }
         }
         while (tcs.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             if (oppTargetsChoice && sa.getActivatingPlayer().equals(ai) && !sa.isTrigger()) {
