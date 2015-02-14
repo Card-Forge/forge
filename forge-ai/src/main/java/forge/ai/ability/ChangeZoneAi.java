@@ -842,7 +842,19 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
 
         } else if (origin.equals(ZoneType.Graveyard)) {
-            if (destination.equals(ZoneType.Hand)) {
+        	if (destination.equals(ZoneType.Exile) || destination.equals(ZoneType.Library)) {
+                // Don't use these abilities before main 2 if possible
+                if (game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+                        && !sa.hasParam("ActivationPhases") && !ComputerUtil.castSpellInMain1(ai, sa)) {
+                    return false;
+                }
+                if ((!game.getPhaseHandler().getNextTurn().equals(ai)
+                            || game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
+                        && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)
+                        && !ComputerUtil.activateForCost(sa, ai)) {
+                    return false;
+                }
+        	} else if (destination.equals(ZoneType.Hand)) {
                 // only retrieve cards from computer graveyard
                 list = CardLists.filterControlledBy(list, ai);
             } else if (sa.hasParam("AttachedTo")) {
@@ -864,7 +876,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (origin.equals(ZoneType.Battlefield)
                 && destination.equals(ZoneType.Exile)
                 && (subApi == ApiType.DelayedTrigger || (subApi == ApiType.ChangeZone  && subAffected.equals("Remembered")))
-                && !(ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS) || sa.isAbility())) {
+                && !(game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS) || sa.isAbility())) {
             return false;
         }
 
@@ -873,8 +885,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
             // don't rush bouncing stuff when not going to attack
             if (!sa.isTrigger() && sa.getPayCosts() != null
-                    && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                    && ai.getGame().getPhaseHandler().isPlayerTurn(ai)
+                    && game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+                    && game.getPhaseHandler().isPlayerTurn(ai)
                     && ai.getCreaturesInPlay().isEmpty()) {
                 return false;
             }
@@ -893,7 +905,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // Only care about combatants during combat
-        if (ai.getGame().getPhaseHandler().inCombat()) {
+        if (game.getPhaseHandler().inCombat()) {
             list = CardLists.getValidCards(list, "Card.attacking,Card.blocking", null, null);
         }
 
