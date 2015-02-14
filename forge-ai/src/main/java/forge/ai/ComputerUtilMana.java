@@ -1046,6 +1046,19 @@ public class ComputerUtilMana {
         final ArrayListMultimap<Integer, SpellAbility> manaMap = ArrayListMultimap.create();
         final Game game = ai.getGame();
 
+        List<ReplacementEffect> replacementEffects = new ArrayList<ReplacementEffect>();
+        for (final Player p : game.getPlayers()) {
+            for (final Card crd : p.getAllCards()) {
+                for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
+                    if (replacementEffect.requirementsCheck(game)
+                            && replacementEffect.getMapParams().containsKey("ManaReplacement")
+                            && replacementEffect.zonesCheck(game.getZoneOf(crd))) {
+                        replacementEffects.add(replacementEffect);
+                    }
+                }
+            }
+        }
+
         // Loop over all current available mana sources
         for (final Card sourceCard : getAvailableMana(ai, checkPlayable)) {
             if (DEBUG_MANA_PAYMENT) {
@@ -1085,23 +1098,17 @@ public class ComputerUtilMana {
                 repParams.put("Player", ai);
                 repParams.put("AbilityMana", m);
 
-                for (final Player p : game.getPlayers()) {
-                    for (final Card crd : p.getAllCards()) {
-                        for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
-                            if (replacementEffect.requirementsCheck(game)
-                                    && replacementEffect.canReplace(repParams)
-                                    && replacementEffect.getMapParams().containsKey("ManaReplacement")
-                                    && replacementEffect.zonesCheck(game.getZoneOf(crd))) {
-                                String repType = crd.getSVar(replacementEffect.getMapParams().get("ManaReplacement"));
-                                if (repType.contains("Chosen")) {
-                                    repType = repType.replace("Chosen", MagicColor.toShortString(crd.getChosenColor()));
-                                }
-                                mp.setManaReplaceType(repType);
-                            }
+                for (final ReplacementEffect replacementEffect : replacementEffects) {
+                    if (replacementEffect.canReplace(repParams)) {
+                        Card crd = replacementEffect.getHostCard();
+                        String repType = crd.getSVar(replacementEffect.getMapParams().get("ManaReplacement"));
+                        if (repType.contains("Chosen")) {
+                            repType = repType.replace("Chosen", MagicColor.toShortString(crd.getChosenColor()));
                         }
+                        mp.setManaReplaceType(repType);
                     }
                 }
-                
+
                 Set<String> reflectedColors = CardUtil.getReflectableManaColors(m);
                 // find possible colors
                 if (mp.canProduce("W", m) || reflectedColors.contains(MagicColor.Constant.WHITE)) {
