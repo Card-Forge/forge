@@ -71,9 +71,25 @@ public enum TriggerType {
     Vote(TriggerVote.class);
 
     private final Class<? extends Trigger> classTrigger;
+    private final Constructor<? extends Trigger> constructor;
+
     private TriggerType(Class<? extends Trigger> clasz) {
         classTrigger = clasz;
+        constructor = findConstructor(clasz);
     }
+
+    private static Constructor<? extends Trigger> findConstructor(Class<? extends Trigger> clasz) {
+        @SuppressWarnings("unchecked")
+        Constructor<? extends Trigger>[] cc = (Constructor<? extends Trigger>[]) clasz.getDeclaredConstructors();
+        for (Constructor<? extends Trigger> c : cc) {
+            Class<?>[] pp = c.getParameterTypes();
+            if (pp[0].isAssignableFrom(Map.class)) {
+                return c;
+            }
+        }
+        throw new RuntimeException("No constructor found that would take Map as 1st parameter in class " + clasz.getName());
+    }
+
     /**
      * TODO: Write javadoc for this method.
      * @param string
@@ -109,21 +125,12 @@ public enum TriggerType {
      * @return
      */
     public Trigger createTrigger(Map<String, String> mapParams, Card host, boolean intrinsic) {
-        @SuppressWarnings("unchecked")
-        Constructor<? extends Trigger>[] cc = (Constructor<? extends Trigger>[]) classTrigger.getDeclaredConstructors();
-        for (Constructor<? extends Trigger> c : cc) {
-            Class<?>[] pp = c.getParameterTypes();
-            if (pp[0].isAssignableFrom(Map.class)) {
-                try {
-                    Trigger res = c.newInstance(mapParams, host, intrinsic);
-                    res.setMode(this);
-                    return res;
-                } catch (IllegalArgumentException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                    // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
-                    e.printStackTrace();
-                }
-            }
+        try {
+            Trigger res = constructor.newInstance(mapParams, host, intrinsic);
+            res.setMode(this);
+            return res;
+        } catch (IllegalArgumentException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            throw new RuntimeException(e);
         }
-        throw new RuntimeException("No constructor found that would take Map as 1st parameter in class " + classTrigger.getName());
     }
 }
