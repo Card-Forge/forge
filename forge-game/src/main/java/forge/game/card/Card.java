@@ -74,7 +74,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -120,9 +119,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final Map<Player, CardPlayOption> mayPlay = Maps.newTreeMap();
 
     // changes by AF animate and continuous static effects - timestamp is the key of maps
-    private final Map<Long, CardChangedType> changedCardTypes = new ConcurrentSkipListMap<Long, CardChangedType>();
-    private final Map<Long, KeywordsChange> changedCardKeywords = new ConcurrentSkipListMap<Long, KeywordsChange>();
-    private final SortedMap<Long, CardColor> changedCardColors = new ConcurrentSkipListMap<Long, CardColor>();
+    private final Map<Long, CardChangedType> changedCardTypes = new TreeMap<Long, CardChangedType>();
+    private final Map<Long, KeywordsChange> changedCardKeywords = new TreeMap<Long, KeywordsChange>();
+    private final SortedMap<Long, CardColor> changedCardColors = new TreeMap<Long, CardColor>();
 
     // changes that say "replace each instance of one [color,type] by another - timestamp is the key of maps
     private final CardChangedWords changedTextColors = new CardChangedWords();
