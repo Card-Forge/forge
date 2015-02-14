@@ -610,6 +610,8 @@ public final class StaticAbilityContinuous {
             if (controllerMayPlay) {
                 affectedCard.setMayPlay(controller, mayPlayWithoutManaCost, mayPlayIgnoreColor);
             }
+
+            affectedCard.updateStateForView();
         }
 
         return affectedCards;
