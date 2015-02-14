@@ -23,6 +23,7 @@ public enum GameType {
     Constructed     (DeckFormat.Constructed, false, true, true, "Constructed", "", null),
     Vanguard        (DeckFormat.Vanguard, true, true, true, "Vanguard", "Each player has a special \"Avatar\" card that affects the game.", null),
     Commander       (DeckFormat.Commander, false, false, false, "Commander", "Each player has a legendary \"General\" card which can be cast at any time and determines deck colors.", null),
+    TinyLeaders     (DeckFormat.TinyLeaders, false, false, false, "Tiny Leaders", "Each player has a legendary \"General\" card which can be cast at any time and determines deck colors. Each card must have CMC less than 4.", null),
     Planechase      (DeckFormat.Planechase, false, false, true, "Planechase", "Plane cards apply global effects. Plane card changed when a player rolls \"Chaos\" on the planar die.", null),
     Archenemy       (DeckFormat.Archenemy, false, false, true, "Archenemy", "One player is the Archenemy and can play scheme cards.", null),
     ArchenemyRumble (DeckFormat.Archenemy, false, false, true, "Archenemy Rumble", "All players are Archenemies and can play scheme cards.", null),
@@ -95,6 +96,7 @@ public enum GameType {
         /*switch (this) {
         case Archenemy:
         case Commander:
+        case TinyLeaders:
         case Planechase:
         case Vanguard:
             return true;

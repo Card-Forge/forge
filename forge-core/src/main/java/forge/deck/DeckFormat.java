@@ -39,6 +39,7 @@ public enum DeckFormat {
     QuestDeck      ( Range.between(40, Integer.MAX_VALUE), Range.between(0, 15), 4),
     Limited        ( Range.between(40, Integer.MAX_VALUE), null, Integer.MAX_VALUE),
     Commander      ( Range.is(99),                         Range.between(0, 10), 1),
+    TinyLeaders    ( Range.is(49),                         Range.between(0, 10), 1),
     PlanarConquest ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 1),
     Vanguard       ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
     Planechase     ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
@@ -118,7 +119,7 @@ public enum DeckFormat {
             return String.format("should not exceed a maximum of %d cards", max);
         }
 
-        if (this == Commander) { //Must contain exactly 1 legendary Commander and a sideboard of 10 or zero cards.
+        if (this == Commander || this == TinyLeaders) { //Must contain exactly 1 legendary Commander and a sideboard of 10 or zero cards.
         	final CardPool cmd = deck.get(DeckSection.Commander);
         	if (cmd == null || cmd.isEmpty()) {
         		return "is missing a commander";
@@ -153,6 +154,35 @@ public enum DeckFormat {
 
         		return sb.toString();
         	}
+        }
+        if(this == TinyLeaders) {
+            final CardPool cmd = deck.get(DeckSection.Commander);
+            List<PaperCard> erroneousCI = new ArrayList<PaperCard>();
+            if(cmd.get(0).getRules().getManaCost().getCMC() > 3) {
+                erroneousCI.add(cmd.get(0));
+            }
+            for (Entry<PaperCard, Integer> cp : deck.get(DeckSection.Main)) {
+                if (cp.getKey().getRules().getManaCost().getCMC() > 3) {
+                    erroneousCI.add(cp.getKey());
+                }
+            }
+            if (deck.has(DeckSection.Sideboard)) {
+                for (Entry<PaperCard, Integer> cp : deck.get(DeckSection.Sideboard)) {
+                    if (cp.getKey().getRules().getManaCost().getCMC() > 3) {
+                        erroneousCI.add(cp.getKey());
+                    }
+                }
+            }
+
+            if (erroneousCI.size() > 0) {
+                StringBuilder sb = new StringBuilder("contains card that have CMC higher than 3:");
+
+                for (PaperCard cp : erroneousCI) {
+                    sb.append("\n").append(cp.getName());
+                }
+
+                return sb.toString();
+            }
         }
 
         int maxCopies = getMaxCardCopies();
