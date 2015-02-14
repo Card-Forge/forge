@@ -99,15 +99,19 @@ public final class AbilityFactory {
         catch (RuntimeException ex) {
             throw new RuntimeException(hostCard.getName() + ": " + ex.getMessage());
         }
-
         // parse universal parameters
         AbilityRecordType type = AbilityRecordType.getRecordType(mapParams);
         if (null == type) {
             String source = hostCard.getName().isEmpty() ? abString : hostCard.getName();
             throw new RuntimeException("AbilityFactory : getAbility -- no API in " + source);
         }
+        return getAbility(mapParams, type, hostCard);
+    }
+    
+    public static final SpellAbility getAbility(final Map<String, String> mapParams, AbilityRecordType type, final Card hostCard) {
         return getAbility(type, type.getApiTypeOf(mapParams), mapParams, parseAbilityCost(hostCard, mapParams, type), hostCard);
     }
+
 
     public static Cost parseAbilityCost(final Card hostCard, Map<String, String> mapParams, AbilityRecordType type) {
         Cost abCost = null;

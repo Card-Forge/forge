@@ -56,12 +56,17 @@ import java.util.Map;
 public final class GameActionUtil {
     // Cache these instead of generating them on the fly, to avoid excessive allocations every time
     // static abilities are checked.
-    private static final String[] BASIC_LAND_ABILITIES = new String[MagicColor.WUBRG.length];
+    @SuppressWarnings("unchecked")
+    private static final Map<String, String>[] BASIC_LAND_ABILITIES_PARAMS = new Map[MagicColor.WUBRG.length];
+    private static final AbilityRecordType[] BASIC_LAND_ABILITIES_TYPES = new AbilityRecordType[MagicColor.WUBRG.length];
     static {
         for (int i = 0; i < MagicColor.WUBRG.length; i++ ) {
             String color = MagicColor.toShortString(MagicColor.WUBRG[i]);
-            BASIC_LAND_ABILITIES[i] = "AB$ Mana | Cost$ T | Produced$ " + color +
+            String abString  = "AB$ Mana | Cost$ T | Produced$ " + color +
                     " | SpellDescription$ Add {" + color + "} to your mana pool.";
+            Map<String, String> mapParams = AbilityFactory.getMapParams(abString);
+            BASIC_LAND_ABILITIES_PARAMS[i] = mapParams;
+            BASIC_LAND_ABILITIES_TYPES[i] = AbilityRecordType.getRecordType(mapParams);
         }
     }
 
@@ -139,10 +144,11 @@ public final class GameActionUtil {
         // add all appropriate mana abilities based on current types
         for (int i = 0; i < MagicColor.WUBRG.length; i++ ) {
             String landType = MagicColor.Constant.BASIC_LANDS.get(i);
-            String abString = BASIC_LAND_ABILITIES[i];
+            Map<String, String> mapParams = BASIC_LAND_ABILITIES_PARAMS[i];
+            AbilityRecordType type = BASIC_LAND_ABILITIES_TYPES[i];
             for (final Card land : lands) {
                 if (land.getType().hasSubtype(landType)) {
-                    final SpellAbility sa = AbilityFactory.getAbility(abString, land);
+                    final SpellAbility sa = AbilityFactory.getAbility(mapParams, type, land);
                     sa.setBasicLandAbility(true);
                     land.getCurrentState().addManaAbility(sa);
                 }
