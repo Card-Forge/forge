@@ -22,6 +22,7 @@ import com.google.common.collect.Lists;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
+import forge.deck.DeckFormat;
 import forge.util.MyRandom;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -44,8 +45,11 @@ public class DeckGenerator3Color extends DeckGeneratorBase {
         ImmutablePair.of(new FilterCMC(6, 20), 3)
     );
 
-    public DeckGenerator3Color(IDeckGenPool pool, final String clr1, final String clr2, final String clr3) {
-        super(pool);
+    public DeckGenerator3Color(IDeckGenPool pool0, DeckFormat format0, final String clr1, final String clr2, final String clr3) {
+        super(pool0, format0);
+
+        format0.adjustCMCLevels(cmcLevels);
+
         int c1 = MagicColor.fromName(clr1);
         int c2 = MagicColor.fromName(clr2);
         int c3 = MagicColor.fromName(clr3);

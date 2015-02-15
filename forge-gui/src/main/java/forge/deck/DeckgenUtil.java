@@ -52,16 +52,16 @@ public class DeckgenUtil {
             DeckGeneratorBase gen = null;
             CardDb cardDb = FModel.getMagicDb().getCommonCards();
             if (selection.size() == 1) {
-                gen = new DeckGeneratorMonoColor(cardDb, selection.get(0));
+                gen = new DeckGeneratorMonoColor(cardDb, DeckFormat.Constructed, selection.get(0));
             }
             else if (selection.size() == 2) {
-                gen = new DeckGenerator2Color(cardDb, selection.get(0), selection.get(1));
+                gen = new DeckGenerator2Color(cardDb, DeckFormat.Constructed, selection.get(0), selection.get(1));
             }
             else if (selection.size() == 3) {
-                gen = new DeckGenerator3Color(cardDb, selection.get(0), selection.get(1), selection.get(2));
+                gen = new DeckGenerator3Color(cardDb, DeckFormat.Constructed, selection.get(0), selection.get(1), selection.get(2));
             }
             else {
-                gen = new DeckGenerator5Color(cardDb);
+                gen = new DeckGenerator5Color(cardDb, DeckFormat.Constructed);
                 deckName = "5 colors";
             }
             gen.setSingleton(FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS));
@@ -278,16 +278,23 @@ public class DeckgenUtil {
     /** Generate a 2-color Commander deck. */
     public static Deck generateCommanderDeck(boolean forAi, GameType gameType) {
         final Deck deck;
-        IDeckGenPool cardDb = gameType.getDeckFormat().getCardPool();
+        IDeckGenPool cardDb = FModel.getMagicDb().getCommonCards();
         PaperCard commander;
         ColorSet colorID;
 
         // Get random multicolor Legendary creature
+        final DeckFormat format = gameType.getDeckFormat();
         Predicate<CardRules> canPlay = forAi ? DeckGeneratorBase.AI_CAN_PLAY : DeckGeneratorBase.HUMAN_CAN_PLAY;
-        Iterable<PaperCard> legends = cardDb.getAllCards(Predicates.compose(Predicates.and
-                (CardRulesPredicates.Presets.IS_CREATURE, CardRulesPredicates.Presets.IS_LEGENDARY), PaperCard.FN_GET_RULES));
-        legends = Iterables.filter(legends, Predicates.compose(Predicates.and
-        		(CardRulesPredicates.Presets.IS_MULTICOLOR, canPlay), PaperCard.FN_GET_RULES));
+        @SuppressWarnings("unchecked")
+        Iterable<PaperCard> legends = cardDb.getAllCards(Predicates.compose(Predicates.and(
+                new Predicate<CardRules>() {
+                    @Override
+                    public boolean apply(CardRules rules) {
+                        return format.isLegalCommander(rules);
+                    }
+                },
+                CardRulesPredicates.Presets.IS_MULTICOLOR,
+                canPlay), PaperCard.FN_GET_RULES));
 
         do {
             commander = Aggregates.random(legends);
@@ -302,7 +309,7 @@ public class DeckgenUtil {
         if (colorID.hasGreen()) {	comColors.add("Green"); }
 
         DeckGeneratorBase gen = null;
-        gen = new DeckGenerator2Color(cardDb, comColors.get(0), comColors.get(1));
+        gen = new DeckGenerator2Color(cardDb, format, comColors.get(0), comColors.get(1));
         gen.setSingleton(true);
         gen.setUseArtifacts(!FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
         CardPool cards = gen == null ? null : gen.getDeck(gameType.getDeckFormat().getMainRange().getMaximum(), forAi);

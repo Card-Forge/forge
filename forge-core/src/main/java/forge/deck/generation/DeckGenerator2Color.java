@@ -22,6 +22,7 @@ import com.google.common.collect.Lists;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
+import forge.deck.DeckFormat;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -42,7 +43,7 @@ public class DeckGenerator2Color extends DeckGeneratorBase {
     @Override protected final float getSpellPercentage() { return 0.25f; }
 
     @SuppressWarnings("unchecked")
-    final List<ImmutablePair<FilterCMC, Integer>> cmcRelativeWeights = Lists.newArrayList(
+    final List<ImmutablePair<FilterCMC, Integer>> cmcLevels = Lists.newArrayList(
         ImmutablePair.of(new FilterCMC(0, 2), 6),
         ImmutablePair.of(new FilterCMC(3, 4), 4),
         ImmutablePair.of(new FilterCMC(5, 6), 2),
@@ -56,11 +57,13 @@ public class DeckGenerator2Color extends DeckGeneratorBase {
     // 4x 7 - 20
     // = 52x - card pool (before further random filtering)
 
-    public DeckGenerator2Color(IDeckGenPool pool, final String clr1, final String clr2) {
-        super(pool);
+    public DeckGenerator2Color(IDeckGenPool pool0, DeckFormat format0, final String clr1, final String clr2) {
+        super(pool0, format0);
         int c1 = MagicColor.fromName(clr1);
         int c2 = MagicColor.fromName(clr2);
-        
+
+        format0.adjustCMCLevels(cmcLevels);
+
         if( c1 == 0 && c2 == 0) {
             int color1 = r.nextInt(5);
             int color2 = (color1 + 1 + r.nextInt(4)) % 5;
@@ -78,7 +81,7 @@ public class DeckGenerator2Color extends DeckGeneratorBase {
 
     @Override
     public final CardPool getDeck(final int size, final boolean forAi) {
-        addCreaturesAndSpells(size, cmcRelativeWeights, forAi);
+        addCreaturesAndSpells(size, cmcLevels, forAi);
 
         // Add lands
         int numLands = Math.round(size * getLandsPercentage());

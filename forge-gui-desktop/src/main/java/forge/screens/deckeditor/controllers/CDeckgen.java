@@ -11,6 +11,7 @@ import forge.card.CardRulesPredicates;
 import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
+import forge.deck.DeckFormat;
 import forge.deck.generation.*;
 import forge.gui.framework.ICDoc;
 import forge.item.InventoryItem;
@@ -112,10 +113,10 @@ public enum CDeckgen implements ICDoc {
         CardDb cardDb = FModel.getMagicDb().getCommonCards();
         DeckGeneratorBase gen = null;
         switch (colorCount0) {
-            case 1: gen = new DeckGeneratorMonoColor(cardDb, null);             break;
-            case 2: gen = new DeckGenerator2Color(cardDb, null, null);          break;
-            case 3: gen = new DeckGenerator3Color(cardDb, null, null, null);    break;
-            case 5: gen = new DeckGenerator5Color(cardDb);                      break;
+            case 1: gen = new DeckGeneratorMonoColor(cardDb, DeckFormat.Constructed, null);             break;
+            case 2: gen = new DeckGenerator2Color(cardDb, DeckFormat.Constructed, null, null);          break;
+            case 3: gen = new DeckGenerator3Color(cardDb, DeckFormat.Constructed, null, null, null);    break;
+            case 5: gen = new DeckGenerator5Color(cardDb, DeckFormat.Constructed);                      break;
         }
         
         if( null != gen ) {

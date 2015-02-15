@@ -21,13 +21,16 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.deck.CardPool;
+import forge.deck.DeckFormat;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
+
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.*;
@@ -50,6 +53,7 @@ public abstract class DeckGeneratorBase {
     protected ColorSet colors;
     protected final CardPool tDeck = new CardPool();
     protected final IDeckGenPool pool;
+    protected final DeckFormat format;
 
     // 2-colored deck generator has its own constants. The rest works fine with these ones
     protected float getLandsPercentage() { return 0.44f; }
@@ -58,8 +62,9 @@ public abstract class DeckGeneratorBase {
 
     StringBuilder tmpDeck = new StringBuilder();
 
-    public DeckGeneratorBase(IDeckGenPool pool0) {
-        pool = pool0;
+    public DeckGeneratorBase(IDeckGenPool pool0, DeckFormat format0) {
+        pool = format0.getCardPool(pool0);
+        format = format0;
     }
 
     public void setSingleton(boolean singleton){

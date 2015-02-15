@@ -1,6 +1,7 @@
 package forge.deck.generate;
 
 import forge.card.CardDb;
+import forge.deck.DeckFormat;
 import forge.deck.generation.DeckGenerator2Color;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -21,7 +22,7 @@ public class Generate2ColorDeckTest {
     @Test(enabled = false)
     public void generate2ColorDeckTest1() {
         CardDb cardDb = FModel.getMagicDb().getCommonCards();
-        final DeckGenerator2Color gen = new DeckGenerator2Color(cardDb, "white", "blue");
+        final DeckGenerator2Color gen = new DeckGenerator2Color(cardDb, DeckFormat.Constructed, "white", "blue");
         final ItemPool<PaperCard> cardList = gen.getDeck(60, false);
         Assert.assertNotNull(cardList);
     }

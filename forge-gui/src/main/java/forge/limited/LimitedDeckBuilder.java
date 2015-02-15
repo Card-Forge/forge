@@ -10,6 +10,7 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.deck.generation.DeckGeneratorBase;
 import forge.item.IPaperCard;
@@ -54,7 +55,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
      *            Chosen colors.
      */
     public LimitedDeckBuilder(List<PaperCard> dList, DeckColors pClrs) {
-        super(FModel.getMagicDb().getCommonCards());
+        super(FModel.getMagicDb().getCommonCards(), DeckFormat.Limited);
         this.availableList = dList;
         this.deckColors = pClrs;
         this.colors = pClrs.getChosenColors();

@@ -18,15 +18,18 @@
 package forge.deck;
 
 import forge.StaticData;
+import forge.card.CardRules;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.deck.generation.DeckGenPool;
+import forge.deck.generation.DeckGeneratorBase.FilterCMC;
 import forge.deck.generation.IDeckGenPool;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 
 import org.apache.commons.lang3.Range;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import com.google.common.base.Predicate;
 
@@ -45,7 +48,7 @@ public enum DeckFormat {
     QuestDeck      ( Range.between(40, Integer.MAX_VALUE), Range.between(0, 15), 4),
     Limited        ( Range.between(40, Integer.MAX_VALUE), null, Integer.MAX_VALUE),
     Commander      ( Range.is(99),                         Range.between(0, 10), 1),
-    TinyLeaders    ( Range.is(49),                         Range.between(0, 10), 1, new Predicate<PaperCard>() {
+    TinyLeaders    ( Range.is(49),                         Range.between(0, 10), 1, new Predicate<CardRules>() {
         private final HashSet<String> bannedCards = new HashSet<String>(Arrays.asList(
                 "Ancestral Recall", "Balance", "Black Lotus", "Black Vise", "Channel", "Chaos Orb", "Contract From Below", "Counterbalance", "Darkpact", "Demonic Attorney", "Demonic Tutor", "Earthcraft", "Edric, Spymaster of Trest", "Falling Star",
                 "Fastbond", "Flash", "Goblin Recruiter", "Hermit Druid", "Imperial Seal", "Jeweled Bird", "Karakas", "Library of Alexandria", "Mana Crypt", "Mana Drain", "Mana Vault", "Metalworker", "Mind Twist", "Mishra's Workshop", "Mox Emerald",
@@ -53,16 +56,32 @@ public enum DeckFormat {
                 "Timmerian Fiends", "Tolarian Academy", "Umezawa's Jitte", "Vampiric Tutor", "Wheel of Fortune", "Yawgmoth's Will"));
 
         @Override
-        public boolean apply(PaperCard card) {
-            if (card.getRules().getManaCost().getCMC() > 3) {
+        public boolean apply(CardRules rules) {
+            if (rules.getManaCost().getCMC() > 3) {
                 return false; //only cards with CMC less than 3 are allowed
             }
-            if (bannedCards.contains(card.getName())) {
+            if (bannedCards.contains(rules.getName())) {
                 return false;
             }
             return true;
         }
-    }),
+    }) {
+        private final HashSet<String> bannedCommanders = new HashSet<String>(Arrays.asList(
+                "Derevi, Empyrial Tactician", "Erayo, Soratami Ascendant", "Rofellos, Llanowar Emissary"));
+
+        @Override
+        public boolean isLegalCommander(CardRules rules) {
+            return super.isLegalCommander(rules) && !bannedCommanders.contains(rules.getName());
+        }
+
+        @Override
+        public void adjustCMCLevels(List<ImmutablePair<FilterCMC, Integer>> cmcLevels) {
+            cmcLevels.clear();
+            cmcLevels.add(ImmutablePair.of(new FilterCMC(0, 1), 3));
+            cmcLevels.add(ImmutablePair.of(new FilterCMC(2, 2), 3));
+            cmcLevels.add(ImmutablePair.of(new FilterCMC(3, 3), 3));
+        }
+    },
     PlanarConquest ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 1),
     Vanguard       ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
     Planechase     ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
@@ -71,12 +90,12 @@ public enum DeckFormat {
     private final Range<Integer> mainRange;
     private final Range<Integer> sideRange; // null => no check
     private final int maxCardCopies;
-    private final Predicate<PaperCard> cardPoolFilter;
+    private final Predicate<CardRules> cardPoolFilter;
 
     private DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0) {
         this(mainRange0, sideRange0, maxCardCopies0, null);
     }
-    private DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0, Predicate<PaperCard> cardPoolFilter0) {
+    private DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0, Predicate<CardRules> cardPoolFilter0) {
         mainRange = mainRange0;
         sideRange = sideRange0;
         maxCardCopies = maxCardCopies0;
@@ -152,9 +171,8 @@ public enum DeckFormat {
         	if (cmd == null || cmd.isEmpty()) {
         		return "is missing a commander";
         	}
-        	if (!cmd.get(0).getRules().getOracleText().contains("can be your commander")
-        	        && (!cmd.get(0).getRules().getType().isLegendary() || !cmd.get(0).getRules().getType().isCreature())) {
-        		return "has a commander that is not a legendary creature";
+        	if (!isLegalCommander(cmd.get(0).getRules())) {
+        		return "has an illegal commander";
         	}
 
         	ColorSet cmdCI = cmd.get(0).getRules().getColorIdentity();
@@ -187,12 +205,12 @@ public enum DeckFormat {
         if (cardPoolFilter != null) {
             List<PaperCard> erroneousCI = new ArrayList<PaperCard>();
             for (Entry<PaperCard, Integer> cp : deck.getAllCardsInASinglePool()) {
-                if (!cardPoolFilter.apply(cp.getKey())) {
+                if (!cardPoolFilter.apply(cp.getKey().getRules())) {
                     erroneousCI.add(cp.getKey());
                 }
             }
             if (erroneousCI.size() > 0) {
-                StringBuilder sb = new StringBuilder("contains card that have CMC higher than 3:");
+                StringBuilder sb = new StringBuilder("contains the following illegal cards:\n");
 
                 for (PaperCard cp : erroneousCI) {
                     sb.append("\n").append(cp.getName());
@@ -275,11 +293,37 @@ public enum DeckFormat {
         return null;
     }
 
-    public IDeckGenPool getCardPool() {
-        IDeckGenPool pool = StaticData.instance().getCommonCards();
-        if (cardPoolFilter != null) {
-            pool = new DeckGenPool(pool.getAllCards(cardPoolFilter));
+    public IDeckGenPool getCardPool(IDeckGenPool basePool) {
+        if (cardPoolFilter == null) {
+            return basePool;
         }
-        return pool;
+        DeckGenPool filteredPool = new DeckGenPool();
+        for (PaperCard pc : basePool.getAllCards()) {
+            if (cardPoolFilter.apply(pc.getRules())) {
+                filteredPool.add(pc);
+            }
+        }
+        return filteredPool;
+    }
+
+    public void adjustCMCLevels(List<ImmutablePair<FilterCMC, Integer>> cmcLevels) {
+        //not needed by default
+    }
+
+    public boolean isLegalCard(PaperCard pc) {
+        if (cardPoolFilter == null) {
+            return true;
+        }
+        return cardPoolFilter.apply(pc.getRules());
+    }
+
+    public boolean isLegalCommander(CardRules rules) {
+        if (cardPoolFilter != null && !cardPoolFilter.apply(rules)) {
+            return false;
+        }
+        if (rules.getType().isLegendary() && rules.getType().isCreature()) {
+            return true;
+        }
+        return rules.getOracleText().contains("can be your commander");
     }
 }

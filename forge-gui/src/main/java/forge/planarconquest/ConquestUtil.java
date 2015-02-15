@@ -9,6 +9,7 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.deck.generation.DeckGenerator2Color;
 import forge.deck.generation.DeckGenerator3Color;
@@ -39,19 +40,19 @@ public class ConquestUtil {
         DeckGeneratorBase gen;
         switch (colors.size()) {
         case 0:
-            gen = new DeckGeneratorMonoColor(pool, "");
+            gen = new DeckGeneratorMonoColor(pool, DeckFormat.PlanarConquest, "");
             break;
         case 1:
-            gen = new DeckGeneratorMonoColor(pool, colors.get(0));
+            gen = new DeckGeneratorMonoColor(pool, DeckFormat.PlanarConquest, colors.get(0));
             break;
         case 2:
-            gen = new DeckGenerator2Color(pool, colors.get(0), colors.get(1));
+            gen = new DeckGenerator2Color(pool, DeckFormat.PlanarConquest, colors.get(0), colors.get(1));
             break;
         case 3:
-            gen = new DeckGenerator3Color(pool, colors.get(0), colors.get(1), colors.get(2));
+            gen = new DeckGenerator3Color(pool, DeckFormat.PlanarConquest, colors.get(0), colors.get(1), colors.get(2));
             break;
         case 5:
-            gen = new DeckGenerator5Color(pool);
+            gen = new DeckGenerator5Color(pool, DeckFormat.PlanarConquest);
             break;
         default:
             return null; //shouldn't happen

@@ -2,6 +2,7 @@ package forge.deck.generate;
 
 import forge.card.CardDb;
 import forge.deck.CardPool;
+import forge.deck.DeckFormat;
 import forge.deck.generation.DeckGenerator3Color;
 import forge.model.FModel;
 
@@ -20,7 +21,7 @@ public class Generate3ColorDeckTest {
     @Test(timeOut = 1000, enabled = false)
     public void generate3ColorDeckTest1() {
         CardDb cardDb = FModel.getMagicDb().getCommonCards();
-        final DeckGenerator3Color gen = new DeckGenerator3Color(cardDb, "white", "blue", "black");
+        final DeckGenerator3Color gen = new DeckGenerator3Color(cardDb, DeckFormat.Constructed, "white", "blue", "black");
         final CardPool cardList = gen.getDeck(60, false);
         Assert.assertNotNull(cardList);
     }

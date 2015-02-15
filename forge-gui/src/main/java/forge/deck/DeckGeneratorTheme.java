@@ -47,8 +47,8 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
      * Constructor for ThemeDeckGenerator.
      * </p>
      */
-    public DeckGeneratorTheme(IDeckGenPool pool) {
-        super(pool);
+    public DeckGeneratorTheme(IDeckGenPool pool0) {
+        super(pool0, DeckFormat.Constructed);
         this.maxDuplicates = 4;
     }
 
