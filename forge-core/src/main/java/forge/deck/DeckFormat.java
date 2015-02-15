@@ -20,13 +20,19 @@ package forge.deck;
 import forge.StaticData;
 import forge.card.CardType;
 import forge.card.ColorSet;
+import forge.deck.generation.DeckGenPool;
+import forge.deck.generation.IDeckGenPool;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
+
 import org.apache.commons.lang3.Range;
+
+import com.google.common.base.Predicate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -39,7 +45,24 @@ public enum DeckFormat {
     QuestDeck      ( Range.between(40, Integer.MAX_VALUE), Range.between(0, 15), 4),
     Limited        ( Range.between(40, Integer.MAX_VALUE), null, Integer.MAX_VALUE),
     Commander      ( Range.is(99),                         Range.between(0, 10), 1),
-    TinyLeaders    ( Range.is(49),                         Range.between(0, 10), 1),
+    TinyLeaders    ( Range.is(49),                         Range.between(0, 10), 1, new Predicate<PaperCard>() {
+        private final HashSet<String> bannedCards = new HashSet<String>(Arrays.asList(
+                "Ancestral Recall", "Balance", "Black Lotus", "Black Vise", "Channel", "Chaos Orb", "Contract From Below", "Counterbalance", "Darkpact", "Demonic Attorney", "Demonic Tutor", "Earthcraft", "Edric, Spymaster of Trest", "Falling Star",
+                "Fastbond", "Flash", "Goblin Recruiter", "Hermit Druid", "Imperial Seal", "Jeweled Bird", "Karakas", "Library of Alexandria", "Mana Crypt", "Mana Drain", "Mana Vault", "Metalworker", "Mind Twist", "Mishra's Workshop", "Mox Emerald",
+                "Mox Jet", "Mox Pearl", "Mox Ruby", "Mox Sapphire", "Necropotence", "Painter's Servant", "Shahrazad", "Skullclamp", "Sol Ring", "Strip Mine", "Survival of the Fittest", "Sword of Body and Mind", "Time Vault", "Time Walk", "Timetwister",
+                "Timmerian Fiends", "Tolarian Academy", "Umezawa's Jitte", "Vampiric Tutor", "Wheel of Fortune", "Yawgmoth's Will"));
+
+        @Override
+        public boolean apply(PaperCard card) {
+            if (card.getRules().getManaCost().getCMC() > 3) {
+                return false; //only cards with CMC less than 3 are allowed
+            }
+            if (bannedCards.contains(card.getName())) {
+                return false;
+            }
+            return true;
+        }
+    }),
     PlanarConquest ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 1),
     Vanguard       ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
     Planechase     ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
@@ -48,11 +71,16 @@ public enum DeckFormat {
     private final Range<Integer> mainRange;
     private final Range<Integer> sideRange; // null => no check
     private final int maxCardCopies;
+    private final Predicate<PaperCard> cardPoolFilter;
 
-    DeckFormat(Range<Integer> main, Range<Integer> side, int maxCopies) {
-        mainRange = main;
-        sideRange = side;
-        maxCardCopies = maxCopies;
+    private DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0) {
+        this(mainRange0, sideRange0, maxCardCopies0, null);
+    }
+    private DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0, Predicate<PaperCard> cardPoolFilter0) {
+        mainRange = mainRange0;
+        sideRange = sideRange0;
+        maxCardCopies = maxCardCopies0;
+        cardPoolFilter = cardPoolFilter0;
     }
 
     /**
@@ -256,5 +284,13 @@ public enum DeckFormat {
             }
         }
         return null;
+    }
+
+    public IDeckGenPool getCardPool() {
+        IDeckGenPool pool = StaticData.instance().getCommonCards();
+        if (cardPoolFilter != null) {
+            pool = new DeckGenPool(pool.getAllCards(cardPoolFilter));
+        }
+        return pool;
     }
 }

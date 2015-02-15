@@ -1,7 +1,6 @@
 package forge.game;
 
 import com.google.common.base.Function;
-
 import forge.StaticData;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -11,22 +10,20 @@ import forge.game.player.RegisteredPlayer;
 
 
 public enum GameType {
-
-    //            deck composition rules, isPoolRestricted, can sideboard between matches
-    Sealed          (DeckFormat.Limited, true, true, true, "Sealed", "", null),
-    Draft           (DeckFormat.Limited, true, true, true, "Draft", "", null),
-    Winston         (DeckFormat.Limited, true, true, true, "Winston", "", null),
-    Gauntlet        (DeckFormat.Limited, true, true, true, "Gauntlet", "", null),
-    Quest           (DeckFormat.QuestDeck, true, true, false, "Quest", "", null),
-    QuestDraft      (DeckFormat.Limited, true, true, true, "Quest Draft", "", null),
-    PlanarConquest  (DeckFormat.PlanarConquest, true, false, false, "Planar Conquest", "", null),
-    Constructed     (DeckFormat.Constructed, false, true, true, "Constructed", "", null),
-    Vanguard        (DeckFormat.Vanguard, true, true, true, "Vanguard", "Each player has a special \"Avatar\" card that affects the game.", null),
-    Commander       (DeckFormat.Commander, false, false, false, "Commander", "Each player has a legendary \"General\" card which can be cast at any time and determines deck colors.", null),
-    TinyLeaders     (DeckFormat.TinyLeaders, false, false, false, "Tiny Leaders", "Each player has a legendary \"General\" card which can be cast at any time and determines deck colors. Each card must have CMC less than 4.", null),
-    Planechase      (DeckFormat.Planechase, false, false, true, "Planechase", "Plane cards apply global effects. Plane card changed when a player rolls \"Chaos\" on the planar die.", null),
-    Archenemy       (DeckFormat.Archenemy, false, false, true, "Archenemy", "One player is the Archenemy and can play scheme cards.", null),
-    ArchenemyRumble (DeckFormat.Archenemy, false, false, true, "Archenemy Rumble", "All players are Archenemies and can play scheme cards.", null),
+    Sealed          (DeckFormat.Limited, true, true, true, "Sealed", ""),
+    Draft           (DeckFormat.Limited, true, true, true, "Draft", ""),
+    Winston         (DeckFormat.Limited, true, true, true, "Winston", ""),
+    Gauntlet        (DeckFormat.Limited, true, true, true, "Gauntlet", ""),
+    Quest           (DeckFormat.QuestDeck, true, true, false, "Quest", ""),
+    QuestDraft      (DeckFormat.Limited, true, true, true, "Quest Draft", ""),
+    PlanarConquest  (DeckFormat.PlanarConquest, true, false, false, "Planar Conquest", ""),
+    Constructed     (DeckFormat.Constructed, false, true, true, "Constructed", ""),
+    Vanguard        (DeckFormat.Vanguard, true, true, true, "Vanguard", "Each player has a special \"Avatar\" card that affects the game."),
+    Commander       (DeckFormat.Commander, false, false, false, "Commander", "Each player has a legendary \"General\" card which can be cast at any time and determines deck colors."),
+    TinyLeaders     (DeckFormat.TinyLeaders, false, false, false, "Tiny Leaders", "Each player has a legendary \"General\" card which can be cast at any time and determines deck colors. Each card must have CMC less than 4."),
+    Planechase      (DeckFormat.Planechase, false, false, true, "Planechase", "Plane cards apply global effects. Plane card changed when a player rolls \"Chaos\" on the planar die."),
+    Archenemy       (DeckFormat.Archenemy, false, false, true, "Archenemy", "One player is the Archenemy and can play scheme cards."),
+    ArchenemyRumble (DeckFormat.Archenemy, false, false, true, "Archenemy Rumble", "All players are Archenemies and can play scheme cards."),
     MomirBasic      (DeckFormat.Constructed, false, false, false, "Momir Basic", "Each player has a deck containing 60 basic lands and the Momir Vig avatar.", new Function<RegisteredPlayer, Deck>() {
         @Override
         public Deck apply(RegisteredPlayer player) {
@@ -48,7 +45,10 @@ public enum GameType {
     private final String name, description;
     private final Function<RegisteredPlayer, Deck> deckAutoGenerator;
 
-    GameType(DeckFormat deckFormat0, boolean isCardPoolLimited0, boolean canSideboard0, boolean addWonCardsMidgame0, String name0, String description0, Function<RegisteredPlayer, Deck> deckAutoGenerator0) {
+    private GameType(DeckFormat deckFormat0, boolean isCardPoolLimited0, boolean canSideboard0, boolean addWonCardsMidgame0, String name0, String description0) {
+        this(deckFormat0, isCardPoolLimited0, canSideboard0, addWonCardsMidgame0, name0, description0, null);
+    }
+    private GameType(DeckFormat deckFormat0, boolean isCardPoolLimited0, boolean canSideboard0, boolean addWonCardsMidgame0, String name0, String description0, Function<RegisteredPlayer, Deck> deckAutoGenerator0) {
         deckFormat = deckFormat0;
         isCardPoolLimited = isCardPoolLimited0;
         canSideboard = canSideboard0;

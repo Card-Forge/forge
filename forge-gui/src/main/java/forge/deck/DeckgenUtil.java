@@ -12,6 +12,7 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.deck.generation.*;
+import forge.game.GameType;
 import forge.item.PaperCard;
 import forge.itemmanager.IItemManager;
 import forge.model.FModel;
@@ -275,9 +276,9 @@ public class DeckgenUtil {
     }
 
     /** Generate a 2-color Commander deck. */
-    public static Deck generateCommanderDeck(boolean forAi, boolean tinyLeaders) {
+    public static Deck generateCommanderDeck(boolean forAi, GameType gameType) {
         final Deck deck;
-        CardDb cardDb = FModel.getMagicDb().getCommonCards();
+        IDeckGenPool cardDb = gameType.getDeckFormat().getCardPool();
         PaperCard commander;
         ColorSet colorID;
 
@@ -287,10 +288,6 @@ public class DeckgenUtil {
                 (CardRulesPredicates.Presets.IS_CREATURE, CardRulesPredicates.Presets.IS_LEGENDARY), PaperCard.FN_GET_RULES));
         legends = Iterables.filter(legends, Predicates.compose(Predicates.and
         		(CardRulesPredicates.Presets.IS_MULTICOLOR, canPlay), PaperCard.FN_GET_RULES));
-
-        if (tinyLeaders) {
-            legends = Iterables.filter(legends, Predicates.compose(CardRulesPredicates.IS_TINY_LEADERS_VALID, PaperCard.FN_GET_RULES));
-        }
 
         do {
             commander = Aggregates.random(legends);
@@ -308,10 +305,10 @@ public class DeckgenUtil {
         gen = new DeckGenerator2Color(cardDb, comColors.get(0), comColors.get(1));
         gen.setSingleton(true);
         gen.setUseArtifacts(!FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
-        CardPool cards = gen == null ? null : gen.getDeck(99, forAi);
+        CardPool cards = gen == null ? null : gen.getDeck(gameType.getDeckFormat().getMainRange().getMaximum(), forAi);
 
         // After generating card lists, build deck.
-        deck = new Deck("Generated " + (tinyLeaders ? "Tiny Leaders" : "Commander") + " deck (" + commander.getName() + ")");
+        deck = new Deck("Generated " + gameType.toString() + " deck (" + commander.getName() + ")");
         deck.getMain().addAll(cards);
         deck.getOrCreate(DeckSection.Commander).add(commander);
 

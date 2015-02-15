@@ -3,6 +3,7 @@ package forge.deck;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.game.GameType;
 import forge.game.IHasGameType;
 import forge.model.FModel;
 import forge.quest.QuestController;
@@ -48,7 +49,7 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
                     return Aggregates.random(decks);
                 }
             }
-            return DeckgenUtil.generateCommanderDeck(isAi, false);
+            return DeckgenUtil.generateCommanderDeck(isAi, GameType.Commander);
         case TinyLeaders:
             if (index == 1) {
                 IStorage<Deck> decks = FModel.getDecks().getTinyLeaders();
@@ -56,7 +57,7 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
                     return Aggregates.random(decks);
                 }
             }
-            return DeckgenUtil.generateCommanderDeck(isAi, true);
+            return DeckgenUtil.generateCommanderDeck(isAi, GameType.TinyLeaders);
         case Archenemy:
             if (index == 1) {
                 IStorage<Deck> decks = FModel.getDecks().getScheme();

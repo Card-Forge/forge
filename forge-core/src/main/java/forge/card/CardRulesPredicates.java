@@ -9,7 +9,6 @@ import forge.util.PredicateString;
 import forge.util.PredicateString.StringOp;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -490,21 +489,6 @@ public final class CardRulesPredicates {
             return subject.getSplitType() == cst;
         }
     }
-
-    public static Predicate<CardRules> IS_TINY_LEADERS_VALID = new Predicate<CardRules>() {
-        private final HashSet<String> bannedCards = new HashSet<String>();
-
-        @Override
-        public boolean apply(CardRules rules) {
-            if (rules.getManaCost().getCMC() > 3) {
-                return false; //only cards with CMC less than 3 are allowed
-            }
-            if (bannedCards.contains(rules.getName())) {
-                return false;
-            }
-            return true;
-        }
-    };
 
     /**
      * The Class Presets.

@@ -253,13 +253,14 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
                     else {
                         deck = (Deck) selected;
                     }
+                    GameType commanderGameType = isTinyLeadersMatch ? GameType.TinyLeaders : GameType.Commander;
                     if (deck == null) { //Can be null if player deselects the list selection or chose Generate
-                        deck = DeckgenUtil.generateCommanderDeck(view.isPlayerAI(i), isTinyLeadersMatch);
+                        deck = DeckgenUtil.generateCommanderDeck(view.isPlayerAI(i), commanderGameType);
                     }
                     if (checkLegality) {
-                        String errMsg = GameType.Commander.getDeckFormat().getDeckConformanceProblem(deck);
+                        String errMsg = commanderGameType.getDeckFormat().getDeckConformanceProblem(deck);
                         if (null != errMsg) {
-                            FOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Commander Deck");
+                            FOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid " + commanderGameType + " Deck");
                             return;
                         }
                     }

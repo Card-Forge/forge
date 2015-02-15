@@ -2,10 +2,19 @@ package forge.deck.generation;
 
 import java.util.HashMap;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
 import forge.item.PaperCard;
 
 public class DeckGenPool implements IDeckGenPool {
     private final HashMap<String, PaperCard> cards = new HashMap<String, PaperCard>();
+
+    public DeckGenPool() {
+    }
+    public DeckGenPool(Iterable<PaperCard> cc) {
+        addAll(cc);
+    }
 
     public void add(PaperCard c) {
         cards.put(c.getName(), c);
@@ -38,5 +47,10 @@ public class DeckGenPool implements IDeckGenPool {
     @Override
     public Iterable<PaperCard> getAllCards() {
         return cards.values();
+    }
+
+    @Override
+    public Iterable<PaperCard> getAllCards(Predicate<PaperCard> filter) {
+        return Iterables.filter(getAllCards(), filter);
     }
 }
