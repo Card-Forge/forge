@@ -93,6 +93,10 @@ public class TargetSelection {
             // Cancel ability if there aren't any valid Candidates
             return false;
         }
+        if (tgt.getMandatory() && !hasCandidates && hasEnoughTargets) {
+            // Mandatory target selection, that has no candidates but enough targets (Min == 0, but no choices)
+            return true;
+        }
         
         final List<ZoneType> zone = tgt.getZone();
         final boolean mandatory = tgt.getMandatory() && hasCandidates;
