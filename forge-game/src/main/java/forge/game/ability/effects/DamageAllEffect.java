@@ -74,7 +74,7 @@ public class DamageAllEffect extends SpellAbilityEffect {
         list = AbilityUtils.filterListByType(list, sa.getParam("ValidCards"), sa);
 
         for (final Card c : list) {
-            if (c.addDamage(dmg, card) && sa.hasParam("RememberDamaged")) {
+            if (c.addDamage(dmg, card) && (sa.hasParam("RememberDamaged") || sa.hasParam("RememberDamagedCreature"))) {
                 source.addRemembered(c);
             }
         }
@@ -82,7 +82,7 @@ public class DamageAllEffect extends SpellAbilityEffect {
         if (!players.equals("")) {
             final List<Player> playerList = AbilityUtils.getDefinedPlayers(card, players, sa);
             for (final Player p : playerList) {
-                if (p.addDamage(dmg, card) && sa.hasParam("RememberDamaged")) {
+                if (p.addDamage(dmg, card) && (sa.hasParam("RememberDamaged") || sa.hasParam("RememberDamagedPlayer"))) {
                     source.addRemembered(p);
                 }
             }
