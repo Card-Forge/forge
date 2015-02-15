@@ -97,8 +97,4 @@ public class CardCollections {
     public IStorage<Deck> getCommander() {
         return commander;
     }
-
-    public IStorage<Deck> getTinyLeaders() {
-        return tinyLeaders;
-    }
 }

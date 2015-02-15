@@ -326,4 +326,14 @@ public enum DeckFormat {
         }
         return rules.getOracleText().contains("can be your commander");
     }
+
+    public List<Deck> getLegalDecks(Iterable<Deck> decks) {
+        List<Deck> filteredDecks = new ArrayList<Deck>();
+        for (Deck deck : decks) {
+            if (getDeckConformanceProblem(deck) == null) {
+                filteredDecks.add(deck);
+            }
+        }
+        return filteredDecks;
+    }
 }

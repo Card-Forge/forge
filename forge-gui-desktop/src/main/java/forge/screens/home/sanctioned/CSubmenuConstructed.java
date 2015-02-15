@@ -245,7 +245,7 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
                     Object selected = view.getCommanderDeckLists().get(i).getSelectedValue();
                     if (selected instanceof String) {
                         String sel = (String) selected;
-                        IStorage<Deck> comDecks = isTinyLeadersMatch ? FModel.getDecks().getTinyLeaders() : FModel.getDecks().getCommander();
+                        IStorage<Deck> comDecks = FModel.getDecks().getCommander();
                         if (sel.equals("Random") && comDecks.size() > 0) {
                             deck = Aggregates.random(comDecks);                            
                         }

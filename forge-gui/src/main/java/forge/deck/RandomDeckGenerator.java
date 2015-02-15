@@ -52,7 +52,7 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
             return DeckgenUtil.generateCommanderDeck(isAi, GameType.Commander);
         case TinyLeaders:
             if (index == 1) {
-                IStorage<Deck> decks = FModel.getDecks().getTinyLeaders();
+                List<Deck> decks = DeckFormat.TinyLeaders.getLegalDecks(FModel.getDecks().getCommander());
                 if (decks.size() > 0) {
                     return Aggregates.random(decks);
                 }
