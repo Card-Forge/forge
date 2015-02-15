@@ -3,7 +3,7 @@ ManaCost:5 U U
 Types:Sorcery
 K:Entwine 2
 A:SP$ Charm | Cost$ 5 U U | Choices$ DBChangeZone,DBDraw | CharmNum$ 1 | SpellDescription$ Choose one - Each player shuffles his or her hand and graveyard into his or her library; or each player draws seven cards.
-SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | UseAllOriginZones$ True | SpellDescription$ Each player shuffles his or her hand and graveyard into his or her library;
+SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | Random$ True | UseAllOriginZones$ True | SpellDescription$ Each player shuffles his or her hand and graveyard into his or her library;
 SVar:DBDraw:DB$ Draw | NumCards$ 7 | Defined$ Each | SpellDescription$ Each player draws seven cards.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_cascade.jpg
