@@ -183,25 +183,14 @@ public enum DeckFormat {
         		return sb.toString();
         	}
         }
-        if(this == TinyLeaders) {
-            final CardPool cmd = deck.get(DeckSection.Commander);
+
+        if (cardPoolFilter != null) {
             List<PaperCard> erroneousCI = new ArrayList<PaperCard>();
-            if(cmd.get(0).getRules().getManaCost().getCMC() > 3) {
-                erroneousCI.add(cmd.get(0));
-            }
-            for (Entry<PaperCard, Integer> cp : deck.get(DeckSection.Main)) {
-                if (cp.getKey().getRules().getManaCost().getCMC() > 3) {
+            for (Entry<PaperCard, Integer> cp : deck.getAllCardsInASinglePool()) {
+                if (!cardPoolFilter.apply(cp.getKey())) {
                     erroneousCI.add(cp.getKey());
                 }
             }
-            if (deck.has(DeckSection.Sideboard)) {
-                for (Entry<PaperCard, Integer> cp : deck.get(DeckSection.Sideboard)) {
-                    if (cp.getKey().getRules().getManaCost().getCMC() > 3) {
-                        erroneousCI.add(cp.getKey());
-                    }
-                }
-            }
-
             if (erroneousCI.size() > 0) {
                 StringBuilder sb = new StringBuilder("contains card that have CMC higher than 3:");
 
