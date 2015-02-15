@@ -1,7 +1,7 @@
 Name:Cowardice
 ManaCost:3 U U
 Types:Enchantment
-T:Mode$ BecomesTarget | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever a creature becomes the target of a spell or ability, return that creature to its owner's hand. (It won't be affected by the spell or ability.)
+T:Mode$ BecomesTarget | ValidTarget$ Card.Creature+inZoneBattlefield | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever a creature becomes the target of a spell or ability, return that creature to its owner's hand. (It won't be affected by the spell or ability.)
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ TriggeredTarget | Origin$ Battlefield | Destination$ Hand
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cowardice.jpg
