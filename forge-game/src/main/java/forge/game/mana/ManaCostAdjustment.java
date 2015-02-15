@@ -27,7 +27,9 @@ import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 
 public class ManaCostAdjustment {
-    public static final void adjust(ManaCostBeingPaid cost, final SpellAbility sa, boolean test) {
+    // If cardsToDelveOut is null, will immediately exile the delved cards and remember them on the host card.
+    // Otherwise, will return them in cardsToDelveOut and the caller is responsible for doing the above.
+    public static final void adjust(ManaCostBeingPaid cost, final SpellAbility sa, CardCollection cardsToDelveOut, boolean test) {
         final Game game = sa.getActivatingPlayer().getGame();
         final Card originalCard = sa.getHostCard();
     
@@ -95,9 +97,11 @@ public class ManaCostAdjustment {
                 final CardCollectionView toExile = pc.getController().chooseCardsToDelve(cost.getUnpaidShards(ManaCostShard.COLORLESS), mutableGrave);
                 for (final Card c : toExile) {
                     cost.decreaseColorlessMana(1);
-                    if (!test) {
+                    if (cardsToDelveOut != null) {
+                        cardsToDelveOut.add(c);
+                    } else if (!test) {
                         sa.getHostCard().addDelved(c);
-                        //pc.getGame().getAction().exile(c);
+                        pc.getGame().getAction().exile(c);
                     }
                 }
             }

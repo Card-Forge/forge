@@ -894,7 +894,7 @@ public class ComputerUtilMana {
             restriction = payCosts.getCostMana().getRestiction();
         }
         ManaCostBeingPaid cost = new ManaCostBeingPaid(mana, restriction);
-        ManaCostAdjustment.adjust(cost, sa, test);
+        ManaCostAdjustment.adjust(cost, sa, null, test);
 
         final Card card = sa.getHostCard();
         // Tack xMana Payments into mana here if X is a set value

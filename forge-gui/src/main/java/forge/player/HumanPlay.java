@@ -101,13 +101,6 @@ public class HumanPlay {
 
             p.getGame().getStack().add(sa);
         }
-
-        if(sa.isDelve()) {
-            for(Card c : sa.getHostCard().getDelved()) {
-                p.getGame().getAction().exile(c);
-            }
-            sa.getHostCard().clearDelved();
-        }
     }
 
     /**
@@ -133,7 +126,7 @@ public class HumanPlay {
         }
         else {
             manaCost = new ManaCostBeingPaid(sa.getPayCosts().getTotalMana());
-            ManaCostAdjustment.adjust(manaCost, sa, false);
+            ManaCostAdjustment.adjust(manaCost, sa, null, false);
         }
 
         boolean isPaid = manaCost.isPaid();
@@ -674,12 +667,18 @@ public class HumanPlay {
     }
     
 
-    private static boolean handleOfferingAndConvoke(final SpellAbility ability, boolean manaInputCancelled, boolean isPaid) {
-        boolean done = !manaInputCancelled && isPaid;
+    private static boolean handleOfferingConvokeAndDelve(final SpellAbility ability, CardCollection cardsToDelve, boolean manaInputCancelled) {
+        if (!manaInputCancelled && !cardsToDelve.isEmpty()) {
+            Card hostCard = ability.getHostCard();
+            for (final Card c : cardsToDelve) {
+                hostCard.addDelved(c);
+                hostCard.getGame().getAction().exile(c);
+            }
+        }
         if (ability.isOffering() && ability.getSacrificedAsOffering() != null) {
             final Card offering = ability.getSacrificedAsOffering();
             offering.setUsedToPay(false);
-            if (done) {
+            if (!manaInputCancelled) {
                 ability.getHostCard().getGame().getAction().sacrifice(offering, ability);
             }
             ability.resetSacrificedAsOffering();
@@ -687,13 +686,13 @@ public class HumanPlay {
         if (ability.getTappedForConvoke() != null) {
             for (final Card c : ability.getTappedForConvoke()) {
                 c.setTapped(false);
-                if (done) {
+                if (!manaInputCancelled) {
                     c.tap();
                 }
             }
             ability.clearTappedForConvoke();
         }
-        return done;
+        return !manaInputCancelled;
     }
     
     public static boolean payManaCost(final PlayerControllerHuman controller, final ManaCost realCost, final CostPartMana mc, final SpellAbility ability, final Player activator, String prompt, boolean isActivatedSa) {
@@ -726,8 +725,9 @@ public class HumanPlay {
             }
         }
 
+        CardCollection cardsToDelve = new CardCollection();
         if (isActivatedSa) {
-            ManaCostAdjustment.adjust(toPay, ability, false);
+            ManaCostAdjustment.adjust(toPay, ability, cardsToDelve, false);
         }
 
         InputPayMana inpPayment;
@@ -740,7 +740,7 @@ public class HumanPlay {
             inpPayment.setMessagePrefix(prompt);
             inpPayment.showAndWait();
             if (!inpPayment.isPaid()) {
-                return handleOfferingAndConvoke(ability, true, false);
+                return handleOfferingConvokeAndDelve(ability, cardsToDelve, true);
             }
 
             source.setXManaCostPaidByColor(toPay.getXManaCostPaidByColor());
@@ -763,6 +763,6 @@ public class HumanPlay {
             }
             ability.clearTappedForConvoke();
         }
-        return handleOfferingAndConvoke(ability, false, true);
+        return handleOfferingConvokeAndDelve(ability, cardsToDelve, false);
     }
 }

@@ -13,6 +13,8 @@ On the Constructed screen, you can now select a new Net Decks category from the 
 Contains all decks from gos's Forge Decks subforums, broken up by the column/event they were taken from.
 Won't cause startup to be slower since they are loaded on the fly.
 
+- Canceling Delve now refunds exiled cards -
+If you cancel casting a spell after selecting cards to Delve, the selected cards will no longer get exiled.
 
 ------------
 Known Issues
