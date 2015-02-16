@@ -44,9 +44,14 @@ import javax.swing.table.*;
 import org.apache.commons.lang3.StringUtils;
 
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.*;
@@ -371,6 +376,26 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             this.setRowMargin(0);
             this.setShowHorizontalLines(false);
             this.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
+            final ActionListener listener = new ActionListener() {
+                @Override
+                public void actionPerformed(final ActionEvent e) {
+                    final StringBuilder sb = new StringBuilder();
+                    for (final int row : getSelectedRows()) {
+                        Entry<T, Integer> item = tableModel.rowToItem(row);
+                        sb.append(item.getValue().toString());
+                        sb.append(' ');
+                        sb.append(item.getKey().toString());
+                        sb.append('\n');
+                    }
+                    final StringSelection selection = new StringSelection(sb.toString());     
+                    final Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                    clipboard.setContents(selection, selection);
+                }
+            };
+
+            final KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(), false);
+            this.registerKeyboardAction(listener, "Copy", stroke, JComponent.WHEN_FOCUSED);
         }
         @Override
         protected JTableHeader createDefaultTableHeader() {
