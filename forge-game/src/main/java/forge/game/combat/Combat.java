@@ -230,6 +230,14 @@ public class Combat {
         CombatLki lki = lkiCache.get(c); 
         return lki == null || !lki.isAttacker ? null : lki.getFirstBand();
     }
+    
+    public final AttackingBand getBandOfAttackerNotNull(final Card c) {
+        AttackingBand band = getBandOfAttacker(c);
+        if (band == null) {
+            throw new NullPointerException("No band for attacker " + c);
+        }
+        return band;
+    }
 
     public final List<AttackingBand> getAttackingBands() {
         return Lists.newArrayList(attackedByBands.values());
@@ -272,22 +280,22 @@ public class Combat {
 
     // Some cards in Alpha may UNBLOCK an attacker, so second parameter is not always-true
     public final void setBlocked(final Card attacker, boolean value) {
-        getBandOfAttacker(attacker).setBlocked(value); // called by Curtain of Light, Dazzling Beauty, Trap Runner
+        getBandOfAttackerNotNull(attacker).setBlocked(value); // called by Curtain of Light, Dazzling Beauty, Trap Runner
     }
 
     public final void addBlocker(final Card attacker, final Card blocker) {
-        final AttackingBand band = getBandOfAttacker(attacker);
+        final AttackingBand band = getBandOfAttackerNotNull(attacker);
         blockedBands.put(band, blocker);
         // If damage is already assigned, add this blocker as a "late entry"
         if (blockersOrderedForDamageAssignment.containsKey(attacker)) {
-        	addBlockerToDamageAssignmentOrder(attacker, blocker);
+            addBlockerToDamageAssignmentOrder(attacker, blocker);
         }
         blocker.updateBlockingForView();
     }
 
     // remove blocked from specific attacker
     public final void removeBlockAssignment(final Card attacker, final Card blocker) {
-        AttackingBand band = getBandOfAttacker(attacker);
+        AttackingBand band = getBandOfAttackerNotNull(attacker);
         Collection<Card> cc = blockedBands.get(band);
         if (cc != null) {
             cc.remove(blocker);

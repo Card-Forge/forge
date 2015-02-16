@@ -436,7 +436,7 @@ public class ComputerUtilCard {
     }
     
     /**
-     * Create a mock combat and returns the list of likely blockers. 
+     * Create a mock combat where ai is being attacked and returns the list of likely blockers. 
      * @param ai blocking player
      * @param blockers list of additional blockers to be considered
      * @return list of creatures assigned to block in the simulation
@@ -446,15 +446,16 @@ public class ComputerUtilCard {
         final Player opp = ai.getOpponent();
         Combat combat = new Combat(opp);
         //Use actual attackers if available, else consider all possible attackers
-        if (ai.getGame().getCombat() == null) {
+        Combat currentCombat = ai.getGame().getCombat();
+        if (currentCombat != null && currentCombat.getAttackingPlayer() != ai) {
+            for (Card c : currentCombat.getAttackers()) {
+                combat.addAttacker(c, ai);
+            }
+        } else {
             for (Card c : opp.getCreaturesInPlay()) {
                 if (ComputerUtilCombat.canAttackNextTurn(c, ai)) {
                     combat.addAttacker(c, ai);
                 }
-            }
-        } else {
-            for (Card c : ai.getGame().getCombat().getAttackers()) {
-                combat.addAttacker(c, ai);
             }
         }
         if (blockers == null || blockers.isEmpty()) {
