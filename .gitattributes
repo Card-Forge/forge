@@ -884,7 +884,6 @@ forge-gui-desktop/src/main/java/forge/itemmanager/views/ItemListView.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/views/ItemTableColumn.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/views/ItemView.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/views/ManaCostRenderer.java -text
-forge-gui-desktop/src/main/java/forge/itemmanager/views/SColumnUtil.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/views/SetCodeRenderer.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/views/StarRenderer.java -text
 forge-gui-desktop/src/main/java/forge/menus/ForgeMenu.java -text
