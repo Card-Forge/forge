@@ -211,11 +211,14 @@ public class GameCopier {
                 newCard.setTapped(true);
             }
             if (c.isFaceDown()) {
+                boolean isCreature = newCard.isCreature();
                 newCard.setState(CardStateName.FaceDown, true);
                 if (c.isManifested()) {
                     newCard.setManifested(true);
                     // TODO: Should be able to copy other abilities...
-                    newCard.addSpellAbility(CardFactoryUtil.abilityManifestFaceUp(newCard, newCard.getManaCost()));
+                    if (isCreature) {
+                        newCard.addSpellAbility(CardFactoryUtil.abilityManifestFaceUp(newCard, newCard.getManaCost()));
+                    }
                 }
             }
             if (c.isMonstrous()) {

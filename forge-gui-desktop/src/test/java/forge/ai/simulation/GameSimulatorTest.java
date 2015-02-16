@@ -75,12 +75,17 @@ public class GameSimulatorTest extends TestCase {
         IPaperCard paperCard = FModel.getMagicDb().getCommonCards().getCard(name);
         return Card.fromPaperCard(paperCard, p);
     }
-    
-    private Card addCard(String name, Player p) {
+
+    private Card addCardToZone(String name, Player p, ZoneType zone) {
         Card c = createCard(name, p);
-        p.getZone(ZoneType.Battlefield).add(c);
+        p.getZone(zone).add(c);
         return c;
     }
+
+    private Card addCard(String name, Player p) {
+        return addCardToZone(name, p, ZoneType.Battlefield);
+    }
+    
 
     public void testActivateAbilityTriggers() {
         Game game = initAndCreateGame();
@@ -217,8 +222,7 @@ public class GameSimulatorTest extends TestCase {
             addCard("Swamp", p);
 
         String merchantCardName = "Gray Merchant of Asphodel";
-        Card c = createCard(merchantCardName, p);
-        p.getZone(ZoneType.Hand).add(c);
+        Card c = addCardToZone(merchantCardName, p, ZoneType.Hand);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
@@ -283,12 +287,9 @@ public class GameSimulatorTest extends TestCase {
         Game game = initAndCreateGame();
         Player p0 = game.getPlayers().get(0);
         Player p1 = game.getPlayers().get(1);
-        Card fractureP0 = createCard("Skull Fracture", p0);
-        p0.getZone(ZoneType.Hand).add(fractureP0);
-        Card creature = createCard("Runeclaw Bear", p0);
-        p0.getZone(ZoneType.Hand).add(creature);
-        Card fractureP1 = createCard("Skull Fracture", p1);
-        p1.getZone(ZoneType.Hand).add(fractureP1);
+        addCardToZone("Skull Fracture", p0, ZoneType.Hand);
+        addCardToZone("Runeclaw Bear", p0, ZoneType.Hand);
+        Card fractureP1 = addCardToZone("Skull Fracture", p1, ZoneType.Hand);
         addCard("Swamp", p1);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p1);
         game.getAction().checkStateEffects(true);
@@ -345,4 +346,68 @@ public class GameSimulatorTest extends TestCase {
         assertFalse(minusTwoCopy.canPlay());
         assertEquals(1, minusTwoCopy.getActivationsThisTurn());
     }
+    
+    public void testManifest() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        addCard("Plains", p);
+        addCard("Plains", p);
+        Card soulSummons = addCardToZone("Soul Summons", p, ZoneType.Hand);
+        addCardToZone("Ornithopter", p, ZoneType.Library);
+        
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility manifestSA = soulSummons.getSpellAbilities().get(0);
+        
+        GameSimulator sim = new GameSimulator(game, p);
+        sim.simulateSpellAbility(manifestSA);
+        Game simGame = sim.getSimulatedGameState();
+        Card manifestedCreature = findCardWithName(simGame, "");
+        assertNotNull(manifestedCreature);
+
+        SpellAbility unmanifestSA = findSAWithPrefix(manifestedCreature, "Unmanifest");
+        assertNotNull(unmanifestSA);
+        assertEquals(2, manifestedCreature.getNetPower());
+        assertFalse(manifestedCreature.hasKeyword("Flying"));
+
+        GameSimulator sim2 = new GameSimulator(simGame, simGame.getPlayers().get(1));
+        sim2.simulateSpellAbility(unmanifestSA);
+        Game simGame2 = sim2.getSimulatedGameState();
+        Card ornithopter = findCardWithName(simGame2, "Ornithopter");
+        assertEquals(0, ornithopter.getNetPower());
+        assertTrue(ornithopter.hasKeyword("Flying"));
+        assertNull(findSAWithPrefix(ornithopter, "Unmanifest"));
+
+        GameCopier copier = new GameCopier(simGame2);
+        Game copy = copier.makeCopy();
+        Card ornithopterCopy = findCardWithName(copy, "Ornithopter");
+        assertNull(findSAWithPrefix(ornithopterCopy, "Unmanifest"));
+    }
+
+    public void testManifest2() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        addCard("Plains", p);
+        addCard("Plains", p);
+        Card soulSummons = addCardToZone("Soul Summons", p, ZoneType.Hand);
+        addCardToZone("Plains", p, ZoneType.Library);
+        
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility manifestSA = soulSummons.getSpellAbilities().get(0);
+        
+        GameSimulator sim = new GameSimulator(game, p);
+        sim.simulateSpellAbility(manifestSA);
+        Game simGame = sim.getSimulatedGameState();
+        Card manifestedCreature = findCardWithName(simGame, "");
+        assertNotNull(manifestedCreature);
+        assertNull(findSAWithPrefix(manifestedCreature, "Unmanifest"));
+
+        GameCopier copier = new GameCopier(simGame);
+        Game copy = copier.makeCopy();
+        Card manifestedCreatureCopy = findCardWithName(copy, "");
+        assertNull(findSAWithPrefix(manifestedCreatureCopy, "Unmanifest"));
+   }
 }
