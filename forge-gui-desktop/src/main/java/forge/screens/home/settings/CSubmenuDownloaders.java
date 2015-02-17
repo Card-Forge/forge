@@ -40,6 +40,10 @@ public enum CSubmenuDownloaders implements ICDoc {
         public void run() { BugReporter.reportBug(null); }
     };
 
+    @Override
+    public void register() {
+    }
+
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
      */

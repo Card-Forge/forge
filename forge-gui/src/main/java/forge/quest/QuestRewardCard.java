@@ -1,22 +1,21 @@
 package forge.quest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
 import forge.card.CardRules;
 import forge.item.IPaperCard;
-import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.model.FModel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /** 
  * TODO: Write javadoc for this type.
  *
  */
-public abstract class QuestRewardCard implements InventoryItem, IQuestRewardCard {
+public abstract class QuestRewardCard implements IQuestRewardCard {
 
     protected String buildDescription(final String [] input) {
         final String defaultDescription = "a card";

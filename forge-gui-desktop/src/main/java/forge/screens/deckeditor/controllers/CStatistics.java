@@ -41,6 +41,10 @@ public enum CStatistics implements ICDoc {
         return null;
     }
 
+    @Override
+    public void register() {
+    }
+
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#initialize()
      */

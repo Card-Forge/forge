@@ -3,11 +3,10 @@ package forge.events;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
 
-
 public class UiEventAttackerDeclared extends UiEvent {
     public final CardView attacker; 
     public final GameEntityView defender;
-    
+
     public UiEventAttackerDeclared(final CardView card, final GameEntityView currentDefender) {
         attacker = card;
         defender = currentDefender;
@@ -17,7 +16,7 @@ public class UiEventAttackerDeclared extends UiEvent {
     public <T> T visit(final IUiEventVisitor<T> visitor) {
         return visitor.visit(this);
     }
-    
+
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */

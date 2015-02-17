@@ -16,8 +16,8 @@ import forge.assets.FSkinImage;
 import forge.game.card.CardView;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
-import forge.match.MatchUtil;
 import forge.screens.FScreen;
+import forge.screens.match.MatchController;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FOverlay;
@@ -96,10 +96,9 @@ public class CardZoom extends FOverlay {
         if (activateHandler != null) {
             currentActivateAction = activateHandler.getActivateAction(currentIndex);
         }
-        if (MatchUtil.canCardBeFlipped(currentCard)) {
+        if (MatchController.instance.mayFlip(currentCard)) {
             flipIconBounds = new Rectangle();
-        }
-        else {
+        } else {
             flipIconBounds = null;
         }
         showAltState = false;

@@ -61,7 +61,10 @@ public class InputProxy implements Observer {
                             game.getPhaseHandler().debugPrintState(), Singletons.getControl().getInputQueue().printInputStack());
 */
         input.set(nextInput);
-        Runnable showMessage = new Runnable() {
+        if (!(nextInput instanceof InputLockUI)) {
+            controller.getGui().setCurrentPlayer(nextInput.getOwner());
+        }
+        final Runnable showMessage = new Runnable() {
             @Override
             public void run() {
                 Input current = getInput(); 
@@ -70,7 +73,6 @@ public class InputProxy implements Observer {
                 current.showMessageInitial(); 
             }
         };
-        
         FThreads.invokeInEdtLater(showMessage);
     }
     /**
@@ -79,7 +81,7 @@ public class InputProxy implements Observer {
      * </p>
      */
     public final void selectButtonOK() {
-        Input inp = getInput();
+        final Input inp = getInput();
         if (inp != null) {
             inp.selectButtonOK();
         }

@@ -39,7 +39,6 @@ import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
-import forge.match.MatchUtil;
 import forge.player.PlayerControllerHuman;
 import forge.util.FCollectionView;
 import forge.util.ITriggerEvent;
@@ -89,10 +88,9 @@ public class InputAttack extends InputSyncronizedBase {
 
     private void updatePrompt() {
         if (canCallBackAttackers()) {
-            ButtonUtil.update(getOwner(), "OK", "Call Back", true, true, true);
-        }
-        else {
-            ButtonUtil.update(getOwner(), "OK", "Alpha Strike", true, true, true);
+            getController().getGui().updateButtons(getOwner(), "OK", "Call Back", true, true, true);
+        } else {
+            getController().getGui().updateButtons(getOwner(), "OK", "Alpha Strike", true, true, true);
         }
     }
 
@@ -137,7 +135,7 @@ public class InputAttack extends InputSyncronizedBase {
                 }
             }
         }
-        MatchUtil.updateCards(refreshCards);
+        getController().getGui().updateCards(refreshCards);
         updateMessage();
     }
 
@@ -147,7 +145,7 @@ public class InputAttack extends InputSyncronizedBase {
             setCurrentDefender(selected);
         }
         else {
-            MatchUtil.getController().flashIncorrectAction(); // cannot attack that player
+            getController().getGui().flashIncorrectAction(); // cannot attack that player
         }
     }
 
@@ -260,18 +258,18 @@ public class InputAttack extends InputSyncronizedBase {
         combat.addAttacker(card, currentDefender, activeBand);
         activateBand(activeBand);
 
-        MatchUtil.fireEvent(new UiEventAttackerDeclared(
+        card.getGame().fireEvent(new UiEventAttackerDeclared(
                 CardView.get(card),
                 GameEntityView.get(currentDefender)));
     }
 
     private boolean undeclareAttacker(final Card card) {
         combat.removeFromCombat(card);
-        MatchUtil.setUsedToPay(CardView.get(card), false);
+        getController().getGui().setUsedToPay(CardView.get(card), false);
         // When removing an attacker clear the attacking band
         activateBand(null);
 
-        MatchUtil.fireEvent(new UiEventAttackerDeclared(
+        card.getGame().fireEvent(new UiEventAttackerDeclared(
                 CardView.get(card), null));
         return true;
     }
@@ -280,10 +278,10 @@ public class InputAttack extends InputSyncronizedBase {
         currentDefender = def;
         for (final GameEntity ge : defenders) {
             if (ge instanceof Card) {
-                MatchUtil.setUsedToPay(CardView.get((Card) ge), ge == def);
+                getController().getGui().setUsedToPay(CardView.get((Card) ge), ge == def);
             }
             else if (ge instanceof Player) {
-                MatchUtil.setHighlighted(PlayerView.get((Player) ge), ge == def);
+                getController().getGui().setHighlighted(PlayerView.get((Player) ge), ge == def);
             }
         }
 
@@ -293,14 +291,14 @@ public class InputAttack extends InputSyncronizedBase {
     private final void activateBand(final AttackingBand band) {
         if (activeBand != null) {
             for (final Card card : activeBand.getAttackers()) {
-                MatchUtil.setUsedToPay(CardView.get(card), false);
+                getController().getGui().setUsedToPay(CardView.get(card), false);
             }
         }
         activeBand = band;
 
         if (activeBand != null) {
             for (final Card card : activeBand.getAttackers()) {
-                MatchUtil.setUsedToPay(CardView.get(card), true);
+                getController().getGui().setUsedToPay(CardView.get(card), true);
             }
         }
     }
@@ -324,6 +322,6 @@ public class InputAttack extends InputSyncronizedBase {
         showMessage(message);
 
         updatePrompt();
-        MatchUtil.getController().showCombat(); // redraw sword icons
+        getController().getGui().showCombat(); // redraw sword icons
     }
 }

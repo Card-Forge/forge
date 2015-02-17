@@ -18,6 +18,7 @@
 package forge.control;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ComponentAdapter;
@@ -33,11 +34,12 @@ import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
+import com.google.common.collect.Lists;
+
 import forge.ImageCache;
 import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.assets.FSkinProp;
-import forge.control.KeyboardShortcuts.Shortcut;
 import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.FScreen;
@@ -45,7 +47,7 @@ import forge.gui.framework.InvalidLayoutFileException;
 import forge.gui.framework.SLayoutIO;
 import forge.gui.framework.SOverflowUtil;
 import forge.gui.framework.SResizingUtil;
-import forge.match.MatchUtil;
+import forge.match.HostedMatch;
 import forge.menus.ForgeMenu;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -55,7 +57,6 @@ import forge.properties.ForgePreferences.FPref;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
 import forge.screens.deckeditor.CDeckEditorUI;
-import forge.screens.match.CMatchUI;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.view.FFrame;
@@ -73,16 +74,16 @@ public enum FControl implements KeyEventDispatcher {
     instance;
 
     private ForgeMenu forgeMenu;
-    private List<Shortcut> shortcuts;
     private JLayeredPane display;
     private FScreen currentScreen;
     private boolean altKeyLastDown;
     private CloseAction closeAction;
+    private List<HostedMatch> currentMatches = Lists.newArrayList();
 
     public static enum CloseAction {
         NONE,
         CLOSE_SCREEN,
-        EXIT_FORGE
+        EXIT_FORGE;
     }
 
     /**
@@ -151,10 +152,10 @@ public enum FControl implements KeyEventDispatcher {
     public boolean canExitForge(boolean forRestart) {
         String action = (forRestart ? "Restart" : "Exit");
         String userPrompt = "Are you sure you wish to " + (forRestart ? "restart" : "exit") + " Forge?";
-        if (MatchUtil.getGame() != null) {
+        if (!currentMatches.isEmpty()) {
             userPrompt = "A game is currently active. " + userPrompt;
         }
-        if (!FOptionPane.showConfirmDialog(userPrompt, action + " Forge", action, "Cancel", MatchUtil.getGame() == null)) { //default Yes if no game active
+        if (!FOptionPane.showConfirmDialog(userPrompt, action + " Forge", action, "Cancel", currentMatches.isEmpty())) { //default Yes if no game active
             return false;
         }
         if (!CDeckEditorUI.SINGLETON_INSTANCE.canSwitchAway(true)) {
@@ -174,12 +175,9 @@ public enum FControl implements KeyEventDispatcher {
 
     /** After view and model have been initialized, control can start.*/
     public void initialize() {
-        MatchUtil.setController(CMatchUI.SINGLETON_INSTANCE);
-
         // Preloads skin components (using progress bar).
         FSkin.loadFull(true);
 
-        shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
         display = FView.SINGLETON_INSTANCE.getLpnDocument();
 
         final ForgePreferences prefs = FModel.getPreferences();
@@ -227,7 +225,7 @@ public enum FControl implements KeyEventDispatcher {
     }
 
     private void setGlobalKeyboardHandler() {
-        KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+        final KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventDispatcher(this);
     }
 
@@ -245,10 +243,10 @@ public enum FControl implements KeyEventDispatcher {
     /**
      * Switches between display screens in top level JFrame.
      */
-    public boolean setCurrentScreen(FScreen screen) {
+    public boolean setCurrentScreen(final FScreen screen) {
         return setCurrentScreen(screen, false);
     }
-    public boolean setCurrentScreen(FScreen screen, boolean previousScreenClosed) {
+    public boolean setCurrentScreen(final FScreen screen, final boolean previousScreenClosed) {
         //TODO: Uncomment the line below if this function stops being used to refresh
         //the current screen in some places (such as Continue and Restart in the match screen)
         //if (currentScreen == screen) { return; }
@@ -258,8 +256,8 @@ public enum FControl implements KeyEventDispatcher {
             return false;
         }
 
-        if (currentScreen == FScreen.MATCH_SCREEN) { //hide targeting overlay and reset image if was on match screen
-            SOverlayUtils.hideTargetingOverlay();
+        if (currentScreen != null && currentScreen.isMatchScreen()) { //hide targeting overlay and reset image if was on match screen
+            //SOverlayUtils.hideTargetingOverlay();
             if (isMatchBackgroundImageVisible()) {
                 FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(new ImageIcon());
             }
@@ -272,6 +270,7 @@ public enum FControl implements KeyEventDispatcher {
         currentScreen = screen;
 
         //load layout for new current screen
+        screen.getController().register();
         try {
             SLayoutIO.loadLayout(null);
         } catch (InvalidLayoutFileException ex) {
@@ -281,14 +280,14 @@ public enum FControl implements KeyEventDispatcher {
             }
         }
 
-        screen.getView().populate();
         screen.getController().initialize();
+        screen.getView().populate();
 
-        if (screen == FScreen.MATCH_SCREEN) {
+        if (screen.isMatchScreen()) {
             if (isMatchBackgroundImageVisible()) {
                 FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_MATCH));
             }
-            SOverlayUtils.showTargetingOverlay();
+            //SOverlayUtils.showTargetingOverlay();
         }
 
         Singletons.getView().getNavigationBar().updateSelectedTab();
@@ -303,11 +302,6 @@ public enum FControl implements KeyEventDispatcher {
         if (currentScreen == screen) { return true; }
 
         return setCurrentScreen(screen);
-    }
-
-    /** @return List<Shortcut> A list of attached keyboard shortcut descriptions and properties. */
-    public List<Shortcut> getShortcuts() {
-        return shortcuts;
     }
 
     /** Remove all children from a specified layer. */
@@ -329,6 +323,10 @@ public enum FControl implements KeyEventDispatcher {
 
         children = display.getComponentsInLayer(JLayeredPane.MODAL_LAYER);
         if (children.length != 0) { children[0].setSize(display.getSize()); }
+    }
+
+    public Dimension getDisplaySize() {
+        return display.getSize();
     }
 
     /* (non-Javadoc)

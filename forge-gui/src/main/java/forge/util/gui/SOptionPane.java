@@ -2,7 +2,6 @@ package forge.util.gui;
 
 import forge.GuiBase;
 import forge.assets.FSkinProp;
-import forge.game.card.CardView;
 
 public class SOptionPane {
     public static final FSkinProp QUESTION_ICON = FSkinProp.ICO_QUESTION;
@@ -58,10 +57,6 @@ public class SOptionPane {
 
     public static int showOptionDialog(String message, String title, FSkinProp icon, String[] options, int defaultOption) {
         return GuiBase.getInterface().showOptionDialog(message, title, icon, options, defaultOption);
-    }
-
-    public static int showCardOptionDialog(CardView card, String message, String title, FSkinProp icon, String[] options, int defaultOption) {
-        return GuiBase.getInterface().showCardOptionDialog(card, message, title, icon, options, defaultOption);
     }
 
     public static String showInputDialog(String message, String title) {

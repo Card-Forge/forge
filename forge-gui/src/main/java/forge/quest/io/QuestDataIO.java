@@ -361,8 +361,7 @@ public class QuestDataIO {
     }
 
     @SuppressWarnings("unchecked")
-    private static <T> T readAsset(final XStream xs, final Document doc, final String tagName, final Class<T> clasz)
-            throws IllegalAccessException, NoSuchFieldException {
+    private static <T> T readAsset(final XStream xs, final Document doc, final String tagName, final Class<T> clasz) {
         final NodeList nn = doc.getElementsByTagName(tagName);
         final Node n = nn.item(0);
 

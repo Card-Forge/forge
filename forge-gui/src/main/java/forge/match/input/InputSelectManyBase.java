@@ -7,7 +7,6 @@ import com.google.common.collect.Iterables;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardView;
-import forge.match.MatchUtil;
 import forge.player.PlayerControllerHuman;
 
 public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyncronizedBase {
@@ -46,7 +45,7 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     @Override
     public final void showMessage() {
         showMessage(getMessage());
-        ButtonUtil.update(getOwner(), hasEnoughTargets(), allowCancel, true);
+        getController().getGui().updateButtons(getOwner(), hasEnoughTargets(), allowCancel, true);
     }
 
     @Override
@@ -76,14 +75,14 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
 
     protected void onSelectStateChanged(final GameEntity c, final boolean newState) {
         if (c instanceof Card) {
-            MatchUtil.setUsedToPay(CardView.get((Card) c), newState); // UI supports card highlighting though this abstraction-breaking mechanism
+            getController().getGui().setUsedToPay(CardView.get((Card) c), newState); // UI supports card highlighting though this abstraction-breaking mechanism
         }
     }
 
     private void resetUsedToPay() {
         for (final GameEntity c : getSelected()) {
             if (c instanceof Card) {
-                MatchUtil.setUsedToPay(CardView.get((Card) c), false);
+                getController().getGui().setUsedToPay(CardView.get((Card) c), false);
             }
         }
     }

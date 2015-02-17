@@ -1,5 +1,23 @@
 package forge.itemmanager;
 
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import javax.swing.JMenu;
+import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import org.apache.commons.lang3.StringUtils;
+
 import forge.Singletons;
 import forge.UiCommand;
 import forge.assets.FSkinProp;
@@ -12,7 +30,13 @@ import forge.game.IHasGameType;
 import forge.gui.GuiUtils;
 import forge.gui.framework.FScreen;
 import forge.item.InventoryItem;
-import forge.itemmanager.filters.*;
+import forge.itemmanager.filters.DeckColorFilter;
+import forge.itemmanager.filters.DeckFolderFilter;
+import forge.itemmanager.filters.DeckFormatFilter;
+import forge.itemmanager.filters.DeckQuestWorldFilter;
+import forge.itemmanager.filters.DeckSearchFilter;
+import forge.itemmanager.filters.DeckSetFilter;
+import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.views.ItemCellRenderer;
 import forge.itemmanager.views.ItemListView;
 import forge.itemmanager.views.ItemTableColumn;
@@ -24,20 +48,9 @@ import forge.screens.deckeditor.controllers.ACEditorBase;
 import forge.screens.deckeditor.controllers.CEditorLimited;
 import forge.screens.deckeditor.controllers.CEditorQuest;
 import forge.screens.home.quest.DialogChooseSets;
+import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
-
-import org.apache.commons.lang3.StringUtils;
-
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.util.*;
-import java.util.List;
-import java.util.Map.Entry;
 
 /** 
  * ItemManager for decks
@@ -59,8 +72,8 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
      *
      * @param gt
      */
-    public DeckManager(final GameType gt) {
-        super(DeckProxy.class, true);
+    public DeckManager(final GameType gt, final CDetailPicture cDetailPicture) {
+        super(DeckProxy.class, cDetailPicture, true);
         this.gameType = gt;
 
         this.addSelectionListener(new ListSelectionListener() {

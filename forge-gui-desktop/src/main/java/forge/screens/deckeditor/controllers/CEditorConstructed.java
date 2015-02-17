@@ -74,8 +74,8 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         schemePool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)), PaperCard.class);
         conspiracyPool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_CONSPIRACY, PaperCard.FN_GET_RULES)), PaperCard.class);
 
-        CardManager catalogManager = new CardManager(false); // TODO: restore the functionality of the "want uniques only" toggle
-        CardManager deckManager = new CardManager(false); // IMPORTANT: must *always* show all cards in the deck, otherwise cards with different art get ignored!
+        CardManager catalogManager = new CardManager(getCDetailPicture(), false); // TODO: restore the functionality of the "want uniques only" toggle
+        CardManager deckManager = new CardManager(getCDetailPicture(), false); // IMPORTANT: must *always* show all cards in the deck, otherwise cards with different art get ignored!
 
         catalogManager.setCaption("Catalog");
 

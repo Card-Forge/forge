@@ -31,7 +31,6 @@ import forge.player.PlayerControllerHuman;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.ITriggerEvent;
 import forge.util.ThreadUtil;
-import forge.util.gui.SOptionPane;
 
 /**
  * <p>
@@ -44,25 +43,23 @@ import forge.util.gui.SOptionPane;
 public class InputPassPriority extends InputSyncronizedBase {
     /** Constant <code>serialVersionUID=-581477682214137181L</code>. */
     private static final long serialVersionUID = -581477682214137181L;
-    private final Player player;
 
     private List<SpellAbility> chosenSa;
 
-    public InputPassPriority(final PlayerControllerHuman controller, final Player human) {
+    public InputPassPriority(final PlayerControllerHuman controller) {
         super(controller);
-        player = human;
     }
 
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
-        showMessage(getTurnPhasePriorityMessage(player.getGame()));
+        showMessage(getTurnPhasePriorityMessage(getController().getGame()));
         chosenSa = null;
         if (getController().canUndoLastAction()) { //allow undoing with cancel button if can undo last action
-            ButtonUtil.update(getOwner(), "OK", "Undo", true, true, true);
+            getController().getGui().updateButtons(getOwner(), "OK", "Undo", true, true, true);
         }
         else { //otherwise allow ending turn with cancel button
-            ButtonUtil.update(getOwner(), "OK", "End Turn", true, true, true);
+            getController().getGui().updateButtons(getOwner(), "OK", "End Turn", true, true, true);
         }
     }
 
@@ -85,7 +82,7 @@ public class InputPassPriority extends InputSyncronizedBase {
             passPriority(new Runnable() {
                 @Override
                 public void run() {
-                    player.getController().autoPassUntilEndOfTurn();
+                    getController().autoPassUntilEndOfTurn();
                     stop();
                 }
             });
@@ -94,13 +91,13 @@ public class InputPassPriority extends InputSyncronizedBase {
 
     @Override
     protected boolean allowAwaitNextInput() {
-        return chosenSa == null && !player.getController().mayAutoPass(); //don't allow awaiting next input if player chose to end the turn or if a spell/ability is chosen
+        return chosenSa == null && !getController().mayAutoPass(); //don't allow awaiting next input if player chose to end the turn or if a spell/ability is chosen
     }
 
     private void passPriority(final Runnable runnable) {
         if (FModel.getPreferences().getPrefBoolean(FPref.UI_MANA_LOST_PROMPT)) {
             //if gui player has mana floating that will be lost if phase ended right now, prompt before passing priority
-            final Game game = player.getGame();
+            final Game game = getController().getGame();
             if (game.getStack().isEmpty()) { //phase can't end right now if stack isn't empty
                 Player player = game.getPhaseHandler().getPriorityPlayer();
                 if (player != null && player.getManaPool().willManaBeLostAtEndOfPhase() && player.getLobbyPlayer() == GamePlayerUtil.getGuiPlayer()) {
@@ -111,7 +108,7 @@ public class InputPassPriority extends InputSyncronizedBase {
                             if (FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN)) {
                                 message += " You will take mana burn damage equal to the amount of floating mana lost this way.";
                             }
-                            if (SOptionPane.showOptionDialog(message, "Mana Floating", SOptionPane.WARNING_ICON, new String[]{"OK", "Cancel"}) == 0) {
+                            if (getController().getGui().showConfirmDialog(message, "Mana Floating", "Ok", "Cancel")) {
                                 runnable.run();
                             }
                         }
@@ -128,12 +125,12 @@ public class InputPassPriority extends InputSyncronizedBase {
     @Override
     protected boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
         //remove unplayable unless triggerEvent specified, in which case unplayable may be shown as disabled options
-    	List<SpellAbility> abilities = card.getAllPossibleAbilities(player, triggerEvent == null); 
+    	List<SpellAbility> abilities = card.getAllPossibleAbilities(getController().getPlayer(), triggerEvent == null); 
     	if (abilities.isEmpty()) {
             return false;
     	}
 
-        final SpellAbility ability = player.getController().getAbilityToPlay(abilities, triggerEvent);
+        final SpellAbility ability = getController().getAbilityToPlay(abilities, triggerEvent);
     	if (ability != null) {
             chosenSa = new ArrayList<SpellAbility>();
             chosenSa.add(ability);
@@ -141,7 +138,7 @@ public class InputPassPriority extends InputSyncronizedBase {
                 //if mana ability activated, activate same ability on other cards to select if possible
                 String abStr = ability.toUnsuppressedString();
                 for (Card c : otherCardsToSelect) {
-                    for (SpellAbility ab : c.getAllPossibleAbilities(player, true)) {
+                    for (SpellAbility ab : c.getAllPossibleAbilities(getController().getPlayer(), true)) {
                         if (ab.toUnsuppressedString().equals(abStr)) {
                             chosenSa.add(ab);
                             break;
@@ -155,12 +152,12 @@ public class InputPassPriority extends InputSyncronizedBase {
     }
 
     @Override
-    public String getActivateAction(Card card) {
-        List<SpellAbility> abilities = card.getAllPossibleAbilities(player, true); 
+    public String getActivateAction(final Card card) {
+        final List<SpellAbility> abilities = card.getAllPossibleAbilities(getController().getPlayer(), true); 
         if (abilities.isEmpty()) {
             return null;
         }
-        SpellAbility sa = abilities.get(0);
+        final SpellAbility sa = abilities.get(0);
         if (sa.isSpell()) {
             return "cast spell";
         }

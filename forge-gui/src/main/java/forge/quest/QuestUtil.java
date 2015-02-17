@@ -17,6 +17,13 @@
  */
 package forge.quest;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
+import com.google.common.collect.ImmutableMap;
+
 import forge.FThreads;
 import forge.GuiBase;
 import forge.LobbyPlayer;
@@ -27,13 +34,13 @@ import forge.card.CardRules;
 import forge.deck.Deck;
 import forge.game.GameRules;
 import forge.game.GameType;
-import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IButton;
+import forge.interfaces.IGuiGame;
 import forge.item.IPaperCard;
 import forge.item.PaperToken;
-import forge.match.MatchUtil;
+import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
@@ -45,10 +52,6 @@ import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <p>
@@ -540,8 +543,8 @@ public class QuestUtil {
             forceAnte = qc.isForceAnte();
         }
 
-        RegisteredPlayer humanStart = new RegisteredPlayer(getDeckForNewGame());
-        RegisteredPlayer aiStart = new RegisteredPlayer(event.getEventDeck());
+        final RegisteredPlayer humanStart = new RegisteredPlayer(getDeckForNewGame());
+        final RegisteredPlayer aiStart = new RegisteredPlayer(event.getEventDeck());
         
         if (lifeHuman != null) {
             humanStart.setStartingLife(lifeHuman);
@@ -555,34 +558,36 @@ public class QuestUtil {
             aiStart.setCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
         }
 
-        List<RegisteredPlayer> starter = new ArrayList<>();
+        final List<RegisteredPlayer> starter = new ArrayList<>();
         starter.add(humanStart.setPlayer(GamePlayerUtil.getQuestPlayer()));
 
-        LobbyPlayer aiPlayer = GamePlayerUtil.createAiPlayer(event.getOpponent() == null ? event.getTitle() : event.getOpponent());
-        GuiBase.getInterface().setPlayerAvatar(aiPlayer, event);
+        final LobbyPlayer aiPlayer = GamePlayerUtil.createAiPlayer(event.getOpponent() == null ? event.getTitle() : event.getOpponent());
         starter.add(aiStart.setPlayer(aiPlayer));
 
-        boolean useRandomFoil = FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
-        for(RegisteredPlayer rp : starter) {
+        final boolean useRandomFoil = FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
+        for (final RegisteredPlayer rp : starter) {
             rp.setRandomFoil(useRandomFoil);
         }
         boolean useAnte = FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE);
-        boolean matchAnteRarity = FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_MATCH_RARITY);
-        if(forceAnte != null)
+        final boolean matchAnteRarity = FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_MATCH_RARITY);
+        if (forceAnte != null) {
             useAnte = forceAnte;
-        GameRules rules = new GameRules(GameType.Quest);
+        }
+        final GameRules rules = new GameRules(GameType.Quest);
         rules.setPlayForAnte(useAnte);
         rules.setMatchAnteRarity(matchAnteRarity);
         rules.setGamesPerMatch(qData.getCharmState() ? 5 : 3);
         rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
         rules.canCloneUseTargetsImage = FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE);
-        final Match mc = new Match(rules, starter);
+        final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
+        final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
         FThreads.invokeInEdtNowOrLater(new Runnable(){
             @Override
             public void run() {
-                MatchUtil.startGame(mc);
+                hostedMatch.startMatch(rules, null, starter, ImmutableMap.of(humanStart, gui));
             }
         });
+        gui.setPlayerAvatar(aiPlayer, event);
     }
 
     private static Deck getDeckForNewGame() {

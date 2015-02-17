@@ -31,6 +31,7 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
 import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.views.*;
+import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.*;
 import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinIcon;
@@ -74,6 +75,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     private UiCommand itemActivateCommand;
     private ContextMenuBuilder contextMenuBuilder;
     private final Class<T> genericType;
+    private final CDetailPicture cDetailPicture;
     private ItemManagerConfig config;
     private final ArrayList<ListSelectionListener> selectionListeners = new ArrayList<ListSelectionListener>();
 
@@ -125,7 +127,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
      * @param statLabels0 stat labels for this item manager
      * @param wantUnique0 whether this table should display only one item with the same name
      */
-    protected ItemManager(final Class<T> genericType0, final boolean wantUnique0) {
+    protected ItemManager(final Class<T> genericType0, final CDetailPicture cDetailPicture, final boolean wantUnique0) {
+        this.cDetailPicture = cDetailPicture;
         this.genericType = genericType0;
         this.wantUnique = wantUnique0;
         this.model = new ItemManagerModel<T>(genericType0);
@@ -142,6 +145,10 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
 
     protected ImageView<T> createImageView(final ItemManagerModel<T> model0) {
         return new ImageView<T>(this, model0);
+    }
+
+    public final CDetailPicture getCDetailPicture() {
+        return cDetailPicture;
     }
 
     /**

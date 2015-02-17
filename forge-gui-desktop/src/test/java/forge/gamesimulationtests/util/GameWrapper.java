@@ -62,7 +62,7 @@ public class GameWrapper {
 		rules.setPlayForAnte(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE));
         rules.setMatchAnteRarity(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_MATCH_RARITY));
 		rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
-		Match match = new Match(rules, registeredPlayers);
+		Match match = new Match(rules, registeredPlayers, "Test");
 		game = match.createGame();
 		
 		//GameNew.newGame( game, false, false ) does a bit of internal setup, then prepares libraries etc

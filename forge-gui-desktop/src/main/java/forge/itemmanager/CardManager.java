@@ -7,6 +7,8 @@ import forge.itemmanager.filters.*;
 import forge.model.FModel;
 import forge.quest.QuestWorld;
 import forge.screens.home.quest.DialogChooseSets;
+import forge.screens.match.controllers.CDetailPicture;
+
 import javax.swing.*;
 
 import java.util.HashMap;
@@ -19,8 +21,8 @@ import java.util.Map.Entry;
  */
 @SuppressWarnings("serial")
 public class CardManager extends ItemManager<PaperCard> {
-    public CardManager(boolean wantUnique0) {
-        super(PaperCard.class, wantUnique0);
+    public CardManager(final CDetailPicture cDetailPicture, final boolean wantUnique0) {
+        super(PaperCard.class, cDetailPicture, wantUnique0);
     }
 
     @Override

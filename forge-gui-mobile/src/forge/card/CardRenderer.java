@@ -26,9 +26,9 @@ import forge.card.mana.ManaCost;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.item.IPaperCard;
-import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
+import forge.screens.match.MatchController;
 import forge.toolbox.FList;
 import forge.util.Utils;
 
@@ -298,7 +298,7 @@ public class CardRenderer {
         w -= 2 * padding;
         h -= 2 * padding;
 
-        boolean canShow = MatchUtil.canCardBeShown(card);
+        boolean canShow = MatchController.instance.mayView(card);
 
         CardStateView details = card.getCurrentState();
         DetailColors borderColor = CardDetailUtil.getBorderColor(details, canShow);
@@ -379,7 +379,7 @@ public class CardRenderer {
             CardFaceSymbols.drawSymbol("phasing", g, stateXSymbols, ySymbols, otherSymbolsSize, otherSymbolsSize);
         }
 
-        if (MatchUtil.isUsedToPay(card)) {
+        if (MatchController.instance.isUsedToPay(card)) {
             float sacSymbolSize = otherSymbolsSize * 1.2f;
             CardFaceSymbols.drawSymbol("sacrifice", g, (x + (w / 2)) - sacSymbolSize / 2, (y + (h / 2)) - sacSymbolSize / 2, otherSymbolsSize, otherSymbolsSize);
         }
@@ -450,7 +450,7 @@ public class CardRenderer {
     }
 
     public static void drawFoilEffect(Graphics g, CardView card, float x, float y, float w, float h) {
-        if (isPreferenceEnabled(FPref.UI_OVERLAY_FOIL_EFFECT) && MatchUtil.canCardBeShown(card)) {
+        if (isPreferenceEnabled(FPref.UI_OVERLAY_FOIL_EFFECT) && MatchController.instance.mayView(card)) {
             int foil = card.getCurrentState().getFoilIndex();
             if (foil > 0) {
                 CardFaceSymbols.drawOther(g, String.format("foil%02d", foil), x, y, w, h);

@@ -854,4 +854,8 @@ public class PlayerControllerAi extends PlayerController {
         getAi().getCardMemory().clearAllRemembered();
     }
 
+    @Override
+    public void autoPassCancel() {
+        // Do nothing
+    }
 }

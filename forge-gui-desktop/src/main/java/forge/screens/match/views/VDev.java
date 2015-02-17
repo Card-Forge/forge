@@ -41,9 +41,7 @@ import forge.toolbox.FSkin.SkinnedLabel;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VDev implements IVDoc<CDev> {
-    /** */
-    SINGLETON_INSTANCE;
+public class VDev implements IVDoc<CDev> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
@@ -72,9 +70,13 @@ public enum VDev implements IVDoc<CDev> {
     private final DevLabel lblRiggedRoll = new DevLabel("Rigged Planar Roll");
     private final DevLabel lblWalkTo = new DevLabel("Planeswalk to");
 
+    private final CDev controller;
+
     //========= Constructor
 
-    private VDev() {
+    public VDev(final CDev controller) {
+        this.controller = controller;
+
         final String constraints = "w 95%!, gap 0 0 4px 0";
         final String halfConstraints = "w 47%!, gap 0 0 4px 0";
         final String halfConstraintsLeft = halfConstraints + ", split 2";
@@ -144,7 +146,7 @@ public enum VDev implements IVDoc<CDev> {
      */
     @Override
     public CDev getLayoutControl() {
-        return CDev.SINGLETON_INSTANCE;
+        return controller;
     }
 
     //========= Retrieval methods

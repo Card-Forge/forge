@@ -34,7 +34,7 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
     private final JPanel pnlStart = new JPanel();
     private final StartButton btnStart  = new StartButton();
 
-    private final DeckManager lstDecks = new DeckManager(GameType.Draft);
+    private final DeckManager lstDecks = new DeckManager(GameType.Draft, null);
 
     private final JRadioButton radSingle = new FRadioButton("Play one opponent");
     private final JRadioButton radAll = new FRadioButton("Play all 7 opponents");
@@ -66,7 +66,7 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         lstDecks.setCaption("Draft Decks");
 
-        JXButtonPanel grpPanel = new JXButtonPanel();
+        final JXButtonPanel grpPanel = new JXButtonPanel();
         grpPanel.add(radSingle, "w 200px!, h 30px!");
         grpPanel.add(radAll, "w 200px!, h 30px!");
         radSingle.setSelected(true);

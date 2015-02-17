@@ -42,7 +42,7 @@ public enum VSubmenuGauntletContests implements IVSubmenu<CSubmenuGauntletContes
     private final SkinnedPanel pnlLoad = new SkinnedPanel(new MigLayout("insets 0, gap 0, wrap"));
 
     private final ContestGauntletLister gauntletList = new ContestGauntletLister();
-    private final FDeckChooser lstDecks = new FDeckChooser(false);
+    private final FDeckChooser lstDecks = new FDeckChooser(null, false);
 
     private final FScrollPane scrLeft  = new FScrollPane(gauntletList, false,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

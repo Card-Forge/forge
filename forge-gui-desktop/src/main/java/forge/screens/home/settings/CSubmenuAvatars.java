@@ -14,6 +14,10 @@ public enum CSubmenuAvatars implements ICDoc {
     private final VSubmenuAvatars view = VSubmenuAvatars.SINGLETON_INSTANCE;
 
     @Override
+    public void register() {
+    }
+
+    @Override
     public void initialize() {
     }
 

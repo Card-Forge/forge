@@ -21,6 +21,7 @@ import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestUtil;
+import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import net.miginfocom.swing.MigLayout;
@@ -42,7 +43,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private NetDeckCategory netDeckCategory;
     private boolean refreshingDeckType;
 
-    private final DeckManager lstDecks = new DeckManager(GameType.Constructed);
+    private final DeckManager lstDecks;
     private final FLabel btnViewDeck = new FLabel.ButtonBuilder().text("View Deck").fontSize(14).build();
     private final FLabel btnRandom = new FLabel.ButtonBuilder().fontSize(14).build();
 
@@ -52,9 +53,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private FPref stateSetting = null;
 
     //Show dialog to select a deck
-    public static Deck promptForDeck(String title, DeckType defaultDeckType, boolean forAi) {
+    public static Deck promptForDeck(final CDetailPicture cDetailPicture, final String title, final DeckType defaultDeckType, final boolean forAi) {
         FThreads.assertExecutedByEdt(true);
-        final FDeckChooser chooser = new FDeckChooser(forAi);
+        final FDeckChooser chooser = new FDeckChooser(cDetailPicture, forAi);
         chooser.initialize(defaultDeckType);
         chooser.populate();
         Dimension parentSize = JOptionPane.getRootFrame().getSize();
@@ -76,7 +77,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         return null;
     }
 
-    public FDeckChooser(boolean forAi) {
+    public FDeckChooser(final CDetailPicture cDetailPicture, final boolean forAi) {
+        lstDecks = new DeckManager(GameType.Constructed, cDetailPicture);
         setOpaque(false);
         isAi = forAi;
         UiCommand cmdViewDeck = new UiCommand() {

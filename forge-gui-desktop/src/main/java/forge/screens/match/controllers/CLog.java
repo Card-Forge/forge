@@ -3,7 +3,9 @@ package forge.screens.match.controllers;
 import forge.UiCommand;
 import forge.FThreads;
 import forge.gui.framework.ICDoc;
+import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VLog;
+
 import java.util.Observable;
 import java.util.Observer;
 
@@ -13,9 +15,21 @@ import java.util.Observer;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
-public enum CLog implements ICDoc, Observer {
-    /** */
-    SINGLETON_INSTANCE;
+public class CLog implements ICDoc, Observer {
+
+    private final CMatchUI matchUI;
+    private final VLog view;
+    public CLog(final CMatchUI matchUI) {
+        this.matchUI = matchUI;
+        this.view = new VLog(this);
+    }
+
+    public final CMatchUI getMatchUI() {
+        return matchUI;
+    }
+    public final VLog getView() {
+        return view;
+    }
 
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
@@ -23,6 +37,10 @@ public enum CLog implements ICDoc, Observer {
     @Override
     public UiCommand getCommandOnSelect() {
         return null;
+    }
+
+    @Override
+    public void register() {
     }
 
     /* (non-Javadoc)
@@ -36,7 +54,7 @@ public enum CLog implements ICDoc, Observer {
     private final Runnable r = new Runnable() {
         @Override
         public void run() {
-            VLog.SINGLETON_INSTANCE.updateConsole();
+            view.updateConsole();
         }
     };
 

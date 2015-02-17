@@ -14,9 +14,10 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.GuiBase;
-import forge.game.card.CardView;
 
 public class SGuiChoose {
+    public static final String[] defaultConfirmOptions = { "Yes", "No" };
+
     /**
      * Convenience for getChoices(message, 0, 1, choices).
      * 
@@ -191,18 +192,18 @@ public class SGuiChoose {
         return GuiBase.getInterface().getChoices(message, min, max, choices, selected, display);
     }
 
-    public static <T> List<T> many(final String title, final String topCaption, int cnt, final List<T> sourceChoices, final CardView referenceCard) {
-        return many(title, topCaption, cnt, cnt, sourceChoices, referenceCard);
+    public static <T> List<T> many(final String title, final String topCaption, int cnt, final List<T> sourceChoices) {
+        return many(title, topCaption, cnt, cnt, sourceChoices);
     }
 
-    public static <T> List<T> many(final String title, final String topCaption, int min, int max, final List<T> sourceChoices, final CardView referenceCard) {
+    public static <T> List<T> many(final String title, final String topCaption, int min, int max, final List<T> sourceChoices) {
         int m2 = min >= 0 ? sourceChoices.size() - min : -1;
         int m1 = max >= 0 ? sourceChoices.size() - max : -1;
-        return order(title, topCaption, m1, m2, sourceChoices, null, referenceCard, false);
+        return order(title, topCaption, m1, m2, sourceChoices, null);
     }
 
-    public static <T> List<T> order(final String title, final String top, final List<T> sourceChoices, final CardView referenceCard) {
-        return order(title, top, 0, 0, sourceChoices, null, referenceCard, false);
+    public static <T> List<T> order(final String title, final String top, final List<T> sourceChoices) {
+        return order(title, top, 0, 0, sourceChoices, null);
     }
 
     /**
@@ -216,17 +217,17 @@ public class SGuiChoose {
      * @return A shallow copy of the list of objects, with newItem inserted.
      */
     public static <T> List<T> insertInList(final String title, final T newItem, final List<T> oldItems) {
-		final T placeAfter = oneOrNone(title, oldItems);
-    	final int indexAfter = (placeAfter == null ? 0 : oldItems.indexOf(placeAfter) + 1);
-    	final List<T> result = Lists.newArrayListWithCapacity(oldItems.size() + 1);
-    	result.addAll(oldItems);
-    	result.add(indexAfter, newItem);
-    	return result;
+        final T placeAfter = oneOrNone(title, oldItems);
+        final int indexAfter = (placeAfter == null ? 0 : oldItems.indexOf(placeAfter) + 1);
+        final List<T> result = Lists.newArrayListWithCapacity(oldItems.size() + 1);
+        result.addAll(oldItems);
+        result.add(indexAfter, newItem);
+        return result;
     }
 
     private static <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
-            final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode) {
-        return GuiBase.getInterface().order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode);
+            final List<T> sourceChoices, final List<T> destChoices) {
+        return GuiBase.getInterface().order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices);
     }
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine

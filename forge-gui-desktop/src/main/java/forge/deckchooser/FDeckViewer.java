@@ -47,15 +47,15 @@ public class FDeckViewer extends FDialog {
     public static void show(final Deck deck) {
         if (deck == null) { return; }
 
-        FDeckViewer deckViewer = new FDeckViewer(deck);
+        final FDeckViewer deckViewer = new FDeckViewer(deck);
         deckViewer.setVisible(true);
         deckViewer.dispose();
     }
 
-    private FDeckViewer(Deck deck0) {
+    private FDeckViewer(final Deck deck0) {
         this.deck = deck0;
         this.setTitle(deck.getName());
-        this.cardManager = new CardManager(false) {
+        this.cardManager = new CardManager(null, false) {
             @Override //show hovered card in Image View in dialog instead of main Detail/Picture panes
             protected ImageView<PaperCard> createImageView(final ItemManagerModel<PaperCard> model0) {
                 return new ImageView<PaperCard>(this, model0) {

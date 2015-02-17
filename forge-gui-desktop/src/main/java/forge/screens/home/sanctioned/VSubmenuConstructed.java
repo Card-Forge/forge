@@ -286,7 +286,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         String labelConstraints = "gaptop 10px, gapbottom 5px";
 
         // Main deck
-        final FDeckChooser mainChooser = new FDeckChooser(isPlayerAI(playerIndex));
+        final FDeckChooser mainChooser = new FDeckChooser(null, isPlayerAI(playerIndex));
         mainChooser.initialize();
         mainChooser.getLstDecks().setSelectCommand(new UiCommand() {
             @Override

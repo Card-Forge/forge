@@ -35,7 +35,6 @@ import forge.Singletons;
 import forge.UiCommand;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
-import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VField;
@@ -49,6 +48,7 @@ import forge.view.arcane.util.CardPanelMouseAdapter;
  * Controls Swing components of a player's hand instance.
  */
 public class CHand implements ICDoc {
+    private final CMatchUI matchUI;
     private final PlayerView player;
     private final VHand view;
     private final List<CardView> ordering = Lists.newArrayList();
@@ -59,7 +59,8 @@ public class CHand implements ICDoc {
      * @param p0 &emsp; {@link forge.game.player.Player}
      * @param v0 &emsp; {@link forge.screens.match.views.VHand}
      */
-    public CHand(final PlayerView p0, final VHand v0) {
+    public CHand(final CMatchUI matchUI, final PlayerView p0, final VHand v0) {
+        this.matchUI = matchUI;
         this.player = p0;
         this.view = v0;
         v0.getHandArea().addCardPanelMouseListener(new CardPanelMouseAdapter() {
@@ -73,6 +74,10 @@ public class CHand implements ICDoc {
                 }
             }
         });
+    }
+
+    @Override
+    public void register() {
     }
 
     @Override
@@ -92,7 +97,7 @@ public class CHand implements ICDoc {
 
         final HandArea p = view.getHandArea();
 
-        VField vf = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(player);
+        final VField vf = matchUI.getFieldViewFor(player);
         if (vf == null) {
             return;
         }
@@ -105,15 +110,18 @@ public class CHand implements ICDoc {
         }
 
         // Don't perform animations if the user's in another tab.
-        if (!FScreen.MATCH_SCREEN.equals(Singletons.getControl().getCurrentScreen())) {
+        if (!matchUI.isCurrentScreen()) {
             return;
         }
 
         //update card panels in hand area
-        
         final List<CardView> cards;
-        synchronized (player) {
-            cards = ImmutableList.copyOf(player.getHand());
+        if (player.getHand() == null) {
+            cards = ImmutableList.of();
+        } else {
+            synchronized (player) {
+                cards = ImmutableList.copyOf(player.getHand());
+            }
         }
 
         synchronized (ordering) {
@@ -133,7 +141,7 @@ public class CHand implements ICDoc {
         for (final CardView card : ordering) {
             CardPanel cardPanel = p.getCardPanel(card.getId());
             if (cardPanel == null) { //create placeholders for new cards
-                cardPanel = new CardPanel(card);
+                cardPanel = new CardPanel(matchUI, card);
                 cardPanel.setDisplayEnabled(false);
                 placeholders.add(cardPanel);
             }
@@ -164,7 +172,7 @@ public class CHand implements ICDoc {
             endY = toPos.y;
 
             if (Singletons.getView().getFrame().isShowing()) {
-                final CardPanel animationPanel = new CardPanel(placeholder.getCard());
+                final CardPanel animationPanel = new CardPanel(matchUI, placeholder.getCard());
                 Animation.moveCard(startX, startY, startWidth, endX, endY, endWidth, animationPanel, placeholder,
                         layeredPane, 500);
             }

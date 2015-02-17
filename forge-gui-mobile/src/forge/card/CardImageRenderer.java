@@ -23,8 +23,8 @@ import forge.card.mana.ManaCost;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.zone.ZoneType;
-import forge.match.MatchUtil;
 import forge.screens.FScreen;
+import forge.screens.match.MatchController;
 import forge.util.Utils;
 
 public class CardImageRenderer {
@@ -73,8 +73,8 @@ public class CardImageRenderer {
         w -= 2 * blackBorderThickness;
         h -= 2 * blackBorderThickness;
 
-        CardStateView state = altState ? card.getAlternateState() : card.getCurrentState();
-        boolean canShow = MatchUtil.canCardBeShown(card);
+        final CardStateView state = card.getState(altState);
+        final boolean canShow = MatchController.instance.mayView(card);
 
         //determine colors for borders
         final List<DetailColors> borderColors = CardDetailUtil.getBorderColors(state, canShow);
@@ -329,7 +329,7 @@ public class CardImageRenderer {
     }
 
     public static void drawZoom(Graphics g, CardView card, boolean altState, float x, float y, float w, float h) {
-        final Texture image = ImageCache.getImage(MatchUtil.getCardImageKey(altState ? card.getAlternateState() : card.getCurrentState()), true);
+        final Texture image = ImageCache.getImage(card.getState(altState).getImageKey(MatchController.instance.getCurrentPlayer()), true);
         if (image == null) { //draw details if can't draw zoom
             drawDetails(g, card, altState, x, y, w, h);
             return;
@@ -354,8 +354,8 @@ public class CardImageRenderer {
         w -= 2 * blackBorderThickness;
         h -= 2 * blackBorderThickness;
 
-        CardStateView state = altState ? card.getAlternateState() : card.getCurrentState();
-        boolean canShow = MatchUtil.canCardBeShown(card);
+        final CardStateView state = card.getState(altState);
+        final boolean canShow = MatchController.instance.mayView(card);
 
         //determine colors for borders
         List<DetailColors> borderColors = CardDetailUtil.getBorderColors(state, canShow);

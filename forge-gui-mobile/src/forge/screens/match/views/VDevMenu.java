@@ -1,9 +1,9 @@
 package forge.screens.match.views;
 
-import forge.match.MatchUtil;
 import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
+import forge.screens.match.MatchController;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.ThreadUtil;
@@ -17,7 +17,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() { //must invoke all these in game thread since they may require synchronous user input
                     @Override
                     public void run() {
-                        MatchUtil.getHumanController().cheat().generateMana();
+                        MatchController.instance.getGameController().cheat().generateMana();
                     }
                 });
             }
@@ -28,7 +28,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        MatchUtil.getHumanController().cheat().tutorForCard();
+                        MatchController.instance.getGameController().cheat().tutorForCard();
                     }
                 });
             }
@@ -39,7 +39,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        MatchUtil.getHumanController().cheat().addCardToHand();
+                        MatchController.instance.getGameController().cheat().addCardToHand();
                     }
                 });
             }
@@ -50,7 +50,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        MatchUtil.getHumanController().cheat().addCardToBattlefield();
+                        MatchController.instance.getGameController().cheat().addCardToBattlefield();
                     }
                 });
             }
@@ -61,7 +61,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        MatchUtil.getHumanController().cheat().setPlayerLife();
+                        MatchController.instance.getGameController().cheat().setPlayerLife();
                     }
                 });
             }
@@ -72,7 +72,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        MatchUtil.getHumanController().cheat().winGame();
+                        MatchController.instance.getGameController().cheat().winGame();
                     }
                 });
             }
@@ -83,7 +83,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        MatchUtil.getHumanController().cheat().setupGameState();
+                        MatchController.instance.getGameController().cheat().setupGameState();
                     }
                 });
             }
@@ -94,26 +94,26 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        MatchUtil.getHumanController().cheat().dumpGameState();
+                        MatchController.instance.getGameController().cheat().dumpGameState();
                     }
                 });
             }
         }));
 
-        final boolean unlimitedLands = MatchUtil.getHumanController().canPlayUnlimitedLands();
+        final boolean unlimitedLands = MatchController.instance.getGameController().canPlayUnlimitedLands();
         addItem(new FCheckBoxMenuItem("Play Unlimited Lands", unlimitedLands,
                 new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                MatchUtil.getHumanController().cheat().setCanPlayUnlimitedLands(!unlimitedLands);
+                MatchController.instance.getGameController().cheat().setCanPlayUnlimitedLands(!unlimitedLands);
             }
         }));
-        final boolean viewAll = MatchUtil.getHumanController().mayLookAtAllCards();
+        final boolean viewAll = MatchController.instance.getGameController().mayLookAtAllCards();
         addItem(new FCheckBoxMenuItem("View All Cards", viewAll,
                 new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                MatchUtil.getHumanController().cheat().setViewAllCards(!viewAll);
+                MatchController.instance.getGameController().cheat().setViewAllCards(!viewAll);
             }
         }));
         addItem(new FMenuItem("Add Counters to Permanent", new FEventHandler() {
@@ -122,7 +122,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        MatchUtil.getHumanController().cheat().addCountersToPermanent();
+                        MatchController.instance.getGameController().cheat().addCountersToPermanent();
                     }
                 });
             }
@@ -133,7 +133,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        MatchUtil.getHumanController().cheat().tapPermanents();
+                        MatchController.instance.getGameController().cheat().tapPermanents();
                     }
                 });
             }
@@ -144,7 +144,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        MatchUtil.getHumanController().cheat().untapPermanents();
+                        MatchController.instance.getGameController().cheat().untapPermanents();
                     }
                 });
             }
@@ -155,7 +155,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        MatchUtil.getHumanController().cheat().riggedPlanarRoll();
+                        MatchController.instance.getGameController().cheat().riggedPlanarRoll();
                     }
                 });
             }
@@ -166,7 +166,7 @@ public class VDevMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        MatchUtil.getHumanController().cheat().planeswalkTo();
+                        MatchController.instance.getGameController().cheat().planeswalkTo();
                     }
                 });
             }

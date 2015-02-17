@@ -7,7 +7,6 @@ import forge.LobbyPlayer;
 import forge.ai.AiProfileUtil;
 import forge.ai.LobbyPlayerAi;
 import forge.game.player.Player;
-import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.GuiDisplayUtil;
@@ -85,17 +84,6 @@ public final class GamePlayerUtil {
         }
         else {
             newPlayerName = getVerifiedPlayerName(getPlayerNameUsingStandardPrompt(oldPlayerName), oldPlayerName);
-        }
-
-        //update name for player in active game if needed
-        if (MatchUtil.getGame() != null) {
-            for (Player player : MatchUtil.getGame().getPlayers()) {
-                if (player.getLobbyPlayer() == MatchUtil.getGuiPlayer()) {
-                    player.setName(newPlayerName);
-                    player.getLobbyPlayer().setName(newPlayerName);
-                    break;
-                }
-            }
         }
 
         FModel.getPreferences().setPref(FPref.PLAYER_NAME, newPlayerName);

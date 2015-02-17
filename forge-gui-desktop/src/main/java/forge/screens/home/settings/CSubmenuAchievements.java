@@ -20,6 +20,10 @@ public enum CSubmenuAchievements implements ICDoc {
     public void initialize() {
     }
 
+    @Override
+    public void register() {
+    }
+
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
      */

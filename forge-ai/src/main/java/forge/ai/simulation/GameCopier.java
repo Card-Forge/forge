@@ -55,7 +55,7 @@ public class GameCopier {
             newPlayers.add(clonePlayer(p));
         }
         GameRules currentRules = origGame.getRules();
-        Match newMatch = new Match(currentRules, newPlayers);
+        Match newMatch = new Match(currentRules, newPlayers, origGame.getView().getTitle());
         Game newGame = new Game(newPlayers, currentRules, newMatch);
         for (int i = 0; i < origGame.getPlayers().size(); i++) {
             Player origPlayer = origGame.getPlayers().get(i);

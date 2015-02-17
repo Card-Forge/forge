@@ -57,7 +57,7 @@ public class InputConfirm extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     protected final void showMessage() {
-        ButtonUtil.update(getOwner(), yesButtonText, noButtonText, true, true, defaultYes);
+        getController().getGui().updateButtons(getOwner(), yesButtonText, noButtonText, true, true, defaultYes);
         showMessage(message);
     }
 

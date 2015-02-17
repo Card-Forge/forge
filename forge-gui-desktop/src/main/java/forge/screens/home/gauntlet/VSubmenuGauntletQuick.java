@@ -53,7 +53,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
     private final JCheckBox boxColorDecks = new FCheckBox(DeckType.COLOR_DECK.toString());
     private final JCheckBox boxThemeDecks = new FCheckBox(DeckType.THEME_DECK.toString());
 
-    private final FDeckChooser lstDecks = new FDeckChooser(false);
+    private final FDeckChooser lstDecks = new FDeckChooser(null, false);
 
     private final FLabel lblOptions = new FLabel.Builder().fontSize(16)
             .fontStyle(Font.BOLD).text("OPTIONS").fontAlign(SwingConstants.CENTER).build();

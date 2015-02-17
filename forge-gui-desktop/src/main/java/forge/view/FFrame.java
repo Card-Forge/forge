@@ -1,8 +1,26 @@
 package forge.view;
 
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowStateListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.JRootPane;
+import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
+
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.framework.SResizingUtil;
-import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -11,12 +29,6 @@ import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.CompoundSkinBorder;
 import forge.toolbox.FSkin.LineSkinBorder;
 import forge.toolbox.FSkin.SkinnedFrame;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-
-import java.awt.*;
-import java.awt.event.*;
 
 @SuppressWarnings("serial")
 public class FFrame extends SkinnedFrame implements ITitleBarOwner {
@@ -78,14 +90,14 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
     private void pause() {
         if (paused || !isMainFrame) { return; }
 
-        MatchUtil.pause();
+        //HostedMatch.pause();
         paused = true;
     }
 
     private void resume() {
         if (!paused || !isMainFrame) { return; }
 
-        MatchUtil.resume();
+        //HostedMatch.resume();
         paused = false;
     }
 

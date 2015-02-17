@@ -103,7 +103,7 @@ public final class AbilityFactory {
         AbilityRecordType type = AbilityRecordType.getRecordType(mapParams);
         if (null == type) {
             String source = hostCard.getName().isEmpty() ? abString : hostCard.getName();
-            throw new RuntimeException("AbilityFactory : getAbility -- no API in " + source);
+            throw new RuntimeException("AbilityFactory : getAbility -- no API in " + source + ": " + abString);
         }
         return getAbility(mapParams, type, hostCard);
     }

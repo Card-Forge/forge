@@ -32,9 +32,7 @@ import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
-import forge.match.MatchUtil;
 import forge.screens.match.CMatchUI;
-import forge.screens.match.controllers.CPrompt;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.MouseTriggerEvent;
 import forge.view.arcane.util.Animation;
@@ -75,8 +73,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private final PlayerView model;
     private final ZoneType zone;
 
-    public PlayArea(final FScrollPane scrollPane, final boolean mirror, final PlayerView player, final ZoneType zone) {
-        super(scrollPane);
+    public PlayArea(final CMatchUI matchUI, final FScrollPane scrollPane, final boolean mirror, final PlayerView player, final ZoneType zone) {
+        super(matchUI, scrollPane);
         this.setBackground(Color.white);
         this.mirror = mirror;
         this.model = player;
@@ -244,7 +242,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     @Override
     public final CardPanel addCard(final CardView card) {
-        final CardPanel placeholder = new CardPanel(card);
+        final CardPanel placeholder = new CardPanel(getMatchUI(), card);
         placeholder.setDisplayEnabled(false);
         this.getCardPanels().add(placeholder);
         this.add(placeholder);
@@ -511,7 +509,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     @Override
     public final void mouseOver(final CardPanel panel, final MouseEvent evt) {
-        CMatchUI.SINGLETON_INSTANCE.setCard(panel.getCard(), evt.isShiftDown());
+        getMatchUI().setCard(panel.getCard(), evt.isShiftDown());
         super.mouseOver(panel, evt);
     }
 
@@ -545,7 +543,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 }
             }
         }
-        if (CPrompt.SINGLETON_INSTANCE.selectCard(panel.getCard(), otherCardViewsToSelect, triggerEvent)) {
+        if (getMatchUI().getCPrompt().selectCard(panel.getCard(), otherCardViewsToSelect, triggerEvent)) {
             return true;
         }
         //if panel can't do anything with card selection, try selecting previous panel in stack
@@ -565,7 +563,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 }
             }
         }
-        MatchUtil.getController().flashIncorrectAction();
+        getMatchUI().flashIncorrectAction();
         return false;
     }
 
@@ -617,7 +615,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
         final List<CardPanel> newPanels = new ArrayList<CardPanel>();
         for (final CardView card : toAdd) {
-            final CardPanel placeholder = new CardPanel(card);
+            final CardPanel placeholder = new CardPanel(getMatchUI(), card);
             placeholder.setDisplayEnabled(false);
             this.getCardPanels().add(placeholder);
             this.add(placeholder);

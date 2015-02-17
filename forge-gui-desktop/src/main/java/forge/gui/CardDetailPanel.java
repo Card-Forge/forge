@@ -31,16 +31,15 @@ import javax.swing.border.EmptyBorder;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardDetailUtil;
-import forge.card.CardRarity;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.CardEdition;
+import forge.card.CardRarity;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.InventoryItemFromSet;
-import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.toolbox.FHtmlViewer;
 import forge.toolbox.FLabel;
@@ -189,7 +188,7 @@ public class CardDetailPanel extends SkinnedPanel {
             return;
         }
 
-        boolean canShow = MatchUtil.canCardBeShown(card);
+        boolean canShow = true;
 
         if (state.getManaCost().isNoCost() || !canShow) {
             nameCostLabel.setText(CardDetailUtil.formatCardName(card, canShow, isInAltState));

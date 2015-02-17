@@ -61,8 +61,8 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
     public CEditorLimited(final IStorage<DeckGroup> deckMap0, FScreen screen0) {
         super(screen0);
 
-        final CardManager catalogManager = new CardManager(false);
-        final CardManager deckManager = new CardManager(false);
+        final CardManager catalogManager = new CardManager(getCDetailPicture(), false);
+        final CardManager deckManager = new CardManager(getCDetailPicture(), false);
 
         catalogManager.setCaption("Sideboard");
 

@@ -1,5 +1,6 @@
 package forge.screens.home.sanctioned;
 
+import forge.GuiBase;
 import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -14,7 +15,7 @@ import forge.gui.framework.ICDoc;
 import forge.itemmanager.ItemManagerConfig;
 import forge.limited.BoosterDraft;
 import forge.limited.LimitedPoolType;
-import forge.match.MatchUtil;
+import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
@@ -46,6 +47,10 @@ public enum CSubmenuDraft implements ICDoc {
             VSubmenuDraft.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
         }
     };
+
+    @Override
+    public void register() {
+    }
 
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
@@ -131,20 +136,22 @@ public enum CSubmenuDraft implements ICDoc {
             }
         });
 
-        DeckGroup opponentDecks = FModel.getDecks().getDraft().get(humanDeck.getName());
-        Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex);
+        final DeckGroup opponentDecks = FModel.getDecks().getDraft().get(humanDeck.getName());
+        final Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex);
         if (aiDeck == null) {
             throw new IllegalStateException("Draft: Computer deck is null!");
         }
 
-        List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
-        starter.add(new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer()));
+        final List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
+        final RegisteredPlayer human = new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
+        starter.add(human);
         starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
         for (RegisteredPlayer pl : starter) {
             pl.assignConspiracies();
         }
 
-        MatchUtil.startMatch(GameType.Draft, starter);
+        final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
+        hostedMatch.startMatch(GameType.Draft, null, starter, human, GuiBase.getInterface().getNewGuiGame());
     }
 
     /** */

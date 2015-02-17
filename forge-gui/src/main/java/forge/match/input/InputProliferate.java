@@ -13,7 +13,6 @@ import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
-import forge.util.gui.SGuiChoose;
 
 public final class InputProliferate extends InputSelectManyBase<GameEntity> {
     private static final long serialVersionUID = -1779224307654698954L;
@@ -61,7 +60,7 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
                 }
             }
 
-            CounterType toAdd = choices.size() == 1 ? choices.get(0) : SGuiChoose.one("Select counter type", choices);
+            CounterType toAdd = choices.size() == 1 ? choices.get(0) : getController().getGui().one("Select counter type", choices);
             chosenCounters.put(card, toAdd);
         }
 

@@ -25,4 +25,5 @@ public enum GameLogEntryType {
     public String getCaption() {
         return caption;
     }
+
 }

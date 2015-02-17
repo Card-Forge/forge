@@ -40,9 +40,9 @@ import forge.card.mana.ManaCost;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.gui.CardContainer;
-import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
+import forge.screens.match.CMatchUI;
 import forge.toolbox.CardFaceSymbols;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.IDisposable;
@@ -70,6 +70,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private static final float ROT_CENTER_TO_TOP_CORNER = 1.0295630140987000315797369464196f;
     private static final float ROT_CENTER_TO_BOTTOM_CORNER = 0.7071067811865475244008443621048f;
 
+    private final CMatchUI matchUI;
     private CardView card;
     private CardPanel attachedToPanel;
     private List<CardPanel> attachedPanels = new ArrayList<CardPanel>();
@@ -88,7 +89,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private int cardXOffset, cardYOffset, cardWidth, cardHeight;
     private boolean isSelected;
 
-    public CardPanel(final CardView card0) {
+    public CardPanel(final CMatchUI matchUI, final CardView card0) {
+        this.matchUI = matchUI;
+
         setBackground(Color.black);
         setOpaque(false);
 
@@ -98,6 +101,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         createScaleImagePanel();
 
         setCard(card0);
+    }
+
+    public CMatchUI getMatchUI() {
+        return matchUI;
     }
 
     private void createScaleImagePanel() {
@@ -152,7 +159,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         updateImage(false);
     }
     private void updateImage(boolean fromSetCard) {
-        final BufferedImage image = card == null ? null : ImageCache.getImage(card, imagePanel.getWidth(), imagePanel.getHeight());
+        final BufferedImage image = card == null ? null : ImageCache.getImage(card, matchUI.getCurrentPlayer(), imagePanel.getWidth(), imagePanel.getHeight());
         if (fromSetCard) {
             setImage(image);
         }
@@ -239,7 +246,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final int offset = isTapped() ? 1 : 0;
 
         // Magenta outline for when card was chosen to pay
-        if (MatchUtil.isUsedToPay(getCard())) {
+        if (matchUI.isUsedToPay(getCard())) {
             g2d.setColor(Color.magenta);
             final int n2 = Math.max(1, Math.round(2 * cardWidth * CardPanel.SELECTED_BORDER_SIZE));
             g2d.fillRoundRect(cardXOffset - n2, (cardYOffset - n2) + offset, cardWidth + (n2 * 2), cardHeight + (n2 * 2), cornerSize + n2, cornerSize + n2);
@@ -258,7 +265,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n , cornerSize + n);
 
         // White border if card is known to have it.
-        if (getCard() != null && MatchUtil.canCardBeShown(getCard())) {
+        if (getCard() != null && matchUI.mayView(getCard())) {
             final CardStateView state = getCard().getCurrentState();
             final CardEdition ed = FModel.getMagicDb().getEditions().get(state.getSetCode());
             boolean colorIsSet = false;
@@ -292,7 +299,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             return;
         }
 
-        boolean canShow = MatchUtil.canCardBeShown(card);
+        boolean canShow = matchUI.mayView(card);
         displayIconOverlay(g, canShow);
         if (canShow) {
             drawFoilEffect(g, card, cardXOffset, cardYOffset,
@@ -320,7 +327,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         imagePanel.setLocation(imgPos);
         imagePanel.setSize(imgSize);
 
-        boolean canShow = MatchUtil.canCardBeShown(card);
+        boolean canShow = matchUI.mayView(card);
         boolean showText = !imagePanel.hasImage() || !isAnimationPanel;
 
         displayCardNameOverlay(showText && canShow && showCardNameOverlay(), imgSize, imgPos);
@@ -419,7 +426,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             CardFaceSymbols.drawSymbol("phasing", g, stateXSymbols, ySymbols);
         }
 
-        if (MatchUtil.isUsedToPay(card)) {
+        if (matchUI.isUsedToPay(card)) {
             CardFaceSymbols.drawSymbol("sacrifice", g, (cardXOffset + (cardWidth / 2)) - 20,
                     (cardYOffset + (cardHeight / 2)) - 20);
         }

@@ -27,7 +27,6 @@ import forge.card.CardZoom;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
-import forge.match.MatchUtil;
 import forge.screens.match.MatchController;
 import forge.toolbox.FButton;
 import forge.toolbox.FCardPanel;
@@ -457,7 +456,7 @@ public class VAssignDamage extends FDialog {
         if (source == null) {
             if (defender instanceof PlayerView) {
                 PlayerView p = (PlayerView)defender;
-                lethalDamage = attackerHasInfect ? MatchUtil.getGameView().getPoisonCountersToLose() - p.getPoisonCounters() : p.getLife();
+                lethalDamage = attackerHasInfect ? MatchController.instance.getGameView().getPoisonCountersToLose() - p.getPoisonCounters() : p.getLife();
             }
             else if (defender instanceof CardView) { // planeswalker
                 CardView pw = (CardView)defender;

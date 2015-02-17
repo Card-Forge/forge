@@ -66,8 +66,8 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         this.cardPoolCondition = poolCondition;
         this.sectionMode = deckSection0;
 
-        CardManager catalogManager = new CardManager(true);
-        CardManager deckManager = new CardManager(true);
+        CardManager catalogManager = new CardManager(getCDetailPicture(), true);
+        CardManager deckManager = new CardManager(getCDetailPicture(), true);
 
         catalogManager.setCaption("Catalog");
 

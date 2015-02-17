@@ -35,9 +35,7 @@ import javax.swing.*;
  * 
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VPicture implements IVDoc<CPicture> {
-    /** */
-    SINGLETON_INSTANCE;
+public class VPicture implements IVDoc<CPicture> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
@@ -47,8 +45,11 @@ public enum VPicture implements IVDoc<CPicture> {
     private final CardPicturePanel pnlPicture = new CardPicturePanel();
     private final SkinnedLabel lblFlipcard = new SkinnedLabel();
 
+    private final CPicture controller;
+
     //========= Constructor
-    private VPicture() {
+    public VPicture(final CPicture controller) {
+        this.controller = controller;
         lblFlipcard.setIcon(FSkin.getIcon(FSkinProp.ICO_FLIPCARD));
         pnlPicture.setOpaque(false);
         lblFlipcard.setVisible(false);
@@ -103,7 +104,7 @@ public enum VPicture implements IVDoc<CPicture> {
      */
     @Override
     public CPicture getLayoutControl() {
-        return CPicture.SINGLETON_INSTANCE;
+        return controller;
     }
 
     //========== Retrieval methods

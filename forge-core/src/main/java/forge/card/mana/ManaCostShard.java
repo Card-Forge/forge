@@ -22,7 +22,7 @@ import forge.util.BinaryUtil;
 /**
  * The Class CardManaCostShard.
  */
-public enum ManaCostShard implements Comparable<ManaCostShard> {
+public enum ManaCostShard {
     // declaration order matters! Place the shards that offer least ways to be paid for first
 
     /* Pure colors */

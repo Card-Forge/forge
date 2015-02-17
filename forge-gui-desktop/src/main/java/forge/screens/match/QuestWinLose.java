@@ -39,8 +39,8 @@ public class QuestWinLose extends ControlWinLose {
      * @param view0 ViewWinLose object
      * @param match2
      */
-    public QuestWinLose(final ViewWinLose view0, final GameView game0) {
-        super(view0, game0);
+    public QuestWinLose(final ViewWinLose view0, final GameView game0, final CMatchUI matchUI) {
+        super(view0, game0, matchUI);
         controller = new QuestWinLoseController(game0, view0);
     }
 

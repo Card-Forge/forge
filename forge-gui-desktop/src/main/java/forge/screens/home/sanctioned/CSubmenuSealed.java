@@ -40,6 +40,10 @@ public enum CSubmenuSealed implements ICDoc {
         }
     };
 
+    @Override
+    public void register() {
+    }
+
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
      */

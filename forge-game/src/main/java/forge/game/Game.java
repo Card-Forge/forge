@@ -44,7 +44,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardView;
 import forge.game.combat.Combat;
-import forge.game.event.GameEvent;
+import forge.game.event.Event;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.phase.Phase;
 import forge.game.phase.PhaseHandler;
@@ -101,7 +101,6 @@ public class Game {
     private final Match match;
     private GameStage age = GameStage.BeforeMulligan;
     private GameOutcome outcome;
-    private boolean disableAutoYields;
 
     private final GameView view; 
     private final Tracker tracker = new Tracker();
@@ -537,14 +536,10 @@ public class Game {
      * Fire only the events after they became real for gamestate and won't get replaced.<br>
      * The events are sent to UI, log and sound system. Network listeners are under development.
      */
-    public void fireEvent(GameEvent event) {
-//        if (LOG_EVENTS) {
-//            System.out.println("GE: " + event.toString()  + " \t\t " + FThreads.debugGetStackTraceItem(4, true));
-//        }
-
+    public void fireEvent(final Event event) {
         events.post(event);
     }
-    public void subscribeToEvents(Object subscriber) {
+    public void subscribeToEvents(final Object subscriber) {
         events.register(subscriber);
     }
 
@@ -603,13 +598,6 @@ public class Game {
     }
     public int nextHiddenCardId() {
         return ++hiddenCardIdCounter;
-    }
-
-    public boolean getDisableAutoYields() {
-        return disableAutoYields;
-    }
-    public void setDisableAutoYields(boolean b0) {
-        disableAutoYields = b0;
     }
 
     public Multimap<Player, Card> chooseCardsForAnte(final boolean matchRarity) {

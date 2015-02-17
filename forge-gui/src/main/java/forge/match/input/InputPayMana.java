@@ -24,16 +24,13 @@ import forge.game.player.PlayerView;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
-import forge.match.MatchUtil;
 import forge.player.HumanPlay;
 import forge.player.PlayerControllerHuman;
 import forge.util.Evaluator;
 import forge.util.ITriggerEvent;
-import forge.util.gui.SGuiChoose;
-
 
 public abstract class InputPayMana extends InputSyncronizedBase {
-    private static final long serialVersionUID = -9133423708688480255L;
+    private static final long serialVersionUID = 718128600948280315L;
 
     protected int phyLifeToLose = 0;
 
@@ -58,13 +55,13 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
         //if player is floating mana, show mana pool to make it easier to use that mana
         wasFloatingMana = !player.getManaPool().isEmpty();
-        zoneToRestore = wasFloatingMana ? MatchUtil.getController().showManaPool(PlayerView.get(player)) : null;
+        zoneToRestore = wasFloatingMana ? getController().getGui().showManaPool(PlayerView.get(player)) : null;
     }
 
     @Override
     protected void onStop() {
         if (wasFloatingMana) { //hide mana pool if it was shown due to floating mana
-            MatchUtil.getController().hideManaPool(PlayerView.get(player), zoneToRestore);
+            getController().getGui().hideManaPool(PlayerView.get(player), zoneToRestore);
         }
     }
 
@@ -273,9 +270,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
         final SpellAbility chosen;
         if (chosenAbility == null) {
-            chosen = abilities.size() > 1 && choice ? SGuiChoose.one("Choose mana ability", abilities) : abilities.get(0);
-        }
-        else {
+            chosen = abilities.size() > 1 && choice ? getController().getGui().one("Choose mana ability", abilities) : abilities.get(0);
+        } else {
             chosen = chosenAbility;
         }
         ColorSet colors = ColorSet.fromMask(0 == colorNeeded ? colorCanUse : colorNeeded);
@@ -387,10 +383,9 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     protected void updateButtons() {
         if (supportAutoPay()) {
-            ButtonUtil.update(getOwner(), "Auto", "Cancel", false, true, false);
-        }
-        else {
-            ButtonUtil.update(getOwner(), "", "Cancel", false, true, false);
+            getController().getGui().updateButtons(getOwner(), "Auto", "Cancel", false, true, false);
+        } else {
+            getController().getGui().updateButtons(getOwner(), "", "Cancel", false, true, false);
         }
     }
 
@@ -412,7 +407,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 canPayManaCost = proc.getResult();
             }
             if (canPayManaCost) { //enabled Auto button if mana cost can be paid
-                ButtonUtil.update(getOwner(), "Auto", "Cancel", true, true, true);
+                getController().getGui().updateButtons(getOwner(), "Auto", "Cancel", true, true, true);
             }
         }
         showMessage(getMessage());

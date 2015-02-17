@@ -34,7 +34,7 @@ public enum VSubmenuWinston implements IVSubmenu<CSubmenuWinston> {
     private final JPanel pnlStart = new JPanel();
     private final StartButton btnStart  = new StartButton();
 
-    private final DeckManager lstDecks = new DeckManager(GameType.Winston);
+    private final DeckManager lstDecks = new DeckManager(GameType.Winston, null);
     private final JList<String> lstAI = new FList<String>();
 
     private final JLabel lblInfo = new FLabel.Builder()

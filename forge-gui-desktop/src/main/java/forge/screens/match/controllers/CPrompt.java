@@ -35,7 +35,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
-import forge.match.MatchUtil;
+import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FSkin;
 import forge.util.ITriggerEvent;
@@ -45,11 +45,19 @@ import forge.util.ITriggerEvent;
  * 
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
-public enum CPrompt implements ICDoc {
-    SINGLETON_INSTANCE;
+public class CPrompt implements ICDoc {
+    private final CMatchUI matchUI;
+    private final VPrompt view;
+    public CPrompt(final CMatchUI matchUI) {
+        this.matchUI = matchUI;
+        this.view = new VPrompt(this);
+    }
+
+    public final VPrompt getView() {
+        return view;
+    }
 
     private Component lastFocusedButton = null;
-    private final VPrompt view = VPrompt.SINGLETON_INSTANCE;
 
     private final ActionListener actCancel = new ActionListener() {
         @Override
@@ -89,31 +97,31 @@ public enum CPrompt implements ICDoc {
     }
 
     public void selectButtonOk() {
-        MatchUtil.getHumanController().selectButtonOk();
+        matchUI.getGameController().selectButtonOk();
     }
 
     public void selectButtonCancel() {
-        MatchUtil.getHumanController().selectButtonCancel();
+        matchUI.getGameController().selectButtonCancel();
     }
 
     public boolean passPriority() {
-        return MatchUtil.getHumanController().passPriority();
+        return matchUI.getGameController().passPriority();
     }
 
     public boolean passPriorityUntilEndOfTurn() {
-        return MatchUtil.getHumanController().passPriorityUntilEndOfTurn();
+        return matchUI.getGameController().passPriorityUntilEndOfTurn();
     }
 
     public void selectPlayer(final PlayerView playerView, final ITriggerEvent triggerEvent) {
-        MatchUtil.getHumanController().selectPlayer(playerView, triggerEvent);
+        matchUI.getGameController().selectPlayer(playerView, triggerEvent);
     }
 
     public boolean selectCard(final CardView cardView, final List<CardView> otherCardViewsToSelect, final ITriggerEvent triggerEvent) {
-        return MatchUtil.getHumanController().selectCard(cardView, otherCardViewsToSelect, triggerEvent);
+        return matchUI.getGameController().selectCard(cardView, otherCardViewsToSelect, triggerEvent);
     }
 
     public void selectAbility(final SpellAbility sa) {
-        MatchUtil.getHumanController().selectAbility(sa);
+        matchUI.getGameController().selectAbility(sa);
     }
 
     public void setMessage(String s0) {
@@ -131,6 +139,10 @@ public enum CPrompt implements ICDoc {
     }
 
     @Override
+    public void register() {
+    }
+
+    @Override
     public void update() {
         // set focus back to button that last had it
         if (null != lastFocusedButton) {
@@ -140,7 +152,10 @@ public enum CPrompt implements ICDoc {
 
     public void updateText() {
         FThreads.assertExecutedByEdt(true);
-        final GameView game = MatchUtil.getGameView();
+        final GameView game = matchUI.getGameView();
+        if (game == null) {
+            return;
+        }
         final String text = String.format("T:%d G:%d/%d [%s]", game.getTurn(), game.getNumPlayedGamesInMatch() + 1, game.getNumGamesInMatch(), game.getGameType());
         view.getLblGames().setText(text);
         view.getLblGames().setToolTipText(String.format("%s: Game #%d of %d, turn %d", game.getGameType(), game.getNumPlayedGamesInMatch() + 1, game.getNumGamesInMatch(), game.getTurn()));

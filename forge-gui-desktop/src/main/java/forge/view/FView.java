@@ -1,5 +1,33 @@
 package forge.view;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
+import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+
+import net.miginfocom.swing.MigLayout;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.Lists;
 
 import forge.Singletons;
@@ -8,32 +36,30 @@ import forge.control.RestartUtil;
 import forge.gui.FNetOverlay;
 import forge.gui.ImportDialog;
 import forge.gui.SOverlayUtils;
-import forge.gui.framework.*;
+import forge.gui.framework.DragCell;
+import forge.gui.framework.EDocID;
+import forge.gui.framework.FScreen;
+import forge.gui.framework.ICDoc;
+import forge.gui.framework.IVDoc;
+import forge.gui.framework.SLayoutConstants;
+import forge.gui.framework.SLayoutIO;
 import forge.properties.ForgeConstants;
 import forge.screens.bazaar.VBazaarUI;
 import forge.screens.deckeditor.VDeckEditorUI;
 import forge.screens.home.VHomeUI;
-import forge.screens.match.TargetingOverlay;
-import forge.screens.match.VMatchUI;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
-import forge.toolbox.*;
+import forge.toolbox.CardFaceSymbols;
+import forge.toolbox.FAbsolutePositioner;
+import forge.toolbox.FButton;
+import forge.toolbox.FLabel;
+import forge.toolbox.FOverlay;
+import forge.toolbox.FPanel;
+import forge.toolbox.FProgressBar;
+import forge.toolbox.FScrollPane;
+import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLayeredPane;
 import forge.util.BuildInfo;
-import net.miginfocom.swing.MigLayout;
-
-import org.apache.commons.lang3.StringUtils;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.*;
-import java.util.List;
 
 public enum FView {
     SINGLETON_INSTANCE;
@@ -97,7 +123,6 @@ public enum FView {
         // Note: when adding new panels here, keep in mind that the layered pane
         // has a null layout, so new components will be W0 x H0 pixels - gotcha!
         // FControl has a method called "sizeComponents" which will fix this.
-        lpnDocument.add(TargetingOverlay.SINGLETON_INSTANCE.getPanel(), TARGETING_LAYER);
         lpnDocument.add(FNetOverlay.SINGLETON_INSTANCE.getPanel(), TARGETING_LAYER);
 
         pnlInsets.add(pnlContent, BorderLayout.CENTER);
@@ -119,8 +144,11 @@ public enum FView {
 
         // Initialize actions on all drag tab components (which should
         // be realized / populated already).
-        for (EDocID doc : EDocID.values()) {
-            doc.getDoc().getLayoutControl().initialize();
+        for (final EDocID doc : EDocID.values()) {
+            final IVDoc<? extends ICDoc> d = doc.getDoc();
+            if (d != null) {
+                d.getLayoutControl().initialize();
+            }
         }
 
         // All is ready to go - fire up home screen and discard splash frame.
@@ -365,7 +393,6 @@ public enum FView {
 
     /** */
     private void cacheUIStates() {
-        VMatchUI.SINGLETON_INSTANCE.instantiate();
         VHomeUI.SINGLETON_INSTANCE.instantiate();
         VDeckEditorUI.SINGLETON_INSTANCE.instantiate();
         VBazaarUI.SINGLETON_INSTANCE.instantiate();

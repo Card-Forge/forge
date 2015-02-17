@@ -40,6 +40,8 @@ import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.FTextArea;
 
 public class ViewWinLose implements IWinLoseView<FButton> {
+    private final ControlWinLose control;
+
     private final FButton btnContinue, btnRestart, btnQuit;
     private final SkinnedPanel pnlCustom;
 
@@ -55,9 +57,9 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     private static final String CONSTRAINTS_CARDS_LARGE = "w 95%!, h 600px!, gap 0 0 0 20px";
 
     private final GameView game;
-    
+
     @SuppressWarnings("serial")
-    public ViewWinLose(final GameView game0) {
+    public ViewWinLose(final GameView game0, final CMatchUI matchUI) {
         this.game = game0;
 
         final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
@@ -76,27 +78,28 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         ControlWinLose control = null;
         switch (game0.getGameType()) {
         case Quest:
-            control = new QuestWinLose(this, game0);
+            control = new QuestWinLose(this, game0, matchUI);
             break;
         case QuestDraft:
-            control = new QuestDraftWinLose(this, game0);
+            control = new QuestDraftWinLose(this, game0, matchUI);
             break;
         case Draft:
             if (!FModel.getGauntletMini().isGauntletDraft()) {
                 break;
             }
         case Sealed:
-            control = new LimitedWinLose(this, game0);
+            control = new LimitedWinLose(this, game0, matchUI);
             break;
         case Gauntlet:
-            control = new GauntletWinLose(this, game0);
+            control = new GauntletWinLose(this, game0, matchUI);
             break;
         default: // will catch it after switch
             break;
         }
         if (null == control) {
-            control = new ControlWinLose(this, game0);
+            control = new ControlWinLose(this, game0, matchUI);
         }
+        this.control = control;
 
         pnlLeft.setOpaque(false);
         pnlRight.setOpaque(false);
@@ -180,6 +183,8 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         pnlLog.add(btnCopyLog, "center, w pref+16, h pref+8");
         pnlLeft.add(pnlLog, "w 100%!");
 
+        lblTitle.setText(composeTitle(game0));
+   
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -194,11 +199,12 @@ public class ViewWinLose implements IWinLoseView<FButton> {
             }
         });
 
-        lblTitle.setText(composeTitle(game0));
-
         showGameOutcomeSummary();
         showPlayerScores();
+    }
 
+    public final ControlWinLose getControl() {
+        return control;
     }
 
     private String composeTitle(final GameView game) {
@@ -234,8 +240,9 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     }
 
     private void showGameOutcomeSummary() {
-        for (final GameLogEntry o : game.getGameLog().getLogEntriesExact(GameLogEntryType.GAME_OUTCOME))
+        for (final GameLogEntry o : game.getGameLog().getLogEntriesExact(GameLogEntryType.GAME_OUTCOME)) {
             pnlOutcomes.add(new FLabel.Builder().text(o.message).fontSize(14).build(), "h 20!");
+        }
     }
 
     private void showPlayerScores() {

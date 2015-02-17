@@ -72,6 +72,10 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
         return lblSelected;
     }
 
+    @Override
+    public void register() {
+    }
+
     /* (non-Javadoc)
      * @see forge.view.home.ICDoc#intialize()
      */
@@ -128,8 +132,7 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
     private void selectPrevious() {
         EDocID selected = null;
         try {
-            selected = EDocID.valueOf(FModel
-                    .getPreferences().getPref(FPref.SUBMENU_CURRENTMENU));
+            selected = EDocID.valueOf(FModel.getPreferences().getPref(FPref.SUBMENU_CURRENTMENU));
         } catch (final Exception e) { }
 
         if (selected != null && VHomeUI.SINGLETON_INSTANCE.getAllSubmenuLabels().get(selected) != null) {

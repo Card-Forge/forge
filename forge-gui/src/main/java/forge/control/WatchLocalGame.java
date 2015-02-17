@@ -8,18 +8,19 @@ import java.util.List;
 import forge.LobbyPlayer;
 import forge.game.Game;
 import forge.game.card.CardView;
-import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
+import forge.interfaces.IDevModeCheats;
+import forge.interfaces.IGuiGame;
 import forge.match.input.Input;
 import forge.match.input.InputPlaybackControl;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 
-
 public class WatchLocalGame extends PlayerControllerHuman {
-    public WatchLocalGame(Game game0, Player p, LobbyPlayer lp) {
-        super(game0, p, lp);
+    public WatchLocalGame(final Game game0, final LobbyPlayer lp, final IGuiGame gui) {
+        super(game0, null, lp);
+        setGui(gui);
     }
 
     @Override
@@ -77,11 +78,14 @@ public class WatchLocalGame extends PlayerControllerHuman {
     }
 
     @Override
-    public void selectPlayer(final PlayerView player, final ITriggerEvent triggerEvent) {
+    public void selectPlayer(final PlayerView player,
+            final ITriggerEvent triggerEvent) {
     }
 
     @Override
-    public boolean selectCard(final CardView card, final List<CardView> otherCardViewsToSelect, final ITriggerEvent triggerEvent) {
+    public boolean selectCard(final CardView card,
+            final List<CardView> otherCardViewsToSelect,
+            final ITriggerEvent triggerEvent) {
         return false;
     }
 
@@ -94,48 +98,12 @@ public class WatchLocalGame extends PlayerControllerHuman {
     }
 
     @Override
-    public Iterable<String> getAutoYields() {
-        return null;
-    }
-    @Override
-    public boolean shouldAutoYield(final String key) {
-        return false;
-    }
-    @Override
-    public void setShouldAutoYield(final String key, final boolean autoYield) {
-    }
-    @Override
-    public boolean shouldAlwaysAcceptTrigger(final Integer trigger) {
-        return false;
-    }
-    @Override
-    public boolean shouldAlwaysDeclineTrigger(final Integer trigger) {
-        return false;
-    }
-    @Override
-    public boolean shouldAlwaysAskTrigger(final Integer trigger) {
-        return false;
-    }
-    @Override
-    public void setShouldAlwaysAcceptTrigger(final Integer trigger) {
-    }
-    @Override
-    public void setShouldAlwaysDeclineTrigger(final Integer trigger) {
-    }
-    @Override
-    public void setShouldAlwaysAskTrigger(final Integer trigger) {
-    }
-    @Override
-    public void autoPassCancel() {
-    }
-
-    @Override
     public boolean canPlayUnlimitedLands() {
         return false;
     }
 
     @Override
-    public DevModeCheats cheat() {
-        return null;
+    public IDevModeCheats cheat() {
+        return DevModeCheats.NO_CHEAT;
     }
 }

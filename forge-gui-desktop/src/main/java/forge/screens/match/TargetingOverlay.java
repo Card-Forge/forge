@@ -30,6 +30,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JPanel;
 
@@ -40,11 +41,8 @@ import forge.game.card.CardView;
 import forge.game.combat.CombatView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
-import forge.gui.framework.FScreen;
-import forge.match.MatchUtil;
-import forge.screens.match.controllers.CDock;
+import forge.screens.match.controllers.CDock.ArcState;
 import forge.screens.match.views.VField;
-import forge.screens.match.views.VStack;
 import forge.screens.match.views.VStack.StackInstanceTextArea;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
@@ -56,9 +54,8 @@ import forge.view.arcane.CardPanel;
  * 
  */
 @SuppressWarnings("serial")
-public enum TargetingOverlay {
-    SINGLETON_INSTANCE;
-
+public class TargetingOverlay {
+    private final CMatchUI matchUI;
     private final OverlayPanel pnl = new OverlayPanel();
     private final List<CardPanel> cardPanels = new ArrayList<CardPanel>();
     private final List<Arc> arcsFoe = new ArrayList<Arc>();
@@ -67,7 +64,7 @@ public enum TargetingOverlay {
     private static class Arc {
         private final int x1, y1, x2, y2;
 
-        private Arc(Point end, Point start) {
+        private Arc(final Point end, final Point start) {
             x1 = start.x;
             y1 = start.y;
             x2 = end.x;
@@ -75,15 +72,16 @@ public enum TargetingOverlay {
         }
     }
 
-    private HashSet<CardView> cardsVisualized = new HashSet<CardView>();
+    private final Set<CardView> cardsVisualized = new HashSet<CardView>();
     private CardPanel activePanel = null;
 
     /**
      * Semi-transparent overlay panel. Should be used with layered panes.
      */
-    private TargetingOverlay() {
+    public TargetingOverlay(final CMatchUI matchUI) {
+        this.matchUI = matchUI;
         pnl.setOpaque(false);
-        pnl.setVisible(false);
+        pnl.setVisible(true);
         pnl.setFocusTraversalKeysEnabled(false);
         pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
     }
@@ -103,18 +101,18 @@ public enum TargetingOverlay {
         cardPanels.clear();
         cardsVisualized.clear();
 
-        StackInstanceTextArea activeStackItem = VStack.SINGLETON_INSTANCE.getHoveredItem();
+        final StackInstanceTextArea activeStackItem = matchUI.getCStack().getView().getHoveredItem();
 
-        switch (CDock.SINGLETON_INSTANCE.getArcState()) {
-            case 0:
+        switch (matchUI.getCDock().getArcState()) {
+            case OFF:
                 return;
-            case 1:
+            case MOUSEOVER:
                 // Draw only hovered card
                 activePanel = null;
-                for (VField f : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
+                for (final VField f : matchUI.getFieldViews()) {
                     cardPanels.addAll(f.getTabletop().getCardPanels());
-                    List<CardPanel> cPanels = f.getTabletop().getCardPanels();
-                    for (CardPanel c : cPanels) {
+                    final List<CardPanel> cPanels = f.getTabletop().getCardPanels();
+                    for (final CardPanel c : cPanels) {
                         if (c.isSelected()) {
                             activePanel = c;
                             break;
@@ -123,9 +121,9 @@ public enum TargetingOverlay {
                 }
                 if (activePanel == null && activeStackItem == null) { return; }
                 break;
-            default:
+            case ON:
                 // Draw all
-                for (VField f : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
+                for (final VField f : matchUI.getFieldViews()) {
                     cardPanels.addAll(f.getTabletop().getCardPanels());
                 }
         }
@@ -147,7 +145,7 @@ public enum TargetingOverlay {
             }
         }
 
-        if (CDock.SINGLETON_INSTANCE.getArcState() == 1) {
+        if (matchUI.getCDock().getArcState() == ArcState.MOUSEOVER) {
             // Only work with the active panel
             if (activePanel != null) {
                 addArcsForCard(activePanel.getCard(), endpoints, combat);
@@ -185,9 +183,9 @@ public enum TargetingOverlay {
         }
     }
 
-    private Point getPlayerTargetingArrowPoint(PlayerView p, Point locOnScreen) {
-        JPanel avatarArea = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(p).getAvatarArea();
-        Point point = avatarArea.getLocationOnScreen();
+    private Point getPlayerTargetingArrowPoint(final PlayerView p, final Point locOnScreen) {
+        final JPanel avatarArea = matchUI.getFieldViewFor(p).getAvatarArea();
+        final Point point = avatarArea.getLocationOnScreen();
         point.x += avatarArea.getWidth() / 2 - locOnScreen.x;
         point.y += avatarArea.getHeight() / 2 - locOnScreen.y;
         return point;
@@ -350,7 +348,7 @@ public enum TargetingOverlay {
             g2d.setTransform(af);
         }
 
-        public void drawArcs(Graphics2D g2d, Color color, List<Arc> arcs) {
+        private void drawArcs(Graphics2D g2d, Color color, List<Arc> arcs) {
             for (Arc arc : arcs) {
                 drawArrow(g2d, arc.x1, arc.y1, arc.x2, arc.y2, color);
             }
@@ -367,16 +365,19 @@ public enum TargetingOverlay {
         @Override
         public void paintComponent(final Graphics g) {
             // No need for this except in match view
-            if (Singletons.getControl().getCurrentScreen() != FScreen.MATCH_SCREEN) { return; }
+            if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) {
+                return;
+            }
 
             super.paintComponent(g);
 
-            // 0 is off
-            int overlaystate = CDock.SINGLETON_INSTANCE.getArcState();
-            if (overlaystate == 0) { return; }
+            final ArcState overlaystate = matchUI.getCDock().getArcState();
+
+            // Arcs are off
+            if (overlaystate == ArcState.OFF) { return; }
 
             // Arc drawing
-            final GameView gameView = MatchUtil.getGameView();
+            final GameView gameView = matchUI.getGameView();
             if (gameView != null) {
                 assembleArcs(gameView.getCombat());
             }

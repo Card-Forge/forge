@@ -1,24 +1,23 @@
 package forge.quest;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-
-import forge.item.InventoryItem;
-import forge.item.PaperCard;
-import forge.model.FModel;
-import forge.util.ItemPool;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
+import forge.item.PaperCard;
+import forge.model.FModel;
+import forge.util.ItemPool;
 
 /** 
  * Resolves a card chooser InventoryItem into a CardPrinted.
  * The initial version includes "duplicate", other type may be added later.
  *
  */
-public class QuestRewardCardChooser extends QuestRewardCard implements InventoryItem  {
+public class QuestRewardCardChooser extends QuestRewardCard {
     /**
      * Possible types for this object.
      */

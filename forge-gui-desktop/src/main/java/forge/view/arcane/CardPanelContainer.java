@@ -49,7 +49,8 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     private static final int DRAG_SMUDGE = 10;
 
     private final List<CardPanel> cardPanels = new ArrayList<CardPanel>();
-    private FScrollPane scrollPane;
+    private final CMatchUI matchUI;
+    private final FScrollPane scrollPane;
 
     private int cardWidthMin = 50;
     private int cardWidthMax = 300;
@@ -63,10 +64,15 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     private int intialMouseDragX = -1, intialMouseDragY;
     private boolean dragEnabled;
 
-    public CardPanelContainer(final FScrollPane scrollPane) {
+    public CardPanelContainer(final CMatchUI matchUI, final FScrollPane scrollPane) {
+        this.matchUI = matchUI;
         this.scrollPane = scrollPane;
         this.setOpaque(true);
         setupMouseListeners();
+    }
+
+    protected final CMatchUI getMatchUI() {
+        return matchUI;
     }
 
     private void setupMouseListeners() {
@@ -213,7 +219,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
                 }
 
                 if (hitPanel != null) {
-                    CMatchUI.SINGLETON_INSTANCE.setCard(hitPanel.getCard());
+                    matchUI.setCard(hitPanel.getCard());
 
                     hoveredPanel = hitPanel;
                     hoveredPanel.setSelected(true);
@@ -239,7 +245,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     protected abstract CardPanel getCardPanel(int x, int y);
 
     public CardPanel addCard(final CardView card) {
-        final CardPanel placeholder = new CardPanel(card);
+        final CardPanel placeholder = new CardPanel(matchUI, card);
         placeholder.setDisplayEnabled(false);
         this.getCardPanels().add(placeholder);
         this.add(placeholder);

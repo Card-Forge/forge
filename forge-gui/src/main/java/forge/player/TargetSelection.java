@@ -35,10 +35,8 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.match.MatchUtil;
 import forge.match.input.InputSelectTargets;
 import forge.util.Aggregates;
-import forge.util.gui.SGuiChoose;
 
 /**
  * <p>
@@ -137,12 +135,12 @@ public class TargetSelection {
             for (Card card : validTargets) {
                 playersWithValidTargets.put(PlayerView.get(card.getController()), null);
             }
-            if (MatchUtil.getController().openZones(zone, playersWithValidTargets)) {
+            if (controller.getGui().openZones(zone, playersWithValidTargets)) {
                 InputSelectTargets inp = new InputSelectTargets(controller, validTargets, ability, mandatory);
                 inp.showAndWait();
                 choiceResult = !inp.hasCancelled();
                 bTargetingDone = inp.hasPressedOk();
-                MatchUtil.getController().restoreOldZones(playersWithValidTargets);
+                controller.getGui().restoreOldZones(playersWithValidTargets);
             }
             else {
                 // for every other case an all-purpose GuiChoose
@@ -206,10 +204,10 @@ public class TargetSelection {
         
         Object chosen = null;
         if (!choices.isEmpty() && mandatory) {
-            chosen = SGuiChoose.one(getTgt().getVTSelection(), choicesFiltered);
+            chosen = controller.getGui().one(getTgt().getVTSelection(), choicesFiltered);
         }
         else {
-            chosen = SGuiChoose.oneOrNone(getTgt().getVTSelection(), choicesFiltered);
+            chosen = controller.getGui().oneOrNone(getTgt().getVTSelection(), choicesFiltered);
         }
         if (chosen == null) {
             return false;
@@ -258,7 +256,7 @@ public class TargetSelection {
                 return false;
             }
             else {
-                final Object madeChoice = SGuiChoose.oneOrNone(message, selectOptions);
+                final Object madeChoice = controller.getGui().oneOrNone(message, selectOptions);
                 if (madeChoice == null) {
                     return false;
                 }

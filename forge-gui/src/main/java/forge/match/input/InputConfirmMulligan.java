@@ -26,12 +26,10 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardView;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.match.MatchUtil;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.ThreadUtil;
-import forge.util.gui.SGuiDialog;
  
 /**
   * <p>
@@ -74,11 +72,11 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
         }
 
         if (isCommander) {
-            ButtonUtil.update(getOwner(), "Keep", "Exile", true, false, true);
+            getController().getGui().updateButtons(getOwner(), "Keep", "Exile", true, false, true);
             sb.append("Will you keep your hand or choose some cards to exile those and draw one less card?");
         }
         else {
-            ButtonUtil.update(getOwner(), "Keep", "Mulligan", true, true, true);
+            getController().getGui().updateButtons(getOwner(), "Keep", "Mulligan", true, true, true);
             sb.append("Do you want to keep your hand?");
         }
 
@@ -103,7 +101,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
         if (isCommander) {
             // Clear the "selected" icon after clicking the done button
             for (final Card c : this.selected) {
-                MatchUtil.setUsedToPay(c.getView(), false);
+                getController().getGui().setUsedToPay(c.getView(), false);
             }
         }
         stop();
@@ -121,7 +119,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
         }
 
         final CardView cView = c0.getView();
-        if (isSerumPowder && SGuiDialog.confirm(cView, "Use " + cView + "'s ability?")) {
+        if (isSerumPowder && getController().getGui().confirm(cView, "Use " + cView + "'s ability?")) {
             cardSelectLocked = true;
             ThreadUtil.invokeInGameThread(new Runnable() {
                 public void run() {
@@ -138,14 +136,14 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
 
         if (isCommander) { // allow to choose cards for partial paris
             if (selected.contains(c0)) {
-                MatchUtil.setUsedToPay(c0.getView(), false);
+                getController().getGui().setUsedToPay(c0.getView(), false);
                 selected.remove(c0);
             }
             else {
-                MatchUtil.setUsedToPay(c0.getView(), true);
+                getController().getGui().setUsedToPay(c0.getView(), true);
                 selected.add(c0);
             }
-            ButtonUtil.update(getOwner(), "Keep", "Exile", true, !selected.isEmpty(), true);
+            getController().getGui().updateButtons(getOwner(), "Keep", "Exile", true, !selected.isEmpty(), true);
         }
         return true;
     }

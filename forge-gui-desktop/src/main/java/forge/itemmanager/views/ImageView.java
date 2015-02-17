@@ -1,5 +1,34 @@
 package forge.itemmanager.views;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.Point;
+import java.awt.Polygon;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.Shape;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseWheelEvent;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
+
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JViewport;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
+
 import forge.ImageCache;
 import forge.assets.FSkinProp;
 import forge.deck.DeckProxy;
@@ -14,25 +43,18 @@ import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
 import forge.itemmanager.SItemManagerUtil;
-import forge.screens.match.controllers.CDetail;
-import forge.screens.match.controllers.CPicture;
-import forge.toolbox.*;
+import forge.screens.match.controllers.CDetailPicture;
+import forge.toolbox.FComboBoxWrapper;
+import forge.toolbox.FLabel;
+import forge.toolbox.FMouseAdapter;
+import forge.toolbox.FScrollPane;
+import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinImage;
+import forge.toolbox.FTextField;
 import forge.toolbox.special.CardZoomer;
 import forge.view.arcane.CardPanel;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
 
 public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final int PADDING = 5;
@@ -137,7 +159,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private final FComboBoxWrapper<Object> cbPileByOptions = new FComboBoxWrapper<Object>();
     private final FComboBoxWrapper<Integer> cbColumnCount = new FComboBoxWrapper<Integer>();
 
-    public ImageView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
+    public ImageView(final ItemManager<T> itemManager0, final ItemManagerModel<T> model0) {
         super(itemManager0, model0);
 
         SItemManagerUtil.populateImageViewOptions(itemManager0, cbGroupByOptions, cbPileByOptions);
@@ -728,9 +750,11 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         return true;
     }
 
-    protected void showHoveredItem(T item) {
-        CDetail.SINGLETON_INSTANCE.showCard(item);
-        CPicture.SINGLETON_INSTANCE.showImage(item);
+    protected void showHoveredItem(final T item) {
+        final CDetailPicture cDetailPicture = itemManager.getCDetailPicture();
+        if (cDetailPicture != null) {
+            cDetailPicture.showItem(item);
+        }
     }
 
     @Override

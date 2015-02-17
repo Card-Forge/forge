@@ -1,16 +1,22 @@
 package forge.toolbox;
 
-import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.event.UndoableEditEvent;
-import javax.swing.event.UndoableEditListener;
-import javax.swing.text.AbstractDocument;
-import javax.swing.text.JTextComponent;
-import javax.swing.undo.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.KeyStroke;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.JTextComponent;
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
+import javax.swing.undo.CompoundEdit;
+import javax.swing.undo.UndoManager;
+import javax.swing.undo.UndoableEdit;
 
 /*
 **  This class will merge individual edits into a single larger edit.
@@ -19,9 +25,7 @@ import java.awt.event.KeyEvent;
 **  of the group and will therefore be undone when the group is undone.
 */
 @SuppressWarnings("serial")
-public class FUndoManager extends UndoManager
-	implements UndoableEditListener, DocumentListener
-{
+public class FUndoManager extends UndoManager implements DocumentListener {
 	private UndoManager undoManager;
 	private CompoundEdit compoundEdit;
 	private JTextComponent textComponent;

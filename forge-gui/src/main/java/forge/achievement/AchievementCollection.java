@@ -18,7 +18,6 @@ import forge.game.Game;
 import forge.game.GameType;
 import forge.game.player.Player;
 import forge.interfaces.IComboBox;
-import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.properties.ForgeConstants;
@@ -35,9 +34,9 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         FileUtil.ensureDirectoryExists(ForgeConstants.ACHIEVEMENTS_DIR);
     }
 
-    public static void updateAll(PlayerControllerHuman controller) {
-        //don't update achievements if player cheated during game or if it's not just a single human player
-        if (controller.hasCheated() || MatchUtil.getHumanCount() != 1) {
+    public static void updateAll(final PlayerControllerHuman controller) {
+        //don't update achievements if player cheated during game
+        if (controller.hasCheated()) {
             return;
         }
 

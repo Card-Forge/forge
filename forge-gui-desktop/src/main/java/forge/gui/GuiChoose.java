@@ -188,6 +188,9 @@ public class GuiChoose {
     }
 
     public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display) {
+        return getChoices(message, min, max, choices, selected, display, null);
+    }
+    public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display, final CMatchUI matchUI) {
         if (choices == null || choices.isEmpty()) {
             if (min == 0) {
                 return new ArrayList<T>();
@@ -195,36 +198,38 @@ public class GuiChoose {
             throw new RuntimeException("choice required from empty list");
         }
 
-        Callable<List<T>> showChoice = new Callable<List<T>>() {
+        final Callable<List<T>> showChoice = new Callable<List<T>>() {
             @Override
             public List<T> call() {
                 ListChooser<T> c = new ListChooser<T>(message, min, max, choices, display);
                 final JList<T> list = c.getLstChoices();
-                list.addListSelectionListener(new ListSelectionListener() {
-                    @Override
-                    public void valueChanged(final ListSelectionEvent ev) {
-                        final T sel = list.getSelectedValue();
-                        if (sel instanceof InventoryItem) {
-                            CMatchUI.SINGLETON_INSTANCE.setCard((InventoryItem) list.getSelectedValue());
-                            return;
-                        }
+                if (matchUI != null) {
+                    list.addListSelectionListener(new ListSelectionListener() {
+                        @Override
+                        public void valueChanged(final ListSelectionEvent ev) {
+                            final T sel = list.getSelectedValue();
+                            if (sel instanceof InventoryItem) {
+                                matchUI.setCard((InventoryItem) list.getSelectedValue());
+                                return;
+                            }
 
-                        final CardView card;
-                        if (sel instanceof CardStateView) {
-                            card = ((CardStateView) sel).getCard();
-                        } else if (sel instanceof CardView) {
-                            card = (CardView) sel;
-                        } else {
-                            card = null;
-                        }
-                        if (card != null) {
-                            CMatchUI.SINGLETON_INSTANCE.setCard(card);
+                            final CardView card;
+                            if (sel instanceof CardStateView) {
+                                card = ((CardStateView) sel).getCard();
+                            } else if (sel instanceof CardView) {
+                                card = (CardView) sel;
+                            } else {
+                                card = null;
+                            }
+                            if (card != null) {
+                                matchUI.setCard(card);
 
-                            GuiUtils.clearPanelSelections();
-                            GuiUtils.setPanelSelection(card);
+                                matchUI.clearPanelSelections();
+                                matchUI.setPanelSelection(card);
+                            }
                         }
-                    }
-                });
+                    });
+                }
 
                 if (selected != null) {
                     c.show(selected);
@@ -233,7 +238,9 @@ public class GuiChoose {
                     c.show();
                 }
 
-                GuiUtils.clearPanelSelections();
+                if (matchUI != null) {
+                    matchUI.clearPanelSelections();
+                }
                 return c.getSelectedValues();
             }
         };
@@ -248,34 +255,28 @@ public class GuiChoose {
         return null;
     }
 
-    public static <T> List<T> many(final String title, final String topCaption, int cnt, final List<T> sourceChoices, final CardView referenceCard) {
-        return order(title, topCaption, cnt, cnt, sourceChoices, null, referenceCard, false);
-    }
-
-    public static <T> List<T> many(final String title, final String topCaption, int min, int max, final List<T> sourceChoices, final CardView referenceCard) {
-        int m2 = min >= 0 ? sourceChoices.size() - min : -1;
-        int m1 = max >= 0 ? sourceChoices.size() - max : -1;
-        return order(title, topCaption, m1, m2, sourceChoices, null, referenceCard, false);
-    }
-
-    public static <T> List<T> order(final String title, final String top, final List<T> sourceChoices, final CardView referenceCard) {
-        return order(title, top, 0, 0, sourceChoices, null, referenceCard, false);
-    }
-
-    public static <T extends Comparable<? super T>> List<T> sideboard(List<T> sideboard, List<T> deck) {
+    public static <T extends Comparable<? super T>> List<T> sideboard(final CMatchUI matchUI, final List<T> sideboard, final List<T> deck) {
         Collections.sort(deck);
         Collections.sort(sideboard);
         return order("Sideboard", "Main Deck", -1, -1, sideboard, deck, null, true);
     }
 
     public static <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
+            final List<T> sourceChoices, final List<T> destChoices) {
+        return order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, null, false, null);
+    }
+    public static <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode) {
+        return order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, null);
+    }
+    public static <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
+            final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode, final CMatchUI matchUI) {
         // An input box for handling the order of choices.
 
         Callable<List<T>> callable = new Callable<List<T>>() {
             @Override
             public List<T> call() throws Exception {
-                DualListBox<T> dual = new DualListBox<T>(remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices);
+                DualListBox<T> dual = new DualListBox<T>(remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, matchUI);
                 dual.setSecondColumnLabelText(top);
 
                 dual.setSideboardMode(sideboardingMode);
@@ -283,8 +284,8 @@ public class GuiChoose {
                 dual.setTitle(title);
                 dual.pack();
                 dual.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-                if (referenceCard != null) {
-                    CMatchUI.SINGLETON_INSTANCE.setCard(referenceCard);
+                if (matchUI != null && referenceCard != null) {
+                    matchUI.setCard(referenceCard);
                     // MARKED FOR UPDATE
                 }
                 dual.setVisible(true);
@@ -292,7 +293,9 @@ public class GuiChoose {
                 List<T> objects = dual.getOrderedList();
 
                 dual.dispose();
-                GuiUtils.clearPanelSelections();
+                if (matchUI != null) {
+                    matchUI.clearPanelSelections();
+                }
                 return objects;
             }
         };

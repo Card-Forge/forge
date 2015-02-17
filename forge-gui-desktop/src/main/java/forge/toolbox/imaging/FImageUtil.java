@@ -21,20 +21,20 @@ package forge.toolbox.imaging;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+
+import javax.imageio.ImageIO;
 
 import forge.ImageCache;
 import forge.ImageKeys;
 import forge.game.card.CardView.CardStateView;
-import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.toolbox.CardFaceSymbols;
 import forge.toolbox.FSkin.SkinIcon;
 import forge.util.ImageUtil;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
-import javax.imageio.ImageIO;
 
 /**
  * Common image-related routines specific to Forge images. 
@@ -55,7 +55,7 @@ public final class FImageUtil {
      * For flip cards, returns the un-flipped image. 
      */
     public static BufferedImage getImage(final CardStateView card) {
-        BufferedImage image = ImageCache.getOriginalImage(MatchUtil.getCardImageKey(card), true);
+        BufferedImage image = ImageCache.getOriginalImage(card.getImageKey(null), true);
         final int foilIndex = card.getFoilIndex();
         if (image != null && foilIndex > 0) { 
             image = getImageWithFoilEffect(image, foilIndex);
@@ -64,12 +64,12 @@ public final class FImageUtil {
     }
 
     public static BufferedImage getImageXlhq(final CardStateView state) {
-        String key = MatchUtil.getCardImageKey(state);
+        final String key = state.getImageKey(null);
         if (key.isEmpty() || key.length() < 3) {
             return null;
         }
 
-        String prefix = key.substring(0, 2);
+        final String prefix = key.substring(0, 2);
 
         if (!prefix.equals(ImageKeys.CARD_PREFIX) && !prefix.equals(ImageKeys.TOKEN_PREFIX)) {
             return null;

@@ -6,6 +6,7 @@ import forge.LobbyPlayer;
 import forge.events.IUiEventVisitor;
 import forge.events.UiEventAttackerDeclared;
 import forge.events.UiEventBlockerAssigned;
+import forge.events.UiEventNextGameDecision;
 import forge.game.card.Card;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventBlockersDeclared;
@@ -211,6 +212,10 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
     }
     @Override
     public SoundEffectType visit(UiEventAttackerDeclared event) {
+        return null;
+    }
+    @Override
+    public SoundEffectType visit(UiEventNextGameDecision event) {
         return null;
     }
     @Override

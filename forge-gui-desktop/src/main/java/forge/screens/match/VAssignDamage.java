@@ -41,7 +41,6 @@ import forge.game.GameEntityView;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.gui.SOverlayUtils;
-import forge.match.MatchUtil;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
@@ -60,6 +59,8 @@ import forge.view.arcane.CardPanel;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
 public class VAssignDamage {
+    private final CMatchUI matchUI;
+
     // Width and height of blocker dialog
     private final int wDlg = 700;
     private final int hDlg = 500;
@@ -82,7 +83,7 @@ public class VAssignDamage {
     private final FButton btnReset = new FButton("Reset");
     private final FButton btnAuto  = new FButton("Auto");
 
-    
+
     private static class DamageTarget {
         public final CardView card;
         public final JLabel label;
@@ -145,7 +146,9 @@ public class VAssignDamage {
      * @param overrideOrder override combatant order
 
      */
-    public VAssignDamage(final CardView attacker, final List<CardView> blockers, final int damage0, final GameEntityView defender0, boolean overrideOrder) {
+    public VAssignDamage(final CMatchUI matchUI, final CardView attacker, final List<CardView> blockers, final int damage0, final GameEntityView defender0, boolean overrideOrder) {
+        this.matchUI = matchUI;
+
         dlg.setTitle("Assign damage dealt by " + attacker);
 
         // Set damage storage vars
@@ -162,7 +165,7 @@ public class VAssignDamage {
         pnlMain.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         // Attacker area
-        final CardPanel pnlAttacker = new CardPanel(attacker);
+        final CardPanel pnlAttacker = new CardPanel(matchUI, attacker);
         pnlAttacker.setOpaque(false);
         pnlAttacker.setCardBounds(0, 0, 105, 150);
 
@@ -183,23 +186,22 @@ public class VAssignDamage {
 
         // Top row of cards...
         for (final CardView c : blockers) {
-            DamageTarget dt = new DamageTarget(c, new FLabel.Builder().text("0").fontSize(18).fontAlign(SwingConstants.CENTER).build());
+            final DamageTarget dt = new DamageTarget(c, new FLabel.Builder().text("0").fontSize(18).fontAlign(SwingConstants.CENTER).build());
             damage.put(c, dt);
             defenders.add(dt);
             addPanelForDefender(pnlDefenders, c);
         }
 
         if (attackerHasTrample) {
-            DamageTarget dt = new DamageTarget(null, new FLabel.Builder().text("0").fontSize(18).fontAlign(SwingConstants.CENTER).build());
+            final DamageTarget dt = new DamageTarget(null, new FLabel.Builder().text("0").fontSize(18).fontAlign(SwingConstants.CENTER).build());
             damage.put(null, dt);
             defenders.add(dt);
             CardView fakeCard = null;
             if (defender instanceof CardView) {
                 fakeCard = (CardView)defender;
-            }
-            else if (defender instanceof PlayerView) { 
+            } else if (defender instanceof PlayerView) { 
                 final PlayerView p = (PlayerView)defender;
-                fakeCard = new CardView(-1, null, defender.toString(), p, CMatchUI.SINGLETON_INSTANCE.avatarImages.get(p.getLobbyPlayerName()));
+                fakeCard = new CardView(-1, null, defender.toString(), p, matchUI.avatarImages.get(p.getLobbyPlayerName()));
             }
             addPanelForDefender(pnlDefenders, fakeCard);
         }        
@@ -208,7 +210,7 @@ public class VAssignDamage {
         // If trample allowed, make card placeholder
 
         // ... bottom row of labels.
-        for (DamageTarget l : defenders) {
+        for (final DamageTarget l : defenders) {
             pnlDefenders.add(l.label, "w 145px!, h 30px!, gap 5px 5px 0 5px");
         }
 
@@ -226,7 +228,7 @@ public class VAssignDamage {
         pnlMain.add(scrDefenders, "w 96%!, gap 2% 0 0 0, pushy, growy, ax center, span 2");
         pnlMain.add(lblAssignRemaining, "w 96%!, gap 2% 0 0 0, ax center, span 2");
 
-        JPanel pnlButtons = new JPanel(new MigLayout("insets 0, gap 0, ax center"));
+        final JPanel pnlButtons = new JPanel(new MigLayout("insets 0, gap 0, ax center"));
         pnlButtons.setOpaque(false);
         pnlButtons.add(btnAuto, "w 110px!, h 30px!, gap 0 10px 0 0");
         pnlButtons.add(btnOK, "w 110px!, h 30px!, gap 0 10px 0 0");
@@ -260,7 +262,7 @@ public class VAssignDamage {
      * @param defender
      */
     private void addPanelForDefender(final JPanel pnlDefenders, final CardView defender) {
-        final CardPanel cp = new CardPanel(defender);
+        final CardPanel cp = new CardPanel(matchUI, defender);
         cp.setCardBounds(0, 0, 105, 150);
         cp.setOpaque(true);
         pnlDefenders.add(cp, "w 145px!, h 170px!, gap 5px 5px 3px 3px, ax center");
@@ -436,7 +438,7 @@ public class VAssignDamage {
         if (card == null) {
             if (defender instanceof PlayerView) {
                 final PlayerView p = (PlayerView)defender;
-                lethalDamage = attackerHasInfect ? MatchUtil.getGameView().getPoisonCountersToLose() - p.getPoisonCounters() : p.getLife();
+                lethalDamage = attackerHasInfect ? matchUI.getGameView().getPoisonCountersToLose() - p.getPoisonCounters() : p.getLife();
             }
             else if (defender instanceof CardView) { // planeswalker
                 final CardView pw = (CardView)defender;

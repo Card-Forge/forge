@@ -2,6 +2,7 @@ package forge.screens.match.controllers;
 
 import forge.UiCommand;
 import forge.gui.framework.ICDoc;
+import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VPlayers;
 
 /** 
@@ -10,9 +11,21 @@ import forge.screens.match.views.VPlayers;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
-public enum CPlayers implements ICDoc {
-    /** */
-    SINGLETON_INSTANCE;
+public class CPlayers implements ICDoc {
+
+    private final CMatchUI matchUI;
+    private final VPlayers view;
+    public CPlayers(final CMatchUI matchUI) {
+        this.matchUI = matchUI;
+        this.view = new VPlayers(this);
+    }
+
+    public final CMatchUI getMatchUI() {
+        return matchUI;
+    }
+    public final VPlayers getView() {
+        return view;
+    }
 
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
@@ -20,6 +33,10 @@ public enum CPlayers implements ICDoc {
     @Override
     public UiCommand getCommandOnSelect() {
         return null;
+    }
+
+    @Override
+    public void register() {
     }
 
     /* (non-Javadoc)
@@ -34,6 +51,6 @@ public enum CPlayers implements ICDoc {
      */
     @Override
     public void update() {
-        VPlayers.SINGLETON_INSTANCE.update();
+        view.update();
     }
 }

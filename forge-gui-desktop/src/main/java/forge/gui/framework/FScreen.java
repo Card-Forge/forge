@@ -1,5 +1,7 @@
 package forge.gui.framework;
 
+import java.io.File;
+
 import forge.Singletons;
 import forge.assets.FSkinProp;
 import forge.properties.FileLocation;
@@ -17,144 +19,152 @@ import forge.screens.workshop.VWorkshopUI;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
-
-import java.io.File;
+import forge.view.FView;
 
 /** 
  * Definitions for Forge screens
- *
  */
-public enum FScreen {
-    HOME_SCREEN(
+public class FScreen {
+    public static final FScreen HOME_SCREEN = new FScreen(
             VHomeUI.SINGLETON_INSTANCE,
             CHomeUI.SINGLETON_INSTANCE,
             "Home",
             FSkin.getIcon(FSkinProp.ICO_FAVICON),
             false,
             "Exit Forge",
-            null),
-    MATCH_SCREEN(
-            VMatchUI.SINGLETON_INSTANCE,
-            CMatchUI.SINGLETON_INSTANCE,
-            "Game",
-            FSkin.getIcon(FSkinProp.ICO_ALPHASTRIKE), //TODO: Create icon for match screen
-            true,
-            "Concede Game",
-            ForgeConstants.MATCH_LAYOUT_FILE),
-    WORKSHOP_SCREEN(
+            null,
+            false);
+    public static final FScreen WORKSHOP_SCREEN = new FScreen(
             VWorkshopUI.SINGLETON_INSTANCE,
             CWorkshopUI.SINGLETON_INSTANCE,
             "Workshop",
             FSkin.getIcon(FSkinProp.ICO_SETTINGS), //TODO: Create icon for workshop screen
             false,
             "Back to Home",
-            ForgeConstants.WORKSHOP_LAYOUT_FILE),
-    DECK_EDITOR_CONSTRUCTED(
+            ForgeConstants.WORKSHOP_LAYOUT_FILE,
+            false);
+    public static final FScreen DECK_EDITOR_CONSTRUCTED = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
             "Deck Editor",
             FSkin.getImage(FSkinProp.IMG_PACK),
             false,
             "Back to Home",
-            ForgeConstants.EDITOR_LAYOUT_FILE),
-    DECK_EDITOR_ARCHENEMY(
+            ForgeConstants.EDITOR_LAYOUT_FILE,
+            false);
+    public static final FScreen DECK_EDITOR_ARCHENEMY = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
             "Scheme Deck Editor",
             FSkin.getImage(FSkinProp.IMG_PACK),
             true,
             "Close Editor",
-            ForgeConstants.EDITOR_LAYOUT_FILE),
-    DECK_EDITOR_COMMANDER(
+            ForgeConstants.EDITOR_LAYOUT_FILE,
+            false);
+    public static final FScreen DECK_EDITOR_COMMANDER = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
             "Commander Deck Editor",
             FSkin.getImage(FSkinProp.IMG_PACK),
             true,
             "Close Editor",
-            ForgeConstants.EDITOR_LAYOUT_FILE),
-    DECK_EDITOR_PLANECHASE(
+            ForgeConstants.EDITOR_LAYOUT_FILE,
+            false);
+    public static final FScreen DECK_EDITOR_PLANECHASE = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
             "Planar Deck Editor",
             FSkin.getImage(FSkinProp.IMG_PACK),
             true,
             "Close Editor",
-            ForgeConstants.EDITOR_LAYOUT_FILE),
-    DECK_EDITOR_VANGUARD(
+            ForgeConstants.EDITOR_LAYOUT_FILE,
+            false);
+    public static final FScreen DECK_EDITOR_VANGUARD = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
             "Vanguard Deck Editor",
             FSkin.getImage(FSkinProp.IMG_PACK),
             true,
             "Close Editor",
-            ForgeConstants.EDITOR_LAYOUT_FILE),
-    DECK_EDITOR_DRAFT(
+            ForgeConstants.EDITOR_LAYOUT_FILE,
+            false);
+    public static final FScreen DECK_EDITOR_DRAFT = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
             "Draft Deck Editor",
             FSkin.getImage(FSkinProp.IMG_PACK),
             true,
             "Close Editor",
-            ForgeConstants.EDITOR_LAYOUT_FILE),
-    DECK_EDITOR_SEALED(
+            ForgeConstants.EDITOR_LAYOUT_FILE,
+            false);
+    public static final FScreen DECK_EDITOR_SEALED = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
             "Sealed Deck Editor",
             FSkin.getImage(FSkinProp.IMG_PACK),
             true,
             "Close Editor",
-            ForgeConstants.EDITOR_LAYOUT_FILE),
-    DECK_EDITOR_QUEST(
+            ForgeConstants.EDITOR_LAYOUT_FILE,
+            false);
+    public static final FScreen DECK_EDITOR_QUEST = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
             "Quest Deck Editor",
             FSkin.getImage(FSkinProp.IMG_PACK),
             true,
             "Close Editor",
-            ForgeConstants.EDITOR_LAYOUT_FILE),
-    DECK_EDITOR_QUEST_TOURNAMENT(
+            ForgeConstants.EDITOR_LAYOUT_FILE,
+            false);
+    public static final FScreen DECK_EDITOR_QUEST_TOURNAMENT = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
             "Quest Tournament Deck Editor",
             FSkin.getImage(FSkinProp.IMG_PACK),
             true,
             "Close Editor",
-            ForgeConstants.EDITOR_LAYOUT_FILE),
-    QUEST_CARD_SHOP(
+            ForgeConstants.EDITOR_LAYOUT_FILE,
+            false);
+    public static final FScreen QUEST_CARD_SHOP = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
             "Spell Shop",
             FSkin.getIcon(FSkinProp.ICO_QUEST_BOOK),
             true,
             "Leave Shop",
-            ForgeConstants.EDITOR_LAYOUT_FILE),
-    DRAFTING_PROCESS(
+            ForgeConstants.EDITOR_LAYOUT_FILE,
+            false);
+    public static final FScreen DRAFTING_PROCESS = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
             "Draft",
             FSkin.getImage(FSkinProp.IMG_ZONE_HAND),
             true,
             "Leave Draft",
-            ForgeConstants.EDITOR_LAYOUT_FILE),
-    QUEST_BAZAAR(
+            ForgeConstants.EDITOR_LAYOUT_FILE,
+            false);
+    public static final FScreen QUEST_BAZAAR = new FScreen(
             VBazaarUI.SINGLETON_INSTANCE,
             CBazaarUI.SINGLETON_INSTANCE,
             "Bazaar",
             FSkin.getIcon(FSkinProp.ICO_QUEST_BOTTLES),
             true,
             "Leave Bazaar",
-            null);
+            null,
+            false);
 
     private final IVTopLevelUI view;
     private final ICDoc controller;
-    private final String tabCaption;
+    private String tabCaption;
     private final SkinImage tabIcon;
     private final boolean allowTabClose;
     private final String closeButtonTooltip;
     private final FileLocation layoutFile;
-    
-    private FScreen(IVTopLevelUI view0, ICDoc controller0, String tabCaption0, SkinImage tabIcon0, boolean allowTabClose0, String closeButtonTooltip0, FileLocation layoutFile0) {
+    private final boolean isMatch;
+
+    private FScreen(final IVTopLevelUI view0, final ICDoc controller0,
+            final String tabCaption0, final SkinImage tabIcon0,
+            final boolean allowTabClose0, final String closeButtonTooltip0,
+            final FileLocation layoutFile0, final boolean isMatch) {
         this.view = view0;
         this.controller = controller0;
         this.tabCaption = tabCaption0;
@@ -162,6 +172,19 @@ public enum FScreen {
         this.allowTabClose = allowTabClose0;
         this.closeButtonTooltip = closeButtonTooltip0;
         this.layoutFile = layoutFile0;
+        this.isMatch = isMatch;
+    }
+
+    public static FScreen getMatchScreen(final CMatchUI controller, final VMatchUI view) {
+        return new FScreen(
+            view,
+            controller,
+            "Game",
+            FSkin.getIcon(FSkinProp.ICO_ALPHASTRIKE), //TODO: Create icon for match screen
+            true,
+            "Concede Game",
+            ForgeConstants.MATCH_LAYOUT_FILE,
+            true);
     }
 
     public IVTopLevelUI getView() {
@@ -175,23 +198,27 @@ public enum FScreen {
     public String getTabCaption() {
         return tabCaption;
     }
-    
+    public void setTabCaption(final String caption) {
+        this.tabCaption = caption;
+        FView.SINGLETON_INSTANCE.getNavigationBar().updateTitle(this);
+    }
+
     public SkinImage getTabIcon() {
         return tabIcon;
     }
-    
+
     public boolean allowTabClose() {
         return allowTabClose;
     }
-    
+
     public String getCloseButtonTooltip() {
         return closeButtonTooltip;
     }
-    
+
     public boolean onSwitching(FScreen toScreen) {
         return view.onSwitching(this, toScreen);
     }
-    
+ 
     public boolean onClosing() {
         return view.onClosing(this);
     }
@@ -202,17 +229,22 @@ public enum FScreen {
 
     public boolean deleteLayoutFile() {
         if (layoutFile == null) { return false; }
-
+        return deleteLayoutFile(layoutFile);
+    }
+    public static boolean deleteMatchLayoutFile() {
+        return deleteLayoutFile(ForgeConstants.MATCH_LAYOUT_FILE);
+    }
+    private static boolean deleteLayoutFile(final FileLocation file) {
         try {
-            File file = new File(layoutFile.userPrefLoc);
-            file.delete();
+            File f = new File(file.userPrefLoc);
+            f.delete();
             return true;
-        }
-        catch (final Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
             FOptionPane.showErrorDialog("Failed to delete layout file.");
         }
         return false;
+        
     }
 
     public void open() {
@@ -221,5 +253,9 @@ public enum FScreen {
     
     public void close() {
         Singletons.getView().getNavigationBar().closeTab(this);
+    }
+
+    public boolean isMatchScreen() {
+        return isMatch;
     }
 }

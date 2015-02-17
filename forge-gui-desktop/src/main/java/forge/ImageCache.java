@@ -34,8 +34,8 @@ import com.mortennobel.imagescaling.ResampleOp;
 
 import forge.assets.FSkinProp;
 import forge.game.card.CardView;
+import forge.game.player.PlayerView;
 import forge.item.InventoryItem;
-import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences.FPref;
@@ -83,8 +83,8 @@ public class ImageCache {
      * retrieve an image from the cache.  returns null if the image is not found in the cache
      * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.
      */
-    public static BufferedImage getImage(final CardView card, final int width, final int height) {
-        final String key = MatchUtil.getCardImageKey(card.getCurrentState());
+    public static BufferedImage getImage(final CardView card, final PlayerView viewer, final int width, final int height) {
+        final String key = card.getCurrentState().getImageKey(viewer);
         return scaleImage(key, width, height, true);
     }
 
@@ -95,7 +95,7 @@ public class ImageCache {
     public static BufferedImage getImage(InventoryItem ii, int width, int height) {
         return scaleImage(ImageKeys.getImageKey(ii, false), width, height, true);
     }
-    
+
     /**
      * retrieve an icon from the cache.  returns the current skin's ICO_UNKNOWN if the icon image is not found
      * in the cache and cannot be loaded from disk.

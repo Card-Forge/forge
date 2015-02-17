@@ -4,6 +4,7 @@ import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.menus.IMenuProvider;
 import forge.menus.MenuUtil;
+
 import javax.swing.*;
 
 import java.util.ArrayList;
@@ -24,6 +25,10 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
             public void run() {
             }
         });
+    }
+
+    @Override
+    public void register() {
     }
 
     @Override

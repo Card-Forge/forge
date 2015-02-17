@@ -36,6 +36,7 @@ import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.menus.CDeckEditorUIMenus;
 import forge.screens.deckeditor.views.VCardCatalog;
 import forge.screens.deckeditor.views.VCurrentDeck;
+import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.ContextMenuBuilder;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
@@ -71,6 +72,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     private ItemManager<TItem> catalogManager;
     private ItemManager<TItem> deckManager;
     protected DeckSection sectionMode = DeckSection.Main;
+    private final CDetailPicture cDetailPicture = new CDetailPicture();
 
     // card transfer buttons
     private final FLabel btnAdd = new FLabel.Builder()
@@ -117,6 +119,10 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
 
     public DeckSection getSectionMode() {
         return this.sectionMode;
+    }
+
+    protected final CDetailPicture getCDetailPicture() {
+        return cDetailPicture;
     }
 
     /* (non-Javadoc)
@@ -525,4 +531,5 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                     KeyEvent.ALT_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
         }
     }
+
 }

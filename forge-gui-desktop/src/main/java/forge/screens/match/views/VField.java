@@ -34,7 +34,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
-import forge.match.MatchUtil;
+import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CField;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
@@ -83,9 +83,8 @@ public class VField implements IVDoc<CField> {
      * @param p &emsp; {@link forge.game.player.Player}
      * @param id0 &emsp; {@link forge.gui.framework.EDocID}
      */
-    public VField(final EDocID id0, final PlayerView p) {
+    public VField(final CMatchUI matchUI, final EDocID id0, final PlayerView p) {
         this.docID = id0;
-        id0.setDoc(this);
 
         this.player = p;
         if (p != null) { tab.setText(p.getName() + " Field"); }
@@ -95,9 +94,9 @@ public class VField implements IVDoc<CField> {
 
         // TODO player is hard-coded into tabletop...should be dynamic
         // (haven't looked into it too deeply). Doublestrike 12-04-12
-        tabletop = new PlayArea(scroller, id0 == EDocID.FIELD_1, player, ZoneType.Battlefield);
+        tabletop = new PlayArea(matchUI, scroller, false, player, ZoneType.Battlefield);
 
-        control = new CField(player, this);
+        control = new CField(matchUI, player, this);
 
         lblAvatar.setFocusable(false);
         lblLife.setFocusable(false);
@@ -200,10 +199,11 @@ public class VField implements IVDoc<CField> {
     }
 
     public boolean isHighlighted() {
-        return MatchUtil.isHighlighted(player);
+        return control.getMatchUI().isHighlighted(player);
     }
 
     public void updateDetails() {
+        control.getMatchUI().getCPlayers().update();
         detailsPanel.updateDetails();
 
         this.getLblLife().setText("" + player.getLife());

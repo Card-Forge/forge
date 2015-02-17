@@ -1,9 +1,16 @@
 package forge.game.player;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Sets;
 
 import forge.LobbyPlayer;
 import forge.card.ColorSet;
@@ -25,7 +32,6 @@ import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.mana.Mana;
-import forge.game.phase.PhaseType;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
@@ -37,15 +43,6 @@ import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.FCollectionView;
 import forge.util.ITriggerEvent;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /** 
  * A prototype for player controller class
@@ -75,7 +72,6 @@ public abstract class PlayerController {
 
     protected final Game game;
 
-    private PhaseType autoPassUntilPhase = null;
     protected final Player player;
     protected final LobbyPlayer lobbyPlayer;
 
@@ -85,70 +81,9 @@ public abstract class PlayerController {
         lobbyPlayer = lp;
     }
 
-    /**
-     * Automatically pass priority until reaching the Cleanup phase of the
-     * current turn.
-     */
-    public void autoPassUntilEndOfTurn() {
-        autoPassUntilPhase = PhaseType.CLEANUP;
-    }
-    
-    protected PhaseType getAutoPassUntilPhase() {
-        return autoPassUntilPhase;
-    }
-
-    public void autoPassCancel() {
-        autoPassUntilPhase = null;
-    }
-
-    public boolean mayAutoPass() {
-        if (autoPassUntilPhase == null) { return false; }
-
-        PhaseType currentPhase = game.getPhaseHandler().getPhase();
-        if (currentPhase.isBefore(autoPassUntilPhase)) {
-            if (currentPhase == PhaseType.COMBAT_DECLARE_BLOCKERS && game.getPhaseHandler().isPlayerTurn(player)) {
-                if (!game.getCombat().getAllBlockers().isEmpty()) {
-                    return false; //prevent auto-passing on Declare Blockers phase if it's your turn and your opponent blocks a creature you attacked with
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
     public boolean isAI() {
         return false;
     }
-
-    // Abilities to auto-yield to
-    private final Set<String> autoYields = Sets.newHashSet();
-    public Iterable<String> getAutoYields() {
-        return autoYields;
-    }
-    public boolean shouldAutoYield(final String key) {
-        return autoYields.contains(key);
-    }
-    public void setShouldAutoYield(final String key, final boolean autoYield) {
-        if (autoYield) {
-            autoYields.add(key);
-        }
-        else {
-            autoYields.remove(key);
-        }
-    }
-
-    // Triggers preliminary choice: ask, decline or play
-    private Map<Integer, Boolean> triggersAlwaysAccept = new HashMap<Integer, Boolean>();
-
-    public boolean shouldAlwaysAcceptTrigger(Integer trigger) { return Boolean.TRUE.equals(triggersAlwaysAccept.get(trigger)); }
-    public boolean shouldAlwaysDeclineTrigger(Integer trigger) { return Boolean.FALSE.equals(triggersAlwaysAccept.get(trigger)); }
-    public boolean shouldAlwaysAskTrigger(Integer trigger) { return !triggersAlwaysAccept.containsKey(trigger); }
-
-    public void setShouldAlwaysAcceptTrigger(Integer trigger) { triggersAlwaysAccept.put(trigger, true); }
-    public void setShouldAlwaysDeclineTrigger(Integer trigger) { triggersAlwaysAccept.put(trigger, false); }
-    public void setShouldAlwaysAskTrigger(Integer trigger) { triggersAlwaysAccept.remove(trigger); }
-
-    // End of Triggers preliminary choice
 
     public Game getGame() { return game; }
     public Player getPlayer() { return player; }
@@ -289,6 +224,8 @@ public abstract class PlayerController {
 
     // better to have this odd method than those if playerType comparison in ChangeZone  
     public abstract Card chooseSingleCardForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, DelayedReveal delayedReveal, String selectPrompt, boolean isOptional, Player decider);
+
+    public abstract void autoPassCancel();
 
     public boolean isGuiPlayer() {
         return false;

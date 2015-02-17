@@ -12,8 +12,8 @@ import forge.assets.FSkinImage;
 import forge.assets.FSkinColor.Colors;
 import forge.card.MagicColor;
 import forge.game.player.PlayerView;
-import forge.match.MatchUtil;
 import forge.player.GamePlayerUtil;
+import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
 
 public class VManaPool extends VDisplayArea {
@@ -82,7 +82,7 @@ public class VManaPool extends VDisplayArea {
         @Override
         public boolean tap(float x, float y, int count) {
             if (player.isLobbyPlayer(GamePlayerUtil.getGuiPlayer())) {
-                MatchUtil.getHumanController().useMana(colorCode);
+                MatchController.instance.getGameController().useMana(colorCode);
             }
             return true;
         }
@@ -91,7 +91,7 @@ public class VManaPool extends VDisplayArea {
         public boolean flick(float x, float y) {
             if (player.isLobbyPlayer(GamePlayerUtil.getGuiPlayer())) {
                 //on two finger tap, keep using mana until it runs out or no longer can be put towards the cost
-                while (MatchUtil.getHumanController().useMana(colorCode)) {}
+                while (MatchController.instance.getGameController().useMana(colorCode)) {}
             }
             return true;
         }

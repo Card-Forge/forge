@@ -2,6 +2,7 @@ package forge.screens.match.controllers;
 
 import forge.UiCommand;
 import forge.gui.framework.ICDoc;
+import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VAntes;
 
 /** 
@@ -10,9 +11,13 @@ import forge.screens.match.views.VAntes;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
-public enum CAntes implements ICDoc {
-    /** */
-    SINGLETON_INSTANCE;
+public class CAntes implements ICDoc {
+    private final CMatchUI matchUI;
+    private final VAntes view;
+    public CAntes(final CMatchUI matchUI) {
+        this.matchUI = matchUI;
+        this.view = new VAntes(this);
+    }
 
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
@@ -20,6 +25,10 @@ public enum CAntes implements ICDoc {
     @Override
     public UiCommand getCommandOnSelect() {
         return null;
+    }
+
+    @Override
+    public void register() {
     }
 
     /* (non-Javadoc)
@@ -34,6 +43,14 @@ public enum CAntes implements ICDoc {
      */
     @Override
     public void update() {
-        VAntes.SINGLETON_INSTANCE.update();
+        view.update();
+    }
+
+    public CMatchUI getMatchUI() {
+        return matchUI;
+    }
+
+    public VAntes getView() {
+        return view;
     }
 }

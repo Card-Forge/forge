@@ -27,6 +27,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
+
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -35,7 +36,6 @@ import forge.assets.FSkinProp;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.gui.SOverlayUtils;
-import forge.match.MatchUtil;
 import forge.toolbox.FOverlay;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
@@ -171,7 +171,7 @@ public enum CardZoomer {
      * <p>
      * This method should be called if the zoomer is activated by holding down
      * the middle mouse button or left and right mouse buttons simultaneously.
-     */    
+     */
     public void doMouseButtonZoom(final CardView newCard) {
         // don't display zoom if already zoomed or just closed zoom 
         // (handles mouse wheeling while middle clicking)
@@ -179,8 +179,8 @@ public enum CardZoomer {
             return;
         }
 
-        isButtonMode = true;        
-        displayCard(newCard);        
+        isButtonMode = true;
+        displayCard(newCard);
     }
 
     public boolean isZoomerOpen() {
@@ -201,7 +201,7 @@ public enum CardZoomer {
      * Displays a graphical indicator that shows whether the current card can be flipped or transformed.
      */
     private void setFlipIndicator() {
-        if (MatchUtil.canCardBeFlipped(thisCard)) {
+        if (thisCard.hasAlternateState()) {
             imagePanel.setLayout(new MigLayout("insets 0, w 100%!, h 100%!"));        
             imagePanel.add(lblFlipcard, "pos (100% - 100px) 0");
         }
@@ -279,7 +279,7 @@ public enum CardZoomer {
      * Toggles between primary and alternate image associated with card if applicable.
      */
     private void toggleCardImage() {
-        if (MatchUtil.canCardBeFlipped(thisCard)) {
+        if (thisCard.hasAlternateState()) {
             toggleFlipCard();
         }
     }

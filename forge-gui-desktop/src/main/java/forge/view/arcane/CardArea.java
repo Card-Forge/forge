@@ -17,6 +17,7 @@
  */
 package forge.view.arcane;
 
+import forge.screens.match.CMatchUI;
 import forge.toolbox.FScrollPane;
 import forge.view.arcane.util.Animation;
 import forge.view.arcane.util.CardPanelMouseListener;
@@ -56,8 +57,8 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
     private boolean isVertical;
     private boolean hasScrollbars;
 
-    public CardArea(final FScrollPane scrollPane) {
-        super(scrollPane);
+    public CardArea(final CMatchUI matchUI, final FScrollPane scrollPane) {
+        super(matchUI, scrollPane);
         this.setBackground(Color.white);
     }
 
@@ -254,7 +255,7 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
         this.mouseDragStartY = dragPanel.getCardY();
         dragPanel.setDisplayEnabled(false);
 
-        CardPanel.setDragAnimationPanel(new CardPanel(dragPanel.getCard()));
+        CardPanel.setDragAnimationPanel(new CardPanel(dragPanel.getMatchUI(), dragPanel.getCard()));
         CardPanel.getDragAnimationPanel().setImage(dragPanel);
         final JFrame frame = (JFrame) SwingUtilities.windowForComponent(this);
         final JLayeredPane layeredPane = frame.getLayeredPane();

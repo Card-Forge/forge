@@ -19,18 +19,18 @@ import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.CardRenderer.CardStackPosition;
+import forge.game.GameView;
 import forge.game.card.CardView;
-import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
-import forge.match.MatchUtil;
+import forge.interfaces.IGameController;
+import forge.interfaces.IGuiGame;
 import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDown;
 import forge.menu.FMenuItem;
 import forge.menu.FMenuTab;
 import forge.menu.FPopupMenu;
-import forge.player.PlayerControllerHuman;
 import forge.screens.match.MatchController;
 import forge.screens.match.TargetingOverlay;
 import forge.toolbox.FCardPanel;
@@ -94,7 +94,7 @@ public class VStack extends FDropDown {
         activeStackInstance = null; //reset before updating stack
         restoreOldZones();
 
-        final FCollectionView<StackItemView> stack = MatchUtil.getGameView().getStack();
+        final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
         if (stackSize != stack.size()) {
             int oldStackSize = stackSize;
             stackSize = stack.size();
@@ -125,7 +125,7 @@ public class VStack extends FDropDown {
         float totalWidth = maxWidth - MatchController.getView().getTopPlayerPanel().getTabs().iterator().next().getRight(); //keep avatar, life total, and hand tab visible to left of stack
         float width = totalWidth - 2 * MARGINS;
 
-        final FCollectionView<StackItemView> stack = MatchUtil.getGameView().getStack();
+        final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
         if (stack.isEmpty()) { //show label if stack empty
             FLabel label = add(new FLabel.Builder().text("[Empty]").font(FONT).align(HAlignment.CENTER).build());
 
@@ -227,7 +227,7 @@ public class VStack extends FDropDown {
 
             text = stackInstance.getText();
             if (stackInstance.isOptionalTrigger() &&
-                    stackInstance0.getActivatingPlayer().equals(MatchUtil.getCurrentPlayer())) {
+                    stackInstance0.getActivatingPlayer().equals(MatchController.instance.getCurrentPlayer())) {
                 text = "(OPTIONAL) " + text;
             }
 
@@ -250,59 +250,60 @@ public class VStack extends FDropDown {
                 VStack.this.updateSizeAndPosition();
                 return true;
             }
-            final Player player = MatchUtil.getCurrentPlayer();
-            if (player != null) { //don't show menu if tapping on art
+            final GameView gameView = MatchController.instance.getGameView();
+            final IGuiGame gui = MatchController.instance;
+            final IGameController controller = MatchController.instance.getGameController();
+            final PlayerView player = MatchController.instance.getCurrentPlayer();
+            if (MatchController.instance.getCurrentPlayer() != null) { //don't show menu if tapping on art
                 if (stackInstance.isAbility()) {
                     FPopupMenu menu = new FPopupMenu() {
                         @Override
                         protected void buildMenu() {
-                            final PlayerControllerHuman humanController = MatchUtil.getHumanController();
-                            final PlayerView playerView = PlayerView.get(player);
                             final String key = stackInstance.getKey();
-                            final boolean autoYield = humanController.shouldAutoYield(key);
+                            final boolean autoYield = gui.shouldAutoYield(key);
                             addItem(new FCheckBoxMenuItem("Auto-Yield", autoYield,
                                     new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
-                                    humanController.setShouldAutoYield(key, !autoYield);
-                                    if (!autoYield && stackInstance.equals(MatchUtil.getGameView().peekStack())) {
+                                    gui.setShouldAutoYield(key, !autoYield);
+                                    if (!autoYield && stackInstance.equals(gameView.peekStack())) {
                                         //auto-pass priority if ability is on top of stack
-                                        humanController.passPriority();
+                                        controller.passPriority();
                                     }
                                 }
                             }));
-                            if (stackInstance.isOptionalTrigger() && stackInstance.getActivatingPlayer().equals(playerView)) {
+                            if (stackInstance.isOptionalTrigger() && stackInstance.getActivatingPlayer().equals(player)) {
                                 final int triggerID = stackInstance.getSourceTrigger();
                                 addItem(new FCheckBoxMenuItem("Always Yes",
-                                        humanController.shouldAlwaysAcceptTrigger(triggerID),
+                                        gui.shouldAlwaysAcceptTrigger(triggerID),
                                         new FEventHandler() {
                                     @Override
                                     public void handleEvent(FEvent e) {
-                                        if (humanController.shouldAlwaysAcceptTrigger(triggerID)) {
-                                            humanController.setShouldAlwaysAskTrigger(triggerID);
+                                        if (gui.shouldAlwaysAcceptTrigger(triggerID)) {
+                                            gui.setShouldAlwaysAskTrigger(triggerID);
                                         }
                                         else {
-                                            humanController.setShouldAlwaysAcceptTrigger(triggerID);
-                                            if (stackInstance.equals(MatchUtil.getGameView().peekStack())) {
+                                            gui.setShouldAlwaysAcceptTrigger(triggerID);
+                                            if (stackInstance.equals(gameView.peekStack())) {
                                                 //auto-yes if ability is on top of stack
-                                                humanController.confirm();
+                                                controller.selectButtonOk();
                                             }
                                         }
                                     }
                                 }));
                                 addItem(new FCheckBoxMenuItem("Always No",
-                                        humanController.shouldAlwaysDeclineTrigger(triggerID),
+                                        gui.shouldAlwaysDeclineTrigger(triggerID),
                                         new FEventHandler() {
                                     @Override
                                     public void handleEvent(FEvent e) {
-                                        if (humanController.shouldAlwaysDeclineTrigger(triggerID)) {
-                                            humanController.setShouldAlwaysAskTrigger(triggerID);
+                                        if (gui.shouldAlwaysDeclineTrigger(triggerID)) {
+                                            gui.setShouldAlwaysAskTrigger(triggerID);
                                         }
                                         else {
-                                            humanController.setShouldAlwaysDeclineTrigger(triggerID);
-                                            if (stackInstance.equals(MatchUtil.getGameView().peekStack())) {
+                                            gui.setShouldAlwaysDeclineTrigger(triggerID);
+                                            if (stackInstance.equals(gameView.peekStack())) {
                                                 //auto-no if ability is on top of stack
-                                                humanController.confirm();
+                                                controller.selectButtonOk();
                                             }
                                         }
                                     }

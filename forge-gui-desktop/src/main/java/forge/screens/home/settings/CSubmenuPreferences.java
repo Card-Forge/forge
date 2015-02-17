@@ -47,6 +47,10 @@ public enum CSubmenuPreferences implements ICDoc {
 
     private final List<Pair<JCheckBox, FPref>> lstControls = new ArrayList<Pair<JCheckBox,FPref>>();
 
+    @Override
+    public void register() {
+    }
+
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
      */
@@ -105,6 +109,7 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbCompactMainMenu(), FPref.UI_COMPACT_MAIN_MENU));
         lstControls.add(Pair.of(view.getCbPromptFreeBlocks(), FPref.MATCHPREF_PROMPT_FREE_BLOCKS));
         lstControls.add(Pair.of(view.getCbPauseWhileMinimized(), FPref.UI_PAUSE_WHILE_MINIMIZED));
+        lstControls.add(Pair.of(view.getCbWorkshopSyntax(), FPref.DEV_WORKSHOP_SYNTAX));
 
         lstControls.add(Pair.of(view.getCbCompactPrompt(), FPref.UI_COMPACT_PROMPT));
         lstControls.add(Pair.of(view.getCbHideReminderText(), FPref.UI_HIDE_REMINDER_TEXT));
@@ -250,7 +255,7 @@ public enum CSubmenuPreferences implements ICDoc {
                         "the Dock tab -> Save Layout option in the Match screen.\n\n" +
                         "Reset layout?";
         if (FOptionPane.showConfirmDialog(userPrompt, "Reset Match Screen Layout")) {
-            if (FScreen.MATCH_SCREEN.deleteLayoutFile()) {
+            if (FScreen.deleteMatchLayoutFile()) {
                 FOptionPane.showMessageDialog("Match Screen layout has been reset.");
             }
         }

@@ -3,69 +3,56 @@ package forge.quest;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.GuiBase;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
-import forge.game.Game;
 import forge.game.GameRules;
 import forge.game.GameType;
-import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
-import forge.match.MatchUtil;
+import forge.interfaces.IGuiGame;
+import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.storage.IStorage;
 
 public class QuestDraftUtils {
-    private static List<DraftMatchup> matchups = new ArrayList<DraftMatchup>();
+    private static final List<DraftMatchup> matchups = new ArrayList<DraftMatchup>();
     
     public static boolean matchInProgress = false;
     public static boolean aiMatchInProgress = false;
     private static boolean waitForUserInput = false;
 
-    public static void continueMatch(final Game lastGame) {
-        if (lastGame.getMatch().isMatchOver()) {
-            matchInProgress = false;
+    public static void completeDraft(final DeckGroup finishedDraft) {
+
+        final List<Deck> aiDecks = new ArrayList<Deck>(finishedDraft.getAiDecks());
+        finishedDraft.getAiDecks().clear();
+
+        for (int i = 0; i < aiDecks.size(); i++) {
+            final Deck oldDeck = aiDecks.get(i);
+            final Deck namedDeck = new Deck("AI Deck " + i);
+            namedDeck.putSection(DeckSection.Main, oldDeck.get(DeckSection.Main));
+            namedDeck.putSection(DeckSection.Sideboard, oldDeck.get(DeckSection.Sideboard));
+            finishedDraft.getAiDecks().add(namedDeck);
         }
-        if (matchInProgress) {
-            MatchUtil.continueMatch();
-        }
-        else {
-            MatchUtil.endCurrentGame();
-        }
+
+        final IStorage<DeckGroup> draft = FModel.getQuest().getDraftDecks();
+        draft.add(finishedDraft);
+
+        FModel.getQuest().save();
+
     }
-	
-	public static void completeDraft(DeckGroup finishedDraft) {
 
-		List<Deck> aiDecks = new ArrayList<Deck>(finishedDraft.getAiDecks());
-		finishedDraft.getAiDecks().clear();
+    public static String getDeckLegality() {
+        final String message = GameType.QuestDraft.getDeckFormat().getDeckConformanceProblem(FModel.getQuest().getAssets().getDraftDeckStorage().get(QuestEventDraft.DECK_NAME).getHumanDeck());
+        if (message != null && FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
+            return message;
+        }
+        return null;
+    }
 
-		for (int i = 0; i < aiDecks.size(); i++) {
-			Deck oldDeck = aiDecks.get(i);
-			Deck namedDeck = new Deck("AI Deck " + i);
-			namedDeck.putSection(DeckSection.Main, oldDeck.get(DeckSection.Main));
-			namedDeck.putSection(DeckSection.Sideboard, oldDeck.get(DeckSection.Sideboard));
-			finishedDraft.getAiDecks().add(namedDeck);
-		}
-
-		IStorage<DeckGroup> draft = FModel.getQuest().getDraftDecks();
-		draft.add(finishedDraft);
-
-		FModel.getQuest().save();
-		
-	}
-	
-	public static String getDeckLegality() {
-		String message = GameType.QuestDraft.getDeckFormat().getDeckConformanceProblem(FModel.getQuest().getAssets().getDraftDeckStorage().get(QuestEventDraft.DECK_NAME).getHumanDeck());
-		if (message != null && FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-			return message;
-		}
-		return null;
-	}
-
-    public static void startNextMatch() {
-        
+    public static void startNextMatch(final IGuiGame gui) {
         if (matchups.size() > 0) {
             return;
         }
@@ -127,7 +114,7 @@ public class QuestDraftUtils {
         
         }
         
-        update();
+        update(gui);
         
     }
     
@@ -148,9 +135,7 @@ public class QuestDraftUtils {
         }
         
         if (humanIndex > -1) {
-            
-            matchup.hasHumanPlayer = true;
-            matchup.matchStarter.add(new RegisteredPlayer(decks.getHumanDeck()).setPlayer(GamePlayerUtil.getGuiPlayer()));
+            matchup.setHumanPlayer(new RegisteredPlayer(decks.getHumanDeck()).setPlayer(GamePlayerUtil.getGuiPlayer()));
 
             int aiName = Integer.parseInt(draft.getStandings()[aiIndex]) - 1;
             
@@ -173,7 +158,7 @@ public class QuestDraftUtils {
         matchups.add(matchup);
     }
 
-    public static void update() {
+    public static void update(final IGuiGame gui) {
         if (matchups.isEmpty()) {
             if (!matchInProgress) {
                 aiMatchInProgress = false;
@@ -189,39 +174,45 @@ public class QuestDraftUtils {
             return;
         }
 
-        MatchUtil.getController().enableOverlay();
+        gui.enableOverlay();
 
-        DraftMatchup nextMatch = matchups.remove(0);
-        
+        final DraftMatchup nextMatch = matchups.remove(0);
         matchInProgress = true;
-        
-        if (!nextMatch.hasHumanPlayer) {
-            MatchUtil.getController().disableOverlay();
+
+        if (nextMatch.hasHumanPlayer()) {
+            waitForUserInput = true;
+            aiMatchInProgress = false;
+        } else {
+            gui.disableOverlay();
             waitForUserInput = false;
             aiMatchInProgress = true;
         }
-        else {
-            waitForUserInput = true;
-            aiMatchInProgress = false;
-        }
-        
-        GameRules rules = new GameRules(GameType.QuestDraft);
+
+        final GameRules rules = new GameRules(GameType.QuestDraft);
         rules.setPlayForAnte(false);
         rules.setMatchAnteRarity(false);
         rules.setGamesPerMatch(3);
         rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
         rules.canCloneUseTargetsImage = FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE);
 
-        MatchUtil.getController().startNewMatch(new Match(rules, nextMatch.matchStarter));
+        final HostedMatch newMatch = GuiBase.getInterface().hostMatch();
+        newMatch.startMatch(rules, null, nextMatch.matchStarter, nextMatch.humanPlayer, gui);
     }
 
-    public static void continueMatches() {
+    public static void continueMatches(final IGuiGame gui) {
         waitForUserInput = false;
-        update();
+        update(gui);
     }
 
-    private static class DraftMatchup {
-        private List<RegisteredPlayer> matchStarter = new ArrayList<RegisteredPlayer>();
-        private boolean hasHumanPlayer = false;
+    private static final class DraftMatchup {
+        private final List<RegisteredPlayer> matchStarter = new ArrayList<RegisteredPlayer>();
+        private RegisteredPlayer humanPlayer = null;
+        private void setHumanPlayer(final RegisteredPlayer humanPlayer) {
+            this.matchStarter.add(humanPlayer);
+            this.humanPlayer = humanPlayer;
+        }
+        private boolean hasHumanPlayer() {
+            return humanPlayer != null;
+        }
     }
 }

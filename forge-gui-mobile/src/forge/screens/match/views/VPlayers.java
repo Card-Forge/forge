@@ -5,10 +5,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
-import forge.match.MatchUtil;
 import forge.menu.FDropDown;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
@@ -20,7 +18,7 @@ import forge.util.Utils;
 
 public class VPlayers extends FDropDown {
     public VPlayers() {
-        for (final PlayerView p : MatchUtil.getGameView().getPlayers()) {
+        for (final PlayerView p : MatchController.instance.getGameView().getPlayers()) {
             add(new PlayerInfoPanel(p));
         }
     }
@@ -89,8 +87,8 @@ public class VPlayers extends FDropDown {
                     builder.append(cv);
                 }
             }
-            if (MatchUtil.getGameView().isCommander()) {
-                builder.append("  |  " + CardFactoryUtil.getCommanderInfo(player));
+            if (MatchController.instance.getGameView().isCommander()) {
+                builder.append("  |  " + player.getCommanderInfo());
             }
 
             g.drawText(builder.toString(), FONT, FList.FORE_COLOR, x, y, getWidth() - PADDING - x, h, true, HAlignment.LEFT, true);

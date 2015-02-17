@@ -10,7 +10,6 @@ import javax.swing.event.ChangeListener;
 
 import forge.Singletons;
 import forge.UiCommand;
-import forge.player.PlayerControllerHuman;
 import forge.toolbox.FButton;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FList;
@@ -31,12 +30,12 @@ public class VAutoYields extends FDialog {
     private final FCheckBox chkDisableAll;
     private final List<String> autoYields;
 
-    public VAutoYields(final PlayerControllerHuman humanController) {
+    public VAutoYields(final CMatchUI matchUI) {
         super();
         setTitle("Auto-Yields");
 
         autoYields = new ArrayList<String>();
-        for (final String autoYield : humanController.getAutoYields()) {
+        for (final String autoYield : matchUI.getAutoYields()) {
             autoYields.add(autoYield);
         }
         lstAutoYields = new FList<String>(new AutoYieldsListModel());
@@ -48,11 +47,11 @@ public class VAutoYields extends FDialog {
 
         listScroller = new FScrollPane(lstAutoYields, true);
 
-        chkDisableAll = new FCheckBox("Disable All Auto Yields", humanController.getDisableAutoYields());
+        chkDisableAll = new FCheckBox("Disable All Auto Yields", matchUI.getDisableAutoYields());
         chkDisableAll.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                humanController.setDisableAutoYields(chkDisableAll.isSelected());
+                matchUI.setDisableAutoYields(chkDisableAll.isSelected());
             }
         });
 
@@ -71,7 +70,7 @@ public class VAutoYields extends FDialog {
                 if (selected != null) {
                     autoYields.remove(selected);
                     btnRemove.setEnabled(autoYields.size() > 0);
-                    humanController.setShouldAutoYield(selected, false);
+                    matchUI.setShouldAutoYield(selected, false);
                     VAutoYields.this.revalidate();
                     lstAutoYields.repaint();
                 }
@@ -115,8 +114,7 @@ public class VAutoYields extends FDialog {
         if (lstAutoYields.getCount() > 0) {
             setVisible(true);
             dispose();
-        }
-        else {
+        } else {
             FOptionPane.showMessageDialog("There are no active auto-yields.", "No Auto-Yields", FOptionPane.INFORMATION_ICON);
         }
     }

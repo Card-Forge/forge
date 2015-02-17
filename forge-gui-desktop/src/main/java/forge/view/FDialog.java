@@ -1,8 +1,43 @@
 package forge.view;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsDevice.WindowTranslucency;
+import java.awt.GraphicsEnvironment;
+import java.awt.Image;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
+import java.awt.Point;
+import java.awt.PopupMenu;
+import java.awt.RenderingHints;
+import java.awt.Toolkit;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
+import java.awt.geom.RoundRectangle2D;
+import java.util.Stack;
+
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRootPane;
+import javax.swing.SwingUtilities;
+
+import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.assets.FSkinProp;
-import forge.match.input.InputBase;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FPanel;
 import forge.toolbox.FSkin;
@@ -12,15 +47,6 @@ import forge.toolbox.FSkin.LineSkinBorder;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedDialog;
 import forge.util.OperatingSystem;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.GraphicsDevice.WindowTranslucency;
-import java.awt.event.*;
-import java.awt.geom.RoundRectangle2D;
-import java.util.Stack;
 
 @SuppressWarnings("serial")
 public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDispatcher {
@@ -146,7 +172,6 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
 
         if (visible) {
             FMouseAdapter.forceMouseUp(); //ensure mouse up handled if dialog shown between mouse down and mouse up
-            InputBase.cancelAwaitNextInput(); //ensure "Waiting for opponent..." prompt doesn't appear while dialog awaiting input
 
             if (openModals.isEmpty()) {
                 setLocationRelativeTo(JOptionPane.getRootFrame());

@@ -531,13 +531,13 @@ public class CardView extends GameEntityView {
             }
         }
 
-        String rulesText = state.getRulesText();
+        final String rulesText = state.getRulesText();
         if (!rulesText.isEmpty()) {
             sb.append(rulesText).append("\r\n\r\n");
         }
         if (isCommander()) {
             sb.append(getOwner()).append("'s Commander\r\n");
-            sb.append(CardFactoryUtil.getCommanderInfo(getOwner())).append("\r\n");
+            sb.append(getOwner().getCommanderInfo()).append("\r\n");
         }
 
         if (isSplitCard()) {

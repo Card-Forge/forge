@@ -1,6 +1,27 @@
 package forge.screens.home.settings;
 
-import forge.Singletons;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+
+import net.miginfocom.swing.MigLayout;
+
+import org.apache.commons.lang3.StringUtils;
+
 import forge.control.FControl.CloseAction;
 import forge.control.KeyboardShortcuts;
 import forge.control.KeyboardShortcuts.Shortcut;
@@ -13,22 +34,13 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
-import forge.toolbox.*;
+import forge.toolbox.FCheckBox;
+import forge.toolbox.FComboBoxPanel;
+import forge.toolbox.FLabel;
+import forge.toolbox.FScrollPane;
+import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.FSkin.SkinnedTextField;
-import net.miginfocom.swing.MigLayout;
-
-import org.apache.commons.lang3.StringUtils;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.util.*;
-import java.util.List;
 
 /**
  * Assembles Swing components of preferences submenu singleton.
@@ -66,6 +78,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbManaBurn = new OptionsCheckBox("Mana Burn");
     private final JCheckBox cbManaLostPrompt = new OptionsCheckBox("Prompt Mana Pool Emptying");
     private final JCheckBox cbDevMode = new OptionsCheckBox("Developer Mode");
+    private final JCheckBox cbWorkshopSyntax = new OptionsCheckBox("Workshop Syntax Checker");
     private final JCheckBox cbEnforceDeckLegality = new OptionsCheckBox("Deck Conformance");
     private final JCheckBox cbCloneImgSource = new OptionsCheckBox("Clones Use Original Card Art");
     private final JCheckBox cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
@@ -181,6 +194,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbDevMode, regularConstraints);
         pnlPrefs.add(new NoteLabel("Enables menu with functions for testing during development."), regularConstraints);
 
+        pnlPrefs.add(cbWorkshopSyntax, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Enables syntax checking of card scripts in the Workshop. Note: functionality still in testing phase!"), regularConstraints);
+
         pnlPrefs.add(cbpGameLogEntryType, "w 80%!, gap 10% 0 0 10px, span 2 1");
         pnlPrefs.add(new NoteLabel("Changes how much information is displayed in the game log. Sorted by least to most verbose."), regularConstraints);
 
@@ -240,7 +256,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         final JLabel lblShortcuts = new SectionLabel("Keyboard Shortcuts");
         pnlPrefs.add(lblShortcuts, sectionConstraints + ", gaptop 2%");
 
-        final List<Shortcut> shortcuts = Singletons.getControl().getShortcuts();
+        final List<Shortcut> shortcuts = KeyboardShortcuts.getKeyboardShortcuts();
 
         for (final Shortcut s : shortcuts) {
             pnlPrefs.add(new FLabel.Builder().text(s.getDescription())
@@ -484,6 +500,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbDevMode() {
         return cbDevMode;
+    }
+
+    public JCheckBox getCbWorkshopSyntax() {
+        return cbWorkshopSyntax;
     }
 
     public FComboBoxPanel<String> getAiProfilesComboBoxPanel() {

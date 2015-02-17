@@ -66,8 +66,8 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     public CEditorDraftingProcess() {
         super(FScreen.DRAFTING_PROCESS);
 
-        final CardManager catalogManager = new CardManager(false);
-        final CardManager deckManager = new CardManager(false);
+        final CardManager catalogManager = new CardManager(getCDetailPicture(), false);
+        final CardManager deckManager = new CardManager(getCDetailPicture(), false);
 
         //hide filters and options panel so more of pack is visible by default
         catalogManager.setHideViewOptions(1, true);

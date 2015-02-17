@@ -36,7 +36,7 @@ public enum VSubmenuQuestDecks implements IVSubmenu<CSubmenuQuestDecks> {
     /** */
     private final LblHeader lblTitle = new LblHeader("Quest Decks");
 
-    private final DeckManager lstDecks = new DeckManager(GameType.Quest);
+    private final DeckManager lstDecks = new DeckManager(GameType.Quest, null);
 
     private final FLabel lblInfo = new FLabel.Builder()
         .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)

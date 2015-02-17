@@ -637,4 +637,9 @@ public class PlayerControllerForTests extends PlayerController {
     public void resetAtEndOfTurn() {
         // Not used by the controller for tests
     }
+
+    @Override
+    public void autoPassCancel() {
+        // Not used by the controller for tests
+    }
 }

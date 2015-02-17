@@ -18,6 +18,7 @@ package forge.screens.match;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.assets.FSkinProp;
@@ -25,7 +26,7 @@ import forge.game.GameView;
 import forge.game.player.PlayerView;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.FScreen;
-import forge.match.MatchUtil;
+import forge.match.NextGameDecision;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.quest.QuestController;
@@ -48,7 +49,6 @@ import forge.toolbox.FSkin;
  */
 public class QuestDraftWinLose extends ControlWinLose {
     private final transient ViewWinLose view;
-    
     private final transient QuestController qData;
 
     /**
@@ -57,8 +57,8 @@ public class QuestDraftWinLose extends ControlWinLose {
      * @param view0 ViewWinLose object
      * @param match2
      */
-    public QuestDraftWinLose(final ViewWinLose view0, final GameView game0) {
-        super(view0, game0);
+    public QuestDraftWinLose(final ViewWinLose view0, final GameView game0, final CMatchUI matchUI) {
+        super(view0, game0, matchUI);
         this.view = view0;
         qData = FModel.getQuest();
     }
@@ -97,11 +97,11 @@ public class QuestDraftWinLose extends ControlWinLose {
             if (lastGame.isMatchOver()) {
                 this.actionOnQuitMatch();
                 QuestDraftUtils.matchInProgress = false;
-                QuestDraftUtils.update();
+                QuestDraftUtils.update(matchUI);
             }
             else {
                 this.actionOnContinue();
-                QuestDraftUtils.update();
+                QuestDraftUtils.update(matchUI);
             }
             return false;
         }
@@ -113,21 +113,20 @@ public class QuestDraftWinLose extends ControlWinLose {
             view.getBtnQuit().setEnabled(true);
             view.getBtnContinue().setEnabled(false);
             view.getBtnQuit().setText("Continue Tournament");
-            for (ActionListener listener : view.getBtnQuit().getActionListeners()) {
+            for (final ActionListener listener : view.getBtnQuit().getActionListeners()) {
                 view.getBtnQuit().removeActionListener(listener);
             }
             view.getBtnQuit().addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent e) {
-                    MatchUtil.endCurrentGame();
+                    matchUI.getGameController().nextGameDecision(NextGameDecision.CONTINUE);
                     QuestDraftUtils.matchInProgress = false;
-                    QuestDraftUtils.continueMatches();
+                    QuestDraftUtils.continueMatches(matchUI);
                 }
             });
-        }
-        else {
+        } else {
             view.getBtnQuit().setEnabled(true);
-            for (ActionListener listener : view.getBtnQuit().getActionListeners()) {
+            for (final ActionListener listener : view.getBtnQuit().getActionListeners()) {
                 view.getBtnQuit().removeActionListener(listener);
             }
             view.getBtnQuit().setText("Forfeit Tournament");
@@ -135,9 +134,9 @@ public class QuestDraftWinLose extends ControlWinLose {
                 @Override
                 public void actionPerformed(final ActionEvent e) {
                     if (FOptionPane.showOptionDialog("Quitting the match now will forfeit the tournament!\n\nReally quit?", "Really Quit Tournament?", FSkin.getImage(FSkinProp.ICO_WARNING).scale(2), new String[] { "Yes", "No" }, 1) == 0) {
-                        MatchUtil.endCurrentGame();
+                        matchUI.getGameController().nextGameDecision(NextGameDecision.QUIT);
                         QuestDraftUtils.matchInProgress = false;
-                        QuestDraftUtils.continueMatches();
+                        QuestDraftUtils.continueMatches(matchUI);
                     }
                 }
             });
@@ -156,9 +155,8 @@ public class QuestDraftWinLose extends ControlWinLose {
         qData.setCurrentEvent(null);
         qData.save();
         FModel.getQuestPreferences().save();
-        CMatchUI.SINGLETON_INSTANCE.writeMatchPreferences();
+        matchUI.writeMatchPreferences();
 
-        MatchUtil.endCurrentGame();
         Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
 
         SOverlayUtils.hideOverlay();

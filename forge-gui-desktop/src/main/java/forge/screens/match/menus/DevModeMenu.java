@@ -1,14 +1,15 @@
 package forge.screens.match.menus;
 
-import forge.match.MatchUtil;
-import forge.menus.MenuUtil;
-import forge.screens.match.controllers.CDev;
-
-import javax.swing.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+
+import forge.menus.MenuUtil;
+import forge.screens.match.controllers.CDev;
 
 /**
  * Gets a menu that replicates all the DevMode options.
@@ -16,9 +17,11 @@ import java.awt.event.KeyEvent;
  * Simply calls the associated method in CDev.
  */
 public class DevModeMenu implements ActionListener {
-    private DevModeMenu() { };
 
-    private static DevModeMenu devMenu = new DevModeMenu();
+    private CDev controller;
+    public DevModeMenu(final CDev controller) {
+        this.controller = controller;
+    };
 
     // Using an enum to avoid having to create multiple
     // ActionListeners each calling a single method.
@@ -41,21 +44,21 @@ public class DevModeMenu implements ActionListener {
         DEV_CORNER("Developer's Corner");
 
         protected String caption;
-        private DevMenuItem(String value) {
+        private DevMenuItem(final String value) {
             this.caption = value;
         }
-        protected static DevMenuItem getValue(String s) {
-            for (DevMenuItem t : DevMenuItem.values()) {
-                if (t.caption == s)
+        protected static DevMenuItem getValue(final String s) {
+            for (final DevMenuItem t : DevMenuItem.values()) {
+                if (t.caption == s) {
                     return t;
+                }
             }
             return null;
         }
     };
 
-    private static CDev controller = CDev.SINGLETON_INSTANCE;
-
-    public static JMenu getMenu() {
+    public JMenu getMenu() {
+        final boolean hasController = controller.getController() != null;
         JMenu menu = new JMenu("Dev");
         menu.setMnemonic(KeyEvent.VK_D);
         menu.add(getMenuItem(DevMenuItem.GENERATE_MANA));
@@ -70,8 +73,8 @@ public class DevModeMenu implements ActionListener {
         menu.add(getMenuItem(DevMenuItem.SETUP_GAME_STATE));
         menu.add(getMenuItem(DevMenuItem.DUMP_GAME_STATE));
         menu.addSeparator();
-        menu.add(getCheckboxMenuItem(DevMenuItem.PLAY_UNLIMITED_LANDS, MatchUtil.getHumanController().canPlayUnlimitedLands()));
-        menu.add(getCheckboxMenuItem(DevMenuItem.VIEW_ALL, MatchUtil.getHumanController().mayLookAtAllCards()));
+        menu.add(getCheckboxMenuItem(DevMenuItem.PLAY_UNLIMITED_LANDS, hasController && controller.getController().canPlayUnlimitedLands()));
+        menu.add(getCheckboxMenuItem(DevMenuItem.VIEW_ALL, hasController && controller.getController().mayLookAtAllCards()));
         menu.add(getMenuItem(DevMenuItem.ADD_COUNTER));
         menu.addSeparator();
         menu.add(getMenuItem(DevMenuItem.TAP_PERMANENT));
@@ -84,16 +87,16 @@ public class DevModeMenu implements ActionListener {
         return menu;
     }
 
-    private static JMenuItem getMenuItem(DevMenuItem m) {
+    private JMenuItem getMenuItem(final DevMenuItem m) {
         JMenuItem menuItem = new JMenuItem(m.caption);
-        menuItem.addActionListener(devMenu);
+        menuItem.addActionListener(this);
         return menuItem;
     }
 
-    private static JCheckBoxMenuItem getCheckboxMenuItem(DevMenuItem m, boolean isSelected) {
+    private JCheckBoxMenuItem getCheckboxMenuItem(final DevMenuItem m, final boolean isSelected) {
         JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(m.caption);
         menuItem.setState(isSelected);
-        menuItem.addActionListener(devMenu);
+        menuItem.addActionListener(this);
         return menuItem;
     }
 
@@ -101,24 +104,24 @@ public class DevModeMenu implements ActionListener {
      * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
      */
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(final ActionEvent e) {
         switch (DevMenuItem.getValue(e.getActionCommand())) {
-        case GENERATE_MANA:     { controller.generateMana(); break; }
-        case TUTOR_FOR_CARD:    { controller.tutorForCard(); break; }
-        case ADD_CARD_TO_HAND:  { controller.addCardToHand(); break; }
-        case ADD_CARD_TO_PLAY:  { controller.addCardToBattlefield(); break; }
-        case SET_PLAYER_LIFE:   { controller.setPlayerLife(); break; }
-        case WIN_GAME:          { controller.winGame(); break; }
-        case SETUP_GAME_STATE:  { controller.setupGameState(); break; }
-        case DUMP_GAME_STATE:   { controller.dumpGameState(); break; }
-        case PLAY_UNLIMITED_LANDS:   { controller.togglePlayManyLandsPerTurn(); break; }
-        case VIEW_ALL:          { controller.toggleViewAllCards(); break; }
-        case ADD_COUNTER:       { controller.addCounterToPermanent(); break; }
-        case TAP_PERMANENT:     { controller.tapPermanent(); break; }
-        case UNTAP_PERMANENT:   { controller.untapPermanent(); break; }
-        case RIGGED_PLANAR_ROLL:{ controller.riggedPlanerRoll(); break; }
-        case PLANESWALK_TO:     { controller.planeswalkTo(); break; }
-        case DEV_CORNER:        { openDevForumInBrowser(); break; }
+        case GENERATE_MANA:        { controller.generateMana(); break; }
+        case TUTOR_FOR_CARD:       { controller.tutorForCard(); break; }
+        case ADD_CARD_TO_HAND:     { controller.addCardToHand(); break; }
+        case ADD_CARD_TO_PLAY:     { controller.addCardToBattlefield(); break; }
+        case SET_PLAYER_LIFE:      { controller.setPlayerLife(); break; }
+        case WIN_GAME:             { controller.winGame(); break; }
+        case SETUP_GAME_STATE:     { controller.setupGameState(); break; }
+        case DUMP_GAME_STATE:      { controller.dumpGameState(); break; }
+        case PLAY_UNLIMITED_LANDS: { controller.togglePlayManyLandsPerTurn(); break; }
+        case VIEW_ALL:             { controller.toggleViewAllCards(); break; }
+        case ADD_COUNTER:          { controller.addCounterToPermanent(); break; }
+        case TAP_PERMANENT:        { controller.tapPermanent(); break; }
+        case UNTAP_PERMANENT:      { controller.untapPermanent(); break; }
+        case RIGGED_PLANAR_ROLL:   { controller.riggedPlanerRoll(); break; }
+        case PLANESWALK_TO:        { controller.planeswalkTo(); break; }
+        case DEV_CORNER:           { openDevForumInBrowser(); break; }
         default:
             break;
         }

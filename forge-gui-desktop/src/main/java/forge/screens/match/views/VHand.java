@@ -25,6 +25,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CHand;
 import forge.toolbox.FScrollPane;
 import forge.view.arcane.HandArea;
@@ -43,7 +44,7 @@ public class VHand implements IVDoc<CHand> {
 
     // Top-level containers
     private final FScrollPane scroller = new FScrollPane(false);
-    private final HandArea hand = new HandArea(scroller);
+    private final HandArea hand;
 
     //========= Constructor
     /**
@@ -52,7 +53,8 @@ public class VHand implements IVDoc<CHand> {
      * @param id0 &emsp; {@link forge.gui.framework.EDocID}
      * @param p &emsp; {@link forge.game.player.Player}
      */
-    public VHand(final EDocID id0, final PlayerView p) {
+    public VHand(final CMatchUI matchUI, final EDocID id0, final PlayerView p) {
+        this.hand = new HandArea(matchUI, scroller);
         docID = id0;
         id0.setDoc(this);
 
@@ -66,7 +68,7 @@ public class VHand implements IVDoc<CHand> {
 
         hand.setOpaque(false);
 
-        control = new CHand(p, this);
+        control = new CHand(matchUI, p, this);
     }
 
     //========= Overridden methods

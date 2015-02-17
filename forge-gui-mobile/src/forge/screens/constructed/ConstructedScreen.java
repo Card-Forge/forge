@@ -373,6 +373,9 @@ public class ConstructedScreen extends LaunchScreen {
                 rp.setTeamNumber(getTeam(i));
                 launchParams.players.add(rp.setPlayer(lobbyPlayer));
             }
+            if (!playerPanel.isPlayerAI()) {
+                launchParams.humanPlayers.add(rp);
+            }
             getDeckChooser(i).saveState();
         }
 

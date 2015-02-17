@@ -26,6 +26,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CCommand;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
@@ -57,9 +58,8 @@ public class VCommand implements IVDoc<CCommand> {
      * @param p &emsp; {@link forge.game.player.Player}
      * @param id0 &emsp; {@link forge.gui.framework.EDocID}
      */
-    public VCommand(final EDocID id0, final PlayerView p) {
+    public VCommand(final CMatchUI matchUI, final EDocID id0, final PlayerView p) {
         this.docID = id0;
-        id0.setDoc(this);
 
         this.player = p;
         if (p != null) { tab.setText(p.getName() + " Command"); }
@@ -67,7 +67,7 @@ public class VCommand implements IVDoc<CCommand> {
 
         // TODO player is hard-coded into tabletop...should be dynamic
         // (haven't looked into it too deeply). Doublestrike 12-04-12
-        tabletop = new PlayArea(scroller, id0 == EDocID.COMMAND_0, player, ZoneType.Command);
+        tabletop = new PlayArea(matchUI, scroller, id0 == EDocID.COMMAND_0, player, ZoneType.Command);
 
         control = new CCommand(player, this);
 

@@ -1,5 +1,6 @@
 package forge.screens.home.gauntlet;
 
+import forge.GuiBase;
 import forge.UiCommand;
 import forge.deck.Deck;
 import forge.deck.DeckType;
@@ -10,7 +11,7 @@ import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
-import forge.match.MatchUtil;
+import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 
@@ -54,6 +55,10 @@ public enum CSubmenuGauntletLoad implements ICDoc {
                 }
             }
         });
+    }
+
+    @Override
+    public void register() {
     }
 
     /* (non-Javadoc)
@@ -113,7 +118,7 @@ public enum CSubmenuGauntletLoad implements ICDoc {
         Deck userDeck = gd.getUserDeck();
         if (userDeck == null) {
             //give user a chance to select a deck if none saved with gauntlet
-            userDeck = FDeckChooser.promptForDeck("Select a deck to play for this gauntlet", DeckType.CUSTOM_DECK, false);
+            userDeck = FDeckChooser.promptForDeck(null, "Select a deck to play for this gauntlet", DeckType.CUSTOM_DECK, false);
             if (userDeck == null) { return; } //prevent crash if user doesn't select a deck
             gd.setUserDeck(userDeck);
             GauntletIO.saveGauntlet(gd);
@@ -129,11 +134,13 @@ public enum CSubmenuGauntletLoad implements ICDoc {
             }
         });
 
-        List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
-        starter.add(new RegisteredPlayer(userDeck).setPlayer(GamePlayerUtil.getGuiPlayer()));
+        final List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
+        final RegisteredPlayer human = new RegisteredPlayer(userDeck).setPlayer(GamePlayerUtil.getGuiPlayer());
+        starter.add(human);
         starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
 
-        MatchUtil.startMatch(GameType.Gauntlet, starter);
+        final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
+        hostedMatch.startMatch(GameType.Gauntlet, null, starter, human, GuiBase.getInterface().getNewGuiGame());
     }
 
     /* (non-Javadoc)

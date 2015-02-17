@@ -27,6 +27,7 @@ import java.util.Set;
 import com.google.common.base.Predicate;
 
 import forge.FThreads;
+import forge.GuiBase;
 import forge.ImageKeys;
 import forge.LobbyPlayer;
 import forge.card.CardRarity;
@@ -37,12 +38,11 @@ import forge.deck.Deck;
 import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.GameView;
-import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IButton;
 import forge.interfaces.IWinLoseView;
 import forge.item.PaperCard;
-import forge.match.MatchUtil;
+import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.planarconquest.ConquestPlaneData.RegionData;
 import forge.planarconquest.ConquestPreferences.CQPref;
@@ -253,8 +253,8 @@ public class ConquestController {
                 variants.add(GameType.Planechase);
             }
 
-            RegisteredPlayer humanStart = new RegisteredPlayer(commander.getDeck());
-            RegisteredPlayer aiStart = new RegisteredPlayer(opponent.getDeck());
+            final RegisteredPlayer humanStart = new RegisteredPlayer(commander.getDeck());
+            final RegisteredPlayer aiStart = new RegisteredPlayer(opponent.getDeck());
 
             if (isHumanDefending) { //give human a small life bonus if defending
                 humanStart.setStartingLife(humanStart.getStartingLife() + prefs.getPrefInt(CQPref.DEFEND_BONUS_LIFE));
@@ -276,28 +276,28 @@ public class ConquestController {
                 aiPlayerName += " (AI)"; //ensure player names are distinct
             }
 
-            List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
+            final List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
             humanPlayer = new LobbyPlayerHuman(humanPlayerName);
             humanPlayer.setAvatarCardImageKey(ImageKeys.getImageKey(commander.getCard(), false));
             starter.add(humanStart.setPlayer(humanPlayer));
 
-            LobbyPlayer aiPlayer = GamePlayerUtil.createAiPlayer(aiPlayerName, -1);
+            final LobbyPlayer aiPlayer = GamePlayerUtil.createAiPlayer(aiPlayerName, -1);
             aiPlayer.setAvatarCardImageKey(ImageKeys.getImageKey(opponent.getCard(), false));
             starter.add(aiStart.setPlayer(aiPlayer));
 
-            boolean useRandomFoil = FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
-            for(RegisteredPlayer rp : starter) {
+            final boolean useRandomFoil = FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
+            for (final RegisteredPlayer rp : starter) {
                 rp.setRandomFoil(useRandomFoil);
             }
-            GameRules rules = new GameRules(GameType.PlanarConquest);
+            final GameRules rules = new GameRules(GameType.PlanarConquest);
             rules.setGamesPerMatch(1); //only play one game at a time
             rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
             rules.canCloneUseTargetsImage = FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE);
-            final Match mc = new Match(rules, starter);
+            final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
             FThreads.invokeInEdtNowOrLater(new Runnable(){
                 @Override
                 public void run() {
-                    MatchUtil.startGame(mc);
+                    hostedMatch.startMatch(rules, null, starter, humanStart, GuiBase.getInterface().getNewGuiGame());
                 }
             });
         }

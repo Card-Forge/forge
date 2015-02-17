@@ -25,17 +25,16 @@ import java.util.Map.Entry;
 import javax.swing.JLabel;
 import javax.swing.ScrollPaneConstants;
 
+import net.miginfocom.swing.MigLayout;
+
 import com.google.common.collect.Lists;
 
-import net.miginfocom.swing.MigLayout;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
-import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.controllers.CPlayers;
@@ -48,9 +47,7 @@ import forge.toolbox.FSkin.SkinnedLabel;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VPlayers implements IVDoc<CPlayers> {
-    /** */
-    SINGLETON_INSTANCE;
+public class VPlayers implements IVDoc<CPlayers> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
@@ -61,6 +58,12 @@ public enum VPlayers implements IVDoc<CPlayers> {
 
     // Other fields
     private Map<PlayerView, JLabel[]> infoLBLs;
+
+    private final CPlayers controller;
+
+    public VPlayers(final CPlayers controller) {
+        this.controller = controller;
+    }
 
     //========= Overridden methods
 
@@ -137,7 +140,7 @@ public enum VPlayers implements IVDoc<CPlayers> {
      */
     @Override
     public CPlayers getLayoutControl() {
-        return CPlayers.SINGLETON_INSTANCE;
+        return controller;
     }
 
     //========== Observer update methods
@@ -146,7 +149,7 @@ public enum VPlayers implements IVDoc<CPlayers> {
     public void update() {
         // No need to update if this panel isn't showing
         if (parentCell == null || !this.equals(parentCell.getSelected())) { return; }
-        boolean isCommander = MatchUtil.getGameView().isCommander();
+        boolean isCommander = controller.getMatchUI().getGameView().isCommander();
 
         for(final Entry<PlayerView, JLabel[]> rr : infoLBLs.entrySet()) {
             PlayerView p0 = rr.getKey();
@@ -180,7 +183,7 @@ public enum VPlayers implements IVDoc<CPlayers> {
                 temp[6].setText(sb.toString());
             }
             if (isCommander) {
-                temp[7].setText(CardFactoryUtil.getCommanderInfo(p0));
+                temp[7].setText(p0.getCommanderInfo());
             }
         }
     }

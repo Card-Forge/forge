@@ -5,8 +5,7 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 
-import forge.game.Game;
-import forge.game.player.Player;
+import forge.screens.match.MatchController;
 import forge.toolbox.FButton;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FChoiceList;
@@ -21,10 +20,10 @@ public class VAutoYields extends FDialog {
     private final FChoiceList<String> lstAutoYields;
     private final FCheckBox chkDisableAll;
 
-    public VAutoYields(final Game game, final Player player) {
+    public VAutoYields() {
         super("Auto-Yields");
         List<String> autoYields = new ArrayList<String>();
-        for (String autoYield : player.getController().getAutoYields()) {
+        for (String autoYield : MatchController.instance.getAutoYields()) {
             autoYields.add(autoYield);
         }
         lstAutoYields = add(new FChoiceList<String>(autoYields) {
@@ -38,11 +37,11 @@ public class VAutoYields extends FDialog {
                 return true;
             }
         });
-        chkDisableAll = add(new FCheckBox("Disable All Auto Yields", game.getDisableAutoYields()));
+        chkDisableAll = add(new FCheckBox("Disable All Auto Yields", MatchController.instance.getDisableAutoYields()));
         chkDisableAll.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                game.setDisableAutoYields(chkDisableAll.isSelected());
+                MatchController.instance.setDisableAutoYields(chkDisableAll.isSelected());
             }
         });
         btnOk = add(new FButton("OK", new FEventHandler() {
@@ -57,7 +56,7 @@ public class VAutoYields extends FDialog {
                 String selected = lstAutoYields.getSelectedItem();
                 if (selected != null) {
                     lstAutoYields.removeItem(selected);
-                    player.getController().setShouldAutoYield(selected, false);
+                    MatchController.instance.setShouldAutoYield(selected, false);
                     btnRemove.setEnabled(lstAutoYields.getCount() > 0);
                     lstAutoYields.cleanUpSelections();
                     VAutoYields.this.revalidate();

@@ -73,7 +73,7 @@ public final class CardPicturePanel extends JPanel {
         }
     }
 
-    public BufferedImage getImage() {
+    private BufferedImage getImage() {
         if (displayed instanceof InventoryItem) {
             final InventoryItem item = (InventoryItem) displayed;
             return ImageCache.getOriginalImage(ImageKeys.getImageKey(item, false), true);

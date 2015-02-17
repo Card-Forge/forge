@@ -1,29 +1,33 @@
 package forge.screens.workshop.controllers;
 
-import forge.UiCommand;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.util.Arrays;
+import java.util.Map.Entry;
+
+import javax.swing.JTextPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.Style;
+import javax.swing.text.StyledDocument;
+
 import forge.Singletons;
+import forge.UiCommand;
 import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardScriptInfo;
+import forge.card.CardScriptParser;
 import forge.game.card.Card;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.item.PaperCard;
 import forge.model.FModel;
-import forge.screens.match.controllers.CDetail;
-import forge.screens.match.controllers.CPicture;
+import forge.properties.ForgePreferences.FPref;
 import forge.screens.workshop.menus.WorkshopFileMenu;
 import forge.screens.workshop.views.VCardDesigner;
 import forge.screens.workshop.views.VCardScript;
 import forge.screens.workshop.views.VWorkshopCatalog;
 import forge.toolbox.FOptionPane;
-import forge.toolbox.FTextEditor;
-
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
-import java.util.Arrays;
-
 
 /** 
  * Controls the "card script" panel in the workshop UI.
@@ -41,20 +45,27 @@ public enum CCardScript implements ICDoc {
     private boolean switchInProgress;
 
     private CCardScript() {
-        VCardScript.SINGLETON_INSTANCE.getTxtScript().addDocumentListener(new DocumentListener() {
+        VCardScript.SINGLETON_INSTANCE.getTxtScript().getDocument().addDocumentListener(new DocumentListener() {
             @Override
-            public void removeUpdate(DocumentEvent arg0) {
+            public void removeUpdate(final DocumentEvent arg0) {
                 updateDirtyFlag();
             }
-
             @Override
-            public void insertUpdate(DocumentEvent arg0) {
+            public void insertUpdate(final DocumentEvent arg0) {
                 updateDirtyFlag();
             }
-
             @Override
-            public void changedUpdate(DocumentEvent arg0) {
+            public void changedUpdate(final DocumentEvent arg0) {
                  //Plain text components do not fire these events
+            }
+        });
+        VCardScript.SINGLETON_INSTANCE.getTxtScript().addFocusListener(new FocusListener() {
+            @Override
+            public void focusLost(final FocusEvent e) {
+                refresh();
+            }
+            @Override
+            public void focusGained(final FocusEvent e) {
             }
         });
     }
@@ -86,10 +97,18 @@ public enum CCardScript implements ICDoc {
     }
 
     public void refresh() {
-        FTextEditor txtScript = VCardScript.SINGLETON_INSTANCE.getTxtScript();
+        final JTextPane txtScript = VCardScript.SINGLETON_INSTANCE.getTxtScript();
         txtScript.setText(currentScriptInfo != null ? currentScriptInfo.getText() : "");
         txtScript.setEditable(currentScriptInfo != null ? currentScriptInfo.canEdit() : false);
         txtScript.setCaretPosition(0); //keep scrolled to top
+
+        final StyledDocument doc = VCardScript.SINGLETON_INSTANCE.getDoc();
+        final Style error = VCardScript.SINGLETON_INSTANCE.getErrorStyle();
+        if (FModel.getPreferences().getPrefBoolean(FPref.DEV_WORKSHOP_SYNTAX) && currentScriptInfo != null) {
+            for (final Entry<Integer, Integer> region : new CardScriptParser(currentScriptInfo.getText()).getErrorRegions().entrySet()) {
+                doc.setCharacterAttributes(region.getKey(), region.getValue(), error, true);
+            }
+        }
     }
 
     public boolean hasChanges() {
@@ -144,8 +163,8 @@ public enum CCardScript implements ICDoc {
         }
 
         VWorkshopCatalog.SINGLETON_INSTANCE.getCardManager().repaint();
-        CDetail.SINGLETON_INSTANCE.showCard(currentCard);
-        CPicture.SINGLETON_INSTANCE.showImage(currentCard);
+        VWorkshopCatalog.SINGLETON_INSTANCE.getCDetailPicture().showItem(currentCard);
+        refresh();
         return true;
     }
 
@@ -157,6 +176,10 @@ public enum CCardScript implements ICDoc {
     @Override
     public UiCommand getCommandOnSelect() {
         return null;
+    }
+
+    @Override
+    public void register() {
     }
 
     /* (non-Javadoc)

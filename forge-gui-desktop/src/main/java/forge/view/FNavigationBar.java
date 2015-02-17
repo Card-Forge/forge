@@ -1,5 +1,30 @@
 package forge.view;
 
+import java.awt.BasicStroke;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.MouseInfo;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SpringLayout;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
+import javax.swing.border.EmptyBorder;
+
+import com.google.common.collect.Lists;
+
 import forge.Singletons;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ILocalRepaint;
@@ -13,16 +38,6 @@ import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.util.ReflectionUtil;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-
 @SuppressWarnings("serial")
 public class FNavigationBar extends FTitleBarBase {
 
@@ -32,7 +47,7 @@ public class FNavigationBar extends FTitleBarBase {
     private static final int initialHideDelay = 500;
 
     private final FButton btnForge = new FButton("Forge");
-    private final ArrayList<NavigationTab> tabs = new ArrayList<NavigationTab>();
+    private final List<NavigationTab> tabs = Lists.newArrayList();
     private final FDigitalClock clock = new FDigitalClock();
     private final JPanel pnlReveal = new JPanel();
     private NavigationTab selectedTab;
@@ -91,14 +106,13 @@ public class FNavigationBar extends FTitleBarBase {
         updateClockVisibility();
     }
 
-    private NavigationTab addNavigationTab(FScreen screen) {
-        NavigationTab tab = new NavigationTab(screen);
+    private NavigationTab addNavigationTab(final FScreen screen) {
+        final NavigationTab tab = new NavigationTab(screen);
         if (tabs.size() == 0) {
             tab.setSelected(true);
             selectedTab = tab;
             layout.putConstraint(SpringLayout.WEST, tab, 1, SpringLayout.EAST, btnForge);
-        }
-        else {
+        } else {
             layout.putConstraint(SpringLayout.WEST, tab, 1, SpringLayout.EAST, tabs.get(tabs.size() - 1));
         }
         layout.putConstraint(SpringLayout.SOUTH, tab, 0, SpringLayout.SOUTH, this);
@@ -107,8 +121,8 @@ public class FNavigationBar extends FTitleBarBase {
         return tab;
     }
 
-    private NavigationTab getTab(FScreen screen) {
-        for (NavigationTab tab : tabs) {
+    private NavigationTab getTab(final FScreen screen) {
+        for (final NavigationTab tab : tabs) {
             if (tab.screen == screen) {
                 return tab;
             }
@@ -121,12 +135,13 @@ public class FNavigationBar extends FTitleBarBase {
     }
 
     public void updateSelectedTab() {
-        FScreen screen = Singletons.getControl().getCurrentScreen();
+        final FScreen screen = Singletons.getControl().getCurrentScreen();
         NavigationTab tab = getTab(screen);
         if (tab == null) {
             tab = addNavigationTab(screen); //if tab not found, add and select it
+        } else if (tab == selectedTab) {
+            return;
         }
-        else if (tab == selectedTab) { return; }
 
         if (selectedTab != null) {
             selectedTab.setSelected(false);
@@ -341,6 +356,14 @@ public class FNavigationBar extends FTitleBarBase {
     public void setIconImage(Image image) {
     }
 
+    public void updateTitle(final FScreen screen) {
+        for (final NavigationTab tab : tabs) {
+            if (tab.screen == screen) {
+                tab.updateTitle();
+            }
+        }
+    }
+
     private final class NavigationTab extends SkinnedLabel implements ILocalRepaint {
         private static final int fontSize = 14;
         private static final int unhoveredAlpha = 150;
@@ -457,6 +480,10 @@ public class FNavigationBar extends FTitleBarBase {
             FSkin.setGraphicsColor(g, buttonBorderColor);
             g.drawRoundRect(0, 0, width, height, radius, radius);
             super.paintComponent(g);
+        }
+
+        private void updateTitle() {
+            setText(screen.getTabCaption());
         }
 
         private class CloseButton extends JLabel implements ILocalRepaint {

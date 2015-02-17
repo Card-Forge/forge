@@ -16,7 +16,6 @@ import forge.assets.FSkinColor.Colors;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
-import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.MatchController;
@@ -299,7 +298,7 @@ public class VPlayerPanel extends FContainer {
             }
 
             //when gui player loses life, vibrate device for a length of time based on amount of life lost
-            if (vibrateDuration > 0 && player.isLobbyPlayer(MatchUtil.getGuiPlayer()) &&
+            if (vibrateDuration > 0 && MatchController.instance.isLocalPlayer(player) &&
                     FModel.getPreferences().getPrefBoolean(FPref.UI_VIBRATE_ON_LIFE_LOSS)) {
                 //never vibrate more than two seconds regardless of life lost or poison counters gained
                 Gdx.input.vibrate(Math.min(vibrateDuration, 2000)); 
@@ -308,7 +307,7 @@ public class VPlayerPanel extends FContainer {
 
         @Override
         public boolean tap(float x, float y, int count) {
-            MatchUtil.getHumanController().selectPlayer(player, null); //treat tapping on life the same as tapping on the avatar
+            MatchController.instance.getGameController().selectPlayer(player, null); //treat tapping on life the same as tapping on the avatar
             return true;
         }
 

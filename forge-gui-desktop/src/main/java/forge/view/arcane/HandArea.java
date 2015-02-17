@@ -17,13 +17,11 @@
  */
 package forge.view.arcane;
 
-import forge.screens.match.CMatchUI;
-import forge.screens.match.controllers.CPrompt;
-import forge.toolbox.FScrollPane;
-import forge.toolbox.MouseTriggerEvent;
-
 import java.awt.event.MouseEvent;
 
+import forge.screens.match.CMatchUI;
+import forge.toolbox.FScrollPane;
+import forge.toolbox.MouseTriggerEvent;
 
 /**
  * <p>
@@ -45,8 +43,8 @@ public class HandArea extends CardArea {
      * 
      * @param scrollPane
      */
-    public HandArea(final FScrollPane scrollPane) {
-        super(scrollPane);
+    public HandArea(final CMatchUI matchUI, final FScrollPane scrollPane) {
+        super(matchUI, scrollPane);
 
         this.setDragEnabled(true);
         this.setVertical(true);
@@ -55,21 +53,21 @@ public class HandArea extends CardArea {
     /** {@inheritDoc} */
     @Override
     public final void mouseOver(final CardPanel panel, final MouseEvent evt) {
-        CMatchUI.SINGLETON_INSTANCE.setCard(panel.getCard(), evt.isShiftDown());
+        getMatchUI().setCard(panel.getCard(), evt.isShiftDown());
         super.mouseOver(panel, evt);
     }
 
     /** {@inheritDoc} */
     @Override
     public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
-        CPrompt.SINGLETON_INSTANCE.selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
+        getMatchUI().getCPrompt().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
         super.mouseLeftClicked(panel, evt);
     }
 
     /** {@inheritDoc} */
     @Override
     public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
-        CPrompt.SINGLETON_INSTANCE.selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
+        getMatchUI().getCPrompt().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
         super.mouseRightClicked(panel, evt);
     }
 }

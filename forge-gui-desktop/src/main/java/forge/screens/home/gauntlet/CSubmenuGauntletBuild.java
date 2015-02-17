@@ -83,6 +83,10 @@ public enum CSubmenuGauntletBuild implements ICDoc {
         });
     }
 
+    @Override
+    public void register() {
+    }
+
     /* (non-Javadoc)
      * @see forge.gui.home.ICSubmenu#initialize()
      */

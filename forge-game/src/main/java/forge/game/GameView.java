@@ -22,11 +22,6 @@ import forge.trackable.TrackableProperty;
 import forge.util.FCollectionView;
 
 public class GameView extends TrackableObject {
-    private static GameView currentGame;
-
-    public static GameView getCurrentGame() {
-        return currentGame;
-    }
 
     /*private final TrackableIndex<CardView> cards = new TrackableIndex<CardView>();
     private final TrackableIndex<PlayerView> players = new TrackableIndex<PlayerView>();
@@ -38,8 +33,8 @@ public class GameView extends TrackableObject {
 
     public GameView(final Game game0) {
         super(-1, game0.getTracker()); //ID not needed
-        currentGame = this;
         game = game0;
+        set(TrackableProperty.Title, game.getMatch().getTitle());
         set(TrackableProperty.WinningTeam, -1);
 
         GameRules rules = game.getRules();
@@ -58,6 +53,9 @@ public class GameView extends TrackableObject {
         return players;
     }
 
+    public String getTitle() {
+        return get(TrackableProperty.Title);
+    }
     public boolean isCommander() {
         return get(TrackableProperty.Commander);
     }
@@ -117,9 +115,6 @@ public class GameView extends TrackableObject {
         set(TrackableProperty.GameOver, game.isGameOver());
         set(TrackableProperty.MatchOver, game.getMatch().isMatchOver());
         set(TrackableProperty.WinningTeam, game.getOutcome() == null ? -1 : game.getOutcome().getWinningTeam());
-        if (game.isGameOver()) {
-            currentGame = null;
-        }
     }
 
     public GameLog getGameLog() {
@@ -199,9 +194,9 @@ public class GameView extends TrackableObject {
         return game.getMatch().getGamesWonBy(questPlayer);
     }
 
-    public Deck getDeck(LobbyPlayer guiPlayer) {
-        for (Player p : game.getRegisteredPlayers()) {
-            if (p.getLobbyPlayer().equals(guiPlayer)) {
+    public Deck getDeck(final String lobbyPlayerName) {
+        for (final Player p : game.getRegisteredPlayers()) {
+            if (p.getLobbyPlayer().getName().equals(lobbyPlayerName)) {
                 return p.getRegisteredPlayer().getDeck();
             }
         }

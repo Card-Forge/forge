@@ -514,6 +514,7 @@ forge-game/src/main/java/forge/game/cost/CostUntapType.java -text
 forge-game/src/main/java/forge/game/cost/ICostVisitor.java -text
 forge-game/src/main/java/forge/game/cost/PaymentDecision.java -text
 forge-game/src/main/java/forge/game/cost/package-info.java svneol=native#text/plain
+forge-game/src/main/java/forge/game/event/Event.java -text
 forge-game/src/main/java/forge/game/event/EventValueChangeType.java -text
 forge-game/src/main/java/forge/game/event/GameEvent.java -text
 forge-game/src/main/java/forge/game/event/GameEventAnteCardsSelected.java -text
@@ -1009,6 +1010,7 @@ forge-gui-desktop/src/main/java/forge/screens/match/controllers/CAntes.java -tex
 forge-gui-desktop/src/main/java/forge/screens/match/controllers/CCombat.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/controllers/CCommand.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/controllers/CDetail.java -text
+forge-gui-desktop/src/main/java/forge/screens/match/controllers/CDetailPicture.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/controllers/CDev.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/controllers/CDock.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/controllers/CField.java -text
@@ -1099,7 +1101,6 @@ forge-gui-desktop/src/main/java/forge/toolbox/special/PhaseLabel.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/special/PlayerDetailsPanel.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/special/package-info.java -text
 forge-gui-desktop/src/main/java/forge/util/AwtUtil.java -text
-forge-gui-desktop/src/main/java/forge/view/ButtonUtil.java -text
 forge-gui-desktop/src/main/java/forge/view/FDialog.java -text
 forge-gui-desktop/src/main/java/forge/view/FFrame.java -text
 forge-gui-desktop/src/main/java/forge/view/FNavigationBar.java -text
@@ -17343,6 +17344,7 @@ forge-gui/src/main/java/forge/card/CardDetailUtil.java -text
 forge-gui/src/main/java/forge/card/CardPreferences.java -text
 forge-gui/src/main/java/forge/card/CardReaderExperiments.java -text
 forge-gui/src/main/java/forge/card/CardScriptInfo.java -text
+forge-gui/src/main/java/forge/card/CardScriptParser.java -text
 forge-gui/src/main/java/forge/control/ChatArea.java -text
 forge-gui/src/main/java/forge/control/FControlGameEventHandler.java -text
 forge-gui/src/main/java/forge/control/FControlGamePlayback.java -text
@@ -17370,6 +17372,7 @@ forge-gui/src/main/java/forge/events/IUiEventVisitor.java -text
 forge-gui/src/main/java/forge/events/UiEvent.java -text
 forge-gui/src/main/java/forge/events/UiEventAttackerDeclared.java -text
 forge-gui/src/main/java/forge/events/UiEventBlockerAssigned.java -text
+forge-gui/src/main/java/forge/events/UiEventNextGameDecision.java -text
 forge-gui/src/main/java/forge/gauntlet/GauntletData.java -text
 forge-gui/src/main/java/forge/gauntlet/GauntletIO.java -text
 forge-gui/src/main/java/forge/gauntlet/GauntletUtil.java -text
@@ -17377,9 +17380,13 @@ forge-gui/src/main/java/forge/gauntlet/GauntletWinLoseController.java -text
 forge-gui/src/main/java/forge/interfaces/IButton.java -text
 forge-gui/src/main/java/forge/interfaces/ICheckBox.java -text
 forge-gui/src/main/java/forge/interfaces/IComboBox.java -text
+forge-gui/src/main/java/forge/interfaces/IDevModeCheats.java -text
 forge-gui/src/main/java/forge/interfaces/IDeviceAdapter.java -text
+forge-gui/src/main/java/forge/interfaces/IGameController.java -text
 forge-gui/src/main/java/forge/interfaces/IGuiBase.java -text
+forge-gui/src/main/java/forge/interfaces/IGuiGame.java -text
 forge-gui/src/main/java/forge/interfaces/IGuiTimer.java -text
+forge-gui/src/main/java/forge/interfaces/IMayViewCards.java -text
 forge-gui/src/main/java/forge/interfaces/IProgressBar.java -text
 forge-gui/src/main/java/forge/interfaces/ITextField.java -text
 forge-gui/src/main/java/forge/interfaces/IWinLoseView.java -text
@@ -17414,10 +17421,10 @@ forge-gui/src/main/java/forge/limited/SealedDeckBuilder.java svneol=native#text/
 forge-gui/src/main/java/forge/limited/WinstonDraft.java -text
 forge-gui/src/main/java/forge/limited/WinstonDraftAI.java -text
 forge-gui/src/main/java/forge/limited/package-info.java svneol=native#text/plain
-forge-gui/src/main/java/forge/match/IMatchController.java -text
+forge-gui/src/main/java/forge/match/AbstractGuiGame.java -text
+forge-gui/src/main/java/forge/match/HostedMatch.java -text
 forge-gui/src/main/java/forge/match/MatchConstants.java -text
-forge-gui/src/main/java/forge/match/MatchUtil.java -text
-forge-gui/src/main/java/forge/match/input/ButtonUtil.java -text
+forge-gui/src/main/java/forge/match/NextGameDecision.java -text
 forge-gui/src/main/java/forge/match/input/Input.java -text
 forge-gui/src/main/java/forge/match/input/InputAttack.java -text
 forge-gui/src/main/java/forge/match/input/InputBase.java -text
@@ -17547,7 +17554,6 @@ forge-gui/src/main/java/forge/util/WaitCallback.java -text
 forge-gui/src/main/java/forge/util/WaitRunnable.java -text
 forge-gui/src/main/java/forge/util/XmlUtil.java -text
 forge-gui/src/main/java/forge/util/gui/SGuiChoose.java -text
-forge-gui/src/main/java/forge/util/gui/SGuiDialog.java -text
 forge-gui/src/main/java/forge/util/gui/SOptionPane.java -text
 forge-gui/src/main/java/forge/util/package-info.java -text
 forge-gui/src/main/resources/proxy-template.ftl -text

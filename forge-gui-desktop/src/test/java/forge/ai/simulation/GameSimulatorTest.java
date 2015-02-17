@@ -37,7 +37,7 @@ public class GameSimulatorTest extends TestCase {
         players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p2", null)));
         players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p1", null)));
         GameRules rules = new GameRules(GameType.Constructed);
-        Match match = new Match(rules, players);
+        Match match = new Match(rules, players, "Test");
         Game game = new Game(players, rules, match);
         game.setAge(GameStage.Play);
 

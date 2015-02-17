@@ -1,6 +1,21 @@
 package forge.game;
 
-import com.google.common.collect.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Random;
+import java.util.Set;
+
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multiset;
 
 import forge.LobbyPlayer;
 import forge.deck.CardPool;
@@ -19,24 +34,34 @@ import forge.item.PaperCard;
 import forge.util.FCollectionView;
 import forge.util.MyRandom;
 
-import java.util.*;
-import java.util.Map.Entry;
-
 public class Match {
     private final List<RegisteredPlayer> players;
     private final GameRules rules;
+    private final String title;
 
     private final List<GameOutcome> gamesPlayed = new ArrayList<GameOutcome>();
     private final List<GameOutcome> gamesPlayedRo;
 
-    public Match(GameRules rules0, List<RegisteredPlayer> players0) {
+    public Match(final GameRules rules0, final List<RegisteredPlayer> players0, final String title) {
         gamesPlayedRo = Collections.unmodifiableList(gamesPlayed);
         players = Collections.unmodifiableList(Lists.newArrayList(players0));
         rules = rules0;
+        this.title = title;
     }
 
     public GameRules getRules() {
         return rules;
+    }
+    String getTitle() {
+        final Multiset<RegisteredPlayer> wins = getGamesWon();
+        final StringBuilder titleAppend = new StringBuilder(title);
+        titleAppend.append(" (");
+        for (final RegisteredPlayer rp : players) {
+            titleAppend.append(wins.count(rp)).append('-');
+        }
+        titleAppend.deleteCharAt(titleAppend.length() - 1);
+        titleAppend.append(')');
+        return titleAppend.toString();
     }
 
     public final List<GameOutcome> getPlayedGames() {
@@ -123,6 +148,13 @@ public class Match {
             }
         }
         return sum;
+    }
+    public Multiset<RegisteredPlayer> getGamesWon() {
+        final Multiset<RegisteredPlayer> won = HashMultiset.create(players.size());
+        for (final GameOutcome go : gamesPlayedRo) {
+            won.add(go.getWinningPlayer().getRegisteredPlayer());
+        }
+        return won;
     }
 
     public boolean isWonBy(LobbyPlayer questPlayer) {

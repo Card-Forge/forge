@@ -26,7 +26,7 @@ import forge.game.combat.CombatView;
 import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
-import forge.match.MatchUtil;
+import forge.interfaces.IGameController;
 import forge.menu.FDropDown;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuBar;
@@ -86,17 +86,17 @@ public class MatchScreen extends FScreen {
                 new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
-                        MatchUtil.getHumanController().selectButtonOk();
+                        getGameController().selectButtonOk();
                     }
                 },
                 new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
-                        MatchUtil.getHumanController().selectButtonCancel();
+                        getGameController().selectButtonCancel();
                     }
                 }));
 
-        if (MatchUtil.getHumanCount() <= 1 || MatchUtil.getController().hotSeatMode()) {
+        if (MatchController.instance.getLocalPlayerCount() <= 1 || MatchController.instance.hotSeatMode()) {
             topPlayerPrompt = null;
         }
         else { //show top prompt if multiple human players and not playing in Hot Seat mode
@@ -104,13 +104,13 @@ public class MatchScreen extends FScreen {
                     new FEventHandler() {
                         @Override
                         public void handleEvent(FEvent e) {
-                            MatchUtil.getHumanController().selectButtonOk();
+                            getGameController().selectButtonOk();
                         }
                     },
                     new FEventHandler() {
                         @Override
                         public void handleEvent(FEvent e) {
-                            MatchUtil.getHumanController().selectButtonCancel();
+                            getGameController().selectButtonCancel();
                         }
                     }));
             topPlayerPrompt.setRotate180(true);
@@ -149,6 +149,10 @@ public class MatchScreen extends FScreen {
             log.setMenuTab(new HiddenMenuTab(log));
             devMenu.setMenuTab(new HiddenMenuTab(devMenu));
         }
+    }
+
+    private IGameController getGameController() {
+        return MatchController.instance.getGameController();
     }
 
     private class HiddenMenuTab extends FMenuTab {
@@ -230,7 +234,7 @@ public class MatchScreen extends FScreen {
     }
 
     public boolean isTopHumanPlayerActive() {
-        return topPlayerPrompt != null && topPlayerPanel.getPlayer() == MatchUtil.getCurrentPlayer().getView();
+        return topPlayerPrompt != null && topPlayerPanel.getPlayer() == MatchController.instance.getCurrentPlayer();
     }
 
     public VPrompt getActivePrompt() {
@@ -299,7 +303,7 @@ public class MatchScreen extends FScreen {
 
     @Override
     protected void drawOverlay(Graphics g) {
-        GameView game = MatchUtil.getGameView();
+        final GameView game = MatchController.instance.getGameView();
         if (game == null) { return; }
 
         //draw arrows for paired cards
@@ -361,25 +365,25 @@ public class MatchScreen extends FScreen {
             return true; //suppress Back button so it's not bumped when trying to press OK or Cancel buttons
         case Keys.A: //alpha strike on Ctrl+A
             if (KeyInputAdapter.isCtrlKeyDown()) {
-                MatchUtil.alphaStrike();
+                getGameController().alphaStrike();
                 return true;
             }
             break;
         case Keys.E: //end turn on Ctrl+E
             if (KeyInputAdapter.isCtrlKeyDown()) {
-                MatchUtil.endCurrentTurn();
+                getGameController().passPriorityUntilEndOfTurn();
                 return true;
             }
             break;
         case Keys.Q: //concede game on Ctrl+Q
             if (KeyInputAdapter.isCtrlKeyDown()) {
-                MatchUtil.concede();
+                getGameController().concede();
                 return true;
             }
             break;
         case Keys.Z: //undo on Ctrl+Z
             if (KeyInputAdapter.isCtrlKeyDown()) {
-                MatchUtil.getHumanController().tryUndoLastAction();
+                getGameController().tryUndoLastAction();
                 return true;
             }
             break;
@@ -393,7 +397,7 @@ public class MatchScreen extends FScreen {
     }
 
     public boolean stopAtPhase(final PlayerView turn, final PhaseType phase) {
-        PhaseLabel label = getPlayerPanel(turn).getPhaseIndicator().getLabel(phase);
+        final PhaseLabel label = getPlayerPanel(turn).getPhaseIndicator().getLabel(phase);
         return label == null || label.getStopAtPhase();
     }
 

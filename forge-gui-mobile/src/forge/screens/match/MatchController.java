@@ -6,28 +6,37 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
+
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 import forge.Forge;
 import forge.Graphics;
+import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.assets.FImage;
 import forge.assets.FSkin;
+import forge.assets.FSkinProp;
 import forge.assets.FTextureRegionImage;
+import forge.assets.ImageCache;
 import forge.card.CardRenderer;
+import forge.card.GameEntityPicker;
+import forge.deck.CardPool;
+import forge.deck.FSideboardDialog;
+import forge.game.GameEntity;
 import forge.game.GameEntityView;
 import forge.game.GameView;
-import forge.game.Match;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
-import forge.game.player.Player;
+import forge.game.player.DelayedReveal;
+import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.interfaces.IButton;
-import forge.match.IMatchController;
-import forge.match.MatchUtil;
+import forge.item.PaperCard;
+import forge.match.AbstractGuiGame;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.properties.ForgePreferences;
@@ -41,11 +50,15 @@ import forge.screens.match.views.VPlayerPanel.InfoTab;
 import forge.screens.match.views.VPrompt;
 import forge.screens.match.winlose.ViewWinLose;
 import forge.toolbox.FDisplayObject;
+import forge.toolbox.FOptionPane;
+import forge.util.FCollectionView;
 import forge.util.ITriggerEvent;
+import forge.util.MessageUtil;
 import forge.util.WaitCallback;
 import forge.util.gui.SGuiChoose;
+import forge.util.gui.SOptionPane;
 
-public class MatchController implements IMatchController {
+public class MatchController extends AbstractGuiGame {
     private MatchController() { }
     public static final MatchController instance = new MatchController();
 
@@ -55,6 +68,15 @@ public class MatchController implements IMatchController {
 
     public static MatchScreen getView() {
         return view;
+    }
+
+    @Override
+    protected void updateCurrentPlayer(final PlayerView player) {
+        for (final PlayerView other : getLocalPlayers()) {
+            if (!other.equals(player)) {
+                updatePromptForAwait(other);
+            }
+        }
     }
 
     public static FImage getPlayerAvatar(final PlayerView p) {
@@ -71,10 +93,6 @@ public class MatchController implements IMatchController {
         return avatar;
     }
 
-    public static void setPlayerAvatar(final LobbyPlayer lp, final FImage avatarImage) {
-        avatarImages.put(lp.getName(), avatarImage);
-    }
-
     public void refreshCardDetails(Iterable<CardView> cards) {
         //ensure cards appear in the correct row of the field
         for (VPlayerPanel pnl : view.getPlayerPanels().values()) {
@@ -83,27 +101,24 @@ public class MatchController implements IMatchController {
     }
 
     @Override
-    public void startNewMatch(Match match) {
-        MatchUtil.startGame(match);
-    }
-
-    @Override
     public boolean resetForNewGame() {
         CardAreaPanel.resetForNewGame(); //ensure card panels reset between games
         return true;
     }
 
-    @Override
     public boolean hotSeatMode() {
         return FModel.getPreferences().getPrefBoolean(FPref.MATCH_HOT_SEAT_MODE);
     }
 
     @Override
-    public void openView(List<Player> sortedPlayers) {
-        boolean noHumans = MatchUtil.getHumanCount() == 0;
-        List<VPlayerPanel> playerPanels = new ArrayList<VPlayerPanel>();
-        for (Player p : sortedPlayers) {
-            playerPanels.add(new VPlayerPanel(PlayerView.get(p), noHumans || p.getController() instanceof PlayerControllerHuman));
+    public void openView(final FCollectionView<PlayerView> myPlayers) {
+        setLocalPlayers(myPlayers);
+        final boolean noHumans = !hasLocalPlayers();
+
+        final FCollectionView<PlayerView> allPlayers = getGameView().getPlayers();
+        final List<VPlayerPanel> playerPanels = new ArrayList<VPlayerPanel>();
+        for (final PlayerView p : allPlayers) {
+            playerPanels.add(new VPlayerPanel(p, noHumans || isLocalPlayer(p)));
         }
         view = new MatchScreen(playerPanels);
 
@@ -118,7 +133,7 @@ public class MatchController implements IMatchController {
                 @Override
                 public void buildTouchListeners(float screenX, float screenY, ArrayList<FDisplayObject> listeners) {
                     if (screenY < view.getHeight() - VPrompt.HEIGHT) {
-                        MatchUtil.pause();
+                        Forge.hostedMatch.pause();
                     }
                 }
             });
@@ -140,7 +155,7 @@ public class MatchController implements IMatchController {
     }
 
     @Override
-    public void showPromptMessage(final PlayerView player, String message) {
+    public void showPromptMessage(final PlayerView player, final String message) {
         view.getPrompt(player).setMessage(message);
     }
 
@@ -156,11 +171,11 @@ public class MatchController implements IMatchController {
 
     @Override
     public void updatePhase() {
-        GameView gameView = MatchUtil.getGameView();
+        final GameView gameView = getGameView();
         final PlayerView p = gameView.getPlayerTurn();
         final PhaseType ph = gameView.getPhase();
 
-        PhaseLabel lbl = view.getPlayerPanel(p).getPhaseIndicator().getLabel(ph);
+        final PhaseLabel lbl = view.getPlayerPanel(p).getPhaseIndicator().getLabel(ph);
 
         view.resetAllPhaseButtons();
         if (lbl != null) {
@@ -175,12 +190,11 @@ public class MatchController implements IMatchController {
     @Override
     public void updatePlayerControl() {
         //show/hide hand for top player based on whether the opponent is controlled
-        if (MatchUtil.getHumanCount() == 1) {
-            PlayerView player = view.getTopPlayerPanel().getPlayer();
+        if (getLocalPlayerCount() == 1) {
+            final PlayerView player = view.getTopPlayerPanel().getPlayer();
             if (player.getMindSlaveMaster() != null) {
                 view.getTopPlayerPanel().setSelectedZone(ZoneType.Hand);
-            }
-            else {
+            } else {
                 view.getTopPlayerPanel().setSelectedTab(null);
             }
         }
@@ -196,7 +210,9 @@ public class MatchController implements IMatchController {
 
     @Override
     public void finishGame() {
-        new ViewWinLose(MatchUtil.getGameView()).setVisible(true);
+        if (hasLocalPlayers() || getGameView().isMatchOver()) {
+            new ViewWinLose(getGameView()).setVisible(true);
+        }
     }
 
     @Override
@@ -328,7 +344,7 @@ public class MatchController implements IMatchController {
     @Override
     public void afterGameEnd() {
         Forge.back();
-        view = null;
+        //view = null;
     }
 
     private static void actuateMatchPreferences() {
@@ -396,4 +412,103 @@ public class MatchController implements IMatchController {
 
         prefs.save();
     }
+
+    @Override
+    public void message(final String message, final String title) {
+        SOptionPane.showMessageDialog(message, title);
+    }
+
+    @Override
+    public void showErrorDialog(final String message, final String title) {
+        SOptionPane.showErrorDialog(message, title);
+    }
+
+    @Override
+    public boolean showConfirmDialog(final String message, final String title, final String yesButtonText, final String noButtonText, final boolean defaultYes) {
+        return SOptionPane.showConfirmDialog(message, title, yesButtonText, noButtonText, defaultYes);
+    }
+
+    @Override
+    public int showOptionDialog(final String message, final String title, final FSkinProp icon, final String[] options, final int defaultOption) {
+        return SOptionPane.showOptionDialog(message, title, icon, options, defaultOption);
+    }
+
+    @Override
+    public int showCardOptionDialog(final CardView card, final String message, final String title, final FSkinProp icon, final String[] options, final int defaultOption) {
+        return FOptionPane.showCardOptionDialog(card, message, title, icon, options, defaultOption);
+    }
+
+    @Override
+    public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final String[] inputOptions) {
+        return SOptionPane.showInputDialog(message, title, icon, initialInput, inputOptions);
+    }
+
+    @Override
+    public boolean confirm(final CardView c, final String question, final boolean defaultIsYes, final String[] options) {
+        return FOptionPane.showCardOptionDialog(c, question, "", SOptionPane.INFORMATION_ICON, options, defaultIsYes ? 1 : 0) == 1;
+    }
+
+    @Override
+    public <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display) {
+        return GuiBase.getInterface().getChoices(message, min, max, choices, selected, display);
+    }
+
+    @Override
+    public <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax, final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode) {
+        return GuiBase.getInterface().order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices);
+    }
+
+    @Override
+    public List<PaperCard> sideboard(final CardPool sideboard, final CardPool main) {
+        return new WaitCallback<List<PaperCard>>() {
+            @Override
+            public void run() {
+                FSideboardDialog sideboardDialog = new FSideboardDialog(sideboard, main, this);
+                sideboardDialog.show();
+            }
+        }.invokeAndWait();
+    }
+
+    @Override
+    public GameEntityView chooseSingleEntityForEffect(final String title, final FCollectionView<? extends GameEntity> optionList, final DelayedReveal delayedReveal, final boolean isOptional, final PlayerControllerHuman controller) {
+        controller.tempShow(optionList);
+        final List<GameEntityView> choiceList = GameEntityView.getEntityCollection(optionList);
+
+        if (delayedReveal == null || Iterables.isEmpty(delayedReveal.getCards())) {
+            if (isOptional) {
+                return SGuiChoose.oneOrNone(title, choiceList);
+            }
+            return SGuiChoose.one(title, choiceList);
+        }
+
+        controller.tempShow(delayedReveal.getCards());
+        final List<CardView> revealList = CardView.getCollection(delayedReveal.getCards());
+        final String revealListCaption = StringUtils.capitalize(MessageUtil.formatMessage("{player's} " + delayedReveal.getZone().name(), controller.getPlayer(), delayedReveal.getOwner()));
+        final FImage revealListImage = MatchController.getView().getPlayerPanels().values().iterator().next().getZoneTab(delayedReveal.getZone()).getIcon();
+
+        //use special dialog for choosing card and offering ability to see all revealed cards at the same time 
+        return new WaitCallback<GameEntityView>() {
+            @Override
+            public void run() {
+                GameEntityPicker picker = new GameEntityPicker(title, choiceList, revealList, revealListCaption, revealListImage, isOptional, this);
+                picker.show();
+            }
+        }.invokeAndWait();
+    }
+
+    @Override
+    public void setCard(final CardView card) {
+        // doesn't need to do anything
+    }
+
+    @Override
+    public void setPlayerAvatar(final LobbyPlayer player, final IHasIcon ihi) {
+        avatarImages.put(player.getName(), ImageCache.getIcon(ihi));
+    }
+
+    @Override
+    public boolean isUiSetToSkipPhase(final PlayerView playerTurn, final PhaseType phase) {
+        return !view.stopAtPhase(playerTurn, phase);
+    }
+
 }

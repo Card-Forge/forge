@@ -450,7 +450,7 @@ public class HumanPlay {
                     }
                     if (typeChoices.size() > 1) {
                         String cprompt = "Select type counters to remove";
-                        counterType = SGuiChoose.one(cprompt, typeChoices);
+                        counterType = controller.getGui().one(cprompt, typeChoices);
                     }
                     else {
                         counterType = typeChoices.get(0);

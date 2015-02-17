@@ -8,7 +8,6 @@ import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.game.player.RegisteredPlayer;
 
-
 public enum GameType {
     Sealed          (DeckFormat.Limited, true, true, true, "Sealed", ""),
     Draft           (DeckFormat.Limited, true, true, true, "Draft", ""),
@@ -21,9 +20,9 @@ public enum GameType {
     Vanguard        (DeckFormat.Vanguard, true, true, true, "Vanguard", "Each player has a special \"Avatar\" card that affects the game."),
     Commander       (DeckFormat.Commander, false, false, false, "Commander", "Each player has a legendary \"General\" card which can be cast at any time and determines deck colors."),
     TinyLeaders     (DeckFormat.TinyLeaders, false, false, false, "Tiny Leaders", "Each player has a legendary \"General\" card which can be cast at any time and determines deck colors. Each card must have CMC less than 4."),
-    Planechase      (DeckFormat.Planechase, false, false, true, "Planechase", "Plane cards apply global effects. Plane card changed when a player rolls \"Chaos\" on the planar die."),
-    Archenemy       (DeckFormat.Archenemy, false, false, true, "Archenemy", "One player is the Archenemy and can play scheme cards."),
-    ArchenemyRumble (DeckFormat.Archenemy, false, false, true, "Archenemy Rumble", "All players are Archenemies and can play scheme cards."),
+    Planechase      (DeckFormat.Planechase, false, false, true, "Planechase", "Plane cards apply global effects. The Plane card changes when a player rolls \"Planeswalk\" on the planar die."),
+    Archenemy       (DeckFormat.Archenemy, false, false, true, "Archenemy", "One player is the Archenemy and fights the other players by playing Scheme cards."),
+    ArchenemyRumble (DeckFormat.Archenemy, false, false, true, "Archenemy Rumble", "All players are Archenemies and can play Scheme cards."),
     MomirBasic      (DeckFormat.Constructed, false, false, false, "Momir Basic", "Each player has a deck containing 60 basic lands and the Momir Vig avatar.", new Function<RegisteredPlayer, Deck>() {
         @Override
         public Deck apply(RegisteredPlayer player) {

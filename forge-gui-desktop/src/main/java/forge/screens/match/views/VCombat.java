@@ -31,17 +31,17 @@ import net.miginfocom.swing.MigLayout;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VCombat implements IVDoc<CCombat> {
-    /** */
-    SINGLETON_INSTANCE;
+public class VCombat implements IVDoc<CCombat> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
     private final DragTab tab = new DragTab("Combat");
-    
-    final SkinnedTextArea tar = new SkinnedTextArea();
 
-    private VCombat() {
+    private final SkinnedTextArea tar = new SkinnedTextArea();
+
+    private final CCombat controller;
+    public VCombat(final CCombat controller) {
+        this.controller = controller;
         tar.setOpaque(false);
         tar.setBorder(new FSkin.MatteSkinBorder(0, 0, 0, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
         tar.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
@@ -98,7 +98,7 @@ public enum VCombat implements IVDoc<CCombat> {
      */
     @Override
     public CCombat getLayoutControl() {
-        return CCombat.SINGLETON_INSTANCE;
+        return controller;
     }
 
     //========= Observer update methods

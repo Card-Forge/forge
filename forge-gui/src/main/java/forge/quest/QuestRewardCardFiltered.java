@@ -14,7 +14,7 @@ import java.util.List;
  * Allows the player to choose a card from a predicate-filtered list of cards.
  *
  */
-public class QuestRewardCardFiltered extends QuestRewardCard implements IQuestRewardCard {
+public class QuestRewardCardFiltered extends QuestRewardCard {
     private final String description;
     private final Predicate<PaperCard> predicates;
 

@@ -6,9 +6,11 @@ import com.badlogic.gdx.math.Vector2;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.assets.FSkin;
 import forge.assets.FSkinFont;
 import forge.assets.FImage;
 import forge.assets.FSkinImage;
+import forge.assets.FSkinProp;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.card.CardRenderer.CardStackPosition;
@@ -16,6 +18,7 @@ import forge.screens.match.views.VPrompt;
 import forge.toolbox.FEvent.*;
 import forge.util.Callback;
 import forge.util.Utils;
+import forge.util.WaitCallback;
 import forge.game.card.CardView;
 
 public class FOptionPane extends FDialog {
@@ -92,6 +95,15 @@ public class FOptionPane extends FDialog {
     public static void showOptionDialog(String message, String title, FImage icon, String[] options, int defaultOption, final Callback<Integer> callback) {
         final FOptionPane optionPane = new FOptionPane(message, title, icon, null, options, defaultOption, callback);
         optionPane.show();
+    }
+
+    public static int showCardOptionDialog(final CardView card, final String message, final String title, final FSkinProp icon, final String[] options, final int defaultOption) {
+        return new WaitCallback<Integer>() {
+            @Override
+            public void run() {
+                FOptionPane.showCardOptionDialog(card, message, title, icon == null ? null : FSkin.getImages().get(icon), options, defaultOption, this);
+            }
+        }.invokeAndWait();
     }
 
     public static void showCardOptionDialog(final CardView card, String message, String title, FImage icon, String[] options, int defaultOption, final Callback<Integer> callback) {

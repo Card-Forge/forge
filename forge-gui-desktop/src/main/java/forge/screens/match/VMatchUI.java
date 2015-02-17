@@ -1,19 +1,27 @@
 package forge.screens.match;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.SwingUtilities;
+
+import forge.Singletons;
 import forge.game.GameView;
-import forge.gui.framework.*;
-import forge.match.MatchUtil;
+import forge.gui.framework.DragCell;
+import forge.gui.framework.EDocID;
+import forge.gui.framework.FScreen;
+import forge.gui.framework.IVTopLevelUI;
+import forge.gui.framework.SRearrangingUtil;
+import forge.gui.framework.VEmptyDoc;
 import forge.properties.ForgePreferences;
-import forge.screens.match.views.*;
+import forge.screens.match.views.VCommand;
+import forge.screens.match.views.VDev;
+import forge.screens.match.views.VField;
+import forge.screens.match.views.VHand;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FButton;
 import forge.view.FView;
-
-import javax.swing.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /** 
  * Top level view class for match UI drag layout.<br>
@@ -22,26 +30,16 @@ import java.util.List;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VMatchUI implements IVTopLevelUI {
-    SINGLETON_INSTANCE;
-
+public class VMatchUI implements IVTopLevelUI {
     private List<VCommand> lstCommands = new ArrayList<VCommand>();
     private List<VField> lstFields = new ArrayList<VField>();
     private List<VHand> lstHands = new ArrayList<VHand>();
 
     // Other instantiations
-    private boolean wasClosed;
-    private final CMatchUI control = null;
+    private final CMatchUI control;
 
-    private VMatchUI() {
-        createEmptyDocs();
-    }
-
-    private void createEmptyDocs() {
-    	 // Create empty docs for all slots
-    	for (int i = 0; i < 8; i++) EDocID.Fields[i].setDoc(new VEmptyDoc(EDocID.Fields[i]));
-        for (int i = 0; i < 8; i++) EDocID.Commands[i].setDoc(new VEmptyDoc(EDocID.Commands[i]));
-        for (int i = 0; i < 8; i++) EDocID.Hands[i].setDoc(new VEmptyDoc(EDocID.Hands[i]));
+    VMatchUI(final CMatchUI control) {
+        this.control = control;
     }
 
     @Override
@@ -51,36 +49,28 @@ public enum VMatchUI implements IVTopLevelUI {
     @Override
     public void populate() {
         // Dev mode disabled? Remove from parent cell if exists.
+        final VDev vDev = getControl().getCDev().getView();
         if (!ForgePreferences.DEV_MODE) {
-            if (VDev.SINGLETON_INSTANCE.getParentCell() != null) {
-                final DragCell parent = VDev.SINGLETON_INSTANCE.getParentCell();
-                parent.removeDoc(VDev.SINGLETON_INSTANCE);
-                VDev.SINGLETON_INSTANCE.setParentCell(null);
+            if (vDev.getParentCell() != null) {
+                final DragCell parent = vDev.getParentCell();
+                parent.removeDoc(vDev);
+                vDev.setParentCell(null);
 
                 // If dev mode was first tab, the new first tab needs re-selecting.
                 if (parent.getDocs().size() > 0) {
                     parent.setSelected(parent.getDocs().get(0));
                 }
             }
-        }
-        // Dev mode enabled? May already by added, or put in message cell by default.
-        else {
-            if (VDev.SINGLETON_INSTANCE.getParentCell() == null) {
-                VPrompt.SINGLETON_INSTANCE.getParentCell().addDoc(VDev.SINGLETON_INSTANCE);
-            }
+        } else if (vDev.getParentCell() == null) {
+            // Dev mode enabled? May already by added, or put in message cell by default.
+            getControl().getCPrompt().getView().getParentCell().addDoc(vDev);
         }
 
-        //Clear previous match views if screen was previously closed
-        if (wasClosed) {
-            wasClosed = false;
-        }
-        else { //focus first enabled Prompt button if returning to match screen
-            if (getBtnOK().isEnabled()) {
-                getBtnOK().requestFocusInWindow();
-            }
-            else if (getBtnCancel().isEnabled()) {
-                getBtnCancel().requestFocusInWindow();
-            }
+        //focus first enabled Prompt button if returning to match screen
+        if (getBtnOK().isEnabled()) {
+            getBtnOK().requestFocusInWindow();
+        } else if (getBtnCancel().isEnabled()) {
+            getBtnCancel().requestFocusInWindow();
         }
 
         // Add extra players alternatively to existing user/AI field panels.
@@ -150,18 +140,18 @@ public enum VMatchUI implements IVTopLevelUI {
     }
 
     public FButton getBtnCancel() {
-        return VPrompt.SINGLETON_INSTANCE.getBtnCancel();
+        return getControl().getCPrompt().getView().getBtnCancel();
     }
 
     public FButton getBtnOK() {
-        return VPrompt.SINGLETON_INSTANCE.getBtnOK();
+        return getControl().getCPrompt().getView().getBtnOK();
     }
 
     public List<VCommand> getCommandViews() {
         return lstCommands;
     }
 
-    public void setCommandViews(List<VCommand> lstCommands0) {
+    public void setCommandViews(final List<VCommand> lstCommands0) {
         this.lstCommands = lstCommands0;
     }
 
@@ -170,22 +160,25 @@ public enum VMatchUI implements IVTopLevelUI {
     }
 
     @Override
-    public boolean onSwitching(FScreen fromScreen, FScreen toScreen) {
+    public boolean onSwitching(final FScreen fromScreen, final FScreen toScreen) {
         return true;
     }
 
     @Override
-    public boolean onClosing(FScreen screen) {
-        final GameView gameView = MatchUtil.getGameView();
+    public boolean onClosing(final FScreen screen) {
+        if (!Singletons.getControl().getCurrentScreen().equals(screen)) {
+            Singletons.getControl().setCurrentScreen(screen);
+        }
+
+        final GameView gameView = control.getGameView();
         if (gameView != null && !gameView.isGameOver()) {
-            MatchUtil.concede();
+            control.concede();
             return false; //delay hiding tab even if concede successful
         }
 
         //switch back to menus music when closing screen
         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
 
-        wasClosed = true;
         return true;
     }
 }

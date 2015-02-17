@@ -45,8 +45,8 @@ public class GauntletWinLose extends ControlWinLose {
      * @param view0 ViewWinLose object
      * @param match
      */
-    public GauntletWinLose(final ViewWinLose view0, final GameView game0) {
-        super(view0, game0);
+    public GauntletWinLose(final ViewWinLose view0, final GameView game0, final CMatchUI matchUI) {
+        super(view0, game0, matchUI);
         controller = new GauntletWinLoseController(view0, game0) {
             @Override
             protected void showOutcome(String message1, String message2, FSkinProp icon, List<String> lstEventNames, List<String> lstEventRecords, int len, int num) {

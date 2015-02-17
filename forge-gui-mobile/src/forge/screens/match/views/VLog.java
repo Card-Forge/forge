@@ -11,10 +11,10 @@ import forge.assets.TextRenderer;
 import forge.assets.FSkinColor.Colors;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
-import forge.match.MatchUtil;
 import forge.menu.FDropDown;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
+import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
 
@@ -45,7 +45,7 @@ public class VLog extends FDropDown {
         clear();
 
         GameLogEntryType logVerbosityFilter = GameLogEntryType.valueOf(FModel.getPreferences().getPref(FPref.DEV_LOG_ENTRY_TYPE));
-        List<GameLogEntry> logEntrys = MatchUtil.getGameView().getGameLog().getLogEntries(logVerbosityFilter);
+        List<GameLogEntry> logEntrys = MatchController.instance.getGameView().getGameLog().getLogEntries(logVerbosityFilter);
 
         LogEntryDisplay logEntryDisplay;
         float width = maxWidth - getMenuTab().screenPos.x; //stretch from tab to edge of screen

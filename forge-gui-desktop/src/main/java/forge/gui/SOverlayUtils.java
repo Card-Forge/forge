@@ -1,22 +1,25 @@
 package forge.gui;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.FocusManager;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.assets.FSkinProp;
-import forge.screens.match.TargetingOverlay;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOverlay;
 import forge.toolbox.FPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedButton;
 import forge.toolbox.FSkin.SkinnedLabel;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.FocusManager;
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /** 
  * All overlay interaction is handled here.
@@ -148,14 +151,4 @@ public final class SOverlayUtils {
         _overlayHasFocus = false;
     }
 
-    public static void showTargetingOverlay() {
-        TargetingOverlay.SINGLETON_INSTANCE.getPanel().setVisible(true);
-    }
-
-    /**
-     * Removes child components and closes overlay.
-     */
-    public static void hideTargetingOverlay() {
-        TargetingOverlay.SINGLETON_INSTANCE.getPanel().setVisible(false);
-    }
 }

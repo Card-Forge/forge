@@ -47,7 +47,7 @@ public class SimulateMatch {
         pp.add(new RegisteredPlayer(d1).setPlayer(GamePlayerUtil.createAiPlayer("Ai-" + d1.getName(), 0)));
         pp.add(new RegisteredPlayer(d2).setPlayer(GamePlayerUtil.createAiPlayer("Ai_" + d2.getName(), 1)));
         GameRules rules = new GameRules(GameType.Constructed);
-        Match mc = new Match(rules, pp);
+        Match mc = new Match(rules, pp, "Test");
         for (int iGame = 0; iGame < nGames; iGame++) {
             simulateSingleMatch(mc, iGame);
         }

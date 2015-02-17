@@ -17,101 +17,50 @@
  */
 package forge.screens.match.controllers;
 
-import java.io.File;
+import java.util.Iterator;
 
-import forge.FThreads;
+import com.google.common.collect.Iterators;
+
 import forge.Singletons;
 import forge.UiCommand;
 import forge.assets.FSkinProp;
-import forge.deck.Deck;
-import forge.deckchooser.FDeckViewer;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SLayoutIO;
-import forge.match.MatchUtil;
 import forge.model.FModel;
-import forge.player.GamePlayerUtil;
-import forge.properties.FileLocation;
 import forge.properties.ForgePreferences.FPref;
+import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VDock;
 import forge.toolbox.FSkin;
-import forge.toolbox.SaveOpenDialog;
-import forge.toolbox.SaveOpenDialog.Filetypes;
-import forge.view.FView;
 
 /**
  * Controls the dock panel in the match UI.
  * 
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
-public enum CDock implements ICDoc {
-    /** */
-    SINGLETON_INSTANCE;
+public class CDock implements ICDoc {
 
-    private int arcState;
+    private ArcState arcState;
+    private final Iterator<ArcState> arcStateIterator = Iterators.cycle(ArcState.values());
+
+    private final CMatchUI matchUI;
+    private final VDock view;
+    public CDock(final CMatchUI matchUI) {
+        this.matchUI = matchUI;
+        this.view = new VDock(this);
+    }
+
+    public enum ArcState { OFF, MOUSEOVER, ON; }
+
+    public VDock getView() {
+        return view;
+    }
 
     /**
      * End turn.
      */
     public void endTurn() {
-        CPrompt.SINGLETON_INSTANCE.passPriorityUntilEndOfTurn();
-    }
-
-    public void revertLayout() {
-        SOverlayUtils.genericOverlay();
-        FView.SINGLETON_INSTANCE.getPnlContent().removeAll();
-
-        FThreads.invokeInEdtLater(new Runnable(){
-            @Override public void run() {
-                SLayoutIO.loadLayout(null);
-                SOverlayUtils.hideOverlay();
-            }
-        });
-    }
-
-    public void saveLayout() {
-        final SaveOpenDialog dlgSave = new SaveOpenDialog();
-        final FileLocation layoutFile = Singletons.getControl().getCurrentScreen().getLayoutFile();
-        final File defFile = layoutFile != null ? new File(layoutFile.userPrefLoc) : null;
-        final File saveFile = dlgSave.SaveDialog(defFile, Filetypes.LAYOUT);
-        if (saveFile != null) {
-            SLayoutIO.saveLayout(saveFile);
-        }
-    }
-
-    public void openLayout() {
-        SOverlayUtils.genericOverlay();
-
-        final SaveOpenDialog dlgOpen = new SaveOpenDialog();
-        final FileLocation layoutFile = Singletons.getControl().getCurrentScreen().getLayoutFile();
-        final File defFile = layoutFile != null ? new File(layoutFile.userPrefLoc) : null;
-        final File loadFile = dlgOpen.OpenDialog(defFile, Filetypes.LAYOUT);
-
-        if (loadFile != null) {
-            FView.SINGLETON_INSTANCE.getPnlContent().removeAll();
-            // let it redraw everything first
-
-            FThreads.invokeInEdtLater(new Runnable() {
-                @Override
-                public void run() {
-                    if (loadFile != null) {
-                        SLayoutIO.loadLayout(loadFile);
-                        SLayoutIO.saveLayout(null);
-                    }
-                    SOverlayUtils.hideOverlay();
-                }
-            });
-        }
-    }
-
-    /**
-     * View deck list.
-     */
-    public void viewDeckList() {
-        final Deck deck = MatchUtil.getGameView().getDeck(GamePlayerUtil.getGuiPlayer());
-        if (deck != null) {
-            FDeckViewer.show(deck);
-        }
+        matchUI.getCPrompt().passPriorityUntilEndOfTurn();
     }
 
     /**
@@ -120,46 +69,45 @@ public enum CDock implements ICDoc {
      * 1 = draw on card mouseover<br>
      * 2 = always draw
      */
-    public int getArcState() {
+    public ArcState getArcState() {
         return arcState;
     }
 
     /** @param state0 int */
     private void refreshArcStateDisplay() {
         switch (arcState) {
-        case 0:
-            VDock.SINGLETON_INSTANCE.getBtnTargeting().setToolTipText("Targeting arcs: Off");
-            VDock.SINGLETON_INSTANCE.getBtnTargeting().setIcon(FSkin.getIcon(FSkinProp.ICO_ARCSOFF));
-            VDock.SINGLETON_INSTANCE.getBtnTargeting().repaintSelf();
+        case OFF:
+            view.getBtnTargeting().setToolTipText("Targeting arcs: Off");
+            view.getBtnTargeting().setIcon(FSkin.getIcon(FSkinProp.ICO_ARCSOFF));
+            view.getBtnTargeting().repaintSelf();
             break;
-        case 1:
-            VDock.SINGLETON_INSTANCE.getBtnTargeting().setToolTipText("Targeting arcs: Card mouseover");
-            VDock.SINGLETON_INSTANCE.getBtnTargeting().setIcon(FSkin.getIcon(FSkinProp.ICO_ARCSHOVER));
-            VDock.SINGLETON_INSTANCE.getBtnTargeting().repaintSelf();
+        case MOUSEOVER:
+            view.getBtnTargeting().setToolTipText("Targeting arcs: Card mouseover");
+            view.getBtnTargeting().setIcon(FSkin.getIcon(FSkinProp.ICO_ARCSHOVER));
+            view.getBtnTargeting().repaintSelf();
             break;
-        default:
-            VDock.SINGLETON_INSTANCE.getBtnTargeting().setIcon(FSkin.getIcon(FSkinProp.ICO_ARCSON));
-            VDock.SINGLETON_INSTANCE.getBtnTargeting().setToolTipText("Targeting arcs: Always on");
-            VDock.SINGLETON_INSTANCE.getBtnTargeting().repaintSelf();
+        case ON:
+            view.getBtnTargeting().setToolTipText("Targeting arcs: Always on");
+            view.getBtnTargeting().setIcon(FSkin.getIcon(FSkinProp.ICO_ARCSON));
+            view.getBtnTargeting().repaintSelf();
             break;
         }
 
-        FModel.getPreferences().setPref(FPref.UI_TARGETING_OVERLAY, String.valueOf(arcState));
-        //FModel.SINGLETON_INSTANCE.getPreferences().save();
+        FModel.getPreferences().setPref(FPref.UI_TARGETING_OVERLAY, String.valueOf(arcState.ordinal()));
+        FModel.getPreferences().save();
     }
 
     /** Toggle targeting overlay painting. */
     public void toggleTargeting() {
-        arcState++;
-
-        if (arcState == 3) { arcState = 0; }
+        arcState = arcStateIterator.next();
 
         refreshArcStateDisplay();
-        FView.SINGLETON_INSTANCE.getFrame().repaint(); // repaint the match UI
+        Singletons.getView().getFrame().repaint(); // repaint the match UI
     }
 
-    public void setArcState(int state) {
+    public void setArcState(final ArcState state) {
         arcState = state;
+        while (arcStateIterator.next() != arcState) { /* Put the iterator to the correct value */ };
     }
 
     /* (non-Javadoc)
@@ -170,6 +118,10 @@ public enum CDock implements ICDoc {
         return null;
     }
 
+    @Override
+    public void register() {
+    }
+
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#initialize()
      */
@@ -178,68 +130,58 @@ public enum CDock implements ICDoc {
     public void initialize() {
         final String temp = FModel.getPreferences()
                 .getPref(FPref.UI_TARGETING_OVERLAY);
-
-        // Old preference used boolean; new preference needs 0-1-2
-        // (none, mouseover, solid).  Can remove this conditional
-        // statement after a while...Doublestrike 17-10-12
-        if (temp.equals("0") || temp.equals("1")) {
-            arcState = Integer.valueOf(temp);
-        }
-        else {
-            arcState = 2;
-        }
-
+        setArcState(ArcState.values()[Integer.valueOf(temp)]);
         refreshArcStateDisplay();
 
-        VDock.SINGLETON_INSTANCE.getBtnConcede().setCommand(new UiCommand() {
+        view.getBtnConcede().setCommand(new UiCommand() {
             @Override
             public void run() {
-                MatchUtil.concede();
+                matchUI.concede();
             }
         });
-        VDock.SINGLETON_INSTANCE.getBtnSettings().setCommand(new UiCommand() {
+        view.getBtnSettings().setCommand(new UiCommand() {
             @Override
             public void run() {
                 SOverlayUtils.showOverlay();
             }
         });
-        VDock.SINGLETON_INSTANCE.getBtnEndTurn().setCommand(new UiCommand() {
+        view.getBtnEndTurn().setCommand(new UiCommand() {
             @Override
             public void run() {
                 endTurn();
             }
         });
-        VDock.SINGLETON_INSTANCE.getBtnViewDeckList().setCommand(new UiCommand() {
+        view.getBtnViewDeckList().setCommand(new UiCommand() {
             @Override
             public void run() {
-                viewDeckList();
+                matchUI.viewDeckList();
             }
         });
-        VDock.SINGLETON_INSTANCE.getBtnRevertLayout().setCommand(new UiCommand() {
+        view.getBtnRevertLayout().setCommand(new UiCommand() {
             @Override
             public void run() {
-                revertLayout();
+                SLayoutIO.revertLayout();
             }
         });
-        VDock.SINGLETON_INSTANCE.getBtnOpenLayout().setCommand(new UiCommand() {
+        view.getBtnOpenLayout().setCommand(new UiCommand() {
             @Override
             public void run() {
-                openLayout();
+                SLayoutIO.openLayout();
             }
         });
-        VDock.SINGLETON_INSTANCE.getBtnSaveLayout().setCommand(new UiCommand() {
+        view.getBtnSaveLayout().setCommand(new UiCommand() {
             @Override
             public void run() {
-                saveLayout();
+                SLayoutIO.saveLayout();
             }
         });
-        VDock.SINGLETON_INSTANCE.getBtnAlphaStrike().setCommand(new UiCommand() {
+        view.getBtnAlphaStrike().setCommand(new UiCommand() {
             @Override
             public void run() {
-                MatchUtil.getHumanController().alphaStrike();
+                matchUI.getGameController().alphaStrike();
             }
         });
-        VDock.SINGLETON_INSTANCE.getBtnTargeting().setCommand(new UiCommand() {
+        view.getBtnTargeting().setCommand(new UiCommand() {
             @Override
             public void run() {
                 toggleTargeting();

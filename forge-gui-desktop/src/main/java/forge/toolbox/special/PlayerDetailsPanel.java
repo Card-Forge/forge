@@ -21,7 +21,6 @@ import forge.assets.FSkinProp;
 import forge.card.MagicColor;
 import forge.game.player.PlayerView;
 import forge.gui.ForgeAction;
-import forge.screens.match.controllers.CPlayers;
 import forge.toolbox.FLabel;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FSkin;
@@ -29,17 +28,17 @@ import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinnedPanel;
 
 public class PlayerDetailsPanel extends JPanel {
-    private static final long serialVersionUID = 8444559244193214459L;
-    
-    private PlayerView player;
-    
+    private static final long serialVersionUID = -6531759554646891983L;
+
+    private final PlayerView player;
+
     // Info labels
-    private FLabel lblHand = new DetailLabel(FSkinProp.IMG_ZONE_HAND, "99", "Cards in hand");
-    private FLabel lblGraveyard = new DetailLabel(FSkinProp.IMG_ZONE_GRAVEYARD, "99", "Cards in graveyard");
-    private FLabel lblLibrary = new DetailLabel(FSkinProp.IMG_ZONE_LIBRARY, "99", "Cards in library");
-    private FLabel lblExile = new DetailLabel(FSkinProp.IMG_ZONE_EXILE, "99", "Exiled cards");
-    private FLabel lblFlashback = new DetailLabel(FSkinProp.IMG_ZONE_FLASHBACK, "99", "Flashback cards");
-    private FLabel lblPoison = new DetailLabel(FSkinProp.IMG_ZONE_POISON, "99", "Poison counters");
+    private final FLabel lblHand = new DetailLabel(FSkinProp.IMG_ZONE_HAND, "99", "Cards in hand");
+    private final FLabel lblGraveyard = new DetailLabel(FSkinProp.IMG_ZONE_GRAVEYARD, "99", "Cards in graveyard");
+    private final FLabel lblLibrary = new DetailLabel(FSkinProp.IMG_ZONE_LIBRARY, "99", "Cards in library");
+    private final FLabel lblExile = new DetailLabel(FSkinProp.IMG_ZONE_EXILE, "99", "Exiled cards");
+    private final FLabel lblFlashback = new DetailLabel(FSkinProp.IMG_ZONE_FLASHBACK, "99", "Flashback cards");
+    private final FLabel lblPoison = new DetailLabel(FSkinProp.IMG_ZONE_POISON, "99", "Poison counters");
     private final List<Pair<DetailLabel, Byte>> manaLabels = new ArrayList<Pair<DetailLabel, Byte>>();
 
     public PlayerDetailsPanel(final PlayerView player0) {
@@ -129,9 +128,6 @@ public class PlayerDetailsPanel extends JPanel {
      * @param p0 &emsp; {@link forge.game.player.Player}
      */
     public void updateDetails() {
-        // "Players" panel update
-        CPlayers.SINGLETON_INSTANCE.update();
-
         // Poison/life
         getLblPoison().setText("" + player.getPoisonCounters());
         if (player.getPoisonCounters() < 8) {

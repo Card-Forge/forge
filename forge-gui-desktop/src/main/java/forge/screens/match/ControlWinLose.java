@@ -9,7 +9,8 @@ import forge.Singletons;
 import forge.game.GameView;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.FScreen;
-import forge.match.MatchUtil;
+import forge.interfaces.IGameController;
+import forge.match.NextGameDecision;
 
 /** 
  * Default controller for a ViewWinLose object. This class can
@@ -20,12 +21,14 @@ import forge.match.MatchUtil;
 public class ControlWinLose {
     private final ViewWinLose view;
     protected final GameView lastGame;
+    protected final CMatchUI matchUI;
 
     /** @param v &emsp; ViewWinLose
      * @param match */
-    public ControlWinLose(final ViewWinLose v, final GameView game0) {
+    public ControlWinLose(final ViewWinLose v, final GameView game0, final CMatchUI matchUI) {
         this.view = v;
         this.lastGame = game0;
+        this.matchUI = matchUI;
         addListeners();
     }
 
@@ -58,21 +61,27 @@ public class ControlWinLose {
     public void actionOnContinue() {
         SOverlayUtils.hideOverlay();
         saveOptions();
-        MatchUtil.continueMatch();
+        for (final IGameController controller : matchUI.getGameControllers()) {
+            controller.nextGameDecision(NextGameDecision.CONTINUE);
+        }
     }
 
     /** Action performed when "restart" button is pressed in default win/lose UI. */
     public void actionOnRestart() {
         SOverlayUtils.hideOverlay();
         saveOptions();
-        MatchUtil.restartMatch();
+        for (final IGameController controller : matchUI.getGameControllers()) {
+            controller.nextGameDecision(NextGameDecision.NEW);
+        }
     }
 
     /** Action performed when "quit" button is pressed in default win/lose UI. */
     public void actionOnQuit() {
         // Reset other stuff
         saveOptions();
-        MatchUtil.endCurrentGame();
+        for (final IGameController controller : matchUI.getGameControllers()) {
+            controller.nextGameDecision(NextGameDecision.QUIT);
+        }
         Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
         SOverlayUtils.hideOverlay();
     }
@@ -82,7 +91,7 @@ public class ControlWinLose {
      * with other game modes.
      */
     public void saveOptions() {
-        CMatchUI.SINGLETON_INSTANCE.writeMatchPreferences();
+        matchUI.writeMatchPreferences();
     }
 
     /**

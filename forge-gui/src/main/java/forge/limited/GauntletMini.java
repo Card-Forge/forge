@@ -20,10 +20,11 @@ package forge.limited;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.GuiBase;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
-import forge.match.MatchUtil;
+import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.Aggregates;
@@ -38,6 +39,7 @@ import forge.util.Aggregates;
  * @since 1.2.xx
  */
 public class GauntletMini {
+    private HostedMatch hostedMatch = null;
     private int rounds;
     private Deck humanDeck;
     private int currentRound;
@@ -76,14 +78,17 @@ public class GauntletMini {
      * Advances the tournament to the next round.
      */
     public void nextRound() {
-        // System.out.println("Moving from round " + currentRound + " to round " +  currentRound + 1 + " of " + rounds);
+        if (hostedMatch == null) {
+            return;
+        }
+
         if (currentRound >= rounds) {
             currentRound = rounds - 1;
             return;
         }
 
         currentRound++;
-        MatchUtil.endCurrentGame();
+        hostedMatch.endCurrentGame();
         startRound();
     }
 
@@ -129,18 +134,19 @@ public class GauntletMini {
         }
 
         resetCurrentRound();
-        startRound();
     }
 
     /**
      * Starts the tournament.
      */
     private void startRound() {
-        List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
-        starter.add(new RegisteredPlayer(humanDeck).setPlayer(GamePlayerUtil.getGuiPlayer()));
+        final List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
+        final RegisteredPlayer human = new RegisteredPlayer(humanDeck).setPlayer(GamePlayerUtil.getGuiPlayer());
+        starter.add(human);
         starter.add(aiOpponents.get(currentRound - 1).setPlayer(GamePlayerUtil.createAiPlayer()));
 
-        MatchUtil.startMatch(gauntletType, starter);
+        final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
+        hostedMatch.startMatch(gauntletType, null, starter, human, GuiBase.getInterface().getNewGuiGame());
     }
 
     /**

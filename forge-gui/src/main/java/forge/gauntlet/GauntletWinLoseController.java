@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
+import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.assets.FSkinProp;
 import forge.deck.Deck;
@@ -12,13 +13,14 @@ import forge.game.GameView;
 import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IButton;
 import forge.interfaces.IWinLoseView;
-import forge.match.MatchUtil;
+import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 
 public abstract class GauntletWinLoseController {
-    private final GameView lastGame;
+    private HostedMatch hostedMatch = null;
     private final IWinLoseView<? extends IButton> view;
+    private final GameView lastGame;
 
     public GauntletWinLoseController(IWinLoseView<? extends IButton> view0, final GameView game0) {
         view = view0;
@@ -111,17 +113,21 @@ public abstract class GauntletWinLoseController {
     public final boolean actionOnContinue() {
         if (lastGame.isMatchOver()) {
             // To change the AI deck, we have to create a new match.
-            GauntletData gd = FModel.getGauntletData();
-            Deck aiDeck = gd.getDecks().get(gd.getCompleted());
-            List<RegisteredPlayer> players = Lists.newArrayList();
-            players.add(new RegisteredPlayer(gd.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer()));
+            final GauntletData gd = FModel.getGauntletData();
+            final RegisteredPlayer human = new RegisteredPlayer(gd.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
+            final Deck aiDeck = gd.getDecks().get(gd.getCompleted());
+            final List<RegisteredPlayer> players = Lists.newArrayList();
+            players.add(human);
             players.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
 
             view.hide();
             saveOptions();
-            MatchUtil.endCurrentGame();
+            if (hostedMatch != null) {
+                hostedMatch.endCurrentGame();
+            }
 
-            MatchUtil.startMatch(GameType.Gauntlet, players);
+            hostedMatch = GuiBase.getInterface().hostMatch();
+            hostedMatch.startMatch(GameType.Gauntlet, null, players, human, GuiBase.getInterface().getNewGuiGame());
             return true;
         }
         return false;

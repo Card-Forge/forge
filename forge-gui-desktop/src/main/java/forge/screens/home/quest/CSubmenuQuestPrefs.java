@@ -18,6 +18,10 @@ public enum CSubmenuQuestPrefs implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
+    @Override
+    public void register() {
+    }
+
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
      */

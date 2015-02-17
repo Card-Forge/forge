@@ -17,6 +17,18 @@
  */
 package forge.game.card;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -32,18 +44,15 @@ import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameLogEntryType;
-import forge.game.GameView;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.CardCollectionView;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
-import forge.game.player.PlayerView;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
@@ -64,11 +73,6 @@ import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.FCollectionView;
 import forge.util.Lang;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * <p>
@@ -2081,28 +2085,6 @@ public class CardFactoryUtil {
     }
     */
 
-    public static final String getCommanderInfo(final PlayerView originPlayer) {
-        GameView game = GameView.getCurrentGame();
-        if (game == null) { return ""; }
-
-        StringBuilder sb = new StringBuilder();
-        for (PlayerView p : game.getPlayers()) {
-        	final String text;
-            if (p.equals(originPlayer)) {
-            	text = "Commander Damage from own Commander: ";
-            }
-            else {
-            	text = "Commander Damage to " + p.getName() + ": ";
-            }
-
-            int damage = p.getCommanderDamage(originPlayer.getCommander());
-            if (damage > 0) {
-                sb.append(text + damage + "\r\n");
-            }
-        }
-        return sb.toString();
-    }
-
     /**
      * <p>
      * postFactoryKeywords.
@@ -3366,7 +3348,7 @@ public class CardFactoryUtil {
             final String parse = card.getKeywords().get(n);
             final String[] k = parse.split(":");
             final int num = Integer.parseInt(k[1]);
-            UUID triggerSvar = UUID.randomUUID();
+            final String triggerSvar = "DBRipple";
 
             final String actualTrigger = "Mode$ SpellCast | ValidCard$ Card.Self | " +
                     "Execute$ " + triggerSvar + " | Secondary$ True | TriggerDescription$" +

@@ -22,7 +22,6 @@ import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
 import forge.game.Game;
-import forge.match.MatchUtil;
 import forge.player.PlayerControllerHuman;
 
 /**
@@ -35,11 +34,9 @@ import forge.player.PlayerControllerHuman;
  */
 public class InputQueue extends Observable {
     private final BlockingDeque<InputSynchronized> inputStack = new LinkedBlockingDeque<InputSynchronized>();
-    private final InputLockUI inputLock;
     private final Game game;
 
     public InputQueue(final Game game, final InputProxy inputProxy) {
-        inputLock = new InputLockUI(game, this);
         this.game = game;
         addObserver(inputProxy);
     }
@@ -63,11 +60,11 @@ public class InputQueue extends Observable {
     }
 
     public final Input getActualInput(final PlayerControllerHuman controller) {
-        Input topMost = inputStack.peek(); // incoming input to Control
-        if (topMost != null && !controller.getGame().isGameOver()) {
+        final Input topMost = inputStack.peek(); // incoming input to Control
+        if (topMost != null && !game.isGameOver()) {
             return topMost;
         }
-        return inputLock;
+        return new InputLockUI(game, this, controller);
     } // getInput()
 
     // only for debug purposes
@@ -76,23 +73,22 @@ public class InputQueue extends Observable {
     }
 
     public void setInput(final InputSynchronized input) {
-        if (MatchUtil.getHumanCount() > 1) { //update current player if needed
-            MatchUtil.setCurrentPlayer(game.getPlayer(input.getOwner()));
-        }
+        //if (HostedMatch.getHumanCount() > 1) { //update current player if needed
+            //HostedMatch.setCurrentPlayer(game.getPlayer(input.getOwner()));
+        //}
         inputStack.push(input);
-        InputBase.waitForOtherPlayer();
         syncPoint();
         updateObservers();
     }
 
-    public void syncPoint() {
-        synchronized (inputLock) {
+    void syncPoint() {
+        synchronized (this) {
             // acquire and release lock, so that actions from Game thread happen before EDT reads their results
         }
     }
 
-    public void onGameOver(boolean releaseAllInputs) {
-        for (InputSynchronized inp : inputStack) {
+    public void onGameOver(final boolean releaseAllInputs) {
+        for (final InputSynchronized inp : inputStack) {
             inp.relaseLatchWhenGameIsOver();
             if (!releaseAllInputs) {
                 break;

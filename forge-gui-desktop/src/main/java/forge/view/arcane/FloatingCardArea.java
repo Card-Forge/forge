@@ -17,6 +17,19 @@
  */
 package forge.view.arcane;
 
+import java.awt.Component;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import javax.swing.ScrollPaneConstants;
+import javax.swing.Timer;
+
 import forge.Singletons;
 import forge.assets.FSkinProp;
 import forge.game.card.CardView;
@@ -27,7 +40,6 @@ import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
-import forge.screens.match.controllers.CPrompt;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
@@ -37,19 +49,6 @@ import forge.util.Lang;
 import forge.view.FDialog;
 import forge.view.FFrame;
 
-import java.awt.Component;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.Timer;
-
-
 public class FloatingCardArea extends CardArea {
     private static final long serialVersionUID = 1927906492186378596L;
 
@@ -58,17 +57,16 @@ public class FloatingCardArea extends CardArea {
     private static final ForgePreferences prefs = FModel.getPreferences();
     private static final HashMap<Integer, FloatingCardArea> floatingAreas = new HashMap<Integer, FloatingCardArea>();
 
-    private static int getKey(PlayerView player, ZoneType zone) {
+    private static int getKey(final PlayerView player, final ZoneType zone) {
         return 40 * player.getId() + zone.hashCode();
     }
-    public static void show(PlayerView player, ZoneType zone) {
+    public static void show(final CMatchUI matchUI, final PlayerView player, final ZoneType zone) {
         int key = getKey(player, zone);
         FloatingCardArea cardArea = floatingAreas.get(key);
         if (cardArea == null) {
-            cardArea = new FloatingCardArea(player, zone);
+            cardArea = new FloatingCardArea(matchUI, player, zone);
             floatingAreas.put(key, cardArea);
-        }
-        else {
+        } else {
             cardArea.setPlayer(player); //ensure player is updated if needed
         }
         cardArea.showWindow();
@@ -133,8 +131,8 @@ public class FloatingCardArea extends CardArea {
         }
     };
 
-    private FloatingCardArea(PlayerView player0, ZoneType zone0) {
-        super(new FScrollPane(false, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER));
+    private FloatingCardArea(final CMatchUI matchUI, final PlayerView player0, final ZoneType zone0) {
+        super(matchUI, new FScrollPane(false, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER));
         window.add(getScrollPane(), "grow, push");
         getScrollPane().setViewportView(this);
         setOpaque(false);
@@ -264,7 +262,7 @@ public class FloatingCardArea extends CardArea {
             for (final CardView card : cards) {
                 CardPanel cardPanel = getCardPanel(card.getId());
                 if (cardPanel == null) {
-                    cardPanel = new CardPanel(card);
+                    cardPanel = new CardPanel(getMatchUI(), card);
                     cardPanel.setDisplayEnabled(true);
                 }
                 else {
@@ -310,17 +308,17 @@ public class FloatingCardArea extends CardArea {
 
     @Override
     public final void mouseOver(final CardPanel panel, final MouseEvent evt) {
-        CMatchUI.SINGLETON_INSTANCE.setCard(panel.getCard(), evt.isShiftDown());
+        getMatchUI().setCard(panel.getCard(), evt.isShiftDown());
         super.mouseOver(panel, evt);
     }
     @Override
     public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
-        CPrompt.SINGLETON_INSTANCE.selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
+        getMatchUI().getCPrompt().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
         super.mouseLeftClicked(panel, evt);
     }
     @Override
     public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
-        CPrompt.SINGLETON_INSTANCE.selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
+        getMatchUI().getCPrompt().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
         super.mouseRightClicked(panel, evt);
     }
 }

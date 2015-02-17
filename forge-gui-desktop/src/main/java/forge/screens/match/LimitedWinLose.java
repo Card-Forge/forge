@@ -46,8 +46,8 @@ public class LimitedWinLose extends ControlWinLose {
      * @param view0 {@link forge.screens.match.ViewWinLose}
      * @param match {@link forge.game.Match}
      */
-    public LimitedWinLose(final ViewWinLose view0, final GameView game0) {
-        super(view0, game0);
+    public LimitedWinLose(final ViewWinLose view0, final GameView game0, final CMatchUI matchUI) {
+        super(view0, game0, matchUI);
         controller = new LimitedWinLoseController(view0, game0) {
             @Override
             protected void showOutcome(Runnable runnable) {

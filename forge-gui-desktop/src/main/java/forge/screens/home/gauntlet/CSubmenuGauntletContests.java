@@ -1,5 +1,6 @@
 package forge.screens.home.gauntlet;
 
+import forge.GuiBase;
 import forge.UiCommand;
 import forge.deck.Deck;
 import forge.game.GameType;
@@ -8,7 +9,7 @@ import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
-import forge.match.MatchUtil;
+import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 
@@ -51,6 +52,10 @@ public enum CSubmenuGauntletContests implements ICDoc {
         });
     }
 
+    @Override
+    public void register() {
+    }
+
     /* (non-Javadoc)
      * @see forge.gui.home.ICSubmenu#initialize()
      */
@@ -82,8 +87,7 @@ public enum CSubmenuGauntletContests implements ICDoc {
 
         if (gd.getUserDeck() != null) {
             userDeck = gd.getUserDeck();
-        }
-        else {
+        } else {
             userDeck = view.getLstDecks().getPlayer().getDeck();
             gd.setUserDeck(userDeck);
         }
@@ -99,14 +103,15 @@ public enum CSubmenuGauntletContests implements ICDoc {
             }
         });
 
-        Deck aiDeck = gd.getDecks().get(gd.getCompleted());
+        final Deck aiDeck = gd.getDecks().get(gd.getCompleted());
 
-        List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
-
-        starter.add(new RegisteredPlayer(gd.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer()));
+        final List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
+        final RegisteredPlayer human = new RegisteredPlayer(gd.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
+        starter.add(human);
         starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
 
-        MatchUtil.startMatch(GameType.Gauntlet, starter);
+        final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
+        hostedMatch.startMatch(GameType.Gauntlet, null, starter, human, GuiBase.getInterface().getNewGuiGame());
     }
 
     /* (non-Javadoc)

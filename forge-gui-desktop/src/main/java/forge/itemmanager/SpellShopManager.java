@@ -2,6 +2,7 @@ package forge.itemmanager;
 
 import forge.item.InventoryItem;
 import forge.itemmanager.filters.ItemFilter;
+import forge.screens.match.controllers.CDetailPicture;
 
 import javax.swing.*;
 
@@ -11,8 +12,8 @@ import javax.swing.*;
  */
 @SuppressWarnings("serial")
 public final class SpellShopManager extends ItemManager<InventoryItem> {
-    public SpellShopManager(boolean wantUnique0) {
-        super(InventoryItem.class, wantUnique0);
+    public SpellShopManager(final CDetailPicture cDetailPicture, final boolean wantUnique0) {
+        super(InventoryItem.class, cDetailPicture, wantUnique0);
     }
 
     @Override

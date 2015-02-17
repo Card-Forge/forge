@@ -44,7 +44,7 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
     private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Sealed Deck");
 
     private final StartButton btnStart = new StartButton();
-    private final DeckManager lstDecks = new DeckManager(GameType.Sealed);
+    private final DeckManager lstDecks = new DeckManager(GameType.Sealed, null);
 
     private final FLabel lblInfo = new FLabel.Builder()
         .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)

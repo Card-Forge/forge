@@ -21,11 +21,17 @@ import forge.util.Lang;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
-public enum CCombat implements ICDoc {
-    /** */
-    SINGLETON_INSTANCE;
-    
+public class CCombat implements ICDoc {
+
     private CombatView combat;
+    private final VCombat view;
+    public CCombat() {
+        view = new VCombat(this);
+    }
+
+    public VCombat getView() {
+        return view;
+    }
 
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
@@ -33,6 +39,10 @@ public enum CCombat implements ICDoc {
     @Override
     public UiCommand getCommandOnSelect() {
         return null;
+    }
+
+    @Override
+    public void register() {
     }
 
     /* (non-Javadoc)
@@ -49,9 +59,9 @@ public enum CCombat implements ICDoc {
     public void update() {
         final CombatView localCombat = this.combat; // noone will re-assign this from other thread. 
         if (localCombat != null) {
-            VCombat.SINGLETON_INSTANCE.updateCombat(localCombat.getNumAttackers(), getCombatDescription(localCombat));
+            view.updateCombat(localCombat.getNumAttackers(), getCombatDescription(localCombat));
         } else {
-            VCombat.SINGLETON_INSTANCE.updateCombat(0, "");
+            view.updateCombat(0, "");
         }
     }
 

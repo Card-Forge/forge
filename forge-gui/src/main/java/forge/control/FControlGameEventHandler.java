@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -50,24 +51,21 @@ import forge.game.player.PlayerView;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.match.IMatchController;
-import forge.match.MatchUtil;
-import forge.match.input.ButtonUtil;
-import forge.match.input.InputBase;
+import forge.interfaces.IGuiGame;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Lang;
-import forge.util.gui.SGuiChoose;
 import forge.util.maps.MapOfLists;
 
 public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final PlayerControllerHuman humanController;
-    private final HashSet<CardView> cardsUpdate = new HashSet<CardView>();
-    private final HashSet<CardView> cardsRefreshDetails = new HashSet<CardView>();
-    private final HashSet<PlayerView> livesUpdate = new HashSet<PlayerView>();
-    private final HashSet<PlayerView> manaPoolUpdate = new HashSet<PlayerView>();
-    private final ArrayList<Pair<PlayerView, ZoneType>> zonesUpdate = new ArrayList<Pair<PlayerView, ZoneType>>();
+    private final IGuiGame matchController;
+    private final Set<CardView> cardsUpdate = new HashSet<CardView>();
+    private final Set<CardView> cardsRefreshDetails = new HashSet<CardView>();
+    private final Set<PlayerView> livesUpdate = new HashSet<PlayerView>();
+    private final Set<PlayerView> manaPoolUpdate = new HashSet<PlayerView>();
+    private final List<Pair<PlayerView, ZoneType>> zonesUpdate = new ArrayList<Pair<PlayerView, ZoneType>>();
 
     private boolean processEventsQueued, needPhaseUpdate, needCombatUpdate, needStackUpdate, needPlayerControlUpdate;
     private boolean gameOver, gameFinished;
@@ -75,6 +73,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     public FControlGameEventHandler(final PlayerControllerHuman humanController0) {
         humanController = humanController0;
+        matchController = humanController.getGui();
     }
 
     private final Runnable processEvents = new Runnable() {
@@ -82,68 +81,69 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         public void run() {
             processEventsQueued = false;
 
-            IMatchController controller = MatchUtil.getController();
             synchronized (cardsUpdate) {
                 if (!cardsUpdate.isEmpty()) {
-                    MatchUtil.updateCards(cardsUpdate);
+                    for (final CardView c : cardsUpdate) {
+                        matchController.updateSingleCard(c);
+                    }
                     cardsUpdate.clear();
                 }
             }
             synchronized (cardsRefreshDetails) {
                 if (!cardsRefreshDetails.isEmpty()) {
-                    controller.refreshCardDetails(cardsRefreshDetails);
+                    matchController.updateCards(cardsRefreshDetails);
                     cardsRefreshDetails.clear();
                 }
             }
             synchronized (livesUpdate) {
                 if (!livesUpdate.isEmpty()) {
-                    controller.updateLives(livesUpdate);
+                    matchController.updateLives(livesUpdate);
                     livesUpdate.clear();
                 }
             }
             synchronized (manaPoolUpdate) {
                 if (!manaPoolUpdate.isEmpty()) {
-                    controller.updateManaPool(manaPoolUpdate);
+                    matchController.updateManaPool(manaPoolUpdate);
                     manaPoolUpdate.clear();
                 }
             }
             if (turnUpdate != null) {
-                controller.updateTurn(turnUpdate);
+                matchController.updateTurn(turnUpdate);
                 turnUpdate = null;
             }
             if (needPhaseUpdate) {
                 needPhaseUpdate = false;
-                controller.updatePhase();
+                matchController.updatePhase();
             }
             if (needCombatUpdate) {
                 needCombatUpdate = false;
-                controller.showCombat();
+                matchController.showCombat();
             }
             if (needStackUpdate) {
                 needStackUpdate = false;
-                controller.updateStack();
+                matchController.updateStack();
             }
             if (needPlayerControlUpdate) {
                 needPlayerControlUpdate = false;
-                controller.updatePlayerControl();
+                matchController.updatePlayerControl();
             }
             synchronized (zonesUpdate) {
                 if (!zonesUpdate.isEmpty()) {
-                    controller.updateZones(zonesUpdate);
+                    matchController.updateZones(zonesUpdate);
                     zonesUpdate.clear();
                 }
             }
             if (gameOver) {
                 gameOver = false;
-                MatchUtil.onGameOver(true); // this will unlock any game threads waiting for inputs to complete
+                humanController.getInputQueue().onGameOver(true); // this will unlock any game threads waiting for inputs to complete
             }
             if (gameFinished) {
                 gameFinished = false;
-                PlayerView localPlayer = humanController.getLocalPlayerView();
-                InputBase.cancelAwaitNextInput(); //ensure "Waiting for opponent..." doesn't appear behind WinLo
-                controller.showPromptMessage(localPlayer, ""); //clear prompt behind WinLose overlay
-                ButtonUtil.update(localPlayer, "", "", false, false, false);
-                controller.finishGame();
+                final PlayerView localPlayer = humanController.getLocalPlayerView();
+                humanController.cancelAwaitNextInput(); //ensure "Waiting for opponent..." doesn't appear behind WinLo
+                matchController.showPromptMessage(localPlayer, ""); //clear prompt behind WinLose overlay
+                matchController.updateButtons(localPlayer, "", "", false, false, false);
+                matchController.finishGame();
                 humanController.updateAchievements();
             }
         }
@@ -161,13 +161,13 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         return null;
     }
 
-    private Void processCard(Card card, HashSet<CardView> list) {
+    private Void processCard(Card card, Set<CardView> list) {
         synchronized (list) {
             list.add(card.getView());
         }
         return processEvent();
     }
-    private Void processCards(Collection<Card> cards, HashSet<CardView> list) {
+    private Void processCards(Collection<Card> cards, Set<CardView> list) {
         if (cards.isEmpty()) { return null; }
 
         synchronized (list) {
@@ -177,7 +177,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         }
         return processEvent();
     }
-    private Void processPlayer(Player player, HashSet<PlayerView> list) {
+    private Void processPlayer(Player player, Set<PlayerView> list) {
         synchronized (list) {
             list.add(player.getView());
         }
@@ -233,7 +233,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             options.add(fakeCard);
             options.add(kv.getValue().getView());
         }
-        SGuiChoose.reveal("These cards were chosen to ante", options);
+        humanController.getGui().reveal("These cards were chosen to ante", options);
         return null;
     }
 

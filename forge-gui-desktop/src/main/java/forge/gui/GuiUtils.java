@@ -24,18 +24,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 import javax.swing.KeyStroke;
-
-import forge.game.card.CardView;
-import forge.screens.match.VMatchUI;
-import forge.screens.match.views.VField;
-import forge.view.arcane.CardPanel;
 
 /**
  * <p>
@@ -70,37 +64,6 @@ public final class GuiUtils {
             System.err.println("GuiUtils > newFont: can't find \"" + filename + "\"");
         }
         return ttf;
-    }
-
-    /**
-     * Clear all visually highlighted card panels on the battlefield.
-     */
-    public static void clearPanelSelections() {
-        List<VField> view = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
-        for (VField v : view) {
-            for (CardPanel p : v.getTabletop().getCardPanels()) {
-                p.setSelected(false);
-            }
-        }
-    }
-
-    /**
-     * Highlight a card on the playfield.
-     * 
-     * @param card
-     *           a card to be highlighted
-     */
-    public static void setPanelSelection(final CardView card) {
-        mainLoop:
-        for (final VField v : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
-            final List<CardPanel> panels = v.getTabletop().getCardPanels();
-            for (final CardPanel p : panels) {
-                if (p.getCard().equals(card)) {
-                    p.setSelected(true);
-                    break mainLoop;
-                }
-            }
-        }
     }
 
     private static final int minItemWidth = 100;

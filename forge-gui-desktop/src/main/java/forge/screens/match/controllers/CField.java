@@ -29,7 +29,7 @@ import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.ICDoc;
 import forge.match.MatchConstants;
-import forge.match.MatchUtil;
+import forge.screens.match.CMatchUI;
 import forge.screens.match.ZoneAction;
 import forge.screens.match.views.VField;
 import forge.toolbox.MouseTriggerEvent;
@@ -38,6 +38,7 @@ import forge.toolbox.MouseTriggerEvent;
  * Controls Swing components of a player's field instance.
  */
 public class CField implements ICDoc {
+    private final CMatchUI matchUI;
     // The one who owns cards on this side of table
     private final PlayerView player;
     private final VField view;
@@ -46,7 +47,7 @@ public class CField implements ICDoc {
     private final MouseListener madAvatar = new MouseAdapter() {
         @Override
         public void mousePressed(final MouseEvent e) {
-            CPrompt.SINGLETON_INSTANCE.selectPlayer(player, new MouseTriggerEvent(e));
+            matchUI.getCPrompt().selectPlayer(player, new MouseTriggerEvent(e));
         }
     };
 
@@ -57,26 +58,35 @@ public class CField implements ICDoc {
      * @param v0 &emsp; {@link forge.screens.match.views.VField}
      * @param playerViewer 
      */
-    public CField(final PlayerView player0, final VField v0) {
+    public CField(final CMatchUI matchUI, final PlayerView player0, final VField v0) {
+        this.matchUI = matchUI;
         this.player = player0;
         this.view = v0;
 
-        final ZoneAction handAction      = new ZoneAction(player, ZoneType.Hand,      MatchConstants.HUMANHAND);
-        final ZoneAction libraryAction   = new ZoneAction(player, ZoneType.Library,   MatchConstants.HUMANLIBRARY);
-        final ZoneAction exileAction     = new ZoneAction(player, ZoneType.Exile,     MatchConstants.HUMANEXILED);
-        final ZoneAction graveAction     = new ZoneAction(player, ZoneType.Graveyard, MatchConstants.HUMANGRAVEYARD);
-        final ZoneAction flashBackAction = new ZoneAction(player, ZoneType.Flashback, MatchConstants.HUMANFLASHBACK);
+        final ZoneAction handAction      = new ZoneAction(matchUI, player, ZoneType.Hand,      MatchConstants.HUMANHAND);
+        final ZoneAction libraryAction   = new ZoneAction(matchUI, player, ZoneType.Library,   MatchConstants.HUMANLIBRARY);
+        final ZoneAction exileAction     = new ZoneAction(matchUI, player, ZoneType.Exile,     MatchConstants.HUMANEXILED);
+        final ZoneAction graveAction     = new ZoneAction(matchUI, player, ZoneType.Graveyard, MatchConstants.HUMANGRAVEYARD);
+        final ZoneAction flashBackAction = new ZoneAction(matchUI, player, ZoneType.Flashback, MatchConstants.HUMANFLASHBACK);
 
-        Function<Byte, Boolean> manaAction = new Function<Byte, Boolean>() {
+        final Function<Byte, Boolean> manaAction = new Function<Byte, Boolean>() {
             public Boolean apply(Byte colorCode) {
                 if (CField.this.player.isLobbyPlayer(Singletons.getControl().getGuiPlayer())) {
-                    return MatchUtil.getHumanController().useMana(colorCode.byteValue());
+                    return matchUI.getGameController().useMana(colorCode.byteValue());
                 }
                 return false;
             }
         };
 
         view.getDetailsPanel().setupMouseActions(handAction, libraryAction, exileAction, graveAction, flashBackAction, manaAction);
+    }
+
+    public final CMatchUI getMatchUI() {
+        return matchUI;
+    }
+
+    @Override
+    public void register() {
     }
 
     @Override

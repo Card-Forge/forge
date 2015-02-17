@@ -69,11 +69,11 @@ public class DualListBox<T> extends FDialog {
     private boolean sideboardingMode = false;
     private boolean showCard = true;
 
-    public DualListBox(int remainingSources, List<T> sourceElements, List<T> destElements) {
-        this(remainingSources, remainingSources, sourceElements, destElements);
-    }
-    
-    public DualListBox(int remainingSourcesMin, int remainingSourcesMax, List<T> sourceElements, List<T> destElements) {
+    private final CMatchUI matchUI;
+
+    public DualListBox(final int remainingSourcesMin, final int remainingSourcesMax, final List<T> sourceElements, final List<T> destElements, final CMatchUI matchUI) {
+        this.matchUI = matchUI;
+
         targetRemainingSourcesMin = remainingSourcesMin;
         targetRemainingSourcesMax = remainingSourcesMax;
         sourceListModel = new UnsortedListModel<T>();
@@ -152,15 +152,15 @@ public class DualListBox<T> extends FDialog {
         autoButton = new FButton("Auto");
         autoButton.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { _addAll(); _finish(); } });
 
-        FPanel leftPanel = new FPanel(new BorderLayout());
+        final FPanel leftPanel = new FPanel(new BorderLayout());
         selectOrder = new FLabel.Builder().text("Select Order:").build();
         leftPanel.add(selectOrder, BorderLayout.NORTH);
         leftPanel.add(new FScrollPane(sourceList, true), BorderLayout.CENTER);
         leftPanel.add(okButton, BorderLayout.SOUTH);
 
-        FPanel centerPanel = new FPanel(new GridLayout(6, 1));
+        final FPanel centerPanel = new FPanel(new GridLayout(6, 1));
         centerPanel.setBorderToggle(false);
-        JPanel emptyPanel = new JPanel();
+        final JPanel emptyPanel = new JPanel();
         emptyPanel.setOpaque(false);
         centerPanel.add(emptyPanel); // empty panel to take up the first slot
         centerPanel.add(addButton);
@@ -170,7 +170,7 @@ public class DualListBox<T> extends FDialog {
 
         orderedLabel = new FLabel.Builder().build();
 
-        FPanel rightPanel = new FPanel(new BorderLayout());
+        final FPanel rightPanel = new FPanel(new BorderLayout());
         rightPanel.add(orderedLabel, BorderLayout.NORTH);
         rightPanel.add(new FScrollPane(destList, true), BorderLayout.CENTER);
         rightPanel.add(autoButton, BorderLayout.SOUTH);
@@ -337,10 +337,12 @@ public class DualListBox<T> extends FDialog {
             card = Card.getCardForUi((IPaperCard) obj).getView();
         }
 
-        GuiUtils.clearPanelSelections();
-        if (card != null) {
-            CMatchUI.SINGLETON_INSTANCE.setCard(card);
-            GuiUtils.setPanelSelection(card);
+        if (matchUI != null) {
+            matchUI.clearPanelSelections();
+            if (card != null) {
+                matchUI.setCard(card);
+                matchUI.setPanelSelection(card);
+            }
         }
     }
 

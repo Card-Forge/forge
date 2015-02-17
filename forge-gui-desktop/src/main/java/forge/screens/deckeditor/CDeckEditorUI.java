@@ -17,31 +17,35 @@
  */
 package forge.screens.deckeditor;
 
-import forge.UiCommand;
-import forge.Singletons;
-import forge.deck.DeckBase;
-import forge.deck.DeckProxy;
-import forge.deck.io.DeckPreferences;
-import forge.gui.framework.FScreen;
-import forge.gui.framework.ICDoc;
-import forge.item.InventoryItem;
-import forge.itemmanager.ItemManager;
-import forge.screens.deckeditor.controllers.*;
-import forge.screens.deckeditor.views.VAllDecks;
-import forge.screens.deckeditor.views.VCardCatalog;
-import forge.screens.deckeditor.views.VCurrentDeck;
-import forge.screens.match.controllers.CDetail;
-import forge.screens.match.controllers.CPicture;
-import forge.util.ItemPool;
-
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map.Entry;
+
+import javax.swing.SwingUtilities;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import forge.Singletons;
+import forge.UiCommand;
+import forge.deck.DeckBase;
+import forge.deck.DeckProxy;
+import forge.deck.io.DeckPreferences;
+import forge.gui.framework.EDocID;
+import forge.gui.framework.FScreen;
+import forge.gui.framework.ICDoc;
+import forge.item.InventoryItem;
+import forge.itemmanager.ItemManager;
+import forge.screens.deckeditor.controllers.ACEditorBase;
+import forge.screens.deckeditor.controllers.CEditorConstructed;
+import forge.screens.deckeditor.controllers.CProbabilities;
+import forge.screens.deckeditor.controllers.CStatistics;
+import forge.screens.deckeditor.controllers.DeckController;
+import forge.screens.deckeditor.views.VAllDecks;
+import forge.screens.deckeditor.views.VCardCatalog;
+import forge.screens.deckeditor.views.VCurrentDeck;
+import forge.screens.match.controllers.CDetailPicture;
+import forge.util.ItemPool;
 
 /**
  * Constructs instance of deck editor UI controller, used as a single point of
@@ -57,9 +61,14 @@ public enum CDeckEditorUI implements ICDoc {
 
     private final HashMap<FScreen, ACEditorBase<? extends InventoryItem, ? extends DeckBase>> screenChildControllers;
 	private ACEditorBase<? extends InventoryItem, ? extends DeckBase> childController;
+	private final CDetailPicture cDetailPicture;
+	private final VAllDecks vAllDecks;
 
     private CDeckEditorUI() {
         screenChildControllers = new HashMap<FScreen, ACEditorBase<? extends InventoryItem, ? extends DeckBase>>();
+        this.cDetailPicture = new CDetailPicture();
+        this.vAllDecks = VAllDecks.SINGLETON_INSTANCE;
+        this.vAllDecks.setCDetailPicture(cDetailPicture);
     }
 
     /**
@@ -67,8 +76,7 @@ public enum CDeckEditorUI implements ICDoc {
      * @param item
      */
     public void setCard(final InventoryItem item) {
-        CDetail.SINGLETON_INSTANCE.showCard(item);
-        CPicture.SINGLETON_INSTANCE.showImage(item);
+        cDetailPicture.showItem(item);
     }
 
     public boolean hasChanges() {
@@ -292,6 +300,12 @@ public enum CDeckEditorUI implements ICDoc {
         return null;
     }
 
+    @Override
+    public void register() {
+        EDocID.CARD_PICTURE.setDoc(cDetailPicture.getCPicture().getView());
+        EDocID.CARD_DETAIL.setDoc(cDetailPicture.getCDetail().getView());
+    }
+
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#initialize()
      */
@@ -308,9 +322,9 @@ public enum CDeckEditorUI implements ICDoc {
 
             String currentDeckStr = DeckPreferences.getCurrentDeck();
             if (currentDeckStr != null) {
-                DeckProxy deck = VAllDecks.SINGLETON_INSTANCE.getLstDecks().stringToItem(currentDeckStr);
+                DeckProxy deck = vAllDecks.getLstDecks().stringToItem(currentDeckStr);
                 if (deck != null) {
-                    VAllDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedItem(deck);
+                    vAllDecks.getLstDecks().setSelectedItem(deck);
                     childController.getDeckController().load(deck.getPath(), deck.getName());
                 }
             }

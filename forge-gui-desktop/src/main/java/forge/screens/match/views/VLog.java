@@ -17,8 +17,8 @@
  */
 package forge.screens.match.views;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -33,7 +33,6 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
-import forge.match.MatchUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.GameLogPanel;
@@ -46,9 +45,7 @@ import forge.toolbox.FSkin.SkinFont;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VLog implements IVDoc<CLog> {
-    /** */
-    SINGLETON_INSTANCE;
+public class VLog implements IVDoc<CLog> {
 
     // Keeps a record of log entries currently displayed so we can
     // easily identify new entries to be added to the game log.
@@ -65,8 +62,11 @@ public enum VLog implements IVDoc<CLog> {
     private GameLogPanel gameLog;
     private JPanel p = null;
 
+    private final CLog controller;
+
     //========== Constructor
-    private VLog() {
+    public VLog(final CLog controller) {
+        this.controller = controller;
         gameLog = new GameLogPanel();
     }
 
@@ -116,7 +116,7 @@ public enum VLog implements IVDoc<CLog> {
      */
     @Override
     public CLog getLayoutControl() {
-        return CLog.SINGLETON_INSTANCE;
+        return controller;
     }
 
     /**
@@ -127,8 +127,8 @@ public enum VLog implements IVDoc<CLog> {
      * @param model contains list of log entries.
      */
     public void updateConsole() {
-        if (isGameLogConsoleVisible()) {
-            GameView model = MatchUtil.getGameView();
+        final GameView model = controller.getMatchUI().getGameView();
+        if (isGameLogConsoleVisible() && model != null) {
             resetDisplayIfNewGame(model);
             displayNewGameLogEntries(model);
             // Important : refreshLayout() needs to be called every update.

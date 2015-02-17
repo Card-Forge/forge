@@ -145,17 +145,22 @@ public class TriggerHandler {
     }
 
     public static Trigger parseTrigger(final Map<String, String> mapParams, final Card host, final boolean intrinsic) {
-        Trigger ret = null;
-
         final TriggerType type = TriggerType.smartValueOf(mapParams.get("Mode"));
-        ret = type.createTrigger(mapParams, host, intrinsic);
+        final Trigger ret = type.createTrigger(mapParams, host, intrinsic);
 
-        String triggerZones = mapParams.get("TriggerZones");
+        final String triggerZones = mapParams.get("TriggerZones");
         if (null != triggerZones) {
             ret.setActiveZone(EnumSet.copyOf(ZoneType.listValueOf(triggerZones)));
+        } else if (type == TriggerType.ChangesZone) {
+            // Special case, because ChangesZone triggers on cards don't
+            // specify their TriggerZone
+            final String origin = mapParams.get("Destination");
+            if (!"Any".equals(origin)) {
+                ret.setActiveZone(EnumSet.copyOf(ZoneType.listValueOf(origin)));
+            }
         }
 
-        String triggerPhases = mapParams.get("Phase");
+        final String triggerPhases = mapParams.get("Phase");
         if (null != triggerPhases) {
             ret.setTriggerPhases(PhaseType.parseRange(triggerPhases));
         }

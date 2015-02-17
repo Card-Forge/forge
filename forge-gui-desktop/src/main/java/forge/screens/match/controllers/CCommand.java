@@ -41,6 +41,10 @@ public class CCommand implements ICDoc {
     }
 
     @Override
+    public void register() {
+    }
+
+    @Override
     public void initialize() {
     }
 

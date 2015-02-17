@@ -14,12 +14,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 public final class CardOverlaysMenu {
-    private CardOverlaysMenu() { }
+    private final CMatchUI matchUI;
+    public CardOverlaysMenu(final CMatchUI matchUI) {
+        this.matchUI = matchUI;
+    }
 
     private static ForgePreferences prefs = FModel.getPreferences();
     private static boolean showOverlays = prefs.getPrefBoolean(FPref.UI_SHOW_CARD_OVERLAYS);
 
-    public static JMenu getMenu(boolean showMenuIcons) {
+    public JMenu getMenu(final boolean showMenuIcons) {
         JMenu menu = new JMenu("Card Overlays");
         menu.add(getMenuItem_ShowOverlays());
         menu.addSeparator();
@@ -30,7 +33,7 @@ public final class CardOverlaysMenu {
         return menu;
     }
 
-    private static JMenuItem getMenuItem_CardOverlay(String menuCaption, FPref pref) {
+    private JMenuItem getMenuItem_CardOverlay(String menuCaption, FPref pref) {
         JCheckBoxMenuItem menu = new JCheckBoxMenuItem(menuCaption);
         menu.setState(prefs.getPrefBoolean(pref));
         menu.setEnabled(showOverlays);
@@ -38,7 +41,7 @@ public final class CardOverlaysMenu {
         return menu;
     }
 
-    private static JMenuItem getMenuItem_ShowOverlays() {
+    private JMenuItem getMenuItem_ShowOverlays() {
         JCheckBoxMenuItem menu = new JCheckBoxMenuItem("Show");
         menu.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_O));
         menu.setState(prefs.getPrefBoolean(FPref.UI_SHOW_CARD_OVERLAYS));
@@ -46,7 +49,7 @@ public final class CardOverlaysMenu {
         return menu;
     }
 
-    private static ActionListener getShowOverlaysAction() {
+    private ActionListener getShowOverlaysAction() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -55,7 +58,7 @@ public final class CardOverlaysMenu {
         };
     }
 
-    private static void toggleCardOverlayDisplay(JMenuItem showMenu) {
+    private void toggleCardOverlayDisplay(JMenuItem showMenu) {
         toggleShowOverlaySetting();
         repaintCardOverlays();
         // Enable/disable overlay menu items based on state of "Show" menu.
@@ -75,7 +78,7 @@ public final class CardOverlaysMenu {
         prefs.save();
     }
 
-    private static ActionListener getCardOverlaysAction(final FPref overlaySetting) {
+    private ActionListener getCardOverlaysAction(final FPref overlaySetting) {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -92,11 +95,11 @@ public final class CardOverlaysMenu {
         prefs.save();
     }
 
-    private static void repaintCardOverlays() {
+    private void repaintCardOverlays() {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                CMatchUI.SINGLETON_INSTANCE.repaintCardOverlays();
+                matchUI.repaintCardOverlays();
             }
         });
     }

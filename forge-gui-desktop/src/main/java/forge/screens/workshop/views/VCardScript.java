@@ -1,14 +1,21 @@
 package forge.screens.workshop.views;
 
+import java.awt.Color;
+
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
+import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+
+import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.screens.workshop.controllers.CCardScript;
-import forge.toolbox.FTextEditor;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
+import forge.toolbox.FTextPane;
 
 /** 
  * Assembles Swing components of workshop card script tab.
@@ -23,14 +30,31 @@ public enum VCardScript implements IVDoc<CCardScript> {
     private DragCell parentCell;
     private final DragTab tab = new DragTab("Card Script");
 
-    private final FTextEditor txtScript = new FTextEditor();
+    private final FTextPane txtScript = new FTextPane();
+    private final StyledDocument doc;
+    private final Style error;
 
     //========== Constructor
     private VCardScript() {
+        txtScript.setEditable(true);
+        txtScript.setFocusable(true);
+        doc = new DefaultStyledDocument();
+        txtScript.setDocument(doc);
+        error = doc.addStyle("error", null);
+        error.addAttribute(StyleConstants.Background, Color.red);
+        error.addAttribute(StyleConstants.Bold, new Boolean(true));
     }
-    
-    public FTextEditor getTxtScript() {
-    	return txtScript;
+
+    public JTextPane getTxtScript() {
+        return txtScript;
+    }
+
+    public StyledDocument getDoc() {
+        return doc;
+    }
+
+    public Style getErrorStyle() {
+        return error;
     }
 
     //========== Overridden methods

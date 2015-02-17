@@ -13,7 +13,7 @@ import forge.card.CardZoom;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardZoom.ActivateHandler;
 import forge.game.card.CardView;
-import forge.match.MatchUtil;
+import forge.screens.match.MatchController;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
 import forge.util.ThreadUtil;
@@ -180,7 +180,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
     @Override
     public String getActivateAction(int index) {
-        return MatchUtil.getHumanController().getInputProxy().getActivateAction(orderedCards.get(index));
+        return MatchController.instance.getGameController().getActivateDescription(orderedCards.get(index));
     }
 
     @Override
@@ -359,7 +359,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         }
 
         public boolean selectCard(boolean selectEntireStack) {
-            if (MatchUtil.getHumanController().selectCard(getCard(), getOtherCardsToSelect(selectEntireStack), null)) {
+            if (MatchController.instance.getGameController().selectCard(getCard(), getOtherCardsToSelect(selectEntireStack), null)) {
                 return true;
             }
             //if panel can't do anything with card selection, try selecting previous panel in stack

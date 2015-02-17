@@ -13,6 +13,7 @@ import forge.gui.GuiChoose;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
+import forge.interfaces.IGuiGame;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.itemmanager.DeckManager;
@@ -38,6 +39,7 @@ import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.JXButtonPanel;
 
 import javax.swing.*;
+
 import java.awt.event.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -56,7 +58,12 @@ public enum CSubmenuQuestDraft implements ICDoc {
     private static final DecimalFormat NUMBER_FORMATTER = new DecimalFormat("#,###");
     
     private boolean drafting = false;
-    
+    private IGuiGame gui = null;
+
+    @Override
+    public void register() {
+    }
+ 
     @SuppressWarnings("serial")
     @Override
     public void initialize() {
@@ -333,7 +340,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
             view.setMode(Mode.TOURNAMENT_ACTIVE);
         }
         
-        QuestDraftUtils.update();
+        QuestDraftUtils.update(gui);
         
         switch (view.getMode()) {
         
@@ -489,7 +496,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
     }
     
     private void editDeck() {
-        VCurrentDeck.SINGLETON_INSTANCE.setItemManager(new DeckManager(GameType.Draft));
+        VCurrentDeck.SINGLETON_INSTANCE.setItemManager(new DeckManager(GameType.Draft, null));
         Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_QUEST_TOURNAMENT);
         CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorQuestLimited(FModel.getQuest()));
         FModel.getQuest().save();
@@ -549,15 +556,16 @@ public enum CSubmenuQuestDraft implements ICDoc {
     }
     
     private void startNextMatch() {
-		
-        String message = QuestDraftUtils.getDeckLegality();
-		
-		if (message != null) {
+
+        final String message = QuestDraftUtils.getDeckLegality();
+
+        if (message != null) {
             FOptionPane.showMessageDialog(message, "Deck Invalid");
             return;
         }
-        
-        QuestDraftUtils.startNextMatch();
+
+        gui = GuiBase.getInterface().getNewGuiGame();
+        QuestDraftUtils.startNextMatch(gui);
         
     }
 

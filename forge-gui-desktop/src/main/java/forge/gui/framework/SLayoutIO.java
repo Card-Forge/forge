@@ -1,9 +1,13 @@
 package forge.gui.framework;
 
+import forge.FThreads;
 import forge.Singletons;
+import forge.gui.SOverlayUtils;
 import forge.properties.FileLocation;
 import forge.properties.ForgeConstants;
 import forge.toolbox.FAbsolutePositioner;
+import forge.toolbox.SaveOpenDialog;
+import forge.toolbox.SaveOpenDialog.Filetypes;
 import forge.util.CollectionSuppliers;
 import forge.util.ThreadUtil;
 import forge.util.maps.HashMapOfLists;
@@ -48,6 +52,54 @@ public final class SLayoutIO {
     private static final XMLEvent TAB = EF.createDTD("\t");
 
     private final static AtomicBoolean saveWindowRequested = new AtomicBoolean(false);
+
+
+    public static void saveLayout() {
+        final SaveOpenDialog dlgSave = new SaveOpenDialog();
+        final FileLocation layoutFile = Singletons.getControl().getCurrentScreen().getLayoutFile();
+        final File defFile = layoutFile != null ? new File(layoutFile.userPrefLoc) : null;
+        final File saveFile = dlgSave.SaveDialog(defFile, Filetypes.LAYOUT);
+        if (saveFile != null) {
+            SLayoutIO.saveLayout(saveFile);
+        }
+    }
+
+    public static void openLayout() {
+        SOverlayUtils.genericOverlay();
+
+        final SaveOpenDialog dlgOpen = new SaveOpenDialog();
+        final FileLocation layoutFile = Singletons.getControl().getCurrentScreen().getLayoutFile();
+        final File defFile = layoutFile != null ? new File(layoutFile.userPrefLoc) : null;
+        final File loadFile = dlgOpen.OpenDialog(defFile, Filetypes.LAYOUT);
+
+        if (loadFile != null) {
+            FView.SINGLETON_INSTANCE.getPnlContent().removeAll();
+            // let it redraw everything first
+
+            FThreads.invokeInEdtLater(new Runnable() {
+                @Override
+                public void run() {
+                    if (loadFile != null) {
+                        SLayoutIO.loadLayout(loadFile);
+                        SLayoutIO.saveLayout(null);
+                    }
+                    SOverlayUtils.hideOverlay();
+                }
+            });
+        }
+    }
+
+    public static void revertLayout() {
+        SOverlayUtils.genericOverlay();
+        FView.SINGLETON_INSTANCE.getPnlContent().removeAll();
+
+        FThreads.invokeInEdtLater(new Runnable(){
+            @Override public void run() {
+                SLayoutIO.loadLayout(null);
+                SOverlayUtils.hideOverlay();
+            }
+        });
+    }
 
     public static void saveWindowLayout() {
         if (saveWindowRequested.getAndSet(true)) { return; }

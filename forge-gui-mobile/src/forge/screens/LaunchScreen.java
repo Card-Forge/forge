@@ -1,19 +1,23 @@
 package forge.screens;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.badlogic.gdx.Input.Keys;
 
-import forge.match.MatchUtil;
-import forge.menu.FPopupMenu;
-import forge.screens.FScreen;
 import forge.Graphics;
+import forge.GuiBase;
 import forge.assets.FSkinImage;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
+import forge.interfaces.IGuiGame;
+import forge.match.HostedMatch;
+import forge.menu.FPopupMenu;
+import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
 import forge.util.Utils;
@@ -53,6 +57,7 @@ public abstract class LaunchScreen extends FScreen {
         public GameType gameType;
         public final List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
         public final Set<GameType> appliedVariants = new HashSet<GameType>();
+        public final Set<RegisteredPlayer> humanPlayers = new HashSet<RegisteredPlayer>();
     }
 
     protected void startMatch() {
@@ -62,7 +67,7 @@ public abstract class LaunchScreen extends FScreen {
         LoadingOverlay.show("Loading new game...", new Runnable() {
             @Override
             public void run() {
-                LaunchParams launchParams = new LaunchParams();
+                final LaunchParams launchParams = new LaunchParams();
                 if (buildLaunchParams(launchParams)) {
                     if (launchParams.gameType == null) {
                         throw new RuntimeException("Must set launchParams.gameType");
@@ -71,7 +76,13 @@ public abstract class LaunchScreen extends FScreen {
                         throw new RuntimeException("Must add at least one player to launchParams.players");
                     }
 
-                    MatchUtil.startMatch(launchParams.gameType, launchParams.appliedVariants, launchParams.players);
+                    final Map<RegisteredPlayer, IGuiGame> guiMap = new HashMap<RegisteredPlayer, IGuiGame>();
+                    for (final RegisteredPlayer human : launchParams.humanPlayers) {
+                        guiMap.put(human, MatchController.instance);
+                    }
+
+                    final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
+                    hostedMatch.startMatch(launchParams.gameType, launchParams.appliedVariants, launchParams.players, guiMap);
                 }
                 creatingMatch = false;
             }

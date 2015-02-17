@@ -38,9 +38,7 @@ import java.awt.event.MouseEvent;
  * 
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VDock implements IVDoc<CDock> {
-    /** */
-    SINGLETON_INSTANCE;
+public class VDock implements IVDoc<CDock> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
@@ -58,7 +56,11 @@ public enum VDock implements IVDoc<CDock> {
     private final FLabel btnTargeting = new FLabel.Builder().icon(FSkin.getIcon(FSkinProp.ICO_ARCSOFF))
                 .hoverable(true).iconInBackground(true).iconScaleFactor(1.0).build();
 
-    private VDock() {
+    private final CDock controller;
+
+    public VDock(final CDock controller) {
+        this.controller = controller;
+
         btnTargeting.setPreferredSize(new Dimension(30, 30));
         btnTargeting.setMinimumSize(new Dimension(30, 30));
         btnTargeting.setMaximumSize(new Dimension(30, 30));
@@ -124,7 +126,7 @@ public enum VDock implements IVDoc<CDock> {
      */
     @Override
     public CDock getLayoutControl() {
-        return CDock.SINGLETON_INSTANCE;
+        return controller;
     }
 
     //========= Retrieval methods

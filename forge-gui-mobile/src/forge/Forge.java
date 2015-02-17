@@ -17,7 +17,7 @@ import forge.assets.ImageCache;
 import forge.error.BugReporter;
 import forge.error.ExceptionHandler;
 import forge.interfaces.IDeviceAdapter;
-import forge.match.MatchUtil;
+import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
@@ -25,7 +25,6 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.screens.SplashScreen;
 import forge.screens.home.HomeScreen;
-import forge.screens.match.MatchController;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FContainer;
@@ -51,6 +50,7 @@ public class Forge implements ApplicationListener {
     private static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
     private static final Stack<FScreen> screens = new Stack<FScreen>();
+    public static HostedMatch hostedMatch;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0) {
         if (GuiBase.getInterface() == null) {
@@ -68,8 +68,6 @@ public class Forge implements ApplicationListener {
     public void create() {
         //install our error handler
         ExceptionHandler.registerErrorHandling();
-
-        MatchUtil.setController(MatchController.instance);
 
         graphics = new Graphics();
         splashScreen = new SplashScreen();
@@ -289,12 +287,16 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void pause() {
-        MatchUtil.pause();
+        if (hostedMatch != null) {
+            hostedMatch.pause();
+        }
     }
 
     @Override
     public void resume() {
-        MatchUtil.resume();
+        if (hostedMatch != null) {
+            hostedMatch.resume();
+        }
     }
 
     @Override

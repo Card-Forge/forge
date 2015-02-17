@@ -1,5 +1,40 @@
 package forge.itemmanager.views;
 
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseWheelEvent;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
+import javax.swing.JComponent;
+import javax.swing.JViewport;
+import javax.swing.Popup;
+import javax.swing.PopupFactory;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import net.miginfocom.swing.MigLayout;
+
+import org.apache.commons.lang3.CharUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import forge.item.InventoryItem;
 import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemManager;
@@ -9,24 +44,9 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
-import forge.toolbox.ToolTipListener;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinImage;
-import net.miginfocom.swing.MigLayout;
-
-import org.apache.commons.lang3.CharUtils;
-import org.apache.commons.lang3.StringUtils;
-
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import forge.toolbox.ToolTipListener;
 
 public abstract class ItemView<T extends InventoryItem> {
     private static final SkinColor BORDER_COLOR = FSkin.getColor(FSkin.Colors.CLR_TEXT);
@@ -44,7 +64,7 @@ public abstract class ItemView<T extends InventoryItem> {
     private boolean isIncrementalSearchActive = false;
 
     @SuppressWarnings("serial")
-    protected ItemView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
+    protected ItemView(final ItemManager<T> itemManager0, final ItemManagerModel<T> model0) {
         this.itemManager = itemManager0;
         this.model = model0;
         this.scroller = new FScrollPane(false) {

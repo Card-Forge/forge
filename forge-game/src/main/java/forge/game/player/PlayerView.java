@@ -1,9 +1,11 @@
 package forge.game.player;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
 import forge.LobbyPlayer;
@@ -83,6 +85,25 @@ public class PlayerView extends GameEntityView {
     public boolean isOpponentOf(final PlayerView other) {
         FCollectionView<PlayerView> opponents = getOpponents();
         return opponents != null && opponents.contains(other);
+    }
+
+    public final String getCommanderInfo() {
+        final StringBuilder sb = new StringBuilder();
+
+        for (final PlayerView p : Iterables.concat(Collections.singleton(this), getOpponents())) {
+            final String text;
+            if (p.equals(this)) {
+                text = "Commander Damage from own Commander: ";
+            } else {
+                text = "Commander Damage to " + p.getName() + ": ";
+            }
+
+            final int damage = p.getCommanderDamage(this.getCommander());
+            if (damage > 0) {
+                sb.append(text + damage + "\r\n");
+            }
+        }
+        return sb.toString();
     }
 
     @Override

@@ -25,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
+import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.gui.CardPicturePanel;
@@ -33,7 +34,6 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
-import forge.match.MatchUtil;
 import forge.screens.match.controllers.CAntes;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
@@ -43,9 +43,8 @@ import forge.toolbox.FScrollPane;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VAntes implements IVDoc<CAntes> {
-    /** */
-    SINGLETON_INSTANCE;
+public class VAntes implements IVDoc<CAntes> {
+    private final CAntes controller;
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
@@ -56,7 +55,8 @@ public enum VAntes implements IVDoc<CAntes> {
     private final SortedSet<AntePanel> allAntes = new TreeSet<AntePanel>();
 
     //========== Constructor
-    private VAntes() {
+    public VAntes(final CAntes controller) {
+        this.controller = controller;
         pnl.setLayout(new WrapLayout());
         pnl.setOpaque(false);
     }
@@ -113,15 +113,19 @@ public enum VAntes implements IVDoc<CAntes> {
      */
     @Override
     public CAntes getLayoutControl() {
-        return CAntes.SINGLETON_INSTANCE;
+        return controller;
     }
 
     public void update() {
         allAntes.clear();
         pnl.removeAll();
+        final GameView gameView = controller.getMatchUI().getGameView();
+        if (gameView == null) {
+            return;
+        }
 
-        for (final PlayerView p : MatchUtil.getGameView().getPlayers()) {
-            Iterable<CardView> ante = p.getAnte();
+        for (final PlayerView p : gameView.getPlayers()) {
+            final Iterable<CardView> ante = p.getAnte();
             if (ante != null) {
                 for (final CardView c : ante) {
                     final AntePanel pnlTemp = new AntePanel(c);

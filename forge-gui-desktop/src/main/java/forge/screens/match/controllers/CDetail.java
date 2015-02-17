@@ -22,10 +22,8 @@ import java.awt.event.MouseEvent;
 import forge.UiCommand;
 import forge.game.card.CardView;
 import forge.gui.framework.ICDoc;
-import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.InventoryItemFromSet;
-import forge.match.MatchUtil;
 import forge.screens.match.views.VDetail;
 import forge.toolbox.FMouseAdapter;
 
@@ -34,37 +32,43 @@ import forge.toolbox.FMouseAdapter;
  * 
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
-public enum CDetail implements ICDoc {
-    SINGLETON_INSTANCE;
+public class CDetail implements ICDoc {
+    private final VDetail view;
+    CDetail(final CDetailPicture controller) {
+        this.view = new VDetail(this);
 
-    private VDetail view = VDetail.SINGLETON_INSTANCE;
+        this.view.getPnlDetail().addMouseListener(new FMouseAdapter() {
+            @Override
+            public void onLeftClick(final MouseEvent e) {
+                controller.flip();
+            }
+        });
+    }
+
+    public VDetail getView() {
+        return view;
+    }
 
     /**
      * Shows card details and/or picture in sidebar cardview tabber.
      * 
      * @param c &emsp; {@link CardView} object
+     * @param isInAltState whether to draw the flip side of the card.
      */
-    public void showCard(final CardView c) {
-        this.showCard(c, false);
-    }
-
-    public void showCard(final CardView c, final boolean isInAltState) {
-        view.getLblFlipcard().setVisible(c != null && MatchUtil.canCardBeFlipped(c));
-        view.getPnlDetail().setCard(c, isInAltState);
+    void showCard(final CardView c, final boolean isInAltState, final boolean mayView, final boolean mayFlip) {
+        final CardView toShow = mayView ? c : null;
+        view.getLblFlipcard().setVisible(toShow != null && mayFlip);
+        view.getPnlDetail().setCard(toShow, isInAltState);
         if (view.getParentCell() != null) {
             view.getParentCell().repaintSelf();
         }
     }
 
-    public void showCard(final InventoryItem item) {
-        if (item instanceof IPaperCard) {
-            showCard(CardView.getCardForUi((IPaperCard)item));
-        } else if (item instanceof InventoryItemFromSet) {
+    void showItem(final InventoryItem item) {
+        if (item instanceof InventoryItemFromSet) {
             view.getLblFlipcard().setVisible(false);
             view.getPnlDetail().setItem((InventoryItemFromSet)item);
             view.getParentCell().repaintSelf();
-        } else {
-            showCard((CardView)null);
         }
     }
 
@@ -74,13 +78,12 @@ public enum CDetail implements ICDoc {
     }
 
     @Override
+    public void register() {
+    }
+
+    @Override
     public void initialize() {
-        view.getPnlDetail().addMouseListener(new FMouseAdapter() {
-            @Override
-            public void onLeftClick(final MouseEvent e) {
-                CPicture.SINGLETON_INSTANCE.flipCard();
-            }
-        });
+
     }
 
     @Override

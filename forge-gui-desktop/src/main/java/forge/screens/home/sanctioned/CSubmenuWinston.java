@@ -1,5 +1,6 @@
 package forge.screens.home.sanctioned;
 
+import forge.GuiBase;
 import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -8,7 +9,7 @@ import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
-import forge.match.MatchUtil;
+import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.deck.DeckProxy;
@@ -46,6 +47,10 @@ public enum CSubmenuWinston implements ICDoc {
             VSubmenuWinston.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
         }
     };
+
+    @Override
+    public void register() {
+    }
 
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
@@ -122,17 +127,19 @@ public enum CSubmenuWinston implements ICDoc {
             }
         });
 
-        DeckGroup opponentDecks = FModel.getDecks().getWinston().get(humanDeck.getName());
-        Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex);
+        final DeckGroup opponentDecks = FModel.getDecks().getWinston().get(humanDeck.getName());
+        final Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex);
         if (aiDeck == null) {
             throw new IllegalStateException("Draft: Computer deck is null!");
         }
 
-        List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
-        starter.add(new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer()));
+        final List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
+        final RegisteredPlayer human = new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
+        starter.add(human);
         starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
 
-        MatchUtil.startMatch(GameType.Winston, starter);
+        final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
+        hostedMatch.startMatch(GameType.Winston, null, starter, human, GuiBase.getInterface().getNewGuiGame());
     }
 
     /** */

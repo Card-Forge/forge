@@ -24,13 +24,11 @@ import java.awt.event.MouseWheelListener;
 import javax.swing.JLabel;
 
 import forge.UiCommand;
-import forge.game.card.Card;
 import forge.game.card.CardView;
+import forge.game.card.CardView.CardStateView;
 import forge.gui.CardPicturePanel;
 import forge.gui.framework.ICDoc;
-import forge.item.IPaperCard;
 import forge.item.InventoryItem;
-import forge.match.MatchUtil;
 import forge.screens.match.views.VPicture;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.special.CardZoomer;
@@ -38,73 +36,46 @@ import forge.toolbox.special.CardZoomer;
 /**
  * Singleton controller for VPicture.
  * <p>
- * Can be used to display images associated with a {@code Card} or
- * {@code InventoryItem} in {@code CardPicturePanel}.<br>
+ * Can be used to display images associated with a {@link Card} or
+ * {@link InventoryItem} in {@link CardPicturePanel}.<br>
  * <br>
- * Can also be used to display details associated with a {@code Card}.
- * 
- * @version: $Id:$
- * 
+ * Can also be used to display details associated with a {@link Card}.
  */
-public enum CPicture implements ICDoc {
-    SINGLETON_INSTANCE;
+public class CPicture implements ICDoc {
+    private final CDetailPicture controller;
+    private final VPicture view;
+    CPicture(final CDetailPicture controller) {
+        this.controller = controller;
+        this.view = new VPicture(this);
+        picturePanel = this.view.getPnlPicture();
+        flipIndicator = this.view.getLblFlipcard();
+
+        setMouseWheelListener();
+        setMouseButtonListener();
+    }
+
+    public VPicture getView() {
+        return view;
+    }
 
     // For brevity, local shortcuts to singletons & child controls...
-    private final VPicture view = VPicture.SINGLETON_INSTANCE;
-    private final CardPicturePanel picturePanel = this.view.getPnlPicture();
-    private final JLabel flipIndicator = this.view.getLblFlipcard();
+    private final CardPicturePanel picturePanel;
+    private final JLabel flipIndicator;
     private final CardZoomer zoomer = CardZoomer.SINGLETON_INSTANCE;
-
-    private CardView currentView = null;
-    private boolean isDisplayAlt = false, alwaysDisplayAlt = false;
 
     /**
      * Shows card details and/or picture in sidebar cardview tabber.
      * 
      */
-    public void showCard(final CardView c, boolean showAlt) {
-        if (c == null) {
-            return;
-        }
-
-        boolean canFlip = MatchUtil.canCardBeFlipped(c);
-
-        currentView = c;
-        isDisplayAlt = showAlt;
-        alwaysDisplayAlt = canFlip && c.isFaceDown();
-        flipIndicator.setVisible(canFlip);
-        picturePanel.setCard(c.getState(isDisplayAlt || alwaysDisplayAlt));
-        if (showAlt && canFlip) {
-            flipCard();
-        }
+    void showCard(final CardView c, final boolean isInAltState, final boolean mayView, final boolean mayFlip) {
+        final CardStateView toShow = c != null && mayView ? c.getState(isInAltState) : null;
+        flipIndicator.setVisible(toShow != null && mayFlip);
+        picturePanel.setCard(toShow);
     }
 
-    /**
-     * Displays image associated with either a {@code Card}
-     * or {@code InventoryItem} instance.
-     */
-    public void showImage(final InventoryItem item) {
-        if (item instanceof IPaperCard) {
-            final IPaperCard paperCard = ((IPaperCard)item);
-            final CardView c = CardView.getCardForUi(paperCard);
-            if (paperCard.isFoil() && c.getCurrentState().getFoilIndex() == 0) {
-                // FIXME should assign a random foil here in all cases
-                // (currently assigns 1 for the deck editors where foils "flicker" otherwise)
-                if (item instanceof Card) {
-                    c.getCurrentState().setFoilIndexOverride(-1); //-1 to choose random
-                }
-                else if (item instanceof IPaperCard) {
-                    c.getCurrentState().setFoilIndexOverride(1);
-                }
-            }
-            showCard(c, false);
-        } else {
-            currentView = null;
-            isDisplayAlt = false;
-            alwaysDisplayAlt = false;
-            flipIndicator.setVisible(false);
-            picturePanel.setCard(item);
-        }
+    void showItem(final InventoryItem item) {
+        flipIndicator.setVisible(false);
+        picturePanel.setCard(item);
     }
 
     @Override
@@ -113,9 +84,11 @@ public enum CPicture implements ICDoc {
     }
 
     @Override
+    public void register() {
+    }
+
+    @Override
     public void initialize() {
-        setMouseWheelListener();
-        setMouseButtonListener();
     }
 
     /**
@@ -128,21 +101,21 @@ public enum CPicture implements ICDoc {
     private void setMouseButtonListener() {
         this.picturePanel.addMouseListener(new FMouseAdapter() {
             @Override
-            public void onLeftClick(MouseEvent e) {
-                flipCard();
+            public void onLeftClick(final MouseEvent e) {
+                controller.flip();
             }
 
             @Override
-            public void onMiddleMouseDown(MouseEvent e) {
+            public void onMiddleMouseDown(final MouseEvent e) {
                 if (isCardDisplayed()) {
-                    CardZoomer.SINGLETON_INSTANCE.doMouseButtonZoom(currentView);
+                    zoomer.doMouseButtonZoom(controller.getCurrentCard());
                 }
             }
 
             @Override
-            public void onMiddleMouseUp(MouseEvent e) {
+            public void onMiddleMouseUp(final MouseEvent e) {
                 if (isCardDisplayed()) {
-                    CardZoomer.SINGLETON_INSTANCE.closeZoomer();
+                    zoomer.closeZoomer();
                 }
             }
         });
@@ -157,10 +130,10 @@ public enum CPicture implements ICDoc {
     private void setMouseWheelListener() {
         picturePanel.addMouseWheelListener(new MouseWheelListener() {
             @Override
-            public void mouseWheelMoved(MouseWheelEvent arg0) {
+            public void mouseWheelMoved(final MouseWheelEvent arg0) {
                 if (isCardDisplayed()) {
                     if (arg0.getWheelRotation() < 0) {
-                        zoomer.doMouseWheelZoom(currentView);
+                        zoomer.doMouseWheelZoom(controller.getCurrentCard());
                     }
                 }
             }
@@ -168,18 +141,11 @@ public enum CPicture implements ICDoc {
     }
 
     private boolean isCardDisplayed() {
-        return (currentView != null);
+        return controller.getCurrentCard() != null;
     }
 
     @Override
     public void update() {
     }
 
-    public void flipCard() {
-        if (MatchUtil.canCardBeFlipped(currentView)) {
-            isDisplayAlt = !isDisplayAlt;
-            picturePanel.setCard(currentView.getState(isDisplayAlt || alwaysDisplayAlt));
-            CDetail.SINGLETON_INSTANCE.showCard(currentView, isDisplayAlt);
-        }
-    }
 }

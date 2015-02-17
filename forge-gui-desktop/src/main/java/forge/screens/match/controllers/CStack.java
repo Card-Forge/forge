@@ -4,6 +4,7 @@ import forge.UiCommand;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
+import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VStack;
 
 /** 
@@ -12,9 +13,21 @@ import forge.screens.match.views.VStack;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
-public enum CStack implements ICDoc {
-    /** */
-    SINGLETON_INSTANCE;
+public class CStack implements ICDoc {
+
+    private final CMatchUI matchUI;
+    private final VStack view;
+    public CStack(final CMatchUI matchUI) {
+        this.matchUI = matchUI;
+        this.view = new VStack(this);
+    }
+
+    public final CMatchUI getMatchUI() {
+        return matchUI;
+    }
+    public final VStack getView() {
+        return view;
+    }
 
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
@@ -22,6 +35,10 @@ public enum CStack implements ICDoc {
     @Override
     public UiCommand getCommandOnSelect() {
         return null;
+    }
+
+    @Override
+    public void register() {
     }
 
     /* (non-Javadoc)
@@ -34,6 +51,6 @@ public enum CStack implements ICDoc {
     @Override
     public void update() {
         SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
-        VStack.SINGLETON_INSTANCE.updateStack();
+        view.updateStack();
     }
 }

@@ -43,7 +43,7 @@ public final class ForgeMenu {
         provider = provider0;
         refresh();
     }
-    
+
     public void refresh() {
         activeShortcuts.clear();
         popupMenu = new JPopupMenu();
@@ -66,7 +66,7 @@ public final class ForgeMenu {
                 }
             }
         }
-        add(LayoutMenu.getMenu());
+        add(new LayoutMenu().getMenu());
         add(HelpMenu.getMenu());
         addSeparator();
         add(getMenuItem_Restart());

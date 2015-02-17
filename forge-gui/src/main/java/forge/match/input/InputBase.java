@@ -18,17 +18,13 @@
 package forge.match.input;
 
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import forge.FThreads;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
-import forge.match.MatchUtil;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 
@@ -41,8 +37,8 @@ import forge.util.ITriggerEvent;
  * @version $Id: InputBase.java 24769 2014-02-09 13:56:04Z Hellfish $
  */
 public abstract class InputBase implements java.io.Serializable, Input {
-    /** Constant <code>serialVersionUID=-6539552513871194081L</code>. */
-    private static final long serialVersionUID = -6539552513871194081L;
+    /** Constant <code>serialVersionUID=-2531867688249685076L</code>. */
+    private static final long serialVersionUID = -2531867688249685076L;
 
     private final PlayerControllerHuman controller;
     public InputBase(final PlayerControllerHuman controller0) {
@@ -52,7 +48,8 @@ public abstract class InputBase implements java.io.Serializable, Input {
         return controller;
     }
     public PlayerView getOwner() {
-        return controller.getPlayer().getView();
+        final Player owner = getController().getPlayer();
+        return owner == null ? null : owner.getView();
     }
 
     private boolean finished = false;
@@ -61,7 +58,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
         finished = true;
 
         if (allowAwaitNextInput()) {
-            awaitNextInput(controller);
+            controller.awaitNextInput();
         }
     }
 
@@ -69,66 +66,11 @@ public abstract class InputBase implements java.io.Serializable, Input {
         return false;
     }
 
-    private static final Timer awaitNextInputTimer = new Timer();
-    private static TimerTask awaitNextInputTask;
-
-    public static void awaitNextInput(final PlayerControllerHuman controller) {
-        //delay updating prompt to await next input briefly so buttons don't flicker disabled then enabled
-        awaitNextInputTask = new TimerTask() {
-            @Override
-            public void run() {
-                FThreads.invokeInEdtLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        synchronized (awaitNextInputTimer) {
-                            if (awaitNextInputTask != null) {
-                                updatePromptForAwait(controller);
-                                awaitNextInputTask = null;
-                            }
-                        }
-                    }
-                });
-            }
-        };
-        awaitNextInputTimer.schedule(awaitNextInputTask, 250);
-    }
-
-    public static void waitForOtherPlayer() {
-        final PlayerControllerHuman controller = MatchUtil.getOtherHumanController();
-        if (controller == null) { return; }
-
-        cancelAwaitNextInput();
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
-            @Override
-            public void run() {
-                updatePromptForAwait(controller);
-            }
-        });
-    }
-
-    private static void updatePromptForAwait(final PlayerControllerHuman controller) {
-        PlayerView playerView = controller.getLocalPlayerView();
-        MatchUtil.getController().showPromptMessage(playerView, "Waiting for opponent...");
-        ButtonUtil.update(playerView, false, false, false);
-    }
-
-    public static void cancelAwaitNextInput() {
-        synchronized (awaitNextInputTimer) { //ensure task doesn't reset awaitNextInputTask during this block
-            if (awaitNextInputTask != null) {
-                try {
-                    awaitNextInputTask.cancel(); //cancel timer once next input shown if needed
-                }
-                catch (Exception ex) {} //suppress any exception thrown by cancel()
-                awaitNextInputTask = null;
-            }
-        }
-    }
-
     // showMessage() is always the first method called
     @Override
     public final void showMessageInitial() {
         finished = false;
-        cancelAwaitNextInput();
+        controller.cancelAwaitNextInput();
         showMessage();
     }
 
@@ -172,7 +114,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
 
     // to remove need for CMatchUI dependence
     protected final void showMessage(final String message) {
-        MatchUtil.getController().showPromptMessage(getOwner(), message);
+        controller.getGui().showPromptMessage(getOwner(), message);
     }
 
     protected String getTurnPhasePriorityMessage(final Game game) {

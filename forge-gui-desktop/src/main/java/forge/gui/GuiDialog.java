@@ -20,21 +20,24 @@ public class GuiDialog {
     private static final String[] defaultConfirmOptions = { "Yes", "No" };
 
     public static boolean confirm(final CardView c, final String question) {
-        return GuiDialog.confirm(c, question, true, null);
+        return confirm(c, question, true, null);
     }
     public static boolean confirm(final CardView c, final String question, final boolean defaultChoice) {
-        return GuiDialog.confirm(c, question, defaultChoice, null);
+        return confirm(c, question, defaultChoice, null);
     }
     public static boolean confirm(final CardView c, final String question, String[] options) {
-        return GuiDialog.confirm(c, question, true, options);
+        return confirm(c, question, true, options);
     }
     
     public static boolean confirm(final CardView c, final String question, final boolean defaultIsYes, final String[] options) {
+        return confirm(c, question, defaultIsYes, options, null);
+    }
+    public static boolean confirm(final CardView c, final String question, final boolean defaultIsYes, final String[] options, final CMatchUI matchUI) {
         Callable<Boolean> confirmTask = new Callable<Boolean>() {
             @Override
             public Boolean call() throws Exception {
-                if (c != null) {
-                    CMatchUI.SINGLETON_INSTANCE.setCard(c);
+                if (matchUI != null && c != null) {
+                    matchUI.setCard(c);
                 }
 
                 final String title = c == null ? "Question" : c + " - Ability";

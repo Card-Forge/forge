@@ -17,13 +17,14 @@
  */
 package forge.view.arcane.util;
 
-import forge.view.arcane.CardPanel;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Container;
+import java.awt.EventQueue;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.JLayeredPane;
+
+import forge.view.arcane.CardPanel;
 
 /**
  * <p>
@@ -39,17 +40,6 @@ public abstract class Animation {
 
     /** Constant <code>timer</code>. */
     private static Timer timer = new Timer("Animation", true);
-
-    /** Constant <code>delayedCardPanel</code>. */
-    private static CardPanel delayedCardPanel;
-    /** Constant <code>delayedTime=</code>. */
-    private static long delayedTime;
-    /** Constant <code>enlargedCardPanel</code>. */
-    private static CardPanel enlargedCardPanel;
-    /** Constant <code>enlargedAnimationPanel</code>. */
-    private static CardPanel enlargedAnimationPanel;
-    /** Constant <code>enlargeLock</code>. */
-    private static Object enlargeLock = new Object();
 
     private TimerTask timerTask;
     private FrameTimer frameTimer;
@@ -419,190 +409,4 @@ public abstract class Animation {
         });
     }
 
-    /**
-     * <p>
-     * shrinkCard.
-     * </p>
-     */
-    public static void shrinkCard() {
-        CardPanel enlargedCardPanel, enlargedAnimationPanel;
-        synchronized (enlargeLock) {
-            delayedCardPanel = null;
-            delayedTime = 0;
-            enlargedCardPanel = Animation.enlargedCardPanel;
-            enlargedAnimationPanel = Animation.enlargedAnimationPanel;
-            if (enlargedAnimationPanel == null) {
-                return;
-            }
-            Animation.enlargedCardPanel = null;
-            Animation.enlargedAnimationPanel = null;
-        }
-
-        final CardPanel overPanel = enlargedCardPanel, animationPanel = enlargedAnimationPanel;
-
-        animationPanel.setAnimationPanel(true);
-        final JLayeredPane layeredPane = SwingUtilities.getRootPane(overPanel).getLayeredPane();
-        layeredPane.setLayer(animationPanel, JLayeredPane.MODAL_LAYER);
-
-        final int startWidth = animationPanel.getCardWidth();
-        final int startHeight = Math.round(startWidth * CardPanel.ASPECT_RATIO);
-        final int endWidth = overPanel.getCardWidth();
-        final int endHeight = Math.round(endWidth * CardPanel.ASPECT_RATIO);
-
-        new Animation(200) {
-            @Override
-            protected void update(final float percentage) {
-                int currentWidth = startWidth + Math.round((endWidth - startWidth) * percentage);
-                int currentHeight = startHeight + Math.round((endHeight - startHeight) * percentage);
-                Point startPos = SwingUtilities.convertPoint(overPanel.getParent(), overPanel.getCardLocation(),
-                        layeredPane);
-                int centerX = startPos.x + Math.round(endWidth / 2f);
-                int centerY = startPos.y + Math.round(endHeight / 2f);
-                int currentX = Math.max(0, centerX - Math.round(currentWidth / 2f));
-                currentX = Math.min(currentX, layeredPane.getWidth() - currentWidth);
-                int currentY = Math.max(0, centerY - Math.round(currentHeight / 2f));
-                currentY = Math.min(currentY, layeredPane.getHeight() - currentHeight);
-                animationPanel.setTappedAngle(overPanel.getTappedAngle() * percentage);
-                animationPanel.setCardBounds(currentX, currentY, currentWidth, currentHeight);
-            }
-
-            @Override
-            protected void end() {
-                animationPanel.setVisible(false);
-                animationPanel.repaint();
-                EventQueue.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        layeredPane.remove(animationPanel);
-                    }
-                });
-            }
-        };
-    }
-
-    /**
-     * <p>
-     * enlargeCard.
-     * </p>
-     * 
-     * @param overPanel
-     *            a {@link forge.view.arcane.CardPanel} object.
-     * @param clientFrame
-     *            a {@link java.awt.Frame} object.
-     * @param delay
-     *            a long.
-     */
-    public static void enlargeCard(final CardPanel overPanel, final Frame clientFrame, final long delay) {
-        if (SwingUtilities.getRootPane(overPanel) == null) {
-            synchronized (enlargeLock) {
-                delayedCardPanel = null;
-                delayedTime = 0;
-                if (Animation.enlargedCardPanel != null) {
-                    Animation.enlargedCardPanel = null;
-                }
-                if (enlargedAnimationPanel == null) {
-                    return;
-                }
-
-                Animation.enlargedAnimationPanel.setVisible(false);
-                Animation.enlargedAnimationPanel.repaint();
-                Animation.enlargedAnimationPanel = null;
-                return;
-            }
-        }
-        final JLayeredPane layeredPane = SwingUtilities.getRootPane(overPanel).getLayeredPane();
-
-        final int startWidth = overPanel.getCardWidth();
-        final int startHeight = Math.round(startWidth * CardPanel.ASPECT_RATIO);
-        final int endWidth = 300;
-        final int endHeight = Math.round(endWidth * CardPanel.ASPECT_RATIO);
-        if (startWidth >= endWidth) {
-            return;
-        }
-
-        long delayedTime;
-        synchronized (enlargeLock) {
-            if (enlargedCardPanel == overPanel) {
-                return; // Already showing this card enlarged.
-            }
-            if (delay > 0 && delayedCardPanel == overPanel) {
-                return; // Already delayed this card.
-            }
-            delayedCardPanel = overPanel;
-            Animation.delayedTime = System.currentTimeMillis();
-            delayedTime = Animation.delayedTime;
-        }
-        final long thisDelayedTime = delayedTime;
-
-        final CardPanel animationPanel = new CardPanel(overPanel.getCard());
-        animationPanel.setImage(overPanel);
-
-        new Animation(200, delay) {
-            @Override
-            protected void start() {
-                synchronized (enlargeLock) {
-                    // Cancel if the panel is no longer delayed or already
-                    // shown.
-                    if (delayedCardPanel != overPanel || thisDelayedTime != Animation.delayedTime
-                            || enlargedCardPanel == overPanel) {
-                        cancel();
-                        return;
-                    }
-                    shrinkCard();
-                    enlargedAnimationPanel = animationPanel;
-                    enlargedCardPanel = overPanel;
-                    Point startPos = overPanel.getCardLocation();
-                    animationPanel.setCardBounds(startPos.x, startPos.y, startWidth, startHeight);
-                }
-                // clientFrame.clearArrows();
-                animationPanel.setTappedAngle(overPanel.getTappedAngle());
-                try {
-                    SwingUtilities.invokeAndWait(new Runnable() {
-                        @Override
-                        public void run() {
-                            layeredPane.add(animationPanel);
-                            layeredPane.setLayer(animationPanel, JLayeredPane.DRAG_LAYER);
-                        }
-                    });
-                } catch (Exception ex) {
-                    throw new RuntimeException("Error invoking runnable in UI thread.", ex);
-                }
-            }
-
-            @Override
-            protected void update(final float percentage) {
-                synchronized (enlargeLock) {
-                    if (enlargedAnimationPanel != animationPanel) {
-                        cancel();
-                        return;
-                    }
-                }
-                int currentWidth = startWidth + Math.round((endWidth - startWidth) * percentage);
-                int currentHeight = startHeight + Math.round((endHeight - startHeight) * percentage);
-                Point startPos = SwingUtilities.convertPoint(overPanel.getParent(), overPanel.getCardLocation(),
-                        layeredPane);
-                int centerX = startPos.x + Math.round(startWidth / 2f);
-                int centerY = startPos.y + Math.round(startHeight / 2f);
-                int currentX = Math.max(0, centerX - Math.round(currentWidth / 2f));
-                currentX = Math.min(currentX, layeredPane.getWidth() - currentWidth);
-                int currentY = Math.max(0, centerY - Math.round(currentHeight / 2f));
-                currentY = Math.min(currentY, layeredPane.getHeight() - currentHeight);
-                animationPanel.setTappedAngle(overPanel.getTappedAngle() * (1 - percentage));
-                animationPanel.setCardBounds(currentX, currentY, currentWidth, currentHeight);
-            }
-        };
-    }
-
-    /**
-     * <p>
-     * isShowingEnlargedCard.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public static boolean isShowingEnlargedCard() {
-        synchronized (enlargeLock) {
-            return enlargedAnimationPanel != null;
-        }
-    }
 }

@@ -8,6 +8,7 @@ import forge.gui.framework.IVDoc;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerContainer;
 import forge.screens.deckeditor.controllers.CAllDecks;
+import forge.screens.match.controllers.CDetailPicture;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -25,12 +26,7 @@ public enum VAllDecks implements IVDoc<CAllDecks> {
     private DragCell parentCell;
     private final DragTab tab = new DragTab("All Decks");
 
-    private final DeckManager lstDecks = new DeckManager(GameType.Constructed);
-
-    //========== Constructor
-    private VAllDecks() {
-        lstDecks.setCaption("Decks");
-    }
+    private DeckManager lstDecks;
 
     //========== Overridden methods
 
@@ -90,5 +86,10 @@ public enum VAllDecks implements IVDoc<CAllDecks> {
     /** @return {@link javax.swing.JPanel} */
     public DeckManager getLstDecks() {
         return lstDecks;
+    }
+
+    public void setCDetailPicture(final CDetailPicture cDetailPicture) {
+        this.lstDecks = new DeckManager(GameType.Constructed, cDetailPicture);
+        this.lstDecks.setCaption("Decks");
     }
 }

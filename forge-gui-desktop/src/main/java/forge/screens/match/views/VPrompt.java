@@ -39,9 +39,7 @@ import java.awt.event.KeyEvent;
  * 
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VPrompt implements IVDoc<CPrompt> {
-    /** */
-    SINGLETON_INSTANCE;
+public class VPrompt implements IVDoc<CPrompt> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
@@ -66,8 +64,12 @@ public enum VPrompt implements IVDoc<CPrompt> {
         }
     };
 
+    private final CPrompt controller;
+
     //========= Constructor
-    private VPrompt() {
+    public VPrompt(final CPrompt controller) {
+        this.controller = controller;
+
         lblGames = new FLabel.Builder()
         .fontSize(12)
         .fontStyle(Font.PLAIN)
@@ -142,7 +144,7 @@ public enum VPrompt implements IVDoc<CPrompt> {
      */
     @Override
     public CPrompt getLayoutControl() {
-        return CPrompt.SINGLETON_INSTANCE;
+        return controller;
     }
 
     /* (non-Javadoc)

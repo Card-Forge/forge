@@ -1,14 +1,12 @@
 package forge.screens.match.views;
 
+import forge.Forge;
 import forge.assets.FSkinImage;
 import forge.deck.Deck;
 import forge.deck.FDeckViewer;
-import forge.game.Game;
-import forge.game.player.Player;
-import forge.game.spellability.SpellAbility;
-import forge.match.MatchUtil;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
+import forge.screens.match.MatchController;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
@@ -20,14 +18,14 @@ public class VGameMenu extends FDropDownMenu {
 
     @Override
     protected void buildMenu() {
-        final Game game = MatchUtil.getGame();
+        
         addItem(new FMenuItem("Concede", FSkinImage.CONCEDE, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        MatchUtil.concede();
+                        MatchController.instance.getGameController().concede();
                     }
                 });
             }
@@ -48,7 +46,7 @@ public class VGameMenu extends FDropDownMenu {
         addItem(new FMenuItem("Deck List", FSkinImage.DECKLIST, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                final Deck deck = MatchUtil.getCurrentPlayer().getRegisteredPlayer().getDeck();
+                final Deck deck = Forge.hostedMatch.getGame().getPhaseHandler().getPlayerTurn().getRegisteredPlayer().getDeck();
                 if (deck != null) {
                     FDeckViewer.show(deck);
                 }
@@ -57,20 +55,20 @@ public class VGameMenu extends FDropDownMenu {
         addItem(new FMenuItem("Auto-Yields", FSkinImage.WARNING, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                final Player localPlayer = MatchUtil.getCurrentPlayer();
-                if (localPlayer == null) { return; }
-
-                final boolean autoYieldsDisabled = game.getDisableAutoYields();
-                VAutoYields autoYields = new VAutoYields(game, localPlayer) {
+                final boolean autoYieldsDisabled = MatchController.instance.getDisableAutoYields();
+                final VAutoYields autoYields = new VAutoYields() {
                     @Override
                     public void setVisible(boolean b0) {
                         super.setVisible(b0);
                         if (!b0) {
-                            if (autoYieldsDisabled && !game.getDisableAutoYields()) {
+                            if (autoYieldsDisabled && !MatchController.instance.getDisableAutoYields()) {
                                 //if re-enabling auto-yields, auto-yield to current ability on stack if applicable
-                                SpellAbility ability = game.getStack().peekAbility();
-                                if (ability != null && ability.isAbility() && localPlayer.getController().shouldAutoYield(ability.toUnsuppressedString())) {
-                                    MatchUtil.getHumanController().passPriority();
+                                final String key = MatchController.instance.getGameView().peekStack().getKey();
+                                final boolean autoYield = MatchController.instance.shouldAutoYield(key);
+                                MatchController.instance.setShouldAutoYield(key, !autoYield);
+                                if (!autoYield && MatchController.instance.shouldAutoYield(key)) {
+                                    //auto-pass priority if ability is on top of stack
+                                    MatchController.instance.getGameController().passPriority();
                                 }
                             }
                         }

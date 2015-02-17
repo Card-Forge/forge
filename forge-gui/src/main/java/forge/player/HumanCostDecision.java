@@ -1,5 +1,13 @@
 package forge.player;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -16,7 +24,34 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardView;
 import forge.game.card.CounterType;
-import forge.game.cost.*;
+import forge.game.cost.CostAddMana;
+import forge.game.cost.CostChooseCreatureType;
+import forge.game.cost.CostDamage;
+import forge.game.cost.CostDecisionMakerBase;
+import forge.game.cost.CostDiscard;
+import forge.game.cost.CostDraw;
+import forge.game.cost.CostExile;
+import forge.game.cost.CostExileFromStack;
+import forge.game.cost.CostExiledMoveToGrave;
+import forge.game.cost.CostFlipCoin;
+import forge.game.cost.CostGainControl;
+import forge.game.cost.CostGainLife;
+import forge.game.cost.CostMill;
+import forge.game.cost.CostPartMana;
+import forge.game.cost.CostPayLife;
+import forge.game.cost.CostPutCardToLib;
+import forge.game.cost.CostPutCounter;
+import forge.game.cost.CostRemoveAnyCounter;
+import forge.game.cost.CostRemoveCounter;
+import forge.game.cost.CostReturn;
+import forge.game.cost.CostReveal;
+import forge.game.cost.CostSacrifice;
+import forge.game.cost.CostTap;
+import forge.game.cost.CostTapType;
+import forge.game.cost.CostUnattach;
+import forge.game.cost.CostUntap;
+import forge.game.cost.CostUntapType;
+import forge.game.cost.PaymentDecision;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
@@ -28,11 +63,6 @@ import forge.util.Aggregates;
 import forge.util.FCollectionView;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
-import forge.util.gui.SGuiChoose;
-import forge.util.gui.SGuiDialog;
-
-import java.util.*;
-import java.util.Map.Entry;
 
 public class HumanCostDecision extends CostDecisionMakerBase {
     private final PlayerControllerHuman controller;
@@ -298,18 +328,18 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.number(0);
         }
         final Game game = controller.getGame();
-        final Player p = game.getPlayer(SGuiChoose.oneOrNone(String.format("Exile from whose %s?", cost.getFrom()), PlayerView.getCollection(payableZone)));
+        final Player p = game.getPlayer(controller.getGui().oneOrNone(String.format("Exile from whose %s?", cost.getFrom()), PlayerView.getCollection(payableZone)));
         if (p == null) {
             return null;
         }
 
-        CardCollection typeList = CardLists.filter(list, CardPredicates.isOwner(p));
-        int count = typeList.size();
+        final CardCollection typeList = CardLists.filter(list, CardPredicates.isOwner(p));
+        final int count = typeList.size();
         if (count < nNeeded) {
             return null;
         }
 
-        CardCollection toExile = game.getCardList(SGuiChoose.many("Exile from " + cost.getFrom(), "To be exiled", nNeeded, CardView.getCollection(typeList), null));
+        final CardCollection toExile = game.getCardList(controller.getGui().many("Exile from " + cost.getFrom(), "To be exiled", nNeeded, CardView.getCollection(typeList), null));
         return PaymentDecision.card(toExile);
     }
     
@@ -357,7 +387,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         List<SpellAbility> exiled = new ArrayList<SpellAbility>();
         for (int i = 0; i < c; i++) {
             //Have to use the stack descriptions here because some copied spells have no description otherwise
-            final String o = SGuiChoose.oneOrNone("Exile from Stack", descList);
+            final String o = controller.getGui().oneOrNone("Exile from Stack", descList);
 
             if (o != null) {
                 final SpellAbility toExile = saList.get(descList.indexOf(o));
@@ -393,7 +423,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         CardCollection exiled = new CardCollection();
         for (int i = 0; i < nNeeded; i++) {
-            final Card c = getCard(SGuiChoose.oneOrNone("Exile from " + cost.getFrom(), CardView.getCollection(typeList)));
+            final Card c = getCard(controller.getGui().oneOrNone("Exile from " + cost.getFrom(), CardView.getCollection(typeList)));
             if (c == null) { return null; }
 
             typeList.remove(c);
@@ -422,7 +452,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (list.size() < c) {
             return null;
         }
-        final CardCollection choice = controller.getGame().getCardList(SGuiChoose.many("Choose an exiled card to put into graveyard", "To graveyard", c, CardView.getCollection(list), CardView.get(source)));
+        final CardCollection choice = controller.getGame().getCardList(controller.getGui().many("Choose an exiled card to put into graveyard", "To graveyard", c, CardView.getCollection(list), CardView.get(source)));
         return PaymentDecision.card(choice);
     }
 
@@ -494,7 +524,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         final StringBuilder sb = new StringBuilder();
         sb.append(source.getName()).append(" - Choose an opponent to gain ").append(c).append(" life:");
 
-        final Player chosenToGain = controller.getGame().getPlayer(SGuiChoose.oneOrNone(sb.toString(), PlayerView.getCollection(oppsThatCanGainLife)));
+        final Player chosenToGain = controller.getGame().getPlayer(controller.getGui().oneOrNone(sb.toString(), PlayerView.getCollection(oppsThatCanGainLife)));
         if (chosenToGain == null) {
             return null;
         }
@@ -604,7 +634,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         CardCollection chosen = new CardCollection();
         for (int i = 0; i < nNeeded; i++) {
-            final Card c = getCard(SGuiChoose.oneOrNone("Put from " + fromZone + " to library", CardView.getCollection(typeList)));
+            final Card c = getCard(controller.getGui().oneOrNone("Put from " + fromZone + " to library", CardView.getCollection(typeList)));
             if (c == null) {
                 return null;
             }
@@ -619,7 +649,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.number(0);
         }
 
-        final Player p = controller.getGame().getPlayer(SGuiChoose.oneOrNone(String.format("Put cards from whose %s?", fromZone), PlayerView.getCollection(payableZone)));
+        final Player p = controller.getGame().getPlayer(controller.getGui().oneOrNone(String.format("Put cards from whose %s?", fromZone), PlayerView.getCollection(payableZone)));
         if (p == null) {
             return null;
         }
@@ -631,7 +661,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         CardCollection chosen = new CardCollection();
         for (int i = 0; i < nNeeded; i++) {
-            final Card c = getCard(SGuiChoose.oneOrNone("Put cards from " + fromZone + " to Library", CardView.getCollection(typeList)));
+            final Card c = getCard(controller.getGui().oneOrNone("Put cards from " + fromZone + " to Library", CardView.getCollection(typeList)));
             if (c == null) {
                 return null;
             }
@@ -805,7 +835,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         String prompt = "Select type counters to remove";
-        cost.setCounterType(SGuiChoose.one(prompt, typeChoices));
+        cost.setCounterType(controller.getGui().one(prompt, typeChoices));
         
         return PaymentDecision.card(selected, cost.getCounter());
     }
@@ -903,7 +933,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             int maxCounters = source.getCounters(cost.counter);
             if (amount.equals("All")) {
                 final CardView view = CardView.get(ability.getHostCard());
-                if (!SGuiDialog.confirm(view, "Remove all counters?")) {
+                if (!controller.getGui().confirm(view, "Remove all counters?")) {
                     return null;
                 }
                 cntRemoved = maxCounters;
@@ -959,7 +989,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             }
         }
 
-        final Card card = getCard(SGuiChoose.oneOrNone("Remove counter(s) from a card in " + cost.zone, suspended));
+        final Card card = getCard(controller.getGui().oneOrNone("Remove counter(s) from a card in " + cost.zone, suspended));
         return null == card ? null : PaymentDecision.card(card, c);
     }
 

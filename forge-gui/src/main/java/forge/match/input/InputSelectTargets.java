@@ -14,11 +14,8 @@ import forge.game.card.CardView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.match.MatchUtil;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
-import forge.util.gui.SGuiChoose;
-
 
 public final class InputSelectTargets extends InputSyncronizedBase {
     private final List<Card> choices;
@@ -70,19 +67,19 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         if (!tgt.isMinTargetsChosen(sa.getHostCard(), sa) || tgt.isDividedAsYouChoose()) {
             if (mandatory && tgt.hasCandidates(sa, true)) {
                 // Player has to click on a target
-                ButtonUtil.update(getOwner(), false, false, false);
+                getController().getGui().updateButtons(getOwner(), false, false, false);
             }
             else {
-                ButtonUtil.update(getOwner(), false, true, false);
+                getController().getGui().updateButtons(getOwner(), false, true, false);
             }
         }
         else {
             if (mandatory && tgt.hasCandidates(sa, true)) {
                 // Player has to click on a target or ok
-                ButtonUtil.update(getOwner(), true, false, true);
+                getController().getGui().updateButtons(getOwner(), true, false, true);
             }
             else {
-                ButtonUtil.update(getOwner(), true, true, true);
+                getController().getGui().updateButtons(getOwner(), true, true, true);
             }
         }
     }
@@ -170,7 +167,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 final StringBuilder sb = new StringBuilder();
                 sb.append(apiBasedMessage);
                 sb.append(card.toString());
-                Integer chosen = SGuiChoose.oneOrNone(sb.toString(), choices);
+                final Integer chosen = getController().getGui().oneOrNone(sb.toString(), choices);
                 if (chosen == null) {
                     return true; //still return true since there was a valid choice
                 }
@@ -226,7 +223,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 final StringBuilder sb = new StringBuilder();
                 sb.append(apiBasedMessage);
                 sb.append(player.getName());
-                Integer chosen = SGuiChoose.oneOrNone(sb.toString(), choices);
+                final Integer chosen = getController().getGui().oneOrNone(sb.toString(), choices);
                 if (null == chosen) {
                     return;
                 }
@@ -243,7 +240,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     private void addTarget(final GameEntity ge) {
         sa.getTargets().add(ge);
         if (ge instanceof Card) {
-            MatchUtil.setUsedToPay(CardView.get((Card) ge), true);
+            getController().getGui().setUsedToPay(CardView.get((Card) ge), true);
             lastTarget = (Card) ge;
         }
         final Integer val = targetDepth.get(ge);
@@ -260,7 +257,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     private void done() {
         for (final GameEntity c : targetDepth.keySet()) {
             if (c instanceof Card) {
-                MatchUtil.setUsedToPay(CardView.get((Card) c), false);
+                getController().getGui().setUsedToPay(CardView.get((Card) c), false);
             }
         }
 

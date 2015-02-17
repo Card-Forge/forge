@@ -3,13 +3,23 @@
  */
 package forge.gui.framework;
 
-import forge.screens.deckeditor.views.*;
+import forge.screens.deckeditor.views.VAllDecks;
+import forge.screens.deckeditor.views.VCardCatalog;
+import forge.screens.deckeditor.views.VCurrentDeck;
+import forge.screens.deckeditor.views.VDeckgen;
+import forge.screens.deckeditor.views.VProbabilities;
+import forge.screens.deckeditor.views.VStatistics;
 import forge.screens.home.gauntlet.VSubmenuGauntletBuild;
 import forge.screens.home.gauntlet.VSubmenuGauntletContests;
 import forge.screens.home.gauntlet.VSubmenuGauntletLoad;
 import forge.screens.home.gauntlet.VSubmenuGauntletQuick;
 import forge.screens.home.online.VSubmenuOnlineLobby;
-import forge.screens.home.quest.*;
+import forge.screens.home.quest.VSubmenuChallenges;
+import forge.screens.home.quest.VSubmenuDuels;
+import forge.screens.home.quest.VSubmenuQuestData;
+import forge.screens.home.quest.VSubmenuQuestDecks;
+import forge.screens.home.quest.VSubmenuQuestDraft;
+import forge.screens.home.quest.VSubmenuQuestPrefs;
 import forge.screens.home.sanctioned.VSubmenuConstructed;
 import forge.screens.home.sanctioned.VSubmenuDraft;
 import forge.screens.home.sanctioned.VSubmenuSealed;
@@ -19,7 +29,6 @@ import forge.screens.home.settings.VSubmenuAvatars;
 import forge.screens.home.settings.VSubmenuDownloaders;
 import forge.screens.home.settings.VSubmenuPreferences;
 import forge.screens.home.settings.VSubmenuReleaseNotes;
-import forge.screens.match.views.*;
 import forge.screens.workshop.views.VCardDesigner;
 import forge.screens.workshop.views.VCardScript;
 import forge.screens.workshop.views.VWorkshopCatalog;
@@ -31,9 +40,9 @@ import forge.screens.workshop.views.VWorkshopCatalog;
  * <br><br><i>(E at beginning of class name denotes an enum.)</i>
  */
 public enum EDocID {
-    CARD_PICTURE (VPicture.SINGLETON_INSTANCE),
-    CARD_DETAIL (VDetail.SINGLETON_INSTANCE),
-    CARD_ANTES (VAntes.SINGLETON_INSTANCE),
+    CARD_PICTURE (),
+    CARD_DETAIL (),
+    CARD_ANTES (),
 
     EDITOR_ALLDECKS (VAllDecks.SINGLETON_INSTANCE),
     EDITOR_STATISTICS (VStatistics.SINGLETON_INSTANCE),
@@ -67,53 +76,63 @@ public enum EDocID {
     HOME_LOBBY (VSubmenuOnlineLobby.SINGLETON_INSTANCE),
     HOME_RELEASE_NOTES (VSubmenuReleaseNotes.SINGLETON_INSTANCE),
 
-    REPORT_MESSAGE (VPrompt.SINGLETON_INSTANCE),
-    REPORT_STACK (VStack.SINGLETON_INSTANCE),
-    REPORT_COMBAT (VCombat.SINGLETON_INSTANCE),
-    REPORT_LOG (VLog.SINGLETON_INSTANCE),
-    REPORT_PLAYERS (VPlayers.SINGLETON_INSTANCE),
+    REPORT_MESSAGE (),
+    REPORT_STACK (),
+    REPORT_COMBAT (),
+    REPORT_LOG (),
+    REPORT_PLAYERS (),
 
-    DEV_MODE (VDev.SINGLETON_INSTANCE),
-    BUTTON_DOCK (VDock.SINGLETON_INSTANCE),
+    DEV_MODE (),
+    BUTTON_DOCK (),
 
-    // Non-user battlefields (AI or teammate), use setDoc to register.
-    FIELD_0 (null),
-    FIELD_1 (null),
-    FIELD_2 (null),
-    FIELD_3 (null),
-    FIELD_4 (null),
-    FIELD_5 (null),
-    FIELD_6 (null),
-    FIELD_7 (null),
+    // Battlefields, use setDoc to register.
+    FIELD_0 (),
+    FIELD_1 (),
+    FIELD_2 (),
+    FIELD_3 (),
+    FIELD_4 (),
+    FIELD_5 (),
+    FIELD_6 (),
+    FIELD_7 (),
 
-    // Non-user hands (AI or teammate), use setDoc to register.
-    HAND_0 (null),
-    HAND_1 (null),
-    HAND_2 (null),
-    HAND_3 (null),
-    HAND_4 (null),
-    HAND_5 (null),
-    HAND_6 (null),
-    HAND_7 (null),
+    // Hands, use setDoc to register.
+    HAND_0 (),
+    HAND_1 (),
+    HAND_2 (),
+    HAND_3 (),
+    HAND_4 (),
+    HAND_5 (),
+    HAND_6 (),
+    HAND_7 (),
 
-    COMMAND_0 (null),
-    COMMAND_1 (null),
-    COMMAND_2 (null),
-    COMMAND_3 (null),
-    COMMAND_4 (null),
-    COMMAND_5 (null),
-    COMMAND_6 (null),
-    COMMAND_7 (null);
+    // Command zones, use setDoc to register.
+    COMMAND_0 (),
+    COMMAND_1 (),
+    COMMAND_2 (),
+    COMMAND_3 (),
+    COMMAND_4 (),
+    COMMAND_5 (),
+    COMMAND_6 (),
+    COMMAND_7 ();
 
     public final static EDocID[] Commands = new EDocID[] {COMMAND_0, COMMAND_1, COMMAND_2, COMMAND_3, COMMAND_4, COMMAND_5, COMMAND_6, COMMAND_7};
     public final static EDocID[] Fields = new EDocID[] {FIELD_0, FIELD_1, FIELD_2, FIELD_3, FIELD_4, FIELD_5, FIELD_6, FIELD_7};
     public final static EDocID[] Hands = new EDocID[] {HAND_0, HAND_1, HAND_2, HAND_3, HAND_4, HAND_5, HAND_6, HAND_7};
+    static {
+        for (int i = 0; i < 8; i++) EDocID.Fields[i].setDoc(new VEmptyDoc(EDocID.Fields[i]));
+        for (int i = 0; i < 8; i++) EDocID.Commands[i].setDoc(new VEmptyDoc(EDocID.Commands[i]));
+        for (int i = 0; i < 8; i++) EDocID.Hands[i].setDoc(new VEmptyDoc(EDocID.Hands[i]));
+    }
 
     // End enum declarations, start enum methods.
     private IVDoc<? extends ICDoc> vDoc;
 
+    private EDocID() {
+        this(null);
+    }
+
     /** @param doc0 &emsp; {@link forge.gui.framework.IVDoc} */
-    EDocID(final IVDoc<? extends ICDoc> doc0) {
+    private EDocID(final IVDoc<? extends ICDoc> doc0) {
         this.vDoc = doc0;
     }
 
@@ -124,7 +143,7 @@ public enum EDocID {
 
     /** @return {@link forge.gui.framework.IVDoc} */
     public IVDoc<? extends ICDoc> getDoc() {
-        if (vDoc == null) { throw new NullPointerException("No document found for " + this.name() + "."); }
+        //if (vDoc == null) { throw new NullPointerException("No document found for " + this.name() + "."); }
         return vDoc;
     }
 }

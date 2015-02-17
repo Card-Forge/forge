@@ -17,15 +17,18 @@
  */
 package forge.screens.workshop;
 
-import forge.UiCommand;
+import java.util.List;
+
+import javax.swing.JMenu;
+
 import forge.Singletons;
+import forge.UiCommand;
+import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.menus.IMenuProvider;
+import forge.screens.match.controllers.CDetailPicture;
 import forge.screens.workshop.menus.CWorkshopUIMenus;
-
-import javax.swing.*;
-
-import java.util.List;
+import forge.screens.workshop.views.VWorkshopCatalog;
 
 /**
  * Constructs instance of workshop UI controller, used as a single point of
@@ -56,6 +59,13 @@ public enum CWorkshopUI implements ICDoc, IMenuProvider {
     @Override
     public UiCommand getCommandOnSelect() {
         return null;
+    }
+
+    @Override
+    public void register() {
+        final CDetailPicture cDetailPicture = VWorkshopCatalog.SINGLETON_INSTANCE.getCDetailPicture();
+        EDocID.CARD_PICTURE.setDoc(cDetailPicture.getCPicture().getView());
+        EDocID.CARD_DETAIL.setDoc(cDetailPicture.getCDetail().getView());
     }
 
     /* (non-Javadoc)

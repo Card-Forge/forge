@@ -4,10 +4,8 @@ import forge.control.FControlGamePlayback;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
-import forge.game.player.PlayerView;
-import forge.match.MatchUtil;
 
-public class InputPlaybackControl extends InputSyncronizedBase implements InputSynchronized {
+public class InputPlaybackControl extends InputSyncronizedBase {
     private static final long serialVersionUID = 7979208993306642072L;
 
     final FControlGamePlayback control;
@@ -17,15 +15,10 @@ public class InputPlaybackControl extends InputSyncronizedBase implements InputS
 
     private final Game game;
     public InputPlaybackControl(final Game game0, final FControlGamePlayback fControlGamePlayback) {
-        super(null);
+        super(fControlGamePlayback.getController());
         game = game0;
         control = fControlGamePlayback;
         setPause(false);
-    }
-
-    @Override
-    public PlayerView getOwner() {
-        return MatchUtil.getHumanController().getLocalPlayerView();
     }
 
     @Override
@@ -39,8 +32,7 @@ public class InputPlaybackControl extends InputSyncronizedBase implements InputS
         if (isPaused) {
             showMessage(getTurnPhasePriorityMessage(game));
             currentTurn = 0;
-        }
-        else {
+        } else {
             final PhaseHandler ph = game.getPhaseHandler();
             if (currentTurn == ph.getTurn()) { return; }
 
@@ -49,13 +41,12 @@ public class InputPlaybackControl extends InputSyncronizedBase implements InputS
         }
     }
 
-    private void setPause(boolean pause) {
+    private void setPause(final boolean pause) {
         isPaused = pause; 
         if (isPaused) {
-            ButtonUtil.update(getOwner(), "Resume", "Step", true, true, true);
-        }
-        else {
-            ButtonUtil.update(getOwner(), "Pause", isFast ? "1x Speed" : "10x Faster", true, true, true);
+            getController().getGui().updateButtons(null, "Resume", "Step", true, true, true);
+        } else {
+            getController().getGui().updateButtons(null, "Pause", isFast ? "1x Speed" : "10x Faster", true, true, true);
         }
     }
 

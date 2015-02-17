@@ -45,6 +45,10 @@ public enum CSubmenuQuestData implements ICDoc {
     private final UiCommand cmdQuestUpdate = new UiCommand() { @Override
         public void run() { update(); } };
 
+    @Override
+    public void register() {
+    }
+
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
      */

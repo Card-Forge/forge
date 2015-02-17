@@ -9,7 +9,7 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
-import forge.match.MatchUtil;
+import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.ThreadUtil;
 
@@ -18,9 +18,11 @@ public class InputLockUI implements Input {
 
     private final InputQueue inputQueue;
     private final Game game;
-    public InputLockUI(final Game game0, final InputQueue inputQueue0) {
+    private final PlayerControllerHuman controller;
+    public InputLockUI(final Game game0, final InputQueue inputQueue0, final PlayerControllerHuman controller) {
         game = game0;
         inputQueue = inputQueue0;
+        this.controller = controller;
     }
 
     @Override
@@ -32,7 +34,7 @@ public class InputLockUI implements Input {
         int ixCall = 1 + iCall.getAndIncrement();
         ThreadUtil.delay(500, new InputUpdater(ixCall));
     }
-    
+
     @Override
     public String toString() {
         return "lockUI"; 
@@ -56,7 +58,7 @@ public class InputLockUI implements Input {
     private final Runnable showMessageFromEdt = new Runnable() {
         @Override
         public void run() {
-            ButtonUtil.update(InputLockUI.this.getOwner(), "", "", false, false, false);
+            controller.getGui().updateButtons(InputLockUI.this.getOwner(), "", "", false, false, false);
             showMessage("Waiting for actions...");
         }
     };
@@ -66,7 +68,7 @@ public class InputLockUI implements Input {
     }
 
     protected void showMessage(String message) { 
-        MatchUtil.getController().showPromptMessage(getOwner(), message);
+        controller.getGui().showPromptMessage(getOwner(), message);
     }
 
     @Override
