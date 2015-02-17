@@ -366,28 +366,32 @@ public class DamageDealAi extends DamageAiBase {
                 // TODO: add check here if card is about to die from something
                 // on the stack
                 // or from taking combat damage
-                if (!source.isSpell()){
-                    boolean freePing = isTrigger || sa.getPayCosts() == null || sa.getTargets().getNumTargeted() > 0
-                    		|| ComputerUtil.playImmediately(ai, sa);
-    
+
+                boolean freePing = isTrigger || sa.getPayCosts() == null
+                        || sa.getTargets().getNumTargeted() > 0
+                        || ComputerUtil.playImmediately(ai, sa);
+
+                if (!source.isSpell()) {
                     if (phase.is(PhaseType.END_OF_TURN) && sa.isAbility()) {
                         if (phase.getNextTurn().equals(ai))
                             freePing = true;
                     }
-    
+
                     if (phase.is(PhaseType.MAIN2) && sa.isAbility()) {
-                        if (sa.getRestrictions().isPwAbility() || source.hasSVar("EndOfTurnLeavePlay"))
+                        if (sa.getRestrictions().isPwAbility()
+                                || source.hasSVar("EndOfTurnLeavePlay"))
                             freePing = true;
                     }
-    
-                    if (freePing && sa.canTarget(enemy)) {
-                        tcs.add(enemy);
-                        if (divided) {
-                            tgt.addDividedAllocation(enemy, dmg);
-                            break;
-                        }
+                }
+
+                if (freePing && sa.canTarget(enemy)) {
+                    tcs.add(enemy);
+                    if (divided) {
+                        tgt.addDividedAllocation(enemy, dmg);
+                        break;
                     }
                 }
+                
             } else if (tgt.canTgtCreature()) {
                 final Card c = this.dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatory);
                 if (c != null) {
