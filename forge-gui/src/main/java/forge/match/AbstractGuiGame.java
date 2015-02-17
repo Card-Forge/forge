@@ -36,6 +36,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     protected final void setLocalPlayers(final FCollectionView<PlayerView> players) {
         this.localPlayers = players;
+        this.currentPlayer = Iterables.getFirst(players, null);
     }
     public final boolean hasLocalPlayers() {
         return localPlayers != null && !localPlayers.isEmpty();
