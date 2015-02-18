@@ -33,6 +33,8 @@ public final class WorkshopFileMenu {
     private static JMenuItem menuItem_SaveCard;
     
     public static void updateSaveEnabled() {
+        if (menuItem_SaveCard == null)
+            getMenuItem_SaveCard();
     	menuItem_SaveCard.setEnabled(CCardScript.SINGLETON_INSTANCE.hasChanges());
     }
 
