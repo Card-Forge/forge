@@ -1359,6 +1359,12 @@ You can now hold the Shift key when clicking on mana pool icons to use as much o
 Forge now supports showing XLHQ (extra large high quality) card pictures when zooming in on a card if these pictures are available. Forge will look for XLHQ card art in the "XLHQ" subfolder of the "pics/cards" folder in Forge cache. XLHQ pictures should have the ".xlhq.jpg" extension instead of the ".full.jpg" one (CCGHQ XLHQ releases comply with this naming scheme). For example, while the regular 10th edition Blaze will be looked up as "pics/cards/10E/Blaze.full.jpg", the XLHQ version will be looked up as "pics/cards/XLHQ/10E/Blaze.xlhq.jpg". If the XLHQ picture is not available Forge will show you the regular card picture in the zoomed view, as usual. Please note that XLHQ versions of cards are *only* showed in the zoom view, regular card pictures are still used (LQ/HQ, depending on what you're using) on the battlefield and elsewhere in the game because XLHQ art is significantly more taxing in memory consumption even when compared to standard high quality (HQ) releases (and in addition to that, XLHQ card borders are not cropped the way Forge expects them in order to show them properly on the battlefield anyway). XLHQ tokens are also supported, but the naming scheme for them is a little different - they are looked up in "pics/tokens/XLHQ" and have their ordinary names. For example, the 1/1 red Goblin token from the Magic 2015 set is normally looked up at "pics/tokens/r_1_1_goblin_m15.jpg", while its XLHQ version is looked up at "pics/tokens/XLHQ/r_1_1_goblin_m15.jpg".
 
 
+- Net Decks support -
+On the Constructed screen, you can now select a new Net Decks category from the drop down.
+Contains all decks from gos's Forge Decks subforums, broken up by the column/event they were taken from.
+Won't cause startup to be slower since they are loaded on the fly.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 

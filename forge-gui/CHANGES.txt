@@ -1,17 +1,12 @@
-Forge Beta: 2-14-2015 ver 1.5.35
+Forge Beta: 2-#-2015 ver 1.5.36
 
 
-14514 cards in total.
+# cards in total.
 
 
 -------------
 Release Notes
 -------------
-
-- Net Decks support -
-On the Constructed screen, you can now select a new Net Decks category from the drop down.
-Contains all decks from gos's Forge Decks subforums, broken up by the column/event they were taken from.
-Won't cause startup to be slower since they are loaded on the fly.
 
 - Canceling Delve now refunds exiled cards -
 If you cancel casting a spell after selecting cards to Delve, the selected cards will no longer get exiled.
@@ -69,18 +64,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-Agetian
-DrDev
-elcnesh
-excessum
-Gos
-Hellfish
-Max mtg
-Myrd
-Sloth
-Sol
-Swordshine
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
