@@ -75,6 +75,20 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         return matchUI;
     }
 
+    private void mouseWheelZoom(final CardView card) {
+        if (canZoom(card)) {
+            CardZoomer.SINGLETON_INSTANCE.doMouseWheelZoom(card);
+        }
+    }
+    private void mouseButtonZoom(final CardView card) {
+        if (canZoom(card)) {
+            CardZoomer.SINGLETON_INSTANCE.doMouseButtonZoom(card);
+        }
+    }
+    private boolean canZoom(final CardView card) {
+        return getMatchUI().mayView(card);
+    }
+
     private void setupMouseListeners() {
         final MouseMotionListener mml = setupMotionMouseListener();
         setupMouseListener(mml);
@@ -86,10 +100,8 @@ public abstract class CardPanelContainer extends SkinnedPanel {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
                 final CardPanel hitPanel = getCardPanel(e.getX(), e.getY());
-                if (hitPanel != null) {
-                    if (e.getWheelRotation() < 0) {
-                        CardZoomer.SINGLETON_INSTANCE.doMouseWheelZoom(hitPanel.getCard());
-                    }
+                if (hitPanel != null && e.getWheelRotation() < 0) {
+                    mouseWheelZoom(hitPanel.getCard());
                 }
             }
         });
@@ -111,7 +123,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
                 if (mouseDownPanel != null && getMouseDragPanel() == null &&
                         (this.buttonsDown[2] || (this.buttonsDown[1] && this.buttonsDown[3]))) {
                     //zoom card when middle mouse button down or both left and right mouse buttons down
-                    CardZoomer.SINGLETON_INSTANCE.doMouseButtonZoom(mouseDownPanel.getCard());
+                    mouseButtonZoom(mouseDownPanel.getCard());
                 }
             }
 

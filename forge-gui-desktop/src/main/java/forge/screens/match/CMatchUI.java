@@ -168,6 +168,9 @@ public final class CMatchUI
         }
     }
 
+    FScreen getScreen() {
+        return this.screen;
+    }
     public boolean isCurrentScreen() {
         return Singletons.getControl().getCurrentScreen() == this.screen;
     }
@@ -257,15 +260,16 @@ public final class CMatchUI
 
         int i = 0;
         for (final PlayerView p : sortedPlayers) {
+            final boolean mirror = !isLocalPlayer(p);
             // A field must be initialized after it's instantiated, to update player info.
             // No player, no init.
             final EDocID fieldDoc = EDocID.Fields[i];
-            final VField f = new VField(this, fieldDoc, p);
+            final VField f = new VField(this, fieldDoc, p, mirror);
             fields.add(f);
             myDocs.put(fieldDoc, f);
 
             final EDocID commandDoc = EDocID.Commands[i];
-            final VCommand c = new VCommand(this, commandDoc, p);
+            final VCommand c = new VCommand(this, commandDoc, p, mirror);
             commands.add(c);
             myDocs.put(commandDoc, c);
 
@@ -339,12 +343,15 @@ public final class CMatchUI
     }
 
     /**
+     * Checks if game control should stop at a phase, for either a forced
+     * programmatic stop, or a user-induced phase toggle.
      * 
-     * Checks if game control should stop at a phase, for either
-     * a forced programmatic stop, or a user-induced phase toggle.
-     * @param turn &emsp; {@link forge.game.player.Player}
-     * @param phase &emsp; {@link java.lang.String}
-     * @return boolean
+     * @param turn
+     *            the {@link Player} at whose phase might be stopped.
+     * @param phase
+     *            the {@link PhaseType} at which might be stopped.
+     * @return boolean whether the current GUI calls for a stop at the specified
+     *         phase of the specified player.
      */
     @Override
     public final boolean stopAtPhase(final PlayerView turn, final PhaseType phase) {
@@ -608,8 +615,9 @@ public final class CMatchUI
     @Override
     public void finishGame() {
         FloatingCardArea.closeAll(); //ensure floating card areas cleared and closed after the game
-        if (hasLocalPlayers() || getGameView().isMatchOver()) {
-            new ViewWinLose(getGameView(), this);
+        final GameView gameView = getGameView();
+        if (hasLocalPlayers() || gameView.isMatchOver()) {
+            new ViewWinLose(gameView, this);
         }
         if (showOverlay) {
             SOverlayUtils.showOverlay();
@@ -758,9 +766,10 @@ public final class CMatchUI
 
     @Override
     public void openView(final FCollectionView<PlayerView> myPlayers) {
-        getGameView().getGameLog().addObserver(getCLog());
+        final GameView gameView = getGameView();
+        gameView.getGameLog().addObserver(getCLog());
 
-        initMatch(getGameView().getPlayers(), myPlayers);
+        initMatch(gameView.getPlayers(), myPlayers);
 
         actuateMatchPreferences();
 
@@ -770,7 +779,7 @@ public final class CMatchUI
         // per player observers were set in CMatchUI.SINGLETON_INSTANCE.initMatch
         //Set Field shown to current player.
         //if (util.getHumanCount() > 0) {
-            final VField nextField = getFieldViewFor(getGameView().getPlayers().get(0));
+            final VField nextField = getFieldViewFor(gameView.getPlayers().get(0));
             SDisplayUtil.showTab(nextField);
         //}
         SOverlayUtils.hideOverlay();

@@ -58,7 +58,7 @@ public class VCommand implements IVDoc<CCommand> {
      * @param p &emsp; {@link forge.game.player.Player}
      * @param id0 &emsp; {@link forge.gui.framework.EDocID}
      */
-    public VCommand(final CMatchUI matchUI, final EDocID id0, final PlayerView p) {
+    public VCommand(final CMatchUI matchUI, final EDocID id0, final PlayerView p, final boolean mirror) {
         this.docID = id0;
 
         this.player = p;
@@ -67,7 +67,7 @@ public class VCommand implements IVDoc<CCommand> {
 
         // TODO player is hard-coded into tabletop...should be dynamic
         // (haven't looked into it too deeply). Doublestrike 12-04-12
-        tabletop = new PlayArea(matchUI, scroller, id0 == EDocID.COMMAND_0, player, ZoneType.Command);
+        tabletop = new PlayArea(matchUI, scroller, mirror, player, ZoneType.Command);
 
         control = new CCommand(player, this);
 

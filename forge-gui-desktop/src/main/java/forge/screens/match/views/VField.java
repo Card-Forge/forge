@@ -83,7 +83,7 @@ public class VField implements IVDoc<CField> {
      * @param p &emsp; {@link forge.game.player.Player}
      * @param id0 &emsp; {@link forge.gui.framework.EDocID}
      */
-    public VField(final CMatchUI matchUI, final EDocID id0, final PlayerView p) {
+    public VField(final CMatchUI matchUI, final EDocID id0, final PlayerView p, final boolean mirror) {
         this.docID = id0;
 
         this.player = p;
@@ -94,7 +94,7 @@ public class VField implements IVDoc<CField> {
 
         // TODO player is hard-coded into tabletop...should be dynamic
         // (haven't looked into it too deeply). Doublestrike 12-04-12
-        tabletop = new PlayArea(matchUI, scroller, false, player, ZoneType.Battlefield);
+        tabletop = new PlayArea(matchUI, scroller, mirror, player, ZoneType.Battlefield);
 
         control = new CField(matchUI, player, this);
 
