@@ -11,6 +11,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -62,6 +63,14 @@ public class DamageDealAi extends DamageAiBase {
             dmg += 2;
         }
         String logic = sa.getParam("AILogic");
+        
+        // Ugin AI: allow other effects to be evaluated first
+        if (source.getName().equals("Ugin, the Spirit Dragon")) {
+            if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) ||
+                    source.getCounters(CounterType.LOYALTY) > 9) {
+                return false;
+            }
+        }
         
         if ("DiscardLands".equals(logic)) {
             dmg = 2;

@@ -8,6 +8,5 @@ SVar:X:XChoice
 A:AB$ GainLife | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | LifeAmount$ 7 | SubAbility$ DBDraw | SpellDescription$ You gain 7 life, draw 7 cards, then put up to seven permanent cards from your hand onto the battlefield.
 SVar:DBDraw:DB$ Draw | NumCards$ 7 | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent | ChangeNum$ 7
-SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ugin_the_spirit_dragon.jpg
 Oracle:+2: Ugin, the Spirit Dragon deals 3 damage to target creature or player.\n-X: Exile each permanent with converted mana cost X or less that's one or more colors.\n-10: You gain 7 life, draw seven cards, then put up to seven permanent cards from your hand onto the battlefield.

@@ -36,6 +36,12 @@ public class LifeGainAi extends SpellAbilityAi {
             lifeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
         }
 
+        //Ugin AI: always use ultimate
+        if (source.getName().equals("Ugin, the Spirit Dragon")) {
+          //TODO: somehow link with DamageDealAi for cases where +1 = win
+            return true;
+        }
+        
         // don't use it if no life to gain
         if (!activateForCost && lifeAmount <= 0) {
             return false;

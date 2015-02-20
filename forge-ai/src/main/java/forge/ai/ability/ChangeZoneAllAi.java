@@ -8,6 +8,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -54,6 +55,28 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         CardCollectionView computerType = ai.getCardsIn(origin);
         computerType = AbilityUtils.filterListByType(computerType, sa.getParam("ChangeType"), sa);
         final TargetRestrictions tgt = sa.getTargetRestrictions();
+        
+        // Ugin AI: always try to sweep before considering +1 
+        if (source.getName().equals("Ugin, the Spirit Dragon")) {
+            //TODO: somehow link with DamageDealAi for cases where a single enemy creature can be removed by +1 and check cases where +1 = win
+            final int loyalty = source.getCounters(CounterType.LOYALTY);
+            int x = -1, best = 0;
+            for (int i = 0; i < loyalty; i++) {
+                source.setSVar("ChosenX", "Number$" + i);
+                final CardCollectionView oppType = AbilityUtils.filterListByType(opp.getCardsIn(origin), sa.getParam("ChangeType"), sa);
+                computerType = AbilityUtils.filterListByType(ai.getCardsIn(origin), sa.getParam("ChangeType"), sa);
+                int net = ComputerUtilCard.evaluatePermanentList(oppType) - ComputerUtilCard.evaluatePermanentList(computerType) - i;
+                if (net > best) {
+                    x = i;
+                    best = net;
+                }
+            }
+            if (x == -1) {
+                return false;
+            }
+            source.setSVar("ChosenX", "Number$" + x);
+            return true;
+        }
 
         // TODO improve restrictions on when the AI would want to use this
         // spBounceAll has some AI we can compare to.
