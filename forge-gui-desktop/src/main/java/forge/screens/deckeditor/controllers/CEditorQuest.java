@@ -39,6 +39,7 @@ import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.home.quest.CSubmenuQuestDecks;
+import forge.screens.match.controllers.CDetailPicture;
 import forge.util.ItemPool;
 
 import java.util.ArrayList;
@@ -91,16 +92,16 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
      * 
      * @param questData0 &emsp; {@link forge.quest.QuestController}
      */
-    public CEditorQuest(final QuestController questData0) {
-        super(FScreen.DECK_EDITOR_QUEST);
+    public CEditorQuest(final QuestController questData0, final CDetailPicture cDetailPicture) {
+        super(FScreen.DECK_EDITOR_QUEST, cDetailPicture);
 
         allSections.add(DeckSection.Main);
         allSections.add(DeckSection.Sideboard);
 
         this.questData = questData0;
 
-        final CardManager catalogManager = new CardManager(getCDetailPicture(), false);
-        final CardManager deckManager = new CardManager(getCDetailPicture(), false);
+        final CardManager catalogManager = new CardManager(cDetailPicture, false);
+        final CardManager deckManager = new CardManager(cDetailPicture, false);
 
         catalogManager.setCaption("Quest Inventory");
 

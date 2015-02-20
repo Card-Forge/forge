@@ -1,19 +1,31 @@
 package forge.screens.home.sanctioned;
 
+import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+
+import net.miginfocom.swing.MigLayout;
 import forge.game.GameType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerContainer;
-import forge.screens.home.*;
+import forge.screens.deckeditor.CDeckEditorUI;
+import forge.screens.home.EMenuGroup;
+import forge.screens.home.IVSubmenu;
+import forge.screens.home.LblHeader;
+import forge.screens.home.StartButton;
+import forge.screens.home.VHomeUI;
 import forge.screens.home.VHomeUI.PnlDisplay;
-import forge.toolbox.*;
-import net.miginfocom.swing.MigLayout;
-
-
-import javax.swing.*;
-import java.awt.*;
+import forge.toolbox.FLabel;
+import forge.toolbox.FList;
+import forge.toolbox.FSkin;
 
 /**
  * Assembles Swing components of draft submenu singleton.
@@ -34,7 +46,7 @@ public enum VSubmenuWinston implements IVSubmenu<CSubmenuWinston> {
     private final JPanel pnlStart = new JPanel();
     private final StartButton btnStart  = new StartButton();
 
-    private final DeckManager lstDecks = new DeckManager(GameType.Winston, null);
+    private final DeckManager lstDecks = new DeckManager(GameType.Winston, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
     private final JList<String> lstAI = new FList<String>();
 
     private final JLabel lblInfo = new FLabel.Builder()

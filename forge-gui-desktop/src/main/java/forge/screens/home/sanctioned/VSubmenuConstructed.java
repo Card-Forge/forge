@@ -860,26 +860,26 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
                     Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_ARCHENEMY);
                     CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
-                    		new CEditorVariant(FModel.getDecks().getScheme(), predSchemes, DeckSection.Schemes, FScreen.DECK_EDITOR_ARCHENEMY));
+                            new CEditorVariant(FModel.getDecks().getScheme(), predSchemes, DeckSection.Schemes, FScreen.DECK_EDITOR_ARCHENEMY, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture()));
                 }
             });
 
             // Commander buttons
             cmdDeckSelectorBtn.setCommand(new Runnable() {
-            	@Override
-            	public void run() {
-            		currentGameMode = vntTinyLeaders.isSelected() ? GameType.TinyLeaders : GameType.Commander;
-            		cmdDeckSelectorBtn.requestFocusInWindow();
-            		changePlayerFocus(index, currentGameMode);
-            	}
+                @Override
+                public void run() {
+                    currentGameMode = vntTinyLeaders.isSelected() ? GameType.TinyLeaders : GameType.Commander;
+                    cmdDeckSelectorBtn.requestFocusInWindow();
+                    changePlayerFocus(index, currentGameMode);
+                }
             });
 
             cmdDeckEditor.setCommand(new UiCommand() {
-            	@Override
-            	public void run() {
-            		currentGameMode = vntTinyLeaders.isSelected() ? GameType.TinyLeaders : GameType.Commander;
+                @Override
+                public void run() {
+                    currentGameMode = vntTinyLeaders.isSelected() ? GameType.TinyLeaders : GameType.Commander;
                     Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_COMMANDER);
-                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander());
+                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture()));
                 }
             });
 
@@ -906,7 +906,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
                     Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_PLANECHASE);
                     CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
-                            new CEditorVariant(FModel.getDecks().getPlane(), predPlanes, DeckSection.Planes, FScreen.DECK_EDITOR_PLANECHASE));
+                            new CEditorVariant(FModel.getDecks().getPlane(), predPlanes, DeckSection.Planes, FScreen.DECK_EDITOR_PLANECHASE, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture()));
                 }
             });
 

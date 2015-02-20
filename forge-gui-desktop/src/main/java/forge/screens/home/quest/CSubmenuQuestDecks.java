@@ -1,7 +1,9 @@
 package forge.screens.home.quest;
 
-import forge.UiCommand;
+import javax.swing.SwingUtilities;
+
 import forge.Singletons;
+import forge.UiCommand;
 import forge.deck.DeckProxy;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
@@ -14,8 +16,6 @@ import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorQuest;
 import forge.screens.home.CHomeUI;
-
-import javax.swing.*;
 
 /** 
  * Controls the quest decks submenu in the home UI.
@@ -64,7 +64,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
                     return;
                 }
                 Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_QUEST);
-                CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorQuest(FModel.getQuest()));
+                CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorQuest(FModel.getQuest(), CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture()));
             }
         });
     }

@@ -236,7 +236,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         switch (this.gameType) {
             case Quest:
                 screen = FScreen.DECK_EDITOR_QUEST;
-                editorCtrl = new CEditorQuest(FModel.getQuest());
+                editorCtrl = new CEditorQuest(FModel.getQuest(), getCDetailPicture());
                 break;
             case Constructed:
                 screen = FScreen.DECK_EDITOR_CONSTRUCTED;
@@ -245,15 +245,15 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 break;
             case Sealed:
                 screen = FScreen.DECK_EDITOR_SEALED;
-                editorCtrl = new CEditorLimited(FModel.getDecks().getSealed(), screen);
+                editorCtrl = new CEditorLimited(FModel.getDecks().getSealed(), screen, getCDetailPicture());
                 break;
             case Draft:
                 screen = FScreen.DECK_EDITOR_DRAFT;
-                editorCtrl = new CEditorLimited(FModel.getDecks().getDraft(), screen);
+                editorCtrl = new CEditorLimited(FModel.getDecks().getDraft(), screen, getCDetailPicture());
                 break;
             case Winston:
                 screen = FScreen.DECK_EDITOR_DRAFT;
-                editorCtrl = new CEditorLimited(FModel.getDecks().getWinston(), screen);
+                editorCtrl = new CEditorLimited(FModel.getDecks().getWinston(), screen, getCDetailPicture());
                 break;
 
             default:

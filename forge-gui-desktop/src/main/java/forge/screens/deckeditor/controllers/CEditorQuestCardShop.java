@@ -32,6 +32,7 @@ import forge.quest.QuestController;
 import forge.quest.QuestSpellShop;
 import forge.screens.deckeditor.views.*;
 import forge.screens.home.quest.CSubmenuQuestDecks;
+import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.util.ItemPool;
@@ -94,8 +95,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
      * @param qd
      *            a {@link forge.quest.data.QuestData} object.
      */
-    public CEditorQuestCardShop(final QuestController qd) {
-        super(FScreen.QUEST_CARD_SHOP);
+    public CEditorQuestCardShop(final QuestController qd, final CDetailPicture cDetailPicture) {
+        super(FScreen.QUEST_CARD_SHOP, cDetailPicture);
 
         this.questData = qd;
 

@@ -322,11 +322,12 @@ public class DualListBox<T> extends FDialog {
         return sourceListModel.model;
     }
 
-    private void showSelectedCard(Object obj) {
+    private void showSelectedCard(final Object obj) {
         if (!showCard || null == obj) {
             return;
         }
-        CardView card = null;
+
+        final CardView card;
         if (obj instanceof CardView) {
             card = (CardView) obj;
         } else if (obj instanceof CardStateView) {
@@ -335,6 +336,8 @@ public class DualListBox<T> extends FDialog {
             card = ((SpellAbilityView) obj).getHostCard();
         } else if (obj instanceof PaperCard) {
             card = Card.getCardForUi((IPaperCard) obj).getView();
+        } else {
+            card = null;
         }
 
         if (matchUI != null) {

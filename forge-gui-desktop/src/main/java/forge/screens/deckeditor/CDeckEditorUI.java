@@ -71,6 +71,10 @@ public enum CDeckEditorUI implements ICDoc {
         this.vAllDecks.setCDetailPicture(cDetailPicture);
     }
 
+    public CDetailPicture getCDetailPicture() {
+        return cDetailPicture;
+    }
+
     /**
      * Set Pack, for when Packs can be shown in the CardPicturePanel.
      * @param item
@@ -318,7 +322,7 @@ public enum CDeckEditorUI implements ICDoc {
             setCurrentEditorController(screenChildController);
         }
         else if (screen == FScreen.DECK_EDITOR_CONSTRUCTED) {
-            setEditorController(new CEditorConstructed()); //ensure Constructed deck editor controller initialized
+            setEditorController(new CEditorConstructed(cDetailPicture)); //ensure Constructed deck editor controller initialized
 
             String currentDeckStr = DeckPreferences.getCurrentDeck();
             if (currentDeckStr != null) {

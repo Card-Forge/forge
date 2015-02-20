@@ -109,38 +109,34 @@ public class QuestDraftWinLose extends ControlWinLose {
         view.getBtnRestart().setEnabled(false);
         view.getBtnRestart().setVisible(false);
 
-        if (lastGame.isMatchOver()) {
-            view.getBtnQuit().setEnabled(true);
-            view.getBtnContinue().setEnabled(false);
-            view.getBtnQuit().setText("Continue Tournament");
-            for (final ActionListener listener : view.getBtnQuit().getActionListeners()) {
-                view.getBtnQuit().removeActionListener(listener);
-            }
-            view.getBtnQuit().addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(final ActionEvent e) {
-                    matchUI.getGameController().nextGameDecision(NextGameDecision.CONTINUE);
+        final boolean isMatchOver = lastGame.isMatchOver();
+        final String quitString, warningString, warningCaption;
+        if (isMatchOver) {
+            quitString = "Continue Tournament";
+            warningString = null;
+            warningCaption = null;
+        } else {
+            quitString = "Forfeit Tournament";
+            warningString = "Quitting the match now will forfeit the tournament!\n\nReally quit?";
+            warningCaption = "Really Quit Tournament?";
+        }
+        view.getBtnQuit().setEnabled(true);
+        view.getBtnContinue().setEnabled(!isMatchOver);
+        view.getBtnQuit().setText(quitString);
+        for (final ActionListener listener : view.getBtnQuit().getActionListeners()) {
+            view.getBtnQuit().removeActionListener(listener);
+        }
+        view.getBtnQuit().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (warningString == null ||
+                        FOptionPane.showOptionDialog(warningString, warningCaption, FSkin.getImage(FSkinProp.ICO_WARNING).scale(2), new String[] { "Yes", "No" }, 1) == 0) {
+                    matchUI.getGameController().nextGameDecision(NextGameDecision.QUIT);
                     QuestDraftUtils.matchInProgress = false;
                     QuestDraftUtils.continueMatches(matchUI);
                 }
-            });
-        } else {
-            view.getBtnQuit().setEnabled(true);
-            for (final ActionListener listener : view.getBtnQuit().getActionListeners()) {
-                view.getBtnQuit().removeActionListener(listener);
             }
-            view.getBtnQuit().setText("Forfeit Tournament");
-            view.getBtnQuit().addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(final ActionEvent e) {
-                    if (FOptionPane.showOptionDialog("Quitting the match now will forfeit the tournament!\n\nReally quit?", "Really Quit Tournament?", FSkin.getImage(FSkinProp.ICO_WARNING).scale(2), new String[] { "Yes", "No" }, 1) == 0) {
-                        matchUI.getGameController().nextGameDecision(NextGameDecision.QUIT);
-                        QuestDraftUtils.matchInProgress = false;
-                        QuestDraftUtils.continueMatches(matchUI);
-                    }
-                }
-            });
-        }
+        });
 
         CSubmenuQuestDraft.SINGLETON_INSTANCE.update();
         VSubmenuQuestDraft.SINGLETON_INSTANCE.populate();

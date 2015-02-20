@@ -1,34 +1,35 @@
 package forge.screens.home.sanctioned;
 
-import forge.GuiBase;
-import forge.UiCommand;
-import forge.Singletons;
-import forge.deck.Deck;
-import forge.deck.DeckGroup;
-import forge.game.GameType;
-import forge.game.player.RegisteredPlayer;
-import forge.gui.GuiChoose;
-import forge.gui.SOverlayUtils;
-import forge.match.HostedMatch;
-import forge.model.FModel;
-import forge.screens.deckeditor.CDeckEditorUI;
-import forge.deck.DeckProxy;
-import forge.screens.deckeditor.controllers.CEditorWinstonProcess;
-import forge.gui.framework.FScreen;
-import forge.gui.framework.ICDoc;
-import forge.toolbox.FOptionPane;
-import forge.itemmanager.ItemManagerConfig;
-import forge.limited.LimitedPoolType;
-import forge.limited.WinstonDraft;
-import forge.player.GamePlayerUtil;
-import forge.properties.ForgePreferences.FPref;
-
-import javax.swing.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.SwingUtilities;
+
+import forge.GuiBase;
+import forge.Singletons;
+import forge.UiCommand;
+import forge.deck.Deck;
+import forge.deck.DeckGroup;
+import forge.deck.DeckProxy;
+import forge.game.GameType;
+import forge.game.player.RegisteredPlayer;
+import forge.gui.GuiChoose;
+import forge.gui.SOverlayUtils;
+import forge.gui.framework.FScreen;
+import forge.gui.framework.ICDoc;
+import forge.itemmanager.ItemManagerConfig;
+import forge.limited.LimitedPoolType;
+import forge.limited.WinstonDraft;
+import forge.match.HostedMatch;
+import forge.model.FModel;
+import forge.player.GamePlayerUtil;
+import forge.properties.ForgePreferences.FPref;
+import forge.screens.deckeditor.CDeckEditorUI;
+import forge.screens.deckeditor.controllers.CEditorWinstonProcess;
+import forge.toolbox.FOptionPane;
 
 /**
  * Controls the draft submenu in the home UI.
@@ -151,7 +152,7 @@ public enum CSubmenuWinston implements ICDoc {
         WinstonDraft draft = WinstonDraft.createDraft(poolType);
         if (draft == null) { return; }
 
-        final CEditorWinstonProcess draftController = new CEditorWinstonProcess();
+        final CEditorWinstonProcess draftController = new CEditorWinstonProcess(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
         draftController.showGui(draft);
 
         Singletons.getControl().setCurrentScreen(FScreen.DRAFTING_PROCESS);

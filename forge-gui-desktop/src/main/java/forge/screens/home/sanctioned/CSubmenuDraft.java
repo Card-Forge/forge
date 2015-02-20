@@ -1,15 +1,23 @@
 package forge.screens.home.sanctioned;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.SwingUtilities;
+
 import forge.GuiBase;
-import forge.UiCommand;
 import forge.Singletons;
+import forge.UiCommand;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
+import forge.deck.DeckProxy;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
-import forge.deck.DeckProxy;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.itemmanager.ItemManagerConfig;
@@ -22,13 +30,6 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorDraftingProcess;
 import forge.toolbox.FOptionPane;
-
-import javax.swing.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 /** 
  * Controls the draft submenu in the home UI.
@@ -163,7 +164,7 @@ public enum CSubmenuDraft implements ICDoc {
         BoosterDraft draft = BoosterDraft.createDraft(poolType);
         if (draft == null) { return; }
 
-        final CEditorDraftingProcess draftController = new CEditorDraftingProcess();
+        final CEditorDraftingProcess draftController = new CEditorDraftingProcess(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
         draftController.showGui(draft);
 
         Singletons.getControl().setCurrentScreen(FScreen.DRAFTING_PROCESS);

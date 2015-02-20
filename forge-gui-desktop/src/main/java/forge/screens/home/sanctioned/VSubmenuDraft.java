@@ -1,19 +1,31 @@
 package forge.screens.home.sanctioned;
 
+import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.SwingConstants;
+
+import net.miginfocom.swing.MigLayout;
 import forge.game.GameType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerContainer;
-import forge.screens.home.*;
+import forge.screens.deckeditor.CDeckEditorUI;
+import forge.screens.home.EMenuGroup;
+import forge.screens.home.IVSubmenu;
+import forge.screens.home.LblHeader;
+import forge.screens.home.StartButton;
+import forge.screens.home.VHomeUI;
 import forge.screens.home.VHomeUI.PnlDisplay;
-import forge.toolbox.*;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-
-import java.awt.*;
+import forge.toolbox.FLabel;
+import forge.toolbox.FRadioButton;
+import forge.toolbox.FSkin;
+import forge.toolbox.JXButtonPanel;
 
 /** 
  * Assembles Swing components of draft submenu singleton.
@@ -34,7 +46,7 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
     private final JPanel pnlStart = new JPanel();
     private final StartButton btnStart  = new StartButton();
 
-    private final DeckManager lstDecks = new DeckManager(GameType.Draft, null);
+    private final DeckManager lstDecks = new DeckManager(GameType.Draft, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
 
     private final JRadioButton radSingle = new FRadioButton("Play one opponent");
     private final JRadioButton radAll = new FRadioButton("Play all 7 opponents");

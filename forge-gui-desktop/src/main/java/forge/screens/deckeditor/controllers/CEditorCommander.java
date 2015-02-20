@@ -33,6 +33,7 @@ import forge.model.FModel;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VDeckgen;
+import forge.screens.match.controllers.CDetailPicture;
 import forge.util.ItemPool;
 
 import java.util.ArrayList;
@@ -64,8 +65,8 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
      * This is the least restrictive mode;
      * all cards are available.
      */
-    public CEditorCommander() {
-        super(FScreen.DECK_EDITOR_COMMANDER);
+    public CEditorCommander(final CDetailPicture cDetailPicture) {
+        super(FScreen.DECK_EDITOR_COMMANDER, cDetailPicture);
         allSections.add(DeckSection.Main);
         allSections.add(DeckSection.Sideboard);
         allSections.add(DeckSection.Commander);

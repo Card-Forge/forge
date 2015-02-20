@@ -33,6 +33,7 @@ import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.home.sanctioned.CSubmenuDraft;
 import forge.screens.home.sanctioned.CSubmenuSealed;
+import forge.screens.match.controllers.CDetailPicture;
 import forge.util.storage.IStorage;
 
 import java.util.Map.Entry;
@@ -58,8 +59,8 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
      *
      * @param deckMap0 &emsp; {@link forge.deck.DeckGroup}<{@link forge.util.storage.IStorage}>
      */
-    public CEditorLimited(final IStorage<DeckGroup> deckMap0, FScreen screen0) {
-        super(screen0);
+    public CEditorLimited(final IStorage<DeckGroup> deckMap0, final FScreen screen0, final CDetailPicture cDetailPicture) {
+        super(screen0, cDetailPicture);
 
         final CardManager catalogManager = new CardManager(getCDetailPicture(), false);
         final CardManager deckManager = new CardManager(getCDetailPicture(), false);

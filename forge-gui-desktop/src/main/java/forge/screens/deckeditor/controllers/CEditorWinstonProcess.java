@@ -32,6 +32,7 @@ import forge.screens.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.screens.home.sanctioned.CSubmenuWinston;
+import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
@@ -73,11 +74,11 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
     /**
      * Updates the deck editor UI as necessary draft selection mode.
      */
-    public CEditorWinstonProcess() {
-        super(FScreen.DRAFTING_PROCESS);
+    public CEditorWinstonProcess(final CDetailPicture cDetailPicture) {
+        super(FScreen.DRAFTING_PROCESS, cDetailPicture);
 
-        final CardManager catalogManager = new CardManager(getCDetailPicture(), false);
-        final CardManager deckManager = new CardManager(getCDetailPicture(), false);
+        final CardManager catalogManager = new CardManager(cDetailPicture, false);
+        final CardManager deckManager = new CardManager(cDetailPicture, false);
 
         //hide filters and options panel so more of pack is visible by default
         catalogManager.setHideViewOptions(1, true);
@@ -237,7 +238,7 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
         //open draft pool in Draft Deck Editor right away
         Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_DRAFT);
-        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorLimited(FModel.getDecks().getWinston(), FScreen.DECK_EDITOR_DRAFT));
+        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorLimited(FModel.getDecks().getWinston(), FScreen.DECK_EDITOR_DRAFT, getCDetailPicture()));
         CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(null, s);
     }
 

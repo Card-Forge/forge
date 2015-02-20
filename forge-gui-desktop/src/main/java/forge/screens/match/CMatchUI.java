@@ -787,7 +787,11 @@ public final class CMatchUI
 
     @Override
     public void afterGameEnd() {
-        Singletons.getView().getNavigationBar().closeTab(screen);
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override public void run() {
+                Singletons.getView().getNavigationBar().closeTab(screen);
+            }
+        });
     }
 
     @Override
@@ -814,7 +818,7 @@ public final class CMatchUI
             System.err.println("Warning: GameObject passed to GUI! Printing stack trace.");
             Thread.dumpStack();
         }*/
-        return GuiChoose.getChoices(message, min, max, choices, selected, display);
+        return GuiChoose.getChoices(message, min, max, choices, selected, display, this);
     }
 
     @Override
@@ -825,7 +829,7 @@ public final class CMatchUI
             System.err.println("Warning: GameObject passed to GUI! Printing stack trace.");
             Thread.dumpStack();
         }*/
-        return GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode);
+        return GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, this);
     }
 
     @Override

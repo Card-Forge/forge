@@ -6,6 +6,7 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerContainer;
+import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.LblHeader;
@@ -36,7 +37,7 @@ public enum VSubmenuQuestDecks implements IVSubmenu<CSubmenuQuestDecks> {
     /** */
     private final LblHeader lblTitle = new LblHeader("Quest Decks");
 
-    private final DeckManager lstDecks = new DeckManager(GameType.Quest, null);
+    private final DeckManager lstDecks = new DeckManager(GameType.Quest, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
 
     private final FLabel lblInfo = new FLabel.Builder()
         .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)

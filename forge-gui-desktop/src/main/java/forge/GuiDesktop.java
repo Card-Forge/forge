@@ -259,7 +259,7 @@ public class GuiDesktop implements IGuiBase {
     public void showSpellShop() {
         Singletons.getControl().setCurrentScreen(FScreen.QUEST_CARD_SHOP);
         CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
-                new CEditorQuestCardShop(FModel.getQuest()));
+                new CEditorQuestCardShop(FModel.getQuest(), CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture()));
     }
 
     @Override

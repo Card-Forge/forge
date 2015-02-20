@@ -46,6 +46,7 @@ import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.home.quest.CSubmenuQuestDecks;
+import forge.screens.match.controllers.CDetailPicture;
 
 //import forge.quest.data.QuestBoosterPack;
 
@@ -91,17 +92,16 @@ public final class CEditorQuestLimited extends ACEditorBase<PaperCard, DeckGroup
      * 
      * @param questData0 &emsp; {@link forge.quest.QuestController}
      */
-    public CEditorQuestLimited(final QuestController questData0) {
-        
-        super(FScreen.DECK_EDITOR_QUEST_TOURNAMENT);
+    public CEditorQuestLimited(final QuestController questData0, final CDetailPicture cDetailPicture) {
+        super(FScreen.DECK_EDITOR_QUEST_TOURNAMENT, cDetailPicture);
 
         allSections.add(DeckSection.Main);
         allSections.add(DeckSection.Sideboard);
 
         this.questData = questData0;
 
-        final CardManager catalogManager = new CardManager(getCDetailPicture(), false);
-        final CardManager deckManager = new CardManager(getCDetailPicture(), false);
+        final CardManager catalogManager = new CardManager(cDetailPicture, false);
+        final CardManager deckManager = new CardManager(cDetailPicture, false);
 
         catalogManager.setCaption("Sideboard");
 

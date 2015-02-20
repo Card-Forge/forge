@@ -1,5 +1,19 @@
 package forge.screens.home.sanctioned;
 
+import java.awt.Font;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+
+import net.miginfocom.swing.MigLayout;
 import forge.assets.FSkinProp;
 import forge.game.GameType;
 import forge.gui.SOverlayUtils;
@@ -8,24 +22,18 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerContainer;
-import forge.screens.home.*;
+import forge.screens.deckeditor.CDeckEditorUI;
+import forge.screens.home.EMenuGroup;
+import forge.screens.home.IVSubmenu;
+import forge.screens.home.LblHeader;
+import forge.screens.home.StartButton;
+import forge.screens.home.VHomeUI;
 import forge.screens.home.VHomeUI.PnlDisplay;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.toolbox.FPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedTextPane;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
-
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /** 
  * Assembles Swing components of sealed submenu singleton.
@@ -44,7 +52,7 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
     private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Sealed Deck");
 
     private final StartButton btnStart = new StartButton();
-    private final DeckManager lstDecks = new DeckManager(GameType.Sealed, null);
+    private final DeckManager lstDecks = new DeckManager(GameType.Sealed, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
 
     private final FLabel lblInfo = new FLabel.Builder()
         .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)

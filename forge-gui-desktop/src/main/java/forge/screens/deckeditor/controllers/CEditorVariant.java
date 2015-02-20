@@ -33,6 +33,7 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VDeckgen;
+import forge.screens.match.controllers.CDetailPicture;
 import forge.util.ItemPool;
 import forge.util.storage.IStorage;
 
@@ -60,14 +61,14 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
      * This is the least restrictive mode;
      * all cards are available.
      */
-    public CEditorVariant(final IStorage<Deck> folder, final Predicate<PaperCard> poolCondition, final DeckSection deckSection0, final FScreen screen0) {
-        super(screen0);
+    public CEditorVariant(final IStorage<Deck> folder, final Predicate<PaperCard> poolCondition, final DeckSection deckSection0, final FScreen screen0, final CDetailPicture cDetailPicture) {
+        super(screen0, cDetailPicture);
 
         this.cardPoolCondition = poolCondition;
         this.sectionMode = deckSection0;
 
-        CardManager catalogManager = new CardManager(getCDetailPicture(), true);
-        CardManager deckManager = new CardManager(getCDetailPicture(), true);
+        final CardManager catalogManager = new CardManager(cDetailPicture, true);
+        final CardManager deckManager = new CardManager(cDetailPicture, true);
 
         catalogManager.setCaption("Catalog");
 

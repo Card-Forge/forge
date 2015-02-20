@@ -40,6 +40,7 @@ import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.home.quest.CSubmenuQuestDraft;
 import forge.screens.home.quest.VSubmenuQuestDraft;
+import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.util.ItemPool;
@@ -75,8 +76,8 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
     /**
      * Updates the deck editor UI as necessary draft selection mode.
      */
-    public CEditorQuestDraftingProcess() {
-        super(FScreen.DRAFTING_PROCESS);
+    public CEditorQuestDraftingProcess(final CDetailPicture cDetailPicture) {
+        super(FScreen.DRAFTING_PROCESS, cDetailPicture);
 
         final CardManager catalogManager = new CardManager(getCDetailPicture(), false);
         final CardManager deckManager = new CardManager(getCDetailPicture(), false);

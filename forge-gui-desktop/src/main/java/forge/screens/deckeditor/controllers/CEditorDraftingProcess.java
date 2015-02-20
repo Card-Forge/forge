@@ -36,6 +36,7 @@ import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.home.sanctioned.CSubmenuDraft;
+import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
@@ -63,8 +64,8 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     /**
      * Updates the deck editor UI as necessary draft selection mode.
      */
-    public CEditorDraftingProcess() {
-        super(FScreen.DRAFTING_PROCESS);
+    public CEditorDraftingProcess(final CDetailPicture cDetailPicture) {
+        super(FScreen.DRAFTING_PROCESS, cDetailPicture);
 
         final CardManager catalogManager = new CardManager(getCDetailPicture(), false);
         final CardManager deckManager = new CardManager(getCDetailPicture(), false);
@@ -227,7 +228,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
         //open draft pool in Draft Deck Editor right away
         Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_DRAFT);
-        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorLimited(FModel.getDecks().getDraft(), FScreen.DECK_EDITOR_DRAFT));
+        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorLimited(FModel.getDecks().getDraft(), FScreen.DECK_EDITOR_DRAFT, getCDetailPicture()));
         CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(null, s);
     }
 

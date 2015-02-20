@@ -1,10 +1,17 @@
 package forge.screens.home.sanctioned;
 
-import forge.UiCommand;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.SwingUtilities;
+
 import forge.Singletons;
-import forge.deck.*;
-import forge.game.GameType;
+import forge.UiCommand;
+import forge.deck.DeckBase;
+import forge.deck.DeckGroup;
 import forge.deck.DeckProxy;
+import forge.game.GameType;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.item.InventoryItem;
@@ -16,11 +23,6 @@ import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.ACEditorBase;
 import forge.screens.deckeditor.controllers.CEditorLimited;
 import forge.toolbox.FOptionPane;
-
-import javax.swing.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /** 
  * Controls the sealed submenu in the home UI.
@@ -122,7 +124,7 @@ public enum CSubmenuSealed implements ICDoc {
         if (sealed == null) { return; }
 
         final ACEditorBase<? extends InventoryItem, T> editor = (ACEditorBase<? extends InventoryItem, T>) new CEditorLimited(
-                FModel.getDecks().getSealed(), FScreen.DECK_EDITOR_SEALED);
+                FModel.getDecks().getSealed(), FScreen.DECK_EDITOR_SEALED, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
 
         Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_SEALED);
         CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(editor);

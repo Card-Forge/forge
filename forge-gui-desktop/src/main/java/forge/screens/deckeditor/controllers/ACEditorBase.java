@@ -72,7 +72,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     private ItemManager<TItem> catalogManager;
     private ItemManager<TItem> deckManager;
     protected DeckSection sectionMode = DeckSection.Main;
-    private final CDetailPicture cDetailPicture = new CDetailPicture();
+    private final CDetailPicture cDetailPicture;
 
     // card transfer buttons
     private final FLabel btnAdd = new FLabel.Builder()
@@ -109,8 +109,9 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             .icon(FSkin.getIcon(FSkinProp.ICO_EDIT))
             .iconScaleAuto(false).hoverable().build();
 
-    protected ACEditorBase(FScreen screen0) {
+    protected ACEditorBase(final FScreen screen0, final CDetailPicture cDetailPicture) {
         this.screen = screen0;
+        this.cDetailPicture = cDetailPicture;
     }
 
     public FScreen getScreen() {

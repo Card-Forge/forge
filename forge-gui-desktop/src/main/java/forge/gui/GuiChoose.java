@@ -258,7 +258,7 @@ public class GuiChoose {
     public static <T extends Comparable<? super T>> List<T> sideboard(final CMatchUI matchUI, final List<T> sideboard, final List<T> deck) {
         Collections.sort(deck);
         Collections.sort(sideboard);
-        return order("Sideboard", "Main Deck", -1, -1, sideboard, deck, null, true);
+        return order("Sideboard", "Main Deck", -1, -1, sideboard, deck, null, true, matchUI);
     }
 
     public static <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,

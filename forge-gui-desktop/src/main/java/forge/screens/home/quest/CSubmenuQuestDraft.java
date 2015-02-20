@@ -1,5 +1,18 @@
 package forge.screens.home.quest;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JRadioButton;
+import javax.swing.SwingUtilities;
+
 import forge.GuiBase;
 import forge.Singletons;
 import forge.UiCommand;
@@ -33,17 +46,11 @@ import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.home.CHomeUI;
 import forge.screens.home.quest.VSubmenuQuestDraft.Mode;
 import forge.screens.home.sanctioned.CSubmenuDraft;
+import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.JXButtonPanel;
-
-import javax.swing.*;
-
-import java.awt.event.*;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 /** 
  * Controls the quest draft submenu in the home UI.
@@ -486,7 +493,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
 		QuestDraftUtils.completeDraft(finishedDraft);
         
         Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_QUEST_TOURNAMENT);
-        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorQuestLimited(FModel.getQuest()));
+        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorQuestLimited(FModel.getQuest(), CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture()));
         
         drafting = false;
 
@@ -496,9 +503,10 @@ public enum CSubmenuQuestDraft implements ICDoc {
     }
     
     private void editDeck() {
-        VCurrentDeck.SINGLETON_INSTANCE.setItemManager(new DeckManager(GameType.Draft, null));
+        final CDetailPicture cDetailPicture = CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture();
+        VCurrentDeck.SINGLETON_INSTANCE.setItemManager(new DeckManager(GameType.Draft, cDetailPicture));
         Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_QUEST_TOURNAMENT);
-        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorQuestLimited(FModel.getQuest()));
+        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorQuestLimited(FModel.getQuest(), cDetailPicture));
         FModel.getQuest().save();
     }
     
@@ -508,15 +516,15 @@ public enum CSubmenuQuestDraft implements ICDoc {
             return;
         }
         
-        QuestEventDraft draftEvent = QuestUtil.getDraftEvent();
+        final QuestEventDraft draftEvent = QuestUtil.getDraftEvent();
         
-        long creditsAvailable = FModel.getQuest().getAssets().getCredits();
+        final long creditsAvailable = FModel.getQuest().getAssets().getCredits();
         if (draftEvent.canEnter()) {
             FOptionPane.showMessageDialog("You need " + NUMBER_FORMATTER.format(draftEvent.getEntryFee() - creditsAvailable) + " more credits to enter this tournament.", "Not Enough Credits", FSkin.getImage(FSkinProp.ICO_WARNING).scale(2.0));
             return;
         }
         
-        boolean okayToEnter = FOptionPane.showOptionDialog("This tournament costs " + draftEvent.getEntryFee() + " credits to enter.\nAre you sure you wish to enter?", "Enter Draft Tournament?", FSkin.getImage(FSkinProp.ICO_QUEST_GOLD), new String[] { "Yes", "No" }, 1) == 0;
+        final boolean okayToEnter = FOptionPane.showOptionDialog("This tournament costs " + draftEvent.getEntryFee() + " credits to enter.\nAre you sure you wish to enter?", "Enter Draft Tournament?", FSkin.getImage(FSkinProp.ICO_QUEST_GOLD), new String[] { "Yes", "No" }, 1) == 0;
         
         if (!okayToEnter) {
             return;
@@ -524,9 +532,9 @@ public enum CSubmenuQuestDraft implements ICDoc {
         
         drafting = true;
 
-		BoosterDraft draft = draftEvent.enter();
+        final BoosterDraft draft = draftEvent.enter();
         
-        final CEditorQuestDraftingProcess draftController = new CEditorQuestDraftingProcess();
+        final CEditorQuestDraftingProcess draftController = new CEditorQuestDraftingProcess(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
         draftController.showGui(draft);
 
         draftController.setDraftQuest(CSubmenuQuestDraft.this);

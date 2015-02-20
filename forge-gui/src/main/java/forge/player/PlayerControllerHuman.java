@@ -1756,8 +1756,10 @@ public class PlayerControllerHuman
 
     @Override
     public void concede() {
-        this.player.concede();
-        getGame().getAction().checkGameOverCondition();
+        if (player != null) {
+            player.concede();
+            getGame().getAction().checkGameOverCondition();
+        }
     }
     public boolean mayAutoPass() {
         return getGui().mayAutoPass(getLocalPlayerView());
