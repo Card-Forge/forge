@@ -721,9 +721,10 @@ public class QuestEventDraft {
             for (CardBlock block : blocks) {
 
                 boolean blockAllowed = true;
+                boolean allBlocksSanctioned = quest.getFormat().getAllowedSetCodes().isEmpty();
 
                 for (CardEdition set : block.getSets()) {
-                    if (!allowedQuestSets.contains(set)) {
+                    if (!allowedQuestSets.contains(set) && !allBlocksSanctioned) {
                         blockAllowed = false;
                         break;
                     }
