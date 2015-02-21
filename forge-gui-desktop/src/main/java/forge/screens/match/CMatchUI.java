@@ -65,6 +65,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.FNetOverlay;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 import forge.gui.GuiUtils;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.EDocID;
@@ -973,11 +974,7 @@ public final class CMatchUI
 
     @Override
     public boolean confirm(final CardView c, final String question, final boolean defaultIsYes, final String[] options) {
-        final String title = c == null ? "Question" : c + " - Ability";
-        final String questionToUse = StringUtils.isBlank(question) ? "Activate card's ability?" : question;
-        final String[] opts = options == null ? SGuiChoose.defaultConfirmOptions : options;
-        final int reply = FOptionPane.showOptionDialog(questionToUse, title, FOptionPane.QUESTION_ICON, opts, defaultIsYes ? 0 : 1);
-        return reply == 0;
+        return GuiDialog.confirm(c, question, defaultIsYes, options, this);
     }
 
     @Override
