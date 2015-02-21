@@ -28,7 +28,8 @@ import forge.screens.match.views.VDetail;
 import forge.toolbox.FMouseAdapter;
 
 /**
- * Controls the card detail area in the match UI.
+ * Controller for {@link VDetail}. May be used as part of a
+ * {@link CDetailPicture}.
  * 
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */

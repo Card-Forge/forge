@@ -8,6 +8,7 @@ import forge.item.InventoryItem;
 
 /**
  * Class that controls and links a {@link CDetail} and a {@link CPicture}.
+ * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
 public class CDetailPicture {
 
@@ -84,15 +85,15 @@ public class CDetailPicture {
     private void update() {
         final boolean mayView = mayView(), mayFlip = mayFlip();
         cDetail.showCard(currentView, isDisplayAlt, mayView, mayFlip);
-        cPicture.showCard(currentView, isDisplayAlt, mayView, mayFlip || alwaysDisplayAlt);
+        cPicture.showCard(currentView, isDisplayAlt || alwaysDisplayAlt, mayView, mayFlip && !alwaysDisplayAlt);
     }
 
     private boolean mayView() {
-        return mayView.mayView(currentView);
+        return currentView == null || mayView.mayView(currentView);
     }
 
     private boolean mayFlip() {
-        return mayView.mayFlip(currentView);
+        return currentView != null && mayView.mayFlip(currentView);
     }
 
 }
