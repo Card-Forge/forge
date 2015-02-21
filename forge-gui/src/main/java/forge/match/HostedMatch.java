@@ -222,9 +222,7 @@ public class HostedMatch {
                 match.startGame(game);
 
                 // After game is over...
-                if (match.isMatchOver()) {
-                    endCurrentGame();
-                } else if (humanCount == 0) {
+                if (humanCount == 0) {
                     // ... if no human players, let AI decide next game
                     addNextGameDecision(null, NextGameDecision.CONTINUE);
                 }
