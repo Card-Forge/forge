@@ -79,12 +79,17 @@ public final class GamePlayerUtil {
         String oldPlayerName = FModel.getPreferences().getPref(FPref.PLAYER_NAME);
 
         String newPlayerName;
-        if (StringUtils.isBlank(oldPlayerName)) {
-            newPlayerName = getVerifiedPlayerName(getPlayerNameUsingFirstTimePrompt(), oldPlayerName);
-        }
-        else {
-            newPlayerName = getVerifiedPlayerName(getPlayerNameUsingStandardPrompt(oldPlayerName), oldPlayerName);
-        }
+    	try{
+	        if (StringUtils.isBlank(oldPlayerName)) {
+	            newPlayerName = getVerifiedPlayerName(getPlayerNameUsingFirstTimePrompt(), oldPlayerName);
+	        }
+	        else {
+	            newPlayerName = getVerifiedPlayerName(getPlayerNameUsingStandardPrompt(oldPlayerName), oldPlayerName);
+	        }
+    	} catch (IllegalStateException ise){
+    		//now is not a good time for this...
+    		newPlayerName = StringUtils.isBlank(oldPlayerName) ? "Human" : oldPlayerName;
+    	}
 
         FModel.getPreferences().setPref(FPref.PLAYER_NAME, newPlayerName);
         FModel.getPreferences().save();

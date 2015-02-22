@@ -134,6 +134,7 @@ public class GauntletMini {
         }
 
         resetCurrentRound();
+        startRound();
     }
 
     /**
