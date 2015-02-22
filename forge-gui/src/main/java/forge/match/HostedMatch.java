@@ -61,6 +61,7 @@ public class HostedMatch {
     private FControlGamePlayback playbackControl = null;
     private final MatchUiEventVisitor visitor = new MatchUiEventVisitor();
     private final Map<PlayerControllerHuman, NextGameDecision> nextGameDecisions = Maps.newHashMap();
+    private boolean isMatchOver = false;
 
     public HostedMatch() {
     }
@@ -222,7 +223,7 @@ public class HostedMatch {
                 match.startGame(game);
 
                 // After game is over...
-                if (humanCount == 0) {
+                if (match.isMatchOver() && humanCount == 0) {
                     // ... if no human players, let AI decide next game
                     addNextGameDecision(null, NextGameDecision.CONTINUE);
                 }
@@ -256,6 +257,7 @@ public class HostedMatch {
             humanController.getGui().afterGameEnd();
         }
         humanControllers.clear();
+        isMatchOver = true;
     }
 
     public void pause() {
@@ -271,6 +273,10 @@ public class HostedMatch {
 
     public void resume() {
         SoundSystem.instance.resume();
+    }
+
+    public boolean isMatchOver() {
+        return isMatchOver;
     }
 
     /** Returns a random name from the supplied list. */

@@ -111,7 +111,7 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public void openView(final FCollectionView<PlayerView> myPlayers) {
+    public void openView(final Iterable<PlayerView> myPlayers) {
         setLocalPlayers(myPlayers);
         final boolean noHumans = !hasLocalPlayers();
 

@@ -19,8 +19,10 @@ import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
+import forge.Singletons;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.framework.SResizingUtil;
+import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -90,14 +92,18 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
     private void pause() {
         if (paused || !isMainFrame) { return; }
 
-        //HostedMatch.pause();
+        for (final HostedMatch hostedMatch : Singletons.getControl().getCurrentMatches()) {
+            hostedMatch.pause();
+        }
         paused = true;
     }
 
     private void resume() {
         if (!paused || !isMainFrame) { return; }
 
-        //HostedMatch.resume();
+        for (final HostedMatch hostedMatch : Singletons.getControl().getCurrentMatches()) {
+            hostedMatch.resume();
+        }
         paused = false;
     }
 

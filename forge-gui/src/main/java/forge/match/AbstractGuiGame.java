@@ -28,15 +28,16 @@ import forge.interfaces.IButton;
 import forge.interfaces.IGameController;
 import forge.interfaces.IGuiGame;
 import forge.interfaces.IMayViewCards;
+import forge.util.FCollection;
 import forge.util.FCollectionView;
 
 public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
-    private FCollectionView<PlayerView> localPlayers;
+    private FCollectionView<PlayerView> localPlayers = new FCollection<PlayerView>();
     private PlayerView currentPlayer = null;
 
-    protected final void setLocalPlayers(final FCollectionView<PlayerView> players) {
-        this.localPlayers = players;
-        this.currentPlayer = players == null ? null : Iterables.getFirst(players, null);
+    protected final void setLocalPlayers(final Iterable<PlayerView> myPlayers) {
+        this.localPlayers = myPlayers == null ? new FCollection<PlayerView>() : new FCollection<PlayerView>(myPlayers);
+        this.currentPlayer = Iterables.getFirst(this.localPlayers, null);
     }
     public final boolean hasLocalPlayers() {
         return localPlayers != null && !localPlayers.isEmpty();

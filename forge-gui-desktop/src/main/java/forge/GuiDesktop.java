@@ -274,6 +274,8 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public HostedMatch hostMatch() {
-        return new HostedMatch();
+        final HostedMatch match = new HostedMatch();
+        Singletons.getControl().addMatch(match);
+        return match;
     }
 }

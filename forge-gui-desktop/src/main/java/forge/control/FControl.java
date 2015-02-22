@@ -27,6 +27,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -34,6 +35,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import forge.ImageCache;
@@ -86,6 +88,28 @@ public enum FControl implements KeyEventDispatcher {
         EXIT_FORGE;
     }
 
+    private boolean hasCurrentMatches() {
+        cleanMatches();
+        return !currentMatches.isEmpty();
+    }
+
+    public List<HostedMatch> getCurrentMatches() {
+        cleanMatches();
+        return Collections.unmodifiableList(currentMatches);
+    }
+
+    public void addMatch(final HostedMatch match) {
+        cleanMatches();
+        currentMatches.add(match);
+    }
+
+    private void cleanMatches() {
+        for (final HostedMatch match : ImmutableList.copyOf(currentMatches)) {
+            if (match.isMatchOver()) {
+                currentMatches.remove(match);
+            }
+        }
+    }
     /**
      * <p>
      * FControl.
@@ -139,7 +163,7 @@ public enum FControl implements KeyEventDispatcher {
         return closeAction;
     }
 
-    public void setCloseAction(CloseAction closeAction0) {
+    public void setCloseAction(final CloseAction closeAction0) {
         if (closeAction == closeAction0) { return; }
         closeAction = closeAction0;
         Singletons.getView().getNavigationBar().updateBtnCloseTooltip();
@@ -149,13 +173,14 @@ public enum FControl implements KeyEventDispatcher {
         prefs.save();
     }
 
-    public boolean canExitForge(boolean forRestart) {
-        String action = (forRestart ? "Restart" : "Exit");
+    public boolean canExitForge(final boolean forRestart) {
+        final String action = (forRestart ? "Restart" : "Exit");
         String userPrompt = "Are you sure you wish to " + (forRestart ? "restart" : "exit") + " Forge?";
-        if (!currentMatches.isEmpty()) {
-            userPrompt = "A game is currently active. " + userPrompt;
+        final boolean hasCurrentMatches = hasCurrentMatches();
+        if (hasCurrentMatches) {
+            userPrompt = "One or more games are currently active. " + userPrompt;
         }
-        if (!FOptionPane.showConfirmDialog(userPrompt, action + " Forge", action, "Cancel", currentMatches.isEmpty())) { //default Yes if no game active
+        if (!FOptionPane.showConfirmDialog(userPrompt, action + " Forge", action, "Cancel", !hasCurrentMatches)) { //default Yes if no game active
             return false;
         }
         if (!CDeckEditorUI.SINGLETON_INSTANCE.canSwitchAway(true)) {

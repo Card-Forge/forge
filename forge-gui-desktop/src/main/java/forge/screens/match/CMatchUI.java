@@ -36,7 +36,6 @@ import javax.swing.MenuElement;
 import javax.swing.MenuSelectionManager;
 import javax.swing.SwingUtilities;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
@@ -60,6 +59,7 @@ import forge.game.combat.CombatView;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
+import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -105,7 +105,6 @@ import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PhaseLabel;
 import forge.util.FCollectionView;
 import forge.util.ITriggerEvent;
-import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
@@ -249,7 +248,7 @@ public final class CMatchUI
         view.getLblAvatar().getResizeTimer().start();
     }
 
-    public void initMatch(final FCollectionView<PlayerView> sortedPlayers, final FCollectionView<PlayerView> myPlayers) {
+    public void initMatch(final FCollectionView<PlayerView> sortedPlayers, final Iterable<PlayerView> myPlayers) {
         this.sortedPlayers = sortedPlayers;
         this.setLocalPlayers(myPlayers);
         allHands = sortedPlayers.size() == getLocalPlayerCount();
@@ -766,7 +765,7 @@ public final class CMatchUI
     }
 
     @Override
-    public void openView(final FCollectionView<PlayerView> myPlayers) {
+    public void openView(final Iterable<PlayerView> myPlayers) {
         final GameView gameView = getGameView();
         gameView.getGameLog().addObserver(getCLog());
 

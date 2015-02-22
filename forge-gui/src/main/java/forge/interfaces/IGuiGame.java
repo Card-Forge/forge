@@ -30,7 +30,7 @@ public interface IGuiGame {
     void setGameView(GameView gameView);
     void setGameController(PlayerView player, IGameController gameController);
     boolean resetForNewGame();
-    void openView(FCollectionView<PlayerView> myPlayers);
+    void openView(Iterable<PlayerView> myPlayers);
     void afterGameEnd();
     void showCombat();
     void showPromptMessage(PlayerView playerView, String message);
