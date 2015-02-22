@@ -22,6 +22,9 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+        if ("Khans".equals(sa.getParam("AILogic")) || "Dragons".equals(sa.getParam("AILogic"))) {
+            return true;
+        }
         return false;
     }
 
@@ -59,8 +62,13 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
                 }
             }
             return spells.get(0);
-        } else {
-            return spells.get(0);
+        } else if ("Khans".equals(logic) || "Dragons".equals(logic)) { // Fate Reforged sieges
+            for (final SpellAbility sp : spells) {
+                if (sp.getDescription().equals(logic)) {
+                    return sp;
+                }
+            }
         }
+        return spells.get(0);   // return first choice if no logic found
     }
 }
