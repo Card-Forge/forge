@@ -17563,6 +17563,7 @@ forge-gui/tools/PerSetTracking.py svneol=native#text/x-python
 forge-gui/tools/assignSetInfo.py svneol=native#text/x-python
 forge-gui/tools/cardTemplateScript.py svneol=native#text/x-python
 forge-gui/tools/deckAiCompat.py -text
+forge-gui/tools/deckForgeCompat.py -text
 forge-gui/tools/extractSetInfo.py -text
 forge-gui/tools/formatCards -text
 forge-gui/tools/formats.txt -text
