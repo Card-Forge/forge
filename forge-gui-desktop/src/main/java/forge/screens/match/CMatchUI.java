@@ -513,6 +513,7 @@ public final class CMatchUI
             layoutControl.initialize();
             layoutControl.update();
         }
+        FloatingCardArea.closeAll();
     }
 
     @Override
@@ -541,6 +542,7 @@ public final class CMatchUI
 
     @Override
     public boolean resetForNewGame() {
+        FloatingCardArea.closeAll();
         return true;
     }
 

@@ -61,9 +61,9 @@ public class FloatingCardArea extends CardArea {
         return 40 * player.getId() + zone.hashCode();
     }
     public static void show(final CMatchUI matchUI, final PlayerView player, final ZoneType zone) {
-        int key = getKey(player, zone);
+        final int key = getKey(player, zone);
         FloatingCardArea cardArea = floatingAreas.get(key);
-        if (cardArea == null) {
+        if (cardArea == null || cardArea.getMatchUI() != matchUI) {
             cardArea = new FloatingCardArea(matchUI, player, zone);
             floatingAreas.put(key, cardArea);
         } else {
@@ -71,7 +71,7 @@ public class FloatingCardArea extends CardArea {
         }
         cardArea.showWindow();
     }
-    public static void refresh(PlayerView player, ZoneType zone) {
+    public static void refresh(final PlayerView player, final ZoneType zone) {
         FloatingCardArea cardArea = floatingAreas.get(getKey(player, zone));
         if (cardArea != null) {
             cardArea.setPlayer(player); //ensure player is updated if needed
@@ -90,12 +90,10 @@ public class FloatingCardArea extends CardArea {
         }
     }
     public static void closeAll() {
-        for (FloatingCardArea cardArea : floatingAreas.values()) {
-            cardArea.clear();
-            cardArea.player = null; //avoid keeping around reference to player between games
-            cardArea.title = null;
+        for (final FloatingCardArea cardArea : floatingAreas.values()) {
             cardArea.window.setVisible(false);
         }
+        floatingAreas.clear();
     }
 
     private final ZoneType zone;
