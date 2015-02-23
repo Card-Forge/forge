@@ -20,6 +20,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 
 import forge.FThreads;
+import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.item.InventoryItem;
@@ -218,15 +219,15 @@ public class GuiChoose {
                                 card = ((CardStateView) sel).getCard();
                             } else if (sel instanceof CardView) {
                                 card = (CardView) sel;
+                            } else if (sel instanceof Card) {
+                                card = CardView.get((Card) sel);
                             } else {
                                 card = null;
                             }
-                            if (card != null) {
-                                matchUI.setCard(card);
 
-                                matchUI.clearPanelSelections();
-                                matchUI.setPanelSelection(card);
-                            }
+                            matchUI.setCard(card);
+                            matchUI.clearPanelSelections();
+                            matchUI.setPanelSelection(card);
                         }
                     });
                 }
