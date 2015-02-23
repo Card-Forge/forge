@@ -349,7 +349,7 @@ public class DamageDealAi extends DamageAiBase {
                 final Card c = this.dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, false);
                 if (c != null) {
                     //option to hold removal instead only applies for single targeted removal
-                    if (sa.isSpell() && tgt.getMaxTargets(sa.getHostCard(), sa) == 1 && !divided) {
+                    if (sa.isSpell() && tgt.getMaxTargets(sa.getHostCard(), sa) == 1 && !divided && !isTrigger) {
                         if (!ComputerUtilCard.useRemovalNow(sa, c, dmg, ZoneType.Graveyard)) {
                             return false;
                         }
