@@ -19,16 +19,13 @@ package forge.screens.match;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.assets.FSkinProp;
 import forge.game.GameView;
-import forge.game.player.PlayerView;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.FScreen;
 import forge.match.NextGameDecision;
 import forge.model.FModel;
-import forge.player.GamePlayerUtil;
 import forge.quest.QuestController;
 import forge.quest.QuestDraftUtils;
 import forge.screens.home.quest.CSubmenuChallenges;
@@ -75,34 +72,18 @@ public class QuestDraftWinLose extends ControlWinLose {
     @Override
     public final boolean populateCustomPanel() {
         QuestController quest = FModel.getQuest();
-        
-        final LobbyPlayer questLobbyPlayer = GamePlayerUtil.getQuestPlayer();
-        final Iterable<PlayerView> players = lastGame.getPlayers();
-        boolean gameHadHumanPlayer = false;
-        for (final PlayerView p : players) {
-            if (p.isLobbyPlayer(questLobbyPlayer)) {
-                gameHadHumanPlayer = true;
-                break;
-            }
-        }
+        final boolean gameHadHumanPlayer = matchUI.hasLocalPlayers();
 
         if (lastGame.isMatchOver()) {
-            String winner = lastGame.getWinningPlayer().getName();
+            final String winner = lastGame.getWinningPlayer().getName();
             
             quest.getAchievements().getCurrentDraft().setWinner(winner);
             quest.save();
         }
 
         if (!gameHadHumanPlayer) {
-            if (lastGame.isMatchOver()) {
-                this.actionOnQuitMatch();
-                QuestDraftUtils.matchInProgress = false;
-                QuestDraftUtils.update(matchUI);
-            }
-            else {
-                this.actionOnContinue();
-                QuestDraftUtils.update(matchUI);
-            }
+            QuestDraftUtils.matchInProgress = false;
+            QuestDraftUtils.update(matchUI);
             return false;
         }
 

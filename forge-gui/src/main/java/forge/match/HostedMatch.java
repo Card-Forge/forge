@@ -223,9 +223,13 @@ public class HostedMatch {
                 match.startGame(game);
 
                 // After game is over...
-                if (match.isMatchOver() && humanCount == 0) {
+                if (humanCount == 0) {
                     // ... if no human players, let AI decide next game
-                    addNextGameDecision(null, NextGameDecision.CONTINUE);
+                    if (match.isMatchOver()) {
+                        addNextGameDecision(null, NextGameDecision.QUIT);
+                    } else {
+                        addNextGameDecision(null, NextGameDecision.CONTINUE);
+                    }
                 }
             }
         });

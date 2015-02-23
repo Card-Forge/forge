@@ -196,7 +196,7 @@ public class QuestDraftUtils {
         rules.canCloneUseTargetsImage = FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE);
 
         final HostedMatch newMatch = GuiBase.getInterface().hostMatch();
-        newMatch.startMatch(rules, null, nextMatch.matchStarter, nextMatch.humanPlayer, gui);
+        newMatch.startMatch(rules, null, nextMatch.matchStarter, nextMatch.humanPlayer, GuiBase.getInterface().getNewGuiGame());
     }
 
     public static void continueMatches(final IGuiGame gui) {
