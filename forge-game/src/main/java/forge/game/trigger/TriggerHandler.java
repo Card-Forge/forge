@@ -145,22 +145,17 @@ public class TriggerHandler {
     }
 
     public static Trigger parseTrigger(final Map<String, String> mapParams, final Card host, final boolean intrinsic) {
-        final TriggerType type = TriggerType.smartValueOf(mapParams.get("Mode"));
-        final Trigger ret = type.createTrigger(mapParams, host, intrinsic);
+        Trigger ret = null;
 
-        final String triggerZones = mapParams.get("TriggerZones");
+        final TriggerType type = TriggerType.smartValueOf(mapParams.get("Mode"));
+        ret = type.createTrigger(mapParams, host, intrinsic);
+
+        String triggerZones = mapParams.get("TriggerZones");
         if (null != triggerZones) {
             ret.setActiveZone(EnumSet.copyOf(ZoneType.listValueOf(triggerZones)));
-        } else if (type == TriggerType.ChangesZone) {
-            // Special case, because ChangesZone triggers on cards don't
-            // specify their TriggerZone
-            final String origin = mapParams.get("Destination");
-            if (!"Any".equals(origin)) {
-                ret.setActiveZone(EnumSet.copyOf(ZoneType.listValueOf(origin)));
-            }
         }
 
-        final String triggerPhases = mapParams.get("Phase");
+        String triggerPhases = mapParams.get("Phase");
         if (null != triggerPhases) {
             ret.setTriggerPhases(PhaseType.parseRange(triggerPhases));
         }
@@ -503,7 +498,7 @@ public class TriggerHandler {
             decider = AbilityUtils.getDefinedPlayers(host, triggerParams.get("OptionalDecider"), sa).get(0);
         }
         else if (sa instanceof AbilitySub || !sa.hasParam("Cost") || sa.getParam("Cost").equals("0")) {
-    		mand = true;
+            mand = true;
         }
         else { // triggers with a cost can't be mandatory
             sa.setOptionalTrigger(true);
