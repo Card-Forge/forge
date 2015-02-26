@@ -12,6 +12,8 @@ import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.VDeckEditorUI;
 import forge.screens.home.CHomeUI;
 import forge.screens.home.VHomeUI;
+import forge.screens.home.online.COnlineLobby;
+import forge.screens.home.online.VOnlineLobby;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.VMatchUI;
 import forge.screens.workshop.CWorkshopUI;
@@ -149,6 +151,15 @@ public class FScreen {
             FSkin.getIcon(FSkinProp.ICO_QUEST_BOTTLES),
             true,
             "Leave Bazaar",
+            null,
+            false);
+    public static final FScreen ONLINE_LOBBY = new FScreen(
+            VOnlineLobby.SINGLETON_INSTANCE,
+            COnlineLobby.SINGLETON_INSTANCE,
+            "Online Lobby",
+            FSkin.getImage(FSkinProp.IMG_CHAOS),
+            true,
+            "Leave Lobby",
             null,
             false);
 

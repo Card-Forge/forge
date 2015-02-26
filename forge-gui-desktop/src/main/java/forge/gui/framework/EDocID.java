@@ -13,6 +13,7 @@ import forge.screens.home.gauntlet.VSubmenuGauntletBuild;
 import forge.screens.home.gauntlet.VSubmenuGauntletContests;
 import forge.screens.home.gauntlet.VSubmenuGauntletLoad;
 import forge.screens.home.gauntlet.VSubmenuGauntletQuick;
+import forge.screens.home.online.VOnlineLobby;
 import forge.screens.home.online.VSubmenuOnlineLobby;
 import forge.screens.home.quest.VSubmenuChallenges;
 import forge.screens.home.quest.VSubmenuDuels;
@@ -73,8 +74,10 @@ public enum EDocID {
     HOME_DRAFT (VSubmenuDraft.SINGLETON_INSTANCE),
     HOME_SEALED (VSubmenuSealed.SINGLETON_INSTANCE),
     HOME_WINSTON (VSubmenuWinston.SINGLETON_INSTANCE),
-    HOME_LOBBY (VSubmenuOnlineLobby.SINGLETON_INSTANCE),
+    HOME_NETWORK (VSubmenuOnlineLobby.SINGLETON_INSTANCE),
     HOME_RELEASE_NOTES (VSubmenuReleaseNotes.SINGLETON_INSTANCE),
+
+    ONLINE_LOBBY (VOnlineLobby.SINGLETON_INSTANCE),
 
     REPORT_MESSAGE (),
     REPORT_STACK (),

@@ -1,5 +1,9 @@
 package forge.gui;
 
+import forge.model.FModel;
+import forge.net.FGameClient;
+import forge.net.game.MessageEvent;
+import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.*;
 import forge.toolbox.FSkin.SkinnedPanel;
 import net.miginfocom.swing.MigLayout;
@@ -31,20 +35,26 @@ public enum FNetOverlay {
     private final FTextField txtInput = new FTextField.Builder().maxLength(60).build();
     private final FLabel cmdSend = new FLabel.ButtonBuilder().text("Send").build(); 
 
-    
     //private boolean minimized = false;
     private int height = 120;
     private int width = 400;
 
-    private final ActionListener onSend = new ActionListener() {
-        
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String message = txtInput.getText();
-            txtInput.setText("");
-            if ( StringUtils.isBlank(message) )
-                return;
+    private FGameClient client = null;
+    public void setGameClient(final FGameClient client) {
+        this.client = client;
+    }
 
+    private final ActionListener onSend = new ActionListener() {
+        @Override public final void actionPerformed(final ActionEvent e) {
+            final String message = txtInput.getText();
+            txtInput.setText("");
+            if (StringUtils.isBlank(message)) {
+                return;
+            }
+
+            if (client != null) {
+                client.send(new MessageEvent(FModel.getPreferences().getPref(FPref.PLAYER_NAME), message));
+            }
             // lobby.speak(ChatArea.Room, lobby.getGuiPlayer(), message);
         }
     };

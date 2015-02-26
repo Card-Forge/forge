@@ -17,17 +17,43 @@
  */
 package forge.screens.home;
 
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+
+import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.assets.FSkinProp;
-import forge.gui.framework.*;
+import forge.gui.framework.EDocID;
+import forge.gui.framework.FScreen;
+import forge.gui.framework.ICDoc;
+import forge.gui.framework.ILocalRepaint;
+import forge.gui.framework.IVTopLevelUI;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeConstants;
+import forge.properties.ForgePreferences.FPref;
 import forge.screens.home.gauntlet.VSubmenuGauntletBuild;
 import forge.screens.home.gauntlet.VSubmenuGauntletContests;
 import forge.screens.home.gauntlet.VSubmenuGauntletLoad;
 import forge.screens.home.gauntlet.VSubmenuGauntletQuick;
-import forge.screens.home.quest.*;
+import forge.screens.home.online.VSubmenuOnlineLobby;
+import forge.screens.home.quest.VSubmenuChallenges;
+import forge.screens.home.quest.VSubmenuDuels;
+import forge.screens.home.quest.VSubmenuQuestData;
+import forge.screens.home.quest.VSubmenuQuestDecks;
+import forge.screens.home.quest.VSubmenuQuestDraft;
+import forge.screens.home.quest.VSubmenuQuestPrefs;
 import forge.screens.home.sanctioned.VSubmenuConstructed;
 import forge.screens.home.sanctioned.VSubmenuDraft;
 import forge.screens.home.sanctioned.VSubmenuSealed;
@@ -42,13 +68,6 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.view.FView;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.util.*;
-import java.util.List;
 
 /**
  * Top level view class for home UI drag layout.<br>

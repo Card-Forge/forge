@@ -29,6 +29,7 @@ import forge.download.GuiDownloader;
 import forge.error.BugReportDialog;
 import forge.gui.BoxedProductCardListViewer;
 import forge.gui.CardListViewer;
+import forge.gui.FNetOverlay;
 import forge.gui.GuiChoose;
 import forge.gui.framework.FScreen;
 import forge.interfaces.IGuiBase;
@@ -277,5 +278,11 @@ public class GuiDesktop implements IGuiBase {
         final HostedMatch match = new HostedMatch();
         Singletons.getControl().addMatch(match);
         return match;
+    }
+
+    @Override
+    public void netMessage(final String origin, final String message) {
+        FNetOverlay.SINGLETON_INSTANCE.showUp("");
+        FNetOverlay.SINGLETON_INSTANCE.addMessage(origin, message);
     }
 }

@@ -282,4 +282,8 @@ public class GuiMobile implements IGuiBase {
     public HostedMatch hostMatch() {
         return Forge.hostedMatch = new HostedMatch();
     }
+
+    @Override
+    public void netMessage(final String origin, final String message) {
+    }
 }
