@@ -1,22 +1,29 @@
 package forge.gui;
 
-import forge.model.FModel;
-import forge.net.FGameClient;
-import forge.net.game.MessageEvent;
-import forge.properties.ForgePreferences.FPref;
-import forge.toolbox.*;
-import forge.toolbox.FSkin.SkinnedPanel;
-import net.miginfocom.swing.MigLayout;
-
-import org.apache.commons.lang3.StringUtils;
-
-import javax.swing.*;
-
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.swing.ScrollPaneConstants;
+
+import net.miginfocom.swing.MigLayout;
+
+import org.apache.commons.lang3.StringUtils;
+
+import forge.model.FModel;
+import forge.net.game.IRemote;
+import forge.net.game.MessageEvent;
+import forge.properties.ForgePreferences.FPref;
+import forge.toolbox.FLabel;
+import forge.toolbox.FScrollPane;
+import forge.toolbox.FSkin;
+import forge.toolbox.FSkin.SkinnedPanel;
+import forge.toolbox.FTextArea;
+import forge.toolbox.FTextField;
+import forge.toolbox.SmartScroller;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -39,9 +46,9 @@ public enum FNetOverlay {
     private int height = 120;
     private int width = 400;
 
-    private FGameClient client = null;
-    public void setGameClient(final FGameClient client) {
-        this.client = client;
+    private IRemote remote = null;
+    public void setGameClient(final IRemote remote) {
+        this.remote = remote;
     }
 
     private final ActionListener onSend = new ActionListener() {
@@ -52,8 +59,8 @@ public enum FNetOverlay {
                 return;
             }
 
-            if (client != null) {
-                client.send(new MessageEvent(FModel.getPreferences().getPref(FPref.PLAYER_NAME), message));
+            if (remote != null) {
+                remote.send(new MessageEvent(FModel.getPreferences().getPref(FPref.PLAYER_NAME), message));
             }
             // lobby.speak(ChatArea.Room, lobby.getGuiPlayer(), message);
         }

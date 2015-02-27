@@ -13,6 +13,7 @@ import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VLobby;
 import forge.screens.home.VHomeUI;
+import forge.screens.home.VLobby.LobbyType;
 
 /**
  * Assembles Swing components of constructed submenu singleton.
@@ -27,7 +28,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private DragCell parentCell;
     private final DragTab tab = new DragTab("Constructed Mode");
 
-    private final VLobby lobby = new VLobby(false);
+    private final VLobby lobby = new VLobby(LobbyType.LOCAL);
     private VSubmenuConstructed() {
     }
 

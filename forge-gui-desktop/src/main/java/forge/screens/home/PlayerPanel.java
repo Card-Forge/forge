@@ -26,11 +26,13 @@ import forge.game.GameType;
 import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.net.game.LobbySlotType;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorCommander;
 import forge.screens.deckeditor.controllers.CEditorVariant;
+import forge.screens.home.VLobby.LobbyType;
 import forge.screens.home.sanctioned.AvatarSelector;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FComboBoxWrapper;
@@ -52,7 +54,10 @@ public class PlayerPanel extends FPanel {
     private static final SkinColor unfocusedPlayerOverlay = FSkin.getColor(FSkin.Colors.CLR_OVERLAY).alphaColor(120);
 
     private final int index;
-    private final boolean allowRemote;
+    private final LobbyType lobbyType;
+
+    private LobbySlotType type = LobbySlotType.LOCAL;
+    private boolean editableForClient;
 
     private final FLabel nameRandomiser;
     private final FLabel avatarLabel = new FLabel.Builder().opaque(true).hoverable(true).iconScaleFactor(0.99f).iconInBackground(true).build();
@@ -63,12 +68,11 @@ public class PlayerPanel extends FPanel {
     private FRadioButton radioAi;
     private JCheckBoxMenuItem radioAiUseSimulation;
     private FRadioButton radioOpen;
-    /** Whether this panel is occupied by a remote player. */
-    private boolean isRemote;
 
     private FComboBoxWrapper<Object> teamComboBox = new FComboBoxWrapper<Object>();
     private FComboBoxWrapper<Object> aeTeamComboBox = new FComboBoxWrapper<Object>();
 
+    private final FLabel closeBtn;
     private final FLabel deckBtn = new FLabel.ButtonBuilder().text("Select a deck").build();
     private final FLabel deckLabel;
 
@@ -91,7 +95,7 @@ public class PlayerPanel extends FPanel {
     private final FLabel vgdLabel;
 
     private final VLobby lobby;
-    public PlayerPanel(final VLobby lobby, final int index, final boolean allowRemote) {
+    public PlayerPanel(final VLobby lobby, final int index, final LobbyType lobbyType) {
         super();
         this.lobby = lobby;
         this.deckLabel = lobby.newLabel("Deck:");
@@ -101,14 +105,14 @@ public class PlayerPanel extends FPanel {
         this.vgdLabel = lobby.newLabel("Vanguard:");
 
         this.index = index;
-        this.allowRemote = allowRemote;
+        this.lobbyType = lobbyType;
         this.playerIsArchenemy = index == 0;
 
         setLayout(new MigLayout("insets 10px, gap 5px"));
 
         // Add a button to players 3+ (or if server) to remove them from the setup
-        if (index >= 2 || allowRemote) {
-            FLabel closeBtn = createCloseButton();
+        closeBtn = createCloseButton();
+        if (index >= 2 || lobbyType == LobbyType.SERVER) {
             this.add(closeBtn, "w 20, h 20, pos (container.w-20) 0");
         }
 
@@ -132,7 +136,7 @@ public class PlayerPanel extends FPanel {
         aeTeamComboBox.addActionListener(teamListener);
         teamComboBox.addTo(this, variantBtnConstraints + ", pushx, growx, gaptop 5px");
         aeTeamComboBox.addTo(this, variantBtnConstraints + ", pushx, growx, gaptop 5px");
-        if (allowRemote) {
+        if (lobbyType == LobbyType.SERVER) {
             this.add(radioOpen, "gapleft 1px");
         }
 
@@ -168,13 +172,31 @@ public class PlayerPanel extends FPanel {
         update();
     }
 
-    private void update() {
-        final boolean enableComponents = !(isOpen() || isRemote());
-        avatarLabel.setEnabled(enableComponents);
-        txtPlayerName.setEnabled(enableComponents);
-        nameRandomiser.setEnabled(enableComponents);
-        deckLabel.setVisible(enableComponents);
-        deckBtn.setVisible(enableComponents);
+    void update() {
+        if (type != LobbySlotType.REMOTE) {
+            if (radioHuman.isSelected()) {
+                type = LobbySlotType.LOCAL;
+            } else if (radioAi.isSelected()) {
+                type = LobbySlotType.AI;
+            } else if (radioOpen.isSelected()) {
+                type = LobbySlotType.OPEN;
+            }
+        }
+
+        final boolean isEditable = lobbyType == LobbyType.LOCAL || type == LobbySlotType.LOCAL ||
+                (lobbyType == LobbyType.SERVER && (type == LobbySlotType.LOCAL || type == LobbySlotType.AI)) ||
+                (lobbyType == LobbyType.CLIENT && editableForClient);
+        avatarLabel.setEnabled(isEditable);
+        txtPlayerName.setEnabled(isEditable);
+        nameRandomiser.setEnabled(isEditable);
+        deckLabel.setVisible(isEditable);
+        deckBtn.setVisible(isEditable);
+
+        final boolean hasSlotControls = lobbyType == LobbyType.LOCAL || (lobbyType == LobbyType.SERVER && type != LobbySlotType.REMOTE);
+        closeBtn.setVisible(hasSlotControls);
+        radioAi.setVisible(hasSlotControls);
+        radioHuman.setVisible(hasSlotControls);
+        radioOpen.setVisible(hasSlotControls && lobbyType == LobbyType.SERVER);
     }
 
     private final FMouseAdapter radioMouseAdapter = new FMouseAdapter() {
@@ -204,6 +226,7 @@ public class PlayerPanel extends FPanel {
                     prefs.setPref(FPref.PLAYER_NAME, newName);
                     prefs.save();
                 }
+                lobby.firePlayerChangeListener();
             }
         }
     };
@@ -244,6 +267,8 @@ public class PlayerPanel extends FPanel {
             if (index < 2) {
                 PlayerPanel.this.lobby.updateAvatarPrefs();
             }
+
+            lobby.firePlayerChangeListener();
         }
         @Override public final void onRightClick(final MouseEvent e) {
             if (!avatarLabel.isEnabled()) {
@@ -334,29 +359,38 @@ public class PlayerPanel extends FPanel {
         return index;
     }
 
+    LobbySlotType getType() {
+        return type;
+    }
+
     public boolean isAi() {
-        return radioAi.isSelected();
+        return type == LobbySlotType.AI;
     }
 
     public boolean isSimulatedAi() {
         return radioAi.isSelected() && radioAiUseSimulation.isSelected();
     }
 
-    public boolean isOpen() {
-        return radioOpen.isSelected() && !isRemote;
+    public boolean isLocal() {
+        return type == LobbySlotType.LOCAL;
     }
 
     public boolean isArchenemy() {
         return playerIsArchenemy;
     }
 
-    public boolean isRemote() {
-        return isRemote;
+    public void setRemote(final boolean remote) {
+        if (remote) {
+            type = LobbySlotType.REMOTE;
+        } else {
+            radioOpen.setSelected(true);
+            type = LobbySlotType.OPEN;
+        }
+        update();
     }
 
-    public void setRemote(final boolean remote) {
-        isRemote = remote;
-        update();
+    public void setEditableForClient(final boolean editable) {
+        editableForClient = editable;
     }
 
     public void setVanguardButtonText(String text) {
@@ -516,9 +550,10 @@ public class PlayerPanel extends FPanel {
      * @param index
      */
     private void createPlayerTypeOptions() {
-        radioHuman = new FRadioButton(allowRemote ? "Local" : "Human", index == 0);
-        radioAi = new FRadioButton("AI", !allowRemote && index != 0);
-        radioOpen = new FRadioButton("Open", allowRemote && index != 0);
+        final boolean isServer = lobbyType == LobbyType.SERVER;
+        radioHuman = new FRadioButton(isServer ? "Local" : "Human", index == 0);
+        radioAi = new FRadioButton("AI", !isServer && index != 0);
+        radioOpen = new FRadioButton("Open", isServer && index != 0);
         final JPopupMenu menu = new  JPopupMenu();
         radioAiUseSimulation = new JCheckBoxMenuItem("Use Simulation");
         menu.add(radioAiUseSimulation);
@@ -605,7 +640,7 @@ public class PlayerPanel extends FPanel {
                 .icon(FSkin.getIcon(FSkinProp.ICO_CLOSE)).hoverable(true).build();
         closeBtn.setCommand(new Runnable() {
             @Override public final void run() {
-                if (isRemote() && !SOptionPane.showConfirmDialog("Really kick player?", "Kick", false)) {
+                if (type == LobbySlotType.REMOTE && !SOptionPane.showConfirmDialog(String.format("Really kick %s?", getPlayerName()), "Kick", false)) {
                     return;
                 }
                 PlayerPanel.this.lobby.removePlayer(index);
@@ -639,6 +674,8 @@ public class PlayerPanel extends FPanel {
             random = MyRandom.getRandom().nextInt(FSkin.getAvatars().size());
         } while (usedAvatars.contains(random));
         setAvatar(random);
+
+        lobby.firePlayerChangeListener();
     }
 
     public void setAvatar(int newAvatarIndex) {

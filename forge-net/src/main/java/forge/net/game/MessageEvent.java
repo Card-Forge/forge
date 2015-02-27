@@ -1,5 +1,7 @@
 package forge.net.game;
 
+import forge.net.game.server.RemoteClient;
+
 public class MessageEvent implements NetEvent {
     private static final long serialVersionUID = 1700060210647684186L;
 
@@ -7,6 +9,8 @@ public class MessageEvent implements NetEvent {
     public MessageEvent(final String source, final String message) {
         this.source = source;
         this.message = message;
+    }
+    public void updateForClient(final RemoteClient client) {
     }
 
     public String getSource() {

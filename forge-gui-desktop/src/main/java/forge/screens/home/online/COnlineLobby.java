@@ -3,12 +3,17 @@ package forge.screens.home.online;
 import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.screens.home.CLobby;
+import forge.screens.home.VLobby;
 
 public enum COnlineLobby implements ICDoc {
     SINGLETON_INSTANCE;
 
-    private final VOnlineLobby view = VOnlineLobby.SINGLETON_INSTANCE;
-    private final CLobby lobby = new CLobby(view.getLobby());
+    private CLobby lobby;
+
+    void setLobby(VLobby lobbyView) {
+        lobby = new CLobby(lobbyView);
+        initialize();
+    }
 
     @Override
     public void register() {
@@ -19,7 +24,9 @@ public enum COnlineLobby implements ICDoc {
      */
     @Override
     public void update() {
-        lobby.update();
+        if (lobby != null) {
+            lobby.update();
+        }
     }
 
     /* (non-Javadoc)
@@ -27,7 +34,9 @@ public enum COnlineLobby implements ICDoc {
      */
     @Override
     public void initialize() {
-        lobby.initialize();
+        if (lobby != null) {
+            lobby.initialize();
+        }
     }
 
     /* (non-Javadoc)

@@ -13,40 +13,71 @@ import forge.game.GameType;
 import forge.gui.FNetOverlay;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
+import forge.interfaces.IPlayerChangeListener;
 import forge.menus.IMenuProvider;
 import forge.menus.MenuUtil;
 import forge.model.FModel;
 import forge.net.FGameClient;
 import forge.net.FServerManager;
+import forge.net.game.LobbyState;
+import forge.net.game.LobbyState.LobbyPlayerData;
+import forge.net.game.LoginEvent;
 import forge.net.game.client.ILobbyListener;
-import forge.net.game.server.RemoteClient;
 import forge.properties.ForgePreferences.FPref;
+import forge.screens.home.VLobby;
+import forge.screens.home.VLobby.LobbyType;
 import forge.screens.home.sanctioned.ConstructedGameMenu;
 
 public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
     SINGLETON_INSTANCE;
 
     final void host(final int portNumber) {
+        final VLobby lobby = VOnlineLobby.SINGLETON_INSTANCE.setLobby(LobbyType.SERVER);
+
         FServerManager.getInstance().startServer(portNumber);
-        FServerManager.getInstance().registerLobbyListener(new ILobbyListener() {
-            @Override public final void logout(final RemoteClient client) {
+        FServerManager.getInstance().setLobby(lobby);
+        FServerManager.getInstance().hostGame(new GameRules(GameType.Constructed));
+
+        FNetOverlay.SINGLETON_INSTANCE.showUp("Hosting game");
+        lobby.setPlayerChangeListener(new IPlayerChangeListener() {
+            @Override public final void update(final LobbyPlayerData data) {
+                FServerManager.getInstance().updateLobbyState();
             }
-            @Override public final void login(final RemoteClient client) {
-                VOnlineLobby.SINGLETON_INSTANCE.getLobby().addPlayerInFreeSlot(client.getUsername());
+        });
+
+        final FGameClient client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), "0", GuiBase.getInterface().getNewGuiGame());
+        FNetOverlay.SINGLETON_INSTANCE.setGameClient(client);
+        client.addLobbyListener(new ILobbyListener() {
+            @Override public final void update(final LobbyState state) {
+                lobby.setState(state);
             }
             @Override public final void message(final String source, final String message) {
                 FNetOverlay.SINGLETON_INSTANCE.addMessage(source, message);
             }
         });
-        FServerManager.getInstance().hostGame(new GameRules(GameType.Constructed));
+        client.connect("localhost", portNumber);
 
         Singletons.getControl().setCurrentScreen(FScreen.ONLINE_LOBBY);
-        FNetOverlay.SINGLETON_INSTANCE.showUp("Hosting game");
+        FNetOverlay.SINGLETON_INSTANCE.showUp(String.format("Hosting on port %d", portNumber));
     }
 
     final void join(final String hostname, final int port) {
         final FGameClient client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), "0", GuiBase.getInterface().getNewGuiGame());
         FNetOverlay.SINGLETON_INSTANCE.setGameClient(client);
+        final VLobby lobby =  VOnlineLobby.SINGLETON_INSTANCE.setLobby(LobbyType.CLIENT);
+        client.addLobbyListener(new ILobbyListener() {
+            @Override public final void update(final LobbyState state) {
+                lobby.setState(state);
+            }
+            @Override public final void message(final String source, final String message) {
+                FNetOverlay.SINGLETON_INSTANCE.addMessage(source, message);
+            }
+        });
+        lobby.setPlayerChangeListener(new IPlayerChangeListener() {
+            @Override public final void update(final LobbyPlayerData data) {
+                client.send(new LoginEvent(data.getName()));
+            }
+        });
         client.connect(hostname, port);
 
         Singletons.getControl().setCurrentScreen(FScreen.ONLINE_LOBBY);

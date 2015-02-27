@@ -13,6 +13,7 @@ import forge.gui.framework.FScreen;
 import forge.gui.framework.IVDoc;
 import forge.gui.framework.IVTopLevelUI;
 import forge.screens.home.VLobby;
+import forge.screens.home.VLobby.LobbyType;
 import forge.toolbox.FPanel;
 import forge.util.gui.SOptionPane;
 import forge.view.FView;
@@ -24,14 +25,18 @@ public enum VOnlineLobby implements IVDoc<COnlineLobby>, IVTopLevelUI {
     private final DragTab tab = new DragTab("Lobby");
 
     // General variables
-    private final VLobby lobby;
+    private VLobby lobby;
 
     private VOnlineLobby() {
-        this.lobby = new VLobby(true);
     }
 
     VLobby getLobby() {
         return lobby;
+    }
+    VLobby setLobby(final LobbyType type) {
+        this.lobby = new VLobby(type);
+        getLayoutControl().setLobby(lobby);
+        return this.lobby;
     }
 
     @Override

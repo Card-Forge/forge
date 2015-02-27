@@ -17392,7 +17392,9 @@ forge-gui/src/main/java/forge/interfaces/IGameController.java -text
 forge-gui/src/main/java/forge/interfaces/IGuiBase.java -text
 forge-gui/src/main/java/forge/interfaces/IGuiGame.java -text
 forge-gui/src/main/java/forge/interfaces/IGuiTimer.java -text
+forge-gui/src/main/java/forge/interfaces/ILobby.java -text
 forge-gui/src/main/java/forge/interfaces/IMayViewCards.java -text
+forge-gui/src/main/java/forge/interfaces/IPlayerChangeListener.java -text
 forge-gui/src/main/java/forge/interfaces/IProgressBar.java -text
 forge-gui/src/main/java/forge/interfaces/ITextField.java -text
 forge-gui/src/main/java/forge/interfaces/IWinLoseView.java -text
@@ -17610,6 +17612,9 @@ forge-net/src/main/java/forge/net/client/state/UnauthorizedClientState.java -tex
 forge-net/src/main/java/forge/net/client/state/package-info.java -text
 forge-net/src/main/java/forge/net/game/GuiGameEvent.java -text
 forge-net/src/main/java/forge/net/game/IRemote.java -text
+forge-net/src/main/java/forge/net/game/LobbySlotType.java -text
+forge-net/src/main/java/forge/net/game/LobbyState.java -text
+forge-net/src/main/java/forge/net/game/LobbyUpdateEvent.java -text
 forge-net/src/main/java/forge/net/game/LoginEvent.java -text
 forge-net/src/main/java/forge/net/game/LogoutEvent.java -text
 forge-net/src/main/java/forge/net/game/MessageEvent.java -text

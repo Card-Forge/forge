@@ -14,21 +14,31 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
-import forge.GuiBase;
+
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
 import forge.game.GameView;
 import forge.game.player.PlayerView;
 import forge.interfaces.IGuiGame;
+import forge.model.FModel;
 import forge.net.game.GuiGameEvent;
+import forge.net.game.LobbyUpdateEvent;
 import forge.net.game.LoginEvent;
 import forge.net.game.MessageEvent;
 import forge.net.game.NetEvent;
+import forge.net.game.client.ILobbyListener;
 import forge.net.game.client.IToServer;
+import forge.properties.ForgePreferences.FPref;
 
 public class FGameClient implements IToServer {
     private final IGuiGame clientGui;
     public FGameClient(final String username, final String roomKey, final IGuiGame clientGui) {
         this.clientGui = clientGui;
     }
+
+    private final List<ILobbyListener> lobbyListeners = Lists.newArrayList();
 
     static final int SIZE = Integer.parseInt(System.getProperty("size", "256"));
 
@@ -47,6 +57,7 @@ public class FGameClient implements IToServer {
                             new ObjectEncoder(),
                             new ObjectDecoder(ClassResolvers.cacheDisabled(null)),
                             new MessageHandler(),
+                            new LobbyUpdateHandler(),
                             new GameClientHandler());
                 }
              });
@@ -74,6 +85,10 @@ public class FGameClient implements IToServer {
         channel.writeAndFlush(event);
     }
 
+    public void addLobbyListener(final ILobbyListener listener) {
+        lobbyListeners.add(listener);
+    }
+
     private class GameClientHandler extends ChannelInboundHandlerAdapter {
         /**
          * Creates a client-side handler.
@@ -83,7 +98,8 @@ public class FGameClient implements IToServer {
 
         @Override
         public void channelActive(final ChannelHandlerContext ctx) {
-            send(new LoginEvent("elcnesh"));
+            // Don't use send here, as this.channel is not yet set!
+            ctx.channel().writeAndFlush(new LoginEvent(FModel.getPreferences().getPref(FPref.PLAYER_NAME)));
         }
 
         @SuppressWarnings("unchecked")
@@ -116,7 +132,21 @@ public class FGameClient implements IToServer {
         public void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
             if (msg instanceof MessageEvent) {
                 final MessageEvent event = (MessageEvent) msg;
-                GuiBase.getInterface().netMessage(event.getSource(), event.getMessage());
+                for (final ILobbyListener listener : lobbyListeners) {
+                    listener.message(event.getSource(), event.getMessage());
+                }
+            }
+            super.channelRead(ctx, msg);
+        }
+    }
+
+    private class LobbyUpdateHandler extends ChannelInboundHandlerAdapter {
+        @Override
+        public void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
+            if (msg instanceof LobbyUpdateEvent) {
+                for (final ILobbyListener listener : lobbyListeners) {
+                    listener.update(((LobbyUpdateEvent) msg).getState());
+                }
             }
             super.channelRead(ctx, msg);
         }

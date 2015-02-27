@@ -1,12 +1,14 @@
 package forge.net;
 
 import forge.game.GameRules;
+import forge.interfaces.ILobby;
+import forge.net.game.LobbyState;
+import forge.net.game.LobbyUpdateEvent;
 import forge.net.game.LoginEvent;
 import forge.net.game.LogoutEvent;
 import forge.net.game.MessageEvent;
 import forge.net.game.NetEvent;
 import forge.net.game.RegisterDeckEvent;
-import forge.net.game.client.ILobbyListener;
 import forge.net.game.server.RemoteClient;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
@@ -25,10 +27,8 @@ import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
-import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 public final class FServerManager {
@@ -39,7 +39,7 @@ public final class FServerManager {
     private final Map<Integer, NetGame> games = Maps.newTreeMap();
     private int id = 0;
     private final Map<Channel, RemoteClient> clients = Maps.newTreeMap();
-    private final List<ILobbyListener> lobbyListeners = Lists.newArrayListWithExpectedSize(1);
+    private ILobby localLobby;
 
     private FServerManager() {
     }
@@ -102,12 +102,13 @@ public final class FServerManager {
 
     public void broadcast(final NetEvent event) {
         for (final RemoteClient client : clients.values()) {
+            event.updateForClient(client);
             client.send(event);
         }
     }
 
-    public void registerLobbyListener(final ILobbyListener lobbyListener) {
-        lobbyListeners.add(lobbyListener);
+    public void setLobby(final ILobby lobby) {
+        this.localLobby = lobby;
     }
 
     public NetGame hostGame(final GameRules rules) {
@@ -115,6 +116,12 @@ public final class FServerManager {
         final NetGame game = new NetGame(rules);
         games.put(id, game);
         return game;
+    }
+
+    public void updateLobbyState() {
+        final LobbyState state = localLobby.getState();
+        final LobbyUpdateEvent event = new LobbyUpdateEvent(state);
+        broadcast(event);
     }
 
     @Override
@@ -153,6 +160,7 @@ public final class FServerManager {
             clients.put(ctx.channel(), client);
             games.get(0).addClient(client);
             System.out.println("User connected to server at " + ctx.channel().remoteAddress());
+            updateLobbyState();
             super.channelActive(ctx);
         }
 
@@ -161,6 +169,7 @@ public final class FServerManager {
             final RemoteClient client = clients.get(ctx.channel());
             if (msg instanceof LoginEvent) {
                 client.setUsername(((LoginEvent) msg).getUsername());
+                updateLobbyState();
             } else if (msg instanceof RegisterDeckEvent) {
                 games.get(0).registerDeck(client, ((RegisterDeckEvent) msg).getDeck());
             }
@@ -173,15 +182,15 @@ public final class FServerManager {
             final RemoteClient client = clients.get(ctx.channel());
             if (msg instanceof LoginEvent) {
                 final LoginEvent event = (LoginEvent) msg;
-                for (final ILobbyListener lobbyListener : lobbyListeners) {
-                    lobbyListener.login(client);
+                final int index = localLobby.login(client);
+                if (index == -1) {
+                    ctx.close();
+                } else {
+                    client.setIndex(index);
+                    broadcast(event);
                 }
-                broadcast(event);
             } else if (msg instanceof MessageEvent) {
                 final MessageEvent event = (MessageEvent) msg;
-                for (final ILobbyListener lobbyListener : lobbyListeners) {
-                    lobbyListener.message(client.getUsername(), event.getMessage());
-                }
                 broadcast(event);
             }
             super.channelRead(ctx, msg);
@@ -189,9 +198,8 @@ public final class FServerManager {
 
         @Override public void channelInactive(final ChannelHandlerContext ctx) throws Exception {
             final RemoteClient client = clients.get(ctx.channel());
-            for (final ILobbyListener lobbyListener : lobbyListeners) {
-                lobbyListener.logout(client);
-            }
+            localLobby.logout(client);
+            updateLobbyState();
             super.channelInactive(ctx);
         }
     }
@@ -205,4 +213,5 @@ public final class FServerManager {
             super.channelInactive(ctx);
         }
     }
+
 }

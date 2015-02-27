@@ -35,8 +35,14 @@ import forge.deckchooser.IDecksComboBoxListener;
 import forge.game.GameType;
 import forge.game.card.CardView;
 import forge.gui.CardDetailPanel;
+import forge.interfaces.ILobby;
+import forge.interfaces.IPlayerChangeListener;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.net.game.LobbySlotType;
+import forge.net.game.LobbyState;
+import forge.net.game.LobbyState.LobbyPlayerData;
+import forge.net.game.server.RemoteClient;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FCheckBox;
@@ -57,13 +63,17 @@ import forge.util.NameGenerator;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public class VLobby {
+public class VLobby implements ILobby {
 
     static final int MAX_PLAYERS = 8;
     private static final ForgePreferences prefs = FModel.getPreferences();
 
+    public enum LobbyType { LOCAL, SERVER, CLIENT; }
+
     // General variables
-    private final boolean allowRemote;
+    private final LobbyType type;
+    private int localPlayer = 0;
+    private IPlayerChangeListener playerChangeListener = null;
     private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Constructed");
     private int activePlayersNum = 2;
     private int playerWithFocus = 0; // index of the player that currently has focus
@@ -122,8 +132,9 @@ public class VLobby {
     private final Vector<Object> aiListData = new Vector<Object>();
 
     // CTR
-    public VLobby(final boolean allowRemote) {
-        this.allowRemote = allowRemote;
+    public VLobby(final LobbyType type) {
+        this.type = type;
+
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         ////////////////////////////////////////////////////////
@@ -153,7 +164,10 @@ public class VLobby {
             teams.add(i + 1);
             archenemyTeams.add(i == 0 ? 1 : 2);
 
-            final PlayerPanel player = new PlayerPanel(this, i, allowRemote);
+            final PlayerPanel player = new PlayerPanel(this, i, type);
+            if (type == LobbyType.CLIENT) {
+                player.setRemote(true);
+            }
             playerPanels.add(player);
 
             // Populate players panel
@@ -172,14 +186,15 @@ public class VLobby {
         playersFrame.setOpaque(false);
         playersFrame.add(playersScroll, "w 100%, h 100%-35px");
 
-        addPlayerBtn.setFocusable(true);
-        addPlayerBtn.setCommand(new Runnable() {
-            @Override
-            public void run() {
-                addPlayer();
-            }
-        });
-        playersFrame.add(addPlayerBtn, "height 30px!, growx, pushx");
+        if (type != LobbyType.CLIENT) {
+            addPlayerBtn.setFocusable(true);
+            addPlayerBtn.setCommand(new Runnable() {
+                @Override public final void run() {
+                    addPlayer();
+                }
+            });
+            playersFrame.add(addPlayerBtn, "height 30px!, growx, pushx");
+        }
 
         constructedFrame.add(playersFrame, "gapright 10px, w 50%-5px, growy, pushy");
 
@@ -194,8 +209,10 @@ public class VLobby {
         decksFrame.setOpaque(false);
 
         // Start Button
-        pnlStart.setOpaque(false);
-        pnlStart.add(btnStart, "align center");
+        if (type != LobbyType.CLIENT) {
+            pnlStart.setOpaque(false);
+            pnlStart.add(btnStart, "align center");
+        }
     }
 
     public void populate() {
@@ -213,20 +230,23 @@ public class VLobby {
 
     }
 
-    public void addPlayerInFreeSlot(final String name) {
+    private int addPlayerInFreeSlot(final String name) {
         if (activePlayersNum >= MAX_PLAYERS) {
-            return;
+            return -1;
         }
 
         for (final PlayerPanel pp : getPlayerPanels()) {
-            if (pp.isVisible() && pp.isOpen()) {
-                addPlayer(pp.getIndex());
+            if (pp.isVisible() && (
+                    pp.getType() == LobbySlotType.OPEN || (pp.isLocal() && type == LobbyType.SERVER))) {
+                final int index = pp.getIndex();
+                addPlayer(index);
                 pp.setPlayerName(name);
-                pp.setRemote(true);
+                System.out.println("Put player " + name + " in slot " + index);
 
-                return;
+                return index;
             }
         }
+        return -1;
     }
     private void addPlayer() {
         if (activePlayersNum >= MAX_PLAYERS) {
@@ -250,10 +270,12 @@ public class VLobby {
 
         playerPanels.get(slot).setVisible(true);
         playerPanels.get(slot).focusOnAvatar();
+
+        firePlayerChangeListener();
     }
 
     void removePlayer(final int playerIndex) {
-        if (activePlayersNum < playerIndex) {
+        if (activePlayersNum <= playerIndex) {
             return;
         }
         activePlayersNum--;
@@ -279,6 +301,69 @@ public class VLobby {
             changePlayerFocus(closest);
             playerPanels.get(closest).focusOnAvatar();
         }
+        firePlayerChangeListener();
+    }
+
+    @Override
+    public int login(final RemoteClient client) {
+        return addPlayerInFreeSlot(client.getUsername());
+    }
+
+    @Override
+    public void logout(final RemoteClient client) {
+        removePlayer(client.getIndex());
+    }
+
+    @Override
+    public LobbyState getState() {
+        final LobbyState state = new LobbyState();
+        for (int i = 0; i < activePlayersNum; i++) {
+            state.addPlayer(getData(i));
+        }
+        return state;
+    }
+
+    public void setState(final LobbyState state) {
+        setLocalPlayer(state.getLocalPlayer());
+
+        final List<LobbyPlayerData> players = state.getPlayers();
+        final int pSize = players.size();
+        activePlayersNum = pSize;
+        for (int i = 0; i < pSize; i++) {
+            final LobbyPlayerData player = players.get(i);
+            final PlayerPanel panel = playerPanels.get(i);
+
+            if (type == LobbyType.CLIENT) {
+                panel.setRemote(i != localPlayer);
+                panel.setEditableForClient(i == localPlayer);
+            } else {
+                panel.setRemote(player.getType() == LobbySlotType.REMOTE);
+                panel.setEditableForClient(false);
+            }
+            panel.setPlayerName(player.getName());
+            panel.setAvatar(player.getAvatarIndex());
+            panel.setVisible(true);
+            panel.update();
+        }
+    }
+
+    private void setLocalPlayer(final int index) {
+        localPlayer = index;
+    }
+
+    public void setPlayerChangeListener(final IPlayerChangeListener listener) {
+        this.playerChangeListener = listener;
+    }
+
+    void firePlayerChangeListener() {
+        if (playerChangeListener != null) {
+            playerChangeListener.update(getData(localPlayer));
+        }
+    }
+
+    private LobbyPlayerData getData(final int index) {
+        final PlayerPanel panel = playerPanels.get(index);
+        return new LobbyPlayerData(panel.getPlayerName(), panel.getAvatarIndex(), panel.getType());
     }
 
     /** Builds the actual deck panel layouts for each player.
@@ -373,7 +458,7 @@ public class VLobby {
     private void populateDeckPanel(final GameType forGameType) {
         decksFrame.removeAll();
 
-        if (playerPanelWithFocus.isOpen() || playerPanelWithFocus.isRemote()) {
+        if (playerPanelWithFocus.getType() == LobbySlotType.OPEN || playerPanelWithFocus.getType() == LobbySlotType.REMOTE) {
             return;
         }
 
@@ -439,8 +524,8 @@ public class VLobby {
         return deckChoosers.get(playernum);
     }
 
-    public List<Integer> getTeams() { return Collections.unmodifiableList(teams); }
-    public List<Integer> getArchenemyTeams() { return Collections.unmodifiableList(archenemyTeams); }
+    public List<Integer> getTeams() { return teams; }
+    public List<Integer> getArchenemyTeams() { return archenemyTeams; }
     public GameType getCurrentGameMode() { return currentGameMode; }
     public void setCurrentGameMode(final GameType mode) { currentGameMode = mode; }
 
