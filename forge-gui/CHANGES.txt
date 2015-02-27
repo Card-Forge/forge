@@ -1,7 +1,7 @@
-Forge Beta: 2-#-2015 ver 1.5.36
+Forge Beta: 2-27-2015 ver 1.5.36
 
 
-# cards in total.
+14514 cards in total.
 
 
 -------------
@@ -10,6 +10,7 @@ Release Notes
 
 - Canceling Delve now refunds exiled cards -
 If you cancel casting a spell after selecting cards to Delve, the selected cards will no longer get exiled.
+
 
 ------------
 Known Issues
@@ -64,7 +65,16 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Agetian
+asepetci
+DrDev
+elcnesh
+excessum
+Gos
+Myrd
+Sloth
+Sol
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
