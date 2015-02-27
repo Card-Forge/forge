@@ -412,7 +412,8 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public Card manifest(Player p) {
         // Turn Face Down (even if it's DFC).
-        ManaCost cost = this.getManaCost();
+        CardState originalCard = this.getState(CardStateName.Original);
+        ManaCost cost = originalCard.getManaCost();
 
         boolean isCreature = this.isCreature();
 
