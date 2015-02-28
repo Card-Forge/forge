@@ -7,29 +7,28 @@ Description=UBG Splinterfright deck with Hermit Druid, Boneyard Wurm and Deadbri
 Icon=LeChuck.jpg
 Deck Type=constructed
 [main]
-3 Bayou
-3 Tropical Island
-1 Forest
-1 Swamp
-1 Dryad Arbor
+4 Bayou
+4 Tropical Island
+2 Forest
+2 Dryad Arbor
 3 Misty Rainforest
-4 Verdant Catacombs
-4 Windswept Heath
-4 Wooded Foothills
-4 Deadbridge Chant
-4 Grisly Salvage
+3 Verdant Catacombs
+3 Windswept Heath
+3 Wooded Foothills
+2 Deadbridge Chant
+2 Grisly Salvage
 2 Tracker's Instincts
 2 Mulch
+4 Satyr Wayfinder
 4 Splinterfright
-3 Golgari Grave-Troll
-1 Jarad's Orders
+4 Golgari Grave-Troll
 3 Armored Skaab
-2 Hermit Druid
+1 Hermit Druid
 4 Boneyard Wurm
 2 Ghoultree
 1 Jarad, Golgari Lich Lord
 1 Brawn
 1 Wonder
-1 Lord of Extinction
-1 Worm Harvest
+2 Nemesis of Mortals
+1 Sidisi, Brood Tyrant
 [sideboard]
