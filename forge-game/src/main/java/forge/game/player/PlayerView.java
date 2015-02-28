@@ -89,8 +89,11 @@ public class PlayerView extends GameEntityView {
 
     public final String getCommanderInfo() {
         final StringBuilder sb = new StringBuilder();
-
-        for (final PlayerView p : Iterables.concat(Collections.singleton(this), getOpponents())) {
+        Iterable<PlayerView> opponents = getOpponents();
+        if (opponents == null) {
+            opponents = Collections.emptyList();
+        }
+        for (final PlayerView p : Iterables.concat(Collections.singleton(this), opponents)) {
             final String text;
             if (p.equals(this)) {
                 text = "Commander Damage from own Commander: ";
