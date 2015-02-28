@@ -64,8 +64,28 @@ public class DestroyAi extends SpellAbilityAi {
                 sa.setTargetingPlayer(targetingPlayer);
                 return targetingPlayer.getController().chooseTargetsFor(sa);
             }
+        	if ("Polymorph".equals(logic)) {
+        		list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
+        		if (list.isEmpty()) {
+        			return false;
+        		}
+        		for (Card c : list) {
+        			if (c.hasKeyword("Indestructible")) {
+        				sa.getTargets().add(c);
+                		return true;
+        			}
+        		}
+        		Card worst = ComputerUtilCard.getWorstAI(list);
+        		if (worst.isCreature() && ComputerUtilCard.evaluateCreature(worst) >= 200) {
+        			return false;
+        		}
+        		if (!worst.isCreature() && worst.getCMC() > 1) {
+        			return false;
+        		}
+        		sa.getTargets().add(worst);
+        		return true;
+        	}
             list = CardLists.getTargetableCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), sa);
-            list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
             if (sa.hasParam("AITgts")) {
             	if (sa.getParam("AITgts").equals("BetterThanSource")) {
             		if (source.isEnchanted()) {
@@ -131,7 +151,7 @@ public class DestroyAi extends SpellAbilityAi {
             }
             // target loop
             while (sa.getTargets().getNumTargeted() < abTgt.getMaxTargets(sa.getHostCard(), sa)) {
-                if (list.size() == 0) {
+                if (list.isEmpty()) {
                     if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getHostCard(), sa))
                             || (sa.getTargets().getNumTargeted() == 0)) {
                         sa.resetTargets();

@@ -723,6 +723,22 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // Don't blink cards that will die.
             aiPermanents = ComputerUtil.getSafeTargets(ai, sa, aiPermanents);
 
+        	if ("Polymorph".equals(sa.getParam("AILogic"))) {
+        		list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
+        		if (list.isEmpty()) {
+        			return false;
+        		}
+        		Card worst = ComputerUtilCard.getWorstAI(list);
+        		if (worst.isCreature() && ComputerUtilCard.evaluateCreature(worst) >= 200) {
+        			return false;
+        		}
+        		if (!worst.isCreature() && worst.getCMC() > 1) {
+        			return false;
+        		}
+        		sa.getTargets().add(worst);
+        		return true;
+        	}
+
             // Combat bouncing
             if (tgt.getMinTargets(sa.getHostCard(), sa) <= 1) {
                 if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
