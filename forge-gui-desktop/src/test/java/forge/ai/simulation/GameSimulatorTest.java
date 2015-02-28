@@ -64,7 +64,7 @@ public class GameSimulatorTest extends TestCase {
     
     private SpellAbility findSAWithPrefix(Iterable<SpellAbility> abilities, String prefix) {
         for (SpellAbility sa : abilities) {
-            if (sa.toString().startsWith(prefix)) {
+            if (sa.getDescription().startsWith(prefix)) {
                 return sa;
             }
         }
@@ -308,7 +308,7 @@ public class GameSimulatorTest extends TestCase {
     public void testPlaneswalkerAbilities() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
-        Card sorin = addCard("Sorin, Solemn Visitor", p);        
+        Card sorin = addCard("Sorin, Solemn Visitor", p);
         sorin.addCounter(CounterType.LOYALTY, 5, false);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
@@ -409,5 +409,34 @@ public class GameSimulatorTest extends TestCase {
         Game copy = copier.makeCopy();
         Card manifestedCreatureCopy = findCardWithName(copy, "");
         assertNull(findSAWithPrefix(manifestedCreatureCopy, "Unmanifest"));
-   }
+    }
+    
+    public void testTypeOfPermanentChanging() {
+        String sarkhanCardName = "Sarkhan, the Dragonspeaker";
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Card sarkhan = addCard(sarkhanCardName, p);
+        sarkhan.addCounter(CounterType.LOYALTY, 4, false);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        assertFalse(sarkhan.isCreature());
+        assertTrue(sarkhan.isPlaneswalker());
+
+        SpellAbility becomeDragonSA = findSAWithPrefix(sarkhan, "+1");
+        assertNotNull(becomeDragonSA);
+
+        GameSimulator sim = new GameSimulator(game, p);
+        sim.simulateSpellAbility(becomeDragonSA);
+        Game simGame = sim.getSimulatedGameState();
+        Card sarkhanSim = findCardWithName(simGame, sarkhanCardName);
+        assertTrue(sarkhanSim.isCreature());
+        assertFalse(sarkhanSim.isPlaneswalker());
+
+        GameCopier copier = new GameCopier(simGame);
+        Game copy = copier.makeCopy();
+        Card sarkhanCopy = findCardWithName(copy, sarkhanCardName);
+        assertTrue(sarkhanCopy.isCreature());
+        assertFalse(sarkhanCopy.isPlaneswalker());
+    }
 }

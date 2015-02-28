@@ -196,6 +196,12 @@ public class GameCopier {
             zoneOwner = playerMap.get(c.getController());
             newCard.setController(zoneOwner, 0);
             
+            int setPower = c.getSetPower();
+            int setToughness = c.getSetToughness();
+            if (setPower != -1 || setToughness != -1)  {
+                // TODO: Copy the full list with timestamps.
+                newCard.addNewPT(setPower, setToughness, newGame.getNextTimestamp());
+            }
             newCard.addTempPowerBoost(c.getTempPowerBoost());
             newCard.setSemiPermanentPowerBoost(c.getSemiPermanentPowerBoost());
             newCard.addTempToughnessBoost(c.getTempToughnessBoost());

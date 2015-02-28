@@ -2650,6 +2650,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         public int getTotal() {
             return currentValue + tempBoost + semiPermanentBoost + bonusFromCounters;
         }
+        @Override
+        public String toString() {
+            return String.format("c:%d tb:%d spb:%d bfc:%d", currentValue, tempBoost, semiPermanentBoost, bonusFromCounters);
+        }
     }
 
     public final StatBreakdown getUnswitchedToughnessBreakdown() {
