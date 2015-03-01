@@ -295,6 +295,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
         }
+        
+        if (ComputerUtil.playImmediately(ai, sa)) {
+        	return true;
+        }
 
         // don't use fetching to top of library/graveyard before main2
         if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
@@ -306,6 +310,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (ai.getCardsIn(ZoneType.Hand).size() > 1 && destination.equals("Hand")) {
                 return false;
             }
+        }
+
+        if (ComputerUtil.waitForBlocking(sa)) {
+        	return false;
         }
 
         final AbilitySub subAb = sa.getSubAbility();

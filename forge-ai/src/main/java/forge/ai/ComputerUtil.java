@@ -859,7 +859,8 @@ public class ComputerUtil {
                 && sa.getPayCosts().hasTapCost()
                 && (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
                         || !ph.getNextTurn().equals(sa.getActivatingPlayer()))
-                && !sa.getHostCard().hasSVar("EndOfTurnLeavePlay"));
+                && !sa.getHostCard().hasSVar("EndOfTurnLeavePlay")
+                && !sa.hasParam("ActivationPhases"));
     }
 
     //returns true if it's better to wait until blockers are declared).
