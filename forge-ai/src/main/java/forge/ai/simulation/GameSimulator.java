@@ -12,12 +12,14 @@ import forge.ai.PlayerControllerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
 import forge.game.GameObject;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.player.Player;
 import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
+import forge.game.spellability.TargetRestrictions;
 
 public class GameSimulator {
     private static int MAX_DEPTH = 5;
@@ -144,8 +146,15 @@ public class GameSimulator {
         debugPrint("Found SA " + sa + " on host card " + sa.getHostCard() + " with owner:"+ sa.getHostCard().getOwner());
         sa.setActivatingPlayer(aiPlayer);
         if (origSa.usesTargeting()) {
-            for (GameObject o : origSa.getTargets().getTargets()) {
-                sa.getTargets().add(copier.find(o));
+            final boolean divided = sa.hasParam("DividedAsYouChoose");
+            final TargetRestrictions origTgtRes = origSa.getTargetRestrictions();
+            final TargetRestrictions tgtRes = sa.getTargetRestrictions();
+            for (final GameObject o : origSa.getTargets().getTargets()) {
+                final GameObject target = copier.find(o);
+                sa.getTargets().add(target);
+                if (divided) {
+                    tgtRes.addDividedAllocation(target, origTgtRes.getDividedValue(o));
+                }
             }
         }
 
