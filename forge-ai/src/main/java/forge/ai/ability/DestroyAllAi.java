@@ -113,6 +113,10 @@ public class DestroyAllAi extends SpellAbilityAi {
         if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;
         }
+        
+        if (humanlist.isEmpty()) {
+        	return false;
+        }
 
         // if only creatures are affected evaluate both lists and pass only if
         // human creatures are more valuable
@@ -127,8 +131,15 @@ public class DestroyAllAi extends SpellAbilityAi {
             
             // test whether the human can kill the ai next turn
             Combat combat = new Combat(ai.getOpponent());
+            boolean containsAttacker = false;
             for (Card att : ai.getOpponent().getCreaturesInPlay()) {
-                combat.addAttacker(att, ai);
+            	if (ComputerUtilCombat.canAttackNextTurn(att, ai)) {
+            		combat.addAttacker(att, ai);
+            		containsAttacker = containsAttacker | humanlist.contains(att);
+            	}
+            }
+            if (!containsAttacker) {
+            	return false;
             }
             AiBlockController block = new AiBlockController(ai);
             block.assignBlockersForCombat(combat);
@@ -146,8 +157,7 @@ public class DestroyAllAi extends SpellAbilityAi {
                 return false;
             }
         } // otherwise evaluate both lists by CMC and pass only if human permanents are more valuable
-        else if ((ComputerUtilCard.evaluatePermanentList(computerlist) + 3) >= ComputerUtilCard
-                .evaluatePermanentList(humanlist)) {
+        else if ((ComputerUtilCard.evaluatePermanentList(computerlist) + 3) >= ComputerUtilCard.evaluatePermanentList(humanlist)) {
             return false;
         }
 
