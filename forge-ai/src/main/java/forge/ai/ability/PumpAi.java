@@ -2,7 +2,6 @@ package forge.ai.ability;
 
 import forge.ai.*;
 import forge.game.Game;
-import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -103,7 +102,7 @@ public class PumpAi extends PumpAiBase {
                 return false;
             }
         } else if (!game.getStack().isEmpty() && !sa.isCurse()) {
-            return pumpAgainstRemoval(ai, sa);
+            return ComputerUtilCard.canPumpAgainstRemoval(ai, sa);
         }
 
         if (sa.hasParam("ActivationNumberSacrifice")) {
@@ -550,47 +549,5 @@ public class PumpAi extends PumpAiBase {
         //the spell in the first place if it would curse its own creature
         //and the pump isn't mandatory
         return true;
-    }
-    
-    boolean pumpAgainstRemoval(Player ai, SpellAbility sa) {
-        final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
-        final CardCollection threatenedTargets = new CardCollection();
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-
-        if (tgt == null) {
-        	final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
-        	for (final Card card : cards) {
-        		if (objects.contains(card)) {
-        			return true;
-        		}
-        	}
-            // For pumps without targeting restrictions, just return immediately until this is fleshed out.
-            return false;
-        }
-
-        CardCollection targetables = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getHostCard());
-        targetables = CardLists.getTargetableCards(targetables, sa);
-        targetables = ComputerUtil.getSafeTargets(ai, sa, targetables);
-        for (final Card c : targetables) {
-            if (objects.contains(c)) {
-                threatenedTargets.add(c);
-            }
-        }
-        if (!threatenedTargets.isEmpty()) {
-            ComputerUtilCard.sortByEvaluateCreature(threatenedTargets);
-            for (Card c : threatenedTargets) {
-                sa.getTargets().add(c);
-                if (sa.getTargets().getNumTargeted() >= tgt.getMaxTargets(sa.getHostCard(), sa)) {
-                    break;
-                }
-            }
-            if (sa.getTargets().getNumTargeted() > tgt.getMaxTargets(sa.getHostCard(), sa)
-                    || sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
-                sa.resetTargets();
-                return false;
-            }
-            return true;
-        }
-        return false;
     }
 }

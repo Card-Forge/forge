@@ -12,6 +12,7 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.Game;
+import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
@@ -21,6 +22,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
@@ -1238,4 +1240,51 @@ public class ComputerUtilCard {
         }
     }
     
+    /**
+     * Evaluate if the ability can save a target against removal
+     * @param ai casting player
+     * @param sa Pump* or CounterPut*
+     * @return
+     */
+    public static boolean canPumpAgainstRemoval(Player ai, SpellAbility sa) {
+        final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
+        final CardCollection threatenedTargets = new CardCollection();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
+
+        if (tgt == null) {
+            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+            for (final Card card : cards) {
+                if (objects.contains(card)) {
+                    return true;
+                }
+            }
+            // For pumps without targeting restrictions, just return immediately until this is fleshed out.
+            return false;
+        }
+
+        CardCollection targetables = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getHostCard());
+        targetables = CardLists.getTargetableCards(targetables, sa);
+        targetables = ComputerUtil.getSafeTargets(ai, sa, targetables);
+        for (final Card c : targetables) {
+            if (objects.contains(c)) {
+                threatenedTargets.add(c);
+            }
+        }
+        if (!threatenedTargets.isEmpty()) {
+            ComputerUtilCard.sortByEvaluateCreature(threatenedTargets);
+            for (Card c : threatenedTargets) {
+                sa.getTargets().add(c);
+                if (sa.getTargets().getNumTargeted() >= tgt.getMaxTargets(sa.getHostCard(), sa)) {
+                    break;
+                }
+            }
+            if (sa.getTargets().getNumTargeted() > tgt.getMaxTargets(sa.getHostCard(), sa)
+                    || sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
+                sa.resetTargets();
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
 }
