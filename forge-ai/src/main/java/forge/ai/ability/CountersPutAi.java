@@ -246,7 +246,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (sa.getHostCard().getName().equals("Abzan Charm")) {
+            if (source.getName().equals("Abzan Charm")) {
                 // specific AI for instant with distribute two +1/+1 counters
                 ComputerUtilCard.sortByEvaluateCreature(list);
                 // maximise the number of targets
@@ -259,7 +259,7 @@ public class CountersPutAi extends SpellAbilityAi {
                             abTgt.addDividedAllocation(c, i);
                             left -= i;
                         }
-                        if (left < i || sa.getTargets().getNumTargeted() == abTgt.getMaxTargets(sa.getHostCard(), sa)) {
+                        if (left < i || sa.getTargets().getNumTargeted() == abTgt.getMaxTargets(source, sa)) {
                             abTgt.addDividedAllocation(sa.getTargets().getFirstTargetedCard(), left + i);
                             left = 0;
                             break;
@@ -289,7 +289,24 @@ public class CountersPutAi extends SpellAbilityAi {
                 if (sa.isCurse()) {
                     choice = CountersAi.chooseCursedTarget(list, type, amount);
                 } else {
-                    choice = CountersAi.chooseBoonTarget(list, type);
+                    if (type.equals("P1P1") && !SpellAbilityAi.isSorcerySpeed(sa)) {
+                        for (Card c : list) {
+                            if (ComputerUtilCard.shouldPumpCard(ai, sa, c, amount, amount, new ArrayList<String>())) {
+                                choice = c;
+                                break;
+                            }
+                        }
+                        if (!source.isSpell()) {    // does not cost a card
+                            if (choice == null) {   // find generic target
+                                if (abCost == null || ph.is(PhaseType.END_OF_TURN, ai.getOpponent())) {
+                                    // only use at opponent EOT unless it is free
+                                    choice = CountersAi.chooseBoonTarget(list, type);
+                                }
+                            }
+                        }
+                    } else {
+                        choice = CountersAi.chooseBoonTarget(list, type);
+                    }
                 }
 
                 if (choice == null) { // can't find anything left
@@ -353,11 +370,6 @@ public class CountersPutAi extends SpellAbilityAi {
         }
 
         if (ComputerUtil.waitForBlocking(sa)) {
-            return false;
-        }
-
-        if (type.equals("P1P1") && !SpellAbilityAi.isSorcerySpeed(sa) && !ph.is(PhaseType.END_OF_TURN, ai.getOpponent()) && abCost != null) {
-            sa.resetTargets();
             return false;
         }
         
