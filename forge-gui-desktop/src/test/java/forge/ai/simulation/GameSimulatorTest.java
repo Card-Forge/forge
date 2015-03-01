@@ -439,4 +439,32 @@ public class GameSimulatorTest extends TestCase {
         assertTrue(sarkhanCopy.isCreature());
         assertFalse(sarkhanCopy.isPlaneswalker());
     }
+    
+    public void testDistributeCountersAbility() {
+        String ajaniCardName = "Ajani, Mentor of Heroes";
+        String ornithoperCardName = "Ornithopter";
+        String bearCardName = "Runeclaw Bear";
+
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        addCard(ornithoperCardName, p);
+        addCard(bearCardName, p);
+        Card ajani = addCard(ajaniCardName, p);
+        ajani.addCounter(CounterType.LOYALTY, 4, false);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = findSAWithPrefix(ajani, "+1: Distribute");
+        assertNotNull(sa);
+
+        PossibleTargetSelector selector = new PossibleTargetSelector(game, p, sa);
+        while (selector.selectNextTargets()) {
+            GameSimulator sim = new GameSimulator(game, p);
+            sim.simulateSpellAbility(sa);
+            Game simGame = sim.getSimulatedGameState();
+            Card thopterSim = findCardWithName(simGame, ornithoperCardName);
+            Card bearSim = findCardWithName(simGame, bearCardName);
+            assertEquals(3, thopterSim.getCounters(CounterType.P1P1) + bearSim.getCounters(CounterType.P1P1));
+        }
+    }
 }
