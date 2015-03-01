@@ -182,7 +182,7 @@ public class PumpAi extends PumpAiBase {
 
                     return true;
                 }
-                if (!card.getController().isOpponentOf(ai) && shouldPumpCard(ai, sa, card, defense, attack, keywords)) {
+                if (!card.getController().isOpponentOf(ai) && ComputerUtilCard.shouldPumpCard(ai, sa, card, defense, attack, keywords)) {
                     return true;
                 }
             }

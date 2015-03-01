@@ -12,11 +12,9 @@ import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
-import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
@@ -25,11 +23,8 @@ import forge.game.phase.Untap;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public abstract class PumpAiBase extends SpellAbilityAi {
 
@@ -426,204 +421,6 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         return true;
     }
 
-    protected boolean shouldPumpCard(final Player ai, final SpellAbility sa, final Card c, final int defense, final int attack,
-            final List<String> keywords) {
-        final Game game = ai.getGame();
-        final PhaseHandler phase = game.getPhaseHandler();
-        final Combat combat = phase.getCombat();
-        
-        if (!c.canBeTargetedBy(sa)) {
-            return false;
-        }
-
-        if (c.getNetToughness() + defense <= 0) {
-            return false;
-        }
-
-        /* -- currently disabled until better conditions are devised and the spell prediction is made smarter --
-        // Determine if some mana sources need to be held for the future spell to cast in Main 2 before determining whether to pump.
-        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        if (aic.getCardMemory().isMemorySetEmpty(AiCardMemory.MemorySet.HELD_MANA_SOURCES)) {
-            // only hold mana sources once
-            SpellAbility futureSpell = aic.predictSpellToCastInMain2(ApiType.Pump);
-            if (futureSpell != null && futureSpell.getHostCard() != null) {
-                aic.reserveManaSourcesForMain2(futureSpell);
-            }
-        }
-        */
-
-        // will the creature attack (only relevant for sorcery speed)?
-        if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                && phase.isPlayerTurn(ai)
-                && SpellAbilityAi.isSorcerySpeed(sa)
-                && attack > 0
-                && ComputerUtilCard.doesCreatureAttackAI(ai, c)) {
-            return true;
-        }
-
-        // buff attacker/blocker using triggered pump
-        if (sa.isTrigger() && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-            if (phase.isPlayerTurn(ai)) {
-                if (CombatUtil.canAttack(c)) {
-                    return true;
-                }
-            } else {
-                if (CombatUtil.canBlock(c)) {
-                    return true;
-                }
-            }
-        }
-
-        final Player opp = ai.getOpponent();
-        Card pumped = pumpedCreature(ai, sa, c, defense, attack, keywords);
-        List<Card> oppCreatures = opp.getCreaturesInPlay();
-        float chance = 0;
-        
-        //create and buff attackers
-        if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai)) {
-            //1. become attacker for whatever reason
-            if (!ComputerUtilCard.doesCreatureAttackAI(ai, c) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
-                float threat = 1.0f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife();
-                if (CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(pumped)).isEmpty()) {
-                    threat *= 2;
-                }
-                if (c.getNetPower() == 0 && c == sa.getHostCard() && attack > 0 ) {
-                    threat *= 4;    //over-value self +attack for 0 power creatures which may be pumped further after attacking 
-                }
-                chance += threat;
-            }
-            
-            //2. grant haste
-            if (keywords.contains("Haste") && c.hasSickness() && !c.isTapped()) {
-                chance += 0.5f;
-                if (ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
-                    chance += 0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife();
-                }
-            }
-            
-            //3. grant evasive
-            if (!CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(c)).isEmpty()) {
-                if (CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(pumped)).isEmpty() 
-                        && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
-                    chance += 0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife();
-                }
-            }
-        }
-        
-        //combat trickery
-        if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-            //clunky code because ComputerUtilCombat.combatantWouldBeDestroyed() does not work for this sort of artificial combat
-            Combat pumpedCombat = new Combat(phase.isPlayerTurn(ai) ? ai : opp);
-            List<Card> opposing = null;
-            boolean pumpedWillDie = false;
-            final boolean isAttacking = combat.isAttacking(c);
-            if (isAttacking) {
-                pumpedCombat.addAttacker(pumped, opp);
-                opposing = combat.getBlockers(c);
-                for (Card b : opposing) {
-                    pumpedCombat.addBlocker(pumped, b);
-                }
-                if (ComputerUtilCombat.attackerWouldBeDestroyed(ai, pumped, pumpedCombat)) {
-                    pumpedWillDie = true;
-                }
-            } else {
-                opposing = combat.getAttackersBlockedBy(c);
-                for (Card a : opposing) {
-                    pumpedCombat.addAttacker(a, ai);
-                    pumpedCombat.addBlocker(a, pumped);
-                }
-                if (ComputerUtilCombat.blockerWouldBeDestroyed(ai, pumped, pumpedCombat)) {
-                    pumpedWillDie = true;
-                }
-            }
-            
-            //1. save combatant
-            if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) && !pumpedWillDie) {
-                return true;
-            }
-            
-            //2. kill combatant
-            boolean survivor = false;
-            for (Card o : opposing) {
-                if (!ComputerUtilCombat.combatantWouldBeDestroyed(opp, o, combat)) {
-                    survivor = true;
-                    break;
-                }
-            }
-            if (survivor) {
-                for (Card o : opposing) {
-                    if (!ComputerUtilCombat.combatantWouldBeDestroyed(opp, o, combat)) {
-                        if (isAttacking) {
-                            if (ComputerUtilCombat.blockerWouldBeDestroyed(opp, o, pumpedCombat)) {
-                                return true;
-                            }
-                        } else {
-                            if (ComputerUtilCombat.attackerWouldBeDestroyed(opp, o, pumpedCombat)) {
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-            
-            //3. buff attacker
-            if (combat.isAttacking(c)) {
-                int dmg = ComputerUtilCombat.damageIfUnblocked(c, opp, combat, true);
-                int pumpedDmg = ComputerUtilCombat.damageIfUnblocked(pumped, opp, pumpedCombat, true);
-                if (combat.isBlocked(c)) {
-                    if (!c.hasKeyword("Trample")) {
-                        dmg = 0;
-                    }
-                    if (c.hasKeyword("Trample") || keywords.contains("Trample")) {
-                       for (Card b : combat.getBlockers(c)) {
-                           pumpedDmg -= ComputerUtilCombat.getDamageToKill(b);
-                       }
-                    } else {
-                        pumpedDmg = 0;
-                    }
-                }
-                if (pumpedDmg >= opp.getLife()) {
-                    return true;
-                }
-                float value = 1.0f * (pumpedDmg - dmg);
-                if (c == sa.getHostCard() && attack > 0) {
-                    int divisor = sa.getPayCosts().getTotalMana().getCMC();
-                    if (divisor <= 0) {
-                        divisor = 1;
-                    }
-                    value *= attack / divisor;
-                } else {
-                    value /= opp.getLife();
-                }
-                chance += value;
-            }
-            
-            //4. lifelink
-            if (ai.canGainLife() && !c.hasKeyword("Lifelink") && keywords.contains("Lifelink")
-                    && (combat.isAttacking(c) || combat.isBlocking(c))) {
-                int dmg = pumped.getNetCombatDamage();
-                //The actual dmg inflicted should be the sum of ComputerUtilCombat.predictDamageTo() for opposing creature
-                //and trample damage (if any)
-                chance += 1.0f * dmg / ai.getLife();
-            }
-            
-            //5. if the life of the computer is in danger, try to pump blockers blocking Tramplers
-            if (combat.isBlocking(c) && defense > 0 ) {
-                List<Card> blockedBy = combat.getAttackersBlockedBy(c);
-                boolean attackerHasTrample = false;
-                for (Card b : blockedBy) {
-                    attackerHasTrample |= b.hasKeyword("Trample");
-                }
-                if (attackerHasTrample && (sa.isAbility() || ComputerUtilCombat.lifeInDanger(ai, combat))) {
-                    return true;
-                }
-            }
-        }
-        //TODO:how to consider repeatable pump abilities? This probably requires the AI to keep track of future decisions and/or
-        //plan a sequence of decisions.
-        return MyRandom.getRandom().nextFloat() < chance;
-    }
-
     /**
      * <p>
      * getPumpCreatures.
@@ -636,7 +433,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return shouldPumpCard(ai, sa, c, defense, attack, keywords);
+                return ComputerUtilCard.shouldPumpCard(ai, sa, c, defense, attack, keywords);
             }
         });
         return list;
@@ -739,47 +536,5 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             }
         }
         return false;
-    }
-
-    public Card pumpedCreature(final Player ai, final SpellAbility sa, final Card c, final int d, final int a,
-            final List<String> keywords) {
-        Card pumped = CardFactory.copyCard(c, true);
-        pumped.setSickness(c.hasSickness());
-        final long timestamp = c.getGame().getNextTimestamp();
-        final ArrayList<String> kws = new ArrayList<String>();
-        for (String kw : keywords) {
-            if (kw.startsWith("HIDDEN")) {
-                pumped.addHiddenExtrinsicKeyword(kw);
-            } else {
-                kws.add(kw);
-            }
-        }
-        pumped.addNewPT(c.getCurrentPower(), c.getCurrentToughness(), timestamp);
-        pumped.addTempPowerBoost(c.getTempPowerBoost() + a);
-        pumped.addTempToughnessBoost(c.getTempToughnessBoost() + d);
-        pumped.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);
-        Set<CounterType> types = c.getCounters().keySet();
-        for(CounterType ct : types) {
-            pumped.addCounterFireNoEvents(ct, c.getCounters(ct), true);
-        }
-        //Copies tap-state and extra keywords (auras, equipment, etc.) 
-        if (c.isTapped()) {
-            pumped.setTapped(true);
-        }
-        final List<String> copiedKeywords = pumped.getKeywords();
-        List<String> toCopy = new ArrayList<String>();
-        for (String kw : c.getKeywords()) {
-            if (!copiedKeywords.contains(kw)) {
-                if (kw.startsWith("HIDDEN")) {
-                    pumped.addHiddenExtrinsicKeyword(kw);
-                } else {
-                    toCopy.add(kw);
-                }
-            }
-        }
-        final long timestamp2 = c.getGame().getNextTimestamp(); //is this necessary or can the timestamp be re-used?
-        pumped.addChangedCardKeywords(toCopy, new ArrayList<String>(), false, timestamp2);
-        ComputerUtilCard.applyStaticContPT(ai.getGame(), pumped, new CardCollection(c));
-        return pumped;
     }
 }

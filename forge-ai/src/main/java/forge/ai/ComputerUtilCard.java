@@ -16,6 +16,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -923,6 +924,266 @@ public class ComputerUtilCard {
             final float chance = MyRandom.getRandom().nextFloat();
             return chance < valueNow;
         }
+    }
+
+    /**
+     * Decides if the "pump" is worthwhile
+     * @param ai casting player
+     * @param sa Pump* or CounterPut*
+     * @param c target of sa
+     * @param toughness +T
+     * @param power +P
+     * @param keywords additional keywords from sa (only for Pump)
+     * @return
+     */
+    public static boolean shouldPumpCard(final Player ai,
+            final SpellAbility sa, final Card c, final int toughness,
+            final int power, final List<String> keywords) {
+        final Game game = ai.getGame();
+        final PhaseHandler phase = game.getPhaseHandler();
+        final Combat combat = phase.getCombat();
+        
+        if (!c.canBeTargetedBy(sa)) {
+            return false;
+        }
+
+        if (c.getNetToughness() + toughness <= 0) {
+            return false;
+        }
+
+        /* -- currently disabled until better conditions are devised and the spell prediction is made smarter --
+        // Determine if some mana sources need to be held for the future spell to cast in Main 2 before determining whether to pump.
+        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+        if (aic.getCardMemory().isMemorySetEmpty(AiCardMemory.MemorySet.HELD_MANA_SOURCES)) {
+            // only hold mana sources once
+            SpellAbility futureSpell = aic.predictSpellToCastInMain2(ApiType.Pump);
+            if (futureSpell != null && futureSpell.getHostCard() != null) {
+                aic.reserveManaSourcesForMain2(futureSpell);
+            }
+        }
+        */
+
+        // will the creature attack (only relevant for sorcery speed)?
+        if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                && phase.isPlayerTurn(ai)
+                && SpellAbilityAi.isSorcerySpeed(sa)
+                && power > 0
+                && ComputerUtilCard.doesCreatureAttackAI(ai, c)) {
+            return true;
+        }
+
+        // buff attacker/blocker using triggered pump
+        if (sa.isTrigger() && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+            if (phase.isPlayerTurn(ai)) {
+                if (CombatUtil.canAttack(c)) {
+                    return true;
+                }
+            } else {
+                if (CombatUtil.canBlock(c)) {
+                    return true;
+                }
+            }
+        }
+
+        final Player opp = ai.getOpponent();
+        Card pumped = getPumpedCreature(ai, sa, c, toughness, power, keywords);
+        List<Card> oppCreatures = opp.getCreaturesInPlay();
+        float chance = 0;
+        
+        //create and buff attackers
+        if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai)) {
+            //1. become attacker for whatever reason
+            if (!ComputerUtilCard.doesCreatureAttackAI(ai, c) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
+                float threat = 1.0f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife();
+                if (CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(pumped)).isEmpty()) {
+                    threat *= 2;
+                }
+                if (c.getNetPower() == 0 && c == sa.getHostCard() && power > 0 ) {
+                    threat *= 4;    //over-value self +attack for 0 power creatures which may be pumped further after attacking 
+                }
+                chance += threat;
+            }
+            
+            //2. grant haste
+            if (keywords.contains("Haste") && c.hasSickness() && !c.isTapped()) {
+                chance += 0.5f;
+                if (ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
+                    chance += 0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife();
+                }
+            }
+            
+            //3. grant evasive
+            if (!CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(c)).isEmpty()) {
+                if (CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(pumped)).isEmpty() 
+                        && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
+                    chance += 0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife();
+                }
+            }
+        }
+        
+        //combat trickery
+        if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+            //clunky code because ComputerUtilCombat.combatantWouldBeDestroyed() does not work for this sort of artificial combat
+            Combat pumpedCombat = new Combat(phase.isPlayerTurn(ai) ? ai : opp);
+            List<Card> opposing = null;
+            boolean pumpedWillDie = false;
+            final boolean isAttacking = combat.isAttacking(c);
+            if (isAttacking) {
+                pumpedCombat.addAttacker(pumped, opp);
+                opposing = combat.getBlockers(c);
+                for (Card b : opposing) {
+                    pumpedCombat.addBlocker(pumped, b);
+                }
+                if (ComputerUtilCombat.attackerWouldBeDestroyed(ai, pumped, pumpedCombat)) {
+                    pumpedWillDie = true;
+                }
+            } else {
+                opposing = combat.getAttackersBlockedBy(c);
+                for (Card a : opposing) {
+                    pumpedCombat.addAttacker(a, ai);
+                    pumpedCombat.addBlocker(a, pumped);
+                }
+                if (ComputerUtilCombat.blockerWouldBeDestroyed(ai, pumped, pumpedCombat)) {
+                    pumpedWillDie = true;
+                }
+            }
+            
+            //1. save combatant
+            if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) && !pumpedWillDie) {
+                return true;
+            }
+            
+            //2. kill combatant
+            boolean survivor = false;
+            for (Card o : opposing) {
+                if (!ComputerUtilCombat.combatantWouldBeDestroyed(opp, o, combat)) {
+                    survivor = true;
+                    break;
+                }
+            }
+            if (survivor) {
+                for (Card o : opposing) {
+                    if (!ComputerUtilCombat.combatantWouldBeDestroyed(opp, o, combat)) {
+                        if (isAttacking) {
+                            if (ComputerUtilCombat.blockerWouldBeDestroyed(opp, o, pumpedCombat)) {
+                                return true;
+                            }
+                        } else {
+                            if (ComputerUtilCombat.attackerWouldBeDestroyed(opp, o, pumpedCombat)) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            //3. buff attacker
+            if (combat.isAttacking(c)) {
+                int dmg = ComputerUtilCombat.damageIfUnblocked(c, opp, combat, true);
+                int pumpedDmg = ComputerUtilCombat.damageIfUnblocked(pumped, opp, pumpedCombat, true);
+                if (combat.isBlocked(c)) {
+                    if (!c.hasKeyword("Trample")) {
+                        dmg = 0;
+                    }
+                    if (c.hasKeyword("Trample") || keywords.contains("Trample")) {
+                       for (Card b : combat.getBlockers(c)) {
+                           pumpedDmg -= ComputerUtilCombat.getDamageToKill(b);
+                       }
+                    } else {
+                        pumpedDmg = 0;
+                    }
+                }
+                if (pumpedDmg >= opp.getLife()) {
+                    return true;
+                }
+                float value = 1.0f * (pumpedDmg - dmg);
+                if (c == sa.getHostCard() && power > 0) {
+                    int divisor = sa.getPayCosts().getTotalMana().getCMC();
+                    if (divisor <= 0) {
+                        divisor = 1;
+                    }
+                    value *= power / divisor;
+                } else {
+                    value /= opp.getLife();
+                }
+                chance += value;
+            }
+            
+            //4. lifelink
+            if (ai.canGainLife() && !c.hasKeyword("Lifelink") && keywords.contains("Lifelink")
+                    && (combat.isAttacking(c) || combat.isBlocking(c))) {
+                int dmg = pumped.getNetCombatDamage();
+                //The actual dmg inflicted should be the sum of ComputerUtilCombat.predictDamageTo() for opposing creature
+                //and trample damage (if any)
+                chance += 1.0f * dmg / ai.getLife();
+            }
+            
+            //5. if the life of the computer is in danger, try to pump blockers blocking Tramplers
+            if (combat.isBlocking(c) && toughness > 0 ) {
+                List<Card> blockedBy = combat.getAttackersBlockedBy(c);
+                boolean attackerHasTrample = false;
+                for (Card b : blockedBy) {
+                    attackerHasTrample |= b.hasKeyword("Trample");
+                }
+                if (attackerHasTrample && (sa.isAbility() || ComputerUtilCombat.lifeInDanger(ai, combat))) {
+                    return true;
+                }
+            }
+        }
+        return MyRandom.getRandom().nextFloat() < chance;
+    }
+    
+    /**
+     * Apply "pump" ability and return modified creature
+     * @param ai casting player
+     * @param sa Pump* or CounterPut*
+     * @param c target of sa
+     * @param toughness +T
+     * @param power +P
+     * @param keywords additional keywords from sa (only for Pump)
+     * @return
+     */
+    public static Card getPumpedCreature(final Player ai, final SpellAbility sa,
+            final Card c, final int toughness, final int power,
+            final List<String> keywords) {
+        Card pumped = CardFactory.copyCard(c, true);
+        pumped.setSickness(c.hasSickness());
+        final long timestamp = c.getGame().getNextTimestamp();
+        final ArrayList<String> kws = new ArrayList<String>();
+        for (String kw : keywords) {
+            if (kw.startsWith("HIDDEN")) {
+                pumped.addHiddenExtrinsicKeyword(kw);
+            } else {
+                kws.add(kw);
+            }
+        }
+        pumped.addNewPT(c.getCurrentPower(), c.getCurrentToughness(), timestamp);
+        pumped.addTempPowerBoost(c.getTempPowerBoost() + power);
+        pumped.addTempToughnessBoost(c.getTempToughnessBoost() + toughness);
+        pumped.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);
+        Set<CounterType> types = c.getCounters().keySet();
+        for(CounterType ct : types) {
+            pumped.addCounterFireNoEvents(ct, c.getCounters(ct), true);
+        }
+        //Copies tap-state and extra keywords (auras, equipment, etc.) 
+        if (c.isTapped()) {
+            pumped.setTapped(true);
+        }
+        final List<String> copiedKeywords = pumped.getKeywords();
+        List<String> toCopy = new ArrayList<String>();
+        for (String kw : c.getKeywords()) {
+            if (!copiedKeywords.contains(kw)) {
+                if (kw.startsWith("HIDDEN")) {
+                    pumped.addHiddenExtrinsicKeyword(kw);
+                } else {
+                    toCopy.add(kw);
+                }
+            }
+        }
+        final long timestamp2 = c.getGame().getNextTimestamp(); //is this necessary or can the timestamp be re-used?
+        pumped.addChangedCardKeywords(toCopy, new ArrayList<String>(), false, timestamp2);
+        ComputerUtilCard.applyStaticContPT(ai.getGame(), pumped, new CardCollection(c));
+        return pumped;
     }
     
     /**
