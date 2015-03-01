@@ -24,6 +24,7 @@ import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -228,6 +229,33 @@ public class CountersPutAi extends SpellAbilityAi {
                 return false;
             }
 
+            if (sa.getHostCard().getName().equals("Abzan Charm")) {
+                // specific AI for instant with distribute two +1/+1 counters
+                ComputerUtilCard.sortByEvaluateCreature(list);
+                // maximise the number of targets
+                for (int i = 1; i < amount + 1; i++) {
+                    int left = amount;
+                    for (Card c : list) {
+                        if (ComputerUtilCard.shouldPumpCard(ai, sa, c, i, i,
+                                new ArrayList<String>())) {
+                            sa.getTargets().add(c);
+                            abTgt.addDividedAllocation(c, i);
+                            left -= i;
+                        }
+                        if (left < i || sa.getTargets().getNumTargeted() == abTgt.getMaxTargets(sa.getHostCard(), sa)) {
+                            abTgt.addDividedAllocation(sa.getTargets().getFirstTargetedCard(), left + i);
+                            left = 0;
+                            break;
+                        }
+                    }
+                    if (left == 0) {
+                        return true;
+                    }
+                    sa.resetTargets();
+                }
+                return false;
+            }
+            
             // target loop
             while (sa.getTargets().getNumTargeted() < abTgt.getMaxTargets(sa.getHostCard(), sa)) {
                 if (list.isEmpty()) {
