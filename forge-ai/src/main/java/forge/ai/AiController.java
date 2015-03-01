@@ -825,7 +825,7 @@ public class AiController {
         return getCardsToDiscard(numDiscard, numDiscard, hand, sa);
     }
 
-    public CardCollection getCardsToDiscard(final int min, final int max, final CardCollection validCards, final SpellAbility sa) {
+    public CardCollection getCardsToDiscard(int min, final int max, final CardCollection validCards, final SpellAbility sa) {
         if (validCards.size() < min) {
             return null;
         }
@@ -835,6 +835,9 @@ public class AiController {
         int count = 0;
         if (sa != null) {
             sourceCard = sa.getHostCard();
+            if ("Always".equals(sa.getParam("AILogic")) && !validCards.isEmpty()) {
+            	min = 1;
+            }
         }
     
         // look for good discards

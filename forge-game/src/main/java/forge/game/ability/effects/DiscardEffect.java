@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DiscardEffect extends SpellAbilityEffect {
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final String mode = sa.getParam("Mode");
@@ -31,7 +32,7 @@ public class DiscardEffect extends SpellAbilityEffect {
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
-        if (tgtPlayers.size() > 0) {
+        if (!tgtPlayers.isEmpty()) {
 
             for (final Player p : tgtPlayers) {
                 sb.append(p.toString()).append(" ");
@@ -113,14 +114,14 @@ public class DiscardEffect extends SpellAbilityEffect {
 
 
         for (final Player p : discarders) {
-            if ((mode.equals("RevealTgtChoose") && firstTarget != null)
-            		|| tgt == null || p.canBeTargetedBy(sa)) {
+            if ((mode.equals("RevealTgtChoose") && firstTarget != null) || tgt == null || p.canBeTargetedBy(sa)) {
             	if (sa.hasParam("RememberDiscarder")) {
             		source.addRemembered(p);
             	}
                 final int numCardsInHand = p.getCardsIn(ZoneType.Hand).size(); 
                 if (mode.equals("Defined")) {
-                    boolean runDiscard = !sa.hasParam("Optional") || p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, sa.getParam("DiscardMessage"));
+                    boolean runDiscard = !sa.hasParam("Optional") 
+                    		|| p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, sa.getParam("DiscardMessage"));
                     if (runDiscard) {
                         final List<Card> toDiscard = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
                         for (final Card c : toDiscard) {
@@ -150,8 +151,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                 }
 
                 if (mode.equals("NotRemembered")) {
-                    final List<Card> dPHand =
-                            CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), "Card.IsNotRemembered", source.getController(), source);
+                    final List<Card> dPHand = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), "Card.IsNotRemembered", p, source);
                     for (final Card c : dPHand) {
                         p.discard(c, sa);
                         discarded.add(c);
@@ -161,8 +161,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                 int numCards = 1;
                 if (sa.hasParam("NumCards")) {
                     numCards = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
-                    if (p.getCardsIn(ZoneType.Hand).size() > 0
-                            && p.getCardsIn(ZoneType.Hand).size() < numCards) {
+                    if (!p.getCardsIn(ZoneType.Hand).isEmpty() && p.getCardsIn(ZoneType.Hand).size() < numCards) {
                         // System.out.println("Scale down discard from " + numCards + " to " + p.getCardsIn(ZoneType.Hand).size());
                         numCards = p.getCardsIn(ZoneType.Hand).size();
                     }
@@ -174,7 +173,7 @@ public class DiscardEffect extends SpellAbilityEffect {
 
                     if (runDiscard) {
                         final String valid = sa.hasParam("DiscardValid") ? sa.getParam("DiscardValid") : "Card";
-                        List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), valid, sa.getHostCard().getController(), sa.getHostCard());
+                        List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), valid, source.getController(), source);
                         list = CardLists.filter(list, Presets.NON_TOKEN);
                         for (int i = 0; i < numCards; i++) {
                             if (list.isEmpty())
