@@ -204,6 +204,23 @@ public class CountersPutAi extends SpellAbilityAi {
                 return false;
             }
         }
+        
+        if (!ai.getGame().getStack().isEmpty() && !SpellAbilityAi.isSorcerySpeed(sa)) {
+            // only evaluates case where all tokens are placed on a single target
+            if (abTgt.getMinTargets(sa.getHostCard(), sa) < 2) {
+                if (ComputerUtilCard.canPumpAgainstRemoval(ai, sa)) {
+                    Card c = sa.getTargets().getFirstTargetedCard();
+                    if (sa.getTargets().getNumTargeted() > 1) {
+                        sa.resetTargets();
+                        sa.getTargets().add(c);
+                    }
+                    abTgt.addDividedAllocation(sa.getTargetCard(), amount);
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
 
         // Targeting
         if (abTgt != null) {
@@ -339,6 +356,11 @@ public class CountersPutAi extends SpellAbilityAi {
             return false;
         }
 
+        if (type.equals("P1P1") && !SpellAbilityAi.isSorcerySpeed(sa) && !ph.is(PhaseType.END_OF_TURN, ai.getOpponent()) && abCost != null) {
+            sa.resetTargets();
+            return false;
+        }
+        
         return true;
     }
 

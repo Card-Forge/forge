@@ -1083,7 +1083,7 @@ public class ComputerUtil {
         Iterable<? extends GameObject> objects = new ArrayList<GameObject>();
         final List<GameObject> threatened = new ArrayList<GameObject>();
         ApiType saviourApi = saviour == null ? null : saviour.getApi();
-        int defense = 0;
+        int toughness = 0;
         boolean grantIndestructible = false;
         boolean grantShroud = false;
     
@@ -1127,7 +1127,7 @@ public class ComputerUtil {
         }
         
         if (saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) {
-            defense = saviour.hasParam("NumDef") ? 
+            toughness = saviour.hasParam("NumDef") ? 
                     AbilityUtils.calculateAmount(saviour.getHostCard(), saviour.getParam("NumDef"), saviour) : 0;
             final List<String> keywords = saviour.hasParam("KW") ? 
                             Arrays.asList(saviour.getParam("KW").split(" & ")) : new ArrayList<String>();
@@ -1136,6 +1136,14 @@ public class ComputerUtil {
             }
             if (keywords.contains("Hexproof") || keywords.contains("Shroud")) {
                 grantShroud = true;
+            }
+        }
+        
+        if (saviourApi == ApiType.PutCounter || saviourApi == ApiType.PutCounterAll) {
+            if (saviour.getParam("CounterType").equals("P1P1")) {
+                toughness = AbilityUtils.calculateAmount(saviour.getHostCard(), saviour.getParam("CounterNum"), saviour);
+            } else {
+                return threatened;
             }
         }
 
@@ -1179,9 +1187,16 @@ public class ComputerUtil {
                     }
 
                     if (saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) {
-                        boolean canSave = ComputerUtilCombat.predictDamageTo(c, dmg - defense, source, false) < ComputerUtilCombat.getDamageToKill(c);
+                        boolean canSave = ComputerUtilCombat.predictDamageTo(c, dmg - toughness, source, false) < ComputerUtilCombat.getDamageToKill(c);
                         if ((tgt == null && !grantIndestructible && !canSave)
                                 || (!grantIndestructible && !grantShroud && !canSave)) {
+                            continue;
+                        }
+                    }
+                    
+                    if (saviourApi == ApiType.PutCounter || saviourApi == ApiType.PutCounterAll) {
+                        boolean canSave = ComputerUtilCombat.predictDamageTo(c, dmg - toughness, source, false) < ComputerUtilCombat.getDamageToKill(c);
+                        if (!canSave) {
                             continue;
                         }
                     }
@@ -1227,14 +1242,23 @@ public class ComputerUtil {
                     if (!canRemove) {
                         continue;
                     }
+                    
                     if (saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) {
-                        final boolean cantSave = c.getNetToughness() + defense <= dmg
+                        final boolean cantSave = c.getNetToughness() + toughness <= dmg
                                 || (!c.hasKeyword("Indestructible") && c.getShieldCount() == 0 && !grantIndestructible 
-                                        && (dmg >= defense + ComputerUtilCombat.getDamageToKill(c)));
+                                        && (dmg >= toughness + ComputerUtilCombat.getDamageToKill(c)));
                         if (cantSave && (tgt == null || !grantShroud)) {
                             continue;
                         }
                     }
+                    
+                    if (saviourApi == ApiType.PutCounter || saviourApi == ApiType.PutCounterAll) {
+                        boolean canSave = c.getNetToughness() + toughness > dmg;
+                        if (!canSave) {
+                            continue;
+                        }
+                    }
+                    
                     if (saviourApi == ApiType.Protection) {
                         if (tgt == null || (ProtectAi.toProtectFrom(source, saviour) == null)) {
                             continue;
