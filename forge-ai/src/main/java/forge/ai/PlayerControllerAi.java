@@ -606,7 +606,7 @@ public class PlayerControllerAi extends PlayerController {
         if (game.stack.size() > 1) {
             for (SpellAbilityStackInstance si : game.getStack()) {
                 SpellAbility spell = si.getSpellAbility(true);
-                if (sa != spell) {
+                if (sa != spell && sa.getHostCard() != spell.getHostCard()) {
                     String s = ProtectAi.toProtectFrom(spell.getHostCard(), sa);
                     if (s != null) {
                         return s;

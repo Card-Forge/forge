@@ -98,7 +98,7 @@ public class ProtectAi extends SpellAbilityAi {
      *            a {@link forge.game.ability.AbilityFactory} object.
      * @return a {@link forge.CardList} object.
      */
-    private static CardCollection getProtectCreatures(final Player ai, final SpellAbility sa) {
+    public static CardCollection getProtectCreatures(final Player ai, final SpellAbility sa) {
         final List<String> gains = ProtectEffect.getProtectionList(sa);
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();

@@ -86,6 +86,14 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
             }
         }
+        
+        if (source.getName().equals("Feat of Resistance")) {    // sub-ability should take precedence
+            CardCollection prot = ProtectAi.getProtectCreatures(ai, sa.getSubAbility());
+            if (!prot.isEmpty()) {
+                sa.getTargets().add(prot.get(0));
+                return true;
+            }
+        }
 
         if (sa.hasParam("Bolster")) {
             CardCollection creatsYouCtrl = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
