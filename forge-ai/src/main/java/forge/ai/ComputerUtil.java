@@ -1231,7 +1231,8 @@ public class ComputerUtil {
         // -Toughness Curse
         else if ((threatApi == ApiType.Pump || threatApi == ApiType.PumpAll && topStack.isCurse())
                 && (saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll 
-                || saviourApi == ApiType.Protection || saviourApi == null)) {
+                || saviourApi == ApiType.Protection || saviourApi == ApiType.PutCounter || saviourApi == ApiType.PutCounterAll
+                || saviourApi == null)) {
             final int dmg = -AbilityUtils.calculateAmount(topStack.getHostCard(),
                     topStack.getParam("NumDef"), topStack);
             for (final Object o : objects) {
