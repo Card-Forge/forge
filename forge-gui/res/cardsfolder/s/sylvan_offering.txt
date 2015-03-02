@@ -4,7 +4,7 @@ Types:Sorcery
 A:SP$ ChoosePlayer | Cost$ X G | Defined$ You | Choices$ Player.Opponent | SubAbility$ DBToken | SpellDescription$ Choose an opponent. You and that player each put an X/X green Treefolk creature token onto the battlefield. Choose an opponent. You and that player each put X 1/1 green Elf Warrior creature tokens onto the battlefield.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Treefolk | TokenOwner$ ChosenAndYou | TokenPower$ X | TokenToughness$ X | References$ X | TokenTypes$ Creature,Treefolk | TokenColors$ Green | SubAbility$ DBChoose
 SVar:DBChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | SubAbility$ DBToken2
-SVar:DBToken2:DB$ Token | TokenAmount$ X | References$ X | TokenName$ Elf Warrior | TokenTypes$ Creature,Elf,Warrior | TokenOwner$ ChosenAndYou | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
+SVar:DBToken2:DB$ Token | TokenAmount$ X | References$ X | TokenName$ Elf Warrior | TokenTypes$ Creature,Elf,Warrior | TokenOwner$ ChosenAndYou | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 elf warrior C14
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True

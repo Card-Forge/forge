@@ -2,7 +2,7 @@ Name:Ghoulcaller Gisa
 ManaCost:3 B B
 Types:Legendary Creature Human Wizard
 PT:3/4
-A:AB$ Token | Cost$ B T Sac<1/Creature.Other/another creature> | TokenAmount$ X | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | TokenColors$ Black | References$ X | SpellDescription$ Put X 2/2 black Zombie creature tokens onto the battlefield, where X is the sacrificed creature's power.
+A:AB$ Token | Cost$ B T Sac<1/Creature.Other/another creature> | TokenAmount$ X | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ b 2 2 zombie C14 | TokenColors$ Black | References$ X | SpellDescription$ Put X 2/2 black Zombie creature tokens onto the battlefield, where X is the sacrificed creature's power.
 SVar:X:Sacrificed$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghoulcaller_gisa.jpg

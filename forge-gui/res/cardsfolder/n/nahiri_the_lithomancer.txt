@@ -3,7 +3,7 @@ ManaCost:3 W W
 Types:Planeswalker Nahiri
 Loyalty:3
 Text:CARDNAME can be your commander.
-A:AB$ Token | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenName$ Kor Soldier | TokenTypes$ Creature,Kor,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | RememberTokens$ True | SubAbility$ DBChooseTarget | SpellDescription$ Put a 1/1 white Kor Soldier creature token onto the battlefield. You may attach an Equipment you control to it.
+A:AB$ Token | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenName$ Kor Soldier | TokenTypes$ Creature,Kor,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ w 1 1 kor soldier C14 | RememberTokens$ True | SubAbility$ DBChooseTarget | SpellDescription$ Put a 1/1 white Kor Soldier creature token onto the battlefield. You may attach an Equipment you control to it.
 SVar:DBChooseTarget:DB$ ChooseCard | DefinedCards$ Remembered | Mandatory$ True | ChoiceTitle$ Choose a token: | SubAbility$ DBAttach
 SVar:DBAttach:DB$ Attach | Optional$ True | Object$ Valid Equipment.YouCtrl | ChooseAnObject$ Choose an equipment you control | Defined$ ChosenCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
