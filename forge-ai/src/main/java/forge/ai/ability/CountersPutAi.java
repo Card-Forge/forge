@@ -207,7 +207,7 @@ public class CountersPutAi extends SpellAbilityAi {
         
         if (!ai.getGame().getStack().isEmpty() && !SpellAbilityAi.isSorcerySpeed(sa)) {
             // only evaluates case where all tokens are placed on a single target
-            if (abTgt.getMinTargets(sa.getHostCard(), sa) < 2) {
+            if (abTgt != null && abTgt.getMinTargets(source, sa) < 2) {
                 if (ComputerUtilCard.canPumpAgainstRemoval(ai, sa)) {
                     Card c = sa.getTargets().getFirstTargetedCard();
                     if (sa.getTargets().getNumTargeted() > 1) {
