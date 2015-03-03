@@ -365,7 +365,7 @@ public class TargetingOverlay {
         @Override
         public void paintComponent(final Graphics g) {
             // No need for this except in match view
-            if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) {
+            if (Singletons.getControl().getCurrentScreen() != matchUI.getScreen()) {
                 return;
             }
 
