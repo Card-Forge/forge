@@ -467,4 +467,22 @@ public class GameSimulatorTest extends TestCase {
             assertEquals(3, thopterSim.getCounters(CounterType.P1P1) + bearSim.getCounters(CounterType.P1P1));
         }
     }
+    
+    public void testChosenColors() {
+        String bearCardName = "Runeclaw Bear";
+
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Card bear = addCard(bearCardName, p);
+        Card hall = addCard("Hall of Triumph", p);
+        hall.setChosenColors(Lists.newArrayList("green"));
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+        assertEquals(3, bear.getNetToughness());
+        
+        GameCopier copier = new GameCopier(game);
+        Game copy = copier.makeCopy();
+        Card bearCopy = findCardWithName(copy, bearCardName);
+        assertEquals(3, bearCopy.getNetToughness());
+    }
 }

@@ -5,6 +5,7 @@ import java.util.Map.Entry;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import com.google.common.collect.Lists;
 
 import forge.LobbyPlayer;
 import forge.ai.LobbyPlayerAi;
@@ -254,10 +255,19 @@ public class GameCopier {
                     newCard.addCounter(CounterType.valueOf(str), count, false);
                 }
             }
-            // TODO: Other chosen things...
             if (c.getChosenPlayer() != null) {
                 newCard.setChosenPlayer(playerMap.get(c.getChosenPlayer()));
             }
+            if (!c.getChosenType().isEmpty()) {
+                newCard.setChosenType(c.getChosenType());
+            }
+            if (c.getChosenColors() != null) {
+                newCard.setChosenColors(Lists.newArrayList(c.getChosenColors()));
+            }
+            if (!c.getNamedCard().isEmpty()) {
+                newCard.setNamedCard(c.getNamedCard());
+            }
+
             // TODO: FIXME
             if (c.hasRemembered()) {
                 for (Object o : c.getRemembered()) {
