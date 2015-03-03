@@ -1285,6 +1285,19 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                     sbLong.append("\r\n");
                 }
+            } else if (keyword.startsWith("Megamorph")) {
+                sbLong.append("Megamorph");
+                if (keyword.contains(":")) {
+                    final Cost mCost = new Cost(keyword.substring(10), true);
+                    if (!mCost.isOnlyManaCost()) {
+                        sbLong.append(" -");
+                    }
+                    sbLong.append(" ").append(mCost.toString()).delete(sbLong.length() - 2, sbLong.length());
+                    if (!mCost.isOnlyManaCost()) {
+                        sbLong.append(".");
+                    }
+                    sbLong.append("\r\n");
+                }
             } else if (keyword.startsWith("Echo")) {
                 sbLong.append("Echo ");
                 final String[] upkeepCostParams = keyword.split(":");

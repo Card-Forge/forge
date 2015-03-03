@@ -131,7 +131,7 @@ public class CardFactoryUtil {
      *            a {@link forge.game.cost.Cost} object.
      * @return a {@link forge.game.spellability.AbilityActivated} object.
      */
-    public static AbilityStatic abilityMorphUp(final Card sourceCard, final Cost cost) {
+    public static AbilityStatic abilityMorphUp(final Card sourceCard, final Cost cost, final boolean mega) {
         final AbilityStatic morphUp = new AbilityStatic(sourceCard, cost, null) {
 
             @Override
@@ -140,6 +140,9 @@ public class CardFactoryUtil {
                     String sb = this.getActivatingPlayer() + " has unmorphed " + sourceCard.getName();
                     sourceCard.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
                     sourceCard.getGame().fireEvent(new GameEventCardStatsChanged(sourceCard));
+                }
+                if (mega) {
+                	sourceCard.addCounter(CounterType.P1P1, 1, true);
                 }
             }
 
@@ -3126,12 +3129,32 @@ public class CardFactoryUtil {
 
                 card.setState(CardStateName.FaceDown, false);
 
-                card.addSpellAbility(abilityMorphUp(card, cost));
+                card.addSpellAbility(abilityMorphUp(card, cost, false));
                 card.setSVars(sVars); // for Warbreak Trumpeter.
 
                 card.setState(CardStateName.Original, false);
             }
+
         } // Morph
+        if (hasKeyword(card, "Megamorph") != -1) {
+            final int n = hasKeyword(card, "Megamorph");
+            if (n != -1) {
+
+                final String parse = card.getKeywords().get(n).toString();
+                Map<String, String> sVars = card.getSVars();
+
+                final String[] k = parse.split(":");
+                final Cost cost = new Cost(k[1], true);
+
+                card.addSpellAbility(abilityMorphDown(card));
+
+                card.setState(CardStateName.FaceDown, false);
+
+                card.addSpellAbility(abilityMorphUp(card, cost, true));
+                card.setSVars(sVars);
+                card.setState(CardStateName.Original, false);
+            }
+        } // Megamorph
 
         if (hasKeyword(card, "Madness") != -1) {
             final int n = hasKeyword(card, "Madness");
