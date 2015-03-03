@@ -40,6 +40,7 @@ public enum TriggerType {
     Discarded(TriggerDiscarded.class),
     Drawn(TriggerDrawn.class),
     Evolved(TriggerEvolved.class),
+    Exploited(TriggerExploited.class),
     FlippedCoin(TriggerFlippedCoin.class),
     LandPlayed(TriggerLandPlayed.class),
     LifeGained(TriggerLifeGained.class),

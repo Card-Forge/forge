@@ -50,6 +50,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
         final int amount = AbilityUtils.calculateAmount(card, num, sa);
         final List<Player> tgts = getTargetPlayers(sa);
         final boolean devour = sa.hasParam("Devour");
+        final boolean exploit = sa.hasParam("Exploit");
 
         String valid = sa.getParam("SacValid");
         if (valid == null) {
@@ -105,6 +106,12 @@ public class SacrificeEffect extends SpellAbilityEffect {
                         final HashMap<String, Object> runParams = new HashMap<String, Object>();
                         runParams.put("Devoured", sac);
                         game.getTriggerHandler().runTrigger(TriggerType.Devoured, runParams, false);
+                    }
+                    if (exploit) {
+                        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                        runParams.put("Exploited", lKICopy);
+                        runParams.put("Card", card);
+                        game.getTriggerHandler().runTrigger(TriggerType.Exploited, runParams, false);
                     }
                     if (wasDestroyed || wasSacrificed) {
                     	countSacrificed++;

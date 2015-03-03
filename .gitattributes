@@ -672,6 +672,7 @@ forge-game/src/main/java/forge/game/trigger/TriggerDevoured.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerDiscarded.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerDrawn.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerEvolved.java -text
+forge-game/src/main/java/forge/game/trigger/TriggerExploited.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerFlippedCoin.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerHandler.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerLandPlayed.java svneol=native#text/plain

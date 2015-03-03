@@ -3239,6 +3239,7 @@ public class CardFactoryUtil {
                 card.addTrigger(myTrigger);
             }
         } // Modular
+        
 
         /*
          * WARNING: must keep this keyword processing before etbCounter keyword
@@ -3402,6 +3403,18 @@ public class CardFactoryUtil {
             card.addTrigger(prowessTrigger);
             card.setSVar("BuffedBy", "Card.nonCreature+nonLand"); // for the AI
         } // Prowess
+        final int exploit = card.getAmountOfKeyword("Exploit");
+        card.removeIntrinsicKeyword("Exploit");
+        final StringBuilder trigExploit = new StringBuilder(
+                "Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield"
+                + " | Execute$ ExploitSac | TriggerDescription$ Exploit (When this creature enters"
+                + " the battlefield, you may sacrifice a creature.)");
+        final String abStringExploit = "DB$ Sacrifice | SacValid$ Creature | Exploit$ True | Optional$ True";
+        card.setSVar("ExploitSac", abStringExploit);
+        final Trigger exploitTrigger = TriggerHandler.parseTrigger(trigExploit.toString(), card, true);
+        for (int i = 0; i < exploit; i++) {
+            card.addTrigger(exploitTrigger);
+        } // Exploit
     }
 
     public final static void refreshTotemArmor(Card c) {
