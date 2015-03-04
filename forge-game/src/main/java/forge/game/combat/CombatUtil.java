@@ -912,6 +912,10 @@ public class CombatUtil {
             return false;
         }
 
+        if (attacker.hasKeyword("Creatures with power greater than CARDNAME's power can't block it.") && attacker.getNetPower() < blocker.getNetPower()) {
+            return false;
+        }
+
         if (attacker.hasStartOfKeyword("CantBeBlockedBy ")) {
             final int keywordPosition = attacker.getKeywordPosition("CantBeBlockedBy ");
             final String parse = attacker.getKeywords().get(keywordPosition).toString();
