@@ -11,8 +11,25 @@ Release Notes
 Fix bug in default preferences causing game to crash.
 
 
+- New Dragons of Tarkir cards -
+We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
+
+
 - Canceling Delve now refunds exiled cards -
 If you cancel casting a spell after selecting cards to Delve, the selected cards will no longer get exiled.
+
+
+----------------------------------
+New Dragons of Tarkir branch Cards
+----------------------------------
+
+Sidisi, Undead Vizier
+Stratus Dancer
+Silumgar Assassin
+Dragonlord Silumgar
+Dragon Tempest
+Sandcrafter Mage
+Sprinting Warbrute
 
 
 ------------
@@ -20,7 +37,7 @@ Known Issues
 ------------
 
 - Fate Reforged cards -
-Forge now includes many of the new CFate Reforged cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
+Forge now includes many of the new Fate Reforged cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
 
 - Commander 2014 cards -
 Forge now includes many of the new Commander 2014 cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
