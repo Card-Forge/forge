@@ -76,6 +76,13 @@ public class MillAi extends SpellAbilityAi {
                 return false;
             }
         }
+        
+        if (source.getName().equals("Tasigur, the Golden Fang")) {
+            if (!ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN, ai.getOpponent()) ||
+                    ai.getCardsIn(ZoneType.Library).size() < 10) {
+                return false;
+            }
+        }
 
         return true;
     }
