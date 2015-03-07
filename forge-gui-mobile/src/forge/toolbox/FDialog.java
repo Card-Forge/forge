@@ -22,8 +22,11 @@ public abstract class FDialog extends FOverlay {
     public static final FSkinColor MSG_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.9f);
     public static final FSkinColor MSG_BACK_COLOR = FScreen.Header.BACK_COLOR.alphaColor(0.75f);
     public static final float MSG_HEIGHT = MSG_FONT.getCapHeight() * 2.5f;
-    private static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
+    private static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS).alphaColor(0.8f);
     private static final float BORDER_THICKNESS = Utils.scale(1);
+    private static final FSkinColor SWIPE_BAR_COLOR = FScreen.Header.BACK_COLOR;
+    private static final FSkinColor SWIPE_BAR_DOT_COLOR = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.75f);
+    private static final float SWIPE_BAR_HEIGHT = Utils.scale(12);
     private static final float BASE_REVEAL_VELOCITY = 3 * Utils.SCREEN_HEIGHT;
 
     private static int openDialogCount = 0;
@@ -39,6 +42,7 @@ public abstract class FDialog extends FOverlay {
     private float totalHeight;
     private float revealPercent = 0;
     private float lastDy = 0;
+    private boolean finishedFirstReveal;
 
     protected FDialog(String title0, int buttonCount0) {
         buttonCount = buttonCount0;
@@ -184,28 +188,32 @@ public abstract class FDialog extends FOverlay {
 
     @Override
     public void drawOverlay(Graphics g) {
-        float y;
+        if (revealPercent == 0) { return; } //skip if not revealed
+
+        //draw swipe bar
+        float dx = SWIPE_BAR_HEIGHT * 0.7f;
+        float startX = dx * 0.7f;
+        float x = startX;
+        float y = getHeight() - totalHeight * revealPercent - SWIPE_BAR_HEIGHT;
         float w = getWidth();
-
-        //show swipe message unless reveal animation in progress or not yet laid out
-        if (activeRevealAnimation == null && totalHeight > 0) {
-            String message;
-            if (revealPercent == 0) {
-                y = getHeight() - MSG_HEIGHT;
-                message = "Swipe up to show modal";
-            }
-            else {
-                y = 0;
-                message = "Swipe down to hide modal";
-            }
-            g.fillRect(FDialog.MSG_BACK_COLOR, 0, y, w, MSG_HEIGHT);
-            g.drawText(message, FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, y, w, MSG_HEIGHT, false, HAlignment.CENTER, true);
+        float dotRadius = SWIPE_BAR_HEIGHT / 6;
+        float dotTop = y + SWIPE_BAR_HEIGHT / 2;
+        int dotCount = 3;
+        g.fillRect(SWIPE_BAR_COLOR, 0, y, w, SWIPE_BAR_HEIGHT);
+        for (int i = 0; i < dotCount; i++) {
+            g.fillCircle(SWIPE_BAR_DOT_COLOR, x, dotTop, dotRadius);
+            x += dx;
         }
-
-        if (revealPercent == 0) { return; } //skip rest if not revealed
-
-        y = getHeight() - totalHeight * revealPercent;
+        x = w - startX;
+        for (int i = 0; i < dotCount; i++) {
+            g.fillCircle(BORDER_COLOR, x, dotTop, dotRadius);
+            x -= dx;
+        }
         g.drawLine(BORDER_THICKNESS, BORDER_COLOR, 0, y, w, y);
+        y += SWIPE_BAR_HEIGHT;
+        g.drawLine(BORDER_THICKNESS, BORDER_COLOR, 0, y, w, y);
+
+        //draw border above prompt
         y = prompt.getTop();
         if (btnMiddle != null) { //render title above prompt if middle button present
             y -= MSG_HEIGHT;
@@ -217,6 +225,8 @@ public abstract class FDialog extends FOverlay {
 
     @Override
     public boolean fling(float velocityX, float velocityY) {
+        if (!finishedFirstReveal) { return false; }
+
         //support toggling temporary hide via swipe
         if (Math.abs(velocityY) > Math.abs(velocityX)) {
             velocityY = -velocityY; //must reverse velocityY for the sake of animation
@@ -275,6 +285,7 @@ public abstract class FDialog extends FOverlay {
         @Override
         protected void onEnd(boolean endingAll) {
             activeRevealAnimation = null;
+            finishedFirstReveal = true;
         }
     }
 }
