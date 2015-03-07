@@ -31,6 +31,7 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ChangeZoneAi extends SpellAbilityAi {
@@ -294,6 +295,20 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     source.setSVar("PayX", Integer.toString(xPay));
                 }
             }
+            
+            if (source.getName().equals("Temur Sabertooth")) {
+                // activated bounce + pump
+                if (ComputerUtilCard.shouldPumpCard(ai, sa.getSubAbility(), source, 0, 0, Arrays.asList("Indestructible")) ||
+                        ComputerUtilCard.canPumpAgainstRemoval(ai, sa.getSubAbility())) {
+                    for (Card c : list) {
+                        if (ComputerUtilCard.evaluateCreature(c) < ComputerUtilCard.evaluateCreature(source)) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+
         }
         
         if (ComputerUtil.playImmediately(ai, sa)) {
@@ -315,7 +330,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (ComputerUtil.waitForBlocking(sa)) {
         	return false;
         }
-
+        
         final AbilitySub subAb = sa.getSubAbility();
         return subAb == null || SpellApiToAi.Converter.get(subAb.getApi()).chkDrawbackWithSubs(ai, subAb);
     }

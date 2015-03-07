@@ -1051,7 +1051,9 @@ public class ComputerUtilCard {
             }
             
             //1. save combatant
-            if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) && !pumpedWillDie) {
+            if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) && !pumpedWillDie 
+                    && !c.hasKeyword("Indestructible")) {   // hack because attackerWouldBeDestroyed() does not
+                                                            // check for Indestructible when computing lethal damage
                 return true;
             }
             
