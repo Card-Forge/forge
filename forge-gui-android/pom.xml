@@ -133,6 +133,7 @@
                             <nativeLibrariesDirectory>${project.basedir}/libs</nativeLibrariesDirectory>
                             <extractDuplicates>true</extractDuplicates>
                             <proguard>
+                                <skip>false</skip>
                                 <config>${project.basedir}/proguard.cfg</config>
                             </proguard>
                             <release>true</release>
@@ -181,6 +182,7 @@
                             <nativeLibrariesDirectory>${project.basedir}/libs</nativeLibrariesDirectory>
                             <extractDuplicates>true</extractDuplicates>
                             <proguard>
+                                <skip>false</skip>
                                 <config>${project.basedir}/proguard.cfg</config>
                             </proguard>
                             <release>true</release>
