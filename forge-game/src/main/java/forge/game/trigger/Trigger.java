@@ -428,8 +428,9 @@ public abstract class Trigger extends TriggerReplacementBase {
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }
-        
-        copy.setID(this.getId());
+
+        // 2015-03-07 Removing the ID copying which makes copied triggers Identical to each other when removing
+        //copy.setID(this.getId());
         copy.setMode(this.getMode());
         copy.setTriggerPhases(this.validPhases);
         copy.setActiveZone(validHostZones);
