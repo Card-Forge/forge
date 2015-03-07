@@ -80,7 +80,7 @@ public class FFileChooser extends FDialog {
                     return;
                 }
 
-                FOptionPane.showInputDialog("Enter name for new folder:", "New Folder", new Callback<String>() {
+                FOptionPane.showInputDialog("Enter name for new folder", new Callback<String>() {
                     @Override
                     public void run(String result) {
                         if (StringUtils.isEmpty(result)) { return; }
@@ -238,16 +238,14 @@ public class FFileChooser extends FDialog {
             return;
         }
 
-        String message, title;
+        String title;
         if (file.isDirectory()) {
-            message = "Enter new name for folder:";
-            title = "Rename Folder";
+            title = "Enter new name for folder";
         }
         else {
-            message = "Enter new name for file:";
-            title = "Rename File";
+            title = "Enter new name for file";
         }
-        FOptionPane.showInputDialog(message, title, null, file.getName(), new Callback<String>() {
+        FOptionPane.showInputDialog(title, file.getName(), new Callback<String>() {
             @Override
             public void run(String result) {
                 if (StringUtils.isEmpty(result)) { return; }

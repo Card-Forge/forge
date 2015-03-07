@@ -134,19 +134,13 @@ public class FOptionPane extends FDialog {
         optionPane.show();
     }
 
-    public static void showInputDialog(String message, String title, final Callback<String> callback) {
-        showInputDialog(message, title, null, "", null, callback);
+    public static void showInputDialog(String title, final Callback<String> callback) {
+        showInputDialog(title, "", null, callback);
     }
-
-    public static void showInputDialog(String message, String title, FImage icon, final Callback<String> callback) {
-        showInputDialog(message, title, icon, "", null, callback);
+    public static <T> void showInputDialog(String title, T initialInput, final Callback<T> callback) {
+        showInputDialog(title, initialInput, null, callback);
     }
-
-    public static void showInputDialog(String message, String title, FImage icon, String initialInput, final Callback<String> callback) {
-        showInputDialog(message, title, icon, initialInput, null, callback);
-    }
-
-    public static <T> void showInputDialog(String message, String title, FImage icon, T initialInput, T[] inputOptions, final Callback<T> callback) {
+    public static <T> void showInputDialog(String title, T initialInput, T[] inputOptions, final Callback<T> callback) {
         final FDisplayObject inputField;
         final FTextField txtInput;
         final FComboBox<T> cbInput;
@@ -162,7 +156,17 @@ public class FOptionPane extends FDialog {
             inputField = cbInput;
         }
 
-        final FOptionPane optionPane = new FOptionPane(message, title, icon, inputField, new String[] {"OK", "Cancel"}, 0, new Callback<Integer>() {
+        //use container to add padding above and below field
+        final FContainer container = new FContainer() {
+            @Override
+            protected void doLayout(float width, float height) {
+                inputField.setBounds(0, (height - inputField.getHeight()) / 2, width, inputField.getHeight());
+            }
+        };
+        container.add(inputField);
+        container.setHeight(inputField.getHeight() + 2 * PADDING);
+
+        final FOptionPane optionPane = new FOptionPane(null, title, null, container, new String[] {"OK", "Cancel"}, 0, new Callback<Integer>() {
             @SuppressWarnings("unchecked")
             @Override
             public void run(Integer result) {
@@ -287,10 +291,7 @@ public class FOptionPane extends FDialog {
 
         x = PADDING;
         if (promptHeight > 0) {
-            y += promptHeight;
-            if (displayObj == null) { //don't add additional padding between prompt and display object
-                y += PADDING;
-            }
+            y += promptHeight + PADDING;
         }
 
         if (displayObj != null) {

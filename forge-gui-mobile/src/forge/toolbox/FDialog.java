@@ -10,6 +10,7 @@ import forge.assets.FSkinColor.Colors;
 import forge.screens.FScreen;
 import forge.screens.match.MatchController;
 import forge.screens.match.views.VPrompt;
+import forge.toolbox.FButton.Corner;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Utils;
 
@@ -28,15 +29,27 @@ public abstract class FDialog extends FOverlay {
     }
 
     private final VPrompt prompt;
+    private final FButton btnMiddle;
+    private final String title;
     private final int buttonCount;
     private float totalHeight;
     private boolean hidden;
 
-    protected FDialog(String title, int buttonCount0) {
-        title = title.replaceAll(" - ", "\n"); //breakup into lines
+    protected FDialog(String title0, int buttonCount0) {
         buttonCount = buttonCount0;
         prompt = add(new VPrompt("", "", null, null));
-        prompt.setMessage(title);
+        if (buttonCount < 3) {
+            title0.replaceAll(" - ", "\n"); //breakup into lines
+            btnMiddle = null;
+            prompt.setMessage(title0); //only put title in message if no third button
+        }
+        else { //handle third button
+            btnMiddle = prompt.add(new FButton()); //add to prompt
+            btnMiddle.setCorner(Corner.BottomMiddle);
+            btnMiddle.setSize(VPrompt.BTN_WIDTH, VPrompt.HEIGHT);
+            btnMiddle.setEnabled(false); //disable until initialized
+        }
+        title = title0;
     }
 
     @Override
@@ -45,6 +58,10 @@ public abstract class FDialog extends FOverlay {
         totalHeight = contentHeight + VPrompt.HEIGHT;
 
         prompt.setBounds(0, height - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
+        if (btnMiddle != null) {
+            btnMiddle.setLeft((width - btnMiddle.getWidth()) / 2);
+            totalHeight += MSG_HEIGHT; //leave room for title above middle button
+        }
 
         //shift all children into position
         float dy = height - totalHeight;
@@ -70,7 +87,7 @@ public abstract class FDialog extends FOverlay {
     }
 
     protected abstract float layoutAndGetHeight(float width, float maxHeight);
-    
+
     protected void initButton(int index, String text, FEventHandler command) {
         FButton button = getButton(index);
         if (button == null) { return; }
@@ -78,13 +95,23 @@ public abstract class FDialog extends FOverlay {
         button.setText(text);
         button.setCommand(command);
         button.setEnabled(true);
+        if (button == btnMiddle) { //allow middle button to be sized to fit text
+            button.setWidth(button.getAutoSizeBounds().width * 1.25f);
+        }
     }
 
     protected FButton getButton(int index) {
+        if (index >= buttonCount) { return null; }
+
         switch (index) {
         case 0:
             return prompt.getBtnOk();
         case 1:
+            if (buttonCount == 2) {
+                return prompt.getBtnCancel();
+            }
+            return btnMiddle;
+        case 2:
             return prompt.getBtnCancel();
         default:
             return null;
@@ -140,6 +167,11 @@ public abstract class FDialog extends FOverlay {
         float y = getHeight() - totalHeight;
         g.drawLine(BORDER_THICKNESS, BORDER_COLOR, 0, y, w, y);
         y = prompt.getTop();
+        if (btnMiddle != null) { //render title above prompt if middle button present
+            y -= MSG_HEIGHT;
+            g.fillRect(VPrompt.BACK_COLOR, 0, y, w, MSG_HEIGHT);
+            g.drawText(title, VPrompt.FONT, VPrompt.FORE_COLOR, 0, y, w, MSG_HEIGHT, false, HAlignment.CENTER, true);
+        }
         g.drawLine(BORDER_THICKNESS, BORDER_COLOR, 0, y, w, y);
     }
 }

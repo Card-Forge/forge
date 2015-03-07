@@ -310,7 +310,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             addItem(new FMenuItem("Rename Deck", FSkinImage.EDIT, new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
-                                    FOptionPane.showInputDialog("Enter new name for deck:", "Rename Deck", null, deck.getName(), new Callback<String>() {
+                                    FOptionPane.showInputDialog("Enter new name for deck", deck.getName(), new Callback<String>() {
                                         @Override
                                         public void run(String result) {
                                             editorType.getController().rename(result);
@@ -431,7 +431,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
     protected void save(final Callback<Boolean> callback) {
         if (StringUtils.isEmpty(deck.getName())) {
-            FOptionPane.showInputDialog("Enter name for new deck:", "New Deck", new Callback<String>() {
+            FOptionPane.showInputDialog("Enter name for new deck", new Callback<String>() {
                 @Override
                 public void run(String result) {
                     if (StringUtils.isEmpty(result)) { return; }

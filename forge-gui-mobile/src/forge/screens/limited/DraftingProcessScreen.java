@@ -34,7 +34,7 @@ public class DraftingProcessScreen extends FDeckEditor {
             return;
         }
 
-        FOptionPane.showInputDialog("Save this draft as:", "Save Draft", FOptionPane.QUESTION_ICON, new Callback<String>() {
+        FOptionPane.showInputDialog("Save this draft as?", new Callback<String>() {
             @Override
             public void run(final String name) {
                 if (StringUtils.isEmpty(name)) {

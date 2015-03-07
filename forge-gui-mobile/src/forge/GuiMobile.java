@@ -164,7 +164,12 @@ public class GuiMobile implements IGuiBase {
         return new WaitCallback<String>() {
             @Override
             public void run() {
-                FOptionPane.showInputDialog(message, title, icon == null ? null : FSkin.getImages().get(icon), initialInput, inputOptions, this);
+                //use message as title and ignore title and icon with new dialog format
+                String title1 = message;
+                if (title1.endsWith(":")) {
+                    title1 = title1.substring(title1.length() - 1); //chop off ":" suffix
+                }
+                FOptionPane.showInputDialog(title1, initialInput, inputOptions, this);
             }
         }.invokeAndWait();
     }

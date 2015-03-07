@@ -32,7 +32,8 @@ public class FButton extends FDisplayObject implements IButton {
     public enum Corner {
         None,
         BottomLeft,
-        BottomRight
+        BottomRight,
+        BottomMiddle
     }
     private Corner corner = Corner.None;
 
@@ -216,11 +217,24 @@ public class FButton extends FDisplayObject implements IButton {
             y += cornerTextOffsetY;
             h -= cornerTextOffsetY;
             break;
+        case BottomMiddle:
+            g.startClip(x, y, w, h);
+            cornerButtonWidth = w / 3;
+            cornerTextOffsetX = cornerButtonWidth / 2;
+            g.drawImage(imgL, 0, 0, cornerButtonWidth, cornerButtonHeight);
+            g.drawImage(imgM, cornerButtonWidth, 0, w - 2 * cornerButtonWidth, cornerButtonHeight);
+            g.drawImage(imgR, w - cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
+            g.endClip();
+            x += cornerTextOffsetX / 2;
+            w -= cornerTextOffsetX;
+            y += cornerTextOffsetY;
+            h -= cornerTextOffsetY;
+            break;
         }
 
         String displayText = text;
         if (!StringUtils.isEmpty(displayText)) {
-            if (corner != Corner.None) {
+            if (corner == Corner.BottomLeft || corner == Corner.BottomRight) {
                 displayText = displayText.replaceFirst(" ", "\n"); //allow second word to wrap if corner button
             }
             g.drawText(displayText, font, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
