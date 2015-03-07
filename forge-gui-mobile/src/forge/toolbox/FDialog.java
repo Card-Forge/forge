@@ -1,8 +1,10 @@
 package forge.toolbox;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.math.Vector2;
 
 import forge.Graphics;
+import forge.animation.ForgeAnimation;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
@@ -12,6 +14,7 @@ import forge.screens.match.MatchController;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FButton.Corner;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.util.PhysicsObject;
 import forge.util.Utils;
 
 public abstract class FDialog extends FOverlay {
@@ -33,7 +36,8 @@ public abstract class FDialog extends FOverlay {
     private final String title;
     private final int buttonCount;
     private float totalHeight;
-    private boolean hidden;
+    private float revealPercent = 1;
+    private float lastDy = 0;
 
     protected FDialog(String title0, int buttonCount0) {
         buttonCount = buttonCount0;
@@ -56,19 +60,24 @@ public abstract class FDialog extends FOverlay {
     protected final void doLayout(float width, float height) {
         float contentHeight = layoutAndGetHeight(width, height - VPrompt.HEIGHT - 2 * MSG_HEIGHT);
         totalHeight = contentHeight + VPrompt.HEIGHT;
+        lastDy = 0; //reset whenever main layout occurs
 
-        prompt.setBounds(0, height - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
+        prompt.setBounds(0, contentHeight, width, VPrompt.HEIGHT);
         if (btnMiddle != null) {
             btnMiddle.setLeft((width - btnMiddle.getWidth()) / 2);
             totalHeight += MSG_HEIGHT; //leave room for title above middle button
         }
 
+        updateDisplayTop();
+    }
+
+    private void updateDisplayTop() {
         //shift all children into position
-        float dy = height - totalHeight;
+        float offsetDy = lastDy;
+        lastDy = getHeight() - totalHeight * revealPercent;
+        float dy = lastDy - offsetDy;
         for (FDisplayObject child : getChildren()) {
-            if (child != prompt) {
-                child.setTop(child.getTop() + dy);
-            }
+            child.setTop(child.getTop() + dy);
         }
     }
 
@@ -143,8 +152,10 @@ public abstract class FDialog extends FOverlay {
     protected void drawBackground(Graphics g) {
         super.drawBackground(g);
 
+        if (revealPercent == 0) { return; }
+
         float x = 0;
-        float y = getHeight() - totalHeight;
+        float y = getHeight() - totalHeight * revealPercent;
         float w = getWidth();
         float h = totalHeight - VPrompt.HEIGHT;
         g.drawImage(FSkinTexture.BG_TEXTURE, x, y, w, h);
@@ -155,16 +166,18 @@ public abstract class FDialog extends FOverlay {
     public void drawOverlay(Graphics g) {
         float w = getWidth();
         String message;
-        if (hidden) {
-            message = "Swipe up to show prompt again";
+        if (revealPercent == 0) {
+            message = "Swipe up to show modal";
         }
         else {
-            message = "Swipe down to temporarily hide prompt";
+            message = "Swipe down to hide modal";
         }
         g.fillRect(FDialog.MSG_BACK_COLOR, 0, 0, w, MSG_HEIGHT);
         g.drawText(message, FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, 0, w, MSG_HEIGHT, false, HAlignment.CENTER, true);
 
-        float y = getHeight() - totalHeight;
+        if (revealPercent == 0) { return; } //skip rest if not revealed
+
+        float y = getHeight() - totalHeight * revealPercent;
         g.drawLine(BORDER_THICKNESS, BORDER_COLOR, 0, y, w, y);
         y = prompt.getTop();
         if (btnMiddle != null) { //render title above prompt if middle button present
@@ -173,5 +186,64 @@ public abstract class FDialog extends FOverlay {
             g.drawText(title, VPrompt.FONT, VPrompt.FORE_COLOR, 0, y, w, MSG_HEIGHT, false, HAlignment.CENTER, true);
         }
         g.drawLine(BORDER_THICKNESS, BORDER_COLOR, 0, y, w, y);
+    }
+
+    @Override
+    public boolean fling(float velocityX, float velocityY) {
+        //support toggling temporary hide via swipe
+        if (Math.abs(velocityY) > Math.abs(velocityX)) {
+            velocityY = -velocityY; //must reverse velocityY for the sake of animation
+            if ((revealPercent > 0) == (velocityY > 0)) {
+                return false;
+            }
+            if (activeRevealAnimation == null) {
+                activeRevealAnimation = new RevealAnimation(velocityY);
+                activeRevealAnimation.start();
+            }
+            else { //update existing animation with new velocity if needed
+                activeRevealAnimation.physicsObj.getVelocity().set(0, velocityY);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private RevealAnimation activeRevealAnimation;
+
+    private class RevealAnimation extends ForgeAnimation {
+        private final PhysicsObject physicsObj;
+
+        private RevealAnimation(float velocityY) {
+            physicsObj = new PhysicsObject(new Vector2(0, totalHeight * revealPercent), new Vector2(0, velocityY));
+        }
+
+        @Override
+        protected boolean advance(float dt) {
+            if (physicsObj.isMoving()) { //avoid storing last fling stop time if scroll manually stopped
+                physicsObj.advance(dt);
+                float newRevealPercent = physicsObj.getPosition().y / totalHeight;
+                if (newRevealPercent < 0) {
+                    newRevealPercent = 0;
+                }
+                else if (newRevealPercent > 1) {
+                    newRevealPercent = 1;
+                }
+                if (revealPercent != newRevealPercent) {
+                    revealPercent = newRevealPercent;
+                    updateDisplayTop();
+                    if (physicsObj.isMoving()) {
+                        return true;
+                    }
+                }
+            }
+
+            //end fling animation if can't reveal or hide anymore or physics object is no longer moving
+            return false;
+        }
+
+        @Override
+        protected void onEnd(boolean endingAll) {
+            activeRevealAnimation = null;
+        }
     }
 }

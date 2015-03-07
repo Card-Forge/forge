@@ -127,7 +127,6 @@ public class CardZoom extends FOverlay {
 
     @Override
     public boolean fling(float velocityX, float velocityY) {
-        //toggle between Zoom and Details with a quick horizontal fling action
         if (Math.abs(velocityX) > Math.abs(velocityY)) {
             incrementCard(velocityX > 0 ? -1 : 1);
             return true;
