@@ -306,7 +306,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         }
                     }
                 }
-                return false;
+                return canBouncePermanent(ai, sa, list) != null;
             }
 
         }
@@ -740,12 +740,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         // Narrow down the list:
         if (origin.equals(ZoneType.Battlefield)) {
-            // filter out untargetables
-            CardCollectionView aiPermanents = CardLists.filterControlledBy(list, ai);
-
-            // Don't blink cards that will die.
-            aiPermanents = ComputerUtil.getSafeTargets(ai, sa, aiPermanents);
-
         	if ("Polymorph".equals(sa.getParam("AILogic"))) {
         		list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
         		if (list.isEmpty()) {
@@ -808,38 +802,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     && (subApi == ApiType.DelayedTrigger || (subApi == ApiType.ChangeZone && subAffected.equals("Remembered")))))
                     && (tgt.getMinTargets(sa.getHostCard(), sa) <= 1)) {
 
-                // check stack for something on the stack that will kill
-                // anything i control
-                if (!game.getStack().isEmpty()) {
-                    final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(ai, sa);
-
-                    final List<Card> threatenedTargets = new ArrayList<Card>();
-
-                    for (final Card c : aiPermanents) {
-                        if (objects.contains(c)) {
-                            threatenedTargets.add(c);
-                        }
-                    }
-
-                    if (!threatenedTargets.isEmpty()) {
-                        // Choose "best" of the remaining to save
-                        sa.getTargets().add(ComputerUtilCard.getBestAI(threatenedTargets));
-                        return true;
-                    }
-                }
-                // Save combatants
-                else if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-                    Combat combat = game.getCombat();
-                    final CardCollection combatants = CardLists.filter(aiPermanents, CardPredicates.Presets.CREATURES);
-                    ComputerUtilCard.sortByEvaluateCreature(combatants);
-
-                    for (final Card c : combatants) {
-                        if (c.getShieldCount() == 0 && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) 
-                        		&& c.getOwner() == ai && !c.isToken()) {
-                            sa.getTargets().add(c);
-                            return true;
-                        }
-                    }
+                Card tobounce = canBouncePermanent(ai, sa, list);
+                if (tobounce != null) {
+                    sa.getTargets().add(tobounce);
+                    return true;
                 }
                 
                 if (!CardLists.getNotType(list, "Land").isEmpty()) {
@@ -1030,6 +996,57 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         return true;
+    }
+    
+    /**
+     * Checks if a permanent threatened by a stack ability or in combat can
+     * be saved by bouncing.
+     * @param ai controlling player
+     * @param sa ChangeZone ability
+     * @param list possible targets
+     * @return target to bounce, null if no good targets
+     */
+    private static Card canBouncePermanent(final Player ai, SpellAbility sa, CardCollectionView list) {
+        Game game = ai.getGame();
+        // filter out untargetables
+        CardCollectionView aiPermanents = CardLists
+                .filterControlledBy(list, ai);
+
+        // Don't blink cards that will die.
+        aiPermanents = ComputerUtil.getSafeTargets(ai, sa, aiPermanents);
+        if (!game.getStack().isEmpty()) {
+            final List<GameObject> objects = ComputerUtil
+                    .predictThreatenedObjects(ai, sa);
+
+            final List<Card> threatenedTargets = new ArrayList<Card>();
+
+            for (final Card c : aiPermanents) {
+                if (objects.contains(c)) {
+                    threatenedTargets.add(c);
+                }
+            }
+
+            if (!threatenedTargets.isEmpty()) {
+                // Choose "best" of the remaining to save
+                return ComputerUtilCard.getBestAI(threatenedTargets);
+            }
+        }
+        // Save combatants
+        else if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+            Combat combat = game.getCombat();
+            final CardCollection combatants = CardLists.filter(aiPermanents,
+                    CardPredicates.Presets.CREATURES);
+            ComputerUtilCard.sortByEvaluateCreature(combatants);
+
+            for (final Card c : combatants) {
+                if (c.getShieldCount() == 0
+                        && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c,
+                                combat) && c.getOwner() == ai && !c.isToken()) {
+                    return c;
+                }
+            }
+        }
+        return null;
     }
 
     private static boolean isUnpreferredTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
@@ -1224,6 +1241,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 c = ComputerUtilCard.getBestAI(fetchList);
             } else {
                 c = ComputerUtilCard.getWorstAI(fetchList);
+                if (sa.getHostCard().getName().equals("Temur Sabertooth")) {
+                    Card tobounce = canBouncePermanent(player, sa, fetchList);
+                    if (tobounce != null) {
+                        c = tobounce;
+                    }
+                }
             }
         } else if (origin.contains(ZoneType.Library) && (type.contains("Basic") || areAllBasics(type))) {
             c = basicManaFixing(decider, fetchList);

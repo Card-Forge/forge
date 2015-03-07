@@ -42,6 +42,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
@@ -1072,8 +1073,17 @@ public class ComputerUtil {
         }
     
         // check stack for something that will kill this
-        final SpellAbility topStack = game.getStack().peekAbility();
-        Iterables.addAll(objects, ComputerUtil.predictThreatenedObjects(aiPlayer, sa, topStack));
+        for (SpellAbilityStackInstance si : game.getStack()) {
+            // iterate from top of stack to find SpellAbility, including sub-abilities,
+            // that does not match "sa"
+            SpellAbility spell = si.getSpellAbility(true), sub = spell.getSubAbility();
+            while (sub != null && sub != sa) {
+                sub = sub.getSubAbility();
+            }
+            if (sa != spell && sa != sub) {
+                Iterables.addAll(objects, ComputerUtil.predictThreatenedObjects(aiPlayer, sa, spell));
+            }
+        }        
     
         return objects;
     }
