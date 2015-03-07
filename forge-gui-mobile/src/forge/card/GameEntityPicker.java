@@ -12,7 +12,6 @@ import forge.game.GameEntityView;
 import forge.game.card.CardView;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FChoiceList;
-import forge.toolbox.FDialog;
 import forge.toolbox.FEvent;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
@@ -39,15 +38,9 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
                             callback.run(null);
                         }
                     }
-                }) {
-            @Override
-            protected boolean padDisplayObject() {
-                return false; //let tabs go right up to edges of dialog
-            }
-        };
+                });
 
-        setHeight(Forge.getCurrentScreen().getHeight() - FDialog.TITLE_HEIGHT - 
-                3 * FOptionPane.PADDING - FOptionPane.BUTTON_HEIGHT - FOptionPane.GAP_BELOW_BUTTONS);
+        setHeight(Forge.getCurrentScreen().getHeight() - 2 * FOptionPane.PADDING);
     }
 
     public void show() {

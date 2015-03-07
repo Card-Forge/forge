@@ -28,7 +28,6 @@ import forge.game.GameEntityView;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.screens.match.MatchController;
-import forge.toolbox.FButton;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDialog;
@@ -66,10 +65,6 @@ public class VAssignDamage extends FDialog {
     private final FLabel lblTotalDamage = add(new FLabel.Builder().text("Available damage points: Unknown").align(HAlignment.CENTER).build());
     private final FLabel lblAssignRemaining = add(new FLabel.Builder().text("Distribute the remaining damage points among lethally wounded entities").align(HAlignment.CENTER).build());
 
-    private final FButton btnOK    = add(new FButton("OK"));
-    private final FButton btnReset = add(new FButton("Reset"));
-    private final FButton btnAuto  = add(new FButton("Auto"));
-
     private final AttDefCardPanel pnlAttacker;
     private final DefendersPanel pnlDefenders;
 
@@ -96,7 +91,7 @@ public class VAssignDamage extends FDialog {
      * @param overrideOrder override combatant order
      */
     public VAssignDamage(final CardView attacker, final List<CardView> blockers, final int damage0, final GameEntityView defender0, boolean overrideOrder, final WaitCallback<Map<CardView, Integer>> waitCallback) {
-        super("Assign damage dealt by " + attacker);
+        super("Assign damage dealt by " + attacker, 3);
 
         callback = waitCallback;
         totalDamageToAssign = damage0;
@@ -109,7 +104,7 @@ public class VAssignDamage extends FDialog {
         pnlAttacker = add(new AttDefCardPanel(attacker));
         pnlDefenders = add(new DefendersPanel(blockers));
 
-        btnAuto.setCommand(new FEventHandler() {
+        initButton(0, "Auto", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 resetAssignedDamage();
@@ -117,13 +112,13 @@ public class VAssignDamage extends FDialog {
                 finish();
             }
         });
-        btnOK.setCommand(new FEventHandler() {
+        initButton(1, "OK", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 finish();
             }
         });
-        btnReset.setCommand(new FEventHandler() {
+        initButton(2, "Reset", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 resetAssignedDamage();
@@ -139,21 +134,9 @@ public class VAssignDamage extends FDialog {
         float padding = FOptionPane.PADDING;
         float w = width - 2 * padding;
 
-        //layout buttons
-        float gapBetweenButtons = padding / 2;
-        float buttonWidth = (w - gapBetweenButtons * 2) / 3;
-        float buttonHeight = FOptionPane.BUTTON_HEIGHT;
         float x = padding;
-        float y = maxHeight - FOptionPane.GAP_BELOW_BUTTONS - buttonHeight;
-        btnAuto.setBounds(x, y, buttonWidth, buttonHeight);
-        x += buttonWidth + gapBetweenButtons;
-        btnOK.setBounds(x, y, buttonWidth, buttonHeight);
-        x += buttonWidth + gapBetweenButtons;
-        btnReset.setBounds(x, y, buttonWidth, buttonHeight);
-
-        x = padding;
         float labelHeight = lblAssignRemaining.getAutoSizeBounds().height;
-        y -= labelHeight + padding;
+        float y = maxHeight - labelHeight + padding;
         lblAssignRemaining.setBounds(x, y, w, labelHeight);
 
         float dtOffset = ADD_BTN_HEIGHT + defenders.get(0).label.getAutoSizeBounds().height;
@@ -436,7 +419,7 @@ public class VAssignDamage extends FDialog {
         }
 
         lblTotalDamage.setText(String.format("Available damage points: %d (of %d)", damageLeft, totalDamageToAssign));
-        btnOK.setEnabled(damageLeft == 0);
+        setButtonEnabled(1, damageLeft == 0);
         lblAssignRemaining.setVisible(allHaveLethal && damageLeft > 0);
     }
 

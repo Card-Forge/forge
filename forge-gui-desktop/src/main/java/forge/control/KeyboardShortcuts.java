@@ -106,7 +106,7 @@ public class KeyboardShortcuts {
             public void actionPerformed(final ActionEvent e) {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
                 if (matchUI == null) { return; }
-                matchUI.getGameController().concede();
+                matchUI.concede();
             }
         };
 

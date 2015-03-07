@@ -8,12 +8,12 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
-import forge.toolbox.FDialog;
 import forge.toolbox.FOverlay;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
 
 public class LoadingOverlay extends FOverlay {
+    private static final float INSETS = Utils.scale(10);
     private static final float LOGO_SIZE_FACTOR = 0.7f;
     private static final float INSETS_FACTOR = 0.025f;
     private static final FSkinFont FONT = FSkinFont.get(22);
@@ -53,9 +53,8 @@ public class LoadingOverlay extends FOverlay {
 
     @Override
     public void drawOverlay(Graphics g) {
-        float insets = FDialog.INSETS;
-        float x = insets;
-        float w = getWidth() - 2 * insets;
+        float x = INSETS;
+        float w = getWidth() - 2 * INSETS;
 
         float padding = w * INSETS_FACTOR;
         float logoSize = w * LOGO_SIZE_FACTOR;

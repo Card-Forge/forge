@@ -12,7 +12,6 @@ import forge.screens.FScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextArea;
 import forge.util.Callback;
@@ -20,6 +19,7 @@ import forge.util.Utils;
 
 public class BugReportDialog extends FScreen { //use screen rather than dialog so screen with bug isn't rendered
     private static final float PADDING = Utils.scale(5);
+    private static final float BUTTON_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.75f;
     private static boolean isOpen;
 
     public static void show(String title, String text, boolean showExitAppBtn) {
@@ -87,7 +87,7 @@ public class BugReportDialog extends FScreen { //use screen rather than dialog s
         y += lblHeader.getHeight() + PADDING;
 
         float buttonWidth = (w - PADDING) / 2;
-        float buttonHeight = FOptionPane.BUTTON_HEIGHT;
+        float buttonHeight = BUTTON_HEIGHT;
 
         tvDetails.setBounds(x, y, w, height - 2 * buttonHeight - 3 * PADDING - y);
         y += tvDetails.getHeight() + PADDING;

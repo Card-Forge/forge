@@ -1,6 +1,5 @@
 package forge.toolbox;
 
-import forge.screens.match.views.VPrompt;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.util.Callback;
@@ -29,8 +28,6 @@ public class DualListBox<T> extends FDialog {
     private final FButton addAllButton;
     private final FButton removeButton;
     private final FButton removeAllButton;
-    private final FButton okButton;
-    private final FButton autoButton;
 
     private final FLabel orderedLabel;
     private final FLabel selectOrder;
@@ -43,7 +40,7 @@ public class DualListBox<T> extends FDialog {
     }
     
     public DualListBox(String title, int remainingSourcesMin, int remainingSourcesMax, List<T> sourceElements, List<T> destElements, final Callback<List<T>> callback) {
-        super(title);
+        super(title, 2);
         targetRemainingSourcesMin = remainingSourcesMin;
         targetRemainingSourcesMax = remainingSourcesMax;
 
@@ -116,14 +113,14 @@ public class DualListBox<T> extends FDialog {
         };
 
         // Dual List Complete Buttons
-        okButton = add(new FButton("OK", onAccept));
-        autoButton = add(new FButton("Auto", new FEventHandler() {
+        initButton(0, "OK", onAccept);
+        initButton(1, "Auto", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 addAll();
                 onAccept.handleEvent(e);
             }
-        }));
+        });
 
         selectOrder = add(new FLabel.Builder().align(HAlignment.CENTER).text("Select Order").build());
         orderedLabel = add(new FLabel.Builder().align(HAlignment.CENTER).build());
@@ -136,12 +133,10 @@ public class DualListBox<T> extends FDialog {
         float x = FOptionPane.PADDING;
         float y = FOptionPane.PADDING / 2;
         width -= 2 * x;
-        maxHeight -= 2 * (VPrompt.HEIGHT - FDialog.INSETS);
 
         float gapBetweenButtons = FOptionPane.PADDING / 2;
-        float buttonHeight = FOptionPane.BUTTON_HEIGHT;
         float labelHeight = selectOrder.getAutoSizeBounds().height;
-        float listHeight = (maxHeight - 2 * labelHeight - buttonHeight - FOptionPane.PADDING - 2 * FDialog.INSETS) / 2;
+        float listHeight = (maxHeight - 2 * labelHeight - FOptionPane.PADDING) / 2;
         float addButtonWidth = addAllButton.getAutoSizeBounds().width * 1.2f;
         float addButtonHeight = listHeight / 2 - gapBetweenButtons;
         float listWidth = width - addButtonWidth - gapBetweenButtons;
@@ -161,11 +156,6 @@ public class DualListBox<T> extends FDialog {
         removeAllButton.setBounds(x, y + addButtonHeight + gapBetweenButtons, addButtonWidth, addButtonHeight);
         destList.setBounds(x + width - listWidth, y, listWidth, listHeight);
         y += listHeight + FOptionPane.PADDING;
-
-        float buttonWidth = (width - gapBetweenButtons) / 2;
-        okButton.setBounds(x, y, buttonWidth, buttonHeight);
-        x += buttonWidth + gapBetweenButtons;
-        autoButton.setBounds(x, y, buttonWidth, buttonHeight);
 
         return maxHeight;
     }
@@ -204,13 +194,13 @@ public class DualListBox<T> extends FDialog {
         boolean canRemove = destList.getCount() != 0;
         boolean targetReached = anySize || targetRemainingSourcesMin <= sourceList.getCount() && targetRemainingSourcesMax >= sourceList.getCount();
 
-        autoButton.setEnabled(targetRemainingSourcesMax == 0 && !targetReached);
+        setButtonEnabled(1, targetRemainingSourcesMax == 0 && !targetReached);
 
         addButton.setEnabled(canAdd);
         addAllButton.setEnabled(canAdd);
         removeButton.setEnabled(canRemove);
         removeAllButton.setEnabled(canRemove);
-        okButton.setEnabled(targetReached);
+        setButtonEnabled(0, targetReached);
     }
 
     private class ChoiceList extends FChoiceList<T> {
@@ -231,13 +221,13 @@ public class DualListBox<T> extends FDialog {
         switch (keyCode) {
         case Keys.ENTER:
         case Keys.ESCAPE: //Enter and Escape should trigger either OK or Auto based on which is enabled
-            if (okButton.trigger()) {
+            if (getButton(0).trigger()) {
                 return true;
             }
-            return autoButton.trigger();
+            return getButton(1).trigger();
         case Keys.SPACE: //Space should trigger OK button if enabled,
             //otherwise it should trigger first enabled button (default container behavior)
-            if (okButton.trigger()) {
+            if (getButton(0).trigger()) {
                 return true;
             }
             break;

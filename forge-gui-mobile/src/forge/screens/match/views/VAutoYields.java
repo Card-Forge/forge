@@ -6,7 +6,6 @@ import java.util.List;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 
 import forge.screens.match.MatchController;
-import forge.toolbox.FButton;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FChoiceList;
 import forge.toolbox.FDialog;
@@ -15,13 +14,11 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 
 public class VAutoYields extends FDialog {
-    private final FButton btnOk;
-    private final FButton btnRemove;
     private final FChoiceList<String> lstAutoYields;
     private final FCheckBox chkDisableAll;
 
     public VAutoYields() {
-        super("Auto-Yields");
+        super("Auto-Yields", 2);
         List<String> autoYields = new ArrayList<String>();
         for (String autoYield : MatchController.instance.getAutoYields()) {
             autoYields.add(autoYield);
@@ -44,26 +41,26 @@ public class VAutoYields extends FDialog {
                 MatchController.instance.setDisableAutoYields(chkDisableAll.isSelected());
             }
         });
-        btnOk = add(new FButton("OK", new FEventHandler() {
+        initButton(0, "OK", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 hide();
             }
-        }));
-        btnRemove = add(new FButton("Remove Yield", new FEventHandler() {
+        });
+        initButton(1, "Remove Yield", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 String selected = lstAutoYields.getSelectedItem();
                 if (selected != null) {
                     lstAutoYields.removeItem(selected);
                     MatchController.instance.setShouldAutoYield(selected, false);
-                    btnRemove.setEnabled(lstAutoYields.getCount() > 0);
+                    setButtonEnabled(1, lstAutoYields.getCount() > 0);
                     lstAutoYields.cleanUpSelections();
                     VAutoYields.this.revalidate();
                 }
             }
-        }));
-        btnRemove.setEnabled(autoYields.size() > 0);
+        });
+        setButtonEnabled(1, autoYields.size() > 0);
     }
 
     @Override
@@ -82,12 +79,10 @@ public class VAutoYields extends FDialog {
         float x = padding;
         float y = padding;
         float w = width - 2 * padding;
-        float buttonWidth = (w - padding) / 2;
-        float buttonHeight = FOptionPane.BUTTON_HEIGHT;
         TextBounds checkBoxSize = chkDisableAll.getAutoSizeBounds();
 
         float listHeight = lstAutoYields.getListItemRenderer().getItemHeight() * lstAutoYields.getCount();
-        float maxListHeight = maxHeight - 3 * padding - checkBoxSize.height - buttonHeight - FOptionPane.GAP_BELOW_BUTTONS - padding;
+        float maxListHeight = maxHeight - 3 * padding - checkBoxSize.height;
         if (listHeight > maxListHeight) {
             listHeight = maxListHeight;
         }
@@ -96,9 +91,7 @@ public class VAutoYields extends FDialog {
         y += listHeight + padding;
         chkDisableAll.setBounds(x, y, Math.min(checkBoxSize.width, w), checkBoxSize.height);
         y += checkBoxSize.height + padding;
-        btnOk.setBounds(x, y, buttonWidth, buttonHeight);
-        btnRemove.setBounds(x + buttonWidth + padding, y, buttonWidth, buttonHeight);
 
-        return y + buttonHeight + FOptionPane.GAP_BELOW_BUTTONS;
+        return y;
     }
 }

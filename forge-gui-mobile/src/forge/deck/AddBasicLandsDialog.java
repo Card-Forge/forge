@@ -32,7 +32,6 @@ import forge.card.CardZoom;
 import forge.card.mana.ManaCostShard;
 import forge.item.PaperCard;
 import forge.model.FModel;
-import forge.toolbox.FButton;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FContainer;
@@ -88,9 +87,6 @@ public class AddBasicLandsDialog extends FDialog {
 
     private final FTextArea lblDeckInfo = add(new FTextArea(true));
 
-    private final FButton btnOK     = add(new FButton("OK"));
-    private final FButton btnCancel = add(new FButton("Cancel"));
-
     private int nonLandCount, oldLandCount;
     private CardEdition landSet;
 
@@ -98,7 +94,7 @@ public class AddBasicLandsDialog extends FDialog {
         this(deck, defaultLandSet, null, callback0);
     }
     public AddBasicLandsDialog(Deck deck, CardEdition defaultLandSet, CardPool restrictedCatalog0, final Callback<CardPool> callback0) {
-        super("Add Basic Lands to " + deck.getName());
+        super("Add Basic Lands to " + deck.getName(), 2);
 
         callback = callback0;
 
@@ -119,7 +115,7 @@ public class AddBasicLandsDialog extends FDialog {
         });
         cbLandSet.setSelectedItem(defaultLandSet);
 
-        btnOK.setCommand(new FEventHandler() {
+        initButton(0, "OK", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 CardPool landsToAdd = new CardPool();
@@ -136,7 +132,7 @@ public class AddBasicLandsDialog extends FDialog {
                 }
             }
         });
-        btnCancel.setCommand(new FEventHandler() {
+        initButton(1, "Cancel", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 hide();
@@ -250,15 +246,7 @@ public class AddBasicLandsDialog extends FDialog {
         y += panelHeight + padding;
         lblDeckInfo.setBounds(x, y, w, lblDeckInfo.getPreferredHeight(w));
 
-        //layout buttons
-        y += lblDeckInfo.getHeight() + padding;
-        float gapBetweenButtons = padding / 2;
-        float buttonWidth = (w - gapBetweenButtons) / 2;
-        btnOK.setBounds(x, y, buttonWidth, FOptionPane.BUTTON_HEIGHT);
-        x += buttonWidth + gapBetweenButtons;
-        btnCancel.setBounds(x, y, buttonWidth, FOptionPane.BUTTON_HEIGHT);
-
-        return y + FOptionPane.BUTTON_HEIGHT + FOptionPane.GAP_BELOW_BUTTONS;
+        return y;
     }
 
     private void updateDeckInfoLabel() {

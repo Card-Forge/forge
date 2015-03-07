@@ -13,7 +13,6 @@ import forge.itemmanager.filters.ItemFilter;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.screens.TabPageScreen;
-import forge.toolbox.FButton;
 import forge.toolbox.FDialog;
 import forge.toolbox.FEvent;
 import forge.toolbox.FOptionPane;
@@ -23,16 +22,14 @@ import forge.util.Callback;
 
 public class FSideboardDialog extends FDialog {
     private final SideboardTabs tabs;
-    private final FButton btnOK;
     private final Callback<List<PaperCard>> callback;
 
     public FSideboardDialog(CardPool sideboard, CardPool main, final Callback<List<PaperCard>> callback0) {
-        super("Update main deck from sideboard");
+        super("Update main deck from sideboard", 1);
 
         callback = callback0;
         tabs = add(new SideboardTabs(sideboard, main));
-        btnOK = add(new FButton("OK"));
-        btnOK.setCommand(new FEventHandler() {
+        initButton(1, "OK", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 hide();
@@ -53,14 +50,7 @@ public class FSideboardDialog extends FDialog {
 
     @Override
     protected float layoutAndGetHeight(float width, float maxHeight) {
-        float buttonHeight = FOptionPane.BUTTON_HEIGHT;
-        float buttonTop = maxHeight - buttonHeight - FOptionPane.GAP_BELOW_BUTTONS;
-
-        tabs.setBounds(0, 0, width, buttonTop - FOptionPane.PADDING);
-
-        float buttonWidth = width / 2;
-        btnOK.setBounds((width - buttonWidth) / 2, buttonTop, buttonWidth, buttonHeight);
-
+        tabs.setBounds(0, 0, width, maxHeight);
         return maxHeight;
     }
 

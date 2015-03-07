@@ -377,7 +377,7 @@ public class MatchScreen extends FScreen {
             break;
         case Keys.Q: //concede game on Ctrl+Q
             if (KeyInputAdapter.isCtrlKeyDown()) {
-                getGameController().concede();
+                MatchController.instance.concede();
                 return true;
             }
             break;

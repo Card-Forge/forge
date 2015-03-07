@@ -48,51 +48,8 @@ public class FFileChooser extends FDialog {
     private final FList<File> lstFiles   = add(new FileList());
     private final FTextField txtFilename = add(new FilenameField());
 
-    private final FButton btnNewFolder = add(new FButton("New Folder", new FEventHandler() {
-        @Override
-        public void handleEvent(FEvent e) {
-            final File dir = getCurrentDir();
-            if (dir == null) {
-                FOptionPane.showErrorDialog("Cannot add new folder to invalid folder.", "Invalid Folder");
-                return;
-            }
-
-            FOptionPane.showInputDialog("Enter name for new folder:", "New Folder", new Callback<String>() {
-                @Override
-                public void run(String result) {
-                    if (StringUtils.isEmpty(result)) { return; }
-
-                    try {
-                        File newDir = new File(dir, result);
-                        if (newDir.mkdirs()) {
-                            txtFilename.setText(newDir.getAbsolutePath());
-                            refreshFileList();
-                            return;
-                        }
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    FOptionPane.showErrorDialog("\"" + result + "\" is not a valid folder name.", "Invalid Name");
-                }
-            });
-        }
-    }));
-    private final FButton btnOK = add(new FButton("OK", new FEventHandler() {
-        @Override
-        public void handleEvent(FEvent e) {
-            activateSelectedFile(true);
-        }
-    }));
-    private final FButton btnCancel  = add(new FButton("Cancel", new FEventHandler() {
-        @Override
-        public void handleEvent(FEvent e) {
-            hide();
-        }
-    }));
-
     private FFileChooser(String title0, ChoiceType choiceType0, String defaultFilename0, String baseDir0, Callback<String> callback0) {
-        super(title0);
+        super(title0, 3);
         choiceType = choiceType0;
         if (choiceType == ChoiceType.GetDirectory) {
             if (defaultFilename0.endsWith(File.separator)) { //if getting directory, don't end with a slash
@@ -107,6 +64,50 @@ public class FFileChooser extends FDialog {
                 refreshFileList();
             }
         });
+
+        initButton(0, "OK", new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                activateSelectedFile(true);
+            }
+        });
+        initButton(1, "New Folder", new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                final File dir = getCurrentDir();
+                if (dir == null) {
+                    FOptionPane.showErrorDialog("Cannot add new folder to invalid folder.", "Invalid Folder");
+                    return;
+                }
+
+                FOptionPane.showInputDialog("Enter name for new folder:", "New Folder", new Callback<String>() {
+                    @Override
+                    public void run(String result) {
+                        if (StringUtils.isEmpty(result)) { return; }
+
+                        try {
+                            File newDir = new File(dir, result);
+                            if (newDir.mkdirs()) {
+                                txtFilename.setText(newDir.getAbsolutePath());
+                                refreshFileList();
+                                return;
+                            }
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        FOptionPane.showErrorDialog("\"" + result + "\" is not a valid folder name.", "Invalid Name");
+                    }
+                });
+            }
+        });
+        initButton(2, "Cancel", new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                hide();
+            }
+        });
+
         baseDir = baseDir0;
         callback = callback0;
         refreshFileList();
@@ -117,22 +118,10 @@ public class FFileChooser extends FDialog {
         float padding = FOptionPane.PADDING;
         float w = width - 2 * padding;
 
-        //layout buttons
-        float gapBetweenButtons = padding / 2;
-        float buttonWidth = (w - gapBetweenButtons * 2) / 3;
-        float buttonHeight = FOptionPane.BUTTON_HEIGHT;
-        float x = padding;
-        float y = maxHeight - FOptionPane.GAP_BELOW_BUTTONS - buttonHeight;
-        btnNewFolder.setBounds(x, y, buttonWidth, buttonHeight);
-        x += buttonWidth + gapBetweenButtons;
-        btnOK.setBounds(x, y, buttonWidth, buttonHeight);
-        x += buttonWidth + gapBetweenButtons;
-        btnCancel.setBounds(x, y, buttonWidth, buttonHeight);
-
         float fieldHeight = txtFilename.getHeight();
-        float listHeight = y - fieldHeight - 3 * padding;
-        x = padding;
-        y = padding;
+        float listHeight = maxHeight - fieldHeight - 2 * padding;
+        float x = padding;
+        float y = padding;
         txtFilename.setBounds(x, y, w, fieldHeight);
         y += fieldHeight + padding;
         lstFiles.setBounds(x, y, w, listHeight);

@@ -21,6 +21,7 @@ package forge.toolbox;
 import com.google.common.base.Function;
 
 import forge.FThreads;
+import forge.Graphics;
 import forge.assets.FSkinFont;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
@@ -106,7 +107,7 @@ public class ListChooser<T> extends FContainer {
 
         String[] options;
         if (minChoices == 0) {
-            options = new String[] {"OK","Cancel"};
+            options = new String[] {"OK", "Cancel"};
         }
         else {
             options = new String[] {"OK"};
@@ -179,8 +180,10 @@ public class ListChooser<T> extends FContainer {
     protected void doLayout(float width, float height) {
         float y = 0;
         if (txtSearch != null) {
-            txtSearch.setBounds(0, 0, width, txtSearch.getHeight());
-            y += txtSearch.getHeight() * 1.25f;
+            float padding = txtSearch.getHeight() * 0.25f;
+            y += padding;
+            txtSearch.setBounds(0, y, width, txtSearch.getHeight());
+            y += txtSearch.getHeight() + padding;
         }
         lstChoices.setBounds(0, y, width, height - y);
     }
@@ -214,6 +217,11 @@ public class ListChooser<T> extends FContainer {
         @Override
         protected void onCompactModeChange() {
             updateHeight(); //update height and scroll bounds based on compact mode change
+        }
+
+        @Override
+        public void drawOverlay(Graphics g) {
+            //don't draw border
         }
     }
 }

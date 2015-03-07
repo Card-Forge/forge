@@ -9,16 +9,13 @@ import com.badlogic.gdx.math.Rectangle;
 
 import forge.Graphics;
 import forge.ImageKeys;
-import forge.assets.FSkinColor;
-import forge.assets.FSkinFont;
-import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinImage;
 import forge.game.card.CardView;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
-import forge.screens.FScreen;
 import forge.screens.match.MatchController;
 import forge.toolbox.FCardPanel;
+import forge.toolbox.FDialog;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FOverlay;
 import forge.util.FCollectionView;
@@ -26,9 +23,6 @@ import forge.util.Utils;
 
 public class CardZoom extends FOverlay {
     private static final float REQ_AMOUNT = Utils.AVG_FINGER_WIDTH;
-    private static final FSkinFont MSG_FONT = FSkinFont.get(12);
-    private static final FSkinColor MSG_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.9f);
-    private static final FSkinColor MSG_BACK_COLOR = FScreen.Header.BACK_COLOR.alphaColor(0.75f);
 
     private static final CardZoom cardZoom = new CardZoom();
     private static List<?> items;
@@ -175,7 +169,7 @@ public class CardZoom extends FOverlay {
     public void drawOverlay(Graphics g) {
         float w = getWidth();
         float h = getHeight();
-        float messageHeight = MSG_FONT.getCapHeight() * 2.5f;
+        float messageHeight = FDialog.MSG_HEIGHT;
         float maxCardHeight = h - 2 * messageHeight;
 
         float cardWidth, cardHeight, y;
@@ -218,11 +212,11 @@ public class CardZoom extends FOverlay {
         }
 
         if (currentActivateAction != null) {
-            g.fillRect(MSG_BACK_COLOR, 0, 0, w, messageHeight);
-            g.drawText("Swipe up to " + currentActivateAction, MSG_FONT, MSG_FORE_COLOR, 0, 0, w, messageHeight, false, HAlignment.CENTER, true);
+            g.fillRect(FDialog.MSG_BACK_COLOR, 0, 0, w, messageHeight);
+            g.drawText("Swipe up to " + currentActivateAction, FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, 0, w, messageHeight, false, HAlignment.CENTER, true);
         }
-        g.fillRect(MSG_BACK_COLOR, 0, h - messageHeight, w, messageHeight);
-        g.drawText("Swipe down to switch to " + (zoomMode ? "detail" : "picture") + " view", MSG_FONT, MSG_FORE_COLOR, 0, h - messageHeight, w, messageHeight, false, HAlignment.CENTER, true);
+        g.fillRect(FDialog.MSG_BACK_COLOR, 0, h - messageHeight, w, messageHeight);
+        g.drawText("Swipe down to switch to " + (zoomMode ? "detail" : "picture") + " view", FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, h - messageHeight, w, messageHeight, false, HAlignment.CENTER, true);
     }
 
     @Override

@@ -25,7 +25,7 @@ public class VGameMenu extends FDropDownMenu {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        MatchController.instance.getGameController().concede();
+                        MatchController.instance.concede();
                     }
                 });
             }

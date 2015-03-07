@@ -22,20 +22,19 @@ import java.net.Proxy;
 import com.badlogic.gdx.Gdx;
 
 import forge.UiCommand;
-import forge.assets.FSkinFont;
 import forge.download.GuiDownloadService;
 import forge.download.GuiDownloadZipService;
 import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FRadioButton.RadioButtonGroup;
 import forge.util.Callback;
+import forge.util.Utils;
 
 public class GuiDownloader extends FDialog {
     public static final Proxy.Type[] TYPES = Proxy.Type.values();
+    private static final float PADDING = Utils.scale(10);
 
     private final FProgressBar progressBar = add(new FProgressBar());
-    private final FButton btnStart = add(new FButton("Start"));
-    private final FButton btnCancel = add(new FButton("Cancel"));
     private final FTextField txtAddress = add(new FTextField());
     private final FTextField txtPort = add(new FTextField());
     private final FRadioButton radProxyNone = add(new FRadioButton("No Proxy"));
@@ -50,7 +49,7 @@ public class GuiDownloader extends FDialog {
             service.setCancel(true);
             hide();
             if (callback != null) {
-                callback.run(btnStart.getText() == "OK"); //determine result based on whether download finished
+                callback.run(getButton(0).getText() == "OK"); //determine result based on whether download finished
             }
         }
     };
@@ -62,7 +61,7 @@ public class GuiDownloader extends FDialog {
         this(service0, null);
     }
     public GuiDownloader(GuiDownloadService service0, Callback<Boolean> callback0) {
-        super(service0.getTitle());
+        super(service0.getTitle(), 2);
         service = service0;
         callback = callback0;
 
@@ -81,10 +80,13 @@ public class GuiDownloader extends FDialog {
         radProxySocks.setCommand(new ProxyHandler(2));
         radProxyNone.setSelected(true);
 
-        btnStart.setFont(FSkinFont.get(18));
-        btnStart.setEnabled(false);
-        btnCancel.setFont(btnStart.getFont());
-        btnCancel.setCommand(cmdClose);
+        getButton(0).setText("Start");
+        initButton(1, "Cancel", new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                cmdClose.run();
+            }
+        });
 
         progressBar.reset();
         progressBar.setShowProgressTrail(true);
@@ -93,7 +95,7 @@ public class GuiDownloader extends FDialog {
 
         show();
 
-        service.initialize(txtAddress, txtPort, progressBar, btnStart, cmdClose, new Runnable() {
+        service.initialize(txtAddress, txtPort, progressBar, getButton(0), cmdClose, new Runnable() {
             @Override
             public void run() {
                 if (!(service instanceof GuiDownloadZipService)) { //retain continuous rendering for zip service
@@ -123,10 +125,9 @@ public class GuiDownloader extends FDialog {
 
     @Override
     protected float layoutAndGetHeight(float width, float maxHeight) {
-        float padding = FDialog.INSETS;
-        float x = padding;
-        float y = padding;
-        float w = width - 2 * padding;
+        float x = PADDING;
+        float y = PADDING;
+        float w = width - 2 * PADDING;
         float radioButtonWidth = w / 3;
         float radioButtonHeight = radProxyNone.getAutoSizeBounds().height;
 
@@ -136,20 +137,14 @@ public class GuiDownloader extends FDialog {
         x += radioButtonWidth;
         radProxySocks.setBounds(x, y, radioButtonWidth, radioButtonHeight);
 
-        x = padding;
-        y += radioButtonHeight + padding;
+        x = PADDING;
+        y += radioButtonHeight + PADDING;
         txtAddress.setBounds(x, y, w, txtAddress.getHeight());
-        y += txtAddress.getHeight() + padding;
+        y += txtAddress.getHeight() + PADDING;
         txtPort.setBounds(x, y, w, txtPort.getHeight());
-        y += txtPort.getHeight() + padding * 2;
+        y += txtPort.getHeight() + PADDING * 2;
         progressBar.setBounds(x, y, w, txtPort.getHeight() * 1.5f);
-        y += progressBar.getHeight() + padding * 2;
-
-        float buttonWidth = (w - padding) / 2;
-        float buttonHeight = txtPort.getHeight() * 1.5f;
-        btnStart.setBounds(x, y, buttonWidth, buttonHeight);
-        x += w - buttonWidth;
-        btnCancel.setBounds(x, y, buttonWidth, buttonHeight);
-        return y + buttonHeight + padding;
+        y += progressBar.getHeight() + PADDING * 2;
+        return y;
     }
 }

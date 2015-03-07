@@ -28,14 +28,9 @@ public class FOptionPane extends FDialog {
     public static final FSkinImage ERROR_ICON = FSkinImage.ERROR;
 
     public static final float PADDING = Utils.scale(10);
-    public static final float GAP_BETWEEN_BUTTONS = Utils.scale(3);
-    public static final float GAP_BELOW_BUTTONS = PADDING * 0.5f;
-    public static final float BUTTON_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.75f;
-    public static final float MIN_BUTTON_WIDTH = Utils.scale(120);
 
     public static float getMaxDisplayObjHeight() {
-        return Forge.getCurrentScreen().getHeight() - 2 * VPrompt.HEIGHT - FDialog.TITLE_HEIGHT - 
-               2 * PADDING - BUTTON_HEIGHT - GAP_BELOW_BUTTONS;
+        return Forge.getCurrentScreen().getHeight() - VPrompt.HEIGHT - 2 * FDialog.MSG_HEIGHT;
     }
 
     public static void showMessageDialog(String message) {
@@ -193,13 +188,12 @@ public class FOptionPane extends FDialog {
     private final FLabel lblIcon;
     private final FTextArea prompt;
     protected final FDisplayObject displayObj;
-    private final FButton[] buttons;
     private final Callback<Integer> callback;
     private final int defaultOption;
     private final boolean centerIcon;
 
     public FOptionPane(String message, String title, FImage icon, FDisplayObject displayObj0, String[] options, int defaultOption0, final Callback<Integer> callback0) {
-        super(title);
+        super(title, options.length);
 
         if (icon != null) {
             centerIcon = icon.getWidth() >= 100; //for large icon, center in dialog
@@ -231,16 +225,14 @@ public class FOptionPane extends FDialog {
 
         callback = callback0;
 
-        int optionCount = options.length;
-        buttons = new FButton[optionCount];
-        for (int i = 0; i < optionCount; i++) {
+        for (int i = 0; i < options.length; i++) {
             final int option = i;
-            buttons[i] = add(new FButton(options[i], new FEventHandler() {
+            initButton(i, options[i], new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     setResult(option);
                 }
-            }));
+            });
         }
         defaultOption = defaultOption0;
     }
@@ -252,24 +244,12 @@ public class FOptionPane extends FDialog {
         }
     }
 
-    public boolean isButtonEnabled(int index) {
-        return buttons[index].isEnabled();
-    }
-
-    public void setButtonEnabled(int index, boolean enabled) {
-        buttons[index].setEnabled(enabled);
-    }
-
-    protected boolean padDisplayObject() {
-        return true;
-    }
-
     @Override
     protected float layoutAndGetHeight(float width, float maxHeight) {
         float x = PADDING;
         float y = PADDING;
 
-        float maxPromptHeight = maxHeight - 2 * PADDING - BUTTON_HEIGHT - GAP_BELOW_BUTTONS;
+        float maxPromptHeight = maxHeight - 2 * PADDING;
         if (displayObj != null) {
             maxPromptHeight -= displayObj.getHeight();
         }
@@ -314,40 +294,10 @@ public class FOptionPane extends FDialog {
         }
 
         if (displayObj != null) {
-            if (padDisplayObject()) {
-                displayObj.setBounds(x, y, width - 2 * x, displayObj.getHeight());
-                y += displayObj.getHeight() + PADDING;
-            }
-            else {
-                displayObj.setBounds(x - PADDING, y - PADDING, width, displayObj.getHeight());
-                y += displayObj.getHeight();
-            }
+            displayObj.setBounds(x - PADDING, y - PADDING, width, displayObj.getHeight());
+            y += displayObj.getHeight() - PADDING;
         }
-
-        //determine size for and position buttons
-        float maxButtonWidth = 0;
-        for (FButton btn : buttons) {
-            float buttonWidth = btn.getAutoSizeBounds().width;
-            if (buttonWidth > maxButtonWidth) {
-                maxButtonWidth = buttonWidth;
-            }
-        }
-        float buttonWidth = Math.max(maxButtonWidth, MIN_BUTTON_WIDTH); //account for margins and enforce minimum width
-        float dx = buttonWidth + GAP_BETWEEN_BUTTONS;
-        float totalButtonWidth = dx * buttons.length - GAP_BETWEEN_BUTTONS;
-
-        x = (width - totalButtonWidth) / 2;
-        if (x < PADDING) { //reduce button width if not enough room for buttons
-            buttonWidth = (width - 2 * PADDING - (buttons.length - 1) * GAP_BETWEEN_BUTTONS) / (float)buttons.length;
-            x = PADDING;
-            dx = buttonWidth + GAP_BETWEEN_BUTTONS;
-        }
-        for (FButton btn : buttons) {
-            btn.setBounds(x, y, buttonWidth, BUTTON_HEIGHT);
-            x += dx;
-        }
-
-        return y + BUTTON_HEIGHT + GAP_BELOW_BUTTONS;
+        return y;
     }
 
     @Override
@@ -363,8 +313,8 @@ public class FOptionPane extends FDialog {
         case Keys.BACK:
             if (Forge.endKeyInput()) { return true; }
 
-            if (isButtonEnabled(buttons.length - 1)) {
-                setResult(buttons.length - 1); //set result to final option on Escape or Back
+            if (isButtonEnabled(1)) {
+                setResult(1); //set result to final option on Escape or Back
             }
             return true;
         }
