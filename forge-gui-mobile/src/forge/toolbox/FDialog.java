@@ -188,8 +188,6 @@ public abstract class FDialog extends FOverlay {
 
     @Override
     public void drawOverlay(Graphics g) {
-        if (revealPercent == 0) { return; } //skip if not revealed
-
         //draw swipe bar
         float dx = SWIPE_BAR_HEIGHT * 0.7f;
         float startX = dx * 0.7f;
@@ -210,6 +208,9 @@ public abstract class FDialog extends FOverlay {
             x -= dx;
         }
         g.drawLine(BORDER_THICKNESS, BORDER_COLOR, 0, y, w, y);
+
+        if (revealPercent == 0) { return; } //skip rest if hidden
+
         y += SWIPE_BAR_HEIGHT;
         g.drawLine(BORDER_THICKNESS, BORDER_COLOR, 0, y, w, y);
 
