@@ -179,57 +179,59 @@ public class FButton extends FDisplayObject implements IButton {
         float cornerTextOffsetX = cornerButtonWidth / 2;
         float cornerTextOffsetY = (cornerButtonHeight - h) / 2;
 
-        //determine images to draw and text alignment based on which corner button is in (if any)
-        switch (corner) {
-        case None:
-            if (imgL.getTextureRegion() == null) {
-                //handle rendering buttons before textures loaded
-                FLabel.drawButtonBackground(g, w, h, imgL == FSkinImage.BTN_DOWN_LEFT);
+        if (imgL.getTextureRegion() == null) {
+            //handle rendering buttons before textures loaded
+            FLabel.drawButtonBackground(g, w, h, imgL == FSkinImage.BTN_DOWN_LEFT);
+        }
+        else {
+            //determine images to draw and text alignment based on which corner button is in (if any)
+            switch (corner) {
+            case None:
+                if (w > 2 * h) {
+                    g.drawImage(imgL, 0, 0, h, h);
+                    g.drawImage(imgM, h, 0, w - (2 * h), h);
+                    g.drawImage(imgR, w - h, 0, h, h);
+                }
+                else {
+                    g.drawImage(imgL, 0, 0, cornerButtonWidth, h);
+                    g.drawImage(imgR, cornerButtonWidth, 0, w - cornerButtonWidth, h);
+                }
+                x += PADDING;
+                w -= 2 * PADDING;
+                break;
+            case BottomLeft:
+                g.startClip(x, y, w, h);
+                g.drawImage(imgM, 0, 0, cornerButtonWidth, cornerButtonHeight);
+                g.drawImage(imgR, cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
+                g.endClip();
+                w -= cornerTextOffsetX;
+                y += cornerTextOffsetY;
+                h -= cornerTextOffsetY;
+                break;
+            case BottomRight:
+                g.startClip(x, y, w, h);
+                g.drawImage(imgL, 0, 0, cornerButtonWidth, cornerButtonHeight);
+                g.drawImage(imgM, cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
+                g.endClip();
+                x += cornerTextOffsetX;
+                w -= cornerTextOffsetX;
+                y += cornerTextOffsetY;
+                h -= cornerTextOffsetY;
+                break;
+            case BottomMiddle:
+                g.startClip(x, y, w, h);
+                cornerButtonWidth = w / 3;
+                cornerTextOffsetX = cornerButtonWidth / 2;
+                g.drawImage(imgL, 0, 0, cornerButtonWidth, cornerButtonHeight);
+                g.drawImage(imgM, cornerButtonWidth, 0, w - 2 * cornerButtonWidth, cornerButtonHeight);
+                g.drawImage(imgR, w - cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
+                g.endClip();
+                x += cornerTextOffsetX / 2;
+                w -= cornerTextOffsetX;
+                y += cornerTextOffsetY;
+                h -= cornerTextOffsetY;
+                break;
             }
-            else if (w > 2 * h) {
-                g.drawImage(imgL, 0, 0, h, h);
-                g.drawImage(imgM, h, 0, w - (2 * h), h);
-                g.drawImage(imgR, w - h, 0, h, h);
-            }
-            else {
-                g.drawImage(imgL, 0, 0, cornerButtonWidth, h);
-                g.drawImage(imgR, cornerButtonWidth, 0, w - cornerButtonWidth, h);
-            }
-            x += PADDING;
-            w -= 2 * PADDING;
-            break;
-        case BottomLeft:
-            g.startClip(x, y, w, h);
-            g.drawImage(imgM, 0, 0, cornerButtonWidth, cornerButtonHeight);
-            g.drawImage(imgR, cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
-            g.endClip();
-            w -= cornerTextOffsetX;
-            y += cornerTextOffsetY;
-            h -= cornerTextOffsetY;
-            break;
-        case BottomRight:
-            g.startClip(x, y, w, h);
-            g.drawImage(imgL, 0, 0, cornerButtonWidth, cornerButtonHeight);
-            g.drawImage(imgM, cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
-            g.endClip();
-            x += cornerTextOffsetX;
-            w -= cornerTextOffsetX;
-            y += cornerTextOffsetY;
-            h -= cornerTextOffsetY;
-            break;
-        case BottomMiddle:
-            g.startClip(x, y, w, h);
-            cornerButtonWidth = w / 3;
-            cornerTextOffsetX = cornerButtonWidth / 2;
-            g.drawImage(imgL, 0, 0, cornerButtonWidth, cornerButtonHeight);
-            g.drawImage(imgM, cornerButtonWidth, 0, w - 2 * cornerButtonWidth, cornerButtonHeight);
-            g.drawImage(imgR, w - cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
-            g.endClip();
-            x += cornerTextOffsetX / 2;
-            w -= cornerTextOffsetX;
-            y += cornerTextOffsetY;
-            h -= cornerTextOffsetY;
-            break;
         }
 
         String displayText = text;
