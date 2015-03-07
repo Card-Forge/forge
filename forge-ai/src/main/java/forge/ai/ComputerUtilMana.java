@@ -426,9 +426,9 @@ public class ComputerUtilMana {
         if (test) {
             refundMana(manaSpentToPay, ai, sa);
         }
-        else {
-            manaSpentToPay.clear(); //prevent mana spent to pay sticking around such that it can cause an improper refund later
-        }
+        // Note: manaSpentToPay shouldn't be cleared here, since it needs to remain
+        // on the SpellAbility in order for effects that check mana spent cost to work.
+
         sa.getHostCard().setColorsPaid(cost.getColorsPaid());
         // if (sa instanceof Spell_Permanent) // should probably add this
         sa.getHostCard().setSunburstValue(cost.getSunburst());
