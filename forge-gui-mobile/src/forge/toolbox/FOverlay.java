@@ -40,6 +40,22 @@ public abstract class FOverlay extends FContainer {
         return overlays;
     }
 
+    //get list of overlays for iterating from top overlay down
+    public static Iterable<FOverlay> getOverlaysTopDown() {
+        if (overlays.size() < 2) {
+            return overlays; //don't need to create new list if one or fewer overlay
+        }
+        ArrayList<FOverlay> reversedList = new ArrayList<FOverlay>();
+        for (int i = overlays.size() - 1; i >= 0; i--) {
+            reversedList.add(overlays.get(i));
+        }
+        return reversedList;
+    }
+
+    public boolean preventInputBehindOverlay() {
+        return true; //prevent input behind overlay by default
+    }
+
     public static void hideAll() {
         hidingAll = true;
         for (int i = overlays.size() - 1; i >= 0; i--) {
@@ -127,6 +143,11 @@ public abstract class FOverlay extends FContainer {
 
     @Override
     public boolean tap(float x, float y, int count) {
+        return true;
+    }
+
+    @Override
+    public boolean flick(float x, float y) {
         return true;
     }
 

@@ -23,7 +23,8 @@ public abstract class FDialog extends FOverlay {
     public static final FSkinColor MSG_BACK_COLOR = FScreen.Header.BACK_COLOR.alphaColor(0.75f);
     public static final float MSG_HEIGHT = MSG_FONT.getCapHeight() * 2.5f;
     private static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
-    private static float BORDER_THICKNESS = Utils.scale(1);
+    private static final float BORDER_THICKNESS = Utils.scale(1);
+    private static final float BASE_REVEAL_VELOCITY = 3 * Utils.SCREEN_HEIGHT;
 
     private static int openDialogCount = 0;
 
@@ -36,7 +37,7 @@ public abstract class FDialog extends FOverlay {
     private final String title;
     private final int buttonCount;
     private float totalHeight;
-    private float revealPercent = 1;
+    private float revealPercent = 0;
     private float lastDy = 0;
 
     protected FDialog(String title0, int buttonCount0) {
@@ -58,17 +59,22 @@ public abstract class FDialog extends FOverlay {
 
     @Override
     protected final void doLayout(float width, float height) {
+        boolean firstReveal = (totalHeight == 0);
         float contentHeight = layoutAndGetHeight(width, height - VPrompt.HEIGHT - 2 * MSG_HEIGHT);
         totalHeight = contentHeight + VPrompt.HEIGHT;
         lastDy = 0; //reset whenever main layout occurs
 
-        prompt.setBounds(0, contentHeight, width, VPrompt.HEIGHT);
         if (btnMiddle != null) {
             btnMiddle.setLeft((width - btnMiddle.getWidth()) / 2);
             totalHeight += MSG_HEIGHT; //leave room for title above middle button
         }
+        prompt.setBounds(0, totalHeight - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
 
         updateDisplayTop();
+
+        if (firstReveal) { //start reveal animation after dialog first laid out
+            updateRevealAnimation(BASE_REVEAL_VELOCITY);
+        }
     }
 
     private void updateDisplayTop() {
@@ -139,13 +145,27 @@ public abstract class FDialog extends FOverlay {
         }
     }
 
-    private boolean isPointWithinDialog(float x, float y) {
-        return y >= getHeight() - totalHeight;
+    @Override
+    public boolean preventInputBehindOverlay() {
+        return revealPercent > 0; //prevent input behind overlay unless completely hidden
     }
 
+    //allow pan, zoom, and long press behind dialog if hidden
+    @Override
+    public boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical) {
+        return preventInputBehindOverlay();
+    }
+    @Override
+    public boolean panStop(float x, float y) {
+        return preventInputBehindOverlay();
+    }
+    @Override
+    public boolean zoom(float x, float y, float amount) {
+        return preventInputBehindOverlay();
+    }
     @Override
     public boolean longPress(float x, float y) {
-        return !isPointWithinDialog(x, y); //don't handle long press by default if pressed inside dialog
+        return false; //never handle long press inside dialog
     }
 
     @Override
@@ -164,20 +184,27 @@ public abstract class FDialog extends FOverlay {
 
     @Override
     public void drawOverlay(Graphics g) {
+        float y;
         float w = getWidth();
-        String message;
-        if (revealPercent == 0) {
-            message = "Swipe up to show modal";
+
+        //show swipe message unless reveal animation in progress or not yet laid out
+        if (activeRevealAnimation == null && totalHeight > 0) {
+            String message;
+            if (revealPercent == 0) {
+                y = getHeight() - MSG_HEIGHT;
+                message = "Swipe up to show modal";
+            }
+            else {
+                y = 0;
+                message = "Swipe down to hide modal";
+            }
+            g.fillRect(FDialog.MSG_BACK_COLOR, 0, y, w, MSG_HEIGHT);
+            g.drawText(message, FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, y, w, MSG_HEIGHT, false, HAlignment.CENTER, true);
         }
-        else {
-            message = "Swipe down to hide modal";
-        }
-        g.fillRect(FDialog.MSG_BACK_COLOR, 0, 0, w, MSG_HEIGHT);
-        g.drawText(message, FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, 0, w, MSG_HEIGHT, false, HAlignment.CENTER, true);
 
         if (revealPercent == 0) { return; } //skip rest if not revealed
 
-        float y = getHeight() - totalHeight * revealPercent;
+        y = getHeight() - totalHeight * revealPercent;
         g.drawLine(BORDER_THICKNESS, BORDER_COLOR, 0, y, w, y);
         y = prompt.getTop();
         if (btnMiddle != null) { //render title above prompt if middle button present
@@ -196,16 +223,20 @@ public abstract class FDialog extends FOverlay {
             if ((revealPercent > 0) == (velocityY > 0)) {
                 return false;
             }
-            if (activeRevealAnimation == null) {
-                activeRevealAnimation = new RevealAnimation(velocityY);
-                activeRevealAnimation.start();
-            }
-            else { //update existing animation with new velocity if needed
-                activeRevealAnimation.physicsObj.getVelocity().set(0, velocityY);
-            }
+            updateRevealAnimation(velocityY);
             return true;
         }
         return false;
+    }
+
+    private void updateRevealAnimation(float velocity) {
+        if (activeRevealAnimation == null) {
+            activeRevealAnimation = new RevealAnimation(velocity);
+            activeRevealAnimation.start();
+        }
+        else { //update existing animation with new velocity if needed
+            activeRevealAnimation.physicsObj.getVelocity().set(0, velocity);
+        }
     }
 
     private RevealAnimation activeRevealAnimation;
@@ -213,8 +244,8 @@ public abstract class FDialog extends FOverlay {
     private class RevealAnimation extends ForgeAnimation {
         private final PhysicsObject physicsObj;
 
-        private RevealAnimation(float velocityY) {
-            physicsObj = new PhysicsObject(new Vector2(0, totalHeight * revealPercent), new Vector2(0, velocityY));
+        private RevealAnimation(float velocity) {
+            physicsObj = new PhysicsObject(new Vector2(0, totalHeight * revealPercent), new Vector2(0, velocity));
         }
 
         @Override

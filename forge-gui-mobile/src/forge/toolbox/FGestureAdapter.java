@@ -216,9 +216,7 @@ public abstract class FGestureAdapter extends InputAdapter {
                 float velocityX = tracker.getVelocityX();
                 float velocityY = tracker.getVelocityY();
                 if (velocityY < 0 && Math.abs(velocityY) > Math.abs(velocityX)) {
-                    if (flick(tracker.startX, tracker.startY)) { //flick is a special case for flinging towards the top of the screen
-                        return true;
-                    }
+                    handled = flick(tracker.startX, tracker.startY) || handled; //flick is a special case for flinging towards the top of the screen
                 }
                 handled = fling(velocityX, velocityY) || handled;
             }

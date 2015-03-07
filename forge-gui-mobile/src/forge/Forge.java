@@ -434,11 +434,13 @@ public class Forge implements ApplicationListener {
             potentialListeners.clear();
 
             //base potential listeners on object containing touch down point
-            FOverlay overlay = FOverlay.getTopOverlay();
-            if (overlay != null) { //let top overlay handle gestures if any is open
+            for (FOverlay overlay : FOverlay.getOverlaysTopDown()) {
                 overlay.buildTouchListeners(x, y, potentialListeners);
+                if (overlay.preventInputBehindOverlay()) {
+                    return;
+                }
             }
-            else if (currentScreen != null) {
+            if (currentScreen != null) {
                 currentScreen.buildTouchListeners(x, y, potentialListeners);
             }
         }
