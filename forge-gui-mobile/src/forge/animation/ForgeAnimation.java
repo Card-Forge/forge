@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 
+import forge.Forge;
+
 public abstract class ForgeAnimation {
     private static final List<ForgeAnimation> activeAnimations = new ArrayList<ForgeAnimation>();
 
@@ -29,7 +31,9 @@ public abstract class ForgeAnimation {
         }
 
         if (activeAnimations.isEmpty()) { //when all animations have ended, turn continuous rendering back off
-            Gdx.graphics.setContinuousRendering(false);
+            if (Forge.isInitialLoadFinished()) { //don't turn back on continuous rendering if initial load isn't finished yet
+                Gdx.graphics.setContinuousRendering(false);
+            }
         }
     }
 
@@ -40,7 +44,9 @@ public abstract class ForgeAnimation {
             animation.onEnd(true);
         }
         activeAnimations.clear();
-        Gdx.graphics.setContinuousRendering(false);
+        if (Forge.isInitialLoadFinished()) { //don't turn back on continuous rendering if initial load isn't finished yet
+            Gdx.graphics.setContinuousRendering(false);
+        }
     }
 
     //return true if animation should continue, false to stop the animation

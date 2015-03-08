@@ -49,6 +49,7 @@ public class Forge implements ApplicationListener {
     private static SplashScreen splashScreen;
     private static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
+    private static boolean initialLoadFinished;
     private static final Stack<FScreen> screens = new Stack<FScreen>();
     public static HostedMatch hostedMatch;
 
@@ -108,6 +109,7 @@ public class Forge implements ApplicationListener {
     }
 
     private void afterDbLoaded() {
+        initialLoadFinished = true;
         Gdx.graphics.setContinuousRendering(false); //save power consumption by disabling continuous rendering once assets loaded
 
         FSkin.loadFull(splashScreen);
@@ -126,6 +128,10 @@ public class Forge implements ApplicationListener {
 
     public static IDeviceAdapter getDeviceAdapter() {
         return deviceAdapter;
+    }
+
+    public static boolean isInitialLoadFinished() {
+        return initialLoadFinished;
     }
 
     public static void showMenu() {
