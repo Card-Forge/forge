@@ -78,8 +78,9 @@ public class GauntletMini {
      * Advances the tournament to the next round.
      */
     public void nextRound() {
+        System.out.println("Moving from round " + currentRound + " to round " +  (currentRound + 1) + " of " + rounds);
         if (hostedMatch == null) {
-            return;
+            throw new IllegalStateException("Cannot advance round when no match has been hosted.");
         }
 
         if (currentRound >= rounds) {
@@ -146,7 +147,7 @@ public class GauntletMini {
         starter.add(human);
         starter.add(aiOpponents.get(currentRound - 1).setPlayer(GamePlayerUtil.createAiPlayer()));
 
-        final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
+        hostedMatch = GuiBase.getInterface().hostMatch();
         hostedMatch.startMatch(gauntletType, null, starter, human, GuiBase.getInterface().getNewGuiGame());
     }
 
