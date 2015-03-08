@@ -803,7 +803,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 final int num = Math.min(fetchList.size(), changeNum - i);
                 String message = "Cancel Search? Up to " + num + " more card" + (num != 1 ? "s" : "") + " can be selected.";
 
-                if (fetchList.isEmpty() || decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, message)) {
+                if (fetchList.isEmpty() || !decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, message)) {
                     break;
                 }
                 i--;
