@@ -662,6 +662,7 @@ forge-game/src/main/java/forge/game/trigger/TriggerChangesZone.java svneol=nativ
 forge-game/src/main/java/forge/game/trigger/TriggerClashed.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerCombatDamageDoneOnce.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerCounterAdded.java svneol=native#text/plain
+forge-game/src/main/java/forge/game/trigger/TriggerCounterAddedOnce.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerCounterRemoved.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerCountered.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerCycled.java svneol=native#text/plain
