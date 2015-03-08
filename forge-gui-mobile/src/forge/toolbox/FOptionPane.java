@@ -182,7 +182,12 @@ public class FOptionPane extends FDialog {
                     callback.run(null);
                 }
             }
-        });
+        }) {
+            @Override
+            protected float getBottomMargin() {
+                return Utils.SCREEN_HEIGHT * 0.4f; //account for keyboard
+            }
+        };
         optionPane.show();
         if (txtInput != null) {
             txtInput.startEdit();

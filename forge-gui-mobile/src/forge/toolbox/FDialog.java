@@ -61,6 +61,10 @@ public abstract class FDialog extends FOverlay {
         title = title0;
     }
 
+    protected float getBottomMargin() {
+        return 0;
+    }
+
     @Override
     protected final void doLayout(float width, float height) {
         boolean firstReveal = (totalHeight == 0);
@@ -84,7 +88,7 @@ public abstract class FDialog extends FOverlay {
     private void updateDisplayTop() {
         //shift all children into position
         float offsetDy = lastDy;
-        lastDy = getHeight() - totalHeight * revealPercent;
+        lastDy = getHeight() - totalHeight * revealPercent - getBottomMargin();
         float dy = lastDy - offsetDy;
         for (FDisplayObject child : getChildren()) {
             child.setTop(child.getTop() + dy);
@@ -179,7 +183,7 @@ public abstract class FDialog extends FOverlay {
         if (revealPercent == 0) { return; }
 
         float x = 0;
-        float y = getHeight() - totalHeight * revealPercent;
+        float y = getHeight() - totalHeight * revealPercent - getBottomMargin();
         float w = getWidth();
         float h = totalHeight - VPrompt.HEIGHT;
         g.drawImage(FSkinTexture.BG_TEXTURE, x, y, w, h);
@@ -192,7 +196,7 @@ public abstract class FDialog extends FOverlay {
         float dx = SWIPE_BAR_HEIGHT * 0.7f;
         float startX = dx * 0.7f;
         float x = startX;
-        float y = getHeight() - totalHeight * revealPercent - SWIPE_BAR_HEIGHT;
+        float y = getHeight() - totalHeight * revealPercent - SWIPE_BAR_HEIGHT - getBottomMargin();
         float w = getWidth();
         float dotRadius = SWIPE_BAR_HEIGHT / 6;
         float dotTop = y + SWIPE_BAR_HEIGHT / 2;
