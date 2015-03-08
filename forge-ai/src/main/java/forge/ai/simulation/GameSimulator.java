@@ -21,18 +21,17 @@ import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
 
 public class GameSimulator {
-    private static int MAX_DEPTH = 5;
-    
     public static boolean COPY_STACK = false;
+    final private SimulationController controller;
     private GameCopier copier;
     private Game simGame;
     private Player aiPlayer;
     private GameStateEvaluator eval;
-    private int recursionDepth;
     private ArrayList<String> origLines;
     private Score origScore;
     
-    public GameSimulator(final Game origGame, final Player origAiPlayer) {
+    public GameSimulator(final SimulationController controller, final Game origGame, final Player origAiPlayer) {
+        this.controller = controller;
         copier = new GameCopier(origGame);
         simGame = copier.makeCopy();
 
@@ -74,10 +73,6 @@ public class GameSimulator {
 
         debugPrint = false;
         debugLines = null;
-    }
-
-    public void setRecursionDepth(int depth) {
-        this.recursionDepth = depth;
     }
 
     private void printDiff(List<String> lines1, List<String> lines2) {
@@ -191,21 +186,17 @@ public class GameSimulator {
             debugPrint = true;
             printDiff(origLines, simLines);
         }
-        for (int i = 0; i < recursionDepth; i++)
-            System.err.print("  ");
-        System.err.println(recursionDepth + ": [" + score.value + "] " + SpellAbilityPicker.abilityToString(origSa));
-        if (recursionDepth < MAX_DEPTH && !simGame.isGameOver()) {
-            debugPrint("Recursing DEPTH=" + recursionDepth);
-            debugPrint("  With: " + sa);
+        controller.printState(score, origSa);
+        if (controller.shouldRecurse() && !simGame.isGameOver()) {
+            controller.push(sa);
             SpellAbilityPicker sim = new SpellAbilityPicker(simGame, aiPlayer);
-            sim.setRecursionDepth(recursionDepth + 1);
             CardCollection cards = ComputerUtilAbility.getAvailableCards(simGame, aiPlayer);
             ArrayList<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, aiPlayer);
-            SpellAbility nextSa = sim.chooseSpellAbilityToPlay(all, true);
+            SpellAbility nextSa = sim.chooseSpellAbilityToPlay(controller, all, true);
             if (nextSa != null) {
                 score = sim.getScoreForChosenAbility();
             }
-            debugPrint("DEPTH"+recursionDepth+" best score " + score + " " + nextSa);
+            controller.pop(score, nextSa);
         }
 
         return score;

@@ -48,6 +48,10 @@ public class GameSimulatorTest extends TestCase {
         }
         return game;
     }
+    
+    private GameSimulator createSimulator(Game game, Player p) {
+        return new GameSimulator(new SimulationController(), game, p);
+    }
  
     private Card findCardWithName(Game game, String name) {
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
@@ -103,7 +107,7 @@ public class GameSimulatorTest extends TestCase {
         SpellAbility outlastSA = findSAWithPrefix(herald, "Outlast");
         assertNotNull(outlastSA);
 
-        GameSimulator sim = new GameSimulator(game, p);
+        GameSimulator sim = createSimulator(game, p);
         int score = sim.simulateSpellAbility(outlastSA).value;
         assertTrue(score >  0);
         Game simGame = sim.getSimulatedGameState();
@@ -147,7 +151,7 @@ public class GameSimulatorTest extends TestCase {
         SpellAbility outlastSA = findSAWithPrefix(herald, "Outlast");
         assertNotNull(outlastSA);
 
-        GameSimulator sim = new GameSimulator(game, p);
+        GameSimulator sim = createSimulator(game, p);
         int score = sim.simulateSpellAbility(outlastSA).value;
         assertTrue(score >  0);
         Game simGame = sim.getSimulatedGameState();
@@ -170,7 +174,7 @@ public class GameSimulatorTest extends TestCase {
         assertEquals(1, lion.getAmountOfKeyword("Hexproof"));
         assertEquals(1, lion.getAmountOfKeyword("Indestructible"));
 
-        GameSimulator sim = new GameSimulator(game, p);
+        GameSimulator sim = createSimulator(game, p);
         Game simGame = sim.getSimulatedGameState();
         Card lionCopy = findCardWithName(simGame, lionCardName);
         assertTrue(lionCopy.isMonstrous());
@@ -190,7 +194,7 @@ public class GameSimulatorTest extends TestCase {
         game.getAction().checkStateEffects(true);
         assertEquals(1, bear.getAmountOfKeyword("Unblockable"));
 
-        GameSimulator sim = new GameSimulator(game, p);
+        GameSimulator sim = createSimulator(game, p);
         Game simGame = sim.getSimulatedGameState();
         Card bearCopy = findCardWithName(simGame, bearCardName);
         assertEquals(1, bearCopy.getAmountOfKeyword("Unblockable"));
@@ -208,7 +212,7 @@ public class GameSimulatorTest extends TestCase {
         game.getAction().checkStateEffects(true);
         assertEquals(1, bear.getAmountOfKeyword("Lifelink"));
 
-        GameSimulator sim = new GameSimulator(game, p);
+        GameSimulator sim = createSimulator(game, p);
         Game simGame = sim.getSimulatedGameState();
         Card bearCopy = findCardWithName(simGame, bearCardName);
         assertEquals(1, bearCopy.getAmountOfKeyword("Lifelink"));
@@ -229,7 +233,7 @@ public class GameSimulatorTest extends TestCase {
         SpellAbility playMerchantSa = c.getSpellAbilities().get(0);
         playMerchantSa.setActivatingPlayer(p);
 
-        GameSimulator sim = new GameSimulator(game, p);
+        GameSimulator sim = createSimulator(game, p);
         int origScore = sim.getScoreForOrigGame().value;
         int score = sim.simulateSpellAbility(playMerchantSa).value;
         assertTrue(String.format("score=%d vs. origScore=%d",  score, origScore), score > origScore);
@@ -254,7 +258,7 @@ public class GameSimulatorTest extends TestCase {
         assertTrue(c2.hasStartOfKeyword("(Echo unpaid)"));
         c2.removeAllExtrinsicKeyword("(Echo unpaid)");
 
-        GameSimulator sim = new GameSimulator(game, p);
+        GameSimulator sim = createSimulator(game, p);
         Game simGame = sim.getSimulatedGameState();
         Card c1Copy = findCardWithName(simGame, c1Name);
         assertTrue(c1Copy.hasStartOfKeyword("(Echo unpaid)"));
@@ -274,7 +278,7 @@ public class GameSimulatorTest extends TestCase {
 
         assertEquals(20, p.getOpponent().getLife());
         
-        GameSimulator sim = new GameSimulator(game, p);
+        GameSimulator sim = createSimulator(game, p);
         Game simGame = sim.getSimulatedGameState();
 
         SpellAbility unmorphSA = findSAWithPrefix(ripper, "Morph - Reveal a black card");
@@ -294,7 +298,7 @@ public class GameSimulatorTest extends TestCase {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p1);
         game.getAction().checkStateEffects(true);
         
-        GameSimulator sim = new GameSimulator(game, p1);
+        GameSimulator sim = createSimulator(game, p1);
         Game simGame = sim.getSimulatedGameState();
 
         SpellAbility fractureSa = fractureP1.getSpellAbilities().get(0);
@@ -321,7 +325,7 @@ public class GameSimulatorTest extends TestCase {
         minusTwo.setActivatingPlayer(p);
         assertTrue(minusTwo.canPlay());
 
-        GameSimulator sim = new GameSimulator(game, p);
+        GameSimulator sim = createSimulator(game, p);
         sim.simulateSpellAbility(minusTwo);
         Game simGame = sim.getSimulatedGameState();
         Card vampireToken = findCardWithName(simGame, "Vampire");
@@ -360,7 +364,7 @@ public class GameSimulatorTest extends TestCase {
 
         SpellAbility manifestSA = soulSummons.getSpellAbilities().get(0);
         
-        GameSimulator sim = new GameSimulator(game, p);
+        GameSimulator sim = createSimulator(game, p);
         sim.simulateSpellAbility(manifestSA);
         Game simGame = sim.getSimulatedGameState();
         Card manifestedCreature = findCardWithName(simGame, "");
@@ -371,7 +375,7 @@ public class GameSimulatorTest extends TestCase {
         assertEquals(2, manifestedCreature.getNetPower());
         assertFalse(manifestedCreature.hasKeyword("Flying"));
 
-        GameSimulator sim2 = new GameSimulator(simGame, simGame.getPlayers().get(1));
+        GameSimulator sim2 = createSimulator(simGame, simGame.getPlayers().get(1));
         sim2.simulateSpellAbility(unmanifestSA);
         Game simGame2 = sim2.getSimulatedGameState();
         Card ornithopter = findCardWithName(simGame2, "Ornithopter");
@@ -398,7 +402,7 @@ public class GameSimulatorTest extends TestCase {
 
         SpellAbility manifestSA = soulSummons.getSpellAbilities().get(0);
         
-        GameSimulator sim = new GameSimulator(game, p);
+        GameSimulator sim = createSimulator(game, p);
         sim.simulateSpellAbility(manifestSA);
         Game simGame = sim.getSimulatedGameState();
         Card manifestedCreature = findCardWithName(simGame, "");
@@ -426,7 +430,7 @@ public class GameSimulatorTest extends TestCase {
         SpellAbility becomeDragonSA = findSAWithPrefix(sarkhan, "+1");
         assertNotNull(becomeDragonSA);
 
-        GameSimulator sim = new GameSimulator(game, p);
+        GameSimulator sim = createSimulator(game, p);
         sim.simulateSpellAbility(becomeDragonSA);
         Game simGame = sim.getSimulatedGameState();
         Card sarkhanSim = findCardWithName(simGame, sarkhanCardName);
@@ -459,7 +463,7 @@ public class GameSimulatorTest extends TestCase {
 
         PossibleTargetSelector selector = new PossibleTargetSelector(game, p, sa);
         while (selector.selectNextTargets()) {
-            GameSimulator sim = new GameSimulator(game, p);
+            GameSimulator sim = createSimulator(game, p);
             sim.simulateSpellAbility(sa);
             Game simGame = sim.getSimulatedGameState();
             Card thopterSim = findCardWithName(simGame, ornithoperCardName);

@@ -18,27 +18,28 @@ import forge.game.spellability.TargetChoices;
 public class SpellAbilityPicker {
     private Game game;
     private Player player;
-    private int recursionDepth;
     private Score bestScore;
+    private boolean printOutput;
 
     public SpellAbilityPicker(Game game, Player player) {
         this.game = game;
         this.player = player;
     }
     
-    public void setRecursionDepth(int depth) {
-        recursionDepth = depth;
-    }
-    
     private void print(String str) {
-        if (recursionDepth == 0) {
+        if (printOutput) {
             System.out.println(str);
         }
     }
-
-    public SpellAbility chooseSpellAbilityToPlay(final ArrayList<SpellAbility> all, boolean skipCounter) {
+    
+    public SpellAbility chooseSpellAbilityToPlay(SimulationController controller, final ArrayList<SpellAbility> all, boolean skipCounter) {
+        printOutput = false;
+        if (controller == null) {
+            controller = new SimulationController();
+            printOutput = true;
+        }
         print("---- choose ability  (phase = " +  game.getPhaseHandler().getPhase() + ")");
-
+        
         ArrayList<SpellAbility> candidateSAs = new ArrayList<>();
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
             // Don't add Counterspells to the "normal" playcard lookups
@@ -64,13 +65,13 @@ public class SpellAbilityPicker {
         }
         SpellAbility bestSa = null;
         print("Evaluating...");
-        GameSimulator simulator = new GameSimulator(game, player);
+        GameSimulator simulator = new GameSimulator(controller, game, player);
         // FIXME: This is wasteful, we should re-use the same simulator...
         Score origGameScore = simulator.getScoreForOrigGame();
         Score bestSaValue = origGameScore;
         for (final SpellAbility sa : candidateSAs) {
             print(abilityToString(sa));;
-            Score value = evaluateSa(sa);
+            Score value = evaluateSa(controller, sa);
             if (value.value > bestSaValue.value) {
                 bestSaValue = value;
                 bestSa = sa;
@@ -148,11 +149,10 @@ public class SpellAbilityPicker {
         return AiPlayDecision.WillPlay;
     }
 
-    private Score evaluateSa(SpellAbility sa) {
+    private Score evaluateSa(SimulationController controller, SpellAbility sa) {
         GameSimulator.debugPrint("Evaluate SA: " + sa);
         if (!sa.usesTargeting()) {
-            GameSimulator simulator = new GameSimulator(game, player);
-            simulator.setRecursionDepth(recursionDepth);
+            GameSimulator simulator = new GameSimulator(controller, game, player);
             return simulator.simulateSpellAbility(sa);
         }
         GameSimulator.debugPrint("Checking out targets");
@@ -161,8 +161,7 @@ public class SpellAbilityPicker {
         TargetChoices tgt = null;
         while (selector.selectNextTargets()) {
             GameSimulator.debugPrint("Trying targets: " + sa.getTargets().getTargetedString());
-            GameSimulator simulator = new GameSimulator(game, player);
-            simulator.setRecursionDepth(recursionDepth);
+            GameSimulator simulator = new GameSimulator(controller, game, player);
             Score score = simulator.simulateSpellAbility(sa);
             if (score.value > bestScore.value) {
                 bestScore = score;

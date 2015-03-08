@@ -1173,7 +1173,7 @@ public class AiController {
             return null;
         
         if (useSimulation) {
-            return simPicker.chooseSpellAbilityToPlay(all, skipCounter);
+            return simPicker.chooseSpellAbilityToPlay(null, all, skipCounter);
         }
         
         Collections.sort(all, saComparator); // put best spells first

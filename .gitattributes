@@ -154,6 +154,7 @@ forge-ai/src/main/java/forge/ai/simulation/GameCopier.java -text
 forge-ai/src/main/java/forge/ai/simulation/GameSimulator.java -text
 forge-ai/src/main/java/forge/ai/simulation/GameStateEvaluator.java -text
 forge-ai/src/main/java/forge/ai/simulation/PossibleTargetSelector.java -text
+forge-ai/src/main/java/forge/ai/simulation/SimulationController.java -text
 forge-ai/src/main/java/forge/ai/simulation/SpellAbilityPicker.java -text
 forge-ai/src/main/java/forge/ai/simulation/TODO.txt -text
 forge-core/.classpath -text
