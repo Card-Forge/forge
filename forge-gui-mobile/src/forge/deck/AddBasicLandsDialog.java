@@ -94,7 +94,7 @@ public class AddBasicLandsDialog extends FDialog {
         this(deck, defaultLandSet, null, callback0);
     }
     public AddBasicLandsDialog(Deck deck, CardEdition defaultLandSet, CardPool restrictedCatalog0, final Callback<CardPool> callback0) {
-        super("Add Basic Lands to " + deck.getName(), 2);
+        super("Add Basic Lands \n" + deck.getName(), 2);
 
         callback = callback0;
 
@@ -246,7 +246,7 @@ public class AddBasicLandsDialog extends FDialog {
         y += panelHeight + padding;
         lblDeckInfo.setBounds(x, y, w, lblDeckInfo.getPreferredHeight(w));
 
-        return y;
+        return y + lblDeckInfo.getHeight() + padding;
     }
 
     private void updateDeckInfoLabel() {
