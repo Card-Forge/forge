@@ -48,7 +48,7 @@ public abstract class FDialog extends FOverlay {
         buttonCount = buttonCount0;
         prompt = add(new VPrompt("", "", null, null));
         if (buttonCount < 3) {
-            title0.replaceAll(" - ", "\n"); //breakup into lines
+            title0 = title0.replaceAll(" - ", "\n"); //breakup into lines
             btnMiddle = null;
             prompt.setMessage(title0); //only put title in message if no third button
         }
