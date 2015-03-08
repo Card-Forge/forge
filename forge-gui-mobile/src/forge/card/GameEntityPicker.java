@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import forge.Forge;
+import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -27,6 +27,8 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
                 new PickerTab(revealList, revealListCaption, revealListImage, 0)
         }, false);
 
+        setHeight(FOptionPane.getMaxDisplayObjHeight());
+
         optionPane = new FOptionPane(null, title, null, this,
                 isOptional ? new String[] { "OK", "Cancel" } : new String[] { "OK" }, 0, new Callback<Integer>() {
                     @Override
@@ -38,9 +40,12 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
                             callback.run(null);
                         }
                     }
-                });
-
-        setHeight(Forge.getCurrentScreen().getHeight() - 2 * FOptionPane.PADDING);
+                }) {
+            @Override
+            protected boolean padAboveAndBelow() {
+                return false; //allow list to go straight up against buttons
+            }
+        };
     }
 
     public void show() {
@@ -91,6 +96,11 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
                         parentScreen.optionPane.setResult(0);
                     }
                 }
+
+                @Override
+                public void drawOverlay(Graphics g) {
+                    //don't draw border
+                }
             });
             if (maxChoices > 0) {
                 list.addSelectedIndex(0);
@@ -106,12 +116,11 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
 
         @Override
         protected void doLayout(float width, float height) {
-            float x = FOptionPane.PADDING;
-            float y = FOptionPane.PADDING;
-            float w = width - 2 * x;
-            txtSearch.setBounds(x, y, w, txtSearch.getHeight());
-            y += txtSearch.getHeight() * 1.25f;
-            list.setBounds(x, y, w, height - y);
+            float padding = txtSearch.getHeight() * 0.25f;
+            float y = padding;
+            txtSearch.setBounds(0, y, width, txtSearch.getHeight());
+            y += txtSearch.getHeight() + padding;
+            list.setBounds(0, y, width, height - y);
         }
     }
 }

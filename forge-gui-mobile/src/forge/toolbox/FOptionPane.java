@@ -1,5 +1,7 @@
 package forge.toolbox;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
@@ -130,6 +132,14 @@ public class FOptionPane extends FDialog {
         else {
             cardDisplay = null;
         }
+
+        //if title not specified and message is a single line, show message as title
+        if (StringUtils.isEmpty(title) && !message.contains("\n")) {
+            title = message;
+            message = null;
+            icon = null;
+        }
+
         final FOptionPane optionPane = new FOptionPane(message, title, icon, cardDisplay, options, defaultOption, callback);
         optionPane.show();
     }
@@ -253,6 +263,10 @@ public class FOptionPane extends FDialog {
         }
     }
 
+    protected boolean padAboveAndBelow() {
+        return true;
+    }
+
     @Override
     protected float layoutAndGetHeight(float width, float maxHeight) {
         float x = PADDING;
@@ -294,14 +308,19 @@ public class FOptionPane extends FDialog {
             }
         }
 
-        x = PADDING;
         if (promptHeight > 0) {
             y += promptHeight + PADDING;
         }
 
         if (displayObj != null) {
-            displayObj.setBounds(x - PADDING, y - PADDING, width, displayObj.getHeight());
-            y += displayObj.getHeight() - PADDING;
+            if (!padAboveAndBelow()) {
+                y -= PADDING;
+            }
+            displayObj.setBounds(0, y, width, displayObj.getHeight());
+            y += displayObj.getHeight();
+            if (padAboveAndBelow()) {
+                y += PADDING;
+            }
         }
         return y;
     }

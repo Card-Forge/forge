@@ -129,7 +129,12 @@ public class ListChooser<T> extends FContainer {
                     callback.run(new ArrayList<T>());
                 }
             }
-        });
+        }) {
+            @Override
+            protected boolean padAboveAndBelow() {
+                return false; //allow list to go straight up against buttons
+            }
+        };
     }
 
     private void updateHeight() {
