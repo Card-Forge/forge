@@ -1,13 +1,16 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Lists;
+
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.trigger.TriggerType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class FightEffect extends SpellAbilityEffect {
@@ -43,6 +46,11 @@ public class FightEffect extends SpellAbilityEffect {
         final int dmg2 = fightToughness ? fighters.get(1).getNetToughness() : fighters.get(1).getNetPower();
         fighters.get(1).addDamage(dmg1, fighters.get(0));
         fighters.get(0).addDamage(dmg2, fighters.get(1));
+        for (Card c : fighters) {
+        	final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        	runParams.put("Fighter", c);
+        	sa.getActivatingPlayer().getGame().getTriggerHandler().runTrigger(TriggerType.Fight, runParams, false);
+        }
     }
 
     private static List<Card> getFighters(SpellAbility sa) {
