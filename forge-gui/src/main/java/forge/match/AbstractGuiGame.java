@@ -589,13 +589,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return showInputDialog(message, title, null, "", null);
     }
 
-    
     @Override
     public String showInputDialog(final String message, final String title, final FSkinProp icon) {
         return showInputDialog(message, title, icon, "", null);
     }
 
-    
     @Override
     public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput) {
         return showInputDialog(message, title, icon, initialInput, null);

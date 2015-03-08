@@ -6,11 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.GuiBase;
@@ -444,7 +446,10 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public boolean confirm(final CardView c, final String question, final boolean defaultIsYes, final String[] options) {
+    public boolean confirm(final CardView c, final String question, final boolean defaultIsYes, String[] options) {
+        if (options == null) {
+            options = new String[] { "Yes", "No" };
+        }
         return FOptionPane.showCardOptionDialog(c, question, "", SOptionPane.INFORMATION_ICON, options, defaultIsYes ? 1 : 0) == 1;
     }
 
