@@ -22,6 +22,10 @@ public abstract class GameObjectMap {
         return (Card) map((GameObject) c);
     }
 
+    public GameEntity map(GameEntity e) {
+        return (GameEntity) map((GameObject) e);
+    }
+
     public CardCollectionView mapCollection(CardCollectionView cards) {
         CardCollection collection = new CardCollection();
         for (Card c : cards) {
