@@ -5,8 +5,7 @@ PT:2/2
 K:Vigilance
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDelay | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, return it to the battlefield transformed under your control at the beginning of the next end step.
 SVar:TrigDelay:AB$ DelayedTrigger | Cost$ 0 | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ TriggeredCard | TriggerDescription$ return CARDNAME to the battlefield transformed
-SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ DelayTriggerRemembered | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ TrigTransform
-SVar:TrigTransform:DB$ SetState | Cost$ 0 | Defined$ DelayTriggerRemembered | Mode$ Transform
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ DelayTriggerRemembered | Origin$ Graveyard | Destination$ Battlefield | Transformed$ True | GainControl$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loyal_cathar.jpg
 AlternateMode:DoubleFaced
 Oracle:Vigilance\nWhen Loyal Cathar dies, return it to the battlefield transformed under your control at the beginning of the next end step.

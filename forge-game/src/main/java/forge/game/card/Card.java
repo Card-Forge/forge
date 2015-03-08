@@ -410,6 +410,41 @@ public class Card extends GameEntity implements Comparable<Card> {
         preFaceDownState = preCharacteristic;
     }
 
+    public boolean changeCardState(final String mode, final String customState) {
+        if (mode == null)
+            return changeToState(CardStateName.smartValueOf(customState));
+
+        // flip and face-down don't overlap. That is there is no chance to turn face down a flipped permanent
+        // and then any effect have it turn upface again and demand its former flip state to be restored
+        // Proof: Morph cards never have ability that makes them flip, Ixidron does not suppose cards to be turned face up again, 
+        // Illusionary Mask affects cards in hand.
+        CardStateName oldState = getCurrentStateName();
+        if (mode.equals("Transform") && isDoubleFaced()) {
+            if (hasKeyword("CARDNAME can't transform")) {
+                return false;
+            }
+            CardStateName destState = oldState == CardStateName.Transformed ? CardStateName.Original : CardStateName.Transformed;
+            return changeToState(destState);
+            
+        } else if (mode.equals("Flip") && isFlipCard()) {
+            CardStateName destState = oldState == CardStateName.Flipped ? CardStateName.Original : CardStateName.Flipped;
+            return changeToState(destState);
+        } else if (mode.equals("TurnFace")) {
+            if (oldState == CardStateName.Original) {
+                // Reset cloned state if Vesuvan Shapeshifter
+                if (isCloned() && getState(CardStateName.Cloner).getName().equals("Vesuvan Shapeshifter")) {
+                    switchStates(CardStateName.Cloner, CardStateName.Original, false);
+                    setState(CardStateName.Original, false);
+                    clearStates(CardStateName.Cloner, false);
+                }
+                return turnFaceDown();
+            } else if (oldState == CardStateName.FaceDown) {
+                return turnFaceUp();
+            }
+        }
+        return false;
+    }
+
     public Card manifest(Player p) {
         // Turn Face Down (even if it's DFC).
         CardState originalCard = this.getState(CardStateName.Original);
