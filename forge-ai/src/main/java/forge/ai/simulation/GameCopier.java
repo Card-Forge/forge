@@ -154,7 +154,7 @@ public class GameCopier {
             otherCard.setTimestamp(card.getTimestamp());
             otherCard.setSickness(card.hasSickness());
             if (card.isEnchanting()) {
-                otherCard.setEnchanting(cardMap.get(card.getEnchanting()));
+                otherCard.setEnchanting(gameObjectMap.map(card.getEnchanting()));
             }
             if (card.isEquipping()) {
                 otherCard.equipCard(cardMap.get(card.getEquipping()));
