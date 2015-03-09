@@ -4,7 +4,7 @@ import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.spellability.SpellAbility;
 
 public class SimulationController {
-    private static int MAX_DEPTH = 5;
+    private static int MAX_DEPTH = 2;
     
     private int recursionDepth;
     
