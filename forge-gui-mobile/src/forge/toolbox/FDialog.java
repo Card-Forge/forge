@@ -88,7 +88,7 @@ public abstract class FDialog extends FOverlay {
     private void updateDisplayTop() {
         //shift all children into position
         float offsetDy = lastDy;
-        lastDy = getHeight() - totalHeight * revealPercent - getBottomMargin();
+        lastDy = getHeight() - (totalHeight + getBottomMargin()) * revealPercent;
         float dy = lastDy - offsetDy;
         for (FDisplayObject child : getChildren()) {
             child.setTop(child.getTop() + dy);
@@ -183,7 +183,7 @@ public abstract class FDialog extends FOverlay {
         if (revealPercent == 0) { return; }
 
         float x = 0;
-        float y = getHeight() - totalHeight * revealPercent - getBottomMargin();
+        float y = getHeight() - (totalHeight + getBottomMargin()) * revealPercent;
         float w = getWidth();
         float h = totalHeight - VPrompt.HEIGHT;
         g.drawImage(FSkinTexture.BG_TEXTURE, x, y, w, h);
@@ -196,7 +196,7 @@ public abstract class FDialog extends FOverlay {
         float dx = SWIPE_BAR_HEIGHT * 0.7f;
         float startX = dx * 0.7f;
         float x = startX;
-        float y = getHeight() - totalHeight * revealPercent - SWIPE_BAR_HEIGHT - getBottomMargin();
+        float y = getHeight() - (totalHeight + getBottomMargin()) * revealPercent - SWIPE_BAR_HEIGHT;
         float w = getWidth();
         float dotRadius = SWIPE_BAR_HEIGHT / 6;
         float dotTop = y + SWIPE_BAR_HEIGHT / 2;
@@ -260,14 +260,14 @@ public abstract class FDialog extends FOverlay {
         private final PhysicsObject physicsObj;
 
         private RevealAnimation(float velocity) {
-            physicsObj = new PhysicsObject(new Vector2(0, totalHeight * revealPercent), new Vector2(0, velocity));
+            physicsObj = new PhysicsObject(new Vector2(0, (totalHeight + getBottomMargin()) * revealPercent), new Vector2(0, velocity));
         }
 
         @Override
         protected boolean advance(float dt) {
             if (physicsObj.isMoving()) { //avoid storing last fling stop time if scroll manually stopped
                 physicsObj.advance(dt);
-                float newRevealPercent = physicsObj.getPosition().y / totalHeight;
+                float newRevealPercent = physicsObj.getPosition().y / (totalHeight + getBottomMargin());
                 if (newRevealPercent < 0) {
                     newRevealPercent = 0;
                 }
