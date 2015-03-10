@@ -15,7 +15,7 @@ public abstract class ForgeAnimation {
 
         activeAnimations.add(this);
         if (activeAnimations.size() == 1) { //if first animation being started, ensure continuous rendering turned on
-            Gdx.graphics.setContinuousRendering(true);
+            Forge.startContinuousRendering();
         }
     }
 
@@ -31,9 +31,7 @@ public abstract class ForgeAnimation {
         }
 
         if (activeAnimations.isEmpty()) { //when all animations have ended, turn continuous rendering back off
-            if (Forge.isInitialLoadFinished()) { //don't turn back on continuous rendering if initial load isn't finished yet
-                Gdx.graphics.setContinuousRendering(false);
-            }
+            Forge.stopContinuousRendering();
         }
     }
 
@@ -44,9 +42,7 @@ public abstract class ForgeAnimation {
             animation.onEnd(true);
         }
         activeAnimations.clear();
-        if (Forge.isInitialLoadFinished()) { //don't turn back on continuous rendering if initial load isn't finished yet
-            Gdx.graphics.setContinuousRendering(false);
-        }
+        Forge.stopContinuousRendering();
     }
 
     //return true if animation should continue, false to stop the animation

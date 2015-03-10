@@ -19,8 +19,7 @@ package forge.screens.settings;
 
 import java.net.Proxy;
 
-import com.badlogic.gdx.Gdx;
-
+import forge.Forge;
 import forge.UiCommand;
 import forge.download.GuiDownloadService;
 import forge.download.GuiDownloadZipService;
@@ -45,7 +44,7 @@ public class GuiDownloader extends FDialog {
     private final UiCommand cmdClose = new UiCommand() {
         @Override
         public void run() {
-            Gdx.graphics.setContinuousRendering(false);
+            Forge.stopContinuousRendering();
             service.setCancel(true);
             hide();
             if (callback != null) {
@@ -91,7 +90,7 @@ public class GuiDownloader extends FDialog {
         progressBar.reset();
         progressBar.setShowProgressTrail(true);
         progressBar.setDescription("Scanning for existing items...");
-        Gdx.graphics.setContinuousRendering(true);
+        Forge.startContinuousRendering();
 
         show();
 
@@ -99,7 +98,7 @@ public class GuiDownloader extends FDialog {
             @Override
             public void run() {
                 if (!(service instanceof GuiDownloadZipService)) { //retain continuous rendering for zip service
-                    Gdx.graphics.setContinuousRendering(false);
+                    Forge.stopContinuousRendering();
                 }
                 progressBar.setShowProgressTrail(false);
             }

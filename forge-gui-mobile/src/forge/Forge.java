@@ -49,7 +49,7 @@ public class Forge implements ApplicationListener {
     private static SplashScreen splashScreen;
     private static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
-    private static boolean initialLoadFinished;
+    private static int continuousRenderingCount = 1; //initialize to 1 since continuous rendering is the default
     private static final Stack<FScreen> screens = new Stack<FScreen>();
     public static HostedMatch hostedMatch;
 
@@ -109,8 +109,7 @@ public class Forge implements ApplicationListener {
     }
 
     private void afterDbLoaded() {
-        initialLoadFinished = true;
-        Gdx.graphics.setContinuousRendering(false); //save power consumption by disabling continuous rendering once assets loaded
+        stopContinuousRendering(); //save power consumption by disabling continuous rendering once assets loaded
 
         FSkin.loadFull(splashScreen);
 
@@ -130,8 +129,17 @@ public class Forge implements ApplicationListener {
         return deviceAdapter;
     }
 
-    public static boolean isInitialLoadFinished() {
-        return initialLoadFinished;
+    public static void startContinuousRendering() {
+        if (++continuousRenderingCount == 1) {
+            //only set continuous rendering to true if needed
+            Gdx.graphics.setContinuousRendering(true);
+        }
+    }
+    public static void stopContinuousRendering() {
+        if (continuousRenderingCount > 0 && --continuousRenderingCount == 0) {
+            //only set continuous rendering to false if all continuous rendering requests have been ended
+            Gdx.graphics.setContinuousRendering(false);
+        }
     }
 
     public static void showMenu() {
