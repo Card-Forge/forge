@@ -270,7 +270,9 @@ public class GauntletScreen extends LaunchScreen {
     protected boolean buildLaunchParams(LaunchParams launchParams) {
         final GauntletData gauntlet = FModel.getGauntletData();
         launchParams.gameType = GameType.Gauntlet;
-        launchParams.players.add(new RegisteredPlayer(gauntlet.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer()));
+        RegisteredPlayer humanPlayer = new RegisteredPlayer(gauntlet.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
+        launchParams.humanPlayers.add(humanPlayer);
+        launchParams.players.add(humanPlayer);
         launchParams.players.add(new RegisteredPlayer(gauntlet.getDecks().get(gauntlet.getCompleted())).setPlayer(GamePlayerUtil.createAiPlayer()));
         return true;
     }
