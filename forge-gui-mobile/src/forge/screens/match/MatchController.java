@@ -450,7 +450,7 @@ public class MatchController extends AbstractGuiGame {
         if (options == null) {
             options = new String[] { "Yes", "No" };
         }
-        return FOptionPane.showCardOptionDialog(c, question, "", SOptionPane.INFORMATION_ICON, options, defaultIsYes ? 1 : 0) == 1;
+        return FOptionPane.showCardOptionDialog(c, question, "", SOptionPane.INFORMATION_ICON, options, defaultIsYes ? 0 : 1) == 0;
     }
 
     @Override
