@@ -510,20 +510,17 @@ public class ComputerUtil {
         if (isOptional && source.getActivatingPlayer().isOpponentOf(ai)) { 
             return sacrificed; // sacrifice none 
         }
-        if (isOptional && source.hasParam("Devour")) {
+        if (isOptional && source.hasParam("Devour") || source.hasParam("Exploit")) {
             remaining = CardLists.filter(remaining, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    if ((c.getCMC() <= 1 && c.getNetPower() < 3)
-                            || c.getNetPower() + c.getNetToughness() <= 3) {
+                    if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) < 190 || c.hasKeyword("Undying")) {
                         return true;
                     }
                     return false;
                 }
             });
         }
-        CardLists.sortByCmcDesc(remaining);
-        Collections.reverse(remaining);
 
         final int max = Math.min(remaining.size(), amount);
 
@@ -559,10 +556,10 @@ public class ComputerUtil {
         }
 
         Card c;
-        if (CardLists.getNotType(remaining, "Creature").size() == 0) {
+        if (CardLists.getNotType(remaining, "Creature").isEmpty()) {
             c = ComputerUtilCard.getWorstCreatureAI(remaining);
         }
-        else if (CardLists.getNotType(remaining, "Land").size() == 0) {
+        else if (CardLists.getNotType(remaining, "Land").isEmpty()) {
             c = ComputerUtilCard.getWorstLand(CardLists.filter(remaining, CardPredicates.Presets.LANDS));
         }
         else {
