@@ -106,24 +106,24 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
         Card divCommandZoneSources = new Card(-4, game);
         divCommandZoneSources.setName("--CARDS IN THE COMMAND ZONE:--");
 
-        if (permanentSources.size() > 0) {
+        if (!permanentSources.isEmpty()) {
             sourcesToChooseFrom.add(divPermanentSources);
             sourcesToChooseFrom.addAll(permanentSources);
         }
-        if (stackSources.size() > 0) {
+        if (!stackSources.isEmpty()) {
             sourcesToChooseFrom.add(divStackSources);
             sourcesToChooseFrom.addAll(stackSources);
         }
-        if (referencedSources.size() > 0) {
+        if (!referencedSources.isEmpty()) {
             sourcesToChooseFrom.add(divReferencedSources);
             sourcesToChooseFrom.addAll(referencedSources);
         }
-        if (commandZoneSources.size() > 0) {
+        if (!commandZoneSources.isEmpty()) {
             sourcesToChooseFrom.add(divCommandZoneSources);
             sourcesToChooseFrom.addAll(commandZoneSources);
         }
 
-        if (sourcesToChooseFrom.size() == 0) {
+        if (sourcesToChooseFrom.isEmpty()) {
             return;
         }
 
@@ -138,7 +138,7 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
                     Card o = null;
                     do {
                         o = p.getController().chooseSingleEntityForEffect(sourcesToChooseFrom, sa, choiceTitle);
-                    } while (o.equals(divPermanentSources) || o.equals(divStackSources) || o.equals(divReferencedSources) || o.equals(divCommandZoneSources));
+                    } while (o == null);
                     chosen.add(o);
                     sourcesToChooseFrom.remove(o);
                 }
