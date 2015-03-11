@@ -397,6 +397,10 @@ public class ManaCostAdjustment {
                 if (!sa.isCycling()) {
                     return;
                 }
+            } else if (params.get("Type").equals("Dash")) {
+                if (!sa.isDash()) {
+                    return;
+                }
             } else if (params.get("Type").equals("Equip")) {
                 if (!(sa instanceof AbilityActivated) || !sa.hasParam("Equip")) {
                     return;
