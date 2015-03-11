@@ -30,6 +30,49 @@ Dragonlord Silumgar
 Dragon Tempest
 Sandcrafter Mage
 Sprinting Warbrute
+Foe-Razer Regent
+Enduring Scalelord
+Dragonlord Kolaghan
+Sarkhan's Triumph
+Warbringer
+Ojutai's Summons
+Profound Journey
+Boltwing Marauder
+Harbinger of the Hunt
+Radiant Purge
+Sunscorch Regent
+Narset Transcendent
+Necromaster Dragon
+Ojutai's Command
+Pristine Skywise
+Dragonlord's Servant
+Shaman of Forgotten Ways
+Thunderbreak Regent
+Aerie Bowmasters
+Aven Sunstriker
+Gudul Lurker
+Marang River Skeleton
+Stormcrag Elemental
+Atarka's Command
+Dragonlord Dromoka
+Lightning Berserker
+Zurgo Bellstriker
+Anticipate
+Arashin Foremost
+Ojutai Exemplars
+Cunning Breezedancer
+Den Protector
+Dragonlord Atarka
+Roast
+Shorecrasher Elemental
+Silumgar Butcher
+
+
+--------------------
+New ORI branch Cards
+--------------------
+
+Liliana, Heretical Healer
 
 
 ------------
