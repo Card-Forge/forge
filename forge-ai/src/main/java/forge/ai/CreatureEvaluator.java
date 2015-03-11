@@ -21,7 +21,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
     public int evaluateCreature(final Card c) {
         int value = 80;
         if (!c.isToken()) {
-            value += addValue(80, "non-token"); // tokens should be worth less than actual cards
+            value += addValue(20, "non-token"); // tokens should be worth less than actual cards
         }
         int power = getEffectivePower(c);
         final int toughness = getEffectiveToughness(c);
