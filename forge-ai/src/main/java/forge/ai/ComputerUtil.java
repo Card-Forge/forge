@@ -41,6 +41,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
@@ -506,11 +507,33 @@ public class ComputerUtil {
             final boolean destroy, final boolean isOptional) {
         CardCollection remaining = new CardCollection(cardlist);
         final CardCollection sacrificed = new CardCollection();
+        final Card host = source.getHostCard();
 
         if (isOptional && source.getActivatingPlayer().isOpponentOf(ai)) { 
             return sacrificed; // sacrifice none 
         }
         if (isOptional && source.hasParam("Devour") || source.hasParam("Exploit")) {
+        	if (source.hasParam("Exploit")) {
+        		for (Trigger t : host.getTriggers()) {
+        			if (t.getMode() == TriggerType.Exploited) {
+        	            final String execute = t.getMapParams().get("Execute");
+        	            if (execute == null) {
+        	                continue;
+        	            }
+        	            final SpellAbility exSA = AbilityFactory.getAbility(host.getSVar(execute), host);
+
+        	            exSA.setActivatingPlayer(ai);
+        	            exSA.setTrigger(true);
+
+        	            // Run non-mandatory trigger.
+        	            // These checks only work if the Executing SpellAbility is an Ability_Sub.
+        	            if ((exSA instanceof AbilitySub) && !SpellApiToAi.Converter.get(exSA.getApi()).doTriggerAI(ai, exSA, false)) {
+        	                // AI would not run this trigger if given the chance
+        	                return sacrificed;
+        	            }
+        			}
+        		}
+        	}
             remaining = CardLists.filter(remaining, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
