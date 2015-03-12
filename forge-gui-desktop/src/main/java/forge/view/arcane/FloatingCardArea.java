@@ -264,7 +264,7 @@ public class FloatingCardArea extends CardArea {
                     cardPanel.setDisplayEnabled(true);
                 }
                 else {
-                    cardPanel.updateImage(); //ensure image updated in case visibility changed
+                    cardPanel.setCard(card); //ensure card view updated
                 }
                 cardPanels.add(cardPanel);
             }

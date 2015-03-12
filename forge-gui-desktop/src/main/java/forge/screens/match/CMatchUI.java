@@ -472,6 +472,7 @@ public final class CMatchUI
             if (hand != null) {
                 CardPanel cp = hand.getHandArea().getCardPanel(c.getId());
                 if (cp != null) {
+                    cp.setCard(c); //ensure card view updated
                     cp.repaintOverlays();
                 }
             }

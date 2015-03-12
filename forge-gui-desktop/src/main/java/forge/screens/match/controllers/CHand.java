@@ -125,14 +125,8 @@ public class CHand implements ICDoc {
         }
 
         synchronized (ordering) {
-            // Remove old cards from ordering
-            ordering.retainAll(cards);
-            // Append new cards to ordering
-            for (final CardView c : cards) {
-                if (!ordering.contains(c)) {
-                    ordering.add(c);
-                }
-            }
+            ordering.clear();
+            ordering.addAll(cards);
         }
 
         final List<CardPanel> placeholders = new ArrayList<CardPanel>();
@@ -144,6 +138,9 @@ public class CHand implements ICDoc {
                 cardPanel = new CardPanel(matchUI, card);
                 cardPanel.setDisplayEnabled(false);
                 placeholders.add(cardPanel);
+            }
+            else {
+                cardPanel.setCard(card); //ensure card view is updated
             }
             cardPanels.add(cardPanel);
         }

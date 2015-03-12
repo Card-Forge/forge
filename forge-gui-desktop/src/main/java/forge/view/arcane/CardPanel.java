@@ -533,15 +533,14 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     /** {@inheritDoc} */
     @Override
     public final void setCard(final CardView cardView) {
-        if ((getCard() != null) && getCard().equals(cardView) && isAnimationPanel
-                && imagePanel.hasImage()) {
-            return;
-        }
-
-        card = cardView;
+        CardView oldCard = card;
+        card = cardView; //always update card in case new card view instance for same card
 
         if (imagePanel == null) {
             return;
+        }
+        if (oldCard != null && oldCard.equals(card) && isAnimationPanel && imagePanel.hasImage()) {
+            return; //prevent unnecessary update logic for animation panel
         }
 
         updateText();
