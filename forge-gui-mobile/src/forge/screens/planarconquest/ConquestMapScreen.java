@@ -8,6 +8,7 @@ import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
 import forge.card.CardDetailUtil;
 import forge.card.CardRenderer;
 import forge.card.CardDetailUtil.DetailColors;
@@ -119,6 +120,7 @@ public class ConquestMapScreen extends FScreen {
             float colWidth = w / cols;
             float rowHeight = h / rows;
             float iconSize = Math.min(colWidth, rowHeight) * 0.5f;
+            float iconBackdropRadius = iconSize * 0.75f;
             float iconOffsetX = (colWidth - iconSize) / 2;
             float iconOffsetY = (rowHeight - iconSize) / 2;
             float lineThickness = iconSize / 4;
@@ -146,6 +148,7 @@ public class ConquestMapScreen extends FScreen {
                 GridPosition pos = path[i];
                 x0 = x + colWidth * pos.col + iconOffsetX;
                 y0 = y + rowHeight * pos.row + iconOffsetY;
+                g.fillCircle(Color.BLACK, x0 + iconSize / 2, y0 + iconSize / 2, iconBackdropRadius);
                 g.drawImage((FImage)opponents.get(i).getMapIcon(), x0, y0, iconSize, iconSize);
             }
         }
