@@ -62,6 +62,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
         
         public boolean accept(CardEdition ed) {
+            if (ed == null)  return false;
             return !filterSets || ed.getType() == Type.CORE || ed.getType() == Type.EXPANSION || ed.getType() == Type.REPRINT; 
         }
     }
