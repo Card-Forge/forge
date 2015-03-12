@@ -8,7 +8,6 @@ import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
-import forge.assets.FSkinImage;
 import forge.card.CardDetailUtil;
 import forge.card.CardRenderer;
 import forge.card.CardDetailUtil.DetailColors;
@@ -23,6 +22,8 @@ import forge.toolbox.FList.ListItemRenderer;
 import forge.util.FCollectionView;
 
 public class ConquestMapScreen extends FScreen {
+    private static final Color FOG_OF_WAR_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.6f);
+
     private final FList<Region> lstRegions;
     private ConquestData model;
 
@@ -115,6 +116,8 @@ public class ConquestMapScreen extends FScreen {
                 }
             }
 
+            int regionCount = model.getCurrentPlane().getRegions().size();
+
             //draw path with opponents
             float x0, y0, prevX = x + w / 2, prevY = y + h;
             float colWidth = w / cols;
@@ -131,7 +134,7 @@ public class ConquestMapScreen extends FScreen {
                 GridPosition pos = path[i];
                 x0 = x + colWidth * pos.col + colWidth / 2;
                 y0 = y + rowHeight * pos.row + rowHeight / 2;
-                if (i > 0 || index < model.getCurrentPlane().getRegions().size() - 1) { //extend path from previous region if any
+                if (i > 0 || index < regionCount - 1) { //extend path from previous region if any
                     g.drawLine(lineThickness, Color.WHITE, x0, y0, prevX, prevY);
                 }
                 prevX = x0;
@@ -150,6 +153,12 @@ public class ConquestMapScreen extends FScreen {
                 y0 = y + rowHeight * pos.row + iconOffsetY;
                 g.fillCircle(Color.BLACK, x0 + iconSize / 2, y0 + iconSize / 2, iconBackdropRadius);
                 g.drawImage((FImage)opponents.get(i).getMapIcon(), x0, y0, iconSize, iconSize);
+            }
+
+            //draw fog of war overlay if region not yet unlocked
+            int startIndex = (regionCount - index - 1) * opponents.size();
+            if (startIndex > model.getCurrentPlaneData().getProgress()) {
+                g.fillRect(FOG_OF_WAR_COLOR, x, y, w, h);
             }
         }
     }
