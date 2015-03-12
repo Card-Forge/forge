@@ -1484,6 +1484,11 @@ public class GameAction {
                         for (final Card c : toMulligan) {
                             moveToLibrary(c);
                         }
+                        try {
+                            Thread.sleep(100); //delay for a tiny bit to give UI a chance catch up
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         p.shuffle(null);
                         p.drawCards(handSize[i] - mulliganDelta);
                     } else {
@@ -1492,6 +1497,11 @@ public class GameAction {
                             exile(c);
                         }
                         exiledDuringMulligans.addAll(p, toExile);
+                        try {
+                            Thread.sleep(100); //delay for a tiny bit to give UI a chance catch up
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         p.drawCards(toExile.size() - 1);
                     }
 
