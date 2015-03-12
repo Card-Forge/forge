@@ -325,7 +325,7 @@ public enum ConquestPlane {
 
         //each region should have 15 opponents include one boss
         private void generateOpponents() {
-            int opponentsBeforeBoss = 14;
+            int opponentsBeforeBoss = 15; //TODO: Reduce by 1 when boss added below
             HashSet<PaperCard> cards = new HashSet<PaperCard>(commanders);
             if (cards.size() < opponentsBeforeBoss) {
                 //if not enough commanders, add normal creatures as non-commander opponents
@@ -351,7 +351,6 @@ public enum ConquestPlane {
                 opponents.add(new ConquestOpponent(card, this));
             }
             //TODO: Determine boss
-            opponents.add(new ConquestOpponent(FModel.getMagicDb().getCommonCards().getCard("Savra, Queen of the Golgari"), this));
         }
 
         public String toString() {
