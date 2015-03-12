@@ -23,7 +23,7 @@ public class ConquestMenu extends FPopupMenu {
     private static final ConquestMapScreen mapScreen = new ConquestMapScreen();
     private static final ConquestPrefsScreen prefsScreen = new ConquestPrefsScreen();
 
-    private static final FMenuItem mapItem = new FMenuItem("Command Center", FSkinImage.QUEST_MAP, new FEventHandler() {
+    private static final FMenuItem mapItem = new FMenuItem("Planar Map", FSkinImage.QUEST_MAP, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             Forge.openScreen(mapScreen);

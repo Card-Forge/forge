@@ -18,10 +18,7 @@
 package forge.planarconquest;
 
 import java.util.HashSet;
-
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-
 import forge.GuiBase;
 import forge.assets.ISkinImage;
 import forge.card.CardEdition;
@@ -240,6 +237,9 @@ public enum ConquestPlane {
                 }
             }
         }
+        for (Region region : regions) {
+            region.generateOpponents();
+        }
         commanders.sort(); //sort main commanders list for the sake of UI
     }
 
@@ -277,6 +277,7 @@ public enum ConquestPlane {
         private final ColorSet colorSet;
         private final Predicate<PaperCard> pred;
         private final DeckGenPool cardPool = new DeckGenPool();
+        private final FCollection<ConquestOpponent> opponents = new FCollection<ConquestOpponent>();
         private final FCollection<PaperCard> commanders = new FCollection<PaperCard>();
 
         private ISkinImage art;
@@ -318,24 +319,39 @@ public enum ConquestPlane {
             return cardPool;
         }
 
-        public FCollectionView<PaperCard> getCommanders() {
-            return commanders;
+        public FCollectionView<ConquestOpponent> getOpponents() {
+            return opponents;
         }
 
-        public ConquestCommander getRandomOpponent(ConquestCommander[] used) {
+        //each region should have 15 opponents include one boss
+        private void generateOpponents() {
+            int opponentsBeforeBoss = 14;
             HashSet<PaperCard> cards = new HashSet<PaperCard>(commanders);
-            for (int i = 0; i < used.length; i++) {
-                if (used[i] != null) {
-                    cards.remove(used[i].getCard());
+            if (cards.size() < opponentsBeforeBoss) {
+                //if not enough commanders, add normal creatures as non-commander opponents
+                Iterable<PaperCard> creatures = cardPool.getAllCards(new Predicate<PaperCard>() {
+                    @Override
+                    public boolean apply(PaperCard card) {
+                        return card.getRules().getType().isCreature();
+                    }
+                });
+                while (cards.size() < opponentsBeforeBoss) {
+                    PaperCard card = Aggregates.random(creatures);
+                    if (!cards.contains(card)) {
+                        cards.add(card);
+                    }
                 }
             }
-            if (cards.isEmpty()) { //if all commanders are used, we can't prevent duplicates
-                cards.addAll(commanders);
-                if (cards.isEmpty()) {
-                    Iterables.addAll(cards, FModel.getConquest().getModel().getCurrentPlane().getCommanders());
+            else {
+                while (cards.size() > opponentsBeforeBoss) {
+                    cards.remove(Aggregates.random(cards));
                 }
             }
-            return new ConquestCommander(Aggregates.random(cards), cardPool, true);
+            for (PaperCard card : cards) {
+                opponents.add(new ConquestOpponent(card, this));
+            }
+            //TODO: Determine boss
+            opponents.add(new ConquestOpponent(FModel.getMagicDb().getCommonCards().getCard("Savra, Queen of the Golgari"), this));
         }
 
         public String toString() {
