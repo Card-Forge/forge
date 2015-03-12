@@ -20,13 +20,13 @@ import forge.toolbox.FEvent.FEventHandler;
 
 public class ConquestMenu extends FPopupMenu {
     private static final ConquestMenu conquestMenu = new ConquestMenu();
-    private static final CommandCenterScreen commanderCenterScreen = new CommandCenterScreen();
+    private static final ConquestMapScreen mapScreen = new ConquestMapScreen();
     private static final ConquestPrefsScreen prefsScreen = new ConquestPrefsScreen();
 
     private static final FMenuItem mapItem = new FMenuItem("Command Center", FSkinImage.QUEST_MAP, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            Forge.openScreen(commanderCenterScreen);
+            Forge.openScreen(mapScreen);
         }
     });
 
@@ -56,14 +56,14 @@ public class ConquestMenu extends FPopupMenu {
                     FModel.getConquest().load(ConquestDataIO.loadData(data));
                     ((DeckController<Deck>)EditorType.PlanarConquest.getController()).setRootFolder(FModel.getConquest().getDecks());
                     if (reason == LaunchReason.StartPlanarConquest) {
-                        Forge.openScreen(commanderCenterScreen);
+                        Forge.openScreen(mapScreen);
                     }
                     else {
-                        commanderCenterScreen.update();
+                        mapScreen.update();
                         if (reason == LaunchReason.LoadConquest) {
                             Forge.back();
                             if (Forge.onHomeScreen()) { //open map screen if Load Conquest screen was opening direct from home screen
-                                Forge.openScreen(commanderCenterScreen);
+                                Forge.openScreen(mapScreen);
                             }
                         }
                         else {
@@ -72,7 +72,7 @@ public class ConquestMenu extends FPopupMenu {
                                 Forge.back(); //remove LoadConquestScreen from screen stack
                             }
                             if (Forge.onHomeScreen()) { //open map screen if New Conquest screen was opening direct from home screen
-                                Forge.openScreen(commanderCenterScreen);
+                                Forge.openScreen(mapScreen);
                             }
                         }
                     }
@@ -93,7 +93,7 @@ public class ConquestMenu extends FPopupMenu {
     @Override
     protected void buildMenu() {
         FScreen currentScreen = Forge.getCurrentScreen();
-        addItem(mapItem); mapItem.setSelected(currentScreen == commanderCenterScreen);
+        addItem(mapItem); mapItem.setSelected(currentScreen == mapScreen);
         addItem(new FMenuItem("New Conquest", FSkinImage.NEW, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {

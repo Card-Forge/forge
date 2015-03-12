@@ -44,7 +44,6 @@ import forge.interfaces.IWinLoseView;
 import forge.item.PaperCard;
 import forge.match.HostedMatch;
 import forge.model.FModel;
-import forge.planarconquest.ConquestPlaneData.RegionData;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.player.GamePlayerUtil;
 import forge.player.LobbyPlayerHuman;
@@ -112,86 +111,12 @@ public class ConquestController {
         SGuiChoose.reveal(commander.getName() + " brought along " + Lang.nounWithAmount(newCards.size(), "new card"), newCards);
     }
 
-    public void endDay(final IVCommandCenter commandCenter) {
-        FThreads.invokeInBackgroundThread(new Runnable() {
-            @Override
-            public void run() {
-                //prompt user if any commander hasn't taken an action
-                final List<ConquestCommander> commanders = model.getCurrentPlaneData().getCommanders();
-                for (ConquestCommander commander : commanders) {
-                    if (commander.getCurrentDayAction() == null) {
-                        if (!SOptionPane.showConfirmDialog(commander.getName() + " has not taken an action today. End day anyway?", "Action Not Taken", "End Day", "Cancel")) {
-                            return;
-                        }
-                    }
-                }
-
-                model.getNewCards().clear(); //reset new cards list before more new cards unlocked
-
-                //perform all commander actions
-                for (ConquestCommander commander : commanders) {
-                    if (commandCenter.setSelectedCommander(commander)) {
-                        try {
-                            //sleep if selection changed so user can see it take effect
-                            Thread.sleep(500);
-                        }
-                        catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    switch (commander.getCurrentDayAction()) {
-                    case Attack1:
-                        playGame(commander, 0, false, commandCenter);
-                        break;
-                    case Attack2:
-                        playGame(commander, 1, false, commandCenter);
-                        break;
-                    case Attack3:
-                        playGame(commander, 2, false, commandCenter);
-                        break;
-                    case Defend:
-                        playGame(commander, Aggregates.randomInt(0, 2), true, commandCenter); //defend against random opponent
-                        break;
-                    case Recruit:
-                        recruit(commander);
-                        break;
-                    case Study:
-                        study(commander);
-                        break;
-                    case Undeploy:
-                        model.getCurrentPlaneData().getRegionData(commander.getDeployedRegion()).setDeployedCommander(null);
-                        break;
-                    default: //remaining actions don't need to do anything more
-                        break;
-                    }
-                    commander.setCurrentDayAction(null);
-                    try {
-                        Thread.sleep(500);
-                    }
-                    catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                //update UI for new day
-                FThreads.invokeInEdtLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        model.incrementDay();
-                        commandCenter.updateCurrentDay();
-                    }
-                });
-            }
-        });
-    }
-
     private void playGame(final ConquestCommander commander, final int opponentIndex, final boolean isHumanDefending, final IVCommandCenter commandCenter) {
         gameRunner = new GameRunner(commander, opponentIndex, isHumanDefending, commandCenter);
         gameRunner.invokeAndWait();
 
         //after game finished
         if (gameRunner.wonGame) {
-            RegionData regionData = model.getCurrentPlaneData().getRegionData(commander.getDeployedRegion());
-            regionData.replaceOpponent(opponentIndex);
         }
         gameRunner = null;
     }
@@ -209,8 +134,7 @@ public class ConquestController {
 
         private GameRunner(final ConquestCommander commander0, final int opponentIndex, final boolean isHumanDefending0, final IVCommandCenter commandCenter0) {
             commander = commander0;
-            RegionData regionData = model.getCurrentPlaneData().getRegionData(commander.getDeployedRegion());
-            opponent = regionData.getOpponent(opponentIndex);
+            opponent = null; //model.getCurrentPlaneData().getOpponent(opponentIndex);
             isHumanDefending = isHumanDefending0;
             commandCenter = commandCenter0;
         }
@@ -345,14 +269,14 @@ public class ConquestController {
 
     private boolean recruit(ConquestCommander commander) {
         boolean bonusCard = Aggregates.randomInt(1, 100) <= FModel.getConquestPreferences().getPrefInt(CQPref.RECRUIT_BONUS_CARD_ODDS);
-        return awardNewCards(commander.getDeployedRegion().getCardPool().getAllCards(),
+        return awardNewCards(model.getCurrentPlane().getCardPool().getAllCards(),
                 commander.getName() + " recruited", "new creature", null, null,
                 CardRulesPredicates.Presets.IS_CREATURE, bonusCard ? 2 : 1);
     }
 
     private boolean study(ConquestCommander commander) {
         boolean bonusCard = Aggregates.randomInt(1, 100) <= FModel.getConquestPreferences().getPrefInt(CQPref.STUDY_BONUS_CARD_ODDS);
-        return awardNewCards(commander.getDeployedRegion().getCardPool().getAllCards(),
+        return awardNewCards(model.getCurrentPlane().getCardPool().getAllCards(),
                 commander.getName() + " unlocked", "new spell", null, null,
                 CardRulesPredicates.Presets.IS_NON_CREATURE_SPELL, bonusCard ? 2 : 1);
     }
@@ -619,7 +543,7 @@ public class ConquestController {
     }
 
     private void awardBooster(final IWinLoseView<? extends IButton> view) {
-        Iterable<PaperCard> cardPool = gameRunner.commander.getDeployedRegion().getCardPool().getAllCards();
+        Iterable<PaperCard> cardPool = model.getCurrentPlane().getCardPool().getAllCards();
 
         ConquestPreferences prefs = FModel.getConquestPreferences();
 

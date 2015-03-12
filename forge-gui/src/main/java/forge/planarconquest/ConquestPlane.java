@@ -335,7 +335,7 @@ public enum ConquestPlane {
                     Iterables.addAll(cards, FModel.getConquest().getModel().getCurrentPlane().getCommanders());
                 }
             }
-            return new ConquestCommander(Aggregates.random(cards), cardPool, true, this);
+            return new ConquestCommander(Aggregates.random(cards), cardPool, true);
         }
 
         public String toString() {

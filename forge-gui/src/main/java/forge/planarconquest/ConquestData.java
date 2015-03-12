@@ -71,7 +71,7 @@ public final class ConquestData {
     }
 
     public List<PaperCard> addCommander(PaperCard card) {
-        ConquestCommander commander = new ConquestCommander(card, currentPlane.getCardPool(), false, null);
+        ConquestCommander commander = new ConquestCommander(card, currentPlane.getCardPool(), false);
         getCurrentPlaneData().getCommanders().add(commander);
         decks.put(commander.getDeck().getName(), commander.getDeck());
 

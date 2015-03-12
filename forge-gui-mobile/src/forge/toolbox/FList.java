@@ -194,8 +194,9 @@ public class FList<T> extends FScrollPane implements Iterable<T> {
             boolean drawSeparators = drawLineSeparators();
 
             float y = Math.round(getItemTop(startIndex)); //round y so items don't flicker from rounding error
-            float valueWidth = w - 2 * PADDING;
-            float valueHeight = itemHeight - 2 * PADDING;
+            float padding = getPadding();
+            float valueWidth = w - 2 * padding;
+            float valueHeight = itemHeight - 2 * padding;
 
             for (int i = startIndex; i < items.size(); i++) {
                 if (y > h) { break; }
@@ -205,7 +206,7 @@ public class FList<T> extends FScrollPane implements Iterable<T> {
                     g.fillRect(fillColor, 0, y, w, itemHeight);
                 }
 
-                renderer.drawValue(g, i, items.get(i), font, FORE_COLOR, fillColor, pressedIndex == i, PADDING, y + PADDING, valueWidth, valueHeight);
+                renderer.drawValue(g, i, items.get(i), font, FORE_COLOR, fillColor, pressedIndex == i, padding, y + padding, valueWidth, valueHeight);
 
                 y += itemHeight;
 
@@ -229,6 +230,10 @@ public class FList<T> extends FScrollPane implements Iterable<T> {
 
     protected boolean drawLineSeparators() {
         return true;
+    }
+
+    protected float getPadding() {
+        return PADDING;
     }
 
     public static abstract class ListItemRenderer<V> {

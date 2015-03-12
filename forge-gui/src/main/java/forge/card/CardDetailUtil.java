@@ -64,6 +64,9 @@ public class CardDetailUtil {
         }
         return getBorderColors(card.getColors(), card.isLand(), canShow, true);
     }
+    public static List<DetailColors> getBorderColors(final ColorSet colorSet) {
+        return getBorderColors(colorSet, false, true, true);
+    }
     private static List<DetailColors> getBorderColors(final ColorSet cardColors, final boolean isLand, boolean canShow, boolean supportMultiple) {
         List<DetailColors> borderColors = new ArrayList<DetailColors>();
 

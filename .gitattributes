@@ -1331,8 +1331,8 @@ forge-gui-mobile/src/forge/screens/match/winlose/GauntletWinLose.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/LimitedWinLose.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/QuestWinLose.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/ViewWinLose.java -text
-forge-gui-mobile/src/forge/screens/planarconquest/CommandCenterScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestDeckEditor.java -text
+forge-gui-mobile/src/forge/screens/planarconquest/ConquestMapScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestMenu.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestPrefsScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/LoadConquestScreen.java -text
@@ -17482,7 +17482,6 @@ forge-gui/src/main/java/forge/planarconquest/ConquestDataIO.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestDeckMap.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestPlane.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestPlaneData.java -text
-forge-gui/src/main/java/forge/planarconquest/ConquestPlaneMap.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestPreferences.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestUtil.java -text
 forge-gui/src/main/java/forge/planarconquest/IVCommandCenter.java -text
