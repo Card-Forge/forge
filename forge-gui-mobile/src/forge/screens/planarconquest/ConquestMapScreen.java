@@ -116,18 +116,19 @@ public class ConquestMapScreen extends FScreen {
 
             //draw path with opponents
             float x0, y0, prevX = x + w / 2, prevY = y + h;
-            float gridSize = h / rows;
-            float iconSize = gridSize * 0.5f;
-            float iconOffset = (gridSize - iconSize) / 2;
+            float colWidth = w / cols;
+            float rowHeight = h / rows;
+            float iconSize = Math.min(colWidth, rowHeight) * 0.5f;
+            float iconOffsetX = (colWidth - iconSize) / 2;
+            float iconOffsetY = (rowHeight - iconSize) / 2;
             float lineThickness = iconSize / 4;
-            float dx = (w - h * cols / rows) / 2; //center grid
             FCollectionView<ConquestOpponent> opponents = region.getOpponents();
 
             //draw line path
             for (int i = 0; i < opponents.size(); i++) {
                 GridPosition pos = path[i];
-                x0 = x + gridSize * pos.col + dx + gridSize / 2;
-                y0 = y + gridSize * pos.row + gridSize / 2;
+                x0 = x + colWidth * pos.col + colWidth / 2;
+                y0 = y + rowHeight * pos.row + rowHeight / 2;
                 if (i > 0 || index < model.getCurrentPlane().getRegions().size() - 1) { //extend path from previous region if any
                     g.drawLine(lineThickness, Color.WHITE, x0, y0, prevX, prevY);
                 }
@@ -143,8 +144,8 @@ public class ConquestMapScreen extends FScreen {
             //draw icons for stops along path for opponents
             for (int i = 0; i < opponents.size(); i++) {
                 GridPosition pos = path[i];
-                x0 = x + gridSize * pos.col + dx + iconOffset;
-                y0 = y + gridSize * pos.row + iconOffset;
+                x0 = x + colWidth * pos.col + iconOffsetX;
+                y0 = y + rowHeight * pos.row + iconOffsetY;
                 g.drawImage((FImage)opponents.get(i).getMapIcon(), x0, y0, iconSize, iconSize);
             }
         }
