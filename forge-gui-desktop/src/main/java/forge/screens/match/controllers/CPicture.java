@@ -37,10 +37,10 @@ import forge.toolbox.special.CardZoomer;
  * Controller for {@link VPicture}. May be used as part of a
  * {@link CDetailPicture}.
  * <p>
- * Can be used to display images associated with a {@link Card} or
+ * Can be used to display images associated with a {@link CardView} or
  * {@link InventoryItem} in {@link CardPicturePanel}.<br>
  * <br>
- * Can also be used to display details associated with a {@link Card}. <br>
+ * Can also be used to display details associated with a {@link CardView}. <br>
  * <br>
  * <i>(C at beginning of class name denotes a control class.)</i>
  */

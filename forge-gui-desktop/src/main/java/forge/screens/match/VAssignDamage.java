@@ -137,15 +137,6 @@ public class VAssignDamage {
         }
     };
 
-    /** Constructor.
-     * 
-     * @param attacker {@link forge.game.card.Card}
-     * @param blockers List<{@link forge.game.card.Card}>
-     * @param damage0 int
-     * @param defender GameEntity that's bein attacked
-     * @param overrideOrder override combatant order
-
-     */
     public VAssignDamage(final CMatchUI matchUI, final CardView attacker, final List<CardView> blockers, final int damage0, final GameEntityView defender0, boolean overrideOrder) {
         this.matchUI = matchUI;
 

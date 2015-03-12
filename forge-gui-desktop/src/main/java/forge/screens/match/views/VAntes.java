@@ -140,11 +140,7 @@ public class VAntes implements IVDoc<CAntes> {
     @SuppressWarnings("serial")
     private class AntePanel extends JPanel implements Comparable<AntePanel> {
         private final CardView card;
-        /**
-         * 
-         * @param p0 &emsp; {@link forge.game.player.Player}
-         * @param c &emsp; {@link forge.game.card.Card}
-         */
+
         public AntePanel(final CardView c) {
             super();
             card = c;
