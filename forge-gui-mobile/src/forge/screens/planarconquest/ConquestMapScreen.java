@@ -119,24 +119,34 @@ public class ConquestMapScreen extends FScreen {
             int progress = model.getCurrentPlaneData().getProgress();
             int regionCount = model.getCurrentPlane().getRegions().size();
             FCollectionView<ConquestOpponent> opponents = region.getOpponents();
-            int startIndex = (regionCount - index - 1) * opponents.size();
+            int regionIndex = regionCount - index - 1;
+            int startIndex = regionIndex * opponents.size();
 
             //draw path with opponents
-            float x0, y0, prevX = x + w / 2, prevY = y + h;
+            float x0, y0;
             float colWidth = w / cols;
             float rowHeight = h / rows;
-            float iconSize = Math.min(colWidth, rowHeight) * 0.5f;
+            float iconSize = Math.min(colWidth, rowHeight) * 0.33f;
             float iconBackdropRadius = iconSize * 0.75f;
             float iconOffsetX = (colWidth - iconSize) / 2;
             float iconOffsetY = (rowHeight - iconSize) / 2;
             float lineThickness = iconSize / 4;
 
+            float prevX;
+            float prevY = y + h;
+            if (regionIndex % 2 == 0) {
+                prevX = x + colWidth / 2;
+            }
+            else {
+                prevX = x + w - colWidth / 2;
+            }
+
             //draw line path
             for (int i = 0; i < opponents.size(); i++) {
-                GridPosition pos = path[i];
+                GridPosition pos = new GridPosition(startIndex, i);
                 x0 = x + colWidth * pos.col + colWidth / 2;
                 y0 = y + rowHeight * pos.row + rowHeight / 2;
-                if (i > 0 || index < regionCount - 1) { //extend path from previous region if any
+                if (i > 0 || startIndex > 0) { //extend path from previous region if any
                     g.drawLine(lineThickness, Color.WHITE, x0, y0, prevX, prevY);
                 }
                 prevX = x0;
@@ -150,7 +160,7 @@ public class ConquestMapScreen extends FScreen {
 
             //draw icons for stops along path for opponents
             for (int i = 0; i < opponents.size(); i++) {
-                GridPosition pos = path[i];
+                GridPosition pos = new GridPosition(startIndex, i);
                 x0 = x + colWidth * pos.col + iconOffsetX;
                 y0 = y + rowHeight * pos.row + iconOffsetY;
                 g.fillCircle(Color.BLACK, x0 + iconSize / 2, y0 + iconSize / 2, iconBackdropRadius);
@@ -165,7 +175,7 @@ public class ConquestMapScreen extends FScreen {
                 //draw planeswalker token above stop
                 int planeswalkerPosition = progress - startIndex;
                 if (planeswalkerPosition < opponents.size()) {
-                    GridPosition pos = path[planeswalkerPosition];
+                    GridPosition pos = new GridPosition(startIndex, planeswalkerPosition);
                     x0 = x + colWidth * pos.col + iconOffsetX;
                     y0 = y + rowHeight * pos.row + iconOffsetY;
                     FImage token = (FImage)model.getPlaneswalkerToken();
@@ -178,38 +188,23 @@ public class ConquestMapScreen extends FScreen {
     }
 
     //path through region should look like this:
-    //       15
-    // 12 13 14
-    // 11
+    // 11 12 13 14 15
     // 10 09 08 07 06
-    //             05
-    //       02 03 04
-    //       01
-    private static final int rows = 7;
+    // 01 02 03 04 05
+    private static final int rows = 3;
     private static final int cols = 5;
-    private static final GridPosition[] path = {
-        new GridPosition(6, 2), //01 is at row 7 col 3
-        new GridPosition(5, 2),
-        new GridPosition(5, 3),
-        new GridPosition(5, 4),
-        new GridPosition(4, 4),
-        new GridPosition(3, 4),
-        new GridPosition(3, 3),
-        new GridPosition(3, 2),
-        new GridPosition(3, 1),
-        new GridPosition(3, 0),
-        new GridPosition(2, 0),
-        new GridPosition(1, 0),
-        new GridPosition(1, 1),
-        new GridPosition(1, 2),
-        new GridPosition(0, 2)
-    };
 
     private static class GridPosition {
         public final int row, col;
-        public GridPosition(int row0, int col0) {
-            row = row0;
-            col = col0;
+        public GridPosition(int startIndex, int i) {
+            int totalRow = (startIndex + i) / cols;
+            row = rows - totalRow % rows - 1;
+            if (totalRow % 2 == 0) {
+                col = i % cols;
+            }
+            else {
+                col = cols - (i % cols) - 1;
+            }
         }
     }
 }
