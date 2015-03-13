@@ -50,6 +50,8 @@ public final class ConquestData {
     private int wins, losses;
     private int winStreakBest = 0;
     private int winStreakCurrent = 0;
+    private int progress = 0;
+    private int planewalkerPosition = 0;
     private int difficulty;
     private ConquestPlane startingPlane, currentPlane;
     private int currentRegionIndex;
@@ -99,6 +101,17 @@ public final class ConquestData {
 
     public int getDifficulty() {
         return difficulty;
+    }
+
+    public int getProgress() {
+        return progress;
+    }
+
+    public int getPlaneswalkerPosition() {
+        return planewalkerPosition;
+    }
+    public void setPlaneswalkerPosition(int planewalkerPosition0) {
+        planewalkerPosition = planewalkerPosition0;
     }
 
     public ISkinImage getPlaneswalkerToken() {

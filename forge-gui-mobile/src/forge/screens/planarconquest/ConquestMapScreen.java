@@ -86,7 +86,18 @@ public class ConquestMapScreen extends FScreen {
 
         @Override
         public boolean tap(Integer index, Region region, float x, float y, int count) {
-            return false;
+            float colWidth = getWidth() / cols;
+            float rowHeight = getItemHeight() / rows;
+            int row = rows - (int)(y / rowHeight) - 1;
+            int col = (int)(x / colWidth);
+            int regionIndex = model.getCurrentPlane().getRegions().size() - index - 1;
+            if ((regionIndex + row) % 2 == 1) {
+                col = cols - col - 1;
+            }
+            int startIndex = regionIndex * rows * cols;
+            int position = startIndex + row * cols + col;
+            model.setPlaneswalkerPosition(position);
+            return true;
         }
 
         @Override
@@ -116,7 +127,7 @@ public class ConquestMapScreen extends FScreen {
                 }
             }
 
-            int progress = model.getCurrentPlaneData().getProgress();
+            int progress = model.getProgress();
             int regionCount = model.getCurrentPlane().getRegions().size();
             FCollectionView<ConquestOpponent> opponents = region.getOpponents();
             int regionIndex = regionCount - index - 1;
@@ -173,7 +184,7 @@ public class ConquestMapScreen extends FScreen {
             }
             else {
                 //draw planeswalker token above stop
-                int planeswalkerPosition = progress - startIndex;
+                int planeswalkerPosition = model.getPlaneswalkerPosition() - startIndex;
                 if (planeswalkerPosition < opponents.size()) {
                     GridPosition pos = new GridPosition(startIndex, planeswalkerPosition);
                     x0 = x + colWidth * pos.col + iconOffsetX;

@@ -18,7 +18,6 @@ public class ConquestPlaneData {
     private int wins, losses;
     private int winStreakBest = 0;
     private int winStreakCurrent = 0;
-    private int progress = 0;
 
     public ConquestPlaneData(ConquestPlane plane0) {
         plane = plane0;
@@ -76,10 +75,6 @@ public class ConquestPlaneData {
 
     public int getWinStreakCurrent() {
         return winStreakCurrent;
-    }
-
-    public int getProgress() {
-        return progress;
     }
 
     public int getUnlockedCount() {
