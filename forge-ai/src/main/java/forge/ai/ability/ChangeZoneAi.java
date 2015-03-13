@@ -55,10 +55,15 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         if (sa.hasParam("AILogic")) {
-            if (sa.getParam("AILogic").equals("Always")) {
+        	String logic = sa.getParam("AILogic");
+            if (logic.equals("Always")) {
                 return true;
-            } else if (sa.getParam("AILogic").equals("BeforeCombat")) {
+            } else if (logic.equals("BeforeCombat")) {
                 if (aiPlayer.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN)) {
+                    return false;
+                }
+            } else if (logic.equals("SurpriseBlock")) {
+                if (aiPlayer.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                     return false;
                 }
             }

@@ -1,7 +1,7 @@
 Name:Surprise Deployment
 ManaCost:3 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 3 W | Origin$ Hand | Destination$ Battlefield | Optional$ You | ChangeType$ Creature.nonWhite | ChangeNum$ 1 | RememberChanged$ True | ForgetOtherRemembered$ True | TgtPrompt$ Select target creature | ActivationPhases$ BeginCombat->EndCombat | SubAbility$ DBAnimate | SpellDescription$ Cast CARDNAME only during combat. You may put a nonwhite creature card from your hand onto the battlefield. At the beginning of the next end step, return that creature to your hand. (Return it only if it's on the battlefield.)
+A:SP$ ChangeZone | Cost$ 3 W | Origin$ Hand | Destination$ Battlefield | Optional$ You | ChangeType$ Creature.nonWhite | ChangeNum$ 1 | RememberChanged$ True | ForgetOtherRemembered$ True | TgtPrompt$ Select target creature | ActivationPhases$ BeginCombat->EndCombat | AILogic$ SurpriseBlock | SubAbility$ DBAnimate | SpellDescription$ Cast CARDNAME only during combat. You may put a nonwhite creature card from your hand onto the battlefield. At the beginning of the next end step, return that creature to your hand. (Return it only if it's on the battlefield.)
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Triggers$ TrigBounce | sVars$ TrigReturn
 SVar:TrigBounce:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of the next end step, return CARDNAME to its owner's hand.
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBCleanup
