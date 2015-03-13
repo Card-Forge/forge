@@ -17,6 +17,8 @@
  */
 package forge.planarconquest;
 
+import forge.achievement.PlaneswalkerAchievements;
+import forge.assets.ISkinImage;
 import forge.deck.Deck;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
@@ -48,11 +50,11 @@ public final class ConquestData {
     private int wins, losses;
     private int winStreakBest = 0;
     private int winStreakCurrent = 0;
-    private int day = 1;
     private int difficulty;
     private ConquestPlane startingPlane, currentPlane;
     private int currentRegionIndex;
     private EnumMap<ConquestPlane, ConquestPlaneData> planeDataMap = new EnumMap<ConquestPlane, ConquestPlaneData>(ConquestPlane.class);
+    private ISkinImage planeswalkerToken = PlaneswalkerAchievements.getTrophyImage("Jace, the Mind Sculptor");
 
     private final HashSet<PaperCard> collection = new HashSet<PaperCard>();
     private final HashMap<String, Deck> decks = new HashMap<String, Deck>();
@@ -99,11 +101,8 @@ public final class ConquestData {
         return difficulty;
     }
 
-    public int getDay() {
-        return day;
-    }
-    public void incrementDay() {
-        day++;
+    public ISkinImage getPlaneswalkerToken() {
+        return planeswalkerToken;
     }
 
     public ConquestPlane getStartingPlane() {

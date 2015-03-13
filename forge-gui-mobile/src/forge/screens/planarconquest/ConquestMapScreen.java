@@ -116,7 +116,10 @@ public class ConquestMapScreen extends FScreen {
                 }
             }
 
+            int progress = model.getCurrentPlaneData().getProgress();
             int regionCount = model.getCurrentPlane().getRegions().size();
+            FCollectionView<ConquestOpponent> opponents = region.getOpponents();
+            int startIndex = (regionCount - index - 1) * opponents.size();
 
             //draw path with opponents
             float x0, y0, prevX = x + w / 2, prevY = y + h;
@@ -127,7 +130,6 @@ public class ConquestMapScreen extends FScreen {
             float iconOffsetX = (colWidth - iconSize) / 2;
             float iconOffsetY = (rowHeight - iconSize) / 2;
             float lineThickness = iconSize / 4;
-            FCollectionView<ConquestOpponent> opponents = region.getOpponents();
 
             //draw line path
             for (int i = 0; i < opponents.size(); i++) {
@@ -156,9 +158,21 @@ public class ConquestMapScreen extends FScreen {
             }
 
             //draw fog of war overlay if region not yet unlocked
-            int startIndex = (regionCount - index - 1) * opponents.size();
-            if (startIndex > model.getCurrentPlaneData().getProgress()) {
+            if (startIndex > progress) {
                 g.fillRect(FOG_OF_WAR_COLOR, x, y, w, h);
+            }
+            else {
+                //draw planeswalker token above stop
+                int planeswalkerPosition = progress - startIndex;
+                if (planeswalkerPosition < opponents.size()) {
+                    GridPosition pos = path[planeswalkerPosition];
+                    x0 = x + colWidth * pos.col + iconOffsetX;
+                    y0 = y + rowHeight * pos.row + iconOffsetY;
+                    FImage token = (FImage)model.getPlaneswalkerToken();
+                    float tokenWidth = iconSize * 2f;
+                    float tokenHeight = tokenWidth * token.getHeight() / token.getWidth();
+                    g.drawImage(token, x0 + (iconSize - tokenWidth) / 2, y0 - tokenHeight, tokenWidth, tokenHeight);
+                }
             }
         }
     }
