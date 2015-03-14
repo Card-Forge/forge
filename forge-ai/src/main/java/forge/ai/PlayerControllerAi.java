@@ -603,6 +603,7 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public String chooseProtectionType(String string, SpellAbility sa, List<String> choices) {
         String choice = choices.get(0);
+        SpellAbility hostsa = null;     //for Protect sub-ability
         if (game.stack.size() > 1) {
             for (SpellAbilityStackInstance si : game.getStack()) {
                 SpellAbility spell = si.getSpellAbility(true);
@@ -617,7 +618,13 @@ public class PlayerControllerAi extends PlayerController {
         }
         final Combat combat = game.getCombat();
         if (combat != null) {
-            Card toSave = sa.getTargetCard();
+            if (game.stack.size() == 1) {
+                SpellAbility topstack = game.stack.peekAbility();
+                if (topstack.getSubAbility() == sa) {
+                    hostsa = topstack;
+                }
+            }
+            Card toSave = hostsa == null ? sa.getTargetCard() : hostsa.getTargetCard();
             CardCollection threats = null;
             if (combat.isBlocked(toSave)) {
                 threats = combat.getBlockers(toSave);
