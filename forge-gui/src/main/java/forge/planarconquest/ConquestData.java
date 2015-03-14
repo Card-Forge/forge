@@ -50,7 +50,7 @@ public final class ConquestData {
     private int wins, losses;
     private int winStreakBest = 0;
     private int winStreakCurrent = 0;
-    private int progress = 0;
+    private int progress = 100;
     private int planewalkerPosition = 0;
     private int difficulty;
     private ConquestPlane startingPlane, currentPlane;

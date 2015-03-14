@@ -96,6 +96,9 @@ public class ConquestMapScreen extends FScreen {
             }
             int startIndex = regionIndex * rows * cols;
             int position = startIndex + row * cols + col;
+            if (position > model.getProgress()) {
+                return false;
+            }
             model.setPlaneswalkerPosition(position);
             return true;
         }
@@ -185,7 +188,7 @@ public class ConquestMapScreen extends FScreen {
             else {
                 //draw planeswalker token above stop
                 int planeswalkerPosition = model.getPlaneswalkerPosition() - startIndex;
-                if (planeswalkerPosition < opponents.size()) {
+                if (planeswalkerPosition >= 0 && planeswalkerPosition < opponents.size()) {
                     GridPosition pos = new GridPosition(startIndex, planeswalkerPosition);
                     x0 = x + colWidth * pos.col + iconOffsetX;
                     y0 = y + rowHeight * pos.row + iconOffsetY;
