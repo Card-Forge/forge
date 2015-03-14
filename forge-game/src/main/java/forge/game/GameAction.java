@@ -1389,6 +1389,11 @@ public class GameAction {
 
             game.getPhaseHandler().startFirstTurn(first);
 
+            //after game ends, ensure Auto-Pass canceled for all players so it doesn't apply to next game
+            for (Player p : game.getRegisteredPlayers()) {
+                p.getController().autoPassCancel();
+            }
+
             first = game.getPhaseHandler().getPlayerTurn();  // needed only for restart
         } while (game.getAge() == GameStage.RestartedByKarn);
     }
