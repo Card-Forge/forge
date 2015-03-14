@@ -915,6 +915,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private void addCounter(final CounterType counterType, final int n, final boolean applyMultiplier, final boolean fireEvents) {
         int addAmount = n;
+        if(addAmount < 0) {
+            addAmount = 0; // As per rule 107.1b
+        }
         final HashMap<String, Object> repParams = new HashMap<String, Object>();
         repParams.put("Event", "AddCounter");
         repParams.put("Affected", this);
