@@ -17,12 +17,16 @@
  */
 package forge.item;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
+
 import com.google.common.base.Function;
 
 import forge.ImageKeys;
+import forge.StaticData;
 import forge.card.CardRarity;
 import forge.card.CardRules;
-
 
 /**
  * A lightweight version of a card that matches real-world cards, to use outside of games (eg. inventory, decks, trade).
@@ -31,9 +35,11 @@ import forge.card.CardRules;
  * 
  * @author Forge
  */
-public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, IPaperCard {
+public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, IPaperCard, Serializable {
+    private static final long serialVersionUID = 2942081982620691205L;
+
     // Reference to rules
-    private final transient CardRules rules;
+    private transient CardRules rules;
 
     // These fields are kinda PK for PrintedCard
     private final String name;
@@ -43,7 +49,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
     private Boolean hasImage;
 
     // Calculated fields are below:
-    private final transient CardRarity rarity; // rarity is given in ctor when set is assigned
+    private transient CardRarity rarity; // rarity is given in ctor when set is assigned
 
     @Override
     public String getName() {
@@ -198,5 +204,14 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
             return setDiff;
         
         return Integer.compare(artIndex, o.getArtIndex());
+    }
+
+    private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
+        // default deserialization
+        ois.defaultReadObject();
+
+        final IPaperCard pc = StaticData.instance().getCommonCards().getCard(name, edition, artIndex);
+        this.rules = pc.getRules();
+        this.rarity = pc.getRarity();
     }
 }

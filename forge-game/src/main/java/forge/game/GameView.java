@@ -2,6 +2,8 @@ package forge.game;
 
 import java.util.List;
 
+import com.google.common.collect.Iterables;
+
 import forge.LobbyPlayer;
 import forge.deck.Deck;
 import forge.game.GameOutcome.AnteResult;
@@ -22,6 +24,7 @@ import forge.trackable.TrackableProperty;
 import forge.util.FCollectionView;
 
 public class GameView extends TrackableObject {
+    private static final long serialVersionUID = 8522884512960961528L;
 
     /*private final TrackableIndex<CardView> cards = new TrackableIndex<CardView>();
     private final TrackableIndex<PlayerView> players = new TrackableIndex<PlayerView>();
@@ -29,7 +32,7 @@ public class GameView extends TrackableObject {
     private final TrackableIndex<StackItemView> stackItems = new TrackableIndex<StackItemView>();*/
     private final TrackableCollection<PlayerView> players;
     private CombatView combatView;
-    private final Game game; //TODO: Remove this when possible before network support added
+    private final transient Game game; //TODO: Remove this when possible before network support added
 
     public GameView(final Game game0) {
         super(-1, game0.getTracker()); //ID not needed
@@ -88,10 +91,17 @@ public class GameView extends TrackableObject {
         set(TrackableProperty.PlayerTurn, PlayerView.get(phaseHandler.getPlayerTurn()));
     }
 
+    public FCollectionView<StackItemView> getStack() {
+        return get(TrackableProperty.Stack);
+    }
+    public StackItemView peekStack() {
+        return Iterables.getFirst(getStack(), null);
+    }
     public int getStormCount() {
         return get(TrackableProperty.StormCount);
     }
-    void updateStack(MagicStack stack) {
+    void updateStack(final MagicStack stack) {
+        set(TrackableProperty.Stack, StackItemView.getCollection(stack));
         set(TrackableProperty.StormCount, stack.getSpellsCastThisTurn().size());
     }
 
@@ -166,10 +176,6 @@ public class GameView extends TrackableObject {
 
     //TODO: Find better ways to make this information available to all GUIs without using the Game class
 
-    public FCollectionView<StackItemView> getStack() {
-        return StackItemView.getCollection(game.getStack());
-    }
-
     public boolean isMatchWonBy(LobbyPlayer questPlayer) {
         return game.getMatch().isWonBy(questPlayer);
     }
@@ -180,10 +186,6 @@ public class GameView extends TrackableObject {
 
     public LobbyPlayer getWinningPlayer() {
         return game.getOutcome().getWinningLobbyPlayer();
-    }
-
-    public StackItemView peekStack() {
-        return StackItemView.get(game.getStack().peek());
     }
 
     public boolean isWinner(LobbyPlayer guiPlayer) {

@@ -1,5 +1,6 @@
 package forge.game.keyword;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -7,8 +8,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
-public class KeywordCollection implements Iterable<String> {
-    private KeywordCollectionView view;
+public class KeywordCollection implements Iterable<String>, Serializable {
+    private static final long serialVersionUID = -2882986558147844702L;
+
+    private transient KeywordCollectionView view;
     private final EnumMap<Keyword, List<KeywordInstance<?>>> map = new EnumMap<Keyword, List<KeywordInstance<?>>>(Keyword.class);
 
     public boolean contains(Keyword keyword) {
@@ -134,7 +137,9 @@ public class KeywordCollection implements Iterable<String> {
         return view;
     }
 
-    public class KeywordCollectionView implements Iterable<String> {
+    public class KeywordCollectionView implements Iterable<String>, Serializable {
+        private static final long serialVersionUID = 7536969077044188264L;
+
         protected KeywordCollectionView() {
         }
 

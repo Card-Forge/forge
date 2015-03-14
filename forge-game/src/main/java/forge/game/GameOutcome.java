@@ -25,6 +25,7 @@ import forge.item.PaperCard;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -41,7 +42,9 @@ import java.util.Map.Entry;
 // only getters) and
 // GameObserver class - who should be notified of any considerable ingame event
 public final class GameOutcome implements Iterable<Pair<LobbyPlayer, PlayerStatistics>> {
-    public static class AnteResult {
+    public static class AnteResult implements Serializable {
+        private static final long serialVersionUID = 5087554550408543192L;
+
         public final List<PaperCard> lostCards;
         public final List<PaperCard> wonCards;
         
@@ -50,8 +53,7 @@ public final class GameOutcome implements Iterable<Pair<LobbyPlayer, PlayerStati
             if (won) {
                 this.wonCards = cards;
                 this.lostCards = new ArrayList<>();
-            }
-            else {
+            } else {
                 this.lostCards = cards;
                 this.wonCards = new ArrayList<>();
             }

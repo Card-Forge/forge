@@ -19,6 +19,7 @@ package forge.card.mana;
 
 import forge.card.MagicColor;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -35,7 +36,9 @@ import org.apache.commons.lang3.StringUtils;
  * @version $Id: CardManaCost.java 9708 2011-08-09 19:34:12Z jendave $
  */
 
-public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostShard> {
+public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostShard>, Serializable {
+    private static final long serialVersionUID = -2477430496624149226L;
+
     private static final char DELIM = (char)6;
 
     private List<ManaCostShard> shards;

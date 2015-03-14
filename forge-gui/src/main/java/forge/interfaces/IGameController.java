@@ -4,7 +4,7 @@ import java.util.List;
 
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
-import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityView;
 import forge.match.NextGameDecision;
 import forge.util.ITriggerEvent;
 
@@ -33,7 +33,7 @@ public interface IGameController {
     boolean selectCard(CardView cardView,
             List<CardView> otherCardViewsToSelect, ITriggerEvent triggerEvent);
 
-    void selectAbility(SpellAbility sa);
+    void selectAbility(SpellAbilityView sa);
 
     boolean tryUndoLastAction();
 

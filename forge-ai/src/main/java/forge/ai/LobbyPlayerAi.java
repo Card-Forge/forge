@@ -1,7 +1,8 @@
 package forge.ai;
 
-import java.util.Map;
+import java.util.Set;
 
+import forge.AIOption;
 import forge.LobbyPlayer;
 import forge.game.Game;
 import forge.game.player.IGameEntitiesFactory;
@@ -15,9 +16,9 @@ public class LobbyPlayerAi extends LobbyPlayer implements IGameEntitiesFactory {
     private boolean allowCheatShuffle;
     private boolean useSimulation;
     
-    public LobbyPlayerAi(String name, Map<String, String> options) {
+    public LobbyPlayerAi(String name, Set<AIOption> options) {
         super(name);
-        if (options != null && "True".equals(options.get("UseSimulation"))) {
+        if (options != null && options.contains(AIOption.USE_SIMULATION)) {
             this.useSimulation = true;
         }
     }

@@ -134,10 +134,15 @@ public enum FNetOverlay {
         getPanel().setBounds(x, y, w, height);
         getPanel().validate();
     }
-    
-    SimpleDateFormat inFormat = new SimpleDateFormat("HH:mm:ss");
-    public void addMessage(String origin, String message) {
-        String toAdd = String.format("%n[%s] %s: %s", inFormat.format(new Date()), origin, message);
+
+    private final static SimpleDateFormat inFormat = new SimpleDateFormat("HH:mm:ss");
+    public void addMessage(final String origin, final String message) {
+        final String toAdd;
+        if (origin == null) {
+            toAdd = String.format("%n[%s] %s: %s", inFormat.format(new Date()), origin, message);
+        } else {
+            toAdd = String.format("%n[%s] %s", inFormat.format(new Date()), message);
+        }
         txtLog.append(toAdd);
     }
 }

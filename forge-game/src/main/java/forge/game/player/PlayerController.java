@@ -26,6 +26,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardShields;
+import forge.game.card.CardView;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
@@ -140,6 +141,8 @@ public abstract class PlayerController {
         reveal(cards, zone, owner, null);
     }
     public abstract void reveal(CardCollectionView cards, ZoneType zone, Player owner, String messagePrefix);
+    public abstract void reveal(Collection<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix);
+
     /** Shows message to player to reveal chosen cardName, creatureType, number etc. AI must analyze API to understand what that is */
     public abstract void notifyOfValue(SpellAbility saSource, GameObject realtedTarget, String value);
     public abstract ImmutablePair<CardCollection, CardCollection> arrangeForScry(CardCollection topN);

@@ -41,6 +41,8 @@ import java.util.Set;
  * @version $Id: java 9708 2011-08-09 19:34:12Z jendave $
  */
 public final class CardType implements Comparable<CardType>, CardTypeView {
+    private static final long serialVersionUID = 7612877255541109847L;
+
     public static final CardTypeView EMPTY = new CardType();
 
     public enum CoreType {

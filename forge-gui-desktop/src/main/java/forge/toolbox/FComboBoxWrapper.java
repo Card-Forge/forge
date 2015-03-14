@@ -1,17 +1,21 @@
 package forge.toolbox;
 
-import forge.interfaces.IComboBox;
-import forge.toolbox.FComboBox.TextAlignment;
-import forge.toolbox.FSkin.SkinFont;
-
-import javax.swing.*;
-
-import java.awt.*;
+import java.awt.Container;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Vector;
+
+import javax.swing.ComboBoxModel;
+import javax.swing.JComponent;
+import javax.swing.ListCellRenderer;
+
+import com.google.common.collect.ObjectArrays;
+
+import forge.interfaces.IComboBox;
+import forge.toolbox.FComboBox.TextAlignment;
+import forge.toolbox.FSkin.SkinFont;
 
 /** 
  * Wrapper for combo box with extra logic (either FComboBoxWrapper or FComboBoxPanel should be used instead of FComboBox so skinning works)
@@ -28,6 +32,7 @@ public class FComboBoxWrapper<E> implements IComboBox<E> {
     }
 
     private FComboBox<E> comboBox;
+    private ActionListener[] suppressedActionListeners = null;
     private Object constraints;
 
     public FComboBoxWrapper() {
@@ -109,6 +114,24 @@ public class FComboBoxWrapper<E> implements IComboBox<E> {
 
     public void addItemListener(ItemListener l) {
         comboBox.addItemListener(l);
+    }
+
+    public void suppressActionListeners() {
+        final ActionListener[] listeners = comboBox.getActionListeners();
+        for (final ActionListener al : listeners) {
+            comboBox.removeActionListener(al);
+        }
+        suppressedActionListeners = suppressedActionListeners == null
+                ? listeners
+                : ObjectArrays.concat(suppressedActionListeners, listeners, ActionListener.class);
+    }
+    public void unsuppressActionListeners() {
+        if (suppressedActionListeners != null) {
+            for (final ActionListener al : suppressedActionListeners) {
+                comboBox.addActionListener(al);
+            }
+            suppressedActionListeners = null;
+        }
     }
 
     public void addKeyListener(KeyListener l) {

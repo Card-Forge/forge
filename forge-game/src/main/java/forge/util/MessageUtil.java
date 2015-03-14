@@ -4,12 +4,21 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.game.GameObject;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 
 public class MessageUtil {
     private MessageUtil() { };
 
     public static String formatMessage(String message, Player player, Object related) {
+        if (related instanceof Player && message.indexOf("{player") >= 0) {
+            String noun = mayBeYou(player, related);
+            message = message.replace("{player}", noun).replace("{player's}", Lang.getPossesive(noun));
+        }
+        return message;
+    }
+
+    public static String formatMessage(String message, PlayerView player, Object related) {
         if (related instanceof Player && message.indexOf("{player") >= 0) {
             String noun = mayBeYou(player, related);
             message = message.replace("{player}", noun).replace("{player's}", Lang.getPossesive(noun));
@@ -48,6 +57,9 @@ public class MessageUtil {
     }
 
     public static String mayBeYou(Player player, Object what) {
+        return what == null ? "(null)" : what == player ? "you" : what.toString();
+    }
+    public static String mayBeYou(PlayerView player, Object what) {
         return what == null ? "(null)" : what == player ? "you" : what.toString();
     }
 }

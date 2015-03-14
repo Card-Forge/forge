@@ -83,6 +83,11 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
         showMessage(sb.toString());
     }
 
+    @Override
+    protected final boolean allowAwaitNextInput() {
+        return true;
+    }
+
     /** {@inheritDoc} */
     @Override
     protected final void onOk() {

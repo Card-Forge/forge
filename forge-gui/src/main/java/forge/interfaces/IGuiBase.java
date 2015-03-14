@@ -51,5 +51,4 @@ public interface IGuiBase {
     void showBazaar();
     IGuiGame getNewGuiGame();
     HostedMatch hostMatch();
-    void netMessage(String origin, String message);
 }

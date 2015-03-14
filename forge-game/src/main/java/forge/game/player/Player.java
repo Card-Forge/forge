@@ -2099,7 +2099,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         return mindSlaveMaster;
     }
 
-    public final void setMindSlaveMaster(Player mindSlaveMaster0) {
+    public final void setMindSlaveMaster(final Player mindSlaveMaster0) {
         if (mindSlaveMaster == mindSlaveMaster0) {
             return;
         }
@@ -2107,14 +2107,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         view.updateMindSlaveMaster(this);
 
         if (mindSlaveMaster != null) {
-            LobbyPlayer oldLobbyPlayer = getLobbyPlayer();
-            IGameEntitiesFactory master = (IGameEntitiesFactory)mindSlaveMaster.getLobbyPlayer();
+            final LobbyPlayer oldLobbyPlayer = getLobbyPlayer();
+            final PlayerController oldController = getController();
+            final IGameEntitiesFactory master = (IGameEntitiesFactory)mindSlaveMaster.getLobbyPlayer();
             controller = master.createMindSlaveController(mindSlaveMaster, this);
-            game.fireEvent(new GameEventPlayerControl(this, oldLobbyPlayer, getLobbyPlayer()));
-        }
-        else {
+            game.fireEvent(new GameEventPlayerControl(this, oldLobbyPlayer, oldController, getLobbyPlayer(), controller));
+        } else {
             controller = controllerCreator;
-            game.fireEvent(new GameEventPlayerControl(this, getLobbyPlayer(), null));
+            game.fireEvent(new GameEventPlayerControl(this, getLobbyPlayer(), controller, null, null));
         }
     }
 

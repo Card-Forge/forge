@@ -9,11 +9,14 @@ import forge.deckchooser.IDecksComboBoxListener;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
+import forge.interfaces.IPlayerChangeListener;
+import forge.match.GameLobby;
+import forge.match.LocalLobby;
+import forge.net.game.UpdateLobbyPlayerEvent;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
-import forge.screens.home.VLobby;
 import forge.screens.home.VHomeUI;
-import forge.screens.home.VLobby.LobbyType;
+import forge.screens.home.VLobby;
 
 /**
  * Assembles Swing components of constructed submenu singleton.
@@ -28,12 +31,22 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private DragCell parentCell;
     private final DragTab tab = new DragTab("Constructed Mode");
 
-    private final VLobby lobby = new VLobby(LobbyType.LOCAL);
+    private final GameLobby lobby = new LocalLobby();
+    private final VLobby vLobby = new VLobby(lobby);
     private VSubmenuConstructed() {
+        lobby.setListener(vLobby);
+
+        vLobby.setPlayerChangeListener(new IPlayerChangeListener() {
+            @Override public final void update(final int index, final UpdateLobbyPlayerEvent event) {
+                lobby.applyToSlot(index, event);
+            }
+        });
+
+        vLobby.update();
     }
 
     public VLobby getLobby() {
-        return lobby;
+        return vLobby;
     }
 
     /////////////////////////////////////
@@ -112,25 +125,27 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
         container.removeAll();
         container.setLayout(new MigLayout("insets 0, gap 0, wrap 1, ax right"));
-        container.add(lobby.getLblTitle(), "w 80%, h 40px!, gap 0 0 15px 15px, span 2, al right, pushx");
+        container.add(vLobby.getLblTitle(), "w 80%, h 40px!, gap 0 0 15px 15px, span 2, al right, pushx");
 
-        for (final FDeckChooser fdc : lobby.getDeckChoosers()) {
+        for (final FDeckChooser fdc : vLobby.getDeckChoosers()) {
             fdc.populate();
             fdc.getDecksComboBox().addListener(new IDecksComboBoxListener() {
                 @Override public final void deckTypeSelected(final DecksComboBoxEvent ev) {
-                    lobby.getPlayerPanelWithFocus().focusOnAvatar();
+                    vLobby.getPlayerPanelWithFocus().focusOnAvatar();
                 }
             });
         }
 
-        container.add(lobby.getConstructedFrame(), "gap 20px 20px 20px 0px, push, grow");
-        container.add(lobby.getPanelStart(), "gap 0 0 3.5%! 3.5%!, ax center");
+        container.add(vLobby.getConstructedFrame(), "gap 20px 20px 20px 0px, push, grow");
+        container.add(vLobby.getPanelStart(), "gap 0 0 3.5%! 3.5%!, ax center");
 
         if (container.isShowing()) {
             container.validate();
             container.repaint();
         }
 
-        lobby.changePlayerFocus(0);
+        if (!vLobby.getPlayerPanels().isEmpty()) {
+            vLobby.changePlayerFocus(0);
+        }
     }
 }

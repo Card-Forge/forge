@@ -44,8 +44,8 @@ import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
+import forge.trackable.TrackableCollection;
 import forge.util.CollectionSuppliers;
-import forge.util.FCollection;
 import forge.util.GuiDisplayUtil;
 import forge.util.NameGenerator;
 import forge.util.maps.HashMapOfLists;
@@ -137,8 +137,6 @@ public class HostedMatch {
         game.subscribeToEvents(SoundSystem.instance);
         game.subscribeToEvents(visitor);
 
-        final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
-
         // Instantiate all required field slots (user at 0)
         final List<Player> sortedPlayers = Lists.newArrayList(game.getRegisteredPlayers());
         Collections.sort(sortedPlayers, new Comparator<Player>() {
@@ -150,18 +148,23 @@ public class HostedMatch {
             }
         });
 
+        final String[] avatarIndices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
         final GameView gameView = getGameView();
 
-        int i = 0;
-        int avatarIndex = 0;
         humanCount = 0;
         final MapOfLists<IGuiGame, PlayerView> playersPerGui = new HashMapOfLists<IGuiGame, PlayerView>(CollectionSuppliers.<PlayerView>arrayLists()); 
-        for (final Player p : sortedPlayers) {
-            if (i < indices.length) {
-                avatarIndex = Integer.parseInt(indices[i]);
-                i++;
+        for (int iPlayer = 0; iPlayer < sortedPlayers.size(); iPlayer++) {
+            final RegisteredPlayer rp = match.getPlayers().get(iPlayer);
+            final Player p = sortedPlayers.get(iPlayer);
+
+            p.getLobbyPlayer().setAvatarIndex(rp.getPlayer().getAvatarIndex());
+            if (p.getLobbyPlayer().getAvatarIndex() == -1) {
+                if (iPlayer < avatarIndices.length) {
+                    p.getLobbyPlayer().setAvatarIndex(Integer.parseInt(avatarIndices[iPlayer]));
+                } else {
+                    p.getLobbyPlayer().setAvatarIndex(0);
+                }
             }
-            p.getLobbyPlayer().setAvatarIndex(avatarIndex);
             p.updateAvatar();
 
             if (p.getController() instanceof PlayerControllerHuman) {
@@ -177,8 +180,9 @@ public class HostedMatch {
                 humanCount++;
             }
         }
+
         for (final Entry<IGuiGame, Collection<PlayerView>> e : playersPerGui.entrySet()) {
-            e.getKey().openView(new FCollection<PlayerView>(e.getValue()));
+            e.getKey().openView(new TrackableCollection<PlayerView>(e.getValue()));
         }
 
         if (humanCount == 0) { //watch game but do not participate

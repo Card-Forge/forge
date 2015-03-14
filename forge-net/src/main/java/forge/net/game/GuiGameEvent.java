@@ -1,35 +1,40 @@
 package forge.net.game;
 
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
-
 import forge.net.game.server.RemoteClient;
-import forge.trackable.TrackableObject;
 
-public final class GuiGameEvent implements NetEvent {
+public final class GuiGameEvent implements IdentifiableNetEvent {
     private static final long serialVersionUID = 6223690008522514574L;
+    private static int staticId = 0;
 
+    private final int id;
     private final String method;
-    private final Iterable<? extends TrackableObject> objects;
+    private final Object[] objects;
 
-    public GuiGameEvent(final String method, final Iterable<? extends TrackableObject> objects) {
+    public GuiGameEvent(final String method, final Object ... objects) {
+        this.id = staticId++;
         this.method = method;
-        this.objects = objects == null ? ImmutableSet.<TrackableObject>of() : objects;
+        this.objects = objects == null ? new Object[0] : objects;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("GuiGameEvent %d: %s (%d args)", id, method, objects.length);
     }
 
     @Override
     public void updateForClient(final RemoteClient client) {
     }
 
+    @Override
+    public int getId() {
+        return id;
+    }
+
     public String getMethod() {
         return method;
     }
 
-    public TrackableObject getObject() {
-        return Iterables.getFirst(objects, null);
-    }
-
-    public Iterable<? extends TrackableObject> getObjects() {
+    public Object[] getObjects() {
         return objects;
     }
 }

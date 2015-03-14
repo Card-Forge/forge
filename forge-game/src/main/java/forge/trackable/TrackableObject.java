@@ -1,5 +1,6 @@
 package forge.trackable;
 
+import java.io.Serializable;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.Map;
@@ -8,7 +9,9 @@ import java.util.Set;
 import forge.game.IIdentifiable;
 
 //base class for objects that can be tracked and synced between game server and GUI
-public abstract class TrackableObject implements IIdentifiable {
+public abstract class TrackableObject implements IIdentifiable, Serializable {
+    private static final long serialVersionUID = 7386836745378571056L;
+
     private final int id;
     protected final transient Tracker tracker;
     private final Map<TrackableProperty, Object> props;
@@ -57,6 +60,30 @@ public abstract class TrackableObject implements IIdentifiable {
         }
         else if (!value.equals(props.put(key, value))) {
             changedProps.add(key);
+        }
+    }
+
+    /**
+     * Copy to this Trackable object the first object of the provided iterator
+     * whose id matches.
+     * 
+     * @see TrackableObject#copy(TrackableObject)
+     */
+    public final void copy(final Iterable<? extends TrackableObject> others) {
+        for (final TrackableObject other : others) {
+            if (this.equals(other)) {
+                copy(other);
+                break;
+            }
+        }
+    }
+
+    /**
+     * Copy all properties of another Trackable object to this object.
+     */
+    public final void copy(final TrackableObject other) {
+        for (final TrackableProperty prop : other.props.keySet()) {
+            set(prop, other.get(prop));
         }
     }
 

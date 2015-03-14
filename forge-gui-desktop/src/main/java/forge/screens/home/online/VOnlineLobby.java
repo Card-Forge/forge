@@ -12,8 +12,8 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.IVDoc;
 import forge.gui.framework.IVTopLevelUI;
+import forge.match.GameLobby;
 import forge.screens.home.VLobby;
-import forge.screens.home.VLobby.LobbyType;
 import forge.toolbox.FPanel;
 import forge.util.gui.SOptionPane;
 import forge.view.FView;
@@ -33,9 +33,9 @@ public enum VOnlineLobby implements IVDoc<COnlineLobby>, IVTopLevelUI {
     VLobby getLobby() {
         return lobby;
     }
-    VLobby setLobby(final LobbyType type) {
-        this.lobby = new VLobby(type);
-        getLayoutControl().setLobby(lobby);
+    VLobby setLobby(final GameLobby lobby) {
+        this.lobby = new VLobby(lobby);
+        getLayoutControl().setLobby(this.lobby);
         return this.lobby;
     }
 
@@ -65,7 +65,9 @@ public enum VOnlineLobby implements IVDoc<COnlineLobby>, IVTopLevelUI {
             container.repaint();
         }
 
-        lobby.changePlayerFocus(0);
+        if (!lobby.getPlayerPanels().isEmpty()) {
+            lobby.changePlayerFocus(0);
+        }
     }
 
     @Override

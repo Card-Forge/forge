@@ -20,6 +20,7 @@ package forge.screens.match.controllers;
 import java.util.Iterator;
 
 import com.google.common.collect.Iterators;
+import com.google.common.primitives.Ints;
 
 import forge.Singletons;
 import forge.UiCommand;
@@ -130,7 +131,8 @@ public class CDock implements ICDoc {
     public void initialize() {
         final String temp = FModel.getPreferences()
                 .getPref(FPref.UI_TARGETING_OVERLAY);
-        setArcState(ArcState.values()[Integer.valueOf(temp)]);
+        final Integer arcState = Ints.tryParse(temp);
+        setArcState(ArcState.values()[arcState == null ? 0 : arcState.intValue()]);
         refreshArcStateDisplay();
 
         view.getBtnConcede().setCommand(new UiCommand() {

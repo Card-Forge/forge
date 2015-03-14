@@ -2,20 +2,25 @@ package forge.game.event;
 
 import forge.LobbyPlayer;
 import forge.game.player.Player;
+import forge.game.player.PlayerController;
 
 public class GameEventPlayerControl extends GameEvent {
     public final Player player;
-    public final LobbyPlayer oldController;
-    public final LobbyPlayer newController;
+    public final LobbyPlayer oldLobbyPlayer;
+    public final PlayerController oldController;
+    public final LobbyPlayer newLobbyPlayer;
+    public final PlayerController newController;
 
-    public GameEventPlayerControl(Player p, LobbyPlayer old, LobbyPlayer new1) {
-        player = p;
-        oldController = old;
-        newController = new1;
+    public GameEventPlayerControl(final Player p, final LobbyPlayer oldLobbyPlayer, final PlayerController oldController, final LobbyPlayer newLobbyPlayer, final PlayerController newController) {
+        this.player = p;
+        this.oldLobbyPlayer = oldLobbyPlayer;
+        this.oldController = oldController;
+        this.newLobbyPlayer = newLobbyPlayer;
+        this.newController = newController;
     }
 
     @Override
-    public <T> T visit(IGameEventVisitor<T> visitor) {
+    public <T> T visit(final IGameEventVisitor<T> visitor) {
         return visitor.visit(this);
     }
 }

@@ -1,10 +1,12 @@
 package forge.game;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 
-public class GameEntityCache<Entity extends GameEntity, View extends GameEntityView> {
+import forge.trackable.TrackableObject;
+
+public class GameEntityCache<Entity extends IIdentifiable, View extends TrackableObject> {
     private HashMap<Integer, Entity> entityCache = new HashMap<Integer, Entity>();
  
     public void put(Integer id, Entity entity) {

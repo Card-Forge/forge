@@ -1,28 +1,32 @@
 package forge.game.player;
 
+import java.util.Collection;
+
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
+import forge.game.card.CardView;
 import forge.game.zone.ZoneType;
 
-//Stores information to reveal cards after a delay unless those cards can be revealed in the same dialog as cards being selected
+/**
+ * Stores information to reveal cards after a delay unless those cards can be
+ * revealed in the same dialog as cards being selected
+ */
 public class DelayedReveal {
-    private final CardCollection cards;
+    private final Collection<CardView> cards;
     private final ZoneType zone;
-    private final Player owner;
+    private final PlayerView owner;
     private final String messagePrefix;
-    private boolean revealed;
 
-    public DelayedReveal(Iterable<Card> cards0, ZoneType zone0, Player owner0) {
+    public DelayedReveal(Iterable<Card> cards0, ZoneType zone0, PlayerView owner0) {
         this(cards0, zone0, owner0, null);
     }
-    public DelayedReveal(Iterable<Card> cards0, ZoneType zone0, Player owner0, String messagePrefix0) {
-        cards = new CardCollection(cards0); //create copy of list to allow modification
+    public DelayedReveal(Iterable<Card> cards0, ZoneType zone0, PlayerView owner0, String messagePrefix0) {
+        cards = CardView.getCollection(cards0);
         zone = zone0;
         owner = owner0;
         messagePrefix = messagePrefix0;
     }
 
-    public Iterable<Card> getCards() {
+    public Collection<CardView> getCards() {
         return cards;
     }
 
@@ -30,17 +34,16 @@ public class DelayedReveal {
         return zone;
     }
 
-    public Player getOwner() {
+    public PlayerView getOwner() {
         return owner;
     }
 
-    public void remove(Card card) {
+    public String getMessagePrefix() {
+        return messagePrefix;
+    }
+
+    public void remove(CardView card) {
         cards.remove(card);
     }
 
-    public void reveal(PlayerController controller) {
-        if (revealed) { return; } //avoid revealing more than once
-        revealed = true;
-        controller.reveal(cards, zone, owner, messagePrefix);
-    }
 }

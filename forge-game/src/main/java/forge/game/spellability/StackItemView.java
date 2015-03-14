@@ -7,8 +7,9 @@ import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.util.FCollectionView;
 
-
 public class StackItemView extends TrackableObject {
+    private static final long serialVersionUID = 6733415646691356052L;
+
     public static StackItemView get(SpellAbilityStackInstance si) {
         return si == null ? null : si.getView();
     }

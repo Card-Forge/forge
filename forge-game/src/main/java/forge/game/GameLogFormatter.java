@@ -111,14 +111,14 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(final GameEventPlayerControl event) {
-        final LobbyPlayer newController = event.newController;
+        final LobbyPlayer newLobbyPlayer = event.newLobbyPlayer;
         final Player p = event.player;
 
         final String message;
-        if (newController == null) {
+        if (newLobbyPlayer == null) {
             message = p.getName() + " has restored control over themself";
         } else {
-            message =  String.format("%s is controlled by %s", p.getName(), newController.getName());
+            message =  String.format("%s is controlled by %s", p.getName(), newLobbyPlayer.getName());
         }
         return new GameLogEntry(GameLogEntryType.PLAYER_CONROL, message);
     }

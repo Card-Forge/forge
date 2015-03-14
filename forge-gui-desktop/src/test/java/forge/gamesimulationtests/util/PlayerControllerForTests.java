@@ -1,5 +1,13 @@
 package forge.gamesimulationtests.util;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
@@ -27,6 +35,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardShields;
+import forge.game.card.CardView;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -39,8 +48,13 @@ import forge.game.player.DelayedReveal;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController;
+import forge.game.player.PlayerView;
 import forge.game.replacement.ReplacementEffect;
-import forge.game.spellability.*;
+import forge.game.spellability.AbilitySub;
+import forge.game.spellability.Spell;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.TargetChoices;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
@@ -48,17 +62,16 @@ import forge.gamesimulationtests.util.card.CardSpecification;
 import forge.gamesimulationtests.util.card.CardSpecificationHandler;
 import forge.gamesimulationtests.util.player.PlayerSpecification;
 import forge.gamesimulationtests.util.player.PlayerSpecificationHandler;
-import forge.gamesimulationtests.util.playeractions.*;
-import forge.player.HumanPlay;
+import forge.gamesimulationtests.util.playeractions.ActivateAbilityAction;
+import forge.gamesimulationtests.util.playeractions.CastSpellFromHandAction;
+import forge.gamesimulationtests.util.playeractions.DeclareAttackersAction;
+import forge.gamesimulationtests.util.playeractions.DeclareBlockersAction;
+import forge.gamesimulationtests.util.playeractions.PlayerActions;
 import forge.item.PaperCard;
+import forge.player.HumanPlay;
 import forge.util.FCollectionView;
 import forge.util.ITriggerEvent;
 import forge.util.MyRandom;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.*;
 
 /**
  * Default harmless implementation for tests.
@@ -166,7 +179,7 @@ public class PlayerControllerForTests extends PlayerController {
 	@Override
 	public <T extends GameEntity> T chooseSingleEntityForEffect(FCollectionView<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer) {
         if (delayedReveal != null) {
-            delayedReveal.reveal(this);
+            reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
         }
 		return chooseItem(optionList);
 	}
@@ -221,6 +234,11 @@ public class PlayerControllerForTests extends PlayerController {
 
 	@Override
 	public void reveal(CardCollectionView cards, ZoneType zone, Player owner, String messagePrefix) {
+		//nothing needs to be done here
+	}
+
+	@Override
+	public void reveal(Collection<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix) {
 		//nothing needs to be done here
 	}
 
@@ -628,7 +646,7 @@ public class PlayerControllerForTests extends PlayerController {
             String selectPrompt, boolean isOptional, Player decider) {
 
         if (delayedReveal != null) {
-            delayedReveal.reveal(this);
+            reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
         }
         return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player, decider);
     }

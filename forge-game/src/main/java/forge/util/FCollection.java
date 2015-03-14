@@ -1,5 +1,6 @@
 package forge.util;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -12,7 +13,9 @@ import java.util.ListIterator;
 import java.util.Set;
 
 //base class for a collection with quick lookup and that maintains order
-public class FCollection<T> implements List<T>, Set<T>, FCollectionView<T>, Cloneable {
+public class FCollection<T> implements List<T>, Set<T>, FCollectionView<T>, Cloneable, Serializable {
+    private static final long serialVersionUID = -1664555336364294106L;
+
     private final HashSet<T> set = new HashSet<T>();
     private final LinkedList<T> list = new LinkedList<T>();
 

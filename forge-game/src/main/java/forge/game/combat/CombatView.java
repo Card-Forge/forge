@@ -17,6 +17,8 @@ import forge.util.FCollection;
 
 
 public class CombatView extends TrackableObject {
+    private static final long serialVersionUID = 68085618912864941L;
+
     public CombatView(final Tracker tracker) {
         super(-1, tracker); //ID not needed
         set(TrackableProperty.AttackersWithDefenders, new HashMap<CardView, GameEntityView>());

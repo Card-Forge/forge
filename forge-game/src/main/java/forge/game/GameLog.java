@@ -19,6 +19,7 @@ package forge.game;
 
 import forge.game.event.IGameEventVisitor;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -30,10 +31,12 @@ import java.util.Observable;
  * @author Forge
  * @version $Id: GameLog.java 12297 2011-11-28 19:56:47Z slapshot5 $
  */
-public class GameLog extends Observable {
-    private List<GameLogEntry> log = new ArrayList<GameLogEntry>();
+public class GameLog extends Observable implements Serializable {
+    private static final long serialVersionUID = 6465283802022948827L;
 
-    private GameLogFormatter formatter = new GameLogFormatter(this);
+    private final List<GameLogEntry> log = new ArrayList<GameLogEntry>();
+
+    private final transient GameLogFormatter formatter = new GameLogFormatter(this);
 
     /** Logging level:
      * 0 - Turn

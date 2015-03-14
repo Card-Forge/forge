@@ -210,9 +210,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         btnOk.setEnabled(okEnabled);
         btnCancel.setEnabled(cancelEnabled);
         if (okEnabled && focusOk) {
-            focusButton(btnOk);
+            focusButton(MatchButtonType.OK);
         } else if (cancelEnabled) {
-            focusButton(btnCancel);
+            focusButton(MatchButtonType.CANCEL);
         }
     }
 

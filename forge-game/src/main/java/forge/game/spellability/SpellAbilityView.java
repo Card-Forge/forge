@@ -5,8 +5,9 @@ import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 
-
 public class SpellAbilityView extends TrackableObject {
+    private static final long serialVersionUID = 2514234930798754769L;
+
     public static SpellAbilityView get(SpellAbility spab) {
         return spab == null ? null : spab.getView();
     }

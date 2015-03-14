@@ -16,6 +16,7 @@ import forge.game.event.GameEventCombatChanged;
 import forge.game.player.DelayedReveal;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.player.PlayerView;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -700,10 +701,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
                 CardCollectionView shown = !decider.hasKeyword("LimitSearchLibrary") ? player.getCardsIn(ZoneType.Library) : player.getCardsIn(ZoneType.Library, fetchNum);
                 // Look at whole library before moving onto choosing a card
-                delayedReveal = new DelayedReveal(shown, ZoneType.Library, player, source.getName() + " - Looking at cards in ");
+                delayedReveal = new DelayedReveal(shown, ZoneType.Library, PlayerView.get(player), source.getName() + " - Looking at cards in ");
             }
             else if (origin.contains(ZoneType.Hand) && player.isOpponentOf(decider)) {
-                delayedReveal = new DelayedReveal(player.getCardsIn(ZoneType.Hand), ZoneType.Hand, player, source.getName() + " - Looking at cards in ");
+                delayedReveal = new DelayedReveal(player.getCardsIn(ZoneType.Hand), ZoneType.Hand, PlayerView.get(player), source.getName() + " - Looking at cards in ");
             }
         }
 
@@ -765,13 +766,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
             if (sa.hasParam("ShareLandType")) {
                 for (final Card card : chosenCards) {
-                	
+
                     fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
-                    	 @Override
-                         public boolean apply(final Card c) {
-                    		return  c.sharesLandTypeWith(card);
-                    	 }
-                    	
+                        @Override
+                        public boolean apply(final Card c) {
+                            return  c.sharesLandTypeWith(card);
+                        }
+
                     });
                 }
             }
@@ -784,7 +785,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             Card c = null;
             if (sa.hasParam("AtRandom")) {
                 if (delayedReveal != null) {
-                    delayedReveal.reveal(decider.getController());
+                    decider.getController().reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
                 }
                 c = Aggregates.random(fetchList);
             }
@@ -812,7 +813,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
             fetchList.remove(c);
             if (delayedReveal != null) {
-                delayedReveal.remove(c);
+                delayedReveal.remove(CardView.get(c));
             }
             chosenCards.add(c);
 

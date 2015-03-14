@@ -9,7 +9,7 @@ import forge.LobbyPlayer;
 import forge.game.Game;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
-import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityView;
 import forge.interfaces.IDevModeCheats;
 import forge.interfaces.IGuiGame;
 import forge.match.input.Input;
@@ -90,7 +90,7 @@ public class WatchLocalGame extends PlayerControllerHuman {
     }
 
     @Override
-    public void selectAbility(final SpellAbility sa) {
+    public void selectAbility(final SpellAbilityView sa) {
     }
 
     @Override

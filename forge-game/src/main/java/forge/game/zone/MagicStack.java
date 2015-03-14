@@ -17,6 +17,16 @@
  */
 package forge.game.zone;
 
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Stack;
+import java.util.concurrent.LinkedBlockingDeque;
+
 import com.esotericsoftware.minlog.Log;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -45,13 +55,16 @@ import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
-import forge.game.spellability.*;
+import forge.game.spellability.Ability;
+import forge.game.spellability.AbilityStatic;
+import forge.game.spellability.OptionalCost;
+import forge.game.spellability.Spell;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.TargetChoices;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
-
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * <p>
@@ -518,6 +531,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         setResolving(false);
         unfreezeStack();
         sa.resetOnceResolved();
+        game.updateStackForView();
 
         //game.getAction().checkStaticAbilities();
         game.getPhaseHandler().onStackResolved();

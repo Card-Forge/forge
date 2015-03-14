@@ -17,6 +17,15 @@
  */
 package forge.deck;
 
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.Lists;
 
 import forge.StaticData;
@@ -26,17 +35,9 @@ import forge.util.ItemPool;
 import forge.util.ItemPoolSorter;
 import forge.util.MyRandom;
 
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 
 public class CardPool extends ItemPool<PaperCard> {
+    private static final long serialVersionUID = -5379091255613968393L;
 
     public CardPool() {
         super(PaperCard.class);

@@ -142,6 +142,7 @@ public enum TrackableProperty {
     MatchOver(TrackableTypes.BooleanType),
     NumGamesInMatch(TrackableTypes.IntegerType),
     NumPlayedGamesInMatch(TrackableTypes.IntegerType),
+    Stack(TrackableTypes.StackItemViewListType),
     StormCount(TrackableTypes.IntegerType),
     GameOver(TrackableTypes.BooleanType),
     PoisonCountersToLose(TrackableTypes.IntegerType),

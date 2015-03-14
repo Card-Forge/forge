@@ -1,6 +1,7 @@
 package forge.screens.match;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.SwingUtilities;
@@ -91,21 +92,49 @@ public class VMatchUI implements IVTopLevelUI {
             }
         }
 
-        // Add extra hands to existing hand panel.
-        for (int i = 1; i < lstHands.size(); i++) {
-            // If already in layout, no need to add again.
-            if (lstHands.get(i).getParentCell() == null) { // if i == 0, we get NPE in two lines
-                DragCell cellWithHand = lstHands.get(0).getParentCell();
-                cellWithHand.addDoc(lstHands.get(i));
+        // Determine (an) existing hand panel
+        DragCell cellWithHands = null;
+        for (final EDocID handId : EDocID.Hands) {
+            cellWithHands = handId.getDoc().getParentCell();
+            if (cellWithHands != null) {
+                break;
             }
         }
+        if (cellWithHands == null) {
+            // Default to a cell we know exists
+            cellWithHands = EDocID.REPORT_LOG.getDoc().getParentCell();
+        }
+        for (final EDocID handId : EDocID.Hands) {
+            final DragCell parentCell = handId.getDoc().getParentCell();
+            VHand myVHand = null;
+            for (final VHand vHand : lstHands) {
+                if (handId.equals(vHand.getDocumentID())) {
+                    myVHand = vHand;
+                    break;
+                }
+            }
 
-        // Remove any hand panels that aren't needed anymore
-        for (int i = EDocID.Hands.length - 1; i >= lstHands.size(); i--) {
-            DragCell cellWithHand = EDocID.Hands[i].getDoc().getParentCell();
-            if (cellWithHand != null) {
-                cellWithHand.removeDoc(EDocID.Hands[i].getDoc());
-                EDocID.Hands[i].setDoc(new VEmptyDoc(EDocID.Hands[i]));
+            if (myVHand == null) {
+                // Hand not present, remove cell if necessary
+                if (parentCell != null) {
+                    parentCell.removeDoc(handId.getDoc());
+                    handId.setDoc(new VEmptyDoc(handId));
+                }
+            } else {
+                // Hand present, add it if necessary
+                if (parentCell == null) {
+                    final EDocID fieldDoc = EDocID.Fields[Arrays.asList(EDocID.Hands).indexOf(handId)];
+                    if (fieldDoc.getDoc().getParentCell() != null) {
+                        fieldDoc.getDoc().getParentCell().addDoc(myVHand);
+                        continue;
+                    }
+                    final EDocID commandDoc = EDocID.Commands[Arrays.asList(EDocID.Hands).indexOf(handId)];
+                    if (commandDoc.getDoc().getParentCell() != null) {
+                        commandDoc.getDoc().getParentCell().addDoc(myVHand);
+                        continue;
+                    }
+                    cellWithHands.addDoc(myVHand);
+                }
             }
         }
 

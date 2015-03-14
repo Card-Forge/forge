@@ -1,7 +1,10 @@
 package forge.player;
 
-import java.util.Map;
+import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
+
+import forge.AIOption;
 import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.ai.AiProfileUtil;
@@ -13,8 +16,6 @@ import forge.util.GuiDisplayUtil;
 import forge.util.MyRandom;
 import forge.util.gui.SOptionPane;
 
-import org.apache.commons.lang3.StringUtils;
-
 public final class GamePlayerUtil {
     private GamePlayerUtil() { };
 
@@ -22,8 +23,8 @@ public final class GamePlayerUtil {
     public static final LobbyPlayer getGuiPlayer() {
         return guiPlayer;
     }
-    public static final LobbyPlayer getGuiPlayer(String name, int index) {
-        if (index == 0) {
+    public static final LobbyPlayer getGuiPlayer(final String name, final boolean writePref) {
+        if (writePref) {
             if (!name.equals(guiPlayer.getName())) {
                 guiPlayer.setName(name);
                 FModel.getPreferences().setPref(FPref.PLAYER_NAME, name);
@@ -49,7 +50,7 @@ public final class GamePlayerUtil {
     public final static LobbyPlayer createAiPlayer(String name, int avatarIndex) {
         return createAiPlayer(name, avatarIndex, null);
     }
-    public final static LobbyPlayer createAiPlayer(String name, int avatarIndex, Map<String, String> options) {
+    public final static LobbyPlayer createAiPlayer(String name, int avatarIndex, Set<AIOption> options) {
         LobbyPlayerAi player = new LobbyPlayerAi(name, options);
 
         // TODO: implement specific AI profiles for quest mode.

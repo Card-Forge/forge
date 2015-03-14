@@ -6,14 +6,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -24,25 +19,31 @@ import javax.swing.event.ListSelectionListener;
 
 import net.miginfocom.swing.MigLayout;
 
-import org.apache.commons.lang3.StringUtils;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
+import forge.AIOption;
 import forge.UiCommand;
+import forge.deck.CardPool;
+import forge.deck.Deck;
 import forge.deck.DeckProxy;
+import forge.deck.DeckSection;
 import forge.deck.DeckType;
+import forge.deck.DeckgenUtil;
 import forge.deckchooser.DecksComboBoxEvent;
 import forge.deckchooser.FDeckChooser;
 import forge.deckchooser.IDecksComboBoxListener;
 import forge.game.GameType;
 import forge.game.card.CardView;
 import forge.gui.CardDetailPanel;
-import forge.interfaces.ILobby;
 import forge.interfaces.IPlayerChangeListener;
+import forge.interfaces.IUpdateable;
 import forge.item.PaperCard;
+import forge.match.GameLobby;
+import forge.match.LobbySlot;
 import forge.model.FModel;
 import forge.net.game.LobbySlotType;
-import forge.net.game.LobbyState;
-import forge.net.game.LobbyState.LobbyPlayerData;
-import forge.net.game.server.RemoteClient;
+import forge.net.game.UpdateLobbyPlayerEvent;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FCheckBox;
@@ -55,39 +56,34 @@ import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.FTextField;
+import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.NameGenerator;
+import forge.util.storage.IStorage;
 
 /**
  * Lobby view. View of a number of players at the deck selection stage.
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public class VLobby implements ILobby {
+public class VLobby implements IUpdateable {
 
     static final int MAX_PLAYERS = 8;
     private static final ForgePreferences prefs = FModel.getPreferences();
 
-    public enum LobbyType { LOCAL, SERVER, CLIENT; }
-
     // General variables
-    private final LobbyType type;
-    private int localPlayer = 0;
+    private final GameLobby lobby;
     private IPlayerChangeListener playerChangeListener = null;
     private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Constructed");
-    private int activePlayersNum = 2;
+    private int activePlayersNum = 0;
     private int playerWithFocus = 0; // index of the player that currently has focus
     private PlayerPanel playerPanelWithFocus;
-    private GameType currentGameMode = GameType.Constructed;
-    private List<Integer> teams = new ArrayList<Integer>(MAX_PLAYERS);
-    private List<Integer> archenemyTeams = new ArrayList<Integer>(MAX_PLAYERS);
 
     private final StartButton btnStart  = new StartButton();
     private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
     private final JPanel constructedFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2")); // Main content frame
 
     // Variants frame and variables
-    private final Set<GameType> appliedVariants = new TreeSet<GameType>();
     private final FPanel variantsPanel = new FPanel(new MigLayout("insets 10, gapx 10"));
     private final VariantCheckBox vntVanguard = new VariantCheckBox(GameType.Vanguard);
     private final VariantCheckBox vntMomirBasic = new VariantCheckBox(GameType.MomirBasic);
@@ -96,6 +92,8 @@ public class VLobby implements ILobby {
     private final VariantCheckBox vntPlanechase = new VariantCheckBox(GameType.Planechase);
     private final VariantCheckBox vntArchenemy = new VariantCheckBox(GameType.Archenemy);
     private final VariantCheckBox vntArchenemyRumble = new VariantCheckBox(GameType.ArchenemyRumble);
+    private final ImmutableList<VariantCheckBox> vntBoxes =
+            ImmutableList.of(vntVanguard, vntMomirBasic, vntCommander, vntTinyLeaders, vntPlanechase, vntArchenemy, vntArchenemyRumble);
 
     // Player frame elements
     private final JPanel playersFrame = new JPanel(new MigLayout("insets 0, gap 0 5, wrap, hidemode 3"));
@@ -109,6 +107,7 @@ public class VLobby implements ILobby {
     private final List<FDeckChooser> deckChoosers = new ArrayList<FDeckChooser>(8);
     private final FCheckBox cbSingletons = new FCheckBox("Singleton Mode");
     private final FCheckBox cbArtifacts = new FCheckBox("Remove Artifacts");
+    private final Deck[] decks = new Deck[MAX_PLAYERS];
 
     // Variants
     private final List<FList<Object>> schemeDeckLists = new ArrayList<FList<Object>>();
@@ -132,8 +131,8 @@ public class VLobby implements ILobby {
     private final Vector<Object> aiListData = new Vector<Object>();
 
     // CTR
-    public VLobby(final LobbyType type) {
-        this.type = type;
+    public VLobby(final GameLobby lobby) {
+        this.lobby = lobby;
 
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
@@ -142,55 +141,23 @@ public class VLobby implements ILobby {
 
         variantsPanel.setOpaque(false);
         variantsPanel.add(newLabel("Variants:"));
-        variantsPanel.add(vntVanguard);
-        variantsPanel.add(vntMomirBasic);
-        variantsPanel.add(vntCommander);
-        variantsPanel.add(vntTinyLeaders);
-        variantsPanel.add(vntPlanechase);
-        variantsPanel.add(vntArchenemy);
-        variantsPanel.add(vntArchenemyRumble);
+        for (final VariantCheckBox vcb : vntBoxes) {
+            variantsPanel.add(vcb);
+        }
 
         constructedFrame.add(new FScrollPane(variantsPanel, false, true,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED),
                 "w 100%, h 45px!, gapbottom 10px, spanx 2, wrap");
 
-        ////////////////////////////////////////////////////////
-        ///////////////////// Player Panel /////////////////////
-
-        // Construct individual player panels
-        String constraints = "pushx, growx, wrap, hidemode 3";
-        for (int i = 0; i < MAX_PLAYERS; i++) {
-            teams.add(i + 1);
-            archenemyTeams.add(i == 0 ? 1 : 2);
-
-            final PlayerPanel player = new PlayerPanel(this, i, type);
-            if (type == LobbyType.CLIENT) {
-                player.setRemote(true);
-            }
-            playerPanels.add(player);
-
-            // Populate players panel
-            player.setVisible(i < activePlayersNum);
-
-            playersScroll.add(player, constraints);
-
-            if (i == 0) {
-                constraints += ", gaptop 5px";
-            }
-        }
-
-        playerPanelWithFocus = playerPanels.get(0);
-        playerPanelWithFocus.setFocused(true);
-
         playersFrame.setOpaque(false);
         playersFrame.add(playersScroll, "w 100%, h 100%-35px");
 
-        if (type != LobbyType.CLIENT) {
+        if (lobby.hasControl()) {
             addPlayerBtn.setFocusable(true);
             addPlayerBtn.setCommand(new Runnable() {
                 @Override public final void run() {
-                    addPlayer();
+                    lobby.addSlot();
                 }
             });
             playersFrame.add(addPlayerBtn, "height 30px!, growx, pushx");
@@ -209,9 +176,16 @@ public class VLobby implements ILobby {
         decksFrame.setOpaque(false);
 
         // Start Button
-        if (type != LobbyType.CLIENT) {
+        if (lobby.hasControl()) {
             pnlStart.setOpaque(false);
             pnlStart.add(btnStart, "align center");
+
+            // Start button event handling
+            btnStart.addActionListener(new ActionListener() {
+                @Override public final void actionPerformed(final ActionEvent arg0) {
+                    lobby.startGame();
+                }
+            });
         }
     }
 
@@ -227,143 +201,95 @@ public class VLobby implements ILobby {
         }
         populateDeckPanel(GameType.Constructed);
         populateVanguardLists();
-
     }
 
-    private int addPlayerInFreeSlot(final String name) {
-        if (activePlayersNum >= MAX_PLAYERS) {
-            return -1;
-        }
-
-        for (final PlayerPanel pp : getPlayerPanels()) {
-            if (pp.isVisible() && (
-                    pp.getType() == LobbySlotType.OPEN || (pp.isLocal() && type == LobbyType.SERVER))) {
-                final int index = pp.getIndex();
-                addPlayer(index);
-                pp.setPlayerName(name);
-                System.out.println("Put player " + name + " in slot " + index);
-
-                return index;
-            }
-        }
-        return -1;
-    }
-    private void addPlayer() {
-        if (activePlayersNum >= MAX_PLAYERS) {
-            return;
-        }
-
-        int freeIndex = -1;
-        for (int i = 0; i < MAX_PLAYERS; i++) {
-            if (!playerPanels.get(i).isVisible()) {
-                freeIndex = i;
-                break;
-            }
-        }
-        addPlayer(freeIndex);
-    }
-    private void addPlayer(final int slot) {
-        playerPanels.get(slot).setVisible(true);
-
-        activePlayersNum++;
+    public void update() {
+        activePlayersNum = lobby.getNumberOfSlots();
         addPlayerBtn.setEnabled(activePlayersNum < MAX_PLAYERS);
 
-        playerPanels.get(slot).setVisible(true);
-        playerPanels.get(slot).focusOnAvatar();
-
-        firePlayerChangeListener();
-    }
-
-    void removePlayer(final int playerIndex) {
-        if (activePlayersNum <= playerIndex) {
-            return;
+        for (final VariantCheckBox vcb : vntBoxes) {
+            vcb.setSelected(hasVariant(vcb.variant));
+            vcb.setEnabled(lobby.hasControl());
         }
-        activePlayersNum--;
-        final FPanel player = playerPanels.get(playerIndex);
-        player.setVisible(false);
-        addPlayerBtn.setEnabled(true);
 
-        //find closest player still in game and give focus
-        int min = MAX_PLAYERS;
-        final List<Integer> participants = getParticipants();
-        if (!participants.isEmpty()) {
-            int closest = 2;
-
-            for (final int participantIndex : getParticipants()) {
-                final int diff = Math.abs(playerIndex - participantIndex);
-
-                if (diff < min) {
-                    min = diff;
-                    closest = participantIndex;
+        final boolean allowNetworking = lobby.isAllowNetworking();
+        for (int i = 0; i < MAX_PLAYERS; i++) {
+            final boolean hasPanel = i < playerPanels.size();
+            if (i < activePlayersNum) {
+                // visible panels
+                final LobbySlot slot = lobby.getSlot(i);
+                final PlayerPanel panel;
+                if (hasPanel) {
+                    panel = playerPanels.get(i);
+                    panel.setVisible(true);
+                } else {
+                    panel = new PlayerPanel(this, allowNetworking, i, slot, lobby.mayEdit(i), lobby.hasControl());
+                    playerPanels.add(panel);
+                    String constraints = "pushx, growx, wrap, hidemode 3";
+                    if (i == 0) {
+                        constraints += ", gaptop 5px";
+                        playerPanelWithFocus = panel;
+                        playerPanelWithFocus.setFocused(true);
+                    }
+                    playersScroll.add(panel, constraints);
                 }
+
+                panel.setType(slot.getType());
+                panel.setPlayerName(slot.getName());
+                panel.setAvatar(slot.getAvatarIndex());
+                panel.setTeam(slot.getTeam());
+                panel.setIsArchenemy(slot.isArchenemy());
+                panel.setUseAiSimulation(slot.getAiOptions().contains(AIOption.USE_SIMULATION));
+                panel.setMayEdit(lobby.mayEdit(i));
+                panel.setMayControl(lobby.mayControl(i));
+                panel.setMayRemove(lobby.mayRemove(i));
+                panel.update();
+
+                deckChoosers.get(i).setIsAi(slot.getType() == LobbySlotType.AI);
+            } else if (hasPanel) {
+                playerPanels.get(i).setVisible(false);
             }
-
-            changePlayerFocus(closest);
-            playerPanels.get(closest).focusOnAvatar();
         }
-        firePlayerChangeListener();
-    }
 
-    @Override
-    public int login(final RemoteClient client) {
-        return addPlayerInFreeSlot(client.getUsername());
-    }
-
-    @Override
-    public void logout(final RemoteClient client) {
-        removePlayer(client.getIndex());
-    }
-
-    @Override
-    public LobbyState getState() {
-        final LobbyState state = new LobbyState();
-        for (int i = 0; i < activePlayersNum; i++) {
-            state.addPlayer(getData(i));
+        if (playerWithFocus >= activePlayersNum) {
+            playerWithFocus = activePlayersNum - 1;
         }
-        return state;
-    }
-
-    public void setState(final LobbyState state) {
-        setLocalPlayer(state.getLocalPlayer());
-
-        final List<LobbyPlayerData> players = state.getPlayers();
-        final int pSize = players.size();
-        activePlayersNum = pSize;
-        for (int i = 0; i < pSize; i++) {
-            final LobbyPlayerData player = players.get(i);
-            final PlayerPanel panel = playerPanels.get(i);
-
-            if (type == LobbyType.CLIENT) {
-                panel.setRemote(i != localPlayer);
-                panel.setEditableForClient(i == localPlayer);
-            } else {
-                panel.setRemote(player.getType() == LobbySlotType.REMOTE);
-                panel.setEditableForClient(false);
-            }
-            panel.setPlayerName(player.getName());
-            panel.setAvatar(player.getAvatarIndex());
-            panel.setVisible(true);
-            panel.update();
-        }
-    }
-
-    private void setLocalPlayer(final int index) {
-        localPlayer = index;
+        changePlayerFocus(playerWithFocus);
+        refreshPanels(true, true);
     }
 
     public void setPlayerChangeListener(final IPlayerChangeListener listener) {
         this.playerChangeListener = listener;
     }
 
-    void firePlayerChangeListener() {
+    void firePlayerChangeListener(final int index) {
         if (playerChangeListener != null) {
-            playerChangeListener.update(getData(localPlayer));
+            playerChangeListener.update(index, getSlot(index));
+        }
+    }
+    void fireDeckChangeListener(final int index, final Deck deck) {
+        decks[index] = deck;
+        if (playerChangeListener != null) {
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.deckUpdate(deck));
+        }
+    }
+    void fireDeckSectionChangeListener(final int index, final DeckSection section, final CardPool cards) {
+        decks[index].putSection(section, cards);
+        if (playerChangeListener != null) {
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.deckUpdate(section, cards));
         }
     }
 
-    private LobbyPlayerData getData(final int index) {
+    void removePlayer(final int index) {
+        lobby.removeSlot(index);
+    }
+    boolean hasVariant(final GameType variant) {
+        return lobby.hasVariant(variant);
+    }
+
+    private UpdateLobbyPlayerEvent getSlot(final int index) {
         final PlayerPanel panel = playerPanels.get(index);
-        return new LobbyPlayerData(panel.getPlayerName(), panel.getAvatarIndex(), panel.getType());
+        return UpdateLobbyPlayerEvent.create(panel.getType(), panel.getPlayerName(), panel.getAvatarIndex(), panel.getTeam(), panel.isArchenemy(), panel.getAiOptions());
     }
 
     /** Builds the actual deck panel layouts for each player.
@@ -374,53 +300,142 @@ public class VLobby implements ILobby {
         String labelConstraints = "gaptop 10px, gapbottom 5px";
 
         // Main deck
-        final FDeckChooser mainChooser = new FDeckChooser(null, isPlayerAI(playerIndex));
+        final FDeckChooser mainChooser = new FDeckChooser(null, false);
         mainChooser.initialize();
         mainChooser.getLstDecks().setSelectCommand(new UiCommand() {
-            @Override
-            public void run() {
+            @Override public final void run() {
                 VLobby.this.onDeckClicked(playerIndex, mainChooser.getSelectedDeckType(), mainChooser.getLstDecks().getSelectedItems());
             }
         });
         deckChoosers.add(mainChooser);
 
         // Scheme deck list
-        FPanel schemeDeckPanel = new FPanel();
+        final FPanel schemeDeckPanel = new FPanel();
         schemeDeckPanel.setBorderToggle(false);
         schemeDeckPanel.setLayout(new MigLayout(sectionConstraints));
         schemeDeckPanel.add(new FLabel.Builder().text("Select Scheme deck:").build(), labelConstraints);
-        FList<Object> schemeDeckList = new FList<Object>();
+        final FList<Object> schemeDeckList = new FList<Object>();
         schemeDeckList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        schemeDeckList.addListSelectionListener(new ListSelectionListener() {
+            @Override public final void valueChanged(final ListSelectionEvent e) {
+                if (playerIndex >= activePlayersNum) {
+                    return;
+                }
 
-        FScrollPane scrSchemes = new FScrollPane(schemeDeckList, true,
+                final Object selected = schemeDeckList.getSelectedValue();
+                final Deck deck = decks[playerIndex];
+                CardPool schemePool = null;
+                if (selected instanceof String) {
+                    String sel = (String) selected;
+                    if (sel.contains("Use deck's scheme section")) {
+                        if (deck.has(DeckSection.Schemes)) {
+                            schemePool = deck.get(DeckSection.Schemes);
+                        } else {
+                            sel = "Random";
+                        }
+                    }
+                    final IStorage<Deck> sDecks = FModel.getDecks().getScheme();
+                    if (sel.equals("Random") && sDecks.size() != 0) {
+                        schemePool = Aggregates.random(sDecks).get(DeckSection.Schemes);                            
+                    }
+                } else if (selected instanceof Deck) {
+                    schemePool = ((Deck) selected).get(DeckSection.Schemes);
+                }
+                if (schemePool == null) { //Can be null if player deselects the list selection or chose Generate
+                    schemePool = DeckgenUtil.generateSchemePool();
+                }
+                fireDeckSectionChangeListener(playerIndex, DeckSection.Schemes, schemePool);
+                getDeckChooser(playerIndex).saveState();
+            }
+        });
+
+        final FScrollPane scrSchemes = new FScrollPane(schemeDeckList, true,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         schemeDeckPanel.add(scrSchemes, "grow, push");
         schemeDeckLists.add(schemeDeckList);
         schemeDeckPanels.add(schemeDeckPanel);
 
         // Commander deck list
-        FPanel commanderDeckPanel = new FPanel();
+        final FPanel commanderDeckPanel = new FPanel();
         commanderDeckPanel.setBorderToggle(false);
         commanderDeckPanel.setLayout(new MigLayout(sectionConstraints));
         commanderDeckPanel.add(new FLabel.Builder().text("Select Commander deck:").build(), labelConstraints);
-        FList<Object> commanderDeckList = new FList<Object>();
+        final FList<Object> commanderDeckList = new FList<Object>();
         commanderDeckList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        commanderDeckList.addListSelectionListener(new ListSelectionListener() {
+            @Override public final void valueChanged(final ListSelectionEvent e) {
+                if (playerIndex >= activePlayersNum) {
+                    return;
+                }
 
-        FScrollPane scrCommander = new FScrollPane(commanderDeckList, true,
+                final Object selected = commanderDeckList.getSelectedValue();
+                Deck deck = null;
+                if (selected instanceof String) {
+                    final String sel = (String) selected;
+                    final IStorage<Deck> comDecks = FModel.getDecks().getCommander();
+                    if (sel.equals("Random") && comDecks.size() > 0) {
+                        deck = Aggregates.random(comDecks);
+                    }
+                } else if (selected instanceof Deck) {
+                    deck = (Deck) selected;
+                }
+                final GameType commanderGameType = hasVariant(GameType.TinyLeaders) ? GameType.TinyLeaders : GameType.Commander;
+                if (deck == null) { //Can be null if player deselects the list selection or chose Generate
+                    deck = DeckgenUtil.generateCommanderDeck(isPlayerAI(playerIndex), commanderGameType);
+                }
+                fireDeckChangeListener(playerIndex, deck);
+                getDeckChooser(playerIndex).saveState();
+            }
+        });
+        
+
+        final FScrollPane scrCommander = new FScrollPane(commanderDeckList, true,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         commanderDeckPanel.add(scrCommander, "grow, push");
         commanderDeckLists.add(commanderDeckList);
         commanderDeckPanels.add(commanderDeckPanel);
 
         // Planar deck list
-        FPanel planarDeckPanel = new FPanel();
+        final FPanel planarDeckPanel = new FPanel();
         planarDeckPanel.setBorderToggle(false);
         planarDeckPanel.setLayout(new MigLayout(sectionConstraints));
         planarDeckPanel.add(new FLabel.Builder().text("Select Planar deck:").build(), labelConstraints);
-        FList<Object> planarDeckList = new FList<Object>();
+        final FList<Object> planarDeckList = new FList<Object>();
         planarDeckList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        planarDeckList.addListSelectionListener(new ListSelectionListener() {
+            @Override public final void valueChanged(final ListSelectionEvent e) {
+                if (playerIndex >= activePlayersNum) {
+                    return;
+                }
 
-        FScrollPane scrPlanes = new FScrollPane(planarDeckList, true,
+                final Object selected = planarDeckList.getSelectedValue();
+                final Deck deck = decks[playerIndex];
+                CardPool planePool = null;
+                if (selected instanceof String) {
+                    String sel = (String) selected;
+                    if (sel.contains("Use deck's planes section")) {
+                        if (deck.has(DeckSection.Planes)) {
+                            planePool = deck.get(DeckSection.Planes);
+                        } else {
+                            sel = "Random";
+                        }
+                    }
+                    final IStorage<Deck> pDecks = FModel.getDecks().getPlane();
+                    if (sel.equals("Random") && pDecks.size() != 0) {
+                        planePool = Aggregates.random(pDecks).get(DeckSection.Planes);                            
+                    }
+                } else if (selected instanceof Deck) {
+                    planePool = ((Deck) selected).get(DeckSection.Planes);
+                }
+                if (planePool == null) { //Can be null if player deselects the list selection or chose Generate
+                    planePool = DeckgenUtil.generatePlanarPool();
+                }
+                fireDeckSectionChangeListener(playerIndex, DeckSection.Planes, planePool);
+                getDeckChooser(playerIndex).saveState();
+            }
+        });
+
+        final FScrollPane scrPlanes = new FScrollPane(planarDeckList, true,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         planarDeckPanel.add(scrPlanes, "grow, push");
         planarDeckLists.add(planarDeckList);
@@ -430,15 +445,15 @@ public class VLobby implements ILobby {
         FPanel vgdDeckPanel = new FPanel();
         vgdDeckPanel.setBorderToggle(false);
 
-        FList<Object> vgdAvatarList = new FList<Object>();
+        final FList<Object> vgdAvatarList = new FList<Object>();
         vgdAvatarList.setListData(isPlayerAI(playerIndex) ? aiListData : humanListData);
         vgdAvatarList.setSelectedIndex(0);
         vgdAvatarList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         vgdAvatarList.addListSelectionListener(vgdLSListener);
-        FScrollPane scrAvatars = new FScrollPane(vgdAvatarList, true,
+        final FScrollPane scrAvatars = new FScrollPane(vgdAvatarList, true,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        CardDetailPanel vgdDetail = new CardDetailPanel();
+        final CardDetailPanel vgdDetail = new CardDetailPanel();
         vgdAvatarDetails.add(vgdDetail);
 
         vgdDeckPanel.setLayout(new MigLayout(sectionConstraints));
@@ -449,16 +464,19 @@ public class VLobby implements ILobby {
         vgdPanels.add(vgdDeckPanel);
     }
 
-    protected void onDeckClicked(int iPlayer, DeckType type, Collection<DeckProxy> selectedDecks) {
-        String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy.FN_GET_NAME);
-        playerPanels.get(iPlayer).setDeckSelectorButtonText(text);
+    protected void onDeckClicked(final int iPlayer, final DeckType type, final Collection<DeckProxy> selectedDecks) {
+        if (iPlayer < activePlayersNum && lobby.mayEdit(iPlayer)) {
+            final String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy.FN_GET_NAME);
+            playerPanels.get(iPlayer).setDeckSelectorButtonText(text);
+            fireDeckChangeListener(iPlayer, selectedDecks.iterator().next().getDeck());
+        }
     }
 
     /** Populates the deck panel with the focused player's deck choices. */
     private void populateDeckPanel(final GameType forGameType) {
         decksFrame.removeAll();
 
-        if (playerPanelWithFocus.getType() == LobbySlotType.OPEN || playerPanelWithFocus.getType() == LobbySlotType.REMOTE) {
+        if (!lobby.mayEdit(playerWithFocus)) {
             return;
         }
 
@@ -487,7 +505,7 @@ public class VLobby implements ILobby {
     }
 
     /** @return {@link javax.swing.JButton} */
-    public JButton getBtnStart() {
+    JButton getBtnStart() {
         return this.btnStart;
     }
 
@@ -497,18 +515,18 @@ public class VLobby implements ILobby {
     public List<FDeckChooser> getDeckChoosers() { return Collections.unmodifiableList(deckChoosers); }
 
     /** Gets the random deck checkbox for Singletons. */
-    public FCheckBox getCbSingletons() { return cbSingletons; }
+    FCheckBox getCbSingletons() { return cbSingletons; }
 
     /** Gets the random deck checkbox for Artifacts. */
-    public FCheckBox getCbArtifacts() { return cbArtifacts; }
+    FCheckBox getCbArtifacts() { return cbArtifacts; }
 
-    public FCheckBox getVntArchenemy()       { return vntArchenemy; }
-    public FCheckBox getVntArchenemyRumble() { return vntArchenemyRumble; }
-    public FCheckBox getVntCommander()       { return vntCommander; }
-    public FCheckBox getVntMomirBasic()      { return vntMomirBasic; }
-    public FCheckBox getVntPlanechase()      { return vntPlanechase; }
-    public FCheckBox getVntTinyLeaders()     { return vntTinyLeaders; }
-    public FCheckBox getVntVanguard()        { return vntVanguard; }
+    FCheckBox getVntArchenemy()       { return vntArchenemy; }
+    FCheckBox getVntArchenemyRumble() { return vntArchenemyRumble; }
+    FCheckBox getVntCommander()       { return vntCommander; }
+    FCheckBox getVntMomirBasic()      { return vntMomirBasic; }
+    FCheckBox getVntPlanechase()      { return vntPlanechase; }
+    FCheckBox getVntTinyLeaders()     { return vntTinyLeaders; }
+    FCheckBox getVntVanguard()        { return vntVanguard; }
 
     public int getLastArchenemy() { return lastArchenemy; }
     public void setLastArchenemy(final int archenemy) { lastArchenemy = archenemy; }
@@ -524,36 +542,20 @@ public class VLobby implements ILobby {
         return deckChoosers.get(playernum);
     }
 
-    public List<Integer> getTeams() { return teams; }
-    public List<Integer> getArchenemyTeams() { return archenemyTeams; }
-    public GameType getCurrentGameMode() { return currentGameMode; }
-    public void setCurrentGameMode(final GameType mode) { currentGameMode = mode; }
-
-    public boolean isPlayerAI(int playernum) {
-        return playerPanels.get(playernum).isAi();
+    GameType getCurrentGameMode() {
+        return lobby.getGameType();
+    }
+    void setCurrentGameMode(final GameType mode) {
+        lobby.setGameType(mode);
+        update();
     }
 
-    public Map<String, String> getAiOptions(int playernum) {
-        if (playerPanels.get(playernum).isSimulatedAi()) {
-            Map<String, String> options = new HashMap<String, String>();
-            options.put("UseSimulation", "True");
-            return options;
-        }
-        return null;
+    public boolean isPlayerAI(final int playernum) {
+        return playernum < activePlayersNum ? playerPanels.get(playernum).isAi() : false;
     }
 
     public int getNumPlayers() {
         return activePlayersNum;
-    }
-
-    public final List<Integer> getParticipants() {
-        final List<Integer> participants = new ArrayList<Integer>(activePlayersNum);
-        for (final PlayerPanel panel : playerPanels) {
-            if (panel.isVisible()) {
-                participants.add(playerPanels.indexOf(panel));
-            }
-        }
-        return participants;
     }
 
     /** Revalidates the player and deck sections. Necessary after adding or hiding any panels. */
@@ -569,7 +571,7 @@ public class VLobby implements ILobby {
     }
 
     public void changePlayerFocus(int newFocusOwner) {
-        changePlayerFocus(newFocusOwner, appliedVariants.contains(currentGameMode) ? currentGameMode : GameType.Constructed);
+        changePlayerFocus(newFocusOwner, lobby.getGameType());
     }
 
     void changePlayerFocus(int newFocusOwner, GameType gType) {
@@ -593,32 +595,15 @@ public class VLobby implements ILobby {
         prefs.save();
     }
 
-    /** Updates the avatars from preferences on update. */
-    public void updatePlayersFromPrefs() {
-        ForgePreferences prefs = FModel.getPreferences();
-
-        // Avatar
-        String[] avatarPrefs = prefs.getPref(FPref.UI_AVATARS).split(",");
-        for (int i = 0; i < avatarPrefs.length; i++) {
-            int avatarIndex = Integer.parseInt(avatarPrefs[i]);
-            playerPanels.get(i).setAvatar(avatarIndex);
-        }
-
-        // Name
-        String prefName = prefs.getPref(FPref.PLAYER_NAME);
-        playerPanels.get(0).setPlayerName(StringUtils.isBlank(prefName) ? "Human" : prefName);
-    }
-
     /** Adds a pre-styled FLabel component with the specified title. */
     FLabel newLabel(String title) {
         return new FLabel.Builder().text(title).fontSize(14).fontStyle(Font.ITALIC).build();
     }
 
     List<Integer> getUsedAvatars() {
-        List<Integer> usedAvatars = Arrays.asList(-1,-1,-1,-1,-1,-1,-1,-1);
-        int i = 0;
-        for (PlayerPanel pp : playerPanels) {
-            usedAvatars.set(i++, pp.getAvatarIndex());
+        final List<Integer> usedAvatars = Lists.newArrayListWithCapacity(MAX_PLAYERS);
+        for (final PlayerPanel pp : playerPanels) {
+            usedAvatars.add(pp.getAvatarIndex());
         }
         return usedAvatars;
     }
@@ -660,92 +645,30 @@ public class VLobby implements ILobby {
         return names;
     }
 
-    public String getPlayerName(int i) {
-        return playerPanels.get(i).getPlayerName();
-    }
-
-    public int getPlayerAvatar(int i) {
-        return playerPanels.get(i).getAvatarIndex();
-    }
-
-    public boolean isEnoughTeams() {
-        int lastTeam = -1;
-        final List<Integer> teamList = appliedVariants.contains(GameType.Archenemy) ? archenemyTeams : teams;
-                
-        for (final int i : getParticipants()) {
-            if (lastTeam == -1) {
-                lastTeam = teamList.get(i);
-            } else if (lastTeam != teamList.get(i)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     /////////////////////////////////////////////
     //========== Various listeners in build order
 
     @SuppressWarnings("serial") private class VariantCheckBox extends FCheckBox {
-        private final GameType variantType;
-
-        private VariantCheckBox(GameType variantType0) {
-            super(variantType0.toString());
-
-            variantType = variantType0;
+        private final GameType variant;
+        private VariantCheckBox(final GameType variantType) {
+            super(variantType.toString());
+            this.variant = variantType;
 
             setToolTipText(variantType.getDescription());
-
             addItemListener(new ItemListener() {
-                @Override
-                public void itemStateChanged(ItemEvent e) {
+                @Override public final void itemStateChanged(final ItemEvent e) {
                     if (e.getStateChange() == ItemEvent.SELECTED) {
-                        appliedVariants.add(variantType);
-                        currentGameMode = variantType;
-
-                        //ensure other necessary variants are unchecked
-                        switch (variantType) {
-                        case Archenemy:
-                            vntArchenemyRumble.setSelected(false);
-                            break;
-                        case ArchenemyRumble:
-                            vntArchenemy.setSelected(false);
-                            break;
-                        case Commander:
-                            vntTinyLeaders.setSelected(false);
-                            vntMomirBasic.setSelected(false);
-                            break;
-                        case TinyLeaders:
-                            vntCommander.setSelected(false);
-                            vntMomirBasic.setSelected(false);
-                            break;
-                        case Vanguard:
-                            vntMomirBasic.setSelected(false);
-                            break;
-                        case MomirBasic:
-                            vntCommander.setSelected(false);
-                            vntVanguard.setSelected(false);
-                            break;
-                        default:
-                            break;
-                        }
+                        lobby.applyVariant(variantType);
+                    } else {
+                        lobby.removeVariant(variantType);
                     }
-                    else {
-                        appliedVariants.remove(variantType);
-                        if (currentGameMode == variantType) {
-                            currentGameMode = GameType.Constructed;
-                        }
-                    }
-
-                    for (PlayerPanel pp : playerPanels) {
-                        pp.toggleIsPlayerArchenemy();
-                    }
-                    changePlayerFocus(playerWithFocus, currentGameMode);
+                    VLobby.this.update();
                 }
             });
         }
     }
 
-    ActionListener nameListener = new ActionListener() {
+    final ActionListener nameListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             FTextField nField = (FTextField)e.getSource();
@@ -756,38 +679,50 @@ public class VLobby implements ILobby {
     /** This listener will look for a vanguard avatar being selected in the lists
     / and update the corresponding detail panel. */
     private ListSelectionListener vgdLSListener = new ListSelectionListener() {
+        @Override public final void valueChanged(final ListSelectionEvent e) {
+            final int index = vgdAvatarLists.indexOf(e.getSource());
+            if (index >= activePlayersNum) {
+                return;
+            }
+            final Object selected = vgdAvatarLists.get(index).getSelectedValue();
+            final PlayerPanel pp = playerPanels.get(index);
+            final CardDetailPanel cdp = vgdAvatarDetails.get(index);
 
-        @Override
-        public void valueChanged(ListSelectionEvent e) {
-            int index = vgdAvatarLists.indexOf(e.getSource());
-            Object obj = vgdAvatarLists.get(index).getSelectedValue();
-            PlayerPanel pp = playerPanels.get(index);
-            CardDetailPanel cdp = vgdAvatarDetails.get(index);
-
-            if (obj instanceof PaperCard) {
-                pp.setVanguardButtonText(((PaperCard) obj).getName());
-                cdp.setCard(CardView.getCardForUi((PaperCard) obj));
+            final PaperCard vanguardAvatar;
+            final Deck deck = decks[index];
+            if (selected instanceof PaperCard) {
+                pp.setVanguardButtonText(((PaperCard) selected).getName());
+                cdp.setCard(CardView.getCardForUi((PaperCard) selected));
                 cdp.setVisible(true);
                 refreshPanels(false, true);
-            }
-            else {
-                pp.setVanguardButtonText((String) obj);
+
+                vanguardAvatar = (PaperCard)selected;
+            } else {
+                String sel = (String) selected;
+                pp.setVanguardButtonText(sel);
                 cdp.setVisible(false);
+
+                if (sel.contains("Use deck's default avatar") && deck.has(DeckSection.Avatar)) {
+                    vanguardAvatar = deck.get(DeckSection.Avatar).get(0);
+                } else { //Only other string is "Random"
+                    if (playerPanels.get(index).isAi()) { //AI
+                        vanguardAvatar = Aggregates.random(getNonRandomAiAvatars());
+                    } else { //Human
+                        vanguardAvatar = Aggregates.random(getNonRandomHumanAvatars());
+                    }
+                }
             }
+
+            final CardPool avatarOnce = new CardPool();
+            avatarOnce.add(vanguardAvatar);
+            fireDeckSectionChangeListener(index, DeckSection.Avatar, avatarOnce);
+            getDeckChooser(index).saveState();
         }
     };
 
 
     /////////////////////////////////////
     //========== METHODS FOR VARIANTS
-
-    public Set<GameType> getAppliedVariants() {
-        return Collections.unmodifiableSet(appliedVariants);
-    }
-
-    public int getTeam(final int playerIndex) {
-        return appliedVariants.contains(GameType.Archenemy) ? archenemyTeams.get(playerIndex) : teams.get(playerIndex);
-    }
 
     /** Gets the list of planar deck lists. */
     public List<FList<Object>> getPlanarDeckLists() {

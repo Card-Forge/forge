@@ -36,6 +36,7 @@ import forge.game.player.DelayedReveal;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController;
+import forge.game.player.PlayerView;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.*;
 import forge.game.trigger.Trigger;
@@ -141,7 +142,7 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public <T extends GameEntity> T chooseSingleEntityForEffect(FCollectionView<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer) {
         if (delayedReveal != null) {
-            delayedReveal.reveal(this);
+            reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
         }
         ApiType api = sa.getApi();
         if (null == api) {
@@ -237,6 +238,11 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public void reveal(CardCollectionView cards, ZoneType zone, Player owner, String messagePrefix) {
+        // We don't know how to reveal cards to AI
+    }
+
+    @Override
+    public void reveal(Collection<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix) {
         // We don't know how to reveal cards to AI
     }
 
@@ -850,7 +856,7 @@ public class PlayerControllerAi extends PlayerController {
             String selectPrompt, boolean isOptional, Player decider) {
 
         if (delayedReveal != null) {
-            delayedReveal.reveal(this);
+            reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
         }
         return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player, decider);
     }

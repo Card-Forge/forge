@@ -125,10 +125,6 @@ public class FMenuItem extends FDisplayObject implements IButton {
     }
 
     @Override
-    public String getText() {
-        return text;
-    }
-    @Override
     public void setText(String text0) {
     }
     @Override

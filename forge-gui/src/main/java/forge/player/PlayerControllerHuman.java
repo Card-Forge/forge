@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -74,6 +75,7 @@ import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.TargetChoices;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.WrappedAbility;
@@ -217,8 +219,8 @@ public class PlayerControllerHuman
      * Uses GUI to learn which spell the player (human in our case) would like to play
      */ 
     public SpellAbility getAbilityToPlay(final List<SpellAbility> abilities, final ITriggerEvent triggerEvent) {
-        return getGui().getAbilityToPlay(abilities, triggerEvent);
-        //return HostedMatch.getController().getAbilityToPlay(abilities, triggerEvent);
+        final SpellAbilityView resultView = getGui().getAbilityToPlay(SpellAbilityView.getCollection(abilities), triggerEvent);
+        return getGame().getSpellAbility(resultView);
     }
 
     @Override
@@ -389,13 +391,13 @@ public class PlayerControllerHuman
         // Human is supposed to read the message and understand from it what to choose
         if (optionList.isEmpty()) {
             if (delayedReveal != null) {
-                delayedReveal.reveal(this);
+                reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
             }
             return null;
         }
         if (!isOptional && optionList.size() == 1) {
             if (delayedReveal != null) {
-                delayedReveal.reveal(this);
+                reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
             }
             return Iterables.getFirst(optionList, null);
         }
@@ -416,7 +418,7 @@ public class PlayerControllerHuman
 
         if (canUseSelectCardsInput) {
             if (delayedReveal != null) {
-                delayedReveal.reveal(this);
+                reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
             }
             InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<T>(this, isOptional ? 0 : 1, 1, optionList);
             input.setCancelAllowed(isOptional);
@@ -425,8 +427,10 @@ public class PlayerControllerHuman
             return Iterables.getFirst(input.getSelected(), null);
         }
 
-        final GameEntityView result = getGui().chooseSingleEntityForEffect(title, optionList, delayedReveal, isOptional, this);
-        endTempShowCards(); //assume tempShow called by GuiBase.getInterface().chooseSingleEntityForEffect
+        tempShow(optionList);
+        final GameEntityView result = getGui().chooseSingleEntityForEffect(title, GameEntityView.getEntityCollection(optionList), delayedReveal, isOptional);
+        endTempShowCards();
+
         if (result instanceof CardView) {
             return (T) game.getCard((CardView)result);
         }
@@ -438,16 +442,16 @@ public class PlayerControllerHuman
 
     @Override
     public int chooseNumber(SpellAbility sa, String title, int min, int max) {
-    	if (min >= max) {
-    		return min;
-    	}
+        if (min >= max) {
+            return min;
+        }
         final Integer[] choices = new Integer[max + 1 - min];
         for (int i = 0; i <= max - min; i++) {
             choices[i] = Integer.valueOf(i + min);
         }
         return getGui().one(title, choices).intValue();
     }
-    
+
     @Override
     public int chooseNumber(SpellAbility sa, String title, List<Integer> choices, Player relatedPlayer) {
         return getGui().one(title, choices).intValue();
@@ -563,19 +567,22 @@ public class PlayerControllerHuman
 
     @Override
     public void reveal(CardCollectionView cards, ZoneType zone, Player owner, String message) {
+        reveal(CardView.getCollection(cards), zone, PlayerView.get(owner), message);
+    }
+
+    @Override
+    public void reveal(Collection<CardView> cards, ZoneType zone, PlayerView owner, String message) {
         if (StringUtils.isBlank(message)) {
             message = "Looking at cards in {player's} " + zone.name().toLowerCase();
-        }
-        else {
+        } else {
             message += "{player's} " + zone.name().toLowerCase();
         }
         String fm = MessageUtil.formatMessage(message, player, owner);
         if (!cards.isEmpty()) {
-            tempShowCards(cards);
-            getGui().reveal(fm, CardView.getCollection(cards));
+            tempShowCards(game.getCardList(cards));
+            getGui().reveal(fm, cards);
             endTempShowCards();
-        }
-        else {
+        } else {
             getGui().message(MessageUtil.formatMessage("There are no cards in {player's} " +
                     zone.name().toLowerCase(), player, owner), fm);
         }
@@ -993,15 +1000,16 @@ public class PlayerControllerHuman
             return Iterables.getFirst(allTargets, null);
         }
 
-        final Function<Pair<SpellAbilityStackInstance, GameObject>, String> fnToString = new Function<Pair<SpellAbilityStackInstance, GameObject>, String>() {
-            @Override
-            public String apply(Pair<SpellAbilityStackInstance, GameObject> targ) {
-                return targ.getRight().toString() + " - " + targ.getLeft().getStackDescription();
-            }
-        };
-
-        List<Pair<SpellAbilityStackInstance, GameObject>> chosen = getGui().getChoices(saSpellskite.getHostCard().getName(), 1, 1, allTargets, null, fnToString);
+        final List<Pair<SpellAbilityStackInstance, GameObject>> chosen = getGui().getChoices(saSpellskite.getHostCard().getName(), 1, 1, allTargets, null, new FnTargetToString());
         return Iterables.getFirst(chosen, null);
+    }
+
+    private final static class FnTargetToString implements Function<Pair<SpellAbilityStackInstance, GameObject>, String>, Serializable {
+        private static final long serialVersionUID = -4779137632302777802L;
+
+        @Override public String apply(final Pair<SpellAbilityStackInstance, GameObject> targ) {
+            return targ.getRight().toString() + " - " + targ.getLeft().getStackDescription();
+        }
     }
 
     @Override
@@ -1352,8 +1360,8 @@ public class PlayerControllerHuman
         return inputProxy.selectCard(cardView, otherCardViewsToSelect, triggerEvent);
     }
 
-    public void selectAbility(final SpellAbility sa) {
-        inputProxy.selectAbility(sa);
+    public void selectAbility(final SpellAbilityView sa) {
+        inputProxy.selectAbility(getGame().getSpellAbility(sa));
     }
 
     public void alphaStrike() {

@@ -21,8 +21,9 @@ import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
 import forge.util.FCollectionView;
 
-
 public class PlayerView extends GameEntityView {
+    private static final long serialVersionUID = 7005892740909549086L;
+
     public static PlayerView get(Player p) {
         return p == null ? null : p.getView();
     }

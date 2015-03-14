@@ -4,6 +4,8 @@ import java.util.Collection;
 import forge.util.FCollection;
 
 public class CardCollection extends FCollection<Card> implements CardCollectionView {
+    private static final long serialVersionUID = -8133537013727100275L;
+
     public static final CardCollectionView EMPTY = new CardCollection();
 
     public static boolean hasCard(CardCollection cards) {

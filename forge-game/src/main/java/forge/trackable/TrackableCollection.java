@@ -5,6 +5,8 @@ import java.util.Collection;
 import forge.util.FCollection;
 
 public class TrackableCollection<T extends TrackableObject> extends FCollection<T> {
+    private static final long serialVersionUID = 1528674215758232314L;
+
     public TrackableCollection() {
     }
     public TrackableCollection(T e) {

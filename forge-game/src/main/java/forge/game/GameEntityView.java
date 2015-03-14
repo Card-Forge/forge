@@ -7,6 +7,8 @@ import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
 
 public abstract class GameEntityView extends TrackableObject {
+    private static final long serialVersionUID = -5129089945124455670L;
+
     public static GameEntityView get(GameEntity e) {
         return e == null ? null : e.getView();
     }

@@ -10,6 +10,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.DelayedReveal;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.PlayerZone;
@@ -144,7 +145,7 @@ public class DigEffect extends SpellAbilityEffect {
                 }
                 else if (!sa.hasParam("NoLooking")) {
                     // show the user the revealed cards
-                    delayedReveal = new DelayedReveal(top, srcZone, p);
+                    delayedReveal = new DelayedReveal(top, srcZone, PlayerView.get(p));
 
                     if (noMove) {
                         // Let the activating player see the cards even if they're not moved

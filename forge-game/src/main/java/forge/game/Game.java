@@ -56,8 +56,10 @@ import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
 import forge.game.replacement.ReplacementHandler;
+import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.SpellAbilityView;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.MagicStack;
@@ -105,20 +107,20 @@ public class Game {
     private final GameView view; 
     private final Tracker tracker = new Tracker();
 
-    private GameEntityCache<Player, PlayerView> playerCache = new GameEntityCache<>();
+    private final GameEntityCache<Player, PlayerView> playerCache = new GameEntityCache<>();
     public Player getPlayer(PlayerView playerView) {
         return playerCache.get(playerView);
     }
-    public void addPlayer(Integer id, Player player) {
-        playerCache.put(id, player);
+    public void addPlayer(int id, Player player) {
+        playerCache.put(Integer.valueOf(id), player);
     }
 
-    public GameEntityCache<Card, CardView> cardCache = new GameEntityCache<>();
+    private final GameEntityCache<Card, CardView> cardCache = new GameEntityCache<>();
     public Card getCard(CardView cardView) {
         return cardCache.get(cardView);
     }
-    public void addCard(Integer id, Card card) {
-        cardCache.put(id, card);
+    public void addCard(int id, Card card) {
+        cardCache.put(Integer.valueOf(id), card);
     }
     public CardCollection getCardList(Iterable<CardView> cardViews) {
         CardCollection list = new CardCollection();
@@ -126,9 +128,19 @@ public class Game {
         return list;
     }
 
+    private final GameEntityCache<SpellAbility, SpellAbilityView> spabCache = new GameEntityCache<>();
+    public SpellAbility getSpellAbility(final SpellAbilityView view) {
+        return spabCache.get(view);
+    }
+    public void addSpellAbility(int id, SpellAbility spellAbility) {
+        spabCache.put(Integer.valueOf(id), spellAbility);
+    }
+
     public Game(List<RegisteredPlayer> players0, GameRules rules0, Match match0) { /* no more zones to map here */
         rules = rules0;
         match = match0;
+
+        spabCache.put(Ability.PLAY_LAND_SURROGATE.getId(), Ability.PLAY_LAND_SURROGATE);
 
         int highestTeam = -1;
         for (RegisteredPlayer psc : players0) {

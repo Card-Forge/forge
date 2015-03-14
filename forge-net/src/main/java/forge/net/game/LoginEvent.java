@@ -6,8 +6,10 @@ public class LoginEvent implements NetEvent {
     private static final long serialVersionUID = -8865183377417377938L;
 
     private final String username;
-    public LoginEvent(final String username) {
+    private final int avatarIndex;
+    public LoginEvent(final String username, final int avatarIndex) {
         this.username = username;
+        this.avatarIndex = avatarIndex;
     }
 
     @Override
@@ -16,5 +18,9 @@ public class LoginEvent implements NetEvent {
 
     public String getUsername() {
         return username;
+    }
+
+    public int getAvatarIndex() {
+        return avatarIndex;
     }
 }

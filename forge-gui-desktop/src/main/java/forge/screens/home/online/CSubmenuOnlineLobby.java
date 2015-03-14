@@ -8,74 +8,102 @@ import javax.swing.JMenu;
 import forge.GuiBase;
 import forge.Singletons;
 import forge.UiCommand;
-import forge.game.GameRules;
-import forge.game.GameType;
 import forge.gui.FNetOverlay;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
+import forge.interfaces.IGuiGame;
+import forge.interfaces.ILobbyListener;
 import forge.interfaces.IPlayerChangeListener;
+import forge.interfaces.IUpdateable;
+import forge.match.GameLobby.GameLobbyData;
 import forge.menus.IMenuProvider;
 import forge.menus.MenuUtil;
 import forge.model.FModel;
+import forge.net.ClientGameLobby;
 import forge.net.FGameClient;
 import forge.net.FServerManager;
-import forge.net.game.LobbyState;
-import forge.net.game.LobbyState.LobbyPlayerData;
-import forge.net.game.LoginEvent;
-import forge.net.game.client.ILobbyListener;
+import forge.net.ServerGameLobby;
+import forge.net.game.IRemote;
+import forge.net.game.IdentifiableNetEvent;
+import forge.net.game.MessageEvent;
+import forge.net.game.NetEvent;
+import forge.net.game.UpdateLobbyPlayerEvent;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.home.VLobby;
-import forge.screens.home.VLobby.LobbyType;
 import forge.screens.home.sanctioned.ConstructedGameMenu;
 
 public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
     SINGLETON_INSTANCE;
 
     final void host(final int portNumber) {
-        final VLobby lobby = VOnlineLobby.SINGLETON_INSTANCE.setLobby(LobbyType.SERVER);
+        final FServerManager server = FServerManager.getInstance();
+        final ServerGameLobby lobby = new ServerGameLobby();
+        final VLobby view = VOnlineLobby.SINGLETON_INSTANCE.setLobby(lobby);
 
-        FServerManager.getInstance().startServer(portNumber);
-        FServerManager.getInstance().setLobby(lobby);
-        FServerManager.getInstance().hostGame(new GameRules(GameType.Constructed));
+        server.startServer(portNumber);
+        server.setLobby(lobby);
 
         FNetOverlay.SINGLETON_INSTANCE.showUp("Hosting game");
-        lobby.setPlayerChangeListener(new IPlayerChangeListener() {
-            @Override public final void update(final LobbyPlayerData data) {
-                FServerManager.getInstance().updateLobbyState();
+        lobby.setListener(new IUpdateable() {
+            @Override public final void update() {
+                view.update();
+                server.updateLobbyState();
+            }
+        });
+        view.setPlayerChangeListener(new IPlayerChangeListener() {
+            @Override public final void update(final int index, final UpdateLobbyPlayerEvent event) {
+                server.updateSlot(index, event);
+                server.updateLobbyState();
             }
         });
 
-        final FGameClient client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), "0", GuiBase.getInterface().getNewGuiGame());
-        FNetOverlay.SINGLETON_INSTANCE.setGameClient(client);
-        client.addLobbyListener(new ILobbyListener() {
-            @Override public final void update(final LobbyState state) {
-                lobby.setState(state);
+        server.setLobbyListener(new ILobbyListener() {
+            @Override public final void update(final GameLobbyData state, final int slot) {
+                // NO-OP, lobby connected directly
             }
             @Override public final void message(final String source, final String message) {
                 FNetOverlay.SINGLETON_INSTANCE.addMessage(source, message);
             }
         });
-        client.connect("localhost", portNumber);
+        FNetOverlay.SINGLETON_INSTANCE.setGameClient(new IRemote() {
+            @Override public final void send(final NetEvent event) {
+                if (event instanceof MessageEvent) {
+                    final MessageEvent message = (MessageEvent) event;
+                    FNetOverlay.SINGLETON_INSTANCE.addMessage(message.getSource(), message.getMessage());
+                    server.broadcast(event);
+                }
+            }
+            @Override public final Object sendAndWait(final IdentifiableNetEvent event) {
+                send(event);
+                return null;
+            }
+        });
+
+        view.update();
 
         Singletons.getControl().setCurrentScreen(FScreen.ONLINE_LOBBY);
         FNetOverlay.SINGLETON_INSTANCE.showUp(String.format("Hosting on port %d", portNumber));
     }
 
     final void join(final String hostname, final int port) {
-        final FGameClient client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), "0", GuiBase.getInterface().getNewGuiGame());
+        final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
+        final FGameClient client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), "0", gui);
         FNetOverlay.SINGLETON_INSTANCE.setGameClient(client);
-        final VLobby lobby =  VOnlineLobby.SINGLETON_INSTANCE.setLobby(LobbyType.CLIENT);
+        final ClientGameLobby lobby = new ClientGameLobby(); 
+        final VLobby view =  VOnlineLobby.SINGLETON_INSTANCE.setLobby(lobby);
+        lobby.setListener(view);
         client.addLobbyListener(new ILobbyListener() {
-            @Override public final void update(final LobbyState state) {
-                lobby.setState(state);
-            }
             @Override public final void message(final String source, final String message) {
                 FNetOverlay.SINGLETON_INSTANCE.addMessage(source, message);
             }
+            @Override public final void update(final GameLobbyData state, final int slot) {
+                lobby.setLocalPlayer(slot);
+                lobby.setData(state);
+            }
         });
-        lobby.setPlayerChangeListener(new IPlayerChangeListener() {
-            @Override public final void update(final LobbyPlayerData data) {
-                client.send(new LoginEvent(data.getName()));
+        view.setPlayerChangeListener(new IPlayerChangeListener() {
+            @Override public final void update(final int index, final UpdateLobbyPlayerEvent event) {
+                client.send(event);
             }
         });
         client.connect(hostname, port);

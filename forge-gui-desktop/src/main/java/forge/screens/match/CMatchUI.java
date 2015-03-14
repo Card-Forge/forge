@@ -51,7 +51,6 @@ import forge.control.KeyboardShortcuts;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deckchooser.FDeckViewer;
-import forge.game.GameEntity;
 import forge.game.GameEntityView;
 import forge.game.GameView;
 import forge.game.card.CardView;
@@ -61,9 +60,8 @@ import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
-import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
-import forge.gui.FNetOverlay;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
 import forge.gui.GuiUtils;
@@ -78,9 +76,9 @@ import forge.interfaces.IButton;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.match.AbstractGuiGame;
+import forge.match.MatchButtonType;
 import forge.menus.IMenuProvider;
 import forge.model.FModel;
-import forge.player.PlayerControllerHuman;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.controllers.CAntes;
@@ -103,6 +101,7 @@ import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.MouseTriggerEvent;
 import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PhaseLabel;
+import forge.trackable.TrackableCollection;
 import forge.util.FCollectionView;
 import forge.util.ITriggerEvent;
 import forge.util.gui.SOptionPane;
@@ -183,6 +182,21 @@ public final class CMatchUI
     public void setGameView(final GameView gameView) {
         super.setGameView(gameView);
         screen.setTabCaption(gameView.getTitle());
+        if (sortedPlayers != null) {
+            for (final PlayerView pv : sortedPlayers) {
+                pv.copy(gameView.getPlayers());
+            }
+            FThreads.invokeInEdtNowOrLater(new Runnable() {
+                @Override public final void run() {
+                    for (final VField f : getFieldViews()) {
+                        f.getTabletop().setupPlayZone();
+                    }
+                    for (final VHand h : getHandViews()) {
+                        h.getLayoutControl().updateHand();
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -248,7 +262,7 @@ public final class CMatchUI
         view.getLblAvatar().getResizeTimer().start();
     }
 
-    public void initMatch(final FCollectionView<PlayerView> sortedPlayers, final Iterable<PlayerView> myPlayers) {
+    private void initMatch(final FCollectionView<PlayerView> sortedPlayers, final Iterable<PlayerView> myPlayers) {
         this.sortedPlayers = sortedPlayers;
         this.setLocalPlayers(myPlayers);
         allHands = sortedPlayers.size() == getLocalPlayerCount();
@@ -356,7 +370,7 @@ public final class CMatchUI
     @Override
     public final boolean stopAtPhase(final PlayerView turn, final PhaseType phase) {
         final VField vf = getFieldViewFor(turn);
-        final PhaseLabel label = vf.getPhaseIndicator() .getLabelFor(phase);
+        final PhaseLabel label = vf.getPhaseIndicator().getLabelFor(phase);
         return label == null || label.getEnabled();
     }
 
@@ -542,12 +556,6 @@ public final class CMatchUI
     }
 
     @Override
-    public boolean resetForNewGame() {
-        FloatingCardArea.closeAll();
-        return true;
-    }
-
-    @Override
     public IButton getBtnOK(final PlayerView playerView) {
         return view.getBtnOK();
     }
@@ -558,13 +566,15 @@ public final class CMatchUI
     }
 
     @Override
-    public void focusButton(final IButton button) {
+    public void focusButton(final MatchButtonType button) {
         // ensure we don't steal focus from an overlay
         if (!SOverlayUtils.overlayHasFocus()) {
             FThreads.invokeInEdtLater(new Runnable() {
-                @Override
-                public void run() {
-                    ((FButton)button).requestFocusInWindow();
+                @Override public final void run() {
+                    final FButton btn = button == MatchButtonType.OK
+                            ? getCPrompt().getView().getBtnOK()
+                            : getCPrompt().getView().getBtnCancel();
+                    btn.requestFocusInWindow();
                 }
             });
         }
@@ -579,7 +589,7 @@ public final class CMatchUI
     public void updatePhase() {
         final PlayerView p = getGameView().getPlayerTurn();
         final PhaseType ph = getGameView().getPhase();
-        PhaseLabel lbl = getFieldViewFor(p).getPhaseIndicator().getLabelFor(ph);
+        final PhaseLabel lbl = p == null ? null : getFieldViewFor(p).getPhaseIndicator().getLabelFor(ph);
 
         resetAllPhaseButtons();
         if (lbl != null) {
@@ -629,7 +639,11 @@ public final class CMatchUI
 
     @Override
     public void updateStack() {
-        getCStack().update();
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override public final void run() {
+                getCStack().update();
+            }
+        });
     }
 
     /**
@@ -664,7 +678,7 @@ public final class CMatchUI
     }
 
     @Override
-    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, ITriggerEvent triggerEvent) {
+    public SpellAbilityView getAbilityToPlay(final List<SpellAbilityView> abilities, final ITriggerEvent triggerEvent) {
         if (triggerEvent == null) {
             if (abilities.isEmpty()) {
                 return null;
@@ -691,7 +705,7 @@ public final class CMatchUI
         boolean enabled;
         boolean hasEnabled = false;
         int shortcut = KeyEvent.VK_1; //use number keys as shortcuts for abilities 1-9
-        for (final SpellAbility ab : abilities) {
+        for (final SpellAbilityView ab : abilities) {
             enabled = ab.canPlay();
             if (enabled) {
                 hasEnabled = true;
@@ -763,12 +777,7 @@ public final class CMatchUI
     }
 
     @Override
-    public void hear(LobbyPlayer player, String message) {
-        FNetOverlay.SINGLETON_INSTANCE.addMessage(player.getName(), message);
-    }
-
-    @Override
-    public void openView(final Iterable<PlayerView> myPlayers) {
+    public void openView(final TrackableCollection<PlayerView> myPlayers) {
         final GameView gameView = getGameView();
         gameView.getGameLog().addObserver(getCLog());
 
@@ -841,16 +850,14 @@ public final class CMatchUI
     }
 
     @Override
-    public GameEntityView chooseSingleEntityForEffect(final String title, final FCollectionView<? extends GameEntity> optionList, final DelayedReveal delayedReveal, final boolean isOptional, final PlayerControllerHuman controller) {
+    public GameEntityView chooseSingleEntityForEffect(final String title, final Collection<? extends GameEntityView> optionList, final DelayedReveal delayedReveal, final boolean isOptional) {
         if (delayedReveal != null) {
-            delayedReveal.reveal(controller); //TODO: Merge this into search dialog
+            reveal(delayedReveal.getMessagePrefix(), delayedReveal.getCards()); //TODO: Merge this into search dialog
         }
-        controller.tempShow(optionList);
-        final List<GameEntityView> gameEntityViews = GameEntityView.getEntityCollection(optionList);
         if (isOptional) {
-            return oneOrNone(title, gameEntityViews);
+            return oneOrNone(title, optionList);
         }
-        return one(title, gameEntityViews);
+        return one(title, optionList);
     }
 
     @Override

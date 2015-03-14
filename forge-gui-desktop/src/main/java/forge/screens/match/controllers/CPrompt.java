@@ -32,7 +32,7 @@ import forge.UiCommand;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
-import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityView;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
 import forge.screens.match.CMatchUI;
@@ -120,7 +120,7 @@ public class CPrompt implements ICDoc {
         return matchUI.getGameController().selectCard(cardView, otherCardViewsToSelect, triggerEvent);
     }
 
-    public void selectAbility(final SpellAbility sa) {
+    public void selectAbility(final SpellAbilityView sa) {
         matchUI.getGameController().selectAbility(sa);
     }
 

@@ -11,7 +11,6 @@ import com.google.common.base.Function;
 import forge.LobbyPlayer;
 import forge.assets.FSkinProp;
 import forge.deck.CardPool;
-import forge.game.GameEntity;
 import forge.game.GameEntityView;
 import forge.game.GameView;
 import forge.game.card.CardView;
@@ -19,25 +18,24 @@ import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
-import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
-import forge.player.PlayerControllerHuman;
-import forge.util.FCollectionView;
+import forge.match.MatchButtonType;
+import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
 
 public interface IGuiGame {
     void setGameView(GameView gameView);
     void setGameController(PlayerView player, IGameController gameController);
-    boolean resetForNewGame();
-    void openView(Iterable<PlayerView> myPlayers);
+    void openView(TrackableCollection<PlayerView> myPlayers);
     void afterGameEnd();
     void showCombat();
     void showPromptMessage(PlayerView playerView, String message);
     boolean stopAtPhase(PlayerView playerTurn, PhaseType phase);
     IButton getBtnOK(PlayerView playerView);
     IButton getBtnCancel(PlayerView playerView);
-    void focusButton(IButton button);
+    void focusButton(MatchButtonType button);
     void flashIncorrectAction();
     void updatePhase();
     void updateTurn(PlayerView player);
@@ -54,8 +52,7 @@ public interface IGuiGame {
     void updateManaPool(Iterable<PlayerView> manaPoolUpdate);
     void updateLives(Iterable<PlayerView> livesUpdate);
     void setPanelSelection(CardView hostCard);
-    void hear(LobbyPlayer player, String message);
-    SpellAbility getAbilityToPlay(List<SpellAbility> abilities,
+    SpellAbilityView getAbilityToPlay(List<SpellAbilityView> abilities,
             ITriggerEvent triggerEvent);
     Map<CardView, Integer> assignDamage(CardView attacker,
             List<CardView> blockers, int damage, GameEntityView defender,
@@ -161,9 +158,8 @@ public interface IGuiGame {
 
     List<PaperCard> sideboard(CardPool sideboard, CardPool main);
     GameEntityView chooseSingleEntityForEffect(String title,
-            FCollectionView<? extends GameEntity> optionList,
-            DelayedReveal delayedReveal, boolean isOptional,
-            PlayerControllerHuman controller);
+            Collection<? extends GameEntityView> optionList,
+            DelayedReveal delayedReveal, boolean isOptional);
     void setCard(CardView card);
     void setPlayerAvatar(LobbyPlayer player, IHasIcon ihi);
     boolean openZones(Collection<ZoneType> zones, Map<PlayerView, Object> players);

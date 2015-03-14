@@ -1,20 +1,35 @@
 package forge.net.game.server;
 
+import forge.net.ReplyPool;
+import forge.net.game.IdentifiableNetEvent;
 import forge.net.game.NetEvent;
 import io.netty.channel.Channel;
+
+import java.util.concurrent.TimeoutException;
 
 public final class RemoteClient implements IToClient {
 
     private final Channel channel;
     private String username;
     private int index;
+    private ReplyPool replies = new ReplyPool();
     public RemoteClient(final Channel channel) {
         this.channel = channel;
     }
 
     @Override
     public void send(final NetEvent event) {
+        System.out.println("Sending event " + event + " to " + channel);
         channel.writeAndFlush(event);
+    }
+
+    @Override
+    public Object sendAndWait(final IdentifiableNetEvent event) throws TimeoutException {
+        replies.initialize(event.getId());
+
+        send(event);
+
+        return replies.get(event.getId());
     }
 
     public String getUsername() {
@@ -29,5 +44,9 @@ public final class RemoteClient implements IToClient {
     }
     public void setIndex(final int index) {
         this.index = index;
+    }
+
+    public void setReply(final int id, final Object reply) {
+        replies.complete(id, reply);
     }
 }

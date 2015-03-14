@@ -1,7 +1,7 @@
 package forge.interfaces;
 
-import forge.net.game.LobbyState.LobbyPlayerData;
+import forge.net.game.UpdateLobbyPlayerEvent;
 
 public interface IPlayerChangeListener {
-    void update(LobbyPlayerData data);
+    void update(int index, UpdateLobbyPlayerEvent event);
 }

@@ -149,7 +149,7 @@ public class InputProxy implements Observer {
     }
 
     public final void selectAbility(final SpellAbility sa) {
-    	final Input inp = getInput();
+        final Input inp = getInput();
         if (inp != null) {
             if (sa != null) {
                 inp.selectAbility(sa);

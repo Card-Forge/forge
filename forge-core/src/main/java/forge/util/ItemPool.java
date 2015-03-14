@@ -22,6 +22,7 @@ import com.google.common.base.Predicate;
 
 import forge.item.InventoryItem;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -34,7 +35,8 @@ import java.util.Map.Entry;
  * @param <T>
  *            an Object
  */
-public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Integer>> {
+public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Integer>>, Serializable {
+    private static final long serialVersionUID = 6572047177527559797L;
 
     /** The fn to printed. */
     public final transient Function<Entry<T, Integer>, T> FN_GET_KEY = new Function<Entry<T, Integer>, T>() {

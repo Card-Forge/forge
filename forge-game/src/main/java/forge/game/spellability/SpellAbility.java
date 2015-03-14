@@ -147,12 +147,23 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             view0 = new SpellAbilityView(this);
         }
         view = view0;
+        if (hostCard != null && hostCard.getGame() != null) {
+            hostCard.getGame().addSpellAbility(id, this);
+        }
     }
 
     @Override
     public int getId() {
         return id;
     }
+    @Override
+    public int hashCode() {
+        return getId();
+    }
+    @Override
+    public boolean equals(final Object obj) {
+        return obj instanceof SpellAbility && this.id == ((SpellAbility) obj).id;
+    };
 
     @Override
     public void setHostCard(final Card c) {
@@ -1247,6 +1258,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public SpellAbilityView getView() {
+        view.updateHostCard(this);
+        view.updateDescription(this);
+        view.updateCanPlay(this);
+        view.updatePromptIfOnlyPossibleAbility(this);
         return view;
     }
 }

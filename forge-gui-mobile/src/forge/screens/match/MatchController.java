@@ -26,7 +26,6 @@ import forge.card.CardRenderer;
 import forge.card.GameEntityPicker;
 import forge.deck.CardPool;
 import forge.deck.FSideboardDialog;
-import forge.game.GameEntity;
 import forge.game.GameEntityView;
 import forge.game.GameView;
 import forge.game.card.CardView;
@@ -34,17 +33,16 @@ import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
-import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.interfaces.IButton;
 import forge.item.PaperCard;
 import forge.match.AbstractGuiGame;
+import forge.match.MatchButtonType;
 import forge.model.FModel;
-import forge.player.PlayerControllerHuman;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.views.VAssignDamage;
-import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.screens.match.views.VPhaseIndicator;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
 import forge.screens.match.views.VPlayerPanel;
@@ -53,6 +51,7 @@ import forge.screens.match.views.VPrompt;
 import forge.screens.match.winlose.ViewWinLose;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
+import forge.trackable.TrackableCollection;
 import forge.util.FCollectionView;
 import forge.util.ITriggerEvent;
 import forge.util.MessageUtil;
@@ -102,18 +101,12 @@ public class MatchController extends AbstractGuiGame {
         }
     }
 
-    @Override
-    public boolean resetForNewGame() {
-        CardAreaPanel.resetForNewGame(); //ensure card panels reset between games
-        return true;
-    }
-
     public boolean hotSeatMode() {
         return FModel.getPreferences().getPrefBoolean(FPref.MATCH_HOT_SEAT_MODE);
     }
 
     @Override
-    public void openView(final Iterable<PlayerView> myPlayers) {
+    public void openView(final TrackableCollection<PlayerView> myPlayers) {
         setLocalPlayers(myPlayers);
         final boolean noHumans = !hasLocalPlayers();
 
@@ -162,7 +155,7 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public void focusButton(final IButton button) {
+    public void focusButton(final MatchButtonType button) {
         //not needed for mobile game
     }
 
@@ -228,7 +221,7 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, ITriggerEvent triggerEvent) {
+    public SpellAbilityView getAbilityToPlay(List<SpellAbilityView> abilities, ITriggerEvent triggerEvent) {
         if (abilities.isEmpty()) {
             return null;
         }
@@ -322,10 +315,6 @@ public class MatchController extends AbstractGuiGame {
         for (PlayerView p : livesUpdate) {
             view.getPlayerPanel(p).updateLife();
         }
-    }
-
-    @Override
-    public void hear(LobbyPlayer player, String message) {
     }
 
     @Override
@@ -475,27 +464,23 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public GameEntityView chooseSingleEntityForEffect(final String title, final FCollectionView<? extends GameEntity> optionList, final DelayedReveal delayedReveal, final boolean isOptional, final PlayerControllerHuman controller) {
-        controller.tempShow(optionList);
-        final List<GameEntityView> choiceList = GameEntityView.getEntityCollection(optionList);
-
+    public GameEntityView chooseSingleEntityForEffect(final String title, final Collection<? extends GameEntityView> optionList, final DelayedReveal delayedReveal, final boolean isOptional) {
         if (delayedReveal == null || Iterables.isEmpty(delayedReveal.getCards())) {
             if (isOptional) {
-                return SGuiChoose.oneOrNone(title, choiceList);
+                return SGuiChoose.oneOrNone(title, optionList);
             }
-            return SGuiChoose.one(title, choiceList);
+            return SGuiChoose.one(title, optionList);
         }
 
-        controller.tempShow(delayedReveal.getCards());
-        final List<CardView> revealList = CardView.getCollection(delayedReveal.getCards());
-        final String revealListCaption = StringUtils.capitalize(MessageUtil.formatMessage("{player's} " + delayedReveal.getZone().name(), controller.getPlayer(), delayedReveal.getOwner()));
+        final Collection<CardView> revealList = delayedReveal.getCards();
+        final String revealListCaption = StringUtils.capitalize(MessageUtil.formatMessage("{player's} " + delayedReveal.getZone().name(), delayedReveal.getOwner(), delayedReveal.getOwner()));
         final FImage revealListImage = MatchController.getView().getPlayerPanels().values().iterator().next().getZoneTab(delayedReveal.getZone()).getIcon();
 
         //use special dialog for choosing card and offering ability to see all revealed cards at the same time 
         return new WaitCallback<GameEntityView>() {
             @Override
             public void run() {
-                GameEntityPicker picker = new GameEntityPicker(title, choiceList, revealList, revealListCaption, revealListImage, isOptional, this);
+                GameEntityPicker picker = new GameEntityPicker(title, optionList, revealList, revealListCaption, revealListImage, isOptional, this);
                 picker.show();
             }
         }.invokeAndWait();

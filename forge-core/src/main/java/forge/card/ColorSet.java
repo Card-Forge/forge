@@ -18,9 +18,11 @@
 package forge.card;
 
 import com.google.common.collect.UnmodifiableIterator;
+
 import forge.card.mana.ManaCost;
 import forge.util.BinaryUtil;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -34,7 +36,8 @@ import java.util.NoSuchElementException;
  * 
  * 
  */
-public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte> {
+public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Serializable {
+    private static final long serialVersionUID = 794691267379929080L;
 
     private final byte myColor;
     private final float orderWeight;

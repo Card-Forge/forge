@@ -10,10 +10,10 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.Iterables;
 
 import forge.ImageKeys;
-import forge.card.CardStateName;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
+import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.CardTypeView;
 import forge.card.ColorSet;
@@ -32,6 +32,8 @@ import forge.trackable.Tracker;
 import forge.util.FCollectionView;
 
 public class CardView extends GameEntityView {
+    private static final long serialVersionUID = -3624090829028979255L;
+
     public static CardView get(Card c) {
         return c == null ? null : c.getView();
     }
@@ -715,6 +717,8 @@ public class CardView extends GameEntityView {
     }
 
     public class CardStateView extends TrackableObject {
+        private static final long serialVersionUID = 6673944200513430607L;
+
         private final CardStateName state;
 
         public CardStateView(final int id0, final CardStateName state0, final Tracker tracker) {

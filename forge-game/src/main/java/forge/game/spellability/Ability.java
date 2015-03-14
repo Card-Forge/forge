@@ -75,11 +75,11 @@ public abstract class Ability extends SpellAbility {
 
         return this.getHostCard().isInPlay() && !this.getHostCard().isFaceDown();
     }
-    
+
     public static final Ability PLAY_LAND_SURROGATE = new Ability(null, (Cost)null, null){
-    	@Override
+        @Override
         public boolean canPlay() {
-    		return true; //if this ability is added anywhere, it can be assumed that land can be played
+            return true; //if this ability is added anywhere, it can be assumed that land can be played
         }
         @Override
         public void resolve() {

@@ -21,7 +21,7 @@ import forge.util.Callback;
 public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
     private final FOptionPane optionPane;
 
-    public GameEntityPicker(String title, List<GameEntityView> choiceList, List<CardView> revealList, String revealListCaption, FImage revealListImage, boolean isOptional, final Callback<GameEntityView> callback) {
+    public GameEntityPicker(String title, Collection<? extends GameEntityView> choiceList, Collection<CardView> revealList, String revealListCaption, FImage revealListImage, boolean isOptional, final Callback<GameEntityView> callback) {
         super(new PickerTab[] {
                 new PickerTab(choiceList, "Choices", FSkinImage.DECKLIST, 1),
                 new PickerTab(revealList, revealListCaption, revealListImage, 0)

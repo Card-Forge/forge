@@ -13,8 +13,8 @@ import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
-import forge.game.card.CounterType;
 import forge.game.card.CardView.CardStateView;
+import forge.game.card.CounterType;
 import forge.game.keyword.KeywordCollection.KeywordCollectionView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
@@ -282,6 +282,22 @@ public class TrackableTypes {
             else {
                 value.serialize(ts); //serialize card state views here since they won't be stored in an index
             }
+        }
+    };
+    public static final TrackableType<TrackableCollection<StackItemView>> StackItemViewListType = new TrackableType<TrackableCollection<StackItemView>>() {
+        @Override
+        protected TrackableCollection<StackItemView> getDefaultValue() {
+            return new TrackableCollection<StackItemView>();
+        }
+
+        @Override
+        protected TrackableCollection<StackItemView> deserialize(TrackableDeserializer td, TrackableCollection<StackItemView> oldValue) {
+            return td.readCollection(oldValue);
+        }
+
+        @Override
+        protected void serialize(TrackableSerializer ts, TrackableCollection<StackItemView> value) {
+            ts.write(value);
         }
     };
     public static final TrackableType<ManaCost> ManaCostType = new TrackableType<ManaCost>() {
