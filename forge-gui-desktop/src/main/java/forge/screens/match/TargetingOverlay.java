@@ -17,10 +17,10 @@
  */
 package forge.screens.match;
 
+import java.awt.Point;
+import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
@@ -175,7 +175,10 @@ public class TargetingOverlay {
                         addArc(endpoints.get(c.getId()), itemLocOnScreen, activator.isOpponentOf(c.getController()));
                     }
                     for (PlayerView p : instance.getTargetPlayers()) {
-                        addArc(getPlayerTargetingArrowPoint(p, locOnScreen), itemLocOnScreen, activator.isOpponentOf(p));
+                        Point point = getPlayerTargetingArrowPoint(p, locOnScreen);
+                        if(point != null) {
+                            addArc(point, itemLocOnScreen, activator.isOpponentOf(p));
+                        }
                     }
                     instance = instance.getSubInstance();
                 }
@@ -185,6 +188,10 @@ public class TargetingOverlay {
 
     private Point getPlayerTargetingArrowPoint(final PlayerView p, final Point locOnScreen) {
         final JPanel avatarArea = matchUI.getFieldViewFor(p).getAvatarArea();
+        if(!avatarArea.isShowing()) {
+            return null;
+        }
+
         final Point point = avatarArea.getLocationOnScreen();
         point.x += avatarArea.getWidth() / 2 - locOnScreen.x;
         point.y += avatarArea.getHeight() / 2 - locOnScreen.y;
