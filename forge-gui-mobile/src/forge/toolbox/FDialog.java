@@ -74,7 +74,9 @@ public abstract class FDialog extends FOverlay {
 
         if (btnMiddle != null) {
             btnMiddle.setLeft((width - btnMiddle.getWidth()) / 2);
-            totalHeight += MSG_HEIGHT; //leave room for title above middle button
+            if (!title.isEmpty()) {
+                totalHeight += MSG_HEIGHT; //leave room for title above middle button
+            }
         }
         prompt.setBounds(0, totalHeight - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
 
@@ -220,7 +222,7 @@ public abstract class FDialog extends FOverlay {
 
         //draw border above prompt
         y = prompt.getTop();
-        if (btnMiddle != null) { //render title above prompt if middle button present
+        if (btnMiddle != null && !title.isEmpty()) { //render title above prompt if middle button present
             y -= MSG_HEIGHT;
             g.fillRect(VPrompt.BACK_COLOR, 0, y, w, MSG_HEIGHT);
             g.drawText(title, VPrompt.FONT, VPrompt.FORE_COLOR, 0, y, w, MSG_HEIGHT, false, HAlignment.CENTER, true);

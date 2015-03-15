@@ -457,7 +457,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             super.onClose(canCloseCallback); //can skip prompt if draft saved
             return;
         }
-        FOptionPane.showOptionDialog("Save changes to current deck?", "Save Changes?",
+        FOptionPane.showOptionDialog("Save changes to current deck?", "",
                 FOptionPane.QUESTION_ICON, new String[] {"Save", "Don't Save", "Cancel"}, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
