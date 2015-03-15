@@ -488,7 +488,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         for (int i = min; i <= cutoff; i++) {
             choices.add(Integer.valueOf(i));
         }
-        choices.add("Other...");
+        choices.add("...");
 
         final Object choice = oneOrNone(message, choices);
         if (choice instanceof Integer || choice == null) {

@@ -145,12 +145,12 @@ public class FOptionPane extends FDialog {
     }
 
     public static void showInputDialog(String title, final Callback<String> callback) {
-        showInputDialog(title, "", null, callback);
+        showInputDialog(null, title, "", null, callback);
     }
     public static <T> void showInputDialog(String title, T initialInput, final Callback<T> callback) {
-        showInputDialog(title, initialInput, null, callback);
+        showInputDialog(null, title, initialInput, null, callback);
     }
-    public static <T> void showInputDialog(String title, T initialInput, T[] inputOptions, final Callback<T> callback) {
+    public static <T> void showInputDialog(String message, String title, T initialInput, T[] inputOptions, final Callback<T> callback) {
         final FDisplayObject inputField;
         final FTextField txtInput;
         final FComboBox<T> cbInput;
@@ -166,17 +166,19 @@ public class FOptionPane extends FDialog {
             inputField = cbInput;
         }
 
+        final float padTop = message == null ? PADDING : 0;
+
         //use container to add padding above and below field
         final FContainer container = new FContainer() {
             @Override
             protected void doLayout(float width, float height) {
-                inputField.setBounds(0, (height - inputField.getHeight()) / 2, width, inputField.getHeight());
+                inputField.setBounds(0, padTop, width, inputField.getHeight());
             }
         };
         container.add(inputField);
-        container.setHeight(inputField.getHeight() + 2 * PADDING);
+        container.setHeight(inputField.getHeight() + padTop + PADDING);
 
-        final FOptionPane optionPane = new FOptionPane(null, title, null, container, new String[] {"OK", "Cancel"}, 0, new Callback<Integer>() {
+        final FOptionPane optionPane = new FOptionPane(message, title, null, container, new String[] {"OK", "Cancel"}, 0, new Callback<Integer>() {
             @SuppressWarnings("unchecked")
             @Override
             public void run(Integer result) {
@@ -196,6 +198,16 @@ public class FOptionPane extends FDialog {
             @Override
             protected float getBottomMargin() {
                 return Utils.SCREEN_HEIGHT * 0.4f; //account for keyboard
+            }
+
+            @Override
+            protected boolean padAboveAndBelow() {
+                return false; //let container around text field handle padding
+            }
+
+            @Override
+            protected boolean centerPrompt() {
+                return true;
             }
         };
         optionPane.show();
@@ -229,7 +241,7 @@ public class FOptionPane extends FDialog {
         if (message != null) {
             prompt = add(new FTextArea(true, message));
             prompt.setFont(FSkinFont.get(12));
-            if (centerIcon) {
+            if (centerIcon || centerPrompt()) {
                 prompt.setAlignment(HAlignment.CENTER);
             }
         }
@@ -265,6 +277,10 @@ public class FOptionPane extends FDialog {
 
     protected boolean padAboveAndBelow() {
         return true;
+    }
+
+    protected boolean centerPrompt() {
+        return false;
     }
 
     @Override
