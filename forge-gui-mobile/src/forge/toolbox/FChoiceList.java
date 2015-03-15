@@ -17,7 +17,7 @@ import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardZoom.ActivateHandler;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
-import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityView;
 import forge.item.PaperCard;
 import forge.screens.match.MatchController;
 import forge.screens.match.views.VAvatar;
@@ -61,7 +61,7 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         else if (item instanceof CardView) {
             renderer = new CardItemRenderer();
         }
-        else if (item instanceof SpellAbility) {
+        else if (item instanceof SpellAbilityView) {
             renderer = new SpellAbilityItemRenderer();
         }
         else if (item instanceof PlayerView) {
@@ -343,7 +343,7 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
 
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            g.drawText(getChoiceText(value), font, foreColor, x, y, w, h, allowDefaultItemWrap(), HAlignment.CENTER, true);
+            g.drawText(getChoiceText(value), font, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
         }
     }
     //special renderer for cards
@@ -419,7 +419,7 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         @Override
         public boolean tap(Integer index, T value, float x, float y, int count) {
             if (x <= VStack.CARD_WIDTH + 2 * FList.PADDING) {
-                CardZoom.show(((SpellAbility)value).getView().getHostCard());
+                CardZoom.show(((SpellAbilityView)value).getHostCard());
                 return true;
             }
             return false;
@@ -427,14 +427,14 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
 
         @Override
         public boolean longPress(Integer index, T value, float x, float y) {
-            CardZoom.show(((SpellAbility)value).getView().getHostCard());
+            CardZoom.show(((SpellAbilityView)value).getHostCard());
             return true;
         }
 
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            SpellAbility spellAbility = (SpellAbility)value;
-            CardRenderer.drawCardWithOverlays(g, spellAbility.getView().getHostCard(), x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT, CardStackPosition.Top);
+            SpellAbilityView spellAbility = (SpellAbilityView)value;
+            CardRenderer.drawCardWithOverlays(g, spellAbility.getHostCard(), x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT, CardStackPosition.Top);
 
             float dx = VStack.CARD_WIDTH + FList.PADDING;
             x += dx;
