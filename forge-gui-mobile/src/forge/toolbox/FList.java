@@ -105,6 +105,9 @@ public class FList<T> extends FScrollPane implements Iterable<T> {
     }
 
     public int getIndexAtPoint(float x, float y) {
+        if (renderer.layoutHorizontal()) {
+            return (int)((getScrollLeft() + x) / renderer.getItemHeight());
+        }
         return (int)((getScrollTop() + y) / renderer.getItemHeight());
     }
 
@@ -124,6 +127,9 @@ public class FList<T> extends FScrollPane implements Iterable<T> {
 
     @Override
     protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+        if (renderer.layoutHorizontal()) {
+            return new ScrollBounds(items.size() * renderer.getItemHeight(), visibleHeight);
+        }
         return new ScrollBounds(visibleWidth, items.size() * renderer.getItemHeight());
     }
 
@@ -145,7 +151,10 @@ public class FList<T> extends FScrollPane implements Iterable<T> {
         T item = getItemAt(index);
         if (item == null) { return false; }
 
-        return renderer.tap(index, item, x, y - getItemTop(index), count);
+        if (renderer.layoutHorizontal()) {
+            return renderer.tap(index, item, x - getItemStartPosition(index), y, count);
+        }
+        return renderer.tap(index, item, x, y - getItemStartPosition(index), count);
     }
 
     public boolean longPress(float x, float y) {
@@ -156,19 +165,40 @@ public class FList<T> extends FScrollPane implements Iterable<T> {
         return renderer.showMenu(index, item, this, x, y);
     }
 
-    public float getItemTop(int index) {
-        return index * renderer.getItemHeight() - getScrollTop();
+    //return scroll position based on layout orientation
+    public float getScrollPosition() {
+        if (renderer.layoutHorizontal()) {
+            return getScrollLeft();
+        }
+        return getScrollTop();
+    }
+    public void setScrollPosition(float scrollPosition) {
+        if (renderer.layoutHorizontal()) {
+            setScrollLeft(scrollPosition);
+        }
+        setScrollTop(scrollPosition);
+    }
+    public float getVisibleSize() {
+        if (renderer.layoutHorizontal()) {
+            return getWidth();
+        }
+        return getHeight();
+    }
+
+    public float getItemStartPosition(int index) {
+        return index * renderer.getItemHeight() - getScrollPosition();
     }
 
     public void scrollIntoView(int index) {
-        float itemTop = getItemTop(index);
-        if (itemTop < 0) {
-            setScrollTop(getScrollTop() + itemTop);
+        float itemStartPos = getItemStartPosition(index);
+        if (itemStartPos < 0) {
+            setScrollPosition(getScrollPosition() + itemStartPos);
         }
         else {
-            float itemBottom = itemTop + renderer.getItemHeight();
-            if (itemBottom > getHeight()) {
-                setScrollTop(getScrollTop() + itemBottom - getHeight());
+            float itemEndPosition = itemStartPos + renderer.getItemHeight();
+            float visibleSize = getVisibleSize();
+            if (itemEndPosition > visibleSize) {
+                setScrollPosition(getScrollPosition() + itemEndPosition - visibleSize);
             }
         }
     }
@@ -190,29 +220,51 @@ public class FList<T> extends FScrollPane implements Iterable<T> {
         //draw only items that are visible
         if (!items.isEmpty()) {
             int startIndex = getIndexAtPoint(0, 0);
-            float itemHeight = renderer.getItemHeight();
             boolean drawSeparators = drawLineSeparators();
 
-            float y = Math.round(getItemTop(startIndex)); //round y so items don't flicker from rounding error
+            float x = 0;
+            float y = Math.round(getItemStartPosition(startIndex)); //round y so items don't flicker from rounding error
+            float itemWidth = w;
+            float itemHeight = renderer.getItemHeight();
+
+            boolean layoutHorizontal = renderer.layoutHorizontal();
+            if (layoutHorizontal) {
+                x = y;
+                y = 0;
+                itemWidth = itemHeight;
+                itemHeight = h;
+            }
+
             float padding = getPadding();
-            float valueWidth = w - 2 * padding;
+            float valueWidth = itemWidth - 2 * padding;
             float valueHeight = itemHeight - 2 * padding;
 
             for (int i = startIndex; i < items.size(); i++) {
-                if (y > h) { break; }
+                if (x > w || y > h) { break; }
 
                 FSkinColor fillColor = getItemFillColor(i);
                 if (fillColor != null) {
-                    g.fillRect(fillColor, 0, y, w, itemHeight);
+                    g.fillRect(fillColor, x, y, w, itemHeight);
                 }
 
-                renderer.drawValue(g, i, items.get(i), font, FORE_COLOR, fillColor, pressedIndex == i, padding, y + padding, valueWidth, valueHeight);
+                renderer.drawValue(g, i, items.get(i), font, FORE_COLOR, fillColor, pressedIndex == i, x + padding, y + padding, valueWidth, valueHeight);
 
-                y += itemHeight;
+                if (layoutHorizontal) {
+                    x += itemWidth;
+                }
+                else {
+                    y += itemHeight;
+                }
 
                 if (drawSeparators) {
-                    y -= LINE_THICKNESS / 2;
-                    g.drawLine(LINE_THICKNESS, LINE_COLOR, 0, y, w, y);
+                    if (layoutHorizontal) {
+                        x -= LINE_THICKNESS / 2;
+                        g.drawLine(LINE_THICKNESS, LINE_COLOR, x, 0, x, h);
+                    }
+                    else {
+                        y -= LINE_THICKNESS / 2;
+                        g.drawLine(LINE_THICKNESS, LINE_COLOR, 0, y, w, y);
+                    }
                 }
             }
         }
@@ -243,6 +295,10 @@ public class FList<T> extends FScrollPane implements Iterable<T> {
 
         public boolean showMenu(Integer index, V value, FDisplayObject owner, float x, float y) {
             return false; //showing menu on long press is optional
+        }
+
+        public boolean layoutHorizontal() {
+            return false; //this doesn't need to be overridden to specify vertical layouts
         }
     }
 

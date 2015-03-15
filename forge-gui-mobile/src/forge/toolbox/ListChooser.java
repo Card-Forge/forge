@@ -27,6 +27,7 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
+import forge.util.Utils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -139,7 +140,12 @@ public class ListChooser<T> extends FContainer {
 
     private void updateHeight() {
         boolean needRevalidate = getHeight() > 0; //needs to revalidate if already has height
-        setHeight(Math.min(lstChoices.getListItemRenderer().getItemHeight() * list.size(), FOptionPane.getMaxDisplayObjHeight()));
+        if (lstChoices.getListItemRenderer().layoutHorizontal()) {
+            setHeight(Utils.AVG_FINGER_HEIGHT);
+        }
+        else {
+            setHeight(Math.min(lstChoices.getListItemRenderer().getItemHeight() * list.size(), FOptionPane.getMaxDisplayObjHeight()));
+        }
         if (needRevalidate) {
             optionPane.revalidate();
         }

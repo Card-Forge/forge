@@ -126,7 +126,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     public Rectangle getSelectionBounds() {
         if (selectedIndices.isEmpty()) { return null; }
 
-        return new Rectangle(list.screenPos.x, list.screenPos.y + list.getItemTop(getSelectedIndex()), list.getWidth(), list.getListItemRenderer().getItemHeight());
+        return new Rectangle(list.screenPos.x, list.screenPos.y + list.getItemStartPosition(getSelectedIndex()), list.getWidth(), list.getListItemRenderer().getItemHeight());
     }
 
     @Override

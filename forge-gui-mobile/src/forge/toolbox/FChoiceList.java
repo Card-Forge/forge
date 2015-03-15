@@ -67,6 +67,9 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         else if (item instanceof PlayerView) {
             renderer = new PlayerItemRenderer();
         }
+        else if (item instanceof Integer) {
+            renderer = new NumberRenderer();
+        }
         else {
             renderer = new DefaultItemRenderer();
         }
@@ -76,6 +79,11 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
             @Override
             public float getItemHeight() {
                 return renderer.getItemHeight();
+            }
+
+            @Override
+            public boolean layoutHorizontal() {
+                return renderer.layoutHorizontal();
             }
 
             @Override
@@ -277,6 +285,10 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         public abstract boolean tap(Integer index, T value, float x, float y, int count);
         public abstract boolean longPress(Integer index, T value, float x, float y);
         public abstract void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h);
+
+        public boolean layoutHorizontal() {
+            return false; //this doesn't need to be overridden to specify vertical layouts
+        }
     }
     protected class DefaultItemRenderer extends ItemRenderer {
         @Override
@@ -305,6 +317,33 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
             g.drawText(getChoiceText(value), font, foreColor, x, y, w, h, allowDefaultItemWrap(), HAlignment.LEFT, true);
+        }
+    }
+    protected class NumberRenderer extends DefaultItemRenderer {
+        @Override
+        public FSkinFont getDefaultFont() {
+            return FSkinFont.get(14);
+        }
+
+        @Override
+        public float getItemHeight() { //this is actually item width since laying out horizontally
+            float width = Utils.AVG_FINGER_WIDTH;
+            int itemCount = getCount();
+            float totalWidth = width * itemCount;
+            if (totalWidth < getWidth()) {
+                width = getWidth() / itemCount; //make items wider to take up full width
+            }
+            return width;
+        }
+
+        @Override
+        public boolean layoutHorizontal() {
+            return true;
+        }
+
+        @Override
+        public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+            g.drawText(getChoiceText(value), font, foreColor, x, y, w, h, allowDefaultItemWrap(), HAlignment.CENTER, true);
         }
     }
     //special renderer for cards
