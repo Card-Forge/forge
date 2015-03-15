@@ -115,8 +115,7 @@ public class AssetsDownloader {
             message += "This download is mandatory to start the app since you haven't previously downloaded these files.";
             options = new String[] { "Download", "Exit" };
         }
-        switch (SOptionPane.showOptionDialog(message, "Download Resource Files?",
-                null, options)) {
+        switch (SOptionPane.showOptionDialog(message, "", null, options)) {
         case 1:
             if (!canIgnoreDownload) {
                 Forge.exit(true); //exit if can't ignore download
