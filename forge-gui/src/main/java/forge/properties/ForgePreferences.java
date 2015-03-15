@@ -144,6 +144,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         ZONE_LOC_AI_EXILE(""),
         ZONE_LOC_AI_FLASHBACK(""),
 
+        CHAT_WINDOW_LOC(""),
+
         SHORTCUT_SHOWSTACK ("83"),
         SHORTCUT_SHOWCOMBAT ("67"),
         SHORTCUT_SHOWCONSOLE ("76"),

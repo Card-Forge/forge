@@ -33,7 +33,6 @@ import com.google.common.collect.Lists;
 import forge.Singletons;
 import forge.assets.FSkinProp;
 import forge.control.RestartUtil;
-import forge.gui.FNetOverlay;
 import forge.gui.ImportDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.DragCell;
@@ -123,7 +122,6 @@ public enum FView {
         // Note: when adding new panels here, keep in mind that the layered pane
         // has a null layout, so new components will be W0 x H0 pixels - gotcha!
         // FControl has a method called "sizeComponents" which will fix this.
-        lpnDocument.add(FNetOverlay.SINGLETON_INSTANCE.getPanel(), TARGETING_LAYER);
 
         pnlInsets.add(pnlContent, BorderLayout.CENTER);
         pnlInsets.setBackgroundTexture(FSkin.getIcon(FSkinProp.BG_TEXTURE));

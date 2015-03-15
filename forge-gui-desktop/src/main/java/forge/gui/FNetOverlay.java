@@ -1,9 +1,11 @@
 package forge.gui;
 
-import java.awt.Graphics;
+import java.awt.Component;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -13,29 +15,58 @@ import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.Singletons;
+import forge.gui.framework.SDisplayUtil;
 import forge.model.FModel;
 import forge.net.game.IRemote;
 import forge.net.game.MessageEvent;
+import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FLabel;
+import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
-import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.FTextArea;
 import forge.toolbox.FTextField;
 import forge.toolbox.SmartScroller;
+import forge.view.FDialog;
+import forge.view.FFrame;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
+
 public enum FNetOverlay {
     SINGLETON_INSTANCE;
 
-    private final OverlayPanel pnl = new OverlayPanel();
-    /** @return {@link javax.swing.JPanel} */
-    public SkinnedPanel getPanel() {
-        return this.pnl;
+    private final String COORD_DELIM = ","; 
+    private final ForgePreferences prefs = FModel.getPreferences();
+    private boolean hasBeenShown, locLoaded;
+
+    @SuppressWarnings("serial")
+    private final FDialog window = new FDialog(false, true, "0") {
+        @Override
+        public void setLocationRelativeTo(Component c) {
+            //don't change location this way if dialog has already been shown or location was loaded from preferences
+            if (hasBeenShown || locLoaded) { return; }
+            super.setLocationRelativeTo(c);
+        }
+
+        @Override
+        public void setVisible(boolean b0) {
+            if (isVisible() == b0) { return; }
+            if (!b0 && hasBeenShown) {
+                //update preference before hiding window, as otherwise its location will be 0,0
+                prefs.setPref(FPref.CHAT_WINDOW_LOC,
+                        getX() + COORD_DELIM + getY() + COORD_DELIM +
+                        getWidth() + COORD_DELIM + getHeight());
+                prefs.save();
+            }
+            super.setVisible(b0);
+            if (b0) {
+                hasBeenShown = true;
+            }
+        }
+    };
+    public FDialog getWindow() {
+        return this.window;
     }
     
     private final FTextArea txtLog = new FTextArea();
@@ -43,7 +74,7 @@ public enum FNetOverlay {
     private final FLabel cmdSend = new FLabel.ButtonBuilder().text("Send").build(); 
 
     //private boolean minimized = false;
-    private int height = 120;
+    private int height = 140;
     private int width = 400;
 
     private IRemote remote = null;
@@ -67,18 +98,18 @@ public enum FNetOverlay {
     };
     
     //private final int minimizedHeight = 30;
-    
+
     /**
      * Semi-transparent overlay panel. Should be used with layered panes.
      */
     private FNetOverlay() {
-        pnl.setOpaque(false);
-        pnl.setVisible(false);
-        pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
-        pnl.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        window.setTitle("Chat");
+        window.setVisible(false);
+        window.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
+        window.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
 
-        pnl.setLayout(new MigLayout("insets 0, gap 0, ax center, wrap 2"));
-//        pnl.add(new FLabel.Builder().text("Loading new game...").fontSize(22).build(), "h 40px!, align center");
+        window.setLayout(new MigLayout("insets 0, gap 0, ax center, wrap 2"));
+//        window.add(new FLabel.Builder().text("Loading new game...").fontSize(22).build(), "h 40px!, align center");
 
         // Block all input events below the overlay
 
@@ -89,50 +120,82 @@ public enum FNetOverlay {
         FScrollPane _operationLogScroller = new FScrollPane(txtLog, false);
         _operationLogScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         new SmartScroller(_operationLogScroller);
-        pnl.add(_operationLogScroller, "pushx, hmin 24, pushy, growy, growx, gap 2px 2px 2px 0, sx 2");
+        window.add(_operationLogScroller, "pushx, hmin 24, pushy, growy, growx, gap 2px 2px 2px 0, sx 2");
 
-        txtInput.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
-        pnl.add(txtInput, "pushx, growx, h 26px!, gap 2px 2px 2px 0");
-        pnl.add(cmdSend, "w 60px!, h 28px!, gap 0 0 2px 0");
+        //txtInput.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        window.add(txtInput, "pushx, growx, h 26px!, gap 2px 2px 2px 0");
+        window.add(cmdSend, "w 60px!, h 28px!, gap 0 0 2px 0");
         
         txtInput.addActionListener(onSend);
         cmdSend.setCommand(new Runnable() { @Override public void run() { onSend.actionPerformed(null); } });
     }
     
     public void showUp(String message) { 
-        txtLog.setText(message);
-        pnl.setVisible(true);
-    }
-
-    private class OverlayPanel extends SkinnedPanel {
-        private static final long serialVersionUID = -5056220798272120558L;
-
-        /**
-         * For some reason, the alpha channel background doesn't work properly on
-         * Windows 7, so the paintComponent override is required for a
-         * semi-transparent overlay.
-         * 
-         * @param g
-         *            &emsp; Graphics object
-         */
-        @Override
-        public void paintComponent(final Graphics g) {
-            super.paintComponent(g);
-            g.setColor(this.getBackground());
-            g.fillRect(0, 0, this.getWidth(), this.getHeight());
+        if (!hasBeenShown) {
+            hasBeenShown = true;
+            loadLocation();
+            window.getTitleBar().addMouseListener(new FMouseAdapter() {
+                @Override
+                public void onLeftDoubleClick(MouseEvent e) {
+                    window.setVisible(false); //hide window if titlebar double-clicked
+                }
+            });
         }
+        txtLog.setText(message);
+        window.setVisible(true);
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param mainBounds
-     */
-    public void containerResized(Rectangle mainBounds) {
-        int w = Math.max(width, (int)(mainBounds.width * 0.25f));
-        int x = mainBounds.width - w;
-        int y = mainBounds.height - height;
-        getPanel().setBounds(x, y, w, height);
-        getPanel().validate();
+    private void loadLocation() {
+        String value = prefs.getPref(FPref.CHAT_WINDOW_LOC);
+        if (value.length() > 0) {
+            String[] coords = value.split(COORD_DELIM);
+            if (coords.length == 4) {
+                try {
+                    int x = Integer.parseInt(coords[0]);
+                    int y = Integer.parseInt(coords[1]);
+                    int w = Integer.parseInt(coords[2]);
+                    int h = Integer.parseInt(coords[3]);
+
+                    //ensure the window is accessible
+                    int centerX = x + w / 2;
+                    int centerY = y + h / 2;
+                    Rectangle screenBounds = SDisplayUtil.getScreenBoundsForPoint(new Point(centerX, centerY)); 
+                    if (centerX < screenBounds.x) {
+                        x = screenBounds.x;
+                    }
+                    else if (centerX > screenBounds.x + screenBounds.width) {
+                        x = screenBounds.x + screenBounds.width - w;
+                        if (x < screenBounds.x) {
+                            x = screenBounds.x;
+                        }
+                    }
+                    if (centerY < screenBounds.y) {
+                        y = screenBounds.y;
+                    }
+                    else if (centerY > screenBounds.y + screenBounds.height) {
+                        y = screenBounds.y + screenBounds.height - h;
+                        if (y < screenBounds.y) {
+                            y = screenBounds.y;
+                        }
+                    }
+                    window.setBounds(x, y, w, h);
+                    locLoaded = true;
+                    return;
+                }
+                catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+            prefs.setPref(FPref.CHAT_WINDOW_LOC, ""); //clear value if invalid
+            prefs.save();
+        }
+
+        //fallback default size
+        FFrame mainFrame = Singletons.getView().getFrame();
+        int w = Math.max(width, (int)(mainFrame.getWidth() * 0.25f));
+        int x = mainFrame.getWidth() - w;
+        int y = mainFrame.getHeight() - height;
+        window.setBounds(x, y, w, height);
     }
 
     private final static SimpleDateFormat inFormat = new SimpleDateFormat("HH:mm:ss");

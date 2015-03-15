@@ -105,7 +105,7 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
                 VHomeUI.SINGLETON_INSTANCE.getLblStopServer().setEnabled(false);
                 VHomeUI.SINGLETON_INSTANCE.getLblStartServer().setEnabled(true);
 
-                FNetOverlay.SINGLETON_INSTANCE.getPanel().setVisible(false);
+                FNetOverlay.SINGLETON_INSTANCE.getWindow().setVisible(false);
             }
         });
     }

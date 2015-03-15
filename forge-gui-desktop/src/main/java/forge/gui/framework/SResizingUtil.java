@@ -1,6 +1,5 @@
 package forge.gui.framework;
 
-import forge.gui.FNetOverlay;
 import forge.gui.MouseUtil;
 import forge.toolbox.FAbsolutePositioner;
 import forge.toolbox.FOverlay;
@@ -126,7 +125,6 @@ public final class SResizingUtil {
 
         FAbsolutePositioner.SINGLETON_INSTANCE.containerResized(mainBounds);
         FOverlay.SINGLETON_INSTANCE.getPanel().setBounds(mainBounds);
-        FNetOverlay.SINGLETON_INSTANCE.containerResized(mainBounds);
 
         pnlInsets.setBounds(mainBounds);
         pnlInsets.validate();
