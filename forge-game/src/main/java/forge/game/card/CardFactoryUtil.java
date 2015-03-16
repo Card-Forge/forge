@@ -209,7 +209,7 @@ public class CardFactoryUtil {
         final StringBuilder sbStack = new StringBuilder();
         sbStack.append(sourceCard.getName()).append(" - turn this card face up.");
         manifestUp.setStackDescription(sbStack.toString());
-        //manifestUp.setIsMorphUp(true);
+        manifestUp.setIsManifestUp(true);
 
         return manifestUp;
     }

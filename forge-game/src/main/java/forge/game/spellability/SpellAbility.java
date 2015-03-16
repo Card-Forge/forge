@@ -94,6 +94,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean dash = false;
     private boolean offering = false;
     private boolean morphup = false;
+    private boolean manifestUp = false;
     private boolean cumulativeupkeep = false;
     private boolean outlast = false;
     private SplitSide splitSide = null;
@@ -284,6 +285,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public final void setIsMorphUp(final boolean b) {
         morphup = b;
+    }
+
+    public boolean isManifestUp() {
+        return manifestUp;
+    }
+    public final void setIsManifestUp(final boolean b) {
+        manifestUp = b;
     }
 
     public boolean isCycling() {

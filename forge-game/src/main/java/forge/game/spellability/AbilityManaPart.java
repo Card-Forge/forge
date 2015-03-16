@@ -310,6 +310,14 @@ public class AbilityManaPart implements java.io.Serializable {
                 }
                 continue;
             }
+            if (restriction.equals("MorphOrManifest")) {
+                if ((sa.isSpell() && sa.getHostCard().isCreature() && ((Spell) sa).isCastFaceDown())
+                        || sa.isManifestUp() || sa.isMorphUp()) {
+                    return true;
+                } else {
+                    continue;
+                }
+            }
 
             if (sa.isAbility()) {
                 if (restriction.startsWith("Activated")) {
@@ -319,6 +327,7 @@ public class AbilityManaPart implements java.io.Serializable {
                     continue;
                 }
             }
+
 
             if (sa.getHostCard() != null) {
                 if (sa.getHostCard().isValid(restriction, this.getSourceCard().getController(), this.getSourceCard())) {
