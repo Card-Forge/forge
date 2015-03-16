@@ -531,7 +531,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         setResolving(false);
         unfreezeStack();
         sa.resetOnceResolved();
-        game.updateStackForView();
 
         //game.getAction().checkStaticAbilities();
         game.getPhaseHandler().onStackResolved();
@@ -673,6 +672,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     public final void remove(final SpellAbilityStackInstance si) {
         stack.remove(si);
         frozenStack.remove(si);
+        game.updateStackForView();
         game.fireEvent(new GameEventSpellRemovedFromStack(si.getSpellAbility(true)));
     }
 
