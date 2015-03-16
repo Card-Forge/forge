@@ -17,7 +17,9 @@ import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardZoom.ActivateHandler;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.SpellAbilityView;
+import forge.game.spellability.StackItemView;
 import forge.item.PaperCard;
 import forge.screens.match.MatchController;
 import forge.screens.match.views.VAvatar;
@@ -63,6 +65,9 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         }
         else if (item instanceof SpellAbilityView) {
             renderer = new SpellAbilityItemRenderer();
+        }
+        else if (item instanceof SpellAbilityStackInstance) {
+            renderer = new StackItemRenderer();
         }
         else if (item instanceof PlayerView) {
             renderer = new PlayerItemRenderer();
@@ -440,6 +445,46 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
             x += dx;
             w -= dx;
             textRenderer.drawText(g, spellAbility.toString(), font, foreColor, x, y, w, h, y, h, true, HAlignment.LEFT, true);
+        }
+    }
+    //special renderer for StackItems
+    protected class StackItemRenderer extends ItemRenderer {
+        private final TextRenderer textRenderer = new TextRenderer(true);
+
+        @Override
+        public FSkinFont getDefaultFont() {
+            return FSkinFont.get(14);
+        }
+
+        @Override
+        public float getItemHeight() {
+            return VStack.CARD_HEIGHT + 2 * FList.PADDING;
+        }
+
+        @Override
+        public boolean tap(Integer index, T value, float x, float y, int count) {
+            if (x <= VStack.CARD_WIDTH + 2 * FList.PADDING) {
+                CardZoom.show(((SpellAbilityStackInstance)value).getView().getSourceCard());
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public boolean longPress(Integer index, T value, float x, float y) {
+            CardZoom.show(((SpellAbilityStackInstance)value).getView().getSourceCard());
+            return true;
+        }
+
+        @Override
+        public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+            StackItemView stackItem = ((SpellAbilityStackInstance)value).getView();
+            CardRenderer.drawCardWithOverlays(g, stackItem.getSourceCard(), x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT, CardStackPosition.Top);
+
+            float dx = VStack.CARD_WIDTH + FList.PADDING;
+            x += dx;
+            w -= dx;
+            textRenderer.drawText(g, stackItem.toString(), font, foreColor, x, y, w, h, y, h, true, HAlignment.LEFT, true);
         }
     }
     protected class PlayerItemRenderer extends ItemRenderer {
