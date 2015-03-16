@@ -74,7 +74,12 @@ public class ListChooser<T> extends FContainer {
     public ListChooser(final String title, final int minChoices, final int maxChoices, final Collection<T> list0, final Function<T, String> display0, final Callback<List<T>> callback0) {
         FThreads.assertExecutedByEdt(true);
         list = list0;
-        if (list.size() > 25) { //only show search field if more than 25 items
+        lstChoices = add(new ChoiceList(list, minChoices, maxChoices));
+        display = display0;
+        callback = callback0;
+
+        //only show search field if more than 25 items and vertical layout
+        if (list.size() > 25 && !lstChoices.getListItemRenderer().layoutHorizontal()) {
             txtSearch = add(new FTextField());
             txtSearch.setFont(FSkinFont.get(12));
             txtSearch.setGhostText("Search");
@@ -102,9 +107,6 @@ public class ListChooser<T> extends FContainer {
                 }
             });
         }
-        lstChoices = add(new ChoiceList(list, minChoices, maxChoices));
-        display = display0;
-        callback = callback0;
 
         String[] options;
         if (minChoices == 0) {
