@@ -23,7 +23,9 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import forge.AIOption;
+import forge.GuiBase;
 import forge.UiCommand;
+import forge.assets.FSkinProp;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
@@ -238,6 +240,7 @@ public class VLobby implements IUpdateable {
                 panel.setPlayerName(slot.getName());
                 panel.setAvatar(slot.getAvatarIndex());
                 panel.setTeam(slot.getTeam());
+                panel.setIsReady(slot.isReady());
                 panel.setIsArchenemy(slot.isArchenemy());
                 panel.setUseAiSimulation(slot.getAiOptions().contains(AIOption.USE_SIMULATION));
                 panel.setMayEdit(lobby.mayEdit(i));
@@ -262,6 +265,16 @@ public class VLobby implements IUpdateable {
         this.playerChangeListener = listener;
     }
 
+    void setReady(final int index, final boolean ready) {
+        if (ready && decks[index] == null) {
+            GuiBase.getInterface().showOptionDialog("Select a deck before readying!", "Error", FSkinProp.ICO_WARNING, new String[] { "Ok" }, 0);
+            update();
+            return;
+        }
+
+        firePlayerChangeListener(index);
+        changePlayerFocus(index);
+    }
     void firePlayerChangeListener(final int index) {
         if (playerChangeListener != null) {
             playerChangeListener.update(index, getSlot(index));
@@ -289,7 +302,7 @@ public class VLobby implements IUpdateable {
 
     private UpdateLobbyPlayerEvent getSlot(final int index) {
         final PlayerPanel panel = playerPanels.get(index);
-        return UpdateLobbyPlayerEvent.create(panel.getType(), panel.getPlayerName(), panel.getAvatarIndex(), panel.getTeam(), panel.isArchenemy(), panel.getAiOptions());
+        return UpdateLobbyPlayerEvent.create(panel.getType(), panel.getPlayerName(), panel.getAvatarIndex(), panel.getTeam(), panel.isArchenemy(), panel.isReady(), panel.getAiOptions());
     }
 
     /** Builds the actual deck panel layouts for each player.

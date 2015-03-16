@@ -15,10 +15,10 @@ public final class LocalLobby extends GameLobby {
         final String humanName = localName();
         final int[] avatarIndices = localAvatarIndices();
 
-        final LobbySlot slot0 = new LobbySlot(LobbySlotType.LOCAL, humanName, avatarIndices[0], 0, true, Collections.<AIOption>emptySet());
+        final LobbySlot slot0 = new LobbySlot(LobbySlotType.LOCAL, humanName, avatarIndices[0], 0, true, true, Collections.<AIOption>emptySet());
         addSlot(slot0);
 
-        final LobbySlot slot1 = new LobbySlot(LobbySlotType.AI, null, avatarIndices[1], 1, false, Collections.<AIOption>emptySet());
+        final LobbySlot slot1 = new LobbySlot(LobbySlotType.AI, null, avatarIndices[1], 1, false, true, Collections.<AIOption>emptySet());
         addSlot(slot1);
     }
 

@@ -18,15 +18,17 @@ public final class LobbySlot implements Serializable {
     private int avatarIndex;
     private int team;
     private boolean isArchenemy;
+    private boolean isReady;
     private Deck deck;
     private ImmutableSet<AIOption> aiOptions;
 
-    public LobbySlot(final LobbySlotType type, final String name, final int avatarIndex, final int team, final boolean isArchenemy, final Set<AIOption> aiOptions) {
+    public LobbySlot(final LobbySlotType type, final String name, final int avatarIndex, final int team, final boolean isArchenemy, final boolean isReady, final Set<AIOption> aiOptions) {
         this.type = type;
         this.name = name;
         this.avatarIndex = avatarIndex;
         this.team = team;
         this.isArchenemy = isArchenemy;
+        this.isReady = isReady;
         this.setAiOptions(aiOptions);
     }
 
@@ -45,6 +47,9 @@ public final class LobbySlot implements Serializable {
         }
         if (data.getArchenemy() != null) {
             setIsArchenemy(data.getArchenemy().booleanValue());
+        }
+        if (data.getReady() != null) {
+            setIsReady(data.getReady().booleanValue());
         }
         if (data.getAiOptions() != null) {
             setAiOptions(data.getAiOptions());
@@ -89,6 +94,13 @@ public final class LobbySlot implements Serializable {
     }
     public void setIsArchenemy(final boolean isArchenemy) {
         this.isArchenemy = isArchenemy;
+    }
+
+    public boolean isReady() {
+        return isReady;
+    }
+    public void setIsReady(final boolean isReady) {
+        this.isReady = isReady;
     }
 
     public Deck getDeck() {

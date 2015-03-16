@@ -17,27 +17,29 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     private final int avatarIndex;
     private final int team;
     private final Boolean isArchenemy;
+    private final Boolean isReady;
     private final Deck deck;
     private final DeckSection section;
     private final CardPool cards;
     private final Set<AIOption> aiOptions;
 
-    public static UpdateLobbyPlayerEvent create(final LobbySlotType type, final String name, final int avatarIndex, final int team, final boolean isArchenemy, final Set<AIOption> aiOptions) {
-        return new UpdateLobbyPlayerEvent(type, name, avatarIndex, team, isArchenemy, null, null, null, aiOptions);
+    public static UpdateLobbyPlayerEvent create(final LobbySlotType type, final String name, final int avatarIndex, final int team, final boolean isArchenemy, final boolean isReady, final Set<AIOption> aiOptions) {
+        return new UpdateLobbyPlayerEvent(type, name, avatarIndex, team, isArchenemy, isReady, null, null, null, aiOptions);
     }
     public static UpdateLobbyPlayerEvent deckUpdate(final Deck deck) {
-        return new UpdateLobbyPlayerEvent(null, null, -1, -1, null, deck, null, null, null);
+        return new UpdateLobbyPlayerEvent(null, null, -1, -1, null, null, deck, null, null, null);
     }
     public static UpdateLobbyPlayerEvent deckUpdate(final DeckSection section, final CardPool cards) {
-        return new UpdateLobbyPlayerEvent(null, null, -1, -1, null, null, section, cards, null);
+        return new UpdateLobbyPlayerEvent(null, null, -1, -1, null, null, null, section, cards, null);
     }
 
-    private UpdateLobbyPlayerEvent(final LobbySlotType type, final String name, final int avatarIndex, final int team, final Boolean isArchenemy, final Deck deck, final DeckSection section, final CardPool cards, final Set<AIOption> aiOptions) {
+    private UpdateLobbyPlayerEvent(final LobbySlotType type, final String name, final int avatarIndex, final int team, final Boolean isArchenemy, final Boolean isReady, final Deck deck, final DeckSection section, final CardPool cards, final Set<AIOption> aiOptions) {
         this.type = type;
         this.name = name;
         this.avatarIndex = avatarIndex;
         this.team = team;
         this.isArchenemy = isArchenemy;
+        this.isReady = isReady;
         this.deck = deck;
         this.section = section;
         this.cards = cards;
@@ -61,6 +63,9 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     }
     public Boolean getArchenemy() {
         return isArchenemy;
+    }
+    public Boolean getReady() {
+        return isReady;
     }
     public Deck getDeck() {
         return deck;

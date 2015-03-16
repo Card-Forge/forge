@@ -115,8 +115,8 @@ public abstract class GameLobby {
                 }
                 otherSlot.setIsArchenemy(becomesArchenemy);
             }
-            updateView();
         }
+        updateView();
     }
 
     public IGameController getController(final int index) {
@@ -134,7 +134,8 @@ public abstract class GameLobby {
 
     public void addSlot() {
         final int newIndex = getNumberOfSlots();
-        addSlot(new LobbySlot(allowNetworking ? LobbySlotType.OPEN : LobbySlotType.LOCAL, null, newIndex, newIndex, false, Collections.<AIOption>emptySet()));
+        final LobbySlotType type = allowNetworking ? LobbySlotType.OPEN : LobbySlotType.LOCAL;
+        addSlot(new LobbySlot(type, null, newIndex, newIndex, false, !allowNetworking, Collections.<AIOption>emptySet()));
     }
     protected final void addSlot(final LobbySlot slot) {
         if (data.slots.size() >= MAX_PLAYERS) {

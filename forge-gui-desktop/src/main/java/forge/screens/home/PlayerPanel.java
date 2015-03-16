@@ -38,6 +38,7 @@ import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorCommander;
 import forge.screens.deckeditor.controllers.CEditorVariant;
 import forge.screens.home.sanctioned.AvatarSelector;
+import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FComboBoxWrapper;
 import forge.toolbox.FLabel;
@@ -71,6 +72,7 @@ public class PlayerPanel extends FPanel {
     private FRadioButton radioAi;
     private JCheckBoxMenuItem radioAiUseSimulation;
     private FRadioButton radioOpen;
+    private FCheckBox chkReady;
 
     private FComboBoxWrapper<Object> teamComboBox = new FComboBoxWrapper<Object>();
     private FComboBoxWrapper<Object> aeTeamComboBox = new FComboBoxWrapper<Object>();
@@ -143,8 +145,10 @@ public class PlayerPanel extends FPanel {
         teamComboBox.addTo(this, variantBtnConstraints + ", pushx, growx, gaptop 5px");
         aeTeamComboBox.addTo(this, variantBtnConstraints + ", pushx, growx, gaptop 5px");
 
+        createReadyButtion();
         if (allowNetworking) {
-            this.add(radioOpen, "cell 4 1, ax left, sx 2, wrap");
+            this.add(radioOpen, "cell 4 1, ax left, sx 2");
+            this.add(chkReady, "cell 5 1, ax left, sx 2, wrap");
         }
 
         this.add(deckLabel, variantBtnConstraints + ", cell 0 2, sx 2, ax right");
@@ -192,6 +196,7 @@ public class PlayerPanel extends FPanel {
         nameRandomiser.setEnabled(mayEdit);
         deckLabel.setVisible(mayEdit);
         deckBtn.setVisible(mayEdit);
+        chkReady.setEnabled(mayEdit);
 
         closeBtn.setVisible(mayRemove);
 
@@ -558,6 +563,15 @@ public class PlayerPanel extends FPanel {
         tempBtnGroup.add(radioOpen);
     }
 
+    private void createReadyButtion() {
+        chkReady = new FCheckBox("Ready");
+        chkReady.addActionListener(new ActionListener() {
+            @Override public final void actionPerformed(final ActionEvent e) {
+                lobby.setReady(index, chkReady.isSelected());
+            }
+        });
+    }
+
     /**
      * @param index
      */
@@ -711,6 +725,13 @@ public class PlayerPanel extends FPanel {
         aeTeamComboBox.suppressActionListeners();
         aeTeamComboBox.setSelectedIndex(isArchenemy ? 0 : 1);
         aeTeamComboBox.unsuppressActionListeners();
+    }
+
+    public boolean isReady() {
+        return chkReady.isSelected();
+    }
+    public void setIsReady(final boolean isReady) {
+        chkReady.setSelected(isReady);
     }
 
     public void setMayEdit(final boolean mayEdit) {
