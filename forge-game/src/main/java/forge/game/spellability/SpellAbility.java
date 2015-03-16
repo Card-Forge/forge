@@ -134,12 +134,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private TargetRestrictions targetRestrictions = null;
     private TargetChoices targetChosen = new TargetChoices();
 
-    private final SpellAbilityView view;
+    private SpellAbilityView view;
 
-    protected SpellAbility(final Card iSourceCard, Cost toPay) {
+    protected SpellAbility(final Card iSourceCard, final Cost toPay) {
         this(iSourceCard, toPay, null);
     }
-    protected SpellAbility(final Card iSourceCard, Cost toPay, SpellAbilityView view0) {
+    protected SpellAbility(final Card iSourceCard, final Cost toPay, SpellAbilityView view0) {
         id = nextId();
         hostCard = iSourceCard;
         payCosts = toPay;
@@ -579,6 +579,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         try {
             clone = (SpellAbility) clone();
             clone.id = nextId();
+            clone.view = new SpellAbilityView(clone);
+            if (clone.hostCard != null && clone.hostCard.getGame() != null) {
+                clone.hostCard.getGame().addSpellAbility(clone.id, clone);
+            }
         } catch (final CloneNotSupportedException e) {
             System.err.println(e);
         }
