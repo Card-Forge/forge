@@ -268,6 +268,10 @@ public abstract class GameLobby {
         }
 
         for (final LobbySlot slot : activeSlots) {
+            if (!slot.isReady() && slot.getType() != LobbySlotType.OPEN) {
+                SOptionPane.showMessageDialog(String.format("Player %s is not ready", slot.getName()));
+                return;
+            }
             if (slot.getDeck() == null) {
                 SOptionPane.showMessageDialog(String.format("Please specify a deck for %s", slot.getName()));
                 return;

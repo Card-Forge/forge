@@ -196,6 +196,7 @@ public class PlayerPanel extends FPanel {
         nameRandomiser.setEnabled(mayEdit);
         deckLabel.setVisible(mayEdit);
         deckBtn.setVisible(mayEdit);
+        chkReady.setVisible(type == LobbySlotType.LOCAL || type == LobbySlotType.REMOTE);
         chkReady.setEnabled(mayEdit);
 
         closeBtn.setVisible(mayRemove);

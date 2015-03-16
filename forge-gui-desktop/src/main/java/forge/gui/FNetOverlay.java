@@ -202,9 +202,9 @@ public enum FNetOverlay {
     public void addMessage(final String origin, final String message) {
         final String toAdd;
         if (origin == null) {
-            toAdd = String.format("%n[%s] %s: %s", inFormat.format(new Date()), origin, message);
-        } else {
             toAdd = String.format("%n[%s] %s", inFormat.format(new Date()), message);
+        } else {
+            toAdd = String.format("%n[%s] %s: %s", inFormat.format(new Date()), origin, message);
         }
         txtLog.append(toAdd);
     }

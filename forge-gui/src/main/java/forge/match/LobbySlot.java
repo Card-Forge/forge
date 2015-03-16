@@ -97,7 +97,7 @@ public final class LobbySlot implements Serializable {
     }
 
     public boolean isReady() {
-        return isReady;
+        return type == LobbySlotType.AI || isReady;
     }
     public void setIsReady(final boolean isReady) {
         this.isReady = isReady;
