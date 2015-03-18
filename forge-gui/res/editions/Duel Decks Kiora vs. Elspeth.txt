@@ -1,0 +1,72 @@
+[metadata]
+Code=DDO
+Date=2015-02-27
+Name=Duel Decks: Kiora vs. Elspeth
+Type=Duel_Decks
+
+[cards]
+M Elspeth, Sun's Champion
+U Banisher Priest
+R Captain of the Watch
+C Celestial Flare
+C Court Street Denizen
+U Dauntless Onslaught
+R Decree of Justice
+R Dictate of Heliod
+C Gempalm Avenger
+C Gustcloak Harrier
+R Gustcloak Savior
+U Gustcloak Sentinel
+U Gustcloak Skirmisher
+C Icatian Javelineers
+C Kinsbaile Skirmisher
+C Kor Skyfisher
+C Loxodon Partisan
+C Mighty Leap
+C Mortal's Ardor
+U Mother of Runes
+C Noble Templar
+R Precinct Captain
+C Raise the Alarm
+C Soul Parry
+C Standing Troops
+C Sunlance
+C Veteran Armorsmith
+C Veteran Swordsmith
+C Secluded Steppe
+L Plains
+L Plains
+L Plains
+L Plains
+M Kiora, the Crashing Wave
+C Accumulated Knowledge
+U AEtherize
+R Inkwell Leviathan
+C Man-o'-War
+C Omenspeaker
+C Peel from Reality
+R Scourge of Fleets
+U Sealock Monster
+C Surrakar Banisher
+R Whelming Wave
+C Explore
+U Explosive Vegetation
+C Grazing Gladehart
+C Nessian Asp
+C Netcaster Spider
+C Time to Feed
+C Coiling Oracle
+U Kiora's Follower
+U Lorescale Coatl
+U Nimbus Swimmer
+R Plasm Capture
+R Simic Sky Swallower
+U Urban Evolution
+C Evolving Wilds
+U Temple of the False God
+L Island
+L Island
+L Island
+L Forest
+L Forest
+L Forest

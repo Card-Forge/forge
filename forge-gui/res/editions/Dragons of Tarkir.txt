@@ -1,0 +1,274 @@
+[metadata]
+Code=DTK
+Date=2015-03-27
+Name=Dragons of Tarkir
+Code2=DTK
+Type=Expansion
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand DTK
+
+[cards]
+U Scion of Ugin
+R Anafenza, Kin-Tree Spirit
+R Arashin Foremost
+C Artful Maneuver
+U Aven Sunstriker
+C Aven Tactician
+U Battle Mastery
+C Center Soul
+C Champion of Arashin
+U Dragon Hunter
+C Dragon's Eye Sentry
+U Dromoka Captain
+C Dromoka Dunecaster
+C Dromoka Warrior
+U Echoes of the Kin Tree
+C Enduring Victory
+C Fate Forgotten
+C Glaring Aegis
+R Gleam of Authority
+U Graceblade Artisan
+U Great Teacher's Decree
+C Herald of Dromoka
+R Hidden Dragonslayer
+C Lightwalker
+C Misthoof Kirin
+R Myth Realized
+M Ojutai Exemplars
+U Orator of Ojutai
+C Pacifism
+R Profound Journey
+R Radiant Purge
+C Resupply
+C Sandcrafter Mage
+C Sandstorm Charger
+U Scale Blessing
+R Secure the Wastes
+U Shieldhide Dragon
+U Silkwrap
+U Strongarm Monk
+C Student of Ojutai
+R Sunscorch Regent
+U Surge of Righteousness
+C Territorial Roc
+C Ancient Carp
+C Anticipate
+U Belltoll Dragon
+R Blessed Reincarnation
+M Clone Legion
+C Contradict
+U Dance of the Skywise
+C Dirgur Nemesis
+R Dragonlord's Prerogative
+C Elusive Spellfist
+U Encase in Ice
+C Glint
+U Gudul Lurker
+C Gurmag Drowner
+R Icefall Regent
+R Illusory Gains
+U Learn from the Past
+R Living Lore
+R Mirror Mockery
+C Monastery Loremaster
+C Mystic Meditation
+C Negate
+C Ojutai Interceptor
+C Ojutai's Breath
+C Ojutai's Summons
+C Palace Familiar
+R Profaner of the Dead
+U Qarsi Deceiver
+C Reduce in Stature
+M Shorecrasher Elemental
+C Sidisi's Faithful
+U Sight Beyond Sight
+U Silumgar Sorcerer
+U Silumgar Spell-Eater
+U Silumgar's Scorn
+U Skywise Teachings
+R Stratus Dancer
+C Taigam's Strike
+C Updraft Elemental
+U Void Squall
+U Youthful Scholar
+C Zephyr Scribe
+U Acid-Spewer Dragon
+U Ambuscade Shaman
+R Blood-Chin Fanatic
+U Blood-Chin Rager
+C Butcher's Glee
+C Coat with Venom
+R Corpseweft
+R Damnable Pact
+U Deadly Wanderings
+U Death Wind
+R Deathbringer Regent
+C Defeat
+C Duress
+C Dutiful Attendant
+C Flatten
+R Foul Renewal
+U Foul-Tongue Invocation
+C Foul-Tongue Shriek
+C Gravepurge
+C Hand of Silumgar
+R Hedonist's Trove
+C Kolaghan Skirmisher
+U Marang River Skeleton
+C Marsh Hulk
+C Mind Rot
+U Minister of Pain
+R Pitiless Horde
+C Qarsi Sadist
+U Rakshasa Gravecaller
+C Reckless Imp
+M Risen Executioner
+U Self-Inflicted Wound
+C Shambling Goblin
+C Sibsig Icebreakers
+R Sidisi, Undead Vizier
+R Silumgar Assassin
+C Silumgar Butcher
+U Ukud Cobra
+U Ultimate Price
+U Virulent Plague
+C Vulturous Aven
+C Wandering Tombshell
+C Atarka Efreet
+U Atarka Pummeler
+R Berserkers' Onslaught
+R Commune with Lava
+R Crater Elemental
+M Descent of the Dragons
+U Draconic Roar
+C Dragon Fodder
+R Dragon Tempest
+M Dragon Whisperer
+U Dragonlord's Servant
+C Hardened Berserker
+C Impact Tremors
+R Ire Shaman
+C Kindled Fury
+C Kolaghan Aspirant
+U Kolaghan Forerunners
+C Kolaghan Stormsinger
+U Lightning Berserker
+C Lose Calm
+C Magmatic Chasm
+U Qal Sisma Behemoth
+U Rending Volley
+U Roast
+C Sabertooth Outrider
+C Sarkhan's Rage
+U Sarkhan's Triumph
+C Screamreach Brawler
+U Seismic Rupture
+C Sprinting Warbrute
+U Stormcrag Elemental
+U Stormwing Dragon
+C Summit Prowler
+C Tail Slash
+R Thunderbreak Regent
+C Tormenting Voice
+C Twin Bolt
+C Vandalize
+C Volcanic Rush
+R Volcanic Vision
+U Warbringer
+R Zurgo Bellstriker
+C Aerie Bowmasters
+C Ainok Artillerist
+U Ainok Survivalist
+R Assault Formation
+C Atarka Beastbreaker
+R Avatar of the Resolute
+U Circle of Elders
+R Collected Company
+C Colossodon Yearling
+C Conifer Strider
+M Deathmist Raptor
+R Den Protector
+U Display of Dominance
+C Dragon-Scarred Bear
+U Dromoka's Gift
+C Epic Confrontation
+U Explosive Vegetation
+R Foe-Razer Regent
+C Glade Watcher
+C Guardian Shield-Bearer
+U Herdchaser Dragon
+U Inspiring Call
+U Lurking Arynx
+C Naturalize
+R Obscuring AEther
+C Pinion Feast
+U Press the Advantage
+C Revealing Wind
+U Salt Road Ambushers
+U Salt Road Quartermasters
+C Sandsteppe Scavenger
+U Scaleguard Sentinels
+C Segmented Krotiq
+C Servant of the Scale
+M Shaman of Forgotten Ways
+C Shape the Sands
+C Sheltered Aerie
+U Sight of the Scalelords
+C Stampeding Elk Herd
+R Sunbringer's Touch
+R Surrak, the Hunt Caller
+C Tread Upon
+R Arashin Sovereign
+R Atarka's Command
+R Boltwing Marauder
+U Cunning Breezedancer
+M Dragonlord Atarka
+M Dragonlord Dromoka
+M Dragonlord Kolaghan
+M Dragonlord Ojutai
+M Dragonlord Silumgar
+R Dromoka's Command
+U Enduring Scalelord
+R Harbinger of the Hunt
+R Kolaghan's Command
+M Narset Transcendent
+R Necromaster Dragon
+R Ojutai's Command
+R Pristine Skywise
+U Ruthless Deathfang
+M Sarkhan Unbroken
+U Savage Ventmaw
+R Silumgar's Command
+U Swift Warkite
+C Ancestral Statue
+U Atarka Monument
+C Custodian of the Trove
+U Dragonloft Idol
+U Dromoka Monument
+U Gate Smasher
+C Keeper of the Lens
+U Kolaghan Monument
+U Ojutai Monument
+U Silumgar Monument
+C Spidersilk Net
+U Stormrider Rig
+U Tapestry of the Ages
+C Vial of Dragonfire
+C Evolving Wilds
+R Haven of the Spirit Dragon
+L Plains
+L Plains
+L Plains
+L Island
+L Island
+L Island
+L Swamp
+L Swamp
+L Swamp
+L Mountain
+L Mountain
+L Mountain
+L Forest
+L Forest
+L Forest
