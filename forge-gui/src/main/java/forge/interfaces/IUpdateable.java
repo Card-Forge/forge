@@ -1,5 +1,5 @@
 package forge.interfaces;
 
 public interface IUpdateable {
-    void update();
+    void update(boolean fullUpdate);
 }

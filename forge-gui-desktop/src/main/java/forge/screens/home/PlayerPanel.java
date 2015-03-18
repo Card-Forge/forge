@@ -228,7 +228,6 @@ public class PlayerPanel extends FPanel {
                 lobby.firePlayerChangeListener(index);
                 avatarLabel.requestFocusInWindow();
                 lobby.updateVanguardList(index);
-                lobby.update();
             }
         };
     };
@@ -255,7 +254,6 @@ public class PlayerPanel extends FPanel {
                     prefs.save();
                 }
                 lobby.firePlayerChangeListener(index);
-                lobby.update();
             }
         }
     };

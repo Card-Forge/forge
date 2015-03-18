@@ -7,7 +7,6 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 
 import forge.Singletons;
-import forge.game.GameView;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
@@ -196,18 +195,16 @@ public class VMatchUI implements IVTopLevelUI {
     @Override
     public boolean onClosing(final FScreen screen) {
         if (!Singletons.getControl().getCurrentScreen().equals(screen)) {
+            // Switch to this screen if not already showing
             Singletons.getControl().setCurrentScreen(screen);
         }
 
-        final GameView gameView = control.getGameView();
-        if (gameView != null && !gameView.isGameOver()) {
-            control.concede();
-            return false; //delay hiding tab even if concede successful
+        if (control.concede()) {
+            //switch back to menus music when closing screen
+            SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
+            return true;
         }
 
-        //switch back to menus music when closing screen
-        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
-
-        return true;
+        return false;
     }
 }

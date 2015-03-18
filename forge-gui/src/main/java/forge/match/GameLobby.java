@@ -65,7 +65,7 @@ public abstract class GameLobby {
     }
     public void setData(final GameLobbyData data) {
         this.data = data;
-        updateView();
+        updateView(true);
     }
 
     public GameType getGameType() {
@@ -73,7 +73,6 @@ public abstract class GameLobby {
     }
     public void setGameType(final GameType type) {
         data.currentGameMode = type;
-        updateView();
     }
 
     public boolean hasVariant(final GameType variant) {
@@ -99,7 +98,8 @@ public abstract class GameLobby {
         final boolean triesToChangeArchenemy = event.getArchenemy() != null;
         final boolean archenemyRemoved = triesToChangeArchenemy && !event.getArchenemy().booleanValue();
         final boolean hasArchenemyChanged = triesToChangeArchenemy && slot.isArchenemy() != event.getArchenemy().booleanValue();
-        slot.apply(event);
+
+        final boolean changed = slot.apply(event) || hasArchenemyChanged;
 
         // Change archenemy teams
         if (hasVariant(GameType.Archenemy) && hasArchenemyChanged) {
@@ -116,7 +116,10 @@ public abstract class GameLobby {
                 otherSlot.setIsArchenemy(becomesArchenemy);
             }
         }
-        updateView();
+
+        if (changed) {
+            updateView(false);
+        }
     }
 
     public IGameController getController(final int index) {
@@ -130,7 +133,8 @@ public abstract class GameLobby {
     public abstract boolean mayEdit(final int index);
     public abstract boolean mayControl(final int index);
     public abstract boolean mayRemove(final int index);
-    public abstract IGuiGame getGui(final int index);
+    protected abstract IGuiGame getGui(final int index);
+    protected abstract void gameStarted();
 
     public void addSlot() {
         final int newIndex = getNumberOfSlots();
@@ -151,7 +155,7 @@ public abstract class GameLobby {
             slot.setIsArchenemy(true);
             lastArchenemy = 0;
         }
-        updateView();
+        updateView(false);
     }
     private String randomName() {
         final List<String> names = Lists.newArrayListWithCapacity(MAX_PLAYERS);
@@ -189,7 +193,7 @@ public abstract class GameLobby {
             lastArchenemy--;
         }
         data.slots.remove(index);
-        updateView();
+        updateView(false);
     }
 
     public void applyVariant(final GameType variant) {
@@ -217,12 +221,13 @@ public abstract class GameLobby {
             break;
         case MomirBasic:
             data.appliedVariants.remove(GameType.Commander);
+            data.appliedVariants.remove(GameType.TinyLeaders);
             data.appliedVariants.remove(GameType.Vanguard);
             break;
         default:
             break;
         }
-        updateView();
+        updateView(true);
     }
 
     public void removeVariant(final GameType variant) {
@@ -230,7 +235,16 @@ public abstract class GameLobby {
         if (data.appliedVariants.isEmpty()) {
             data.appliedVariants.add(GameType.Constructed);
         }
-        updateView();
+        if (variant == data.currentGameMode) {
+            if (hasVariant(GameType.Commander)) {
+                data.currentGameMode = GameType.Commander;
+            } else if (hasVariant(GameType.TinyLeaders)) {
+                data.currentGameMode = GameType.TinyLeaders;
+            } else {
+                data.currentGameMode = GameType.Constructed;
+            }
+        }
+        updateView(true);
     }
 
     private boolean isEnoughTeams() {
@@ -247,9 +261,9 @@ public abstract class GameLobby {
         return false;
     }
 
-    protected final void updateView() {
+    protected final void updateView(final boolean fullUpdate) {
         if (listener != null) {
-            listener.update();
+            listener.update(fullUpdate);
         }
     }
 
@@ -422,6 +436,8 @@ public abstract class GameLobby {
                 gameControllers.put(slot, (IGameController) p.getController());
             }
         }
+
+        gameStarted();
     }
 
     public final static class GameLobbyData implements Serializable {

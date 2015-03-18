@@ -30,7 +30,10 @@ public final class ClientGameLobby extends GameLobby {
         return false;
     }
 
-    @Override public IGuiGame getGui(final int index) {
+    @Override protected IGuiGame getGui(final int index) {
         return null;
+    }
+
+    @Override protected void gameStarted() {
     }
 }

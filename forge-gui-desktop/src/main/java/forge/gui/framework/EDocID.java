@@ -3,6 +3,8 @@
  */
 package forge.gui.framework;
 
+import com.google.common.collect.ObjectArrays;
+
 import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VCardCatalog;
 import forge.screens.deckeditor.views.VCurrentDeck;
@@ -126,6 +128,7 @@ public enum EDocID {
         for (int i = 0; i < 8; i++) EDocID.Commands[i].setDoc(new VEmptyDoc(EDocID.Commands[i]));
         for (int i = 0; i < 8; i++) EDocID.Hands[i].setDoc(new VEmptyDoc(EDocID.Hands[i]));
     }
+    public final static EDocID[] VarDocs = ObjectArrays.concat(ObjectArrays.concat(Commands, Fields, EDocID.class), Hands, EDocID.class);
 
     // End enum declarations, start enum methods.
     private IVDoc<? extends ICDoc> vDoc;

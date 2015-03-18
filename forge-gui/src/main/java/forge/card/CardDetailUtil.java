@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Sets;
 
+import forge.game.GameView;
 import forge.game.card.CardUtil;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
@@ -201,7 +202,7 @@ public class CardDetailUtil {
         return id.isEmpty() ? id : "[" + id + "]";
     }
 
-    public static String composeCardText(final CardStateView state, final boolean canShow) {
+    public static String composeCardText(final CardStateView state, final GameView gameView, final boolean canShow) {
         if (!canShow) { return ""; }
 
         final CardView card = state.getCard();
@@ -479,10 +480,7 @@ public class CardDetailUtil {
         }
 
         //show current storm count for storm cards
-        // TODO add Storm
-        /*
         if (state.hasStorm()) {
-            GameView gameView = HostedMatch.getGameView();
             if (gameView != null) {
                 if (area.length() != 0) {
                     area.append("\n\n");
@@ -490,7 +488,6 @@ public class CardDetailUtil {
                 area.append("Current Storm Count: " + gameView.getStormCount());
             }
         }
-        */
         return area.toString();
     }
 }

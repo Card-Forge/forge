@@ -32,33 +32,42 @@ public final class LobbySlot implements Serializable {
         this.setAiOptions(aiOptions);
     }
 
-    void apply(final UpdateLobbyPlayerEvent data) {
+    boolean apply(final UpdateLobbyPlayerEvent data) {
+        boolean changed = false;
         if (data.getType() != null) {
             setType(data.getType());
+            changed = true;
         }
         if (data.getName() != null) {
             setName(data.getName());
+            changed = true;
         }
         if (data.getAvatarIndex() != -1) {
             setAvatarIndex(data.getAvatarIndex());
+            changed = true;
         }
         if (data.getTeam() != -1) {
             setTeam(data.getTeam());
+            changed = true;
         }
         if (data.getArchenemy() != null) {
             setIsArchenemy(data.getArchenemy().booleanValue());
+            changed = true;
         }
         if (data.getReady() != null) {
             setIsReady(data.getReady().booleanValue());
+            changed = true;
         }
         if (data.getAiOptions() != null) {
             setAiOptions(data.getAiOptions());
+            changed = true;
         }
         if (data.getDeck() != null) {
             setDeck(data.getDeck());
         } else if (getDeck() != null && data.getSection() != null && data.getCards() != null) {
             getDeck().putSection(data.getSection(), data.getCards());
         }
+        return changed;
     }
 
     public LobbySlotType getType() {

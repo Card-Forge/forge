@@ -42,7 +42,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             }
         });
 
-        vLobby.update();
+        vLobby.update(false);
     }
 
     public VLobby getLobby() {

@@ -45,8 +45,8 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
 
         FNetOverlay.SINGLETON_INSTANCE.showUp("Hosting game");
         lobby.setListener(new IUpdateable() {
-            @Override public final void update() {
-                view.update();
+            @Override public final void update(final boolean fullUpdate) {
+                view.update(fullUpdate);
                 server.updateLobbyState();
             }
         });
@@ -79,7 +79,7 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
             }
         });
 
-        view.update();
+        view.update(true);
 
         Singletons.getControl().setCurrentScreen(FScreen.ONLINE_LOBBY);
         FNetOverlay.SINGLETON_INSTANCE.showUp(String.format("Hosting on port %d", portNumber));

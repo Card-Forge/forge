@@ -245,7 +245,10 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     public Deck getDeck() {
-        DeckProxy proxy = lstDecks.getSelectedItem();
+        final DeckProxy proxy = lstDecks.getSelectedItem();
+        if (proxy == null) {
+            return null;
+        }
         return proxy.getDeck();
     }
 
@@ -271,12 +274,11 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         if (decksComboBox == null) { //initialize components with delayed initialization the first time this is populated
             decksComboBox = new DecksComboBox();
             lstDecksContainer = new ItemManagerContainer(lstDecks);
-            restoreSavedState();
             decksComboBox.addListener(this);
+            restoreSavedState();
         }
         else {
             removeAll();
-            restoreSavedState(); //ensure decks refreshed and state restored in case any deleted or added since last loaded
         }
         this.setLayout(new MigLayout("insets 0, gap 0"));
         decksComboBox.addTo(this, "w 100%, h 30px!, gapbottom 5px, spanx 2, wrap");

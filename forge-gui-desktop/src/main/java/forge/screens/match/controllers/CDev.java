@@ -61,7 +61,7 @@ public class CDev implements ICDoc {
 
     private final MouseListener madViewAll = new MouseAdapter() {
         @Override
-        public void mousePressed(MouseEvent e) {
+        public void mousePressed(final MouseEvent e) {
             toggleViewAllCards();
         }
     };
@@ -228,8 +228,8 @@ public class CDev implements ICDoc {
     @Override
     public void update() {
         if (getController() != null) {
-            view.getLblUnlimitedLands().setToggled(!getController().canPlayUnlimitedLands());
-            view.getLblViewAll().setToggled(!getController().mayLookAtAllCards());
+            view.getLblUnlimitedLands().setToggled(getController().canPlayUnlimitedLands());
+            view.getLblViewAll().setToggled(getController().mayLookAtAllCards());
         }
     }
 }

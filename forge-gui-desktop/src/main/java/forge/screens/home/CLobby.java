@@ -29,7 +29,7 @@ public class CLobby {
                 Vector<Object> listData;
                 Object val;
 
-                for (int i = 0; i < 8; i++) {
+                for (int i = 0; i < VLobby.MAX_PLAYERS; i++) {
                     // Commander: reinit deck list and restore last selections (if any)
                     deckList = view.getCommanderDeckLists().get(i);
                     listData = new Vector<Object>();

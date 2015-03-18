@@ -158,40 +158,31 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     /** Concede game, bring up WinLose UI. */
-    public void concede() {
-        final String userPrompt =
-                "This will end the current game and you will not be able to resume.\n\n" +
-                        "Concede anyway?";
-        if (hasLocalPlayers() && showConfirmDialog(userPrompt, "Concede Game?", "Concede", "Cancel")) {
-            for (final IGameController c : getGameControllers()) {
-                // Concede each player on this Gui
-                c.concede();
-            }
-            /*
-            if (humanCount == 0) { // no human? then all players surrender!
-                for (Player p : game.getPlayers()) {
-                    p.concede();
+    public boolean concede() {
+        if (gameView.isGameOver()) {
+            return true;
+        }
+        if (hasLocalPlayers()) {
+            if (showConfirmDialog("This will concede the current game and you will lose.\n\nConcede anyway?", "Concede Game?", "Concede", "Cancel")) {
+                for (final IGameController c : getGameControllers()) {
+                    // Concede each player on this Gui
+                    c.concede();
                 }
             }
-            else {
-                getCurrentPlayer().concede();
+            if (gameView.isGameOver()) {
+                // Don't immediately close, wait for win/lose screen
+                return false;
+            } else {
+                return true;
             }
-
-            Player priorityPlayer = game.getPhaseHandler().getPriorityPlayer();
-            boolean humanHasPriority = priorityPlayer == null || priorityPlayer.getLobbyPlayer() instanceof LobbyPlayerHuman;
-
-            if (humanCount > 0 && humanHasPriority) {
-                game.getAction().checkGameOverCondition();
+        } else {
+            if (showConfirmDialog("This will close this game and you will not be able to resume watching it.\n\nClose anyway?", "Close Game?", "Close", "Cancel")) {
+                //if (playbackControl != null) {
+                    //playbackControl.onGameStopRequested();
+                //}
+                return true;
             }
-            else {
-                game.isGameOver(); // this is synchronized method - it's used to make Game-0 thread see changes made here
-                onGameOver(false); //release any waiting input, effectively passing priority
-            }
-
-            if (playbackControl != null) {
-                playbackControl.onGameStopRequested();
-            }
-            */
+            return false;
         }
     }
 

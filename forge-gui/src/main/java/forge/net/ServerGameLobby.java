@@ -33,13 +33,13 @@ public final class ServerGameLobby extends GameLobby {
         slot.setType(LobbySlotType.REMOTE);
         slot.setName(name);
         slot.setAvatarIndex(avatarIndex);
-        updateView();
+        updateView(false);
     }
     public void disconnectPlayer(final int index) {
         final LobbySlot slot = getSlot(index);
         slot.setType(LobbySlotType.OPEN);
         slot.setName(StringUtils.EMPTY);
-        updateView();
+        updateView(false);
     }
 
     @Override public boolean hasControl() {
@@ -59,7 +59,11 @@ public final class ServerGameLobby extends GameLobby {
         return true;
     }
 
-    @Override public IGuiGame getGui(final int index) {
+    @Override protected IGuiGame getGui(final int index) {
         return FServerManager.getInstance().getGui(index);
+    }
+
+    @Override
+    protected void gameStarted() {
     }
 }

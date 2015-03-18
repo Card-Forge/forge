@@ -20,6 +20,7 @@ import forge.assets.TextRenderer;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.card.mana.ManaCost;
+import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.zone.ZoneType;
@@ -328,10 +329,10 @@ public class CardImageRenderer {
         }
     }
 
-    public static void drawZoom(Graphics g, CardView card, boolean altState, float x, float y, float w, float h) {
+    public static void drawZoom(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h) {
         final Texture image = ImageCache.getImage(card.getState(altState).getImageKey(MatchController.instance.getCurrentPlayer()), true);
         if (image == null) { //draw details if can't draw zoom
-            drawDetails(g, card, altState, x, y, w, h);
+            drawDetails(g, card, gameView, altState, x, y, w, h);
             return;
         }
 
@@ -344,7 +345,7 @@ public class CardImageRenderer {
         CardRenderer.drawFoilEffect(g, card, x, y, w, y);
     }
 
-    public static void drawDetails(Graphics g, CardView card, boolean altState, float x, float y, float w, float h) {
+    public static void drawDetails(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h) {
         updateStaticFields(w, h);
 
         float blackBorderThickness = w * BLACK_BORDER_THICKNESS_RATIO;
@@ -393,7 +394,7 @@ public class CardImageRenderer {
         y += cardNameBoxHeight + innerBorderThickness;
         Color textBoxColor1 = FSkinColor.tintColor(Color.WHITE, color1, CardRenderer.TEXT_BOX_TINT);
         Color textBoxColor2 = color2 == null ? null : FSkinColor.tintColor(Color.WHITE, color2, CardRenderer.TEXT_BOX_TINT);
-        drawDetailsTextBox(g, card, state, canShow, textBoxColor1, textBoxColor2, x, y, w, textBoxHeight);
+        drawDetailsTextBox(g, state, gameView, canShow, textBoxColor1, textBoxColor2, x, y, w, textBoxHeight);
 
         y += textBoxHeight + innerBorderThickness;
         Color ptColor1 = FSkinColor.tintColor(Color.WHITE, color1, CardRenderer.PT_BOX_TINT);
@@ -457,7 +458,7 @@ public class CardImageRenderer {
         g.drawText(CardDetailUtil.formatCardType(state, canShow), TYPE_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
     }
 
-    private static void drawDetailsTextBox(Graphics g, CardView card, CardStateView state, boolean canShow, Color color1, Color color2, float x, float y, float w, float h) {
+    private static void drawDetailsTextBox(Graphics g, CardStateView state, GameView gameView, boolean canShow, Color color1, Color color2, float x, float y, float w, float h) {
         if (color2 == null) {
             g.fillRect(color1, x, y, w, h);
         }
@@ -472,7 +473,7 @@ public class CardImageRenderer {
         y += padY;
         w -= 2 * padX;
         h -= 2 * padY;
-        cardTextRenderer.drawText(g, CardDetailUtil.composeCardText(state, canShow), TEXT_FONT, Color.BLACK, x, y, w, h, y, h, true, HAlignment.LEFT, false);
+        cardTextRenderer.drawText(g, CardDetailUtil.composeCardText(state, gameView, canShow), TEXT_FONT, Color.BLACK, x, y, w, h, y, h, true, HAlignment.LEFT, false);
     }
 
     private static void drawDetailsIdAndPtBox(Graphics g, CardView card, CardStateView state, boolean canShow, Color idForeColor, Color color1, Color color2, float x, float y, float w, float h) {

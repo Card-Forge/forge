@@ -34,6 +34,7 @@ import forge.card.CardDetailUtil;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
+import forge.game.GameView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
@@ -69,6 +70,8 @@ public class CardDetailPanel extends SkinnedPanel {
     private final FHtmlViewer cdArea;
     private final FScrollPane scrArea;
 
+    private GameView gameView = null;
+
     public CardDetailPanel() {
         super();
         setLayout(null);
@@ -98,6 +101,10 @@ public class CardDetailPanel extends SkinnedPanel {
         add(powerToughnessLabel);
         add(setInfoLabel);
         add(scrArea);
+    }
+
+    public void setGameView(final GameView gameView) {
+        this.gameView = gameView;
     }
 
     @Override
@@ -261,7 +268,7 @@ public class CardDetailPanel extends SkinnedPanel {
         idLabel.setText(canShow ? CardDetailUtil.formatCardId(state) : "");
 
         // fill the card text
-        cdArea.setText(FSkin.encodeSymbols(CardDetailUtil.composeCardText(state, canShow), true));
+        cdArea.setText(FSkin.encodeSymbols(CardDetailUtil.composeCardText(state, gameView, canShow), true));
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override

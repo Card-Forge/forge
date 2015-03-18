@@ -270,7 +270,7 @@ public class GuiDesktop implements IGuiBase {
 
     public IGuiGame getNewGuiGame() {
         return new CMatchUI();
-    };
+    }
 
     @Override
     public HostedMatch hostMatch() {

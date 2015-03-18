@@ -7,9 +7,11 @@ import java.util.Map.Entry;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Rectangle;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.ImageKeys;
 import forge.assets.FSkinImage;
+import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
@@ -166,6 +168,8 @@ public class CardZoom extends FOverlay {
 
     @Override
     public void drawOverlay(Graphics g) {
+        final GameView gameView = Forge.hostedMatch.getGameView();
+
         float w = getWidth();
         float h = getHeight();
         float messageHeight = FDialog.MSG_HEIGHT;
@@ -181,10 +185,10 @@ public class CardZoom extends FOverlay {
             cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
             y = (h - cardHeight) / 2;
             if (prevCard != null) {
-                CardImageRenderer.drawZoom(g, prevCard, false, 0, y, cardWidth, cardHeight);
+                CardImageRenderer.drawZoom(g, prevCard, gameView, false, 0, y, cardWidth, cardHeight);
             }
             if (nextCard != null) {
-                CardImageRenderer.drawZoom(g, nextCard, false, w - cardWidth, y, cardWidth, cardHeight);
+                CardImageRenderer.drawZoom(g, nextCard, gameView, false, w - cardWidth, y, cardWidth, cardHeight);
             }
             cardWidth = w * 0.7f;
             cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
@@ -197,10 +201,10 @@ public class CardZoom extends FOverlay {
         float x = (w - cardWidth) / 2;
         y = (h - cardHeight) / 2;
         if (zoomMode) {
-            CardImageRenderer.drawZoom(g, currentCard, showAltState, x, y, cardWidth, cardHeight);
+            CardImageRenderer.drawZoom(g, currentCard, gameView, showAltState, x, y, cardWidth, cardHeight);
         }
         else {
-            CardImageRenderer.drawDetails(g, currentCard, showAltState, x, y, cardWidth, cardHeight);
+            CardImageRenderer.drawDetails(g, currentCard, gameView, showAltState, x, y, cardWidth, cardHeight);
         }
 
         if (flipIconBounds != null) {

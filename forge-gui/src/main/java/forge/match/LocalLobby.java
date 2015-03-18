@@ -9,6 +9,7 @@ import forge.net.game.LobbySlotType;
 
 public final class LocalLobby extends GameLobby {
 
+    private IGuiGame gui = null;
     public LocalLobby() {
         super(false);
 
@@ -38,7 +39,14 @@ public final class LocalLobby extends GameLobby {
         return index >= 2;
     }
 
-    @Override public IGuiGame getGui(final int index) {
-        return GuiBase.getInterface().getNewGuiGame();
+    @Override protected IGuiGame getGui(final int index) {
+        if (gui == null) {
+            gui = GuiBase.getInterface().getNewGuiGame();
+        }
+        return gui;
+    }
+
+    @Override protected void gameStarted() {
+        gui = null;
     }
 }

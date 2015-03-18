@@ -66,12 +66,14 @@ import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
 import forge.gui.GuiUtils;
 import forge.gui.SOverlayUtils;
+import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.framework.SLayoutIO;
+import forge.gui.framework.VEmptyDoc;
 import forge.interfaces.IButton;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
@@ -181,6 +183,7 @@ public final class CMatchUI
     @Override
     public void setGameView(final GameView gameView) {
         super.setGameView(gameView);
+        cDetailPicture.setGameView(gameView);
         screen.setTabCaption(gameView.getTitle());
         if (sortedPlayers != null) {
             for (final PlayerView pv : sortedPlayers) {
@@ -516,6 +519,16 @@ public final class CMatchUI
     public void register() {
         initHandViews();
         registerDocs();
+        for (final EDocID fieldDoc : EDocID.VarDocs) {
+            // Remove unnecessary docs for this match
+            if (!myDocs.containsKey(fieldDoc)) {
+                final DragCell parent = fieldDoc.getDoc().getParentCell();
+                if (parent != null) {
+                    parent.removeDoc(fieldDoc.getDoc());
+                    fieldDoc.setDoc(new VEmptyDoc(fieldDoc));
+                }
+            }
+        }
     }
 
     @Override

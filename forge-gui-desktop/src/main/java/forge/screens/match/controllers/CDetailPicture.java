@@ -1,5 +1,6 @@
 package forge.screens.match.controllers;
 
+import forge.game.GameView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.interfaces.IMayViewCards;
@@ -73,6 +74,10 @@ public class CDetailPicture {
             cDetail.showItem(item);
             cPicture.showItem(item);
         }
+    }
+
+    public void setGameView(final GameView gameView) {
+        cDetail.getView().setGameView(gameView);
     }
 
     void flip() {

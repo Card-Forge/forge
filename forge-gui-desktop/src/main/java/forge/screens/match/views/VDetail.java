@@ -18,6 +18,7 @@
 package forge.screens.match.views;
 
 import forge.assets.FSkinProp;
+import forge.game.GameView;
 import forge.gui.CardDetailPanel;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -52,6 +53,10 @@ public class VDetail implements IVDoc<CDetail> {
         this.controller = controller;
         lblFlipcard.setIcon(FSkin.getIcon(FSkinProp.ICO_FLIPCARD));
         lblFlipcard.setVisible(false);
+    }
+
+    public void setGameView(final GameView gameView) {
+        this.pnlDetail.setGameView(gameView);
     }
 
     //========= Overridden methods
