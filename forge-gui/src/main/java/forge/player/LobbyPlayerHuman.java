@@ -9,7 +9,11 @@ import forge.util.GuiDisplayUtil;
 
 public class LobbyPlayerHuman extends LobbyPlayer implements IGameEntitiesFactory {
     public LobbyPlayerHuman(final String name) {
+        this(name, -1);
+    }
+    public LobbyPlayerHuman(final String name, final int avatarIndex) {
         super(name);
+        setAvatarIndex(avatarIndex);
     }
 
     @Override

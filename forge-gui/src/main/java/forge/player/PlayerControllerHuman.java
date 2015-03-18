@@ -577,7 +577,7 @@ public class PlayerControllerHuman
         } else {
             message += "{player's} " + zone.name().toLowerCase();
         }
-        String fm = MessageUtil.formatMessage(message, player, owner);
+        String fm = MessageUtil.formatMessage(message, getLocalPlayerView(), owner);
         if (!cards.isEmpty()) {
             tempShowCards(game.getCardList(cards));
             getGui().reveal(fm, cards);

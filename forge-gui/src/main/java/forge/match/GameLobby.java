@@ -347,7 +347,7 @@ public abstract class GameLobby {
                     setNameNow = true;
                     hasNameBeenSet = true;
                 }
-                lobbyPlayer = GamePlayerUtil.getGuiPlayer(name, setNameNow);
+                lobbyPlayer = GamePlayerUtil.getGuiPlayer(name, avatar, setNameNow);
             }
 
             Deck deck = slot.getDeck();

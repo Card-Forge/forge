@@ -46,6 +46,7 @@ import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.trackable.TrackableCollection;
 import forge.util.CollectionSuppliers;
+import forge.util.FCollectionView;
 import forge.util.GuiDisplayUtil;
 import forge.util.NameGenerator;
 import forge.util.maps.HashMapOfLists;
@@ -99,12 +100,21 @@ public class HostedMatch {
             gameRules.setAppliedVariants(appliedVariants);
         }
 
-        if (players.size() == 2) {
-            title = String.format("%s vs %s", players.get(0).getPlayer().getName(), players.get(1).getPlayer().getName());
+        final List<RegisteredPlayer> sortedPlayers = Lists.newArrayList(players);
+        Collections.sort(sortedPlayers, new Comparator<RegisteredPlayer>() {
+            @Override public final int compare(final RegisteredPlayer p1, final RegisteredPlayer p2) {
+                final int v1 = p1.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
+                final int v2 = p2.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
+                return Integer.compare(v1, v2);
+            }
+        });
+
+        if (sortedPlayers.size() == 2) {
+            title = String.format("%s vs %s", sortedPlayers.get(0).getPlayer().getName(), sortedPlayers.get(1).getPlayer().getName());
         } else {
-            title = String.format("Multiplayer Game (%d players)", players.size()); 
+            title = String.format("Multiplayer Game (%d players)", sortedPlayers.size()); 
         }
-        this.match = new Match(gameRules, players, title);
+        this.match = new Match(gameRules, sortedPlayers, title);
         startGame();
     }
 
@@ -137,25 +147,15 @@ public class HostedMatch {
         game.subscribeToEvents(SoundSystem.instance);
         game.subscribeToEvents(visitor);
 
-        // Instantiate all required field slots (user at 0)
-        final List<Player> sortedPlayers = Lists.newArrayList(game.getRegisteredPlayers());
-        Collections.sort(sortedPlayers, new Comparator<Player>() {
-            @Override
-            public int compare(final Player p1, final Player p2) {
-                final int v1 = p1.getController() instanceof PlayerControllerHuman ? 0 : 1;
-                final int v2 = p2.getController() instanceof PlayerControllerHuman ? 0 : 1;
-                return Integer.compare(v1, v2);
-            }
-        });
-
+        final FCollectionView<Player> players = game.getPlayers();
         final String[] avatarIndices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
         final GameView gameView = getGameView();
 
         humanCount = 0;
         final MapOfLists<IGuiGame, PlayerView> playersPerGui = new HashMapOfLists<IGuiGame, PlayerView>(CollectionSuppliers.<PlayerView>arrayLists()); 
-        for (int iPlayer = 0; iPlayer < sortedPlayers.size(); iPlayer++) {
+        for (int iPlayer = 0; iPlayer < players.size(); iPlayer++) {
             final RegisteredPlayer rp = match.getPlayers().get(iPlayer);
-            final Player p = sortedPlayers.get(iPlayer);
+            final Player p = players.get(iPlayer);
 
             p.getLobbyPlayer().setAvatarIndex(rp.getPlayer().getAvatarIndex());
             if (p.getLobbyPlayer().getAvatarIndex() == -1) {
@@ -195,7 +195,7 @@ public class HostedMatch {
             gui.setGameController(null, humanController);
 
             gui.openView(null);
-        } else if (humanCount == sortedPlayers.size()) {
+        } else if (humanCount == players.size()) {
             //if there are no AI's, allow all players to see all cards (hotseat mode).
             for (final PlayerControllerHuman humanController : humanControllers) {
                 humanController.setMayLookAtAllCards(true);
@@ -208,7 +208,7 @@ public class HostedMatch {
         }
 
         //ensure opponents set properly
-        for (final Player p : sortedPlayers) {
+        for (final Player p : players) {
             p.updateOpponentsForView();
         }
 

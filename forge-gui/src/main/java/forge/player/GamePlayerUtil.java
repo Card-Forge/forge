@@ -23,7 +23,7 @@ public final class GamePlayerUtil {
     public static final LobbyPlayer getGuiPlayer() {
         return guiPlayer;
     }
-    public static final LobbyPlayer getGuiPlayer(final String name, final boolean writePref) {
+    public static final LobbyPlayer getGuiPlayer(final String name, final int avatarIndex, final boolean writePref) {
         if (writePref) {
             if (!name.equals(guiPlayer.getName())) {
                 guiPlayer.setName(name);
@@ -33,7 +33,7 @@ public final class GamePlayerUtil {
             return guiPlayer;
         }
         //use separate LobbyPlayerHuman instance for human players beyond first
-        return new LobbyPlayerHuman(name);
+        return new LobbyPlayerHuman(name, avatarIndex);
     }
 
     public static final LobbyPlayer getQuestPlayer() {
