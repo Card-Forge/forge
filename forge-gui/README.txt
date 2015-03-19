@@ -1365,6 +1365,13 @@ Contains all decks from gos's Forge Decks subforums, broken up by the column/eve
 Won't cause startup to be slower since they are loaded on the fly.
 
 
+Fix bug in default preferences causing game to crash.
+
+
+- Canceling Delve now refunds exiled cards -
+If you cancel casting a spell after selecting cards to Delve, the selected cards will no longer get exiled.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 

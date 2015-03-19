@@ -1,22 +1,15 @@
-Forge Beta: 3-14-2015 ver 1.5.37
+Forge Beta: 3-#-2015 ver 1.5.38
 
 
-14514 cards in total.
+# cards in total.
 
 
 -------------
 Release Notes
 -------------
 
-Fix bug in default preferences causing game to crash.
-
-
 - New Dragons of Tarkir cards -
 We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
-
-
-- Canceling Delve now refunds exiled cards -
-If you cancel casting a spell after selecting cards to Delve, the selected cards will no longer get exiled.
 
 
 ----------------------------------
@@ -154,21 +147,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-Agetian
-DrDev
-elcnesh
-excessum
-Gos
--gz
-Hellfish
-jlands
-Marek14
-Myrd
-Sloth
-Sol
-Swordshine
-Xitax
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
