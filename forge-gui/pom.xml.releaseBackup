@@ -4,7 +4,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.5.34-SNAPSHOT</version>
+        <version>1.5.37-SNAPSHOT</version>
     </parent>
 
     <artifactId>forge-gui</artifactId>
@@ -46,5 +46,11 @@
 	        <artifactId>commons-lang3</artifactId>
             <version>3.3</version>
         </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.0.25.Final</version>
+            <scope>compile</scope>
+          </dependency>
     </dependencies>
 </project>
