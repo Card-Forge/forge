@@ -134,7 +134,7 @@ public abstract class GameLobby {
     public abstract boolean mayControl(final int index);
     public abstract boolean mayRemove(final int index);
     protected abstract IGuiGame getGui(final int index);
-    protected abstract void gameStarted();
+    protected abstract void onGameStarted();
 
     public void addSlot() {
         final int newIndex = getNumberOfSlots();
@@ -437,7 +437,7 @@ public abstract class GameLobby {
             }
         }
 
-        gameStarted();
+        onGameStarted();
     }
 
     public final static class GameLobbyData implements Serializable {

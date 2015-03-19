@@ -46,7 +46,9 @@ public final class LocalLobby extends GameLobby {
         return gui;
     }
 
-    @Override protected void gameStarted() {
+    @Override protected void onGameStarted() {
         gui = null;
+        // Re-randomize random decks after starting a game
+        updateView(true);
     }
 }

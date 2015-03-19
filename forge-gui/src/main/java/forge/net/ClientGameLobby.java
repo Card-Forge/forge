@@ -34,6 +34,6 @@ public final class ClientGameLobby extends GameLobby {
         return null;
     }
 
-    @Override protected void gameStarted() {
+    @Override protected void onGameStarted() {
     }
 }

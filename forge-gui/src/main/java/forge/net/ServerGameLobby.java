@@ -64,6 +64,6 @@ public final class ServerGameLobby extends GameLobby {
     }
 
     @Override
-    protected void gameStarted() {
+    protected void onGameStarted() {
     }
 }
