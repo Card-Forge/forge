@@ -296,7 +296,7 @@ public class ConstructedScreen extends LaunchScreen {
             PlayerPanel playerPanel = playerPanels.get(i);
             String name = getPlayerName(i);
             LobbyPlayer lobbyPlayer = playerPanel.isPlayerAI() ? GamePlayerUtil.createAiPlayer(name,
-                    getPlayerAvatar(i)) : GamePlayerUtil.getGuiPlayer(name, i == 0);
+                    getPlayerAvatar(i)) : GamePlayerUtil.getGuiPlayer(name, playerPanel.avatarIndex, i == 0);
             RegisteredPlayer rp = playerPanel.deckChooser.getPlayer();
 
             if (appliedVariants.isEmpty()) {
