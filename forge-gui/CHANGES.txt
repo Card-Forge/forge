@@ -86,6 +86,112 @@ Thunderbreak Regent
 Warbringer
 Zurgo Bellstriker
 
+Gleam of Authority
+Qarsi Deceiver
+Hardened Berserker
+Avatar of the Resolute
+Herdchaser Dragon
+Scion of Ugin
+Stampeding Elk Herd
+Atarka Monument
+Custodian of the Trove
+Dromoka Monument
+Kolaghan Monument
+Ojutai Monument
+Pitiless Horde
+Rending Volley
+Silumgar Monument
+Ainok Survivalist
+Belltoll Dragon
+Surrak, the Hunt Caller
+Tapestry of the Ages
+Damnable Pact
+Icefall Regent
+Silkwrap
+Vial of Dragonfire
+Wandering Tombshell
+Ainok Artillerist
+Dromoka's Command
+Myth Realized
+Ambuscade Shaman
+Ancestral Statue
+Ancient Carp
+Atarka Beastbreaker
+Atarka Efreet
+Atarka Pummeler
+Aven Tactician
+Berserkers' Onslaught
+Blessed Reincarnation
+Blood-Chin Rager
+Butcher's Glee
+Center Soul
+Champion of Arashin
+Circle of Elders
+Coat with Venom
+Colossodon Yearling
+Conifer Strider
+Contradict
+Dance of the Skywise
+Deadly Wanderings
+Defeat
+Dirgur Nemesis
+Dragonloft Idol
+Dragon's Eye Sentry
+Dromoka's Gift
+Dromoka Captain
+Dromoka Dunecaster
+Dromoka Warrior
+Dutiful Attendant
+Echoes of the Kin Tree
+Elusive Spellfist
+Enduring Victory
+Corpseweft
+Deathbringer Regent
+Fate Forgotten
+Flatten
+Foul Renewal
+Foul-Tongue Shriek
+Gate Smasher
+Glade Watcher
+Glaring Aegis
+Glint
+Graceblade Artisan
+Great Teacher's Decree
+Guardian Shield-Bearer
+Gurmag Drowner
+Hand of Silumgar
+Herald of Dromoka
+Illusory Gains
+Impact Tremors
+Inspiring Call
+Keeper of the Lens
+Kolaghan Aspirant
+Kolaghan Forerunner
+Kolaghan Skirmisher
+Kolaghan Stormsinger
+Learn from the Past
+Lightwalker
+Lose Calm
+Lurking Arynx
+Magmatic Chasm
+Marsh Hulk
+Minister of Pain
+Misthoof Kirin
+Monastery Loremaster
+Mystic Meditation
+Obstructing AEther
+Ojutai's Breath
+Ojutai Interceptor
+Palace Familiar
+Pinion Feast
+Press the Advantage
+Qal Sisma Behemoth
+Qarsi Sadist
+Rakshasa Gravecaller
+Reckless Imp
+Reduce in Stature
+Resupply
+
 
 --------------------
 New ORI branch Cards
