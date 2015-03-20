@@ -6,7 +6,7 @@ SVar:DBNoLife:DB$ Effect | Name$ Atarka's Command Effect | StaticAbilities$ STCa
 SVar:STCantGain:Mode$ Continuous | EffectZone$ Command | Affected$ Player.Opponent | AddKeyword$ You can't gain life. | Description$ Your opponents can't gain life.
 SVar:DBDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to each opponent.
 SVar:DBLand:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | Optional$ You | SpellDescription$ You may put a land card from your hand onto the battlefield.
-SVar:PumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Reach | SpellDescription$ Creatures you control get +1/+1 and gain reach until end of turn.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Reach | SpellDescription$ Creatures you control get +1/+1 and gain reach until end of turn.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/atarkas_command.jpg
 Oracle:Choose two -\n• Your opponents can't gain life this turn.\n• CARDNAME deals 3 damage to each opponent.\n• You may put a land card from your hand onto the battlefield.\n• Creatures you control get +1/+1 and gain reach until end of turn.
