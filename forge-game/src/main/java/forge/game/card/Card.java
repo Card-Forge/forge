@@ -2733,6 +2733,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final int getNetToughness() {
         return getNetToughnessBreakdown().getTotal();
     }
+    
+    public final boolean toughnessAssignsDamage() {
+    	return getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.toughnessAssignsDamage)
+        		|| hasKeyword("CARDNAME assigns combat damage equal to its toughness rather than its power");
+    }
 
     // How much combat damage does the card deal
     public final StatBreakdown getNetCombatDamageBreakdown() {
@@ -2740,7 +2745,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return new StatBreakdown();
         }
 
-        if (getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.toughnessAssignsDamage)) {
+        if (toughnessAssignsDamage()) {
             return getNetToughnessBreakdown();
         }
         return getNetPowerBreakdown();
