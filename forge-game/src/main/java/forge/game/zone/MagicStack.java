@@ -130,8 +130,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     public final void addAndUnfreeze(final SpellAbility ability) {
-        ability.getRestrictions().abilityActivated();
-        ability.checkActivationResloveSubs();
+        if (!ability.isCopied()) {
+            // Copied abilities aren't activated, so they shouldn't change these values
+            ability.getRestrictions().abilityActivated();
+            ability.checkActivationResloveSubs();
+        }
 
         // if the ability is a spell, but not a copied spell and its not already
         // on the stack zone, move there
