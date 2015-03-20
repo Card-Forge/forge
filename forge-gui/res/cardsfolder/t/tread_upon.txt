@@ -1,0 +1,6 @@
+Name:Tread Upon
+ManaCost:1 G
+Types:Instant
+A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | SpellDescription$ Target creature gets +2/+2 and gains trample until end of turn.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tread_upon.jpg
+Oracle:Target creature gets +2/+2 and gains trample until end of turn.

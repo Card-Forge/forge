@@ -1,0 +1,9 @@
+Name:Aven Sunstriker
+ManaCost:1 W W
+Types:Creature Bird Warrior
+PT:1/1
+K:Flying
+K:Double Strike
+K:Megamorph:4 W
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_sunstriker.jpg
+Oracle:Flying\nDouble strike (This creature deals both first-strike and regular combat damage.)\nMegamorph {4}{W} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)

@@ -1,0 +1,9 @@
+Name:Reduce in Stature
+ManaCost:2 U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | SetPower$ 0 | SetToughness$ 2 | Description$ Enchanted creature has base power and toughness 0/2.
+SVar:NonStackingAttachEffect:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reduce_in_stature.jpg
+Oracle:Enchant creature\nEnchanted creature has base power and toughness 0/2.

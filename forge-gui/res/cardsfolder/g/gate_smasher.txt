@@ -1,0 +1,11 @@
+Name:Gate Smasher
+ManaCost:3
+Types:Artifact Equipment
+Text:CARDNAME can be attached only to a creature with toughness 4 or greater.
+K:Equip 3
+K:CantEquip Creature.toughnessLT4
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddKeyword$ Trample | Description$ Equipped creature gets +3/+0 and has trample.
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gate_smasher.jpg
+Oracle:Gate Smasher can be attached only to a creature with toughness 4 or greater.\nEquipped creature gets +3/+0 and has trample.\nEquip {3}

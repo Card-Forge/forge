@@ -1,0 +1,9 @@
+Name:Rakshasa Gravecaller
+ManaCost:4 B
+Types:Creature Cat Demon
+PT:3/6
+K:Exploit
+T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME exploits a creature, put two 2/2 black Zombie creature tokens onto the battlefield.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 2 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ b 2 2 zombie DTK
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rakshasa_gravecaller.jpg
+Oracle:Exploit (When this creature enters the battlefield, you may sacrifice a creature.)\nWhen Rakshasa Gravecaller exploits a creature, put two 2/2 black Zombie creature tokens onto the battlefield.

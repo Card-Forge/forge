@@ -1,0 +1,11 @@
+Name:Glaring Aegis
+ManaCost:W
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap target creature an opponent controls.
+SVar:TrigTap:AB$ Tap | Cost$ 0 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 3 | Description$ Enchanted creature gets +1/+3.
+SVar:PlayMain1:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/glaring_aegis.jpg
+Oracle:Enchant creature\nWhen Glaring Aegis enters the battlefield, tap target creature an opponent controls.\nEnchanted creature gets +1/+3.

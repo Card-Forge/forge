@@ -1,0 +1,8 @@
+Name:Tail Slash
+ManaCost:2 R
+Types:Instant
+A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ TailDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to target creature you don't control.
+SVar:TailDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you don't control | NumDmg$ X | References$ X | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ1 | DamageSource$ ParentTarget
+SVar:X:ParentTargeted$CardPower
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tail_strike.jpg
+Oracle:Target creature you control deals damage equal to its power to target creature you don't control.

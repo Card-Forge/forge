@@ -1,0 +1,6 @@
+Name:Fate Forgotten
+ManaCost:2 W
+Types:Instant
+A:SP$ ChangeZone | Cost$ 2 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact or enchantment.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fate_forgotten.jpg
+Oracle:Exile target artifact or enchantment.

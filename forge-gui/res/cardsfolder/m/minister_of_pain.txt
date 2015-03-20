@@ -1,0 +1,9 @@
+Name:Minister of Pain
+ManaCost:2 B
+Types:Creature Human Shaman
+PT:2/3
+K:Exploit
+T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigMassacre | TriggerDescription$ When CARDNAME exploits a creature, creatures your opponents control get -1/-1 until end of turn.
+SVar:TrigMassacre:AB$ PumpAll | Cost$ 0 | NumAtt$ -1 | NumDef$ -1 | ValidCards$ Creature.OppCtrl | IsCurse$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/minister_of_pain.jpg
+Oracle:Exploit (When this creature enters the battlefield, you may sacrifice a creature.)\nWhen Minister of Pain exploits a creature, creatures your opponents control get -1/-1 until end of turn.

@@ -1,0 +1,10 @@
+Name:Ojutai Monument
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U} to your mana pool.
+A:AB$ Animate | Cost$ 4 W U | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Artifact,Creature,Dragon | Colors$ White,Blue | Keywords$ Flying | SpellDescription$ CARDNAME becomes a 4/4 white and blue Dragon artifact creature with flying until end of turn.
+SVar:RemRandomDeck:True
+DeckNeeds:Color$White|Blue
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ojutai_monument.jpg
+Oracle:{T}: Add {W} or {U} to your mana pool.\n{4}{W}{U}: Ojutai Monument becomes a 4/4 white and blue Dragon artifact creature with flying until end of turn.

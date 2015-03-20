@@ -1,0 +1,9 @@
+Name:Reckless Imp
+ManaCost:2 B
+Types:Creature Imp
+PT:2/2
+K:Flying
+K:CARDNAME can't block.
+K:Dash:1 B
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_imp.jpg
+Oracle:Flying\nReckless Imp can't block.\nDash {1}{B} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)

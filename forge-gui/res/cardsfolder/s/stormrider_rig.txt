@@ -1,0 +1,9 @@
+Name:Stormrider Rig
+ManaCost:2
+Types:Artifact Equipment
+K:Equip 2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigAttach | OptionalDecider$ You | TriggerDescription$ Whenever a creature enters the battlefield under your control, you may attach CARDNAME to it.
+SVar:TrigAttach:DB$ Attach | Cost$ 0 | Defined$ TriggeredCard
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stormrider_rig.jpg
+Oracle:Equipped creature gets +1/+1.\nWhenever a creature enters the battlefield under your control, you may attach Stormrider Rig to it.\nEquip {2}

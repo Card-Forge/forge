@@ -1,0 +1,10 @@
+Name:Den Protector
+ManaCost:1 G
+Types:Creature Human Warrior
+PT:2/1
+K:Creatures with power less than CARDNAME's power can't block it.
+K:Megamorph:1 G
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, return target card from your graveyard to your hand.
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Card.YouOwn | TgtPrompt$ Select target card | Origin$ Graveyard | Destination$ Hand
+SVar:Picture:http://www.wizards.com/global/images/magic/general/den_protector.jpg
+Oracle:Creatures with power less than Den Protector's power can't block it.\nMegamorph {1}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)\nWhen Den Protector is turned face up, return target card from your graveyard to your hand.

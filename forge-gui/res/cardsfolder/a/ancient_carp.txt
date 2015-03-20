@@ -1,0 +1,6 @@
+Name:Ancient Carp
+ManaCost:4 U
+Types:Creature Fish
+PT:2/5
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_carp.jpg
+Oracle:

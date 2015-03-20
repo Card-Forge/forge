@@ -1,0 +1,9 @@
+Name:Ancestral Statue
+ManaCost:4
+Types:Artifact Creature Golem
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a nonland permanent you control to its owner's hand.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 0 | Hidden$ True | Mandatory$ True | ChangeType$ Permanent.nonLand+YouCtrl
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ancestral_statue.jpg
+Oracle:When Ancestral Statue enters the battlefield, return a nonland permanent you control to its owner's hand.

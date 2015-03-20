@@ -1,0 +1,11 @@
+Name:Descent of the Dragons
+ManaCost:4 R R
+Types:Sorcery
+A:SP$ Destroy | Cost$ 4 R R | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTgts | References$ MaxTgts | RememberLKI$ True | SubAbility$ DBToken | SpellDescription$ Destroy any number of target creatures. For each creature destroyed this way, its controller puts a 4/4 red Dragon creature token with flying onto the battlefield.
+SVar:DBToken:DB$ RepeatEach | UseImprinted$ True | DefinedCards$ DirectRemembered | RepeatSubAbility$ TokenDragon | SubAbility$ DBCleanup
+SVar:TokenDragon:DB$ Token | TokenAmount$ 1 | TokenName$ Dragon | TokenTypes$ Creature,Dragon | TokenOwner$ ImprintedController | TokenColors$ Red | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying | TokenImage$ r_4_4_dragon_dtk
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:MaxTgts:Count$Valid Creature
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/descent_of_the_dragons.jpg
+Oracle:Destroy any number of target creatures. For each creature destroyed this way, its controller puts a 4/4 red Dragon creature token with flying onto the battlefield.

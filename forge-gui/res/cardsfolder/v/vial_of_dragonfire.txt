@@ -1,0 +1,6 @@
+Name:Vial of Dragonfire
+ManaCost:2
+Types:Artifact
+A:AB$ DealDamage | Cost$ 2 T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vial_of_dragonfire.jpg
+Oracle:{2}, {T}, Sacrifice Vial of Dragonfire: Vial of Dragonfire deals 2 damage to target creature.

@@ -1,0 +1,8 @@
+Name:Damnable Pact
+ManaCost:X B B
+Types:Sorcery
+A:SP$ Draw | Cost$ X B B | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | References$ X | SubAbility$ DBLoseLife | SpellDescription$ Target player draws X cards and loses X life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | References$ X | Defined$ Targeted
+SVar:X:Count$xPaid
+SVar:Picture:http://www.wizards.com/global/images/magic/general/damnable_pact.jpg
+Oracle:Target player draws X cards and loses X life.

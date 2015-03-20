@@ -1,0 +1,11 @@
+Name:Hardened Berserker
+ManaCost:2 R
+Types:Creature Human Berserker
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ When CARDNAME attacks, the next spell you cast this turn costs {1} less to cast.
+SVar:TrigEffect:AB$ Effect | Cost$ 0 | StaticAbilities$ HBReduceCost | Triggers$ TrigCastSpell | SVars$ RemoveEffect
+SVar:HBReduceCost:Mode$ ReduceCost | EffectZone$ Command | Type$ Spell | Activator$ You | Amount$ 1 | Description$ the next spell you cast this turn costs {1} less to cast.
+SVar:TrigCastSpell:Mode$ SpellCast | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ RemoveEffect | Static$ True
+SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hardened_berserker.jpg
+Oracle:Whenever Hardened Berserker attacks, the next spell you cast this turn costs {1} less to cast.

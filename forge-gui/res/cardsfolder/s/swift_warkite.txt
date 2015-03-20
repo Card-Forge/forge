@@ -1,0 +1,14 @@
+Name:Swift Warkite
+ManaCost:4 B R
+Types:Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may put a creature card with converted mana cost 3 or less from your hand or graveyard onto the battlefield. That creature gains haste. Return it to your hand at the beginning of the next end step.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Hand,Graveyard | Destination$ Battlefield | ChangeType$ Creature.cmcLE3+YouCtrl | SubAbility$ DBPump | RememberChanged$ True | ChangeNum$ 1
+SVar:DBPump:DB$ Animate | Keywords$ Haste | sVars$ SneakAttackEOT | Defined$ Remembered | Permanent$ True | SubAbility$ DelTrig
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigReturn | RememberObjects$ Remembered | TriggerDescription$ CARDNAME - Return the creature to your hand at the beginning of the next end step. | SubAbility$ DBCleanup | AILogic$ Always
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Hand
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:SneakAttackEOT:SVar:EndOfTurnLeavePlay:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/swift_warkite.jpg
+Oracle:Flying\nWhen Swiftwing Warkite enters the battlefield, you may put a creature card with converted mana cost 3 or less from your hand onto the battlefield. That creature gains haste. Return it to your hand at the beginning of the next end step.

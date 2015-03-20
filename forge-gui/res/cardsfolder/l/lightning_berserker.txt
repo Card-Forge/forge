@@ -1,0 +1,8 @@
+Name:Lightning Berserker
+ManaCost:R
+Types:Creature Human Berserker
+PT:1/1
+A:AB$ Pump | Cost$ R | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+K:Dash:R
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_berserker.jpg
+Oracle:{R}: Lightning Berserker gets +1/+0 until end of turn.\nDash {R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)

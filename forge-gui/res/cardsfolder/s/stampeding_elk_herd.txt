@@ -1,0 +1,9 @@
+Name:Stampeding Elk Herd
+ManaCost:3 G G
+Types:Creature Elk
+PT:5/5
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE8 | Execute$ TrigFormidable | TriggerDescription$ Formidable - Whenever CARDNAME attacks, if creatures you control have total power 8 or greater, creatures you control gain trample until end of turn.
+SVar:TrigFormidable:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | KW$ Trample
+SVar:X:Count$SumPower_Creature.YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stampeding_elk_herd.jpg
+Oracle:Formidable - Whenever Stampeding Elk Herd attacks, if creatures you control have total power 8 or greater, creatures you control gain trample until end of turn.

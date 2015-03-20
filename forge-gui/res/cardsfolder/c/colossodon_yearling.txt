@@ -1,0 +1,6 @@
+Name:Colossodon Yearling
+ManaCost:2 G
+Types:Creature Beast
+PT:2/4
+SVar:Picture:http://www.wizards.com/global/images/magic/general/colossodon_yearling.jpg
+Oracle:

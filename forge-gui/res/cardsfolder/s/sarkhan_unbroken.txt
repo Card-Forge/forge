@@ -1,0 +1,11 @@
+Name:Sarkhan Unbroken
+ManaCost:2 G U R
+Types:Planeswalker Sarkhan
+Loyalty:4
+A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Defined$ You | SubAbility$ DBMana | Planeswalker$ True | SpellDescription$ Draw a card, then add one mana of any color to your mana pool.
+SVar:DBMana:DB$Mana | Produced$ Any | AILogic$ MostProminentInComputerHand
+A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | TokenAmount$ 1 | TokenName$ Dragon | TokenTypes$ Creature,Dragon | TokenOwner$ You | TokenColors$ Red | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying | TokenImage$ r 4 4 dragon DTK | Planeswalker$ True | SpellDescription$ Put a 4/4 red Dragon creature token with flying onto the battlefield.
+A:AB$ ChangeZone | Cost$ SubCounter<8/LOYALTY> | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.Dragon | ChangeNum$ XFetch | Planeswalker$ True | Ultimate$ True | StackDescription$ SpellDescription | References$ XFetch | SpellDescription$ Search your library for any number of Dragon creature cards and put them onto the battlefield. Then shuffle your library.
+SVar:XFetch:Count$TypeInYourLibrary.Dragon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sarkhan_unbroken.jpg
+Oracle:[+1] Draw a card, then add one mana of any color to your mana pool.\n[-2] Put a 4/4 red Dragon creature token with flying onto the battlefield.\n[-8] Search your library for any number of Dragon creature cards and put them onto the battlefield. Then shuffle your library.

@@ -1,0 +1,9 @@
+Name:Foul Renewal
+ManaCost:3 B
+Types:Instant
+A:SP$ ChangeZone | Cost$ 3 B | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | RememberChanged$ True | SubAbility$ DBPump | SpellDescription$ Return target creature card from your graveyard to your hand. Target creature gets -X/-X until end of turn, where X is the toughness of the card returned this way.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | References$ X | NumAtt$ -X | NumDef$ -X | IsCurse$ True | TgtPrompt$ Choose target creature | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardToughness
+SVar:Picture:http://www.wizards.com/global/images/magic/general/foul_renewal.jpg
+Oracle:Return target creature card from your graveyard to your hand. Target creature gets -X/-X until end of turn, where X is the toughness of the card returned this way.

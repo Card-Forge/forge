@@ -1,0 +1,8 @@
+Name:Corpseweft
+ManaCost:2 B
+Types:Enchantment
+A:AB$ Token | Announce$ X | XCantBe0$ True | Cost$ 1 B ExileFromGrave<X/Creature> | TokenAmount$ 1 | TokenName$ Zombie Horror | TokenOwner$ You | TokenPower$ Y | TokenToughness$ Y | References$ Y | TokenTypes$ Creature,Zombie,Horror | TokenColors$ Black | TokenTapped$ True | SpellDescription$ Put an X/X black Zombie Horror creature token onto the battlefield tapped, where X is twice the number of cards exiled this way.
+SVar:Y:ExiledCards$Amount.Twice
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/corpseweft.jpg
+Oracle:{1}{B}, Exile one or more creature cards from your graveyard: Put an X/X black Zombie Horror creature token onto the battlefield tapped, where X is twice the number of cards exiled this way.

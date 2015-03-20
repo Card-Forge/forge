@@ -1,0 +1,10 @@
+Name:Atarka Monument
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G} to your mana pool.
+A:AB$ Animate | Cost$ 4 R G | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Artifact,Creature,Dragon | Colors$ Red,Green | Keywords$ Flying | SpellDescription$ CARDNAME becomes a 4/4 red and green Dragon artifact creature with flying until end of turn.
+SVar:RemRandomDeck:True
+DeckNeeds:Color$Red|Green
+SVar:Picture:http://www.wizards.com/global/images/magic/general/atarka_monument.jpg
+Oracle:{T}: Add {R} or {G} to your mana pool.\n{4}{R}{G}: Atarka Monument becomes a 4/4 red and green Dragon artifact creature with flying until end of turn.

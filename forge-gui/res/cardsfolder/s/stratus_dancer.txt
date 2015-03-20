@@ -1,0 +1,10 @@
+Name:Stratus Dancer
+ManaCost:1 U
+Types:Creature Djinn Monk
+PT:2/1
+K:Flying
+K:Megamorph:1 U
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, counter target instant or sorcery spell.
+SVar:TrigCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select target Instant or Sorcery Spell
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stratus_dancer.jpg
+Oracle:Flying\nMegamorph {1}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)\nWhen Stratus Dancer is turned face up, counter target instant or sorcery spell.

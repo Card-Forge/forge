@@ -1,0 +1,12 @@
+Name:Dragonlord Kolaghan
+ManaCost:4 B R
+Types:Legendary Creature Elder Dragon
+PT:6/5
+K:Flying
+K:Haste
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Haste | Description$ Other creatures you control have haste.
+T:Mode$ SpellCast | ValidCard$ Creature,Planeswalker | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | SharesNameWithActivatorsZone$ Graveyard | Execute$ TrigLoseLife | TriggerDescription$ Whenever an opponent casts a creature or planeswalker spell with the same name as a card in his or her graveyard, that player loses 10 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredActivator | LifeAmount$ 10
+SVar:PlayMain1:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonlord_kolaghan.jpg
+Oracle:Flying, haste\nOther creatures you control have haste.\nWhenever an opponent casts a creature or planeswalker spell with the same name as a card in his or her graveyard, that player loses 10 life.

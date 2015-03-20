@@ -1,0 +1,9 @@
+Name:Lurking Arynx
+ManaCost:4 G
+Types:Creature Cat Beast
+PT:3/5
+A:AB$ MustBlock | Cost$ 2 G | ValidTgts$ Creature | CheckSVar$ FormidableTest | SVarCompare$ GE8 | References$ FormidableTest | PrecostDesc$ Formidable - | TgtPrompt$ Select target creature that must block this creature this turn | SpellDescription$ Target creature blocks CARDNAME this turn if able. Activate this ability only if creatures you control have total power 8 or greater.
+SVar:FormidableTest:Count$SumPower_Creature.YouCtrl
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lurking_arynx.jpg
+Oracle:Formidable - {2}{G}: Target creature blocks Lurking Arynx this turn if able. Activate this ability only if creatures you control have total power 8 or greater.

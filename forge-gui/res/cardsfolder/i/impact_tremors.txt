@@ -1,0 +1,7 @@
+Name:Impact Tremors
+ManaCost:1 R
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever a creature enters the battlefield under your control, CARDNAME deals 1 damage to each opponent.
+SVar:TrigDmg:AB$ DealDamage | Cost$ 0 | Defined$ Player.Opponent | NumDmg$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/impact_tremors.jpg
+Oracle:Whenever a creature enters the battlefield under your control, Impact Tremors deals 1 damage to each opponent.

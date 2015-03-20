@@ -1,0 +1,8 @@
+Name:Atarka Beastbreaker
+ManaCost:1 G
+Types:Creature Human Warrior
+PT:2/2
+A:AB$ Pump | Cost$ 4 G | NumAtt$ +4 | NumDef$ +4 | CheckSVar$ FormidableTest | SVarCompare$ GE8 | References$ FormidableTest | PrecostDesc$ Formidable - | SpellDescription$ CARDNAME gets +4/+4 until end of turn. Activate this ability only if creatures you control have total power 8 or greater.
+SVar:FormidableTest:Count$SumPower_Creature.YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/atarka_beastbreaker.jpg
+Oracle:Formidable - {4}{G}: Atarka Beastbreaker gets +4/+4 until end of turn. Activate this ability only if creatures you control have total power 8 or greater.

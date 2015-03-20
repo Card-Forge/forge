@@ -1,0 +1,12 @@
+Name:Silumgar Sorcerer
+ManaCost:1 U U
+Types:Creature Human Wizard
+PT:2/1
+K:Flash
+K:Flying
+K:Exploit
+T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ When CARDNAME exploits a creature, counter target creature spell.
+SVar:TrigCounter:DB$ Counter | Cost$ 0 | TargetType$ Spell | ValidTgts$ Creature | TgtPrompt$ Select target creature spell
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/silumgar_sorcerer.jpg
+Oracle:Exploit (When this creature enters the battlefield, you may sacrifice a creature.)\nWhen Silumgar Sorcerer exploits a creature, counter target creature spell.

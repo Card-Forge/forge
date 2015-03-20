@@ -1,0 +1,9 @@
+Name:Silumgar Butcher
+ManaCost:4 B
+Types:Creature Zombie Djinn
+PT:3/3
+K:Exploit
+T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ When CARDNAME exploits a creature, target creature gets -3/-3 until end of turn/
+SVar:TrigPump:DB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/silumgar_butcher.jpg
+Oracle:Exploit (When this creature enters the battlefield, you may sacrifice a creature.)\nWhen Silumgar Butcher exploits a creature, target creature gets -3/-3 until end of turn.

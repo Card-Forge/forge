@@ -1,0 +1,7 @@
+Name:Champion of Arashin
+ManaCost:3 W
+Types:Creature Hound Warrior
+PT:3/2
+K:Lifelink
+SVar:Picture:http://www.wizards.com/global/images/magic/general/champion_of_arashin.jpg
+Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)

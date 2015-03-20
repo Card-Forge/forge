@@ -1,0 +1,9 @@
+Name:Sight of the Scalelords
+ManaCost:4 G
+Types:Enchantment
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, creatures you control with toughness 4 or greater get +2/+2 and gain vigilance until end of turn.
+SVar:TrigPump:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl+toughnessGE4 | KW$ Vigilance | NumAtt$ +2 | NumDef$ +2
+SVar:PlayMain1:TRUE
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sight_of_the_scalelords.jpg
+Oracle:At the beginning of combat on your turn, creatures you control with toughness 4 or greater get +2/+2 and gain vigilance until end of turn.

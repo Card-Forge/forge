@@ -1,0 +1,9 @@
+Name:Surrak, the Hunt Caller
+ManaCost:2 G G
+Types:Legendary Creature Human Warrior
+PT:5/4
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE8 | Execute$ TrigPump | TriggerDescription$ Formidable - At the beginning of combat on your turn, if creatures you control have total power 8 or greater, target creature you control gains haste until end of turn.
+SVar:X:Count$SumPower_Creature.YouCtrl
+SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Haste
+SVar:Picture:http://www.wizards.com/global/images/magic/general/surrak_the_hunt_caller.jpg
+Oracle:Formidable - At the beginning of combat on your turn, if creatures you control have total power 8 or greater, target creature you control gains haste until end of turn.

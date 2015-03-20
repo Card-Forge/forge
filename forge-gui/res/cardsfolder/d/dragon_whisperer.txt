@@ -1,0 +1,10 @@
+Name:Dragon Whisperer
+ManaCost:R R
+Types:Creature Human Shaman
+PT:2/2
+A:AB$ Pump | Cost$ R | KW$ Flying | Defined$ Self | SpellDescription$ CARDNAME gains flying until end of turn.
+A:AB$ Pump | Cost$ 1 R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+A:AB$ Token | Cost$ 4 R R | TokenOwner$ You | TokenAmount$ 1 | TokenName$ Dragon | TokenTypes$ Creature,Dragon | TokenColors$ Red | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying | TokenImage$ r 4 4 dragon DTK | CheckSVar$ FormidableTest | SVarCompare$ GE8 | References$ FormidableTest | PrecostDesc$ Formidable - | SpellDescription$ Put a 4/4 red Dragon creature token with flying onto the battlefield.
+SVar:FormidableTest:Count$SumPower_Creature.YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_whisperer.jpg
+Oracle:{R}: Dragon Whisperer gains flying until end of turn.\n{1}{R}: Dragon Whisperer gets +1/+0 until end of turn.\nFormidable - {4}{R}{R}: Put a 4/4 red Dragon creature token with flying onto the battlefield. Activate this ability only if creatures you control have total power 8 or greater.

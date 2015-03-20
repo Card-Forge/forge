@@ -1,0 +1,9 @@
+Name:Savage Ventmaw
+ManaCost:4 R G
+Types:Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ Whenever CARDNAME attacks, add {R}{R}{R}{G}{G}{G} to your mana pool. Until end of turn, this mana doesn't empty from your mana pool as steps and phases end.
+SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ R R R G G G | PersistentMana$ True | SpellDescription$ Add {R}{R}{R}{G}{G}{G} to your mana pool. Until end of turn, this mana doesn't empty from your mana pool as steps and phases end.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_ventmaw.jpg
+Oracle:Flying\nWhenever Savage Ventmaw attacks, add {R}{R}{R}{G}{G}{G} to your mana pool. Until end of turn, this mana doesn't empty from your mana pool as steps and phases end.

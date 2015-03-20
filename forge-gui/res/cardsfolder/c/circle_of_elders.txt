@@ -1,0 +1,9 @@
+Name:Circle of Elders
+ManaCost:2 G G
+Types:Creature Human Shaman
+PT:2/4
+K:Vigilance
+A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 3 | CheckSVar$ FormidableTest | SVarCompare$ GE8 | References$ FormidableTest | PrecostDesc$ Formidable - | SpellDescription$ Add {3} to your mana pool. Activate this ability only if creatures you control have total power 8 or greater.
+SVar:FormidableTest:Count$SumPower_Creature.YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/circle_of_elders.jpg
+Oracle:Vigilance\nFormidable - {T}: Add {3} to your mana pool. Activate this ability only if creatures you control have total power 8 or greater.

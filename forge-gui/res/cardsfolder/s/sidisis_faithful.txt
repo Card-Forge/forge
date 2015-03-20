@@ -1,0 +1,10 @@
+Name:Sidisi's Faithful
+ManaCost:U
+Types:Creature Naga Wizard
+PT:0/4
+K:Exploit
+T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME exploits a creature, return target creature to its owner's hand.
+SVar:TrigChangeZone:DB$ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand
+SVar:PlayMain1:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sidisis_faithful.jpg
+Oracle:Exploit (When this creature enters the battlefield, you may sacrifice a creature.)\nWhen Sidisi's Faithful exploits a creature, return target creature to its owner's hand.

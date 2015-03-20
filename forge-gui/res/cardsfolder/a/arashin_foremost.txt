@@ -1,0 +1,12 @@
+Name:Arashin Foremost
+ManaCost:1 W W
+Types:Creature Human Warrior
+PT:2/2
+K:Double Strike
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, another target Warrior creature you control gains double strike until end of turn.
+T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, another target Warrior creature you control gains double strike until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Creature.Warrior+YouCtrl+Other | TgtPrompt$ Select another target Warrior creature you control | KW$ Double Strike
+SVar:HasAttackEffect:TRUE
+SVar:PlayMain1:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/arashin_foremost.jpg
+Oracle:Double strike\nWhenever Arashin Foremost enters the battlefield or attacks, another target Warrior creature you control gains double strike until end of turn.

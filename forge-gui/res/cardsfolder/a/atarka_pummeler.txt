@@ -1,0 +1,9 @@
+Name:Atarka Pummeler
+ManaCost:4 R
+Types:Creature Ogre Warrior
+PT:4/5
+A:AB$ Effect | Cost$ 3 R R | Name$ Atarka Pummeler Effect | StaticAbilities$ KWPump | CheckSVar$ FormidableTest | SVarCompare$ GE8 | References$ FormidableTest | PrecostDesc$ Formidable - | SpellDescription$ Each creature you control can't be blocked this turn except by two or more creatures. Activate this ability only if creatures you control have total power 8 or greater.
+SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CantBeBlockedByAmount LT2 | Description$ Each creature you control can't be blocked this turn except by two or more creatures.
+SVar:FormidableTest:Count$SumPower_Creature.YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/atarka_pummeler.jpg
+Oracle:Formidable - {3}{R}{R}: Each creature you control can't be blocked this turn except by two or more creatures. Activate this ability only if creatures you control have total power 8 or greater.

@@ -1,0 +1,8 @@
+Name:Dutiful Attendant
+ManaCost:2 B
+Types:Creature Human Warrior
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerController$ TriggeredCardController | Execute$ TrigChange | TriggerDescription$ When CARDNAME dies, return another target creature card from your graveyard to your hand.
+SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.Other | TargetsWithDefinedController$ TriggeredCardController
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dutiful_attendant.jpg
+Oracle:When Dutiful Attendant dies, return another target creature card from your graveyard to your hand.

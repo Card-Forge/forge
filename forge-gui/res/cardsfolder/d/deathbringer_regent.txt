@@ -1,0 +1,11 @@
+Name:Deathbringer Regent
+ManaCost:5 B B
+Types:Creature Dragon
+PT:5/6
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromHand+Self | CheckSVar$ X | SVarCompare$ GE5 | Destination$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand and there are five or more other creatures on the battlefield, destroy all other creatures.
+SVar:TrigDestroy:AB$ DestroyAll | Cost$ 0 | ValidCards$ Creature.Other
+SVar:X:Count$Valid Creature.Other
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deathbringer_regent.jpg
+Oracle:Flying\nWhen Deathbringer Regent enters the battlefield, if you cast it from your hand and there are five or more other creatures on the battlefield, destroy all other creatures.

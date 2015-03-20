@@ -1,0 +1,7 @@
+Name:Secure the Wastes
+ManaCost:X W
+Types:Instant
+A:SP$ Token | Cost$ X W | TokenAmount$ X | References$ X | TokenName$ Warrior | TokenTypes$ Creature,Warrior | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ w 1 1 warrior DTK | SpellDescription$ Put X 1/1 white Warrior creature tokens onto the battlefield.
+SVar:X:Count$xPaid
+SVar:Picture:http://www.wizards.com/global/images/magic/general/secure_the_wastes.jpg
+Oracle:Put X 1/1 white Warrior creature tokens onto the battlefield.

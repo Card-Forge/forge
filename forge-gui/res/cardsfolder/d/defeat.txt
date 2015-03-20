@@ -1,0 +1,6 @@
+Name:Defeat
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less. | SpellDescription$ Destroy target creature with power 2 or less.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/defeat.jpg
+Oracle:Destroy target creature with power 2 or less.

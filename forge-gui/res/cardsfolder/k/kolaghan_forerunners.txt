@@ -1,0 +1,11 @@
+Name:Kolaghan Forerunners
+ManaCost:2 R
+Types:Creature Human Berserker
+PT:*/3
+K:Trample
+K:Dash:2 R
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of creatures you control.
+SVar:X:Count$TypeYouCtrl.Creature
+SVar:BuffedBy:Creature
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kolaghan_forerunners.jpg
+Oracle:Trample\nKolaghan Forerunners's power is equal to the number of creatures you control.\nDash {2}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)
