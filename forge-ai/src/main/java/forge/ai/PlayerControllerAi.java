@@ -632,11 +632,13 @@ public class PlayerControllerAi extends PlayerController {
             }
             Card toSave = hostsa == null ? sa.getTargetCard() : hostsa.getTargetCard();
             CardCollection threats = null;
-            if (combat.isBlocked(toSave)) {
-                threats = combat.getBlockers(toSave);
-            }
-            if (combat.isBlocking(toSave)) {
-                threats = combat.getAttackersBlockedBy(toSave);
+            if (toSave != null) {
+                if (combat.isBlocked(toSave)) {
+                    threats = combat.getBlockers(toSave);
+                }
+                if (combat.isBlocking(toSave)) {
+                    threats = combat.getAttackersBlockedBy(toSave);
+                }
             }
             if (threats != null) {
                 ComputerUtilCard.sortByEvaluateCreature(threats);
