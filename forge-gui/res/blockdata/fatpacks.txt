@@ -55,3 +55,4 @@ JOU: 9 Boosters, 80 BasicLands THS
 M15: 9 Boosters, 80 BasicLands
 KTK: 9 Boosters, 80 BasicLands 
 FRF: 9 Boosters, 80 BasicLands
+DTK: 9 Boosters, 80 BasicLands 
