@@ -8,13 +8,13 @@ Forge Beta: 3-#-2015 ver 1.5.38
 Release Notes
 -------------
 
-- New Dragons of Tarkir cards -
-We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
+- Dragons of Tarkir -
+Forge now includes many of the new Dragons of Tarkir cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
 
 
-----------------------------------
-New Dragons of Tarkir branch Cards
-----------------------------------
+----------
+New Cards
+---------
 
 Acid-Spewer Dragon
 Aerie Bowmasters
@@ -166,7 +166,7 @@ Impact Tremors
 Inspiring Call
 Keeper of the Lens
 Kolaghan Aspirant
-Kolaghan Forerunner
+Kolaghan Forerunners
 Kolaghan Skirmisher
 Kolaghan Stormsinger
 Learn from the Past
@@ -179,7 +179,7 @@ Minister of Pain
 Misthoof Kirin
 Monastery Loremaster
 Mystic Meditation
-Obstructing AEther
+Obscuring AEther
 Ojutai's Breath
 Ojutai Interceptor
 Palace Familiar
@@ -191,6 +191,49 @@ Rakshasa Gravecaller
 Reckless Imp
 Reduce in Stature
 Resupply
+
+Sabertooth Outrider
+Salt Road Quartermasters
+Sandsteppe Scavenger
+Sandstorm Charger
+Sarkhan's Rage
+Scale Blessing
+Screamreach Brawler
+Secure the Wastes
+Segmented Krotiq
+Seismic Rupture
+Servant of the Scale
+Shambling Goblin
+Shape the Sands
+Sheltered Aerie
+Sibsig Icebreakers
+Sidisi's Faithful
+Sight Beyond Sight
+Sight of the Scalelords
+Silumgar Sorcerer
+Silumgar Spell-Eater
+Skywise Teachings
+Stormrider Rig
+Strongarm Monk
+Student of Ojutai
+Taigam's Strike
+Tail Slash
+Territorial Roc
+Tread Upon
+Twin Bolt
+Ukud Cobra
+Updraft Elemental
+Vandalize
+Virulent Plague
+Void Squall
+Volcanic Rush
+Volcanic Vision
+Vulturous Aven
+Youthful Scholar
+Zephyr Scribe
+Assault Formation
+Arashin Sovereign
+Clone Legion
 
 
 --------------------
