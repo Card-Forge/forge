@@ -10906,6 +10906,7 @@ forge-gui/res/cardsfolder/p/prodigal_sorcerer_avatar.txt -text
 forge-gui/res/cardsfolder/p/profane_command.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/profane_memento.txt -text
 forge-gui/res/cardsfolder/p/profane_prayers.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/p/profaner_of_the_dead.txt -text
 forge-gui/res/cardsfolder/p/profit_loss.txt -text
 forge-gui/res/cardsfolder/p/profound_journey.txt -text
 forge-gui/res/cardsfolder/p/progenitor_mimic.txt -text
@@ -11972,6 +11973,7 @@ forge-gui/res/cardsfolder/s/sakura_tribe_scout.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sakura_tribe_springcaller.txt -text
 forge-gui/res/cardsfolder/s/salt_flats.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/salt_marsh.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/salt_road_ambushers.txt -text
 forge-gui/res/cardsfolder/s/salt_road_patrol.txt -text
 forge-gui/res/cardsfolder/s/salt_road_quartermasters.txt -text
 forge-gui/res/cardsfolder/s/saltblast.txt svneol=native#text/plain
