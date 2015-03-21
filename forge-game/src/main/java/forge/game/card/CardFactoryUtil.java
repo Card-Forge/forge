@@ -1313,7 +1313,8 @@ public class CardFactoryUtil {
             else {
                 ce = c;
             }
-            return doXMath(ce.getCMC(), m, c);
+
+            return doXMath(ce == null ? 0 : ce.getCMC(), m, c);
         }
         // Count$SumCMC_valid
         if (sq[0].contains("SumCMC")) {

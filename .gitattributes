@@ -8595,6 +8595,7 @@ forge-gui/res/cardsfolder/l/living_end.txt -text
 forge-gui/res/cardsfolder/l/living_hive.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/living_inferno.txt -text
 forge-gui/res/cardsfolder/l/living_lands.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/l/living_lore.txt -text
 forge-gui/res/cardsfolder/l/living_plane.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/living_terrain.txt -text
 forge-gui/res/cardsfolder/l/living_totem.txt -text

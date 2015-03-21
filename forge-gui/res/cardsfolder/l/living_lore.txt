@@ -1,0 +1,13 @@
+Name:Living Lore
+ManaCost:3 U
+Types:Creature Avatar
+P/T:*/*
+K:ETBReplacement:Copy:ChooseSpell
+SVar:ChooseSpell:DB$ ChangeZone | ChangeType$ Instant.YouOwn,Sorcery.YouOwn | ChangeNum$ 1 | Hidden$ True | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | Mandatory$ True | SpellDescription$ As CARDNAME enters the battlefield, exile an instant or sorcery card from your graveyard.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the exiled card's converted mana cost.
+SVar:X:Count$RememberedCardManaCost
+T:Mode$ DealtCombatDamageOnce | ValidSource$ Card.Self | Execute$ TrigSacLore | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage, you may sacrifice it. If you do, you may cast the exiled card without paying its mana cost.
+SVar:TrigSacLore:AB$ Play | Cost$ Sac<1/CARDNAME> | Defined$ Remembered | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True | ForgetRemembered$ True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/living_lore.jpg
+Oracle:As Living Lore enters the battlefield, exile an instant or sorcery card from your graveyard.\nLiving Lore's power and toughness are each equal to the exiled card's converted mana cost.\nWhenever Living Lore deals combat damage, you may sacrifice it. If you do, you may cast the exiled card without paying its mana cost.
