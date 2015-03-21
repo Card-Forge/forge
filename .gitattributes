@@ -4286,6 +4286,7 @@ forge-gui/res/cardsfolder/d/deathless_angel.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/deathmark.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/deathmark_prelate.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/deathmask_nezumi.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/d/deathmist_raptor.txt -text
 forge-gui/res/cardsfolder/d/deathpact_angel.txt -text
 forge-gui/res/cardsfolder/d/deathreap_ritual.txt -text
 forge-gui/res/cardsfolder/d/deathrender.txt -text

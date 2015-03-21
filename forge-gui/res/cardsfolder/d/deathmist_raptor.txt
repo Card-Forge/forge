@@ -1,0 +1,12 @@
+Name:Deathmist Raptor
+ManaCost:1 G G
+Types:Creature Lizard Beast
+PT:3/3
+K:Deathtouch
+K:Megamorph:4 G
+T:Mode$ TurnFaceUp | ValidCard$ Permanent.YouCtrl | Execute$ TrigChange | TriggerZones$ Graveyard | OptionalDecider$ You | TriggerDescription$ Whenever a permanent you control is turned face up, you may return CARDNAME from your graveyard to the battlefield face up or face down.
+SVar:TrigChange:DB$ GenericChoice | Choices$ DBTop,DBBottom
+SVar:DBTop:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Put it on battlefield face up
+SVar:DBBottom:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | FaceDown$ True | SpellDescription$ Put it on battlefield face down
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deathmist_raptor.jpg
+Oracle:Deathtouch\nWhenever a permanent you control is turned face up, you may return Deathmist Raptor from your graveyard to the battlefield face up or face down.\nMegamorph {4}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)
