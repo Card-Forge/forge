@@ -4828,6 +4828,7 @@ forge-gui/res/cardsfolder/d/dromoka_monument.txt -text
 forge-gui/res/cardsfolder/d/dromoka_the_eternal.txt -text
 forge-gui/res/cardsfolder/d/dromoka_warrior.txt -text
 forge-gui/res/cardsfolder/d/dromokas_command.txt -text
+forge-gui/res/cardsfolder/d/dromokas_gift.txt -text
 forge-gui/res/cardsfolder/d/dromosaur.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/droning_bureaucrats.txt -text
 forge-gui/res/cardsfolder/d/drooling_groodion.txt svneol=native#text/plain
@@ -12375,6 +12376,7 @@ forge-gui/res/cardsfolder/s/selesnya_sagittars.txt -text
 forge-gui/res/cardsfolder/s/selesnya_sanctuary.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/selesnya_sentry.txt -text
 forge-gui/res/cardsfolder/s/selesnya_signet.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/self_inflicted_wound.txt -text
 forge-gui/res/cardsfolder/s/selfless_cathar.txt -text
 forge-gui/res/cardsfolder/s/selfless_exorcist.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/selhoff_occultist.txt -text

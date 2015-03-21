@@ -1,0 +1,8 @@
+Name:Self-Inflicted Wound
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Sacrifice | Cost$ 1 B | ValidTgts$ Player.Opponent | SacValid$ Creature.White,Creature.Green | SacMessage$ Green or White Creature | RememberSacrificed$ True | SubAbility$ DBDrain | SpellDescription$ Target opponent sacrifices a green or white creature. If that player does, he or she loses 2 life.
+SVar:DBDrain:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/self_inflicted_wound.jpg
+Oracle:Target opponent sacrifices a green or white creature. If that player does, he or she loses 2 life.
