@@ -1,0 +1,7 @@
+Name:Clone Legion
+ManaCost:7 U U
+Types:Sorcery
+A:SP$ RepeatEach | Cost$ 7 U U | ValidTgts$ Player | UseImprinted$ True | RepeatCards$ Card.Creature+TargetedPlayerCtrl | Zone$ Battlefield | RepeatSubAbility$ DBClone | StackDescription$ SpellDescription | SpellDescription$ For each creature target player controls, put a token onto the battlefield that's a copy of that creature.
+SVar:DBClone:DB$ CopyPermanent | Defined$ Imprinted | NumCopies$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/clone_legion.jpg
+Oracle:For each creature target player controls, put a token onto the battlefield that's a copy of that creature.

@@ -1880,6 +1880,7 @@ forge-gui/res/cardsfolder/a/arachnus_web.txt -text
 forge-gui/res/cardsfolder/a/arashi_the_sky_asunder.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arashin_cleric.txt -text
 forge-gui/res/cardsfolder/a/arashin_foremost.txt -text
+forge-gui/res/cardsfolder/a/arashin_soverign.txt -text
 forge-gui/res/cardsfolder/a/arashin_war_beast.txt -text
 forge-gui/res/cardsfolder/a/arbalest_elite.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arbiter_of_knollridge.txt svneol=native#text/plain
@@ -3562,6 +3563,7 @@ forge-gui/res/cardsfolder/c/clockwork_swarm.txt -text
 forge-gui/res/cardsfolder/c/clockwork_vorrac.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/cloistered_youth_unholy_fiend.txt -text
 forge-gui/res/cardsfolder/c/clone.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/c/clone_legion.txt -text
 forge-gui/res/cardsfolder/c/clone_shell.txt -text
 forge-gui/res/cardsfolder/c/close_quarters.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/clot_sliver.txt svneol=native#text/plain
