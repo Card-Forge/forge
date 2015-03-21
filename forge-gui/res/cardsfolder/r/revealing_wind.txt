@@ -1,0 +1,12 @@
+Name:Revealing Wind
+ManaCost:2 G
+Types:Instant
+A:SP$ Fog | Cost$ 2 G | SpellDescription$ Prevent all combat damage that would be dealt this turn. You may look at each face-down creature that's attacking or blocking. | StackDescription$ SpellDescription | SubAbility$ DBRepeatLook
+SVar:DBRepeatLook:DB$ Repeat | RepeatSubAbility$ DBCleanLoop | RepeatDefined$ Remembered | RepeatPresent$ Card | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanLoop:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBChoose
+SVar:DBChoose:DB$ ChooseCard | Choices$ Creature.faceDown+attacking,Creature.faceDown+blocking | RememberChosen$ True | ChoiceTitle$ Choose an face-down attacking or blocking creature | SubAbility$ DBLook
+SVar:DBLook:DB$ LookAt | Defined$ Remembered
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/revealing_wind.jpg
+Oracle:Prevent all combat damage that would be dealt this turn. You may look at each face-down creature that's attacking or blocking.
