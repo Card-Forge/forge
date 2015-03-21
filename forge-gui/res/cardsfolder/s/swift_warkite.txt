@@ -10,5 +10,6 @@ SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ Tr
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Hand
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SneakAttackEOT:SVar:EndOfTurnLeavePlay:True
+SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swift_warkite.jpg
 Oracle:Flying\nWhen Swiftwing Warkite enters the battlefield, you may put a creature card with converted mana cost 3 or less from your hand onto the battlefield. That creature gains haste. Return it to your hand at the beginning of the next end step.
