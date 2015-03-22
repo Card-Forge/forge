@@ -782,7 +782,10 @@ public class AbilityUtils {
                 valid = valid.replace("EQ" + varName, "EQ" + Integer.toString(calculateAmount(source, varName, sa)));
             }
         }
-
+        if (sa.hasParam("AbilityCount")) { // replace specific string other than "EQ" cases
+        	String var = sa.getParam("AbilityCount");
+        	valid = valid.replace(var, Integer.toString(calculateAmount(source, var, sa)));
+        }
         return CardLists.getValidCards(list, valid.split(","), sa.getActivatingPlayer(), source);
     }
 
