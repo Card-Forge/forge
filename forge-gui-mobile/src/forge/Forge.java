@@ -16,9 +16,7 @@ import forge.assets.FSkinFont;
 import forge.assets.ImageCache;
 import forge.error.BugReporter;
 import forge.error.ExceptionHandler;
-import forge.game.GameView;
 import forge.interfaces.IDeviceAdapter;
-import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
@@ -26,6 +24,7 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.screens.SplashScreen;
 import forge.screens.home.HomeScreen;
+import forge.screens.match.MatchController;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FContainer;
@@ -52,7 +51,6 @@ public class Forge implements ApplicationListener {
     private static boolean exited;
     private static int continuousRenderingCount = 1; //initialize to 1 since continuous rendering is the default
     private static final Stack<FScreen> screens = new Stack<FScreen>();
-    public static HostedMatch hostedMatch;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0) {
         if (GuiBase.getInterface() == null) {
@@ -302,15 +300,15 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void pause() {
-        if (hostedMatch != null) {
-            hostedMatch.pause();
+        if (MatchController.getHostedMatch() != null) {
+            MatchController.getHostedMatch().pause();
         }
     }
 
     @Override
     public void resume() {
-        if (hostedMatch != null) {
-            hostedMatch.resume();
+        if (MatchController.getHostedMatch() != null) {
+            MatchController.getHostedMatch().resume();
         }
     }
 
@@ -650,9 +648,5 @@ public class Forge implements ApplicationListener {
             }
             return handled;
         }
-    }
-
-    public static GameView getGameView() {
-        return hostedMatch == null ? null : hostedMatch.getGameView();
     }
 }

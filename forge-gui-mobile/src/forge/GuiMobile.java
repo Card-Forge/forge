@@ -280,7 +280,6 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public HostedMatch hostMatch() {
-        return Forge.hostedMatch = new HostedMatch();
+        return MatchController.hostMatch();
     }
-
 }

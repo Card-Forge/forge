@@ -7,7 +7,6 @@ import java.util.Map.Entry;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Rectangle;
 
-import forge.Forge;
 import forge.Graphics;
 import forge.ImageKeys;
 import forge.assets.FSkinImage;
@@ -168,7 +167,7 @@ public class CardZoom extends FOverlay {
 
     @Override
     public void drawOverlay(Graphics g) {
-        final GameView gameView = Forge.getGameView();
+        final GameView gameView = MatchController.instance.getGameView();
 
         float w = getWidth();
         float h = getHeight();

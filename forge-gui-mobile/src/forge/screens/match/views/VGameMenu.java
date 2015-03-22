@@ -1,6 +1,5 @@
 package forge.screens.match.views;
 
-import forge.Forge;
 import forge.assets.FSkinImage;
 import forge.deck.Deck;
 import forge.deck.FDeckViewer;
@@ -46,7 +45,7 @@ public class VGameMenu extends FDropDownMenu {
         addItem(new FMenuItem("Deck List", FSkinImage.DECKLIST, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                final Deck deck = Forge.hostedMatch.getGame().getPhaseHandler().getPlayerTurn().getRegisteredPlayer().getDeck();
+                final Deck deck = MatchController.getHostedMatch().getGame().getPhaseHandler().getPlayerTurn().getRegisteredPlayer().getDeck();
                 if (deck != null) {
                     FDeckViewer.show(deck);
                 }

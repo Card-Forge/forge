@@ -38,6 +38,7 @@ import forge.game.zone.ZoneType;
 import forge.interfaces.IButton;
 import forge.item.PaperCard;
 import forge.match.AbstractGuiGame;
+import forge.match.HostedMatch;
 import forge.match.MatchButtonType;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
@@ -65,6 +66,7 @@ public class MatchController extends AbstractGuiGame {
 
     private static final Map<String, FImage> avatarImages = new HashMap<String, FImage>();
 
+    private static HostedMatch hostedMatch;
     private static MatchScreen view;
 
     public static MatchScreen getView() {
@@ -128,7 +130,7 @@ public class MatchController extends AbstractGuiGame {
                 @Override
                 public void buildTouchListeners(float screenX, float screenY, ArrayList<FDisplayObject> listeners) {
                     if (screenY < view.getHeight() - VPrompt.HEIGHT) {
-                        Forge.hostedMatch.pause();
+                        hostedMatch.pause();
                     }
                 }
             });
@@ -501,4 +503,12 @@ public class MatchController extends AbstractGuiGame {
         return !view.stopAtPhase(playerTurn, phase);
     }
 
+    public static HostedMatch hostMatch() {
+        hostedMatch = new HostedMatch();
+        return hostedMatch;
+    }
+
+    public static HostedMatch getHostedMatch() {
+        return hostedMatch;
+    }
 }
