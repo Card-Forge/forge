@@ -2,10 +2,14 @@ package forge.game.player;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.LobbyPlayer;
@@ -20,6 +24,7 @@ import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
 import forge.util.FCollectionView;
+import forge.util.Lang;
 
 public class PlayerView extends GameEntityView {
     private static final long serialVersionUID = 7005892740909549086L;
@@ -89,25 +94,48 @@ public class PlayerView extends GameEntityView {
     }
 
     public final String getCommanderInfo() {
+        final CardView commander = getCommander();
+        if (commander == null) {
+            return StringUtils.EMPTY;
+        }
+
         final StringBuilder sb = new StringBuilder();
         Iterable<PlayerView> opponents = getOpponents();
         if (opponents == null) {
             opponents = Collections.emptyList();
         }
         for (final PlayerView p : Iterables.concat(Collections.singleton(this), opponents)) {
-            final String text;
-            if (p.equals(this)) {
-                text = "Commander Damage from own Commander: ";
-            } else {
-                text = "Commander Damage to " + p.getName() + ": ";
-            }
-
             final int damage = p.getCommanderDamage(this.getCommander());
             if (damage > 0) {
-                sb.append(text + damage + "\r\n");
+                final String text = String.format("Commander damage to %s:", p);
+                sb.append(String.format(text + " %d\r\n", damage));
             }
         }
         return sb.toString();
+    }
+
+    public final List<String> getPlayerCommanderInfo() {
+        final CardView commander = getCommander();
+        if (commander == null) {
+            return Collections.emptyList();
+        }
+
+        final FCollectionView<PlayerView> opponents = getOpponents();
+        final List<String> info = Lists.newArrayListWithExpectedSize(opponents.size());
+        info.add(String.format("Commander: %s", commander));
+        for (final PlayerView p : Iterables.concat(Collections.singleton(this), opponents == null ? Collections.<PlayerView>emptySet() : opponents)) {
+            final int damage = this.getCommanderDamage(p.getCommander());
+            if (damage > 0) {
+                final String text;
+                if (p.equals(this)) {
+                    text = "Commander damage from own commander:";
+                } else {
+                    text = String.format("Commander damage from %s:", p);
+                }
+                info.add(String.format(text + " %d\r\n", damage));
+            }
+        }
+        return info;
     }
 
     @Override
@@ -143,6 +171,10 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.HasUnlimitedHandSize, p.isUnlimitedHandSize());
     }
 
+    public String getMaxHandString() {
+        return hasUnlimitedHandSize() ? "unlimited" : String.valueOf(getMaxHandSize());
+    }
+
     public int getNumDrawnThisTurn() {
         return get(TrackableProperty.NumDrawnThisTurn);
     }
@@ -152,6 +184,12 @@ public class PlayerView extends GameEntityView {
 
     public KeywordCollectionView getKeywords() {
         return get(TrackableProperty.Keywords);
+    }
+    public List<String> getDisplayableKeywords() {
+        final List<String> allKws = Lists.newArrayList(getKeywords());
+        while (allKws.remove("CanSeeOpponentsFaceDownCards")) {
+        }
+        return allKws;
     }
     public boolean hasKeyword(String keyword) {
         return getKeywords().contains(keyword);
@@ -307,5 +345,47 @@ public class PlayerView extends GameEntityView {
             mana.put(b, p.getManaPool().getAmountOfColor(b));
         }
         set(TrackableProperty.Mana, mana);
+    }
+
+    private List<String> getDetailsList() {
+        final List<String> details = Lists.newArrayListWithCapacity(8);
+        details.add(String.format("Life: %d", getLife()));
+        final int poison = getPoisonCounters();
+        if (poison > 0) {
+            details.add(String.format("Poison counters: %d", poison));
+        }
+        details.add(String.format("Cards in hand: %d/%s", getHandSize(), getMaxHandString()));
+        details.add(String.format("Cards drawn this turn: %d", getNumDrawnThisTurn()));
+        details.add(String.format("Damage prevention: %d", getPreventNextDamage()));
+        final String keywords = Lang.joinHomogenous(getDisplayableKeywords());
+        if (!keywords.isEmpty()) {
+            details.add(keywords);
+        }
+        final FCollectionView<CardView> ante = getAnte();
+        if (ante != null && !ante.isEmpty()) {
+            details.add(String.format("Ante'd: %s", Lang.joinHomogenous(ante)));
+        }
+        details.addAll(getPlayerCommanderInfo());
+        return details;
+    }
+    public String getDetails() {
+        final StringBuilder builder = new StringBuilder();
+        for (final String detailsPart : getDetailsList()) {
+            builder.append(detailsPart);
+            builder.append('\n');
+        }
+        return builder.toString();
+    }
+    public String getDetailsHtml() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("<html>");
+        builder.append(getName());
+        builder.append("<hr/>");
+        for (final String line : getDetailsList()) {
+            builder.append(line);
+            builder.append("<br/>");
+        }
+        builder.append("</html>");
+        return builder.toString();
     }
 }

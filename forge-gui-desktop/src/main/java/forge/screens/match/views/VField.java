@@ -217,5 +217,6 @@ public class VField implements IVDoc<CField> {
         boolean highlighted = isHighlighted();
         this.avatarArea.setBorder(highlighted ? borderAvatarHighlighted : borderAvatarSimple );
         this.avatarArea.setOpaque(highlighted);
+        this.avatarArea.setToolTipText(player.getDetailsHtml());
     }
 }

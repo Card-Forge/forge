@@ -425,17 +425,19 @@ public final class CMatchUI
         for (final Pair<PlayerView, ZoneType> kv : zonesToUpdate) {
             final PlayerView owner = kv.getKey();
             final ZoneType zt = kv.getValue();
+            final VField vf = getFieldViewFor(owner);
 
             switch (zt) {
             case Battlefield:
-                getFieldViewFor(owner).getTabletop().setupPlayZone();
+                vf.getTabletop().setupPlayZone();
                 break;
             case Hand:
                 final VHand vHand = getHandFor(owner);
                 if (vHand != null) {
                     vHand.getLayoutControl().updateHand();
                 }
-                getFieldViewFor(owner).getDetailsPanel().updateZones();
+                vf.getDetailsPanel().updateZones();
+                vf.updateDetails();
                 FloatingCardArea.refresh(owner, zt);
                 break;
             case Command:
@@ -445,7 +447,6 @@ public final class CMatchUI
                 cAntes.update();
                 break;
             default:
-                final VField vf = getFieldViewFor(owner);
                 if (vf != null) {
                     vf.getDetailsPanel().updateZones();
                 }
