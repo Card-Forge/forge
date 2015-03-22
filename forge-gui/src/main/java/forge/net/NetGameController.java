@@ -126,4 +126,8 @@ public class NetGameController implements IGameController {
         send(methodName());
     }
 
+    @Override
+    public void reorderHand(CardView card, int index) {
+        send(methodName(), card, index);
+    }
 }

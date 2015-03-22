@@ -71,6 +71,7 @@ public class CHand implements ICDoc {
                 synchronized (ordering) {
                     ordering.remove(dragPanel.getCard());
                     ordering.add(index, dragPanel.getCard());
+                    matchUI.getGameController(p0).reorderHand(dragPanel.getCard(), index);
                 }
             }
         });

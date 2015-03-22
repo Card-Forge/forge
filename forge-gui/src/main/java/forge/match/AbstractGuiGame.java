@@ -74,6 +74,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public final IGameController getGameController() {
         return gameControllers.get(getCurrentPlayer());
     }
+    public final IGameController getGameController(PlayerView p0) {
+        return gameControllers.get(p0);
+    }
     public final Collection<IGameController> getGameControllers() {
         return gameControllers.values();
     }

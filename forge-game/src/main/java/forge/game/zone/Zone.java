@@ -63,6 +63,11 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         return null;
     }
 
+    public final void reorder(final Card c, final int index) {
+        cardList.remove(c);
+        cardList.add(index, c);
+    }
+
     public final void add(final Card c) {
         add(c, null);
     }

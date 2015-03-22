@@ -42,4 +42,6 @@ public interface IGameController {
     void nextGameDecision(NextGameDecision decision);
 
     String getActivateDescription(CardView card);
+
+    void reorderHand(CardView card, int index);
 }

@@ -80,6 +80,7 @@ import forge.game.spellability.TargetChoices;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.MagicStack;
+import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.interfaces.IDevModeCheats;
@@ -1794,5 +1795,12 @@ public class PlayerControllerHuman
     @Override
     public String getActivateDescription(final CardView card) {
         return getInputProxy().getActivateAction(card);
+    }
+
+    @Override
+    public void reorderHand(CardView card, int index) {
+        PlayerZone hand = player.getZone(ZoneType.Hand);
+        hand.reorder(game.getCard(card), index);
+        player.updateZoneForView(hand);
     }
 }
