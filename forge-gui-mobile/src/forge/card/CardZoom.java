@@ -168,7 +168,7 @@ public class CardZoom extends FOverlay {
 
     @Override
     public void drawOverlay(Graphics g) {
-        final GameView gameView = Forge.hostedMatch.getGameView();
+        final GameView gameView = Forge.getGameView();
 
         float w = getWidth();
         float h = getHeight();

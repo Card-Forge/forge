@@ -16,6 +16,7 @@ import forge.assets.FSkinFont;
 import forge.assets.ImageCache;
 import forge.error.BugReporter;
 import forge.error.ExceptionHandler;
+import forge.game.GameView;
 import forge.interfaces.IDeviceAdapter;
 import forge.match.HostedMatch;
 import forge.model.FModel;
@@ -649,5 +650,9 @@ public class Forge implements ApplicationListener {
             }
             return handled;
         }
+    }
+
+    public static GameView getGameView() {
+        return hostedMatch == null ? null : hostedMatch.getGameView();
     }
 }
