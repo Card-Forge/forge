@@ -757,6 +757,7 @@ forge-gui-android/lint.xml -text
 forge-gui-android/pom.xml -text
 forge-gui-android/proguard.cfg -text
 forge-gui-android/project.properties -text
+forge-gui-android/publish.bat -text
 forge-gui-android/res/drawable-hdpi/ic_launcher.png -text
 forge-gui-android/res/drawable-mdpi/ic_launcher.png -text
 forge-gui-android/res/drawable-xhdpi/ic_launcher.png -text
