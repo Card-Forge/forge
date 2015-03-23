@@ -922,7 +922,11 @@ public class CombatUtil {
             final String[] k = parse.split(" ", 2);
             final String[] restrictions = k[1].split(",");
             if (blocker.isValid(restrictions, attacker.getController(), attacker)) {
-                return false;
+            	//Dragon Hunter check
+            	if (!k[1].contains("withoutReach") || !attacker.getType().hasCreatureType("Dragon")
+            			|| !blocker.hasKeyword("CARDNAME can block Dragons as though it had reach.")) {
+            		return false;
+            	}
             }
         }
 
