@@ -198,7 +198,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         // Change Zone All, can be any type moving from one zone to another
 
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
-        final ZoneType origin = ZoneType.smartValueOf(sa.getParam("Origin"));
+        final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
 
         final Player opp = ai.getOpponent();
         final CardCollectionView humanType = AbilityUtils.filterListByType(opp.getCardsIn(origin), sa.getParam("ChangeType"), sa);
