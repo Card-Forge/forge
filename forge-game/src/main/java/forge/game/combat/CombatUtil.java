@@ -949,7 +949,9 @@ public class CombatUtil {
         }
 
         if (attacker.hasKeyword("Flying") && !blocker.hasKeyword("Flying") && !blocker.hasKeyword("Reach")) {
-            return false;
+        	if (!attacker.getType().hasCreatureType("Dragon") || !blocker.hasKeyword("CARDNAME can block Dragons as though it had reach.")) {
+        		return false;
+        	}
         }
 
         if (attacker.hasKeyword("Horsemanship") && !blocker.hasKeyword("Horsemanship")) {

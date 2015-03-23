@@ -1,0 +1,8 @@
+Name:Dragon Hunter
+ManaCost:W
+Types:Creature Human Warrior
+PT:2/1
+K:Protection from Dragons
+K:CARDNAME can block Dragons as though it had reach.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_hunter.jpg
+Oracle:Protection from Dragons\nDragon Hunter can block Dragons as though it had reach.

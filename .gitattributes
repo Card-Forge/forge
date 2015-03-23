@@ -4702,6 +4702,7 @@ forge-gui/res/cardsfolder/d/dragon_fangs.txt -text
 forge-gui/res/cardsfolder/d/dragon_fodder.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dragon_grip.txt -text
 forge-gui/res/cardsfolder/d/dragon_hatchling.txt -text
+forge-gui/res/cardsfolder/d/dragon_hunter.txt -text
 forge-gui/res/cardsfolder/d/dragon_mage.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dragon_mantle.txt -text
 forge-gui/res/cardsfolder/d/dragon_mask.txt -text
