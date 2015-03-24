@@ -32,6 +32,7 @@ import forge.game.spellability.Ability;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Visitor;
 
@@ -209,19 +210,23 @@ public class TriggerHandler {
         });
     }
 
-    public final void clearInstrinsicActiveTriggers(final Card c) {
+    public final void clearInstrinsicActiveTriggers(final Card c, Zone zoneFrom) {
         final Iterator<Trigger> itr = activeTriggers.iterator();
         Trigger t;
         final List<Trigger> toBeRemoved = new ArrayList<Trigger>();
 
         while(itr.hasNext()) {
             t = itr.next();
+            // Clear if no ZoneFrom, or not coming from the TriggerZone
             if (c.getId() == t.getHostCard().getId() && t.isIntrinsic()) {
-                toBeRemoved.add(t);
+                if (zoneFrom == null || (!t.getMapParams().containsKey("TriggerZones") ||
+                        !t.getMapParams().get("TriggerZones").contains(zoneFrom.getZoneType().toString())))
+                    toBeRemoved.add(t);
             }
         }
 
         for (final Trigger removed : toBeRemoved) {
+            // This line was not removing the correct trigger for cloned tokens
             activeTriggers.remove(removed);
         }
     }

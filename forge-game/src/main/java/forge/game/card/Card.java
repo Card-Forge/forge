@@ -291,7 +291,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 || (cur == CardStateName.Transformed && state == CardStateName.Original)) {
 
             // Clear old dfc trigger from the trigger handler
-            getGame().getTriggerHandler().clearInstrinsicActiveTriggers(this);
+            getGame().getTriggerHandler().clearInstrinsicActiveTriggers(this, null);
             getGame().getTriggerHandler().registerActiveTrigger(this, false);
             HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Transformer", this);
@@ -1708,9 +1708,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             //Determine if a card has multiple choices, then format it in an easier to read list.
             if (element.getApi() != null && element.getApi().equals(ApiType.Charm)) {
-
-                String chooseText = elementText.split("-")[0].trim();
-                String[] splitElemText = elementText.split("-");
+                // Only split once! Otherwise some Charm spells looks broken
+                String[] splitElemText = elementText.split("-", 2);
+                String chooseText = splitElemText[0].trim();
                 String[] choices = splitElemText.length > 1 ? splitElemText[1].split(";") : null;
 
                 sb.append(chooseText);

@@ -84,7 +84,7 @@ public class CloneEffect extends SpellAbilityEffect {
         final List<Card> cloneTargets = AbilityUtils.getDefinedCards(host, sa.getParam("CloneTarget"), sa);
         if (!cloneTargets.isEmpty()) {
             tgtCard = cloneTargets.get(0);
-            game.getTriggerHandler().clearInstrinsicActiveTriggers(tgtCard);
+            game.getTriggerHandler().clearInstrinsicActiveTriggers(tgtCard, null);
         }
 
         // determine the image to be used for the clone
