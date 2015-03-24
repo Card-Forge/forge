@@ -167,9 +167,9 @@ if __name__ == '__main__':
 
 
 	ignoredSet = [ 'ASTRAL', 'ATH', 'BD', 'BR', 'CM1', 'DD2', 'DDC', 'DDD', 'DDE', 'DDF',
-		'DDG', 'DDH', 'DDI', 'DDJ', 'DDK', 'DDL', 'DKM', 'DRB', 'DREAM', 'EVG', 'H09', 'ME2',
+		'DDG', 'DDH', 'DDI', 'DDJ', 'DDK', 'DDL', 'DDM', 'DDN', 'DKM', 'DRB', 'DREAM', 'EVG', 'H09', 'MD1', 'ME2',
 		'ME3', 'ME4', 'MED', 'PD2', 'PD3', 'SDC', 'UG', 'UGL', 'UNH', 'V09', 'V10', 'V11', 'V12',
-		'V13', '']
+		'V13', 'V14', '']
 
 	for currentSet in setCodes :
 		# Ignore any sets that we don't tabulate
