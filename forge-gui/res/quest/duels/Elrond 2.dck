@@ -3,7 +3,7 @@
 Name=Elrond 2
 Title=Elrond
 Difficulty=medium
-Description=RGW Aura deck with Aura Gnarlid and Rabid Wombat
+Description=RGW Aura deck with Aura Gnarlid and Kor Spiritdancer
 Icon=Elrond.jpg
 Deck Type=constructed
 [main]
@@ -17,12 +17,12 @@ Deck Type=constructed
 4 Jungle Shrine
 2 Taiga
 2 Plateau
-1 Heroes' Reunion
 1 Winds of Rath
 3 Aura Gnarlid
-2 Rabid Wombat
+1 Rabid Wombat
 2 Kor Spiritdancer
 2 Gatherer of Graces
+1 Graceblade Artisan
 1 Uril, the Miststalker
 1 Gate Hound
 1 Skyrider Trainee
@@ -50,4 +50,5 @@ Deck Type=constructed
 1 Armadillo Cloak
 1 Unflinching Courage
 1 Ethereal Armor
+1 Glaring Aegis
 [sideboard]

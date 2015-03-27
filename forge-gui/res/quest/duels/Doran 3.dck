@@ -3,7 +3,7 @@
 Name=Doran 3
 Title=Doran
 Difficulty=hard
-Description=WBG Doran, the Siege Tower deck with high toughness creatures
+Description=WBG Doran, the Siege Tower deck with high toughness creatures and Assault Formation
 Icon=Doran.jpg
 Deck Type=constructed
 [main]
@@ -21,7 +21,8 @@ Deck Type=constructed
 1 Mox Jet
 1 Mox Pearl
 4 Doran, the Siege Tower
-4 Time of Need
+1 Time of Need
+3 Assault Formation
 1 Primal Rage
 2 Putrefy
 2 Mortify
