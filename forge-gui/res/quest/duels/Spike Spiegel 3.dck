@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Spike Spiegel 3
+Title=Spike Spiegel
+Difficulty=hard
+Description=WU AEthermage's Touch deck with Surprise Deployment and Flash
+Icon=Spike Spiegel.jpg
+Deck Type=constructed
+[main]
+4 Seachrome Coast
+4 Sejiri Refuge
+3 Temple of Enlightenment
+4 Tranquil Cove
+4 Seaside Citadel
+1 Thornwood Falls
+1 Mox Pearl
+1 Mox Sapphire
+1 Mox Emerald
+1 Sol Ring
+4 Sundering Titan
+4 Trostani's Summoner
+2 Hornet Queen
+2 Armada Wurm
+4 AEthermage's Touch
+4 Surprise Deployment
+1 Flash
+1 Absorb
+1 Ancestral Recall
+1 Time Walk
+4 Swords to Plowshares
+1 Disenchant
+1 Rewind
+2 Spell Snare
+1 Mental Misstep
+1 Think Twice
+1 Fact or Fiction
+1 Jace, Architect of Thought
+[sideboard]
