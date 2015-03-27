@@ -1,7 +1,7 @@
-Forge Beta: 3-#-2015 ver 1.5.38
+Forge Beta: 3-27-2015 ver 1.5.38
 
 
-# cards in total.
+14738 cards in total.
 
 
 -------------
@@ -18,231 +18,228 @@ New Cards
 
 Acid-Spewer Dragon
 Aerie Bowmasters
+Ainok Artillerist
+Ainok Survivalist
+Ambuscade Shaman
 Anafenza, Kin-Tree Spirit
+Ancestral Statue
+Ancient Carp
 Anticipate
 Arashin Foremost
+Arashin Sovereign
 Artful Maneuver
+Assault Formation
+Atarka Beastbreaker
+Atarka Efreet
+Atarka Monument
+Atarka Pummeler
 Atarka's Command
+Avatar of the Resolute
 Aven Sunstriker
+Aven Tactician
+Belltoll Dragon
+Berserkers' Onslaught
+Blessed Reincarnation
 Blood-Chin Fanatic
+Blood-Chin Rager
 Boltwing Marauder
+Butcher's Glee
+Center Soul
+Champion of Arashin
+Circle of Elders
+Clone Legion
+Coat with Venom
 Collected Company
+Colossodon Yearling
+Conifer Strider
+Contradict
+Corpseweft
 Crater Elemental
 Cunning Breezedancer
+Custodian of the Trove
+Damnable Pact
+Dance of the Skywise
+Deadly Wanderings
+Deathbringer Regent
+Deathmist Raptor
+Defeat
 Den Protector
 Descent of the Dragons
+Dirgur Nemesis
 Display of Dominance
+Dragon Hunter
 Dragon Tempest
 Dragon Whisperer
+Dragon's Eye Sentry
+Dragonloft Idol
 Dragonlord Atarka
 Dragonlord Dromoka
 Dragonlord Kolaghan
 Dragonlord Ojutai
 Dragonlord Silumgar
 Dragonlord's Servant
-Encase in Ice
-Enduring Scalelord
-Epic Confrontation
-Foe-Razer Regent
-Gudul Lurker
-Harbinger of the Hunt
-Haven of the Spirit Dragon
-Hidden Dragonslayer
-Ire Shaman
-Kolaghan's Command
-Lightning Berserker
-Marang River Skeleton
-Mirror Mockery
-Narset Transcendent
-Necromaster Dragon
-Ojutai Exemplars
-Ojutai's Command
-Ojutai's Summons
-Pristine Skywise
-Profound Journey
-Radiant Purge
-Roast
-Ruthless Deathfang
-Sandcrafter Mage
-Sarkhan Unbroken
-Sarkhan's Triumph
-Savage Ventmaw
-Shaman of Forgotten Ways
-Shieldhide Dragon
-Shorecrasher Elemental
-Sidisi, Undead Vizier
-Silumgar Assassin
-Silumgar Butcher
-Silumgar's Command
-Sprinting Warbrute
-Stormcrag Elemental
-Stormwing Dragon
-Stratus Dancer
-Sunbringer's Touch
-Sunscorch Regent
-Surge of Righteousness
-Swift Warkite
-Thunderbreak Regent
-Warbringer
-Zurgo Bellstriker
-
-Gleam of Authority
-Qarsi Deceiver
-Hardened Berserker
-Avatar of the Resolute
-Herdchaser Dragon
-Scion of Ugin
-Stampeding Elk Herd
-Atarka Monument
-Custodian of the Trove
-Dromoka Monument
-Kolaghan Monument
-Ojutai Monument
-Pitiless Horde
-Rending Volley
-Silumgar Monument
-Ainok Survivalist
-Belltoll Dragon
-Surrak, the Hunt Caller
-Tapestry of the Ages
-Damnable Pact
-Icefall Regent
-Silkwrap
-Vial of Dragonfire
-Wandering Tombshell
-Ainok Artillerist
-Dromoka's Command
-Myth Realized
-Ambuscade Shaman
-Ancestral Statue
-Ancient Carp
-Atarka Beastbreaker
-Atarka Efreet
-Atarka Pummeler
-Aven Tactician
-Berserkers' Onslaught
-Blessed Reincarnation
-Blood-Chin Rager
-Butcher's Glee
-Center Soul
-Champion of Arashin
-Circle of Elders
-Coat with Venom
-Colossodon Yearling
-Conifer Strider
-Contradict
-Dance of the Skywise
-Deadly Wanderings
-Defeat
-Dirgur Nemesis
-Dragonloft Idol
-Dragon's Eye Sentry
-Dromoka's Gift
 Dromoka Captain
 Dromoka Dunecaster
+Dromoka Monument
 Dromoka Warrior
+Dromoka's Command
+Dromoka's Gift
+Dromoka's Gift
 Dutiful Attendant
 Echoes of the Kin Tree
 Elusive Spellfist
+Encase in Ice
+Enduring Scalelord
 Enduring Victory
-Corpseweft
-Deathbringer Regent
+Epic Confrontation
 Fate Forgotten
 Flatten
+Foe-Razer Regent
 Foul Renewal
 Foul-Tongue Shriek
 Gate Smasher
 Glade Watcher
 Glaring Aegis
+Gleam of Authority
 Glint
 Graceblade Artisan
 Great Teacher's Decree
 Guardian Shield-Bearer
+Gudul Lurker
 Gurmag Drowner
 Hand of Silumgar
+Harbinger of the Hunt
+Hardened Berserker
+Haven of the Spirit Dragon
 Herald of Dromoka
+Herdchaser Dragon
+Hidden Dragonslayer
+Icefall Regent
 Illusory Gains
 Impact Tremors
 Inspiring Call
+Ire Shaman
 Keeper of the Lens
 Kolaghan Aspirant
 Kolaghan Forerunners
+Kolaghan Monument
 Kolaghan Skirmisher
 Kolaghan Stormsinger
+Kolaghan's Command
 Learn from the Past
+Lightning Berserker
 Lightwalker
+Living Lore
 Lose Calm
 Lurking Arynx
 Magmatic Chasm
+Marang River Skeleton
 Marsh Hulk
 Minister of Pain
+Mirror Mockery
 Misthoof Kirin
 Monastery Loremaster
 Mystic Meditation
+Myth Realized
+Narset Transcendent
+Necromaster Dragon
 Obscuring AEther
-Ojutai's Breath
+Ojutai Exemplars
 Ojutai Interceptor
+Ojutai Monument
+Ojutai's Breath
+Ojutai's Command
+Ojutai's Summons
 Palace Familiar
 Pinion Feast
+Pitiless Horde
 Press the Advantage
+Pristine Skywise
+Profaner of the Dead
+Profound Journey
 Qal Sisma Behemoth
+Qarsi Deceiver
 Qarsi Sadist
+Radiant Purge
 Rakshasa Gravecaller
 Reckless Imp
 Reduce in Stature
+Rending Volley
 Resupply
-
+Revealing Wind
+Roast
+Ruthless Deathfang
 Sabertooth Outrider
+Salt Road Ambushers
 Salt Road Quartermasters
+Sandcrafter Mage
 Sandsteppe Scavenger
 Sandstorm Charger
+Sarkhan Unbroken
 Sarkhan's Rage
+Sarkhan's Triumph
+Savage Ventmaw
 Scale Blessing
+Scion of Ugin
 Screamreach Brawler
 Secure the Wastes
 Segmented Krotiq
 Seismic Rupture
+Self-Inflicted Wound
 Servant of the Scale
+Shaman of Forgotten Ways
 Shambling Goblin
 Shape the Sands
 Sheltered Aerie
+Shieldhide Dragon
+Shorecrasher Elemental
 Sibsig Icebreakers
 Sidisi's Faithful
+Sidisi, Undead Vizier
 Sight Beyond Sight
 Sight of the Scalelords
+Silkwrap
+Silumgar Assassin
+Silumgar Butcher
+Silumgar Monument
 Silumgar Sorcerer
 Silumgar Spell-Eater
+Silumgar's Command
 Skywise Teachings
+Sprinting Warbrute
+Stampeding Elk Herd
+Stormcrag Elemental
 Stormrider Rig
+Stormwing Dragon
+Stratus Dancer
 Strongarm Monk
 Student of Ojutai
+Sunbringer's Touch
+Sunscorch Regent
+Surge of Righteousness
+Surrak, the Hunt Caller
+Swift Warkite
 Taigam's Strike
 Tail Slash
+Tapestry of the Ages
 Territorial Roc
+Thunderbreak Regent
 Tread Upon
 Twin Bolt
 Ukud Cobra
 Updraft Elemental
 Vandalize
+Vial of Dragonfire
 Virulent Plague
 Void Squall
 Volcanic Rush
 Volcanic Vision
 Vulturous Aven
+Wandering Tombshell
+Warbringer
 Youthful Scholar
 Zephyr Scribe
-Assault Formation
-Arashin Sovereign
-Clone Legion
-
-Deathmist Raptor
-Profaner of the Dead
-Salt Road Ambushers
-Self-Inflicted Wound
-Dromoka's Gift
-Living Lore
-Revealing Wind
-Dragon Hunter
+Zurgo Bellstriker
 
 
 --------------------
@@ -305,7 +302,14 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+DrDev
+elcnesh
+Gos
+Marek14
+Sloth
+Sol
+Swordshine
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
