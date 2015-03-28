@@ -62,16 +62,8 @@ public class DamageDealAi extends DamageAiBase {
         if (sa.getHostCard().getName().equals("Crater's Claws") && ai.hasFerocious()) {
             dmg += 2;
         }
+        
         String logic = sa.getParam("AILogic");
-        
-        // Ugin AI: allow other effects to be evaluated first
-        if (source.getName().equals("Ugin, the Spirit Dragon")) {
-            if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) ||
-                    source.getCounters(CounterType.LOYALTY) > 9) {
-                return false;
-            }
-        }
-        
         if ("DiscardLands".equals(logic)) {
             dmg = 2;
         } else if ("WildHunt".equals(logic)) {
