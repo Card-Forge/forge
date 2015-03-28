@@ -685,11 +685,12 @@ public class AiController {
             
             // save cards with flash for surprise blocking
             if (card.hasKeyword("Flash")
-                    && (player.isUnlimitedHandSize() || player.getCardsIn(ZoneType.Hand).size() <= player.getMaxHandSize())
+                    && (player.isUnlimitedHandSize() || player.getCardsIn(ZoneType.Hand).size() <= player.getMaxHandSize()
+                    	|| game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
                     && player.getManaPool().totalMana() <= 0
                     && (game.getPhaseHandler().isPlayerTurn(player)
                             || game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS))
-                    && (!card.hasETBTrigger() || card.hasSVar("AmbushAI"))
+                    && (!card.hasETBTrigger(true) || card.hasSVar("AmbushAI"))
                     && !ComputerUtil.castPermanentInMain1(player, sa)) {
                 return AiPlayDecision.AnotherTime;
             }
@@ -1070,8 +1071,8 @@ public class AiController {
                 }
             }
 
-            if (card.isCreature() && (card.getNetToughness() <= 0) && !card.hasStartOfKeyword("etbCounter")
-                    && mana.countX() == 0 && !card.hasETBTrigger()
+            if (card.isCreature() && card.getNetToughness() <= 0 && !card.hasStartOfKeyword("etbCounter")
+                    && mana.countX() == 0 && !card.hasETBTrigger(false)
                     && !card.hasETBReplacement()
                     && !card.hasSVar("NoZeroToughnessAI")) {
                 return AiPlayDecision.WouldBecomeZeroToughnessCreature;

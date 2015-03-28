@@ -6254,7 +6254,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         clearBlockedThisTurn();
     }
 
-    public boolean hasETBTrigger() {
+    public boolean hasETBTrigger(final boolean drawbackOnly) {
         for (final Trigger tr : getTriggers()) {
             final Map<String, String> params = tr.getMapParams();
             if (tr.getMode() != TriggerType.ChangesZone) {
@@ -6267,6 +6267,12 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             if (params.containsKey("ValidCard") && !params.get("ValidCard").contains("Self")) {
                 continue;
+            }
+            if (drawbackOnly && params.containsKey("Execute")){
+            	String exec = this.getSVar(params.get("Execute"));
+            	if (exec.contains("AB$")) {
+            		continue;
+            	}
             }
             return true;
         }
