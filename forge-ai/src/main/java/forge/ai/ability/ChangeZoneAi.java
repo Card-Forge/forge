@@ -733,10 +733,26 @@ public class ChangeZoneAi extends SpellAbilityAi {
         CardCollection list = CardLists.getValidCards(game.getCardsIn(origin), tgt.getValidTgts(), ai, source);
         list = CardLists.getTargetableCards(list, sa);
         if (sa.hasParam("AITgts")) {
-            list = CardLists.getValidCards(list, sa.getParam("AITgts"), sa.getActivatingPlayer(), source);
+            list = CardLists.getValidCards(list, sa.getParam("AITgts"), ai, source);
         }
         if (source.isInZone(ZoneType.Hand)) {
             list = CardLists.filter(list, Predicates.not(CardPredicates.nameEquals(source.getName()))); // Don't get the same card back.
+        }
+        System.out.println("isPreferredTarget " + list);
+        if (sa.hasParam("AttachedTo")) {
+        	System.out.println("isPreferredTarget att " + list);
+            list = CardLists.filter(list, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
+                        if (card.isValid(sa.getParam("AttachedTo"), ai, c)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            });
+            System.out.println("isPreferredTarget ok " + list);
         }
 
         if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
