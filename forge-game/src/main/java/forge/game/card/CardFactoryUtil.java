@@ -2953,6 +2953,11 @@ public class CardFactoryUtil {
                 : String.format("You may %s rather than pay %s's mana cost.", abCost.toStringAlt(), card.getName());
         
         altCostSA.setDescription(costDescription);
+        if (params.containsKey("References")) {
+            for (String svar : params.get("References").split(",")) {
+            	altCostSA.setSVar(svar, card.getSVar(svar));
+            }
+        }
         return altCostSA;
     }
 
