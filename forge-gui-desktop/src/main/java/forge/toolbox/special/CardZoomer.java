@@ -59,7 +59,7 @@ public enum CardZoomer {
     private final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
     private JPanel pnlMain;
     private FImagePanel imagePanel;
-    private SkinnedLabel lblFlipcard = new SkinnedLabel();    
+    private SkinnedLabel lblFlipcard = new SkinnedLabel();
 
     // Details about the current card being displayed.
     private CardView thisCard;
@@ -67,13 +67,13 @@ public enum CardZoomer {
 
     // The zoomer is in button mode when it is activated by holding down the
     // middle mouse button or left and right mouse buttons simultaneously.
-    private boolean isButtonMode = false;    
+    private boolean isButtonMode = false;
     private boolean isOpen = false;
     private long lastClosedTime;
 
     // Used to ignore mouse wheel rotation for a short period of time.
     private Timer mouseWheelCoolDownTimer;
-    private boolean isMouseWheelEnabled = false;    
+    private boolean isMouseWheelEnabled = false;
 
     // ctr
     private CardZoomer() {
@@ -201,8 +201,8 @@ public enum CardZoomer {
      * Displays a graphical indicator that shows whether the current card can be flipped or transformed.
      */
     private void setFlipIndicator() {
-        if (thisCard.hasAlternateState()) {
-            imagePanel.setLayout(new MigLayout("insets 0, w 100%!, h 100%!"));        
+        if (thisCard != null && thisCard.hasAlternateState()) {
+            imagePanel.setLayout(new MigLayout("insets 0, w 100%!, h 100%!"));
             imagePanel.add(lblFlipcard, "pos (100% - 100px) 0");
         }
     }
@@ -213,7 +213,7 @@ public enum CardZoomer {
     private void setImage() {
         imagePanel = new FImagePanel();
 
-        BufferedImage xlhqImage = FImageUtil.getImageXlhq(getState());
+        final BufferedImage xlhqImage = FImageUtil.getImageXlhq(getState());
         imagePanel.setImage(xlhqImage == null ? FImageUtil.getImage(getState()) : xlhqImage, getInitialRotation(), AutoSizeImageMode.SOURCE);
 
         pnlMain.removeAll();
@@ -223,7 +223,8 @@ public enum CardZoomer {
     }
 
     private int getInitialRotation() {
-        return (thisCard.isSplitCard() || thisCard.getCurrentState().getType().isPlane() || thisCard.getCurrentState().getType().isPhenomenon() ? 90 : 0);
+        return thisCard == null ? 0 :
+                (thisCard.isSplitCard() || thisCard.getCurrentState().getType().isPlane() || thisCard.getCurrentState().getType().isPhenomenon() ? 90 : 0);
     }   
 
     private void setLayout() {
@@ -237,7 +238,7 @@ public enum CardZoomer {
 
     public void closeZoomer() {
         if (!isOpen) { return; }
-        stopMouseWheelCoolDownTimer();        
+        stopMouseWheelCoolDownTimer();
         isOpen = false;
         SOverlayUtils.hideOverlay();
         lastClosedTime = System.currentTimeMillis();
@@ -248,22 +249,22 @@ public enum CardZoomer {
      * wheel for a short period of time after opening. This will 
      * prevent flip and double side cards from immediately flipping.
      */
-    private void startMouseWheelCoolDownTimer(int millisecsDelay) {        
+    private void startMouseWheelCoolDownTimer(int millisecsDelay) {
         isMouseWheelEnabled = false;
         createMouseWheelCoolDownTimer(millisecsDelay);
         mouseWheelCoolDownTimer.setInitialDelay(millisecsDelay);
-        mouseWheelCoolDownTimer.restart();           
+        mouseWheelCoolDownTimer.restart();
     }
-    
+
     /**
      * Used to ignore mouse wheel rotation for {@code millisecsDelay} milliseconds.
      */
     private void createMouseWheelCoolDownTimer(int millisecsDelay) {
-        if (mouseWheelCoolDownTimer == null) {           
-            mouseWheelCoolDownTimer = new Timer(millisecsDelay, new ActionListener() {                
+        if (mouseWheelCoolDownTimer == null) {
+            mouseWheelCoolDownTimer = new Timer(millisecsDelay, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    isMouseWheelEnabled = true;                
+                    isMouseWheelEnabled = true;
                 }
             });
         }
@@ -272,14 +273,14 @@ public enum CardZoomer {
     private void stopMouseWheelCoolDownTimer() {
         if (mouseWheelCoolDownTimer != null && mouseWheelCoolDownTimer.isRunning()) {
             mouseWheelCoolDownTimer.stop();
-        }        
+        }
     }
 
     /**
      * Toggles between primary and alternate image associated with card if applicable.
      */
     private void toggleCardImage() {
-        if (thisCard.hasAlternateState()) {
+        if (thisCard != null && thisCard.hasAlternateState()) {
             toggleFlipCard();
         }
     }
