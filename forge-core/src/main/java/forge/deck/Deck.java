@@ -62,6 +62,19 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         getOrCreate(DeckSection.Main);
     }
 
+    /**
+     * Copy constructor.
+     * 
+     * @param other
+     *            the {@link Deck} to copy.
+     */
+    public Deck(final Deck other) {
+        super(other.getName());
+        setComment(other.getComment());
+        parts.putAll(other.parts);
+        tags.addAll(other.getTags());
+    }
+
     @Override
     public String getItemType() {
         return "Deck";

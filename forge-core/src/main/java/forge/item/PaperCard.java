@@ -211,6 +211,9 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         ois.defaultReadObject();
 
         final IPaperCard pc = StaticData.instance().getCommonCards().getCard(name, edition, artIndex);
+        if (pc == null) {
+            throw new IOException(String.format("Card %s not found", name));
+        }
         this.rules = pc.getRules();
         this.rarity = pc.getRarity();
     }
