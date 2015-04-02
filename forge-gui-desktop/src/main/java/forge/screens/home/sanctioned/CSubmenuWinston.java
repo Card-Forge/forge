@@ -141,6 +141,13 @@ public enum CSubmenuWinston implements ICDoc {
 
         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
         hostedMatch.startMatch(GameType.Winston, null, starter, human, GuiBase.getInterface().getNewGuiGame());
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                SOverlayUtils.hideOverlay();
+            }
+        });
     }
 
     /** */

@@ -85,6 +85,13 @@ public enum CSubmenuGauntletQuick implements ICDoc {
 
         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
         hostedMatch.startMatch(GameType.Gauntlet, null, starter, human, GuiBase.getInterface().getNewGuiGame());
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                SOverlayUtils.hideOverlay();
+            }
+        });
     }
 
     /* (non-Javadoc)

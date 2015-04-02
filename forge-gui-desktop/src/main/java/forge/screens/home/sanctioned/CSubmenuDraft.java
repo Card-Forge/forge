@@ -153,6 +153,13 @@ public enum CSubmenuDraft implements ICDoc {
 
         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
         hostedMatch.startMatch(GameType.Draft, null, starter, human, GuiBase.getInterface().getNewGuiGame());
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                SOverlayUtils.hideOverlay();
+            }
+        });
     }
 
     /** */
