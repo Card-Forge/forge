@@ -174,6 +174,8 @@ public abstract class GameState {
             else if (categoryName.equals("aicardsinlibrary"))       aiCardTexts.put(ZoneType.Library, categoryValue);
             else if (categoryName.equals("humancardsinexile"))      humanCardTexts.put(ZoneType.Exile, categoryValue);
             else if (categoryName.equals("aicardsinexile"))         aiCardTexts.put(ZoneType.Exile, categoryValue);
+            else if (categoryName.equals("humancardsincommand"))    humanCardTexts.put(ZoneType.Command, categoryValue);
+            else if (categoryName.equals("aicardsincommand"))       aiCardTexts.put(ZoneType.Command, categoryValue);
             else System.out.println("Unknown key: " + categoryName);
         }
     }
