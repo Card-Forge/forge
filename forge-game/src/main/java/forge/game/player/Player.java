@@ -858,6 +858,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             setPoisonCounters(poisonCounters + num, source);
         }
     }
+    public final void removePoisonCounters(final int num, final Card source) {
+        setPoisonCounters(poisonCounters - num, source);
+    }
 
     public final void addChangedKeywords(final String[] addKeywords, final String[] removeKeywords, final Long timestamp) {
         addChangedKeywords(ImmutableList.copyOf(addKeywords), ImmutableList.copyOf(removeKeywords), timestamp);

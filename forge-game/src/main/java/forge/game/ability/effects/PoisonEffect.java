@@ -26,7 +26,11 @@ import java.util.List;
             final TargetRestrictions tgt = sa.getTargetRestrictions();
             for (final Player p : getTargetPlayers(sa)) {
                 if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                    p.addPoisonCounters(amount, sa.getHostCard());
+                    if (amount >= 0) {
+                        p.addPoisonCounters(amount, sa.getHostCard());
+                    } else {
+                        p.removePoisonCounters(-amount, sa.getHostCard());
+                    }
                 }
             }
         }
