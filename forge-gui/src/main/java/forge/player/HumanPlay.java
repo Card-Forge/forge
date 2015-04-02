@@ -93,8 +93,7 @@ public class HumanPlay {
 
             final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa, payment);
             req.playAbility(true, false, false);
-        }
-        else if (payManaCostIfNeeded(controller, p, sa)) {
+        } else if (payManaCostIfNeeded(controller, p, sa)) {
             if (sa.isSpell() && !source.isCopiedSpell()) {
                 sa.setHostCard(p.getGame().getAction().moveToStack(source));
             }

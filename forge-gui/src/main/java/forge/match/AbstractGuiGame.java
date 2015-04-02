@@ -617,11 +617,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public boolean showConfirmDialog(final String message) {
-        return showConfirmDialog(message, null);
-    }
-
-    @Override
     public boolean showConfirmDialog(final String message, final String title) {
         return showConfirmDialog(message, title, true);
     }

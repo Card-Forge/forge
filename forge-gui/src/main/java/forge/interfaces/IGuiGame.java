@@ -64,7 +64,6 @@ public interface IGuiGame {
     void showErrorDialog(String message);
     void showErrorDialog(String message, String title);
 
-    boolean showConfirmDialog(String message);
     boolean showConfirmDialog(String message, String title);
     boolean showConfirmDialog(String message, String title, boolean defaultYes);
     boolean showConfirmDialog(String message, String title, String yesButtonText, String noButtonText);
