@@ -1097,9 +1097,9 @@ public class AiController {
             if (landsWannaPlay != null && !landsWannaPlay.isEmpty() && player.canPlayLand(null)) {
                 Card land = chooseBestLandToPlay(landsWannaPlay);
                 if (ComputerUtil.damageFromETB(player, land) < player.getLife() || !player.canLoseLife()) {
-                    Ability.PLAY_LAND_SURROGATE.setHostCard(land);
+                    game.PLAY_LAND_SURROGATE.setHostCard(land);
                     final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
-                    abilities.add(Ability.PLAY_LAND_SURROGATE);
+                    abilities.add(game.PLAY_LAND_SURROGATE);
                     return abilities;
                 }
             }

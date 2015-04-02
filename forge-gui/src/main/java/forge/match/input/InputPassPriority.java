@@ -23,7 +23,6 @@ import java.util.List;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
-import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -161,7 +160,7 @@ public class InputPassPriority extends InputSyncronizedBase {
         if (sa.isSpell()) {
             return "cast spell";
         }
-        if (sa == Ability.PLAY_LAND_SURROGATE) {
+        if (sa == card.getGame().PLAY_LAND_SURROGATE) {
             return "play land";
         }
         return "activate ability";

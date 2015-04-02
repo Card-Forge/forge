@@ -6427,8 +6427,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         if (getState(CardStateName.Original).getType().isLand() && player.canPlayLand(this)) {
-            Ability.PLAY_LAND_SURROGATE.setHostCard(this);
-            abilities.add(Ability.PLAY_LAND_SURROGATE);
+            game.PLAY_LAND_SURROGATE.setHostCard(this);
+            abilities.add(game.PLAY_LAND_SURROGATE);
         }
 
         return abilities;

@@ -1,5 +1,11 @@
 package forge.player;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -12,14 +18,43 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.ability.effects.FlipCoinEffect;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.cost.*;
+import forge.game.card.CardView;
+import forge.game.card.CounterType;
+import forge.game.cost.Cost;
+import forge.game.cost.CostAddMana;
+import forge.game.cost.CostDamage;
+import forge.game.cost.CostDiscard;
+import forge.game.cost.CostDraw;
+import forge.game.cost.CostExile;
+import forge.game.cost.CostFlipCoin;
+import forge.game.cost.CostGainControl;
+import forge.game.cost.CostGainLife;
+import forge.game.cost.CostMill;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostPartMana;
+import forge.game.cost.CostPartWithList;
+import forge.game.cost.CostPayLife;
+import forge.game.cost.CostPayment;
+import forge.game.cost.CostPutCardToLib;
+import forge.game.cost.CostPutCounter;
+import forge.game.cost.CostRemoveAnyCounter;
+import forge.game.cost.CostRemoveCounter;
+import forge.game.cost.CostReturn;
+import forge.game.cost.CostReveal;
+import forge.game.cost.CostSacrifice;
+import forge.game.cost.CostTapType;
+import forge.game.cost.PaymentDecision;
 import forge.game.mana.ManaCostAdjustment;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
-import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
@@ -30,12 +65,6 @@ import forge.match.input.InputSelectCardsFromList;
 import forge.util.FCollectionView;
 import forge.util.Lang;
 import forge.util.gui.SGuiChoose;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 
 public class HumanPlay {
@@ -54,7 +83,7 @@ public class HumanPlay {
     public final static void playSpellAbility(final PlayerControllerHuman controller, final Player p, SpellAbility sa) {
         FThreads.assertExecutedByEdt(false);
 
-        if (sa == Ability.PLAY_LAND_SURROGATE) {
+        if (sa == controller.getGame().PLAY_LAND_SURROGATE) {
             p.playLand(sa.getHostCard(), false);
             return;
         }

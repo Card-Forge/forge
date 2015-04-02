@@ -215,7 +215,7 @@ public class HostedMatch {
         // It's important to run match in a different thread to allow GUI inputs to be invoked from inside game. 
         // Game is set on pause while gui player takes decisions
         game.getAction().invoke(new Runnable() {
-            @Override public void run() {
+            @Override public final void run() {
                 if (humanCount == 0) {
                     // Create FControlGamePlayback in game thread to allow pausing
                     playbackControl = new FControlGamePlayback(humanControllers.get(0));
@@ -234,6 +234,9 @@ public class HostedMatch {
                     } else {
                         addNextGameDecision(null, NextGameDecision.CONTINUE);
                     }
+                }
+                if (match.isMatchOver()) {
+                    isMatchOver = true;
                 }
             }
         });

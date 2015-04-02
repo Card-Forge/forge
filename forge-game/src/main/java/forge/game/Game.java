@@ -44,6 +44,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardView;
 import forge.game.combat.Combat;
+import forge.game.cost.Cost;
 import forge.game.event.Event;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.phase.Phase;
@@ -107,6 +108,19 @@ public class Game {
     private final GameView view; 
     private final Tracker tracker = new Tracker();
 
+    public final Ability PLAY_LAND_SURROGATE = new Ability(null, (Cost) null) {
+        @Override
+        public boolean canPlay() {
+            return true; //if this ability is added anywhere, it can be assumed that land can be played
+        }
+        @Override
+        public void resolve() {
+            throw new RuntimeException("This ability is intended to indicate \"land to play\" choice only");
+        }
+        @Override
+        public String toUnsuppressedString() { return "Play land"; }
+    };
+
     private final GameEntityCache<Player, PlayerView> playerCache = new GameEntityCache<>();
     public Player getPlayer(PlayerView playerView) {
         return playerCache.get(playerView);
@@ -140,7 +154,7 @@ public class Game {
         rules = rules0;
         match = match0;
 
-        spabCache.put(Ability.PLAY_LAND_SURROGATE.getId(), Ability.PLAY_LAND_SURROGATE);
+        spabCache.put(PLAY_LAND_SURROGATE.getId(), PLAY_LAND_SURROGATE);
 
         int highestTeam = -1;
         for (RegisteredPlayer psc : players0) {

@@ -15,7 +15,6 @@ import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.player.Player;
-import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
@@ -152,7 +151,7 @@ public class GameSimulator {
             }
         }
 
-        if (sa == Ability.PLAY_LAND_SURROGATE) {
+        if (sa == origSa.getHostCard().getGame().PLAY_LAND_SURROGATE) {
             aiPlayer.playLand(sa.getHostCard(), false);
         } else {
             if (debugPrint && !sa.getAllTargetChoices().isEmpty()) {

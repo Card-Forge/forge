@@ -813,6 +813,7 @@ public final class CMatchUI
 
     @Override
     public void afterGameEnd() {
+        Singletons.getView().getLpnDocument().remove(targetingOverlay.getPanel());
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override public void run() {
                 Singletons.getView().getNavigationBar().closeTab(screen);
