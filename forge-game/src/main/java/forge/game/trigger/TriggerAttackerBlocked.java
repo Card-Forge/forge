@@ -17,11 +17,10 @@
  */
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -61,8 +60,8 @@ public class TriggerAttackerBlocked extends Trigger {
         if (this.mapParams.containsKey("ValidBlocker")) {
             boolean valid = false;
             @SuppressWarnings("unchecked")
-            List<Card> list = (List<Card>) runParams2.get("Blockers");
-            for (Card b : list) {
+            final Iterable<Card> list = (Iterable<Card>) runParams2.get("Blockers");
+            for (final Card b : list) {
                 if (matchesValid(b, this.mapParams.get("ValidBlocker").split(","), this.getHostCard())) {
                     valid = true;
                     break;
