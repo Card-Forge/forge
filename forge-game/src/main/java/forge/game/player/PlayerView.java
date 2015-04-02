@@ -186,7 +186,10 @@ public class PlayerView extends GameEntityView {
         return get(TrackableProperty.Keywords);
     }
     public List<String> getDisplayableKeywords() {
-        final List<String> allKws = Lists.newArrayList(getKeywords());
+        final List<String> allKws;
+        synchronized (this) {
+            allKws = Lists.newArrayList(getKeywords());
+        }
         while (allKws.remove("CanSeeOpponentsFaceDownCards")) {
         }
         return allKws;
