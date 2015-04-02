@@ -536,7 +536,7 @@ public class PlayerControllerHuman
             return inp.getResult() ? this.player : this.player.getOpponents().get(0);
         }
         else {
-            final String prompt = String.format("%s, you %s\n\nWho would you like to start this game?", 
+            final String prompt = String.format("%s, you %s\n\nWho would you like to start this game? (Click on the portrait.)", 
                     player.getName(), isFirstGame ? " have won the coin toss." : " lost the last game.");
             final InputSelectEntitiesFromList<Player> input = new InputSelectEntitiesFromList<Player>(this, 1, 1, new FCollection<Player>(game.getPlayersInTurnOrder()));
             input.setMessage(prompt);
