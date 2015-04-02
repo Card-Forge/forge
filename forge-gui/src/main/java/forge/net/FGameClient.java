@@ -104,6 +104,10 @@ public class FGameClient implements IToServer {
         }
     }
 
+    public void close() {
+        channel.close();
+    }
+
     @Override
     public void send(final NetEvent event) {
         System.out.println("Client sent " + event);
@@ -381,6 +385,14 @@ public class FGameClient implements IToServer {
                 }
             }
             super.channelRead(ctx, msg);
+        }
+
+        @Override
+        public void channelInactive(final ChannelHandlerContext ctx) throws Exception {
+            for (final ILobbyListener listener : lobbyListeners) {
+                listener.close();
+            }
+            super.channelInactive(ctx);
         }
     }
 }

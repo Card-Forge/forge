@@ -41,6 +41,7 @@ public abstract class GameLobby {
     private final static int MAX_PLAYERS = 8;
 
     private GameLobbyData data = new GameLobbyData();
+    private GameType currentGameType = GameType.Constructed;
     private int lastArchenemy = 0;
 
     private IUpdateable listener;
@@ -69,10 +70,10 @@ public abstract class GameLobby {
     }
 
     public GameType getGameType() {
-        return data.currentGameMode;
+        return currentGameType;
     }
     public void setGameType(final GameType type) {
-        data.currentGameMode = type;
+        currentGameType = type;
     }
 
     public boolean hasVariant(final GameType variant) {
@@ -90,7 +91,7 @@ public abstract class GameLobby {
     }
     public void applyToSlot(final int index, final UpdateLobbyPlayerEvent event) {
         final LobbySlot slot = getSlot(index);
-        if (slot == null) {
+        if (slot == null || event == null) {
             throw new NullPointerException();
         }
 
@@ -130,10 +131,10 @@ public abstract class GameLobby {
     }
 
     public abstract boolean hasControl();
-    public abstract boolean mayEdit(final int index);
-    public abstract boolean mayControl(final int index);
-    public abstract boolean mayRemove(final int index);
-    protected abstract IGuiGame getGui(final int index);
+    public abstract boolean mayEdit(int index);
+    public abstract boolean mayControl(int index);
+    public abstract boolean mayRemove(int index);
+    protected abstract IGuiGame getGui(int index);
     protected abstract void onGameStarted();
 
     public void addSlot() {
@@ -142,6 +143,9 @@ public abstract class GameLobby {
         addSlot(new LobbySlot(type, null, newIndex, newIndex, false, !allowNetworking, Collections.<AIOption>emptySet()));
     }
     protected final void addSlot(final LobbySlot slot) {
+        if (slot == null) {
+            throw new NullPointerException();
+        }
         if (data.slots.size() >= MAX_PLAYERS) {
             return;
         }
@@ -197,7 +201,7 @@ public abstract class GameLobby {
     }
 
     public void applyVariant(final GameType variant) {
-        data.currentGameMode = variant;
+        setGameType(variant);
         data.appliedVariants.add(variant);
 
         //ensure other necessary variants are unchecked
@@ -231,17 +235,21 @@ public abstract class GameLobby {
     }
 
     public void removeVariant(final GameType variant) {
-        data.appliedVariants.remove(variant);
+        final boolean changed = data.appliedVariants.remove(variant);
+        if (!changed) {
+            return;
+        }
+
         if (data.appliedVariants.isEmpty()) {
             data.appliedVariants.add(GameType.Constructed);
         }
-        if (variant == data.currentGameMode) {
+        if (variant == currentGameType) {
             if (hasVariant(GameType.Commander)) {
-                data.currentGameMode = GameType.Commander;
+                currentGameType = GameType.Commander;
             } else if (hasVariant(GameType.TinyLeaders)) {
-                data.currentGameMode = GameType.TinyLeaders;
+                currentGameType = GameType.TinyLeaders;
             } else {
-                data.currentGameMode = GameType.Constructed;
+                currentGameType = GameType.Constructed;
             }
         }
         updateView(true);
@@ -275,7 +283,7 @@ public abstract class GameLobby {
         }
 
         final List<LobbySlot> activeSlots = Lists.newArrayListWithCapacity(getNumberOfSlots());
-        for (final LobbySlot slot : data.getSlots()) {
+        for (final LobbySlot slot : data.slots) {
             if (slot.getType() != LobbySlotType.OPEN) {
                 activeSlots.add(slot);
             }
@@ -289,6 +297,12 @@ public abstract class GameLobby {
             if (slot.getDeck() == null) {
                 SOptionPane.showMessageDialog(String.format("Please specify a deck for %s", slot.getName()));
                 return;
+            }
+            if (hasVariant(GameType.Commander) || hasVariant(GameType.TinyLeaders)) {
+                if (!slot.getDeck().has(DeckSection.Commander)) {
+                    SOptionPane.showMessageDialog(String.format("%s doesn't have a commander", slot.getName()));
+                    return;
+                }
             }
         }
 
@@ -391,7 +405,7 @@ public abstract class GameLobby {
                             return;
                         }
                     }
-                    schemes = schemePool.toFlatList();
+                    schemes = schemePool == null ? Collections.<PaperCard>emptyList() : schemePool.toFlatList();
                 }
 
                 //Planechase
@@ -404,7 +418,7 @@ public abstract class GameLobby {
                             return;
                         }
                     }
-                    planes = planePool.toFlatList();
+                    planes = planePool == null ? Collections.<PaperCard>emptyList() : planePool.toFlatList();
                 }
 
                 //Vanguard
@@ -441,23 +455,12 @@ public abstract class GameLobby {
     }
 
     public final static class GameLobbyData implements Serializable {
-        private static final long serialVersionUID = -9038854736144187540L;
+        private static final long serialVersionUID = 9184758307999646864L;
 
-        private transient GameType currentGameMode = GameType.Constructed;
         private final Set<GameType> appliedVariants = EnumSet.of(GameType.Constructed);
         private final List<LobbySlot> slots = Lists.newArrayList();
 
-        public GameType getCurrentGameMode() {
-            return currentGameMode;
-        }
-        public void setCurrentGameMode(GameType currentGameMode) {
-            this.currentGameMode = currentGameMode;
-        }
-        public Set<GameType> getAppliedVariants() {
-            return Collections.unmodifiableSet(appliedVariants);
-        }
-        public List<LobbySlot> getSlots() {
-            return Collections.unmodifiableList(slots);
+        public GameLobbyData() {
         }
     }
 }

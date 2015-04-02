@@ -239,7 +239,8 @@ public class VLobby implements IUpdateable {
                     isNewPanel = true;
                 }
 
-                panel.setType(slot.getType());
+                final LobbySlotType type = slot.getType();
+                panel.setType(type);
                 panel.setPlayerName(slot.getName());
                 panel.setAvatar(slot.getAvatarIndex());
                 panel.setTeam(slot.getTeam());
@@ -253,7 +254,7 @@ public class VLobby implements IUpdateable {
 
                 final FDeckChooser deckChooser = getDeckChooser(i);
                 deckChooser.setIsAi(slot.getType() == LobbySlotType.AI);
-                if (fullUpdate) {
+                if (fullUpdate && (type == LobbySlotType.LOCAL || type == LobbySlotType.AI)) {
                     selectDeck(i);
                 }
                 if (isNewPanel) {
@@ -298,7 +299,9 @@ public class VLobby implements IUpdateable {
         }
     }
     private void fireDeckSectionChangeListener(final int index, final DeckSection section, final CardPool cards) {
-        decks[index].putSection(section, cards);
+        final Deck copy = new Deck(decks[index]);
+        copy.putSection(section, cards);
+        decks[index] = copy;
         if (playerChangeListener != null) {
             playerChangeListener.update(index, UpdateLobbyPlayerEvent.deckUpdate(section, cards));
         }
@@ -486,7 +489,7 @@ public class VLobby implements IUpdateable {
     }
 
     private void selectPlanarDeck(final int playerIndex) {
-        if (playerIndex >= activePlayersNum) {
+        if (playerIndex >= activePlayersNum || !hasVariant(GameType.Planechase)) {
             return;
         }
 

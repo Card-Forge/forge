@@ -28,6 +28,7 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
+import forge.assets.FSkinProp;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.DragCell;
@@ -39,6 +40,7 @@ import forge.screens.match.controllers.CField;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
+import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PlayerDetailsPanel;
@@ -50,6 +52,9 @@ import forge.view.arcane.PlayArea;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
 public class VField implements IVDoc<CField> {
+    private final static int LIFE_CRITICAL = 5;
+    private final static int POISON_CRITICAL = 8;
+
     // Fields used with interface IVDoc
     private final CField control;
     private DragCell parentCell;
@@ -57,7 +62,7 @@ public class VField implements IVDoc<CField> {
     private final DragTab tab = new DragTab("Field");
 
     // Other fields
-    private PlayerView player = null;
+    private final PlayerView player;
 
     // Top-level containers
     private final FScrollPane scroller = new FScrollPane(false);
@@ -68,7 +73,8 @@ public class VField implements IVDoc<CField> {
 
     // Avatar area
     private final FLabel lblAvatar = new FLabel.Builder().fontAlign(SwingConstants.CENTER).iconScaleFactor(1.0f).build();
-    private final FLabel lblLife = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).build();
+    private final FLabel lblLife   = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).build();
+    private final FLabel lblPoison = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).icon(FSkin.getImage(FSkinProp.IMG_ZONE_POISON)).iconInBackground().build();
 
     private final PhaseIndicator phaseIndicator = new PhaseIndicator();
 
@@ -100,12 +106,13 @@ public class VField implements IVDoc<CField> {
 
         lblAvatar.setFocusable(false);
         lblLife.setFocusable(false);
+        lblPoison.setFocusable(false);
 
         avatarArea.setOpaque(false);
         avatarArea.setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
         avatarArea.setLayout(new MigLayout("insets 0, gap 0"));
         avatarArea.add(lblAvatar, "w 100%-6px!, h 100%-23px!, wrap, gap 3 3 3 0");
-        avatarArea.add(lblLife, "w 100%!, h 20px!");
+        avatarArea.add(lblLife, "w 100%!, h 20px!, wrap");
 
         // Player area hover effect
         avatarArea.addMouseListener(new MouseAdapter() {
@@ -170,24 +177,12 @@ public class VField implements IVDoc<CField> {
         return this.parentCell;
     }
 
-    public PlayerView getPlayer() {
-        return this.player;
-    }
-
     public PlayArea getTabletop() {
         return this.tabletop;
     }
 
     public JPanel getAvatarArea() {
         return this.avatarArea;
-    }
-
-    public FLabel getLblAvatar() {
-        return this.lblAvatar;
-    }
-
-    public FLabel getLblLife() {
-        return this.lblLife;
     }
 
     public PhaseIndicator getPhaseIndicator() {
@@ -198,23 +193,67 @@ public class VField implements IVDoc<CField> {
         return detailsPanel;
     }
 
-    public boolean isHighlighted() {
+    private boolean isHighlighted() {
         return control.getMatchUI().isHighlighted(player);
+    }
+
+    public void setAvatar(final SkinImage avatar) {
+        lblAvatar.setIcon(avatar);
+        lblAvatar.getResizeTimer().start();
+    }
+
+    public void updateManaPool() {
+        detailsPanel.updateManaPool();
+    }
+    public void updateZones() {
+        detailsPanel.updateZones();
+    }
+
+    private void addLblPoison() {
+        if (lblPoison.isShowing()) {
+            return;
+        }
+        avatarArea.remove(lblLife);
+        avatarArea.add(lblLife, "w 50%!, h 20px!, split 2");
+        avatarArea.add(lblPoison, "w 50%!, h 20px!, wrap");
+    }
+    private void removeLblPoison() {
+        if (!lblPoison.isShowing()) {
+            return;
+        }
+        avatarArea.remove(lblPoison);
+        avatarArea.remove(lblLife);
+        avatarArea.add(lblLife, "w 100%!, h 20px!, wrap");
     }
 
     public void updateDetails() {
         control.getMatchUI().getCPlayers().update();
         detailsPanel.updateDetails();
 
-        this.getLblLife().setText("" + player.getLife());
-        if (player.getLife() > 5) {
-            this.getLblLife().setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        }
-        else {
-            this.getLblLife().setForeground(Color.red);
+        // Update life total
+        final int life = player.getLife();
+        lblLife.setText(String.valueOf(life));
+        if (life > LIFE_CRITICAL) {
+            lblLife.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        } else {
+            lblLife.setForeground(Color.RED);
         }
 
-        boolean highlighted = isHighlighted();
+        // Update poison counters
+        final int poison = player.getPoisonCounters();
+        if (poison > 0) {
+            addLblPoison();
+            lblPoison.setText(String.valueOf(poison));
+            if (poison < POISON_CRITICAL) {
+                lblPoison.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            } else {
+                lblPoison.setForeground(Color.RED);
+            }
+        } else {
+            removeLblPoison();
+        }
+
+        final boolean highlighted = isHighlighted();
         this.avatarArea.setBorder(highlighted ? borderAvatarHighlighted : borderAvatarSimple );
         this.avatarArea.setOpaque(highlighted);
         this.avatarArea.setToolTipText(player.getDetailsHtml());

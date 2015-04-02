@@ -52,6 +52,7 @@ import com.google.common.collect.Maps;
 public final class FServerManager {
     private static FServerManager instance = null;
 
+    private boolean isHosting = false;
     private final EventLoopGroup bossGroup = new NioEventLoopGroup(1);
     private final EventLoopGroup workerGroup = new NioEventLoopGroup();
     private final Map<Channel, RemoteClient> clients = Maps.newTreeMap();
@@ -102,6 +103,7 @@ public final class FServerManager {
                     
                 }
             }).start();
+            isHosting = true;
         } catch (final InterruptedException e) {
             e.printStackTrace();
         }
@@ -110,6 +112,11 @@ public final class FServerManager {
     public void stopServer() {
         bossGroup.shutdownGracefully();
         workerGroup.shutdownGracefully();
+        isHosting = false;
+    }
+
+    public boolean isHosting() {
+        return isHosting;
     }
 
     public void broadcast(final NetEvent event) {

@@ -62,10 +62,11 @@ public final class LobbySlot implements Serializable {
             setAiOptions(data.getAiOptions());
             changed = true;
         }
+        final Deck oldDeck = getDeck();
         if (data.getDeck() != null) {
             setDeck(data.getDeck());
-        } else if (getDeck() != null && data.getSection() != null && data.getCards() != null) {
-            getDeck().putSection(data.getSection(), data.getCards());
+        } else if (oldDeck != null && data.getSection() != null && data.getCards() != null) {
+            oldDeck.putSection(data.getSection(), data.getCards());
         }
         return changed;
     }

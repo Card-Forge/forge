@@ -104,6 +104,7 @@ import forge.toolbox.MouseTriggerEvent;
 import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PhaseLabel;
 import forge.trackable.TrackableCollection;
+import forge.util.FCollection;
 import forge.util.FCollectionView;
 import forge.util.ITriggerEvent;
 import forge.util.gui.SOptionPane;
@@ -260,11 +261,6 @@ public final class CMatchUI
         return FSkin.getAvatars().get(avatarIdx >= 0 ? avatarIdx : defaultIndex);
     }
 
-    private void setAvatar(VField view, SkinImage img) {
-        view.getLblAvatar().setIcon(img);
-        view.getLblAvatar().getResizeTimer().start();
-    }
-
     private void initMatch(final FCollectionView<PlayerView> sortedPlayers, final Iterable<PlayerView> myPlayers) {
         this.sortedPlayers = sortedPlayers;
         this.setLocalPlayers(myPlayers);
@@ -290,8 +286,7 @@ public final class CMatchUI
             commands.add(c);
             myDocs.put(commandDoc, c);
 
-            //setAvatar(f, new ImageIcon(FSkin.getAvatars().get()));
-            setAvatar(f, getPlayerAvatar(p, Integer.parseInt(indices[i > 2 ? 1 : 0])));
+            f.setAvatar(getPlayerAvatar(p, Integer.parseInt(indices[i > 2 ? 1 : 0])));
             f.getLayoutControl().initialize();
             c.getLayoutControl().initialize();
             i++;
@@ -436,7 +431,7 @@ public final class CMatchUI
                 if (vHand != null) {
                     vHand.getLayoutControl().updateHand();
                 }
-                vf.getDetailsPanel().updateZones();
+                vf.updateZones();
                 vf.updateDetails();
                 FloatingCardArea.refresh(owner, zt);
                 break;
@@ -448,7 +443,7 @@ public final class CMatchUI
                 break;
             default:
                 if (vf != null) {
-                    vf.getDetailsPanel().updateZones();
+                    vf.updateZones();
                 }
                 FloatingCardArea.refresh(owner, zt);
                 break;
@@ -460,7 +455,7 @@ public final class CMatchUI
     @Override
     public void updateManaPool(final Iterable<PlayerView> manaPoolUpdate) {
         for (final PlayerView p : manaPoolUpdate) {
-            getFieldViewFor(p).getDetailsPanel().updateManaPool();
+            getFieldViewFor(p).updateManaPool();
         }
 
     }
@@ -795,7 +790,12 @@ public final class CMatchUI
         final GameView gameView = getGameView();
         gameView.getGameLog().addObserver(getCLog());
 
-        initMatch(gameView.getPlayers(), myPlayers);
+        // Sort players
+        FCollectionView<PlayerView> players = gameView.getPlayers();
+        if (players.size() == 2 && myPlayers.size() == 1 && myPlayers.get(0).equals(players.get(1))) {
+            players = new FCollection<PlayerView>(new PlayerView[] { players.get(1), players.get(0) });
+        }
+        initMatch(players, myPlayers);
 
         actuateMatchPreferences();
 

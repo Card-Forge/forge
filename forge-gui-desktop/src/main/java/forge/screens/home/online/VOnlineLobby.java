@@ -6,6 +6,7 @@ import net.miginfocom.swing.MigLayout;
 import forge.deckchooser.DecksComboBoxEvent;
 import forge.deckchooser.FDeckChooser;
 import forge.deckchooser.IDecksComboBoxListener;
+import forge.gui.FNetOverlay;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -13,6 +14,8 @@ import forge.gui.framework.FScreen;
 import forge.gui.framework.IVDoc;
 import forge.gui.framework.IVTopLevelUI;
 import forge.match.GameLobby;
+import forge.net.FGameClient;
+import forge.net.FServerManager;
 import forge.screens.home.VLobby;
 import forge.toolbox.FPanel;
 import forge.util.gui.SOptionPane;
@@ -26,6 +29,7 @@ public enum VOnlineLobby implements IVDoc<COnlineLobby>, IVTopLevelUI {
 
     // General variables
     private VLobby lobby;
+    private FGameClient client;
 
     private VOnlineLobby() {
     }
@@ -39,10 +43,15 @@ public enum VOnlineLobby implements IVDoc<COnlineLobby>, IVTopLevelUI {
         return this.lobby;
     }
 
+    void setClient(final FGameClient client) {
+        this.client = client;
+    }
+
     @Override
     public void populate() {
         final JPanel outerContainer = FView.SINGLETON_INSTANCE.getPnlInsets();
         outerContainer.removeAll();
+
         final FPanel container = new FPanel(new MigLayout("insets 0, gap 0, wrap 1, ax right"));
         outerContainer.add(container);
         lobby.getLblTitle().setText("Online Multiplayer: Lobby");
@@ -106,7 +115,23 @@ public enum VOnlineLobby implements IVDoc<COnlineLobby>, IVTopLevelUI {
 
     @Override
     public boolean onClosing(final FScreen screen) {
-        return SOptionPane.showConfirmDialog("Leave lobby?", "Leave");
+        final FServerManager server = FServerManager.getInstance();
+        if (server.isHosting()) {
+            if (SOptionPane.showConfirmDialog("Leave lobby? Doing so will shut down all connections and stop hosting.", "Leave")) {
+                FServerManager.getInstance().stopServer();
+                return true;
+            }
+        } else {
+            if (client == null || SOptionPane.showConfirmDialog("Leave lobby?", "Leave")) {
+                if (client != null) {
+                    client.close();
+                    client = null;
+                }
+                FNetOverlay.SINGLETON_INSTANCE.setGameClient(null);
+                return true;
+            }
+        }
+        return false;
     }
 
 }

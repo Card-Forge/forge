@@ -8,6 +8,7 @@ import javax.swing.JMenu;
 import forge.GuiBase;
 import forge.Singletons;
 import forge.UiCommand;
+import forge.assets.FSkinProp;
 import forge.gui.FNetOverlay;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
@@ -31,6 +32,7 @@ import forge.net.game.UpdateLobbyPlayerEvent;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.home.VLobby;
 import forge.screens.home.sanctioned.ConstructedGameMenu;
+import forge.util.gui.SOptionPane;
 
 public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
     SINGLETON_INSTANCE;
@@ -64,6 +66,9 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
             @Override public final void message(final String source, final String message) {
                 FNetOverlay.SINGLETON_INSTANCE.addMessage(source, message);
             }
+            @Override public final void close() {
+                // NO-OP, server can't receive close message
+            }
         });
         FNetOverlay.SINGLETON_INSTANCE.setGameClient(new IRemote() {
             @Override public final void send(final NetEvent event) {
@@ -79,6 +84,7 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
             }
         });
 
+        view.populate();
         view.update(true);
 
         Singletons.getControl().setCurrentScreen(FScreen.ONLINE_LOBBY);
@@ -88,6 +94,7 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
     final void join(final String hostname, final int port) {
         final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
         final FGameClient client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), "0", gui);
+        VOnlineLobby.SINGLETON_INSTANCE.setClient(client);
         FNetOverlay.SINGLETON_INSTANCE.setGameClient(client);
         final ClientGameLobby lobby = new ClientGameLobby(); 
         final VLobby view =  VOnlineLobby.SINGLETON_INSTANCE.setLobby(lobby);
@@ -100,6 +107,11 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
                 lobby.setLocalPlayer(slot);
                 lobby.setData(state);
             }
+            @Override public final void close() {
+                SOptionPane.showMessageDialog("Connection to the host was interrupted.", "Error", FSkinProp.ICO_WARNING);
+                VOnlineLobby.SINGLETON_INSTANCE.setClient(null);
+                FScreen.ONLINE_LOBBY.close();
+            }
         });
         view.setPlayerChangeListener(new IPlayerChangeListener() {
             @Override public final void update(final int index, final UpdateLobbyPlayerEvent event) {
@@ -109,7 +121,7 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
         client.connect(hostname, port);
 
         Singletons.getControl().setCurrentScreen(FScreen.ONLINE_LOBBY);
-        FNetOverlay.SINGLETON_INSTANCE.showUp(String.format("Connected to %s:%s", hostname, port));
+        FNetOverlay.SINGLETON_INSTANCE.showUp(String.format("Connected to %s:%d", hostname, port));
     }
 
     @Override

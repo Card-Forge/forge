@@ -1,6 +1,7 @@
 package forge.toolbox.special;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -33,23 +34,23 @@ public class PlayerDetailsPanel extends JPanel {
     private final PlayerView player;
 
     // Info labels
-    private final FLabel lblHand = new DetailLabel(FSkinProp.IMG_ZONE_HAND, "99", "Cards in hand");
-    private final FLabel lblGraveyard = new DetailLabel(FSkinProp.IMG_ZONE_GRAVEYARD, "99", "Cards in graveyard");
-    private final FLabel lblLibrary = new DetailLabel(FSkinProp.IMG_ZONE_LIBRARY, "99", "Cards in library");
-    private final FLabel lblExile = new DetailLabel(FSkinProp.IMG_ZONE_EXILE, "99", "Exiled cards");
-    private final FLabel lblFlashback = new DetailLabel(FSkinProp.IMG_ZONE_FLASHBACK, "99", "Flashback cards");
-    private final FLabel lblPoison = new DetailLabel(FSkinProp.IMG_ZONE_POISON, "99", "Poison counters");
+    private final DetailLabel lblHand = new DetailLabel(FSkinProp.IMG_ZONE_HAND, "Hand (%s/%s)");
+    private final DetailLabel lblGraveyard = new DetailLabel(FSkinProp.IMG_ZONE_GRAVEYARD, "Graveyard (%s)");
+    private final DetailLabel lblLibrary = new DetailLabel(FSkinProp.IMG_ZONE_LIBRARY, "Library (%s)");
+    private final DetailLabel lblExile = new DetailLabel(FSkinProp.IMG_ZONE_EXILE, "Exile (%s)");
+    private final DetailLabel lblFlashback = new DetailLabel(FSkinProp.IMG_ZONE_FLASHBACK, "Flashback cards (%s)");
+    private final DetailLabel lblPoison = new DetailLabel(FSkinProp.IMG_ZONE_POISON, "Poison counters (%s)");
     private final List<Pair<DetailLabel, Byte>> manaLabels = new ArrayList<Pair<DetailLabel, Byte>>();
 
     public PlayerDetailsPanel(final PlayerView player0) {
         player = player0;
 
-        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_B, "99", "Black mana"), MagicColor.BLACK));
-        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_U, "99", "Blue mana"), MagicColor.BLUE));
-        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_G, "99", "Green mana"), MagicColor.GREEN));
-        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_R, "99", "Red mana"), MagicColor.RED));
-        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_W, "99", "White mana"), MagicColor.WHITE));
-        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_COLORLESS, "99", "Colorless mana"), (byte)0));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_W,         "White mana (%s)"),     MagicColor.WHITE));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_U,         "Blue mana (%s)"),      MagicColor.BLUE));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_B,         "Black mana (%s)"),     MagicColor.BLACK));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_R,         "Red mana (%s)"),       MagicColor.RED));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_G,         "Green mana (%s)"),     MagicColor.GREEN));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_COLORLESS, "Colorless mana (%s)"), MagicColor.COLORLESS));
 
         setOpaque(false);
         setLayout(new MigLayout("insets 0, gap 0, wrap"));
@@ -104,73 +105,58 @@ public class PlayerDetailsPanel extends JPanel {
         add(row5, constraintsRow);
         add(row6, constraintsRow);
     }
-    
+
+    public Component getLblLibrary() {
+        return lblLibrary;
+    }
+
     /**
      * Handles observer update of player Zones - hand, graveyard, etc.
      * 
      * @param p0 &emsp; {@link forge.game.player.Player}
      */
     public void updateZones() {
-        getLblHand().setText("" + player.getHandSize());
-        final String handMaxToolTip = player.hasUnlimitedHandSize()
-                ? "no maximum hand size" : String.valueOf(player.getMaxHandSize());
-        getLblHand().setToolTipText("Cards in hand (max: " + handMaxToolTip + ")");
-        getLblGraveyard().setText("" + player.getGraveyardSize());
-        getLblLibrary().setText("" + player.getLibrarySize());
-        getLblFlashback().setText("" + player.getFlashbackSize());
-        getLblExile().setText("" + player.getExileSize());
+        final String handSize = String.valueOf(player.getHandSize()),
+                graveyardSize = String.valueOf(player.getGraveyardSize()),
+                librarySize   = String.valueOf(player.getLibrarySize()),
+                flashbackSize = String.valueOf(player.getFlashbackSize()),
+                exileSize     = String.valueOf(player.getExileSize());
+        lblHand.setText(handSize);
+        lblHand.setToolTip(handSize, player.getMaxHandString());
+        lblGraveyard.setText(graveyardSize);
+        lblGraveyard.setToolTip(graveyardSize);
+        lblLibrary.setText(librarySize);
+        lblLibrary.setToolTip(librarySize);
+        lblFlashback.setText(flashbackSize);
+        lblFlashback.setToolTip(flashbackSize);
+        lblExile.setText(exileSize);
+        lblExile.setToolTip(exileSize);
     }
 
     /**
-     * Handles observer update of non-Zone details - life, poison, etc. Also
-     * updates "players" panel in tabber for this player.
-     * 
-     * @param p0 &emsp; {@link forge.game.player.Player}
+     * Handles observer update of non-Zone details (poison).
      */
     public void updateDetails() {
-        // Poison/life
-        getLblPoison().setText("" + player.getPoisonCounters());
-        if (player.getPoisonCounters() < 8) {
-            getLblPoison().setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        }
-        else {
-            getLblPoison().setForeground(Color.red);
+        // Poison
+        final int poison = player.getPoisonCounters();
+        lblPoison.setText(String.valueOf(poison));
+        lblPoison.setToolTip(String.valueOf(poison));
+        if (poison < 8) {
+            lblPoison.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        } else {
+            lblPoison.setForeground(Color.red);
         }
     }
 
     /**
      * Handles observer update of the mana pool.
-     * 
-     * @param p0 &emsp; {@link forge.game.player.Player}
      */
     public void updateManaPool() {
         for (final Pair<DetailLabel, Byte> label : manaLabels) {
-            label.getKey().setText(Integer.toString(player.getMana(label.getRight())));
+            final String mana = String.valueOf(player.getMana(label.getRight().byteValue()));
+            label.getKey().setText(mana);
+            label.getKey().setToolTip(mana);
         }
-    }
-
-    public FLabel getLblHand() {
-        return lblHand;
-    }
-
-    public FLabel getLblLibrary() {
-        return lblLibrary;
-    }
-
-    public FLabel getLblGraveyard() {
-        return lblGraveyard;
-    }
-
-    public FLabel getLblExile() {
-        return lblExile;
-    }
-
-    public FLabel getLblFlashback() {
-        return lblFlashback;
-    }
-
-    public FLabel getLblPoison() {
-        return lblPoison;
     }
 
     public void setupMouseActions(final ForgeAction handAction, final ForgeAction libraryAction, final ForgeAction exileAction,
@@ -212,7 +198,8 @@ public class PlayerDetailsPanel extends JPanel {
                 @Override
                 public void onLeftClick(final MouseEvent e) {
                     //if shift key down, keep using mana until it runs out or no longer can be put towards the cost
-                    while (manaAction.apply(labelPair.getRight()) && e.isShiftDown()) {}
+                    final Byte mana = labelPair.getRight();
+                    while (manaAction.apply(mana) && e.isShiftDown()) {}
                 }
             });
         }
@@ -220,18 +207,24 @@ public class PlayerDetailsPanel extends JPanel {
 
     @SuppressWarnings("serial")
     private class DetailLabel extends FLabel {
-        private DetailLabel(FSkinProp p0, String s0, String s1) {
-            super(new FLabel.Builder().icon(FSkin.getImage(p0))
+        private final String tooltip;
+        private DetailLabel(final FSkinProp icon, final String tooltip) {
+            super(new FLabel.Builder().icon(FSkin.getImage(icon))
             .opaque(false).fontSize(14).hoverable()
             .fontStyle(Font.BOLD).iconInBackground()
-            .text(s0).tooltip(s1).fontAlign(SwingConstants.RIGHT));
+            .fontAlign(SwingConstants.RIGHT));
 
+            this.tooltip = tooltip;
             setFocusable(false);
         }
 
-        public void setText(String text0) {
+        public void setText(final String text0) {
             super.setText(text0);
             autoSizeFont();
+        }
+
+        public void setToolTip(final String... args) {
+            super.setToolTipText(String.format(tooltip, (Object[]) args));
         }
 
         protected void resetIcon() {
@@ -240,13 +233,13 @@ public class PlayerDetailsPanel extends JPanel {
         }
 
         private void autoSizeFont() {
-            String text = getText();
+            final String text = getText();
             if (StringUtils.isEmpty(text)) { return; }
 
-            Graphics g = getGraphics();
+            final Graphics g = getGraphics();
             if (g == null) { return; }
 
-            int max = getMaxTextWidth();
+            final int max = getMaxTextWidth();
 
             SkinFont font = null;
             for (int fontSize = 14; fontSize > 5; fontSize--) {
