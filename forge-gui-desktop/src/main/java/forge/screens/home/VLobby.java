@@ -170,6 +170,7 @@ public class VLobby implements IUpdateable {
         ////////////////////////////////////////////////////////
         ////////////////////// Deck Panel //////////////////////
 
+        populateVanguardLists();
         for (int i = 0; i < MAX_PLAYERS; i++) {
             buildDeckPanel(i);
         }
@@ -202,7 +203,6 @@ public class VLobby implements IUpdateable {
             });
         }
         populateDeckPanel(GameType.Constructed);
-        populateVanguardLists();
     }
 
     public void update(final boolean fullUpdate) {
@@ -736,6 +736,10 @@ public class VLobby implements IUpdateable {
     / and update the corresponding detail panel. */
     private ListSelectionListener vgdLSListener = new ListSelectionListener() {
         @Override public final void valueChanged(final ListSelectionEvent e) {
+            if (!hasVariant(GameType.Vanguard)) {
+                return;
+            }
+
             final int index = vgdAvatarLists.indexOf(e.getSource());
             if (index >= activePlayersNum) {
                 return;
@@ -754,17 +758,21 @@ public class VLobby implements IUpdateable {
 
                 vanguardAvatar = (PaperCard)selected;
             } else {
-                String sel = (String) selected;
+                final String sel = (String) selected;
                 pp.setVanguardButtonText(sel);
                 cdp.setVisible(false);
 
-                if (sel.contains("Use deck's default avatar") && deck.has(DeckSection.Avatar)) {
-                    vanguardAvatar = deck.get(DeckSection.Avatar).get(0);
-                } else { //Only other string is "Random"
-                    if (playerPanels.get(index).isAi()) { //AI
-                        vanguardAvatar = Aggregates.random(getNonRandomAiAvatars());
-                    } else { //Human
-                        vanguardAvatar = Aggregates.random(getNonRandomHumanAvatars());
+                if (sel == null) {
+                    vanguardAvatar = null;
+                } else {
+                    if (sel.contains("Use deck's default avatar") && deck != null && deck.has(DeckSection.Avatar)) {
+                        vanguardAvatar = deck.get(DeckSection.Avatar).get(0);
+                    } else { //Only other string is "Random"
+                        if (playerPanels.get(index).isAi()) { //AI
+                            vanguardAvatar = Aggregates.random(getNonRandomAiAvatars());
+                        } else { //Human
+                            vanguardAvatar = Aggregates.random(getNonRandomHumanAvatars());
+                        }
                     }
                 }
             }
