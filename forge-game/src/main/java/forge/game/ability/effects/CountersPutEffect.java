@@ -118,6 +118,9 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         continue;
                     }
                 }
+                if (rememberCards) {
+                    card.addRemembered(tgtCard);
+                }
                 final Zone zone = tgtCard.getGame().getZoneOf(tgtCard);
                 if (zone == null || zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack)) {
                     tgtCard.addCounter(counterType, counterAmount, true);
@@ -125,9 +128,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         final int value = tgtCard.getTotalCountersToAdd();
                         tgtCard.addCountersAddedBy(card, counterType, value);
                     }
-                    if (rememberCards) {
-                        card.addRemembered(tgtCard);
-                    }
+
                     if (sa.hasParam("Evolve")) {
                         final HashMap<String, Object> runParams = new HashMap<String, Object>();
                         runParams.put("Card", tgtCard);
