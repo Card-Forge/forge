@@ -92,6 +92,8 @@ public class HumanPlaySpellAbility {
             ability.setHostCard(game.getAction().moveToStack(c));
         }
 
+        ability.resetPaidHash();
+
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
         game.getStack().freezeStack();
 

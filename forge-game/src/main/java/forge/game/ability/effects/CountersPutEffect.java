@@ -86,6 +86,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
         final boolean etbcounter = sa.hasParam("ETB");
         final boolean remember = sa.hasParam("RememberCounters");
+        final boolean rememberCards = sa.hasParam("RememberCards");
         int counterAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
         final int max = sa.hasParam("MaxFromEffect") ? Integer.parseInt(sa.getParam("MaxFromEffect")) : -1;
 
@@ -123,6 +124,9 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     if (remember) {
                         final int value = tgtCard.getTotalCountersToAdd();
                         tgtCard.addCountersAddedBy(card, counterType, value);
+                    }
+                    if (rememberCards) {
+                        card.addRemembered(tgtCard);
                     }
                     if (sa.hasParam("Evolve")) {
                         final HashMap<String, Object> runParams = new HashMap<String, Object>();
