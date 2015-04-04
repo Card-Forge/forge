@@ -6403,27 +6403,28 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public List<SpellAbility> getAllPossibleAbilities(final Player player, final boolean removeUnplayable) {
         // this can only be called by the Human
-        final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
+        final List<SpellAbility> abilities = Lists.newArrayList();
         for (SpellAbility sa : getSpellAbilities()) {
             //add alternative costs as additional spell abilities
             abilities.add(sa);
             abilities.addAll(GameActionUtil.getAlternativeCosts(sa, player));
         }
-        if (isFaceDown() && isInZone(ZoneType.Exile) && mayPlay(player) != null) {
+        final CardPlayOption playOption = mayPlay(player);
+        if (isFaceDown() && isInZone(ZoneType.Exile) && playOption != null) {
             for (final SpellAbility sa : getState(CardStateName.Original).getSpellAbilities()) {
-                abilities.add(sa);
+                abilities.addAll(GameActionUtil.getAlternativeCosts(sa, player));
             }
         }
 
-        for (int i = abilities.size() - 1; i >= 0; i--) {
-            SpellAbility sa = abilities.get(i);
+        final Collection<SpellAbility> toRemove = Lists.newArrayListWithCapacity(abilities.size());
+        for (final SpellAbility sa : abilities) {
             sa.setActivatingPlayer(player);
-            if (removeUnplayable && !sa.canPlay()) {
-                abilities.remove(i);
+            if ((removeUnplayable && !sa.canPlay()) || !sa.isPossible()) {
+                toRemove.add(sa);
             }
-            else if (!sa.isPossible()) {
-                abilities.remove(i);
-            }
+        }
+        for (final SpellAbility sa : toRemove) {
+            abilities.remove(sa);
         }
 
         if (getState(CardStateName.Original).getType().isLand() && player.canPlayLand(this)) {

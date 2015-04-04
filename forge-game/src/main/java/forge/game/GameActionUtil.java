@@ -31,6 +31,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPlayOption;
 import forge.game.card.CardPredicates;
+import forge.game.card.CardPlayOption.PayManaCost;
 import forge.game.cost.Cost;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
@@ -177,16 +178,27 @@ public final class GameActionUtil {
 
         final Card source = sa.getHostCard();
         final CardPlayOption playOption = source.mayPlay(activator);
-        if (sa.isSpell() && playOption != null && playOption.isWithoutManaCost()) {
-            final SpellAbility newSA = sa.copy();
-            final SpellAbilityRestriction sar = new SpellAbilityRestriction();
-            sar.setVariables(sa.getRestrictions());
-            sar.setZone(null);
-            newSA.setRestrictions(sar);
-            newSA.setBasicSpell(false);
-            newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
-            newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
-            alternatives.add(newSA);
+        if (sa.isSpell() && playOption != null) {
+            final PayManaCost payMana = playOption.getPayManaCost();
+            if (payMana == PayManaCost.YES || payMana == PayManaCost.MAYBE) {
+                final SpellAbility newSA = sa.copy();
+                final SpellAbilityRestriction sar = new SpellAbilityRestriction();
+                sar.setVariables(sa.getRestrictions());
+                sar.setZone(null);
+                newSA.setRestrictions(sar);
+                alternatives.add(newSA); 
+            }
+            if (payMana == PayManaCost.NO || payMana == PayManaCost.MAYBE) {
+                final SpellAbility newSA = sa.copy();
+                final SpellAbilityRestriction sar = new SpellAbilityRestriction();
+                sar.setVariables(sa.getRestrictions());
+                sar.setZone(null);
+                newSA.setRestrictions(sar);
+                newSA.setBasicSpell(false);
+                newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
+                newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
+                alternatives.add(newSA); 
+            }
         }
 
         for (final String keyword : source.getKeywords()) {
