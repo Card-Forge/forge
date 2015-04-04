@@ -81,16 +81,15 @@ public class GauntletIO {
         GZIPInputStream zin = null;
         try {
             zin = new GZIPInputStream(new FileInputStream(xmlSaveFile));
-            InputStreamReader reader = new InputStreamReader(zin);
+            final InputStreamReader reader = new InputStreamReader(zin);
 
-            GauntletData data = (GauntletData)GauntletIO.getSerializer(true).fromXML(reader);
+            final GauntletData data = (GauntletData)GauntletIO.getSerializer(true).fromXML(reader);
 
-            String filename = xmlSaveFile.getName();
+            final String filename = xmlSaveFile.getName();
             data.setName(filename.substring(0, filename.length() - SUFFIX_DATA.length()));
-            
             return data;
-        } catch (final Exception ex) {
-            throw new RuntimeException(ex);
+        } catch (final IOException e) {
+            throw new RuntimeException(e);
         } finally {
             if (null != zin) {
                 try { zin.close(); }
