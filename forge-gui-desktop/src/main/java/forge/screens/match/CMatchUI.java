@@ -792,7 +792,7 @@ public final class CMatchUI
 
         // Sort players
         FCollectionView<PlayerView> players = gameView.getPlayers();
-        if (players.size() == 2 && myPlayers.size() == 1 && myPlayers.get(0).equals(players.get(1))) {
+        if (players.size() == 2 && myPlayers != null && myPlayers.size() == 1 && myPlayers.get(0).equals(players.get(1))) {
             players = new FCollection<PlayerView>(new PlayerView[] { players.get(1), players.get(0) });
         }
         initMatch(players, myPlayers);
