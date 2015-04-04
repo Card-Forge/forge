@@ -68,6 +68,7 @@ public class CField implements ICDoc {
         final ZoneAction exileAction     = new ZoneAction(matchUI, player, ZoneType.Exile,     MatchConstants.HUMANEXILED);
         final ZoneAction graveAction     = new ZoneAction(matchUI, player, ZoneType.Graveyard, MatchConstants.HUMANGRAVEYARD);
         final ZoneAction flashBackAction = new ZoneAction(matchUI, player, ZoneType.Flashback, MatchConstants.HUMANFLASHBACK);
+        final ZoneAction commandAction   = new ZoneAction(matchUI, player, ZoneType.Command,   MatchConstants.HUMANCOMMAND);
 
         final Function<Byte, Boolean> manaAction = new Function<Byte, Boolean>() {
             public Boolean apply(Byte colorCode) {
@@ -78,7 +79,7 @@ public class CField implements ICDoc {
             }
         };
 
-        view.getDetailsPanel().setupMouseActions(handAction, libraryAction, exileAction, graveAction, flashBackAction, manaAction);
+        view.getDetailsPanel().setupMouseActions(handAction, libraryAction, exileAction, graveAction, flashBackAction, commandAction, manaAction);
     }
 
     public final CMatchUI getMatchUI() {

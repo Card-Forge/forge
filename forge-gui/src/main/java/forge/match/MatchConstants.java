@@ -4,6 +4,7 @@ public enum MatchConstants {
     ALWAYSACCEPT  ("Always accept this trigger"),
     ALWAYSDECLINE ("Always decline this trigger"),
     ALWAYSASK     ("Always ask"),
+    HUMANCOMMAND  ("Player's Command zone", "Command: ", "Player - View Command"),
     HUMANEXILED   ("Player's Exile", "Exile:", "Player - View Exile"),
     HUMANFLASHBACK("Play card with Flashback", "Flashback:", "Player - View Cards with Flashback"),
     HUMANGRAVEYARD("Player's Graveyard", "Graveyard:", "Player - View Graveyard"),

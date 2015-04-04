@@ -1,6 +1,5 @@
 package forge.toolbox.special;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -39,7 +38,7 @@ public class PlayerDetailsPanel extends JPanel {
     private final DetailLabel lblLibrary = new DetailLabel(FSkinProp.IMG_ZONE_LIBRARY, "Library (%s)");
     private final DetailLabel lblExile = new DetailLabel(FSkinProp.IMG_ZONE_EXILE, "Exile (%s)");
     private final DetailLabel lblFlashback = new DetailLabel(FSkinProp.IMG_ZONE_FLASHBACK, "Flashback cards (%s)");
-    private final DetailLabel lblPoison = new DetailLabel(FSkinProp.IMG_ZONE_POISON, "Poison counters (%s)");
+    private final DetailLabel lblCommand = new DetailLabel(FSkinProp.IMG_PLANESWALKER, "Command zone (%s)");
     private final List<Pair<DetailLabel, Byte>> manaLabels = new ArrayList<Pair<DetailLabel, Byte>>();
 
     public PlayerDetailsPanel(final PlayerView player0) {
@@ -76,7 +75,7 @@ public class PlayerDetailsPanel extends JPanel {
         row5.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         row6.setOpaque(false);
 
-        // Hand, library, graveyard, exile, flashback, poison labels
+        // Hand, library, graveyard, exile, flashback, command
         final String constraintsCell = "w 50%-4px!, h 100%!, gapleft 2px, gapright 2px";
 
         row1.add(lblHand, constraintsCell);
@@ -86,7 +85,7 @@ public class PlayerDetailsPanel extends JPanel {
         row2.add(lblExile, constraintsCell);
 
         row3.add(lblFlashback, constraintsCell);
-        row3.add(lblPoison, constraintsCell);
+        row3.add(lblCommand, constraintsCell);
 
         row4.add(manaLabels.get(0).getLeft(), constraintsCell);
         row4.add(manaLabels.get(1).getLeft(), constraintsCell);
@@ -120,7 +119,8 @@ public class PlayerDetailsPanel extends JPanel {
                 graveyardSize = String.valueOf(player.getGraveyardSize()),
                 librarySize   = String.valueOf(player.getLibrarySize()),
                 flashbackSize = String.valueOf(player.getFlashbackSize()),
-                exileSize     = String.valueOf(player.getExileSize());
+                exileSize     = String.valueOf(player.getExileSize()),
+                commandSize   = String.valueOf(player.getCommandSize());
         lblHand.setText(handSize);
         lblHand.setToolTip(handSize, player.getMaxHandString());
         lblGraveyard.setText(graveyardSize);
@@ -131,21 +131,8 @@ public class PlayerDetailsPanel extends JPanel {
         lblFlashback.setToolTip(flashbackSize);
         lblExile.setText(exileSize);
         lblExile.setToolTip(exileSize);
-    }
-
-    /**
-     * Handles observer update of non-Zone details (poison).
-     */
-    public void updateDetails() {
-        // Poison
-        final int poison = player.getPoisonCounters();
-        lblPoison.setText(String.valueOf(poison));
-        lblPoison.setToolTip(String.valueOf(poison));
-        if (poison < 8) {
-            lblPoison.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        } else {
-            lblPoison.setForeground(Color.red);
-        }
+        lblCommand.setText(commandSize);
+        lblCommand.setToolTip(commandSize);
     }
 
     /**
@@ -160,7 +147,8 @@ public class PlayerDetailsPanel extends JPanel {
     }
 
     public void setupMouseActions(final ForgeAction handAction, final ForgeAction libraryAction, final ForgeAction exileAction,
-                                  final ForgeAction graveAction, final ForgeAction flashBackAction, final Function<Byte, Boolean> manaAction) {
+                                  final ForgeAction graveAction, final ForgeAction flashBackAction, final ForgeAction commandAction,
+                                  final Function<Byte, Boolean> manaAction) {
         // Detail label listeners
         lblGraveyard.addMouseListener(new FMouseAdapter() {
             @Override
@@ -190,6 +178,12 @@ public class PlayerDetailsPanel extends JPanel {
             @Override
             public void onLeftClick(final MouseEvent e) {
                 flashBackAction.actionPerformed(null);
+            }
+        });
+        lblCommand.addMouseListener(new FMouseAdapter() {
+            @Override
+            public void onLeftClick(final MouseEvent e) {
+                commandAction.actionPerformed(null);
             }
         });
 
