@@ -93,7 +93,6 @@ public class CustomLimited extends DeckBase {
      * @return the custom limited
      */
     public static CustomLimited parse(final List<String> dfData, final IStorage<Deck> cubes) {
-
         final FileSection data = FileSection.parse(dfData, ":");
 
         List<Pair<String, Integer>> slots = new ArrayList<Pair<String,Integer>>();
@@ -116,8 +115,6 @@ public class CustomLimited extends DeckBase {
 
         return cd;
     }
-
-
 
     /**
      * Gets the num packs.
@@ -176,5 +173,10 @@ public class CustomLimited extends DeckBase {
 
     public boolean isSingleton() {
         return singleton;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return cardPool.isEmpty();
     }
 }

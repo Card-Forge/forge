@@ -9,4 +9,6 @@ public interface IComboBox<E> {
     void setSelectedIndex(int index);
     void addItem(E item);
     void removeAllItems();
+    int getSelectedIndex();
+    E getSelectedItem();
 }

@@ -94,6 +94,12 @@ public class FComboBox<E> extends SkinnedComboBox<E> implements IComboBox<E> {
         return maxWidth + 28; //leave room for arrow and padding
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public E getSelectedItem() {
+        return (E)super.getSelectedItem();
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

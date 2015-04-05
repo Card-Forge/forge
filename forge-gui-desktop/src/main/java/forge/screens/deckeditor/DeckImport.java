@@ -19,31 +19,20 @@ package forge.screens.deckeditor;
 
 import forge.deck.Deck;
 import forge.deck.DeckBase;
+import forge.deck.DeckImportController;
 import forge.deck.DeckRecognizer;
 import forge.deck.DeckRecognizer.TokenType;
-import forge.deck.DeckSection;
 import forge.item.InventoryItem;
-import forge.item.PaperCard;
-import forge.model.FModel;
 import forge.screens.deckeditor.controllers.ACEditorBase;
 import forge.toolbox.*;
 import forge.view.FDialog;
 
-import org.apache.commons.lang3.StringUtils;
-
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Element;
-import javax.swing.text.ElementIterator;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import java.text.DateFormatSymbols;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -94,18 +83,13 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     private final FComboBox<String> monthDropdown = new FComboBox<String>(); //don't need wrappers since skin can't change while this dialog is open
     private final FComboBox<Integer> yearDropdown = new FComboBox<Integer>();
 
-    /** The tokens. */
-    private final List<DeckRecognizer.Token> tokens = new ArrayList<DeckRecognizer.Token>();
-
+    private final DeckImportController controller;
     private final ACEditorBase<TItem, TModel> host;
 
-    /**
-     * Instantiates a new deck import.
-     * 
-     * @param g
-     *            the g
-     */
+
     public DeckImport(final ACEditorBase<TItem, TModel> g, boolean allowCardsFromAllSets) {
+        this.controller = new DeckImportController(!g.getDeckController().isEmpty(),
+                newEditionCheck, dateTimeCheck, onlyCoreExpCheck, monthDropdown, yearDropdown);
         this.host = g;
 
         final int wWidth = 700;
@@ -130,11 +114,10 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
 
         this.add(monthDropdown, "cell 0 3, w 20%, ax left, split 2, pad 0 4 0 0");
         this.add(yearDropdown, "w 15%");
-        fillDateDropdowns();
 
         this.onlyCoreExpCheck.setSelected(!allowCardsFromAllSets);
         this.add(this.onlyCoreExpCheck, "cell 0 4, w 50%, ax c");
-        
+
         this.add(this.scrollOutput, "cell 1 0, w 50%, growy, pushy");
         this.add(this.summaryMain, "cell 1 1, label");
         this.add(this.summarySide, "cell 1 2, label");
@@ -153,11 +136,9 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             @SuppressWarnings("unchecked")
             @Override
             public void actionPerformed(final ActionEvent e) {
-                final String warning = "This will replace contents of your currently open deck with whatever you are importing. Proceed?";
-                if (!FOptionPane.showConfirmDialog(warning, "Replacing old deck")) {
-                    return;
-                }
-                final Deck toSet = DeckImport.this.buildDeck();
+                final Deck toSet = controller.accept();
+                if (toSet == null) { return; }
+
                 DeckImport.this.host.getDeckController().setModel((TModel) toSet);
                 DeckImport.this.processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
             }
@@ -188,63 +169,54 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     }
 
     /**
-     * TODO: Write javadoc for this method.
+     * The Class OnChangeTextUpdate.
      */
-    private void fillDateDropdowns() {
-        DateFormatSymbols dfs = new DateFormatSymbols();
-        monthDropdown.removeAllItems();
-        String[] months = dfs.getMonths();
-        for(String monthName : months)
-            if(!StringUtils.isBlank(monthName))
-                monthDropdown.addItem(monthName);
-        int yearNow = Calendar.getInstance().get(Calendar.YEAR);
-        for(int i = yearNow; i >= 1993; i--)
-            yearDropdown.addItem(Integer.valueOf(i));
+    protected class OnChangeTextUpdate implements DocumentListener {
+        private void onChange() {
+            parseAndDisplay();
+        }
+
+        @Override
+        public final void insertUpdate(final DocumentEvent e) {
+            this.onChange();
+        }
+
+        @Override
+        public final void removeUpdate(final DocumentEvent e) {
+            this.onChange();
+        }
+
+        @Override
+        public void changedUpdate(final DocumentEvent e) {
+        } // Happend only on ENTER pressed
     }
 
-    private void readInput() {
-        this.tokens.clear();
-        final ElementIterator it = new ElementIterator(this.txtInput.getDocument().getDefaultRootElement());
-        Element e;
-
-        DeckRecognizer recognizer = new DeckRecognizer(newEditionCheck.isSelected(),  onlyCoreExpCheck.isSelected(), FModel.getMagicDb().getCommonCards());
-        if (dateTimeCheck.isSelected()) {
-            recognizer.setDateConstraint(monthDropdown.getSelectedIndex(), (Integer)yearDropdown.getSelectedItem());
-        }
-        while ((e = it.next()) != null) {
-            if (!e.isLeaf()) {
-                continue;
-            }
-            final int rangeStart = e.getStartOffset();
-            final int rangeEnd = e.getEndOffset();
-            try {
-                final String line = this.txtInput.getText(rangeStart, rangeEnd - rangeStart);
-                this.tokens.add(recognizer.recognizeLine(line));
-            }
-            catch (final BadLocationException ex) {
-            }
-        }
+    private void parseAndDisplay() {
+        List<DeckRecognizer.Token> tokens = controller.parseInput(txtInput.getText());
+        displayTokens(tokens);
+        updateSummaries(tokens);
     }
 
-    private void displayTokens() {
-        if(this.tokens.isEmpty())
-            this.htmlOutput.setText(HTML_WELCOME_TEXT);
+    private void displayTokens(List<DeckRecognizer.Token> tokens) {
+        if (tokens.isEmpty()) {
+            htmlOutput.setText(HTML_WELCOME_TEXT);
+        }
         else {
             final StringBuilder sbOut = new StringBuilder("<html>");
             sbOut.append(DeckImport.STYLESHEET);
-            for (final DeckRecognizer.Token t : this.tokens) {
-                sbOut.append(this.makeHtmlViewOfToken(t));
+            for (final DeckRecognizer.Token t : tokens) {
+                sbOut.append(makeHtmlViewOfToken(t));
             }
             sbOut.append("</html>");
-            this.htmlOutput.setText(sbOut.toString());
+            htmlOutput.setText(sbOut.toString());
         }
     }
 
-    private void updateSummaries() {
+    private void updateSummaries(List<DeckRecognizer.Token> tokens) {
         final int[] cardsOk = new int[2];
         final int[] cardsUnknown = new int[2];
         int idx = 0;
-        for (final DeckRecognizer.Token t : this.tokens) {
+        for (final DeckRecognizer.Token t : tokens) {
             if (t.getType() == TokenType.KnownCard) {
                 cardsOk[idx] += t.getNumber();
             }
@@ -255,81 +227,9 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
                 idx = 1;
             }
         }
-        this.summaryMain.setText(String.format("Main: %d cards recognized, %d unknown cards", cardsOk[0], cardsUnknown[0]));
-        this.summarySide.setText(String.format("Sideboard: %d cards recognized, %d unknown cards", cardsOk[1], cardsUnknown[1]));
-        this.cmdAccept.setEnabled(cardsOk[0] > 0);
-    }
-
-    private Deck buildDeck() {
-        final Deck result = new Deck();
-        boolean isMain = true;
-        for (final DeckRecognizer.Token t : this.tokens) {
-            final DeckRecognizer.TokenType type = t.getType();
-            if ((type == DeckRecognizer.TokenType.SectionName) && t.getText().toLowerCase().contains("side")) {
-                isMain = false;
-            }
-            if (type != DeckRecognizer.TokenType.KnownCard) {
-                continue;
-            }
-            final PaperCard crd = t.getCard();
-            if (isMain) {
-                result.getMain().add(crd, t.getNumber());
-            }
-            else {
-                result.getOrCreate(DeckSection.Sideboard).add(crd, t.getNumber());
-            }
-        }
-        return result;
-    }
-
-    protected void parseAndDisplay() {
-        readInput();
-        displayTokens();
-        updateSummaries();
-    }
-
-    /**
-     * The Class OnChangeTextUpdate.
-     */
-    protected class OnChangeTextUpdate implements DocumentListener {
-        private void onChange() {
-            DeckImport.this.parseAndDisplay();
-        }
-
-        /*
-         * (non-Javadoc)
-         * 
-         * @see
-         * javax.swing.event.DocumentListener#insertUpdate(javax.swing.event
-         * .DocumentEvent)
-         */
-        @Override
-        public final void insertUpdate(final DocumentEvent e) {
-            this.onChange();
-        }
-
-        /*
-         * (non-Javadoc)
-         * 
-         * @see
-         * javax.swing.event.DocumentListener#removeUpdate(javax.swing.event
-         * .DocumentEvent)
-         */
-        @Override
-        public final void removeUpdate(final DocumentEvent e) {
-            this.onChange();
-        }
-
-        /*
-         * (non-Javadoc)
-         * 
-         * @see
-         * javax.swing.event.DocumentListener#changedUpdate(javax.swing.event
-         * .DocumentEvent)
-         */
-        @Override
-        public void changedUpdate(final DocumentEvent e) {
-        } // Happend only on ENTER pressed
+        summaryMain.setText(String.format("Main: %d cards recognized, %d unknown cards", cardsOk[0], cardsUnknown[0]));
+        summarySide.setText(String.format("Sideboard: %d cards recognized, %d unknown cards", cardsOk[1], cardsUnknown[1]));
+        cmdAccept.setEnabled(cardsOk[0] > 0);
     }
 
     private String makeHtmlViewOfToken(final DeckRecognizer.Token token) {
@@ -345,9 +245,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         case Comment:
             return String.format("<div class='comment'>%s</div>", token.getText());
         default:
-            break;
+            return "";
         }
-        return "";
     }
-
 }

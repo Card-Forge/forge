@@ -1254,6 +1254,7 @@ forge-gui-mobile/src/forge/card/GameEntityPicker.java -text
 forge-gui-mobile/src/forge/deck/AddBasicLandsDialog.java -text
 forge-gui-mobile/src/forge/deck/FDeckChooser.java -text
 forge-gui-mobile/src/forge/deck/FDeckEditor.java -text
+forge-gui-mobile/src/forge/deck/FDeckImportDialog.java -text
 forge-gui-mobile/src/forge/deck/FDeckViewer.java -text
 forge-gui-mobile/src/forge/deck/FSideboardDialog.java -text
 forge-gui-mobile/src/forge/deck/FVanguardChooser.java -text
@@ -17594,6 +17595,7 @@ forge-gui/src/main/java/forge/control/WatchLocalGame.java -text
 forge-gui/src/main/java/forge/control/package-info.java -text
 forge-gui/src/main/java/forge/deck/ColorDeckGenerator.java -text
 forge-gui/src/main/java/forge/deck/DeckGeneratorTheme.java -text
+forge-gui/src/main/java/forge/deck/DeckImportController.java -text
 forge-gui/src/main/java/forge/deck/DeckProxy.java -text
 forge-gui/src/main/java/forge/deck/DeckType.java -text
 forge-gui/src/main/java/forge/deck/DeckgenUtil.java -text

@@ -306,6 +306,27 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                 setSelectedPage(getMainDeckPage()); //select main deck page if needed so main deck if visible below dialog
                             }
                         }));
+                        if (!isLimitedEditor()) {
+                            addItem(new FMenuItem("Import Deck", FSkinImage.OPEN, new FEventHandler() {
+                                @Override
+                                public void handleEvent(FEvent e) {
+                                    FDeckImportDialog dialog = new FDeckImportDialog(deck.isEmpty(), new Callback<Deck>() {
+                                        @Override
+                                        public void run(Deck importedDeck) {
+                                            getMainDeckPage().setCards(importedDeck.getMain());
+                                            if (getSideboardPage() != null) {
+                                                getSideboardPage().setCards(importedDeck.getOrCreate(DeckSection.Sideboard));
+                                            }
+                                            if (getCommanderPage() != null) {
+                                                getCommanderPage().setCards(importedDeck.getOrCreate(DeckSection.Commander));
+                                            }
+                                        }
+                                    });
+                                    dialog.show();
+                                    setSelectedPage(getMainDeckPage()); //select main deck page if needed so main deck if visible below dialog
+                                }
+                            }));
+                        }
                         if (allowRename()) {
                             addItem(new FMenuItem("Rename Deck", FSkinImage.EDIT, new FEventHandler() {
                                 @Override

@@ -319,7 +319,6 @@ public enum CSubmenuPreferences implements ICDoc {
 
     private <E> void addComboBoxListener(final FComboBox<E> comboBox, final ForgePreferences.FPref setting) {
         comboBox.addItemListener(new ItemListener() {
-            @SuppressWarnings("unchecked")
             @Override
             public void itemStateChanged(final ItemEvent e) {
                 E selectedType = (E) comboBox.getSelectedItem();

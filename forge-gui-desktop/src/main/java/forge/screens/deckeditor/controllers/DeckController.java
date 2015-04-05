@@ -72,6 +72,10 @@ public class DeckController<T extends DeckBase> {
         return this.modelPath;
     }
 
+    public boolean isEmpty() {
+        return model == null || model.isEmpty();
+    }
+
     /**
      * Sets the model.
      *

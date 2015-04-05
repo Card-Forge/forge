@@ -146,5 +146,10 @@ public class DeckGroup extends DeckBase {
         public Deck apply(DeckGroup arg1) {
             return arg1.getHumanDeck();
         }
-    };    
+    };
+
+    @Override
+    public boolean isEmpty() {
+        return humanDeck == null || humanDeck.isEmpty();
+    }    
 }
