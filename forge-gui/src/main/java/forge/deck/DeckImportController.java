@@ -64,7 +64,7 @@ public class DeckImportController {
         if (tokens.isEmpty()) { return null; }
 
         if (replacingDeck) {
-            final String warning = "This will replace contents of the current deck with whatever you are importing.\n\nProceed?";
+            final String warning = "This will replace the contents of your current deck with these cards.\n\nProceed?";
             if (!SOptionPane.showConfirmDialog(warning, "Replace Current Deck", "Replace", "Cancel")) {
                 return null;
             }

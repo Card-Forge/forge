@@ -307,10 +307,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             }
                         }));
                         if (!isLimitedEditor()) {
-                            addItem(new FMenuItem("Import Deck", FSkinImage.OPEN, new FEventHandler() {
+                            addItem(new FMenuItem("Import from Clipboard", FSkinImage.OPEN, new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
-                                    FDeckImportDialog dialog = new FDeckImportDialog(deck.isEmpty(), new Callback<Deck>() {
+                                    FDeckImportDialog dialog = new FDeckImportDialog(!deck.isEmpty(), new Callback<Deck>() {
                                         @Override
                                         public void run(Deck importedDeck) {
                                             getMainDeckPage().setCards(importedDeck.getMain());
