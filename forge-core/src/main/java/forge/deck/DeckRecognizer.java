@@ -38,25 +38,14 @@ import java.util.regex.Pattern;
  * 
  */
 public class DeckRecognizer {
-
     /**
      * The Enum TokenType.
      */
     public enum TokenType {
-
-        /** The Known card. */
         KnownCard,
-
-        /** The Unknown card. */
         UnknownCard,
-
-        /** The Section name. */
         SectionName,
-
-        /** The Comment. */
         Comment,
-
-        /** The Unknown text. */
         UnknownText
     }
 
@@ -69,28 +58,10 @@ public class DeckRecognizer {
         private final int number;
         private final String text;
 
-        /**
-         * Known card.
-         * 
-         * @param theCard
-         *            the the card
-         * @param count
-         *            the count
-         * @return the token
-         */
         public static Token knownCard(final PaperCard theCard, final int count) {
             return new Token(theCard, TokenType.KnownCard, count, null);
         }
 
-        /**
-         * Unknown card.
-         * 
-         * @param cardNme
-         *            the card nme
-         * @param count
-         *            the count
-         * @return the token
-         */
         public static Token unknownCard(final String cardNme, final int count) {
             return new Token(null, TokenType.UnknownCard, count, cardNme);
         }
@@ -102,16 +73,6 @@ public class DeckRecognizer {
             this.text = message;
         }
 
-        /**
-         * Instantiates a new token.
-         * 
-         * @param type1
-         *            the type1
-         * @param count
-         *            the count
-         * @param message
-         *            the message
-         */
         public Token(final TokenType type1, final int count, final String message) {
             this(null, type1, count, message);
             if ((type1 == TokenType.KnownCard) || (type1 == TokenType.UnknownCard)) {
@@ -119,38 +80,18 @@ public class DeckRecognizer {
             }
         }
 
-        /**
-         * Gets the text.
-         * 
-         * @return the text
-         */
         public final String getText() {
             return this.text;
         }
 
-        /**
-         * Gets the card.
-         * 
-         * @return the card
-         */
         public final PaperCard getCard() {
             return this.card;
         }
 
-        /**
-         * Gets the type.
-         * 
-         * @return the type
-         */
         public final TokenType getType() {
             return this.type;
         }
 
-        /**
-         * Gets the number.
-         * 
-         * @return the number
-         */
         public final int getNumber() {
             return this.number;
         }
@@ -162,19 +103,20 @@ public class DeckRecognizer {
     private static final Pattern SEARCH_NUMBERS_IN_FRONT = Pattern.compile("([\\d]{1,2})[^A-Za-wyz]*\\s+(.*)");
     //private static final Pattern READ_SEPARATED_EDITION = Pattern.compile("[[\\(\\{]([a-zA-Z0-9]){1,3})[]*\\s+(.*)");
 
-
     private final SetPreference useLastSet;
     private final ICardDatabase db;
     private Date recognizeCardsPrintedBefore = null;
     
     public DeckRecognizer(boolean fromLatestSet, boolean onlyCoreAndExp, CardDb db) {
-        if(!fromLatestSet)
+        if (!fromLatestSet) {
             useLastSet = null;
-        else if (onlyCoreAndExp)
+        }
+        else if (onlyCoreAndExp) {
             useLastSet = SetPreference.LatestCoreExp;
-        else
+        }
+        else {
             useLastSet = SetPreference.Latest;
-
+        }
         this.db = db;
     }
     
@@ -275,16 +217,9 @@ public class DeckRecognizer {
         return false;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param month
-     * @param year
-     */
     public void setDateConstraint(int month, Integer year) {
         Calendar ca = Calendar.getInstance();
         ca.set(year, month, 1);
         recognizeCardsPrintedBefore = ca.getTime();
-        
     }
-
 }

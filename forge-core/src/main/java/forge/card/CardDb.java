@@ -302,6 +302,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     public PaperCard getCardFromEdition(final String cardName, final Date printedBefore, final SetPreference fromSet, int artIndex) {
         final CardRequest cr = CardRequest.fromString(cardName);
         List<PaperCard> cards = this.allCardsByName.get(cr.cardName);
+        boolean cardsListReadOnly = true;
 
         if (StringUtils.isNotBlank(cr.edition)) {
             cards = Lists.newArrayList(Iterables.filter(cards, new Predicate<PaperCard>() {
@@ -311,9 +312,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         if (artIndex == -1 && cr.artIndex > 0) {
             artIndex = cr.artIndex;
         }
-        
+
         int sz = cards.size();
         if (fromSet == SetPreference.Earliest || fromSet == SetPreference.EarliestCoreExp) {
+            PaperCard firstWithoutImage = null;
             for (int i = sz - 1 ; i >= 0 ; i--) {
                 PaperCard pc = cards.get(i);
                 CardEdition ed = editions.get(pc.getEdition());
@@ -322,13 +324,19 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 }
 
                 if ((artIndex <= 0 || pc.getArtIndex() == artIndex) && (printedBefore == null || ed.getDate().before(printedBefore))) {
-                    return pc;
+                    if (pc.hasImage()) {
+                        return pc;
+                    }
+                    else if (firstWithoutImage == null) {
+                        firstWithoutImage = pc; //ensure first without image returns if none have image
+                    }
                 }
             }
-            return null;
+            return firstWithoutImage;
         }
         else if (fromSet == SetPreference.LatestCoreExp || fromSet == SetPreference.Latest || fromSet == null || fromSet == SetPreference.Random) {
-            for (int i = 0 ; i < sz ; i++) {
+            PaperCard firstWithoutImage = null;
+            for (int i = 0; i < sz; i++) {
                 PaperCard pc = cards.get(i);
                 CardEdition ed = editions.get(pc.getEdition());
                 if (fromSet != null && !fromSet.accept(ed)) {
@@ -337,12 +345,36 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
                 if ((artIndex < 0 || pc.getArtIndex() == artIndex) && (printedBefore == null || ed.getDate().before(printedBefore))) {
                     if (fromSet == SetPreference.LatestCoreExp || fromSet == SetPreference.Latest) {
-                        return pc;
+                        if (pc.hasImage()) {
+                            return pc;
+                        }
+                        else if (firstWithoutImage == null) {
+                            firstWithoutImage = pc; //ensure first without image returns if none have image
+                        }
                     }
-                    return cards.get(i + MyRandom.getRandom().nextInt(sz-i));
+                    else {
+                        while (sz > i) {
+                            int randomIndex = i + MyRandom.getRandom().nextInt(sz - i);
+                            pc = cards.get(randomIndex);
+                            if (pc.hasImage()) {
+                                return pc;
+                            }
+                            else {
+                                if (firstWithoutImage == null) {
+                                    firstWithoutImage = pc; //ensure first without image returns if none have image
+                                }
+                                if (cardsListReadOnly) { //ensure we don't modify a cached collection
+                                    cards = new ArrayList<PaperCard>(cards);
+                                    cardsListReadOnly = false;
+                                }
+                                cards.remove(randomIndex); //remove card from collection and try another random card
+                                sz--;
+                            }
+                        }
+                    }
                 }
             }
-            return null;
+            return firstWithoutImage;
         }
         return null;
     }
