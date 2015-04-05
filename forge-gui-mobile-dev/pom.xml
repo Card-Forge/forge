@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>forge</groupId>
   <artifactId>forge-gui-mobile-dev</artifactId>
-  <version>1.5.38-SNAPSHOT</version>
+  <version>1.5.39-SNAPSHOT</version>
   <name>Forge</name>
   <build>
     <sourceDirectory>src</sourceDirectory>
