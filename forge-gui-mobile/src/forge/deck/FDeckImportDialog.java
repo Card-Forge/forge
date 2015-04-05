@@ -21,6 +21,7 @@ import java.util.List;
 
 import forge.FThreads;
 import forge.Forge;
+import forge.Graphics;
 import forge.deck.DeckRecognizer.TokenType;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
@@ -43,6 +44,7 @@ public class FDeckImportDialog extends FDialog {
     private final FComboBox<String> monthDropdown = add(new FComboBox<String>()); //don't need wrappers since skin can't change while this dialog is open
     private final FComboBox<Integer> yearDropdown = add(new FComboBox<Integer>());
 
+    private final boolean showOptions;
     private final DeckImportController controller;
 
     public FDeckImportDialog(final boolean replacingDeck, final Callback<Deck> callback0) {
@@ -84,24 +86,59 @@ public class FDeckImportDialog extends FDialog {
         //ensure at least one known card found on clipboard
         for (DeckRecognizer.Token token : tokens) {
             if (token.getType() == TokenType.KnownCard) {
+                showOptions = true;
                 return;
             }
         }
 
+        showOptions = false;
         setButtonEnabled(0, false);
         txtInput.setText("No known cards found on clipboard.\n\nCopy the decklist to the clipboard, then reopen this dialog.");
     }
 
     @Override
+    public void drawOverlay(Graphics g) {
+        super.drawOverlay(g);
+        if (showOptions) {
+            float y = txtInput.getTop() - FOptionPane.PADDING;
+            g.drawLine(BORDER_THICKNESS, BORDER_COLOR, 0, y, getWidth(), y);
+        }
+    }
+
+    @Override
     protected float layoutAndGetHeight(float width, float maxHeight) {
         float padding = FOptionPane.PADDING;
+        float x = padding;
+        float y = padding;
         float w = width - 2 * padding;
-        float h = txtInput.getPreferredHeight(w);
-        float maxTextBoxHeight = maxHeight - 2 * padding;
+        float h;
+        if (showOptions) {
+            h = monthDropdown.getHeight();
+            float fieldPadding = padding / 2;
+
+            newEditionCheck.setBounds(x, y, w, h);
+            y += h + fieldPadding;
+            dateTimeCheck.setBounds(x, y, w, h);
+            y += h + fieldPadding;
+            
+            float dropDownWidth = (w - fieldPadding) / 2;
+            monthDropdown.setBounds(x, y, dropDownWidth, h);
+            yearDropdown.setBounds(x + dropDownWidth + fieldPadding, y, dropDownWidth, h);
+            y += h + fieldPadding;
+
+            onlyCoreExpCheck.setBounds(x, y, w, h);
+            y += h + 2 * padding;
+        }
+        h = txtInput.getPreferredHeight(w);
+        float maxTextBoxHeight = maxHeight - y - padding;
         if (h > maxTextBoxHeight) {
             h = maxTextBoxHeight;
         }
-        txtInput.setBounds(padding, padding, w, h);
-        return h + 2 * padding;
+        txtInput.setBounds(x, y, w, h);
+        y += h + padding;
+        if (showOptions) {
+            h = newEditionCheck.getHeight();
+        }
+        return y;
     }
 }

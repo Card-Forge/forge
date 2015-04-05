@@ -22,8 +22,8 @@ public abstract class FDialog extends FOverlay {
     public static final FSkinColor MSG_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.9f);
     public static final FSkinColor MSG_BACK_COLOR = FScreen.Header.BACK_COLOR.alphaColor(0.75f);
     public static final float MSG_HEIGHT = MSG_FONT.getCapHeight() * 2.5f;
-    private static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS).alphaColor(0.8f);
-    private static final float BORDER_THICKNESS = Utils.scale(1);
+    protected static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS).alphaColor(0.8f);
+    protected static final float BORDER_THICKNESS = Utils.scale(1);
     private static final FSkinColor SWIPE_BAR_COLOR = FScreen.Header.BACK_COLOR;
     private static final FSkinColor SWIPE_BAR_DOT_COLOR = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.75f);
     private static final float SWIPE_BAR_HEIGHT = Utils.scale(12);
