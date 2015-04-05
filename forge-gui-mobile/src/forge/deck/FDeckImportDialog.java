@@ -87,6 +87,14 @@ public class FDeckImportDialog extends FDialog {
         for (DeckRecognizer.Token token : tokens) {
             if (token.getType() == TokenType.KnownCard) {
                 showOptions = true;
+
+                dateTimeCheck.setCommand(new FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {
+                        updateDropDownEnabled();
+                    }
+                });
+                updateDropDownEnabled();
                 return;
             }
         }
@@ -94,6 +102,12 @@ public class FDeckImportDialog extends FDialog {
         showOptions = false;
         setButtonEnabled(0, false);
         txtInput.setText("No known cards found on clipboard.\n\nCopy the decklist to the clipboard, then reopen this dialog.");
+    }
+
+    private void updateDropDownEnabled() {
+        boolean enabled = dateTimeCheck.isSelected();
+        monthDropdown.setEnabled(enabled);
+        yearDropdown.setEnabled(enabled);
     }
 
     @Override
