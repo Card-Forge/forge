@@ -60,6 +60,7 @@ public class FDeckImportDialog extends FDialog {
                 FThreads.invokeInBackgroundThread(new Runnable() {
                     @Override
                     public void run() {
+                        controller.parseInput(txtInput.getText()); //ensure deck updated based on any changes to options
                         final Deck deck = controller.accept(); //must accept in background thread in case a dialog is shown
                         if (deck == null) { return; }
 
