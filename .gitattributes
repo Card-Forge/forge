@@ -471,6 +471,7 @@ forge-game/src/main/java/forge/game/card/CardState.java -text
 forge-game/src/main/java/forge/game/card/CardUtil.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardView.java -text
 forge-game/src/main/java/forge/game/card/CounterType.java svneol=native#text/plain
+forge-game/src/main/java/forge/game/card/IHasCardView.java -text
 forge-game/src/main/java/forge/game/card/package-info.java -text
 forge-game/src/main/java/forge/game/combat/AttackConstraints.java -text
 forge-game/src/main/java/forge/game/combat/AttackRequirement.java -text

@@ -20,6 +20,8 @@ package forge.game.spellability;
 import forge.game.IIdentifiable;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardView;
+import forge.game.card.IHasCardView;
 import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -39,7 +41,7 @@ import java.util.Set;
  * @author Forge
  * @version $Id$
  */
-public class SpellAbilityStackInstance implements IIdentifiable {
+public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
     private static int maxId = 0;
     private static int nextId() { return ++maxId; }
 
@@ -310,5 +312,10 @@ public class SpellAbilityStackInstance implements IIdentifiable {
 
     public StackItemView getView() {
         return view;
+    }
+
+    @Override
+    public CardView getCardView() {
+        return CardView.get(getSourceCard());
     }
 }

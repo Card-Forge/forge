@@ -18,6 +18,7 @@
 package forge.game.spellability;
 
 import com.google.common.collect.Iterables;
+
 import forge.card.mana.ManaCost;
 import forge.game.CardTraitBase;
 import forge.game.Game;

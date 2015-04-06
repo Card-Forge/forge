@@ -1,11 +1,12 @@
 package forge.game.spellability;
 
 import forge.game.card.CardView;
+import forge.game.card.IHasCardView;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 
-public class SpellAbilityView extends TrackableObject {
+public class SpellAbilityView extends TrackableObject implements IHasCardView {
     private static final long serialVersionUID = 2514234930798754769L;
 
     public static SpellAbilityView get(SpellAbility spab) {
@@ -61,5 +62,10 @@ public class SpellAbilityView extends TrackableObject {
     }
     void updatePromptIfOnlyPossibleAbility(SpellAbility sa) {
         set(TrackableProperty.PromptIfOnlyPossibleAbility, sa.promptIfOnlyPossibleAbility());
+    }
+
+    @Override
+    public CardView getCardView() {
+        return getHostCard();
     }
 }

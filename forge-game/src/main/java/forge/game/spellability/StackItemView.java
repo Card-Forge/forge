@@ -1,13 +1,14 @@
 package forge.game.spellability;
 
 import forge.game.card.CardView;
+import forge.game.card.IHasCardView;
 import forge.game.player.PlayerView;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.util.FCollectionView;
 
-public class StackItemView extends TrackableObject {
+public class StackItemView extends TrackableObject implements IHasCardView {
     private static final long serialVersionUID = 6733415646691356052L;
 
     public static StackItemView get(SpellAbilityStackInstance si) {
@@ -112,5 +113,10 @@ public class StackItemView extends TrackableObject {
     @Override
     public String toString() {
         return getText();
+    }
+
+    @Override
+    public CardView getCardView() {
+        return getSourceCard();
     }
 }

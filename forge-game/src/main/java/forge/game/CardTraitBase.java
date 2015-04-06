@@ -7,6 +7,8 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
+import forge.game.card.CardView;
+import forge.game.card.IHasCardView;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -20,7 +22,7 @@ import com.google.common.collect.Maps;
  * Base class for Triggers,ReplacementEffects and StaticAbilities.
  * 
  */
-public abstract class CardTraitBase extends GameObject {
+public abstract class CardTraitBase extends GameObject implements IHasCardView {
 
     /** The host card. */
     protected Card hostCard;
@@ -384,5 +386,10 @@ public abstract class CardTraitBase extends GameObject {
                 this.mapParams.put(key, newValue);
             }
         }
+    }
+
+    @Override
+    public CardView getCardView() {
+        return CardView.get(hostCard);
     }
 }
