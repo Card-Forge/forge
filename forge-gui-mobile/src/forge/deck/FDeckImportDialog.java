@@ -74,7 +74,7 @@ public class FDeckImportDialog extends FDialog {
                             }
                         }
                         if (sb.length() > 0) {
-                            if (!SOptionPane.showConfirmDialog("The following cards cannot be imported due to misspelling, set restrictions, or not being in Forge yet:\n\n" + sb.toString(), "Import remaining cards?", "OK", "Cancel")) {
+                            if (SOptionPane.showOptionDialog("The following cards cannot be imported due to misspelling, set restrictions, or not being in Forge yet:\n\n" + sb.toString(), "Import remaining cards?", SOptionPane.INFORMATION_ICON, new String[] { "Import", "Cancel" }) == 1) {
                                 return;
                             }
                         }
