@@ -1118,10 +1118,17 @@ public class PlayerControllerHuman
 
     @Override
     public ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers, HashMap<String, Object> runParams) {
+        ReplacementEffect first = possibleReplacers.get(0);
         if (possibleReplacers.size() == 1) {
-            return possibleReplacers.get(0);
+            return first;
         }
-        return getGui().one(prompt, possibleReplacers);
+        String firstStr = first.toString();
+        for (int i = 1; i < possibleReplacers.size(); i++) {
+            if (!possibleReplacers.get(i).toString().equals(firstStr)) {
+                return getGui().one(prompt, possibleReplacers); //prompt user if there are multiple different options
+            }
+        }
+        return first; //return first option without prompting if all options are the same
     }
 
     @Override

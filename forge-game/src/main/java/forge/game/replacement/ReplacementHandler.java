@@ -97,7 +97,6 @@ public class ReplacementHandler {
      * @return true if the event was replaced.
      */
     public ReplacementResult run(final HashMap<String, Object> runParams, final ReplacementLayer layer, final Player decider, final Game game) {
-
         final List<ReplacementEffect> possibleReplacers = new ArrayList<ReplacementEffect>();
         // Round up Non-static replacement effects ("Until EOT," or
         // "The next time you would..." etc)
