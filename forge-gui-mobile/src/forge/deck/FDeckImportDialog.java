@@ -31,6 +31,7 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextArea;
 import forge.util.Callback;
+import forge.util.gui.SOptionPane;
 
 
 public class FDeckImportDialog extends FDialog {
@@ -60,7 +61,24 @@ public class FDeckImportDialog extends FDialog {
                 FThreads.invokeInBackgroundThread(new Runnable() {
                     @Override
                     public void run() {
-                        controller.parseInput(txtInput.getText()); //ensure deck updated based on any changes to options
+                        List<DeckRecognizer.Token> tokens = controller.parseInput(txtInput.getText()); //ensure deck updated based on any changes to options
+
+                        //if there are any unknown cards, let user know this and give them the option to cancel
+                        StringBuilder sb = new StringBuilder();
+                        for (DeckRecognizer.Token token : tokens) {
+                            if (token.getType() == TokenType.UnknownCard) {
+                                if (sb.length() > 0) {
+                                    sb.append("\n");
+                                }
+                                sb.append(token.getNumber() + " " + token.getText());
+                            }
+                        }
+                        if (sb.length() > 0) {
+                            if (!SOptionPane.showConfirmDialog("The following cards cannot be imported due to misspelling, set restrictions, or not being in Forge yet:\n\n" + sb.toString(), "Import remaining cards?", "OK", "Cancel")) {
+                                return;
+                            }
+                        }
+
                         final Deck deck = controller.accept(); //must accept in background thread in case a dialog is shown
                         if (deck == null) { return; }
 
