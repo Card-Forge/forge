@@ -1146,7 +1146,12 @@ public class PlayerControllerHuman
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
         List<SpellAbility> orderedSAs = activePlayerSAs;
         if (activePlayerSAs.size() > 1) { // give a dual list form to create instead of needing to do it one at a time
-            orderedSAs = getGui().order("Select order for Simultaneous Spell Abilities", "Resolve first", activePlayerSAs, null);
+            String firstStr = orderedSAs.get(0).toString();
+            for (int i = 1; i < orderedSAs.size(); i++) { //don't prompt user if all options are the same
+                if (!orderedSAs.get(i).toString().equals(firstStr)) {
+                    orderedSAs = getGui().order("Select order for simultaneous abilities", "Resolve first", activePlayerSAs, null);
+                }
+            }
         }
         int size = orderedSAs.size();
         for (int i = size - 1; i >= 0; i--) {
