@@ -17734,6 +17734,8 @@ forge-gui/src/main/java/forge/player/HumanPlay.java -text
 forge-gui/src/main/java/forge/player/HumanPlaySpellAbility.java -text
 forge-gui/src/main/java/forge/player/LobbyPlayerHuman.java -text
 forge-gui/src/main/java/forge/player/PlayerControllerHuman.java -text
+forge-gui/src/main/java/forge/player/PlayerZoneUpdate.java -text
+forge-gui/src/main/java/forge/player/PlayerZoneUpdates.java -text
 forge-gui/src/main/java/forge/player/TargetSelection.java -text
 forge-gui/src/main/java/forge/player/package-info.java -text
 forge-gui/src/main/java/forge/properties/ForgeConstants.java -text

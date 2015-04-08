@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Function;
 import com.google.common.collect.Maps;
 
@@ -30,6 +28,7 @@ import forge.match.AbstractGuiGame;
 import forge.match.MatchButtonType;
 import forge.net.game.GuiGameEvent;
 import forge.net.game.server.IToClient;
+import forge.player.PlayerZoneUpdate;
 import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
 
@@ -184,7 +183,7 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
-    public void updateZones(final List<Pair<PlayerView, ZoneType>> zonesToUpdate) {
+    public void updateZones(final Iterable<PlayerZoneUpdate> zonesToUpdate) {
         updateGameView();
         send(methodName(), zonesToUpdate);
     }

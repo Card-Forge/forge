@@ -36,8 +36,6 @@ import javax.swing.MenuElement;
 import javax.swing.MenuSelectionManager;
 import javax.swing.SwingUtilities;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
 
@@ -81,6 +79,7 @@ import forge.match.AbstractGuiGame;
 import forge.match.MatchButtonType;
 import forge.menus.IMenuProvider;
 import forge.model.FModel;
+import forge.player.PlayerZoneUpdate;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.controllers.CAntes;
@@ -193,7 +192,7 @@ public final class CMatchUI
             FThreads.invokeInEdtNowOrLater(new Runnable() {
                 @Override public final void run() {
                     for (final VField f : getFieldViews()) {
-                        f.getTabletop().setupPlayZone();
+                        f.getTabletop().update();
                     }
                     for (final VHand h : getHandViews()) {
                         h.getLayoutControl().updateHand();
@@ -418,37 +417,58 @@ public final class CMatchUI
     } // showCombat(CombatView)
 
     @Override
-    public void updateZones(final List<Pair<PlayerView, ZoneType>> zonesToUpdate) {
-        for (final Pair<PlayerView, ZoneType> kv : zonesToUpdate) {
-            final PlayerView owner = kv.getKey();
-            final ZoneType zt = kv.getValue();
-            final VField vf = getFieldViewFor(owner);
+    public void updateZones(final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        for (final PlayerZoneUpdate update : zonesToUpdate) {
+            final PlayerView owner = update.getPlayer();
 
-            switch (zt) {
-            case Battlefield:
-                vf.getTabletop().setupPlayZone();
-                break;
-            case Hand:
+            boolean setupPlayZone = false, updateHand = false, updateCommand = false, updateAnte = false, updateZones = false, updateDetails = false;
+            for (final ZoneType zone : update.getZones()) {
+                switch (zone) {
+                case Battlefield:
+                    setupPlayZone = true;
+                    break;
+                case Ante:
+                    updateAnte = true;
+                    break;
+                case Hand:
+                    updateHand = true;
+                    updateZones = true;
+                    updateDetails = true;
+                    FloatingCardArea.refresh(owner, zone);
+                    break;
+                case Command:
+                    updateCommand = true;
+                    updateZones = true;
+                    FloatingCardArea.refresh(owner, zone);
+                    break;
+                default:
+                    updateZones = true;
+                    FloatingCardArea.refresh(owner, zone);
+                    break;
+                }
+            }
+
+            final VField vField = getFieldViewFor(owner);
+            if (setupPlayZone) {
+                vField.getTabletop().update();
+            }
+            if (updateHand) {
                 final VHand vHand = getHandFor(owner);
                 if (vHand != null) {
                     vHand.getLayoutControl().updateHand();
                 }
-                vf.updateZones();
-                vf.updateDetails();
-                FloatingCardArea.refresh(owner, zt);
-                break;
-            case Command:
-                getCommandFor(owner).getTabletop().setupPlayZone();
-                break;
-            case Ante:
+            }
+            if (updateCommand) {
+                getCommandFor(owner).getTabletop().update();
+            }
+            if (updateAnte) {
                 cAntes.update();
-                break;
-            default:
-                if (vf != null) {
-                    vf.updateZones();
-                }
-                FloatingCardArea.refresh(owner, zt);
-                break;
+            }
+            if (updateZones) {
+                vField.updateZones();
+            }
+            if (updateDetails) {
+                vField.updateDetails();
             }
         }
     }

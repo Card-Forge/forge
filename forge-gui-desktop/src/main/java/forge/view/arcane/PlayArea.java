@@ -567,7 +567,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         return false;
     }
 
-    public void setupPlayZone() {
+    public void update() {
         FThreads.assertExecutedByEdt(true);
         recalculateCardPanels(model, zone);
     }

@@ -33,6 +33,7 @@ import forge.menu.FMenuBar;
 import forge.menu.FMenuItem;
 import forge.menu.FMenuTab;
 import forge.model.FModel;
+import forge.player.PlayerZoneUpdate;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
@@ -430,14 +431,13 @@ public class MatchScreen extends FScreen {
         }
     }
 
-    public void updateZones(List<Pair<PlayerView, ZoneType>> zonesToUpdate) {
-        for (Pair<PlayerView, ZoneType> kv : zonesToUpdate) {
-            PlayerView owner = kv.getKey();
-            ZoneType zt = kv.getValue();
-            if (owner == null || zt == null) {
-                continue;
+    public void updateZones(final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        for (final PlayerZoneUpdate update : zonesToUpdate) {
+            final PlayerView owner = update.getPlayer();
+            final VPlayerPanel panel = getPlayerPanel(owner);
+            for (final ZoneType zone : update.getZones()) {
+                panel.updateZone(zone);
             }
-            getPlayerPanel(owner).updateZone(zt);
         }
     }
 

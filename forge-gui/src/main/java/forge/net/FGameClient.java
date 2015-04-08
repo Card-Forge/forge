@@ -21,8 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
@@ -50,6 +48,7 @@ import forge.net.game.MessageEvent;
 import forge.net.game.NetEvent;
 import forge.net.game.ReplyEvent;
 import forge.net.game.client.IToServer;
+import forge.player.PlayerZoneUpdates;
 import forge.properties.ForgePreferences.FPref;
 import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
@@ -234,7 +233,7 @@ public class FGameClient implements IToServer {
                 case "updateZones":
                     FThreads.invokeInEdtNowOrLater(new Runnable() {
                         @Override public final void run() {
-                            clientGui.updateZones((List<Pair<PlayerView, ZoneType>>) args[0]);
+                            clientGui.updateZones((PlayerZoneUpdates) args[0]);
                         }
                     });
                     break;

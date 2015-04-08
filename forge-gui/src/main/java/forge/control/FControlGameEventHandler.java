@@ -1,13 +1,10 @@
 package forge.control;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
-
-import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
@@ -54,6 +51,8 @@ import forge.game.zone.ZoneType;
 import forge.interfaces.IGuiGame;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
+import forge.player.PlayerZoneUpdate;
+import forge.player.PlayerZoneUpdates;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Lang;
 import forge.util.maps.MapOfLists;
@@ -65,7 +64,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final Set<CardView> cardsRefreshDetails = new HashSet<CardView>();
     private final Set<PlayerView> livesUpdate = new HashSet<PlayerView>();
     private final Set<PlayerView> manaPoolUpdate = new HashSet<PlayerView>();
-    private final List<Pair<PlayerView, ZoneType>> zonesUpdate = new ArrayList<Pair<PlayerView, ZoneType>>();
+    private final PlayerZoneUpdates zonesUpdate = new PlayerZoneUpdates();
 
     private boolean processEventsQueued, needPhaseUpdate, needCombatUpdate, needStackUpdate, needPlayerControlUpdate;
     private boolean gameOver, gameFinished;
@@ -192,12 +191,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         if (p == null || z == null) { return null; }
 
         synchronized (zonesUpdate) {
-            for (Pair<PlayerView, ZoneType> pair : zonesUpdate) {
-                if (pair.getLeft() == p.getView() && pair.getRight() == z) {
-                    return null; //avoid adding the same pair multiple times
-                }
-            }
-            zonesUpdate.add(Pair.of(p.getView(), z));
+            zonesUpdate.add(new PlayerZoneUpdate(PlayerView.get(p), z));
         }
         return processEvent();
     }

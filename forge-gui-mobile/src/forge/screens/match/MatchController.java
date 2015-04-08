@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -41,6 +40,7 @@ import forge.match.AbstractGuiGame;
 import forge.match.HostedMatch;
 import forge.match.MatchButtonType;
 import forge.model.FModel;
+import forge.player.PlayerZoneUpdate;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.views.VAssignDamage;
@@ -325,7 +325,7 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public void updateZones(List<Pair<PlayerView, ZoneType>> zonesToUpdate) {
+    public void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate) {
         view.updateZones(zonesToUpdate);
     }
 

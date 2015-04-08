@@ -4,8 +4,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Function;
 
 import forge.LobbyPlayer;
@@ -22,6 +20,7 @@ import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.match.MatchButtonType;
+import forge.player.PlayerZoneUpdate;
 import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
 
@@ -46,7 +45,7 @@ public interface IGuiGame {
     Object showManaPool(PlayerView player);
     void hideManaPool(PlayerView player, Object zoneToRestore);
     void updateStack();
-    void updateZones(List<Pair<PlayerView, ZoneType>> zonesToUpdate);
+    void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate);
     void updateSingleCard(CardView card);
     void updateCards(Iterable<CardView> cards);
     void updateManaPool(Iterable<PlayerView> manaPoolUpdate);
