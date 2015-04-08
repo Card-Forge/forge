@@ -18,8 +18,6 @@ import forge.card.CardZoom.ActivateHandler;
 import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
 import forge.game.player.PlayerView;
-import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.StackItemView;
 import forge.item.PaperCard;
 import forge.screens.match.MatchController;
 import forge.screens.match.views.VAvatar;

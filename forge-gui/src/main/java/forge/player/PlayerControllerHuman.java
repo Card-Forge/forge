@@ -1150,6 +1150,7 @@ public class PlayerControllerHuman
             for (int i = 1; i < orderedSAs.size(); i++) { //don't prompt user if all options are the same
                 if (!orderedSAs.get(i).toString().equals(firstStr)) {
                     orderedSAs = getGui().order("Select order for simultaneous abilities", "Resolve first", activePlayerSAs, null);
+                    break;
                 }
             }
         }
