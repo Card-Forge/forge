@@ -214,6 +214,7 @@ public class VField implements IVDoc<CField> {
             return;
         }
         avatarArea.remove(lblLife);
+        lblLife.setIcon(FSkin.getImage(FSkinProp.ICO_QUEST_LIFE));
         avatarArea.add(lblLife, "w 50%!, h 20px!, split 2");
         avatarArea.add(lblPoison, "w 50%!, h 20px!, wrap");
     }
