@@ -165,12 +165,8 @@ public class QuestDraftUtils {
             }
             return;
         }
-        
-        if (waitForUserInput) {
-            return;
-        }
-        
-        if (matchInProgress) {
+
+        if (waitForUserInput || matchInProgress) {
             return;
         }
 

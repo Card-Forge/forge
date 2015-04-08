@@ -1,7 +1,6 @@
 package forge.screens.match;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.SwingUtilities;
@@ -103,7 +102,8 @@ public class VMatchUI implements IVTopLevelUI {
             // Default to a cell we know exists
             cellWithHands = EDocID.REPORT_LOG.getDoc().getParentCell();
         }
-        for (final EDocID handId : EDocID.Hands) {
+        for (int iHandId = 0; iHandId < EDocID.Hands.length; iHandId++) {
+            final EDocID handId = EDocID.Hands[iHandId];
             final DragCell parentCell = handId.getDoc().getParentCell();
             VHand myVHand = null;
             for (final VHand vHand : lstHands) {
@@ -122,12 +122,12 @@ public class VMatchUI implements IVTopLevelUI {
             } else {
                 // Hand present, add it if necessary
                 if (parentCell == null) {
-                    final EDocID fieldDoc = EDocID.Fields[Arrays.asList(EDocID.Hands).indexOf(handId)];
+                    final EDocID fieldDoc = EDocID.Fields[iHandId];
                     if (fieldDoc.getDoc().getParentCell() != null) {
                         fieldDoc.getDoc().getParentCell().addDoc(myVHand);
                         continue;
                     }
-                    final EDocID commandDoc = EDocID.Commands[Arrays.asList(EDocID.Hands).indexOf(handId)];
+                    final EDocID commandDoc = EDocID.Commands[iHandId];
                     if (commandDoc.getDoc().getParentCell() != null) {
                         commandDoc.getDoc().getParentCell().addDoc(myVHand);
                         continue;

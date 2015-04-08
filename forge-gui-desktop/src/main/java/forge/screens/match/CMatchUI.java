@@ -205,7 +205,8 @@ public final class CMatchUI
 
     @Override
     protected void updateCurrentPlayer(final PlayerView player) {
-        // No action necessary
+        // Update toggle buttons in dev mdoe panel
+        getCDev().update();
     }
 
     public CAntes getCAntes() {
@@ -303,10 +304,11 @@ public final class CMatchUI
 
     private void initHandViews() {
         final List<VHand> hands = new ArrayList<VHand>();
+        final Iterable<PlayerView> localPlayers = getLocalPlayers();
 
         int i = 0;
         for (final PlayerView p : sortedPlayers) {
-            if (allHands || isLocalPlayer(p) || CardView.mayViewAny(p.getHand(), getCurrentPlayer())) {
+            if (allHands || isLocalPlayer(p) || CardView.mayViewAny(p.getHand(), localPlayers)) {
                 final EDocID doc = EDocID.Hands[i];
                 final VHand newHand = new VHand(this, doc, p);
                 newHand.getLayoutControl().initialize();

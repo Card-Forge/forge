@@ -13,6 +13,7 @@ import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -299,7 +300,8 @@ public class VLobby implements IUpdateable {
         }
     }
     private void fireDeckSectionChangeListener(final int index, final DeckSection section, final CardPool cards) {
-        final Deck copy = new Deck(decks[index]);
+        final Deck deck = decks[index];
+        final Deck copy = deck == null ? new Deck() : new Deck(decks[index]);
         copy.putSection(section, cards);
         decks[index] = copy;
         if (playerChangeListener != null) {
@@ -342,7 +344,7 @@ public class VLobby implements IUpdateable {
         schemeDeckPanel.setLayout(new MigLayout(sectionConstraints));
         schemeDeckPanel.add(new FLabel.Builder().text("Select Scheme deck:").build(), labelConstraints);
         final FList<Object> schemeDeckList = new FList<Object>();
-        schemeDeckList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        schemeDeckList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         schemeDeckList.addListSelectionListener(new ListSelectionListener() {
             @Override public final void valueChanged(final ListSelectionEvent e) {
                 selectSchemeDeck(playerIndex);
@@ -361,7 +363,7 @@ public class VLobby implements IUpdateable {
         commanderDeckPanel.setLayout(new MigLayout(sectionConstraints));
         commanderDeckPanel.add(new FLabel.Builder().text("Select Commander deck:").build(), labelConstraints);
         final FList<Object> commanderDeckList = new FList<Object>();
-        commanderDeckList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        commanderDeckList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         commanderDeckList.addListSelectionListener(new ListSelectionListener() {
             @Override public final void valueChanged(final ListSelectionEvent e) {
                 selectCommanderDeck(playerIndex);
@@ -380,7 +382,7 @@ public class VLobby implements IUpdateable {
         planarDeckPanel.setLayout(new MigLayout(sectionConstraints));
         planarDeckPanel.add(new FLabel.Builder().text("Select Planar deck:").build(), labelConstraints);
         final FList<Object> planarDeckList = new FList<Object>();
-        planarDeckList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        planarDeckList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         planarDeckList.addListSelectionListener(new ListSelectionListener() {
             @Override public final void valueChanged(final ListSelectionEvent e) {
                 selectPlanarDeck(playerIndex);
@@ -400,11 +402,15 @@ public class VLobby implements IUpdateable {
         final FList<Object> vgdAvatarList = new FList<Object>();
         vgdAvatarList.setListData(isPlayerAI(playerIndex) ? aiListData : humanListData);
         vgdAvatarList.setSelectedIndex(0);
-        vgdAvatarList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        vgdAvatarList.addListSelectionListener(vgdLSListener);
+        vgdAvatarList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        vgdAvatarList.addListSelectionListener(new ListSelectionListener() {
+            @Override public final void valueChanged(final ListSelectionEvent e) {
+                selectVanguardAvatar(playerIndex);
+            }
+        });
+
         final FScrollPane scrAvatars = new FScrollPane(vgdAvatarList, true,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
         final CardDetailPanel vgdDetail = new CardDetailPanel();
         vgdAvatarDetails.add(vgdDetail);
 
@@ -417,10 +423,14 @@ public class VLobby implements IUpdateable {
     }
 
     private void selectDeck(final int playerIndex) {
+        // Full deck selection
         selectMainDeck(playerIndex);
         selectCommanderDeck(playerIndex);
+
+        // Deck section selection
         selectSchemeDeck(playerIndex);
         selectPlanarDeck(playerIndex);
+        selectVanguardAvatar(playerIndex);
     }
 
     private void selectMainDeck(final int playerIndex) {
@@ -516,6 +526,50 @@ public class VLobby implements IUpdateable {
             planePool = DeckgenUtil.generatePlanarPool();
         }
         fireDeckSectionChangeListener(playerIndex, DeckSection.Planes, planePool);
+        getDeckChooser(playerIndex).saveState();
+    }
+
+    private void selectVanguardAvatar(final int playerIndex) {
+        if (playerIndex >= activePlayersNum || !hasVariant(GameType.Vanguard)) {
+            return;
+        }
+
+        final Object selected = vgdAvatarLists.get(playerIndex).getSelectedValue();
+        final PlayerPanel pp = playerPanels.get(playerIndex);
+        final CardDetailPanel cdp = vgdAvatarDetails.get(playerIndex);
+
+        final PaperCard vanguardAvatar;
+        final Deck deck = decks[playerIndex];
+        if (selected instanceof PaperCard) {
+            pp.setVanguardButtonText(((PaperCard) selected).getName());
+            cdp.setCard(CardView.getCardForUi((PaperCard) selected));
+            cdp.setVisible(true);
+            refreshPanels(false, true);
+
+            vanguardAvatar = (PaperCard)selected;
+        } else {
+            final String sel = (String) selected;
+            pp.setVanguardButtonText(sel);
+            cdp.setVisible(false);
+
+            if (sel == null) {
+                vanguardAvatar = null;
+            } else {
+                if (sel.contains("Use deck's default avatar") && deck != null && deck.has(DeckSection.Avatar)) {
+                    vanguardAvatar = deck.get(DeckSection.Avatar).get(0);
+                } else { //Only other string is "Random"
+                    if (playerPanels.get(playerIndex).isAi()) { //AI
+                        vanguardAvatar = Aggregates.random(getNonRandomAiAvatars());
+                    } else { //Human
+                        vanguardAvatar = Aggregates.random(getNonRandomHumanAvatars());
+                    }
+                }
+            }
+        }
+
+        final CardPool avatarOnce = new CardPool();
+        avatarOnce.add(vanguardAvatar);
+        fireDeckSectionChangeListener(playerIndex, DeckSection.Avatar, avatarOnce);
         getDeckChooser(playerIndex).saveState();
     }
 
@@ -731,59 +785,6 @@ public class VLobby implements IUpdateable {
             nField.transferFocus();
         }
     };
-
-    /** This listener will look for a vanguard avatar being selected in the lists
-    / and update the corresponding detail panel. */
-    private ListSelectionListener vgdLSListener = new ListSelectionListener() {
-        @Override public final void valueChanged(final ListSelectionEvent e) {
-            if (!hasVariant(GameType.Vanguard)) {
-                return;
-            }
-
-            final int index = vgdAvatarLists.indexOf(e.getSource());
-            if (index >= activePlayersNum) {
-                return;
-            }
-            final Object selected = vgdAvatarLists.get(index).getSelectedValue();
-            final PlayerPanel pp = playerPanels.get(index);
-            final CardDetailPanel cdp = vgdAvatarDetails.get(index);
-
-            final PaperCard vanguardAvatar;
-            final Deck deck = decks[index];
-            if (selected instanceof PaperCard) {
-                pp.setVanguardButtonText(((PaperCard) selected).getName());
-                cdp.setCard(CardView.getCardForUi((PaperCard) selected));
-                cdp.setVisible(true);
-                refreshPanels(false, true);
-
-                vanguardAvatar = (PaperCard)selected;
-            } else {
-                final String sel = (String) selected;
-                pp.setVanguardButtonText(sel);
-                cdp.setVisible(false);
-
-                if (sel == null) {
-                    vanguardAvatar = null;
-                } else {
-                    if (sel.contains("Use deck's default avatar") && deck != null && deck.has(DeckSection.Avatar)) {
-                        vanguardAvatar = deck.get(DeckSection.Avatar).get(0);
-                    } else { //Only other string is "Random"
-                        if (playerPanels.get(index).isAi()) { //AI
-                            vanguardAvatar = Aggregates.random(getNonRandomAiAvatars());
-                        } else { //Human
-                            vanguardAvatar = Aggregates.random(getNonRandomHumanAvatars());
-                        }
-                    }
-                }
-            }
-
-            final CardPool avatarOnce = new CardPool();
-            avatarOnce.add(vanguardAvatar);
-            fireDeckSectionChangeListener(index, DeckSection.Avatar, avatarOnce);
-            getDeckChooser(index).saveState();
-        }
-    };
-
 
     /////////////////////////////////////
     //========== METHODS FOR VARIANTS

@@ -227,9 +227,10 @@ public class CDev implements ICDoc {
      */
     @Override
     public void update() {
-        if (getController() != null) {
-            view.getLblUnlimitedLands().setToggled(getController().canPlayUnlimitedLands());
-            view.getLblViewAll().setToggled(getController().mayLookAtAllCards());
+        final IGameController controller = getController();
+        if (controller != null) {
+            view.getLblUnlimitedLands().setToggled(controller.canPlayUnlimitedLands());
+            view.getLblViewAll().setToggled(controller.mayLookAtAllCards());
         }
     }
 }

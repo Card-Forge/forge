@@ -83,8 +83,8 @@ public class ImageCache {
      * retrieve an image from the cache.  returns null if the image is not found in the cache
      * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.
      */
-    public static BufferedImage getImage(final CardView card, final PlayerView viewer, final int width, final int height) {
-        final String key = card.getCurrentState().getImageKey(viewer);
+    public static BufferedImage getImage(final CardView card, final Iterable<PlayerView> viewers, final int width, final int height) {
+        final String key = card.getCurrentState().getImageKey(viewers);
         return scaleImage(key, width, height, true);
     }
 

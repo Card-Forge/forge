@@ -41,6 +41,8 @@ import forge.screens.match.controllers.CPlayers;
 import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
+import forge.util.FCollectionView;
+import forge.util.Lang;
 
 /** 
  * Assembles Swing components of players report.
@@ -169,16 +171,13 @@ public class VPlayers implements IVDoc<CPlayers> {
                 temp[5].setText("");
             }
             if (FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
-                final Iterable<CardView> list = p0.getAnte();
+                final FCollectionView<CardView> list = p0.getAnte();
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Ante'd: ");
-                boolean needDelim = false;
-                for (CardView cv : list) {
-                    if (needDelim) {
-                        sb.append(", ");
-                    }
-                    else { needDelim = true; }
-                    sb.append(cv);
+                if (list == null || list.isEmpty()) {
+                    sb.append("none");
+                } else {
+                    sb.append(Lang.joinHomogenous(list));
                 }
                 temp[6].setText(sb.toString());
             }

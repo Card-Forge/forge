@@ -254,7 +254,7 @@ public class VStack extends FDropDown {
             final IGuiGame gui = MatchController.instance;
             final IGameController controller = MatchController.instance.getGameController();
             final PlayerView player = MatchController.instance.getCurrentPlayer();
-            if (MatchController.instance.getCurrentPlayer() != null) { //don't show menu if tapping on art
+            if (player != null) { //don't show menu if tapping on art
                 if (stackInstance.isAbility()) {
                     FPopupMenu menu = new FPopupMenu() {
                         @Override

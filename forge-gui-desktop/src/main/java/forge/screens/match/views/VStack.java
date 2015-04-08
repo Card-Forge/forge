@@ -239,7 +239,7 @@ public class VStack implements IVDoc<CStack> {
             final Graphics2D g2d = (Graphics2D) g;
 
             //draw image for source card
-            final BufferedImage img = ImageCache.getImage(item.getSourceCard(), controller.getMatchUI().getCurrentPlayer(), CARD_WIDTH, CARD_HEIGHT);
+            final BufferedImage img = ImageCache.getImage(item.getSourceCard(), controller.getMatchUI().getLocalPlayers(), CARD_WIDTH, CARD_HEIGHT);
             if (img != null) {
                 g2d.drawImage(img, null, PADDING, PADDING);
             }

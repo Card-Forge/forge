@@ -82,7 +82,7 @@ public class ImageCache {
     }
 
     public static Texture getImage(final CardView card) {
-        final String key = card.getCurrentState().getImageKey(MatchController.instance.getCurrentPlayer());
+        final String key = card.getCurrentState().getImageKey(MatchController.instance.getLocalPlayers());
         return getImage(key, true);
     }
 

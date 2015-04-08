@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.ImageKeys;
@@ -60,11 +61,11 @@ public class CardView extends GameEntityView {
         return collection;
     }
 
-    public static boolean mayViewAny(Iterable<CardView> cards, PlayerView viewer) {
+    public static boolean mayViewAny(Iterable<CardView> cards, Iterable<PlayerView> viewer) {
         if (cards == null) { return false; }
 
         for (CardView cv : cards) {
-            if (cv.canBeShownTo(viewer)) {
+            if (cv.canBeShownToAny(viewer)) {
                 return true;
             }
         }
@@ -282,15 +283,13 @@ public class CardView extends GameEntityView {
                 if (card.isFaceDown()) {
                     sb.append("Face Down");
                     // face-down cards don't show unique number to avoid cheating
-                }
-                else {
+                } else {
                     sb.append(card.getName());
                     sb.append(" (");
                     sb.append(card.getId());
                     sb.append(")");
                 }
-            }
-            else if (o != null) {
+            } else if (o != null) {
                 sb.append(o.toString());
             }
             sb.append("\r\n");
@@ -339,7 +338,16 @@ public class CardView extends GameEntityView {
             }
         }
     }
-    public boolean canBeShownTo(final PlayerView viewer) {
+
+    public boolean canBeShownToAny(final Iterable<PlayerView> viewers) {
+        return Iterables.any(viewers, new Predicate<PlayerView>() {
+            public final boolean apply(final PlayerView input) {
+                return canBeShownTo(input);
+            };
+        });
+    }
+
+    private boolean canBeShownTo(final PlayerView viewer) {
         if (viewer == null) { return false; }
 
         ZoneType zone = getZone();
@@ -394,7 +402,16 @@ public class CardView extends GameEntityView {
         }
         return false;
     }
-    public boolean canFaceDownBeShownTo(final PlayerView viewer) {
+
+    public boolean canFaceDownBeShownToAny(final Iterable<PlayerView> viewers) {
+        return Iterables.any(viewers, new Predicate<PlayerView>() {
+            @Override public final boolean apply(final PlayerView input) {
+                return canFaceDownBeShownTo(input);
+            }
+        });
+    }
+
+    private boolean canFaceDownBeShownTo(final PlayerView viewer) {
         if (!isFaceDown()) {
             return true;
         }
@@ -777,8 +794,11 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.Colors, c.getColor());
         }
 
-        public String getImageKey(PlayerView viewer) {
-            if (viewer == null || canBeShownTo(viewer)) {
+        public String getImageKey() {
+            return getImageKey(null);
+        }
+        public String getImageKey(Iterable<PlayerView> viewers) {
+            if (viewers == null || canBeShownToAny(viewers)) {
                 return get(TrackableProperty.ImageKey);
             }
             return ImageKeys.HIDDEN_CARD;

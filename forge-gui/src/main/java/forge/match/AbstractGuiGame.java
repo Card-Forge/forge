@@ -11,7 +11,6 @@ import java.util.TimerTask;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -93,8 +92,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     public String getCardImageKey(final CardStateView csv) {
-        if (getCurrentPlayer() == null) { return csv.getImageKey(null); } //if not in game, card can be shown
-        return csv.getImageKey(getCurrentPlayer());
+        return csv.getImageKey(getLocalPlayers());
     }
 
     @Override
@@ -105,9 +103,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (getGameController().mayLookAtAllCards()) {
             return true;
         }
-        return Iterables.any(localPlayers, new Predicate<PlayerView>() {
-            @Override public boolean apply(final PlayerView input) { return c.canBeShownTo(input); };
-        });
+        return c.canBeShownToAny(getLocalPlayers());
     }
 
     @Override
@@ -121,7 +117,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         case Original:
             CardStateView currentState = cv.getCurrentState();
             if (currentState.getState() == CardStateName.FaceDown) {
-                return getCurrentPlayer() == null || cv.canFaceDownBeShownTo(getCurrentPlayer());
+                return getCurrentPlayer() == null || cv.canFaceDownBeShownToAny(getLocalPlayers());
             }
             return true; //original can always be shown if not a face down that can't be shown
         case Flipped:

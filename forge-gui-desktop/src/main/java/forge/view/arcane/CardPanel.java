@@ -159,7 +159,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         updateImage(false);
     }
     private void updateImage(boolean fromSetCard) {
-        final BufferedImage image = card == null ? null : ImageCache.getImage(card, matchUI.getCurrentPlayer(), imagePanel.getWidth(), imagePanel.getHeight());
+        final BufferedImage image = card == null ? null : ImageCache.getImage(card, matchUI.getLocalPlayers(), imagePanel.getWidth(), imagePanel.getHeight());
         if (fromSetCard) {
             setImage(image);
         }

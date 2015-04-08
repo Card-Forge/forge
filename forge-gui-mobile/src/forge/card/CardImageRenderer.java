@@ -330,7 +330,7 @@ public class CardImageRenderer {
     }
 
     public static void drawZoom(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h) {
-        final Texture image = ImageCache.getImage(card.getState(altState).getImageKey(MatchController.instance.getCurrentPlayer()), true);
+        final Texture image = ImageCache.getImage(card.getState(altState).getImageKey(MatchController.instance.getLocalPlayers()), true);
         if (image == null) { //draw details if can't draw zoom
             drawDetails(g, card, gameView, altState, x, y, w, h);
             return;

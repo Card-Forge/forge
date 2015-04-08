@@ -84,7 +84,7 @@ public class CardRenderer {
         return getCardArt(ImageKeys.getImageKey(pc, false), pc.getRules().getSplitType() == CardSplitType.Split);
     }
     public static FImageComplex getCardArt(CardView card) {
-        return getCardArt(card.getCurrentState().getImageKey(null), card.isSplitCard());
+        return getCardArt(card.getCurrentState().getImageKey(), card.isSplitCard());
     }
     public static FImageComplex getCardArt(String imageKey, boolean isSplitCard) {
         FImageComplex cardArt = cardArtCache.get(imageKey);
