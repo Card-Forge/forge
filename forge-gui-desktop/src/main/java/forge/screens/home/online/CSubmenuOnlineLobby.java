@@ -84,7 +84,6 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
             }
         });
 
-        view.populate();
         view.update(true);
 
         Singletons.getControl().setCurrentScreen(FScreen.ONLINE_LOBBY);

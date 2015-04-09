@@ -33,9 +33,7 @@ import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
 import forge.deck.DeckType;
 import forge.deck.DeckgenUtil;
-import forge.deckchooser.DecksComboBoxEvent;
 import forge.deckchooser.FDeckChooser;
-import forge.deckchooser.IDecksComboBoxListener;
 import forge.game.GameType;
 import forge.game.card.CardView;
 import forge.gui.CardDetailPanel;
@@ -80,7 +78,6 @@ public class VLobby implements IUpdateable {
     private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Constructed");
     private int activePlayersNum = 0;
     private int playerWithFocus = 0; // index of the player that currently has focus
-    private PlayerPanel playerPanelWithFocus;
 
     private final StartButton btnStart  = new StartButton();
     private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
@@ -113,12 +110,11 @@ public class VLobby implements IUpdateable {
     private final Deck[] decks = new Deck[MAX_PLAYERS];
 
     // Variants
-    private final List<FList<Object>> schemeDeckLists = new ArrayList<FList<Object>>();
-    private final List<FPanel> schemeDeckPanels = new ArrayList<FPanel>(MAX_PLAYERS);
-    private int lastArchenemy = 0;
-
     private final List<FList<Object>> commanderDeckLists = new ArrayList<FList<Object>>();
     private final List<FPanel> commanderDeckPanels = new ArrayList<FPanel>(MAX_PLAYERS);
+
+    private final List<FList<Object>> schemeDeckLists = new ArrayList<FList<Object>>();
+    private final List<FPanel> schemeDeckPanels = new ArrayList<FPanel>(MAX_PLAYERS);
 
     private final List<FList<Object>> planarDeckLists = new ArrayList<FList<Object>>();
     private final List<FPanel> planarDeckPanels = new ArrayList<FPanel>(MAX_PLAYERS);
@@ -193,17 +189,15 @@ public class VLobby implements IUpdateable {
         }
     }
 
-    public void populate() {
-        for (final FDeckChooser fdc : deckChoosers) {
-            fdc.populate();
-            fdc.getDecksComboBox().addListener(new IDecksComboBoxListener() {
-                @Override
-                public void deckTypeSelected(DecksComboBoxEvent ev) {
-                    playerPanelWithFocus.focusOnAvatar();
-                }
-            });
+    public void updateDeckPanel() {
+        for (int iPlayer = 0; iPlayer < activePlayersNum; iPlayer++) {
+            final FDeckChooser fdc = getDeckChooser(iPlayer);
+            fdc.restoreSavedState();
         }
-        populateDeckPanel(GameType.Constructed);
+    }
+
+    public void focusOnAvatar() {
+        getPlayerPanelWithFocus().focusOnAvatar();
     }
 
     public void update(final boolean fullUpdate) {
@@ -221,6 +215,7 @@ public class VLobby implements IUpdateable {
             if (i < activePlayersNum) {
                 // visible panels
                 final LobbySlot slot = lobby.getSlot(i);
+                final FDeckChooser deckChooser = getDeckChooser(i);
                 final PlayerPanel panel;
                 final boolean isNewPanel;
                 if (hasPanel) {
@@ -234,6 +229,7 @@ public class VLobby implements IUpdateable {
                         constraints += ", gaptop 5px";
                     }
                     playersScroll.add(panel, constraints);
+                    deckChooser.restoreSavedState();
                     if (i == 0) {
                         changePlayerFocus(0);
                     }
@@ -253,7 +249,6 @@ public class VLobby implements IUpdateable {
                 panel.setMayRemove(lobby.mayRemove(i));
                 panel.update();
 
-                final FDeckChooser deckChooser = getDeckChooser(i);
                 deckChooser.setIsAi(slot.getType() == LobbySlotType.AI);
                 if (fullUpdate && (type == LobbySlotType.LOCAL || type == LobbySlotType.AI)) {
                     selectDeck(i);
@@ -325,8 +320,8 @@ public class VLobby implements IUpdateable {
      * These are added to a list which can be referenced to populate the deck panel appropriately. */
     @SuppressWarnings("serial")
     private void buildDeckPanel(final int playerIndex) {
-        String sectionConstraints = "insets 0, gap 0, wrap";
-        String labelConstraints = "gaptop 10px, gapbottom 5px";
+        final String sectionConstraints = "insets 0, gap 0, wrap";
+        final String labelConstraints = "gaptop 10px, gapbottom 5px";
 
         // Main deck
         final FDeckChooser mainChooser = new FDeckChooser(null, false);
@@ -637,14 +632,14 @@ public class VLobby implements IUpdateable {
     FCheckBox getVntTinyLeaders()     { return vntTinyLeaders; }
     FCheckBox getVntVanguard()        { return vntVanguard; }
 
-    public int getLastArchenemy() { return lastArchenemy; }
-    public void setLastArchenemy(final int archenemy) { lastArchenemy = archenemy; }
-
     public final List<PlayerPanel> getPlayerPanels() {
         return playerPanels;
     }
-    public final PlayerPanel getPlayerPanelWithFocus() {
-        return playerPanelWithFocus;
+    private PlayerPanel getPlayerPanelWithFocus() {
+        return getPlayerPanels().get(playerWithFocus);
+    }
+    boolean hasFocus(final int iPlayer) {
+        return iPlayer == playerWithFocus;
     }
 
     public final FDeckChooser getDeckChooser(int playernum) {
@@ -684,14 +679,15 @@ public class VLobby implements IUpdateable {
     }
 
     void changePlayerFocus(int newFocusOwner, GameType gType) {
-        if (playerPanelWithFocus != null) {
-            playerPanelWithFocus.setFocused(false);
+        final PlayerPanel oldFocus = getPlayerPanelWithFocus();
+        if (oldFocus != null) {
+            oldFocus.setFocused(false);
         }
         playerWithFocus = newFocusOwner;
-        playerPanelWithFocus = playerPanels.get(playerWithFocus);
-        playerPanelWithFocus.setFocused(true);
+        final PlayerPanel newFocus = getPlayerPanelWithFocus();
+        newFocus.setFocused(true);
 
-        playersScroll.getViewport().scrollRectToVisible(playerPanelWithFocus.getBounds());
+        playersScroll.getViewport().scrollRectToVisible(newFocus.getBounds());
         populateDeckPanel(gType);
 
         refreshPanels(true, true);

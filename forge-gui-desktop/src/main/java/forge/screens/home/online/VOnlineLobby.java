@@ -61,7 +61,7 @@ public enum VOnlineLobby implements IVDoc<COnlineLobby>, IVTopLevelUI {
             fdc.populate();
             fdc.getDecksComboBox().addListener(new IDecksComboBoxListener() {
                 @Override public final void deckTypeSelected(final DecksComboBoxEvent ev) {
-                    lobby.getPlayerPanelWithFocus().focusOnAvatar();
+                    lobby.focusOnAvatar();
                 }
             });
         }

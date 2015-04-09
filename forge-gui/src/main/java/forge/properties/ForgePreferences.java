@@ -167,6 +167,12 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         public String getDefault() {
             return strDefaultVal;
         }
+
+        public static FPref[] CONSTRUCTED_DECK_STATES = {
+            CONSTRUCTED_P1_DECK_STATE, CONSTRUCTED_P2_DECK_STATE,
+            CONSTRUCTED_P3_DECK_STATE, CONSTRUCTED_P4_DECK_STATE,
+            CONSTRUCTED_P5_DECK_STATE, CONSTRUCTED_P6_DECK_STATE,
+            CONSTRUCTED_P7_DECK_STATE, CONSTRUCTED_P8_DECK_STATE };
     }
 
     public static enum CardSizeType {

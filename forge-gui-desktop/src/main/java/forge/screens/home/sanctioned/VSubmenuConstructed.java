@@ -131,7 +131,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             fdc.populate();
             fdc.getDecksComboBox().addListener(new IDecksComboBoxListener() {
                 @Override public final void deckTypeSelected(final DecksComboBoxEvent ev) {
-                    vLobby.getPlayerPanelWithFocus().focusOnAvatar();
+                    vLobby.focusOnAvatar();
                 }
             });
         }

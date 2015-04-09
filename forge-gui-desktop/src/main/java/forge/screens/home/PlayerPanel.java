@@ -346,10 +346,14 @@ public class PlayerPanel extends FPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (lobby.getPlayerPanelWithFocus() != this) {
+        if (!hasFocusInLobby()) {
             FSkin.setGraphicsColor(g, unfocusedPlayerOverlay);
             g.fillRect(0, 0, this.getWidth(), this.getHeight());
         }
+    }
+
+    private boolean hasFocusInLobby() {
+        return lobby.hasFocus(index);
     }
 
     int getIndex() {

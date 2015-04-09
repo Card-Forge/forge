@@ -204,12 +204,15 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     }
 
     public CardPool getAllCardsInASinglePool() {
-        CardPool allCards = new CardPool(); // will count cards in this pool to enforce restricted
+        return getAllCardsInASinglePool(true);
+    }
+    public CardPool getAllCardsInASinglePool(final boolean includeCommander) {
+        final CardPool allCards = new CardPool(); // will count cards in this pool to enforce restricted
         allCards.addAll(this.getMain());
         if (this.has(DeckSection.Sideboard)) {
             allCards.addAll(this.get(DeckSection.Sideboard));
         }
-        if (this.has(DeckSection.Commander)) {
+        if (includeCommander && this.has(DeckSection.Commander)) {
             allCards.addAll(this.get(DeckSection.Commander));
         }
         // do not include schemes / avatars and any non-regular cards

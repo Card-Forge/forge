@@ -17,6 +17,18 @@
  */
 package forge.deck;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map.Entry;
+
+import org.apache.commons.lang3.Range;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableSet;
+
 import forge.StaticData;
 import forge.card.CardRules;
 import forge.card.CardType;
@@ -27,17 +39,6 @@ import forge.deck.generation.IDeckGenPool;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
-
-import org.apache.commons.lang3.Range;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
-import com.google.common.base.Predicate;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map.Entry;
 
 /**
  * GameType is an enum to determine the type of current game. :)
@@ -66,8 +67,7 @@ public enum DeckFormat {
             return true;
         }
     }) {
-        private final HashSet<String> bannedCommanders = new HashSet<String>(Arrays.asList(
-                "Derevi, Empyrial Tactician", "Erayo, Soratami Ascendant", "Rofellos, Llanowar Emissary"));
+        private final ImmutableSet<String> bannedCommanders = ImmutableSet.of("Derevi, Empyrial Tactician", "Erayo, Soratami Ascendant", "Rofellos, Llanowar Emissary");
 
         @Override
         public boolean isLegalCommander(CardRules rules) {
@@ -100,6 +100,10 @@ public enum DeckFormat {
         sideRange = sideRange0;
         maxCardCopies = maxCardCopies0;
         cardPoolFilter = cardPoolFilter0;
+    }
+
+    private boolean hasCommander() {
+        return this == Commander || this == TinyLeaders;
     }
 
     /**
@@ -159,58 +163,40 @@ public enum DeckFormat {
         // Adjust minimum base on number of Advantageous Proclamation or similar cards
 
         if (deckSize < min) {
-            return String.format("should have a minimum of %d cards", min);
+            return String.format("should have at least %d cards", min);
         }
 
         if (deckSize > max) {
-            return String.format("should not exceed a maximum of %d cards", max);
+            return String.format("should have no more than %d cards", max);
         }
 
-        if (this == Commander || this == TinyLeaders) { //Must contain exactly 1 legendary Commander and a sideboard of 10 or zero cards.
-        	final CardPool cmd = deck.get(DeckSection.Commander);
-        	if (cmd == null || cmd.isEmpty()) {
-        		return "is missing a commander";
-        	}
-        	if (!isLegalCommander(cmd.get(0).getRules())) {
-        		return "has an illegal commander";
-        	}
+        if (hasCommander()) { //Must contain exactly 1 legendary Commander and a sideboard of 10 or zero cards.
+            final CardPool cmd = deck.get(DeckSection.Commander);
+            if (cmd == null || cmd.isEmpty()) {
+                return "is missing a commander";
+            }
+            if (!isLegalCommander(cmd.get(0).getRules())) {
+                return "has an illegal commander";
+            }
 
-        	ColorSet cmdCI = cmd.get(0).getRules().getColorIdentity();
-        	List<PaperCard> erroneousCI = new ArrayList<PaperCard>();
+            final ColorSet cmdCI = cmd.get(0).getRules().getColorIdentity();
+            final List<PaperCard> erroneousCI = new ArrayList<PaperCard>();
 
-        	for (Entry<PaperCard, Integer> cp : deck.get(DeckSection.Main)) {
-        		if (!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI.getColor())) {
-        			erroneousCI.add(cp.getKey());
-        		}
-        	}
-        	if (deck.has(DeckSection.Sideboard)) {
-        		for (Entry<PaperCard, Integer> cp : deck.get(DeckSection.Sideboard)) {
-        			if (!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI.getColor())) {
-        				erroneousCI.add(cp.getKey());
-        			}
-        		}
-        	}
-
-        	if (erroneousCI.size() > 0) {
-        		StringBuilder sb = new StringBuilder("contains card that do not match the commanders color identity:");
-
-        		for (PaperCard cp : erroneousCI) {
-        			sb.append("\n").append(cp.getName());
-        		}
-
-        		return sb.toString();
-        	}
-        }
-
-        if (cardPoolFilter != null) {
-            List<PaperCard> erroneousCI = new ArrayList<PaperCard>();
-            for (Entry<PaperCard, Integer> cp : deck.getAllCardsInASinglePool()) {
-                if (!cardPoolFilter.apply(cp.getKey().getRules())) {
+            for (final Entry<PaperCard, Integer> cp : deck.get(DeckSection.Main)) {
+                if (!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI.getColor())) {
                     erroneousCI.add(cp.getKey());
                 }
             }
+            if (deck.has(DeckSection.Sideboard)) {
+                for (final Entry<PaperCard, Integer> cp : deck.get(DeckSection.Sideboard)) {
+                    if (!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI.getColor())) {
+                        erroneousCI.add(cp.getKey());
+                    }
+                }
+            }
+
             if (erroneousCI.size() > 0) {
-                StringBuilder sb = new StringBuilder("contains the following illegal cards:\n");
+                StringBuilder sb = new StringBuilder("contains one or more cards that do not match the commanders color identity:");
 
                 for (PaperCard cp : erroneousCI) {
                     sb.append("\n").append(cp.getName());
@@ -220,29 +206,43 @@ public enum DeckFormat {
             }
         }
 
-        int maxCopies = getMaxCardCopies();
+        if (cardPoolFilter != null) {
+            final List<PaperCard> erroneousCI = new ArrayList<PaperCard>();
+            for (final Entry<PaperCard, Integer> cp : deck.getAllCardsInASinglePool()) {
+                if (!cardPoolFilter.apply(cp.getKey().getRules())) {
+                    erroneousCI.add(cp.getKey());
+                }
+            }
+            if (erroneousCI.size() > 0) {
+                final StringBuilder sb = new StringBuilder("contains the following illegal cards:\n");
+
+                for (final PaperCard cp : erroneousCI) {
+                    sb.append("\n").append(cp.getName());
+                }
+
+                return sb.toString();
+            }
+        }
+
+        final int maxCopies = getMaxCardCopies();
         if (maxCopies < Integer.MAX_VALUE) {
             //Must contain no more than 4 of the same card
             //shared among the main deck and sideboard, except
             //basic lands, Shadowborn Apostle and Relentless Rats
 
-            CardPool tmp = new CardPool(deck.getMain());
-            if (deck.has(DeckSection.Sideboard)) {
-                tmp.addAll(deck.get(DeckSection.Sideboard));
-            }
-            if (deck.has(DeckSection.Commander) && this == Commander) {
-                tmp.addAll(deck.get(DeckSection.Commander));
-            }
-
-            List<String> limitExceptions = Arrays.asList(new String[]{"Relentless Rats", "Shadowborn Apostle"});
+            final CardPool allCards = deck.getAllCardsInASinglePool(hasCommander());
+            final ImmutableSet<String> limitExceptions = ImmutableSet.of("Relentless Rats", "Shadowborn Apostle");
 
             // should group all cards by name, so that different editions of same card are really counted as the same card
-            for (Entry<String, Integer> cp : Aggregates.groupSumBy(tmp, PaperCard.FN_GET_NAME)) {
-                IPaperCard simpleCard = StaticData.instance().getCommonCards().getCard(cp.getKey());
-                boolean canHaveMultiple = simpleCard.getRules().getType().isBasicLand() || limitExceptions.contains(cp.getKey());
+            for (final Entry<String, Integer> cp : Aggregates.groupSumBy(allCards, PaperCard.FN_GET_NAME)) {
+                final IPaperCard simpleCard = StaticData.instance().getCommonCards().getCard(cp.getKey());
+                if (simpleCard == null) {
+                    return String.format("contains the nonexisting card %s", cp.getKey());
+                }
 
+                final boolean canHaveMultiple = simpleCard.getRules().getType().isBasicLand() || limitExceptions.contains(cp.getKey());
                 if (!canHaveMultiple && cp.getValue() > maxCopies) {
-                    return String.format("must not contain more than %d of '%s' card", maxCopies, cp.getKey());
+                    return String.format("must not contain more than %d copies of the card %s", maxCopies, cp.getKey());
                 }
             }
         }

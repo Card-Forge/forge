@@ -17,14 +17,15 @@
  */
 package forge.screens.deckeditor.controllers;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Supplier;
 
 import forge.deck.DeckBase;
 import forge.screens.deckeditor.menus.DeckFileMenu;
 import forge.screens.deckeditor.views.VCurrentDeck;
+import forge.screens.home.sanctioned.VSubmenuConstructed;
 import forge.util.storage.IStorage;
-
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * TODO: Write javadoc for this type.
@@ -199,6 +200,8 @@ public class DeckController<T extends DeckBase> {
         this.currentFolder.add((T) this.model.copyTo(this.model.getName()));
         this.modelInStorage = true;
         this.setSaved(true);
+
+        VSubmenuConstructed.SINGLETON_INSTANCE.getLobby().updateDeckPanel();
     }
 
     /**

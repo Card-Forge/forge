@@ -276,8 +276,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             lstDecksContainer = new ItemManagerContainer(lstDecks);
             decksComboBox.addListener(this);
             restoreSavedState();
-        }
-        else {
+        } else {
             removeAll();
         }
         this.setLayout(new MigLayout("insets 0, gap 0"));
@@ -330,6 +329,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private void refreshDecksList(DeckType deckType, boolean forceRefresh, DecksComboBoxEvent ev) {
+        if (decksComboBox == null) { return; } // Not yet populated
         if (selectedDeckType == deckType && !forceRefresh) { return; }
         selectedDeckType = deckType;
 
@@ -406,7 +406,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         }
     }
 
-    private void restoreSavedState() {
+    public void restoreSavedState() {
         DeckType oldDeckType = selectedDeckType;
         if (stateSetting == null) {
             //if can't restore saved state, just refresh deck list

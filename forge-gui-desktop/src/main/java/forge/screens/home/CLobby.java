@@ -8,6 +8,9 @@ import javax.swing.SwingUtilities;
 
 import forge.deck.Deck;
 import forge.deck.DeckType;
+import forge.deckchooser.DecksComboBoxEvent;
+import forge.deckchooser.FDeckChooser;
+import forge.deckchooser.IDecksComboBoxListener;
 import forge.model.CardCollections;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
@@ -102,14 +105,16 @@ public class CLobby {
     }
 
     public void initialize() {
-        view.getDeckChooser(0).initialize(FPref.CONSTRUCTED_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
-        view.getDeckChooser(1).initialize(FPref.CONSTRUCTED_P2_DECK_STATE, DeckType.COLOR_DECK);
-        view.getDeckChooser(2).initialize(FPref.CONSTRUCTED_P3_DECK_STATE, DeckType.COLOR_DECK);
-        view.getDeckChooser(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, DeckType.COLOR_DECK);
-        view.getDeckChooser(4).initialize(FPref.CONSTRUCTED_P5_DECK_STATE, DeckType.COLOR_DECK);
-        view.getDeckChooser(5).initialize(FPref.CONSTRUCTED_P6_DECK_STATE, DeckType.COLOR_DECK);
-        view.getDeckChooser(6).initialize(FPref.CONSTRUCTED_P7_DECK_STATE, DeckType.COLOR_DECK);
-        view.getDeckChooser(7).initialize(FPref.CONSTRUCTED_P8_DECK_STATE, DeckType.COLOR_DECK);
+        for (int iSlot = 0; iSlot < VLobby.MAX_PLAYERS; iSlot++) {
+            final FDeckChooser fdc = view.getDeckChooser(iSlot);
+            fdc.initialize(FPref.CONSTRUCTED_DECK_STATES[iSlot], defaultDeckTypeForSlot(iSlot));
+            fdc.populate();
+            fdc.getDecksComboBox().addListener(new IDecksComboBoxListener() {
+                @Override public final void deckTypeSelected(final DecksComboBoxEvent ev) {
+                    view.focusOnAvatar();
+                }
+            });
+        }
 
         final ForgePreferences prefs = FModel.getPreferences();
         // Checkbox event handling
@@ -134,4 +139,7 @@ public class CLobby {
         view.getCbArtifacts().setSelected(prefs.getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
     }
 
+    private static DeckType defaultDeckTypeForSlot(final int iSlot) {
+        return iSlot == 0 ? DeckType.PRECONSTRUCTED_DECK : DeckType.COLOR_DECK;
+    }
 }
