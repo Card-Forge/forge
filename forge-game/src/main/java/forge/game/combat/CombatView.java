@@ -3,10 +3,11 @@ package forge.game.combat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
@@ -14,7 +15,6 @@ import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
 import forge.util.FCollection;
-
 
 public class CombatView extends TrackableObject {
     private static final long serialVersionUID = 68085618912864941L;
@@ -68,11 +68,15 @@ public class CombatView extends TrackableObject {
     }
 
     public boolean isBlocking(final CardView card) {
-        for (final FCollection<CardView> blockers : getAttackersWithBlockers().values()) {
+        final List<FCollection<CardView>> allBlockers;
+        synchronized (this) {
+            allBlockers = Lists.newArrayList(getAttackersWithBlockers().values());
+        }
+        for (final FCollection<CardView> blockers : allBlockers) {
             if (blockers == null) {
                 continue;
             }
-            if (Iterables.contains(blockers, card)) {
+            if (blockers.contains(card)) {
                 return true;
             }
         }
@@ -122,8 +126,12 @@ public class CombatView extends TrackableObject {
     }
 
     public FCollection<CardView> getAttackersOf(final GameEntityView defender) {
-        FCollection<CardView> views = new FCollection<CardView>();
-        for (Entry<CardView, GameEntityView> entry : getAttackersWithDefenders().entrySet()) {
+        final List<Entry<CardView, GameEntityView>> attackersWithDefenders;
+        synchronized (this) {
+            attackersWithDefenders = Lists.newArrayList(getAttackersWithDefenders().entrySet());
+        }
+        final FCollection<CardView> views = new FCollection<CardView>();
+        for (final Entry<CardView, GameEntityView> entry : attackersWithDefenders) {
             if (entry.getValue().equals(defender)) {
                 views.add(entry.getKey());
             }
@@ -131,8 +139,12 @@ public class CombatView extends TrackableObject {
         return views;
     }
     public Iterable<FCollection<CardView>> getAttackingBandsOf(final GameEntityView defender) {
-        ArrayList<FCollection<CardView>> views = new ArrayList<FCollection<CardView>>();
-        for (Entry<FCollection<CardView>, GameEntityView> entry : getBandsWithDefenders().entrySet()) {
+        final List<Entry<FCollection<CardView>, GameEntityView>> bandsWithDefenders;
+        synchronized (this) {
+            bandsWithDefenders = Lists.newArrayList(getBandsWithDefenders().entrySet());
+        }
+        final List<FCollection<CardView>> views = new ArrayList<FCollection<CardView>>();
+        for (final Entry<FCollection<CardView>, GameEntityView> entry : bandsWithDefenders) {
             if (entry.getValue().equals(defender)) {
                 views.add(entry.getKey());
             }

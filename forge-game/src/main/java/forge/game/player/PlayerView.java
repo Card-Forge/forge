@@ -187,8 +187,9 @@ public class PlayerView extends GameEntityView {
     }
     public List<String> getDisplayableKeywords() {
         final List<String> allKws;
-        synchronized (this) {
-            allKws = Lists.newArrayList(getKeywords());
+        final KeywordCollectionView kws = getKeywords();
+        synchronized (kws) {
+            allKws = Lists.newArrayList(kws);
         }
         while (allKws.remove("CanSeeOpponentsFaceDownCards")) {
         }
