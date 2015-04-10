@@ -21,6 +21,7 @@ import forge.net.game.NetEvent;
 import forge.net.game.ReplyEvent;
 import forge.net.game.UpdateLobbyPlayerEvent;
 import forge.net.game.server.RemoteClient;
+import forge.properties.ForgeConstants;
 import forge.util.ITriggerEvent;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
@@ -40,10 +41,18 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
 import java.io.Serializable;
+import java.net.Inet4Address;
+import java.net.UnknownHostException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.log4j.PropertyConfigurator;
+import org.fourthline.cling.UpnpService;
+import org.fourthline.cling.UpnpServiceImpl;
+import org.fourthline.cling.support.igd.PortMappingListener;
+import org.fourthline.cling.support.model.PortMapping;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -55,15 +64,29 @@ public final class FServerManager {
     private boolean isHosting = false;
     private final EventLoopGroup bossGroup = new NioEventLoopGroup(1);
     private final EventLoopGroup workerGroup = new NioEventLoopGroup();
+    private UpnpService upnpService = null;
     private final Map<Channel, RemoteClient> clients = Maps.newTreeMap();
     private ServerGameLobby localLobby;
     private ILobbyListener lobbyListener;
+    private final Thread shutdownHook = new Thread(new Runnable() {
+        @Override public final void run() {
+            if (isHosting()) {
+                stopServer(false);
+            }
+        }
+    });
 
     private FServerManager() {
     }
 
+    /**
+     * Get the singleton instance of {@link FServerManager}.
+     * 
+     * @return the singleton FServerManager.
+     */
     public static FServerManager getInstance() {
         if (instance == null) {
+            PropertyConfigurator.configure(ForgeConstants.ASSETS_DIR + "/src/main/resources/log4jConfig.config");
             instance = new FServerManager();
         }
         return instance;
@@ -103,6 +126,8 @@ public final class FServerManager {
                     
                 }
             }).start();
+            mapNatPort(port);
+            Runtime.getRuntime().addShutdownHook(shutdownHook);
             isHosting = true;
         } catch (final InterruptedException e) {
             e.printStackTrace();
@@ -110,8 +135,18 @@ public final class FServerManager {
     }
 
     public void stopServer() {
+        stopServer(true);
+    }
+    private void stopServer(final boolean removeShutdownHook) {
         bossGroup.shutdownGracefully();
         workerGroup.shutdownGracefully();
+        if (upnpService != null) {
+            upnpService.shutdown();
+            upnpService = null;
+        }
+        if (removeShutdownHook) {
+            Runtime.getRuntime().removeShutdownHook(shutdownHook);
+        }
         isHosting = false;
     }
 
@@ -167,10 +202,21 @@ public final class FServerManager {
         return null;
     }
 
-    @Override
-    protected void finalize() throws Throwable {
-        super.finalize();
-        stopServer();
+    private void mapNatPort(final int port) {
+        final String localAddress;
+        try {
+            localAddress = Inet4Address.getLocalHost().getHostAddress();
+        } catch (final UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
+
+        final PortMapping portMapping = new PortMapping(port, localAddress, PortMapping.Protocol.TCP, "Forge");
+        if (upnpService != null) {
+            // Safeguard shutdown call, to prevent lingering port mappings
+            upnpService.shutdown();
+        }
+        upnpService = new UpnpServiceImpl(new PortMappingListener(portMapping));
+        upnpService.getControlPoint().search();
     }
 
     private class MessageHandler extends ChannelInboundHandlerAdapter {

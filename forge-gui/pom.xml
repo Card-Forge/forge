@@ -10,6 +10,16 @@
     <artifactId>forge-gui</artifactId>
     <name>Forge Gui</name>
 
+    <repositories>
+        <repository>
+            <id>4thline-repo</id>
+            <url>http://4thline.org/m2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>forge</groupId>
@@ -51,6 +61,16 @@
             <artifactId>netty-all</artifactId>
             <version>4.0.25.Final</version>
             <scope>compile</scope>
-          </dependency>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <dependency>
+          <groupId>org.fourthline.cling</groupId>
+          <artifactId>cling-support</artifactId>
+          <version>2.0.1</version>
+        </dependency>
     </dependencies>
 </project>
