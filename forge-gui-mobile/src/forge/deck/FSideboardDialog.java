@@ -29,7 +29,7 @@ public class FSideboardDialog extends FDialog {
 
         callback = callback0;
         tabs = add(new SideboardTabs(sideboard, main));
-        initButton(1, "OK", new FEventHandler() {
+        initButton(0, "OK", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 hide();
