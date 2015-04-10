@@ -61,11 +61,11 @@ public class CardView extends GameEntityView {
         return collection;
     }
 
-    public static boolean mayViewAny(Iterable<CardView> cards, Iterable<PlayerView> viewer) {
+    public static boolean mayViewAny(Iterable<CardView> cards, Iterable<PlayerView> viewers) {
         if (cards == null) { return false; }
 
         for (CardView cv : cards) {
-            if (cv.canBeShownToAny(viewer)) {
+            if (cv.canBeShownToAny(viewers)) {
                 return true;
             }
         }
@@ -340,6 +340,8 @@ public class CardView extends GameEntityView {
     }
 
     public boolean canBeShownToAny(final Iterable<PlayerView> viewers) {
+        if (viewers == null || Iterables.isEmpty(viewers)) { return true; }
+
         return Iterables.any(viewers, new Predicate<PlayerView>() {
             public final boolean apply(final PlayerView input) {
                 return canBeShownTo(input);
@@ -798,7 +800,7 @@ public class CardView extends GameEntityView {
             return getImageKey(null);
         }
         public String getImageKey(Iterable<PlayerView> viewers) {
-            if (viewers == null || canBeShownToAny(viewers)) {
+            if (canBeShownToAny(viewers)) {
                 return get(TrackableProperty.ImageKey);
             }
             return ImageKeys.HIDDEN_CARD;
