@@ -89,9 +89,16 @@ public class InputAttack extends InputSyncronizedBase {
     private void updatePrompt() {
         if (canCallBackAttackers()) {
             getController().getGui().updateButtons(getOwner(), "OK", "Call Back", true, true, true);
-        } else {
+        }
+        else {
             getController().getGui().updateButtons(getOwner(), "OK", "Alpha Strike", true, true, true);
         }
+    }
+
+    @Override
+    protected final boolean allowAwaitNextInput() {
+        //wait for opponent to declare blockers if any attackers
+        return !combat.getAttackers().isEmpty();
     }
 
     @Override
