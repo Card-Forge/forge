@@ -55,23 +55,36 @@ public class VZoneDisplay extends VCardDisplayArea {
                 break;
             }
         }
-        if (idx >= 0) { //cascade cards back from revealed panel
-            clearChildren();
-            int maxIdx = cardPanels.size() - 1;
-            int offset = Math.max(idx, maxIdx - idx);
-            for (int i = offset; i > 0; i--) {
-                int idx1 = idx - i;
-                int idx2 = idx + i;
-                if (idx1 >= 0) {
-                    add(cardPanels.get(idx1));
-                }
-                if (idx2 <= maxIdx) {
-                    add(cardPanels.get(idx2));
-                }
-            }
-            revealedPanel = cardPanels.get(idx);
-            add(revealedPanel);
+        if (idx >= 0) {
+            setRevealedPanel(idx);
         }
+    }
+
+    private void setRevealedPanel(int idx) {
+        //cascade cards back from revealed panel
+        clearChildren();
+        int maxIdx = cardPanels.size() - 1;
+        int offset = Math.max(idx, maxIdx - idx);
+        for (int i = offset; i > 0; i--) {
+            int idx1 = idx - i;
+            int idx2 = idx + i;
+            if (idx1 >= 0) {
+                add(cardPanels.get(idx1));
+            }
+            if (idx2 <= maxIdx) {
+                add(cardPanels.get(idx2));
+            }
+        }
+        revealedPanel = cardPanels.get(idx);
+        add(revealedPanel);
+    }
+
+    @Override
+    public void setSelectedIndex(int index) {
+        if (revealedPanel == null) {
+            super.setSelectedIndex(index);
+        }
+        setRevealedPanel(index);
     }
 
     @Override
