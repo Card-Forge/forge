@@ -27,7 +27,7 @@ public class CardZoom extends FOverlay {
 
     private static final CardZoom cardZoom = new CardZoom();
     private static List<?> items;
-    private static int currentIndex;
+    private static int currentIndex, initialIndex;
     private static CardView currentCard, prevCard, nextCard;
     private static boolean zoomMode = true;
     private static boolean oneCardView = false;
@@ -49,6 +49,7 @@ public class CardZoom extends FOverlay {
         items = items0;
         activateHandler = activateHandler0;
         currentIndex = currentIndex0;
+        initialIndex = currentIndex0;
         currentCard = getCardView(items.get(currentIndex));
         prevCard = currentIndex > 0 ? getCardView(items.get(currentIndex - 1)) : null;
         nextCard = currentIndex < items.size() - 1 ? getCardView(items.get(currentIndex + 1)) : null;
@@ -65,6 +66,18 @@ public class CardZoom extends FOverlay {
     }
 
     private CardZoom() {
+    }
+
+    @Override
+    public void setVisible(boolean visible0) {
+        if (this.isVisible() == visible0) { return; }
+
+        super.setVisible(visible0);
+
+        //update selected index when hidden if current index is different than initial index
+        if (!visible0 && activateHandler != null && currentIndex != initialIndex) {
+            activateHandler.setSelectedIndex(currentIndex);
+        }
     }
 
     private static void incrementCard(int dir) {
@@ -227,6 +240,7 @@ public class CardZoom extends FOverlay {
 
     public static interface ActivateHandler {
         String getActivateAction(int index);
+        void setSelectedIndex(int index);
         void activate(int index);
     }
 }

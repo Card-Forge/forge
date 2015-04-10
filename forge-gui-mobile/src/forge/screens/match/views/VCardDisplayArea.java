@@ -184,6 +184,13 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
     }
 
     @Override
+    public void setSelectedIndex(int index) {
+        //just scroll card into view
+        final CardAreaPanel cardPanel = CardAreaPanel.get(orderedCards.get(index));
+        scrollIntoView(cardPanel);
+    }
+
+    @Override
     public void activate(int index) {
         final CardAreaPanel cardPanel = CardAreaPanel.get(orderedCards.get(index));
         ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread in case a dialog needs to be shown
