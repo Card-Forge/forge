@@ -195,10 +195,10 @@ public class SFilterUtil {
                     result = !color.isMulticolor();
                     if (colors != MagicColor.ALL_COLORS) {
                         if (useColorIdentity) {
-                            result &= color.hasAnyColor(colors);
+                            result = result && color.hasAnyColor(colors);
                         }
                         else {
-                            result &= rules.canCastWithAvailable(colors);
+                            result = result && rules.canCastWithAvailable(colors);
                         }
                     }
                 }
@@ -206,9 +206,9 @@ public class SFilterUtil {
                     if (colors != 0 && colors != MagicColor.ALL_COLORS) {
                         //if colorless filtered out ensure phyrexian cards don't appear
                         //unless at least one of their colors is selected
-                        result &= color.hasAnyColor(colors);
+                        result = result && color.hasAnyColor(colors);
                     }
-                    result &= !color.isColorless();
+                    result = result && !color.isColorless();
                 }
                 return result;
             }
