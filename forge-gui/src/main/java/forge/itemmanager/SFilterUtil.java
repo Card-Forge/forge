@@ -2,9 +2,10 @@ package forge.itemmanager;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
-import forge.card.CardRulesPredicates.Presets;
+import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.deck.DeckProxy;
 import forge.game.GameFormat;
@@ -137,63 +138,81 @@ public class SFilterUtil {
     }
     
     public static Predicate<PaperCard> buildColorFilter(Map<SItemManagerUtil.StatTypes, ? extends IButton> buttonMap) {
-        byte colors = 0;
+        byte colors0 = 0;
 
         if (buttonMap.get(StatTypes.WHITE).isSelected()) {
-            colors |= MagicColor.WHITE;
+            colors0 |= MagicColor.WHITE;
         }
         if (buttonMap.get(StatTypes.BLUE).isSelected()) {
-            colors |= MagicColor.BLUE;
+            colors0 |= MagicColor.BLUE;
         }
         if (buttonMap.get(StatTypes.BLACK).isSelected()) {
-            colors |= MagicColor.BLACK;
+            colors0 |= MagicColor.BLACK;
         }
         if (buttonMap.get(StatTypes.RED).isSelected()) {
-            colors |= MagicColor.RED;
+            colors0 |= MagicColor.RED;
         }
         if (buttonMap.get(StatTypes.GREEN).isSelected()) {
-            colors |= MagicColor.GREEN;
+            colors0 |= MagicColor.GREEN;
         }
 
-        boolean wantColorless = buttonMap.get(StatTypes.COLORLESS).isSelected();
-        boolean wantMulticolor = buttonMap.get(StatTypes.MULTICOLOR).isSelected();
+        final byte colors = colors0;
+        final boolean wantColorless = buttonMap.get(StatTypes.COLORLESS).isSelected();
+        final boolean wantMulticolor = buttonMap.get(StatTypes.MULTICOLOR).isSelected();
 
-        Predicate<CardRules> preFinal = null;
-        if (wantMulticolor) {
-            if (colors == 0) { //handle showing all multi-color cards if all 5 colors are filtered
-                preFinal = Presets.IS_MULTICOLOR;
-                if (wantColorless) {
-                    preFinal = Predicates.or(preFinal, Presets.IS_COLORLESS);
+        return new Predicate<PaperCard>() {
+            @Override
+            public boolean apply(PaperCard card) {
+                CardRules rules = card.getRules();
+                ColorSet color = rules.getColor();
+
+                //use color identity for lands, which allows filtering to just lands that can be played in your deck
+                boolean useColorIdentity = rules.getType().isLand();
+                if (useColorIdentity) {
+                    color = rules.getColorIdentity();
                 }
-            }
-            else if (colors != MagicColor.ALL_COLORS) {
-                preFinal = CardRulesPredicates.canCastWithAvailable(colors);
-            }
-        }
-        else {
-            preFinal = Predicates.not(Presets.IS_MULTICOLOR);
-            if (colors != MagicColor.ALL_COLORS) {
-                preFinal = Predicates.and(CardRulesPredicates.canCastWithAvailable(colors), preFinal);
-            }
-        }
-        if (!wantColorless) {
-            if (colors != 0 && colors != MagicColor.ALL_COLORS) {
-                //if colorless filtered out ensure phyrexian cards don't appear
-                //unless at least one of their colors is selected
-                preFinal = Predicates.and(preFinal, CardRulesPredicates.isColor(colors));
-            }
-            preFinal = SFilterUtil.optimizedAnd(preFinal, Predicates.not(Presets.IS_COLORLESS));
-        }
 
-        if (preFinal == null) {
-            return new Predicate<PaperCard>() { //use custom return true delegate to validate the item is a card
-                @Override
-                public boolean apply(PaperCard card) {
-                    return true;
+                boolean result = true;
+                if (wantMulticolor) {
+                    if (colors == 0) { //handle showing all multi-color cards if all 5 colors are filtered
+                        if (color.isMulticolor()) {
+                            result = true;
+                        }
+                        else if (wantColorless && color.isColorless()) {
+                            result = true;
+                        }
+                    }
+                    else if (colors != MagicColor.ALL_COLORS) {
+                        if (useColorIdentity) {
+                            result = color.hasAllColors(colors);
+                        }
+                        else {
+                            result = rules.canCastWithAvailable(colors);
+                        }
+                    }
                 }
-            };
-        }
-        return Predicates.compose(preFinal, PaperCard.FN_GET_RULES);
+                else {
+                    result = !color.isMulticolor();
+                    if (colors != MagicColor.ALL_COLORS) {
+                        if (useColorIdentity) {
+                            result &= color.hasAnyColor(colors);
+                        }
+                        else {
+                            result &= rules.canCastWithAvailable(colors);
+                        }
+                    }
+                }
+                if (!wantColorless) {
+                    if (colors != 0 && colors != MagicColor.ALL_COLORS) {
+                        //if colorless filtered out ensure phyrexian cards don't appear
+                        //unless at least one of their colors is selected
+                        result &= color.hasAnyColor(colors);
+                    }
+                    result &= !color.isColorless();
+                }
+                return result;
+            }
+        };
     }
 
     public static Predicate<DeckProxy> buildDeckColorFilter(final Map<StatTypes, ? extends IButton> buttonMap) {
