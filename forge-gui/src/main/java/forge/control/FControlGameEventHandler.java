@@ -82,15 +82,13 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
             synchronized (cardsUpdate) {
                 if (!cardsUpdate.isEmpty()) {
-                    for (final CardView c : cardsUpdate) {
-                        matchController.updateSingleCard(c);
-                    }
+                    matchController.updateCards(cardsUpdate);
                     cardsUpdate.clear();
                 }
             }
             synchronized (cardsRefreshDetails) {
                 if (!cardsRefreshDetails.isEmpty()) {
-                    matchController.updateCards(cardsRefreshDetails);
+                    matchController.refreshCardDetails(cardsRefreshDetails);
                     cardsRefreshDetails.clear();
                 }
             }

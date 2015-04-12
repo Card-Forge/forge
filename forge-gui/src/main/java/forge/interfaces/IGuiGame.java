@@ -48,6 +48,7 @@ public interface IGuiGame {
     void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate);
     void updateSingleCard(CardView card);
     void updateCards(Iterable<CardView> cards);
+    void refreshCardDetails(Iterable<CardView> cards);
     void updateManaPool(Iterable<PlayerView> manaPoolUpdate);
     void updateLives(Iterable<PlayerView> livesUpdate);
     void setPanelSelection(CardView hostCard);

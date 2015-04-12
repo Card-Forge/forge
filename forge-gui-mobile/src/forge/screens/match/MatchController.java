@@ -96,6 +96,7 @@ public class MatchController extends AbstractGuiGame {
         return avatar;
     }
 
+    @Override
     public void refreshCardDetails(Iterable<CardView> cards) {
         //ensure cards appear in the correct row of the field
         for (VPlayerPanel pnl : view.getPlayerPanels().values()) {

@@ -91,6 +91,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
     }
 
+    @Override
+    public void refreshCardDetails(final Iterable<CardView> cards) {
+        //not needed for base game implementation
+    }
+
     public String getCardImageKey(final CardStateView csv) {
         return csv.getImageKey(getLocalPlayers());
     }
