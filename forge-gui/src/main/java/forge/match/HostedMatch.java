@@ -47,8 +47,6 @@ import forge.sound.SoundSystem;
 import forge.trackable.TrackableCollection;
 import forge.util.CollectionSuppliers;
 import forge.util.FCollectionView;
-import forge.util.GuiDisplayUtil;
-import forge.util.NameGenerator;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
 
@@ -227,6 +225,7 @@ public class HostedMatch {
                 match.startGame(game);
 
                 // After game is over...
+                isMatchOver = match.isMatchOver();
                 if (humanCount == 0) {
                     // ... if no human players, let AI decide next game
                     if (match.isMatchOver()) {
@@ -234,9 +233,6 @@ public class HostedMatch {
                     } else {
                         addNextGameDecision(null, NextGameDecision.CONTINUE);
                     }
-                }
-                if (match.isMatchOver()) {
-                    isMatchOver = true;
                 }
             }
         });
@@ -268,14 +264,12 @@ public class HostedMatch {
             humanController.getGui().afterGameEnd();
         }
         humanControllers.clear();
-        isMatchOver = true;
     }
 
     public void pause() {
         final ForgePreferences prefs = FModel.getPreferences();
         if (prefs == null) { return; } //do nothing if prefs haven't been initialized yet
 
-        SoundSystem.instance.pause();
         //pause playback if needed
         if (prefs.getPrefBoolean(FPref.UI_PAUSE_WHILE_MINIMIZED) && playbackControl != null) {
             playbackControl.getInput().pause();
@@ -283,18 +277,11 @@ public class HostedMatch {
     }
 
     public void resume() {
-        SoundSystem.instance.resume();
+        // Doesn't need to do anything right now
     }
 
     public boolean isMatchOver() {
         return isMatchOver;
-    }
-
-    /** Returns a random name from the supplied list. */
-    public static String getRandomName() {
-        final String playerName = GuiDisplayUtil.getPlayerName();
-        final String aiName = NameGenerator.getRandomName("Any", "Generic", playerName);
-        return aiName;
     }
 
     private final class MatchUiEventVisitor implements IUiEventVisitor<Void> {

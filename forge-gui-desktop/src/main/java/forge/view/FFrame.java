@@ -26,6 +26,7 @@ import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import forge.sound.SoundSystem;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.CompoundSkinBorder;
@@ -92,6 +93,10 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
     private void pause() {
         if (paused || !isMainFrame) { return; }
 
+        // Pause the sound
+        SoundSystem.instance.pause();
+
+        // Pause all hosted matches
         for (final HostedMatch hostedMatch : Singletons.getControl().getCurrentMatches()) {
             hostedMatch.pause();
         }
@@ -101,6 +106,10 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
     private void resume() {
         if (!paused || !isMainFrame) { return; }
 
+        // Resum the sound
+        SoundSystem.instance.resume();
+
+        // Resume all hosted matches
         for (final HostedMatch hostedMatch : Singletons.getControl().getCurrentMatches()) {
             hostedMatch.resume();
         }
