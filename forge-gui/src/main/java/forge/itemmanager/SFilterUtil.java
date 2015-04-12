@@ -175,12 +175,7 @@ public class SFilterUtil {
                 boolean result = true;
                 if (wantMulticolor) {
                     if (colors == 0) { //handle showing all multi-color cards if all 5 colors are filtered
-                        if (color.isMulticolor()) {
-                            result = true;
-                        }
-                        else if (wantColorless && color.isColorless()) {
-                            result = true;
-                        }
+                        result = color.isMulticolor() || (wantColorless && color.isColorless());
                     }
                     else if (colors != MagicColor.ALL_COLORS) {
                         if (useColorIdentity) {
