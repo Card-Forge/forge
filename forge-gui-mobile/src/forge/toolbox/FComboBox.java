@@ -17,7 +17,7 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
     private final List<T> items = new ArrayList<T>();
     private T selectedItem;
     private final DropDown dropDown = new DropDown();
-    private FEventHandler dropDownChangeHandler;
+    private FEventHandler dropDownItemTap, dropDownChangeHandler;
 
     public FComboBox() {
         initialize();
@@ -134,6 +134,13 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
         return false; //don't allow editing text
     }
 
+    public FEventHandler getDropDownItemTap() {
+        return dropDownItemTap;
+    }
+    public void setDropDownItemTap(FEventHandler itemTap0) {
+        dropDownItemTap = itemTap0;
+    }
+
     public FEventHandler getDropDownChangeHandler() {
         return dropDownChangeHandler;
     }
@@ -193,6 +200,9 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
                 FMenuItem menuItem = new FMenuItem(item.toString(), new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
+                        if (dropDownItemTap != null) {
+                            dropDownItemTap.handleEvent(new FEvent(FComboBox.this, FEventType.TAP, item));
+                        }
                         if (item != selectedItem) {
                             setSelectedItem(item);
                             if (dropDownChangeHandler != null) {

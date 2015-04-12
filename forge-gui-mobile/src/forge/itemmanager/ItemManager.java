@@ -187,7 +187,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
         sortCols.clear();
         if (cbxSortOptions != null) {
-            cbxSortOptions.setChangedHandler(null);
+            cbxSortOptions.setDropDownItemTap(null);
             cbxSortOptions.removeAllItems();
         }
 
@@ -226,10 +226,10 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         }
 
         if (cbxSortOptions != null) {
-            cbxSortOptions.setChangedHandler(new FEventHandler() {
+            cbxSortOptions.setDropDownItemTap(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    model.getCascadeManager().add(cbxSortOptions.getSelectedItem(), false);
+                    model.getCascadeManager().add((ItemColumn)e.getArgs(), false);
                     model.refreshSort();
                     ItemManagerConfig.save();
                     updateView(true, null);
