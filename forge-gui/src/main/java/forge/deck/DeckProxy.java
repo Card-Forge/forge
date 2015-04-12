@@ -1,6 +1,7 @@
 package forge.deck;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -13,8 +14,10 @@ import com.google.common.collect.Iterables;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
+import forge.card.CardRules;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.mana.ManaCostShard;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.item.InventoryItem;
@@ -136,16 +139,43 @@ public class DeckProxy implements InventoryItem {
     public ColorSet getColor() {
         if (color == null && !isGeneratedDeck()) {
             byte colorProfile = MagicColor.COLORLESS;
+            byte landProfile = MagicColor.COLORLESS;
+            HashSet<Byte> nonReqColors = null;
+
             for (Entry<DeckSection, CardPool> deckEntry : getDeck()) {
                 switch (deckEntry.getKey()) {
                 case Main:
                 case Commander:
                     for (Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
-                        colorProfile |= poolEntry.getKey().getRules().getColor().getColor();
+                        CardRules rules = poolEntry.getKey().getRules();
+                        if (rules.getType().isLand()) { //track color identity of lands separately
+                            landProfile |= rules.getColorIdentity().getColor();
+                        }
+                        else {
+                            for (ManaCostShard shard : rules.getManaCost()) {
+                                //track phyrexian and hybrid costs separately as they won't always affect color
+                                if (shard.isPhyrexian() || shard.isOr2Colorless() || !shard.isMonoColor()) {
+                                    if (nonReqColors == null) {
+                                        nonReqColors = new HashSet<Byte>();
+                                    }
+                                    nonReqColors.add(shard.getColorMask());
+                                }
+                                else {
+                                    colorProfile |= shard.getColorMask();
+                                }
+                            }
+                        }
                     }
                     break;
                 default:
                     break; //ignore other sections
+                }
+            }
+            if (nonReqColors != null) {
+                //if any non-required mana colors present, determine which colors, if any,
+                //need to be accounted for in color profile of deck
+                for (Byte colorMask : nonReqColors) {
+                    colorProfile |= (colorMask & landProfile);
                 }
             }
             color = ColorSet.fromMask(colorProfile);
