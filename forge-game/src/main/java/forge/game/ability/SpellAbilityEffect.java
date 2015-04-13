@@ -1,15 +1,21 @@
 package forge.game.ability;
 
-import forge.game.GameObject;
-import forge.game.card.CardFactoryUtil;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.SpellAbility;
-
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.Lists;
+
+import forge.game.GameObject;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardFactoryUtil;
+import forge.game.player.Player;
+import forge.game.spellability.AbilitySub;
+import forge.game.spellability.SpellAbility;
+import forge.util.FCollection;
 
 /**
  * <p>
@@ -20,7 +26,7 @@ import java.util.StringTokenizer;
  * @version $Id: AbilityFactoryAlterLife.java 17656 2012-10-22 19:32:56Z Max mtg $
  */
 
-public abstract class SpellAbilityEffect extends SaTargetRoutines {
+public abstract class SpellAbilityEffect {
 
     public abstract void resolve(SpellAbility sa);
 
@@ -128,5 +134,53 @@ public abstract class SpellAbilityEffect extends SaTargetRoutines {
                 sb.append(StringUtils.join(objs, ", "));
             }
         }
+    }
+
+    // Target/defined methods
+    // Cards
+    protected final static CardCollection getTargetCards(final SpellAbility sa) {                                       return getCards(false, "Defined",    sa); }
+    protected final static CardCollection getTargetCards(final SpellAbility sa, final String definedParam) {            return getCards(false, definedParam, sa); }
+    protected final static CardCollection getDefinedCardsOrTargeted(final SpellAbility sa) {                            return getCards(true,  "Defined",    sa); }
+    protected final static CardCollection getDefinedCardsOrTargeted(final SpellAbility sa, final String definedParam) { return getCards(true,  definedParam, sa); }
+
+    private static CardCollection getCards(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
+        final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam))
+                && sa.getTargets() != null && (sa.getTargets().isTargetingAnyCard() || sa.getTargets().getTargets().isEmpty());
+        return useTargets ? new CardCollection(sa.getTargets().getTargetCards()) 
+                : AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam(definedParam), sa);
+    }
+
+    // Players
+    protected final static FCollection<Player> getTargetPlayers(final SpellAbility sa) {                                       return getPlayers(false, "Defined",    sa); }
+    protected final static FCollection<Player> getTargetPlayers(final SpellAbility sa, final String definedParam) {            return getPlayers(false, definedParam, sa); }
+    protected final static FCollection<Player> getDefinedPlayersOrTargeted(final SpellAbility sa ) {                           return getPlayers(true,  "Defined",    sa); }
+    protected final static FCollection<Player> getDefinedPlayersOrTargeted(final SpellAbility sa, final String definedParam) { return getPlayers(true,  definedParam, sa); }
+
+    private static FCollection<Player> getPlayers(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
+        final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
+        return useTargets ? new FCollection<Player>(sa.getTargets().getTargetPlayers()) 
+                : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam(definedParam), sa);
+    }
+
+    // Spells
+    protected final static List<SpellAbility> getTargetSpells(final SpellAbility sa) {                                       return getSpells(false, "Defined",    sa); }
+    protected final static List<SpellAbility> getTargetSpells(final SpellAbility sa, final String definedParam) {            return getSpells(false, definedParam, sa); }
+    protected final static List<SpellAbility> getDefinedSpellsOrTargeted(final SpellAbility sa, final String definedParam) { return getSpells(true,  definedParam, sa); }
+
+    private static List<SpellAbility> getSpells(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
+        final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
+        return useTargets ? Lists.newArrayList(sa.getTargets().getTargetSpells()) 
+                : AbilityUtils.getDefinedSpellAbilities(sa.getHostCard(), sa.getParam(definedParam), sa);
+    }
+
+    // Targets of unspecified type
+    protected final static List<GameObject> getTargets(final SpellAbility sa) {                                return getTargetables(false, "Defined",    sa); }
+    protected final static List<GameObject> getTargets(final SpellAbility sa, final String definedParam) {     return getTargetables(false, definedParam, sa); }
+    protected final static List<GameObject> getDefinedOrTargeted(SpellAbility sa, final String definedParam) { return getTargetables(true,  definedParam, sa); }
+
+    private static List<GameObject> getTargetables(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
+        final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
+        return useTargets ? Lists.newArrayList(sa.getTargets().getTargets()) 
+                : AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
 }

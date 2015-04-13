@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -23,6 +24,7 @@ import forge.game.zone.ZoneType;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
+import forge.util.FCollection;
 import forge.util.FCollectionView;
 import forge.util.Lang;
 
@@ -82,7 +84,7 @@ public class PlayerView extends GameEntityView {
     }
 
     public FCollectionView<PlayerView> getOpponents() {
-        return get(TrackableProperty.Opponents);
+        return Objects.firstNonNull(this.<FCollectionView<PlayerView>>get(TrackableProperty.Opponents), new FCollection<PlayerView>());
     }
     void updateOpponents(Player p) {
         set(TrackableProperty.Opponents, PlayerView.getCollection(p.getOpponents()));
@@ -123,7 +125,7 @@ public class PlayerView extends GameEntityView {
         final FCollectionView<PlayerView> opponents = getOpponents();
         final List<String> info = Lists.newArrayListWithExpectedSize(opponents.size());
         info.add(String.format("Commander: %s", commander));
-        for (final PlayerView p : Iterables.concat(Collections.singleton(this), opponents == null ? Collections.<PlayerView>emptySet() : opponents)) {
+        for (final PlayerView p : Iterables.concat(Collections.singleton(this), opponents)) {
             final int damage = this.getCommanderDamage(p.getCommander());
             if (damage > 0) {
                 final String text;

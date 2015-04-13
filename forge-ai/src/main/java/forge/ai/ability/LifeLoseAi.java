@@ -11,6 +11,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.util.FCollection;
 
 import java.util.List;
 
@@ -19,7 +20,9 @@ public class LifeLoseAi extends SpellAbilityAi {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
 
-        List<Player> tgtPlayers = getTargetPlayers(sa);
+        final List<Player> tgtPlayers = sa.usesTargeting() && !sa.hasParam("Defined")
+                ? new FCollection<Player>(sa.getTargets().getTargetPlayers()) 
+                : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
 
         final Card source = sa.getHostCard();
         final String amountStr = sa.getParam("LifeAmount");
@@ -158,7 +161,9 @@ public class LifeLoseAi extends SpellAbilityAi {
             amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }
 
-        List<Player> tgtPlayers = getTargetPlayers(sa);
+        final List<Player> tgtPlayers = sa.usesTargeting() && !sa.hasParam("Defined")
+                ? new FCollection<Player>(sa.getTargets().getTargetPlayers()) 
+                : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
 
         if (!mandatory && tgtPlayers.contains(ai) && amount > 0 && amount + 3 > ai.getLife()) {
             // For cards like Foul Imp, ETB you lose life

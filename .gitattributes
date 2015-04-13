@@ -319,7 +319,7 @@ forge-game/src/main/java/forge/game/ability/AbilityApiBased.java -text
 forge-game/src/main/java/forge/game/ability/AbilityFactory.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/ability/AbilityUtils.java -text
 forge-game/src/main/java/forge/game/ability/ApiType.java -text
-forge-game/src/main/java/forge/game/ability/SaTargetRoutines.java -text
+forge-game/src/main/java/forge/game/ability/IllegalAbilityException.java -text
 forge-game/src/main/java/forge/game/ability/SpellAbilityEffect.java -text
 forge-game/src/main/java/forge/game/ability/SpellApiBased.java -text
 forge-game/src/main/java/forge/game/ability/StaticAbilityApiBased.java -text

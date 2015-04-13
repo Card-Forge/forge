@@ -738,9 +738,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (source.isInZone(ZoneType.Hand)) {
             list = CardLists.filter(list, Predicates.not(CardPredicates.nameEquals(source.getName()))); // Don't get the same card back.
         }
-        System.out.println("isPreferredTarget " + list);
+        //System.out.println("isPreferredTarget " + list);
         if (sa.hasParam("AttachedTo")) {
-        	System.out.println("isPreferredTarget att " + list);
+            //System.out.println("isPreferredTarget att " + list);
             list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
@@ -752,7 +752,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     return false;
                 }
             });
-            System.out.println("isPreferredTarget ok " + list);
+            //System.out.println("isPreferredTarget ok " + list);
         }
 
         if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {

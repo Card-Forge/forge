@@ -155,18 +155,19 @@ public class FGameClient implements IToServer {
                 replies.complete(event.getIndex(), event.getReply());
             } else if (msg instanceof GuiGameEvent) {
                 final GuiGameEvent event = (GuiGameEvent) msg;
+                final String method = event.getMethod();
                 final Object[] args = event.getObjects();
                 Serializable reply = null;
                 boolean doReply = false;
 
                 final IButton btn;
-                if (args.length >= 2 && args[0] instanceof PlayerView && args[1] instanceof MatchButtonType) {
+                if (method.startsWith("btn_") && args.length >= 2 && args[0] instanceof PlayerView && args[1] instanceof MatchButtonType) {
                     btn = args[1] == MatchButtonType.OK ? clientGui.getBtnOK((PlayerView) args[0]) : clientGui.getBtnCancel((PlayerView) args[0]);
                 } else {
                     btn = null;
                 }
 
-                switch (event.getMethod()) {
+                switch (method) {
                 case "setGameView":
                     clientGui.setGameView((GameView) args[0]);
                     break;

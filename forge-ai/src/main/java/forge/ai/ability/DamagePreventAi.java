@@ -146,7 +146,7 @@ public class DamagePreventAi extends SpellAbilityAi {
                 }
             }
         }
-        if (sa.hasParam("DividedAsYouChoose") && sa.getTargets() != null && !sa.getTargets().getTargets().isEmpty()) {
+        if (tgt != null && sa.hasParam("DividedAsYouChoose") && sa.getTargets() != null && !sa.getTargets().getTargets().isEmpty()) {
             tgt.addDividedAllocation(sa.getTargets().getTargets().get(0), AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa));
         }
 

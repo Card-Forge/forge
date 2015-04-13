@@ -1,6 +1,9 @@
 package forge.ai.ability;
 
+import java.util.List;
+
 import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
@@ -21,8 +24,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-
-import java.util.List;
 
 public class ChooseSourceAi extends SpellAbilityAi {
 
@@ -184,4 +185,10 @@ public class ChooseSourceAi extends SpellAbilityAi {
         }
         return null;
     }    
+
+    private static List<GameObject> getTargets(final SpellAbility sa) {
+        return sa.usesTargeting() && (!sa.hasParam("Defined"))
+                ? Lists.newArrayList(sa.getTargets().getTargets()) 
+                : AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam("Defined"), sa);
+    }
 }

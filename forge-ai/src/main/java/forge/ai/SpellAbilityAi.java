@@ -1,10 +1,11 @@
 package forge.ai;
 
+import java.util.Collection;
+import java.util.List;
 
 import com.google.common.collect.Iterables;
 
 import forge.game.GameEntity;
-import forge.game.ability.SaTargetRoutines;
 import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -14,10 +15,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 
-import java.util.Collection;
-import java.util.List;
-
-public abstract class SpellAbilityAi extends SaTargetRoutines {
+public abstract class SpellAbilityAi {
 
     public final boolean canPlayAIWithSubs(final Player aiPlayer, final SpellAbility sa) {
         if (!canPlayAI(aiPlayer, sa)) {

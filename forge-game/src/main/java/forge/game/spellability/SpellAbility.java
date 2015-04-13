@@ -103,7 +103,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private int totalManaSpent = 0;
 
     /** The pay costs. */
-    private Cost payCosts = null;
+    private Cost payCosts;
     private SpellAbilityRestriction restrictions = new SpellAbilityRestriction();
     private SpellAbilityCondition conditions = new SpellAbilityCondition();
     private AbilitySub subAbility = null;

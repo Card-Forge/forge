@@ -1209,7 +1209,7 @@ public class ComputerUtilMana {
      * @return map between creatures and shards to convoke
      */
     public static Map<Card, ManaCostShard> getConvokeFromList(final ManaCost cost, List<Card> list) {
-        HashMap<Card, ManaCostShard> convoke = new HashMap<Card, ManaCostShard>();
+        final Map<Card, ManaCostShard> convoke = new HashMap<Card, ManaCostShard>();
         Card convoked = null;
         for (ManaCostShard toPay : cost) {
             for (Card c : list) {
@@ -1217,9 +1217,6 @@ public class ComputerUtilMana {
                 if (mask != 0) {
                     convoked = c;
                     convoke.put(c, toPay);
-                    break;
-                }
-                if (convoked != null){
                     break;
                 }
             }

@@ -66,7 +66,7 @@ public class DeckgenUtil {
             }
             gen.setSingleton(FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS));
             gen.setUseArtifacts(!FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
-            CardPool cards = gen == null ? null : gen.getDeck(60, forAi);
+            final CardPool cards = gen.getDeck(60, forAi);
     
             if (null == deckName) {
                 deckName = Lang.joinHomogenous(Arrays.asList(selection));
@@ -312,7 +312,7 @@ public class DeckgenUtil {
         gen = new DeckGenerator2Color(cardDb, format, comColors.get(0), comColors.get(1));
         gen.setSingleton(true);
         gen.setUseArtifacts(!FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
-        CardPool cards = gen == null ? null : gen.getDeck(gameType.getDeckFormat().getMainRange().getMaximum(), forAi);
+        CardPool cards = gen.getDeck(gameType.getDeckFormat().getMainRange().getMaximum(), forAi);
 
         // After generating card lists, build deck.
         deck = new Deck("Generated " + gameType.toString() + " deck (" + commander.getName() + ")");
