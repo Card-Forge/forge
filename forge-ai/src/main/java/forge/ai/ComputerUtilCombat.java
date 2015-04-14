@@ -387,7 +387,7 @@ public class ComputerUtilCombat {
 
             final List<Card> blockers = combat.getBlockers(attacker);           
 
-            if (blockers.size() == 0) {
+            if (blockers.isEmpty()) {
                 if (!attacker.getSVar("MustBeBlocked").equals("")) {
                     return true;
                 }
@@ -446,7 +446,7 @@ public class ComputerUtilCombat {
 
             final List<Card> blockers = combat.getBlockers(attacker);
 
-            if (blockers.size() == 0) {
+            if (blockers.isEmpty()) {
                 if (!attacker.getSVar("MustBeBlocked").equals("")) {
                     return true;
                 }

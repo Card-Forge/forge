@@ -116,13 +116,19 @@ public class AiBlockController {
 
         final FCollectionView<GameEntity> defenders = combat.getDefenders();
 
-
         // If I don't have any planeswalkers then sorting doesn't really matter
         if (defenders.size() == 1) {
         	final CardCollection attackers = combat.getAttackersOf(defenders.get(0));
             // Begin with the attackers that pose the biggest threat
             ComputerUtilCard.sortByEvaluateCreature(attackers);
             CardLists.sortByPowerDesc(attackers);
+        	//move cards like Phage the Untouchable to the front
+            for (Card attacker : attackers) {
+            	if (attacker.hasSVar("MustBeBlocked")) {
+            		attackers.remove(attacker);
+            		attackers.add(0, attacker);
+            	}
+            }
             return attackers;
         }
 
@@ -149,14 +155,12 @@ public class AiBlockController {
             for (final Card c : firstAttacker) {
                 sortedAttackers.add(0, c);
             }
-
         } else {
             // add creatures attacking the Player to the back of the list
             for (final Card c : firstAttacker) {
                 sortedAttackers.add(c);
             }
         }
-
         return sortedAttackers;
     }
 
@@ -183,25 +187,25 @@ public class AiBlockController {
             List<Card> killingBlockers;
 
             if (!safeBlockers.isEmpty()) {
-                // 1.Blockers that can destroy the attacker but won't get
-                // destroyed
+                // 1.Blockers that can destroy the attacker but won't get destroyed
                 killingBlockers = getKillingBlockers(combat, attacker, safeBlockers);
                 if (!killingBlockers.isEmpty()) {
                     blocker = ComputerUtilCard.getWorstCreatureAI(killingBlockers);
+                // 2.Blockers that won't get destroyed
                 } else if (!attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
                     blocker = ComputerUtilCard.getWorstCreatureAI(safeBlockers);
+                    // check whether it's better to block a creature without trample to absorb more damage
                     if (attacker.hasKeyword("Trample")) {
                         boolean doNotBlock = false;
                         for (Card other : attackersLeft) {
-                            if (other.equals(attacker) || !CombatUtil.canBlock(other, blocker) 
-                                    || ComputerUtilCombat.canDestroyBlocker(ai, blocker, other, combat, false)) {
+                            if (other.equals(attacker) || !CombatUtil.canBlock(other, blocker)
+                                    || ComputerUtilCombat.canDestroyBlocker(ai, blocker, other, combat, false)
+                                    || other.hasKeyword("Trample")
+                                    || other.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
                                 continue;
                             }
-                            int damageNext = other.getNetPower();
-                            if (other.hasKeyword("Trample")) {
-                                damageNext -= blocker.getLethalDamage();
-                            }
-                            if (damageNext > blocker.getLethalDamage()) {
+
+                            if (other.getNetCombatDamage() > blocker.getLethalDamage()) {
                                 doNotBlock = true;
                                 break;
                             }
@@ -262,7 +266,7 @@ public class AiBlockController {
                         }
                     }
 
-                    if ((ComputerUtilCard.evaluateCreature(worst) + diff) < value) {
+                    if (ComputerUtilCard.evaluateCreature(worst) + diff < value) {
                         blocker = worst;
                     }
                 }
@@ -838,7 +842,7 @@ public class AiBlockController {
         for (Card attacker : attackers) {
             if (!CombatUtil.canAttackerBeBlockedWithAmount(attacker, combat.getBlockers(attacker).size(), combat)) {
                 for (final Card blocker : combat.getBlockers(attacker)) {
-                    if ( blocker.getController() == ai ) // don't touch other player's blockers
+                    if (blocker.getController() == ai) // don't touch other player's blockers
                         combat.removeFromCombat(blocker);
                 }
             }
