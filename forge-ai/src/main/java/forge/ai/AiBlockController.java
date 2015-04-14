@@ -238,7 +238,7 @@ public class AiBlockController {
                     }
                 }
                 // 5.Blockers that can destroy the attacker and are worth less
-                if (blocker == null && !killingBlockers.isEmpty()) {
+                if (!killingBlockers.isEmpty()) {
                     final Card worst = ComputerUtilCard.getWorstCreatureAI(killingBlockers);
                     int value = ComputerUtilCard.evaluateCreature(attacker);
                     
@@ -504,6 +504,7 @@ public class AiBlockController {
                         }
                         if (other.getNetCombatDamage() >= damageAbsorbed 
                                 && !other.hasKeyword("Trample")
+                                && !other.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
                                 && CombatUtil.canBlock(other, blocker, combat)) {
                             combat.addBlocker(other, blocker);
                             attackersLeft.remove(other);
@@ -602,8 +603,7 @@ public class AiBlockController {
         List<Card> targetAttackers = CardLists.filter(blockedButUnkilled, Predicates.not(rampagesOrNeedsManyToBlock));
 
         // TODO - should check here for a "rampage-like" trigger that replaced
-        // the keyword:
-        // "Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it."
+        // the keyword: "Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it."
 
         for (final Card attacker : targetAttackers) {
             blockers = getPossibleBlockers(combat, attacker, blockersLeft, false);
@@ -657,7 +657,7 @@ public class AiBlockController {
 
         final List<Card> oldBlockers = combat.getAllBlockers();
         for (final Card blocker : oldBlockers) {
-            if ( blocker.getController() == ai ) // don't touch other player's blockers
+            if (blocker.getController() == ai) // don't touch other player's blockers
                 combat.removeFromCombat(blocker);
         }
 
