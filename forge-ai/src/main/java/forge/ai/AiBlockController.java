@@ -54,26 +54,17 @@ public class AiBlockController {
     /** Constant <code>attackers</code>. */
     private List<Card> attackers = new ArrayList<Card>(); // all attackers
     /** Constant <code>attackersLeft</code>. */
-    private List<Card> attackersLeft = new ArrayList<Card>(); // keeps track of
-                                                            // all currently
-                                                            // unblocked
-                                                            // attackers
+    private List<Card> attackersLeft = new ArrayList<Card>(); // keeps track of all currently unblocked attackers
     /** Constant <code>blockedButUnkilled</code>. */
-    private List<Card> blockedButUnkilled = new ArrayList<Card>(); // blocked
-                                                                 // attackers
-                                                                 // that
-                                                                 // currently
-                                                                 // wouldn't be
-                                                                 // destroyed
+    private List<Card> blockedButUnkilled = new ArrayList<Card>(); // blocked attackers that currently wouldn't be destroyed
     /** Constant <code>blockersLeft</code>. */
-    private List<Card> blockersLeft = new ArrayList<Card>(); // keeps track of all
-                                                           // unassigned
-                                                           // blockers
+    private List<Card> blockersLeft = new ArrayList<Card>(); // keeps track of all unassigned blockers
     private int diff = 0;
 
     private boolean lifeInDanger = false;
+    
     public AiBlockController(Player aiPlayer) {
-        this.ai = aiPlayer;
+        ai = aiPlayer;
     }
     
     // finds the creatures able to block the attacker
@@ -81,8 +72,7 @@ public class AiBlockController {
         final List<Card> blockers = new ArrayList<Card>();
 
         for (final Card blocker : blockersLeft) {
-            // if the blocker can block a creature with lure it can't block a
-            // creature without
+            // if the blocker can block a creature with lure it can't block a creature without
             if (CombatUtil.canBlock(attacker, blocker, combat)) {
                 if (solo && blocker.hasKeyword("CARDNAME can't attack or block alone.")) {
                     continue;
@@ -120,44 +110,38 @@ public class AiBlockController {
         return blockers;
     }
 
-    private static List<CardCollection> sortAttackerByDefender(final Combat combat) {
-        FCollectionView<GameEntity> defenders = combat.getDefenders();
-        final ArrayList<CardCollection> attackers = new ArrayList<CardCollection>(defenders.size());
-        for (GameEntity defender : defenders) {
-            attackers.add(combat.getAttackersOf(defender));
-        }
-        return attackers;
-    }
-
     private List<Card> sortPotentialAttackers(final Combat combat) {
-        final List<CardCollection> attackerLists = sortAttackerByDefender(combat);
         final CardCollection sortedAttackers = new CardCollection();
-        final CardCollection firstAttacker = attackerLists.get(0);
+        CardCollection firstAttacker = new CardCollection();
 
         final FCollectionView<GameEntity> defenders = combat.getDefenders();
 
-        // Begin with the attackers that pose the biggest threat
-        ComputerUtilCard.sortByEvaluateCreature(firstAttacker);
-        CardLists.sortByPowerDesc(firstAttacker);
 
-        // If I don't have any planeswalkers than sorting doesn't really matter
+        // If I don't have any planeswalkers then sorting doesn't really matter
         if (defenders.size() == 1) {
-            return firstAttacker;
+        	final CardCollection attackers = combat.getAttackersOf(defenders.get(0));
+            // Begin with the attackers that pose the biggest threat
+            ComputerUtilCard.sortByEvaluateCreature(attackers);
+            CardLists.sortByPowerDesc(attackers);
+            return attackers;
         }
 
         final boolean bLifeInDanger = ComputerUtilCombat.lifeInDanger(ai, combat);
 
-        // TODO Add creatures attacking Planeswalkers in order of which we want
-        // to protect
-        // defend planeswalkers with more loyalty before planeswalkers with less
-        // loyalty
+        // TODO Add creatures attacking Planeswalkers in order of which we want to protect
+        // defend planeswalkers with more loyalty before planeswalkers with less loyalty
         // if planeswalker will be too difficult to defend don't even bother
-        for (List<Card> attacker : attackerLists) {
-            // Begin with the attackers that pose the biggest threat
-            CardLists.sortByPowerDesc(attacker);
-            for (final Card c : attacker) {
-                sortedAttackers.add(c);
-            }
+        for (GameEntity defender : defenders) {
+        	if (defender instanceof Card) {
+        		final CardCollection attackers = combat.getAttackersOf(defender);
+        		// Begin with the attackers that pose the biggest threat
+        		CardLists.sortByPowerDesc(attackers);
+        		for (final Card c : attackers) {
+        			sortedAttackers.add(c);
+        		}
+        	} else {
+        		firstAttacker = combat.getAttackersOf(defender);
+        	}
         }
 
         if (bLifeInDanger) {
