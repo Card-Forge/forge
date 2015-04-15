@@ -41,7 +41,7 @@ import forge.toolbox.FSkin.SkinnedLabel;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public class VDev implements IVDoc<CDev> {
+public class VDev implements IVDoc<CDev>, IDevListener {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
@@ -107,6 +107,12 @@ public class VDev implements IVDoc<CDev> {
     public void populate() {
         parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
         parentCell.getBody().add(scroller, "w 100%, h 100%!");
+    }
+
+    @Override
+    public void update(final boolean playUnlimitedLands, final boolean mayViewAllCards) {
+        getLblUnlimitedLands().setToggled(playUnlimitedLands);
+        getLblViewAll().setToggled(mayViewAllCards);
     }
 
     /* (non-Javadoc)

@@ -3,11 +3,15 @@ package forge.screens.match.controllers;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
+
+import com.google.common.collect.Lists;
 
 import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.interfaces.IGameController;
 import forge.screens.match.CMatchUI;
+import forge.screens.match.views.IDevListener;
 import forge.screens.match.views.VDev;
 
 /**
@@ -16,13 +20,14 @@ import forge.screens.match.views.VDev;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
-public class CDev implements ICDoc {
+public final class CDev implements ICDoc {
 
     private final CMatchUI matchUI;
     private final VDev view;
     public CDev(final CMatchUI matchUI) {
         this.matchUI = matchUI;
         this.view = new VDev(this);
+        addListener(view);
 
         view.getLblUnlimitedLands().addMouseListener(madUnlimited);
         view.getLblViewAll().addMouseListener(madViewAll);
@@ -40,11 +45,16 @@ public class CDev implements ICDoc {
         view.getLblRiggedRoll().addMouseListener(madRiggedRoll);
         view.getLblWalkTo().addMouseListener(madWalkToPlane);
     }
-    public final IGameController getController() {
+    public IGameController getController() {
         return matchUI.getGameController();
     }
-    public final VDev getView() {
+    public VDev getView() {
         return view;
+    }
+
+    private final List<IDevListener> listeners = Lists.newArrayListWithCapacity(2);
+    public void addListener(final IDevListener listener) {
+        listeners.add(listener);
     }
 
     private final MouseListener madUnlimited = new MouseAdapter() {
@@ -55,8 +65,8 @@ public class CDev implements ICDoc {
     };
     public void togglePlayManyLandsPerTurn() {
         final boolean newValue = !view.getLblUnlimitedLands().getToggled();
-        view.getLblUnlimitedLands().setToggled(newValue);
         getController().cheat().setCanPlayUnlimitedLands(newValue);
+        update();
     }
 
     private final MouseListener madViewAll = new MouseAdapter() {
@@ -67,8 +77,8 @@ public class CDev implements ICDoc {
     };
     public void toggleViewAllCards() {
         final boolean newValue = !view.getLblViewAll().getToggled();
-        view.getLblViewAll().setToggled(newValue);
         getController().cheat().setViewAllCards(newValue);
+        update();
     }
 
     private final MouseListener madMana = new MouseAdapter() {
@@ -229,8 +239,11 @@ public class CDev implements ICDoc {
     public void update() {
         final IGameController controller = getController();
         if (controller != null) {
-            view.getLblUnlimitedLands().setToggled(controller.canPlayUnlimitedLands());
-            view.getLblViewAll().setToggled(controller.mayLookAtAllCards());
+            final boolean canPlayUnlimitedLands = controller.canPlayUnlimitedLands();
+            final boolean mayLookAtAllCards = controller.mayLookAtAllCards();
+            for (final IDevListener listener : listeners) {
+                listener.update(canPlayUnlimitedLands, mayLookAtAllCards);
+            }
         }
     }
 }

@@ -10,17 +10,20 @@ import javax.swing.JMenuItem;
 
 import forge.menus.MenuUtil;
 import forge.screens.match.controllers.CDev;
+import forge.screens.match.views.IDevListener;
 
 /**
  * Gets a menu that replicates all the DevMode options.
  * <p>
  * Simply calls the associated method in CDev.
  */
-public class DevModeMenu implements ActionListener {
+public class DevModeMenu implements ActionListener, IDevListener {
 
     private CDev controller;
+    private JCheckBoxMenuItem playUnlimitedLands = null, viewAll = null;
     public DevModeMenu(final CDev controller) {
         this.controller = controller;
+        controller.addListener(this);
     };
 
     // Using an enum to avoid having to create multiple
@@ -57,9 +60,16 @@ public class DevModeMenu implements ActionListener {
         }
     };
 
+    @Override
+    public void update(final boolean playUnlimitedLands, final boolean mayViewAllCards) {
+        if (this.playUnlimitedLands != null && this.viewAll != null) {
+            this.playUnlimitedLands.setSelected(playUnlimitedLands);
+            this.viewAll.setSelected(mayViewAllCards);
+        }
+    }
+
     public JMenu getMenu() {
-        final boolean hasController = controller.getController() != null;
-        JMenu menu = new JMenu("Dev");
+        final JMenu menu = new JMenu("Dev");
         menu.setMnemonic(KeyEvent.VK_D);
         menu.add(getMenuItem(DevMenuItem.GENERATE_MANA));
         menu.add(getMenuItem(DevMenuItem.TUTOR_FOR_CARD));
@@ -73,8 +83,8 @@ public class DevModeMenu implements ActionListener {
         menu.add(getMenuItem(DevMenuItem.SETUP_GAME_STATE));
         menu.add(getMenuItem(DevMenuItem.DUMP_GAME_STATE));
         menu.addSeparator();
-        menu.add(getCheckboxMenuItem(DevMenuItem.PLAY_UNLIMITED_LANDS, hasController && controller.getController().canPlayUnlimitedLands()));
-        menu.add(getCheckboxMenuItem(DevMenuItem.VIEW_ALL, hasController && controller.getController().mayLookAtAllCards()));
+        menu.add(playUnlimitedLands = getCheckboxMenuItem(DevMenuItem.PLAY_UNLIMITED_LANDS));
+        menu.add(viewAll = getCheckboxMenuItem(DevMenuItem.VIEW_ALL));
         menu.add(getMenuItem(DevMenuItem.ADD_COUNTER));
         menu.addSeparator();
         menu.add(getMenuItem(DevMenuItem.TAP_PERMANENT));
@@ -88,14 +98,13 @@ public class DevModeMenu implements ActionListener {
     }
 
     private JMenuItem getMenuItem(final DevMenuItem m) {
-        JMenuItem menuItem = new JMenuItem(m.caption);
+        final JMenuItem menuItem = new JMenuItem(m.caption);
         menuItem.addActionListener(this);
         return menuItem;
     }
 
-    private JCheckBoxMenuItem getCheckboxMenuItem(final DevMenuItem m, final boolean isSelected) {
-        JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(m.caption);
-        menuItem.setState(isSelected);
+    private JCheckBoxMenuItem getCheckboxMenuItem(final DevMenuItem m) {
+        final JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(m.caption);
         menuItem.addActionListener(this);
         return menuItem;
     }

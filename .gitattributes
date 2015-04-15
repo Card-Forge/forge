@@ -1038,6 +1038,7 @@ forge-gui-desktop/src/main/java/forge/screens/match/menus/CardOverlaysMenu.java 
 forge-gui-desktop/src/main/java/forge/screens/match/menus/DevModeMenu.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/menus/GameMenu.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/package-info.java -text
+forge-gui-desktop/src/main/java/forge/screens/match/views/IDevListener.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/views/VAntes.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/views/VCombat.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/views/VCommand.java -text
