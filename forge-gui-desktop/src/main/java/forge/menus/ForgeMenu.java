@@ -1,18 +1,23 @@
 package forge.menus;
 
-import forge.Singletons;
-import forge.control.RestartUtil;
-import forge.gui.GuiUtils;
-import forge.util.ReflectionUtil;
-
-import javax.swing.*;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.KeyStroke;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
+
+import forge.Singletons;
+import forge.control.RestartUtil;
+import forge.gui.FNetOverlay;
+import forge.gui.GuiUtils;
+import forge.util.ReflectionUtil;
 
 public final class ForgeMenu {
     private JPopupMenu popupMenu;
@@ -22,19 +27,19 @@ public final class ForgeMenu {
     public ForgeMenu() {
         refresh();
     }
-    
+
     public void show() {
         show(false);
     }
-    
+
     public void show(boolean hideIfAlreadyShown) {
         Singletons.getView().getNavigationBar().showForgeMenu(hideIfAlreadyShown);
     }
-    
+
     public void hide() {
         popupMenu.setVisible(false);
     }
-    
+
     public JPopupMenu getPopupMenu() {
         return popupMenu;
     }
@@ -69,25 +74,27 @@ public final class ForgeMenu {
         add(new LayoutMenu().getMenu());
         add(HelpMenu.getMenu());
         addSeparator();
+        add(getMenuItem_ChatPanel());
+        addSeparator();
         add(getMenuItem_Restart());
         add(getMenuItem_Exit());
     }
-    
+
     public void add(JMenuItem item) {
         item = popupMenu.add(item);
         setupItem(item);
     }
-    
+
     public void addSeparator() {
         popupMenu.addSeparator();
     }
-    
+
     private void setupMenu(JMenu menu) {
         for (int i = 0; i < menu.getItemCount(); i++) {
             setupItem(menu.getItem(i));
         }
     }
-    
+
     private void setupItem(JMenuItem item) {
         if (item == null) { return; }
 
@@ -116,31 +123,45 @@ public final class ForgeMenu {
         return false;
     }
 
+    private static JMenuItem getMenuItem_ChatPanel() {
+        final JMenuItem menuItem = new JMenuItem("Open chat panel");
+        menuItem.addActionListener(getChatPanelAction());
+        return menuItem;
+    }
+
+    private static ActionListener getChatPanelAction() {
+        return new ActionListener() {
+            @Override public final void actionPerformed(final ActionEvent e) {
+                FNetOverlay.SINGLETON_INSTANCE.shopUp();
+            }
+        };
+    }
+
     private static JMenuItem getMenuItem_Restart() {
         JMenuItem menuItem = new JMenuItem("Restart");
         menuItem.setMnemonic(KeyEvent.VK_R);
         menuItem.addActionListener(getRestartAction());
-        return menuItem;        
+        return menuItem;
     }
-    
+
     private static ActionListener getRestartAction() {
-        return new ActionListener() {            
+        return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RestartUtil.restartApplication(null);                
+                RestartUtil.restartApplication(null);
             }
         };
     }
-    
+
     private static JMenuItem getMenuItem_Exit() {
         JMenuItem menuItem = new JMenuItem("Exit");
         menuItem.setMnemonic(KeyEvent.VK_X);
         menuItem.addActionListener(getExitAction());
         return menuItem;
     }
-    
+
     private static ActionListener getExitAction() {
-        return new ActionListener() {            
+        return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Singletons.getControl().exitForge();

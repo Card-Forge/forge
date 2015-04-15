@@ -1,5 +1,31 @@
 package forge.gui.framework;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import javax.swing.border.EmptyBorder;
+import javax.xml.stream.XMLEventFactory;
+import javax.xml.stream.XMLEventReader;
+import javax.xml.stream.XMLEventWriter;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.events.Attribute;
+import javax.xml.stream.events.StartElement;
+import javax.xml.stream.events.XMLEvent;
+
 import forge.FThreads;
 import forge.Singletons;
 import forge.gui.SOverlayUtils;
@@ -14,21 +40,6 @@ import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
 import forge.view.FFrame;
 import forge.view.FView;
-
-import javax.swing.border.EmptyBorder;
-import javax.xml.stream.*;
-import javax.xml.stream.events.Attribute;
-import javax.xml.stream.events.StartElement;
-import javax.xml.stream.events.XMLEvent;
-
-import java.awt.*;
-import java.io.*;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 
 /**
  * Handles layout saving and loading.
@@ -79,10 +90,8 @@ public final class SLayoutIO {
             FThreads.invokeInEdtLater(new Runnable() {
                 @Override
                 public void run() {
-                    if (loadFile != null) {
-                        SLayoutIO.loadLayout(loadFile);
-                        SLayoutIO.saveLayout(null);
-                    }
+                    SLayoutIO.loadLayout(loadFile);
+                    SLayoutIO.saveLayout(null);
                     SOverlayUtils.hideOverlay();
                 }
             });
