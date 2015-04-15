@@ -17,24 +17,34 @@
  */
 package forge.error;
 
-import forge.gui.WrapLayout;
-import forge.toolbox.FHyperlink;
-import forge.toolbox.FLabel;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-
-import java.awt.*;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
+
+import net.miginfocom.swing.MigLayout;
+import forge.gui.WrapLayout;
+import forge.toolbox.FHyperlink;
+import forge.toolbox.FLabel;
 
 /**
- * The class ErrorViewer. Enables showing and saving error messages that
- * occurred in forge.
+ * The class BugReportDialog. Enables showing and saving error messages that
+ * occurred in Forge.
  * 
  * @author Clemens Koza
- * @version V1.0 02.08.2009
  */
 public class BugReportDialog {
     private static boolean dialogShown;
@@ -61,7 +71,7 @@ public class BugReportDialog {
 
         // Button is not modified, String gets the automatic listener to hide
         // the dialog
-        ArrayList<Object> options = new ArrayList<Object>();
+        List<Object> options = new ArrayList<Object>();
         options.add(new JButton(new _CopyAndGo(area)));
         options.add(new JButton(new _SaveAction(area)));
         options.add(BugReporter.CONTINUE);
@@ -83,7 +93,7 @@ public class BugReportDialog {
     @SuppressWarnings("serial")
     private static class _CopyAndGo extends AbstractAction {
         private final JTextArea text;
-        
+
         public _CopyAndGo(JTextArea text) {
             super(BugReporter.REPORT);
             this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_R, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));

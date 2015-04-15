@@ -132,21 +132,19 @@ public class ImageCache {
                 return _defaultImage;
             }
         }
-        
+
         // Load from file and add to cache if not found in cache initially. 
         BufferedImage original = getImage(imageKey);
-        
+
         // No image file exists for the given key so optionally associate with
         // a default "not available" image and add to cache for given key.
         if (original == null) {
             if (useDefaultIfNotFound) { 
                 original = _defaultImage;
                 _CACHE.put(imageKey, _defaultImage);
-            } else {
-                original = null;
-            }            
+            }
         }
-                
+
         return original;
     }
 

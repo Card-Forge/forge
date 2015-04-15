@@ -926,10 +926,10 @@ public class PhaseHandler implements java.io.Serializable {
                         pPlayerPriority.getController().playChosenSpellAbility(sa);
                     }
                     loopCount++;
-                } while (chosenSa != null && (loopCount < 999 || !pPlayerPriority.getController().isAI()));
+                } while (loopCount < 999 || !pPlayerPriority.getController().isAI());
 
                 if (loopCount >= 999 && pPlayerPriority.getController().isAI()) {
-                	System.out.print("AI looped too much with: " + chosenSa);
+                    System.out.print("AI looped too much with: " + chosenSa);
                 }
 
                 if (DEBUG_PHASES) {

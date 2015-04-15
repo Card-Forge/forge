@@ -508,7 +508,7 @@ public class AbilityUtils {
         final SpellAbility sa = (SpellAbility) ability;
         // Player attribute counting
         if (calcX[0].startsWith("TargetedPlayer")) {
-            final ArrayList<Player> players = new ArrayList<Player>();
+            final List<Player> players = new ArrayList<Player>();
             final SpellAbility saTargeting = sa.getSATargetingPlayer();
             if (null != saTargeting) {
                 Iterables.addAll(players, saTargeting.getTargets().getTargetPlayers());
@@ -516,10 +516,8 @@ public class AbilityUtils {
             return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
         }
         if (calcX[0].startsWith("ThisTargetedPlayer")) {
-            final ArrayList<Player> players = new ArrayList<Player>();
-            if (null != ability) {
-                Iterables.addAll(players, sa.getTargets().getTargetPlayers());
-            }
+            final List<Player> players = new ArrayList<Player>();
+            Iterables.addAll(players, sa.getTargets().getTargetPlayers());
             return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
         }
         if (calcX[0].startsWith("TargetedObjects")) {
@@ -535,7 +533,7 @@ public class AbilityUtils {
             return CardFactoryUtil.objectXCount(objects, calcX[1], card) * multiplier;
         }
         if (calcX[0].startsWith("TargetedController")) {
-            final ArrayList<Player> players = new ArrayList<Player>();
+            final List<Player> players = new ArrayList<Player>();
             final CardCollection list = getDefinedCards(card, "Targeted", sa);
             final List<SpellAbility> sas = AbilityUtils.getDefinedSpellAbilities(card, "Targeted", sa);
 
@@ -568,7 +566,7 @@ public class AbilityUtils {
             return o instanceof Player ? CardFactoryUtil.playerXProperty((Player) o, calcX[1], card) * multiplier : 0;
         }
         if (calcX[0].equals("TriggeredCardController")) {
-            final ArrayList<Player> players = new ArrayList<Player>();
+            final List<Player> players = new ArrayList<Player>();
             Iterables.addAll(players, getDefinedPlayers(card, "TriggeredCardController", sa));
             return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
         }

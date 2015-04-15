@@ -121,19 +121,14 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public ISkinImage createLayeredImage(FSkinProp background, String overlayFilename, float opacity) {
-        BufferedImage image = new BufferedImage(background.getWidth(), background.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g = image.createGraphics();
-        FSkin.SkinImage backgroundImage = FSkin.getImage(background);
+        final BufferedImage image = new BufferedImage(background.getWidth(), background.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        final Graphics2D g = image.createGraphics();
+        final FSkin.SkinImage backgroundImage = FSkin.getImage(background);
         FSkin.drawImage(g, backgroundImage, 0, 0, background.getWidth(), background.getHeight());
 
         if (FileUtil.doesFileExist(overlayFilename)) {
-            try {
-                ImageIcon overlay = new ImageIcon(overlayFilename);
-                if (overlay != null) {
-                    g.drawImage(overlay.getImage(), (background.getWidth() - overlay.getIconWidth()) / 2, (background.getHeight() - overlay.getIconHeight()) / 2, overlay.getIconWidth(), overlay.getIconHeight(), null);
-                }
-            }
-            catch (Exception e) {}
+            final ImageIcon overlay = new ImageIcon(overlayFilename);
+            g.drawImage(overlay.getImage(), (background.getWidth() - overlay.getIconWidth()) / 2, (background.getHeight() - overlay.getIconHeight()) / 2, overlay.getIconWidth(), overlay.getIconHeight(), null);
         }
         return new FSkin.UnskinnedIcon(image, opacity);
     }

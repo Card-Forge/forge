@@ -36,7 +36,7 @@ import forge.view.FFrame;
 public enum FNetOverlay {
     SINGLETON_INSTANCE;
 
-    private final String COORD_DELIM = ","; 
+    private static final String COORD_DELIM = ",";
     private final ForgePreferences prefs = FModel.getPreferences();
     private boolean hasBeenShown, locLoaded;
 
@@ -93,11 +93,8 @@ public enum FNetOverlay {
             if (remote != null) {
                 remote.send(new MessageEvent(FModel.getPreferences().getPref(FPref.PLAYER_NAME), message));
             }
-            // lobby.speak(ChatArea.Room, lobby.getGuiPlayer(), message);
         }
     };
-    
-    //private final int minimizedHeight = 30;
 
     /**
      * Semi-transparent overlay panel. Should be used with layered panes.
@@ -109,10 +106,8 @@ public enum FNetOverlay {
         window.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
 
         window.setLayout(new MigLayout("insets 0, gap 0, ax center, wrap 2"));
-//        window.add(new FLabel.Builder().text("Loading new game...").fontSize(22).build(), "h 40px!, align center");
 
         // Block all input events below the overlay
-
         txtLog.setOpaque(true);
         txtLog.setFocusable(true);
         txtLog.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
@@ -129,8 +124,11 @@ public enum FNetOverlay {
         txtInput.addActionListener(onSend);
         cmdSend.setCommand(new Runnable() { @Override public void run() { onSend.actionPerformed(null); } });
     }
-    
-    public void showUp(String message) { 
+
+    public void shopUp() {
+        showUp(null);
+    }
+    public void showUp(final String message) { 
         if (!hasBeenShown) {
             hasBeenShown = true;
             loadLocation();
@@ -141,7 +139,9 @@ public enum FNetOverlay {
                 }
             });
         }
-        txtLog.setText(message);
+        if (message != null) {
+            txtLog.setText(message);
+        }
         window.setVisible(true);
     }
 
@@ -200,11 +200,12 @@ public enum FNetOverlay {
 
     private final static SimpleDateFormat inFormat = new SimpleDateFormat("HH:mm:ss");
     public void addMessage(final String origin, final String message) {
+        final String now = inFormat.format(new Date());
         final String toAdd;
         if (origin == null) {
-            toAdd = String.format("%n[%s] %s", inFormat.format(new Date()), message);
+            toAdd = String.format("%n[%s] %s", now, message);
         } else {
-            toAdd = String.format("%n[%s] %s: %s", inFormat.format(new Date()), origin, message);
+            toAdd = String.format("%n[%s] %s: %s", now, origin, message);
         }
         txtLog.append(toAdd);
     }

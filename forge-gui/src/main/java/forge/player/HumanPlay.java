@@ -663,9 +663,7 @@ public class HumanPlay {
             prompt = source + "\n" + promptCurrent;
         }
         
-        if (sourceAbility != null) {
-            sourceAbility.clearManaPaid();
-        }
+        sourceAbility.clearManaPaid();
         boolean paid = p.getController().payManaCost(cost.getCostMana(), sourceAbility, prompt, false);
         if (!paid) {
             p.getManaPool().refundManaPaid(sourceAbility);

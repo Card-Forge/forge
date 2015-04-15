@@ -127,9 +127,7 @@ public class GuiMobile implements IGuiBase {
                 if (FileUtil.doesFileExist(overlayFilename)) {
                     try {
                         Texture overlay = new Texture(Gdx.files.absolute(overlayFilename));
-                        if (overlay != null) {
-                            g.drawImage(overlay, (background.getWidth() - overlay.getWidth()) / 2, (background.getHeight() - overlay.getHeight()) / 2, overlay.getWidth(), overlay.getHeight());
-                        }
+                        g.drawImage(overlay, (background.getWidth() - overlay.getWidth()) / 2, (background.getHeight() - overlay.getHeight()) / 2, overlay.getWidth(), overlay.getHeight());
                     }
                     catch (Exception e) {}
                 }

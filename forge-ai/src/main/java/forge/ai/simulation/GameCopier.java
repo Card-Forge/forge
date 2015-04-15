@@ -1,6 +1,8 @@
 package forge.ai.simulation;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.collect.BiMap;
@@ -179,7 +181,6 @@ public class GameCopier {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private void addCard(Game newGame, ZoneType zone, Card c) {
         Player owner = playerMap.get(c.getOwner());
         Card newCard = null;
@@ -215,7 +216,7 @@ public class GameCopier {
             // TODO: Is this correct? Does it not duplicate keywords from enchantments and such?
             for (String kw : c.getHiddenExtrinsicKeywords())
                 newCard.addHiddenExtrinsicKeyword(kw);
-            newCard.setExtrinsicKeyword((ArrayList<String>) c.getExtrinsicKeyword().clone());
+            newCard.setExtrinsicKeyword(Lists.newArrayList(c.getExtrinsicKeyword()));
             if (c.isTapped()) {
                 newCard.setTapped(true);
             }

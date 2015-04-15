@@ -106,7 +106,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
     private void resume() {
         if (!paused || !isMainFrame) { return; }
 
-        // Resum the sound
+        // Resume the sound
         SoundSystem.instance.resume();
 
         // Resume all hosted matches

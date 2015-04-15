@@ -1083,8 +1083,7 @@ public class CardView extends GameEntityView {
             TrackableCollection<CardView> views = get(key);
             if (views == null) {
                 set(key, null);
-            }
-            else if (views != null && views.remove(cardToRemove.getView())) {
+            } else if (views.remove(cardToRemove.getView())) {
                 if (views.isEmpty()) {
                     set(key, null); //avoid keeping around an empty collection
                 }
@@ -1107,8 +1106,7 @@ public class CardView extends GameEntityView {
             if (oldCards.remove(c)) {
                 if (views == null) {
                     set(key, null);
-                }
-                else if (views != null && views.remove(c.getView())) {
+                } else if (views.remove(c.getView())) {
                     if (views.isEmpty()) {
                         views = null;
                         set(key, null); //avoid keeping around an empty collection

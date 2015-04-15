@@ -97,9 +97,8 @@ public final class FImageUtil {
                 modPath = path.getRoot().toString() + path.subpath(0, path.getNameCount()-1).toString() + File.separator + "XLHQ" + File.separator + path.subpath(path.getNameCount()-1, path.getNameCount());
             }
 
-            File xlhqFile = new File(modPath.replace(".full.jpg", ".xlhq.jpg"));
-
-            if (xlhqFile != null && xlhqFile.exists()) {
+            final File xlhqFile = new File(modPath.replace(".full.jpg", ".xlhq.jpg"));
+            if (xlhqFile.exists()) {
                 try {
                     img = ImageIO.read(xlhqFile);
                     final int foilIndex = state.getFoilIndex();

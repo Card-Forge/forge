@@ -621,7 +621,7 @@ public class QuestWinLoseController {
                 }
             }
         }
-        if (cardsWon != null && !cardsWon.isEmpty()) {
+        if (!cardsWon.isEmpty()) {
             if (message == null) {
                 message = "Cards Won";
             }

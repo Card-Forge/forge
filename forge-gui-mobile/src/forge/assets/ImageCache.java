@@ -169,9 +169,6 @@ public class ImageCache {
                 image = defaultImage;
                 cache.put(imageKey, defaultImage);
             }
-            else {
-                image = null;
-            }
         }
         return image;
     }

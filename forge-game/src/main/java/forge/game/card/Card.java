@@ -17,6 +17,28 @@
  */
 package forge.game.card;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.EnumMap;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.NavigableMap;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.mutable.MutableBoolean;
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
@@ -28,12 +50,26 @@ import com.google.common.collect.Sets;
 
 import forge.GameCommand;
 import forge.StaticData;
-import forge.card.*;
+import forge.card.CardChangedType;
 import forge.card.CardDb.SetPreference;
+import forge.card.CardEdition;
+import forge.card.CardRarity;
+import forge.card.CardRules;
+import forge.card.CardStateName;
+import forge.card.CardType;
 import forge.card.CardType.CoreType;
+import forge.card.CardTypeView;
+import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
-import forge.game.*;
+import forge.game.CardTraitBase;
+import forge.game.Direction;
+import forge.game.Game;
+import forge.game.GameActionUtil;
+import forge.game.GameEntity;
+import forge.game.GameLogEntryType;
+import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -41,15 +77,23 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
-import forge.game.event.*;
+import forge.game.event.GameEventCardAttachment;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
+import forge.game.event.GameEventCardCounters;
+import forge.game.event.GameEventCardDamaged;
 import forge.game.event.GameEventCardDamaged.DamageType;
+import forge.game.event.GameEventCardPhased;
+import forge.game.event.GameEventCardStatsChanged;
+import forge.game.event.GameEventCardTapped;
 import forge.game.keyword.KeywordsChange;
 import forge.game.player.Player;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementResult;
-import forge.game.spellability.*;
+import forge.game.spellability.OptionalCost;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellPermanent;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -67,14 +111,6 @@ import forge.util.TextUtil;
 import forge.util.Visitor;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.mutable.MutableBoolean;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * <p>
@@ -101,7 +137,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final CardDamageHistory damageHistory = new CardDamageHistory();
     private Map<CounterType, Integer> counters = new TreeMap<CounterType, Integer>();
     private Map<Card, Map<CounterType, Integer>> countersAddedBy = new TreeMap<Card, Map<CounterType, Integer>>();
-    private ArrayList<String> extrinsicKeyword = new ArrayList<String>();
+    private List<String> extrinsicKeyword = new ArrayList<String>();
     // Hidden keywords won't be displayed on the card
     private final CopyOnWriteArrayList<String> hiddenExtrinsicKeyword = new CopyOnWriteArrayList<String>();
 
@@ -112,7 +148,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     // if this card is attached or linked to something, what card is it currently attached to
     private Card equipping, fortifying, cloneOrigin, haunting, effectSource, pairedWith;
 
-    // which auras enchanted this card?
     // if this card is an Aura, what Entity is it enchanting?
     private GameEntity enchanting = null;
 
@@ -178,7 +213,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private long timestamp = -1; // permanents on the battlefield
 
     // stack of set power/toughness
-    private ArrayList<CardPowerToughness> newPT = new ArrayList<CardPowerToughness>();
+    private List<CardPowerToughness> newPT = new ArrayList<CardPowerToughness>();
     private int baseLoyalty = 0;
     private String basePowerString = null;
     private String baseToughnessString = null;
@@ -208,7 +243,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private Player owner = null;
     private Player controller = null;
     private long controllerTimestamp = 0;
-    private TreeMap<Long, Player> tempControllers = new TreeMap<Long, Player>();
+    private NavigableMap<Long, Player> tempControllers = new TreeMap<Long, Player>();
 
     private String originalText = "", text = "";
     private String echoCost = "";
@@ -1243,7 +1278,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     // convert a keyword list to the String that should be displayed in game
-    public final String keywordsToText(final ArrayList<String> keywords) {
+    public final String keywordsToText(final List<String> keywords) {
         final StringBuilder sb = new StringBuilder();
         final StringBuilder sbLong = new StringBuilder();
 
@@ -1629,7 +1664,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             sb.append(stAb.toString() + "\r\n");
         }
 
-        final ArrayList<String> addedManaStrings = new ArrayList<String>();
+        final List<String> addedManaStrings = new ArrayList<String>();
         boolean primaryCost = true;
         boolean isNonAura = !type.hasSubtype("Aura");
 
@@ -2930,8 +2965,8 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final void addChangedCardKeywords(final String[] keywords, final String[] removeKeywords,
             final boolean removeAllKeywords, final long timestamp) {
-        ArrayList<String> keywordsList = new ArrayList<String>();
-        ArrayList<String> removeKeywordsList = new ArrayList<String>();
+        List<String> keywordsList = new ArrayList<String>();
+        List<String> removeKeywordsList = new ArrayList<String>();
         if (keywords != null) {
             keywordsList = new ArrayList<String>(Arrays.asList(keywords));
         }
@@ -2952,11 +2987,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     // Hidden keywords will be left out
-    public final ArrayList<String> getUnhiddenKeywords() {
+    public final List<String> getUnhiddenKeywords() {
         return getUnhiddenKeywords(currentState);
     }
-    public final ArrayList<String> getUnhiddenKeywords(CardState state) {
-        final ArrayList<String> keywords = new ArrayList<String>();
+    public final List<String> getUnhiddenKeywords(CardState state) {
+        final List<String> keywords = new ArrayList<String>();
         Iterables.addAll(keywords, state.getIntrinsicKeywords());
         keywords.addAll(extrinsicKeyword);
 
@@ -3141,10 +3176,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
     }
 
-    public ArrayList<String> getExtrinsicKeyword() {
+    public List<String> getExtrinsicKeyword() {
         return extrinsicKeyword;
     }
-    public final void setExtrinsicKeyword(final ArrayList<String> a) {
+    public final void setExtrinsicKeyword(final List<String> a) {
         extrinsicKeyword = new ArrayList<String>(a);
     }
 
@@ -3169,7 +3204,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public void removeAllExtrinsicKeyword(final String s) {
-        final ArrayList<String> strings = new ArrayList<String>();
+        final List<String> strings = new ArrayList<String>();
         strings.add(s);
         boolean needKeywordUpdate = false;
         if (extrinsicKeyword.removeAll(strings)) {
@@ -3186,7 +3221,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     // Hidden Keywords will be returned without the indicator HIDDEN
-    public final ArrayList<String> getHiddenExtrinsicKeywords() {
+    public final List<String> getHiddenExtrinsicKeywords() {
         ListKeywordVisitor visitor = new ListKeywordVisitor();
         visitHiddenExtreinsicKeywords(visitor);
         return visitor.getKeywords();
@@ -3234,7 +3269,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final Iterable<String> getStaticAbilityStrings() {
         return currentState.getStaticAbilityStrings();
     }
-    public final void setStaticAbilities(final ArrayList<StaticAbility> a) {
+    public final void setStaticAbilities(final List<StaticAbility> a) {
         currentState.setStaticAbilities(new ArrayList<StaticAbility>(a));
     }
     public final void addStaticAbilityString(final String s) {
@@ -6546,14 +6581,14 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     // Collects all the keywords into a list.
     private static final class ListKeywordVisitor extends Visitor<String> {
-        private ArrayList<String> keywords = new ArrayList<>();
+        private List<String> keywords = new ArrayList<>();
 
         @Override
         public void visit(String kw) {
             keywords.add(kw);
         }
  
-        public ArrayList<String> getKeywords() {
+        public List<String> getKeywords() {
             return keywords;
         }
     }
