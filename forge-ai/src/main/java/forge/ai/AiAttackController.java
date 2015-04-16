@@ -68,8 +68,7 @@ public class AiAttackController {
     private final Player ai;
     private Player defendingOpponent;
     
-    private int aiAggression = 0; // added by Masher, how aggressive the ai is
-                                  // attack will be depending on circumstances
+    private int aiAggression = 0; // added by Masher, how aggressive the ai is attack will be depending on circumstances
 
 
     /**
@@ -204,7 +203,8 @@ public class AiAttackController {
         if (ComputerUtilCombat.poisonIfUnblocked(attacker, opp) > 0) {
             return true;
         }
-        if (this.attackers.size() == 1 && attacker.hasKeyword("Exalted") && ComputerUtilCombat.predictDamageTo(opp, 1, attacker, true) > 0) {
+        if (this.attackers.size() == 1 && attacker.hasKeyword("Exalted") 
+        		&& ComputerUtilCombat.predictDamageTo(opp, 1, attacker, true) > 0) {
             return true;
         }
 
@@ -224,27 +224,26 @@ public class AiAttackController {
         possibleBlockers = CardLists.filter(possibleBlockers, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return canBlockAnAttacker(c, attackers);
+                return canBlockAnAttacker(c, attackers, false);
             }
         });
         return possibleBlockers;
     }
 
-    public final static boolean canBlockAnAttacker(final Card c, final List<Card> attackers) {
+    public final static boolean canBlockAnAttacker(final Card c, final List<Card> attackers, final boolean nextTurn) {
         final List<Card> attackerList = new ArrayList<Card>(attackers);
         if (!c.isCreature()) {
             return false;
         }
         for (final Card attacker : attackerList) {
-            if (CombatUtil.canBlock(attacker, c)) {
+            if (CombatUtil.canBlock(attacker, c, nextTurn)) {
                 return true;
             }
         }
         return false;
     }
 
-    // this checks to make sure that the computer player
-    // doesn't lose when the human player attacks
+    // this checks to make sure that the computer player doesn't lose when the human player attacks
     // this method is used by getAttackers()
     public final List<Card> notNeededAsBlockers(final Player ai, final List<Card> attackers) {
         final List<Card> notNeededAsBlockers = new ArrayList<Card>(attackers);
@@ -254,13 +253,20 @@ public class AiAttackController {
         if (ai.getGame().getPhaseHandler().getNextTurn().equals(ai)) {
             return attackers;
         }
+        List<Card> opponentsAttackers = new ArrayList<Card>(oppList);
+        opponentsAttackers = CardLists.filter(opponentsAttackers, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return ComputerUtilCombat.canAttackNextTurn(c) && c.getNetCombatDamage() > 0;
+            }
+        });
         for (final Card c : this.myList) {
             if (c.getName().equals("Masako the Humorless")) {
                 // "Tapped creatures you control can block as though they were untapped."
                 return attackers;
             }
             if (!attackers.contains(c)) { // this creature can't attack anyway
-                if (canBlockAnAttacker(c, this.oppList)) {
+                if (canBlockAnAttacker(c, opponentsAttackers, false)) {
                     fixedBlockers++;
                 }
                 continue;
@@ -268,16 +274,16 @@ public class AiAttackController {
             if (c.hasKeyword("Vigilance")) {
                 vigilantes.add(c);
                 notNeededAsBlockers.remove(c); // they will be re-added later
-                if (canBlockAnAttacker(c, this.oppList)) {
+                if (canBlockAnAttacker(c, opponentsAttackers, false)) {
                     fixedBlockers++;
                 }
             }
         }
         CardLists.sortByPowerAsc(attackers);
-        int blockersNeeded = this.oppList.size();
+        int blockersNeeded = opponentsAttackers.size();
 
         // don't hold back creatures that can't block any of the human creatures
-        final List<Card> list = getPossibleBlockers(attackers, this.oppList);
+        final List<Card> list = getPossibleBlockers(attackers, opponentsAttackers);
 
         //Calculate the amount of creatures necessary
         for (int i = 0; i < list.size(); i++) {
@@ -313,9 +319,7 @@ public class AiAttackController {
             final boolean finestHour = opp.isCardInPlay("Finest Hour");
 
             if ((blockersNeeded == 0 || finestHour) && !this.oppList.isEmpty()) {
-                //
-                // total attack = biggest creature + exalted, *2 if Rafiq is in
-                // play
+                // total attack = biggest creature + exalted, *2 if Rafiq is in play
                 int humanBasePower = getAttack(this.oppList.get(0)) + humanExaltedBonus;
                 if (finestHour) {
                     // For Finest Hour, one creature could attack and get the
@@ -326,7 +330,7 @@ public class AiAttackController {
                         : humanBasePower;
                 if (ai.getLife() - 3 <= totalExaltedAttack) {
                     // We will lose if there is an Exalted attack -- keep one blocker
-                    if ((blockersNeeded == 0) && !notNeededAsBlockers.isEmpty()) {
+                    if (blockersNeeded == 0 && !notNeededAsBlockers.isEmpty()) {
                         notNeededAsBlockers.remove(0);
                     }
 
@@ -362,8 +366,7 @@ public class AiAttackController {
             totalPoison += ComputerUtilCombat.poisonIfUnblocked(attacker, ai);
         }
 
-        if (totalAttack > 0 && ai.getLife() <= totalAttack
-                && !ai.cantLoseForZeroOrLessLife()) {
+        if (totalAttack > 0 && ai.getLife() <= totalAttack && !ai.cantLoseForZeroOrLessLife()) {
             return true;
         }
         return ai.getPoisonCounters() + totalPoison > 9;
@@ -371,8 +374,7 @@ public class AiAttackController {
 
     private boolean doAssault(final Player ai) {
         // Beastmaster Ascension
-        if (ai.isCardInPlay("Beastmaster Ascension")
-                && (this.attackers.size() > 1)) {
+        if (ai.isCardInPlay("Beastmaster Ascension") && this.attackers.size() > 1) {
             final CardCollectionView beastions = ai.getCardsIn(ZoneType.Battlefield, "Beastmaster Ascension");
             int minCreatures = 7;
             for (final Card beastion : beastions) {
@@ -445,12 +447,12 @@ public class AiAttackController {
         }
 
         if (ComputerUtilCombat.sumDamageIfUnblocked(unblockedAttackers, opp) + ComputerUtil.possibleNonCombatDamage(ai) 
-                + trampleDamage>= opp.getLife()
-                && !((opp.cantLoseForZeroOrLessLife() || ai.cantWin()) && (opp.getLife() < 1))) {
+                + trampleDamage >= opp.getLife()
+                && !((opp.cantLoseForZeroOrLessLife() || ai.cantWin()) && opp.getLife() < 1)) {
             return true;
         }
 
-        if (ComputerUtilCombat.sumPoisonIfUnblocked(unblockedAttackers, opp) >= (10 - opp.getPoisonCounters())) {
+        if (ComputerUtilCombat.sumPoisonIfUnblocked(unblockedAttackers, opp) >= 10 - opp.getPoisonCounters()) {
             return true;
         }
 
@@ -543,7 +545,7 @@ public class AiAttackController {
             return;
         }
         if (bAssault) {
-            if ( LOG_AI_ATTACKS )
+            if (LOG_AI_ATTACKS)
                 System.out.println("Assault");
             CardLists.sortByPowerDesc(attackersLeft);
             for (Card attacker : attackersLeft) {
@@ -557,7 +559,7 @@ public class AiAttackController {
         // Cards that are remembered to attack anyway (e.g. temporarily stolen creatures)
         if (ai.getController() instanceof PlayerControllerAi) {
             // Only do this if |ai| is actually an AI - as we could be trying to predict how the human will attack.
-            AiCardMemory aiMemory = ((PlayerControllerAi)ai.getController()).getAi().getCardMemory();
+            AiCardMemory aiMemory = ((PlayerControllerAi) ai.getController()).getAi().getCardMemory();
             for (Card attacker : this.attackers) {
                 if (aiMemory.isRememberedCard(attacker, AiCardMemory.MemorySet.MANDATORY_ATTACKERS)) {
                     combat.addAttacker(attacker, defender);
@@ -589,11 +591,11 @@ public class AiAttackController {
             }
             if (exalted) {
                 CardLists.sortByPowerDesc(this.attackers);
-                if ( LOG_AI_ATTACKS )
+                if (LOG_AI_ATTACKS)
                     System.out.println("Exalted");
                 this.aiAggression = 6;
                 for (Card attacker : this.attackers) {
-                    if (CombatUtil.canAttack(attacker, defender)  && this.shouldAttack(ai, attacker, this.blockers, combat)) {
+                    if (CombatUtil.canAttack(attacker, defender) && this.shouldAttack(ai, attacker, this.blockers, combat)) {
                         combat.addAttacker(attacker, defender);
                         return;
                     }
@@ -612,20 +614,30 @@ public class AiAttackController {
         // examine the potential forces
         final List<Card> nextTurnAttackers = new ArrayList<Card>();
         int candidateCounterAttackDamage = 0;
+        
+        final Player opp = this.defendingOpponent;
+        // get the potential damage and strength of the AI forces
+        final List<Card> candidateAttackers = new ArrayList<Card>();
+        int candidateUnblockedDamage = 0;
+        for (final Card pCard : this.myList) {
+            // if the creature can attack then it's a potential attacker this
+            // turn, assume summoning sickness creatures will be able to
+            if (ComputerUtilCombat.canAttackNextTurn(pCard) && pCard.getNetCombatDamage() > 0) {
+                candidateAttackers.add(pCard);
+                candidateUnblockedDamage += ComputerUtilCombat.damageIfUnblocked(pCard, opp, null, false);
+                computerForces += 1;
+            }
+        }
 
         for (final Card pCard : this.oppList) {
-            // if the creature can attack next turn add it to counter attackers
-            // list
-            if (ComputerUtilCombat.canAttackNextTurn(pCard)) {
+            // if the creature can attack next turn add it to counter attackers list
+            if (ComputerUtilCombat.canAttackNextTurn(pCard) && pCard.getNetCombatDamage() > 0) {
                 nextTurnAttackers.add(pCard);
-                if (pCard.getNetCombatDamage() > 0) {
-                    candidateCounterAttackDamage += pCard.getNetCombatDamage();
-                    humanForces += 1; // player forces they might use to attack
-                }
+                candidateCounterAttackDamage += pCard.getNetCombatDamage();
+                humanForces += 1; // player forces they might use to attack
             }
-            // increment player forces that are relevant to an attritional
-            // attack - includes walls
-            if (CombatUtil.canBlock(pCard, true)) {
+            // increment player forces that are relevant to an attritional attack - includes walls
+            if (canBlockAnAttacker(pCard, candidateAttackers, true)) {
                 humanForcesForAttritionalAttack += 1;
             }
         }
@@ -634,22 +646,6 @@ public class AiAttackController {
         double aiLifeToPlayerDamageRatio = 1000000;
         if (candidateCounterAttackDamage > 0) {
             aiLifeToPlayerDamageRatio = (double) ai.getLife() / candidateCounterAttackDamage;
-        }
-
-        final Player opp = this.defendingOpponent;
-        // get the potential damage and strength of the AI forces
-        final List<Card> candidateAttackers = new ArrayList<Card>();
-        int candidateUnblockedDamage = 0;
-        for (final Card pCard : this.myList) {
-            // if the creature can attack then it's a potential attacker this
-            // turn, assume summoning sickness creatures will be able to
-            if (ComputerUtilCombat.canAttackNextTurn(pCard)) {
-                candidateAttackers.add(pCard);
-                if (pCard.getNetCombatDamage() > 0) {
-                    candidateUnblockedDamage += ComputerUtilCombat.damageIfUnblocked(pCard, opp, null, false);
-                    computerForces += 1;
-                }
-            }
         }
 
         // find the potential damage ratio the AI can cause
@@ -751,8 +747,7 @@ public class AiAttackController {
                 nextUnblockableDamage += ComputerUtilCombat.damageIfUnblocked(attacker, opp, null, false);
             }
         }
-        if (unblockableDamage > 0 && !opp.cantLoseForZeroOrLessLife()
-                && opp.canLoseLife()) {
+        if (unblockableDamage > 0 && !opp.cantLoseForZeroOrLessLife() && opp.canLoseLife()) {
             turnsUntilDeathByUnblockable = 1 + (opp.getLife() - unblockableDamage) / nextUnblockableDamage;
         }
         if (opp.canLoseLife()) {
@@ -796,7 +791,7 @@ public class AiAttackController {
         if ( LOG_AI_ATTACKS )
             System.out.println("Normal attack");
 
-        attackersLeft = this.notNeededAsBlockers(ai, attackersLeft);
+        attackersLeft = notNeededAsBlockers(ai, attackersLeft);
         attackersLeft = sortAttackers(attackersLeft);
 
         if ( LOG_AI_ATTACKS )
@@ -971,8 +966,7 @@ public class AiAttackController {
             canBeKilledByOne = true;
             isWorthLessThanAllKillers = false;
             hasCombatEffect = false;
-        }
-        else if (ComputerUtilCard.canBeBlockedProfitably(defendingOpponent, attacker)) {
+        } else if (ComputerUtilCard.canBeBlockedProfitably(defendingOpponent, attacker)) {
             canKillAllDangerous = false;
             canBeKilled = true;
         } 
@@ -980,7 +974,7 @@ public class AiAttackController {
         // if the creature cannot block and can kill all opponents they might as
         // well attack, they do nothing staying back
         if (canKillAll && isWorthLessThanAllKillers && !CombatUtil.canBlock(attacker)) {
-            if ( LOG_AI_ATTACKS )
+            if (LOG_AI_ATTACKS)
                 System.out.println(attacker.getName() + " = attacking because they can't block, expecting to kill or damage player");
             return true;
         }
@@ -997,44 +991,42 @@ public class AiAttackController {
         switch (this.aiAggression) {
         case 6: // Exalted: expecting to at least kill a creature of equal value or not be blocked
             if ((canKillAll && isWorthLessThanAllKillers) || !canBeBlocked) {
-                if ( LOG_AI_ATTACKS )
+                if (LOG_AI_ATTACKS)
                     System.out.println(attacker.getName() + " = attacking expecting to kill creature, or is unblockable");
                 return true;
             }
             break;
         case 5: // all out attacking
-            if ( LOG_AI_ATTACKS )
+            if (LOG_AI_ATTACKS)
                 System.out.println(attacker.getName() + " = all out attacking");
             return true;
         case 4: // expecting to at least trade with something
             if (canKillAll || (canKillAllDangerous && !canBeKilledByOne) || !canBeBlocked) {
-                if ( LOG_AI_ATTACKS )
+                if (LOG_AI_ATTACKS)
                     System.out.println(attacker.getName() + " = attacking expecting to at least trade with something");
                 return true;
             }
             break;
-        case 3: // expecting to at least kill a creature of equal value, not be
-                // blocked
+        case 3: // expecting to at least kill a creature of equal value or not be blocked
             if ((canKillAll && isWorthLessThanAllKillers)
                     || ((canKillAllDangerous || hasAttackEffect || hasCombatEffect) && !canBeKilledByOne)
                     || !canBeBlocked) {
-                if ( LOG_AI_ATTACKS )
+                if (LOG_AI_ATTACKS)
                     System.out.println(attacker.getName() + " = attacking expecting to kill creature or cause damage, or is unblockable");
                 return true;
             }
             break;
-        case 2: // attack expecting to attract a group block or destroying a
-                // single blocker and surviving
-            if ((((canKillAll || hasAttackEffect || hasCombatEffect) && !canBeKilledByOne) || !canBeBlocked) &&
-                    (canKillAllDangerous || !canBeKilled)) {
-                if ( LOG_AI_ATTACKS )
+        case 2: // attack expecting to attract a group block or destroying a single blocker and surviving
+            if (!canBeBlocked || ((canKillAll || hasAttackEffect || hasCombatEffect) && !canBeKilledByOne &&
+                    (canKillAllDangerous || !canBeKilled))) {
+                if (LOG_AI_ATTACKS)
                     System.out.println(attacker.getName() + " = attacking expecting to survive or attract group block");
                 return true;
             }
             break;
         case 1: // unblockable creatures only
             if (!canBeBlocked || (numberOfPossibleBlockers == 1 && canKillAll && !canBeKilledByOne)) {
-                if ( LOG_AI_ATTACKS )
+                if (LOG_AI_ATTACKS)
                     System.out.println(attacker.getName() + " = attacking expecting not to be blocked");
                 return true;
             }
