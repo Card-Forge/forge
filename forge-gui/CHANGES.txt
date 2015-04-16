@@ -9,6 +9,14 @@ Release Notes
 -------------
 
 
+- Smarter Deck Color Determination -
+When determining the color of decks, colors of hybrid and phyrexian cards are no longer considered unless they can be produced by a land in the deck
+
+
+- Land Color Filtering in Deck Editor -
+When filtering colors in the Deck Editor, lands that produce all selected colors will now be shown
+This means if you filter to show only green and white cards, lands that produce green and white will now be shown
+This should hopefully make finding multicolor lands for your decks easier
 
 
 ----------
