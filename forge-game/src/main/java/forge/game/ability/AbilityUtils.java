@@ -1464,6 +1464,18 @@ public class AbilityUtils {
                     }
                     return count;
                 }
+
+                // Count$TargetedLifeTotal (targeted player's life total)
+                // Not optimal but since xCount doesn't take SAs, we need to replicate while we have it
+                // Probably would be best if xCount took an optional SA to use in these circumstances
+                if (sq[0].contains("TargetedLifeTotal")) {
+                    final SpellAbility saTargeting = sa.getSATargetingPlayer();
+                    if (saTargeting != null) {
+                        for (final Player tgtP : saTargeting.getTargets().getTargetPlayers()) {
+                            return CardFactoryUtil.doXMath(tgtP.getLife(), expr, c);
+                        }
+                    }
+                }
             }
         }
         return CardFactoryUtil.xCount(c, s2);

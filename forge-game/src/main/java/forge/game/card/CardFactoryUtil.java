@@ -1126,6 +1126,7 @@ public class CardFactoryUtil {
 
         //  Count$TargetedLifeTotal (targeted player's life total)
         if (sq[0].contains("TargetedLifeTotal")) {
+            // This doesn't work in some circumstances, since the active SA isn't passed through
             for (final SpellAbility sa : c.getCurrentState().getNonManaAbilities()) {
                 final SpellAbility saTargeting = sa.getSATargetingPlayer();
                 if (saTargeting != null) {
