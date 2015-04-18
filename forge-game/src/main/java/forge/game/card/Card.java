@@ -996,17 +996,17 @@ public class Card extends GameEntity implements Comparable<Card> {
                 // play the Add Counter sound
                 getGame().fireEvent(new GameEventCardCounters(this, counterType, oldValue == null ? 0 : oldValue.intValue(), newValue));
             }
-        }
 
-        // Run triggers
-        final Map<String, Object> runParams = new TreeMap<String, Object>();
-        runParams.put("Card", this);
-        runParams.put("CounterType", counterType);
-        for (int i = 0; i < addAmount; i++) {
-            getGame().getTriggerHandler().runTrigger(TriggerType.CounterAdded, runParams, false);
-        }
-        if (addAmount > 0) {
-            getGame().getTriggerHandler().runTrigger(TriggerType.CounterAddedOnce, runParams, false);
+            // Run triggers
+            final Map<String, Object> runParams = new TreeMap<String, Object>();
+            runParams.put("Card", this);
+            runParams.put("CounterType", counterType);
+            for (int i = 0; i < addAmount; i++) {
+                getGame().getTriggerHandler().runTrigger(TriggerType.CounterAdded, runParams, false);
+            }
+            if (addAmount > 0) {
+                getGame().getTriggerHandler().runTrigger(TriggerType.CounterAddedOnce, runParams, false);
+            }
         }
     }
 
