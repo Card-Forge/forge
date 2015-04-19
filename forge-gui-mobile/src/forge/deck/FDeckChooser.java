@@ -2,7 +2,6 @@ package forge.deck;
 
 import forge.FThreads;
 import forge.Forge;
-import forge.GuiBase;
 import forge.deck.Deck;
 import forge.deck.FDeckEditor.EditorType;
 import forge.deck.io.DeckPreferences;
@@ -11,10 +10,8 @@ import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletUtil;
-import forge.interfaces.IGuiGame;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
-import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences;
@@ -25,7 +22,6 @@ import forge.quest.QuestEventChallenge;
 import forge.quest.QuestUtil;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
-import forge.screens.match.MatchController;
 import forge.toolbox.FButton;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FEvent;
@@ -43,9 +39,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class FDeckChooser extends FScreen {
     public static final float PADDING = Utils.scale(5);
@@ -696,11 +690,7 @@ public class FDeckChooser extends FScreen {
                                 players.add(humanPlayer);
                                 players.add(new RegisteredPlayer(gauntlet.getDecks().get(gauntlet.getCompleted())).setPlayer(GamePlayerUtil.createAiPlayer()));
 
-                                final Map<RegisteredPlayer, IGuiGame> guiMap = new HashMap<RegisteredPlayer, IGuiGame>();
-                                guiMap.put(humanPlayer, MatchController.instance);
-
-                                final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
-                                hostedMatch.startMatch(GameType.DeckEditorTest, null, players, guiMap);
+                                gauntlet.startRound(players, humanPlayer);
                             }
                         });
                     }
