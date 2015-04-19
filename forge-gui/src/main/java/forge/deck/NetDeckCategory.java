@@ -47,6 +47,7 @@ public class NetDeckCategory extends StorageBase<Deck> {
         switch (gameType) {
         case Constructed:
         case Gauntlet:
+        case DeckEditorTest:
             if (constructed == null) {
                 constructed = loadCategories(ForgeConstants.NET_DECKS_LIST_FILE);
             }
@@ -79,7 +80,7 @@ public class NetDeckCategory extends StorageBase<Deck> {
             return category;
         }
 
-        final NetDeckCategory c= SGuiChoose.oneOrNone("Select a Net Deck category", categories.values());
+        final NetDeckCategory c = SGuiChoose.oneOrNone("Select a Net Deck category", categories.values());
         if (c == null) { return null; }
 
         if (c.map.isEmpty()) { //only download decks once per session
