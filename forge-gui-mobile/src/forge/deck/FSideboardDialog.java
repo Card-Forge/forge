@@ -137,8 +137,7 @@ public class FSideboardDialog extends FDialog {
 
             @Override
             protected void doLayout(float width, float height) {
-                float y = FOptionPane.PADDING - ItemFilter.PADDING;
-                cardManager.setBounds(FOptionPane.PADDING, y, width - 2 * FOptionPane.PADDING, height - y);
+                cardManager.setBounds(0, 0, width, height);
             }
         }
 
