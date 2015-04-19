@@ -78,6 +78,8 @@ public abstract class GauntletWinLoseController {
                     gd.stamp();
                     GauntletIO.saveGauntlet(gd);
 
+                    view.getBtnContinue().setText("Next Round (" + (gd.getCompleted() + 1)
+                            + "/" + len + ")");
                     view.getBtnContinue().setVisible(true);
                     view.getBtnContinue().setEnabled(true);
                     view.getBtnQuit().setText("Save and Quit");
