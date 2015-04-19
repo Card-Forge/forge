@@ -1,85 +1,117 @@
 package forge.deck;
 
 import forge.Forge;
+import forge.assets.FImage;
+import forge.assets.FSkin;
+import forge.assets.FSkinImage;
+import forge.assets.FTextureRegionImage;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
+import forge.menu.FMenuItem;
+import forge.menu.FPopupMenu;
 import forge.screens.FScreen;
 import forge.screens.match.MatchController;
-import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
-import forge.util.Utils;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map.Entry;
 
 public class FDeckViewer extends FScreen {
-    private static final float BUTTON_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.8f;
-    private static final float PADDING = Utils.AVG_FINGER_HEIGHT * 0.1f;
+    private static FDeckViewer deckViewer;
+    private static FPopupMenu menu = new FPopupMenu() {
+        @Override
+        protected void buildMenu() {
+            Deck deck = deckViewer.deck;
+            for (Entry<DeckSection, CardPool> entry : deck) {
+                final DeckSection section = entry.getKey();
+                final CardPool pool = entry.getValue();
+                int count = pool.countAll();
+                if (count == 0) { continue; }
+
+                final String captionPrefix;
+                final FImage icon;
+                switch (section) {
+                default:
+                case Main:
+                    captionPrefix = "Main Deck";
+                    icon = FDeckEditor.MAIN_DECK_ICON;
+                    break;
+                case Sideboard:
+                    captionPrefix = "Sideboard";
+                    icon = FDeckEditor.SIDEBOARD_ICON;
+                    break;
+                case Commander:
+                    captionPrefix = "Commander";
+                    icon = FSkinImage.PLANESWALKER;
+                    break;
+                case Avatar:
+                    captionPrefix = "Avatar";
+                    icon = new FTextureRegionImage(FSkin.getAvatars().get(0));
+                    break;
+                case Planes:
+                    captionPrefix = "Planes";
+                    icon = FSkinImage.CHAOS;
+                    break;
+                case Schemes:
+                    captionPrefix = "Schemes";
+                    icon = FSkinImage.POISON;
+                    break;
+                }
+
+                FMenuItem item = new FMenuItem(captionPrefix + " (" + count + ")", icon, new FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {
+                        deckViewer.setCurrentSection(section);
+                    }
+                });
+                if (section == deckViewer.currentSection) {
+                    item.setSelected(true);
+                }
+                addItem(item);
+            }
+            addItem(new FMenuItem("Copy to Clipboard", new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    deckViewer.copyToClipboard();
+                }
+            }));
+        }
+    };
 
     private final Deck deck;
-    private final List<DeckSection> sections = new ArrayList<DeckSection>();
     private final CardManager cardManager;
     private DeckSection currentSection;
-
-    private final FButton btnCopyToClipboard = new FButton("Copy to Clipboard");
-    private final FButton btnChangeSection = new FButton("Change Section");
 
     public static void show(final Deck deck) {
         if (deck == null) { return; }
 
-        FDeckViewer deckViewer = new FDeckViewer(deck);
+        deckViewer = new FDeckViewer(deck);
         deckViewer.setRotate180(MatchController.getView() != null && MatchController.getView().isTopHumanPlayerActive());
         Forge.openScreen(deckViewer);
     }
 
     private FDeckViewer(Deck deck0) {
-        super(deck0.getName());
+        super(deck0.getName(), menu);
         deck = deck0;
         cardManager = new CardManager(false);
         cardManager.setPool(deck.getMain());
 
-        for (Entry<DeckSection, CardPool> entry : deck) {
-            sections.add(entry.getKey());
-        }
         currentSection = DeckSection.Main;
         updateCaption();
 
-        btnCopyToClipboard.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                copyToClipboard();
-            }
-        });
-        if (sections.size() > 1) {
-            btnChangeSection.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    changeSection();
-                }
-            });
-        }
-        else {
-            btnChangeSection.setEnabled(false);
-        }
-
         add(cardManager);
-        add(btnCopyToClipboard);
-        add(btnChangeSection);
 
         cardManager.setup(ItemManagerConfig.DECK_VIEWER);
     }
 
-    private void changeSection() {
-        int index = sections.indexOf(currentSection);
-        index = (index + 1) % sections.size();
-        currentSection = sections.get(index);
+    private void setCurrentSection(DeckSection currentSection0) {
+        if (currentSection == currentSection0) { return; }
+        currentSection = currentSection0;
         cardManager.setPool(deck.get(currentSection));
         updateCaption();
     }
@@ -118,11 +150,6 @@ public class FDeckViewer extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
-        cardManager.setBounds(PADDING, startY, width - 2 * PADDING, height - BUTTON_HEIGHT - 2 * PADDING - startY);
-
-        float y = height - BUTTON_HEIGHT - PADDING;
-        float buttonWidth = (width - 3 * PADDING) / 2;
-        btnCopyToClipboard.setBounds(PADDING, y, buttonWidth, BUTTON_HEIGHT);
-        btnChangeSection.setBounds(buttonWidth + 2 * PADDING, y, buttonWidth, BUTTON_HEIGHT);
+        cardManager.setBounds(0, startY, width, height - startY);
     }
 }
