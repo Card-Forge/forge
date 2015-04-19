@@ -17,7 +17,6 @@ import forge.item.InventoryItem;
 import forge.screens.match.MatchController;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDialog;
-import forge.toolbox.FOptionPane;
 import forge.toolbox.FOverlay;
 import forge.util.FCollectionView;
 import forge.util.Utils;
@@ -189,7 +188,7 @@ public class CardZoom extends FOverlay {
 
         float cardWidth, cardHeight, y;
         if (oneCardView) {
-            cardWidth = w - 2 * FOptionPane.PADDING;
+            cardWidth = w;
             cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
         }
         else {
