@@ -456,11 +456,7 @@ public class FDeckChooser extends FScreen {
     private void updateRandom() {
         lstDecks.setSelectionSupport(1, 1);
 
-        ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
-        decks.add(new RandomDeckGenerator("Random Generated Deck", 0, lstDecks, isAi));
-        decks.add(new RandomDeckGenerator("Random User Deck", 1, lstDecks, isAi));
-
-        lstDecks.setPool(decks);
+        lstDecks.setPool(RandomDeckGenerator.getRandomDecks(lstDecks, isAi));
         lstDecks.setup(ItemManagerConfig.STRING_ONLY);
 
         btnNewDeck.setText("Generate New Deck");

@@ -207,11 +207,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private void updateRandom() {
         lstDecks.setAllowMultipleSelections(false);
 
-        ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
-        decks.add(new RandomDeckGenerator("Random Generated Deck", 0, lstDecks, isAi));
-        decks.add(new RandomDeckGenerator("Random User Deck", 1, lstDecks, isAi));
-
-        lstDecks.setPool(decks);
+        lstDecks.setPool(RandomDeckGenerator.getRandomDecks(lstDecks, isAi));
         lstDecks.setup(ItemManagerConfig.STRING_ONLY);
 
         btnViewDeck.setVisible(false);

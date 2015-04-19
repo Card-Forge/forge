@@ -3,23 +3,41 @@ package forge.deck;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
 import forge.game.GameType;
 import forge.game.IHasGameType;
 import forge.model.FModel;
 import forge.quest.QuestController;
 import forge.util.Aggregates;
-import forge.util.storage.IStorage;
 
 public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomDeckGenerator> {
+    private enum RandomDeckType {
+        Generated,
+        User,
+        Favorite
+    }
+    
+    public static List<DeckProxy> getRandomDecks(IHasGameType lstDecks0, boolean isAi0) {
+        ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
+
+        decks.add(new RandomDeckGenerator("Random Generated Deck", RandomDeckType.Generated, lstDecks0, isAi0));
+        decks.add(new RandomDeckGenerator("Random User Deck", RandomDeckType.User, lstDecks0, isAi0));
+        decks.add(new RandomDeckGenerator("Random Favorite Deck", RandomDeckType.Favorite, lstDecks0, isAi0));
+
+        return decks;
+    }
+
     private final String name;
-    private final int index;
+    private final RandomDeckType type;
     private final IHasGameType lstDecks;
     private final boolean isAi;
 
-    public RandomDeckGenerator(String name0, int index0, IHasGameType lstDecks0, boolean isAi0) {
+    public RandomDeckGenerator(String name0, RandomDeckType type0, IHasGameType lstDecks0, boolean isAi0) {
         super();
         name = name0;
-        index = index0;
+        type = type0;
         lstDecks = lstDecks0;
         isAi = isAi0;
     }
@@ -36,51 +54,32 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
 
     @Override
     public int compareTo(final RandomDeckGenerator d) {
-        return d instanceof RandomDeckGenerator ? Integer.compare(index, ((RandomDeckGenerator)d).index) : 1;
+        return d instanceof RandomDeckGenerator ? Integer.compare(type.ordinal(), ((RandomDeckGenerator)d).type.ordinal()) : 1;
     }
 
     @Override
     public Deck getDeck() {
+        switch (type) {
+        case Generated:
+            return getGeneratedDeck();
+        case User:
+            return getUserDeck();
+        default:
+            return getFavoriteDeck();
+        }
+    }
+
+    private Deck getGeneratedDeck() {
         switch (lstDecks.getGameType()) {
         case Commander:
-            if (index == 1) {
-                IStorage<Deck> decks = FModel.getDecks().getCommander();
-                if (decks.size() > 0) {
-                    return Aggregates.random(decks);
-                }
-            }
             return DeckgenUtil.generateCommanderDeck(isAi, GameType.Commander);
         case TinyLeaders:
-            if (index == 1) {
-                List<Deck> decks = DeckFormat.TinyLeaders.getLegalDecks(FModel.getDecks().getCommander());
-                if (decks.size() > 0) {
-                    return Aggregates.random(decks);
-                }
-            }
             return DeckgenUtil.generateCommanderDeck(isAi, GameType.TinyLeaders);
         case Archenemy:
-            if (index == 1) {
-                IStorage<Deck> decks = FModel.getDecks().getScheme();
-                if (decks.size() > 0) {
-                    return Aggregates.random(decks);
-                }
-            }
             return DeckgenUtil.generateSchemeDeck();
         case Planechase:
-            if (index == 1) {
-                IStorage<Deck> decks = FModel.getDecks().getPlane();
-                if (decks.size() > 0) {
-                    return Aggregates.random(decks);
-                }
-            }
             return DeckgenUtil.generatePlanarDeck();
         default:
-            if (index == 1) {
-                IStorage<Deck> decks = FModel.getDecks().getConstructed();
-                if (decks.size() > 0) {
-                    return Aggregates.random(decks);
-                }
-            }
             while (true) {
                 switch (Aggregates.random(DeckType.values())) {
                 case PRECONSTRUCTED_DECK:
@@ -101,6 +100,57 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
                 }
             }
         }
+    }
+    
+    private Deck getUserDeck() {
+        Iterable<Deck> decks;
+        switch (lstDecks.getGameType()) {
+        case Commander:
+            decks = FModel.getDecks().getCommander();
+        case TinyLeaders:
+            decks = DeckFormat.TinyLeaders.getLegalDecks(FModel.getDecks().getCommander());
+        case Archenemy:
+            decks = FModel.getDecks().getScheme();
+        case Planechase:
+            decks = FModel.getDecks().getPlane();
+        default:
+            decks = FModel.getDecks().getConstructed();
+        }
+        if (Iterables.isEmpty(decks)) {
+            return getGeneratedDeck(); //fall back to generated deck if no decks in filtered list
+        }
+        return Aggregates.random(decks);
+    }
+
+    private Deck getFavoriteDeck() {
+        Iterable<DeckProxy> decks;
+        switch (lstDecks.getGameType()) {
+        case Commander:
+            decks = DeckProxy.getAllCommanderDecks();
+        case TinyLeaders:
+            decks = Iterables.filter(DeckProxy.getAllCommanderDecks(), new Predicate<DeckProxy>() {
+                @Override
+                public boolean apply(DeckProxy deck) {
+                    return DeckFormat.TinyLeaders.getDeckConformanceProblem(deck.getDeck()) == null;
+                }
+            });
+        case Archenemy:
+            decks = DeckProxy.getAllSchemeDecks();
+        case Planechase:
+            decks = DeckProxy.getAllPlanarDecks();
+        default:
+            decks = DeckProxy.getAllConstructedDecks();
+        }
+        decks = Iterables.filter(decks, new Predicate<DeckProxy>() {
+            @Override
+            public boolean apply(DeckProxy deck) {
+                return deck.isFavoriteDeck();
+            }
+        });
+        if (Iterables.isEmpty(decks)) {
+            return getGeneratedDeck(); //fall back to generated deck if no favorite decks
+        }
+        return Aggregates.random(decks).getDeck();
     }
 
     @Override

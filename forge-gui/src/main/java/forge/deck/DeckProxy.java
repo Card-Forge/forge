@@ -18,6 +18,7 @@ import forge.card.CardRules;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
+import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.item.InventoryItem;
@@ -287,6 +288,10 @@ public class DeckProxy implements InventoryItem {
 
     public boolean isGeneratedDeck() {
         return false;
+    }
+
+    public boolean isFavoriteDeck() {
+        return DeckPreferences.getPrefs(this).getStarCount() > 0;
     }
 
     // TODO: The methods below should not take the decks collections from singletons, instead they are supposed to use data passed in parameters
