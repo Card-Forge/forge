@@ -6,48 +6,27 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.quest;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
-import forge.card.BoosterSlots;
-import forge.card.CardEdition;
-import forge.card.CardRarity;
-import forge.card.ICardDatabase;
-import forge.card.MagicColor;
-import forge.card.UnOpenedProduct;
+import forge.card.*;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameFormat;
-import forge.item.BoosterBox;
-import forge.item.BoosterPack;
-import forge.item.FatPack;
-import forge.item.IPaperCard;
-import forge.item.InventoryItem;
-import forge.item.PaperCard;
-import forge.item.PreconDeck;
-import forge.item.SealedProduct;
-import forge.item.TournamentPack;
+import forge.item.*;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.bazaar.QuestItemType;
@@ -59,6 +38,12 @@ import forge.quest.data.QuestPreferences.QPref;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  * This is a helper class to execute operations on QuestData. It has been
@@ -71,7 +56,7 @@ public final class QuestUtilCards {
 
     /**
      * Instantiates a new quest util cards.
-     * 
+     *
      * @param qd
      *            the qd
      */
@@ -158,7 +143,7 @@ public final class QuestUtilCards {
      * <p>
      * addCards.
      * </p>
-     * 
+     *
      * @param fSets
      *            the f sets
      * @return the array list
@@ -170,7 +155,7 @@ public final class QuestUtilCards {
 
     /**
      * Adds the all cards.
-     * 
+     *
      * @param newCards
      *            the new cards
      */
@@ -182,7 +167,7 @@ public final class QuestUtilCards {
 
     /**
      * Adds the single card.
-     * 
+     *
      * @param card
      *            the card
      * @param qty
@@ -214,7 +199,7 @@ public final class QuestUtilCards {
 
     /**
      * Adds the random rare.
-     * 
+     *
      * @return the card printed
      */
     public PaperCard addRandomRare() {
@@ -228,7 +213,7 @@ public final class QuestUtilCards {
 
     /**
      * Adds a random common.
-     * 
+     *
      * @param n the number of cards to add
      * @return the list of cards added
      */
@@ -241,7 +226,7 @@ public final class QuestUtilCards {
 
     /**
      * Adds a random uncommon.
-     * 
+     *
      * @param n the number of cards to add
      * @return the list of cards added
      */
@@ -254,7 +239,7 @@ public final class QuestUtilCards {
 
     /**
      * Adds the random rare.
-     * 
+     *
      * @param n
      *            the n
      * @return the list
@@ -269,7 +254,7 @@ public final class QuestUtilCards {
 
     /**
      * Adds the random rare.
-     * 
+     *
      * @param n
      *            the n
      * @return the list
@@ -284,7 +269,7 @@ public final class QuestUtilCards {
 
     /**
      * Adds the random rare.
-     * 
+     *
      * @param n
      *            the n
      * @return the list
@@ -293,20 +278,20 @@ public final class QuestUtilCards {
         final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.MYTHIC_PREDICATE);
 
         final Iterable<PaperCard> cardPool = Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), myFilter);
-        
+
         if (!cardPool.iterator().hasNext()) {
             return null;
         }
-        
+
         final List<PaperCard> newCards = Aggregates.random(cardPool, n);
         this.addAllCards(newCards);
         return newCards;
-        
+
     }
 
     /**
      * Setup new game card pool.
-     * 
+     *
      * @param filter
      *            the filter
      * @param idxDifficulty
@@ -324,7 +309,7 @@ public final class QuestUtilCards {
 
     /**
      * Buy card.
-     * 
+     *
      * @param card
      *            the card
      * @param qty
@@ -336,14 +321,13 @@ public final class QuestUtilCards {
         int totalCost = qty * value;
         if (this.qa.getCredits() >= totalCost) {
             this.qa.setCredits(this.qa.getCredits() - totalCost);
-            this.qa.getShopList().remove(card, qty);
             this.addSingleCard(card, qty);
         }
     }
 
     /**
      * Buy booster.
-     * 
+     *
      * @param booster
      *            the booster
      * @param value
@@ -352,14 +336,13 @@ public final class QuestUtilCards {
     public void buyPack(final SealedProduct booster, final int value) {
         if (this.qa.getCredits() >= value) {
             this.qa.setCredits(this.qa.getCredits() - value);
-            this.qa.getShopList().remove(booster);
             this.addAllCards(booster.getCards());
         }
     }
 
     /**
      * Buy precon deck.
-     * 
+     *
      * @param precon
      *            the precon
      * @param value
@@ -368,14 +351,13 @@ public final class QuestUtilCards {
     public void buyPreconDeck(final PreconDeck precon, final int value) {
         if (this.qa.getCredits() >= value) {
             this.qa.setCredits(this.qa.getCredits() - value);
-            this.qa.getShopList().remove(precon);
             this.addDeck(precon.getDeck());
         }
     }
 
     /**
      * Import an existing deck.
-     * 
+     *
      * @param fromDeck
      *            Deck, deck to import
      */
@@ -392,7 +374,7 @@ public final class QuestUtilCards {
 
     /**
      * Sell card.
-     * 
+     *
      * @param card
      *            the card
      * @param qty
@@ -405,12 +387,8 @@ public final class QuestUtilCards {
     }
 
     /**
-     * lose card.
-     * 
-     * @param card
-     *            the card
-     * @param qty
-     *          quantity
+     * Lose card.
+     * @param cards
      */
     public void loseCards(final List<PaperCard> cards) {
         for(PaperCard pc: cards)
@@ -419,13 +397,10 @@ public final class QuestUtilCards {
 
     /**
      * Sell card.
-     * 
-     * @param card
-     *            the card
-     * @param price
-     *            the price
-     * @param addToShop
-     *            true if this card should be added to the shop, false otherwise
+     * @param card The card to sell.
+     * @param qty The quantity of the card to sell.
+     * @param pricePerCard The price of each card.
+     * @param addToShop If true, this adds the sold cards to the shop's inventory.
      */
     private void sellCard(final PaperCard card, int qty, final int pricePerCard, final boolean addToShop) {
         if (pricePerCard > 0) {
@@ -471,7 +446,7 @@ public final class QuestUtilCards {
 
     /**
      * Gets the sell mutliplier.
-     * 
+     *
      * @return the sell mutliplier
      */
     public double getSellMultiplier() {
@@ -500,7 +475,7 @@ public final class QuestUtilCards {
 
     /**
      * Gets the sell price limit.
-     * 
+     *
      * @return the sell price limit
      */
     public int getSellPriceLimit() {
@@ -517,7 +492,7 @@ public final class QuestUtilCards {
     private final Predicate<CardEdition> filterExt = this.formats.getExtended().editionLegalPredicate;
 
     /** The filter t2booster. */
-    private final Predicate<CardEdition> filterT2booster = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER, 
+    private final Predicate<CardEdition> filterT2booster = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
             this.formats.getStandard().editionLegalPredicate);
 
     /** The filter ext but t2. */
@@ -531,7 +506,7 @@ public final class QuestUtilCards {
 
     /**
      * Helper predicate for shops: is legal in quest format.
-     * 
+     *
      * @param qFormat
      *            the quest format
      * @return the predicate
@@ -542,7 +517,7 @@ public final class QuestUtilCards {
 
     /**
      * Generate boosters in shop.
-     * 
+     *
      * @param count
      *            the count
      */
@@ -561,7 +536,7 @@ public final class QuestUtilCards {
 
     /**
      * Generate precons in shop.
-     * 
+     *
      * @param count
      *            the count
      */
@@ -576,7 +551,7 @@ public final class QuestUtilCards {
 
     /**
      * Generate precons in shop.
-     * 
+     *
      * @param count
      *            the count
      */
@@ -588,13 +563,13 @@ public final class QuestUtilCards {
         Iterable<CardEdition> rightEditions = Iterables.filter(FModel.getMagicDb().getEditions(), formatFilter);
         this.qa.getShopList().addAllFlat(Aggregates.random(Iterables.transform(rightEditions, FatPack.FN_FROM_SET), count));
     }
-    
+
     private void generateBoosterBoxesInShop(final int count) {
-        
+
         if (count == 0) {
             return;
         }
-        
+
         Predicate<CardEdition> formatFilter = CardEdition.Predicates.HAS_BOOSTER_BOX;
         if (qc.getFormat() != null) {
             formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(qc.getFormat()));
@@ -605,29 +580,29 @@ public final class QuestUtilCards {
         for (CardEdition e : rightEditions) {
             editions.add(e);
         }
-        
+
         Collections.shuffle(editions);
-        
+
         int numberOfBoxes = Math.min(Math.max(count / 2, 1), editions.size());
-        
+
         if (numberOfBoxes == 0) {
             return;
         }
-        
+
         editions = editions.subList(0, numberOfBoxes);
-        
+
         List<BoosterBox> output = new ArrayList<>();
         for (CardEdition e : editions) {
             output.add(BoosterBox.FN_FROM_SET.apply(e));
         }
-        
+
         this.qa.getShopList().addAllFlat(output);
-        
+
     }
 
     /**
      * Generate precons in shop.
-     * 
+     *
      * @param count
      *            the count
      */
@@ -697,7 +672,7 @@ public final class QuestUtilCards {
 
     /**
      * Gets the cardpool.
-     * 
+     *
      * @return the cardpool
      */
     public ItemPool<PaperCard> getCardpool() {
@@ -706,7 +681,7 @@ public final class QuestUtilCards {
 
     /**
      * Gets the shop list.
-     * 
+     *
      * @return the shop list
      */
     public ItemPool<InventoryItem> getShopList() {
@@ -718,7 +693,7 @@ public final class QuestUtilCards {
 
     /**
      * Gets the new cards.
-     * 
+     *
      * @return the new cards
      */
     public ItemPool<InventoryItem> getNewCards() {
