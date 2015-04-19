@@ -14,6 +14,9 @@ import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.model.FModel;
+import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.MatchController;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDialog;
@@ -25,11 +28,12 @@ public class CardZoom extends FOverlay {
     private static final float REQ_AMOUNT = Utils.AVG_FINGER_WIDTH;
 
     private static final CardZoom cardZoom = new CardZoom();
+    private static final ForgePreferences prefs = FModel.getPreferences();
     private static List<?> items;
     private static int currentIndex, initialIndex;
     private static CardView currentCard, prevCard, nextCard;
     private static boolean zoomMode = true;
-    private static boolean oneCardView = false;
+    private static boolean oneCardView = prefs.getPrefBoolean(FPref.UI_SINGLE_CARD_ZOOM);
     private float totalZoomAmount;
     private static ActivateHandler activateHandler;
     private static String currentActivateAction;
@@ -156,16 +160,24 @@ public class CardZoom extends FOverlay {
         return false;
     }
 
+    private void setOneCardView(boolean oneCardView0) {
+        if (oneCardView == oneCardView0) { return; }
+
+        oneCardView = oneCardView0;
+        prefs.setPref(FPref.UI_SINGLE_CARD_ZOOM, oneCardView0);
+        prefs.save();
+    }
+
     @Override
     public boolean zoom(float x, float y, float amount) {
         totalZoomAmount += amount;
 
         if (totalZoomAmount >= REQ_AMOUNT) {
-            oneCardView = true;
+            setOneCardView(true);
             totalZoomAmount = 0;
         }
         else if (totalZoomAmount <= -REQ_AMOUNT) {
-            oneCardView = false;
+            setOneCardView(false);
             totalZoomAmount = 0;
         }
         return true;
@@ -173,7 +185,7 @@ public class CardZoom extends FOverlay {
 
     @Override
     public boolean longPress(float x, float y) {
-        oneCardView = !oneCardView;
+        setOneCardView(!oneCardView);
         return true;
     }
 
