@@ -36,7 +36,7 @@ public class FOptionPane extends FDialog {
     }
 
     public static void showMessageDialog(String message) {
-        showMessageDialog(message, "Forge", INFORMATION_ICON);
+        showMessageDialog(message, "", INFORMATION_ICON);
     }
 
     public static void showMessageDialog(String message, String title) {
@@ -44,7 +44,7 @@ public class FOptionPane extends FDialog {
     }
 
     public static void showErrorDialog(String message) {
-        showMessageDialog(message, "Forge", ERROR_ICON);
+        showMessageDialog(message, "", ERROR_ICON);
     }
 
     public static void showErrorDialog(String message, String title) {
@@ -60,7 +60,7 @@ public class FOptionPane extends FDialog {
     }
 
     public static void showConfirmDialog(String message, final Callback<Boolean> callback) {
-        showConfirmDialog(message, "Forge", callback);
+        showConfirmDialog(message, "", callback);
     }
 
     public static void showConfirmDialog(String message, String title, final Callback<Boolean> callback) {
