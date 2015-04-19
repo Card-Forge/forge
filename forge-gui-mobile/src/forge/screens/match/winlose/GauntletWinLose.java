@@ -42,7 +42,9 @@ public class GauntletWinLose extends ControlWinLose {
         super(view0, lastGame);
         controller = new GauntletWinLoseController(view0, lastGame) {
             @Override
-            protected void showOutcome(final String message1, final String message2, final FSkinProp icon, final List<String> lstEventNames, final List<String> lstEventRecords, final int len, final int num) {
+            protected void showOutcome(final boolean isMatchOver, final String message1, final String message2, final FSkinProp icon, final List<String> lstEventNames, final List<String> lstEventRecords, final int len, final int num) {
+                if (!isMatchOver) { return; } //don't show progress dialog unless match over
+
                 FThreads.invokeInBackgroundThread(new Runnable() {
                     @Override
                     public void run() {

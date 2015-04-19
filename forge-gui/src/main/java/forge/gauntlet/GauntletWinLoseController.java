@@ -51,7 +51,8 @@ public abstract class GauntletWinLoseController {
         lstEventRecords.set(gd.getCompleted(), lastGame.getGamesWonBy(questPlayer) + " - "
                 + (lastGame.getNumPlayedGamesInMatch() - lastGame.getGamesWonBy(questPlayer) + 1));
         
-        if (lastGame.isMatchOver()) {
+        boolean isMatchOver = lastGame.isMatchOver();
+        if (isMatchOver) {
             gd.setCompleted(gd.getCompleted() + 1);
 
             // Win match case
@@ -105,7 +106,7 @@ public abstract class GauntletWinLoseController {
 
         gd.setEventRecords(lstEventRecords);
 
-        showOutcome(message1, message2, icon, lstEventNames, lstEventRecords, len, num);
+        showOutcome(isMatchOver, message1, message2, icon, lstEventNames, lstEventRecords, len, num);
     }
 
     public final boolean actionOnContinue() {
@@ -126,6 +127,6 @@ public abstract class GauntletWinLoseController {
         return false;
     }
 
-    protected abstract void showOutcome(String message1, String message2, FSkinProp icon, List<String> lstEventNames, List<String> lstEventRecords, int len, int num);
+    protected abstract void showOutcome(boolean isMatchOver, String message1, String message2, FSkinProp icon, List<String> lstEventNames, List<String> lstEventRecords, int len, int num);
     protected abstract void saveOptions();
 }
