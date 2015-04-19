@@ -73,7 +73,10 @@ public enum CSubmenuGauntletContests implements ICDoc {
         final File[] files = GauntletIO.getGauntletFilesLocked();
         final List<GauntletData> data = new ArrayList<GauntletData>();
         for (final File f : files) {
-            data.add(GauntletIO.loadGauntlet(f));
+            GauntletData gd = GauntletIO.loadGauntlet(f);
+            if (gd != null) {
+                data.add(gd);
+            }
         }
 
         view.getGauntletLister().setGauntlets(data);

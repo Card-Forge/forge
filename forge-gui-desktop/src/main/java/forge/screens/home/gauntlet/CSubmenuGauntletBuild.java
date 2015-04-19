@@ -193,6 +193,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
                     "Overwrite Gauntlet?")) { return false; }
 
             gd = GauntletIO.loadGauntlet(f);
+            if (gd == null) { return false; }
         }
         // Confirm if a new gauntlet will be created
         else {
@@ -233,6 +234,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
         }
 
         final GauntletData gd = GauntletIO.loadGauntlet(file);
+        if (gd == null) { return false; }
 
         this.workingDecks.clear();
         this.workingDecks.addAll(gd.getDecks());

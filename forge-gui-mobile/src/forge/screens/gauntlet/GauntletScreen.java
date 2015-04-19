@@ -100,7 +100,10 @@ public class GauntletScreen extends LaunchScreen {
         final List<GauntletData> data = new ArrayList<GauntletData>();
 
         for (final File f : files) {
-            data.add(GauntletIO.loadGauntlet(f));
+            GauntletData gd = GauntletIO.loadGauntlet(f);
+            if (gd != null) {
+                data.add(gd);
+            }
         }
 
         lstGauntlets.setGauntlets(data);
@@ -213,7 +216,10 @@ public class GauntletScreen extends LaunchScreen {
         final File[] files = GauntletIO.getGauntletFilesLocked();
         final List<GauntletData> contests = new ArrayList<GauntletData>();
         for (final File f : files) {
-            contests.add(GauntletIO.loadGauntlet(f));
+            GauntletData gd = GauntletIO.loadGauntlet(f);
+            if (gd != null) {
+                contests.add(gd);
+            }
         }
 
         GuiChoose.oneOrNone("Select Gauntlet Contest", contests, new Callback<GauntletData>() {

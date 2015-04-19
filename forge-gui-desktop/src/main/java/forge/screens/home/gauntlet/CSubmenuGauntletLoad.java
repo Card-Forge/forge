@@ -94,7 +94,10 @@ public enum CSubmenuGauntletLoad implements ICDoc {
         final List<GauntletData> data = new ArrayList<GauntletData>();
 
         for (final File f : files) {
-            data.add(GauntletIO.loadGauntlet(f));
+            GauntletData gd = GauntletIO.loadGauntlet(f);
+            if (gd != null) {
+                data.add(gd);
+            }
         }
 
         view.getGauntletLister().setGauntlets(data);
@@ -110,10 +113,10 @@ public enum CSubmenuGauntletLoad implements ICDoc {
     }
 
     private void startGame() {
-        FModel.setGauntletData(
-                GauntletIO.loadGauntlet(view.getGauntletLister().getSelectedGauntletFile()));
+        final GauntletData gd = GauntletIO.loadGauntlet(view.getGauntletLister().getSelectedGauntletFile());
+        if (gd == null) { return; }
 
-        final GauntletData gd = FModel.getGauntletData();
+        FModel.setGauntletData(gd);
         final Deck aiDeck = gd.getDecks().get(gd.getCompleted());
         Deck userDeck = gd.getUserDeck();
         if (userDeck == null) {

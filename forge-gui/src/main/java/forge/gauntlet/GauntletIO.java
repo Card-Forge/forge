@@ -79,6 +79,7 @@ public class GauntletIO {
 
     public static GauntletData loadGauntlet(final File xmlSaveFile) {
         GZIPInputStream zin = null;
+        boolean isCorrupt = false;
         try {
             zin = new GZIPInputStream(new FileInputStream(xmlSaveFile));
             final InputStreamReader reader = new InputStreamReader(zin);
@@ -88,14 +89,33 @@ public class GauntletIO {
             final String filename = xmlSaveFile.getName();
             data.setName(filename.substring(0, filename.length() - SUFFIX_DATA.length()));
             return data;
-        } catch (final IOException e) {
-            throw new RuntimeException(e);
-        } finally {
-            if (null != zin) {
-                try { zin.close(); }
-                catch (IOException e) { System.out.println("error closing gauntlet data reader: " + e); }
+        }
+        catch (final IOException e) {
+            e.printStackTrace();
+        }
+        catch (final Exception e) { //if there's a non-IO exception, delete the corrupt file
+            e.printStackTrace();
+            isCorrupt = true;
+        }
+        finally {
+            if (zin != null) {
+                try {
+                    zin.close();
+                }
+                catch (IOException e) {
+                    System.out.println("error closing gauntlet data reader: " + e);
+                }
             }
         }
+        if (isCorrupt) {
+            try {
+                xmlSaveFile.delete();
+            }
+            catch (Exception e) {
+                System.out.println("error delete corrupt gauntlet file: " + e);
+            }
+        }
+        return null;
     }
 
     public static void saveGauntlet(final GauntletData gd0) {
