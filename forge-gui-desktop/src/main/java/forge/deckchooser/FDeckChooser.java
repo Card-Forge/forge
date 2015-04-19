@@ -131,14 +131,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private void updateColors() {
         lstDecks.setAllowMultipleSelections(true);
 
-        String[] colors = new String[] { "Random 1", "Random 2", "Random 3",
-                "White", "Blue", "Black", "Red", "Green" };
-        ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
-        for (int i = 0; i < colors.length; i++) {
-            decks.add(new ColorDeckGenerator(colors[i], i, lstDecks, isAi));
-        }
-
-        lstDecks.setPool(decks);
+        lstDecks.setPool(ColorDeckGenerator.getColorDecks(lstDecks, isAi));
         lstDecks.setup(ItemManagerConfig.STRING_ONLY);
 
         btnRandom.setText("Random Colors");

@@ -34,7 +34,7 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
     private final IHasGameType lstDecks;
     private final boolean isAi;
 
-    public RandomDeckGenerator(String name0, RandomDeckType type0, IHasGameType lstDecks0, boolean isAi0) {
+    private RandomDeckGenerator(String name0, RandomDeckType type0, IHasGameType lstDecks0, boolean isAi0) {
         super();
         name = name0;
         type = type0;
