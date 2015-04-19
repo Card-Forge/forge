@@ -53,7 +53,7 @@ public abstract class GauntletWinLoseController {
 
         // In all cases, update stats.
         lstEventRecords.set(gd.getCompleted(), lastGame.getGamesWonBy(questPlayer) + " - "
-                + (lastGame.getNumPlayedGamesInMatch() - lastGame.getGamesWonBy(questPlayer)));
+                + (lastGame.getNumPlayedGamesInMatch() - lastGame.getGamesWonBy(questPlayer) + 1));
         
         if (lastGame.isMatchOver()) {
             gd.setCompleted(gd.getCompleted() + 1);
