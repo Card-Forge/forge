@@ -6,10 +6,11 @@ import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
 import forge.Forge;
 import forge.assets.FSkinImage;
+import forge.deck.FDeckChooser;
+import forge.game.GameType;
 import forge.screens.constructed.ConstructedScreen;
 import forge.screens.gauntlet.GauntletScreen;
 import forge.screens.limited.LimitedScreen;
-import forge.screens.planarconquest.ConquestMenu;
 import forge.screens.quest.QuestMenu;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
@@ -39,13 +40,18 @@ public class HomeScreen extends FScreen {
                 Forge.openScreen(new LimitedScreen());
             }
         });
-        addButton("Planar Conquest", new FEventHandler() {
+        addButton("Deck Editor", new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                FDeckChooser.promptForDeck("Deck Editor", GameType.DeckEditor, false, null);
+            }
+        });
+        /*addButton("Planar Conquest", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ConquestMenu.launchPlanarConquest(ConquestMenu.LaunchReason.StartPlanarConquest);
             }
-        });
-        buttons.get(buttons.size() - 1).setEnabled(false);
+        });*/
         addButton("Quest Mode", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
