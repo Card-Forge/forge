@@ -280,7 +280,8 @@ public class GauntletScreen extends LaunchScreen {
         launchParams.humanPlayers.add(humanPlayer);
         launchParams.players.add(humanPlayer);
         launchParams.players.add(new RegisteredPlayer(gauntlet.getDecks().get(gauntlet.getCompleted())).setPlayer(GamePlayerUtil.createAiPlayer()));
-        return true;
+        gauntlet.startRound(launchParams.players, humanPlayer);
+        return false; //return false since we're creating the match here
     }
 
     private void renameGauntlet(final GauntletData gauntlet) {
