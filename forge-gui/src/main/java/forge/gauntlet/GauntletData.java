@@ -2,7 +2,11 @@ package forge.gauntlet;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import forge.GuiBase;
 import forge.deck.Deck;
+import forge.game.GameType;
+import forge.game.player.RegisteredPlayer;
+import forge.match.HostedMatch;
 import forge.properties.ForgeConstants;
 
 import java.io.File;
@@ -21,7 +25,9 @@ import java.util.List;
 public final class GauntletData {
     @XStreamOmitField
     private String name; // set based on the the filename on load
-    
+
+    private transient HostedMatch hostedMatch = null;
+
     private int completed;
     private String timestamp;
     private List<String> eventRecords = new ArrayList<String>();
@@ -29,23 +35,13 @@ public final class GauntletData {
     private Deck userDeck;
     private List<Deck> decks;
 
-
-    /** Constructor. */
     public GauntletData() {
     }
-
-    //========== Mutator / accessor methods
 
     public void setName(String name0) {
         name = name0;
     }
 
-    /**
-     * Rename this gauntlet.
-     *
-     * @param newName
-     *            the new name to set
-     */
     public void rename(final String newName) {
         File newpath = new File(ForgeConstants.GAUNTLET_DIR.userPrefLoc, newName + ".dat");
         File oldpath = new File(ForgeConstants.GAUNTLET_DIR.userPrefLoc, name + ".dat");
@@ -132,6 +128,20 @@ public final class GauntletData {
 
     public List<Deck> getDecks() {
         return decks;
+    }
+
+    public void startRound(final List<RegisteredPlayer> players, final RegisteredPlayer human) {
+        hostedMatch = GuiBase.getInterface().hostMatch();
+        hostedMatch.startMatch(GameType.Gauntlet, null, players, human, GuiBase.getInterface().getNewGuiGame());
+    }
+
+    public void nextRound(final List<RegisteredPlayer> players, final RegisteredPlayer human) {
+        if (hostedMatch == null) {
+            throw new IllegalStateException("Cannot advance round when no match has been hosted.");
+        }
+
+        hostedMatch.endCurrentGame();
+        startRound(players, human);
     }
 
     @Override

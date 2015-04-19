@@ -1,15 +1,12 @@
 package forge.screens.home.gauntlet;
 
-import forge.GuiBase;
 import forge.UiCommand;
 import forge.deck.DeckType;
-import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletUtil;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
-import forge.match.HostedMatch;
 import forge.player.GamePlayerUtil;
 
 import javax.swing.*;
@@ -83,8 +80,7 @@ public enum CSubmenuGauntletQuick implements ICDoc {
         starter.add(human);
         starter.add(new RegisteredPlayer(gd.getDecks().get(gd.getCompleted())).setPlayer(GamePlayerUtil.createAiPlayer()));
 
-        final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
-        hostedMatch.startMatch(GameType.Gauntlet, null, starter, human, GuiBase.getInterface().getNewGuiGame());
+        gd.startRound(starter, human);
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override

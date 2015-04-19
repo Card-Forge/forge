@@ -4,21 +4,17 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
-import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.assets.FSkinProp;
 import forge.deck.Deck;
-import forge.game.GameType;
 import forge.game.GameView;
 import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IButton;
 import forge.interfaces.IWinLoseView;
-import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 
 public abstract class GauntletWinLoseController {
-    private HostedMatch hostedMatch = null;
     private final IWinLoseView<? extends IButton> view;
     private final GameView lastGame;
 
@@ -122,12 +118,7 @@ public abstract class GauntletWinLoseController {
 
             view.hide();
             saveOptions();
-            if (hostedMatch != null) {
-                hostedMatch.endCurrentGame();
-            }
-
-            hostedMatch = GuiBase.getInterface().hostMatch();
-            hostedMatch.startMatch(GameType.Gauntlet, null, players, human, GuiBase.getInterface().getNewGuiGame());
+            gd.nextRound(players, human);
             return true;
         }
         return false;
