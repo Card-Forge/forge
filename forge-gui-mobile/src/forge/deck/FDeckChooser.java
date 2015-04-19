@@ -2,15 +2,21 @@ package forge.deck;
 
 import forge.FThreads;
 import forge.Forge;
+import forge.GuiBase;
 import forge.deck.Deck;
 import forge.deck.FDeckEditor.EditorType;
 import forge.deck.io.DeckPreferences;
 import forge.error.BugReporter;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
+import forge.gauntlet.GauntletData;
+import forge.gauntlet.GauntletUtil;
+import forge.interfaces.IGuiGame;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
+import forge.match.HostedMatch;
 import forge.model.FModel;
+import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
@@ -18,9 +24,13 @@ import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestUtil;
 import forge.screens.FScreen;
+import forge.screens.LoadingOverlay;
+import forge.screens.match.MatchController;
 import forge.toolbox.FButton;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FEvent;
+import forge.toolbox.GuiChoose;
+import forge.toolbox.ListChooser;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
@@ -33,7 +43,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FDeckChooser extends FScreen {
     public static final float PADDING = Utils.scale(5);
@@ -159,8 +171,8 @@ public class FDeckChooser extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 if (lstDecks.getGameType() == GameType.DeckEditorTest) {
-                    //for Deck Editor, play deck instead of randomly selecting deck
-                    editSelectedDeck();
+                    //for Deck Editor, test deck instead of randomly selecting deck
+                    testSelectedDeck();
                     return;
                 }
                 if (selectedDeckType == DeckType.COLOR_DECK) {
@@ -225,7 +237,7 @@ public class FDeckChooser extends FScreen {
             return;
         }
 
-        //set if deck with selected name exists already
+        //see if deck with selected name exists already
         final IStorage<Deck> decks = FModel.getDecks().getConstructed();
         Deck existingDeck = decks.get(deck.getName());
         if (existingDeck != null) {
@@ -647,5 +659,54 @@ public class FDeckChooser extends FScreen {
 
     public FComboBox<DeckType> getDecksComboBox() {
         return cmbDeckTypes;
+    }
+
+    //create quick gauntlet for testing deck
+    private void testSelectedDeck() {
+        final DeckProxy deckProxy = lstDecks.getSelectedItem();
+        if (deckProxy == null) { return; }
+        final Deck userDeck = deckProxy.getDeck();
+        if (userDeck == null) { return; }
+
+        GuiChoose.getInteger("How many opponents are you willing to face?", 1, 50, new Callback<Integer>() {
+            @Override
+            public void run(final Integer numOpponents) {
+                if (numOpponents == null) { return; }
+
+                ListChooser<DeckType> chooser = new ListChooser<DeckType>(
+                        "Choose allowed deck types for opponents", 0, 5, Arrays.asList(new DeckType[] {
+                        DeckType.CUSTOM_DECK,
+                        DeckType.PRECONSTRUCTED_DECK,
+                        DeckType.QUEST_OPPONENT_DECK,
+                        DeckType.COLOR_DECK,
+                        DeckType.THEME_DECK
+                }), null, new Callback<List<DeckType>>() {
+                    @Override
+                    public void run(final List<DeckType> allowedDeckTypes) {
+                        if (allowedDeckTypes == null || allowedDeckTypes.isEmpty()) { return; }
+
+                        LoadingOverlay.show("Loading new game...", new Runnable() {
+                            @Override
+                            public void run() {
+                                GauntletData gauntlet = GauntletUtil.createQuickGauntlet(userDeck, numOpponents, allowedDeckTypes);
+                                FModel.setGauntletData(gauntlet);
+
+                                List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
+                                RegisteredPlayer humanPlayer = new RegisteredPlayer(userDeck).setPlayer(GamePlayerUtil.getGuiPlayer());
+                                players.add(humanPlayer);
+                                players.add(new RegisteredPlayer(gauntlet.getDecks().get(gauntlet.getCompleted())).setPlayer(GamePlayerUtil.createAiPlayer()));
+
+                                final Map<RegisteredPlayer, IGuiGame> guiMap = new HashMap<RegisteredPlayer, IGuiGame>();
+                                guiMap.put(humanPlayer, MatchController.instance);
+
+                                final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
+                                hostedMatch.startMatch(GameType.DeckEditorTest, null, players, guiMap);
+                            }
+                        });
+                    }
+                });
+                chooser.show(null, true);
+            }
+        });
     }
 }
