@@ -80,7 +80,7 @@ public class FDeckChooser extends FScreen {
         lstDecks.setItemActivateHandler(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                if (lstDecks.getGameType() == GameType.DeckEditor) {
+                if (lstDecks.getGameType() == GameType.DeckEditorTest) {
                     //for Deck Editor, edit deck instead of accepting
                     editSelectedDeck();
                     return;
@@ -158,7 +158,7 @@ public class FDeckChooser extends FScreen {
         btnRandom.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                if (lstDecks.getGameType() == GameType.DeckEditor) {
+                if (lstDecks.getGameType() == GameType.DeckEditorTest) {
                     //for Deck Editor, play deck instead of randomly selecting deck
                     editSelectedDeck();
                     return;
@@ -177,7 +177,7 @@ public class FDeckChooser extends FScreen {
             break; //delay initialize for constructed until saved decks can be reloaded
         case Commander:
         case Gauntlet:
-        case DeckEditor:
+        case DeckEditorTest:
             initialize(null, DeckType.CUSTOM_DECK);
             break;
         default:
@@ -295,7 +295,7 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.RANDOM_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_DECK);
                 break;
-            case DeckEditor:
+            case DeckEditorTest:
                 cmbDeckTypes.addItem(DeckType.CUSTOM_DECK);
                 cmbDeckTypes.addItem(DeckType.PRECONSTRUCTED_DECK);
                 cmbDeckTypes.addItem(DeckType.QUEST_OPPONENT_DECK);
@@ -452,7 +452,7 @@ public class FDeckChooser extends FScreen {
 
             btnNewDeck.setText("New Deck");
 
-            if (lstDecks.getGameType() == GameType.DeckEditor) {
+            if (lstDecks.getGameType() == GameType.DeckEditorTest) {
                 //handle special case of Deck Editor screen where this button will start a game with the deck
                 btnRandom.setText("Test Deck");
             }

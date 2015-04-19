@@ -17,7 +17,7 @@ public enum GameType {
     QuestDraft      (DeckFormat.Limited, true, true, true, "Quest Draft", ""),
     PlanarConquest  (DeckFormat.PlanarConquest, true, false, false, "Planar Conquest", ""),
     Constructed     (DeckFormat.Constructed, false, true, true, "Constructed", ""),
-    DeckEditor      (DeckFormat.Constructed, false, true, true, "Deck Editor", ""),
+    DeckEditorTest  (DeckFormat.Constructed, false, true, true, "Deck Editor Test", ""),
     Vanguard        (DeckFormat.Vanguard, true, true, true, "Vanguard", "Each player has a special \"Avatar\" card that affects the game."),
     Commander       (DeckFormat.Commander, false, false, false, "Commander", "Each player has a legendary \"General\" card which can be cast at any time and determines deck colors."),
     TinyLeaders     (DeckFormat.TinyLeaders, false, false, false, "Tiny Leaders", "Each player has a legendary \"General\" card which can be cast at any time and determines deck colors. Each card must have CMC less than 4."),

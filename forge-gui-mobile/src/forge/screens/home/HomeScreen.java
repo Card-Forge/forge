@@ -43,7 +43,7 @@ public class HomeScreen extends FScreen {
         addButton("Deck Editor", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                FDeckChooser.promptForDeck("Deck Editor", GameType.DeckEditor, false, null);
+                FDeckChooser.promptForDeck("Deck Editor", GameType.DeckEditorTest, false, null);
             }
         });
         /*addButton("Planar Conquest", new FEventHandler() {
