@@ -50,6 +50,7 @@ public class FDeckChooser extends FScreen {
     private final FButton btnViewDeck = new FButton("View Deck");
     private final FButton btnRandom = new FButton("Random Deck");
 
+    private RegisteredPlayer player;
     private boolean isAi;
 
     private final ForgePreferences prefs = FModel.getPreferences();
@@ -555,21 +556,27 @@ public class FDeckChooser extends FScreen {
     }
 
     /** Generates deck from current list selection(s). */
-    public RegisteredPlayer getPlayer() {
-        if (lstDecks.getSelectedIndex() < 0) { return null; }
-
-        // Special branch for quest events
-        if (selectedDeckType == DeckType.QUEST_OPPONENT_DECK) {
-            QuestEvent event = DeckgenUtil.getQuestEvent(lstDecks.getSelectedItem().getName());
-            RegisteredPlayer result = new RegisteredPlayer(event.getEventDeck());
-            if (event instanceof QuestEventChallenge) {
-                result.setStartingLife(((QuestEventChallenge) event).getAiLife());
-            }
-            result.setCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
-            return result;
+    public RegisteredPlayer getPlayer(boolean forceRefresh) {
+        if (player != null && !forceRefresh) {
+            return player;
         }
 
-        return new RegisteredPlayer(getDeck());
+        if (lstDecks.getSelectedIndex() < 0) {
+            player = null;
+        }
+        else if (selectedDeckType == DeckType.QUEST_OPPONENT_DECK) {
+            //Special branch for quest events
+            QuestEvent event = DeckgenUtil.getQuestEvent(lstDecks.getSelectedItem().getName());
+            player = new RegisteredPlayer(event.getEventDeck());
+            if (event instanceof QuestEventChallenge) {
+                player.setStartingLife(((QuestEventChallenge) event).getAiLife());
+            }
+            player.setCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
+        }
+        else {
+            player = new RegisteredPlayer(getDeck());
+        }
+        return player;
     }
 
     public final boolean isAi() {

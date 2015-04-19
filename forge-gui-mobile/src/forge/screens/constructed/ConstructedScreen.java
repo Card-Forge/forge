@@ -255,7 +255,7 @@ public class ConstructedScreen extends LaunchScreen {
         }
 
         for (int i = 0; i < getNumPlayers(); i++) {
-            if (getDeckChooser(i).getPlayer() == null) {
+            if (getDeckChooser(i).getPlayer(true) == null) {
                 FOptionPane.showMessageDialog("Please specify a deck for " + getPlayerName(i));
                 return false;
             }
@@ -284,7 +284,7 @@ public class ConstructedScreen extends LaunchScreen {
         if (checkLegality && autoGenerateVariant == null && !isCommanderMatch) { 
             for (int i = 0; i < getNumPlayers(); i++) {
                 String name = getPlayerName(i);
-                String errMsg = GameType.Constructed.getDeckFormat().getDeckConformanceProblem(getDeckChooser(i).getPlayer().getDeck());
+                String errMsg = GameType.Constructed.getDeckFormat().getDeckConformanceProblem(getDeckChooser(i).getPlayer(false).getDeck());
                 if (errMsg != null) {
                     FOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Deck");
                     return false;
@@ -297,7 +297,7 @@ public class ConstructedScreen extends LaunchScreen {
             String name = getPlayerName(i);
             LobbyPlayer lobbyPlayer = playerPanel.isPlayerAI() ? GamePlayerUtil.createAiPlayer(name,
                     getPlayerAvatar(i)) : GamePlayerUtil.getGuiPlayer(name, playerPanel.avatarIndex, i == 0);
-            RegisteredPlayer rp = playerPanel.deckChooser.getPlayer();
+            RegisteredPlayer rp = playerPanel.deckChooser.getPlayer(false);
 
             if (appliedVariants.isEmpty()) {
                 rp.setTeamNumber(getTeam(i));
