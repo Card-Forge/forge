@@ -228,7 +228,7 @@ public class HostedMatch {
                 isMatchOver = match.isMatchOver();
                 if (humanCount == 0) {
                     // ... if no human players, let AI decide next game
-                    if (match.isMatchOver()) {
+                    if (isMatchOver) {
                         addNextGameDecision(null, NextGameDecision.QUIT);
                     } else {
                         addNextGameDecision(null, NextGameDecision.CONTINUE);
@@ -322,6 +322,7 @@ public class HostedMatch {
             FThreads.invokeInEdtNowOrLater(new Runnable() {
                 @Override public void run() {
                     endCurrentGame();
+                    isMatchOver = true;
                 }
             });
             return; // if any player chooses quit, quit the match
