@@ -10,7 +10,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/forge-game"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/forge-gui"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/forge-gui-mobile"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/forge-net"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/forge-ai"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
 		<attributes>
@@ -24,7 +23,9 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="minlog-1.2.jar"/>
 	<classpathentry kind="lib" path="libs/gdx-backend-robovm.jar"/>
+	<classpathentry kind="lib" path="/forge-gui-mobile/libs/gdx.jar" sourcepath="libs/gdx-sources.jar"/>
 	<classpathentry kind="lib" path="/forge-gui-mobile/libs/gdx-freetype.jar"/>
-	<classpathentry kind="lib" path="/forge-gui-mobile/libs/gdx.jar" sourcepath="/forge-gui-mobile/libs/gdx-sources.jar"/>
+	<classpathentry kind="con" path="org.robovm.eclipse.ROBOVM_CONTAINER"/>
+	<classpathentry kind="con" path="org.robovm.eclipse.ROBOVM_COCOA_TOUCH_CONTAINER"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

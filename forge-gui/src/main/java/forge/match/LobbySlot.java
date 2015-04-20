@@ -7,8 +7,7 @@ import com.google.common.collect.ImmutableSet;
 
 import forge.AIOption;
 import forge.deck.Deck;
-import forge.net.game.LobbySlotType;
-import forge.net.game.UpdateLobbyPlayerEvent;
+import forge.net.event.UpdateLobbyPlayerEvent;
 
 public final class LobbySlot implements Serializable {
     private static final long serialVersionUID = 6918205436608794289L;

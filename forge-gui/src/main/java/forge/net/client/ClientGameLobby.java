@@ -1,4 +1,4 @@
-package forge.net;
+package forge.net.client;
 
 import forge.interfaces.IGuiGame;
 import forge.match.GameLobby;

@@ -1,4 +1,4 @@
-package forge.net;
+package forge.net.server;
 
 import java.util.Collection;
 import java.util.EnumMap;
@@ -26,8 +26,7 @@ import forge.interfaces.IButton;
 import forge.item.PaperCard;
 import forge.match.AbstractGuiGame;
 import forge.match.MatchButtonType;
-import forge.net.game.GuiGameEvent;
-import forge.net.game.server.IToClient;
+import forge.net.event.GuiGameEvent;
 import forge.player.PlayerZoneUpdate;
 import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;

@@ -8,7 +8,7 @@ Forge Beta: #-#-2015 ver 1.5.39
 Release Notes
 -------------
 
-Interface Update
+- Interface Update -
 The interface has received several small changes.
 - The "Players" panel has been removed. This information can now be viewed by
   hovering the cursor over a player's avatar.
@@ -16,6 +16,14 @@ The interface has received several small changes.
   This is only visible if the player has any poison counters.
 - The poison counters button has been replaced with a Command Zone button.
   The command zone panels have been removed.
+
+- Network play (BETA) -
+This version of Forge includes a preliminary version of peer-to-peer (P2P)
+network support. If one player hosts, other players can connect to that
+player's machine by filling out the corresponding IP address and port number
+(default 36743), provided the lobby contains one or more open player slots.
+Do not expect network support to work reliably yet, any bug reports or other
+comments are welcome!
 
 - Smarter Deck Color Determination -
 When determining the color of decks, colors of hybrid and phyrexian cards are no

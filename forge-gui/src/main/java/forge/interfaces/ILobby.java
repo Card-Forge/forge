@@ -1,7 +1,7 @@
 package forge.interfaces;
 
 import forge.match.GameLobby;
-import forge.net.game.server.RemoteClient;
+import forge.net.server.RemoteClient;
 
 public interface ILobby {
     GameLobby getState();

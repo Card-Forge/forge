@@ -36,11 +36,6 @@
             <artifactId>forge-ai</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>forge</groupId>
-            <artifactId>forge-net</artifactId>
-            <version>${project.version}</version>
-        </dependency>
 	    <dependency>
 	        <groupId>com.google.guava</groupId>
 	        <artifactId>guava</artifactId>

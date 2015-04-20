@@ -1,4 +1,4 @@
-package forge.net;
+package forge.net.server;
 
 import forge.FThreads;
 import forge.GuiBase;
@@ -11,16 +11,16 @@ import forge.interfaces.IGameController;
 import forge.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
 import forge.match.LobbySlot;
+import forge.match.LobbySlotType;
 import forge.match.NextGameDecision;
-import forge.net.game.GuiGameEvent;
-import forge.net.game.LobbySlotType;
-import forge.net.game.LoginEvent;
-import forge.net.game.LogoutEvent;
-import forge.net.game.MessageEvent;
-import forge.net.game.NetEvent;
-import forge.net.game.ReplyEvent;
-import forge.net.game.UpdateLobbyPlayerEvent;
-import forge.net.game.server.RemoteClient;
+import forge.net.event.GuiGameEvent;
+import forge.net.event.LobbyUpdateEvent;
+import forge.net.event.LoginEvent;
+import forge.net.event.LogoutEvent;
+import forge.net.event.MessageEvent;
+import forge.net.event.NetEvent;
+import forge.net.event.ReplyEvent;
+import forge.net.event.UpdateLobbyPlayerEvent;
 import forge.properties.ForgeConstants;
 import forge.util.ITriggerEvent;
 import io.netty.bootstrap.ServerBootstrap;
@@ -41,7 +41,7 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
 import java.io.Serializable;
-import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Collection;
 import java.util.Collections;
@@ -205,7 +205,7 @@ public final class FServerManager {
     private void mapNatPort(final int port) {
         final String localAddress;
         try {
-            localAddress = Inet4Address.getLocalHost().getHostAddress();
+            localAddress = InetAddress.getLocalHost().getHostAddress();
         } catch (final UnknownHostException e) {
             throw new RuntimeException(e);
         }
@@ -436,7 +436,7 @@ public final class FServerManager {
             if (msg instanceof LoginEvent) {
                 final String username = ((LoginEvent) msg).getUsername();
                 client.setUsername(username);
-                broadcast(new MessageEvent(null, String.format("%s joined the room", username)));
+                broadcast(new MessageEvent(String.format("%s joined the room", username)));
                 updateLobbyState();
             } else if (msg instanceof UpdateLobbyPlayerEvent) {
                 localLobby.applyToSlot(client.getIndex(), (UpdateLobbyPlayerEvent) msg);

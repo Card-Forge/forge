@@ -5,7 +5,6 @@ import java.util.Collections;
 import forge.AIOption;
 import forge.GuiBase;
 import forge.interfaces.IGuiGame;
-import forge.net.game.LobbySlotType;
 
 public final class LocalLobby extends GameLobby {
 

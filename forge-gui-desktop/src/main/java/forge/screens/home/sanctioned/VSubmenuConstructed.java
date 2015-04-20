@@ -12,7 +12,7 @@ import forge.gui.framework.EDocID;
 import forge.interfaces.IPlayerChangeListener;
 import forge.match.GameLobby;
 import forge.match.LocalLobby;
-import forge.net.game.UpdateLobbyPlayerEvent;
+import forge.net.event.UpdateLobbyPlayerEvent;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;

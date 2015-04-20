@@ -41,7 +41,6 @@ import forge.gui.framework.ICDoc;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.framework.IVTopLevelUI;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.home.gauntlet.VSubmenuGauntletBuild;
 import forge.screens.home.gauntlet.VSubmenuGauntletContests;
@@ -97,35 +96,17 @@ public enum VHomeUI implements IVTopLevelUI {
         .iconAlignX(SwingConstants.CENTER)
         .iconInBackground(true).iconScaleFactor(1.0).build();
 
-    private final FLabel lblStartServer = new FLabel.ButtonBuilder().text("Start Server").fontSize(14).build();
-    private final FLabel lblStopServer = new FLabel.ButtonBuilder().text("Stop Server").fontSize(14).build();
-
     private VHomeUI() {
         // Add main menu containing logo and menu buttons
         final JPanel pnlMainMenu = new JPanel(new MigLayout("w 200px!, ax center, insets 0, gap 0, wrap"));
         pnlMainMenu.setOpaque(false);
 
-        final List<FLabel> mainMenuButtons = new ArrayList<FLabel>();
-        if (ForgeConstants.SERVER_PORT_NUMBER >= 80) {
-            mainMenuButtons.add(lblStartServer);
-            mainMenuButtons.add(lblStopServer);
-            lblStopServer.setEnabled(false);
-        }
-
         final int logoSize = 170;
         final int logoBottomGap = 4;
-        final int buttonHeight = 30;
-        final int buttonBottomGap = 8;
-        final int pnlMainMenuHeight = logoSize + logoBottomGap +
-                mainMenuButtons.size() * (buttonHeight + buttonBottomGap);
+        final int pnlMainMenuHeight = logoSize + logoBottomGap;
 
         pnlMainMenu.add(lblLogo, "w " + logoSize + "px!, h " + logoSize +
                 "px!, gap 0 4px 0 " + logoBottomGap + "px");
-        String buttonLayout = "w 170px!, h " + buttonHeight +
-                "px!, gap 0 0 0 " + buttonBottomGap + "px";
-        for (FLabel button : mainMenuButtons) {
-            pnlMainMenu.add(button, buttonLayout);
-        }
         pnlMenu.add(pnlMainMenu);
         
         pnlSubmenus = new FScrollPanel(new MigLayout("insets 0, gap 0, wrap, hidemode 3"), true,
@@ -137,7 +118,7 @@ public enum VHomeUI implements IVTopLevelUI {
         allSubmenus.add(VSubmenuSealed.SINGLETON_INSTANCE);
         //allSubmenus.add(VSubmenuWinston.SINGLETON_INSTANCE);
 
-        //allSubmenus.add(VSubmenuOnlineLobby.SINGLETON_INSTANCE);
+        allSubmenus.add(VSubmenuOnlineLobby.SINGLETON_INSTANCE);
 
         allSubmenus.add(VSubmenuDuels.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuChallenges.SINGLETON_INSTANCE);
@@ -187,14 +168,6 @@ public enum VHomeUI implements IVTopLevelUI {
 
         pnlMenu.add(pnlSubmenus, "w 100%!, h 100% - " + pnlMainMenuHeight + "px!");
         pnlDisplay.setBackground(l00.alphaColor(100));
-    }
-
-    public final FLabel getLblStartServer() {
-        return lblStartServer;
-    }
-    
-    public final FLabel getLblStopServer() {
-        return lblStopServer;
     }
 
     /** @return {@link javax.swing.JPanel} */

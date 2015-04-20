@@ -1,4 +1,4 @@
-package forge.net;
+package forge.net.server;
 
 import java.util.Collections;
 
@@ -8,7 +8,7 @@ import forge.AIOption;
 import forge.interfaces.IGuiGame;
 import forge.match.GameLobby;
 import forge.match.LobbySlot;
-import forge.net.game.LobbySlotType;
+import forge.match.LobbySlotType;
 
 public final class ServerGameLobby extends GameLobby {
 

@@ -1,4 +1,4 @@
-package forge.net;
+package forge.net.client;
 
 import java.util.List;
 import java.util.concurrent.TimeoutException;
@@ -9,8 +9,7 @@ import forge.game.spellability.SpellAbilityView;
 import forge.interfaces.IDevModeCheats;
 import forge.interfaces.IGameController;
 import forge.match.NextGameDecision;
-import forge.net.game.GuiGameEvent;
-import forge.net.game.client.IToServer;
+import forge.net.event.GuiGameEvent;
 import forge.util.ITriggerEvent;
 
 public class NetGameController implements IGameController {

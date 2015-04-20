@@ -64,11 +64,6 @@
         </dependency>
         <dependency>
             <groupId>forge</groupId>
-            <artifactId>forge-net</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>forge</groupId>
             <artifactId>forge-gui</artifactId>
             <version>${project.version}</version>
         </dependency>
