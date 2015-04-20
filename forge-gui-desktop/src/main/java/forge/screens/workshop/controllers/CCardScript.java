@@ -36,7 +36,6 @@ import forge.toolbox.FOptionPane;
  *
  */
 public enum CCardScript implements ICDoc {
-    /** */
     SINGLETON_INSTANCE;
 
     private PaperCard currentCard;
