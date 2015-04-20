@@ -107,14 +107,19 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
         switch (lstDecks.getGameType()) {
         case Commander:
             decks = FModel.getDecks().getCommander();
+            break;
         case TinyLeaders:
             decks = DeckFormat.TinyLeaders.getLegalDecks(FModel.getDecks().getCommander());
+            break;
         case Archenemy:
             decks = FModel.getDecks().getScheme();
+            break;
         case Planechase:
             decks = FModel.getDecks().getPlane();
+            break;
         default:
             decks = FModel.getDecks().getConstructed();
+            break;
         }
         if (Iterables.isEmpty(decks)) {
             return getGeneratedDeck(); //fall back to generated deck if no decks in filtered list
@@ -127,6 +132,7 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
         switch (lstDecks.getGameType()) {
         case Commander:
             decks = DeckProxy.getAllCommanderDecks();
+            break;
         case TinyLeaders:
             decks = Iterables.filter(DeckProxy.getAllCommanderDecks(), new Predicate<DeckProxy>() {
                 @Override
@@ -134,12 +140,16 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
                     return DeckFormat.TinyLeaders.getDeckConformanceProblem(deck.getDeck()) == null;
                 }
             });
+            break;
         case Archenemy:
             decks = DeckProxy.getAllSchemeDecks();
+            break;
         case Planechase:
             decks = DeckProxy.getAllPlanarDecks();
+            break;
         default:
             decks = DeckProxy.getAllConstructedDecks();
+            break;
         }
         decks = Iterables.filter(decks, new Predicate<DeckProxy>() {
             @Override
