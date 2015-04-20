@@ -42,6 +42,7 @@ public enum CCardScript implements ICDoc {
     private CardScriptInfo currentScriptInfo;
     private boolean isTextDirty;
     private boolean switchInProgress;
+    private boolean refreshing;
 
     private CCardScript() {
         VCardScript.SINGLETON_INSTANCE.getTxtScript().getDocument().addDocumentListener(new DocumentListener() {
@@ -70,7 +71,7 @@ public enum CCardScript implements ICDoc {
     }
 
     private void updateDirtyFlag() {
-        boolean isTextNowDirty = currentScriptInfo != null && !VCardScript.SINGLETON_INSTANCE.getTxtScript().getText().equals(currentScriptInfo.getText());
+        boolean isTextNowDirty = !refreshing && currentScriptInfo != null && !VCardScript.SINGLETON_INSTANCE.getTxtScript().getText().equals(currentScriptInfo.getText());
         if (isTextDirty == isTextNowDirty) { return; }
         isTextDirty = isTextNowDirty;
         VCardDesigner.SINGLETON_INSTANCE.getBtnSaveCard().setEnabled(isTextNowDirty);
@@ -96,6 +97,8 @@ public enum CCardScript implements ICDoc {
     }
 
     public void refresh() {
+        if (refreshing) { return; }
+        refreshing = true;
         final JTextPane txtScript = VCardScript.SINGLETON_INSTANCE.getTxtScript();
         txtScript.setText(currentScriptInfo != null ? currentScriptInfo.getText() : "");
         txtScript.setEditable(currentScriptInfo != null ? currentScriptInfo.canEdit() : false);
@@ -108,6 +111,7 @@ public enum CCardScript implements ICDoc {
                 doc.setCharacterAttributes(region.getKey(), region.getValue(), error, true);
             }
         }
+        refreshing = false;
     }
 
     public boolean hasChanges() {
