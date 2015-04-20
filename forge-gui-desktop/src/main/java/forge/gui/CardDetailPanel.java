@@ -318,7 +318,7 @@ public class CardDetailPanel extends SkinnedPanel {
 
     //ensure mouse listener hooked up to all certain opaque child components so it can get raised properly
     @Override
-    public void addMouseListener(MouseListener l) {
+    public synchronized void addMouseListener(final MouseListener l) {
         super.addMouseListener(l);
         setInfoLabel.addMouseListener(l);
         cdArea.addMouseListener(l);

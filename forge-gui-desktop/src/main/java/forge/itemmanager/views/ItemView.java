@@ -10,6 +10,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -325,7 +326,7 @@ public abstract class ItemView<T extends InventoryItem> {
         private boolean popupShowing = false;
         private Popup popup;
         private Timer popupTimer;
-        private static final int okModifiers = KeyEvent.SHIFT_MASK | KeyEvent.ALT_GRAPH_MASK;
+        private static final int okModifiers = InputEvent.SHIFT_MASK | InputEvent.ALT_GRAPH_MASK;
 
         public IncrementalSearch() {
         }
@@ -476,8 +477,8 @@ public abstract class ItemView<T extends InventoryItem> {
                 if (str.toString().isEmpty()) {
                     return;
                 }
-                // fall through
 
+            //$FALL-THROUGH$
             default:
                 // shift and/or alt-graph down is ok.  anything else is a hotkey (e.g. ctrl-f)
                 if (okModifiers != (e.getModifiers() | okModifiers)

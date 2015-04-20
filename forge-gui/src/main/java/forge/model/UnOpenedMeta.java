@@ -102,6 +102,7 @@ public class UnOpenedMeta implements IUnOpenedProduct {
                     return ms.getBooster().get();
                 }
 
+            //$FALL-THROUGH$
             case RandomOne: // AI should fall though here from the case above
                 int selected = generator.nextInt(metaSets.size());
                 final IUnOpenedProduct newBooster = metaSets.get(selected).getBooster();

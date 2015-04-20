@@ -74,8 +74,8 @@ public class DeckGenerator3Color extends DeckGeneratorBase {
                     rc = MagicColor.WHITE << MyRandom.getRandom().nextInt(5); 
                 } while ( rc == combo );
                 combo |= rc;
-                // fall-through
 
+            //$FALL-THROUGH$
             case 2:
                 do {
                     rc = MagicColor.WHITE << MyRandom.getRandom().nextInt(5); 

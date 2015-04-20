@@ -46,6 +46,7 @@ import forge.view.FView;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import java.util.List;
@@ -518,7 +519,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         }
 
         public void addMoveItems(String verb, String dest) {
-            addItems(verb, dest, false, 0, KeyEvent.SHIFT_DOWN_MASK, KeyEvent.ALT_MASK);
+            addItems(verb, dest, false, 0, InputEvent.SHIFT_DOWN_MASK, InputEvent.ALT_MASK);
         }
 
         public void addMoveAlternateItems(String verb, String dest) {
@@ -526,10 +527,10 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                 this.menu.addSeparator();
             }
             //yes, CTRL_DOWN_MASK and not getMenuShortcutKeyMask().  On OSX, cmd-space is hard-coded to bring up Spotlight
-            addItems(verb, dest, true, KeyEvent.CTRL_DOWN_MASK,
+            addItems(verb, dest, true, InputEvent.CTRL_DOWN_MASK,
                     //getMenuShortcutKeyMask() instead of CTRL_DOWN_MASK since on OSX, ctrl-shift-space brings up the window manager
-                    KeyEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(),
-                    KeyEvent.ALT_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+                    InputEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(),
+                    InputEvent.ALT_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
         }
     }
 

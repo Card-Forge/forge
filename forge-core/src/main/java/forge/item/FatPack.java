@@ -99,7 +99,7 @@ public class FatPack extends BoxedProduct {
 
         public static final class Reader extends StorageReaderFile<Template> {
             public Reader(String pathname) {
-                super(pathname, Template.FN_GET_NAME);
+                super(pathname, FN_GET_NAME);
             }
 
             @Override

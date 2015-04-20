@@ -36,6 +36,7 @@ import forge.itemmanager.filters.DeckFormatFilter;
 import forge.itemmanager.filters.DeckQuestWorldFilter;
 import forge.itemmanager.filters.DeckSearchFilter;
 import forge.itemmanager.filters.DeckSetFilter;
+import forge.itemmanager.filters.FormatFilter;
 import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.views.ItemCellRenderer;
 import forge.itemmanager.views.ItemListView;
@@ -180,7 +181,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 public void run() {
                     addFilter(new DeckFormatFilter(DeckManager.this, f));
                 }
-            }, DeckFormatFilter.canAddFormat(f, getFilter(DeckFormatFilter.class)));
+            }, FormatFilter.canAddFormat(f, getFilter(DeckFormatFilter.class)));
         }
         menu.add(fmt);
 

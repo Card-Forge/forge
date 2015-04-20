@@ -104,6 +104,6 @@ public class WatchLocalGame extends PlayerControllerHuman {
 
     @Override
     public IDevModeCheats cheat() {
-        return DevModeCheats.NO_CHEAT;
+        return IDevModeCheats.NO_CHEAT;
     }
 }

@@ -370,7 +370,7 @@ public class CardView extends GameEntityView {
             if (controller.hasKeyword("Play with your hand revealed.")) {
                 return true;
             }
-            //fall through
+            //$FALL-THROUGH$
         case Sideboard:
             //face-up cards in these zones are hidden to opponents unless they specify otherwise
             if (controller.isOpponentOf(viewer) && !getCurrentState().getOpponentMayLook()) {

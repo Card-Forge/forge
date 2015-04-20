@@ -468,8 +468,8 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
         private SkinImage img1;
         private SkinImage img2;
         
-        private FLabel name1 = new FLabel.Builder().fontSize(14).fontAlign(JLabel.LEFT).build();
-        private FLabel name2 = new FLabel.Builder().fontSize(14).fontAlign(JLabel.LEFT).build();
+        private FLabel name1 = new FLabel.Builder().fontSize(14).fontAlign(SwingConstants.LEFT).build();
+        private FLabel name2 = new FLabel.Builder().fontSize(14).fontAlign(SwingConstants.LEFT).build();
         
         private LineDirection lineDir;
         private LineSide lineSide;
@@ -489,8 +489,8 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
             this.lineSide = side;
             this.size = size;
             this.singleBox = singleBox;
-            name1.setVerticalAlignment(JLabel.BOTTOM);
-            name2.setVerticalAlignment(JLabel.TOP);
+            name1.setVerticalAlignment(SwingConstants.BOTTOM);
+            name2.setVerticalAlignment(SwingConstants.TOP);
         }
         
         public PnlMatchup(LineDirection dir, LineSide side, BoxSize size) {

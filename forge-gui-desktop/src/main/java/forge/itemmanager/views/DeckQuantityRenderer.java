@@ -38,7 +38,7 @@ public class DeckQuantityRenderer extends ItemCellRenderer {
     private static final int imgSize = 13;
 
     public DeckQuantityRenderer() {
-        this.setHorizontalAlignment(JLabel.CENTER);
+        this.setHorizontalAlignment(SwingConstants.CENTER);
     }
 
     @Override

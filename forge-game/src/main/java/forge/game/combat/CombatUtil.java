@@ -201,14 +201,17 @@ public class CombatUtil {
                 if (attacker.getController().getSpellsCastThisTurn() > 0) {
                     return false;
                 }
+                break;
             case "Defender":
                 if (!canAttackWithDefender) {
                     return false;
                 }
+                break;
             case "CARDNAME can't attack during extra turns.":
                 if (game.getPhaseHandler().getPlayerTurn().isPlayingExtraTurn()) {
                     return false;
                 }
+                break;
             }
         }
 

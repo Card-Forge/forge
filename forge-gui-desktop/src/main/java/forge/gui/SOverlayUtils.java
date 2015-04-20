@@ -3,11 +3,11 @@ package forge.gui;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.KeyboardFocusManager;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.FocusManager;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -130,7 +130,7 @@ public final class SOverlayUtils {
     private static Component prevFocusOwner;
     public static void showOverlay() {
         Singletons.getView().getNavigationBar().setEnabled(false);
-        prevFocusOwner = FocusManager.getCurrentKeyboardFocusManager().getPermanentFocusOwner();
+        prevFocusOwner = KeyboardFocusManager.getCurrentKeyboardFocusManager().getPermanentFocusOwner();
         FOverlay.SINGLETON_INSTANCE.getPanel().setVisible(true);
         // ensure no background element has focus
         FOverlay.SINGLETON_INSTANCE.getPanel().requestFocusInWindow();

@@ -76,7 +76,7 @@ public class CardManager extends ItemManager<PaperCard> {
                 public void run() {
                     itemManager.addFilter(new CardFormatFilter(itemManager, f));
                 }
-            }, CardFormatFilter.canAddFormat(f, itemManager.getFilter(CardFormatFilter.class)));
+            }, FormatFilter.canAddFormat(f, itemManager.getFilter(CardFormatFilter.class)));
         }
         menu.add(fmt);
 

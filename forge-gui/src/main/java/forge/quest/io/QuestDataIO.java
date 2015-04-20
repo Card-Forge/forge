@@ -238,7 +238,7 @@ public class QuestDataIO {
             if (gearLevel == 2) {
                 newData.getAssets().setItemLevel(QuestItemType.ZEPPELIN, 1);
             }
-            // fall-through
+            //$FALL-THROUGH$
         case 1:
             // nothing to do here, everything is managed by CardPoolToXml
             // deserializer
@@ -284,6 +284,7 @@ public class QuestDataIO {
             QuestDataIO.setFinalField(QuestAssets.class, "shopList", qS, QuestDataIO.readAsset(xs, document, "shopList", ItemPool.class));
             QuestDataIO.setFinalField(QuestAssets.class, "newCardList", qS, QuestDataIO.readAsset(xs, document, "newCardList", ItemPool.class));
 
+            //$FALL-THROUGH$
         case 3:
             // QuestInventory class no longer exists - KV pairs of
             // QuestItemPair => level moved to assets
@@ -316,6 +317,7 @@ public class QuestDataIO {
                 }
             }
 
+            //$FALL-THROUGH$
         case 4:
             if (saveVersion > 0) {
                 NodeList pets = document.getElementsByTagName("pets").item(0).getChildNodes();
@@ -332,6 +334,7 @@ public class QuestDataIO {
             }
 
             // pet manager will be re-engineered here
+            //$FALL-THROUGH$
         case 5:
         case 6:
             // have to convert completed challenges list members to strings.
@@ -346,11 +349,10 @@ public class QuestDataIO {
                     qA.getCurrentChallenges().set(i, lc.toString());
             }
             
+            //$FALL-THROUGH$
         case 7:
         case 8:
             QuestDataIO.setFinalField(QuestAssets.class, "draftDecks", qS, new HashMap<String, DeckGroup>());
-            
-        default:
             break;
         }
 

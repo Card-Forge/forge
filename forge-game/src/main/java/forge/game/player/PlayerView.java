@@ -208,7 +208,7 @@ public class PlayerView extends GameEntityView {
         return get(TrackableProperty.Commander);
     }
     void updateCommander(Player p) {
-        set(TrackableProperty.Commander, PlayerView.get(p.getCommander()));
+        set(TrackableProperty.Commander, GameEntityView.get(p.getCommander()));
     }
 
     public int getCommanderDamage(CardView commander) {
