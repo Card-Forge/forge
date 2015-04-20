@@ -1020,7 +1020,6 @@ forge-gui-desktop/src/main/java/forge/screens/match/ViewWinLose.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/ZoneAction.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/controllers/CAntes.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/controllers/CCombat.java -text
-forge-gui-desktop/src/main/java/forge/screens/match/controllers/CCommand.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/controllers/CDetail.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/controllers/CDetailPicture.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/controllers/CDev.java -text
@@ -1029,7 +1028,6 @@ forge-gui-desktop/src/main/java/forge/screens/match/controllers/CField.java -tex
 forge-gui-desktop/src/main/java/forge/screens/match/controllers/CHand.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/controllers/CLog.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/controllers/CPicture.java -text
-forge-gui-desktop/src/main/java/forge/screens/match/controllers/CPlayers.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/controllers/CPrompt.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/controllers/CStack.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/controllers/package-info.java -text
@@ -1041,7 +1039,6 @@ forge-gui-desktop/src/main/java/forge/screens/match/package-info.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/views/IDevListener.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/views/VAntes.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/views/VCombat.java -text
-forge-gui-desktop/src/main/java/forge/screens/match/views/VCommand.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/views/VDetail.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/views/VDev.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/views/VDock.java -text
@@ -1049,7 +1046,6 @@ forge-gui-desktop/src/main/java/forge/screens/match/views/VField.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/views/VHand.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/views/VLog.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/views/VPicture.java -text
-forge-gui-desktop/src/main/java/forge/screens/match/views/VPlayers.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/views/VPrompt.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/views/VStack.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/views/package-info.java -text

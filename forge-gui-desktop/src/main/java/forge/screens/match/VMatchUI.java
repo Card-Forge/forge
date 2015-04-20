@@ -13,7 +13,6 @@ import forge.gui.framework.IVTopLevelUI;
 import forge.gui.framework.SRearrangingUtil;
 import forge.gui.framework.VEmptyDoc;
 import forge.properties.ForgePreferences;
-import forge.screens.match.views.VCommand;
 import forge.screens.match.views.VDev;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
@@ -30,7 +29,6 @@ import forge.view.FView;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
 public class VMatchUI implements IVTopLevelUI {
-    private List<VCommand> lstCommands = new ArrayList<VCommand>();
     private List<VField> lstFields = new ArrayList<VField>();
     private List<VHand> lstHands = new ArrayList<VHand>();
 
@@ -81,15 +79,6 @@ public class VMatchUI implements IVTopLevelUI {
             }
         }
 
-        // Add extra players alternatively to existing user/AI field panels.
-        for (int i = 2; i < lstCommands.size(); i++) {
-            // If already in layout, no need to add again.
-            VCommand cmdView = lstCommands.get(i);
-            if (cmdView.getParentCell() == null) {
-                lstCommands.get(i % 2).getParentCell().addDoc(cmdView);
-            }
-        }
-
         // Determine (an) existing hand panel
         DragCell cellWithHands = null;
         for (final EDocID handId : EDocID.Hands) {
@@ -125,11 +114,6 @@ public class VMatchUI implements IVTopLevelUI {
                     final EDocID fieldDoc = EDocID.Fields[iHandId];
                     if (fieldDoc.getDoc().getParentCell() != null) {
                         fieldDoc.getDoc().getParentCell().addDoc(myVHand);
-                        continue;
-                    }
-                    final EDocID commandDoc = EDocID.Commands[iHandId];
-                    if (commandDoc.getDoc().getParentCell() != null) {
-                        commandDoc.getDoc().getParentCell().addDoc(myVHand);
                         continue;
                     }
                     cellWithHands.addDoc(myVHand);
@@ -173,14 +157,6 @@ public class VMatchUI implements IVTopLevelUI {
 
     public FButton getBtnOK() {
         return getControl().getCPrompt().getView().getBtnOK();
-    }
-
-    public List<VCommand> getCommandViews() {
-        return lstCommands;
-    }
-
-    public void setCommandViews(final List<VCommand> lstCommands0) {
-        this.lstCommands = lstCommands0;
     }
 
     public List<VHand> getHands() {

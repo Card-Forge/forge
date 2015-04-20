@@ -228,8 +228,6 @@ public class VField implements IVDoc<CField> {
     }
 
     public void updateDetails() {
-        control.getMatchUI().getCPlayers().update();
-
         // Update life total
         final int life = player.getLife();
         lblLife.setText(String.valueOf(life));

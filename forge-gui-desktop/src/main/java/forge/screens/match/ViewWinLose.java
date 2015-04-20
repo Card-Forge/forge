@@ -87,6 +87,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
             if (!FModel.getGauntletMini().isGauntletDraft()) {
                 break;
             }
+        //$FALL-THROUGH$
         case Sealed:
             control = new LimitedWinLose(this, game0, matchUI);
             break;
@@ -184,7 +185,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         pnlLeft.add(pnlLog, "w 100%!");
 
         lblTitle.setText(composeTitle(game0));
-   
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {

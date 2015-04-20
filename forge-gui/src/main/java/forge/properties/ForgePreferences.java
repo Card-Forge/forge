@@ -150,7 +150,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SHORTCUT_SHOWSTACK ("83"),
         SHORTCUT_SHOWCOMBAT ("67"),
         SHORTCUT_SHOWCONSOLE ("76"),
-        SHORTCUT_SHOWPLAYERS ("80"),
         SHORTCUT_SHOWDEV ("68"),
         SHORTCUT_CONCEDE ("17"),
         SHORTCUT_ENDTURN ("69"),

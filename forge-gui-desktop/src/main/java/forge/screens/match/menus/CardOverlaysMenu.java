@@ -22,7 +22,7 @@ public final class CardOverlaysMenu {
     private static ForgePreferences prefs = FModel.getPreferences();
     private static boolean showOverlays = prefs.getPrefBoolean(FPref.UI_SHOW_CARD_OVERLAYS);
 
-    public JMenu getMenu(final boolean showMenuIcons) {
+    public JMenu getMenu() {
         JMenu menu = new JMenu("Card Overlays");
         menu.add(getMenuItem_ShowOverlays());
         menu.addSeparator();

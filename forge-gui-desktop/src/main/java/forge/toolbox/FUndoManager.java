@@ -51,7 +51,8 @@ public class FUndoManager extends UndoManager implements DocumentListener {
 	**  Add a DocumentLister before the undo is done so we can position
 	**  the Caret correctly as each edit is undone.
 	*/
-	public void undo() {
+	@Override
+	public synchronized void undo() {
 		if (canUndo()) {
 			textComponent.getDocument().addDocumentListener(this);
 			super.undo();
@@ -63,7 +64,8 @@ public class FUndoManager extends UndoManager implements DocumentListener {
 	**  Add a DocumentLister before the redo is done so we can position
 	**  the Caret correctly as each edit is redone.
 	*/
-	public void redo() {
+	@Override
+	public synchronized void redo() {
 		if (canRedo()) {
 			textComponent.getDocument().addDocumentListener(this);
 			super.redo();
@@ -75,6 +77,7 @@ public class FUndoManager extends UndoManager implements DocumentListener {
 	**  Whenever an UndoableEdit happens the edit will either be absorbed
 	**  by the current compound edit or a new compound edit will be started
 	*/
+	@Override
 	public void undoableEditHappened(UndoableEditEvent e) {
 		//  Start a new compound edit
 		if (compoundEdit == null) {
@@ -153,25 +156,30 @@ public class FUndoManager extends UndoManager implements DocumentListener {
 	 *  Updates to the Document as a result of Undo/Redo will cause the
 	 *  Caret to be repositioned
 	 */
+	@Override
 	public void insertUpdate(final DocumentEvent e) {
 		int offset = e.getOffset() + e.getLength();
 		offset = Math.min(offset, textComponent.getDocument().getLength());
 		textComponent.setCaretPosition(offset);
 	}
 
+	@Override
 	public void removeUpdate(DocumentEvent e) {
 		textComponent.setCaretPosition(e.getOffset());
 	}
 
+	@Override
 	public void changedUpdate(DocumentEvent e) {}
 
 	private class MyCompoundEdit extends CompoundEdit {
+	    @Override
 		public boolean isInProgress() {
 			//  in order for the canUndo() and canRedo() methods to work
 			//  assume that the compound edit is never in progress
 			return false;
 		}
 
+	    @Override
 		public void undo() throws CannotUndoException {
 			//  End the edit so future edits don't get absorbed by this edit
 			if (compoundEdit != null) {
@@ -197,6 +205,7 @@ public class FUndoManager extends UndoManager implements DocumentListener {
 			setEnabled(false);
 		}
 
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
 				undoManager.undo();
@@ -225,6 +234,7 @@ public class FUndoManager extends UndoManager implements DocumentListener {
 			setEnabled(false);
 		}
 
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
 				undoManager.redo();

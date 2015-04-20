@@ -8,10 +8,18 @@ Forge Beta: #-#-2015 ver 1.5.39
 Release Notes
 -------------
 
+Interface Update
+The interface has received several small changes.
+- The "Players" panel has been removed. This information can now be viewed by
+  hovering the cursor over a player's avatar.
+- The poison counters value has been moved to next to a players life total.
+  This is only visible if the player has any poison counters.
+- The poison counters button has been replaced with a Command Zone button.
+  The command zone panels have been removed.
 
 - Smarter Deck Color Determination -
-When determining the color of decks, colors of hybrid and phyrexian cards are no longer considered unless they can be produced by a land in the deck
-
+When determining the color of decks, colors of hybrid and phyrexian cards are no
+longer considered unless they can be produced by a land in the deck
 
 - Land Color Filtering in Deck Editor -
 When filtering colors in the Deck Editor, lands that produce all selected colors will now be shown

@@ -36,8 +36,8 @@ public final class GameMenu {
     private static ForgePreferences prefs = FModel.getPreferences();
     private static boolean showIcons;
 
-    public JMenu getMenu(final boolean showMenuIcons) {
-        JMenu menu = new JMenu("Game");
+    public JMenu getMenu() {
+        final JMenu menu = new JMenu("Game");
         menu.setMnemonic(KeyEvent.VK_G);
         menu.add(getMenuItem_Undo());
         menu.add(getMenuItem_Concede());
@@ -45,7 +45,7 @@ public final class GameMenu {
         menu.add(getMenuItem_AlphaStrike());
         menu.addSeparator();
         menu.add(getMenuItem_TargetingArcs());
-        menu.add(new CardOverlaysMenu(matchUI).getMenu(showMenuIcons));
+        menu.add(new CardOverlaysMenu(matchUI).getMenu());
         menu.add(getMenuItem_AutoYields());
         menu.addSeparator();
         menu.add(getMenuItem_ViewDeckList());

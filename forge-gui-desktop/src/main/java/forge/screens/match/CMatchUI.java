@@ -88,11 +88,9 @@ import forge.screens.match.controllers.CDetailPicture;
 import forge.screens.match.controllers.CDev;
 import forge.screens.match.controllers.CDock;
 import forge.screens.match.controllers.CLog;
-import forge.screens.match.controllers.CPlayers;
 import forge.screens.match.controllers.CPrompt;
 import forge.screens.match.controllers.CStack;
 import forge.screens.match.menus.CMatchUIMenus;
-import forge.screens.match.views.VCommand;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
 import forge.toolbox.FButton;
@@ -124,26 +122,26 @@ public final class CMatchUI
     implements ICDoc, IMenuProvider {
 
     private final FScreen screen;
+    private VMatchUI view;
+    private final CMatchUIMenus menus = new CMatchUIMenus(this);
+    private final Map<EDocID, IVDoc<? extends ICDoc>> myDocs;
+    private final TargetingOverlay targetingOverlay = new TargetingOverlay(this);
 
     private FCollectionView<PlayerView> sortedPlayers;
-    /** Players attached to this UI */
-    private VMatchUI view;
+    private final Map<String, String> avatarImages = new HashMap<String, String>();
     private boolean allHands;
     private boolean showOverlay = true;
 
     private IVDoc<? extends ICDoc> selectedDocBeforeCombat;
-    public final Map<String, String> avatarImages = new HashMap<String, String>();
+
     private final CAntes cAntes = new CAntes(this);
     private final CCombat cCombat = new CCombat();
     private final CDetailPicture cDetailPicture = new CDetailPicture(this);
     private final CDev cDev = new CDev(this);
     private final CDock cDock = new CDock(this);
     private final CLog cLog = new CLog(this);
-    private final CPlayers cPlayers = new CPlayers(this);
     private final CPrompt cPrompt = new CPrompt(this);
     private final CStack cStack = new CStack(this);
-    private final TargetingOverlay targetingOverlay = new TargetingOverlay(this);
-    private final Map<EDocID, IVDoc<? extends ICDoc>> myDocs;
 
     public CMatchUI() {
         this.view = new VMatchUI(this);
@@ -158,7 +156,6 @@ public final class CMatchUI
         this.myDocs.put(EDocID.REPORT_STACK, getCStack().getView());
         this.myDocs.put(EDocID.REPORT_COMBAT, getCCombat().getView());
         this.myDocs.put(EDocID.REPORT_LOG, getCLog().getView());
-        this.myDocs.put(EDocID.REPORT_PLAYERS, getCPlayers().getView());
         this.myDocs.put(EDocID.DEV_MODE, getCDev().getView());
         this.myDocs.put(EDocID.BUTTON_DOCK, getCDock().getView());;
     }
@@ -178,6 +175,10 @@ public final class CMatchUI
 
     private boolean isInGame() {
         return getGameView() != null;
+    }
+
+    public String getAvatarImage(final String playerName) {
+        return avatarImages.get(playerName);
     }
 
     @Override
@@ -226,9 +227,6 @@ public final class CMatchUI
     public CLog getCLog() {
         return cLog;
     }
-    public CPlayers getCPlayers() {
-        return cPlayers;
-    }
     public CPrompt getCPrompt() {
         return cPrompt;
     }
@@ -269,7 +267,6 @@ public final class CMatchUI
         final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
 
         final List<VField> fields = new ArrayList<VField>();
-        final List<VCommand> commands = new ArrayList<VCommand>();
 
         int i = 0;
         for (final PlayerView p : sortedPlayers) {
@@ -281,21 +278,12 @@ public final class CMatchUI
             fields.add(f);
             myDocs.put(fieldDoc, f);
 
-            final EDocID commandDoc = EDocID.Commands[i];
-            final VCommand c = new VCommand(this, commandDoc, p, mirror);
-            commands.add(c);
-            myDocs.put(commandDoc, c);
-
             f.setAvatar(getPlayerAvatar(p, Integer.parseInt(indices[i > 2 ? 1 : 0])));
             f.getLayoutControl().initialize();
-            c.getLayoutControl().initialize();
             i++;
         }
 
-        view.setCommandViews(commands);
         view.setFieldViews(fields);
-
-        getCPlayers().getView().init(this.sortedPlayers);
 
         initHandViews();
         registerDocs();
@@ -336,14 +324,6 @@ public final class CMatchUI
     public VField getFieldViewFor(final PlayerView p) {
         final int idx = getPlayerIndex(p);
         return idx < 0 ? null : getFieldViews().get(idx);
-    }
-
-    public List<VCommand> getCommandViews() {
-        return view.getCommandViews();
-    }
-    public VCommand getCommandFor(final PlayerView p) {
-        final int idx = getPlayerIndex(p);
-        return idx < 0 ? null : getCommandViews().get(idx);
     }
 
     public List<VHand> getHandViews() {
@@ -421,7 +401,7 @@ public final class CMatchUI
         for (final PlayerZoneUpdate update : zonesToUpdate) {
             final PlayerView owner = update.getPlayer();
 
-            boolean setupPlayZone = false, updateHand = false, updateCommand = false, updateAnte = false, updateZones = false, updateDetails = false;
+            boolean setupPlayZone = false, updateHand = false, updateAnte = false, updateZones = false;
             for (final ZoneType zone : update.getZones()) {
                 switch (zone) {
                 case Battlefield:
@@ -432,15 +412,7 @@ public final class CMatchUI
                     break;
                 case Hand:
                     updateHand = true;
-                    updateZones = true;
-                    updateDetails = true;
-                    FloatingCardArea.refresh(owner, zone);
-                    break;
-                case Command:
-                    updateCommand = true;
-                    updateZones = true;
-                    FloatingCardArea.refresh(owner, zone);
-                    break;
+                    //$FALL-THROUGH$
                 default:
                     updateZones = true;
                     FloatingCardArea.refresh(owner, zone);
@@ -458,17 +430,11 @@ public final class CMatchUI
                     vHand.getLayoutControl().updateHand();
                 }
             }
-            if (updateCommand) {
-                getCommandFor(owner).getTabletop().update();
-            }
             if (updateAnte) {
                 cAntes.update();
             }
             if (updateZones) {
                 vField.updateZones();
-            }
-            if (updateDetails) {
-                vField.updateDetails();
             }
         }
     }
@@ -512,12 +478,6 @@ public final class CMatchUI
                 }
             }
             break;
-        case Command:
-            final VCommand command = getCommandFor(c.getController());
-            if (command != null) {
-                command.getTabletop().updateCard(c, false);
-            }
-            break;
         default:
             break;
         }
@@ -525,7 +485,7 @@ public final class CMatchUI
 
     @Override
     public List<JMenu> getMenus() {
-        return new CMatchUIMenus(this).getMenus(cDev);
+        return menus.getMenus();
     }
 
     @Override
@@ -579,9 +539,6 @@ public final class CMatchUI
         }
         for (final VField f : view.getFieldViews()) {
             panels.addAll(f.getTabletop().getCardPanels());
-        }
-        for (final VCommand c : view.getCommandViews()) {
-            panels.addAll(c.getTabletop().getCardPanels());
         }
         return panels;
     }
@@ -650,7 +607,7 @@ public final class CMatchUI
     public void disableOverlay() {
         showOverlay = false;
     }
-    
+
     @Override
     public void enableOverlay() {
         showOverlay = true;
@@ -934,34 +891,34 @@ public final class CMatchUI
         final List<VField> fieldViews = getFieldViews();
 
         // AI field is at index [1]
-        PhaseIndicator fvAi = fieldViews.get(1).getPhaseIndicator();
-        prefs.setPref(FPref.PHASE_AI_UPKEEP, String.valueOf(fvAi.getLblUpkeep().getEnabled()));
-        prefs.setPref(FPref.PHASE_AI_DRAW, String.valueOf(fvAi.getLblDraw().getEnabled()));
-        prefs.setPref(FPref.PHASE_AI_MAIN1, String.valueOf(fvAi.getLblMain1().getEnabled()));
-        prefs.setPref(FPref.PHASE_AI_BEGINCOMBAT, String.valueOf(fvAi.getLblBeginCombat().getEnabled()));
-        prefs.setPref(FPref.PHASE_AI_DECLAREATTACKERS, String.valueOf(fvAi.getLblDeclareAttackers().getEnabled()));
-        prefs.setPref(FPref.PHASE_AI_DECLAREBLOCKERS, String.valueOf(fvAi.getLblDeclareBlockers().getEnabled()));
-        prefs.setPref(FPref.PHASE_AI_FIRSTSTRIKE, String.valueOf(fvAi.getLblFirstStrike().getEnabled()));
-        prefs.setPref(FPref.PHASE_AI_COMBATDAMAGE, String.valueOf(fvAi.getLblCombatDamage().getEnabled()));
-        prefs.setPref(FPref.PHASE_AI_ENDCOMBAT, String.valueOf(fvAi.getLblEndCombat().getEnabled()));
-        prefs.setPref(FPref.PHASE_AI_MAIN2, String.valueOf(fvAi.getLblMain2().getEnabled()));
-        prefs.setPref(FPref.PHASE_AI_EOT, String.valueOf(fvAi.getLblEndTurn().getEnabled()));
-        prefs.setPref(FPref.PHASE_AI_CLEANUP, String.valueOf(fvAi.getLblCleanup().getEnabled()));
+        final PhaseIndicator fvAi = fieldViews.get(1).getPhaseIndicator();
+        prefs.setPref(FPref.PHASE_AI_UPKEEP,           fvAi.getLblUpkeep().getEnabled());
+        prefs.setPref(FPref.PHASE_AI_DRAW,             fvAi.getLblDraw().getEnabled());
+        prefs.setPref(FPref.PHASE_AI_MAIN1,            fvAi.getLblMain1().getEnabled());
+        prefs.setPref(FPref.PHASE_AI_BEGINCOMBAT,      fvAi.getLblBeginCombat().getEnabled());
+        prefs.setPref(FPref.PHASE_AI_DECLAREATTACKERS, fvAi.getLblDeclareAttackers().getEnabled());
+        prefs.setPref(FPref.PHASE_AI_DECLAREBLOCKERS,  fvAi.getLblDeclareBlockers().getEnabled());
+        prefs.setPref(FPref.PHASE_AI_FIRSTSTRIKE,      fvAi.getLblFirstStrike().getEnabled());
+        prefs.setPref(FPref.PHASE_AI_COMBATDAMAGE,     fvAi.getLblCombatDamage().getEnabled());
+        prefs.setPref(FPref.PHASE_AI_ENDCOMBAT,        fvAi.getLblEndCombat().getEnabled());
+        prefs.setPref(FPref.PHASE_AI_MAIN2,            fvAi.getLblMain2().getEnabled());
+        prefs.setPref(FPref.PHASE_AI_EOT,              fvAi.getLblEndTurn().getEnabled());
+        prefs.setPref(FPref.PHASE_AI_CLEANUP,          fvAi.getLblCleanup().getEnabled());
 
         // Human field is at index [0]
-        PhaseIndicator fvHuman = fieldViews.get(0).getPhaseIndicator();
-        prefs.setPref(FPref.PHASE_HUMAN_UPKEEP, String.valueOf(fvHuman.getLblUpkeep().getEnabled()));
-        prefs.setPref(FPref.PHASE_HUMAN_DRAW, String.valueOf(fvHuman.getLblDraw().getEnabled()));
-        prefs.setPref(FPref.PHASE_HUMAN_MAIN1, String.valueOf(fvHuman.getLblMain1().getEnabled()));
-        prefs.setPref(FPref.PHASE_HUMAN_BEGINCOMBAT, String.valueOf(fvHuman.getLblBeginCombat().getEnabled()));
-        prefs.setPref(FPref.PHASE_HUMAN_DECLAREATTACKERS, String.valueOf(fvHuman.getLblDeclareAttackers().getEnabled()));
-        prefs.setPref(FPref.PHASE_HUMAN_DECLAREBLOCKERS, String.valueOf(fvHuman.getLblDeclareBlockers().getEnabled()));
-        prefs.setPref(FPref.PHASE_HUMAN_FIRSTSTRIKE, String.valueOf(fvHuman.getLblFirstStrike().getEnabled()));
-        prefs.setPref(FPref.PHASE_HUMAN_COMBATDAMAGE, String.valueOf(fvHuman.getLblCombatDamage().getEnabled()));
-        prefs.setPref(FPref.PHASE_HUMAN_ENDCOMBAT, String.valueOf(fvHuman.getLblEndCombat().getEnabled()));
-        prefs.setPref(FPref.PHASE_HUMAN_MAIN2, String.valueOf(fvHuman.getLblMain2().getEnabled()));
-        prefs.setPref(FPref.PHASE_HUMAN_EOT, fvHuman.getLblEndTurn().getEnabled());
-        prefs.setPref(FPref.PHASE_HUMAN_CLEANUP, fvHuman.getLblCleanup().getEnabled());
+        final PhaseIndicator fvHuman = fieldViews.get(0).getPhaseIndicator();
+        prefs.setPref(FPref.PHASE_HUMAN_UPKEEP,           fvHuman.getLblUpkeep().getEnabled());
+        prefs.setPref(FPref.PHASE_HUMAN_DRAW,             fvHuman.getLblDraw().getEnabled());
+        prefs.setPref(FPref.PHASE_HUMAN_MAIN1,            fvHuman.getLblMain1().getEnabled());
+        prefs.setPref(FPref.PHASE_HUMAN_BEGINCOMBAT,      fvHuman.getLblBeginCombat().getEnabled());
+        prefs.setPref(FPref.PHASE_HUMAN_DECLAREATTACKERS, fvHuman.getLblDeclareAttackers().getEnabled());
+        prefs.setPref(FPref.PHASE_HUMAN_DECLAREBLOCKERS,  fvHuman.getLblDeclareBlockers().getEnabled());
+        prefs.setPref(FPref.PHASE_HUMAN_FIRSTSTRIKE,      fvHuman.getLblFirstStrike().getEnabled());
+        prefs.setPref(FPref.PHASE_HUMAN_COMBATDAMAGE,     fvHuman.getLblCombatDamage().getEnabled());
+        prefs.setPref(FPref.PHASE_HUMAN_ENDCOMBAT,        fvHuman.getLblEndCombat().getEnabled());
+        prefs.setPref(FPref.PHASE_HUMAN_MAIN2,            fvHuman.getLblMain2().getEnabled());
+        prefs.setPref(FPref.PHASE_HUMAN_EOT,              fvHuman.getLblEndTurn().getEnabled());
+        prefs.setPref(FPref.PHASE_HUMAN_CLEANUP,          fvHuman.getLblCleanup().getEnabled());
 
         prefs.save();
     }

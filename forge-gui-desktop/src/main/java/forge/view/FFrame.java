@@ -304,7 +304,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
 
     //override normal state behavior
     @Override
-    public void setState(int state) {
+    public synchronized void setState(final int state) {
         setMinimized(state == Frame.ICONIFIED);
         if (state == Frame.MAXIMIZED_BOTH) {
             this.setMaximized(true);

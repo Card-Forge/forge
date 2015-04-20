@@ -1,13 +1,13 @@
 package forge.screens.match.menus;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JMenu;
 
+import com.google.common.collect.Lists;
+
 import forge.properties.ForgePreferences;
 import forge.screens.match.CMatchUI;
-import forge.screens.match.controllers.CDev;
 
 /**
  * Gets the menus associated with the Game screen.
@@ -15,18 +15,16 @@ import forge.screens.match.controllers.CDev;
  */
 public class CMatchUIMenus {
 
-    private final boolean SHOW_ICONS = false;
-
     private final CMatchUI matchUI;
     public CMatchUIMenus(final CMatchUI matchUI) {
         this.matchUI = matchUI;
     }
 
-    public List<JMenu> getMenus(final CDev devController) {
-        final List<JMenu> menus = new ArrayList<JMenu>();
-        menus.add(new GameMenu(matchUI).getMenu(SHOW_ICONS));
+    public List<JMenu> getMenus() {
+        final List<JMenu> menus = Lists.newArrayListWithCapacity(2);
+        menus.add(new GameMenu(matchUI).getMenu());
         if (ForgePreferences.DEV_MODE) {
-            menus.add(new DevModeMenu(devController).getMenu());
+            menus.add(new DevModeMenu(matchUI.getCDev()).getMenu());
         }
         return menus;
     }

@@ -28,7 +28,8 @@ import forge.view.arcane.CardPanel;
 
 /**
  * <p>
- * Abstract Animation class.
+ * Animation class. Provides useful static methods for animating movement of
+ * cards.
  * </p>
  * 
  * @author Forge
@@ -39,40 +40,41 @@ public abstract class Animation {
     private static final long TARGET_MILLIS_PER_FRAME = 30;
 
     /** Constant <code>timer</code>. */
-    private static Timer timer = new Timer("Animation", true);
+    private static final Timer timer = new Timer("Animation", true);
 
-    private TimerTask timerTask;
+    private final long delay;
+
+    private final TimerTask timerTask;
     private FrameTimer frameTimer;
     private long elapsed;
 
     /**
-     * <p>
-     * Constructor for Animation.
-     * </p>
+     * Constructor for Animation, with a default delay of zero.
      * 
      * @param duration
-     *            a long.
+     *            the duration, in milliseconds, for which the animation will
+     *            run.
      */
-    public Animation(final long duration) {
+    private Animation(final long duration) {
         this(duration, 0);
     }
 
     /**
-     * <p>
      * Constructor for Animation.
-     * </p>
      * 
      * @param duration
-     *            a long.
+     *            the duration, in milliseconds, for which the animation will
+     *            run.
      * @param delay
-     *            a long.
+     *            the delay, in milliseconds, between subsequent
+     *            {@link #update(float)} calls while the animation is running.
      */
-    public Animation(final long duration, final long delay) {
+    private Animation(final long duration, final long delay) {
+        this.delay = delay;
         timerTask = new TimerTask() {
-            @Override
-            public void run() {
+            @Override public final void run() {
                 if (frameTimer == null) {
-                    start();
+                    onStart();
                     frameTimer = new FrameTimer();
                 }
                 elapsed += frameTimer.getTimeSinceLastFrame();
@@ -82,17 +84,21 @@ public abstract class Animation {
                 }
                 update(elapsed / (float) duration);
                 if (elapsed == duration) {
-                    end();
+                    onEnd();
                 }
             }
         };
+    }
+
+    /**
+     * Starts the animation.
+     */
+    protected final void run() {
         timer.scheduleAtFixedRate(timerTask, delay, TARGET_MILLIS_PER_FRAME);
     }
 
     /**
-     * <p>
-     * update.
-     * </p>
+     * Called every {@link #delay} ms while the animation is running.
      * 
      * @param percentage
      *            a float.
@@ -100,29 +106,23 @@ public abstract class Animation {
     protected abstract void update(float percentage);
 
     /**
-     * <p>
-     * cancel.
-     * </p>
+     * Cancel the animation.
      */
     protected final void cancel() {
         timerTask.cancel();
-        end();
+        onEnd();
     }
 
     /**
-     * <p>
-     * start.
-     * </p>
+     * Executed when the animation starts.
      */
-    protected void start() {
+    protected void onStart() {
     }
 
     /**
-     * <p>
-     * end.
-     * </p>
+     * Executed when the animation ends.
      */
-    protected void end() {
+    protected void onEnd() {
     }
 
     /**
@@ -133,7 +133,7 @@ public abstract class Animation {
      * @param runnable
      *            a {@link java.lang.Runnable} object.
      */
-    public static void invokeLater(final Runnable runnable) {
+    private static void invokeLater(final Runnable runnable) {
         EventQueue.invokeLater(runnable);
     }
 
@@ -141,7 +141,7 @@ public abstract class Animation {
      * Uses averaging of the time between the past few frames to provide smooth
      * animation.
      */
-    private class FrameTimer {
+    private static final class FrameTimer {
         private static final int SAMPLES = 6;
         private static final long MAX_FRAME = 100; // Max time for one frame, to
                                                    // weed out spikes.
@@ -194,7 +194,7 @@ public abstract class Animation {
     public static void tapCardToggle(final CardPanel panel) {
         new Animation(200) {
             @Override
-            protected void start() {
+            protected void onStart() {
                 panel.setTapped(!panel.isTapped());
             }
 
@@ -208,18 +208,14 @@ public abstract class Animation {
             }
 
             @Override
-            protected void end() {
+            protected void onEnd() {
                 panel.setTappedAngle(panel.isTapped() ? CardPanel.TAPPED_ANGLE : 0);
             }
-        };
+        }.run();
     }
 
-    // static public void moveCardToPlay (Component source, final CardPanel
-    // dest, final CardPanel animationPanel) {
     /**
-     * <p>
-     * moveCardToPlay.
-     * </p>
+     * Animate a {@link CardPanel} moving.
      * 
      * @param startX
      *            a int.
@@ -242,7 +238,7 @@ public abstract class Animation {
      * @param speed
      *            a int.
      */
-    public static void moveCardToPlay(final int startX, final int startY, final int startWidth, final int endX,
+    public static void moveCardToField(final int startX, final int startY, final int startWidth, final int endX,
             final int endY, final int endWidth, final CardPanel animationPanel, final CardPanel placeholder,
             final JLayeredPane layeredPane, final int speed) {
         Animation.invokeLater(new Runnable() {
@@ -258,7 +254,7 @@ public abstract class Animation {
                 Container parent = animationPanel.getParent();
                 if (parent != layeredPane) {
                     layeredPane.add(animationPanel);
-                    layeredPane.setLayer(animationPanel, JLayeredPane.MODAL_LAYER);
+                    layeredPane.setLayer(animationPanel, JLayeredPane.MODAL_LAYER.intValue());
                 }
 
                 new Animation(700) {
@@ -292,7 +288,7 @@ public abstract class Animation {
                     }
 
                     @Override
-                    protected void end() {
+                    protected void onEnd() {
                         EventQueue.invokeLater(new Runnable() {
                             @Override
                             public void run() {
@@ -306,15 +302,13 @@ public abstract class Animation {
                             }
                         });
                     }
-                };
+                }.run();
             }
         });
     }
 
     /**
-     * <p>
-     * moveCard.
-     * </p>
+     * Animate a {@link CardPanel} moving.
      * 
      * @param startX
      *            a int.
@@ -351,7 +345,7 @@ public abstract class Animation {
                 Container parent = animationPanel.getParent();
                 if (parent != layeredPane) {
                     layeredPane.add(animationPanel);
-                    layeredPane.setLayer(animationPanel, JLayeredPane.MODAL_LAYER);
+                    layeredPane.setLayer(animationPanel, JLayeredPane.MODAL_LAYER.intValue());
                 }
 
                 new Animation(speed) {
@@ -365,7 +359,7 @@ public abstract class Animation {
                     }
 
                     @Override
-                    protected void end() {
+                    protected void onEnd() {
                         EventQueue.invokeLater(new Runnable() {
                             @Override
                             public void run() {
@@ -383,15 +377,13 @@ public abstract class Animation {
                             }
                         });
                     }
-                };
+                }.run();
             }
         });
     }
 
     /**
-     * <p>
-     * moveCard.
-     * </p>
+     * Animate a {@link CardPanel} moving.
      * 
      * @param placeholder
      *            a {@link forge.view.arcane.CardPanel} object.

@@ -72,7 +72,7 @@ public class ForgeProfileProperties {
         cacheDir    = getDir(props, CACHE_DIR_KEY,     defaults.getRight());
         cardPicsDir = getDir(props, CARD_PICS_DIR_KEY, cacheDir + "pics" + File.separator + "cards" + File.separator);
         cardPicsSubDirs = getMap(props, CARD_PICS_SUB_DIRS_KEY);
-        serverPort = getInt(props, SERVER_PORT_KEY, 0);
+        serverPort = getInt(props, SERVER_PORT_KEY, 36743); // "Forge" using phone keypad
 
         //ensure directories exist
         FileUtil.ensureDirectoryExists(userDir);

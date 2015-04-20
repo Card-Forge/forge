@@ -80,15 +80,6 @@ public class KeyboardShortcuts {
             }
         };
 
-        /** Show players panel. */
-        final Action actShowPlayers = new AbstractAction() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
-                SDisplayUtil.showTab(EDocID.REPORT_PLAYERS.getDoc());
-            }
-        };
-
         /** Show dev panel. */
         final Action actShowDev = new AbstractAction() {
             @Override
@@ -144,7 +135,6 @@ public class KeyboardShortcuts {
         list.add(new Shortcut(FPref.SHORTCUT_SHOWSTACK, "Match: show stack panel", actShowStack, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_SHOWCOMBAT, "Match: show combat panel", actShowCombat, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_SHOWCONSOLE, "Match: show console panel", actShowConsole, am, im));
-        list.add(new Shortcut(FPref.SHORTCUT_SHOWPLAYERS, "Match: show players panel", actShowPlayers, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_SHOWDEV, "Match: show dev panel", actShowDev, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_CONCEDE, "Match: concede game", actConcede, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_ENDTURN, "Match: pass priority until EOT or next stack event", actEndTurn, am, im));
