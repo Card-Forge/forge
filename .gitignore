@@ -214,8 +214,6 @@ forge-gui/res/skins/zendikar/pics_product
 forge-gui/target
 forge-gui/tools/PerSetTrackingResults
 forge-gui/tools/oracleScript.log
-forge-net/src/main/php/*.php
-forge-net/target
 /forge.profile.properties
 /jgv.txt
 /nbactions.xml
