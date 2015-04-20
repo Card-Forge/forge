@@ -70,9 +70,13 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                 loopOverCards = true;
             }
         }
+        // Removing this throw since it doesn't account for Repeating by players or counters e.g. Tempting Wurm
+        // Feel free to re-add it if you account for every card that's scripted with RepeatEach
+        /*
         else {
             throw new IllegalAbilityException(sa, this);
-        }
+        }*/
+
 
         if (sa.hasParam("ClearRemembered")) {
             source.clearRemembered();
