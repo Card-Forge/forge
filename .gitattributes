@@ -17714,7 +17714,13 @@ forge-gui/src/main/java/forge/net/client/GameClientHandler.java -text
 forge-gui/src/main/java/forge/net/client/IToServer.java -text
 forge-gui/src/main/java/forge/net/client/NetGameController.java -text
 forge-gui/src/main/java/forge/net/client/package-info.java -text
+forge-gui/src/main/java/forge/net/event/GuiGameEvent.java -text
+forge-gui/src/main/java/forge/net/event/IdentifiableNetEvent.java -text
 forge-gui/src/main/java/forge/net/event/LobbyUpdateEvent.java -text
+forge-gui/src/main/java/forge/net/event/LoginEvent.java -text
+forge-gui/src/main/java/forge/net/event/LogoutEvent.java -text
+forge-gui/src/main/java/forge/net/event/MessageEvent.java -text
+forge-gui/src/main/java/forge/net/event/NetEvent.java -text
 forge-gui/src/main/java/forge/net/event/ReplyEvent.java -text
 forge-gui/src/main/java/forge/net/event/UpdateLobbyPlayerEvent.java -text
 forge-gui/src/main/java/forge/net/event/package-info.java -text
