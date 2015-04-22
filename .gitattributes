@@ -1301,12 +1301,15 @@ forge-gui-mobile/src/forge/screens/SplashScreen.java -text
 forge-gui-mobile/src/forge/screens/TabPageScreen.java -text
 forge-gui-mobile/src/forge/screens/constructed/AvatarSelector.java -text
 forge-gui-mobile/src/forge/screens/constructed/ConstructedScreen.java -text
-forge-gui-mobile/src/forge/screens/gauntlet/GauntletScreen.java -text
+forge-gui-mobile/src/forge/screens/gauntlet/LoadGauntletScreen.java -text
+forge-gui-mobile/src/forge/screens/gauntlet/NewGauntletScreen.java -text
 forge-gui-mobile/src/forge/screens/home/HomeScreen.java -text
+forge-gui-mobile/src/forge/screens/home/NewGameMenu.java -text
 forge-gui-mobile/src/forge/screens/limited/DraftingProcessScreen.java -text
-forge-gui-mobile/src/forge/screens/limited/LimitedScreen.java -text
 forge-gui-mobile/src/forge/screens/limited/LoadDraftScreen.java -text
 forge-gui-mobile/src/forge/screens/limited/LoadSealedScreen.java -text
+forge-gui-mobile/src/forge/screens/limited/NewDraftScreen.java -text
+forge-gui-mobile/src/forge/screens/limited/NewSealedScreen.java -text
 forge-gui-mobile/src/forge/screens/match/MatchController.java -text
 forge-gui-mobile/src/forge/screens/match/MatchScreen.java -text
 forge-gui-mobile/src/forge/screens/match/TargetingOverlay.java -text

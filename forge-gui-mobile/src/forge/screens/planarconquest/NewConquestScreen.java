@@ -12,6 +12,7 @@ import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.planarconquest.ConquestUtil;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
+import forge.screens.home.NewGameMenu;
 import forge.screens.planarconquest.ConquestMenu.LaunchReason;
 import forge.toolbox.FChoiceList;
 import forge.toolbox.FComboBox;
@@ -50,7 +51,7 @@ public class NewConquestScreen extends FScreen {
             }).build());
 
     public NewConquestScreen() {
-        super("New Planar Conquest");
+        super(null, NewGameMenu.getMenu());
 
         cbxStartingPlane.setChangedHandler(new FEventHandler() {
             @Override

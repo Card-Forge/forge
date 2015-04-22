@@ -3,15 +3,11 @@ package forge.screens.home;
 import java.util.ArrayList;
 
 import forge.screens.FScreen;
-import forge.screens.LoadingOverlay;
 import forge.Forge;
 import forge.assets.FSkinImage;
 import forge.deck.FDeckChooser;
 import forge.game.GameType;
-import forge.screens.constructed.ConstructedScreen;
-import forge.screens.gauntlet.GauntletScreen;
-import forge.screens.limited.LimitedScreen;
-import forge.screens.quest.QuestMenu;
+import forge.screens.limited.LoadDraftScreen;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
@@ -28,45 +24,33 @@ public class HomeScreen extends FScreen {
     public HomeScreen() {
         super((Header)null);
 
-        addButton("Constructed", new FEventHandler() {
+        addButton("New Game", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                Forge.openScreen(new ConstructedScreen());
+                NewGameMenu.openPreferredScreen();
             }
         });
-        addButton("Draft / Sealed", new FEventHandler() {
+        addButton("Load Game", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                Forge.openScreen(new LimitedScreen());
+                Forge.openScreen(new LoadDraftScreen());
             }
         });
+        addButton("Play Online", new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+            }
+        });
+        buttons.get(buttons.size() - 1).setEnabled(false);
         addButton("Deck Editor", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 FDeckChooser.promptForDeck("Deck Editor", GameType.DeckEditorTest, false, null);
             }
         });
-        /*addButton("Planar Conquest", new FEventHandler() {
+        addButton("Achievements", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                ConquestMenu.launchPlanarConquest(ConquestMenu.LaunchReason.StartPlanarConquest);
-            }
-        });*/
-        addButton("Quest Mode", new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                QuestMenu.launchQuestMode(QuestMenu.LaunchReason.StartQuestMode);
-            }
-        });
-        addButton("Gauntlets", new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                LoadingOverlay.show("Loading gauntlets...", new Runnable() {
-                    @Override
-                    public void run() {
-                        Forge.openScreen(new GauntletScreen());
-                    }
-                });
             }
         });
         addButton("Settings", new FEventHandler() {

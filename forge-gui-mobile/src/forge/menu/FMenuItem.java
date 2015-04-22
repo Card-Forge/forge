@@ -53,6 +53,10 @@ public class FMenuItem extends FDisplayObject implements IButton {
         textWidth = FONT.getBounds(text).width;
     }
 
+    public String getText() {
+        return text;
+    }
+
     public boolean hasIcon() {
         return icon != null;
     }

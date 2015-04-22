@@ -34,6 +34,7 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.screens.LaunchScreen;
+import forge.screens.home.NewGameMenu;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
@@ -95,7 +96,7 @@ public class ConstructedScreen extends LaunchScreen {
     private int lastArchenemy = 0;
 
     public ConstructedScreen() {
-        super("Constructed");
+        super(null, NewGameMenu.getMenu());
 
         btnStart.setEnabled(false); //disable start button until decks loaded
 

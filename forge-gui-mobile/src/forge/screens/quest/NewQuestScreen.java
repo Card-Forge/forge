@@ -35,6 +35,7 @@ import forge.quest.data.GameFormatQuest;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
+import forge.screens.home.NewGameMenu;
 import forge.screens.quest.QuestMenu.LaunchReason;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
@@ -154,7 +155,7 @@ public class NewQuestScreen extends FScreen {
             }).build());
 
     public NewQuestScreen() {
-        super("Start a New Quest");
+        super(null, NewGameMenu.getMenu());
 
         cbxStartingPool.addItem(StartingPoolType.Complete);
         cbxStartingPool.addItem(StartingPoolType.Rotating);

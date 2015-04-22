@@ -28,6 +28,7 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.quest.QuestUtil;
 import forge.screens.LaunchScreen;
+import forge.screens.home.NewGameMenu;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
@@ -41,7 +42,7 @@ import forge.util.ThreadUtil;
 import forge.util.Utils;
 import forge.util.gui.SOptionPane;
 
-public class GauntletScreen extends LaunchScreen {
+public class NewGauntletScreen extends LaunchScreen {
     private static final float PADDING = Utils.AVG_FINGER_HEIGHT * 0.1f;
     private static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
 
@@ -50,8 +51,8 @@ public class GauntletScreen extends LaunchScreen {
     private final FButton btnRenameGauntlet = add(new FButton("Rename"));
     private final FButton btnDeleteGauntlet = add(new FButton("Delete"));
 
-    public GauntletScreen() {
-        super("Gauntlets");
+    public NewGauntletScreen() {
+        super(null, NewGameMenu.getMenu());
 
         btnNewGauntlet.setFont(FSkinFont.get(16));
         btnNewGauntlet.setCommand(new FEventHandler() {

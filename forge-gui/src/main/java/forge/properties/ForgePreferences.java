@@ -88,6 +88,9 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         MATCH_HOT_SEAT_MODE("false"), //this only applies to mobile game
         MATCHPREF_PROMPT_FREE_BLOCKS("false"),
 
+        NEW_GAME_SCREEN("Constructed"),
+        LOAD_GAME_SCREEN("BoosterDraft"),
+
         SUBMENU_CURRENTMENU ("CONSTRUCTED"),
         SUBMENU_SANCTIONED ("true"),
         SUBMENU_ONLINE ("false"),

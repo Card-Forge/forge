@@ -12,6 +12,7 @@ import forge.limited.LimitedPoolType;
 import forge.limited.SealedCardPoolGenerator;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
+import forge.screens.home.NewGameMenu;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
 import forge.toolbox.FGroupBox;
@@ -22,7 +23,7 @@ import forge.util.ThreadUtil;
 import forge.util.Utils;
 import forge.util.gui.SGuiChoose;
 
-public class LimitedScreen extends FScreen {
+public class NewDraftScreen extends FScreen {
     private static final float PADDING = Utils.scale(10);
 
     private final FGroupBox grpDraft = add(new FGroupBox("Booster Draft") {
@@ -66,8 +67,8 @@ public class LimitedScreen extends FScreen {
     private final FButton btnNewSealed = grpSealed.add(new FButton("New Deck"));
     private final FButton btnLoadSealed = grpSealed.add(new FButton("Load Deck"));
 
-    public LimitedScreen() {
-        super("Draft / Sealed");
+    public NewDraftScreen() {
+        super(null, NewGameMenu.getMenu());
 
         lblDraftDesc.setFont(FSkinFont.get(12));
         lblDraftDesc.setTextColor(FLabel.INLINE_LABEL_COLOR);
