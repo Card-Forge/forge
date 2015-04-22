@@ -193,6 +193,9 @@ public final class CMatchUI
             FThreads.invokeInEdtNowOrLater(new Runnable() {
                 @Override public final void run() {
                     for (final VField f : getFieldViews()) {
+                        f.updateDetails();
+                        f.updateZones();
+                        f.updateManaPool();
                         f.getTabletop().update();
                     }
                     for (final VHand h : getHandViews()) {
@@ -457,29 +460,31 @@ public final class CMatchUI
     }
 
     @Override
-    public void updateSingleCard(final CardView c) {
-        final ZoneType zone = c.getZone();
-        if (zone == null) { return; }
+    public void updateCards(final Iterable<CardView> cards) {
+        for (final CardView c : cards) {
+            final ZoneType zone = c.getZone();
+            if (zone == null) { return; }
 
-        switch (zone) {
-        case Battlefield:
-            final VField battlefield = getFieldViewFor(c.getController());
-            if (battlefield != null) {
-                battlefield.getTabletop().updateCard(c, false);
-            }
-            break;
-        case Hand:
-            final VHand hand = getHandFor(c.getController());
-            if (hand != null) {
-                CardPanel cp = hand.getHandArea().getCardPanel(c.getId());
-                if (cp != null) {
-                    cp.setCard(c); //ensure card view updated
-                    cp.repaintOverlays();
+            switch (zone) {
+            case Battlefield:
+                final VField battlefield = getFieldViewFor(c.getController());
+                if (battlefield != null) {
+                    battlefield.getTabletop().updateCard(c, false);
                 }
+                break;
+            case Hand:
+                final VHand hand = getHandFor(c.getController());
+                if (hand != null) {
+                    final CardPanel cp = hand.getHandArea().getCardPanel(c.getId());
+                    if (cp != null) {
+                        cp.setCard(c); //ensure card view updated
+                        cp.repaintOverlays();
+                    }
+                }
+                break;
+            default:
+                break;
             }
-            break;
-        default:
-            break;
         }
     }
 

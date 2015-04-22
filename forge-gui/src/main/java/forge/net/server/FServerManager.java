@@ -126,7 +126,7 @@ public final class FServerManager {
                     
                 }
             }).start();
-            mapNatPort(port);
+            //mapNatPort(port);
             Runtime.getRuntime().addShutdownHook(shutdownHook);
             isHosting = true;
         } catch (final InterruptedException e) {

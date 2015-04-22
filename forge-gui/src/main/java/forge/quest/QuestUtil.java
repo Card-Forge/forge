@@ -339,7 +339,7 @@ public class QuestUtil {
             }
             else {
                 view.getLblZep().setEnabled(true);
-                view.getLblZep().setTextColor(FSkinProp.CLR_TEXT);
+                view.getLblZep().setImage(FSkinProp.CLR_TEXT);
             }
         }
         else {
@@ -413,7 +413,7 @@ public class QuestUtil {
             lblCurrentDeck.setText("Build, then select a deck in the \"Quest Decks\" submenu.");
         }
         else {
-            lblCurrentDeck.setTextColor(FSkinProp.CLR_TEXT);
+            lblCurrentDeck.setImage(FSkinProp.CLR_TEXT);
             lblCurrentDeck.setText("Your current deck is \""
                     + getCurrentDeck().getName() + "\".");
         }

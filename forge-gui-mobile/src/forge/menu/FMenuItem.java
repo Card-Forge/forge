@@ -143,7 +143,7 @@ public class FMenuItem extends FDisplayObject implements IButton {
     public void setCommand(UiCommand command0) {
     }
     @Override
-    public void setTextColor(FSkinProp color) {
+    public void setImage(FSkinProp color) {
     }
     @Override
     public void setTextColor(int r, int g, int b) {

@@ -188,9 +188,9 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
-    public void updateSingleCard(final CardView card) {
+    public void updateCards(final Iterable<CardView> cards) {
         updateGameView();
-        send(methodName(), card);
+        send(methodName(), cards);
     }
 
     @Override
@@ -366,7 +366,7 @@ public class NetGuiGame extends AbstractGuiGame {
         }
 
         @Override
-        public void setTextColor(final FSkinProp color) {
+        public void setImage(final FSkinProp color) {
             send("btn_" + methodName(), playerView, type, color);
         }
 

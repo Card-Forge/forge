@@ -398,7 +398,7 @@ public class FLabel extends FDisplayObject implements IButton {
     }
 
     @Override
-    public void setTextColor(FSkinProp color) {
+    public void setImage(FSkinProp color) {
         setTextColor(FSkinColor.get(Colors.fromSkinProp(color)));
     }
 

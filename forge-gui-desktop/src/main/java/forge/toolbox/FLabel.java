@@ -644,7 +644,7 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
     }
 
     @Override
-    public void setTextColor(FSkinProp color) {
+    public void setImage(FSkinProp color) {
         setForeground(FSkin.getColor(Colors.fromSkinProp(color)));
     }
 

@@ -3,6 +3,7 @@ package forge.match;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -85,10 +86,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public void updateCards(final Iterable<CardView> cards) {
-        for (final CardView card : cards) {
-            updateSingleCard(card);
-        }
+    public final void updateSingleCard(final CardView card) {
+        updateCards(Collections.singleton(card));
     }
 
     @Override

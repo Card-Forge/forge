@@ -280,7 +280,7 @@ public class FButton extends FDisplayObject implements IButton {
     }
 
     @Override
-    public void setTextColor(FSkinProp color) {
+    public void setImage(FSkinProp color) {
         foreColor = FSkinColor.get(Colors.fromSkinProp(color));
     }
 

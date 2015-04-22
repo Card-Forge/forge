@@ -331,8 +331,10 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public void updateSingleCard(CardView card) {
-        view.updateSingleCard(card);
+    public void updateCards(Iterable<CardView> cards) {
+        for (final CardView card : cards) {
+            view.updateSingleCard(card);
+        }
     }
 
     @Override

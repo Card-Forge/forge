@@ -11,6 +11,6 @@ public interface IButton {
     void setSelected(boolean b0);
     boolean requestFocusInWindow();
     void setCommand(UiCommand command0);
-    void setTextColor(FSkinProp color);
+    void setImage(FSkinProp color);
     void setTextColor(int r, int g, int b);
 }
