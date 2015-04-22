@@ -3,11 +3,9 @@ package forge.screens.home;
 import java.util.ArrayList;
 
 import forge.screens.FScreen;
-import forge.Forge;
 import forge.assets.FSkinImage;
 import forge.deck.FDeckChooser;
 import forge.game.GameType;
-import forge.screens.limited.LoadDraftScreen;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
@@ -27,13 +25,13 @@ public class HomeScreen extends FScreen {
         addButton("New Game", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                NewGameMenu.openPreferredScreen();
+                NewGameMenu.getPreferredScreen().open();
             }
         });
         addButton("Load Game", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                Forge.openScreen(new LoadDraftScreen());
+                LoadGameMenu.getPreferredScreen().open();
             }
         });
         addButton("Play Online", new FEventHandler() {

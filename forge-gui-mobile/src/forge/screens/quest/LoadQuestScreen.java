@@ -13,7 +13,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.FThreads;
-import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -28,6 +27,8 @@ import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
 import forge.screens.FScreen;
+import forge.screens.home.LoadGameMenu;
+import forge.screens.home.NewGameMenu.NewGameScreen;
 import forge.screens.quest.QuestMenu.LaunchReason;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
@@ -51,7 +52,7 @@ public class LoadQuestScreen extends FScreen {
     private final FButton btnDeleteQuest = add(new FButton("Delete"));
 
     public LoadQuestScreen() {
-        super("Load Quest");
+        super(null, LoadGameMenu.getMenu());
 
         lblOldQuests.setFont(FSkinFont.get(12));
         lblOldQuests.setAlignment(HAlignment.CENTER);
@@ -60,7 +61,7 @@ public class LoadQuestScreen extends FScreen {
         btnNewQuest.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                Forge.openScreen(new NewQuestScreen());
+                NewGameScreen.QuestMode.open();
             }
         });
         btnRenameQuest.setFont(btnNewQuest.getFont());

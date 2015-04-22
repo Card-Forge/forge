@@ -7,36 +7,34 @@ import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
-import forge.screens.constructed.ConstructedScreen;
-import forge.screens.gauntlet.NewGauntletScreen;
-import forge.screens.limited.NewDraftScreen;
-import forge.screens.limited.NewSealedScreen;
-import forge.screens.planarconquest.NewConquestScreen;
-import forge.screens.quest.NewQuestScreen;
+import forge.screens.gauntlet.LoadGauntletScreen;
+import forge.screens.limited.LoadDraftScreen;
+import forge.screens.limited.LoadSealedScreen;
+import forge.screens.planarconquest.LoadConquestScreen;
+import forge.screens.quest.LoadQuestScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 
-public class NewGameMenu extends FPopupMenu {
-    public enum NewGameScreen {
-        Constructed("Constructed", ConstructedScreen.class),
-        BoosterDraft("Booster Draft", NewDraftScreen.class),
-        SealedDeck("Sealed Deck", NewSealedScreen.class),
-        QuestMode("Quest Mode", NewQuestScreen.class),
-        PlanarConquest("Planar Conquest", NewConquestScreen.class),
-        Gauntlet("Gauntlet", NewGauntletScreen.class);
+public class LoadGameMenu extends FPopupMenu {
+    public enum LoadGameScreen {
+        BoosterDraft("Booster Draft", LoadDraftScreen.class),
+        SealedDeck("Sealed Deck", LoadSealedScreen.class),
+        QuestMode("Quest Mode", LoadQuestScreen.class),
+        PlanarConquest("Planar Conquest", LoadConquestScreen.class),
+        Gauntlet("Gauntlet", LoadGauntletScreen.class);
  
         private final FMenuItem item;
         private final Class<? extends FScreen> screenClass;
         private FScreen screen;
 
-        private NewGameScreen(final String caption0, final Class<? extends FScreen> screenClass0) {
+        private LoadGameScreen(final String caption0, final Class<? extends FScreen> screenClass0) {
             screenClass = screenClass0;
             item = new FMenuItem(caption0, new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     Forge.back(); //remove current screen from chain
                     open();
-                    setPreferredScreen(NewGameScreen.this);
+                    setPreferredScreen(LoadGameScreen.this);
                 }
             });
         }
@@ -45,7 +43,7 @@ public class NewGameMenu extends FPopupMenu {
             if (screen == null) { //don't initialize screen until it's opened the first time
                 try {
                     screen = screenClass.newInstance();
-                    screen.setHeaderCaption("New Game - " + item.getText());
+                    screen.setHeaderCaption("Load Game - " + item.getText());
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -57,44 +55,44 @@ public class NewGameMenu extends FPopupMenu {
     }
 
     private static final ForgePreferences prefs = FModel.getPreferences();
-    private static final NewGameMenu menu = new NewGameMenu();
-    private static NewGameScreen preferredScreen;
+    private static final LoadGameMenu menu = new LoadGameMenu();
+    private static LoadGameScreen preferredScreen;
 
     static {
         try {
-            preferredScreen = NewGameScreen.valueOf(prefs.getPref(FPref.NEW_GAME_SCREEN));
+            preferredScreen = LoadGameScreen.valueOf(prefs.getPref(FPref.LOAD_GAME_SCREEN));
         }
         catch (Exception ex) {
             ex.printStackTrace();
-            preferredScreen = NewGameScreen.Constructed;
-            prefs.setPref(FPref.NEW_GAME_SCREEN, preferredScreen.name());
+            preferredScreen = LoadGameScreen.BoosterDraft;
+            prefs.setPref(FPref.LOAD_GAME_SCREEN, preferredScreen.name());
             prefs.save();
         }
     }
 
-    public static NewGameScreen getPreferredScreen() {
+    public static LoadGameScreen getPreferredScreen() {
         return preferredScreen;
     }
-    public static void setPreferredScreen(NewGameScreen preferredScreen0) {
+    public static void setPreferredScreen(LoadGameScreen preferredScreen0) {
         if (preferredScreen == preferredScreen0) { return; }
         preferredScreen = preferredScreen0;
-        prefs.setPref(FPref.NEW_GAME_SCREEN, preferredScreen.name());
+        prefs.setPref(FPref.LOAD_GAME_SCREEN, preferredScreen.name());
         prefs.save();
     }
 
-    public static NewGameMenu getMenu() {
+    public static LoadGameMenu getMenu() {
         return menu;
     }
 
-    private NewGameMenu() {
+    private LoadGameMenu() {
     }
 
     @Override
     protected void buildMenu() {
         FScreen currentScreen = Forge.getCurrentScreen();
-        for (NewGameScreen ngs : NewGameScreen.values()) {
-            addItem(ngs.item);
-            ngs.item.setSelected(currentScreen == ngs.screen);
+        for (LoadGameScreen lgs : LoadGameScreen.values()) {
+            addItem(lgs.item);
+            lgs.item.setSelected(currentScreen == lgs.screen);
         }
     }
 }

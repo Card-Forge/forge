@@ -15,6 +15,8 @@ import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.properties.ForgeConstants;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
+import forge.screens.home.LoadGameMenu.LoadGameScreen;
+import forge.screens.home.NewGameMenu.NewGameScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 
@@ -83,10 +85,10 @@ public class ConquestMenu extends FPopupMenu {
 
         //if current quest can't be loaded, open New Conquest or Load Conquest screen based on whether a quest exists
         if (dirConquests.exists() && dirConquests.isDirectory() && dirConquests.list().length > 0) {
-            Forge.openScreen(new LoadConquestScreen());
+            LoadGameScreen.PlanarConquest.open();
         }
         else {
-            Forge.openScreen(new NewConquestScreen());
+            NewGameScreen.PlanarConquest.open();
         }
     }
 
@@ -94,18 +96,6 @@ public class ConquestMenu extends FPopupMenu {
     protected void buildMenu() {
         FScreen currentScreen = Forge.getCurrentScreen();
         addItem(mapItem); mapItem.setSelected(currentScreen == mapScreen);
-        addItem(new FMenuItem("New Conquest", FSkinImage.NEW, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                Forge.openScreen(new NewConquestScreen());
-            }
-        }));
-        addItem(new FMenuItem("Load Conquest", FSkinImage.OPEN, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                Forge.openScreen(new LoadConquestScreen());
-            }
-        }));
         addItem(new FMenuItem("Preferences", FSkinImage.SETTINGS, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {

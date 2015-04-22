@@ -1304,6 +1304,7 @@ forge-gui-mobile/src/forge/screens/constructed/ConstructedScreen.java -text
 forge-gui-mobile/src/forge/screens/gauntlet/LoadGauntletScreen.java -text
 forge-gui-mobile/src/forge/screens/gauntlet/NewGauntletScreen.java -text
 forge-gui-mobile/src/forge/screens/home/HomeScreen.java -text
+forge-gui-mobile/src/forge/screens/home/LoadGameMenu.java -text
 forge-gui-mobile/src/forge/screens/home/NewGameMenu.java -text
 forge-gui-mobile/src/forge/screens/limited/DraftingProcessScreen.java -text
 forge-gui-mobile/src/forge/screens/limited/LoadDraftScreen.java -text

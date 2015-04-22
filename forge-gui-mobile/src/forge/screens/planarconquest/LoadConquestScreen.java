@@ -13,7 +13,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.FThreads;
-import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -28,6 +27,8 @@ import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.properties.ForgeConstants;
 import forge.quest.QuestUtil;
 import forge.screens.FScreen;
+import forge.screens.home.LoadGameMenu;
+import forge.screens.home.NewGameMenu.NewGameScreen;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
@@ -50,7 +51,7 @@ public class LoadConquestScreen extends FScreen {
     private final FButton btnDeleteConquest = add(new FButton("Delete"));
 
     public LoadConquestScreen() {
-        super("Load Planar Conquest");
+        super(null, LoadGameMenu.getMenu());
 
         lblOldConquests.setFont(FSkinFont.get(12));
         lblOldConquests.setAlignment(HAlignment.CENTER);
@@ -59,7 +60,7 @@ public class LoadConquestScreen extends FScreen {
         btnNewConquest.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                Forge.openScreen(new NewConquestScreen());
+                NewGameScreen.PlanarConquest.open();
             }
         });
         btnRenameConquest.setFont(btnNewConquest.getFont());

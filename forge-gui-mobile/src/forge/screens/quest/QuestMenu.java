@@ -21,6 +21,8 @@ import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
+import forge.screens.home.LoadGameMenu.LoadGameScreen;
+import forge.screens.home.NewGameMenu.NewGameScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.ThreadUtil;
@@ -198,10 +200,10 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
 
         //if current quest can't be loaded, open New Quest or Load Quest screen based on whether a quest exists
         if (dirQuests.exists() && dirQuests.isDirectory() && dirQuests.list().length > 0) {
-            Forge.openScreen(new LoadQuestScreen());
+            LoadGameScreen.QuestMode.open();
         }
         else {
-            Forge.openScreen(new NewQuestScreen());
+            NewGameScreen.QuestMode.open();
         }
     }
 
@@ -217,18 +219,6 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         addItem(statsItem); statsItem.setSelected(currentScreen == statsScreen);
         addItem(unlockSetsItem);
         addItem(travelItem);
-        addItem(new FMenuItem("New Quest", FSkinImage.NEW, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                Forge.openScreen(new NewQuestScreen());
-            }
-        }));
-        addItem(new FMenuItem("Load Quest", FSkinImage.OPEN, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                Forge.openScreen(new LoadQuestScreen());
-            }
-        }));
         addItem(new FMenuItem("Preferences", FSkinImage.SETTINGS, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {

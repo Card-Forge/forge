@@ -16,6 +16,7 @@ import forge.itemmanager.filters.ItemFilter;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.LaunchScreen;
+import forge.screens.home.LoadGameMenu;
 import forge.toolbox.FEvent;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
@@ -29,7 +30,7 @@ public class LoadSealedScreen extends LaunchScreen {
         .align(HAlignment.CENTER).font(FSkinFont.get(12)).build());
 
     public LoadSealedScreen() {
-        super("Sealed Deck");
+        super(null, LoadGameMenu.getMenu());
 
         lstDecks.setup(ItemManagerConfig.SEALED_DECKS);
         lstDecks.setItemActivateHandler(new FEventHandler() {

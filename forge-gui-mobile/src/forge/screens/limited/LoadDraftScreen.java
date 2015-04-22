@@ -7,6 +7,7 @@ import forge.Forge;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.LaunchScreen;
 import forge.screens.LoadingOverlay;
+import forge.screens.home.LoadGameMenu;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
@@ -32,7 +33,7 @@ public class LoadDraftScreen extends LaunchScreen {
         .align(HAlignment.CENTER).font(FSkinFont.get(12)).build());
 
     public LoadDraftScreen() {
-        super("Booster Draft");
+        super(null, LoadGameMenu.getMenu());
 
         lstDecks.setup(ItemManagerConfig.DRAFT_DECKS);
         lstDecks.setItemActivateHandler(new FEventHandler() {

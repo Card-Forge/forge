@@ -28,6 +28,7 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.quest.QuestUtil;
 import forge.screens.LaunchScreen;
+import forge.screens.home.LoadGameMenu;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
@@ -51,7 +52,7 @@ public class LoadGauntletScreen extends LaunchScreen {
     private final FButton btnDeleteGauntlet = add(new FButton("Delete"));
 
     public LoadGauntletScreen() {
-        super("Gauntlets");
+        super(null, LoadGameMenu.getMenu());
 
         btnNewGauntlet.setFont(FSkinFont.get(16));
         btnNewGauntlet.setCommand(new FEventHandler() {
