@@ -189,10 +189,8 @@
         <module>forge-core</module>
         <module>forge-game</module>
         <module>forge-ai</module>
-        <module>forge-net</module>
         <module>forge-gui</module>
         <module>forge-gui-desktop</module>
-
     </modules>
 
     <distributionManagement>
