@@ -77,6 +77,13 @@ public class LoadConquestScreen extends LaunchScreen {
                 deleteConquest(lstConquests.getSelectedConquest());
             }
         });
+    }
+
+    @Override
+    public void onActivate() {
+        lblOldConquests.setText("Loading Existing Quests...");
+        lstConquests.clear();
+        revalidate();
 
         FThreads.invokeInBackgroundThread(new Runnable() {
             @Override
