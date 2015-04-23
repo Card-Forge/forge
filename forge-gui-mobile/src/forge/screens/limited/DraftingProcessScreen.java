@@ -2,13 +2,13 @@ package forge.screens.limited;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.Forge;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.FDeckEditor;
 import forge.deck.io.DeckPreferences;
 import forge.limited.BoosterDraft;
 import forge.model.FModel;
+import forge.screens.home.LoadGameMenu.LoadGameScreen;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
 
@@ -87,7 +87,7 @@ public class DraftingProcessScreen extends FDeckEditor {
         getEditorType().getController().load("", name);
         DeckPreferences.setDraftDeck(name);
 
-        Forge.setBackScreen(new LoadDraftScreen()); //set load draft screen to be opened when user done editing deck
+        LoadGameScreen.BoosterDraft.setAsBackScreen(); //set load draft screen to be opened when user done editing deck
 
         //show header for main deck and sideboard when finished drafting
         deckHeader.setVisible(true);

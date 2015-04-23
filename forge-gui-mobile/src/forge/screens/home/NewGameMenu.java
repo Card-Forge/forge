@@ -40,8 +40,8 @@ public class NewGameMenu extends FPopupMenu {
                 }
             });
         }
-
-        public void open() {
+        
+        private void initializeScreen() {
             if (screen == null) { //don't initialize screen until it's opened the first time
                 try {
                     screen = screenClass.newInstance();
@@ -52,7 +52,16 @@ public class NewGameMenu extends FPopupMenu {
                     return;
                 }
             }
+        }
+
+        public void open() {
+            initializeScreen();
             Forge.openScreen(screen);
+        }
+
+        public void setAsBackScreen() {
+            initializeScreen();
+            Forge.setBackScreen(screen);
         }
     }
 
