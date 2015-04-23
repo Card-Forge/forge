@@ -152,7 +152,7 @@ public class LoadQuestScreen extends LaunchScreen {
         float y = startY + 2 * PADDING;
         lblOldQuests.setBounds(0, y, width, lblOldQuests.getPreferredHeight(width));
         y += lblOldQuests.getHeight() + PADDING;
-        lstQuests.setBounds(0, y, width, height - y - buttonHeight - 2 * PADDING);
+        lstQuests.setBounds(0, y, width, height - y - buttonHeight - PADDING);
         y += lstQuests.getHeight() + PADDING;
 
         float x = 0;

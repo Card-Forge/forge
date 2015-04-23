@@ -151,7 +151,7 @@ public class LoadConquestScreen extends LaunchScreen {
         float y = startY + 2 * PADDING;
         lblOldConquests.setBounds(0, y, width, lblOldConquests.getPreferredHeight(width));
         y += lblOldConquests.getHeight() + PADDING;
-        lstConquests.setBounds(0, y, width, height - y - buttonHeight - 2 * PADDING);
+        lstConquests.setBounds(0, y, width, height - y - buttonHeight - PADDING);
         y += lstConquests.getHeight() + PADDING;
 
         float x = 0;
