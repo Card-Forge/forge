@@ -362,7 +362,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     @Override
     protected void onOk() {
-        if (supportAutoPay()) {
+        if (supportAutoPay() && !locked) { //prevent AI taking over from double-clicking Auto
+            locked = true;
             //use AI utility to automatically pay mana cost if possible
             final Runnable proc = new Runnable() {
                 @Override
