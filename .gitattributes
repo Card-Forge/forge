@@ -1299,6 +1299,7 @@ forge-gui-mobile/src/forge/screens/LaunchScreen.java -text
 forge-gui-mobile/src/forge/screens/LoadingOverlay.java -text
 forge-gui-mobile/src/forge/screens/SplashScreen.java -text
 forge-gui-mobile/src/forge/screens/TabPageScreen.java -text
+forge-gui-mobile/src/forge/screens/achievements/AchievementsScreen.java -text
 forge-gui-mobile/src/forge/screens/constructed/AvatarSelector.java -text
 forge-gui-mobile/src/forge/screens/constructed/ConstructedScreen.java -text
 forge-gui-mobile/src/forge/screens/gauntlet/LoadGauntletScreen.java -text
@@ -1356,7 +1357,6 @@ forge-gui-mobile/src/forge/screens/quest/QuestPrefsScreen.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestSpellShopScreen.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestStatsScreen.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestTournamentsScreen.java -text
-forge-gui-mobile/src/forge/screens/settings/AchievementsPage.java -text
 forge-gui-mobile/src/forge/screens/settings/FilesPage.java -text
 forge-gui-mobile/src/forge/screens/settings/GuiDownloader.java -text
 forge-gui-mobile/src/forge/screens/settings/SettingsPage.java -text

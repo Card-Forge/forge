@@ -6,6 +6,7 @@ import forge.screens.FScreen;
 import forge.assets.FSkinImage;
 import forge.deck.FDeckChooser;
 import forge.game.GameType;
+import forge.screens.achievements.AchievementsScreen;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
@@ -49,6 +50,7 @@ public class HomeScreen extends FScreen {
         addButton("Achievements", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
+                AchievementsScreen.show();
             }
         });
         addButton("Settings", new FEventHandler() {

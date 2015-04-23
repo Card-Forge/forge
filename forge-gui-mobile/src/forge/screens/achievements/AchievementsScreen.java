@@ -1,9 +1,10 @@
-package forge.screens.settings;
+package forge.screens.achievements;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Rectangle;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.achievement.Achievement;
 import forge.achievement.AchievementCollection;
@@ -17,7 +18,6 @@ import forge.card.CardZoom;
 import forge.item.IPaperCard;
 import forge.menu.FDropDown;
 import forge.screens.FScreen;
-import forge.screens.TabPageScreen.TabPage;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FEvent;
 import forge.toolbox.FLabel;
@@ -25,7 +25,7 @@ import forge.toolbox.FScrollPane;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Utils;
 
-public class AchievementsPage extends TabPage<SettingsScreen> {
+public class AchievementsScreen extends FScreen {
     private static final float TROPHY_PADDING = 45;
     private static final float PADDING = Utils.scale(5);
     private static final float SELECTED_BORDER_THICKNESS = Utils.scale(1);
@@ -35,12 +35,21 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
     private static final FSkinFont DESC_FONT = FSkinFont.get(12);
     private static final FSkinColor TEXT_COLOR = FLabel.DEFAULT_TEXT_COLOR;
     private static final FSkinColor NOT_EARNED_COLOR = TEXT_COLOR.alphaColor(0.5f);
+    
+    private static AchievementsScreen achievementsScreen; //keep settings screen around so scroll positions maintained
+
+    public static void show() {
+        if (achievementsScreen == null) {
+            achievementsScreen = new AchievementsScreen();
+        }
+        Forge.openScreen(achievementsScreen);
+    }
 
     private final FComboBox<AchievementCollection> cbCollections = add(new FComboBox<AchievementCollection>());
     private final TrophyCase trophyCase = add(new TrophyCase());
 
-    protected AchievementsPage() {
-        super("Achievements", FSkinImage.QUEST_BOX);
+    private AchievementsScreen() {
+        super("Achievements");
 
         AchievementCollection.buildComboBox(cbCollections);
 
@@ -56,9 +65,9 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
     }
 
     @Override
-    protected void doLayout(float width, float height) {
+    protected void doLayout(float startY, float width, float height) {
         float x = PADDING;
-        float y = PADDING;
+        float y = startY + PADDING;
         width -= 2 * x;
 
         cbCollections.setBounds(x, y, width, cbCollections.getHeight());
