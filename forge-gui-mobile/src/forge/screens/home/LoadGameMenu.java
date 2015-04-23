@@ -1,6 +1,8 @@
 package forge.screens.home;
 
 import forge.Forge;
+import forge.assets.FImage;
+import forge.assets.FSkinImage;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
@@ -17,19 +19,19 @@ import forge.toolbox.FEvent.FEventHandler;
 
 public class LoadGameMenu extends FPopupMenu {
     public enum LoadGameScreen {
-        BoosterDraft("Booster Draft", LoadDraftScreen.class),
-        SealedDeck("Sealed Deck", LoadSealedScreen.class),
-        QuestMode("Quest Mode", LoadQuestScreen.class),
-        PlanarConquest("Planar Conquest", LoadConquestScreen.class),
-        Gauntlet("Gauntlet", LoadGauntletScreen.class);
+        BoosterDraft("Booster Draft", FSkinImage.HAND, LoadDraftScreen.class),
+        SealedDeck("Sealed Deck", FSkinImage.PACK, LoadSealedScreen.class),
+        QuestMode("Quest Mode", FSkinImage.QUEST_ZEP, LoadQuestScreen.class),
+        PlanarConquest("Planar Conquest", FSkinImage.QUEST_MAP, LoadConquestScreen.class),
+        Gauntlet("Gauntlet", FSkinImage.ALPHASTRIKE, LoadGauntletScreen.class);
  
         private final FMenuItem item;
         private final Class<? extends FScreen> screenClass;
         private FScreen screen;
 
-        private LoadGameScreen(final String caption0, final Class<? extends FScreen> screenClass0) {
+        private LoadGameScreen(final String caption0, final FImage icon0, final Class<? extends FScreen> screenClass0) {
             screenClass = screenClass0;
-            item = new FMenuItem(caption0, new FEventHandler() {
+            item = new FMenuItem(caption0, icon0, new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     Forge.back(); //remove current screen from chain
