@@ -62,21 +62,7 @@ public class ConquestMenu extends FPopupMenu {
                     }
                     else {
                         mapScreen.update();
-                        if (reason == LaunchReason.LoadConquest) {
-                            Forge.back();
-                            if (Forge.onHomeScreen()) { //open map screen if Load Conquest screen was opening direct from home screen
-                                Forge.openScreen(mapScreen);
-                            }
-                        }
-                        else {
-                            Forge.back();
-                            if (Forge.getCurrentScreen() instanceof LoadConquestScreen) {
-                                Forge.back(); //remove LoadConquestScreen from screen stack
-                            }
-                            if (Forge.onHomeScreen()) { //open map screen if New Conquest screen was opening direct from home screen
-                                Forge.openScreen(mapScreen);
-                            }
-                        }
+                        Forge.openScreen(mapScreen);
                     }
                 }
             });

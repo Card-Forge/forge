@@ -26,7 +26,7 @@ import forge.planarconquest.ConquestDataIO;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.properties.ForgeConstants;
 import forge.quest.QuestUtil;
-import forge.screens.FScreen;
+import forge.screens.LaunchScreen;
 import forge.screens.home.LoadGameMenu;
 import forge.screens.home.NewGameMenu.NewGameScreen;
 import forge.screens.settings.SettingsScreen;
@@ -39,7 +39,7 @@ import forge.util.ThreadUtil;
 import forge.util.Utils;
 import forge.util.gui.SOptionPane;
 
-public class LoadConquestScreen extends FScreen {
+public class LoadConquestScreen extends LaunchScreen {
     private static final float PADDING = Utils.AVG_FINGER_HEIGHT * 0.1f;
     private static final FSkinColor OLD_CONQUESTS_BACK_COLOR = FSkinColor.get(Colors.CLR_INACTIVE).getContrastColor(20);
     private static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
@@ -144,7 +144,7 @@ public class LoadConquestScreen extends FScreen {
     }
 
     @Override
-    protected void doLayout(float startY, float width, float height) {
+    protected void doLayoutAboveBtnStart(float startY, float width, float height) {
         float buttonWidth = (width - 2 * PADDING) / 3;
         float buttonHeight = btnNewConquest.getAutoSizeBounds().height * 1.2f;
 
@@ -224,6 +224,16 @@ public class LoadConquestScreen extends FScreen {
                 lstConquests.removeConquest(quest);
             }
         });
+    }
+
+    @Override
+    protected void startMatch() {
+        changeConquest();
+    }
+
+    @Override
+    protected boolean buildLaunchParams(LaunchParams launchParams) {
+        return false; //this override isn't needed
     }
 
     private class ConquestFileLister extends FList<ConquestData> {

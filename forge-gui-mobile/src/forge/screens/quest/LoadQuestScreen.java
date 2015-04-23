@@ -26,7 +26,7 @@ import forge.quest.QuestUtil;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
-import forge.screens.FScreen;
+import forge.screens.LaunchScreen;
 import forge.screens.home.LoadGameMenu;
 import forge.screens.home.NewGameMenu.NewGameScreen;
 import forge.screens.quest.QuestMenu.LaunchReason;
@@ -40,7 +40,7 @@ import forge.util.ThreadUtil;
 import forge.util.Utils;
 import forge.util.gui.SOptionPane;
 
-public class LoadQuestScreen extends FScreen {
+public class LoadQuestScreen extends LaunchScreen {
     private static final float PADDING = Utils.AVG_FINGER_HEIGHT * 0.1f;
     private static final FSkinColor OLD_QUESTS_BACK_COLOR = FSkinColor.get(Colors.CLR_INACTIVE).getContrastColor(20);
     private static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
@@ -145,7 +145,7 @@ public class LoadQuestScreen extends FScreen {
     }
 
     @Override
-    protected void doLayout(float startY, float width, float height) {
+    protected void doLayoutAboveBtnStart(float startY, float width, float height) {
         float buttonWidth = (width - 2 * PADDING) / 3;
         float buttonHeight = btnNewQuest.getAutoSizeBounds().height * 1.2f;
 
@@ -227,6 +227,16 @@ public class LoadQuestScreen extends FScreen {
                 lstQuests.removeQuest(quest);
             }
         });
+    }
+
+    @Override
+    protected void startMatch() {
+        changeQuest();
+    }
+
+    @Override
+    protected boolean buildLaunchParams(LaunchParams launchParams) {
+        return false; //this override isn't needed
     }
 
     private class QuestFileLister extends FList<QuestData> {
