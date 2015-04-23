@@ -124,6 +124,7 @@ public class LoadConquestScreen extends LaunchScreen {
                         lblOldConquests.setText("Old conquest data? Put into \""
                                 + ForgeConstants.CONQUEST_SAVE_DIR.replace('\\', '/') + "\" and restart Forge.");
                         revalidate();
+                        lstConquests.scrollIntoView(lstConquests.selectedIndex);
                     }
                 });
             }

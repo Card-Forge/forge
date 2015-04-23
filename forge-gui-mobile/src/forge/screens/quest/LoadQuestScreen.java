@@ -78,6 +78,13 @@ public class LoadQuestScreen extends LaunchScreen {
                 deleteQuest(lstQuests.getSelectedQuest());
             }
         });
+    }
+
+    @Override
+    public void onActivate() {
+        lblOldQuests.setText("Loading Existing Quests...");
+        lstQuests.clear();
+        revalidate();
 
         FThreads.invokeInBackgroundThread(new Runnable() {
             @Override
@@ -125,6 +132,7 @@ public class LoadQuestScreen extends LaunchScreen {
                         lblOldQuests.setText("Old quest data? Put into \""
                                 + ForgeConstants.QUEST_SAVE_DIR.replace('\\', '/') + "\" and restart Forge.");
                         revalidate();
+                        lstQuests.scrollIntoView(lstQuests.selectedIndex);
                     }
                 });
             }
