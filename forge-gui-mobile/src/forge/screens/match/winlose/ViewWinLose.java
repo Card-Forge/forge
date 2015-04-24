@@ -78,7 +78,7 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
             control = new LimitedWinLose(this, game0);
             break;
         case Gauntlet:
-        case DeckEditorTest:
+        case DeckManager:
             control = new GauntletWinLose(this, game0);
             break;
         default: // will catch it after switch

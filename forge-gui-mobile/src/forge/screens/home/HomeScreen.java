@@ -41,10 +41,10 @@ public class HomeScreen extends FScreen {
             }
         });
         buttons.get(buttons.size() - 1).setEnabled(false);
-        addButton("Deck Editor", new FEventHandler() {
+        addButton("Deck Manager", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                FDeckChooser.promptForDeck("Deck Editor", GameType.DeckEditorTest, false, null);
+                FDeckChooser.promptForDeck("Deck Manager", GameType.DeckManager, false, null);
             }
         });
         addButton("Achievements", new FEventHandler() {

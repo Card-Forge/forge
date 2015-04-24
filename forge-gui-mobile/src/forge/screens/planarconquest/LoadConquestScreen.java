@@ -81,7 +81,7 @@ public class LoadConquestScreen extends LaunchScreen {
 
     @Override
     public void onActivate() {
-        lblOldConquests.setText("Loading Existing Quests...");
+        lblOldConquests.setText("Loading Existing Conquests...");
         lstConquests.clear();
         revalidate();
 

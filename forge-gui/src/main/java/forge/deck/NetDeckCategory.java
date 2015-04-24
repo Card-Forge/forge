@@ -47,7 +47,7 @@ public class NetDeckCategory extends StorageBase<Deck> {
         switch (gameType) {
         case Constructed:
         case Gauntlet:
-        case DeckEditorTest:
+        case DeckManager:
             if (constructed == null) {
                 constructed = loadCategories(ForgeConstants.NET_DECKS_LIST_FILE);
             }
