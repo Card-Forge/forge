@@ -18,7 +18,7 @@ import forge.util.Utils;
 public class NewSealedScreen extends LaunchScreen {
     private static final float PADDING = Utils.scale(10);
 
-    private final FTextArea lblSealedDesc = add(new FTextArea(false,
+    private final FTextArea lblDesc = add(new FTextArea(false,
             "In Sealed mode, you build a deck from booster packs (maximum 10).\n\n" +
             "Build a deck from the cards you receive. A number of AI opponents will do the same.\n\n" +
             "Then, play against each of the AI opponents."));
@@ -26,8 +26,8 @@ public class NewSealedScreen extends LaunchScreen {
     public NewSealedScreen() {
         super(null, NewGameMenu.getMenu());
 
-        lblSealedDesc.setFont(FSkinFont.get(12));
-        lblSealedDesc.setTextColor(FLabel.INLINE_LABEL_COLOR);
+        lblDesc.setFont(FSkinFont.get(12));
+        lblDesc.setTextColor(FLabel.INLINE_LABEL_COLOR);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class NewSealedScreen extends LaunchScreen {
         float y = startY + PADDING;
         float w = width - 2 * PADDING;
         float h = height - y - PADDING;
-        lblSealedDesc.setBounds(x, y, w, h);
+        lblDesc.setBounds(x, y, w, h);
     }
 
     @Override

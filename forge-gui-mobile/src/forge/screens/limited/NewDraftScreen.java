@@ -17,7 +17,7 @@ import forge.util.gui.SGuiChoose;
 public class NewDraftScreen extends LaunchScreen {
     private static final float PADDING = Utils.scale(10);
 
-    private final FTextArea lblDraftDesc = add(new FTextArea(false,
+    private final FTextArea lblDesc = add(new FTextArea(false,
             "In Draft mode, three booster packs are rotated around eight players.\n\n" +
             "Build a deck from the cards you choose. The AI will do the same.\n\n" +
             "Then, play against any number of the AI opponents."));
@@ -25,8 +25,8 @@ public class NewDraftScreen extends LaunchScreen {
     public NewDraftScreen() {
         super(null, NewGameMenu.getMenu());
 
-        lblDraftDesc.setFont(FSkinFont.get(12));
-        lblDraftDesc.setTextColor(FLabel.INLINE_LABEL_COLOR);
+        lblDesc.setFont(FSkinFont.get(12));
+        lblDesc.setTextColor(FLabel.INLINE_LABEL_COLOR);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class NewDraftScreen extends LaunchScreen {
         float y = startY + PADDING;
         float w = width - 2 * PADDING;
         float h = height - y - PADDING;
-        lblDraftDesc.setBounds(x, y, w, h);
+        lblDesc.setBounds(x, y, w, h);
     }
 
     @Override

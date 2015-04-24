@@ -5,31 +5,48 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import forge.Forge;
+import forge.assets.FSkinFont;
 import forge.deck.Deck;
 import forge.deck.DeckType;
 import forge.deck.FDeckChooser;
 import forge.game.GameType;
+import forge.game.player.RegisteredPlayer;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gauntlet.GauntletUtil;
 import forge.model.FModel;
+import forge.player.GamePlayerUtil;
 import forge.screens.LaunchScreen;
 import forge.screens.home.NewGameMenu;
-import forge.screens.home.LoadGameMenu.LoadGameScreen;
+import forge.toolbox.FLabel;
+import forge.toolbox.FTextArea;
 import forge.toolbox.GuiChoose;
 import forge.toolbox.ListChooser;
 import forge.util.Callback;
+import forge.util.Utils;
 
 public class NewGauntletScreen extends LaunchScreen {
+    private static final float PADDING = Utils.scale(10);
+
+    private final FTextArea lblDesc = add(new FTextArea(false,
+            "In Gauntlet mode, you select a deck and play against multiple opponents.\n\n" +
+            "Configure how many opponents you wish to face and what decks or types of decks they will play.\n\n" +
+            "Then, try to beat all AI opponents without losing a match."));
+
     public NewGauntletScreen() {
         super(null, NewGameMenu.getMenu());
 
+        lblDesc.setFont(FSkinFont.get(12));
+        lblDesc.setTextColor(FLabel.INLINE_LABEL_COLOR);
     }
 
     @Override
     protected void doLayoutAboveBtnStart(float startY, float width, float height) {
-        
+        float x = PADDING;
+        float y = startY + PADDING;
+        float w = width - 2 * PADDING;
+        float h = height - y - PADDING;
+        lblDesc.setBounds(x, y, w, h);
     }
 
     @Override
@@ -54,8 +71,6 @@ public class NewGauntletScreen extends LaunchScreen {
                     createGauntletContest();
                     break;
                 }
-                Forge.back(); //prevent going back to this screen from Load Gauntlet screen
-                LoadGameScreen.Gauntlet.open();
             }
         });
     }
@@ -88,7 +103,8 @@ public class NewGauntletScreen extends LaunchScreen {
                             public void run(Deck userDeck) {
                                 if (userDeck == null) { return; }
 
-                                GauntletUtil.createQuickGauntlet(userDeck, numOpponents, allowedDeckTypes);
+                                GauntletData gauntlet = GauntletUtil.createQuickGauntlet(userDeck, numOpponents, allowedDeckTypes);
+                                launchGauntlet(gauntlet);
                             }
                         });
                     }
@@ -133,8 +149,7 @@ public class NewGauntletScreen extends LaunchScreen {
 
                             gauntlet.setUserDeck(userDeck);
                             GauntletUtil.setDefaultGauntletName(gauntlet, GauntletIO.PREFIX_CUSTOM);
-                            FModel.setGauntletData(gauntlet);
-                            gauntlet.reset();
+                            launchGauntlet(gauntlet);
                         }
                     });
                 }
@@ -168,11 +183,22 @@ public class NewGauntletScreen extends LaunchScreen {
                         gauntlet.setEventNames(new ArrayList<String>(contest.getEventNames()));
                         gauntlet.setUserDeck(userDeck);
                         GauntletUtil.setDefaultGauntletName(gauntlet, contest.getDisplayName() + "_");
-                        FModel.setGauntletData(gauntlet);
-                        gauntlet.reset();
+                        launchGauntlet(gauntlet);
                     }
                 });
             }
         });
+    }
+
+    private void launchGauntlet(GauntletData gauntlet) {
+        if (gauntlet == null) { return; }
+        FModel.setGauntletData(gauntlet);
+        gauntlet.reset();
+
+        RegisteredPlayer humanPlayer = new RegisteredPlayer(gauntlet.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
+        List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
+        players.add(humanPlayer);
+        players.add(new RegisteredPlayer(gauntlet.getDecks().get(gauntlet.getCompleted())).setPlayer(GamePlayerUtil.createAiPlayer()));
+        gauntlet.startRound(players, humanPlayer);
     }
 }
