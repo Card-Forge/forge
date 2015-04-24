@@ -27,6 +27,7 @@ import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.TextUtil;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,9 +41,11 @@ import com.google.common.collect.Lists;
  * @author Forge
  * @version $Id$
  */
-public class Cost {
+public class Cost implements Serializable {
+    private static final long serialVersionUID = -8483455045558996502L;
+
     private boolean isAbility = true;
-    private final ArrayList<CostPart> costParts = new ArrayList<CostPart>();
+    private final List<CostPart> costParts = new ArrayList<CostPart>();
 
     private boolean tapCost = false;
 

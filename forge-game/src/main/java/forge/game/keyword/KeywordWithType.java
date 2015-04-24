@@ -1,6 +1,8 @@
 package forge.game.keyword;
 
 public class KeywordWithType extends KeywordInstance<KeywordWithType> {
+    private static final long serialVersionUID = 4959671775512932812L;
+
     private String type;
 
     @Override

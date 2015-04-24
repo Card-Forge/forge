@@ -1,6 +1,8 @@
 package forge.game.keyword;
 
 public class Cycling extends KeywordWithCost {
+    private static final long serialVersionUID = 8536162621947386491L;
+
     private String type;
 
     public Cycling() {

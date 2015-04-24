@@ -1,6 +1,10 @@
 package forge.game.keyword;
 
-public abstract class KeywordInstance<T extends KeywordInstance<?>> {
+import java.io.Serializable;
+
+public abstract class KeywordInstance<T extends KeywordInstance<?>> implements Serializable {
+    private static final long serialVersionUID = -8515507185693606389L;
+
     private Keyword keyword;
 
     public Keyword getKeyword() {

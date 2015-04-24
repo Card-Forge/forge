@@ -1,6 +1,8 @@
 package forge.game.keyword;
 
 public class UndefinedKeyword extends KeywordInstance<UndefinedKeyword> {
+    private static final long serialVersionUID = 1016294080901302718L;
+
     private String keyword;
 
     @Override
