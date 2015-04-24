@@ -90,6 +90,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
 
         NEW_GAME_SCREEN("Constructed"),
         LOAD_GAME_SCREEN("BoosterDraft"),
+        PLAY_ONLINE_SCREEN("Lobby"),
 
         SUBMENU_CURRENTMENU ("CONSTRUCTED"),
         SUBMENU_SANCTIONED ("true"),

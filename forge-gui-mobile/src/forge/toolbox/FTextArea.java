@@ -15,6 +15,7 @@ public class FTextArea extends FScrollPane {
     private Vector2 insets;
     private FSkinColor textColor;
     private final TextRenderer renderer;
+    private boolean centerVertically;
 
     public FTextArea(boolean parseReminderText0) {
         this(parseReminderText0, "");
@@ -41,6 +42,13 @@ public class FTextArea extends FScrollPane {
     }
     public void setAlignment(HAlignment alignment0) {
         alignment = alignment0;
+    }
+
+    public boolean getCenterVertically() {
+        return centerVertically;
+    }
+    public void setCenterVertically(boolean centerVertically0) {
+        centerVertically = centerVertically0;
     }
 
     public FSkinFont getFont() {
@@ -71,6 +79,6 @@ public class FTextArea extends FScrollPane {
 
     @Override
     protected void drawBackground(Graphics g) {
-        renderer.drawText(g, text, font, textColor, insets.x - getScrollLeft(), insets.y - getScrollTop(), getScrollWidth() - 2 * insets.x, getScrollHeight() - 2 * insets.y, 0, getHeight(), true, alignment, false);
+        renderer.drawText(g, text, font, textColor, insets.x - getScrollLeft(), insets.y - getScrollTop(), getScrollWidth() - 2 * insets.x, getScrollHeight() - 2 * insets.y, 0, getHeight(), true, alignment, centerVertically);
     }
 }

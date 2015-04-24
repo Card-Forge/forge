@@ -7,6 +7,7 @@ import forge.assets.FSkinImage;
 import forge.deck.FDeckChooser;
 import forge.game.GameType;
 import forge.screens.achievements.AchievementsScreen;
+import forge.screens.online.OnlineMenu;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
@@ -38,9 +39,9 @@ public class HomeScreen extends FScreen {
         addButton("Play Online", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
+                OnlineMenu.getPreferredScreen().open();
             }
         });
-        buttons.get(buttons.size() - 1).setEnabled(false);
         addButton("Deck Manager", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
