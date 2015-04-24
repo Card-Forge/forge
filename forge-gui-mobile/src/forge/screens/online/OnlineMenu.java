@@ -14,8 +14,8 @@ import forge.toolbox.FEvent.FEventHandler;
 
 public class OnlineMenu extends FPopupMenu {
     public enum OnlineScreen {
-        Lobby("Lobby", FSkinImage.DECKLIST, OnlineLobbyScreen.class),
-        Chat("Chat", FSkinImage.HAND, OnlineChatScreen.class);
+        Lobby("Lobby", FSkinImage.FAVICON, OnlineLobbyScreen.class),
+        Chat("Chat", FSkinImage.QUEST_NOTES, OnlineChatScreen.class);
  
         private final FMenuItem item;
         private final Class<? extends FScreen> screenClass;
