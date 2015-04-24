@@ -17,6 +17,11 @@
  */
 package forge.game.cost;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.CardTraitBase;
@@ -27,12 +32,6 @@ import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.TextUtil;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.google.common.collect.Lists;
-
 /**
  * <p>
  * Cost class.
@@ -41,9 +40,7 @@ import com.google.common.collect.Lists;
  * @author Forge
  * @version $Id$
  */
-public class Cost implements Serializable {
-    private static final long serialVersionUID = -8483455045558996502L;
-
+public class Cost {
     private boolean isAbility = true;
     private final List<CostPart> costParts = new ArrayList<CostPart>();
 

@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.ImmutableMultiset;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -18,7 +19,6 @@ import forge.card.MagicColor;
 import forge.game.GameEntityView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
-import forge.game.keyword.KeywordCollection.KeywordCollectionView;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.trackable.TrackableCollection;
@@ -184,24 +184,23 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.NumDrawnThisTurn, p.getNumDrawnThisTurn());
     }
 
-    public KeywordCollectionView getKeywords() {
+    public ImmutableMultiset<String> getKeywords() {
         return get(TrackableProperty.Keywords);
     }
     public List<String> getDisplayableKeywords() {
         final List<String> allKws;
-        final KeywordCollectionView kws = getKeywords();
+        final ImmutableMultiset<String> kws = getKeywords();
         synchronized (kws) {
-            allKws = Lists.newArrayList(kws);
+            allKws = Lists.newArrayList(kws.elementSet());
         }
-        while (allKws.remove("CanSeeOpponentsFaceDownCards")) {
-        }
+        allKws.remove("CanSeeOpponentsFaceDownCards");
         return allKws;
     }
     public boolean hasKeyword(String keyword) {
         return getKeywords().contains(keyword);
     }
     void updateKeywords(Player p) {
-        set(TrackableProperty.Keywords, p.getKeywords());
+        set(TrackableProperty.Keywords, ImmutableMultiset.copyOf(p.getKeywords()));
     }
 
     public CardView getCommander() {

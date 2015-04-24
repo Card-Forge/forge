@@ -3,8 +3,6 @@ package forge.game.keyword;
 import forge.game.cost.Cost;
 
 public class KeywordWithCostAndType extends KeywordInstance<KeywordWithCostAndType> {
-    private static final long serialVersionUID = -5457093564089570731L;
-
     private Cost cost;
     private String type;
 
