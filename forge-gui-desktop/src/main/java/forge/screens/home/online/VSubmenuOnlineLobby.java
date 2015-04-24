@@ -75,6 +75,11 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby> {
             }
         });
         pnlJoin.add(btnJoin, "span 2, w 200!, h 50!");
+
+        if (container.isShowing()) {
+            container.validate();
+            container.repaint();
+        }
     }
 
     @Override
