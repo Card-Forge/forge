@@ -547,6 +547,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         protected abstract void initialize();
+
+        @Override
+        public boolean fling(float velocityX, float velocityY) {
+            return false; //prevent left/right swipe to change tabs since it doesn't play nice with item managers
+        }
     }
 
     protected static abstract class CardManagerPage extends DeckEditorPage {
