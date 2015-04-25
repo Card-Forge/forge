@@ -565,6 +565,16 @@ public class FDeckChooser extends FScreen {
             if (lstDecks.getGameType() == GameType.DeckManager) {
                 //handle special case of Deck Editor screen where this button will start a game with the deck
                 btnRandom.setText("Test Deck");
+
+                switch (selectedDeckType) {
+                case SCHEME_DECKS:
+                case PLANAR_DECKS: //don't allow testing secondary decks this way
+                    btnRandom.setEnabled(false);
+                    break;
+                default:
+                    btnRandom.setEnabled(true);
+                    break;
+                }
             }
             else {
                 btnRandom.setText("Random Deck");
