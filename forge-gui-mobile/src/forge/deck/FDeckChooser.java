@@ -130,6 +130,8 @@ public class FDeckChooser extends FScreen {
                                 case COMMANDER_DECK:
                                 case SCHEME_DECKS:
                                 case PLANAR_DECKS:
+                                case DRAFT_DECKS:
+                                case SEALED_DECKS:
                                     break;
                                 default:
                                     setSelectedDeckType(DeckType.CONSTRUCTED_DECK);
@@ -226,6 +228,12 @@ public class FDeckChooser extends FScreen {
                 case PLANAR_DECKS:
                     lstDecks.setSelectedString(DeckPreferences.getPlanarDeck());
                     break;
+                case DRAFT_DECKS:
+                    lstDecks.setSelectedString(DeckPreferences.getDraftDeck());
+                    break;
+                case SEALED_DECKS:
+                    lstDecks.setSelectedString(DeckPreferences.getSealedDeck());
+                    break;
                 default:
                     lstDecks.setSelectedString(DeckPreferences.getCurrentDeck());
                     break;
@@ -248,6 +256,8 @@ public class FDeckChooser extends FScreen {
         case COMMANDER_DECK:
         case SCHEME_DECKS:
         case PLANAR_DECKS:
+        case DRAFT_DECKS:
+        case SEALED_DECKS:
             editDeck(deck);
             break;
         default:
@@ -289,6 +299,10 @@ public class FDeckChooser extends FScreen {
                 return EditorType.Archenemy;
             case PLANAR_DECKS:
                 return EditorType.Planechase;
+            case DRAFT_DECKS:
+                return EditorType.Draft;
+            case SEALED_DECKS:
+                return EditorType.Sealed;
             default:
                 return EditorType.Constructed;
             }
@@ -314,6 +328,12 @@ public class FDeckChooser extends FScreen {
             break;
         case Planechase:
             DeckPreferences.setPlanarDeck(deck.getName());
+            break;
+        case Draft:
+            DeckPreferences.setDraftDeck(deck.getName());
+            break;
+        case Sealed:
+            DeckPreferences.setSealedDeck(deck.getName());
             break;
         default:
             DeckPreferences.setCurrentDeck(deck.getName());
@@ -350,6 +370,8 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.COMMANDER_DECK);
                 cmbDeckTypes.addItem(DeckType.SCHEME_DECKS);
                 cmbDeckTypes.addItem(DeckType.PLANAR_DECKS);
+                cmbDeckTypes.addItem(DeckType.DRAFT_DECKS);
+                cmbDeckTypes.addItem(DeckType.SEALED_DECKS);
                 cmbDeckTypes.addItem(DeckType.PRECONSTRUCTED_DECK);
                 cmbDeckTypes.addItem(DeckType.QUEST_OPPONENT_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_DECK);
@@ -455,6 +477,14 @@ public class FDeckChooser extends FScreen {
         case PLANAR_DECKS:
             pool = DeckProxy.getAllPlanarDecks();
             config = ItemManagerConfig.PLANAR_DECKS;
+            break;
+        case DRAFT_DECKS:
+            pool = DeckProxy.getAllDraftDecks();
+            config = ItemManagerConfig.DRAFT_DECKS;
+            break;
+        case SEALED_DECKS:
+            pool = DeckProxy.getAllSealedDecks();
+            config = ItemManagerConfig.SEALED_DECKS;
             break;
         case COLOR_DECK:
             maxSelections = 3;

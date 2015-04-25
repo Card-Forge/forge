@@ -43,7 +43,7 @@ public class LoadSealedScreen extends LaunchScreen {
 
     @Override
     public void onActivate() {
-        lstDecks.setPool(DeckProxy.getAllSealedDecks(FModel.getDecks().getSealed()));
+        lstDecks.setPool(DeckProxy.getAllSealedDecks());
         lstDecks.setSelectedString(DeckPreferences.getSealedDeck());
     }
 

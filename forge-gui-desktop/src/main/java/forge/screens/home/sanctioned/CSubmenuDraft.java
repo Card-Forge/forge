@@ -85,7 +85,7 @@ public enum CSubmenuDraft implements ICDoc {
         final VSubmenuDraft view = VSubmenuDraft.SINGLETON_INSTANCE;
         final JButton btnStart = view.getBtnStart();
 
-        view.getLstDecks().setPool(DeckProxy.getDraftDecks(FModel.getDecks().getDraft()));
+        view.getLstDecks().setPool(DeckProxy.getAllDraftDecks());
         view.getLstDecks().setup(ItemManagerConfig.DRAFT_DECKS);
 
         if (!view.getLstDecks().getPool().isEmpty()) {

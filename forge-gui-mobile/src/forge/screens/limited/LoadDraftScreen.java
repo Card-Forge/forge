@@ -46,7 +46,7 @@ public class LoadDraftScreen extends LaunchScreen {
 
     @Override
     public void onActivate() {
-        lstDecks.setPool(DeckProxy.getDraftDecks(FModel.getDecks().getDraft()));
+        lstDecks.setPool(DeckProxy.getAllDraftDecks());
         lstDecks.setSelectedString(DeckPreferences.getDraftDeck());
     }
 

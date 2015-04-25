@@ -441,8 +441,9 @@ public class DeckProxy implements InventoryItem {
     }
 
     @SuppressWarnings("unchecked")
-    public static List<DeckProxy> getAllSealedDecks(IStorage<DeckGroup> sealed) {
+    public static List<DeckProxy> getAllSealedDecks() {
         final List<DeckProxy> humanDecks = new ArrayList<DeckProxy>();
+        final IStorage<DeckGroup> sealed = FModel.getDecks().getSealed();
 
         // Since AI decks are tied directly to the human choice,
         // they're just mapped in a parallel map and grabbed when the game starts.
@@ -463,8 +464,9 @@ public class DeckProxy implements InventoryItem {
     }
 
     @SuppressWarnings("unchecked")
-    public static List<DeckProxy> getDraftDecks(IStorage<DeckGroup> draft) {
+    public static List<DeckProxy> getAllDraftDecks() {
         ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
+        IStorage<DeckGroup> draft = FModel.getDecks().getDraft();
         for (DeckGroup d : draft) {
             decks.add(new DeckProxy(d, "Draft", ((Function<IHasName, Deck>)(Object)DeckGroup.FN_HUMAN_DECK), GameType.Draft, draft));
         }

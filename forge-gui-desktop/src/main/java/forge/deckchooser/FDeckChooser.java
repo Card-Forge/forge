@@ -351,6 +351,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         case NET_DECK:
             updateNetDecks();
             break;
+        default:
+            break; //other deck types not currently supported here
         }
     }
 

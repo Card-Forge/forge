@@ -1414,6 +1414,15 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             case Constructed:
                 DeckPreferences.setCurrentDeck(deckStr);
                 break;
+            case Commander:
+                DeckPreferences.setCommanderDeck(deckStr);
+                break;
+            case Archenemy:
+                DeckPreferences.setSchemeDeck(deckStr);
+                break;
+            case Planechase:
+                DeckPreferences.setPlanarDeck(deckStr);
+                break;
             case Draft:
                 DeckPreferences.setDraftDeck(deckStr);
                 break;

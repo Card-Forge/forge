@@ -6,6 +6,8 @@ public enum DeckType {
     COMMANDER_DECK ("Commander Decks"),
     SCHEME_DECKS ("Scheme Decks"),
     PLANAR_DECKS ("Planar Decks"),
+    DRAFT_DECKS ("Draft Decks"),
+    SEALED_DECKS ("Sealed Decks"),
     PRECONSTRUCTED_DECK("Preconstructed Decks"),
     QUEST_OPPONENT_DECK ("Quest Opponent Decks"),
     COLOR_DECK ("Random Color Decks"),
