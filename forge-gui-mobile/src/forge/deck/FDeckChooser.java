@@ -394,6 +394,7 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.PRECONSTRUCTED_DECK);
                 cmbDeckTypes.addItem(DeckType.QUEST_OPPONENT_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_DECK);
+                cmbDeckTypes.addItem(DeckType.NET_COMMANDER_DECK);
                 break;
             default:
                 cmbDeckTypes.addItem(DeckType.CUSTOM_DECK);
@@ -405,32 +406,37 @@ public class FDeckChooser extends FScreen {
             cmbDeckTypes.setChangedHandler(new FEventHandler() {
                 @Override
                 public void handleEvent(final FEvent e) {
-                    if (cmbDeckTypes.getSelectedItem() == DeckType.NET_DECK && !refreshingDeckType) {
+                    final DeckType deckType = cmbDeckTypes.getSelectedItem();
+                    if (!refreshingDeckType && (deckType == DeckType.NET_DECK || deckType == DeckType.NET_COMMANDER_DECK)) {
                         FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
                             @Override
                             public void run() {
-                                final NetDeckCategory category = NetDeckCategory.selectAndLoad(lstDecks.getGameType());
+                                GameType gameType = lstDecks.getGameType();
+                                if (gameType == GameType.DeckManager) {
+                                    gameType = deckType == DeckType.NET_COMMANDER_DECK ? GameType.Commander : GameType.Constructed;
+                                }
+                                final NetDeckCategory category = NetDeckCategory.selectAndLoad(gameType);
 
                                 FThreads.invokeInEdtLater(new Runnable() {
                                     @Override
                                     public void run() {
                                         if (category == null) {
                                             cmbDeckTypes.setSelectedItem(selectedDeckType); //restore old selection if user cancels
-                                            if (selectedDeckType == DeckType.NET_DECK && netDeckCategory != null) {
+                                            if (selectedDeckType == deckType && netDeckCategory != null) {
                                                 cmbDeckTypes.setText(netDeckCategory.getDeckType());
                                             }
                                             return;
                                         }
 
                                         netDeckCategory = category;
-                                        refreshDecksList(DeckType.NET_DECK, true, e);
+                                        refreshDecksList(deckType, true, e);
                                     }
                                 });
                             }
                         });
                         return;
                     }
-                    refreshDecksList(cmbDeckTypes.getSelectedItem(), false, e);
+                    refreshDecksList(deckType, false, e);
                 }
             });
             add(cmbDeckTypes);
@@ -527,6 +533,7 @@ public class FDeckChooser extends FScreen {
             config = ItemManagerConfig.STRING_ONLY;
             break;
         case NET_DECK:
+        case NET_COMMANDER_DECK:
             if (netDeckCategory != null) {
                 cmbDeckTypes.setText(netDeckCategory.getDeckType());
             }
@@ -784,7 +791,7 @@ public class FDeckChooser extends FScreen {
         final Deck userDeck = deckProxy.getDeck();
         if (userDeck == null) { return; }
 
-        if (selectedDeckType == DeckType.COMMANDER_DECK) {
+        if (selectedDeckType == DeckType.COMMANDER_DECK || selectedDeckType == DeckType.NET_COMMANDER_DECK) {
             //cannot create gauntlet for commander decks, so just start single match
             testCommanderDeck(userDeck);
             return;

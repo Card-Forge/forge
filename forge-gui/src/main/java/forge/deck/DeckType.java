@@ -13,7 +13,8 @@ public enum DeckType {
     COLOR_DECK ("Random Color Decks"),
     THEME_DECK ("Random Theme Decks"),
     RANDOM_DECK ("Random Decks"),
-    NET_DECK ("Net Decks");
+    NET_DECK ("Net Decks"),
+    NET_COMMANDER_DECK ("Net Commander Decks");
 
     private String value;
     private DeckType(String value) {
