@@ -2,6 +2,10 @@ package forge.deck;
 
 public enum DeckType {
     CUSTOM_DECK ("Custom User Decks"),
+    CONSTRUCTED_DECK ("Constructed Decks"),
+    COMMANDER_DECK ("Commander Decks"),
+    SCHEME_DECKS ("Scheme Decks"),
+    PLANAR_DECKS ("Planar Decks"),
     PRECONSTRUCTED_DECK("Preconstructed Decks"),
     QUEST_OPPONENT_DECK ("Quest Opponent Decks"),
     COLOR_DECK ("Random Color Decks"),

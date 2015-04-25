@@ -97,21 +97,6 @@ public class FDeckChooser extends FScreen {
         btnNewDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                EditorType editorType;
-                switch (lstDecks.getGameType()) {
-                case Commander:
-                    editorType = EditorType.Commander;
-                    break;
-                case Archenemy:
-                    editorType = EditorType.Archenemy;
-                    break;
-                case Planechase:
-                    editorType = EditorType.Planechase;
-                    break;
-                default:
-                    editorType = EditorType.Constructed;
-                    break;
-                }
                 FDeckEditor editor;
                 switch (selectedDeckType) {
                 case COLOR_DECK:
@@ -123,7 +108,7 @@ public class FDeckChooser extends FScreen {
                         if (generatedDeck == null) { return; }
 
                         generatedDeck = (Deck)generatedDeck.copyTo(""); //prevent deck having a name by default
-                        editor = new FDeckEditor(editorType, generatedDeck, true);
+                        editor = new FDeckEditor(getEditorType(), generatedDeck, true);
                     }
                     else {
                         FOptionPane.showErrorDialog("You must select something before you can generate a new deck.");
@@ -131,16 +116,29 @@ public class FDeckChooser extends FScreen {
                     }
                     break;
                 default:
-                    editor = new FDeckEditor(editorType, "", false);
+                    editor = new FDeckEditor(getEditorType(), "", false);
                     break;
                 }
                 editor.setSaveHandler(new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
-                        //ensure user returns to custom user deck and that list is refreshed if new deck is saved
+                        //ensure user returns to proper deck type and that list is refreshed if new deck is saved
                         if (!needRefreshOnActivate) {
                             needRefreshOnActivate = true;
-                            setSelectedDeckType(DeckType.CUSTOM_DECK);
+                            if (lstDecks.getGameType() == GameType.DeckManager) {
+                                switch (selectedDeckType) {
+                                case COMMANDER_DECK:
+                                case SCHEME_DECKS:
+                                case PLANAR_DECKS:
+                                    break;
+                                default:
+                                    setSelectedDeckType(DeckType.CONSTRUCTED_DECK);
+                                    break;
+                                }
+                            }
+                            else {
+                                setSelectedDeckType(DeckType.CUSTOM_DECK);
+                            }
                         }
                     }
                 });
@@ -183,8 +181,10 @@ public class FDeckChooser extends FScreen {
             break; //delay initialize for constructed until saved decks can be reloaded
         case Commander:
         case Gauntlet:
-        case DeckManager:
             initialize(null, DeckType.CUSTOM_DECK);
+            break;
+        case DeckManager:
+            initialize(null, DeckType.CONSTRUCTED_DECK);
             break;
         default:
             initialize(null, DeckType.RANDOM_DECK);
@@ -204,7 +204,7 @@ public class FDeckChooser extends FScreen {
     public void onActivate() {
         if (needRefreshOnActivate) {
             needRefreshOnActivate = false;
-            refreshDecksList(DeckType.CUSTOM_DECK, true, null);
+            refreshDecksList(selectedDeckType, true, null);
             switch (lstDecks.getGameType()) {
             case Commander:
                 lstDecks.setSelectedString(DeckPreferences.getCommanderDeck());
@@ -214,6 +214,22 @@ public class FDeckChooser extends FScreen {
                 break;
             case Planechase:
                 lstDecks.setSelectedString(DeckPreferences.getPlanarDeck());
+                break;
+            case DeckManager:
+                switch (selectedDeckType) {
+                case COMMANDER_DECK:
+                    lstDecks.setSelectedString(DeckPreferences.getCommanderDeck());
+                    break;
+                case SCHEME_DECKS:
+                    lstDecks.setSelectedString(DeckPreferences.getSchemeDeck());
+                    break;
+                case PLANAR_DECKS:
+                    lstDecks.setSelectedString(DeckPreferences.getPlanarDeck());
+                    break;
+                default:
+                    lstDecks.setSelectedString(DeckPreferences.getCurrentDeck());
+                    break;
+                }
                 break;
             default:
                 lstDecks.setSelectedString(DeckPreferences.getCurrentDeck());
@@ -226,52 +242,80 @@ public class FDeckChooser extends FScreen {
         final DeckProxy deck = lstDecks.getSelectedItem();
         if (deck == null) { return; }
 
-        if (selectedDeckType == DeckType.CUSTOM_DECK) {
+        switch (selectedDeckType) {
+        case CUSTOM_DECK:
+        case CONSTRUCTED_DECK:
+        case COMMANDER_DECK:
+        case SCHEME_DECKS:
+        case PLANAR_DECKS:
             editDeck(deck);
-            return;
-        }
+            break;
+        default:
+            final DeckType fallbackType = lstDecks.getGameType() == GameType.DeckManager ? DeckType.CONSTRUCTED_DECK : DeckType.CUSTOM_DECK;
 
-        //see if deck with selected name exists already
-        final IStorage<Deck> decks = FModel.getDecks().getConstructed();
-        Deck existingDeck = decks.get(deck.getName());
-        if (existingDeck != null) {
-            setSelectedDeckType(DeckType.CUSTOM_DECK);
-            editDeck(new DeckProxy(existingDeck, "Constructed", lstDecks.getGameType(), decks));
-            return;
-        }
-
-        //prompt to duplicate deck if deck doesn't exist already
-        FOptionPane.showConfirmDialog(selectedDeckType + " cannot be edited directly. Would you like to duplicate " + deck.getName() + " for editing as a custom user deck?",
-                "Duplicate Deck?", "Duplicate", "Cancel", new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                if (result) {
-                    Deck copiedDeck = (Deck)deck.getDeck().copyTo(deck.getName());
-                    decks.add(copiedDeck);
-                    setSelectedDeckType(DeckType.CUSTOM_DECK);
-                    editDeck(new DeckProxy(copiedDeck, "Constructed", lstDecks.getGameType(), decks));
-                }
+            //see if deck with selected name exists already
+            final IStorage<Deck> decks = FModel.getDecks().getConstructed();
+            Deck existingDeck = decks.get(deck.getName());
+            if (existingDeck != null) {
+                setSelectedDeckType(fallbackType);
+                editDeck(new DeckProxy(existingDeck, "Constructed", lstDecks.getGameType(), decks));
+                return;
             }
-        });
+
+            //prompt to duplicate deck if deck doesn't exist already
+            FOptionPane.showConfirmDialog(selectedDeckType + " cannot be edited directly. Would you like to duplicate " + deck.getName() + " for editing as a custom user deck?",
+                    "Duplicate Deck?", "Duplicate", "Cancel", new Callback<Boolean>() {
+                @Override
+                public void run(Boolean result) {
+                    if (result) {
+                        Deck copiedDeck = (Deck)deck.getDeck().copyTo(deck.getName());
+                        decks.add(copiedDeck);
+                        setSelectedDeckType(fallbackType);
+                        editDeck(new DeckProxy(copiedDeck, "Constructed", lstDecks.getGameType(), decks));
+                    }
+                }
+            });
+            break;
+        }
+    }
+
+    private EditorType getEditorType() {
+        switch (lstDecks.getGameType()) {
+        case DeckManager:
+            switch (selectedDeckType) {
+            case COMMANDER_DECK:
+                return EditorType.Commander;
+            case SCHEME_DECKS:
+                return EditorType.Archenemy;
+            case PLANAR_DECKS:
+                return EditorType.Planechase;
+            default:
+                return EditorType.Constructed;
+            }
+        case Commander:
+            return EditorType.Commander;
+        case Archenemy:
+            return EditorType.Archenemy;
+        case Planechase:
+            return EditorType.Planechase;
+        default:
+            return EditorType.Constructed;
+        }
     }
 
     private void editDeck(DeckProxy deck) {
-        EditorType editorType;
-        switch (lstDecks.getGameType()) {
+        EditorType editorType = getEditorType();
+        switch (editorType) {
         case Commander:
-            editorType = EditorType.Commander;
             DeckPreferences.setCommanderDeck(deck.getName());
             break;
         case Archenemy:
-            editorType = EditorType.Archenemy;
             DeckPreferences.setSchemeDeck(deck.getName());
             break;
         case Planechase:
-            editorType = EditorType.Planechase;
             DeckPreferences.setPlanarDeck(deck.getName());
             break;
         default:
-            editorType = EditorType.Constructed;
             DeckPreferences.setCurrentDeck(deck.getName());
             break;
         }
@@ -302,7 +346,10 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.NET_DECK);
                 break;
             case DeckManager:
-                cmbDeckTypes.addItem(DeckType.CUSTOM_DECK);
+                cmbDeckTypes.addItem(DeckType.CONSTRUCTED_DECK);
+                cmbDeckTypes.addItem(DeckType.COMMANDER_DECK);
+                cmbDeckTypes.addItem(DeckType.SCHEME_DECKS);
+                cmbDeckTypes.addItem(DeckType.PLANAR_DECKS);
                 cmbDeckTypes.addItem(DeckType.PRECONSTRUCTED_DECK);
                 cmbDeckTypes.addItem(DeckType.QUEST_OPPONENT_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_DECK);
@@ -392,6 +439,22 @@ public class FDeckChooser extends FScreen {
                 config = ItemManagerConfig.CONSTRUCTED_DECKS;
                 break;
             }
+            break;
+        case CONSTRUCTED_DECK:
+            pool = DeckProxy.getAllConstructedDecks();
+            config = ItemManagerConfig.CONSTRUCTED_DECKS;
+            break;
+        case COMMANDER_DECK:
+            pool = DeckProxy.getAllCommanderDecks();
+            config = ItemManagerConfig.COMMANDER_DECKS;
+            break;
+        case SCHEME_DECKS:
+            pool = DeckProxy.getAllSchemeDecks();
+            config = ItemManagerConfig.SCHEME_DECKS;
+            break;
+        case PLANAR_DECKS:
+            pool = DeckProxy.getAllPlanarDecks();
+            config = ItemManagerConfig.PLANAR_DECKS;
             break;
         case COLOR_DECK:
             maxSelections = 3;
