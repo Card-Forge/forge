@@ -22,6 +22,7 @@ import forge.quest.QuestEventChallenge;
 import forge.quest.QuestUtil;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
+import forge.screens.home.NewGameMenu.NewGameScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FEvent;
@@ -97,54 +98,7 @@ public class FDeckChooser extends FScreen {
         btnNewDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                FDeckEditor editor;
-                switch (selectedDeckType) {
-                case COLOR_DECK:
-                case THEME_DECK:
-                case RANDOM_DECK:
-                    final DeckProxy deck = lstDecks.getSelectedItem();
-                    if (deck != null) {
-                        Deck generatedDeck = deck.getDeck();
-                        if (generatedDeck == null) { return; }
-
-                        generatedDeck = (Deck)generatedDeck.copyTo(""); //prevent deck having a name by default
-                        editor = new FDeckEditor(getEditorType(), generatedDeck, true);
-                    }
-                    else {
-                        FOptionPane.showErrorDialog("You must select something before you can generate a new deck.");
-                        return;
-                    }
-                    break;
-                default:
-                    editor = new FDeckEditor(getEditorType(), "", false);
-                    break;
-                }
-                editor.setSaveHandler(new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        //ensure user returns to proper deck type and that list is refreshed if new deck is saved
-                        if (!needRefreshOnActivate) {
-                            needRefreshOnActivate = true;
-                            if (lstDecks.getGameType() == GameType.DeckManager) {
-                                switch (selectedDeckType) {
-                                case COMMANDER_DECK:
-                                case SCHEME_DECKS:
-                                case PLANAR_DECKS:
-                                case DRAFT_DECKS:
-                                case SEALED_DECKS:
-                                    break;
-                                default:
-                                    setSelectedDeckType(DeckType.CONSTRUCTED_DECK);
-                                    break;
-                                }
-                            }
-                            else {
-                                setSelectedDeckType(DeckType.CUSTOM_DECK);
-                            }
-                        }
-                    }
-                });
-                Forge.openScreen(editor);
+                createNewDeck();
             }
         });
         btnEditDeck.setCommand(new FEventHandler() {
@@ -244,6 +198,63 @@ public class FDeckChooser extends FScreen {
                 break;
             }
         }
+    }
+
+    private void createNewDeck() {
+        FDeckEditor editor;
+        switch (selectedDeckType) {
+        case DRAFT_DECKS:
+            NewGameScreen.BoosterDraft.open();
+            return;
+        case SEALED_DECKS:
+            NewGameScreen.SealedDeck.open();
+            return;
+        case COLOR_DECK:
+        case THEME_DECK:
+        case RANDOM_DECK:
+            final DeckProxy deck = lstDecks.getSelectedItem();
+            if (deck != null) {
+                Deck generatedDeck = deck.getDeck();
+                if (generatedDeck == null) { return; }
+
+                generatedDeck = (Deck)generatedDeck.copyTo(""); //prevent deck having a name by default
+                editor = new FDeckEditor(getEditorType(), generatedDeck, true);
+            }
+            else {
+                FOptionPane.showErrorDialog("You must select something before you can generate a new deck.");
+                return;
+            }
+            break;
+        default:
+            editor = new FDeckEditor(getEditorType(), "", false);
+            break;
+        }
+        editor.setSaveHandler(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                //ensure user returns to proper deck type and that list is refreshed if new deck is saved
+                if (!needRefreshOnActivate) {
+                    needRefreshOnActivate = true;
+                    if (lstDecks.getGameType() == GameType.DeckManager) {
+                        switch (selectedDeckType) {
+                        case COMMANDER_DECK:
+                        case SCHEME_DECKS:
+                        case PLANAR_DECKS:
+                        case DRAFT_DECKS:
+                        case SEALED_DECKS:
+                            break;
+                        default:
+                            setSelectedDeckType(DeckType.CONSTRUCTED_DECK);
+                            break;
+                        }
+                    }
+                    else {
+                        setSelectedDeckType(DeckType.CUSTOM_DECK);
+                    }
+                }
+            }
+        });
+        Forge.openScreen(editor);
     }
 
     private void editSelectedDeck() {
