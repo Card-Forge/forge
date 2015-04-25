@@ -2,6 +2,7 @@ package forge.deck;
 
 import forge.FThreads;
 import forge.Forge;
+import forge.GuiBase;
 import forge.deck.Deck;
 import forge.deck.FDeckEditor.EditorType;
 import forge.deck.io.DeckPreferences;
@@ -10,8 +11,10 @@ import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletUtil;
+import forge.interfaces.IGuiGame;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
+import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences;
@@ -23,6 +26,7 @@ import forge.quest.QuestUtil;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
 import forge.screens.home.NewGameMenu.NewGameScreen;
+import forge.screens.match.MatchController;
 import forge.toolbox.FButton;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FEvent;
@@ -40,7 +44,11 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class FDeckChooser extends FScreen {
     public static final float PADDING = Utils.scale(5);
@@ -776,6 +784,12 @@ public class FDeckChooser extends FScreen {
         final Deck userDeck = deckProxy.getDeck();
         if (userDeck == null) { return; }
 
+        if (selectedDeckType == DeckType.COMMANDER_DECK) {
+            //cannot create gauntlet for commander decks, so just start single match
+            testCommanderDeck(userDeck);
+            return;
+        }
+
         GuiChoose.getInteger("How many opponents are you willing to face?", 1, 50, new Callback<Integer>() {
             @Override
             public void run(final Integer numOpponents) {
@@ -812,5 +826,36 @@ public class FDeckChooser extends FScreen {
                 chooser.show(null, true);
             }
         });
+    }
+
+    private void testCommanderDeck(final Deck userDeck) {
+        FDeckChooser aiDeckPrompt = new FDeckChooser(GameType.Commander, true, null);
+        aiDeckPrompt.setHeaderCaption("Select Opponent's Deck");
+        aiDeckPrompt.callback = new Callback<Deck>() {
+            @Override
+            public void run(final Deck aiDeck) {
+                if (aiDeck == null) { return; }
+
+                LoadingOverlay.show("Loading new game...", new Runnable() {
+                    @Override
+                    public void run() {
+                        Set<GameType> appliedVariants = new HashSet<GameType>();
+                        appliedVariants.add(GameType.Commander);
+
+                        List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
+                        RegisteredPlayer humanPlayer = new RegisteredPlayer(userDeck).setPlayer(GamePlayerUtil.getGuiPlayer());
+                        players.add(humanPlayer);
+                        players.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
+
+                        final Map<RegisteredPlayer, IGuiGame> guiMap = new HashMap<RegisteredPlayer, IGuiGame>();
+                        guiMap.put(humanPlayer, MatchController.instance);
+
+                        final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
+                        hostedMatch.startMatch(GameType.Constructed, appliedVariants, players, guiMap);
+                    }
+                });
+            }
+        };
+        Forge.openScreen(aiDeckPrompt);
     }
 }
