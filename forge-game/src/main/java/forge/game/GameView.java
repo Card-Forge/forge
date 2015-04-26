@@ -114,12 +114,17 @@ public class GameView extends TrackableObject {
     public boolean isMatchOver() {
         return get(TrackableProperty.MatchOver);
     }
+    public String getWinningPlayerName() {
+        return get(TrackableProperty.WinningPlayerName);
+    }
     public int getWinningTeam() {
         return get(TrackableProperty.WinningTeam);
     }
-    void updateGameOver(Game game) {
+    void updateGameOver(final Game game) {
         set(TrackableProperty.GameOver, game.isGameOver());
         set(TrackableProperty.MatchOver, game.getMatch().isMatchOver());
+        final Player winner = game.getOutcome().getWinningPlayer();
+        set(TrackableProperty.WinningPlayerName, winner == null ? null : winner.getName());
         set(TrackableProperty.WinningTeam, game.getOutcome() == null ? -1 : game.getOutcome().getWinningTeam());
     }
 
@@ -178,10 +183,6 @@ public class GameView extends TrackableObject {
 
     public Iterable<GameOutcome> getOutcomesOfMatch() {
         return game.getMatch().getOutcomes();
-    }
-
-    public LobbyPlayer getWinningPlayer() {
-        return game.getOutcome().getWinningLobbyPlayer();
     }
 
     public boolean isWinner(LobbyPlayer guiPlayer) {

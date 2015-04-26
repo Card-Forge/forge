@@ -16,7 +16,6 @@ import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.LobbyPlayer;
 import forge.UiCommand;
 import forge.assets.FSkinProp;
 import forge.game.GameLogEntry;
@@ -209,14 +208,14 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     }
 
     private String composeTitle(final GameView game) {
-        final LobbyPlayer winner = game.getWinningPlayer();
+        final String winner = game.getWinningPlayerName();
         final int winningTeam = game.getWinningTeam();
         if (winner == null) {
             return "It's a draw!";
         } else if (winningTeam != -1) {
-            return "Team " + winningTeam + " Won!";
+            return String.format("Team %d won!", Integer.valueOf(winningTeam));
         } else {
-            return winner.getName() + " Won!";
+            return String.format("%s won!", winner);
         }
     }
 

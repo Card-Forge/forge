@@ -97,7 +97,7 @@ public class QuestWinLoseController {
                         if (anteResult.lostCards != null) {
                             qc.getCards().loseCards(anteResult.lostCards);
                         }
-                        anteReport(anteResult.wonCards, anteResult.lostCards, questPlayer.isLobbyPlayer(lastGame.getWinningPlayer()));
+                        anteReport(anteResult.wonCards, anteResult.lostCards);
                     }
                 }
 
@@ -156,13 +156,13 @@ public class QuestWinLoseController {
         });
     }
 
-    private void anteReport(final List<PaperCard> cardsWon, List<PaperCard> cardsLost, boolean hasWon) {
+    private void anteReport(final List<PaperCard> cardsWon, List<PaperCard> cardsLost) {
         // Generate Swing components and attach.
         if (cardsWon != null && !cardsWon.isEmpty()) {
-            view.showCards("Spoils! Cards won from ante.", cardsWon);
+            view.showCards("Spoils! Cards won from ante", cardsWon);
         }
         if (cardsLost != null && !cardsLost.isEmpty()) {
-            view.showCards("Looted! Cards lost to ante.", cardsLost);
+            view.showCards("Looted! Cards lost to ante", cardsLost);
         }
     }
 

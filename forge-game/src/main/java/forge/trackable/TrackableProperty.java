@@ -138,6 +138,7 @@ public enum TrackableProperty {
     GameType(TrackableTypes.EnumType(GameType.class)),
     Title(TrackableTypes.StringType),
     Turn(TrackableTypes.IntegerType),
+    WinningPlayerName(TrackableTypes.StringType),
     WinningTeam(TrackableTypes.IntegerType),
     MatchOver(TrackableTypes.BooleanType),
     NumGamesInMatch(TrackableTypes.IntegerType),

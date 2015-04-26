@@ -75,7 +75,7 @@ public class QuestDraftWinLose extends ControlWinLose {
         final boolean gameHadHumanPlayer = matchUI.hasLocalPlayers();
 
         if (lastGame.isMatchOver()) {
-            final String winner = lastGame.getWinningPlayer().getName();
+            final String winner = lastGame.getWinningPlayerName();
             
             quest.getAchievements().getCurrentDraft().setWinner(winner);
             quest.save();

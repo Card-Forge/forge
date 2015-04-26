@@ -122,7 +122,6 @@ public final class FServerManager {
                     } finally {
                         stopServer();
                     }
-                    
                 }
             }).start();
             mapNatPort(port);

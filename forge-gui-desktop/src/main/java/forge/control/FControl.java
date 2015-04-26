@@ -211,7 +211,7 @@ public enum FControl implements KeyEventDispatcher {
 
         closeAction = CloseAction.valueOf(prefs.getPref(FPref.UI_CLOSE_ACTION));
 
-        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("About to load current quest.");
+        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Loading quest...");
         // Preload quest data if present
         final File dirQuests = new File(ForgeConstants.QUEST_SAVE_DIR);
         final String questname = FModel.getQuestPreferences().getPref(QPref.CURRENT_QUEST);

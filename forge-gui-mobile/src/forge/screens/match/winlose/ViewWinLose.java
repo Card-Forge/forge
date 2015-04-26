@@ -9,11 +9,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.FThreads;
 import forge.Forge;
-import forge.LobbyPlayer;
 import forge.assets.FSkinColor;
-import forge.assets.FSkinProp;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinProp;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
 import forge.game.GameView;
@@ -123,14 +122,14 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
     }
 
     private String composeTitle(final GameView game) {
-        final LobbyPlayer winner = game.getWinningPlayer();
+        final String winner = game.getWinningPlayerName();
         final int winningTeam = game.getWinningTeam();
         if (winner == null) {
             return "It's a draw!";
         } else if (winningTeam != -1) {
-            return "Team " + winningTeam + " Won!";
+            return String.format("Team %d won!", Integer.valueOf(winningTeam));
         } else {
-            return winner.getName() + " Won!";
+            return String.format("%s won!", winner);
         }
     }
 
