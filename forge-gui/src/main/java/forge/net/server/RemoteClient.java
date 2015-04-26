@@ -46,7 +46,7 @@ public final class RemoteClient implements IToClient {
         this.index = index;
     }
 
-    public void setReply(final int id, final Object reply) {
-        replies.complete(id, reply);
+    ReplyPool getReplyPool() {
+        return replies;
     }
 }

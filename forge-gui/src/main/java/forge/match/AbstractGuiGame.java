@@ -24,7 +24,6 @@ import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
-import forge.interfaces.IButton;
 import forge.interfaces.IGameController;
 import forge.interfaces.IGuiGame;
 import forge.interfaces.IMayViewCards;
@@ -195,20 +194,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public void updateButtons(final PlayerView owner, final String okLabel, final String cancelLabel, final boolean okEnabled, final boolean cancelEnabled, final boolean focusOk) {
-        final IButton btnOk = getBtnOK(owner);
-        final IButton btnCancel = getBtnCancel(owner);
-
-        btnOk.setText(okLabel);
-        btnCancel.setText(cancelLabel);
-        btnOk.setEnabled(okEnabled);
-        btnCancel.setEnabled(cancelEnabled);
-        if (okEnabled && focusOk) {
-            focusButton(MatchButtonType.OK);
-        } else if (cancelEnabled) {
-            focusButton(MatchButtonType.CANCEL);
-        }
-    }
+    public abstract void updateButtons(PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1);
 
     // Auto-yield and other input-related code
 

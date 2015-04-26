@@ -1,13 +1,18 @@
 package forge.game.ability.effects;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.StaticData;
-import forge.card.CardStateName;
 import forge.card.CardRulesPredicates;
+import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -22,11 +27,6 @@ import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.Lang;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PlayEffect extends SpellAbilityEffect {
     @Override
@@ -160,13 +160,13 @@ public class PlayEffect extends SpellAbilityEffect {
             }
             Card original = tgtCard;
             if (sa.hasParam("CopyCard")) {
-            	Zone zone = tgtCard.getZone();
+                final Zone zone = tgtCard.getZone();
                 tgtCard = Card.fromPaperCard(tgtCard.getPaperCard(), sa.getActivatingPlayer());
 
                 tgtCard.setToken(true);
                 tgtCard.setZone(zone);
                 if (zone != null) {
-                	zone.add(tgtCard);
+                    zone.add(tgtCard);
                 }
 
                 if (useEncoded) {
@@ -197,7 +197,7 @@ public class PlayEffect extends SpellAbilityEffect {
             }
 
             // only one mode can be used
-            SpellAbility tgtSA = sa.getActivatingPlayer().getController().getAbilityToPlay(sas);
+            SpellAbility tgtSA = sa.getActivatingPlayer().getController().getAbilityToPlay(tgtCard, sas);
             boolean noManaCost = sa.hasParam("WithoutManaCost");
             if (noManaCost) {
                 tgtSA = tgtSA.copyWithNoManaCost();

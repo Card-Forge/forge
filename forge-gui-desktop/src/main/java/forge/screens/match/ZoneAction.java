@@ -32,6 +32,6 @@ public class ZoneAction extends ForgeAction {
 
     @Override
     public void actionPerformed(final ActionEvent e) {
-        FloatingCardArea.show(matchUI, player, zone);
+        FloatingCardArea.showOrHide(matchUI, player, zone);
     }
 }

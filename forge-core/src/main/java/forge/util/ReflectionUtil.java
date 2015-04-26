@@ -1,7 +1,10 @@
 package forge.util;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+
+import org.apache.commons.lang3.reflect.TypeUtils;
 
 /**
  * Static utilities related to reflection.
@@ -62,4 +65,10 @@ public final class ReflectionUtil {
         return null;
     }
 
+    public static boolean isInstance(final Object obj, final Class<?> type) {
+        if (Array.class.equals(type)) {
+            return obj.getClass().isArray();
+        }
+        return TypeUtils.isInstance(obj, type);
+    }
 }

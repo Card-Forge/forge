@@ -61,7 +61,7 @@ public class CDock implements ICDoc {
      * End turn.
      */
     public void endTurn() {
-        matchUI.getCPrompt().passPriorityUntilEndOfTurn();
+        matchUI.getGameController().passPriorityUntilEndOfTurn();
     }
 
     /**

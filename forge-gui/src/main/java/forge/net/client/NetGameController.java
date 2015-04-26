@@ -1,7 +1,6 @@
 package forge.net.client;
 
 import java.util.List;
-import java.util.concurrent.TimeoutException;
 
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
@@ -9,90 +8,77 @@ import forge.game.spellability.SpellAbilityView;
 import forge.interfaces.IDevModeCheats;
 import forge.interfaces.IGameController;
 import forge.match.NextGameDecision;
-import forge.net.event.GuiGameEvent;
+import forge.net.GameProtocol.ProtocolMethod;
+import forge.net.GameProtocolSender;
 import forge.util.ITriggerEvent;
 
 public class NetGameController implements IGameController {
 
-    private final IToServer server;
+    private final GameProtocolSender sender;
     public NetGameController(final IToServer server) {
-        this.server = server;
+        this.sender = new GameProtocolSender(server);
     }
 
-    private String methodName() {
-        boolean passedFirst = false;
-        for (final StackTraceElement ste : Thread.currentThread().getStackTrace()) {
-            if (ste.getClassName() == getClass().getName()) {
-                if (passedFirst) {
-                    return ste.getMethodName();
-                }
-                passedFirst = true;
-            }
-        }
-        return null;
+    private void send(final ProtocolMethod method, final Object... args) {
+        sender.send(method, args);
     }
 
-    private void send(final String method, final Object... args) {
-        server.send(new GuiGameEvent(method, args));
-    }
-    @SuppressWarnings("unchecked")
-    private <T> T sendAndWait(final String method, final Object... args) {
-        try {
-            return (T) server.sendAndWait(new GuiGameEvent(method, args));
-        } catch (final TimeoutException e) {
-            e.printStackTrace();
-        }
-        return null;
+    private <T> T sendAndWait(final ProtocolMethod method, final Object... args) {
+        return sender.sendAndWait(method, args);
     }
 
     @Override
-    public boolean useMana(final byte color) {
-        return sendAndWait(methodName(), color);
+    public void useMana(final byte color) {
+        send(ProtocolMethod.useMana, Byte.valueOf(color));
     }
 
     @Override
-    public boolean tryUndoLastAction() {
-        return sendAndWait(methodName());
+    public void undoLastAction() {
+        send(ProtocolMethod.undoLastAction);
     }
 
     @Override
     public void selectPlayer(final PlayerView playerView, final ITriggerEvent triggerEvent) {
-        send(methodName(), playerView, triggerEvent);
+        send(ProtocolMethod.selectPlayer, playerView, triggerEvent);
     }
 
     @Override
     public boolean selectCard(final CardView cardView, final List<CardView> otherCardViewsToSelect, final ITriggerEvent triggerEvent) {
-        return sendAndWait(methodName(), cardView, otherCardViewsToSelect, triggerEvent);
+        send(ProtocolMethod.selectCard, cardView, otherCardViewsToSelect, triggerEvent);
+        // Difference from local games! Always consider a card as successfully selected,
+        // to avoid blocks where server and client wait for each other to respond.
+        // Some cost in functionality but a huge gain in stability & speed.
+        return true;
     }
 
     @Override
     public void selectButtonOk() {
-        send(methodName());
+        send(ProtocolMethod.selectButtonOk);
     }
 
     @Override
     public void selectButtonCancel() {
-        send(methodName());
+        send(ProtocolMethod.selectButtonCancel);
     }
 
     @Override
     public void selectAbility(final SpellAbilityView sa) {
-        send(methodName(), sa);
+        send(ProtocolMethod.selectAbility, sa);
     }
 
     @Override
-    public boolean passPriorityUntilEndOfTurn() {
-        return sendAndWait(methodName());
+    public void passPriorityUntilEndOfTurn() {
+        send(ProtocolMethod.passPriorityUntilEndOfTurn);
     }
 
     @Override
-    public boolean passPriority() {
-        return sendAndWait(methodName());
+    public void passPriority() {
+        send(ProtocolMethod.passPriority);
     }
 
     @Override
     public void nextGameDecision(final NextGameDecision decision) {
-        send(methodName(), decision);
+        send(ProtocolMethod.nextGameDecision, decision);
     }
 
     @Override
@@ -102,31 +88,33 @@ public class NetGameController implements IGameController {
     }
 
     public String getActivateDescription(final CardView card) {
-        return sendAndWait(methodName(), card);
+        return sendAndWait(ProtocolMethod.getActivateDescription, card);
     }
 
     @Override
     public void concede() {
-        send(methodName());
+        send(ProtocolMethod.concede);
     }
 
     @Override
     public IDevModeCheats cheat() {
+        // No cheating in network games!
         return IDevModeCheats.NO_CHEAT;
     }
 
     @Override
     public boolean canPlayUnlimitedLands() {
+        // Don't do this over network
         return false;
     }
 
     @Override
     public void alphaStrike() {
-        send(methodName());
+        send(ProtocolMethod.alphaStrike);
     }
 
     @Override
     public void reorderHand(CardView card, int index) {
-        send(methodName(), card, index);
+        send(ProtocolMethod.reorderHand, card, Integer.valueOf(index));
     }
 }

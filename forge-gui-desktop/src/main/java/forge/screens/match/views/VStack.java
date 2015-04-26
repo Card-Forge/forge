@@ -69,7 +69,7 @@ public class VStack implements IVDoc<CStack> {
     // Other fields
     private final AbilityMenu abilityMenu = new AbilityMenu();
 
-    private static StackInstanceTextArea hoveredItem;
+    private StackInstanceTextArea hoveredItem;
 
     public StackInstanceTextArea getHoveredItem() {
         return hoveredItem;
@@ -267,7 +267,7 @@ public class VStack implements IVDoc<CStack> {
                     controller.getMatchUI().setShouldAutoYield(key, !autoYield);
                     if (!autoYield && controller.getMatchUI().getGameView().peekStack() == item) {
                         //auto-pass priority if ability is on top of stack
-                        controller.getMatchUI().getCPrompt().passPriority();
+                        controller.getMatchUI().getGameController().passPriority();
                     }
                 }
             });

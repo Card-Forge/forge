@@ -23,22 +23,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.util.List;
 
 import javax.swing.JButton;
 
 import forge.FThreads;
 import forge.UiCommand;
 import forge.game.GameView;
-import forge.game.card.CardView;
-import forge.game.player.PlayerView;
-import forge.game.spellability.SpellAbilityView;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FSkin;
-import forge.util.ITriggerEvent;
 
 /**
  * Controls the prompt panel in the match UI.
@@ -96,32 +91,12 @@ public class CPrompt implements ICDoc {
         _initButton(view.getBtnOK(), actOK);
     }
 
-    public void selectButtonOk() {
+    private void selectButtonOk() {
         matchUI.getGameController().selectButtonOk();
     }
 
-    public void selectButtonCancel() {
+    private void selectButtonCancel() {
         matchUI.getGameController().selectButtonCancel();
-    }
-
-    public boolean passPriority() {
-        return matchUI.getGameController().passPriority();
-    }
-
-    public boolean passPriorityUntilEndOfTurn() {
-        return matchUI.getGameController().passPriorityUntilEndOfTurn();
-    }
-
-    public void selectPlayer(final PlayerView playerView, final ITriggerEvent triggerEvent) {
-        matchUI.getGameController().selectPlayer(playerView, triggerEvent);
-    }
-
-    public boolean selectCard(final CardView cardView, final List<CardView> otherCardViewsToSelect, final ITriggerEvent triggerEvent) {
-        return matchUI.getGameController().selectCard(cardView, otherCardViewsToSelect, triggerEvent);
-    }
-
-    public void selectAbility(final SpellAbilityView sa) {
-        matchUI.getGameController().selectAbility(sa);
     }
 
     public void setMessage(String s0) {

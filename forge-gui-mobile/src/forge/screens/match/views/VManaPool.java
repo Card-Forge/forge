@@ -91,7 +91,13 @@ public class VManaPool extends VDisplayArea {
         public boolean flick(float x, float y) {
             if (player.isLobbyPlayer(GamePlayerUtil.getGuiPlayer())) {
                 //on two finger tap, keep using mana until it runs out or no longer can be put towards the cost
-                while (MatchController.instance.getGameController().useMana(colorCode)) {}
+                int oldMana, newMana = player.getMana(colorCode);
+                do {
+                    oldMana = newMana;
+                    MatchController.instance.getGameController().useMana(colorCode);
+                    newMana = player.getMana(colorCode);
+                }
+                while (oldMana != newMana);
             }
             return true;
         }

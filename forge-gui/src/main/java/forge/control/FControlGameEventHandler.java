@@ -126,7 +126,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             }
             synchronized (zonesUpdate) {
                 if (!zonesUpdate.isEmpty()) {
-                    matchController.updateZones(zonesUpdate);
+                    // Copy to prevent concurrency issues
+                    matchController.updateZones(new PlayerZoneUpdates(zonesUpdate));
                     zonesUpdate.clear();
                 }
             }

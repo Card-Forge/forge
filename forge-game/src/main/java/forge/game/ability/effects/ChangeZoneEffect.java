@@ -720,7 +720,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sas.isEmpty()) {
                         continue;
                     }
-                    SpellAbility tgtSA = decider.getController().getAbilityToPlay(sas);
+                    SpellAbility tgtSA = decider.getController().getAbilityToPlay(tgtCard, sas);
                     if (!decider.getController().confirmAction(tgtSA, null, "Do you want to play " + tgtCard + "?")) {
                         continue;
                     }

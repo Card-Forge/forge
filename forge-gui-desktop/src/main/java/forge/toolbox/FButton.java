@@ -17,6 +17,24 @@
  */
 package forge.toolbox;
 
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+
+import javax.swing.BorderFactory;
+
 import forge.UiCommand;
 import forge.assets.FSkinProp;
 import forge.gui.framework.ILocalRepaint;
@@ -24,11 +42,6 @@ import forge.interfaces.IButton;
 import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.FSkin.SkinnedButton;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.*;
 
 /**
  * The core JButton used throughout the Forge project. Follows skin font and

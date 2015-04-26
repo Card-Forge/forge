@@ -129,7 +129,7 @@ public class InputPassPriority extends InputSyncronizedBase {
             return false;
         }
 
-        final SpellAbility ability = getController().getAbilityToPlay(abilities, triggerEvent);
+        final SpellAbility ability = getController().getAbilityToPlay(card, abilities, triggerEvent);
         if (ability != null) {
             chosenSa = new ArrayList<SpellAbility>();
             chosenSa.add(ability);

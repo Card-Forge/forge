@@ -375,6 +375,8 @@ public class PlayerView extends GameEntityView {
     }
     public String getDetails() {
         final StringBuilder builder = new StringBuilder();
+        builder.append(getName());
+        builder.append('\n');
         for (final String detailsPart : getDetailsList()) {
             builder.append(detailsPart);
             builder.append('\n');

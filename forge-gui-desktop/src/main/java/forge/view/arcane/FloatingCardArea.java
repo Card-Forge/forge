@@ -26,6 +26,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.ScrollPaneConstants;
 import javax.swing.Timer;
@@ -55,12 +56,20 @@ public class FloatingCardArea extends CardArea {
     private static final String COORD_DELIM = ","; 
 
     private static final ForgePreferences prefs = FModel.getPreferences();
-    private static final HashMap<Integer, FloatingCardArea> floatingAreas = new HashMap<Integer, FloatingCardArea>();
+    private static final Map<Integer, FloatingCardArea> floatingAreas = new HashMap<Integer, FloatingCardArea>();
 
     private static int getKey(final PlayerView player, final ZoneType zone) {
         return 40 * player.getId() + zone.hashCode();
     }
+    public static void showOrHide(final CMatchUI matchUI, final PlayerView player, final ZoneType zone) {
+        final FloatingCardArea cardArea = _init(matchUI, player, zone);
+        cardArea.showOrHideWindow();
+    }
     public static void show(final CMatchUI matchUI, final PlayerView player, final ZoneType zone) {
+        final FloatingCardArea cardArea = _init(matchUI, player, zone);
+        cardArea.showWindow(); 
+    }
+    private static FloatingCardArea _init(final CMatchUI matchUI, final PlayerView player, final ZoneType zone) {
         final int key = getKey(player, zone);
         FloatingCardArea cardArea = floatingAreas.get(key);
         if (cardArea == null || cardArea.getMatchUI() != matchUI) {
@@ -69,7 +78,11 @@ public class FloatingCardArea extends CardArea {
         } else {
             cardArea.setPlayer(player); //ensure player is updated if needed
         }
-        cardArea.showWindow();
+        return cardArea;
+    }
+    public static CardPanel getCardPanel(final CMatchUI matchUI, final CardView card) {
+        final FloatingCardArea window = _init(matchUI, card.getController(), card.getZone());
+        return window.getCardPanel(card.getId());
     }
     public static void refresh(final PlayerView player, final ZoneType zone) {
         FloatingCardArea cardArea = floatingAreas.get(getKey(player, zone));
@@ -188,16 +201,22 @@ public class FloatingCardArea extends CardArea {
     }
 
     private void showWindow() {
+        onShow();
+        window.setVisible(true);
+    }
+    private void showOrHideWindow() {
+        onShow();
+        window.setVisible(!window.isVisible());
+    }
+    private void onShow() {
         if (!hasBeenShown) {
             loadLocation();
             window.getTitleBar().addMouseListener(new FMouseAdapter() {
-                @Override
-                public void onLeftDoubleClick(MouseEvent e) {
+                @Override public final void onLeftDoubleClick(final MouseEvent e) {
                     window.setVisible(false); //hide window if titlebar double-clicked
                 }
             });
         }
-        window.setVisible(!window.isVisible());
     }
 
     private void loadLocation() {
@@ -251,7 +270,7 @@ public class FloatingCardArea extends CardArea {
         window.setSize(mainFrame.getWidth() / 5, mainFrame.getHeight() / 2);
     }
 
-    public void refresh() {
+    private void refresh() {
         if (!window.isVisible()) { return; } //don't refresh while window hidden
 
         List<CardPanel> cardPanels = new ArrayList<CardPanel>();
@@ -292,7 +311,7 @@ public class FloatingCardArea extends CardArea {
         }
     }
 
-    final Timer layoutTimer = new Timer(250, new ActionListener() {
+    private final Timer layoutTimer = new Timer(250, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent arg0) {
             layoutTimer.stop();
@@ -311,12 +330,12 @@ public class FloatingCardArea extends CardArea {
     }
     @Override
     public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
-        getMatchUI().getCPrompt().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
+        getMatchUI().getGameController().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
         super.mouseLeftClicked(panel, evt);
     }
     @Override
     public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
-        getMatchUI().getCPrompt().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
+        getMatchUI().getGameController().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
         super.mouseRightClicked(panel, evt);
     }
 }

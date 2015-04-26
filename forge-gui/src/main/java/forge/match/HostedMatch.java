@@ -193,11 +193,6 @@ public class HostedMatch {
             gui.setGameController(null, humanController);
 
             gui.openView(null);
-        } else if (humanCount == players.size()) {
-            //if there are no AI's, allow all players to see all cards (hotseat mode).
-            for (final PlayerControllerHuman humanController : humanControllers) {
-                humanController.setMayLookAtAllCards(true);
-            }
         }
 
         //prompt user for player one name if needed

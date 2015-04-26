@@ -1,5 +1,6 @@
 package forge.net.event;
 
+import forge.net.GameProtocol.ProtocolMethod;
 import forge.net.server.RemoteClient;
 
 public final class GuiGameEvent implements IdentifiableNetEvent {
@@ -7,10 +8,10 @@ public final class GuiGameEvent implements IdentifiableNetEvent {
     private static int staticId = 0;
 
     private final int id;
-    private final String method;
+    private final ProtocolMethod method;
     private final Object[] objects;
 
-    public GuiGameEvent(final String method, final Object ... objects) {
+    public GuiGameEvent(final ProtocolMethod method, final Object ... objects) {
         this.id = staticId++;
         this.method = method;
         this.objects = objects == null ? new Object[0] : objects;
@@ -30,7 +31,7 @@ public final class GuiGameEvent implements IdentifiableNetEvent {
         return id;
     }
 
-    public String getMethod() {
+    public ProtocolMethod getMethod() {
         return method;
     }
 

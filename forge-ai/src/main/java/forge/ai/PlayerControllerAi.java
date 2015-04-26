@@ -79,7 +79,7 @@ public class PlayerControllerAi extends PlayerController {
         brains.setUseSimulation(value);
     }
 
-    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, ITriggerEvent triggerEvent) {
+    public SpellAbility getAbilityToPlay(Card hostCard, List<SpellAbility> abilities, ITriggerEvent triggerEvent) {
         if (abilities.size() == 0) {
             return null;
         }

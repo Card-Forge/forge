@@ -219,8 +219,8 @@ public class PlayerControllerHuman
     /**
      * Uses GUI to learn which spell the player (human in our case) would like to play
      */ 
-    public SpellAbility getAbilityToPlay(final List<SpellAbility> abilities, final ITriggerEvent triggerEvent) {
-        final SpellAbilityView resultView = getGui().getAbilityToPlay(SpellAbilityView.getCollection(abilities), triggerEvent);
+    public SpellAbility getAbilityToPlay(final Card hostCard, final List<SpellAbility> abilities, final ITriggerEvent triggerEvent) {
+        final SpellAbilityView resultView = getGui().getAbilityToPlay(CardView.get(hostCard), SpellAbilityView.getCollection(abilities), triggerEvent);
         return getGame().getSpellAbility(resultView);
     }
 
@@ -1304,6 +1304,12 @@ public class PlayerControllerHuman
         return true;
     }
 
+
+    @Override
+    public void undoLastAction() {
+        tryUndoLastAction();
+    }
+
     public boolean tryUndoLastAction() {
         if (!canUndoLastAction()) {
             return false;
@@ -1333,37 +1339,33 @@ public class PlayerControllerHuman
         }
     }
 
-    public boolean passPriority() {
-        return passPriority(false);
+    public void passPriority() {
+        passPriority(false);
     }
-    public boolean passPriorityUntilEndOfTurn() {
-        return passPriority(true);
+    public void passPriorityUntilEndOfTurn() {
+        passPriority(true);
     }
-    private boolean passPriority(final boolean passUntilEndOfTurn) {
+    private void passPriority(final boolean passUntilEndOfTurn) {
         final Input inp = inputProxy.getInput();
         if (inp instanceof InputPassPriority) {
             if (passUntilEndOfTurn) {
                 autoPassUntilEndOfTurn();
             }
             inp.selectButtonOK();
-            return true;
+        } else {
+            FThreads.invokeInEdtNowOrLater(new Runnable() {
+                @Override public final void run() {
+                    getGui().message("Cannot pass priority at this time.");
+                }
+            });
         }
-
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
-            @Override
-            public void run() {
-                getGui().message("Cannot pass priority at this time.");
-            }
-        });
-        return false;
     }
 
-    public boolean useMana(final byte mana) {
+    public void useMana(final byte mana) {
         final Input input = inputQueue.getInput();
         if (input instanceof InputPayMana) {
-            return ((InputPayMana) input).useManaFromPool(mana);
+            ((InputPayMana) input).useManaFromPool(mana);
         }
-        return false;
     }
 
     public void selectPlayer(final PlayerView playerView, final ITriggerEvent triggerEvent) {

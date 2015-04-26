@@ -26,10 +26,6 @@ import forge.util.FCollectionView;
 public class GameView extends TrackableObject {
     private static final long serialVersionUID = 8522884512960961528L;
 
-    /*private final TrackableIndex<CardView> cards = new TrackableIndex<CardView>();
-    private final TrackableIndex<PlayerView> players = new TrackableIndex<PlayerView>();
-    private final TrackableIndex<SpellAbilityView> spellAbilities = new TrackableIndex<SpellAbilityView>();
-    private final TrackableIndex<StackItemView> stackItems = new TrackableIndex<StackItemView>();*/
     private final TrackableCollection<PlayerView> players;
     private CombatView combatView;
     private final transient Game game; //TODO: Remove this when possible before network support added

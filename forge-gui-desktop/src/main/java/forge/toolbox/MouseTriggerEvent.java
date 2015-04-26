@@ -7,20 +7,28 @@ import forge.util.ITriggerEvent;
 
 //MouseEvent wrapper used for passing trigger to input classes
 public class MouseTriggerEvent implements ITriggerEvent, Serializable {
-    private static final long serialVersionUID = -4746127117012991732L;
+    private static final long serialVersionUID = -5440485066050000298L;
 
-    private final MouseEvent event;
+    private final int button, x, y;
 
-    public MouseTriggerEvent(MouseEvent event0) {
-        event = event0;
+    public MouseTriggerEvent(final MouseEvent event) {
+        this.button = event.getButton();
+        this.x = event.getX();
+        this.y = event.getY();
     }
 
     @Override
     public int getButton() {
-        return event.getButton();
+        return button;
     }
 
-    public MouseEvent getMouseEvent() {
-        return event;
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
     }
 }

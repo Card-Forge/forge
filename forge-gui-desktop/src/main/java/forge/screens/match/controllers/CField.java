@@ -47,7 +47,7 @@ public class CField implements ICDoc {
     private final MouseListener madAvatar = new MouseAdapter() {
         @Override
         public void mousePressed(final MouseEvent e) {
-            matchUI.getCPrompt().selectPlayer(player, new MouseTriggerEvent(e));
+            matchUI.getGameController().selectPlayer(player, new MouseTriggerEvent(e));
         }
     };
 
@@ -71,9 +71,11 @@ public class CField implements ICDoc {
         final ZoneAction commandAction   = new ZoneAction(matchUI, player, ZoneType.Command,   MatchConstants.HUMANCOMMAND);
 
         final Function<Byte, Boolean> manaAction = new Function<Byte, Boolean>() {
-            public Boolean apply(Byte colorCode) {
+            public Boolean apply(final Byte colorCode) {
                 if (CField.this.player.isLobbyPlayer(Singletons.getControl().getGuiPlayer())) {
-                    return matchUI.getGameController().useMana(colorCode.byteValue());
+                    final int oldMana = player.getMana(colorCode);
+                    matchUI.getGameController().useMana(colorCode.byteValue());
+                    return oldMana != player.getMana(colorCode);
                 }
                 return false;
             }

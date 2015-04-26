@@ -144,7 +144,7 @@ public class HumanPlay {
             return original;
         }
         final List<SpellAbility> abilities = GameActionUtil.getOptionalCosts(original);
-        return p.getController().getAbilityToPlay(abilities);
+        return p.getController().getAbilityToPlay(original.getHostCard(), abilities);
     }
 
     private static boolean payManaCostIfNeeded(final PlayerControllerHuman controller, final Player p, final SpellAbility sa) {

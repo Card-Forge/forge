@@ -473,8 +473,9 @@ public class PlayerControllerForTests extends PlayerController {
 	}
 
 	@Override
-	public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, ITriggerEvent triggerEvent) {
-		return getAbilityToPlay(abilities);
+	public SpellAbility getAbilityToPlay(Card hostCard, List<SpellAbility> abilities, ITriggerEvent triggerEvent) {
+	    // Isn't this a method invocation loop? --elcnesh
+		return getAbilityToPlay(hostCard, abilities);
 	}
 
 	@Override

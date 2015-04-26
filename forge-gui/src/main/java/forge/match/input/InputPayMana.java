@@ -153,14 +153,12 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         return abilities;
     }
 
-    public boolean useManaFromPool(byte colorCode) {
+    public void useManaFromPool(byte colorCode) {
         // find the matching mana in pool.
         if (player.getManaPool().tryPayCostWithColor(colorCode, saPaidFor, manaCost)) {
             onManaAbilityPaid();
             showMessage();
-            return true;
         }
-        return false;
     }
 
     protected boolean activateManaAbility(final Card card, ManaCostBeingPaid manaCost) {

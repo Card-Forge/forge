@@ -85,7 +85,7 @@ public final class GameMenu {
         return new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                matchUI.getGameController().tryUndoLastAction();
+                matchUI.getGameController().undoLastAction();
             }
         };
     }

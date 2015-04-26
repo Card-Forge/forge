@@ -18,15 +18,15 @@ public interface IGameController {
 
     void alphaStrike();
 
-    boolean useMana(byte color);
+    void useMana(byte color);
 
     void selectButtonOk();
 
     void selectButtonCancel();
 
-    boolean passPriority();
+    void passPriority();
 
-    boolean passPriorityUntilEndOfTurn();
+    void passPriorityUntilEndOfTurn();
 
     void selectPlayer(PlayerView playerView, ITriggerEvent triggerEvent);
 
@@ -35,7 +35,7 @@ public interface IGameController {
 
     void selectAbility(SpellAbilityView sa);
 
-    boolean tryUndoLastAction();
+    void undoLastAction();
 
     IDevModeCheats cheat();
 

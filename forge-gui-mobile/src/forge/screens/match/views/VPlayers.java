@@ -5,11 +5,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
-import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.menu.FDropDown;
-import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.MatchController;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
@@ -65,33 +62,7 @@ public class VPlayers extends FDropDown {
             g.drawImage(avatarImage, x, y, h, h);
             x += h + PADDING;
 
-            StringBuilder builder = new StringBuilder();
-            builder.append(player.getName());
-            builder.append("\nLife: " + String.valueOf(player.getLife()));
-            builder.append("  |  Poison counters: " + String.valueOf(player.getPoisonCounters()));
-            builder.append("  |  Maximum hand size: " + String.valueOf(player.getMaxHandSize()));
-            builder.append("  |  Cards drawn this turn: " + String.valueOf(player.getNumDrawnThisTurn()));
-            builder.append("  |  Damage Prevention: " + String.valueOf(player.getPreventNextDamage()));
-            if (!player.getKeywords().isEmpty()) {
-                builder.append("  |  " + player.getKeywords().toString());
-            }
-            if (FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
-                Iterable<CardView> list = player.getAnte();
-                builder.append("  |  Ante'd: ");
-                boolean needDelim = false;
-                for (CardView cv : list) {
-                    if (needDelim) {
-                        builder.append(", ");
-                    }
-                    else { needDelim = true; }
-                    builder.append(cv);
-                }
-            }
-            if (MatchController.instance.getGameView().isCommander()) {
-                builder.append("  |  " + player.getCommanderInfo());
-            }
-
-            g.drawText(builder.toString(), FONT, FList.FORE_COLOR, x, y, getWidth() - PADDING - x, h, true, HAlignment.LEFT, true);
+            g.drawText(player.getDetails(), FONT, FList.FORE_COLOR, x, y, getWidth() - PADDING - x, h, true, HAlignment.LEFT, true);
         }
 
         @Override

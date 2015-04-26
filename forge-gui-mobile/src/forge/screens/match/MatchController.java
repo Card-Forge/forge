@@ -34,11 +34,9 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
-import forge.interfaces.IButton;
 import forge.item.PaperCard;
 import forge.match.AbstractGuiGame;
 import forge.match.HostedMatch;
-import forge.match.MatchButtonType;
 import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
 import forge.properties.ForgePreferences;
@@ -50,6 +48,7 @@ import forge.screens.match.views.VPlayerPanel;
 import forge.screens.match.views.VPlayerPanel.InfoTab;
 import forge.screens.match.views.VPrompt;
 import forge.screens.match.winlose.ViewWinLose;
+import forge.toolbox.FButton;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
@@ -143,23 +142,17 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public IButton getBtnOK(PlayerView player) {
-        return view.getPrompt(player).getBtnOk();
-    }
-
-    @Override
-    public IButton getBtnCancel(PlayerView player) {
-        return view.getPrompt(player).getBtnCancel();
-    }
-
-    @Override
     public void showPromptMessage(final PlayerView player, final String message) {
         view.getPrompt(player).setMessage(message);
     }
 
-    @Override
-    public void focusButton(final MatchButtonType button) {
-        //not needed for mobile game
+    public void updateButtons(final PlayerView owner, final String label1, final String label2, final boolean enable1, final boolean enable2, final boolean focus1) {
+        final VPrompt prompt = view.getPrompt(owner);
+        final FButton btn1 = prompt.getBtnOk(), btn2 = prompt.getBtnCancel();
+        btn1.setText(label1);
+        btn2.setText(label2);
+        btn1.setEnabled(enable1);
+        btn2.setEnabled(enable2);
     }
 
     @Override
@@ -224,7 +217,7 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public SpellAbilityView getAbilityToPlay(List<SpellAbilityView> abilities, ITriggerEvent triggerEvent) {
+    public SpellAbilityView getAbilityToPlay(final CardView hostCard, final List<SpellAbilityView> abilities, final ITriggerEvent triggerEvent) {
         if (abilities.isEmpty()) {
             return null;
         }
@@ -318,11 +311,6 @@ public class MatchController extends AbstractGuiGame {
         for (PlayerView p : livesUpdate) {
             view.getPlayerPanel(p).updateLife();
         }
-    }
-
-    @Override
-    public boolean stopAtPhase(PlayerView turn, PhaseType phase) {
-        return view.stopAtPhase(turn, phase);
     }
 
     @Override

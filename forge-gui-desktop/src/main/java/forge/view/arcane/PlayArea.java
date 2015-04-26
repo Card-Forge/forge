@@ -543,7 +543,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 }
             }
         }
-        if (getMatchUI().getCPrompt().selectCard(panel.getCard(), otherCardViewsToSelect, triggerEvent)) {
+        if (getMatchUI().getGameController().selectCard(panel.getCard(), otherCardViewsToSelect, triggerEvent)) {
             return true;
         }
         //if panel can't do anything with card selection, try selecting previous panel in stack

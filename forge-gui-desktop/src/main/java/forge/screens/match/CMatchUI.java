@@ -17,8 +17,8 @@
  */
 package forge.screens.match;
 
+import java.awt.Component;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -32,11 +32,10 @@ import java.util.concurrent.atomic.AtomicReference;
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
-import javax.swing.MenuElement;
-import javax.swing.MenuSelectionManager;
 import javax.swing.SwingUtilities;
 
 import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
 import forge.FThreads;
@@ -56,7 +55,6 @@ import forge.game.combat.CombatView;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
-import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
@@ -72,11 +70,9 @@ import forge.gui.framework.IVDoc;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.framework.SLayoutIO;
 import forge.gui.framework.VEmptyDoc;
-import forge.interfaces.IButton;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.match.AbstractGuiGame;
-import forge.match.MatchButtonType;
 import forge.menus.IMenuProvider;
 import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
@@ -97,7 +93,6 @@ import forge.toolbox.FButton;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
-import forge.toolbox.MouseTriggerEvent;
 import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PhaseLabel;
 import forge.trackable.TrackableCollection;
@@ -149,13 +144,13 @@ public final class CMatchUI
         Singletons.getView().getLpnDocument().add(targetingOverlay.getPanel(), FView.TARGETING_LAYER);
         targetingOverlay.getPanel().setSize(Singletons.getControl().getDisplaySize());
         this.myDocs = new EnumMap<EDocID, IVDoc<? extends ICDoc>>(EDocID.class);
-        this.myDocs.put(EDocID.CARD_PICTURE, getCDetailPicture().getCPicture().getView());
-        this.myDocs.put(EDocID.CARD_DETAIL, getCDetailPicture().getCDetail().getView());
-        this.myDocs.put(EDocID.CARD_ANTES, getCAntes().getView());
+        this.myDocs.put(EDocID.CARD_PICTURE, cDetailPicture.getCPicture().getView());
+        this.myDocs.put(EDocID.CARD_DETAIL, cDetailPicture.getCDetail().getView());
+        this.myDocs.put(EDocID.CARD_ANTES, cAntes.getView());
         this.myDocs.put(EDocID.REPORT_MESSAGE, getCPrompt().getView());
         this.myDocs.put(EDocID.REPORT_STACK, getCStack().getView());
-        this.myDocs.put(EDocID.REPORT_COMBAT, getCCombat().getView());
-        this.myDocs.put(EDocID.REPORT_LOG, getCLog().getView());
+        this.myDocs.put(EDocID.REPORT_COMBAT, cCombat.getView());
+        this.myDocs.put(EDocID.REPORT_LOG, cLog.getView());
         this.myDocs.put(EDocID.DEV_MODE, getCDev().getView());
         this.myDocs.put(EDocID.BUTTON_DOCK, getCDock().getView());;
     }
@@ -212,25 +207,13 @@ public final class CMatchUI
         getCDev().update();
     }
 
-    public CAntes getCAntes() {
-        return cAntes;
-    }
-    public CCombat getCCombat() {
-        return cCombat;
-    }
-    public CDetailPicture getCDetailPicture() {
-        return cDetailPicture;
-    }
     public CDev getCDev() {
         return cDev;
     }
     public CDock getCDock() {
         return cDock;
     }
-    public CLog getCLog() {
-        return cLog;
-    }
-    public CPrompt getCPrompt() {
+    CPrompt getCPrompt() {
         return cPrompt;
     }
     public CStack getCStack() {
@@ -338,24 +321,6 @@ public final class CMatchUI
         return idx < 0 || idx >= allHands.size() ? null : allHands.get(idx);
     }
 
-    /**
-     * Checks if game control should stop at a phase, for either a forced
-     * programmatic stop, or a user-induced phase toggle.
-     * 
-     * @param turn
-     *            the {@link Player} at whose phase might be stopped.
-     * @param phase
-     *            the {@link PhaseType} at which might be stopped.
-     * @return boolean whether the current GUI calls for a stop at the specified
-     *         phase of the specified player.
-     */
-    @Override
-    public final boolean stopAtPhase(final PlayerView turn, final PhaseType phase) {
-        final VField vf = getFieldViewFor(turn);
-        final PhaseLabel label = vf.getPhaseIndicator().getLabelFor(phase);
-        return label == null || label.getEnabled();
-    }
-
     @Override
     public void setCard(final CardView c) {
         this.setCard(c, false);
@@ -395,8 +360,8 @@ public final class CMatchUI
             SDisplayUtil.showTab(selectedDocBeforeCombat);
             selectedDocBeforeCombat = null;
         }
-        getCCombat().setModel(combat);
-        getCCombat().update();
+        cCombat.setModel(combat);
+        cCombat.update();
     } // showCombat(CombatView)
 
     @Override
@@ -548,26 +513,60 @@ public final class CMatchUI
         return panels;
     }
 
-    @Override
-    public IButton getBtnOK(final PlayerView playerView) {
-        return view.getBtnOK();
+    /**
+     * Find the card panel belonging to a card, bringing up the corresponding
+     * window or tab if necessary.
+     * 
+     * @param card
+     *            the {@link CardView} to find a panel for.
+     * @return a {@link CardPanel}, or {@code null} if no corresponding panel is
+     *         found.
+     */
+    private CardPanel findCardPanel(final CardView card) {
+        final int id = card.getId();
+        switch (card.getZone()) {
+        case Battlefield:
+            for (final VField f : view.getFieldViews()) {
+                final CardPanel panel = f.getTabletop().getCardPanel(id);
+                if (panel != null) {
+                    SDisplayUtil.showTab(f);
+                    return panel;
+                }
+            }
+            break;
+        case Hand:
+            for (final VHand h : view.getHands()) {
+                final CardPanel panel = h.getHandArea().getCardPanel(id);
+                if (panel != null) {
+                    SDisplayUtil.showTab(h);
+                    return panel;
+                }
+            }
+            break;
+        case Command:
+        case Exile:
+        case Graveyard:
+        case Library:
+            return FloatingCardArea.getCardPanel(this, card);
+        default:
+            break;
+        }
+        return null;
     }
 
-    @Override
-    public IButton getBtnCancel(final PlayerView playerView) {
-        return view.getBtnCancel();
-    }
+    public void updateButtons(final PlayerView owner, final String label1, final String label2, final boolean enable1, final boolean enable2, final boolean focus1) {
+        final FButton btn1 = view.getBtnOK(), btn2 = view.getBtnCancel();
+        btn1.setText(label1);
+        btn2.setText(label2);
+        btn1.setEnabled(enable1);
+        btn2.setEnabled(enable2);
 
-    @Override
-    public void focusButton(final MatchButtonType button) {
+        final FButton toFocus = enable1 && focus1 ? btn1 : (enable2 ? btn2 : null);
         // ensure we don't steal focus from an overlay
-        if (!SOverlayUtils.overlayHasFocus()) {
+        if (toFocus != null && !SOverlayUtils.overlayHasFocus()) {
             FThreads.invokeInEdtLater(new Runnable() {
                 @Override public final void run() {
-                    final FButton btn = button == MatchButtonType.OK
-                            ? getCPrompt().getView().getBtnOK()
-                            : getCPrompt().getView().getBtnCancel();
-                    btn.requestFocusInWindow();
+                    toFocus.requestFocusInWindow();
                 }
             });
         }
@@ -671,7 +670,7 @@ public final class CMatchUI
     }
 
     @Override
-    public SpellAbilityView getAbilityToPlay(final List<SpellAbilityView> abilities, final ITriggerEvent triggerEvent) {
+    public SpellAbilityView getAbilityToPlay(final CardView hostCard, final List<SpellAbilityView> abilities, final ITriggerEvent triggerEvent) {
         if (triggerEvent == null) {
             if (abilities.isEmpty()) {
                 return null;
@@ -696,19 +695,20 @@ public final class CMatchUI
         final JPopupMenu menu = new JPopupMenu("Abilities");
 
         boolean enabled;
-        boolean hasEnabled = false;
+        int firstEnabled = -1;
         int shortcut = KeyEvent.VK_1; //use number keys as shortcuts for abilities 1-9
+        int index = 0;
         for (final SpellAbilityView ab : abilities) {
             enabled = ab.canPlay();
-            if (enabled) {
-                hasEnabled = true;
+            if (enabled && firstEnabled < 0) {
+                firstEnabled = index;
             }
             GuiUtils.addMenuItem(menu, FSkin.encodeSymbols(ab.toString(), true),
                     shortcut > 0 ? KeyStroke.getKeyStroke(shortcut, 0) : null,
                     new Runnable() {
                         @Override
                         public void run() {
-                            cPrompt.selectAbility(ab);
+                            getGameController().selectAbility(ab);
                         }
                     }, enabled);
             if (shortcut > 0) {
@@ -717,15 +717,38 @@ public final class CMatchUI
                     shortcut = 0; //stop adding shortcuts after 9
                 }
             }
+            index++;
         }
-        if (hasEnabled) { //only show menu if at least one ability can be played
-            SwingUtilities.invokeLater(new Runnable() { //use invoke later to ensure first ability selected by default
-                public void run() {
-                    MenuSelectionManager.defaultManager().setSelectedPath(new MenuElement[]{menu, menu.getSubElements()[0]});
+
+        if (firstEnabled >= 0) { //only show menu if at least one ability can be played
+            final CardPanel panel = findCardPanel(hostCard);
+            final Component menuParent;
+            final int x, y;
+            if (panel == null) {
+                // Fall back to showing in VPrompt if no panel can be found
+                menuParent = getCPrompt().getView().getTarMessage();
+                x = 0;
+                y = 0;
+                SDisplayUtil.showTab(getCPrompt().getView());
+            } else {
+                final ZoneType zone = hostCard.getZone();
+                if (ImmutableList.of(ZoneType.Command, ZoneType.Exile, ZoneType.Graveyard, ZoneType.Library).contains(zone)) {
+                    FloatingCardArea.show(this, hostCard.getController(), zone);
+                }
+                menuParent = panel.getParent();
+                x = triggerEvent.getX();
+                y = triggerEvent.getY();
+            }
+            menu.show(menuParent, x, y);
+
+            final int _firstEnabled = firstEnabled;
+            SwingUtilities.invokeLater(new Runnable() { //use invoke later to ensure first enabled ability selected by default
+                @Override public final void run() {
+                    for (int i = 0; i <= _firstEnabled; i++) {
+                        menu.dispatchEvent(new KeyEvent(menu, KeyEvent.KEY_PRESSED, 0, 0, KeyEvent.VK_DOWN, KeyEvent.CHAR_UNDEFINED));
+                    }
                 }
             });
-            MouseEvent mouseEvent = ((MouseTriggerEvent)triggerEvent).getMouseEvent();
-            menu.show(mouseEvent.getComponent(), mouseEvent.getX(), mouseEvent.getY());
         }
 
         return null; //delay ability until choice made
@@ -772,7 +795,7 @@ public final class CMatchUI
     @Override
     public void openView(final TrackableCollection<PlayerView> myPlayers) {
         final GameView gameView = getGameView();
-        gameView.getGameLog().addObserver(getCLog());
+        gameView.getGameLog().addObserver(cLog);
 
         // Sort players
         FCollectionView<PlayerView> players = gameView.getPlayers();

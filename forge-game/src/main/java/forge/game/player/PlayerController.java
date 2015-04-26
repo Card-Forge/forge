@@ -90,8 +90,8 @@ public abstract class PlayerController {
     public Player getPlayer() { return player; }
     public LobbyPlayer getLobbyPlayer() { return lobbyPlayer; }
 
-    public final SpellAbility getAbilityToPlay(List<SpellAbility> abilities) { return getAbilityToPlay(abilities, null); }
-    public abstract SpellAbility getAbilityToPlay(List<SpellAbility> abilities, ITriggerEvent triggerEvent);
+    public final SpellAbility getAbilityToPlay(final Card hostCard, final List<SpellAbility> abilities) { return getAbilityToPlay(hostCard, abilities, null); }
+    public abstract SpellAbility getAbilityToPlay(Card hostCard, List<SpellAbility> abilities, ITriggerEvent triggerEvent);
 
     //public abstract void playFromSuspend(Card c);
     public abstract void playSpellAbilityForFree(SpellAbility copySA, boolean mayChoseNewTargets);

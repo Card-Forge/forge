@@ -1,5 +1,6 @@
 package forge.game.player;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import forge.game.card.Card;
@@ -10,7 +11,9 @@ import forge.game.zone.ZoneType;
  * Stores information to reveal cards after a delay unless those cards can be
  * revealed in the same dialog as cards being selected
  */
-public class DelayedReveal {
+public class DelayedReveal implements Serializable {
+    private static final long serialVersionUID = 5516713460440436615L;
+
     private final Collection<CardView> cards;
     private final ZoneType zone;
     private final PlayerView owner;

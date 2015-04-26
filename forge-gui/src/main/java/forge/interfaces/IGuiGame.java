@@ -19,7 +19,6 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
-import forge.match.MatchButtonType;
 import forge.player.PlayerZoneUpdate;
 import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
@@ -31,10 +30,8 @@ public interface IGuiGame {
     void afterGameEnd();
     void showCombat();
     void showPromptMessage(PlayerView playerView, String message);
-    boolean stopAtPhase(PlayerView playerTurn, PhaseType phase);
-    IButton getBtnOK(PlayerView playerView);
-    IButton getBtnCancel(PlayerView playerView);
-    void focusButton(MatchButtonType button);
+    void updateButtons(PlayerView owner, boolean okEnabled, boolean cancelEnabled, boolean focusOk);
+    void updateButtons(PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1);
     void flashIncorrectAction();
     void updatePhase();
     void updateTurn(PlayerView player);
@@ -52,11 +49,8 @@ public interface IGuiGame {
     void updateManaPool(Iterable<PlayerView> manaPoolUpdate);
     void updateLives(Iterable<PlayerView> livesUpdate);
     void setPanelSelection(CardView hostCard);
-    SpellAbilityView getAbilityToPlay(List<SpellAbilityView> abilities,
-            ITriggerEvent triggerEvent);
-    Map<CardView, Integer> assignDamage(CardView attacker,
-            List<CardView> blockers, int damage, GameEntityView defender,
-            boolean overrideOrder);
+    SpellAbilityView getAbilityToPlay(CardView hostCard, List<SpellAbilityView> abilities, ITriggerEvent triggerEvent);
+    Map<CardView, Integer> assignDamage(CardView attacker, List<CardView> blockers, int damage, GameEntityView defender, boolean overrideOrder);
 
     void message(String message);
     void message(String message, String title);
@@ -163,10 +157,6 @@ public interface IGuiGame {
     void setPlayerAvatar(LobbyPlayer player, IHasIcon ihi);
     boolean openZones(Collection<ZoneType> zones, Map<PlayerView, Object> players);
     void restoreOldZones(Map<PlayerView, Object> playersToRestoreZonesFor);
-    void updateButtons(PlayerView owner, boolean okEnabled,
-            boolean cancelEnabled, boolean focusOk);
-    void updateButtons(PlayerView owner, String okLabel, String cancelLabel,
-            boolean okEnabled, boolean cancelEnabled, boolean focusOk);
     void setHighlighted(PlayerView pv, boolean b);
     void setUsedToPay(CardView card, boolean value);
 

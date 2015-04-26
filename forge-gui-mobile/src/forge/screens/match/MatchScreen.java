@@ -384,7 +384,7 @@ public class MatchScreen extends FScreen {
             break;
         case Keys.Z: //undo on Ctrl+Z
             if (KeyInputAdapter.isCtrlKeyDown()) {
-                getGameController().tryUndoLastAction();
+                getGameController().undoLastAction();
                 return true;
             }
             break;

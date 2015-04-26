@@ -32,8 +32,7 @@ public class WatchLocalGame extends PlayerControllerHuman {
     }
 
     @Override
-    public boolean tryUndoLastAction() {
-        return false;
+    public void undoLastAction() {
     }
 
     @Override
@@ -63,18 +62,15 @@ public class WatchLocalGame extends PlayerControllerHuman {
     }
 
     @Override
-    public boolean passPriority() {
-        return false;
+    public void passPriority() {
     }
 
     @Override
-    public boolean passPriorityUntilEndOfTurn() {
-        return false;
+    public void passPriorityUntilEndOfTurn() {
     }
 
     @Override
-    public boolean useMana(final byte mana) {
-        return false;
+    public void useMana(final byte mana) {
     }
 
     @Override
