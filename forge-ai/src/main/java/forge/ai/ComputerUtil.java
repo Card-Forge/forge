@@ -578,7 +578,7 @@ public class ComputerUtil {
             }
         }
 
-        Card c;
+        Card c = null;
         if (CardLists.getNotType(remaining, "Creature").isEmpty()) {
             c = ComputerUtilCard.getWorstCreatureAI(remaining);
         }
@@ -589,7 +589,7 @@ public class ComputerUtil {
             c = ComputerUtilCard.getWorstPermanentAI(remaining, false, false, false, false);
         }
 
-        if (c.isEnchanted()) {
+        if (c != null && c.isEnchanted()) {
             // TODO: choose "worst" controlled enchanting Aura
             for (Card aura : c.getEnchantedBy(false)) {
                 if (aura.getController().equals(c.getController()) && remaining.contains(aura)) {
