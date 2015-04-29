@@ -242,6 +242,7 @@ forge-core/src/main/java/forge/util/BinaryUtil.java -text
 forge-core/src/main/java/forge/util/BuildInfo.java -text
 forge-core/src/main/java/forge/util/CollectionSuppliers.java -text
 forge-core/src/main/java/forge/util/ComparableOp.java -text
+forge-core/src/main/java/forge/util/EnumUtil.java -text
 forge-core/src/main/java/forge/util/FileSection.java -text
 forge-core/src/main/java/forge/util/FileSectionManual.java -text
 forge-core/src/main/java/forge/util/FileUtil.java svneol=native#text/plain
@@ -259,6 +260,7 @@ forge-core/src/main/java/forge/util/MyRandom.java svneol=native#text/plain
 forge-core/src/main/java/forge/util/NameGenerator.java -text
 forge-core/src/main/java/forge/util/PredicateString.java -text
 forge-core/src/main/java/forge/util/ReflectionUtil.java -text
+forge-core/src/main/java/forge/util/Settable.java -text
 forge-core/src/main/java/forge/util/TextUtil.java -text
 forge-core/src/main/java/forge/util/ThreadUtil.java -text
 forge-core/src/main/java/forge/util/Visitor.java -text

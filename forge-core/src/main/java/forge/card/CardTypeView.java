@@ -1,7 +1,6 @@
 package forge.card;
 
 import java.io.Serializable;
-import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -40,6 +39,5 @@ public interface CardTypeView extends Iterable<String>, Serializable {
     boolean isPhenomenon();
     boolean isEmblem();
     boolean isTribal();
-    LinkedHashSet<String> getTypesBeforeDash();
     CardTypeView getTypeWithChanges(Map<Long, CardChangedType> changedCardTypes);
 }

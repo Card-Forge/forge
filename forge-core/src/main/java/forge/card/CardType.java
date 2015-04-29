@@ -6,23 +6,19 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.card;
 
-import org.apache.commons.lang3.NotImplementedException;
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.Iterables;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -32,16 +28,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.NotImplementedException;
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
+
+import forge.util.EnumUtil;
+import forge.util.Settable;
+
 /**
  * <p>
  * Immutable Card type. Can be built only from parsing a string.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id: java 9708 2011-08-09 19:34:12Z jendave $
  */
 public final class CardType implements Comparable<CardType>, CardTypeView {
-    private static final long serialVersionUID = 7612877255541109847L;
+    private static final long serialVersionUID = 4629853583167022151L;
 
     public static final CardTypeView EMPTY = new CardType();
 
@@ -53,15 +58,16 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         Enchantment(true),
         Instant(false),
         Land(true),
+        Phenomenon(false),
         Plane(false),
         Planeswalker(true),
         Scheme(false),
         Sorcery(false),
         Tribal(false),
-        Vanguard(false),
-        Phenomenon(false);
+        Vanguard(false);
 
         public final boolean isPermanent;
+        private static final ImmutableList<String> allCoreTypeNames = EnumUtil.getNames(CoreType.class);
 
         private CoreType(final boolean permanent) {
             isPermanent = permanent;
@@ -74,12 +80,14 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         Legendary,
         Snow,
         Ongoing,
-        World
+        World;
+
+        private static final ImmutableList<String> allSuperTypeNames = EnumUtil.getNames(Supertype.class);
     }
 
     // This will be useful for faster parses
-    private static HashMap<String, CoreType> stringToCoreType = new HashMap<String, CoreType>();
-    private static HashMap<String, Supertype> stringToSupertype = new HashMap<String, Supertype>();
+    private static Map<String, CoreType> stringToCoreType = new HashMap<String, CoreType>();
+    private static Map<String, Supertype> stringToSupertype = new HashMap<String, Supertype>();
     static {
         for (final Supertype st : Supertype.values()) {
             stringToSupertype.put(st.name(), st);
@@ -89,31 +97,31 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         }
     }
 
-    private final EnumSet<CoreType> coreTypes = EnumSet.noneOf(CoreType.class);
-    private final EnumSet<Supertype> supertypes = EnumSet.noneOf(Supertype.class);
-    private final LinkedHashSet<String> subtypes = new LinkedHashSet<String>();
-    private String calculatedType = null;
+    private final Set<CoreType> coreTypes = EnumSet.noneOf(CoreType.class);
+    private final Set<Supertype> supertypes = EnumSet.noneOf(Supertype.class);
+    private final Set<String> subtypes = new LinkedHashSet<String>();
+    private transient String calculatedType = null;
 
     public CardType() {
     }
-    public CardType(Iterable<String> from0) {
+    public CardType(final Iterable<String> from0) {
         addAll(from0);
     }
-    public CardType(CardType from0) {
+    public CardType(final CardType from0) {
         addAll(from0);
     }
-    public CardType(CardTypeView from0) {
+    public CardType(final CardTypeView from0) {
         addAll(from0);
     }
 
     public boolean add(final String t) {
         boolean changed;
-        CoreType ct = stringToCoreType.get(t);
+        final CoreType ct = stringToCoreType.get(t);
         if (ct != null) {
             changed = coreTypes.add(ct);
         }
         else {
-            Supertype st = stringToSupertype.get(t);
+            final Supertype st = stringToSupertype.get(t);
             if (st != null) {
                 changed = supertypes.add(st);
             }
@@ -128,23 +136,23 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         }
         return false;
     }
-    public boolean addAll(Iterable<String> types) {
+    public boolean addAll(final Iterable<String> types) {
         boolean changed = false;
-        for (String t : types) {
+        for (final String t : types) {
             if (add(t)) {
                 changed = true;
             }
         }
         return changed;
     }
-    public boolean addAll(CardType type) {
+    public boolean addAll(final CardType type) {
         boolean changed = false;
         if (coreTypes.addAll(type.coreTypes)) { changed = true; }
         if (supertypes.addAll(type.supertypes)) { changed = true; }
         if (subtypes.addAll(type.subtypes)) { changed = true; }
         return changed;
     }
-    public boolean addAll(CardTypeView type) {
+    public boolean addAll(final CardTypeView type) {
         boolean changed = false;
         if (Iterables.addAll(coreTypes, type.getCoreTypes())) { changed = true; }
         if (Iterables.addAll(supertypes, type.getSupertypes())) { changed = true; }
@@ -152,7 +160,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return changed;
     }
 
-    public boolean removeAll(CardType type) {
+    public boolean removeAll(final CardType type) {
         boolean changed = false;
         if (coreTypes.removeAll(type.coreTypes)) { changed = true; }
         if (supertypes.removeAll(type.supertypes)) { changed = true; }
@@ -172,23 +180,28 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         calculatedType = null;
     }
 
+    @Override
     public boolean isEmpty() {
         return coreTypes.isEmpty() && supertypes.isEmpty() && subtypes.isEmpty();
     }
 
+    @Override
     public Iterable<CoreType> getCoreTypes() {
         return coreTypes;
     }
+    @Override
     public Iterable<Supertype> getSupertypes() {
         return supertypes;
     }
+    @Override
     public Iterable<String> getSubtypes() {
         return subtypes;
     }
+    @Override
     public Set<String> getCreatureTypes() {
-        Set<String> creatureTypes = new HashSet<String>();
+        final Set<String> creatureTypes = new HashSet<String>();
         if (isCreature() || isTribal()) {
-            for (String t : subtypes) {
+            for (final String t : subtypes) {
                 if (isACreatureType(t) || t.equals("AllCreatureTypes")) {
                     creatureTypes.add(t);
                 }
@@ -196,18 +209,20 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         }
         return creatureTypes;
     }
+    @Override
     public Set<String> getLandTypes() {
-        Set<String> landTypes = new HashSet<String>();
+        final Set<String> landTypes = new HashSet<String>();
         if (isLand()) {
-            for (String t : subtypes) {
+            for (final String t : subtypes) {
                 if (isALandType(t) || isABasicLandType(t)) {
-                	landTypes.add(t);
+                    landTypes.add(t);
                 }
             }
         }
         return landTypes;
     }
 
+    @Override
     public boolean hasStringType(String t) {
         if (t.isEmpty()) {
             return false;
@@ -215,32 +230,36 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (hasSubtype(t)) {
             return true;
         }
-        char firstChar = t.charAt(0);
+        final char firstChar = t.charAt(0);
         if (Character.isLowerCase(firstChar)) {
             t = Character.toUpperCase(firstChar) + t.substring(1); //ensure string is proper case for enum types
         }
-        CoreType type = stringToCoreType.get(t);
+        final CoreType type = stringToCoreType.get(t);
         if (type != null) {
             return hasType(type);
         }
-        Supertype supertype = stringToSupertype.get(t);
+        final Supertype supertype = stringToSupertype.get(t);
         if (supertype != null) {
             return hasSupertype(supertype);
         }
         return false;
     }
-    public boolean hasType(CoreType type) {
+    @Override
+    public boolean hasType(final CoreType type) {
         return coreTypes.contains(type);
     }
-    public boolean hasSupertype(Supertype supertype) {
+    @Override
+    public boolean hasSupertype(final Supertype supertype) {
         return supertypes.contains(supertype);
     }
-    public boolean hasSubtype(String subtype) {
-        if (forge.card.CardType.isACreatureType(subtype) && subtypes.contains("AllCreatureTypes")) {
+    @Override
+    public boolean hasSubtype(final String subtype) {
+        if (isACreatureType(subtype) && subtypes.contains("AllCreatureTypes")) {
             return true;
         }
         return subtypes.contains(subtype);
     }
+    @Override
     public boolean hasCreatureType(String creatureType) {
         if (subtypes.isEmpty()) { return false; }
         if (!isCreature() && !isTribal()) { return false; }
@@ -267,8 +286,9 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return sb.toString();
     }
 
+    @Override
     public boolean isPermanent() {
-        for (CoreType type : coreTypes) {
+        for (final CoreType type : coreTypes) {
             if (type.isPermanent) {
                 return true;
             }
@@ -276,74 +296,92 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return false;
     }
 
+    @Override
     public boolean isCreature() {
         return coreTypes.contains(CoreType.Creature);
     }
 
+    @Override
     public boolean isPlaneswalker() {
         return coreTypes.contains(CoreType.Planeswalker);
     }
 
+    @Override
     public boolean isLand() {
         return coreTypes.contains(CoreType.Land);
     }
 
+    @Override
     public boolean isArtifact() {
         return coreTypes.contains(CoreType.Artifact);
     }
 
+    @Override
     public boolean isInstant() {
         return coreTypes.contains(CoreType.Instant);
     }
 
+    @Override
     public boolean isSorcery() {
         return coreTypes.contains(CoreType.Sorcery);
     }
 
+    @Override
     public boolean isConspiracy() {
         return coreTypes.contains(CoreType.Conspiracy);
     }
 
+    @Override
     public boolean isVanguard() {
         return coreTypes.contains(CoreType.Vanguard);
     }
 
+    @Override
     public boolean isScheme() {
         return coreTypes.contains(CoreType.Scheme);
     }
 
+    @Override
     public boolean isEnchantment() {
         return coreTypes.contains(CoreType.Enchantment);
     }
 
+    @Override
     public boolean isBasic() {
         return supertypes.contains(Supertype.Basic);
     }
 
+    @Override
     public boolean isLegendary() {
         return supertypes.contains(Supertype.Legendary);
     }
 
+    @Override
     public boolean isSnow() {
         return supertypes.contains(Supertype.Snow);
     }
 
+    @Override
     public boolean isBasicLand() {
         return isBasic() && isLand();
     }
 
+    @Override
     public boolean isPlane() {
         return coreTypes.contains(CoreType.Plane);
     }
 
+    @Override
     public boolean isPhenomenon() {
         return coreTypes.contains(CoreType.Phenomenon);
     }
 
+    @Override
     public boolean isEmblem() {
         return coreTypes.contains(CoreType.Emblem);
     }
 
+    @Override
     public boolean isTribal() {
         return coreTypes.contains(CoreType.Tribal);
     }
@@ -361,8 +399,8 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return calculatedType;
     }
 
-    public LinkedHashSet<String> getTypesBeforeDash() {
-        final LinkedHashSet<String> types = new LinkedHashSet<String>();
+    private Set<String> getTypesBeforeDash() {
+        final Set<String> types = new LinkedHashSet<String>();
         for (final Supertype st : supertypes) {
             types.add(st.name());
         }
@@ -372,7 +410,8 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return types;
     }
 
-    public CardTypeView getTypeWithChanges(Map<Long, CardChangedType> changedCardTypes) {
+    @Override
+    public CardTypeView getTypeWithChanges(final Map<Long, CardChangedType> changedCardTypes) {
         if (changedCardTypes.isEmpty()) { return this; }
 
         final CardType newType = new CardType(CardType.this);
@@ -387,9 +426,9 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
                 newType.subtypes.clear();
             }
             else if (ct.isRemoveCreatureTypes()) {
-                Iterator<String> subtypes = newType.subtypes.iterator();
+                final Iterator<String> subtypes = newType.subtypes.iterator();
                 while (subtypes.hasNext()) {
-                    String t = subtypes.next();
+                    final String t = subtypes.next();
                     if (isACreatureType(t) || t.equals("AllCreatureTypes")) {
                         subtypes.remove();
                     }
@@ -439,8 +478,8 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return toString().compareTo(o.toString());
     }
 
-    public boolean sharesSubtypeWith(CardType ctOther) {
-        for (String t : ctOther.getSubtypes()) {
+    public boolean sharesSubtypeWith(final CardType ctOther) {
+        for (final String t : ctOther.getSubtypes()) {
             if (hasSubtype(t)) {
                 return true;
             }
@@ -472,7 +511,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     public static CardType combine(final CardType a, final CardType b) {
-        CardType result = new CardType();
+        final CardType result = new CardType();
         result.supertypes.addAll(a.supertypes);
         result.supertypes.addAll(b.supertypes);
         result.coreTypes.addAll(a.coreTypes);
@@ -495,14 +534,11 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     public static class Constant {
-        public static final boolean[] LOADED = { false };
-        public static final List<String> CARD_TYPES = new ArrayList<String>();
-        public static final List<String> SUPER_TYPES = new ArrayList<String>();
+        public static final Settable LOADED = new Settable();
         public static final List<String> BASIC_TYPES = new ArrayList<String>();
         public static final List<String> LAND_TYPES = new ArrayList<String>();
         public static final List<String> CREATURE_TYPES = new ArrayList<String>();
-        public static final List<String> INSTANT_TYPES = new ArrayList<String>();
-        public static final List<String> SORCERY_TYPES = new ArrayList<String>();
+        public static final List<String> SPELL_TYPES = new ArrayList<String>();
         public static final List<String> ENCHANTMENT_TYPES = new ArrayList<String>();
         public static final List<String> ARTIFACT_TYPES = new ArrayList<String>();
         public static final List<String> WALKER_TYPES = new ArrayList<String>();
@@ -513,40 +549,26 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return getAllCardTypes().contains(cardType);
     }
 
-    public static ArrayList<String> getAllCardTypes() {
-        final ArrayList<String> types = new ArrayList<String>();
-    
-        // types.addAll(getCardTypes());
-        types.addAll(Constant.CARD_TYPES);
-    
-        // Variant card types (I don't understand these lines, shouldn't core types be enough?)
-        types.add("Plane");
-        types.add("Scheme");
-        types.add("Vanguard");
-        types.add("Conspiracy");
-    
-        return types;
+    public static ImmutableList<String> getAllCardTypes() {
+        return CoreType.allCoreTypeNames;
     }
 
-    public static ArrayList<String> getBasicTypes() {
-        final ArrayList<String> types = new ArrayList<String>();
-    
-        types.addAll(Constant.BASIC_TYPES);
-    
-        return types;
+    public static List<String> getBasicTypes() {
+        return Collections.unmodifiableList(Constant.BASIC_TYPES);
     }
 
-    public static ArrayList<String> getAllLandTypes() {
-        final ArrayList<String> types = new ArrayList<String>();
-    
-        types.addAll(Constant.BASIC_TYPES);
-        types.addAll(Constant.LAND_TYPES);
-    
-        return types;
+    public static List<String> getAllCreatureTypes() {
+        return Collections.unmodifiableList(Constant.CREATURE_TYPES);
+    }
+    public static List<String> getAllLandTypes() {
+        return ImmutableList.<String>builder()
+                .addAll(getBasicTypes())
+                .addAll(Constant.LAND_TYPES)
+                .build();
     }
 
     public static boolean isASupertype(final String cardType) {
-        return (Constant.SUPER_TYPES.contains(cardType));
+        return (Supertype.allSuperTypeNames.contains(cardType));
     }
 
     public static boolean isASubType(final String cardType) {

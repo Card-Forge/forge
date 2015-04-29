@@ -17,10 +17,18 @@
  */
 package forge.game.phase;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
-import forge.card.CardType.Constant;
+import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.ApiType;
@@ -34,9 +42,6 @@ import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.FCollection;
-
-import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * <p>
@@ -131,7 +136,7 @@ public class Untap extends Phase {
             }
             if (kw.startsWith("OnlyUntapChosen") && !hasChosen) {
                 List<String> validTypes = Arrays.asList(kw.split(":")[1].split(","));
-                List<String> invalidTypes = new ArrayList<String>(Constant.CARD_TYPES);
+                List<String> invalidTypes = new ArrayList<String>(CardType.getAllCardTypes());
                 invalidTypes.removeAll(validTypes);
                 final String chosen = player.getController().chooseSomeType("Card", new SpellAbility.EmptySa(ApiType.ChooseType, null, player), validTypes, invalidTypes);
                 list = CardLists.getType(list,chosen);

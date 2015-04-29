@@ -17,6 +17,11 @@
  */
 package forge.model;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import forge.CardStorageReader;
 import forge.CardStorageReader.ProgressObserver;
 import forge.FThreads;
@@ -51,11 +56,6 @@ import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
-
-import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * The default Model implementation for Forge.
@@ -204,7 +204,7 @@ public class FModel {
      * Load dynamic gamedata.
      */
     public static void loadDynamicGamedata() {
-        if (!CardType.Constant.LOADED[0]) {
+        if (!CardType.Constant.LOADED.isSet()) {
             final List<String> typeListFile = FileUtil.readFile(ForgeConstants.TYPE_LIST_FILE);
 
             List<String> tList = null;
@@ -212,16 +212,7 @@ public class FModel {
             if (typeListFile.size() > 0) {
                 for (int i = 0; i < typeListFile.size(); i++) {
                     final String s = typeListFile.get(i);
-
-                    if (s.equals("[CardTypes]")) {
-                        tList = CardType.Constant.CARD_TYPES;
-                    }
-
-                    else if (s.equals("[SuperTypes]")) {
-                        tList = CardType.Constant.SUPER_TYPES;
-                    }
-
-                    else if (s.equals("[BasicTypes]")) {
+                    if (s.equals("[BasicTypes]")) {
                         tList = CardType.Constant.BASIC_TYPES;
                     }
 
@@ -233,12 +224,8 @@ public class FModel {
                         tList = CardType.Constant.CREATURE_TYPES;
                     }
 
-                    else if (s.equals("[InstantTypes]")) {
-                        tList = CardType.Constant.INSTANT_TYPES;
-                    }
-
-                    else if (s.equals("[SorceryTypes]")) {
-                        tList = CardType.Constant.SORCERY_TYPES;
+                    else if (s.equals("[SpellTypes]")) {
+                        tList = CardType.Constant.SPELL_TYPES;
                     }
 
                     else if (s.equals("[EnchantmentTypes]")) {
@@ -258,7 +245,7 @@ public class FModel {
                     }
                 }
             }
-            CardType.Constant.LOADED[0] = true;
+            CardType.Constant.LOADED.set();
         }
 
         if (!keywordsLoaded) {
