@@ -113,7 +113,7 @@ public class DamageDealEffect extends SpellAbilityEffect {
         final boolean remember = sa.hasParam("RememberDamaged");
 
         final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DamageSource"), sa);
-        if (definedSources == null) {
+        if (definedSources == null || definedSources.isEmpty()) {
             return;
         }
         final Card source = definedSources.get(0);
