@@ -2,7 +2,6 @@ package forge.net;
 
 import java.util.concurrent.TimeoutException;
 
-import forge.net.GameProtocol.ProtocolMethod;
 import forge.net.event.GuiGameEvent;
 
 public final class GameProtocolSender {

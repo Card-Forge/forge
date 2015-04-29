@@ -10,6 +10,7 @@ public class LogoutEvent implements NetEvent {
         this.username = username;
     }
 
+    @Override
     public void updateForClient(final RemoteClient client) {
     }
 

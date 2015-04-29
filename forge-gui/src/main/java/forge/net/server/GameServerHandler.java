@@ -2,9 +2,9 @@ package forge.net.server;
 
 import io.netty.channel.ChannelHandlerContext;
 import forge.interfaces.IGameController;
-import forge.net.GameProtocol.ProtocolMethod;
 import forge.net.GameProtocolHandler;
 import forge.net.IRemote;
+import forge.net.ProtocolMethod;
 import forge.net.ReplyPool;
 
 final class GameServerHandler extends GameProtocolHandler<IGameController> {

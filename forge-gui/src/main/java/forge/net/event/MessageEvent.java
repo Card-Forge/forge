@@ -13,12 +13,15 @@ public final class MessageEvent implements NetEvent {
         this.source = source;
         this.message = message;
     }
+
+    @Override
     public void updateForClient(final RemoteClient client) {
     }
 
     public String getSource() {
         return source;
     }
+
     public String getMessage() {
         return message;
     }

@@ -1,6 +1,6 @@
 package forge.net.event;
 
-import forge.net.GameProtocol.ProtocolMethod;
+import forge.net.ProtocolMethod;
 import forge.net.server.RemoteClient;
 
 public final class GuiGameEvent implements IdentifiableNetEvent {

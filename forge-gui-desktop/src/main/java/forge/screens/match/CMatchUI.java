@@ -834,14 +834,6 @@ public final class CMatchUI
     }
 
     @Override
-    public int showCardOptionDialog(final CardView card, final String message, final String title, final FSkinProp skinIcon, final String[] options, final int defaultOption) {
-        if (card != null) {
-            setCard(card);
-        }
-        return showOptionDialog(message, title, skinIcon, options, defaultOption);
-    }
-
-    @Override
     public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final String[] inputOptions) {
         return FOptionPane.showInputDialog(message, title, icon == null ? null : FSkin.getImage(icon), initialInput, inputOptions);
     }

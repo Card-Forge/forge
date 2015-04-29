@@ -1,7 +1,6 @@
 package forge.net;
 
 import forge.FThreads;
-import forge.net.GameProtocol.ProtocolMethod;
 import forge.net.event.GuiGameEvent;
 import forge.net.event.ReplyEvent;
 import io.netty.channel.ChannelHandlerContext;

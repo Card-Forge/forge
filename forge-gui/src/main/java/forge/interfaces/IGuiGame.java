@@ -65,8 +65,6 @@ public interface IGuiGame {
 
     int showOptionDialog(String message, String title, FSkinProp icon,
             String[] options, int defaultOption);
-    int showCardOptionDialog(CardView card, String message, String title,
-            FSkinProp icon, String[] options, int defaultOption);
 
     String showInputDialog(String message, String title);
     String showInputDialog(String message, String title, FSkinProp icon);

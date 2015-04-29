@@ -418,11 +418,6 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public int showCardOptionDialog(final CardView card, final String message, final String title, final FSkinProp icon, final String[] options, final int defaultOption) {
-        return FOptionPane.showCardOptionDialog(card, message, title, icon, options, defaultOption);
-    }
-
-    @Override
     public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final String[] inputOptions) {
         return SOptionPane.showInputDialog(message, title, icon, initialInput, inputOptions);
     }

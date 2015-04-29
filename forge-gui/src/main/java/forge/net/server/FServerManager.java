@@ -1,7 +1,6 @@
 package forge.net.server;
 
 import forge.GuiBase;
-import forge.game.GameView;
 import forge.interfaces.IGameController;
 import forge.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
@@ -71,16 +70,13 @@ public final class FServerManager {
     RemoteClient getClient(final Channel ch) {
         return clients.get(ch);
     }
-    GameView getGameView() {
-        return localLobby.getGameView();
-    }
     IGameController getController(final int index) {
         return localLobby.getController(index);
     }
 
     /**
      * Get the singleton instance of {@link FServerManager}.
-     * 
+     *
      * @return the singleton FServerManager.
      */
     public static FServerManager getInstance() {
@@ -94,10 +90,10 @@ public final class FServerManager {
     public void startServer(final int port) {
         try {
             final ServerBootstrap b = new ServerBootstrap()
-             .group(bossGroup, workerGroup)
-             .channel(NioServerSocketChannel.class)
-             .handler(new LoggingHandler(LogLevel.INFO))
-             .childHandler(new ChannelInitializer<SocketChannel>() {
+            .group(bossGroup, workerGroup)
+            .channel(NioServerSocketChannel.class)
+            .handler(new LoggingHandler(LogLevel.INFO))
+            .childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override public final void initChannel(final SocketChannel ch) {
                     final ChannelPipeline p = ch.pipeline();
                     p.addLast(
@@ -109,7 +105,7 @@ public final class FServerManager {
                             new DeregisterClientHandler(),
                             new GameServerHandler());
                 }
-             });
+            });
 
             // Bind and start to accept incoming connections.
             final ChannelFuture ch = b.bind(port).sync().channel().closeFuture();
@@ -277,7 +273,7 @@ public final class FServerManager {
 
     private class DeregisterClientHandler extends ChannelInboundHandlerAdapter {
         @Override
-        public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        public void channelInactive(final ChannelHandlerContext ctx) throws Exception {
             final RemoteClient client = clients.remove(ctx.channel());
             localLobby.disconnectPlayer(client.getIndex());
             broadcast(new LogoutEvent(client.getUsername()));

@@ -20,8 +20,8 @@ import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.match.AbstractGuiGame;
-import forge.net.GameProtocol.ProtocolMethod;
 import forge.net.GameProtocolSender;
+import forge.net.ProtocolMethod;
 import forge.player.PlayerZoneUpdate;
 import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
@@ -191,11 +191,6 @@ public class NetGuiGame extends AbstractGuiGame {
     @Override
     public int showOptionDialog(final String message, final String title, final FSkinProp icon, final String[] options, final int defaultOption) {
         return sendAndWait(ProtocolMethod.showOptionDialog, message, title, icon, options, defaultOption);
-    }
-
-    @Override
-    public int showCardOptionDialog(final CardView card, final String message, final  String title, final FSkinProp icon, final String[] options, final int defaultOption) {
-        return sendAndWait(ProtocolMethod.showCardOptionDialog, card, message, title, icon, options, defaultOption);
     }
 
     @Override

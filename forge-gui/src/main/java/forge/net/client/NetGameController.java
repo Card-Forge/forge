@@ -8,8 +8,8 @@ import forge.game.spellability.SpellAbilityView;
 import forge.interfaces.IDevModeCheats;
 import forge.interfaces.IGameController;
 import forge.match.NextGameDecision;
-import forge.net.GameProtocol.ProtocolMethod;
 import forge.net.GameProtocolSender;
+import forge.net.ProtocolMethod;
 import forge.util.ITriggerEvent;
 
 public class NetGameController implements IGameController {
@@ -87,6 +87,7 @@ public class NetGameController implements IGameController {
         return false;
     }
 
+    @Override
     public String getActivateDescription(final CardView card) {
         return sendAndWait(ProtocolMethod.getActivateDescription, card);
     }
@@ -114,7 +115,7 @@ public class NetGameController implements IGameController {
     }
 
     @Override
-    public void reorderHand(CardView card, int index) {
+    public void reorderHand(final CardView card, final int index) {
         send(ProtocolMethod.reorderHand, card, Integer.valueOf(index));
     }
 }

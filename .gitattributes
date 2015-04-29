@@ -17720,6 +17720,7 @@ forge-gui/src/main/java/forge/net/GameProtocol.java -text
 forge-gui/src/main/java/forge/net/GameProtocolHandler.java -text
 forge-gui/src/main/java/forge/net/GameProtocolSender.java -text
 forge-gui/src/main/java/forge/net/IRemote.java -text
+forge-gui/src/main/java/forge/net/ProtocolMethod.java -text
 forge-gui/src/main/java/forge/net/ReplyPool.java -text
 forge-gui/src/main/java/forge/net/client/ClientGameLobby.java -text
 forge-gui/src/main/java/forge/net/client/FGameClient.java -text

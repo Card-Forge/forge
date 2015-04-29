@@ -47,6 +47,7 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
         this.aiOptions = aiOptions;
     }
 
+    @Override
     public void updateForClient(final RemoteClient client) {
     }
 
