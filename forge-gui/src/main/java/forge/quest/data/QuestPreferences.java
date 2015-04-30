@@ -6,24 +6,25 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.quest.data;
 
+import java.io.Serializable;
+
 import forge.properties.ForgeConstants;
 import forge.properties.PreferencesStore;
 
-import java.io.Serializable;
-
 @SuppressWarnings("serial")
 public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> implements Serializable {
+
     /**
      * Preference identifiers, and their default values.
      */
@@ -39,7 +40,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         // How many credits are lost for losing a match
         PENALTY_LOSS("15"),
 
-        // Currently chosen quest and deck 
+        // Currently chosen quest and deck
         CURRENT_QUEST("DEFAULT"),
         CURRENT_DECK("DEFAULT"),
 
@@ -131,7 +132,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         WINS_EXPERTAI_MEDIUM("36"),
         WINS_EXPERTAI_HARD("32"),
         WINS_EXPERTAI_EXPERT("28"),
-        
+
         WINS_UNLOCK_SET("20"),
 
         // Maximum amount of "Packs" opened by the Shop and available as singles
@@ -145,7 +146,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
 
         // How many wins it takes to open an additional pack in the shop
         SHOP_WINS_FOR_ADDITIONAL_PACK("10"),
-        // How many packs the shop start with. 
+        // How many packs the shop start with.
         SHOP_STARTING_PACKS("5"),
 
         // Maximum selling price in a spell shop
@@ -154,23 +155,22 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         SHOP_WINS_FOR_NO_SELL_LIMIT("50"),
 
         ITEM_LEVEL_RESTRICTION("1");
-        
 
         private final String strDefaultVal;
 
         /**
          * Instantiates a new q pref.
-         * 
+         *
          * @param s0
          *            &emsp; {@link java.lang.String}
          */
-        QPref(final String s0) {
+        private QPref(final String s0) {
             this.strDefaultVal = s0;
         }
 
         /**
          * Gets the default.
-         * 
+         *
          * @return {@link java.lang.String}
          */
         public String getDefault() {
@@ -179,7 +179,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
     }
 
     public static enum DifficultyPrefs {
-        STARTING_COMMONS, 
+        STARTING_COMMONS,
         STARTING_UNCOMMONS,
         STARTING_RARES,
         STARTING_CREDITS,
@@ -189,33 +189,36 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         WINS_HARDAI,
         WINS_EXPERTAI
     }
-    
+
     /** Instantiates a QuestPreferences object. */
     public QuestPreferences() {
         super(ForgeConstants.QUEST_PREFS_FILE, QPref.class);
     }
 
+    @Override
     protected QPref[] getEnumValues() {
         return QPref.values();
     }
-    
-    protected QPref valueOf(String name) {
+
+    @Override
+    protected QPref valueOf(final String name) {
         try {
             return QPref.valueOf(name);
         }
-        catch (Exception e) {
+        catch (final Exception e) {
             return null;
         }
     }
 
-    protected String getPrefDefault(QPref key) {
+    @Override
+    protected String getPrefDefault(final QPref key) {
         return key.getDefault();
     }
 
     /**
      * Returns a preference value according to a difficulty index.
      */
-    public String getPref(DifficultyPrefs pref, int difficultyIndex) {
+    public String getPref(final DifficultyPrefs pref, final int difficultyIndex) {
         String newQPref = pref.toString();
 
         switch (difficultyIndex) {
@@ -232,12 +235,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
             newQPref += "_EXPERT";
             break;
         default:
-            try {
-                throw new Exception();
-            } catch (final Exception e1) {
-                System.err.println("Difficulty index out of bounds: " + difficultyIndex);
-                e1.printStackTrace();
-            }
+            throw new IllegalArgumentException(String.format("Difficulty index %d out of bounds, preference %s", Integer.valueOf(difficultyIndex), newQPref));
         }
 
         return getPref(QPref.valueOf(newQPref));
@@ -246,125 +244,60 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
     /**
      * Returns a difficulty-indexed preference value, as an int.
      */
-    public int getPrefInt(DifficultyPrefs pref, int difficultyIndex) {
+    public int getPrefInt(final DifficultyPrefs pref, final int difficultyIndex) {
         return Integer.parseInt(this.getPref(pref, difficultyIndex));
     }
 
-    /**
-     * Gets the difficulty.
-     */
-    public static String getDifficulty(int difficultyIndex) {
-        String s;
-        switch (difficultyIndex) {
-        case 1:
-            s = "EASY";
-            break;
-        case 2:
-            s = "MEDIUM";
-            break;
-        case 3:
-            s = "HARD";
-            break;
-        case 4:
-            s = "EXPERT";
-            break;
-        default:
-            s = "UNKNOWN";
-        }
-        return s;
-    }
-
-    public String validatePreference(QPref qpref, int val) {
-        int temp1, temp2;
+    public String validatePreference(final QPref qpref, final int val) {
         switch (qpref) {
-            case STARTING_CREDITS_EASY: case STARTING_CREDITS_MEDIUM:
-            case STARTING_CREDITS_HARD: case STARTING_CREDITS_EXPERT:
-            case REWARDS_MILLED: case REWARDS_MULLIGAN0:
-            case REWARDS_ALTERNATIVE: case REWARDS_TURN5:
-                if (val > 500) {
-                    return "Value too large (maximum 500).";
-                }
-                break;
-            case BOOSTER_COMMONS:
-                temp1 = getPrefInt(QPref.BOOSTER_UNCOMMONS);
-                temp2 = getPrefInt(QPref.BOOSTER_RARES);
+        case STARTING_POOL_COLOR_BIAS:
+            if (val < 1) {
+                return "Bias value too small (minimum 1).";
+            } else if (val > 10) {
+                return "Bias value too large (maximum 10).";
+            }
+            break;
 
-                if (temp1 + temp2 + val > 15) {
-                    return "Booster packs must have maximum 15 cards.";
-                }
-                break;
-            case BOOSTER_UNCOMMONS:
-                temp1 = getPrefInt(QPref.BOOSTER_COMMONS);
-                temp2 = getPrefInt(QPref.BOOSTER_RARES);
+        case ITEM_LEVEL_RESTRICTION:
+            if (val != 0 && val != 1) {
+                return "Only values 0 or 1 are acceptable; 1 for enabled, 0 for disabled.";
+            }
+            break;
 
-                if (temp1 + temp2 + val > 15) {
-                    return "Booster packs must have maximum 15 cards.";
-                }
-                break;
-            case BOOSTER_RARES:
-                temp1 = getPrefInt(QPref.BOOSTER_COMMONS);
-                temp2 = getPrefInt(QPref.BOOSTER_UNCOMMONS);
+        case SHOP_MAX_PACKS:
+        case SHOP_MAX_SELLING_PRICE:
+        case SHOP_WINS_FOR_ADDITIONAL_PACK:
+        case WINS_NEW_DRAFT:
+        case WINS_ROTATE_DRAFT:
+        case WINS_UNLOCK_SET:
+            if (val < 1) {
+                return "Value too small (minimum 1).";
+            }
+            break;
 
-                if (temp1 + temp2 + val > 15) {
-                    return "Booster packs must have maximum 15 cards.";
-                }
-                break;
-            case REWARDS_TURN1:
-                if (val > 2000) {
-                    return "Value too large (maximum 2000).";
-                }
-                break;
-            case SHOP_STARTING_PACKS:
-            case SHOP_SINGLES_COMMON: case SHOP_SINGLES_UNCOMMON: case SHOP_SINGLES_RARE:
-                if (val < 0) {
-                    return "Value too small (minimum 0).";
-                } else if (val > 15) {
-                    return "Value too large (maximum 15).";
-                }
-                break;
-            case SHOP_WINS_FOR_ADDITIONAL_PACK: case SHOP_MAX_PACKS: case SHOP_MIN_PACKS:
-                if (val < 1) {
-                    return "Value too small (minimum 1).";
-                } else if (val > 25) {
-                    return "Value too large (maximum 25).";
-                }
-                break;
-            case WINS_UNLOCK_SET:
-                if (val < 1) {
-                    return "Value too small (minimum 1).";
-                } else if (val > 100) {
-                    return "Value too large (maximum 100).";
-                }
-                break;
-            case STARTING_POOL_COLOR_BIAS:
-                if (val < 1) {
-                    return "Bias value too small (minimum 1).";
-                } else if (val > 10) {
-                    return "Bias value too large (maximum 10).";
-                }
-                break;
-            case ITEM_LEVEL_RESTRICTION:
-                if (val != 0 && val != 1) {
-                    return "Only values 0 or 1 are acceptable. 1 for enabled, 0 for disabled.";
-                }
-                break;
-            case SHOP_WINS_FOR_NO_SELL_LIMIT:
-                if (val < 0) {
-                    return "Value too small (minimum 0).";
-                }
-                break;
-            case WINS_NEW_DRAFT:
-            case WINS_ROTATE_DRAFT:
-            case SHOP_MAX_SELLING_PRICE:
-                if (val < 1) {
-                    return "Value too small (minimum 1).";
-                }
-                break;
-            default:
-                if (val > 100) {
-                    return "Value too large (maximum 100).";
-                }
-                break;
+        case BOOSTER_COMMONS:
+        case BOOSTER_UNCOMMONS:
+        case BOOSTER_RARES:
+        case STARTING_CREDITS_EASY:
+        case STARTING_CREDITS_MEDIUM:
+        case STARTING_CREDITS_HARD:
+        case STARTING_CREDITS_EXPERT:
+        case REWARDS_MILLED:
+        case REWARDS_MULLIGAN0:
+        case REWARDS_ALTERNATIVE:
+        case REWARDS_TURN5:
+        case REWARDS_TURN1:
+        case SHOP_MIN_PACKS:
+        case SHOP_STARTING_PACKS:
+        case SHOP_SINGLES_COMMON:
+        case SHOP_SINGLES_UNCOMMON:
+        case SHOP_SINGLES_RARE:
+        case SHOP_WINS_FOR_NO_SELL_LIMIT:
+        default:
+            if (val < 0) {
+                return "Value too small (minimum 0).";
+            }
+            break;
         }
         return null;
     }
