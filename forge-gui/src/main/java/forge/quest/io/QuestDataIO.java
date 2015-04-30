@@ -6,25 +6,52 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.quest.io;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.StringReader;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.converters.Converter;
+import com.thoughtworks.xstream.converters.MarshallingContext;
+import com.thoughtworks.xstream.converters.UnmarshallingContext;
+import com.thoughtworks.xstream.io.HierarchicalStreamReader;
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import forge.card.CardEdition;
+import forge.deck.CardPool;
+import forge.deck.Deck;
+import forge.deck.DeckGroup;
+import forge.deck.DeckSection;
+import forge.item.*;
+import forge.model.FModel;
+import forge.properties.ForgeConstants;
+import forge.quest.QuestController;
+import forge.quest.QuestEventDraft;
+import forge.quest.QuestMode;
+import forge.quest.bazaar.QuestItemType;
+import forge.quest.data.*;
+import forge.util.FileUtil;
+import forge.util.IgnoringXStream;
+import forge.util.ItemPool;
+import forge.util.XmlUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.w3c.dom.*;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.*;
 import java.lang.reflect.Field;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -33,60 +60,11 @@ import java.util.Map.Entry;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.apache.commons.lang3.StringUtils;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.converters.Converter;
-import com.thoughtworks.xstream.converters.MarshallingContext;
-import com.thoughtworks.xstream.converters.UnmarshallingContext;
-import com.thoughtworks.xstream.io.HierarchicalStreamReader;
-import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
-
-import forge.card.CardEdition;
-import forge.deck.CardPool;
-import forge.deck.Deck;
-import forge.deck.DeckGroup;
-import forge.deck.DeckSection;
-import forge.item.BoosterBox;
-import forge.item.BoosterPack;
-import forge.item.FatPack;
-import forge.item.InventoryItem;
-import forge.item.PaperCard;
-import forge.item.PreconDeck;
-import forge.item.TournamentPack;
-import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.quest.QuestController;
-import forge.quest.QuestEventDraft;
-import forge.quest.QuestMode;
-import forge.quest.bazaar.QuestItemType;
-import forge.quest.data.GameFormatQuest;
-import forge.quest.data.QuestAchievements;
-import forge.quest.data.QuestAssets;
-import forge.quest.data.QuestData;
-import forge.quest.data.QuestEventDraftContainer;
-import forge.quest.data.QuestItemCondition;
-import forge.util.FileUtil;
-import forge.util.IgnoringXStream;
-import forge.util.ItemPool;
-import forge.util.XmlUtil;
-
 /**
  * <p>
  * QuestDataIO class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -119,14 +97,14 @@ public class QuestDataIO {
      * <p>
      * loadData.
      * </p>
-     * 
+     *
      * @param xmlSaveFile
      *            &emsp; {@link java.io.File}
      * @return {@link forge.quest.data.QuestData}
      */
     public static QuestData loadData(final File xmlSaveFile) {
         try {
-            QuestData data = null;
+            QuestData data;
 
             final GZIPInputStream zin = new GZIPInputStream(new FileInputStream(xmlSaveFile));
             final StringBuilder xml = new StringBuilder();
@@ -141,7 +119,7 @@ public class QuestDataIO {
             }
 
             zin.close();
-            
+
             String bigXML = xml.toString();
             data = (QuestData) QuestDataIO.getSerializer(true).fromXML(bigXML);
 
@@ -175,7 +153,7 @@ public class QuestDataIO {
      * <p>
      * updateSaveFile.
      * </p>
-     * 
+     *
      * @param newData
      *            a {@link forge.quest.data.QuestData} object.
      * @param input
@@ -208,15 +186,15 @@ public class QuestDataIO {
         if (saveVersion < 5) {
             QuestDataIO.setFinalField(QuestAssets.class, "combatPets", newData.getAssets(), new HashMap<String, QuestItemCondition>());
         }
-        
+
         if (saveVersion < 6) {
-            QuestDataIO.setFinalField(QuestData.class, "petSlots", newData, new HashMap<Integer, String>());
+            QuestDataIO.setFinalField(QuestData.class, "petSlots", newData, new HashMap<>());
         }
-        
+
         if (saveVersion < 8) {
         	QuestDataIO.setFinalField(QuestData.class, "isCharmActive", newData, false);
         }
-        
+
         final QuestAssets qS = newData.getAssets();
         final QuestAchievements qA = newData.getAchievements();
 
@@ -262,7 +240,7 @@ public class QuestDataIO {
 
             QuestDataIO.setFinalField(QuestAchievements.class, "challengesPlayed", qA, Integer.parseInt(document.getElementsByTagName("challengesPlayed").item(0).getTextContent()));
 
-            final ArrayList<Integer> completedChallenges = new ArrayList<Integer>();
+            final ArrayList<Integer> completedChallenges = new ArrayList<>();
             QuestDataIO.setFinalField(QuestAchievements.class, "completedChallenges", qA, completedChallenges);
 
             if ((nw = document.getElementsByTagName("completedChallenges").item(0)) != null) {
@@ -340,15 +318,17 @@ public class QuestDataIO {
             // have to convert completed challenges list members to strings.
             for(int i = qA.getLockedChallenges().size()-1; i >= 0; i-- ) {
                 Object lc = qA.getLockedChallenges().get(i);
-                if (!(lc instanceof String))
+                if (lc != null) {
                     qA.getLockedChallenges().set(i, lc.toString());
+                }
             }
             for(int i = qA.getCurrentChallenges().size()-1; i >= 0; i-- ) {
                 Object lc = qA.getCurrentChallenges().get(i);
-                if (!(lc instanceof String))
+                if (lc != null) {
                     qA.getCurrentChallenges().set(i, lc.toString());
+                }
             }
-            
+
             //$FALL-THROUGH$
         case 7:
         case 8:
@@ -379,7 +359,7 @@ public class QuestDataIO {
      * <p>
      * saveData.
      * </p>
-     * 
+     *
      * @param qd
      *            a {@link forge.quest.data.QuestData} object.
      */
@@ -388,6 +368,10 @@ public class QuestDataIO {
             final XStream xStream = QuestDataIO.getSerializer(false);
 
             final File f = new File(ForgeConstants.QUEST_SAVE_DIR, qd.getName());
+            //Copy the save file in case the save fails
+            if (Files.exists(new File(f + ".dat").toPath())) {
+                Files.copy(new File(f + ".dat").toPath(), new File(f + ".dat.bak").toPath(), StandardCopyOption.REPLACE_EXISTING);
+            }
             QuestDataIO.savePacked(f + ".dat", xStream, qd);
             // QuestDataIO.saveUnpacked(f + ".xml", xStream, qd);
 
@@ -449,8 +433,8 @@ public class QuestDataIO {
             String name = reader.getAttribute("name");
             String unlocksUsed = reader.getAttribute("unlocksUsed");
             boolean canUnlock = !("0".equals(reader.getAttribute("canUnlock")));
-            List<String> allowedSets = new ArrayList<String>();
-            List<String> bannedCards = new ArrayList<String>();
+            List<String> allowedSets = new ArrayList<>();
+            List<String> bannedCards = new ArrayList<>();
             reader.moveUp();
             while (reader.hasMoreChildren()) {
                 reader.moveDown();
@@ -471,11 +455,7 @@ public class QuestDataIO {
                     setFinalField(GameFormatQuest.class, "unlocksUsed", res, Integer.parseInt(unlocksUsed));
                 }
                 setFinalField(GameFormatQuest.class, "allowUnlocks", res, canUnlock);
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (NoSuchFieldException e) {
+            } catch (NumberFormatException | IllegalAccessException | NoSuchFieldException e) {
                 e.printStackTrace();
             }
 
@@ -503,7 +483,7 @@ public class QuestDataIO {
             return QuestMode.smartValueOf(value, QuestMode.Classic);
         }
     }
-    
+
     private static class DraftTournamentToXml implements Converter {
 
         @SuppressWarnings("rawtypes")
@@ -515,17 +495,17 @@ public class QuestDataIO {
         @Override
         public void marshal(Object source, HierarchicalStreamWriter writer,
                 MarshallingContext context) {
-            
+
             QuestEventDraftContainer drafts = (QuestEventDraftContainer) source;
-            
+
             for (QuestEventDraft draft : drafts) {
-                
+
                 writer.startNode("draft");
-                
+
                 writer.startNode("title");
                 writer.setValue(draft.getTitle());
                 writer.endNode();
-                
+
                 writer.startNode("packs");
                 String output = "";
                 for (int i = 0; i < draft.getBoosterConfiguration().length; i++) {
@@ -536,15 +516,15 @@ public class QuestDataIO {
                 }
                 writer.setValue(output);
                 writer.endNode();
-                
+
                 writer.startNode("entryFee");
                 writer.setValue(String.valueOf(draft.getEntryFee()));
                 writer.endNode();
-                
+
                 writer.startNode("block");
                 writer.setValue(draft.getBlock());
                 writer.endNode();
-                
+
                 writer.startNode("standings");
                 int i = 0;
                 for (String standing : draft.getStandings()) {
@@ -553,7 +533,7 @@ public class QuestDataIO {
                     writer.endNode();
                 }
                 writer.endNode();
-                
+
                 writer.startNode("aiNames");
                 i = 0;
                 for (String name : draft.getAINames()) {
@@ -562,7 +542,7 @@ public class QuestDataIO {
                     writer.endNode();
                 }
                 writer.endNode();
-                
+
                 writer.startNode("aiIcons");
                 i = 0;
                 for (int icon : draft.getAIIcons()) {
@@ -571,31 +551,31 @@ public class QuestDataIO {
                     writer.endNode();
                 }
                 writer.endNode();
-                
+
                 writer.startNode("started");
                 writer.setValue("" + draft.isStarted());
                 writer.endNode();
-                
+
                 writer.startNode("age");
                 writer.setValue("" + draft.getAge());
                 writer.endNode();
-                
+
                 writer.endNode();
-                
+
             }
-            
+
         }
 
         @Override
         public Object unmarshal(HierarchicalStreamReader reader,
                 UnmarshallingContext context) {
-            
+
             QuestEventDraftContainer output = new QuestEventDraftContainer();
-            
+
             while (reader.hasMoreChildren()) {
-                
+
                 reader.moveDown();
-                
+
                 String draftName = null;
                 String boosterConfiguration = null;
                 int entryFee = 1500;
@@ -605,11 +585,11 @@ public class QuestDataIO {
                 String[] aiNames = new String[7];
                 int[] aiIcons = new int[7];
                 boolean started = false;
-                
+
                 while (reader.hasMoreChildren()) {
-                    
+
                     reader.moveDown();
-                    
+
                     switch (reader.getNodeName()) {
                         case "title":
                             draftName = reader.getValue();
@@ -654,11 +634,11 @@ public class QuestDataIO {
                             age = Integer.parseInt(reader.getValue());
                             break;
                     }
-                    
+
                     reader.moveUp();
-                    
+
                 }
-                
+
                 QuestEventDraft draft = new QuestEventDraft(draftName);
                 draft.setBoosterConfiguration(boosterConfiguration);
                 draft.setEntryFee(entryFee);
@@ -668,19 +648,19 @@ public class QuestDataIO {
                 draft.setAIIcons(aiIcons);
                 draft.setStarted(started);
                 draft.setAge(age);
-                
+
                 output.add(draft);
-                
+
                 reader.moveUp();
-                
+
             }
-            
+
             return output;
         }
     }
 
     public static class DeckToXml extends ItemPoolToXml {
-    
+
         /* (non-Javadoc)
          * @see com.thoughtworks.xstream.converters.ConverterMatcher#canConvert(java.lang.Class)
          */
@@ -689,7 +669,7 @@ public class QuestDataIO {
         public boolean canConvert(Class type) {
             return type.equals(Deck.class);
         }
-    
+
         /* (non-Javadoc)
          * @see com.thoughtworks.xstream.converters.Converter#marshal(java.lang.Object, com.thoughtworks.xstream.io.HierarchicalStreamWriter, com.thoughtworks.xstream.converters.MarshallingContext)
          */
@@ -699,7 +679,7 @@ public class QuestDataIO {
             writer.startNode("name");
             writer.setValue(d.getName());
             writer.endNode();
-            
+
             for( Entry<DeckSection, CardPool> ds : d ) {
                 writer.startNode(ds.getKey().toString());
                 for (final Entry<PaperCard, Integer> e : ds.getValue()) {
@@ -708,25 +688,25 @@ public class QuestDataIO {
                 writer.endNode();
             }
         }
-    
+
         /* (non-Javadoc)
          * @see com.thoughtworks.xstream.converters.Converter#unmarshal(com.thoughtworks.xstream.io.HierarchicalStreamReader, com.thoughtworks.xstream.converters.UnmarshallingContext)
          */
         @Override
         public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
 
-            reader.moveDown(); // <name> tag MUST be at first position at all times  
+            reader.moveDown(); // <name> tag MUST be at first position at all times
             String deckName = reader.getValue();
             reader.moveUp();
-            
+
             final Deck result = new Deck(deckName);
-            
+
             while (reader.hasMoreChildren()) {
                 reader.moveDown();
                 DeckSection section = DeckSection.smartValueOf(reader.getNodeName());
                 if ( null == section )
                     throw new RuntimeException("Quest deck has unknown section: " + reader.getNodeName());
-                
+
                 CardPool pool = result.getOrCreate(section);
                 while (reader.hasMoreChildren()) {
                     reader.moveDown();
@@ -742,7 +722,7 @@ public class QuestDataIO {
                 }
                 reader.moveUp();
             }
-            
+
             return result;
         }
     }
@@ -827,7 +807,7 @@ public class QuestDataIO {
 
         @Override
         public Object unmarshal(final HierarchicalStreamReader reader, final UnmarshallingContext context) {
-            final ItemPool<InventoryItem> result = new ItemPool<InventoryItem>(InventoryItem.class);
+            final ItemPool<InventoryItem> result = new ItemPool<>(InventoryItem.class);
             while (reader.hasMoreChildren()) {
                 reader.moveDown();
                 final String sCnt = reader.getAttribute("n");
