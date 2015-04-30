@@ -231,6 +231,7 @@ public class LoadQuestScreen extends LaunchScreen {
                 }
 
                 new File(ForgeConstants.QUEST_SAVE_DIR, quest.getName() + ".dat").delete();
+                new File(ForgeConstants.QUEST_SAVE_DIR, quest.getName() + ".dat.bak").delete();
 
                 lstQuests.removeQuest(quest);
             }
@@ -249,7 +250,7 @@ public class LoadQuestScreen extends LaunchScreen {
 
     private class QuestFileLister extends FList<QuestData> {
         private int selectedIndex = 0;
-        
+
         private QuestFileLister() {
             setListItemRenderer(new ListItemRenderer<QuestData>() {
                 @Override

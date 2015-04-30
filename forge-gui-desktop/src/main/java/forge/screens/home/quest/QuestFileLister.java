@@ -19,7 +19,7 @@ import java.io.File;
 import java.util.*;
 import java.util.List;
 
-/** 
+/**
  * Creates file list/table for quick deleting, editing, and basic info.
  *
  */
@@ -40,7 +40,7 @@ public class QuestFileLister extends JPanel {
     /**
      * Creates deck list for selected decks for quick deleting, editing, and basic info.
      * Set "selectable" and "editable" to show those buttons, or not.
-     * 
+     *
      * @param deletable {@link java.lang.Boolean}
      * @param editable {@link java.lang.Boolean}
      */
@@ -84,7 +84,7 @@ public class QuestFileLister extends JPanel {
         rowTitle.add(new FLabel.Builder().text("Mode | Difficulty").fontAlign(SwingConstants.LEFT).build(), "w 40% - 112px!, h 20px!, gaptop 5px, gapleft 4px");
         rowTitle.add(new FLabel.Builder().text("Record | Assets").fontAlign(SwingConstants.LEFT).build(), "w 120px!, h 20px!, gaptop 5px, gapleft 4px");
         this.add(rowTitle, "w 98%!, h 30px!, gapleft 1%");
-		
+
 		Map<Integer, String> difficultyNameMap = new HashMap<>();
 		difficultyNameMap.put(0, "Easy");
 		difficultyNameMap.put(1, "Medium");
@@ -93,15 +93,15 @@ public class QuestFileLister extends JPanel {
 
         RowPanel row;
         String mode;
-		
+
         for (QuestData qd : sorted) {
-			
+
             mode = qd.getMode().toString();
             row = new RowPanel(qd);
-			
+
             row.add(new DeleteButton(row), "w 22px!, h 20px!, cell 0 0 1 2");
             row.add(new EditButton(row), "w 22px!, h 20px!, cell 1 0 1 2");
-			
+
             row.add(new FLabel.Builder().text(qd.getName()).fontAlign(SwingConstants.LEFT)
 					.fontStyle(Font.BOLD)
 					.build(), "w 60%, h 20px!, shrinkx, gaptop 5px, gapleft 4px, cell 2 0 1 1");
@@ -110,16 +110,16 @@ public class QuestFileLister extends JPanel {
 					.fontSize(12)
 					.build(), "w 60%, h 20px!, shrinkx, gapbottom 5px, gapleft 4px, cell 2 1 1 1");
 
-			
+
             row.add(new FLabel.Builder().text(mode).fontAlign(SwingConstants.LEFT).build(), "h 20px!, gaptop 5px, gapleft 4px, cell 3 0 1 1");
 			row.add(new FLabel.Builder().text(difficultyNameMap.get(qd.getAchievements().getDifficulty()))
 					.fontAlign(SwingConstants.LEFT)
 					.fontSize(12)
 					.build(), "h 20px!, pushx, gapbottom 5px, gapleft 4px, cell 3 1 1 1");
-			
+
             row.add(new FLabel.Builder().text(qd.getAchievements().getWin() + " W / " + qd.getAchievements().getLost() + " L")
                     .fontAlign(SwingConstants.RIGHT).build(), "h 20px!, gaptop 5px, gapleft 4px, gapright 5px, cell 4 0 1 1, align right");
-			
+
 			FLabel cardsLabel = new FLabel.Builder().text(String.valueOf(qd.getAssets().getCardPool().countAll()))
 					.fontAlign(SwingConstants.LEFT)
 					.fontSize(12)
@@ -131,13 +131,13 @@ public class QuestFileLister extends JPanel {
 					.fontSize(12)
 					.icon(FSkin.getImage(FSkinProp.ICO_QUEST_GOLD))
 					.build();
-			
+
 			row.add(cardsLabel, "h 20px!, gapbottom 5px, cell 4 1 1 1");
 			row.add(goldLabel, "h 20px!, gapleft 10px, gapright 5px, gapbottom 5px, cell 4 1 1 1");
-			
+
             this.add(row, "w 98%!, h 50px!, gap 1% 0 0 0");
             tempRows.add(row);
-			
+
         }
 
         rows = tempRows.toArray(new RowPanel[0]);
@@ -380,6 +380,7 @@ public class QuestFileLister extends JPanel {
         }
 
         new File(ForgeConstants.QUEST_SAVE_DIR, r0.getQuestData().getName() + ".dat").delete();
+        new File(ForgeConstants.QUEST_SAVE_DIR, r0.getQuestData().getName() + ".dat.bak").delete();
 
         if (cmdRowDelete != null) { cmdRowDelete.run(); }
 
