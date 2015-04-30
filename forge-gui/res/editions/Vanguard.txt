@@ -15,7 +15,6 @@ S Ashling, the Extinguisher Avatar
 S Ashnod
 S Barrin
 S Birds of Paradise Avatar
-S Birds of Paradise Avatar
 S Bosh, Iron Golem Avatar
 S Braids, Conjurer Adept Avatar
 S Chronatog Avatar
@@ -29,7 +28,6 @@ S Eladamri, Lord of Leaves Avatar
 S Elvish Champion Avatar
 S Enigma Sphinx Avatar
 S Erhnam Djinn Avatar
-S Erhnam Djinn Avatar
 S Ertai
 S Etched Oracle Avatar
 S Fallen Angel Avatar
@@ -39,9 +37,7 @@ S Frenetic Efreet Avatar
 S Gerrard
 S Gix
 S Goblin Warchief Avatar
-S Goblin Warchief Avatar
 S Greven il-Vec
-S Grinning Demon Avatar
 S Grinning Demon Avatar
 S Haakon, Stromgald Scourge Avatar
 S Hanna
@@ -82,21 +78,16 @@ S Orim
 S Peacekeeper Avatar
 S Phage the Untouchable Avatar
 S Platinum Angel Avatar
-S Platinum Angel Avatar
-S Prodigal Sorcerer Avatar
 S Prodigal Sorcerer Avatar
 S Raksha Golden Cub Avatar
 S Reaper King Avatar
 S Rith, the Awakener Avatar
-S Rith, the Awakener Avatar
 S Rofellos
-S Royal Assassin Avatar
 S Royal Assassin Avatar
 S Rumbling Slum Avatar
 S Sakashima the Impostor Avatar
 S Selenia
 S Serra
-S Serra Angel Avatar
 S Serra Angel Avatar
 S Seshiro the Anointed Avatar
 S Sidar Kondo
@@ -115,7 +106,6 @@ S Takara
 S Tawnos
 S Teysa, Orzhov Scion Avatar
 S Titania
-S Tradewind Rider Avatar
 S Tradewind Rider Avatar
 S Two-Headed Giant of Foriys Avatar
 S Urza
