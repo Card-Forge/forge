@@ -50,13 +50,6 @@ public class GauntletMini {
     private List<RegisteredPlayer> aiOpponents = new ArrayList<RegisteredPlayer>();
 
     public GauntletMini() {
-    }
-
-    // private final String humanName;
-    /**
-     * TODO: Write javadoc for Constructor.
-     */
-    public void gauntletMini() {
         currentRound = 1;
         gauntletDraft = false;
         wins = 0;
