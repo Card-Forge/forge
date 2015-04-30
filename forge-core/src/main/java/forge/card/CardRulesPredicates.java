@@ -1,5 +1,9 @@
 package forge.card;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -7,10 +11,6 @@ import com.google.common.collect.Iterables;
 import forge.util.ComparableOp;
 import forge.util.PredicateString;
 import forge.util.PredicateString.StringOp;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Filtering conditions specific for CardRules class, defined here along with
@@ -38,23 +38,23 @@ public final class CardRulesPredicates {
     // themselves
     /**
      * Cmc.
-     * 
+     *
      * @param op
      *            the op
      * @param what
      *            the what
      * @return the predicate
      */
-	public static Predicate<CardRules> cmc(final ComparableOp op, final int what) {
-		return new LeafNumber(LeafNumber.CardField.CMC, op, what);
-	}
-	
-	public static Predicate<CardRules> cost(final PredicateString.StringOp op, final String what) {
-		return new LeafString(LeafString.CardField.COST, op, what);
-	}
+    public static Predicate<CardRules> cmc(final ComparableOp op, final int what) {
+        return new LeafNumber(LeafNumber.CardField.CMC, op, what);
+    }
+
+    public static Predicate<CardRules> cost(final PredicateString.StringOp op, final String what) {
+        return new LeafString(LeafString.CardField.COST, op, what);
+    }
 
     /**
-     * 
+     *
      * @param op
      *            the op
      * @param what
@@ -66,7 +66,7 @@ public final class CardRulesPredicates {
     }
 
     /**
-     * 
+     *
      * @param op
      *            the op
      * @param what
@@ -80,7 +80,7 @@ public final class CardRulesPredicates {
     // P/T
     /**
      * Rules.
-     * 
+     *
      * @param op
      *            the op
      * @param what
@@ -93,7 +93,7 @@ public final class CardRulesPredicates {
 
     /**
      * Name.
-     * 
+     *
      * @param op
      *            the op
      * @param what
@@ -109,13 +109,13 @@ public final class CardRulesPredicates {
      * @param transform
      * @return
      */
-    public static Predicate<CardRules> splitType(CardSplitType transform) {
+    public static Predicate<CardRules> splitType(final CardSplitType transform) {
         return new PredicateSplitType(transform);
     }
 
     /**
      * Sub type.
-     * 
+     *
      * @param what
      *            the what
      * @return the predicate
@@ -126,7 +126,7 @@ public final class CardRulesPredicates {
 
     /**
      * Sub type.
-     * 
+     *
      * @param op
      *            the op
      * @param what
@@ -139,7 +139,7 @@ public final class CardRulesPredicates {
 
     /**
      * Joined type.
-     * 
+     *
      * @param op
      *            the op
      * @param what
@@ -156,8 +156,8 @@ public final class CardRulesPredicates {
             public boolean apply(final CardRules card) {
                 if (!card.getType().isCreature()) { return false; }
 
-                Set<String> set = card.getType().getCreatureTypes();
-                for (String creatureType : creatureTypes) {
+                final Set<String> set = card.getType().getCreatureTypes();
+                for (final String creatureType : creatureTypes) {
                     if (set.contains(creatureType)) {
                         return true;
                     }
@@ -169,7 +169,7 @@ public final class CardRulesPredicates {
 
     /**
      * Has Keyword.
-     * 
+     *
      * @param keyword
      *            the keyword
      * @return the predicate
@@ -185,7 +185,7 @@ public final class CardRulesPredicates {
 
     /**
      * Core type.
-     * 
+     *
      * @param isEqual
      *            the is equal
      * @param what
@@ -202,7 +202,7 @@ public final class CardRulesPredicates {
 
     /**
      * Core type.
-     * 
+     *
      * @param isEqual
      *            the is equal
      * @param type
@@ -215,7 +215,7 @@ public final class CardRulesPredicates {
 
     /**
      * Super type.
-     * 
+     *
      * @param isEqual
      *            the is equal
      * @param what
@@ -232,7 +232,7 @@ public final class CardRulesPredicates {
 
     /**
      * Super type.
-     * 
+     *
      * @param isEqual
      *            the is equal
      * @param type
@@ -246,7 +246,7 @@ public final class CardRulesPredicates {
 
     /**
      * Checks for color.
-     * 
+     *
      * @param thatColor
      *            color to check
      * @return the predicate
@@ -257,7 +257,7 @@ public final class CardRulesPredicates {
 
     /**
      * Checks if is color.
-     * 
+     *
      * @param thatColor
      *            color to check
      * @return the predicate
@@ -268,7 +268,7 @@ public final class CardRulesPredicates {
 
     /**
      * Checks if card can be cast with unlimited mana of given color set.
-     * 
+     *
      * @param thatColor
      *            color to check
      * @return the predicate
@@ -279,7 +279,7 @@ public final class CardRulesPredicates {
 
     /**
      * Checks if is exactly that color.
-     * 
+     *
      * @param thatColor
      *            color to check
      * @return the predicate
@@ -290,7 +290,7 @@ public final class CardRulesPredicates {
 
     /**
      * Checks for cnt colors.
-     * 
+     *
      * @param cntColors
      *            the cnt colors
      * @return the predicate
@@ -301,7 +301,7 @@ public final class CardRulesPredicates {
 
     /**
      * Checks for at least cnt colors.
-     * 
+     *
      * @param cntColors
      *            the cnt colors
      * @return the predicate
@@ -313,7 +313,7 @@ public final class CardRulesPredicates {
     public static Predicate<CardRules> hasColorIdentity(final int colormask) {
         return new Predicate<CardRules>() {
             @Override
-            public boolean apply(CardRules rules) {
+            public boolean apply(final CardRules rules) {
                 return rules.getColorIdentity().hasNoColorsExcept(colormask);
             }
         };
@@ -340,9 +340,9 @@ public final class CardRulesPredicates {
                 return op(card.getOracleText(), operand);
             case JOINED_TYPE:
                 return op(card.getType().toString(), operand);
-			case COST:
-				String cost = card.getManaCost().toString();
-				return op(cost, operand);
+            case COST:
+                final String cost = card.getManaCost().toString();
+                return op(cost, operand);
             default:
                 return false;
             }

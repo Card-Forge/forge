@@ -491,10 +491,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         return sb;
     }
-    
-    public String cardToString(PaperCard pc) {
-        return appendCardToStringBuilder(pc, new StringBuilder()).toString();
-    }
 
     public PaperCard createUnsuportedCard(String cardName) {
         CardRequest request = CardRequest.fromString(cardName);
@@ -599,21 +595,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 reIndex();
             }
             return result;
-        }
-        public void removeCard(String name) {
-            allCardsByName.removeAll(name);
-            uniqueCardsByName.remove(name);
-            rulesByName.remove(name);
-            Iterator<PaperCard> it = allCards.iterator();
-            while(it.hasNext()) {
-                PaperCard pc = it.next();
-                if (pc.getName().equalsIgnoreCase(name)) {
-                    it.remove();
-                }
-            }
-        }
-        public void rebuildIndex() {
-            reIndex();
         }
 
         public boolean isImmediateReindex() {

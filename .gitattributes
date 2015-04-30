@@ -219,7 +219,6 @@ forge-core/src/main/java/forge/deck/io/DeckFileHeader.java -text
 forge-core/src/main/java/forge/deck/io/DeckGroupSerializer.java -text
 forge-core/src/main/java/forge/deck/io/DeckSerializer.java -text
 forge-core/src/main/java/forge/deck/io/DeckStorage.java -text
-forge-core/src/main/java/forge/deck/io/OldDeckFileFormatException.java -text
 forge-core/src/main/java/forge/deck/io/package-info.java -text
 forge-core/src/main/java/forge/deck/package-info.java -text
 forge-core/src/main/java/forge/item/BoosterBox.java -text

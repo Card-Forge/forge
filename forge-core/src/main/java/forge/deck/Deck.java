@@ -26,8 +26,6 @@ import forge.item.PaperCard;
 import java.util.*;
 import java.util.Map.Entry;
 
-
-
 /**
  * <p>
  * Deck class.
@@ -69,9 +67,23 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
      *            the {@link Deck} to copy.
      */
     public Deck(final Deck other) {
-        super(other.getName());
+        this(other, other.getName());
+    }
+
+    /**
+     * Copy constructor with a different name for the new deck.
+     * 
+     * @param other
+     *            the {@link Deck} to copy.
+     * @param newName
+     *            the name of the new deck.
+     */
+    public Deck(final Deck other, final String newName) {
+        super(newName);
         setComment(other.getComment());
-        parts.putAll(other.parts);
+        for (final Entry<DeckSection, CardPool> sections : parts.entrySet()) {
+            parts.put(sections.getKey(), new CardPool(sections.getValue()));
+        }
         tags.addAll(other.getTags());
     }
 
