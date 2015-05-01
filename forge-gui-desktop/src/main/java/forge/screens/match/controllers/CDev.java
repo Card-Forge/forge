@@ -7,7 +7,6 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
-import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.interfaces.IGameController;
 import forge.screens.match.CMatchUI;
@@ -16,7 +15,7 @@ import forge.screens.match.views.VDev;
 
 /**
  * Controls the combat panel in the match UI.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
@@ -100,7 +99,7 @@ public final class CDev implements ICDoc {
     public void setupGameState() {
         getController().cheat().setupGameState();
     }
-    
+
     private final MouseListener madDump = new MouseAdapter() {
         @Override
         public void mousePressed(final MouseEvent e) {
@@ -212,14 +211,6 @@ public final class CDev implements ICDoc {
     }
 
     //========== End mouse listener inits
-
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
-    }
 
     @Override
     public void register() {

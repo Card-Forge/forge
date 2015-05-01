@@ -114,7 +114,7 @@ public enum FNetOverlay {
 
         FScrollPane _operationLogScroller = new FScrollPane(txtLog, false);
         _operationLogScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        new SmartScroller(_operationLogScroller);
+        new SmartScroller(_operationLogScroller).attach();
         window.add(_operationLogScroller, "pushx, hmin 24, pushy, growy, growx, gap 2px 2px 2px 0, sx 2");
 
         //txtInput.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS)));

@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -19,7 +19,6 @@ package forge.screens.match.controllers;
 
 import java.awt.event.MouseEvent;
 
-import forge.UiCommand;
 import forge.game.card.CardView;
 import forge.gui.framework.ICDoc;
 import forge.item.InventoryItem;
@@ -30,7 +29,7 @@ import forge.toolbox.FMouseAdapter;
 /**
  * Controller for {@link VDetail}. May be used as part of a
  * {@link CDetailPicture}.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
 public class CDetail implements ICDoc {
@@ -52,7 +51,7 @@ public class CDetail implements ICDoc {
 
     /**
      * Shows card details and/or picture in sidebar cardview tabber.
-     * 
+     *
      * @param c &emsp; {@link CardView} object
      * @param isInAltState whether to draw the flip side of the card.
      */
@@ -71,11 +70,6 @@ public class CDetail implements ICDoc {
             view.getPnlDetail().setItem((InventoryItemFromSet)item);
             view.getParentCell().repaintSelf();
         }
-    }
-
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
     }
 
     @Override

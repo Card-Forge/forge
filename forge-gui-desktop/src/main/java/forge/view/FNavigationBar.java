@@ -56,7 +56,7 @@ public class FNavigationBar extends FTitleBarBase {
     private Timer incrementRevealTimer, checkForRevealChangeTimer;
     private boolean hidden;
 
-    public FNavigationBar(FFrame f) {
+    public FNavigationBar(final FFrame f) {
         super(f);
         this.setBorder(new FSkin.MatteSkinBorder(0, 0, 2, 0, bottomEdgeColor));
         this.setLocation(0, -visibleHeight); //hide by default
@@ -130,7 +130,7 @@ public class FNavigationBar extends FTitleBarBase {
         return null;
     }
 
-    public boolean canSwitch(FScreen toScreen) {
+    public boolean canSwitch(final FScreen toScreen) {
         return (selectedTab == null || selectedTab.screen.onSwitching(toScreen));
     }
 
@@ -155,14 +155,14 @@ public class FNavigationBar extends FTitleBarBase {
         closeTab(selectedTab);
     }
 
-    public void closeTab(FScreen screen) {
-        NavigationTab tab = getTab(screen);
+    public void closeTab(final FScreen screen) {
+        final NavigationTab tab = getTab(screen);
         if (tab != null) {
             closeTab(tab);
         }
     }
 
-    private void closeTab(NavigationTab tab) {
+    private void closeTab(final NavigationTab tab) {
         if (tab == null) { return; }
         if (!tab.screen.onClosing()) { return; } //give screen a chance to perform special close handling and/or cancel closing tab
 
@@ -172,7 +172,7 @@ public class FNavigationBar extends FTitleBarBase {
             this.selectedTab = null; //prevent raising onSwitching for tab being closed
             Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN, true);
         }
-        int index = tabs.indexOf(tab);
+        final int index = tabs.indexOf(tab);
         if (index != -1) {
             tabs.remove(index);
             remove(tab);
@@ -199,7 +199,7 @@ public class FNavigationBar extends FTitleBarBase {
     private void addForgeButtonListeners() {
         btnForge.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(final MouseEvent e) {
                 if (btnForge.isEnabled() && System.currentTimeMillis() - timeMenuHidden > 250) { //time comparsion needed clicking button a second time to hide menu
                     showForgeMenu(true);
                 }
@@ -207,7 +207,7 @@ public class FNavigationBar extends FTitleBarBase {
         });
     }
 
-    public void showForgeMenu(boolean hideIfAlreadyShown) {
+    public void showForgeMenu(final boolean hideIfAlreadyShown) {
         if (!btnForge.isToggled() && forgeMenu.getPopupMenu().isEnabled()) {
             btnForge.setToggled(true);
             forgeMenu.getPopupMenu().show(this, 1, this.getHeight());
@@ -229,19 +229,21 @@ public class FNavigationBar extends FTitleBarBase {
         pnlReveal.setOpaque(false);
         pnlReveal.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseEntered(MouseEvent e) {
+            public void mouseEntered(final MouseEvent e) {
                 if (revealDir == 0) {
                     startReveal();
                 }
             }
         });
         incrementRevealTimer = new Timer(revealSpeed / visibleHeight, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
                 incrementReveal();
             }
         });
         checkForRevealChangeTimer = new Timer(revealDelay, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
                 checkForRevealChange();
             }
         });
@@ -270,25 +272,25 @@ public class FNavigationBar extends FTitleBarBase {
     private void incrementReveal() {
         int newY = this.getLocation().y + revealDir * 2;
         switch (revealDir) {
-            case 0:
+        case 0:
+            incrementRevealTimer.stop();
+            return;
+        case 1:
+            if (newY >= 0) {
+                newY = 0;
+                revealDir = 0;
                 incrementRevealTimer.stop();
-                return;
-            case 1:
-                if (newY >= 0) {
-                    newY = 0;
-                    revealDir = 0;
-                    incrementRevealTimer.stop();
-                    checkForRevealChangeTimer.setInitialDelay(0);
-                    checkForRevealChangeTimer.start(); //once open fully, start another timer to check when mouse moves away
-                }
-                break;
-            case -1:
-                if (newY <= -visibleHeight) {
-                    newY = -visibleHeight;
-                    revealDir = 0;
-                    incrementRevealTimer.stop();
-                }
-                break;
+                checkForRevealChangeTimer.setInitialDelay(0);
+                checkForRevealChangeTimer.start(); //once open fully, start another timer to check when mouse moves away
+            }
+            break;
+        case -1:
+            if (newY <= -visibleHeight) {
+                newY = -visibleHeight;
+                revealDir = 0;
+                incrementRevealTimer.stop();
+            }
+            break;
         }
         this.setLocation(0, newY);
         checkForRevealChange();
@@ -306,22 +308,22 @@ public class FNavigationBar extends FTitleBarBase {
         }
     }
 
-    public void setMenuShortcutsEnabled(boolean enabled0) {
+    public void setMenuShortcutsEnabled(final boolean enabled0) {
         forgeMenu.getPopupMenu().setEnabled(enabled0);
     }
 
     @Override
-    public void setEnabled(boolean enabled0) {
+    public void setEnabled(final boolean enabled0) {
         btnForge.setEnabled(enabled0);
         setMenuShortcutsEnabled(enabled0);
-        for (NavigationTab tab : tabs) {
+        for (final NavigationTab tab : tabs) {
             tab.setEnabled(enabled0);
         }
         btnClose.setEnabled(enabled0); //don't allow closing screens using Close button while disabled
     }
 
     @Override
-    public void setVisible(boolean visible) {
+    public void setVisible(final boolean visible) {
         hidden = !visible;
         if (pnlReveal != null) { //check needed because FTitleBarBase constructor calls this
             revealDir = 0;
@@ -339,7 +341,7 @@ public class FNavigationBar extends FTitleBarBase {
     }
 
     @Override
-    public void setSize(int width, int height) {
+    public void setSize(final int width, final int height) {
         super.setSize(width, height);
         pnlReveal.setSize(width, 1);
     }
@@ -349,11 +351,11 @@ public class FNavigationBar extends FTitleBarBase {
     }
 
     @Override
-    public void setTitle(String title) {
+    public void setTitle(final String title) {
     }
 
     @Override
-    public void setIconImage(Image image) {
+    public void setIconImage(final Image image) {
     }
 
     public void updateTitle(final FScreen screen) {
@@ -387,7 +389,7 @@ public class FNavigationBar extends FTitleBarBase {
                 btnClose = new CloseButton();
                 btnClose.setToolTipText(screen.getCloseButtonTooltip());
                 closeButtonOffset = btnClose.getPreferredSize().width;
-                SpringLayout tabLayout = new SpringLayout();
+                final SpringLayout tabLayout = new SpringLayout();
                 setLayout(tabLayout);
                 add(btnClose);
                 tabLayout.putConstraint(SpringLayout.WEST, btnClose, 4, SpringLayout.EAST, this);
@@ -401,7 +403,7 @@ public class FNavigationBar extends FTitleBarBase {
 
             addMouseListener(new MouseAdapter() {
                 @Override
-                public void mousePressed(MouseEvent e) {
+                public void mousePressed(final MouseEvent e) {
                     if (!NavigationTab.this.isEnabled()) { return; }
                     if (SwingUtilities.isLeftMouseButton(e)) {
                         if (!selected) {
@@ -413,13 +415,13 @@ public class FNavigationBar extends FTitleBarBase {
                     }
                 }
                 @Override
-                public void mouseEntered(MouseEvent e) {
+                public void mouseEntered(final MouseEvent e) {
                     if (!NavigationTab.this.isEnabled()) { return; }
                     hovered = true;
                     repaintSelf();
                 }
                 @Override
-                public void mouseExited(MouseEvent e) {
+                public void mouseExited(final MouseEvent e) {
                     if (hovered && (btnClose == null || !btnClose.getBounds().contains(e.getPoint()))) { //ensure mouse didn't simply move onto close button
                         hovered = false;
                         repaintSelf();
@@ -437,8 +439,8 @@ public class FNavigationBar extends FTitleBarBase {
         }
 
         @Override
-        public void setIcon(Icon icon) {
-            ImageIcon imageIcon = ReflectionUtil.safeCast(icon, ImageIcon.class);
+        public void setIcon(final Icon icon) {
+            final ImageIcon imageIcon = ReflectionUtil.safeCast(icon, ImageIcon.class);
             if (imageIcon != null) {
                 super.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING)));
             }
@@ -448,7 +450,7 @@ public class FNavigationBar extends FTitleBarBase {
         }
 
         @Override
-        public void setEnabled(boolean enabled0) {
+        public void setEnabled(final boolean enabled0) {
             if (!enabled0 && hovered) {
                 hovered = false; //ensure hovered reset if disabled
             }
@@ -470,10 +472,10 @@ public class FNavigationBar extends FTitleBarBase {
 
         @Override
         public void paintComponent(final Graphics g) {
-            Graphics2D g2d = (Graphics2D)g;
-            int width = getWidth() - 1;
-            int height = visibleHeight - 1;
-            int radius = 6;
+            final Graphics2D g2d = (Graphics2D)g;
+            final int width = getWidth() - 1;
+            final int height = visibleHeight - 1;
+            final int radius = 6;
             backColor = this.selected ? bottomEdgeColor : (this.hovered ? buttonHoverColor : buttonHoverColor.alphaColor(unhoveredAlpha));
             FSkin.setGraphicsGradientPaint(g2d, 0, 0, backColor.stepColor(30), 0, height, backColor);
             g.fillRoundRect(0, 0, width, height, radius, radius);
@@ -493,7 +495,7 @@ public class FNavigationBar extends FTitleBarBase {
                 setPreferredSize(new Dimension(17, 17));
                 addMouseListener(new MouseAdapter() {
                     @Override
-                    public void mousePressed(MouseEvent e) {
+                    public void mousePressed(final MouseEvent e) {
                         if (!CloseButton.this.isEnabled()) { return; }
                         if (SwingUtilities.isLeftMouseButton(e)) {
                             pressed = true;
@@ -501,7 +503,7 @@ public class FNavigationBar extends FTitleBarBase {
                         }
                     }
                     @Override
-                    public void mouseReleased(MouseEvent e) {
+                    public void mouseReleased(final MouseEvent e) {
                         if (pressed && SwingUtilities.isLeftMouseButton(e)) {
                             pressed = false;
                             if (hovered) { //only handle click if mouse released over button
@@ -511,13 +513,13 @@ public class FNavigationBar extends FTitleBarBase {
                         }
                     }
                     @Override
-                    public void mouseEntered(MouseEvent e) {
+                    public void mouseEntered(final MouseEvent e) {
                         if (!CloseButton.this.isEnabled()) { return; }
                         hovered = true;
                         repaintSelf();
                     }
                     @Override
-                    public void mouseExited(MouseEvent e) {
+                    public void mouseExited(final MouseEvent e) {
                         if (hovered) {
                             hovered = false;
                             repaintSelf();
@@ -527,7 +529,7 @@ public class FNavigationBar extends FTitleBarBase {
             }
 
             @Override
-            public void setEnabled(boolean enabled0) {
+            public void setEnabled(final boolean enabled0) {
                 if (!enabled0 && hovered) {
                     hovered = false; //ensure hovered reset if disabled
                 }
@@ -541,7 +543,7 @@ public class FNavigationBar extends FTitleBarBase {
             }
 
             @Override
-            public void paintComponent(Graphics g) {
+            public void paintComponent(final Graphics g) {
                 super.paintComponent(g);
 
                 if (hovered) {
@@ -556,14 +558,14 @@ public class FNavigationBar extends FTitleBarBase {
                     }
                 }
 
-                int thickness = 2;
-                int offset = 4;
-                int x1 = offset;
-                int y1 = offset;
-                int x2 = getWidth() - offset - 1;
-                int y2 = getHeight() - offset - 1;
+                final int thickness = 2;
+                final int offset = 4;
+                final int x1 = offset;
+                final int y1 = offset;
+                final int x2 = getWidth() - offset - 1;
+                final int y2 = getHeight() - offset - 1;
 
-                Graphics2D g2d = (Graphics2D) g;
+                final Graphics2D g2d = (Graphics2D) g;
                 SkinColor iconColor = NavigationTab.this.getSkin().getForeground();
                 if (!NavigationTab.this.isEnabled()) {
                     iconColor = iconColor.alphaColor(100);

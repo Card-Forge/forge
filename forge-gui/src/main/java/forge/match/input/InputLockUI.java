@@ -30,31 +30,33 @@ public class InputLockUI implements Input {
         return null;
     }
 
+    @Override
     public void showMessageInitial() {
-        int ixCall = 1 + iCall.getAndIncrement();
+        final int ixCall = 1 + iCall.getAndIncrement();
         ThreadUtil.delay(500, new InputUpdater(ixCall));
     }
 
     @Override
     public String toString() {
-        return "lockUI"; 
+        return "lockUI";
     }
-    
+
     private class InputUpdater implements Runnable {
         final int ixCall;
-        
+
         public InputUpdater(final int idxCall) {
             ixCall = idxCall;
         }
-        
+
         @Override
         public void run() {
-            if ( ixCall != iCall.get() || !isActive()) // cancel the message if it's not from latest call or input is gone already 
+            if ( ixCall != iCall.get() || !isActive()) {
                 return;
+            }
             FThreads.invokeInEdtLater(showMessageFromEdt);
         }
     };
-    
+
     private final Runnable showMessageFromEdt = new Runnable() {
         @Override
         public void run() {
@@ -67,20 +69,20 @@ public class InputLockUI implements Input {
         return inputQueue.getInput() == this;
     }
 
-    protected void showMessage(String message) { 
+    protected void showMessage(final String message) {
         controller.getGui().showPromptMessage(getOwner(), message);
     }
 
     @Override
-    public boolean selectCard(Card c, final List<Card> otherCardsToSelect, ITriggerEvent triggerEvent) {
+    public boolean selectCard(final Card c, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
         return false;
     }
     @Override
-    public boolean selectAbility(SpellAbility ab) {
+    public boolean selectAbility(final SpellAbility ab) {
         return false;
     }
     @Override
-    public void selectPlayer(Player player, ITriggerEvent triggerEvent) {
+    public void selectPlayer(final Player player, final ITriggerEvent triggerEvent) {
     }
     @Override
     public void selectButtonOK() {
@@ -88,13 +90,13 @@ public class InputLockUI implements Input {
     @Override
     public void selectButtonCancel() {
         //cancel auto pass for all players
-        for (Player player : game.getPlayers()) {
+        for (final Player player : game.getPlayers()) {
             player.getController().autoPassCancel();
         }
     }
 
     @Override
-    public String getActivateAction(Card card) {
+    public String getActivateAction(final Card card) {
         return null;
     }
 }

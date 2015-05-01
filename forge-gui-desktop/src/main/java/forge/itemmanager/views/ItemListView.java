@@ -6,16 +6,66 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.itemmanager.views;
+
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.KeyboardFocusManager;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Enumeration;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.JViewport;
+import javax.swing.KeyStroke;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+
+import org.apache.commons.lang3.StringUtils;
 
 import forge.assets.FSkinProp;
 import forge.gui.MouseUtil;
@@ -29,39 +79,17 @@ import forge.itemmanager.ItemManagerModel;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FSkin;
-import forge.toolbox.FSkin.*;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.TableModelEvent;
-import javax.swing.table.*;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.awt.*;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.util.*;
-import java.util.List;
-import java.util.Map.Entry;
+import forge.toolbox.FSkin.SkinBorder;
+import forge.toolbox.FSkin.SkinColor;
+import forge.toolbox.FSkin.SkinFont;
+import forge.toolbox.FSkin.SkinImage;
+import forge.toolbox.FSkin.SkinnedTable;
+import forge.toolbox.FSkin.SkinnedTableHeader;
 
 
 /**
  * ItemTable.
- * 
+ *
  * @param <T>
  *            the generic type
  */
@@ -87,11 +115,11 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     /**
      * ItemTable Constructor.
-     * 
+     *
      * @param itemManager0
      * @param model0
      */
-    public ItemListView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
+    public ItemListView(final ItemManager<T> itemManager0, final ItemManagerModel<T> model0) {
         super(itemManager0, model0);
         this.tableModel = new ItemTableModel(model0);
         this.setAllowMultipleSelections(false);
@@ -99,21 +127,19 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
         // use different selection highlight colors for focused vs. unfocused tables
         this.table.addMouseListener(new FMouseAdapter() {
-            @Override
-            public void onLeftDoubleClick(MouseEvent e) {
+            @Override public void onLeftDoubleClick(final MouseEvent e) {
                 if (e.isConsumed()) { return; } //don't activate if inline button double clicked
 
-                int clickedIndex = table.rowAtPoint(e.getPoint());
+                final int clickedIndex = table.rowAtPoint(e.getPoint());
 
                 itemManager.activateSelectedItems();
 
                 if (clickedIndex >= table.getRowCount()) {
-                    FMouseAdapter.forceMouseUp(); //prevent mouse getting stuck if final row removed from double click handling 
+                    FMouseAdapter.forceMouseUp(); //prevent mouse getting stuck if final row removed from double click handling
                 }
             }
 
-            @Override
-            public void onRightClick(MouseEvent e) {
+            @Override public void onRightClick(final MouseEvent e) {
                 itemManager.showContextMenu(e);
             }
         });
@@ -124,13 +150,13 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @Override
-    public void setup(ItemManagerConfig config, Map<ColumnDef, ItemTableColumn> colOverrides) {
+    public void setup(final ItemManagerConfig config, final Map<ColumnDef, ItemTableColumn> colOverrides) {
         final Iterable<T> selectedItemsBefore = getSelectedItems();
         final DefaultTableColumnModel colmodel = new DefaultTableColumnModel();
 
         //ensure columns ordered properly
         final List<ItemTableColumn> columns = new LinkedList<ItemTableColumn>();
-        for (ItemColumnConfig colConfig : config.getCols().values()) {
+        for (final ItemColumnConfig colConfig : config.getCols().values()) {
             if (colOverrides == null || !colOverrides.containsKey(colConfig.getDef())) {
                 columns.add(new ItemTableColumn(new ItemColumn(colConfig)));
             }
@@ -139,14 +165,13 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             }
         }
         Collections.sort(columns, new Comparator<ItemTableColumn>() {
-            @Override
-            public int compare(ItemTableColumn arg0, ItemTableColumn arg1) {
+            @Override public int compare(final ItemTableColumn arg0, final ItemTableColumn arg1) {
                 return Integer.compare(arg0.getIndex(), arg1.getIndex());
             }
         });
 
         //hide table header if only showing single string column
-        boolean hideHeader = (config.getCols().size() == 1 && config.getCols().containsKey(ColumnDef.STRING));
+        final boolean hideHeader = (config.getCols().size() == 1 && config.getCols().containsKey(ColumnDef.STRING));
 
         getPnlOptions().removeAll();
 
@@ -155,9 +180,8 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             chkBox.setFont(ROW_FONT);
             chkBox.setToolTipText("Toggle whether to show unique cards only");
             chkBox.addChangeListener(new ChangeListener() {
-                @Override
-                public void stateChanged(ChangeEvent arg0) {
-                    boolean wantUnique = chkBox.isSelected();
+                @Override public void stateChanged(final ChangeEvent arg0) {
+                    final boolean wantUnique = chkBox.isSelected();
                     if (itemManager.getWantUnique() == wantUnique) { return; }
                     itemManager.setWantUnique(wantUnique);
                     itemManager.refresh();
@@ -181,9 +205,8 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 chkBox.setFont(ROW_FONT);
                 chkBox.setToolTipText(col.getLongName());
                 chkBox.addChangeListener(new ChangeListener() {
-                    @Override
-                    public void stateChanged(ChangeEvent arg0) {
-                        boolean visible = chkBox.isSelected();
+                    @Override public void stateChanged(final ChangeEvent arg0) {
+                        final boolean visible = chkBox.isSelected();
                         if (col.isVisible() == visible) { return; }
                         col.setVisible(visible);
 
@@ -191,7 +214,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                             colmodel.addColumn(col);
 
                             //move column into proper position
-                            int oldIndex = colmodel.getColumnCount() - 1;
+                            final int oldIndex = colmodel.getColumnCount() - 1;
                             int newIndex = col.getIndex();
                             for (int i = 0; i < col.getIndex(); i++) {
                                 if (!columns.get(i).isVisible()) {
@@ -252,7 +275,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @Override
-    public void setAllowMultipleSelections(boolean allowMultipleSelections) {
+    public void setAllowMultipleSelections(final boolean allowMultipleSelections) {
         this.table.setSelectionMode(allowMultipleSelections ? ListSelectionModel.MULTIPLE_INTERVAL_SELECTION : ListSelectionModel.SINGLE_SELECTION);
     }
 
@@ -263,8 +286,8 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     public Iterable<Integer> getSelectedIndices() {
-        List<Integer> indices = new ArrayList<Integer>();
-        int[] selectedRows = this.table.getSelectedRows();
+        final List<Integer> indices = new ArrayList<Integer>();
+        final int[] selectedRows = this.table.getSelectedRows();
         for (int i = 0; i < selectedRows.length; i++) {
             indices.add(selectedRows[i]);
         }
@@ -272,23 +295,23 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @Override
-    protected void onSetSelectedIndex(int index) {
+    protected void onSetSelectedIndex(final int index) {
         this.table.setRowSelectionInterval(index, index);
     }
 
     @Override
-    protected void onSetSelectedIndices(Iterable<Integer> indices) {
+    protected void onSetSelectedIndices(final Iterable<Integer> indices) {
         this.table.clearSelection();
-        for (Integer index : indices) {
+        for (final Integer index : indices) {
             this.table.addRowSelectionInterval(index, index);
         }
     }
 
     @Override
-    protected void onScrollSelectionIntoView(JViewport viewport) {
+    protected void onScrollSelectionIntoView(final JViewport viewport) {
         // compute where we're going and where we are
-        Rectangle targetRect  = this.table.getCellRect(this.getSelectedIndex(), 0, true);
-        Rectangle curViewRect = viewport.getViewRect();
+        final Rectangle targetRect  = this.table.getCellRect(this.getSelectedIndex(), 0, true);
+        final Rectangle curViewRect = viewport.getViewRect();
 
         // if the target cell is not visible, attempt to jump to a location where it is
         // visible but not on the edge of the viewport
@@ -310,13 +333,13 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @Override
-    public int getIndexOfItem(T item) {
+    public int getIndexOfItem(final T item) {
         return this.tableModel.itemToRow(item);
     }
 
     @Override
-    public T getItemAtIndex(int index) {
-        Entry<T, Integer> itemEntry = this.tableModel.rowToItem(index);
+    public T getItemAtIndex(final int index) {
+        final Entry<T, Integer> itemEntry = this.tableModel.rowToItem(index);
         return itemEntry != null ? itemEntry.getKey() : null;
     }
 
@@ -331,7 +354,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @Override
-    public int getIndexAtPoint(Point p) {
+    public int getIndexAtPoint(final Point p) {
         return this.table.rowAtPoint(p);
     }
 
@@ -355,7 +378,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
             this.addFocusListener(new FocusListener() {
                 @Override
-                public void focusGained(FocusEvent e) {
+                public void focusGained(final FocusEvent e) {
                     setSelectionBackground(SEL_ACTIVE_COLOR);
                     // if nothing selected when we gain focus, select the first row (if exists)
                     if (getSelectedIndex() == -1 && getCount() > 0) {
@@ -364,7 +387,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 }
 
                 @Override
-                public void focusLost(FocusEvent e) {
+                public void focusLost(final FocusEvent e) {
                     if (!e.isTemporary()) {
                         setSelectionBackground(SEL_INACTIVE_COLOR);
                     }
@@ -382,13 +405,13 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 public void actionPerformed(final ActionEvent e) {
                     final StringBuilder sb = new StringBuilder();
                     for (final int row : getSelectedRows()) {
-                        Entry<T, Integer> item = tableModel.rowToItem(row);
+                        final Entry<T, Integer> item = tableModel.rowToItem(row);
                         sb.append(item.getValue().toString());
                         sb.append(' ');
                         sb.append(item.getKey().toString());
                         sb.append('\n');
                     }
-                    final StringSelection selection = new StringSelection(sb.toString());     
+                    final StringSelection selection = new StringSelection(sb.toString());
                     final Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                     clipboard.setContents(selection, selection);
                 }
@@ -399,12 +422,12 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         }
         @Override
         protected JTableHeader createDefaultTableHeader() {
-            SkinnedTableHeader header = new SkinnedTableHeader(columnModel) {
+            final SkinnedTableHeader header = new SkinnedTableHeader(columnModel) {
                 @Override
-                public String getToolTipText(MouseEvent e) {
-                    int col = columnModel.getColumnIndexAtX(e.getPoint().x);
+                public String getToolTipText(final MouseEvent e) {
+                    final int col = columnModel.getColumnIndexAtX(e.getPoint().x);
                     if (col < 0) { return null; }
-                    ItemTableColumn tableColumn = (ItemTableColumn) columnModel.getColumn(col);
+                    final ItemTableColumn tableColumn = (ItemTableColumn) columnModel.getColumn(col);
                     if (tableColumn.getLongName().isEmpty()) {
                         return null;
                     }
@@ -418,9 +441,9 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             final DefaultTableCellRenderer renderer = ((DefaultTableCellRenderer)header.getDefaultRenderer());
             header.setDefaultRenderer(new DefaultTableCellRenderer() {
                 @Override
-                public Component getTableCellRendererComponent(JTable table,
-                        Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                    JLabel lbl = (JLabel) renderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                public Component getTableCellRendererComponent(final JTable table,
+                        final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column) {
+                    final JLabel lbl = (JLabel) renderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                     lbl.setHorizontalAlignment(SwingConstants.LEFT);
                     FSkin.setTempBorder(lbl, HEADER_BORDER);
                     return lbl;
@@ -429,39 +452,40 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             return header;
         }
 
-        public void processMouseEvent(MouseEvent e) {
-            Point p = e.getPoint();
-            int row = rowAtPoint(p);
-            int col = columnAtPoint(p);
+        @Override
+        public void processMouseEvent(final MouseEvent e) {
+            final Point p = e.getPoint();
+            final int row = rowAtPoint(p);
+            final int col = columnAtPoint(p);
 
             if (col < 0 || col >= getColumnCount() || row < 0 || row >= getRowCount()) {
                 return;
             }
 
-            Object val = getValueAt(row, col);
+            final Object val = getValueAt(row, col);
             if (val == null) {
                 return;
             }
 
-            ItemCellRenderer renderer = (ItemCellRenderer)getCellRenderer(row, col);
+            final ItemCellRenderer renderer = (ItemCellRenderer)getCellRenderer(row, col);
             if (renderer != null) {
                 renderer.processMouseEvent(e, ItemListView.this, val, row, col); //give renderer a chance to process the mouse event
             }
             try {
                 super.processMouseEvent(e);
             }
-            catch (Exception ex) { //trap error thrown by weird tooltip issue
+            catch (final Exception ex) { //trap error thrown by weird tooltip issue
                 ex.printStackTrace();
             }
         }
 
-        private String getCellTooltip(TableCellRenderer renderer, int row, int col, Object val) {
-            Component cell = renderer.getTableCellRendererComponent(this, val, false, false, row, col);
+        private String getCellTooltip(final TableCellRenderer renderer, final int row, final int col, final Object val) {
+            final Component cell = renderer.getTableCellRendererComponent(this, val, false, false, row, col);
 
             // use a pre-set tooltip if it exists
             if (cell instanceof JComponent) {
-                JComponent jcell = (JComponent)cell;
-                String tip = jcell.getToolTipText();
+                final JComponent jcell = (JComponent)cell;
+                final String tip = jcell.getToolTipText();
                 if (tip != null && !tip.isEmpty()) {
                     return tip;
                 }
@@ -470,7 +494,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             // if we're conditionally showing the tooltip, check to see
             // if we shouldn't show it
             if (val == null) { return null; }
-            String text = val.toString();
+            final String text = val.toString();
             if (text.isEmpty()) { return null; }
 
             if (!(renderer instanceof ItemCellRenderer) || !((ItemCellRenderer)renderer).alwaysShowTooltip()) {
@@ -478,8 +502,8 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 // we use '>' here instead of '>=' since that seems to be the
                 // threshold for where the ellipses appear for the default
                 // JTable renderer
-                int requiredWidth = cell.getPreferredSize().width;
-                TableColumn tableColumn = this.getColumnModel().getColumn(col);
+                final int requiredWidth = cell.getPreferredSize().width;
+                final TableColumn tableColumn = this.getColumnModel().getColumn(col);
                 if (tableColumn.getWidth() > requiredWidth) {
                     return null;
                 }
@@ -490,16 +514,16 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         }
 
         @Override
-        public String getToolTipText(MouseEvent e) {
-            Point p = e.getPoint();
-            int row = rowAtPoint(p);
-            int col = columnAtPoint(p);
+        public String getToolTipText(final MouseEvent e) {
+            final Point p = e.getPoint();
+            final int row = rowAtPoint(p);
+            final int col = columnAtPoint(p);
 
             if (col >= getColumnCount() || row >= getRowCount()) {
                 return null;
             }
 
-            Object val = getValueAt(row, col);
+            final Object val = getValueAt(row, col);
             if (val == null) {
                 return null;
             }
@@ -512,7 +536,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         private Point lastTooltipPt;
 
         @Override
-        public Point getToolTipLocation(MouseEvent e) {
+        public Point getToolTipLocation(final MouseEvent e) {
             Point p = e.getPoint();
             final int row = rowAtPoint(p);
             final int col = columnAtPoint(p);
@@ -533,7 +557,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
         /**
          * Instantiates a new table model.
-         * 
+         *
          * @param table0 &emsp; {@link forge.gui.ItemManager.ItemTable<T>}
          * @param model0 &emsp; {@link forge.gui.ItemManager.ItemManagerModel<T>}
          */
@@ -556,7 +580,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             model.getCascadeManager().reset();
 
             for (int i = sortcols.length - 1; i >= 0; i--) {
-                ItemTableColumn col = sortcols[i];
+                final ItemTableColumn col = sortcols[i];
                 if (col != null) {
                     model.getCascadeManager().add(col.getItemColumn(), true);
                 }
@@ -565,7 +589,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
         /**
          * Row to item.
-         * 
+         *
          * @param row - the row
          * @return the item
          */
@@ -576,7 +600,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
         /**
          * Item to row.
-         * 
+         *
          * @param item - the item
          * @return the row
          */
@@ -608,11 +632,11 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             private ItemTableColumn resizeColumn;
 
             @Override
-            public void onLeftMouseDown(MouseEvent e) {
+            public void onLeftMouseDown(final MouseEvent e) {
                 focus();
                 if (Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR) == table.getTableHeader().getCursor()) {
                     final TableColumnModel colModel = table.getColumnModel();
-                    int index = colModel.getColumnIndexAtX(e.getX() - 3); //-3 to ensure we get column left of resizer
+                    final int index = colModel.getColumnIndexAtX(e.getX() - 3); //-3 to ensure we get column left of resizer
                     if (index >= 0) {
                         resizeColumn = (ItemTableColumn) colModel.getColumn(index);
                         resizeColumn.startResize();
@@ -622,7 +646,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             }
 
             @Override
-            public void onLeftMouseUp(MouseEvent e) {
+            public void onLeftMouseUp(final MouseEvent e) {
                 if (resizeColumn != null) {
                     MouseUtil.unlockCursor();
                     resizeColumn.endResize();
@@ -631,7 +655,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             }
 
             @Override
-            public void onLeftClick(MouseEvent e) {
+            public void onLeftClick(final MouseEvent e) {
                 if (Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR) == table.getTableHeader().getCursor()) {
                     return;
                 }
@@ -655,9 +679,9 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             }
 
             @Override
-            public void onLeftMouseDragDrop(MouseEvent e) { //save preferences after column moved/resized
+            public void onLeftMouseDragDrop(final MouseEvent e) { //save preferences after column moved/resized
                 for (int i = 0; i < table.getColumnCount(); i++) {
-                    ItemTableColumn column = (ItemTableColumn) table.getColumnModel().getColumn(i);
+                    final ItemTableColumn column = (ItemTableColumn) table.getColumnModel().getColumn(i);
                     column.updatePreferredWidth();
                     column.setIndex(i);
                 }
@@ -665,14 +689,14 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             }
 
             @Override
-            public void onMouseExit(MouseEvent e) {
+            public void onMouseExit(final MouseEvent e) {
                 MouseUtil.resetCursor();
             }
         };
 
         private final MouseMotionAdapter headerMouseMotionAdapter = new MouseMotionAdapter() {
             @Override
-            public void mouseMoved(MouseEvent arg0) {
+            public void mouseMoved(final MouseEvent arg0) {
                 MouseUtil.setCursor(table.getTableHeader().getCursor());
             }
         };
@@ -724,8 +748,8 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
          * @see javax.swing.table.TableModel#getValueAt(int, int)
          */
         @Override
-        public Object getValueAt(int iRow, int iCol) {
-            Entry<T, Integer> card = this.rowToItem(iRow);
+        public Object getValueAt(final int iRow, final int iCol) {
+            final Entry<T, Integer> card = this.rowToItem(iRow);
             if (null == card) {
                 return null;
             }

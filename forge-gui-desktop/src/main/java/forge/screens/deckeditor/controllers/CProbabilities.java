@@ -1,5 +1,12 @@
 package forge.screens.deckeditor.controllers;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import forge.UiCommand;
 import forge.deck.DeckBase;
 import forge.gui.framework.ICDoc;
@@ -10,11 +17,9 @@ import forge.screens.deckeditor.views.VProbabilities;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
 
-import java.util.*;
-
-/** 
+/**
  * Controls the "analysis" panel in the deck editor UI.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
@@ -23,14 +28,6 @@ public enum CProbabilities implements ICDoc {
     SINGLETON_INSTANCE;
 
     //========== Overridden methods
-
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
-    }
 
     @Override
     public void register() {
@@ -65,7 +62,7 @@ public enum CProbabilities implements ICDoc {
                 CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
 
         if (ed == null) { return new ArrayList<String>(); }
-        
+
         final ItemPool<PaperCard> deck = ItemPool.createFrom(ed.getDeckManager().getPool(), PaperCard.class);
 
         final List<String> cardProbabilities = new ArrayList<String>();
@@ -84,12 +81,11 @@ public enum CProbabilities implements ICDoc {
         // Formulas is (remaining instances of this card / total cards remaining)
         final Iterator<PaperCard> itr = shuffled.iterator();
         PaperCard tmp;
-       // int prob;
         while (itr.hasNext()) {
             tmp = itr.next();
 
-           // prob = SEditorUtil.calculatePercentage(
-             //       cardTotals.get(tmp), shuffled.size());
+            // int prob = SEditorUtil.calculatePercentage(
+            //       cardTotals.get(tmp), shuffled.size());
 
             cardTotals.put(tmp, cardTotals.get(tmp) - 1);
             cardProbabilities.add(tmp.getName()); // + " (" + prob + "%)");

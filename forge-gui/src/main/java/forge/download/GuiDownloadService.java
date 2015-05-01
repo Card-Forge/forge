@@ -320,12 +320,10 @@ public abstract class GuiDownloadService implements Runnable {
     protected Proxy getProxy() {
         if (type == 0) {
             return Proxy.NO_PROXY;
-        }
-        else {
+        } else {
             try {
                 return new Proxy(TYPES[type], new InetSocketAddress(txtAddress.getText(), Integer.parseInt(txtPort.getText())));
-            }
-            catch (final Exception ex) {
+            } catch (final Exception ex) {
                 BugReporter.reportException(ex,
                         "Proxy connection could not be established!\nProxy address: %s\nProxy port: %s",
                         txtAddress.getText(), txtPort.getText());

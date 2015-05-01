@@ -126,7 +126,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
         cbCollections.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setAchievements((AchievementCollection)cbCollections.getSelectedItem());
+                setAchievements(cbCollections.getSelectedItem());
             }
         });
         cbCollections.setSelectedIndex(0);

@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -30,15 +30,15 @@ import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.ThreadUtil;
- 
+
 /**
-  * <p>
-  * InputConfirmMulligan class.
-  * </p>
-  * 
-  * @author Forge
-  * @version $Id: InputConfirmMulligan.java 24769 2014-02-09 13:56:04Z Hellfish $
-  */
+ * <p>
+ * InputConfirmMulligan class.
+ * </p>
+ *
+ * @author Forge
+ * @version $Id: InputConfirmMulligan.java 24769 2014-02-09 13:56:04Z Hellfish $
+ */
 public class InputConfirmMulligan extends InputSyncronizedBase {
     /** Constant <code>serialVersionUID=-8112954303001155622L</code>. */
     private static final long serialVersionUID = -8112954303001155622L;
@@ -60,9 +60,9 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
-        Game game = player.getGame();
+        final Game game = player.getGame();
 
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         if (startingPlayer == player) {
             sb.append(player).append(", you are going first!\n\n");
         }
@@ -116,9 +116,9 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
 
     @Override
     protected boolean onCardSelected(final Card c0, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) { // the only place that would cause troubles - input is supposed only to confirm, not to fire abilities
-        boolean fromHand = player.getZone(ZoneType.Hand).contains(c0);
-        boolean isSerumPowder = c0.getName().equals("Serum Powder");
-        boolean isLegalChoice = fromHand && (isCommander || isSerumPowder);
+        final boolean fromHand = player.getZone(ZoneType.Hand).contains(c0);
+        final boolean isSerumPowder = c0.getName().equals("Serum Powder");
+        final boolean isLegalChoice = fromHand && (isCommander || isSerumPowder);
         if (!isLegalChoice || cardSelectLocked) {
             return false;
         }
@@ -127,9 +127,9 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
         if (isSerumPowder && getController().getGui().confirm(cView, "Use " + cView + "'s ability?")) {
             cardSelectLocked = true;
             ThreadUtil.invokeInGameThread(new Runnable() {
-                public void run() {
-                    CardCollection hand = new CardCollection(c0.getController().getCardsIn(ZoneType.Hand));
-                    for (Card c : hand) {
+                @Override public void run() {
+                    final CardCollection hand = new CardCollection(c0.getController().getCardsIn(ZoneType.Hand));
+                    for (final Card c : hand) {
                         player.getGame().getAction().exile(c);
                     }
                     c0.getController().drawCards(hand.size());
@@ -162,7 +162,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
     }
 
     @Override
-    public String getActivateAction(Card card) {
+    public String getActivateAction(final Card card) {
         return null;
     }
 }

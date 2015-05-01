@@ -6,34 +6,41 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.download;
 
-import java.net.Proxy;
-
-import forge.UiCommand;
-import forge.assets.FSkinProp;
-import forge.gui.SOverlayUtils;
-import forge.toolbox.*;
-import forge.util.Callback;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
+import javax.swing.AbstractButton;
+import javax.swing.DefaultBoundedRangeModel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import net.miginfocom.swing.MigLayout;
+import forge.UiCommand;
+import forge.assets.FSkinProp;
+import forge.gui.SOverlayUtils;
+import forge.toolbox.FButton;
+import forge.toolbox.FLabel;
+import forge.toolbox.FOverlay;
+import forge.toolbox.FPanel;
+import forge.toolbox.FProgressBar;
+import forge.toolbox.FRadioButton;
+import forge.toolbox.FSkin;
+import forge.toolbox.FTextField;
+import forge.toolbox.JXButtonPanel;
+import forge.util.Callback;
+
 @SuppressWarnings("serial")
 public class GuiDownloader extends DefaultBoundedRangeModel {
-    public static final Proxy.Type[] TYPES = Proxy.Type.values();
-
     // Swing components
     private final FPanel pnlDialog = new FPanel(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
     private final FProgressBar progressBar = new FProgressBar();
@@ -42,8 +49,7 @@ public class GuiDownloader extends DefaultBoundedRangeModel {
     private final FTextField txtPort = new FTextField.Builder().ghostText("Proxy Port").build();
 
     private final UiCommand cmdClose = new UiCommand() {
-        @Override
-        public void run() {
+        @Override public void run() {
             service.setCancel(true);
 
             // Kill overlay
@@ -65,15 +71,15 @@ public class GuiDownloader extends DefaultBoundedRangeModel {
     private final GuiDownloadService service;
     private final Callback<Boolean> callback;
 
-    public GuiDownloader(GuiDownloadService service0) {
+    public GuiDownloader(final GuiDownloadService service0) {
         this(service0, null);
     }
-    public GuiDownloader(GuiDownloadService service0, Callback<Boolean> callback0) {
+    public GuiDownloader(final GuiDownloadService service0, final Callback<Boolean> callback0) {
         service = service0;
         callback = callback0;
 
-        String radConstraints = "w 100%!, h 30px!, gap 2% 0 0 10px";
-        JXButtonPanel grpPanel = new JXButtonPanel();
+        final String radConstraints = "w 100%!, h 30px!, gap 2% 0 0 10px";
+        final JXButtonPanel grpPanel = new JXButtonPanel();
         grpPanel.add(radProxyNone, radConstraints);
         grpPanel.add(radProxyHTTP, radConstraints);
         grpPanel.add(radProxySocks, radConstraints);
@@ -98,7 +104,9 @@ public class GuiDownloader extends DefaultBoundedRangeModel {
         pnlDialog.add(progressBar, "w 95%!, h 40px!, gap 2% 0 20px 0");
         pnlDialog.add(btnStart, "w 200px!, h 40px!, gap 0 0 20px 0, ax center");
         pnlDialog.add(btnClose, "w 20px!, h 20px!, pos 370px 10px");
+    }
 
+    public void show() {
         final JPanel pnl = FOverlay.SINGLETON_INSTANCE.getPanel();
         pnl.removeAll();
         pnl.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
@@ -106,8 +114,7 @@ public class GuiDownloader extends DefaultBoundedRangeModel {
         SOverlayUtils.showOverlay();
 
         service.initialize(txtAddress, txtPort, progressBar, btnStart, cmdClose, null, new Runnable() {
-            @Override
-            public void run() {
+            @Override public void run() {
                 fireStateChanged();
             }
         });

@@ -17,7 +17,6 @@ import com.google.common.eventbus.Subscribe;
 
 import forge.FThreads;
 import forge.GuiBase;
-import forge.LobbyPlayer;
 import forge.control.FControlGameEventHandler;
 import forge.control.FControlGamePlayback;
 import forge.control.WatchLocalGame;
@@ -110,7 +109,7 @@ public class HostedMatch {
         if (sortedPlayers.size() == 2) {
             title = String.format("%s vs %s", sortedPlayers.get(0).getPlayer().getName(), sortedPlayers.get(1).getPlayer().getName());
         } else {
-            title = String.format("Multiplayer Game (%d players)", sortedPlayers.size()); 
+            title = String.format("Multiplayer Game (%d players)", sortedPlayers.size());
         }
         this.match = new Match(gameRules, sortedPlayers, title);
         startGame();
@@ -134,7 +133,7 @@ public class HostedMatch {
         game = match.createGame();
 
         if (game.getRules().getGameType() == GameType.Quest) {
-            QuestController qc = FModel.getQuest();
+            final QuestController qc = FModel.getQuest();
             // Reset new list when the Match round starts, not when each game starts
             if (game.getMatch().getPlayedGames().isEmpty()) {
                 qc.getCards().resetNewList();
@@ -150,7 +149,7 @@ public class HostedMatch {
         final GameView gameView = getGameView();
 
         humanCount = 0;
-        final MapOfLists<IGuiGame, PlayerView> playersPerGui = new HashMapOfLists<IGuiGame, PlayerView>(CollectionSuppliers.<PlayerView>arrayLists()); 
+        final MapOfLists<IGuiGame, PlayerView> playersPerGui = new HashMapOfLists<IGuiGame, PlayerView>(CollectionSuppliers.<PlayerView>arrayLists());
         for (int iPlayer = 0; iPlayer < players.size(); iPlayer++) {
             final RegisteredPlayer rp = match.getPlayers().get(iPlayer);
             final Player p = players.get(iPlayer);
@@ -234,7 +233,7 @@ public class HostedMatch {
 
     }
 
-    public void registerSpectator(final LobbyPlayer lobbyPlayer, final IGuiGame gui) {
+    public void registerSpectator(final IGuiGame gui) {
         final PlayerControllerHuman humanController = new WatchLocalGame(game, null, gui);
         gui.setGameController(null, humanController);
         gui.openView(null);

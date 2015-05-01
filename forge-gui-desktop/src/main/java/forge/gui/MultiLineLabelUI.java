@@ -6,29 +6,42 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.gui;
 
-import javax.swing.*;
-import javax.swing.plaf.ComponentUI;
-import javax.swing.plaf.LabelUI;
-import javax.swing.plaf.basic.BasicLabelUI;
-import javax.swing.text.*;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Insets;
+import java.awt.Rectangle;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.swing.Icon;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.plaf.LabelUI;
+import javax.swing.plaf.basic.BasicLabelUI;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.Element;
+import javax.swing.text.PlainDocument;
+import javax.swing.text.Segment;
+import javax.swing.text.Utilities;
+import javax.swing.text.View;
 
 /**
  * Label UI delegate that supports multiple lines and line wrapping. Hard line
@@ -42,7 +55,7 @@ import java.util.List;
  * <p/>
  * Example of usage:
  * <p/>
- * 
+ *
  * <pre>
  * JLabel myLabel = new JLabel();
  * myLabel.setUI(MultiLineLabelUI.labelUI);
@@ -55,7 +68,7 @@ import java.util.List;
  * by overriding {@link #paintEnabledText(JLabel, Graphics, String, int, int)}
  * and {@link #paintDisabledText(JLabel, Graphics, String, int, int)}. This
  * class is designed to be easily extended by subclasses.
- * 
+ *
  * @author Samuel Sjoberg, http://samuelsjoberg.com
  * @version 1.3.0
  */
@@ -95,17 +108,6 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
      */
     private static int defaultSize = 4;
 
-    /**
-     * Get the shared UI instance.
-     * 
-     * @param c
-     *            the c
-     * @return a ComponentUI
-     */
-    public static ComponentUI createUI(final JComponent c) {
-        return MultiLineLabelUI.getLabelUI();
-    }
-
     /** {@inheritDoc} */
     @Override
     protected void uninstallDefaults(final JLabel c) {
@@ -129,7 +131,7 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
 
     /**
      * Clear the wrapped line cache.
-     * 
+     *
      * @param l
      *            the label containing a cached value
      */
@@ -150,7 +152,7 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
     /**
      * Calculate the paint rectangles for the icon and text for the passed
      * label.
-     * 
+     *
      * @param l
      *            a label
      * @param fm
@@ -193,7 +195,7 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
      * <p>
      * prepareGraphics.
      * </p>
-     * 
+     *
      * @param g
      *            a {@link java.awt.Graphics} object.
      */
@@ -237,7 +239,7 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
 
     /**
      * Paint the wrapped text lines.
-     * 
+     *
      * @param g
      *            graphics component to paint on
      * @param label
@@ -288,7 +290,7 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
     /**
      * Returns the available height to paint text on. This is the height of the
      * passed component with insets subtracted.
-     * 
+     *
      * @param l
      *            a component
      * @return the available height
@@ -301,7 +303,7 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
     /**
      * Add a clip indication to the string. It is important that the string
      * length does not exceed the length or the original string.
-     * 
+     *
      * @param text
      *            the to be painted
      * @param fm
@@ -324,7 +326,7 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
     /**
      * Establish the vertical text alignment. The default alignment is to center
      * the text in the label.
-     * 
+     *
      * @param label
      *            the label to paint
      * @param fm
@@ -359,7 +361,7 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
      * <p>
      * getAscent.
      * </p>
-     * 
+     *
      * @param fm
      *            a {@link java.awt.FontMetrics} object.
      * @return a int.
@@ -371,7 +373,7 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
     /**
      * Establish the horizontal text alignment. The default alignment is left
      * aligned text.
-     * 
+     *
      * @param label
      *            the label to paint
      * @param fm
@@ -401,7 +403,7 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
      * Check the given string to see if it should be rendered as HTML. Code
      * based on implementation found in
      * <code>BasicHTML.isHTMLString(String)</code> in future JDKs.
-     * 
+     *
      * @param s
      *            the string
      * @return <code>true</code> if string is HTML, otherwise <code>false</code>
@@ -453,7 +455,7 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
     /**
      * The preferred height of the label is the height of the lines with added
      * top and bottom insets.
-     * 
+     *
      * @param label
      *            the label
      * @return the preferred height of the wrapped lines.
@@ -467,7 +469,7 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
     /**
      * Get the lines of text contained in the text label. The prepared lines is
      * cached as a client property, accessible via {@link #PROPERTY_KEY}.
-     * 
+     *
      * @param l
      *            the label
      * @return the text lines of the label.
@@ -509,7 +511,7 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
     /**
      * Prepare the text lines for rendering. The lines are wrapped to fit in the
      * current available space for text. Explicit line breaks are preserved.
-     * 
+     *
      * @param l
      *            the label to render
      * @return a list of text lines to render
@@ -535,7 +537,7 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
 
     /**
      * If necessary, wrap the text into multiple lines.
-     * 
+     *
      * @param lines
      *            line array in which to store the wrapped lines
      * @param elem
@@ -557,7 +559,7 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
 
     /**
      * Calculate the position on which to break (wrap) the line.
-     * 
+     *
      * @param doc
      *            the document
      * @param p0
@@ -583,7 +585,7 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
 
     /**
      * Gets the label ui.
-     * 
+     *
      * @return the labelUI
      */
     public static LabelUI getLabelUI() {
@@ -591,18 +593,8 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
     }
 
     /**
-     * Sets the label ui.
-     * 
-     * @param labelUI
-     *            the new label ui
-     */
-    public static void setLabelUI(final LabelUI labelUI) {
-        MultiLineLabelUI.labelUI = labelUI;
-    }
-
-    /**
      * Static singleton {@link Segment} cache.
-     * 
+     *
      * @author Samuel Sjoberg
      * @see javax.swing.text.SegmentCache
      */
@@ -627,7 +619,7 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
         /**
          * Returns a <code>Segment</code>. When done, the <code>Segment</code>
          * should be recycled by invoking {@link #releaseSegment(Segment)}.
-         * 
+         *
          * @return a <code>Segment</code>.
          */
         public static Segment getSegment() {
@@ -642,7 +634,7 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
          * Releases a <code>Segment</code>. A segment should not be used after
          * it is released, and a segment should never be released more than
          * once.
-         * 
+         *
          * @param segment
          *            the segment
          */

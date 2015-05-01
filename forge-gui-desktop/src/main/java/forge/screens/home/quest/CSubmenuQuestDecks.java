@@ -5,7 +5,6 @@ import javax.swing.SwingUtilities;
 import forge.Singletons;
 import forge.UiCommand;
 import forge.deck.DeckProxy;
-import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.itemmanager.ItemManagerConfig;
@@ -15,11 +14,10 @@ import forge.quest.QuestUtil;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorQuest;
-import forge.screens.home.CHomeUI;
 
-/** 
+/**
  * Controls the quest decks submenu in the home UI.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
 @SuppressWarnings("serial")
@@ -30,7 +28,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
     private final UiCommand cmdDeckSelect = new UiCommand() {
         @Override
         public void run() {
-            DeckProxy deck = VSubmenuQuestDecks.SINGLETON_INSTANCE.getLstDecks().getSelectedItem();
+            final DeckProxy deck = VSubmenuQuestDecks.SINGLETON_INSTANCE.getLstDecks().getSelectedItem();
             if (deck != null) {
                 FModel.getQuestPreferences().setPref(QPref.CURRENT_DECK, deck.toString());
             }
@@ -80,7 +78,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
         view.getLstDecks().setDeleteCommand(null);
 
         final QuestController qData = FModel.getQuest();
-        boolean hasQuest = qData.getAssets() != null;
+        final boolean hasQuest = qData.getAssets() != null;
         // Retrieve and set all decks
         view.getLstDecks().setPool(DeckProxy.getAllQuestDecks(hasQuest ? qData.getMyDecks() : null));
         view.getLstDecks().setup(ItemManagerConfig.QUEST_DECKS);
@@ -106,19 +104,4 @@ public enum CSubmenuQuestDecks implements ICDoc {
         });
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        final QuestController qc = FModel.getQuest();
-        return new UiCommand() {
-            @Override
-            public void run() {
-                if (qc.getAchievements() == null) {
-                    CHomeUI.SINGLETON_INSTANCE.itemClick(EDocID.HOME_QUESTDATA);
-                }
-            }
-        };
-    }
 }

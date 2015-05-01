@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -24,11 +24,9 @@ import java.awt.event.MouseListener;
 import com.google.common.base.Function;
 
 import forge.Singletons;
-import forge.UiCommand;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.ICDoc;
-import forge.match.MatchConstants;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.ZoneAction;
 import forge.screens.match.views.VField;
@@ -53,31 +51,31 @@ public class CField implements ICDoc {
 
     /**
      * Controls Swing components of a player's field instance.
-     * 
+     *
      * @param player0 &emsp; {@link forge.game.player.Player}
      * @param v0 &emsp; {@link forge.screens.match.views.VField}
-     * @param playerViewer 
+     * @param playerViewer
      */
     public CField(final CMatchUI matchUI, final PlayerView player0, final VField v0) {
         this.matchUI = matchUI;
         this.player = player0;
         this.view = v0;
 
-        final ZoneAction handAction      = new ZoneAction(matchUI, player, ZoneType.Hand,      MatchConstants.HUMANHAND);
-        final ZoneAction libraryAction   = new ZoneAction(matchUI, player, ZoneType.Library,   MatchConstants.HUMANLIBRARY);
-        final ZoneAction exileAction     = new ZoneAction(matchUI, player, ZoneType.Exile,     MatchConstants.HUMANEXILED);
-        final ZoneAction graveAction     = new ZoneAction(matchUI, player, ZoneType.Graveyard, MatchConstants.HUMANGRAVEYARD);
-        final ZoneAction flashBackAction = new ZoneAction(matchUI, player, ZoneType.Flashback, MatchConstants.HUMANFLASHBACK);
-        final ZoneAction commandAction   = new ZoneAction(matchUI, player, ZoneType.Command,   MatchConstants.HUMANCOMMAND);
+        final ZoneAction handAction      = new ZoneAction(matchUI, player, ZoneType.Hand);
+        final ZoneAction libraryAction   = new ZoneAction(matchUI, player, ZoneType.Library);
+        final ZoneAction exileAction     = new ZoneAction(matchUI, player, ZoneType.Exile);
+        final ZoneAction graveAction     = new ZoneAction(matchUI, player, ZoneType.Graveyard);
+        final ZoneAction flashBackAction = new ZoneAction(matchUI, player, ZoneType.Flashback);
+        final ZoneAction commandAction   = new ZoneAction(matchUI, player, ZoneType.Command);
 
         final Function<Byte, Boolean> manaAction = new Function<Byte, Boolean>() {
-            public Boolean apply(final Byte colorCode) {
+            @Override public final Boolean apply(final Byte colorCode) {
                 if (CField.this.player.isLobbyPlayer(Singletons.getControl().getGuiPlayer())) {
                     final int oldMana = player.getMana(colorCode);
                     matchUI.getGameController().useMana(colorCode.byteValue());
-                    return oldMana != player.getMana(colorCode);
+                    return Boolean.valueOf(oldMana != player.getMana(colorCode));
                 }
-                return false;
+                return Boolean.FALSE;
             }
         };
 
@@ -106,11 +104,4 @@ public class CField implements ICDoc {
     public void update() {
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
-    }
 } // End class CField

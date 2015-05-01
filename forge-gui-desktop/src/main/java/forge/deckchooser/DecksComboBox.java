@@ -1,21 +1,22 @@
 package forge.deckchooser;
 
-import forge.deck.DeckType;
-import forge.gui.MouseUtil;
-import forge.toolbox.FComboBoxWrapper;
-import forge.toolbox.FSkin;
-import forge.toolbox.FComboBox.TextAlignment;
-
-import javax.swing.*;
-
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.DefaultComboBoxModel;
+
+import com.google.common.collect.Lists;
+
+import forge.deck.DeckType;
+import forge.gui.MouseUtil;
+import forge.toolbox.FComboBox.TextAlignment;
+import forge.toolbox.FComboBoxWrapper;
+import forge.toolbox.FSkin;
+
 public class DecksComboBox extends FComboBoxWrapper<DeckType> {
-    private List<IDecksComboBoxListener> _listeners = new ArrayList<>();
+    private final List<IDecksComboBoxListener> _listeners = Lists.newArrayList();
     private DeckType selectedDeckType = null;
 
     public DecksComboBox() {
@@ -24,19 +25,18 @@ public class DecksComboBox extends FComboBoxWrapper<DeckType> {
         addActionListener(getDeckTypeComboListener());
     }
 
-    public void refresh(DeckType deckType) {
+    public void refresh(final DeckType deckType) {
         setModel(new DefaultComboBoxModel<DeckType>(DeckType.values()));
         setSelectedItem(deckType);
     }
 
     private ActionListener getDeckTypeComboListener() {
         return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Object selectedItem = getSelectedItem();
+            @Override public void actionPerformed(final ActionEvent e) {
+                final Object selectedItem = getSelectedItem();
                 if (selectedItem instanceof DeckType) {
                     MouseUtil.setCursor(Cursor.WAIT_CURSOR);
-                    DeckType newDeckType = (DeckType)selectedItem;
+                    final DeckType newDeckType = (DeckType)selectedItem;
                     if (newDeckType != selectedDeckType) {
                         selectedDeckType = newDeckType;
                         notifyDeckTypeSelected(newDeckType);
@@ -47,17 +47,13 @@ public class DecksComboBox extends FComboBoxWrapper<DeckType> {
         };
     }
 
-    public synchronized void addListener(IDecksComboBoxListener obj) {
+    public synchronized void addListener(final IDecksComboBoxListener obj) {
         _listeners.add(obj);
     }
 
-    public synchronized void removeListener(IDecksComboBoxListener obj) {
-        _listeners.remove(obj);
-    }
-
-    private synchronized void notifyDeckTypeSelected(DeckType deckType) {
+    private synchronized void notifyDeckTypeSelected(final DeckType deckType) {
         if (deckType != null) {
-            for (IDecksComboBoxListener listener : _listeners) {
+            for (final IDecksComboBoxListener listener : _listeners) {
                 listener.deckTypeSelected(new DecksComboBoxEvent(this, deckType));
             }
         }
@@ -67,13 +63,13 @@ public class DecksComboBox extends FComboBoxWrapper<DeckType> {
         return selectedDeckType;
     }
 
-    public void setDeckType(DeckType valueOf) {
+    public void setDeckType(final DeckType valueOf) {
         selectedDeckType = valueOf;
         setSelectedItem(selectedDeckType);
     }
 
     @Override
-    public void setText(String text0) {
+    public void setText(final String text0) {
         selectedDeckType = null; //ensure selecting current deck type again raises event
         super.setText(text0);
     }

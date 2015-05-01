@@ -1,7 +1,16 @@
 package forge.screens.deckeditor.controllers;
 
-import forge.UiCommand;
+import java.awt.Dialog.ModalityType;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.io.File;
+
+import javax.swing.JFileChooser;
+import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileFilter;
+
 import forge.Singletons;
+import forge.UiCommand;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.io.DeckSerializer;
@@ -14,58 +23,38 @@ import forge.screens.deckeditor.DeckImport;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VCurrentDeck;
 
-import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
-
-import java.awt.Dialog.ModalityType;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.io.File;
-
-/** 
+/**
  * Controls the "current deck" panel in the deck editor UI.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
 public enum CCurrentDeck implements ICDoc {
-    /** */
     SINGLETON_INSTANCE;
 
     private static File previousDirectory;
 
-    private JFileChooser fileChooser = new JFileChooser(ForgeConstants.DECK_BASE_DIR);
+    private final JFileChooser fileChooser = new JFileChooser(ForgeConstants.DECK_BASE_DIR);
 
     //========== Overridden methods
 
     private CCurrentDeck() {
-        FileFilter[] defaultFilters = fileChooser.getChoosableFileFilters();
-        for(FileFilter defFilter : defaultFilters)
-        {
+        final FileFilter[] defaultFilters = fileChooser.getChoosableFileFilters();
+        for (final FileFilter defFilter : defaultFilters) {
             fileChooser.removeChoosableFileFilter(defFilter);
         }
 
-        FileFilter DCK_FILTER = new FileFilter() {
-            @Override
-            public boolean accept(final File f) {
+        final FileFilter DCK_FILTER = new FileFilter() {
+            @Override public final boolean accept(final File f) {
                 return f.getName().endsWith(DeckStorage.FILE_EXTENSION) || f.isDirectory();
             }
 
-            @Override
-            public String getDescription() {
+            @Override public final String getDescription() {
                 return "Simple Deck File .dck";
             }
         };
 
         fileChooser.addChoosableFileFilter(DCK_FILTER);
-    }
-
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
     }
 
     @Override
@@ -117,7 +106,7 @@ public enum CCurrentDeck implements ICDoc {
         });
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().addKeyListener(new KeyAdapter() {
             @Override
-            public void keyPressed(KeyEvent e) {
+            public void keyPressed(final KeyEvent e) {
                 if (Character.isLetterOrDigit(e.getKeyChar())) {
                     CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().notifyModelChanged();
                 }
@@ -204,7 +193,7 @@ public enum CCurrentDeck implements ICDoc {
     /** */
     @SuppressWarnings("unchecked")
     private void exportDeck() {
-        DeckController<Deck> controller = (DeckController<Deck>)
+        final DeckController<Deck> controller = (DeckController<Deck>)
                 CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController();
 
         final File filename = this.getExportFilename();
@@ -215,7 +204,7 @@ public enum CCurrentDeck implements ICDoc {
         //create copy of deck to save under new name
         String name = filename.getName();
         name = name.substring(0, name.lastIndexOf(".")); //remove extension
-        Deck deck = (Deck)controller.getModel().copyTo(name);
+        final Deck deck = (Deck)controller.getModel().copyTo(name);
 
         try {
             DeckSerializer.writeDeck(deck, filename);

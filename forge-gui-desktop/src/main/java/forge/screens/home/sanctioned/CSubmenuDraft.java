@@ -31,15 +31,13 @@ import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorDraftingProcess;
 import forge.toolbox.FOptionPane;
 
-/** 
+/**
  * Controls the draft submenu in the home UI.
- * 
- * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
+ * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
 @SuppressWarnings("serial")
 public enum CSubmenuDraft implements ICDoc {
-    /** */
     SINGLETON_INSTANCE;
 
     private final UiCommand cmdDeckSelect = new UiCommand() {
@@ -114,7 +112,7 @@ public enum CSubmenuDraft implements ICDoc {
         }
 
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            String errorMessage = gameType.getDeckFormat().getDeckConformanceProblem(humanDeck.getDeck());
+            final String errorMessage = gameType.getDeckFormat().getDeckConformanceProblem(humanDeck.getDeck());
             if (null != errorMessage) {
                 FOptionPane.showErrorDialog("Your deck " + errorMessage + " Please edit or choose a different deck.", "Invalid Deck");
                 return;
@@ -124,7 +122,7 @@ public enum CSubmenuDraft implements ICDoc {
         FModel.getGauntletMini().resetGauntletDraft();
 
         if (gauntlet) {
-            int rounds = FModel.getDecks().getDraft().get(humanDeck.getName()).getAiDecks().size();
+            final int rounds = FModel.getDecks().getDraft().get(humanDeck.getName()).getAiDecks().size();
             FModel.getGauntletMini().launch(rounds, humanDeck.getDeck(), gameType);
             return;
         }
@@ -147,7 +145,7 @@ public enum CSubmenuDraft implements ICDoc {
         final RegisteredPlayer human = new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
         starter.add(human);
         starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
-        for (RegisteredPlayer pl : starter) {
+        for (final RegisteredPlayer pl : starter) {
             pl.assignConspiracies();
         }
 
@@ -168,7 +166,7 @@ public enum CSubmenuDraft implements ICDoc {
         final LimitedPoolType poolType = GuiChoose.oneOrNone("Choose Draft Format", LimitedPoolType.values());
         if (poolType == null) { return; }
 
-        BoosterDraft draft = BoosterDraft.createDraft(poolType);
+        final BoosterDraft draft = BoosterDraft.createDraft(poolType);
         if (draft == null) { return; }
 
         final CEditorDraftingProcess draftController = new CEditorDraftingProcess(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
@@ -178,11 +176,4 @@ public enum CSubmenuDraft implements ICDoc {
         CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(draftController);
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
-    }
 }

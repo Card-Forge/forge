@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -47,7 +47,7 @@ import forge.util.FCollection;
  * <p>
  * SpellAbility_Requirements class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id: HumanPlaySpellAbility.java 24317 2014-01-17 08:32:39Z Max mtg $
  */
@@ -62,7 +62,7 @@ public class HumanPlaySpellAbility {
         payment = payment0;
     }
 
-    public final void playAbility(boolean mayChooseTargets, boolean isFree, boolean skipStack) {
+    public final void playAbility(final boolean mayChooseTargets, final boolean isFree, final boolean skipStack) {
         final Player human = ability.getActivatingPlayer();
         final Game game = ability.getActivatingPlayer().getGame();
 
@@ -75,9 +75,9 @@ public class HumanPlaySpellAbility {
         final Card c = ability.getHostCard();
         final CardPlayOption option = c.mayPlay(human);
 
-        boolean manaConversion = (ability.isSpell() && (c.hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME")
+        final boolean manaConversion = (ability.isSpell() && (c.hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME")
                 || (option != null && option.isIgnoreManaCostColor())));
-        boolean playerManaConversion = human.hasManaConversion()
+        final boolean playerManaConversion = human.hasManaConversion()
                 && human.getController().confirmAction(ability, null, "Do you want to spend mana as though it were mana of any color to pay the cost?");
         if (ability instanceof Spell && !c.isCopiedSpell()) {
             fromZone = game.getZoneOf(c);
@@ -106,7 +106,7 @@ public class HumanPlaySpellAbility {
         }
         // This line makes use of short-circuit evaluation of boolean values, that is each subsequent argument
         // is only executed or evaluated if the first argument does not suffice to determine the value of the expression
-        boolean prerequisitesMet = announceValuesLikeX()
+        final boolean prerequisitesMet = announceValuesLikeX()
                 && announceType()
                 && (!mayChooseTargets || setupTargets()) // if you can choose targets, then do choose them.
                 && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, ability.getHostCard())));
@@ -160,12 +160,12 @@ public class HumanPlaySpellAbility {
         SpellAbility currentAbility = ability;
         final Card source = ability.getHostCard();
         do {
-            TargetRestrictions tgt = currentAbility.getTargetRestrictions();
+            final TargetRestrictions tgt = currentAbility.getTargetRestrictions();
             if (tgt != null && tgt.doesTarget()) {
                 clearTargets(currentAbility);
                 Player targetingPlayer;
                 if (currentAbility.hasParam("TargetingPlayer")) {
-                    FCollection<Player> candidates = AbilityUtils.getDefinedPlayers(source, currentAbility.getParam("TargetingPlayer"), currentAbility);
+                    final FCollection<Player> candidates = AbilityUtils.getDefinedPlayers(source, currentAbility.getParam("TargetingPlayer"), currentAbility);
                     // activator chooses targeting player
                     targetingPlayer = ability.getActivatingPlayer().getController().chooseSingleEntityForEffect(
                             candidates, currentAbility, "Choose the targeting player");
@@ -173,8 +173,9 @@ public class HumanPlaySpellAbility {
                     targetingPlayer = ability.getActivatingPlayer();
                 }
                 currentAbility.setTargetingPlayer(targetingPlayer);
-                if (!targetingPlayer.getController().chooseTargetsFor(currentAbility))
+                if (!targetingPlayer.getController().chooseTargetsFor(currentAbility)) {
                     return false;
+                }
             }
             final SpellAbility subAbility = currentAbility.getSubAbility();
             if (subAbility != null) {
@@ -186,15 +187,15 @@ public class HumanPlaySpellAbility {
         return true;
     }
 
-    public final void clearTargets(SpellAbility ability) {
-        TargetRestrictions tg = ability.getTargetRestrictions();
+    public final void clearTargets(final SpellAbility ability) {
+        final TargetRestrictions tg = ability.getTargetRestrictions();
         if (tg != null) {
             ability.resetTargets();
             tg.calculateStillToDivide(ability.getParam("DividedAsYouChoose"), ability.getHostCard(), ability);
         }
     }
 
-    private void rollbackAbility(final Zone fromZone, final CardStateName fromState, final int zonePosition) { 
+    private void rollbackAbility(final Zone fromZone, final CardStateName fromState, final int zonePosition) {
         // cancel ability during target choosing
         final Game game = ability.getActivatingPlayer().getGame();
 
@@ -213,24 +214,24 @@ public class HumanPlaySpellAbility {
 
     private boolean announceValuesLikeX() {
         if (ability.isCopied()) { return true; } //don't re-announce for spell copies
-        
+
         boolean needX = true;
-        boolean allowZero = !ability.hasParam("XCantBe0");
-        CostPartMana manaCost = ability.getPayCosts().getCostMana();
-        PlayerController controller = ability.getActivatingPlayer().getController();
-        Card card = ability.getHostCard();
+        final boolean allowZero = !ability.hasParam("XCantBe0");
+        final CostPartMana manaCost = ability.getPayCosts().getCostMana();
+        final PlayerController controller = ability.getActivatingPlayer().getController();
+        final Card card = ability.getHostCard();
 
         // Announcing Requirements like Choosing X or Multikicker
         // SA Params as comma delimited list
-        String announce = ability.getParam("Announce");
+        final String announce = ability.getParam("Announce");
         if (announce != null) {
-            for (String aVar : announce.split(",")) {
-                String varName = aVar.trim();
+            for (final String aVar : announce.split(",")) {
+                final String varName = aVar.trim();
 
-                boolean isX = "X".equalsIgnoreCase(varName);
+                final boolean isX = "X".equalsIgnoreCase(varName);
                 if (isX) { needX = false; }
 
-                Integer value = controller.announceRequirements(ability, varName, allowZero && (!isX || manaCost == null || manaCost.canXbe0()));
+                final Integer value = controller.announceRequirements(ability, varName, allowZero && (!isX || manaCost == null || manaCost.canXbe0()));
                 if (value == null) {
                     return false;
                 }
@@ -246,9 +247,9 @@ public class HumanPlaySpellAbility {
         }
 
         if (needX && manaCost != null && manaCost.getAmountOfX() > 0) {
-            String sVar = ability.getSVar("X"); //only prompt for new X value if card doesn't determine it another way
+            final String sVar = ability.getSVar("X"); //only prompt for new X value if card doesn't determine it another way
             if ("Count$xPaid".equals(sVar) || sVar.isEmpty()) {
-                Integer value = controller.announceRequirements(ability, "X", allowZero && manaCost.canXbe0());
+                final Integer value = controller.announceRequirements(ability, "X", allowZero && manaCost.canXbe0());
                 if (value == null) {
                     return false;
                 }
@@ -262,19 +263,19 @@ public class HumanPlaySpellAbility {
     private boolean announceType() {
         if (ability.isCopied()) { return true; } //don't re-announce for spell copies
 
-        String announce = ability.getParam("AnnounceType");
-        PlayerController pc = ability.getActivatingPlayer().getController();
+        final String announce = ability.getParam("AnnounceType");
+        final PlayerController pc = ability.getActivatingPlayer().getController();
         if (announce != null) {
-            for (String aVar : announce.split(",")) {
-                String varName = aVar.trim();
+            for (final String aVar : announce.split(",")) {
+                final String varName = aVar.trim();
                 if ("CreatureType".equals(varName)) {
                     final String choice = pc.chooseSomeType("Creature", ability, CardType.Constant.CREATURE_TYPES, Collections.<String>emptyList());
                     ability.getHostCard().setChosenType(choice);
                 }
                 if ("ChooseNumber".equals(varName)) {
-                    int min = Integer.parseInt(ability.getParam("Min"));
-                    int max = Integer.parseInt(ability.getParam("Max"));
-                    int i = ability.getActivatingPlayer().getController().chooseNumber(ability,
+                    final int min = Integer.parseInt(ability.getParam("Min"));
+                    final int max = Integer.parseInt(ability.getParam("Max"));
+                    final int i = ability.getActivatingPlayer().getController().chooseNumber(ability,
                             "Choose a number", min, max);
                     ability.getHostCard().setChosenNumber(i);
                 }
@@ -283,7 +284,7 @@ public class HumanPlaySpellAbility {
         return true;
     }
 
-    private void enusureAbilityHasDescription(SpellAbility ability) {
+    private static void enusureAbilityHasDescription(final SpellAbility ability) {
         if (!StringUtils.isBlank(ability.getStackDescription())) {
             return;
         }

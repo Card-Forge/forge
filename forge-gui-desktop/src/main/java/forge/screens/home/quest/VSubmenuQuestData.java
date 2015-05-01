@@ -1,5 +1,20 @@
 package forge.screens.home.quest;
 
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
+
+import net.miginfocom.swing.MigLayout;
+
+import org.apache.commons.lang3.text.WordUtils;
+
 import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -17,20 +32,14 @@ import forge.quest.StartingPoolType;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
-import forge.toolbox.*;
+import forge.toolbox.FCheckBox;
+import forge.toolbox.FComboBoxWrapper;
+import forge.toolbox.FLabel;
+import forge.toolbox.FRadioButton;
+import forge.toolbox.FScrollPane;
+import forge.toolbox.FSkin;
+import forge.toolbox.JXButtonPanel;
 import forge.util.storage.IStorage;
-import net.miginfocom.swing.MigLayout;
-
-import org.apache.commons.lang3.text.WordUtils;
-
-import javax.swing.*;
-import javax.swing.plaf.basic.BasicComboBoxRenderer;
-
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Assembles Swing components of quest data submenu singleton.
@@ -47,8 +56,8 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
     /** */
     private final FLabel lblTitle = new FLabel.Builder()
-        .text("Load Quest Data").fontAlign(SwingConstants.CENTER)
-        .opaque(true).fontSize(16).build();
+    .text("Load Quest Data").fontAlign(SwingConstants.CENTER)
+    .opaque(true).fontSize(16).build();
 
     private final FLabel lblTitleNew = new FLabel.Builder().text("Start a new Quest")
             .opaque(true).fontSize(16).build();
@@ -67,7 +76,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final FRadioButton radHard = new FRadioButton("Hard");
     private final FRadioButton radExpert = new FRadioButton("Expert");
     private final FCheckBox boxFantasy = new FCheckBox("Fantasy Mode");
-	private final FCheckBox boxCompleteSet = new FCheckBox("Start with all cards in selected sets");
+    private final FCheckBox boxCompleteSet = new FCheckBox("Start with all cards in selected sets");
 
     private final FLabel lblStartingWorld = new FLabel.Builder().text("Starting world:").build();
     private final FComboBoxWrapper<QuestWorld> cbxStartingWorld = new FComboBoxWrapper<QuestWorld>();
@@ -115,8 +124,8 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final ActionListener alStartingPool = new ActionListener() {
         @SuppressWarnings("incomplete-switch")
         @Override
-        public void actionPerformed(ActionEvent e) {
-            StartingPoolType newVal = getStartingPoolType();
+        public void actionPerformed(final ActionEvent e) {
+            final StartingPoolType newVal = getStartingPoolType();
             lblUnrestricted.setVisible(newVal == StartingPoolType.Complete);
 
             lblPreconDeck.setVisible(newVal == StartingPoolType.Precon);
@@ -128,23 +137,23 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
             btnDefineCustomFormat.setVisible(newVal == StartingPoolType.CustomFormat);
 
 
-            boolean usesDeckList = newVal == StartingPoolType.SealedDeck || newVal == StartingPoolType.DraftDeck || newVal == StartingPoolType.Cube;
+            final boolean usesDeckList = newVal == StartingPoolType.SealedDeck || newVal == StartingPoolType.DraftDeck || newVal == StartingPoolType.Cube;
             lblCustomDeck.setVisible(usesDeckList);
             cbxCustomDeck.setVisible(usesDeckList);
 
             if (usesDeckList) {
                 cbxCustomDeck.removeAllItems();
-                CardCollections decks = FModel.getDecks();
+                final CardCollections decks = FModel.getDecks();
                 switch (newVal) {
-                    case SealedDeck:
-                        for (DeckGroup d : decks.getSealed()) { cbxCustomDeck.addItem(d.getHumanDeck()); }
-                        break;
-                    case DraftDeck:
-                        for (DeckGroup d : decks.getDraft()) { cbxCustomDeck.addItem(d.getHumanDeck()); }
-                        break;
-                    case Cube:
-                        for (Deck d : decks.getCubes()) { cbxCustomDeck.addItem(d); }
-                        break;
+                case SealedDeck:
+                    for (final DeckGroup d : decks.getSealed()) { cbxCustomDeck.addItem(d.getHumanDeck()); }
+                    break;
+                case DraftDeck:
+                    for (final DeckGroup d : decks.getDraft()) { cbxCustomDeck.addItem(d.getHumanDeck()); }
+                    break;
+                case Cube:
+                    for (final Deck d : decks.getCubes()) { cbxCustomDeck.addItem(d); }
+                    break;
                 }
             }
         }
@@ -153,8 +162,8 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     /* Listeners */
     private final ActionListener alPrizesPool = new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent e) {
-            StartingPoolType newVal = getPrizedPoolType();
+        public void actionPerformed(final ActionEvent e) {
+            final StartingPoolType newVal = getPrizedPoolType();
             lblPrizeUnrestricted.setVisible(newVal == StartingPoolType.Complete);
             cboAllowUnlocks.setVisible(newVal != StartingPoolType.Complete);
 
@@ -168,7 +177,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     /* Listeners */
     private final ActionListener alStartingWorld = new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(final ActionEvent e) {
             updateEnabledFormats();
         }
     };
@@ -205,7 +214,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         difficultyPanel.add(radExpert, difficulty_constraints);
         radEasy.setSelected(true);
 
-		boxCompleteSet.setToolTipText("You will start the quest with 4 of each card in the sets you have selected.");
+        boxCompleteSet.setToolTipText("You will start the quest with 4 of each card in the sets you have selected.");
 
         cbxStartingPool.addItem(StartingPoolType.Complete);
         cbxStartingPool.addItem(StartingPoolType.Rotating);
@@ -226,7 +235,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         cbxPrizedCards.addItem(StartingPoolType.CustomFormat);
         cbxPrizedCards.addActionListener(alPrizesPool);
 
-        for (GameFormat gf : FModel.getFormats().getOrderedList()) {
+        for (final GameFormat gf : FModel.getFormats().getOrderedList()) {
             cbxFormat.addItem(gf);
             cbxPrizeFormat.addItem(gf);
         }
@@ -241,7 +250,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         cbxPreferredColor.addItem(MagicColor.Constant.GREEN + stringBias);
         cbxPreferredColor.addItem(MagicColor.Constant.COLORLESS + stringBias);
 
-        for (QuestWorld qw : FModel.getWorlds()) {
+        for (final QuestWorld qw : FModel.getWorlds()) {
             cbxStartingWorld.addItem(qw);
         }
         // Default to 'Main world'
@@ -253,13 +262,13 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         cboAllowUnlocks.setSelected(true);
 
         final Map<String, String> preconDescriptions = new HashMap<String, String>();
-        IStorage<PreconDeck> preconDecks = QuestController.getPrecons();
+        final IStorage<PreconDeck> preconDecks = QuestController.getPrecons();
 
-        for (PreconDeck preconDeck : preconDecks) {
+        for (final PreconDeck preconDeck : preconDecks) {
             if (QuestController.getPreconDeals(preconDeck).getMinWins() > 0) {
                 continue;
             }
-            String name = preconDeck.getName();
+            final String name = preconDeck.getName();
             cbxPreconDeck.addItem(name);
             String description = preconDeck.getDescription();
             description = "<html>" + WordUtils.wrap(description, 40, "<br>", false) + "</html>";
@@ -273,11 +282,11 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
             @SuppressWarnings("rawtypes")
             @Override
             public Component getListCellRendererComponent(
-                    JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-                Component defaultComponent =
+                    final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus) {
+                final Component defaultComponent =
                         super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 if (-1 < index && null != value) {
-                    String val = (String) value;
+                    final String val = (String) value;
                     list.setToolTipText(preconDescriptions.get(val));
                 }
                 return defaultComponent;
@@ -287,21 +296,21 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         // Fantasy box enabled by Default
         boxFantasy.setSelected(true);
         boxFantasy.setEnabled(true);
-		boxCompleteSet.setEnabled(true);
+        boxCompleteSet.setEnabled(true);
 
         cbxPreferredColor.setEnabled(true);
 
         pnlOptions.setOpaque(false);
         pnlOptions.setLayout(new MigLayout("insets 0, gap 10px, fillx, wrap 2"));
 
-        JPanel pnlDifficultyMode = new JPanel(new MigLayout("insets 0, gap 1%, flowy"));
+        final JPanel pnlDifficultyMode = new JPanel(new MigLayout("insets 0, gap 1%, flowy"));
         pnlDifficultyMode.add(difficultyPanel, "gapright 4%");
         pnlDifficultyMode.add(boxFantasy, difficulty_constraints + ", gapright 4%");
         pnlDifficultyMode.setOpaque(false);
         pnlOptions.add(pnlDifficultyMode, "w 40%");
 
 
-        JPanel pnlRestrictions = new JPanel();
+        final JPanel pnlRestrictions = new JPanel();
         final String constraints = "h 27px!, ";
         final String lblWidth = "w 40%, ";
         final String hidemode = "hidemode 3, ";
@@ -340,7 +349,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         pnlRestrictions.add(lblPrizeUnrestricted, constraints + hidemode + "spanx 2");
 
         pnlRestrictions.add(cboAllowUnlocks, constraints + "spanx 2, ax right");
-		pnlRestrictions.add(boxCompleteSet, constraints + "spanx 2, ax right");
+        pnlRestrictions.add(boxCompleteSet, constraints + "spanx 2, ax right");
 
 
         pnlRestrictions.add(lblPreferredColor,  constraints + lblWidthStart);
@@ -349,7 +358,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         pnlRestrictions.add(lblStartingWorld, constraints + lblWidthStart);
         cbxStartingWorld.addTo(pnlRestrictions, constraints + cboWidthStart);
 
-//        cboAllowUnlocks.setOpaque(false);
+        //        cboAllowUnlocks.setOpaque(false);
         pnlRestrictions.setOpaque(false);
         pnlOptions.add(pnlRestrictions, "pushx, ay top");
 
@@ -442,7 +451,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
      * @see forge.gui.framework.IVDoc#setParentCell(forge.gui.framework.DragCell)
      */
     @Override
-    public void setParentCell(DragCell cell0) {
+    public void setParentCell(final DragCell cell0) {
         this.parentCell = cell0;
     }
 
@@ -472,7 +481,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     }
 
     public Deck getSelectedDeck() {
-        Object sel = cbxCustomDeck.getSelectedItem();
+        final Object sel = cbxCustomDeck.getSelectedItem();
         return sel instanceof Deck ? (Deck) sel : null;
     }
 
@@ -481,12 +490,12 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     }
 
     public StartingPoolType getStartingPoolType() {
-        return (StartingPoolType) cbxStartingPool.getSelectedItem();
+        return cbxStartingPool.getSelectedItem();
     }
 
     public StartingPoolType getPrizedPoolType() {
-         Object v = cbxPrizedCards.getSelectedItem();
-         return v instanceof StartingPoolType ? (StartingPoolType) v : null;
+        final Object v = cbxPrizedCards.getSelectedItem();
+        return v instanceof StartingPoolType ? (StartingPoolType) v : null;
     }
 
     public String getStartingWorldName() {
@@ -496,10 +505,10 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     public boolean isFantasy() {
         return boxFantasy.isSelected();
     }
-	
-	public boolean startWithCompleteSet() {
-		return boxCompleteSet.isSelected();
-	}
+
+    public boolean startWithCompleteSet() {
+        return boxCompleteSet.isSelected();
+    }
 
     public boolean randomizeColorDistribution() {
         return stringRandomizedDistribution.equals(cbxPreferredColor.getSelectedItem());
@@ -514,11 +523,11 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     }
 
     public GameFormat getRotatingFormat() {
-        return (GameFormat) cbxFormat.getSelectedItem();
+        return cbxFormat.getSelectedItem();
     }
 
     public GameFormat getPrizedRotatingFormat() {
-        return (GameFormat) cbxPrizeFormat.getSelectedItem();
+        return cbxPrizeFormat.getSelectedItem();
     }
 
     public FLabel getBtnCustomFormat() {

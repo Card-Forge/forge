@@ -1,12 +1,13 @@
 package forge.toolbox;
 
-import forge.interfaces.IProgressBar;
-
-import javax.swing.*;
-
 import java.util.Date;
 
-/** 
+import javax.swing.JProgressBar;
+import javax.swing.SwingUtilities;
+
+import forge.interfaces.IProgressBar;
+
+/**
  * A simple progress bar component using the Forge skin.
  */
 @SuppressWarnings("serial")
@@ -16,7 +17,7 @@ public class FProgressBar extends JProgressBar implements IProgressBar {
     private String desc = "";
     private boolean showETA = true;
     private boolean showCount = true;
-    
+
     private boolean percentMode = false;
 
     public FProgressBar() {
@@ -25,13 +26,14 @@ public class FProgressBar extends JProgressBar implements IProgressBar {
         setStringPainted(true);
     }
 
+    @Override
     public void setDescription(final String s0) {
         desc = s0;
         setString(s0);
     }
-    
+
     /** Increments bar, thread safe. Calculations executed on separate thread. */
-    public void setValueThreadSafe(int value) {
+    public void setValueThreadSafe(final int value) {
         tempVal = value;
         SwingUtilities.invokeLater(barIncrementor);
     }
@@ -45,14 +47,14 @@ public class FProgressBar extends JProgressBar implements IProgressBar {
     };
 
     @Override
-    public void setValue(int value0) {
+    public void setValue(final int value0) {
         super.setValue(value0);
 
         // String.format leads to StringBuilder anyway. Direct calls will be faster
-        StringBuilder sb = new StringBuilder(desc);
+        final StringBuilder sb = new StringBuilder(desc);
         if (showCount) {
             sb.append(" ");
-            int maximum = getMaximum();
+            final int maximum = getMaximum();
             if (percentMode) {
                 sb.append(100 * value0 / maximum).append("%");
             }
@@ -69,6 +71,7 @@ public class FProgressBar extends JProgressBar implements IProgressBar {
     }
 
     /** Resets the various values required for this class. */
+    @Override
     public void reset() {
         setIndeterminate(true);
         setValue(0);
@@ -79,24 +82,27 @@ public class FProgressBar extends JProgressBar implements IProgressBar {
         setShowCount(true);
     }
 
-    public void setShowETA(boolean b0) {
+    @Override
+    public void setShowETA(final boolean b0) {
         showETA = b0;
     }
 
-    public void setShowCount(boolean b0) {
+    @Override
+    public void setShowCount(final boolean b0) {
         showCount = b0;
     }
 
-    private void calculateETA(int v0) {
-        float tempMillis = new Date().getTime();
-        float timePerUnit = (tempMillis - startMillis) / v0;
+    private void calculateETA(final int v0) {
+        final float tempMillis = new Date().getTime();
+        final float timePerUnit = (tempMillis - startMillis) / v0;
         etaSecs = (int) ((getMaximum() - v0) * timePerUnit) / 1000;
     }
 
     public boolean isPercentMode() {
         return percentMode;
     }
-    public void setPercentMode(boolean value) {
+    @Override
+    public void setPercentMode(final boolean value) {
         percentMode = value;
     }
 }

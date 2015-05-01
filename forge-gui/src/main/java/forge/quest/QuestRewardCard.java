@@ -11,10 +11,6 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.model.FModel;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
 public abstract class QuestRewardCard implements IQuestRewardCard {
 
     protected String buildDescription(final String [] input) {
@@ -22,12 +18,12 @@ public abstract class QuestRewardCard implements IQuestRewardCard {
         if (input == null || input.length < 1) {
             return defaultDescription;
         }
-    
+
         String buildDesc = null;
-    
-        for (String s : input) {
+
+        for (final String s : input) {
             if (s.startsWith("desc:") || s.startsWith("Desc:")) {
-                String[] tmp = s.split(":");
+                final String[] tmp = s.split(":");
                 if (tmp.length > 1) {
                     buildDesc = new String(tmp[1]);
                 } else {
@@ -41,7 +37,7 @@ public abstract class QuestRewardCard implements IQuestRewardCard {
                 }
             }
         }
-    
+
         if (buildDesc != null) {
             return buildDesc;
         }
@@ -52,19 +48,19 @@ public abstract class QuestRewardCard implements IQuestRewardCard {
         if (input == null || input.length < 1) {
             return null;
         }
-    
+
         Predicate<PaperCard> filters = FModel.getQuest().getFormat().getFilterPrinted();
         Predicate<CardRules> filterRules = null;
         Predicate<PaperCard> filterRarity = null;
-    
-        for (String s : input) {
+
+        for (final String s : input) {
             if (s.startsWith("sets:") || s.startsWith("Sets:")) {
                 final String[] tmp = s.split(":");
                 if (tmp.length > 1) {
-                    String [] setcodes = tmp[1].split(",");
+                    final String [] setcodes = tmp[1].split(",");
                     if (setcodes.length > 0) {
-                        List<String> sets = new ArrayList<String>();
-                        for (String code : setcodes) {
+                        final List<String> sets = new ArrayList<String>();
+                        for (final String code : setcodes) {
                             if (FModel.getMagicDb().getEditions().contains(code)) {
                                 // System.out.println("Set " + code + " was found!");
                                 sets.add(code);
@@ -79,9 +75,9 @@ public abstract class QuestRewardCard implements IQuestRewardCard {
             } else if (s.startsWith("rules:") || s.startsWith("Rules:")) {
                 final String[] tmp = s.split(":");
                 if (tmp.length > 1) {
-                    String [] ruleCodes = tmp[1].split(",");
+                    final String [] ruleCodes = tmp[1].split(",");
                     if (ruleCodes.length > 0) {
-                        for (String rule : ruleCodes) {
+                        for (final String rule : ruleCodes) {
                             final Predicate<CardRules> newRule = BoosterUtils.parseRulesLimitation(rule);
                             if (newRule != null) {
                                 filterRules = (filterRules == null ? newRule : Predicates.and(filterRules, newRule));
@@ -92,9 +88,9 @@ public abstract class QuestRewardCard implements IQuestRewardCard {
             } else if (s.startsWith("rarity:") || s.startsWith("Rarity:")) {
                 final String[] tmp = s.split(":");
                 if (tmp.length > 1) {
-                    String [] rarityCodes = tmp[1].split(",");
+                    final String [] rarityCodes = tmp[1].split(",");
                     if (rarityCodes.length > 0) {
-                        for (String rarity : rarityCodes) {
+                        for (final String rarity : rarityCodes) {
                             if (rarity.startsWith("C") || rarity.startsWith("c")) {
                                 filterRarity = (filterRarity == null ? IPaperCard.Predicates.Presets.IS_COMMON : Predicates.or(filterRarity, IPaperCard.Predicates.Presets.IS_COMMON));
                             } else if (rarity.startsWith("U") || rarity.startsWith("u")) {
@@ -109,7 +105,7 @@ public abstract class QuestRewardCard implements IQuestRewardCard {
                 }
             }
         }
-    
+
         if (filterRules != null) {
             final Predicate<PaperCard> rulesPrinted = Predicates.compose(filterRules, PaperCard.FN_GET_RULES);
             filters = Predicates.and(filters, rulesPrinted);
@@ -119,7 +115,5 @@ public abstract class QuestRewardCard implements IQuestRewardCard {
         }
         return filters;
     }
-
-    public abstract List<PaperCard> getChoices();
 
 }

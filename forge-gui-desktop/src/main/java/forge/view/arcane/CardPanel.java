@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -52,7 +52,7 @@ import forge.view.arcane.util.OutlinedLabel;
  * <p>
  * CardPanel class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id: CardPanel.java 25264 2014-03-27 01:59:18Z drdev $
  */
@@ -155,23 +155,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         add(cardIdText);
     }
 
-    public void updateImage() {
-        updateImage(false);
-    }
-    private void updateImage(boolean fromSetCard) {
+    private void updateImage() {
         final BufferedImage image = card == null ? null : ImageCache.getImage(card, matchUI.getLocalPlayers(), imagePanel.getWidth(), imagePanel.getHeight());
-        if (fromSetCard) {
-            setImage(image);
-        }
-        else {
-            synchronized (imagePanel) {
-                if (imagePanel.getSrcImage() == image) {
-                    return; 
-                }
-                imagePanel.setImage(image);
-                repaint();
-            }
-        }
+        setImage(image);
     }
 
     private void setImage(final BufferedImage srcImage) {
@@ -285,9 +271,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
     }
 
-    private void drawManaCost(final Graphics g, ManaCost cost, int deltaY) {
-        int width = CardFaceSymbols.getWidth(cost);
-        int height = CardFaceSymbols.getHeight();
+    private void drawManaCost(final Graphics g, final ManaCost cost, final int deltaY) {
+        final int width = CardFaceSymbols.getWidth(cost);
+        final int height = CardFaceSymbols.getHeight();
         CardFaceSymbols.draw(g, cost, (cardXOffset + (cardWidth / 2)) - (width / 2), deltaY + cardYOffset + (cardHeight / 2) - height/2);
     }
 
@@ -299,7 +285,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             return;
         }
 
-        boolean canShow = matchUI.mayView(card);
+        final boolean canShow = matchUI.mayView(card);
         displayIconOverlay(g, canShow);
         if (canShow) {
             drawFoilEffect(g, card, cardXOffset, cardYOffset,
@@ -309,7 +295,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     public static void drawFoilEffect(final Graphics g, final CardView card2, final int x, final int y, final int width, final int height, final int borderSize) {
         if (isPreferenceEnabled(FPref.UI_OVERLAY_FOIL_EFFECT)) {
-            int foil = card2.getCurrentState().getFoilIndex();
+            final int foil = card2.getCurrentState().getFoilIndex();
             if (foil > 0) {
                 CardFaceSymbols.drawOther(g, String.format("foil%02d", foil),
                         x + borderSize, y + borderSize, width - 2 * borderSize, height - 2 * borderSize);
@@ -327,15 +313,15 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         imagePanel.setLocation(imgPos);
         imagePanel.setSize(imgSize);
 
-        boolean canShow = matchUI.mayView(card);
-        boolean showText = !imagePanel.hasImage() || !isAnimationPanel;
+        final boolean canShow = matchUI.mayView(card);
+        final boolean showText = !imagePanel.hasImage() || !isAnimationPanel;
 
         displayCardNameOverlay(showText && canShow && showCardNameOverlay(), imgSize, imgPos);
         displayPTOverlay(showText && (canShow || card.isFaceDown()) && showCardPowerOverlay(), imgSize, imgPos);
         displayCardIdOverlay(showText && canShow && showCardIdOverlay(), imgSize, imgPos);
     }
 
-    private void displayCardIdOverlay(boolean isVisible, Dimension imgSize, Point imgPos) {
+    private void displayCardIdOverlay(final boolean isVisible, final Dimension imgSize, final Point imgPos) {
         if (isVisible) {
             final Dimension idSize = cardIdText.getPreferredSize();
             cardIdText.setSize(idSize.width, idSize.height);
@@ -346,7 +332,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         cardIdText.setVisible(isVisible);
     }
 
-    private void displayPTOverlay(boolean isVisible, Dimension imgSize, Point imgPos) {
+    private void displayPTOverlay(final boolean isVisible, final Dimension imgSize, final Point imgPos) {
         if (isVisible) {
             final int rightLine = Math.round(imgSize.width * (412f / 480)) + 3;
             // Power
@@ -366,7 +352,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         damageText.setVisible(isVisible);
     }
 
-    private void displayCardNameOverlay(boolean isVisible, Dimension imgSize, Point imgPos) {
+    private void displayCardNameOverlay(final boolean isVisible, final Dimension imgSize, final Point imgPos) {
         if (isVisible) {
             final int titleX = Math.round(imgSize.width * (24f / 480));
             final int titleY = Math.round(imgSize.height * (54f / 640)) - 15;
@@ -507,7 +493,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         // Card Id overlay
         cardIdText.setText(card.getCurrentState().getDisplayId());
-    } 
+    }
 
     public final void updatePTOverlay() {
         // P/T overlay
@@ -533,7 +519,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     /** {@inheritDoc} */
     @Override
     public final void setCard(final CardView cardView) {
-        CardView oldCard = card;
+        final CardView oldCard = card;
         card = cardView; //always update card in case new card view instance for same card
 
         if (imagePanel == null) {
@@ -545,9 +531,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         updateText();
         updatePTOverlay();
-        updateImage(true);
+        updateImage();
     }
 
+    @Override
     public void dispose() {
         attachedToPanel = null;
         attachedPanels = null;
@@ -596,11 +583,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         tappedAngle = tappedAngle0;
     }
 
-    public static final float getBorderSize() {
-        return BLACK_BORDER_SIZE;
-    }
-
-    private static boolean isPreferenceEnabled(FPref preferenceName) {
+    private static boolean isPreferenceEnabled(final FPref preferenceName) {
         return FModel.getPreferences().getPrefBoolean(preferenceName);
     }
 

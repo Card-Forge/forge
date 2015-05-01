@@ -6,33 +6,34 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.quest.io;
-
-import com.esotericsoftware.minlog.Log;
-import forge.card.MagicColor;
-import forge.properties.ForgeConstants;
-import forge.util.FileUtil;
-import forge.util.MyRandom;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import com.esotericsoftware.minlog.Log;
+
+import forge.card.MagicColor;
+import forge.properties.ForgeConstants;
+import forge.util.FileUtil;
+import forge.util.MyRandom;
+
 /**
  * <p>
  * ReadPriceList class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -41,7 +42,7 @@ public class ReadPriceList {
     /** Constant <code>comment="//"</code>. */
     private static final String COMMENT = "//";
 
-    private HashMap<String, Integer> priceMap;
+    private Map<String, Integer> priceMap;
 
     /**
      * <p>
@@ -66,17 +67,17 @@ public class ReadPriceList {
      * <p>
      * readFile.
      * </p>
-     * 
+     *
      * @param file
      *            a {@link java.io.File} object.
      * @return a {@link java.util.HashMap} object.
      */
-    private HashMap<String, Integer> readFile(String file) {
-        final HashMap<String, Integer> map = new HashMap<String, Integer>();
+    private Map<String, Integer> readFile(final String file) {
+        final Map<String, Integer> map = new HashMap<String, Integer>();
         final Random r = MyRandom.getRandom();
 
-        List<String> lines = FileUtil.readFile(file);
-        for (String line : lines) {
+        final List<String> lines = FileUtil.readFile(file);
+        for (final String line : lines) {
             if (line.trim().length() == 0) {
                 break;
             }
@@ -124,7 +125,7 @@ public class ReadPriceList {
      * <p>
      * getPriceList.
      * </p>
-     * 
+     *
      * @return a {@link java.util.Map} object.
      */
     public final Map<String, Integer> getPriceList() {

@@ -26,14 +26,15 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
     private final ManaCostBeingPaid remainingCost;
     private final Player player;
     private final CardCollectionView availableCreatures;
-    
-    public InputSelectCardsForConvoke(final PlayerControllerHuman controller, final Player p, final ManaCost cost, final CardCollectionView untapped) { 
+
+    public InputSelectCardsForConvoke(final PlayerControllerHuman controller, final Player p, final ManaCost cost, final CardCollectionView untapped) {
         super(controller, 0, Math.min(cost.getCMC(), untapped.size()));
         remainingCost = new ManaCostBeingPaid(cost);
         player = p;
         availableCreatures = untapped;
     }
 
+    @Override
     protected String getMessage() {
         return "Choose creatures to tap for convoke.\nRemaining mana cost is " + remainingCost.toString();
     }
@@ -45,15 +46,15 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
             return false;
         }
 
-        boolean entityWasSelected = chosenCards.containsKey(card);
+        final boolean entityWasSelected = chosenCards.containsKey(card);
         if (entityWasSelected) {
-            ImmutablePair<Byte, ManaCostShard> color = this.chosenCards.remove(card);
+            final ImmutablePair<Byte, ManaCostShard> color = this.chosenCards.remove(card);
             remainingCost.increaseShard(color.right, 1);
             onSelectStateChanged(card, false);
         }
         else {
             byte chosenColor;
-            ColorSet colors = CardUtil.getColors(card);
+            final ColorSet colors = CardUtil.getColors(card);
             if (colors.isMonoColor()) {
                 // Since the convoke mana logic can use colored mana as colorless if needed,
                 // there is no need to prompt the user when convoking with a mono-color creature.
@@ -61,7 +62,7 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
             } else {
                 chosenColor = player.getController().chooseColorAllowColorless("Convoke " + card.toString() + "  for which color?", card, colors);
             }
-            ManaCostShard shard = remainingCost.payManaViaConvoke(chosenColor);
+            final ManaCostShard shard = remainingCost.payManaViaConvoke(chosenColor);
             if (shard != null) {
                 chosenCards.put(card, ImmutablePair.of(chosenColor, shard));
                 onSelectStateChanged(card, true);
@@ -77,7 +78,7 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
     }
 
     @Override
-    public String getActivateAction(Card card) {
+    public String getActivateAction(final Card card) {
         if (availableCreatures.contains(card)) {
             return "tap creature for Convoke";
         }
@@ -85,14 +86,16 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
     }
 
     @Override
-    protected final void onPlayerSelected(Player player, final ITriggerEvent triggerEvent) {
+    protected final void onPlayerSelected(final Player player, final ITriggerEvent triggerEvent) {
     }
 
     public Map<Card, ManaCostShard> getConvokeMap() {
-        Map<Card, ManaCostShard> result = new HashMap<Card, ManaCostShard>();
-        if( !hasCancelled() )
-            for(Entry<Card, ImmutablePair<Byte, ManaCostShard>> c : chosenCards.entrySet())
+        final Map<Card, ManaCostShard> result = new HashMap<Card, ManaCostShard>();
+        if(!hasCancelled()) {
+            for(final Entry<Card, ImmutablePair<Byte, ManaCostShard>> c : chosenCards.entrySet()) {
                 result.put(c.getKey(), c.getValue().right);
+            }
+        }
         return result;
     }
 

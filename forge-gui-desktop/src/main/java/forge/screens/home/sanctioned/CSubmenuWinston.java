@@ -113,7 +113,7 @@ public enum CSubmenuWinston implements ICDoc {
         }
 
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            String errorMessage = gameType.getDeckFormat().getDeckConformanceProblem(humanDeck.getDeck());
+            final String errorMessage = gameType.getDeckFormat().getDeckConformanceProblem(humanDeck.getDeck());
             if (null != errorMessage) {
                 FOptionPane.showErrorDialog("Your deck " + errorMessage + " Please edit or choose a different deck.", "Invalid Deck");
                 return;
@@ -156,7 +156,7 @@ public enum CSubmenuWinston implements ICDoc {
         final LimitedPoolType poolType = GuiChoose.oneOrNone("Choose Draft Format", LimitedPoolType.values());
         if (poolType == null) { return; }
 
-        WinstonDraft draft = WinstonDraft.createDraft(poolType);
+        final WinstonDraft draft = WinstonDraft.createDraft(poolType);
         if (draft == null) { return; }
 
         final CEditorWinstonProcess draftController = new CEditorWinstonProcess(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
@@ -166,11 +166,4 @@ public enum CSubmenuWinston implements ICDoc {
         CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(draftController);
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
-    }
 }

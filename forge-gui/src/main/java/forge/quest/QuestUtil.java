@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -34,7 +34,6 @@ import forge.card.CardRules;
 import forge.deck.Deck;
 import forge.game.GameRules;
 import forge.game.GameType;
-import forge.game.card.Card;
 import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IButton;
 import forge.interfaces.IGuiGame;
@@ -58,28 +57,18 @@ import forge.util.gui.SOptionPane;
  * QuestUtil class.
  * </p>
  * MODEL - Static utility methods to help with minor tasks around Quest.
- * 
+ *
  * @author Forge
  * @version $Id$
  */
 public class QuestUtil {
-    /**
-     * <p>
-     * getComputerStartingCards.
-     * </p>
-     * 
-     * @return a {@link java.util.List} object.
-     */
-    public static List<Card> getComputerStartingCards() {
-        return new ArrayList<>();
-    }
 
     /**
      * <p>
      * getComputerStartingCards.
      * </p>
      * Returns new card instances of extra AI cards in play at start of event.
-     * 
+     *
      * @param qe
      *            a {@link forge.quest.QuestEvent} object.
      * @return a {@link java.util.List} object.
@@ -107,10 +96,10 @@ public class QuestUtil {
         final List<IPaperCard> list = new ArrayList<>();
 
         for (int iSlot = 0; iSlot < QuestController.MAX_PET_SLOTS; iSlot++) {
-            String petName = qc.getSelectedPet(iSlot);
-            QuestPetController pet = qc.getPetsStorage().getPet(petName);
+            final String petName = qc.getSelectedPet(iSlot);
+            final QuestPetController pet = qc.getPetsStorage().getPet(petName);
             if (pet != null) {
-                IPaperCard c = pet.getPetCard(qc.getAssets());
+                final IPaperCard c = pet.getPetCard(qc.getAssets());
                 if (c != null) {
                     list.add(c);
                 }
@@ -126,7 +115,7 @@ public class QuestUtil {
      * </p>
      * Returns new card instances of extra human cards, including current
      * plant/pet configuration, and cards in play at start of quest.
-     * 
+     *
      * @param qc
      *            a {@link forge.quest.QuestController} object.
      * @param qe
@@ -146,7 +135,7 @@ public class QuestUtil {
      * createToken.
      * </p>
      * Creates a card instance for token defined by property string.
-     * 
+     *
      * @param s
      *            Properties string of token
      *            (TOKEN;W;1;1;sheep;type;type;type...)
@@ -155,13 +144,13 @@ public class QuestUtil {
     public static PaperToken createToken(final String s) {
         final String[] properties = s.split(";", 6);
 
-        List<String> script = new ArrayList<>();
+        final List<String> script = new ArrayList<>();
         script.add("Name:" + properties[4]);
         script.add("Colors:" + properties[1]);
         script.add("PT:"+ properties[2] + "/" + properties[3]);
         script.add("Types:" + properties[5].replace(';', ' '));
         script.add("Oracle:"); // tokens don't have texts yet
-        String fileName = PaperToken.makeTokenFileName(properties[1], properties[2], properties[3], properties[4]);
+        final String fileName = PaperToken.makeTokenFileName(properties[1], properties[2], properties[3], properties[4]);
         return new PaperToken(CardRules.fromScript(script), CardEdition.UNKNOWN, fileName);
     }
 
@@ -170,7 +159,7 @@ public class QuestUtil {
      * readExtraCard.
      * </p>
      * Creates single card for a string read from unique event properties.
-     * 
+     *
      * @param name
      *            the name
      * @return the card
@@ -185,15 +174,15 @@ public class QuestUtil {
         // Standard card creation
         return FModel.getMagicDb().getCommonCards().getCardFromEdition(name, SetPreference.Latest);
     }
-    
+
     public static void travelWorld() {
         if (!checkActiveQuest("Travel between worlds.")) {
             return;
         }
-        List<QuestWorld> worlds = new ArrayList<>();
+        final List<QuestWorld> worlds = new ArrayList<>();
         final QuestController qCtrl = FModel.getQuest();
 
-        for (QuestWorld qw : FModel.getWorlds()) {
+        for (final QuestWorld qw : FModel.getWorlds()) {
             if (qCtrl.getWorld() != qw) {
                 worlds.add(qw);
             }
@@ -246,15 +235,15 @@ public class QuestUtil {
             qCtrl.save();
         }
     }
-    
+
     private static QuestEvent event;
-    private static QuestEventDraft draftEvent; 
+    private static QuestEventDraft draftEvent;
 
     /**
      * <p>
      * nextChallengeInWins.
      * </p>
-     * 
+     *
      * @return a int.
      */
     public static int nextChallengeInWins() {
@@ -312,7 +301,7 @@ public class QuestUtil {
                     view.getCbxPet().addItem("Don't summon a pet");
 
                     for (final QuestPetController pet : petList) {
-                        String name = "Summon " + pet.getName();
+                        final String name = "Summon " + pet.getName();
                         view.getCbxPet().addItem(name);
                         if (pet.getName().equals(currentPetName)) {
                             view.getCbxPet().setSelectedItem(name);
@@ -323,7 +312,7 @@ public class QuestUtil {
                 }
             }
         }
-        
+
         if (qCtrl.getAssets().hasItem(QuestItemType.CHARM)) {
             view.getCbCharm().setVisible(true);
         }
@@ -354,7 +343,7 @@ public class QuestUtil {
      * - Pets<br>
      * - Current deck info<br>
      * - "Challenge In" info<br>
-     * 
+     *
      * @param view0 {@link forge.quest.IVQuestStats}
      */
     public static void updateQuestView(final IVQuestStats view0) {
@@ -462,16 +451,16 @@ public class QuestUtil {
     }
 
     public static boolean checkActiveQuest(final String location) {
-        QuestController qc = FModel.getQuest();
+        final QuestController qc = FModel.getQuest();
         if (qc == null || qc.getAssets() == null) {
-            String msg = "Please create a Quest before attempting to " + location;
+            final String msg = "Please create a Quest before attempting to " + location;
             SOptionPane.showErrorDialog(msg, "No Quest");
             System.out.println(msg);
             return false;
         }
         return true;
     }
-    
+
     /** */
     public static void showSpellShop() {
         if (!checkActiveQuest("Visit the Spell Shop.")) {
@@ -494,12 +483,12 @@ public class QuestUtil {
             return;
         }
         final QuestController qData = FModel.getQuest();
-        ImmutablePair<CardEdition, Integer> toUnlock = QuestUtilUnlockSets.chooseSetToUnlock(qData, false, null);
+        final ImmutablePair<CardEdition, Integer> toUnlock = QuestUtilUnlockSets.chooseSetToUnlock(qData, false, null);
         if (toUnlock == null) {
             return;
         }
 
-        CardEdition unlocked = toUnlock.left;
+        final CardEdition unlocked = toUnlock.left;
         qData.getAssets().subtractCredits(toUnlock.right);
         SOptionPane.showMessageDialog("You have successfully unlocked " + unlocked.getName() + "!",
                 unlocked.getName() + " unlocked!", null);
@@ -531,7 +520,7 @@ public class QuestUtil {
         Boolean forceAnte = null;
         int lifeAI = 20;
         if (event instanceof QuestEventChallenge) {
-            QuestEventChallenge qc = ((QuestEventChallenge) event);
+            final QuestEventChallenge qc = ((QuestEventChallenge) event);
             lifeAI = qc.getAILife();
             lifeHuman = qc.getHumanLife();
 
@@ -545,7 +534,7 @@ public class QuestUtil {
 
         final RegisteredPlayer humanStart = new RegisteredPlayer(getDeckForNewGame());
         final RegisteredPlayer aiStart = new RegisteredPlayer(event.getEventDeck());
-        
+
         if (lifeHuman != null) {
             humanStart.setStartingLife(lifeHuman);
         } else {
@@ -554,7 +543,7 @@ public class QuestUtil {
 
         if (useBazaar) {
             humanStart.setCardsOnBattlefield(QuestUtil.getHumanStartingCards(qData, event));
-            aiStart.setStartingLife(lifeAI);  
+            aiStart.setStartingLife(lifeAI);
             aiStart.setCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
         }
 
@@ -612,16 +601,16 @@ public class QuestUtil {
             return false;
         }
 
-        Deck deck = getDeckForNewGame();
+        final Deck deck = getDeckForNewGame();
         if (deck == null) {
-            String msg = "Please select a Quest Deck.";
+            final String msg = "Please select a Quest Deck.";
             SOptionPane.showErrorDialog(msg, "No Deck");
             System.out.println(msg);
             return false;
         }
 
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            String errorMessage = GameType.Quest.getDeckFormat().getDeckConformanceProblem(deck);
+            final String errorMessage = GameType.Quest.getDeckFormat().getDeckConformanceProblem(deck);
             if (null != errorMessage) {
                 SOptionPane.showErrorDialog("Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid Deck");
                 return false;
@@ -642,7 +631,7 @@ public class QuestUtil {
         final StringBuilder out = new StringBuilder();
         final char[] c = in.toCharArray();
 
-        for (char aC : c) {
+        for (final char aC : c) {
             if (Character.isLetterOrDigit(aC) || (aC == '-') || (aC == '_') || (aC == ' ')) {
                 out.append(aC);
             }
@@ -651,7 +640,7 @@ public class QuestUtil {
         return out.toString();
     }
 
-    public static void buyQuestItem(IQuestBazaarItem item) {
+    public static void buyQuestItem(final IQuestBazaarItem item) {
         final QuestAssets qA = FModel.getQuest().getAssets();
         final int cost = item.getBuyingPrice(qA);
         if (cost >= 0 && (qA.getCredits() - cost) >= 0) {

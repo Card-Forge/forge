@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -23,7 +23,6 @@ import java.awt.event.MouseWheelListener;
 
 import javax.swing.JLabel;
 
-import forge.UiCommand;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.gui.CardPicturePanel;
@@ -68,7 +67,7 @@ public class CPicture implements ICDoc {
 
     /**
      * Shows card details and/or picture in sidebar cardview tabber.
-     * 
+     *
      */
     void showCard(final CardView c, final boolean isInAltState, final boolean mayView, final boolean mayFlip) {
         final CardStateView toShow = c != null && mayView ? c.getState(isInAltState) : null;
@@ -79,11 +78,6 @@ public class CPicture implements ICDoc {
     void showItem(final InventoryItem item) {
         flipIndicator.setVisible(false);
         picturePanel.setCard(item);
-    }
-
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
     }
 
     @Override

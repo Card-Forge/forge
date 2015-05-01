@@ -9,7 +9,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.google.common.base.Function;
 
-import forge.animation.GuiTimer;
 import forge.assets.FBufferedImage;
 import forge.assets.FDelayLoadImage;
 import forge.assets.FImage;
@@ -25,7 +24,6 @@ import forge.download.GuiDownloadService;
 import forge.error.BugReportDialog;
 import forge.interfaces.IGuiBase;
 import forge.interfaces.IGuiGame;
-import forge.interfaces.IGuiTimer;
 import forge.item.PaperCard;
 import forge.match.HostedMatch;
 import forge.properties.ForgeConstants;
@@ -46,8 +44,8 @@ import forge.util.WaitRunnable;
 
 public class GuiMobile implements IGuiBase {
     private final String assetsDir;
-    
-    public GuiMobile(String assetsDir0) {
+
+    public GuiMobile(final String assetsDir0) {
         assetsDir = assetsDir0;
     }
 
@@ -67,7 +65,7 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public void invokeInEdtLater(Runnable proc) {
+    public void invokeInEdtLater(final Runnable proc) {
         Gdx.app.postRunnable(proc);
     }
 
@@ -92,18 +90,13 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public IGuiTimer createGuiTimer(Runnable proc, int interval) {
-        return new GuiTimer(proc, interval);
-    }
-
-    @Override
-    public ISkinImage getSkinIcon(FSkinProp skinProp) {
+    public ISkinImage getSkinIcon(final FSkinProp skinProp) {
         if (skinProp == null) { return null; }
         return FSkin.getImages().get(skinProp);
     }
 
     @Override
-    public ISkinImage getUnskinnedIcon(String path) {
+    public ISkinImage getUnskinnedIcon(final String path) {
         if (isGuiThread()) {
             return new FTextureImage(new Texture(Gdx.files.absolute(path)));
         }
@@ -113,7 +106,7 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public ISkinImage getCardArt(PaperCard card) {
+    public ISkinImage getCardArt(final PaperCard card) {
         return CardRenderer.getCardArt(card);
     }
 
@@ -121,15 +114,15 @@ public class GuiMobile implements IGuiBase {
     public ISkinImage createLayeredImage(final FSkinProp background, final String overlayFilename, final float opacity) {
         return new FBufferedImage(background.getWidth(), background.getHeight(), opacity) {
             @Override
-            protected void draw(Graphics g, float w, float h) {
+            protected void draw(final Graphics g, final float w, final float h) {
                 g.drawImage(FSkin.getImages().get(background), 0, 0, background.getWidth(), background.getHeight());
 
                 if (FileUtil.doesFileExist(overlayFilename)) {
                     try {
-                        Texture overlay = new Texture(Gdx.files.absolute(overlayFilename));
+                        final Texture overlay = new Texture(Gdx.files.absolute(overlayFilename));
                         g.drawImage(overlay, (background.getWidth() - overlay.getWidth()) / 2, (background.getHeight() - overlay.getHeight()) / 2, overlay.getWidth(), overlay.getHeight());
+                    } catch (final Exception e) {
                     }
-                    catch (Exception e) {}
                 }
 
                 Gdx.graphics.requestRendering(); //ensure image appears right away
@@ -189,20 +182,20 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public void showBugReportDialog(String title, String text, boolean showExitAppBtn) {
+    public void showBugReportDialog(final String title, final String text, final boolean showExitAppBtn) {
         BugReportDialog.show(title, text, showExitAppBtn);
     }
 
     @Override
     public void showCardList(final String title, final String message, final List<PaperCard> list) {
-        Deck deck = new Deck(title + " - " + message);
+        final Deck deck = new Deck(title + " - " + message);
         deck.getMain().addAllFlat(list);
         FDeckViewer.show(deck);
     }
 
     @Override
     public boolean showBoxedProduct(final String title, final String message, final List<PaperCard> list) {
-        Deck deck = new Deck(title + " - " + message); //TODO: Make this nicer
+        final Deck deck = new Deck(title + " - " + message); //TODO: Make this nicer
         deck.getMain().addAllFlat(list);
         FDeckViewer.show(deck);
         return false;
@@ -217,42 +210,42 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public String showFileDialog(String title, String defaultDir) {
+    public String showFileDialog(final String title, final String defaultDir) {
         return ForgeConstants.USER_GAMES_DIR + "Test.fgs"; //TODO: Show dialog
     }
 
     @Override
-    public File getSaveFile(File defaultFile) {
+    public File getSaveFile(final File defaultFile) {
         return defaultFile; //TODO: Show dialog
     }
 
     @Override
-    public void download(GuiDownloadService service, Callback<Boolean> callback) {
-        new GuiDownloader(service, callback);
+    public void download(final GuiDownloadService service, final Callback<Boolean> callback) {
+        new GuiDownloader(service, callback).show();
     }
 
     @Override
-    public void copyToClipboard(String text) {
+    public void copyToClipboard(final String text) {
         Forge.getClipboard().setContents(text);
     }
 
     @Override
-    public void browseToUrl(String url) {
+    public void browseToUrl(final String url) {
         Gdx.net.openURI(url);
     }
 
     @Override
-    public IAudioClip createAudioClip(String filename) {
+    public IAudioClip createAudioClip(final String filename) {
         return AudioClip.createClip(ForgeConstants.SOUND_DIR + filename);
     }
 
     @Override
-    public IAudioMusic createAudioMusic(String filename) {
+    public IAudioMusic createAudioMusic(final String filename) {
         return new AudioMusic(filename);
     }
 
     @Override
-    public void startAltSoundSystem(String filename, boolean isSynchronized) {
+    public void startAltSoundSystem(final String filename, final boolean isSynchronized) {
         //TODO: Support alt sound system
     }
 

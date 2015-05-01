@@ -1,30 +1,22 @@
 package forge.screens.deckeditor.controllers;
 
-import forge.UiCommand;
 import forge.deck.DeckProxy;
 import forge.gui.framework.ICDoc;
 import forge.itemmanager.ItemManagerConfig;
 import forge.screens.deckeditor.views.VAllDecks;
 
-/** 
+/**
  * Controls the "all decks" panel in the deck editor UI.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
 public enum CAllDecks implements ICDoc {
-    /** */
     SINGLETON_INSTANCE;
 
-    //========== Overridden methods
+    private final VAllDecks view = VAllDecks.SINGLETON_INSTANCE;
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
-    }
+    //========== Overridden methods
 
     @Override
     public void register() {
@@ -39,7 +31,7 @@ public enum CAllDecks implements ICDoc {
     }
 
     public void refresh() {
-        VAllDecks.SINGLETON_INSTANCE.getLstDecks().setPool(DeckProxy.getAllConstructedDecks());
+        view.getLstDecks().setPool(DeckProxy.getAllConstructedDecks());
     }
 
     /* (non-Javadoc)
@@ -47,6 +39,6 @@ public enum CAllDecks implements ICDoc {
      */
     @Override
     public void update() {
-        VAllDecks.SINGLETON_INSTANCE.getLstDecks().setup(ItemManagerConfig.CONSTRUCTED_DECKS);
+        view.getLstDecks().setup(ItemManagerConfig.CONSTRUCTED_DECKS);
     }
 }

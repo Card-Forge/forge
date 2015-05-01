@@ -786,18 +786,11 @@ forge-gui-desktop/src/main/config/forge.sh -text
 forge-gui-desktop/src/main/config/forge_checks.xml -text
 forge-gui-desktop/src/main/config/support/dmg-license.py -text
 forge-gui-desktop/src/main/config/support/template.applescript -text
-forge-gui-desktop/src/main/html/connectionTest.html -text
-forge-gui-desktop/src/main/html/css/core.css -text
-forge-gui-desktop/src/main/html/js/jquery/jquery-1.9.1.js -text
-forge-gui-desktop/src/main/html/js/jquery/jquery-1.9.1.min.js -text
-forge-gui-desktop/src/main/html/js/observable.js -text
-forge-gui-desktop/src/main/html/js/socket.js -text
 forge-gui-desktop/src/main/java/forge/GuiDesktop.java -text
 forge-gui-desktop/src/main/java/forge/ImageCache.java -text
 forge-gui-desktop/src/main/java/forge/ImageLoader.java -text
 forge-gui-desktop/src/main/java/forge/Singletons.java -text
 forge-gui-desktop/src/main/java/forge/control/FControl.java -text
-forge-gui-desktop/src/main/java/forge/control/GuiTimer.java -text
 forge-gui-desktop/src/main/java/forge/control/KeyboardShortcuts.java -text
 forge-gui-desktop/src/main/java/forge/control/RestartUtil.java -text
 forge-gui-desktop/src/main/java/forge/control/package-info.java -text
@@ -818,7 +811,6 @@ forge-gui-desktop/src/main/java/forge/gui/CardListViewer.java -text
 forge-gui-desktop/src/main/java/forge/gui/CardPicturePanel.java -text
 forge-gui-desktop/src/main/java/forge/gui/DualListBox.java -text
 forge-gui-desktop/src/main/java/forge/gui/FNetOverlay.java -text
-forge-gui-desktop/src/main/java/forge/gui/ForgeAction.java -text
 forge-gui-desktop/src/main/java/forge/gui/GuiChoose.java -text
 forge-gui-desktop/src/main/java/forge/gui/GuiDialog.java -text
 forge-gui-desktop/src/main/java/forge/gui/GuiProgressBarWindow.java -text
@@ -838,7 +830,6 @@ forge-gui-desktop/src/main/java/forge/gui/framework/DragTab.java -text
 forge-gui-desktop/src/main/java/forge/gui/framework/EDocID.java -text
 forge-gui-desktop/src/main/java/forge/gui/framework/FScreen.java -text
 forge-gui-desktop/src/main/java/forge/gui/framework/ICDoc.java -text
-forge-gui-desktop/src/main/java/forge/gui/framework/IDocIdList.java -text
 forge-gui-desktop/src/main/java/forge/gui/framework/ILocalRepaint.java -text
 forge-gui-desktop/src/main/java/forge/gui/framework/IVDoc.java -text
 forge-gui-desktop/src/main/java/forge/gui/framework/IVTopLevelUI.java -text
@@ -874,7 +865,6 @@ forge-gui-desktop/src/main/java/forge/itemmanager/filters/DeckFormatFilter.java 
 forge-gui-desktop/src/main/java/forge/itemmanager/filters/DeckQuestWorldFilter.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/filters/DeckSearchFilter.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/filters/DeckSetFilter.java -text
-forge-gui-desktop/src/main/java/forge/itemmanager/filters/DeckStatTypeFilter.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/filters/FormatFilter.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/filters/ItemFilter.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/filters/ListLabelFilter.java -text
@@ -938,7 +928,6 @@ forge-gui-desktop/src/main/java/forge/screens/deckeditor/views/VStatistics.java 
 forge-gui-desktop/src/main/java/forge/screens/home/CHomeUI.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/CLobby.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/EMenuGroup.java -text
-forge-gui-desktop/src/main/java/forge/screens/home/EMenuItem.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/IVSubmenu.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/LblGroup.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/LblHeader.java -text
@@ -973,7 +962,6 @@ forge-gui-desktop/src/main/java/forge/screens/home/quest/DialogChooseSets.java -
 forge-gui-desktop/src/main/java/forge/screens/home/quest/PnlDraftEvent.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/PnlEvent.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/QuestFileLister.java -text
-forge-gui-desktop/src/main/java/forge/screens/home/quest/QuestPreferencesHandler.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/VSubmenuChallenges.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/VSubmenuDuels.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/VSubmenuQuestData.java -text
@@ -1104,13 +1092,11 @@ forge-gui-desktop/src/main/java/forge/toolbox/ToolTipListener.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/imaging/FImagePanel.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/imaging/FImageUtil.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/package-info.java -text
-forge-gui-desktop/src/main/java/forge/toolbox/special/CardViewer.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/special/CardZoomer.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/special/PhaseIndicator.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/special/PhaseLabel.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/special/PlayerDetailsPanel.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/special/package-info.java -text
-forge-gui-desktop/src/main/java/forge/util/AwtUtil.java -text
 forge-gui-desktop/src/main/java/forge/view/FDialog.java -text
 forge-gui-desktop/src/main/java/forge/view/FFrame.java -text
 forge-gui-desktop/src/main/java/forge/view/FNavigationBar.java -text
@@ -1128,7 +1114,6 @@ forge-gui-desktop/src/main/java/forge/view/arcane/FloatingCardArea.java -text
 forge-gui-desktop/src/main/java/forge/view/arcane/HandArea.java -text
 forge-gui-desktop/src/main/java/forge/view/arcane/PlayArea.java -text
 forge-gui-desktop/src/main/java/forge/view/arcane/ScaledImagePanel.java -text
-forge-gui-desktop/src/main/java/forge/view/arcane/ViewPanel.java -text
 forge-gui-desktop/src/main/java/forge/view/arcane/package-info.java -text
 forge-gui-desktop/src/main/java/forge/view/arcane/util/Animation.java -text
 forge-gui-desktop/src/main/java/forge/view/arcane/util/CardPanelMouseAdapter.java -text
@@ -1136,7 +1121,6 @@ forge-gui-desktop/src/main/java/forge/view/arcane/util/CardPanelMouseListener.ja
 forge-gui-desktop/src/main/java/forge/view/arcane/util/OutlinedLabel.java -text
 forge-gui-desktop/src/main/java/forge/view/arcane/util/package-info.java -text
 forge-gui-desktop/src/main/java/forge/view/package-info.java -text
-forge-gui-desktop/src/site/apt/index.apt -text
 forge-gui-desktop/src/test/java/forge/BoosterDraft1Test.java -text
 forge-gui-desktop/src/test/java/forge/BoosterDraftTest.java -text
 forge-gui-desktop/src/test/java/forge/GuiDownloadPicturesLQTest.java -text
@@ -1228,7 +1212,6 @@ forge-gui-mobile/src/forge/animation/ForgeAnimation.java -text
 forge-gui-mobile/src/forge/animation/ForgeTransition.java -text
 forge-gui-mobile/src/forge/animation/GifAnimation.java -text
 forge-gui-mobile/src/forge/animation/GifDecoder.java -text
-forge-gui-mobile/src/forge/animation/GuiTimer.java -text
 forge-gui-mobile/src/forge/assets/AssetsDownloader.java -text
 forge-gui-mobile/src/forge/assets/BitmapFontWriter.java -text
 forge-gui-mobile/src/forge/assets/FBufferedImage.java -text
@@ -17609,7 +17592,6 @@ forge-gui/src/main/java/forge/deck/DeckgenUtil.java -text
 forge-gui/src/main/java/forge/deck/NetDeckCategory.java -text
 forge-gui/src/main/java/forge/deck/RandomDeckGenerator.java -text
 forge-gui/src/main/java/forge/deck/io/DeckPreferences.java -text
-forge-gui/src/main/java/forge/deck/io/OldDeckParser.java -text
 forge-gui/src/main/java/forge/download/GuiDownloadPicturesLQ.java -text
 forge-gui/src/main/java/forge/download/GuiDownloadPrices.java -text
 forge-gui/src/main/java/forge/download/GuiDownloadQuestImages.java -text
@@ -17631,17 +17613,17 @@ forge-gui/src/main/java/forge/gauntlet/GauntletWinLoseController.java -text
 forge-gui/src/main/java/forge/interfaces/IButton.java -text
 forge-gui/src/main/java/forge/interfaces/ICheckBox.java -text
 forge-gui/src/main/java/forge/interfaces/IComboBox.java -text
+forge-gui/src/main/java/forge/interfaces/IComponent.java -text
 forge-gui/src/main/java/forge/interfaces/IDevModeCheats.java -text
 forge-gui/src/main/java/forge/interfaces/IDeviceAdapter.java -text
 forge-gui/src/main/java/forge/interfaces/IGameController.java -text
 forge-gui/src/main/java/forge/interfaces/IGuiBase.java -text
 forge-gui/src/main/java/forge/interfaces/IGuiGame.java -text
-forge-gui/src/main/java/forge/interfaces/IGuiTimer.java -text
-forge-gui/src/main/java/forge/interfaces/ILobby.java -text
 forge-gui/src/main/java/forge/interfaces/ILobbyListener.java -text
 forge-gui/src/main/java/forge/interfaces/IMayViewCards.java -text
 forge-gui/src/main/java/forge/interfaces/IPlayerChangeListener.java -text
 forge-gui/src/main/java/forge/interfaces/IProgressBar.java -text
+forge-gui/src/main/java/forge/interfaces/ITextComponent.java -text
 forge-gui/src/main/java/forge/interfaces/ITextField.java -text
 forge-gui/src/main/java/forge/interfaces/IUpdateable.java -text
 forge-gui/src/main/java/forge/interfaces/IWinLoseView.java -text
@@ -17682,8 +17664,6 @@ forge-gui/src/main/java/forge/match/HostedMatch.java -text
 forge-gui/src/main/java/forge/match/LobbySlot.java -text
 forge-gui/src/main/java/forge/match/LobbySlotType.java -text
 forge-gui/src/main/java/forge/match/LocalLobby.java -text
-forge-gui/src/main/java/forge/match/MatchButtonType.java -text
-forge-gui/src/main/java/forge/match/MatchConstants.java -text
 forge-gui/src/main/java/forge/match/NextGameDecision.java -text
 forge-gui/src/main/java/forge/match/input/Input.java -text
 forge-gui/src/main/java/forge/match/input/InputAttack.java -text
@@ -17712,10 +17692,8 @@ forge-gui/src/main/java/forge/model/CardBlock.java -text
 forge-gui/src/main/java/forge/model/CardCollections.java -text
 forge-gui/src/main/java/forge/model/FModel.java svneol=native#text/plain
 forge-gui/src/main/java/forge/model/MetaSet.java -text
-forge-gui/src/main/java/forge/model/MultipleForgeJarsFoundError.java -text
 forge-gui/src/main/java/forge/model/UnOpenedMeta.java -text
 forge-gui/src/main/java/forge/model/package-info.java svneol=native#text/plain
-forge-gui/src/main/java/forge/net/GameProtocol.java -text
 forge-gui/src/main/java/forge/net/GameProtocolHandler.java -text
 forge-gui/src/main/java/forge/net/GameProtocolSender.java -text
 forge-gui/src/main/java/forge/net/IRemote.java -text
@@ -17769,8 +17747,6 @@ forge-gui/src/main/java/forge/player/TargetSelection.java -text
 forge-gui/src/main/java/forge/player/package-info.java -text
 forge-gui/src/main/java/forge/properties/ForgeConstants.java -text
 forge-gui/src/main/java/forge/properties/ForgePreferences.java svneol=native#text/plain
-forge-gui/src/main/java/forge/properties/Preferences.java svneol=native#text/plain
-forge-gui/src/main/java/forge/properties/SavePreferencesListener.java svneol=native#text/plain
 forge-gui/src/main/java/forge/properties/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/quest/BoosterUtils.java svneol=native#text/plain
 forge-gui/src/main/java/forge/quest/IQuestRewardCard.java -text

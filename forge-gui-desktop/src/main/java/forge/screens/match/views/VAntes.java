@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -38,7 +38,7 @@ import forge.screens.match.controllers.CAntes;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 
-/** 
+/**
  * Assembles Swing components of card ante area.
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
@@ -70,10 +70,6 @@ public class VAntes implements IVDoc<CAntes> {
     public void populate() {
         parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
         parentCell.getBody().add(scroller, "w 100%!, h 100%!");
-    }
-
-    public final void setModel() {
-        update();
     }
 
     /* (non-Javadoc)
@@ -154,7 +150,7 @@ public class VAntes implements IVDoc<CAntes> {
             setLayout(new MigLayout("gap 0, insets 0, wrap"));
             add(new FLabel.Builder().fontSize(14).text(card.getOwner().getName())
                 .fontAlign(SwingConstants.CENTER).build(), "w 160px, h 20px");
-            CardPicturePanel picPanel = new CardPicturePanel();
+            final CardPicturePanel picPanel = new CardPicturePanel();
             add(picPanel, "w 160px, h 230px");
             picPanel.setCard(c.getCurrentState());
         }

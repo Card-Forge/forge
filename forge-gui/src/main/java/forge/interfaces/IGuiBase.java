@@ -24,7 +24,6 @@ public interface IGuiBase {
     void invokeInEdtLater(Runnable runnable);
     void invokeInEdtAndWait(Runnable proc);
     boolean isGuiThread();
-    IGuiTimer createGuiTimer(Runnable proc, int interval);
     ISkinImage getSkinIcon(FSkinProp skinProp);
     ISkinImage getUnskinnedIcon(String path);
     ISkinImage getCardArt(PaperCard card);

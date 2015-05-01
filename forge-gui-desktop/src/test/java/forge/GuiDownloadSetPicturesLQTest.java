@@ -1,9 +1,9 @@
 package forge;
 
+import org.testng.annotations.Test;
+
 import forge.download.GuiDownloadSetPicturesLQ;
 import forge.download.GuiDownloader;
-
-import org.testng.annotations.Test;
 
 /**
  * Created by IntelliJ IDEA. User: dhudson
@@ -16,6 +16,6 @@ public class GuiDownloadSetPicturesLQTest {
      */
     @Test(enabled = false, timeOut = 1000)
     public void g() {
-        new GuiDownloader(new GuiDownloadSetPicturesLQ());
+        new GuiDownloader(new GuiDownloadSetPicturesLQ()).show();
     }
 }

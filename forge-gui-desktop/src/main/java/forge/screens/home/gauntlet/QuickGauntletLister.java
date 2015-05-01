@@ -1,5 +1,18 @@
 package forge.screens.home.gauntlet;
 
+import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+
+import net.miginfocom.swing.MigLayout;
 import forge.UiCommand;
 import forge.assets.FSkinProp;
 import forge.gauntlet.GauntletData;
@@ -12,26 +25,13 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;
 import forge.toolbox.FSkin.SkinnedButton;
 import forge.toolbox.FSkin.SkinnedPanel;
-import net.miginfocom.swing.MigLayout;
 
-import javax.swing.*;
-import javax.swing.border.Border;
-
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-/** 
+/**
  * Creates file list/table for quick deleting, editing, and basic info.
- *
  */
 @SuppressWarnings("serial")
 public class QuickGauntletLister extends JPanel {
-    private SkinIcon icoDelete, icoDeleteOver, icoEdit, icoEditOver;
+    private final SkinIcon icoDelete, icoDeleteOver, icoEdit, icoEditOver;
     private RowPanel previousSelect;
     private RowPanel[] rows;
     private UiCommand cmdRowSelect, cmdRowDelete, cmdRowActivate;
@@ -39,7 +39,6 @@ public class QuickGauntletLister extends JPanel {
     private final FSkin.SkinColor clrHover, clrActive, clrBorders;
     private List<GauntletData> gauntlets;
 
-    /** */
     public QuickGauntletLister() {
         super();
 
@@ -57,17 +56,16 @@ public class QuickGauntletLister extends JPanel {
         icoEditOver = FSkin.getIcon(FSkinProp.ICO_EDIT_OVER);
     }
 
-    /** @param gd0 &emsp; {@link forge.gauntlet.GauntletData}[] */
-    public void setGauntlets(List<GauntletData> gd0) {
+    public void setGauntlets(final List<GauntletData> gd0) {
         gauntlets = gd0;
         refresh();
     }
 
     public void refresh() {
         this.removeAll();
-        List<RowPanel> tempRows = new ArrayList<RowPanel>();
-        List<GauntletData> sorted = new ArrayList<GauntletData>();
-        for (GauntletData gd : gauntlets) { sorted.add(gd); }
+        final List<RowPanel> tempRows = new ArrayList<RowPanel>();
+        final List<GauntletData> sorted = new ArrayList<GauntletData>();
+        for (final GauntletData gd : gauntlets) { sorted.add(gd); }
         Collections.sort(sorted, new Comparator<GauntletData>() {
             @Override
             public int compare(final GauntletData x, final GauntletData y) {
@@ -95,7 +93,7 @@ public class QuickGauntletLister extends JPanel {
 
         RowPanel row;
         String name;
-        for (GauntletData gd : sorted) {
+        for (final GauntletData gd : sorted) {
             name = gd.getName();
 
             row = new RowPanel(gd);
@@ -124,7 +122,6 @@ public class QuickGauntletLister extends JPanel {
         revalidate();
     }
 
-    /** @return {@link forge.deck.Deck} */
     public File getSelectedGauntletFile() {
         if (previousSelect == null) {
             return null;
@@ -149,21 +146,21 @@ public class QuickGauntletLister extends JPanel {
 
             this.addMouseListener(new FMouseAdapter() {
                 @Override
-                public void onMouseEnter(MouseEvent e) {
+                public void onMouseEnter(final MouseEvent e) {
                     if (!r0.selected) {
                         r0.setBackground(clrHover);
                         r0.setOpaque(true);
                     }
                 }
                 @Override
-                public void onMouseExit(MouseEvent e) {
+                public void onMouseExit(final MouseEvent e) {
                     if (!r0.selected) {
                         r0.setBackground(clrDefault);
                         r0.setOpaque(false);
                     }
                 }
                 @Override
-                public void onLeftClick(MouseEvent e) {
+                public void onLeftClick(final MouseEvent e) {
                     deleteFile(r0);
                 }
             });
@@ -185,21 +182,21 @@ public class QuickGauntletLister extends JPanel {
 
             this.addMouseListener(new FMouseAdapter() {
                 @Override
-                public void onMouseEnter(MouseEvent e) {
+                public void onMouseEnter(final MouseEvent e) {
                     if (!r0.selected) {
                         r0.setBackground(clrHover);
                         r0.setOpaque(true);
                     }
                 }
                 @Override
-                public void onMouseExit(MouseEvent e) {
+                public void onMouseExit(final MouseEvent e) {
                     if (!r0.selected) {
                         r0.setBackground(clrDefault);
                         r0.setOpaque(false);
                     }
                 }
                 @Override
-                public void onLeftClick(MouseEvent e) {
+                public void onLeftClick(final MouseEvent e) {
                     renameGauntlet(r0.getGauntletData());
                 }
             });
@@ -209,9 +206,9 @@ public class QuickGauntletLister extends JPanel {
     private class RowPanel extends SkinnedPanel {
         private boolean selected = false;
         private boolean hovered = false;
-        private GauntletData gauntletData;
+        private final GauntletData gauntletData;
 
-        public RowPanel(GauntletData gd0) {
+        public RowPanel(final GauntletData gd0) {
             super();
             setOpaque(false);
             setBackground(new Color(0, 0, 0, 0));
@@ -267,7 +264,6 @@ public class QuickGauntletLister extends JPanel {
         }
     }
 
-    /** @return {@link java.lang.Integer} */
     public int getSelectedIndex() {
         for (int i = 0; i < rows.length; i++) {
             if (rows[i].isSelected()) { return i; }
@@ -279,42 +275,28 @@ public class QuickGauntletLister extends JPanel {
      * @param i0 &emsp; int
      * @return boolean success
      */
-    public boolean setSelectedIndex(int i0) {
+    public boolean setSelectedIndex(final int i0) {
         if (i0 >= rows.length) { return false; }
         selectHandler(rows[Math.max(0, i0)]);
         return true;
     }
 
-    /**
-     * @param qd0 &emsp; Gauntlet data object to select (if exists in list)
-     * @return boolean success
-     */
-    public boolean setSelectedGauntletData(GauntletData qd0) {
-        /*for (RowPanel r : rows) {
-            if (r.getQuestData().getName().equals(qd0.getName())) {
-                selectHandler(r);
-                return true;
-            }
-        }*/
-        return false;
-    }
-
     /** @param c0 &emsp; {@link forge.UiCommand} command executed on row select. */
-    public void setCmdSelect(UiCommand c0) {
+    public void setCmdSelect(final UiCommand c0) {
         this.cmdRowSelect = c0;
     }
 
     /** @param c0 &emsp; {@link forge.UiCommand} command executed on row delete. */
-    public void setCmdDelete(UiCommand c0) {
+    public void setCmdDelete(final UiCommand c0) {
         this.cmdRowDelete = c0;
     }
 
     /** @param c0 &emsp; {@link forge.UiCommand} command executed on row activate. */
-    public void setCmdActivate(UiCommand c0) {
+    public void setCmdActivate(final UiCommand c0) {
         this.cmdRowActivate = c0;
     }
 
-    private void selectHandler(RowPanel r0) {
+    private void selectHandler(final RowPanel r0) {
         if (previousSelect != null) {
             previousSelect.setSelected(false);
         }
@@ -324,9 +306,9 @@ public class QuickGauntletLister extends JPanel {
         if (cmdRowSelect != null) { cmdRowSelect.run(); }
     }
 
-    private void renameGauntlet(GauntletData gauntlet) {
+    private void renameGauntlet(final GauntletData gauntlet) {
         String gauntletName;
-        String oldGauntletName = gauntlet.getName();
+        final String oldGauntletName = gauntlet.getName();
         while (true) {
             gauntletName = FOptionPane.showInputDialog("Rename gauntlet to:", "Gauntlet Rename", null, oldGauntletName);
             if (gauntletName == null) { return; }
@@ -340,7 +322,7 @@ public class QuickGauntletLister extends JPanel {
             }
 
             boolean exists = false;
-            for (RowPanel r : rows) {
+            for (final RowPanel r : rows) {
                 if (r.getGauntletData().getName().equalsIgnoreCase(gauntletName)) {
                     exists = true;
                     break;
@@ -357,7 +339,7 @@ public class QuickGauntletLister extends JPanel {
         refresh();
     }
 
-    private void deleteFile(RowPanel r0) {
+    private void deleteFile(final RowPanel r0) {
         final GauntletData gd = r0.getGauntletData();
 
         if (!FOptionPane.showConfirmDialog(

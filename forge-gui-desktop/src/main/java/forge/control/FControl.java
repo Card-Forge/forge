@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -43,7 +43,6 @@ import forge.ImageCache;
 import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.assets.FSkinProp;
-import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.InvalidLayoutFileException;
@@ -62,6 +61,7 @@ import forge.quest.io.QuestDataIO;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
+import forge.util.gui.SOptionPane;
 import forge.view.FFrame;
 import forge.view.FView;
 
@@ -81,7 +81,7 @@ public enum FControl implements KeyEventDispatcher {
     private FScreen currentScreen;
     private boolean altKeyLastDown;
     private CloseAction closeAction;
-    private List<HostedMatch> currentMatches = Lists.newArrayList();
+    private final List<HostedMatch> currentMatches = Lists.newArrayList();
 
     public static enum CloseAction {
         NONE,
@@ -126,8 +126,8 @@ public enum FControl implements KeyEventDispatcher {
             public void windowClosing(final WindowEvent e) {
                 switch (closeAction) {
                 case NONE: //prompt user for close action if not previously specified
-                    String[] options = {"Close Screen", "Exit Forge", "Cancel"};
-                    int reply = FOptionPane.showOptionDialog(
+                    final String[] options = {"Close Screen", "Exit Forge", "Cancel"};
+                    final int reply = FOptionPane.showOptionDialog(
                             "Forge now supports navigation tabs which allow closing and switching between different screens with ease. "
                             + "As a result, you no longer need to use the X button in the upper right to close the current screen and go back."
                             + "\n\n"
@@ -300,8 +300,8 @@ public enum FControl implements KeyEventDispatcher {
         screen.getController().register();
         try {
             SLayoutIO.loadLayout(null);
-        } catch (InvalidLayoutFileException ex) {
-            GuiDialog.message("Your " + screen.getTabCaption() + " layout file could not be read. It will be deleted after you press OK.\nThe game will proceed with default layout.");
+        } catch (final InvalidLayoutFileException ex) {
+            SOptionPane.showMessageDialog(String.format("Your %s layout file could not be read. It will be deleted after you press OK.\nThe game will proceed with default layout.", screen.getTabCaption()), "Warning!");
             if (screen.deleteLayoutFile()) {
                 SLayoutIO.loadLayout(null); //try again
             }
@@ -325,7 +325,7 @@ public enum FControl implements KeyEventDispatcher {
         return FModel.getPreferences().getPrefBoolean(FPref.UI_MATCH_IMAGE_VISIBLE);
     }
 
-    public boolean ensureScreenActive(FScreen screen) {
+    public boolean ensureScreenActive(final FScreen screen) {
         if (currentScreen == screen) { return true; }
 
         return setCurrentScreen(screen);
@@ -360,7 +360,7 @@ public enum FControl implements KeyEventDispatcher {
      * @see java.awt.KeyEventDispatcher#dispatchKeyEvent(java.awt.event.KeyEvent)
      */
     @Override
-    public boolean dispatchKeyEvent(KeyEvent e) {
+    public boolean dispatchKeyEvent(final KeyEvent e) {
         // Show Forge menu if Alt key pressed without modifiers and released without pressing any other keys in between
         if (e.getKeyCode() == KeyEvent.VK_ALT) {
             if (e.getID() == KeyEvent.KEY_RELEASED) {

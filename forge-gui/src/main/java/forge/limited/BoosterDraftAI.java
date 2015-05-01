@@ -6,16 +6,22 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.limited;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.tuple.MutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -24,17 +30,11 @@ import forge.item.PaperCard;
 import forge.properties.ForgePreferences;
 import forge.util.Aggregates;
 
-import org.apache.commons.lang3.tuple.MutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * <p>
  * BoosterDraftAI class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -62,7 +62,7 @@ public class BoosterDraftAI {
      * <p>
      * Choose a CardPrinted from the list given.
      * </p>
-     * 
+     *
      * @param chooseFrom
      *            List of CardPrinted
      * @param player
@@ -74,22 +74,24 @@ public class BoosterDraftAI {
             System.out.println("Player[" + player + "] pack: " + chooseFrom.toString());
         }
 
-        DeckColors deckCols = this.playerColors.get(player);
-        ColorSet currentChoice = deckCols.getChosenColors();
-        boolean canAddMoreColors = deckCols.canChoseMoreColors();
-        
-        List<Pair<PaperCard, Double>> rankedCards = rankCards(chooseFrom);
-        
-        for(Pair<PaperCard, Double> p : rankedCards) {
+        final DeckColors deckCols = this.playerColors.get(player);
+        final ColorSet currentChoice = deckCols.getChosenColors();
+        final boolean canAddMoreColors = deckCols.canChoseMoreColors();
+
+        final List<Pair<PaperCard, Double>> rankedCards = rankCards(chooseFrom);
+
+        for (final Pair<PaperCard, Double> p : rankedCards) {
             double valueBoost = 0;
 
             // If a card is not ai playable, somewhat decrease its rating
-            if( p.getKey().getRules().getAiHints().getRemAIDecks() )
+            if( p.getKey().getRules().getAiHints().getRemAIDecks() ) {
                 valueBoost = TAKE_BEST_THRESHOLD;
+            }
 
             // if I cannot choose more colors, and the card cannot be played with chosen colors, decrease its rating.
-            if( !canAddMoreColors && !p.getKey().getRules().getManaCost().canBePaidWithAvaliable(currentChoice.getColor()))
+            if( !canAddMoreColors && !p.getKey().getRules().getManaCost().canBePaidWithAvaliable(currentChoice.getColor())) {
                 valueBoost = TAKE_BEST_THRESHOLD * 3;
+            }
 
             if (valueBoost > 0) {
                 p.setValue(p.getValue() + valueBoost);
@@ -100,11 +102,11 @@ public class BoosterDraftAI {
         double bestRanking = Double.MAX_VALUE;
         PaperCard bestPick = null;
         final List<PaperCard> possiblePick = new ArrayList<PaperCard>();
-        for(Pair<PaperCard, Double> p : rankedCards) { 
-            double rating = p.getValue();
+        for (final Pair<PaperCard, Double> p : rankedCards) {
+            final double rating = p.getValue();
             if(rating <= bestRanking + .01) {
                 if (rating < bestRanking) {
-                	// found a better card start a new list
+                    // found a better card start a new list
                     possiblePick.clear();
                     bestRanking = rating;
                 }
@@ -114,12 +116,13 @@ public class BoosterDraftAI {
 
         bestPick = Aggregates.random(possiblePick);
 
-        if (canAddMoreColors)
+        if (canAddMoreColors) {
             deckCols.addColorsOf(bestPick);
-        
+        }
+
         System.out.println("Player[" + player + "] picked: " + bestPick + " ranking of " + bestRanking);
         this.deck.get(player).add(bestPick);
-        
+
         return bestPick;
     }
 
@@ -127,14 +130,14 @@ public class BoosterDraftAI {
      * Sort cards by rank. Note that if pack has cards from different editions,
      * they could have the same rank. Basic lands and unrecognised cards are
      * rated worse than all other possible picks.
-     * 
+     *
      * @param chooseFrom
      *            List of cards
      * @return map of rankings
      */
-    private List<Pair<PaperCard, Double>> rankCards(final Iterable<PaperCard> chooseFrom) {
-        List<Pair<PaperCard, Double>> rankedCards = new ArrayList<Pair<PaperCard,Double>>();
-        for (PaperCard card : chooseFrom) {
+    private static List<Pair<PaperCard, Double>> rankCards(final Iterable<PaperCard> chooseFrom) {
+        final List<Pair<PaperCard, Double>> rankedCards = new ArrayList<Pair<PaperCard,Double>>();
+        for (final PaperCard card : chooseFrom) {
             Double rank;
             if (MagicColor.Constant.BASIC_LANDS.contains(card.getName())) {
                 rank = RANK_UNPICKABLE;
@@ -155,7 +158,7 @@ public class BoosterDraftAI {
      * <p>
      * getDecks.
      * </p>
-     * 
+     *
      * @return an array of {@link forge.deck.Deck} objects.
      */
     public Deck[] getDecks() {
@@ -186,7 +189,7 @@ public class BoosterDraftAI {
 
     /**
      * Gets the bd.
-     * 
+     *
      * @return the bd
      */
     public IBoosterDraft getBd() {
@@ -195,7 +198,7 @@ public class BoosterDraftAI {
 
     /**
      * Sets the bd.
-     * 
+     *
      * @param bd0
      *            the bd to set
      */

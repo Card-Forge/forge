@@ -45,35 +45,35 @@ public class GauntletIO {
         return xStream;
     }
 
-    public static File getGauntletFile(String name) {
+    public static File getGauntletFile(final String name) {
         return new File(ForgeConstants.GAUNTLET_DIR.userPrefLoc, name + SUFFIX_DATA);
     }
 
-    public static File getGauntletFile(GauntletData gd) {
+    public static File getGauntletFile(final GauntletData gd) {
         return getGauntletFile(gd.getName());
     }
 
     public static File[] getGauntletFilesUnlocked(final String prefix) {
         final FilenameFilter filter = new FilenameFilter() {
             @Override
-            public boolean accept(File dir, String name) {
+            public boolean accept(final File dir, final String name) {
                 return ((prefix == null || name.startsWith(prefix)) && name.endsWith(SUFFIX_DATA));
             }
         };
 
-        File folder = new File(ForgeConstants.GAUNTLET_DIR.userPrefLoc);
+        final File folder = new File(ForgeConstants.GAUNTLET_DIR.userPrefLoc);
         return folder.listFiles(filter);
     }
 
     public static File[] getGauntletFilesLocked() {
         final FilenameFilter filter = new FilenameFilter() {
             @Override
-            public boolean accept(File dir, String name) {
+            public boolean accept(final File dir, final String name) {
                 return (name.startsWith(PREFIX_LOCKED) && name.endsWith(SUFFIX_DATA));
             }
         };
 
-        File folder = new File(ForgeConstants.GAUNTLET_DIR.defaultLoc);
+        final File folder = new File(ForgeConstants.GAUNTLET_DIR.defaultLoc);
         return folder.listFiles(filter);
     }
 
@@ -101,8 +101,7 @@ public class GauntletIO {
             if (zin != null) {
                 try {
                     zin.close();
-                }
-                catch (IOException e) {
+                } catch (final IOException e) {
                     System.out.println("error closing gauntlet data reader: " + e);
                 }
             }
@@ -110,8 +109,7 @@ public class GauntletIO {
         if (isCorrupt) {
             try {
                 xmlSaveFile.delete();
-            }
-            catch (Exception e) {
+            } catch (final Exception e) {
                 System.out.println("error delete corrupt gauntlet file: " + e);
             }
         }
@@ -145,7 +143,7 @@ public class GauntletIO {
         @Override
         public void marshal(final Object source, final HierarchicalStreamWriter writer, final MarshallingContext context) {
             for (final Entry<PaperCard, Integer> e : (CardPool) source) {
-                this.writeCardPrinted(e.getKey(), e.getValue(), writer);
+                writeCardPrinted(e.getKey(), e.getValue(), writer);
             }
         }
 
@@ -161,15 +159,15 @@ public class GauntletIO {
                 if ("string".equals(nodename)) {
                     result.add(FModel.getMagicDb().getCommonCards().getCard(reader.getValue()));
                 } else if ("card".equals(nodename)) { // new format
-                    result.add(this.readCardPrinted(reader), cnt);
+                    result.add(readCardPrinted(reader), cnt);
                 }
                 reader.moveUp();
             }
-            
+
             return result;
         }
 
-        private void writeCardPrinted(final PaperCard cref, final Integer count, final HierarchicalStreamWriter writer) {
+        private static void writeCardPrinted(final PaperCard cref, final Integer count, final HierarchicalStreamWriter writer) {
             writer.startNode("card");
             writer.addAttribute("c", cref.getName());
             writer.addAttribute("s", cref.getEdition());
@@ -181,17 +179,19 @@ public class GauntletIO {
             writer.endNode();
         }
 
-        private PaperCard readCardPrinted(final HierarchicalStreamReader reader) {
+        private static PaperCard readCardPrinted(final HierarchicalStreamReader reader) {
             final String name = reader.getAttribute("c");
             final String set = reader.getAttribute("s");
             final String sIndex = reader.getAttribute("i");
             final short index = StringUtils.isNumeric(sIndex) ? Short.parseShort(sIndex) : 0;
             final boolean foil = "1".equals(reader.getAttribute("foil"));
             PaperCard card = FModel.getMagicDb().getCommonCards().getCard(name, set, index);
-            if ( null == card )
+            if (null == card) {
                 card = FModel.getMagicDb().getCommonCards().getCard(name, set, -1);
-            if ( null == card ) 
+            }
+            if (null == card) {
                 throw new RuntimeException("Unsupported card found in quest save: " + name + " from edition " + set);
+            }
             return foil ? FModel.getMagicDb().getCommonCards().getFoiled(card) : card;
         }
     }

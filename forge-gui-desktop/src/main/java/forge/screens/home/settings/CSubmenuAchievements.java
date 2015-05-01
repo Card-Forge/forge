@@ -1,11 +1,10 @@
 package forge.screens.home.settings;
 
-import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 
 /**
  * Controls the achievements submenu in the home UI.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
@@ -31,11 +30,4 @@ public enum CSubmenuAchievements implements ICDoc {
     public void update() {
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
-    }
 }

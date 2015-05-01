@@ -58,7 +58,7 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
     private int w, h = 0;
     private boolean allImagesPresent = false;
     private boolean toggle = false;
-    private boolean hovered = false; 
+    private boolean hovered = false;
     private final AlphaComposite disabledComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.25f);
     private KeyAdapter klEnter;
 
@@ -99,7 +99,7 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
         // Mouse events
         this.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
-            public void mouseEntered(MouseEvent evt) {
+            public void mouseEntered(final MouseEvent evt) {
                 hovered = true;
                 if (isToggled() || !isEnabled()) { return; }
                 resetImg();
@@ -107,7 +107,7 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
             }
 
             @Override
-            public void mouseExited(MouseEvent evt) {
+            public void mouseExited(final MouseEvent evt) {
                 hovered = false;
                 if (isToggled() || !isEnabled()) { return; }
                 resetImg();
@@ -115,7 +115,7 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
             }
 
             @Override
-            public void mousePressed(MouseEvent evt) {
+            public void mousePressed(final MouseEvent evt) {
                 if (isToggled() || !isEnabled()) { return; }
                 imgL = FSkin.getIcon(FSkinProp.IMG_BTN_DOWN_LEFT);
                 imgM = FSkin.getIcon(FSkinProp.IMG_BTN_DOWN_CENTER);
@@ -124,7 +124,7 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
             }
 
             @Override
-            public void mouseReleased(MouseEvent evt) {
+            public void mouseReleased(final MouseEvent evt) {
                 if (isToggled() || !isEnabled()) { return; }
                 resetImg();
                 repaintSelf();
@@ -134,7 +134,7 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
         // Focus events
         this.addFocusListener(new FocusAdapter() {
             @Override
-            public void focusGained(FocusEvent e) {
+            public void focusGained(final FocusEvent e) {
                 if (isToggled()) { return; }
                 resetImg();
                 addKeyListener(klEnter);
@@ -142,7 +142,7 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
             }
 
             @Override
-            public void focusLost(FocusEvent e) {
+            public void focusLost(final FocusEvent e) {
                 if (isToggled()) { return; }
                 resetImg();
                 removeKeyListener(klEnter);
@@ -167,9 +167,9 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
             imgR = FSkin.getIcon(FSkinProp.IMG_BTN_UP_RIGHT);
         }
     }
-    
+
     @Override
-    public void setEnabled(boolean b0) {
+    public void setEnabled(final boolean b0) {
         if (!b0) {
             imgL = FSkin.getIcon(FSkinProp.IMG_BTN_DISABLED_LEFT);
             imgM = FSkin.getIcon(FSkinProp.IMG_BTN_DISABLED_CENTER);
@@ -183,9 +183,9 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
         repaintSelf();
     }
 
-    /** 
+    /**
      * Button toggle state, for a "permanently pressed" functionality, e.g. as a tab.
-     * 
+     *
      * @return boolean
      */
     public boolean isToggled() {
@@ -193,7 +193,7 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
     }
 
     /** @param b0 &emsp; boolean. */
-    public void setToggled(boolean b0) {
+    public void setToggled(final boolean b0) {
         if (b0) {
             imgL = FSkin.getIcon(FSkinProp.IMG_BTN_TOGGLE_LEFT);
             imgM = FSkin.getIcon(FSkinProp.IMG_BTN_TOGGLE_CENTER);
@@ -214,7 +214,7 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
     public int getAutoSizeWidth() {
         int width = 0;
         if (this.getText() != null && !this.getText().isEmpty()) {
-            FontMetrics metrics = this.getFontMetrics(this.getFont());
+            final FontMetrics metrics = this.getFontMetrics(this.getFont());
             width = metrics.stringWidth(this.getText());
         }
         return width;
@@ -257,19 +257,19 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
     public void setCommand(final UiCommand command) {
         addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 command.run();
             }
         });
     }
 
     @Override
-    public void setImage(FSkinProp color) {
+    public void setImage(final FSkinProp color) {
         setForeground(FSkin.getColor(Colors.fromSkinProp(color)));
     }
 
     @Override
-    public void setTextColor(int r, int g, int b) {
+    public void setTextColor(final int r, final int g, final int b) {
         setForeground(new Color(r, g, b));
     }
 }

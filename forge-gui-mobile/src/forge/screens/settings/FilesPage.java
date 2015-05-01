@@ -142,7 +142,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
 
         @Override
         public void select() {
-            new GuiDownloader(createService());
+            new GuiDownloader(createService()).show();
         }
         protected abstract GuiDownloadService createService();
     }

@@ -1,40 +1,41 @@
 package forge.toolbox;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
-/** 
+/**
  * Special mouse adapter to make it handling specific mouse buttons easier
  * and improve responsiveness of click and double click actions
  *
  */
 public abstract class FMouseAdapter extends MouseAdapter {
     //Event functions to override
-    public void onLeftMouseDown(MouseEvent e) {}
-    public void onLeftMouseUp(MouseEvent e) {}
-    public void onLeftClick(MouseEvent e) {}
-    public void onLeftDoubleClick(MouseEvent e) {}
-    public void onLeftMouseDragging(MouseEvent e) {}
-    public void onLeftMouseDragDrop(MouseEvent e) {}
+    public void onLeftMouseDown(final MouseEvent e) {}
+    public void onLeftMouseUp(final MouseEvent e) {}
+    public void onLeftClick(final MouseEvent e) {}
+    public void onLeftDoubleClick(final MouseEvent e) {}
+    public void onLeftMouseDragging(final MouseEvent e) {}
+    public void onLeftMouseDragDrop(final MouseEvent e) {}
 
-    public void onMiddleMouseDown(MouseEvent e) {}
-    public void onMiddleMouseUp(MouseEvent e) {}
-    public void onMiddleClick(MouseEvent e) {}
-    public void onMiddleDoubleClick(MouseEvent e) {}
-    public void onMiddleMouseDragging(MouseEvent e) {}
-    public void onMiddleMouseDragDrop(MouseEvent e) {}
+    public void onMiddleMouseDown(final MouseEvent e) {}
+    public void onMiddleMouseUp(final MouseEvent e) {}
+    public void onMiddleClick(final MouseEvent e) {}
+    public void onMiddleDoubleClick(final MouseEvent e) {}
+    public void onMiddleMouseDragging(final MouseEvent e) {}
+    public void onMiddleMouseDragDrop(final MouseEvent e) {}
 
-    public void onRightMouseDown(MouseEvent e) {}
-    public void onRightMouseUp(MouseEvent e) {}
-    public void onRightClick(MouseEvent e) {}
-    public void onRightDoubleClick(MouseEvent e) {}
-    public void onRightMouseDragging(MouseEvent e) {}
-    public void onRightMouseDragDrop(MouseEvent e) {}
+    public void onRightMouseDown(final MouseEvent e) {}
+    public void onRightMouseUp(final MouseEvent e) {}
+    public void onRightClick(final MouseEvent e) {}
+    public void onRightDoubleClick(final MouseEvent e) {}
+    public void onRightMouseDragging(final MouseEvent e) {}
+    public void onRightMouseDragDrop(final MouseEvent e) {}
 
-    public void onMouseEnter(MouseEvent e) {}
-    public void onMouseExit(MouseEvent e) {}
+    public void onMouseEnter(final MouseEvent e) {}
+    public void onMouseExit(final MouseEvent e) {}
 
     /**
      * Forge Mouse Adapter with infinite click tolerance (so long as mouse doesn't leave component)
@@ -43,7 +44,7 @@ public abstract class FMouseAdapter extends MouseAdapter {
         this(false);
     }
 
-    public FMouseAdapter(boolean isCompDraggable0) {
+    public FMouseAdapter(final boolean isCompDraggable0) {
         isCompDraggable = isCompDraggable0;
     }
 
@@ -54,7 +55,7 @@ public abstract class FMouseAdapter extends MouseAdapter {
         setMouseDownAdapter(null);
     }
 
-    private static void setMouseDownAdapter(FMouseAdapter mouseDownAdapter0) {
+    private static void setMouseDownAdapter(final FMouseAdapter mouseDownAdapter0) {
         if (mouseDownAdapter == mouseDownAdapter0) { return; }
         if (mouseDownAdapter != null) {
             //ensure mouse up handled for mouse down adapter if needed
@@ -124,7 +125,7 @@ public abstract class FMouseAdapter extends MouseAdapter {
         if (isCompDraggable) {
             tempMotionListenerComp = e.getComponent();
             if (tempMotionListenerComp != null) {
-                for (MouseMotionListener motionListener : tempMotionListenerComp.getMouseMotionListeners()) {
+                for (final MouseMotionListener motionListener : tempMotionListenerComp.getMouseMotionListeners()) {
                     if (motionListener == this) {
                         tempMotionListenerComp = null;
                         break;
@@ -159,7 +160,7 @@ public abstract class FMouseAdapter extends MouseAdapter {
     }
 
     @Override
-    public final void mouseDragged(MouseEvent e) {
+    public final void mouseDragged(final MouseEvent e) {
         //clear mouse down location if component begins being dragged
         if (mouseDownLoc != null && isCompDraggable &&
                 e.getLocationOnScreen().distance(mouseDownLoc) > 3) {
@@ -181,13 +182,13 @@ public abstract class FMouseAdapter extends MouseAdapter {
     }
 
     @Override
-    public final void mouseEntered(MouseEvent e) {
+    public final void mouseEntered(final MouseEvent e) {
         hovered = true;
         onMouseEnter(e);
     }
 
     @Override
-    public final void mouseExited(MouseEvent e) {
+    public final void mouseExited(final MouseEvent e) {
         hovered = false;
         onMouseExit(e);
     }
@@ -201,7 +202,7 @@ public abstract class FMouseAdapter extends MouseAdapter {
     }
 
     @Override
-    public final void mouseReleased(MouseEvent e) {
+    public final void mouseReleased(final MouseEvent e) {
         int button = e.getButton();
         if (button < 1 || button > 3 || downButton == 0 || mouseDownAdapter != this) {
             return;
@@ -268,7 +269,7 @@ public abstract class FMouseAdapter extends MouseAdapter {
     }
 
     @Override
-    public final void mouseClicked(MouseEvent e) {
+    public final void mouseClicked(final MouseEvent e) {
         //override mouseClicked as final to prevent it being used since it doesn't fire
         //if the user moves the mouse at all between mouse down and mouse up
     }

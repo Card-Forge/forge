@@ -1,5 +1,16 @@
 package forge.screens.home.gauntlet;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JFileChooser;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileFilter;
+
+import org.apache.commons.lang3.ArrayUtils;
+
 import forge.UiCommand;
 import forge.deck.Deck;
 import forge.gauntlet.GauntletData;
@@ -8,18 +19,9 @@ import forge.gui.framework.ICDoc;
 import forge.properties.ForgeConstants;
 import forge.toolbox.FOptionPane;
 
-import org.apache.commons.lang3.ArrayUtils;
-
-import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-/** 
+/**
  * Controls the "build gauntlet" submenu in the home UI.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
@@ -30,7 +32,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
 
     private final VSubmenuGauntletBuild view = VSubmenuGauntletBuild.SINGLETON_INSTANCE;
     private final List<Deck> workingDecks = new ArrayList<Deck>();
-    private File openStartDir = new File(ForgeConstants.GAUNTLET_DIR.userPrefLoc);
+    private final File openStartDir = new File(ForgeConstants.GAUNTLET_DIR.userPrefLoc);
 
     private final FileFilter filterDAT = new FileFilter() {
         @Override
@@ -39,7 +41,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
                 return true;
             }
 
-            String filename = f.getName();
+            final String filename = f.getName();
             return (!filename.startsWith(GauntletIO.PREFIX_QUICK) && filename.endsWith(GauntletIO.SUFFIX_DATA));
         }
 
@@ -49,29 +51,41 @@ public enum CSubmenuGauntletBuild implements ICDoc {
         }
     };
 
-    //private final KeyAdapter kadSearch = new KeyAdapter() { @Override
-        //public void keyPressed(final KeyEvent e) { search(); } };
-
-    private final UiCommand cmdAddDeck = new UiCommand() { @Override
-        public void run() { addDeck(); } };
-
-    private final UiCommand cmdRemoveDeck = new UiCommand() { @Override
-        public void run() { removeDeck(); } };
-
-    private final UiCommand cmdDeckUp = new UiCommand() { @Override
-        public void run() { deckUp(); } };
-
-    private final UiCommand cmdDeckDown = new UiCommand() { @Override
-        public void run() { deckDown(); } };
-
-    private final UiCommand cmdSave = new UiCommand() { @Override
-        public void run() { saveGauntlet(); } };
-
-    private final UiCommand cmdNew = new UiCommand() { @Override
-        public void run() { newGauntlet(); } };
-
-    private final UiCommand cmdOpen = new UiCommand() { @Override
-        public void run() { openGauntlet(); } };
+    private final UiCommand cmdAddDeck = new UiCommand() {
+        @Override public void run() {
+            addDeck();
+        }
+    };
+    private final UiCommand cmdRemoveDeck = new UiCommand() {
+        @Override public void run() {
+            removeDeck();
+        }
+    };
+    private final UiCommand cmdDeckUp = new UiCommand() {
+        @Override public void run() {
+            deckUp();
+        }
+    };
+    private final UiCommand cmdDeckDown = new UiCommand() {
+        @Override public void run() {
+            deckDown();
+        }
+    };
+    private final UiCommand cmdSave = new UiCommand() {
+        @Override public void run() {
+            saveGauntlet();
+        }
+    };
+    private final UiCommand cmdNew = new UiCommand() {
+        @Override public void run() {
+            newGauntlet();
+        }
+    };
+    private final UiCommand cmdOpen = new UiCommand() {
+        @Override public void run() {
+            openGauntlet();
+        }
+    };
 
     /* (non-Javadoc)
      * @see forge.gui.home.ICSubmenu#initialize()
@@ -102,23 +116,16 @@ public enum CSubmenuGauntletBuild implements ICDoc {
         view.getBtnSave().setCommand(cmdSave);
         view.getBtnOpen().setCommand(cmdOpen);
         view.getBtnNew().setCommand(cmdNew);
-        
+
         view.getLstLeft().initialize();
-//        updateDecks();
+        // updateDecks();
     }
-
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
-    }
-
 
     private void addDeck() {
         final Deck deckToAdd = view.getLstLeft().getPlayer().getDeck();
-        if ( null == deckToAdd ) return;
+        if ( null == deckToAdd ) {
+            return;
+        }
         workingDecks.add(deckToAdd);
         view.getLblSave().setVisible(false);
         dumpDecksIntoList();
@@ -189,7 +196,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
         if (f.exists()) {
             if (!FOptionPane.showConfirmDialog(
                     "There is already a gauntlet named '" + name + "'.\n"
-                    + "All progress and data will be overwritten. Continue?",
+                            + "All progress and data will be overwritten. Continue?",
                     "Overwrite Gauntlet?")) { return false; }
 
             gd = GauntletIO.loadGauntlet(f);

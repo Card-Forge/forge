@@ -1,22 +1,22 @@
 package forge.itemmanager.filters;
 
-import forge.game.GameFormat;
-import forge.itemmanager.ItemManager;
-import forge.deck.DeckProxy;
-import forge.model.FModel;
-import forge.quest.QuestWorld;
-
 import java.util.HashSet;
 import java.util.Set;
+
+import forge.deck.DeckProxy;
+import forge.game.GameFormat;
+import forge.itemmanager.ItemManager;
+import forge.model.FModel;
+import forge.quest.QuestWorld;
 
 
 public class DeckQuestWorldFilter extends DeckFormatFilter {
     private final Set<QuestWorld> questWorlds = new HashSet<QuestWorld>();
 
-    public DeckQuestWorldFilter(ItemManager<? super DeckProxy> itemManager0) {
+    public DeckQuestWorldFilter(final ItemManager<? super DeckProxy> itemManager0) {
         super(itemManager0);
     }
-    public DeckQuestWorldFilter(ItemManager<? super DeckProxy> itemManager0, QuestWorld questWorld0) {
+    public DeckQuestWorldFilter(final ItemManager<? super DeckProxy> itemManager0, final QuestWorld questWorld0) {
         super(itemManager0);
         this.questWorlds.add(questWorld0);
         this.formats.add(getQuestWorldFormat(questWorld0));
@@ -24,9 +24,9 @@ public class DeckQuestWorldFilter extends DeckFormatFilter {
 
     @Override
     public ItemFilter<DeckProxy> createCopy() {
-        DeckQuestWorldFilter copy = new DeckQuestWorldFilter(itemManager);
+        final DeckQuestWorldFilter copy = new DeckQuestWorldFilter(itemManager);
         copy.questWorlds.addAll(this.questWorlds);
-        for (QuestWorld w : this.questWorlds) {
+        for (final QuestWorld w : this.questWorlds) {
             copy.formats.add(getQuestWorldFormat(w));
         }
         return copy;
@@ -38,7 +38,7 @@ public class DeckQuestWorldFilter extends DeckFormatFilter {
         super.reset();
     }
 
-    public static boolean canAddQuestWorld(QuestWorld questWorld, ItemFilter<DeckProxy> existingFilter) {
+    public static boolean canAddQuestWorld(final QuestWorld questWorld, final ItemFilter<DeckProxy> existingFilter) {
         if (questWorld.getFormat() == null && FModel.getQuest().getMainFormat() == null) {
             return false; //must have format
         }
@@ -51,10 +51,10 @@ public class DeckQuestWorldFilter extends DeckFormatFilter {
      * @return true if filter merged in or to suppress adding a new filter, false to allow adding new filter
      */
     @Override
-    public boolean merge(ItemFilter<?> filter) {
-        DeckQuestWorldFilter cardQuestWorldFilter = (DeckQuestWorldFilter)filter;
+    public boolean merge(final ItemFilter<?> filter) {
+        final DeckQuestWorldFilter cardQuestWorldFilter = (DeckQuestWorldFilter)filter;
         this.questWorlds.addAll(cardQuestWorldFilter.questWorlds);
-        for (QuestWorld w : cardQuestWorldFilter.questWorlds) {
+        for (final QuestWorld w : cardQuestWorldFilter.questWorlds) {
             this.formats.add(getQuestWorldFormat(w));
         }
         return true;
@@ -72,14 +72,14 @@ public class DeckQuestWorldFilter extends DeckFormatFilter {
 
     @Override
     protected Iterable<String> getList() {
-        Set<String> strings = new HashSet<String>();
-        for (QuestWorld w : this.questWorlds) {
+        final Set<String> strings = new HashSet<String>();
+        for (final QuestWorld w : this.questWorlds) {
             strings.add(w.getName());
         }
         return strings;
     }
 
-    private GameFormat getQuestWorldFormat(QuestWorld w) {
+    private static GameFormat getQuestWorldFormat(final QuestWorld w) {
         GameFormat format = w.getFormat();
         if (format == null) {
             //assumes that no world other than the main world will have a null format

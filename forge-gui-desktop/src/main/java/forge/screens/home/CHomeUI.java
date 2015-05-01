@@ -5,7 +5,6 @@ import java.util.List;
 import javax.swing.JMenu;
 
 import forge.Singletons;
-import forge.UiCommand;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.menus.IMenuProvider;
@@ -32,7 +31,7 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
 
     /** Programatically selects a menu item.
      *  @param id0 {@link forge.gui.framework.EDocID} */
-    public void itemClick(EDocID id0) {
+    public void itemClick(final EDocID id0) {
         final ForgePreferences prefs = FModel.getPreferences();
 
         if (lblSelected != null) {
@@ -87,14 +86,6 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
      */
     @Override
     public void update() {
-    }
-
-    /* (non-Javadoc)
-     * @see forge.view.home.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
     }
 
     /**

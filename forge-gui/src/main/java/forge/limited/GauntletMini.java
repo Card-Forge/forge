@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -33,7 +33,7 @@ import forge.util.Aggregates;
  * <p>
  * GauntletMini class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id: GauntletMini.java $
  * @since 1.2.xx
@@ -47,7 +47,7 @@ public class GauntletMini {
     private int losses;
     private boolean gauntletDraft; // Means: Draft game is in Gauntlet-mode, not a single match
     private GameType gauntletType;
-    private List<RegisteredPlayer> aiOpponents = new ArrayList<RegisteredPlayer>();
+    private final List<RegisteredPlayer> aiOpponents = new ArrayList<RegisteredPlayer>();
 
     public GauntletMini() {
         currentRound = 1;
@@ -87,10 +87,10 @@ public class GauntletMini {
     }
 
     /**
-     * 
+     *
      * Setup and launch the gauntlet.
      * Note: The AI decks are connected to the human deck.
-     * 
+     *
      * @param rounds0
      *          the number of rounds (opponent decks) in this tournament
      * @param humanDeck0
@@ -98,7 +98,7 @@ public class GauntletMini {
      * @param gauntletType0
      *          game type (Sealed, Draft, Constructed...)
      */
-    public void launch(int rounds0, Deck humanDeck0, final GameType gauntletType0) {
+    public void launch(final int rounds0, final Deck humanDeck0, final GameType gauntletType0) {
         rounds = rounds0;
         humanDeck = humanDeck0;
         gauntletType = gauntletType0;

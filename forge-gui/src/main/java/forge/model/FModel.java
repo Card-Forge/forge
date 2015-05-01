@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -59,10 +59,10 @@ import forge.util.storage.StorageBase;
 
 /**
  * The default Model implementation for Forge.
- * 
+ *
  * This used to be an interface, but it seems unlikely that we will ever use a
  * different model.
- * 
+ *
  * In case we need to convert it into an interface in the future, all fields of
  * this class must be either private or public static final.
  */
@@ -98,18 +98,18 @@ public class FModel {
                 ForgeConstants.CACHE_BOOSTERBOX_PICS_DIR, ForgeConstants.CACHE_PRECON_PICS_DIR,
                 ForgeConstants.CACHE_TOURNAMENTPACK_PICS_DIR);
 
-		// Instantiate preferences: quest and regular
-		//Preferences are initialized first so that the splash screen can be translated.
-		try {
-			preferences = new ForgePreferences();
-			GamePlayerUtil.getGuiPlayer().setName(preferences.getPref(FPref.PLAYER_NAME));
-		}
-		catch (final Exception exn) {
-			throw new RuntimeException(exn);
-		}
+        // Instantiate preferences: quest and regular
+        // Preferences are initialized first so that the splash screen can be translated.
+        try {
+            preferences = new ForgePreferences();
+            GamePlayerUtil.getGuiPlayer().setName(preferences.getPref(FPref.PLAYER_NAME));
+        }
+        catch (final Exception exn) {
+            throw new RuntimeException(exn);
+        }
 
-		Localizer.getInstance().initialize(FModel.getPreferences().getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
-		
+        Localizer.getInstance().initialize(FModel.getPreferences().getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
+
         //load card database
         final ProgressObserver progressBarBridge = (progressBar == null) ?
                 ProgressObserver.emptyObserver : new ProgressObserver() {
@@ -140,8 +140,8 @@ public class FModel {
         magicDb = new StaticData(reader, ForgeConstants.EDITIONS_DIR, ForgeConstants.BLOCK_DATA_DIR);
 
         //create profile dirs if they don't already exist
-        for (String dname : ForgeConstants.PROFILE_DIRS) {
-            File path = new File(dname);
+        for (final String dname : ForgeConstants.PROFILE_DIRS) {
+            final File path = new File(dname);
             if (path.isDirectory()) {
                 // already exists
                 continue;
@@ -199,7 +199,7 @@ public class FModel {
     }
 
     private static boolean keywordsLoaded = false;
-    
+
     /**
      * Load dynamic gamedata.
      */
@@ -210,37 +210,22 @@ public class FModel {
             List<String> tList = null;
 
             if (typeListFile.size() > 0) {
-                for (int i = 0; i < typeListFile.size(); i++) {
-                    final String s = typeListFile.get(i);
+                for (final String s : typeListFile) {
                     if (s.equals("[BasicTypes]")) {
                         tList = CardType.Constant.BASIC_TYPES;
-                    }
-
-                    else if (s.equals("[LandTypes]")) {
+                    } else if (s.equals("[LandTypes]")) {
                         tList = CardType.Constant.LAND_TYPES;
-                    }
-
-                    else if (s.equals("[CreatureTypes]")) {
+                    } else if (s.equals("[CreatureTypes]")) {
                         tList = CardType.Constant.CREATURE_TYPES;
-                    }
-
-                    else if (s.equals("[SpellTypes]")) {
+                    } else if (s.equals("[SpellTypes]")) {
                         tList = CardType.Constant.SPELL_TYPES;
-                    }
-
-                    else if (s.equals("[EnchantmentTypes]")) {
+                    } else if (s.equals("[EnchantmentTypes]")) {
                         tList = CardType.Constant.ENCHANTMENT_TYPES;
-                    }
-
-                    else if (s.equals("[ArtifactTypes]")) {
+                    } else if (s.equals("[ArtifactTypes]")) {
                         tList = CardType.Constant.ARTIFACT_TYPES;
-                    }
-
-                    else if (s.equals("[WalkerTypes]")) {
+                    } else if (s.equals("[WalkerTypes]")) {
                         tList = CardType.Constant.WALKER_TYPES;
-                    }
-
-                    else if (s.length() > 1) {
+                    } else if (s.length() > 1) {
                         tList.add(s);
                     }
                 }
@@ -252,7 +237,7 @@ public class FModel {
             final List<String> nskwListFile = FileUtil.readFile(ForgeConstants.KEYWORD_LIST_FILE);
 
             if (nskwListFile.size() > 1) {
-                for (String s : nskwListFile) {
+                for (final String s : nskwListFile) {
                     if (s.length() > 1) {
                         CardUtil.NON_STACKING_LIST.add(s);
                     }
@@ -303,7 +288,7 @@ public class FModel {
         return gauntletData;
     }
 
-    public static void setGauntletData(GauntletData data0) {
+    public static void setGauntletData(final GauntletData data0) {
         gauntletData = data0;
     }
 
@@ -321,7 +306,7 @@ public class FModel {
     public static IStorage<QuestWorld> getWorlds() {
         return worlds;
     }
- 
+
     public static GameFormat.Collection getFormats() {
         return formats;
     }

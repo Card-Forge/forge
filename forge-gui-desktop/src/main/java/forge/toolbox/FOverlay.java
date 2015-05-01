@@ -6,38 +6,39 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.toolbox;
 
-import forge.gui.SOverlayUtils;
-import forge.toolbox.FSkin.SkinnedPanel;
-
-import javax.swing.*;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+
+import forge.gui.SOverlayUtils;
+import forge.toolbox.FSkin.SkinnedPanel;
+
 /**
  * Semi-transparent overlay panel. Should be used with layered panes.
- * 
+ *
  */
 
 // Currently used only once, in top level UI, with layering already in place.
 // Getter in AllZone: getOverlay()
 @SuppressWarnings("serial")
 public enum FOverlay {
-    /** */
     SINGLETON_INSTANCE;
 
     private final JButton btnClose = new JButton("X");
@@ -74,7 +75,7 @@ public enum FOverlay {
      * Gets the close button, which must be added dynamically since different
      * overlays have different layouts. The overlay does not have the close
      * button by default, but a fully working instance is available if required.
-     * 
+     *
      * @return JButton
      */
     public JButton getBtnClose() {
@@ -90,7 +91,7 @@ public enum FOverlay {
          * For some reason, the alpha channel background doesn't work properly on
          * Windows 7, so the paintComponent override is required for a
          * semi-transparent overlay.
-         * 
+         *
          * @param g
          *            &emsp; Graphics object
          */

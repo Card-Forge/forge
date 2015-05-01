@@ -6,28 +6,29 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.itemmanager.views;
 
-import forge.item.InventoryItem;
-import forge.itemmanager.ColumnDef;
-import forge.toolbox.FSkin;
+import java.awt.Component;
+import java.awt.event.MouseEvent;
 
-import javax.swing.*;
+import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import java.awt.*;
-import java.awt.event.MouseEvent;
+import forge.item.InventoryItem;
+import forge.itemmanager.ColumnDef;
+import forge.toolbox.FSkin;
 
 /**
  * Base cell renderer class for item tables
@@ -36,7 +37,7 @@ import java.awt.event.MouseEvent;
 public class ItemCellRenderer extends DefaultTableCellRenderer {
     private static final Border DEFAULT_BORDER = new EmptyBorder(1, 1, 1, 1);
 
-    public static ItemCellRenderer getColumnDefRenderer(ColumnDef columnDef) {
+    public static ItemCellRenderer getColumnDefRenderer(final ColumnDef columnDef) {
         switch (columnDef) {
         case POWER:
         case TOUGHNESS:
@@ -66,12 +67,12 @@ public class ItemCellRenderer extends DefaultTableCellRenderer {
         return false;
     }
 
-    public <T extends InventoryItem> void processMouseEvent(final MouseEvent e, final ItemListView<T> listView, final Object value, final int row, final int column) {
+    protected <T extends InventoryItem> void processMouseEvent(final MouseEvent e, final ItemListView<T> listView, final Object value, final int row, final int column) {
     }
 
     @Override
-    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        JLabel lbl = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+    public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column) {
+        final JLabel lbl = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         lbl.setBorder(DEFAULT_BORDER); //prevent selected cell having inner border
         if (isSelected) {
             lbl.setBackground(table.getSelectionBackground());
@@ -85,5 +86,5 @@ public class ItemCellRenderer extends DefaultTableCellRenderer {
             }
         }
         return lbl;
-    } 
+    }
 }

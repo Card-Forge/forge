@@ -1,27 +1,31 @@
 package forge.toolbox;
 
-import forge.UiCommand;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Cursor;
+import java.awt.Desktop;
+import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.net.URI;
 import java.net.URISyntaxException;
+
+import javax.swing.SwingWorker;
+
+import forge.UiCommand;
 
 
 @SuppressWarnings("serial")
 public class FHyperlink extends FLabel {
     public static class Builder extends FLabel.Builder {
         private String bldUrl;
-        
+
         public Builder() {
             bldHoverable        = true;
             bldReactOnMouseDown = true;
             bldCmd = null;
         }
-        
+
+        @Override
         public FHyperlink build() {
-            StringBuilder sb = new StringBuilder();
+            final StringBuilder sb = new StringBuilder();
             sb.append("<html><a href='").append(bldUrl).append("'>");
             sb.append((null == bldText || bldText.isEmpty()) ? bldUrl : bldText);
             sb.append("</a></html>");
@@ -33,15 +37,15 @@ public class FHyperlink extends FLabel {
             else {
                 tooltip(bldUrl + " (click to copy to clipboard)");
             }
-            
+
             final URI uri;
             try {
                 uri = new URI(bldUrl);
             }
-            catch (URISyntaxException e) {
+            catch (final URISyntaxException e) {
                 throw new RuntimeException(e);
             }
-            
+
             // overwrite whatever command is there -- we could chain them if we wanted to, though
             cmdClick(new UiCommand() {
                 @Override
@@ -52,11 +56,11 @@ public class FHyperlink extends FLabel {
                     }
                     else {
                         // copy link to clipboard
-                        StringSelection ss = new StringSelection(bldUrl);
+                        final StringSelection ss = new StringSelection(bldUrl);
                         try {
                             Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
                         }
-                        catch (IllegalStateException ex) {
+                        catch (final IllegalStateException ex) {
                             FOptionPane.showErrorDialog(
                                     "Sorry, a problem occurred while copying this link to your system clipboard.",
                                     "A problem occurred");
@@ -64,12 +68,12 @@ public class FHyperlink extends FLabel {
                     }
                 }
             });
-            
+
             return new FHyperlink(this);
         }
-        
-        public Builder url(String url) { bldUrl = url; return this; }
-        
+
+        public Builder url(final String url) { bldUrl = url; return this; }
+
         private static boolean _isBrowsingSupported() {
             if (!Desktop.isDesktopSupported()) {
                 return false;
@@ -77,18 +81,18 @@ public class FHyperlink extends FLabel {
             return Desktop.getDesktop().isSupported(Desktop.Action.BROWSE);
         }
     }
-    
+
     // Call this using FLabel.Builder()...
     private FHyperlink(final Builder b) {
         super(b);
-        
+
         setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
     private static class _LinkRunner extends SwingWorker<Void, Void> {
         private final URI uri;
 
-        private _LinkRunner(URI u) {
+        private _LinkRunner(final URI u) {
             if (u == null) {
                 throw new NullPointerException();
             }

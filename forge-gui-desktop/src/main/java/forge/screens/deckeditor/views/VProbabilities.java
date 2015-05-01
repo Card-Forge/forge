@@ -1,5 +1,15 @@
 package forge.screens.deckeditor.views;
 
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import net.miginfocom.swing.MigLayout;
 import forge.deck.DeckBase;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -13,16 +23,8 @@ import forge.screens.deckeditor.controllers.CProbabilities;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
-import net.miginfocom.swing.MigLayout;
 
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.List;
-
-/** 
+/**
  * Assembles Swing components of deck editor analysis tab.
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
@@ -43,8 +45,8 @@ public enum VProbabilities implements IVDoc<CProbabilities> {
             .fontSize(12).text("SAMPLE HAND").opaque(true).build();
     private final FLabel lblRemainingDraws = new FLabel.Builder().fontStyle(Font.BOLD)
             .fontSize(12).text("REMAINING DRAWS").opaque(true).build();
-   // private final JLabel lblExplanation = new FLabel.Builder()
-     //       .fontSize(11).text("XX % = frequency that card will appear at that position").build();
+    // private final JLabel lblExplanation = new FLabel.Builder()
+    //       .fontSize(11).text("XX % = frequency that card will appear at that position").build();
 
     // Layout containers
     private final JPanel pnlContent = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
@@ -61,14 +63,14 @@ public enum VProbabilities implements IVDoc<CProbabilities> {
 
         lblSampleHand.setBorder(new FSkin.MatteSkinBorder(1, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
         lblSampleHand.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        
+
         lblRemainingDraws.setBorder(new FSkin.MatteSkinBorder(1, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
         lblRemainingDraws.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         // Core layout
         pnlContent.add(lblReshuffle, "w 96%!, h 29px!, gap 2% 0 5px 5px");
         pnlContent.add(lblSampleHand, "w 96%!, h 25px!, gap 2% 0 0 0");
-       // pnlContent.add(lblExplanation, "w 96%!, h 25px!, gap 2% 0 0 0");
+        // pnlContent.add(lblExplanation, "w 96%!, h 25px!, gap 2% 0 0 0");
         pnlContent.add(pnlHand, "w 96%!, gap 2% 0 0 5px");
         pnlContent.add(lblRemainingDraws, "w 96%!, h 25px!, gap 2% 0 0 0");
         pnlContent.add(pnlLibrary, "w 96%!, gap 2% 0 5px 0");
@@ -152,7 +154,7 @@ public enum VProbabilities implements IVDoc<CProbabilities> {
         pnlLibrary.validate();
     }
 
-    private <T extends InventoryItem, TModel extends DeckBase> JLabel buildLabel(final boolean zebra) {
+    private static <T extends InventoryItem, TModel extends DeckBase> JLabel buildLabel(final boolean zebra) {
         final FLabel lbl = new FLabel.Builder().text("--")
                 .fontAlign(SwingConstants.CENTER).fontSize(13)
                 .build();
@@ -168,7 +170,7 @@ public enum VProbabilities implements IVDoc<CProbabilities> {
                 final String name1 = lbl.getText();
                 String name2;
 
-                for (PaperCard c : cards) {
+                for (final PaperCard c : cards) {
                     name2 = c.getName();
                     if (name2.length() > name1.length()) { continue; }
 

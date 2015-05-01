@@ -6,17 +6,35 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package forge.gui;
+
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.util.Collection;
+import java.util.List;
+
+import javax.swing.AbstractListModel;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
@@ -27,17 +45,6 @@ import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.util.Collection;
-import java.util.List;
-
 /**
  * A simple class that shows a list of choices in a dialog. Two properties
  * influence the behavior of a list chooser: minSelection and maxSelection.
@@ -46,8 +53,8 @@ import java.util.List;
  * and the choice doesn't matter.
  * <ul>
  * <li>If minSelection is 0, there will be a Cancel button.</li>
- * <li>If minSelection is -1, 0 or 1, double-clicking a choice will also close the
- * dialog.</li>
+ * <li>If minSelection is -1, 0 or 1, double-clicking a choice will also close
+ * the dialog.</li>
  * <li>If the number of selections is out of bounds, the "OK" button is
  * disabled.</li>
  * <li>The dialog was "committed" if "OK" was clicked or a choice was double
@@ -56,7 +63,7 @@ import java.util.List;
  * <li>If the dialog was canceled, the selection will be empty.</li>
  * <li>
  * </ul>
- * 
+ *
  * @param <T>
  *            the generic type
  * @author Forge
@@ -64,15 +71,15 @@ import java.util.List;
  */
 public class ListChooser<T> {
     // Data and number of choices for the list
-    private List<T> list;
-    private int minChoices, maxChoices;
+    private final List<T> list;
+    private final int minChoices, maxChoices;
 
     // Flag: was the dialog already shown?
     private boolean called;
 
     // initialized before; listeners may be added to it
-    private FList<T> lstChoices;
-    private FOptionPane optionPane;
+    private final FList<T> lstChoices;
+    private final FOptionPane optionPane;
 
     public ListChooser(final String title, final int minChoices, final int maxChoices, final Collection<T> list, final Function<T, String> display) {
         FThreads.assertExecutedByEdt(true);
@@ -97,7 +104,7 @@ public class ListChooser<T> {
             this.lstChoices.setCellRenderer(new TransformedCellRenderer(display));
         }
 
-        FScrollPane listScroller = new FScrollPane(this.lstChoices, true);
+        final FScrollPane listScroller = new FScrollPane(this.lstChoices, true);
         int minWidth = this.lstChoices.getAutoSizeWidth();
         if (this.lstChoices.getModel().getSize() > this.lstChoices.getVisibleRowCount()) {
             minWidth += listScroller.getVerticalScrollBar().getPreferredSize().width;
@@ -120,16 +127,14 @@ public class ListChooser<T> {
         }
 
         this.lstChoices.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
+            @Override public void keyPressed(final KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     ListChooser.this.commit();
                 }
             }
         });
         this.lstChoices.addMouseListener(new FMouseAdapter() {
-            @Override
-            public void onLeftClick(MouseEvent e) {
+            @Override public void onLeftClick(final MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     ListChooser.this.commit();
                 }
@@ -140,7 +145,7 @@ public class ListChooser<T> {
     /**
      * Returns the FList used in the list chooser. this is useful for
      * registering listeners before showing the dialog.
-     * 
+     *
      * @return a {@link javax.swing.JList} object.
      */
     public FList<T> getLstChoices() {
@@ -154,7 +159,7 @@ public class ListChooser<T> {
 
     /**
      * Shows the dialog and returns after the dialog was closed.
-     * 
+     *
      * @param index0 index to select when shown
      * @return a boolean.
      */
@@ -194,7 +199,7 @@ public class ListChooser<T> {
     /**
      * Returns if the dialog was closed by pressing "OK" or double clicking an
      * option the last time.
-     * 
+     *
      * @return a boolean.
      */
     public boolean isCommitted() {
@@ -206,7 +211,7 @@ public class ListChooser<T> {
 
     /**
      * Returns the selected indices as a list of integers.
-     * 
+     *
      * @return a {@link java.util.List} object.
      */
     public int[] getSelectedIndices() {
@@ -219,7 +224,7 @@ public class ListChooser<T> {
     /**
      * Returns the selected values as a list of objects. no casts are necessary
      * when retrieving the objects.
-     * 
+     *
      * @return a {@link java.util.List} object.
      */
     public List<T> getSelectedValues() {
@@ -231,7 +236,7 @@ public class ListChooser<T> {
 
     /**
      * Returns the (minimum) selected index, or -1.
-     * 
+     *
      * @return a int.
      */
     public int getSelectedIndex() {
@@ -243,14 +248,14 @@ public class ListChooser<T> {
 
     /**
      * Returns the (first) selected value, or null.
-     * 
+     *
      * @return a T object.
      */
     public T getSelectedValue() {
         if (!this.called) {
             throw new IllegalStateException("not yet shown");
         }
-        return (T) this.lstChoices.getSelectedValue();
+        return this.lstChoices.getSelectedValue();
     }
 
     /**
@@ -302,7 +307,7 @@ public class ListChooser<T> {
          * @see javax.swing.ListCellRenderer#getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
          */
         @Override
-        public Component getListCellRendererComponent(JList<? extends T> list, T value, int index, boolean isSelected, boolean cellHasFocus) {
+        public Component getListCellRendererComponent(final JList<? extends T> list, final T value, final int index, final boolean isSelected, final boolean cellHasFocus) {
             // TODO Auto-generated method stub
             return defRenderer.getListCellRendererComponent(list, transformer.apply(value), index, isSelected, cellHasFocus);
         }

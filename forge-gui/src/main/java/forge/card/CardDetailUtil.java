@@ -21,6 +21,7 @@ import forge.item.SealedProduct;
 import forge.util.Lang;
 
 public class CardDetailUtil {
+
     private CardDetailUtil() {
     }
 
@@ -43,7 +44,7 @@ public class CardDetailUtil {
 
         public final int r, g, b;
 
-        private DetailColors(int r0, int g0, int b0) {
+        private DetailColors(final int r0, final int g0, final int b0) {
             r = r0;
             g = g0;
             b = b0;
@@ -56,9 +57,6 @@ public class CardDetailUtil {
         }
         return getBorderColors(card.getColors(), card.isLand(), canShow, false).iterator().next();
     }
-    public static DetailColors getBorderColor(final ColorSet cardColors, final boolean isLand, boolean canShow) {
-        return getBorderColors(cardColors, isLand, canShow, false).get(0);
-    }
     public static List<DetailColors> getBorderColors(final CardStateView card, final boolean canShow) {
         if (card == null) {
             return getBorderColors(null, false, false, true);
@@ -68,8 +66,8 @@ public class CardDetailUtil {
     public static List<DetailColors> getBorderColors(final ColorSet colorSet) {
         return getBorderColors(colorSet, false, true, true);
     }
-    private static List<DetailColors> getBorderColors(final ColorSet cardColors, final boolean isLand, boolean canShow, boolean supportMultiple) {
-        List<DetailColors> borderColors = new ArrayList<DetailColors>();
+    private static List<DetailColors> getBorderColors(final ColorSet cardColors, final boolean isLand, final boolean canShow, final boolean supportMultiple) {
+        final List<DetailColors> borderColors = new ArrayList<DetailColors>();
 
         if (cardColors == null || !canShow) {
             borderColors.add(DetailColors.FACE_DOWN);
@@ -83,7 +81,7 @@ public class CardDetailUtil {
             }
         }
         else {
-            int colorCount = cardColors.countColors();
+            final int colorCount = cardColors.countColors();
             if (colorCount > 2 || (colorCount > 1 && !supportMultiple)) {
                 borderColors.add(DetailColors.MULTICOLOR);
             }
@@ -162,7 +160,7 @@ public class CardDetailUtil {
         if (item instanceof PreconDeck) {
             return ((PreconDeck) item).getDescription();
         }
-        return item.getName(); 
+        return item.getName();
     }
 
     public static String formatCardName(final CardView card, final boolean canShow, final boolean forAltState) {
@@ -178,7 +176,7 @@ public class CardDetailUtil {
         if (!canShow && card.getState() != CardStateName.FaceDown) {
             return "";
         }
-        StringBuilder ptText = new StringBuilder();
+        final StringBuilder ptText = new StringBuilder();
         if (card.isCreature()) {
             ptText.append(card.getPower()).append(" / ").append(card.getToughness());
         }
@@ -250,7 +248,7 @@ public class CardDetailUtil {
         }
         for (final Entry<String, String> e : Sets.union(changedColorWords.entrySet(), changedTypes.entrySet())) {
             // ignore lower case and plural form keys, to avoid duplicity
-            if (Character.isUpperCase(e.getKey().charAt(0)) && 
+            if (Character.isUpperCase(e.getKey().charAt(0)) &&
                     !CardUtil.singularTypes.containsKey(e.getKey())) {
                 area.append("Text changed: all instances of ");
                 if (e.getKey().equals("Any")) {

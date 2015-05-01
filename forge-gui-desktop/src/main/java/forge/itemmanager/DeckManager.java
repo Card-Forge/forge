@@ -53,7 +53,7 @@ import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 
-/** 
+/**
  * ItemManager for decks
  *
  */
@@ -78,8 +78,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         this.gameType = gt;
 
         this.addSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
+            @Override public void valueChanged(final ListSelectionEvent e) {
                 if (cmdSelect != null) {
                     cmdSelect.run();
                 }
@@ -94,18 +93,19 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         });
     }
 
+    @Override
     public GameType getGameType() {
         return gameType;
     }
 
     @Override
-    public void setup(ItemManagerConfig config0) {
-        boolean wasStringOnly = (this.getConfig() == ItemManagerConfig.STRING_ONLY);
-        boolean isStringOnly = (config0 == ItemManagerConfig.STRING_ONLY);
+    public void setup(final ItemManagerConfig config0) {
+        final boolean wasStringOnly = (this.getConfig() == ItemManagerConfig.STRING_ONLY);
+        final boolean isStringOnly = (config0 == ItemManagerConfig.STRING_ONLY);
 
         Map<ColumnDef, ItemTableColumn> colOverrides = null;
         if (config0.getCols().containsKey(ColumnDef.DECK_ACTIONS)) {
-            ItemTableColumn column = new ItemTableColumn(new ItemColumn(config0.getCols().get(ColumnDef.DECK_ACTIONS)));
+            final ItemTableColumn column = new ItemTableColumn(new ItemColumn(config0.getCols().get(ColumnDef.DECK_ACTIONS)));
             column.setCellRenderer(new DeckActionsRenderer());
             colOverrides = new HashMap<ColumnDef, ItemTableColumn>();
             colOverrides.put(ColumnDef.DECK_ACTIONS, column);
@@ -148,17 +148,17 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     }
 
     @Override
-    protected void buildAddFilterMenu(JMenu menu) {
+    protected void buildAddFilterMenu(final JMenu menu) {
         GuiUtils.addSeparator(menu); //separate from current search item
 
-        Set<String> folders = new HashSet<String>();
+        final Set<String> folders = new HashSet<String>();
         for (final Entry<DeckProxy, Integer> deckEntry : getPool()) {
-            String path = deckEntry.getKey().getPath();
+            final String path = deckEntry.getKey().getPath();
             if (StringUtils.isNotEmpty(path)) { //don't include root folder as option
                 folders.add(path);
             }
         }
-        JMenu folder = GuiUtils.createMenu("Folder");
+        final JMenu folder = GuiUtils.createMenu("Folder");
         if (folders.size() > 0) {
             for (final String f : folders) {
                 GuiUtils.addMenuItem(folder, f, null, new Runnable() {
@@ -174,7 +174,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         }
         menu.add(folder);
 
-        JMenu fmt = GuiUtils.createMenu("Format");
+        final JMenu fmt = GuiUtils.createMenu("Format");
         for (final GameFormat f : FModel.getFormats().getOrderedList()) {
             GuiUtils.addMenuItem(fmt, f.getName(), null, new Runnable() {
                 @Override
@@ -186,18 +186,15 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         menu.add(fmt);
 
         GuiUtils.addMenuItem(menu, "Sets...", null, new Runnable() {
-            @Override
-            public void run() {
-                DeckSetFilter existingFilter = getFilter(DeckSetFilter.class);
+            @Override public void run() {
+                final DeckSetFilter existingFilter = getFilter(DeckSetFilter.class);
                 if (existingFilter != null) {
                     existingFilter.edit();
-                }
-                else {
+                } else {
                     final DialogChooseSets dialog = new DialogChooseSets(null, null, true);
                     dialog.setOkCallback(new Runnable() {
-                        @Override
-                        public void run() {
-                            List<String> sets = dialog.getSelectedSets();
+                        @Override public void run() {
+                            final List<String> sets = dialog.getSelectedSets();
                             if (!sets.isEmpty()) {
                                 addFilter(new DeckSetFilter(DeckManager.this, sets, dialog.getWantReprints()));
                             }
@@ -207,11 +204,10 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
             }
         });
 
-        JMenu world = GuiUtils.createMenu("Quest world");
+        final JMenu world = GuiUtils.createMenu("Quest world");
         for (final QuestWorld w : FModel.getWorlds()) {
             GuiUtils.addMenuItem(world, w.getName(), null, new Runnable() {
-                @Override
-                public void run() {
+                @Override public void run() {
                     addFilter(new DeckQuestWorldFilter(DeckManager.this, w));
                 }
             }, DeckQuestWorldFilter.canAddQuestWorld(w, getFilter(DeckQuestWorldFilter.class)));
@@ -235,30 +231,30 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         FScreen screen = null;
 
         switch (this.gameType) {
-            case Quest:
-                screen = FScreen.DECK_EDITOR_QUEST;
-                editorCtrl = new CEditorQuest(FModel.getQuest(), getCDetailPicture());
-                break;
-            case Constructed:
-                screen = FScreen.DECK_EDITOR_CONSTRUCTED;
-                DeckPreferences.setCurrentDeck(deck.toString());
-                //re-use constructed controller
-                break;
-            case Sealed:
-                screen = FScreen.DECK_EDITOR_SEALED;
-                editorCtrl = new CEditorLimited(FModel.getDecks().getSealed(), screen, getCDetailPicture());
-                break;
-            case Draft:
-                screen = FScreen.DECK_EDITOR_DRAFT;
-                editorCtrl = new CEditorLimited(FModel.getDecks().getDraft(), screen, getCDetailPicture());
-                break;
-            case Winston:
-                screen = FScreen.DECK_EDITOR_DRAFT;
-                editorCtrl = new CEditorLimited(FModel.getDecks().getWinston(), screen, getCDetailPicture());
-                break;
+        case Quest:
+            screen = FScreen.DECK_EDITOR_QUEST;
+            editorCtrl = new CEditorQuest(FModel.getQuest(), getCDetailPicture());
+            break;
+        case Constructed:
+            screen = FScreen.DECK_EDITOR_CONSTRUCTED;
+            DeckPreferences.setCurrentDeck(deck.toString());
+            //re-use constructed controller
+            break;
+        case Sealed:
+            screen = FScreen.DECK_EDITOR_SEALED;
+            editorCtrl = new CEditorLimited(FModel.getDecks().getSealed(), screen, getCDetailPicture());
+            break;
+        case Draft:
+            screen = FScreen.DECK_EDITOR_DRAFT;
+            editorCtrl = new CEditorLimited(FModel.getDecks().getDraft(), screen, getCDetailPicture());
+            break;
+        case Winston:
+            screen = FScreen.DECK_EDITOR_DRAFT;
+            editorCtrl = new CEditorLimited(FModel.getDecks().getWinston(), screen, getCDetailPicture());
+            break;
 
-            default:
-                return;
+        default:
+            return;
         }
 
         if (!Singletons.getControl().ensureScreenActive(screen)) { return; }
@@ -272,7 +268,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(deck.getPath(), deck.getName());
     }
 
-    public boolean deleteDeck(DeckProxy deck) {
+    public boolean deleteDeck(final DeckProxy deck) {
         if (deck == null) { return false; }
 
         if (!FOptionPane.showConfirmDialog(
@@ -283,17 +279,17 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
         // consider using deck proxy's method to delete deck
         switch(this.gameType) {
-            case Constructed:
-            case Draft:
-            case Sealed:
-                deck.deleteFromStorage();
-                break;
-            case Quest:
-                deck.deleteFromStorage();
-                FModel.getQuest().save();
-                break;
-            default:
-                throw new UnsupportedOperationException("Delete not implemented for game type = " + gameType.toString());
+        case Constructed:
+        case Draft:
+        case Sealed:
+            deck.deleteFromStorage();
+            break;
+        case Quest:
+            deck.deleteFromStorage();
+            FModel.getQuest().save();
+            break;
+        default:
+            throw new UnsupportedOperationException("Delete not implemented for game type = " + gameType.toString());
         }
 
         this.removeItem(deck, 1);
@@ -305,7 +301,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     }
 
     public class DeckActionsRenderer extends ItemCellRenderer {
-        private int overActionIndex = -1;
+        private final int overActionIndex = -1;
         private static final int imgSize = 20;
 
         @Override
@@ -315,7 +311,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see
          * javax.swing.table.DefaultTableCellRenderer#getTableCellRendererComponent
          * (javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
@@ -329,11 +325,11 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
         @Override
         public <T extends InventoryItem> void processMouseEvent(final MouseEvent e, final ItemListView<T> listView, final Object value, final int row, final int column) {
-            Rectangle cellBounds = listView.getTable().getCellRect(row, column, false);
-            int x = e.getX() - cellBounds.x;
+            final Rectangle cellBounds = listView.getTable().getCellRect(row, column, false);
+            final int x = e.getX() - cellBounds.x;
 
             if (e.getID() == MouseEvent.MOUSE_PRESSED && e.getButton() == 1) {
-                DeckProxy deck = (DeckProxy) value;
+                final DeckProxy deck = (DeckProxy) value;
 
                 if (x >= 0 && x < imgSize) { //delete button
                     if (DeckManager.this.deleteDeck(deck)) {
@@ -370,7 +366,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see javax.swing.JComponent#paint(java.awt.Graphics)
          */
         @Override

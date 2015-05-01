@@ -17,22 +17,78 @@
  */
 package forge.toolbox;
 
-import forge.FThreads;
-import forge.Singletons;
-import forge.assets.FSkinProp;
-import forge.assets.ISkinImage;
-import forge.gui.GuiUtils;
-import forge.gui.framework.ILocalRepaint;
-import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
-import forge.properties.ForgeConstants;
-import forge.view.FView;
-
-import org.apache.commons.lang3.text.WordUtils;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Composite;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Frame;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.LayoutManager;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.Toolkit;
+import java.awt.Window;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Vector;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.AbstractButton;
+import javax.swing.Action;
+import javax.swing.BorderFactory;
+import javax.swing.ComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JEditorPane;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JSlider;
+import javax.swing.JSpinner;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.ListModel;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
@@ -41,25 +97,35 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 import javax.swing.text.JTextComponent;
 
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.util.*;
-import java.util.Map.Entry;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.text.WordUtils;
+
+import forge.FThreads;
+import forge.Singletons;
+import forge.assets.FSkinProp;
+import forge.assets.ISkinImage;
+import forge.gui.GuiUtils;
+import forge.gui.framework.ILocalRepaint;
+import forge.model.FModel;
+import forge.properties.ForgeConstants;
+import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
+import forge.view.FView;
 
 /**
  * Assembles settings from selected or default theme as appropriate. Saves in a
  * hashtable, access using .get(settingName) method.
- * 
  */
 public class FSkin {
+
+    /**
+     * Utf-8 chars representing a bullet symbol.
+     */
+    public static final String BULLET = String.valueOf(new char[] {(char) 226, (char) 128, (char) 162 } );
+
     /**
      * Retrieves a color from this skin's color map.
-     * 
+     *
      * @param c0 &emsp; Colors property (from enum)
      * @return {@link forge.toolbox.SkinColor}
      */
@@ -75,7 +141,7 @@ public class FSkin {
      * @param step int
      * @return {@link java.awt.Color}
      */
-    public static Color stepColor(Color clr0, int step) {
+    public static Color stepColor(final Color clr0, final int step) {
         int r = clr0.getRed();
         int g = clr0.getGreen();
         int b = clr0.getBlue();
@@ -102,42 +168,42 @@ public class FSkin {
      * @param alpha int
      * @return {@link java.awt.Color}
      */
-    public static Color alphaColor(Color clr0, int alpha) {
+    public static Color alphaColor(final Color clr0, final int alpha) {
         return new Color(clr0.getRed(), clr0.getGreen(), clr0.getBlue(), alpha);
     }
 
     /**
      * @see http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx
      */
-    public static boolean isColorBright(Color c) {
-        int v = (int)Math.sqrt(
+    public static boolean isColorBright(final Color c) {
+        final int v = (int)Math.sqrt(
                 c.getRed() * c.getRed() * 0.241 +
                 c.getGreen() * c.getGreen() * 0.691 +
                 c.getBlue() * c.getBlue() * 0.068);
         return v >= 130;
     }
 
-    public static Color getHighContrastColor(Color c) {
+    public static Color getHighContrastColor(final Color c) {
         return isColorBright(c) ? Color.BLACK : Color.WHITE;
     }
 
-    public static void setGraphicsColor(Graphics g, SkinColor skinColor) {
+    public static void setGraphicsColor(final Graphics g, final SkinColor skinColor) {
         g.setColor(skinColor.color);
     }
 
-    public static void setGraphicsGradientPaint(Graphics2D g2d, float x1, float y1, SkinColor skinColor1, float x2, float y2, SkinColor skinColor2) {
+    public static void setGraphicsGradientPaint(final Graphics2D g2d, final float x1, final float y1, final SkinColor skinColor1, final float x2, final float y2, final SkinColor skinColor2) {
         g2d.setPaint(new GradientPaint(x1, y1, skinColor1.color, x2, y2, skinColor2.color));
     }
-    public static void setGraphicsGradientPaint(Graphics2D g2d, float x1, float y1, Color color1, float x2, float y2, SkinColor skinColor2) {
+    public static void setGraphicsGradientPaint(final Graphics2D g2d, final float x1, final float y1, final Color color1, final float x2, final float y2, final SkinColor skinColor2) {
         g2d.setPaint(new GradientPaint(x1, y1, color1, x2, y2, skinColor2.color));
     }
-    public static void setGraphicsGradientPaint(Graphics2D g2d, float x1, float y1, SkinColor skinColor1, float x2, float y2, Color color2) {
+    public static void setGraphicsGradientPaint(final Graphics2D g2d, final float x1, final float y1, final SkinColor skinColor1, final float x2, final float y2, final Color color2) {
         g2d.setPaint(new GradientPaint(x1, y1, skinColor1.color, x2, y2, color2));
     }
 
     //set background color for component that's temporary
     //only use if can't use ISkinnedComponent class
-    public static void setTempBackground(Component comp, SkinColor skinColor) {
+    public static void setTempBackground(final Component comp, final SkinColor skinColor) {
         comp.setBackground(skinColor.color);
     }
 
@@ -158,10 +224,10 @@ public class FSkin {
         public Color getColor() { return color; }
 
         //private constructors for color that changes with skin (use getColor())
-        private SkinColor(Colors baseColor0) {
+        private SkinColor(final Colors baseColor0) {
             this(baseColor0, NO_BRIGHTNESS_DELTA, NO_STEP, NO_STEP, NO_ALPHA);
         }
-        private SkinColor(Colors baseColor0, int brightnessDelta0, int step0, int contrastStep0, int alpha0) {
+        private SkinColor(final Colors baseColor0, final int brightnessDelta0, final int step0, final int contrastStep0, final int alpha0) {
             this.baseColor = baseColor0;
             this.brightnessDelta = brightnessDelta0;
             this.step = step0;
@@ -170,8 +236,8 @@ public class FSkin {
             this.updateColor();
         }
 
-        private SkinColor getDerivedColor(int brightnessDelta0, int step0, int contrastStep0, int alpha0) {
-            String key = this.baseColor.name() + "|" + brightnessDelta0 + "|" + step0 + "|" + contrastStep0 + "|" + alpha0;
+        private SkinColor getDerivedColor(final int brightnessDelta0, final int step0, final int contrastStep0, final int alpha0) {
+            final String key = this.baseColor.name() + "|" + brightnessDelta0 + "|" + step0 + "|" + contrastStep0 + "|" + alpha0;
             SkinColor derivedColor = derivedColors.get(key);
             if (derivedColor == null) {
                 derivedColor = new SkinColor(this.baseColor, brightnessDelta0, step0, contrastStep0, alpha0);
@@ -206,7 +272,7 @@ public class FSkin {
             return getContrastColor(255);
         }
 
-        public SkinColor alphaColor(int alpha0) {
+        public SkinColor alphaColor(final int alpha0) {
             return getDerivedColor(this.brightnessDelta, this.step, this.contrastStep, alpha0);
         }
 
@@ -238,7 +304,7 @@ public class FSkin {
 
     //set border for component that's temporary
     //only use if can't use ISkinnedComponent class
-    public static void setTempBorder(JComponent comp, SkinBorder skinBorder) {
+    public static void setTempBorder(final JComponent comp, final SkinBorder skinBorder) {
         comp.setBorder(skinBorder.createBorder());
     }
 
@@ -249,10 +315,10 @@ public class FSkin {
         private final SkinColor skinColor;
         private final int thickness;
 
-        public LineSkinBorder(SkinColor skinColor0) {
+        public LineSkinBorder(final SkinColor skinColor0) {
             this(skinColor0, 1);
         }
-        public LineSkinBorder(SkinColor skinColor0, int thickness0) {
+        public LineSkinBorder(final SkinColor skinColor0, final int thickness0) {
             this.skinColor = skinColor0;
             this.thickness = thickness0;
         }
@@ -266,7 +332,7 @@ public class FSkin {
         private final int top, left, bottom, right;
         private final SkinColor skinColor;
 
-        public MatteSkinBorder(int top0, int left0, int bottom0, int right0, SkinColor skinColor0) {
+        public MatteSkinBorder(final int top0, final int left0, final int bottom0, final int right0, final SkinColor skinColor0) {
             this.top = top0;
             this.left = left0;
             this.bottom = bottom0;
@@ -283,15 +349,15 @@ public class FSkin {
         private Border outsideBorder, insideBorder;
         private SkinBorder outsideSkinBorder, insideSkinBorder;
 
-        public CompoundSkinBorder(SkinBorder outsideSkinBorder0, SkinBorder insideSkinBorder0) {
+        public CompoundSkinBorder(final SkinBorder outsideSkinBorder0, final SkinBorder insideSkinBorder0) {
             this.outsideSkinBorder = outsideSkinBorder0;
             this.insideSkinBorder = insideSkinBorder0;
         }
-        public CompoundSkinBorder(SkinBorder outsideSkinBorder0, Border insideBorder0) {
+        public CompoundSkinBorder(final SkinBorder outsideSkinBorder0, final Border insideBorder0) {
             this.outsideSkinBorder = outsideSkinBorder0;
             this.insideBorder = insideBorder0;
         }
-        public CompoundSkinBorder(Border outsideBorder0, SkinBorder insideSkinBorder0) {
+        public CompoundSkinBorder(final Border outsideBorder0, final SkinBorder insideSkinBorder0) {
             this.outsideBorder = outsideBorder0;
             this.insideSkinBorder = insideSkinBorder0;
         }
@@ -315,13 +381,13 @@ public class FSkin {
         private Border insideBorder;
         private SkinBorder insideSkinBorder;
 
-        public TitledSkinBorder(Border insideBorder0, String title0, SkinColor foreColor0) {
+        public TitledSkinBorder(final Border insideBorder0, final String title0, final SkinColor foreColor0) {
             this.insideBorder = insideBorder0;
             this.title = title0;
             this.foreColor = foreColor0;
         }
 
-        public TitledSkinBorder(SkinBorder insideSkinBorder0, String title0, SkinColor foreColor0) {
+        public TitledSkinBorder(final SkinBorder insideSkinBorder0, final String title0, final SkinColor foreColor0) {
             this.insideSkinBorder = insideSkinBorder0;
             this.title = title0;
             this.foreColor = foreColor0;
@@ -333,7 +399,7 @@ public class FSkin {
             if (this.insideSkinBorder != null) {
                 inBorder = this.insideSkinBorder.createBorder();
             }
-            TitledBorder border = new TitledBorder(inBorder, this.title);
+            final TitledBorder border = new TitledBorder(inBorder, this.title);
             border.setTitleColor(foreColor.color);
             return border;
         }
@@ -357,13 +423,13 @@ public class FSkin {
         CLR_NORMAL_TARGETING_ARROW(FSkinProp.CLR_NORMAL_TARGETING_ARROW);
 
         private Color color;
-        private FSkinProp skinProp;
+        private final FSkinProp skinProp;
 
-        private Colors(FSkinProp skinProp0) {
+        private Colors(final FSkinProp skinProp0) {
             skinProp = skinProp0;
         }
 
-        public static Colors fromSkinProp(FSkinProp skinProp) {
+        public static Colors fromSkinProp(final FSkinProp skinProp) {
             for (final Colors c : Colors.values()) {
                 if (c.skinProp == skinProp) {
                     return c;
@@ -400,13 +466,13 @@ public class FSkin {
         }
     }
 
-    public static void drawImage(Graphics g, SkinImage skinImage, int x, int y) {
+    public static void drawImage(final Graphics g, final SkinImage skinImage, final int x, final int y) {
         skinImage.draw(g, x, y);
     }
-    public static void drawImage(Graphics g, SkinImage skinImage, int x, int y, int w, int h) {
+    public static void drawImage(final Graphics g, final SkinImage skinImage, final int x, final int y, final int w, final int h) {
         skinImage.draw(g, x, y, w, h);
     }
-    public static void drawImage(Graphics g, SkinImage skinImage, int dx1, int dy1, int dx2, int dy2, int sx1, int sy1, int sx2, int sy2) {
+    public static void drawImage(final Graphics g, final SkinImage skinImage, final int dx1, final int dy1, final int dx2, final int dy2, final int sx1, final int sy1, final int sx2, final int sy2) {
         skinImage.draw(g, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2);
     }
 
@@ -429,7 +495,7 @@ public class FSkin {
 
     /**
      * Gets a scaled version of an image from this skin's image map.
-     * 
+     *
      * @param s0
      *            String image enum
      * @param w0
@@ -447,7 +513,7 @@ public class FSkin {
     public static class SkinImage implements ISkinImage {
         private static final Map<FSkinProp, SkinImage> images = new HashMap<FSkinProp, SkinImage>();
 
-        private static void setImage(final FSkinProp s0, Image image0) {
+        private static void setImage(final FSkinProp s0, final Image image0) {
             SkinImage skinImage = images.get(s0);
             if (skinImage == null) {
                 skinImage = new SkinImage(image0);
@@ -460,7 +526,7 @@ public class FSkin {
 
         /**
          * setImage, with auto-scaling assumed true.
-         * 
+         *
          * @param s0
          */
         private static void setImage(final FSkinProp s0) {
@@ -470,12 +536,12 @@ public class FSkin {
         /**
          * Checks the preferred sprite for existence of a sub-image
          * defined by X, Y, W, H.
-         * 
+         *
          * If an image is not present at those coordinates, default
          * icon is substituted.
-         * 
+         *
          * The result is saved in a HashMap.
-         * 
+         *
          * @param s0 &emsp; An address in the hashmap, derived from FSkinProp enum
          */
         private static void setImage(final FSkinProp s0, final boolean scale) {
@@ -502,26 +568,27 @@ public class FSkin {
         protected HashMap<String, SkinImage> scaledImages;
         private HashMap<String, SkinCursor> cursors;
 
-        private SkinImage(Image image0) {
+        private SkinImage(final Image image0) {
             this.image = image0;
         }
 
-        protected void changeImage(Image image0, ImageIcon imageIcon0) {
+        protected void changeImage(final Image image0, final ImageIcon imageIcon0) {
             this.image = image0;
             this.imageIcon = imageIcon0;
             this.updateScaledImages();
             this.updateCursors();
         }
 
+        @Override
         protected SkinImage clone() {
             return new SkinImage(this.image);
         }
 
-        public SkinImage resize(int w, int h) {
+        public SkinImage resize(final int w, final int h) {
             if (this.scaledImages == null) {
                 this.scaledImages = new HashMap<String, SkinImage>();
             }
-            String key = w + "x" + h;
+            final String key = w + "x" + h;
             SkinImage scaledImage = this.scaledImages.get(key);
             if (scaledImage == null) {
                 scaledImage = this.clone();
@@ -531,32 +598,32 @@ public class FSkin {
             return scaledImage;
         }
 
-        public boolean save(String path, int w, int h) {
-        	final BufferedImage resizedImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        public boolean save(final String path, final int w, final int h) {
+            final BufferedImage resizedImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 
             final Graphics2D g2d = resizedImage.createGraphics();
             g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
             g2d.drawImage(this.image, 0, 0, w, h, 0, 0, this.getWidth(), this.getHeight(), null);
             g2d.dispose();
 
-            File outputfile = new File(path);
+            final File outputfile = new File(path);
             try {
-				ImageIO.write(resizedImage, "png", outputfile);
-				return true;
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+                ImageIO.write(resizedImage, "png", outputfile);
+                return true;
+            } catch (final IOException e) {
+                e.printStackTrace();
+            }
             return false;
         }
 
-        public SkinImage scale(double scale) {
+        public SkinImage scale(final double scale) {
             return scale(scale, scale);
         }
-        public SkinImage scale(double scaleX, double scaleY) {
+        public SkinImage scale(final double scaleX, final double scaleY) {
             if (this.scaledImages == null) {
                 this.scaledImages = new HashMap<String, SkinImage>();
             }
-            String key = scaleX + "|" + scaleY;
+            final String key = scaleX + "|" + scaleY;
             SkinImage scaledImage = this.scaledImages.get(key);
             if (scaledImage == null) {
                 scaledImage = this.clone();
@@ -569,7 +636,7 @@ public class FSkin {
         protected void updateScaledImages() {
             if (this.scaledImages == null) { return; }
 
-            for (Entry<String, SkinImage> i : this.scaledImages.entrySet()) {
+            for (final Entry<String, SkinImage> i : this.scaledImages.entrySet()) {
                 String[] dims = i.getKey().split("x");
                 if (dims.length == 2) { //static scale
                     i.getValue().createResizedImage(this, Integer.parseInt(dims[0]), Integer.parseInt(dims[1]));
@@ -581,7 +648,7 @@ public class FSkin {
             }
         }
 
-        protected void createResizedImage(SkinImage baseImage, int w, int h) {
+        protected void createResizedImage(final SkinImage baseImage, final int w, final int h) {
             final BufferedImage resizedImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 
             final Graphics2D g2d = resizedImage.createGraphics();
@@ -592,15 +659,15 @@ public class FSkin {
             this.changeImage(resizedImage, null);
         }
 
-        private void createScaledImage(SkinImage baseImage, double scaleX, double scaleY) {
+        private void createScaledImage(final SkinImage baseImage, final double scaleX, final double scaleY) {
             createResizedImage(baseImage, (int)(baseImage.getWidth() * scaleX), (int)(baseImage.getHeight() * scaleY));
         }
 
-        private SkinCursor toCursor(int hotSpotX, int hotSpotY, String name) {
+        private SkinCursor toCursor(final int hotSpotX, final int hotSpotY, final String name) {
             if (this.cursors == null) {
                 this.cursors = new HashMap<String, SkinCursor>();
             }
-            String key = hotSpotX + "|" + hotSpotY + "|" + name;
+            final String key = hotSpotX + "|" + hotSpotY + "|" + name;
             SkinCursor cursor = this.cursors.get(key);
             if (cursor == null) {
                 cursor = new SkinCursor(new Point(hotSpotX, hotSpotY), name);
@@ -613,12 +680,12 @@ public class FSkin {
         private void updateCursors() {
             if (this.cursors == null) { return; }
 
-            for (SkinCursor cursor : this.cursors.values()) {
+            for (final SkinCursor cursor : this.cursors.values()) {
                 cursor.updateCursor(this.image);
             }
         }
 
-        public Dimension getSizeForPaint(Graphics g) {
+        public Dimension getSizeForPaint(final Graphics g) {
             if (g == null) {
                 throw new NullPointerException("Must pass Graphics to get size for paint");
             }
@@ -640,13 +707,13 @@ public class FSkin {
             return this.imageIcon;
         }
 
-        protected void draw(Graphics g, int x, int y) {
+        protected void draw(final Graphics g, final int x, final int y) {
             g.drawImage(image, x, y, null);
         }
-        protected void draw(Graphics g, int x, int y, int w, int h) {
+        protected void draw(final Graphics g, final int x, final int y, final int w, final int h) {
             g.drawImage(image, x, y, w, h, null);
         }
-        protected void draw(Graphics g, int dx1, int dy1, int dx2, int dy2, int sx1, int sy1, int sx2, int sy2) {
+        protected void draw(final Graphics g, final int dx1, final int dy1, final int dx2, final int dy2, final int sx1, final int sy1, final int sx2, final int sy2) {
             g.drawImage(image, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, null);
         }
     }
@@ -657,7 +724,7 @@ public class FSkin {
      * @param s0 &emsp; FSkinProp enum
      * @return {@link forge.toolbox.SkinCursor}
      */
-    public static SkinCursor getCursor(final FSkinProp s0, int hotSpotX, int hotSpotY, String name) {
+    public static SkinCursor getCursor(final FSkinProp s0, final int hotSpotX, final int hotSpotY, final String name) {
         return getImage(s0).toCursor(hotSpotX, hotSpotY, name);
     }
 
@@ -668,12 +735,12 @@ public class FSkin {
         private final String name;
         private Cursor cursor;
 
-        private SkinCursor(Point hotSpot0, String name0) {
+        private SkinCursor(final Point hotSpot0, final String name0) {
             this.hotSpot = hotSpot0;
             this.name = name0;
         }
 
-        private void updateCursor(Image image) {
+        private void updateCursor(final Image image) {
             this.cursor = TOOLS.createCustomCursor(image, this.hotSpot, this.name);
         }
     }
@@ -685,7 +752,7 @@ public class FSkin {
      * @return {@link forge.toolbox.SkinImage}
      */
     public static SkinIcon getIcon(final FSkinProp s0) {
-        SkinIcon icon = SkinIcon.icons.get(s0);
+        final SkinIcon icon = SkinIcon.icons.get(s0);
         if (icon == null) {
             throw new NullPointerException("Can't find an icon for FSkinProp " + s0);
         }
@@ -695,7 +762,7 @@ public class FSkin {
     public static class SkinIcon extends SkinImage {
         private static final Map<FSkinProp, SkinIcon> icons = new HashMap<FSkinProp, SkinIcon>();
 
-        private static void setIcon(final FSkinProp s0, ImageIcon imageIcon0) {
+        private static void setIcon(final FSkinProp s0, final ImageIcon imageIcon0) {
             SkinIcon skinIcon = icons.get(s0);
             if (skinIcon == null) {
                 skinIcon = new SkinIcon(imageIcon0);
@@ -721,7 +788,7 @@ public class FSkin {
         /**
          * Sets an icon in this skin's icon map from a file address.
          * Throws IO exception for debugging if needed.
-         * 
+         *
          * @param s0
          *            &emsp; Skin property (from enum)
          * @param s1
@@ -739,7 +806,7 @@ public class FSkin {
 
         /**
          * Sets an icon in this skin's icon map from a buffered image.
-         * 
+         *
          * @param s0 &emsp; Skin property (from enum)
          * @param bi0 &emsp; BufferedImage
          */
@@ -747,7 +814,7 @@ public class FSkin {
             setIcon(s0, new ImageIcon(bi0));
         }
 
-        private SkinIcon(ImageIcon imageIcon0) {
+        private SkinIcon(final ImageIcon imageIcon0) {
             super(imageIcon0.getImage());
             this.imageIcon = imageIcon0;
         }
@@ -758,22 +825,22 @@ public class FSkin {
         }
 
         @Override
-        public SkinIcon resize(int w, int h) {
+        public SkinIcon resize(final int w, final int h) {
             return (SkinIcon)super.resize(w, h);
         }
 
         @Override
-        public SkinIcon scale(double scale) {
+        public SkinIcon scale(final double scale) {
             return scale(scale, scale);
         }
         @Override
-        public SkinIcon scale(double scaleX, double scaleY) {
+        public SkinIcon scale(final double scaleX, final double scaleY) {
             return (SkinIcon)super.scale(scaleX, scaleY);
         }
 
         @Override
-        protected void createResizedImage(SkinImage baseImage, int w, int h) {
-            Image image0 = baseImage.image.getScaledInstance(w, h, java.awt.Image.SCALE_SMOOTH);
+        protected void createResizedImage(final SkinImage baseImage, final int w, final int h) {
+            final Image image0 = baseImage.image.getScaledInstance(w, h, java.awt.Image.SCALE_SMOOTH);
             this.changeImage(image0, new ImageIcon(image0));
         }
 
@@ -797,14 +864,14 @@ public class FSkin {
     public static class UnskinnedIcon extends SkinIcon {
         private final float opacity;
 
-        public UnskinnedIcon(String path0) {
+        public UnskinnedIcon(final String path0) {
             super(new ImageIcon(path0));
             opacity = 1;
         }
-        public UnskinnedIcon(BufferedImage i0) {
+        public UnskinnedIcon(final BufferedImage i0) {
             this(i0, 1);
         }
-        public UnskinnedIcon(BufferedImage i0, float opacity0) {
+        public UnskinnedIcon(final BufferedImage i0, final float opacity0) {
             super(new ImageIcon(i0));
             opacity = opacity0;
         }
@@ -815,37 +882,37 @@ public class FSkin {
         }
 
         @Override
-        protected void draw(Graphics g, int x, int y) {
+        protected void draw(final Graphics g, final int x, final int y) {
             if (opacity == 1) {
                 super.draw(g, x, y);
                 return;
             }
-            Graphics2D g2d = (Graphics2D)g;
-            Composite oldComp = g2d.getComposite();
+            final Graphics2D g2d = (Graphics2D)g;
+            final Composite oldComp = g2d.getComposite();
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
             super.draw(g2d, x, y);
             g2d.setComposite(oldComp);
         }
         @Override
-        protected void draw(Graphics g, int x, int y, int w, int h) {
+        protected void draw(final Graphics g, final int x, final int y, final int w, final int h) {
             if (opacity == 1) {
                 super.draw(g, x, y, w, h);
                 return;
             }
-            Graphics2D g2d = (Graphics2D)g;
-            Composite oldComp = g2d.getComposite();
+            final Graphics2D g2d = (Graphics2D)g;
+            final Composite oldComp = g2d.getComposite();
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
             super.draw(g, x, y, w, h);
             g2d.setComposite(oldComp);
         }
         @Override
-        protected void draw(Graphics g, int dx1, int dy1, int dx2, int dy2, int sx1, int sy1, int sx2, int sy2) {
+        protected void draw(final Graphics g, final int dx1, final int dy1, final int dx2, final int dy2, final int sx1, final int sy1, final int sx2, final int sy2) {
             if (opacity == 1) {
                 super.draw(g, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2);
                 return;
             }
-            Graphics2D g2d = (Graphics2D)g;
-            Composite oldComp = g2d.getComposite();
+            final Graphics2D g2d = (Graphics2D)g;
+            final Composite oldComp = g2d.getComposite();
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
             super.draw(g, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2);
             g2d.setComposite(oldComp);
@@ -910,7 +977,7 @@ public class FSkin {
         return SkinFont.get(Font.ITALIC, size);
     }
 
-    public static void setGraphicsFont(Graphics g, SkinFont skinFont) {
+    public static void setGraphicsFont(final Graphics g, final SkinFont skinFont) {
         g.setFont(skinFont.font);
     }
 
@@ -919,7 +986,7 @@ public class FSkin {
         private static Map<String, SkinFont> fonts = new HashMap<String, SkinFont>();
 
         private static SkinFont get(final int style0, final int size0) {
-            String key = style0 + "|" + size0;
+            final String key = style0 + "|" + size0;
             SkinFont skinFont = fonts.get(key);
             if (skinFont == null) {
                 skinFont = new SkinFont(style0, size0);
@@ -928,11 +995,11 @@ public class FSkin {
             return skinFont;
         }
 
-        private static void setBaseFont(Font baseFont0) {
+        private static void setBaseFont(final Font baseFont0) {
             baseFont = baseFont0;
 
             //update all cached skin fonts
-            for (SkinFont skinFont : fonts.values()) {
+            for (final SkinFont skinFont : fonts.values()) {
                 skinFont.updateFont();
             }
         }
@@ -950,7 +1017,7 @@ public class FSkin {
             return this.font.getSize();
         }
 
-        public int measureTextWidth(Graphics g, String text) {
+        public int measureTextWidth(final Graphics g, final String text) {
             return g.getFontMetrics(this.font).stringWidth(text);
         }
 
@@ -963,40 +1030,43 @@ public class FSkin {
         }
     }
 
-    private static void addEncodingSymbol(String key, FSkinProp skinProp) {
-    	String path = ForgeConstants.CACHE_SYMBOLS_DIR + "/" + key.replace("/", "") + ".png";
-    	getImage(skinProp).save(path, 13, 13);
+    private static void addEncodingSymbol(final String key, final FSkinProp skinProp) {
+        final String path = ForgeConstants.CACHE_SYMBOLS_DIR + "/" + key.replace("/", "") + ".png";
+        getImage(skinProp).save(path, 13, 13);
     }
 
-    public static String encodeSymbols(String str, boolean formatReminderText) {
-    	String pattern, replacement;
+    public static String encodeSymbols(String str, final boolean formatReminderText) {
+        String pattern, replacement;
 
-    	if (formatReminderText) {
-	        //format reminder text in italics (or hide if preference set)
-	        pattern = "\\((.+)\\)";
-	        replacement = FModel.getPreferences().getPrefBoolean(FPref.UI_HIDE_REMINDER_TEXT) ?
-	                "" : "<i>\\($1\\)</i>";
-	        str = str.replaceAll(pattern, replacement);
-    	}
+        // Bullet char
+        str = StringUtils.replace(str, BULLET, "\u2022");
+
+        if (formatReminderText) {
+            //format reminder text in italics (or hide if preference set)
+            pattern = "\\((.+)\\)";
+            replacement = FModel.getPreferences().getPrefBoolean(FPref.UI_HIDE_REMINDER_TEXT) ?
+                    "" : "<i>\\($1\\)</i>";
+            str = str.replaceAll(pattern, replacement);
+        }
 
         //format mana symbols to display as icons
-    	pattern = "\\{([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}"; //fancy pattern needed so "/" can be omitted from replacement
-		try {
-			replacement = "<img src='" + new File(ForgeConstants.CACHE_SYMBOLS_DIR + "/$1$2$3.png").toURI().toURL().toString() + "'>";
-			str = str.replaceAll(pattern, replacement);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
+        pattern = "\\{([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}"; //fancy pattern needed so "/" can be omitted from replacement
+        try {
+            replacement = "<img src='" + new File(ForgeConstants.CACHE_SYMBOLS_DIR + "/$1$2$3.png").toURI().toURL().toString() + "'>";
+            str = str.replaceAll(pattern, replacement);
+        } catch (final MalformedURLException e) {
+            e.printStackTrace();
+        }
 
-    	return "<html>" + str + "</html>"; //must wrap in <html> tag for images to appear
+        return "<html>" + str + "</html>"; //must wrap in <html> tag for images to appear
     }
 
-    private static ArrayList<String> allSkins;
+    private static List<String> allSkins;
     private static int currentSkinIndex;
     private static String preferredDir;
     private static String preferredName;
     private static BufferedImage bimDefaultSprite, bimPreferredSprite, bimFoils, bimQuestDraftDeck,
-        bimOldFoils, bimDefaultAvatars, bimPreferredAvatars, bimTrophies;
+    bimOldFoils, bimDefaultAvatars, bimPreferredAvatars, bimTrophies;
     private static int x0, y0, w0, h0, newW, newH, preferredW, preferredH;
     private static int[] tempCoords;
     private static int defaultFontSize = 12;
@@ -1027,8 +1097,8 @@ public class FSkin {
     /**
      * Loads a "light" version of FSkin, just enough for the splash screen:
      * skin name. Generates custom skin settings, fonts, and backgrounds.
-     * 
-     * 
+     *
+     *
      * @param skinName
      *            the skin name
      */
@@ -1039,7 +1109,7 @@ public class FSkin {
 
             if (allSkins == null) { //initialize
                 allSkins = new ArrayList<String>();
-                ArrayList<String> skinDirectoryNames = getSkinDirectoryNames();
+                final ArrayList<String> skinDirectoryNames = getSkinDirectoryNames();
                 for (int i = 0; i < skinDirectoryNames.size(); i++) {
                     allSkins.add(WordUtils.capitalize(skinDirectoryNames.get(i).replace('_', ' ')));
                 }
@@ -1089,17 +1159,17 @@ public class FSkin {
      * Loads two sprites: the default (which should be a complete
      * collection of all symbols) and the preferred (which may be
      * incomplete).
-     * 
+     *
      * Font must be present in the skin folder, and will not
      * be replaced by default.  The fonts are pre-derived
      * in this method and saved in a HashMap for future access.
-     * 
+     *
      * Color swatches must be present in the preferred
      * sprite, and will not be replaced by default.
-     * 
+     *
      * Background images must be present in skin folder,
      * and will not be replaced by default.
-     * 
+     *
      * Icons, however, will be pulled from the two sprites. Obviously,
      * preferred takes precedence over default, but if something is
      * missing, the default picture is retrieved.
@@ -1158,7 +1228,7 @@ public class FSkin {
 
         // Initialize fonts
         if (onInit) { //set default font size only once onInit
-            Font f = UIManager.getDefaults().getFont("Label.font");
+            final Font f = UIManager.getDefaults().getFont("Label.font");
             if (f != null) {
                 defaultFontSize = f.getSize();
             }
@@ -1172,7 +1242,7 @@ public class FSkin {
 
         // Run through enums and load their coords.
         Colors.updateAll();
-        for (FSkinProp prop : FSkinProp.values()) {
+        for (final FSkinProp prop : FSkinProp.values()) {
             switch (prop.getType()) {
             case IMAGE:
                 SkinImage.setImage(prop);
@@ -1222,11 +1292,11 @@ public class FSkin {
         bimTrophies = null;
 
         //establish encoding symbols
-        File dir = new File(ForgeConstants.CACHE_SYMBOLS_DIR);
+        final File dir = new File(ForgeConstants.CACHE_SYMBOLS_DIR);
         if (!dir.mkdir()) { //ensure symbols directory exists and is empty
-        	for (File file : dir.listFiles()) {
-        		file.delete();
-        	}
+            for (final File file : dir.listFiles()) {
+                file.delete();
+            }
         }
 
         addEncodingSymbol("W", FSkinProp.IMG_MANA_W);
@@ -1267,17 +1337,8 @@ public class FSkin {
 
         // Set look and feel after skin loaded
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Setting look and feel...");
-        ForgeLookAndFeel laf = new ForgeLookAndFeel();
+        final ForgeLookAndFeel laf = new ForgeLookAndFeel();
         laf.setForgeLookAndFeel(Singletons.getView().getFrame());
-    }
-
-    /**
-     * Gets the name.
-     * 
-     * @return Name of the current skin.
-     */
-    public static String getName() {
-        return preferredName;
     }
 
     /**
@@ -1318,7 +1379,7 @@ public class FSkin {
      * <p>
      * getColorFromPixel.
      * </p>
-     * 
+     *
      * @param {@link java.lang.Integer} pixel information
      */
     private static Color getColorFromPixel(final int pixel) {
@@ -1338,7 +1399,7 @@ public class FSkin {
         h0 = tempCoords[3];
 
         if (s0.equals(FSkinProp.IMG_QUEST_DRAFT_DECK)) {
-            Color c = getColorFromPixel(bimQuestDraftDeck.getRGB((x0 + w0 / 2), (y0 + h0 / 2)));
+            final Color c = getColorFromPixel(bimQuestDraftDeck.getRGB((x0 + w0 / 2), (y0 + h0 / 2)));
             if (c.getAlpha() != 0) { return bimQuestDraftDeck; }
         }
 
@@ -1353,7 +1414,7 @@ public class FSkin {
         // If any return true, image exists.
         int x = 0, y = 0;
         Color c;
-        
+
         // Center
         x = (x0 + w0 / 2);
         y = (y0 + h0 / 2);
@@ -1412,7 +1473,7 @@ public class FSkin {
         }
     }
 
-    private static void setImage(final FSkinProp s0, BufferedImage bim) {
+    private static void setImage(final FSkinProp s0, final BufferedImage bim) {
         tempCoords = s0.getCoords();
         x0 = tempCoords[0];
         y0 = tempCoords[1];
@@ -1420,10 +1481,6 @@ public class FSkin {
         h0 = tempCoords[3];
 
         SkinImage.setImage(s0, bim.getSubimage(x0, y0, w0, h0));
-    }
-
-    public static boolean isLookAndFeelSet() {
-        return ForgeLookAndFeel.isMetalLafSet;
     }
 
     /**
@@ -1461,7 +1518,7 @@ public class FSkin {
          * If not explicitly set then the Mac uses its native L&F which does
          * not support various settings (eg. combobox background color).
          */
-        private boolean setMetalLookAndFeel(JFrame appFrame) {
+        private boolean setMetalLookAndFeel(final JFrame appFrame) {
             if (onInit) { //only attempt to set Metal Look and Feel the first time
                 try {
                     UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
@@ -1480,9 +1537,9 @@ public class FSkin {
          */
         private void setMenusLookAndFeel() {
             // JMenuBar
-            Color clrTheme = getColor(Colors.CLR_THEME).color;
-            Color backgroundColor = stepColor(clrTheme, 0);
-            Color menuBarEdgeColor = stepColor(clrTheme, -80);
+            final Color clrTheme = getColor(Colors.CLR_THEME).color;
+            final Color backgroundColor = stepColor(clrTheme, 0);
+            final Color menuBarEdgeColor = stepColor(clrTheme, -80);
             UIManager.put("MenuBar.foreground", FORE_COLOR);
             UIManager.put("MenuBar.gradient", getColorGradients(backgroundColor.darker(), backgroundColor));
             UIManager.put("MenuBar.border", BorderFactory.createMatteBorder(0, 0, 1, 0, menuBarEdgeColor));
@@ -1542,7 +1599,7 @@ public class FSkin {
             UIManager.put("ComboBox.disabledBackground", BACK_COLOR);
             UIManager.put("ComboBox.disabledForeground", BACK_COLOR.darker());
             UIManager.put("ComboBox.font", getDefaultFont("ComboBox.font"));
-            boolean isBright = isColorBright(FORE_COLOR);
+            final boolean isBright = isColorBright(FORE_COLOR);
             UIManager.put("ComboBox.border", BorderFactory.createLineBorder(isBright ? FORE_COLOR.darker() : FORE_COLOR.brighter(), 1));
         }
 
@@ -1560,12 +1617,12 @@ public class FSkin {
             UIManager.put("ToolTip.border", LINE_BORDER);
         }
 
-        private Font getDefaultFont(String component) {
+        private static Font getDefaultFont(final String component) {
             return getFont(UIManager.getFont(component).getSize()).font;
         }
 
-        private ArrayList<Object> getColorGradients(Color bottom, Color top) {
-            ArrayList<Object> gradients = new ArrayList<>();
+        private static List<Object> getColorGradients(final Color bottom, final Color top) {
+            final List<Object> gradients = new ArrayList<>();
             gradients.add(0.0);
             gradients.add(0.0);
             gradients.add(top);
@@ -1584,7 +1641,7 @@ public class FSkin {
         protected ComponentSkin() {
         }
 
-        protected boolean update(T comp) {
+        protected boolean update(final T comp) {
             if (appliedSkinIndex == currentSkinIndex) { return false; }
             appliedSkinIndex = currentSkinIndex;
             reapply(comp);
@@ -1592,21 +1649,21 @@ public class FSkin {
         }
 
         public SkinColor getForeground() { return this.foreground; }
-        protected void setForeground(T comp, SkinColor skinColor) { comp.setForeground(skinColor != null ? skinColor.color : null); this.foreground = skinColor; }
+        protected void setForeground(final T comp, final SkinColor skinColor) { comp.setForeground(skinColor != null ? skinColor.color : null); this.foreground = skinColor; }
         protected void resetForeground() { this.foreground = null; }
 
         public SkinColor getBackground() { return this.background; }
-        protected void setBackground(T comp, SkinColor skinColor) { comp.setBackground(skinColor != null ? skinColor.color : null); this.background = skinColor; }
+        protected void setBackground(final T comp, final SkinColor skinColor) { comp.setBackground(skinColor != null ? skinColor.color : null); this.background = skinColor; }
         protected void resetBackground() { this.background = null; }
 
         public SkinFont getFont() { return this.font; }
-        protected void setFont(T comp, SkinFont skinFont) { comp.setFont(skinFont != null ? skinFont.font : null); this.font = skinFont; }
+        protected void setFont(final T comp, final SkinFont skinFont) { comp.setFont(skinFont != null ? skinFont.font : null); this.font = skinFont; }
         protected void resetFont() { this.font = null; }
 
-        protected void setCursor(T comp, SkinCursor skinCursor) { comp.setCursor(skinCursor != null ? skinCursor.cursor : null); this.cursor = skinCursor; }
+        protected void setCursor(final T comp, final SkinCursor skinCursor) { comp.setCursor(skinCursor != null ? skinCursor.cursor : null); this.cursor = skinCursor; }
         protected void resetCursor() { this.cursor = null; }
 
-        protected void reapply(T comp) {
+        protected void reapply(final T comp) {
             if (this.foreground != null) { setForeground(comp, this.foreground); }
             if (this.background != null) { setBackground(comp, this.background); }
             if (this.font != null) { setFont(comp, this.font); }
@@ -1619,11 +1676,11 @@ public class FSkin {
         protected WindowSkin() {
         }
 
-        protected void setIconImage(T comp, SkinImage skinImage) { comp.setIconImage(skinImage != null ? skinImage.image : null); this.iconImage = skinImage; }
+        protected void setIconImage(final T comp, final SkinImage skinImage) { comp.setIconImage(skinImage != null ? skinImage.image : null); this.iconImage = skinImage; }
         protected void resetIconImage() { this.iconImage = null; }
 
         @Override
-        protected void reapply(T comp) {
+        protected void reapply(final T comp) {
             if (this.iconImage != null) { setIconImage(comp, this.iconImage); }
             super.reapply(comp);
         }
@@ -1634,11 +1691,11 @@ public class FSkin {
         protected JComponentSkin() {
         }
 
-        protected void setBorder(T comp, SkinBorder skinBorder) { comp.setBorder(skinBorder != null ? skinBorder.createBorder() : null); this.border = skinBorder; }
+        protected void setBorder(final T comp, final SkinBorder skinBorder) { comp.setBorder(skinBorder != null ? skinBorder.createBorder() : null); this.border = skinBorder; }
         protected void resetBorder() { this.border = null; }
 
         @Override
-        protected void reapply(T comp) {
+        protected void reapply(final T comp) {
             if (this.border != null) { setBorder(comp, this.border); }
             super.reapply(comp);
         }
@@ -1649,11 +1706,11 @@ public class FSkin {
         protected JLabelSkin() {
         }
 
-        protected void setIcon(T comp, SkinImage skinImage) { comp.setIcon(skinImage != null ? skinImage.getIcon() : null); this.icon = skinImage; }
+        protected void setIcon(final T comp, final SkinImage skinImage) { comp.setIcon(skinImage != null ? skinImage.getIcon() : null); this.icon = skinImage; }
         protected void resetIcon() { this.icon = null; }
 
         @Override
-        protected void reapply(T comp) {
+        protected void reapply(final T comp) {
             if (this.icon != null) { setIcon(comp, this.icon); }
             super.reapply(comp);
         }
@@ -1664,17 +1721,17 @@ public class FSkin {
         protected AbstractButtonSkin() {
         }
 
-        protected void setIcon(T comp, SkinImage skinImage) { comp.setIcon(skinImage != null ? skinImage.getIcon() : null); this.icon = skinImage; }
+        protected void setIcon(final T comp, final SkinImage skinImage) { comp.setIcon(skinImage != null ? skinImage.getIcon() : null); this.icon = skinImage; }
         protected void resetIcon() { this.icon = null; }
 
-        protected void setPressedIcon(T comp, SkinImage skinImage) { comp.setPressedIcon(skinImage != null ? skinImage.getIcon() : null); this.pressedIcon = skinImage; }
+        protected void setPressedIcon(final T comp, final SkinImage skinImage) { comp.setPressedIcon(skinImage != null ? skinImage.getIcon() : null); this.pressedIcon = skinImage; }
         protected void resetPressedIcon() { this.pressedIcon = null; }
 
-        protected void setRolloverIcon(T comp, SkinImage skinImage) { comp.setRolloverIcon(skinImage != null ? skinImage.getIcon() : null); this.rolloverIcon = skinImage; }
+        protected void setRolloverIcon(final T comp, final SkinImage skinImage) { comp.setRolloverIcon(skinImage != null ? skinImage.getIcon() : null); this.rolloverIcon = skinImage; }
         protected void resetRolloverIcon() { this.rolloverIcon = null; }
 
         @Override
-        protected void reapply(T comp) {
+        protected void reapply(final T comp) {
             if (this.icon != null) { setIcon(comp, this.icon); }
             if (this.pressedIcon != null) { setPressedIcon(comp, this.pressedIcon); }
             if (this.rolloverIcon != null) { setRolloverIcon(comp, this.rolloverIcon); }
@@ -1687,11 +1744,11 @@ public class FSkin {
         protected JTextComponentSkin() {
         }
 
-        protected void setCaretColor(T comp, SkinColor skinColor) { comp.setCaretColor(skinColor != null ? skinColor.color : null); this.caretColor = skinColor; }
+        protected void setCaretColor(final T comp, final SkinColor skinColor) { comp.setCaretColor(skinColor != null ? skinColor.color : null); this.caretColor = skinColor; }
         protected void resetCaretColor() { this.caretColor = null; }
 
         @Override
-        protected void reapply(T comp) {
+        protected void reapply(final T comp) {
             if (this.caretColor != null) { setCaretColor(comp, this.caretColor); }
             super.reapply(comp);
         }
@@ -1702,17 +1759,17 @@ public class FSkin {
         protected JTableSkin() {
         }
 
-        protected void setSelectionForeground(T comp, SkinColor skinColor) { comp.setSelectionForeground(skinColor != null ? skinColor.color : null); this.selectionForeground = skinColor; }
+        protected void setSelectionForeground(final T comp, final SkinColor skinColor) { comp.setSelectionForeground(skinColor != null ? skinColor.color : null); this.selectionForeground = skinColor; }
         protected void resetSelectionForeground() { this.selectionForeground = null; }
 
-        protected void setSelectionBackground(T comp, SkinColor skinColor) { comp.setSelectionBackground(skinColor != null ? skinColor.color : null); this.selectionBackground = skinColor; }
+        protected void setSelectionBackground(final T comp, final SkinColor skinColor) { comp.setSelectionBackground(skinColor != null ? skinColor.color : null); this.selectionBackground = skinColor; }
         protected void resetSelectionBackground() { this.selectionBackground = null; }
 
-        protected void setGridColor(T comp, SkinColor skinColor) { comp.setGridColor(skinColor != null ? skinColor.color : null); this.gridColor = skinColor; }
+        protected void setGridColor(final T comp, final SkinColor skinColor) { comp.setGridColor(skinColor != null ? skinColor.color : null); this.gridColor = skinColor; }
         protected void resetGridColor() { this.gridColor = null; }
 
         @Override
-        protected void reapply(T comp) {
+        protected void reapply(final T comp) {
             if (this.selectionForeground != null) { setSelectionForeground(comp, this.selectionForeground); }
             if (this.selectionBackground != null) { setSelectionBackground(comp, this.selectionBackground); }
             if (this.gridColor != null) { setGridColor(comp, this.gridColor); }
@@ -1725,14 +1782,14 @@ public class FSkin {
         protected JSkinSkin() {
         }
 
-        protected void setSelectionForeground(T comp, SkinColor skinColor) { comp.setSelectionForeground(skinColor != null ? skinColor.color : null); this.selectionForeground = skinColor; }
+        protected void setSelectionForeground(final T comp, final SkinColor skinColor) { comp.setSelectionForeground(skinColor != null ? skinColor.color : null); this.selectionForeground = skinColor; }
         protected void resetSelectionForeground() { this.selectionForeground = null; }
 
-        protected void setSelectionBackground(T comp, SkinColor skinColor) { comp.setSelectionBackground(skinColor != null ? skinColor.color : null); this.selectionBackground = skinColor; }
+        protected void setSelectionBackground(final T comp, final SkinColor skinColor) { comp.setSelectionBackground(skinColor != null ? skinColor.color : null); this.selectionBackground = skinColor; }
         protected void resetSelectionBackground() { this.selectionBackground = null; }
 
         @Override
-        protected void reapply(T comp) {
+        protected void reapply(final T comp) {
             if (this.selectionForeground != null) { setSelectionForeground(comp, this.selectionForeground); }
             if (this.selectionBackground != null) { setSelectionBackground(comp, this.selectionBackground); }
             super.reapply(comp);
@@ -1749,6 +1806,7 @@ public class FSkin {
         private SkinBorder border;
 
         private WindowSkin<JFrame> skin;
+        @Override
         public WindowSkin<JFrame> getSkin() {
             if (skin == null) { skin = new WindowSkin<JFrame>(); }
             return skin;
@@ -1756,27 +1814,27 @@ public class FSkin {
 
         public SkinnedFrame() { super(); }
 
-        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
-        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+        public void setForeground(final SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(final Color color) { getSkin().resetForeground(); super.setForeground(color); }
 
-        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
-        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+        public void setBackground(final SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(final Color color) { getSkin().resetBackground(); super.setBackground(color); }
 
-        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
-        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+        public void setFont(final SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(final Font font) { getSkin().resetFont(); super.setFont(font); }
 
-        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
-        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+        public void setCursor(final SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(final Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
 
-        public void setIconImage(SkinImage skinImage) { getSkin().setIconImage(this, skinImage); }
-        @Override public void setIconImage(Image image) { getSkin().resetIconImage(); super.setIconImage(image); }
+        public void setIconImage(final SkinImage skinImage) { getSkin().setIconImage(this, skinImage); }
+        @Override public void setIconImage(final Image image) { getSkin().resetIconImage(); super.setIconImage(image); }
 
         //relay border to root pane
-        public void setBorder(SkinBorder skinBorder) { getRootPane().setBorder(skinBorder != null ? skinBorder.createBorder() : null); this.border = skinBorder; }
-        public void setBorder(Border border) { getRootPane().setBorder(border); this.border = null; }
+        public void setBorder(final SkinBorder skinBorder) { getRootPane().setBorder(skinBorder != null ? skinBorder.createBorder() : null); this.border = skinBorder; }
+        public void setBorder(final Border border) { getRootPane().setBorder(border); this.border = null; }
 
         @Override
-        public void paint(Graphics g) {
+        public void paint(final Graphics g) {
             if (getSkin().update(this)) {
                 if (this.border != null) { setBorder(this.border); }
             }
@@ -1789,35 +1847,36 @@ public class FSkin {
         private SkinBorder border;
 
         private WindowSkin<JDialog> skin;
+        @Override
         public WindowSkin<JDialog> getSkin() {
             if (skin == null) { skin = new WindowSkin<JDialog>(); }
             return skin;
         }
 
         public SkinnedDialog() { super(); }
-        public SkinnedDialog(Frame owner, boolean modal) { super(owner, modal); }
+        public SkinnedDialog(final Frame owner, final boolean modal) { super(owner, modal); }
 
-        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
-        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+        public void setForeground(final SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(final Color color) { getSkin().resetForeground(); super.setForeground(color); }
 
-        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
-        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+        public void setBackground(final SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(final Color color) { getSkin().resetBackground(); super.setBackground(color); }
 
-        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
-        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+        public void setFont(final SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(final Font font) { getSkin().resetFont(); super.setFont(font); }
 
-        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
-        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+        public void setCursor(final SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(final Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
 
-        public void setIconImage(SkinImage skinImage) { getSkin().setIconImage(this, skinImage); }
-        @Override public void setIconImage(Image image) { getSkin().resetIconImage(); super.setIconImage(image); }
+        public void setIconImage(final SkinImage skinImage) { getSkin().setIconImage(this, skinImage); }
+        @Override public void setIconImage(final Image image) { getSkin().resetIconImage(); super.setIconImage(image); }
 
         //relay border to root pane
-        public void setBorder(SkinBorder skinBorder) { getRootPane().setBorder(skinBorder != null ? skinBorder.createBorder() : null); this.border = skinBorder; }
-        public void setBorder(Border border) { getRootPane().setBorder(border); this.border = null; }
+        public void setBorder(final SkinBorder skinBorder) { getRootPane().setBorder(skinBorder != null ? skinBorder.createBorder() : null); this.border = skinBorder; }
+        public void setBorder(final Border border) { getRootPane().setBorder(border); this.border = null; }
 
         @Override
-        public void paint(Graphics g) {
+        public void paint(final Graphics g) {
             if (getSkin().update(this)) {
                 if (this.border != null) { setBorder(this.border); }
             }
@@ -1828,6 +1887,7 @@ public class FSkin {
         private static final long serialVersionUID = -8325505112790327931L;
 
         private JComponentSkin<JLayeredPane> skin;
+        @Override
         public JComponentSkin<JLayeredPane> getSkin() {
             if (skin == null) { skin = new JComponentSkin<JLayeredPane>(); }
             return skin;
@@ -1835,11 +1895,11 @@ public class FSkin {
 
         public SkinnedLayeredPane() { super(); }
 
-        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
-        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+        public void setCursor(final SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(final Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(this);
             super.paintComponent(g);
         }
@@ -1848,6 +1908,7 @@ public class FSkin {
         private static final long serialVersionUID = -183434586261989294L;
 
         private JComponentSkin<JMenuBar> skin;
+        @Override
         public JComponentSkin<JMenuBar> getSkin() {
             if (skin == null) {skin = new JComponentSkin<JMenuBar>(); }
             return skin;
@@ -1855,23 +1916,23 @@ public class FSkin {
 
         public SkinnedMenuBar() { super(); }
 
-        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
-        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+        public void setForeground(final SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(final Color color) { getSkin().resetForeground(); super.setForeground(color); }
 
-        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
-        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+        public void setBackground(final SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(final Color color) { getSkin().resetBackground(); super.setBackground(color); }
 
-        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
-        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+        public void setFont(final SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(final Font font) { getSkin().resetFont(); super.setFont(font); }
 
-        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
-        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+        public void setCursor(final SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(final Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
 
-        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
-        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+        public void setBorder(final SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(final Border border) { getSkin().resetBorder(); super.setBorder(border); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(this);
             super.paintComponent(g);
         }
@@ -1880,34 +1941,35 @@ public class FSkin {
         private static final long serialVersionUID = 7046941724535782054L;
 
         private JLabelSkin<JLabel> skin;
+        @Override
         public JLabelSkin<JLabel> getSkin() {
             if (skin == null) { skin = new JLabelSkin<JLabel>(); }
             return skin;
         }
 
         public SkinnedLabel() { super(); }
-        public SkinnedLabel(String text) { super(text); }
+        public SkinnedLabel(final String text) { super(text); }
 
-        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
-        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+        public void setForeground(final SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(final Color color) { getSkin().resetForeground(); super.setForeground(color); }
 
-        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
-        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+        public void setBackground(final SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(final Color color) { getSkin().resetBackground(); super.setBackground(color); }
 
-        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
-        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+        public void setFont(final SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(final Font font) { getSkin().resetFont(); super.setFont(font); }
 
-        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
-        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+        public void setCursor(final SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(final Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
 
-        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
-        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+        public void setBorder(final SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(final Border border) { getSkin().resetBorder(); super.setBorder(border); }
 
-        public void setIcon(SkinImage skinImage) { getSkin().setIcon(this, skinImage); }
-        @Override public void setIcon(Icon icon) { getSkin().resetIcon(); super.setIcon(icon); }
+        public void setIcon(final SkinImage skinImage) { getSkin().setIcon(this, skinImage); }
+        @Override public void setIcon(final Icon icon) { getSkin().resetIcon(); super.setIcon(icon); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(this);
             super.paintComponent(g);
         }
@@ -1916,33 +1978,34 @@ public class FSkin {
         private static final long serialVersionUID = 9032839876990765149L;
 
         private JComponentSkin<JComboBox<E>> skin;
+        @Override
         public JComponentSkin<JComboBox<E>> getSkin() {
             if (skin == null) { skin = new JComponentSkin<JComboBox<E>>(); }
             return skin;
         }
 
         public SkinnedComboBox() { super(); }
-        public SkinnedComboBox(ComboBoxModel<E> model0) { super(model0); }
-        public SkinnedComboBox(E[] items) { super(items); }
-        public SkinnedComboBox(Vector<E> items) { super(items); }
+        public SkinnedComboBox(final ComboBoxModel<E> model0) { super(model0); }
+        public SkinnedComboBox(final E[] items) { super(items); }
+        public SkinnedComboBox(final Vector<E> items) { super(items); }
 
-        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
-        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+        public void setForeground(final SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(final Color color) { getSkin().resetForeground(); super.setForeground(color); }
 
-        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
-        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+        public void setBackground(final SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(final Color color) { getSkin().resetBackground(); super.setBackground(color); }
 
-        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
-        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+        public void setFont(final SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(final Font font) { getSkin().resetFont(); super.setFont(font); }
 
-        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
-        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+        public void setCursor(final SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(final Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
 
-        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
-        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+        public void setBorder(final SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(final Border border) { getSkin().resetBorder(); super.setBorder(border); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(this);
             super.paintComponent(g);
         }
@@ -1951,38 +2014,39 @@ public class FSkin {
         private static final long serialVersionUID = -2449981390420167627L;
 
         private JSkinSkin<JList<E>> skin;
+        @Override
         public JSkinSkin<JList<E>> getSkin() {
             if (skin == null) { skin = new JSkinSkin<JList<E>>(); }
             return skin;
         }
 
         public SkinnedList() { super(); }
-        public SkinnedList(ListModel<E> model0) { super(model0); }
-        public SkinnedList(E[] items) { super(items); }
+        public SkinnedList(final ListModel<E> model0) { super(model0); }
+        public SkinnedList(final E[] items) { super(items); }
 
-        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
-        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+        public void setForeground(final SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(final Color color) { getSkin().resetForeground(); super.setForeground(color); }
 
-        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
-        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+        public void setBackground(final SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(final Color color) { getSkin().resetBackground(); super.setBackground(color); }
 
-        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
-        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+        public void setFont(final SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(final Font font) { getSkin().resetFont(); super.setFont(font); }
 
-        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
-        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+        public void setCursor(final SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(final Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
 
-        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
-        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+        public void setBorder(final SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(final Border border) { getSkin().resetBorder(); super.setBorder(border); }
 
-        public void setSelectionForeground(SkinColor skinColor) { getSkin().setSelectionForeground(this, skinColor); }
-        @Override public void setSelectionForeground(Color color) { getSkin().resetSelectionForeground(); super.setSelectionForeground(color); }
+        public void setSelectionForeground(final SkinColor skinColor) { getSkin().setSelectionForeground(this, skinColor); }
+        @Override public void setSelectionForeground(final Color color) { getSkin().resetSelectionForeground(); super.setSelectionForeground(color); }
 
-        public void setSelectionBackground(SkinColor skinColor) { getSkin().setSelectionBackground(this, skinColor); }
-        @Override public void setSelectionBackground(Color color) { getSkin().resetSelectionBackground(); super.setSelectionBackground(color); }
+        public void setSelectionBackground(final SkinColor skinColor) { getSkin().setSelectionBackground(this, skinColor); }
+        @Override public void setSelectionBackground(final Color color) { getSkin().resetSelectionBackground(); super.setSelectionBackground(color); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(this);
             super.paintComponent(g);
         }
@@ -1991,6 +2055,7 @@ public class FSkin {
         private static final long serialVersionUID = -1842620489613307379L;
 
         private JComponentSkin<JPanel> skin;
+        @Override
         public JComponentSkin<JPanel> getSkin() {
             if (skin == null) { skin = new JComponentSkin<JPanel>(); }
             return skin;
@@ -1999,23 +2064,23 @@ public class FSkin {
         public SkinnedPanel() { super(); }
         public SkinnedPanel(final LayoutManager layoutManager) { super(layoutManager); }
 
-        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
-        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+        public void setForeground(final SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(final Color color) { getSkin().resetForeground(); super.setForeground(color); }
 
-        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
-        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+        public void setBackground(final SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(final Color color) { getSkin().resetBackground(); super.setBackground(color); }
 
-        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
-        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+        public void setFont(final SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(final Font font) { getSkin().resetFont(); super.setFont(font); }
 
-        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
-        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+        public void setCursor(final SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(final Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
 
-        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
-        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+        public void setBorder(final SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(final Border border) { getSkin().resetBorder(); super.setBorder(border); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(this);
             super.paintComponent(g);
         }
@@ -2044,7 +2109,7 @@ public class FSkin {
         public final void setBackgroundTextureOverlay(final Color color) { onSetBackgroundTextureOverlay(color); this.backgroundTextureOverlay = null; }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             if (getSkin().update(this)) {
                 if (this.foregroundImage != null) { this.setForegroundImage(this.foregroundImage); }
                 if (this.backgroundTexture != null) { this.setBackgroundTexture(this.backgroundTexture); }
@@ -2057,15 +2122,16 @@ public class FSkin {
         private static final long serialVersionUID = 8958616297664604107L;
 
         private JComponentSkin<JScrollPane> skin;
+        @Override
         public JComponentSkin<JScrollPane> getSkin() {
             if (skin == null) { skin = new JComponentSkin<JScrollPane>(); }
             return skin;
         }
 
         public SkinnedScrollPane() { super(); init(); }
-        public SkinnedScrollPane(Component comp) { super(comp); init(); }
-        public SkinnedScrollPane(int vsbPolicy, int hsbPolicy) { super(vsbPolicy, hsbPolicy); init(); }
-        public SkinnedScrollPane(Component comp, int vsbPolicy, int hsbPolicy) { super(comp, vsbPolicy, hsbPolicy); init(); }
+        public SkinnedScrollPane(final Component comp) { super(comp); init(); }
+        public SkinnedScrollPane(final int vsbPolicy, final int hsbPolicy) { super(vsbPolicy, hsbPolicy); init(); }
+        public SkinnedScrollPane(final Component comp, final int vsbPolicy, final int hsbPolicy) { super(comp, vsbPolicy, hsbPolicy); init(); }
 
         private void init() {
             new SkinScrollBarUI(getVerticalScrollBar(), true);
@@ -2089,18 +2155,18 @@ public class FSkin {
             private final boolean vertical;
             private boolean hovered;
 
-            private SkinScrollBarUI(JScrollBar scrollbar, boolean vertical0) {
+            private SkinScrollBarUI(final JScrollBar scrollbar, final boolean vertical0) {
                 vertical = vertical0;
                 scrollbar.setOpaque(false);
                 scrollbar.addMouseListener(new MouseAdapter() {
                     @Override
-                    public void mouseEntered(MouseEvent e) {
+                    public void mouseEntered(final MouseEvent e) {
                         hovered = true;
                         repaintSelf();
                     }
 
                     @Override
-                    public void mouseExited(MouseEvent e) {
+                    public void mouseExited(final MouseEvent e) {
                         hovered = false;
                         repaintSelf();
                     }
@@ -2115,22 +2181,22 @@ public class FSkin {
             }
 
             @Override
-            protected JButton createIncreaseButton(int orientation) {
+            protected JButton createIncreaseButton(final int orientation) {
                 return hiddenButton; //hide increase button
             }
 
             @Override
-            protected JButton createDecreaseButton(int orientation) {
+            protected JButton createDecreaseButton(final int orientation) {
                 return hiddenButton; //hide decrease button
             }
 
             @Override
-            protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
+            protected void paintTrack(final Graphics g, final JComponent c, final Rectangle trackBounds) {
                 //make track transparent
             }
 
             @Override
-            protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
+            protected void paintThumb(final Graphics g, final JComponent c, final Rectangle thumbBounds) {
                 int x = thumbBounds.x;
                 int y = thumbBounds.y;
                 int width = thumbBounds.width - 1;
@@ -2141,8 +2207,8 @@ public class FSkin {
                 if (vertical) {
                     x += 2;
                     width -= 4;
-                    int x2 = x + width / 2;
-                    int x3 = x + width;
+                    final int x2 = x + width / 2;
+                    final int x3 = x + width;
 
                     int arrowThickness = width / 2;
                     int maxArrowThickness = height / 2 - grooveSpace * 2;
@@ -2152,9 +2218,9 @@ public class FSkin {
                     if (arrowThickness > maxArrowThickness) {
                         arrowThickness = maxArrowThickness;
                     }
-                    int y2 = y + arrowThickness;
-                    int y3 = y + height - arrowThickness;
-                    int y4 = y + height;
+                    final int y2 = y + arrowThickness;
+                    final int y3 = y + height - arrowThickness;
+                    final int y4 = y + height;
 
                     xPoints = new int[] { x, x2, x3, x3, x2, x };
                     yPoints = new int[] { y2, y, y2, y3, y4, y3 };
@@ -2162,8 +2228,8 @@ public class FSkin {
                 else {
                     y += 2;
                     height -= 4;
-                    int y2 = y + height / 2;
-                    int y3 = y + height;
+                    final int y2 = y + height / 2;
+                    final int y3 = y + height;
 
                     int arrowThickness = height / 2;
                     int maxArrowThickness = width / 2 - grooveSpace * 2;
@@ -2173,16 +2239,16 @@ public class FSkin {
                     if (arrowThickness > maxArrowThickness) {
                         arrowThickness = maxArrowThickness;
                     }
-                    int x2 = x + arrowThickness;
-                    int x3 = x + width - arrowThickness;
-                    int x4 = x + width;
+                    final int x2 = x + arrowThickness;
+                    final int x3 = x + width - arrowThickness;
+                    final int x4 = x + width;
 
                     yPoints = new int[] { y, y2, y3, y3, y2, y };
                     xPoints = new int[] { x2, x, x2, x3, x4, x3 };
                 }
 
                 //draw thumb
-                Graphics2D g2d = (Graphics2D) g;
+                final Graphics2D g2d = (Graphics2D) g;
                 if (!hovered) {
                     g2d.setComposite(alphaDim);
                 }
@@ -2196,11 +2262,11 @@ public class FSkin {
                 if (vertical) {
                     if (height > grooveSpace * 4) {
                         setGraphicsColor(g2d, grooveColor);
-                        int x2 = x + grooveSpace;
-                        int x3 = x + width - grooveSpace;
-                        int y3 = y + height / 2;
-                        int y2 = y3 - grooveSpace;
-                        int y4 = y3 + grooveSpace;
+                        final int x2 = x + grooveSpace;
+                        final int x3 = x + width - grooveSpace;
+                        final int y3 = y + height / 2;
+                        final int y2 = y3 - grooveSpace;
+                        final int y4 = y3 + grooveSpace;
                         g2d.drawLine(x2, y2, x3, y2);
                         g2d.drawLine(x2, y3, x3, y3);
                         g2d.drawLine(x2, y4, x3, y4);
@@ -2208,11 +2274,11 @@ public class FSkin {
                 }
                 else if (width > grooveSpace * 4) {
                     setGraphicsColor(g2d, grooveColor);
-                    int y2 = y + grooveSpace;
-                    int y3 = y + height - grooveSpace;
-                    int x3 = x + width / 2;
-                    int x2 = x3 - grooveSpace;
-                    int x4 = x3 + grooveSpace;
+                    final int y2 = y + grooveSpace;
+                    final int y3 = y + height - grooveSpace;
+                    final int x3 = x + width / 2;
+                    final int x2 = x3 - grooveSpace;
+                    final int x4 = x3 + grooveSpace;
                     g2d.drawLine(x2, y2, x2, y3);
                     g2d.drawLine(x3, y2, x3, y3);
                     g2d.drawLine(x4, y2, x4, y3);
@@ -2220,23 +2286,23 @@ public class FSkin {
             }
         }
 
-        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
-        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+        public void setForeground(final SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(final Color color) { getSkin().resetForeground(); super.setForeground(color); }
 
-        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
-        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+        public void setBackground(final SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(final Color color) { getSkin().resetBackground(); super.setBackground(color); }
 
-        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
-        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+        public void setFont(final SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(final Font font) { getSkin().resetFont(); super.setFont(font); }
 
-        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
-        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+        public void setCursor(final SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(final Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
 
-        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
-        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+        public void setBorder(final SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(final Border border) { getSkin().resetBorder(); super.setBorder(border); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(this);
             super.paintComponent(g);
         }
@@ -2245,6 +2311,7 @@ public class FSkin {
         private static final long serialVersionUID = 6069807433509074270L;
 
         private JComponentSkin<JTabbedPane> skin;
+        @Override
         public JComponentSkin<JTabbedPane> getSkin() {
             if (skin == null) { skin = new JComponentSkin<JTabbedPane>(); }
             return skin;
@@ -2252,23 +2319,23 @@ public class FSkin {
 
         public SkinnedTabbedPane() { super(); }
 
-        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
-        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+        public void setForeground(final SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(final Color color) { getSkin().resetForeground(); super.setForeground(color); }
 
-        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
-        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+        public void setBackground(final SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(final Color color) { getSkin().resetBackground(); super.setBackground(color); }
 
-        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
-        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+        public void setFont(final SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(final Font font) { getSkin().resetFont(); super.setFont(font); }
 
-        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
-        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+        public void setCursor(final SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(final Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
 
-        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
-        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+        public void setBorder(final SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(final Border border) { getSkin().resetBorder(); super.setBorder(border); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(this);
             super.paintComponent(g);
         }
@@ -2277,40 +2344,41 @@ public class FSkin {
         private static final long serialVersionUID = -1868724405885582324L;
 
         private AbstractButtonSkin<JButton> skin;
+        @Override
         public AbstractButtonSkin<JButton> getSkin() {
             if (skin == null) { skin = new AbstractButtonSkin<JButton>(); }
             return skin;
         }
 
         public SkinnedButton() { super(); }
-        public SkinnedButton(String text) { super(text); }
+        public SkinnedButton(final String text) { super(text); }
 
-        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
-        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+        public void setForeground(final SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(final Color color) { getSkin().resetForeground(); super.setForeground(color); }
 
-        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
-        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+        public void setBackground(final SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(final Color color) { getSkin().resetBackground(); super.setBackground(color); }
 
-        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
-        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+        public void setFont(final SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(final Font font) { getSkin().resetFont(); super.setFont(font); }
 
-        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
-        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+        public void setCursor(final SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(final Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
 
-        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
-        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+        public void setBorder(final SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(final Border border) { getSkin().resetBorder(); super.setBorder(border); }
 
-        public void setIcon(SkinImage skinImage) { getSkin().setIcon(this, skinImage); }
-        @Override public void setIcon(Icon icon) { getSkin().resetIcon(); super.setIcon(icon); }
+        public void setIcon(final SkinImage skinImage) { getSkin().setIcon(this, skinImage); }
+        @Override public void setIcon(final Icon icon) { getSkin().resetIcon(); super.setIcon(icon); }
 
-        public void setPressedIcon(SkinImage skinImage) { getSkin().setPressedIcon(this, skinImage); }
-        @Override public void setPressedIcon(Icon icon) { getSkin().resetPressedIcon(); super.setPressedIcon(icon); }
+        public void setPressedIcon(final SkinImage skinImage) { getSkin().setPressedIcon(this, skinImage); }
+        @Override public void setPressedIcon(final Icon icon) { getSkin().resetPressedIcon(); super.setPressedIcon(icon); }
 
-        public void setRolloverIcon(SkinImage skinImage) { getSkin().setRolloverIcon(this, skinImage); }
-        @Override public void setRolloverIcon(Icon icon) { getSkin().resetRolloverIcon(); super.setRolloverIcon(icon); }
+        public void setRolloverIcon(final SkinImage skinImage) { getSkin().setRolloverIcon(this, skinImage); }
+        @Override public void setRolloverIcon(final Icon icon) { getSkin().resetRolloverIcon(); super.setRolloverIcon(icon); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(this);
             super.paintComponent(g);
         }
@@ -2319,31 +2387,32 @@ public class FSkin {
         private static final long serialVersionUID = 6283239481504889377L;
 
         private AbstractButtonSkin<JCheckBox> skin;
+        @Override
         public AbstractButtonSkin<JCheckBox> getSkin() {
             if (skin == null) { skin = new AbstractButtonSkin<JCheckBox>(); }
             return skin;
         }
 
         public SkinnedCheckBox() { super(); }
-        public SkinnedCheckBox(String text) { super(text); }
+        public SkinnedCheckBox(final String text) { super(text); }
 
-        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
-        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+        public void setForeground(final SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(final Color color) { getSkin().resetForeground(); super.setForeground(color); }
 
-        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
-        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+        public void setBackground(final SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(final Color color) { getSkin().resetBackground(); super.setBackground(color); }
 
-        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
-        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+        public void setFont(final SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(final Font font) { getSkin().resetFont(); super.setFont(font); }
 
-        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
-        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+        public void setCursor(final SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(final Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
 
-        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
-        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+        public void setBorder(final SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(final Border border) { getSkin().resetBorder(); super.setBorder(border); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(this);
             super.paintComponent(g);
         }
@@ -2352,31 +2421,32 @@ public class FSkin {
         private static final long serialVersionUID = 2724598726704588129L;
 
         private AbstractButtonSkin<JRadioButton> skin;
+        @Override
         public AbstractButtonSkin<JRadioButton> getSkin() {
             if (skin == null) { skin = new AbstractButtonSkin<JRadioButton>(); }
             return skin;
         }
 
         public SkinnedRadioButton() { super(); }
-        public SkinnedRadioButton(String text) { super(text); }
+        public SkinnedRadioButton(final String text) { super(text); }
 
-        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
-        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+        public void setForeground(final SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(final Color color) { getSkin().resetForeground(); super.setForeground(color); }
 
-        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
-        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+        public void setBackground(final SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(final Color color) { getSkin().resetBackground(); super.setBackground(color); }
 
-        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
-        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+        public void setFont(final SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(final Font font) { getSkin().resetFont(); super.setFont(font); }
 
-        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
-        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+        public void setCursor(final SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(final Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
 
-        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
-        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+        public void setBorder(final SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(final Border border) { getSkin().resetBorder(); super.setBorder(border); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(this);
             super.paintComponent(g);
         }
@@ -2385,20 +2455,21 @@ public class FSkin {
         private static final long serialVersionUID = -1067731457894672601L;
 
         private AbstractButtonSkin<JMenu> skin;
+        @Override
         public AbstractButtonSkin<JMenu> getSkin() {
             if (skin == null) { skin = new AbstractButtonSkin<JMenu>(); }
             return skin;
         }
 
         public SkinnedMenu() { super(); }
-        public SkinnedMenu(String text) { super(text); }
-        public SkinnedMenu(Action a) { super(a); }
+        public SkinnedMenu(final String text) { super(text); }
+        public SkinnedMenu(final Action a) { super(a); }
 
-        public void setIcon(SkinImage skinImage) { getSkin().setIcon(this, skinImage); }
-        @Override public void setIcon(Icon icon) { getSkin().resetIcon(); super.setIcon(icon); }
+        public void setIcon(final SkinImage skinImage) { getSkin().setIcon(this, skinImage); }
+        @Override public void setIcon(final Icon icon) { getSkin().resetIcon(); super.setIcon(icon); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(this);
             super.paintComponent(g);
         }
@@ -2407,20 +2478,21 @@ public class FSkin {
         private static final long serialVersionUID = 3738616219203986847L;
 
         private AbstractButtonSkin<JMenuItem> skin;
+        @Override
         public AbstractButtonSkin<JMenuItem> getSkin() {
             if (skin == null) { skin = new AbstractButtonSkin<JMenuItem>(); }
             return skin;
         }
 
         public SkinnedMenuItem() { super(); }
-        public SkinnedMenuItem(String text) { super(text); }
-        public SkinnedMenuItem(Action a) { super(a); }
+        public SkinnedMenuItem(final String text) { super(text); }
+        public SkinnedMenuItem(final Action a) { super(a); }
 
-        public void setIcon(SkinImage skinImage) { getSkin().setIcon(this, skinImage); }
-        @Override public void setIcon(Icon icon) { getSkin().resetIcon(); super.setIcon(icon); }
+        public void setIcon(final SkinImage skinImage) { getSkin().setIcon(this, skinImage); }
+        @Override public void setIcon(final Icon icon) { getSkin().resetIcon(); super.setIcon(icon); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(this);
             super.paintComponent(g);
         }
@@ -2429,20 +2501,21 @@ public class FSkin {
         private static final long serialVersionUID = 7972531296466954594L;
 
         private AbstractButtonSkin<JCheckBoxMenuItem> skin;
+        @Override
         public AbstractButtonSkin<JCheckBoxMenuItem> getSkin() {
             if (skin == null) { skin = new AbstractButtonSkin<JCheckBoxMenuItem>(); }
             return skin;
         }
 
         public SkinnedCheckBoxMenuItem() { super(); }
-        public SkinnedCheckBoxMenuItem(String text) { super(text); }
-        public SkinnedCheckBoxMenuItem(Action a) { super(a); }
+        public SkinnedCheckBoxMenuItem(final String text) { super(text); }
+        public SkinnedCheckBoxMenuItem(final Action a) { super(a); }
 
-        public void setIcon(SkinImage skinImage) { getSkin().setIcon(this, skinImage); }
-        @Override public void setIcon(Icon icon) { getSkin().resetIcon(); super.setIcon(icon); }
+        public void setIcon(final SkinImage skinImage) { getSkin().setIcon(this, skinImage); }
+        @Override public void setIcon(final Icon icon) { getSkin().resetIcon(); super.setIcon(icon); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(this);
             super.paintComponent(g);
         }
@@ -2451,20 +2524,21 @@ public class FSkin {
         private static final long serialVersionUID = -3609854793671399210L;
 
         private AbstractButtonSkin<JRadioButtonMenuItem> skin;
+        @Override
         public AbstractButtonSkin<JRadioButtonMenuItem> getSkin() {
             if (skin == null) { skin = new AbstractButtonSkin<JRadioButtonMenuItem>(); }
             return skin;
         }
 
         public SkinnedRadioButtonMenuItem() { super(); }
-        public SkinnedRadioButtonMenuItem(String text) { super(text); }
-        public SkinnedRadioButtonMenuItem(Action a) { super(a); }
+        public SkinnedRadioButtonMenuItem(final String text) { super(text); }
+        public SkinnedRadioButtonMenuItem(final Action a) { super(a); }
 
-        public void setIcon(SkinImage skinImage) { getSkin().setIcon(this, skinImage); }
-        @Override public void setIcon(Icon icon) { getSkin().resetIcon(); super.setIcon(icon); }
+        public void setIcon(final SkinImage skinImage) { getSkin().setIcon(this, skinImage); }
+        @Override public void setIcon(final Icon icon) { getSkin().resetIcon(); super.setIcon(icon); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(this);
             super.paintComponent(g);
         }
@@ -2473,34 +2547,35 @@ public class FSkin {
         private static final long serialVersionUID = 5133370343400427635L;
 
         private JTextComponentSkin<JTextField> skin;
+        @Override
         public JTextComponentSkin<JTextField> getSkin() {
             if (skin == null) { skin = new JTextComponentSkin<JTextField>(); }
             return skin;
         }
 
         public SkinnedTextField() { super(); }
-        public SkinnedTextField(String text) { super(text); }
+        public SkinnedTextField(final String text) { super(text); }
 
-        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
-        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+        public void setForeground(final SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(final Color color) { getSkin().resetForeground(); super.setForeground(color); }
 
-        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
-        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+        public void setBackground(final SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(final Color color) { getSkin().resetBackground(); super.setBackground(color); }
 
-        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
-        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+        public void setFont(final SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(final Font font) { getSkin().resetFont(); super.setFont(font); }
 
-        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
-        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+        public void setCursor(final SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(final Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
 
-        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
-        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+        public void setBorder(final SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(final Border border) { getSkin().resetBorder(); super.setBorder(border); }
 
-        public void setCaretColor(SkinColor skinColor) { getSkin().setCaretColor(this, skinColor); }
-        @Override public void setCaretColor(Color color) { getSkin().resetCaretColor(); super.setCaretColor(color); }
+        public void setCaretColor(final SkinColor skinColor) { getSkin().setCaretColor(this, skinColor); }
+        @Override public void setCaretColor(final Color color) { getSkin().resetCaretColor(); super.setCaretColor(color); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(this);
             super.paintComponent(g);
         }
@@ -2509,6 +2584,7 @@ public class FSkin {
         private static final long serialVersionUID = 1557674285031452868L;
 
         private JTextComponentSkin<JTextField> skin;
+        @Override
         public JTextComponentSkin<JTextField> getSkin() {
             if (skin == null) { skin = new JTextComponentSkin<JTextField>(); }
             return skin;
@@ -2516,26 +2592,26 @@ public class FSkin {
 
         public SkinnedPasswordField() { super(); }
 
-        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
-        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+        public void setForeground(final SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(final Color color) { getSkin().resetForeground(); super.setForeground(color); }
 
-        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
-        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+        public void setBackground(final SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(final Color color) { getSkin().resetBackground(); super.setBackground(color); }
 
-        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
-        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+        public void setFont(final SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(final Font font) { getSkin().resetFont(); super.setFont(font); }
 
-        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
-        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+        public void setCursor(final SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(final Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
 
-        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
-        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+        public void setBorder(final SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(final Border border) { getSkin().resetBorder(); super.setBorder(border); }
 
-        public void setCaretColor(SkinColor skinColor) { getSkin().setCaretColor(this, skinColor); }
-        @Override public void setCaretColor(Color color) { getSkin().resetCaretColor(); super.setCaretColor(color); }
+        public void setCaretColor(final SkinColor skinColor) { getSkin().setCaretColor(this, skinColor); }
+        @Override public void setCaretColor(final Color color) { getSkin().resetCaretColor(); super.setCaretColor(color); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(this);
             super.paintComponent(g);
         }
@@ -2544,34 +2620,35 @@ public class FSkin {
         private static final long serialVersionUID = 4191648156716570907L;
 
         private JTextComponentSkin<JTextArea> skin;
+        @Override
         public JTextComponentSkin<JTextArea> getSkin() {
             if (skin == null) { skin = new JTextComponentSkin<JTextArea>(); }
             return skin;
         }
 
         public SkinnedTextArea() { super(); }
-        public SkinnedTextArea(String text) { super(text); }
+        public SkinnedTextArea(final String text) { super(text); }
 
-        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
-        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+        public void setForeground(final SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(final Color color) { getSkin().resetForeground(); super.setForeground(color); }
 
-        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
-        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+        public void setBackground(final SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(final Color color) { getSkin().resetBackground(); super.setBackground(color); }
 
-        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
-        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+        public void setFont(final SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(final Font font) { getSkin().resetFont(); super.setFont(font); }
 
-        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
-        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+        public void setCursor(final SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(final Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
 
-        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
-        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+        public void setBorder(final SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(final Border border) { getSkin().resetBorder(); super.setBorder(border); }
 
-        public void setCaretColor(SkinColor skinColor) { getSkin().setCaretColor(this, skinColor); }
-        @Override public void setCaretColor(Color color) { getSkin().resetCaretColor(); super.setCaretColor(color); }
+        public void setCaretColor(final SkinColor skinColor) { getSkin().setCaretColor(this, skinColor); }
+        @Override public void setCaretColor(final Color color) { getSkin().resetCaretColor(); super.setCaretColor(color); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(this);
             super.paintComponent(g);
         }
@@ -2580,6 +2657,7 @@ public class FSkin {
         private static final long serialVersionUID = -209191600467610844L;
 
         private JTextComponentSkin<JTextPane> skin;
+        @Override
         public JTextComponentSkin<JTextPane> getSkin() {
             if (skin == null) { skin = new JTextComponentSkin<JTextPane>(); }
             return skin;
@@ -2587,26 +2665,26 @@ public class FSkin {
 
         public SkinnedTextPane() { super(); }
 
-        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
-        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+        public void setForeground(final SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(final Color color) { getSkin().resetForeground(); super.setForeground(color); }
 
-        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
-        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+        public void setBackground(final SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(final Color color) { getSkin().resetBackground(); super.setBackground(color); }
 
-        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
-        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+        public void setFont(final SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(final Font font) { getSkin().resetFont(); super.setFont(font); }
 
-        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
-        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+        public void setCursor(final SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(final Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
 
-        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
-        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+        public void setBorder(final SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(final Border border) { getSkin().resetBorder(); super.setBorder(border); }
 
-        public void setCaretColor(SkinColor skinColor) { getSkin().setCaretColor(this, skinColor); }
-        @Override public void setCaretColor(Color color) { getSkin().resetCaretColor(); super.setCaretColor(color); }
+        public void setCaretColor(final SkinColor skinColor) { getSkin().setCaretColor(this, skinColor); }
+        @Override public void setCaretColor(final Color color) { getSkin().resetCaretColor(); super.setCaretColor(color); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(this);
             super.paintComponent(g);
         }
@@ -2615,6 +2693,7 @@ public class FSkin {
         private static final long serialVersionUID = 88434642461539322L;
 
         private JTextComponentSkin<JEditorPane> skin;
+        @Override
         public JTextComponentSkin<JEditorPane> getSkin() {
             if (skin == null) { skin = new JTextComponentSkin<JEditorPane>(); }
             return skin;
@@ -2622,26 +2701,26 @@ public class FSkin {
 
         public SkinnedEditorPane() { super(); }
 
-        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
-        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+        public void setForeground(final SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(final Color color) { getSkin().resetForeground(); super.setForeground(color); }
 
-        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
-        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+        public void setBackground(final SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(final Color color) { getSkin().resetBackground(); super.setBackground(color); }
 
-        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
-        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+        public void setFont(final SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(final Font font) { getSkin().resetFont(); super.setFont(font); }
 
-        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
-        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+        public void setCursor(final SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(final Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
 
-        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
-        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+        public void setBorder(final SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(final Border border) { getSkin().resetBorder(); super.setBorder(border); }
 
-        public void setCaretColor(SkinColor skinColor) { getSkin().setCaretColor(this, skinColor); }
-        @Override public void setCaretColor(Color color) { getSkin().resetCaretColor(); super.setCaretColor(color); }
+        public void setCaretColor(final SkinColor skinColor) { getSkin().setCaretColor(this, skinColor); }
+        @Override public void setCaretColor(final Color color) { getSkin().resetCaretColor(); super.setCaretColor(color); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(this);
             super.paintComponent(g);
         }
@@ -2651,6 +2730,7 @@ public class FSkin {
 
         //special case to treat as text component
         private JTextComponentSkin<JFormattedTextField> skin;
+        @Override
         public JTextComponentSkin<JFormattedTextField> getSkin() {
             if (skin == null) { skin = new JTextComponentSkin<JFormattedTextField>(); }
             return skin;
@@ -2664,7 +2744,7 @@ public class FSkin {
         }
 
         @Override
-        public void setEditor(JComponent editor) {
+        public void setEditor(final JComponent editor) {
             super.setEditor(editor);
             updateTextField();
         }
@@ -2673,28 +2753,28 @@ public class FSkin {
             try {
                 textField = ((JSpinner.NumberEditor)this.getEditor()).getTextField();
             }
-            catch (Exception ex) {
+            catch (final Exception ex) {
                 textField = null;
             }
         }
 
-        public void setForeground(SkinColor skinColor) { getSkin().setForeground(textField, skinColor); }
-        @Override public void setForeground(Color color) { if (textField == null) { super.setForeground(color); return; } getSkin().resetForeground(); textField.setForeground(color); }
+        public void setForeground(final SkinColor skinColor) { getSkin().setForeground(textField, skinColor); }
+        @Override public void setForeground(final Color color) { if (textField == null) { super.setForeground(color); return; } getSkin().resetForeground(); textField.setForeground(color); }
 
-        public void setBackground(SkinColor skinColor) { getSkin().setBackground(textField, skinColor); }
-        @Override public void setBackground(Color color) { if (textField == null) { super.setBackground(color); return; } getSkin().resetBackground(); textField.setBackground(color); }
+        public void setBackground(final SkinColor skinColor) { getSkin().setBackground(textField, skinColor); }
+        @Override public void setBackground(final Color color) { if (textField == null) { super.setBackground(color); return; } getSkin().resetBackground(); textField.setBackground(color); }
 
-        public void setFont(SkinFont skinFont) { getSkin().setFont(textField, skinFont); }
-        @Override public void setFont(Font font) { if (textField == null) { super.setFont(font); return; } getSkin().resetFont(); textField.setFont(font); }
+        public void setFont(final SkinFont skinFont) { getSkin().setFont(textField, skinFont); }
+        @Override public void setFont(final Font font) { if (textField == null) { super.setFont(font); return; } getSkin().resetFont(); textField.setFont(font); }
 
-        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(textField, skinCursor); }
-        @Override public void setCursor(Cursor cursor) { if (textField == null) { super.setCursor(cursor); return; } getSkin().resetCursor(); textField.setCursor(cursor); }
+        public void setCursor(final SkinCursor skinCursor) { getSkin().setCursor(textField, skinCursor); }
+        @Override public void setCursor(final Cursor cursor) { if (textField == null) { super.setCursor(cursor); return; } getSkin().resetCursor(); textField.setCursor(cursor); }
 
-        public void setCaretColor(SkinColor skinColor) { getSkin().setCaretColor(textField, skinColor); }
-        public void setCaretColor(Color color) { if (textField == null) { return; } getSkin().resetCaretColor(); textField.setCaretColor(color); }
+        public void setCaretColor(final SkinColor skinColor) { getSkin().setCaretColor(textField, skinColor); }
+        public void setCaretColor(final Color color) { if (textField == null) { return; } getSkin().resetCaretColor(); textField.setCaretColor(color); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(textField);
             super.paintComponent(g);
         }
@@ -2703,34 +2783,35 @@ public class FSkin {
         private static final long serialVersionUID = -7846549500200072420L;
 
         private JComponentSkin<JSlider> skin;
+        @Override
         public JComponentSkin<JSlider> getSkin() {
             if (skin == null) { skin = new JComponentSkin<JSlider>(); }
             return skin;
         }
 
         public SkinnedSlider() { super(); }
-        public SkinnedSlider(int orientation) { super(orientation); }
-        public SkinnedSlider(int min, int max) { super(min, max); }
-        public SkinnedSlider(int min, int max, int value) { super(min, max, value); }
-        public SkinnedSlider(int orientation, int min, int max, int value) { super(orientation, min, max, value); }
+        public SkinnedSlider(final int orientation) { super(orientation); }
+        public SkinnedSlider(final int min, final int max) { super(min, max); }
+        public SkinnedSlider(final int min, final int max, final int value) { super(min, max, value); }
+        public SkinnedSlider(final int orientation, final int min, final int max, final int value) { super(orientation, min, max, value); }
 
-        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
-        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+        public void setForeground(final SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(final Color color) { getSkin().resetForeground(); super.setForeground(color); }
 
-        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
-        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+        public void setBackground(final SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(final Color color) { getSkin().resetBackground(); super.setBackground(color); }
 
-        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
-        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+        public void setFont(final SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(final Font font) { getSkin().resetFont(); super.setFont(font); }
 
-        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
-        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+        public void setCursor(final SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(final Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
 
-        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
-        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+        public void setBorder(final SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(final Border border) { getSkin().resetBorder(); super.setBorder(border); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(this);
             super.paintComponent(g);
         }
@@ -2739,6 +2820,7 @@ public class FSkin {
         private static final long serialVersionUID = -4194423897092773473L;
 
         private JTableSkin<JTable> skin;
+        @Override
         public JTableSkin<JTable> getSkin() {
             if (skin == null) { skin = new JTableSkin<JTable>(); }
             return skin;
@@ -2746,32 +2828,32 @@ public class FSkin {
 
         public SkinnedTable() { super(); }
 
-        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
-        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+        public void setForeground(final SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(final Color color) { getSkin().resetForeground(); super.setForeground(color); }
 
-        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
-        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+        public void setBackground(final SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(final Color color) { getSkin().resetBackground(); super.setBackground(color); }
 
-        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
-        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+        public void setFont(final SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(final Font font) { getSkin().resetFont(); super.setFont(font); }
 
-        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
-        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+        public void setCursor(final SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(final Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
 
-        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
-        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+        public void setBorder(final SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(final Border border) { getSkin().resetBorder(); super.setBorder(border); }
 
-        public void setSelectionForeground(SkinColor skinColor) { getSkin().setSelectionForeground(this, skinColor); }
-        @Override public void setSelectionForeground(Color color) { getSkin().resetSelectionForeground(); super.setSelectionForeground(color); }
+        public void setSelectionForeground(final SkinColor skinColor) { getSkin().setSelectionForeground(this, skinColor); }
+        @Override public void setSelectionForeground(final Color color) { getSkin().resetSelectionForeground(); super.setSelectionForeground(color); }
 
-        public void setSelectionBackground(SkinColor skinColor) { getSkin().setSelectionBackground(this, skinColor); }
-        @Override public void setSelectionBackground(Color color) { getSkin().resetSelectionBackground(); super.setSelectionBackground(color); }
+        public void setSelectionBackground(final SkinColor skinColor) { getSkin().setSelectionBackground(this, skinColor); }
+        @Override public void setSelectionBackground(final Color color) { getSkin().resetSelectionBackground(); super.setSelectionBackground(color); }
 
-        public void setGridColor(SkinColor skinColor) { getSkin().setGridColor(this, skinColor); }
-        @Override public void setGridColor(Color color) { getSkin().resetGridColor(); super.setGridColor(color); }
+        public void setGridColor(final SkinColor skinColor) { getSkin().setGridColor(this, skinColor); }
+        @Override public void setGridColor(final Color color) { getSkin().resetGridColor(); super.setGridColor(color); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(this);
             super.paintComponent(g);
         }
@@ -2780,31 +2862,32 @@ public class FSkin {
         private static final long serialVersionUID = -1842620489613307379L;
 
         private JComponentSkin<JTableHeader> skin;
+        @Override
         public JComponentSkin<JTableHeader> getSkin() {
             if (skin == null) { skin = new JComponentSkin<JTableHeader>(); }
             return skin;
         }
 
         public SkinnedTableHeader() { super(); }
-        public SkinnedTableHeader(TableColumnModel columnModel0) { super(columnModel0); }
+        public SkinnedTableHeader(final TableColumnModel columnModel0) { super(columnModel0); }
 
-        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
-        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+        public void setForeground(final SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(final Color color) { getSkin().resetForeground(); super.setForeground(color); }
 
-        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
-        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+        public void setBackground(final SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(final Color color) { getSkin().resetBackground(); super.setBackground(color); }
 
-        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
-        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+        public void setFont(final SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(final Font font) { getSkin().resetFont(); super.setFont(font); }
 
-        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
-        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+        public void setCursor(final SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(final Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
 
-        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
-        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+        public void setBorder(final SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(final Border border) { getSkin().resetBorder(); super.setBorder(border); }
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             getSkin().update(this);
             super.paintComponent(g);
         }

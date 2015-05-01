@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -27,11 +27,6 @@ import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.home.sanctioned.VSubmenuConstructed;
 import forge.util.storage.IStorage;
 
-/**
- * TODO: Write javadoc for this type.
- *
- * @param <T> the generic type
- */
 public class DeckController<T extends DeckBase> {
     private T model;
     private boolean saved;
@@ -99,8 +94,7 @@ public class DeckController<T extends DeckBase> {
             else {
                 this.notifyModelChanged();
             }
-        }
-        else { //TODO: Make this smarter
+        } else { //TODO: Make this smarter
             this.currentFolder = this.rootFolder;
             this.modelPath = "";
             this.setSaved(true);
@@ -142,7 +136,7 @@ public class DeckController<T extends DeckBase> {
         }
     }
 
-    private void setSaved(boolean val) {
+    private void setSaved(final boolean val) {
         saved = val;
         updateCaptions();
     }
@@ -151,7 +145,7 @@ public class DeckController<T extends DeckBase> {
      * Reload current model
      */
     public void reload() {
-        String name = this.getModelName();
+        final String name = this.getModelName();
         if (name.isEmpty()) {
             newModel();
         }
@@ -178,7 +172,7 @@ public class DeckController<T extends DeckBase> {
      */
     @SuppressWarnings("unchecked")
     private void load(final String name) {
-        T newModel = this.currentFolder.get(name);
+        final T newModel = this.currentFolder.get(name);
         if (newModel != null) {
             this.setModel((T) newModel.copyTo(name), true);
         }
@@ -237,15 +231,6 @@ public class DeckController<T extends DeckBase> {
     }
 
     /**
-     * Import deck.
-     *
-     * @param newDeck the new deck
-     */
-    public void importDeck(final T newDeck) {
-        this.setModel(newDeck);
-    }
-
-    /**
      * Refresh current model or create new one if none
      */
     public void refreshModel() {
@@ -272,7 +257,7 @@ public class DeckController<T extends DeckBase> {
 
     public void updateCaptions() {
         String tabCaption = "Current Deck";
-        String title = this.getModelName();
+        final String title = this.getModelName();
         String itemManagerCaption = title.isEmpty() ? "[Untitled]" : title;
 
         if (!saved) {

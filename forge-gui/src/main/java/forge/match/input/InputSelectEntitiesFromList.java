@@ -36,7 +36,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
     }
 
     @Override
-    public String getActivateAction(Card card) {
+    public String getActivateAction(final Card card) {
         if (validChoices.contains(card)) {
             if (selected.contains(card)) {
                 return "unselect card";
@@ -54,17 +54,18 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         refresh();
     }
 
+    @Override
     public final Collection<T> getSelected() {
         return selected;
     }
 
     @SuppressWarnings("unchecked")
-    protected boolean selectEntity(GameEntity c) {
+    protected boolean selectEntity(final GameEntity c) {
         if (!validChoices.contains(c)) {
             return false;
         }
 
-        boolean entityWasSelected = selected.contains(c);
+        final boolean entityWasSelected = selected.contains(c);
         if (entityWasSelected) {
             selected.remove(c);
         }
@@ -77,9 +78,12 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
     }
 
     // might re-define later
+    @Override
     protected boolean hasEnoughTargets() { return selected.size() >= min; }
+    @Override
     protected boolean hasAllTargets() { return selected.size() >= max; }
 
+    @Override
     protected String getMessage() {
         return max == Integer.MAX_VALUE
                 ? String.format(message, selected.size())

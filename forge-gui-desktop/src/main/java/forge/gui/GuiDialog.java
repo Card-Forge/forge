@@ -1,9 +1,8 @@
 package forge.gui;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
-
-import javax.swing.UIManager;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -12,70 +11,35 @@ import forge.game.card.CardView;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FOptionPane;
 
-/** 
- * Holds player interactions using standard windows 
+/**
+ * Holds player interactions using standard windows
  *
  */
 public class GuiDialog {
     private static final String[] defaultConfirmOptions = { "Yes", "No" };
 
-    public static boolean confirm(final CardView c, final String question) {
-        return confirm(c, question, true, null);
-    }
-    public static boolean confirm(final CardView c, final String question, final boolean defaultChoice) {
-        return confirm(c, question, defaultChoice, null);
-    }
-    public static boolean confirm(final CardView c, final String question, String[] options) {
-        return confirm(c, question, true, options);
-    }
-    
-    public static boolean confirm(final CardView c, final String question, final boolean defaultIsYes, final String[] options) {
-        return confirm(c, question, defaultIsYes, options, null);
-    }
     public static boolean confirm(final CardView c, final String question, final boolean defaultIsYes, final String[] options, final CMatchUI matchUI) {
-        Callable<Boolean> confirmTask = new Callable<Boolean>() {
-            @Override
-            public Boolean call() throws Exception {
+        final Callable<Boolean> confirmTask = new Callable<Boolean>() {
+            @Override public final Boolean call() {
                 if (matchUI != null && c != null) {
                     matchUI.setCard(c);
                 }
 
                 final String title = c == null ? "Question" : c + " - Ability";
-                String questionToUse = StringUtils.isBlank(question) ? "Activate card's ability?" : question;
-                String[] opts = options == null ? defaultConfirmOptions : options;
-                int answer = FOptionPane.showOptionDialog(questionToUse, title, FOptionPane.QUESTION_ICON, opts, defaultIsYes ? 0 : 1);
-                return answer == 0;
+                final String questionToUse = StringUtils.isBlank(question) ? "Activate card's ability?" : question;
+                final String[] opts = options == null ? defaultConfirmOptions : options;
+                final int answer = FOptionPane.showOptionDialog(questionToUse, title, FOptionPane.QUESTION_ICON, opts, defaultIsYes ? 0 : 1);
+                return Boolean.valueOf(answer == 0);
             }};
 
-        FutureTask<Boolean> future = new FutureTask<Boolean>(confirmTask);
+        final FutureTask<Boolean> future = new FutureTask<Boolean>(confirmTask);
         FThreads.invokeInEdtAndWait(future);
-        try { 
+        try {
             return future.get().booleanValue();
-        }
-        catch (Exception e) { // should be no exception here
+        } catch (final InterruptedException | ExecutionException e) { // should be no exception here
             e.printStackTrace();
         }
         return false;
     }
 
-    /**
-     * <p>
-     * showInfoDialg.
-     * </p>
-     * 
-     * @param message
-     *            a {@link java.lang.String} object.
-     */
-    public static void message(final String message) {
-        message(message, UIManager.getString("OptionPane.messageDialogTitle"));
-    }
-
-    public static void message(final String message, final String title) {
-        FThreads.invokeInEdtAndWait(new Runnable() {
-            @Override
-            public void run() {
-                FOptionPane.showMessageDialog(message, title, null);
-            }
-        });
-    }
 }

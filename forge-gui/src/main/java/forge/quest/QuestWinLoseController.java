@@ -1,5 +1,12 @@
 package forge.quest;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map.Entry;
+
+import org.apache.commons.lang3.StringUtils;
+
 import forge.LobbyPlayer;
 import forge.assets.FSkinProp;
 import forge.card.CardEdition;
@@ -15,7 +22,11 @@ import forge.game.player.PlayerStatistics;
 import forge.game.player.PlayerView;
 import forge.interfaces.IButton;
 import forge.interfaces.IWinLoseView;
-import forge.item.*;
+import forge.item.BoosterPack;
+import forge.item.InventoryItem;
+import forge.item.PaperCard;
+import forge.item.SealedProduct;
+import forge.item.TournamentPack;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
@@ -25,13 +36,6 @@ import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.MyRandom;
 import forge.util.gui.SGuiChoose;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map.Entry;
 
 public class QuestWinLoseController {
     private final GameView lastGame;
@@ -89,7 +93,7 @@ public class QuestWinLoseController {
             public void run() {
                 if (isAnte) {
                     // Won/lost cards should already be calculated (even in a draw)
-                    GameOutcome.AnteResult anteResult = lastGame.getAnteResult(questPlayer);
+                    final GameOutcome.AnteResult anteResult = lastGame.getAnteResult(questPlayer);
                     if (anteResult != null) {
                         if (anteResult.wonCards != null) {
                             qc.getCards().addAllCards(anteResult.wonCards);
@@ -104,7 +108,7 @@ public class QuestWinLoseController {
                 if (matchIsNotOver) { return; } //skip remaining logic if match isn't over yet
 
                 // TODO: We don't have a enum for difficulty?
-                int difficulty = qData.getAchievements().getDifficulty();
+                final int difficulty = qData.getAchievements().getDifficulty();
 
                 final int wins = qData.getAchievements().getWin();
                 // Win case
@@ -124,7 +128,7 @@ public class QuestWinLoseController {
                             awardRandomRare("You've won a random rare for winning against a very hard deck.");
                         }
                     }
-                    
+
                     awardWinStreakBonus();
 
                     // Random rare given at 50% chance (65% with luck upgrade)
@@ -147,7 +151,7 @@ public class QuestWinLoseController {
                 // Grant booster on a win, or on a loss in easy mode
                 if (wonMatch || difficulty == 0) {
                     final int outcome = wonMatch ? wins : qData.getAchievements().getLost();
-                    int winsPerBooster = FModel.getQuestPreferences().getPrefInt(DifficultyPrefs.WINS_BOOSTER, qData.getAchievements().getDifficulty());
+                    final int winsPerBooster = FModel.getQuestPreferences().getPrefInt(DifficultyPrefs.WINS_BOOSTER, qData.getAchievements().getDifficulty());
                     if (winsPerBooster > 0 && (outcome + 1) % winsPerBooster == 0) {
                         awardBooster();
                     }
@@ -156,7 +160,7 @@ public class QuestWinLoseController {
         });
     }
 
-    private void anteReport(final List<PaperCard> cardsWon, List<PaperCard> cardsLost) {
+    private void anteReport(final List<PaperCard> cardsWon, final List<PaperCard> cardsLost) {
         // Generate Swing components and attach.
         if (cardsWon != null && !cardsWon.isEmpty()) {
             view.showCards("Spoils! Cards won from ante", cardsWon);
@@ -196,14 +200,13 @@ public class QuestWinLoseController {
         qData.save();
         FModel.getQuestPreferences().save();
     }
-    
 
     /**
      * <p>
      * awardEventCredits.
      * </p>
      * Generates and displays standard rewards for gameplay and skill level.
-     * 
+     *
      */
     private void awardEventCredits() {
         // TODO use q.qdPrefs to write bonus credits in prefs file
@@ -220,17 +223,17 @@ public class QuestWinLoseController {
         final double multiplier = qEvent.getDifficulty().getMultiplier();
 
         credBase = (int) (base * multiplier);
-        
+
         sb.append(StringUtils.capitalize(qEvent.getDifficulty().getTitle()));
         sb.append(" opponent: ").append(credBase).append(" credits.\n");
 
         final int creditsForPreviousWins = (int) ((Double.parseDouble(FModel.getQuestPreferences()
                 .getPref(QPref.REWARDS_WINS_MULTIPLIER)) * qData.getAchievements().getWin()));
         credBase += creditsForPreviousWins;
-        
+
         sb.append("Bonus for previous wins: ").append(creditsForPreviousWins).append(
-                  creditsForPreviousWins != 1 ? " credits.\n" : " credit.\n");
-        
+                creditsForPreviousWins != 1 ? " credits.\n" : " credit.\n");
+
         // Gameplay bonuses (for each game win)
         boolean hasNeverLost = true;
         int lifeDifferenceCredits = 0;
@@ -245,7 +248,7 @@ public class QuestWinLoseController {
 
             // final PlayerStatistics aiRating = game.getStatistics(computer.getName());
             PlayerStatistics humanRating = null;
-            for (Entry<LobbyPlayer, PlayerStatistics> kvRating : game) {
+            for (final Entry<LobbyPlayer, PlayerStatistics> kvRating : game) {
                 if (kvRating.getKey().equals(localHuman)) {
                     humanRating = kvRating.getValue();
                     continue;
@@ -290,11 +293,11 @@ public class QuestWinLoseController {
                 credGameplay += mulliganReward;
                 sb.append(String.format("Mulliganed to zero and still won! Bonus: %d credits.\n", mulliganReward));
             }
-            
+
             // Early turn bonus
             final int winTurn = game.getLastTurnNumber();
             final int turnCredits = getCreditsRewardForWinByTurn(winTurn);
-            
+
             if (winTurn == 0) {
                 sb.append("Won on turn zero!");
             }
@@ -310,18 +313,18 @@ public class QuestWinLoseController {
             else if (winTurn <= 15) {
                 sb.append("Won by turn 15!");
             }
-            
+
             if (turnCredits > 0) {
                 credGameplay += turnCredits;
                 sb.append(String.format(" Bonus: %d credits.\n", turnCredits));
             }
-            
+
             if (game.getLifeDelta() >= 50) {
                 lifeDifferenceCredits += Math.max(Math.min((game.getLifeDelta() - 46) / 4, 750), 0);
             }
-            
+
         } // End for(game)
-        
+
         if (lifeDifferenceCredits > 0) {
             sb.append(String.format("Life total difference: %d credits.\n", lifeDifferenceCredits));
         }
@@ -384,7 +387,7 @@ public class QuestWinLoseController {
      * awardRandomRare.
      * </p>
      * Generates and displays a random rare win case.
-     * 
+     *
      */
     private void awardRandomRare(final String message) {
         final PaperCard c = qData.getCards().addRandomRare();
@@ -393,69 +396,69 @@ public class QuestWinLoseController {
 
         view.showCards(message, cardsWon);
     }
-    
+
     /**
      * <p>
      * awardWinStreakBonus.
      * </p>
      * Generates and displays a reward for maintaining a win streak.
-     * 
+     *
      */
     private void awardWinStreakBonus() {
-        int currentStreak = (qData.getAchievements().getWinStreakCurrent() + 1) % 50;
+        final int currentStreak = (qData.getAchievements().getWinStreakCurrent() + 1) % 50;
 
         final List<PaperCard> cardsWon = new ArrayList<>();
         List<PaperCard> cardsToAdd;
         String typeWon = "";
         boolean addDraftToken = false;
-        
+
         switch (currentStreak) {
-            case 3:
-                cardsWon.addAll(qData.getCards().addRandomCommon(1));
-                typeWon = "common";
-                break;
-            case 5:
-                cardsWon.addAll(qData.getCards().addRandomUncommon(1));
-                typeWon = "uncommon";
-                break;
-            case 7:
-                cardsWon.addAll(qData.getCards().addRandomRareNotMythic(1));
+        case 3:
+            cardsWon.addAll(qData.getCards().addRandomCommon(1));
+            typeWon = "common";
+            break;
+        case 5:
+            cardsWon.addAll(qData.getCards().addRandomUncommon(1));
+            typeWon = "uncommon";
+            break;
+        case 7:
+            cardsWon.addAll(qData.getCards().addRandomRareNotMythic(1));
+            typeWon = "rare";
+            break;
+        case 10:
+            cardsToAdd = qData.getCards().addRandomMythicRare(1);
+            if (cardsToAdd != null) {
+                cardsWon.addAll(cardsToAdd);
+                typeWon = "mythic rare";
+            } else {
+                cardsWon.addAll(qData.getCards().addRandomRareNotMythic(3));
                 typeWon = "rare";
-                break;
-            case 10:
-                cardsToAdd = qData.getCards().addRandomMythicRare(1);
-                if (cardsToAdd != null) {
-                    cardsWon.addAll(cardsToAdd);
-                    typeWon = "mythic rare";
-                } else {
-                    cardsWon.addAll(qData.getCards().addRandomRareNotMythic(3));
-                    typeWon = "rare";
-                }
-                break;
-            case 25:
-                cardsToAdd = qData.getCards().addRandomMythicRare(5);
-                if (cardsToAdd != null) {
-                    cardsWon.addAll(cardsToAdd);
-                    typeWon = "mythic rare";
-                } else {
-                    cardsWon.addAll(qData.getCards().addRandomRareNotMythic(15));
-                    typeWon = "rare";
-                }
-                addDraftToken = true;
-                break;
-            case 0: //The 50th win in the streak is 0, since (50 % 50 == 0)
-                cardsToAdd = qData.getCards().addRandomMythicRare(10);
-                if (cardsToAdd != null) {
-                    cardsWon.addAll(cardsToAdd);
-                    typeWon = "mythic rare";
-                } else {
-                    cardsWon.addAll(qData.getCards().addRandomRareNotMythic(30));
-                    typeWon = "rare";
-                }
-                addDraftToken = true;
-                break;
-            default:
-                return;
+            }
+            break;
+        case 25:
+            cardsToAdd = qData.getCards().addRandomMythicRare(5);
+            if (cardsToAdd != null) {
+                cardsWon.addAll(cardsToAdd);
+                typeWon = "mythic rare";
+            } else {
+                cardsWon.addAll(qData.getCards().addRandomRareNotMythic(15));
+                typeWon = "rare";
+            }
+            addDraftToken = true;
+            break;
+        case 0: //The 50th win in the streak is 0, since (50 % 50 == 0)
+            cardsToAdd = qData.getCards().addRandomMythicRare(10);
+            if (cardsToAdd != null) {
+                cardsWon.addAll(cardsToAdd);
+                typeWon = "mythic rare";
+            } else {
+                cardsWon.addAll(qData.getCards().addRandomRareNotMythic(30));
+                typeWon = "rare";
+            }
+            addDraftToken = true;
+            break;
+        default:
+            return;
         }
 
         if (addDraftToken) {
@@ -473,7 +476,7 @@ public class QuestWinLoseController {
      * awardJackpot.
      * </p>
      * Generates and displays jackpot win case.
-     * 
+     *
      */
     private void awardJackpot() {
         final List<PaperCard> cardsWon = qData.getCards().addRandomRare(10);
@@ -485,7 +488,7 @@ public class QuestWinLoseController {
      * awardBooster.
      * </p>
      * Generates and displays booster pack win case.
-     * 
+     *
      */
     private void awardBooster() {
         List<PaperCard> cardsWon = null;
@@ -493,10 +496,10 @@ public class QuestWinLoseController {
         String title;
         if (qData.getFormat() == null) {
             final List<GameFormat> formats = new ArrayList<GameFormat>();
-            String preferredFormat = FModel.getQuestPreferences().getPref(QPref.BOOSTER_FORMAT);
+            final String preferredFormat = FModel.getQuestPreferences().getPref(QPref.BOOSTER_FORMAT);
 
             GameFormat pref = null;
-            for (GameFormat f : FModel.getFormats().getOrderedList()) {
+            for (final GameFormat f : FModel.getFormats().getOrderedList()) {
                 formats.add(f);
                 if (f.toString().equals(preferredFormat)) {
                     pref = f;
@@ -516,7 +519,7 @@ public class QuestWinLoseController {
         else {
             final List<String> sets = new ArrayList<String>();
 
-            for (SealedProduct.Template bd : FModel.getMagicDb().getBoosters()) {
+            for (final SealedProduct.Template bd : FModel.getMagicDb().getBoosters()) {
                 if (bd != null && qData.getFormat().isSetLegal(bd.getEdition())) {
                     sets.add(bd.getEdition());
                 }
@@ -532,11 +535,11 @@ public class QuestWinLoseController {
                 maxChoices += qData.getAssets().getItemLevel(QuestItemType.MEMBERSHIP_TOKEN);
             }
 
-            List<CardEdition> options = new ArrayList<CardEdition>();
-            
-            while(!sets.isEmpty() && maxChoices > 0) {
-                int ix = MyRandom.getRandom().nextInt(sets.size());
-                String set = sets.get(ix);
+            final List<CardEdition> options = new ArrayList<CardEdition>();
+
+            while (!sets.isEmpty() && maxChoices > 0) {
+                final int ix = MyRandom.getRandom().nextInt(sets.size());
+                final String set = sets.get(ix);
                 sets.remove(ix);
                 options.add(FModel.getMagicDb().getEditions().get(set));
                 maxChoices--;
@@ -544,7 +547,7 @@ public class QuestWinLoseController {
 
             final CardEdition chooseEd = SGuiChoose.one("Choose bonus booster set", options);
 
-            IUnOpenedProduct product = new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(chooseEd.getCode()));
+            final IUnOpenedProduct product = new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(chooseEd.getCode()));
             cardsWon = product.get();
             qData.getCards().addAllCards(cardsWon);
             title = "Bonus " + chooseEd.getName() + " booster pack!";
@@ -561,7 +564,7 @@ public class QuestWinLoseController {
      * awardChallengeWin.
      * </p>
      * Generates and displays win case for challenge event.
-     * 
+     *
      */
     private void awardChallengeWin() {
         final long questRewardCredits = ((QuestEventChallenge) qEvent).getCreditsReward();
@@ -585,7 +588,7 @@ public class QuestWinLoseController {
      * @param message String, reward text to be displayed, if any
      */
     private void awardSpecialReward(String message) {
-        final List<InventoryItem> itemsWon = ((QuestEvent) qEvent).getCardRewardList();
+        final List<InventoryItem> itemsWon = qEvent.getCardRewardList();
 
         if (itemsWon == null || itemsWon.isEmpty()) {
             return;
@@ -593,12 +596,12 @@ public class QuestWinLoseController {
 
         final List<PaperCard> cardsWon = new ArrayList<PaperCard>();
 
-        for (InventoryItem ii : itemsWon) {
+        for (final InventoryItem ii : itemsWon) {
             if (ii instanceof PaperCard) {
                 cardsWon.add((PaperCard) ii);
             }
             else if (ii instanceof TournamentPack || ii instanceof BoosterPack) {
-                List<PaperCard> boosterCards = new ArrayList<PaperCard>();
+                final List<PaperCard> boosterCards = new ArrayList<PaperCard>();
                 SealedProduct booster = null;
                 if (ii instanceof BoosterPack) {
                     booster = (BoosterPack) ((BoosterPack) ii).clone();
@@ -640,7 +643,7 @@ public class QuestWinLoseController {
      * getLuckyCoinResult.
      * </p>
      * A chance check, for rewards like random rares.
-     * 
+     *
      * @return boolean
      */
     private boolean getLuckyCoinResult() {
@@ -654,12 +657,12 @@ public class QuestWinLoseController {
      * getCreditsRewardForAltWin.
      * </p>
      * Retrieves credits for win under special conditions.
-     * 
+     *
      * @param whyAiLost GameLossReason
      * @return int
      */
-    private int getCreditsRewardForAltWin(final GameLossReason whyAiLost) {
-        QuestPreferences qp = FModel.getQuestPreferences();
+    private static int getCreditsRewardForAltWin(final GameLossReason whyAiLost) {
+        final QuestPreferences qp = FModel.getQuestPreferences();
         if (null == whyAiLost) {
             // Felidar, Helix Pinnacle, etc.
             return qp.getPrefInt(QPref.REWARDS_ALTERNATIVE);
@@ -683,11 +686,11 @@ public class QuestWinLoseController {
      * getCreditsRewardForWinByTurn.
      * </p>
      * Retrieves credits for win on or under turn count.
-     * 
-     * @param iTurn int - turn count 
+     *
+     * @param iTurn int - turn count
      * @return int credits won
      */
-    private int getCreditsRewardForWinByTurn(final int iTurn) {
+    private static int getCreditsRewardForWinByTurn(final int iTurn) {
         int credits;
 
         if (iTurn <= 1) {

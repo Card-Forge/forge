@@ -1,31 +1,40 @@
 package forge.toolbox;
 
-import javax.swing.*;
+import java.awt.Component;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
+import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
-import java.awt.event.*;
 
 /**
  * A list of FCheckBox items using Forge skin properties.
  * Call setListData() with an array of FCheckBox items to populate.
- * 
+ *
  * based on code at http://www.devx.com/tips/Tip/5342
  */
 @SuppressWarnings("serial")
 public class FCheckBoxList<E> extends JList<E> {
     protected static Border noFocusBorder = new EmptyBorder(1, 1, 1, 1);
 
-    public FCheckBoxList(boolean keepSelectionWhenFocusLost) {
+    public FCheckBoxList(final boolean keepSelectionWhenFocusLost) {
         setCellRenderer(new CellRenderer<E>());
 
         addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
-                int index = locationToIndex(e.getPoint());
+            public void mousePressed(final MouseEvent e) {
+                final int index = locationToIndex(e.getPoint());
 
                 if (index != -1) {
-                    FCheckBox checkbox = (FCheckBox)getModel().getElementAt(index);
+                    final FCheckBox checkbox = (FCheckBox)getModel().getElementAt(index);
                     if (checkbox.isEnabled()) {
                         checkbox.setSelected(!checkbox.isSelected());
                         repaint();
@@ -33,34 +42,34 @@ public class FCheckBoxList<E> extends JList<E> {
                 }
             }
         });
-        
+
         addKeyListener(new KeyAdapter() {
             @Override
-            public void keyPressed(KeyEvent e) {
+            public void keyPressed(final KeyEvent e) {
                 if (e.getKeyChar() == ' ') {
-                    FCheckBox item = (FCheckBox)getSelectedValue();
+                    final FCheckBox item = (FCheckBox)getSelectedValue();
                     if (null == item || !item.isEnabled()) {
                         return;
                     }
-                    
+
                     item.setSelected(!item.isSelected());
                     repaint();
                 }
             }
         });
-        
+
         if (!keepSelectionWhenFocusLost) {
             addFocusListener(new FocusListener() {
                 int lastSelectedIdx;
-                
+
                 @Override
-                public void focusLost(FocusEvent arg0) {
+                public void focusLost(final FocusEvent arg0) {
                     lastSelectedIdx = Math.max(0, getSelectedIndex());
                     clearSelection();
                 }
-                
+
                 @Override
-                public void focusGained(FocusEvent arg0) {
+                public void focusGained(final FocusEvent arg0) {
                     if (-1 == getSelectedIndex()) {
                         setSelectedIndex(lastSelectedIdx);
                     }
@@ -70,10 +79,11 @@ public class FCheckBoxList<E> extends JList<E> {
 
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
-    
+
     protected class CellRenderer<E1> implements ListCellRenderer<E1> {
-        public Component getListCellRendererComponent(JList<? extends E1> list, E1 value, int index, boolean isSelected, boolean cellHasFocus) {
-            FCheckBox checkbox = (FCheckBox)value;
+        @Override
+        public Component getListCellRendererComponent(final JList<? extends E1> list, final E1 value, final int index, final boolean isSelected, final boolean cellHasFocus) {
+            final FCheckBox checkbox = (FCheckBox)value;
             checkbox.setBackground(isSelected ? getSelectionBackground() : getBackground());
             checkbox.setForeground(isSelected ? getSelectionForeground() : getForeground());
             checkbox.setFont(getFont());

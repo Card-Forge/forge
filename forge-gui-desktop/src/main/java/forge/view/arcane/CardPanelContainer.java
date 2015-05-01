@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -40,7 +40,7 @@ import forge.view.arcane.util.CardPanelMouseListener;
 /**
  * Manages mouse events and common functionality for CardPanel containing
  * components.
- * 
+ *
  * @author Forge
  * @version $Id: CardPanelContainer.java 24793 2014-02-10 08:04:02Z Max mtg $
  */
@@ -98,7 +98,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     private void setupMouseWheelListener() {
         this.addMouseWheelListener(new MouseWheelListener() {
             @Override
-            public void mouseWheelMoved(MouseWheelEvent e) {
+            public void mouseWheelMoved(final MouseWheelEvent e) {
                 final CardPanel hitPanel = getCardPanel(e.getX(), e.getY());
                 if (hitPanel != null && e.getWheelRotation() < 0) {
                     mouseWheelZoom(hitPanel.getCard());
@@ -134,7 +134,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
                     return;
                 }
 
-                boolean zoomed = CardZoomer.SINGLETON_INSTANCE.isZoomerOpen();
+                final boolean zoomed = CardZoomer.SINGLETON_INSTANCE.isZoomerOpen();
                 if (!zoomed && dragEnabled) {
                     intialMouseDragX = -1;
                     if (getMouseDragPanel() != null) {
@@ -295,13 +295,13 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         repaint();
     }
 
-    public final void setCardPanels(List<CardPanel> cardPanels) {
+    public final void setCardPanels(final List<CardPanel> cardPanels) {
         if (cardPanels.size() == 0) {
             clear();
             return;
         }
 
-        for (CardPanel p : this.getCardPanels()) {
+        for (final CardPanel p : this.getCardPanels()) {
             if (!cardPanels.contains(p)) { //dispose of any card panels that have been removed
                 p.dispose();
             }
@@ -309,7 +309,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         this.getCardPanels().clear();
         this.removeAll();
         this.getCardPanels().addAll(cardPanels);
-        for (CardPanel cardPanel : cardPanels) {
+        for (final CardPanel cardPanel : cardPanels) {
             this.add(cardPanel);
         }
         this.doLayout();
@@ -320,7 +320,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
 
     public final void clear() {
         FThreads.assertExecutedByEdt(true);
-        for (CardPanel p : getCardPanels()) {
+        for (final CardPanel p : getCardPanels()) {
             p.dispose();
         }
         getCardPanels().clear();
@@ -403,22 +403,6 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         for (final CardPanelMouseListener listener : this.listeners) {
             listener.mouseOver(panel, evt);
         }
-    }
-
-    public final CardView getHoveredCard(final MouseEvent e) {
-        // re-evaluate cursor position so if we hovered over a card, alt-tabbed out of the application, then
-        // clicked back on the application somewhere else, the last hovered card won't register the click
-        // this cannot protect against alt tabbing off then re-focusing on the application by clicking on
-        // the already-hovered card, though, since we cannot tell the difference between that and clicking
-        // on the hovered card when the app already has focus.
-        CardPanel p = getCardPanel(e.getX(), e.getY());
-
-        // if cursor has jumped, for example via the above alt-tabbing example, fix the card hover highlight
-        if (null != hoveredPanel && p != hoveredPanel) {
-            mouseOut(hoveredPanel, e);
-        }
-
-        return (null == p || p != hoveredPanel) ? null : p.getCard();
     }
 
     public final List<CardPanel> getCardPanels() {

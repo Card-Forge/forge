@@ -1,15 +1,14 @@
 package forge.screens.match.controllers;
 
-import forge.UiCommand;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VStack;
 
-/** 
+/**
  * Controls the combat panel in the match UI.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
@@ -27,14 +26,6 @@ public class CStack implements ICDoc {
     }
     public final VStack getView() {
         return view;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
     }
 
     @Override

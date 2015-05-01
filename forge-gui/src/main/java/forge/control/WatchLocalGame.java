@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package forge.control;
 
@@ -27,6 +27,7 @@ public class WatchLocalGame extends PlayerControllerHuman {
     public void updateAchievements() {
     }
 
+    @Override
     public boolean canUndoLastAction() {
         return false;
     }

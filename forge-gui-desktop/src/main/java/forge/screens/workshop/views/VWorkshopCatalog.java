@@ -21,17 +21,14 @@ import forge.screens.workshop.controllers.CCardScript;
 import forge.screens.workshop.controllers.CWorkshopCatalog;
 import forge.util.ItemPool;
 
-/** 
+/**
  * Assembles Swing components of card catalog in workshop.
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
- * 
+ *
  */
 public enum VWorkshopCatalog implements IVDoc<CWorkshopCatalog> {
-    /** */
     SINGLETON_INSTANCE;
-
-    public static final int SEARCH_MODE_INVERSE_INDEX = 1;
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
@@ -41,7 +38,6 @@ public enum VWorkshopCatalog implements IVDoc<CWorkshopCatalog> {
     private final CDetailPicture cDetailPicture = new CDetailPicture();
 
     //========== Constructor
-    /** */
     private VWorkshopCatalog() {
         this.cardManager = new CardManager(cDetailPicture, true);
         this.cardManager.setCaption("Catalog");
@@ -77,7 +73,7 @@ public enum VWorkshopCatalog implements IVDoc<CWorkshopCatalog> {
     }
 
     @Override
-    public void setParentCell(DragCell cell0) {
+    public void setParentCell(final DragCell cell0) {
         this.parentCell = cell0;
     }
 

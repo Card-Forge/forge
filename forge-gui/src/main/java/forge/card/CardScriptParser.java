@@ -38,17 +38,13 @@ public final class CardScriptParser {
         }
     }
 
-    public boolean hasErrors() {
-        return !getErrorRegions(true).isEmpty();
-    }
-
     public Map<Integer, Integer> getErrorRegions() {
         return getErrorRegions(false);
     }
 
     /**
      * Find all erroneous regions of this script.
-     * 
+     *
      * @param quick
      *            if {@code true}, stop when the first region is found.
      * @return a {@link Map} mapping the starting index of each error region to
@@ -299,9 +295,9 @@ public final class CardScriptParser {
 
     private static final Predicate<String> startsWith(final String s) {
         return new Predicate<String>() {
-        public boolean apply(final String input) {
-            return s.startsWith(input);
-        }};
+            @Override public boolean apply(final String input) {
+                return s.startsWith(input);
+            }};
     }
 
     /**

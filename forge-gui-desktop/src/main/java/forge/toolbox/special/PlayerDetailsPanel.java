@@ -20,7 +20,6 @@ import com.google.common.base.Function;
 import forge.assets.FSkinProp;
 import forge.card.MagicColor;
 import forge.game.player.PlayerView;
-import forge.gui.ForgeAction;
 import forge.toolbox.FLabel;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FSkin;
@@ -111,7 +110,7 @@ public class PlayerDetailsPanel extends JPanel {
 
     /**
      * Handles observer update of player Zones - hand, graveyard, etc.
-     * 
+     *
      * @param p0 &emsp; {@link forge.game.player.Player}
      */
     public void updateZones() {
@@ -146,44 +145,38 @@ public class PlayerDetailsPanel extends JPanel {
         }
     }
 
-    public void setupMouseActions(final ForgeAction handAction, final ForgeAction libraryAction, final ForgeAction exileAction,
-                                  final ForgeAction graveAction, final ForgeAction flashBackAction, final ForgeAction commandAction,
+    public void setupMouseActions(final Runnable handAction, final Runnable libraryAction, final Runnable exileAction,
+                                  final Runnable graveAction, final Runnable flashBackAction, final Runnable commandAction,
                                   final Function<Byte, Boolean> manaAction) {
         // Detail label listeners
         lblGraveyard.addMouseListener(new FMouseAdapter() {
-            @Override
-            public void onLeftClick(final MouseEvent e) {
-                graveAction.actionPerformed(null);
+            @Override public void onLeftClick(final MouseEvent e) {
+                graveAction.run();
             }
         });
         lblExile.addMouseListener(new FMouseAdapter() {
-            @Override
-            public void onLeftClick(final MouseEvent e) {
-                exileAction.actionPerformed(null);
+            @Override public void onLeftClick(final MouseEvent e) {
+                exileAction.run();
             }
         });
         lblLibrary.addMouseListener(new FMouseAdapter() {
-            @Override
-            public void onLeftClick(final MouseEvent e) {
-                libraryAction.actionPerformed(null);
+            @Override public void onLeftClick(final MouseEvent e) {
+                libraryAction.run();
             }
         });
         lblHand.addMouseListener(new FMouseAdapter() {
-            @Override
-            public void onLeftClick(final MouseEvent e) {
-                handAction.actionPerformed(null);
+            @Override public void onLeftClick(final MouseEvent e) {
+                handAction.run();
             }
         });
         lblFlashback.addMouseListener(new FMouseAdapter() {
-            @Override
-            public void onLeftClick(final MouseEvent e) {
-                flashBackAction.actionPerformed(null);
+            @Override public void onLeftClick(final MouseEvent e) {
+                flashBackAction.run();
             }
         });
         lblCommand.addMouseListener(new FMouseAdapter() {
-            @Override
-            public void onLeftClick(final MouseEvent e) {
-                commandAction.actionPerformed(null);
+            @Override public void onLeftClick(final MouseEvent e) {
+                commandAction.run();
             }
         });
 
@@ -204,14 +197,15 @@ public class PlayerDetailsPanel extends JPanel {
         private final String tooltip;
         private DetailLabel(final FSkinProp icon, final String tooltip) {
             super(new FLabel.Builder().icon(FSkin.getImage(icon))
-            .opaque(false).fontSize(14).hoverable()
-            .fontStyle(Font.BOLD).iconInBackground()
-            .fontAlign(SwingConstants.RIGHT));
+                    .opaque(false).fontSize(14).hoverable()
+                    .fontStyle(Font.BOLD).iconInBackground()
+                    .fontAlign(SwingConstants.RIGHT));
 
             this.tooltip = tooltip;
             setFocusable(false);
         }
 
+        @Override
         public void setText(final String text0) {
             super.setText(text0);
             autoSizeFont();
@@ -221,6 +215,7 @@ public class PlayerDetailsPanel extends JPanel {
             super.setToolTipText(String.format(tooltip, (Object[]) args));
         }
 
+        @Override
         protected void resetIcon() {
             super.resetIcon();
             autoSizeFont();

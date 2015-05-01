@@ -1,5 +1,10 @@
 package forge.limited;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Stack;
+
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
@@ -8,8 +13,6 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.util.MyRandom;
-
-import java.util.*;
 
 public class WinstonDraft extends BoosterDraft {
     private WinstonDraftAI draftAI = null;
@@ -20,7 +23,7 @@ public class WinstonDraft extends BoosterDraft {
     private List<List<PaperCard>> piles;    // 3 piles to draft from
 
     public static WinstonDraft createDraft(final LimitedPoolType draftType) {
-        WinstonDraft draft = new WinstonDraft(draftType);
+        final WinstonDraft draft = new WinstonDraft(draftType);
         if (!draft.generateProduct()) {
             return null;
         }
@@ -28,7 +31,7 @@ public class WinstonDraft extends BoosterDraft {
         return draft;
     }
 
-    private WinstonDraft(LimitedPoolType draftType) {
+    private WinstonDraft(final LimitedPoolType draftType) {
         draftFormat = draftType;
         draftAI = new WinstonDraftAI();
 
@@ -37,10 +40,10 @@ public class WinstonDraft extends BoosterDraft {
     private void initializeWinstonDraft() {
         this.deck = new Stack<PaperCard>();
         for (int i = 0; i < this.product.size(); i++) {
-            Supplier<List<PaperCard>> supply = this.product.get(i);
+            final Supplier<List<PaperCard>> supply = this.product.get(i);
             for(int j = 0; j < NUM_PLAYERS; j++) {
                 // Remove Basic Lands from draft for simplicity
-                for (PaperCard paperCard : Iterables.filter(supply.get(), Predicates.not(PaperCard.Predicates.Presets.IS_BASIC_LAND))) {
+                for (final PaperCard paperCard : Iterables.filter(supply.get(), Predicates.not(PaperCard.Predicates.Presets.IS_BASIC_LAND))) {
                     this.deck.add(paperCard);
                 }
             }
@@ -50,7 +53,7 @@ public class WinstonDraft extends BoosterDraft {
         // Create three Winston piles, adding the top card from the Winston deck to start each pile
         this.piles = new ArrayList<>();
         for(int i = 0; i < NUM_PILES; i++) {
-            List<PaperCard> pile = new ArrayList<PaperCard>();
+            final List<PaperCard> pile = new ArrayList<PaperCard>();
             pile.add(this.deck.pop());
             this.piles.add(pile);
         }
@@ -77,8 +80,9 @@ public class WinstonDraft extends BoosterDraft {
             }
         }
 
-        if (nextPile < 0 || nextPile > this.piles.size())
+        if (nextPile < 0 || nextPile > this.piles.size()) {
             return null;
+        }
 
         nextBoosterGroup = nextPile;
 
@@ -89,64 +93,72 @@ public class WinstonDraft extends BoosterDraft {
         return getPoolByPile(this.nextBoosterGroup);
     }
 
-    private CardPool getPoolByPile(int i) {
-        CardPool result = new CardPool();
+    private CardPool getPoolByPile(final int i) {
+        final CardPool result = new CardPool();
         result.addAllFlat(this.piles.get(i));
         return result;
     }
 
+    @Override
     public void computerChoose() {
         nextBoosterGroup = 0;
         draftAI.choose();
     }
 
-    public void refillPile(List<PaperCard> pile) {
-        if (this.deck.size() > 0)
+    public void refillPile(final List<PaperCard> pile) {
+        if (this.deck.size() > 0) {
             pile.add(this.deck.pop());
+        }
     }
 
-    public int getNextChoice(int startPile) {
+    public int getNextChoice(final int startPile) {
         for(int i = startPile; i < NUM_PILES; i++) {
-            if (this.piles.get(i).size() > 0)
+            if (this.piles.get(i).size() > 0) {
                 return i;
+            }
         }
         // All piles are empty, so draft is about to end.
         return -1;
     }
 
+    @Override
     public boolean hasNextChoice() {
         return getNextChoice(0) >= 0;
     }
 
-    public boolean isLastPileAndEmptyDeck(int pile) {
+    public boolean isLastPileAndEmptyDeck(final int pile) {
         return this.deck.size() == 0 && getNextChoice(pile+1) >= 0;
     }
 
+    @Override
     public int getCurrentBoosterIndex() {
         return nextBoosterGroup;
     }
 
-    public CardPool takeActivePile(boolean humanAction) {
-        CardPool pool = getPoolByPile(this.nextBoosterGroup);
+    public CardPool takeActivePile(final boolean humanAction) {
+        final CardPool pool = getPoolByPile(this.nextBoosterGroup);
 
         this.piles.get(this.nextBoosterGroup).clear();
         this.refillPile(this.piles.get(this.nextBoosterGroup));
         this.nextBoosterGroup = 0;
-        if (humanAction)
+        if (humanAction) {
             computerChoose();
+        }
         return pool;
     }
 
-    public CardPool passActivePile(boolean humanAction) {
+    public CardPool passActivePile(final boolean humanAction) {
         this.refillPile(this.piles.get(this.nextBoosterGroup));
         this.nextBoosterGroup++;
         if (this.nextBoosterGroup >= this.piles.size()) {
-            CardPool pool = new CardPool();
-            if (this.deck.size() > 0)
+            final CardPool pool = new CardPool();
+            if (this.deck.size() > 0) {
                 pool.add(this.deck.pop());
+            }
             this.nextBoosterGroup = 0;
-            if (humanAction)
+            if (humanAction) {
                 computerChoose();
+            }
             return pool;
         }
         return null;

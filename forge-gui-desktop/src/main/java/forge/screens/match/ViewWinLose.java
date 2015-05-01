@@ -41,6 +41,7 @@ import forge.toolbox.FTextArea;
 public class ViewWinLose implements IWinLoseView<FButton> {
     private final ControlWinLose control;
 
+    private final FScrollPane scrLog;
     private final FButton btnContinue, btnRestart, btnQuit;
     private final SkinnedPanel pnlCustom;
 
@@ -86,7 +87,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
             if (!FModel.getGauntletMini().isGauntletDraft()) {
                 break;
             }
-        //$FALL-THROUGH$
+            //$FALL-THROUGH$
         case Sealed:
             control = new LimitedWinLose(this, game0, matchUI);
             break;
@@ -128,14 +129,14 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         txtLog.setFont(FSkin.getFont(14));
         txtLog.setFocusable(true); // allow highlighting and copying of log
 
-        FLabel btnCopyLog = new FLabel.ButtonBuilder().text("Copy to clipboard").build();
+        final FLabel btnCopyLog = new FLabel.ButtonBuilder().text("Copy to clipboard").build();
         btnCopyLog.setCommand(new UiCommand() {
             @Override
             public void run() {
-                StringSelection ss = new StringSelection(txtLog.getText());
+                final StringSelection ss = new StringSelection(txtLog.getText());
                 try {
                     Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-                } catch (IllegalStateException ex) {
+                } catch (final IllegalStateException ex) {
                     // ignore; may be unavailable on some platforms
                 }
             }
@@ -172,7 +173,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         pnlLeft.add(pnlButtons, "w 100%!");
 
         final JPanel pnlLog = new JPanel(new MigLayout("insets 0, wrap, ax center"));
-        final FScrollPane scrLog = new FScrollPane(txtLog, false);
+        scrLog = new FScrollPane(txtLog, false);
         pnlLog.setOpaque(false);
 
         pnlLog.add(
@@ -184,7 +185,9 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         pnlLeft.add(pnlLog, "w 100%!");
 
         lblTitle.setText(composeTitle(game0));
+    }
 
+    public final void show() {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -207,7 +210,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         return control;
     }
 
-    private String composeTitle(final GameView game) {
+    private static String composeTitle(final GameView game) {
         final String winner = game.getWinningPlayerName();
         final int winningTeam = game.getWinningTeam();
         if (winner == null) {
@@ -220,16 +223,19 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     }
 
     /** @return {@link forge.toolbox.FButton} */
+    @Override
     public FButton getBtnContinue() {
         return this.btnContinue;
     }
 
     /** @return {@link forge.toolbox.FButton} */
+    @Override
     public FButton getBtnRestart() {
         return this.btnRestart;
     }
 
     /** @return {@link forge.toolbox.FButton} */
+    @Override
     public FButton getBtnQuit() {
         return this.btnQuit;
     }
@@ -251,7 +257,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         }
     }
 
-    private String removePlayerTypeFromLogMessage(String message) {
+    private static String removePlayerTypeFromLogMessage(final String message) {
         return message.replaceAll("\\[[^\\]]*\\]", "");
     }
 
@@ -261,12 +267,12 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     }
 
     @Override
-    public void showRewards(Runnable runnable) {
+    public void showRewards(final Runnable runnable) {
         runnable.run(); //just run on GUI thread
     }
 
     @Override
-    public void showCards(String title, List<PaperCard> cards) {
+    public void showCards(final String title, final List<PaperCard> cards) {
         final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cards);
         getPnlCustom().add(new TitleLabel(title), CONSTRAINTS_TITLE);
         if (FModel.getPreferences().getPrefBoolean(FPref.UI_LARGE_CARD_VIEWERS)) {
@@ -278,13 +284,13 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     }
 
     @Override
-    public void showMessage(String message, String title, FSkinProp icon) {
-        SkinIcon icoTemp = FSkin.getIcon(icon).scale(0.5);
+    public void showMessage(String message, final String title, final FSkinProp icon) {
+        final SkinIcon icoTemp = FSkin.getIcon(icon).scale(0.5);
 
         if (message.contains("\n")) { //ensure new line characters are encoded
             message = "<html>" + message.replace("\n", "<br>") + "</html>";
         }
-        SkinnedLabel lblMessage = new SkinnedLabel(message);
+        final SkinnedLabel lblMessage = new SkinnedLabel(message);
         lblMessage.setFont(FSkin.getFont(14));
         lblMessage.setForeground(FORE_COLOR);
         lblMessage.setHorizontalAlignment(SwingConstants.CENTER);
@@ -297,7 +303,6 @@ public class ViewWinLose implements IWinLoseView<FButton> {
 
     /**
      * JLabel header between reward sections.
-     * 
      */
     @SuppressWarnings("serial")
     private class TitleLabel extends SkinnedLabel {

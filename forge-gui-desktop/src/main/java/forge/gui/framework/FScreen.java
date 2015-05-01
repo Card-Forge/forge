@@ -23,7 +23,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.view.FView;
 
-/** 
+/**
  * Definitions for Forge screens
  */
 public class FScreen {
@@ -76,15 +76,6 @@ public class FScreen {
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
             "Planar Deck Editor",
-            FSkin.getImage(FSkinProp.IMG_PACK),
-            true,
-            "Close Editor",
-            ForgeConstants.EDITOR_LAYOUT_FILE,
-            false);
-    public static final FScreen DECK_EDITOR_VANGUARD = new FScreen(
-            VDeckEditorUI.SINGLETON_INSTANCE,
-            CDeckEditorUI.SINGLETON_INSTANCE,
-            "Vanguard Deck Editor",
             FSkin.getImage(FSkinProp.IMG_PACK),
             true,
             "Close Editor",
@@ -188,14 +179,14 @@ public class FScreen {
 
     public static FScreen getMatchScreen(final CMatchUI controller, final VMatchUI view) {
         return new FScreen(
-            view,
-            controller,
-            "Game",
-            FSkin.getIcon(FSkinProp.ICO_ALPHASTRIKE), //TODO: Create icon for match screen
-            true,
-            "Concede Game",
-            ForgeConstants.MATCH_LAYOUT_FILE,
-            true);
+                view,
+                controller,
+                "Game",
+                FSkin.getIcon(FSkinProp.ICO_ALPHASTRIKE), //TODO: Create icon for match screen
+                true,
+                "Concede Game",
+                ForgeConstants.MATCH_LAYOUT_FILE,
+                true);
     }
 
     public IVTopLevelUI getView() {
@@ -226,14 +217,14 @@ public class FScreen {
         return closeButtonTooltip;
     }
 
-    public boolean onSwitching(FScreen toScreen) {
+    public boolean onSwitching(final FScreen toScreen) {
         return view.onSwitching(this, toScreen);
     }
- 
+
     public boolean onClosing() {
         return view.onClosing(this);
     }
-    
+
     public FileLocation getLayoutFile() {
         return layoutFile;
     }
@@ -247,7 +238,7 @@ public class FScreen {
     }
     private static boolean deleteLayoutFile(final FileLocation file) {
         try {
-            File f = new File(file.userPrefLoc);
+            final File f = new File(file.userPrefLoc);
             f.delete();
             return true;
         } catch (final Exception e) {
@@ -255,13 +246,9 @@ public class FScreen {
             FOptionPane.showErrorDialog("Failed to delete layout file.");
         }
         return false;
-        
+
     }
 
-    public void open() {
-        Singletons.getControl().setCurrentScreen(this);
-    }
-    
     public void close() {
         Singletons.getView().getNavigationBar().closeTab(this);
     }

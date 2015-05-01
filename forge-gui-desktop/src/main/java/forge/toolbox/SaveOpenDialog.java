@@ -6,39 +6,39 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package forge.toolbox;
 
-import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 
-/** 
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+/**
  * A class for showing open or save dialogs in Forge.
- * 
- *
- *
  */
 @SuppressWarnings("serial")
 public class SaveOpenDialog extends JPanel {
 
-    private JFileChooser fc;
+    private final JFileChooser fc;
 
     /**
      *  Enum to contain information for filetype filtering in the open/save dialog.
      *  Add more entries to enum as needed.
-     * 
-     * 
+     *
+     *
      */
     public enum Filetypes {
         LAYOUT  ("Layout File", "xml"),
@@ -46,14 +46,14 @@ public class SaveOpenDialog extends JPanel {
 
         private final String TypeName;
         private final String TypeExtension;
-        Filetypes(String Name, String Extension) {
+        Filetypes(final String Name, final String Extension) {
             this.TypeName = Name;
             this.TypeExtension = Extension;
         }
     }
 
     /**
-     * 
+     *
      * constructor for a save or open dialog.
      */
     public SaveOpenDialog() {
@@ -65,7 +65,7 @@ public class SaveOpenDialog extends JPanel {
      * to Type to allow all files to be viewed/opened.
      * @param defFileName pass the default file to use, also determines directory
      * @param type label to tell what type of file to filter
-     * 
+     *
      *
      */
     public File OpenDialog(final File defFileName, final Filetypes type) {
@@ -77,7 +77,7 @@ public class SaveOpenDialog extends JPanel {
             fc.addChoosableFileFilter(filter);
         }
 
-        int RetValue = fc.showOpenDialog(JOptionPane.getRootFrame());
+        final int RetValue = fc.showOpenDialog(JOptionPane.getRootFrame());
         if (RetValue == JFileChooser.APPROVE_OPTION) {
             final File RetFile = fc.getSelectedFile();
             return RetFile;
@@ -87,11 +87,11 @@ public class SaveOpenDialog extends JPanel {
 
     /**
      * Shows the save dialog.
-     * 
+     *
      * @param defFileName default file name/directory to show when save dialog is opened
      * @param type file types to show in dialog
-     * 
-     * 
+     *
+     *
      */
     public File SaveDialog(final File defFileName, final Filetypes type) {
         File RetFile = defFileName;
@@ -104,7 +104,7 @@ public class SaveOpenDialog extends JPanel {
             fc.addChoosableFileFilter(filter);
         }
 
-        int RetValue = fc.showSaveDialog(JOptionPane.getRootFrame());
+        final int RetValue = fc.showSaveDialog(JOptionPane.getRootFrame());
 
         /* user picked save */
         if (RetValue == JFileChooser.APPROVE_OPTION) {

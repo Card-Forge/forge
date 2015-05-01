@@ -1,18 +1,30 @@
 package forge.screens.home.quest;
 
+import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+
+import net.miginfocom.swing.MigLayout;
 import forge.assets.FSkinProp;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.interfaces.IButton;
 import forge.quest.IVQuestStats;
-import forge.screens.home.*;
-import forge.toolbox.*;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-
-import java.awt.*;
+import forge.screens.home.EMenuGroup;
+import forge.screens.home.IVSubmenu;
+import forge.screens.home.LblHeader;
+import forge.screens.home.StartButton;
+import forge.screens.home.VHomeUI;
+import forge.toolbox.FCheckBox;
+import forge.toolbox.FComboBoxWrapper;
+import forge.toolbox.FLabel;
+import forge.toolbox.FScrollPanel;
+import forge.toolbox.FSkin;
 
 /**
  * Assembles Swing components of quest duels submenu singleton.
@@ -20,7 +32,6 @@ import java.awt.*;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
 public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
-    /** */
     SINGLETON_INSTANCE;
 
     // Fields used with interface IVDoc
@@ -60,8 +71,8 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
     private final LblHeader lblTitle = new LblHeader("Quest Mode: Duels");
 
     private final FLabel lblInfo = new FLabel.Builder().text("Select your next duel.")
-            .fontStyle(Font.BOLD).fontSize(16)
-            .fontAlign(SwingConstants.LEFT).build();
+        .fontStyle(Font.BOLD).fontSize(16)
+        .fontAlign(SwingConstants.LEFT).build();
 
     private final FLabel lblCurrentDeck = new FLabel.Builder()
         .text("Current deck hasn't been set yet.")
@@ -81,7 +92,7 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
      * Constructor.
      */
     private VSubmenuDuels() {
-        
+
         final String constraints = "h 30px!, gap 0 0 0 5px";
         pnlStats.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 0"));
         pnlStats.add(btnUnlock, "w 150px!, h 30px!, gap 0 0 0 10px");
@@ -99,9 +110,9 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
         pnlStats.add(cbCharm, constraints);
         cbxPet.addTo(pnlStats, constraints);
         pnlStats.setOpaque(false);
-        
+
         btnRandomOpponent.setToolTipText("Starts a duel against a randomly selected opponent.");
-        
+
     }
 
     /* (non-Javadoc)
@@ -274,7 +285,7 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
      * @see forge.gui.framework.IVDoc#setParentCell(forge.gui.framework.DragCell)
      */
     @Override
-    public void setParentCell(DragCell cell0) {
+    public void setParentCell(final DragCell cell0) {
         this.parentCell = cell0;
     }
 
@@ -286,12 +297,13 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
         return parentCell;
     }
 
-	/**
-	 * @return the cbCharm
-	 */
-	public FCheckBox getCbCharm() {
-		return cbCharm;
-	}
+    /**
+     * @return the cbCharm
+     */
+    @Override
+    public FCheckBox getCbCharm() {
+        return cbCharm;
+    }
 
     @Override
     public boolean isChallengesView() {

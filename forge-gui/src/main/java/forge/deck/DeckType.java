@@ -17,19 +17,12 @@ public enum DeckType {
     NET_COMMANDER_DECK ("Net Commander Decks");
 
     private String value;
-    private DeckType(String value) {
+    private DeckType(final String value) {
         this.value = value;
     }
+
     @Override
     public String toString() {
         return value;
-    }
-    public static DeckType fromString(String value){
-        for (final DeckType d : DeckType.values()) {
-            if (d.toString().equalsIgnoreCase(value)) {
-                return d;
-            }
-        }
-        throw new IllegalArgumentException("No Enum specified for this string");
     }
 }

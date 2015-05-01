@@ -70,7 +70,7 @@ public abstract class ItemView<T extends InventoryItem> {
         this.model = model0;
         this.scroller = new FScrollPane(false) {
             @Override
-            protected void processMouseWheelEvent(MouseWheelEvent e) {
+            protected void processMouseWheelEvent(final MouseWheelEvent e) {
                 if (e.isControlDown()) {
                     onMouseWheelZoom(e);
                     return;
@@ -81,9 +81,13 @@ public abstract class ItemView<T extends InventoryItem> {
         this.pnlOptions.setOpaque(false);
         this.pnlOptions.setBorder(new FSkin.MatteSkinBorder(1, 0, 0, 0, BORDER_COLOR));
         this.scroller.setBorder(new FSkin.LineSkinBorder(BORDER_COLOR));
-        this.button = new FLabel.Builder().hoverable().selectable(true)
-            .icon(getIcon()).iconScaleAuto(false)
-            .tooltip(getCaption()).build();
+        this.button = new FLabel.Builder()
+            .hoverable()
+            .selectable(true)
+            .icon(getIcon())
+            .iconScaleAuto(false)
+            .tooltip(getCaption())
+            .build();
     }
 
     public void initialize(final int index) {
@@ -92,16 +96,14 @@ public abstract class ItemView<T extends InventoryItem> {
         //hook incremental search functionality
         final IncrementalSearch incrementalSearch  = new IncrementalSearch();
         comp.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusLost(FocusEvent arg0) {
+            @Override public void focusLost(final FocusEvent arg0) {
                 incrementalSearch.cancel();
             }
         });
         comp.addKeyListener(incrementalSearch);
 
         this.button.setCommand(new Runnable() {
-            @Override
-            public void run() {
+            @Override public void run() {
                 if (button.isSelected()) {
                     itemManager.setViewIndex(index);
                 }
@@ -114,11 +116,10 @@ public abstract class ItemView<T extends InventoryItem> {
         this.scroller.setViewportView(comp);
         this.scroller.getVerticalScrollBar().addAdjustmentListener(new ToolTipListener());
         this.scroller.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
+            @Override public void componentResized(final ComponentEvent e) {
                 onResize();
                 //scroll selection into view whenever view height changes
-                int height = e.getComponent().getHeight();
+                final int height = e.getComponent().getHeight();
                 if (height != heightBackup) {
                     heightBackup = height;
                     scrollSelectionIntoView();
@@ -143,11 +144,11 @@ public abstract class ItemView<T extends InventoryItem> {
         return scroller.getVerticalScrollBar().getValue();
     }
 
-    public void setScrollValue(int value) {
+    public void setScrollValue(final int value) {
         scroller.getVerticalScrollBar().setValue(value);
     }
 
-    protected void onMouseWheelZoom(MouseWheelEvent e) {
+    protected void onMouseWheelZoom(final MouseWheelEvent e) {
     }
 
     public boolean isIncrementalSearchActive() {
@@ -178,9 +179,9 @@ public abstract class ItemView<T extends InventoryItem> {
     }
 
     public final Collection<T> getSelectedItems() {
-        List<T> items = new ArrayList<T>();
-        for (Integer i : getSelectedIndices()) {
-            T item = getItemAtIndex(i);
+        final List<T> items = new ArrayList<T>();
+        for (final Integer i : getSelectedIndices()) {
+            final T item = getItemAtIndex(i);
             if (item != null) {
                 items.add(item);
             }
@@ -188,11 +189,11 @@ public abstract class ItemView<T extends InventoryItem> {
         return items;
     }
 
-    public final boolean setSelectedItem(T item) {
+    public final boolean setSelectedItem(final T item) {
         return setSelectedItem(item, true);
     }
-    public final boolean setSelectedItem(T item, boolean scrollIntoView) {
-        int index = getIndexOfItem(item);
+    public final boolean setSelectedItem(final T item, final boolean scrollIntoView) {
+        final int index = getIndexOfItem(item);
         if (index != -1) {
             setSelectedIndex(index, scrollIntoView);
             return true;
@@ -200,13 +201,13 @@ public abstract class ItemView<T extends InventoryItem> {
         return false;
     }
 
-    public final boolean setSelectedItems(Iterable<T> items) {
+    public final boolean setSelectedItems(final Iterable<T> items) {
         return setSelectedItems(items, true);
     }
-    public final boolean setSelectedItems(Iterable<T> items, boolean scrollIntoView) {
-        List<Integer> indices = new ArrayList<Integer>();
-        for (T item : items) {
-            int index = getIndexOfItem(item);
+    public final boolean setSelectedItems(final Iterable<T> items, final boolean scrollIntoView) {
+        final List<Integer> indices = new ArrayList<Integer>();
+        for (final T item : items) {
+            final int index = getIndexOfItem(item);
             if (index != -1) {
                 indices.add(index);
             }
@@ -221,11 +222,11 @@ public abstract class ItemView<T extends InventoryItem> {
         return false;
     }
 
-    public void setSelectedIndex(int index) {
+    public void setSelectedIndex(final int index) {
         setSelectedIndex(index, true);
     }
-    public void setSelectedIndex(int index, boolean scrollIntoView) {
-        int count = getCount();
+    public void setSelectedIndex(int index, final boolean scrollIntoView) {
+        final int count = getCount();
         if (count == 0) { return; }
 
         if (index < 0) {
@@ -241,22 +242,22 @@ public abstract class ItemView<T extends InventoryItem> {
         }
     }
 
-    public void setSelectedIndices(Iterable<Integer> indices) {
+    public void setSelectedIndices(final Iterable<Integer> indices) {
         setSelectedIndices(indices, true);
     }
-    public void setSelectedIndices(Iterable<Integer> indices, boolean scrollIntoView) {
-        int count = getCount();
+    public void setSelectedIndices(final Iterable<Integer> indices, final boolean scrollIntoView) {
+        final int count = getCount();
         if (count == 0) { return; }
 
-        List<Integer> indexList = new ArrayList<Integer>();
-        for (Integer index : indices) {
+        final List<Integer> indexList = new ArrayList<Integer>();
+        for (final Integer index : indices) {
             if (index >= 0 && index < count) {
                 indexList.add(index);
             }
         }
 
         if (indexList.isEmpty()) { //if no index in range, set selected index based on first index
-            for (Integer index : indices) {
+            for (final Integer index : indices) {
                 setSelectedIndex(index);
                 return;
             }
@@ -272,15 +273,15 @@ public abstract class ItemView<T extends InventoryItem> {
     protected void onSelectionChange() {
         final int index = getSelectedIndex();
         if (index != -1) {
-            ListSelectionEvent event = new ListSelectionEvent(itemManager, index, index, false);
-            for (ListSelectionListener listener : itemManager.getSelectionListeners()) {
+            final ListSelectionEvent event = new ListSelectionEvent(itemManager, index, index, false);
+            for (final ListSelectionListener listener : itemManager.getSelectionListeners()) {
                 listener.valueChanged(event);
             }
         }
     }
 
     public void scrollSelectionIntoView() {
-        Container parent = getComponent().getParent();
+        final Container parent = getComponent().getParent();
         if (parent instanceof JViewport) {
             onScrollSelectionIntoView((JViewport)parent);
         }
@@ -334,13 +335,13 @@ public abstract class ItemView<T extends InventoryItem> {
         private void setPopupSize() {
             // resize popup to size of label (ensure there's room for the next character so the label
             // doesn't show '...' in the time between when we set the text and when we increase the size
-            Dimension labelDimension = popupLabel.getPreferredSize();
-            Dimension popupDimension = new Dimension(labelDimension.width + 12, labelDimension.height + 4);
+            final Dimension labelDimension = popupLabel.getPreferredSize();
+            final Dimension popupDimension = new Dimension(labelDimension.width + 12, labelDimension.height + 4);
             SwingUtilities.getRoot(popupLabel).setSize(popupDimension);
         }
 
-        private void findNextMatch(int startIdx, boolean reverse) {
-            int numItems = itemManager.getItemCount();
+        private void findNextMatch(int startIdx, final boolean reverse) {
+            final int numItems = itemManager.getItemCount();
             if (0 == numItems) {
                 cancel();
                 return;
@@ -349,11 +350,11 @@ public abstract class ItemView<T extends InventoryItem> {
             // find the next item that matches the string
             startIdx %= numItems;
             final int increment = reverse ? numItems - 1 : 1;
-            int stopIdx = (startIdx + numItems - increment) % numItems;
-            String searchStr = str.toString();
+            final int stopIdx = (startIdx + numItems - increment) % numItems;
+            final String searchStr = str.toString();
             boolean found = false;
             for (int idx = startIdx;; idx = (idx + increment) % numItems) {
-                T item = ItemView.this.getItemAtIndex(idx);
+                final T item = ItemView.this.getItemAtIndex(idx);
                 if (item == null) {
                     break;
                 }
@@ -388,14 +389,13 @@ public abstract class ItemView<T extends InventoryItem> {
                 popupTimer.restart();
             }
             else {
-                PopupFactory factory = PopupFactory.getSharedInstance();
-                Point tableLoc = ItemView.this.getLocationOnScreen();
+                final PopupFactory factory = PopupFactory.getSharedInstance();
+                final Point tableLoc = ItemView.this.getLocationOnScreen();
                 popup = factory.getPopup(null, popupLabel, tableLoc.x + 10, tableLoc.y + 10);
                 FSkin.setTempBackground(SwingUtilities.getRoot(popupLabel), FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
 
                 popupTimer = new Timer(5000, new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
+                    @Override public void actionPerformed(final ActionEvent e) {
                         cancel();
                     }
                 });
@@ -424,14 +424,14 @@ public abstract class ItemView<T extends InventoryItem> {
         }
 
         @Override
-        public void keyPressed(KeyEvent e) {
+        public void keyPressed(final KeyEvent e) {
             if (popupShowing) {
                 if (KeyEvent.VK_ESCAPE == e.getKeyCode()) {
                     cancel();
                 }
             }
             else {
-                for (KeyListener keyListener : itemManager.getKeyListeners()) {
+                for (final KeyListener keyListener : itemManager.getKeyListeners()) {
                     keyListener.keyPressed(e);
                     if (e.isConsumed()) { return; }
                 }
@@ -445,9 +445,9 @@ public abstract class ItemView<T extends InventoryItem> {
         }
 
         @Override
-        public void keyTyped(KeyEvent e) {
+        public void keyTyped(final KeyEvent e) {
             if (!popupShowing) {
-                for (KeyListener keyListener : itemManager.getKeyListeners()) {
+                for (final KeyListener keyListener : itemManager.getKeyListeners()) {
                     keyListener.keyTyped(e);
                     if (e.isConsumed()) { return; }
                 }
@@ -478,11 +478,11 @@ public abstract class ItemView<T extends InventoryItem> {
                     return;
                 }
 
-            //$FALL-THROUGH$
+                //$FALL-THROUGH$
             default:
                 // shift and/or alt-graph down is ok.  anything else is a hotkey (e.g. ctrl-f)
                 if (okModifiers != (e.getModifiers() | okModifiers)
-                 || !CharUtils.isAsciiPrintable(e.getKeyChar())) { // escape sneaks in here on Windows
+                || !CharUtils.isAsciiPrintable(e.getKeyChar())) { // escape sneaks in here on Windows
                     return;
                 }
                 str.append(e.getKeyChar());
@@ -492,9 +492,9 @@ public abstract class ItemView<T extends InventoryItem> {
         }
 
         @Override
-        public void keyReleased(KeyEvent e) {
+        public void keyReleased(final KeyEvent e) {
             if (!popupShowing) {
-                for (KeyListener keyListener : itemManager.getKeyListeners()) {
+                for (final KeyListener keyListener : itemManager.getKeyListeners()) {
                     keyListener.keyReleased(e);
                     if (e.isConsumed()) { return; }
                 }

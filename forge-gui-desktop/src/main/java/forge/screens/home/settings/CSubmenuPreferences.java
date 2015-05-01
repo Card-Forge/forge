@@ -1,7 +1,20 @@
 package forge.screens.home.settings;
 
-import forge.UiCommand;
+import java.awt.Desktop;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JCheckBox;
+import javax.swing.SwingUtilities;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
 import forge.Singletons;
+import forge.UiCommand;
 import forge.ai.AiProfileUtil;
 import forge.control.FControl.CloseAction;
 import forge.control.RestartUtil;
@@ -10,30 +23,18 @@ import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
+import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
-import forge.properties.ForgeConstants;
 import forge.sound.SoundSystem;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FComboBoxPanel;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
-import javax.swing.*;
-
-import java.awt.Desktop;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Controls the preferences submenu in the home UI.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
@@ -142,7 +143,7 @@ public enum CSubmenuPreferences implements ICDoc {
                 CSubmenuPreferences.this.resetDeckEditorLayout();
             }
         });
-        
+
         view.getBtnDeleteWorkshopUI().setCommand(new UiCommand() {
             @Override
             public void run() {
@@ -191,7 +192,7 @@ public enum CSubmenuPreferences implements ICDoc {
         view.getCbDevMode().setSelected(ForgePreferences.DEV_MODE);
         view.getCbEnableMusic().setSelected(prefs.getPrefBoolean(FPref.UI_ENABLE_MUSIC));
 
-        for(Pair<JCheckBox, FPref> kv: lstControls) {
+        for(final Pair<JCheckBox, FPref> kv: lstControls) {
             kv.getKey().setSelected(prefs.getPrefBoolean(kv.getValue()));
         }
         view.reloadShortcuts();
@@ -203,20 +204,12 @@ public enum CSubmenuPreferences implements ICDoc {
         updating = false;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
-    }
-
     private void resetForgeSettingsToDefault() {
-        String userPrompt =
+        final String userPrompt =
                 "This will reset all preferences to their defaults and restart Forge.\n\n" +
                         "Reset and restart Forge?";
         if (FOptionPane.showConfirmDialog(userPrompt, "Reset Settings")) {
-            ForgePreferences prefs = FModel.getPreferences();
+            final ForgePreferences prefs = FModel.getPreferences();
             prefs.reset();
             prefs.save();
             update();
@@ -225,7 +218,7 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     private void resetDeckEditorLayout() {
-        String userPrompt =
+        final String userPrompt =
                 "This will reset the Deck Editor screen layout.\n" +
                         "All tabbed views will be restored to their default positions.\n\n" +
                         "Reset layout?";
@@ -237,7 +230,7 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     private void resetWorkshopLayout() {
-        String userPrompt =
+        final String userPrompt =
                 "This will reset the Workshop screen layout.\n" +
                         "All tabbed views will be restored to their default positions.\n\n" +
                         "Reset layout?";
@@ -249,7 +242,7 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     private void resetMatchScreenLayout() {
-        String userPrompt =
+        final String userPrompt =
                 "This will reset the layout of the Match screen.\n" +
                         "If you want to save the current layout first, please use " +
                         "the Dock tab -> Save Layout option in the Match screen.\n\n" +
@@ -262,56 +255,53 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     private void openUserProfileDirectory() {
-        try{
+        try {
             if (Desktop.isDesktopSupported()) {
                 Desktop.getDesktop().open(new File(ForgeConstants.USER_DIR));
             }
-        }
-        catch(Exception e) {
+        } catch(final Exception e) {
             System.out.println("Unable to open Directory: " + e.toString());
         }
     }
 
     private void openContentDirectory() {
-        try{
+        try {
             if (Desktop.isDesktopSupported()) {
                 Desktop.getDesktop().open(new File(ForgeConstants.CACHE_DIR));
             }
-        }
-        catch(Exception e) {
+        } catch(final Exception e) {
             System.out.println("Unable to open Directory: " + e.toString());
         }
     }
 
     private void initializeGameLogVerbosityComboBox() {
-        FPref userSetting = FPref.DEV_LOG_ENTRY_TYPE;
-        FComboBoxPanel<GameLogEntryType> panel = this.view.getGameLogVerbosityComboBoxPanel();
-        FComboBox<GameLogEntryType> comboBox = createComboBox(GameLogEntryType.values(), userSetting);
-        GameLogEntryType selectedItem = GameLogEntryType.valueOf(this.prefs.getPref(userSetting));
+        final FPref userSetting = FPref.DEV_LOG_ENTRY_TYPE;
+        final FComboBoxPanel<GameLogEntryType> panel = this.view.getGameLogVerbosityComboBoxPanel();
+        final FComboBox<GameLogEntryType> comboBox = createComboBox(GameLogEntryType.values(), userSetting);
+        final GameLogEntryType selectedItem = GameLogEntryType.valueOf(this.prefs.getPref(userSetting));
         panel.setComboBox(comboBox, selectedItem);
     }
-    
+
     private void initializeCloseActionComboBox() {
         final FComboBoxPanel<CloseAction> panel = this.view.getCloseActionComboBoxPanel();
         final FComboBox<CloseAction> comboBox = new FComboBox<CloseAction>(CloseAction.values());
         comboBox.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(final ItemEvent e) {
-                Singletons.getControl().setCloseAction((CloseAction) comboBox.getSelectedItem());
+            @Override public void itemStateChanged(final ItemEvent e) {
+                Singletons.getControl().setCloseAction(comboBox.getSelectedItem());
             }
         });
         panel.setComboBox(comboBox, Singletons.getControl().getCloseAction());
     }
 
     private void initializeAiProfilesComboBox() {
-        FPref userSetting = FPref.UI_CURRENT_AI_PROFILE;
-        FComboBoxPanel<String> panel = this.view.getAiProfilesComboBoxPanel();
-        FComboBox<String> comboBox = createComboBox(AiProfileUtil.getProfilesArray(), userSetting);
-        String selectedItem = this.prefs.getPref(userSetting);
+        final FPref userSetting = FPref.UI_CURRENT_AI_PROFILE;
+        final FComboBoxPanel<String> panel = this.view.getAiProfilesComboBoxPanel();
+        final FComboBox<String> comboBox = createComboBox(AiProfileUtil.getProfilesArray(), userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);
     }
 
-    private <E> FComboBox<E> createComboBox(E[] items, final ForgePreferences.FPref setting) {
+    private <E> FComboBox<E> createComboBox(final E[] items, final ForgePreferences.FPref setting) {
         final FComboBox<E> comboBox = new FComboBox<E>(items);
         addComboBoxListener(comboBox, setting);
         return comboBox;
@@ -319,9 +309,8 @@ public enum CSubmenuPreferences implements ICDoc {
 
     private <E> void addComboBoxListener(final FComboBox<E> comboBox, final ForgePreferences.FPref setting) {
         comboBox.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(final ItemEvent e) {
-                E selectedType = (E) comboBox.getSelectedItem();
+            @Override public void itemStateChanged(final ItemEvent e) {
+                final E selectedType = comboBox.getSelectedItem();
                 CSubmenuPreferences.this.prefs.setPref(setting, selectedType.toString());
                 CSubmenuPreferences.this.prefs.save();
             }
@@ -329,22 +318,21 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     private void initializePlayerNameButton() {
-        FLabel btn = view.getBtnPlayerName();
+        final FLabel btn = view.getBtnPlayerName();
         setPlayerNameButtonText();
         btn.setCommand(getPlayerNameButtonCommand());
     }
 
     private void setPlayerNameButtonText() {
-        FLabel btn = view.getBtnPlayerName();
-        String name = prefs.getPref(FPref.PLAYER_NAME);
+        final FLabel btn = view.getBtnPlayerName();
+        final String name = prefs.getPref(FPref.PLAYER_NAME);
         btn.setText(StringUtils.isBlank(name) ? "Human" : name);
     }
 
     @SuppressWarnings("serial")
     private UiCommand getPlayerNameButtonCommand() {
         return new UiCommand() {
-            @Override
-            public void run() {
+            @Override public void run() {
                 GamePlayerUtil.setPlayerName();
                 setPlayerNameButtonText();
             }

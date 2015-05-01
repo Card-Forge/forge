@@ -23,7 +23,6 @@ import com.google.common.base.Function;
 
 import forge.assets.FSkinProp;
 import forge.assets.ISkinImage;
-import forge.control.GuiTimer;
 import forge.download.GuiDownloadService;
 import forge.download.GuiDownloader;
 import forge.error.BugReportDialog;
@@ -33,7 +32,6 @@ import forge.gui.GuiChoose;
 import forge.gui.framework.FScreen;
 import forge.interfaces.IGuiBase;
 import forge.interfaces.IGuiGame;
-import forge.interfaces.IGuiTimer;
 import forge.item.PaperCard;
 import forge.match.HostedMatch;
 import forge.model.FModel;
@@ -70,7 +68,7 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public void invokeInEdtLater(Runnable proc) {
+    public void invokeInEdtLater(final Runnable proc) {
         SwingUtilities.invokeLater(proc);
     }
 
@@ -99,28 +97,23 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public IGuiTimer createGuiTimer(Runnable proc, int interval) {
-        return new GuiTimer(proc, interval);
-    }
-
-    @Override
-    public ISkinImage getSkinIcon(FSkinProp skinProp) {
+    public ISkinImage getSkinIcon(final FSkinProp skinProp) {
         if (skinProp == null) { return null; }
         return FSkin.getIcon(skinProp);
     }
 
     @Override
-    public ISkinImage getUnskinnedIcon(String path) {
+    public ISkinImage getUnskinnedIcon(final String path) {
         return new FSkin.UnskinnedIcon(path);
     }
 
     @Override
-    public ISkinImage getCardArt(PaperCard card) {
+    public ISkinImage getCardArt(final PaperCard card) {
         return null; //TODO
     }
 
     @Override
-    public ISkinImage createLayeredImage(FSkinProp background, String overlayFilename, float opacity) {
+    public ISkinImage createLayeredImage(final FSkinProp background, final String overlayFilename, final float opacity) {
         final BufferedImage image = new BufferedImage(background.getWidth(), background.getHeight(), BufferedImage.TYPE_INT_ARGB);
         final Graphics2D g = image.createGraphics();
         final FSkin.SkinImage backgroundImage = FSkin.getImage(background);
@@ -134,17 +127,17 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public void showImageDialog(ISkinImage image, String message, String title) {
+    public void showImageDialog(final ISkinImage image, final String message, final String title) {
         FOptionPane.showMessageDialog(message, title, (SkinImage)image);
     }
 
     @Override
-    public int showOptionDialog(String message, String title, FSkinProp icon, String[] options, int defaultOption) {
+    public int showOptionDialog(final String message, final String title, final FSkinProp icon, final String[] options, final int defaultOption) {
         return FOptionPane.showOptionDialog(message, title, icon == null ? null : FSkin.getImage(icon), options, defaultOption);
     }
 
     @Override
-    public String showInputDialog(String message, String title, FSkinProp icon, String initialInput, String[] inputOptions) {
+    public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final String[] inputOptions) {
         return FOptionPane.showInputDialog(message, title, icon == null ? null : FSkin.getImage(icon), initialInput, inputOptions);
     }
 
@@ -192,7 +185,7 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public String showFileDialog(String title, String defaultDir) {
+    public String showFileDialog(final String title, final String defaultDir) {
         final JFileChooser fc = new JFileChooser(defaultDir);
         final int rc = fc.showDialog(null, title);
         if (rc != JFileChooser.APPROVE_OPTION) {
@@ -202,46 +195,46 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public void showBugReportDialog(String title, String text, boolean showExitAppBtn) {
+    public void showBugReportDialog(final String title, final String text, final boolean showExitAppBtn) {
         BugReportDialog.show(title, text, showExitAppBtn);
     }
 
     @Override
-    public File getSaveFile(File defaultFile) {
-        JFileChooser fc = new JFileChooser();
+    public File getSaveFile(final File defaultFile) {
+        final JFileChooser fc = new JFileChooser();
         fc.setSelectedFile(defaultFile);
         fc.showSaveDialog(null);
         return fc.getSelectedFile();
     }
 
     @Override
-    public void download(GuiDownloadService service, Callback<Boolean> callback) {
-        new GuiDownloader(service, callback);
+    public void download(final GuiDownloadService service, final Callback<Boolean> callback) {
+        new GuiDownloader(service, callback).show();
     }
 
     @Override
-    public void copyToClipboard(String text) {
-        StringSelection ss = new StringSelection(text);
+    public void copyToClipboard(final String text) {
+        final StringSelection ss = new StringSelection(text);
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
     }
 
     @Override
-    public void browseToUrl(String url) throws IOException, URISyntaxException {
+    public void browseToUrl(final String url) throws IOException, URISyntaxException {
         Desktop.getDesktop().browse(new URI(url));
     }
 
     @Override
-    public IAudioClip createAudioClip(String filename) {
+    public IAudioClip createAudioClip(final String filename) {
         return AudioClip.fileExists(filename) ? new AudioClip(filename) : null;
     }
 
     @Override
-    public IAudioMusic createAudioMusic(String filename) {
+    public IAudioMusic createAudioMusic(final String filename) {
         return new AudioMusic(filename);
     }
 
     @Override
-    public void startAltSoundSystem(String filename, boolean isSynchronized) {
+    public void startAltSoundSystem(final String filename, final boolean isSynchronized) {
         new AltSoundSystem(filename, isSynchronized).start();
     }
 
@@ -263,6 +256,7 @@ public class GuiDesktop implements IGuiBase {
         Singletons.getView().getFrame().validate();
     }
 
+    @Override
     public IGuiGame getNewGuiGame() {
         return new CMatchUI();
     }

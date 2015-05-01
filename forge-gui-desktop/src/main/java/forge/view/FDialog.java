@@ -57,8 +57,8 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
     private static final boolean antiAliasBorder;
 
     static {
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        GraphicsDevice gd = ge.getDefaultScreenDevice();
+        final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        final GraphicsDevice gd = ge.getDefaultScreenDevice();
         isSetShapeSupported = gd.isWindowTranslucencySupported(WindowTranslucency.PERPIXEL_TRANSPARENT);
 
         //only apply anti-aliasing to border on Windows, as it creates issues on Linux
@@ -78,7 +78,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
         this(true, false, "dialog");
     }
 
-    public FDialog(boolean modal0, boolean allowResize0, String insets) {
+    public FDialog(final boolean modal0, final boolean allowResize0, final String insets) {
         super(JOptionPane.getRootFrame(), modal0);
         allowResize = allowResize0;
         setUndecorated(true);
@@ -120,7 +120,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
             addComponentListener(new ComponentAdapter() {
                 @Override
                 public void componentResized(final ComponentEvent e) { //must update shape whenever dialog is resized
-                    int arc = cornerDiameter - 4; //leave room for border aliasing
+                    final int arc = cornerDiameter - 4; //leave room for border aliasing
                     FDialog.this.setShape(new RoundRectangle2D.Float(0, 0, FDialog.this.getWidth(), FDialog.this.getHeight(), arc, arc));
                 }
             });
@@ -129,10 +129,10 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
 
     //Make Escape key close dialog if allowed
     @Override
-    public boolean dispatchKeyEvent(KeyEvent e) {
+    public boolean dispatchKeyEvent(final KeyEvent e) {
         if (e.getID() == KeyEvent.KEY_PRESSED) {
             if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+                final WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
                 Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
                 return true;
             }
@@ -141,7 +141,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
     }
 
     @Override
-    public void paint(Graphics g) {
+    public void paint(final Graphics g) {
         super.paint(g);
         if (allowResize) { return; }
 
@@ -167,7 +167,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
     }
 
     @Override
-    public void setVisible(boolean visible) {
+    public void setVisible(final boolean visible) {
         if (isVisible() == visible) { return; }
 
         if (visible) {
@@ -201,12 +201,12 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
         super.setVisible(visible);
     }
 
-    public void setDefaultFocus(JComponent comp) {
+    public void setDefaultFocus(final JComponent comp) {
         defaultFocus = comp;
     }
 
     @Override
-    public void setTitle(String title) {
+    public void setTitle(final String title) {
         super.setTitle(title);
         if (titleBar != null) {
             titleBar.setTitle(title);
@@ -214,7 +214,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
     }
 
     @Override
-    public void setIconImage(Image image) {
+    public void setIconImage(final Image image) {
         super.setIconImage(image);
         if (titleBar != null) {
             titleBar.setIconImage(image);
@@ -231,7 +231,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
 
     //relay certain methods to the inner panel if it has been initialized
     @Override
-    public void setContentPane(Container contentPane) {
+    public void setContentPane(final Container contentPane) {
         if (innerPanel != null) {
             innerPanel.add(contentPane, "w 100%!, h 100%!");
         }
@@ -239,15 +239,15 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
     }
 
     @Override
-    public Component add(Component comp) {
+    public Component add(final Component comp) {
         if (innerPanel != null) {
             return innerPanel.add(comp);
         }
         return super.add(comp);
     }
-    
+
     @Override
-    public void add(PopupMenu popup) {
+    public void add(final PopupMenu popup) {
         if (innerPanel != null) {
             innerPanel.add(popup);
             return;
@@ -255,38 +255,38 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
         super.add(popup);
     }
 
-    public void add(Component comp, int x, int y, int w, int h) {
+    public void add(final Component comp, final int x, final int y, final int w, final int h) {
         add(comp, "x " + x + ", y " + y + ", w " + w + ", h " + h);
     }
 
     @Override
-    public void add(Component comp, Object constraints) {
+    public void add(final Component comp, final Object constraints) {
         if (innerPanel != null) {
             innerPanel.add(comp, constraints);
             return;
         }
         super.add(comp, constraints);
     }
-    
+
     @Override
-    public Component add(Component comp, int index) {
+    public Component add(final Component comp, final int index) {
         if (innerPanel != null) {
             return innerPanel.add(comp, index);
         }
         return super.add(comp, index);
     }
-    
+
     @Override
-    public void add(Component comp, Object constraints, int index) {
+    public void add(final Component comp, final Object constraints, final int index) {
         if (innerPanel != null) {
             innerPanel.add(comp, constraints, index);
             return;
         }
         super.add(comp, constraints, index);
     }
-    
+
     @Override
-    public Component add(String name, Component comp) {
+    public Component add(final String name, final Component comp) {
         if (innerPanel != null) {
             return innerPanel.add(name, comp);
         }
@@ -296,7 +296,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
     private void addMoveSupport() {
         titleBar.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(final MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     if (e.getClickCount() == 1) {
                         locBeforeMove = getLocation();
@@ -305,7 +305,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
                 }
             }
             @Override
-            public void mouseReleased(MouseEvent e) {
+            public void mouseReleased(final MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     locBeforeMove = null;
                     mouseDownLoc = null;
@@ -314,7 +314,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
         });
         titleBar.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
-            public void mouseDragged(MouseEvent e) {
+            public void mouseDragged(final MouseEvent e) {
                 if (mouseDownLoc != null) {
                     final Point loc = e.getLocationOnScreen();
                     final int dx = loc.x - mouseDownLoc.x;
@@ -325,7 +325,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
         });
     }
 
-    private void setResizeCursor(int resizeCursor0) {
+    private void setResizeCursor(final int resizeCursor0) {
         resizeCursor = resizeCursor0;
         getRootPane().setCursor(Cursor.getPredefinedCursor(resizeCursor0));
     }
@@ -338,7 +338,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
         final JRootPane resizeBorders = getRootPane();
         resizeBorders.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(final MouseEvent e) {
                 if (resizeCursor != Cursor.DEFAULT_CURSOR && SwingUtilities.isLeftMouseButton(e)) {
                     locBeforeMove = getLocation();
                     sizeBeforeResize = getSize();
@@ -346,7 +346,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
                 }
             }
             @Override
-            public void mouseReleased(MouseEvent e) {
+            public void mouseReleased(final MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     locBeforeMove = null;
                     sizeBeforeResize = null;
@@ -355,7 +355,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
                 }
             }
             @Override
-            public void mouseExited(MouseEvent e) {
+            public void mouseExited(final MouseEvent e) {
                 if (mouseDownLoc == null) {
                     setResizeCursor(Cursor.DEFAULT_CURSOR);
                 }
@@ -363,7 +363,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
         });
         resizeBorders.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
-            public void mouseMoved(MouseEvent e) {
+            public void mouseMoved(final MouseEvent e) {
                 if (mouseDownLoc == null) {
                     final int grabArea = borderThickness * 2;
                     final Point loc = e.getPoint();
@@ -401,7 +401,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
                 }
             }
             @Override
-            public void mouseDragged(MouseEvent e) {
+            public void mouseDragged(final MouseEvent e) {
                 if (mouseDownLoc == null) { return; }
 
                 final Point loc = e.getLocationOnScreen();
@@ -412,39 +412,39 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
                 int width = sizeBeforeResize.width;
                 int height = sizeBeforeResize.height;
                 switch (resizeCursor) {
-                    case Cursor.E_RESIZE_CURSOR:
-                        width += dx;
-                        break;
-                    case Cursor.W_RESIZE_CURSOR:
-                        width -= dx;
-                        break;
-                    case Cursor.S_RESIZE_CURSOR:
-                        height += dy;
-                        break;
-                    case Cursor.N_RESIZE_CURSOR:
-                        height -= dy;
-                        break;
-                    case Cursor.SE_RESIZE_CURSOR:
-                        width += dx;
-                        height += dy;
-                        break;
-                    case Cursor.NE_RESIZE_CURSOR:
-                        width += dx;
-                        height -= dy;
-                        break;
-                    case Cursor.SW_RESIZE_CURSOR:
-                        width -= dx;
-                        height += dy;
-                        break;
-                    case Cursor.NW_RESIZE_CURSOR:
-                        width -= dx;
-                        height -= dy;
-                        break;
+                case Cursor.E_RESIZE_CURSOR:
+                    width += dx;
+                    break;
+                case Cursor.W_RESIZE_CURSOR:
+                    width -= dx;
+                    break;
+                case Cursor.S_RESIZE_CURSOR:
+                    height += dy;
+                    break;
+                case Cursor.N_RESIZE_CURSOR:
+                    height -= dy;
+                    break;
+                case Cursor.SE_RESIZE_CURSOR:
+                    width += dx;
+                    height += dy;
+                    break;
+                case Cursor.NE_RESIZE_CURSOR:
+                    width += dx;
+                    height -= dy;
+                    break;
+                case Cursor.SW_RESIZE_CURSOR:
+                    width -= dx;
+                    height += dy;
+                    break;
+                case Cursor.NW_RESIZE_CURSOR:
+                    width -= dx;
+                    height -= dy;
+                    break;
                 }
 
                 //ensure new size in bounds
-                Dimension minSize = getMinimumSize();
-                Dimension maxSize = getMaximumSize();
+                final Dimension minSize = getMinimumSize();
+                final Dimension maxSize = getMaximumSize();
                 if (width < minSize.width) {
                     dx += (width - minSize.width);
                     width = minSize.width;
@@ -466,18 +466,18 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
                 int x = locBeforeMove.x;
                 int y = locBeforeMove.y;
                 switch (resizeCursor) {
-                    case Cursor.W_RESIZE_CURSOR:
-                    case Cursor.SW_RESIZE_CURSOR:
-                        x += dx;
-                        break;
-                    case Cursor.N_RESIZE_CURSOR:
-                    case Cursor.NE_RESIZE_CURSOR:
-                        y += dy;
-                        break;
-                    case Cursor.NW_RESIZE_CURSOR:
-                        x += dx;
-                        y += dy;
-                        break;
+                case Cursor.W_RESIZE_CURSOR:
+                case Cursor.SW_RESIZE_CURSOR:
+                    x += dx;
+                    break;
+                case Cursor.N_RESIZE_CURSOR:
+                case Cursor.NE_RESIZE_CURSOR:
+                    y += dy;
+                    break;
+                case Cursor.NW_RESIZE_CURSOR:
+                    x += dx;
+                    y += dy;
+                    break;
                 }
 
                 //set bounds based on new size and location
@@ -492,7 +492,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
     }
 
     @Override
-    public void setMinimized(boolean b) {
+    public void setMinimized(final boolean b) {
     }
 
     @Override
@@ -501,7 +501,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
     }
 
     @Override
-    public void setMaximized(boolean b) {
+    public void setMaximized(final boolean b) {
     }
 
     @Override
@@ -510,7 +510,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
     }
 
     @Override
-    public void setFullScreen(boolean b) {
+    public void setFullScreen(final boolean b) {
     }
 
     @Override
@@ -519,7 +519,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
     }
 
     @Override
-    public void setLockTitleBar(boolean b) {
+    public void setLockTitleBar(final boolean b) {
     }
 
     @Override

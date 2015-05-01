@@ -6,16 +6,43 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.itemmanager;
+
+import java.awt.Component;
+import java.awt.Toolkit;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.swing.JMenu;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
+
+import net.miginfocom.swing.MigLayout;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -25,38 +52,28 @@ import forge.UiCommand;
 import forge.assets.FSkinProp;
 import forge.gui.GuiUtils;
 import forge.item.InventoryItem;
-import forge.itemmanager.ColumnDef;
-import forge.itemmanager.IItemManager;
-import forge.itemmanager.ItemManagerConfig;
-import forge.itemmanager.ItemManagerModel;
 import forge.itemmanager.filters.ItemFilter;
-import forge.itemmanager.views.*;
+import forge.itemmanager.views.ImageView;
+import forge.itemmanager.views.ItemListView;
+import forge.itemmanager.views.ItemTableColumn;
+import forge.itemmanager.views.ItemView;
 import forge.screens.match.controllers.CDetailPicture;
-import forge.toolbox.*;
+import forge.toolbox.ContextMenuBuilder;
+import forge.toolbox.FLabel;
+import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinIcon;
 import forge.toolbox.FSkin.SkinnedCheckBox;
 import forge.toolbox.FSkin.SkinnedPanel;
+import forge.toolbox.FTextField;
+import forge.toolbox.LayoutHelper;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.ReflectionUtil;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
-
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import java.util.List;
-import java.util.Map.Entry;
-
 
 /**
  * ItemManager.
- * 
+ *
  * @param <T>
  *            the generic type
  */
@@ -108,7 +125,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
 
     private static final SkinIcon VIEW_OPTIONS_ICON = FSkin.getIcon(FSkinProp.ICO_SETTINGS).resize(20, 20);
     private final FLabel btnViewOptions = new FLabel.Builder()
-        .hoverable().selectable(true)
+        .hoverable()
+        .selectable(true)
         .icon(VIEW_OPTIONS_ICON).iconScaleAuto(false)
         .tooltip("Toggle to show/hide options for current view")
         .build();
@@ -122,7 +140,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
 
     /**
      * ItemManager Constructor.
-     * 
+     *
      * @param genericType0 the class of item that this table will contain
      * @param statLabels0 stat labels for this item manager
      * @param wantUnique0 whether this table should display only one item with the same name
@@ -167,11 +185,10 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         this.chkEnableFilters.setText("(*)");
         this.chkEnableFilters.setSelected(true);
         this.chkEnableFilters.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent arg0) {
+            @Override public void itemStateChanged(final ItemEvent arg0) {
                 lockFiltering = true;
-                boolean enabled = chkEnableFilters.isSelected();
-                for (ItemFilter<? extends T> filter : orderedFilters) {
+                final boolean enabled = chkEnableFilters.isSelected();
+                for (final ItemFilter<? extends T> filter : orderedFilters) {
                     filter.setEnabled(enabled);
                 }
                 txtFilterLogic.setEnabled(enabled);
@@ -194,7 +211,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         this.add(this.btnFilters);
         this.add(this.lblCaption);
         this.add(this.lblRatio);
-        for (ItemView<T> view : this.views) {
+        for (final ItemView<T> view : this.views) {
             this.add(view.getButton());
             view.getButton().setSelected(view == this.currentView);
         }
@@ -204,9 +221,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         this.add(this.currentView.getScroller());
 
         final Runnable cmdAddCurrentSearch = new Runnable() {
-            @Override
-            public void run() {
-                ItemFilter<? extends T> searchFilter = mainSearchFilter.createCopy();
+            @Override public void run() {
+                final ItemFilter<? extends T> searchFilter = mainSearchFilter.createCopy();
                 if (searchFilter != null) {
                     lockFiltering = true; //prevent updating filtering from this change
                     addFilter(searchFilter);
@@ -216,8 +232,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
             }
         };
         final Runnable cmdResetFilters = new Runnable() {
-            @Override
-            public void run() {
+            @Override public void run() {
                 resetFilters();
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
@@ -228,8 +243,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
             }
         };
         final Runnable cmdHideFilters = new Runnable() {
-            @Override
-            public void run() {
+            @Override public void run() {
                 setHideFilters(!getHideFilters());
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
@@ -241,8 +255,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         };
 
         this.mainSearchFilter.getMainComponent().addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
+            @Override public void keyPressed(final KeyEvent e) {
                 if (e.getKeyCode() == 10) {
                     if (e.isControlDown() || e.isMetaDown()) {
                         cmdAddCurrentSearch.run();
@@ -253,14 +266,12 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
 
         //setup command for btnFilters
         final UiCommand cmdBuildFilterMenu = new UiCommand() {
-            @Override
-            public void run() {
-                JPopupMenu menu = new JPopupMenu("FilterMenu");
+            @Override public void run() {
+                final JPopupMenu menu = new JPopupMenu("FilterMenu");
                 if (hideFilters) {
                     GuiUtils.addMenuItem(menu, "Show Filters", null, cmdHideFilters);
-                }
-                else {
-                    JMenu addMenu = GuiUtils.createMenu("Add");
+                } else {
+                    final JMenu addMenu = GuiUtils.createMenu("Add");
                     if (mainSearchFilter.isEnabled()) {
                         GuiUtils.addMenuItem(addMenu, "Current text search",
                                 KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
@@ -268,8 +279,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
                         if (config != ItemManagerConfig.STRING_ONLY) {
                             buildAddFilterMenu(addMenu);
                         }
-                    }
-                    else {
+                    } else {
                         addMenu.setEnabled(false);
                     }
                     menu.add(addMenu);
@@ -284,8 +294,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         this.btnFilters.setRightClickCommand(cmdBuildFilterMenu); //show menu on right-click too
 
         this.btnViewOptions.setCommand(new Runnable() {
-            @Override
-            public void run() {
+            @Override public void run() {
                 currentView.getPnlOptions().setVisible(!currentView.getPnlOptions().isVisible());
                 revalidate();
             }
@@ -302,26 +311,28 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         }
     }
 
+    @Override
     public ItemManagerConfig getConfig() {
         return this.config;
     }
 
-    public void setup(ItemManagerConfig config0) {
+    @Override
+    public void setup(final ItemManagerConfig config0) {
         this.setup(config0, null);
     }
-    public void setup(ItemManagerConfig config0, Map<ColumnDef, ItemTableColumn> colOverrides) {
+    public void setup(final ItemManagerConfig config0, final Map<ColumnDef, ItemTableColumn> colOverrides) {
         this.config = config0;
         this.setWantUnique(config0.getUniqueCardsOnly());
-        for (ItemView<T> view : this.views) {
+        for (final ItemView<T> view : this.views) {
             view.setup(config0, colOverrides);
         }
         this.setViewIndex(config0.getViewIndex());
         this.setHideFilters(config0.getHideFilters());
     }
 
-    public void setViewIndex(int viewIndex) {
+    public void setViewIndex(final int viewIndex) {
         if (viewIndex < 0 || viewIndex >= this.views.size()) { return; }
-        ItemView<T> view = this.views.get(viewIndex);
+        final ItemView<T> view = this.views.get(viewIndex);
         if (this.currentView == view) { return; }
 
         if (this.config != null) {
@@ -355,19 +366,19 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         this.focus();
     }
 
-    public void setHideViewOptions(int viewIndex, boolean hideViewOptions) {
+    public void setHideViewOptions(final int viewIndex, final boolean hideViewOptions) {
         if (viewIndex < 0 || viewIndex >= this.views.size()) { return; }
         this.views.get(viewIndex).getPnlOptions().setVisible(!hideViewOptions);
     }
 
     @Override
     public void doLayout() {
-        int buttonPanelHeight = 32;
-        LayoutHelper helper = new LayoutHelper(this);
+        final int buttonPanelHeight = 32;
+        final LayoutHelper helper = new LayoutHelper(this);
 
         boolean showButtonPanel = false;
         if (this.pnlButtons.isVisible()) {
-            for (Component comp : this.pnlButtons.getComponents()) {
+            for (final Component comp : this.pnlButtons.getComponents()) {
                 if (comp.isVisible()) {
                     showButtonPanel = true;
                     break;
@@ -379,15 +390,13 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
             if (showButtonPanel) {
                 helper.offset(0, -4);
                 helper.fillLine(this.pnlButtons, buttonPanelHeight);
-            }
-            else {
+            } else {
                 this.pnlButtons.setBounds(0, 0, 0, 0); //prevent horizontal line appearing
             }
-        }
-        else {
+        } else {
             int number = 0;
-            StringBuilder logicBuilder = new StringBuilder();
-            for (ItemFilter<? extends T> filter : this.orderedFilters) {
+            final StringBuilder logicBuilder = new StringBuilder();
+            for (final ItemFilter<? extends T> filter : this.orderedFilters) {
                 filter.setNumber(++number);
                 logicBuilder.append(number + "&");
                 helper.fillLine(filter.getPanel(), ItemFilter.PANEL_HEIGHT);
@@ -405,20 +414,19 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         helper.offset(1, 0); //align filters button with expand/collapse all button
         helper.include(this.btnFilters, 61, FTextField.HEIGHT);
         int captionWidth = this.lblCaption.getAutoSizeWidth();
-        int ratioWidth = this.lblRatio.getAutoSizeWidth();
-        int viewButtonWidth = FTextField.HEIGHT;
-        int viewButtonCount = this.views.size() + 1;
-        int availableCaptionWidth = helper.getParentWidth() - viewButtonWidth * viewButtonCount - ratioWidth - helper.getX() - (viewButtonCount + 2) * helper.getGapX();
+        final int ratioWidth = this.lblRatio.getAutoSizeWidth();
+        final int viewButtonWidth = FTextField.HEIGHT;
+        final int viewButtonCount = this.views.size() + 1;
+        final int availableCaptionWidth = helper.getParentWidth() - viewButtonWidth * viewButtonCount - ratioWidth - helper.getX() - (viewButtonCount + 2) * helper.getGapX();
         if (captionWidth > availableCaptionWidth) { //truncate caption if not enough room for it
             this.lblCaption.setToolTipText(this.lblCaption.getText());
             captionWidth = availableCaptionWidth;
-        }
-        else {
+        } else {
             this.lblCaption.setToolTipText(null);
         }
         helper.include(this.lblCaption, captionWidth, FTextField.HEIGHT);
         helper.fillLine(this.lblRatio, FTextField.HEIGHT, (viewButtonWidth + helper.getGapX()) * viewButtonCount - viewButtonCount + 1); //leave room for view buttons
-        for (ItemView<T> view : this.views) {
+        for (final ItemView<T> view : this.views) {
             helper.include(view.getButton(), viewButtonWidth, FTextField.HEIGHT);
             helper.offset(-1, 0);
         }
@@ -431,78 +439,85 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     /**
-     * 
+     *
      * getGenericType.
-     * 
+     *
      * @return generic type of items
      */
+    @Override
     public Class<T> getGenericType() {
         return this.genericType;
     }
 
     /**
-     * 
+     *
      * getCaption.
-     * 
+     *
      * @return caption to display before ratio
      */
+    @Override
     public String getCaption() {
         return this.lblCaption.getText();
     }
 
     /**
-     * 
+     *
      * setCaption.
-     * 
+     *
      * @param caption - caption to display before ratio
      */
-    public void setCaption(String caption) {
+    @Override
+    public void setCaption(final String caption) {
         this.lblCaption.setText(caption);
     }
 
     /**
-     * 
+     *
      * Gets the item pool.
-     * 
+     *
      * @return ItemPoolView
      */
+    @Override
     public ItemPool<T> getPool() {
         return this.pool;
     }
 
     /**
-     * 
+     *
      * Sets the item pool.
-     * 
+     *
      * @param items
      */
+    @Override
     public void setPool(final Iterable<T> items) {
         this.setPool(ItemPool.createFrom(items, this.genericType), false);
     }
 
     /**
-     * 
+     *
      * Sets the item pool.
-     * 
+     *
      * @param poolView
      * @param infinite
      */
-    public void setPool(final ItemPool<T> poolView, boolean infinite) {
+    @Override
+    public void setPool(final ItemPool<T> poolView, final boolean infinite) {
         this.setPoolImpl(ItemPool.createFrom(poolView, this.genericType), infinite);
     }
 
+    @Override
     public void setPool(final ItemPool<T> pool0) {
         this.setPoolImpl(pool0, false);
     }
 
     /**
-     * 
+     *
      * Sets the item pool.
-     * 
+     *
      * @param pool0
      * @param infinite
      */
-    private void setPoolImpl(final ItemPool<T> pool0, boolean infinite) {
+    private void setPoolImpl(final ItemPool<T> pool0, final boolean infinite) {
         this.model.clear();
         this.pool = pool0;
         this.model.addItems(this.pool);
@@ -515,89 +530,99 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     /**
-     * 
+     *
      * getItemCount.
-     * 
+     *
      * @return int
      */
+    @Override
     public int getItemCount() {
         return this.currentView.getCount();
     }
 
     /**
-     * 
+     *
      * getSelectionCount.
-     * 
+     *
      * @return int
      */
+    @Override
     public int getSelectionCount() {
         return this.currentView.getSelectionCount();
     }
 
     /**
-     * 
+     *
      * getSelectedItem.
-     * 
+     *
      * @return T
      */
+    @Override
     public T getSelectedItem() {
         return this.currentView.getSelectedItem();
     }
 
     /**
-     * 
+     *
      * getSelectedItems.
-     * 
+     *
      * @return Iterable<T>
      */
+    @Override
     public Collection<T> getSelectedItems() {
         return this.currentView.getSelectedItems();
     }
 
     /**
-     * 
+     *
      * getSelectedItems.
-     * 
+     *
      * @return ItemPool<T>
      */
+    @Override
     public ItemPool<T> getSelectedItemPool() {
-        ItemPool<T> selectedItemPool = new ItemPool<T>(this.genericType);
-        for (T item : getSelectedItems()) {
+        final ItemPool<T> selectedItemPool = new ItemPool<T>(this.genericType);
+        for (final T item : getSelectedItems()) {
             selectedItemPool.add(item, getItemCount(item));
         }
         return selectedItemPool;
     }
 
     /**
-     * 
+     *
      * setSelectedItem.
-     * 
+     *
      * @param item - Item to select
      */
-    public boolean setSelectedItem(T item) {
-    	return this.currentView.setSelectedItem(item);
+    @Override
+    public boolean setSelectedItem(final T item) {
+        return this.currentView.setSelectedItem(item);
     }
 
     /**
-     * 
+     *
      * setSelectedItems.
-     * 
+     *
      * @param items - Items to select
      */
-    public boolean setSelectedItems(Iterable<T> items) {
+    @Override
+    public boolean setSelectedItems(final Iterable<T> items) {
         return this.currentView.setSelectedItems(items);
     }
 
     /**
-     * 
+     *
      * stringToItem.
-     * 
+     *
      * @param str - String to get item corresponding to
      */
-    public T stringToItem(String str) {
-        if (this.pool == null) { return null; }
+    @Override
+    public T stringToItem(final String str) {
+        if (this.pool == null) {
+            return null;
+        }
 
-        for (Entry<T, Integer> itemEntry : this.pool) {
+        for (final Entry<T, Integer> itemEntry : this.pool) {
             if (itemEntry.getKey().toString().equals(str)) {
                 return itemEntry.getKey();
             }
@@ -606,13 +631,14 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     /**
-     * 
+     *
      * setSelectedString.
-     * 
+     *
      * @param str - String to select
      */
-    public boolean setSelectedString(String str) {
-        T item = stringToItem(str);
+    @Override
+    public boolean setSelectedString(final String str) {
+        final T item = stringToItem(str);
         if (item != null) {
             return this.setSelectedItem(item);
         }
@@ -620,15 +646,16 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     /**
-     * 
+     *
      * setSelectedStrings.
-     * 
+     *
      * @param strings - Strings to select
      */
-    public boolean setSelectedStrings(Iterable<String> strings) {
-        List<T> items = new ArrayList<T>();
-        for (String str : strings) {
-            T item = stringToItem(str);
+    @Override
+    public boolean setSelectedStrings(final Iterable<String> strings) {
+        final List<T> items = new ArrayList<T>();
+        for (final String str : strings) {
+            final T item = stringToItem(str);
             if (item != null) {
                 items.add(item);
             }
@@ -637,115 +664,126 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     /**
-     * 
+     *
      * selectItemEntrys.
-     * 
+     *
      * @param itemEntrys - Item entrys to select
      */
-    public boolean selectItemEntrys(Iterable<Entry<T, Integer>> itemEntrys) {
-        List<T> items = new ArrayList<T>();
-        for (Entry<T, Integer> itemEntry : itemEntrys) {
+    @Override
+    public boolean selectItemEntrys(final Iterable<Entry<T, Integer>> itemEntrys) {
+        final List<T> items = new ArrayList<T>();
+        for (final Entry<T, Integer> itemEntry : itemEntrys) {
             items.add(itemEntry.getKey());
         }
         return this.setSelectedItems(items);
     }
 
     /**
-     * 
+     *
      * selectAll.
-     * 
+     *
      */
+    @Override
     public void selectAll() {
         this.currentView.selectAll();
     }
 
     /**
-     * 
+     *
      * getSelectedItem.
-     * 
+     *
      * @return T
      */
+    @Override
     public int getSelectedIndex() {
         return this.currentView.getSelectedIndex();
     }
 
     /**
-     * 
+     *
      * getSelectedItems.
-     * 
+     *
      * @return Iterable<Integer>
      */
+    @Override
     public Iterable<Integer> getSelectedIndices() {
         return this.currentView.getSelectedIndices();
     }
 
     /**
-     * 
+     *
      * setSelectedIndex.
-     * 
+     *
      * @param index - Index to select
      */
-    public void setSelectedIndex(int index) {
+    @Override
+    public void setSelectedIndex(final int index) {
         this.currentView.setSelectedIndex(index);
     }
 
     /**
-     * 
+     *
      * setSelectedIndices.
-     * 
+     *
      * @param indices - Indices to select
      */
-    public void setSelectedIndices(Integer[] indices) {
+    @Override
+    public void setSelectedIndices(final Integer[] indices) {
         this.currentView.setSelectedIndices(Arrays.asList(indices));
     }
-    public void setSelectedIndices(Iterable<Integer> indices) {
+
+    @Override
+    public void setSelectedIndices(final Iterable<Integer> indices) {
         this.currentView.setSelectedIndices(indices);
     }
 
     /**
-     * 
+     *
      * addItem.
-     * 
+     *
      * @param item
      * @param qty
      */
-    public void addItem(final T item, int qty) {
+    @Override
+    public void addItem(final T item, final int qty) {
         this.pool.add(item, qty);
         if (this.isUnfiltered()) {
             this.model.addItem(item, qty);
         }
-        List<T> items = new ArrayList<T>();
+        final List<T> items = new ArrayList<T>();
         items.add(item);
         this.updateView(false, items);
     }
 
     /**
-     * 
+     *
      * addItems.
-     * 
+     *
      * @param itemsToAdd
      */
-    public void addItems(Iterable<Entry<T, Integer>> itemsToAdd) {
+    @Override
+    public void addItems(final Iterable<Entry<T, Integer>> itemsToAdd) {
         this.pool.addAll(itemsToAdd);
         if (this.isUnfiltered()) {
             this.model.addItems(itemsToAdd);
         }
 
-        List<T> items = new ArrayList<T>();
-        for (Map.Entry<T, Integer> item : itemsToAdd) {
+        final List<T> items = new ArrayList<T>();
+        for (final Map.Entry<T, Integer> item : itemsToAdd) {
             items.add(item.getKey());
         }
         this.updateView(false, items);
     }
 
     /**
-     * 
+     *
      * removeItem.
-     * 
+     *
      * @param item
      * @param qty
      */
-    public void removeItem(final T item, int qty) {
+    @Override
+    public void removeItem(final T item, final int qty) {
         final Iterable<T> itemsToSelect = this.currentView == this.listView ? this.getSelectedItems() : null;
 
         this.pool.remove(item, qty);
@@ -756,15 +794,16 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     /**
-     * 
+     *
      * removeItems.
-     * 
+     *
      * @param itemsToRemove
      */
-    public void removeItems(Iterable<Map.Entry<T, Integer>> itemsToRemove) {
+    @Override
+    public void removeItems(final Iterable<Map.Entry<T, Integer>> itemsToRemove) {
         final Iterable<T> itemsToSelect = this.currentView == this.listView ? this.getSelectedItems() : null;
 
-        for (Map.Entry<T, Integer> item : itemsToRemove) {
+        for (final Map.Entry<T, Integer> item : itemsToRemove) {
             this.pool.remove(item.getKey(), item.getValue());
             if (this.isUnfiltered()) {
                 this.model.removeItem(item.getKey(), item.getValue());
@@ -774,10 +813,11 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     /**
-     * 
+     *
      * removeAllItems.
-     * 
+     *
      */
+    @Override
     public void removeAllItems() {
         this.pool.clear();
         this.model.clear();
@@ -785,29 +825,32 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     /**
-     * 
+     *
      * scrollSelectionIntoView.
-     * 
+     *
      */
+    @Override
     public void scrollSelectionIntoView() {
         this.currentView.scrollSelectionIntoView();
     }
 
     /**
-     * 
+     *
      * getItemCount.
-     * 
+     *
      * @param item
      */
+    @Override
     public int getItemCount(final T item) {
         return this.model.isInfinite() ? Integer.MAX_VALUE : this.pool.count(item);
     }
 
     /**
      * Gets all filtered items in the model.
-     * 
+     *
      * @return ItemPoolView<T>
      */
+    @Override
     public ItemPool<T> getFilteredItems() {
         return this.model.getItems();
     }
@@ -816,7 +859,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     protected abstract ItemFilter<? extends T> createSearchFilter();
     protected abstract void buildAddFilterMenu(JMenu menu);
 
-    protected <F extends ItemFilter<? extends T>> F getFilter(Class<F> filterClass) {
+    protected <F extends ItemFilter<? extends T>> F getFilter(final Class<F> filterClass) {
         return ReflectionUtil.safeCast(this.filters.get(filterClass), filterClass);
     }
 
@@ -844,7 +887,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         orderedFilters.add(filter);
         this.add(filter.getPanel());
 
-        boolean visible = !this.hideFilters;
+        final boolean visible = !this.hideFilters;
         filter.getPanel().setVisible(visible);
         if (visible && this.initialized) {
             this.revalidate();
@@ -872,7 +915,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
 
     public void restoreDefaultFilters() {
         lockFiltering = true;
-        for (ItemFilter<? extends T> filter : this.orderedFilters) {
+        for (final ItemFilter<? extends T> filter : this.orderedFilters) {
             this.remove(filter.getPanel());
         }
         this.filters.clear();
@@ -884,7 +927,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     @SuppressWarnings("unchecked")
-    public void removeFilter(ItemFilter<? extends T> filter) {
+    public void removeFilter(final ItemFilter<? extends T> filter) {
         final Class<? extends ItemFilter<? extends T>> filterClass = (Class<? extends ItemFilter<? extends T>>) filter.getClass();
         final List<ItemFilter<? extends T>> classFilters = this.filters.get(filterClass);
         if (classFilters != null && classFilters.remove(filter)) {
@@ -898,11 +941,12 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         }
     }
 
+    @Override
     public boolean applyFilters() {
         if (this.lockFiltering || !this.initialized) { return false; }
 
-        List<Predicate<? super T>> predicates = new ArrayList<Predicate<? super T>>();
-        for (ItemFilter<? extends T> filter : this.orderedFilters) { //TODO: Support custom filter logic
+        final List<Predicate<? super T>> predicates = new ArrayList<Predicate<? super T>>();
+        for (final ItemFilter<? extends T> filter : this.orderedFilters) { //TODO: Support custom filter logic
             if (filter.isEnabled() && !filter.isEmpty()) {
                 predicates.add(filter.buildPredicate(this.genericType));
             }
@@ -911,7 +955,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
             predicates.add(mainSearchFilter.buildPredicate(this.genericType));
         }
 
-        Predicate<? super T> newFilterPredicate = predicates.size() == 0 ? null : Predicates.and(predicates);
+        final Predicate<? super T> newFilterPredicate = predicates.size() == 0 ? null : Predicates.and(predicates);
         if (this.filterPredicate == newFilterPredicate) { return false; }
 
         this.filterPredicate = newFilterPredicate;
@@ -922,18 +966,18 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     /**
-     * 
+     *
      * isUnfiltered.
-     * 
+     *
      */
     private boolean isUnfiltered() {
         return this.filterPredicate == null;
     }
 
     /**
-     * 
+     *
      * getHideFilters.
-     * 
+     *
      * @return true if filters are hidden, false otherwise
      */
     public boolean getHideFilters() {
@@ -941,17 +985,17 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     /**
-     * 
+     *
      * setHideFilters.
-     * 
+     *
      * @param hideFilters0 - if true, hide the filters, otherwise show them
      */
-    public void setHideFilters(boolean hideFilters0) {
+    public void setHideFilters(final boolean hideFilters0) {
         if (this.hideFilters == hideFilters0) { return; }
         this.hideFilters = hideFilters0;
 
-        boolean visible = !hideFilters0;
-        for (ItemFilter<? extends T> filter : this.orderedFilters) {
+        final boolean visible = !hideFilters0;
+        for (final ItemFilter<? extends T> filter : this.orderedFilters) {
             filter.getPanel().setVisible(visible);
         }
         this.chkEnableFilters.setVisible(visible);
@@ -960,7 +1004,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
 
         if (this.initialized) {
             this.revalidate();
-    
+
             if (hideFilters0) {
                 this.resetFilters(); //reset filters when they're hidden
             }
@@ -975,13 +1019,13 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     /**
-     * 
+     *
      * resetFilters.
-     * 
+     *
      */
     public void resetFilters() {
         lockFiltering = true; //prevent updating filtering from this change until all filters reset
-        for (ItemFilter<? extends T> filter : orderedFilters) {
+        for (final ItemFilter<? extends T> filter : orderedFilters) {
             filter.setEnabled(true);
             filter.reset();
         }
@@ -1003,14 +1047,14 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         this.updateView(true, this.getSelectedItems());
     }
 
-    protected Iterable<Entry<T, Integer>> getUnique(Iterable<Entry<T, Integer>> items) {
+    protected Iterable<Entry<T, Integer>> getUnique(final Iterable<Entry<T, Integer>> items) {
         return Aggregates.uniqueByLast(items, this.pool.FN_GET_NAME);
     }
 
     /**
-     * 
+     *
      * updateView.
-     * 
+     *
      * @param bForceFilter
      */
     public void updateView(final boolean forceFilter, final Iterable<T> itemsToSelect) {
@@ -1021,16 +1065,16 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         }
 
         if (useFilter && this.wantUnique) {
-            Predicate<Entry<T, Integer>> filterForPool = Predicates.compose(this.filterPredicate, this.pool.FN_GET_KEY);
-            Iterable<Entry<T, Integer>> items = getUnique(Iterables.filter(this.pool, filterForPool));
+            final Predicate<Entry<T, Integer>> filterForPool = Predicates.compose(this.filterPredicate, this.pool.FN_GET_KEY);
+            final Iterable<Entry<T, Integer>> items = getUnique(Iterables.filter(this.pool, filterForPool));
             this.model.addItems(items);
         }
         else if (useFilter) {
-            Predicate<Entry<T, Integer>> pred = Predicates.compose(this.filterPredicate, this.pool.FN_GET_KEY);
+            final Predicate<Entry<T, Integer>> pred = Predicates.compose(this.filterPredicate, this.pool.FN_GET_KEY);
             this.model.addItems(Iterables.filter(this.pool, pred));
         }
         else if (this.wantUnique) {
-            Iterable<Entry<T, Integer>> items = getUnique(this.pool);
+            final Iterable<Entry<T, Integer>> items = getUnique(this.pool);
             this.model.addItems(items);
         }
         else if (!useFilter && forceFilter) {
@@ -1039,7 +1083,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
 
         this.currentView.refresh(itemsToSelect, this.getSelectedIndex(), forceFilter ? 0 : this.currentView.getScrollValue());
 
-        for (ItemFilter<? extends T> filter : this.orderedFilters) {
+        for (final ItemFilter<? extends T> filter : this.orderedFilters) {
             filter.afterFiltersApplied();
         }
 
@@ -1050,8 +1094,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         }
         else if (this.wantUnique) {
             total = 0;
-            Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(this.pool, this.pool.FN_GET_NAME);
-            for (Entry<T, Integer> entry : items) {
+            final Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(this.pool, this.pool.FN_GET_NAME);
+            for (final Entry<T, Integer> entry : items) {
                 total += entry.getValue();
             }
         }
@@ -1062,9 +1106,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     /**
-     * 
+     *
      * getPnlButtons.
-     * 
+     *
      * @return panel to put any custom buttons on
      */
     public JPanel getPnlButtons() {
@@ -1072,9 +1116,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     /**
-     * 
+     *
      * isIncrementalSearchActive.
-     * 
+     *
      * @return true if an incremental search is currently active
      */
     public boolean isIncrementalSearchActive() {
@@ -1082,9 +1126,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     /**
-     * 
+     *
      * getWantUnique.
-     * 
+     *
      * @return true if the editor is in "unique item names only" mode.
      */
     public boolean getWantUnique() {
@@ -1092,19 +1136,19 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     /**
-     * 
+     *
      * setWantUnique.
-     * 
+     *
      * @param unique - if true, the editor will be set to the "unique item names only" mode.
      */
-    public void setWantUnique(boolean unique) {
+    public void setWantUnique(final boolean unique) {
         this.wantUnique = this.alwaysNonUnique ? false : unique;
     }
 
     /**
-     * 
+     *
      * getAlwaysNonUnique.
-     * 
+     *
      * @return if true, this editor must always show non-unique items (e.g. quest editor).
      */
     public boolean getAlwaysNonUnique() {
@@ -1112,43 +1156,43 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     /**
-     * 
+     *
      * setAlwaysNonUnique.
-     * 
+     *
      * @param nonUniqueOnly - if true, this editor must always show non-unique items (e.g. quest editor).
      */
-    public void setAlwaysNonUnique(boolean nonUniqueOnly) {
+    public void setAlwaysNonUnique(final boolean nonUniqueOnly) {
         this.alwaysNonUnique = nonUniqueOnly;
     }
 
     /**
-     * 
+     *
      * getAllowMultipleSelections.
-     * 
+     *
      * @return if true, multiple items can be selected at once
      */
     public boolean getAllowMultipleSelections() {
-    	return this.allowMultipleSelections;
+        return this.allowMultipleSelections;
     }
 
     /**
-     * 
+     *
      * setAllowMultipleSelections.
-     * 
+     *
      * @return allowMultipleSelections0 - if true, multiple items can be selected at once
      */
-    public void setAllowMultipleSelections(boolean allowMultipleSelections0) {
-    	if (this.allowMultipleSelections == allowMultipleSelections0) { return; }
-    	this.allowMultipleSelections = allowMultipleSelections0;
-    	for (ItemView<T> view : views) {
-    	    view.setAllowMultipleSelections(allowMultipleSelections0);
-    	}
+    public void setAllowMultipleSelections(final boolean allowMultipleSelections0) {
+        if (this.allowMultipleSelections == allowMultipleSelections0) { return; }
+        this.allowMultipleSelections = allowMultipleSelections0;
+        for (final ItemView<T> view : views) {
+            view.setAllowMultipleSelections(allowMultipleSelections0);
+        }
     }
 
     /**
-     * 
+     *
      * isInfinite.
-     * 
+     *
      * @return whether item manager's pool of items is in infinite supply
      */
     public boolean isInfinite() {
@@ -1156,38 +1200,34 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     /**
-     * 
+     *
      * focus.
-     * 
+     *
      */
     public void focus() {
         this.currentView.focus();
     }
 
     /**
-     * 
+     *
      * focusSearch.
-     * 
+     *
      */
     public void focusSearch() {
         this.setHideFilters(false); //ensure filters shown
         this.mainSearchFilter.getMainComponent().requestFocusInWindow();
     }
 
-    public void addSelectionListener(ListSelectionListener listener) {
-    	selectionListeners.remove(listener); //ensure listener not added multiple times
-    	selectionListeners.add(listener);
-    }
-
-    public void removeSelectionListener(ListSelectionListener listener) {
-    	selectionListeners.remove(listener);
+    public void addSelectionListener(final ListSelectionListener listener) {
+        selectionListeners.remove(listener); //ensure listener not added multiple times
+        selectionListeners.add(listener);
     }
 
     public Iterable<ListSelectionListener> getSelectionListeners() {
-    	return selectionListeners;
+        return selectionListeners;
     }
 
-    public void setItemActivateCommand(UiCommand itemActivateCommand0) {
+    public void setItemActivateCommand(final UiCommand itemActivateCommand0) {
         this.itemActivateCommand = itemActivateCommand0;
     }
 
@@ -1197,21 +1237,21 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         }
     }
 
-    public void setContextMenuBuilder(ContextMenuBuilder contextMenuBuilder0) {
+    public void setContextMenuBuilder(final ContextMenuBuilder contextMenuBuilder0) {
         this.contextMenuBuilder = contextMenuBuilder0;
     }
 
-    public void showContextMenu(MouseEvent e) {
+    public void showContextMenu(final MouseEvent e) {
         showContextMenu(e, null);
     }
-    public void showContextMenu(MouseEvent e, final Runnable onClose) {
+    public void showContextMenu(final MouseEvent e, final Runnable onClose) {
         //ensure the item manager has focus
         this.focus();
 
         //if item under the cursor is not selected, select it
-        int index = this.currentView.getIndexAtPoint(e.getPoint());
+        final int index = this.currentView.getIndexAtPoint(e.getPoint());
         boolean needSelection = true;
-        for (Integer selectedIndex : this.getSelectedIndices()) {
+        for (final Integer selectedIndex : this.getSelectedIndices()) {
             if (selectedIndex == index) {
                 needSelection = false;
                 break;
@@ -1228,23 +1268,23 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
             return;
         }
 
-        JPopupMenu menu = new JPopupMenu("ItemManagerContextMenu");
+        final JPopupMenu menu = new JPopupMenu("ItemManagerContextMenu");
         this.contextMenuBuilder.buildContextMenu(menu);
 
         if (onClose != null) {
             menu.addPopupMenuListener(new PopupMenuListener() {
                 @Override
-                public void popupMenuCanceled(PopupMenuEvent arg0) {
+                public void popupMenuCanceled(final PopupMenuEvent arg0) {
                     onClose.run();
                 }
 
                 @Override
-                public void popupMenuWillBecomeInvisible(PopupMenuEvent arg0) {
+                public void popupMenuWillBecomeInvisible(final PopupMenuEvent arg0) {
                     onClose.run();
                 }
 
                 @Override
-                public void popupMenuWillBecomeVisible(PopupMenuEvent arg0) {
+                public void popupMenuWillBecomeVisible(final PopupMenuEvent arg0) {
                 }
             });
         }

@@ -4,7 +4,6 @@ import javax.swing.SwingUtilities;
 
 import com.google.common.primitives.Ints;
 
-import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.model.FModel;
 import forge.quest.data.QuestPreferences;
@@ -43,7 +42,7 @@ public enum CSubmenuQuestPrefs implements ICDoc {
     /**
      * Checks validity of values entered into quest preference input text
      * fields.
-     * 
+     *
      * @param i0
      *            the input.
      */
@@ -102,11 +101,4 @@ public enum CSubmenuQuestPrefs implements ICDoc {
         view.getLblErrShop().setVisible(false);
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
-    }
 }

@@ -4,15 +4,19 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
-import forge.UiCommand;
 import forge.Singletons;
+import forge.UiCommand;
 import forge.card.CardDb;
 import forge.card.CardRulesPredicates;
 import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckFormat;
-import forge.deck.generation.*;
+import forge.deck.generation.DeckGenerator2Color;
+import forge.deck.generation.DeckGenerator3Color;
+import forge.deck.generation.DeckGenerator5Color;
+import forge.deck.generation.DeckGeneratorBase;
+import forge.deck.generation.DeckGeneratorMonoColor;
 import forge.gui.framework.ICDoc;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
@@ -24,9 +28,9 @@ import forge.screens.deckeditor.views.VDeckgen;
 import forge.util.Aggregates;
 
 
-/** 
+/**
  * Controls the "analysis" panel in the deck editor UI.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
@@ -35,14 +39,6 @@ public enum CDeckgen implements ICDoc {
     SINGLETON_INSTANCE;
 
     //========== Overridden methods
-
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
-    }
 
     @Override
     public void register() {
@@ -94,11 +90,11 @@ public enum CDeckgen implements ICDoc {
 
         final Deck randomDeck = new Deck();
 
-        Predicate<PaperCard> notBasicLand = Predicates.not(Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES));
-        Iterable<PaperCard> source = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards(), notBasicLand);
+        final Predicate<PaperCard> notBasicLand = Predicates.not(Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES));
+        final Iterable<PaperCard> source = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards(), notBasicLand);
         randomDeck.getMain().addAllFlat(Aggregates.random(source, 15 * 5));
 
-        for(String landName : MagicColor.Constant.BASIC_LANDS) { 
+        for(final String landName : MagicColor.Constant.BASIC_LANDS) {
             randomDeck.getMain().add(landName, 1);
         }
         randomDeck.getMain().add("Terramorphic Expanse", 1);
@@ -114,15 +110,15 @@ public enum CDeckgen implements ICDoc {
         if (!SEditorIO.confirmSaveChanges(Singletons.getControl().getCurrentScreen(), true)) { return; }
 
         final Deck genConstructed = new Deck();
-        CardDb cardDb = FModel.getMagicDb().getCommonCards();
+        final CardDb cardDb = FModel.getMagicDb().getCommonCards();
         DeckGeneratorBase gen = null;
         switch (colorCount0) {
-            case 1: gen = new DeckGeneratorMonoColor(cardDb, DeckFormat.Constructed, null);             break;
-            case 2: gen = new DeckGenerator2Color(cardDb, DeckFormat.Constructed, null, null);          break;
-            case 3: gen = new DeckGenerator3Color(cardDb, DeckFormat.Constructed, null, null, null);    break;
-            case 5: gen = new DeckGenerator5Color(cardDb, DeckFormat.Constructed);                      break;
+        case 1: gen = new DeckGeneratorMonoColor(cardDb, DeckFormat.Constructed, null);             break;
+        case 2: gen = new DeckGenerator2Color(cardDb, DeckFormat.Constructed, null, null);          break;
+        case 3: gen = new DeckGenerator3Color(cardDb, DeckFormat.Constructed, null, null, null);    break;
+        case 5: gen = new DeckGenerator5Color(cardDb, DeckFormat.Constructed);                      break;
         }
-        
+
         if( null != gen ) {
             gen.setSingleton(FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS));
             gen.setUseArtifacts(!FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));

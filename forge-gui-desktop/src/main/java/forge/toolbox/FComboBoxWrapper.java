@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.Vector;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.JComponent;
@@ -17,7 +16,7 @@ import forge.interfaces.IComboBox;
 import forge.toolbox.FComboBox.TextAlignment;
 import forge.toolbox.FSkin.SkinFont;
 
-/** 
+/**
  * Wrapper for combo box with extra logic (either FComboBoxWrapper or FComboBoxPanel should be used instead of FComboBox so skinning works)
  *
  */
@@ -26,7 +25,7 @@ public class FComboBoxWrapper<E> implements IComboBox<E> {
     private static final ArrayList<FComboBoxWrapper<?>> allWrappers = new ArrayList<FComboBoxWrapper<?>>();
 
     public static void refreshAllSkins() {
-        for (FComboBoxWrapper<?> wrapper : allWrappers) {
+        for (final FComboBoxWrapper<?> wrapper : allWrappers) {
             wrapper.refreshSkin();
         }
     }
@@ -41,62 +40,50 @@ public class FComboBoxWrapper<E> implements IComboBox<E> {
         allWrappers.add(this);
     }
 
-    public FComboBoxWrapper(E[] items) {
-        super();
-        comboBox = new FComboBox<E>(items);
-        allWrappers.add(this);
-    }
-
-    public FComboBoxWrapper(Vector<E> items) {
-        super();
-        comboBox = new FComboBox<E>(items);
-        allWrappers.add(this);
-    }
-
-    public FComboBoxWrapper(ComboBoxModel<E> aModel) {
-        super();
-        comboBox = new FComboBox<E>(aModel);
-        allWrappers.add(this);
-    }
-
-    public void addItem(E item) {
+    @Override
+    public void addItem(final E item) {
         comboBox.addItem(item);
     }
 
-    public void removeItem(E item) {
+    public void removeItem(final E item) {
         comboBox.removeItem(item);
     }
 
+    @Override
     public void removeAllItems() {
         comboBox.removeAllItems();
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public E getSelectedItem() {
-        Object res = comboBox.getSelectedItem();
+        final Object res = comboBox.getSelectedItem();
         return res == null ? null : (E) res;
     }
 
-    public void setSelectedItem(Object item) {
+    @Override
+    public void setSelectedItem(final Object item) {
         comboBox.setSelectedItem(item);
     }
 
+    @Override
     public int getSelectedIndex() {
         return comboBox.getSelectedIndex();
     }
 
-    public void setSelectedIndex(int index) {
+    @Override
+    public void setSelectedIndex(final int index) {
         comboBox.setSelectedIndex(index);
     }
 
     public String getText() {
         return comboBox.getText();
     }
-    public void setText(String text0) {
+    public void setText(final String text0) {
         comboBox.setText(text0);
     }
 
-    public void setMaximumRowCount(int count) {
+    public void setMaximumRowCount(final int count) {
         comboBox.setMaximumRowCount(count);
     }
 
@@ -104,15 +91,15 @@ public class FComboBoxWrapper<E> implements IComboBox<E> {
         return comboBox.getItemCount();
     }
 
-    public E getItemAt(int index) {
+    public E getItemAt(final int index) {
         return comboBox.getItemAt(index);
     }
 
-    public void addActionListener(ActionListener l) {
+    public void addActionListener(final ActionListener l) {
         comboBox.addActionListener(l);
     }
 
-    public void addItemListener(ItemListener l) {
+    public void addItemListener(final ItemListener l) {
         comboBox.addItemListener(l);
     }
 
@@ -123,7 +110,7 @@ public class FComboBoxWrapper<E> implements IComboBox<E> {
         }
         suppressedActionListeners = suppressedActionListeners == null
                 ? listeners
-                : ObjectArrays.concat(suppressedActionListeners, listeners, ActionListener.class);
+                        : ObjectArrays.concat(suppressedActionListeners, listeners, ActionListener.class);
     }
     public void unsuppressActionListeners() {
         if (suppressedActionListeners != null) {
@@ -134,23 +121,23 @@ public class FComboBoxWrapper<E> implements IComboBox<E> {
         }
     }
 
-    public void addKeyListener(KeyListener l) {
+    public void addKeyListener(final KeyListener l) {
         comboBox.addKeyListener(l);
     }
 
-    public void setRenderer(ListCellRenderer<? super E> aRenderer) {
+    public void setRenderer(final ListCellRenderer<? super E> aRenderer) {
         comboBox.setRenderer(aRenderer);
     }
 
-    public void setModel(ComboBoxModel<E> aModel) {
+    public void setModel(final ComboBoxModel<E> aModel) {
         comboBox.setModel(aModel);
     }
 
-    public void setTextAlignment(TextAlignment align) {
+    public void setTextAlignment(final TextAlignment align) {
         comboBox.setTextAlignment(align);
     }
 
-    public void setSkinFont(SkinFont skinFont) {
+    public void setSkinFont(final SkinFont skinFont) {
         comboBox.setSkinFont(skinFont);
     }
 
@@ -160,7 +147,7 @@ public class FComboBoxWrapper<E> implements IComboBox<E> {
     }
 
     @Override
-    public void setVisible(boolean aFlag) {
+    public void setVisible(final boolean aFlag) {
         comboBox.setVisible(aFlag);
     }
 
@@ -170,7 +157,7 @@ public class FComboBoxWrapper<E> implements IComboBox<E> {
     }
 
     @Override
-    public void setEnabled(boolean aFlag) {
+    public void setEnabled(final boolean aFlag) {
         comboBox.setEnabled(aFlag);
     }
 
@@ -178,10 +165,10 @@ public class FComboBoxWrapper<E> implements IComboBox<E> {
         return comboBox.getAutoSizeWidth();
     }
 
-    public void addTo(Container container) {
+    public void addTo(final Container container) {
         addTo(container, null);
     }
-    public void addTo(Container container, Object constraints0) {
+    public void addTo(final Container container, final Object constraints0) {
         container.add(comboBox, constraints0);
         constraints = constraints0;
     }
@@ -198,12 +185,12 @@ public class FComboBoxWrapper<E> implements IComboBox<E> {
 
     //refresh combo box skin by replacing it with a copy of itself
     //TODO: Figure out if there's a better way, as calling updateUI doesn't seem to work
-    public static <E> FComboBox<E> refreshComboBoxSkin(FComboBox<E> comboBox) {
+    public static <E> FComboBox<E> refreshComboBoxSkin(final FComboBox<E> comboBox) {
         return refreshComboBoxSkin(comboBox, null);
     }
-    public static <E> FComboBox<E> refreshComboBoxSkin(FComboBox<E> comboBox, Object constraints) {
+    public static <E> FComboBox<E> refreshComboBoxSkin(final FComboBox<E> comboBox, final Object constraints) {
         //find index of combo box within parent
-        Container parent = comboBox.getParent();
+        final Container parent = comboBox.getParent();
         if (parent == null) { return comboBox; }
 
         int index;
@@ -214,36 +201,36 @@ public class FComboBoxWrapper<E> implements IComboBox<E> {
         }
 
         //create copy of combo box
-        FComboBox<E> newComboBox = new FComboBox<E>();
+        final FComboBox<E> newComboBox = new FComboBox<E>();
         for (int i = 0; i < comboBox.getItemCount(); i++) {
             newComboBox.addItem(comboBox.getItemAt(i));
         }
         newComboBox.setSelectedIndex(comboBox.getSelectedIndex());
 
         ActionListener[] actionListeners = newComboBox.getActionListeners();
-        for (ActionListener l : actionListeners) {
+        for (final ActionListener l : actionListeners) {
             newComboBox.removeActionListener(l); //remove default action listeners to prevent duplicates
         }
         actionListeners = comboBox.getActionListeners();
-        for (ActionListener l : actionListeners) {
+        for (final ActionListener l : actionListeners) {
             newComboBox.addActionListener(l);
         }
 
         ItemListener[] itemListeners = newComboBox.getItemListeners();
-        for (ItemListener l : itemListeners) {
+        for (final ItemListener l : itemListeners) {
             newComboBox.removeItemListener(l); //remove default item listener to prevent duplicates
         }
         itemListeners = comboBox.getItemListeners();
-        for (ItemListener l : itemListeners) {
+        for (final ItemListener l : itemListeners) {
             newComboBox.addItemListener(l);
         }
 
         KeyListener[] keyListeners = newComboBox.getKeyListeners();
-        for (KeyListener l : keyListeners) {
+        for (final KeyListener l : keyListeners) {
             newComboBox.removeKeyListener(l); //remove default key listeners to prevent duplicates
         }
         keyListeners = comboBox.getKeyListeners();
-        for (KeyListener l : keyListeners) {
+        for (final KeyListener l : keyListeners) {
             newComboBox.addKeyListener(l);
         }
 

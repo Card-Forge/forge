@@ -5,12 +5,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -19,17 +19,12 @@ package forge.screens.match;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import forge.Singletons;
 import forge.assets.FSkinProp;
 import forge.game.GameView;
-import forge.gui.SOverlayUtils;
-import forge.gui.framework.FScreen;
 import forge.match.NextGameDecision;
 import forge.model.FModel;
 import forge.quest.QuestController;
 import forge.quest.QuestDraftUtils;
-import forge.screens.home.quest.CSubmenuChallenges;
-import forge.screens.home.quest.CSubmenuDuels;
 import forge.screens.home.quest.CSubmenuQuestDraft;
 import forge.screens.home.quest.VSubmenuQuestDraft;
 import forge.toolbox.FOptionPane;
@@ -42,22 +37,20 @@ import forge.toolbox.FSkin;
  * Processes win/lose presentation for Quest events. This presentation is
  * displayed by WinLoseFrame. Components to be added to pnlCustom in
  * WinLoseFrame should use MigLayout.
- * 
+ *
  */
 public class QuestDraftWinLose extends ControlWinLose {
     private final transient ViewWinLose view;
-    private final transient QuestController qData;
 
     /**
      * Instantiates a new quest win lose handler.
-     * 
+     *
      * @param view0 ViewWinLose object
      * @param match2
      */
     public QuestDraftWinLose(final ViewWinLose view0, final GameView game0, final CMatchUI matchUI) {
         super(view0, game0, matchUI);
         this.view = view0;
-        qData = FModel.getQuest();
     }
 
     /**
@@ -66,17 +59,17 @@ public class QuestDraftWinLose extends ControlWinLose {
      * </p>
      * Checks conditions of win and fires various reward display methods
      * accordingly.
-     * 
+     *
      * @return true, if successful
      */
     @Override
     public final boolean populateCustomPanel() {
-        QuestController quest = FModel.getQuest();
+        final QuestController quest = FModel.getQuest();
         final boolean gameHadHumanPlayer = matchUI.hasLocalPlayers();
 
         if (lastGame.isMatchOver()) {
             final String winner = lastGame.getWinningPlayerName();
-            
+
             quest.getAchievements().getCurrentDraft().setWinner(winner);
             quest.save();
         }
@@ -125,17 +118,4 @@ public class QuestDraftWinLose extends ControlWinLose {
         return false; //We're not awarding anything, so never display the custom panel.
     }
 
-    public final void actionOnQuitMatch() {
-        CSubmenuDuels.SINGLETON_INSTANCE.update();
-        CSubmenuChallenges.SINGLETON_INSTANCE.update();
-
-        qData.setCurrentEvent(null);
-        qData.save();
-        FModel.getQuestPreferences().save();
-        matchUI.writeMatchPreferences();
-
-        Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
-
-        SOverlayUtils.hideOverlay();
-    }
 }

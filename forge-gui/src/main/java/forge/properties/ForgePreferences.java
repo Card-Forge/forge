@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -82,7 +82,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
 
         UI_VIBRATE_ON_LIFE_LOSS("true"),
         UI_VIBRATE_ON_LONG_PRESS("true"),
-        
+
         UI_LANGUAGE("en-US"),
 
         MATCH_HOT_SEAT_MODE("false"), //this only applies to mobile game
@@ -162,12 +162,10 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
 
         private final String strDefaultVal;
 
-        /** @param s0 &emsp; {@link java.lang.String} */
-        FPref(String s0) {
+        private FPref(final String s0) {
             this.strDefaultVal = s0;
         }
 
-        /** @return {@link java.lang.String} */
         public String getDefault() {
             return strDefaultVal;
         }
@@ -179,39 +177,28 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
             CONSTRUCTED_P7_DECK_STATE, CONSTRUCTED_P8_DECK_STATE };
     }
 
-    public static enum CardSizeType {
-        tiny, smaller, small, medium, large, huge
-    }
-
-
-    public static enum StackOffsetType {
-        tiny, small, medium, large
-    }
-
-
-    public static enum HomeMenus {
-        constructed, draft, sealed, quest, settings, utilities
-    }
-
     /** Instantiates a ForgePreferences object. */
     public ForgePreferences() {
         super(ForgeConstants.MAIN_PREFS_FILE, FPref.class);
     }
 
+    @Override
     protected FPref[] getEnumValues() {
         return FPref.values();
     }
 
-    protected FPref valueOf(String name) {
+    @Override
+    protected FPref valueOf(final String name) {
         try {
             return FPref.valueOf(name);
         }
-        catch (Exception e) {
+        catch (final Exception e) {
             return null;
         }
     }
 
-    protected String getPrefDefault(FPref key) {
+    @Override
+    protected String getPrefDefault(final FPref key) {
         return key.getDefault();
     }
 

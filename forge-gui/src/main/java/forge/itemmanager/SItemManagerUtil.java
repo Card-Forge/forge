@@ -1,5 +1,13 @@
 package forge.itemmanager;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map.Entry;
+
+import com.google.common.base.Predicate;
+
 import forge.assets.FSkinProp;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
@@ -8,15 +16,7 @@ import forge.interfaces.IComboBox;
 import forge.item.InventoryItem;
 import forge.util.ComparableOp;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Map.Entry;
-
-import com.google.common.base.Predicate;
-
-
-/** 
+/**
  * Static methods for working with top-level editor methods,
  * included but not limited to preferences IO, icon generation,
  * and stats analysis.
@@ -65,25 +65,25 @@ public final class SItemManagerUtil {
         public final Predicate<CardRules> predicate;
         public final String label;
 
-        private StatTypes(FSkinProp skinProp0, Predicate<CardRules> predicate0, String label0) {
+        private StatTypes(final FSkinProp skinProp0, final Predicate<CardRules> predicate0, final String label0) {
             skinProp = skinProp0;
             predicate = predicate0;
             label = label0;
         }
     }
 
-    public static String getItemDisplayString(InventoryItem item, int qty, boolean forTitle) {
-        ArrayList<InventoryItem> items = new ArrayList<InventoryItem>();
+    public static String getItemDisplayString(final InventoryItem item, final int qty, final boolean forTitle) {
+        final List<InventoryItem> items = new ArrayList<InventoryItem>();
         items.add(item);
         return getItemDisplayString(items, qty, forTitle);
     }
-    public static String getItemDisplayString(Iterable<? extends InventoryItem> items, int qty, boolean forTitle) {
+    public static String getItemDisplayString(final Iterable<? extends InventoryItem> items, final int qty, final boolean forTitle) {
         //determine shared type among items
         int itemCount = 0;
         String sharedType = null;
         boolean checkForSharedType = true;
 
-        for (InventoryItem item : items) {
+        for (final InventoryItem item : items) {
             if (checkForSharedType) {
                 if (sharedType == null) {
                     sharedType = item.getItemType();
@@ -122,9 +122,9 @@ public final class SItemManagerUtil {
         return result;
     }
 
-    public static String buildDisplayList(Iterable<Entry<InventoryItem, Integer>> items) {
-        ArrayList<Entry<InventoryItem, Integer>> sorted = new ArrayList<Entry<InventoryItem, Integer>>();
-        for (Entry<InventoryItem, Integer> itemEntry : items) {
+    public static String buildDisplayList(final Iterable<Entry<InventoryItem, Integer>> items) {
+        final List<Entry<InventoryItem, Integer>> sorted = new ArrayList<Entry<InventoryItem, Integer>>();
+        for (final Entry<InventoryItem, Integer> itemEntry : items) {
             sorted.add(itemEntry);
         }
         Collections.sort(sorted, new Comparator<Entry<InventoryItem, Integer>>() {
@@ -133,8 +133,8 @@ public final class SItemManagerUtil {
                 return x.getKey().toString().compareTo(y.getKey().toString());
             }
         });
-        StringBuilder builder = new StringBuilder();
-        for (Entry<InventoryItem, Integer> itemEntry : sorted) {
+        final StringBuilder builder = new StringBuilder();
+        for (final Entry<InventoryItem, Integer> itemEntry : sorted) {
             builder.append("\n" + itemEntry.getValue() + " * " + itemEntry.getKey().toString());
         }
         return builder.toString();
@@ -145,16 +145,16 @@ public final class SItemManagerUtil {
     private static final ColumnDef[] CARD_PILEBY_OPTIONS = { ColumnDef.CMC, ColumnDef.COLOR, ColumnDef.NAME, ColumnDef.COST, ColumnDef.TYPE, ColumnDef.RARITY, ColumnDef.SET };
     private static final ColumnDef[] DECK_PILEBY_OPTIONS = { ColumnDef.DECK_COLOR, ColumnDef.DECK_FOLDER, ColumnDef.NAME, ColumnDef.DECK_FORMAT, ColumnDef.DECK_EDITION };
 
-    public static void populateImageViewOptions(IItemManager<?> itemManager, IComboBox<Object> cbGroupByOptions, IComboBox<Object> cbPileByOptions) {
-        boolean isDeckManager = itemManager.getGenericType().equals(DeckProxy.class);
-        GroupDef[] groupByOptions = isDeckManager ? DECK_GROUPBY_OPTIONS : CARD_GROUPBY_OPTIONS;
-        ColumnDef[] pileByOptions = isDeckManager ? DECK_PILEBY_OPTIONS : CARD_PILEBY_OPTIONS;
+    public static void populateImageViewOptions(final IItemManager<?> itemManager, final IComboBox<Object> cbGroupByOptions, final IComboBox<Object> cbPileByOptions) {
+        final boolean isDeckManager = itemManager.getGenericType().equals(DeckProxy.class);
+        final GroupDef[] groupByOptions = isDeckManager ? DECK_GROUPBY_OPTIONS : CARD_GROUPBY_OPTIONS;
+        final ColumnDef[] pileByOptions = isDeckManager ? DECK_PILEBY_OPTIONS : CARD_PILEBY_OPTIONS;
         cbGroupByOptions.addItem("(none)");
         cbPileByOptions.addItem("(none)");
-        for (GroupDef option : groupByOptions) {
+        for (final GroupDef option : groupByOptions) {
             cbGroupByOptions.addItem(option);
         }
-        for (ColumnDef option : pileByOptions) {
+        for (final ColumnDef option : pileByOptions) {
             cbPileByOptions.addItem(option);
         }
         cbGroupByOptions.setSelectedIndex(0);

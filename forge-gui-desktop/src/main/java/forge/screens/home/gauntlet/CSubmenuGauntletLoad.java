@@ -1,5 +1,14 @@
 package forge.screens.home.gauntlet;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.SwingUtilities;
+
 import forge.GuiBase;
 import forge.UiCommand;
 import forge.deck.Deck;
@@ -15,25 +24,20 @@ import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 
-import javax.swing.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-/** 
+/**
  * Controls the "quick gauntlet" submenu in the home UI.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
 public enum CSubmenuGauntletLoad implements ICDoc {
     SINGLETON_INSTANCE;
 
-    private final ActionListener actStartGame = new ActionListener() { @Override
-        public void actionPerformed(ActionEvent arg0) { startGame(); } };
+    private final ActionListener actStartGame = new ActionListener() {
+        @Override public final void actionPerformed(final ActionEvent arg0) {
+            startGame();
+        }
+    };
 
     private final VSubmenuGauntletLoad view = VSubmenuGauntletLoad.SINGLETON_INSTANCE;
 
@@ -49,7 +53,7 @@ public enum CSubmenuGauntletLoad implements ICDoc {
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() {
-                JButton btnStart = view.getBtnStart();
+                final JButton btnStart = view.getBtnStart();
                 if (btnStart.isEnabled()) {
                     view.getBtnStart().requestFocusInWindow();
                 }
@@ -94,7 +98,7 @@ public enum CSubmenuGauntletLoad implements ICDoc {
         final List<GauntletData> data = new ArrayList<GauntletData>();
 
         for (final File f : files) {
-            GauntletData gd = GauntletIO.loadGauntlet(f);
+            final GauntletData gd = GauntletIO.loadGauntlet(f);
             if (gd != null) {
                 data.add(gd);
             }
@@ -153,17 +157,4 @@ public enum CSubmenuGauntletLoad implements ICDoc {
         });
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    @SuppressWarnings("serial")
-    public UiCommand getCommandOnSelect() {
-        return new UiCommand() {
-            @Override
-            public void run() {
-                updateData();
-            }
-        };
-    }
 }

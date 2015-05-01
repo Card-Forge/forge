@@ -2,14 +2,12 @@ package forge.gui;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.KeyboardFocusManager;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
@@ -19,17 +17,21 @@ import forge.toolbox.FOverlay;
 import forge.toolbox.FPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedButton;
-import forge.toolbox.FSkin.SkinnedLabel;
 
-/** 
+/**
  * All overlay interaction is handled here.
  *
  * <br><br><i>(S at beginning of class name denotes a static factory.)</i>
  */
 public final class SOverlayUtils {
-    private static int counter = 0;
 
-    /** 
+    /**
+     * Private constructor to prevent instantiation.
+     */
+    private SOverlayUtils() {
+    }
+
+    /**
      * A standardized overlay for a game start condition.
      */
     public static void startGameOverlay() {
@@ -58,46 +60,6 @@ public final class SOverlayUtils {
     }
 
     /**
-     * A standardized overlay for a loading condition (note: thread issues, as of 1-Mar-12).
-     * @param msg0 &emsp; {@link java.lang.String}
-     * @return {@link javax.swing.JPanel}
-     */
-    // NOTE: This animation happens on the EDT; if the EDT is tied up doing something
-    // else, the animation is effectively frozen.  So, this needs some work.
-    public static JPanel loadingOverlay(final String msg0) {
-        final JPanel overlay = SOverlayUtils.genericOverlay();
-        final FPanel pnlLoading = new FPanel();
-        final int w = overlay.getWidth();
-        final int h = overlay.getHeight();
-
-        final SkinnedLabel lblLoading = new SkinnedLabel("");
-        lblLoading.setOpaque(true);
-        lblLoading.setBackground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        lblLoading.setMinimumSize(new Dimension(0, 20));
-
-        pnlLoading.setBounds(((w - 170) / 2), ((h - 80) / 2), 170, 80);
-        pnlLoading.setLayout(new MigLayout("wrap, align center"));
-        pnlLoading.add(new FLabel.Builder().fontSize(18)
-                .text(msg0).build(), "h 20px!, w 140px!, gap 0 0 5px 0");
-        pnlLoading.add(lblLoading, "gap 0 0 0 10px");
-
-        overlay.add(pnlLoading);
-
-        SOverlayUtils.counter = 0;
-        final Timer timer = new Timer(300, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                lblLoading.setMinimumSize(new Dimension(10 * (SOverlayUtils.counter++), 20));
-                lblLoading.revalidate();
-                if (SOverlayUtils.counter > 13) { SOverlayUtils.counter = 0; }
-            }
-        });
-        timer.start();
-
-        return overlay;
-    }
-
-    /** 
      * A template overlay with close button, null layout, ready for anything.
      * @return {@link javax.swing.JPanel}
      */
@@ -113,7 +75,7 @@ public final class SOverlayUtils {
         btnCloseTopRight.setBackground(new Color(0, 0, 0));
         btnCloseTopRight.setFocusPainted(false);
         btnCloseTopRight.addActionListener(new ActionListener() { @Override
-            public void actionPerformed(ActionEvent arg0) { SOverlayUtils.hideOverlay(); } });
+            public void actionPerformed(final ActionEvent arg0) { SOverlayUtils.hideOverlay(); } });
 
         overlay.removeAll();
         overlay.setLayout(null);
@@ -126,7 +88,7 @@ public final class SOverlayUtils {
     public static boolean overlayHasFocus() {
         return _overlayHasFocus;
     }
-    
+
     private static Component prevFocusOwner;
     public static void showOverlay() {
         Singletons.getView().getNavigationBar().setEnabled(false);

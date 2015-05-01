@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -23,8 +23,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -36,7 +34,7 @@ import forge.util.gui.SOptionPane;
 /**
  * The class ErrorViewer. Enables showing and saving error messages that
  * occurred in forge.
- * 
+ *
  * @author Clemens Koza
  * @version V1.0 02.08.2009
  */
@@ -48,30 +46,30 @@ public class BugReporter {
     public static final String CONTINUE = "Continue";
     public static final String EXIT = "Exit";
 
-    public static final String HELP_TEXT =
-            "A template for a post in the bug reports forum topic is shown below.  Just select '" + REPORT + "' "
-            + "and the template will be copied to your system clipboard and the forum page will open in your browser.  "
-            + "Then all you have to do is paste the text into a forum post and edit the description line.";
+    public static final String HELP_TEXT = String.format(
+            "A template for a post in the bug reports forum topic is shown below.  Just select '%s' "
+          + "and the template will be copied to your system clipboard and the forum page will open in your browser.  "
+          + "Then all you have to do is paste the text into a forum post and edit the description line.", REPORT);
     public static final String HELP_URL_LABEL =
             "Reporting bugs in Forge is very important. We sincerely thank you for your time."
-            + " For help writing a solid bug report, please see:";
+          + " For help writing a solid bug report, please see:";
     public static final String HELP_URL =
             "http://www.slightlymagic.net/forum/viewtopic.php?f=26&p=109925#p109925";
-    public static final String FORUM_URL;
+    private static final String FORUM_URL;
 
     static {
-        String forgeVersion = BuildInfo.getVersionString();
+        final String forgeVersion = BuildInfo.getVersionString();
         if (StringUtils.containsIgnoreCase(forgeVersion, "svn") || StringUtils.containsIgnoreCase(forgeVersion, "snapshot")) {
             FORUM_URL = "http://www.slightlymagic.net/forum/viewtopic.php?f=52&t=6333&start=54564487645#bottom";
-        }
-        else {
+        } else {
             FORUM_URL = "http://www.slightlymagic.net/forum/viewforum.php?f=26";
         }
     }
 
     /**
-     * Shows exception information in a format ready to post to the forum as a crash report.  Uses the exception's message
-     * as the reason if message is null.
+     * Shows exception information in a format ready to post to the forum as a
+     * crash report. Uses the exception's message as the reason if message is
+     * null.
      */
     public static void reportException(final Throwable ex, final String message) {
         if (ex == null) {
@@ -82,20 +80,20 @@ public class BugReporter {
         }
         System.err.print(FThreads.debugGetCurrThreadId() + " > ");
         ex.printStackTrace();
-        
-        StringBuilder sb = new StringBuilder();
+
+        final StringBuilder sb = new StringBuilder();
         sb.append("Description: [describe what you were doing when the crash occurred]\n\n");
         buildSpoilerHeader(sb, ex.getClass().getSimpleName());
         sb.append("\n\n");
         if (null != message && !message.isEmpty()) {
             sb.append(FThreads.debugGetCurrThreadId()).append(" > ").append(message).append("\n");
         }
-        
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
+
+        final StringWriter sw = new StringWriter();
+        final PrintWriter pw = new PrintWriter(sw);
         ex.printStackTrace(pw);
 
-        String swStr = sw.toString();
+        final String swStr = sw.toString();
         if (ex instanceof StackOverflowError && swStr.length() >= STACK_OVERFLOW_MAX_MESSAGE_LEN) {
             // most likely a cycle.  only take first portion so the message
             // doesn't grow too large to post
@@ -129,7 +127,7 @@ public class BugReporter {
      * Shows a forum post template for reporting a bug.
      */
     public static void reportBug(final String details) {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         sb.append("Description: [describe the problem]\n\n");
         buildSpoilerHeader(sb, "General bug report");
         if (null != details && !details.isEmpty()) {
@@ -139,42 +137,6 @@ public class BugReporter {
         buildSpoilerFooter(sb);
 
         GuiBase.getInterface().showBugReportDialog("Report a bug", sb.toString(), false);
-    }
-
-    /**
-     * Shows thread stack information in a format ready to post to the forum.
-     */
-    public static void reportThreadStacks(final String message) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Description: [describe what you were doing at the time]\n\n");
-        buildSpoilerHeader(sb, "Thread stack dump");
-        sb.append("\n\n");
-        if (null != message && !message.isEmpty()) {
-            sb.append(message);
-            sb.append("\n");
-        }
-        
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-        final Map<Thread, StackTraceElement[]> traces = Thread.getAllStackTraces();
-        for (final Entry<Thread, StackTraceElement[]> e : traces.entrySet()) {
-            pw.println();
-            pw.printf("%s (%s):%n", e.getKey().getName(), e.getKey().getId());
-            for (final StackTraceElement el : e.getValue()) {
-                pw.println(el);
-            }
-        }
-
-        sb.append(sw.toString());
-        buildSpoilerFooter(sb);
-        GuiBase.getInterface().showBugReportDialog("Thread stack dump", sb.toString(), false);
-    }
-
-    /**
-     * Alias for reportThreadStacks(String.format(format, args))
-     */
-    public static void reportThreadStacks(final String format, final Object... args) {
-        reportThreadStacks(String.format(format, args));
     }
 
     private static StringBuilder buildSpoilerHeader(final StringBuilder sb, final String reportTitle) {
@@ -188,7 +150,7 @@ public class BugReporter {
         return sb;
     }
 
-    private static StringBuilder buildSpoilerFooter(StringBuilder sb) {
+    private static StringBuilder buildSpoilerFooter(final StringBuilder sb) {
         sb.append("[/code][/spoiler]");
         return sb;
     }
@@ -198,8 +160,7 @@ public class BugReporter {
             // copy text to clipboard
             GuiBase.getInterface().copyToClipboard(text);
             GuiBase.getInterface().browseToUrl(FORUM_URL);
-        }
-        catch (Exception ex) {
+        } catch (final Exception ex) {
             SOptionPane.showMessageDialog("Sorry, a problem occurred while opening the forum in your default browser.",
                     "A problem occurred", SOptionPane.ERROR_ICON);
         }
@@ -207,7 +168,7 @@ public class BugReporter {
 
     public static void saveToFile(final String text) {
         File f;
-        long curTime = System.currentTimeMillis();
+        final long curTime = System.currentTimeMillis();
         for (int i = 0;; i++) {
             final String name = String.format("%TF-%02d.txt", curTime, i);
             f = new File(name);
@@ -228,7 +189,10 @@ public class BugReporter {
                     "Error saving file", SOptionPane.ERROR_ICON);
         }
     }
-    
-    // disable instantiation
-    private BugReporter() { }
+
+    /**
+     * Private constructor to prevent instantiation.
+     */
+    private BugReporter() {
+    }
 }

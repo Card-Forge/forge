@@ -18,9 +18,9 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
         User,
         Favorite
     }
-    
-    public static List<DeckProxy> getRandomDecks(IHasGameType lstDecks0, boolean isAi0) {
-        ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
+
+    public static List<DeckProxy> getRandomDecks(final IHasGameType lstDecks0, final boolean isAi0) {
+        final List<DeckProxy> decks = new ArrayList<DeckProxy>();
 
         decks.add(new RandomDeckGenerator("Random Generated Deck", RandomDeckType.Generated, lstDecks0, isAi0));
         decks.add(new RandomDeckGenerator("Random User Deck", RandomDeckType.User, lstDecks0, isAi0));
@@ -34,7 +34,7 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
     private final IHasGameType lstDecks;
     private final boolean isAi;
 
-    private RandomDeckGenerator(String name0, RandomDeckType type0, IHasGameType lstDecks0, boolean isAi0) {
+    private RandomDeckGenerator(final String name0, final RandomDeckType type0, final IHasGameType lstDecks0, final boolean isAi0) {
         super();
         name = name0;
         type = type0;
@@ -54,7 +54,7 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
 
     @Override
     public int compareTo(final RandomDeckGenerator d) {
-        return d instanceof RandomDeckGenerator ? Integer.compare(type.ordinal(), ((RandomDeckGenerator)d).type.ordinal()) : 1;
+        return Integer.compare(type.ordinal(), d.type.ordinal());
     }
 
     @Override
@@ -87,8 +87,8 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
                 case QUEST_OPPONENT_DECK:
                     return Aggregates.random(DeckProxy.getAllQuestEventAndChallenges()).getDeck();
                 case COLOR_DECK:
-                    List<String> colors = new ArrayList<String>();
-                    int count = Aggregates.randomInt(1, 3);
+                    final List<String> colors = new ArrayList<String>();
+                    final int count = Aggregates.randomInt(1, 3);
                     for (int i = 1; i <= count; i++) {
                         colors.add("Random " + i);
                     }
@@ -101,7 +101,7 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
             }
         }
     }
-    
+
     private Deck getUserDeck() {
         Iterable<Deck> decks;
         switch (lstDecks.getGameType()) {
@@ -135,8 +135,7 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
             break;
         case TinyLeaders:
             decks = Iterables.filter(DeckProxy.getAllCommanderDecks(), new Predicate<DeckProxy>() {
-                @Override
-                public boolean apply(DeckProxy deck) {
+                @Override public boolean apply(final DeckProxy deck) {
                     return DeckFormat.TinyLeaders.getDeckConformanceProblem(deck.getDeck()) == null;
                 }
             });
@@ -152,8 +151,7 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
             break;
         }
         decks = Iterables.filter(decks, new Predicate<DeckProxy>() {
-            @Override
-            public boolean apply(DeckProxy deck) {
+            @Override public boolean apply(final DeckProxy deck) {
                 return deck.isFavoriteDeck();
             }
         });

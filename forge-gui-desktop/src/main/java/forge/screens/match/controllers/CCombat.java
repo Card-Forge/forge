@@ -4,7 +4,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
 
-import forge.UiCommand;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
@@ -15,9 +14,9 @@ import forge.screens.match.views.VCombat;
 import forge.util.FCollection;
 import forge.util.Lang;
 
-/** 
+/**
  * Controls the combat panel in the match UI.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
@@ -31,14 +30,6 @@ public class CCombat implements ICDoc {
 
     public VCombat getView() {
         return view;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
     }
 
     @Override
@@ -57,7 +48,7 @@ public class CCombat implements ICDoc {
      */
     @Override
     public void update() {
-        final CombatView localCombat = this.combat; // noone will re-assign this from other thread. 
+        final CombatView localCombat = this.combat; // noone will re-assign this from other thread.
         if (localCombat != null) {
             view.updateCombat(localCombat.getNumAttackers(), getCombatDescription(localCombat));
         } else {
@@ -81,7 +72,7 @@ public class CCombat implements ICDoc {
     private static String getCombatDescription(final CombatView localCombat, final GameEntityView defender) {
         final StringBuilder display = new StringBuilder();
 
-        Iterable<FCollection<CardView>> bands = localCombat.getAttackingBandsOf(defender);
+        final Iterable<FCollection<CardView>> bands = localCombat.getAttackingBandsOf(defender);
         if (bands == null || Iterables.isEmpty(bands)) {
             return StringUtils.EMPTY;
         }
@@ -108,7 +99,7 @@ public class CCombat implements ICDoc {
                 display.append("\n");
             }
 
-            final FCollection<CardView> blockers = localCombat.getBlockers(band); 
+            final FCollection<CardView> blockers = localCombat.getBlockers(band);
             final boolean blocked = blockers != null && !blockers.isEmpty();
             final boolean isBand = bandSize > 1;
             if (isBand) {
@@ -151,7 +142,7 @@ public class CCombat implements ICDoc {
      * <p>
      * combatantToString.
      * </p>
-     * 
+     *
      * @param c
      *            a {@link forge.game.card.Card} object.
      * @return a {@link java.lang.String} object.

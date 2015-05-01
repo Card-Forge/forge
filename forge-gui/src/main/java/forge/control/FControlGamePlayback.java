@@ -53,7 +53,9 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
     }
 
     @Subscribe
-    public void receiveGameEvent(final GameEvent ev) { ev.visit(this); }
+    public void receiveGameEvent(final GameEvent ev) {
+        ev.visit(this);
+    }
 
     public static final int phasesDelay = 200;
     public static final int combatDelay = 400;
@@ -83,9 +85,9 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventTurnPhase ev) {
         try {
-        final boolean isUiToStop = !humanController.getGui().isUiSetToSkipPhase(ev.playerTurn.getView(), ev.phase);
+            final boolean isUiToStop = !humanController.getGui().isUiSetToSkipPhase(ev.playerTurn.getView(), ev.phase);
 
-        switch(ev.phase) {
+            switch(ev.phase) {
             case COMBAT_END:
             case COMBAT_DECLARE_ATTACKERS:
             case COMBAT_DECLARE_BLOCKERS:
@@ -98,8 +100,8 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
                     pauseForEvent(phasesDelay);
                 }
                 break;
-        }
-        } catch (Exception e) {
+            }
+        } catch (final Exception e) {
             e.printStackTrace();
         }
 

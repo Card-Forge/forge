@@ -1,5 +1,8 @@
 package forge.screens.deckeditor.views;
 
+import javax.swing.JPanel;
+
+import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -8,21 +11,15 @@ import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerContainer;
 import forge.screens.deckeditor.controllers.CCardCatalog;
-import net.miginfocom.swing.MigLayout;
 
-import javax.swing.*;
-
-/** 
+/**
  * Assembles Swing components of card catalog in deck editor.
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
- * 
+ *
  */
 public enum VCardCatalog implements IVDoc<CCardCatalog> {
-    /** */
     SINGLETON_INSTANCE;
-
-    public static final int SEARCH_MODE_INVERSE_INDEX = 1;
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
@@ -54,7 +51,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
     }
 
     @Override
-    public void setParentCell(DragCell cell0) {
+    public void setParentCell(final DragCell cell0) {
         this.parentCell = cell0;
     }
 
@@ -65,7 +62,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
 
     @Override
     public void populate() {
-        JPanel parentBody = parentCell.getBody();
+        final JPanel parentBody = parentCell.getBody();
         parentBody.setLayout(new MigLayout("insets 5, gap 0, wrap, hidemode 3"));
         parentBody.add(itemManagerContainer, "push, grow");
     }

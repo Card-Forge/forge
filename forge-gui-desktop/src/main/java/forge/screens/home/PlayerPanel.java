@@ -74,8 +74,8 @@ public class PlayerPanel extends FPanel {
     private FRadioButton radioOpen;
     private FCheckBox chkReady;
 
-    private FComboBoxWrapper<Object> teamComboBox = new FComboBoxWrapper<Object>();
-    private FComboBoxWrapper<Object> aeTeamComboBox = new FComboBoxWrapper<Object>();
+    private final FComboBoxWrapper<Object> teamComboBox = new FComboBoxWrapper<Object>();
+    private final FComboBoxWrapper<Object> aeTeamComboBox = new FComboBoxWrapper<Object>();
 
     private final FLabel closeBtn;
     private final FLabel deckBtn = new FLabel.ButtonBuilder().text("Select a deck").build();
@@ -236,18 +236,18 @@ public class PlayerPanel extends FPanel {
      * Listens to name text fields and gives the appropriate player focus. Also
      * saves the name preference when leaving player one's text field.
      */
-    private FocusAdapter nameFocusListener = new FocusAdapter() {
+    private final FocusAdapter nameFocusListener = new FocusAdapter() {
         @Override
-        public void focusGained(FocusEvent e) {
+        public void focusGained(final FocusEvent e) {
             lobby.changePlayerFocus(index);
         }
 
         @Override
-        public void focusLost(FocusEvent e) {
+        public void focusLost(final FocusEvent e) {
             final Object source = e.getSource();
             if (source instanceof FTextField) { // the text box
-                FTextField nField = (FTextField)source;
-                String newName = nField.getText().trim();
+                final FTextField nField = (FTextField)source;
+                final String newName = nField.getText().trim();
                 if (index == 0 && !StringUtils.isBlank(newName)
                         && StringUtils.isAlphanumericSpace(newName) && prefs.getPref(FPref.PLAYER_NAME) != newName) {
                     prefs.setPref(FPref.PLAYER_NAME, newName);
@@ -259,14 +259,14 @@ public class PlayerPanel extends FPanel {
     };
 
     /** Listens to avatar buttons and gives the appropriate player focus. */
-    private FocusAdapter avatarFocusListener = new FocusAdapter() {
+    private final FocusAdapter avatarFocusListener = new FocusAdapter() {
         @Override
-        public void focusGained(FocusEvent e) {
+        public void focusGained(final FocusEvent e) {
             lobby.changePlayerFocus(index);
         }
     };
 
-    private FMouseAdapter avatarMouseListener = new FMouseAdapter() {
+    private final FMouseAdapter avatarMouseListener = new FMouseAdapter() {
         @Override public final void onLeftClick(final MouseEvent e) {
             if (!avatarLabel.isEnabled()) {
                 return;
@@ -297,6 +297,7 @@ public class PlayerPanel extends FPanel {
 
             lobby.firePlayerChangeListener(index);
         }
+
         @Override public final void onRightClick(final MouseEvent e) {
             if (!avatarLabel.isEnabled()) {
                 return;
@@ -314,13 +315,13 @@ public class PlayerPanel extends FPanel {
     };
 
     private void updateVariantControlsVisibility() {
-        boolean isCommanderApplied = mayEdit && (lobby.hasVariant(GameType.Commander) || lobby.hasVariant(GameType.TinyLeaders));
-        boolean isPlanechaseApplied = mayEdit && lobby.hasVariant(GameType.Planechase);
-        boolean isVanguardApplied = mayEdit && lobby.hasVariant(GameType.Vanguard);
-        boolean isArchenemyApplied = mayEdit && lobby.hasVariant(GameType.Archenemy);
-        boolean archenemyVisiblity = mayEdit && lobby.hasVariant(GameType.ArchenemyRumble) || (isArchenemyApplied && isArchenemy());
+        final boolean isCommanderApplied = mayEdit && (lobby.hasVariant(GameType.Commander) || lobby.hasVariant(GameType.TinyLeaders));
+        final boolean isPlanechaseApplied = mayEdit && lobby.hasVariant(GameType.Planechase);
+        final boolean isVanguardApplied = mayEdit && lobby.hasVariant(GameType.Vanguard);
+        final boolean isArchenemyApplied = mayEdit && lobby.hasVariant(GameType.Archenemy);
+        final boolean archenemyVisiblity = mayEdit && lobby.hasVariant(GameType.ArchenemyRumble) || (isArchenemyApplied && isArchenemy());
         // Commander deck building replaces normal one, so hide it
-        boolean isDeckBuildingAllowed = mayEdit && !isCommanderApplied && !lobby.hasVariant(GameType.MomirBasic);
+        final boolean isDeckBuildingAllowed = mayEdit && !isCommanderApplied && !lobby.hasVariant(GameType.MomirBasic);
 
         deckLabel.setVisible(isDeckBuildingAllowed);
         deckBtn.setVisible(isDeckBuildingAllowed);
@@ -344,7 +345,7 @@ public class PlayerPanel extends FPanel {
     }
 
     @Override
-    public void paintComponent(Graphics g) {
+    public void paintComponent(final Graphics g) {
         super.paintComponent(g);
         if (!hasFocusInLobby()) {
             FSkin.setGraphicsColor(g, unfocusedPlayerOverlay);
@@ -354,10 +355,6 @@ public class PlayerPanel extends FPanel {
 
     private boolean hasFocusInLobby() {
         return lobby.hasFocus(index);
-    }
-
-    int getIndex() {
-        return index;
     }
 
     LobbySlotType getType() {
@@ -417,11 +414,11 @@ public class PlayerPanel extends FPanel {
         }
     }
 
-    public void setVanguardButtonText(String text) {
+    public void setVanguardButtonText(final String text) {
         vgdSelectorBtn.setText(text);
     }
 
-    public void setDeckSelectorButtonText(String text) {
+    public void setDeckSelectorButtonText(final String text) {
         deckBtn.setText(text);
     }
 
@@ -439,7 +436,7 @@ public class PlayerPanel extends FPanel {
         teamComboBox.setEnabled(true);
     }
 
-    private ActionListener teamListener = new ActionListener() {
+    private final ActionListener teamListener = new ActionListener() {
         @SuppressWarnings("unchecked")
         @Override public final void actionPerformed(final ActionEvent e) {
             final FComboBox<Object> cb = (FComboBox<Object>) e.getSource();
@@ -460,7 +457,7 @@ public class PlayerPanel extends FPanel {
         // Archenemy buttons
         scmDeckSelectorBtn.setCommand(new Runnable() {
             @Override public final void run() {
-                lobby.setCurrentGameMode(lobby.getVntArchenemy().isSelected() ? GameType.Archenemy : GameType.ArchenemyRumble);
+                lobby.setCurrentGameMode(lobby.hasVariant(GameType.Archenemy) ? GameType.Archenemy : GameType.ArchenemyRumble);
                 scmDeckSelectorBtn.requestFocusInWindow();
                 lobby.changePlayerFocus(index);
             }
@@ -469,8 +466,8 @@ public class PlayerPanel extends FPanel {
         scmDeckEditor.setCommand(new UiCommand() {
             @Override
             public void run() {
-                lobby.setCurrentGameMode(lobby.getVntArchenemy().isSelected() ? GameType.Archenemy : GameType.ArchenemyRumble);
-                Predicate<PaperCard> predSchemes = new Predicate<PaperCard>() {
+                lobby.setCurrentGameMode(lobby.hasVariant(GameType.Archenemy) ? GameType.Archenemy : GameType.ArchenemyRumble);
+                final Predicate<PaperCard> predSchemes = new Predicate<PaperCard>() {
                     @Override public final boolean apply(final PaperCard arg0) {
                         return arg0.getRules().getType().isScheme();
                     }
@@ -486,7 +483,7 @@ public class PlayerPanel extends FPanel {
         cmdDeckSelectorBtn.setCommand(new Runnable() {
             @Override
             public void run() {
-                lobby.setCurrentGameMode(lobby.getVntTinyLeaders().isSelected() ? GameType.TinyLeaders : GameType.Commander);
+                lobby.setCurrentGameMode(lobby.hasVariant(GameType.TinyLeaders) ? GameType.TinyLeaders : GameType.Commander);
                 cmdDeckSelectorBtn.requestFocusInWindow();
                 lobby.changePlayerFocus(index);
             }
@@ -495,7 +492,7 @@ public class PlayerPanel extends FPanel {
         cmdDeckEditor.setCommand(new UiCommand() {
             @Override
             public void run() {
-                lobby.setCurrentGameMode(lobby.getVntTinyLeaders().isSelected() ? GameType.TinyLeaders : GameType.Commander);
+                lobby.setCurrentGameMode(lobby.hasVariant(GameType.TinyLeaders) ? GameType.TinyLeaders : GameType.Commander);
                 Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_COMMANDER);
                 CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture()));
             }
@@ -515,9 +512,9 @@ public class PlayerPanel extends FPanel {
             @Override
             public void run() {
                 lobby.setCurrentGameMode(GameType.Planechase);
-                Predicate<PaperCard> predPlanes = new Predicate<PaperCard>() {
+                final Predicate<PaperCard> predPlanes = new Predicate<PaperCard>() {
                     @Override
-                    public boolean apply(PaperCard arg0) {
+                    public boolean apply(final PaperCard arg0) {
                         return arg0.getRules().getType().isPlane() || arg0.getRules().getType().isPhenomenon();
                     }
                 };
@@ -600,7 +597,7 @@ public class PlayerPanel extends FPanel {
         newNameBtn.setCommand(new UiCommand() {
             @Override
             public void run() {
-                String newName = lobby.getNewName();
+                final String newName = lobby.getNewName();
                 if (null == newName) {
                     return;
                 }
@@ -656,7 +653,7 @@ public class PlayerPanel extends FPanel {
     }
 
     private void createAvatar() {
-        String[] currentPrefs = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
+        final String[] currentPrefs = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
         if (index < currentPrefs.length) {
             avatarIndex = Integer.parseInt(currentPrefs[index]);
             avatarLabel.setIcon(FSkin.getAvatars().get(avatarIndex));
@@ -690,7 +687,7 @@ public class PlayerPanel extends FPanel {
     private final FSkin.LineSkinBorder focusedBorder = new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS).alphaColor(255), 3);
     private final FSkin.LineSkinBorder defaultBorder = new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_THEME).alphaColor(200), 2);
 
-    public void setFocused(boolean focused) {
+    public void setFocused(final boolean focused) {
         avatarLabel.setBorder(focused ? focusedBorder : defaultBorder);
     }
 

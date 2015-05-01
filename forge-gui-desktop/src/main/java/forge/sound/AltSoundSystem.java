@@ -53,6 +53,7 @@ public class AltSoundSystem extends Thread {
         isSync = synced;
     } 
 
+    @Override
     public void run() { 
         if (isSync && AsyncSoundRegistry.getNumIterations(filename) >= 1) {
             return;

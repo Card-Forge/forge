@@ -6,31 +6,38 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.toolbox;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.LayoutManager;
+import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.SwingConstants;
 
 import forge.UiCommand;
 import forge.gui.framework.ILocalRepaint;
 import forge.toolbox.FSkin.FPanelBase;
 import forge.toolbox.FSkin.SkinColor;
 
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-
-/** 
+/**
  * Core panel used in UI.
  * <br><br>
  * Adjustable features of FPanel:<br>
@@ -141,6 +148,7 @@ public class FPanel extends FPanelBase implements ILocalRepaint {
     }
 
     /** @param img0 &emsp; {@link java.awt.Image} */
+    @Override
     protected void onSetForegroundImage(final Image img0) {
         if (img0 == null) {
             this.foregroundImage = null;
@@ -177,6 +185,7 @@ public class FPanel extends FPanelBase implements ILocalRepaint {
     }
 
     /** @param img0 &emsp; {@link java.awt.Image} */
+    @Override
     protected void onSetBackgroundTexture(final Image img0) {
         if (img0 == null) { return; }
 
@@ -186,6 +195,7 @@ public class FPanel extends FPanelBase implements ILocalRepaint {
     }
 
     /** @param clr0 &emsp; {@link java.awt.Color} */
+    @Override
     public void onSetBackgroundTextureOverlay(final Color color) {
         this.backgroundTextureOverlay = color;
     }
@@ -213,7 +223,7 @@ public class FPanel extends FPanelBase implements ILocalRepaint {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
      */
     @Override
@@ -308,13 +318,13 @@ public class FPanel extends FPanelBase implements ILocalRepaint {
 
         // Scaling step 3: Center image in panel
         switch(this.foregroundAlign) {
-            case SwingConstants.BOTTOM:
-                tempX = ((pnlW - scaledW) / 2);
-                tempY = pnlH - scaledH;
-                break;
-            default:
-                tempX = ((pnlW - scaledW) / 2);
-                tempY = ((pnlH - scaledH) / 2);
+        case SwingConstants.BOTTOM:
+            tempX = ((pnlW - scaledW) / 2);
+            tempY = pnlH - scaledH;
+            break;
+        default:
+            tempX = ((pnlW - scaledW) / 2);
+            tempY = ((pnlH - scaledH) / 2);
         }
 
         g2d0.drawImage(foregroundImage, tempX, tempY, scaledW + tempX, scaledH + tempY, 0, 0, imgW, imgH, null);

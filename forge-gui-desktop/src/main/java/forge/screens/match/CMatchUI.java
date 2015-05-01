@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -42,7 +42,6 @@ import forge.FThreads;
 import forge.ImageCache;
 import forge.LobbyPlayer;
 import forge.Singletons;
-import forge.UiCommand;
 import forge.assets.FSkinProp;
 import forge.control.KeyboardShortcuts;
 import forge.deck.CardPool;
@@ -109,7 +108,7 @@ import forge.view.arcane.FloatingCardArea;
  * top-level control for child UIs. Tasks targeting the view of individual
  * components are found in a separate controller for that component and
  * should not be included here.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
 public final class CMatchUI
@@ -117,7 +116,7 @@ public final class CMatchUI
     implements ICDoc, IMenuProvider {
 
     private final FScreen screen;
-    private VMatchUI view;
+    private final VMatchUI view;
     private final CMatchUIMenus menus = new CMatchUIMenus(this);
     private final Map<EDocID, IVDoc<? extends ICDoc>> myDocs;
     private final TargetingOverlay targetingOverlay = new TargetingOverlay(this);
@@ -237,11 +236,11 @@ public final class CMatchUI
     }
 
     private SkinImage getPlayerAvatar(final PlayerView p, final int defaultIndex) {
-         if (avatarImages.containsKey(p.getLobbyPlayerName())) {
+        if (avatarImages.containsKey(p.getLobbyPlayerName())) {
             return ImageCache.getIcon(avatarImages.get(p.getLobbyPlayerName()));
         }
 
-        int avatarIdx = p.getAvatarIndex();
+        final int avatarIdx = p.getAvatarIndex();
         return FSkin.getAvatars().get(avatarIdx >= 0 ? avatarIdx : defaultIndex);
     }
 
@@ -335,7 +334,7 @@ public final class CMatchUI
         cDetailPicture.showItem(item);
     }
 
-    private int getPlayerIndex(PlayerView player) {
+    private int getPlayerIndex(final PlayerView player) {
         return sortedPlayers.indexOf(player);
     }
 
@@ -344,7 +343,7 @@ public final class CMatchUI
         final CombatView combat = getGameView().getCombat();
         if (combat != null && combat.getNumAttackers() > 0 && getGameView().peekStack() == null) {
             if (selectedDocBeforeCombat == null) {
-                IVDoc<? extends ICDoc> combatDoc = EDocID.REPORT_COMBAT.getDoc();
+                final IVDoc<? extends ICDoc> combatDoc = EDocID.REPORT_COMBAT.getDoc();
                 if (combatDoc.getParentCell() != null) {
                     selectedDocBeforeCombat = combatDoc.getParentCell().getSelected();
                     if (selectedDocBeforeCombat != combatDoc) {
@@ -459,11 +458,6 @@ public final class CMatchUI
     }
 
     @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
-    }
-
-    @Override
     public void register() {
         initHandViews();
         registerDocs();
@@ -516,7 +510,7 @@ public final class CMatchUI
     /**
      * Find the card panel belonging to a card, bringing up the corresponding
      * window or tab if necessary.
-     * 
+     *
      * @param card
      *            the {@link CardView} to find a panel for.
      * @return a {@link CardPanel}, or {@code null} if no corresponding panel is
@@ -554,6 +548,7 @@ public final class CMatchUI
         return null;
     }
 
+    @Override
     public void updateButtons(final PlayerView owner, final String label1, final String label2, final boolean enable1, final boolean enable2, final boolean focus1) {
         final FButton btn1 = view.getBtnOK(), btn2 = view.getBtnCancel();
         btn1.setText(label1);
@@ -574,7 +569,7 @@ public final class CMatchUI
 
     @Override
     public void flashIncorrectAction() {
-        SDisplayUtil.remind(getCPrompt().getView());
+        getCPrompt().remind();
     }
 
     @Override
@@ -591,7 +586,7 @@ public final class CMatchUI
 
     @Override
     public void updateTurn(final PlayerView player) {
-        VField nextField = getFieldViewFor(player);
+        final VField nextField = getFieldViewFor(player);
         SDisplayUtil.showTab(nextField);
         cPrompt.updateText();
         repaintCardOverlays();
@@ -622,7 +617,7 @@ public final class CMatchUI
         FloatingCardArea.closeAll(); //ensure floating card areas cleared and closed after the game
         final GameView gameView = getGameView();
         if (hasLocalPlayers() || gameView.isMatchOver()) {
-            new ViewWinLose(gameView, this);
+            new ViewWinLose(gameView, this).show();
         }
         if (showOverlay) {
             SOverlayUtils.showOverlay();
@@ -652,7 +647,7 @@ public final class CMatchUI
 
     /**
      * Highlight a card on the playfield.
-     * 
+     *
      * @param card
      *            a card to be highlighted
      */
@@ -759,6 +754,7 @@ public final class CMatchUI
         cPrompt.setMessage(message);
     }
 
+    @Override
     public Object showManaPool(final PlayerView player) {
         return null; //not needed since mana pool icons are always visible
     }
@@ -809,12 +805,6 @@ public final class CMatchUI
         Singletons.getControl().setCurrentScreen(screen);
         SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
 
-        // per player observers were set in CMatchUI.SINGLETON_INSTANCE.initMatch
-        //Set Field shown to current player.
-        //if (util.getHumanCount() > 0) {
-            final VField nextField = getFieldViewFor(gameView.getPlayers().get(0));
-            SDisplayUtil.showTab(nextField);
-        //}
         SOverlayUtils.hideOverlay();
     }
 
@@ -951,7 +941,7 @@ public final class CMatchUI
         final List<VField> fieldViews = getFieldViews();
 
         // Human field is at index [0]
-        PhaseIndicator fvHuman = fieldViews.get(0).getPhaseIndicator();
+        final PhaseIndicator fvHuman = fieldViews.get(0).getPhaseIndicator();
         fvHuman.getLblUpkeep().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_UPKEEP));
         fvHuman.getLblDraw().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_DRAW));
         fvHuman.getLblMain1().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_MAIN1));
@@ -967,7 +957,7 @@ public final class CMatchUI
 
         // AI field is at index [1], ...
         for (int i = 1; i < fieldViews.size(); i++) {
-            PhaseIndicator fvAi = fieldViews.get(i).getPhaseIndicator();
+            final PhaseIndicator fvAi = fieldViews.get(i).getPhaseIndicator();
             fvAi.getLblUpkeep().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_UPKEEP));
             fvAi.getLblDraw().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_DRAW));
             fvAi.getLblMain1().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_MAIN1));
@@ -981,17 +971,15 @@ public final class CMatchUI
             fvAi.getLblEndTurn().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_EOT));
             fvAi.getLblCleanup().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_CLEANUP));
         }
-
-        //Singletons.getView().getViewMatch().setLayoutParams(prefs.getPref(FPref.UI_LAYOUT_PARAMS));
     }
 
     @Override
-    public void message(String message, String title) {
+    public void message(final String message, final String title) {
         SOptionPane.showMessageDialog(message, title);
     }
 
     @Override
-    public void showErrorDialog(String message, String title) {
+    public void showErrorDialog(final String message, final String title) {
         SOptionPane.showErrorDialog(message, title);
     }
 

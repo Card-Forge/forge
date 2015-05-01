@@ -83,11 +83,11 @@ public final class CardPicturePanel extends JPanel {
         return null;
     }
 
-    private AutoSizeImageMode getAutoSizeImageMode() {
+    private static AutoSizeImageMode getAutoSizeImageMode() {
         return (isUIScaleLarger() ? AutoSizeImageMode.PANEL : AutoSizeImageMode.SOURCE);
     }
 
-    private boolean isUIScaleLarger() {
+    private static boolean isUIScaleLarger() {
         return FModel.getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER);
     }
 

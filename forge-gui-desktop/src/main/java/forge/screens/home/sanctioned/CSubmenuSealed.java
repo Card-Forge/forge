@@ -24,9 +24,9 @@ import forge.screens.deckeditor.controllers.ACEditorBase;
 import forge.screens.deckeditor.controllers.CEditorLimited;
 import forge.toolbox.FOptionPane;
 
-/** 
+/**
  * Controls the sealed submenu in the home UI.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
@@ -88,7 +88,7 @@ public enum CSubmenuSealed implements ICDoc {
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() {
-                JButton btnStart = view.getBtnStart();
+                final JButton btnStart = view.getBtnStart();
                 if (btnStart.isEnabled()) {
                     view.getBtnStart().requestFocusInWindow();
                 } else {
@@ -107,14 +107,14 @@ public enum CSubmenuSealed implements ICDoc {
         }
 
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            String errorMessage = gameType.getDeckFormat().getDeckConformanceProblem(human.getDeck());
+            final String errorMessage = gameType.getDeckFormat().getDeckConformanceProblem(human.getDeck());
             if (null != errorMessage) {
                 FOptionPane.showErrorDialog("Your deck " + errorMessage + " Please edit or choose a different deck.", "Invalid Deck");
                 return;
             }
         }
 
-        int matches = FModel.getDecks().getSealed().get(human.getName()).getAiDecks().size();
+        final int matches = FModel.getDecks().getSealed().get(human.getName()).getAiDecks().size();
         FModel.getGauntletMini().launch(matches, human.getDeck(), gameType);
     }
 
@@ -131,11 +131,4 @@ public enum CSubmenuSealed implements ICDoc {
         editor.getDeckController().setModel((T) sealed);
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
-    }
 }

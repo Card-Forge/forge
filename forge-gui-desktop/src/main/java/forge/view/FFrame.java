@@ -49,11 +49,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
         setUndecorated(true);
     }
 
-    public void initialize() {
-        initialize(new FTitleBar(this));
-    }
-
-    public void initialize(FTitleBarBase titleBar0) {
+    public void initialize(final FTitleBarBase titleBar0) {
         this.isMainFrame = (FView.SINGLETON_INSTANCE.getFrame() == this);
 
         // Frame border
@@ -63,12 +59,12 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
         addResizeSupport();
         this.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowActivated(WindowEvent e) {
+            public void windowActivated(final WindowEvent e) {
                 resume(); //resume music when main frame regains focus
             }
 
             @Override
-            public void windowDeactivated(WindowEvent e) {
+            public void windowDeactivated(final WindowEvent e) {
                 if (e.getOppositeWindow() == null) {
                     pause(); //pause music when main frame loses focus to outside application
 
@@ -80,7 +76,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
         });
         this.addWindowStateListener(new WindowStateListener() {
             @Override
-            public void windowStateChanged(WindowEvent e) {
+            public void windowStateChanged(final WindowEvent e) {
                 setState(e.getNewState());
             }
         });
@@ -120,11 +116,13 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
         return this.titleBar;
     }
 
+    @Override
     public boolean getLockTitleBar() {
         return this.lockTitleBar;
     }
 
-    public void setLockTitleBar(boolean lockTitleBar0) {
+    @Override
+    public void setLockTitleBar(final boolean lockTitleBar0) {
         if (this.lockTitleBar == lockTitleBar0) { return; }
         this.lockTitleBar = lockTitleBar0;
         if (this.isMainFrame) {
@@ -152,7 +150,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
     }
 
     @Override
-    public void setTitle(String title) {
+    public void setTitle(final String title) {
         super.setTitle(title);
         if (this.titleBar != null) {
             this.titleBar.setTitle(title);
@@ -160,7 +158,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
     }
 
     @Override
-    public void setIconImage(Image image) {
+    public void setIconImage(final Image image) {
         super.setIconImage(image);
         if (this.titleBar != null) {
             this.titleBar.setIconImage(image);
@@ -169,22 +167,22 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
 
     //ensure un-maximized if location or size changed
     @Override
-    public void setLocation(Point point) {
+    public void setLocation(final Point point) {
         resetState();
         super.setLocation(point);
     }
     @Override
-    public void setLocation(int x, int y) {
+    public void setLocation(final int x, final int y) {
         resetState();
         super.setLocation(x, y);
     }
     @Override
-    public void setSize(Dimension size) {
+    public void setSize(final Dimension size) {
         resetState();
         super.setSize(size);
     }
     @Override
-    public void setSize(int width, int height) {
+    public void setSize(final int width, final int height) {
         resetState();
         super.setSize(width, height);
     }
@@ -201,7 +199,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
         }
     }
 
-    public void setWindowLayout(int x, int y, int width, int height, boolean maximized0, boolean fullScreen0) {
+    public void setWindowLayout(final int x, final int y, final int width, final int height, final boolean maximized0, final boolean fullScreen0) {
         this.normalBounds = new Rectangle(x, y, width, height);
         this.maximized = maximized0;
         this.fullScreen = fullScreen0;
@@ -219,11 +217,13 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
         this.normalBounds = this.getBounds();
     }
 
+    @Override
     public boolean isMinimized() {
         return this.minimized;
     }
 
-    public void setMinimized(boolean minimized0) {
+    @Override
+    public void setMinimized(final boolean minimized0) {
         if (this.minimized == minimized0) { return; }
         this.minimized = minimized0;
         updateState();
@@ -237,21 +237,25 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
         }
     }
 
+    @Override
     public boolean isMaximized() {
         return this.maximized;
     }
 
-    public void setMaximized(boolean maximized0) {
+    @Override
+    public void setMaximized(final boolean maximized0) {
         if (this.maximized == maximized0) { return; }
         this.maximized = maximized0;
         updateState();
     }
 
+    @Override
     public boolean isFullScreen() {
         return this.fullScreen;
     }
 
-    public void setFullScreen(boolean fullScreen0) {
+    @Override
+    public void setFullScreen(final boolean fullScreen0) {
         if (this.fullScreen == fullScreen0) { return; }
         this.fullScreen = fullScreen0;
         if (!fullScreen0) { //cancel full screen here instead of updateState
@@ -313,7 +317,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
 
     //override normal extended state behavior
     @Override
-    public void setExtendedState(int state) {
+    public void setExtendedState(final int state) {
         if (this.isActive()) { //only update state set this way when active, otherwise window will be minimized when deactivated
             this.minimized = (state & Frame.ICONIFIED) == Frame.ICONIFIED;
             this.maximized = (state & Frame.MAXIMIZED_BOTH) == Frame.MAXIMIZED_BOTH;
@@ -324,7 +328,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
     private void addMoveSupport() {
         this.titleBar.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(final MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e) && !fullScreen) { //don't allow moving or restore down when Full Screen
                     if (e.getClickCount() == 1) {
                         locBeforeMove = getLocation();
@@ -336,7 +340,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
                 }
             }
             @Override
-            public void mouseReleased(MouseEvent e) {
+            public void mouseReleased(final MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     locBeforeMove = null;
                     mouseDownLoc = null;
@@ -346,7 +350,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
         });
         this.titleBar.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
-            public void mouseDragged(MouseEvent e) {
+            public void mouseDragged(final MouseEvent e) {
                 if (mouseDownLoc != null) {
                     final Point loc = e.getLocationOnScreen();
                     final int dx = loc.x - mouseDownLoc.x;
@@ -364,7 +368,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
         });
     }
 
-    private void setResizeCursor(int resizeCursor0) {
+    private void setResizeCursor(final int resizeCursor0) {
         this.resizeCursor = resizeCursor0;
         this.getRootPane().setCursor(Cursor.getPredefinedCursor(resizeCursor0));
     }
@@ -373,7 +377,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
         final JRootPane resizeBorders = getRootPane();
         resizeBorders.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(final MouseEvent e) {
                 if (resizeCursor != Cursor.DEFAULT_CURSOR && SwingUtilities.isLeftMouseButton(e)) {
                     locBeforeMove = getLocation();
                     sizeBeforeResize = getSize();
@@ -381,7 +385,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
                 }
             }
             @Override
-            public void mouseReleased(MouseEvent e) {
+            public void mouseReleased(final MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     locBeforeMove = null;
                     sizeBeforeResize = null;
@@ -390,7 +394,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
                 }
             }
             @Override
-            public void mouseExited(MouseEvent e) {
+            public void mouseExited(final MouseEvent e) {
                 if (mouseDownLoc == null) {
                     setResizeCursor(Cursor.DEFAULT_CURSOR);
                 }
@@ -398,7 +402,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
         });
         resizeBorders.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
-            public void mouseMoved(MouseEvent e) {
+            public void mouseMoved(final MouseEvent e) {
                 if (mouseDownLoc == null && !maximized) {
                     final int grabArea = borderThickness * 2;
                     final Point loc = e.getPoint();
@@ -436,7 +440,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
                 }
             }
             @Override
-            public void mouseDragged(MouseEvent e) {
+            public void mouseDragged(final MouseEvent e) {
                 if (mouseDownLoc == null) { return; }
 
                 final Point loc = e.getLocationOnScreen();
@@ -447,39 +451,39 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
                 int width = sizeBeforeResize.width;
                 int height = sizeBeforeResize.height;
                 switch (resizeCursor) {
-                    case Cursor.E_RESIZE_CURSOR:
-                        width += dx;
-                        break;
-                    case Cursor.W_RESIZE_CURSOR:
-                        width -= dx;
-                        break;
-                    case Cursor.S_RESIZE_CURSOR:
-                        height += dy;
-                        break;
-                    case Cursor.N_RESIZE_CURSOR:
-                        height -= dy;
-                        break;
-                    case Cursor.SE_RESIZE_CURSOR:
-                        width += dx;
-                        height += dy;
-                        break;
-                    case Cursor.NE_RESIZE_CURSOR:
-                        width += dx;
-                        height -= dy;
-                        break;
-                    case Cursor.SW_RESIZE_CURSOR:
-                        width -= dx;
-                        height += dy;
-                        break;
-                    case Cursor.NW_RESIZE_CURSOR:
-                        width -= dx;
-                        height -= dy;
-                        break;
+                case Cursor.E_RESIZE_CURSOR:
+                    width += dx;
+                    break;
+                case Cursor.W_RESIZE_CURSOR:
+                    width -= dx;
+                    break;
+                case Cursor.S_RESIZE_CURSOR:
+                    height += dy;
+                    break;
+                case Cursor.N_RESIZE_CURSOR:
+                    height -= dy;
+                    break;
+                case Cursor.SE_RESIZE_CURSOR:
+                    width += dx;
+                    height += dy;
+                    break;
+                case Cursor.NE_RESIZE_CURSOR:
+                    width += dx;
+                    height -= dy;
+                    break;
+                case Cursor.SW_RESIZE_CURSOR:
+                    width -= dx;
+                    height += dy;
+                    break;
+                case Cursor.NW_RESIZE_CURSOR:
+                    width -= dx;
+                    height -= dy;
+                    break;
                 }
 
                 //ensure new size in bounds
-                Dimension minSize = getMinimumSize();
-                Dimension maxSize = getMaximumSize();
+                final Dimension minSize = getMinimumSize();
+                final Dimension maxSize = getMaximumSize();
                 if (width < minSize.width) {
                     dx += (width - minSize.width);
                     width = minSize.width;
@@ -501,18 +505,18 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
                 int x = locBeforeMove.x;
                 int y = locBeforeMove.y;
                 switch (resizeCursor) {
-                    case Cursor.W_RESIZE_CURSOR:
-                    case Cursor.SW_RESIZE_CURSOR:
-                        x += dx;
-                        break;
-                    case Cursor.N_RESIZE_CURSOR:
-                    case Cursor.NE_RESIZE_CURSOR:
-                        y += dy;
-                        break;
-                    case Cursor.NW_RESIZE_CURSOR:
-                        x += dx;
-                        y += dy;
-                        break;
+                case Cursor.W_RESIZE_CURSOR:
+                case Cursor.SW_RESIZE_CURSOR:
+                    x += dx;
+                    break;
+                case Cursor.N_RESIZE_CURSOR:
+                case Cursor.NE_RESIZE_CURSOR:
+                    y += dy;
+                    break;
+                case Cursor.NW_RESIZE_CURSOR:
+                    x += dx;
+                    y += dy;
+                    break;
                 }
 
                 //set bounds based on new size and location

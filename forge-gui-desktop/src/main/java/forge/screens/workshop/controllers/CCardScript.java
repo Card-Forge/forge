@@ -12,7 +12,6 @@ import javax.swing.text.Style;
 import javax.swing.text.StyledDocument;
 
 import forge.Singletons;
-import forge.UiCommand;
 import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardScriptInfo;
@@ -29,9 +28,9 @@ import forge.screens.workshop.views.VCardScript;
 import forge.screens.workshop.views.VWorkshopCatalog;
 import forge.toolbox.FOptionPane;
 
-/** 
+/**
  * Controls the "card script" panel in the workshop UI.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
@@ -56,7 +55,7 @@ public enum CCardScript implements ICDoc {
             }
             @Override
             public void changedUpdate(final DocumentEvent arg0) {
-                 //Plain text components do not fire these events
+                //Plain text components do not fire these events
             }
         });
         VCardScript.SINGLETON_INSTANCE.getTxtScript().addFocusListener(new FocusListener() {
@@ -71,7 +70,7 @@ public enum CCardScript implements ICDoc {
     }
 
     private void updateDirtyFlag() {
-        boolean isTextNowDirty = !refreshing && currentScriptInfo != null && !VCardScript.SINGLETON_INSTANCE.getTxtScript().getText().equals(currentScriptInfo.getText());
+        final boolean isTextNowDirty = !refreshing && currentScriptInfo != null && !VCardScript.SINGLETON_INSTANCE.getTxtScript().getText().equals(currentScriptInfo.getText());
         if (isTextDirty == isTextNowDirty) { return; }
         isTextDirty = isTextNowDirty;
         VCardDesigner.SINGLETON_INSTANCE.getBtnSaveCard().setEnabled(isTextNowDirty);
@@ -83,7 +82,7 @@ public enum CCardScript implements ICDoc {
         return currentCard;
     }
 
-    public void showCard(PaperCard card) {
+    public void showCard(final PaperCard card) {
         if (currentCard == card || switchInProgress) { return; }
 
         if (!canSwitchAway(true)) { //ensure current card saved before changing to a different card
@@ -118,7 +117,7 @@ public enum CCardScript implements ICDoc {
         return (currentScriptInfo != null && isTextDirty);
     }
 
-    public boolean canSwitchAway(boolean isCardChanging) {
+    public boolean canSwitchAway(final boolean isCardChanging) {
         if (switchInProgress) { return false; }
         if (!hasChanges()) { return true; }
 
@@ -144,24 +143,23 @@ public enum CCardScript implements ICDoc {
     public boolean saveChanges() {
         if (!hasChanges()) { return true; } //not need if text hasn't been changed
 
-        String text = VCardScript.SINGLETON_INSTANCE.getTxtScript().getText();
+        final String text = VCardScript.SINGLETON_INSTANCE.getTxtScript().getText();
         if (!currentScriptInfo.trySetText(text)) {
             return false;
         }
 
         updateDirtyFlag();
 
-        String oldName = currentCard.getName();
+        final String oldName = currentCard.getName();
 
-        CardRules newRules = CardRules.fromScript(Arrays.asList(text.split("\n")));
-        CardDb cardDb = newRules.isVariant() ? FModel.getMagicDb().getVariantCards() :
+        final CardRules newRules = CardRules.fromScript(Arrays.asList(text.split("\n")));
+        final CardDb cardDb = newRules.isVariant() ? FModel.getMagicDb().getVariantCards() :
             FModel.getMagicDb().getCommonCards();
 
         cardDb.getEditor().putCard(newRules);
         if (newRules.getName().equals(oldName)) {
             Card.updateCard(currentCard);
-        }
-        else {
+        } else {
             currentCard = cardDb.getCard(newRules.getName());
         }
 
@@ -172,14 +170,6 @@ public enum CCardScript implements ICDoc {
     }
 
     //========== Overridden methods
-
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
-    }
 
     @Override
     public void register() {

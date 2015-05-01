@@ -1,33 +1,38 @@
 package forge.toolbox;
 
-import forge.gui.MouseUtil;
-import forge.interfaces.ITextField;
-import forge.toolbox.FSkin.SkinnedTextField;
+import java.awt.Cursor;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.RenderingHints;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
-import javax.swing.*;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
-import java.awt.*;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import forge.gui.MouseUtil;
+import forge.interfaces.ITextField;
+import forge.toolbox.FSkin.SkinnedTextField;
 
-/** 
+/**
  * A custom instance of JTextField using Forge skin properties.
- *
  */
 @SuppressWarnings("serial")
 public class FTextField extends SkinnedTextField implements ITextField {
-    /** 
+
+    /**
      * Uses the Builder pattern to facilitate/encourage inline styling.
      * Credit to Effective Java 2 (Joshua Bloch).
      * Methods in builder can be chained. To declare:
      * <code>new FTextField.Builder().method1(foo).method2(bar).method3(baz)...</code>
      * <br>and then call build() to make the widget (don't forget that part).
-    */
+     */
     public static class Builder {
         //========== Default values for FTextField are set here.
         private int     maxLength = 0; // <=0 indicates no maximum
@@ -39,14 +44,14 @@ public class FTextField extends SkinnedTextField implements ITextField {
 
         public FTextField build() { return new FTextField(this); }
 
-        public Builder maxLength(int i0)    { maxLength = i0; return this; }
-        public Builder readonly(boolean b0) { readonly = b0; return this; }
+        public Builder maxLength(final int i0)    { maxLength = i0; return this; }
+        public Builder readonly(final boolean b0) { readonly = b0; return this; }
         public Builder readonly()           { return readonly(true); }
 
-        public Builder text(String s0)                    { text = s0; return this; }
-        public Builder tooltip(String s0)                 { toolTip = s0; return this; }
-        public Builder ghostText(String s0)               { ghostText = s0; return this; }
-        public Builder showGhostTextWithFocus(boolean b0) { showGhostTextWithFocus = b0; return this; }
+        public Builder text(final String s0)                    { text = s0; return this; }
+        public Builder tooltip(final String s0)                 { toolTip = s0; return this; }
+        public Builder ghostText(final String s0)               { ghostText = s0; return this; }
+        public Builder showGhostTextWithFocus(final boolean b0) { showGhostTextWithFocus = b0; return this; }
         public Builder showGhostTextWithFocus()           { return showGhostTextWithFocus(true); }
     }
 
@@ -58,7 +63,7 @@ public class FTextField extends SkinnedTextField implements ITextField {
     private String ghostText;
     private boolean showGhostTextWithFocus;
 
-    private FTextField(Builder builder) {
+    private FTextField(final Builder builder) {
         this.setForeground(textColor);
         this.setBackground(backColor);
         this.setCaretColor(textColor);
@@ -98,7 +103,7 @@ public class FTextField extends SkinnedTextField implements ITextField {
 
             @Override
             public void focusLost(final FocusEvent e) {
-                FTextField field = (FTextField)e.getSource();
+                final FTextField field = (FTextField)e.getSource();
                 if (field.ghostText != null && field.isEmpty() && !field.showGhostTextWithFocus) {
                     field.repaint();
                 }
@@ -110,17 +115,17 @@ public class FTextField extends SkinnedTextField implements ITextField {
     }
 
     public boolean isEmpty() {
-        String text = this.getText();
+        final String text = this.getText();
         return (text == null || text.isEmpty());
     }
-    
+
     public int getAutoSizeWidth() {
-        FontMetrics metrics = this.getFontMetrics(this.getFont());
+        final FontMetrics metrics = this.getFontMetrics(this.getFont());
         return metrics.stringWidth(this.getText()) + 12;
     }
 
     @Override
-    public void paint(Graphics g) {
+    public void paint(final Graphics g) {
         super.paint(g);
         if (this.ghostText != null && this.isEmpty() && (this.showGhostTextWithFocus || !this.hasFocus())) {
             //TODO: Make ghost text look more like regular text
@@ -151,7 +156,7 @@ public class FTextField extends SkinnedTextField implements ITextField {
         return this.showGhostTextWithFocus;
     }
 
-    public void setShowGhostTextWithFocus(boolean showGhostTextWithFocus0) {
+    public void setShowGhostTextWithFocus(final boolean showGhostTextWithFocus0) {
         if (this.showGhostTextWithFocus == showGhostTextWithFocus0) { return; }
         this.showGhostTextWithFocus = showGhostTextWithFocus0;
         if (this.isEmpty() && this.hasFocus()) {
@@ -162,16 +167,16 @@ public class FTextField extends SkinnedTextField implements ITextField {
     private static class _LengthLimitedDocument extends PlainDocument {
         private final int _limit;
 
-        _LengthLimitedDocument(int limit) { _limit = limit; }
+        _LengthLimitedDocument(final int limit) { _limit = limit; }
 
         // called each time a character is typed or a string is pasted
         @Override
-        public void insertString(int offset, String s, AttributeSet attributeSet)
+        public void insertString(final int offset, String s, final AttributeSet attributeSet)
                 throws BadLocationException {
             if (_limit <= this.getLength()) {
                 return;
             }
-            int newLen = this.getLength() + s.length();
+            final int newLen = this.getLength() + s.length();
             if (_limit < newLen) {
                 s = s.substring(0, _limit - this.getLength());
             }
@@ -179,23 +184,23 @@ public class FTextField extends SkinnedTextField implements ITextField {
         }
     }
 
-    public void addChangeListener(ChangeListener listener) {
+    public void addChangeListener(final ChangeListener listener) {
         this.getDocument().addDocumentListener(listener);
     }
 
     public static abstract class ChangeListener implements DocumentListener {
         @Override
-        public void changedUpdate(DocumentEvent e) {
+        public void changedUpdate(final DocumentEvent e) {
             textChanged();
         }
 
         @Override
-        public void removeUpdate(DocumentEvent e) {
+        public void removeUpdate(final DocumentEvent e) {
             textChanged();
         }
 
         @Override
-        public void insertUpdate(DocumentEvent e) {
+        public void insertUpdate(final DocumentEvent e) {
             textChanged();
         }
 

@@ -1,11 +1,10 @@
 package forge.screens.home.settings;
 
-import forge.UiCommand;
+import javax.swing.SwingUtilities;
+
 import forge.gui.framework.ICDoc;
 
-import javax.swing.*;
-
-/** 
+/**
  * Controls the avatars submenu in the home UI.
  */
 public enum CSubmenuAvatars implements ICDoc {
@@ -24,15 +23,11 @@ public enum CSubmenuAvatars implements ICDoc {
     @Override
     public void update() {
         SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() {
-            	view.refreshAvatarFromPrefs(0);
-            	view.refreshAvatarFromPrefs(1);
-            	view.focusHuman(); }
+            @Override public final void run() {
+                view.refreshAvatarFromPrefs(0);
+                view.refreshAvatarFromPrefs(1);
+                view.focusHuman(); }
         });
     }
 
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
-    }
 }

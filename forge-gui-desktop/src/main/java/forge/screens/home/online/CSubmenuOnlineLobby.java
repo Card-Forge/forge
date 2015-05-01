@@ -5,9 +5,10 @@ import java.util.List;
 
 import javax.swing.JMenu;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.GuiBase;
 import forge.Singletons;
-import forge.UiCommand;
 import forge.assets.FSkinProp;
 import forge.gui.FNetOverlay;
 import forge.gui.framework.FScreen;
@@ -29,6 +30,7 @@ import forge.net.event.NetEvent;
 import forge.net.event.UpdateLobbyPlayerEvent;
 import forge.net.server.FServerManager;
 import forge.net.server.ServerGameLobby;
+import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.home.VLobby;
 import forge.screens.home.sanctioned.ConstructedGameMenu;
@@ -38,6 +40,8 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
     SINGLETON_INSTANCE;
 
     final void host(final int portNumber) {
+        promptNameIfNeeded();
+
         final FServerManager server = FServerManager.getInstance();
         final ServerGameLobby lobby = new ServerGameLobby();
         final VLobby view = VOnlineLobby.SINGLETON_INSTANCE.setLobby(lobby);
@@ -91,11 +95,13 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
     }
 
     final void join(final String hostname, final int port) {
+        promptNameIfNeeded();
+
         final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
         final FGameClient client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), "0", gui);
         VOnlineLobby.SINGLETON_INSTANCE.setClient(client);
         FNetOverlay.SINGLETON_INSTANCE.setGameClient(client);
-        final ClientGameLobby lobby = new ClientGameLobby(); 
+        final ClientGameLobby lobby = new ClientGameLobby();
         final VLobby view =  VOnlineLobby.SINGLETON_INSTANCE.setLobby(lobby);
         lobby.setListener(view);
         client.addLobbyListener(new ILobbyListener() {
@@ -123,6 +129,13 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
         FNetOverlay.SINGLETON_INSTANCE.showUp(String.format("Connected to %s:%d", hostname, port));
     }
 
+    private static void promptNameIfNeeded() {
+        //prompt user for player one name if needed
+        if (StringUtils.isBlank(FModel.getPreferences().getPref(FPref.PLAYER_NAME))) {
+            GamePlayerUtil.setPlayerName();
+        }
+    }
+
     @Override
     public void register() {
     }
@@ -143,19 +156,11 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
-    }
-
-    /* (non-Javadoc)
      * @see forge.gui.menubar.IMenuProvider#getMenus()
      */
     @Override
     public List<JMenu> getMenus() {
-        List<JMenu> menus = new ArrayList<JMenu>();
+        final List<JMenu> menus = new ArrayList<JMenu>();
         menus.add(ConstructedGameMenu.getMenu());
         return menus;
     }

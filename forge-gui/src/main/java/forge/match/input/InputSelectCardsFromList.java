@@ -10,12 +10,9 @@ public class InputSelectCardsFromList extends InputSelectEntitiesFromList<Card> 
     public InputSelectCardsFromList(final PlayerControllerHuman controller, final int cnt, final FCollectionView<Card> validCards) {
         super(controller, cnt, cnt, validCards); // to avoid hangs
     }
-    
+
     public InputSelectCardsFromList(final PlayerControllerHuman controller, final int min, final int max, final FCollectionView<Card> validCards) {
         super(controller, min, max, validCards); // to avoid hangs
     }
-    
-    public InputSelectCardsFromList(final PlayerControllerHuman controller, final FCollectionView<Card> validCards) {
-        super(controller, 1, 1, validCards); // to avoid hangs
-    }    
+
 }

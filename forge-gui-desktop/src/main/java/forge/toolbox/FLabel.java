@@ -1,5 +1,32 @@
 package forge.toolbox;
 
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Composite;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import javax.swing.Timer;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+
 import forge.UiCommand;
 import forge.assets.FSkinProp;
 import forge.gui.framework.ILocalRepaint;
@@ -9,14 +36,7 @@ import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.FSkin.SkinnedLabel;
 
-import javax.swing.*;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
-
-import java.awt.*;
-import java.awt.event.*;
-
-/** 
+/**
  * Uses the Builder pattern to facilitate/encourage inline styling.
  * Credit to Effective Java 2 (Joshua Bloch).
  * Methods in builder can be chained. To declare:
@@ -33,21 +53,21 @@ import java.awt.event.*;
  */
 @SuppressWarnings("serial")
 public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
-    /** 
+    /**
      * Uses the Builder pattern to facilitate/encourage inline styling.
      * Credit to Effective Java 2 (Joshua Bloch).
      * Methods in builder can be chained. To declare:
      * <code>new FLabel.Builder().method1(foo).method2(bar).method3(baz)...</code>
      * <br>and then call build() to make the label (don't forget that part).
-    */
+     */
     public static class Builder {
         //========== Default values for FLabel are set here.
-        private double  bldIconScaleFactor  = 0.8;
-        private int     bldFontStyle        = Font.PLAIN;
-        private int     bldFontSize         = 14;
-        private float   bldUnhoveredAlpha   = 0.7f;
-        private int     bldIconAlignX       = SwingConstants.LEFT;
-        private Point   bldIconInsets       = new Point(0, 0);
+        private double      bldIconScaleFactor  = 0.8;
+        private int         bldFontStyle        = Font.PLAIN;
+        private int         bldFontSize         = 14;
+        private float       bldUnhoveredAlpha   = 0.7f;
+        private int         bldIconAlignX       = SwingConstants.LEFT;
+        private final Point bldIconInsets       = new Point(0, 0);
 
         private boolean bldSelectable         = false;
         private boolean bldSelected           = false;
@@ -151,11 +171,6 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
          * SwingConstants.HORIZONTAL .VERTICAL or .CENTER
          * @return {@link forge.gui.toolbox.Builder} */
         public Builder iconAlignX(final int i0) { this.bldIconAlignX = i0; return this; }
-
-        /**@param i0 &emsp; Point. Only available for background icon.
-         * Additional padding to top left corner of icon, after alignX.
-         * @return {@link forge.gui.toolbox.Builder} */
-        public Builder iconInsets(final Point i0) { this.bldIconInsets = i0; return this; }
     }
 
     // sets better defaults for button labels
@@ -207,8 +222,8 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
             });
 
             this.addFocusListener(new FocusListener() {
-                @Override public void focusLost(FocusEvent arg0)   { repaintSelf(); }
-                @Override public void focusGained(FocusEvent arg0) { repaintSelf(); }
+                @Override public void focusLost(final FocusEvent arg0)   { repaintSelf(); }
+                @Override public void focusGained(final FocusEvent arg0) { repaintSelf(); }
             });
         }
 
@@ -241,12 +256,20 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
 
     // Custom properties, assigned either at realization (using builder)
     // or dynamically (using methods below).
-    private double iconScaleFactor;
-    private int fontStyle, iconAlignX;
+    private final double iconScaleFactor;
+    private int fontStyle;
+    private final int iconAlignX;
     private int iw, ih;
-    private boolean selectable, selected, hoverable, hovered, pressed, opaque,
-        iconInBackground, iconScaleAuto, reactOnMouseDown;
-    private Point iconInsets;
+    private final boolean selectable;
+    private boolean selected;
+    private boolean hoverable;
+    private boolean hovered;
+    private boolean pressed;
+    private boolean opaque;
+    private final boolean iconInBackground;
+    private final boolean iconScaleAuto;
+    private boolean reactOnMouseDown;
+    private final Point iconInsets;
 
     // Various variables used in image rendering.
     private Image img;
@@ -277,11 +300,11 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
         }
 
         @Override
-        public void ancestorMoved(AncestorEvent arg0) {
+        public void ancestorMoved(final AncestorEvent arg0) {
         }
 
         @Override
-        public void ancestorRemoved(AncestorEvent arg0) {
+        public void ancestorRemoved(final AncestorEvent arg0) {
         }
     };
 
@@ -301,17 +324,17 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
     // Mouse event handler
     private final FMouseAdapter madEvents = new FMouseAdapter() {
         @Override
-        public void onMouseEnter(MouseEvent e) {
+        public void onMouseEnter(final MouseEvent e) {
             setHovered(true);
         }
 
         @Override
-        public void onMouseExit(MouseEvent e) {
+        public void onMouseExit(final MouseEvent e) {
             setHovered(false);
         }
 
         @Override
-        public void onLeftMouseDown(MouseEvent e) {
+        public void onLeftMouseDown(final MouseEvent e) {
             if (reactOnMouseDown) {
                 _doMouseAction(); //for best responsiveness, do action before repainting for pressed state
             }
@@ -319,19 +342,19 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
         }
 
         @Override
-        public void onLeftMouseUp(MouseEvent e) {
+        public void onLeftMouseUp(final MouseEvent e) {
             setPressed(false);
         }
 
         @Override
-        public void onLeftClick(MouseEvent e) {
+        public void onLeftClick(final MouseEvent e) {
             if (!reactOnMouseDown) {
                 _doMouseAction();
             }
         }
 
         @Override
-        public void onRightClick(MouseEvent e) {
+        public void onRightClick(final MouseEvent e) {
             _doRightClickAction();
         }
     };
@@ -358,23 +381,25 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
         else { this.addMouseListener(madEvents); }
     }
 
-    protected void setHovered(boolean hovered0) {
+    protected void setHovered(final boolean hovered0) {
         this.hovered = hovered0;
         repaintSelf();
     }
 
-    protected void setPressed(boolean pressed0) {
+    protected void setPressed(final boolean pressed0) {
         this.pressed = pressed0;
         repaintSelf();
     }
 
     /** @param b0 &emsp; boolean */
     // Must be public.
+    @Override
     public void setSelected(final boolean b0) {
         this.selected = b0;
         repaintSelf();
     }
 
+    @Override
     public boolean isSelected() {
         return this.selected;
     }
@@ -389,9 +414,9 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
 
     public void setFontSize(final int i0) {
         switch(this.fontStyle) {
-            case Font.BOLD: this.setFont(FSkin.getBoldFont(i0)); break;
-            case Font.ITALIC: this.setFont(FSkin.getItalicFont(i0)); break;
-            default: this.setFont(FSkin.getFont(i0));
+        case Font.BOLD: this.setFont(FSkin.getBoldFont(i0)); break;
+        case Font.ITALIC: this.setFont(FSkin.getItalicFont(i0)); break;
+        default: this.setFont(FSkin.getFont(i0));
         }
     }
 
@@ -419,7 +444,7 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
     public int getAutoSizeWidth() {
         int width = 0;
         if (this.getText() != null && !this.getText().isEmpty()) {
-            FontMetrics metrics = this.getFontMetrics(this.getFont());
+            final FontMetrics metrics = this.getFontMetrics(this.getFont());
             width = metrics.stringWidth(this.getText());
         }
         if (this.getIcon() != null) {
@@ -435,7 +460,7 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
      * To prevent this label from recalculating on each increment, a timer
      * is run to check that the the "sliding" is finished.  To resize this label
      * explicitly, retrieve this timer and start it.  It will stop automatically.
-     * 
+     *
      * @return {@link javax.swing.Timer}
      */
     public Timer getResizeTimer() {
@@ -447,16 +472,16 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
         return this.cmdClick;
     }
 
-	/** @return {@link forge.UiCommand} */
+    /** @return {@link forge.UiCommand} */
     public Runnable getRightClickCommand() {
         return this.cmdRightClick;
     }
 
     protected int getMaxTextWidth() {
-        int w = getWidth();
-        int h = getHeight();
-        int sh = (int) (h * iconScaleFactor);
-        int sw = (int) (sh * iar);
+        final int w = getWidth();
+        final int h = getHeight();
+        final int sh = (int) (h * iconScaleFactor);
+        final int sw = (int) (sh * iar);
         return w - sw;
     }
 
@@ -489,12 +514,12 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
         this.cmdClick = c0;
     }
 
-	/** @param c0 &emsp; {@link forge.UiCommand} on right-click */
+    /** @param c0 &emsp; {@link forge.UiCommand} on right-click */
     public void setRightClickCommand(final Runnable c0) {
         this.cmdRightClick = c0;
     }
 
-    public void setReactOnMouseDown(boolean b0) {
+    public void setReactOnMouseDown(final boolean b0) {
         this.reactOnMouseDown = b0;
     }
 
@@ -514,18 +539,18 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
 
     @Override
     public void paintComponent(final Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
+        final Graphics2D g2d = (Graphics2D) g;
 
-        int w = getWidth();
-        int h = getHeight();
+        final int w = getWidth();
+        final int h = getHeight();
 
-        boolean paintWithHover = hoverable && hovered && isEnabled();
-        Composite oldComp = g2d.getComposite();
+        final boolean paintWithHover = hoverable && hovered && isEnabled();
+        final Composite oldComp = g2d.getComposite();
         if (hoverable) {
             g2d.setComposite(paintWithHover ? alphaStrong : alphaDim);
         }
 
-        boolean paintPressedState = pressed && hovered && isEnabled() && (opaque || selectable);
+        final boolean paintPressedState = pressed && hovered && isEnabled() && (opaque || selectable);
         if (paintPressedState) {
             paintPressed(g2d, w, h);
         }
@@ -557,23 +582,23 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
         }
     }
 
-    protected void paintContent(final Graphics2D g, int w, int h, final boolean paintPressedState) {
+    protected void paintContent(final Graphics2D g, final int w, final int h, final boolean paintPressedState) {
         if (paintPressedState) { //while pressed, translate graphics so icon and text appear shifted down and to the right
             g.translate(1, 1);
         }
 
         // Icon in background
         if (iconInBackground) {
-            int sh = (int) (h * iconScaleFactor);
-            int sw = (int) (sh * iar);
+            final int sh = (int) (h * iconScaleFactor);
+            final int sw = (int) (sh * iar);
 
-            int x = iconAlignX == SwingConstants.CENTER
-                        ? (int) ((w - sw) / 2 + iconInsets.getX())
-                        : (int) iconInsets.getX();
+            final int x = iconAlignX == SwingConstants.CENTER
+                    ? (int) ((w - sw) / 2 + iconInsets.getX())
+                            : (int) iconInsets.getX();
 
-            int y = (int) (((h - sh) / 2) + iconInsets.getY());
+                    final int y = (int) (((h - sh) / 2) + iconInsets.getY());
 
-            g.drawImage(img, x, y, sw + x, sh + y, 0, 0, iw, ih, null);
+                    g.drawImage(img, x, y, sw + x, sh + y, 0, 0, iw, ih, null);
         }
 
         super.paintComponent(g);
@@ -583,14 +608,14 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
         }
     }
 
-    private void paintFocus(final Graphics2D g, int w, int h) {
+    private static void paintFocus(final Graphics2D g, final int w, final int h) {
         FSkin.setGraphicsColor(g, clrHover);
         g.drawRect(0, 0, w - 2, h - 2);
         FSkin.setGraphicsColor(g, l30);
         g.drawRect(1, 1, w - 4, h - 4);
     }
 
-    private void paintPressed(final Graphics2D g, int w, int h) {
+    private static void paintPressed(final Graphics2D g, final int w, final int h) {
         FSkin.setGraphicsGradientPaint(g, 0, h, d50, 0, 0, d10);
         g.fillRect(0, 0, w - 1, h - 1);
 
@@ -600,7 +625,7 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
         g.drawRect(1, 1, w - 4, h - 4);
     }
 
-    private void paintUp(final Graphics2D g, int w, int h) {
+    private static void paintUp(final Graphics2D g, final int w, final int h) {
         FSkin.setGraphicsGradientPaint(g, 0, h, d10, 0, 0, l20);
         g.fillRect(0, 0, w, h);
 
@@ -610,14 +635,14 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
         g.drawRect(1, 1, w - 4, h - 4);
     }
 
-    private void paintBorder(final Graphics2D g, int w, int h) {
+    private static void paintBorder(final Graphics2D g, final int w, final int h) {
         FSkin.setGraphicsColor(g, l10);
         g.drawRect(0, 0, w - 2, h - 2);
         FSkin.setGraphicsColor(g, l30);
         g.drawRect(1, 1, w - 4, h - 4);
     }
 
-    private void paintDown(final Graphics2D g, int w, int h) {
+    private static void paintDown(final Graphics2D g, final int w, final int h) {
         FSkin.setGraphicsGradientPaint(g, 0, h, d30, 0, 0, l10);
         g.fillRect(0, 0, w - 1, h - 1);
 
@@ -630,8 +655,8 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
     protected void resetIcon() {
         // Non-background icon
         if (img != null && iconScaleAuto  && !iconInBackground) {
-            int h = (int) (getHeight() * iconScaleFactor);
-            int w = (int) (h * iar);
+            final int h = (int) (getHeight() * iconScaleFactor);
+            final int w = (int) (h * iar);
             if (w == 0 || h == 0) { return; }
 
             super.setIcon(new ImageIcon(img.getScaledInstance(w, h, Image.SCALE_SMOOTH)));
@@ -639,17 +664,17 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
     }
 
     @Override
-    public void setCommand(UiCommand command0) {
+    public void setCommand(final UiCommand command0) {
         cmdClick = command0;
     }
 
     @Override
-    public void setImage(FSkinProp color) {
+    public void setImage(final FSkinProp color) {
         setForeground(FSkin.getColor(Colors.fromSkinProp(color)));
     }
 
     @Override
-    public void setTextColor(int r, int g, int b) {
+    public void setTextColor(final int r, final int g, final int b) {
         setForeground(new Color(r, g, b));
     }
 }

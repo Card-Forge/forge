@@ -159,23 +159,23 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         return null;
     }
 
-    private Void processCard(Card card, Set<CardView> list) {
+    private Void processCard(final Card card, final Set<CardView> list) {
         synchronized (list) {
             list.add(card.getView());
         }
         return processEvent();
     }
-    private Void processCards(Collection<Card> cards, Set<CardView> list) {
+    private Void processCards(final Collection<Card> cards, final Set<CardView> list) {
         if (cards.isEmpty()) { return null; }
 
         synchronized (list) {
-            for (Card c : cards) {
+            for (final Card c : cards) {
                 list.add(c.getView());
             }
         }
         return processEvent();
     }
-    private Void processPlayer(Player player, Set<PlayerView> list) {
+    private Void processPlayer(final Player player, final Set<PlayerView> list) {
         synchronized (list) {
             list.add(player.getView());
         }
@@ -186,7 +186,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
         return updateZone(z.getPlayer(), z.getZoneType());
     }
-    private Void updateZone(Player p, ZoneType z) {
+    private Void updateZone(final Player p, final ZoneType z) {
         if (p == null || z == null) { return null; }
 
         synchronized (zonesUpdate) {
@@ -202,7 +202,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
-    public Void visit(GameEventPlayerPriority event) {
+    public Void visit(final GameEventPlayerPriority event) {
         needCombatUpdate = true;
         return processEvent();
     }
@@ -218,7 +218,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
-    public Void visit(GameEventAnteCardsSelected ev) {
+    public Void visit(final GameEventAnteCardsSelected ev) {
         final List<CardView> options = Lists.newArrayList();
         for (final Entry<Player, Card> kv : ev.cards.entries()) {
             //use fake card so real cards appear with proper formatting
@@ -231,7 +231,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
-    public Void visit(GameEventPlayerControl ev) {
+    public Void visit(final GameEventPlayerControl ev) {
         if (ev.player.getGame().isGameOver()) {
             return null;
         }
@@ -243,37 +243,37 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
-    public Void visit(GameEventGameOutcome ev) {
+    public Void visit(final GameEventGameOutcome ev) {
         gameOver = true;
         return processEvent();
     }
 
     @Override
-    public Void visit(GameEventGameFinished ev) {
+    public Void visit(final GameEventGameFinished ev) {
         gameFinished = true;
         return processEvent();
     }
 
     @Override
-    public Void visit(GameEventSpellAbilityCast event) {
+    public Void visit(final GameEventSpellAbilityCast event) {
         needStackUpdate = true;
         return processEvent();
     }
 
     @Override
-    public Void visit(GameEventSpellResolved event) {
+    public Void visit(final GameEventSpellResolved event) {
         needStackUpdate = true;
         return processEvent();
     }
 
     @Override
-    public Void visit(GameEventSpellRemovedFromStack event) {
+    public Void visit(final GameEventSpellRemovedFromStack event) {
         needStackUpdate = true;
         return processEvent();
     }
 
     @Override
-    public Void visit(GameEventZone event) {
+    public Void visit(final GameEventZone event) {
         if (event.player != null) {
             // anything except stack will get here
             updateZone(event.player, event.zoneType);
@@ -283,7 +283,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
-    public Void visit(GameEventCardAttachment event) {
+    public Void visit(final GameEventCardAttachment event) {
         final Game game = event.equipment.getGame();
         final PlayerZone zEq = (PlayerZone)game.getZoneOf(event.equipment);
         if (event.oldEntiy instanceof Card) {
@@ -301,7 +301,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         processCard(event.card, cardsUpdate);
         return processEvent();
     }
-    
+
     @Override
     public Void visit(final GameEventCardPhased event) {
         processCard(event.card, cardsUpdate);
@@ -322,9 +322,9 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventBlockersDeclared event) {
-        HashSet<Card> cards = new HashSet<Card>();
-        for (MapOfLists<Card, Card> kv : event.blockers.values()) {
-            for (Collection<Card> blockers : kv.values()) {
+        final HashSet<Card> cards = new HashSet<Card>();
+        for (final MapOfLists<Card, Card> kv : event.blockers.values()) {
+            for (final Collection<Card> blockers : kv.values()) {
                 cards.addAll(blockers);
             }
         }
@@ -332,18 +332,18 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
-    public Void visit(GameEventAttackersDeclared event) {
+    public Void visit(final GameEventAttackersDeclared event) {
         return processCards(event.attackersMap.values(), cardsUpdate);
     }
 
     @Override
-    public Void visit(GameEventCombatChanged event) {
+    public Void visit(final GameEventCombatChanged event) {
         needCombatUpdate = true;
         return processEvent();
     }
 
     @Override
-    public Void visit(GameEventCombatEnded event) {
+    public Void visit(final GameEventCombatEnded event) {
         needCombatUpdate = true;
 
         // This should remove sword/shield icons from combatants by the time game moves to M2
@@ -352,20 +352,20 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
-    public Void visit(GameEventCardChangeZone event) {
+    public Void visit(final GameEventCardChangeZone event) {
         updateZone(event.from);
         return updateZone(event.to);
     }
 
     @Override
-    public Void visit(GameEventCardStatsChanged event) {
+    public Void visit(final GameEventCardStatsChanged event) {
         processCards(event.cards, cardsRefreshDetails);
         return processCards(event.cards, cardsUpdate);
     }
 
     @Override
-    public Void visit(GameEventPlayerStatsChanged event) {
-        CardCollection cards = new CardCollection();
+    public Void visit(final GameEventPlayerStatsChanged event) {
+        final CardCollection cards = new CardCollection();
         for (final Player p : event.players) {
             cards.addAll(p.getAllCards());
         }
@@ -373,22 +373,22 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
-    public Void visit(GameEventShuffle event) {
+    public Void visit(final GameEventShuffle event) {
         return updateZone(event.player.getZone(ZoneType.Library));
     }
 
     @Override
-    public Void visit(GameEventManaPool event) {
+    public Void visit(final GameEventManaPool event) {
         return processPlayer(event.player, manaPoolUpdate);
     }
 
     @Override
-    public Void visit(GameEventPlayerLivesChanged event) {
+    public Void visit(final GameEventPlayerLivesChanged event) {
         return processPlayer(event.player, livesUpdate);
     }
 
     @Override
-    public Void visit(GameEventPlayerPoisoned event) {
+    public Void visit(final GameEventPlayerPoisoned event) {
         return processPlayer(event.receiver, livesUpdate);
     }
 }

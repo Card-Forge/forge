@@ -46,8 +46,8 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
 
     /** */
     private final FLabel lblTitle = new FLabel.Builder()
-        .text("Quest Preferences").fontAlign(SwingConstants.CENTER)
-        .opaque(true).fontSize(16).build();
+    .text("Quest Preferences").fontAlign(SwingConstants.CENTER)
+    .opaque(true).fontSize(16).build();
 
     private final JPanel pnlContent = new JPanel();
     private final FScrollPane scrContent = new FScrollPane(pnlContent, false);

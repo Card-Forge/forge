@@ -67,6 +67,7 @@ public class AudioClip implements IAudioClip {
         throw new MissingResourceException("Sound clip failed to load", this.getClass().getName(), filename);
     }
 
+    @Override
     public final void play() {
         if (null == clip) {
             return;
@@ -80,6 +81,7 @@ public class AudioClip implements IAudioClip {
         clip.start();
     }
 
+    @Override
     public final void loop() {
         if (null == clip) {
             return;
@@ -93,6 +95,7 @@ public class AudioClip implements IAudioClip {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
+    @Override
     public final void stop() {
         if (null == clip) {
             return;
@@ -100,6 +103,7 @@ public class AudioClip implements IAudioClip {
         clip.stop();
     }
 
+    @Override
     public final boolean isDone() {
         if (null == clip) {
             return false;

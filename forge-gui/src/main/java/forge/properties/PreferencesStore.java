@@ -6,18 +6,16 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.properties;
-
-import forge.util.FileUtil;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -25,6 +23,8 @@ import java.io.IOException;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+
+import forge.util.FileUtil;
 
 /**
  * Holds default preference values in an enum.
@@ -35,25 +35,25 @@ public abstract class PreferencesStore<T extends Enum<T>> {
     private final Map<T, String> preferenceValues;
     private final String filename;
 
-    public PreferencesStore(String filename0, Class<T> clasz) {
+    public PreferencesStore(final String filename0, final Class<T> clasz) {
         preferenceValues = new EnumMap<T, String>(clasz);
         filename = filename0;
-        
-        List<String> lines = FileUtil.readFile(filename);
+
+        final List<String> lines = FileUtil.readFile(filename);
         for (String line : lines) {
             line = line.trim();
             if (line.startsWith("#") || (line.isEmpty())) {
                 continue;
             }
 
-            String[] split = line.split("=");
-            T pref = valueOf(split[0]);
-            
+            final String[] split = line.split("=");
+            final T pref = valueOf(split[0]);
+
             if (null == pref) {
                 System.out.println("unknown preference: " + line);
                 continue;
             }
-            
+
             if (split.length == 2) {
                 this.setPref(pref, split[1]);
             } else if (split.length == 1 && line.endsWith("=")) {
@@ -61,25 +61,28 @@ public abstract class PreferencesStore<T extends Enum<T>> {
             }
         }
     }
-    
+
     protected abstract T[] getEnumValues();
     protected abstract T valueOf(String name);
     protected abstract String getPrefDefault(T key);
-    
+
     public final void save() {
         BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new FileWriter(filename));
-            for (T key : getEnumValues()) {
+            for (final T key : getEnumValues()) {
                 writer.write(key + "=" + getPref(key));
                 writer.newLine();
             }
-        } catch (IOException ex) {
+        } catch (final IOException ex) {
             ex.printStackTrace();
         } finally {
             if (null != writer) {
-                try { writer.close(); }
-                catch (IOException e) { System.out.println("error while closing " + filename); }
+                try {
+                    writer.close();
+                } catch (final IOException e) {
+                    System.out.println("error while closing " + filename);
+                }
             }
         }
     }
@@ -88,15 +91,15 @@ public abstract class PreferencesStore<T extends Enum<T>> {
         this.preferenceValues.clear();
     }
 
-    public final void setPref(T q0, String s0) {
+    public final void setPref(final T q0, final String s0) {
         preferenceValues.put(q0, s0);
     }
 
-    public final void setPref(T q0, boolean val) {
+    public final void setPref(final T q0, final boolean val) {
         setPref(q0, String.valueOf(val));
     }
 
-    public final String getPref(T fp0) {
+    public final String getPref(final T fp0) {
         String val;
 
         val = preferenceValues.get(fp0);
@@ -105,11 +108,11 @@ public abstract class PreferencesStore<T extends Enum<T>> {
         return val;
     }
 
-    public final int getPrefInt(T fp0) {
+    public final int getPrefInt(final T fp0) {
         return Integer.parseInt(getPref(fp0));
     }
 
-    public final boolean getPrefBoolean(T fp0) {
+    public final boolean getPrefBoolean(final T fp0) {
         return Boolean.parseBoolean(getPref(fp0));
     }
 }

@@ -1,18 +1,29 @@
 package forge.gui.framework;
 
-import forge.FThreads;
-import forge.view.FFrame;
-
-import javax.swing.*;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Insets;
+import java.awt.KeyboardFocusManager;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.Window;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/** 
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+import forge.FThreads;
+import forge.view.FFrame;
+
+/**
  * Experimental static factory for generic operations carried out
  * onto specific members of the framework. Doublestrike 11-04-12
- * 
+ *
  * <br><br><i>(S at beginning of class name denotes a static factory.)</i>
  */
 public class SDisplayUtil {
@@ -22,7 +33,7 @@ public class SDisplayUtil {
     private static Timer timer1 = null;
 
     /** Flashes animation on input panel if play is currently waiting on input.
-     * 
+     *
      * @param tab0 &emsp; {@link java.GuiBase.getInterface().framework.IVDoc}
      */
     public static void remind(final IVDoc<? extends ICDoc> tab0) {
@@ -55,21 +66,22 @@ public class SDisplayUtil {
         }
 
         final TimerTask tt = new TimerTask() {
-            @Override
-            public void run() {
+            @Override public final void run() {
                 counter++;
                 if (counter != (steps - 1)) {
-                    SwingUtilities.invokeLater(new Runnable() { @Override
-                        public void run() {
-                            int r = newR == null ? oldR : newR[counter];
-                            int a = newA == null ? oldA : newR[counter];
-                            pnl.setBackground(new Color(r, oldG, oldB, a));
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override public void run() {
+                        final int r = newR == null ? oldR : newR[counter];
+                        final int a = newA == null ? oldA : newR[counter];
+                        pnl.setBackground(new Color(r, oldG, oldB, a));
+                    }
+                    });
+                } else {
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override public void run() {
+                            pnl.setBackground(new Color(oldR, oldG, oldB, oldA));
                         }
                     });
-                }
-                else {
-                    SwingUtilities.invokeLater(new Runnable() { @Override
-                        public void run() { pnl.setBackground(new Color(oldR, oldG, oldB, oldA)); } });
                     remindIsRunning = false;
                     timer1.cancel();
                     newR = null;
@@ -86,15 +98,15 @@ public class SDisplayUtil {
 
     /** @param tab0 &emsp; {@link java.GuiBase.getInterface().framework.IVDoc} */
     public static void showTab(final IVDoc<? extends ICDoc> tab0) {
-        
-        Runnable showTabRoutine = new Runnable() {
-            @Override
-            public void run() {
+
+        final Runnable showTabRoutine = new Runnable() {
+            @Override public void run() {
                 // FThreads.assertExecutedByEdt(true); - always true
-                Component c = KeyboardFocusManager.getCurrentKeyboardFocusManager().getPermanentFocusOwner();
-                DragCell dc = tab0.getParentCell();
-                if (dc != null)
+                final Component c = KeyboardFocusManager.getCurrentKeyboardFocusManager().getPermanentFocusOwner();
+                final DragCell dc = tab0.getParentCell();
+                if (dc != null) {
                     dc.setSelected(tab0);
+                }
                 // set focus back to previous owner, if any
                 if (null != c) {
                     c.requestFocusInWindow();
@@ -103,56 +115,52 @@ public class SDisplayUtil {
         };
         FThreads.invokeInEdtLater(showTabRoutine);
     }
-    
-    public static GraphicsDevice getGraphicsDevice(Point point) {
-        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        for (GraphicsDevice gd : env.getScreenDevices()) {
+
+    public static GraphicsDevice getGraphicsDevice(final Point point) {
+        final GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        for (final GraphicsDevice gd : env.getScreenDevices()) {
             if (gd.getDefaultConfiguration().getBounds().contains(point)) {
                 return gd;
             }
         }
         return null;
     }
-    
-    public static GraphicsDevice getGraphicsDevice(Rectangle rect) {
+
+    public static GraphicsDevice getGraphicsDevice(final Rectangle rect) {
         return getGraphicsDevice(new Point(rect.x + (rect.width / 2), rect.y + (rect.height / 2)));
     }
-    
-    public static Rectangle getScreenBoundsForPoint(Point point) {
-        GraphicsDevice gd = getGraphicsDevice(point);
+
+    public static Rectangle getScreenBoundsForPoint(final Point point) {
+        final GraphicsDevice gd = getGraphicsDevice(point);
         if (gd == null) {
             //return bounds of default monitor if point not on any screen
             return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
         }
         return gd.getDefaultConfiguration().getBounds();
     }
-    
-    public static Rectangle getScreenMaximizedBounds(Rectangle rect) {
-        GraphicsDevice gd = getGraphicsDevice(rect);
+
+    public static Rectangle getScreenMaximizedBounds(final Rectangle rect) {
+        final GraphicsDevice gd = getGraphicsDevice(rect);
         if (gd == null) {
             //return bounds of default monitor if center of rect not on any screen
             return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
         }
 
-        GraphicsConfiguration config = gd.getDefaultConfiguration();
-        Rectangle bounds = config.getBounds();
-        Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(config);
+        final GraphicsConfiguration config = gd.getDefaultConfiguration();
+        final Rectangle bounds = config.getBounds();
+        final Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(config);
         bounds.x += screenInsets.left;
         bounds.y += screenInsets.top;
         bounds.width -= screenInsets.left + screenInsets.right;
         bounds.height -= screenInsets.top + screenInsets.bottom;
         return bounds;
     }
-    
-    public static boolean setFullScreenWindow(FFrame frame, boolean fullScreen) {
+
+    public static boolean setFullScreenWindow(final FFrame frame, final boolean fullScreen) {
         return setFullScreenWindow(getGraphicsDevice(frame.getNormalBounds()), frame, fullScreen);
     }
-    
-    public static boolean setFullScreenWindow(Window window, boolean fullScreen) {
-        return setFullScreenWindow(getGraphicsDevice(window.getBounds()), window, fullScreen);
-    }
 
-    private static boolean setFullScreenWindow(GraphicsDevice gd, Window window, boolean fullScreen) {
+    private static boolean setFullScreenWindow(final GraphicsDevice gd, final Window window, final boolean fullScreen) {
         if (gd != null && gd.isFullScreenSupported()) {
             if (fullScreen) {
                 gd.setFullScreenWindow(window);

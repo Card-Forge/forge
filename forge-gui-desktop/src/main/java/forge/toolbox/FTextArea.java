@@ -1,18 +1,16 @@
 package forge.toolbox;
 
+import java.awt.FontMetrics;
+
 import forge.toolbox.FSkin.SkinnedTextArea;
 
-import java.awt.*;
-
-/** 
+/**
  * A custom instance of JTextArea using Forge skin properties.
- *
  */
 @SuppressWarnings("serial")
 public class FTextArea extends SkinnedTextArea {
     private boolean autoSize;
 
-    /** */
     public FTextArea() {
         super();
         this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
@@ -23,7 +21,7 @@ public class FTextArea extends SkinnedTextArea {
         this.setFocusable(false);
         this.setEditable(false);
     }
-    /** @param str {@java.lang.String} */
+
     public FTextArea(final String str) {
         this();
         this.setText(str);
@@ -33,7 +31,7 @@ public class FTextArea extends SkinnedTextArea {
         return this.autoSize;
     }
 
-    public void setAutoSize(boolean autoSize0) {
+    public void setAutoSize(final boolean autoSize0) {
         if (this.autoSize == autoSize0) { return; }
         this.autoSize = autoSize0;
         if (autoSize0) {
@@ -51,10 +49,10 @@ public class FTextArea extends SkinnedTextArea {
         }
 
         int maxLineWidth = 0;
-        FontMetrics metrics = this.getGraphics().getFontMetrics(this.getFont());
-        String[] lines = this.getText().split("(\r\n)|(\n)");
+        final FontMetrics metrics = this.getGraphics().getFontMetrics(this.getFont());
+        final String[] lines = this.getText().split("(\r\n)|(\n)");
         for (int i = 0; i < lines.length; i++) {
-            int lineWidth = metrics.stringWidth(lines[i]);
+            final int lineWidth = metrics.stringWidth(lines[i]);
             if (lineWidth > maxLineWidth) {
                 maxLineWidth = lineWidth;
             }

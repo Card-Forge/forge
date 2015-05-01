@@ -16,20 +16,21 @@ import forge.util.ITriggerEvent;
 
 public final class InputProliferate extends InputSelectManyBase<GameEntity> {
     private static final long serialVersionUID = -1779224307654698954L;
-    private Map<GameEntity, CounterType> chosenCounters = new HashMap<GameEntity, CounterType>();
+    private final Map<GameEntity, CounterType> chosenCounters = new HashMap<GameEntity, CounterType>();
 
     public InputProliferate(final PlayerControllerHuman controller) {
         super(controller, 1, Integer.MAX_VALUE);
     }
 
+    @Override
     protected String getMessage() {
-        StringBuilder sb = new StringBuilder("Choose permanents and/or players with counters on them to add one more counter of that type.");
+        final StringBuilder sb = new StringBuilder("Choose permanents and/or players with counters on them to add one more counter of that type.");
         sb.append("\n\nYou've selected so far:\n");
         if (chosenCounters.isEmpty()) {
             sb.append("(none)");
         }
         else {
-            for (Entry<GameEntity, CounterType> ge : chosenCounters.entrySet()) {
+            for (final Entry<GameEntity, CounterType> ge : chosenCounters.entrySet()) {
                 if (ge.getKey() instanceof Player) {
                     sb.append("* A poison counter to player ").append(ge.getKey()).append("\n");
                 }
@@ -47,8 +48,8 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
         if (!card.hasCounters()) {
             return false;
         }
-        
-        boolean entityWasSelected = chosenCounters.containsKey(card);
+
+        final boolean entityWasSelected = chosenCounters.containsKey(card);
         if (entityWasSelected) {
             this.chosenCounters.remove(card);
         }
@@ -60,7 +61,7 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
                 }
             }
 
-            CounterType toAdd = choices.size() == 1 ? choices.get(0) : getController().getGui().one("Select counter type", choices);
+            final CounterType toAdd = choices.size() == 1 ? choices.get(0) : getController().getGui().one("Select counter type", choices);
             chosenCounters.put(card, toAdd);
         }
 
@@ -69,7 +70,7 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
     }
 
     @Override
-    public String getActivateAction(Card card) {
+    public String getActivateAction(final Card card) {
         if (card.hasCounters() && !chosenCounters.containsKey(card)) {
             return "add counter to card";
         }
@@ -77,17 +78,18 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
     }
 
     @Override
-    protected final void onPlayerSelected(Player player, final ITriggerEvent triggerEvent) {
+    protected final void onPlayerSelected(final Player player, final ITriggerEvent triggerEvent) {
         if (player.getPoisonCounters() == 0 || player.hasKeyword("You can't get poison counters")) {
             return;
         }
-        
-        boolean entityWasSelected = chosenCounters.containsKey(player);
+
+        final boolean entityWasSelected = chosenCounters.containsKey(player);
         if (entityWasSelected) {
             this.chosenCounters.remove(player);
-        } else
+        } else {
             this.chosenCounters.put(player, null /* POISON counter is meant */);
-        
+        }
+
         refresh();
     }
 

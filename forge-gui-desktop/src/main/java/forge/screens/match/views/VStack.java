@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -51,7 +51,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedTextArea;
 import forge.util.FCollectionView;
 
-/** 
+/**
  * Assembles Swing components of stack report.
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
@@ -129,7 +129,7 @@ public class VStack implements IVDoc<CStack> {
 
         boolean isFirst = true;
         for (final StackItemView item : items) {
-            final StackInstanceTextArea tar = new StackInstanceTextArea(model, item);
+            final StackInstanceTextArea tar = new StackInstanceTextArea(item);
 
             scroller.add(tar, "pushx, growx" + (isFirst ? "" : ", gaptop 2px"));
 
@@ -167,8 +167,7 @@ public class VStack implements IVDoc<CStack> {
         public Point getLocationOnScreen() {
             try {
                 return super.getLocationOnScreen();
-            }
-            catch (Exception e) {
+            } catch (final Exception e) {
                 //suppress exception that can occur if stack hidden while over an item
                 if (hoveredItem == this) {
                     hoveredItem = null; //reset this if this happens
@@ -177,7 +176,7 @@ public class VStack implements IVDoc<CStack> {
             }
         }
 
-        public StackInstanceTextArea(final GameView gameView, final StackItemView item0) {
+        public StackInstanceTextArea(final StackItemView item0) {
             item = item0;
 
             final String txt = (item.isOptionalTrigger() && controller.getMatchUI().isLocalPlayer(item.getActivatingPlayer())
@@ -213,14 +212,14 @@ public class VStack implements IVDoc<CStack> {
             if (item.isAbility()) {
                 addMouseListener(new FMouseAdapter() {
                     @Override
-                    public void onLeftClick(MouseEvent e) {
+                    public void onLeftClick(final MouseEvent e) {
                         onClick(e);
                     }
                     @Override
-                    public void onRightClick(MouseEvent e) {
+                    public void onRightClick(final MouseEvent e) {
                         onClick(e);
                     }
-                    private void onClick(MouseEvent e) {
+                    private void onClick(final MouseEvent e) {
                         abilityMenu.setStackInstance(item);
                         abilityMenu.show(e.getComponent(), e.getX(), e.getY());
                     }
@@ -233,7 +232,7 @@ public class VStack implements IVDoc<CStack> {
         }
 
         @Override
-        public void paintComponent(Graphics g) {
+        public void paintComponent(final Graphics g) {
             super.paintComponent(g);
 
             final Graphics2D g2d = (Graphics2D) g;
@@ -261,7 +260,7 @@ public class VStack implements IVDoc<CStack> {
             jmiAutoYield = new JCheckBoxMenuItem("Auto-Yield");
             jmiAutoYield.addActionListener(new ActionListener() {
                 @Override
-                public void actionPerformed(ActionEvent arg0) {
+                public void actionPerformed(final ActionEvent arg0) {
                     final String key = item.getKey();
                     final boolean autoYield = controller.getMatchUI().shouldAutoYield(key);
                     controller.getMatchUI().setShouldAutoYield(key, !autoYield);
@@ -276,7 +275,7 @@ public class VStack implements IVDoc<CStack> {
             jmiAlwaysYes = new JCheckBoxMenuItem("Always Yes");
             jmiAlwaysYes.addActionListener(new ActionListener() {
                 @Override
-                public void actionPerformed(ActionEvent arg0) {
+                public void actionPerformed(final ActionEvent arg0) {
                     if (controller.getMatchUI().shouldAlwaysAcceptTrigger(triggerID)) {
                         controller.getMatchUI().setShouldAlwaysAskTrigger(triggerID);
                     }
@@ -294,7 +293,7 @@ public class VStack implements IVDoc<CStack> {
             jmiAlwaysNo = new JCheckBoxMenuItem("Always No");
             jmiAlwaysNo.addActionListener(new ActionListener() {
                 @Override
-                public void actionPerformed(ActionEvent arg0) {
+                public void actionPerformed(final ActionEvent arg0) {
                     if (controller.getMatchUI().shouldAlwaysDeclineTrigger(triggerID)) {
                         controller.getMatchUI().setShouldAlwaysAskTrigger(triggerID);
                     }

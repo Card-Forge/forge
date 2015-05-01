@@ -17,16 +17,20 @@
  */
 package forge.toolbox;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Component;
+import java.awt.LayoutManager;
+import java.awt.MenuComponent;
+import java.awt.PopupMenu;
 
-/** 
+import javax.swing.JPanel;
+import javax.swing.ScrollPaneConstants;
+
+/**
  * An extension of FScrollPane that can be used as a panel
- *
  */
 @SuppressWarnings("serial")
 public class FScrollPanel extends FScrollPane {
-    private JPanel innerPanel;
+    private final JPanel innerPanel;
 
     public FScrollPanel() {
         this(null);
@@ -34,10 +38,10 @@ public class FScrollPanel extends FScrollPane {
     public FScrollPanel(final LayoutManager layout) {
         this(layout, false);
     }
-    public FScrollPanel(final LayoutManager layout, boolean useArrowButtons0) {
+    public FScrollPanel(final LayoutManager layout, final boolean useArrowButtons0) {
         this(layout, useArrowButtons0, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     }
-    public FScrollPanel(final LayoutManager layout, boolean useArrowButtons0, final int vertical0, final int horizontal0) {
+    public FScrollPanel(final LayoutManager layout, final boolean useArrowButtons0, final int vertical0, final int horizontal0) {
         super(new JPanel(layout), false, useArrowButtons0, vertical0, horizontal0);
         innerPanel = (JPanel)getViewport().getView();
         innerPanel.setOpaque(false);
@@ -45,7 +49,7 @@ public class FScrollPanel extends FScrollPane {
 
     //relay certain methods to the inner panel if it has been initialized
     @Override
-    public Component add(Component comp) {
+    public Component add(final Component comp) {
         if (innerPanel != null) {
             return innerPanel.add(comp);
         }
@@ -53,7 +57,7 @@ public class FScrollPanel extends FScrollPane {
     }
 
     @Override
-    public void add(PopupMenu popup) {
+    public void add(final PopupMenu popup) {
         if (innerPanel != null) {
             innerPanel.add(popup);
             return;
@@ -62,7 +66,7 @@ public class FScrollPanel extends FScrollPane {
     }
 
     @Override
-    public void add(Component comp, Object constraints) {
+    public void add(final Component comp, final Object constraints) {
         if (innerPanel != null) {
             innerPanel.add(comp, constraints);
             return;
@@ -71,7 +75,7 @@ public class FScrollPanel extends FScrollPane {
     }
 
     @Override
-    public Component add(Component comp, int index) {
+    public Component add(final Component comp, final int index) {
         if (innerPanel != null) {
             return innerPanel.add(comp, index);
         }
@@ -79,7 +83,7 @@ public class FScrollPanel extends FScrollPane {
     }
 
     @Override
-    public void add(Component comp, Object constraints, int index) {
+    public void add(final Component comp, final Object constraints, final int index) {
         if (innerPanel != null) {
             innerPanel.add(comp, constraints, index);
             return;
@@ -88,7 +92,7 @@ public class FScrollPanel extends FScrollPane {
     }
 
     @Override
-    public Component add(String name, Component comp) {
+    public Component add(final String name, final Component comp) {
         if (innerPanel != null) {
             return innerPanel.add(name, comp);
         }
@@ -96,7 +100,7 @@ public class FScrollPanel extends FScrollPane {
     }
 
     @Override
-    public void remove(Component comp) {
+    public void remove(final Component comp) {
         if (innerPanel != null) {
             innerPanel.remove(comp);
             return;
@@ -105,7 +109,7 @@ public class FScrollPanel extends FScrollPane {
     }
 
     @Override
-    public void remove(int index) {
+    public void remove(final int index) {
         if (innerPanel != null) {
             innerPanel.remove(index);
             return;
@@ -114,7 +118,7 @@ public class FScrollPanel extends FScrollPane {
     }
 
     @Override
-    public void remove(MenuComponent popup) {
+    public void remove(final MenuComponent popup) {
         if (innerPanel != null) {
             innerPanel.remove(popup);
             return;

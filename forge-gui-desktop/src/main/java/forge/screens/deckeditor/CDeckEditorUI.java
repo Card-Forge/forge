@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -52,7 +52,7 @@ import forge.util.ItemPool;
  * top-level control for child UIs. Tasks targeting the view of individual
  * components are found in a separate controller for that component and
  * should not be included here.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
 public enum CDeckEditorUI implements ICDoc {
@@ -60,9 +60,9 @@ public enum CDeckEditorUI implements ICDoc {
     SINGLETON_INSTANCE;
 
     private final HashMap<FScreen, ACEditorBase<? extends InventoryItem, ? extends DeckBase>> screenChildControllers;
-	private ACEditorBase<? extends InventoryItem, ? extends DeckBase> childController;
-	private final CDetailPicture cDetailPicture;
-	private final VAllDecks vAllDecks;
+    private ACEditorBase<? extends InventoryItem, ? extends DeckBase> childController;
+    private final CDetailPicture cDetailPicture;
+    private final VAllDecks vAllDecks;
 
     private CDeckEditorUI() {
         screenChildControllers = new HashMap<FScreen, ACEditorBase<? extends InventoryItem, ? extends DeckBase>>();
@@ -92,7 +92,7 @@ public enum CDeckEditorUI implements ICDoc {
         return !deckController.isSaved();
     }
 
-    public boolean canSwitchAway(boolean isClosing) {
+    public boolean canSwitchAway(final boolean isClosing) {
         if (this.childController != null) {
             if (!this.childController.canSwitchAway(isClosing)) {
                 return false;
@@ -117,8 +117,8 @@ public enum CDeckEditorUI implements ICDoc {
     /**
      * Set controller for a given editor screen.
      */
-    public void setEditorController(ACEditorBase<? extends InventoryItem, ? extends DeckBase> childController0) {
-        FScreen screen = childController0.getScreen();
+    public void setEditorController(final ACEditorBase<? extends InventoryItem, ? extends DeckBase> childController0) {
+        final FScreen screen = childController0.getScreen();
         screenChildControllers.put(screen, childController0);
         if (screen == Singletons.getControl().getCurrentScreen()) {
             setCurrentEditorController(childController0);
@@ -126,18 +126,18 @@ public enum CDeckEditorUI implements ICDoc {
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends InventoryItem> void incrementDeckQuantity(T item, int delta) {
+    public <T extends InventoryItem> void incrementDeckQuantity(final T item, final int delta) {
         if (item == null || delta == 0) { return; }
 
         if (delta > 0) { //add items
-            int qty = Math.min(delta, ((ItemManager<T>)childController.getCatalogManager()).getItemCount(item));
+            final int qty = Math.min(delta, ((ItemManager<T>)childController.getCatalogManager()).getItemCount(item));
             if (qty == 0) { return; }
-            ((ACEditorBase<T, ?>)childController).addItem(item, qty, false);
+            ((ACEditorBase<T, ?>)childController).addItem(item, qty);
         }
         else { //remove items
-            int qty = Math.min(-delta, ((ItemManager<T>)childController.getDeckManager()).getItemCount(item));
+            final int qty = Math.min(-delta, ((ItemManager<T>)childController.getDeckManager()).getItemCount(item));
             if (qty == 0) { return; }
-            ((ACEditorBase<T, ?>)childController).removeItem(item, qty, false);
+            ((ACEditorBase<T, ?>)childController).removeItem(item, qty);
         }
 
         CStatistics.SINGLETON_INSTANCE.update();
@@ -148,12 +148,12 @@ public enum CDeckEditorUI implements ICDoc {
         public <T extends InventoryItem> void move(Iterable<Entry<T, Integer>> items);
     }
 
-    private <T extends InventoryItem> void moveSelectedItems(ItemManager<T> itemManager, _MoveAction moveAction, int maxQty) {
+    private <T extends InventoryItem> void moveSelectedItems(final ItemManager<T> itemManager, final _MoveAction moveAction, final int maxQty) {
         if (maxQty == 0) { return; }
 
-        ItemPool<T> items = new ItemPool<T>(itemManager.getGenericType());
-        for (T item : itemManager.getSelectedItems()) {
-            int qty = Math.min(maxQty, itemManager.getItemCount(item));
+        final ItemPool<T> items = new ItemPool<T>(itemManager.getGenericType());
+        for (final T item : itemManager.getSelectedItems()) {
+            final int qty = Math.min(maxQty, itemManager.getItemCount(item));
             if (qty > 0) {
                 items.add(item, qty);
             }
@@ -167,42 +167,28 @@ public enum CDeckEditorUI implements ICDoc {
     }
 
     @SuppressWarnings("unchecked")
-    public void addSelectedCards(final boolean toAlternate, int number) {
+    public void addSelectedCards(final boolean toAlternate, final int number) {
         moveSelectedItems(childController.getCatalogManager(), new _MoveAction() {
-            @Override
-            public <T extends InventoryItem> void move(Iterable<Entry<T, Integer>> items) {
+            @Override public <T extends InventoryItem> void move(final Iterable<Entry<T, Integer>> items) {
                 ((ACEditorBase<T, ?>)childController).addItems(items, toAlternate);
             }
         }, number);
     }
 
     @SuppressWarnings("unchecked")
-    public void removeSelectedCards(final boolean toAlternate, int number) {
+    public void removeSelectedCards(final boolean toAlternate, final int number) {
         moveSelectedItems(childController.getDeckManager(), new _MoveAction() {
-            @Override
-            public <T extends InventoryItem> void move(Iterable<Entry<T, Integer>> items) {
+            @Override public <T extends InventoryItem> void move(final Iterable<Entry<T, Integer>> items) {
                 ((ACEditorBase<T, ?>)childController).removeItems(items, toAlternate);
             }
         }, number);
-    }
-
-    @SuppressWarnings("unchecked")
-    public void removeAllCards(final boolean toAlternate) {
-        ItemManager<?> v = childController.getDeckManager();
-        v.selectAll();
-        moveSelectedItems(v, new _MoveAction() {
-            @Override
-            public <T extends InventoryItem> void move(Iterable<Entry<T, Integer>> items) {
-                ((ACEditorBase<T, ?>)childController).removeItems(items, toAlternate);
-            }
-        }, Integer.MAX_VALUE);
     }
 
     /**
      * Set current editor controller
      */
     @SuppressWarnings("serial")
-    private void setCurrentEditorController(ACEditorBase<? extends InventoryItem, ? extends DeckBase> childController0) {
+    private void setCurrentEditorController(final ACEditorBase<? extends InventoryItem, ? extends DeckBase> childController0) {
         this.childController = childController0;
         Singletons.getControl().getForgeMenu().setProvider(childController0);
 
@@ -216,8 +202,7 @@ public enum CDeckEditorUI implements ICDoc {
 
         if (!childController.listenersHooked) { //hook listeners the first time the controller is updated
             catView.addKeyListener(new KeyAdapter() {
-                @Override
-                public void keyPressed(KeyEvent e) {
+                @Override public void keyPressed(final KeyEvent e) {
                     if (!catView.isIncrementalSearchActive() && KeyEvent.VK_SPACE == e.getKeyCode()) {
                         addSelectedCards(e.isControlDown() || e.isMetaDown(), e.isShiftDown() ? 4: 1);
                     }
@@ -229,8 +214,7 @@ public enum CDeckEditorUI implements ICDoc {
             });
 
             deckView.addKeyListener(new KeyAdapter() {
-                @Override
-                public void keyPressed(KeyEvent e) {
+                @Override public void keyPressed(final KeyEvent e) {
                     if (!catView.isIncrementalSearchActive() && KeyEvent.VK_SPACE == e.getKeyCode()) {
                         removeSelectedCards(e.isControlDown() || e.isMetaDown(), e.isShiftDown() ? 4: 1);
                     }
@@ -265,18 +249,16 @@ public enum CDeckEditorUI implements ICDoc {
 
             //set card when selection changes
             catView.addSelectionListener(new ListSelectionListener() {
-				@Override
-				public void valueChanged(ListSelectionEvent e) {
-					setCard(catView.getSelectedItem());
-				}
-			});
+                @Override public void valueChanged(final ListSelectionEvent e) {
+                    setCard(catView.getSelectedItem());
+                }
+            });
 
             deckView.addSelectionListener(new ListSelectionListener() {
-				@Override
-				public void valueChanged(ListSelectionEvent e) {
-					setCard(deckView.getSelectedItem());
-				}
-			});
+                @Override public void valueChanged(final ListSelectionEvent e) {
+                    setCard(deckView.getSelectedItem());
+                }
+            });
 
             catView.setAllowMultipleSelections(true);
             deckView.setAllowMultipleSelections(true);
@@ -296,14 +278,6 @@ public enum CDeckEditorUI implements ICDoc {
         });
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
-    }
-
     @Override
     public void register() {
         EDocID.CARD_PICTURE.setDoc(cDetailPicture.getCPicture().getView());
@@ -316,17 +290,16 @@ public enum CDeckEditorUI implements ICDoc {
     @Override
     public void initialize() {
         //change to previously open child controller based on screen
-        FScreen screen = Singletons.getControl().getCurrentScreen();
-        ACEditorBase<? extends InventoryItem, ? extends DeckBase> screenChildController = screenChildControllers.get(screen);
+        final FScreen screen = Singletons.getControl().getCurrentScreen();
+        final ACEditorBase<? extends InventoryItem, ? extends DeckBase> screenChildController = screenChildControllers.get(screen);
         if (screenChildController != null) {
             setCurrentEditorController(screenChildController);
-        }
-        else if (screen == FScreen.DECK_EDITOR_CONSTRUCTED) {
+        } else if (screen == FScreen.DECK_EDITOR_CONSTRUCTED) {
             setEditorController(new CEditorConstructed(cDetailPicture)); //ensure Constructed deck editor controller initialized
 
-            String currentDeckStr = DeckPreferences.getCurrentDeck();
+            final String currentDeckStr = DeckPreferences.getCurrentDeck();
             if (currentDeckStr != null) {
-                DeckProxy deck = vAllDecks.getLstDecks().stringToItem(currentDeckStr);
+                final DeckProxy deck = vAllDecks.getLstDecks().stringToItem(currentDeckStr);
                 if (deck != null) {
                     vAllDecks.getLstDecks().setSelectedItem(deck);
                     childController.getDeckController().load(deck.getPath(), deck.getName());

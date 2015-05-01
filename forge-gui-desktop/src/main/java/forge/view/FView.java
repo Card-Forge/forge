@@ -112,7 +112,7 @@ public enum FView {
         // Frame components
         frmDocument.setContentPane(lpnDocument);
         lpnDocument.add(pnlInsets, (Integer) 1);
-        FAbsolutePositioner.SINGLETON_INSTANCE.initialize(lpnDocument, (Integer) 2);
+        FAbsolutePositioner.SINGLETON_INSTANCE.initialize(lpnDocument, 2);
         lpnDocument.add(pnlPreview, (Integer) 3);
         lpnDocument.add(pnlTabOverflow, (Integer) 4);
         lpnDocument.add(navigationBar, NAVIGATION_BAR_LAYER);
@@ -135,7 +135,7 @@ public enum FView {
         FOverlay.SINGLETON_INSTANCE.getPanel().setBackground(FSkin.getColor(FSkin.Colors.CLR_OVERLAY));
 
         // Populate all drag tab components.
-        this.cacheUIStates();
+        cacheUIStates();
 
         // Does not use progress bar, due to be deprecated with battlefield refactoring.
         CardFaceSymbols.loadImages();
@@ -157,35 +157,35 @@ public enum FView {
 
         SLayoutIO.loadWindowLayout();
         frmDocument.setVisible(true);
-        
+
         // remove this once our userbase has been migrated to the profile layout
         {
             // get profile directories -- if one of them is actually under the res directory, don't
             // count is as data to migrate
             final Set<File> profileDirs = new HashSet<File>();
-            for (String dname : ForgeConstants.PROFILE_DIRS) {
+            for (final String dname : ForgeConstants.PROFILE_DIRS) {
                 profileDirs.add(new File(dname));
             }
 
             final List<File> resDirs = new ArrayList<File>();
-            for (String resDir : Lists.newArrayList("decks", "gauntlet", "layouts", "pics", "preferences", "quest/data")) {
+            for (final String resDir : Lists.newArrayList("decks", "gauntlet", "layouts", "pics", "preferences", "quest/data")) {
                 resDirs.add(new File("res", resDir));
             }
 
             final Set<File> doNotDeleteDirs = new HashSet<File>();
-            for (String dir : Lists.newArrayList("decks", "decks/constructed", "decks/draft", "decks/plane", "decks/scheme", "decks/sealed", "gauntlet", "layouts", "pics", "preferences", "quest/data")) {
+            for (final String dir : Lists.newArrayList("decks", "decks/constructed", "decks/draft", "decks/plane", "decks/scheme", "decks/sealed", "gauntlet", "layouts", "pics", "preferences", "quest/data")) {
                 doNotDeleteDirs.add(new File("res", dir));
             }
-            
+
             // if we have any data to migrate, pop up the migration dialog
             if (_addRemainingFiles(null, resDirs, profileDirs, doNotDeleteDirs)) {
                 new ImportDialog("res", new Runnable() {
                     @Override public void run() {
                         // remove known cruft files, yes this is ugly, but it's also temporary
-                        for (String cruftFile : Lists.newArrayList("decks/SkieraCube-cards_not_supported_yet.txt", "decks/cube/ArabianExtended.dck", "decks/cube/GtcGuildBoros.dck", "decks/cube/GtcGuildDimir.dck", "decks/cube/GtcGuildGruul.dck", "decks/cube/GtcGuildOrzhov.dck", "decks/cube/GtcGuildSimic.dck", "decks/cube/GtcPromoBoros.dck", "decks/cube/GtcPromoDimir.dck", "decks/cube/GtcPromoGruul.dck", "decks/cube/GtcPromoOrzhov.dck", "decks/cube/GtcPromoSimic.dck", "decks/cube/JuzamjediCube.dck", "decks/cube/RtRGuildAzorius.dck", "decks/cube/RtRGuildGolgari.dck", "decks/cube/RtRGuildIzzet.dck", "decks/cube/RtRGuildRakdos.dck", "decks/cube/RtRGuildSelesnya.dck", "decks/cube/RtRPromoAzorius.dck", "decks/cube/RtRPromoGolgari.dck", "decks/cube/RtRPromoIzzet.dck", "decks/cube/RtRPromoRakdos.dck", "decks/cube/RtRPromoSelesnya.dck", "decks/cube/SkieraCube.dck", "gauntlet/LOCKED_DotP Preconstructed.dat", "gauntlet/LOCKED_Swimming With Sharks.dat", "layouts/editor_default.xml", "layouts/home_default.xml", "layouts/match_default.xml", "pics/snow_covered_forest1.jpg", "pics/snow_covered_forest2.jpg", "pics/snow_covered_forest3.jpg", "pics/snow_covered_island1.jpg", "pics/snow_covered_island2.jpg", "pics/snow_covered_island3.jpg", "pics/snow_covered_mountain1.jpg", "pics/snow_covered_mountain2.jpg", "pics/snow_covered_mountain3.jpg", "pics/snow_covered_plains1.jpg", "pics/snow_covered_plains2.jpg", "pics/snow_covered_plains3.jpg", "pics/snow_covered_swamp1.jpg", "pics/snow_covered_swamp2.jpg", "pics/snow_covered_swamp3.jpg", "pics/VAN/Birds of Paradise Avatar.full.jpg", "pics/VAN/Erhnam Djinn Avatar.full.jpg", "pics/VAN/Goblin Warchief Avatar.full.jpg", "pics/VAN/Grinning Demon Avatar.full.jpg", "pics/VAN/Platinum Angel Avatar.full.jpg", "pics/VAN/Prodigal Sorcerer Avatar.full.jpg", "pics/VAN/Rith, the Awakener Avatar.full.jpg", "pics/VAN/Royal Assassin Avatar.full.jpg", "pics/VAN/Serra Angel Avatar.full.jpg", "pics/VAN/Tradewind Rider Avatar.full.jpg", "pics_product/10E.jpg", "pics_product/2ED.jpg", "pics_product/3ED.jpg", "pics_product/4ED.jpg", "pics_product/5DN.jpg", "pics_product/5ED.jpg", "pics_product/6ED.jpg", "pics_product/7ED.jpg", "pics_product/8ED.jpg", "pics_product/9ED.jpg", "pics_product/ALA.jpg", "pics_product/ALL.jpg", "pics_product/APC.jpg", "pics_product/ARB.jpg", "pics_product/ARN.jpg", "pics_product/ATQ.jpg", "pics_product/BOK.jpg", "pics_product/CFX.jpg", "pics_product/CHK.jpg", "pics_product/CHR.jpg", "pics_product/CSP.jpg", "pics_product/DIS.jpg", "pics_product/DKA.jpg", "pics_product/DRK.jpg", "pics_product/DST.jpg", "pics_product/EVE.jpg", "pics_product/EXO.jpg", "pics_product/FEM.jpg", "pics_product/FUT.jpg", "pics_product/GPT.jpg", "pics_product/HML.jpg", "pics_product/ICE.jpg", "pics_product/INV.jpg", "pics_product/ISD.jpg", "pics_product/JUD.jpg", "pics_product/LEA.jpg", "pics_product/LEB.jpg", "pics_product/LEG.jpg", "pics_product/LGN.jpg", "pics_product/LRW.jpg", "pics_product/M10.jpg", "pics_product/M11.jpg", "pics_product/M12.jpg", "pics_product/MBS.jpg", "pics_product/MIR.jpg", "pics_product/MMQ.jpg", "pics_product/MOR.jpg", "pics_product/MRD.jpg", "pics_product/NMS.jpg", "pics_product/NPH.jpg", "pics_product/ODY.jpg", "pics_product/ONS.jpg", "pics_product/PCY.jpg", "pics_product/PLC.jpg", "pics_product/PLS.jpg", "pics_product/PO2.jpg", "pics_product/POR.jpg", "pics_product/PTK.jpg", "pics_product/RAV.jpg", "pics_product/ROE.jpg", "pics_product/S99.jpg", "pics_product/SCG.jpg", "pics_product/SHM.jpg", "pics_product/SOK.jpg", "pics_product/SOM.jpg", "pics_product/STH.jpg", "pics_product/TMP.jpg", "pics_product/TOR.jpg", "pics_product/TSP.jpg", "pics_product/UDS.jpg", "pics_product/ULG.jpg", "pics_product/USG.jpg", "pics_product/VIS.jpg", "pics_product/WTH.jpg", "pics_product/WWK.jpg", "pics_product/ZEN.jpg", "pics_product/booster/7E.png", "pics_product/booster/AP.png", "pics_product/booster/DPA.png", "pics_product/booster/EX.png", "pics_product/booster/IN.png", "pics_product/booster/MI.png", "pics_product/booster/OD.png", "pics_product/booster/PS.png", "pics_product/booster/ST.png", "pics_product/booster/TE.png", "pics_product/booster/UD.png", "pics_product/booster/UL.png", "pics_product/booster/UZ.png", "pics_product/booster/VI.png", "pics_product/booster/WL.png", "preferences/.project", "preferences/editor.default.preferences", "preferences/main.properties", "quest/quest.preferences", "quest/quest.properties")) {
+                        for (final String cruftFile : Lists.newArrayList("decks/SkieraCube-cards_not_supported_yet.txt", "decks/cube/ArabianExtended.dck", "decks/cube/GtcGuildBoros.dck", "decks/cube/GtcGuildDimir.dck", "decks/cube/GtcGuildGruul.dck", "decks/cube/GtcGuildOrzhov.dck", "decks/cube/GtcGuildSimic.dck", "decks/cube/GtcPromoBoros.dck", "decks/cube/GtcPromoDimir.dck", "decks/cube/GtcPromoGruul.dck", "decks/cube/GtcPromoOrzhov.dck", "decks/cube/GtcPromoSimic.dck", "decks/cube/JuzamjediCube.dck", "decks/cube/RtRGuildAzorius.dck", "decks/cube/RtRGuildGolgari.dck", "decks/cube/RtRGuildIzzet.dck", "decks/cube/RtRGuildRakdos.dck", "decks/cube/RtRGuildSelesnya.dck", "decks/cube/RtRPromoAzorius.dck", "decks/cube/RtRPromoGolgari.dck", "decks/cube/RtRPromoIzzet.dck", "decks/cube/RtRPromoRakdos.dck", "decks/cube/RtRPromoSelesnya.dck", "decks/cube/SkieraCube.dck", "gauntlet/LOCKED_DotP Preconstructed.dat", "gauntlet/LOCKED_Swimming With Sharks.dat", "layouts/editor_default.xml", "layouts/home_default.xml", "layouts/match_default.xml", "pics/snow_covered_forest1.jpg", "pics/snow_covered_forest2.jpg", "pics/snow_covered_forest3.jpg", "pics/snow_covered_island1.jpg", "pics/snow_covered_island2.jpg", "pics/snow_covered_island3.jpg", "pics/snow_covered_mountain1.jpg", "pics/snow_covered_mountain2.jpg", "pics/snow_covered_mountain3.jpg", "pics/snow_covered_plains1.jpg", "pics/snow_covered_plains2.jpg", "pics/snow_covered_plains3.jpg", "pics/snow_covered_swamp1.jpg", "pics/snow_covered_swamp2.jpg", "pics/snow_covered_swamp3.jpg", "pics/VAN/Birds of Paradise Avatar.full.jpg", "pics/VAN/Erhnam Djinn Avatar.full.jpg", "pics/VAN/Goblin Warchief Avatar.full.jpg", "pics/VAN/Grinning Demon Avatar.full.jpg", "pics/VAN/Platinum Angel Avatar.full.jpg", "pics/VAN/Prodigal Sorcerer Avatar.full.jpg", "pics/VAN/Rith, the Awakener Avatar.full.jpg", "pics/VAN/Royal Assassin Avatar.full.jpg", "pics/VAN/Serra Angel Avatar.full.jpg", "pics/VAN/Tradewind Rider Avatar.full.jpg", "pics_product/10E.jpg", "pics_product/2ED.jpg", "pics_product/3ED.jpg", "pics_product/4ED.jpg", "pics_product/5DN.jpg", "pics_product/5ED.jpg", "pics_product/6ED.jpg", "pics_product/7ED.jpg", "pics_product/8ED.jpg", "pics_product/9ED.jpg", "pics_product/ALA.jpg", "pics_product/ALL.jpg", "pics_product/APC.jpg", "pics_product/ARB.jpg", "pics_product/ARN.jpg", "pics_product/ATQ.jpg", "pics_product/BOK.jpg", "pics_product/CFX.jpg", "pics_product/CHK.jpg", "pics_product/CHR.jpg", "pics_product/CSP.jpg", "pics_product/DIS.jpg", "pics_product/DKA.jpg", "pics_product/DRK.jpg", "pics_product/DST.jpg", "pics_product/EVE.jpg", "pics_product/EXO.jpg", "pics_product/FEM.jpg", "pics_product/FUT.jpg", "pics_product/GPT.jpg", "pics_product/HML.jpg", "pics_product/ICE.jpg", "pics_product/INV.jpg", "pics_product/ISD.jpg", "pics_product/JUD.jpg", "pics_product/LEA.jpg", "pics_product/LEB.jpg", "pics_product/LEG.jpg", "pics_product/LGN.jpg", "pics_product/LRW.jpg", "pics_product/M10.jpg", "pics_product/M11.jpg", "pics_product/M12.jpg", "pics_product/MBS.jpg", "pics_product/MIR.jpg", "pics_product/MMQ.jpg", "pics_product/MOR.jpg", "pics_product/MRD.jpg", "pics_product/NMS.jpg", "pics_product/NPH.jpg", "pics_product/ODY.jpg", "pics_product/ONS.jpg", "pics_product/PCY.jpg", "pics_product/PLC.jpg", "pics_product/PLS.jpg", "pics_product/PO2.jpg", "pics_product/POR.jpg", "pics_product/PTK.jpg", "pics_product/RAV.jpg", "pics_product/ROE.jpg", "pics_product/S99.jpg", "pics_product/SCG.jpg", "pics_product/SHM.jpg", "pics_product/SOK.jpg", "pics_product/SOM.jpg", "pics_product/STH.jpg", "pics_product/TMP.jpg", "pics_product/TOR.jpg", "pics_product/TSP.jpg", "pics_product/UDS.jpg", "pics_product/ULG.jpg", "pics_product/USG.jpg", "pics_product/VIS.jpg", "pics_product/WTH.jpg", "pics_product/WWK.jpg", "pics_product/ZEN.jpg", "pics_product/booster/7E.png", "pics_product/booster/AP.png", "pics_product/booster/DPA.png", "pics_product/booster/EX.png", "pics_product/booster/IN.png", "pics_product/booster/MI.png", "pics_product/booster/OD.png", "pics_product/booster/PS.png", "pics_product/booster/ST.png", "pics_product/booster/TE.png", "pics_product/booster/UD.png", "pics_product/booster/UL.png", "pics_product/booster/UZ.png", "pics_product/booster/VI.png", "pics_product/booster/WL.png", "preferences/.project", "preferences/editor.default.preferences", "preferences/main.properties", "quest/quest.preferences", "quest/quest.properties")) {
                             new File("res", cruftFile).delete();
                         }
-                        
+
                         // assemble a list of remaining files.
                         final List<File> remainingFiles = new LinkedList<File>();
                         _addRemainingFiles(remainingFiles, resDirs, profileDirs, doNotDeleteDirs);
@@ -198,22 +198,22 @@ public enum FView {
 
                         if (remainingFiles.isEmpty()) {
                             p.add(new FLabel.Builder().text("<html>You're done!  It looks like everything went smoothly." +
-                            		"  Now just restart Forge to load the data from its new home!  Note that there is more data available" +
-                                        " from the downloaders now.  You might want to run through the content downloaders to check for new files.</html>").build());
+                                    "  Now just restart Forge to load the data from its new home!  Note that there is more data available" +
+                                    " from the downloaders now.  You might want to run through the content downloaders to check for new files.</html>").build());
                         } else {
                             p.add(new FLabel.Builder().text("<html>There seem to be a few files left over in your old data" +
-                            		" directories.  They should be deleted or moved somewhere else to avoid having the data" +
-                            		" migration prompt pop up again!</html>").build());
-                            
-                            JTextArea files = new JTextArea(StringUtils.join(remainingFiles, '\n'));
+                                    " directories.  They should be deleted or moved somewhere else to avoid having the data" +
+                                    " migration prompt pop up again!</html>").build());
+
+                            final JTextArea files = new JTextArea(StringUtils.join(remainingFiles, '\n'));
                             files.setFont(new Font("Monospaced", Font.PLAIN, 10));
                             files.setOpaque(false);
                             files.setWrapStyleWord(true);
                             files.setLineWrap(true);
                             files.setEditable(false);
-                            FScrollPane scroller = new FScrollPane(files, true);
+                            final FScrollPane scroller = new FScrollPane(files, true);
                             p.add(scroller, "w 600:100%:100%, h 100:100%:100%, gaptop 10");
-                            
+
                             SwingUtilities.invokeLater(new Runnable() {
                                 @Override
                                 public void run() {
@@ -223,10 +223,10 @@ public enum FView {
                                 }
                             });
                         }
-                        
+
                         final FButton btnOk = new FButton(remainingFiles.isEmpty() ? "Restart Forge" : "Close Forge");
                         btnOk.addActionListener(new ActionListener() {
-                            @Override public void actionPerformed(ActionEvent e) {
+                            @Override public void actionPerformed(final ActionEvent e) {
                                 if (remainingFiles.isEmpty()) {
                                     RestartUtil.restartApplication(null);
                                 } else {
@@ -236,16 +236,18 @@ public enum FView {
                         });
                         p.add(btnOk, "center, w pref+64!, h pref+12!, gaptop 20");
 
-                        JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
+                        final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
                         overlay.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
                         overlay.add(p, "w 100::80%, h 50::90%");
                         SOverlayUtils.showOverlay();
-                        
+
                         SwingUtilities.invokeLater(new Runnable() {
-                            @Override public void run() { btnOk.requestFocusInWindow(); }
+                            @Override public void run() {
+                                btnOk.requestFocusInWindow();
+                            }
                         });
                     }
-                });
+                }).show();
             }
         }
 
@@ -257,9 +259,9 @@ public enum FView {
     // been added to remainingFiles (or would have been added if remainingFiles is null)
     // directories listed in profileDirs will not be searched
     // removes empty directories to reduce tree conflicts
-    private static boolean _addRemainingFiles(List<File> remainingFiles, List<File> dirRoots, Set<File> profileDirs, Set<File> doNotDeleteDirs) {
-        Deque<File> stack = new LinkedList<File>(dirRoots);
-	Set<File> seenDirs = new HashSet<File>();
+    private static boolean _addRemainingFiles(final List<File> remainingFiles, final List<File> dirRoots, final Set<File> profileDirs, final Set<File> doNotDeleteDirs) {
+        final Deque<File> stack = new LinkedList<File>(dirRoots);
+        final Set<File> seenDirs = new HashSet<File>();
         boolean ret = false;
         while (!stack.isEmpty()) {
             File cur = stack.peek();
@@ -268,7 +270,7 @@ public enum FView {
                 stack.pop();
                 continue;
             }
-            
+
             if (seenDirs.contains(cur)) {
                 cur = stack.pop();
                 if (cur.exists() && !doNotDeleteDirs.contains(cur)) {
@@ -277,13 +279,13 @@ public enum FView {
                 }
                 continue;
             }
-            
+
             seenDirs.add(cur);
-            File[] curListing = cur.listFiles();
+            final File[] curListing = cur.listFiles();
             if (null == curListing) {
                 continue;
             }
-            for (File f : curListing) {
+            for (final File f : curListing) {
                 if (f.isDirectory()) {
                     if (!".svn".equals(f.getName())) {
                         stack.push(f);
@@ -315,7 +317,7 @@ public enum FView {
     public SkinnedLayeredPane getLpnDocument() {
         return lpnDocument;
     }
-    
+
     /** @return {@link forge.view.FNavigationBar} */
     public FNavigationBar getNavigationBar() {
         return navigationBar;
@@ -389,19 +391,18 @@ public enum FView {
         }
     }
 
-    /** */
-    private void cacheUIStates() {
+    private static void cacheUIStates() {
         VHomeUI.SINGLETON_INSTANCE.instantiate();
         VDeckEditorUI.SINGLETON_INSTANCE.instantiate();
         VBazaarUI.SINGLETON_INSTANCE.instantiate();
     }
-    
-    public void incrementSplashProgessBar(int value) {
+
+    public void incrementSplashProgessBar(final int value) {
         if (this.frmSplash == null) { return; }
         this.frmSplash.getProgressBar().setValueThreadSafe(value);
     }
 
-    public void setSplashProgessBarMessage(final String message) { 
+    public void setSplashProgessBarMessage(final String message) {
         setSplashProgessBarMessage(message, 0);
     }
     public void setSplashProgessBarMessage(final String message, final int cnt) {
@@ -422,8 +423,8 @@ public enum FView {
         });
     }
 
-    public void refreshAllCellLayouts(boolean showTabs) {
-        for (DragCell cell : allCells) {
+    public void refreshAllCellLayouts(final boolean showTabs) {
+        for (final DragCell cell : allCells) {
             cell.doCellLayout(showTabs);
         }
     }

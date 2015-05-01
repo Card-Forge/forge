@@ -6,16 +6,28 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.screens.deckeditor.controllers;
+
+import java.awt.Toolkit;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map.Entry;
+
+import javax.swing.JMenu;
+import javax.swing.JPopupMenu;
+import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 
 import forge.UiCommand;
 import forge.assets.FSkinProp;
@@ -24,7 +36,11 @@ import forge.deck.DeckBase;
 import forge.deck.DeckSection;
 import forge.gui.GuiChoose;
 import forge.gui.GuiUtils;
-import forge.gui.framework.*;
+import forge.gui.framework.DragCell;
+import forge.gui.framework.FScreen;
+import forge.gui.framework.ICDoc;
+import forge.gui.framework.IVDoc;
+import forge.gui.framework.SRearrangingUtil;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.ItemManager;
@@ -43,15 +59,6 @@ import forge.toolbox.FSkin;
 import forge.util.ItemPool;
 import forge.view.FView;
 
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map.Entry;
-
 /**
  * Maintains a generically typed architecture for various editing
  * environments.  A basic editor instance requires a card catalog, the
@@ -60,7 +67,7 @@ import java.util.Map.Entry;
  * These requirements are collected in this class and manipulated
  * in subclasses for different environments. There are two generic
  * types for all card display and filter predicates.
- * 
+ *
  * <br><br><i>(A at beginning of class name denotes an abstract class.)</i>
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
@@ -138,41 +145,35 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         return new CDeckEditorUIMenus().getMenus();
     }
 
-    public final void addItem(TItem item) {
+    public final void addItem(final TItem item) {
         onAddItems(createPoolForItem(item, 1), false);
     }
-    public final void addItem(TItem item, int qty) {
+    public final void addItem(final TItem item, final int qty) {
         onAddItems(createPoolForItem(item, qty), false);
     }
-    public final void addItem(TItem item, int qty, boolean toAlternate) {
-        onAddItems(createPoolForItem(item, qty), toAlternate);
-    }
 
-    public final void removeItem(TItem item) {
+    public final void removeItem(final TItem item) {
         onRemoveItems(createPoolForItem(item, 1), false);
     }
-    public final void removeItem(TItem item, int qty) {
+    public final void removeItem(final TItem item, final int qty) {
         onRemoveItems(createPoolForItem(item, qty), false);
-    }
-    public final void removeItem(TItem item, int qty, boolean toAlternate) {
-        onRemoveItems(createPoolForItem(item, qty), toAlternate);
     }
 
     @SuppressWarnings("unchecked")
     private ItemPool<TItem> createPoolForItem(final TItem item, final int qty) {
         if (item == null || qty <= 0) { return null; }
 
-        ItemPool<TItem> pool = new ItemPool<TItem>((Class<TItem>)item.getClass());
+        final ItemPool<TItem> pool = new ItemPool<TItem>((Class<TItem>)item.getClass());
         pool.add(item, qty);
         return pool;
     }
 
-    public final void addItems(Iterable<Entry<TItem, Integer>> items, boolean toAlternate) {
+    public final void addItems(final Iterable<Entry<TItem, Integer>> items, final boolean toAlternate) {
         if (items == null || !items.iterator().hasNext()) { return; } //do nothing if no items
         onAddItems(items, toAlternate);
     }
 
-    public final void removeItems(Iterable<Entry<TItem, Integer>> items, boolean toAlternate) {
+    public final void removeItems(final Iterable<Entry<TItem, Integer>> items, final boolean toAlternate) {
         if (items == null || !items.iterator().hasNext()) { return; } //do nothing if no items
         onRemoveItems(items, toAlternate);
     }
@@ -189,15 +190,15 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     /**
      * @return pool of additions allowed to deck
      */
-    protected ItemPool<TItem> getAllowedAdditions(Iterable<Entry<TItem, Integer>> itemsToAdd) {
-        ItemPool<TItem> additions = new ItemPool<TItem>(getCatalogManager().getGenericType());
-        CardLimit limit = getCardLimit();
-        DeckController<TModel> controller = getDeckController();
-        Deck deck = controller != null && controller.getModel() instanceof Deck ? (Deck)controller.getModel() : null;
+    protected ItemPool<TItem> getAllowedAdditions(final Iterable<Entry<TItem, Integer>> itemsToAdd) {
+        final ItemPool<TItem> additions = new ItemPool<TItem>(getCatalogManager().getGenericType());
+        final CardLimit limit = getCardLimit();
+        final DeckController<TModel> controller = getDeckController();
+        final Deck deck = controller != null && controller.getModel() instanceof Deck ? (Deck)controller.getModel() : null;
 
-        for (Entry<TItem, Integer> itemEntry : itemsToAdd) {
-            TItem item = itemEntry.getKey();
-            PaperCard card = item instanceof PaperCard ? (PaperCard)item : null;
+        for (final Entry<TItem, Integer> itemEntry : itemsToAdd) {
+            final TItem item = itemEntry.getKey();
+            final PaperCard card = item instanceof PaperCard ? (PaperCard)item : null;
             int qty = itemEntry.getValue();
 
             int max;
@@ -228,7 +229,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
 
     protected abstract CardLimit getCardLimit();
 
-    /** 
+    /**
      * Operation to add selected items to current deck.
      */
     protected abstract void onAddItems(Iterable<Entry<TItem, Integer>> items, boolean toAlternate);
@@ -255,7 +256,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
 
     /**
      * Called when switching away from or closing the editor wants to exit. Should confirm save options.
-     * 
+     *
      * @return boolean &emsp; true if safe to exit
      */
     public abstract boolean canSwitchAway(boolean isClosing);
@@ -272,7 +273,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
 
     /**
      * Gets the ItemManager holding the cards in the current deck.
-     * 
+     *
      * @return {@link forge.itemmanager.ItemManager}
      */
     public ItemManager<TItem> getDeckManager() {
@@ -281,7 +282,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
 
     /**
      * Sets the ItemManager holding the cards in the current deck.
-     * 
+     *
      * @param itemManager &emsp; {@link forge.itemmanager.ItemManager}
      */
     @SuppressWarnings("serial")
@@ -289,14 +290,12 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         this.deckManager = itemManager;
 
         btnRemove.setCommand(new UiCommand() {
-            @Override
-            public void run() {
+            @Override public void run() {
                 CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, 1);
             }
         });
         btnRemove4.setCommand(new UiCommand() {
-            @Override
-            public void run() {
+            @Override public void run() {
                 CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, 4);
             }
         });
@@ -307,7 +306,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
 
     /**
      * Gets the ItemManager holding the cards in the current catalog.
-     * 
+     *
      * @return {@link forge.itemmanager.ItemManager}
      */
     public ItemManager<TItem> getCatalogManager() {
@@ -316,7 +315,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
 
     /**
      * Sets the ItemManager holding the cards in the current catalog.
-     * 
+     *
      * @param itemManager &emsp; {@link forge.itemmanager.ItemManager}
      */
     @SuppressWarnings("serial")
@@ -324,14 +323,12 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         this.catalogManager = itemManager;
 
         btnAdd.setCommand(new UiCommand() {
-            @Override
-            public void run() {
+            @Override public void run() {
                 CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(false, 1);
             }
         });
         btnAdd4.setCommand(new UiCommand() {
-            @Override
-            public void run() {
+            @Override public void run() {
                 CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(false, 4);
             }
         });
@@ -342,7 +339,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     /**
      * Removes the specified tab and returns its parent for later re-adding
      */
-    protected DragCell removeTab (IVDoc<? extends ICDoc> tab) {
+    protected DragCell removeTab (final IVDoc<? extends ICDoc> tab) {
         final DragCell parent;
         if (tab.getParentCell() == null) {
             parent = null;
@@ -398,7 +395,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     public FLabel getBtnRemove4() { return btnRemove4; }
     public FLabel getBtnCycleSection() { return btnCycleSection; }
 
-    public ContextMenuBuilder createContextMenuBuilder(boolean isAddContextMenu0) {
+    public ContextMenuBuilder createContextMenuBuilder(final boolean isAddContextMenu0) {
         return new EditorContextMenuBuilder(isAddContextMenu0);
     }
 
@@ -406,7 +403,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         private final boolean isAddContextMenu;
         private JPopupMenu menu;
 
-        private EditorContextMenuBuilder(boolean isAddContextMenu0) {
+        private EditorContextMenuBuilder(final boolean isAddContextMenu0) {
             isAddContextMenu = isAddContextMenu0;
         }
 
@@ -419,7 +416,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         }
 
         @Override
-        public void buildContextMenu(JPopupMenu menu) {
+        public void buildContextMenu(final JPopupMenu menu) {
             this.menu = menu; //cache menu while controller populates menu
             if (isAddContextMenu) {
                 buildAddContextMenu(this);
@@ -459,28 +456,27 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             });
         }
 
-        private void addItem(String verb, String dest, final boolean toAlternate, final int qty, int shortcutModifiers) {
+        private void addItem(final String verb, final String dest, final boolean toAlternate, final int qty, final int shortcutModifiers) {
             String label = verb + " " + SItemManagerUtil.getItemDisplayString(getItemManager().getSelectedItems(), qty, false);
             if (dest != null && !dest.isEmpty()) {
                 label += " " + dest;
             }
             GuiUtils.addMenuItem(menu, label,
                     KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, shortcutModifiers), new Runnable() {
-                        @Override
-                        public void run() {
-                            Integer quantity = qty;
-                            if (quantity < 0) {
-                                quantity = GuiChoose.getInteger("Choose a value for X", 1, -quantity, 20);
-                                if (quantity == null) { return; }
-                            }
-                            if (isAddContextMenu) {
-                                CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(toAlternate, quantity);
-                            }
-                            else {
-                                CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(toAlternate, quantity);
-                            }
-                        }
-                    }, true, shortcutModifiers == 0);
+                @Override public void run() {
+                    Integer quantity = qty;
+                    if (quantity < 0) {
+                        quantity = GuiChoose.getInteger("Choose a value for X", 1, -quantity, 20);
+                        if (quantity == null) { return; }
+                    }
+                    if (isAddContextMenu) {
+                        CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(toAlternate, quantity);
+                    }
+                    else {
+                        CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(toAlternate, quantity);
+                    }
+                }
+            }, true, shortcutModifiers == 0);
         }
 
         private int getMaxMoveQuantity() {
@@ -492,7 +488,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                 return 0;
             }
             int max = Integer.MAX_VALUE;
-            for (Entry<TItem, Integer> itemEntry : selectedItemPool) {
+            for (final Entry<TItem, Integer> itemEntry : selectedItemPool) {
                 if (itemEntry.getValue() < max) {
                     max = itemEntry.getValue();
                 }
@@ -500,8 +496,8 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             return max;
         }
 
-        private void addItems(String verb, String dest, boolean toAlternate, int shortcutModifiers1, int shortcutModifiers2, int shortcutModifiers3) {
-            int max = getMaxMoveQuantity();
+        private void addItems(final String verb, final String dest, final boolean toAlternate, final int shortcutModifiers1, final int shortcutModifiers2, final int shortcutModifiers3) {
+            final int max = getMaxMoveQuantity();
             if (max == 0) { return; }
 
             addItem(verb, dest, toAlternate, 1, shortcutModifiers1);
@@ -518,11 +514,11 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             addItem(verb, dest, toAlternate, -max, shortcutModifiers3); //pass -max as quantity to indicate to prompt for specific quantity
         }
 
-        public void addMoveItems(String verb, String dest) {
+        public void addMoveItems(final String verb, final String dest) {
             addItems(verb, dest, false, 0, InputEvent.SHIFT_DOWN_MASK, InputEvent.ALT_MASK);
         }
 
-        public void addMoveAlternateItems(String verb, String dest) {
+        public void addMoveAlternateItems(final String verb, final String dest) {
             if (this.menu.getComponentCount() > 0) {
                 this.menu.addSeparator();
             }

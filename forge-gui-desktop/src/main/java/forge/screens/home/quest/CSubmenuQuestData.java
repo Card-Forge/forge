@@ -1,5 +1,17 @@
 package forge.screens.home.quest;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import javax.swing.SwingUtilities;
+
 import forge.UiCommand;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -8,29 +20,26 @@ import forge.gui.framework.ICDoc;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
-import forge.quest.*;
+import forge.quest.QuestController;
+import forge.quest.QuestMode;
+import forge.quest.QuestUtil;
+import forge.quest.QuestWorld;
+import forge.quest.StartingPoolPreferences;
+import forge.quest.StartingPoolType;
 import forge.quest.data.GameFormatQuest;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
 import forge.toolbox.FOptionPane;
 
-import javax.swing.*;
-
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.*;
-import java.util.Map.Entry;
-
-/** 
+/**
  * Controls the quest data submenu in the home UI.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
 @SuppressWarnings("serial")
 public enum CSubmenuQuestData implements ICDoc {
-    /** */
     SINGLETON_INSTANCE;
 
     private final Map<String, QuestData> arrQuests = new HashMap<String, QuestData>();
@@ -39,11 +48,16 @@ public enum CSubmenuQuestData implements ICDoc {
     private final List<String> customFormatCodes = new ArrayList<String>();
     private final List<String> customPrizeFormatCodes = new ArrayList<String>();
 
-    private final UiCommand cmdQuestSelect = new UiCommand() { @Override
-        public void run() { changeQuest(); } };
-
-    private final UiCommand cmdQuestUpdate = new UiCommand() { @Override
-        public void run() { update(); } };
+    private final UiCommand cmdQuestSelect = new UiCommand() {
+        @Override public final void run() {
+            changeQuest();
+        }
+    };
+    private final UiCommand cmdQuestUpdate = new UiCommand() {
+        @Override public final void run() {
+            update();
+        }
+    };
 
     @Override
     public void register() {
@@ -99,15 +113,15 @@ public enum CSubmenuQuestData implements ICDoc {
         final QuestController qc = FModel.getQuest();
 
         // Iterate over files and load quest data for each.
-        FilenameFilter takeDatFiles = new FilenameFilter() {
+        final FilenameFilter takeDatFiles = new FilenameFilter() {
             @Override
             public boolean accept(final File dir, final String name) {
                 return name.endsWith(".dat");
             }
         };
-        File[] arrFiles = dirQuests.listFiles(takeDatFiles);
+        final File[] arrFiles = dirQuests.listFiles(takeDatFiles);
         arrQuests.clear();
-        for (File f : arrFiles) {
+        for (final File f : arrFiles) {
             arrQuests.put(f.getName(), QuestDataIO.loadData(f));
         }
 
@@ -147,15 +161,15 @@ public enum CSubmenuQuestData implements ICDoc {
      */
     private void newQuest() {
         final VSubmenuQuestData view = VSubmenuQuestData.SINGLETON_INSTANCE;
-        int difficulty = view.getSelectedDifficulty();
+        final int difficulty = view.getSelectedDifficulty();
 
         final QuestMode mode = view.isFantasy() ? QuestMode.Fantasy : QuestMode.Classic;
 
         Deck dckStartPool = null;
         GameFormat fmtStartPool = null;
-        QuestWorld startWorld = FModel.getWorlds().get(view.getStartingWorldName());
+        final QuestWorld startWorld = FModel.getWorlds().get(view.getStartingWorldName());
 
-        GameFormat worldFormat = (startWorld == null ? null : startWorld.getFormat());
+        final GameFormat worldFormat = (startWorld == null ? null : startWorld.getFormat());
 
         if (worldFormat == null) {
             switch(view.getStartingPoolType()) {
@@ -200,16 +214,16 @@ public enum CSubmenuQuestData implements ICDoc {
 
         // The starting QuestWorld format should NOT affect what you get if you travel to a world that doesn't have one...
         // if (worldFormat == null) {
-        StartingPoolType prizedPoolType = view.getPrizedPoolType();
+        final StartingPoolType prizedPoolType = view.getPrizedPoolType();
         if (null == prizedPoolType) {
             fmtPrizes = fmtStartPool;
             if (null == fmtPrizes && dckStartPool != null) { // build it form deck
-                Set<String> sets = new HashSet<String>();
-                for (Entry<PaperCard, Integer> c : dckStartPool.getMain()) {
+                final Set<String> sets = new HashSet<String>();
+                for (final Entry<PaperCard, Integer> c : dckStartPool.getMain()) {
                     sets.add(c.getKey().getEdition());
                 }
                 if (dckStartPool.has(DeckSection.Sideboard)) {
-                    for (Entry<PaperCard, Integer> c : dckStartPool.get(DeckSection.Sideboard)) {
+                    for (final Entry<PaperCard, Integer> c : dckStartPool.get(DeckSection.Sideboard)) {
                         sets.add(c.getKey().getEdition());
                     }
                 }
@@ -258,8 +272,8 @@ public enum CSubmenuQuestData implements ICDoc {
             }
             break;
         }
-		
-        QuestController qc = FModel.getQuest();
+
+        final QuestController qc = FModel.getQuest();
 
         qc.newGame(questName, difficulty, mode, fmtPrizes, view.isUnlockSetsAllowed(), dckStartPool, fmtStartPool, view.getStartingWorldName(), userPrefs);
         FModel.getQuest().save();
@@ -294,11 +308,4 @@ public enum CSubmenuQuestData implements ICDoc {
         return arrQuests;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
-    }
 }

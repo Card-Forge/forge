@@ -19,9 +19,8 @@ import forge.util.storage.IStorage;
 
 public class QuestDraftUtils {
     private static final List<DraftMatchup> matchups = new ArrayList<DraftMatchup>();
-    
+
     public static boolean matchInProgress = false;
-    public static boolean aiMatchInProgress = false;
     private static boolean waitForUserInput = false;
 
     public static void completeDraft(final DeckGroup finishedDraft) {
@@ -56,76 +55,76 @@ public class QuestDraftUtils {
         if (matchups.size() > 0) {
             return;
         }
-        
+
         matchups.clear();
-        
-        QuestEventDraft draft = FModel.getQuest().getAchievements().getCurrentDraft();
-        String[] currentStandings = draft.getStandings();
-        
+
+        final QuestEventDraft draft = FModel.getQuest().getAchievements().getCurrentDraft();
+        final String[] currentStandings = draft.getStandings();
+
         int currentSet = -1;
-        
+
         for (int i = currentStandings.length - 1; i >= 0; i--) {
             if (!currentStandings[i].equals(QuestEventDraft.UNDETERMINED)) {
                 currentSet = i;
                 break;
             }
         }
-        
+
         switch (currentSet) {
-            
-            case 7:
-                addMatchup(0, 1, draft);
-                addMatchup(2, 3, draft);
-                addMatchup(4, 5, draft);
-                addMatchup(6, 7, draft);
-                break;
-                
-            case 8:
-                addMatchup(2, 3, draft);
-                addMatchup(4, 5, draft);
-                addMatchup(6, 7, draft);
-                break;
-                
-            case 9:
-                addMatchup(4, 5, draft);
-                addMatchup(6, 7, draft);
-                break;
-                
-            case 10:
-                addMatchup(6, 7, draft);
-                break;
-                
-            case 11:
-                addMatchup(8, 9, draft);
-                addMatchup(10, 11, draft);
-                break;
-                
-            case 12:
-                addMatchup(10, 11, draft);
-                break;
-                
-            case 13:
-                addMatchup(12, 13, draft);
-                break;
-                
-            case 14:
-            default:
-                return;
-        
+
+        case 7:
+            addMatchup(0, 1, draft);
+            addMatchup(2, 3, draft);
+            addMatchup(4, 5, draft);
+            addMatchup(6, 7, draft);
+            break;
+
+        case 8:
+            addMatchup(2, 3, draft);
+            addMatchup(4, 5, draft);
+            addMatchup(6, 7, draft);
+            break;
+
+        case 9:
+            addMatchup(4, 5, draft);
+            addMatchup(6, 7, draft);
+            break;
+
+        case 10:
+            addMatchup(6, 7, draft);
+            break;
+
+        case 11:
+            addMatchup(8, 9, draft);
+            addMatchup(10, 11, draft);
+            break;
+
+        case 12:
+            addMatchup(10, 11, draft);
+            break;
+
+        case 13:
+            addMatchup(12, 13, draft);
+            break;
+
+        case 14:
+        default:
+            return;
+
         }
-        
+
         update(gui);
-        
+
     }
-    
+
     private static void addMatchup(final int player1, final int player2, final QuestEventDraft draft) {
-        
-        DraftMatchup matchup = new DraftMatchup();
-        DeckGroup decks = FModel.getQuest().getAssets().getDraftDeckStorage().get(QuestEventDraft.DECK_NAME);
-        
+
+        final DraftMatchup matchup = new DraftMatchup();
+        final DeckGroup decks = FModel.getQuest().getAssets().getDraftDeckStorage().get(QuestEventDraft.DECK_NAME);
+
         int humanIndex = -1;
         int aiIndex = -1;
-        
+
         if (draft.getStandings()[player1].equals(QuestEventDraft.HUMAN)) {
             humanIndex = player1;
             aiIndex = player2;
@@ -133,36 +132,33 @@ public class QuestDraftUtils {
             humanIndex = player2;
             aiIndex = player1;
         }
-        
+
         if (humanIndex > -1) {
             matchup.setHumanPlayer(new RegisteredPlayer(decks.getHumanDeck()).setPlayer(GamePlayerUtil.getGuiPlayer()));
 
-            int aiName = Integer.parseInt(draft.getStandings()[aiIndex]) - 1;
-            
-            int aiDeckIndex = Integer.parseInt(draft.getStandings()[aiIndex]) - 1;
+            final int aiName = Integer.parseInt(draft.getStandings()[aiIndex]) - 1;
+
+            final int aiDeckIndex = Integer.parseInt(draft.getStandings()[aiIndex]) - 1;
             matchup.matchStarter.add(new RegisteredPlayer(decks.getAiDecks().get(aiDeckIndex)).setPlayer(GamePlayerUtil.createAiPlayer(draft.getAINames()[aiName], draft.getAIIcons()[aiName])));
-            
+
         } else {
 
-            int aiName1 = Integer.parseInt(draft.getStandings()[player1]) - 1;
-            int aiName2 = Integer.parseInt(draft.getStandings()[player2]) - 1;
-            
+            final int aiName1 = Integer.parseInt(draft.getStandings()[player1]) - 1;
+            final int aiName2 = Integer.parseInt(draft.getStandings()[player2]) - 1;
+
             int aiDeckIndex = Integer.parseInt(draft.getStandings()[player1]) - 1;
             matchup.matchStarter.add(new RegisteredPlayer(decks.getAiDecks().get(aiDeckIndex)).setPlayer(GamePlayerUtil.createAiPlayer(draft.getAINames()[aiName1], draft.getAIIcons()[aiName1])));
 
             aiDeckIndex = Integer.parseInt(draft.getStandings()[player2]) - 1;
             matchup.matchStarter.add(new RegisteredPlayer(decks.getAiDecks().get(aiDeckIndex)).setPlayer(GamePlayerUtil.createAiPlayer(draft.getAINames()[aiName2], draft.getAIIcons()[aiName2])));
-            
+
         }
-        
+
         matchups.add(matchup);
     }
 
     public static void update(final IGuiGame gui) {
         if (matchups.isEmpty()) {
-            if (!matchInProgress) {
-                aiMatchInProgress = false;
-            }
             return;
         }
 
@@ -177,11 +173,9 @@ public class QuestDraftUtils {
 
         if (nextMatch.hasHumanPlayer()) {
             waitForUserInput = true;
-            aiMatchInProgress = false;
         } else {
             gui.disableOverlay();
             waitForUserInput = false;
-            aiMatchInProgress = true;
         }
 
         final GameRules rules = new GameRules(GameType.QuestDraft);

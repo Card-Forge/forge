@@ -1,5 +1,9 @@
 package forge.screens.deckeditor.views;
 
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import net.miginfocom.swing.MigLayout;
 import forge.assets.FSkinProp;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -12,18 +16,13 @@ import forge.screens.deckeditor.controllers.CCurrentDeck;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FTextField;
-import net.miginfocom.swing.MigLayout;
 
-import javax.swing.*;
-
-
-/** 
+/**
  * Assembles Swing components of current deck being edited in deck editor.
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
 public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
-    /** */
     SINGLETON_INSTANCE;
 
     // Fields used with interface IVDoc
@@ -157,11 +156,11 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
         parentBody.add(pnlHeader, "pushx, growx");
         parentBody.add(itemManagerContainer, "push, grow");
     }
-    
+
     public ItemManager<? extends InventoryItem> getItemManager() {
         return this.itemManager;
     }
-    
+
     public void setItemManager(final ItemManager<? extends InventoryItem> itemManager0) {
         this.itemManager = itemManager0;
         itemManagerContainer.setItemManager(itemManager0);
@@ -211,7 +210,6 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
      * @return
      */
     public FLabel getBtnImport() {
-        // TODO Auto-generated method stub
-        return (FLabel) btnImport;
+        return btnImport;
     }
 }

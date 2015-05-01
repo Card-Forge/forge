@@ -6,16 +6,21 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.toolbox;
+
+import java.awt.Graphics;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 import com.esotericsoftware.minlog.Log;
 
@@ -24,24 +29,19 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.toolbox.FSkin.SkinImage;
 
-import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringTokenizer;
-
 /**
  * <p>
  * CardFaceSymbols class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id: CardFaceSymbols.java 24769 2014-02-09 13:56:04Z Hellfish $
  */
 public class CardFaceSymbols {
     /** Constant <code>manaImages</code>. */
     private static final Map<String, SkinImage> MANA_IMAGES = new HashMap<String, SkinImage>();
-    
-    private static final int manaImageSize = 13; 
+
+    private static final int manaImageSize = 13;
 
     /**
      * <p>
@@ -122,7 +122,7 @@ public class CardFaceSymbols {
      * <p>
      * draw.
      * </p>
-     * 
+     *
      * @param g
      *            a {@link java.awt.Graphics} object.
      * @param manaCost
@@ -132,7 +132,7 @@ public class CardFaceSymbols {
      * @param y
      *            a int.
      */
-    public static void draw(Graphics g, ManaCost manaCost, int x, int y) {
+    public static void draw(final Graphics g, final ManaCost manaCost, final int x, final int y) {
         if (manaCost.isNoCost()) {
             return;
         }
@@ -153,7 +153,7 @@ public class CardFaceSymbols {
             final String sGeneric = Integer.toString(genericManaCost);
             CardFaceSymbols.drawSymbol(sGeneric, g, xpos, y);
             xpos += offset;
-    
+
             for (final ManaCostShard s : manaCost) { //render non-X shards after generic
                 if (s != ManaCostShard.X) {
                     CardFaceSymbols.drawSymbol(s.getImageKey(), g, xpos, y);
@@ -170,7 +170,7 @@ public class CardFaceSymbols {
     }
 
     /**
-     * 
+     *
      * draw.
      * @param g a Graphics
      * @param s a STring
@@ -179,15 +179,15 @@ public class CardFaceSymbols {
      * @param w an int
      * @param h and int
      */
-    public static void drawOther(final Graphics g, String s, int x, final int y, final int w, final int h) {
+    public static void drawOther(final Graphics g, final String s, int x, final int y, final int w, final int h) {
         if (s.length() == 0) {
             return;
         }
 
-        StringTokenizer tok = new StringTokenizer(s, " ");
+        final StringTokenizer tok = new StringTokenizer(s, " ");
         while (tok.hasMoreTokens()) {
-            String symbol = tok.nextToken();
-            SkinImage image = MANA_IMAGES.get(symbol);
+            final String symbol = tok.nextToken();
+            final SkinImage image = MANA_IMAGES.get(symbol);
             if (image == null) {
                 Log.info("Symbol not recognized \"" + symbol + "\" in string: " + s);
                 continue;
@@ -199,25 +199,9 @@ public class CardFaceSymbols {
 
     /**
      * <p>
-     * drawAttack.
-     * </p>
-     * 
-     * @param g
-     *            a {@link java.awt.Graphics} object.
-     * @param x
-     *            a int.
-     * @param y
-     *            a int.
-     */
-    public static void drawAttack(final Graphics g, final int x, final int y) {
-        FSkin.drawImage(g, MANA_IMAGES.get("attack"), x, y);
-    }
-
-    /**
-     * <p>
      * drawSymbol.
      * </p>
-     * 
+     *
      * @param imageName
      *            a {@link java.lang.String} object.
      * @param g
@@ -230,12 +214,12 @@ public class CardFaceSymbols {
     public static void drawSymbol(final String imageName, final Graphics g, final int x, final int y) {
         FSkin.drawImage(g, MANA_IMAGES.get(imageName), x, y);
     }
-    
+
     /**
      * <p>
      * getWidth.
      * </p>
-     * 
+     *
      * @param manaCost
      *            a {@link java.lang.String} object.
      * @return a int.
@@ -243,7 +227,7 @@ public class CardFaceSymbols {
     public static int getWidth(final ManaCost manaCost) {
         return manaCost.getGlyphCount() * 14;
     }
-    
+
     public static int getHeight() {
         return 14;
     }

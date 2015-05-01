@@ -15,16 +15,17 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
         cdlDone = new CountDownLatch(1);
     }
 
+    @Override
     public void awaitLatchRelease() {
         FThreads.assertExecutedByEdt(false);
         try{
             cdlDone.await();
-        }
-        catch (InterruptedException e) {
+        } catch (final InterruptedException e) {
             BugReporter.reportException(e);
         }
     }
 
+    @Override
     public final void relaseLatchWhenGameIsOver() {
         cdlDone.countDown();
     }
@@ -33,7 +34,7 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
         getController().getInputQueue().setInput(this);
         awaitLatchRelease();
     }
-    
+
     protected final void stop() {
         onStop();
 

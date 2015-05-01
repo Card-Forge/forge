@@ -1,17 +1,29 @@
 package forge.toolbox;
 
-import forge.interfaces.IComboBox;
-import forge.toolbox.FSkin.SkinFont;
-import forge.toolbox.FSkin.SkinnedComboBox;
+import java.awt.Component;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.LayoutManager;
+import java.util.Vector;
 
-import javax.swing.*;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.ComboPopup;
 
-import java.awt.*;
-import java.util.Vector;
+import forge.interfaces.IComboBox;
+import forge.toolbox.FSkin.SkinFont;
+import forge.toolbox.FSkin.SkinnedComboBox;
 
 @SuppressWarnings("serial")
 public class FComboBox<E> extends SkinnedComboBox<E> implements IComboBox<E> {
@@ -20,7 +32,7 @@ public class FComboBox<E> extends SkinnedComboBox<E> implements IComboBox<E> {
         RIGHT (SwingConstants.RIGHT),
         CENTER (SwingConstants.CENTER);
         private int value;
-        private TextAlignment(int value) { this.value = value; }
+        private TextAlignment(final int value) { this.value = value; }
         public int getInt() { return value; }
     }
     private TextAlignment textAlignment = TextAlignment.LEFT;
@@ -31,15 +43,15 @@ public class FComboBox<E> extends SkinnedComboBox<E> implements IComboBox<E> {
         super();
         initialize();
     }
-    public FComboBox(ComboBoxModel<E> model) {
+    public FComboBox(final ComboBoxModel<E> model) {
         super(model);
         initialize();
     }
-    public FComboBox(E[] items) {
+    public FComboBox(final E[] items) {
         super(items);
         initialize();
     }
-    public FComboBox(Vector<E> items) {
+    public FComboBox(final Vector<E> items) {
         super(items);
         initialize();
     }
@@ -49,18 +61,18 @@ public class FComboBox<E> extends SkinnedComboBox<E> implements IComboBox<E> {
         setBorder(getDefaultBorder());
     }
 
-    private Border getDefaultBorder() {
+    private static Border getDefaultBorder() {
         return UIManager.getBorder("ComboBox.border");
     }
 
     public String getText() {
-        Object selectedItem = getSelectedItem();
+        final Object selectedItem = getSelectedItem();
         if (selectedItem == null) {
             return "";
         }
         return selectedItem.toString();
     }
-    public void setText(String text0) {
+    public void setText(final String text0) {
         setSelectedItem(null);
         dataModel.setSelectedItem(text0); //use this to get around inability to set selected item that's not in items
     }
@@ -69,24 +81,24 @@ public class FComboBox<E> extends SkinnedComboBox<E> implements IComboBox<E> {
         return textAlignment;
     }
 
-    public void setTextAlignment(TextAlignment align) {
+    public void setTextAlignment(final TextAlignment align) {
         textAlignment = align;
     }
 
     public SkinFont getSkinFont() {
         return this.skinFont;
     }
-    
-    public void setSkinFont(SkinFont skinFont0) {
+
+    public void setSkinFont(final SkinFont skinFont0) {
         this.skinFont = skinFont0;
         this.setFont(skinFont0);
     }
 
     public int getAutoSizeWidth() {
         int maxWidth = 0;
-        FontMetrics metrics = this.getFontMetrics(this.getFont());
+        final FontMetrics metrics = this.getFontMetrics(this.getFont());
         for (int i = 0; i < this.getItemCount(); i++) {
-            int width = metrics.stringWidth(this.getItemAt(i).toString());
+            final int width = metrics.stringWidth(this.getItemAt(i).toString());
             if (width > maxWidth) {
                 maxWidth = width;
             }
@@ -101,9 +113,9 @@ public class FComboBox<E> extends SkinnedComboBox<E> implements IComboBox<E> {
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
+    protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D)g;
+        final Graphics2D g2d = (Graphics2D)g;
         g2d.setPaint(getForeground());
         int shapeWidth = 8;
         int shapeHeight = 8;
@@ -115,8 +127,8 @@ public class FComboBox<E> extends SkinnedComboBox<E> implements IComboBox<E> {
             x -= 4;
             y--;
         }
-        int[] xPoints = {x, x + shapeWidth, x + (shapeWidth / 2)};
-        int[] yPoints = {y, y, y + (shapeHeight / 2)};
+        final int[] xPoints = {x, x + shapeWidth, x + (shapeWidth / 2)};
+        final int[] yPoints = {y, y, y + (shapeHeight / 2)};
         g2d.fillPolygon(xPoints, yPoints, 3);
     }
 
@@ -128,8 +140,8 @@ public class FComboBox<E> extends SkinnedComboBox<E> implements IComboBox<E> {
 
         @Override
         protected ComboPopup createPopup() {
-            ComboPopup p = super.createPopup();
-            JComponent c = (JComponent)p;
+            final ComboPopup p = super.createPopup();
+            final JComponent c = (JComponent)p;
             c.setBorder(getDefaultBorder());
             return p;
         }
@@ -137,10 +149,10 @@ public class FComboBox<E> extends SkinnedComboBox<E> implements IComboBox<E> {
         @Override
         protected JButton createArrowButton() {
             return new JButton() { //return button that takes up no space
-                @Override  
-                public int getWidth() {  
-                    return 0;  
-                }  
+                @Override
+                public int getWidth() {
+                    return 0;
+                }
             };
         }
 
@@ -152,14 +164,14 @@ public class FComboBox<E> extends SkinnedComboBox<E> implements IComboBox<E> {
 
         @SuppressWarnings("hiding")
         private class CustomCellRenderer<E> implements ListCellRenderer<E> {
-            private DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
+            private final DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
             @Override
             public Component getListCellRendererComponent(
-                    JList<? extends E> list, E value, int index,
-                    boolean isSelected, boolean cellHasFocus) {
+                    final JList<? extends E> list, final E value, final int index,
+                    final boolean isSelected, final boolean cellHasFocus) {
 
-                JLabel lblItem = (JLabel) defaultRenderer.getListCellRendererComponent(
+                final JLabel lblItem = (JLabel) defaultRenderer.getListCellRendererComponent(
                         list, value, index, isSelected, cellHasFocus);
 
                 lblItem.setBorder(new EmptyBorder(4, 3, 4, 3));

@@ -1,20 +1,17 @@
 package forge.screens.bazaar;
 
+import javax.swing.SwingUtilities;
+
 import com.google.common.collect.Iterables;
 
-import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.quest.bazaar.QuestBazaarManager;
 import forge.toolbox.FLabel;
 
-import javax.swing.*;
-
-/** 
- * TODO: Write javadoc for this type.
- *
- */
 public enum CBazaarUI implements ICDoc {
     SINGLETON_INSTANCE;
+
+    private final VBazaarUI view = VBazaarUI.SINGLETON_INSTANCE;
 
     /**
      * Controls top-level instance of bazaar.
@@ -25,30 +22,20 @@ public enum CBazaarUI implements ICDoc {
     }
 
     /** Populate all stalls, and select first one. */
-    public void initBazaar(QuestBazaarManager bazaar) {
-        VBazaarUI.SINGLETON_INSTANCE.populateStalls();
-        ((FLabel) VBazaarUI.SINGLETON_INSTANCE.getPnlAllStalls().getComponent(0)).setSelected(true);
+    public void initBazaar(final QuestBazaarManager bazaar) {
+        view.populateStalls();
+        ((FLabel) view.getPnlAllStalls().getComponent(0)).setSelected(true);
         showStall(Iterables.get(bazaar.getStallNames(), 0), bazaar);
     }
 
     /** @param s0 &emsp; {@link java.lang.String} */
     public void showStall(final String s0, final QuestBazaarManager bazaar) {
         SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                VBazaarUI.SINGLETON_INSTANCE.getPnlSingleStall().setStall(bazaar.getStall(s0));
-                VBazaarUI.SINGLETON_INSTANCE.getPnlSingleStall().updateStall();
+            @Override public void run() {
+                view.getPnlSingleStall().setStall(bazaar.getStall(s0));
+                view.getPnlSingleStall().updateStall();
             }
         });
-    }
-
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     @Override
@@ -60,8 +47,6 @@ public enum CBazaarUI implements ICDoc {
      */
     @Override
     public void initialize() {
-        // TODO Auto-generated method stub
-        
     }
 
     /* (non-Javadoc)
@@ -69,7 +54,5 @@ public enum CBazaarUI implements ICDoc {
      */
     @Override
     public void update() {
-        // TODO Auto-generated method stub
-        
     }
 }

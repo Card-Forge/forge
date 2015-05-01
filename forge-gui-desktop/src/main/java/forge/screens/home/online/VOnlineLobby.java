@@ -34,9 +34,6 @@ public enum VOnlineLobby implements IVDoc<COnlineLobby>, IVTopLevelUI {
     private VOnlineLobby() {
     }
 
-    VLobby getLobby() {
-        return lobby;
-    }
     VLobby setLobby(final GameLobby lobby) {
         this.lobby = new VLobby(lobby);
         getLayoutControl().setLobby(this.lobby);

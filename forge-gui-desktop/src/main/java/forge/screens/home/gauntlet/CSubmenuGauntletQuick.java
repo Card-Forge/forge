@@ -1,6 +1,12 @@
 package forge.screens.home.gauntlet;
 
-import forge.UiCommand;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.SwingUtilities;
+
 import forge.deck.DeckType;
 import forge.game.player.RegisteredPlayer;
 import forge.gauntlet.GauntletData;
@@ -9,16 +15,9 @@ import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.player.GamePlayerUtil;
 
-import javax.swing.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-
-/** 
+/**
  * Controls the "quick gauntlet" submenu in the home UI.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
@@ -27,8 +26,11 @@ public enum CSubmenuGauntletQuick implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
-    private final ActionListener actStartGame = new ActionListener() { @Override
-        public void actionPerformed(ActionEvent arg0) { startGame(); } };
+    private final ActionListener actStartGame = new ActionListener() {
+        @Override public void actionPerformed(final ActionEvent arg0) {
+            startGame();
+        }
+    };
 
     private final VSubmenuGauntletQuick view = VSubmenuGauntletQuick.SINGLETON_INSTANCE;
 
@@ -90,11 +92,4 @@ public enum CSubmenuGauntletQuick implements ICDoc {
         });
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
-    }
 }

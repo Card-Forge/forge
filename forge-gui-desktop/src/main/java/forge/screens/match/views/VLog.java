@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -59,7 +59,7 @@ public class VLog implements IVDoc<CLog> {
     private final DragTab tab = new DragTab("Log");
 
     // Other fields
-    private GameLogPanel gameLog;
+    private final GameLogPanel gameLog;
     private JPanel p = null;
 
     private final CLog controller;
@@ -168,17 +168,17 @@ public class VLog implements IVDoc<CLog> {
     }
 
     private void displayNewGameLogEntries(final GameView model) {
-        List<GameLogEntry> newLogEntries = Lists.reverse(getNewGameLogEntries(model));
+        final List<GameLogEntry> newLogEntries = Lists.reverse(getNewGameLogEntries(model));
         if (newLogEntries.size() > 0) {
             addNewLogEntriesToJPanel(newLogEntries);
         }
     }
 
     private List<GameLogEntry> getNewGameLogEntries(final GameView model) {
-        String logEntryType = FModel.getPreferences().getPref(FPref.DEV_LOG_ENTRY_TYPE);
-        GameLogEntryType logVerbosityFilter = GameLogEntryType.valueOf(logEntryType);
+        final String logEntryType = FModel.getPreferences().getPref(FPref.DEV_LOG_ENTRY_TYPE);
+        final GameLogEntryType logVerbosityFilter = GameLogEntryType.valueOf(logEntryType);
         if (model != null && model.getGameLog() != null) {
-            List<GameLogEntry> logEntries = model.getGameLog().getLogEntries(logVerbosityFilter);
+            final List<GameLogEntry> logEntries = model.getGameLog().getLogEntries(logVerbosityFilter);
             // Set subtraction - remove all log entries from new list which are already displayed.
             logEntries.removeAll(this.displayedLogEntries);
             return logEntries;
@@ -186,16 +186,16 @@ public class VLog implements IVDoc<CLog> {
         return new ArrayList<GameLogEntry>();
     }
 
-    private void addNewLogEntriesToJPanel(List<GameLogEntry> newLogEntries) {
-        for (GameLogEntry logEntry : newLogEntries) {
+    private void addNewLogEntriesToJPanel(final List<GameLogEntry> newLogEntries) {
+        for (final GameLogEntry logEntry : newLogEntries) {
             gameLog.setTextFont(getJTextAreaFont(logEntry.type));
             gameLog.addLogEntry(logEntry.message);
             this.displayedLogEntries.add(logEntry);
         }
     }
 
-    private SkinFont getJTextAreaFont(GameLogEntryType logEntryType) {
-        boolean isNewTurn = (logEntryType == GameLogEntryType.TURN);
+    private static SkinFont getJTextAreaFont(final GameLogEntryType logEntryType) {
+        final boolean isNewTurn = (logEntryType == GameLogEntryType.TURN);
         return (isNewTurn ? FSkin.getBoldFont() : FSkin.getFont());
     }
 }

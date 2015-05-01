@@ -24,9 +24,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import forge.AIOption;
-import forge.GuiBase;
 import forge.UiCommand;
-import forge.assets.FSkinProp;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
@@ -60,6 +58,7 @@ import forge.toolbox.FTextField;
 import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.NameGenerator;
+import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
 
 /**
@@ -200,6 +199,7 @@ public class VLobby implements IUpdateable {
         getPlayerPanelWithFocus().focusOnAvatar();
     }
 
+    @Override
     public void update(final boolean fullUpdate) {
         activePlayersNum = lobby.getNumberOfSlots();
         addPlayerBtn.setEnabled(activePlayersNum < MAX_PLAYERS);
@@ -275,7 +275,7 @@ public class VLobby implements IUpdateable {
 
     void setReady(final int index, final boolean ready) {
         if (ready && decks[index] == null) {
-            GuiBase.getInterface().showOptionDialog("Select a deck before readying!", "Error", FSkinProp.ICO_WARNING, new String[] { "Ok" }, 0);
+            SOptionPane.showErrorDialog("Select a deck before readying!");
             update(false);
             return;
         }
@@ -391,7 +391,7 @@ public class VLobby implements IUpdateable {
         planarDeckPanels.add(planarDeckPanel);
 
         // Vanguard avatar list
-        FPanel vgdDeckPanel = new FPanel();
+        final FPanel vgdDeckPanel = new FPanel();
         vgdDeckPanel.setBorderToggle(false);
 
         final FList<Object> vgdAvatarList = new FList<Object>();
@@ -624,14 +624,6 @@ public class VLobby implements IUpdateable {
     /** Gets the random deck checkbox for Artifacts. */
     FCheckBox getCbArtifacts() { return cbArtifacts; }
 
-    FCheckBox getVntArchenemy()       { return vntArchenemy; }
-    FCheckBox getVntArchenemyRumble() { return vntArchenemyRumble; }
-    FCheckBox getVntCommander()       { return vntCommander; }
-    FCheckBox getVntMomirBasic()      { return vntMomirBasic; }
-    FCheckBox getVntPlanechase()      { return vntPlanechase; }
-    FCheckBox getVntTinyLeaders()     { return vntTinyLeaders; }
-    FCheckBox getVntVanguard()        { return vntVanguard; }
-
     public final List<PlayerPanel> getPlayerPanels() {
         return playerPanels;
     }
@@ -642,7 +634,7 @@ public class VLobby implements IUpdateable {
         return iPlayer == playerWithFocus;
     }
 
-    public final FDeckChooser getDeckChooser(int playernum) {
+    public final FDeckChooser getDeckChooser(final int playernum) {
         return deckChoosers.get(playernum);
     }
 
@@ -663,7 +655,7 @@ public class VLobby implements IUpdateable {
     }
 
     /** Revalidates the player and deck sections. Necessary after adding or hiding any panels. */
-    private void refreshPanels(boolean refreshPlayerFrame, boolean refreshDeckFrame) {
+    private void refreshPanels(final boolean refreshPlayerFrame, final boolean refreshDeckFrame) {
         if (refreshPlayerFrame) {
             playersScroll.validate();
             playersScroll.repaint();
@@ -674,11 +666,11 @@ public class VLobby implements IUpdateable {
         }
     }
 
-    public void changePlayerFocus(int newFocusOwner) {
+    public void changePlayerFocus(final int newFocusOwner) {
         changePlayerFocus(newFocusOwner, lobby.getGameType());
     }
 
-    void changePlayerFocus(int newFocusOwner, GameType gType) {
+    void changePlayerFocus(final int newFocusOwner, final GameType gType) {
         final PlayerPanel oldFocus = getPlayerPanelWithFocus();
         if (oldFocus != null) {
             oldFocus.setFocused(false);
@@ -695,15 +687,15 @@ public class VLobby implements IUpdateable {
 
     /** Saves avatar prefs for players one and two. */
     void updateAvatarPrefs() {
-        int pOneIndex = playerPanels.get(0).getAvatarIndex();
-        int pTwoIndex = playerPanels.get(1).getAvatarIndex();
+        final int pOneIndex = playerPanels.get(0).getAvatarIndex();
+        final int pTwoIndex = playerPanels.get(1).getAvatarIndex();
 
         prefs.setPref(FPref.UI_AVATARS, pOneIndex + "," + pTwoIndex);
         prefs.save();
     }
 
     /** Adds a pre-styled FLabel component with the specified title. */
-    FLabel newLabel(String title) {
+    FLabel newLabel(final String title) {
         return new FLabel.Builder().text(title).fontSize(14).fontStyle(Font.ITALIC).build();
     }
 
@@ -735,7 +727,7 @@ public class VLobby implements IUpdateable {
         final String type = typeOptions[typeIndex];
 
         String confirmMsg, newName;
-        List<String> usedNames = getPlayerNames();
+        final List<String> usedNames = getPlayerNames();
         do {
             newName = NameGenerator.getRandomName(gender, type, usedNames);
             confirmMsg = "Would you like to use the name \"" + newName + "\", or try again?";
@@ -745,8 +737,8 @@ public class VLobby implements IUpdateable {
     }
 
     List<String> getPlayerNames() {
-        List<String> names = new ArrayList<String>();
-        for (PlayerPanel pp : playerPanels) {
+        final List<String> names = new ArrayList<String>();
+        for (final PlayerPanel pp : playerPanels) {
             names.add(pp.getPlayerName());
         }
         return names;
@@ -776,8 +768,8 @@ public class VLobby implements IUpdateable {
 
     final ActionListener nameListener = new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent e) {
-            FTextField nField = (FTextField)e.getSource();
+        public void actionPerformed(final ActionEvent e) {
+            final FTextField nField = (FTextField)e.getSource();
             nField.transferFocus();
         }
     };
@@ -812,7 +804,7 @@ public class VLobby implements IUpdateable {
     /** Return all the Vanguard avatars. */
     public Iterable<PaperCard> getAllAvatars() {
         if (vgdAllAvatars.isEmpty()) {
-            for (PaperCard c : FModel.getMagicDb().getVariantCards().getAllCards()) {
+            for (final PaperCard c : FModel.getMagicDb().getVariantCards().getAllCards()) {
                 if (c.getRules().getType().isVanguard()) {
                     vgdAllAvatars.add(c);
                 }
@@ -842,7 +834,7 @@ public class VLobby implements IUpdateable {
         humanListData.add("Random");
         aiListData.add("Use deck's default avatar (random if unavailable)");
         aiListData.add("Random");
-        for (PaperCard cp : getAllAvatars()) {
+        for (final PaperCard cp : getAllAvatars()) {
             humanListData.add(cp);
             if (!cp.getRules().getAiHints().getRemRandomDecks()) {
                 nonRandomHumanAvatars.add(cp);
@@ -858,9 +850,9 @@ public class VLobby implements IUpdateable {
     }
 
     /** update vanguard list. */
-    public void updateVanguardList(int playerIndex) {
-        FList<Object> vgdList = getVanguardLists().get(playerIndex);
-        Object lastSelection = vgdList.getSelectedValue();
+    public void updateVanguardList(final int playerIndex) {
+        final FList<Object> vgdList = getVanguardLists().get(playerIndex);
+        final Object lastSelection = vgdList.getSelectedValue();
         vgdList.setListData(isPlayerAI(playerIndex) ? aiListData : humanListData);
         if (null != lastSelection) {
             vgdList.setSelectedValue(lastSelection, true);

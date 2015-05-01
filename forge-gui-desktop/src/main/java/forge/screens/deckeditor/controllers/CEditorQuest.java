@@ -6,16 +6,22 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.screens.deckeditor.controllers;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import com.google.common.base.Function;
 import com.google.common.base.Supplier;
@@ -42,21 +48,13 @@ import forge.screens.home.quest.CSubmenuQuestDecks;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.ItemPool;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-//import forge.quest.data.QuestBoosterPack;
-
 /**
  * Child controller for quest deck editor UI.
  * <br><br>
  * Card catalog and decks are drawn from a QuestController object.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
- * 
+ *
  * @author Forge
  * @version $Id: CEditorQuest.java 24868 2014-02-17 05:08:05Z drdev $
  */
@@ -89,7 +87,7 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
      * Child controller for quest deck editor UI.
      * <br><br>
      * Card catalog and decks are drawn from a QuestController object.
-     * 
+     *
      * @param questData0 &emsp; {@link forge.quest.QuestController}
      */
     public CEditorQuest(final QuestController questData0, final CDetailPicture cDetailPicture) {
@@ -121,16 +119,6 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         this.controller = new DeckController<Deck>(questData0.getMyDecks(), this, newCreator);
     }
 
-    /**
-     * Adds any card to the catalog and data pool.
-     * 
-     * @param card {@link forge.item.PaperCard}
-     */
-    public void addCheatCard(final PaperCard card, int qty) {
-        this.getCatalogManager().addItem(card, qty);
-        this.questData.getCards().getCardpool().add(card, qty);
-    }
-
     // fills number of decks using each card
     private Map<PaperCard, Integer> countDecksForEachCard() {
         final Map<PaperCard, Integer> result = new HashMap<PaperCard, Integer>();
@@ -158,7 +146,7 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
      * @see forge.gui.deckeditor.ACEditorBase#onAddItems()
      */
     @Override
-    protected void onAddItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
+    protected void onAddItems(final Iterable<Entry<PaperCard, Integer>> items, final boolean toAlternate) {
         CEditorConstructed.onAddItems(this, items, toAlternate);
     }
 
@@ -166,7 +154,7 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
      * @see forge.gui.deckeditor.ACEditorBase#onRemoveItems()
      */
     @Override
-    protected void onRemoveItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
+    protected void onRemoveItems(final Iterable<Entry<PaperCard, Integer>> items, final boolean toAlternate) {
         CEditorConstructed.onRemoveItems(this, items, toAlternate);
     }
 
@@ -174,7 +162,7 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
      * @see forge.gui.deckeditor.ACEditorBase#buildAddContextMenu()
      */
     @Override
-    protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
+    protected void buildAddContextMenu(final EditorContextMenuBuilder cmb) {
         CEditorConstructed.buildAddContextMenu(cmb, sectionMode);
     }
 
@@ -182,13 +170,13 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
      * @see forge.gui.deckeditor.ACEditorBase#buildRemoveContextMenu()
      */
     @Override
-    protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
+    protected void buildRemoveContextMenu(final EditorContextMenuBuilder cmb) {
         CEditorConstructed.buildRemoveContextMenu(cmb, sectionMode);
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see forge.gui.deckeditor.ACEditorBase#updateView()
      */
     @Override
@@ -212,7 +200,7 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see forge.gui.deckeditor.ACEditorBase#getController()
      */
     @Override
@@ -263,18 +251,17 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
 
         this.getBtnCycleSection().setVisible(true);
         this.getBtnCycleSection().setCommand(new UiCommand() {
-            @Override
-            public void run() {
+            @Override public void run() {
                 cycleEditorMode();
-        } });
+            }
+        });
 
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
 
         if (this.controller.getModel() == null) {
             this.getDeckController().setModel(new Deck());
-        }
-        else {
+        } else {
             this.controller.refreshModel();
         }
     }
@@ -283,7 +270,7 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
      * @see forge.gui.deckeditor.controllers.ACEditorBase#canSwitchAway()
      */
     @Override
-    public boolean canSwitchAway(boolean isClosing) {
+    public boolean canSwitchAway(final boolean isClosing) {
         if (SEditorIO.confirmSaveChanges(FScreen.DECK_EDITOR_QUEST, isClosing)) {
             FModel.getQuest().save();
             return true;
@@ -306,11 +293,4 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         }
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param d0
-     */
-    public void load(Deck deck) {
-        controller.setModel(deck);
-    }
 }

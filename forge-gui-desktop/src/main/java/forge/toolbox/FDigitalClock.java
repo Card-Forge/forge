@@ -1,14 +1,14 @@
 package forge.toolbox;
 
-import forge.toolbox.FSkin.SkinnedLabel;
-
-import javax.swing.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import javax.swing.Timer;
+
+import forge.toolbox.FSkin.SkinnedLabel;
 
 /**
  * Digital clock label that displays current time
@@ -26,7 +26,8 @@ public class FDigitalClock extends SkinnedLabel {
         clocks.add(this);
         if (timer == null) {
             timer = new Timer(60000, new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
+                @Override
+                public void actionPerformed(final ActionEvent e) {
                     now.add(Calendar.MINUTE, 1);
                     updateTimeDisplay();
                 }
@@ -43,7 +44,7 @@ public class FDigitalClock extends SkinnedLabel {
 
     private static void updateTimeDisplay() {
         currentTimeDisplay = timeFormatter.format(now.getTime());
-        for (FDigitalClock clock : clocks) {
+        for (final FDigitalClock clock : clocks) {
             clock.setText(currentTimeDisplay);
         }
     }

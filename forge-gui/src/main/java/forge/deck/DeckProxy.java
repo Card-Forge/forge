@@ -31,7 +31,6 @@ import forge.quest.QuestEvent;
 import forge.util.BinaryUtil;
 import forge.util.IHasName;
 import forge.util.storage.IStorage;
-import forge.util.storage.StorageImmediatelySerialized;
 
 // Adding a generic to this class creates compile problems in ItemManager (that I can not fix)
 public class DeckProxy implements InventoryItem {
@@ -41,7 +40,7 @@ public class DeckProxy implements InventoryItem {
 
     public static final Function<DeckProxy, String> FN_GET_NAME = new Function<DeckProxy, String>() {
         @Override
-        public String apply(DeckProxy arg0) {
+        public String apply(final DeckProxy arg0) {
             return arg0.getName();
         }
     };
@@ -61,15 +60,15 @@ public class DeckProxy implements InventoryItem {
         this(null, "", null, "", null, null);
     }
 
-    public DeckProxy(Deck deck, String deckType, GameType type, IStorage<? extends IHasName> storage) {
+    public DeckProxy(final Deck deck, final String deckType, final GameType type, final IStorage<? extends IHasName> storage) {
         this(deck, deckType, type, "", storage, null);
     }
 
-    public DeckProxy(IHasName deck, String deckType, Function<IHasName, Deck> fnGetDeck, GameType type, IStorage<? extends IHasName> storage) {
+    public DeckProxy(final IHasName deck, final String deckType, final Function<IHasName, Deck> fnGetDeck, final GameType type, final IStorage<? extends IHasName> storage) {
         this(deck, deckType, type, "", storage, fnGetDeck);
     }
 
-    private DeckProxy(IHasName deck, String deckType, GameType type, String path, IStorage<? extends IHasName> storage, Function<IHasName, Deck> fnGetDeck) {
+    private DeckProxy(final IHasName deck, final String deckType, final GameType type, final String path, final IStorage<? extends IHasName> storage, final Function<IHasName, Deck> fnGetDeck) {
         this.deck = deck;
         this.deckType = deckType;
         this.storage = storage;
@@ -120,7 +119,7 @@ public class DeckProxy implements InventoryItem {
         return getDeckString(path, deck.getName());
     }
 
-    public static String getDeckString(String path, String name) {
+    public static String getDeckString(final String path, final String name) {
         if (StringUtils.isEmpty(path)) {
             return name;
         }
@@ -143,17 +142,17 @@ public class DeckProxy implements InventoryItem {
             byte landProfile = MagicColor.COLORLESS;
             HashSet<Byte> nonReqColors = null;
 
-            for (Entry<DeckSection, CardPool> deckEntry : getDeck()) {
+            for (final Entry<DeckSection, CardPool> deckEntry : getDeck()) {
                 switch (deckEntry.getKey()) {
                 case Main:
                 case Commander:
-                    for (Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
-                        CardRules rules = poolEntry.getKey().getRules();
+                    for (final Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
+                        final CardRules rules = poolEntry.getKey().getRules();
                         if (rules.getType().isLand()) { //track color identity of lands separately
                             landProfile |= rules.getColorIdentity().getColor();
                         }
                         else {
-                            for (ManaCostShard shard : rules.getManaCost()) {
+                            for (final ManaCostShard shard : rules.getManaCost()) {
                                 //track phyrexian and hybrid costs separately as they won't always affect color
                                 if (shard.isPhyrexian() || shard.isOr2Colorless() || !shard.isMonoColor()) {
                                     if (nonReqColors == null) {
@@ -175,7 +174,7 @@ public class DeckProxy implements InventoryItem {
             if (nonReqColors != null) {
                 //if any non-required mana colors present, determine which colors, if any,
                 //need to be accounted for in color profile of deck
-                for (Byte colorMask : nonReqColors) {
+                for (final Byte colorMask : nonReqColors) {
                     colorProfile |= (colorMask & landProfile);
                 }
             }
@@ -188,12 +187,12 @@ public class DeckProxy implements InventoryItem {
         if (colorIdentity == null) {
             byte colorProfile = MagicColor.COLORLESS;
 
-            for (Entry<DeckSection, CardPool> deckEntry : getDeck()) {
+            for (final Entry<DeckSection, CardPool> deckEntry : getDeck()) {
                 switch (deckEntry.getKey()) {
                 case Main:
                 case Sideboard:
                 case Commander:
-                    for (Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
+                    for (final Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
                         colorProfile |= poolEntry.getKey().getRules().getColorIdentity().getColor();
                     }
                     break;
@@ -209,12 +208,12 @@ public class DeckProxy implements InventoryItem {
     public CardRarity getHighestRarity() {
         if (highestRarity == null) {
             highestRarity = CardRarity.Common;
-            for (Entry<DeckSection, CardPool> deckEntry : getDeck()) {
+            for (final Entry<DeckSection, CardPool> deckEntry : getDeck()) {
                 switch (deckEntry.getKey()) {
                 case Main:
                 case Sideboard:
                 case Commander:
-                    for (Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
+                    for (final Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
                         switch (poolEntry.getKey().getRarity()) {
                         case MythicRare:
                             highestRarity = CardRarity.MythicRare;
@@ -262,11 +261,11 @@ public class DeckProxy implements InventoryItem {
                 mainSize = -1;
             }
             else {
-                Deck d = getDeck();
+                final Deck d = getDeck();
                 mainSize = d.getMain().countAll();
 
                 //account for commander as part of main deck size
-                CardPool commander = d.get(DeckSection.Commander);
+                final CardPool commander = d.get(DeckSection.Commander);
                 if (commander != null) {
                     mainSize += commander.countAll();
                 }
@@ -277,7 +276,7 @@ public class DeckProxy implements InventoryItem {
 
     public int getSideSize() {
         if (sbSize == null) {
-            CardPool sb = getDeck().get(DeckSection.Sideboard);
+            final CardPool sb = getDeck().get(DeckSection.Sideboard);
             sbSize = sb == null ? -1 : sb.countAll();
             if (sbSize == 0) {
                 sbSize = -1;
@@ -296,36 +295,36 @@ public class DeckProxy implements InventoryItem {
 
     // TODO: The methods below should not take the decks collections from singletons, instead they are supposed to use data passed in parameters
     public static Iterable<DeckProxy> getAllConstructedDecks() {
-        List<DeckProxy> result = new ArrayList<DeckProxy>();
+        final List<DeckProxy> result = new ArrayList<DeckProxy>();
         addDecksRecursivelly("Constructed", GameType.Constructed, result, "", FModel.getDecks().getConstructed());
         return result;
     }
 
     public static Iterable<DeckProxy> getAllCommanderDecks() {
-        List<DeckProxy> result = new ArrayList<DeckProxy>();
+        final List<DeckProxy> result = new ArrayList<DeckProxy>();
         addDecksRecursivelly("Commander", GameType.Commander, result, "", FModel.getDecks().getCommander());
         return result;
     }
 
     public static Iterable<DeckProxy> getAllSchemeDecks() {
-        List<DeckProxy> result = new ArrayList<DeckProxy>();
+        final List<DeckProxy> result = new ArrayList<DeckProxy>();
         addDecksRecursivelly("Scheme", GameType.Archenemy, result, "", FModel.getDecks().getScheme());
         return result;
     }
 
     public static Iterable<DeckProxy> getAllPlanarDecks() {
-        List<DeckProxy> result = new ArrayList<DeckProxy>();
+        final List<DeckProxy> result = new ArrayList<DeckProxy>();
         addDecksRecursivelly("Plane", GameType.Planechase, result, "", FModel.getDecks().getPlane());
         return result;
     }
 
-    private static void addDecksRecursivelly(String deckType, GameType gameType, List<DeckProxy> list, String path, IStorage<Deck> folder) {
-        for (IStorage<Deck> f : folder.getFolders()) {
-            String subPath = (StringUtils.isBlank(path) ? "" : path) + "/" + f.getName();
+    private static void addDecksRecursivelly(final String deckType, final GameType gameType, final List<DeckProxy> list, final String path, final IStorage<Deck> folder) {
+        for (final IStorage<Deck> f : folder.getFolders()) {
+            final String subPath = (StringUtils.isBlank(path) ? "" : path) + "/" + f.getName();
             addDecksRecursivelly(deckType, gameType, list, subPath, f);
         }
 
-        for (Deck d : folder) {
+        for (final Deck d : folder) {
             list.add(new DeckProxy(d, deckType, gameType, path, folder, null));
         }
     }
@@ -334,13 +333,13 @@ public class DeckProxy implements InventoryItem {
     public static final Predicate<DeckProxy> createPredicate(final Predicate<PaperCard> cardPredicate) {
         return new Predicate<DeckProxy>() {
             @Override
-            public boolean apply(DeckProxy input) {
-                for (Entry<DeckSection, CardPool> deckEntry : input.getDeck()) {
+            public boolean apply(final DeckProxy input) {
+                for (final Entry<DeckSection, CardPool> deckEntry : input.getDeck()) {
                     switch (deckEntry.getKey()) {
                     case Main:
                     case Sideboard:
                     case Commander:
-                        for (Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
+                        for (final Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
                             if (!cardPredicate.apply(poolEntry.getKey())) {
                                 return false; //all cards in deck must pass card predicate to pass deck predicate
                             }
@@ -362,13 +361,6 @@ public class DeckProxy implements InventoryItem {
         invalidateCache();
     }
 
-    @SuppressWarnings("unchecked")
-    public void updateInStorage() {
-        if (storage instanceof StorageImmediatelySerialized<?>) {
-            ((StorageImmediatelySerialized<IHasName>)storage).add(deck);
-        }
-    }
-
     public void deleteFromStorage() {
         if (storage != null) {
             storage.delete(getName());
@@ -377,7 +369,7 @@ public class DeckProxy implements InventoryItem {
 
     private static class ThemeDeckGenerator extends DeckProxy {
         private final String name;
-        public ThemeDeckGenerator(String name0) {
+        public ThemeDeckGenerator(final String name0) {
             super();
             name = name0;
         }
@@ -388,7 +380,7 @@ public class DeckProxy implements InventoryItem {
             final Deck deck = new Deck();
             gen.setSingleton(FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS));
             gen.setUseArtifacts(!FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
-            StringBuilder errorBuilder = new StringBuilder();
+            final StringBuilder errorBuilder = new StringBuilder();
             deck.getMain().addAll(gen.getThemeDeck(this.getName(), 60, errorBuilder));
             if (errorBuilder.length() > 0) {
                 throw new RuntimeException(errorBuilder.toString());
@@ -406,13 +398,14 @@ public class DeckProxy implements InventoryItem {
             return name;
         }
 
+        @Override
         public boolean isGeneratedDeck() {
             return true;
         }
     }
 
     public static List<DeckProxy> getAllThemeDecks() {
-        ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
+        final List<DeckProxy> decks = new ArrayList<DeckProxy>();
         for (final String s : DeckGeneratorTheme.getThemeNames()) {
             decks.add(new ThemeDeckGenerator(s));
         }
@@ -420,8 +413,8 @@ public class DeckProxy implements InventoryItem {
     }
 
     @SuppressWarnings("unchecked")
-    public static List<DeckProxy> getAllPreconstructedDecks(IStorage<PreconDeck> iStorage) {
-        ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
+    public static List<DeckProxy> getAllPreconstructedDecks(final IStorage<PreconDeck> iStorage) {
+        final List<DeckProxy> decks = new ArrayList<DeckProxy>();
         for (final PreconDeck preconDeck : iStorage) {
             decks.add(new DeckProxy(preconDeck, "Precon", (Function<IHasName, Deck>)(Object)PreconDeck.FN_GET_DECK, null, iStorage));
         }
@@ -429,12 +422,12 @@ public class DeckProxy implements InventoryItem {
     }
 
     public static List<DeckProxy> getAllQuestEventAndChallenges() {
-        ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
-        QuestController quest = FModel.getQuest();
-        for (QuestEvent e : quest.getDuelsManager().getAllDuels()) {
+        final List<DeckProxy> decks = new ArrayList<DeckProxy>();
+        final QuestController quest = FModel.getQuest();
+        for (final QuestEvent e : quest.getDuelsManager().getAllDuels()) {
             decks.add(new DeckProxy(e.getEventDeck(), "Quest Event", null, null));
         }
-        for (QuestEvent e : quest.getChallenges()) {
+        for (final QuestEvent e : quest.getChallenges()) {
             decks.add(new DeckProxy(e.getEventDeck(), "Quest Event", null, null));
         }
         return decks;
@@ -453,8 +446,8 @@ public class DeckProxy implements InventoryItem {
         return humanDecks;
     }
 
-    public static List<DeckProxy> getAllQuestDecks(IStorage<Deck> storage) {
-        ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
+    public static List<DeckProxy> getAllQuestDecks(final IStorage<Deck> storage) {
+        final List<DeckProxy> decks = new ArrayList<DeckProxy>();
         if (storage != null) {
             for (final Deck deck : storage) {
                 decks.add(new DeckProxy(deck, "Quest", GameType.Quest, storage));
@@ -465,25 +458,25 @@ public class DeckProxy implements InventoryItem {
 
     @SuppressWarnings("unchecked")
     public static List<DeckProxy> getAllDraftDecks() {
-        ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
-        IStorage<DeckGroup> draft = FModel.getDecks().getDraft();
-        for (DeckGroup d : draft) {
+        final List<DeckProxy> decks = new ArrayList<DeckProxy>();
+        final IStorage<DeckGroup> draft = FModel.getDecks().getDraft();
+        for (final DeckGroup d : draft) {
             decks.add(new DeckProxy(d, "Draft", ((Function<IHasName, Deck>)(Object)DeckGroup.FN_HUMAN_DECK), GameType.Draft, draft));
         }
         return decks;
     }
 
     @SuppressWarnings("unchecked")
-    public static List<DeckProxy> getWinstonDecks(IStorage<DeckGroup> draft) {
-        ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
-        for (DeckGroup d : draft) {
+    public static List<DeckProxy> getWinstonDecks(final IStorage<DeckGroup> draft) {
+        final List<DeckProxy> decks = new ArrayList<DeckProxy>();
+        for (final DeckGroup d : draft) {
             decks.add(new DeckProxy(d, "Winston", ((Function<IHasName, Deck>)(Object)DeckGroup.FN_HUMAN_DECK), GameType.Winston, draft));
         }
         return decks;
     }
 
-    public static List<DeckProxy> getNetDecks(NetDeckCategory category) {
-        ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
+    public static List<DeckProxy> getNetDecks(final NetDeckCategory category) {
+        final List<DeckProxy> decks = new ArrayList<DeckProxy>();
         if (category != null) {
             addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category);
         }
@@ -493,49 +486,49 @@ public class DeckProxy implements InventoryItem {
     public static final Predicate<DeckProxy> IS_WHITE = new Predicate<DeckProxy>() {
         @Override
         public boolean apply(final DeckProxy deck) {
-            ColorSet cs = deck.getColor();
+            final ColorSet cs = deck.getColor();
             return cs != null && cs.hasAnyColor(MagicColor.WHITE);
         }
     };
     public static final Predicate<DeckProxy> IS_BLUE = new Predicate<DeckProxy>() {
         @Override
         public boolean apply(final DeckProxy deck) {
-            ColorSet cs = deck.getColor();
+            final ColorSet cs = deck.getColor();
             return cs != null && cs.hasAnyColor(MagicColor.BLUE);
         }
     };
     public static final Predicate<DeckProxy> IS_BLACK = new Predicate<DeckProxy>() {
         @Override
         public boolean apply(final DeckProxy deck) {
-            ColorSet cs = deck.getColor();
+            final ColorSet cs = deck.getColor();
             return cs != null && cs.hasAnyColor(MagicColor.BLACK);
         }
     };
     public static final Predicate<DeckProxy> IS_RED = new Predicate<DeckProxy>() {
         @Override
         public boolean apply(final DeckProxy deck) {
-            ColorSet cs = deck.getColor();
+            final ColorSet cs = deck.getColor();
             return cs != null && cs.hasAnyColor(MagicColor.RED);
         }
     };
     public static final Predicate<DeckProxy> IS_GREEN = new Predicate<DeckProxy>() {
         @Override
         public boolean apply(final DeckProxy deck) {
-            ColorSet cs = deck.getColor();
+            final ColorSet cs = deck.getColor();
             return cs != null && cs.hasAnyColor(MagicColor.GREEN);
         }
     };
     public static final Predicate<DeckProxy> IS_COLORLESS = new Predicate<DeckProxy>() {
         @Override
         public boolean apply(final DeckProxy deck) {
-            ColorSet cs = deck.getColor();
+            final ColorSet cs = deck.getColor();
             return cs != null && cs.getColor() == 0;
         }
     };
     public static final Predicate<DeckProxy> IS_MULTICOLOR = new Predicate<DeckProxy>() {
         @Override
         public boolean apply(final DeckProxy deck) {
-            ColorSet cs = deck.getColor();
+            final ColorSet cs = deck.getColor();
             return cs != null && BinaryUtil.bitCount(cs.getColor()) > 1;
         }
     };

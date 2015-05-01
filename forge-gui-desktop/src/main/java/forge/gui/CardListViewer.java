@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -43,7 +43,7 @@ import forge.view.FDialog;
 /**
  * A simple class that shows a list of cards in a dialog with preview in its
  * right part.
- * 
+ *
  * @author Forge
  * @version $Id: ListChooser.java 9708 2011-08-09 19:34:12Z jendave $
  */
@@ -60,7 +60,7 @@ public class CardListViewer extends FDialog {
 
     /**
      * Instantiates a new card list viewer.
-     * 
+     *
      * @param title
      *            the title
      * @param list
@@ -72,7 +72,7 @@ public class CardListViewer extends FDialog {
 
     /**
      * Instantiates a new card list viewer.
-     * 
+     *
      * @param title
      *            the title
      * @param message
@@ -86,7 +86,7 @@ public class CardListViewer extends FDialog {
 
     /**
      * Instantiates a new card list viewer.
-     * 
+     *
      * @param title
      *            the title
      * @param message
@@ -104,16 +104,16 @@ public class CardListViewer extends FDialog {
         this.picture.setOpaque(false);
 
         this.setTitle(title);
-        
+
         if (FModel.getPreferences().getPrefBoolean(FPref.UI_LARGE_CARD_VIEWERS)) {
             this.setSize(1200, 825);
         } else {
             this.setSize(720, 374);
         }
-        
+
         this.addWindowFocusListener(new CardListFocuser());
 
-        FButton btnOK = new FButton("OK");
+        final FButton btnOK = new FButton("OK");
         btnOK.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {

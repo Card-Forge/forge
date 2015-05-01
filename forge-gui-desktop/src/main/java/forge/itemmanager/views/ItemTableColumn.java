@@ -6,16 +6,21 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.itemmanager.views;
+
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.swing.table.TableColumn;
 
 import com.google.common.base.Function;
 
@@ -25,11 +30,6 @@ import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemColumnConfig;
 import forge.itemmanager.ItemColumnConfig.SortState;
 import forge.itemmanager.ItemManagerConfig;
-
-import javax.swing.table.TableColumn;
-
-import java.util.Map;
-import java.util.Map.Entry;
 
 /**
  * A column object in a EditorTableModel in the card editor.
@@ -41,15 +41,15 @@ public class ItemTableColumn extends TableColumn {
 
     private final ItemColumn itemColumn;
 
-    public ItemTableColumn(ItemColumn itemColumn0) {
+    public ItemTableColumn(final ItemColumn itemColumn0) {
         super();
 
         itemColumn = itemColumn0;
-        ColumnDef def = itemColumn.getConfig().getDef();
+        final ColumnDef def = itemColumn.getConfig().getDef();
         this.setIdentifier(def);
         this.setHeaderValue(def.shortName);
 
-        int width = itemColumn.getConfig().getPreferredWidth();
+        final int width = itemColumn.getConfig().getPreferredWidth();
         this.setPreferredWidth(width);
         if (def.isWidthFixed) {
             this.setMinWidth(width);
@@ -102,7 +102,7 @@ public class ItemTableColumn extends TableColumn {
         return itemColumn.getConfig().isVisible();
     }
 
-    public void setVisible(boolean visible0) {
+    public void setVisible(final boolean visible0) {
         itemColumn.getConfig().setVisible(visible0);
     }
 
@@ -125,7 +125,7 @@ public class ItemTableColumn extends TableColumn {
     public void endResize() {
         //restore min/max width after resize to prevent table auto-scaling fixed width columns
         if (itemColumn.getConfig().getDef().isWidthFixed) {
-            int width = this.getWidth();
+            final int width = this.getWidth();
             this.setMinWidth(width);
             this.setMaxWidth(width);
         }
@@ -140,13 +140,13 @@ public class ItemTableColumn extends TableColumn {
         return itemColumn.toString();
     }
 
-    public static void addColOverride(ItemManagerConfig config, Map<ColumnDef, ItemTableColumn> colOverrides, ColumnDef colDef) {
-        ItemColumnConfig colConfig = config.getCols().get(colDef);
+    public static void addColOverride(final ItemManagerConfig config, final Map<ColumnDef, ItemTableColumn> colOverrides, final ColumnDef colDef) {
+        final ItemColumnConfig colConfig = config.getCols().get(colDef);
         addColOverride(config, colOverrides, colDef, colConfig.getFnSort(), colConfig.getFnDisplay());
     }
-    public static void addColOverride(ItemManagerConfig config, Map<ColumnDef, ItemTableColumn> colOverrides, ColumnDef colDef,
-            Function<Entry<InventoryItem, Integer>, Comparable<?>> fnSort0,
-            Function<Entry<? extends InventoryItem, Integer>, Object> fnDisplay0) {
+    public static void addColOverride(final ItemManagerConfig config, final Map<ColumnDef, ItemTableColumn> colOverrides, final ColumnDef colDef,
+            final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnSort0,
+            final Function<Entry<? extends InventoryItem, Integer>, Object> fnDisplay0) {
         colOverrides.put(colDef, new ItemTableColumn(new ItemColumn(config.getCols().get(colDef), fnSort0, fnDisplay0)));
     }
 }

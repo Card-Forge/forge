@@ -1,18 +1,21 @@
 package forge.gui;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.AbstractListModel;
+import javax.swing.ListModel;
+
+import com.google.common.collect.Lists;
 
 @SuppressWarnings("serial")
 public class UnsortedListModel<T> extends AbstractListModel<T> {
-    List<T> model;
+    final List<T> model;
 
     public UnsortedListModel() {
-        model = new ArrayList<T>();
+        model = Lists.newArrayList();
     }
 
     @Override
@@ -21,25 +24,17 @@ public class UnsortedListModel<T> extends AbstractListModel<T> {
     }
 
     @Override
-    public T getElementAt(int index) {
+    public T getElementAt(final int index) {
         return model.get(index);
     }
 
-    public void add(T element) {
+    public void add(final T element) {
         model.add(element);
         fireIntervalAdded(this, getSize() - 1, getSize() - 1);
         fireContentsChanged(this, 0, getSize() - 1);
     }
 
-    public void addAll(T[] elements) {
-        for (T e : elements) {
-            model.add(e);
-        }
-        fireIntervalAdded(this, getSize() - elements.length, getSize() - 1);
-        fireContentsChanged(this, 0, getSize() - 1);
-    }
-
-    public void addAll(Collection<T> elements) {
+    public void addAll(final Collection<T> elements) {
         if (elements.isEmpty()) {
             return;
         }
@@ -48,23 +43,23 @@ public class UnsortedListModel<T> extends AbstractListModel<T> {
         fireContentsChanged(this, 0, getSize() - 1);
     }
 
-    public void addAll(ListModel<T> otherModel) {
-        Collection<T> elements = new ArrayList<T>();
-        int size = otherModel.getSize();
+    public void addAll(final ListModel<T> otherModel) {
+        final Collection<T> elements = new ArrayList<T>();
+        final int size = otherModel.getSize();
         for (int i = 0; size > i; ++i) {
-            elements.add((T)otherModel.getElementAt(i));
+            elements.add(otherModel.getElementAt(i));
         }
         addAll(elements);
     }
 
     public void clear() {
-        int prevSize = getSize();
+        final int prevSize = getSize();
         model.clear();
         fireIntervalRemoved(this, 0, prevSize - 1);
         fireContentsChanged(this, 0, prevSize - 1);
     }
 
-    public boolean contains(Object element) {
+    public boolean contains(final Object element) {
         return model.contains(element);
     }
 
@@ -72,7 +67,7 @@ public class UnsortedListModel<T> extends AbstractListModel<T> {
         return model.iterator();
     }
 
-    public void removeElement(int idx) {
+    public void removeElement(final int idx) {
         model.remove(idx);
         fireIntervalRemoved(this, idx, idx);
         fireContentsChanged(this, 0, getSize());

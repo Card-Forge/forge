@@ -6,16 +6,28 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.limited;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.NoSuchElementException;
+import java.util.Stack;
+import java.util.TreeMap;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.common.base.Supplier;
 
@@ -30,8 +42,8 @@ import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.model.CardBlock;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
 import forge.properties.ForgeConstants;
+import forge.properties.ForgePreferences;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
 import forge.util.ItemPool;
@@ -39,16 +51,8 @@ import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
 
-import org.apache.commons.lang3.ArrayUtils;
-
-import java.io.File;
-import java.util.*;
-import java.util.Map.Entry;
-
 /**
- * 
  * Booster Draft Format.
- * 
  */
 public class BoosterDraft implements IBoosterDraft {
     private final BoosterDraftAI draftAI = new BoosterDraftAI();
@@ -67,7 +71,7 @@ public class BoosterDraft implements IBoosterDraft {
     protected final List<Supplier<List<PaperCard>>> product = new ArrayList<Supplier<List<PaperCard>>>();
 
     public static BoosterDraft createDraft(final LimitedPoolType draftType) {
-        BoosterDraft draft = new BoosterDraft(draftType);
+        final BoosterDraft draft = new BoosterDraft(draftType);
         if (!draft.generateProduct()) { return null; }
         return draft;
     }
@@ -75,7 +79,7 @@ public class BoosterDraft implements IBoosterDraft {
     protected boolean generateProduct() {
         switch (this.draftFormat) {
         case Full: // Draft from all cards in Forge
-            Supplier<List<PaperCard>> s = new UnOpenedProduct(SealedProduct.Template.genericBooster);
+            final Supplier<List<PaperCard>> s = new UnOpenedProduct(SealedProduct.Template.genericBooster);
 
             for (int i = 0; i < 3; i++) {
                 this.product.add(s);
@@ -85,11 +89,12 @@ public class BoosterDraft implements IBoosterDraft {
 
         case Block: // Draft from cards by block or set
         case FantasyBlock:
-            List<CardBlock> blocks = new ArrayList<CardBlock>();
-            IStorage<CardBlock> storage = this.draftFormat == LimitedPoolType.Block
-                    ? FModel.getBlocks() : FModel.getFantasyBlocks();
+            final List<CardBlock> blocks = new ArrayList<CardBlock>();
+            final IStorage<CardBlock> storage = this.draftFormat == LimitedPoolType.Block
+                    ? FModel.getBlocks()
+                    : FModel.getFantasyBlocks();
 
-            for (CardBlock b : storage) {
+            for (final CardBlock b : storage) {
                 if (b.getCntBoostersDraft() > 0) {
                     blocks.add(b);
                 }
@@ -109,7 +114,7 @@ public class BoosterDraft implements IBoosterDraft {
                 sets.add(cardSets.get(k).getCode());
             }
 
-            for (String setCode : block.getMetaSetNames()) {
+            for (final String setCode : block.getMetaSetNames()) {
                 if (block.getMetaSet(setCode).isDraftable()) {
                     sets.push(setCode); // to the beginning
                 }
@@ -127,7 +132,7 @@ public class BoosterDraft implements IBoosterDraft {
                 }
             }
             else {
-                IUnOpenedProduct product1 = block.getBooster(sets.get(0));
+                final IUnOpenedProduct product1 = block.getBooster(sets.get(0));
 
                 for (int i = 0; i < nPacks; i++) {
                     this.product.add(product1);
@@ -138,7 +143,7 @@ public class BoosterDraft implements IBoosterDraft {
             break;
 
         case Custom:
-            final List<CustomLimited> myDrafts = this.loadCustomDrafts();
+            final List<CustomLimited> myDrafts = loadCustomDrafts();
 
             if (myDrafts.isEmpty()) {
                 SOptionPane.showMessageDialog("No custom draft files found.");
@@ -159,9 +164,9 @@ public class BoosterDraft implements IBoosterDraft {
         return true;
     }
 
-    public static BoosterDraft createDraft(final LimitedPoolType draftType, final CardBlock block, final String[] boosters) {   
-        BoosterDraft draft = new BoosterDraft(draftType);
-        
+    public static BoosterDraft createDraft(final LimitedPoolType draftType, final CardBlock block, final String[] boosters) {
+        final BoosterDraft draft = new BoosterDraft(draftType);
+
         final int nPacks = boosters.length;
 
         for (int i = 0; i < nPacks; i++) {
@@ -198,7 +203,7 @@ public class BoosterDraft implements IBoosterDraft {
 
         final SealedProduct.Template tpl = draft.getSealedProductTemplate();
 
-        UnOpenedProduct toAdd = new UnOpenedProduct(tpl, dPool);
+        final UnOpenedProduct toAdd = new UnOpenedProduct(tpl, dPool);
         toAdd.setLimitedPool(draft.isSingleton());
         for (int i = 0; i < draft.getNumPacks(); i++) {
             this.product.add(toAdd);
@@ -208,7 +213,7 @@ public class BoosterDraft implements IBoosterDraft {
     }
 
     /** Looks for draft files, reads them, returns a list. */
-    private List<CustomLimited> loadCustomDrafts() {
+    private static List<CustomLimited> loadCustomDrafts() {
         String[] dList;
         final ArrayList<CustomLimited> customs = new ArrayList<CustomLimited>();
 
@@ -237,7 +242,7 @@ public class BoosterDraft implements IBoosterDraft {
      * <p>
      * nextChoice.
      * </p>
-     * 
+     *
      * @return a {@link forge.deck.CardPool} object.
      */
     @Override
@@ -247,7 +252,7 @@ public class BoosterDraft implements IBoosterDraft {
         }
 
         this.computerChoose();
-        CardPool result = new CardPool();
+        final CardPool result = new CardPool();
         result.addAllFlat(this.pack.get(this.getCurrentBoosterIndex()));
         return result;
     }
@@ -256,7 +261,7 @@ public class BoosterDraft implements IBoosterDraft {
      * <p>
      * get8BoosterPack.
      * </p>
-     * 
+     *
      * @return an array of {@link forge.deck.CardPool} objects.
      */
     public List<List<PaperCard>> get8BoosterPack() {
@@ -281,7 +286,7 @@ public class BoosterDraft implements IBoosterDraft {
      * <p>
      * getDecks.
      * </p>
-     * 
+     *
      * @return an array of {@link forge.deck.Deck} objects.
      */
     @Override
@@ -305,7 +310,7 @@ public class BoosterDraft implements IBoosterDraft {
     } // computerChoose()
 
     /**
-     * 
+     *
      * Get the current booster index.
      * @return int
      */
@@ -317,7 +322,7 @@ public class BoosterDraft implements IBoosterDraft {
      * <p>
      * hasNextChoice.
      * </p>
-     * 
+     *
      * @return a boolean.
      */
     @Override
@@ -374,8 +379,8 @@ public class BoosterDraft implements IBoosterDraft {
             return;
         }
 
-        ArrayList<String> outDraftData = new ArrayList<String>();
-        for (Entry<String, Float> key : draftPicks.entrySet()) {
+        final List<String> outDraftData = new ArrayList<String>();
+        for (final Entry<String, Float> key : draftPicks.entrySet()) {
             outDraftData.add(key.getValue() + "|" + key.getKey());
         }
         Collections.sort(outDraftData);
@@ -388,8 +393,8 @@ public class BoosterDraft implements IBoosterDraft {
     }
 
     private static List<String> getSetCombos(final List<String> setz) {
-        String[] sets = setz.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
-        List<String> setCombos = new ArrayList<String>();
+        final String[] sets = setz.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+        final List<String> setCombos = new ArrayList<String>();
         if (sets.length >= 2) {
             setCombos.add(String.format("%s/%s/%s", sets[0], sets[0], sets[0]));
             setCombos.add(String.format("%s/%s/%s", sets[0], sets[0], sets[1]));

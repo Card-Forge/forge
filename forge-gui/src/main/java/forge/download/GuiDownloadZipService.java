@@ -26,7 +26,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
     private final String name, desc, sourceUrl, destFolder, deleteFolder;
     private int filesExtracted;
 
-    public GuiDownloadZipService(String name0, String desc0, String sourceUrl0, String destFolder0, String deleteFolder0, IProgressBar progressBar0) {
+    public GuiDownloadZipService(final String name0, final String desc0, final String sourceUrl0, final String destFolder0, final String deleteFolder0, final IProgressBar progressBar0) {
         name = name0;
         desc = desc0;
         sourceUrl = sourceUrl0;
@@ -47,7 +47,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
 
     @Override
     protected final Map<String, String> getNeededFiles() {
-        HashMap<String, String> files = new HashMap<String, String>();
+        final Map<String, String> files = new HashMap<String, String>();
         files.put("_", "_");
         return files; //not needed by zip service, so just return map of size 1
     }
@@ -74,13 +74,13 @@ public class GuiDownloadZipService extends GuiDownloadService {
         //if assets.zip downloaded successfully, unzip into destination folder
         try {
             if (deleteFolder != null) {
-                File deleteDir = new File(deleteFolder);
+                final File deleteDir = new File(deleteFolder);
                 if (deleteDir.exists()) {
                     //attempt to delete previous res directory if to be rebuilt
                     progressBar.reset();
                     progressBar.setDescription("Deleting old " + desc + "...");
                     if (deleteFolder.equals(destFolder)) { //move zip file to prevent deleting it
-                        String oldZipFilename = zipFilename;
+                        final String oldZipFilename = zipFilename;
                         zipFilename = deleteDir.getParentFile().getAbsolutePath() + File.separator + "temp.zip";
                         Files.move(new File(oldZipFilename), new File(zipFilename));
                     }
@@ -88,8 +88,8 @@ public class GuiDownloadZipService extends GuiDownloadService {
                 }
             }
 
-            ZipFile zipFile = new ZipFile(zipFilename);
-            Enumeration<? extends ZipEntry> entries = zipFile.entries();
+            final ZipFile zipFile = new ZipFile(zipFilename);
+            final Enumeration<? extends ZipEntry> entries = zipFile.entries();
 
             progressBar.reset();
             progressBar.setPercentMode(true);
@@ -104,9 +104,9 @@ public class GuiDownloadZipService extends GuiDownloadService {
                 if (cancel) { break; }
 
                 try {
-                    ZipEntry entry = (ZipEntry)entries.nextElement();
+                    final ZipEntry entry = entries.nextElement();
 
-                    String path = destFolder + entry.getName();
+                    final String path = destFolder + entry.getName();
                     if (entry.isDirectory()) {
                         new File(path).mkdir();
                         progressBar.setValue(++count);
@@ -116,7 +116,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
                     progressBar.setValue(++count);
                     filesExtracted++;
                 }
-                catch (Exception e) { //don't quit out completely if an entry is not UTF-8
+                catch (final Exception e) { //don't quit out completely if an entry is not UTF-8
                     progressBar.setValue(++count);
                     failedCount++;
                 }
@@ -129,19 +129,19 @@ public class GuiDownloadZipService extends GuiDownloadService {
             zipFile.close();
             new File(zipFilename).delete();
         }
-        catch (Exception e) {
+        catch (final Exception e) {
             e.printStackTrace();
         }
     }
 
-    public String download(String filename) {
+    public String download(final String filename) {
         progressBar.reset();
         progressBar.setPercentMode(true);
         progressBar.setDescription("Downloading " + desc);
 
         try {
-            URL url = new URL(sourceUrl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection(getProxy());
+            final URL url = new URL(sourceUrl);
+            final HttpURLConnection conn = (HttpURLConnection) url.openConnection(getProxy());
 
             if (url.getPath().endsWith(".php")) {
                 //ensure file can be downloaded if returned from PHP script
@@ -154,7 +154,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
                 return null;
             }
 
-            long contentLength = conn.getContentLength();
+            final long contentLength = conn.getContentLength();
             if (contentLength == 0) {
                 return null;
             }
@@ -162,18 +162,18 @@ public class GuiDownloadZipService extends GuiDownloadService {
             progressBar.setMaximum(100);
 
             // input stream to read file - with 8k buffer
-            InputStream input = new BufferedInputStream(conn.getInputStream(), 8192);
+            final InputStream input = new BufferedInputStream(conn.getInputStream(), 8192);
 
             FileUtil.ensureDirectoryExists(destFolder);
- 
+
             // output stream to write file
-            String destFile = destFolder + filename;
-            OutputStream output = new FileOutputStream(destFile);
- 
+            final String destFile = destFolder + filename;
+            final OutputStream output = new FileOutputStream(destFile);
+
             int count;
             long total = 0;
-            byte data[] = new byte[1024];
- 
+            final byte data[] = new byte[1024];
+
             while ((count = input.read(data)) != -1) {
                 if (cancel) { break; }
 
@@ -181,7 +181,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
                 progressBar.setValue((int)(100 * total / contentLength));
                 output.write(data, 0, count);
             }
- 
+
             output.flush();
             output.close();
             input.close();
@@ -198,10 +198,10 @@ public class GuiDownloadZipService extends GuiDownloadService {
         return null;
     }
 
-    protected void copyInputStream(InputStream in, String outPath) throws IOException{
-        byte[] buffer = new byte[1024];
+    protected void copyInputStream(final InputStream in, final String outPath) throws IOException{
+        final byte[] buffer = new byte[1024];
         int len;
-        BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(outPath));
+        final BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(outPath));
 
         while((len = in.read(buffer)) >= 0) {
             out.write(buffer, 0, len);

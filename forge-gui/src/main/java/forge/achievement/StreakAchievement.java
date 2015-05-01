@@ -8,15 +8,12 @@ import forge.game.player.Player;
 public abstract class StreakAchievement extends Achievement {
     private int current;
 
-    protected StreakAchievement(String key0, String displayName0, String description0, String flavorText0) {
-        super(key0, displayName0, description0, flavorText0, 0);
-    }
     //use this constructor for regular tiered achievements
-    protected StreakAchievement(String key0, String displayName0, String sharedDesc0,
-            String commonDesc0, int commonThreshold0,
-            String uncommonDesc0, int uncommonThreshold0,
-            String rareDesc0, int rareThreshold0,
-            String mythicDesc0, int mythicThreshold0) {
+    protected StreakAchievement(final String key0, final String displayName0, final String sharedDesc0,
+            final String commonDesc0, final int commonThreshold0,
+            final String uncommonDesc0, final int uncommonThreshold0,
+            final String rareDesc0, final int rareThreshold0,
+            final String mythicDesc0, final int mythicThreshold0) {
         super(key0, displayName0, sharedDesc0, 0, commonDesc0, commonThreshold0,
                 uncommonDesc0, uncommonThreshold0, rareDesc0, rareThreshold0,
                 mythicDesc0, mythicThreshold0);
@@ -25,8 +22,8 @@ public abstract class StreakAchievement extends Achievement {
     protected abstract Boolean eval(Player player, Game game);
 
     @Override
-    protected final int evaluate(Player player, Game game) {
-        Boolean val = eval(player, game);
+    protected final int evaluate(final Player player, final Game game) {
+        final Boolean val = eval(player, game);
         if (val != null) { //null means don't increment or reset
             if (val) {
                 current++;
@@ -48,13 +45,13 @@ public abstract class StreakAchievement extends Achievement {
     }
 
     @Override
-    public void saveToXml(Element el) {
+    public void saveToXml(final Element el) {
         super.saveToXml(el);
         el.setAttribute("current", String.valueOf(current));
     }
 
     @Override
-    public void loadFromXml(Element el) {
+    public void loadFromXml(final Element el) {
         super.loadFromXml(el);
         current = getIntAttribute(el, "current");
     }

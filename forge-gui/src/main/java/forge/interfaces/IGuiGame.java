@@ -68,24 +68,18 @@ public interface IGuiGame {
 
     String showInputDialog(String message, String title);
     String showInputDialog(String message, String title, FSkinProp icon);
-    String showInputDialog(String message, String title, FSkinProp icon,
-            String initialInput);
-    String showInputDialog(String message, String title, FSkinProp icon,
-            String initialInput, String[] inputOptions);
+    String showInputDialog(String message, String title, FSkinProp icon, String initialInput);
+    String showInputDialog(String message, String title, FSkinProp icon, String initialInput, String[] inputOptions);
 
     boolean confirm(CardView c, String question);
-    boolean confirm(CardView c, String question, boolean defaultChoice);
     boolean confirm(CardView c, String question, String[] options);
     boolean confirm(CardView c, String question, boolean defaultIsYes, String[] options);
 
     <T> List<T> getChoices(String message, int min, int max, T[] choices);
-    <T> List<T> getChoices(String message, int min, int max,
-            Collection<T> choices);
-    <T> List<T> getChoices(String message, int min, int max,
-            Collection<T> choices, T selected, Function<T, String> display);
+    <T> List<T> getChoices(String message, int min, int max, Collection<T> choices);
+    <T> List<T> getChoices(String message, int min, int max, Collection<T> choices, T selected, Function<T, String> display);
 
     // Get Integer in range
-    Integer getInteger(String message);
     Integer getInteger(String message, int min);
     Integer getInteger(String message, int min, int max);
     Integer getInteger(String message, int min, int max, boolean sortDesc);
@@ -93,7 +87,7 @@ public interface IGuiGame {
 
     /**
      * Convenience for getChoices(message, 0, 1, choices).
-     * 
+     *
      * @param <T>
      *            is automatically inferred.
      * @param message
@@ -108,50 +102,47 @@ public interface IGuiGame {
     <T> T oneOrNone(String message, T[] choices);
     <T> T oneOrNone(String message, Collection<T> choices);
 
-    // returned Object will never be null
     /**
      * <p>
      * getChoice.
      * </p>
-     * 
+     *
      * @param <T>
      *            a T object.
      * @param message
      *            a {@link java.lang.String} object.
      * @param choices
      *            a T object.
-     * @return a T object.
+     * @return One of {@code choices}. Can only be {@code null} if {@code choices} is empty.
      */
     <T> T one(String message, T[] choices);
     <T> T one(String message, Collection<T> choices);
-    <T> List<T> noneOrMany(String message, Collection<T> choices);
 
-    <T> void reveal(String message, T item);
-    <T> void reveal(String message, T[] items);
     <T> void reveal(String message, Collection<T> items);
 
-    <T> List<T> many(String title, String topCaption, int min, int max,
-            List<T> sourceChoices);
-    <T> List<T> many(String title, String topCaption, int cnt,
-            List<T> sourceChoices);
-    <T> List<T> many(String title, String topCaption, int cnt,
-            List<T> sourceChoices, CardView c);
-    <T> List<T> many(String title, String topCaption, int min, int max,
-            List<T> sourceChoices, CardView c);
+    <T> List<T> many(String title, String topCaption, int cnt, List<T> sourceChoices, CardView c);
+    <T> List<T> many(String title, String topCaption, int min, int max, List<T> sourceChoices, CardView c);
 
-    <T> List<T> order(String title, String top, List<T> sourceChoices);
     <T> List<T> order(String title, String top, List<T> sourceChoices, CardView c);
-    <T> List<T> order(String title, String top, int remainingObjectsMin,
-            int remainingObjectsMax, List<T> sourceChoices,
-            List<T> destChoices, CardView referenceCard,
-            boolean sideboardingMode);
+    <T> List<T> order(String title, String top, int remainingObjectsMin, int remainingObjectsMax, List<T> sourceChoices, List<T> destChoices, CardView referenceCard, boolean sideboardingMode);
+
+    /**
+     * Ask the user to insert an object into a list of other objects. The
+     * current implementation requires the user to cancel in order to get the
+     * new item to be the first item in the resulting list.
+     *
+     * @param title
+     *            the dialog title.
+     * @param newItem
+     *            the object to insert.
+     * @param oldItems
+     *            the list of objects.
+     * @return A shallow copy of the list of objects, with newItem inserted.
+     */
     <T> List<T> insertInList(String title, T newItem, List<T> oldItems);
 
     List<PaperCard> sideboard(CardPool sideboard, CardPool main);
-    GameEntityView chooseSingleEntityForEffect(String title,
-            Collection<? extends GameEntityView> optionList,
-            DelayedReveal delayedReveal, boolean isOptional);
-    void setCard(CardView card);
+    GameEntityView chooseSingleEntityForEffect(String title, Collection<? extends GameEntityView> optionList, DelayedReveal delayedReveal, boolean isOptional); void setCard(CardView card);
     void setPlayerAvatar(LobbyPlayer player, IHasIcon ihi);
     boolean openZones(Collection<ZoneType> zones, Map<PlayerView, Object> players);
     void restoreOldZones(Map<PlayerView, Object> playersToRestoreZonesFor);
@@ -170,7 +161,6 @@ public interface IGuiGame {
     void setShouldAutoYield(String key, boolean autoYield);
     boolean shouldAlwaysAcceptTrigger(int trigger);
     boolean shouldAlwaysDeclineTrigger(int trigger);
-    boolean shouldAlwaysAskTrigger(int trigger);
     void setShouldAlwaysAcceptTrigger(int trigger);
     void setShouldAlwaysDeclineTrigger(int trigger);
     void setShouldAlwaysAskTrigger(int trigger);

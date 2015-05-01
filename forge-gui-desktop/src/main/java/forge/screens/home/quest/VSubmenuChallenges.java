@@ -1,17 +1,29 @@
 package forge.screens.home.quest;
 
+import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+
+import net.miginfocom.swing.MigLayout;
 import forge.assets.FSkinProp;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.quest.IVQuestStats;
-import forge.screens.home.*;
-import forge.toolbox.*;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-
-import java.awt.*;
+import forge.screens.home.EMenuGroup;
+import forge.screens.home.IVSubmenu;
+import forge.screens.home.LblHeader;
+import forge.screens.home.StartButton;
+import forge.screens.home.VHomeUI;
+import forge.toolbox.FCheckBox;
+import forge.toolbox.FComboBoxWrapper;
+import forge.toolbox.FLabel;
+import forge.toolbox.FScrollPanel;
+import forge.toolbox.FSkin;
 
 /**
  * Assembles Swing components of quest challenges submenu singleton.
@@ -268,7 +280,7 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
      * @see forge.gui.framework.IVDoc#setParentCell(forge.gui.framework.DragCell)
      */
     @Override
-    public void setParentCell(DragCell cell0) {
+    public void setParentCell(final DragCell cell0) {
         this.parentCell = cell0;
     }
 
@@ -280,12 +292,13 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
         return parentCell;
     }
 
-	/**
-	 * @return the cbCharm
-	 */
-	public FCheckBox getCbCharm() {
-		return cbCharm;
-	}
+    /**
+     * @return the cbCharm
+     */
+    @Override
+    public FCheckBox getCbCharm() {
+        return cbCharm;
+    }
 
     @Override
     public FLabel getBtnRandomOpponent() {

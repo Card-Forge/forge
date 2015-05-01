@@ -22,6 +22,7 @@ public class AudioMusic implements IAudioMusic {
         filename = filename0;
     }
 
+    @Override
     public void play(final Runnable onComplete0) {
         onComplete = onComplete0;
         play(-1);
@@ -46,19 +47,17 @@ public class AudioMusic implements IAudioMusic {
                     }
                 }
             });
-            new Thread(
-                    new Runnable(){
-                        public void run(){
-                            try {
-                                musicPlayer.play();
-                            }
-                            catch (Exception e){
-                                e.printStackTrace();
-                                valid = false;
-                            }
-                        }
+            new Thread(new Runnable(){
+                @Override public void run(){
+                    try {
+                        musicPlayer.play();
                     }
-            ).start();
+                    catch (Exception e){
+                        e.printStackTrace();
+                        valid = false;
+                    }
+                }
+            }).start();
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -67,6 +66,7 @@ public class AudioMusic implements IAudioMusic {
         return valid;
     }
 
+    @Override
     public void pause() {
         if (musicPlayer == null) { return; }
 
@@ -90,6 +90,7 @@ public class AudioMusic implements IAudioMusic {
         musicPlayer = null;
     }
 
+    @Override
     public void resume() {
         if (!canResume) { return; }
 
@@ -98,6 +99,7 @@ public class AudioMusic implements IAudioMusic {
         }
     }
 
+    @Override
     public void stop() {
         if (musicPlayer == null) { return; }
 
@@ -105,6 +107,7 @@ public class AudioMusic implements IAudioMusic {
         musicPlayer.stop();
     }
 
+    @Override
     public void dispose() {
         if (musicPlayer == null) { return; }
 

@@ -25,15 +25,15 @@ public abstract class Achievement {
     private int best;
 
     //use this constructor for special achievements without tiers
-    protected Achievement(String key0, String displayName0, String description0, String flavorText0, int defaultValue0) {
+    protected Achievement(final String key0, final String displayName0, final String description0, final String flavorText0, final int defaultValue0) {
         this(key0, displayName0, description0, defaultValue0, null, 1, null, 1, null, 1, "(" + flavorText0 + ")", 1); //pass flavor text as mythic description so it appears below description faded out
     }
     //use this constructor for regular tiered achievements
-    protected Achievement(String key0, String displayName0, String sharedDesc0, int defaultValue0,
-            String commonDesc0, int commonThreshold0,
-            String uncommonDesc0, int uncommonThreshold0,
-            String rareDesc0, int rareThreshold0,
-            String mythicDesc0, int mythicThreshold0) {
+    protected Achievement(final String key0, final String displayName0, final String sharedDesc0, final int defaultValue0,
+            final String commonDesc0, final int commonThreshold0,
+            final String uncommonDesc0, final int uncommonThreshold0,
+            final String rareDesc0, final int rareThreshold0,
+            final String mythicDesc0, final int mythicThreshold0) {
         key = key0;
         displayName = displayName0;
         sharedDesc = sharedDesc0;
@@ -152,18 +152,18 @@ public abstract class Achievement {
         image = GuiBase.getInterface().createLayeredImage(background, ForgeConstants.CACHE_ACHIEVEMENTS_DIR + "/" + key + ".png", opacity);
     }
 
-    public int update(Player player) {
-        int value = evaluate(player, player.getGame());
+    public int update(final Player player) {
+        final int value = evaluate(player, player.getGame());
         if (checkGreaterThan) {
             if (value <= best) { return value; }
         }
         else if (value >= best) { return value; }
 
-        boolean hadEarnedSpecial = earnedSpecial();
-        boolean hadEarnedMythic = earnedMythic();
-        boolean hadEarnedRare = earnedRare();
-        boolean hadEarnedUncommon = earnedUncommon();
-        boolean hadEarnedCommon = earnedCommon();
+        final boolean hadEarnedSpecial = earnedSpecial();
+        final boolean hadEarnedMythic = earnedMythic();
+        final boolean hadEarnedRare = earnedRare();
+        final boolean hadEarnedUncommon = earnedUncommon();
+        final boolean hadEarnedCommon = earnedCommon();
 
         best = value;
         timestamp = new Date().getTime();
@@ -216,39 +216,39 @@ public abstract class Achievement {
         return best != defaultValue;
     }
 
-    public void saveToXml(Element el) {
+    public void saveToXml(final Element el) {
         el.setAttribute("best", String.valueOf(best));
         el.setAttribute("time", String.valueOf(timestamp));
     }
 
-    public void loadFromXml(Element el) {
+    public void loadFromXml(final Element el) {
         best = getIntAttribute(el, "best");
         timestamp = getLongAttribute(el, "time");
         best = performConversion(best, timestamp);
     }
 
     //give derived classes a chance to perform a conversion if needed
-    protected int performConversion(int value, long timestamp) {
+    protected int performConversion(final int value, final long timestamp) {
         return value;
     }
 
-    protected int getIntAttribute(Element el, String name) {
-        String value = el.getAttribute(name);
+    protected int getIntAttribute(final Element el, final String name) {
+        final String value = el.getAttribute(name);
         if (value.length() > 0) {
             try {
                 return Integer.parseInt(value);
             }
-            catch (Exception ex) {}
+            catch (final Exception ex) {}
         }
         return 0;
     }
-    protected long getLongAttribute(Element el, String name) {
-        String value = el.getAttribute(name);
+    protected long getLongAttribute(final Element el, final String name) {
+        final String value = el.getAttribute(name);
         if (value.length() > 0) {
             try {
                 return Long.parseLong(value);
             }
-            catch (Exception ex) {}
+            catch (final Exception ex) {}
         }
         return 0;
     }
@@ -265,11 +265,11 @@ public abstract class Achievement {
     protected final String getFormattedTimestamp() {
         if (timestamp == 0) { return null; }
 
-        DateFormat formatter = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.getDefault());
+        final DateFormat formatter = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.getDefault());
         return formatter.format(new Date(timestamp));
     }
 
-    public String getSubTitle(boolean includeTimestamp) {
+    public String getSubTitle(final boolean includeTimestamp) {
         if (best == defaultValue) { return null; }
 
         String subTitle;
@@ -280,7 +280,7 @@ public abstract class Achievement {
             subTitle = "Best: " + best + " " + (pluralizeNoun() ? Lang.getPlural(getNoun()) : getNoun());
         }
         if (includeTimestamp) {
-            String formattedTimestamp = getFormattedTimestamp();
+            final String formattedTimestamp = getFormattedTimestamp();
             if (formattedTimestamp != null) {
                 subTitle += " (" + formattedTimestamp + ")";
             }

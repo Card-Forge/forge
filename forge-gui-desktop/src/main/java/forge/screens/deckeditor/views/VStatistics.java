@@ -1,5 +1,10 @@
 package forge.screens.deckeditor.views;
 
+import java.awt.Font;
+
+import javax.swing.JPanel;
+
+import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -10,13 +15,8 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
-import net.miginfocom.swing.MigLayout;
 
-import javax.swing.*;
-
-import java.awt.*;
-
-/** 
+/**
  * Assembles Swing components of deck editor analysis tab.
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
@@ -279,7 +279,7 @@ public enum VStatistics implements IVDoc<CStatistics> {
 
     //========== Other methods
 
-    private FLabel buildLabel(SkinImage icon, boolean zebra) {
+    private static FLabel buildLabel(final SkinImage icon, final boolean zebra) {
         final FLabel lbl = new FLabel.Builder().text("0 (0%)")
                 .icon(icon).iconScaleAuto(false)
                 .fontSize(11).build();
@@ -291,8 +291,8 @@ public enum VStatistics implements IVDoc<CStatistics> {
 
         return lbl;
     }
-    
-    private FLabel buildLabel(StatTypes statType, boolean zebra) {
+
+    private static FLabel buildLabel(final StatTypes statType, final boolean zebra) {
         return buildLabel(FSkin.getImage(statType.skinProp, 18, 18), zebra);
     }
 }

@@ -1,9 +1,12 @@
 package forge.screens.deckeditor.controllers;
 
+import java.util.Map.Entry;
+
+import javax.swing.JLabel;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
-import forge.UiCommand;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.MagicColor;
@@ -16,14 +19,9 @@ import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.views.VStatistics;
 import forge.util.ItemPool;
 
-import javax.swing.*;
-
-import java.util.Map.Entry;
-
-
-/** 
+/**
  * Controls the "analysis" panel in the deck editor UI.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
@@ -32,14 +30,6 @@ public enum CStatistics implements ICDoc {
     SINGLETON_INSTANCE;
 
     //========== Overridden methods
-
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
-    }
 
     @Override
     public void register() {
@@ -60,8 +50,8 @@ public enum CStatistics implements ICDoc {
         analyze();
     }
 
-    private void setLabelValue(JLabel label, ItemPool<PaperCard> deck, Predicate<CardRules> predicate, int total) {
-        int tmp = deck.countAll(Predicates.compose(predicate, PaperCard.FN_GET_RULES));
+    private void setLabelValue(final JLabel label, final ItemPool<PaperCard> deck, final Predicate<CardRules> predicate, final int total) {
+        final int tmp = deck.countAll(Predicates.compose(predicate, PaperCard.FN_GET_RULES));
         label.setText(tmp + " (" + calculatePercentage(tmp, total) + "%)");
     }
 
@@ -76,7 +66,7 @@ public enum CStatistics implements ICDoc {
         final ItemPool<PaperCard> deck = ItemPool.createFrom(ed.getDeckManager().getPool(), PaperCard.class);
 
         int total = deck.countAll();
-        int[] shardCount = calculateShards(deck);
+        final int[] shardCount = calculateShards(deck);
 
         // Hack-ish: avoid /0 cases, but still populate labels :)
         if (total == 0) { total = 1; }
@@ -115,7 +105,7 @@ public enum CStatistics implements ICDoc {
         for (final Entry<PaperCard, Integer> e : deck) {
             tmc += e.getKey().getRules().getManaCost().getCMC() * e.getValue();
         }
-        double amc = Math.round((double) tmc / (double) total * 100) / 100.0d;
+        final double amc = Math.round((double) tmc / (double) total * 100) / 100.0d;
 
         VStatistics.SINGLETON_INSTANCE.getLblTotal().setText("TOTAL CARDS: " + deck.countAll());
         VStatistics.SINGLETON_INSTANCE.getLblTMC().setText("TOTAL MANA COST: " + tmc);
@@ -124,7 +114,7 @@ public enum CStatistics implements ICDoc {
 
     /**
      * Divides X by Y, multiplies by 100, rounds, returns.
-     * 
+     *
      * @param x0 &emsp; Numerator (int)
      * @param y0 &emsp; Denominator (int)
      * @return rounded result (int)
@@ -133,10 +123,10 @@ public enum CStatistics implements ICDoc {
         return (int) Math.round((double) (x0 * 100) / (double) y0);
     }
 
-    public static int[] calculateShards(ItemPool<PaperCard> deck) {
-        int[] counts = new int[5]; // in WUBRG order
-        for (PaperCard c : deck.toFlatList()) {
-            int[] cShards = c.getRules().getManaCost().getColorShardCounts();
+    public static int[] calculateShards(final ItemPool<PaperCard> deck) {
+        final int[] counts = new int[5]; // in WUBRG order
+        for (final PaperCard c : deck.toFlatList()) {
+            final int[] cShards = c.getRules().getManaCost().getColorShardCounts();
             for (int i = 0; i < 5; i++) {
                 counts[i] += cShards[i];
             }

@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.swing.JMenu;
 
-import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.menus.IMenuProvider;
 import forge.menus.MenuUtil;
@@ -13,7 +12,7 @@ import forge.screens.home.CLobby;
 
 /**
  * Controls the constructed submenu in the home UI.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
@@ -46,19 +45,11 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
-    }
-
-    /* (non-Javadoc)
      * @see forge.gui.menubar.IMenuProvider#getMenus()
      */
     @Override
     public List<JMenu> getMenus() {
-        List<JMenu> menus = new ArrayList<JMenu>();
+        final List<JMenu> menus = new ArrayList<JMenu>();
         menus.add(ConstructedGameMenu.getMenu());
         return menus;
     }

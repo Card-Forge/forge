@@ -9,7 +9,6 @@ import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.ai.AiProfileUtil;
 import forge.ai.LobbyPlayerAi;
-import forge.game.player.Player;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.GuiDisplayUtil;
@@ -43,15 +42,15 @@ public final class GamePlayerUtil {
     public final static LobbyPlayer createAiPlayer() {
         return createAiPlayer(GuiDisplayUtil.getRandomAiName());
     }
-    public final static LobbyPlayer createAiPlayer(String name) {
-        int avatarCount = GuiBase.getInterface().getAvatarCount();
+    public final static LobbyPlayer createAiPlayer(final String name) {
+        final int avatarCount = GuiBase.getInterface().getAvatarCount();
         return createAiPlayer(name, avatarCount == 0 ? 0 : MyRandom.getRandom().nextInt(avatarCount));
     }
-    public final static LobbyPlayer createAiPlayer(String name, int avatarIndex) {
+    public final static LobbyPlayer createAiPlayer(final String name, final int avatarIndex) {
         return createAiPlayer(name, avatarIndex, null);
     }
-    public final static LobbyPlayer createAiPlayer(String name, int avatarIndex, Set<AIOption> options) {
-        LobbyPlayerAi player = new LobbyPlayerAi(name, options);
+    public final static LobbyPlayer createAiPlayer(final String name, final int avatarIndex, final Set<AIOption> options) {
+        final LobbyPlayerAi player = new LobbyPlayerAi(name, options);
 
         // TODO: implement specific AI profiles for quest mode.
         String lastProfileChosen = FModel.getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
@@ -65,32 +64,20 @@ public final class GamePlayerUtil {
         return player;
     }
 
-    public Player getSingleOpponent(Player player) {
-        if (player.getGame().getRegisteredPlayers().size() == 2) {
-            for (Player p : player.getGame().getRegisteredPlayers()) {
-                if (p.isOpponentOf(player)) {
-                    return p;
-                }
-            }
-        }
-        return null;
-    }
-
     public static void setPlayerName() {
-        String oldPlayerName = FModel.getPreferences().getPref(FPref.PLAYER_NAME);
+        final String oldPlayerName = FModel.getPreferences().getPref(FPref.PLAYER_NAME);
 
         String newPlayerName;
-    	try{
-	        if (StringUtils.isBlank(oldPlayerName)) {
-	            newPlayerName = getVerifiedPlayerName(getPlayerNameUsingFirstTimePrompt(), oldPlayerName);
-	        }
-	        else {
-	            newPlayerName = getVerifiedPlayerName(getPlayerNameUsingStandardPrompt(oldPlayerName), oldPlayerName);
-	        }
-    	} catch (IllegalStateException ise){
-    		//now is not a good time for this...
-    		newPlayerName = StringUtils.isBlank(oldPlayerName) ? "Human" : oldPlayerName;
-    	}
+        try{
+            if (StringUtils.isBlank(oldPlayerName)) {
+                newPlayerName = getVerifiedPlayerName(getPlayerNameUsingFirstTimePrompt(), oldPlayerName);
+            } else {
+                newPlayerName = getVerifiedPlayerName(getPlayerNameUsingStandardPrompt(oldPlayerName), oldPlayerName);
+            }
+        } catch (final IllegalStateException ise){
+            //now is not a good time for this...
+            newPlayerName = StringUtils.isBlank(oldPlayerName) ? "Human" : oldPlayerName;
+        }
 
         FModel.getPreferences().setPref(FPref.PLAYER_NAME, newPlayerName);
         FModel.getPreferences().save();
@@ -123,7 +110,7 @@ public final class GamePlayerUtil {
                 playerName);
     }
 
-    private static String getVerifiedPlayerName(String newName, String oldName) {
+    private static String getVerifiedPlayerName(String newName, final String oldName) {
         if (newName == null || !StringUtils.isAlphanumericSpace(newName)) {
             newName = (StringUtils.isBlank(oldName) ? "Human" : oldName);
         } else if (StringUtils.isWhitespace(newName)) {

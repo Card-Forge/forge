@@ -1,14 +1,21 @@
 package forge.toolbox;
 
+import java.awt.Cursor;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.RenderingHints;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+
+import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 import forge.gui.MouseUtil;
 import forge.interfaces.ITextField;
 import forge.toolbox.FSkin.SkinnedPasswordField;
-import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import java.awt.*;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 
 /** 
  * A custom instance of JPasswordField using Forge skin properties.
@@ -16,7 +23,6 @@ import java.awt.event.FocusEvent;
  */
 @SuppressWarnings("serial")
 public class FPasswordField extends SkinnedPasswordField implements ITextField {
-    public static final int HEIGHT = 25; //TODO: calculate this somehow instead of hard-coding it
     private static final FSkin.SkinColor textColor = FSkin.getColor(FSkin.Colors.CLR_TEXT);
     private static final FSkin.SkinColor ghostTextColor = textColor.stepColor(20);
     private static final FSkin.SkinColor backColor = FSkin.getColor(FSkin.Colors.CLR_THEME2);
@@ -114,10 +120,6 @@ public class FPasswordField extends SkinnedPasswordField implements ITextField {
         if (this.isEmpty() && this.hasFocus()) {
             this.repaint();
         }
-    }
-
-    public void addChangeListener(ChangeListener listener) {
-        this.getDocument().addDocumentListener(listener);
     }
 
     public static abstract class ChangeListener implements DocumentListener {

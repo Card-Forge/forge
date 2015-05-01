@@ -6,26 +6,25 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package forge.screens.home.settings;
 
-import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 
-/** 
+/**
  * Controller for VSubmenuReleaseNotes submenu in the home UI.
- * 
+ *
  * @version $Id$
  *
  */
@@ -45,7 +44,7 @@ public enum CSubmenuReleaseNotes implements ICDoc {
      * @see forge.control.home.IControlSubmenu#update()
      */
     @Override
-    public void initialize() {       
+    public void initialize() {
         this.view = VSubmenuReleaseNotes.SINGLETON_INSTANCE;
         //this.prefs = FModel.getPreferences();
     }
@@ -54,40 +53,32 @@ public enum CSubmenuReleaseNotes implements ICDoc {
      * @see forge.control.home.IControlSubmenu#update()
      */
     @Override
-    public void update() {       
-       this.view = VSubmenuReleaseNotes.SINGLETON_INSTANCE;
-       //this.prefs = FModel.getPreferences();
-       setReleaseNotesContent();
+    public void update() {
+        this.view = VSubmenuReleaseNotes.SINGLETON_INSTANCE;
+        //this.prefs = FModel.getPreferences();
+        setReleaseNotesContent();
     }
-    
+
     private void setReleaseNotesContent() {
         if (!this.isReleaseNotesUpdated) {
             this.view.setReleaseNotesContent(getReleaseNotes());
             this.isReleaseNotesUpdated = true;
-        }        
-    }
-
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {       
-        return null;
+        }
     }
 
     /**
      * Returns content of CHANGES.txt.
      */
-    private String getReleaseNotes() {
+    private static String getReleaseNotes() {
         // !! Linux is case-sensitive so file name and extension need to match exactly !!
-        String filename = ForgeConstants.CHANGES_FILE;
-        String filePath = FileUtil.pathCombine(System.getProperty("user.dir"), filename);        
+        final String filename = ForgeConstants.CHANGES_FILE;
+        final String filePath = FileUtil.pathCombine(System.getProperty("user.dir"), filename);
         String notes;
-                
+
         if (FileUtil.doesFileExist(filePath)) {
-            notes = filePath + "\n\n" + FileUtil.readFileToString(filePath);   
+            notes = filePath + "\n\n" + FileUtil.readFileToString(filePath);
         } else {
-            notes = filePath + "\nis MISSING!";            
+            notes = filePath + "\nis MISSING!";
         }
 
         return notes;

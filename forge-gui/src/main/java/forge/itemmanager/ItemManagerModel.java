@@ -6,30 +6,34 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.itemmanager;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemColumnConfig.SortState;
 import forge.util.ItemPool;
 import forge.util.ItemPoolSorter;
 
-import java.util.*;
-import java.util.Map.Entry;
-
 /**
  * <p>
  * ItemManagerModel class.
  * </p>
- * 
+ *
  * @param <T>
  *            the generic type
  * @author Forge
@@ -44,7 +48,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
 
     /**
      * Instantiates a new list view model
-     * 
+     *
      * @param ItemManager0
      * @param genericType0
      */
@@ -67,13 +71,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
     /** Whether list is in sync. */
     protected transient boolean isListInSync = false;
 
-    /**
-     * 
-     * getOrderedList.
-     * 
-     * @return List<Entry<T, Integer>>
-     */
-    public final List<Entry<T, Integer>> getOrderedList() {
+    public List<Entry<T, Integer>> getOrderedList() {
         if (!this.isListInSync) {
             this.rebuildOrderedList();
         }
@@ -90,19 +88,13 @@ public final class ItemManagerModel<T extends InventoryItem> {
         this.isListInSync = true;
     }
 
-    /**
-     * 
-     * countDistinct.
-     * 
-     * @return int
-     */
-    public final int countDistinct() {
+    public int countDistinct() {
         return this.data.countDistinct();
     }
 
     /**
      * Gets all items in the model.
-     * 
+     *
      * @return ItemPoolView<T>
      */
     public ItemPool<T> getItems() {
@@ -111,10 +103,10 @@ public final class ItemManagerModel<T extends InventoryItem> {
 
     /**
      * Removes a item from the model.
-     * 
+     *
      * @param item0 &emsp; {@link forge.Item} object
      */
-    public void removeItem(final T item0, int qty) {
+    public void removeItem(final T item0, final int qty) {
         if (isInfinite()) { return; }
 
         final boolean wasThere = this.data.count(item0) > 0;
@@ -125,7 +117,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
     }
 
     public void replaceAll(final T item0, final T replacement0) {
-        int count = this.data.count(item0);
+        final int count = this.data.count(item0);
         if (count > 0) {
             this.data.removeAll(item0);
             this.data.add(replacement0, count);
@@ -135,17 +127,17 @@ public final class ItemManagerModel<T extends InventoryItem> {
 
     /**
      * Adds a item to the model.
-     * 
+     *
      * @param item0 &emsp; {@link forge.Item} object.
      */
-    public void addItem(final T item0, int qty) {
+    public void addItem(final T item0, final int qty) {
         this.data.add(item0, qty);
         isListInSync = false;
     }
 
     /**
      * Adds multiple copies of multiple items to the model.
-     * 
+     *
      * @param items0 &emsp; {@link java.lang.Iterable}<Entry<T, Integer>>
      */
     public void addItems(final Iterable<Entry<T, Integer>> items0) {
@@ -154,17 +146,17 @@ public final class ItemManagerModel<T extends InventoryItem> {
     }
 
     /**
-     * Sets whether this table's pool of items is in infinite supply.  If false, items in the
-     * table have a limited number of copies.
+     * Sets whether this table's pool of items is in infinite supply. If false,
+     * items in the table have a limited number of copies.
      */
-    public void setInfinite(boolean infinite) {
+    public void setInfinite(final boolean infinite) {
         this.infiniteSupply = infinite;
     }
 
     public boolean isInfinite() {
         return infiniteSupply;
     }
-    
+
     public CascadeManager getCascadeManager() {
         return cascadeManager;
     }
@@ -188,13 +180,12 @@ public final class ItemManagerModel<T extends InventoryItem> {
         // Adds a column to sort cascade list.
         // If column is first in the cascade, inverts direction of sort.
         // Otherwise, sorts in ascending direction.
-        public void add(final ItemColumn col0, boolean forSetup) {
+        public void add(final ItemColumn col0, final boolean forSetup) {
             this.sorter = null;
 
             if (forSetup) { //just add column unmodified if setting up sort columns
-                this.colsToSort.add(0, (ItemColumn) col0);
-            }
-            else {
+                this.colsToSort.add(0, col0);
+            } else {
                 if (colsToSort.size() > 0 && colsToSort.get(0).equals(col0)) { //if column already at top level, just invert
                     col0.getConfig().setSortPriority(1);
                     col0.getConfig().setSortState(col0.getConfig().getSortState() == SortState.ASC ? SortState.DESC : SortState.ASC);
@@ -203,7 +194,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
                     this.colsToSort.remove(col0);
                     col0.getConfig().setSortPriority(1);
                     col0.getConfig().setSortState(col0.getConfig().getDefaultSortState());
-                    this.colsToSort.add(0, (ItemColumn) col0);
+                    this.colsToSort.add(0, col0);
                 }
 
                 //decrement sort priority on remaining columns
@@ -236,8 +227,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
         }
 
         private Sorter createSorter() {
-            final List<ItemPoolSorter<InventoryItem>> oneColSorters
-                = new ArrayList<ItemPoolSorter<InventoryItem>>(maxSortDepth);
+            final List<ItemPoolSorter<InventoryItem>> oneColSorters = new ArrayList<ItemPoolSorter<InventoryItem>>(maxSortDepth);
 
             for (final ItemColumn col : this.colsToSort) {
                 oneColSorters.add(new ItemPoolSorter<InventoryItem>(
@@ -253,9 +243,9 @@ public final class ItemManagerModel<T extends InventoryItem> {
             private final int cntFields;
 
             /**
-             * 
+             *
              * Sorter Constructor.
-             * 
+             *
              * @param sorters0
              *            a List<TableSorter<InventoryItem>>
              */
@@ -266,7 +256,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
 
             /*
              * (non-Javadoc)
-             * 
+             *
              * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
              */
             @Override
@@ -286,13 +276,13 @@ public final class ItemManagerModel<T extends InventoryItem> {
         }
     }
 
-    private class MyComparator implements Comparator<Entry<T, Integer>> {
+    private final class MyComparator implements Comparator<Entry<T, Integer>> {
         /* (non-Javadoc)
          * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
          */
         @SuppressWarnings("unchecked")
         @Override
-        public int compare(Entry<T, Integer> o1, Entry<T, Integer> o2) {
+        public int compare(final Entry<T, Integer> o1, final Entry<T, Integer> o2) {
             return cascadeManager.getSorter().compare((Entry<InventoryItem, Integer>)o1, (Entry<InventoryItem, Integer>)o2);
         }
     }

@@ -1,5 +1,20 @@
 package forge.gui.framework;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import net.miginfocom.swing.MigLayout;
+
 import com.google.common.collect.Lists;
 
 import forge.assets.FSkinProp;
@@ -10,15 +25,6 @@ import forge.toolbox.FPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.view.FView;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Top-level container in drag layout.  A cell holds
@@ -49,9 +55,6 @@ public final class DragCell extends JPanel implements ILocalRepaint {
     private final JLabel lblOverflow = new JLabel();
     private IVDoc<? extends ICDoc> docSelected = null;
 
-    /**
-     * 
-     */
     public DragCell() {
         super(new MigLayout("insets 0, gap 0, wrap 2"));
 
@@ -89,10 +92,10 @@ public final class DragCell extends JPanel implements ILocalRepaint {
      * <p>
      * Primarily used to toggle visibility of tabs.
      */
-    public void doCellLayout(boolean showTabs) {
+    public void doCellLayout(final boolean showTabs) {
         this.removeAll();
-        int borderT = SLayoutConstants.BORDER_T;
-        int headH = ((showTabs || allDocs.size() > 1) ? SLayoutConstants.HEAD_H : 0);
+        final int borderT = SLayoutConstants.BORDER_T;
+        final int headH = ((showTabs || allDocs.size() > 1) ? SLayoutConstants.HEAD_H : 0);
         this.add(pnlHead,
                 "w 100% - " + borderT + "px!" + ", " + "h " + headH + "px!");
         this.add(pnlBorderRight,
@@ -109,8 +112,8 @@ public final class DragCell extends JPanel implements ILocalRepaint {
     /**
      * Determines visibility of tabs on game screen.
      */
-    private boolean showGameTabs() {
-        ForgePreferences prefs = FModel.getPreferences();
+    private static boolean showGameTabs() {
+        final ForgePreferences prefs = FModel.getPreferences();
         return !prefs.getPrefBoolean(FPref.UI_HIDE_GAME_TABS);
     }
 
@@ -229,7 +232,7 @@ public final class DragCell extends JPanel implements ILocalRepaint {
      *  @param w0 &emsp; double
      *  @param h0 &emsp; double
      */
-    public void setRoughBounds(RectangleOfDouble rectangleOfDouble) {
+    public void setRoughBounds(final RectangleOfDouble rectangleOfDouble) {
         this.roughSize = rectangleOfDouble;
     }
 
@@ -283,7 +286,7 @@ public final class DragCell extends JPanel implements ILocalRepaint {
     /** Removes a document from the layout and tabs.
      * @param doc0 &emsp; {@link forge.gui.framework.IVDoc} */
     public void removeDoc(final IVDoc<? extends ICDoc> doc0) {
-        boolean wasSelected = (docSelected == doc0);
+        final boolean wasSelected = (docSelected == doc0);
         allDocs.remove(doc0);
         pnlHead.remove(doc0.getTabLabel());
         if (wasSelected) { //after removing selected doc, select most recent doc if possible
@@ -296,10 +299,10 @@ public final class DragCell extends JPanel implements ILocalRepaint {
     /** - Deselects previous selection, if there is one<br>
      *  - Decrements the priorities of all other tabs<br>
      *  - Sets selected as priority 1<br>
-     * 
+     *
      * <br><b>null</b> will reset
      * (deselect all tabs, and then select the first in the group).
-     * 
+     *
      * <br><br>Unless there are no tab docs in this cell, there
      * will always be a selection.
      *
@@ -340,32 +343,6 @@ public final class DragCell extends JPanel implements ILocalRepaint {
      * @return {@link forge.gui.framework.IVDoc} */
     public IVDoc<? extends ICDoc> getSelected() {
         return docSelected;
-    }
-
-    /**
-     * Enable/disable resize on the X axis for this cell.
-     * 
-     * @param enable0 &emsp; boolean
-     */
-    public void toggleResizeX(final boolean enable0) {
-        this.removeMouseListener(SResizingUtil.getResizeXListener());
-
-        if (enable0) {
-            this.addMouseListener(SResizingUtil.getResizeXListener());
-        }
-    }
-
-    /**
-     * Enable/disable resize on the Y axis for this cell.
-     * 
-     * @param enable0 &emsp; boolean
-     */
-    public void toggleResizeY(final boolean enable0) {
-        this.removeMouseListener(SResizingUtil.getResizeYListener());
-
-        if (enable0) {
-            this.addMouseListener(SResizingUtil.getResizeYListener());
-        }
     }
 
     /**
@@ -464,8 +441,8 @@ public final class DragCell extends JPanel implements ILocalRepaint {
         public void paintComponent(final Graphics g) {
             super.paintComponent(g);
             if (!hovered) { return; }
-            
-            final Dimension imgSize = img.getSizeForPaint(g);            
+
+            final Dimension imgSize = img.getSizeForPaint(g);
             final int imgW = imgSize.width;
             if (imgW < 1) { return; }
             final int imgH = imgSize.height;

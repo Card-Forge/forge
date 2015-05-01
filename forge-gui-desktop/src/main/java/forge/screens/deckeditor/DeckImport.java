@@ -6,16 +6,25 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.screens.deckeditor;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.util.List;
+
+import javax.swing.BorderFactory;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import forge.deck.Deck;
 import forge.deck.DeckBase;
@@ -24,19 +33,18 @@ import forge.deck.DeckRecognizer;
 import forge.deck.DeckRecognizer.TokenType;
 import forge.item.InventoryItem;
 import forge.screens.deckeditor.controllers.ACEditorBase;
-import forge.toolbox.*;
+import forge.toolbox.FButton;
+import forge.toolbox.FCheckBox;
+import forge.toolbox.FComboBox;
+import forge.toolbox.FHtmlViewer;
+import forge.toolbox.FLabel;
+import forge.toolbox.FScrollPane;
+import forge.toolbox.FSkin;
+import forge.toolbox.FTextArea;
 import forge.view.FDialog;
 
-import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.util.List;
-
 /**
- * 
+ *
  * Dialog for quick import of decks.
  *
  * @param <TItem>
@@ -87,7 +95,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     private final ACEditorBase<TItem, TModel> host;
 
 
-    public DeckImport(final ACEditorBase<TItem, TModel> g, boolean allowCardsFromAllSets) {
+    public DeckImport(final ACEditorBase<TItem, TModel> g, final boolean allowCardsFromAllSets) {
         this.controller = new DeckImportController(!g.getDeckController().isEmpty(),
                 newEditionCheck, dateTimeCheck, onlyCoreExpCheck, monthDropdown, yearDropdown);
         this.host = g;
@@ -102,7 +110,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         txtInput.setFocusable(true);
         txtInput.setEditable(true);
 
-        FSkin.SkinColor foreColor = FSkin.getColor(FSkin.Colors.CLR_TEXT);
+        final FSkin.SkinColor foreColor = FSkin.getColor(FSkin.Colors.CLR_TEXT);
         this.scrollInput.setBorder(new FSkin.TitledSkinBorder(BorderFactory.createEtchedBorder(), "Paste or type a decklist", foreColor));
         this.scrollOutput.setBorder(new FSkin.TitledSkinBorder(BorderFactory.createEtchedBorder(), "Expect the recognized lines to appear", foreColor));
         this.scrollInput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
@@ -144,10 +152,9 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             }
         });
 
-        ActionListener updateDateCheck = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                boolean isSel = dateTimeCheck.isSelected();
+        final ActionListener updateDateCheck = new ActionListener() {
+            @Override public void actionPerformed(final ActionEvent e) {
+                final boolean isSel = dateTimeCheck.isSelected();
                 monthDropdown.setEnabled(isSel);
                 yearDropdown.setEnabled(isSel);
                 parseAndDisplay();
@@ -155,8 +162,10 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         };
         this.dateTimeCheck.addActionListener(updateDateCheck);
 
-        ActionListener reparse = new ActionListener() {
-            @Override public void actionPerformed(ActionEvent e) { parseAndDisplay(); }
+        final ActionListener reparse = new ActionListener() {
+            @Override public void actionPerformed(final ActionEvent e) {
+                parseAndDisplay();
+            }
         };
         this.newEditionCheck.addActionListener(reparse);
         this.onlyCoreExpCheck.addActionListener(reparse);
@@ -192,12 +201,12 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     }
 
     private void parseAndDisplay() {
-        List<DeckRecognizer.Token> tokens = controller.parseInput(txtInput.getText());
+        final List<DeckRecognizer.Token> tokens = controller.parseInput(txtInput.getText());
         displayTokens(tokens);
         updateSummaries(tokens);
     }
 
-    private void displayTokens(List<DeckRecognizer.Token> tokens) {
+    private void displayTokens(final List<DeckRecognizer.Token> tokens) {
         if (tokens.isEmpty()) {
             htmlOutput.setText(HTML_WELCOME_TEXT);
         }
@@ -212,7 +221,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         }
     }
 
-    private void updateSummaries(List<DeckRecognizer.Token> tokens) {
+    private void updateSummaries(final List<DeckRecognizer.Token> tokens) {
         final int[] cardsOk = new int[2];
         final int[] cardsUnknown = new int[2];
         int idx = 0;
@@ -232,7 +241,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         cmdAccept.setEnabled(cardsOk[0] > 0);
     }
 
-    private String makeHtmlViewOfToken(final DeckRecognizer.Token token) {
+    private static String makeHtmlViewOfToken(final DeckRecognizer.Token token) {
         switch (token.getType()) {
         case KnownCard:
             return String.format("<div class='knowncard'>%s * %s [%s] %s</div>", token.getNumber(), token.getCard()

@@ -65,6 +65,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public final GameView getGameView() {
         return gameView;
     }
+    @Override
     public void setGameView(final GameView gameView) {
         this.gameView = gameView;
     }
@@ -73,7 +74,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public final IGameController getGameController() {
         return gameControllers.get(getCurrentPlayer());
     }
-    public final IGameController getGameController(PlayerView p0) {
+    public final IGameController getGameController(final PlayerView p0) {
         return gameControllers.get(p0);
     }
     public final Collection<IGameController> getGameControllers() {
@@ -94,10 +95,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         //not needed for base game implementation
     }
 
-    public String getCardImageKey(final CardStateView csv) {
-        return csv.getImageKey(getLocalPlayers());
-    }
-
     @Override
     public boolean mayView(final CardView c) {
         if (!hasLocalPlayers()) {
@@ -113,12 +110,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public boolean mayFlip(final CardView cv) {
         if (cv == null) { return false; }
 
-        CardStateView altState = cv.getAlternateState();
+        final CardStateView altState = cv.getAlternateState();
         if (altState == null) { return false; }
 
         switch (altState.getState()) {
         case Original:
-            CardStateView currentState = cv.getCurrentState();
+            final CardStateView currentState = cv.getCurrentState();
             if (currentState.getState() == CardStateName.FaceDown) {
                 return getCurrentPlayer() == null || cv.canFaceDownBeShownToAny(getLocalPlayers());
             }
@@ -131,7 +128,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
     }
 
-    private Set<PlayerView> highlightedPlayers = Sets.newHashSet();
+    private final Set<PlayerView> highlightedPlayers = Sets.newHashSet();
     @Override
     public void setHighlighted(final PlayerView pv, final boolean b) {
         if (b) {
@@ -141,21 +138,21 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
     }
 
-    public boolean isHighlighted(PlayerView player) {
+    public boolean isHighlighted(final PlayerView player) {
         return highlightedPlayers.contains(player);
     }
 
-    private Set<CardView> highlightedCards = Sets.newHashSet();
+    private final Set<CardView> highlightedCards = Sets.newHashSet();
     // used to highlight cards in UI
     @Override
-    public void setUsedToPay(CardView card, boolean value) {
-        boolean hasChanged = value ? highlightedCards.add(card) : highlightedCards.remove(card);
+    public void setUsedToPay(final CardView card, final boolean value) {
+        final boolean hasChanged = value ? highlightedCards.add(card) : highlightedCards.remove(card);
         if (hasChanged) { // since we are in UI thread, may redraw the card right now
             updateSingleCard(card);
         }
     }
 
-    public boolean isUsedToPay(CardView card) {
+    public boolean isUsedToPay(final CardView card) {
         return highlightedCards.contains(card);
     }
 
@@ -210,6 +207,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         updateAutoPassPrompt();
     }
 
+    @Override
     public final void autoPassCancel(final PlayerView player) {
         if (!autoPassUntilEndOfTurn.remove(player)) {
             return;
@@ -222,6 +220,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         awaitNextInput();
     }
 
+    @Override
     public final boolean mayAutoPass(final PlayerView player) {
         return autoPassUntilEndOfTurn.contains(player);
     }
@@ -313,8 +312,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public final boolean shouldAlwaysAcceptTrigger(final int trigger) { return Boolean.TRUE.equals(triggersAlwaysAccept.get(Integer.valueOf(trigger))); }
     @Override
     public final boolean shouldAlwaysDeclineTrigger(final int trigger) { return Boolean.FALSE.equals(triggersAlwaysAccept.get(Integer.valueOf(trigger))); }
-    @Override
-    public final boolean shouldAlwaysAskTrigger(final int trigger) { return !triggersAlwaysAccept.containsKey(Integer.valueOf(trigger)); }
 
     @Override
     public final void setShouldAlwaysAcceptTrigger(final int trigger) { triggersAlwaysAccept.put(Integer.valueOf(trigger), Boolean.TRUE); }
@@ -329,7 +326,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     /**
      * Convenience for getChoices(message, 0, 1, choices).
-     * 
+     *
      * @param <T>
      *            is automatically inferred.
      * @param message
@@ -364,7 +361,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
      * <p>
      * getChoice.
      * </p>
-     * 
+     *
      * @param <T>
      *            a T object.
      * @param message
@@ -394,22 +391,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return choice.get(0);
     }
 
-    @Override
-    public <T> List<T> noneOrMany(final String message, final Collection<T> choices) {
-        return getChoices(message, 0, choices.size(), choices, null, null);
-    }
-
-    @Override
     // Nothing to choose here. Code uses this to just reveal one or more items
-    public <T> void reveal(final String message, final T item) {
-        List<T> items = new ArrayList<T>();
-        items.add(item);
-        reveal(message, items);
-    }
-    @Override
-    public <T> void reveal(final String message, final T[] items) {
-        getChoices(message, -1, -1, items);
-    }
     @Override
     public <T> void reveal(final String message, final Collection<T> items) {
         getChoices(message, -1, -1, items);
@@ -417,15 +399,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     // Get Integer in range
     @Override
-    public Integer getInteger(final String message) {
-        return getInteger(message, 0, Integer.MAX_VALUE, false);
-    }
-    @Override
-    public Integer getInteger(final String message, int min) {
+    public Integer getInteger(final String message, final int min) {
         return getInteger(message, min, Integer.MAX_VALUE, false);
     }
     @Override
-    public Integer getInteger(final String message, int min, int max) {
+    public Integer getInteger(final String message, final int min, final int max) {
         return getInteger(message, min, max, false);
     }
     @Override
@@ -436,8 +414,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (max == Integer.MAX_VALUE) {
             return getInteger(message, min, max, min + 99);
         }
-        int count = max - min + 1;
-        if (count > 100) { 
+        final int count = max - min + 1;
+        if (count > 100) {
             return getInteger(message, min, max, min + 99);
         }
 
@@ -513,30 +491,15 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public <T> List<T> many(final String title, final String topCaption, int cnt, final List<T> sourceChoices) {
-        return many(title, topCaption, cnt, sourceChoices, null);
-    }
-
-    @Override
     public <T> List<T> many(final String title, final String topCaption, final int cnt, final List<T> sourceChoices, final CardView c) {
         return many(title, topCaption, cnt, cnt, sourceChoices, c);
     }
 
     @Override
-    public <T> List<T> many(final String title, final String topCaption, final int min, final int max, final List<T> sourceChoices) {
-        return many(title, topCaption, min, max, sourceChoices, null);
-    }
-
-    @Override
-    public <T> List<T> many(final String title, final String topCaption, int min, int max, final List<T> sourceChoices, final CardView c) {
+    public <T> List<T> many(final String title, final String topCaption, final int min, final int max, final List<T> sourceChoices, final CardView c) {
         final int m2 = min >= 0 ? sourceChoices.size() - min : -1;
         final int m1 = max >= 0 ? sourceChoices.size() - max : -1;
         return order(title, topCaption, m1, m2, sourceChoices, null, c, false);
-    }
-
-    @Override
-    public <T> List<T> order(final String title, final String top, final List<T> sourceChoices) {
-        return order(title, top, sourceChoices, null);
     }
 
     @Override
@@ -548,7 +511,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
      * Ask the user to insert an object into a list of other objects. The
      * current implementation requires the user to cancel in order to get the
      * new item to be the first item in the resulting list.
-     * 
+     *
      * @param title the dialog title.
      * @param newItem the object to insert.
      * @param oldItems the list of objects.
@@ -584,11 +547,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return confirm(c, question, true, null);
     }
     @Override
-    public boolean confirm(final CardView c, final String question, final boolean defaultChoice) {
-        return confirm(c, question, defaultChoice, null);
-    }
-    @Override
-    public boolean confirm(final CardView c, final String question, String[] options) {
+    public boolean confirm(final CardView c, final String question, final String[] options) {
         return confirm(c, question, true, options);
     }
 

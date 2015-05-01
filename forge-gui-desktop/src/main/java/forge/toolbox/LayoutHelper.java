@@ -1,19 +1,20 @@
 package forge.toolbox;
 
-import javax.swing.*;
+import javax.swing.JComponent;
 
-/** 
+/**
  * Helper class for doing custom layout
  *
  */
 public final class LayoutHelper {
     private final int parentWidth, parentHeight;
-    private int x, y, lineBottom, gapX, gapY;
+    private int x, y, lineBottom;
+    private final int gapX, gapY;
 
-    public LayoutHelper(JComponent parent) {
+    public LayoutHelper(final JComponent parent) {
         this(parent, 3, 3);
     }
-    public LayoutHelper(JComponent parent, int gapX0, int gapY0) {
+    public LayoutHelper(final JComponent parent, final int gapX0, final int gapY0) {
         parentWidth = parent.getWidth();
         parentHeight = parent.getHeight();
         gapX = gapX0;
@@ -34,7 +35,7 @@ public final class LayoutHelper {
      * @param comp
      * @param height
      */
-    public void fillLine(final JComponent comp, int height) {
+    public void fillLine(final JComponent comp, final int height) {
         fillLine(comp, height, 0);
     }
 
@@ -44,7 +45,7 @@ public final class LayoutHelper {
      * @param height
      * @param rightPadding
      */
-    public void fillLine(final JComponent comp, int height, int rightPadding) {
+    public void fillLine(final JComponent comp, final int height, final int rightPadding) {
         if (x >= parentWidth) {
             newLine();
         }
@@ -57,7 +58,7 @@ public final class LayoutHelper {
      * @param widthPercent
      * @param height
      */
-    public void include(final JComponent comp, float widthPercent, int height) {
+    public void include(final JComponent comp, final float widthPercent, final int height) {
         include(comp, Math.round(parentWidth * widthPercent), height);
     }
 
@@ -67,7 +68,7 @@ public final class LayoutHelper {
      * @param width
      * @param heightPercent
      */
-    public void include(final JComponent comp, int width, float heightPercent) {
+    public void include(final JComponent comp, final int width, final float heightPercent) {
         include(comp, width, Math.round(parentHeight * heightPercent));
     }
 
@@ -77,7 +78,7 @@ public final class LayoutHelper {
      * @param widthPercent
      * @param heightPercent
      */
-    public void include(final JComponent comp, float widthPercent, float heightPercent) {
+    public void include(final JComponent comp, final float widthPercent, final float heightPercent) {
         include(comp, Math.round(parentWidth * widthPercent), Math.round(parentHeight * heightPercent));
     }
 
@@ -87,7 +88,7 @@ public final class LayoutHelper {
      * @param width
      * @param height
      */
-    public void include(final JComponent comp, int width, int height) {
+    public void include(final JComponent comp, int width, final int height) {
         if (width <= 0 || height <= 0) { return; }
 
         if (x + width > parentWidth) {
@@ -112,7 +113,7 @@ public final class LayoutHelper {
      * @param dx
      * @param dy
      */
-    public void offset(int dx, int dy) {
+    public void offset(final int dx, final int dy) {
         x += dx;
         y += dy;
     }
@@ -130,7 +131,7 @@ public final class LayoutHelper {
     /**
      * Start new line of layout
      */
-    public void newLine(int dy) {
+    public void newLine(final int dy) {
         x = 0;
         y = lineBottom + gapY + dy;
         lineBottom = y;

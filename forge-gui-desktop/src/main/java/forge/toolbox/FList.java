@@ -1,16 +1,21 @@
 package forge.toolbox;
 
-import forge.Singletons;
-import forge.toolbox.FSkin.SkinnedList;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
-import java.awt.*;
+import java.awt.Component;
+import java.awt.FontMetrics;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-/** 
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
+import javax.swing.ListModel;
+import javax.swing.border.EmptyBorder;
+
+import forge.Singletons;
+import forge.toolbox.FSkin.SkinnedList;
+
+/**
  * A JList object using Forge skin properties.
  *
  */
@@ -22,7 +27,8 @@ public class FList<E> extends SkinnedList<E> {
         super();
         initialize();
     }
-    /** 
+
+    /**
      * A JList object using Forge skin properties.
      * This constructor assumes list contents are null and will be set later.
      * This constructor is used for applying a list model at instantiation.
@@ -30,17 +36,6 @@ public class FList<E> extends SkinnedList<E> {
      */
     public FList(final ListModel<E> model0) {
         super(model0);
-        initialize();
-    }
-
-    /**
-     * A JList object using Forge skin properties.
-     * This constructor may be passed an object array of list contents.
-     * 
-     * @param o0 {@link java.lang.Object}[]
-     */
-    public FList(E[] o0) {
-        super(o0);
         initialize();
     }
 
@@ -53,12 +48,12 @@ public class FList<E> extends SkinnedList<E> {
 
         this.addFocusListener(new FocusListener() {
             @Override
-            public void focusGained(FocusEvent arg0) {
+            public void focusGained(final FocusEvent arg0) {
                 updateSelectionBackground();
             }
 
             @Override
-            public void focusLost(FocusEvent arg0) {
+            public void focusLost(final FocusEvent arg0) {
                 updateSelectionBackground();
             }
         });
@@ -70,22 +65,22 @@ public class FList<E> extends SkinnedList<E> {
     }
 
     public int getAutoSizeWidth() {
-        FontMetrics metrics = this.getFontMetrics(this.getFont());
+        final FontMetrics metrics = this.getFontMetrics(this.getFont());
         int width = 0;
         for (int i = 0; i < this.getModel().getSize(); i++) {
-            int itemWidth = metrics.stringWidth(this.getModel().getElementAt(i).toString());
+            final int itemWidth = metrics.stringWidth(this.getModel().getElementAt(i).toString());
             if (itemWidth > width) {
                 width = itemWidth;
             }
         }
         width += itemBorder.getBorderInsets().left + itemBorder.getBorderInsets().right; //account for item border insets
 
-        int minWidth = 150;
+        final int minWidth = 150;
         if (width < minWidth) {
             width = minWidth;
         }
         else {
-            int maxWidth = Singletons.getView().getFrame().getWidth() - 50;
+            final int maxWidth = Singletons.getView().getFrame().getWidth() - 50;
             if (width > maxWidth) {
                 width = maxWidth;
             }
@@ -98,13 +93,13 @@ public class FList<E> extends SkinnedList<E> {
     }
 
     private class ComplexCellRenderer<E1> implements ListCellRenderer<E1> {
-        private DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
+        private final DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
         @Override
-        public Component getListCellRendererComponent(JList<? extends E1> lst0, E1 val0, int i0,
-            boolean isSelected, boolean cellHasFocus) {
+        public Component getListCellRendererComponent(final JList<? extends E1> lst0, final E1 val0, final int i0,
+                final boolean isSelected, final boolean cellHasFocus) {
 
-            JLabel lblItem = (JLabel) defaultRenderer.getListCellRendererComponent(
+            final JLabel lblItem = (JLabel) defaultRenderer.getListCellRendererComponent(
                     lst0, val0, i0, isSelected, cellHasFocus);
             lblItem.setBorder(itemBorder);
             return lblItem;

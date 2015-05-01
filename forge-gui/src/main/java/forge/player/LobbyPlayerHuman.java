@@ -17,7 +17,7 @@ public class LobbyPlayerHuman extends LobbyPlayer implements IGameEntitiesFactor
     }
 
     @Override
-    public PlayerController createMindSlaveController(Player master, Player slave) {
+    public PlayerController createMindSlaveController(final Player master, final Player slave) {
         return new PlayerControllerHuman(slave, this, (PlayerControllerHuman)master.getController());
     }
 
@@ -29,7 +29,8 @@ public class LobbyPlayerHuman extends LobbyPlayer implements IGameEntitiesFactor
         return player;
     }
 
-    public void hear(LobbyPlayer player, String message) {
-        //ostedMatch.getController().hear(player, message);
+    @Override
+    public void hear(final LobbyPlayer player, final String message) {
+        //hostedMatch.getController().hear(player, message);
     }
 }

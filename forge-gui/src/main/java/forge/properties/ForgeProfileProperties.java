@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -40,7 +40,7 @@ public class ForgeProfileProperties {
     private static String cacheDir;
     private static String cardPicsDir;
     private static Map<String, String> cardPicsSubDirs;
-    private static int serverPort; 
+    private static int serverPort;
 
     private static final String USER_DIR_KEY      = "userDir";
     private static final String CACHE_DIR_KEY     = "cacheDir";
@@ -52,22 +52,18 @@ public class ForgeProfileProperties {
         //prevent initializing static class
     }
 
-    public static void init() {
-    }
-
     public static void load() {
-        Properties props = new Properties();
-        File propFile = new File(ForgeConstants.PROFILE_FILE);
+        final Properties props = new Properties();
+        final File propFile = new File(ForgeConstants.PROFILE_FILE);
         try {
             if (propFile.canRead()) {
                 props.load(new FileInputStream(propFile));
             }
-        }
-        catch (IOException e) {
+        } catch (final IOException e) {
             System.err.println("error while reading from profile properties file");
         }
 
-        Pair<String, String> defaults = getDefaultDirs();
+        final Pair<String, String> defaults = getDefaultDirs();
         userDir     = getDir(props, USER_DIR_KEY,      defaults.getLeft());
         cacheDir    = getDir(props, CACHE_DIR_KEY,     defaults.getRight());
         cardPicsDir = getDir(props, CARD_PICS_DIR_KEY, cacheDir + "pics" + File.separator + "cards" + File.separator);
@@ -83,7 +79,7 @@ public class ForgeProfileProperties {
     public static String getUserDir() {
         return userDir;
     }
-    public static void setUserDir(String userDir0) {
+    public static void setUserDir(final String userDir0) {
         userDir = userDir0;
         save();
     }
@@ -91,8 +87,8 @@ public class ForgeProfileProperties {
     public static String getCacheDir() {
         return cacheDir;
     }
-    public static void setCacheDir(String cacheDir0) {
-        int idx = cardPicsDir.indexOf(cacheDir); //ensure card pics directory is updated too if within cache directory
+    public static void setCacheDir(final String cacheDir0) {
+        final int idx = cardPicsDir.indexOf(cacheDir); //ensure card pics directory is updated too if within cache directory
         if (idx != -1) {
             cardPicsDir = cacheDir0 + cardPicsDir.substring(idx + cacheDir.length());
         }
@@ -103,8 +99,8 @@ public class ForgeProfileProperties {
     public static String getCardPicsDir() {
         return cardPicsDir;
     }
-    public static void setCardPicsDir(String cardPicsDir0) {
-        cardPicsDir = cardPicsDir0; 
+    public static void setCardPicsDir(final String cardPicsDir0) {
+        cardPicsDir = cardPicsDir0;
         save();
     }
 
@@ -116,28 +112,29 @@ public class ForgeProfileProperties {
         return serverPort;
     }
 
-    private static Map<String, String> getMap(Properties props, String propertyKey) {
-        String strMap = props.getProperty(propertyKey, "").trim();
+    private static Map<String, String> getMap(final Properties props, final String propertyKey) {
+        final String strMap = props.getProperty(propertyKey, "").trim();
         return FileSection.parseToMap(strMap, "->", "|");
     }
 
-    private static int getInt(Properties props, String propertyKey, int defaultValue) {
-        String strValue = props.getProperty(propertyKey, "").trim();
-        if ( StringUtils.isNotBlank(strValue) && StringUtils.isNumeric(strValue) ) 
+    private static int getInt(final Properties props, final String propertyKey, final int defaultValue) {
+        final String strValue = props.getProperty(propertyKey, "").trim();
+        if (StringUtils.isNotBlank(strValue) && StringUtils.isNumeric(strValue)) {
             return Integer.parseInt(strValue);
+        }
         return defaultValue;
-    }    
+    }
 
-    private static String getDir(Properties props, String propertyKey, String defaultVal) {
+    private static String getDir(final Properties props, final String propertyKey, final String defaultVal) {
         String retDir = props.getProperty(propertyKey, defaultVal).trim();
         if (retDir.isEmpty()) {
             // use default if dir is "defined" as an empty string in the properties file
             retDir = defaultVal;
         }
-        
+
         // canonicalize
         retDir = new File(retDir).getAbsolutePath();
-        
+
         // ensure path ends in a slash
         if (File.separatorChar == retDir.charAt(retDir.length() - 1)) {
             return retDir;
@@ -148,18 +145,18 @@ public class ForgeProfileProperties {
     // returns a pair <userDir, cacheDir>
     private static Pair<String, String> getDefaultDirs() {
         if (!GuiBase.getInterface().isRunningOnDesktop()) { //special case for mobile devices
-            String assetsDir = ForgeConstants.ASSETS_DIR;
+            final String assetsDir = ForgeConstants.ASSETS_DIR;
             return Pair.of(assetsDir + "data" + File.separator, assetsDir + "cache" + File.separator);
         }
 
-        String osName = System.getProperty("os.name");
-        String homeDir = System.getProperty("user.home");
+        final String osName = System.getProperty("os.name");
+        final String homeDir = System.getProperty("user.home");
 
         if (StringUtils.isEmpty(osName) || StringUtils.isEmpty(homeDir)) {
             throw new RuntimeException("cannot determine OS and user home directory");
         }
-        
-        String fallbackDataDir = String.format("%s/.forge", homeDir);
+
+        final String fallbackDataDir = String.format("%s/.forge", homeDir);
 
         if (StringUtils.containsIgnoreCase(osName, "windows")) {
             // the split between appdata and localappdata on windows is relatively recent.  If
@@ -179,7 +176,7 @@ public class ForgeProfileProperties {
         }
         else if (StringUtils.containsIgnoreCase(osName, "mac os x")) {
             return Pair.of(String.format("%s/Library/Application Support/Forge", homeDir),
-                           String.format("%s/Library/Caches/Forge", homeDir));
+                    String.format("%s/Library/Caches/Forge", homeDir));
         }
 
         // Linux and everything else
@@ -187,13 +184,13 @@ public class ForgeProfileProperties {
     }
 
     private static void save() {
-        Pair<String, String> defaults = getDefaultDirs();
-        String defaultUserDir = defaults.getLeft() + File.separator;
-        String defaultCacheDir = defaults.getRight() + File.separator;
-        String defaultCardPicsDir = defaultCacheDir + "pics" + File.separator + "cards" + File.separator;
+        final Pair<String, String> defaults = getDefaultDirs();
+        final String defaultUserDir = defaults.getLeft() + File.separator;
+        final String defaultCacheDir = defaults.getRight() + File.separator;
+        final String defaultCardPicsDir = defaultCacheDir + "pics" + File.separator + "cards" + File.separator;
 
         //only append values that aren't equal to defaults
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         if (!userDir.equals(defaultUserDir)) { //ensure backslashes are escaped
             sb.append(USER_DIR_KEY + "=" + userDir.replace("\\", "\\\\") + "\n");
         }
@@ -205,8 +202,8 @@ public class ForgeProfileProperties {
         }
         if (cardPicsSubDirs.size() > 0) {
             sb.append(CARD_PICS_SUB_DIRS_KEY + "=");
-            boolean needDelim = false;
-            for (Map.Entry<String, String> entry : cardPicsSubDirs.entrySet()) {
+            final boolean needDelim = false;
+            for (final Map.Entry<String, String> entry : cardPicsSubDirs.entrySet()) {
                 if (needDelim) {
                     sb.append("|");
                 }
@@ -222,12 +219,11 @@ public class ForgeProfileProperties {
         }
         else { //delete file if empty
             try {
-                File file = new File(ForgeConstants.PROFILE_FILE);
+                final File file = new File(ForgeConstants.PROFILE_FILE);
                 if (file.exists()) {
                     file.delete();
                 }
-            }
-            catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
             }
         }

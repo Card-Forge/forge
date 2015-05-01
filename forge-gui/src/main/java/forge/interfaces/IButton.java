@@ -3,10 +3,7 @@ package forge.interfaces;
 import forge.UiCommand;
 import forge.assets.FSkinProp;
 
-public interface IButton {
-    void setEnabled(boolean b0);
-    void setVisible(boolean b0);
-    void setText(String text0);
+public interface IButton extends ITextComponent {
     boolean isSelected();
     void setSelected(boolean b0);
     boolean requestFocusInWindow();

@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -22,7 +22,6 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
 import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
@@ -32,7 +31,6 @@ import com.google.common.collect.Lists;
 
 import forge.FThreads;
 import forge.Singletons;
-import forge.UiCommand;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.gui.framework.ICDoc;
@@ -55,9 +53,6 @@ public class CHand implements ICDoc {
 
     /**
      * Controls Swing components of a player's hand instance.
-     * 
-     * @param p0 &emsp; {@link forge.game.player.Player}
-     * @param v0 &emsp; {@link forge.screens.match.views.VHand}
      */
     public CHand(final CMatchUI matchUI, final PlayerView p0, final VHand v0) {
         this.matchUI = matchUI;
@@ -65,7 +60,7 @@ public class CHand implements ICDoc {
         this.view = v0;
         v0.getHandArea().addCardPanelMouseListener(new CardPanelMouseAdapter() {
             @Override
-            public void mouseDragEnd(CardPanel dragPanel, MouseEvent evt) {
+            public void mouseDragEnd(final CardPanel dragPanel, final MouseEvent evt) {
                 //update index of dragged card in hand zone to match new index within hand area
                 final int index = CHand.this.view.getHandArea().getCardPanels().indexOf(dragPanel);
                 synchronized (ordering) {
@@ -84,14 +79,6 @@ public class CHand implements ICDoc {
     @Override
     public void initialize() {
     }
-
-    public void update(final Observable a, final Object b) {
-        FThreads.invokeInEdtNowOrLater(updateRoutine);
-    }
-
-    private final Runnable updateRoutine = new Runnable() {
-        @Override public void run() { updateHand(); }
-    };
 
     public void updateHand() {
         FThreads.assertExecutedByEdt(true);
@@ -149,7 +136,7 @@ public class CHand implements ICDoc {
         p.setCardPanels(cardPanels);
 
         //animate new cards into positions defined by placeholders
-        JLayeredPane layeredPane = Singletons.getView().getFrame().getLayeredPane();
+        final JLayeredPane layeredPane = Singletons.getView().getFrame().getLayeredPane();
         int fromZoneX = 0, fromZoneY = 0;
 
         final Point zoneLocation = SwingUtilities.convertPoint(vf.getDetailsPanel().getLblLibrary(),
@@ -178,14 +165,6 @@ public class CHand implements ICDoc {
                 Animation.moveCard(placeholder);
             }
         }
-    }
-
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
     }
 
     @Override

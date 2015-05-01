@@ -1,16 +1,22 @@
 package forge.toolbox;
 
-import forge.toolbox.FSkin.SkinColor;
-import forge.toolbox.FSkin.SkinnedScrollPane;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/** 
+import javax.swing.JScrollBar;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.Timer;
+import javax.swing.border.Border;
+
+import forge.toolbox.FSkin.SkinColor;
+import forge.toolbox.FSkin.SkinnedScrollPane;
+
+/**
  * An extension of JScrollPane to centralize common styling changes
  * and supports using arrow buttons to scroll instead of scrollbars
  *
@@ -20,22 +26,22 @@ public class FScrollPane extends SkinnedScrollPane {
     private static final SkinColor arrowColor = FSkin.getColor(FSkin.Colors.CLR_TEXT);
     private final ArrowButton[] arrowButtons;
 
-    public FScrollPane(boolean showBorder0) {
+    public FScrollPane(final boolean showBorder0) {
         this(null, showBorder0);
     }
-    public FScrollPane(boolean showBorder0, final int vertical0, final int horizontal0) {
+    public FScrollPane(final boolean showBorder0, final int vertical0, final int horizontal0) {
         this(null, showBorder0, false, vertical0, horizontal0);
     }
-    public FScrollPane(final Component c0, boolean showBorder0) {
+    public FScrollPane(final Component c0, final boolean showBorder0) {
         this(c0, showBorder0, false, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     }
-    public FScrollPane(final Component c0, boolean showBorder0, boolean useArrowButtons0) {
+    public FScrollPane(final Component c0, final boolean showBorder0, final boolean useArrowButtons0) {
         this(c0, showBorder0, useArrowButtons0, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     }
-    public FScrollPane(final Component c0, boolean showBorder0, final int vertical0, final int horizontal0) {
+    public FScrollPane(final Component c0, final boolean showBorder0, final int vertical0, final int horizontal0) {
         this(c0, showBorder0, false, vertical0, horizontal0);
     }
-    public FScrollPane(final Component c0, boolean showBorder0, boolean useArrowButtons0, final int vertical0, final int horizontal0) {
+    public FScrollPane(final Component c0, final boolean showBorder0, final boolean useArrowButtons0, final int vertical0, final int horizontal0) {
         super(c0, vertical0, horizontal0);
 
         getVerticalScrollBar().setUnitIncrement(16);
@@ -60,7 +66,7 @@ public class FScrollPane extends SkinnedScrollPane {
     }
 
     @Override
-    public void setVisible(boolean visible0) {
+    public void setVisible(final boolean visible0) {
         super.setVisible(visible0);
         if (!visible0) { //ensure arrow buttons hidden if scroll pane hidden
             hideArrowButtons();
@@ -70,7 +76,7 @@ public class FScrollPane extends SkinnedScrollPane {
     public void hideArrowButtons() {
         if (arrowButtons == null) { return; }
 
-        for (ArrowButton arrowButton : arrowButtons) {
+        for (final ArrowButton arrowButton : arrowButtons) {
             if (arrowButton != null) {
                 FAbsolutePositioner.SINGLETON_INSTANCE.hide(arrowButton);
             }
@@ -82,12 +88,12 @@ public class FScrollPane extends SkinnedScrollPane {
     }
 
     @Override
-    public void paint(Graphics g) {
+    public void paint(final Graphics g) {
         super.paint(g);
         if (arrowButtons == null) { return; }
 
         //determine which buttons should be visible
-        boolean[] visible = new boolean[] { false, false, false, false };
+        final boolean[] visible = new boolean[] { false, false, false, false };
         final JScrollBar horzScrollBar = this.getHorizontalScrollBar();
         if (horzScrollBar.isVisible()) { //NOTE: scrollbar wouldn't actually be visible since size set to 0 to hide it
             visible[0] = horzScrollBar.getValue() > 0;
@@ -103,7 +109,7 @@ public class FScrollPane extends SkinnedScrollPane {
         }
     }
 
-    private void updateArrowButton(int dir, boolean[] visible) {
+    private void updateArrowButton(final int dir, final boolean[] visible) {
         ArrowButton arrowButton = arrowButtons[dir];
         if (!visible[dir]) {
             if (arrowButton != null) {
@@ -149,18 +155,18 @@ public class FScrollPane extends SkinnedScrollPane {
 
         if (arrowButton == null) {
             switch (dir) {
-                case 0:
-                    arrowButton = new LeftArrowButton(getHorizontalScrollBar());
-                    break;
-                case 1:
-                    arrowButton = new RightArrowButton(getHorizontalScrollBar());
-                    break;
-                case 2:
-                    arrowButton = new TopArrowButton(getVerticalScrollBar());
-                    break;
-                default:
-                    arrowButton = new BottomArrowButton(getVerticalScrollBar());
-                    break;
+            case 0:
+                arrowButton = new LeftArrowButton(getHorizontalScrollBar());
+                break;
+            case 1:
+                arrowButton = new RightArrowButton(getHorizontalScrollBar());
+                break;
+            case 2:
+                arrowButton = new TopArrowButton(getVerticalScrollBar());
+                break;
+            default:
+                arrowButton = new BottomArrowButton(getVerticalScrollBar());
+                break;
             }
             arrowButtons[dir] = arrowButton;
         }
@@ -183,7 +189,7 @@ public class FScrollPane extends SkinnedScrollPane {
         }
 
         @Override
-        protected void setPressed(boolean pressed0) {
+        protected void setPressed(final boolean pressed0) {
             super.setPressed(pressed0);
             if (pressed0) {
                 scrollBar.setValue(scrollBar.getValue() + scrollBar.getUnitIncrement() * incrementDirection);
@@ -195,7 +201,7 @@ public class FScrollPane extends SkinnedScrollPane {
         }
 
         @Override
-        protected void paintContent(final Graphics2D g, int w, int h, final boolean paintPressedState) {
+        protected void paintContent(final Graphics2D g, final int w, final int h, final boolean paintPressedState) {
             FSkin.setGraphicsColor(g, arrowColor);
             drawArrow(g);
         }
@@ -204,7 +210,8 @@ public class FScrollPane extends SkinnedScrollPane {
 
         //timer to continue scrollling while mouse remains down
         final Timer timer = new Timer(50, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
                 if (!isVisible()) {
                     //ensure timer stops if button hidden from scrolling to beginning/end (based on incrementDirection)
                     ((Timer)e.getSource()).stop();

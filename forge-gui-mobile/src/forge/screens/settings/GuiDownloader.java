@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -23,9 +23,13 @@ import forge.Forge;
 import forge.UiCommand;
 import forge.download.GuiDownloadService;
 import forge.download.GuiDownloadZipService;
-import forge.toolbox.*;
+import forge.toolbox.FDialog;
+import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FProgressBar;
+import forge.toolbox.FRadioButton;
 import forge.toolbox.FRadioButton.RadioButtonGroup;
+import forge.toolbox.FTextField;
 import forge.util.Callback;
 import forge.util.Utils;
 
@@ -42,8 +46,7 @@ public class GuiDownloader extends FDialog {
 
     @SuppressWarnings("serial")
     private final UiCommand cmdClose = new UiCommand() {
-        @Override
-        public void run() {
+        @Override public void run() {
             Forge.stopContinuousRendering();
             service.setCancel(true);
             hide();
@@ -56,10 +59,10 @@ public class GuiDownloader extends FDialog {
     private final GuiDownloadService service;
     private final Callback<Boolean> callback;
 
-    public GuiDownloader(GuiDownloadService service0) {
+    public GuiDownloader(final GuiDownloadService service0) {
         this(service0, null);
     }
-    public GuiDownloader(GuiDownloadService service0, Callback<Boolean> callback0) {
+    public GuiDownloader(final GuiDownloadService service0, final Callback<Boolean> callback0) {
         super(service0.getTitle(), 2);
         service = service0;
         callback = callback0;
@@ -69,7 +72,7 @@ public class GuiDownloader extends FDialog {
         txtAddress.setEnabled(false);
         txtPort.setEnabled(false);
 
-        RadioButtonGroup group = new RadioButtonGroup();
+        final RadioButtonGroup group = new RadioButtonGroup();
         radProxyNone.setGroup(group);
         radProxyHTTP.setGroup(group);
         radProxySocks.setGroup(group);
@@ -81,8 +84,7 @@ public class GuiDownloader extends FDialog {
 
         getButton(0).setText("Start");
         initButton(1, "Cancel", new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
+            @Override public void handleEvent(final FEvent e) {
                 cmdClose.run();
             }
         });
@@ -90,6 +92,10 @@ public class GuiDownloader extends FDialog {
         progressBar.reset();
         progressBar.setShowProgressTrail(true);
         progressBar.setDescription("Scanning for existing items...");
+    }
+
+    @Override
+    public void show() {
         Forge.startContinuousRendering();
 
         show();
@@ -113,7 +119,7 @@ public class GuiDownloader extends FDialog {
         }
 
         @Override
-        public void handleEvent(FEvent e) {
+        public void handleEvent(final FEvent e) {
             if (((FRadioButton) e.getSource()).isSelected()) {
                 service.setType(this.type);
                 txtAddress.setEnabled(this.type != 0);
@@ -123,12 +129,12 @@ public class GuiDownloader extends FDialog {
     }
 
     @Override
-    protected float layoutAndGetHeight(float width, float maxHeight) {
+    protected float layoutAndGetHeight(final float width, final float maxHeight) {
         float x = PADDING;
         float y = PADDING;
-        float w = width - 2 * PADDING;
-        float radioButtonWidth = w / 3;
-        float radioButtonHeight = radProxyNone.getAutoSizeBounds().height;
+        final float w = width - 2 * PADDING;
+        final float radioButtonWidth = w / 3;
+        final float radioButtonHeight = radProxyNone.getAutoSizeBounds().height;
 
         radProxyNone.setBounds(x, y, radioButtonWidth, radioButtonHeight);
         x += radioButtonWidth;

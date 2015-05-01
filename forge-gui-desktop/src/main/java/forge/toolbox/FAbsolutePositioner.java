@@ -17,12 +17,16 @@
  */
 package forge.toolbox;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Point;
+import java.awt.Rectangle;
+
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 
 /**
  * Utility to manage absolutely positioned components
- * 
+ *
  */
 
 // Currently used only once, in top level UI, with layering already in place.
@@ -36,55 +40,55 @@ public enum FAbsolutePositioner {
         panel.setOpaque(false);
         panel.setLayout(null);
     }
-    
-    public void initialize(JLayeredPane parent, Integer index) {
+
+    public void initialize(final JLayeredPane parent, final Integer index) {
         parent.add(panel, index);
     }
-    
-    public void containerResized(Rectangle mainBounds) {
+
+    public void containerResized(final Rectangle mainBounds) {
         panel.setBounds(mainBounds);
         panel.validate();
     }
-    
+
     /**
      * Show the given component absolutely positioned at the given screen location
-     * 
+     *
      * @param comp &emsp; Component to absolutely position
      * @param screenX &emsp; Screen X location to show component at
      * @param screenY &emsp; Screen Y location to show component at
      */
-    public void show(Component comp, int screenX, int screenY) {
+    public void show(final Component comp, final int screenX, final int screenY) {
         if (comp.getParent() != panel) {
             comp.setVisible(false);
             panel.add(comp);
         }
-        Point panelScreenLocation = panel.getLocationOnScreen();
+        final Point panelScreenLocation = panel.getLocationOnScreen();
         comp.setLocation(screenX - panelScreenLocation.x, screenY - panelScreenLocation.y);
         comp.setVisible(true);
     }
-    
+
     /**
      * Show the given component absolutely positioned relative to another component
-     * 
+     *
      * @param comp &emsp; Component to absolutely position
      * @param relativeToComp &emsp; Component to position relative to
      * @param offsetX &emsp; X offset of relative location
      * @param offsetY &emsp; Y offset of relative location
      */
-    public void show(Component comp, Component relativeToComp, int offsetX, int offsetY) {
-        Point screenLocation = relativeToComp.getLocationOnScreen();
+    public void show(final Component comp, final Component relativeToComp, final int offsetX, final int offsetY) {
+        final Point screenLocation = relativeToComp.getLocationOnScreen();
         show(comp, screenLocation.x + offsetX, screenLocation.y + offsetY);
     }
-    
+
     /**
      * Hide given absolutely positioned component
-     * 
+     *
      * @param comp &emsp; Component to hide
      */
-    public void hide(Component comp) {
+    public void hide(final Component comp) {
         panel.remove(comp);
     }
-    
+
     /**
      * Hide all absolutely positioned components
      */

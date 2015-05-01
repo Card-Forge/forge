@@ -1,13 +1,12 @@
 package forge.screens.workshop.controllers;
 
-import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.itemmanager.ItemManagerConfig;
 import forge.screens.workshop.views.VWorkshopCatalog;
 
-/** 
+/**
  * Controls the "card catalog" panel in the workshop UI.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
@@ -20,14 +19,6 @@ public enum CWorkshopCatalog implements ICDoc {
 
     //========== Overridden methods
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
-    }
-
     @Override
     public void register() {
     }
@@ -38,7 +29,7 @@ public enum CWorkshopCatalog implements ICDoc {
     @Override
     public void initialize() {
     }
-    
+
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#update()
      */

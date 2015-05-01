@@ -9,69 +9,69 @@ public class SOptionPane {
     public static final FSkinProp WARNING_ICON = FSkinProp.ICO_WARNING;
     public static final FSkinProp ERROR_ICON = FSkinProp.ICO_ERROR;
 
-    public static void showMessageDialog(String message) {
+    public static void showMessageDialog(final String message) {
         showMessageDialog(message, "Forge", INFORMATION_ICON);
     }
 
-    public static void showMessageDialog(String message, String title) {
+    public static void showMessageDialog(final String message, final String title) {
         showMessageDialog(message, title, INFORMATION_ICON);
     }
 
-    public static void showErrorDialog(String message) {
+    public static void showErrorDialog(final String message) {
         showMessageDialog(message, "Forge", ERROR_ICON);
     }
 
-    public static void showErrorDialog(String message, String title) {
+    public static void showErrorDialog(final String message, final String title) {
         showMessageDialog(message, title, ERROR_ICON);
     }
 
-    public static void showMessageDialog(String message, String title, FSkinProp icon) {
+    public static void showMessageDialog(final String message, final String title, final FSkinProp icon) {
         showOptionDialog(message, title, icon, new String[] {"OK"}, 0);
     }
 
-    public static boolean showConfirmDialog(String message) {
+    public static boolean showConfirmDialog(final String message) {
         return showConfirmDialog(message, "Forge");
     }
 
-    public static boolean showConfirmDialog(String message, String title) {
+    public static boolean showConfirmDialog(final String message, final String title) {
         return showConfirmDialog(message, title, "Yes", "No", true);
     }
 
-    public static boolean showConfirmDialog(String message, String title, boolean defaultYes) {
+    public static boolean showConfirmDialog(final String message, final String title, final boolean defaultYes) {
         return showConfirmDialog(message, title, "Yes", "No", defaultYes);
     }
 
-    public static boolean showConfirmDialog(String message, String title, String yesButtonText, String noButtonText) {
+    public static boolean showConfirmDialog(final String message, final String title, final String yesButtonText, final String noButtonText) {
         return showConfirmDialog(message, title, yesButtonText, noButtonText, true);
     }
 
-    public static boolean showConfirmDialog(String message, String title, String yesButtonText, String noButtonText, boolean defaultYes) {
-        String[] options = {yesButtonText, noButtonText};
-        int reply = SOptionPane.showOptionDialog(message, title, QUESTION_ICON, options, defaultYes ? 0 : 1);
+    public static boolean showConfirmDialog(final String message, final String title, final String yesButtonText, final String noButtonText, final boolean defaultYes) {
+        final String[] options = {yesButtonText, noButtonText};
+        final int reply = SOptionPane.showOptionDialog(message, title, QUESTION_ICON, options, defaultYes ? 0 : 1);
         return (reply == 0);
     }
 
-    public static int showOptionDialog(String message, String title, FSkinProp icon, String[] options) {
+    public static int showOptionDialog(final String message, final String title, final FSkinProp icon, final String[] options) {
         return showOptionDialog(message, title, icon, options, 0);
     }
 
-    public static int showOptionDialog(String message, String title, FSkinProp icon, String[] options, int defaultOption) {
+    public static int showOptionDialog(final String message, final String title, final FSkinProp icon, final String[] options, final int defaultOption) {
         return GuiBase.getInterface().showOptionDialog(message, title, icon, options, defaultOption);
     }
 
-    public static String showInputDialog(String message, String title) {
+    public static String showInputDialog(final String message, final String title) {
         return showInputDialog(message, title, null, "", null);
     }
 
-    public static String showInputDialog(String message, String title, FSkinProp icon) {
+    public static String showInputDialog(final String message, final String title, final FSkinProp icon) {
         return showInputDialog(message, title, icon, "", null);
     }
 
-    public static String showInputDialog(String message, String title, FSkinProp icon, String initialInput) {
+    public static String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput) {
         return showInputDialog(message, title, icon, initialInput, null);
     }
 
-    public static String showInputDialog(String message, String title, FSkinProp icon, String initialInput, String[] inputOptions) {
+    public static String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final String[] inputOptions) {
         return GuiBase.getInterface().showInputDialog(message, title, icon, initialInput, inputOptions);
     }
 

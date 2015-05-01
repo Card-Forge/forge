@@ -1,20 +1,30 @@
 package forge.screens.match;
 
+import java.awt.AWTEvent;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JComponent;
+import javax.swing.JLayer;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.Scrollable;
+import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.LayerUI;
+
+import net.miginfocom.swing.MigLayout;
 import forge.gui.MouseUtil;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinnedTextArea;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.LayerUI;
-
-import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class GameLogPanel extends JPanel {
@@ -22,7 +32,7 @@ public class GameLogPanel extends JPanel {
     private MyScrollablePanel scrollablePanel;
     private SkinFont textFont = FSkin.getFont();
 
-    private LayerUI<FScrollPane> layerUI = new GameLogPanelLayerUI();
+    private final LayerUI<FScrollPane> layerUI = new GameLogPanelLayerUI();
     private JLayer<FScrollPane> layer;
     private boolean isScrollBarVisible = false;
 
@@ -55,7 +65,7 @@ public class GameLogPanel extends JPanel {
     private void setResizeListener() {
         addComponentListener(new ComponentAdapter() {
             @Override
-            public void componentResized(ComponentEvent arg0) {
+            public void componentResized(final ComponentEvent arg0) {
                 forceVerticalScrollbarToMax();
             }
         });
@@ -101,7 +111,7 @@ public class GameLogPanel extends JPanel {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JScrollBar scrollbar = scrollPane.getVerticalScrollBar();
+                final JScrollBar scrollbar = scrollPane.getVerticalScrollBar();
                 scrollbar.setValue(scrollbar.getMaximum());
                 // This is needed to ensure scrollbar is set to max correctly.
                 scrollPane.validate();
@@ -131,11 +141,11 @@ public class GameLogPanel extends JPanel {
 
     }
 
-    public void setTextFont(SkinFont newFont) {
+    public void setTextFont(final SkinFont newFont) {
         this.textFont = newFont;
     }
 
-    private JTextArea createNewLogEntryJTextArea(String text, boolean useAlternateBackColor) {
+    private JTextArea createNewLogEntryJTextArea(final String text, final boolean useAlternateBackColor) {
         final SkinnedTextArea tar = new SkinnedTextArea(text);
         tar.setFont(textFont);
         tar.setBorder(new EmptyBorder(3, 4, 3, 4));
@@ -155,23 +165,28 @@ public class GameLogPanel extends JPanel {
 
     protected final class MyScrollablePanel extends JPanel implements Scrollable {
 
+        @Override
         public Dimension getPreferredScrollableViewportSize() {
             return getPreferredSize();
         }
 
-        public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction) {
+        @Override
+        public int getScrollableUnitIncrement(final Rectangle visibleRect, final int orientation, final int direction) {
             return textFont.getSize();
         }
 
-        public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction) {
+        @Override
+        public int getScrollableBlockIncrement(final Rectangle visibleRect, final int orientation, final int direction) {
             return textFont.getSize();
         }
 
+        @Override
         public boolean getScrollableTracksViewportWidth() {
             return true;
         }
 
         // we don't want to track the height, because we want to scroll vertically.
+        @Override
         public boolean getScrollableTracksViewportHeight() {
             return false;
         }
@@ -181,25 +196,25 @@ public class GameLogPanel extends JPanel {
 
         @SuppressWarnings("unchecked")
         @Override
-        public void installUI(JComponent c) {
+        public void installUI(final JComponent c) {
             super.installUI(c);
-            JLayer<FScrollPane> l = (JLayer<FScrollPane>)c;
+            final JLayer<FScrollPane> l = (JLayer<FScrollPane>)c;
             l.setLayerEventMask(AWTEvent.MOUSE_EVENT_MASK);
         }
 
         @SuppressWarnings("unchecked")
         @Override
-        public void uninstallUI(JComponent c) {
+        public void uninstallUI(final JComponent c) {
             super.uninstallUI(c);
-            JLayer<FScrollPane> l = (JLayer<FScrollPane>)c;
+            final JLayer<FScrollPane> l = (JLayer<FScrollPane>)c;
             l.setLayerEventMask(0);
         }
 
         @Override
-        protected void processMouseEvent(MouseEvent e, JLayer<? extends FScrollPane> l) {
+        protected void processMouseEvent(final MouseEvent e, final JLayer<? extends FScrollPane> l) {
 
-            boolean isScrollBarRequired = scrollPane.getVerticalScrollBar().getMaximum() > getHeight();
-            boolean isHoveringOverLogEntry = e.getSource() instanceof JTextArea;
+            final boolean isScrollBarRequired = scrollPane.getVerticalScrollBar().getMaximum() > getHeight();
+            final boolean isHoveringOverLogEntry = e.getSource() instanceof JTextArea;
 
             switch (e.getID()) {
             case MouseEvent.MOUSE_ENTERED:

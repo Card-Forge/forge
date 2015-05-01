@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -36,7 +36,7 @@ import forge.toolbox.FSkin;
 
 /**
  * Controls the dock panel in the match UI.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
 public class CDock implements ICDoc {
@@ -109,14 +109,6 @@ public class CDock implements ICDoc {
     public void setArcState(final ArcState state) {
         arcState = state;
         while (arcStateIterator.next() != arcState) { /* Put the iterator to the correct value */ };
-    }
-
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
     }
 
     @Override

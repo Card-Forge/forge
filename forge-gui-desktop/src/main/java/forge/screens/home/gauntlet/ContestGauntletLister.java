@@ -1,17 +1,6 @@
 package forge.screens.home.gauntlet;
 
-
-import forge.UiCommand;
-import forge.gauntlet.GauntletData;
-import forge.gauntlet.GauntletIO;
-import forge.toolbox.FLabel;
-import forge.toolbox.FSkin;
-import forge.toolbox.FSkin.SkinnedPanel;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-
-import java.awt.*;
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -19,7 +8,18 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/** 
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import net.miginfocom.swing.MigLayout;
+import forge.UiCommand;
+import forge.gauntlet.GauntletData;
+import forge.gauntlet.GauntletIO;
+import forge.toolbox.FLabel;
+import forge.toolbox.FSkin;
+import forge.toolbox.FSkin.SkinnedPanel;
+
+/**
  * Creates file list/table for quick deleting, editing, and basic info.
  *
  */
@@ -31,7 +31,6 @@ public class ContestGauntletLister extends JPanel {
     private final Color clrDefault;
     private final FSkin.SkinColor clrHover, clrActive, clrBorders;
 
-    /** */
     public ContestGauntletLister() {
         super();
         this.clrDefault = new Color(0, 0, 0, 0);
@@ -43,12 +42,11 @@ public class ContestGauntletLister extends JPanel {
         this.setLayout(new MigLayout("insets 0, gap 0, wrap"));
     }
 
-    /** @param gd0 &emsp; {@link forge.gauntlet.GauntletData}[] */
-    public void setGauntlets(List<GauntletData> gd0) {
+    public void setGauntlets(final List<GauntletData> gd0) {
         this.removeAll();
-        List<RowPanel> tempRows = new ArrayList<RowPanel>();
-        List<GauntletData> sorted = new ArrayList<GauntletData>();
-        for (GauntletData gd : gd0) { sorted.add(gd); }
+        final List<RowPanel> tempRows = new ArrayList<RowPanel>();
+        final List<GauntletData> sorted = new ArrayList<GauntletData>();
+        for (final GauntletData gd : gd0) { sorted.add(gd); }
         Collections.sort(sorted, new Comparator<GauntletData>() {
             @Override
             public int compare(final GauntletData x, final GauntletData y) {
@@ -77,7 +75,7 @@ public class ContestGauntletLister extends JPanel {
         RowPanel row;
         String name;
         String progress;
-        for (GauntletData gd : sorted) {
+        for (final GauntletData gd : sorted) {
             name = gd.getName();
             name = name.substring(GauntletIO.PREFIX_LOCKED.length());
 
@@ -109,7 +107,6 @@ public class ContestGauntletLister extends JPanel {
         revalidate();
     }
 
-    /** @return {@link forge.deck.Deck} */
     public GauntletData getSelectedGauntlet() {
         if (previousSelect == null) {
             return null;
@@ -121,9 +118,9 @@ public class ContestGauntletLister extends JPanel {
 
     private class RowPanel extends SkinnedPanel {
         private boolean selected = false;
-        private GauntletData gauntletData;
+        private final GauntletData gauntletData;
 
-        public RowPanel(GauntletData gd0) {
+        public RowPanel(final GauntletData gd0) {
             super();
             setOpaque(false);
             setBackground(new Color(0, 0, 0, 0));
@@ -133,27 +130,27 @@ public class ContestGauntletLister extends JPanel {
 
             this.addMouseListener(new MouseAdapter() {
                 @Override
-                public void mouseEntered(MouseEvent e) {
+                public void mouseEntered(final MouseEvent e) {
                     if (!selected) {
                         RowPanel.this.setBackground(clrHover);
                         RowPanel.this.setOpaque(true);
                     }
                 }
                 @Override
-                public void mouseExited(MouseEvent e) {
+                public void mouseExited(final MouseEvent e) {
                     if (!selected) {
                         RowPanel.this.setBackground(clrDefault);
                         RowPanel.this.setOpaque(false);
                     }
                 }
                 @Override
-                public void mousePressed(MouseEvent e) {
+                public void mousePressed(final MouseEvent e) {
                     selectHandler(RowPanel.this);
                 }
             });
         }
 
-        public void setSelected(boolean b0) {
+        public void setSelected(final boolean b0) {
             selected = b0;
             setOpaque(b0);
             this.setBackground(b0 ? clrActive : clrHover);
@@ -168,7 +165,6 @@ public class ContestGauntletLister extends JPanel {
         }
     }
 
-    /** @return {@link java.lang.Integer} */
     public int getSelectedIndex() {
         for (int i = 0; i < rows.length; i++) {
             if (rows[i].isSelected()) { return i; }
@@ -180,32 +176,18 @@ public class ContestGauntletLister extends JPanel {
      * @param i0 &emsp; int
      * @return boolean success
      */
-    public boolean setSelectedIndex(int i0) {
+    public boolean setSelectedIndex(final int i0) {
         if (i0 >= rows.length) { return false; }
         selectHandler(rows[i0]);
         return true;
     }
 
-    /**
-     * @param qd0 &emsp; Gauntlet data object to select (if exists in list)
-     * @return boolean success
-     */
-    public boolean setSelectedGauntletData(GauntletData qd0) {
-        /*for (RowPanel r : rows) {
-            if (r.getQuestData().getName().equals(qd0.getName())) {
-                selectHandler(r);
-                return true;
-            }
-        }*/
-        return false;
-    }
-
     /** @param c0 &emsp; {@link forge.UiCommand} command executed on row select. */
-    public void setSelectCommand(UiCommand c0) {
+    public void setSelectCommand(final UiCommand c0) {
         this.cmdRowSelect = c0;
     }
 
-    private void selectHandler(RowPanel r0) {
+    private void selectHandler(final RowPanel r0) {
         if (previousSelect != null) {
             previousSelect.setSelected(false);
         }

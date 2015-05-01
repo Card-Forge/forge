@@ -167,10 +167,10 @@ public abstract class GameLobby {
         }
         return NameGenerator.getRandomName("Any", "Any", names);
     }
-    protected final String localName() {
+    protected final static String localName() {
         return FModel.getPreferences().getPref(FPref.PLAYER_NAME);
     }
-    protected final int[] localAvatarIndices() {
+    protected final static int[] localAvatarIndices() {
         final String[] sAvatars = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
         final int[] result = new int[sAvatars.length];
         for (int i = 0; i < sAvatars.length; i++) {
@@ -323,14 +323,14 @@ public abstract class GameLobby {
             }
         }
 
-        boolean checkLegality = FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY);
+        final boolean checkLegality = FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY);
 
         //Auto-generated decks don't need to be checked here
         //Commander deck replaces regular deck and is checked later
         if (checkLegality && autoGenerateVariant == null && !isCommanderMatch) {
             for (final LobbySlot slot : activeSlots) {
                 final String name = slot.getName();
-                String errMsg = GameType.Constructed.getDeckFormat().getDeckConformanceProblem(slot.getDeck());
+                final String errMsg = GameType.Constructed.getDeckFormat().getDeckConformanceProblem(slot.getDeck());
                 if (null != errMsg) {
                     SOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Deck");
                     return;
@@ -374,7 +374,7 @@ public abstract class GameLobby {
                 if (isCommanderMatch) {
                     final GameType commanderGameType = isTinyLeadersMatch ? GameType.TinyLeaders : GameType.Commander;
                     if (checkLegality) {
-                        String errMsg = commanderGameType.getDeckFormat().getDeckConformanceProblem(deck);
+                        final String errMsg = commanderGameType.getDeckFormat().getDeckConformanceProblem(deck);
                         if (null != errMsg) {
                             SOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid " + commanderGameType + " Deck");
                             return;
@@ -400,7 +400,7 @@ public abstract class GameLobby {
                         || (variantTypes.contains(GameType.Archenemy) && isArchenemy)) {
                     final CardPool schemePool = deck.get(DeckSection.Schemes);
                     if (checkLegality) {
-                        String errMsg = DeckFormat.getSchemeSectionConformanceProblem(schemePool);
+                        final String errMsg = DeckFormat.getSchemeSectionConformanceProblem(schemePool);
                         if (null != errMsg) {
                             SOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Scheme Deck");
                             return;
@@ -413,7 +413,7 @@ public abstract class GameLobby {
                 if (variantTypes.contains(GameType.Planechase)) {
                     final CardPool planePool = deck.get(DeckSection.Planes);
                     if (checkLegality) {
-                        String errMsg = DeckFormat.getPlaneSectionConformanceProblem(planePool);
+                        final String errMsg = DeckFormat.getPlaneSectionConformanceProblem(planePool);
                         if (null != errMsg) {
                             SOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Planar Deck");
                             return;

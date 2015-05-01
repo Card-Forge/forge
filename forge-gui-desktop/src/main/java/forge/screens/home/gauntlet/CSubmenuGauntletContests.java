@@ -1,7 +1,14 @@
 package forge.screens.home.gauntlet;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.SwingUtilities;
+
 import forge.GuiBase;
-import forge.UiCommand;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
@@ -13,22 +20,13 @@ import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 
-import javax.swing.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-/** 
+/**
  * Controls the "gauntlet contests" submenu in the home UI.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
 
-@SuppressWarnings("serial")
 public enum CSubmenuGauntletContests implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
@@ -37,7 +35,7 @@ public enum CSubmenuGauntletContests implements ICDoc {
 
     private final ActionListener actStartGame = new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent arg0) {
+        public void actionPerformed(final ActionEvent arg0) {
             startGame();
         }
     };
@@ -73,7 +71,7 @@ public enum CSubmenuGauntletContests implements ICDoc {
         final File[] files = GauntletIO.getGauntletFilesLocked();
         final List<GauntletData> data = new ArrayList<GauntletData>();
         for (final File f : files) {
-            GauntletData gd = GauntletIO.loadGauntlet(f);
+            final GauntletData gd = GauntletIO.loadGauntlet(f);
             if (gd != null) {
                 data.add(gd);
             }
@@ -124,16 +122,4 @@ public enum CSubmenuGauntletContests implements ICDoc {
         });
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return new UiCommand() {
-            @Override
-            public void run() {
-                updateData();
-            }
-        };
-    }
 }

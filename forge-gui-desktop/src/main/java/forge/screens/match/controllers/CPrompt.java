@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -27,7 +27,6 @@ import java.awt.event.FocusListener;
 import javax.swing.JButton;
 
 import forge.FThreads;
-import forge.UiCommand;
 import forge.game.GameView;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
@@ -37,7 +36,7 @@ import forge.toolbox.FSkin;
 
 /**
  * Controls the prompt panel in the match UI.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
 public class CPrompt implements ICDoc {
@@ -69,7 +68,7 @@ public class CPrompt implements ICDoc {
 
     private final FocusListener onFocus = new FocusAdapter() {
         @Override
-        public void focusGained(FocusEvent e) {
+        public void focusGained(final FocusEvent e) {
             if (null != view.getParentCell() && view == view.getParentCell().getSelected()) {
                 // only record focus changes when we're showing -- otherwise it is due to a tab visibility change
                 lastFocusedButton = e.getComponent();
@@ -77,7 +76,7 @@ public class CPrompt implements ICDoc {
         }
     };
 
-    private void _initButton(JButton button, ActionListener onClick) {
+    private void _initButton(final JButton button, final ActionListener onClick) {
         // remove to ensure listeners don't accumulate over many initializations
         button.removeActionListener(onClick);
         button.addActionListener(onClick);
@@ -99,18 +98,15 @@ public class CPrompt implements ICDoc {
         matchUI.getGameController().selectButtonCancel();
     }
 
-    public void setMessage(String s0) {
+    public void setMessage(final String s0) {
         view.getTarMessage().setText(FSkin.encodeSymbols(s0, false));
     }
 
-    /** Flashes animation on input panel if play is currently waiting on input. */
+    /**
+     * Invoke a flashing animation on the prompt.
+     */
     public void remind() {
         SDisplayUtil.remind(view);
-    }
-
-    @Override
-    public UiCommand getCommandOnSelect() {
-        return null;
     }
 
     @Override

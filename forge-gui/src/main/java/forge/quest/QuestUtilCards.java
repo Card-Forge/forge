@@ -20,8 +20,10 @@ package forge.quest;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.card.*;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -38,6 +40,7 @@ import forge.quest.data.QuestPreferences.QPref;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
@@ -626,9 +629,8 @@ public final class QuestUtilCards {
         ));
     }
 
-    @SuppressWarnings("unchecked")
     private SealedProduct.Template getBoosterTemplate() {
-        return new SealedProduct.Template(Lists.newArrayList(
+        return new SealedProduct.Template(ImmutableList.of(
             Pair.of(BoosterSlots.COMMON, this.qpref.getPrefInt(QPref.BOOSTER_COMMONS)),
             Pair.of(BoosterSlots.UNCOMMON, this.qpref.getPrefInt(QPref.BOOSTER_UNCOMMONS)),
             Pair.of(BoosterSlots.RARE_MYTHIC, this.qpref.getPrefInt(QPref.BOOSTER_RARES))
@@ -649,7 +651,6 @@ public final class QuestUtilCards {
         final int levelPacks = level > 0 ? startPacks / level : startPacks;
         final int winPacks = this.qc.getAchievements().getWin() / winsForPack;
         final int totalPacks = Math.min(Math.max(levelPacks + winPacks, minPacks), maxPacks);
-
 
         SealedProduct.Template tpl = getShopBoosterTemplate();
         UnOpenedProduct unopened = qc.getFormat() == null ?  new UnOpenedProduct(tpl) : new UnOpenedProduct(tpl, qc.getFormat().getFilterPrinted());

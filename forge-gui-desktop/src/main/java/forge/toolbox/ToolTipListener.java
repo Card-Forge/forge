@@ -6,20 +6,30 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.toolbox;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Component;
+import java.awt.Point;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.ToolTipManager;
 
 // based on code from http://tips4java.wordpress.com/2009/11/08/tooltips-and-scrollpanes/
 
@@ -57,57 +67,60 @@ public class ToolTipListener
     /**
      *  Create a mouseMoved event to pass to the ToolTipManager.
      */
-    private void phantomMouseMoved(Component component)
-    {
+    private void phantomMouseMoved(final Component component) {
         if (null == component) {
             return;
         }
 
         // mouse is in the bounds of the component, generate phantom
         // mouseMoved event for the ToolTipManager
-        Point mouseLocation = component.getMousePosition();
-        if (mouseLocation != null)
-        {
-            MouseEvent phantom = new MouseEvent(
-                component,
-                MouseEvent.MOUSE_MOVED,
-                System.currentTimeMillis(),
-                0,
-                mouseLocation.x,
-                mouseLocation.y,
-                0,
-                false);
+        final Point mouseLocation = component.getMousePosition();
+        if (mouseLocation != null) {
+            final MouseEvent phantom = new MouseEvent(
+                    component,
+                    MouseEvent.MOUSE_MOVED,
+                    System.currentTimeMillis(),
+                    0,
+                    mouseLocation.x,
+                    mouseLocation.y,
+                    0,
+                    false);
 
             ToolTipManager.sharedInstance().mouseMoved(phantom);
         }
     }
 
     // implement ComponentListener
-    public void componentMoved(ComponentEvent e)
-    {
+    @Override
+    public void componentMoved(final ComponentEvent e) {
         phantomMouseMoved(e.getComponent());
     }
 
-    public void componentResized(ComponentEvent e)
-    {
+    @Override
+    public void componentResized(final ComponentEvent e) {
         phantomMouseMoved(e.getComponent());
     }
 
-    public void componentHidden(ComponentEvent e) { }
-    public void componentShown(ComponentEvent e)  { }
-    
+    @Override
+    public void componentHidden(final ComponentEvent e) {
+    }
+
+    @Override
+    public void componentShown(final ComponentEvent e)  {
+    }
+
     // implement MouseWheelListener
-    public void mouseWheelMoved(MouseWheelEvent e)
-    {
-        JScrollPane scrollPane = (JScrollPane)e.getSource();
+    @Override
+    public void mouseWheelMoved(final MouseWheelEvent e) {
+        final JScrollPane scrollPane = (JScrollPane)e.getSource();
         phantomMouseMoved(scrollPane.getViewport().getView());
     }
 
     // implement AdjustmentListener
-    public void adjustmentValueChanged(AdjustmentEvent e)
-    {
-        JScrollBar scrollBar = (JScrollBar)e.getSource();
-        JScrollPane scrollPane = (JScrollPane)scrollBar.getParent();
+    @Override
+    public void adjustmentValueChanged(final AdjustmentEvent e) {
+        final JScrollBar scrollBar = (JScrollBar)e.getSource();
+        final JScrollPane scrollPane = (JScrollPane)scrollBar.getParent();
         phantomMouseMoved(scrollPane.getViewport().getView());
     }
 }
