@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -35,7 +35,7 @@ import java.util.Map;
  * <p>
  * QuestData class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -62,7 +62,7 @@ public final class QuestData {
 
     private QuestAssets assets;
     private QuestAchievements achievements;
-    private final Map<Integer, String> petSlots = new HashMap<Integer, String>();
+    private final Map<Integer, String> petSlots = new HashMap<>();
     private boolean isCharmActive = false;
 
     public QuestData() { //needed for XML serialization
@@ -70,12 +70,12 @@ public final class QuestData {
 
     /**
      * Instantiates a new quest data.
-     * @param mode2
-     *      quest mode
+     * @param name0
+     *      quest name
      * @param diff
      *  achievement diff
-     * @param name2
-     *      quest name
+     * @param mode0
+     *      quest mode
      * @param userFormat
      *      user-defined format, if any (null if none).
      * @param allowSetUnlocks
@@ -98,7 +98,7 @@ public final class QuestData {
 
     /**
      * Gets the mode.
-     * 
+     *
      * @return the mode
      */
     public QuestMode getMode() {
@@ -107,7 +107,7 @@ public final class QuestData {
 
     /**
      * Gets the persistent format, null if not assigned.
-     * 
+     *
      * @return GameFormatQuest, the persistent format
      */
     public GameFormatQuest getFormat() {
@@ -118,7 +118,7 @@ public final class QuestData {
     // This must be called by XML-serializer via reflection
     /**
      * Read resolve.
-     * 
+     *
      * @return the object
      */
     public Object readResolve() {
@@ -134,7 +134,7 @@ public final class QuestData {
 
     /**
      * Gets the version number.
-     * 
+     *
      * @return the versionNumber
      */
     public int getVersionNumber() {
@@ -143,7 +143,7 @@ public final class QuestData {
 
     /**
      * Sets the version number.
-     * 
+     *
      * @param versionNumber0
      *            the versionNumber to set
      */
@@ -167,12 +167,18 @@ public final class QuestData {
      *            the new name to set
      */
     public void rename(final String newName) {
+
         File newpath = new File(ForgeConstants.QUEST_SAVE_DIR, newName + ".dat");
         File oldpath = new File(ForgeConstants.QUEST_SAVE_DIR, this.name + ".dat");
         oldpath.renameTo(newpath);
 
+        newpath = new File(ForgeConstants.QUEST_SAVE_DIR, newName + ".dat.bak");
+        oldpath = new File(ForgeConstants.QUEST_SAVE_DIR, this.name + ".dat.bak");
+        oldpath.renameTo(newpath);
+
         this.name = newName;
         QuestDataIO.saveData(this);
+
     }
 
     public QuestAssets getAssets() {
