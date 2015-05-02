@@ -14,6 +14,7 @@ import forge.gauntlet.GauntletUtil;
 import forge.interfaces.IGuiGame;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
+import forge.itemmanager.filters.ItemFilter;
 import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -29,6 +30,7 @@ import forge.screens.home.NewGameMenu.NewGameScreen;
 import forge.screens.match.MatchController;
 import forge.toolbox.FButton;
 import forge.toolbox.FComboBox;
+import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
 import forge.toolbox.GuiChoose;
 import forge.toolbox.ListChooser;
@@ -71,20 +73,46 @@ public class FDeckChooser extends FScreen {
 
     private final ForgePreferences prefs = FModel.getPreferences();
     private FPref stateSetting = null;
+    private FOptionPane optionPane;
 
-    //Show screen to select a deck
-    private static FDeckChooser deckChooserForPrompt;
+    //Show dialog to select a deck
     public static void promptForDeck(String title, GameType gameType, boolean forAi, final Callback<Deck> callback) {
         FThreads.assertExecutedByEdt(true);
-        if (deckChooserForPrompt == null) {
-            deckChooserForPrompt = new FDeckChooser(gameType, forAi, null);
-        }
-        else { //reuse same deck chooser
-            deckChooserForPrompt.setIsAi(forAi);
-        }
-        deckChooserForPrompt.setHeaderCaption(title);
-        deckChooserForPrompt.callback = callback;
-        Forge.openScreen(deckChooserForPrompt);
+
+        final FDeckChooser deckChooser = new FDeckChooser(gameType, forAi, null);
+
+        //use container to contain both combo box and deck list
+        final FContainer container = new FContainer() {
+            @Override
+            protected void doLayout(final float width, final float height) {
+                float x = 0;
+                float y = ItemFilter.PADDING;
+                float fieldHeight = deckChooser.cmbDeckTypes.getHeight();
+                deckChooser.cmbDeckTypes.setBounds(x, y, width, fieldHeight);
+                y += fieldHeight + 1;
+                deckChooser.lstDecks.setBounds(x, y, width, height - y);
+            }
+        };
+        container.add(deckChooser.cmbDeckTypes);
+        container.add(deckChooser.lstDecks);
+        container.setHeight(FOptionPane.getMaxDisplayObjHeight());
+
+        deckChooser.optionPane = new FOptionPane(null, title, null, container, new String[] { "OK", "Cancel" }, 0, new Callback<Integer>() {
+            @Override
+            public void run(Integer result) {
+                if (result == 0) {
+                    if (callback != null) {
+                        callback.run(deckChooser.getDeck());
+                    }
+                }
+            }
+        }) {
+            @Override
+            protected boolean padAboveAndBelow() {
+                return false; //allow list to go straight up against buttons
+            }
+        };
+        deckChooser.optionPane.show();
     }
 
     public FDeckChooser(GameType gameType0, boolean isAi0, FEventHandler selectionChangedHandler) {
@@ -158,9 +186,14 @@ public class FDeckChooser extends FScreen {
     }
 
     private void accept() {
-        Forge.back();
-        if (callback != null) {
-            callback.run(getDeck());
+        if (optionPane == null) {
+            Forge.back();
+            if (callback != null) {
+                callback.run(getDeck());
+            }
+        }
+        else {
+            optionPane.setResult(0);
         }
     }
 
