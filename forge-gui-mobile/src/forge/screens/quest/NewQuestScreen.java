@@ -1,17 +1,6 @@
 package forge.screens.quest;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang3.text.WordUtils;
-
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-
 import forge.FThreads;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -25,38 +14,31 @@ import forge.item.PreconDeck;
 import forge.model.CardCollections;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
-import forge.quest.QuestController;
-import forge.quest.QuestMode;
-import forge.quest.QuestUtil;
-import forge.quest.QuestWorld;
-import forge.quest.StartingPoolPreferences;
-import forge.quest.StartingPoolType;
+import forge.quest.*;
 import forge.quest.data.GameFormatQuest;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
 import forge.screens.home.NewGameMenu;
 import forge.screens.quest.QuestMenu.LaunchReason;
-import forge.toolbox.FCheckBox;
-import forge.toolbox.FComboBox;
-import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
+import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FLabel;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.FScrollPane;
 import forge.util.FileUtil;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
 import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.text.WordUtils;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 public class NewQuestScreen extends FScreen {
     private static final float EMBARK_BTN_HEIGHT = 2 * Utils.AVG_FINGER_HEIGHT;
     private static final float PADDING = FOptionPane.PADDING;
 
-    private final List<String> customFormatCodes = new ArrayList<String>();
-    private final List<String> customPrizeFormatCodes = new ArrayList<String>();
+    private final List<String> customFormatCodes = new ArrayList<>();
+    private final List<String> customPrizeFormatCodes = new ArrayList<>();
 
     private final FScrollPane scroller = add(new FScrollPane() {
         @Override
@@ -99,15 +81,15 @@ public class NewQuestScreen extends FScreen {
 
     @SuppressWarnings("unused")
     private final FLabel lblDifficulty = scroller.add(new FLabel.Builder().text("Difficulty:").build());
-    private final FComboBox<String> cbxDifficulty = scroller.add(new FComboBox<String>(new String[]{ "Easy", "Medium", "Hard", "Expert" }));
+    private final FComboBox<String> cbxDifficulty = scroller.add(new FComboBox<>(new String[]{ "Easy", "Medium", "Hard", "Expert" }));
 
     @SuppressWarnings("unused")
     private final FLabel lblPreferredColor = scroller.add(new FLabel.Builder().text("Starting pool colors:").build());
     private final FComboBox<String> cbxPreferredColor = scroller.add(new FComboBox<String>());
-    private final String stringBalancedDistribution = new String("balanced distribution");
-    private final String stringRandomizedDistribution = new String("randomized distribution");
-    private final String stringBias = new String(" bias");
-    
+    private final String stringBalancedDistribution = "balanced distribution";
+    private final String stringRandomizedDistribution = "randomized distribution";
+    private final String stringBias = " bias";
+
     @SuppressWarnings("unused")
     private final FLabel lblStartingPool = scroller.add(new FLabel.Builder().text("Starting pool:").build());
     private final FComboBox<StartingPoolType> cbxStartingPool = scroller.add(new FComboBox<StartingPoolType>());
@@ -127,7 +109,7 @@ public class NewQuestScreen extends FScreen {
 
     @SuppressWarnings("unused")
     private final FLabel lblPrizedCards = scroller.add(new FLabel.Builder().text("Prized cards:").build());
-    private final FComboBox<Object> cbxPrizedCards = scroller.add(new FComboBox<Object>());
+    private final FComboBox<Object> cbxPrizedCards = scroller.add(new FComboBox<>());
 
     private final FLabel lblPrizeFormat = scroller.add(new FLabel.Builder().text("Sanctioned format:").build());
     private final FComboBox<GameFormat> cbxPrizeFormat = scroller.add(new FComboBox<GameFormat>());
@@ -138,6 +120,7 @@ public class NewQuestScreen extends FScreen {
 
     private final FCheckBox cbAllowUnlocks = scroller.add(new FCheckBox("Allow unlock of additional editions"));
     private final FCheckBox cbCompleteSet = scroller.add(new FCheckBox("Start with all cards in selected sets"));
+    private final FCheckBox cbDuplicateCards = scroller.add(new FCheckBox("Allow duplicates in starting pool"));
     private final FCheckBox cbFantasy = scroller.add(new FCheckBox("Fantasy Mode"));
 
     private final FLabel btnEmbark = add(new FLabel.ButtonBuilder()
@@ -218,7 +201,7 @@ public class NewQuestScreen extends FScreen {
 
         cbAllowUnlocks.setSelected(true);
 
-        final Map<String, String> preconDescriptions = new HashMap<String, String>();
+        final Map<String, String> preconDescriptions = new HashMap<>();
         IStorage<PreconDeck> preconDecks = QuestController.getPrecons();
 
         for (PreconDeck preconDeck : preconDecks) {
@@ -237,7 +220,7 @@ public class NewQuestScreen extends FScreen {
         btnPrizeDefineCustomFormat.setEnabled(false);
 
         // disable the very powerful sets -- they can be unlocked later for a high price
-        final List<String> unselectableSets = new ArrayList<String>();
+        final List<String> unselectableSets = new ArrayList<>();
         unselectableSets.add("LEA");
         unselectableSets.add("LEB");
         unselectableSets.add("MBP");
@@ -359,12 +342,12 @@ public class NewQuestScreen extends FScreen {
     }
 
     public String getSelectedPrecon() {
-        return cbxPreconDeck.getSelectedItem().toString();
+        return cbxPreconDeck.getSelectedItem();
     }
 
     public Deck getSelectedDeck() {
         Object sel = cbxCustomDeck.getSelectedItem();
-        return sel instanceof Deck ? (Deck) sel : null;
+        return sel != null ? (Deck) sel : null;
     }
 
     public boolean isUnlockSetsAllowed() {
@@ -375,8 +358,12 @@ public class NewQuestScreen extends FScreen {
         return cbCompleteSet.isSelected();
     }
 
+    public boolean allowDuplicateCards() {
+        return cbDuplicateCards.isSelected();
+    }
+
     public StartingPoolType getStartingPoolType() {
-        return (StartingPoolType) cbxStartingPool.getSelectedItem();
+        return cbxStartingPool.getSelectedItem();
     }
 
     public StartingPoolType getPrizedPoolType() {
@@ -405,11 +392,11 @@ public class NewQuestScreen extends FScreen {
     }
 
     public GameFormat getRotatingFormat() {
-        return (GameFormat) cbxFormat.getSelectedItem();
+        return cbxFormat.getSelectedItem();
     }
 
     public GameFormat getPrizedRotatingFormat() {
-        return (GameFormat) cbxPrizeFormat.getSelectedItem();
+        return cbxPrizeFormat.getSelectedItem();
     }
 
     @Override
@@ -468,7 +455,7 @@ public class NewQuestScreen extends FScreen {
             fmtStartPool = worldFormat;
         }
 
-        GameFormat fmtPrizes = null;
+        GameFormat fmtPrizes;
 
         // The starting QuestWorld format should NOT affect what you get if you travel to a world that doesn't have one...
         // if (worldFormat == null) {
@@ -476,7 +463,7 @@ public class NewQuestScreen extends FScreen {
         if (null == prizedPoolType) {
             fmtPrizes = fmtStartPool;
             if (null == fmtPrizes && dckStartPool != null) { // build it form deck
-                Set<String> sets = new HashSet<String>();
+                Set<String> sets = new HashSet<>();
                 for (Entry<PaperCard, Integer> c : dckStartPool.getMain()) {
                     sets.add(c.getKey().getEdition());
                 }
@@ -500,7 +487,7 @@ public class NewQuestScreen extends FScreen {
                         return;
                     }
                 }
-                fmtPrizes = customPrizeFormatCodes.isEmpty() ? null : new GameFormat("Custom Prizes", customPrizeFormatCodes, null); // chosen sets and no banend cards
+                fmtPrizes = customPrizeFormatCodes.isEmpty() ? null : new GameFormat("Custom Prizes", customPrizeFormatCodes, null); // chosen sets and no banned cards
                 break;
             case Rotating:
                 fmtPrizes = getPrizedRotatingFormat();
@@ -539,7 +526,7 @@ public class NewQuestScreen extends FScreen {
                     @Override
                     public void run() {
                         final QuestMode mode = isFantasy() ? QuestMode.Fantasy : QuestMode.Classic;
-                        final StartingPoolPreferences userPrefs = new StartingPoolPreferences(randomizeColorDistribution(), getPreferredColor(), startWithCompleteSet());
+                        final StartingPoolPreferences userPrefs = new StartingPoolPreferences(randomizeColorDistribution(), getPreferredColor(), startWithCompleteSet(), allowDuplicateCards());
                         QuestController qc = FModel.getQuest();
                         qc.newGame(questName, getSelectedDifficulty(), mode, fmtPrizes, isUnlockSetsAllowed(), dckStartPool, fmtStartPool, getStartingWorldName(), userPrefs);
                         qc.save();

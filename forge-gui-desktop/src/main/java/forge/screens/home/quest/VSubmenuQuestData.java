@@ -1,20 +1,5 @@
 package forge.screens.home.quest;
 
-import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.plaf.basic.BasicComboBoxRenderer;
-
-import net.miginfocom.swing.MigLayout;
-
-import org.apache.commons.lang3.text.WordUtils;
-
 import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -32,29 +17,32 @@ import forge.quest.StartingPoolType;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
-import forge.toolbox.FCheckBox;
-import forge.toolbox.FComboBoxWrapper;
-import forge.toolbox.FLabel;
-import forge.toolbox.FRadioButton;
-import forge.toolbox.FScrollPane;
-import forge.toolbox.FSkin;
-import forge.toolbox.JXButtonPanel;
+import forge.toolbox.*;
 import forge.util.storage.IStorage;
+import net.miginfocom.swing.MigLayout;
+import org.apache.commons.lang3.text.WordUtils;
+
+import javax.swing.*;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Assembles Swing components of quest data submenu singleton.
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
+@SuppressWarnings("FieldCanBeLocal")
 public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
-    /** */
     SINGLETON_INSTANCE;
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
     private final DragTab tab = new DragTab("Quest Data");
 
-    /** */
     private final FLabel lblTitle = new FLabel.Builder()
     .text("Load Quest Data").fontAlign(SwingConstants.CENTER)
     .opaque(true).fontSize(16).build();
@@ -70,50 +58,52 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final FScrollPane scrQuests = new FScrollPane(lstQuests, false);
     private final JPanel pnlOptions = new JPanel();
 
-    /* Fist column */
+    /* First column */
     private final FRadioButton radEasy = new FRadioButton("Easy");
     private final FRadioButton radMedium = new FRadioButton("Medium");
     private final FRadioButton radHard = new FRadioButton("Hard");
     private final FRadioButton radExpert = new FRadioButton("Expert");
     private final FCheckBox boxFantasy = new FCheckBox("Fantasy Mode");
-    private final FCheckBox boxCompleteSet = new FCheckBox("Start with all cards in selected sets");
 
     private final FLabel lblStartingWorld = new FLabel.Builder().text("Starting world:").build();
-    private final FComboBoxWrapper<QuestWorld> cbxStartingWorld = new FComboBoxWrapper<QuestWorld>();
-
-    private final FLabel lblPreferredColor = new FLabel.Builder().text("Starting pool colors:").build();
-    private final FComboBoxWrapper<String> cbxPreferredColor = new FComboBoxWrapper<String>();
-    private final String stringBalancedDistribution = new String("balanced distribution");
-    private final String stringRandomizedDistribution = new String("randomized distribution");
-    private final String stringBias = new String(" bias");
+    private final FComboBoxWrapper<QuestWorld> cbxStartingWorld = new FComboBoxWrapper<>();
 
     /* Second column */
-
     private final FLabel lblStartingPool = new FLabel.Builder().text("Starting pool:").build();
-    private final FComboBoxWrapper<StartingPoolType> cbxStartingPool = new FComboBoxWrapper<StartingPoolType>();
+    private final FComboBoxWrapper<StartingPoolType> cbxStartingPool = new FComboBoxWrapper<>();
 
     private final FLabel lblUnrestricted = new FLabel.Builder().text("All cards will be available to play.").build();
 
     private final FLabel lblPreconDeck = new FLabel.Builder().text("Starter/Event deck:").build();
-    private final FComboBoxWrapper<String> cbxPreconDeck = new FComboBoxWrapper<String>();
+    private final FComboBoxWrapper<String> cbxPreconDeck = new FComboBoxWrapper<>();
 
     private final FLabel lblFormat = new FLabel.Builder().text("Sanctioned format:").build();
-    private final FComboBoxWrapper<GameFormat> cbxFormat = new FComboBoxWrapper<GameFormat>();
+    private final FComboBoxWrapper<GameFormat> cbxFormat = new FComboBoxWrapper<>();
 
     private final FLabel lblCustomDeck = new FLabel.Builder().text("Custom deck:").build();
-    private final FComboBoxWrapper<Deck> cbxCustomDeck = new FComboBoxWrapper<Deck>();
+    private final FComboBoxWrapper<Deck> cbxCustomDeck = new FComboBoxWrapper<>();
 
     private final FLabel btnDefineCustomFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Define custom format").build();
+
+    private final FCheckBox boxCompleteSet = new FCheckBox("Start with all cards in selected sets");
+    private final FCheckBox boxAllowDuplicates = new FCheckBox("Allow duplicate cards");
+
+    private final FLabel lblPreferredColor = new FLabel.Builder().text("Starting pool colors:").build();
+    private final FComboBoxWrapper<String> cbxPreferredColor = new FComboBoxWrapper<>();
+    private final String stringBalancedDistribution = "balanced distribution";
+    private final String stringRandomizedDistribution = "randomized distribution";
+    private final String stringBias = " bias";
+
     private final FLabel btnPrizeDefineCustomFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Define custom format").build();
 
     private final FLabel lblPrizedCards = new FLabel.Builder().text("Prized cards:").build();
-    private final FComboBoxWrapper<Object> cbxPrizedCards = new FComboBoxWrapper<Object>();
+    private final FComboBoxWrapper<Object> cbxPrizedCards = new FComboBoxWrapper<>();
 
     private final FLabel lblPrizeFormat = new FLabel.Builder().text("Sanctioned format:").build();
-    private final FComboBoxWrapper<GameFormat> cbxPrizeFormat = new FComboBoxWrapper<GameFormat>();
+    private final FComboBoxWrapper<GameFormat> cbxPrizeFormat = new FComboBoxWrapper<>();
 
     private final FLabel lblPrizeUnrestricted = new FLabel.Builder().text("All cards will be available to win.").build();
-    private final FLabel lblPrizeSameAsStarting = new FLabel.Builder().text("Only sets found in starting pool will be available.").build();
+    private final FLabel lblPrizeSameAsStarting = new FLabel.Builder().text("Only sets in starting pool will be available.").build();
 
     private final FCheckBox cboAllowUnlocks = new FCheckBox("Allow unlock of additional editions");
 
@@ -145,15 +135,15 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
                 cbxCustomDeck.removeAllItems();
                 final CardCollections decks = FModel.getDecks();
                 switch (newVal) {
-                case SealedDeck:
-                    for (final DeckGroup d : decks.getSealed()) { cbxCustomDeck.addItem(d.getHumanDeck()); }
-                    break;
-                case DraftDeck:
-                    for (final DeckGroup d : decks.getDraft()) { cbxCustomDeck.addItem(d.getHumanDeck()); }
-                    break;
-                case Cube:
-                    for (final Deck d : decks.getCubes()) { cbxCustomDeck.addItem(d); }
-                    break;
+                    case SealedDeck:
+                        for (final DeckGroup d : decks.getSealed()) { cbxCustomDeck.addItem(d.getHumanDeck()); }
+                        break;
+                    case DraftDeck:
+                        for (final DeckGroup d : decks.getDraft()) { cbxCustomDeck.addItem(d.getHumanDeck()); }
+                        break;
+                    case Cube:
+                        for (final Deck d : decks.getCubes()) { cbxCustomDeck.addItem(d); }
+                        break;
                 }
             }
         }
@@ -202,12 +192,13 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
      * Constructor.
      */
     @SuppressWarnings("unchecked")
-    private VSubmenuQuestData() {
+    VSubmenuQuestData() {
+
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         lblTitleNew.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         final JXButtonPanel difficultyPanel = new JXButtonPanel();
-        final String difficulty_constraints = "h 27px!, gapbottom 5";
+        final String difficulty_constraints = "h 25px!, gapbottom 5";
         difficultyPanel.add(radEasy, difficulty_constraints);
         difficultyPanel.add(radMedium, difficulty_constraints);
         difficultyPanel.add(radHard, difficulty_constraints);
@@ -215,6 +206,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         radEasy.setSelected(true);
 
         boxCompleteSet.setToolTipText("You will start the quest with 4 of each card in the sets you have selected.");
+        boxAllowDuplicates.setToolTipText("When your starting pool is generated duplicates of cards may be included.");
 
         cbxStartingPool.addItem(StartingPoolType.Complete);
         cbxStartingPool.addItem(StartingPoolType.Rotating);
@@ -261,7 +253,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
         cboAllowUnlocks.setSelected(true);
 
-        final Map<String, String> preconDescriptions = new HashMap<String, String>();
+        final Map<String, String> preconDescriptions = new HashMap<>();
         final IStorage<PreconDeck> preconDecks = QuestController.getPrecons();
 
         for (final PreconDeck preconDeck : preconDecks) {
@@ -297,6 +289,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         boxFantasy.setSelected(true);
         boxFantasy.setEnabled(true);
         boxCompleteSet.setEnabled(true);
+        boxAllowDuplicates.setEnabled(true);
 
         cbxPreferredColor.setEnabled(true);
 
@@ -305,60 +298,59 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
         final JPanel pnlDifficultyMode = new JPanel(new MigLayout("insets 0, gap 1%, flowy"));
         pnlDifficultyMode.add(difficultyPanel, "gapright 4%");
-        pnlDifficultyMode.add(boxFantasy, difficulty_constraints + ", gapright 4%");
+        pnlDifficultyMode.add(boxFantasy, "h 27px!, gapbottom 15, gapright 4%");
+        pnlDifficultyMode.add(lblStartingWorld, "h 27px!, hidemode 3");
+        cbxStartingWorld.addTo(pnlDifficultyMode, "h 27px!, w 40%, pushx, hidemode 3");
         pnlDifficultyMode.setOpaque(false);
         pnlOptions.add(pnlDifficultyMode, "w 40%");
 
 
         final JPanel pnlRestrictions = new JPanel();
-        final String constraints = "h 27px!, ";
-        final String lblWidth = "w 40%, ";
+        final String constraints = "h 25px!, ";
         final String hidemode = "hidemode 3, ";
-        final String lblWidthStart = lblWidth + hidemode;
-        final String cboWidth = "pushx, ";
+        final String cboWidth = "w 240px!, pushx, ";
         final String cboWidthStart = cboWidth + hidemode;
+        final String btnStartingCustomFormatWidth = "w " + (4 + cbxStartingPool.getAutoSizeWidth()) + "px!, ";
 
-        pnlRestrictions.setLayout(new MigLayout("insets 0, gap 0, wrap 2", "[120, al right][240, fill]", "[|]12[|]6[]"));
+        pnlRestrictions.setLayout(new MigLayout("insets 0, gap 10", "[right][left]"));
 
 
-        pnlRestrictions.add(lblStartingPool, constraints + lblWidthStart);
-        cbxStartingPool.addTo(pnlRestrictions, constraints + cboWidthStart);
+        pnlRestrictions.add(lblStartingPool, "h 15px!, cell 0 0");
+        cbxStartingPool.addTo(pnlRestrictions, constraints + cboWidthStart + " cell 1 0");
 
-        /* out of these 3 groups only one will be visible */
-        pnlRestrictions.add(lblUnrestricted, constraints + hidemode + "spanx 2");
+        /* --vvv-- out of these 3 groups only one will be visible --vvv-- */
+        pnlRestrictions.add(lblUnrestricted, constraints + hidemode + " cell 1 1, ");
 
-        pnlRestrictions.add(lblPreconDeck, constraints + lblWidthStart);
-        cbxPreconDeck.addTo(pnlRestrictions, constraints + cboWidthStart);
+        pnlRestrictions.add(lblPreconDeck, constraints + hidemode + " cell 0 1");
+        cbxPreconDeck.addTo(pnlRestrictions, constraints + cboWidthStart + " cell 1 1");
 
-        pnlRestrictions.add(lblCustomDeck, constraints + lblWidthStart);
-        cbxCustomDeck.addTo(pnlRestrictions, constraints + cboWidthStart); // , skip 1
+        pnlRestrictions.add(lblCustomDeck, constraints + hidemode + " cell 0 1");
+        cbxCustomDeck.addTo(pnlRestrictions, constraints + cboWidthStart + " cell 1 1");
+        /* --^^^-- out of these 3 groups only one will be visible --^^^-- */
 
-        pnlRestrictions.add(lblFormat, constraints + lblWidthStart);
-        cbxFormat.addTo(pnlRestrictions, constraints + cboWidthStart); // , skip 1
+        pnlRestrictions.add(lblFormat, constraints + hidemode + " cell 0 1");
+        cbxFormat.addTo(pnlRestrictions, constraints + cboWidthStart + " cell 1 1");
 
-        pnlRestrictions.add(btnDefineCustomFormat, constraints + hidemode + "spanx 2, w 240px");
+        pnlRestrictions.add(btnDefineCustomFormat, btnStartingCustomFormatWidth + constraints + hidemode + " cell 1 1");
+
+        pnlRestrictions.add(boxAllowDuplicates, "h 15px!, cell 1 2");
+        pnlRestrictions.add(boxCompleteSet, "h 15px!, cell 1 3");
+
+        pnlRestrictions.add(lblPreferredColor, constraints + hidemode + "cell 0 4");
+        cbxPreferredColor.addTo(pnlRestrictions, constraints + cboWidthStart + "cell 1 4");
 
         // Prized cards options
-        pnlRestrictions.add(lblPrizedCards, constraints + lblWidth);
-        cbxPrizedCards.addTo(pnlRestrictions, constraints + cboWidth);
+        pnlRestrictions.add(lblPrizedCards, constraints + " cell 0 5");
+        cbxPrizedCards.addTo(pnlRestrictions, constraints + cboWidth + " cell 1 5");
 
-        pnlRestrictions.add(lblPrizeFormat, constraints + lblWidthStart);
-        cbxPrizeFormat.addTo(pnlRestrictions, constraints + cboWidthStart); // , skip 1
-        pnlRestrictions.add(btnPrizeDefineCustomFormat, constraints + hidemode + "spanx 2, w 240px");
-        pnlRestrictions.add(lblPrizeSameAsStarting,  constraints + hidemode + "spanx 2");
-        pnlRestrictions.add(lblPrizeUnrestricted, constraints + hidemode + "spanx 2");
+        pnlRestrictions.add(lblPrizeFormat, constraints + hidemode + "cell 0 6");
+        cbxPrizeFormat.addTo(pnlRestrictions, constraints + cboWidthStart + "cell 1 6"); // , skip 1
+        pnlRestrictions.add(btnPrizeDefineCustomFormat, constraints + hidemode + "cell 1 6");
+        pnlRestrictions.add(lblPrizeSameAsStarting, constraints + hidemode + "cell 1 6");
+        pnlRestrictions.add(lblPrizeUnrestricted, constraints + hidemode + "cell 1 6");
 
-        pnlRestrictions.add(cboAllowUnlocks, constraints + "spanx 2, ax right");
-        pnlRestrictions.add(boxCompleteSet, constraints + "spanx 2, ax right");
+        pnlRestrictions.add(cboAllowUnlocks, constraints + "cell 1 7");
 
-
-        pnlRestrictions.add(lblPreferredColor,  constraints + lblWidthStart);
-        cbxPreferredColor.addTo(pnlRestrictions, constraints + cboWidthStart + ", wrap");
-
-        pnlRestrictions.add(lblStartingWorld, constraints + lblWidthStart);
-        cbxStartingWorld.addTo(pnlRestrictions, constraints + cboWidthStart);
-
-        //        cboAllowUnlocks.setOpaque(false);
         pnlRestrictions.setOpaque(false);
         pnlOptions.add(pnlRestrictions, "pushx, ay top");
 
@@ -477,12 +469,12 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     }
 
     public String getSelectedPrecon() {
-        return cbxPreconDeck.getSelectedItem().toString();
+        return cbxPreconDeck.getSelectedItem();
     }
 
     public Deck getSelectedDeck() {
         final Object sel = cbxCustomDeck.getSelectedItem();
-        return sel instanceof Deck ? (Deck) sel : null;
+        return sel != null ? (Deck) sel : null;
     }
 
     public boolean isUnlockSetsAllowed() {
@@ -508,6 +500,10 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
     public boolean startWithCompleteSet() {
         return boxCompleteSet.isSelected();
+    }
+
+    public boolean allowDuplicateCards() {
+        return boxAllowDuplicates.isSelected();
     }
 
     public boolean randomizeColorDistribution() {

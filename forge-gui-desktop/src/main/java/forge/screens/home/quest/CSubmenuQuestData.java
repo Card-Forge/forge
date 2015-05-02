@@ -1,17 +1,5 @@
 package forge.screens.home.quest;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import javax.swing.SwingUtilities;
-
 import forge.UiCommand;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -20,17 +8,18 @@ import forge.gui.framework.ICDoc;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
-import forge.quest.QuestController;
-import forge.quest.QuestMode;
-import forge.quest.QuestUtil;
-import forge.quest.QuestWorld;
-import forge.quest.StartingPoolPreferences;
-import forge.quest.StartingPoolType;
+import forge.quest.*;
 import forge.quest.data.GameFormatQuest;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
 import forge.toolbox.FOptionPane;
+
+import javax.swing.*;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * Controls the quest data submenu in the home UI.
@@ -80,27 +69,33 @@ public enum CSubmenuQuestData implements ICDoc {
         unselectableSets.add("ARC");
         unselectableSets.add("PC2");
 
-        view.getBtnCustomFormat().setCommand(new UiCommand() { @Override public void run() {
-            final DialogChooseSets dialog = new DialogChooseSets(customFormatCodes, unselectableSets, false);
-            dialog.setOkCallback(new Runnable() {
-                @Override
-                public void run() {
-                    customFormatCodes.clear();
-                    customFormatCodes.addAll(dialog.getSelectedSets());
-                }
-            });
-        } });
+        view.getBtnCustomFormat().setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                final DialogChooseSets dialog = new DialogChooseSets(customFormatCodes, unselectableSets, false);
+                dialog.setOkCallback(new Runnable() {
+                    @Override
+                    public void run() {
+                        customFormatCodes.clear();
+                        customFormatCodes.addAll(dialog.getSelectedSets());
+                    }
+                });
+            }
+        });
 
-        view.getBtnPrizeCustomFormat().setCommand(new UiCommand() { @Override public void run() {
-            final DialogChooseSets dialog = new DialogChooseSets(customPrizeFormatCodes, unselectableSets, false);
-            dialog.setOkCallback(new Runnable() {
-                @Override
-                public void run() {
-                    customPrizeFormatCodes.clear();
-                    customPrizeFormatCodes.addAll(dialog.getSelectedSets());
-                }
-            });
-        } });
+        view.getBtnPrizeCustomFormat().setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                final DialogChooseSets dialog = new DialogChooseSets(customPrizeFormatCodes, unselectableSets, false);
+                dialog.setOkCallback(new Runnable() {
+                    @Override
+                    public void run() {
+                        customPrizeFormatCodes.clear();
+                        customPrizeFormatCodes.addAll(dialog.getSelectedSets());
+                    }
+                });
+            }
+        });
     }
 
     /* (non-Javadoc)
@@ -152,7 +147,10 @@ public enum CSubmenuQuestData implements ICDoc {
         view.getLstQuests().setEditCommand(cmdQuestUpdate);
 
         SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() { view.getBtnEmbark().requestFocusInWindow(); }
+            @Override
+            public void run() {
+                view.getBtnEmbark().requestFocusInWindow();
+            }
         });
     }
 
@@ -253,7 +251,7 @@ public enum CSubmenuQuestData implements ICDoc {
         // } else {
         //    fmtPrizes = worldFormat;
         // }
-        final StartingPoolPreferences userPrefs = new StartingPoolPreferences(view.randomizeColorDistribution(), view.getPreferredColor(), view.startWithCompleteSet());
+        final StartingPoolPreferences userPrefs = new StartingPoolPreferences(view.randomizeColorDistribution(), view.getPreferredColor(), view.startWithCompleteSet(), view.allowDuplicateCards());
 
         String questName;
         while (true) {

@@ -1,29 +1,11 @@
 package forge.quest;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Function;
-
 import forge.GuiBase;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.item.BoosterBox;
-import forge.item.BoosterPack;
-import forge.item.BoxedProduct;
-import forge.item.FatPack;
-import forge.item.IPaperCard;
-import forge.item.InventoryItem;
-import forge.item.PaperCard;
-import forge.item.PreconDeck;
-import forge.item.SealedProduct;
-import forge.item.TournamentPack;
+import forge.item.*;
 import forge.itemmanager.IItemManager;
 import forge.itemmanager.SItemManagerUtil;
 import forge.model.FModel;
@@ -31,6 +13,13 @@ import forge.properties.ForgePreferences.FPref;
 import forge.quest.io.ReadPriceList;
 import forge.util.ItemPool;
 import forge.util.gui.SOptionPane;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class QuestSpellShop {
     private static Map<String, Integer> mapPrices;
@@ -211,9 +200,9 @@ public class QuestSpellShop {
                     final List<PaperCard> newCards = booster.getCards();
 
                     itemsToAdd.addAllFlat(newCards);
-                    
+
                     if (booster instanceof BoxedProduct && FModel.getPreferences().getPrefBoolean(FPref.UI_OPEN_PACKS_INDIV)) {
-                        
+
                         int totalPacks = ((BoxedProduct) booster).boosterPacksRemaining();
                         boolean skipTheRest = false;
                         final List<PaperCard> remainingCards = new ArrayList<>();
@@ -233,7 +222,7 @@ public class QuestSpellShop {
                         if (remainingCards.size() > 0) {
                             GuiBase.getInterface().showCardList(booster.getName(), "You have found the following cards inside:", remainingCards);
                         }
-                        
+
                     }
                     else {
                         GuiBase.getInterface().showCardList(booster.getName(), "You have found the following cards inside:", newCards);
@@ -279,7 +268,7 @@ public class QuestSpellShop {
             String suffix = SItemManagerUtil.getItemDisplayString(itemFlatList, 1, true);
             String displayList = SItemManagerUtil.buildDisplayList(itemsToSell);
             String title = "Sell " + suffix;
-    
+
             if (!SOptionPane.showConfirmDialog("Sell the following " + suffix.toLowerCase() + " for " + totalReceived +
                     " credit" + (totalReceived != 1 ? "s" : "") + "?\n" + displayList, title, "Sell", "Cancel")) {
                 return;

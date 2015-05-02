@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -39,12 +39,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-// The BoosterPack generates cards for the Card Pool in Quest Mode
 /**
  * <p>
- * QuestBoosterPack class.
+ * QuestBoosterPack class. Generates cards for the Card Pool in Quest Mode
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -52,7 +51,7 @@ public final class BoosterUtils {
 
     /**
      * Gets the quest starter deck.
-     * 
+     *
      * @param filter
      *            the filter
      * @param numCommon
@@ -68,13 +67,13 @@ public final class BoosterUtils {
     public static List<PaperCard> getQuestStarterDeck(final Predicate<PaperCard> filter, final int numCommon,
             final int numUncommon, final int numRare, final StartingPoolPreferences userPrefs) {
 
-        final ArrayList<PaperCard> cards = new ArrayList<PaperCard>();
+        final ArrayList<PaperCard> cards = new ArrayList<>();
 
         // Each color should have around the same amount of monocolored cards
         // There should be 3 Colorless cards for every 4 cards in a single color
         // There should be 1 Multicolor card for every 4 cards in a single color
 
-        final List<Predicate<CardRules>> colorFilters = new ArrayList<Predicate<CardRules>>();
+        final List<Predicate<CardRules>> colorFilters = new ArrayList<>();
         final boolean preferred = (userPrefs != null && userPrefs.getPreferredColor() != MagicColor.ALL_COLORS);
         final boolean randomized = userPrefs != null && userPrefs.useRandomPool();
         final int colorBias =  (preferred && !randomized) ? FModel.getQuestPreferences().getPrefInt(QPref.STARTING_POOL_COLOR_BIAS) : 0;
@@ -108,23 +107,24 @@ public final class BoosterUtils {
         // This will save CPU time when sets are limited
         final List<PaperCard> cardpool = Lists.newArrayList(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), filter));
 
-		if (userPrefs.grantCompleteSet()) {
-			for (PaperCard card : cardpool) {
-				cards.add(card);
-				cards.add(card);
-				cards.add(card);
-				cards.add(card);
-			}
-			return cards;
-		}
-		
+        assert userPrefs != null;
+        if (userPrefs.grantCompleteSet()) {
+            for (PaperCard card : cardpool) {
+                cards.add(card);
+                cards.add(card);
+                cards.add(card);
+                cards.add(card);
+            }
+            return cards;
+        }
+
         final Predicate<PaperCard> pCommon = IPaperCard.Predicates.Presets.IS_COMMON;
-        cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, pCommon, biasAdjustedCommons, colorFilters));
+        cards.addAll(BoosterUtils.generateCards(cardpool, pCommon, biasAdjustedCommons, colorFilters, userPrefs.allowDuplicates()));
 
         final Predicate<PaperCard> pUncommon = IPaperCard.Predicates.Presets.IS_UNCOMMON;
-        cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, pUncommon, biasAdjustedUncommons, colorFilters));
+        cards.addAll(BoosterUtils.generateCards(cardpool, pUncommon, biasAdjustedUncommons, colorFilters, userPrefs.allowDuplicates()));
 
-		int nRares = biasAdjustedRares, nMythics = 0;
+        int nRares = biasAdjustedRares, nMythics = 0;
         final Predicate<PaperCard> filterMythics = IPaperCard.Predicates.Presets.IS_MYTHIC_RARE;
         final boolean haveMythics = Iterables.any(cardpool, filterMythics);
         for (int iSlot = 0; haveMythics && (iSlot < numRare); iSlot++) {
@@ -136,16 +136,16 @@ public final class BoosterUtils {
         }
 
         final Predicate<PaperCard> pRare = IPaperCard.Predicates.Presets.IS_RARE;
-        cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, pRare, nRares, colorFilters));
+        cards.addAll(BoosterUtils.generateCards(cardpool, pRare, nRares, colorFilters, false));
         if (nMythics > 0) {
-            cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, filterMythics, nMythics, colorFilters));
+            cards.addAll(BoosterUtils.generateCards(cardpool, filterMythics, nMythics, colorFilters, userPrefs.allowDuplicates()));
         }
         return cards;
     }
 
     /**
      * Create the list of card names at random from the given pool.
-     * 
+     *
      * @param source
      *            an Iterable<CardPrinted>
      * @param filter
@@ -154,12 +154,16 @@ public final class BoosterUtils {
      *            an int
      * @param allowedColors
      *            a List<Predicate<CardRules>>
+     * @param allowDuplicates
+     *            If true, multiple copies of the same card will be allowed to be generated.
      * @return a list of card names
      */
-    private static ArrayList<PaperCard> generateDefinetlyColouredCards(final Iterable<PaperCard> source,
-            final Predicate<PaperCard> filter, final int cntNeeded, final List<Predicate<CardRules>> allowedColors) {
+    private static ArrayList<PaperCard> generateCards(
+            final Iterable<PaperCard> source, final Predicate<PaperCard> filter, final int cntNeeded,
+            final List<Predicate<CardRules>> allowedColors, final boolean allowDuplicates) {
+
         // If color is null, use colorOrder progression to grab cards
-        final ArrayList<PaperCard> result = new ArrayList<PaperCard>();
+        final ArrayList<PaperCard> result = new ArrayList<>();
 
         final int size = allowedColors == null ? 0 : allowedColors.size();
         if (allowedColors != null) {
@@ -169,8 +173,7 @@ public final class BoosterUtils {
         int cntMade = 0, iAttempt = 0;
 
         // This will prevent endless loop @ wh
-        int allowedMisses = (2 + size + 2) * cntNeeded; // lol, 2+2 is not magic
-                                                        // constant!
+        int allowedMisses = (size + 4) * cntNeeded; // lol, 2+2 is not magic constant!
 
         while ((cntMade < cntNeeded) && (allowedMisses > 0)) {
             PaperCard card = null;
@@ -188,7 +191,7 @@ public final class BoosterUtils {
                 card = Aggregates.random(Iterables.filter(source, filter));
             }
 
-            if ((card != null) && !result.contains(card)) {
+            if ((card != null) && (allowDuplicates || !result.contains(card))) {
                 result.add(card);
                 cntMade++;
             } else {
@@ -206,7 +209,7 @@ public final class BoosterUtils {
      * @param input
      *      String, the limitation as text.
      * @return Predicate<CardRules> the text parsed into a CardRules predicate.
-     * 
+     *
      */
     public static Predicate<CardRules> parseRulesLimitation(final String input) {
         if (null == input || "random".equalsIgnoreCase(input)) {
@@ -240,18 +243,19 @@ public final class BoosterUtils {
     private static List<InventoryItem> parseReward(final String s) {
 
         String[] temp = s.split(" ");
-        List<InventoryItem> rewards = new ArrayList<InventoryItem>();
+        List<InventoryItem> rewards = new ArrayList<>();
 
         // last word starts with 'rare' ignore case
         if (temp.length > 1 && temp[temp.length - 1].regionMatches(true, 0, "rare", 0, 4)) {
             // Type 1: 'n [color] rares'
             final int qty = Integer.parseInt(temp[0]);
 
-            List<Predicate<PaperCard>> preds = new ArrayList<Predicate<PaperCard>>();
+            List<Predicate<PaperCard>> preds = new ArrayList<>();
             preds.add(IPaperCard.Predicates.Presets.IS_RARE_OR_MYTHIC); // Determine rarity
 
             if (temp.length > 2) {
                 Predicate<CardRules> cr = parseRulesLimitation(temp[1]);
+                //noinspection RedundantCast
                 if (Predicates.alwaysTrue() != (Object) cr) { // guava has a single instance for always-const predicates
                     preds.add(Predicates.compose(cr, PaperCard.FN_GET_RULES));
                 }
@@ -295,7 +299,7 @@ public final class BoosterUtils {
      * generateCardRewardList.
      * </p>
      * Takes a reward list string, parses, and returns list of cards rewarded.
-     * 
+     *
      * @param s
      *            Properties string of reward (97 multicolor rares)
      * @return List<CardPrinted>
@@ -307,7 +311,7 @@ public final class BoosterUtils {
         }
 
         final String[] items = s.split(";");
-        final List<InventoryItem> rewards = new ArrayList<InventoryItem>();
+        final List<InventoryItem> rewards = new ArrayList<>();
 
         for (final String item : items) {
 
