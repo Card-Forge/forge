@@ -2,6 +2,7 @@ package forge.screens.home;
 
 import java.util.ArrayList;
 
+import forge.Forge;
 import forge.screens.FScreen;
 import forge.assets.FSkinImage;
 import forge.deck.FDeckChooser;
@@ -20,6 +21,7 @@ public class HomeScreen extends FScreen {
 
     private final FLabel lblLogo = add(new FLabel.Builder().icon(FSkinImage.LOGO).iconInBackground().iconScaleFactor(1).build());
     private final ArrayList<FButton> buttons = new ArrayList<FButton>();
+    private FDeckChooser deckManager;
 
     public HomeScreen() {
         super((Header)null);
@@ -45,7 +47,11 @@ public class HomeScreen extends FScreen {
         addButton("Deck Manager", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                FDeckChooser.promptForDeck("Deck Manager", GameType.DeckManager, false, null);
+                if (deckManager == null) {
+                    deckManager = new FDeckChooser(GameType.DeckManager, false, null);
+                    deckManager.setHeaderCaption("Deck Manager");
+                }
+                Forge.openScreen(deckManager);
             }
         });
         addButton("Achievements", new FEventHandler() {

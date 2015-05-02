@@ -836,9 +836,7 @@ public class FDeckChooser extends FScreen {
     }
 
     private void testCommanderDeck(final Deck userDeck) {
-        FDeckChooser aiDeckPrompt = new FDeckChooser(GameType.Commander, true, null);
-        aiDeckPrompt.setHeaderCaption("Select Opponent's Deck");
-        aiDeckPrompt.callback = new Callback<Deck>() {
+        promptForDeck("Select Opponent's Deck", GameType.Commander, true, new Callback<Deck>() {
             @Override
             public void run(final Deck aiDeck) {
                 if (aiDeck == null) { return; }
@@ -865,7 +863,6 @@ public class FDeckChooser extends FScreen {
                     }
                 });
             }
-        };
-        Forge.openScreen(aiDeckPrompt);
+        });
     }
 }
