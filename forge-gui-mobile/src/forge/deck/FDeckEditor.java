@@ -358,6 +358,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                 }
                             }));
                         }
+                        addItem(new FMenuItem("Copy to Clipboard", new FEventHandler() {
+                            @Override
+                            public void handleEvent(FEvent e) {
+                                FDeckViewer.copyDeckToClipboard(deck);
+                            }
+                        }));
                         ((DeckEditorPage)getSelectedPage()).buildDeckMenu(this);
                     }
                 };

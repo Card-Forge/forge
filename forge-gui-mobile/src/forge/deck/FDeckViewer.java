@@ -77,11 +77,39 @@ public class FDeckViewer extends FScreen {
             addItem(new FMenuItem("Copy to Clipboard", new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    deckViewer.copyToClipboard();
+                    copyDeckToClipboard(deckViewer.deck);
                 }
             }));
         }
     };
+
+    public static void copyDeckToClipboard(Deck deck) {
+        final String nl = System.getProperty("line.separator");
+        final StringBuilder deckList = new StringBuilder();
+        final String dName = deck.getName();
+        deckList.append(dName == null ? "" : dName + nl + nl);
+
+        for (DeckSection s : DeckSection.values()){
+            CardPool cp = deck.get(s);
+            if (cp == null || cp.isEmpty()) {
+                continue;
+            }
+            deckList.append(s.toString()).append(": ");
+            if (s.isSingleCard()) {
+                deckList.append(cp.get(0).getName()).append(nl);
+            }
+            else {
+                deckList.append(nl);
+                for (final Entry<PaperCard, Integer> ev : cp) {
+                    deckList.append(ev.getValue()).append(" ").append(ev.getKey()).append(nl);
+                }
+            }
+            deckList.append(nl);
+        }
+
+        Forge.getClipboard().setContents(deckList.toString());
+        FOptionPane.showMessageDialog("Deck list for '" + deck.getName() + "' copied to clipboard.");
+    }
 
     private final Deck deck;
     private final CardManager cardManager;
@@ -118,34 +146,6 @@ public class FDeckViewer extends FScreen {
 
     private void updateCaption() {
         cardManager.setCaption(currentSection.name());
-    }
-
-    private void copyToClipboard() {
-        final String nl = System.getProperty("line.separator");
-        final StringBuilder deckList = new StringBuilder();
-        final String dName = deck.getName();
-        deckList.append(dName == null ? "" : dName + nl + nl);
-
-        for (DeckSection s : DeckSection.values()){
-            CardPool cp = deck.get(s);
-            if (cp == null || cp.isEmpty()) {
-                continue;
-            }
-            deckList.append(s.toString()).append(": ");
-            if (s.isSingleCard()) {
-                deckList.append(cp.get(0).getName()).append(nl);
-            }
-            else {
-                deckList.append(nl);
-                for (final Entry<PaperCard, Integer> ev : cp) {
-                    deckList.append(ev.getValue()).append(" ").append(ev.getKey()).append(nl);
-                }
-            }
-            deckList.append(nl);
-        }
-
-        Forge.getClipboard().setContents(deckList.toString());
-        FOptionPane.showMessageDialog("Deck list for '" + deck.getName() + "' copied to clipboard.");
     }
 
     @Override
