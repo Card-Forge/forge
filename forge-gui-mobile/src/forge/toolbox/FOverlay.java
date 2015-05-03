@@ -11,6 +11,7 @@ import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
+import forge.screens.FScreen;
 import forge.screens.match.MatchController;
 
 public abstract class FOverlay extends FContainer {
@@ -20,6 +21,7 @@ public abstract class FOverlay extends FContainer {
     private static FOverlay tempOverlay;
 
     private FSkinColor backColor;
+    private FScreen screen;
 
     public FOverlay() {
         this(FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(ALPHA_COMPOSITE));
@@ -95,20 +97,25 @@ public abstract class FOverlay extends FContainer {
             //rotate overlay to face top human player if needed
             setRotate180(MatchController.getView() != null && MatchController.getView().isTopHumanPlayerActive());
             overlays.push(this);
+            screen = Forge.getCurrentScreen();
         }
-        else if (!hidingAll) { //hiding all handles cleaning up overlay collection
-            if (overlays.get(overlays.size() - 1) == this) {
-                //after removing the top overlay, delay hiding overlay for a brief period
-                //to prevent back color flickering if another popup immediately follows
-                if (tempOverlay != this && backColor != null) {
-                    tempOverlay = this;
-                    Timer.schedule(hideTempOverlayTask, 0.025f);
-                    return;
+        else {
+            screen = null;
+
+            if (!hidingAll) { //hiding all handles cleaning up overlay collection
+                if (overlays.get(overlays.size() - 1) == this) {
+                    //after removing the top overlay, delay hiding overlay for a brief period
+                    //to prevent back color flickering if another popup immediately follows
+                    if (tempOverlay != this && backColor != null) {
+                        tempOverlay = this;
+                        Timer.schedule(hideTempOverlayTask, 0.025f);
+                        return;
+                    }
+                    overlays.pop();
                 }
-                overlays.pop();
-            }
-            else {
-                overlays.remove(this);
+                else {
+                    overlays.remove(this);
+                }
             }
         }
         super.setVisible(visible0);
@@ -116,6 +123,10 @@ public abstract class FOverlay extends FContainer {
 
     public FSkinColor getBackColor() { 
         return backColor;
+    }
+
+    public FScreen getScreen() {
+        return screen;
     }
 
     @Override
