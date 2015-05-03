@@ -958,6 +958,7 @@ forge-gui-desktop/src/main/java/forge/screens/home/quest/CSubmenuQuestData.java 
 forge-gui-desktop/src/main/java/forge/screens/home/quest/CSubmenuQuestDecks.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/CSubmenuQuestDraft.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/CSubmenuQuestPrefs.java -text
+forge-gui-desktop/src/main/java/forge/screens/home/quest/DialogChooseColors.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/DialogChooseSets.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/PnlDraftEvent.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/PnlEvent.java -text
