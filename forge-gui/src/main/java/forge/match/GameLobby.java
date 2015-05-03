@@ -431,7 +431,7 @@ public abstract class GameLobby {
                     }
                 }
 
-                rp = RegisteredPlayer.forVariants(variantTypes, deck, schemes, isArchenemy, planes, vanguardAvatar);
+                rp = RegisteredPlayer.forVariants(activeSlots.size(), variantTypes, deck, schemes, isArchenemy, planes, vanguardAvatar);
                 rp.setTeamNumber(team);
                 players.add(rp.setPlayer(lobbyPlayer));
             }

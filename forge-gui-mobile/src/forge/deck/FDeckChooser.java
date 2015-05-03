@@ -881,9 +881,9 @@ public class FDeckChooser extends FScreen {
                         appliedVariants.add(GameType.Commander);
 
                         List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
-                        RegisteredPlayer humanPlayer = RegisteredPlayer.forVariants(appliedVariants, userDeck, null, false, null, null);
+                        RegisteredPlayer humanPlayer = RegisteredPlayer.forVariants(2, appliedVariants, userDeck, null, false, null, null);
                         humanPlayer.setPlayer(GamePlayerUtil.getGuiPlayer());
-                        RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(appliedVariants, aiDeck, null, false, null, null);
+                        RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(2, appliedVariants, aiDeck, null, false, null, null);
                         aiPlayer.setPlayer(GamePlayerUtil.createAiPlayer());
                         players.add(humanPlayer);
                         players.add(aiPlayer);

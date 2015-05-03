@@ -293,7 +293,8 @@ public class ConstructedScreen extends LaunchScreen {
             }
         }
 
-        for (int i = 0; i < getNumPlayers(); i++) {
+        int playerCount = getNumPlayers();
+        for (int i = 0; i < playerCount; i++) {
             PlayerPanel playerPanel = playerPanels.get(i);
             String name = getPlayerName(i);
             LobbyPlayer lobbyPlayer = playerPanel.isPlayerAI() ? GamePlayerUtil.createAiPlayer(name,
@@ -370,7 +371,7 @@ public class ConstructedScreen extends LaunchScreen {
                     }
                 }
 
-                rp = RegisteredPlayer.forVariants(appliedVariants, deck, schemes, playerIsArchenemy, planes, vanguardAvatar);
+                rp = RegisteredPlayer.forVariants(playerCount, appliedVariants, deck, schemes, playerIsArchenemy, planes, vanguardAvatar);
                 rp.setTeamNumber(getTeam(i));
                 launchParams.players.add(rp.setPlayer(lobbyPlayer));
             }

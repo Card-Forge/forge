@@ -130,7 +130,7 @@ public class RegisteredPlayer {
         return start;
     }
 
-    public static RegisteredPlayer forVariants(
+    public static RegisteredPlayer forVariants(final int playerCount,
     		final Set<GameType> appliedVariants, final Deck deck,	              //General vars
     		final Iterable<PaperCard> schemes, final boolean playerIsArchenemy,   //Archenemy specific vars
     		final Iterable<PaperCard> planes, final PaperCard vanguardAvatar) {   //Planechase and Vanguard
@@ -146,8 +146,13 @@ public class RegisteredPlayer {
     	}
     	if (appliedVariants.contains(GameType.Commander)) {
             start.commander = deck.has(DeckSection.Commander) ? deck.get(DeckSection.Commander).get(0) : null;
-    		start.setStartingLife(start.getStartingLife() + 20); // 903.7: ...each player sets his or her life total to 40
-    		                                                     // Modified for layering of variants to life +20
+            if (playerCount > 2) {
+                start.setStartingLife(start.getStartingLife() + 20); // 903.7: ...each player sets his or her life total to 40
+    		                                                         // Modified for layering of variants to life +20
+            }
+            else { //Duel Commander has each player starting at 30 life instead of 40
+                start.setStartingLife(start.getStartingLife() + 10);
+            }
     	}
         if (appliedVariants.contains(GameType.TinyLeaders)) {
             start.commander = deck.has(DeckSection.Commander) ? deck.get(DeckSection.Commander).get(0) : null;
