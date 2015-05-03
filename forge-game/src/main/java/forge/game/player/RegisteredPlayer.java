@@ -145,12 +145,12 @@ public class RegisteredPlayer {
     		start.schemes = schemes;
     	}
     	if (appliedVariants.contains(GameType.Commander)) {
-            start.commander = deck.get(DeckSection.Commander).get(0);
+            start.commander = deck.has(DeckSection.Commander) ? deck.get(DeckSection.Commander).get(0) : null;
     		start.setStartingLife(start.getStartingLife() + 20); // 903.7: ...each player sets his or her life total to 40
     		                                                     // Modified for layering of variants to life +20
     	}
         if (appliedVariants.contains(GameType.TinyLeaders)) {
-            start.commander = deck.get(DeckSection.Commander).get(0);
+            start.commander = deck.has(DeckSection.Commander) ? deck.get(DeckSection.Commander).get(0) : null;
             start.setStartingLife(start.getStartingLife() + 5);
         }
     	if (appliedVariants.contains(GameType.Planechase)) {
