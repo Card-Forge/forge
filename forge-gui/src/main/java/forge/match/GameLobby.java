@@ -138,7 +138,7 @@ public abstract class GameLobby {
 
     public void addSlot() {
         final int newIndex = getNumberOfSlots();
-        final LobbySlotType type = allowNetworking ? LobbySlotType.OPEN : LobbySlotType.LOCAL;
+        final LobbySlotType type = allowNetworking ? LobbySlotType.OPEN : LobbySlotType.AI;
         addSlot(new LobbySlot(type, null, newIndex, newIndex, false, !allowNetworking, Collections.<AIOption>emptySet()));
     }
     protected final void addSlot(final LobbySlot slot) {
