@@ -1,6 +1,7 @@
 package forge.screens.quest;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+
 import forge.FThreads;
 import forge.UiCommand;
 import forge.assets.FSkinFont;
@@ -31,6 +32,7 @@ import forge.util.ThreadUtil;
 import forge.util.Utils;
 import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
+
 import org.apache.commons.lang3.text.WordUtils;
 
 import java.util.*;
@@ -129,13 +131,11 @@ public class NewQuestScreen extends FScreen {
 
     private final FLabel btnDefineCustomFormat = scroller.add(new FLabel.ButtonBuilder().text("Define custom format").build());
 
-    @SuppressWarnings("unused")
     private final FLabel lblPoolDistribution = scroller.add(new FLabel.Builder().text("Starting pool distribution:").build());
     private final FRadioButton radBalanced = scroller.add(new FRadioButton("Balanced"));
     private final FRadioButton radRandom = scroller.add(new FRadioButton("Random"));
     private final FRadioButton radSurpriseMe = scroller.add(new FRadioButton("Surprise Me"));
 
-    @SuppressWarnings("unused")
     private final FLabel lblPreferredColor = scroller.add(new FLabel.Builder().text("Starting pool colors:").build());
     private final FColorCheckBox cbBlack = scroller.add(new FColorCheckBox("Black"));
     private final FColorCheckBox cbBlue = scroller.add(new FColorCheckBox("Blue"));
@@ -144,7 +144,6 @@ public class NewQuestScreen extends FScreen {
     private final FColorCheckBox cbWhite = scroller.add(new FColorCheckBox("White"));
     private final FColorCheckBox cbColorless = scroller.add(new FColorCheckBox("Colorless"));
 
-    @SuppressWarnings("unused")
     private final FLabel lblPoolOptions = scroller.add(new FLabel.Builder().text("Starting pool options:").build());
     private final FCheckBox cbCompleteSet = scroller.add(new FCheckBox("Start with all cards in selected sets"));
     private final FCheckBox cbDuplicateCards = scroller.add(new FCheckBox("Allow duplicates in starting pool"));
@@ -219,6 +218,7 @@ public class NewQuestScreen extends FScreen {
         radRandom.setGroup(distributionGroup);
         radSurpriseMe.setGroup(distributionGroup);
 
+        @SuppressWarnings("serial")
         UiCommand colorBoxEnabler = new UiCommand() {
             @Override
             public void run() {
