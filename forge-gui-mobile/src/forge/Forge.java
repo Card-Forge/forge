@@ -262,7 +262,7 @@ public class Forge implements ApplicationListener {
                 graphics.endTransform();
             }
             for (FOverlay overlay : FOverlay.getOverlays()) {
-                if (overlay.getScreen() == currentScreen) {
+                if (overlay.isVisibleOnScreen(currentScreen)) {
                     overlay.screenPos.setSize(screenWidth, screenHeight);
                     overlay.setSize(screenWidth, screenHeight); //update overlay sizes as they're rendered
                     if (overlay.getRotate180()) {
@@ -450,7 +450,7 @@ public class Forge implements ApplicationListener {
 
             //base potential listeners on object containing touch down point
             for (FOverlay overlay : FOverlay.getOverlaysTopDown()) {
-                if (overlay.getScreen() == currentScreen) {
+                if (overlay.isVisibleOnScreen(currentScreen)) {
                     overlay.buildTouchListeners(x, y, potentialListeners);
                     if (overlay.preventInputBehindOverlay()) {
                         return;

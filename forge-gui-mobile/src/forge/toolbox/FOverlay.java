@@ -21,7 +21,7 @@ public abstract class FOverlay extends FContainer {
     private static FOverlay tempOverlay;
 
     private FSkinColor backColor;
-    private FScreen screen;
+    private FScreen openedOnScreen;
 
     public FOverlay() {
         this(FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(ALPHA_COMPOSITE));
@@ -83,6 +83,10 @@ public abstract class FOverlay extends FContainer {
         setVisible(false);
     }
 
+    public boolean isVisibleOnScreen(FScreen screen) {
+        return (openedOnScreen == screen); //by default, only show overlay on the same screen it's opened on
+    }
+
     @Override
     public void setVisible(boolean visible0) {
         if (this.isVisible() == visible0) { return; }
@@ -97,10 +101,10 @@ public abstract class FOverlay extends FContainer {
             //rotate overlay to face top human player if needed
             setRotate180(MatchController.getView() != null && MatchController.getView().isTopHumanPlayerActive());
             overlays.push(this);
-            screen = Forge.getCurrentScreen();
+            openedOnScreen = Forge.getCurrentScreen();
         }
         else {
-            screen = null;
+            openedOnScreen = null;
 
             if (!hidingAll) { //hiding all handles cleaning up overlay collection
                 if (overlays.get(overlays.size() - 1) == this) {
@@ -123,10 +127,6 @@ public abstract class FOverlay extends FContainer {
 
     public FSkinColor getBackColor() { 
         return backColor;
-    }
-
-    public FScreen getScreen() {
-        return screen;
     }
 
     @Override

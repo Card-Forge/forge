@@ -48,6 +48,11 @@ public class LoadingOverlay extends FOverlay {
     }
 
     @Override
+    public boolean isVisibleOnScreen(FScreen screen) {
+        return true; //allow LoadingOverlay to remain visible while transitioning between screens
+    }
+
+    @Override
     protected void doLayout(float width, float height) {
     }
 
