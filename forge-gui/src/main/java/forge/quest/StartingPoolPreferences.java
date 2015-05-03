@@ -17,6 +17,8 @@
  */
 package forge.quest;
 
+import java.util.List;
+
 /**
  * This class is used to store the Quest starting pool preferences.
  * (It could be expanded to store other Quest starting preferences as well,
@@ -26,41 +28,55 @@ package forge.quest;
  */
 public final class StartingPoolPreferences {
 
-    private final boolean randomPool;
-    private final byte preferredColor;
+    public enum PoolType {
+        /** Cards of the selected colors will be given equal odds during generation. */
+        BALANCED,
+        /** Anything goes. Selected colors are ignored and what goes in the pool is almost entirely random. */
+        RANDOM,
+        /** Same as BALANCED, except this picks colors for you without telling you what they are. */
+        RANDOM_BALANCED
+    }
+
+    private final PoolType poolType;
+    private final List<Byte> preferredColors;
+    private final boolean includeArtifacts;
     private final boolean completeSet;
     private final boolean allowDuplicates;
 
     /**
      * Creates a new StartingPoolPreferences instance.
-     * @param random If true, a completely random pool will be generated without filter restrictions. This does not
-     *               bypass rarity restrictions.
-     * @param preference Preferred color or colorless. All colors == no preference. See {@link forge.card.MagicColor}.
+     * @param poolType The type of card pool to generate.
+     * @param preferredColors A list of preferred colors to use when generating the card pool.
+     *                        See {@link forge.card.MagicColor} for allowed values.
+     * @param includeArtifacts If true, artifacts will be included in the pool regardless of selected colors. This
+     *                         mimics the old quest pool generation.
      * @param completeSet If true, four of each card in the starting pool will be generated.
      * @param allowDuplicates If true, multiples of each card will be allowed to be generated.
      */
-    public StartingPoolPreferences(final boolean random, final byte preference, final boolean completeSet, final boolean allowDuplicates) {
-        randomPool = random;
-        preferredColor = preference;
+    public StartingPoolPreferences(final PoolType poolType, final List<Byte> preferredColors, final boolean includeArtifacts, final boolean completeSet, final boolean allowDuplicates) {
+        this.poolType = poolType;
+        this.preferredColors = preferredColors;
+        this.includeArtifacts = includeArtifacts;
         this.completeSet = completeSet;
         this.allowDuplicates = allowDuplicates;
     }
 
     /**
-     * Is the starting pool completely random?
-     * @return boolean, true if the starting pool is completely random (except for rarity)
+     * @return The PoolType to use for this starting pool.
      */
-    public boolean useRandomPool() {
-        return randomPool;
+    public PoolType getPoolType() {
+        return poolType;
     }
 
     /**
-     * Get the preferred starting pool color.
-     * Return ALL_COLORS if no preference set.
-     * @return MagicColor
+     * @return A list of colors to use when generating the card pool. See {@link forge.card.MagicColor} for allowed values.
      */
-    public byte getPreferredColor() {
-        return preferredColor;
+    public List<Byte> getPreferredColors() {
+        return preferredColors;
+    }
+
+    public boolean includeArtifacts() {
+        return includeArtifacts;
     }
 
     public boolean grantCompleteSet() {

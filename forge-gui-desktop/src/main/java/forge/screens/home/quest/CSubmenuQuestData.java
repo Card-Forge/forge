@@ -9,6 +9,7 @@ import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.quest.*;
+import forge.quest.StartingPoolPreferences.PoolType;
 import forge.quest.data.GameFormatQuest;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences.QPref;
@@ -31,22 +32,26 @@ import java.util.Map.Entry;
 public enum CSubmenuQuestData implements ICDoc {
     SINGLETON_INSTANCE;
 
-    private final Map<String, QuestData> arrQuests = new HashMap<String, QuestData>();
+    private final Map<String, QuestData> arrQuests = new HashMap<>();
 
     private final VSubmenuQuestData view = VSubmenuQuestData.SINGLETON_INSTANCE;
-    private final List<String> customFormatCodes = new ArrayList<String>();
-    private final List<String> customPrizeFormatCodes = new ArrayList<String>();
+    private final List<String> customFormatCodes = new ArrayList<>();
+    private final List<String> customPrizeFormatCodes = new ArrayList<>();
 
     private final UiCommand cmdQuestSelect = new UiCommand() {
-        @Override public final void run() {
+        @Override public void run() {
             changeQuest();
         }
     };
     private final UiCommand cmdQuestUpdate = new UiCommand() {
-        @Override public final void run() {
+        @Override public void run() {
             update();
         }
     };
+
+    List<Byte> preferredColors = new ArrayList<>();
+    private PoolType poolType = PoolType.BALANCED;
+    private boolean includeArtifacts = true;
 
     @Override
     public void register() {
@@ -61,7 +66,7 @@ public enum CSubmenuQuestData implements ICDoc {
                 new UiCommand() { @Override public void run() { newQuest(); } });
 
         // disable the very powerful sets -- they can be unlocked later for a high price
-        final List<String> unselectableSets = new ArrayList<String>();
+        final List<String> unselectableSets = new ArrayList<>();
         unselectableSets.add("LEA");
         unselectableSets.add("LEB");
         unselectableSets.add("MBP");
@@ -96,6 +101,22 @@ public enum CSubmenuQuestData implements ICDoc {
                 });
             }
         });
+
+        view.getBtnPreferredColors().setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                final DialogChooseColors colorChooser = new DialogChooseColors(preferredColors, poolType, includeArtifacts);
+                colorChooser.show(new UiCommand() {
+                    @Override
+                    public void run() {
+                        preferredColors = colorChooser.getPreferredColors();
+                        poolType = colorChooser.getPoolType();
+                        includeArtifacts = colorChooser.includeArtifacts();
+                    }
+                });
+            }
+        });
+
     }
 
     /* (non-Javadoc)
@@ -103,6 +124,7 @@ public enum CSubmenuQuestData implements ICDoc {
      */
     @Override
     public void update() {
+
         final VSubmenuQuestData view = VSubmenuQuestData.SINGLETON_INSTANCE;
         final File dirQuests = new File(ForgeConstants.QUEST_SAVE_DIR);
         final QuestController qc = FModel.getQuest();
@@ -121,15 +143,15 @@ public enum CSubmenuQuestData implements ICDoc {
         }
 
         // Populate list with available quest data.
-        view.getLstQuests().setQuests(new ArrayList<QuestData>(arrQuests.values()));
+        view.getLstQuests().setQuests(new ArrayList<>(arrQuests.values()));
 
         // If there are quests available, force select.
-        if (arrQuests.size() > 0) {
-            final String questname = FModel.getQuestPreferences().getPref(QPref.CURRENT_QUEST);
+        if (!arrQuests.isEmpty()) {
+            final String questName = FModel.getQuestPreferences().getPref(QPref.CURRENT_QUEST);
 
             // Attempt to select previous quest.
-            if (arrQuests.get(questname) != null) {
-                view.getLstQuests().setSelectedQuestData(arrQuests.get(questname));
+            if (arrQuests.get(questName) != null) {
+                view.getLstQuests().setSelectedQuestData(arrQuests.get(questName));
             }
             else {
                 view.getLstQuests().setSelectedIndex(0);
@@ -152,6 +174,7 @@ public enum CSubmenuQuestData implements ICDoc {
                 view.getBtnEmbark().requestFocusInWindow();
             }
         });
+
     }
 
     /**
@@ -181,7 +204,7 @@ public enum CSubmenuQuestData implements ICDoc {
                         return;
                     }
                 }
-                fmtStartPool = customFormatCodes.isEmpty() ? null : new GameFormatQuest("Custom", customFormatCodes, null); // chosen sets and no banend cards
+                fmtStartPool = customFormatCodes.isEmpty() ? null : new GameFormatQuest("Custom", customFormatCodes, null); // chosen sets and no banned cards
                 break;
 
             case DraftDeck:
@@ -208,15 +231,13 @@ public enum CSubmenuQuestData implements ICDoc {
             fmtStartPool = worldFormat;
         }
 
-        GameFormat fmtPrizes = null;
+        GameFormat fmtPrizes;
 
-        // The starting QuestWorld format should NOT affect what you get if you travel to a world that doesn't have one...
-        // if (worldFormat == null) {
         final StartingPoolType prizedPoolType = view.getPrizedPoolType();
         if (null == prizedPoolType) {
             fmtPrizes = fmtStartPool;
             if (null == fmtPrizes && dckStartPool != null) { // build it form deck
-                final Set<String> sets = new HashSet<String>();
+                final Set<String> sets = new HashSet<>();
                 for (final Entry<PaperCard, Integer> c : dckStartPool.getMain()) {
                     sets.add(c.getKey().getEdition());
                 }
@@ -235,11 +256,11 @@ public enum CSubmenuQuestData implements ICDoc {
                 break;
             case CustomFormat:
                 if (customPrizeFormatCodes.isEmpty()) {
-                    if (!FOptionPane.showConfirmDialog("You have defined custom format as containing no sets.\nThis will choose all editions without restriction as prized.\n\nContinue?")) {
+                    if (!FOptionPane.showConfirmDialog("You have defined custom format as containing no sets.\nThis will choose all editions without restriction as prizes.\n\nContinue?")) {
                         return;
                     }
                 }
-                fmtPrizes = customPrizeFormatCodes.isEmpty() ? null : new GameFormat("Custom Prizes", customPrizeFormatCodes, null); // chosen sets and no banend cards
+                fmtPrizes = customPrizeFormatCodes.isEmpty() ? null : new GameFormat("Custom Prizes", customPrizeFormatCodes, null); // chosen sets and no banned cards
                 break;
             case Rotating:
                 fmtPrizes = view.getPrizedRotatingFormat();
@@ -248,10 +269,8 @@ public enum CSubmenuQuestData implements ICDoc {
                 throw new RuntimeException("Should not get this result");
             }
         }
-        // } else {
-        //    fmtPrizes = worldFormat;
-        // }
-        final StartingPoolPreferences userPrefs = new StartingPoolPreferences(view.randomizeColorDistribution(), view.getPreferredColor(), view.startWithCompleteSet(), view.allowDuplicateCards());
+
+        final StartingPoolPreferences userPrefs = new StartingPoolPreferences(poolType, preferredColors, includeArtifacts, view.startWithCompleteSet(), view.allowDuplicateCards());
 
         String questName;
         while (true) {
@@ -281,27 +300,25 @@ public enum CSubmenuQuestData implements ICDoc {
         FModel.getQuestPreferences().save();
 
         update();
-    }   // New Quest
+
+    }
 
     /** Changes between quest data files. */
     private void changeQuest() {
-        FModel.getQuest().load(VSubmenuQuestData.SINGLETON_INSTANCE
-                .getLstQuests().getSelectedQuest());
+
+        FModel.getQuest().load(VSubmenuQuestData.SINGLETON_INSTANCE.getLstQuests().getSelectedQuest());
 
         // Save in preferences.
-        FModel.getQuestPreferences().setPref(QPref.CURRENT_QUEST,
-                FModel.getQuest().getName() + ".dat");
+        FModel.getQuestPreferences().setPref(QPref.CURRENT_QUEST, FModel.getQuest().getName() + ".dat");
         FModel.getQuestPreferences().save();
-
-        //SSubmenuQuestUtil.updateQuestInfo();
 
         CSubmenuDuels.SINGLETON_INSTANCE.update();
         CSubmenuChallenges.SINGLETON_INSTANCE.update();
         CSubmenuQuestDecks.SINGLETON_INSTANCE.update();
         CSubmenuQuestDraft.SINGLETON_INSTANCE.update();
+
     }
 
-    /** @return  */
     private Map<String, QuestData> getAllQuests() {
         return arrQuests;
     }

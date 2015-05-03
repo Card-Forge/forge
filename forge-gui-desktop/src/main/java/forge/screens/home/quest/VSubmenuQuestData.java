@@ -1,6 +1,5 @@
 package forge.screens.home.quest;
 
-import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.game.GameFormat;
@@ -89,10 +88,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final FCheckBox boxAllowDuplicates = new FCheckBox("Allow duplicate cards");
 
     private final FLabel lblPreferredColor = new FLabel.Builder().text("Starting pool colors:").build();
-    private final FComboBoxWrapper<String> cbxPreferredColor = new FComboBoxWrapper<>();
-    private final String stringBalancedDistribution = "balanced distribution";
-    private final String stringRandomizedDistribution = "randomized distribution";
-    private final String stringBias = " bias";
+    private final FLabel btnPreferredColors = new FLabel.Builder().opaque(true).hoverable(true).text("Choose Colors").build();
 
     private final FLabel btnPrizeDefineCustomFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Define custom format").build();
 
@@ -181,10 +177,6 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
             cbxStartingPool.setEnabled(qw.getFormat() == null);
             cbxFormat.setEnabled(qw.getFormat() == null);
             cbxCustomDeck.setEnabled(qw.getFormat() == null);
-            // Do NOT disable the following...
-            // cbxPrizeFormat.setEnabled(qw.getFormat() == null);
-            // cboAllowUnlocks.setEnabled(qw.getFormat() == null);
-            // cbxPrizedCards.setEnabled(qw.getFormat() == null);
         }
     }
 
@@ -206,7 +198,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         radEasy.setSelected(true);
 
         boxCompleteSet.setToolTipText("You will start the quest with 4 of each card in the sets you have selected.");
-        boxAllowDuplicates.setToolTipText("When your starting pool is generated duplicates of cards may be included.");
+        boxAllowDuplicates.setToolTipText("When your starting pool is generated, duplicates of cards may be included.");
 
         cbxStartingPool.addItem(StartingPoolType.Complete);
         cbxStartingPool.addItem(StartingPoolType.Rotating);
@@ -231,16 +223,6 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
             cbxFormat.addItem(gf);
             cbxPrizeFormat.addItem(gf);
         }
-
-        // Initialize color balance selection
-        cbxPreferredColor.addItem(stringBalancedDistribution);
-        cbxPreferredColor.addItem(stringRandomizedDistribution);
-        cbxPreferredColor.addItem(MagicColor.Constant.WHITE + stringBias);
-        cbxPreferredColor.addItem(MagicColor.Constant.BLUE + stringBias);
-        cbxPreferredColor.addItem(MagicColor.Constant.BLACK + stringBias);
-        cbxPreferredColor.addItem(MagicColor.Constant.RED + stringBias);
-        cbxPreferredColor.addItem(MagicColor.Constant.GREEN + stringBias);
-        cbxPreferredColor.addItem(MagicColor.Constant.COLORLESS + stringBias);
 
         for (final QuestWorld qw : FModel.getWorlds()) {
             cbxStartingWorld.addItem(qw);
@@ -291,16 +273,14 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         boxCompleteSet.setEnabled(true);
         boxAllowDuplicates.setEnabled(true);
 
-        cbxPreferredColor.setEnabled(true);
-
         pnlOptions.setOpaque(false);
         pnlOptions.setLayout(new MigLayout("insets 0, gap 10px, fillx, wrap 2"));
 
         final JPanel pnlDifficultyMode = new JPanel(new MigLayout("insets 0, gap 1%, flowy"));
         pnlDifficultyMode.add(difficultyPanel, "gapright 4%");
-        pnlDifficultyMode.add(boxFantasy, "h 27px!, gapbottom 15, gapright 4%");
-        pnlDifficultyMode.add(lblStartingWorld, "h 27px!, hidemode 3");
-        cbxStartingWorld.addTo(pnlDifficultyMode, "h 27px!, w 40%, pushx, hidemode 3");
+        pnlDifficultyMode.add(boxFantasy, "h 25px!, gapbottom 15, gapright 4%");
+        pnlDifficultyMode.add(lblStartingWorld, "h 25px!, hidemode 3");
+        cbxStartingWorld.addTo(pnlDifficultyMode, "h 27px!, w 40%, pushx, gapbottom 7");
         pnlDifficultyMode.setOpaque(false);
         pnlOptions.add(pnlDifficultyMode, "w 40%");
 
@@ -337,7 +317,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         pnlRestrictions.add(boxCompleteSet, "h 15px!, cell 1 3");
 
         pnlRestrictions.add(lblPreferredColor, constraints + hidemode + "cell 0 4");
-        cbxPreferredColor.addTo(pnlRestrictions, constraints + cboWidthStart + "cell 1 4");
+        pnlRestrictions.add(btnPreferredColors, btnStartingCustomFormatWidth + constraints + hidemode + "cell 1 4");
 
         // Prized cards options
         pnlRestrictions.add(lblPrizedCards, constraints + " cell 0 5");
@@ -345,7 +325,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
         pnlRestrictions.add(lblPrizeFormat, constraints + hidemode + "cell 0 6");
         cbxPrizeFormat.addTo(pnlRestrictions, constraints + cboWidthStart + "cell 1 6"); // , skip 1
-        pnlRestrictions.add(btnPrizeDefineCustomFormat, constraints + hidemode + "cell 1 6");
+        pnlRestrictions.add(btnPrizeDefineCustomFormat, btnStartingCustomFormatWidth + constraints + hidemode + "cell 1 6");
         pnlRestrictions.add(lblPrizeSameAsStarting, constraints + hidemode + "cell 1 6");
         pnlRestrictions.add(lblPrizeUnrestricted, constraints + hidemode + "cell 1 6");
 
@@ -507,15 +487,8 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     }
 
     public boolean randomizeColorDistribution() {
-        return stringRandomizedDistribution.equals(cbxPreferredColor.getSelectedItem());
-    }
-
-    public byte getPreferredColor() {
-        if (stringBalancedDistribution.equals(cbxPreferredColor.getSelectedItem())
-                || stringRandomizedDistribution.equals(cbxPreferredColor.getSelectedItem())) {
-            return MagicColor.ALL_COLORS;
-        }
-        return MagicColor.fromName(cbxPreferredColor.getSelectedItem().split(" ")[0]);
+        return false;
+        //return stringRandomizedDistribution.equals(cbxPreferredColor.getSelectedItem());
     }
 
     public GameFormat getRotatingFormat() {
@@ -531,6 +504,9 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     }
     public FLabel getBtnPrizeCustomFormat() {
         return btnPrizeDefineCustomFormat;
+    }
+    public FLabel getBtnPreferredColors() {
+        return btnPreferredColors;
     }
 
 }

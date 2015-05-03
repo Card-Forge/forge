@@ -2,6 +2,7 @@ package forge.screens.quest;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import forge.FThreads;
+import forge.UiCommand;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.card.MagicColor;
@@ -15,6 +16,7 @@ import forge.model.CardCollections;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.quest.*;
+import forge.quest.StartingPoolPreferences.PoolType;
 import forge.quest.data.GameFormatQuest;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.FScreen;
@@ -23,6 +25,7 @@ import forge.screens.home.NewGameMenu;
 import forge.screens.quest.QuestMenu.LaunchReason;
 import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FRadioButton.RadioButtonGroup;
 import forge.util.FileUtil;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
@@ -34,13 +37,23 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class NewQuestScreen extends FScreen {
+
     private static final float EMBARK_BTN_HEIGHT = 2 * Utils.AVG_FINGER_HEIGHT;
     private static final float PADDING = FOptionPane.PADDING;
 
     private final List<String> customFormatCodes = new ArrayList<>();
     private final List<String> customPrizeFormatCodes = new ArrayList<>();
 
+    private final class FColorCheckBox extends FCheckBox {
+        private FColorCheckBox(final String text0) {
+            super(text0);
+        }
+    }
+
     private final FScrollPane scroller = add(new FScrollPane() {
+
+        private int colorBoxCount = 0;
+
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
             float x = PADDING;
@@ -51,17 +64,33 @@ public class NewQuestScreen extends FScreen {
             float gapY = PADDING / 2;
 
             for (FDisplayObject obj : getChildren()) {
-                if (!obj.isVisible()) { continue; }
+                if (!obj.isVisible()) {
+                    continue;
+                }
 
-                if (obj instanceof FLabel) {
+                if (obj instanceof FColorCheckBox) {
+                    float visWidth = (visibleWidth - PADDING) / 3;
+                    float xAdjustment = visWidth * (colorBoxCount++ % 3);
+                    if (colorBoxCount == 1 || colorBoxCount == 4) {
+                        xAdjustment += PADDING;
+                    }
+                    obj.setBounds(xAdjustment, y, visWidth, h); //make label take up half of line so combo boxes all the same width
+                    x += obj.getWidth();
+                    if (colorBoxCount == 3 || colorBoxCount == 6) {
+                        y += h + gapY;
+                        x = PADDING;
+                    }
+                    continue;
+                }
+
+                if (obj instanceof FLabel && obj != lblPoolDistribution && obj != lblPoolOptions && obj != lblPreferredColor) {
                     //display labels inline before object following them
-                    FLabel lbl = (FLabel)obj;
+                    FLabel lbl = (FLabel) obj;
                     if (lbl.getText().endsWith(":")) {
                         obj.setBounds(x, y, visibleWidth / 2 - x, h); //make label take up half of line so combo boxes all the same width
                         x += obj.getWidth();
                         continue;
-                    }
-                    else if (lbl.getAlignment() == HAlignment.RIGHT) {
+                    } else if (lbl.getAlignment() == HAlignment.RIGHT) {
                         y -= gapY; //remove most of the padding above description text
                     }
                 }
@@ -84,13 +113,6 @@ public class NewQuestScreen extends FScreen {
     private final FComboBox<String> cbxDifficulty = scroller.add(new FComboBox<>(new String[]{ "Easy", "Medium", "Hard", "Expert" }));
 
     @SuppressWarnings("unused")
-    private final FLabel lblPreferredColor = scroller.add(new FLabel.Builder().text("Starting pool colors:").build());
-    private final FComboBox<String> cbxPreferredColor = scroller.add(new FComboBox<String>());
-    private final String stringBalancedDistribution = "balanced distribution";
-    private final String stringRandomizedDistribution = "randomized distribution";
-    private final String stringBias = " bias";
-
-    @SuppressWarnings("unused")
     private final FLabel lblStartingPool = scroller.add(new FLabel.Builder().text("Starting pool:").build());
     private final FComboBox<StartingPoolType> cbxStartingPool = scroller.add(new FComboBox<StartingPoolType>());
 
@@ -108,6 +130,27 @@ public class NewQuestScreen extends FScreen {
     private final FLabel btnDefineCustomFormat = scroller.add(new FLabel.ButtonBuilder().text("Define custom format").build());
 
     @SuppressWarnings("unused")
+    private final FLabel lblPoolDistribution = scroller.add(new FLabel.Builder().text("Starting pool distribution:").build());
+    private final FRadioButton radBalanced = scroller.add(new FRadioButton("Balanced"));
+    private final FRadioButton radRandom = scroller.add(new FRadioButton("Random"));
+    private final FRadioButton radSurpriseMe = scroller.add(new FRadioButton("Surprise Me"));
+
+    @SuppressWarnings("unused")
+    private final FLabel lblPreferredColor = scroller.add(new FLabel.Builder().text("Starting pool colors:").build());
+    private final FColorCheckBox cbBlack = scroller.add(new FColorCheckBox("Black"));
+    private final FColorCheckBox cbBlue = scroller.add(new FColorCheckBox("Blue"));
+    private final FColorCheckBox cbGreen = scroller.add(new FColorCheckBox("Green"));
+    private final FColorCheckBox cbRed = scroller.add(new FColorCheckBox("Red"));
+    private final FColorCheckBox cbWhite = scroller.add(new FColorCheckBox("White"));
+    private final FColorCheckBox cbColorless = scroller.add(new FColorCheckBox("Colorless"));
+
+    @SuppressWarnings("unused")
+    private final FLabel lblPoolOptions = scroller.add(new FLabel.Builder().text("Starting pool options:").build());
+    private final FCheckBox cbCompleteSet = scroller.add(new FCheckBox("Start with all cards in selected sets"));
+    private final FCheckBox cbDuplicateCards = scroller.add(new FCheckBox("Allow duplicates in starting pool"));
+    private final FCheckBox cbIncludeArtifacts = scroller.add(new FCheckBox("Include artifacts in starting pool"));
+
+    @SuppressWarnings("unused")
     private final FLabel lblPrizedCards = scroller.add(new FLabel.Builder().text("Prized cards:").build());
     private final FComboBox<Object> cbxPrizedCards = scroller.add(new FComboBox<>());
 
@@ -119,8 +162,6 @@ public class NewQuestScreen extends FScreen {
     private final FLabel btnPrizeDefineCustomFormat = scroller.add(new FLabel.ButtonBuilder().text("Define custom format").build());
 
     private final FCheckBox cbAllowUnlocks = scroller.add(new FCheckBox("Allow unlock of additional editions"));
-    private final FCheckBox cbCompleteSet = scroller.add(new FCheckBox("Start with all cards in selected sets"));
-    private final FCheckBox cbDuplicateCards = scroller.add(new FCheckBox("Allow duplicates in starting pool"));
     private final FCheckBox cbFantasy = scroller.add(new FCheckBox("Fantasy Mode"));
 
     private final FLabel btnEmbark = add(new FLabel.ButtonBuilder()
@@ -172,15 +213,28 @@ public class NewQuestScreen extends FScreen {
             cbxPrizeFormat.addItem(gf);
         }
 
-        // Initialize color balance selection
-        cbxPreferredColor.addItem(stringBalancedDistribution);
-        cbxPreferredColor.addItem(stringRandomizedDistribution);
-        cbxPreferredColor.addItem(MagicColor.Constant.WHITE + stringBias);
-        cbxPreferredColor.addItem(MagicColor.Constant.BLUE + stringBias);
-        cbxPreferredColor.addItem(MagicColor.Constant.BLACK + stringBias);
-        cbxPreferredColor.addItem(MagicColor.Constant.RED + stringBias);
-        cbxPreferredColor.addItem(MagicColor.Constant.GREEN + stringBias);
-        cbxPreferredColor.addItem(MagicColor.Constant.COLORLESS + stringBias);
+        RadioButtonGroup distributionGroup = new RadioButtonGroup();
+        radBalanced.setGroup(distributionGroup);
+        radBalanced.setSelected(true);
+        radRandom.setGroup(distributionGroup);
+        radSurpriseMe.setGroup(distributionGroup);
+
+        UiCommand colorBoxEnabler = new UiCommand() {
+            @Override
+            public void run() {
+                cbBlack.setEnabled(radBalanced.isSelected());
+                cbBlue.setEnabled(radBalanced.isSelected());
+                cbGreen.setEnabled(radBalanced.isSelected());
+                cbRed.setEnabled(radBalanced.isSelected());
+                cbWhite.setEnabled(radBalanced.isSelected());
+                cbColorless.setEnabled(radBalanced.isSelected());
+                cbIncludeArtifacts.setEnabled(radBalanced.isSelected());
+            }
+        };
+
+        radBalanced.setCommand(colorBoxEnabler);
+        radRandom.setCommand(colorBoxEnabler);
+        radSurpriseMe.setCommand(colorBoxEnabler);
 
         for (QuestWorld qw : FModel.getWorlds()) {
             cbxStartingWorld.addItem(qw);
@@ -260,7 +314,6 @@ public class NewQuestScreen extends FScreen {
         cbFantasy.setSelected(true);
         cbFantasy.setEnabled(true);
 
-        cbxPreferredColor.setEnabled(true);
     }
 
     private void updateStartingPoolOptions() {
@@ -379,16 +432,41 @@ public class NewQuestScreen extends FScreen {
         return cbFantasy.isSelected();
     }
 
-    public boolean randomizeColorDistribution() {
-        return stringRandomizedDistribution.equals(cbxPreferredColor.getSelectedItem());
+    public PoolType getPoolType() {
+        if (radSurpriseMe.isSelected()) {
+            return PoolType.RANDOM_BALANCED;
+        }
+        if (radRandom.isSelected()) {
+            return PoolType.RANDOM;
+        }
+        return PoolType.BALANCED;
     }
 
-    public byte getPreferredColor() {
-        if (stringBalancedDistribution.equals(cbxPreferredColor.getSelectedItem())
-                || stringRandomizedDistribution.equals(cbxPreferredColor.getSelectedItem())) {
-            return MagicColor.ALL_COLORS;
+    public List<Byte> getPreferredColors() {
+
+        List<Byte> preferredColors = new ArrayList<>();
+
+        if (cbBlack.isSelected()) {
+            preferredColors.add(MagicColor.BLACK);
         }
-        return MagicColor.fromName(cbxPreferredColor.getSelectedItem().split(" ")[0]);
+        if (cbBlue.isSelected()) {
+            preferredColors.add(MagicColor.BLUE);
+        }
+        if (cbGreen.isSelected()) {
+            preferredColors.add(MagicColor.GREEN);
+        }
+        if (cbRed.isSelected()) {
+            preferredColors.add(MagicColor.RED);
+        }
+        if (cbWhite.isSelected()) {
+            preferredColors.add(MagicColor.WHITE);
+        }
+        if (cbColorless.isSelected()) {
+            preferredColors.add(MagicColor.COLORLESS);
+        }
+
+        return preferredColors;
+
     }
 
     public GameFormat getRotatingFormat() {
@@ -526,7 +604,8 @@ public class NewQuestScreen extends FScreen {
                     @Override
                     public void run() {
                         final QuestMode mode = isFantasy() ? QuestMode.Fantasy : QuestMode.Classic;
-                        final StartingPoolPreferences userPrefs = new StartingPoolPreferences(randomizeColorDistribution(), getPreferredColor(), startWithCompleteSet(), allowDuplicateCards());
+                        final StartingPoolPreferences userPrefs =
+                                new StartingPoolPreferences(getPoolType(), getPreferredColors(), cbIncludeArtifacts.isSelected(), startWithCompleteSet(), allowDuplicateCards());
                         QuestController qc = FModel.getQuest();
                         qc.newGame(questName, getSelectedDifficulty(), mode, fmtPrizes, isUnlockSetsAllowed(), dckStartPool, fmtStartPool, getStartingWorldName(), userPrefs);
                         qc.save();

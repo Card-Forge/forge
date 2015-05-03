@@ -1,18 +1,5 @@
 package forge.screens.home.quest;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-
-import net.miginfocom.swing.MigLayout;
 import forge.assets.FSkinProp;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -29,6 +16,15 @@ import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedTextField;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Assembles Swing components of quest preferences submenu singleton.
@@ -76,7 +72,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
     /**
      * Constructor.
      */
-    private VSubmenuQuestPrefs() {
+    VSubmenuQuestPrefs() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         pnlContent.setOpaque(false);
@@ -318,7 +314,9 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         pnlDifficulty.add(new FLabel.Builder().text("Starting Snow Lands").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_SNOW_LANDS, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
 
-        pnlDifficulty.add(new FLabel.Builder().text("Color Bias (1-10)").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
+        FLabel colorBias = new FLabel.Builder().text("Color Bias (1-100%)").fontAlign(SwingConstants.RIGHT).build();
+        colorBias.setToolTipText("The percentage of cards in your starting pool that will be the colors you select.");
+        pnlDifficulty.add(colorBias, labelConstraints);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_POOL_COLOR_BIAS, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
 
         pnlDifficulty.add(new FLabel.Builder().text("Penalty for Loss").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
@@ -398,7 +396,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         /**
          * @param qp0 &emsp; {@link forge.quest.data.QuestPreferences.QPref}
          *                  preferences ident enum
-         * @param e0 &emsp; {@link forge.view.home.ViewQuestPreference.QuestPreferencesErrType}
+         * @param e0 &emsp; {@link forge.screens.home.quest.VSubmenuQuestPrefs.QuestPreferencesErrType}
          *                  where error should display to
          */
         public PrefInput(final QPref qp0, final QuestPreferencesErrType e0) {

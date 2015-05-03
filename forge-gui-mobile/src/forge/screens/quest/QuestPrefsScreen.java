@@ -88,7 +88,7 @@ public class QuestPrefsScreen extends FScreen {
         scroller.add(new PrefsHeader("Difficulty Adjustments (All)", FSkinImage.QUEST_NOTES, PrefsGroup.DIFFICULTY_ALL));
         scroller.add(new PrefsOption("Starting basic lands", QPref.STARTING_BASIC_LANDS, PrefsGroup.DIFFICULTY_ALL));
         scroller.add(new PrefsOption("Starting snow lands", QPref.STARTING_SNOW_LANDS, PrefsGroup.DIFFICULTY_ALL));
-        scroller.add(new PrefsOption("Color bias (1-10)", QPref.STARTING_POOL_COLOR_BIAS, PrefsGroup.DIFFICULTY_ALL));
+        scroller.add(new PrefsOption("Color bias (1-100%)", QPref.STARTING_POOL_COLOR_BIAS, PrefsGroup.DIFFICULTY_ALL));
         scroller.add(new PrefsOption("Penalty for loss", QPref.PENALTY_LOSS, PrefsGroup.DIFFICULTY_ALL));
 
         //Difficult Adjustments (Easy)
@@ -145,7 +145,7 @@ public class QuestPrefsScreen extends FScreen {
         scroller.setBounds(0, startY, width, height - startY);
     }
 
-    private class PrefsHeader extends FLabel {
+    private final class PrefsHeader extends FLabel {
         private PrefsHeader(String title, FImage icon, final PrefsGroup group) {
             super(new ButtonBuilder().text(title).font(FSkinFont.get(16)).icon(icon).iconScaleFactor(1f)
                     .command(new FEventHandler() {
@@ -165,7 +165,7 @@ public class QuestPrefsScreen extends FScreen {
         }
     }
 
-    private static class PrefsOption extends FContainer {
+    private static final class PrefsOption extends FContainer {
         private static final float FIELD_WIDTH = new FTextField("99999").getAutoSizeWidth(); //base width on 5 digit number
 
         private final FLabel label = add(new FLabel.Builder().build());
@@ -186,7 +186,7 @@ public class QuestPrefsScreen extends FScreen {
             field.setBounds(width - FIELD_WIDTH, 0, FIELD_WIDTH, height);
         }
 
-        private class OptionField extends FNumericTextField {
+        private final class OptionField extends FNumericTextField {
             private OptionField() {
             }
 

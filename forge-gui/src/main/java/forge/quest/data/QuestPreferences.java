@@ -17,10 +17,10 @@
  */
 package forge.quest.data;
 
-import java.io.Serializable;
-
 import forge.properties.ForgeConstants;
 import forge.properties.PreferencesStore;
+
+import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> implements Serializable {
@@ -28,7 +28,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
     /**
      * Preference identifiers, and their default values.
      */
-    public static enum QPref {
+    public enum QPref {
 
         // How many of each rarity comes in a won booster pack
         BOOSTER_COMMONS("11"),
@@ -72,7 +72,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         STARTING_SNOW_LANDS("5"),
 
         // Starting pool color bias effect
-        STARTING_POOL_COLOR_BIAS("6"),
+        STARTING_POOL_COLOR_BIAS("75"),
 
         // Commons in your starting pool, by difficulty
         STARTING_COMMONS_EASY("82"),
@@ -164,7 +164,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
          * @param s0
          *            &emsp; {@link java.lang.String}
          */
-        private QPref(final String s0) {
+        QPref(final String s0) {
             this.strDefaultVal = s0;
         }
 
@@ -178,7 +178,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         }
     }
 
-    public static enum DifficultyPrefs {
+    public enum DifficultyPrefs {
         STARTING_COMMONS,
         STARTING_UNCOMMONS,
         STARTING_RARES,
@@ -235,7 +235,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
             newQPref += "_EXPERT";
             break;
         default:
-            throw new IllegalArgumentException(String.format("Difficulty index %d out of bounds, preference %s", Integer.valueOf(difficultyIndex), newQPref));
+            throw new IllegalArgumentException(String.format("Difficulty index %d out of bounds, preference %s", difficultyIndex, newQPref));
         }
 
         return getPref(QPref.valueOf(newQPref));
@@ -253,8 +253,8 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         case STARTING_POOL_COLOR_BIAS:
             if (val < 1) {
                 return "Bias value too small (minimum 1).";
-            } else if (val > 10) {
-                return "Bias value too large (maximum 10).";
+            } else if (val > 100) {
+                return "Bias value too large (maximum 100).";
             }
             break;
 

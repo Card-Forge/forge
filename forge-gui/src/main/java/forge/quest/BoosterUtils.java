@@ -21,17 +21,17 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.MagicColor;
 import forge.card.PrintSheet;
 import forge.item.*;
+import forge.item.IPaperCard.Predicates.Presets;
 import forge.model.FModel;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
-
+import forge.util.PredicateString.StringOp;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -49,67 +49,47 @@ import java.util.List;
  */
 public final class BoosterUtils {
 
+    private static final List<Byte> possibleColors = new ArrayList<>();
+
+    private static final int RARES_PER_MYTHIC = 8;
+    private static final int MAX_BIAS = 100; //Bias is a percentage; this is 100%
+
+    private static final int[] COLOR_COUNT_PROBABILITIES = new int[] {
+            1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 4, 4, 5, 6
+    };
+
     /**
      * Gets the quest starter deck.
      *
      * @param filter
      *            the filter
-     * @param numCommon
+     * @param numCommons
      *            the num common
-     * @param numUncommon
+     * @param numUncommons
      *            the num uncommon
-     * @param numRare
+     * @param numRares
      *            the num rare
      * @param userPrefs
      *            the starting pool preferences
      * @return the quest starter deck
      */
-    public static List<PaperCard> getQuestStarterDeck(final Predicate<PaperCard> filter, final int numCommon,
-            final int numUncommon, final int numRare, final StartingPoolPreferences userPrefs) {
+    public static List<PaperCard> getQuestStarterDeck(final Predicate<PaperCard> filter, final int numCommons,
+            final int numUncommons, final int numRares, final StartingPoolPreferences userPrefs) {
 
-        final ArrayList<PaperCard> cards = new ArrayList<>();
-
-        // Each color should have around the same amount of monocolored cards
-        // There should be 3 Colorless cards for every 4 cards in a single color
-        // There should be 1 Multicolor card for every 4 cards in a single color
-
-        final List<Predicate<CardRules>> colorFilters = new ArrayList<>();
-        final boolean preferred = (userPrefs != null && userPrefs.getPreferredColor() != MagicColor.ALL_COLORS);
-        final boolean randomized = userPrefs != null && userPrefs.useRandomPool();
-        final int colorBias =  (preferred && !randomized) ? FModel.getQuestPreferences().getPrefInt(QPref.STARTING_POOL_COLOR_BIAS) : 0;
-        final int biasAdjustedCommons = (((colorBias * numCommon) / 25) > 0 ? numCommon - (colorBias * numCommon) / 25 : numCommon);
-        final int biasAdjustedUncommons = (((colorBias * numUncommon) / 25) > 0 ? numUncommon - (colorBias * numUncommon) / 25 : numUncommon);
-        final int biasAdjustedRares = (((colorBias * numRare) / 25) > 0 ? numRare - (colorBias * numRare) / 25 : numRare);
-
-        if (!randomized) {
-            colorFilters.add(CardRulesPredicates.Presets.IS_MULTICOLOR);
-
-            // extra filters of the preferred color if chosen
-            if (preferred) {
-                for (int i = 0; i < colorBias +  (colorBias > 6 ? (2 * (colorBias - 6 + (colorBias / 10))) : 0); i++) {
-                    colorFilters.add(CardRulesPredicates.isMonoColor(userPrefs.getPreferredColor()));
-                }
-            }
-
-            for (int i = 0; i < (preferred ? 3 : 4); i++) {
-                if (i != 2) {
-                    colorFilters.add(CardRulesPredicates.Presets.IS_COLORLESS);
-                }
-
-                colorFilters.add(CardRulesPredicates.isMonoColor(MagicColor.WHITE));
-                colorFilters.add(CardRulesPredicates.isMonoColor(MagicColor.RED));
-                colorFilters.add(CardRulesPredicates.isMonoColor(MagicColor.BLUE));
-                colorFilters.add(CardRulesPredicates.isMonoColor(MagicColor.BLACK));
-                colorFilters.add(CardRulesPredicates.isMonoColor(MagicColor.GREEN));
-            }
-
+        if (possibleColors.isEmpty()) {
+            possibleColors.add(MagicColor.BLACK);
+            possibleColors.add(MagicColor.BLUE);
+            possibleColors.add(MagicColor.GREEN);
+            possibleColors.add(MagicColor.RED);
+            possibleColors.add(MagicColor.WHITE);
+            possibleColors.add(MagicColor.COLORLESS);
         }
-        // This will save CPU time when sets are limited
-        final List<PaperCard> cardpool = Lists.newArrayList(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), filter));
 
-        assert userPrefs != null;
-        if (userPrefs.grantCompleteSet()) {
-            for (PaperCard card : cardpool) {
+        final List<PaperCard> cardPool = Lists.newArrayList(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), filter));
+        final List<PaperCard> cards = new ArrayList<>();
+
+        if (userPrefs != null && userPrefs.grantCompleteSet()) {
+            for (PaperCard card : cardPool) {
                 cards.add(card);
                 cards.add(card);
                 cards.add(card);
@@ -118,29 +98,167 @@ public final class BoosterUtils {
             return cards;
         }
 
-        final Predicate<PaperCard> pCommon = IPaperCard.Predicates.Presets.IS_COMMON;
-        cards.addAll(BoosterUtils.generateCards(cardpool, pCommon, biasAdjustedCommons, colorFilters, userPrefs.allowDuplicates()));
+        final boolean allowDuplicates = userPrefs != null && userPrefs.allowDuplicates();
+        final boolean mythicsAvailable = Iterables.any(cardPool, Presets.IS_MYTHIC_RARE);
+        final int numMythics = mythicsAvailable ? numRares / RARES_PER_MYTHIC : 0;
+        final int adjustedRares = numRares - numMythics;
 
-        final Predicate<PaperCard> pUncommon = IPaperCard.Predicates.Presets.IS_UNCOMMON;
-        cards.addAll(BoosterUtils.generateCards(cardpool, pUncommon, biasAdjustedUncommons, colorFilters, userPrefs.allowDuplicates()));
+        final List<Predicate<CardRules>> colorFilters = getColorFilters(userPrefs, cardPool);
 
-        int nRares = biasAdjustedRares, nMythics = 0;
-        final Predicate<PaperCard> filterMythics = IPaperCard.Predicates.Presets.IS_MYTHIC_RARE;
-        final boolean haveMythics = Iterables.any(cardpool, filterMythics);
-        for (int iSlot = 0; haveMythics && (iSlot < numRare); iSlot++) {
-            if (MyRandom.getRandom().nextInt(10) < 1) {
-                // 10% chance of upgrading a Rare into a Mythic
-                nRares--;
-                nMythics++;
-            }
+        cards.addAll(BoosterUtils.generateCards(cardPool, Presets.IS_COMMON, numCommons, colorFilters, allowDuplicates));
+        cards.addAll(BoosterUtils.generateCards(cardPool, Presets.IS_UNCOMMON, numUncommons, colorFilters, allowDuplicates));
+        cards.addAll(BoosterUtils.generateCards(cardPool, Presets.IS_RARE, adjustedRares, colorFilters, allowDuplicates));
+
+        if (numMythics > 0) {
+            cards.addAll(BoosterUtils.generateCards(cardPool, Presets.IS_MYTHIC_RARE, numMythics, colorFilters, allowDuplicates));
         }
 
-        final Predicate<PaperCard> pRare = IPaperCard.Predicates.Presets.IS_RARE;
-        cards.addAll(BoosterUtils.generateCards(cardpool, pRare, nRares, colorFilters, false));
-        if (nMythics > 0) {
-            cards.addAll(BoosterUtils.generateCards(cardpool, filterMythics, nMythics, colorFilters, userPrefs.allowDuplicates()));
-        }
         return cards;
+
+    }
+
+    private static List<Predicate<CardRules>> getColorFilters(final StartingPoolPreferences userPrefs, final List<PaperCard> cardPool) {
+
+        final List<Predicate<CardRules>> colorFilters = new ArrayList<>();
+
+        if (userPrefs != null) {
+
+            boolean includeArtifacts = userPrefs.includeArtifacts();
+
+            final List<Byte> preferredColors = userPrefs.getPreferredColors();
+
+            switch (userPrefs.getPoolType()) {
+
+                case RANDOM_BALANCED:
+                    preferredColors.clear();
+                    int numberOfColors = COLOR_COUNT_PROBABILITIES[(int) (Math.random() * COLOR_COUNT_PROBABILITIES.length)];
+                    if (numberOfColors < 6) {
+                        Collections.shuffle(possibleColors);
+                        for (int i = 0; i < numberOfColors; i++) {
+                            preferredColors.add(possibleColors.get(i));
+                        }
+                    } else {
+                        preferredColors.addAll(possibleColors);
+                    }
+                    includeArtifacts = Math.random() < 0.5;
+                case BALANCED:
+                    populateBalancedFilters(colorFilters, preferredColors, cardPool, includeArtifacts);
+                    break;
+                case RANDOM:
+                    populateRandomFilters(colorFilters);
+                    break;
+
+            }
+
+        }
+
+        return colorFilters;
+
+    }
+
+    private static void populateRandomFilters(final List<Predicate<CardRules>> colorFilters) {
+
+        for (int i = 0; i < MAX_BIAS; i++) {
+            Predicate<CardRules> predicate;
+            byte color = possibleColors.get((int) (Math.random() * 6));
+            if (Math.random() < 0.6) {
+                predicate = CardRulesPredicates.isMonoColor(color);
+            } else {
+                predicate = CardRulesPredicates.hasColor(color);
+            }
+            if (Math.random() < 0.1) {
+                predicate = Predicates.and(predicate, CardRulesPredicates.Presets.IS_MULTICOLOR);
+            }
+            colorFilters.add(predicate);
+        }
+
+    }
+
+    private static void populateBalancedFilters(final List<Predicate<CardRules>> colorFilters, final List<Byte> preferredColors, final List<PaperCard> cardPool, final boolean includeArtifacts) {
+
+        final List<Byte> otherColors = new ArrayList<>(possibleColors);
+        otherColors.removeAll(preferredColors);
+
+        int colorBias = FModel.getQuestPreferences().getPrefInt(QPref.STARTING_POOL_COLOR_BIAS);
+        double preferredBias = 0;
+
+        if (preferredColors.isEmpty()) {
+            colorBias = 0;
+        } else {
+            preferredBias = (double) colorBias / preferredColors.size();
+        }
+
+        int usedMulticolor = 0, usedPhyrexian = 0;
+
+        for (int i = 0; i < MAX_BIAS; i++) {
+
+            if (i < colorBias) {
+
+                int index = (int) ((double) i / preferredBias);
+                for (Byte ignored : otherColors) {
+
+                    //Add artifacts here if there's no colorless selection
+                    if (i % 8 == 0 && !preferredColors.contains(MagicColor.COLORLESS) && includeArtifacts) {
+                        colorFilters.add(CardRulesPredicates.Presets.IS_ARTIFACT);
+                    } else if (i % 5 == 0) {
+
+                        //If colorless is the only color selected, add a small chance to get Phyrexian mana cost cards.
+                        if (preferredColors.contains(MagicColor.COLORLESS) && preferredColors.size() == 1) {
+
+                            Predicate<CardRules> predicateRules =  CardRulesPredicates.cost(StringOp.CONTAINS_IC, "p/");
+                            Predicate<PaperCard> predicateCard = Predicates.compose(predicateRules, PaperCard.FN_GET_RULES);
+
+                            int size = Iterables.size(Iterables.filter(cardPool, predicateCard));
+                            int totalSize = cardPool.size();
+
+                            double phyrexianAmount = (double) size / totalSize;
+                            phyrexianAmount *= 125;
+
+                            if (usedPhyrexian < Math.min(1, phyrexianAmount)) {
+                                colorFilters.add(predicateRules);
+                                usedPhyrexian++;
+                                continue;
+                            }
+
+                        }
+
+                        //Try to get multicolored cards that fit into the preferred colors.
+                        Predicate<CardRules> predicateRules = Predicates.and(
+                                CardRulesPredicates.isColor(preferredColors.get(index)),
+                                CardRulesPredicates.Presets.IS_MULTICOLOR
+                        );
+                        Predicate<PaperCard> predicateCard = Predicates.compose(predicateRules, PaperCard.FN_GET_RULES);
+
+                        //Adjust for the number of multicolored possibilities. This prevents flooding of non-selected
+                        //colors if multicolored cards aren't in the selected sets. The more multi-colored cards in the
+                        //sets, the more that will be selected.
+                        if (usedMulticolor / 8 < Iterables.size(Iterables.filter(cardPool, predicateCard))) {
+                            colorFilters.add(predicateRules);
+                            usedMulticolor++;
+                        } else {
+                            //Exceeded multicolor-specific ratio, so here we add a more generic filter.
+                            colorFilters.add(CardRulesPredicates.isColor(preferredColors.get(index)));
+                        }
+
+                    } else {
+                        colorFilters.add(CardRulesPredicates.isMonoColor(preferredColors.get(index)));
+                    }
+                }
+
+            } else {
+
+                for (Byte color : otherColors) {
+                    if (i % 6 == 0) {
+                        colorFilters.add(Predicates.and(CardRulesPredicates.isColor(color), CardRulesPredicates.Presets.IS_MULTICOLOR));
+                    } else {
+                        colorFilters.add(CardRulesPredicates.isMonoColor(color));
+                    }
+                }
+
+            }
+
+        }
+
     }
 
     /**
@@ -162,7 +280,7 @@ public final class BoosterUtils {
             final Iterable<PaperCard> source, final Predicate<PaperCard> filter, final int cntNeeded,
             final List<Predicate<CardRules>> allowedColors, final boolean allowDuplicates) {
 
-        // If color is null, use colorOrder progression to grab cards
+        //If color is null, use colorOrder progression to grab cards
         final ArrayList<PaperCard> result = new ArrayList<>();
 
         final int size = allowedColors == null ? 0 : allowedColors.size();
@@ -172,23 +290,35 @@ public final class BoosterUtils {
 
         int cntMade = 0, iAttempt = 0;
 
-        // This will prevent endless loop @ wh
-        int allowedMisses = (size + 4) * cntNeeded; // lol, 2+2 is not magic constant!
+        //This will prevent endless loop @ wh
+        int allowedMisses = (size + 4) * cntNeeded;
+        int nullMisses = 0;
 
-        while ((cntMade < cntNeeded) && (allowedMisses > 0)) {
+        while (cntMade < cntNeeded && allowedMisses > 0) {
             PaperCard card = null;
 
             if (size > 0) {
                 final Predicate<CardRules> color2 = allowedColors.get(iAttempt % size);
-                if (color2 != null) {
-                    Predicate<PaperCard> color2c = Predicates.compose(color2, PaperCard.FN_GET_RULES);
-                    card = Aggregates.random(Iterables.filter(source, Predicates.and(filter, color2c)));
-                }
+                int colorMisses = 0;
+                //Try a few times to get a card using the available filter. This is important for sets with only a small
+                //handful of multi-colored cards.
+                do {
+                    if (color2 != null) {
+                        Predicate<PaperCard> color2c = Predicates.compose(color2, PaperCard.FN_GET_RULES);
+                        card = Aggregates.random(Iterables.filter(source, Predicates.and(filter, color2c)));
+                    }
+                } while (card == null && colorMisses++ < 10);
             }
 
             if (card == null) {
-                // We can't decide on a color, so just pick a card.
-                card = Aggregates.random(Iterables.filter(source, filter));
+                //We can't decide on a color. We're going to try very hard to pick a color within the current filters.
+                if (nullMisses++ < 10) {
+                    iAttempt++;
+                    continue;
+                }
+                nullMisses = 0;
+                //Still no luck. We're going to skip generating this card. This will very, very rarely result in fewer
+                //cards than expected; however, it will keep unselected colors out of the pool.
             }
 
             if ((card != null) && (allowDuplicates || !result.contains(card))) {

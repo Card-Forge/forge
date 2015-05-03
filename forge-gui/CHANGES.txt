@@ -34,8 +34,20 @@ When filtering colors in the Deck Editor, lands that produce all selected colors
 This means if you filter to show only green and white cards, lands that produce green and white will now be shown
 This should hopefully make finding multicolor lands for your decks easier
 
+- Quest Starting Pool Configuration -
+When starting a new quest, you now have many more options to configure your starting pool. Instead of just picking a
+single color, you can pick any combination of them, including colorless. There's also the option to include artifacts in
+the pool alongside your colored cards or not.
+The "color bias" option in the quest settings is now the percentage of your generated card pool that will contain the
+settings you've selected. For example, if you picked Green cards and a color bias of 75, your card pool would be 75%
+green, 25% all other colors.
+Finally, there's three settings to choose your color distribution. "Balanced" maintains an equal balance between your
+selected colors. "Random" completely randomizes the pool and makes only miniscule attempts to control the cards you get.
+"Surprise Me" is much like "Balanced", except it will pick all your settings for you and not tell you what they were!
+The New/Load quest menu has been given a small facelift to accommodate these changes and make it easier to read.
+You will need to update your color bias quest setting as the values are now much too low.
 
-----------
+---------
 New Cards
 ---------
 
