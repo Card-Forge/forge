@@ -97,7 +97,6 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 import javax.swing.text.JTextComponent;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
 
 import forge.FThreads;
@@ -117,11 +116,6 @@ import forge.view.FView;
  * hashtable, access using .get(settingName) method.
  */
 public class FSkin {
-
-    /**
-     * Utf-8 chars representing a bullet symbol.
-     */
-    public static final String BULLET = String.valueOf(new char[] {(char) 226, (char) 128, (char) 162 } );
 
     /**
      * Retrieves a color from this skin's color map.
@@ -1038,9 +1032,6 @@ public class FSkin {
     public static String encodeSymbols(String str, final boolean formatReminderText) {
         String pattern, replacement;
 
-        // Bullet char
-        str = StringUtils.replace(str, BULLET, "\u2022");
-
         if (formatReminderText) {
             //format reminder text in italics (or hide if preference set)
             pattern = "\\((.+)\\)";
@@ -1244,23 +1235,23 @@ public class FSkin {
         Colors.updateAll();
         for (final FSkinProp prop : FSkinProp.values()) {
             switch (prop.getType()) {
-            case IMAGE:
-                SkinImage.setImage(prop);
-                break;
-            case ICON:
-                SkinIcon.setIcon(prop);
-                break;
-            case FOIL:
-                setImage(prop, bimFoils);
-                break;
-            case OLD_FOIL:
-                setImage(prop, bimOldFoils);
-                break;
-            case TROPHY:
-                setImage(prop, bimTrophies);
-                break;
-            default:
-                break;
+                case IMAGE:
+                    SkinImage.setImage(prop);
+                    break;
+                case ICON:
+                    SkinIcon.setIcon(prop);
+                    break;
+                case FOIL:
+                    setImage(prop, bimFoils);
+                    break;
+                case OLD_FOIL:
+                    setImage(prop, bimOldFoils);
+                    break;
+                case TROPHY:
+                    setImage(prop, bimTrophies);
+                    break;
+                default:
+                    break;
             }
         }
 
