@@ -99,10 +99,20 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
             if (value.equals("AltCost"))
                 this.altCostPaid = true;
+
+            if (value.equals("OptionalCost")) {
+                this.optionalCostPaid = true;
+            }
+
+            if (params.containsKey("ConditionOptionalPaid")) {
+                this.optionalBoolean = Boolean.parseBoolean(params.get("ConditionOptionalPaid"));
+            }
         }
 
+
+
         if (params.containsKey("ConditionZone")) {
-            this.setZone(ZoneType.smartValueOf(params.get("ContitionZone")));
+            this.setZone(ZoneType.smartValueOf(params.get("ConditionZone")));
         }
 
         if (params.containsKey("ConditionSorcerySpeed")) {
@@ -208,7 +218,10 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.kicked && !sa.isKicked()) return false;
         if (this.kicked1 && !sa.isOptionalCostPaid(OptionalCost.Kicker1)) return false;
         if (this.kicked2 && !sa.isOptionalCostPaid(OptionalCost.Kicker2)) return false;
-        if( this.altCostPaid && !sa.isOptionalCostPaid(OptionalCost.AltCost)) return false;
+        if (this.altCostPaid && !sa.isOptionalCostPaid(OptionalCost.AltCost)) return false;
+
+        if (this.optionalCostPaid && this.optionalBoolean && !sa.isOptionalCostPaid(OptionalCost.Generic)) return false;
+        if (this.optionalCostPaid && !this.optionalBoolean && sa.isOptionalCostPaid(OptionalCost.Generic)) return false;
         
         if (this.isAllTargetsLegal()) {
             for (Card c : sa.getTargets().getTargetCards()) {

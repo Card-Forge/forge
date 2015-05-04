@@ -370,21 +370,29 @@ public final class GameActionUtil {
             } else if (keyword.startsWith("Kicker")) {
                 for (int i = 0; i < abilities.size(); i++) {
                     String[] sCosts = TextUtil.split(keyword.substring(7), ':');
+                    boolean generic = sCosts[sCosts.length - 1].trim().equals("Generic");
                     int iUnKicked = i;
-                    for (int j = 0; j < sCosts.length; j++) {
+                    // If this is a "generic kicker" (Undergrowth), ignore value for kicker creations
+                    int numKickers = sCosts.length - (generic ? 1 : 0);
+                    for (int j = 0; j < numKickers; j++) {
                         final SpellAbility newSA = abilities.get(iUnKicked).copy();
                         newSA.setBasicSpell(false);
                         final Cost cost = new Cost(sCosts[j], false);
-                        newSA.setDescription(newSA.getDescription() + " (Kicker " + cost.toSimpleString() + ")");
                         newSA.setPayCosts(cost.add(newSA.getPayCosts()));
-                        newSA.addOptionalCost(j == 0 ? OptionalCost.Kicker1 : OptionalCost.Kicker2);
+                        if (!generic) {
+                            newSA.setDescription(newSA.getDescription() + " (Kicker " + cost.toSimpleString() + ")");
+                            newSA.addOptionalCost(j == 0 ? OptionalCost.Kicker1 : OptionalCost.Kicker2);
+                        } else {
+                            newSA.setDescription(newSA.getDescription() + " (Optional Cost " + cost.toSimpleString() + ")");
+                            newSA.addOptionalCost(OptionalCost.Generic);
+                        }
                         if (newSA.canPlay()) {
                             abilities.add(i, newSA);
                             i++;
                             iUnKicked++;
                         }
                     }
-                    if (sCosts.length == 2) { // case for both kickers - it's hardcoded since they never have more than 2 kickers
+                    if (numKickers == 2) { // case for both kickers - it's hardcoded since they never have more than 2 kickers
                         final SpellAbility newSA = abilities.get(iUnKicked).copy();
                         newSA.setBasicSpell(false);
                         final Cost cost1 = new Cost(sCosts[0], false);

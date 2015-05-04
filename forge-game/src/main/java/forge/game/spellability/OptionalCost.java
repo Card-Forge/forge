@@ -11,4 +11,5 @@ public enum OptionalCost {
     Kicker1,
     Kicker2, 
     AltCost, // used by prowl
+    Generic, // used by "Dragon Presence" and pseudo-kicker cards
 }

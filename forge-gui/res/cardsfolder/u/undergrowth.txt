@@ -2,8 +2,9 @@ Name:Undergrowth
 ManaCost:G
 Types:Instant
 Text:As an additional cost to cast CARDNAME, you may pay {2}{R}.
-A:SP$ Fog | Cost$ G | SpellDescription$ Prevent all combat damage that would be dealt this turn.
-A:SP$ Effect | Cost$ 2 R G | Name$ Undergrowth Effect | StaticAbilities$ KWPump | SpellDescription$ If its additional cost was paid, CARDNAME doesn't affect combat damage that would be dealt by red creatures.
+K:Kicker 2 R : Generic
+A:SP$ Fog | Cost$ G | Condition$ OptionalCost | ConditionOptionalPaid$ False | SubAbility$ DBEffect | SpellDescription$ Prevent all combat damage that would be dealt this turn. If its additional cost was paid, CARDNAME doesn't affect combat damage that would be dealt by red creatures. | StackDescription$ SpellDescription
+SVar:DBEffect:DB$ Effect | Condition$ OptionalCost | ConditionOptionalPaid$ True | Name$ Undergrowth Effect | StaticAbilities$ KWPump
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.nonRed | AddHiddenKeyword$ Prevent all combat damage that would be dealt by CARDNAME. | Description$ Prevent all combat damage this turn except that from red creatures.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undergrowth.jpg
