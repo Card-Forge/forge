@@ -9,6 +9,7 @@ import forge.toolbox.*;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class DialogChooseColors {
 
     private Runnable callback;
 
+    @SuppressWarnings("serial")
     public DialogChooseColors(final List<Byte> preferredColors, final PoolType poolType, final boolean includeArtifacts) {
 
         for (Byte color : preferredColors) {

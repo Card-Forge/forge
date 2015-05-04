@@ -34,7 +34,6 @@ import java.util.Map;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-@SuppressWarnings("FieldCanBeLocal")
 public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     SINGLETON_INSTANCE;
 
