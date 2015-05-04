@@ -50,8 +50,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.lang.reflect.Field;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -369,12 +367,9 @@ public class QuestDataIO {
 
             final File f = new File(ForgeConstants.QUEST_SAVE_DIR, qd.getName());
             //Copy the save file in case the save fails
-            if (Files.exists(new File(f + ".dat").toPath())) {
-                Files.copy(new File(f + ".dat").toPath(), new File(f + ".dat.bak").toPath(), StandardCopyOption.REPLACE_EXISTING);
-            }
+            FileUtil.copyFile(f + ".dat", f + ".dat.bak");
             QuestDataIO.savePacked(f + ".dat", xStream, qd);
             // QuestDataIO.saveUnpacked(f + ".xml", xStream, qd);
-
         }
         catch (final Exception ex) {
             //BugReporter.reportException(ex, "Error saving Quest Data.");
