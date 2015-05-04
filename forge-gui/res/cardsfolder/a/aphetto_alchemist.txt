@@ -6,4 +6,4 @@ K:Morph:U
 A:AB$ Untap | Cost$ T | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | SpellDescription$ Untap target artifact or creature.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aphetto_alchemist.jpg
-Oracle:{T}: Untap target artifact or creature.\nMorph {U} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
+Oracle:{T}: Untap target artifact or creature.\nMorph {U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

@@ -7,4 +7,4 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | Condi
 SVar:X:Count$Valid Card.Self+faceUp
 SVar:BuffedBy:Card
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gathan_raiders.jpg
-Oracle:Hellbent - Gathan Raiders gets +2/+2 as long as you have no cards in hand.\nMorph-Discard a card. (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
+Oracle:Hellbent - Gathan Raiders gets +2/+2 as long as you have no cards in hand.\nMorph-Discard a card. (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

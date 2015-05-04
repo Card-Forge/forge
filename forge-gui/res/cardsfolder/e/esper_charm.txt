@@ -7,4 +7,4 @@ SVar:DBDraw:DB$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards;
 SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/esper_charm.jpg
-Oracle:Choose one - Destroy target enchantment; or draw two cards; or target player discards two cards.
+Oracle:Choose one -\n• Destroy target enchantment.\n• Draw two cards.\n• Target player discards two cards.

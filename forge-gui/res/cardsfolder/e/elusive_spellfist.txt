@@ -6,4 +6,4 @@ T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | E
 SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ +1 | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME gets +1/+0 until end of turn and can't be blocked this turn.
 SVar:BuffedBy:Card.nonLand+nonCreature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elusive_spellfist.jpg
-Oracle:Whenever you cast a noncreature spell, Elusive Spellfist gets +1/+0 until end of turn and can't be blocked this turn. 
+Oracle:Whenever you cast a noncreature spell, Elusive Spellfist gets +1/+0 until end of turn and can't be blocked this turn.

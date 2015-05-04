@@ -8,4 +8,4 @@ SVar:DBTapAll:DB$ TapAll | ValidCards$ Creature.OppCtrl | SpellDescription$ Tap 
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptic_command.jpg
-Oracle:Choose two - Counter target spell; or return target permanent to its owner's hand; or tap all creatures your opponents control; or draw a card.
+Oracle:Choose two -\n• Counter target spell.\n• Return target permanent to its owner's hand.\n• Tap all creatures your opponents control.\n• Draw a card.

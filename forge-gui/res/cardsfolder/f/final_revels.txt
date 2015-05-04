@@ -6,4 +6,4 @@ SVar:DBPump:DB$ PumpAll | ValidCards$ Creature | NumAtt$ +2 | SpellDescription$ 
 SVar:DBPump2:DB$ PumpAll | ValidCards$ Creature | NumDef$ -2 | SpellDescription$ All creatures get -0/-2 until end of turn.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/final_revels.jpg
-Oracle:Choose one - All creatures get +2/+0 until end of turn; or all creatures get -0/-2 until end of turn.
+Oracle:Choose one -\n• All creatures get +2/+0 until end of turn.\n• All creatures get -0/-2 until end of turn.

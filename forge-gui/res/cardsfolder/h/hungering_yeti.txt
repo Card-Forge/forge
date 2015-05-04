@@ -5,4 +5,4 @@ PT:4/4
 S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | AddHiddenKeyword$ You may cast CARDNAME as though it had flash. | AffectedZone$ Hand,Graveyard,Exile,Command,Library | CheckSVar$ X | Description$ As long as you control a green or blue permanent, you may cast CARDNAME as though it had flash.
 SVar:X:Count$Valid Permanent.Green+YouCtrl,Permanent.Blue+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hungering_yeti.jpg
-Oracle:As long as you control a green or blue permanent, you may cast Hungering Yeti as though it had flash.
+Oracle:As long as you control a green or blue permanent, you may cast Hungering Yeti as though it had flash. (You may cast it any time you could cast an instant.)

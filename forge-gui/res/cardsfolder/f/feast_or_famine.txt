@@ -6,4 +6,4 @@ SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creatu
 SVar:DBDestroy:DB$ Destroy |  ValidTgts$ Creature.nonBlack+nonArtifact | TgtPrompt$ Select target nonblack, nonartifact creature | NoRegen$ True | SpellDescription$ Destroy target nonartifact, nonblack creature and it can't be regenerated.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feast_or_famine.jpg
-Oracle:Choose one - Put a 2/2 black Zombie creature token onto the battlefield; or destroy target nonartifact, nonblack creature and it can't be regenerated.
+Oracle:Choose one -\n• Put a 2/2 black Zombie creature token onto the battlefield.\n• Destroy target nonartifact, nonblack creature. It can't be regenerated.

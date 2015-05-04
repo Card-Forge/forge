@@ -7,4 +7,4 @@ SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select targe
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ +3 | NumDef$ +3 | TgtPrompt$ Select target creature | SpellDescription$ Target creature gets +3/+3 until end of turn.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darigaazs_charm.jpg
-Oracle:Choose one - Return target creature card from your graveyard to your hand; or Darigaaz's Charm deals 3 damage to target creature or player; or target creature gets +3/+3 until end of turn.
+Oracle:Choose one -\n• Return target creature card from your graveyard to your hand.\n• Darigaaz's Charm deals 3 damage to target creature or player.\n• Target creature gets +3/+3 until end of turn.

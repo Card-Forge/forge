@@ -6,4 +6,4 @@ SVar:DealDmg:DB$ DealDamage | ValidTgts$ Player | AILogic$ ChoiceBurn | NumDmg$ 
 SVar:PumpAll:DB$ PumpAll | ValidCards$ Permanent.YouCtrl | KW$ Indestructible | SpellDescription$ Permanets you control gain indestructible until end of turn.
 SVar:PumpDouble:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Double Strike | SpellDescription$ Target creature gains double strike until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_charm.jpg
-Oracle:Choose one - Boros Charm deals 4 damage to target player; or permanents you control gain indestructible until end of turn; or target creature gains double strike until end of turn.
+Oracle:Choose one -\n• Boros Charm deals 4 damage to target player.\n• Permanents you control gain indestructible until end of turn.\n• Target creature gains double strike until end of turn.

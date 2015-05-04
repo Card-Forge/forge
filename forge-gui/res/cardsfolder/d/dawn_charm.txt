@@ -6,4 +6,4 @@ SVar:DBFog:DB$ Fog | SpellDescription$ Prevent all combat damage that would be d
 SVar:DBRegen:DB$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Regenerate target creature;
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | TargetValidTargeting$ You | TgtPrompt$ Select target spell that is targeting you | ValidTgts$ Card | SpellDescription$ Counter target spell that targets you.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dawn_charm.jpg
-Oracle:Choose one - Prevent all combat damage that would be dealt this turn; or regenerate target creature; or counter target spell that targets you.
+Oracle:Choose one -\n• Prevent all combat damage that would be dealt this turn.\n• Regenerate target creature.\n• Counter target spell that targets you.

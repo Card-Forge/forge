@@ -6,4 +6,4 @@ SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent.Red | TgtPrompt$ Select target
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Mountain | TgtPrompt$ Select target Mountain | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target Mountain to its owner's hand.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flash_flood.jpg
-Oracle:Choose one - Destroy target red permanent; or return target Mountain to its owner's hand.
+Oracle:Choose one -\n• Destroy target red permanent.\n• Return target Mountain to its owner's hand.

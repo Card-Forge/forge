@@ -6,4 +6,4 @@ K:ETBReplacement:Copy:ChoosePermanent:Optional
 SVar:ChoosePermanent:DB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Permanent.nonLand+Other | SubAbility$ DBCopy | AILogic$ Clone | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any nonland permanent on the battlefield.
 SVar:DBCopy:DB$ Clone | Defined$ ChosenCard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clever_impersonator.jpg
-Oracle:You have may Clever Impersonator enter the battlefield as a copy of any nonland permanent on the battlefield.
+Oracle:You may have Clever Impersonator enter the battlefield as a copy of any nonland permanent on the battlefield.

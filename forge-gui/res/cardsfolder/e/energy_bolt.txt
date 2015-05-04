@@ -7,4 +7,4 @@ SVar:DBGainLife:DB$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target play
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/energy_bolt.jpg
-Oracle:Choose one - Energy Bolt deals X damage to target player; or target player gains X life.
+Oracle:Choose one -\n• Energy Bolt deals X damage to target player.\n• Target player gains X life.

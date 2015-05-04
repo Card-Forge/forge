@@ -7,4 +7,4 @@ SVar:DBDestroy:DB$ Destroy | ValidTgts$ Enchantment.nonAura | TgtPrompt$ Select 
 SVar:DBDebuff:DB$ Debuff | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Flying | SpellDescription$ Target creature loses flying until end of turn
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emerald_charm.jpg
-Oracle:Choose one - Untap target permanent; or destroy target non-Aura enchantment; or target creature loses flying until end of turn.
+Oracle:Choose one -\n• Untap target permanent.\n• Destroy target non-Aura enchantment.\n• Target creature loses flying until end of turn.

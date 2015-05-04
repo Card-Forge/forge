@@ -8,4 +8,4 @@ SVar:DBDestroy3:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target art
 SVar:DestroyEnch:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hull_breach.jpg
-Oracle:Choose one - Destroy target artifact; or destroy target enchantment; or destroy target artifact and target enchantment.
+Oracle:Choose one -\n• Destroy target artifact.\n• Destroy target enchantment.\n• Destroy target artifact and target enchantment.

@@ -8,4 +8,4 @@ SVar:DBLoseLife:DB$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select a player to
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/misery_charm.jpg
-Oracle:Choose one - Destroy target Cleric; or return target Cleric card from your graveyard to your hand; or target player loses 2 life.
+Oracle:Choose one -\n• Destroy target Cleric.\n• Return target Cleric card from your graveyard to your hand.\n• Target player loses 2 life.

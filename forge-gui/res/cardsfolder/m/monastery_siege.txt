@@ -10,4 +10,4 @@ SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 SVar:Dragons:DB$ Animate | Defined$ Self | staticAbilities$ DragonsST | Permanent$ True | SpellDescription$ Dragons
 SVar:DragonsST:Mode$ RaiseCost | ValidTarget$ You,Card.YouCtrl | Activator$ Opponent | Type$ Spell | Amount$ 2 | Description$ Spells your opponents cast that target you or a permanent you control cost {2} more to cast.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/monasterz_siege.jpg
-Oracle:As Monastery Siege enters the battlefield, choose Khans or Dragons.\n- Khans - At the beginning of your draw step, draw an additional card, then discard a card.\n- Dragons - Spells your opponents cast that target you or a permanent you control cost {2} more to cast.
+Oracle:As Monastery Siege enters the battlefield, choose Khans or Dragons.\n• Khans - At the beginning of your draw step, draw an additional card, then discard a card.\n• Dragons - Spells your opponents cast that target you or a permanent you control cost {2} more to cast.

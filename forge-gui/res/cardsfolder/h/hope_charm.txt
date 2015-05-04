@@ -7,4 +7,4 @@ SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | ValidTgts$ Player | TgtPrompt$ Ch
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Aura | TgtPrompt$ Select target Aura | SpellDescription$ Destroy target Aura.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hope_charm.jpg
-Oracle:Choose one - Target creature gains first strike until end of turn; or target player gains 2 life; or destroy target Aura.
+Oracle:Choose one -\n• Target creature gains first strike until end of turn.\n• Target player gains 2 life.\n• Destroy target Aura.

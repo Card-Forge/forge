@@ -6,4 +6,4 @@ SVar:DBDraw:DB$ Draw | ValidTgts$ Player | NumCards$ 2 | SpellDescription$ Targe
 SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consult_the_necrosages.jpg
-Oracle:Choose one - Target player draws two cards; or target player discards two cards.
+Oracle:Choose one -\n• Target player draws two cards.\n• Target player discards two cards.

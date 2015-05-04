@@ -8,4 +8,4 @@ SVar:DBDraw:DB$ Draw | Cost$ U | NumCards$ 2 | SubAbility$ DBDiscard | SpellDesc
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/izzet_charm.jpg
-Oracle:Choose one - Counter target noncreature spell unless its controller pays {2}; or Izzet Charm deals 2 damage to target creature; or draw two cards, then discard two cards.
+Oracle:Choose one -\n• Counter target noncreature spell unless its controller pays {2}.\n• Izzet Charm deals 2 damage to target creature.\n• Draw two cards, then discard two cards.

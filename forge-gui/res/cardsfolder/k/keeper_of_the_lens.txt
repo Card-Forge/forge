@@ -1,6 +1,6 @@
 Name:Keeper of the Lens
 ManaCost:1
-Types:Artifact Creature - Golem
+Types:Artifact Creature Golem
 PT:1/2
 S:Mode$ Continuous | Affected$ You | AddKeyword$ CanSeeOpponentsFaceDownCards | SpellDescription$ You may look at face-down creatures you don't control.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keeper_of_the_lens.jpg

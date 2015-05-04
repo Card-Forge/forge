@@ -7,4 +7,4 @@ SVar:DBDmgC:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target crea
 SVar:DBDmgP:DB$ DealDamage | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target player.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barbed_lightning.jpg
-Oracle:Choose one - Barbed Lightning deals 3 damage to target creature; or Barbed Lightning deals 3 damage to target player.\nEntwine {2} (Choose both if you pay the entwine cost.)
+Oracle:Choose one -\n• Barbed Lightning deals 3 damage to target creature.\n• Barbed Lightning deals 3 damage to target player.\nEntwine {2} (Choose both if you pay the entwine cost.)

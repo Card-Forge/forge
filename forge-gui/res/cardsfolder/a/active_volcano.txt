@@ -7,4 +7,4 @@ SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Island | TgtPrompt$ Select target 
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/active_volcano.jpg
-Oracle:Choose one - Destroy target blue permanent; or return target Island to its owner's hand.
+Oracle:Choose one -\n• Destroy target blue permanent.\n• Return target Island to its owner's hand.

@@ -5,4 +5,4 @@ A:SP$ Charm | Cost$ 2 W W | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ Change,Destr
 SVar:Change:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Enchantment.YouCtrl | SpellDescription$ Return target enchantment card from your graveyard to your hand
 SVar:Destroy:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dawn_to_dusk.jpg
-Oracle:Choose one or both - Return target enchantment card from your graveyard to your hand; and/or destroy target enchantment.
+Oracle:Choose one or both -\n• Return target enchantment card from your graveyard to your hand.\n• Destroy target enchantment.

@@ -10,4 +10,4 @@ SVar:RestoreSight:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.IsRemembered
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinding_beam.jpg
-Oracle:Choose one - Tap two target creatures; or creatures don't untap during target player's next untap step.\nEntwine {1} (Choose both if you pay the entwine cost.)
+Oracle:Choose one -\n• Tap two target creatures.\n• Creatures don't untap during target player's next untap step.\nEntwine {1} (Choose both if you pay the entwine cost.)

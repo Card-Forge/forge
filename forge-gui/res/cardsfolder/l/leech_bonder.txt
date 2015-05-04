@@ -3,8 +3,8 @@ ManaCost:2 U
 Types:Creature Merfolk Soldier
 PT:3/3
 K:etbCounter:M1M1:2
-A:AB$ Pump | Cost$ U Q | ValidTgts$ Creature | TgtPrompt$ Select target creature to remove counters | SubAbility$ DBMove | StackDescription$ None | SpellDescription$ Move a counter from target creature onto another target creature.
+A:AB$ Pump | Cost$ U Q | ValidTgts$ Creature | TgtPrompt$ Select target creature to remove counters | SubAbility$ DBMove | StackDescription$ None | SpellDescription$ Move a counter from target creature onto a second target creature.
 SVar:DBMove:DB$ MoveCounter | Source$ ParentTarget | ValidTgts$ Creature | TgtPrompt$ Select target creature to add counters | TargetUnique$ True | CounterType$ Any | CounterNum$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leech_bonder.jpg
-Oracle:Leech Bonder enters the battlefield with two -1/-1 counters on it.\n{U}, {Q}: Move a counter from target creature onto another target creature. ({Q} is the untap symbol.)
+Oracle:Leech Bonder enters the battlefield with two -1/-1 counters on it.\n{U}, {Q}: Move a counter from target creature onto a second target creature. ({Q} is the untap symbol.)

@@ -7,4 +7,4 @@ SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ 0 | SpellDescription$ Creatures you control get +2/+0 until end of turn.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grixis_charm.jpg
-Oracle:Choose one - Return target permanent to its owner's hand; or target creature gets -4/-4 until end of turn; or creatures you control get +2/+0 until end of turn.
+Oracle:Choose one -\n• Return target permanent to its owner's hand.\n• Target creature gets -4/-4 until end of turn.\n• Creatures you control get +2/+0 until end of turn.

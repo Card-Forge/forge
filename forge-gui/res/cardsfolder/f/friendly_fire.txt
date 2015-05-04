@@ -8,4 +8,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/friendly_fire.jpg
-Oracle:Target creature's controller reveals a card at random from his or her hand. Friendly fire deals damage to that creature and that player equal to the revealed card's converted mana cost.t.
+Oracle:Target creature's controller reveals a card at random from his or her hand. Friendly Fire deals damage to that creature and that player equal to the revealed card's converted mana cost.

@@ -5,4 +5,4 @@ A:SP$ Charm | Cost$ 3 B B | Choices$ DBDestroyAll,DBDestroyAll2 | SpellDescripti
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.Dragon | SpellDescription$ Destroy all Dragon creatures;
 SVar:DBDestroyAll2:DB$ DestroyAll | ValidCards$ Creature.nonDragon | SpellDescription$ Destoy all non-Dragon creatures.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crux_of_fate.jpg
-Oracle:Choose one -\n- Destroy all Dragon creatures.\n- Destroy all non-Dragon creatures.
+Oracle:Choose one -\n• Destroy all Dragon creatures.\n• Destroy all non-Dragon creatures.

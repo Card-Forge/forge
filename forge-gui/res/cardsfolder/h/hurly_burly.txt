@@ -5,4 +5,4 @@ A:SP$ Charm | Cost$ 1 R | Choices$ DBDmg1,DBDmg2 | CharmNum$ 1 | SpellDescriptio
 SVar:DBDmg1:DB$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.withoutFlying | ValidDescription$ each creature without flying. | SpellDescription$ CARDNAME deals 1 damage to each creature without flying;
 SVar:DBDmg2:DB$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.withFlying | ValidDescription$ each creature with flying. | SpellDescription$ CARDNAME deals 1 damage to each creature with flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hurly_burly.jpg
-Oracle:Choose one - Hurly-Burly deals 1 damage to each creature without flying; or Hurly-Burly deals 1 damage to each creature with flying.
+Oracle:Choose one -\n• Hurly-Burly deals 1 damage to each creature without flying.\n• Hurly-Burly deals 1 damage to each creature with flying.

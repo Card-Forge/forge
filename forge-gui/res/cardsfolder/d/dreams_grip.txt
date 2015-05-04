@@ -7,4 +7,4 @@ SVar:DBTap:DB$ Tap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent t
 SVar:DBUntap:DB$ Untap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent to untap | SpellDescription$ Untap target permanent.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreams_grip.jpg
-Oracle:Choose one - Tap target permanent; or untap target permanent.\nEntwine {1} (Choose both if you pay the entwine cost.)
+Oracle:Choose one -\n• Tap target permanent.\n• Untap target permanent.\nEntwine {1} (Choose both if you pay the entwine cost.)

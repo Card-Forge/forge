@@ -6,4 +6,4 @@ SVar:DBDestroy:DB$ Destroy | ValidTgts$ Wall | TgtPrompt$ Select target wall | S
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature;
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | KW$ Haste | TgtPrompt$ Select target creature | SpellDescription$ Target creature gains haste until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chaos_charm.jpg
-Oracle:Choose one - Destroy target Wall; or Chaos Charm deals 1 damage to target creature; or target creature gains haste until end of turn.
+Oracle:Choose one -\n• Destroy target Wall.\n• Chaos Charm deals 1 damage to target creature.\n• Target creature gains haste until end of turn.

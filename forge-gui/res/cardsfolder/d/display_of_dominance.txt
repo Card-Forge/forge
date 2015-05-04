@@ -7,4 +7,4 @@ SVar:DBProtect:DB$ Effect | Name$ Display of Dominance Effect | StaticAbilities$
 SVar:STCantBeTarget:Mode$ CantTarget | ValidCard$ Permanent.YouCtrl | ValidSource$ Card.Blue+OppCtrl,Card.Black+OppCtrl | Spell$ True | EffectZone$ Command | Description$ Permanents you control can't be the targets of blue or black spells your opponents control this turn.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/display_of_dominance.jpg
-Oracle:Choose one -\n• Destroy target blue or black noncreature permanent.\n• Permanents you control can't be the targets of blue or black spells your opponents control this turn.
+Oracle:Choose one -\nâ€¢ Destroy target blue or black noncreature permanent.\nâ€¢ Permanents you control can't be the targets of blue or black spells your opponents control this turn.

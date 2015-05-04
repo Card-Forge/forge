@@ -7,4 +7,4 @@ SVar:ExileCreature:DB$ ChangeZoneAll | ChangeType$ Creature | Origin$ Battlefiel
 SVar:ExileEnchant:DB$ ChangeZoneAll | ChangeType$ Enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile all enchantments.
 SVar:ExilePlaneswalker:DB$ ChangeZoneAll | ChangeType$ Planeswalker | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile all planeswalkers.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merciless_eviction.jpg
-Oracle:Choose one - Exile all artifacts; or exile all creatures; or exile all enchantments; or exile all planeswalkers.
+Oracle:Choose one -\n• Exile all artifacts.\n• Exile all creatures.\n• Exile all enchantments.\n• Exile all planeswalkers.

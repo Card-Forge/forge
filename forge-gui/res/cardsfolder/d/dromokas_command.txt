@@ -12,4 +12,4 @@ SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ Fight | TgtPrompt$
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dromokas_command.jpg
-Oracle:Choose two -\n• Prevent all damage target instant or sorcery spell would deal this turn.\n• Target player sacrifices an enchantment.\n• Put a +1/+1 counter on target creature.\n• Target creature you control fights target creature you don't control.
+Oracle:Choose two -\nâ€¢ Prevent all damage target instant or sorcery spell would deal this turn.\nâ€¢ Target player sacrifices an enchantment.\nâ€¢ Put a +1/+1 counter on target creature.\nâ€¢ Target creature you control fights target creature you don't control.
