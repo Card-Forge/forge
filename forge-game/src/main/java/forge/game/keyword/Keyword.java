@@ -59,7 +59,7 @@ public enum Keyword {
     LIVING_WEAPON(SimpleKeyword.class, true, "When this Equipment enters the battlefield, put a 0/0 black Germ creature token onto the battlefield, then attach this Equipment to it."),
     MADNESS(KeywordWithCost.class, true, "If you discard this card, you may cast it for %s instead of putting it into your graveyard."),
     MODULAR(KeywordWithAmount.class, false, "This creature enters the battlefield with %d +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature."),
-    MORPH(KeywordWithCost.class, true, "You may cast this face down as a 2/2 creature for {3}. You may pay %s at any time to turn it face up."),
+    MORPH(KeywordWithCost.class, true, "You may cast this card face down as a 2/2 creature for {3}. You may pay %s at any time to turn it face up."),
     MULTIKICKER(KeywordWithCost.class, false, "You may pay an additional %s any number of times as you cast this spell."),
     NINJUTSU(KeywordWithCost.class, false, "%s, Reveal this card from your hand, Return an unblocked attacking creature you control to its owner's hand: Put this card onto the battlefield from your hand tapped and attacking."),
     OFFERING(KeywordWithType.class, false, "You may cast this card any time you could cast an instant by sacrificing a %s. If you do, the total cost to cast this card is reduced by the mana cost of the sacrificed %s."),
