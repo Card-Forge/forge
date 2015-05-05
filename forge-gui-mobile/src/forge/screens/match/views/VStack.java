@@ -175,7 +175,7 @@ public class VStack extends FDropDown {
         }
         
         FMenuTab menuTab = getMenuTab();
-        float screenHeight = Forge.getCurrentScreen().getHeight();
+        float screenHeight = Forge.getScreenHeight();
         float width = (screenHeight - 2 * VPrompt.HEIGHT - 2 * VAvatar.HEIGHT) * 4f / 6f;
         float maxVisibleHeight = menuTab.screenPos.x;
         paneSize = updateAndGetPaneSize(width + MatchController.getView().getTopPlayerPanel().getTabs().iterator().next().getRight(), maxVisibleHeight);

@@ -32,7 +32,7 @@ public class FOptionPane extends FDialog {
     public static final float PADDING = Utils.scale(10);
 
     public static float getMaxDisplayObjHeight() {
-        return Forge.getCurrentScreen().getHeight() - VPrompt.HEIGHT - 2 * FDialog.MSG_HEIGHT;
+        return Forge.getScreenHeight() - VPrompt.HEIGHT - 2 * FDialog.MSG_HEIGHT;
     }
 
     public static void showMessageDialog(final String message) {
@@ -127,7 +127,7 @@ public class FOptionPane extends FDialog {
                     CardRenderer.drawCard(g, card, x, y, w, h, CardStackPosition.Top);
                 }
             };
-            cardDisplay.setHeight(Utils.SCREEN_HEIGHT / 2);
+            cardDisplay.setHeight(Forge.getScreenHeight() / 2);
         }
         else {
             cardDisplay = null;
@@ -195,7 +195,7 @@ public class FOptionPane extends FDialog {
         }) {
             @Override
             protected float getBottomMargin() {
-                return Utils.SCREEN_HEIGHT * 0.4f; //account for keyboard
+                return Forge.getScreenHeight() * 0.4f; //account for keyboard
             }
 
             @Override

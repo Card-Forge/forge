@@ -217,6 +217,14 @@ public class Forge implements ApplicationListener {
         });
     }
 
+    public static int getScreenWidth() {
+        return screenWidth;
+    }
+
+    public static int getScreenHeight() {
+        return screenHeight;
+    }
+
     public static FScreen getCurrentScreen() {
         return currentScreen;
     }

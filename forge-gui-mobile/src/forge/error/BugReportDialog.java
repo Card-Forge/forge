@@ -115,7 +115,7 @@ public class BugReportDialog extends FScreen { //use screen rather than dialog s
 
         private TemplateView(String text0) {
             text = text0;
-            setHeight(Forge.getCurrentScreen().getHeight() / 3);
+            setHeight(Forge.getScreenHeight() / 3);
         }
 
         @Override

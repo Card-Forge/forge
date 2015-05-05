@@ -5,17 +5,20 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Utils {
+    public static final boolean DEV_SCREEN_LANDSCAPE = false;
+
     public static final float BASE_WIDTH = 320f;
     public static final float BASE_HEIGHT = 480f;
-    public static final float SCREEN_WIDTH = (float)Gdx.graphics.getWidth();
-    public static final float SCREEN_HEIGHT = (float)Gdx.graphics.getHeight();
+    private static final float SCREEN_WIDTH = (float)Gdx.graphics.getWidth();
+    private static final float SCREEN_HEIGHT = (float)Gdx.graphics.getHeight();
     private static final float HEIGHT_RATIO = SCREEN_HEIGHT / BASE_HEIGHT;
 
     private static final float AVG_FINGER_SIZE_CM = 1.1f;
 
     //Swap commented out line below to specify average finger size and dev screen size
     private static final float ppcX = Gdx.graphics.getPpcX(), ppcY = Gdx.graphics.getPpcY();
-    public static final int DEV_SCREEN_WIDTH = (int)BASE_WIDTH, DEV_SCREEN_HEIGHT = (int)BASE_HEIGHT;
+    public static final int DEV_SCREEN_WIDTH = DEV_SCREEN_LANDSCAPE ? (int)(BASE_HEIGHT * 16 / 9) : (int)BASE_WIDTH;
+    public static final int DEV_SCREEN_HEIGHT = (int)BASE_HEIGHT;
     //private static final float ppcX = 169f / AVG_FINGER_SIZE_CM, ppcY = 237f / AVG_FINGER_SIZE_CM;
     //public static final int DEV_SCREEN_WIDTH = 400, DEV_SCREEN_HEIGHT = 600;
     //private static final float scaleX = 1.41f, scaleY = 1.25f;

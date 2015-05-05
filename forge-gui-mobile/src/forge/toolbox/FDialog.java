@@ -3,6 +3,7 @@ package forge.toolbox;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
 import forge.assets.FSkinColor;
@@ -27,7 +28,6 @@ public abstract class FDialog extends FOverlay {
     private static final FSkinColor SWIPE_BAR_COLOR = FScreen.Header.BACK_COLOR;
     private static final FSkinColor SWIPE_BAR_DOT_COLOR = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.75f);
     private static final float SWIPE_BAR_HEIGHT = Utils.scale(12);
-    private static final float BASE_REVEAL_VELOCITY = 3 * Utils.SCREEN_HEIGHT;
 
     private static int openDialogCount = 0;
 
@@ -83,7 +83,7 @@ public abstract class FDialog extends FOverlay {
         updateDisplayTop();
 
         if (firstReveal) { //start reveal animation after dialog first laid out
-            updateRevealAnimation(BASE_REVEAL_VELOCITY);
+            updateRevealAnimation(3 * Forge.getScreenHeight());
         }
     }
 
