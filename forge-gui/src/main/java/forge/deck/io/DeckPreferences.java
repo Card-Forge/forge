@@ -21,14 +21,14 @@ import org.w3c.dom.NodeList;
  *
  */
 public class DeckPreferences {
-    private static String currentDeck, draftDeck, sealedDeck, commanderDeck, planarDeck, schemeDeck;
+    private static String currentDeck = "", draftDeck = "", sealedDeck = "", commanderDeck = "", planarDeck = "", schemeDeck = "";
     private static Map<String, DeckPreferences> allPrefs = new HashMap<String, DeckPreferences>();
 
     public static String getCurrentDeck() {
         return currentDeck;
     }
     public static void setCurrentDeck(String currentDeck0) {
-        if (currentDeck != null && currentDeck.equals(currentDeck0)) { return; }
+        if (currentDeck.equals(currentDeck0)) { return; }
         currentDeck = currentDeck0;
         save();
     }
@@ -37,7 +37,7 @@ public class DeckPreferences {
         return draftDeck;
     }
     public static void setDraftDeck(String draftDeck0) {
-        if (draftDeck != null && draftDeck.equals(draftDeck0)) { return; }
+        if (draftDeck.equals(draftDeck0)) { return; }
         draftDeck = draftDeck0;
         save();
     }
@@ -46,7 +46,7 @@ public class DeckPreferences {
         return sealedDeck;
     }
     public static void setSealedDeck(String sealedDeck0) {
-        if (sealedDeck != null && sealedDeck.equals(sealedDeck0)) { return; }
+        if (sealedDeck.equals(sealedDeck0)) { return; }
         sealedDeck = sealedDeck0;
         save();
     }
@@ -55,7 +55,7 @@ public class DeckPreferences {
         return commanderDeck;
     }
     public static void setCommanderDeck(String commanderDeck0) {
-        if (commanderDeck != null && commanderDeck.equals(commanderDeck0)) { return; }
+        if (commanderDeck.equals(commanderDeck0)) { return; }
         commanderDeck = commanderDeck0;
         save();
     }
@@ -64,7 +64,7 @@ public class DeckPreferences {
         return planarDeck;
     }
     public static void setPlanarDeck(String planarDeck0) {
-        if (planarDeck != null && planarDeck.equals(planarDeck0)) { return; }
+        if (planarDeck.equals(planarDeck0)) { return; }
         planarDeck = planarDeck0;
         save();
     }
@@ -73,7 +73,7 @@ public class DeckPreferences {
         return schemeDeck;
     }
     public static void setSchemeDeck(String schemeDeck0) {
-        if (schemeDeck != null && schemeDeck.equals(schemeDeck0)) { return; }
+        if (schemeDeck.equals(schemeDeck0)) { return; }
         schemeDeck = schemeDeck0;
         save();
     }
