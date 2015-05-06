@@ -9,4 +9,4 @@ SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | Remember
 SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered | Prevent$ True | PreventionEffect$ True | Description$ Prevent all damage the source would deal this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riths_charm.jpg
-Oracle:Choose one - Destroy target nonbasic land; or put three 1/1 green Saproling creature tokens onto the battlefield; or prevent all damage a source of your choice would deal this turn.
+Oracle:Choose one -\n• Destroy target nonbasic land.\n• Put three 1/1 green Saproling creature tokens onto the battlefield.\n• Prevent all damage a source of your choice would deal this turn.

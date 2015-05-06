@@ -7,4 +7,4 @@ SVar:DBPump:DB$ PumpAll | NumAtt$ 1 | NumDef$ 1 | ValidCards$ Creature.YouCtrl |
 SVar:DBUntap:DB$ UntapAll | ValidCards$ Creature.YouCtrl | SpellDescription$ Untap all creatures you control.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roar_of_the_kha.jpg
-Oracle:Choose one - Creatures you control get +1/+1 until end of turn; or untap all creatures you control.\nEntwine {1}{W} (Choose both if you pay the entwine cost.)
+Oracle:Choose one -\n• Creatures you control get +1/+1 until end of turn.\n• Untap all creatures you control.\nEntwine {1}{W} (Choose both if you pay the entwine cost.)

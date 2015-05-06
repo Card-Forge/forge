@@ -7,4 +7,4 @@ SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent | AITgts$ Card.Blue | TgtPromp
 SVar:X:Targeted$Valid Card.Blue
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyroblast.jpg
-Oracle:Choose one - Counter target spell if it's blue; or destroy target permanent if it's blue.
+Oracle:Choose one -\n• Counter target spell if it's blue.\n• Destroy target permanent if it's blue.

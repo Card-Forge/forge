@@ -4,4 +4,4 @@ Types:Sorcery
 K:Rebound
 A:SP$ Token | Cost$ 3 U U | TokenAmount$ 1 | TokenName$ Djinn Monk | TokenTypes$ Creature,Djinn,Monk | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Flying | SpellDescription$ Put a 2/2 blue Djinn Monk creature token with flying onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ojutais_summons.jpg
-Oracle:Put a 2/2 blue Djinn Monk creature token with flying onto the battlefield.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.) 
+Oracle:Put a 2/2 blue Djinn Monk creature token with flying onto the battlefield.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)

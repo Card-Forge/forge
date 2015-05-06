@@ -5,4 +5,4 @@ A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target 
 SVar:LifeTough:DB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Targeted$CardToughness
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sheltering_word.jpg
-Oracle:Target creature you control gains hexproof until end of turn. You gain life equal to that creature's toughness. (A creature with hexproof can't be the target of spells or abilities opponents control.)
+Oracle:Target creature you control gains hexproof until end of turn. You gain life equal to that creature's toughness. (A creature with hexproof can't be the target of spells or abilities your opponents control.)

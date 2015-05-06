@@ -6,4 +6,4 @@ A:SP$ Charm | Cost$ 5 G | Choices$ DBToken,DBToken2 | CharmNum$ 1 | SpellDescrip
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Green | TokenPower$ 5 | TokenToughness$ 5 | SpellDescription$ Put a 5/5 green Beast creature token onto the battlefield;
 SVar:DBToken2:DB$ Token | TokenAmount$ 5 | TokenName$ Insect | TokenTypes$ Creature,Insect | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 insect MRD | SpellDescription$ Put five 1/1 green Insect creature tokens onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/one_dozen_eyes.jpg
-Oracle:Choose one - Put a 5/5 green Beast creature token onto the battlefield; or put five 1/1 green Insect creature tokens onto the battlefield.\nEntwine {G}{G}{G} (Choose both if you pay the entwine cost.)
+Oracle:Choose one -\n• Put a 5/5 green Beast creature token onto the battlefield.\n• Put five 1/1 green Insect creature tokens onto the battlefield.\nEntwine {G}{G}{G} (Choose both if you pay the entwine cost.)

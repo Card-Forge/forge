@@ -9,4 +9,4 @@ SVar:DBDamage:DB$ DealDamage | ValidTgts$ Player | TgtPrompt$ Select target play
 SVar:DBGain:DB$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 1 | SpellDescription$ Target player gains 1 life.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_bind.jpg
-Oracle:Enchant artifact an opponent controls\nWhenever enchanted artifact becomes tapped, choose one - Relic Bind deals 1 damage to target player; or target player gains 1 life.
+Oracle:Enchant artifact an opponent controls\nWhenever enchanted artifact becomes tapped, choose one -\n• Relic Bind deals 1 damage to target player.\n• Target player gains 1 life.

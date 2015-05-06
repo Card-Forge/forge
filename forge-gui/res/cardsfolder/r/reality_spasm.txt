@@ -8,4 +8,4 @@ SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Permanent
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reality_spasm.jpg
-Oracle:Choose one - Tap X target permanents; or untap X target permanents.
+Oracle:Choose one -\n• Tap X target permanents.\n• Untap X target permanents.

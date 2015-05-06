@@ -7,4 +7,4 @@ SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent.Blue | TgtPrompt$ Select targe
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/red_elemental_blast.jpg
-Oracle:Choose one - Counter target blue spell; or destroy target blue permanent.
+Oracle:Choose one -\n• Counter target blue spell.\n• Destroy target blue permanent.

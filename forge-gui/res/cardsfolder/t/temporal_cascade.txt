@@ -7,4 +7,4 @@ SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand,Graveyard 
 SVar:DBDraw:DB$ Draw | NumCards$ 7 | Defined$ Each | SpellDescription$ Each player draws seven cards.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_cascade.jpg
-Oracle:Choose one - Each player shuffles his or her hand and graveyard into his or her library; or each player draws seven cards.\nEntwine {2} (Choose both if you pay the entwine cost.)
+Oracle:Choose one -\n• Each player shuffles his or her hand and graveyard into his or her library.\n• Each player draws seven cards.\nEntwine {2} (Choose both if you pay the entwine cost.)

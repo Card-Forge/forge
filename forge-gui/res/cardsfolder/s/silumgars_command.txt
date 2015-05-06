@@ -8,4 +8,4 @@ SVar:DBPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ -3 | NumDef$ -3 | TgtPrompt
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Planeswalker | TgtPrompt$ Select target planeswalker | SpellDescription$ Destroy target planeswalker.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silumgars_command.jpg
-Oracle:Choose two -\n• Counter target noncreature spell.\n• Return target permanent to its owner's hand.\n• Target creature gets -3/-3 until end of turn.\n• Destroy target planeswalker.
+Oracle:Choose two -\nâ€¢ Counter target noncreature spell.\nâ€¢ Return target permanent to its owner's hand.\nâ€¢ Target creature gets -3/-3 until end of turn.\nâ€¢ Destroy target planeswalker.

@@ -1,7 +1,7 @@
 Name:Skywise Teachings
 ManaCost:3 U
 Types:Enchantment
-T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a noncreature spell you may pay {1}{U}. If you do, put a 2/2 blue Djinn Monk creature token with flyinge onto the battlefield.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a noncreature spell, you may pay {1}{U}. If you do, put a 2/2 blue Djinn Monk creature token with flying onto the battlefield.
 SVar:TrigToken:AB$ Token | Cost$ 1 U | TokenAmount$ 1 | TokenName$ Djinn Monk | TokenTypes$ Creature,Djinn,Monk | TokenColors$ Blue | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Flying | TokenOwner$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skywise_teachings.jpg
-Oracle:Whenever you cast a noncreature spell you may pay {1}{U}. If you do, put a 2/2 blue Djinn Monk creature token with flyinge onto the battlefield.
+Oracle:Whenever you cast a noncreature spell, you may pay {1}{U}. If you do, put a 2/2 blue Djinn Monk creature token with flying onto the battlefield.

@@ -7,4 +7,4 @@ SVar:DBRearrange:DB$ RearrangeTopOfLibrary | ValidTgts$ Opponent | TgtPrompt$ Ch
 SVar:DBRearrange2:DB$ RearrangeTopOfLibrary | Defined$ You | NumCards$ 5 | SpellDescription$ look at the top five cards of your library, then put them back in any order.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/second_sight.jpg
-Oracle:Choose one - Look at the top five cards of target opponent's library, then put them back in any order; or look at the top five cards of your library, then put them back in any order.\nEntwine {U} (Choose both if you pay the entwine cost.)
+Oracle:Choose one -\n• Look at the top five cards of target opponent's library, then put them back in any order.\n• Look at the top five cards of your library, then put them back in any order.\nEntwine {U} (Choose both if you pay the entwine cost.)

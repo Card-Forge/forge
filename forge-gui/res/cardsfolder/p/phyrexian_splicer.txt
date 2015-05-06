@@ -11,4 +11,4 @@ SVar:DBGainShdw:DB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select targ
 SVar:DBGainTrpl:DB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature to gain trample | KW$ Trample | TargetUnique$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_splicer.jpg
-Oracle:{2}, {T}: Choose one - flying; first strike; shadow; or trample. Target creature with that ability loses it until end of turn and another target creature gains it until end of turn.
+Oracle:{2}, {T}, Choose flying, first strike, trample, or shadow: Until end of turn, target creature with the chosen ability loses it and another target creature gains it.

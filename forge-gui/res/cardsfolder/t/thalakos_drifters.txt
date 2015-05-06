@@ -4,4 +4,4 @@ Types:Creature Thalakos
 PT:3/3
 A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | KW$ Shadow | SpellDescription$ CARDNAME gains shadow until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thalakos_drifters.jpg
-Oracle:Discard a card: Thalakos Drifters gains shadow until end of turn. (This creature can block or be blocked by only creatures with shadow.)
+Oracle:Discard a card: Thalakos Drifters gains shadow until end of turn. (It can block or be blocked by only creatures with shadow.)

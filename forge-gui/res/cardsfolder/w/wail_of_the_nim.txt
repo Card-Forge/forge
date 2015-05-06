@@ -7,4 +7,4 @@ SVar:DBRegenerate:DB$ RegenerateAll | ValidCards$ Creature.YouCtrl | SpellDescri
 SVar:DBDamageAll:DB$ DamageAll | ValidCards$ Creature | ValidPlayers$ Each | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each creature and each player.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wail_of_the_nim.jpg
-Oracle:Choose one - Regenerate each creature you control; or Wail of the Nim deals 1 damage to each creature and each player.\nEntwine {B} (Choose both if you pay the entwine cost.)
+Oracle:Choose one -\n• Regenerate each creature you control.\n• Wail of the Nim deals 1 damage to each creature and each player.\nEntwine {B} (Choose both if you pay the entwine cost.)

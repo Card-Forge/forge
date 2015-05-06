@@ -7,4 +7,4 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$Valid Swamp.YouCtrl
 SVar:BuffedBy:Swamp
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83186.jpg
-Oracle:Flying\nNightmare's power and toughness are each equal to the number of Swamps you control.
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nNightmare's power and toughness are each equal to the number of Swamps you control.

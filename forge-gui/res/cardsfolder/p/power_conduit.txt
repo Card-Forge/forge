@@ -5,4 +5,4 @@ A:AB$ Charm | Cost$ T RemoveAnyCounter<1/Permanent.YouCtrl/a permanent you contr
 SVar:ConduitCharge:DB$ PutCounter | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on target artifact;
 SVar:ConduitP1P1:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ or put a +1/+1 counter on target creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/power_conduit.jpg
-Oracle:{T}, Remove a counter from a permanent you control: Choose one - Put a charge counter on target artifact; or put a +1/+1 counter on target creature.
+Oracle:{T}, Remove a counter from a permanent you control: Choose one -\n• Put a charge counter on target artifact.\n• Put a +1/+1 counter on target creature.

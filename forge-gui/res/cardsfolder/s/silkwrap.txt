@@ -10,4 +10,4 @@ SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ 
 SVar:PlayMain1:TRUE
 SVar:NeedsToPlay:Creature.cmcLE3+OppCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silkwrap.jpg
-Oracle:When Silkwrap enters the battlefield, exile target creature with converted mana cost 3 or less an opponent controls until Silkwrap leaves the battlefield. (That creature returns under its owner's control.) 
+Oracle:When Silkwrap enters the battlefield, exile target creature with converted mana cost 3 or less an opponent controls until Silkwrap leaves the battlefield. (That creature returns under its owner's control.)

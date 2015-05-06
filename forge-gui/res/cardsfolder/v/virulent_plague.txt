@@ -5,4 +5,4 @@ S:Mode$ Continuous | Affected$ Creature.token | AddPower$ -2 | AddToughness$ -2 
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/virulent_plague.jpg
-Oracle:Creature tokens get -2/-2. 
+Oracle:Creature tokens get -2/-2.

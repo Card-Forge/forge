@@ -8,4 +8,4 @@ SVar:TrigUntap:AB$ Untap | Cost$ 0 | Defined$ Self | SubAbility$ DBProtection
 SVar:DBProtection:DB$ Protection | Defined$ Self | Gains$ Choice | Choices$ AnyColor
 SVar:BuffedBy:Card.nonLand+nonCreature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pristine_skywise.jpg
-Oracle:Flying\nWhenever you cast a noncreature spell, untap CARDNAME. It gains protection from the color of your choice until end of turn.
+Oracle:Flying\nWhenever you cast a noncreature spell, untap Pristine Skywise. It gains protection from the color of your choice until end of turn.

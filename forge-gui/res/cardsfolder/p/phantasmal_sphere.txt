@@ -12,4 +12,4 @@ SVar:X:Count$CardCounters.P1P1
 SVar:XLKI:TriggeredCard$CardCounters.P1P1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantasmal_sphere.jpg
-Oracle:Flying\nAt the beginning of your upkeep, put a +1/+1 counter on Phantasmal Sphere, then sacrifice Phantasmal Sphere unless you pay {1} for each +1/+1 counter on it.\nWhen Phantasmal Sphere leaves the battlefield,  target opponent puts an X/X blue Orb creature token with flying onto the battlefield, where X is the number of +1/+1 counters on Phantasmal Sphere.
+Oracle:Flying\nAt the beginning of your upkeep, put a +1/+1 counter on Phantasmal Sphere, then sacrifice Phantasmal Sphere unless you pay {1} for each +1/+1 counter on it.\nWhen Phantasmal Sphere leaves the battlefield, target opponent puts an X/X blue Orb creature token with flying onto the battlefield, where X is the number of +1/+1 counters on Phantasmal Sphere.

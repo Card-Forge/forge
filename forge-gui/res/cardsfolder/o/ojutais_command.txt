@@ -8,4 +8,4 @@ SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Creature | SpellDesc
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ojutais_command.jpg
-Oracle:Choose two -\n• Return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.\n• You gain 4 life.\n• Counter target creature spell.\n• Draw a card.
+Oracle:Choose two -\nâ€¢ Return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.\nâ€¢ You gain 4 life.\nâ€¢ Counter target creature spell.\nâ€¢ Draw a card.

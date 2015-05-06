@@ -8,4 +8,4 @@ SVar:DBDestroyWhite:DB$ Destroy | ValidTgts$ Creature.White | TgtPrompt$ Select 
 SVar:DBDestroyBlue:DB$ Destroy | ValidTgts$ Creature.Blue | TgtPrompt$ Select target blue creature
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reign_of_chaos.jpg
-Oracle:Choose one - Destroy target Plains and target white creature; or destroy target Island and target blue creature.
+Oracle:Choose one -\n• Destroy target Plains and target white creature.\n• Destroy target Island and target blue creature.
