@@ -2,7 +2,7 @@ package forge.game.player;
 
 import java.util.HashSet;
 
-import forge.card.MagicColor;
+import forge.card.ColorSet;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -15,17 +15,17 @@ public class AchievementTracker {
     public int maxStormCount = 0;
     public int landsPlayed = 0;
 
-    public void onSpellAbilityPlayed(SpellAbility sa) {
+    public void onSpellAbilityPlayed(final SpellAbility sa) {
         final Card card = sa.getHostCard();
         if (sa.getRestrictions().isPwAbility() && sa.hasParam("Ultimate")) {
             activatedUltimates.add(card.getName());
         }
-        if (card.determineColor().getColor() == MagicColor.ALL_COLORS) {
+        if (card.determineColor().equals(ColorSet.ALL_COLORS)) {
             challengesCompleted.add("Chromatic");
         }
     }
 
-    public void onSpellResolve(SpellAbility spell) {
+    public void onSpellResolve(final SpellAbility spell) {
         final Card card = spell.getHostCard();
         if (card.hasKeyword("Epic")) {
             challengesCompleted.add("Epic");

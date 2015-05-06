@@ -33,7 +33,7 @@ public class ChangeTextEffect extends SpellAbilityEffect {
             final String[] changedColorWordsArray = sa.getParam("ChangeColorWord").split(" ");
             if (changedColorWordsArray[0].equals("Choose")) {
                 originalColor = sa.getActivatingPlayer().getController().chooseColor(
-                        "Choose a color word to replace", sa, ColorSet.fromMask(MagicColor.ALL_COLORS));
+                        "Choose a color word to replace", sa, ColorSet.ALL_COLORS);
                 changedColorWordOriginal = TextUtil.capitalize(MagicColor.toLongString(originalColor));
             } else {
                 changedColorWordOriginal = changedColorWordsArray[0];
@@ -43,7 +43,7 @@ public class ChangeTextEffect extends SpellAbilityEffect {
             if (changedColorWordsArray[1].equals("Choose")) {
                 final ColorSet possibleNewColors;
                 if (originalColor == 0) { // no original color (ie. any or absent)
-                    possibleNewColors = ColorSet.fromMask(MagicColor.ALL_COLORS);
+                    possibleNewColors = ColorSet.ALL_COLORS;
                 } else { // may choose any except original color
                     possibleNewColors = ColorSet.fromMask(originalColor).inverse();
                 }
@@ -129,7 +129,7 @@ public class ChangeTextEffect extends SpellAbilityEffect {
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected String getStackDescription(SpellAbility sa) {
+    protected String getStackDescription(final SpellAbility sa) {
         final String changedColorWordOriginal, changedColorWordNew;
         if (sa.hasParam("ChangeColorWord")) {
             final String[] changedColorWordsArray = sa.getParam("ChangeColorWord").split(" ");

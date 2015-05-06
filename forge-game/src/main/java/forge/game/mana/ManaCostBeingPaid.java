@@ -417,7 +417,7 @@ public class ManaCostBeingPaid {
 
         if (bill.isMonoColor()) {
             if (bill.isOr2Colorless()) {
-                return (bill.getColorMask() & paymentColor & MagicColor.ALL_COLORS) != 0? 9 : 4;
+                return !ColorSet.fromMask(bill.getColorMask() & paymentColor).isColorless() ? 9 : 4;
             }
             if (!bill.isPhyrexian()) {
                 return 10;

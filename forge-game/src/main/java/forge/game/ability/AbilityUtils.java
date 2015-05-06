@@ -2,6 +2,7 @@ package forge.game.ability;
 
 import com.google.common.collect.Iterables;
 
+import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -1494,9 +1495,9 @@ public class AbilityUtils {
                 String convertTo = params.get(key);
                 byte convertByte = 0;
                 if ("All".equals(convertTo)) {
-                    convertByte = MagicColor.ALL_COLORS;
-                } else{
-                    for(String convertColor : convertTo.split(",")) {
+                    convertByte = ColorSet.ALL_COLORS.getColor();
+                } else {
+                    for (final String convertColor : convertTo.split(",")) {
                         convertByte |= MagicColor.fromName(convertColor);
                     }
                 }

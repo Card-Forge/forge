@@ -93,7 +93,7 @@ public enum ConquestPlane {
             new Region("Auntie's Hovel", "Auntie's Hovel", MagicColor.BLACK | MagicColor.RED),
             new Region("Gilt-Leaf Palace", "Gilt-Leaf Palace", MagicColor.BLACK | MagicColor.GREEN),
             new Region("Murmuring Bosk", "Murmuring Bosk", MagicColor.WHITE | MagicColor.BLACK | MagicColor.GREEN),
-            new Region("Primal Beyond", "Primal Beyond", MagicColor.ALL_COLORS),
+            new Region("Primal Beyond", "Primal Beyond", ColorSet.ALL_COLORS.getColor()),
             new Region("Rustic Clachan", "Rustic Clachan", MagicColor.GREEN | MagicColor.WHITE),
             new Region("Secluded Glen", "Secluded Glen", MagicColor.BLUE | MagicColor.BLACK),
             new Region("Wanderwine Hub", "Wanderwine Hub", MagicColor.WHITE | MagicColor.BLUE),
@@ -116,7 +116,7 @@ public enum ConquestPlane {
             new Region("Ish Sah", "Vault of Whispers", MagicColor.BLACK),
             new Region("Kuldotha", "Great Furnace", MagicColor.RED),
             new Region("Tel-Jilad", "Tree of Tales", MagicColor.GREEN),
-            new Region("Glimmervoid", "Glimmervoid", MagicColor.ALL_COLORS)
+            new Region("Glimmervoid", "Glimmervoid", ColorSet.ALL_COLORS.getColor())
     }),
     Rath("Rath", new String[] {
             "TMP", "STH", "EXO"
@@ -299,7 +299,7 @@ public enum ConquestPlane {
             name = name0;
             artCardName = artCardName0;
             pred = pred0;
-            colorSet = ColorSet.fromMask(MagicColor.ALL_COLORS);
+            colorSet = ColorSet.fromMask(ColorSet.ALL_COLORS.getColor());
         }
 
         public String getName() {

@@ -176,29 +176,25 @@ public class SFilterUtil {
                 if (wantMulticolor) {
                     if (colors == 0) { //handle showing all multi-color cards if all 5 colors are filtered
                         result = color.isMulticolor() || (wantColorless && color.isColorless());
-                    }
-                    else if (colors != MagicColor.ALL_COLORS) {
+                    } else if (colors != ColorSet.ALL_COLORS.getColor()) {
                         if (useColorIdentity) {
                             result = color.hasAllColors(colors);
-                        }
-                        else {
+                        } else {
                             result = rules.canCastWithAvailable(colors);
                         }
                     }
-                }
-                else {
+                } else {
                     result = !color.isMulticolor();
-                    if (colors != MagicColor.ALL_COLORS) {
+                    if (colors != ColorSet.ALL_COLORS.getColor()) {
                         if (useColorIdentity) {
                             result = result && color.hasAnyColor(colors);
-                        }
-                        else {
+                        } else {
                             result = result && rules.canCastWithAvailable(colors);
                         }
                     }
                 }
                 if (!wantColorless) {
-                    if (colors != 0 && colors != MagicColor.ALL_COLORS) {
+                    if (colors != 0 && colors != ColorSet.ALL_COLORS.getColor()) {
                         //if colorless filtered out ensure phyrexian cards don't appear
                         //unless at least one of their colors is selected
                         result = result && color.hasAnyColor(colors);

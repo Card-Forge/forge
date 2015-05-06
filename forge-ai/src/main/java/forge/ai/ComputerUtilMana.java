@@ -3,6 +3,7 @@ package forge.ai;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
 
+import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
@@ -696,7 +697,7 @@ public class ComputerUtilMana {
         // * pay hybrids
         // * pay phyrexian, keep mana for colorless
         // * pay colorless
-        return cost.getShardToPayByPriority(cost.getDistinctShards(), MagicColor.ALL_COLORS);
+        return cost.getShardToPayByPriority(cost.getDistinctShards(), ColorSet.ALL_COLORS.getColor());
     }
 
     private static void adjustManaCostToAvoidNegEffects(ManaCostBeingPaid cost, final Card card, Player ai) {

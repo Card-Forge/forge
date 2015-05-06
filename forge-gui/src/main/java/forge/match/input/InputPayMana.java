@@ -233,7 +233,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
         // If the card has any ability that tracks mana spent, skip express Mana choice
         if (saPaidFor.tracksManaSpent()) {
-            colorCanUse = MagicColor.ALL_COLORS;
+            colorCanUse = ColorSet.ALL_COLORS.getColor();
             guessAbilityWithRequiredColors = false;
         }
 

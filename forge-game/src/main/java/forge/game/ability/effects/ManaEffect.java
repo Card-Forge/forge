@@ -87,7 +87,7 @@ public class ManaEffect extends SpellAbilityEffect {
                     for (int nChar = 0; nChar < colorsNeeded.length(); nChar++) {
                         mask |= MagicColor.fromName(colorsNeeded.charAt(nChar));
                     }
-                    colorMenu = ColorSet.fromMask(mask == 0 ? MagicColor.ALL_COLORS : mask);
+                    colorMenu = mask == 0 ? ColorSet.ALL_COLORS : ColorSet.fromMask(mask);
                     byte val = act.getController().chooseColor("Select Mana to Produce", sa, colorMenu);
                     if (0 == val) {
                         throw new RuntimeException("ManaEffect::resolve() /*any mana*/ - " + act + " color mana choice is empty for " + card.getName());

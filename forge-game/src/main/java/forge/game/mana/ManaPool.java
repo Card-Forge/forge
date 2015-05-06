@@ -22,6 +22,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
 import forge.GameCommand;
+import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.game.GlobalRuleChange;
@@ -368,7 +369,7 @@ public class ManaPool implements Iterable<Mana> {
             colorConversionMatrix[i] = identityMatrix[i];
         }
         for (int i = 0; i < colorRestrictionMatrix.length; i++) {
-            colorRestrictionMatrix[i] = MagicColor.ALL_COLORS;
+            colorRestrictionMatrix[i] = ColorSet.ALL_COLORS.getColor();
         }
     }
 

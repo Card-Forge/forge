@@ -42,21 +42,11 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
     private final byte myColor;
     private final float orderWeight;
 
-    private static final ColorSet[] allColors = new ColorSet[32];
-    private static final ColorSet noColor = new ColorSet();
+    private static final ColorSet[] cache = new ColorSet[32];
 
-    // TODO: some cards state "CardName is %color%" (e.g. pacts of...) - fix
-    // this later
-    /**
-     * Instantiates a new card color.
-     *
-     * @param mana
-     *            the mana
-     */
-    private ColorSet() {
-        myColor = 0;
-        orderWeight = -1;
-    }
+    private static final byte ALL_COLORS_MASK = MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK | MagicColor.RED | MagicColor.GREEN;
+    public static final ColorSet ALL_COLORS = fromMask(ALL_COLORS_MASK);
+    private static final ColorSet NO_COLORS = fromMask(MagicColor.COLORLESS);
 
     private ColorSet(final byte mask) {
         this.myColor = mask;
@@ -64,11 +54,11 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
     }
 
     public static ColorSet fromMask(final int mask) {
-        final int mask32 = mask & MagicColor.ALL_COLORS;
-        if (allColors[mask32] == null) {
-            allColors[mask32] = new ColorSet((byte) mask);
+        final int mask32 = mask & ALL_COLORS_MASK;
+        if (cache[mask32] == null) {
+            cache[mask32] = new ColorSet((byte) mask32);
         }
-        return allColors[mask32];
+        return cache[mask32];
     }
 
     public static ColorSet fromNames(final String... colors) {
@@ -114,6 +104,11 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
     }
 
     /** this has no other colors except defined by operand.  */
+    public boolean hasNoColorsExcept(final ColorSet other) {
+        return hasNoColorsExcept(other.getColor());
+    }
+
+    /** this has no other colors except defined by operand.  */
     public boolean hasNoColorsExcept(final int colormask) {
         return (this.myColor & ~colormask) == 0;
     }
@@ -139,7 +134,7 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
      *
      * @return the order weight
      */
-    public float getOrderWeight() {
+    private float getOrderWeight() {
         float res = this.countColors();
         if(hasWhite()) {
             res += 0.0005f;
@@ -255,7 +250,7 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
 
     public ColorSet inverse() {
         byte mask = this.myColor;
-        mask ^= MagicColor.ALL_COLORS;
+        mask ^= ALL_COLORS_MASK;
         return fromMask(mask);
     }
 
@@ -286,7 +281,7 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
      * @return the nullColor
      */
     public static ColorSet getNullColor() {
-        return noColor;
+        return NO_COLORS;
     }
 
     /**
@@ -299,8 +294,12 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
         return (this.myColor & ccOther.myColor) != 0;
     }
 
+    public ColorSet getSharedColors(final ColorSet ccOther) {
+        return fromMask(getColor() & ccOther.getColor());
+    }
+
     public ColorSet getOffColors(final ColorSet ccOther) {
-        return ColorSet.fromMask(~this.myColor & ccOther.myColor);
+        return fromMask(~this.myColor & ccOther.myColor);
     }
 
     @Override
@@ -313,8 +312,8 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
 
         private int getIndexOfNextColor(){
             int nextBit = currentBit + 1;
-            while(nextBit < MagicColor.NUMBER_OR_COLORS) {
-                if((myColor & MagicColor.WUBRG[nextBit]) != 0) {
+            while (nextBit < MagicColor.NUMBER_OR_COLORS) {
+                if ((myColor & MagicColor.WUBRG[nextBit]) != 0) {
                     break;
                 }
                 nextBit++;

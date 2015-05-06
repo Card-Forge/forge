@@ -619,14 +619,14 @@ public class AbilityManaPart implements java.io.Serializable {
         }
         if (manaReplace.startsWith("Any")) {
             // Replace any type and amount
-        	String replaced = manaReplace.split("->")[1];
-        	if (replaced.equals("Any")) {
+            String replaced = manaReplace.split("->")[1];
+            if (replaced.equals("Any")) {
                 byte rs = MagicColor.GREEN;
                 if (act != null) {
-                    rs = act.getController().chooseColor("Choose a color", sa, ColorSet.fromMask(MagicColor.ALL_COLORS));
+                    rs = act.getController().chooseColor("Choose a color", sa, ColorSet.ALL_COLORS);
                 }
                 replaced = MagicColor.toShortString(rs);
-        	}
+            }
             return replaced;
         }
         final Pattern splitter = Pattern.compile("->");
@@ -657,7 +657,7 @@ public class AbilityManaPart implements java.io.Serializable {
         while (replaced.contains("Any")) {
             byte rs = MagicColor.GREEN;
             if (act != null) {
-                rs = act.getController().chooseColor("Choose a color", sa, ColorSet.fromMask(MagicColor.ALL_COLORS));
+                rs = act.getController().chooseColor("Choose a color", sa, ColorSet.ALL_COLORS);
             }
             replaced = replaced.replaceFirst("Any", MagicColor.toShortString(rs));
         }

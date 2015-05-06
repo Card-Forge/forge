@@ -102,8 +102,8 @@ public class ConquestUtil {
         availableCards.remove(commander);
 
         //remove any cards that aren't allowed in deck due to color identity
-        byte colorIdentity = commander.getRules().getColorIdentity().getColor();
-        if (colorIdentity != MagicColor.ALL_COLORS) {
+        final ColorSet colorIdentity = commander.getRules().getColorIdentity();
+        if (!colorIdentity.equals(ColorSet.ALL_COLORS)) {
             List<PaperCard> invalidCards = new ArrayList<PaperCard>();
             for (PaperCard pc : availableCards) {
                 if (!pc.getRules().getColorIdentity().hasNoColorsExcept(colorIdentity)) {
@@ -119,7 +119,7 @@ public class ConquestUtil {
 
         String setCode = FModel.getConquest().getModel().getCurrentPlane().getEditions().get(0).getCode();
         for (int i = 0; i < MagicColor.WUBRG.length; i++) {
-            if ((colorIdentity & MagicColor.WUBRG[i]) != 0) {
+            if (colorIdentity.hasAnyColor(MagicColor.WUBRG[i])) {
                 pool.add(MagicColor.Constant.BASIC_LANDS.get(i), setCode, 50);
             }
         }
