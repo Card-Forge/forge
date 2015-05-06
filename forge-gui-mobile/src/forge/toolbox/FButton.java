@@ -288,4 +288,8 @@ public class FButton extends FDisplayObject implements IButton {
     public void setTextColor(int r, int g, int b) {
         foreColor = FSkinColor.getStandardColor(r, g, b);
     }
+
+    public FSkinColor getForeColor() {
+        return foreColor;
+    }
 }

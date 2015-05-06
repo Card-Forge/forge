@@ -217,6 +217,10 @@ public class Forge implements ApplicationListener {
         });
     }
 
+    public static boolean isLandscapeMode() {
+        return screenWidth > screenHeight;
+    }
+
     public static int getScreenWidth() {
         return screenWidth;
     }

@@ -76,7 +76,10 @@ public abstract class FScreen extends FContainer {
 
     @Override
     protected final void doLayout(float width, float height) {
-        if (header != null) {
+        if (width > height) { //handle landscape layout special
+            doLandscapeLayout(width, height);
+        }
+        else if (header != null) {
             header.setBounds(0, 0, width, header.getPreferredHeight());
             doLayout(header.getHeight(), width, height);
         }
@@ -86,6 +89,10 @@ public abstract class FScreen extends FContainer {
     }
 
     protected abstract void doLayout(float startY, float width, float height);
+
+    protected void doLandscapeLayout(float width, float height) {
+        doLayout(0, width, height); //just use normal doLayout function by default
+    }
 
     @Override
     protected void drawBackground(Graphics g) {
