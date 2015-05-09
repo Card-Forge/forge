@@ -31,6 +31,7 @@ import forge.itemmanager.CardManager;
 import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManager.ContextMenuBuilder;
+import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.ItemManagerConfig;
 import forge.limited.BoosterDraft;
 import forge.menu.FCheckBoxMenuItem;
@@ -736,7 +737,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         @Override
         protected void doLayout(float width, float height) {
-            cardManager.setBounds(0, 0, width, height);
+            float x = 0;
+            if (Forge.isLandscapeMode()) { //add some horizontal padding in landscape mode
+                x = ItemFilter.PADDING;
+                width -= 2 * x;
+            }
+            cardManager.setBounds(x, 0, width, height);
         }
     }
 
