@@ -28,11 +28,13 @@ public class HomeScreen extends FScreen {
     private static final FSkinColor d80 = clrTheme.stepColor(-80);
     private static final float MAIN_MENU_WIDTH_FACTOR = 0.35f;
 
+    public static final HomeScreen instance = new HomeScreen();
+
     private final FLabel lblLogo = add(new FLabel.Builder().icon(FSkinImage.LOGO).iconInBackground().iconScaleFactor(1).build());
     private final ArrayList<MenuButton> buttons = new ArrayList<MenuButton>();
     private FDeckChooser deckManager;
 
-    public HomeScreen() {
+    private HomeScreen() {
         super((Header)null);
 
         addButton("New Game", new FEventHandler() {
@@ -57,7 +59,12 @@ public class HomeScreen extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 if (deckManager == null) {
-                    deckManager = new FDeckChooser(GameType.DeckManager, false, null);
+                    deckManager = new FDeckChooser(GameType.DeckManager, false, null) {
+                        @Override
+                        public FScreen getLandscapeBackdropScreen() {
+                            return HomeScreen.instance; //use home screen as backdrop when in landscape mode
+                        }  
+                    };
                     deckManager.setHeaderCaption("Deck Manager");
                 }
                 Forge.openScreen(deckManager);
@@ -105,7 +112,7 @@ public class HomeScreen extends FScreen {
     }
 
     @Override
-    protected void doLandscapeLayout(float width, float height) {
+    protected float doLandscapeLayout(float width, float height) {
         float mainMenuWidth = height * MAIN_MENU_WIDTH_FACTOR;
         float logoSize = mainMenuWidth - 2 * PADDING;
         lblLogo.setBounds(PADDING, PADDING, logoSize, logoSize);
@@ -119,6 +126,7 @@ public class HomeScreen extends FScreen {
             button.setBounds(x, y, buttonWidth, buttonHeight);
             y += buttonHeight;
         }
+        return width - mainMenuWidth; //move hosted screens to the right of menu
     }
 
     @Override
@@ -129,26 +137,37 @@ public class HomeScreen extends FScreen {
         float w = getWidth();
         float h = getHeight();
         if (w > h) {
-            float y1 = 0;
-            float y2 = 0;
-            float h1 = h;
-            float h2 = 0;
             w = h * MAIN_MENU_WIDTH_FACTOR;
 
-            /*if (lblSelected.isShowing()) {
-                int scrollPanelTop = scrollPanel.getY();
-                int labelTop = lblSelected.getY() + lblSelected.getParent().getY() + scrollPanelTop - scrollPanel.getVerticalScrollBar().getValue();
-                y2 = labelTop + lblSelected.getHeight();
+            MenuButton activeButton = null;
+            if (NewGameMenu.getPreferredScreen().isCurrentScreen()) {
+                activeButton = buttons.get(0);
+            }
+            else if (LoadGameMenu.getPreferredScreen().isCurrentScreen()) {
+                activeButton = buttons.get(1);
+            }
+            else if (OnlineMenu.getPreferredScreen().isCurrentScreen()) {
+                activeButton = buttons.get(2);
+            }
+            else if (Forge.getCurrentScreen() == deckManager) {
+                activeButton = buttons.get(3);
+            }
+            else if (AchievementsScreen.isCurrentScreen()) {
+                activeButton = buttons.get(4);
+            }
+            else if (SettingsScreen.isCurrentScreen()) {
+                activeButton = buttons.get(5);
+            }
 
-                //ensure clipped to scroll panel
-                if (y2 > scrollPanelTop) {
-                    if (labelTop < scrollPanelTop) {
-                        labelTop = scrollPanelTop;
-                    }
-                    h2 = h1 - y2;
-                    h1 = labelTop - y1;
-                }
-            }*/
+            float y1 = 0;
+            float h1 = h;
+            float y2 = 0;
+            float h2 = 0;
+            if (activeButton != null) {
+                h1 = activeButton.getTop();
+                y2 = activeButton.getBottom();
+                h2 = h - y2;
+            }
 
             float w1 = w * 0.66f;
             float w2 = w - w1;

@@ -116,7 +116,7 @@ public class Forge implements ApplicationListener {
 
         Gdx.input.setCatchBackKey(true);
         Gdx.input.setCatchMenuKey(true);
-        openScreen(new HomeScreen());
+        openScreen(HomeScreen.instance);
         splashScreen = null;
     }
 

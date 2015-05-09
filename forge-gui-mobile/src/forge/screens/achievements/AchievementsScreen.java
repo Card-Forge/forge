@@ -45,6 +45,10 @@ public class AchievementsScreen extends FScreen {
         Forge.openScreen(achievementsScreen);
     }
 
+    public static boolean isCurrentScreen() {
+        return Forge.getCurrentScreen() == achievementsScreen;
+    }
+
     private final FComboBox<AchievementCollection> cbCollections = add(new FComboBox<AchievementCollection>());
     private final TrophyCase trophyCase = add(new TrophyCase());
 

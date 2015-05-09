@@ -1,5 +1,7 @@
 package forge.screens;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Rectangle;
@@ -14,6 +16,7 @@ import forge.assets.FSkinTexture;
 import forge.menu.FPopupMenu;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FContainer;
+import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
@@ -90,8 +93,56 @@ public abstract class FScreen extends FContainer {
 
     protected abstract void doLayout(float startY, float width, float height);
 
-    protected void doLandscapeLayout(float width, float height) {
+    //do layout for landscape mode and return width for any screen hosted on top of this screen
+    protected float doLandscapeLayout(float width, float height) {
         doLayout(0, width, height); //just use normal doLayout function by default
+        return width;
+    }
+
+    //get screen to serve as the backdrop for this screen when in landscape mode
+    public FScreen getLandscapeBackdropScreen() {
+        return null;
+    }
+
+    @Override
+    public void setSize(float width, float height) {
+        if (Forge.isLandscapeMode()) {
+            //adjust size if in landscape mode and has a backdrop
+            FScreen backdrop = getLandscapeBackdropScreen();
+            if (backdrop != null) {
+                width = backdrop.doLandscapeLayout(width, height);
+            }
+        }
+        super.setSize(width, height);
+    }
+
+    @Override
+    public void buildTouchListeners(float screenX, float screenY, ArrayList<FDisplayObject> listeners) {
+        if (Forge.isLandscapeMode()) {
+            //allow touch events on backdrop screen if any
+            FScreen backdrop = getLandscapeBackdropScreen();
+            if (backdrop != null) {
+                backdrop.buildTouchListeners(screenX, screenY, listeners);
+            }
+        }
+        super.buildTouchListeners(screenX, screenY, listeners);
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        if (Forge.isLandscapeMode() && getLeft() == 0) { //check that left is 0 to avoid infinite loop
+            //draw landscape backdrop first if needed
+            FScreen backdrop = getLandscapeBackdropScreen();
+            if (backdrop != null) {
+                backdrop.draw(g);
+                //temporarily shift into position for drawing in front of backdrop
+                setLeft(Forge.getScreenWidth() - getWidth());
+                g.draw(this);
+                setLeft(0);
+                return;
+            }
+        }
+        super.draw(g);
     }
 
     @Override
