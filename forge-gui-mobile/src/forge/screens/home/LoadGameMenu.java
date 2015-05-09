@@ -63,10 +63,6 @@ public class LoadGameMenu extends FPopupMenu {
             initializeScreen();
             Forge.setBackScreen(screen);
         }
-
-        public boolean isCurrentScreen() {
-            return Forge.getCurrentScreen() == screen;
-        }
     }
 
     private static final ForgePreferences prefs = FModel.getPreferences();

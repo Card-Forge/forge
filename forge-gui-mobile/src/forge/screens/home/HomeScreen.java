@@ -32,6 +32,7 @@ public class HomeScreen extends FScreen {
 
     private final FLabel lblLogo = add(new FLabel.Builder().icon(FSkinImage.LOGO).iconInBackground().iconScaleFactor(1).build());
     private final ArrayList<MenuButton> buttons = new ArrayList<MenuButton>();
+    private int activeButtonIndex;
     private FDeckChooser deckManager;
 
     private HomeScreen() {
@@ -40,24 +41,28 @@ public class HomeScreen extends FScreen {
         addButton("New Game", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
+                activeButtonIndex = 0;
                 NewGameMenu.getPreferredScreen().open();
             }
         });
         addButton("Load Game", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
+                activeButtonIndex = 1;
                 LoadGameMenu.getPreferredScreen().open();
             }
         });
         addButton("Play Online", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
+                activeButtonIndex = 2;
                 OnlineMenu.getPreferredScreen().open();
             }
         });
         addButton("Deck Manager", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
+                activeButtonIndex = 3;
                 if (deckManager == null) {
                     deckManager = new FDeckChooser(GameType.DeckManager, false, null);
                     deckManager.setHeaderCaption("Deck Manager");
@@ -68,12 +73,14 @@ public class HomeScreen extends FScreen {
         addButton("Achievements", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
+                activeButtonIndex = 4;
                 AchievementsScreen.show();
             }
         });
         addButton("Settings", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
+                activeButtonIndex = 5;
                 SettingsScreen.show();
             }
         });
@@ -139,31 +146,12 @@ public class HomeScreen extends FScreen {
         if (w > h) {
             w = h * MAIN_MENU_WIDTH_FACTOR;
 
-            MenuButton activeButton = null;
-            if (NewGameMenu.getPreferredScreen().isCurrentScreen()) {
-                activeButton = buttons.get(0);
-            }
-            else if (LoadGameMenu.getPreferredScreen().isCurrentScreen()) {
-                activeButton = buttons.get(1);
-            }
-            else if (OnlineMenu.getPreferredScreen().isCurrentScreen()) {
-                activeButton = buttons.get(2);
-            }
-            else if (Forge.getCurrentScreen() == deckManager) {
-                activeButton = buttons.get(3);
-            }
-            else if (AchievementsScreen.isCurrentScreen()) {
-                activeButton = buttons.get(4);
-            }
-            else if (SettingsScreen.isCurrentScreen()) {
-                activeButton = buttons.get(5);
-            }
-
             float y1 = 0;
             float h1 = h;
             float y2 = 0;
             float h2 = 0;
-            if (activeButton != null) {
+            if (activeButtonIndex != -1) {
+                MenuButton activeButton = buttons.get(activeButtonIndex);
                 h1 = activeButton.getTop();
                 y2 = activeButton.getBottom();
                 h2 = h - y2;

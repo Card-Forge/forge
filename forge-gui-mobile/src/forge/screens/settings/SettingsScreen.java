@@ -23,10 +23,6 @@ public class SettingsScreen extends TabPageScreen<SettingsScreen> {
         Forge.openScreen(settingsScreen);
     }
 
-    public static boolean isCurrentScreen() {
-        return Forge.getCurrentScreen() == settingsScreen;
-    }
-
     @SuppressWarnings("unchecked")
     private SettingsScreen() {
         super(new TabPage[] {

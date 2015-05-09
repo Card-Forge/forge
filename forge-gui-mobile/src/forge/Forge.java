@@ -24,6 +24,7 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.screens.SplashScreen;
 import forge.screens.home.HomeScreen;
+import forge.screens.home.NewGameMenu;
 import forge.screens.match.MatchController;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
@@ -118,6 +119,10 @@ public class Forge implements ApplicationListener {
         Gdx.input.setCatchMenuKey(true);
         openScreen(HomeScreen.instance);
         splashScreen = null;
+
+        if (isLandscapeMode()) { //open preferred new game screen by default if landscape mode
+            NewGameMenu.getPreferredScreen().open();
+        }
     }
 
     public static Clipboard getClipboard() {

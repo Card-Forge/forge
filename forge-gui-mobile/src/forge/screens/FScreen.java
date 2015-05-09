@@ -135,7 +135,7 @@ public abstract class FScreen extends FContainer {
             //draw landscape backdrop first if needed
             FScreen backdrop = getLandscapeBackdropScreen();
             if (backdrop != null) {
-                backdrop.draw(g);
+                g.draw(backdrop);
                 //temporarily shift into position for drawing in front of backdrop
                 setLeft(Forge.getScreenWidth() - getWidth());
                 g.draw(this);
