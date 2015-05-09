@@ -243,7 +243,7 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
             FScreen screen = Forge.getCurrentScreen();
             float screenHeight = screen.getHeight();
 
-            float x = FComboBox.this.localToScreenX(0);
+            float x = screen.screenToLocalX(FComboBox.this.localToScreenX(0));
             float y = FComboBox.this.localToScreenY(FComboBox.this.getHeight());
 
             float maxVisibleHeight = screenHeight - y;

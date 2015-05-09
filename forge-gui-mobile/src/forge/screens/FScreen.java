@@ -147,6 +147,9 @@ public abstract class FScreen extends FContainer {
 
     @Override
     protected void drawBackground(Graphics g) {
+        if (Forge.isLandscapeMode() && getLandscapeBackdropScreen() != null) {
+            return; //don't draw background if this screen has a backdrop
+        }
         float w = getWidth();
         float h = getHeight();
         g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, w, h);

@@ -91,7 +91,7 @@ public abstract class FDropDown extends FScrollPane {
         if (visible0) {
             updateSizeAndPosition();
 
-            if (autoHide()) { //add invisible backdrop if needed to allow auto-hiding when pressing outide drop down
+            if (autoHide()) { //add invisible backdrop if needed to allow auto-hiding when pressing outside drop down
                 backdrop = new Backdrop();
                 backdrop.setSize(container.getWidth(), container.getHeight());
                 container.add(backdrop);
@@ -203,7 +203,7 @@ public abstract class FDropDown extends FScrollPane {
 
         @Override
         public boolean press(float x, float y) {
-            if (hideBackdropOnPress(x, y)) {
+            if (hideBackdropOnPress(localToScreenX(x), y)) {
                 hide();
             }
             return false; //allow press to pass through to object behind backdrop
