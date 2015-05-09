@@ -1,0 +1,259 @@
+[metadata]
+Name=Modern Masters 2015
+Code=MM2
+Date=2015-05-22
+Type=Reprint
+BoosterCovers=3
+Booster=11 Common, 3 Uncommon, 1 RareMythic
+FoilChanceInBooster=100
+
+[cards]
+R All Is Dust
+U Artisan of Kozilek
+M Emrakul, the Aeons Torn
+M Karn Liberated
+M Kozilek, Butcher of Truth
+M Ulamog, the Infinite Gyre
+C Ulamog's Crusher
+C Apostle's Blessing
+C Arrest
+R Battlegrace Angel
+U Celestial Purge
+C Conclave Phalanx
+C Court Homunculus
+R Daybreak Coronet
+U Dispatch
+M Elesh Norn, Grand Cenobite
+C Fortify
+U Hikari, Twilight Guardian
+R Indomitable Archangel
+M Iona, Shield of Emeria
+C Kami of Ancient Law
+U Kor Duelist
+R Leyline of Sanctity
+C Mighty Leap
+R Mirran Crusader
+R Mirror Entity
+C Moonlit Strider
+U Myrsmith
+U Oblivion Ring
+C Otherworldly Journey
+C Raise the Alarm
+C Skyhunter Skirmisher
+U Spectral Procession
+C Sunlance
+C Sunspear Shikari
+U Taj-Nar Swordsmith
+C Terashi's Grasp
+C Waxmane Baku
+C AEthersnipe
+U Air Servant
+R Argent Sphinx
+C Cloud Elemental
+R Cryptic Command
+C Faerie Mechanist
+U Flashfreeze
+R Guile
+C Helium Squirter
+R Hurkyl's Recall
+R Inexorable Tide
+C Mana Leak
+U Mulldrifter
+C Narcolepsy
+U Novijen Sages
+U Qumulox
+U Remand
+C Repeal
+C Somber Hoverguard
+C Steady Progress
+C Stoic Rebuttal
+R Surrakar Spellblade
+C Telling Time
+M Tezzeret the Seeker
+U Tezzeret's Gambit
+C Thoughtcast
+C Thrummingbird
+C Vapor Snag
+M Vendilion Clique
+C Vigean Graftmage
+U Water Servant
+C Wings of Velis Vel
+M Bitterblossom
+C Bloodthrone Vampire
+C Bone Splinters
+U Daggerclaw Imp
+M Dark Confidant
+C Death Denied
+U Deathmark
+U Devouring Greed
+U Dismember
+C Dread Drone
+C Duskhunter Bat
+R Endrek Sahr, Master Breeder
+C Ghostly Changeling
+C Grim Affliction
+C Instill Infection
+R Midnight Banshee
+C Nameless Inversion
+R Necroskitter
+C Plagued Rusalka
+R Profane Command
+R Puppeteer Clique
+U Reassembling Skeleton
+U Scavenger Drake
+C Scuttling Death
+C Shrivel
+C Sickle Ripper
+C Sign in Blood
+U Spread the Sickness
+R Surgical Extraction
+C Thief of Hope
+C Vampire Lacerator
+U Vampire Outcasts
+C Waking Nightmare
+R Banefire
+C Blades of Velis Vel
+C Blood Ogre
+U Bloodshot Trainee
+C Brute Force
+C Burst Lightning
+U Combust
+M Comet Storm
+C Dragonsoul Knight
+C Fiery Fall
+C Goblin Fireslinger
+C Goblin War Paint
+C Gorehorn Minotaurs
+C Gut Shot
+R Hellkite Charger
+U Incandescent Soulstoke
+C Inner-Flame Igniter
+M Kiki-Jiki, Mirror Breaker
+U Lightning Bolt
+U Skarrgan Firebird
+C Smash to Smithereens
+C Smokebraider
+C Soulbright Flamekin
+R Spikeshot Elder
+U Spitebellows
+R Splinter Twin
+U Stormblood Berserker
+R Thunderblust
+C Tribal Flames
+C Viashino Slaughtermaster
+R Wildfire
+U Worldheart Phoenix
+C Wrap in Flames
+U Algae Gharial
+R All Suns' Dawn
+R Ant Queen
+C Aquastrand Spider
+U Bestial Menace
+C Commune with Nature
+U Cytoplast Root-Kin
+C Gnarlid Pack
+U Karplusan Strider
+C Kavu Primarch
+C Kozilek's Predator
+C Matca Rioters
+U Mutagenic Growth
+C Nest Invader
+R Noble Hierarch
+U Overwhelm
+R Overwhelming Stampede
+U Pelakka Wurm
+C Plummet
+M Primeval Titan
+C Rampant Growth
+U Root-Kin Ally
+C Scatter the Seeds
+C Scion of the Wild
+R Scute Mob
+C Simic Initiate
+C Sundering Vitae
+C Sylvan Bounty
+M Tarmogoyf
+C Thrive
+C Tukatongue Thallid
+C Vines of Vastwood
+R Wolfbriar Elemental
+U Agony Warp
+R Apocalypse Hydra
+U Boros Swiftblade
+U Drooling Goodion
+U Electrolyze
+U Ethercaste Knight
+R Ghost Council of Orzhova
+U Glassdust Hulk
+R Horde of Notions
+U Lorescale Coatl
+R Mystic Snake
+U Necrogenesis
+R Niv-Mizzet, the Firemind
+U Pillory of the Sleepless
+U Plaxcaster Frogling
+U Savage Twister
+R Shadowmage Infiltrator
+U Sigil Blessing
+U Vengeful Rebirth
+U Wrecking Ball
+U Ashenmoor Gouger
+R Creakwood Liege
+U Dimir Guildmage
+R Fulminator Mage
+U Hearthfire Hobgoblin
+R Nobilis of War
+U Restless Apparition
+U Selesnya Guildmage
+U Shrewd Hatchling
+R Swans of Bryn Argoll
+R Wilt-Leaf Liege
+C Alloy Myr
+C Blinding Souleater
+C Carthodion
+R Chimeric Mass
+C Copper Carapace
+U Cranial Plating
+U Culling Dais
+U Darksteel Axe
+R Etched Champion
+R Etched Monstrosity
+U Etched Oracle
+U Everflowing Chalice
+U Expedition Map
+C Flayer Husk
+C Frogmite
+C Glint Hawk Idol
+C Gust-Skimmer
+C Kitesail
+R Lodestone Golem
+R Lodestone Myr
+R Long-Forgotten Gohei
+U Mortarpod
+M Mox Opal
+C Myr Enforcer
+R Precursor Golem
+C Runed Servitor
+C Rusted Relic
+C Sickleslicer
+C Skyreach Manta
+R Spellskite
+C Sphere of the Suns
+R Sunforger
+U Tumble Magnet
+C Wayfarer's Bauble
+U Azorius Chancery
+R Blinkmoth Nexus
+U Boros Garrison
+C Darksteel Citadel
+U Dimir Aquaduct
+U Eldrazi Temple
+C Evolving Wilds
+R Eye of Ugin
+U Golgari Rot Farm
+U Gruul Turf
+U Izzet Boilerworks
+U Orzhov Basilica
+U Rakdos Carnarium
+U Selesnya Sanctuary
+U Simic Growth Chamber
