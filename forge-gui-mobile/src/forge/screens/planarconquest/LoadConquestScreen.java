@@ -142,13 +142,13 @@ public class LoadConquestScreen extends LaunchScreen {
     protected void drawBackground(Graphics g) {
         super.drawBackground(g);
         float y = getHeader().getBottom();
-        g.fillRect(OLD_CONQUESTS_BACK_COLOR, 0, y, getWidth(), lstConquests.getTop() - y);
+        g.fillRect(OLD_CONQUESTS_BACK_COLOR, 0, y, lstConquests.getWidth(), lstConquests.getTop() - y);
     }
 
     @Override
     protected void drawOverlay(Graphics g) {
         float y = lstConquests.getTop();
-        g.drawLine(1, FList.LINE_COLOR, 0, y, getWidth(), y); //draw top border for list
+        g.drawLine(1, FList.LINE_COLOR, 0, y, lstConquests.getWidth(), y); //draw top border for list
     }
 
     @Override
