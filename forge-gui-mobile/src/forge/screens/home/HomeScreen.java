@@ -63,7 +63,7 @@ public class HomeScreen extends FScreen {
                         @Override
                         public FScreen getLandscapeBackdropScreen() {
                             return HomeScreen.instance; //use home screen as backdrop when in landscape mode
-                        }  
+                        }
                     };
                     deckManager.setHeaderCaption("Deck Manager");
                 }
