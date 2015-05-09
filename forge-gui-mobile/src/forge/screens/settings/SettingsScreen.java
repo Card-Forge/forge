@@ -4,9 +4,7 @@ import forge.Forge;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
-import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
-import forge.screens.home.HomeScreen;
 import forge.util.Utils;
 
 public class SettingsScreen extends TabPageScreen<SettingsScreen> {
@@ -40,10 +38,5 @@ public class SettingsScreen extends TabPageScreen<SettingsScreen> {
     @Override
     public void showMenu() {
         Forge.back(); //hide settings screen when menu button pressed
-    }
-
-    @Override
-    public FScreen getLandscapeBackdropScreen() {
-        return HomeScreen.instance; //use home screen as backdrop when in landscape mode
     }
 }

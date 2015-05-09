@@ -14,6 +14,7 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinTexture;
 import forge.menu.FPopupMenu;
+import forge.screens.home.HomeScreen;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
@@ -101,7 +102,7 @@ public abstract class FScreen extends FContainer {
 
     //get screen to serve as the backdrop for this screen when in landscape mode
     public FScreen getLandscapeBackdropScreen() {
-        return null;
+        return HomeScreen.instance; //use home screen as backdrop when in landscape mode by default
     }
 
     @Override

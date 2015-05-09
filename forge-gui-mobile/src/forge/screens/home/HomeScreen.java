@@ -59,12 +59,7 @@ public class HomeScreen extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 if (deckManager == null) {
-                    deckManager = new FDeckChooser(GameType.DeckManager, false, null) {
-                        @Override
-                        public FScreen getLandscapeBackdropScreen() {
-                            return HomeScreen.instance; //use home screen as backdrop when in landscape mode
-                        }
-                    };
+                    deckManager = new FDeckChooser(GameType.DeckManager, false, null);
                     deckManager.setHeaderCaption("Deck Manager");
                 }
                 Forge.openScreen(deckManager);
@@ -127,6 +122,11 @@ public class HomeScreen extends FScreen {
             y += buttonHeight;
         }
         return width - mainMenuWidth; //move hosted screens to the right of menu
+    }
+
+    @Override
+    public FScreen getLandscapeBackdropScreen() {
+        return null;
     }
 
     @Override

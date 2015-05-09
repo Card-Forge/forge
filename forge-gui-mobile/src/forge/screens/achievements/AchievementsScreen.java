@@ -18,7 +18,6 @@ import forge.card.CardZoom;
 import forge.item.IPaperCard;
 import forge.menu.FDropDown;
 import forge.screens.FScreen;
-import forge.screens.home.HomeScreen;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FEvent;
 import forge.toolbox.FLabel;
@@ -78,11 +77,6 @@ public class AchievementsScreen extends FScreen {
         cbCollections.setBounds(x, y, width, cbCollections.getHeight());
         y += cbCollections.getHeight() + PADDING;
         trophyCase.setBounds(x, y, width, height - PADDING - y);
-    }
-
-    @Override
-    public FScreen getLandscapeBackdropScreen() {
-        return HomeScreen.instance; //use home screen as backdrop when in landscape mode
     }
 
     private void setAchievements(AchievementCollection achievements0) {

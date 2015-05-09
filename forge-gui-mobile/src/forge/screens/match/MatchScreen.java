@@ -295,6 +295,11 @@ public class MatchScreen extends FScreen {
     }
 
     @Override
+    public FScreen getLandscapeBackdropScreen() {
+        return null;
+    }
+
+    @Override
     public Rectangle getDropDownBoundary() {
         if (topPlayerPrompt == null) {
             return new Rectangle(0, 0, getWidth(), getHeight() - VPrompt.HEIGHT); //prevent covering prompt

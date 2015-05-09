@@ -17,7 +17,6 @@ import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IGuiGame;
 import forge.match.HostedMatch;
 import forge.menu.FPopupMenu;
-import forge.screens.home.HomeScreen;
 import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
@@ -49,11 +48,6 @@ public abstract class LaunchScreen extends FScreen {
         btnStart.setBounds((width - buttonWidth) / 2, height - buttonHeight - PADDING, buttonWidth, buttonHeight);
 
         doLayoutAboveBtnStart(startY, width, height - buttonHeight - 2 * PADDING);
-    }
-
-    @Override
-    public FScreen getLandscapeBackdropScreen() {
-        return HomeScreen.instance; //use home screen as backdrop when in landscape mode
     }
 
     protected abstract void doLayoutAboveBtnStart(float startY, float width, float height);
