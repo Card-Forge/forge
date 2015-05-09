@@ -54,4 +54,9 @@ public class FMenuBar extends Header {
         float h = getHeight();
         g.fillRect(BACK_COLOR, 0, 0, w, h);
     }
+
+    @Override
+    public float doLandscapeLayout(float screenWidth, float screenHeight) {
+        return 0;
+    }
 }

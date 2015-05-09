@@ -26,7 +26,7 @@ public class HomeScreen extends FScreen {
     private static final FSkinColor clrTheme = FSkinColor.get(Colors.CLR_THEME);
     private static final FSkinColor l00 = clrTheme.stepColor(0);
     private static final FSkinColor d80 = clrTheme.stepColor(-80);
-    private static final float MAIN_MENU_WIDTH_FACTOR = 0.35f;
+    public static final float MAIN_MENU_WIDTH_FACTOR = 0.35f;
 
     public static final HomeScreen instance = new HomeScreen();
 

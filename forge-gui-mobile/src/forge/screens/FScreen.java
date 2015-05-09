@@ -96,7 +96,11 @@ public abstract class FScreen extends FContainer {
 
     //do layout for landscape mode and return width for any screen hosted on top of this screen
     protected float doLandscapeLayout(float width, float height) {
-        doLayout(0, width, height); //just use normal doLayout function by default
+        //just use normal doLayout function by default after making room for header menu
+        if (header != null) {
+            width -= header.doLandscapeLayout(width, height);
+        }
+        doLayout(0, width, height);
         return width;
     }
 
@@ -164,6 +168,9 @@ public abstract class FScreen extends FContainer {
         public static final float LINE_THICKNESS = Utils.scale(1);
 
         public abstract float getPreferredHeight();
+
+        //do layout for landscape mode and return needed width
+        public abstract float doLandscapeLayout(float screenWidth, float screenHeight);
     }
     private static class DefaultHeader extends Header {
         protected static final float HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
@@ -185,6 +192,11 @@ public abstract class FScreen extends FContainer {
         @Override
         public float getPreferredHeight() {
             return HEIGHT;
+        }
+
+        @Override
+        public float doLandscapeLayout(float screenWidth, float screenHeight) {
+            return 0; //default header doesn't need to display for landscape mode
         }
 
         @Override
@@ -221,6 +233,12 @@ public abstract class FScreen extends FContainer {
         protected void doLayout(float width, float height) {
             super.doLayout(width, height);
             btnMenu.setLeft(width - height);
+        }
+
+        @Override
+        public float doLandscapeLayout(float screenWidth, float screenHeight) {
+            float width = screenHeight * HomeScreen.MAIN_MENU_WIDTH_FACTOR;
+            return width;
         }
     }
 

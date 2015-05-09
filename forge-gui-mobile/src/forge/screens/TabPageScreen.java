@@ -111,6 +111,19 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                         finalVisibleTab = child;
                     }
                 }
+
+                if (Forge.isLandscapeMode()) {
+                    //render vertically in Landscape mode
+                    float y = 0;
+                    for (FDisplayObject child : getChildren()) {
+                        if (child.isVisible()) {
+                            child.setBounds(0, y, visibleWidth, HEIGHT);
+                            y += HEIGHT;
+                        }
+                    }
+                    return new ScrollBounds(visibleWidth, y);
+                }
+
                 float x = 0;
                 float tabWidth;
                 isScrollable = (tabCount > 3); //support up to 3 tabs without scrolling
@@ -160,6 +173,12 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
 
         @Override
         public void drawOverlay(Graphics g) {
+            if (Forge.isLandscapeMode()) {
+                //in landscape mode, draw left border for header
+                g.drawLine(LINE_THICKNESS, LINE_COLOR, 0, 0, 0, getHeight());
+                return;
+            }
+
             //draw right border for back button
             if (btnBack != null) {
                 float x = btnBack.getWidth() - LINE_THICKNESS / 2;
@@ -174,12 +193,19 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         @Override
         protected void doLayout(float width, float height) {
             float x = 0;
-            if (btnBack != null) {
+            if (btnBack != null && !Forge.isLandscapeMode()) {
                 btnBack.setIconScaleAuto(COMPACT_TABS);
                 btnBack.setSize(BACK_BUTTON_WIDTH, height);
                 x += BACK_BUTTON_WIDTH;
             }
             scroller.setBounds(x, 0, width - x, height);
+        }
+
+        @Override
+        public float doLandscapeLayout(float screenWidth, float screenHeight) {
+            float width = HEIGHT * 1.5f;
+            setBounds(screenWidth - width, 0, width, screenHeight);
+            return width;
         }
     }
 
@@ -268,6 +294,8 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
 
             @Override
             public void draw(Graphics g) {
+                boolean isLandscapeMode = Forge.isLandscapeMode();
+
                 float w = getWidth();
                 float h = getHeight();
                 float padding = h * 0.1f;
@@ -277,7 +305,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                 w -= 2 * padding;
 
                 //draw caption and icon
-                if (COMPACT_TABS) {
+                if (COMPACT_TABS && !isLandscapeMode) {
                     h -= 2 * padding;
                     if (icon == null) {
                         g.drawText(caption, TAB_FONT, TAB_FORE_COLOR, padding, padding, w, h, false, HAlignment.CENTER, true);
@@ -327,10 +355,16 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                     }
                 }
 
-                //draw right border if needed
-                if (parentScreen.tabHeader.finalVisibleTab != this) {
-                    float x = getWidth() - Header.LINE_THICKNESS / 2;
-                    g.drawLine(Header.LINE_THICKNESS, TabHeader.SEPARATOR_COLOR, x, 0, x, getHeight());
+                //draw right/bottom border if needed
+                if (parentScreen.tabHeader.finalVisibleTab != this || isLandscapeMode) {
+                    if (isLandscapeMode) {
+                        float y = getHeight() - Header.LINE_THICKNESS / 2;
+                        g.drawLine(Header.LINE_THICKNESS, TabHeader.SEPARATOR_COLOR, 0, y, getWidth(), y);
+                    }
+                    else {
+                        float x = getWidth() - Header.LINE_THICKNESS / 2;
+                        g.drawLine(Header.LINE_THICKNESS, TabHeader.SEPARATOR_COLOR, x, 0, x, getHeight());
+                    }
                 }
             }
         }
