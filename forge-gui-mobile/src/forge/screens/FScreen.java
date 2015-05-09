@@ -185,7 +185,6 @@ public abstract class FScreen extends FContainer {
                     Forge.back();
                 }
             }).build());
-            btnBack.setSize(HEIGHT, HEIGHT);
             lblCaption = add(new FLabel.Builder().text(headerCaption).font(FONT).align(HAlignment.CENTER).build());
         }
 
@@ -201,43 +200,64 @@ public abstract class FScreen extends FContainer {
 
         @Override
         public void drawBackground(Graphics g) {
-            g.fillRect(BACK_COLOR, 0, 0, getWidth(), HEIGHT);
+            g.fillRect(BACK_COLOR, 0, 0, getWidth(), getHeight());
         }
 
         @Override
         public void drawOverlay(Graphics g) {
+            if (Forge.isLandscapeMode()) {
+                //in landscape mode, draw left border for header
+                g.drawLine(LINE_THICKNESS, LINE_COLOR, 0, 0, 0, getHeight());
+                return;
+            }
             float y = HEIGHT - LINE_THICKNESS / 2;
             g.drawLine(LINE_THICKNESS, LINE_COLOR, 0, y, getWidth(), y);
         }
 
         @Override
         protected void doLayout(float width, float height) {
+            if (Forge.isLandscapeMode()) {
+                //in landscape mode, don't show back button or caption
+                btnBack.setBounds(0, 0, 0, 0);
+                lblCaption.setBounds(0, 0, 0, 0);
+                return;
+            }
+            btnBack.setBounds(0, 0, height, height);
             lblCaption.setBounds(height, 0, width - 2 * height, height);
         }
     }
     private static class MenuHeader extends DefaultHeader {
         private final FLabel btnMenu;
+        private final FPopupMenu menu;
 
-        public MenuHeader(String headerCaption, final FPopupMenu menu) {
+        public MenuHeader(String headerCaption, FPopupMenu menu0) {
             super(headerCaption);
+            menu = menu0;
             btnMenu = add(new FLabel.Builder().icon(new MenuIcon(HEIGHT, HEIGHT)).pressedColor(BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     menu.show(btnMenu, 0, HEIGHT);
                 }
             }).build());
-            btnMenu.setSize(HEIGHT, HEIGHT);
         }
 
         @Override
         protected void doLayout(float width, float height) {
             super.doLayout(width, height);
-            btnMenu.setLeft(width - height);
+
+            if (Forge.isLandscapeMode()) {
+                //for landscape mode, hide menu button and display menu
+                btnMenu.setBounds(0, 0, 0, 0);
+                return;
+            }
+
+            btnMenu.setBounds(width - height, 0, height, height);
         }
 
         @Override
         public float doLandscapeLayout(float screenWidth, float screenHeight) {
             float width = screenHeight * HomeScreen.MAIN_MENU_WIDTH_FACTOR;
+            setBounds(screenWidth - width, 0, width, screenHeight);
             return width;
         }
     }
