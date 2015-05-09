@@ -1,0 +1,279 @@
+[metadata]
+Code=TPR
+Date=2015-05-06
+Name=Tempest Remastered
+Type=Reprint
+BoosterCovers=1
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand TPR
+FoilChanceInBooster=100
+
+[cards]
+M Cataclysm
+M Cursed Scroll
+M Dream Halls
+M Grindstone
+M Humility
+M Living Death
+M Mox Diamond
+M Oath of Druids
+M Recurring Nightmare
+M Shard Phoenix
+M Sliver Queen
+M Starke of Rath
+M Survival of the Fittest
+M Time Warp
+M Volrath's Stronghold
+R Aluren
+R City of Traitors
+R Coat of Arms
+R Coffin Queen
+R Commander Greven il-Vec
+R Corpse Dance
+R Crovax the Cursed
+R Death Pits of Rath
+R Dracoplasm
+R Ephemeron
+R Erratic Portal
+R Exalted Dragon
+R Fanning the Flames
+R Field of Souls
+R Flame Wave
+R Forbid
+R Gerrard's Battle Cry
+R Heartwood Giant
+R Intuition
+R Jinxed Idol
+R Kezzerdrix
+R Krakilin
+R Legacy's Allure
+R Magmasaur
+R Manabond
+R Mawcor
+R Meditate
+R Mindless Automaton
+R Mirri, Cat Warrior
+R Mogg Infestation
+R Necrologia
+R Ogre Shaman
+R Orim, Samite Healer
+R Paladin en-Vec
+R Pandemonium
+R Rathi Dragon
+R Recycle
+R Selenia, Dark Angel
+R Shaman en-Kor
+R Silver Wyvern
+R Soltari Guerrillas
+R Spike Hatcher
+R Spirit Mirror
+R Spitting Hydra
+R Stronghold Assassin
+R Thopter Squadron
+R Tradewind Rider
+R Verdant Force
+R Vhati il-Dal
+R Volrath's Laboratory
+R Wasteland
+R Winds of Rath
+R Wood Sage
+U Acidic Sliver
+U Angelic Protector
+U Avenging Angel
+U Caldera Lake
+U Cannibalize
+U Capsize
+U Carnassid
+U Cinder Marsh
+U Counterspell
+U Crashing Boars
+U Crystalline Sliver
+U Curiosity
+U Dauthi Marauder
+U Dauthi Slayer
+U Dauthi Warlord
+U Deadshot
+U Dismiss
+U Dream Prowler
+U Emmessi Tome
+U Evincar's Justice
+U Fighting Drake
+U Flowstone Mauler
+U Flowstone Wyvern
+U Fugue
+U Gallantry
+U Goblin Bombardment
+U Hermit Druid
+U Hibernation Sliver
+U Killer Whale
+U Kor Chant
+U Legerdemain
+U Lotus Petal
+U Lowland Basilisk
+U Mage il-Vec
+U Maze of Shadows
+U Mogg Hollows
+U Mogg Maniac
+U Needle Storm
+U Overrun
+U Pacifism
+U Pegasus Stampede
+U Phyrexian Hulk
+U Pine Barrens
+U Reanimate
+U Renegade Warlord
+U Repentance
+U Revenant
+U Rolling Thunder
+U Rootbreaker Wurm
+U Rootwater Depths
+U Rootwater Hunter
+U Sabertooth Wyvern
+U Salt Flats
+U Sarcomancy
+U Scabland
+U Screeching Harpy
+U Searing Touch
+U Shadowstorm
+U Skyshroud Forest
+U Skyshroud Vampire
+U Soltari Champion
+U Soltari Monk
+U Soltari Priest
+U Spellshock
+U Spike Breeder
+U Spike Feeder
+U Spined Sliver
+U Stalking Stones
+U Thalakos Drifters
+U Thalakos Lowlands
+U Tranquility
+U Vec Townships
+U Verdant Touch
+U Victual Sliver
+U Volrath's Curse
+U Wall of Blossoms
+U Wall of Essence
+U Wall of Souls
+U Warrior en-Kor
+U Wind Dancer
+C Aftershock
+C Anarchist
+C Angelic Blessing
+C Anoint
+C Armor Sliver
+C Armored Pegasus
+C Bandage
+C Barbed Sliver
+C Bottle Gnomes
+C Canopy Spider
+C Canyon Wildcat
+C Carnophage
+C Charging Paladin
+C Clot Sliver
+C Coercion
+C Coiled Tinviper
+C Conviction
+C Craven Giant
+C Cursed Flesh
+C Dark Banishing
+C Dark Ritual
+C Dauthi Horror
+C Dauthi Jackal
+C Death Stroke
+C Death's Duet
+C Diabolic Edict
+C Disenchant
+C Dungeon Shade
+C Elven Rite
+C Elvish Fury
+C Endangered Armodon
+C Flowstone Blade
+C Furnace Brood
+C Gaseous Form
+C Gravedigger
+C Hammerhead Shark
+C Harrow
+C Heartwood Dryad
+C Horned Sliver
+C Horned Turtle
+C Kindle
+C Lab Rats
+C Lightning Blast
+C Lowland Giant
+C Mana Leak
+C Maniacal Rage
+C Master Decoy
+C Merfolk Looter
+C Metallic Sliver
+C Mnemonic Sliver
+C Mogg Conscripts
+C Mogg Fanatic
+C Mogg Flunkies
+C Mounted Archers
+C Mulch
+C Muscle Sliver
+C Nomads en-Kor
+C Patchwork Gnomes
+C Provoke
+C Rampant Growth
+C Rats of Rath
+C Reality Anchor
+C Rootwalla
+C Sandstone Warrior
+C Scrivener
+C Sea Monster
+C Seething Anger
+C Serpent Warrior
+C Shackles
+C Shadow Rift
+C Shatter
+C Sift
+C Skyshaper
+C Skyshroud Elf
+C Skyshroud Troll
+C Smite
+C Soltari Lancer
+C Soltari Trooper
+C Spell Blast
+C Spike Colony
+C Spinal Graft
+C Spined Wurm
+C Spirit en-Kor
+C Standing Troops
+C Staunch Defenders
+C Stun
+C Telethopter
+C Thalakos Scout
+C Thalakos Seer
+C Thrull Surgeon
+C Time Ebb
+C Trained Armodon
+C Twitch
+C Vampire Hounds
+C Verdigris
+C Wall of Diffusion
+C Wayward Soul
+C Whispers of the Muse
+C Wind Drake
+C Winged Sliver
+C Youthful Knight
+L Forest
+L Forest
+L Forest
+L Forest
+L Island
+L Island
+L Island
+L Island
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Plains
+L Plains
+L Plains
+L Plains
+L Swamp
+L Swamp
+L Swamp
+L Swamp

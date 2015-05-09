@@ -62,6 +62,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         EXPANSION,
         
         REPRINT,
+        ONLINE,
         STARTER,
         
         DUEL_DECKS,

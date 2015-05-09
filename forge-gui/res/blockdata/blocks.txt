@@ -55,4 +55,5 @@ Theros, 3/6/THS, THS BNG JOU
 Magic 2015, 3/6/M15, M15
 Khans of Tarkir, 3/6/KTK, KTK FRF
 Dragons of Tarkir, 3/6/DTK, DTK FRF
+Tempest Remastered, 3/6/TPR, TPR
 Modern Masters 2015, 3/6/M15, MM2
