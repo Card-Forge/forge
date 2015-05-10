@@ -62,6 +62,10 @@ public class AnimateAi extends SpellAbilityAi {
         // "Am I going to attack with this?"
         // TODO - add some kind of check for during human turn to answer
         // "Can I use this to block something?"
+        
+        if (sa.getConditions() != null && !sa.getConditions().areMet(sa) && sa.getSubAbility() == null) {
+        	return false;
+        }
 
         //interrupt sacrifice effect
         if (!game.getStack().isEmpty()) {
@@ -118,13 +122,14 @@ public class AnimateAi extends SpellAbilityAi {
                 && aiPlayer.getLife() < 6
                 && opponent.getLife() > 6
                 && Iterables.any(opponent.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)
-                && !sa.hasParam("AILogic")) {
+                && !sa.hasParam("AILogic")
+                && !sa.hasParam("Permanent")) {
             return false;
         }
 
         // don't use instant speed animate abilities outside humans
         // Combat_Declare_Attackers_InstantAbility step
-        if (ph.getPlayerTurn().isOpponentOf(aiPlayer) &&
+        if (ph.getPlayerTurn().isOpponentOf(aiPlayer) && !sa.hasParam("Permanent") &&
                 (!ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, opponent) || game.getCombat() != null && game.getCombat().getAttackersOf(aiPlayer).isEmpty())) {
             return false;
         }
@@ -165,12 +170,19 @@ public class AnimateAi extends SpellAbilityAi {
 	                    if (sa.hasParam("Toughness")) {
 	                        toughness = AbilityUtils.calculateAmount(source, sa.getParam("Toughness"), sa);
 	                    }
-	                    if ((power + toughness) > (c.getCurrentPower() + c.getCurrentToughness())) {
+	                    if (sa.hasParam("Keywords")) {
+	                    	for (String keyword : sa.getParam("Keywords").split(" & ")) {
+	                    		if (!source.hasKeyword(keyword)) {
+	                    			bFlag = true;
+	                    		}
+	                    	}
+	                    }
+	                    if (power + toughness > c.getCurrentPower() + c.getCurrentToughness()) {
 	                        bFlag = true;
 	                    }
 	                }
 
-	                if (!SpellAbilityAi.isSorcerySpeed(sa)) {
+	                if (!SpellAbilityAi.isSorcerySpeed(sa) && !sa.hasParam("Permanent")) {
 	                    Card animatedCopy = CardFactory.getCard(c.getPaperCard(), aiPlayer, c.getGame());
 	                    AnimateAi.becomeAnimated(animatedCopy, c.hasSickness(), sa);
 	                    if (ph.isPlayerTurn(aiPlayer) && !ComputerUtilCard.doesSpecifiedCreatureAttackAI(aiPlayer, animatedCopy)) {

@@ -54,6 +54,10 @@ public class CountersPutAi extends SpellAbilityAi {
         if ("Never".equals(sa.getParam("AILogic"))) {
             return false;
         }
+
+        if (sa.getConditions() != null && !sa.getConditions().areMet(sa) && sa.getSubAbility() == null) {
+        	return false;
+        }
         
         if (abCost != null) {
             // AI currently disabled for these costs
