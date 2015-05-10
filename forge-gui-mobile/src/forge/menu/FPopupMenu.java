@@ -3,15 +3,16 @@ package forge.menu;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Forge;
+import forge.Graphics;
 import forge.screens.FScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FLabel;
 
 public abstract class FPopupMenu extends FDropDownMenu {
-    FDisplayObject owner;
-    float x, y;
-    private Vector2 pressPoint;
+    private FDisplayObject owner;
+    private float x, y;
+    private Vector2 pressPoint, fixedSize;
 
     public void show(FDisplayObject owner0, float x0, float y0) {
         owner = owner0;
@@ -27,6 +28,14 @@ public abstract class FPopupMenu extends FDropDownMenu {
         show();
     }
 
+    public void show(float screenX, float screenY, float fixedWidth, float fixedHeight) {
+        x = screenX;
+        y = screenY;
+        fixedSize = new Vector2(fixedWidth, fixedHeight);
+
+        show();
+    }
+
     @Override
     protected FDisplayObject getDropDownOwner() {
         return owner;
@@ -37,11 +46,23 @@ public abstract class FPopupMenu extends FDropDownMenu {
         if (pressPoint != null) {
             //if owner kept pressed while open, release when menu hidden
             owner.release(pressPoint.x, pressPoint.y);
+            pressPoint = null;
         }
+        owner = null;
+        fixedSize = null;
     }
 
     @Override
     protected void updateSizeAndPosition() {
+        if (fixedSize != null) {
+            paneSize = updateAndGetPaneSize(fixedSize.x, fixedSize.y);
+            setBounds(x, y, fixedSize.x, fixedSize.y);
+            for (FMenuItem item : items) {
+                item.setTabMode(true); //ensure items in fixed size menu are treated as tabs
+            }
+            return;
+        }
+
         FScreen screen = Forge.getCurrentScreen();
         float screenWidth = screen.getWidth();
         float screenHeight = screen.getHeight();
@@ -59,5 +80,32 @@ public abstract class FPopupMenu extends FDropDownMenu {
         }
 
         setBounds(Math.round(x), Math.round(y), paneSize.getWidth(), paneSize.getHeight());
+    }
+
+    @Override
+    protected float determineMenuWidth() {
+        if (fixedSize != null) {
+            return fixedSize.x;
+        }
+        return super.determineMenuWidth();
+    }
+
+    @Override
+    protected boolean autoHide() {
+        return fixedSize == null; //don't auto-hide if menu has fixed size
+    }
+
+    @Override
+    protected void drawBackground(Graphics g) {
+        if (fixedSize == null) { //avoid showing background if menu has fixed size
+            super.drawBackground(g);
+        }
+    }
+
+    @Override
+    protected void drawOverlay(Graphics g) {
+        if (fixedSize == null) { //avoid showing overlay if menu has fixed size
+            super.drawOverlay(g);
+        }
     }
 }

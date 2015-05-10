@@ -36,13 +36,7 @@ public abstract class FDropDownMenu extends FDropDown {
         }
 
         //determine needed width of menu
-        float width = 0;
-        for (FMenuItem item : items) {
-            float minWidth = item.getMinWidth();
-            if (width < minWidth) {
-                width = minWidth;
-            }
-        }
+        float width = determineMenuWidth();
         if (width > maxWidth) {
             width = maxWidth;
         }
@@ -57,6 +51,17 @@ public abstract class FDropDownMenu extends FDropDown {
         return new ScrollBounds(width, y);
     }
 
+    protected float determineMenuWidth() {
+        float width = 0;
+        for (FMenuItem item : items) {
+            float minWidth = item.getMinWidth();
+            if (width < minWidth) {
+                width = minWidth;
+            }
+        }
+        return width;
+    }
+
     public void addItem(FMenuItem item) {
         if (item.isVisible()) {
             items.add(add(item));
@@ -65,7 +70,7 @@ public abstract class FDropDownMenu extends FDropDown {
 
     @Override
     public boolean tap(float x, float y, int count) {
-        hide(); //hide when item tapped
+        super.tap(x, y, count);
         if (getDropDownOwner() instanceof FSubMenu) {
             return false; //return false so owning sub menu can be hidden
         }

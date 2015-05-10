@@ -89,8 +89,6 @@ public abstract class FContainer extends FDisplayObject {
 
     @Override
     public void setSize(float width, float height) {
-        if (getWidth() == width && getHeight() == height) { return; }
-
         super.setSize(width, height);
         doLayout(width, height);
     }

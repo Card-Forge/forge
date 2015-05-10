@@ -12,6 +12,7 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinProp;
 import forge.interfaces.IButton;
+import forge.screens.FScreen.Header;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
@@ -28,11 +29,12 @@ public class FMenuItem extends FDisplayObject implements IButton {
     protected static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinColor PRESSED_COLOR = FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(0.9f);
     private static final FSkinColor SEPARATOR_COLOR = FORE_COLOR.alphaColor(0.5f);
+    private static final FSkinColor TAB_SEPARATOR_COLOR = Header.BACK_COLOR.stepColor(-40);
 
     private final String text;
     private final FImage icon;
     private final FEventHandler handler;
-    private boolean pressed, allowForIcon, selected;
+    private boolean pressed, allowForIcon, selected, tabMode;
     private float textWidth;
 
     public FMenuItem(String text0, FEventHandler handler0) {
@@ -63,6 +65,10 @@ public class FMenuItem extends FDisplayObject implements IButton {
 
     public void setAllowForIcon(boolean allowForIcon0) {
         allowForIcon = allowForIcon0;
+    }
+
+    public void setTabMode(boolean tabMode0) {
+        tabMode = tabMode0;
     }
 
     public float getMinWidth() {
@@ -100,7 +106,7 @@ public class FMenuItem extends FDisplayObject implements IButton {
     }
 
     protected boolean showPressedColor() {
-        return pressed || selected;
+        return (pressed && !tabMode) || selected;
     }
 
     @Override
@@ -125,7 +131,12 @@ public class FMenuItem extends FDisplayObject implements IButton {
         g.drawText(text, FONT, FORE_COLOR, x, 0, w - x - GAP_X, h, false, HAlignment.LEFT, true);
 
         //draw separator line
-        g.drawLine(1, SEPARATOR_COLOR, 0, h, w, h);
+        if (tabMode) {
+            g.drawLine(1, TAB_SEPARATOR_COLOR, 0, h, w, h);
+        }
+        else {
+            g.drawLine(1, SEPARATOR_COLOR, 0, h, w, h);
+        }
     }
 
     @Override

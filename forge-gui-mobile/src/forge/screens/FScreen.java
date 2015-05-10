@@ -245,9 +245,12 @@ public abstract class FScreen extends FContainer {
         protected void doLayout(float width, float height) {
             super.doLayout(width, height);
 
+            menu.hide(); //ensure menu hidden when screen resized
+
             if (Forge.isLandscapeMode()) {
                 //for landscape mode, hide menu button and display menu
                 btnMenu.setBounds(0, 0, 0, 0);
+                menu.show(getLeft(), 0, width, height);
                 return;
             }
 
@@ -256,7 +259,7 @@ public abstract class FScreen extends FContainer {
 
         @Override
         public float doLandscapeLayout(float screenWidth, float screenHeight) {
-            float width = screenHeight * HomeScreen.MAIN_MENU_WIDTH_FACTOR;
+            float width = screenHeight * HomeScreen.MAIN_MENU_WIDTH_FACTOR * 0.75f;
             setBounds(screenWidth - width, 0, width, screenHeight);
             return width;
         }
