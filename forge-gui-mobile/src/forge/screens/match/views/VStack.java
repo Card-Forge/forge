@@ -122,7 +122,13 @@ public class VStack extends FDropDown {
 
         float x = MARGINS;
         float y = MARGINS;
-        float totalWidth = maxWidth - MatchController.getView().getTopPlayerPanel().getTabs().iterator().next().getRight(); //keep avatar, life total, and hand tab visible to left of stack
+        float totalWidth;
+        if (Forge.isLandscapeMode()) {
+            totalWidth = Forge.getScreenWidth() * 0.35f;
+        }
+        else {
+            totalWidth = maxWidth - MatchController.getView().getTopPlayerPanel().getTabs().iterator().next().getRight(); //keep avatar, life total, and hand tab visible to left of stack
+        }
         float width = totalWidth - 2 * MARGINS;
 
         final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
