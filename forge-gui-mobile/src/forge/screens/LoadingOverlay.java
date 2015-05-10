@@ -3,6 +3,7 @@ package forge.screens;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.FThreads;
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -59,19 +60,24 @@ public class LoadingOverlay extends FOverlay {
     @Override
     public void drawOverlay(Graphics g) {
         float x = INSETS;
-        float w = getWidth() - 2 * INSETS;
+        float panelWidth = getWidth() - 2 * INSETS;
 
-        float padding = w * INSETS_FACTOR;
-        float logoSize = w * LOGO_SIZE_FACTOR;
+        if (Forge.isLandscapeMode()) {
+            panelWidth = getHeight() - 2 * INSETS;
+            x = (getWidth() - panelWidth) / 2;
+        }
+
+        float padding = panelWidth * INSETS_FACTOR;
+        float logoSize = panelWidth * LOGO_SIZE_FACTOR;
         float fontHeight = FONT.getCapHeight();
         float panelHeight = logoSize + fontHeight + 4 * padding;
 
         float y = (getHeight() - panelHeight) / 2;
-        g.fillRect(BACK_COLOR, x, y, w, panelHeight);
-        g.drawRect(Utils.scale(2), FORE_COLOR, x, y, w, panelHeight);
+        g.fillRect(BACK_COLOR, x, y, panelWidth, panelHeight);
+        g.drawRect(Utils.scale(2), FORE_COLOR, x, y, panelWidth, panelHeight);
         y += padding;
         g.drawImage(FSkinImage.LOGO, (getWidth() - logoSize) / 2f, y, logoSize, logoSize);
         y += logoSize + padding;
-        g.drawText(caption, FONT, FORE_COLOR, x, y, w, getHeight(), false, HAlignment.CENTER, false);
+        g.drawText(caption, FONT, FORE_COLOR, x, y, panelWidth, getHeight(), false, HAlignment.CENTER, false);
     }
 }
