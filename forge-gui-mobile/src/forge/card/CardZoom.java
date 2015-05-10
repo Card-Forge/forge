@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Rectangle;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.ImageKeys;
 import forge.assets.FSkinImage;
@@ -161,7 +162,7 @@ public class CardZoom extends FOverlay {
     }
 
     private void setOneCardView(boolean oneCardView0) {
-        if (oneCardView == oneCardView0) { return; }
+        if (oneCardView == oneCardView0 || Forge.isLandscapeMode()) { return; } //don't allow changing this when in landscape mode
 
         oneCardView = oneCardView0;
         prefs.setPref(FPref.UI_SINGLE_CARD_ZOOM, oneCardView0);
@@ -199,13 +200,19 @@ public class CardZoom extends FOverlay {
         float maxCardHeight = h - 2 * messageHeight;
 
         float cardWidth, cardHeight, y;
-        if (oneCardView) {
+        if (oneCardView && !Forge.isLandscapeMode()) {
             cardWidth = w;
             cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
         }
         else {
             cardWidth = w * 0.5f;
             cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
+
+            float maxSideCardHeight = maxCardHeight * 5 / 7;
+            if (cardHeight > maxSideCardHeight) { //prevent card overlapping message bars
+                cardHeight = maxSideCardHeight;
+                cardWidth = cardHeight / FCardPanel.ASPECT_RATIO;
+            }
             y = (h - cardHeight) / 2;
             if (prevCard != null) {
                 CardImageRenderer.drawZoom(g, prevCard, gameView, false, 0, y, cardWidth, cardHeight);
@@ -213,6 +220,7 @@ public class CardZoom extends FOverlay {
             if (nextCard != null) {
                 CardImageRenderer.drawZoom(g, nextCard, gameView, false, w - cardWidth, y, cardWidth, cardHeight);
             }
+            
             cardWidth = w * 0.7f;
             cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
         }
