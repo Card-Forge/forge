@@ -31,6 +31,12 @@ public class ConquestMenu extends FPopupMenu {
             Forge.openScreen(mapScreen);
         }
     });
+    private static final FMenuItem prefsItem = new FMenuItem("Preferences", FSkinImage.SETTINGS, new FEventHandler() {
+        @Override
+        public void handleEvent(FEvent e) {
+            Forge.openScreen(prefsScreen);
+        }
+    });
 
     public static ConquestMenu getMenu() {
         return conquestMenu;
@@ -82,11 +88,6 @@ public class ConquestMenu extends FPopupMenu {
     protected void buildMenu() {
         FScreen currentScreen = Forge.getCurrentScreen();
         addItem(mapItem); mapItem.setSelected(currentScreen == mapScreen);
-        addItem(new FMenuItem("Preferences", FSkinImage.SETTINGS, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                Forge.openScreen(prefsScreen);
-            }
-        }));
+        addItem(prefsItem); prefsItem.setSelected(currentScreen == prefsScreen);
     }
 }
