@@ -403,6 +403,14 @@ public class VPlayerPanel extends FContainer {
                     w /= 2;
                 }
                 h = icon.getHeight() * w / icon.getWidth();
+                float maxImageHeight = getHeight() - 2 * INFO_TAB_PADDING_Y;
+                if (h > maxImageHeight) {
+                    h = icon.getNearestHQHeight(maxImageHeight);
+                    if (h > maxImageWidth) {
+                        h /= 2;
+                    }
+                    w = icon.getWidth() * h / icon.getHeight();
+                }
                 x = INFO_TAB_PADDING_X + (maxImageWidth - w) / 2;
                 y = (getHeight() - h) / 2;
                 if (lblLife.getRotate180()) {
