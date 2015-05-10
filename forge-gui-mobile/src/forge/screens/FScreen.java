@@ -97,10 +97,18 @@ public abstract class FScreen extends FContainer {
     //do layout for landscape mode and return width for any screen hosted on top of this screen
     protected float doLandscapeLayout(float width, float height) {
         //just use normal doLayout function by default after making room for header menu
+        float startY = 0;
         if (header != null) {
-            width -= header.doLandscapeLayout(width, height);
+            float headerWidth = header.doLandscapeLayout(width, height);
+            if (headerWidth == 0) { //if header doesn't support landscape layout, make room for it at top
+                header.setBounds(0, 0, width, header.getPreferredHeight());
+                startY += header.getHeight();
+            }
+            else { //otherwise make room for it on right
+                width -= headerWidth;
+            }
         }
-        doLayout(0, width, height);
+        doLayout(startY, width, height);
         return width;
     }
 
@@ -176,7 +184,7 @@ public abstract class FScreen extends FContainer {
         protected static final float HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
         protected static final FSkinFont FONT = FSkinFont.get(16);
 
-        private final FLabel btnBack, lblCaption;
+        protected final FLabel btnBack, lblCaption;
 
         public DefaultHeader(String headerCaption) {
             btnBack = add(new FLabel.Builder().icon(new BackIcon(HEIGHT, HEIGHT)).pressedColor(BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new FEventHandler() {
@@ -216,12 +224,6 @@ public abstract class FScreen extends FContainer {
 
         @Override
         protected void doLayout(float width, float height) {
-            if (Forge.isLandscapeMode()) {
-                //in landscape mode, don't show back button or caption
-                btnBack.setBounds(0, 0, 0, 0);
-                lblCaption.setBounds(0, 0, 0, 0);
-                return;
-            }
             btnBack.setBounds(0, 0, height, height);
             lblCaption.setBounds(height, 0, width - 2 * height, height);
         }
@@ -242,6 +244,16 @@ public abstract class FScreen extends FContainer {
         }
 
         @Override
+        public void drawOverlay(Graphics g) {
+            if (Forge.isLandscapeMode()) {
+                //in landscape mode, draw left border for header
+                g.drawLine(LINE_THICKNESS, LINE_COLOR, 0, 0, 0, getHeight());
+                return;
+            }
+            super.drawOverlay(g);
+        }
+
+        @Override
         protected void doLayout(float width, float height) {
             super.doLayout(width, height);
 
@@ -249,6 +261,8 @@ public abstract class FScreen extends FContainer {
 
             if (Forge.isLandscapeMode()) {
                 //for landscape mode, hide menu button and display menu
+                btnBack.setBounds(0, 0, 0, 0);
+                lblCaption.setBounds(0, 0, 0, 0);
                 btnMenu.setBounds(0, 0, 0, 0);
                 menu.show(getLeft(), 0, width, height);
                 return;

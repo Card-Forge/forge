@@ -295,13 +295,6 @@ public class MatchScreen extends FScreen {
     }
 
     @Override
-    protected float doLandscapeLayout(float width, float height) {
-        getHeader().setBounds(0, 0, width, getHeader().getPreferredHeight());
-        doLayout(getHeader().getHeight(), width, height);
-        return width;
-    }
-
-    @Override
     public FScreen getLandscapeBackdropScreen() {
         return null;
     }

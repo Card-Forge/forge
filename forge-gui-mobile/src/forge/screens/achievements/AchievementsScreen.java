@@ -75,6 +75,14 @@ public class AchievementsScreen extends FScreen {
         trophyCase.setBounds(x, y, width, height - PADDING - y);
     }
 
+    @Override
+    protected float doLandscapeLayout(float width, float height) {
+        //don't show header in landscape mode
+        getHeader().setBounds(0, 0, 0, 0);
+        doLayout(0, width, height);
+        return 0;
+    }
+
     private void setAchievements(AchievementCollection achievements0) {
         trophyCase.achievements = achievements0;
         trophyCase.selectedAchievement = null;

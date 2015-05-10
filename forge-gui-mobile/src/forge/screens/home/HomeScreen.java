@@ -64,7 +64,15 @@ public class HomeScreen extends FScreen {
             public void handleEvent(FEvent e) {
                 activeButtonIndex = 3;
                 if (deckManager == null) {
-                    deckManager = new FDeckChooser(GameType.DeckManager, false, null);
+                    deckManager = new FDeckChooser(GameType.DeckManager, false, null) {
+                        @Override
+                        protected float doLandscapeLayout(float width, float height) {
+                            //don't show header in landscape mode
+                            getHeader().setBounds(0, 0, 0, 0);
+                            doLayout(0, width, height);
+                            return 0;
+                        }
+                    };
                     deckManager.setHeaderCaption("Deck Manager");
                 }
                 Forge.openScreen(deckManager);
