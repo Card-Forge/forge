@@ -259,7 +259,7 @@ public abstract class FScreen extends FContainer {
 
         @Override
         public float doLandscapeLayout(float screenWidth, float screenHeight) {
-            float width = screenHeight * HomeScreen.MAIN_MENU_WIDTH_FACTOR * 0.75f;
+            float width = screenHeight * HomeScreen.MAIN_MENU_WIDTH_FACTOR * 0.8f;
             setBounds(screenWidth - width, 0, width, screenHeight);
             return width;
         }

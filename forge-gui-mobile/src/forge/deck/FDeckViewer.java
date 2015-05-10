@@ -11,6 +11,7 @@ import forge.deck.DeckSection;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
+import forge.itemmanager.filters.ItemFilter;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.screens.FScreen;
@@ -150,6 +151,11 @@ public class FDeckViewer extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
-        cardManager.setBounds(0, startY, width, height - startY);
+        float x = 0;
+        if (Forge.isLandscapeMode()) { //add some horizontal padding in landscape mode
+            x = ItemFilter.PADDING;
+            width -= 2 * x;
+        }
+        cardManager.setBounds(x, startY, width, height - startY);
     }
 }
