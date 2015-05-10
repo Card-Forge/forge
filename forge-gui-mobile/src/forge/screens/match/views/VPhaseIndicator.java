@@ -53,11 +53,15 @@ public class VPhaseIndicator extends FContainer {
         }
     }
 
+    public void resetFont() {
+        font = BASE_FONT;
+    }
+
     public float getPreferredHeight(float width) {
         //build string to use to determine ideal font
         float w = width / phaseLabels.size();
         w -= 2 * PADDING_X;
-        font = BASE_FONT;
+        resetFont();
         return _getPreferredHeight(w);
     }
     private float _getPreferredHeight(float w) {
@@ -77,13 +81,25 @@ public class VPhaseIndicator extends FContainer {
 
     @Override
     protected void doLayout(float width, float height) {
-        float x = 0;
-        float w = width / phaseLabels.size();
-        float h = height;
+        if (width > height) {
+            float x = 0;
+            float w = width / phaseLabels.size();
+            float h = height;
+    
+            for (FDisplayObject lbl : getChildren()) {
+                lbl.setBounds(x, 0, w, h);
+                x += w;
+            }
+        }
+        else {
+            float y = 0;
+            float w = width;
+            float h = height / phaseLabels.size();
 
-        for (FDisplayObject lbl : getChildren()) {
-            lbl.setBounds(x, 0, w, h);
-            x += w;
+            for (FDisplayObject lbl : getChildren()) {
+                lbl.setBounds(0, y, w, h);
+                y += h;
+            }
         }
     }
 

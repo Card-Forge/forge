@@ -8,6 +8,7 @@ import java.util.Map;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
@@ -191,6 +192,11 @@ public class VPlayerPanel extends FContainer {
 
     @Override
     protected void doLayout(float width, float height) {
+        if (Forge.isLandscapeMode()) {
+            doLandscapeLayout(width, height);
+            return;
+        }
+
         //layout for bottom panel by default
         float x = VAvatar.WIDTH;
         float w = width - VAvatar.WIDTH;
@@ -242,6 +248,26 @@ public class VPlayerPanel extends FContainer {
                 child.setTop(height - child.getBottom());
             }
         }
+    }
+
+    private void doLandscapeLayout(float width, float height) {
+        float x = 0;
+        float y = 0;
+        avatar.setPosition(x, y);
+        y += avatar.getHeight();
+        lblLife.setBounds(x, y, avatar.getWidth(), LIFE_FONT.getLineHeight());
+        y += lblLife.getHeight();
+        float infoTabWidth = avatar.getWidth() * 0.5f;
+        phaseIndicator.resetFont();
+        phaseIndicator.setBounds(x, y, avatar.getWidth() - infoTabWidth, height - y);
+        x += phaseIndicator.getWidth();
+        float infoTabHeight = (height - y) / tabs.size();
+        for (InfoTab tab : tabs) {
+            tab.setBounds(x, y, infoTabWidth, infoTabHeight);
+            y += infoTabHeight;
+        }
+        x = avatar.getRight();
+        field.setBounds(x, 0, width - x, height);
     }
 
     @Override

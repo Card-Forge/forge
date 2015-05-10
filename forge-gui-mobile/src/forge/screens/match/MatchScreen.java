@@ -469,24 +469,29 @@ public class MatchScreen extends FScreen {
         public void drawBackground(Graphics g) {
             super.drawBackground(g);
             float midField = topPlayerPanel.getBottom();
+            float x = topPlayerPanel.getField().getLeft();
             float y = midField - topPlayerPanel.getField().getHeight();
-            float w = getWidth();
+            float w = topPlayerPanel.getField().getWidth();
 
             if (FModel.getPreferences().getPrefBoolean(FPref.UI_MATCH_IMAGE_VISIBLE)) {
-                g.drawImage(FSkinTexture.BG_MATCH, 0, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
+                g.drawImage(FSkinTexture.BG_MATCH, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
             }
 
             //field separator lines
-            if (topPlayerPanel.getSelectedTab() == null) {
-                y++; //ensure border goes all the way across under avatar
+            if (!Forge.isLandscapeMode()) {
+                if (topPlayerPanel.getSelectedTab() == null) {
+                    y++; //ensure border goes all the way across under avatar
+                }
+                g.drawLine(1, BORDER_COLOR, 0, y, w, y);
             }
-            g.drawLine(1, BORDER_COLOR, 0, y, w, y);
 
             y = midField;
-            g.drawLine(1, BORDER_COLOR, 0, y, w, y);
+            g.drawLine(1, BORDER_COLOR, x, y, w, y);
 
-            y = midField + bottomPlayerPanel.getField().getHeight();
-            g.drawLine(1, BORDER_COLOR, 0, y, w, y);
+            if (!Forge.isLandscapeMode()) {
+                y = midField + bottomPlayerPanel.getField().getHeight();
+                g.drawLine(1, BORDER_COLOR, 0, y, w, y);
+            }
         }
 
         @Override
@@ -495,27 +500,33 @@ public class MatchScreen extends FScreen {
 
             //determine player panel heights based on visibility of zone displays
             float topPlayerPanelHeight, bottomPlayerPanelHeight;
-            float cardRowsHeight = totalHeight - 2 * VAvatar.HEIGHT;
-            if (topPlayerPanel.getSelectedTab() == null) {
-                if (bottomPlayerPanel.getSelectedTab() != null) {
-                    topPlayerPanelHeight = cardRowsHeight * 2f / 5f;
-                    bottomPlayerPanelHeight = cardRowsHeight * 3f / 5f;
+            if (Forge.isLandscapeMode()) {
+                topPlayerPanelHeight = totalHeight / 2;
+                bottomPlayerPanelHeight = topPlayerPanelHeight;
+            }
+            else {
+                float cardRowsHeight = totalHeight - 2 * VAvatar.HEIGHT;
+                if (topPlayerPanel.getSelectedTab() == null) {
+                    if (bottomPlayerPanel.getSelectedTab() != null) {
+                        topPlayerPanelHeight = cardRowsHeight * 2f / 5f;
+                        bottomPlayerPanelHeight = cardRowsHeight * 3f / 5f;
+                    }
+                    else {
+                        topPlayerPanelHeight = cardRowsHeight / 2f;
+                        bottomPlayerPanelHeight = topPlayerPanelHeight;
+                    }
+                }
+                else if (bottomPlayerPanel.getSelectedTab() == null) {
+                    topPlayerPanelHeight = cardRowsHeight * 3f / 5f;
+                    bottomPlayerPanelHeight = cardRowsHeight * 2f / 5f;
                 }
                 else {
                     topPlayerPanelHeight = cardRowsHeight / 2f;
                     bottomPlayerPanelHeight = topPlayerPanelHeight;
                 }
+                topPlayerPanelHeight += VAvatar.HEIGHT;
+                bottomPlayerPanelHeight += VAvatar.HEIGHT;
             }
-            else if (bottomPlayerPanel.getSelectedTab() == null) {
-                topPlayerPanelHeight = cardRowsHeight * 3f / 5f;
-                bottomPlayerPanelHeight = cardRowsHeight * 2f / 5f;
-            }
-            else {
-                topPlayerPanelHeight = cardRowsHeight / 2f;
-                bottomPlayerPanelHeight = topPlayerPanelHeight;
-            }
-            topPlayerPanelHeight += VAvatar.HEIGHT;
-            bottomPlayerPanelHeight += VAvatar.HEIGHT;
 
             topPlayerPanel.setBounds(0, 0, visibleWidth, topPlayerPanelHeight);
             bottomPlayerPanel.setBounds(0, totalHeight - bottomPlayerPanelHeight, visibleWidth, bottomPlayerPanelHeight);
