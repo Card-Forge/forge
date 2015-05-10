@@ -9,6 +9,7 @@ public class BoosterSlots {
     public static final String RARE = "Rare";
     public static final String RARE_MYTHIC = "RareMythic";
     public static final String MYTHIC = "Mythic";
+    public static final String SPECIAL = "Special";
     public static final String BASIC_LAND = "BasicLand";
     public static final String TIME_SHIFTED = "TimeShifted";
     public static final String DUAL_FACED_CARD = "dfc";

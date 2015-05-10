@@ -1,0 +1,336 @@
+[metadata]
+Name=Vintage Masters
+Code=VMA
+Date=2014-06-16
+Type=Online
+BoosterCovers=1
+Booster=11 Common, 3 Uncommon, 1 RareMythic, 0 Special
+# 0 Special is needed here so the Foil card includes the Specials
+FoilChanceInBooster=100
+
+[cards]
+S Ancestral Recall
+S Time Walk
+S Timetwister
+S Black Lotus
+S Mox Emerald
+S Mox Jet
+S Mox Pearl
+S Mox Ruby
+S Mox Sapphire
+C Afterlife
+U Akroma's Blessing
+M Armageddon
+U Astral Slide
+M Balance
+C Battle Screech
+C Benalish Trapper
+C Benevolent Bodyguard
+U Breath of Life
+C Brilliant Halo
+R Council's Judgment
+R Crescendo of War
+R Decree of Justice
+C Deftblade Elite
+U Devout Witness
+U Empyrial Armor
+R Eternal Dragon
+C Exile
+R Gerrard's Battle Cry
+C Gilded Light
+C Gustcloak Harrier
+R Jareth, Leonine Titan
+R Karmic Guide
+R Kongming, "Sleeping Dragon"
+C Mistmoon Griffin
+U Mystic Zealot
+C Noble Templar
+R Parallax Wave
+C Phantom Nomad
+U Pianna, Nomad Captain
+U Radiant, Archangel
+C Radiant's Judgment
+C Renewed Faith
+C Seal of Cleansing
+C Shelter
+U Sidar Jabari
+C Soltari Emissary
+C Soltari Trooper
+R Spirit Cairn
+R Spirit Mirror
+U Stoic Champion
+U Swords to Plowshares
+C Teroh's Faithful
+R Winds of Rath
+R Zhalfirin Crusader
+R Academy Elite
+C Aquamoeba
+U Brain Freeze
+C Brainstorm
+C Choking Tethers
+C Circular Logic
+U Cloud Djinn
+U Cloud of Faeries
+R Control Magic
+C Counterspell
+C Deep Analysis
+R Ephemeron
+U Fact or Fiction
+R Flusterstorm
+R Force of Will
+C Frantic Search
+R Future Sight
+U Gush
+U High Tide
+M Jace, the Mind Sculptor
+C Keeneye Aven
+C Killer Whale
+C Krovikan Sorcerer
+M Mana Drain
+C Man-o'-War
+R Mind's Desire
+M Morphling
+M Muzzio, Visionary Architect
+C Obsessive Search
+C Ophidian
+C Owl Familiar
+R Palinchron
+R Plea for Power
+U Power Sink
+C Repel
+C Rescind
+C Scrivener
+R Sea Drake
+U Serendib Efreet
+C Skywing Aven
+R Stroke of Genius
+C Temporal Fissure
+U Thalakos Drifters
+R Tradewind Rider
+U Turnabout
+M Upheaval
+R Volrath's Shapeshifter
+U Waterfront Bouncer
+C Addle
+U Animate Dead
+R Baleful Force
+U Cabal Ritual
+C Carnophage
+C Chainer's Edict
+C Choking Sands
+R Crovax the Cursed
+R Cruel Bargain
+U Dark Hatchling
+C Dark Ritual
+C Dauthi Mercenary
+C Death's-Head Buzzard
+M Demonic Tutor
+R Drakestown Forgotten
+C Expunge
+C Fallen Askari
+U Famine
+C Fledgling Djinn
+U Hymn to Tourach
+R Ichorid
+U Kezzerdrix
+R Laquatus's Champion
+R Living Death
+U Lurking Evil
+C Mesmeric Fiend
+R Nature's Ruin
+R Necropotence
+C Nightscape Familiar
+C Paralyze
+U Phyrexian Defiler
+C Predatory Nightstalker
+C Putrid Imp
+U Reanimate
+R Recurring Nightmare
+R Reign of the Pit
+U Sarcomancy
+C Skirge Familiar
+C Spinal Graft
+U Tendrils of Agony
+C Tyrant's Choice
+C Urborg Uprising
+R Vampiric Tutor
+R Visara the Dreadful
+M Yawgmoth's Bargain
+M Yawgmoth's Will
+C Aftershock
+C Beetleback Chief
+R Burning of Xinye
+R Burning Wish
+C Chain Lightning
+R Chaos Warp
+C Chartooth Cougar
+R Clickslither
+R Crater Hellion
+C Falter
+U Fireblast
+U Flametongue Kavu
+U Flowstone Hellion
+R Gamble
+C Giant Strength
+C Goblin Commando
+C Goblin General
+U Goblin Goon
+R Goblin Lackey
+C Goblin Matron
+C Goblin Patrol
+R Goblin Piledriver
+U Goblin Ringleader
+U Goblin Settler
+U Goblin Warchief
+C Hulking Goblin
+U Kaervek's Torch
+C Kindle
+R Lightning Dragon
+U Lightning Rift
+C Orcish Lumberjack
+U Pillaging Horde
+C Reckless Charge
+U Rites of Initiation
+R Rorix Bladewing
+M Scourge of the Throne
+C Skirk Drill Sergeant
+C Skirk Prospector
+C Solar Blast
+C Spark Spray
+R Starstorm
+R Sulfuric Vortex
+C Wall of Diffusion
+M Wheel of Fortune
+R Worldgorger Dragon
+C Armor of Thorns
+C Arrogant Wurm
+C Basking Rootwalla
+R Berserk
+U Blastoderm
+C Brindle Shoat
+M Channel
+C Claws of Wirewood
+R Deranged Hermit
+U Desert Twister
+U Dreampod Druid
+C Elephant Guide
+C Elvish Aberration
+U Erhnam Djinn
+M Eureka
+M Fastbond
+C Fyndhorn Elves
+U Gaea's Embrace
+R Genesis
+C Giant Mantis
+R Gigapede
+U Grizzly Fate
+R Hermit Druid
+C Jungle Wurm
+C Krosan Tusker
+C Krosan Vorine
+C Nature's Lore
+R Norwood Priestess
+U Nostalgic Dreams
+M Oath of Druids
+U Penumbra Wurm
+C Provoke
+R Realm Seekers
+R Regrowth
+U Roar of the Wurm
+R Rofellos, Llanowar Emissary
+R Saproling Burst
+R Silvos, Rogue Elemental
+C Simian Grunts
+C Sudden Strength
+R Survival of the Fittest
+R Sylvan Library
+U Symbiotic Wurm
+C Tangle
+C Tribute to the Wild
+C Wild Mongrel
+U Yavimaya Elder
+U Æther Mutation
+U Armadillo Cloak
+R Baleful Strix
+R Basandra, Battle Seraph
+U Blazing Specter
+R Brago, King Eternal
+M Dack Fayden
+R Dack's Duplicate
+U Death Grasp
+U Deathreap Ritual
+R Edric, Spymaster of Trest
+U Fires of Yavimaya
+U Goblin Trenches
+R Grenzo, Dungeon Warden
+R Magister of Worth
+M Marchesa, the Black Rose
+U Prophetic Bolt
+U Psychatog
+U Reviving Vapors
+R Selvala, Explorer Returned
+R Shivan Wurm
+R Spiritmonger
+R Ankh of Mishra
+U Chimeric Idol
+M City in a Bottle
+M Coercive Portal
+R Cursed Scroll
+R Flowstone Sculpture
+U Ivory Tower
+R Karn, Silver Golem
+M Lion's Eye Diamond
+M Mana Crypt
+C Mana Prism
+R Mana Vault
+R Masticore
+M Memory Jar
+R Nevinyrral's Disk
+R Null Rod
+R Predator, Flagship
+R Ring of Gix
+M Skullclamp
+R Smokestack
+M Sol Ring
+R Sphere of Resistance
+U Su-Chi
+U Thopter Squadron
+M Time Vault
+U Triangle of War
+R Ancient Tomb
+U Bad River
+R Badlands
+C Barren Moor
+R Bayou
+M Bazaar of Baghdad
+U Caldera Lake
+U Flood Plain
+C Forgotten Cave
+R Grand Coliseum
+U Grasslands
+R Keldon Necropolis
+R Kjeldoran Outpost
+R Lake of the Dead
+M Library of Alexandria
+C Lonely Sandbar
+M Mishra's Workshop
+U Mountain Valley
+U Pine Barrens
+R Plateau
+U Rocky Tar Pit
+U Salt Flats
+R Savannah
+U Scabland
+R Scrubland
+C Secluded Steppe
+U Skyshroud Forest
+R Strip Mine
+R Taiga
+R Thawing Glaciers
+M Tolarian Academy
+C Tranquil Thicket
+R Tropical Island
+R Tundra
+R Underground Sea
+R Volcanic Island
+R Yavimaya Hollow

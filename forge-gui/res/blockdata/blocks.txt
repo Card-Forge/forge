@@ -52,6 +52,7 @@ Modern Masters, 3/6/M13, MMA
 Magic 2014, 3/6/M14, M14
 Theros, 3/6/THS, THS BNG JOU
 #Conspiracy, 3/6/M14, CNS
+Vintage Masters, 3/6/M14, VMA
 Magic 2015, 3/6/M15, M15
 Khans of Tarkir, 3/6/KTK, KTK FRF
 Dragons of Tarkir, 3/6/DTK, DTK FRF
