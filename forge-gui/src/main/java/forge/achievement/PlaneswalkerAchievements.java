@@ -63,6 +63,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Liliana of the Dark Realms", "Liliana's Ritual", "What do you mean, \"out of character\"?");
         add("Liliana of the Veil", "Liliana's Choice", "Which one of your children do you love best?");
         add("Nahiri, the Lithomancer", "Nahiri's Gift", "I pulled it out! Now I'm a king!");
+        add("Narset Transcendent", "Narset's Advantage", "Hey, at least you tried!");
         add("Nicol Bolas, Planeswalker", "Bolas's Ultimatum", "Whatever you do, don't call him \"Nicol\"!");
         add("Nissa Revane", "Nissa's Summoning", "The whole village is here!");
         add("Nissa, Worldwaker", "Nissa's Awakening", "The whole country is here!");
@@ -71,6 +72,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Sarkhan Vol", "Sarkhan's Dragons", "Go forth, my minions!");
         add("Sarkhan the Mad", "Sarkhan's Beatdown", "Tag! You're it!");
         add("Sarkhan, the Dragonspeaker", "Sarkhan's Voices", "Huh? What are you saying?)");
+        add("Sarkhan Unbroken", "Sarkhan's Summoning", "Say hello to my not-so-little friends!");
         add("Sorin Markov", "Sorin's Hypnosis", "You're getting sleepy... very sleepy...");
         add("Sorin, Lord of Innistrad", "Sorin's Recruitment", "My favorite game is Shogi!");
         add("Sorin, Solemn Visitor", "Sorin's Abyss", "Don't get so close to the edge!");
