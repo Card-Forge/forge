@@ -584,7 +584,12 @@ public class FDeckChooser extends FScreen {
 
         if (config == ItemManagerConfig.STRING_ONLY) {
             //hide edit/view buttons for string-only lists
-            btnNewDeck.setWidth(getWidth() - 2 * PADDING);
+            if (Forge.isLandscapeMode()) {
+                btnNewDeck.setWidth((getWidth() - 3 * PADDING) / 2);
+            }
+            else {
+                btnNewDeck.setWidth(getWidth() - 2 * PADDING);
+            }
             btnEditDeck.setVisible(false);
             btnViewDeck.setVisible(false);
             btnRandom.setWidth(btnNewDeck.getWidth());
@@ -649,27 +654,51 @@ public class FDeckChooser extends FScreen {
         width -= 2 * x;
 
         float fieldHeight = cmbDeckTypes.getHeight();
-        float totalButtonHeight = 2 * fieldHeight + PADDING;
+        float totalButtonHeight;
+        boolean landscapeMode = Forge.isLandscapeMode();
+        if (landscapeMode) {
+            totalButtonHeight = fieldHeight;
+        }
+        else {
+            totalButtonHeight = 2 * fieldHeight + PADDING;
+        }
 
         cmbDeckTypes.setBounds(x, y, width, fieldHeight);
         y += cmbDeckTypes.getHeight() + 1;
         lstDecks.setBounds(x, y, width, height - y - totalButtonHeight - 2 * PADDING); //leave room for buttons at bottom
 
         y += lstDecks.getHeight() + PADDING;
-        float buttonWidth = (width - PADDING) / 2;
+        float buttonWidth;
+        if (landscapeMode) {
+            buttonWidth = (width - 3 * PADDING) / 4;
+        }
+        else {
+            buttonWidth = (width - PADDING) / 2;
+        }
 
         if (btnEditDeck.isVisible()) {
             btnNewDeck.setBounds(x, y, buttonWidth, fieldHeight);
+        }
+        else if (landscapeMode) {
+            btnNewDeck.setBounds(x, y, 2 * buttonWidth + PADDING, fieldHeight);
         }
         else {
             btnNewDeck.setBounds(x, y, width, fieldHeight);
         }
         btnEditDeck.setBounds(x + buttonWidth + PADDING, y, buttonWidth, fieldHeight);
-        y += fieldHeight + PADDING;
+        if (landscapeMode) {
+            x += 2 * (buttonWidth + PADDING);
+        }
+        else {
+            y += fieldHeight + PADDING;
+        }
 
         btnViewDeck.setBounds(x, y, buttonWidth, fieldHeight);
         if (btnViewDeck.isVisible()) {
             btnRandom.setBounds(x + buttonWidth + PADDING, y, buttonWidth, fieldHeight);
+        }
+        else if (landscapeMode) {
+            btnRandom.setBounds(x, y, 2 * buttonWidth + PADDING, fieldHeight);
         }
         else {
             btnRandom.setBounds(x, y, width, fieldHeight);
