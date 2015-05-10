@@ -8,6 +8,7 @@ import forge.deck.FDeckEditor;
 import forge.deck.io.DeckPreferences;
 import forge.limited.BoosterDraft;
 import forge.model.FModel;
+import forge.screens.FScreen;
 import forge.screens.home.LoadGameMenu.LoadGameScreen;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
@@ -102,5 +103,10 @@ public class DraftingProcessScreen extends FDeckEditor {
         }
         FOptionPane.showConfirmDialog("This will end the current draft and you will not be able to resume.\n\n" +
                 "Leave anyway?", "Leave Draft?", "Leave", "Cancel", false, canCloseCallback);
+    }
+
+    @Override
+    public FScreen getLandscapeBackdropScreen() {
+        return null;
     }
 }
