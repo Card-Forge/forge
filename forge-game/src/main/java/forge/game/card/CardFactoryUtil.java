@@ -113,7 +113,7 @@ public class CardFactoryUtil {
             }
         };
 
-        morphDown.setDescription("(You may cast this face down as a 2/2 creature for {3}.)");
+        morphDown.setDescription("(You may cast this card face down as a 2/2 creature for {3}.)");
         morphDown.setStackDescription("Morph - Creature 2/2");
         morphDown.setCastFaceDown(true);
 
