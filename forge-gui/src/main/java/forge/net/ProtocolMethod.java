@@ -1,6 +1,5 @@
 package forge.net;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.List;
@@ -55,13 +54,13 @@ public enum ProtocolMethod {
     message             (Mode.SERVER, Void.TYPE, String.class, String.class),
     showErrorDialog     (Mode.SERVER, Void.TYPE, String.class, String.class),
     showConfirmDialog   (Mode.SERVER, Boolean.TYPE, String.class, String.class, String.class, String.class, Boolean.TYPE),
-    showOptionDialog    (Mode.SERVER, Integer.TYPE, String.class, String.class, FSkinProp.class, Array/*String*/.class, Integer.TYPE),
-    showInputDialog     (Mode.SERVER, String.class, String.class, String.class, FSkinProp.class, String.class, Array/*String*/.class),
-    confirm             (Mode.SERVER, Boolean.TYPE, CardView.class, String.class, Boolean.TYPE, Array/*String*/.class),
-    getChoices          (Mode.SERVER, List.class, String.class, Integer.TYPE, Integer.TYPE, Collection.class, Object.class, Function.class),
+    showOptionDialog    (Mode.SERVER, Integer.TYPE, String.class, String.class, FSkinProp.class, List/*String*/.class, Integer.TYPE),
+    showInputDialog     (Mode.SERVER, String.class, String.class, String.class, FSkinProp.class, String.class, List/*String*/.class),
+    confirm             (Mode.SERVER, Boolean.TYPE, CardView.class, String.class, Boolean.TYPE, List/*String*/.class),
+    getChoices          (Mode.SERVER, List.class, String.class, Integer.TYPE, Integer.TYPE, List.class, Object.class, Function.class),
     order               (Mode.SERVER, List.class, String.class, String.class, Integer.TYPE, Integer.TYPE, List.class, List.class, CardView.class, Boolean.TYPE),
     sideboard           (Mode.SERVER, List.class, CardPool.class, CardPool.class),
-    chooseSingleEntityForEffect(Mode.SERVER, GameEntityView.class, String.class, TrackableCollection.class, DelayedReveal.class, Boolean.TYPE),
+    chooseSingleEntityForEffect(Mode.SERVER, GameEntityView.class, String.class, List.class, DelayedReveal.class, Boolean.TYPE),
     setCard             (Mode.SERVER, Void.TYPE, CardView.class),
     // TODO case "setPlayerAvatar":
     openZones           (Mode.SERVER, Boolean.TYPE, Collection/*ZoneType*/.class, Map/*PlayerView,Object*/.class),

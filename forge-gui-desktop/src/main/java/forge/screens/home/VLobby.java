@@ -707,12 +707,13 @@ public class VLobby implements IUpdateable {
         return usedAvatars;
     }
 
+
+    private static final ImmutableList<String> genderOptions = ImmutableList.of("Male",    "Female",  "Any"),
+                                               typeOptions   = ImmutableList.of("Fantasy", "Generic", "Any");
     final String getNewName() {
         final String title = "Get new random name";
         final String message = "What type of name do you want to generate?";
         final SkinImage icon = FOptionPane.QUESTION_ICON;
-        final String[] genderOptions = new String[]{ "Male", "Female", "Any" };
-        final String[] typeOptions = new String[]{ "Fantasy", "Generic", "Any" };
 
         final int genderIndex = FOptionPane.showOptionDialog(message, title, icon, genderOptions, 2);
         if (genderIndex < 0) {
@@ -723,8 +724,8 @@ public class VLobby implements IUpdateable {
             return null;
         }
 
-        final String gender = genderOptions[genderIndex];
-        final String type = typeOptions[typeIndex];
+        final String gender = genderOptions.get(genderIndex);
+        final String type = typeOptions.get(typeIndex);
 
         String confirmMsg, newName;
         final List<String> usedNames = getPlayerNames();

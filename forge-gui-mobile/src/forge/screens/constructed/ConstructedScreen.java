@@ -5,6 +5,7 @@ import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.google.common.collect.ImmutableList;
 
 import forge.FThreads;
 import forge.Forge;
@@ -859,12 +860,12 @@ public class ConstructedScreen extends LaunchScreen {
         return usedAvatars;
     }
 
+    private static final ImmutableList<String> genderOptions = ImmutableList.of("Male",    "Female",  "Any");
+    private static final ImmutableList<String> typeOptions   = ImmutableList.of("Fantasy", "Generic", "Any");
     private final void getNewName(final Callback<String> callback) {
         final String title = "Get new random name";
         final String message = "What type of name do you want to generate?";
         final FSkinImage icon = FOptionPane.QUESTION_ICON;
-        final String[] genderOptions = new String[]{ "Male", "Female", "Any" };
-        final String[] typeOptions = new String[]{ "Fantasy", "Generic", "Any" };
 
         FOptionPane.showOptionDialog(message, title, icon, genderOptions, 2, new Callback<Integer>() {
             @Override
@@ -882,7 +883,7 @@ public class ConstructedScreen extends LaunchScreen {
                             return;
                         }
 
-                        generateRandomName(genderOptions[genderIndex], typeOptions[typeIndex], getPlayerNames(), title, callback);
+                        generateRandomName(genderOptions.get(genderIndex), typeOptions.get(typeIndex), getPlayerNames(), title, callback);
                     }
                 });
             }

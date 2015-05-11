@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
+import com.google.common.collect.ImmutableList;
 
 import forge.Forge;
 import forge.Graphics;
@@ -479,6 +480,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
     }
 
+    private final static ImmutableList<String> onCloseOptions = ImmutableList.of("Save", "Don't Save", "Cancel");
+
     @Override
     public void onClose(final Callback<Boolean> canCloseCallback) {
         if (editorType.getController().isSaved() || canCloseCallback == null) {
@@ -486,7 +489,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             return;
         }
         FOptionPane.showOptionDialog("Save changes to current deck?", "",
-                FOptionPane.QUESTION_ICON, new String[] {"Save", "Don't Save", "Cancel"}, new Callback<Integer>() {
+                FOptionPane.QUESTION_ICON, onCloseOptions, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == 0) {

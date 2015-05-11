@@ -63,21 +63,19 @@ public interface IGuiGame {
     boolean showConfirmDialog(String message, String title, String yesButtonText, String noButtonText);
     boolean showConfirmDialog(String message, String title, String yesButtonText, String noButtonText, boolean defaultYes);
 
-    int showOptionDialog(String message, String title, FSkinProp icon,
-            String[] options, int defaultOption);
+    int showOptionDialog(String message, String title, FSkinProp icon, List<String> options, int defaultOption);
 
     String showInputDialog(String message, String title);
     String showInputDialog(String message, String title, FSkinProp icon);
     String showInputDialog(String message, String title, FSkinProp icon, String initialInput);
-    String showInputDialog(String message, String title, FSkinProp icon, String initialInput, String[] inputOptions);
+    String showInputDialog(String message, String title, FSkinProp icon, String initialInput, List<String> inputOptions);
 
     boolean confirm(CardView c, String question);
-    boolean confirm(CardView c, String question, String[] options);
-    boolean confirm(CardView c, String question, boolean defaultIsYes, String[] options);
+    boolean confirm(CardView c, String question, List<String> options);
+    boolean confirm(CardView c, String question, boolean defaultIsYes, List<String> options);
 
-    <T> List<T> getChoices(String message, int min, int max, T[] choices);
-    <T> List<T> getChoices(String message, int min, int max, Collection<T> choices);
-    <T> List<T> getChoices(String message, int min, int max, Collection<T> choices, T selected, Function<T, String> display);
+    <T> List<T> getChoices(String message, int min, int max, List<T> choices);
+    <T> List<T> getChoices(String message, int min, int max, List<T> choices, T selected, Function<T, String> display);
 
     // Get Integer in range
     Integer getInteger(String message, int min);
@@ -99,8 +97,7 @@ public interface IGuiGame {
      *         getChoices.
      * @see #getChoices(String, int, int, Object...)
      */
-    <T> T oneOrNone(String message, T[] choices);
-    <T> T oneOrNone(String message, Collection<T> choices);
+    <T> T oneOrNone(String message, List<T> choices);
 
     /**
      * <p>
@@ -115,10 +112,9 @@ public interface IGuiGame {
      *            a T object.
      * @return One of {@code choices}. Can only be {@code null} if {@code choices} is empty.
      */
-    <T> T one(String message, T[] choices);
-    <T> T one(String message, Collection<T> choices);
+    <T> T one(String message, List<T> choices);
 
-    <T> void reveal(String message, Collection<T> items);
+    <T> void reveal(String message, List<T> items);
 
     <T> List<T> many(String title, String topCaption, int cnt, List<T> sourceChoices, CardView c);
     <T> List<T> many(String title, String topCaption, int min, int max, List<T> sourceChoices, CardView c);
@@ -142,7 +138,7 @@ public interface IGuiGame {
     <T> List<T> insertInList(String title, T newItem, List<T> oldItems);
 
     List<PaperCard> sideboard(CardPool sideboard, CardPool main);
-    GameEntityView chooseSingleEntityForEffect(String title, Collection<? extends GameEntityView> optionList, DelayedReveal delayedReveal, boolean isOptional); void setCard(CardView card);
+    GameEntityView chooseSingleEntityForEffect(String title, List<? extends GameEntityView> optionList, DelayedReveal delayedReveal, boolean isOptional); void setCard(CardView card);
     void setPlayerAvatar(LobbyPlayer player, IHasIcon ihi);
     boolean openZones(Collection<ZoneType> zones, Map<PlayerView, Object> players);
     void restoreOldZones(Map<PlayerView, Object> playersToRestoreZonesFor);

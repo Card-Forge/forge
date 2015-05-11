@@ -55,6 +55,8 @@ import net.miginfocom.swing.MigLayout;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.google.common.collect.ImmutableList;
+
 import forge.UiCommand;
 import forge.assets.FSkinProp;
 import forge.error.BugReporter;
@@ -90,6 +92,8 @@ public class ImportDialog {
 
     // volatile since it is checked from multiple threads
     private volatile boolean _cancel;
+
+    private static final ImmutableList<String> fixOrContinue = ImmutableList.of("Whoops, let me fix that!", "Continue with the import, I know what I'm doing.");
 
     @SuppressWarnings("serial")
     public ImportDialog(final String forcedSrcDir, final Runnable onDialogClose) {
@@ -636,8 +640,7 @@ public class ImportDialog {
                                 sb.append("will come up again the next time you start Forge in order to migrate the remaining files<br>");
                                 sb.append("unless you move or delete them manually.</html>");
 
-                                final String[] options = { "Whoops, let me fix that!", "Continue with the import, I know what I'm doing." };
-                                final int chosen = FOptionPane.showOptionDialog(sb.toString(), "Migration warning", FOptionPane.WARNING_ICON, options);
+                                final int chosen = FOptionPane.showOptionDialog(sb.toString(), "Migration warning", FOptionPane.WARNING_ICON, fixOrContinue);
 
                                 if (chosen != 1) {
                                     // i.e. option 0 was chosen or the dialog was otherwise closed

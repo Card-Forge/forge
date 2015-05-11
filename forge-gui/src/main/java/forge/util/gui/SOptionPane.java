@@ -1,5 +1,9 @@
 package forge.util.gui;
 
+import java.util.List;
+
+import com.google.common.collect.ImmutableList;
+
 import forge.GuiBase;
 import forge.assets.FSkinProp;
 
@@ -26,7 +30,7 @@ public class SOptionPane {
     }
 
     public static void showMessageDialog(final String message, final String title, final FSkinProp icon) {
-        showOptionDialog(message, title, icon, new String[] {"OK"}, 0);
+        showOptionDialog(message, title, icon, ImmutableList.of("OK"), 0);
     }
 
     public static boolean showConfirmDialog(final String message) {
@@ -46,16 +50,16 @@ public class SOptionPane {
     }
 
     public static boolean showConfirmDialog(final String message, final String title, final String yesButtonText, final String noButtonText, final boolean defaultYes) {
-        final String[] options = {yesButtonText, noButtonText};
+        final List<String> options = ImmutableList.of(yesButtonText, noButtonText);
         final int reply = SOptionPane.showOptionDialog(message, title, QUESTION_ICON, options, defaultYes ? 0 : 1);
         return (reply == 0);
     }
 
-    public static int showOptionDialog(final String message, final String title, final FSkinProp icon, final String[] options) {
+    public static int showOptionDialog(final String message, final String title, final FSkinProp icon, final List<String> options) {
         return showOptionDialog(message, title, icon, options, 0);
     }
 
-    public static int showOptionDialog(final String message, final String title, final FSkinProp icon, final String[] options, final int defaultOption) {
+    public static int showOptionDialog(final String message, final String title, final FSkinProp icon, final List<String> options, final int defaultOption) {
         return GuiBase.getInterface().showOptionDialog(message, title, icon, options, defaultOption);
     }
 
@@ -71,7 +75,7 @@ public class SOptionPane {
         return showInputDialog(message, title, icon, initialInput, null);
     }
 
-    public static String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final String[] inputOptions) {
+    public static String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final List<String> inputOptions) {
         return GuiBase.getInterface().showInputDialog(message, title, icon, initialInput, inputOptions);
     }
 

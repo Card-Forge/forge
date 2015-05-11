@@ -19,6 +19,8 @@ package forge.deck;
 
 import java.util.List;
 
+import com.google.common.collect.ImmutableList;
+
 import forge.FThreads;
 import forge.Forge;
 import forge.Graphics;
@@ -48,6 +50,8 @@ public class FDeckImportDialog extends FDialog {
     private final boolean showOptions;
     private final DeckImportController controller;
 
+    private final static ImmutableList<String> importOrCancel = ImmutableList.of("Import", "Cancel");
+
     public FDeckImportDialog(final boolean replacingDeck, final Callback<Deck> callback0) {
         super("Import from Clipboard", 2);
 
@@ -74,7 +78,7 @@ public class FDeckImportDialog extends FDialog {
                             }
                         }
                         if (sb.length() > 0) {
-                            if (SOptionPane.showOptionDialog("The following cards cannot be imported due to misspelling, set restrictions, or not being in Forge yet:\n\n" + sb.toString(), "Import remaining cards?", SOptionPane.INFORMATION_ICON, new String[] { "Import", "Cancel" }) == 1) {
+                            if (SOptionPane.showOptionDialog("The following cards cannot be imported due to misspelling, set restrictions, or not being in Forge yet:\n\n" + sb.toString(), "Import remaining cards?", SOptionPane.INFORMATION_ICON, importOrCancel) == 1) {
                                 return;
                             }
                         }

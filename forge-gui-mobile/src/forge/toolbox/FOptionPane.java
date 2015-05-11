@@ -1,10 +1,13 @@
 package forge.toolbox;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
+import com.google.common.collect.ImmutableList;
 
 import forge.Forge;
 import forge.Graphics;
@@ -52,11 +55,11 @@ public class FOptionPane extends FDialog {
     }
 
     public static void showMessageDialog(final String message, final String title, final FImage icon) {
-        showOptionDialog(message, title, icon, new String[] {"OK"}, 0, null);
+        showOptionDialog(message, title, icon, ImmutableList.of("OK"), 0, null);
     }
 
     public static void showMessageDialog(final String message, final String title, final FImage icon, final Callback<Integer> callback) {
-        showOptionDialog(message, title, icon, new String[] {"OK"}, 0, callback);
+        showOptionDialog(message, title, icon, ImmutableList.of("OK"), 0, callback);
     }
 
     public static void showConfirmDialog(final String message, final Callback<Boolean> callback) {
@@ -76,7 +79,7 @@ public class FOptionPane extends FDialog {
     }
 
     public static void showConfirmDialog(final String message, final String title, final String yesButtonText, final String noButtonText, final boolean defaultYes, final Callback<Boolean> callback) {
-        final String[] options = {yesButtonText, noButtonText};
+        final List<String> options = ImmutableList.of(yesButtonText, noButtonText);
         showOptionDialog(message, title, QUESTION_ICON, options, defaultYes ? 0 : 1, new Callback<Integer>() {
             @Override
             public void run(final Integer result) {
@@ -85,16 +88,16 @@ public class FOptionPane extends FDialog {
         });
     }
 
-    public static void showOptionDialog(final String message, final String title, final FImage icon, final String[] options, final Callback<Integer> callback) {
+    public static void showOptionDialog(final String message, final String title, final FImage icon, final List<String> options, final Callback<Integer> callback) {
         showOptionDialog(message, title, icon, options, 0, callback);
     }
 
-    public static void showOptionDialog(final String message, final String title, final FImage icon, final String[] options, final int defaultOption, final Callback<Integer> callback) {
+    public static void showOptionDialog(final String message, final String title, final FImage icon, final List<String> options, final int defaultOption, final Callback<Integer> callback) {
         final FOptionPane optionPane = new FOptionPane(message, title, icon, null, options, defaultOption, callback);
         optionPane.show();
     }
 
-    public static int showCardOptionDialog(final CardView card, final String message, final String title, final FSkinProp icon, final String[] options, final int defaultOption) {
+    public static int showCardOptionDialog(final CardView card, final String message, final String title, final FSkinProp icon, final List<String> options, final int defaultOption) {
         return new WaitCallback<Integer>() {
             @Override
             public void run() {
@@ -103,7 +106,7 @@ public class FOptionPane extends FDialog {
         }.invokeAndWait();
     }
 
-    public static void showCardOptionDialog(final CardView card, String message, String title, FImage icon, final String[] options, final int defaultOption, final Callback<Integer> callback) {
+    public static void showCardOptionDialog(final CardView card, String message, String title, FImage icon, final List<String> options, final int defaultOption, final Callback<Integer> callback) {
         final FDisplayObject cardDisplay;
         if (card != null) {
             cardDisplay = new FDisplayObject() {
@@ -150,7 +153,7 @@ public class FOptionPane extends FDialog {
     public static <T> void showInputDialog(final String title, final T initialInput, final Callback<T> callback) {
         showInputDialog(null, title, initialInput, null, callback);
     }
-    public static <T> void showInputDialog(final String message, final String title, final T initialInput, final T[] inputOptions, final Callback<T> callback) {
+    public static <T> void showInputDialog(final String message, final String title, final T initialInput, final List<T> inputOptions, final Callback<T> callback) {
         final FDisplayObject inputField;
         final FTextField txtInput;
         final FComboBox<T> cbInput;
@@ -178,7 +181,7 @@ public class FOptionPane extends FDialog {
         container.add(inputField);
         container.setHeight(inputField.getHeight() + padTop + PADDING);
 
-        final FOptionPane optionPane = new FOptionPane(message, title, null, container, new String[] {"OK", "Cancel"}, 0, new Callback<Integer>() {
+        final FOptionPane optionPane = new FOptionPane(message, title, null, container, ImmutableList.of("OK", "Cancel"), 0, new Callback<Integer>() {
             @SuppressWarnings("unchecked")
             @Override
             public void run(final Integer result) {
@@ -221,8 +224,8 @@ public class FOptionPane extends FDialog {
     private final int defaultOption;
     private final boolean centerIcon;
 
-    public FOptionPane(final String message, final String title, final FImage icon, final FDisplayObject displayObj0, final String[] options, final int defaultOption0, final Callback<Integer> callback0) {
-        super(title, options.length);
+    public FOptionPane(final String message, final String title, final FImage icon, final FDisplayObject displayObj0, final List<String> options, final int defaultOption0, final Callback<Integer> callback0) {
+        super(title, options.size());
 
         if (icon != null) {
             centerIcon = icon.getWidth() >= 100; //for large icon, center in dialog
@@ -254,9 +257,10 @@ public class FOptionPane extends FDialog {
 
         callback = callback0;
 
-        for (int i = 0; i < options.length; i++) {
+        final int optionsSize = options.size();
+        for (int i = 0; i < optionsSize; i++) {
             final int option = i;
-            initButton(i, options[i], new FEventHandler() {
+            initButton(i, options.get(i), new FEventHandler() {
                 @Override
                 public void handleEvent(final FEvent e) {
                     setResult(option);

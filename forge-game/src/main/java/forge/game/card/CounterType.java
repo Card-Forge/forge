@@ -18,6 +18,8 @@
 
 package forge.game.card;
 
+import com.google.common.collect.ImmutableList;
+
 /**
  * The class Counters.
  * 
@@ -311,4 +313,6 @@ public enum CounterType {
         final String replacedName = name.replace("/", "").replaceAll("\\+", "p").replaceAll("\\-", "m").toUpperCase();
         return Enum.valueOf(CounterType.class, replacedName);
     }
+
+    public static final ImmutableList<CounterType> values = ImmutableList.copyOf(values());
 }

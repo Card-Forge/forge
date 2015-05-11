@@ -7,12 +7,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.text.StyleConstants;
+
+import com.google.common.collect.ImmutableList;
 
 import forge.assets.FSkinProp;
 import forge.toolbox.FSkin.SkinImage;
@@ -46,7 +49,7 @@ public class FOptionPane extends FDialog {
     }
 
     public static void showMessageDialog(final String message, final String title, final SkinImage icon) {
-        showOptionDialog(message, title, icon, new String[] {"OK"}, 0);
+        showOptionDialog(message, title, icon, ImmutableList.of("OK"), 0);
     }
 
     public static boolean showConfirmDialog(final String message) {
@@ -66,16 +69,16 @@ public class FOptionPane extends FDialog {
     }
 
     public static boolean showConfirmDialog(final String message, final String title, final String yesButtonText, final String noButtonText, final boolean defaultYes) {
-        final String[] options = {yesButtonText, noButtonText};
+        final List<String> options = ImmutableList.of(yesButtonText, noButtonText);
         final int reply = FOptionPane.showOptionDialog(message, title, QUESTION_ICON, options, defaultYes ? 0 : 1);
         return (reply == 0);
     }
 
-    public static int showOptionDialog(final String message, final String title, final SkinImage icon, final String[] options) {
+    public static int showOptionDialog(final String message, final String title, final SkinImage icon, final List<String> options) {
         return showOptionDialog(message, title, icon, options, 0);
     }
 
-    public static int showOptionDialog(final String message, final String title, final SkinImage icon, final String[] options, final int defaultOption) {
+    public static int showOptionDialog(final String message, final String title, final SkinImage icon, final List<String> options, final int defaultOption) {
         final FOptionPane optionPane = new FOptionPane(message, title, icon, null, options, defaultOption);
         optionPane.setVisible(true);
         final int dialogResult = optionPane.result;
@@ -96,21 +99,20 @@ public class FOptionPane extends FDialog {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> T showInputDialog(final String message, final String title, final SkinImage icon, final T initialInput, final T[] inputOptions) {
+    public static <T> T showInputDialog(final String message, final String title, final SkinImage icon, final String initialInput, final List<T> inputOptions) {
         final JComponent inputField;
         FTextField txtInput = null;
         FComboBox<T> cbInput = null;
         if (inputOptions == null) {
             txtInput = new FTextField.Builder().text(initialInput.toString()).build();
             inputField = txtInput;
-        }
-        else {
+        } else {
             cbInput = new FComboBox<T>(inputOptions);
             cbInput.setSelectedItem(initialInput);
             inputField = cbInput;
         }
 
-        final FOptionPane optionPane = new FOptionPane(message, title, icon, inputField, new String[] {"OK", "Cancel"}, -1);
+        final FOptionPane optionPane = new FOptionPane(message, title, icon, inputField, ImmutableList.of("OK", "Cancel"), -1);
         optionPane.setDefaultFocus(inputField);
         inputField.addKeyListener(new KeyAdapter() { //hook so pressing Enter on field accepts dialog
             @Override
@@ -136,7 +138,7 @@ public class FOptionPane extends FDialog {
     private int result = -1; //default result to -1, indicating dialog closed without choosing option
     private final FButton[] buttons;
 
-    public FOptionPane(final String message, final String title, final SkinImage icon, final Component comp, final String[] options, final int defaultOption) {
+    public FOptionPane(final String message, final String title, final SkinImage icon, final Component comp, final List<String> options, final int defaultOption) {
         this.setTitle(title);
 
         final int padding = 10;
@@ -184,18 +186,19 @@ public class FOptionPane extends FDialog {
         }
 
         //determine size of buttons
-        final int optionCount = options.length;
+        final int optionCount = options.size();
         final FButton btnMeasure = new FButton(); //use blank button to aid in measurement
         final FontMetrics metrics = JOptionPane.getRootFrame().getGraphics().getFontMetrics(btnMeasure.getFont());
 
         int maxTextWidth = 0;
         buttons = new FButton[optionCount];
         for (int i = 0; i < optionCount; i++) {
-            final int textWidth = metrics.stringWidth(options[i]);
+            final String option = options.get(i);
+            final int textWidth = metrics.stringWidth(option);
             if (textWidth > maxTextWidth) {
                 maxTextWidth = textWidth;
             }
-            buttons[i] = new FButton(options[i]);
+            buttons[i] = new FButton(option);
         }
 
         this.pack(); //resize dialog to fit component and title to help determine button layout

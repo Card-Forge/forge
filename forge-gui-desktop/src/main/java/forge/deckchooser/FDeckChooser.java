@@ -1,5 +1,19 @@
 package forge.deckchooser;
 
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import net.miginfocom.swing.MigLayout;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.ImmutableList;
+
 import forge.FThreads;
 import forge.UiCommand;
 import forge.deck.ColorDeckGenerator;
@@ -24,16 +38,6 @@ import forge.quest.QuestUtil;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
-import net.miginfocom.swing.MigLayout;
-
-import org.apache.commons.lang3.StringUtils;
-
-import javax.swing.*;
-
-import java.awt.Dimension;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @SuppressWarnings("serial")
 public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
@@ -58,9 +62,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         final FDeckChooser chooser = new FDeckChooser(cDetailPicture, forAi);
         chooser.initialize(defaultDeckType);
         chooser.populate();
-        Dimension parentSize = JOptionPane.getRootFrame().getSize();
+        final Dimension parentSize = JOptionPane.getRootFrame().getSize();
         chooser.setMinimumSize(new Dimension((int)(parentSize.getWidth() / 2), (int)parentSize.getHeight() - 200));
-        final FOptionPane optionPane = new FOptionPane(null, title, null, chooser, new String[] { "OK", "Cancel" }, 0);
+        final FOptionPane optionPane = new FOptionPane(null, title, null, chooser, ImmutableList.of("OK", "Cancel"), 0);
         optionPane.setDefaultFocus(chooser);
         chooser.lstDecks.setItemActivateCommand(new UiCommand() {
             @Override
@@ -69,7 +73,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             }
         });
         optionPane.setVisible(true);
-        int dialogResult = optionPane.getResult();
+        final int dialogResult = optionPane.getResult();
         optionPane.dispose();
         if (dialogResult == 0) {
             return chooser.getDeck();
@@ -81,9 +85,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks = new DeckManager(GameType.Constructed, cDetailPicture);
         setOpaque(false);
         isAi = forAi;
-        UiCommand cmdViewDeck = new UiCommand() {
-            @Override
-            public void run() {
+        final UiCommand cmdViewDeck = new UiCommand() {
+            @Override public void run() {
                 if (selectedDeckType != DeckType.COLOR_DECK && selectedDeckType != DeckType.THEME_DECK) {
                     FDeckViewer.show(getDeck());
                 }
@@ -96,16 +99,16 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     public void initialize() {
         initialize(DeckType.COLOR_DECK);
     }
-    public void initialize(DeckType defaultDeckType) {
+    public void initialize(final DeckType defaultDeckType) {
         initialize(null, defaultDeckType);
     }
-    public void initialize(FPref savedStateSetting, DeckType defaultDeckType) {
+    public void initialize(final FPref savedStateSetting, final DeckType defaultDeckType) {
         stateSetting = savedStateSetting;
         selectedDeckType = defaultDeckType;
     }
 
     public DeckType getSelectedDeckType() { return selectedDeckType; }
-    public void setSelectedDeckType(DeckType selectedDeckType0) {
+    public void setSelectedDeckType(final DeckType selectedDeckType0) {
         refreshDecksList(selectedDeckType0, false, null);
     }
 
@@ -247,8 +250,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
         // Special branch for quest events
         if (selectedDeckType == DeckType.QUEST_OPPONENT_DECK) {
-            QuestEvent event = DeckgenUtil.getQuestEvent(lstDecks.getSelectedItem().getName());
-            RegisteredPlayer result = new RegisteredPlayer(event.getEventDeck());
+            final QuestEvent event = DeckgenUtil.getQuestEvent(lstDecks.getSelectedItem().getName());
+            final RegisteredPlayer result = new RegisteredPlayer(event.getEventDeck());
             if (event instanceof QuestEventChallenge) {
                 result.setStartingLife(((QuestEventChallenge) event).getAiLife());
             }
@@ -283,7 +286,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         return isAi;
     }
 
-    public void setIsAi(boolean isAiDeck) {
+    public void setIsAi(final boolean isAiDeck) {
         isAi = isAiDeck;
     }
 
@@ -317,7 +320,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         refreshDecksList(ev.getDeckType(), false, ev);
     }
 
-    private void refreshDecksList(DeckType deckType, boolean forceRefresh, DecksComboBoxEvent ev) {
+    private void refreshDecksList(final DeckType deckType, final boolean forceRefresh, final DecksComboBoxEvent ev) {
         if (decksComboBox == null) { return; } // Not yet populated
         if (selectedDeckType == deckType && !forceRefresh) { return; }
         selectedDeckType = deckType;
@@ -330,29 +333,29 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setCaption(deckType.toString());
 
         switch (deckType) {
-        case CUSTOM_DECK:
-            updateCustom();
-            break;
-        case COLOR_DECK:
-            updateColors();
-            break;
-        case THEME_DECK:
-            updateThemes();
-            break;
-        case QUEST_OPPONENT_DECK:
-            updateQuestEvents();
-            break;
-        case PRECONSTRUCTED_DECK:
-            updatePrecons();
-            break;
-        case RANDOM_DECK:
-            updateRandom();
-            break;
-        case NET_DECK:
-            updateNetDecks();
-            break;
-        default:
-            break; //other deck types not currently supported here
+            case CUSTOM_DECK:
+                updateCustom();
+                break;
+            case COLOR_DECK:
+                updateColors();
+                break;
+            case THEME_DECK:
+                updateThemes();
+                break;
+            case QUEST_OPPONENT_DECK:
+                updateQuestEvents();
+                break;
+            case PRECONSTRUCTED_DECK:
+                updatePrecons();
+                break;
+            case RANDOM_DECK:
+                updateRandom();
+                break;
+            case NET_DECK:
+                updateNetDecks();
+                break;
+            default:
+                break; //other deck types not currently supported here
         }
     }
 
@@ -367,7 +370,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private String getState() {
-        StringBuilder state = new StringBuilder();
+        final StringBuilder state = new StringBuilder();
         if (decksComboBox.getDeckType() == null || decksComboBox.getDeckType() == DeckType.NET_DECK) {
             //handle special case of net decks
             if (netDeckCategory == null) { return ""; }
@@ -381,15 +384,14 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         return state.toString();
     }
 
-    private void joinSelectedDecks(StringBuilder state, String delimiter) {
-        Iterable<DeckProxy> selectedDecks = lstDecks.getSelectedItems();
+    private void joinSelectedDecks(final StringBuilder state, final String delimiter) {
+        final Iterable<DeckProxy> selectedDecks = lstDecks.getSelectedItems();
         boolean isFirst = true;
         if (selectedDecks != null) {
-            for (DeckProxy deck : selectedDecks) {
+            for (final DeckProxy deck : selectedDecks) {
                 if (isFirst) {
                     isFirst = false;
-                }
-                else {
+                } else {
                     state.append(delimiter);
                 }
                 state.append(deck.toString());
@@ -398,14 +400,14 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     public void restoreSavedState() {
-        DeckType oldDeckType = selectedDeckType;
+        final DeckType oldDeckType = selectedDeckType;
         if (stateSetting == null) {
             //if can't restore saved state, just refresh deck list
             refreshDecksList(oldDeckType, true, null);
             return;
         }
 
-        String savedState = prefs.getPref(stateSetting);
+        final String savedState = prefs.getPref(stateSetting);
         refreshDecksList(getDeckTypeFromSavedState(savedState), true, null);
         if (!lstDecks.setSelectedStrings(getSelectedDecksFromSavedState(savedState))) {
             //if can't select old decks, just refresh deck list
@@ -413,36 +415,32 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         }
     }
 
-    private DeckType getDeckTypeFromSavedState(String savedState) {
+    private DeckType getDeckTypeFromSavedState(final String savedState) {
         try {
             if (StringUtils.isBlank(savedState)) {
                 return selectedDeckType;
-            }
-            else {
-                String deckType = savedState.split(";")[0];
+            } else {
+                final String deckType = savedState.split(";")[0];
                 if (deckType.startsWith(NetDeckCategory.PREFIX)) {
                     netDeckCategory = NetDeckCategory.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckCategory.PREFIX.length()));
                     return DeckType.NET_DECK;
                 }
                 return DeckType.valueOf(deckType);
             }
-        }
-        catch (IllegalArgumentException ex) {
+        } catch (final IllegalArgumentException ex) {
             System.err.println(ex.getMessage() + ". Using default : " + selectedDeckType);
             return selectedDeckType;
         }
     }
 
-    private List<String> getSelectedDecksFromSavedState(String savedState) {
+    private List<String> getSelectedDecksFromSavedState(final String savedState) {
         try {
             if (StringUtils.isBlank(savedState)) {
                 return new ArrayList<String>();
-            }
-            else {
+            } else {
                 return Arrays.asList(savedState.split(";")[1].split(SELECTED_DECK_DELIMITER));
             }
-        }
-        catch (Exception ex) {
+        } catch (final Exception ex) {
             System.err.println(ex + " [savedState=" + savedState + "]");
             return new ArrayList<String>();
         }

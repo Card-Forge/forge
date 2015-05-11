@@ -189,22 +189,22 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
-    public int showOptionDialog(final String message, final String title, final FSkinProp icon, final String[] options, final int defaultOption) {
+    public int showOptionDialog(final String message, final String title, final FSkinProp icon, final List<String> options, final int defaultOption) {
         return sendAndWait(ProtocolMethod.showOptionDialog, message, title, icon, options, defaultOption);
     }
 
     @Override
-    public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final String[] inputOptions) {
+    public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final List<String> inputOptions) {
         return sendAndWait(ProtocolMethod.showInputDialog, message, title, icon, initialInput, inputOptions);
     }
 
     @Override
-    public boolean confirm(final CardView c, final String question, final boolean defaultIsYes, final String[] options) {
+    public boolean confirm(final CardView c, final String question, final boolean defaultIsYes, final List<String> options) {
         return sendAndWait(ProtocolMethod.confirm, c, question, defaultIsYes, options);
     }
 
     @Override
-    public <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display) {
+    public <T> List<T> getChoices(final String message, final int min, final int max, final List<T> choices, final T selected, final Function<T, String> display) {
         return sendAndWait(ProtocolMethod.getChoices, message, min, max, choices, selected, display);
     }
 
@@ -219,7 +219,7 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
-    public GameEntityView chooseSingleEntityForEffect(final String title, final Collection<? extends GameEntityView> optionList, final DelayedReveal delayedReveal, final boolean isOptional) {
+    public GameEntityView chooseSingleEntityForEffect(final String title, final List<? extends GameEntityView> optionList, final DelayedReveal delayedReveal, final boolean isOptional) {
         return sendAndWait(ProtocolMethod.chooseSingleEntityForEffect, title, optionList, delayedReveal, isOptional);
     }
 

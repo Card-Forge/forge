@@ -37,6 +37,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import forge.FThreads;
@@ -88,12 +89,11 @@ public class ListChooser<T> {
         this.list = list.getClass().isInstance(List.class) ? (List<T>)list : Lists.newArrayList(list);
         this.lstChoices = new FList<T>(new ChooserListModel());
 
-        String[] options;
+        final ImmutableList<String> options;
         if (minChoices == 0) {
-            options = new String[] {"OK","Cancel"};
-        }
-        else {
-            options = new String[] {"OK"};
+            options = ImmutableList.of("OK","Cancel");
+        } else {
+            options = ImmutableList.of("OK");
         }
 
         if (maxChoices == 1 || minChoices == -1) {

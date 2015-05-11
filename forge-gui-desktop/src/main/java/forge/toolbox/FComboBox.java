@@ -5,6 +5,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.LayoutManager;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.ComboBoxModel;
@@ -50,6 +51,9 @@ public class FComboBox<E> extends SkinnedComboBox<E> implements IComboBox<E> {
     public FComboBox(final E[] items) {
         super(items);
         initialize();
+    }
+    public FComboBox(final List<E> items) {
+        this(new Vector<>(items));
     }
     public FComboBox(final Vector<E> items) {
         super(items);

@@ -11,6 +11,8 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.Style;
 import javax.swing.text.StyledDocument;
 
+import com.google.common.collect.ImmutableList;
+
 import forge.Singletons;
 import forge.card.CardDb;
 import forge.card.CardRules;
@@ -117,6 +119,7 @@ public enum CCardScript implements ICDoc {
         return (currentScriptInfo != null && isTextDirty);
     }
 
+    private static final ImmutableList<String> switchAwayOptions = ImmutableList.of("Save", "Don't Save", "Cancel");
     public boolean canSwitchAway(final boolean isCardChanging) {
         if (switchInProgress) { return false; }
         if (!hasChanges()) { return true; }
@@ -124,10 +127,10 @@ public enum CCardScript implements ICDoc {
         switchInProgress = true;
         Singletons.getControl().ensureScreenActive(FScreen.WORKSHOP_SCREEN); //ensure Workshop is active before showing dialog
         final int choice = FOptionPane.showOptionDialog(
-                "Save changes to " + currentCard + "?",
+                String.format("Save changes to %s?", currentCard),
                 "Save Changes?",
                 FOptionPane.QUESTION_ICON,
-                new String[] {"Save", "Don't Save", "Cancel"});
+                switchAwayOptions);
         switchInProgress = false;
 
         if (choice == -1 || choice == 2) { return false; }

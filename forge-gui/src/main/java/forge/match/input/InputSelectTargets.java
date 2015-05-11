@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.google.common.collect.ImmutableList;
+
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.ApiType;
@@ -46,20 +48,22 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         sb.append("Targeted:\n");
         for (final Entry<GameEntity, Integer> o : targetDepth.entrySet()) {
             sb.append(o.getKey());
-            if( o.getValue() > 1 )
-                sb.append(" (").append(o.getValue()).append(" times)");
-           sb.append("\n");
+            if (o.getValue() > 1) {
+                sb.append(String.format(" (%d times)", o.getValue()));
+            }
+            sb.append("\n");
         }
         if (!sa.getUniqueTargets().isEmpty()) {
             sb.append("Parent Targeted:");
             sb.append(sa.getUniqueTargets()).append("\n");
         }
         sb.append(sa.getHostCard() + " - " + tgt.getVTSelection());
-        
-        int maxTargets = tgt.getMaxTargets(sa.getHostCard(), sa);
-        int targeted = sa.getTargets().getNumTargeted();
-        if(maxTargets > 1)
-            sb.append("\n(").append(maxTargets - targeted).append(" more can be targeted)");
+
+        final int maxTargets = tgt.getMaxTargets(sa.getHostCard(), sa);
+        final int targeted = sa.getTargets().getNumTargeted();
+        if(maxTargets > 1) {
+            sb.append(String.format("\n(%d more can be targeted)", Integer.valueOf(maxTargets - targeted)));
+        }
 
         showMessage(sb.toString());
 
@@ -122,9 +126,9 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         // If all cards must have different controllers
         if (tgt.isDifferentControllers()) {
             final List<Player> targetedControllers = new ArrayList<Player>();
-            for (GameObject o : targetDepth.keySet()) {
+            for (final GameObject o : targetDepth.keySet()) {
                 if (o instanceof Card) {
-                    Player p = ((Card) o).getController();
+                    final Player p = ((Card) o).getController();
                     targetedControllers.add(p);
                 }
             }
@@ -150,9 +154,9 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             // allow allocation only if the max targets isn't reached and there are more candidates
             if ((sa.getTargets().getNumTargeted() + 1 < tgt.getMaxTargets(sa.getHostCard(), sa))
                     && (tgt.getNumCandidates(sa, true) - 1 > 0) && stillToDivide > 1) {
-                final Integer[] choices = new Integer[stillToDivide];
+                final ImmutableList.Builder<Integer> choices = ImmutableList.builder();
                 for (int i = 1; i <= stillToDivide; i++) {
-                    choices[i - 1] = i;
+                    choices.add(Integer.valueOf(i));
                 }
                 String apiBasedMessage = "Distribute how much to ";
                 if (sa.getApi() == ApiType.DealDamage) {
@@ -167,7 +171,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 final StringBuilder sb = new StringBuilder();
                 sb.append(apiBasedMessage);
                 sb.append(card.toString());
-                final Integer chosen = getController().getGui().oneOrNone(sb.toString(), choices);
+                final Integer chosen = getController().getGui().oneOrNone(sb.toString(), choices.build());
                 if (chosen == null) {
                     return true; //still return true since there was a valid choice
                 }
@@ -184,7 +188,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     @Override
-    public String getActivateAction(Card card) {
+    public String getActivateAction(final Card card) {
         if (!tgt.isUniqueTargets() && targetDepth.containsKey(card)) {
             return null;
         }
@@ -195,7 +199,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     @Override
-    protected final void onPlayerSelected(Player player, final ITriggerEvent triggerEvent) {
+    protected final void onPlayerSelected(final Player player, final ITriggerEvent triggerEvent) {
         if (!tgt.isUniqueTargets() && targetDepth.containsKey(player)) {
             return;
         }
@@ -204,15 +208,15 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             showMessage(sa.getHostCard() + " - Cannot target this player (Hexproof? Protection? Restrictions?).");
             return;
         }
-        
+
         if (tgt.isDividedAsYouChoose()) {
             final int stillToDivide = tgt.getStillToDivide();
             int allocatedPortion = 0;
             // allow allocation only if the max targets isn't reached and there are more candidates
             if ((sa.getTargets().getNumTargeted() + 1 < tgt.getMaxTargets(sa.getHostCard(), sa)) && (tgt.getNumCandidates(sa, true) - 1 > 0) && stillToDivide > 1) {
-                final Integer[] choices = new Integer[stillToDivide];
+                final ImmutableList.Builder<Integer> choices = ImmutableList.builder();
                 for (int i = 1; i <= stillToDivide; i++) {
-                    choices[i - 1] = i;
+                    choices.add(Integer.valueOf(i));
                 }
                 String apiBasedMessage = "Distribute how much to ";
                 if (sa.getApi() == ApiType.DealDamage) {
@@ -223,7 +227,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 final StringBuilder sb = new StringBuilder();
                 sb.append(apiBasedMessage);
                 sb.append(player.getName());
-                final Integer chosen = getController().getGui().oneOrNone(sb.toString(), choices);
+                final Integer chosen = getController().getGui().oneOrNone(sb.toString(), choices.build());
                 if (null == chosen) {
                     return;
                 }
@@ -245,15 +249,15 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         }
         final Integer val = targetDepth.get(ge);
         targetDepth.put(ge, val == null ? Integer.valueOf(1) : Integer.valueOf(val.intValue() + 1) );
-        
-        if(hasAllTargets()) {
+
+        if (hasAllTargets()) {
             bOk = true;
             this.done();
-        }
-        else
+        } else {
             this.showMessage();
+        }
     }
-    
+
     private void done() {
         for (final GameEntity c : targetDepth.keySet()) {
             if (c instanceof Card) {
@@ -263,7 +267,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
 
         this.stop();
     }
-    
+
     private boolean hasAllTargets() {
         return tgt.isMaxTargetsChosen(sa.getHostCard(), sa) || ( tgt.getStillToDivide() == 0 && tgt.isDividedAsYouChoose());
     }

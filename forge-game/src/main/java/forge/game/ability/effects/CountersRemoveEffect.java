@@ -12,7 +12,10 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 
 import java.util.Map;
+
 import org.apache.commons.lang3.tuple.Pair;
+
+import com.google.common.collect.ImmutableList;
 
 public class CountersRemoveEffect extends SpellAbilityEffect {
     @Override
@@ -93,7 +96,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                     while (cntToRemove > 0 && tgtCard.hasCounters()) {
                         final Map<CounterType, Integer> tgtCounters = tgtCard.getCounters();
 
-                        CounterType chosenType = pc.chooseCounterType(tgtCounters.keySet(), sa, "Select type of counters to remove");
+                        CounterType chosenType = pc.chooseCounterType(ImmutableList.copyOf(tgtCounters.keySet()), sa, "Select type of counters to remove");
                         String prompt = "Select the number of " + chosenType.getName() + " counters to remove";
                         int chosenAmount = pc.chooseNumber(sa, prompt, 1, Math.min(cntToRemove, tgtCounters.get(chosenType)));
 

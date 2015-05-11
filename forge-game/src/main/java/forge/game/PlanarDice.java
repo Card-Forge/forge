@@ -5,6 +5,8 @@ import forge.game.trigger.TriggerType;
 
 import java.util.HashMap;
 
+import com.google.common.collect.ImmutableList;
+
 /** 
  * Represents the planar dice for Planechase games.
  *
@@ -59,4 +61,6 @@ public enum PlanarDice {
 
         throw new RuntimeException("Element " + value + " not found in PlanarDice enum");
     }
+
+    public static final ImmutableList<PlanarDice> values = ImmutableList.copyOf(values());
 }

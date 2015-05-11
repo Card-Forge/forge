@@ -25,6 +25,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
 
 import forge.FThreads;
 import forge.GuiBase;
@@ -291,7 +292,7 @@ public class ConquestController {
                 public void run() {
                     awardWinStreakBonus(view);
 
-                    String[] options = {"Booster", "Card"};
+                    final List<String> options = ImmutableList.of("Booster", "Card");
                     if (SOptionPane.showOptionDialog("Choose one \u2014\n\n" +
                             "\u2022 Open a random booster pack\n" +
                             "\u2022 Choose a card from your opponent's deck",

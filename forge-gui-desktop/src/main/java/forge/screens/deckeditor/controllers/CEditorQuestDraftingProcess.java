@@ -19,6 +19,8 @@ package forge.screens.deckeditor.controllers;
 
 import java.util.Map.Entry;
 
+import com.google.common.collect.ImmutableList;
+
 import forge.assets.FSkinProp;
 import forge.card.MagicColor;
 import forge.deck.Deck;
@@ -70,6 +72,8 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;
     private boolean saved = false;
+
+    private static final ImmutableList<String> leaveOrCancel = ImmutableList.of("Leave", "Cancel");
 
     //========== Constructor
 
@@ -290,7 +294,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
             String userPrompt =
                     "This will end the current draft and you will not be able to join this tournament again.\nYour credits will be refunded and the draft will be removed.\n\n" +
                             "Leave anyway?";
-            boolean leave = FOptionPane.showOptionDialog(userPrompt, "Leave Draft?", FSkin.getImage(FSkinProp.ICO_WARNING).scale(2.0), new String[] {"Leave", "Cancel"}, 1) == 0;
+            boolean leave = FOptionPane.showOptionDialog(userPrompt, "Leave Draft?", FSkin.getImage(FSkinProp.ICO_WARNING).scale(2.0), leaveOrCancel, 1) == 0;
             if (leave) {
                 QuestEventDraft draft = quest.getAchievements().getCurrentDraft();
                 quest.getAssets().addCredits(draft.getEntryFee());

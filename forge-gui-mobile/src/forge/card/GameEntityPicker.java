@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.google.common.collect.ImmutableList;
+
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
@@ -30,7 +32,7 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
         setHeight(FOptionPane.getMaxDisplayObjHeight());
 
         optionPane = new FOptionPane(null, title, null, this,
-                isOptional ? new String[] { "OK", "Cancel" } : new String[] { "OK" }, 0, new Callback<Integer>() {
+                isOptional ? ImmutableList.of("OK", "Cancel") : ImmutableList.of("OK"), 0, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == 0) {

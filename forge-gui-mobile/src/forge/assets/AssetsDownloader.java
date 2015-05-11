@@ -3,11 +3,13 @@ package forge.assets;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
+import com.google.common.collect.ImmutableList;
 
 import forge.FThreads;
 import forge.Forge;
@@ -19,6 +21,9 @@ import forge.util.gui.SOptionPane;
 
 public class AssetsDownloader {
     public static final boolean SHARE_DESKTOP_ASSETS = true; //change to false to test downloading separate assets for desktop version
+
+    private final static ImmutableList<String> downloadIgnoreExit = ImmutableList.of("Download", "Ignore", "Exit");
+    private final static ImmutableList<String> downloadExit = ImmutableList.of("Download", "Exit");
 
     //if not sharing desktop assets, check whether assets are up to date
     public static void checkForUpdates(final SplashScreen splashScreen) {
@@ -105,16 +110,16 @@ public class AssetsDownloader {
         else {
             message += "so it's highly recommended that you connect to wifi first.";
         }
-        String[] options;
+        final List<String> options;
         message += "\n\n";
         if (canIgnoreDownload) {
             message += "If you choose to ignore this download, you may miss out on card fixes or experience other problems.";
-            options = new String[] { "Download", "Ignore", "Exit" };
-        }
-        else {
+            options = downloadIgnoreExit;
+        } else {
             message += "This download is mandatory to start the app since you haven't previously downloaded these files.";
-            options = new String[] { "Download", "Exit" };
+            options = downloadExit;
         }
+
         switch (SOptionPane.showOptionDialog(message, "", null, options)) {
         case 1:
             if (!canIgnoreDownload) {

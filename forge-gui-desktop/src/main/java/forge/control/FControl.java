@@ -126,7 +126,7 @@ public enum FControl implements KeyEventDispatcher {
             public void windowClosing(final WindowEvent e) {
                 switch (closeAction) {
                 case NONE: //prompt user for close action if not previously specified
-                    final String[] options = {"Close Screen", "Exit Forge", "Cancel"};
+                    final List<String> options = ImmutableList.of("Close Screen", "Exit Forge", "Cancel");
                     final int reply = FOptionPane.showOptionDialog(
                             "Forge now supports navigation tabs which allow closing and switching between different screens with ease. "
                             + "As a result, you no longer need to use the X button in the upper right to close the current screen and go back."

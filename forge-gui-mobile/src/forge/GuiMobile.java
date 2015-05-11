@@ -141,7 +141,7 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public int showOptionDialog(final String message, final String title, final FSkinProp icon, final String[] options, final int defaultOption) {
+    public int showOptionDialog(final String message, final String title, final FSkinProp icon, final List<String> options, final int defaultOption) {
         return new WaitCallback<Integer>() {
             @Override
             public void run() {
@@ -151,7 +151,7 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final String[] inputOptions) {
+    public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final List<String> inputOptions) {
         return new WaitCallback<String>() {
             @Override
             public void run() {

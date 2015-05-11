@@ -43,6 +43,7 @@ import forge.util.storage.IStorage;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -97,7 +98,7 @@ public class FDeckChooser extends FScreen {
         container.add(deckChooser.lstDecks);
         container.setHeight(FOptionPane.getMaxDisplayObjHeight());
 
-        deckChooser.optionPane = new FOptionPane(null, title, null, container, new String[] { "OK", "Cancel" }, 0, new Callback<Integer>() {
+        deckChooser.optionPane = new FOptionPane(null, title, null, container, ImmutableList.of("OK", "Cancel"), 0, new Callback<Integer>() {
             @Override
             public void run(Integer result) {
                 if (result == 0) {

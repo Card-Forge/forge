@@ -141,7 +141,7 @@ public abstract class PlayerController {
         reveal(cards, zone, owner, null);
     }
     public abstract void reveal(CardCollectionView cards, ZoneType zone, Player owner, String messagePrefix);
-    public abstract void reveal(Collection<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix);
+    public abstract void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix);
 
     /** Shows message to player to reveal chosen cardName, creatureType, number etc. AI must analyze API to understand what that is */
     public abstract void notifyOfValue(SpellAbility saSource, GameObject realtedTarget, String value);
@@ -192,7 +192,7 @@ public abstract class PlayerController {
 
     public abstract PaperCard chooseSinglePaperCard(SpellAbility sa, String message, Predicate<PaperCard> cpp, String name);
     public abstract List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options);
-    public abstract CounterType chooseCounterType(Collection<CounterType> options, SpellAbility sa, String prompt);
+    public abstract CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, String prompt);
 
     public abstract boolean confirmPayment(CostPart costPart, String string);
     public abstract ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers, HashMap<String, Object> runParams);

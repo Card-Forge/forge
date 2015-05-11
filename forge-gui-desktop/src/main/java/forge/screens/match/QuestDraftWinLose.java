@@ -19,6 +19,8 @@ package forge.screens.match;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import com.google.common.collect.ImmutableList;
+
 import forge.assets.FSkinProp;
 import forge.game.GameView;
 import forge.match.NextGameDecision;
@@ -104,7 +106,7 @@ public class QuestDraftWinLose extends ControlWinLose {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (warningString == null ||
-                        FOptionPane.showOptionDialog(warningString, warningCaption, FSkin.getImage(FSkinProp.ICO_WARNING).scale(2), new String[] { "Yes", "No" }, 1) == 0) {
+                        FOptionPane.showOptionDialog(warningString, warningCaption, FSkin.getImage(FSkinProp.ICO_WARNING).scale(2), ImmutableList.of("Yes", "No"), 1) == 0) {
                     matchUI.getGameController().nextGameDecision(NextGameDecision.QUIT);
                     QuestDraftUtils.matchInProgress = false;
                     QuestDraftUtils.continueMatches(matchUI);

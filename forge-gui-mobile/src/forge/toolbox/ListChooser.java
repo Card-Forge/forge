@@ -19,6 +19,7 @@
 package forge.toolbox;
 
 import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
 
 import forge.FThreads;
 import forge.Graphics;
@@ -108,12 +109,11 @@ public class ListChooser<T> extends FContainer {
             });
         }
 
-        String[] options;
+        final List<String> options;
         if (minChoices == 0) {
-            options = new String[] {"OK", "Cancel"};
-        }
-        else {
-            options = new String[] {"OK"};
+            options = ImmutableList.of("OK", "Cancel");
+        } else {
+            options = ImmutableList.of("OK");
         }
 
         updateHeight();

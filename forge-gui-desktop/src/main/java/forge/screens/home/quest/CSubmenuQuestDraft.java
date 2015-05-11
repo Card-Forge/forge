@@ -13,6 +13,8 @@ import java.util.List;
 import javax.swing.JRadioButton;
 import javax.swing.SwingUtilities;
 
+import com.google.common.collect.ImmutableList;
+
 import forge.GuiBase;
 import forge.Singletons;
 import forge.UiCommand;
@@ -139,7 +141,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
 
             final boolean shouldQuit = FOptionPane.showOptionDialog("If you leave now, this tournament will be forever gone."
                     + "\nYou will keep the cards you drafted, but will receive no other prizes."
-                    + "\n\nWould you still like to quit the tournament?", "Really Quit?", FSkin.getImage(FSkinProp.ICO_WARNING).scale(2.0), new String[] { "Yes", "No" }, 1) == 0;
+                    + "\n\nWould you still like to quit the tournament?", "Really Quit?", FSkin.getImage(FSkinProp.ICO_WARNING).scale(2.0), ImmutableList.of("Yes", "No"), 1) == 0;
             if (!shouldQuit) {
                 return;
             }
@@ -149,7 +151,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
             if (draft.playerHasMatchesLeft()) {
                 final boolean shouldQuit = FOptionPane.showOptionDialog("You have matches left to play!\nLeaving the tournament early will forfeit your potential future winnings."
                         + "\nYou will still receive winnings as if you conceded your next match and you will keep the cards you drafted."
-                        + "\n\nWould you still like to quit the tournament?", "Really Quit?", FSkin.getImage(FSkinProp.ICO_WARNING).scale(2.0), new String[] { "Yes", "No" }, 1) == 0;
+                        + "\n\nWould you still like to quit the tournament?", "Really Quit?", FSkin.getImage(FSkinProp.ICO_WARNING).scale(2.0), ImmutableList.of("Yes", "No"), 1) == 0;
                 if (!shouldQuit) {
                     return;
                 }
@@ -242,7 +244,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
 
         }
 
-        final boolean saveDraft = FOptionPane.showOptionDialog("Would you like to save this draft to the regular draft mode?", "Save Draft?", FSkin.getImage(FSkinProp.ICO_QUESTION).scale(2.0), new String[] { "Yes", "No" }, 0) == 0;
+        final boolean saveDraft = FOptionPane.showOptionDialog("Would you like to save this draft to the regular draft mode?", "Save Draft?", FSkin.getImage(FSkinProp.ICO_QUESTION).scale(2.0), ImmutableList.of("Yes", "No"), 0) == 0;
 
         if (saveDraft) {
             draft.saveToRegularDraft();
@@ -525,7 +527,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
             return;
         }
 
-        final boolean okayToEnter = FOptionPane.showOptionDialog("This tournament costs " + draftEvent.getEntryFee() + " credits to enter.\nAre you sure you wish to enter?", "Enter Draft Tournament?", FSkin.getImage(FSkinProp.ICO_QUEST_GOLD), new String[] { "Yes", "No" }, 1) == 0;
+        final boolean okayToEnter = FOptionPane.showOptionDialog("This tournament costs " + draftEvent.getEntryFee() + " credits to enter.\nAre you sure you wish to enter?", "Enter Draft Tournament?", FSkin.getImage(FSkinProp.ICO_QUEST_GOLD), ImmutableList.of("Yes", "No"), 1) == 0;
 
         if (!okayToEnter) {
             return;

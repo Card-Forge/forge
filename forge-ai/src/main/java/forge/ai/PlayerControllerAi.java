@@ -242,7 +242,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public void reveal(Collection<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix) {
+    public void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix) {
         // We don't know how to reveal cards to AI
     }
 
@@ -583,7 +583,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CounterType chooseCounterType(Collection<CounterType> options, SpellAbility sa, String prompt) {
+    public CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, String prompt) {
         // may write a smarter AI if you need to (with calls to AI-clas for given API ability)
 
         // TODO: ArsenalNut (06 Feb 12)computer needs

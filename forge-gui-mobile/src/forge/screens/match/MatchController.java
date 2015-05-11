@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
 import forge.Forge;
@@ -82,7 +83,7 @@ public class MatchController extends AbstractGuiGame {
     }
 
     public static FImage getPlayerAvatar(final PlayerView p) {
-        String lp = p.getLobbyPlayerName();
+        final String lp = p.getLobbyPlayerName();
         FImage avatar = avatarImages.get(lp);
         if (avatar == null) {
             if (StringUtils.isEmpty(p.getAvatarCardImageKey())) {
@@ -96,9 +97,9 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public void refreshCardDetails(Iterable<CardView> cards) {
+    public void refreshCardDetails(final Iterable<CardView> cards) {
         //ensure cards appear in the correct row of the field
-        for (VPlayerPanel pnl : view.getPlayerPanels().values()) {
+        for (final VPlayerPanel pnl : view.getPlayerPanels().values()) {
             pnl.getField().update();
         }
     }
@@ -123,12 +124,12 @@ public class MatchController extends AbstractGuiGame {
             //add special object that pauses game if screen touched
             view.add(new FDisplayObject() {
                 @Override
-                public void draw(Graphics g) {
+                public void draw(final Graphics g) {
                     //don't draw anything
                 }
 
                 @Override
-                public void buildTouchListeners(float screenX, float screenY, ArrayList<FDisplayObject> listeners) {
+                public void buildTouchListeners(final float screenX, final float screenY, final ArrayList<FDisplayObject> listeners) {
                     if (screenY < view.getHeight() - VPrompt.HEIGHT) {
                         hostedMatch.pause();
                     }
@@ -146,6 +147,7 @@ public class MatchController extends AbstractGuiGame {
         view.getPrompt(player).setMessage(message);
     }
 
+    @Override
     public void updateButtons(final PlayerView owner, final String label1, final String label2, final boolean enable1, final boolean enable2, final boolean focus1) {
         final VPrompt prompt = view.getPrompt(owner);
         final FButton btn1 = prompt.getBtnOk(), btn2 = prompt.getBtnCancel();
@@ -194,7 +196,7 @@ public class MatchController extends AbstractGuiGame {
     @Override
     public void disableOverlay() {
     }
-    
+
     @Override
     public void enableOverlay() {
     }
@@ -233,15 +235,15 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public Object showManaPool(final PlayerView player) {
-        VPlayerPanel playerPanel = view.getPlayerPanel(player);
-        InfoTab oldSelectedTab = playerPanel.getSelectedTab();
+        final VPlayerPanel playerPanel = view.getPlayerPanel(player);
+        final InfoTab oldSelectedTab = playerPanel.getSelectedTab();
         playerPanel.setSelectedTab(playerPanel.getManaPoolTab());
         return oldSelectedTab;
     }
 
     @Override
     public void hideManaPool(final PlayerView player, final Object zoneToRestore) {
-        VPlayerPanel playerPanel = view.getPlayerPanel(player);
+        final VPlayerPanel playerPanel = view.getPlayerPanel(player);
         if (zoneToRestore == playerPanel.getManaPoolTab()) {
             return; //if mana pool was selected previously, we don't need to switch back to anything
         }
@@ -252,38 +254,37 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public boolean openZones(Collection<ZoneType> zones, Map<PlayerView, Object> players) {
+    public boolean openZones(final Collection<ZoneType> zones, final Map<PlayerView, Object> players) {
         if (zones.size() == 1) {
-            ZoneType zoneType = zones.iterator().next();
+            final ZoneType zoneType = zones.iterator().next();
             switch (zoneType) {
-            case Battlefield:
-            case Command:
-                players.clear(); //clear since no zones need to be restored
-                return true; //Battlefield is always open
-            default:
-                //open zone tab for given zone if needed
-                boolean result = true;
-                for (PlayerView player : players.keySet()) {
-                    VPlayerPanel playerPanel = view.getPlayerPanel(player);
-                    players.put(player, playerPanel.getSelectedTab()); //backup selected tab before changing it
-                    InfoTab zoneTab = playerPanel.getZoneTab(zoneType);
-                    if (zoneTab == null) {
-                        result = false;
+                case Battlefield:
+                case Command:
+                    players.clear(); //clear since no zones need to be restored
+                    return true; //Battlefield is always open
+                default:
+                    //open zone tab for given zone if needed
+                    boolean result = true;
+                    for (final PlayerView player : players.keySet()) {
+                        final VPlayerPanel playerPanel = view.getPlayerPanel(player);
+                        players.put(player, playerPanel.getSelectedTab()); //backup selected tab before changing it
+                        final InfoTab zoneTab = playerPanel.getZoneTab(zoneType);
+                        if (zoneTab == null) {
+                            result = false;
+                        } else {
+                            playerPanel.setSelectedTab(zoneTab);
+                        }
                     }
-                    else {
-                        playerPanel.setSelectedTab(zoneTab);
-                    }
-                }
-                return result;
+                    return result;
             }
         }
         return false;
     }
 
     @Override
-    public void restoreOldZones(Map<PlayerView, Object> playersToRestoreZonesFor) {
-        for (Entry<PlayerView, Object> player : playersToRestoreZonesFor.entrySet()) {
-            VPlayerPanel playerPanel = view.getPlayerPanel(player.getKey());
+    public void restoreOldZones(final Map<PlayerView, Object> playersToRestoreZonesFor) {
+        for (final Entry<PlayerView, Object> player : playersToRestoreZonesFor.entrySet()) {
+            final VPlayerPanel playerPanel = view.getPlayerPanel(player.getKey());
             playerPanel.setSelectedTab((InfoTab)player.getValue());
         }
     }
@@ -293,33 +294,33 @@ public class MatchController extends AbstractGuiGame {
         return new WaitCallback<Map<CardView, Integer>>() {
             @Override
             public void run() {
-                VAssignDamage v = new VAssignDamage(attacker, blockers, damage, defender, overrideOrder, this);
+                final VAssignDamage v = new VAssignDamage(attacker, blockers, damage, defender, overrideOrder, this);
                 v.show();
             }
         }.invokeAndWait();
     }
 
     @Override
-    public void updateManaPool(Iterable<PlayerView> manaPoolUpdate) {
-        for (PlayerView p : manaPoolUpdate) {
+    public void updateManaPool(final Iterable<PlayerView> manaPoolUpdate) {
+        for (final PlayerView p : manaPoolUpdate) {
             view.getPlayerPanel(p).updateManaPool();
         }
     }
 
     @Override
-    public void updateLives(Iterable<PlayerView> livesUpdate) {
-        for (PlayerView p : livesUpdate) {
+    public void updateLives(final Iterable<PlayerView> livesUpdate) {
+        for (final PlayerView p : livesUpdate) {
             view.getPlayerPanel(p).updateLife();
         }
     }
 
     @Override
-    public void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate) {
+    public void updateZones(final Iterable<PlayerZoneUpdate> zonesToUpdate) {
         view.updateZones(zonesToUpdate);
     }
 
     @Override
-    public void updateCards(Iterable<CardView> cards) {
+    public void updateCards(final Iterable<CardView> cards) {
         for (final CardView card : cards) {
             view.updateSingleCard(card);
         }
@@ -332,9 +333,9 @@ public class MatchController extends AbstractGuiGame {
     }
 
     private static void actuateMatchPreferences() {
-        ForgePreferences prefs = FModel.getPreferences();
+        final ForgePreferences prefs = FModel.getPreferences();
 
-        VPhaseIndicator fvAi = view.getTopPlayerPanel().getPhaseIndicator();
+        final VPhaseIndicator fvAi = view.getTopPlayerPanel().getPhaseIndicator();
         fvAi.getLabel(PhaseType.UPKEEP).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_UPKEEP));
         fvAi.getLabel(PhaseType.DRAW).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_DRAW));
         fvAi.getLabel(PhaseType.MAIN1).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_MAIN1));
@@ -348,7 +349,7 @@ public class MatchController extends AbstractGuiGame {
         fvAi.getLabel(PhaseType.END_OF_TURN).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_EOT));
         fvAi.getLabel(PhaseType.CLEANUP).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_CLEANUP));
 
-        VPhaseIndicator fvHuman = view.getBottomPlayerPanel().getPhaseIndicator();
+        final VPhaseIndicator fvHuman = view.getBottomPlayerPanel().getPhaseIndicator();
         fvHuman.getLabel(PhaseType.UPKEEP).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_UPKEEP));
         fvHuman.getLabel(PhaseType.DRAW).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_DRAW));
         fvHuman.getLabel(PhaseType.MAIN1).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_MAIN1));
@@ -364,9 +365,9 @@ public class MatchController extends AbstractGuiGame {
     }
 
     public static void writeMatchPreferences() {
-        ForgePreferences prefs = FModel.getPreferences();
+        final ForgePreferences prefs = FModel.getPreferences();
 
-        VPhaseIndicator fvAi = view.getTopPlayerPanel().getPhaseIndicator();
+        final VPhaseIndicator fvAi = view.getTopPlayerPanel().getPhaseIndicator();
         prefs.setPref(FPref.PHASE_AI_UPKEEP, String.valueOf(fvAi.getLabel(PhaseType.UPKEEP).getStopAtPhase()));
         prefs.setPref(FPref.PHASE_AI_DRAW, String.valueOf(fvAi.getLabel(PhaseType.DRAW).getStopAtPhase()));
         prefs.setPref(FPref.PHASE_AI_MAIN1, String.valueOf(fvAi.getLabel(PhaseType.MAIN1).getStopAtPhase()));
@@ -380,7 +381,7 @@ public class MatchController extends AbstractGuiGame {
         prefs.setPref(FPref.PHASE_AI_EOT, String.valueOf(fvAi.getLabel(PhaseType.END_OF_TURN).getStopAtPhase()));
         prefs.setPref(FPref.PHASE_AI_CLEANUP, String.valueOf(fvAi.getLabel(PhaseType.CLEANUP).getStopAtPhase()));
 
-        VPhaseIndicator fvHuman = view.getBottomPlayerPanel().getPhaseIndicator();
+        final VPhaseIndicator fvHuman = view.getBottomPlayerPanel().getPhaseIndicator();
         prefs.setPref(FPref.PHASE_HUMAN_UPKEEP, String.valueOf(fvHuman.getLabel(PhaseType.UPKEEP).getStopAtPhase()));
         prefs.setPref(FPref.PHASE_HUMAN_DRAW, String.valueOf(fvHuman.getLabel(PhaseType.DRAW).getStopAtPhase()));
         prefs.setPref(FPref.PHASE_HUMAN_MAIN1, String.valueOf(fvHuman.getLabel(PhaseType.MAIN1).getStopAtPhase()));
@@ -413,25 +414,28 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public int showOptionDialog(final String message, final String title, final FSkinProp icon, final String[] options, final int defaultOption) {
+    public int showOptionDialog(final String message, final String title, final FSkinProp icon, final List<String> options, final int defaultOption) {
         return SOptionPane.showOptionDialog(message, title, icon, options, defaultOption);
     }
 
     @Override
-    public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final String[] inputOptions) {
+    public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final List<String> inputOptions) {
         return SOptionPane.showInputDialog(message, title, icon, initialInput, inputOptions);
     }
 
     @Override
-    public boolean confirm(final CardView c, final String question, final boolean defaultIsYes, String[] options) {
+    public boolean confirm(final CardView c, final String question, final boolean defaultIsYes, final List<String> options) {
+        final List<String> optionsToUse;
         if (options == null) {
-            options = new String[] { "Yes", "No" };
+            optionsToUse = ImmutableList.of("Yes", "No");
+        } else {
+            optionsToUse = options;
         }
-        return FOptionPane.showCardOptionDialog(c, question, "", SOptionPane.INFORMATION_ICON, options, defaultIsYes ? 0 : 1) == 0;
+        return FOptionPane.showCardOptionDialog(c, question, "", SOptionPane.INFORMATION_ICON, optionsToUse, defaultIsYes ? 0 : 1) == 0;
     }
 
     @Override
-    public <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display) {
+    public <T> List<T> getChoices(final String message, final int min, final int max, final List<T> choices, final T selected, final Function<T, String> display) {
         return GuiBase.getInterface().getChoices(message, min, max, choices, selected, display);
     }
 
@@ -445,14 +449,14 @@ public class MatchController extends AbstractGuiGame {
         return new WaitCallback<List<PaperCard>>() {
             @Override
             public void run() {
-                FSideboardDialog sideboardDialog = new FSideboardDialog(sideboard, main, this);
+                final FSideboardDialog sideboardDialog = new FSideboardDialog(sideboard, main, this);
                 sideboardDialog.show();
             }
         }.invokeAndWait();
     }
 
     @Override
-    public GameEntityView chooseSingleEntityForEffect(final String title, final Collection<? extends GameEntityView> optionList, final DelayedReveal delayedReveal, final boolean isOptional) {
+    public GameEntityView chooseSingleEntityForEffect(final String title, final List<? extends GameEntityView> optionList, final DelayedReveal delayedReveal, final boolean isOptional) {
         if (delayedReveal == null || Iterables.isEmpty(delayedReveal.getCards())) {
             if (isOptional) {
                 return SGuiChoose.oneOrNone(title, optionList);
@@ -464,11 +468,11 @@ public class MatchController extends AbstractGuiGame {
         final String revealListCaption = StringUtils.capitalize(MessageUtil.formatMessage("{player's} " + delayedReveal.getZone().name(), delayedReveal.getOwner(), delayedReveal.getOwner()));
         final FImage revealListImage = MatchController.getView().getPlayerPanels().values().iterator().next().getZoneTab(delayedReveal.getZone()).getIcon();
 
-        //use special dialog for choosing card and offering ability to see all revealed cards at the same time 
+        //use special dialog for choosing card and offering ability to see all revealed cards at the same time
         return new WaitCallback<GameEntityView>() {
             @Override
             public void run() {
-                GameEntityPicker picker = new GameEntityPicker(title, optionList, revealList, revealListCaption, revealListImage, isOptional, this);
+                final GameEntityPicker picker = new GameEntityPicker(title, optionList, revealList, revealListCaption, revealListImage, isOptional, this);
                 picker.show();
             }
         }.invokeAndWait();

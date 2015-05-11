@@ -1,11 +1,11 @@
 package forge.game.player;
 
 import java.io.Serializable;
-import java.util.Collection;
 
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.zone.ZoneType;
+import forge.trackable.TrackableCollection;
 
 /**
  * Stores information to reveal cards after a delay unless those cards can be
@@ -14,22 +14,22 @@ import forge.game.zone.ZoneType;
 public class DelayedReveal implements Serializable {
     private static final long serialVersionUID = 5516713460440436615L;
 
-    private final Collection<CardView> cards;
+    private final TrackableCollection<CardView> cards;
     private final ZoneType zone;
     private final PlayerView owner;
     private final String messagePrefix;
 
-    public DelayedReveal(Iterable<Card> cards0, ZoneType zone0, PlayerView owner0) {
+    public DelayedReveal(final Iterable<Card> cards0, final ZoneType zone0, final PlayerView owner0) {
         this(cards0, zone0, owner0, null);
     }
-    public DelayedReveal(Iterable<Card> cards0, ZoneType zone0, PlayerView owner0, String messagePrefix0) {
+    public DelayedReveal(final Iterable<Card> cards0, final ZoneType zone0, final PlayerView owner0, final String messagePrefix0) {
         cards = CardView.getCollection(cards0);
         zone = zone0;
         owner = owner0;
         messagePrefix = messagePrefix0;
     }
 
-    public Collection<CardView> getCards() {
+    public TrackableCollection<CardView> getCards() {
         return cards;
     }
 
@@ -45,7 +45,7 @@ public class DelayedReveal implements Serializable {
         return messagePrefix;
     }
 
-    public void remove(CardView card) {
+    public void remove(final CardView card) {
         cards.remove(card);
     }
 

@@ -1,7 +1,6 @@
 package forge.match;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -12,6 +11,7 @@ import java.util.TimerTask;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -114,17 +114,17 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (altState == null) { return false; }
 
         switch (altState.getState()) {
-        case Original:
-            final CardStateView currentState = cv.getCurrentState();
-            if (currentState.getState() == CardStateName.FaceDown) {
-                return getCurrentPlayer() == null || cv.canFaceDownBeShownToAny(getLocalPlayers());
-            }
-            return true; //original can always be shown if not a face down that can't be shown
-        case Flipped:
-        case Transformed:
-            return true;
-        default:
-            return false;
+            case Original:
+                final CardStateView currentState = cv.getCurrentState();
+                if (currentState.getState() == CardStateName.FaceDown) {
+                    return getCurrentPlayer() == null || cv.canFaceDownBeShownToAny(getLocalPlayers());
+                }
+                return true; //original can always be shown if not a face down that can't be shown
+            case Flipped:
+            case Transformed:
+                return true;
+            default:
+                return false;
         }
     }
 
@@ -339,17 +339,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
      * @see #getChoices(String, int, int, Object...)
      */
     @Override
-    public <T> T oneOrNone(final String message, final T[] choices) {
-        if ((choices == null) || (choices.length == 0)) {
-            return null;
-        }
-        final List<T> choice = getChoices(message, 0, 1, choices);
-        return choice.isEmpty() ? null : choice.get(0);
-    }
-
-    @Override
-    public <T> T oneOrNone(final String message, final Collection<T> choices) {
-        if ((choices == null) || choices.isEmpty()) {
+    public <T> T oneOrNone(final String message, final List<T> choices) {
+        if (choices == null || choices.isEmpty()) {
             return null;
         }
         final List<T> choice = getChoices(message, 0, 1, choices);
@@ -371,14 +362,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
      * @return a T object.
      */
     @Override
-    public <T> T one(final String message, final T[] choices) {
-        final List<T> choice = getChoices(message, 1, 1, choices);
-        assert choice.size() == 1;
-        return choice.get(0);
-    }
-
-    @Override
-    public <T> T one(final String message, final Collection<T> choices) {
+    public <T> T one(final String message, final List<T> choices) {
         if (choices == null || choices.isEmpty()) {
             return null;
         }
@@ -393,7 +377,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     // Nothing to choose here. Code uses this to just reveal one or more items
     @Override
-    public <T> void reveal(final String message, final Collection<T> items) {
+    public <T> void reveal(final String message, final List<T> items) {
         getChoices(message, -1, -1, items);
     }
 
@@ -424,14 +408,14 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             for (int i = 0; i < count; i++) {
                 choices[count - i - 1] = Integer.valueOf(i + min);
             }
-        }
-        else {
+        } else {
             for (int i = 0; i < count; i++) {
                 choices[i] = Integer.valueOf(i + min);
             }
         }
-        return oneOrNone(message, choices);
+        return oneOrNone(message, ImmutableList.copyOf(choices));
     }
+
     @Override
     public Integer getInteger(final String message, final int min, final int max, final int cutoff) {
         if (max <= min || cutoff < min) {
@@ -442,15 +426,15 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             return getInteger(message, min, max);
         }
 
-        final List<Object> choices = new ArrayList<Object>();
+        final ImmutableList.Builder<Serializable> choices = ImmutableList.builder();
         for (int i = min; i <= cutoff; i++) {
             choices.add(Integer.valueOf(i));
         }
         choices.add("...");
 
-        final Object choice = oneOrNone(message, choices);
+        final Object choice = oneOrNone(message, choices.build());
         if (choice instanceof Integer || choice == null) {
-            return (Integer)choice;
+            return (Integer) choice;
         }
 
         //if Other option picked, prompt for number input
@@ -481,12 +465,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     // returned Object will never be null
     @Override
-    public <T> List<T> getChoices(final String message, final int min, final int max, final T[] choices) {
-        return getChoices(message, min, max, Arrays.asList(choices), null, null);
-    }
-
-    @Override
-    public <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices) {
+    public <T> List<T> getChoices(final String message, final int min, final int max, final List<T> choices) {
         return getChoices(message, min, max, choices, null, null);
     }
 
@@ -546,8 +525,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public boolean confirm(final CardView c, final String question) {
         return confirm(c, question, true, null);
     }
+
     @Override
-    public boolean confirm(final CardView c, final String question, final String[] options) {
+    public boolean confirm(final CardView c, final String question, final List<String> options) {
         return confirm(c, question, true, options);
     }
 

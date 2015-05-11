@@ -24,6 +24,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -447,11 +448,11 @@ implements IGameController {
         if (min >= max) {
             return min;
         }
-        final Integer[] choices = new Integer[max + 1 - min];
+        final ImmutableList.Builder<Integer> choices = ImmutableList.builder();
         for (int i = 0; i <= max - min; i++) {
-            choices[i] = Integer.valueOf(i + min);
+            choices.add(Integer.valueOf(i + min));
         }
-        return getGui().one(title, choices).intValue();
+        return getGui().one(title, choices.build()).intValue();
     }
 
     @Override
@@ -460,10 +461,13 @@ implements IGameController {
     }
 
     @Override
-    public SpellAbility chooseSingleSpellForEffect(final java.util.List<SpellAbility> spells, final SpellAbility sa, final String title) {
+    public SpellAbility chooseSingleSpellForEffect(final List<SpellAbility> spells, final SpellAbility sa, final String title) {
         if (spells.size() < 2) {
-            return spells.get(0);
+            return Iterables.getFirst(spells, null);
         }
+
+        // Show the card that asked for this choice
+        getGui().setCard(CardView.get(sa.getHostCard()));
 
         // Human is supposed to read the message and understand from it what to choose
         return getGui().one(title, spells);
@@ -573,7 +577,7 @@ implements IGameController {
     }
 
     @Override
-    public void reveal(final Collection<CardView> cards, final ZoneType zone, final PlayerView owner, String message) {
+    public void reveal(final List<CardView> cards, final ZoneType zone, final PlayerView owner, String message) {
         if (StringUtils.isBlank(message)) {
             message = "Looking at cards in {player's} " + zone.name().toLowerCase();
         } else {
@@ -626,7 +630,7 @@ implements IGameController {
         final CardView view = CardView.get(c);
 
         tempShowCard(c);
-        final boolean result = getGui().confirm(view, "Put " + view + " on the top or bottom of your library?", new String[]{"Top", "Bottom"});
+        final boolean result = getGui().confirm(view, String.format("Put %s on the top or bottom of your library?", view), ImmutableList.of("Top", "Bottom"));
         endTempShowCards();
 
         return result;
@@ -637,28 +641,28 @@ implements IGameController {
         List<CardView> choices;
         tempShowCards(cards);
         switch (destinationZone) {
-        case Library:
-            choices = getGui().order("Choose order of cards to put into the library", "Closest to top", CardView.getCollection(cards), null);
-            break;
-        case Battlefield:
-            choices = getGui().order("Choose order of cards to put onto the battlefield", "Put first", CardView.getCollection(cards), null);
-            break;
-        case Graveyard:
-            choices = getGui().order("Choose order of cards to put into the graveyard", "Closest to bottom", CardView.getCollection(cards), null);
-            break;
-        case PlanarDeck:
-            choices = getGui().order("Choose order of cards to put into the planar deck", "Closest to top", CardView.getCollection(cards), null);
-            break;
-        case SchemeDeck:
-            choices = getGui().order("Choose order of cards to put into the scheme deck", "Closest to top", CardView.getCollection(cards), null);
-            break;
-        case Stack:
-            choices = getGui().order("Choose order of copies to cast", "Put first", CardView.getCollection(cards), null);
-            break;
-        default:
-            System.out.println("ZoneType " + destinationZone + " - Not Ordered");
-            endTempShowCards();
-            return cards;
+            case Library:
+                choices = getGui().order("Choose order of cards to put into the library", "Closest to top", CardView.getCollection(cards), null);
+                break;
+            case Battlefield:
+                choices = getGui().order("Choose order of cards to put onto the battlefield", "Put first", CardView.getCollection(cards), null);
+                break;
+            case Graveyard:
+                choices = getGui().order("Choose order of cards to put into the graveyard", "Closest to bottom", CardView.getCollection(cards), null);
+                break;
+            case PlanarDeck:
+                choices = getGui().order("Choose order of cards to put into the planar deck", "Closest to top", CardView.getCollection(cards), null);
+                break;
+            case SchemeDeck:
+                choices = getGui().order("Choose order of cards to put into the scheme deck", "Closest to top", CardView.getCollection(cards), null);
+                break;
+            case Stack:
+                choices = getGui().order("Choose order of copies to cast", "Put first", CardView.getCollection(cards), null);
+                break;
+            default:
+                System.out.println("ZoneType " + destinationZone + " - Not Ordered");
+                endTempShowCards();
+                return cards;
         }
         endTempShowCards();
         return game.getCardList(choices);
@@ -694,13 +698,13 @@ implements IGameController {
         if (cardsInGrave == 0) {
             return CardCollection.EMPTY;
         }
-        final CardCollection toExile = new CardCollection();
-        final Integer[] cntChoice = new Integer[cardsInGrave + 1];
-        for (int i = 0; i <= cardsInGrave; i++) {
-            cntChoice[i] = Integer.valueOf(i);
-        }
 
-        final Integer chosenAmount = getGui().one("Delve how many cards?", cntChoice);
+        final CardCollection toExile = new CardCollection();
+        final ImmutableList.Builder<Integer> cntChoice = ImmutableList.builder();
+        for (int i = 0; i <= cardsInGrave; i++) {
+            cntChoice.add(Integer.valueOf(i));
+        }
+        final int chosenAmount = getGui().one("Delve how many cards?", cntChoice.build()).intValue();
         for (int i = 0; i < chosenAmount; i++) {
             final CardView nowChosen = getGui().oneOrNone("Exile which card?", CardView.getCollection(grave));
 
@@ -949,15 +953,15 @@ implements IGameController {
 
     @Override
     public boolean chooseBinary(final SpellAbility sa, final String question, final BinaryChoiceType kindOfChoice, final Boolean defaultVal) {
-        final String[] labels;
+        final List<String> labels;
         switch (kindOfChoice) {
-        case HeadsOrTails:       labels = new String[]{"Heads", "Tails"}; break;
-        case TapOrUntap:         labels = new String[]{"Tap", "Untap"}; break;
-        case OddsOrEvens:        labels = new String[]{"Odds", "Evens"}; break;
-        case UntapOrLeaveTapped: labels = new String[]{"Untap", "Leave tapped"}; break;
-        case UntapTimeVault:     labels = new String[]{"Untap (and skip this turn)", "Leave tapped"}; break;
-        case PlayOrDraw:         labels = new String[]{"Play", "Draw"}; break;
-        default:                 labels = kindOfChoice.toString().split("Or");
+            case HeadsOrTails:       labels = ImmutableList.of("Heads",                      "Tails");        break;
+            case TapOrUntap:         labels = ImmutableList.of("Tap",                        "Untap");        break;
+            case OddsOrEvens:        labels = ImmutableList.of("Odds",                       "Evens");        break;
+            case UntapOrLeaveTapped: labels = ImmutableList.of("Untap",                      "Leave tapped"); break;
+            case UntapTimeVault:     labels = ImmutableList.of("Untap (and skip this turn)", "Leave tapped"); break;
+            case PlayOrDraw:         labels = ImmutableList.of("Play",                       "Draw");         break;
+            default:                 labels = ImmutableList.copyOf(kindOfChoice.toString().split("Or"));
         }
         return getGui().confirm(CardView.get(sa.getHostCard()), question, defaultVal == null || defaultVal.booleanValue(), labels);
     }
@@ -965,11 +969,11 @@ implements IGameController {
     @Override
     public boolean chooseFlipResult(final SpellAbility sa, final Player flipper, final boolean[] results, final boolean call) {
         final String[] labelsSrc = call ? new String[]{"heads", "tails"} : new String[]{"win the flip", "lose the flip"};
-        final String[] strResults = new String[results.length];
+        final ImmutableList.Builder<String> strResults = ImmutableList.<String>builder();
         for (int i = 0; i < results.length; i++) {
-            strResults[i] = labelsSrc[results[i] ? 0 : 1];
+            strResults.add(labelsSrc[results[i] ? 0 : 1]);
         }
-        return getGui().one(sa.getHostCard().getName() + " - Choose a result", strResults).equals(labelsSrc[0]);
+        return getGui().one(sa.getHostCard().getName() + " - Choose a result", strResults.build()).equals(labelsSrc[0]);
     }
 
     @Override
@@ -986,12 +990,12 @@ implements IGameController {
         }
 
         final String counterChoiceTitle = "Choose a counter type on " + cardWithCounter;
-        final CounterType chosen = getGui().one(counterChoiceTitle, cardWithCounter.getCounters().keySet());
+        final CounterType chosen = getGui().one(counterChoiceTitle, ImmutableList.copyOf(cardWithCounter.getCounters().keySet()));
 
         final String putOrRemoveTitle = "What to do with that '" + chosen.getName() + "' counter ";
         final String putString = "Put another " + chosen.getName() + " counter on " + cardWithCounter;
         final String removeString = "Remove a " + chosen.getName() + " counter from " + cardWithCounter;
-        final String addOrRemove = getGui().one(putOrRemoveTitle, new String[]{putString,removeString});
+        final String addOrRemove = getGui().one(putOrRemoveTitle, ImmutableList.of(putString, removeString));
 
         return new ImmutablePair<CounterType,String>(chosen,addOrRemove);
     }
@@ -1061,9 +1065,9 @@ implements IGameController {
     public byte chooseColor(final String message, final SpellAbility sa, final ColorSet colors) {
         final int cntColors = colors.countColors();
         switch (cntColors) {
-        case 0: return 0;
-        case 1: return colors.getColor();
-        default: return chooseColorCommon(message, sa == null ? null : sa.getHostCard(), colors, false);
+            case 0: return 0;
+            case 1: return colors.getColor();
+            default: return chooseColorCommon(message, sa == null ? null : sa.getHostCard(), colors, false);
         }
     }
 
@@ -1071,29 +1075,25 @@ implements IGameController {
     public byte chooseColorAllowColorless(final String message, final Card c, final ColorSet colors) {
         final int cntColors = 1 + colors.countColors();
         switch (cntColors) {
-        case 1: return 0;
-        default: return chooseColorCommon(message, c, colors, true);
+            case 1: return 0;
+            default: return chooseColorCommon(message, c, colors, true);
         }
     }
 
     private byte chooseColorCommon(final String message, final Card c, final ColorSet colors, final boolean withColorless) {
-        int cntColors = colors.countColors();
-        if(withColorless) {
-            cntColors++;
-        }
-        final String[] colorNames = new String[cntColors];
-        int i = 0;
+        final ImmutableList.Builder<String> colorNamesBuilder = ImmutableList.builder();
         if (withColorless) {
-            colorNames[i++] = MagicColor.toLongString((byte)0);
+            colorNamesBuilder.add(MagicColor.toLongString(MagicColor.COLORLESS));
         }
-        for (final byte b : colors) {
-            colorNames[i++] = MagicColor.toLongString(b);
+        for (final Byte b : colors) {
+            colorNamesBuilder.add(MagicColor.toLongString(b.byteValue()));
         }
-        if (colorNames.length > 2) {
+        final ImmutableList<String> colorNames = colorNamesBuilder.build();
+        if (colorNames.size() > 2) {
             return MagicColor.fromName(getGui().one(message, colorNames));
         }
         final int idxChosen = getGui().confirm(CardView.get(c), message, colorNames) ? 0 : 1;
-        return MagicColor.fromName(colorNames[idxChosen]);
+        return MagicColor.fromName(colorNames.get(idxChosen));
     }
 
     @Override
@@ -1105,7 +1105,7 @@ implements IGameController {
     }
 
     @Override
-    public CounterType chooseCounterType(final Collection<CounterType> options, final SpellAbility sa, final String prompt) {
+    public CounterType chooseCounterType(final List<CounterType> options, final SpellAbility sa, final String prompt) {
         if (options.size() <= 1) {
             return Iterables.getFirst(options, null);
         }
@@ -1202,7 +1202,7 @@ implements IGameController {
         if (!faceUp) {
             final String p1Str = String.format("Pile 1 (%s cards)", pile1.size());
             final String p2Str = String.format("Pile 2 (%s cards)", pile2.size());
-            final String[] possibleValues = { p1Str , p2Str };
+            final List<String> possibleValues = ImmutableList.of(p1Str , p2Str);
             return getGui().confirm(CardView.get(sa.getHostCard()), "Choose a Pile", possibleValues);
         }
 
@@ -1239,7 +1239,7 @@ implements IGameController {
     @Override
     public void revealAnte(final String message, final Multimap<Player, PaperCard> removedAnteCards) {
         for (final Player p : removedAnteCards.keySet()) {
-            getGui().reveal(message + " from " + Lang.getPossessedObject(MessageUtil.mayBeYou(player, p), "deck"), removedAnteCards.get(p));
+            getGui().reveal(message + " from " + Lang.getPossessedObject(MessageUtil.mayBeYou(player, p), "deck"), ImmutableList.copyOf(removedAnteCards.get(p)));
         }
     }
 
@@ -1568,7 +1568,7 @@ implements IGameController {
             final Card card = game.getCard(getGui().oneOrNone("Add counters to which card?", CardView.getCollection(cards)));
             if (card == null) { return; }
 
-            final CounterType counter = getGui().oneOrNone("Which type of counter?", CounterType.values());
+            final CounterType counter = getGui().oneOrNone("Which type of counter?", CounterType.values);
             if (counter == null) { return; }
 
             final Integer count = getGui().getInteger("How many counters?", 1, Integer.MAX_VALUE, 10);
@@ -1746,7 +1746,7 @@ implements IGameController {
             final Player player = game.getPlayer(getGui().oneOrNone("Which player should roll?", PlayerView.getCollection(game.getPlayers())));
             if (player == null) { return; }
 
-            final PlanarDice res = getGui().oneOrNone("Choose result", PlanarDice.values());
+            final PlanarDice res = getGui().oneOrNone("Choose result", PlanarDice.values);
             if (res == null) { return; }
 
             System.out.println("Rigging planar dice roll: " + res.toString());

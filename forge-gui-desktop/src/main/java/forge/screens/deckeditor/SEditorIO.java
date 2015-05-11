@@ -12,6 +12,8 @@ import forge.toolbox.FOptionPane;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.ImmutableList;
+
 /** 
  * Handles editor preferences saving and loading.
  * 
@@ -69,6 +71,7 @@ public class SEditorIO {
         return true;
     }
 
+    private final static ImmutableList<String> confirmSaveOptions = ImmutableList.of("Save", "Don't Save", "Cancel");
     /**
      * Prompts to save changes if necessary.
      * 
@@ -82,7 +85,7 @@ public class SEditorIO {
             }
 
             final int choice = FOptionPane.showOptionDialog("Save changes to current deck?", "Save Changes?",
-                    FOptionPane.QUESTION_ICON, new String[] {"Save", "Don't Save", "Cancel"});
+                    FOptionPane.QUESTION_ICON, confirmSaveOptions);
 
             if (choice == -1 || choice == 2) { return false; }
 
