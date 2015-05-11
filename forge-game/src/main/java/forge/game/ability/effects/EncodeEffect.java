@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import forge.game.Game;
+import forge.game.GameLogEntryType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -56,6 +57,10 @@ public class EncodeEffect extends SpellAbilityEffect {
         if (choice == null) {
           return;
         }
+
+        StringBuilder codeLog = new StringBuilder();
+        codeLog.append("Encoding ").append(host.toString()).append(" to ").append(choice.toString());
+        game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, codeLog.toString());
 
         // store hostcard in encoded array
         choice.addEncodedCard(movedCard);
