@@ -493,6 +493,7 @@ public class SpellAbilityVariables {
     protected boolean altCostPaid = false;
     protected boolean optionalCostPaid = false; // Undergrowth other Pseudo-kickers
     protected boolean optionalBoolean = true; // Just in case you need to check if something wasn't kicked, etc
+    protected boolean dragonPresence = false;
 
     /**
      * @return the allTargetsLegal

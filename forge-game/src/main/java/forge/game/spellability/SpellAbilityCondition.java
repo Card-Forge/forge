@@ -109,7 +109,9 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
         }
 
-
+        if (params.containsKey("ConditionDragonPresence")) {
+            this.dragonPresence = true;
+        }
 
         if (params.containsKey("ConditionZone")) {
             this.setZone(ZoneType.smartValueOf(params.get("ConditionZone")));
@@ -222,6 +224,13 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
         if (this.optionalCostPaid && this.optionalBoolean && !sa.isOptionalCostPaid(OptionalCost.Generic)) return false;
         if (this.optionalCostPaid && !this.optionalBoolean && sa.isOptionalCostPaid(OptionalCost.Generic)) return false;
+
+        if (this.dragonPresence) {
+            if (!(sa.isOptionalCostPaid(OptionalCost.Generic) ||
+                    sa.getHostCard().getSVar("DragonPresence").equals("Number$1"))) {
+                return false;
+            }
+        }
         
         if (this.isAllTargetsLegal()) {
             for (Card c : sa.getTargets().getTargetCards()) {
