@@ -383,7 +383,7 @@ public final class GameActionUtil {
                             newSA.setDescription(newSA.getDescription() + " (Kicker " + cost.toSimpleString() + ")");
                             newSA.addOptionalCost(j == 0 ? OptionalCost.Kicker1 : OptionalCost.Kicker2);
                         } else {
-                            newSA.setDescription(newSA.getDescription() + " (Optional Cost " + cost.toSimpleString() + ")");
+                            newSA.setDescription(newSA.getDescription() + " (Optional " + cost.toSimpleString() + ")");
                             newSA.addOptionalCost(OptionalCost.Generic);
                         }
                         if (newSA.canPlay()) {

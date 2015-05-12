@@ -1402,7 +1402,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 final Cost cost2 = new Cost(costString2, false);
                 sbLong.append("As an additional cost to cast " + getName() + ", " + cost1.toSimpleString()
                         + " or pay " + cost2.toSimpleString() + ".\r\n");
-            } else if (keyword.startsWith("Kicker")) {
+            } else if (keyword.startsWith("Kicker") && !keyword.endsWith("Generic")) {
                 final Cost cost = new Cost(keyword.substring(7), false);
                 sbLong.append("Kicker " + cost.toSimpleString() + "\r\n");
             } else if (keyword.endsWith(".") && !keyword.startsWith("Haunt")) {
@@ -1816,7 +1816,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sb.append("Entwine ").append(cost.toSimpleString());
                 sb.append(" (Choose both if you pay the entwine cost.)");
                 sb.append("\r\n");
-            } else if (keyword.startsWith("Kicker")) {
+            } else if (keyword.startsWith("Kicker") && !keyword.endsWith("Generic")) {
                 final Cost cost = new Cost(keyword.substring(7), false);
                 sb.append("Kicker " + cost.toSimpleString() + "\r\n");
             } else if (keyword.startsWith("AlternateAdditionalCost")) {
