@@ -63,7 +63,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Liliana of the Dark Realms", "Liliana's Ritual", "What do you mean, \"out of character\"?");
         add("Liliana of the Veil", "Liliana's Choice", "Which one of your children do you love best?");
         add("Nahiri, the Lithomancer", "Nahiri's Gift", "I pulled it out! Now I'm a king!");
-        add("Narset Transcendent", "Narset's Simple Rule", "No spells for you!");
+        add("Narset Transcendent", "Narset's One Rule", "No spells for you!");
         add("Nicol Bolas, Planeswalker", "Bolas's Ultimatum", "Whatever you do, don't call him \"Nicol\"!");
         add("Nissa Revane", "Nissa's Summoning", "The whole village is here!");
         add("Nissa, Worldwaker", "Nissa's Awakening", "The whole country is here!");
