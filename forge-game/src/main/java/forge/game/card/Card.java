@@ -5132,6 +5132,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!hasCounters()) {
                 return false;
             }
+        } else if (property.startsWith("wasCast")) {
+            if (null == getCastFrom()) {
+                return false;
+            }
         } else if (property.startsWith("wasNotCast")) {
             if (null != getCastFrom()) {
                 return false;
