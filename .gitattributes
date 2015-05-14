@@ -4674,6 +4674,7 @@ forge-gui/res/cardsfolder/d/downsize.txt -text
 forge-gui/res/cardsfolder/d/dowsing_shaman.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/draco.txt -text
 forge-gui/res/cardsfolder/d/draconian_cylix.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/d/draconic_roar.txt -text
 forge-gui/res/cardsfolder/d/dracoplasm.txt -text
 forge-gui/res/cardsfolder/d/drafnas_restoration.txt -text
 forge-gui/res/cardsfolder/d/drag_down.txt svneol=native#text/plain
@@ -5957,6 +5958,7 @@ forge-gui/res/cardsfolder/f/foul_imp.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/foul_presence.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/foul_renewal.txt -text
 forge-gui/res/cardsfolder/f/foul_spirit.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/f/foul_tongue_invocation.txt -text
 forge-gui/res/cardsfolder/f/foul_tongue_shriek.txt -text
 forge-gui/res/cardsfolder/f/foundry_champion.txt -text
 forge-gui/res/cardsfolder/f/foundry_street_denizen.txt -text
@@ -10195,6 +10197,7 @@ forge-gui/res/cardsfolder/o/oracles_insight.txt -text
 forge-gui/res/cardsfolder/o/oran_rief_recluse.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/oran_rief_survivalist.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/oran_rief_the_vastwood.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/o/orator_of_ojutai.txt -text
 forge-gui/res/cardsfolder/o/oraxid.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/orb_of_dreams.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/orbweaver_kumo.txt svneol=native#text/plain
