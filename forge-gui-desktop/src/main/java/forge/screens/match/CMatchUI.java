@@ -140,8 +140,6 @@ public final class CMatchUI
     public CMatchUI() {
         this.view = new VMatchUI(this);
         this.screen = FScreen.getMatchScreen(this, view);
-        Singletons.getView().getLpnDocument().add(targetingOverlay.getPanel(), FView.TARGETING_LAYER);
-        targetingOverlay.getPanel().setSize(Singletons.getControl().getDisplaySize());
         this.myDocs = new EnumMap<EDocID, IVDoc<? extends ICDoc>>(EDocID.class);
         this.myDocs.put(EDocID.CARD_PICTURE, cDetailPicture.getCPicture().getView());
         this.myDocs.put(EDocID.CARD_DETAIL, cDetailPicture.getCDetail().getView());
@@ -252,6 +250,8 @@ public final class CMatchUI
         final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
 
         final List<VField> fields = new ArrayList<VField>();
+        Singletons.getView().getLpnDocument().add(targetingOverlay.getPanel(), FView.TARGETING_LAYER);
+        targetingOverlay.getPanel().setSize(Singletons.getControl().getDisplaySize());
 
         int i = 0;
         for (final PlayerView p : sortedPlayers) {
