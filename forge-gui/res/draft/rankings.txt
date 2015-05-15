@@ -1,4 +1,254 @@
 //Rank|Name|Rarity|Set
+#1|Karn Liberated|M|MM2
+#2|Primeval Titan|M|MM2
+#3|Vendilion Clique|M|MM2
+#4|Bitterblossom|M|MM2
+#5|Emrakul, the Aeons Torn|M|MM2
+#6|Elesh Norn, Grand Cenobite|M|MM2
+#7|Ulamog, the Infinite Gyre|M|MM2
+#8|Kozilek, Butcher of Truth|M|MM2
+#9|Kiki-Jiki, Mirror Breaker|M|MM2
+#10|Tezzeret the Seeker|M|MM2
+#11|Tarmogoyf|M|MM2
+#12|Dark Confidant|M|MM2
+#13|Mox Opal|M|MM2
+#14|Comet Storm|M|MM2
+#15|Iona, Shield of Emeria|M|MM2
+#16|Noble Hierarch|R|MM2
+#17|Cryptic Command|R|MM2
+#18|Wilt-Leaf Liege|R|MM2
+#19|Etched Champion|R|MM2
+#20|Battlegrace Angel|R|MM2
+#21|Creakwood Liege|R|MM2
+#22|Ant Queen|R|MM2
+#23|Spellskite|R|MM2
+#24|Mirror Entity|R|MM2
+#25|All Is Dust|R|MM2
+#26|Precursor Golem|R|MM2
+#27|Indomitable Archangel|R|MM2
+#28|Mirran Crusader|R|MM2
+#29|Midnight Banshee|R|MM2
+#30|Niv-Mizzet, the Firemind|R|MM2
+#31|Wolfbriar Elemental|R|MM2
+#32|Profane Command|R|MM2
+#33|Ghost Council of Orzhova|R|MM2
+#34|Hellkite Charger|R|MM2
+#35|Guile|R|MM2
+#36|Argent Sphinx|R|MM2
+#37|Blinkmoth Nexus|R|MM2
+#38|Apocalypse Hydra|R|MM2
+#39|Banefire|R|MM2
+#40|Fulminator Mage|R|MM2
+#41|Necroskitter|R|MM2
+#42|Chimeric Mass|R|MM2
+#43|Splinter Twin|R|MM2
+#44|Nobilis of War|R|MM2
+#45|Lodestone Golem|R|MM2
+#46|Puppeteer Clique|R|MM2
+#47|Lightning Bolt|U|MM2
+#48|Endrek Sahr, Master Breeder|R|MM2
+#49|Spikeshot Elder|R|MM2
+#50|Dismember|U|MM2
+#51|Scute Mob|R|MM2
+#52|Swans of Bryn Argoll|R|MM2
+#53|Daybreak Coronet|R|MM2
+#54|Sunforger|R|MM2
+#55|Leyline of Sanctity|R|MM2
+#56|Overwhelming Stampede|R|MM2
+#57|Mulldrifter|U|MM2
+#58|Shadowmage Infiltrator|R|MM2
+#59|Etched Monstrosity|R|MM2
+#60|Thunderblust|R|MM2
+#61|Oblivion Ring|U|MM2
+#62|Mystic Snake|R|MM2
+#63|Lodestone Myr|R|MM2
+#64|Horde of Notions|R|MM2
+#65|Wildfire|R|MM2
+#66|Remand|U|MM2
+#67|Spectral Procession|U|MM2
+#68|Darksteel Axe|U|MM2
+#69|Surrakar Spellblade|R|MM2
+#70|Eye of Ugin|R|MM2
+#71|Pelakka Wurm|U|MM2
+#72|Bestial Menace|U|MM2
+#73|Inexorable Tide|R|MM2
+#74|Selesnya Guildmage|U|MM2
+#75|Cytoplast Root-Kin|U|MM2
+#76|Hurkyl's Recall|R|MM2
+#77|Tezzeret's Gambit|U|MM2
+#78|Cranial Plating|U|MM2
+#79|Electrolyze|U|MM2
+#80|Myrsmith|U|MM2
+#81|Artisan of Kozilek|U|MM2
+#82|Stormblood Berserker|U|MM2
+#83|Wrecking Ball|U|MM2
+#84|Vampire Outcasts|U|MM2
+#85|Spread the Sickness|U|MM2
+#86|Dispatch|U|MM2
+#87|Spitebellows|U|MM2
+#88|Air Servant|U|MM2
+#89|Surgical Extraction|R|MM2
+#90|Arrest|C|MM2
+#91|Long-Forgotten Gohei|R|MM2
+#92|Glassdust Hulk|U|MM2
+#93|Pillory of the Sleepless|U|MM2
+#94|Savage Twister|U|MM2
+#95|Ethercaste Knight|U|MM2
+#96|Ashenmoor Gouger|U|MM2
+#97|Skarrgan Firebird|U|MM2
+#98|All Suns' Dawn|R|MM2
+#99|Restless Apparition|U|MM2
+#100|Qumulox|U|MM2
+#101|Tumble Magnet|U|MM2
+#102|Water Servant|U|MM2
+#103|Scavenger Drake|U|MM2
+#104|Mortarpod|U|MM2
+#105|Lorescale Coatl|U|MM2
+#106|Hikari, Twilight Guardian|U|MM2
+#107|Everflowing Chalice|U|MM2
+#108|Burst Lightning|C|MM2
+#109|Nameless Inversion|C|MM2
+#110|Kozilek's Predator|C|MM2
+#111|Incandescent Soulstoke|U|MM2
+#112|Hearthfire Hobgoblin|U|MM2
+#113|Sunlance|C|MM2
+#114|Mutagenic Growth|U|MM2
+#115|Plaxcaster Frogling|U|MM2
+#116|Mana Leak|C|MM2
+#117|Ulamog's Crusher|C|MM2
+#118|Shrewd Hatchling|U|MM2
+#119|Daggerclaw Imp|U|MM2
+#120|Nest Invader|C|MM2
+#121|Narcolepsy|C|MM2
+#122|Rampant Growth|C|MM2
+#123|Alloy Myr|C|MM2
+#124|Azorius Chancery|U|MM2
+#125|Sphere of the Suns|C|MM2
+#126|Etched Oracle|U|MM2
+#127|Vapor Snag|C|MM2
+#128|Expedition Map|U|MM2
+#129|Dimir Guildmage|U|MM2
+#130|Bloodshot Trainee|U|MM2
+#131|Repeal|C|MM2
+#132|Sickleslicer|C|MM2
+#133|Taj-Nar Swordsmith|U|MM2
+#134|Algae Gharial|U|MM2
+#135|Blinding Souleater|C|MM2
+#136|Novijen Sages|U|MM2
+#137|Evolving Wilds|C|MM2
+#138|Court Homunculus|C|MM2
+#139|Flayer Husk|C|MM2
+#140|Rusted Relic|C|MM2
+#141|Raise the Alarm|C|MM2
+#142|Reassembling Skeleton|U|MM2
+#143|Agony Warp|U|MM2
+#144|Darksteel Citadel|C|MM2
+#145|Golgari Rot Farm|U|MM2
+#146|Myr Enforcer|C|MM2
+#147|Selesnya Sanctuary|U|MM2
+#148|Karplusan Strider|U|MM2
+#149|Glint Hawk Idol|C|MM2
+#150|Orzhov Basilica|U|MM2
+#151|Scion of the Wild|C|MM2
+#152|Skyhunter Skirmisher|C|MM2
+#153|Wayfarer's Bauble|C|MM2
+#154|Blood Ogre|C|MM2
+#155|Telling Time|C|MM2
+#156|Thoughtcast|C|MM2
+#157|Faerie Mechanist|C|MM2
+#158|Simic Growth Chamber|U|MM2
+#159|Cathodion|C|MM2
+#160|AEthersnipe|C|MM2
+#161|Cloud Elemental|C|MM2
+#162|Root-Kin Ally|U|MM2
+#163|Kor Duelist|U|MM2
+#164|Scatter the Seeds|C|MM2
+#165|Thrummingbird|C|MM2
+#166|Frogmite|C|MM2
+#167|Gorehorn Minotaurs|C|MM2
+#168|Tribal Flames|C|MM2
+#169|Grim Affliction|C|MM2
+#170|Otherworldly Journey|C|MM2
+#171|Apostle's Blessing|C|MM2
+#172|Sunspear Shikari|C|MM2
+#173|Fiery Fall|C|MM2
+#174|Somber Hoverguard|C|MM2
+#175|Rakdos Carnarium|U|MM2
+#176|Gust-Skimmer|C|MM2
+#177|Thief of Hope|C|MM2
+#178|Stoic Rebuttal|C|MM2
+#179|Gut Shot|C|MM2
+#180|Aquastrand Spider|C|MM2
+#181|Izzet Boilerworks|U|MM2
+#182|Duskhunter Bat|C|MM2
+#183|Kavu Primarch|C|MM2
+#184|Gnarlid Pack|C|MM2
+#185|Bone Splinters|C|MM2
+#186|Vigean Graftmage|C|MM2
+#187|Steady Progress|C|MM2
+#188|Sickle Ripper|C|MM2
+#189|Vines of Vastwood|C|MM2
+#190|Kami of Ancient Law|C|MM2
+#191|Gruul Turf|U|MM2
+#192|Copper Carapace|C|MM2
+#193|Vengeful Rebirth|U|MM2
+#194|Dread Drone|C|MM2
+#195|Helium Squirter|C|MM2
+#196|Overwhelm|U|MM2
+#197|Goblin Fireslinger|C|MM2
+#198|Sigil Blessing|U|MM2
+#199|Conclave Phalanx|C|MM2
+#200|Boros Swiftblade|U|MM2
+#201|Vampire Lacerator|C|MM2
+#202|Fortify|C|MM2
+#203|Kitesail|C|MM2
+#204|Scuttling Death|C|MM2
+#205|Ghostly Changeling|C|MM2
+#206|Inner-Flame Igniter|C|MM2
+#207|Runed Servitor|C|MM2
+#208|Sign in Blood|C|MM2
+#209|Brute Force|C|MM2
+#210|Dimir Aqueduct|U|MM2
+#211|Soulbright Flamekin|C|MM2
+#212|Waxmane Baku|C|MM2
+#213|Smokebraider|C|MM2
+#214|Celestial Purge|U|MM2
+#215|Skyreach Manta|C|MM2
+#216|Mighty Leap|C|MM2
+#217|Wings of Velis Vel|C|MM2
+#218|Moonlit Strider|C|MM2
+#219|Drooling Groodion|U|MM2
+#220|Bloodthrone Vampire|C|MM2
+#221|Plagued Rusalka|C|MM2
+#222|Simic Initiate|C|MM2
+#223|Tukatongue Thallid|C|MM2
+#224|Matca Rioters|C|MM2
+#225|Dragonsoul Knight|C|MM2
+#226|Terashi's Grasp|C|MM2
+#227|Goblin War Paint|C|MM2
+#228|Deathmark|U|MM2
+#229|Sylvan Bounty|C|MM2
+#230|Viashino Slaughtermaster|C|MM2
+#231|Instill Infection|C|MM2
+#232|Death Denied|C|MM2
+#233|Blades of Velis Vel|C|MM2
+#234|Thrive|C|MM2
+#235|Eldrazi Temple|U|MM2
+#236|Wrap in Flames|C|MM2
+#237|Flashfreeze|U|MM2
+#238|Smash to Smithereens|C|MM2
+#239|Waking Nightmare|C|MM2
+#240|Shrivel|C|MM2
+#241|Commune with Nature|C|MM2
+#242|Plummet|C|MM2
+#243|Sundering Vitae|C|MM2
+#244|Culling Dais|U|MM2
+#245|Combust|U|MM2
+#246|Devouring Greed|U|MM2
+#247|Necrogenesis|U|MM2
+#248|Boros Garrison|U|MM2
+#249|Worldheart Phoenix|U|MM2
+//Rank|Name|Rarity|Set
 #1|Cataclysm|M|TPR
 #2|Cursed Scroll|M|TPR
 #3|Dream Halls|M|TPR
