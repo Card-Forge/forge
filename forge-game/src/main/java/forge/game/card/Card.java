@@ -1696,7 +1696,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sb.insert(0, "\r\n");
                 sb.insert(0, sAbility);
             }
-            else if (!sAbility.endsWith(state.getName())) {
+            else if (!sAbility.endsWith(state.getName() + "\r\n")) {
                 sb.append(sAbility);
                 sb.append("\r\n");
             }
