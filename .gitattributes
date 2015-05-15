@@ -3651,6 +3651,7 @@ forge-gui/res/cardsfolder/c/commanders_sphere.txt -text
 forge-gui/res/cardsfolder/c/commando_raid.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/c/common_bond.txt -text
 forge-gui/res/cardsfolder/c/common_cause.txt -text
+forge-gui/res/cardsfolder/c/commune_with_lava.txt -text
 forge-gui/res/cardsfolder/c/commune_with_nature.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/commune_with_the_gods.txt -text
 forge-gui/res/cardsfolder/c/complex_automaton.txt svneol=native#text/plain
