@@ -4712,6 +4712,7 @@ forge-gui/res/cardsfolder/d/dragonlord_dromoka.txt -text
 forge-gui/res/cardsfolder/d/dragonlord_kolaghan.txt -text
 forge-gui/res/cardsfolder/d/dragonlord_ojutai.txt -text
 forge-gui/res/cardsfolder/d/dragonlord_silumgar.txt -text
+forge-gui/res/cardsfolder/d/dragonlords_prerogative.txt -text
 forge-gui/res/cardsfolder/d/dragonlords_servant.txt -text
 forge-gui/res/cardsfolder/d/dragonmaster_outcast.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dragonrage.txt -text
@@ -12111,6 +12112,7 @@ forge-gui/res/cardsfolder/s/scale_of_chiss_goria.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/scalebanes_elite.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/scaled_hulk.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/scaled_wurm.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/scaleguard_sentinels.txt -text
 forge-gui/res/cardsfolder/s/scalpelexis.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/scandalmonger.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/scapegoat.txt svneol=native#text/plain
@@ -12753,6 +12755,7 @@ forge-gui/res/cardsfolder/s/silumgar_sorcerer.txt -text
 forge-gui/res/cardsfolder/s/silumgar_spell_eater.txt -text
 forge-gui/res/cardsfolder/s/silumgar_the_drifting_death.txt -text
 forge-gui/res/cardsfolder/s/silumgars_command.txt -text
+forge-gui/res/cardsfolder/s/silumgars_scorn.txt -text
 forge-gui/res/cardsfolder/s/silver_drake.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/silver_erne.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/silver_inlaid_dagger.txt -text
