@@ -1785,8 +1785,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || keyword.startsWith("May be played") || keyword.startsWith("Conspire")
                     || keyword.startsWith("Cascade") || keyword.startsWith("Wither")
                     || (keyword.startsWith("Epic") && !sb.toString().contains("Epic"))
-                    || (keyword.startsWith("Split second") && !sb.toString().contains("Split second"))
-                    || (keyword.startsWith("Multikicker") && !sb.toString().contains("Multikicker"))) {
+                    || (keyword.startsWith("Split second") && !sb.toString().contains("Split second"))) {
                 sb.append(keyword).append("\r\n");
             }
             else if (keyword.equals("You may cast CARDNAME as though it had flash if you pay 2 more to cast it.")) {
@@ -1818,6 +1817,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sb.append("Entwine ").append(cost.toSimpleString());
                 sb.append(" (Choose both if you pay the entwine cost.)");
                 sb.append("\r\n");
+            } else if (keyword.startsWith("Multikicker")) {
+                if (!keyword.endsWith("Generic")) {
+                    final Cost cost = new Cost(keyword.substring(7), false);
+                    sb.append("Multikicker " + cost.toSimpleString() + "\r\n");
+                }
             } else if (keyword.startsWith("Kicker")) {
                 if (!keyword.endsWith("Generic")) {
                     final Cost cost = new Cost(keyword.substring(7), false);

@@ -743,6 +743,14 @@ public class HumanPlay {
             }
         }
 
+        int timesPseudokicked = source.getPseudoKickerMagnitude();
+        if (timesPseudokicked > 0 && ability.isAnnouncing("Pseudo-multikicker")) {
+            ManaCost mkCost = ability.getMultiKickerManaCost();
+            for (int i = 0; i < timesPseudokicked; i++) {
+                toPay.addManaCost(mkCost);
+            }
+        }
+
         Integer replicate = ability.getSVarInt("Replicate");
         if (replicate != null) {
             ManaCost rCost = source.getManaCost();

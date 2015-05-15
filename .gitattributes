@@ -14087,6 +14087,7 @@ forge-gui/res/cardsfolder/t/task_force.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/task_mage_assembly.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/taste_for_mayhem.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/taste_of_blood.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/t/taste_of_paradise.txt -text
 forge-gui/res/cardsfolder/t/tatsumasa_the_dragons_fang.txt -text
 forge-gui/res/cardsfolder/t/tattered_drake.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/tatterkite.txt svneol=native#text/plain

@@ -1372,6 +1372,9 @@ public class CardFactoryUtil {
         if (sq[0].contains("TimesKicked")) {
             return doXMath(c.getKickerMagnitude(), m, c);
         }
+        if (sq[0].contains("TimesPseudokicked")) {
+            return doXMath(c.getPseudoKickerMagnitude(), m, c);
+        }
 
         // Count$IfMainPhase.<numMain>.<numNotMain> // 7/10
         if (sq[0].contains("IfMainPhase")) {
@@ -2107,10 +2110,14 @@ public class CardFactoryUtil {
         for (String keyword : card.getKeywords()) {
             if (keyword.startsWith("Multikicker")) {
                 final String[] k = keyword.split("kicker ");
-
+                String mkCost = k[1].split(":")[0];
                 final SpellAbility sa = card.getFirstSpellAbility();
-                sa.setMultiKickerManaCost(new ManaCost(new ManaCostParser(k[1])));
-                sa.addAnnounceVar("Multikicker");
+                sa.setMultiKickerManaCost(new ManaCost(new ManaCostParser(mkCost)));
+                if (k[1].endsWith("Generic")) {
+                    sa.addAnnounceVar("Pseudo-multikicker");
+                } else {
+                    sa.addAnnounceVar("Multikicker");
+                }
             }
             else if (keyword.startsWith("Replicate")) {
                 card.getFirstSpellAbility().addAnnounceVar("Replicate");
