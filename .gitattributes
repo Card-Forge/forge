@@ -16848,6 +16848,7 @@ forge-gui/res/quest/precons/Cho-Manno's[!!-~]Resolve.dck -text
 forge-gui/res/quest/precons/Code[!!-~]of[!!-~]the[!!-~]Orzhov.dck -text
 forge-gui/res/quest/precons/Conquering[!!-~]Hordes.dck -text
 forge-gui/res/quest/precons/Critical[!!-~]Mass.dck -text
+forge-gui/res/quest/precons/Cruel[!!-~]Plots.dck -text
 forge-gui/res/quest/precons/Crusher.dck -text
 forge-gui/res/quest/precons/Cunning[!!-~]Plan.dck -text
 forge-gui/res/quest/precons/Custom[!!-~]Creatures.dck -text
@@ -16875,6 +16876,7 @@ forge-gui/res/quest/precons/Eldritch[!!-~]Onslaught.dck -text
 forge-gui/res/quest/precons/Elementals[!!-~]Path.dck -text
 forge-gui/res/quest/precons/Elvish[!!-~]Predation.dck -text
 forge-gui/res/quest/precons/Elvish[!!-~]Rage.dck -text
+forge-gui/res/quest/precons/Enlightened[!!-~]Mastery.dck -text
 forge-gui/res/quest/precons/Entangling[!!-~]Webs.dck -text
 forge-gui/res/quest/precons/Esper[!!-~]Air[!!-~]Assault.dck -text
 forge-gui/res/quest/precons/Esper[!!-~]Artifice.dck -text
@@ -16893,6 +16895,7 @@ forge-gui/res/quest/precons/Firebomber.dck -text
 forge-gui/res/quest/precons/Flames[!!-~]Of[!!-~]The[!!-~]Dragon.dck -text
 forge-gui/res/quest/precons/Flyover.dck -text
 forge-gui/res/quest/precons/Forged[!!-~]in[!!-~]Battle.dck -text
+forge-gui/res/quest/precons/Furious[!!-~]Forces.dck -text
 forge-gui/res/quest/precons/Gifts[!!-~]of[!!-~]the[!!-~]Gods.dck -text
 forge-gui/res/quest/precons/Gleeful[!!-~]Flames.dck -text
 forge-gui/res/quest/precons/Going[!!-~]Rogue.dck -text
@@ -16934,6 +16937,7 @@ forge-gui/res/quest/precons/Little[!!-~]Bashers.dck -text
 forge-gui/res/quest/precons/Lofty[!!-~]Heights.dck -text
 forge-gui/res/quest/precons/Manipulative[!!-~]Monstrosities.dck -text
 forge-gui/res/quest/precons/Mardu[!!-~]Raiders.dck -text
+forge-gui/res/quest/precons/Massed[!!-~]Ranks.dck -text
 forge-gui/res/quest/precons/Master[!!-~]Blaster.dck -text
 forge-gui/res/quest/precons/Mercenaries.dck -text
 forge-gui/res/quest/precons/Merrow[!!-~]Riverways.dck -text
@@ -16971,6 +16975,7 @@ forge-gui/res/quest/precons/Ravaging[!!-~]Swarm.dck -text
 forge-gui/res/quest/precons/Rebels[!!-~]Unite.dck -text
 forge-gui/res/quest/precons/Reign[!!-~]of[!!-~]Vampirism.dck -text
 forge-gui/res/quest/precons/Relentless[!!-~]Dead.dck -text
+forge-gui/res/quest/precons/Relentless[!!-~]Rush.dck -text
 forge-gui/res/quest/precons/Relic[!!-~]Breaker.dck -text
 forge-gui/res/quest/precons/Repeat[!!-~]Performance.dck -text
 forge-gui/res/quest/precons/Repel[!!-~]the[!!-~]Dark.dck -text
