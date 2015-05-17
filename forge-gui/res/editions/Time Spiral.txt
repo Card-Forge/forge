@@ -144,7 +144,7 @@ U Knight of the Holy Nimbus
 U Krosan Grip
 R Liege of the Pit
 C Lightning Axe
-R Lim-Dûl the Necromancer
+R Lim-Dul the Necromancer
 R Living End
 U Locket of Yesterdays
 C Looter il-Kor

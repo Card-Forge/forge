@@ -1,4 +1,4 @@
-Name:Lim-Dûl the Necromancer
+Name:Lim-Dul the Necromancer
 ManaCost:5 B B
 Types:Legendary Creature Human Wizard
 PT:4/4

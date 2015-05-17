@@ -98,7 +98,7 @@ U Cursed Land
 C D'Avenant Archer
 R Dance of Many
 R Dancing Scimitar
-C Dandân
+C Dandan
 C Dark Maze
 C Dark Ritual
 C Death Speakers
@@ -172,7 +172,7 @@ U Fyndhorn Elder
 R Game of Chaos
 C Gaseous Form
 R Gauntlets of Chaos
-C Ghazbán Ogre
+C Ghazban Ogre
 C Giant Growth
 C Giant Spider
 C Giant Strength

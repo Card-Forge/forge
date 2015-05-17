@@ -88,7 +88,7 @@ U Earth Elemental
 C Earthbind
 R Earthquake
 R Ebony Horse
-R El-Hajjâj
+R El-Hajjaj
 R Elvish Archers
 U Energy Flux
 C Erg Raiders

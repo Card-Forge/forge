@@ -43,7 +43,7 @@ R Cyclone
 C D'Avenant Archer
 R Dakkon Blackblade
 R Dance of Many
-C Dandân
+C Dandan
 C Divine Offering
 C Emerald Dragonfly
 U Enchantment Alteration
@@ -56,7 +56,7 @@ C Flash Flood
 C Fountain of Youth
 R Gabriel Angelfire
 R Gauntlets of Chaos
-C Ghazbán Ogre
+C Ghazban Ogre
 C Giant Slug
 U Goblin Artisans
 C Goblin Digging Team

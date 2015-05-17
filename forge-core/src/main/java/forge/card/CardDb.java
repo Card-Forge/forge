@@ -42,7 +42,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     // need this to obtain cardReference by name+set+artindex
     private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<String,Collection<PaperCard>>(String.CASE_INSENSITIVE_ORDER),  CollectionSuppliers.<PaperCard>arrayLists());
     private final Map<String, PaperCard> uniqueCardsByName = new TreeMap<String, PaperCard>(String.CASE_INSENSITIVE_ORDER);
-    private final Map<String, String> accentedCardNameEquivalents = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, CardRules> rulesByName;
     private static Map<String, String> artPrefs = new HashMap<String, String>();
 
@@ -166,7 +165,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         for (CardRules cr : rulesByName.values()) {
             if (!allCardsByName.containsKey(cr.getName())) {
-                System.err.println(String.format("The card  %s was not assigned to any set. Adding it to UNKNOWN set... to fix see res/editions/ folder. ", cr.getName()));
+                System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/cardeditions/ folder. ");
                 addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special, 1));
             }
         }
@@ -184,13 +183,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         for (Entry<String, Collection<PaperCard>> kv : allCardsByName.asMap().entrySet()) {
             uniqueCardsByName.put(kv.getKey(), getFirstWithImage(kv.getValue()));
             allCards.addAll(kv.getValue());
-        }
-
-        for (String name : allCardsByName.keySet()) {
-            if (StringUtils.containsAny(name, "áàâéèêúùûíìîóòô")) {
-                String equivName = StringUtils.replaceChars(name, "áàâéèêúùûíìîóòô", "aaaeeeuuuiiiooo");
-                accentedCardNameEquivalents.put(equivName, name);
-            }
         }
     }
 
@@ -547,15 +539,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return new PaperCard(CardRules.getUnsupportedCardNamed(request.cardName), cE.getCode(), cR, 1);
     }
 
-
-    public String getEquivalentCardName(String name) {
-        boolean hasSetInfo = name.indexOf('|') != -1;
-        String cardName = !hasSetInfo ? name : StringUtils.substring(name, 0, name.indexOf('|'));
-        String setInfo = !hasSetInfo ? "" : StringUtils.substring(name, name.indexOf("|"));
-        return accentedCardNameEquivalents.containsKey(cardName) ? String.format("%s%s", accentedCardNameEquivalents.get(cardName), setInfo) : 
-                String.format("%s%s", name, setInfo);
-    }
-
     private final Editor editor = new Editor();
     public Editor getEditor() { return editor; }
     public class Editor {
@@ -620,6 +603,5 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         public void setImmediateReindex(boolean immediateReindex) {
             this.immediateReindex = immediateReindex;
         }
-
     }
 }

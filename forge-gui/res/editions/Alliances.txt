@@ -103,10 +103,10 @@ R Lake of the Dead
 C Lat-Nam's Legacy
 C Lat-Nam's Legacy
 R Library of Lat-Nam
-C Lim-Dûl's High Guard
-C Lim-Dûl's High Guard
-U Lim-Dûl's Paladin
-U Lim-Dûl's Vault
+C Lim-Dul's High Guard
+C Lim-Dul's High Guard
+U Lim-Dul's Paladin
+U Lim-Dul's Vault
 R Lodestone Bauble
 R Lord of Tresserhorn
 C Martyrdom
