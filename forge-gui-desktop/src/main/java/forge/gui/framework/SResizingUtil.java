@@ -140,7 +140,7 @@ public final class SResizingUtil {
             existingComponents.add(c);
         }
 
-        // This is the core of the pixel-perfect layout. To avoid ±1 px errors on borders
+        // This is the core of the pixel-perfect layout. To avoid Â±1 px errors on borders
         // from rounding individual panels, the intermediate values (exactly accurate, in %)
         // for width and height are rounded based on comparison to other panels in the
         // layout.  This is to avoid errors such as:
