@@ -107,7 +107,7 @@ public class ImageUtil {
     }
 
     private static String formatName(final String name) {
-        return StringUtils.replaceChars(name, "áàâéèêúùûíìîóòô", "aaaeeeuuuiiiooo");
+        return StringUtils.replaceChars(name, "Ã¡Ã Ã¢Ã©Ã¨ÃªÃºÃ¹Ã»Ã­Ã¬Ã®Ã³Ã²Ã´", "aaaeeeuuuiiiooo");
     }
 
     public static String getImageKey(final PaperCard cp, final boolean backFace, final boolean includeSet) {
