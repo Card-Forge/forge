@@ -34,6 +34,8 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class CardDb implements ICardDatabase, IDeckGenPool {
     public final static String foilSuffix = "+";
@@ -42,6 +44,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     // need this to obtain cardReference by name+set+artindex
     private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<String,Collection<PaperCard>>(String.CASE_INSENSITIVE_ORDER),  CollectionSuppliers.<PaperCard>arrayLists());
     private final Map<String, PaperCard> uniqueCardsByName = new TreeMap<String, PaperCard>(String.CASE_INSENSITIVE_ORDER);
+    private final Map<String, String> accentedCardNameEquivalents = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, CardRules> rulesByName;
     private static Map<String, String> artPrefs = new HashMap<String, String>();
 
@@ -183,6 +186,13 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         for (Entry<String, Collection<PaperCard>> kv : allCardsByName.asMap().entrySet()) {
             uniqueCardsByName.put(kv.getKey(), getFirstWithImage(kv.getValue()));
             allCards.addAll(kv.getValue());
+        }
+
+        for (String name : allCardsByName.keySet()) {
+            if (StringUtils.containsAny(name, "áàâéèêúùûíìîóòô")) {
+                String equivName = StringUtils.replaceChars(name, "áàâéèêúùûíìîóòô", "aaaeeeuuuiiiooo");
+                accentedCardNameEquivalents.put(equivName, name);
+            }
         }
     }
 
@@ -539,6 +549,15 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return new PaperCard(CardRules.getUnsupportedCardNamed(request.cardName), cE.getCode(), cR, 1);
     }
 
+
+    public String getEquivalentCardName(String name) {
+        if (accentedCardNameEquivalents.containsKey(name)) {
+            return accentedCardNameEquivalents.get(name);
+        } else {
+            return name;
+        }
+    }
+
     private final Editor editor = new Editor();
     public Editor getEditor() { return editor; }
     public class Editor {
@@ -603,5 +622,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         public void setImmediateReindex(boolean immediateReindex) {
             this.immediateReindex = immediateReindex;
         }
+
     }
 }
