@@ -96,7 +96,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbCompactPrompt = new OptionsCheckBox("Compact Prompt");
     private final JCheckBox cbHideReminderText = new OptionsCheckBox("Hide Reminder Text");
     private final JCheckBox cbOpenPacksIndiv = new OptionsCheckBox("Open Packs Individually");
-    private final JCheckBox cbTokensInSeparateRow = new OptionsCheckBox("Display Tokens on a Separate Row");
+    private final JCheckBox cbTokensInSeparateRow = new OptionsCheckBox("Display Tokens in a Separate Row");
     private final JCheckBox cbStackCreatures = new OptionsCheckBox("Stack Creatures");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<FPref, KeyboardShortcutField>();
