@@ -25,7 +25,8 @@ found in Forge preferences under "Graphic Options". It is called "Display Tokens
 in a Separate Row" and defaults to "enabled" (classic Forge behavior) until the
 new mode is tested thoroughly. If you disable this option, the game will display
 tokens together with other cards as opposed to in their own row, which will make
-the game use your screen space more effectively.
+the game use your screen space more effectively. Tokens will be displayed to the
+right of the non-token cards in the same row.
 
 - Network play (BETA) -
 This version of Forge includes a preliminary version of peer-to-peer (P2P)
