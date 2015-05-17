@@ -549,11 +549,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
 
     public String getEquivalentCardName(String name) {
-        if (accentedCardNameEquivalents.containsKey(name)) {
-            return accentedCardNameEquivalents.get(name);
-        } else {
-            return name;
-        }
+        boolean hasSetInfo = name.indexOf('|') != -1;
+        String cardName = !hasSetInfo ? name : name.substring(0, name.indexOf('|'));
+        String setInfo = !hasSetInfo ? "" : name.substring(name.indexOf("|"));
+        return accentedCardNameEquivalents.containsKey(cardName) ? String.format("%s%s", accentedCardNameEquivalents.get(cardName), setInfo) : 
+                String.format("%s%s", name, setInfo);
     }
 
     private final Editor editor = new Editor();
