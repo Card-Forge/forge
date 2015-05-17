@@ -32,6 +32,8 @@ import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
+import forge.model.FModel;
+import forge.properties.ForgePreferences;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.MouseTriggerEvent;
@@ -73,12 +75,15 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private final PlayerView model;
     private final ZoneType zone;
 
+    private boolean makeTokenRow = true;
+
     public PlayArea(final CMatchUI matchUI, final FScrollPane scrollPane, final boolean mirror, final PlayerView player, final ZoneType zone) {
         super(matchUI, scrollPane);
         this.setBackground(Color.white);
         this.mirror = mirror;
         this.model = player;
         this.zone = zone;
+        this.makeTokenRow = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_TOKENS_IN_SEPARATE_ROW);
     }
 
     private final CardStackRow collectAllLands() {
@@ -263,6 +268,18 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         final CardStackRow creatures = new CardStackRow(this.getCardPanels(), RowType.CreatureNonToken);
         final CardStackRow others = new CardStackRow(this.getCardPanels(), RowType.Other);
         
+        if (!makeTokenRow) {
+            for (CardStack s : tokens) {
+                if (!s.isEmpty()) {
+                    if (s.get(0).getCard().getCurrentState().isCreature()) {
+                        creatures.add(s);
+                    } else {
+                        others.add(s);
+                    }
+                } 
+            }
+            tokens.clear();
+        }
 
         /*if (FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES) && !collectedCreatures.isEmpty()) {
             creatures = collectedCreatures;
