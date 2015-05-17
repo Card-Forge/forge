@@ -8,6 +8,18 @@ Forge Beta: #-#-2015 ver 1.5.39
 Release Notes
 -------------
 
+- Morph/Manifest images -
+Forge now supports proper images for face-down creatures. In order to correctly
+use these images, it's necessary to remove a file in your picture directory
+(see below), then redownload token images. Alternatively, you can do this
+yourself by renaming the current file "morph.jpg" to "hidden.jpg" and adding
+new files "morph.jpg" and "manifest.jpg" for the morph and manifest reminder
+overlays, respectively. All these files are located inside the "tokens"
+subdirectory of your image cache, which can be found here:
+- Windows: [home directory]/Application Data/Forge/Cache/pics
+- Mac:     [home directory]/Library/Caches/Forge/pics
+- Linux:   [home directory]/.cache/forge/pics
+
 - Interface Update -
 The interface has received several small changes.
 - The "Players" panel has been removed. This information can now be viewed by

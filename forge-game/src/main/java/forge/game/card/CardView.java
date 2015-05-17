@@ -803,7 +803,7 @@ public class CardView extends GameEntityView {
             if (canBeShownToAny(viewers)) {
                 return get(TrackableProperty.ImageKey);
             }
-            return ImageKeys.HIDDEN_CARD;
+            return ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD);
         }
         void updateImageKey(Card c) {
             set(TrackableProperty.ImageKey, c.getImageKey());

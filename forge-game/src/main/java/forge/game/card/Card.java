@@ -49,6 +49,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import forge.GameCommand;
+import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardChangedType;
 import forge.card.CardDb.SetPreference;
@@ -5562,7 +5563,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         boolean DEBUGShieldsWithEffects = false;
         while (!getPreventNextDamageWithEffect().isEmpty() && restDamage != 0) {
-            TreeMap<Card, Map<String, String>> shieldMap = getPreventNextDamageWithEffect();
+            Map<Card, Map<String, String>> shieldMap = getPreventNextDamageWithEffect();
             CardCollectionView preventionEffectSources = new CardCollection(shieldMap.keySet());
             Card shieldSource = preventionEffectSources.get(0);
             if (preventionEffectSources.size() > 1) {
@@ -5583,7 +5584,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 System.out.println("Prevention shield source: " + shieldSource);
             }
 
-            int shieldAmount = Integer.valueOf(shieldMap.get(shieldSource).get("ShieldAmount"));
+            int shieldAmount = Integer.valueOf(shieldMap.get(shieldSource).get("ShieldAmount")).intValue();
             int dmgToBePrevented = Math.min(restDamage, shieldAmount);
             if (DEBUGShieldsWithEffects) {
                 System.out.println("Selected source initial shield amount: " + shieldAmount);
@@ -5877,6 +5878,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public final void setManifested(final boolean manifested) {
         this.manifested = manifested;
+        final String image = manifested ? ImageKeys.MANIFEST_IMAGE : ImageKeys.MORPH_IMAGE;
+        getState(CardStateName.FaceDown).setImageKey(ImageKeys.getTokenKey(image));
     }
 
     public final void animateBestow() {

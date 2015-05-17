@@ -1,3 +1,4 @@
+# Tokens
 b_0_0_germ.jpg                         http://www.cardforge.org/fpics/tokens/b_0_0_germ.jpg
 b_0_1_insect.jpg                       http://www.cardforge.org/fpics/tokens/b_0_1_insect.jpg
 b_0_1_serf.jpg                         http://www.cardforge.org/fpics/tokens/b_0_1_serf.jpg
@@ -343,7 +344,7 @@ wb_1_1_spirit_gtc.jpg                  http://www.cardforge.org/fpics/tokens/wb_
 wrg_8_8_beast.jpg                      http://www.cardforge.org/fpics/tokens/wrg_8_8_beast.jpg
 wu_1_1_bird.jpg                        http://www.cardforge.org/fpics/tokens/wu_1_1_bird.jpg
 
-# //Emblems and extras
+# Emblems
 chandra_the_firebrand_effect.jpg       http://www.cardforge.org/fpics/effects/chandra_the_firebrand_effect.jpg
 domri_rade_emblem.jpg                  http://www.cardforge.org/fpics/effects/domri_rade_emblem.jpg
 elspeth_knight_errant_emblem.jpg       http://www.cardforge.org/fpics/effects/elspeth_knight_errant_emblem.jpg
@@ -355,4 +356,8 @@ liliana_of_the_dark_realms_emblem.jpg  http://www.cardforge.org/fpics/effects/li
 sorin_lord_of_innistrad_emblem.jpg     http://www.cardforge.org/fpics/effects/sorin_lord_of_innistrad_emblem.jpg
 tamiyo_the_moon_sage_emblem.jpg        http://www.cardforge.org/fpics/effects/tamiyo_the_moon_sage_emblem.jpg
 venser_the_sojourner_emblem.jpg        http://www.cardforge.org/fpics/effects/venser_the_sojourner_emblem.jpg
-morph.jpg                              http://www.cardforge.org/fpics/effects/morph.jpg
+
+# Other
+hidden.jpg                             http://www.cardforge.org/fpics/effects/morph.jpg
+morph.jpg                              http://www.cardforge.link/data/images/effects/morph.jpg
+manifest.jpg                           http://www.cardforge.link/data/images/effects/manifest.jpg

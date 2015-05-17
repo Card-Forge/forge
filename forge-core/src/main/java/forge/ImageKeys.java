@@ -21,16 +21,23 @@ public class ImageKeys {
     public static final String PRECON_PREFIX         = "p:";
     public static final String TOURNAMENTPACK_PREFIX = "o:";
 
-    public static final String MORPH_IMAGE          = "morph";
-    public static final String HIDDEN_CARD          = TOKEN_PREFIX + MORPH_IMAGE;
-    
+    public static final String HIDDEN_CARD           = "hidden";
+    public static final String MORPH_IMAGE           = "morph";
+    public static final String MANIFEST_IMAGE        = "manifest";
+
     public static final String BACKFACE_POSTFIX  = "$alt";
 
     private static String CACHE_CARD_PICS_DIR, CACHE_TOKEN_PICS_DIR, CACHE_ICON_PICS_DIR, CACHE_BOOSTER_PICS_DIR,
         CACHE_FATPACK_PICS_DIR, CACHE_BOOSTERBOX_PICS_DIR, CACHE_PRECON_PICS_DIR, CACHE_TOURNAMENTPACK_PICS_DIR;
     private static Map<String, String> CACHE_CARD_PICS_SUBDIR;
 
-    private static HashMap<String, Boolean> editionImageLookup = new HashMap<String, Boolean>();
+    private static Map<String, Boolean> editionImageLookup = new HashMap<String, Boolean>();
+
+    /**
+     * Private constructor to prevent instantiation.
+     */
+    private ImageKeys() {
+    }
 
     public static void initializeDirs(String cards, Map<String, String> cardsSub, String tokens, String icons, String boosters,
             String fatPacks, String boosterBoxes, String precons, String tournamentPacks) {
