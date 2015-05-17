@@ -20,6 +20,7 @@ subdirectory of your image cache, which can be found here:
 - Mac:     [home directory]/Library/Caches/Forge/pics
 - Linux:   [home directory]/.cache/forge/pics
 
+
 - Interface Update -
 The interface has received several small changes.
 - The "Players" panel has been removed. This information can now be viewed by
@@ -28,6 +29,7 @@ The interface has received several small changes.
   This is only visible if the player has any poison counters.
 - The poison counters button has been replaced with a Command Zone button.
   The command zone panels have been removed.
+
 
 - Display tokens on the same row as other cards / on their own row -
 It is now possible to make the game display tokens on the same row as other
@@ -40,6 +42,7 @@ tokens together with other cards as opposed to in their own row, which will make
 the game use your screen space more effectively. Tokens will be displayed to the
 right of the non-token cards in the same row.
 
+
 - Network play (BETA) -
 This version of Forge includes a preliminary version of peer-to-peer (P2P)
 network support. If one player hosts, other players can connect to that
@@ -48,14 +51,17 @@ player's machine by filling out the corresponding IP address and port number
 Do not expect network support to work reliably yet, any bug reports or other
 comments are welcome!
 
+
 - Smarter Deck Color Determination -
 When determining the color of decks, colors of hybrid and phyrexian cards are no
 longer considered unless they can be produced by a land in the deck
+
 
 - Land Color Filtering in Deck Editor -
 When filtering colors in the Deck Editor, lands that produce all selected colors will now be shown
 This means if you filter to show only green and white cards, lands that produce green and white will now be shown
 This should hopefully make finding multicolor lands for your decks easier
+
 
 - Quest Starting Pool Configuration -
 When starting a new quest, you now have many more options to configure your starting pool. Instead of just picking a
@@ -64,17 +70,27 @@ the pool alongside your colored cards or not.
 The "color bias" option in the quest settings is now the percentage of your generated card pool that will contain the
 settings you've selected. For example, if you picked Green cards and a color bias of 75, your card pool would be 75%
 green, 25% all other colors.
+
 Finally, there's three settings to choose your color distribution. "Balanced" maintains an equal balance between your
 selected colors. "Random" completely randomizes the pool and makes only miniscule attempts to control the cards you get.
 "Surprise Me" is much like "Balanced", except it will pick all your settings for you and not tell you what they were!
 The New/Load quest menu has been given a small facelift to accommodate these changes and make it easier to read.
 You will need to update your color bias quest setting as the values are now much too low.
 
+
 ---------
 New Cards
 ---------
 
 Risen Executioner
+Draconic Roar
+Foul-Tongue Invocation
+Orator of Ojutai
+Dragonlord's Prerogative
+Scaleguard Sentinels
+Silumgar's Scorn
+Commune with Lava
+Taste of Paradise
 
 
 --------------------
@@ -89,7 +105,6 @@ Known Issues
 ------------
 
 - Dragon Presence cards from DTK -
-
 Work has started on the Dragon Presence cards. These cards should typically work on their own merits, but a few corner cases dealing with copying/cloning may not work as expected. As these cases are fairly limited, it was decided to add these cards for people to be able to use. 
 
 - Dragons of Tarkir -
