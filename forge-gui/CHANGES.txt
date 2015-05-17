@@ -17,6 +17,15 @@ The interface has received several small changes.
 - The poison counters button has been replaced with a Command Zone button.
   The command zone panels have been removed.
 
+- Display tokens on the same row as other cards -
+It is now possible to make the game display tokens on the same row as other
+cards to conserve battlefield space (for example, creature tokens are displayed
+on the same row as creatures). The option that controls this behavior can be 
+found in Forge preferences under "Graphic Options". It is called "Display Tokens
+on a Separate Row", which defaults to "enabled" until the new mode is tested
+thoroughly. If you disable this option, the game will display tokens together
+with other cards as opposed to in their own row.
+
 - Network play (BETA) -
 This version of Forge includes a preliminary version of peer-to-peer (P2P)
 network support. If one player hosts, other players can connect to that
