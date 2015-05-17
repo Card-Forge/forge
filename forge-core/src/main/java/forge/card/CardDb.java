@@ -550,8 +550,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     public String getEquivalentCardName(String name) {
         boolean hasSetInfo = name.indexOf('|') != -1;
-        String cardName = !hasSetInfo ? name : name.substring(0, name.indexOf('|'));
-        String setInfo = !hasSetInfo ? "" : name.substring(name.indexOf("|"));
+        String cardName = !hasSetInfo ? name : StringUtils.substring(name, 0, name.indexOf('|'));
+        String setInfo = !hasSetInfo ? "" : StringUtils.substring(name, name.indexOf("|"));
         return accentedCardNameEquivalents.containsKey(cardName) ? String.format("%s%s", accentedCardNameEquivalents.get(cardName), setInfo) : 
                 String.format("%s%s", name, setInfo);
     }
