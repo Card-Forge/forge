@@ -58,7 +58,7 @@ public class CDetail implements ICDoc {
     void showCard(final CardView c, final boolean isInAltState, final boolean mayView, final boolean mayFlip) {
         final CardView toShow = mayView ? c : null;
         view.getLblFlipcard().setVisible(toShow != null && mayFlip);
-        view.getPnlDetail().setCard(toShow, isInAltState, mayView);
+        view.getPnlDetail().setCard(toShow, isInAltState);
         if (view.getParentCell() != null) {
             view.getParentCell().repaintSelf();
         }
