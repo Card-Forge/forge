@@ -34,7 +34,6 @@ import forge.card.CardDetailUtil;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
-import forge.card.CardStateName;
 import forge.game.GameView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
@@ -173,6 +172,10 @@ public class CardDetailPanel extends SkinnedPanel {
     }
 
     public final void setCard(final CardView card, final boolean isInAltState) {
+        setCard(card, false, true);
+    }
+
+    public final void setCard(final CardView card, final boolean isInAltState, final boolean canShow) {
         nameCostLabel.setText("");
         typeLabel.setVisible(true);
         typeLabel.setText("");
@@ -195,8 +198,6 @@ public class CardDetailPanel extends SkinnedPanel {
             updateBorder(null, false);
             return;
         }
-
-        boolean canShow = true;
 
         if (state.getManaCost().isNoCost() || !canShow) {
             nameCostLabel.setText(CardDetailUtil.formatCardName(card, canShow, isInAltState));
@@ -262,11 +263,7 @@ public class CardDetailPanel extends SkinnedPanel {
             setInfoLabel.setBorder(BorderFactory.createLineBorder(foreColor));
         }
 
-        if (state.getState() == CardStateName.FaceDown) {
-            updateBorder(state, false); // do not spoil the color of face-down cards
-        } else {
-            updateBorder(state, canShow);
-        }
+        updateBorder(state, canShow);
 
         powerToughnessLabel.setText(CardDetailUtil.formatPowerToughness(state, canShow));
 
