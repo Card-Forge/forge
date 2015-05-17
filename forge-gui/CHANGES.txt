@@ -8,6 +8,29 @@ Forge Beta: #-#-2015 ver 1.5.39
 Release Notes
 -------------
 
+- Special characters in card names -
+Many cards with special characters in their names, most notably those whose name
+contains "Lim-Dûl", have been fixed to contain those characters. Your deck
+files may need to be updated accordingly. The full list of cards is as follows:
+- Dandân
+- Déjà Vu
+- El Hallâj
+- Ghazbán Ogre
+- Ifh-Bíff Efreet
+- Junún Efreet
+- Juzám Djinn
+- Khabál Ghoul
+- Legions of Lim-Dûl
+- Lim-Dûl the Necromancer
+- Lim-Dûl's Cohort
+- Lim-Dûl's Hex
+- Lim-Dûl's High Guard
+- Lim-Dûl's Paladin
+- Lim-Dûl's Vault
+- Márton Stromgald
+- Oath of Lim-Dûl
+- Séance
+
 - Morph/Manifest images -
 Forge now supports proper images for face-down creatures. In order to correctly
 use these images, it's necessary to remove a file in your picture directory

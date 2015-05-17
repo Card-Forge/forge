@@ -127,7 +127,7 @@ C Saving Grasp
 C Scorch the Fields
 C Scorned Villager
 C Screeching Skaab
-R Seance
+R Séance
 U Secrets of the Dead
 U Shattered Perception
 C Shriekgeist

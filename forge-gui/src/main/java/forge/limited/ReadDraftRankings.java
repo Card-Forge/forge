@@ -1,16 +1,18 @@
 package forge.limited;
 
-import com.esotericsoftware.minlog.Log;
-import forge.properties.ForgeConstants;
-import forge.util.FileUtil;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.esotericsoftware.minlog.Log;
+
+import forge.properties.ForgeConstants;
+import forge.util.FileUtil;
+
 /**
  * ReadDraftRankings class.
- * 
  */
 public class ReadDraftRankings {
 
@@ -30,19 +32,23 @@ public class ReadDraftRankings {
         this.draftRankings = this.readFile(FileUtil.readFile(ForgeConstants.DRAFT_RANKINGS_FILE));
     } // setup()
 
+    private static String getRankingCardName(final String name) {
+        return StringUtils.replaceChars(name.trim(), "-áàâéèêúùûíìîóòô", " aaaeeeuuuiiiooo").replaceAll("[^A-Za-z ]", "");
+    }
+
     /**
      * <p>
      * readFile.
      * </p>
-     * 
+     *
      * @param file
      *            a {@link java.io.File} object.
      * @return a {@link java.util.Map} object.
      */
-    private Map<String, Map<String, Integer>> readFile(List<String> lines) {
+    private Map<String, Map<String, Integer>> readFile(final List<String> lines) {
 
         final Map<String, Map<String, Integer>> map = new HashMap<String, Map<String, Integer>>();
-        for (String line : lines) {
+        for (final String line : lines) {
             // stop reading if end of file or blank line is read
             if (line == null || line.length() == 0) {
                 break;
@@ -53,7 +59,7 @@ public class ReadDraftRankings {
             }
             final String[] s = line.split("\\|");
             final String rankStr = s[0].trim().substring(1);
-            final String name = s[1].trim().replaceAll("-", " ").replaceAll("[^A-Za-z ]", "");
+            final String name = getRankingCardName(s[1]);
             // final String rarity = s[2].trim();
             final String edition = s[3].trim();
 
@@ -68,7 +74,7 @@ public class ReadDraftRankings {
                 } else {
                     setSizes.put(edition, rank);
                 }
-            } catch (NumberFormatException nfe) {
+            } catch (final NumberFormatException nfe) {
                 Log.warn("NumberFormatException: " + nfe.getMessage());
             }
         }
@@ -78,26 +84,24 @@ public class ReadDraftRankings {
 
     /**
      * Get the relative ranking for the given card name in the given edition.
-     * 
+     *
      * @param cardName
      *            the card name
      * @param edition
      *            the card's edition
      * @return ranking
      */
-    public Double getRanking(String cardName, String edition) {
-        Double rank = null;
-
+    public Double getRanking(final String cardName, final String edition) {
         if (draftRankings.containsKey(edition)) {
-            String safeName = cardName.replaceAll("-", " ").replaceAll("[^A-Za-z ]", "");
+            final String safeName = getRankingCardName(cardName);
 
             // If a card has no ranking, don't try to look it up --BBU
             if (draftRankings.get(edition).get(safeName) == null) {
                 // System.out.println("WARNING! " + safeName + " NOT found in " + edition);
                 return null;
             }
-            rank = (double) draftRankings.get(edition).get(safeName) / (double) setSizes.get(edition);
+            return Double.valueOf(draftRankings.get(edition).get(safeName).doubleValue() / setSizes.get(edition).doubleValue());
         }
-        return rank;
+        return null;
     }
 }

@@ -23,7 +23,7 @@ S Cockatrice
 S Consecrate Land
 S Conspiracy
 S Craw Giant
-S Dandan
+S Dandân
 S Darkness
 S Dauthi Slayer
 S Defiant Vanguard

@@ -28,14 +28,14 @@ U City of Brass
 C Cuombajj Witches
 U Cyclone
 R Dancing Scimitar
-C Dandan
+C Dandân
 C Desert
 C Desert Nomads
 U Desert Twister
 U Diamond Valley
 R Drop of Honey
 R Ebony Horse
-R El-Hajjaj
+R El-Hajjâj
 R Elephant Graveyard
 C Erg Raiders
 C Erg Raiders
@@ -45,23 +45,23 @@ C Fishliver Oil
 C Fishliver Oil
 U Flying Carpet
 C Flying Men
-C Ghazban Ogre
+C Ghazbán Ogre
 C Giant Tortoise
 C Giant Tortoise
 R Guardian Beast
 C Hasran Ogress
 C Hasran Ogress
 C Hurr Jackal
-R Ifh-Biff Efreet
+R Ifh-Bíff Efreet
 R Island Fish Jasconius
 R Island of Wak-Wak
 R Jandor's Ring
 R Jandor's Saddlebags
 U Jeweled Bird
 R Jihad
-R Junun Efreet
-R Juzam Djinn
-U Khabal Ghoul
+R Junún Efreet
+R Juzám Djinn
+U Khabál Ghoul
 R King Suleiman
 C Kird Ape
 U Library of Alexandria

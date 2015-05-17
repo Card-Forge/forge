@@ -213,19 +213,19 @@ R Land Cap
 U Lapis Lazuli Talisman
 C Lava Burst
 R Lava Tubes
-C Legions of Lim-Dul
+C Legions of Lim-Dûl
 U Leshrac's Rite
 U Leshrac's Sigil
 R Lhurgoyf
 R Lightning Blow
-C Lim-Dul's Cohort
-U Lim-Dul's Hex
+C Lim-Dûl's Cohort
+U Lim-Dûl's Hex
 R Lost Order of Jarkeld
 U Lure
 U Maddening Wind
 R Magus of the Unseen
 U Malachite Talisman
-R Marton Stromgald
+R Márton Stromgald
 U Melee
 U Melting
 R Mercenaries
@@ -255,7 +255,7 @@ R Naked Singularity
 U Nature's Lore
 R Necropotence
 C Norritt
-R Oath of Lim-Dul
+R Oath of Lim-Dûl
 U Onyx Talisman
 U Orcish Cannoneers
 C Orcish Conscripts

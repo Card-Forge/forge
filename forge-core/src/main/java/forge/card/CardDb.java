@@ -165,7 +165,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         for (CardRules cr : rulesByName.values()) {
             if (!allCardsByName.containsKey(cr.getName())) {
-                System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/cardeditions/ folder. ");
+                System.err.println(String.format("The card  %s was not assigned to any set. Adding it to UNKNOWN set... to fix see res/editions/ folder. ", cr.getName()));
                 addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special, 1));
             }
         }

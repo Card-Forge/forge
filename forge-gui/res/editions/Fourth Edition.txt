@@ -111,7 +111,7 @@ C Dwarven Warriors
 U Earth Elemental
 R Earthquake
 R Ebony Horse
-R El-Hajjaj
+R El-Hajjâj
 R Elder Land Wurm
 U Elven Riders
 R Elvish Archers
@@ -188,7 +188,7 @@ R Jade Monolith
 R Jandor's Saddlebags
 R Jayemdae Tome
 C Jump
-U Junun Efreet
+U Junún Efreet
 U Karma
 U Keldon Warlord
 U Killer Bees
