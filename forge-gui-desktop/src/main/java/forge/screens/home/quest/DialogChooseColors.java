@@ -117,8 +117,6 @@ public class DialogChooseColors {
         left.setOpaque(false);
         left.add(new FLabel.Builder().text("Distribution").fontSize(18).build(), "gaptop 10");
 
-        radBalanced.setSelected(true);
-
         final JXButtonPanel poolTypePanel = new JXButtonPanel();
         final String radioConstraints = "h 25px!, gaptop 5";
         poolTypePanel.add(radBalanced, radioConstraints);
