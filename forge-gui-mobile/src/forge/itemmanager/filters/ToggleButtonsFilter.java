@@ -1,5 +1,10 @@
 package forge.itemmanager.filters;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+
 import forge.assets.FImage;
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
@@ -7,14 +12,11 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.toolbox.FLabel;
-import java.util.ArrayList;
-
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 
 public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemFilter<T> {
     protected boolean lockFiltering;
-    private final ArrayList<FLabel> buttons = new ArrayList<FLabel>();
+    private final List<FLabel> buttons = new ArrayList<FLabel>();
 
     protected ToggleButtonsFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);

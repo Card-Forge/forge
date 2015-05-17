@@ -110,7 +110,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     protected ApiType api = null;
 
-    private final ArrayList<Mana> payingMana = new ArrayList<Mana>();
+    private final List<Mana> payingMana = new ArrayList<Mana>();
     private final List<SpellAbility> paidAbilities = new ArrayList<SpellAbility>();
 
     private HashMap<String, CardCollection> paidLists = new HashMap<String, CardCollection>();
@@ -946,8 +946,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
-    public final ArrayList<TargetChoices> getAllTargetChoices() {
-        final ArrayList<TargetChoices> res = new ArrayList<TargetChoices>();
+    public final List<TargetChoices> getAllTargetChoices() {
+        final List<TargetChoices> res = new ArrayList<TargetChoices>();
 
         SpellAbility sa = getRootAbility();
         if (sa.getTargetRestrictions() != null) {

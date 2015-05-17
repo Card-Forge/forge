@@ -94,7 +94,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     private final Class<T> genericType;
     private final CDetailPicture cDetailPicture;
     private ItemManagerConfig config;
-    private final ArrayList<ListSelectionListener> selectionListeners = new ArrayList<ListSelectionListener>();
+    private final List<ListSelectionListener> selectionListeners = new ArrayList<ListSelectionListener>();
 
     private final SkinnedCheckBox chkEnableFilters = new SkinnedCheckBox();
 

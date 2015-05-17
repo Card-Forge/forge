@@ -3,6 +3,7 @@ package forge.assets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.text.WordUtils;
@@ -30,7 +31,7 @@ public class FSkin {
     private static final Map<FSkinProp, FSkinImage> images = new HashMap<FSkinProp, FSkinImage>();
     private static final Map<Integer, TextureRegion> avatars = new HashMap<Integer, TextureRegion>();
 
-    private static ArrayList<String> allSkins;
+    private static List<String> allSkins;
     private static FileHandle preferredDir;
     private static String preferredName;
     private static boolean loaded = false;
@@ -98,9 +99,9 @@ public class FSkin {
             if (splashScreen != null) {
                 if (allSkins == null) { //initialize
                     allSkins = new ArrayList<String>();
-                    ArrayList<String> skinDirectoryNames = getSkinDirectoryNames();
-                    for (int i = 0; i < skinDirectoryNames.size(); i++) {
-                        allSkins.add(WordUtils.capitalize(skinDirectoryNames.get(i).replace('_', ' ')));
+                    final List<String> skinDirectoryNames = getSkinDirectoryNames();
+                    for (final String skinDirectoryName : skinDirectoryNames) {
+                        allSkins.add(WordUtils.capitalize(skinDirectoryName.replace('_', ' ')));
                     }
                     Collections.sort(allSkins);
                 }
@@ -300,8 +301,8 @@ public class FSkin {
      *
      * @return the skins
      */
-    public static ArrayList<String> getSkinDirectoryNames() {
-        final ArrayList<String> mySkins = new ArrayList<String>();
+    public static List<String> getSkinDirectoryNames() {
+        final List<String> mySkins = new ArrayList<String>();
 
         final FileHandle dir = Gdx.files.absolute(ForgeConstants.SKINS_DIR);
         for (FileHandle skinFile : dir.list()) {

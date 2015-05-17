@@ -2,6 +2,7 @@ package forge.toolbox;
 
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
+import java.util.List;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -9,7 +10,7 @@ import forge.Graphics;
 import forge.error.BugReporter;
 
 public abstract class FContainer extends FDisplayObject {
-    private final ArrayList<FDisplayObject> children = new ArrayList<FDisplayObject>();
+    private final List<FDisplayObject> children = new ArrayList<FDisplayObject>();
 
     public <T extends FDisplayObject> T add(T child) {
         children.add(child);
@@ -103,7 +104,7 @@ public abstract class FContainer extends FDisplayObject {
     protected abstract void doLayout(float width, float height);
 
     @Override
-    public void buildTouchListeners(float screenX, float screenY, ArrayList<FDisplayObject> listeners) {
+    public void buildTouchListeners(float screenX, float screenY, List<FDisplayObject> listeners) {
         if (isEnabled() && isVisible() && screenPos.contains(screenX, screenY)) {
             for (int i = children.size() - 1; i >= 0; i--) {
                 children.get(i).buildTouchListeners(screenX, screenY, listeners);

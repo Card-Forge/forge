@@ -1,6 +1,7 @@
 package forge.toolbox;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 import com.badlogic.gdx.Input.Keys;
@@ -47,7 +48,7 @@ public abstract class FOverlay extends FContainer {
         if (overlays.size() < 2) {
             return overlays; //don't need to create new list if one or fewer overlay
         }
-        ArrayList<FOverlay> reversedList = new ArrayList<FOverlay>();
+        List<FOverlay> reversedList = new ArrayList<FOverlay>();
         for (int i = overlays.size() - 1; i >= 0; i--) {
             reversedList.add(overlays.get(i));
         }
@@ -183,7 +184,7 @@ public abstract class FOverlay extends FContainer {
     }
 
     @Override
-    public void buildTouchListeners(float screenX, float screenY, ArrayList<FDisplayObject> listeners) {
+    public void buildTouchListeners(float screenX, float screenY, List<FDisplayObject> listeners) {
         if (tempOverlay == this) { return; } //suppress touch events if waiting to be hidden
 
         super.buildTouchListeners(screenX, screenY, listeners);

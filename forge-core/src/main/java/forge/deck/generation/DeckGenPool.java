@@ -1,6 +1,7 @@
 package forge.deck.generation;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -8,7 +9,7 @@ import com.google.common.collect.Iterables;
 import forge.item.PaperCard;
 
 public class DeckGenPool implements IDeckGenPool {
-    private final HashMap<String, PaperCard> cards = new HashMap<String, PaperCard>();
+    private final Map<String, PaperCard> cards = new HashMap<String, PaperCard>();
 
     public DeckGenPool() {
     }

@@ -17,15 +17,17 @@
  */
 package forge.game.cost;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.game.card.Card;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
 
 /**
  * The Class CostAddMana.
@@ -73,7 +75,7 @@ public class CostAddMana extends CostPart {
         if (ai.getGame().getRules().hasCommander()) {
             cid = ai.getCommander().getRules().getColorIdentity();
         }
-        ArrayList<Mana> manaProduced = new ArrayList<Mana>();
+        List<Mana> manaProduced = new ArrayList<Mana>();
         final String type = this.getType();
         for (int n = 0; n < decision.c; n++) {
             if (StringUtils.isNumeric(type)) {

@@ -50,7 +50,7 @@ public class BoosterDraftAI {
 
     // holds all the cards for each of the computer's decks
     protected final List<List<PaperCard>> deck = new ArrayList<List<PaperCard>>();
-    protected final ArrayList<DeckColors> playerColors = new ArrayList<DeckColors>();
+    protected final List<DeckColors> playerColors = new ArrayList<DeckColors>();
 
     // roughly equivalent to 25 ranks in a core set, or 15 ranks in a small set
     private static final double TAKE_BEST_THRESHOLD = 0.1;

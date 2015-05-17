@@ -1,11 +1,11 @@
 package forge.toolbox;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.badlogic.gdx.math.Vector2;
 
-import forge.animation.ForgeAnimation;
 import forge.Graphics;
+import forge.animation.ForgeAnimation;
 import forge.util.PhysicsObject;
 import forge.util.Utils;
 
@@ -273,7 +273,7 @@ public abstract class FScrollPane extends FContainer {
     }
 
     @Override
-    public void buildTouchListeners(float screenX, float screenY, ArrayList<FDisplayObject> listeners) {
+    public void buildTouchListeners(float screenX, float screenY, List<FDisplayObject> listeners) {
         //if fling animation active, stop it and prevent child controls handling touch events before next touch down unless already moving really slow
         if (activeFlingAnimation != null) {
             boolean suppressEvent = activeFlingAnimation.physicsObj.getVelocity().len() > Utils.AVG_FINGER_HEIGHT;

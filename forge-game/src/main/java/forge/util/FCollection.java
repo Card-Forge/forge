@@ -16,7 +16,7 @@ import java.util.Set;
 public class FCollection<T> implements List<T>, Set<T>, FCollectionView<T>, Cloneable, Serializable {
     private static final long serialVersionUID = -1664555336364294106L;
 
-    private final HashSet<T> set = new HashSet<T>();
+    private final Set<T> set = new HashSet<T>();
     private final LinkedList<T> list = new LinkedList<T>();
 
     public FCollection() {

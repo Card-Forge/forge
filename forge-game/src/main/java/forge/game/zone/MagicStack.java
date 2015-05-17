@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.Map.Entry;
 import java.util.Stack;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -377,7 +378,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 s = si.getSpellAbility(true);
             }
             runParams.put("SourceSA", s);
-            HashSet<Object> distinctObjects = new HashSet<Object>();
+            Set<Object> distinctObjects = new HashSet<Object>();
             for (final TargetChoices tc : chosenTargets) {
                 if (tc != null && tc.getTargetCards() != null) {
                     for (final Object tgt : tc.getTargets()) {

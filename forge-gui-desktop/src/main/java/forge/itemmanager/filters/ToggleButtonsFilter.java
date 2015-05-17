@@ -1,18 +1,20 @@
 package forge.itemmanager.filters;
 
+import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.Icon;
+import javax.swing.JPanel;
+
 import forge.UiCommand;
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
-import forge.toolbox.LayoutHelper;
 import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinImage;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.util.ArrayList;
+import forge.toolbox.LayoutHelper;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -21,7 +23,7 @@ import java.util.ArrayList;
 @SuppressWarnings("serial")
 public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemFilter<T> {
     protected boolean lockFiltering;
-    private final ArrayList<FLabel> buttons = new ArrayList<FLabel>();
+    private final List<FLabel> buttons = new ArrayList<FLabel>();
 
     protected ToggleButtonsFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);

@@ -2007,8 +2007,8 @@ public class CardFactoryUtil {
         return types.size();
     }
 
-    public static ArrayList<SpellAbility> getBushidoEffects(final Card c) {
-        final ArrayList<SpellAbility> list = new ArrayList<SpellAbility>();
+    public static List<SpellAbility> getBushidoEffects(final Card c) {
+        final List<SpellAbility> list = new ArrayList<SpellAbility>();
         for (final String kw : c.getKeywords()) {
             if (kw.contains("Bushido")) {
                 final String[] parse = kw.split(" ");

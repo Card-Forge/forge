@@ -37,7 +37,7 @@ import java.util.Map;
 public class CostPayment {
     private final Cost cost;
     private final SpellAbility ability;
-    private final ArrayList<CostPart> paidCostParts = new ArrayList<CostPart>();
+    private final List<CostPart> paidCostParts = new ArrayList<CostPart>();
 
     /**
      * <p>

@@ -10,19 +10,17 @@ import forge.Graphics;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOverlay;
 
-
 public class ForgeTransition extends ForgeAnimation {
     private static final FOverlay overlay = new FOverlay(null) {
-        @Override
-        protected void doLayout(float width, float height) {
+        @Override protected void doLayout(final float width, final float height) {
         }
     };
     private static final Map<FDisplayObject, TransitionObject> transitionLookup = new LinkedHashMap<FDisplayObject, TransitionObject>();
 
-    public static void queue(FDisplayObject obj, Rectangle destBounds, float duration, Runnable onFinished) {
+    public static void queue(final FDisplayObject obj, final Rectangle destBounds, final float duration, final Runnable onFinished) {
         queue(obj, destBounds, duration, 0, false, onFinished);
     }
-    public static void queue(FDisplayObject obj, Rectangle destBounds, float duration, float arcAmount, boolean arcOriginBelow, Runnable onFinished) {
+    public static void queue(final FDisplayObject obj, final Rectangle destBounds, final float duration, final float arcAmount, final boolean arcOriginBelow, final Runnable onFinished) {
         TransitionObject transitionObj = transitionLookup.get(obj);
         if (transitionObj == null) {
             transitionObj = new TransitionObject(obj);
@@ -30,7 +28,7 @@ public class ForgeTransition extends ForgeAnimation {
             overlay.add(transitionObj);
             obj.setVisible(false); //hide original object while transition in progress
         }
-        ForgeTransition transition = new ForgeTransition(transitionObj, destBounds, duration, arcAmount, arcOriginBelow, onFinished);
+        final ForgeTransition transition = new ForgeTransition(transitionObj, destBounds, duration, arcAmount, arcOriginBelow, onFinished);
         transitionObj.transitions.add(transition);
         if (transitionObj.transitions.size() == 1) {
             transition.start(); //start transition right away if first transition added
@@ -45,7 +43,7 @@ public class ForgeTransition extends ForgeAnimation {
     private final boolean arcOriginBelow;*/
     private final Runnable onFinished;
 
-    private ForgeTransition(TransitionObject obj0, Rectangle destBounds0, float duration0, float arcAmount0, boolean arcOriginBelow0, Runnable onFinished0) {
+    private ForgeTransition(final TransitionObject obj0, final Rectangle destBounds0, final float duration0, final float arcAmount0, final boolean arcOriginBelow0, final Runnable onFinished0) {
         obj = obj0;
         /*destBounds = destBounds0;
         duration = duration0;
@@ -55,12 +53,12 @@ public class ForgeTransition extends ForgeAnimation {
     }
 
     @Override
-    protected boolean advance(float dt) {
+    protected boolean advance(final float dt) {
         return false;
     }
 
     @Override
-    protected void onEnd(boolean endingAll) {
+    protected void onEnd(final boolean endingAll) {
         if (onFinished != null) {
             onFinished.run();
         }
@@ -70,7 +68,7 @@ public class ForgeTransition extends ForgeAnimation {
             return;
         }
 
-        int index = obj.transitions.indexOf(this);
+        final int index = obj.transitions.indexOf(this);
         obj.transitions.remove(index);
         if (index == 0) {
             if (obj.transitions.isEmpty()) {
@@ -91,13 +89,13 @@ public class ForgeTransition extends ForgeAnimation {
         private final FDisplayObject originalObj;
         private final LinkedList<ForgeTransition> transitions = new LinkedList<ForgeTransition>();
 
-        private TransitionObject(FDisplayObject originalObj0) {
+        private TransitionObject(final FDisplayObject originalObj0) {
             originalObj = originalObj0;
             setBounds(originalObj.screenPos.x, originalObj.screenPos.y, originalObj.getWidth(), originalObj.getHeight());
         }
 
         @Override
-        public void draw(Graphics g) {
+        public void draw(final Graphics g) {
             originalObj.draw(g);
         }
     }

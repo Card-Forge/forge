@@ -61,7 +61,7 @@ import java.util.Map.Entry;
 public class SealedCardPoolGenerator {
     public static final String FILE_EXT = ".sealed";
 
-    private final ArrayList<IUnOpenedProduct> product = new ArrayList<IUnOpenedProduct>();
+    private final List<IUnOpenedProduct> product = new ArrayList<IUnOpenedProduct>();
 
     /** The Land set code. */
     private String landSetCode = null;
@@ -216,7 +216,7 @@ public class SealedCardPoolGenerator {
 
             case Custom:
                 String[] dList;
-                final ArrayList<CustomLimited> customs = new ArrayList<CustomLimited>();
+                final List<CustomLimited> customs = new ArrayList<CustomLimited>();
 
                 // get list of custom draft files
                 final File dFolder = new File(ForgeConstants.SEALED_DIR);
@@ -278,9 +278,9 @@ public class SealedCardPoolGenerator {
      * 
      * @return an ArrayList of the set choices.
      */
-    private static ArrayList<String> getSetCombos(final List<String> setz, final int nPacks) {
+    private static List<String> getSetCombos(final List<String> setz, final int nPacks) {
         String[] sets = setz.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
-        ArrayList<String> setCombos = new ArrayList<String>();
+        List<String> setCombos = new ArrayList<String>();
 
         if (nPacks == 3) {
             if (sets.length >= 2) {

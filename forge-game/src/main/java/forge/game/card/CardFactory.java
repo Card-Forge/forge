@@ -642,7 +642,7 @@ public class CardFactory {
         }
 
         private static String[] getCardTypes(Card c) {
-            ArrayList<String> relevantTypes = new ArrayList<String>();
+            List<String> relevantTypes = new ArrayList<String>();
             for (CoreType t : c.getType().getCoreTypes()) {
                 relevantTypes.add(t.name());
             }

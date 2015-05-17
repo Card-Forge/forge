@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-
 public class ProtectEffect extends SpellAbilityEffect {
 
     /* (non-Javadoc)
@@ -122,7 +121,7 @@ public class ProtectEffect extends SpellAbilityEffect {
             }
         }
 
-        final ArrayList<Card> untargetedCards = new ArrayList<Card>();
+        final List<Card> untargetedCards = new ArrayList<Card>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         if (sa.hasParam("Radiance") && (tgt != null)) {
@@ -205,7 +204,7 @@ public class ProtectEffect extends SpellAbilityEffect {
     
 
     public static List<String> getProtectionList(final SpellAbility sa) {
-        final ArrayList<String> gains = new ArrayList<String>();
+        final List<String> gains = new ArrayList<String>();
 
         final String gainStr = sa.getParam("Gains");
         if (gainStr.equals("Choice")) {

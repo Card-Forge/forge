@@ -238,7 +238,7 @@ public class QuestDataIO {
 
             QuestDataIO.setFinalField(QuestAchievements.class, "challengesPlayed", qA, Integer.parseInt(document.getElementsByTagName("challengesPlayed").item(0).getTextContent()));
 
-            final ArrayList<Integer> completedChallenges = new ArrayList<>();
+            final List<Integer> completedChallenges = new ArrayList<>();
             QuestDataIO.setFinalField(QuestAchievements.class, "completedChallenges", qA, completedChallenges);
 
             if ((nw = document.getElementsByTagName("completedChallenges").item(0)) != null) {

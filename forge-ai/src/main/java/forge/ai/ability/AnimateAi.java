@@ -290,17 +290,17 @@ public class AnimateAi extends SpellAbilityAi {
             types.add(source.getChosenType());
         }
 
-        final ArrayList<String> keywords = new ArrayList<String>();
+        final List<String> keywords = new ArrayList<String>();
         if (sa.hasParam("Keywords")) {
             keywords.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
         }
 
-        final ArrayList<String> removeKeywords = new ArrayList<String>();
+        final List<String> removeKeywords = new ArrayList<String>();
         if (sa.hasParam("RemoveKeywords")) {
             removeKeywords.addAll(Arrays.asList(sa.getParam("RemoveKeywords").split(" & ")));
         }
 
-        final ArrayList<String> hiddenKeywords = new ArrayList<String>();
+        final List<String> hiddenKeywords = new ArrayList<String>();
         if (sa.hasParam("HiddenKeywords")) {
             hiddenKeywords.addAll(Arrays.asList(sa.getParam("HiddenKeywords").split(" & ")));
         }
@@ -327,31 +327,31 @@ public class AnimateAi extends SpellAbilityAi {
         final String finalDesc = tmpDesc;
 
         // abilities to add to the animated being
-        final ArrayList<String> abilities = new ArrayList<String>();
+        final List<String> abilities = new ArrayList<String>();
         if (sa.hasParam("Abilities")) {
             abilities.addAll(Arrays.asList(sa.getParam("Abilities").split(",")));
         }
 
         // replacement effects to add to the animated being
-        final ArrayList<String> replacements = new ArrayList<String>();
+        final List<String> replacements = new ArrayList<String>();
         if (sa.hasParam("Replacements")) {
             replacements.addAll(Arrays.asList(sa.getParam("Replacements").split(",")));
         }
 
         // triggers to add to the animated being
-        final ArrayList<String> triggers = new ArrayList<String>();
+        final List<String> triggers = new ArrayList<String>();
         if (sa.hasParam("Triggers")) {
             triggers.addAll(Arrays.asList(sa.getParam("Triggers").split(",")));
         }
 
         // static abilities to add to the animated being
-        final ArrayList<String> stAbs = new ArrayList<String>();
+        final List<String> stAbs = new ArrayList<String>();
         if (sa.hasParam("staticAbilities")) {
             stAbs.addAll(Arrays.asList(sa.getParam("staticAbilities").split(",")));
         }
 
         // sVars to add to the animated being
-        final ArrayList<String> sVars = new ArrayList<String>();
+        final List<String> sVars = new ArrayList<String>();
         if (sa.hasParam("sVars")) {
             sVars.addAll(Arrays.asList(sa.getParam("sVars").split(",")));
         }
@@ -413,7 +413,7 @@ public class AnimateAi extends SpellAbilityAi {
         //back to duplicating AnimateEffect.resolve
         //TODO will all these abilities/triggers/replacements/etc. lead to memory leaks or unintended effects?
      // remove abilities
-        final ArrayList<SpellAbility> removedAbilities = new ArrayList<SpellAbility>();
+        final List<SpellAbility> removedAbilities = new ArrayList<SpellAbility>();
         boolean clearAbilities = sa.hasParam("OverwriteAbilities");
         boolean clearSpells = sa.hasParam("OverwriteSpells");
         boolean removeAll = sa.hasParam("RemoveAllAbilities");
@@ -429,7 +429,7 @@ public class AnimateAi extends SpellAbilityAi {
         }
 
         // give abilities
-        final ArrayList<SpellAbility> addedAbilities = new ArrayList<SpellAbility>();
+        final List<SpellAbility> addedAbilities = new ArrayList<SpellAbility>();
         if (abilities.size() > 0) {
             for (final String s : abilities) {
                 final String actualAbility = source.getSVar(s);
@@ -440,7 +440,7 @@ public class AnimateAi extends SpellAbilityAi {
         }
 
         // Grant triggers
-        final ArrayList<Trigger> addedTriggers = new ArrayList<Trigger>();
+        final List<Trigger> addedTriggers = new ArrayList<Trigger>();
         if (triggers.size() > 0) {
             for (final String s : triggers) {
                 final String actualTrigger = source.getSVar(s);
@@ -450,7 +450,7 @@ public class AnimateAi extends SpellAbilityAi {
         }
 
         // give replacement effects
-        final ArrayList<ReplacementEffect> addedReplacements = new ArrayList<ReplacementEffect>();
+        final List<ReplacementEffect> addedReplacements = new ArrayList<ReplacementEffect>();
         if (replacements.size() > 0) {
             for (final String s : replacements) {
                 final String actualReplacement = source.getSVar(s);
@@ -460,7 +460,7 @@ public class AnimateAi extends SpellAbilityAi {
         }
 
         // suppress triggers from the animated card
-        final ArrayList<Trigger> removedTriggers = new ArrayList<Trigger>();
+        final List<Trigger> removedTriggers = new ArrayList<Trigger>();
         if (sa.hasParam("OverwriteTriggers") || removeAll) {
             final FCollectionView<Trigger> triggersToRemove = card.getTriggers();
             for (final Trigger trigger : triggersToRemove) {
@@ -498,7 +498,7 @@ public class AnimateAi extends SpellAbilityAi {
         }
 
         // suppress static abilities from the animated card
-        final ArrayList<StaticAbility> removedStatics = new ArrayList<StaticAbility>();
+        final List<StaticAbility> removedStatics = new ArrayList<StaticAbility>();
         if (sa.hasParam("OverwriteStatics") || removeAll) {
             final FCollectionView<StaticAbility> staticsToRemove = card.getStaticAbilities();
             for (final StaticAbility stAb : staticsToRemove) {
@@ -508,7 +508,7 @@ public class AnimateAi extends SpellAbilityAi {
         }
 
         // suppress static abilities from the animated card
-        final ArrayList<ReplacementEffect> removedReplacements = new ArrayList<ReplacementEffect>();
+        final List<ReplacementEffect> removedReplacements = new ArrayList<ReplacementEffect>();
         if (sa.hasParam("OverwriteReplacements") || removeAll) {
             for (final ReplacementEffect re : card.getReplacementEffects()) {
                 re.setTemporarilySuppressed(true);

@@ -80,7 +80,7 @@ public class DeckHtmlSerializer {
                 }
             }
 
-            final TreeMap<String, Integer> map = new TreeMap<String, Integer>();
+            final Map<String, Integer> map = new TreeMap<String, Integer>();
             for (final Entry<PaperCard, Integer> entry : d.getMain()) {
                 map.put(entry.getKey().getName(), entry.getValue());
                 // System.out.println(entry.getValue() + " " +

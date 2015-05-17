@@ -1,16 +1,17 @@
 package forge.limited;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.util.MyRandom;
-
-import java.util.ArrayList;
 
 public class WinstonDraftAI extends BoosterDraftAI{
 
     private WinstonDraft draft = null;
     private static final int N_DECKS = 1;
-    private ArrayList<Byte> colorPreference = new ArrayList<>();
+    private List<Byte> colorPreference = new ArrayList<>();
 
     public WinstonDraft getDraft() {
         return draft;

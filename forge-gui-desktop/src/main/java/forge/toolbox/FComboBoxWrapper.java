@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.JComponent;
@@ -22,7 +23,7 @@ import forge.toolbox.FSkin.SkinFont;
  */
 public class FComboBoxWrapper<E> implements IComboBox<E> {
 
-    private static final ArrayList<FComboBoxWrapper<?>> allWrappers = new ArrayList<FComboBoxWrapper<?>>();
+    private static final List<FComboBoxWrapper<?>> allWrappers = new ArrayList<FComboBoxWrapper<?>>();
 
     public static void refreshAllSkins() {
         for (final FComboBoxWrapper<?> wrapper : allWrappers) {

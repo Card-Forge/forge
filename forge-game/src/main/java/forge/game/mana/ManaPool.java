@@ -280,14 +280,14 @@ public class ManaPool implements Iterable<Mana> {
 
     //Account for mana part of ability when undoing it
     public boolean accountFor(final AbilityManaPart ma) {
-    	if (ma == null) {
-    		return false;
-    	}
+        if (ma == null) {
+            return false;
+        }
         if (floatingMana.isEmpty()) {
             return false;
         }
 
-        final ArrayList<Mana> removeFloating = new ArrayList<Mana>();
+        final List<Mana> removeFloating = new ArrayList<Mana>();
 
         boolean manaNotAccountedFor = false;
         // loop over mana produced by mana ability

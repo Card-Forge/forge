@@ -564,7 +564,7 @@ public class AttachAi extends SpellAbilityAi {
 
         int totToughness = 0;
         int totPower = 0;
-        final ArrayList<String> keywords = new ArrayList<String>();
+        final List<String> keywords = new ArrayList<String>();
 
         for (final StaticAbility stAbility : attachSource.getStaticAbilities()) {
             final Map<String, String> stabMap = stAbility.getMapParams();
@@ -860,7 +860,7 @@ public class AttachAi extends SpellAbilityAi {
 
         int totToughness = 0;
         int totPower = 0;
-        final ArrayList<String> keywords = new ArrayList<String>();
+        final List<String> keywords = new ArrayList<String>();
         boolean grantingAbilities = false;
 
         for (final StaticAbility stAbility : attachSource.getStaticAbilities()) {
@@ -1169,7 +1169,7 @@ public class AttachAi extends SpellAbilityAi {
      * @param sa SpellAbility
      * @return true, if successful
      */
-    private static boolean containsUsefulCurseKeyword(final ArrayList<String> keywords, final Card card, final SpellAbility sa) {
+    private static boolean containsUsefulCurseKeyword(final List<String> keywords, final Card card, final SpellAbility sa) {
         for (final String keyword : keywords) {
             if (isUsefulCurseKeyword(keyword, card, sa)) {
                 return true;

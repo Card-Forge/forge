@@ -31,24 +31,33 @@ import forge.util.FCollection;
 import forge.util.FCollectionView;
 
 public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
-    private FCollectionView<PlayerView> localPlayers = new FCollection<PlayerView>();
+    private FCollection<PlayerView> localPlayers = new FCollection<PlayerView>();
     private PlayerView currentPlayer = null;
 
-    protected final void setLocalPlayers(final Iterable<PlayerView> myPlayers) {
+    protected final void setLocalPlayers(final Collection<PlayerView> myPlayers) {
         this.localPlayers = myPlayers == null ? new FCollection<PlayerView>() : new FCollection<PlayerView>(myPlayers);
         this.currentPlayer = Iterables.getFirst(this.localPlayers, null);
+        this.autoPassUntilEndOfTurn.retainAll(myPlayers);
     }
+    private void addLocalPlayer(final PlayerView player) {
+        this.localPlayers.add(player);
+    }
+    private void removeLocalPlayer(final PlayerView player) {
+        this.localPlayers.remove(player);
+        this.autoPassUntilEndOfTurn.remove(player);
+    }
+
     public final boolean hasLocalPlayers() {
-        return localPlayers != null && !localPlayers.isEmpty();
+        return !localPlayers.isEmpty();
     }
     public final FCollectionView<PlayerView> getLocalPlayers() {
         return localPlayers;
     }
     public final int getLocalPlayerCount() {
-        return localPlayers == null ? 0 : localPlayers.size();
+        return localPlayers.size();
     }
     public final boolean isLocalPlayer(final PlayerView player) {
-        return hasLocalPlayers() && localPlayers.contains(player);
+        return  localPlayers.contains(player);
     }
 
     public final PlayerView getCurrentPlayer() {
@@ -83,6 +92,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     @Override
     public void setGameController(final PlayerView player, final IGameController gameController) {
         this.gameControllers.put(player, gameController);
+        if (gameController == null) {
+            addLocalPlayer(player);
+        } else {
+            removeLocalPlayer(player);
+        }
     }
 
     @Override

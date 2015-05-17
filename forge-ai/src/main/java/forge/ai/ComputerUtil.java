@@ -27,9 +27,9 @@ import java.util.Random;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Multimap;
 
 import forge.ai.ability.ProtectAi;
 import forge.card.CardType;
@@ -1156,7 +1156,7 @@ public class ComputerUtil {
             }
         } else {
             objects = topStack.getTargets().getTargets();
-            final ArrayList<GameObject> canBeTargeted = new ArrayList<GameObject>();
+            final List<GameObject> canBeTargeted = new ArrayList<GameObject>();
             for (Object o : objects) {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
@@ -1612,7 +1612,7 @@ public class ComputerUtil {
             if (logic != null) {
                 if (logic.equals("MostNeededType")) {
                     // Choose a type that is in the deck, but not in hand or on the battlefield 
-                    final ArrayList<String> basics = new ArrayList<String>();
+                    final List<String> basics = new ArrayList<String>();
                     basics.addAll(CardType.Constant.BASIC_TYPES);
                     CardCollectionView presentCards = CardCollection.combine(ai.getCardsIn(ZoneType.Battlefield), ai.getCardsIn(ZoneType.Hand));
                     CardCollectionView possibleCards = ai.getAllCards();
@@ -1666,7 +1666,7 @@ public class ComputerUtil {
         return chosen;
     }
 
-    public static Object vote(Player ai, List<Object> options, SpellAbility sa, ArrayListMultimap<Object, Player> votes) {
+    public static Object vote(Player ai, List<Object> options, SpellAbility sa, Multimap<Object, Player> votes) {
         if (!sa.hasParam("AILogic")) {
             return Aggregates.random(options);
         } else {

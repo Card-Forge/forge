@@ -3,6 +3,7 @@ package forge.deck;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
@@ -140,7 +141,7 @@ public class DeckProxy implements InventoryItem {
         if (color == null && !isGeneratedDeck()) {
             byte colorProfile = MagicColor.COLORLESS;
             byte landProfile = MagicColor.COLORLESS;
-            HashSet<Byte> nonReqColors = null;
+            Set<Byte> nonReqColors = null;
 
             for (final Entry<DeckSection, CardPool> deckEntry : getDeck()) {
                 switch (deckEntry.getKey()) {

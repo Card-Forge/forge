@@ -1,6 +1,7 @@
 package forge;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -405,7 +406,7 @@ public class Forge implements ApplicationListener {
     }
 
     private static class MainInputProcessor extends FGestureAdapter {
-        private static final ArrayList<FDisplayObject> potentialListeners = new ArrayList<FDisplayObject>();
+        private static final List<FDisplayObject> potentialListeners = new ArrayList<FDisplayObject>();
         private static char lastKeyTyped;
         private static boolean keyTyped, shiftKeyDown;
 

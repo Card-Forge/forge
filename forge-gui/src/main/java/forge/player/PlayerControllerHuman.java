@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.Range;
@@ -23,9 +24,9 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
@@ -120,8 +121,8 @@ import forge.util.gui.SOptionPane;
  * Handles phase skips for now.
  */
 public class PlayerControllerHuman
-extends PlayerController
-implements IGameController {
+    extends PlayerController
+    implements IGameController {
     /**
      * Cards this player may look at right now, for example when searching a
      * library.
@@ -176,7 +177,7 @@ implements IGameController {
         return mayLookAtAllCards;
     }
 
-    private final HashSet<Card> tempShownCards = new HashSet<Card>();
+    private final Set<Card> tempShownCards = new HashSet<Card>();
     public <T> void tempShow(final Iterable<T> objects) {
         for (final T t : objects) {
             if (t instanceof Card) {
@@ -796,7 +797,7 @@ implements IGameController {
     }
 
     @Override
-    public Object vote(final SpellAbility sa, final String prompt, final List<Object> options, final ArrayListMultimap<Object, Player> votes) {
+    public Object vote(final SpellAbility sa, final String prompt, final List<Object> options, final ListMultimap<Object, Player> votes) {
         return getGui().one(prompt, options);
     }
 
@@ -1120,7 +1121,7 @@ implements IGameController {
     }
 
     @Override
-    public ReplacementEffect chooseSingleReplacementEffect(final String prompt, final List<ReplacementEffect> possibleReplacers, final HashMap<String, Object> runParams) {
+    public ReplacementEffect chooseSingleReplacementEffect(final String prompt, final List<ReplacementEffect> possibleReplacers, final Map<String, Object> runParams) {
         final ReplacementEffect first = possibleReplacers.get(0);
         if (possibleReplacers.size() == 1) {
             return first;

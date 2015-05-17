@@ -494,7 +494,7 @@ public class ManaCostBeingPaid {
         }
 
         // Sort the keys to get a deterministic ordering.
-        ArrayList<ManaCostShard> shards = new ArrayList<ManaCostShard>(unpaidShards.keySet());
+        List<ManaCostShard> shards = new ArrayList<ManaCostShard>(unpaidShards.keySet());
         Collections.sort(shards);
         for (ManaCostShard shard : shards) {
             if (shard == ManaCostShard.COLORLESS) {

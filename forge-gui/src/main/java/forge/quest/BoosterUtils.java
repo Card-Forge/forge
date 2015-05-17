@@ -276,12 +276,12 @@ public final class BoosterUtils {
      *            If true, multiple copies of the same card will be allowed to be generated.
      * @return a list of card names
      */
-    private static ArrayList<PaperCard> generateCards(
+    private static List<PaperCard> generateCards(
             final Iterable<PaperCard> source, final Predicate<PaperCard> filter, final int cntNeeded,
             final List<Predicate<CardRules>> allowedColors, final boolean allowDuplicates) {
 
         //If color is null, use colorOrder progression to grab cards
-        final ArrayList<PaperCard> result = new ArrayList<>();
+        final List<PaperCard> result = new ArrayList<>();
 
         final int size = allowedColors == null ? 0 : allowedColors.size();
         if (allowedColors != null) {

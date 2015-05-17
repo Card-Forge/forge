@@ -32,7 +32,7 @@ public class SpellAbilityPicker {
         }
     }
     
-    public SpellAbility chooseSpellAbilityToPlay(SimulationController controller, final ArrayList<SpellAbility> all, boolean skipCounter) {
+    public SpellAbility chooseSpellAbilityToPlay(SimulationController controller, final List<SpellAbility> all, boolean skipCounter) {
         printOutput = false;
         if (controller == null) {
             controller = new SimulationController();
@@ -40,7 +40,7 @@ public class SpellAbilityPicker {
         }
         print("---- choose ability  (phase = " +  game.getPhaseHandler().getPhase() + ")");
         
-        ArrayList<SpellAbility> candidateSAs = new ArrayList<>();
+        List<SpellAbility> candidateSAs = new ArrayList<>();
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
             // Don't add Counterspells to the "normal" playcard lookups
             if (skipCounter && sa.getApi() == ApiType.Counter) {

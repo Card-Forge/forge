@@ -79,8 +79,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private Point hoverScrollPos;
     private ItemInfo hoveredItem;
     private ItemInfo focalItem;
-    private final ArrayList<ItemInfo> orderedItems = new ArrayList<ItemInfo>();
-    private final ArrayList<Group> groups = new ArrayList<Group>();
+    private final List<ItemInfo> orderedItems = new ArrayList<ItemInfo>();
+    private final List<Group> groups = new ArrayList<Group>();
 
     @SuppressWarnings("serial")
     private class ExpandCollapseButton extends FLabel {
@@ -580,7 +580,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             if (forRefresh && pileBy != null) { //refresh piles if needed
                 //use TreeMap to build pile set so iterating below sorts on key
                 ColumnDef groupPileBy = groupBy == null ? pileBy : groupBy.getGroupPileBy(i, pileBy);
-                TreeMap<Comparable<?>, Pile> piles = new TreeMap<Comparable<?>, Pile>();
+                Map<Comparable<?>, Pile> piles = new TreeMap<Comparable<?>, Pile>();
                 for (ItemInfo itemInfo : group.items) {
                     Comparable<?> key = groupPileBy.fnSort.apply(itemInfo);
                     if (!piles.containsKey(key)) {

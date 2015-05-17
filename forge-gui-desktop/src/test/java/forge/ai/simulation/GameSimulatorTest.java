@@ -1,7 +1,8 @@
 package forge.ai.simulation;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import junit.framework.TestCase;
 
 import com.google.common.collect.Lists;
 
@@ -26,7 +27,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.model.FModel;
-import junit.framework.TestCase;
 
 public class GameSimulatorTest extends TestCase {
     private static boolean initialized = false;
@@ -319,7 +319,7 @@ public class GameSimulatorTest extends TestCase {
         game.getAction().checkStateEffects(true);
 
         CardCollection cards = ComputerUtilAbility.getAvailableCards(game, p);
-        ArrayList<SpellAbility> abilities = ComputerUtilAbility.getSpellAbilities(cards, p);
+        List<SpellAbility> abilities = ComputerUtilAbility.getSpellAbilities(cards, p);
         SpellAbility minusTwo = findSAWithPrefix(abilities, "-2: Put a 2/2 black Vampire");
         assertNotNull(minusTwo);
         minusTwo.setActivatingPlayer(p);

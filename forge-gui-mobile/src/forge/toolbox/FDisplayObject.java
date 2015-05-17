@@ -1,8 +1,9 @@
 package forge.toolbox;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.badlogic.gdx.math.Rectangle;
+
 import forge.Graphics;
 
 public abstract class FDisplayObject {
@@ -109,7 +110,7 @@ public abstract class FDisplayObject {
     }
 
     public abstract void draw(Graphics g);
-    public void buildTouchListeners(float screenX, float screenY, ArrayList<FDisplayObject> listeners) {
+    public void buildTouchListeners(float screenX, float screenY, List<FDisplayObject> listeners) {
         if (enabled && visible && screenPos.contains(screenX, screenY)) {
             listeners.add(this);
         }

@@ -121,7 +121,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private final Map<ZoneType, PlayerZone> zones = new EnumMap<ZoneType, PlayerZone>(ZoneType.class);
 
     private CardCollection currentPlanes = new CardCollection();
-    private ArrayList<String> prowl = new ArrayList<String>();
+    private List<String> prowl = new ArrayList<String>();
 
     private PlayerStatistics stats = new PlayerStatistics();
     private PlayerController controller;
@@ -692,7 +692,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         boolean DEBUGShieldsWithEffects = false;
         while (!getPreventNextDamageWithEffect().isEmpty() && restDamage != 0) {
-            TreeMap<Card, Map<String, String>> shieldMap = getPreventNextDamageWithEffect();
+            Map<Card, Map<String, String>> shieldMap = getPreventNextDamageWithEffect();
             CardCollection preventionEffectSources = new CardCollection(shieldMap.keySet());
             Card shieldSource = preventionEffectSources.get(0);
             if (preventionEffectSources.size() > 1) {

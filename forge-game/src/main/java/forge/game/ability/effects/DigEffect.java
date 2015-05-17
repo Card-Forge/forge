@@ -75,7 +75,7 @@ public class DigEffect extends SpellAbilityEffect {
 
         boolean changeAll = false;
         boolean allButOne = false;
-        final ArrayList<String> keywords = new ArrayList<String>();
+        final List<String> keywords = new ArrayList<String>();
         if (sa.hasParam("Keywords")) {
             keywords.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
         }

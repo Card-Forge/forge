@@ -215,7 +215,7 @@ public class BoosterDraft implements IBoosterDraft {
     /** Looks for draft files, reads them, returns a list. */
     private static List<CustomLimited> loadCustomDrafts() {
         String[] dList;
-        final ArrayList<CustomLimited> customs = new ArrayList<CustomLimited>();
+        final List<CustomLimited> customs = new ArrayList<CustomLimited>();
 
         // get list of custom draft files
         final File dFolder = new File(ForgeConstants.DRAFT_DIR);

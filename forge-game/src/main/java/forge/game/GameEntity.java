@@ -32,7 +32,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     private String name = "";
     private int preventNextDamage = 0;
     private CardCollection enchantedBy;
-    private TreeMap<Card, Map<String, String>> preventionShieldsWithEffects = new TreeMap<Card, Map<String, String>>();
+    private Map<Card, Map<String, String>> preventionShieldsWithEffects = new TreeMap<Card, Map<String, String>>();
 
     protected GameEntity(int id0) {
         id = id0;
@@ -97,7 +97,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
 
     // PreventNextDamageWithEffect
-    public TreeMap<Card, Map<String, String>> getPreventNextDamageWithEffect() {
+    public Map<Card, Map<String, String>> getPreventNextDamageWithEffect() {
         return preventionShieldsWithEffects;
     }
     public int getPreventNextDamageTotalShields() {
@@ -112,7 +112,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
      * @param shieldSource - The source card which generated the shield
      * @param effectMap - A map of the effect occurring with the damage prevention
      */
-    public void addPreventNextDamageWithEffect(final Card shieldSource, TreeMap<String, String> effectMap) {
+    public void addPreventNextDamageWithEffect(final Card shieldSource, Map<String, String> effectMap) {
         if (preventionShieldsWithEffects.containsKey(shieldSource)) {
             int currentShields = Integer.valueOf(preventionShieldsWithEffects.get(shieldSource).get("ShieldAmount"));
             currentShields += Integer.valueOf(effectMap.get("ShieldAmount"));

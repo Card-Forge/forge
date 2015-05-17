@@ -254,9 +254,9 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
             view.updateText(this);
 
             // Run BecomesTargetTrigger
-            HashMap<String, Object> runParams = new HashMap<String, Object>();
+            Map<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("SourceSA", ability);
-            HashSet<Object> distinctObjects = new HashSet<Object>();
+            Set<Object> distinctObjects = new HashSet<Object>();
             for (final Object tgt : target.getTargets()) {
                 if (distinctObjects.contains(tgt)) {
                     continue;

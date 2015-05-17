@@ -129,7 +129,7 @@ public class MatchController extends AbstractGuiGame {
                 }
 
                 @Override
-                public void buildTouchListeners(final float screenX, final float screenY, final ArrayList<FDisplayObject> listeners) {
+                public void buildTouchListeners(final float screenX, final float screenY, final List<FDisplayObject> listeners) {
                     if (screenY < view.getHeight() - VPrompt.HEIGHT) {
                         hostedMatch.pause();
                     }

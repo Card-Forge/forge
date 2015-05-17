@@ -1,6 +1,7 @@
 package forge.achievement;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import forge.game.Game;
 import forge.game.card.Card;
@@ -15,7 +16,7 @@ public class Domain extends ProgressiveAchievement {
     @Override
     protected boolean eval(Player player, Game game) {
         if (player.getOutcome().hasWon()) {
-            HashSet<String> basicLands = new HashSet<String>();
+            Set<String> basicLands = new HashSet<String>();
             for (Card c : player.getCardsIn(ZoneType.Battlefield)) {
                 if (c.isBasicLand()) {
                     basicLands.add(c.getName());

@@ -41,7 +41,7 @@ public class UnOpenedMeta implements IUnOpenedProduct {
         SelectAll,
     }
 
-    private final ArrayList<MetaSet> metaSets;
+    private final List<MetaSet> metaSets;
     private final JoinOperation operation;
     private final Random generator = MyRandom.getRandom();
 

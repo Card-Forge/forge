@@ -603,7 +603,7 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
         /**
          * Reused segments.
          */
-        private final ArrayList<Segment> segments = new ArrayList<Segment>(2);
+        private final List<Segment> segments = new ArrayList<Segment>(2);
 
         /**
          * Singleton instance.

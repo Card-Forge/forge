@@ -2,6 +2,7 @@ package forge.toolbox;
 
 import java.awt.FlowLayout;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -14,7 +15,7 @@ import forge.toolbox.FSkin.SkinnedLabel;
 @SuppressWarnings("serial")
 public class FComboBoxPanel<E> extends JPanel {
 
-    private static final ArrayList<FComboBoxPanel<?>> allPanels = new ArrayList<FComboBoxPanel<?>>();
+    private static final List<FComboBoxPanel<?>> allPanels = new ArrayList<FComboBoxPanel<?>>();
 
     public static void refreshAllSkins() {
         for (final FComboBoxPanel<?> panel : allPanels) {

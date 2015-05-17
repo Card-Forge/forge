@@ -17,6 +17,10 @@
  */
 package forge.game.spellability;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -28,9 +32,6 @@ import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
-
-import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * <p>
@@ -80,7 +81,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 this.setHellbent(true);
             }
             if (value.startsWith("Prowl")) {
-                final ArrayList<String> prowlTypes = new ArrayList<String>();
+                final List<String> prowlTypes = new ArrayList<String>();
                 prowlTypes.add("Rogue");
                 if (value.split("Prowl").length > 1) {
                     prowlTypes.add(value.split("Prowl")[1]);

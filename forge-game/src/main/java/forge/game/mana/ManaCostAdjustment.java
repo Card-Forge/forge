@@ -52,9 +52,9 @@ public class ManaCostAdjustment {
         if (!cardsOnBattlefield.contains(originalCard)) {
             cardsOnBattlefield.add(originalCard);
         }
-        final ArrayList<StaticAbility> raiseAbilities = new ArrayList<StaticAbility>();
-        final ArrayList<StaticAbility> reduceAbilities = new ArrayList<StaticAbility>();
-        final ArrayList<StaticAbility> setAbilities = new ArrayList<StaticAbility>();
+        final List<StaticAbility> raiseAbilities = new ArrayList<StaticAbility>();
+        final List<StaticAbility> reduceAbilities = new ArrayList<StaticAbility>();
+        final List<StaticAbility> setAbilities = new ArrayList<StaticAbility>();
     
         // Sort abilities to apply them in proper order
         for (Card c : cardsOnBattlefield) {

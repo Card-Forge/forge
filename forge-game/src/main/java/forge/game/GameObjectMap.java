@@ -14,37 +14,37 @@ public abstract class GameObjectMap {
 
     public abstract GameObject map(GameObject o);
 
-    public Player map(Player p) {
+    public Player map(final Player p) {
         return (Player) map((GameObject) p);
     }
- 
-    public Card map(Card c) {
+
+    public Card map(final Card c) {
         return (Card) map((GameObject) c);
     }
 
-    public GameEntity map(GameEntity e) {
+    public GameEntity map(final GameEntity e) {
         return (GameEntity) map((GameObject) e);
     }
 
-    public CardCollectionView mapCollection(CardCollectionView cards) {
-        CardCollection collection = new CardCollection();
-        for (Card c : cards) {
+    public CardCollectionView mapCollection(final CardCollectionView cards) {
+        final CardCollection collection = new CardCollection();
+        for (final Card c : cards) {
             collection.add(map(c));
         }
         return collection;
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends GameObject> List<T> mapList(List<T> objects) {
-        ArrayList<T> result = new ArrayList<T>();
-        for (T o : objects) {
+    public <T extends GameObject> List<T> mapList(final List<T> objects) {
+        final List<T> result = new ArrayList<T>();
+        for (final T o : objects) {
             result.add((T) map(o));
         }
         return result;
     }
 
-    public <K extends GameObject, V> void fillKeyedMap(Map<K, V> dest, Map<K, V> src) {
-        for (Map.Entry<K, V> entry : src.entrySet()) {
+    public <K extends GameObject, V> void fillKeyedMap(final Map<K, V> dest, final Map<K, V> src) {
+        for (final Map.Entry<K, V> entry : src.entrySet()) {
             dest.put(entry.getKey(), entry.getValue());
         }
     }

@@ -242,7 +242,7 @@ public final class CMatchUI
         return FSkin.getAvatars().get(avatarIdx >= 0 ? avatarIdx : defaultIndex);
     }
 
-    private void initMatch(final FCollectionView<PlayerView> sortedPlayers, final Iterable<PlayerView> myPlayers) {
+    private void initMatch(final FCollectionView<PlayerView> sortedPlayers, final Collection<PlayerView> myPlayers) {
         this.sortedPlayers = sortedPlayers;
         this.setLocalPlayers(myPlayers);
         allHands = sortedPlayers.size() == getLocalPlayerCount();

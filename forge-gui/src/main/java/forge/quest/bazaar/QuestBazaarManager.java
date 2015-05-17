@@ -6,16 +6,38 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.quest.bazaar;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -25,29 +47,18 @@ import forge.quest.data.QuestAssets;
 import forge.util.IgnoringXStream;
 import forge.util.XmlUtil;
 
-import org.w3c.dom.*;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
-
 /**
  * <p>
  * QuestStallManager class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
 public class QuestBazaarManager {
     private final File xmlFile;
 
-    public QuestBazaarManager(File xmlFile0) {
+    public QuestBazaarManager(final File xmlFile0) {
         xmlFile = xmlFile0;
     }
 
@@ -57,42 +68,42 @@ public class QuestBazaarManager {
             builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             final Document document = builder.parse(xmlFile);
 
-            XStream xs = new IgnoringXStream();
+            final XStream xs = new IgnoringXStream();
             xs.autodetectAnnotations(true);
 
-            NodeList xmlStalls = document.getElementsByTagName("stalls").item(0).getChildNodes();
+            final NodeList xmlStalls = document.getElementsByTagName("stalls").item(0).getChildNodes();
             for (int iN = 0; iN < xmlStalls.getLength(); iN++) {
-                Node n = xmlStalls.item(iN);
+                final Node n = xmlStalls.item(iN);
                 if (n.getNodeType() != Node.ELEMENT_NODE) { continue; }
 
-                Attr att = document.createAttribute("resolves-to");
+                final Attr att = document.createAttribute("resolves-to");
                 att.setValue(QuestStallDefinition.class.getCanonicalName());
                 n.getAttributes().setNamedItem(att);
-                QuestStallDefinition stall = (QuestStallDefinition) xs.fromXML(XmlUtil.nodeToString(n));
+                final QuestStallDefinition stall = (QuestStallDefinition) xs.fromXML(XmlUtil.nodeToString(n));
                 stalls.put(stall.getName(), stall);
             }
 
-            NodeList xmlQuestItems = document.getElementsByTagName("questItems").item(0).getChildNodes();
+            final NodeList xmlQuestItems = document.getElementsByTagName("questItems").item(0).getChildNodes();
             for (int iN = 0; iN < xmlQuestItems.getLength(); iN++) {
-                Node n = xmlQuestItems.item(iN);
+                final Node n = xmlQuestItems.item(iN);
                 if (n.getNodeType() != Node.ELEMENT_NODE) { continue; }
 
-                NamedNodeMap attrs = n.getAttributes();
-                String sType = attrs.getNamedItem("itemType").getTextContent();
-                String name = attrs.getNamedItem("name").getTextContent();
-                QuestItemType qType = QuestItemType.smartValueOf(sType);
-                Attr att = document.createAttribute("resolves-to");
+                final NamedNodeMap attrs = n.getAttributes();
+                final String sType = attrs.getNamedItem("itemType").getTextContent();
+                final String name = attrs.getNamedItem("name").getTextContent();
+                final QuestItemType qType = QuestItemType.smartValueOf(sType);
+                final Attr att = document.createAttribute("resolves-to");
                 att.setValue(qType.getBazaarControllerClass().getCanonicalName());
                 attrs.setNamedItem(att);
-                QuestItemBasic ctrl = (QuestItemBasic) xs.fromXML(XmlUtil.nodeToString(n));
+                final QuestItemBasic ctrl = (QuestItemBasic) xs.fromXML(XmlUtil.nodeToString(n));
                 items.put(name, ctrl);
             }
 
-        } catch (SAXException e) {
+        } catch (final SAXException e) {
             e.printStackTrace();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
-        } catch (ParserConfigurationException e) {
+        } catch (final ParserConfigurationException e) {
             e.printStackTrace();
         }
     }
@@ -107,7 +118,7 @@ public class QuestBazaarManager {
      * <p>
      * getStall.
      * </p>
-     * 
+     *
      * @param stallName
      *            a {@link java.lang.String} object.
      * @return a {@link forge.quest.bazaar.QuestStallDefinition} object.
@@ -129,7 +140,7 @@ public class QuestBazaarManager {
 
         for (int iSlot = 0; iSlot < QuestController.MAX_PET_SLOTS; iSlot++) {
 
-            for (QuestPetController pet : qCtrl.getPetsStorage().getAllPets(iSlot)) {
+            for (final QuestPetController pet : qCtrl.getPetsStorage().getAllPets(iSlot)) {
                 //System.out.println("Pet: " + pet.getName());
                 itemSet.put(pet.getName(), pet);
             }
@@ -139,11 +150,11 @@ public class QuestBazaarManager {
 
         itemsOnStalls.clear();
 
-        for (QuestStallDefinition thisStall : stalls.values()) {
-            TreeSet<IQuestBazaarItem> set = new TreeSet<IQuestBazaarItem>();
+        for (final QuestStallDefinition thisStall : stalls.values()) {
+            final SortedSet<IQuestBazaarItem> set = new TreeSet<IQuestBazaarItem>();
 
-            for (String itemName : thisStall.getItems()) {
-                IQuestBazaarItem item = itemSet.get(itemName);
+            for (final String itemName : thisStall.getItems()) {
+                final IQuestBazaarItem item = itemSet.get(itemName);
                 //System.out.println(itemName);
                 set.add(item);
             }
@@ -153,7 +164,7 @@ public class QuestBazaarManager {
 
     /**
      * Returns <i>purchasable</i> items available for a particular stall.
-     * 
+     *
      * @param stallName &emsp; {@link java.lang.String}
      * @return {@link java.util.List}.
      */
@@ -162,7 +173,7 @@ public class QuestBazaarManager {
 
         final List<IQuestBazaarItem> ret = new ArrayList<IQuestBazaarItem>();
 
-        QuestAssets qA = FModel.getQuest().getAssets();
+        final QuestAssets qA = FModel.getQuest().getAssets();
         for (final IQuestBazaarItem purchasable : itemsOnStalls.get(stallName)) {
             if (purchasable.isAvailableForPurchase(qA, qCtrl)) {
                 ret.add(purchasable);

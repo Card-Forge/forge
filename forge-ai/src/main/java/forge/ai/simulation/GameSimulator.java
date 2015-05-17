@@ -26,7 +26,7 @@ public class GameSimulator {
     private Game simGame;
     private Player aiPlayer;
     private GameStateEvaluator eval;
-    private ArrayList<String> origLines;
+    private List<String> origLines;
     private Score origScore;
     
     public GameSimulator(final SimulationController controller, final Game origGame, final Player origAiPlayer) {
@@ -44,7 +44,7 @@ public class GameSimulator {
         origScore = eval.getScoreForGameState(origGame, origAiPlayer);
 
         eval.setDebugging(true);
-        ArrayList<String> simLines = new ArrayList<String>();
+        List<String> simLines = new ArrayList<String>();
         debugLines = simLines;
         Score simScore = eval.getScoreForGameState(simGame, aiPlayer);
         if (!simScore.equals(origScore)) {
@@ -102,7 +102,7 @@ public class GameSimulator {
     }
 
     public static boolean debugPrint;
-    public static ArrayList<String> debugLines;
+    public static List<String> debugLines;
     public static void debugPrint(String str) {
         if (debugPrint) {
             System.out.println(str);
@@ -172,7 +172,7 @@ public class GameSimulator {
         // TODO: If this is during combat, before blockers are declared,
         // we should simulate how combat will resolve and evaluate that
         // state instead!
-        ArrayList<String> simLines = null;
+        List<String> simLines = null;
         if (debugPrint) {
             debugPrint("SimGame:");
             simLines = new ArrayList<String>();
@@ -190,7 +190,7 @@ public class GameSimulator {
             controller.push(sa);
             SpellAbilityPicker sim = new SpellAbilityPicker(simGame, aiPlayer);
             CardCollection cards = ComputerUtilAbility.getAvailableCards(simGame, aiPlayer);
-            ArrayList<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, aiPlayer);
+            List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, aiPlayer);
             SpellAbility nextSa = sim.chooseSpellAbilityToPlay(controller, all, true);
             if (nextSa != null) {
                 score = sim.getScoreForChosenAbility();

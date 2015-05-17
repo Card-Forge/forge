@@ -156,7 +156,7 @@ public class SpellAbilityVariables {
     private boolean allTargetsLegal = false;
 
     /** The prowl. */
-    private ArrayList<String> prowlTypes = new ArrayList<String>();
+    private List<String> prowlTypes = new ArrayList<String>();
 
     /** The s is present. */
     private String isPresent = null;
@@ -518,7 +518,7 @@ public class SpellAbilityVariables {
      * @param types
      *            the new prowl
      */
-    public final void setProwlTypes(final ArrayList<String> types) {
+    public final void setProwlTypes(final List<String> types) {
         this.prowlTypes = types;
     }
 
@@ -750,7 +750,7 @@ public class SpellAbilityVariables {
      * 
      * @return the prowl
      */
-    public final ArrayList<String> getProwlTypes() {
+    public final List<String> getProwlTypes() {
         return this.prowlTypes;
     }
 

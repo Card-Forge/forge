@@ -9,8 +9,8 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Multimap;
 
 import forge.LobbyPlayer;
@@ -465,26 +465,26 @@ public class PlayerControllerForTests extends PlayerController {
         return (CardCollection)items.subList(0, Math.max(amount, items.size()));
     }
 
-	private <T> T chooseItem(Iterable<T> items) {
-		if (items == null) {
-			return null;
-		}
-		return Iterables.getFirst(items, null);
-	}
-
-	@Override
-	public SpellAbility getAbilityToPlay(Card hostCard, List<SpellAbility> abilities, ITriggerEvent triggerEvent) {
-	    // Isn't this a method invocation loop? --elcnesh
-		return getAbilityToPlay(hostCard, abilities);
-	}
-
-	@Override
-	public String chooseSomeType(String kindOfType, SpellAbility sa, List<String> validTypes, List<String> invalidTypes, boolean isOptional) {
-		return chooseItem(validTypes);
-	}
+    private <T> T chooseItem(Iterable<T> items) {
+        if (items == null) {
+            return null;
+        }
+        return Iterables.getFirst(items, null);
+    }
 
     @Override
-    public Object vote(SpellAbility sa, String prompt, List<Object> options, ArrayListMultimap<Object, Player> votes) {
+    public SpellAbility getAbilityToPlay(Card hostCard, List<SpellAbility> abilities, ITriggerEvent triggerEvent) {
+        // Isn't this a method invocation loop? --elcnesh
+        return getAbilityToPlay(hostCard, abilities);
+    }
+
+    @Override
+    public String chooseSomeType(String kindOfType, SpellAbility sa, List<String> validTypes, List<String> invalidTypes, boolean isOptional) {
+        return chooseItem(validTypes);
+    }
+
+    @Override
+    public Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes) {
         return chooseItem(options);
     }
 
@@ -509,9 +509,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public ReplacementEffect chooseSingleReplacementEffect(String prompt,
-            List<ReplacementEffect> possibleReplacers,
-            HashMap<String, Object> runParams) {
+    public ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers, Map<String, Object> runParams) {
         // TODO Auto-generated method stub
         return Iterables.getFirst(possibleReplacers, null);
     }

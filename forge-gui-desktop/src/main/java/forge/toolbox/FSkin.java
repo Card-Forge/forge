@@ -1100,7 +1100,7 @@ public class FSkin {
 
             if (allSkins == null) { //initialize
                 allSkins = new ArrayList<String>();
-                final ArrayList<String> skinDirectoryNames = getSkinDirectoryNames();
+                final List<String> skinDirectoryNames = getSkinDirectoryNames();
                 for (int i = 0; i < skinDirectoryNames.size(); i++) {
                     allSkins.add(WordUtils.capitalize(skinDirectoryNames.get(i).replace('_', ' ')));
                 }
@@ -1337,8 +1337,8 @@ public class FSkin {
      *
      * @return the skins
      */
-    public static ArrayList<String> getSkinDirectoryNames() {
-        final ArrayList<String> mySkins = new ArrayList<String>();
+    public static List<String> getSkinDirectoryNames() {
+        final List<String> mySkins = new ArrayList<String>();
 
         final File dir = new File(ForgeConstants.SKINS_DIR);
         final String[] children = dir.list();

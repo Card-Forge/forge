@@ -100,7 +100,7 @@ public final class StaticAbilityContinuous {
         final Card hostCard = stAb.getHostCard();
         final Player controller = hostCard.getController();
 
-        final ArrayList<Player> affectedPlayers = StaticAbilityContinuous.getAffectedPlayers(stAb);
+        final List<Player> affectedPlayers = StaticAbilityContinuous.getAffectedPlayers(stAb);
         final Game game = hostCard.getGame();
 
         final StaticEffect se = game.getStaticEffects().getStaticEffect(stAb);
@@ -132,7 +132,7 @@ public final class StaticAbilityContinuous {
         String addColors = null;
         String[] addTriggers = null;
         String[] addStatics = null;
-        ArrayList<SpellAbility> addFullAbs = null;
+        List<SpellAbility> addFullAbs = null;
         boolean removeAllAbilities = false;
         boolean removeSuperTypes = false;
         boolean removeCardTypes = false;
@@ -329,7 +329,7 @@ public final class StaticAbilityContinuous {
 
         if (layer == StaticAbilityLayer.ABILITIES1 && params.containsKey("GainsAbilitiesOf")) {
             final String[] valids = params.get("GainsAbilitiesOf").split(",");
-            ArrayList<ZoneType> validZones = new ArrayList<ZoneType>();
+            List<ZoneType> validZones = new ArrayList<ZoneType>();
             validZones.add(ZoneType.Battlefield);
             if (params.containsKey("GainsAbilitiesOfZones")) {
                 validZones.clear();
@@ -656,12 +656,12 @@ public final class StaticAbilityContinuous {
         sourceCard.addLeavesPlayCommand(removeIgnore);
     }
 
-    private static ArrayList<Player> getAffectedPlayers(final StaticAbility stAb) {
+    private static List<Player> getAffectedPlayers(final StaticAbility stAb) {
         final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
         final Player controller = hostCard.getController();
 
-        final ArrayList<Player> players = new ArrayList<Player>();
+        final List<Player> players = new ArrayList<Player>();
 
         if (!params.containsKey("Affected")) {
             return players;

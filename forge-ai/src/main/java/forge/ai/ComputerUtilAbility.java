@@ -1,6 +1,7 @@
 package forge.ai;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import forge.card.CardStateName;
 import forge.game.Game;
@@ -11,7 +12,6 @@ import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-
 
 public class ComputerUtilAbility {
     public static CardCollection getAvailableCards(final Game game, final Player player) {
@@ -29,8 +29,8 @@ public class ComputerUtilAbility {
         return all;
     }
 
-    public static ArrayList<SpellAbility> getSpellAbilities(final CardCollectionView l, final Player player) {
-        final ArrayList<SpellAbility> spellAbilities = new ArrayList<SpellAbility>();
+    public static List<SpellAbility> getSpellAbilities(final CardCollectionView l, final Player player) {
+        final List<SpellAbility> spellAbilities = new ArrayList<SpellAbility>();
         for (final Card c : l) {
             for (final SpellAbility sa : c.getSpellAbilities()) {
                 spellAbilities.add(sa);
@@ -44,8 +44,8 @@ public class ComputerUtilAbility {
         return spellAbilities;
     }
 
-    public static ArrayList<SpellAbility> getOriginalAndAltCostAbilities(final ArrayList<SpellAbility> originList, final Player player) {
-        final ArrayList<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
+    public static List<SpellAbility> getOriginalAndAltCostAbilities(final List<SpellAbility> originList, final Player player) {
+        final List<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
         for (SpellAbility sa : originList) {
             sa.setActivatingPlayer(player);
             //add alternative costs as additional spell abilities
@@ -53,7 +53,7 @@ public class ComputerUtilAbility {
             newAbilities.addAll(GameActionUtil.getAlternativeCosts(sa, player));
         }
     
-        final ArrayList<SpellAbility> result = new ArrayList<SpellAbility>();
+        final List<SpellAbility> result = new ArrayList<SpellAbility>();
         for (SpellAbility sa : newAbilities) {
             sa.setActivatingPlayer(player);
             result.addAll(GameActionUtil.getOptionalCosts(sa));

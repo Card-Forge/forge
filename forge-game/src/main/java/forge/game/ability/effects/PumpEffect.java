@@ -34,7 +34,7 @@ public class PumpEffect extends SpellAbilityEffect {
             return;
         }
         final Game game = sa.getActivatingPlayer().getGame();
-        final ArrayList<String> kws = new ArrayList<String>();
+        final List<String> kws = new ArrayList<String>();
 
         for (String kw : keywords) {
             if (kw.startsWith("HIDDEN")) {

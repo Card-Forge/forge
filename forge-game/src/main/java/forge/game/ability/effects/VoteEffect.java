@@ -1,7 +1,15 @@
 package forge.game.ability.effects;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 
 import forge.game.Game;
@@ -15,12 +23,6 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import org.apache.commons.lang3.StringUtils;
 
 public class VoteEffect extends SpellAbilityEffect {
 
@@ -66,7 +68,7 @@ public class VoteEffect extends SpellAbilityEffect {
         while (tgtPlayers.contains(activator) && !activator.equals(Iterables.getFirst(tgtPlayers, null))) {
             tgtPlayers.add(pSize - 1, tgtPlayers.remove(0));
         }
-        ArrayListMultimap<Object, Player> votes = ArrayListMultimap.create();
+        ListMultimap<Object, Player> votes = ArrayListMultimap.create();
 
         for (final Player p : tgtPlayers) {
             int voteAmount = p.getKeywords().getAmount("You get an additional vote.") + 1;
@@ -107,7 +109,7 @@ public class VoteEffect extends SpellAbilityEffect {
         }
     }
 
-    private static List<Object> getMostVotes(final ArrayListMultimap<Object, Player> votes) {
+    private static List<Object> getMostVotes(final ListMultimap<Object, Player> votes) {
         final List<Object> most = Lists.newArrayList();
         int amount = 0;
         for (final Object voteType : votes.keySet()) {

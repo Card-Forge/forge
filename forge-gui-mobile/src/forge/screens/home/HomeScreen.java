@@ -1,17 +1,18 @@
 package forge.screens.home;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge;
 import forge.Graphics;
-import forge.screens.FScreen;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinImage;
 import forge.deck.FDeckChooser;
 import forge.game.GameType;
+import forge.screens.FScreen;
 import forge.screens.achievements.AchievementsScreen;
 import forge.screens.online.OnlineMenu;
 import forge.screens.settings.SettingsScreen;
@@ -31,7 +32,7 @@ public class HomeScreen extends FScreen {
     public static final HomeScreen instance = new HomeScreen();
 
     private final FLabel lblLogo = add(new FLabel.Builder().icon(FSkinImage.LOGO).iconInBackground().iconScaleFactor(1).build());
-    private final ArrayList<MenuButton> buttons = new ArrayList<MenuButton>();
+    private final List<MenuButton> buttons = new ArrayList<MenuButton>();
     private int activeButtonIndex;
     private FDeckChooser deckManager;
 

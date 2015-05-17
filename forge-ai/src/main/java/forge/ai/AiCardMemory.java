@@ -40,9 +40,9 @@ import java.util.Set;
  */
 public class AiCardMemory {
 
-    private HashSet<Card> memMandatoryAttackers = new HashSet<Card>();
-    private HashSet<Card> memHeldManaSources = new HashSet<Card>();
-    private HashSet<Card> memAttachedThisTurn = new HashSet<Card>();
+    private Set<Card> memMandatoryAttackers = new HashSet<Card>();
+    private Set<Card> memHeldManaSources = new HashSet<Card>();
+    private Set<Card> memAttachedThisTurn = new HashSet<Card>();
     //private HashSet<Card> memRevealedCards = new HashSet<Card>();
 
     /**

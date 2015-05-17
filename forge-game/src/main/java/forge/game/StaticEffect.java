@@ -181,7 +181,7 @@ public class StaticEffect {
      * @param c
      *            a {@link forge.game.card.Card} object.
      * @param s
-     *            a {@link java.util.ArrayList} object.
+     *            a {@link java.util.List} object.
      */
     public final void addOriginalAbilities(final Card c, final List<SpellAbility> s) {
         final List<SpellAbility> list = new ArrayList<SpellAbility>(s);
@@ -200,10 +200,10 @@ public class StaticEffect {
      * 
      * @param c
      *            a {@link forge.game.card.Card} object.
-     * @return a {@link java.util.ArrayList} object.
+     * @return a {@link java.util.List} object.
      */
-    public final ArrayList<SpellAbility> getOriginalAbilities(final Card c) {
-        final ArrayList<SpellAbility> returnList = new ArrayList<SpellAbility>();
+    public final List<SpellAbility> getOriginalAbilities(final Card c) {
+        final List<SpellAbility> returnList = new ArrayList<SpellAbility>();
         if (this.originalAbilities.containsKey(c)) {
             returnList.addAll(this.originalAbilities.get(c));
         }
@@ -566,7 +566,7 @@ public class StaticEffect {
      */
     public final void addType(final Card c, final String s) {
         if (!this.types.containsKey(c)) {
-            final ArrayList<String> list = new ArrayList<String>();
+            final List<String> list = new ArrayList<String>();
             list.add(s);
             this.types.put(c, list);
         } else {
@@ -581,10 +581,10 @@ public class StaticEffect {
      * 
      * @param c
      *            a {@link forge.game.card.Card} object.
-     * @return a {@link java.util.ArrayList} object.
+     * @return a {@link java.util.List} object.
      */
-    public final ArrayList<String> getTypes(final Card c) {
-        final ArrayList<String> returnList = new ArrayList<String>();
+    public final List<String> getTypes(final Card c) {
+        final List<String> returnList = new ArrayList<String>();
         if (this.types.containsKey(c)) {
             returnList.addAll(this.types.get(c));
         }
@@ -749,7 +749,7 @@ public class StaticEffect {
      * @param list
      *            the new affected players
      */
-    public final void setAffectedPlayers(final ArrayList<Player> list) {
+    public final void setAffectedPlayers(final List<Player> list) {
         this.affectedPlayers = list;
     }
 

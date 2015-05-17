@@ -1,5 +1,10 @@
 package forge.game.ability.effects;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -7,10 +12,6 @@ import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeMap;
 
 public class DamagePreventEffect extends SpellAbilityEffect {
 
@@ -68,7 +69,7 @@ public class DamagePreventEffect extends SpellAbilityEffect {
         int numDam = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
 
         final List<GameObject> tgts = getTargets(sa);
-        final ArrayList<Card> untargetedCards = new ArrayList<Card>();
+        final List<Card> untargetedCards = new ArrayList<Card>();
         
         if (sa.hasParam("Radiance") && (sa.usesTargeting())) {
             Card origin = null;
@@ -95,7 +96,7 @@ public class DamagePreventEffect extends SpellAbilityEffect {
                 final Card c = (Card) o;
                 if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {
                     if (preventionWithEffect) {
-                        TreeMap<String, String> effectMap = new TreeMap<String, String>();
+                        Map<String, String> effectMap = new TreeMap<String, String>();
                         effectMap.put("EffectString", sa.getSVar(sa.getParam("PreventionSubAbility")));
                         effectMap.put("ShieldAmount", String.valueOf(numDam));
                         if (sa.hasParam("ShieldEffectTarget")) {
@@ -122,7 +123,7 @@ public class DamagePreventEffect extends SpellAbilityEffect {
                 final Player p = (Player) o;
                 if (!targeted || p.canBeTargetedBy(sa)) {
                     if (preventionWithEffect) {
-                        TreeMap<String, String> effectMap = new TreeMap<String, String>();
+                        Map<String, String> effectMap = new TreeMap<String, String>();
                         effectMap.put("EffectString", sa.getSVar(sa.getParam("PreventionSubAbility")));
                         effectMap.put("ShieldAmount", String.valueOf(numDam));
                         if (sa.hasParam("ShieldEffectTarget")) {

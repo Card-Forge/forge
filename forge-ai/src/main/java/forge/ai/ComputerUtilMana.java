@@ -2,6 +2,8 @@ package forge.ai;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Multimap;
 
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -133,7 +135,7 @@ public class ComputerUtilMana {
         }
     }
     
-    private static void sortManaAbilities(final ArrayListMultimap<ManaCostShard, SpellAbility> manaAbilityMap) {
+    private static void sortManaAbilities(final Multimap<ManaCostShard, SpellAbility> manaAbilityMap) {
         final Map<Card, ManaProducingCard> manaCardMap = new HashMap<>();
         final List<Card> orderedCards = new ArrayList<>();
         
@@ -162,7 +164,7 @@ public class ComputerUtilMana {
         }
 
         for (final ManaCostShard shard : manaAbilityMap.keySet()) {
-            final List<SpellAbility> abilities = manaAbilityMap.get(shard);
+            final Collection<SpellAbility> abilities = manaAbilityMap.get(shard);
             final List<SpellAbility> newAbilities = new ArrayList<>(abilities);
 
             if (DEBUG_MANA_PAYMENT) {
@@ -254,7 +256,7 @@ public class ComputerUtilMana {
         }
 
         // arrange all mana abilities by color produced.
-        final ArrayListMultimap<Integer, SpellAbility> manaAbilityMap = ComputerUtilMana.groupSourcesByManaColor(ai, true);
+        final ListMultimap<Integer, SpellAbility> manaAbilityMap = ComputerUtilMana.groupSourcesByManaColor(ai, true);
         if (manaAbilityMap.isEmpty()) {
             refundMana(manaSpentToPay, ai, sa);
 
@@ -263,7 +265,7 @@ public class ComputerUtilMana {
         }
 
         // select which abilities may be used for each shard
-        ArrayListMultimap<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
+        Multimap<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
 
         sortManaAbilities(sourcesForShards);
 
@@ -321,7 +323,7 @@ public class ComputerUtilMana {
         }
 
         // arrange all mana abilities by color produced.
-        final ArrayListMultimap<Integer, SpellAbility> manaAbilityMap = ComputerUtilMana.groupSourcesByManaColor(ai, checkPlayable);
+        final ListMultimap<Integer, SpellAbility> manaAbilityMap = ComputerUtilMana.groupSourcesByManaColor(ai, checkPlayable);
         if (manaAbilityMap.isEmpty()) {
             refundMana(manaSpentToPay, ai, sa);
 
@@ -334,7 +336,7 @@ public class ComputerUtilMana {
         }
 
         // select which abilities may be used for each shard
-        ArrayListMultimap<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
+        ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
 
         sortManaAbilities(sourcesForShards);
 
@@ -826,10 +828,10 @@ public class ComputerUtilMana {
      * @param manaAbilityMap The map of SpellAbilities that produce mana.
      * @return Were all mana sources found?
      */
-    private static ArrayListMultimap<ManaCostShard, SpellAbility> groupAndOrderToPayShards(final Player ai, final ArrayListMultimap<Integer, SpellAbility> manaAbilityMap,
+    private static ListMultimap<ManaCostShard, SpellAbility> groupAndOrderToPayShards(final Player ai, final ListMultimap<Integer, SpellAbility> manaAbilityMap,
             final ManaCostBeingPaid cost) {
-        ArrayListMultimap<ManaCostShard, SpellAbility> res = ArrayListMultimap.create();
-        
+        ListMultimap<ManaCostShard, SpellAbility> res = ArrayListMultimap.create();
+
         if (cost.getColorlessManaAmount() > 0 && manaAbilityMap.containsKey(ManaAtom.COLORLESS)) {
             res.putAll(ManaCostShard.COLORLESS, manaAbilityMap.get(ManaAtom.COLORLESS));
         }
@@ -974,7 +976,7 @@ public class ComputerUtilMana {
             int usableManaAbilities = 0;
             boolean needsLimitedResources = false;
             boolean producesAnyColor = false;
-            final ArrayList<SpellAbility> manaAbilities = getAIPlayableMana(card);
+            final List<SpellAbility> manaAbilities = getAIPlayableMana(card);
 
             for (final SpellAbility m : manaAbilities) {
                 if (m.getManaPart().isAnyMana()) {
@@ -1044,8 +1046,8 @@ public class ComputerUtilMana {
     } // getAvailableMana()
 
     //This method is currently used by AI to estimate mana available
-    private static ArrayListMultimap<Integer, SpellAbility> groupSourcesByManaColor(final Player ai, boolean checkPlayable) {
-        final ArrayListMultimap<Integer, SpellAbility> manaMap = ArrayListMultimap.create();
+    private static ListMultimap<Integer, SpellAbility> groupSourcesByManaColor(final Player ai, boolean checkPlayable) {
+        final ListMultimap<Integer, SpellAbility> manaMap = ArrayListMultimap.create();
         final Game game = ai.getGame();
 
         List<ReplacementEffect> replacementEffects = new ArrayList<ReplacementEffect>();
@@ -1167,10 +1169,10 @@ public class ComputerUtilMana {
      * getAIPlayableMana.
      * </p>
      * 
-     * @return a {@link java.util.ArrayList} object.
+     * @return a {@link java.util.List} object.
      */
-    public static ArrayList<SpellAbility> getAIPlayableMana(Card c) {
-        final ArrayList<SpellAbility> res = new ArrayList<>();
+    public static List<SpellAbility> getAIPlayableMana(Card c) {
+        final List<SpellAbility> res = new ArrayList<>();
         for (final SpellAbility a : c.getManaAbilities()) {
             // if a mana ability has a mana cost the AI will miscalculate
             // if there is a parent ability the AI can't use it

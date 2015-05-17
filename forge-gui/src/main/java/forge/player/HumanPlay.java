@@ -270,7 +270,7 @@ public class HumanPlay {
         }
 
         final List<CostPart> parts = cost.getCostParts();
-        ArrayList<CostPart> remainingParts = new ArrayList<CostPart>(parts);
+        final List<CostPart> remainingParts = new ArrayList<CostPart>(parts);
         CostPart costPart = null;
         if (!parts.isEmpty()) {
             costPart = parts.get(0);
@@ -470,7 +470,7 @@ public class HumanPlay {
                     }
                     Card selected = inp.getFirstSelected();
                     final Map<CounterType, Integer> tgtCounters = selected.getCounters();
-                    final ArrayList<CounterType> typeChoices = new ArrayList<CounterType>();
+                    final List<CounterType> typeChoices = new ArrayList<CounterType>();
                     for (CounterType key : tgtCounters.keySet()) {
                         if (tgtCounters.get(key) > 0) {
                             typeChoices.add(key);

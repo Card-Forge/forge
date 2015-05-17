@@ -137,7 +137,7 @@ public class AiController {
         simPicker = new SpellAbilityPicker(game, player);
     }
 
-    private ArrayList<SpellAbility> getPossibleETBCounters() {
+    private List<SpellAbility> getPossibleETBCounters() {
         final Player opp = player.getOpponent();
         CardCollection all = new CardCollection(player.getCardsIn(ZoneType.Hand));
         all.addAll(player.getCardsIn(ZoneType.Exile));
@@ -147,7 +147,7 @@ public class AiController {
         }
         all.addAll(opp.getCardsIn(ZoneType.Exile));
 
-        final ArrayList<SpellAbility> spellAbilities = new ArrayList<SpellAbility>();
+        final List<SpellAbility> spellAbilities = new ArrayList<SpellAbility>();
         for (final Card c : all) {
             for (final SpellAbility sa : c.getNonManaAbilities()) {
                 if (sa instanceof SpellPermanent) {
@@ -323,8 +323,8 @@ public class AiController {
         return true;
     }
 
-    private static ArrayList<SpellAbility> getPlayableCounters(final CardCollection l) {
-        final ArrayList<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
+    private static List<SpellAbility> getPlayableCounters(final CardCollection l) {
+        final List<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
         for (final Card c : l) {
             for (final SpellAbility sa : c.getNonManaAbilities()) {
                 // Check if this AF is a Counterpsell
@@ -482,7 +482,7 @@ public class AiController {
         if (Iterables.any(landList, CardPredicates.Presets.BASIC_LANDS)) {
             final CardCollectionView combined = player.getCardsIn(ZoneType.Battlefield);
 
-            final ArrayList<String> basics = new ArrayList<String>();
+            final List<String> basics = new ArrayList<String>();
     
             // what types can I go get?
             for (final String name : CardType.Constant.BASIC_TYPES) {
@@ -513,7 +513,7 @@ public class AiController {
     }
 
     // if return true, go to next phase
-    private SpellAbility chooseCounterSpell(final ArrayList<SpellAbility> possibleCounters) {
+    private SpellAbility chooseCounterSpell(final List<SpellAbility> possibleCounters) {
         if (possibleCounters == null || possibleCounters.isEmpty()) {
             return null;
         }
@@ -562,7 +562,7 @@ public class AiController {
         final CardCollectionView cards = handOnly ? player.getCardsIn(ZoneType.Hand) :
             ComputerUtilAbility.getAvailableCards(game, player);
 
-        ArrayList<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
+        List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
         Collections.sort(all, saComparator); // put best spells first
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
@@ -1169,7 +1169,7 @@ public class AiController {
         return result;
     }
     
-    private SpellAbility chooseSpellAbilityToPlay(final ArrayList<SpellAbility> all, boolean skipCounter) {
+    private SpellAbility chooseSpellAbilityToPlay(final List<SpellAbility> all, boolean skipCounter) {
         if (all == null || all.isEmpty())
             return null;
         

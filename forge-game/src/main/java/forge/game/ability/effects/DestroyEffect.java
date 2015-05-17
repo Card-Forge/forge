@@ -73,7 +73,7 @@ public class DestroyEffect extends SpellAbilityEffect {
         final boolean sac = sa.hasParam("Sacrifice");
 
         final List<Card> tgtCards = getTargetCards(sa);
-        final ArrayList<Card> untargetedCards = new ArrayList<Card>();
+        final List<Card> untargetedCards = new ArrayList<Card>();
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 

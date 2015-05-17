@@ -17,15 +17,16 @@
  */
 package forge.game.trigger;
 
-import forge.game.card.Card;
-import forge.game.player.Player;
-import forge.game.spellability.SpellAbility;
-import forge.util.FCollection;
-
 import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
+
+import forge.game.card.Card;
+import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
+import forge.util.FCollection;
 
 /**
  * <p>
@@ -63,12 +64,12 @@ public class TriggerVote extends Trigger {
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
         @SuppressWarnings("unchecked")
-        final ArrayListMultimap<Object, Player> votes = (ArrayListMultimap<Object, Player>) this.getRunParams().get("AllVotes");
+        final ListMultimap<Object, Player> votes = (ArrayListMultimap<Object, Player>) this.getRunParams().get("AllVotes");
         sa.setTriggeringObject("OtherVoters", getVoters(this.getHostCard().getController(), votes, true, true));
     }
 
     private static FCollection<Player> getVoters(final Player player,
-            final ArrayListMultimap<Object, Player> votes,
+            final ListMultimap<Object, Player> votes,
             final boolean isOpponent, final boolean votedOtherchoice) {
         final FCollection<Player> voters = new FCollection<Player>();
         for (final Object voteType : votes.keySet()) {

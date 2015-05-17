@@ -1414,13 +1414,13 @@ public class GameAction {
         // Power Play - Each player with a Power Play in the CommandZone becomes the Starting Player
         Set<Player> powerPlayers = new HashSet<>();
         for (Card c : game.getCardsIn(ZoneType.Command)) {
-        	if (c.getName().equals("Power Play")) {
-        		powerPlayers.add(c.getOwner());
-        	}
+            if (c.getName().equals("Power Play")) {
+                powerPlayers.add(c.getOwner());
+            }
         }
 
         if (!powerPlayers.isEmpty()) {
-            ArrayList<Player> players = Lists.newArrayList(powerPlayers);
+            List<Player> players = Lists.newArrayList(powerPlayers);
             Collections.shuffle(players);
             return players.get(0);
         }

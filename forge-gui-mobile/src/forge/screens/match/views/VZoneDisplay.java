@@ -1,6 +1,6 @@
 package forge.screens.match.views;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
@@ -27,7 +27,7 @@ public class VZoneDisplay extends VCardDisplayArea {
     }
 
     @Override
-    public void buildTouchListeners(float screenX, float screenY, ArrayList<FDisplayObject> listeners) {
+    public void buildTouchListeners(float screenX, float screenY, List<FDisplayObject> listeners) {
         super.buildTouchListeners(screenX, screenY, listeners);
 
         if (revealedPanel != null) {

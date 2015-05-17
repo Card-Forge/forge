@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -313,7 +314,7 @@ public class MatchScreen extends FScreen {
         if (game == null) { return; }
 
         //draw arrows for paired cards
-        HashSet<CardView> pairedCards = new HashSet<CardView>();
+        Set<CardView> pairedCards = new HashSet<CardView>();
         for (VPlayerPanel playerPanel : playerPanels.values()) {
             for (CardView card : playerPanel.getField().getRow1().getOrderedCards()) {
                 if (pairedCards.contains(card)) { continue; } //prevent arrows going both ways

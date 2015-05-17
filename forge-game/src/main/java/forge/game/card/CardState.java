@@ -153,7 +153,7 @@ public class CardState {
     public final boolean hasIntrinsicKeyword(String k) {
         return intrinsicKeywords.contains(k);
     }
-    public final void setIntrinsicKeywords(final ArrayList<String> intrinsicKeyword0) {
+    public final void setIntrinsicKeywords(final List<String> intrinsicKeyword0) {
         intrinsicKeywords = intrinsicKeyword0;
     }
 
@@ -296,7 +296,7 @@ public class CardState {
     public final Iterable<String> getStaticAbilityStrings() {
         return staticAbilityStrings;
     }
-    public final void setStaticAbilityStrings(final ArrayList<String> staticAbilityStrings0) {
+    public final void setStaticAbilityStrings(final List<String> staticAbilityStrings0) {
         staticAbilityStrings = staticAbilityStrings0;
     }
     public boolean addStaticAbilityString(String s) {

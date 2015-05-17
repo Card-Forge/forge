@@ -3,8 +3,8 @@ package forge.ai;
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Multimap;
 
 import forge.LobbyPlayer;
@@ -356,7 +356,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Object vote(SpellAbility sa, String prompt, List<Object> options, ArrayListMultimap<Object, Player> votes) {
+    public Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes) {
         return ComputerUtil.vote(player, options, sa, votes);
     }
 
@@ -599,7 +599,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers, HashMap<String, Object> runParams) {
+    public ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers, Map<String, Object> runParams) {
         // AI logic for choosing which replacement effect to apply
         // happens here.
         return possibleReplacers.get(0);

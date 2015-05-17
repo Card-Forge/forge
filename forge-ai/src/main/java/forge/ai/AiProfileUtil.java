@@ -62,7 +62,7 @@ public class AiProfileUtil {
         AI_PROFILE_DIR = aiProfileDir;
 
         loadedProfiles.clear();
-        ArrayList<String> availableProfiles = getAvailableProfiles();
+        List<String> availableProfiles = getAvailableProfiles();
         for (String profile : availableProfiles) {
             loadedProfiles.put(profile, loadProfile(profile));
         }
@@ -119,9 +119,9 @@ public class AiProfileUtil {
      * @return ArrayList<String> - an array of strings containing all 
      * available profiles.
      */
-    public static ArrayList<String> getAvailableProfiles()
+    public static List<String> getAvailableProfiles()
     {
-        final ArrayList<String> availableProfiles = new ArrayList<String>();
+        final List<String> availableProfiles = new ArrayList<String>();
 
         final File dir = new File(AI_PROFILE_DIR);
         final String[] children = dir.list();
@@ -144,8 +144,8 @@ public class AiProfileUtil {
      * @return ArrayList<String> - an array list of strings containing all 
      * available profiles including special random profile tags.
      */
-    public static ArrayList<String> getProfilesDisplayList() {
-        final ArrayList<String> availableProfiles = new ArrayList<String>();
+    public static List<String> getProfilesDisplayList() {
+        final List<String> availableProfiles = new ArrayList<String>();
         availableProfiles.add(AI_PROFILE_RANDOM_MATCH);
         availableProfiles.add(AI_PROFILE_RANDOM_DUEL);
         availableProfiles.addAll(getAvailableProfiles());

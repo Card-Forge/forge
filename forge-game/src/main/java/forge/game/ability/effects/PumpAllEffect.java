@@ -19,12 +19,12 @@ import java.util.List;
 public class PumpAllEffect extends SpellAbilityEffect {
     private static void applyPumpAll(final SpellAbility sa,
             final List<Card> list, final int a, final int d,
-            final List<String> keywords, final ArrayList<ZoneType> affectedZones) {
+            final List<String> keywords, final List<ZoneType> affectedZones) {
         
         final Game game = sa.getActivatingPlayer().getGame();
         final long timestamp = game.getNextTimestamp();
-        final ArrayList<String> kws = new ArrayList<String>();
-        final ArrayList<String> hiddenkws = new ArrayList<String>();
+        final List<String> kws = new ArrayList<String>();
+        final List<String> hiddenkws = new ArrayList<String>();
         boolean suspend = false;
         
         for (String kw : keywords) {
@@ -124,7 +124,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
     @Override
     public void resolve(final SpellAbility sa) {
         final List<Player> tgtPlayers = getTargetPlayers(sa);
-        final ArrayList<ZoneType> affectedZones = new ArrayList<ZoneType>();
+        final List<ZoneType> affectedZones = new ArrayList<ZoneType>();
         final Game game = sa.getActivatingPlayer().getGame();
 
         if (sa.hasParam("PumpZone")) {

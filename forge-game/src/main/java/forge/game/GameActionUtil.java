@@ -450,9 +450,9 @@ public final class GameActionUtil {
      * @return an ArrayList<SpellAbility>.
      * get abilities with all Splice options
      */
-    private  static final ArrayList<SpellAbility> getSpliceAbilities(SpellAbility sa) {
-        ArrayList<SpellAbility> newSAs = new ArrayList<SpellAbility>();
-        ArrayList<SpellAbility> allSaCombinations = new ArrayList<SpellAbility>();
+    private  static final List<SpellAbility> getSpliceAbilities(SpellAbility sa) {
+        List<SpellAbility> newSAs = new ArrayList<SpellAbility>();
+        List<SpellAbility> allSaCombinations = new ArrayList<SpellAbility>();
         allSaCombinations.add(sa);
         Card source = sa.getHostCard();
 

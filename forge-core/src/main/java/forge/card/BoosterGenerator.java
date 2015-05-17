@@ -223,7 +223,7 @@ public class BoosterGenerator {
             } else if (operator.startsWith("fromSheet(") && invert) {
                 String sheetName = StringUtils.strip(operator.substring(9), "()\" ");
                 Iterable<PaperCard> src = StaticData.instance().getPrintSheets().get(sheetName).toFlatList();
-                ArrayList<String> cardNames = Lists.newArrayList();
+                List<String> cardNames = Lists.newArrayList();
                 for (PaperCard card : src) {
                     cardNames.add(card.getName());
                 }

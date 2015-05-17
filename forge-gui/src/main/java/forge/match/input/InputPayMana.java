@@ -247,7 +247,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 colorNeeded = MagicColor.WHITE;
             }
             else {
-                final ArrayList<SpellAbility> colorMatches = new ArrayList<SpellAbility>();
+                final List<SpellAbility> colorMatches = new ArrayList<SpellAbility>();
                 for (SpellAbility sa : abilities) {
                     if (abilityProducesManaColor(sa, sa.getManaPartRecursive(), colorNeeded)) {
                         colorMatches.add(sa);

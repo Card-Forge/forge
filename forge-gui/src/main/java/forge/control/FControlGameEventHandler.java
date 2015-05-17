@@ -322,7 +322,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventBlockersDeclared event) {
-        final HashSet<Card> cards = new HashSet<Card>();
+        final Set<Card> cards = new HashSet<Card>();
         for (final MapOfLists<Card, Card> kv : event.blockers.values()) {
             for (final Collection<Card> blockers : kv.values()) {
                 cards.addAll(blockers);

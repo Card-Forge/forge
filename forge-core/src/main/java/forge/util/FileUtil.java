@@ -234,7 +234,7 @@ public final class FileUtil {
      * @return list of strings
      */
     public static List<String> readAllLines(final Reader reader, final boolean mayTrim) {
-        final ArrayList<String> list = new ArrayList<String>();
+        final List<String> list = new ArrayList<String>();
         try {
             final BufferedReader in = new BufferedReader(reader);
             String line;

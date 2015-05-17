@@ -1,6 +1,6 @@
 package forge.screens;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
@@ -10,8 +10,8 @@ import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
-import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
+import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
 import forge.menu.FPopupMenu;
 import forge.screens.home.HomeScreen;
@@ -130,7 +130,7 @@ public abstract class FScreen extends FContainer {
     }
 
     @Override
-    public void buildTouchListeners(float screenX, float screenY, ArrayList<FDisplayObject> listeners) {
+    public void buildTouchListeners(float screenX, float screenY, List<FDisplayObject> listeners) {
         if (Forge.isLandscapeMode()) {
             //allow touch events on backdrop screen if any
             FScreen backdrop = getLandscapeBackdropScreen();

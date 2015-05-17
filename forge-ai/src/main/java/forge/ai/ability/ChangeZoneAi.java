@@ -465,7 +465,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      */
     private static Card basicManaFixing(final Player ai, final List<Card> list) { // Search for a Basic Land
         final CardCollectionView combined = CardCollection.combine(ai.getCardsIn(ZoneType.Battlefield), ai.getCardsIn(ZoneType.Hand));
-        final ArrayList<String> basics = new ArrayList<String>();
+        final List<String> basics = new ArrayList<String>();
 
         // what types can I go get?
         for (final String name : MagicColor.Constant.BASIC_LANDS) {

@@ -202,7 +202,7 @@ public class CloneEffect extends SpellAbilityEffect {
         }
 
         // triggers to add to clone
-        final ArrayList<String> triggers = new ArrayList<String>();
+        final List<String> triggers = new ArrayList<String>();
         if (sa.hasParam("AddTriggers")) {
             triggers.addAll(Arrays.asList(sa.getParam("AddTriggers").split(",")));
             for (final String s : triggers) {
@@ -237,7 +237,7 @@ public class CloneEffect extends SpellAbilityEffect {
         }
 
         // keywords to add to clone
-        final ArrayList<String> keywords = new ArrayList<String>();
+        final List<String> keywords = new ArrayList<String>();
         if (sa.hasParam("AddKeywords")) {
             keywords.addAll(Arrays.asList(sa.getParam("AddKeywords").split(" & ")));
             // allow SVar substitution for keywords

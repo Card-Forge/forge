@@ -17,11 +17,12 @@
  */
 package forge.itemmanager;
 
-import forge.itemmanager.ItemColumnConfig.SortState;
-
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import forge.itemmanager.ItemColumnConfig.SortState;
 
 /**
  * A collection of methods pertaining to columns in card catalog and
@@ -55,7 +56,7 @@ public final class SColumnUtil {
     }
     private static Map<ColumnDef, ItemColumnConfig> getCardColumns(ColumnDef quantityColDef, boolean includeFavorite,
             boolean includeOwned, boolean includePrice, boolean includeNew, boolean includeDecks) {
-        ArrayList<ColumnDef> colDefs = new ArrayList<ColumnDef>();
+        List<ColumnDef> colDefs = new ArrayList<ColumnDef>();
         if (includeFavorite) {
             colDefs.add(ColumnDef.FAVORITE);
         }
@@ -126,7 +127,7 @@ public final class SColumnUtil {
     }
 
     public static Map<ColumnDef, ItemColumnConfig> getSpecialCardPoolDefaultColumns() {
-        ArrayList<ColumnDef> colDefs = new ArrayList<ColumnDef>();
+        List<ColumnDef> colDefs = new ArrayList<ColumnDef>();
         colDefs.add(ColumnDef.FAVORITE);
         colDefs.add(ColumnDef.NAME);
         colDefs.add(ColumnDef.TYPE);
@@ -186,7 +187,7 @@ public final class SColumnUtil {
     }
 
     public static Map<ColumnDef, ItemColumnConfig> getDecksDefaultColumns(boolean allowEdit, boolean includeFolder) {
-        ArrayList<ColumnDef> colDefs = new ArrayList<ColumnDef>();
+        List<ColumnDef> colDefs = new ArrayList<ColumnDef>();
         colDefs.add(ColumnDef.DECK_FAVORITE);
         if (allowEdit) {
             colDefs.add(ColumnDef.DECK_ACTIONS);

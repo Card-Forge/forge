@@ -56,7 +56,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
     public void resolve(final SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
-        final ArrayList<String> keywords = new ArrayList<String>();
+        final List<String> keywords = new ArrayList<String>();
         final List<String> types = new ArrayList<String>();
         final List<String> svars = new ArrayList<String>();
         final List<String> triggers = new ArrayList<String>();

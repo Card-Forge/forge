@@ -101,7 +101,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                     while (cntToMove > 0 && source.hasCounters()) {
                         final Map<CounterType, Integer> tgtCounters = source.getCounters();
                         
-                        final ArrayList<CounterType> typeChoices = new ArrayList<CounterType>();
+                        final List<CounterType> typeChoices = new ArrayList<CounterType>();
                         // get types of counters
                         for (CounterType ct : tgtCounters.keySet()) {
                             if (ct != CounterType.M1M1 || canPlaceM1M1Counters) {

@@ -1,7 +1,6 @@
 package forge.game.player;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +8,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Multimap;
 
 import forge.LobbyPlayer;
@@ -164,7 +163,7 @@ public abstract class PlayerController {
         return chooseSomeType(kindOfType, sa, validTypes, invalidTypes, false);
     }
 
-    public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ArrayListMultimap<Object, Player> votes);
+    public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes);
     public abstract Pair<CounterType,String> chooseAndRemoveOrPutCounter(Card cardWithCounter);
     public abstract boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question);
     public abstract CardCollectionView getCardsToMulligan(boolean isCommander, Player firstPlayer);
@@ -195,7 +194,7 @@ public abstract class PlayerController {
     public abstract CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, String prompt);
 
     public abstract boolean confirmPayment(CostPart costPart, String string);
-    public abstract ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers, HashMap<String, Object> runParams);
+    public abstract ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers, Map<String, Object> runParams);
     public abstract String chooseProtectionType(String string, SpellAbility sa, List<String> choices);
 	public abstract CardShields chooseRegenerationShield(Card c);
 	

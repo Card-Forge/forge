@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -214,7 +215,7 @@ public abstract class GameState {
         if (life > 0) p.setLife(life, null);
         for (Entry<ZoneType, CardCollectionView> kv : playerCards.entrySet()) {
             if (kv.getKey() == ZoneType.Battlefield) {
-                ArrayList<Card> cards = new ArrayList<Card>();
+                List<Card> cards = new ArrayList<Card>();
                 for (final Card c : kv.getValue()) {
                     if (c.isToken()) {
                         cards.add(c);

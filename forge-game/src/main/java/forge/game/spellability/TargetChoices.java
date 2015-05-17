@@ -109,7 +109,7 @@ public class TargetChoices implements Cloneable {
     }
 
     public final List<GameObject> getTargets() {
-        final ArrayList<GameObject> tgts = new ArrayList<GameObject>();
+        final List<GameObject> tgts = new ArrayList<GameObject>();
         tgts.addAll(targetPlayers);
         tgts.addAll(targetCards);
         tgts.addAll(targetSpells);
