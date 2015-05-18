@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -34,7 +34,6 @@ import forge.card.CardDetailUtil;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
-import forge.card.CardStateName;
 import forge.game.GameView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
@@ -51,7 +50,7 @@ import forge.toolbox.FSkin.SkinnedPanel;
 
 /**
  * The class CardDetailPanel. Shows the details of a card.
- * 
+ *
  * @author Clemens Koza
  * @version V0.0 17.02.2010
  */
@@ -59,7 +58,7 @@ public class CardDetailPanel extends SkinnedPanel {
     /** Constant <code>serialVersionUID=-8461473263764812323L</code>. */
     private static final long serialVersionUID = -8461473263764812323L;
 
-    private static Color fromDetailColor(DetailColors detailColor) {
+    private static Color fromDetailColor(final DetailColors detailColor) {
         return new Color(detailColor.r, detailColor.g, detailColor.b);
     }
 
@@ -110,13 +109,13 @@ public class CardDetailPanel extends SkinnedPanel {
 
     @Override
     public void doLayout() {
-        int insets = 3;
-        int setInfoWidth = 40;
-        int x = insets;
+        final int insets = 3;
+        final int setInfoWidth = 40;
+        final int x = insets;
         int y = insets;
-        int lineWidth = getWidth() - 2 * insets;
-        int lineHeight = nameCostLabel.getPreferredSize().height;
-        int dy = lineHeight + 1;
+        final int lineWidth = getWidth() - 2 * insets;
+        final int lineHeight = nameCostLabel.getPreferredSize().height;
+        final int dy = lineHeight + 1;
 
         nameCostLabel.setBounds(x, y, lineWidth, lineHeight);
         y += dy;
@@ -142,18 +141,18 @@ public class CardDetailPanel extends SkinnedPanel {
         cdArea.setText(CardDetailUtil.getItemDescription(item));
         updateBorder(item instanceof IPaperCard ? Card.getCardForUi((IPaperCard)item).getView().getCurrentState() : null, true);
 
-        String set = item.getEdition();
+        final String set = item.getEdition();
         setInfoLabel.setText(set);
         setInfoLabel.setToolTipText("");
         if (StringUtils.isEmpty(set)) {
             setInfoLabel.setOpaque(false);
             setInfoLabel.setBorder(null);
         } else {
-            CardEdition edition = FModel.getMagicDb().getEditions().get(set);
+            final CardEdition edition = FModel.getMagicDb().getEditions().get(set);
             if (null != edition) {
                 setInfoLabel.setToolTipText(edition.getName());
             }
-            
+
             setInfoLabel.setOpaque(true);
             setInfoLabel.setBackground(Color.BLACK);
             setInfoLabel.setForeground(Color.WHITE);
@@ -169,115 +168,86 @@ public class CardDetailPanel extends SkinnedPanel {
     }
 
     public final void setCard(final CardView card) {
-        setCard(card, false);
+        setCard(card, true, false);
     }
 
-    public final void setCard(final CardView card, final boolean isInAltState) {
-        nameCostLabel.setText("");
+    public final void setCard(final CardView card, final boolean mayView, final boolean isInAltState) {
         typeLabel.setVisible(true);
-        typeLabel.setText("");
         powerToughnessLabel.setVisible(true);
-        powerToughnessLabel.setText("");
-        idLabel.setText("");
-        setInfoLabel.setText("");
-        setInfoLabel.setToolTipText("");
-        setInfoLabel.setOpaque(false);
-        setInfoLabel.setBorder(null);
-        cdArea.setText("");
 
-        if (card == null) {
-            updateBorder(null, false);
-            return;
-        }
-
-        final CardStateView state = card.getState(isInAltState);
+        final CardStateView state = card == null ? null : card.getState(isInAltState);
         if (state == null) {
+            nameCostLabel.setText("");
+            typeLabel.setText("");
+            powerToughnessLabel.setText("");
+            idLabel.setText("");
+            setInfoLabel.setText("");
+            setInfoLabel.setToolTipText("");
+            setInfoLabel.setOpaque(false);
+            setInfoLabel.setBorder(null);
+            cdArea.setText("");
             updateBorder(null, false);
             return;
         }
 
-        boolean canShow = true;
-
-        if (state.getManaCost().isNoCost() || !canShow) {
-            nameCostLabel.setText(CardDetailUtil.formatCardName(card, canShow, isInAltState));
-        }
-        else {
+        final String name = CardDetailUtil.formatCardName(card, mayView, isInAltState), nameCost;
+        if (state.getManaCost().isNoCost() || !mayView) {
+            nameCost = name;
+        } else {
             final String manaCost;
             if (card.isSplitCard() && card.hasAlternateState() && card.getZone() != ZoneType.Stack) { //only display current state's mana cost when on stack
                 manaCost = card.getCurrentState().getManaCost() + " // " + card.getAlternateState().getManaCost();
-            }
-            else {
+            } else {
                 manaCost = state.getManaCost().toString();
             }
-            nameCostLabel.setText(FSkin.encodeSymbols(CardDetailUtil.formatCardName(card, canShow, isInAltState) + " - " + manaCost, true));
+            nameCost = String.format("%s - %s", name, manaCost);
         }
-        typeLabel.setText(CardDetailUtil.formatCardType(state, canShow));
+        nameCostLabel.setText(FSkin.encodeSymbols(nameCost, false));
+        typeLabel.setText(CardDetailUtil.formatCardType(state, mayView));
 
-        String set = state.getSetCode();
-        CardRarity rarity = state.getRarity();
-        if (!canShow) {
+        final String set;
+        final CardRarity rarity;
+        if (mayView) {
+            set = state.getSetCode();
+            rarity = state.getRarity();
+        } else {
             set = CardEdition.UNKNOWN.getCode();
             rarity = CardRarity.Unknown;
         }
         setInfoLabel.setText(set);
+
         if (null != set && !set.isEmpty()) {
-            if (canShow) {
-                CardEdition edition = FModel.getMagicDb().getEditions().get(set);
+            if (mayView) {
+                final CardEdition edition = FModel.getMagicDb().getEditions().get(set);
+                final String setTooltip;
                 if (null == edition) {
-                    setInfoLabel.setToolTipText(rarity.name());
+                    setTooltip = rarity.name();
+                } else {
+                    setTooltip = String.format("%s (%s)", edition.getName(), rarity.name());
                 }
-                else {
-                    setInfoLabel.setToolTipText(String.format("%s (%s)", edition.getName(), rarity.name()));
-                }
+                setInfoLabel.setToolTipText(setTooltip);
             }
 
             setInfoLabel.setOpaque(true);
 
-            Color backColor;
-            switch (rarity) {
-            case Uncommon:
-                backColor = fromDetailColor(DetailColors.UNCOMMON);
-                break;
-
-            case Rare:
-                backColor = fromDetailColor(DetailColors.RARE);
-                break;
-
-            case MythicRare:
-                backColor = fromDetailColor(DetailColors.MYTHIC);
-                break; 
-
-            case Special: //"Timeshifted" or other Special Rarity Cards
-                backColor = fromDetailColor(DetailColors.SPECIAL);
-                break;
-
-            default: //case BasicLand: + case Common:
-                backColor = fromDetailColor(DetailColors.COMMON);
-                break;
-            }
-
-            Color foreColor = FSkin.getHighContrastColor(backColor);
+            final Color backColor = fromDetailColor(CardDetailUtil.getRarityColor(rarity));
             setInfoLabel.setBackground(backColor);
+            final Color foreColor = FSkin.getHighContrastColor(backColor);
             setInfoLabel.setForeground(foreColor);
             setInfoLabel.setBorder(BorderFactory.createLineBorder(foreColor));
         }
 
-        if (state.getState() == CardStateName.FaceDown) {
-            updateBorder(state, false); // do not spoil the color of face-down cards
-        } else {
-            updateBorder(state, canShow);
-        }
+        updateBorder(state, mayView);
 
-        powerToughnessLabel.setText(CardDetailUtil.formatPowerToughness(state, canShow));
+        powerToughnessLabel.setText(CardDetailUtil.formatPowerToughness(state, mayView));
 
-        idLabel.setText(canShow ? CardDetailUtil.formatCardId(state) : "");
+        idLabel.setText(mayView ? CardDetailUtil.formatCardId(state) : "");
 
         // fill the card text
-        cdArea.setText(FSkin.encodeSymbols(CardDetailUtil.composeCardText(state, gameView, canShow), true));
+        cdArea.setText(FSkin.encodeSymbols(CardDetailUtil.composeCardText(state, gameView, mayView), true));
 
         SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
+            @Override public void run() {
                 scrArea.getVerticalScrollBar().setValue(scrArea.getVerticalScrollBar().getMinimum());
             }
         });
@@ -316,7 +286,7 @@ public class CardDetailPanel extends SkinnedPanel {
             return;
         }
 
-        Color color = fromDetailColor(CardDetailUtil.getBorderColor(card, canShow));
+        final Color color = fromDetailColor(CardDetailUtil.getBorderColor(card, canShow));
         setBorder(BorderFactory.createLineBorder(color, 2));
         scrArea.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, color));
     }

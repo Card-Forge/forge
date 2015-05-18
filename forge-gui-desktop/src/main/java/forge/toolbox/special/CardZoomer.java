@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -33,7 +33,6 @@ import javax.swing.Timer;
 
 import net.miginfocom.swing.MigLayout;
 import forge.assets.FSkinProp;
-import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.gui.SOverlayUtils;
 import forge.toolbox.FOverlay;
@@ -43,14 +42,14 @@ import forge.toolbox.imaging.FImagePanel;
 import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
 
-/** 
+/**
  * Displays card image at its original size and correct orientation.
  * <p>
  * Supports split, flip and double-sided cards as well as cards that
  * can be played face-down (eg. morph).
  *
  * @version $Id: CardZoomer.java 24769 2014-02-09 13:56:04Z Hellfish $
- * 
+ *
  */
 public enum CardZoomer {
     SINGLETON_INSTANCE;
@@ -59,11 +58,11 @@ public enum CardZoomer {
     private final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
     private JPanel pnlMain;
     private FImagePanel imagePanel;
-    private SkinnedLabel lblFlipcard = new SkinnedLabel();
+    private final SkinnedLabel lblFlipcard = new SkinnedLabel();
 
     // Details about the current card being displayed.
-    private CardView thisCard;
-    private boolean isInAltState;
+    private CardStateView thisCard;
+    private boolean mayFlip, isInAltState;
 
     // The zoomer is in button mode when it is activated by holding down the
     // middle mouse button or left and right mouse buttons simultaneously.
@@ -83,6 +82,12 @@ public enum CardZoomer {
         setKeyListeners();
     }
 
+    public void setCard(final CardStateView card, final boolean mayFlip) {
+        this.thisCard = card;
+        this.mayFlip = mayFlip;
+        this.isInAltState = card == null ? false : card == card.getCard().getAlternateState();
+    }
+
     /**
      * Creates listener for keys that are recognised by zoomer.
      * <p><ul>
@@ -91,8 +96,7 @@ public enum CardZoomer {
      */
     private void setKeyListeners() {
         overlay.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
+            @Override public void keyPressed(final KeyEvent e) {
                 if (!isButtonMode) {
                     if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                         closeZoomer();
@@ -101,7 +105,7 @@ public enum CardZoomer {
                 if (e.getKeyCode() == KeyEvent.VK_CONTROL) {
                     toggleCardImage();
                 }
-            }        
+            }
         });
     }
 
@@ -113,8 +117,7 @@ public enum CardZoomer {
      */
     private void setMouseButtonListener() {
         overlay.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseReleased(MouseEvent e) {
+            @Override public void mouseReleased(final MouseEvent e) {
                 closeZoomer();
             }
         });
@@ -135,8 +138,7 @@ public enum CardZoomer {
      */
     private void setMouseWheelListener() {
         overlay.addMouseWheelListener(new MouseWheelListener() {
-            @Override
-            public void mouseWheelMoved(MouseWheelEvent e) {
+            @Override public void mouseWheelMoved(final MouseWheelEvent e) {
                 if (!isButtonMode) {
                     if (isMouseWheelEnabled) {
                         isMouseWheelEnabled = false;
@@ -159,9 +161,9 @@ public enum CardZoomer {
      * This method should be called if the zoomer is activated by rotating the
      * mouse wheel.
      */
-    public void doMouseWheelZoom(final CardView card) {
+    public void doMouseWheelZoom() {
         isButtonMode = false;
-        displayCard(card);
+        displayCard();
         startMouseWheelCoolDownTimer(200);
     }
 
@@ -172,25 +174,23 @@ public enum CardZoomer {
      * This method should be called if the zoomer is activated by holding down
      * the middle mouse button or left and right mouse buttons simultaneously.
      */
-    public void doMouseButtonZoom(final CardView newCard) {
-        // don't display zoom if already zoomed or just closed zoom 
+    public void doMouseButtonZoom() {
+        // don't display zoom if already zoomed or just closed zoom
         // (handles mouse wheeling while middle clicking)
         if (isOpen || System.currentTimeMillis() - lastClosedTime < 250) {
             return;
         }
 
         isButtonMode = true;
-        displayCard(newCard);
+        displayCard();
     }
 
     public boolean isZoomerOpen() {
         return isOpen;
     }
 
-    private void displayCard(final CardView newCard) {
+    private void displayCard() {
         isMouseWheelEnabled = false;
-        thisCard = newCard;
-        isInAltState = false;
         setLayout();
         setImage();
         SOverlayUtils.showOverlay();
@@ -201,7 +201,7 @@ public enum CardZoomer {
      * Displays a graphical indicator that shows whether the current card can be flipped or transformed.
      */
     private void setFlipIndicator() {
-        if (thisCard != null && thisCard.hasAlternateState()) {
+        if (thisCard != null && mayFlip) {
             imagePanel.setLayout(new MigLayout("insets 0, w 100%!, h 100%!"));
             imagePanel.add(lblFlipcard, "pos (100% - 100px) 0");
         }
@@ -213,8 +213,8 @@ public enum CardZoomer {
     private void setImage() {
         imagePanel = new FImagePanel();
 
-        final BufferedImage xlhqImage = FImageUtil.getImageXlhq(getState());
-        imagePanel.setImage(xlhqImage == null ? FImageUtil.getImage(getState()) : xlhqImage, getInitialRotation(), AutoSizeImageMode.SOURCE);
+        final BufferedImage xlhqImage = FImageUtil.getImageXlhq(thisCard);
+        imagePanel.setImage(xlhqImage == null ? FImageUtil.getImage(thisCard) : xlhqImage, getInitialRotation(), AutoSizeImageMode.SOURCE);
 
         pnlMain.removeAll();
         pnlMain.add(imagePanel, "w 80%!, h 80%!");
@@ -223,9 +223,11 @@ public enum CardZoomer {
     }
 
     private int getInitialRotation() {
-        return thisCard == null ? 0 :
-                (thisCard.isSplitCard() || thisCard.getCurrentState().getType().isPlane() || thisCard.getCurrentState().getType().isPhenomenon() ? 90 : 0);
-    }   
+        if (thisCard == null) {
+            return 0;
+        }
+        return thisCard.getCard().isSplitCard() || thisCard.getType().isPlane() || thisCard.getType().isPhenomenon() ? 90 : 0;
+    }
 
     private void setLayout() {
         overlay.removeAll();
@@ -243,13 +245,13 @@ public enum CardZoomer {
         SOverlayUtils.hideOverlay();
         lastClosedTime = System.currentTimeMillis();
     }
-    
+
     /**
      * If the zoomer is ativated using the mouse wheel then ignore
-     * wheel for a short period of time after opening. This will 
+     * wheel for a short period of time after opening. This will
      * prevent flip and double side cards from immediately flipping.
      */
-    private void startMouseWheelCoolDownTimer(int millisecsDelay) {
+    private void startMouseWheelCoolDownTimer(final int millisecsDelay) {
         isMouseWheelEnabled = false;
         createMouseWheelCoolDownTimer(millisecsDelay);
         mouseWheelCoolDownTimer.setInitialDelay(millisecsDelay);
@@ -259,11 +261,10 @@ public enum CardZoomer {
     /**
      * Used to ignore mouse wheel rotation for {@code millisecsDelay} milliseconds.
      */
-    private void createMouseWheelCoolDownTimer(int millisecsDelay) {
+    private void createMouseWheelCoolDownTimer(final int millisecsDelay) {
         if (mouseWheelCoolDownTimer == null) {
             mouseWheelCoolDownTimer = new Timer(millisecsDelay, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
+                @Override public void actionPerformed(final ActionEvent e) {
                     isMouseWheelEnabled = true;
                 }
             });
@@ -280,7 +281,7 @@ public enum CardZoomer {
      * Toggles between primary and alternate image associated with card if applicable.
      */
     private void toggleCardImage() {
-        if (thisCard != null && thisCard.hasAlternateState()) {
+        if (thisCard != null && mayFlip) {
             toggleFlipCard();
         }
     }
@@ -293,11 +294,9 @@ public enum CardZoomer {
      */
     private void toggleFlipCard() {
         isInAltState = !isInAltState;
-        imagePanel.setRotation(thisCard.isFlipCard() && isInAltState ? 180 : 0);
+        thisCard = thisCard.getCard().getState(isInAltState);
+        imagePanel.setRotation(thisCard.getCard().isFlipCard() && isInAltState ? 180 : 0);
         setImage();
     }
 
-    private CardStateView getState() {
-        return thisCard.getState(isInAltState);
-    }
 }

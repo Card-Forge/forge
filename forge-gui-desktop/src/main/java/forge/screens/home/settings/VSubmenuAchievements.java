@@ -99,12 +99,12 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
             }
 
             private void showCard(MouseEvent e) {
-                Achievement achievement = getAchievementAt(e.getX(), e.getY());
+                final Achievement achievement = getAchievementAt(e.getX(), e.getY());
                 if (achievement != null) {
-                    IPaperCard pc = achievement.getPaperCard();
+                    final IPaperCard pc = achievement.getPaperCard();
                     if (pc != null) {
                         preventMouseOut = true;
-                        CardZoomer.SINGLETON_INSTANCE.doMouseButtonZoom(CardView.getCardForUi(pc));
+                        CardZoomer.SINGLETON_INSTANCE.setCard(CardView.getCardForUi(pc).getCurrentState(), true);
                     }
                 }
             }

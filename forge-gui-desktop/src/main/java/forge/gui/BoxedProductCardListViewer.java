@@ -190,7 +190,7 @@ public class BoxedProductCardListViewer extends FDialog {
             if ((row >= 0) && (row < BoxedProductCardListViewer.this.list.size())) {
                 final PaperCard cp = BoxedProductCardListViewer.this.list.get(row);
                 BoxedProductCardListViewer.this.detail.setCard(CardView.getCardForUi(cp));
-                BoxedProductCardListViewer.this.picture.setCard(cp);
+                BoxedProductCardListViewer.this.picture.setItem(cp);
             }
         }
     }

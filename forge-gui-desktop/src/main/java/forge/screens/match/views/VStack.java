@@ -196,9 +196,7 @@ public class VStack implements IVDoc<CStack> {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
                     hoveredItem = StackInstanceTextArea.this;
-                    if (!txt.startsWith("Morph ")) {
-                        controller.getMatchUI().setCard(item.getSourceCard());
-                    }
+                    controller.getMatchUI().setCard(item.getSourceCard());
                 }
 
                 @Override

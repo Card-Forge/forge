@@ -256,7 +256,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 if (item != null && item.item instanceof IPaperCard) {
                     setLockHoveredItem(true); //lock hoveredItem while zoomer open
                     final CardView card = CardView.getCardForUi((IPaperCard) item.item);
-                    CardZoomer.SINGLETON_INSTANCE.doMouseButtonZoom(card);
+                    CardZoomer.SINGLETON_INSTANCE.setCard(card.getCurrentState(), true);
+                    CardZoomer.SINGLETON_INSTANCE.doMouseButtonZoom();
                 }
             }
 

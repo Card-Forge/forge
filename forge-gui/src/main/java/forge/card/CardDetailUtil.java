@@ -153,6 +153,21 @@ public class CardDetailUtil {
         return borderColors;
     }
 
+    public static DetailColors getRarityColor(final CardRarity rarity) {
+        switch (rarity) {
+            case Uncommon:
+                return DetailColors.UNCOMMON;
+            case Rare:
+                return DetailColors.RARE;
+            case MythicRare:
+                return DetailColors.MYTHIC;
+            case Special: //"Timeshifted" or other Special Rarity Cards
+                return DetailColors.SPECIAL;
+            default: //case BasicLand: + case Common:
+                return DetailColors.COMMON;
+        }
+    }
+
     public static String getItemDescription(final InventoryItemFromSet item) {
         if (item instanceof SealedProduct) {
             return ((SealedProduct)item).getDescription();

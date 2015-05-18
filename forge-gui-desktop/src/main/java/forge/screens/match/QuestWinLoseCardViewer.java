@@ -113,7 +113,7 @@ public class QuestWinLoseCardViewer extends FPanel {
             if ((row >= 0) && (row < QuestWinLoseCardViewer.this.list.size())) {
                 final PaperCard cp = QuestWinLoseCardViewer.this.list.get(row);
                 QuestWinLoseCardViewer.this.detail.setCard(CardView.getCardForUi(cp));
-                QuestWinLoseCardViewer.this.picture.setCard(cp);
+                QuestWinLoseCardViewer.this.picture.setItem(cp);
             }
         }
     }

@@ -173,7 +173,7 @@ public class CardListViewer extends FDialog {
             if ((row >= 0) && (row < CardListViewer.this.list.size())) {
                 final PaperCard cp = CardListViewer.this.list.get(row);
                 CardListViewer.this.detail.setCard(CardView.getCardForUi(cp));
-                CardListViewer.this.picture.setCard(cp);
+                CardListViewer.this.picture.setItem(cp);
             }
         }
     }

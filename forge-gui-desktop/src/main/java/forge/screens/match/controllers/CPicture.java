@@ -72,12 +72,13 @@ public class CPicture implements ICDoc {
     void showCard(final CardView c, final boolean isInAltState, final boolean mayView, final boolean mayFlip) {
         final CardStateView toShow = c != null && mayView ? c.getState(isInAltState) : null;
         flipIndicator.setVisible(toShow != null && mayFlip);
-        picturePanel.setCard(toShow);
+        picturePanel.setCard(toShow, mayView);
+        zoomer.setCard(toShow, mayFlip);
     }
 
     void showItem(final InventoryItem item) {
         flipIndicator.setVisible(false);
-        picturePanel.setCard(item);
+        picturePanel.setItem(item);
     }
 
     @Override
@@ -105,7 +106,7 @@ public class CPicture implements ICDoc {
             @Override
             public void onMiddleMouseDown(final MouseEvent e) {
                 if (isCardDisplayed()) {
-                    zoomer.doMouseButtonZoom(controller.getCurrentCard());
+                    zoomer.doMouseButtonZoom();
                 }
             }
 
@@ -130,7 +131,7 @@ public class CPicture implements ICDoc {
             public void mouseWheelMoved(final MouseWheelEvent arg0) {
                 if (isCardDisplayed()) {
                     if (arg0.getWheelRotation() < 0) {
-                        zoomer.doMouseWheelZoom(controller.getCurrentCard());
+                        zoomer.doMouseWheelZoom();
                     }
                 }
             }

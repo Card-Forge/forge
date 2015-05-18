@@ -174,7 +174,7 @@ public class CardListChooser extends FDialog {
             if ((row >= 0) && (row < CardListChooser.this.list.size())) {
                 final PaperCard cp = CardListChooser.this.list.get(row);
                 CardListChooser.this.detail.setCard(CardView.getCardForUi(cp));
-                CardListChooser.this.picture.setCard(cp);
+                CardListChooser.this.picture.setItem(cp);
             }
         }
     }
