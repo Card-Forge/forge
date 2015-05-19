@@ -41,7 +41,7 @@ public enum ProtocolMethod {
     enableOverlay       (Mode.SERVER),
     disableOverlay      (Mode.SERVER),
     finishGame          (Mode.SERVER),
-    showManaPool        (Mode.SERVER, Object.class, PlayerView.class),
+    showManaPool        (Mode.SERVER, Void.TYPE, PlayerView.class),
     hideManaPool        (Mode.SERVER, Void.TYPE, PlayerView.class),
     updateStack         (Mode.SERVER),
     updateZones         (Mode.SERVER, Void.TYPE, Iterable/*PlayerZoneUpdate*/.class),

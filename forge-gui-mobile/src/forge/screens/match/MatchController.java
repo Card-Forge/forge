@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 
 import forge.Forge;
 import forge.Graphics;
@@ -68,6 +69,8 @@ public class MatchController extends AbstractGuiGame {
 
     private static HostedMatch hostedMatch;
     private static MatchScreen view;
+
+    private final Map<PlayerView, InfoTab> zonesToRestore = Maps.newHashMap();
 
     public static MatchScreen getView() {
         return view;
@@ -233,23 +236,27 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public Object showManaPool(final PlayerView player) {
+    public void showManaPool(final PlayerView player) {
         final VPlayerPanel playerPanel = view.getPlayerPanel(player);
-        final InfoTab oldSelectedTab = playerPanel.getSelectedTab();
-        playerPanel.setSelectedTab(playerPanel.getManaPoolTab());
-        return oldSelectedTab;
+        final InfoTab selectedTab = playerPanel.getSelectedTab(), manaPoolTab = playerPanel.getManaPoolTab();
+        if (!manaPoolTab.equals(selectedTab)) {
+            //if mana pool was selected previously, we don't need to switch back to anything
+            zonesToRestore.put(player, selectedTab);
+        }
+        playerPanel.setSelectedTab(manaPoolTab);
     }
 
     @Override
-    public void hideManaPool(final PlayerView player, final Object zoneToRestore) {
+    public void hideManaPool(final PlayerView player) {
         final VPlayerPanel playerPanel = view.getPlayerPanel(player);
-        if (zoneToRestore == playerPanel.getManaPoolTab()) {
-            return; //if mana pool was selected previously, we don't need to switch back to anything
+        // value may be null so explicit containsKey call is necessary
+        final boolean doRestore = zonesToRestore.containsKey(player);
+        final InfoTab zoneToRestore = zonesToRestore.remove(player);
+        if (!playerPanel.getManaPoolTab().equals(playerPanel.getSelectedTab()) || !doRestore) {
+            return; //if player switched away from mana pool already, don't change anything
         }
-        if (playerPanel.getSelectedTab() != playerPanel.getManaPoolTab()) {
-            return; //if player switch away from mana pool already, don't change anything
-        }
-        playerPanel.setSelectedTab((InfoTab)zoneToRestore);
+
+        playerPanel.setSelectedTab(zoneToRestore);
     }
 
     @Override

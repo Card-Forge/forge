@@ -39,7 +39,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     protected ManaCostBeingPaid manaCost;
     protected final SpellAbility saPaidFor;
     private final boolean wasFloatingMana;
-    private final Object zoneToRestore;
     private final Queue<Card> delaySelectCards = new LinkedList<Card>();
 
     private boolean bPaid = false;
@@ -55,13 +54,15 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
         //if player is floating mana, show mana pool to make it easier to use that mana
         wasFloatingMana = !player.getManaPool().isEmpty();
-        zoneToRestore = wasFloatingMana ? getController().getGui().showManaPool(PlayerView.get(player)) : null;
+        if (wasFloatingMana) {
+            getController().getGui().showManaPool(PlayerView.get(player));
+        }
     }
 
     @Override
     protected void onStop() {
         if (wasFloatingMana) { //hide mana pool if it was shown due to floating mana
-            getController().getGui().hideManaPool(PlayerView.get(player), zoneToRestore);
+            getController().getGui().hideManaPool(PlayerView.get(player));
         }
     }
 

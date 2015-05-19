@@ -769,12 +769,12 @@ public final class CMatchUI
     }
 
     @Override
-    public Object showManaPool(final PlayerView player) {
-        return null; //not needed since mana pool icons are always visible
+    public void showManaPool(final PlayerView player) {
+        //not needed since mana pool icons are always visible
     }
 
     @Override
-    public void hideManaPool(final PlayerView player, final Object zoneToRestore) {
+    public void hideManaPool(final PlayerView player) {
         //not needed since mana pool icons are always visible
     }
 

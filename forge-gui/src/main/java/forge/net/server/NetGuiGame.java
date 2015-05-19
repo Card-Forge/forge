@@ -117,14 +117,13 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
-    public Object showManaPool(final PlayerView player) {
+    public void showManaPool(final PlayerView player) {
         send(ProtocolMethod.showManaPool, player);
-        return null;
     }
 
     @Override
-    public void hideManaPool(final PlayerView player, final Object zoneToRestore) {
-        send(ProtocolMethod.hideManaPool, player, zoneToRestore);
+    public void hideManaPool(final PlayerView player) {
+        send(ProtocolMethod.hideManaPool, player);
     }
 
     @Override

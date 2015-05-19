@@ -41,8 +41,8 @@ public interface IGuiGame {
     void enableOverlay();
     void disableOverlay();
     void finishGame();
-    Object showManaPool(PlayerView player);
-    void hideManaPool(PlayerView player, Object zoneToRestore);
+    void showManaPool(PlayerView player);
+    void hideManaPool(PlayerView player);
     void updateStack();
     void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate);
     void updateSingleCard(CardView card);
