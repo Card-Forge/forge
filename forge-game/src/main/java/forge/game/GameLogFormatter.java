@@ -100,8 +100,11 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventCardModeChosen ev) {
-        String modeChoiceOutcome = String.format("%s has chosen %s for %s.", ev.player, ev.mode, ev.cardName);
+        if (!ev.log) {
+            return null;
+        }
 
+        String modeChoiceOutcome = String.format("%s has chosen %s for %s.", ev.player, ev.mode, ev.cardName);
         return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, modeChoiceOutcome);
     }
 

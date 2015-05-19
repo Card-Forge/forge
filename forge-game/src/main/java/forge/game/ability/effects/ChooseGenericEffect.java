@@ -57,14 +57,14 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                 chosenName = choices[idxChosen];
             }
             SpellAbility chosenSA = AbilityFactory.getAbility(host.getSVar(chosenName), host);
+            String chosenValue = abilities.get(idxChosen).getDescription();
             if (sa.hasParam("ShowChoice")) {
                 boolean dontNotifySelf = sa.getParam("ShowChoice").equals("ExceptSelf");
-                String chosenValue = abilities.get(idxChosen).getDescription();
                 p.getGame().getAction().nofityOfValue(sa, p, chosenValue, dontNotifySelf ? sa.getActivatingPlayer() : null);
-                p.getGame().fireEvent(new GameEventCardModeChosen(p, host.getName(), chosenValue));
             }
             chosenSA.setActivatingPlayer(sa.getActivatingPlayer());
             ((AbilitySub) chosenSA).setParent(sa);
+            p.getGame().fireEvent(new GameEventCardModeChosen(p, host.getName(), chosenValue, sa.hasParam("ShowChoice")));
             AbilityUtils.resolve(chosenSA);
         }
     }
