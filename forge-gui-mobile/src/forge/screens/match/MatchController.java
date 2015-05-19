@@ -110,7 +110,6 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void openView(final TrackableCollection<PlayerView> myPlayers) {
-        setLocalPlayers(myPlayers);
         final boolean noHumans = !hasLocalPlayers();
 
         final FCollectionView<PlayerView> allPlayers = getGameView().getPlayers();

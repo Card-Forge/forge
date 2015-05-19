@@ -59,31 +59,26 @@ public class ControlWinLose {
 
     /** Action performed when "continue" button is pressed in default win/lose UI. */
     public void actionOnContinue() {
-        SOverlayUtils.hideOverlay();
-        saveOptions();
-        for (final IGameController controller : matchUI.getGameControllers()) {
-            controller.nextGameDecision(NextGameDecision.CONTINUE);
-        }
+        nextGameAction(NextGameDecision.CONTINUE);
     }
 
     /** Action performed when "restart" button is pressed in default win/lose UI. */
     public void actionOnRestart() {
-        SOverlayUtils.hideOverlay();
-        saveOptions();
-        for (final IGameController controller : matchUI.getGameControllers()) {
-            controller.nextGameDecision(NextGameDecision.NEW);
-        }
+        nextGameAction(NextGameDecision.NEW);
     }
 
     /** Action performed when "quit" button is pressed in default win/lose UI. */
     public void actionOnQuit() {
-        // Reset other stuff
-        saveOptions();
-        for (final IGameController controller : matchUI.getGameControllers()) {
-            controller.nextGameDecision(NextGameDecision.QUIT);
-        }
+        nextGameAction(NextGameDecision.QUIT);
         Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
+    }
+
+    private void nextGameAction(final NextGameDecision decision) {
         SOverlayUtils.hideOverlay();
+        saveOptions();
+        for (final IGameController controller : matchUI.getOriginalGameControllers()) {
+            controller.nextGameDecision(decision);
+        }
     }
 
     /**

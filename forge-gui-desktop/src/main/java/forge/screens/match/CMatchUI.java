@@ -244,7 +244,6 @@ public final class CMatchUI
 
     private void initMatch(final FCollectionView<PlayerView> sortedPlayers, final Collection<PlayerView> myPlayers) {
         this.sortedPlayers = sortedPlayers;
-        this.setLocalPlayers(myPlayers);
         allHands = sortedPlayers.size() == getLocalPlayerCount();
 
         final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");

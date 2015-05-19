@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -27,37 +28,24 @@ import forge.game.player.PlayerView;
 import forge.interfaces.IGameController;
 import forge.interfaces.IGuiGame;
 import forge.interfaces.IMayViewCards;
-import forge.util.FCollection;
-import forge.util.FCollectionView;
 
 public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
-    private FCollection<PlayerView> localPlayers = new FCollection<PlayerView>();
     private PlayerView currentPlayer = null;
-
-    protected final void setLocalPlayers(final Collection<PlayerView> myPlayers) {
-        this.localPlayers = myPlayers == null ? new FCollection<PlayerView>() : new FCollection<PlayerView>(myPlayers);
-        this.currentPlayer = Iterables.getFirst(this.localPlayers, null);
-        this.autoPassUntilEndOfTurn.retainAll(myPlayers);
-    }
-    private void addLocalPlayer(final PlayerView player) {
-        this.localPlayers.add(player);
-    }
-    private void removeLocalPlayer(final PlayerView player) {
-        this.localPlayers.remove(player);
-        this.autoPassUntilEndOfTurn.remove(player);
-    }
+    private IGameController spectator = null;
+    private final Map<PlayerView, IGameController> gameControllers = Maps.newHashMap();
+    private final Map<PlayerView, IGameController> originalGameControllers = Maps.newHashMap();
 
     public final boolean hasLocalPlayers() {
-        return !localPlayers.isEmpty();
+        return !gameControllers.isEmpty();
     }
-    public final FCollectionView<PlayerView> getLocalPlayers() {
-        return localPlayers;
+    public final Set<PlayerView> getLocalPlayers() {
+        return gameControllers.keySet();
     }
     public final int getLocalPlayerCount() {
-        return localPlayers.size();
+        return gameControllers.size();
     }
     public final boolean isLocalPlayer(final PlayerView player) {
-        return  localPlayers.contains(player);
+        return gameControllers.containsKey(player);
     }
 
     public final PlayerView getCurrentPlayer() {
@@ -65,6 +53,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
     @Override
     public final void setCurrentPlayer(final PlayerView player) {
+        if (!gameControllers.containsKey(player)) {
+            throw new IllegalArgumentException();
+        }
         this.currentPlayer = player;
         updateCurrentPlayer(player);
     }
@@ -79,24 +70,54 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         this.gameView = gameView;
     }
 
-    private final Map<PlayerView, IGameController> gameControllers = Maps.newHashMap();
     public final IGameController getGameController() {
-        return gameControllers.get(getCurrentPlayer());
+        return getGameController(getCurrentPlayer());
     }
-    public final IGameController getGameController(final PlayerView p0) {
-        return gameControllers.get(p0);
+    public final IGameController getGameController(final PlayerView player) {
+        if (player == null) {
+            return spectator;
+        }
+        return gameControllers.get(player);
     }
-    public final Collection<IGameController> getGameControllers() {
-        return gameControllers.values();
+
+    public final Collection<IGameController> getOriginalGameControllers() {
+        return originalGameControllers.values();
     }
+
+    @Override
+    public void setOriginalGameController(final PlayerView player, final IGameController gameController) {
+        if (player == null || gameController == null) {
+            throw new IllegalArgumentException();
+        }
+        originalGameControllers.put(player, gameController);
+        gameControllers.put(player, gameController);
+    }
+
     @Override
     public void setGameController(final PlayerView player, final IGameController gameController) {
-        this.gameControllers.put(player, gameController);
-        if (gameController == null) {
-            addLocalPlayer(player);
-        } else {
-            removeLocalPlayer(player);
+        if (player == null) {
+            throw new IllegalArgumentException();
         }
+        if (gameController == null) {
+            if (originalGameControllers.containsKey(player)) {
+                gameControllers.put(player, originalGameControllers.get(player));
+            } else {
+                gameControllers.remove(player);
+                autoPassUntilEndOfTurn.remove(player);
+                final PlayerView currentPlayer = getCurrentPlayer();
+                if (Objects.equals(player, currentPlayer)) {
+                    // set current player to a value known to be legal
+                    setCurrentPlayer(Iterables.getFirst(gameControllers.keySet(), null));
+                }
+            }
+        } else {
+            this.gameControllers.put(player, gameController);
+        }
+    }
+
+    @Override
+    public void setSpectator(final IGameController spectator) {
+        this.spectator = spectator;
     }
 
     @Override
@@ -177,8 +198,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
         if (hasLocalPlayers()) {
             if (showConfirmDialog("This will concede the current game and you will lose.\n\nConcede anyway?", "Concede Game?", "Concede", "Cancel")) {
-                for (final IGameController c : getGameControllers()) {
-                    // Concede each player on this Gui
+                for (final IGameController c : getOriginalGameControllers()) {
+                    // Concede each player on this Gui (except mind-controlled players)
                     c.concede();
                 }
             }
@@ -203,9 +224,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public void updateButtons(final PlayerView owner, final boolean okEnabled, final boolean cancelEnabled, final boolean focusOk) {
         updateButtons(owner, "OK", "Cancel", okEnabled, cancelEnabled, focusOk);
     }
-
-    @Override
-    public abstract void updateButtons(PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1);
 
     // Auto-yield and other input-related code
 

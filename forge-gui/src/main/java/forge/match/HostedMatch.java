@@ -169,7 +169,7 @@ public class HostedMatch {
                 final IGuiGame gui = guis.get(p.getRegisteredPlayer());
                 humanController.setGui(gui);
                 gui.setGameView(gameView);
-                gui.setGameController(p.getView(), humanController);
+                gui.setOriginalGameController(p.getView(), humanController);
 
                 game.subscribeToEvents(new FControlGameEventHandler(humanController));
                 playersPerGui.add(gui, p.getView());
@@ -189,7 +189,7 @@ public class HostedMatch {
             final PlayerControllerHuman humanController = new WatchLocalGame(game, new LobbyPlayerHuman("Spectator"), gui);
             game.subscribeToEvents(new FControlGameEventHandler(humanController));
             humanControllers.add(humanController);
-            gui.setGameController(null, humanController);
+            gui.setSpectator(humanController);
 
             gui.openView(null);
         }
@@ -230,12 +230,11 @@ public class HostedMatch {
                 }
             }
         });
-
     }
 
     public void registerSpectator(final IGuiGame gui) {
         final PlayerControllerHuman humanController = new WatchLocalGame(game, null, gui);
-        gui.setGameController(null, humanController);
+        gui.setSpectator(humanController);
         gui.openView(null);
 
         game.subscribeToEvents(new FControlGameEventHandler(humanController));

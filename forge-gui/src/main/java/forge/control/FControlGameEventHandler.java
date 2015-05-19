@@ -235,9 +235,15 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         if (ev.player.getGame().isGameOver()) {
             return null;
         }
+
+        final PlayerControllerHuman newController;
         if (ev.newController instanceof PlayerControllerHuman) {
-            matchController.setGameController(PlayerView.get(ev.player), (PlayerControllerHuman) ev.newController);
+            newController = (PlayerControllerHuman) ev.newController;
+        } else {
+            newController = null;
         }
+        matchController.setGameController(PlayerView.get(ev.player), newController);
+
         needPlayerControlUpdate = true;
         return processEvent();
     }
