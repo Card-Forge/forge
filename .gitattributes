@@ -526,6 +526,7 @@ forge-game/src/main/java/forge/game/event/GameEventCardChangeZone.java -text
 forge-game/src/main/java/forge/game/event/GameEventCardCounters.java -text
 forge-game/src/main/java/forge/game/event/GameEventCardDamaged.java -text
 forge-game/src/main/java/forge/game/event/GameEventCardDestroyed.java -text
+forge-game/src/main/java/forge/game/event/GameEventCardModeChosen.java -text
 forge-game/src/main/java/forge/game/event/GameEventCardPhased.java -text
 forge-game/src/main/java/forge/game/event/GameEventCardRegenerated.java -text
 forge-game/src/main/java/forge/game/event/GameEventCardSacrificed.java -text

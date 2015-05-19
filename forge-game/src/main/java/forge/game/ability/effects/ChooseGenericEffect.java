@@ -4,6 +4,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.event.GameEventCardModeChosen;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
@@ -57,7 +58,10 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
             }
             SpellAbility chosenSA = AbilityFactory.getAbility(host.getSVar(chosenName), host);
             if (sa.hasParam("ShowChoice")) {
-                p.getGame().getAction().nofityOfValue(sa, p, abilities.get(idxChosen).getDescription(), null);
+                boolean dontNotifySelf = sa.getParam("ShowChoice").equals("ExceptSelf");
+                String chosenValue = abilities.get(idxChosen).getDescription();
+                p.getGame().getAction().nofityOfValue(sa, p, chosenValue, dontNotifySelf ? sa.getActivatingPlayer() : null);
+                p.getGame().fireEvent(new GameEventCardModeChosen(p, host.getName(), chosenValue));
             }
             chosenSA.setActivatingPlayer(sa.getActivatingPlayer());
             ((AbilitySub) chosenSA).setParent(sa);

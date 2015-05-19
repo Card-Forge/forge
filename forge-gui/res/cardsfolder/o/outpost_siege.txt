@@ -2,7 +2,7 @@ Name:Outpost Siege
 ManaCost:3 R
 Types:Enchantment
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ SiegeChoice | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose Khans or Dragons. Khans - At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card. Dragons - Whenever a creature you control leaves the battlefield, CARDNAME deals 1 damage to target creature or player.
-SVar:SiegeChoice:DB$ GenericChoice | Choices$ Khans,Dragons | Defined$ You | AILogic$ Khans
+SVar:SiegeChoice:DB$ GenericChoice | Choices$ Khans,Dragons | Defined$ You | AILogic$ Khans | ShowChoice$ ExceptSelf
 SVar:Khans:DB$ Animate | Defined$ Self | Triggers$ KhansTrigger | Permanent$ True | SpellDescription$ Khans
 SVar:KhansTrigger:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ PseudoDraw | TriggerDescription$ At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card.
 SVar:PseudoDraw:DB$ Mill | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBMayBePlay

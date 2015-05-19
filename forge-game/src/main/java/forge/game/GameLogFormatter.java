@@ -13,6 +13,7 @@ import forge.game.event.GameEventAttackersDeclared;
 import forge.game.event.GameEventBlockersDeclared;
 import forge.game.event.GameEventCardDamaged;
 import forge.game.event.GameEventCardDamaged.DamageType;
+import forge.game.event.GameEventCardModeChosen;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.event.GameEventLandPlayed;
 import forge.game.event.GameEventMulligan;
@@ -95,6 +96,13 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         sb.append(".");
 
         return new GameLogEntry(GameLogEntryType.STACK_ADD, sb.toString());
+    }
+
+    @Override
+    public GameLogEntry visit(GameEventCardModeChosen ev) {
+        String modeChoiceOutcome = String.format("%s has chosen %s for %s.", ev.player, ev.mode, ev.cardName);
+
+        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, modeChoiceOutcome);
     }
 
     private static GameLogEntry generateSummary(final List<GameOutcome> gamesPlayed) {
