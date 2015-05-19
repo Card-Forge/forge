@@ -557,14 +557,17 @@ public final class CMatchUI
         btn1.setText(label1);
         btn2.setText(label2);
 
+        final FButton toFocus = enable1 && focus1 ? btn1 : (enable2 ? btn2 : null);
+
         // Remove focusable so the right button grabs focus properly
-        btn1.setFocusable(false);
-        btn2.setFocusable(false);
+        if (toFocus == btn2)
+            btn1.setFocusable(false);
+        else if (toFocus == btn1)
+            btn2.setFocusable(false);
 
         btn1.setEnabled(enable1);
         btn2.setEnabled(enable2);
 
-        final FButton toFocus = enable1 && focus1 ? btn1 : (enable2 ? btn2 : null);
         // ensure we don't steal focus from an overlay
         if (toFocus != null) {
             FThreads.invokeInEdtLater(new Runnable() {
