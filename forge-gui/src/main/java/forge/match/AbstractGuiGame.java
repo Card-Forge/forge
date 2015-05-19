@@ -89,8 +89,13 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (player == null || gameController == null) {
             throw new IllegalArgumentException();
         }
+
+        final boolean doSetCurrentPlayer = originalGameControllers.isEmpty();
         originalGameControllers.put(player, gameController);
         gameControllers.put(player, gameController);
+        if (doSetCurrentPlayer) {
+            setCurrentPlayer(player);
+        }
     }
 
     @Override
