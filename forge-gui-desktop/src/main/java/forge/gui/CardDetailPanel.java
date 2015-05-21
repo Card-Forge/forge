@@ -239,7 +239,7 @@ public class CardDetailPanel extends SkinnedPanel {
         }
 
         if (state.getState() == CardStateName.FaceDown) {
-            updateBorder(state, false); // HACK! A temporary measure until the morphs still leaking color can be fixed.
+            updateBorder(state, false); // TODO: HACK! A temporary measure until the morphs still leaking color can be fixed properly.
         } else {
             updateBorder(state, mayView);
         }
