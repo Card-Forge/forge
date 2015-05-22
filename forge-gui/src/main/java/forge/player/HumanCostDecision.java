@@ -898,10 +898,6 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         private int getDistibutedCounters() {
-            if (cardsChosen == null) {
-                return 0;
-            }
-
             int sum = 0;
             for (final Entry<Card, Integer> kv : cardsChosen.entrySet()) {
                 sum += kv.getValue().intValue();
