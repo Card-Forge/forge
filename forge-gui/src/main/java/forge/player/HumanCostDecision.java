@@ -898,6 +898,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         private int getDistibutedCounters() {
+            if (cardsChosen == null) {
+                return 0;
+            }
+
             int sum = 0;
             for (final Entry<Card, Integer> kv : cardsChosen.entrySet()) {
                 sum += kv.getValue().intValue();
@@ -965,6 +969,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         final CardCollectionView validCards = CardLists.getValidCards(player.getCardsIn(cost.zone), type.split(";"), player, source);
         if (cost.zone.equals(ZoneType.Battlefield)) {
+            if (cntRemoved == 0) {
+                return PaymentDecision.card(source, 0);
+            }
+
             final InputSelectCardToRemoveCounter inp = new InputSelectCardToRemoveCounter(controller, cntRemoved, cost.counter, validCards);
             inp.setMessage("Remove %d " + cost.counter.getName() + " counters from " + cost.getDescriptiveType());
             inp.setCancelAllowed(true);
