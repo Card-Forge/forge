@@ -602,6 +602,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     private final boolean hasFizzled(final SpellAbility sa, final Card source, final boolean parentFizzled) {
+        // Check if the spellability is a trigger that was invalidated with fizzleTriggersOnStackTargeting
+        if (sa.getSVar("TriggerFizzled").equals("True")) {
+            return true;
+        }
+
         // Can't fizzle unless there are some targets
         boolean fizzle = false;
         boolean rememberTgt = sa.getRootAbility().hasParam("RememberOriginalTargets");
@@ -688,7 +693,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 if (sa instanceof WrappedAbility) {
                     WrappedAbility wi = (WrappedAbility)sa;
                     if (wi.getTrigger().getMode() == t) {
-                        sa.getTriggeringObjects().put("Target", null);
+                        sa.setSVar("TriggerFizzled", "True");
                     }
                 }
             }
