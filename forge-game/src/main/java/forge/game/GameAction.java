@@ -303,6 +303,10 @@ public class GameAction {
                 copied.getDamageHistory().setNotBlockedSinceLastUpkeepOf(p);
                 copied.getDamageHistory().setNotBeenBlockedSinceLastUpkeepOf(p);
             }
+            if (zoneFrom.is(ZoneType.Graveyard)) {
+                // fizzle all "damage done" triggers for cards returning to battlefield from graveyard
+                game.getStack().fizzleTriggersTargeting(copied, TriggerType.DamageDone);
+            }
         } else if (zoneTo.is(ZoneType.Graveyard) || zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library)) {
             copied.setTimestamp(game.getNextTimestamp());
             for (String s : copied.getKeywords()) {

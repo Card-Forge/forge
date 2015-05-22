@@ -66,6 +66,7 @@ import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
+import forge.game.trigger.WrappedAbility;
 
 /**
  * <p>
@@ -678,6 +679,20 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         frozenStack.remove(si);
         game.updateStackForView();
         game.fireEvent(new GameEventSpellRemovedFromStack(si.getSpellAbility(true)));
+    }
+
+    public void fizzleTriggersTargeting(Card c, TriggerType t) {
+        for (SpellAbilityStackInstance si : stack) {
+            SpellAbility sa = si.getSpellAbility(false);
+            if (sa.getTriggeringObjects().containsKey("Target") && sa.getTriggeringObjects().get("Target").equals(c)) {
+                if (sa instanceof WrappedAbility) {
+                    WrappedAbility wi = (WrappedAbility)sa;
+                    if (wi.getTrigger().getMode() == t) {
+                        sa.getTriggeringObjects().put("Target", null);
+                    }
+                }
+            }
+        }
     }
 
     public final SpellAbilityStackInstance getInstanceFromSpellAbility(final SpellAbility sa) {
