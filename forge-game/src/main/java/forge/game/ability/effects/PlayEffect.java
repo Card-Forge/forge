@@ -30,7 +30,7 @@ import forge.util.Lang;
 
 public class PlayEffect extends SpellAbilityEffect {
     @Override
-    protected String getStackDescription(SpellAbility sa) {
+    protected String getStackDescription(final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
         sb.append("Play ");
@@ -49,13 +49,12 @@ public class PlayEffect extends SpellAbilityEffect {
     }
 
     @Override
-    public void resolve(SpellAbility sa) {
+    public void resolve(final SpellAbility sa) {
         final Card source = sa.getHostCard();
         Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
-        boolean optional = sa.hasParam("Optional");
+        final boolean optional = sa.hasParam("Optional");
         boolean remember = sa.hasParam("RememberPlayed");
-        boolean wasFaceDown = false;
         boolean useEncoded = false;
         int amount = 1;
         if (sa.hasParam("Amount") && !sa.getParam("Amount").equals("All")) {
@@ -84,26 +83,26 @@ public class PlayEffect extends SpellAbilityEffect {
         }
         else if (sa.hasParam("AnySupportedCard")) {
             List<PaperCard> cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
-            String valid = sa.getParam("AnySupportedCard");
+            final String valid = sa.getParam("AnySupportedCard");
             if (StringUtils.containsIgnoreCase(valid, "sorcery")) {
-                Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_SORCERY, PaperCard.FN_GET_RULES);
+                final Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_SORCERY, PaperCard.FN_GET_RULES);
                 cards = Lists.newArrayList(Iterables.filter(cards, cpp));
             }
             if (StringUtils.containsIgnoreCase(valid, "instant")) {
-                Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_INSTANT, PaperCard.FN_GET_RULES);
+                final Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_INSTANT, PaperCard.FN_GET_RULES);
                 cards = Lists.newArrayList(Iterables.filter(cards, cpp));
             }
             if (sa.hasParam("RandomCopied")) {
-                List<PaperCard> copysource = new ArrayList<PaperCard>(cards);
-                CardCollection choice = new CardCollection();
+                final List<PaperCard> copysource = new ArrayList<PaperCard>(cards);
+                final CardCollection choice = new CardCollection();
                 final String num = sa.hasParam("RandomNum") ? sa.getParam("RandomNum") : "1";
                 int ncopied = AbilityUtils.calculateAmount(source, num, sa);
                 while(ncopied > 0) {
                     final PaperCard cp = Aggregates.random(copysource);
-                    Card possibleCard = Card.fromPaperCard(cp, null);
+                    final Card possibleCard = Card.fromPaperCard(cp, null);
                     // Need to temporarily set the Owner so the Game is set
                     possibleCard.setOwner(sa.getActivatingPlayer());
-                    
+
                     if (possibleCard.isValid(valid, source.getController(), source)) {
                         choice.add(possibleCard);
                         copysource.remove(cp);
@@ -134,31 +133,39 @@ public class PlayEffect extends SpellAbilityEffect {
             amount = tgtCards.size();
         }
 
-        for (int i = 0; i < amount; i++) {
+        final CardCollection saidNoTo = new CardCollection();
+        while (tgtCards.size() > saidNoTo.size() && amount > 0) {
             Card tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, "Select a card to play");
             if (tgtCard == null) {
                 return;
             }
 
+            final boolean wasFaceDown;
             if (tgtCard.isFaceDown()) {
                 tgtCard.setState(CardStateName.Original, false);
                 wasFaceDown = true;
+            } else {
+                wasFaceDown = false;
             }
-            
-            if (optional && !controller.getController().confirmAction(sa, null, "Do you want to play " + tgtCard + "?")) {
-                // i--;  // This causes an infinite loop (ArsenalNut)
+
+            if (optional && !controller.getController().confirmAction(sa, null, String.format("Do you want to play %s?", tgtCard))) {
                 if (wasFaceDown) {
                     tgtCard.setState(CardStateName.FaceDown, false);
                 }
+                saidNoTo.add(tgtCard);
                 continue;
             }
+
+            tgtCards.remove(tgtCard);
+
             if (wasFaceDown) {
                 tgtCard.updateStateForView();
             }
             if (sa.hasParam("ForgetRemembered")) {
                 source.clearRemembered();
             }
-            Card original = tgtCard;
+
+            final Card original = tgtCard;
             if (sa.hasParam("CopyCard")) {
                 final Zone zone = tgtCard.getZone();
                 tgtCard = Card.fromPaperCard(tgtCard.getPaperCard(), sa.getActivatingPlayer());
@@ -173,24 +180,30 @@ public class PlayEffect extends SpellAbilityEffect {
                     tgtCard.setSVar("IsEncoded", "Number$1");
                 }
             }
+
             if(sa.hasParam("SuspendCast")) {
                 tgtCard.setSuspendCast(true);
             }
+
             // lands will be played
             if (tgtCard.isLand()) {
-                if (controller.playLand(tgtCard, true) && remember) {
-                    source.addRemembered(tgtCard);
+                if (controller.playLand(tgtCard, true)) {
+                    amount--;
+                    if (remember) {
+                        source.addRemembered(tgtCard);
+                    }
+                } else {
+                    saidNoTo.add(tgtCard);
                 }
-                tgtCards.remove(tgtCard);
                 continue;
             }
 
             // get basic spells (no flashback, etc.)
-            List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(tgtCard, controller);
+            final List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(tgtCard, controller);
             if (sas.isEmpty()) {
-                return;
+                continue;
             }
-            tgtCards.remove(tgtCard);
+
             // play copied cards with linked abilities, e.g. Elite Arcanist
             if (sa.hasParam("CopyOnce")) {
                 tgtCards.remove(original);
@@ -198,11 +211,11 @@ public class PlayEffect extends SpellAbilityEffect {
 
             // only one mode can be used
             SpellAbility tgtSA = sa.getActivatingPlayer().getController().getAbilityToPlay(tgtCard, sas);
-            boolean noManaCost = sa.hasParam("WithoutManaCost");
+            final boolean noManaCost = sa.hasParam("WithoutManaCost");
             if (noManaCost) {
                 tgtSA = tgtSA.copyWithNoManaCost();
             } else if (sa.hasParam("PlayMadness")) {
-                Cost abCost = new Cost(sa.getParam("PlayMadness"), false);
+                final Cost abCost = new Cost(sa.getParam("PlayMadness"), false);
                 tgtSA = tgtSA.copyWithDefinedCost(abCost);
                 tgtSA.getHostCard().setMadness(true);
             }
@@ -210,13 +223,13 @@ public class PlayEffect extends SpellAbilityEffect {
             if (tgtSA.usesTargeting() && !optional) {
                 tgtSA.getTargetRestrictions().setMandatory(true);
             }
-            
-            
+
             remember &= controller.getController().playSaFromPlayEffect(tgtSA);
             if (remember) {
                 source.addRemembered(tgtSA.getHostCard());
             }
-       
+
+            amount--;
         }
     } // end resolve
 
