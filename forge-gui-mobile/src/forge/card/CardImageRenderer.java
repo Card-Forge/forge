@@ -64,6 +64,10 @@ public class CardImageRenderer {
         prevImageHeight = h;
     }
 
+    public static void drawFaceDownCard(Graphics g, float x, float y, float w, float h) {
+        drawArt(g, x, y, w, h);
+    }
+
     public static void drawCardImage(Graphics g, CardView card, boolean altState, float x, float y, float w, float h, CardStackPosition pos) {
         updateStaticFields(w, h);
 
@@ -76,6 +80,11 @@ public class CardImageRenderer {
 
         final CardStateView state = card.getState(altState);
         final boolean canShow = MatchController.instance.mayView(card);
+
+        if (!canShow) {
+            drawFaceDownCard(g, x, y, w, h);
+            return;
+        }
 
         //determine colors for borders
         final List<DetailColors> borderColors = CardDetailUtil.getBorderColors(state, canShow);
