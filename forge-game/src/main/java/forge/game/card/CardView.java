@@ -1,5 +1,6 @@
 package forge.game.card;
 
+import com.google.common.base.Objects;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
@@ -380,7 +381,7 @@ public class CardView extends GameEntityView {
         case Library:
         case PlanarDeck:
             //cards in these zones are hidden to all unless they specify otherwise
-            if (controller == viewer && getCurrentState().getYouMayLook()) {
+            if (Objects.equal(controller, viewer) && getCurrentState().getYouMayLook()) {
                 return true;
             }
             if (controller.isOpponentOf(viewer) && getCurrentState().getOpponentMayLook()) {
