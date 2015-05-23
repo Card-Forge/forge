@@ -65,6 +65,7 @@ public class CardImageRenderer {
     }
 
     public static void drawFaceDownCard(Graphics g, float x, float y, float w, float h) {
+        // TODO: improve the way a face-down card back is represented so it doesn't look as ugly
         drawArt(g, x, y, w, h);
     }
 
