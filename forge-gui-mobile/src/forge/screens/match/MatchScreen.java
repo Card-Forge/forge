@@ -495,7 +495,7 @@ public class MatchScreen extends FScreen {
                 g.drawLine(1, BORDER_COLOR, 0, y, w, y);
             }
 
-            y = midField;
+            y = midField - 0.5f;
             g.drawLine(1, BORDER_COLOR, x, y, w, y);
 
             if (!Forge.isLandscapeMode()) {

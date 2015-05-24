@@ -93,9 +93,9 @@ public class VPhaseIndicator extends FContainer {
         }
         else {
             float padding = Utils.scale(1);
-            float y = padding;
+            float y = 0;
             float w = width - 2 * padding;
-            float h = (height - 2 * padding) / phaseLabels.size();
+            float h = height / phaseLabels.size();
 
             for (FDisplayObject lbl : getChildren()) {
                 lbl.setBounds(padding, y + padding, w, h - 2 * padding);
