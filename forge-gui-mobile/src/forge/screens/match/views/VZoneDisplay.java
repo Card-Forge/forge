@@ -3,6 +3,7 @@ package forge.screens.match.views;
 import java.util.List;
 
 import forge.Forge;
+import forge.Graphics;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.toolbox.FCardPanel;
@@ -170,5 +171,15 @@ public class VZoneDisplay extends VCardDisplayArea {
         }
 
         return new ScrollBounds(visibleWidth, cardHeight + (rowCount - 1) * dy);
+    }
+
+    @Override
+    protected void startClip(Graphics g) {
+        if (Forge.isLandscapeMode()) {
+            g.startClip(0, 0, getWidth(), getHeight());
+        }
+        else {
+            super.startClip(g);
+        }
     }
 }
