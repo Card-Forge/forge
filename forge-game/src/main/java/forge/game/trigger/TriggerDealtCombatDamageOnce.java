@@ -20,6 +20,7 @@ package forge.game.trigger;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Expressions;
 
 import java.util.Set;
 
@@ -74,6 +75,23 @@ public class TriggerDealtCombatDamageOnce extends Trigger {
             }
         }
 
+        if (this.mapParams.containsKey("DamageAmount")) {
+            final String fullParam = this.mapParams.get("DamageAmount");
+
+            final String operator = fullParam.substring(0, 2);
+            final int operand = Integer.parseInt(fullParam.substring(2));
+            final int actualAmount = (Integer) runParams2.get("DamageAmount");
+
+            if (!Expressions.compare(actualAmount, operator, operand)) {
+                return false;
+            }
+
+            System.out.print("DealtCombatDamageOnce Amount Operator: ");
+            System.out.println(operator);
+            System.out.print("DealtCombatDamageOnce Amount Operand: ");
+            System.out.println(operand);
+        }
+
         return true;
     }
 
@@ -82,5 +100,6 @@ public class TriggerDealtCombatDamageOnce extends Trigger {
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Source", this.getRunParams().get("DamageSource"));
         sa.setTriggeringObject("Targets", this.getRunParams().get("DamageTargets"));
+        sa.setTriggeringObject("DamageAmount", this.getRunParams().get("DamageAmount"));
     }
 }

@@ -666,6 +666,7 @@ public class Combat {
         // This function handles both Regular and First Strike combat assignment
         final HashMap<Card, Integer> defMap = defendingDamageMap;
         final HashMap<GameEntity, CardCollection> wasDamaged = new HashMap<GameEntity, CardCollection>();
+        final Map<Card, Integer> damageDealtThisCombat = new HashMap<Card, Integer>();
 
         for (final Entry<Card, Integer> entry : defMap.entrySet()) {
             GameEntity defender = getDefenderByAttacker(entry.getKey());
@@ -678,6 +679,7 @@ public class Combat {
                         l.add(entry.getKey());
                         wasDamaged.put(defender, l);
                     }
+                    damageDealtThisCombat.put(entry.getKey(), entry.getValue());
                 }
             }
             else if (defender instanceof Card) { // planeswalker
@@ -697,6 +699,7 @@ public class Combat {
         // this can be much better below here...
 
         final CardCollection combatants = new CardCollection();
+
         combatants.addAll(getAttackers());
         combatants.addAll(getAllBlockers());
         combatants.addAll(getDefendingPlaneswalkers());
@@ -716,6 +719,13 @@ public class Combat {
             for (final Entry<Card, Integer> entry : assignedDamageMap.entrySet()) {
                 final Card crd = entry.getKey();
                 damageMap.put(crd, entry.getValue());
+                if (entry.getValue() > 0) {
+                    if (damageDealtThisCombat.containsKey(crd)) {
+                        damageDealtThisCombat.put(crd, damageDealtThisCombat.get(crd) + entry.getValue());
+                    } else {
+                        damageDealtThisCombat.put(crd, entry.getValue());
+                    }
+                }
             }
             c.addCombatDamage(damageMap);
 
@@ -735,8 +745,10 @@ public class Combat {
         // when ... deals combat damage to one or more
         for (final Card damageSource : dealtDamageTo.keySet()) {
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            int dealtDamage = damageDealtThisCombat.containsKey(damageSource) ? damageDealtThisCombat.get(damageSource) : 0;
             runParams.put("DamageSource", damageSource);
             runParams.put("DamageTargets", dealtDamageTo.get(damageSource));
+            runParams.put("DamageAmount", dealtDamage);
             damageSource.getGame().getTriggerHandler().runTrigger(TriggerType.DealtCombatDamageOnce, runParams, false);
         }
         dealtDamageToThisCombat.putAll(dealtDamageTo);
