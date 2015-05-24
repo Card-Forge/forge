@@ -155,6 +155,7 @@ public class VZoneDisplay extends VCardDisplayArea {
         float cardWidth = visibleWidth / 2;
         float cardHeight = getCardHeight(cardWidth);
         float dy = cardHeight;
+        float scrollHeight;
 
         int rowCount = (int)Math.ceil((float)cardPanels.size() / 2f);
         float totalHeight = cardHeight * rowCount;
@@ -166,9 +167,11 @@ public class VZoneDisplay extends VCardDisplayArea {
             if (revealedPanel == null) {
                 revealedPanel = cardPanels.get(cardPanels.size() - 1);
             }
+            scrollHeight = visibleHeight;
         }
         else {
             revealedPanel = null;
+            scrollHeight = rowCount * dy;
         }
 
         for (CardAreaPanel cardPanel : cardPanels) {
@@ -183,7 +186,7 @@ public class VZoneDisplay extends VCardDisplayArea {
             }
         }
 
-        return new ScrollBounds(visibleWidth, cardHeight + (rowCount - 1) * dy);
+        return new ScrollBounds(visibleWidth, scrollHeight);
     }
 
     @Override
