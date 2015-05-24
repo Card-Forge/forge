@@ -153,6 +153,9 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
     protected float getCardWidth(float cardHeight) {
         return (cardHeight - 2 * FCardPanel.PADDING) / FCardPanel.ASPECT_RATIO + 2 * FCardPanel.PADDING; //ensure aspect ratio maintained after padding applied
     }
+    protected float getCardHeight(float cardWidth) {
+        return (cardWidth - 2 * FCardPanel.PADDING) * FCardPanel.ASPECT_RATIO + 2 * FCardPanel.PADDING; //ensure aspect ratio maintained after padding applied
+    }
 
     @Override
     protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {

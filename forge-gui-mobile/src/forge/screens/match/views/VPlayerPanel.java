@@ -21,6 +21,7 @@ import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
+import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
@@ -267,18 +268,12 @@ public class VPlayerPanel extends FContainer {
         phaseIndicator.resetFont();
         phaseIndicator.setBounds(x, 0, avatar.getWidth() * 0.6f, height);
         x += phaseIndicator.getWidth();
-        width -= x;
-        field.setBounds(x, 0, width, height);
+        field.setBounds(x, 0, width - x, height);
 
-        float displayAreaHeight = getHeight() / 3;
-        if (isFlipped()) {
-            y = 0;
-        }
-        else {
-            y = height - displayAreaHeight;
-        }
+        float displayAreaWidth = height / FCardPanel.ASPECT_RATIO;
+        x = width - displayAreaWidth;
         for (InfoTab tab : tabs) {
-            tab.displayArea.setBounds(x, y, width, displayAreaHeight);
+            tab.displayArea.setBounds(x, 0, displayAreaWidth, height);
         }
     }
 

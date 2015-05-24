@@ -2,6 +2,7 @@ package forge.screens.match.views;
 
 import java.util.List;
 
+import forge.Forge;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.toolbox.FCardPanel;
@@ -101,6 +102,10 @@ public class VZoneDisplay extends VCardDisplayArea {
 
         orderedCards.clear();
 
+        if (Forge.isLandscapeMode()) {
+            return layoutAndGetScrollBoundsLandscape(visibleWidth, visibleHeight);
+        }
+
         float x = 0;
         float y = 0;
         float cardHeight = visibleHeight;
@@ -128,5 +133,42 @@ public class VZoneDisplay extends VCardDisplayArea {
         }
 
         return new ScrollBounds(x, visibleHeight);
+    }
+
+    private ScrollBounds layoutAndGetScrollBoundsLandscape(float visibleWidth, float visibleHeight) {
+        float x = 0;
+        float y = 0;
+        float cardWidth = visibleWidth / 2;
+        float cardHeight = getCardHeight(cardWidth);
+        float dy = cardHeight;
+
+        int rowCount = (int)Math.ceil((float)cardPanels.size() / 2f);
+        float totalHeight = cardHeight * rowCount;
+        if (totalHeight > visibleHeight && totalHeight <= visibleHeight * 3) {
+            //allow overlapping cards up to one third of the card,
+            //otherwise don't overlap and allow scrolling vertically
+            dy *= (visibleHeight - cardHeight) / (totalHeight - cardHeight);
+            dy += FCardPanel.PADDING / rowCount; //make final card go right up to right edge of screen
+            if (revealedPanel == null) {
+                revealedPanel = cardPanels.get(cardPanels.size() - 1);
+            }
+        }
+        else {
+            revealedPanel = null;
+        }
+
+        for (CardAreaPanel cardPanel : cardPanels) {
+            orderedCards.add(cardPanel.getCard());
+            cardPanel.setBounds(x, y, cardWidth, cardHeight);
+            if (orderedCards.size() % 2 == 0) {
+                x = 0;
+                y += dy;
+            }
+            else {
+                x += cardWidth;
+            }
+        }
+
+        return new ScrollBounds(visibleWidth, cardHeight + (rowCount - 1) * dy);
     }
 }
