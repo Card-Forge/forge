@@ -267,21 +267,34 @@ public class VPlayerPanel extends FContainer {
         phaseIndicator.resetFont();
         phaseIndicator.setBounds(x, 0, avatar.getWidth() * 0.6f, height);
         x += phaseIndicator.getWidth();
-        field.setBounds(x, 0, width - x, height);
+        width -= x;
+        field.setBounds(x, 0, width, height);
+
+        float displayAreaHeight = getHeight() / 3;
+        if (isFlipped()) {
+            y = 0;
+        }
+        else {
+            y = height - displayAreaHeight;
+        }
+        for (InfoTab tab : tabs) {
+            tab.displayArea.setBounds(x, y, width, displayAreaHeight);
+        }
     }
 
     @Override
     public void drawBackground(Graphics g) {
         float y;
-        if (selectedTab != null) { //draw background and border for selected zone if needed 
-            float w = getWidth();
+        if (selectedTab != null) { //draw background and border for selected zone if needed
             VDisplayArea selectedDisplayArea = selectedTab.displayArea;
-            g.fillRect(DISPLAY_AREA_BACK_COLOR, 0, selectedDisplayArea.getTop(), w, selectedDisplayArea.getHeight());
+            float x = selectedDisplayArea.getLeft();
+            float w = selectedDisplayArea.getWidth();
+            g.fillRect(DISPLAY_AREA_BACK_COLOR, x, selectedDisplayArea.getTop(), w, selectedDisplayArea.getHeight());
 
             if (!Forge.isLandscapeMode()) {
                 y = isFlipped() ? selectedDisplayArea.getTop() + 1 : selectedDisplayArea.getBottom();
                 //leave gap at selected zone tab
-                g.drawLine(1, MatchScreen.BORDER_COLOR, 0, y, selectedTab.getLeft(), y);
+                g.drawLine(1, MatchScreen.BORDER_COLOR, x, y, selectedTab.getLeft(), y);
                 g.drawLine(1, MatchScreen.BORDER_COLOR, selectedTab.getRight(), y, w, y);
             }
         }
