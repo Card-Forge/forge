@@ -699,7 +699,6 @@ public class Combat {
         // this can be much better below here...
 
         final CardCollection combatants = new CardCollection();
-
         combatants.addAll(getAttackers());
         combatants.addAll(getAllBlockers());
         combatants.addAll(getDefendingPlaneswalkers());
