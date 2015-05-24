@@ -257,16 +257,16 @@ public class VPlayerPanel extends FContainer {
         y += avatar.getHeight();
         lblLife.setBounds(x, y, avatar.getWidth(), LIFE_FONT.getLineHeight());
         y += lblLife.getHeight();
-        float infoTabWidth = avatar.getWidth() * 0.5f;
-        phaseIndicator.resetFont();
-        phaseIndicator.setBounds(x, y, avatar.getWidth() - infoTabWidth, height - y);
-        x += phaseIndicator.getWidth();
+        float infoTabWidth = avatar.getWidth();
         float infoTabHeight = (height - y) / tabs.size();
         for (InfoTab tab : tabs) {
             tab.setBounds(x, y, infoTabWidth, infoTabHeight);
             y += infoTabHeight;
         }
         x = avatar.getRight();
+        phaseIndicator.resetFont();
+        phaseIndicator.setBounds(x, 0, avatar.getWidth() * 0.6f, height);
+        x += phaseIndicator.getWidth();
         field.setBounds(x, 0, width - x, height);
     }
 
@@ -278,10 +278,12 @@ public class VPlayerPanel extends FContainer {
             VDisplayArea selectedDisplayArea = selectedTab.displayArea;
             g.fillRect(DISPLAY_AREA_BACK_COLOR, 0, selectedDisplayArea.getTop(), w, selectedDisplayArea.getHeight());
 
-            y = isFlipped() ? selectedDisplayArea.getTop() + 1 : selectedDisplayArea.getBottom();
-            //leave gap at selected zone tab
-            g.drawLine(1, MatchScreen.BORDER_COLOR, 0, y, selectedTab.getLeft(), y);
-            g.drawLine(1, MatchScreen.BORDER_COLOR, selectedTab.getRight(), y, w, y);
+            if (!Forge.isLandscapeMode()) {
+                y = isFlipped() ? selectedDisplayArea.getTop() + 1 : selectedDisplayArea.getBottom();
+                //leave gap at selected zone tab
+                g.drawLine(1, MatchScreen.BORDER_COLOR, 0, y, selectedTab.getLeft(), y);
+                g.drawLine(1, MatchScreen.BORDER_COLOR, selectedTab.getRight(), y, w, y);
+            }
         }
         if (commandZone.isVisible()) { //draw border for command zone if needed
             float x = commandZone.getLeft();
@@ -409,16 +411,18 @@ public class VPlayerPanel extends FContainer {
                     h += 2;
                 }
                 g.fillRect(DISPLAY_AREA_BACK_COLOR, 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, w, getHeight() - INFO_TAB_PADDING_Y);
-                if (isFlipped()) { //use clip to ensure all corners connect
-                    g.startClip(-1, y, w + 2, h);
+                if (!Forge.isLandscapeMode()) {
+                    if (isFlipped()) { //use clip to ensure all corners connect
+                        g.startClip(-1, y, w + 2, h);
+                    }
+                    else {
+                        g.startClip(-1, y, w + 2, yAcross - y);
+                    }
+                    g.drawLine(1, MatchScreen.BORDER_COLOR, 0, yAcross, w, yAcross);
+                    g.drawLine(1, MatchScreen.BORDER_COLOR, 0, y, 0, h);
+                    g.drawLine(1, MatchScreen.BORDER_COLOR, w, y, w, h);
+                    g.endClip();
                 }
-                else {
-                    g.startClip(-1, y, w + 2, yAcross - y);
-                }
-                g.drawLine(1, MatchScreen.BORDER_COLOR, 0, yAcross, w, yAcross);
-                g.drawLine(1, MatchScreen.BORDER_COLOR, 0, y, 0, h);
-                g.drawLine(1, MatchScreen.BORDER_COLOR, w, y, w, h);
-                g.endClip();
             }
 
             //show image left of text if wider than tall

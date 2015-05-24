@@ -469,14 +469,23 @@ public class MatchScreen extends FScreen {
         @Override
         public void drawBackground(Graphics g) {
             super.drawBackground(g);
-            float midField = topPlayerPanel.getBottom();
-            float x = topPlayerPanel.getField().getLeft();
-            float y = midField - topPlayerPanel.getField().getHeight();
-            float w = topPlayerPanel.getField().getWidth();
 
             if (FModel.getPreferences().getPrefBoolean(FPref.UI_MATCH_IMAGE_VISIBLE)) {
+                float midField = topPlayerPanel.getBottom();
+                float x = topPlayerPanel.getField().getLeft();
+                float y = midField - topPlayerPanel.getField().getHeight();
+                float w = topPlayerPanel.getField().getWidth();
+
                 g.drawImage(FSkinTexture.BG_MATCH, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
             }
+        }
+
+        @Override
+        public void drawOverlay(Graphics g) {
+            float midField = topPlayerPanel.getBottom();
+            float x = 0;
+            float y = midField - topPlayerPanel.getField().getHeight();
+            float w = getWidth();
 
             //field separator lines
             if (!Forge.isLandscapeMode()) {
