@@ -33,7 +33,19 @@ public class VZoneDisplay extends VCardDisplayArea {
         super.buildTouchListeners(screenX, screenY, listeners);
 
         if (revealedPanel != null) {
-            updateRevealedPanel(screenToLocalX(screenX), screenToLocalY(screenY));
+            float x = screenToLocalX(screenX);
+            float y = screenToLocalY(screenY);
+            if (revealedPanel.contains(x, y)) { return; }
+
+            int idx = cardPanels.size() - 1;
+            for (int i = getChildCount() - 2; i >= 0; i--) {
+                final FDisplayObject cardPanel = getChildAt(i);
+                if (cardPanel.contains(x, y)) {
+                    idx = cardPanels.indexOf(cardPanel);
+                    break;
+                }
+            }
+            setRevealedPanel(idx);
         }
     }
 
@@ -42,42 +54,43 @@ public class VZoneDisplay extends VCardDisplayArea {
         if (revealedPanel == null) { //if no overlapping panels, just pan scroll as normal
             return super.pan(x, y, deltaX, deltaY, moreVertical);
         }
-        updateRevealedPanel(x, y);
-        return true;
-    }
-
-    private void updateRevealedPanel(float x, float y) {
-        if (revealedPanel.contains(x, y)) { return; }
-
-        int idx = -1;
-        for (int i = getChildCount() - 2; i >= 0; i--) {
-            final FDisplayObject cardPanel = getChildAt(i);
-            if (cardPanel.contains(x, y)) {
-                idx = cardPanels.indexOf(cardPanel);
+        int idx = cardPanels.size() - 1;
+        for (int i = idx - 1; i >= 0; i--) {
+            if (cardPanels.get(i).contains(x, y)) {
+                idx = i;
                 break;
             }
         }
-        if (idx >= 0) {
-            setRevealedPanel(idx);
-        }
+        setRevealedPanel(idx);
+        return true;
     }
 
     private void setRevealedPanel(int idx) {
-        //cascade cards back from revealed panel
+        revealedPanel = cardPanels.get(idx);
         clearChildren();
-        int maxIdx = cardPanels.size() - 1;
-        int offset = Math.max(idx, maxIdx - idx);
-        for (int i = offset; i > 0; i--) {
-            int idx1 = idx - i;
-            int idx2 = idx + i;
-            if (idx1 >= 0) {
-                add(cardPanels.get(idx1));
-            }
-            if (idx2 <= maxIdx) {
-                add(cardPanels.get(idx2));
+        if (Forge.isLandscapeMode()) {
+            //for landscape mode, just show revealed card on top
+            for (CardAreaPanel cardPanel : cardPanels) {
+                if (cardPanel != revealedPanel) {
+                    add(cardPanel);
+                }
             }
         }
-        revealedPanel = cardPanels.get(idx);
+        else {
+            //for portrait mode, cascade cards back from revealed panel
+            int maxIdx = cardPanels.size() - 1;
+            int offset = Math.max(idx, maxIdx - idx);
+            for (int i = offset; i > 0; i--) {
+                int idx1 = idx - i;
+                int idx2 = idx + i;
+                if (idx1 >= 0) {
+                    add(cardPanels.get(idx1));
+                }
+                if (idx2 <= maxIdx) {
+                    add(cardPanels.get(idx2));
+                }
+            }
+        }
         add(revealedPanel);
     }
 
