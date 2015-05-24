@@ -286,7 +286,10 @@ public class VPlayerPanel extends FContainer {
             float w = selectedDisplayArea.getWidth();
             g.fillRect(DISPLAY_AREA_BACK_COLOR, x, selectedDisplayArea.getTop(), w, selectedDisplayArea.getHeight());
 
-            if (!Forge.isLandscapeMode()) {
+            if (Forge.isLandscapeMode()) {
+                g.drawLine(1, MatchScreen.BORDER_COLOR, x, selectedDisplayArea.getTop(), x, selectedDisplayArea.getBottom());
+            }
+            else {
                 y = isFlipped() ? selectedDisplayArea.getTop() + 1 : selectedDisplayArea.getBottom();
                 //leave gap at selected zone tab
                 g.drawLine(1, MatchScreen.BORDER_COLOR, x, y, selectedTab.getLeft(), y);
