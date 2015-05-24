@@ -165,6 +165,9 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
     protected void doLayout(float width, float height) {
         float x = width * INSETS_FACTOR;
         float y = x;
+        if (Forge.isLandscapeMode()) { //prevent everything being too wide in Landscape mode
+            x += width * 0.25f;
+        }
         float w = width - 2 * x;
         float dy = height * GAP_Y_FACTOR;
 
