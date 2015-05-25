@@ -32,6 +32,7 @@ public abstract class FPopupMenu extends FDropDownMenu {
         x = screenX;
         y = screenY;
         fixedSize = new Vector2(fixedWidth, fixedHeight);
+        setDropDownContainer(Forge.getCurrentScreen());
 
         show();
     }
