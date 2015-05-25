@@ -160,7 +160,7 @@ public class VPhaseIndicator extends FContainer {
                 backColor = FSkinColor.get(Colors.CLR_PHASE_INACTIVE_DISABLED);
             }
             g.fillRect(backColor, x, 0, w, h);
-            g.drawText(caption, font, Color.BLACK, x, PADDING_Y, w, h, false, HAlignment.CENTER, false);
+            g.drawText(caption, font, Color.BLACK, x, 0, w, h, false, HAlignment.CENTER, true);
         }
     }
 }
