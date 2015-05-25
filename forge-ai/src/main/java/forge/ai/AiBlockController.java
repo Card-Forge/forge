@@ -29,9 +29,7 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.util.FCollectionView;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -117,14 +115,17 @@ public class AiBlockController {
             ComputerUtilCard.sortByEvaluateCreature(attackers);
             CardLists.sortByPowerDesc(attackers);
         	//move cards like Phage the Untouchable to the front
-            List<Card> prioritizedAttackers = new ArrayList<>();
-            for (Card attacker : attackers) {
-            	if (attacker.hasSVar("MustBeBlocked")) {
-                    prioritizedAttackers.add(attacker);
-            	}
-            }
-            attackers.removeAll((Iterable<Card>) prioritizedAttackers);
-            attackers.addAll(0, prioritizedAttackers);
+            Collections.sort(attackers, new Comparator<Card>() {
+                @Override
+                public int compare(final Card o1, final Card o2) {
+                    if (o1.hasSVar("MustBeBlocked") && !o2.hasSVar("MustBeBlocked")) {
+                        return -1;
+                    } else if (!o1.hasSVar("MustBeBlocked") && o2.hasSVar("MustBeBlocked")) {
+                        return 1;
+                    }
+                    return 0;
+                }
+            });
             return attackers;
         }
 
