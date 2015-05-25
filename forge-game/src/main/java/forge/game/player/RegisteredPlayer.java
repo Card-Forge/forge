@@ -146,13 +146,8 @@ public class RegisteredPlayer {
     	}
     	if (appliedVariants.contains(GameType.Commander)) {
             start.commander = deck.has(DeckSection.Commander) ? deck.get(DeckSection.Commander).get(0) : null;
-            if (playerCount > 2) {
-                start.setStartingLife(start.getStartingLife() + 20); // 903.7: ...each player sets his or her life total to 40
-    		                                                         // Modified for layering of variants to life +20
-            }
-            else { //Duel Commander has each player starting at 30 life instead of 40
-                start.setStartingLife(start.getStartingLife() + 10);
-            }
+            start.setStartingLife(start.getStartingLife() + 20); // 903.7: ...each player sets his or her life total to 40
+		                                                         // Modified for layering of variants to life +20
     	}
         if (appliedVariants.contains(GameType.TinyLeaders)) {
             start.commander = deck.has(DeckSection.Commander) ? deck.get(DeckSection.Commander).get(0) : null;
