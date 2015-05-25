@@ -8,6 +8,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -29,13 +30,15 @@ public class Main extends AndroidApplication {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //setup portrait orientation
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        if (Build.VERSION.SDK_INT > 8) { //use dual-side portrait mode if supported
-            this.setRequestedOrientation(7);
-        }
+        AndroidAdapter adapter = new AndroidAdapter(this.getContext());
 
-        AndroidAdapter adapter = new AndroidAdapter();
+        //enforce portrait orientation for non-tablet screens
+        if (!adapter.isTablet) {
+            this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            if (Build.VERSION.SDK_INT > 8) { //use dual-side portrait mode if supported
+                this.setRequestedOrientation(7);
+            }
+        }
 
         //establish assets directory
         if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
@@ -88,7 +91,14 @@ public class Main extends AndroidApplication {
     }
 
     private class AndroidAdapter implements IDeviceAdapter {
+        private final boolean isTablet;
         private final ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        private AndroidAdapter(Context context) {
+            isTablet = (context.getResources().getConfiguration().screenLayout
+                    & Configuration.SCREENLAYOUT_SIZE_MASK)
+                    >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+        }
 
         @Override
         public boolean isConnectedToInternet() {
@@ -145,6 +155,11 @@ public class Main extends AndroidApplication {
                             | Intent.FLAG_ACTIVITY_CLEAR_TASK // finish everything else in the task
                             | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS); // hide (remove, in this case) task from recents
             startActivity(relaunch);
+        }
+
+        @Override
+        public boolean isTablet() {
+            return isTablet;
         }
     }
 }

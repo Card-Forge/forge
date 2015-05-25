@@ -58,5 +58,10 @@ public class Main {
         public void exit() {
             Gdx.app.exit(); //can just use Gdx.app.exit for desktop
         }
+
+        @Override
+        public boolean isTablet() {
+            return true; //treat desktop the same as a tablet
+        }
     }
 }
