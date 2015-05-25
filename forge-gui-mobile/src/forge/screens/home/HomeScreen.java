@@ -33,7 +33,7 @@ public class HomeScreen extends FScreen {
 
     private final FLabel lblLogo = add(new FLabel.Builder().icon(FSkinImage.LOGO).iconInBackground().iconScaleFactor(1).build());
     private final List<MenuButton> buttons = new ArrayList<MenuButton>();
-    private int activeButtonIndex;
+    private int activeButtonIndex, baseButtonCount;
     private FDeckChooser deckManager;
 
     private HomeScreen() {
@@ -93,10 +93,39 @@ public class HomeScreen extends FScreen {
                 SettingsScreen.show();
             }
         });
+        baseButtonCount = buttons.size();
     }
 
     private void addButton(String caption, FEventHandler command) {
         buttons.add(add(new MenuButton(caption, command)));
+    }
+
+    public void addButtonForMode(String caption, final FEventHandler command) {
+        //ensure we don't add the same mode button more than once
+        for (int i = baseButtonCount; i < buttons.size(); i++) {
+            if (buttons.get(i).getText().equals(caption)) {
+                final int index = i;
+                buttons.get(i).setCommand(new FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {
+                        activeButtonIndex = index;
+                        command.handleEvent(e);
+                    }
+                });
+                activeButtonIndex = i;
+                return;
+            }
+        }
+        final int index = buttons.size();
+        activeButtonIndex = index;
+        addButton(caption, new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                activeButtonIndex = index;
+                command.handleEvent(e);
+            }
+        });
+        revalidate();
     }
 
     @Override

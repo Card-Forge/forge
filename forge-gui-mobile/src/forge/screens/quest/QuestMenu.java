@@ -21,6 +21,7 @@ import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
+import forge.screens.home.HomeScreen;
 import forge.screens.home.LoadGameMenu.LoadGameScreen;
 import forge.screens.home.NewGameMenu.NewGameScreen;
 import forge.toolbox.FEvent;
@@ -140,6 +141,16 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         else if (statsItem.isSelected()) {
             statsScreen.update();
         }
+    }
+
+    static {
+        //the first time quest mode is launched, add button for it
+        HomeScreen.instance.addButtonForMode("Quest Mode", new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                launchQuestMode(LaunchReason.StartQuestMode);
+            }
+        });
     }
 
     public static QuestMenu getMenu() {
