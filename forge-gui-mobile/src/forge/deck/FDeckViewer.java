@@ -15,6 +15,7 @@ import forge.itemmanager.filters.ItemFilter;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.screens.FScreen;
+import forge.screens.home.HomeScreen;
 import forge.screens.match.MatchController;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
@@ -115,16 +116,17 @@ public class FDeckViewer extends FScreen {
     private final Deck deck;
     private final CardManager cardManager;
     private DeckSection currentSection;
+    private final boolean fromHomeScreen;
 
-    public static void show(final Deck deck) {
-        if (deck == null) { return; }
+    public static void show(final Deck deck0, boolean fromHomeScreen0) {
+        if (deck0 == null) { return; }
 
-        deckViewer = new FDeckViewer(deck);
+        deckViewer = new FDeckViewer(deck0, fromHomeScreen0);
         deckViewer.setRotate180(MatchController.getView() != null && MatchController.getView().isTopHumanPlayerActive());
         Forge.openScreen(deckViewer);
     }
 
-    private FDeckViewer(Deck deck0) {
+    private FDeckViewer(Deck deck0, boolean fromHomeScreen0) {
         super(new MenuHeader(deck0.getName(), menu) {
             @Override
             protected boolean displaySidebarForLandscapeMode() {
@@ -132,6 +134,7 @@ public class FDeckViewer extends FScreen {
             }
         });
         deck = deck0;
+        fromHomeScreen = fromHomeScreen0;
         cardManager = new CardManager(false);
         cardManager.setPool(deck.getMain());
 
@@ -162,5 +165,13 @@ public class FDeckViewer extends FScreen {
             width -= 2 * x;
         }
         cardManager.setBounds(x, startY, width, height - startY);
+    }
+
+    @Override
+    public FScreen getLandscapeBackdropScreen() {
+        if (fromHomeScreen) {
+            return HomeScreen.instance;
+        }
+        return null;
     }
 }

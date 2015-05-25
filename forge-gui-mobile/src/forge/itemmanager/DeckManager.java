@@ -104,7 +104,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
             @Override
             public boolean longPress(Integer index, Entry<DeckProxy, Integer> value, float x, float y) {
-                FDeckViewer.show(value.getKey().getDeck());
+                FDeckViewer.show(value.getKey().getDeck(), true);
                 return true;
             }
 

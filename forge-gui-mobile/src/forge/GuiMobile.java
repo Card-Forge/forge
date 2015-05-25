@@ -190,14 +190,14 @@ public class GuiMobile implements IGuiBase {
     public void showCardList(final String title, final String message, final List<PaperCard> list) {
         final Deck deck = new Deck(title + " - " + message);
         deck.getMain().addAllFlat(list);
-        FDeckViewer.show(deck);
+        FDeckViewer.show(deck, false);
     }
 
     @Override
     public boolean showBoxedProduct(final String title, final String message, final List<PaperCard> list) {
         final Deck deck = new Deck(title + " - " + message); //TODO: Make this nicer
         deck.getMain().addAllFlat(list);
-        FDeckViewer.show(deck);
+        FDeckViewer.show(deck, false);
         return false;
     }
 

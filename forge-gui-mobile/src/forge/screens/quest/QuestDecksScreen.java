@@ -102,7 +102,7 @@ public class QuestDecksScreen extends FScreen {
             public void handleEvent(FEvent e) {
                 final DeckProxy deck = lstDecks.getSelectedItem();
                 if (deck != null) {
-                    FDeckViewer.show(deck.getDeck());
+                    FDeckViewer.show(deck.getDeck(), true);
                 }
             }
         });
