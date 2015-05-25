@@ -1038,11 +1038,12 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final CardCollectionView drawCards(final int n) {
         final CardCollection drawn = new CardCollection();
+        boolean isDrawingMultipleCards = n > 1;
         for (int i = 0; i < n; i++) {
             if (!canDraw()) {
                 return drawn;
             }
-            drawn.addAll(doDraw());
+            drawn.addAll(doDraw(isDrawingMultipleCards));
         }
         return drawn;
     }
@@ -1050,7 +1051,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     /**
      * @return a CardCollectionView of cards actually drawn
      */
-    private CardCollectionView doDraw() {
+    private CardCollectionView doDraw(boolean multipleCards) {
         final CardCollection drawn = new CardCollection();
         final PlayerZone library = getZone(ZoneType.Library);
 
@@ -1065,10 +1066,13 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         if (!library.isEmpty()) {
             Card c = library.get(0);
+            boolean topCardRevealed = c.hasKeyword("Your opponent may look at this card.");
             c = game.getAction().moveToHand(c);
             drawn.add(c);
 
-            if (numDrawnThisTurn == 0) {
+            if (multipleCards && topCardRevealed) {
+                game.getAction().reveal(drawn, this, true, "Revealing the card drawn from ");
+            } else if (numDrawnThisTurn == 0) {
                 boolean reveal = false;
                 final CardCollectionView cards = getCardsIn(ZoneType.Battlefield);
                 for (final Card card : cards) {
@@ -1081,7 +1085,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 if (reveal) {
                     game.getAction().reveal(drawn, this, true, "Revealing the first card drawn from ");
                 }
-            }
+            } 
 
             setLastDrawnCard(c);
             c.setDrawnThisTurn(true);
