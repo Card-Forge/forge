@@ -213,8 +213,8 @@ public abstract class FScreen extends FContainer {
 
         @Override
         public void drawOverlay(Graphics g) {
-            if (Forge.isLandscapeMode()) {
-                //in landscape mode, draw left border for header
+            if (Forge.isLandscapeMode() && getWidth() < Forge.getCurrentScreen().getWidth()) {
+                //in landscape mode, draw left border for sidebar if needed
                 g.drawLine(LINE_THICKNESS, LINE_COLOR, 0, 0, 0, getHeight());
                 return;
             }
