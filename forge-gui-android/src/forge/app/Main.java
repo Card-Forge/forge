@@ -36,7 +36,7 @@ public class Main extends AndroidApplication {
         if (!adapter.isTablet) {
             this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             if (Build.VERSION.SDK_INT > 8) { //use dual-side portrait mode if supported
-                this.setRequestedOrientation(7);
+                this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
             }
         }
 
