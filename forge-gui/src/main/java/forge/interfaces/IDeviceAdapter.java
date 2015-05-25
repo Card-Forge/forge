@@ -6,5 +6,6 @@ public interface IDeviceAdapter {
     boolean isTablet();
     String getDownloadsDir();
     boolean openFile(String filename);
+    void setLandscapeMode(boolean landscapeMode);
     void exit();
 }

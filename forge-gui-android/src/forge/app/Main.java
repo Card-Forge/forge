@@ -12,7 +12,6 @@ import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.webkit.MimeTypeMap;
@@ -32,13 +31,8 @@ public class Main extends AndroidApplication {
 
         AndroidAdapter adapter = new AndroidAdapter(this.getContext());
 
-        //enforce portrait orientation for non-tablet screens
-        if (!adapter.isTablet) {
-            this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-            if (Build.VERSION.SDK_INT > 8) { //use dual-side portrait mode if supported
-                this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
-            }
-        }
+        //enforce orientation based on whether device is a tablet
+        adapter.setLandscapeMode(adapter.isTablet);
 
         //establish assets directory
         if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
@@ -160,6 +154,16 @@ public class Main extends AndroidApplication {
         @Override
         public boolean isTablet() {
             return isTablet;
+        }
+
+        @Override
+        public void setLandscapeMode(boolean landscapeMode) {
+            if (landscapeMode) {
+                Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            }
+            else {
+                Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            }
         }
     }
 }

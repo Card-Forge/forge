@@ -63,5 +63,10 @@ public class Main {
         public boolean isTablet() {
             return true; //treat desktop the same as a tablet
         }
+
+        @Override
+        public void setLandscapeMode(boolean landscapeMode) {
+            //TODO: Consider supporting toggling this on desktop for testing
+        }
     }
 }
