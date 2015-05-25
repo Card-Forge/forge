@@ -34,9 +34,14 @@ public class SettingsScreen extends TabPageScreen<SettingsScreen> {
 
     @SuppressWarnings("unchecked")
     private SettingsScreen() {
-        super(new TabPage[] {
+        super(new TabHeader<SettingsScreen>(new TabPage[] {
                 new SettingsPage(),
                 new FilesPage()
+        }, true) {
+            @Override
+            protected boolean showBackButtonInLandscapeMode() {
+                return false;
+            }
         });
     }
 

@@ -30,13 +30,17 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         this(tabPages0, true);
     }
 
-    @SuppressWarnings("unchecked")
     public TabPageScreen(TabPage<T>[] tabPages0, boolean showBackButton) {
-        super(new TabHeader<T>(tabPages0, showBackButton));
-        tabHeader = (TabHeader<T>)getHeader(); //cache reference to tab header with proper type
+        this(new TabHeader<T>(tabPages0, showBackButton));
+    }
+
+    @SuppressWarnings("unchecked")
+    public TabPageScreen(TabHeader<T> tabHeader0) {
+        super(tabHeader0);
+        tabHeader = tabHeader0; //cache reference to tab header with proper type
 
         int index = 0;
-        tabPages = tabPages0;
+        tabPages = tabHeader.tabPages;
         for (TabPage<T> tabPage : tabPages) {
             tabPage.index = index++;
             tabPage.parentScreen = (T)this;
@@ -91,12 +95,13 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         }
     }
 
-    private static class TabHeader<T extends TabPageScreen<T>> extends Header {
+    protected static class TabHeader<T extends TabPageScreen<T>> extends Header {
         private static final float HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 1.4f);
         private static final float COMPACT_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
         private static final float BACK_BUTTON_WIDTH = Math.round(HEIGHT / 2);
         private static final FSkinColor SEPARATOR_COLOR = BACK_COLOR.stepColor(-40);
 
+        private final TabPage<T>[] tabPages;
         private final FLabel btnBack;
         private boolean isScrollable;
         private FDisplayObject finalVisibleTab;
@@ -143,7 +148,8 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
             }
         });
 
-        public TabHeader(TabPage<T>[] tabPages, boolean showBackButton) {
+        public TabHeader(TabPage<T>[] tabPages0, boolean showBackButton) {
+            tabPages = tabPages0;
             if (showBackButton) {
                 btnBack = add(new FLabel.Builder().icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new FEventHandler() {
                     @Override
@@ -161,6 +167,10 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
             }
         }
 
+        protected boolean showBackButtonInLandscapeMode() {
+            return btnBack != null;
+        }
+
         @Override
         public float getPreferredHeight() {
             return COMPACT_TABS ? COMPACT_HEIGHT : HEIGHT;
@@ -176,7 +186,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
             if (Forge.isLandscapeMode()) {
                 //in landscape mode, draw left border for header
                 g.drawLine(LINE_THICKNESS, LINE_COLOR, 0, 0, 0, getHeight());
-                if (btnBack != null) { //draw top border for back button
+                if (showBackButtonInLandscapeMode()) { //draw top border for back button
                     float y = btnBack.getTop() - LINE_THICKNESS / 2;
                     g.drawLine(LINE_THICKNESS, SEPARATOR_COLOR, 0, y, getWidth(), y);
                 }
@@ -199,9 +209,11 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
             float x = 0;
             if (btnBack != null) {
                 if (Forge.isLandscapeMode()) { //show back button at bottom for landscape mode
-                    float backButtonHeight = HEIGHT * 0.75f;
-                    btnBack.setBounds(0, height - backButtonHeight, width, backButtonHeight);
-                    height -= backButtonHeight;
+                    if (showBackButtonInLandscapeMode()) {
+                        float backButtonHeight = HEIGHT * 0.75f;
+                        btnBack.setBounds(0, height - backButtonHeight, width, backButtonHeight);
+                        height -= backButtonHeight;
+                    }
                 }
                 else {
                     btnBack.setIconScaleAuto(COMPACT_TABS);
