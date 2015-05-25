@@ -20,6 +20,7 @@ import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
+import forge.toolbox.FScrollPane;
 import forge.util.Utils;
 
 public class HomeScreen extends FScreen {
@@ -32,6 +33,7 @@ public class HomeScreen extends FScreen {
     public static final HomeScreen instance = new HomeScreen();
 
     private final FLabel lblLogo = add(new FLabel.Builder().icon(FSkinImage.LOGO).iconInBackground().iconScaleFactor(1).build());
+    private final ButtonScroller buttonScroller = add(new ButtonScroller());
     private final List<MenuButton> buttons = new ArrayList<MenuButton>();
     private int activeButtonIndex, baseButtonCount;
     private FDeckChooser deckManager;
@@ -97,7 +99,7 @@ public class HomeScreen extends FScreen {
     }
 
     private void addButton(String caption, FEventHandler command) {
-        buttons.add(add(new MenuButton(caption, command)));
+        buttons.add(buttonScroller.add(new MenuButton(caption, command)));
     }
 
     public void addButtonForMode(String caption, final FEventHandler command) {
@@ -133,13 +135,12 @@ public class HomeScreen extends FScreen {
         float buttonWidth = width - 2 * PADDING;
         float buttonHeight = buttons.get(0).getFont().getCapHeight() * 3.5f;
         float x = PADDING;
-        float y = height;
         float dy = buttonHeight + PADDING;
+        float y = height - buttons.size() * dy;
 
-        for (int i = buttons.size() - 1; i >= 0; i--) {
-            y -= dy;
-            buttons.get(i).setBounds(x, y, buttonWidth, buttonHeight);
-        }
+        buttonScroller.buttonHeight = buttonHeight;
+        buttonScroller.padding = PADDING;
+        buttonScroller.setBounds(x, y, buttonWidth, height - y);
 
         float logoSize = y - 2 * PADDING;
         y = PADDING;
@@ -162,10 +163,10 @@ public class HomeScreen extends FScreen {
         float buttonWidth = mainMenuWidth - x;
         float buttonHeight = Utils.AVG_FINGER_HEIGHT * 0.9f;
 
-        for (MenuButton button : buttons) {
-            button.setBounds(x, y, buttonWidth, buttonHeight);
-            y += buttonHeight;
-        }
+        buttonScroller.buttonHeight = buttonHeight;
+        buttonScroller.padding = 0;
+        buttonScroller.setBounds(x, y, buttonWidth, height - y);
+
         return width - mainMenuWidth; //move hosted screens to the right of menu
     }
 
@@ -190,9 +191,20 @@ public class HomeScreen extends FScreen {
             float h2 = 0;
             if (activeButtonIndex != -1) {
                 MenuButton activeButton = buttons.get(activeButtonIndex);
-                h1 = activeButton.getTop();
-                y2 = activeButton.getBottom();
+                h1 = buttonScroller.getTop() + activeButton.getTop();
+                y2 = h1 + activeButton.getHeight();
                 h2 = h - y2;
+
+                //prevent showing active button height behind logo
+                float scrollerTop = buttonScroller.getTop();
+                if (y2 < scrollerTop) { //if entire active button behind logo, only need to draw one rectangle
+                    h1 = h;
+                    y2 = 0;
+                    h2 = 0;
+                }
+                else if (h1 < scrollerTop) {
+                    h1 = scrollerTop;
+                }
             }
 
             float w1 = w * 0.66f;
@@ -205,6 +217,21 @@ public class HomeScreen extends FScreen {
             if (h2 > 0) {
                 g.fillGradientRect(l00, d80, false, w1, y2, w2, h2);
             }
+        }
+    }
+
+    private class ButtonScroller extends FScrollPane {
+        private float buttonHeight, padding;
+
+        @Override
+        protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+            float y = 0;
+            float dy = buttonHeight + padding;
+            for (MenuButton button : buttons) {
+                button.setBounds(0, y, visibleWidth, buttonHeight);
+                y += dy;
+            }
+            return new ScrollBounds(visibleWidth, y - padding);
         }
     }
 
