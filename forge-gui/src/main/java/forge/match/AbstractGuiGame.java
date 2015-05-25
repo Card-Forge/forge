@@ -207,6 +207,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                     // Concede each player on this Gui (except mind-controlled players)
                     c.concede();
                 }
+            } else {
+                return false;
             }
             if (gameView.isGameOver()) {
                 // Don't immediately close, wait for win/lose screen
