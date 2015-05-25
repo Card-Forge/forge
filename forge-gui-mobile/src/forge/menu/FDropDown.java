@@ -39,6 +39,17 @@ public abstract class FDropDown extends FScrollPane {
         dropDownContainer = dropDownContainer0;
     }
 
+    protected FContainer getContainer() {
+        FContainer container = dropDownContainer;
+        if (container == null) {
+            container = FOverlay.getTopOverlay();
+            if (container == null) {
+                container = Forge.getCurrentScreen();
+            }
+        }
+        return container;
+    }
+
     public void update() {
         if (isVisible()) {
             updateSizeAndPosition();
@@ -81,13 +92,7 @@ public abstract class FDropDown extends FScrollPane {
         if (isVisible() == visible0) { return; }
 
         //add/remove drop down from its container, current screen, or top overlay when its visibility changes
-        FContainer container = dropDownContainer;
-        if (container == null) {
-            container = FOverlay.getTopOverlay();
-            if (container == null) {
-                container = Forge.getCurrentScreen();
-            }
-        }
+        FContainer container = getContainer();
         if (visible0) {
             updateSizeAndPosition();
 

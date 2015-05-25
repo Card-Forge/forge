@@ -5,12 +5,10 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
-import forge.Forge;
 import forge.Graphics;
 import forge.interfaces.IComboBox;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
-import forge.screens.FScreen;
 import forge.toolbox.FEvent.*;
 
 public class FComboBox<T> extends FTextField implements IComboBox<T> {
@@ -240,13 +238,13 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
 
         @Override
         protected void updateSizeAndPosition() {
-            FScreen screen = Forge.getCurrentScreen();
-            float screenHeight = screen.getHeight();
+            FContainer container = getContainer();
+            float containerHeight = container.getHeight();
 
-            float x = screen.screenToLocalX(FComboBox.this.localToScreenX(0));
+            float x = container.screenToLocalX(FComboBox.this.localToScreenX(0));
             float y = FComboBox.this.localToScreenY(FComboBox.this.getHeight());
 
-            float maxVisibleHeight = screenHeight - y;
+            float maxVisibleHeight = containerHeight - y;
             paneSize = updateAndGetPaneSize(FComboBox.this.getWidth(), maxVisibleHeight);
 
             setBounds(Math.round(x), Math.round(y), Math.round(FComboBox.this.getWidth()), Math.min(Math.round(paneSize.getHeight()), maxVisibleHeight));
