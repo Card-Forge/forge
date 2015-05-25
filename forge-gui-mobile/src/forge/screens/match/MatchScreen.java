@@ -474,7 +474,7 @@ public class MatchScreen extends FScreen {
                 float midField = topPlayerPanel.getBottom();
                 float x = topPlayerPanel.getField().getLeft();
                 float y = midField - topPlayerPanel.getField().getHeight();
-                float w = topPlayerPanel.getField().getWidth();
+                float w = getWidth() - x;
 
                 g.drawImage(FSkinTexture.BG_MATCH, x, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
             }

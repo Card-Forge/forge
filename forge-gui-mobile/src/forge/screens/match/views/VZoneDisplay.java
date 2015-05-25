@@ -108,6 +108,10 @@ public class VZoneDisplay extends VCardDisplayArea {
         super.clear();
     }
 
+    protected boolean layoutVerticallyForLandscapeMode() {
+        return true;
+    }
+
     @Override
     protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
         if (!isVisible()) { //if zone not visible, don't spend time laying out cards
@@ -116,7 +120,7 @@ public class VZoneDisplay extends VCardDisplayArea {
 
         orderedCards.clear();
 
-        if (Forge.isLandscapeMode()) {
+        if (Forge.isLandscapeMode() && layoutVerticallyForLandscapeMode()) {
             return layoutAndGetScrollBoundsLandscape(visibleWidth, visibleHeight);
         }
 

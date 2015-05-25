@@ -268,9 +268,31 @@ public class VPlayerPanel extends FContainer {
         phaseIndicator.resetFont();
         phaseIndicator.setBounds(x, 0, avatar.getWidth() * 0.6f, height);
         x += phaseIndicator.getWidth();
-        field.setBounds(x, 0, width - x, height);
 
+        float fieldWidth = width - x;
         float displayAreaWidth = height / FCardPanel.ASPECT_RATIO;
+        if (selectedTab != null) {
+            fieldWidth -= displayAreaWidth;
+        }
+
+        //account for command zone if needed
+        int commandZoneCount = commandZone.getCount();
+        if (commandZoneCount > 0) {
+            float commandZoneHeight = height / 2;
+            float commandZoneWidth = Math.min(commandZoneCount, 2) * commandZone.getCardWidth(commandZoneHeight);
+            commandZone.setBounds(x + fieldWidth - commandZoneWidth, height - commandZoneHeight, commandZoneWidth, commandZoneHeight);
+            if (isFlipped()) { //flip across x-axis if needed
+                commandZone.setTop(height - commandZone.getBottom());
+            }
+
+            field.setCommandZoneWidth(commandZoneWidth + 1); //ensure second row of field accounts for width of command zone and its border
+        }
+        else {
+            field.setCommandZoneWidth(0);
+        }
+
+        field.setBounds(x, 0, fieldWidth, height);
+
         x = width - displayAreaWidth;
         for (InfoTab tab : tabs) {
             tab.displayArea.setBounds(x, 0, displayAreaWidth, height);
@@ -510,6 +532,11 @@ public class VPlayerPanel extends FContainer {
                 setVisible(newCount > 0);
                 VPlayerPanel.this.revalidate(); //need to revalidated entire panel when command zone size changes
             }
+        }
+
+        @Override
+        protected boolean layoutVerticallyForLandscapeMode() {
+            return false;
         }
     }
 }
