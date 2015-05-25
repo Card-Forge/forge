@@ -176,6 +176,10 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
             if (Forge.isLandscapeMode()) {
                 //in landscape mode, draw left border for header
                 g.drawLine(LINE_THICKNESS, LINE_COLOR, 0, 0, 0, getHeight());
+                if (btnBack != null) { //draw top border for back button
+                    float y = btnBack.getTop() - LINE_THICKNESS / 2;
+                    g.drawLine(LINE_THICKNESS, SEPARATOR_COLOR, 0, y, getWidth(), y);
+                }
                 return;
             }
 
@@ -193,10 +197,17 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         @Override
         protected void doLayout(float width, float height) {
             float x = 0;
-            if (btnBack != null && !Forge.isLandscapeMode()) {
-                btnBack.setIconScaleAuto(COMPACT_TABS);
-                btnBack.setSize(BACK_BUTTON_WIDTH, height);
-                x += BACK_BUTTON_WIDTH;
+            if (btnBack != null) {
+                if (Forge.isLandscapeMode()) { //show back button at bottom for landscape mode
+                    float backButtonHeight = HEIGHT * 0.75f;
+                    btnBack.setBounds(0, height - backButtonHeight, width, backButtonHeight);
+                    height -= backButtonHeight;
+                }
+                else {
+                    btnBack.setIconScaleAuto(COMPACT_TABS);
+                    btnBack.setSize(BACK_BUTTON_WIDTH, height);
+                    x += BACK_BUTTON_WIDTH;
+                }
             }
             scroller.setBounds(x, 0, width - x, height);
         }
