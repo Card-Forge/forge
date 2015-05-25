@@ -1075,9 +1075,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             drawn.add(c);
 
             if (topCardRevealed) {
-                // game.getAction().reveal(drawn, this, true, "Revealing the card drawn from ");
                 revealed.add(c);
             } 
+
             if (numDrawnThisTurn == 0) {
                 boolean reveal = false;
                 final CardCollectionView cards = getCardsIn(ZoneType.Battlefield);
