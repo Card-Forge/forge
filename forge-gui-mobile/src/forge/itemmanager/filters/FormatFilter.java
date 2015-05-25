@@ -214,7 +214,7 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
 
             @Override
             public void drawValue(Graphics g, Integer index, CardEdition value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
-                float offset = w * SettingsScreen.INSETS_FACTOR - FList.PADDING; //increase padding for settings items
+                float offset = SettingsScreen.getInsets(w) - FList.PADDING; //increase padding for settings items
                 x += offset;
                 y += offset;
                 w -= 2 * offset;

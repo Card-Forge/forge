@@ -237,7 +237,7 @@ public class LoadGauntletScreen extends LaunchScreen {
 
                 @Override
                 public void drawValue(Graphics g, Integer index, GauntletData value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
-                    float offset = w * SettingsScreen.INSETS_FACTOR - FList.PADDING; //increase padding for settings items
+                    float offset = SettingsScreen.getInsets(w) - FList.PADDING; //increase padding for settings items
                     x += offset;
                     y += offset;
                     w -= 2 * offset;
@@ -258,7 +258,7 @@ public class LoadGauntletScreen extends LaunchScreen {
 
                     h += SettingsScreen.SETTING_PADDING;
                     y += h;
-                    h = totalHeight - h + w * SettingsScreen.INSETS_FACTOR;
+                    h = totalHeight - h + SettingsScreen.getInsets(w);
 
                     String timestamp = value.getTimestamp();
                     font = FSkinFont.get(12);

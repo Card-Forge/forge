@@ -1022,7 +1022,7 @@ public class ConstructedScreen extends LaunchScreen {
 
             @Override
             public void drawValue(Graphics g, Integer index, Variant value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
-                float offset = w * SettingsScreen.INSETS_FACTOR - FList.PADDING;
+                float offset = SettingsScreen.getInsets(w) - FList.PADDING;
                 x += offset;
                 y += offset;
                 w -= 2 * offset;
@@ -1035,7 +1035,7 @@ public class ConstructedScreen extends LaunchScreen {
                 g.drawText(text, font, foreColor, x, y, w, h, false, HAlignment.LEFT, false);
                 value.draw(g, font, foreColor, x, y, w, h);
                 h += SettingsScreen.SETTING_PADDING;
-                g.drawText(value.gameType.getDescription(), SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + w * SettingsScreen.INSETS_FACTOR, true, HAlignment.LEFT, false);            
+                g.drawText(value.gameType.getDescription(), SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + SettingsScreen.getInsets(w), true, HAlignment.LEFT, false);            
             }
         }
     }
