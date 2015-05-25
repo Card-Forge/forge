@@ -228,7 +228,7 @@ public abstract class FScreen extends FContainer {
             lblCaption.setBounds(height, 0, width - 2 * height, height);
         }
     }
-    private static class MenuHeader extends DefaultHeader {
+    protected static class MenuHeader extends DefaultHeader {
         private final FLabel btnMenu;
         private final FPopupMenu menu;
 
@@ -245,7 +245,7 @@ public abstract class FScreen extends FContainer {
 
         @Override
         public void drawOverlay(Graphics g) {
-            if (Forge.isLandscapeMode()) {
+            if (Forge.isLandscapeMode() && displaySidebarForLandscapeMode()) {
                 //in landscape mode, draw left border for header
                 g.drawLine(LINE_THICKNESS, LINE_COLOR, 0, 0, 0, getHeight());
                 return;
@@ -259,8 +259,8 @@ public abstract class FScreen extends FContainer {
 
             menu.hide(); //ensure menu hidden when screen resized
 
-            if (Forge.isLandscapeMode()) {
-                //for landscape mode, hide menu button and display menu
+            if (Forge.isLandscapeMode() && displaySidebarForLandscapeMode()) {
+                //for landscape mode, hide menu button and display menu as sidebar
                 btnBack.setBounds(0, 0, 0, 0);
                 lblCaption.setBounds(0, 0, 0, 0);
                 btnMenu.setBounds(0, 0, 0, 0);
@@ -271,11 +271,18 @@ public abstract class FScreen extends FContainer {
             btnMenu.setBounds(width - height, 0, height, height);
         }
 
+        protected boolean displaySidebarForLandscapeMode() {
+            return true;
+        }
+
         @Override
         public float doLandscapeLayout(float screenWidth, float screenHeight) {
-            float width = screenHeight * HomeScreen.MAIN_MENU_WIDTH_FACTOR * 0.8f;
-            setBounds(screenWidth - width, 0, width, screenHeight);
-            return width;
+            if (displaySidebarForLandscapeMode()) {
+                float width = screenHeight * HomeScreen.MAIN_MENU_WIDTH_FACTOR * 0.8f;
+                setBounds(screenWidth - width, 0, width, screenHeight);
+                return width;
+            }
+            return 0;
         }
     }
 

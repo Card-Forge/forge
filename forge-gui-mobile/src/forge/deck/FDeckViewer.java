@@ -125,7 +125,12 @@ public class FDeckViewer extends FScreen {
     }
 
     private FDeckViewer(Deck deck0) {
-        super(deck0.getName(), menu);
+        super(new MenuHeader(deck0.getName(), menu) {
+            @Override
+            protected boolean displaySidebarForLandscapeMode() {
+                return false;
+            }
+        });
         deck = deck0;
         cardManager = new CardManager(false);
         cardManager.setPool(deck.getMain());
