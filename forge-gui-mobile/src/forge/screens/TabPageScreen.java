@@ -210,7 +210,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
             if (btnBack != null) {
                 if (Forge.isLandscapeMode()) { //show back button at bottom for landscape mode
                     if (showBackButtonInLandscapeMode()) {
-                        float backButtonHeight = HEIGHT * 0.75f;
+                        float backButtonHeight = HEIGHT * 0.7f;
                         btnBack.setBounds(0, height - backButtonHeight, width, backButtonHeight);
                         height -= backButtonHeight;
                     }
@@ -226,7 +226,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
 
         @Override
         public float doLandscapeLayout(float screenWidth, float screenHeight) {
-            float width = HEIGHT * 1.5f;
+            float width = HEIGHT * 1.25f;
             setBounds(screenWidth - width, 0, width, screenHeight);
             return width;
         }
