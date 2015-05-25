@@ -20,6 +20,7 @@ package forge.deck;
 import java.text.NumberFormat;
 import java.util.Map.Entry;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.StaticData;
 import forge.assets.FSkinFont;
@@ -63,7 +64,7 @@ public class AddBasicLandsDialog extends FDialog {
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
             float padding = FOptionPane.PADDING;
             float x = padding;
-            float totalWidth = 2 * visibleWidth - ADD_BTN_SIZE;
+            float totalWidth = Forge.isLandscapeMode() ? visibleWidth : 2 * visibleWidth - ADD_BTN_SIZE;
             float panelWidth = (totalWidth - 6 * padding) / 5;
 
             pnlPlains.setBounds(x, 0, panelWidth, visibleHeight);
@@ -230,7 +231,13 @@ public class AddBasicLandsDialog extends FDialog {
         //layout card panel scroller
         y += comboBoxHeight + padding;
         float panelExtraHeight = pnlPlains.cbLandArt.getHeight() + ADD_BTN_SIZE + 2 * LAND_PANEL_PADDING;
-        float panelWidth = (2 * width - ADD_BTN_SIZE - 6 * padding) / 5;
+        float panelWidth;
+        if (Forge.isLandscapeMode()) {
+            panelWidth = (width - 6 * padding) / 5;
+        }
+        else {
+            panelWidth = (2 * width - ADD_BTN_SIZE - 6 * padding) / 5;
+        }
         float panelHeight = panelWidth * FCardPanel.ASPECT_RATIO + panelExtraHeight;
         scroller.setBounds(0, y, width, panelHeight);
 
