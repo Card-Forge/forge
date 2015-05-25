@@ -90,7 +90,7 @@ public class HomeScreen extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 activeButtonIndex = 5;
-                SettingsScreen.show();
+                SettingsScreen.show(true);
             }
         });
         baseButtonCount = buttons.size();

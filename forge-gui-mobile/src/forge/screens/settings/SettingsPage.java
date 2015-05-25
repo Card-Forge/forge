@@ -19,6 +19,7 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
 import forge.screens.TabPageScreen.TabPage;
+import forge.screens.home.HomeScreen;
 import forge.sound.SoundSystem;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FGroupList;
@@ -335,6 +336,14 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             @Override
             protected void doLayout(float startY, float width, float height) {
                 lstOptions.setBounds(0, startY, width, height - startY);
+            }
+
+            @Override
+            public FScreen getLandscapeBackdropScreen() {
+                if (SettingsScreen.launchedFromHomeScreen()) {
+                    return HomeScreen.instance;
+                }
+                return null;
             }
         }
 

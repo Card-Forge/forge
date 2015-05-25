@@ -4,7 +4,9 @@ import forge.Forge;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
+import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
+import forge.screens.home.HomeScreen;
 import forge.util.Utils;
 
 public class SettingsScreen extends TabPageScreen<SettingsScreen> {
@@ -15,13 +17,19 @@ public class SettingsScreen extends TabPageScreen<SettingsScreen> {
     private static final float INSETS_FACTOR = 0.025f;
     private static final float MAX_INSETS = SETTING_HEIGHT * 0.15f;
 
+    private static boolean fromHomeScreen;
     private static SettingsScreen settingsScreen; //keep settings screen around so scroll positions maintained
 
-    public static void show() {
+    public static void show(boolean fromHomeScreen0) {
         if (settingsScreen == null) {
             settingsScreen = new SettingsScreen();
         }
+        fromHomeScreen = fromHomeScreen0;
         Forge.openScreen(settingsScreen);
+    }
+
+    public static boolean launchedFromHomeScreen() {
+        return fromHomeScreen;
     }
 
     public static float getInsets(float itemWidth) {
@@ -40,9 +48,16 @@ public class SettingsScreen extends TabPageScreen<SettingsScreen> {
         }, true) {
             @Override
             protected boolean showBackButtonInLandscapeMode() {
-                return false;
+                return !fromHomeScreen; //don't show back button if launched from home screen
             }
         });
+    }
+
+    public FScreen getLandscapeBackdropScreen() {
+        if (fromHomeScreen) {
+            return HomeScreen.instance;
+        }
+        return null;
     }
 
     @Override

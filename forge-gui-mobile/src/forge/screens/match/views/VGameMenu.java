@@ -79,7 +79,7 @@ public class VGameMenu extends FDropDownMenu {
         addItem(new FMenuItem("Settings", FSkinImage.SETTINGS, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                SettingsScreen.show();
+                SettingsScreen.show(false);
             }
         }));
     }

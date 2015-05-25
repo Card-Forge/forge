@@ -74,7 +74,7 @@ public abstract class FScreen extends FContainer {
             ((MenuHeader)header).btnMenu.trigger();
         }
         else { //just so settings screen if no menu header
-            SettingsScreen.show();
+            SettingsScreen.show(false);
         }
     }
 
