@@ -126,6 +126,12 @@ public abstract class FScreen extends FContainer {
                 width = backdrop.doLandscapeLayout(width, height);
             }
         }
+        if (getWidth() == width && getHeight() == height) {
+            if (header != null) {
+                header.onScreenActivate(); //let header handle when screen activated
+            }
+            return;
+        }
         super.setSize(width, height);
     }
 
@@ -176,6 +182,10 @@ public abstract class FScreen extends FContainer {
         public static final float LINE_THICKNESS = Utils.scale(1);
 
         public abstract float getPreferredHeight();
+
+        //handle when screen activated
+        protected void onScreenActivate() {
+        }
 
         //do layout for landscape mode and return needed width
         public abstract float doLandscapeLayout(float screenWidth, float screenHeight);
@@ -269,6 +279,15 @@ public abstract class FScreen extends FContainer {
             }
 
             btnMenu.setBounds(width - height, 0, height, height);
+        }
+
+        @Override
+        protected void onScreenActivate() {
+            //ensure menu layout refreshed for sidebar when screen activated
+            if (Forge.isLandscapeMode() && displaySidebarForLandscapeMode()) {
+                menu.hide();
+                menu.show(getLeft(), 0, getWidth(), getHeight());
+            }
         }
 
         protected boolean displaySidebarForLandscapeMode() {
