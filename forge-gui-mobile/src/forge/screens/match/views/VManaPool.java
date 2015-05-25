@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
@@ -58,12 +59,31 @@ public class VManaPool extends VDisplayArea {
     protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
         float x = 0;
         float y = 0;
-        float labelWidth = visibleWidth / manaLabels.size();
-        float labelHeight = visibleHeight;
 
-        for (ManaLabel label : manaLabels) {
-            label.setBounds(x, y, labelWidth, labelHeight);
-            x += labelWidth;
+        if (Forge.isLandscapeMode()) {
+            float labelWidth = visibleWidth / 2;
+            float labelHeight = visibleHeight / 3;
+
+            int count = 0;
+            for (ManaLabel label : manaLabels) {
+                label.setBounds(x, y, labelWidth, labelHeight);
+                if (++count % 2 == 0) {
+                    x = 0;
+                    y += labelHeight;
+                }
+                else {
+                    x += labelWidth;
+                }
+            }
+        }
+        else {
+            float labelWidth = visibleWidth / manaLabels.size();
+            float labelHeight = visibleHeight;
+
+            for (ManaLabel label : manaLabels) {
+                label.setBounds(x, y, labelWidth, labelHeight);
+                x += labelWidth;
+            }
         }
 
         return new ScrollBounds(visibleWidth, visibleHeight);
