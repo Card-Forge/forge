@@ -13,25 +13,25 @@ public class BooleanExpression {
 
     private Stack<Operator> operators = new Stack<>();
     private Stack<Predicate<CardRules>> operands = new Stack<>();
-    
+
     private StringTokenizer expression;
-    
+
     private boolean inName, inType, inText, inCost;
 
-    private static enum Operator {
+    private enum Operator {
 
         AND("&", 0), OR("|", 0), NOT("!", 1), OPEN_PAREN("(", 2), CLOSE_PAREN(")", 2), ESCAPE("\\", -1);
 
         private final String token;
         private final int precedence;
 
-        private Operator(final String token, final int precedence) {
+        Operator(final String token, final int precedence) {
             this.token = token;
             this.precedence = precedence;
         }
 
     }
-    
+
     public BooleanExpression(final String expression, final boolean inName, final boolean inType, final boolean inText, final boolean inCost) {
         this.expression = new StringTokenizer(expression);
         this.inName = inName;
@@ -39,7 +39,7 @@ public class BooleanExpression {
         this.inText = inText;
         this.inCost = inCost;
     }
-    
+
     public Predicate<CardRules> evaluate() {
 
         String currentValue = "";
@@ -68,17 +68,17 @@ public class BooleanExpression {
             if (operator == null) {
                 currentValue += token;
             } else {
-                
+
                 if (escapeNext) {
                     escapeNext = false;
                     currentValue += token;
                     continue;
                 }
-                
+
                 if (!currentValue.trim().isEmpty()) {
                     operands.push(valueOf(currentValue.trim()));
                 }
-                
+
                 currentValue = "";
 
                 if (!operators.isEmpty() && operator.precedence < operators.peek().precedence) {
@@ -88,11 +88,11 @@ public class BooleanExpression {
                     while (!operators.isEmpty() && operators.peek() != Operator.OPEN_PAREN) {
                         resolve(true);
                     }
-                    
+
                 }
-                
+
                 operators.push(operator);
-            
+
             }
 
         }
@@ -101,14 +101,14 @@ public class BooleanExpression {
             operands.push(valueOf(currentValue.trim()));
         }
 
-        while (operators.size() > 0) {
+        while (!operators.isEmpty()) {
             resolve(true);
         }
-        
+
         return operands.get(0);
-        
+
     }
-    
+
     private void resolve(final boolean alwaysPopOperator) {
 
         Predicate<CardRules> right;
@@ -138,11 +138,11 @@ public class BooleanExpression {
                 }
                 break;
         }
-        
+
     }
-    
+
     private Predicate<CardRules> valueOf(final String value) {
-        
+
         List<Predicate<CardRules>> predicates = new ArrayList<>();
         if (inName) {
             predicates.add(CardRulesPredicates.name(StringOp.CONTAINS_IC, value));
@@ -156,15 +156,15 @@ public class BooleanExpression {
         if (inCost) {
             predicates.add(CardRulesPredicates.cost(StringOp.CONTAINS_IC, value));
         }
-        if (predicates.size() > 0) {
+        if (!predicates.isEmpty()) {
             return Predicates.or(predicates);
         }
         return Predicates.alwaysTrue();
-        
+
     }
-    
+
     public static boolean isExpression(final String string) {
         return string.contains(Operator.AND.token) || string.contains(Operator.OR.token) || string.trim().startsWith(Operator.NOT.token);
     }
-    
+
 }

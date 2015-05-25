@@ -154,6 +154,10 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         // Wins until the selling price limit is removed
         SHOP_WINS_FOR_NO_SELL_LIMIT("50"),
 
+        //The number of cards to keep before selling
+        SHOP_EXTRAS_TO_KEEP("4"),
+        SHOP_EXTRA_BASIC_LANDS_TO_KEEP("50"),
+
         ITEM_LEVEL_RESTRICTION("1");
 
         private final String strDefaultVal;
@@ -250,54 +254,61 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
 
     public String validatePreference(final QPref qpref, final int val) {
         switch (qpref) {
-        case STARTING_POOL_COLOR_BIAS:
-            if (val < 1) {
-                return "Bias value too small (minimum 1).";
-            } else if (val > 100) {
-                return "Bias value too large (maximum 100).";
-            }
-            break;
+            case STARTING_POOL_COLOR_BIAS:
+                if (val < 1) {
+                    return "Bias value too small (minimum 1).";
+                } else if (val > 100) {
+                    return "Bias value too large (maximum 100).";
+                }
+                break;
 
-        case ITEM_LEVEL_RESTRICTION:
-            if (val != 0 && val != 1) {
-                return "Only values 0 or 1 are acceptable; 1 for enabled, 0 for disabled.";
-            }
-            break;
+            case ITEM_LEVEL_RESTRICTION:
+                if (val != 0 && val != 1) {
+                    return "Only values 0 or 1 are acceptable; 1 for enabled, 0 for disabled.";
+                }
+                break;
 
-        case SHOP_MAX_PACKS:
-        case SHOP_MAX_SELLING_PRICE:
-        case SHOP_WINS_FOR_ADDITIONAL_PACK:
-        case WINS_NEW_DRAFT:
-        case WINS_ROTATE_DRAFT:
-        case WINS_UNLOCK_SET:
-            if (val < 1) {
-                return "Value too small (minimum 1).";
-            }
-            break;
+            case SHOP_EXTRA_BASIC_LANDS_TO_KEEP:
+                if (val < 10) {
+                    return "Value too small (minimum 10).";
+                }
+                break;
 
-        case BOOSTER_COMMONS:
-        case BOOSTER_UNCOMMONS:
-        case BOOSTER_RARES:
-        case STARTING_CREDITS_EASY:
-        case STARTING_CREDITS_MEDIUM:
-        case STARTING_CREDITS_HARD:
-        case STARTING_CREDITS_EXPERT:
-        case REWARDS_MILLED:
-        case REWARDS_MULLIGAN0:
-        case REWARDS_ALTERNATIVE:
-        case REWARDS_TURN5:
-        case REWARDS_TURN1:
-        case SHOP_MIN_PACKS:
-        case SHOP_STARTING_PACKS:
-        case SHOP_SINGLES_COMMON:
-        case SHOP_SINGLES_UNCOMMON:
-        case SHOP_SINGLES_RARE:
-        case SHOP_WINS_FOR_NO_SELL_LIMIT:
-        default:
-            if (val < 0) {
-                return "Value too small (minimum 0).";
-            }
-            break;
+            case SHOP_MAX_PACKS:
+            case SHOP_MAX_SELLING_PRICE:
+            case SHOP_WINS_FOR_ADDITIONAL_PACK:
+            case SHOP_EXTRAS_TO_KEEP:
+            case WINS_NEW_DRAFT:
+            case WINS_ROTATE_DRAFT:
+            case WINS_UNLOCK_SET:
+                if (val < 1) {
+                    return "Value too small (minimum 1).";
+                }
+                break;
+
+            case BOOSTER_COMMONS:
+            case BOOSTER_UNCOMMONS:
+            case BOOSTER_RARES:
+            case STARTING_CREDITS_EASY:
+            case STARTING_CREDITS_MEDIUM:
+            case STARTING_CREDITS_HARD:
+            case STARTING_CREDITS_EXPERT:
+            case REWARDS_MILLED:
+            case REWARDS_MULLIGAN0:
+            case REWARDS_ALTERNATIVE:
+            case REWARDS_TURN5:
+            case REWARDS_TURN1:
+            case SHOP_MIN_PACKS:
+            case SHOP_STARTING_PACKS:
+            case SHOP_SINGLES_COMMON:
+            case SHOP_SINGLES_UNCOMMON:
+            case SHOP_SINGLES_RARE:
+            case SHOP_WINS_FOR_NO_SELL_LIMIT:
+            default:
+                if (val < 0) {
+                    return "Value too small (minimum 0).";
+                }
+                break;
         }
         return null;
     }

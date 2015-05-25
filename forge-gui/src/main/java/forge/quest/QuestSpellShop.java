@@ -10,6 +10,7 @@ import forge.itemmanager.IItemManager;
 import forge.itemmanager.SItemManagerUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
+import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.ReadPriceList;
 import forge.util.ItemPool;
 import forge.util.gui.SOptionPane;
@@ -27,10 +28,10 @@ public class QuestSpellShop {
     private static ItemPool<InventoryItem> decksUsingMyCards;
 
     public static Integer getCardValue(final InventoryItem card) {
-        String ns = null;
+        String ns;
         int value = 1337; // previously this was the returned default
         boolean foil = false;
-        int foilMultiplier = 1;
+        int foilMultiplier;
 
         if (card instanceof PaperCard) {
             ns = card.getName() + "|" + ((PaperCard) card).getEdition();
@@ -104,7 +105,7 @@ public class QuestSpellShop {
             value *= foilMultiplier;
         }
 
-        return Integer.valueOf(value);
+        return value;
     }
 
     public static final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnPriceCompare = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
@@ -128,21 +129,20 @@ public class QuestSpellShop {
     public static final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
         @Override
         public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-            final Integer iValue = decksUsingMyCards.count(from.getKey());
-            return iValue == null ? Integer.valueOf(0) : iValue;
+            return decksUsingMyCards.count(from.getKey());
         }
     };
     public static final Function<Entry<? extends InventoryItem, Integer>, Object> fnDeckGet = new Function<Entry<? extends InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<? extends InventoryItem, Integer> from) {
             final Integer iValue = decksUsingMyCards.count(from.getKey());
-            return iValue == null ? "" : iValue.toString();
+            return iValue.toString();
         }
     };
 
     public static void buy(Iterable<Entry<InventoryItem, Integer>> items, IItemManager<InventoryItem> shopManager, IItemManager<InventoryItem> inventoryManager, boolean confirmPurchase) {
         long totalCost = 0;
-        ItemPool<InventoryItem> itemsToBuy = new ItemPool<InventoryItem>(InventoryItem.class);
+        ItemPool<InventoryItem> itemsToBuy = new ItemPool<>(InventoryItem.class);
         for (Entry<InventoryItem, Integer> itemEntry : items) {
             final InventoryItem item = itemEntry.getKey();
             if (item instanceof PaperCard || item instanceof SealedProduct || item instanceof PreconDeck) {
@@ -169,7 +169,7 @@ public class QuestSpellShop {
             return;
         }
 
-        ItemPool<InventoryItem> itemsToAdd = new ItemPool<InventoryItem>(InventoryItem.class);
+        ItemPool<InventoryItem> itemsToAdd = new ItemPool<>(InventoryItem.class);
 
         for (Entry<InventoryItem, Integer> itemEntry : itemsToBuy) {
             final InventoryItem item = itemEntry.getKey();
@@ -197,6 +197,7 @@ public class QuestSpellShop {
                         booster = (BoosterBox) ((BoosterBox) item).clone();
                     }
                     FModel.getQuest().getCards().buyPack(booster, value);
+                    assert booster != null;
                     final List<PaperCard> newCards = booster.getCards();
 
                     itemsToAdd.addAllFlat(newCards);
@@ -219,7 +220,7 @@ public class QuestSpellShop {
 
                         remainingCards.addAll(((BoxedProduct) booster).getExtraCards());
 
-                        if (remainingCards.size() > 0) {
+                        if (!remainingCards.isEmpty()) {
                             GuiBase.getInterface().showCardList(booster.getName(), "You have found the following cards inside:", remainingCards);
                         }
 
@@ -252,7 +253,7 @@ public class QuestSpellShop {
 
     public static void sell(Iterable<Entry<InventoryItem, Integer>> items, IItemManager<InventoryItem> shopManager, IItemManager<InventoryItem> inventoryManager, boolean confirmSale) {
         long totalReceived = 0;
-        ItemPool<InventoryItem> itemsToSell = new ItemPool<InventoryItem>(InventoryItem.class);
+        ItemPool<InventoryItem> itemsToSell = new ItemPool<>(InventoryItem.class);
         for (Entry<InventoryItem, Integer> itemEntry : items) {
             final InventoryItem item = itemEntry.getKey();
             if (item instanceof PaperCard) {
@@ -288,10 +289,11 @@ public class QuestSpellShop {
     }
 
     public static void sellExtras(IItemManager<InventoryItem> shopManager, IItemManager<InventoryItem> inventoryManager) {
-        List<Entry<InventoryItem, Integer>> cardsToRemove = new LinkedList<Map.Entry<InventoryItem,Integer>>();
+        List<Entry<InventoryItem, Integer>> cardsToRemove = new LinkedList<>();
         for (Entry<InventoryItem, Integer> item : inventoryManager.getPool()) {
             PaperCard card = (PaperCard)item.getKey();
-            int numToKeep = card.getRules().getType().isBasic() ? 50 : 4;
+            int numToKeep = card.getRules().getType().isBasic() ?
+                    FModel.getQuestPreferences().getPrefInt(QPref.SHOP_EXTRA_BASIC_LANDS_TO_KEEP) : FModel.getQuestPreferences().getPrefInt(QPref.SHOP_EXTRAS_TO_KEEP);
             if ("Relentless Rats".equals(card.getName()) || "Shadowborn Apostle".equals(card.getName())) {
                 numToKeep = Integer.MAX_VALUE;
             }
@@ -316,7 +318,7 @@ public class QuestSpellShop {
 
     // fills number of decks using each card
     public static void updateDecksForEachCard() {
-        decksUsingMyCards = new ItemPool<InventoryItem>(InventoryItem.class);
+        decksUsingMyCards = new ItemPool<>(InventoryItem.class);
         for (final Deck deck : FModel.getQuest().getMyDecks()) {
             CardPool main = deck.getMain();
             for (final Entry<PaperCard, Integer> e : main) {
