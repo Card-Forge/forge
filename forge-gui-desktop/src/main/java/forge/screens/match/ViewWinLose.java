@@ -213,7 +213,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     private static String composeTitle(final GameView game) {
         final String winner = game.getWinningPlayerName();
         final int winningTeam = game.getWinningTeam();
-        if (winner == null) {
+        if (winner == null || winner.isEmpty()) {
             return "It's a draw!";
         } else if (winningTeam != -1) {
             return String.format("Team %d won!", Integer.valueOf(winningTeam));
