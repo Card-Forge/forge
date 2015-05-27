@@ -691,6 +691,9 @@ public class GameAction {
         game.getStack().setFrozen(true);
         game.getTracker().freeze(); //prevent views flickering during while updating for state-based effects
 
+        // check the game over condition early for win conditions such as Platinum Angel + Hurricane lethal for both players
+        checkGameOverCondition();
+
         // do this multiple times, sometimes creatures/permanents will survive when they shouldn't
         for (int q = 0; q < 9; q++) {
             checkStaticAbilities(false, affectedCards);
@@ -800,7 +803,12 @@ public class GameAction {
             game.fireEvent(new GameEventCardStatsChanged(affectedCards));
         }
 
-        checkGameOverCondition();
+        // recheck the game over condition at this point to make sure no other win conditions apply now.
+        // TODO: is this necessary at this point if it's checked early above anyway?
+        if (!game.isGameOver()) {
+            checkGameOverCondition();
+        }
+        
         if (game.getAge() != GameStage.Play) {
             return;
         }
