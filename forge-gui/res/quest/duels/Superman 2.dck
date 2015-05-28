@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Superman 2
+Title=Superman
+Difficulty=medium
+Description=WG Outlast/Bolster deck
+Icon=Superman.jpg
+Deck Type=constructed
+[main]
+4 Forest
+6 Plains
+1 Savannah
+4 Graypelt Refuge
+1 Gavony Township
+4 Windswept Heath
+2 Razorverge Thicket
+2 Abzan Battle Priest
+2 Abzan Falconer
+2 Ainok Bond-Kin
+2 Anafenza, Kin-Tree Spirit
+1 Avatar of the Resolute
+1 Daghatar the Adamant
+1 Dragonscale General
+1 Dromoka Captain
+1 Elite Scaleguard
+1 Forgotten Ancient
+2 High Sentinels of Arashin
+2 Juniper Order Ranger
+1 Longshot Squad
+1 Sandcrafter Mage
+1 Steward of Valeron
+2 Tuskguard Captain
+1 Vinelasher Kudzu
+1 Echoes of the Kin Tree
+2 Disenchant
+2 Scale Blessing
+1 Oust
+1 Journey to Nowhere
+1 Excoriate
+1 Cached Defenses
+2 Map the Wastes
+1 Titania's Boon
+2 Hardened Scales
+[sideboard]
