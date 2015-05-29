@@ -379,15 +379,20 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         pnlShop.add(new FLabel.Builder().text("Wins to Uncap Sale Price").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
         pnlShop.add(new PrefInput(QPref.SHOP_WINS_FOR_NO_SELL_LIMIT, QuestPreferencesErrType.SHOP), fieldConstraints);
 
-        FLabel extraCardsToKeep = new FLabel.Builder().text("Copies of Cards to Keep").fontAlign(SwingConstants.RIGHT).build();
+        FLabel extraCardsToKeep = new FLabel.Builder().text("Playset Size").fontAlign(SwingConstants.RIGHT).build();
         extraCardsToKeep.setToolTipText("The number of copies of cards to keep before selling extras.");
         pnlShop.add(extraCardsToKeep, labelConstraints);
-        pnlShop.add(new PrefInput(QPref.SHOP_EXTRAS_TO_KEEP, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
+        pnlShop.add(new PrefInput(QPref.PLAYSET_SIZE, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
 
-        FLabel extraLandsToKeep = new FLabel.Builder().text("Copies of Basic Lands to Keep").fontAlign(SwingConstants.RIGHT).build();
+        FLabel extraLandsToKeep = new FLabel.Builder().text("Playset Size: Basic Land").fontAlign(SwingConstants.RIGHT).build();
         extraLandsToKeep.setToolTipText("The number of copies of basic lands to keep before selling extras.");
         pnlShop.add(extraLandsToKeep, labelConstraints);
-        pnlShop.add(new PrefInput(QPref.SHOP_EXTRA_BASIC_LANDS_TO_KEEP, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
+        pnlShop.add(new PrefInput(QPref.PLAYSET_BASIC_LAND_SIZE, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
+
+        FLabel infiniteToKeep = new FLabel.Builder().text("Playset Size: Any Number").fontAlign(SwingConstants.RIGHT).build();
+        infiniteToKeep.setToolTipText("The number of copies of Relentless Rats or Shadowborn Apostles to keep before selling extras.");
+        pnlShop.add(infiniteToKeep, labelConstraints);
+        pnlShop.add(new PrefInput(QPref.PLAYSET_ANY_NUMBER_SIZE, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
 
         pnlShop.add(new FLabel.Builder().text("Item Level Restriction").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
         pnlShop.add(new PrefInput(QPref.ITEM_LEVEL_RESTRICTION, QuestPreferencesErrType.SHOP), fieldConstraints);

@@ -83,8 +83,9 @@ public class QuestPrefsScreen extends FScreen {
         scroller.add(new PrefsOption("Common Singles", QPref.SHOP_SINGLES_COMMON, PrefsGroup.SHOP));
         scroller.add(new PrefsOption("Uncommon Singles", QPref.SHOP_SINGLES_UNCOMMON, PrefsGroup.SHOP));
         scroller.add(new PrefsOption("Rare Singles", QPref.SHOP_SINGLES_RARE, PrefsGroup.SHOP));
-        scroller.add(new PrefsOption("Copies of Cards to Keep", QPref.SHOP_EXTRAS_TO_KEEP, PrefsGroup.SHOP));
-        scroller.add(new PrefsOption("Copies of Basic Lands to Keep", QPref.SHOP_EXTRA_BASIC_LANDS_TO_KEEP, PrefsGroup.SHOP));
+        scroller.add(new PrefsOption("Playset Size", QPref.PLAYSET_SIZE, PrefsGroup.SHOP));
+        scroller.add(new PrefsOption("Playset Size: Basic Lands", QPref.PLAYSET_BASIC_LAND_SIZE, PrefsGroup.SHOP));
+        scroller.add(new PrefsOption("Playset Size: Any Number", QPref.PLAYSET_ANY_NUMBER_SIZE, PrefsGroup.SHOP));
 
         //Difficulty Adjustments (All)
         scroller.add(new PrefsHeader("Difficulty Adjustments (All)", FSkinImage.QUEST_NOTES, PrefsGroup.DIFFICULTY_ALL));

@@ -293,9 +293,9 @@ public class QuestSpellShop {
         for (Entry<InventoryItem, Integer> item : inventoryManager.getPool()) {
             PaperCard card = (PaperCard)item.getKey();
             int numToKeep = card.getRules().getType().isBasic() ?
-                    FModel.getQuestPreferences().getPrefInt(QPref.SHOP_EXTRA_BASIC_LANDS_TO_KEEP) : FModel.getQuestPreferences().getPrefInt(QPref.SHOP_EXTRAS_TO_KEEP);
+                    FModel.getQuestPreferences().getPrefInt(QPref.PLAYSET_BASIC_LAND_SIZE) : FModel.getQuestPreferences().getPrefInt(QPref.PLAYSET_SIZE);
             if ("Relentless Rats".equals(card.getName()) || "Shadowborn Apostle".equals(card.getName())) {
-                numToKeep = Integer.MAX_VALUE;
+                numToKeep = FModel.getQuestPreferences().getPrefInt(QPref.PLAYSET_ANY_NUMBER_SIZE);
             }
             if (numToKeep < item.getValue()) {
                 cardsToRemove.add(Pair.of(item.getKey(), item.getValue() - numToKeep));

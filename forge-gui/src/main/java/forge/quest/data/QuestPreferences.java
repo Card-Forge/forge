@@ -155,8 +155,9 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         SHOP_WINS_FOR_NO_SELL_LIMIT("50"),
 
         //The number of cards to keep before selling
-        SHOP_EXTRAS_TO_KEEP("4"),
-        SHOP_EXTRA_BASIC_LANDS_TO_KEEP("50"),
+        PLAYSET_SIZE("4"),
+        PLAYSET_ANY_NUMBER_SIZE("500"),
+        PLAYSET_BASIC_LAND_SIZE("50"),
 
         ITEM_LEVEL_RESTRICTION("1");
 
@@ -268,7 +269,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
                 }
                 break;
 
-            case SHOP_EXTRA_BASIC_LANDS_TO_KEEP:
+            case PLAYSET_BASIC_LAND_SIZE:
                 if (val < 10) {
                     return "Value too small (minimum 10).";
                 }
@@ -277,7 +278,8 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
             case SHOP_MAX_PACKS:
             case SHOP_MAX_SELLING_PRICE:
             case SHOP_WINS_FOR_ADDITIONAL_PACK:
-            case SHOP_EXTRAS_TO_KEEP:
+            case PLAYSET_SIZE:
+            case PLAYSET_ANY_NUMBER_SIZE:
             case WINS_NEW_DRAFT:
             case WINS_ROTATE_DRAFT:
             case WINS_UNLOCK_SET:
