@@ -115,10 +115,8 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                 int ncopied = AbilityUtils.calculateAmount(hostCard, num, sa);
                 while(ncopied > 0) {
                     final PaperCard cp = Aggregates.random(copysource);
-                    Card possibleCard = Card.fromPaperCard(cp, null);
-                    // Need to temporarily set the Owner so the Game is set
-                    possibleCard.setOwner(sa.getActivatingPlayer());
-                    
+                    Card possibleCard = Card.fromPaperCard(cp, sa.getActivatingPlayer()); // Need to temporarily set the Owner so the Game is set
+
                     if (possibleCard.isValid(valid, hostCard.getController(), hostCard)) {
                         choice.add(possibleCard);
                         copysource.remove(cp);
