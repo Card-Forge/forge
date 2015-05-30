@@ -11,6 +11,7 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManager.ContextMenuBuilder;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
+import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FDialog;
 import forge.toolbox.FEvent;
@@ -73,6 +74,11 @@ public class FSideboardDialog extends FDialog {
         @Override
         protected boolean canActivateTabPage() {
             return true; //always allow activating tab pages while this is open
+        }
+
+        @Override
+        public FScreen getLandscapeBackdropScreen() {
+            return null;
         }
 
         private static abstract class TabPageBase extends TabPage<SideboardTabs> {

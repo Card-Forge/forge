@@ -12,6 +12,7 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
+import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FChoiceList;
 import forge.toolbox.FEvent;
@@ -57,6 +58,11 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
     @Override
     protected boolean canActivateTabPage() {
         return true; //always allow activating tab pages while this is open
+    }
+
+    @Override
+    public FScreen getLandscapeBackdropScreen() {
+        return null;
     }
 
     private static class PickerTab extends TabPage<GameEntityPicker> {
