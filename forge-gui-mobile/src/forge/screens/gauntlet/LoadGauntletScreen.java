@@ -14,7 +14,6 @@ import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
-import forge.card.CardRenderer;
 import forge.deck.Deck;
 import forge.deck.FDeckChooser;
 import forge.game.GameType;
@@ -39,6 +38,7 @@ import forge.util.Utils;
 import forge.util.gui.SOptionPane;
 
 public class LoadGauntletScreen extends LaunchScreen {
+    private static final float ITEM_HEIGHT = Utils.AVG_FINGER_HEIGHT;
     private static final float PADDING = Utils.AVG_FINGER_HEIGHT * 0.1f;
     private static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
 
@@ -232,7 +232,7 @@ public class LoadGauntletScreen extends LaunchScreen {
 
                 @Override
                 public float getItemHeight() {
-                    return CardRenderer.getCardListItemHeight(false);
+                    return ITEM_HEIGHT;
                 }
 
                 @Override

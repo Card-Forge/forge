@@ -19,7 +19,6 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
-import forge.card.CardRenderer;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.quest.QuestController;
@@ -42,6 +41,7 @@ import forge.util.Utils;
 import forge.util.gui.SOptionPane;
 
 public class LoadQuestScreen extends LaunchScreen {
+    private static final float ITEM_HEIGHT = Utils.AVG_FINGER_HEIGHT;
     private static final float PADDING = Utils.AVG_FINGER_HEIGHT * 0.1f;
     private static final FSkinColor OLD_QUESTS_BACK_COLOR = FSkinColor.get(Colors.CLR_INACTIVE).getContrastColor(20);
     private static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
@@ -267,7 +267,7 @@ public class LoadQuestScreen extends LaunchScreen {
 
                 @Override
                 public float getItemHeight() {
-                    return CardRenderer.getCardListItemHeight(false);
+                    return ITEM_HEIGHT;
                 }
 
                 @Override
