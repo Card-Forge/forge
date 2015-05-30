@@ -128,6 +128,7 @@ public class HomeScreen extends FScreen {
             }
         });
         revalidate();
+        buttonScroller.scrollIntoView(buttons.get(index));
     }
 
     @Override
