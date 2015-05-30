@@ -3,12 +3,14 @@ package forge.screens.match.views;
 import forge.assets.FSkinImage;
 import forge.deck.Deck;
 import forge.deck.FDeckViewer;
+import forge.game.player.Player;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.screens.match.MatchController;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FOptionPane;
 import forge.util.ThreadUtil;
 
 public class VGameMenu extends FDropDownMenu {
@@ -45,10 +47,15 @@ public class VGameMenu extends FDropDownMenu {
         addItem(new FMenuItem("Deck List", FSkinImage.DECKLIST, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                final Deck deck = MatchController.getHostedMatch().getGame().getPhaseHandler().getPlayerTurn().getRegisteredPlayer().getDeck();
-                if (deck != null) {
-                    FDeckViewer.show(deck);
+                final Player player = MatchController.getHostedMatch().getGame().getPhaseHandler().getPlayerTurn();
+                if (player != null) {
+                    final Deck deck = player.getRegisteredPlayer().getDeck();
+                    if (deck != null) {
+                        FDeckViewer.show(deck);
+                        return;
+                    }
                 }
+                FOptionPane.showMessageDialog("No player has priority at the moment, so deck list can't be viewed.");
             }
         }));
         addItem(new FMenuItem("Auto-Yields", FSkinImage.WARNING, new FEventHandler() {
