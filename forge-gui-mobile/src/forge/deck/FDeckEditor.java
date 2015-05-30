@@ -43,6 +43,7 @@ import forge.model.FModel;
 import forge.planarconquest.ConquestUtil;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.data.QuestPreferences.QPref;
+import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
@@ -504,6 +505,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         }
                     }
         });
+    }
+
+    @Override
+    public FScreen getLandscapeBackdropScreen() {
+        return null; //never use backdrop for editor
     }
 
     private boolean isLimitedEditor() {

@@ -148,7 +148,7 @@ public class FDeckChooser extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 if (selectedDeckType != DeckType.COLOR_DECK && selectedDeckType != DeckType.THEME_DECK) {
-                    FDeckViewer.show(getDeck(), true);
+                    FDeckViewer.show(getDeck());
                 }
             }
         });

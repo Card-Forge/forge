@@ -47,7 +47,7 @@ public class VGameMenu extends FDropDownMenu {
             public void handleEvent(FEvent e) {
                 final Deck deck = MatchController.getHostedMatch().getGame().getPhaseHandler().getPlayerTurn().getRegisteredPlayer().getDeck();
                 if (deck != null) {
-                    FDeckViewer.show(deck, false);
+                    FDeckViewer.show(deck);
                 }
             }
         }));
