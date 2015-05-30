@@ -575,7 +575,7 @@ public class CardView extends GameEntityView {
 
         if (isSplitCard() && getZone() != ZoneType.Stack) {
             //ensure ability text for right half of split card is included unless spell is on stack
-            sb.append("\r\n\r\n").append("(").append(getAlternateState().getName()).append(") ").append(getAlternateState().getAbilityText());
+            sb.append("\r\n\r\n").append("(").append(getAlternateState().getName()).append(") ").append(getAlternateState().getOracleText());
         }
 
         String nonAbilityText = get(TrackableProperty.NonAbilityText);
