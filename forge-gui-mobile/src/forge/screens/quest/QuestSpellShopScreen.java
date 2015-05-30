@@ -52,6 +52,11 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
         update();
     }
 
+    @Override
+    protected boolean allowBackInLandscapeMode() {
+        return true;
+    }
+
     public void onClose(Callback<Boolean> canCloseCallback) {
         FModel.getQuest().save();
         super.onClose(canCloseCallback);

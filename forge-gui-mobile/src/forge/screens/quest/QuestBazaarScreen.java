@@ -35,6 +35,11 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
         super(getPages());
     }
 
+    @Override
+    protected boolean allowBackInLandscapeMode() {
+        return true;
+    }
+
     private static BazaarPage[] getPages() {
         int pageNum = 0;
         QuestBazaarManager bazaar = FModel.getQuest().getBazaar();

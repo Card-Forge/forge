@@ -928,4 +928,9 @@ public class FDeckChooser extends FScreen {
             }
         });
     }
+
+    @Override
+    protected boolean allowBackInLandscapeMode() {
+        return true;
+    }
 }

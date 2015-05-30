@@ -378,13 +378,17 @@ public abstract class FScreen extends FContainer {
         }
     }
 
+    protected boolean allowBackInLandscapeMode() {
+        return getLandscapeBackdropScreen() != HomeScreen.instance; //don't allow going back if home screen is backdrop by default
+    }
+
     @Override
     public boolean keyDown(int keyCode) {
         if (keyCode == Keys.ESCAPE || keyCode == Keys.BACK) {
             if (Forge.endKeyInput()) { return true; }
 
-            if (Forge.isLandscapeMode() && getLandscapeBackdropScreen() == HomeScreen.instance) {
-                Forge.exit(false); //prompt to exit if attempting to go back from screen with home screen as backdrop
+            if (Forge.isLandscapeMode() && !allowBackInLandscapeMode()) {
+                Forge.exit(false); //prompt to exit if attempting to go back from screen that doesn't allow back in landscape mode
                 return true;
             }
             Forge.back(); //go back on escape by default
