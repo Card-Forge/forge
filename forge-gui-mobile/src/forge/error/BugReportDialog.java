@@ -72,6 +72,11 @@ public class BugReportDialog extends FScreen { //use screen rather than dialog s
     }
 
     @Override
+    public FScreen getLandscapeBackdropScreen() {
+        return null;
+    }
+
+    @Override
     public void onClose(Callback<Boolean> canCloseCallback) {
         super.onClose(canCloseCallback);
         isOpen = false;
@@ -86,21 +91,35 @@ public class BugReportDialog extends FScreen { //use screen rather than dialog s
         lblHeader.setBounds(x, y, w, lblHeader.getPreferredHeight(w));
         y += lblHeader.getHeight() + PADDING;
 
-        float buttonWidth = (w - PADDING) / 2;
+        float buttonWidth, totalButtonHeight;
         float buttonHeight = BUTTON_HEIGHT;
+        boolean landscapeMode = Forge.isLandscapeMode();
+        if (landscapeMode) {
+            buttonWidth = (w - 3 * PADDING) / 4;
+            totalButtonHeight = buttonHeight;
+        }
+        else {
+            buttonWidth = (w - PADDING) / 2;
+            totalButtonHeight = 2 * buttonHeight + PADDING;
+        }
 
-        tvDetails.setBounds(x, y, w, height - 2 * buttonHeight - 3 * PADDING - y);
+        tvDetails.setBounds(x, y, w, height - totalButtonHeight - 2 * PADDING - y);
         y += tvDetails.getHeight() + PADDING;
 
         btnReport.setBounds(x, y, buttonWidth, buttonHeight);
         btnSave.setBounds(x + buttonWidth + PADDING, y, buttonWidth, buttonHeight);
-        y += buttonHeight + PADDING;
+        if (landscapeMode) {
+            x += 2 * (buttonWidth + PADDING);
+        }
+        else {
+            y += buttonHeight + PADDING;
+        }
         if (btnExit.isVisible()) {
             btnContinue.setBounds(x, y, buttonWidth, buttonHeight);
             btnExit.setBounds(x + buttonWidth + PADDING, y, buttonWidth, buttonHeight);
         }
         else {
-            btnContinue.setBounds(x, y, w, buttonHeight);
+            btnContinue.setBounds(x, y, 2 * buttonWidth + PADDING, buttonHeight);
         }
     }
 
