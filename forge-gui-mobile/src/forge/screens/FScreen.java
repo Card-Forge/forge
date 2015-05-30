@@ -383,6 +383,10 @@ public abstract class FScreen extends FContainer {
         if (keyCode == Keys.ESCAPE || keyCode == Keys.BACK) {
             if (Forge.endKeyInput()) { return true; }
 
+            if (Forge.isLandscapeMode() && getLandscapeBackdropScreen() == HomeScreen.instance) {
+                Forge.exit(false); //prompt to exit if attempting to go back from screen with home screen as backdrop
+                return true;
+            }
             Forge.back(); //go back on escape by default
             return true;
         }
