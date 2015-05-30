@@ -616,6 +616,9 @@ public class AbilityManaPart implements java.io.Serializable {
         final Player act = sa != null ? sa.getActivatingPlayer() : null;
         final String manaReplace = sa != null ? sa.getManaPart().getManaReplaceType(): "";
         if (manaReplace.isEmpty()) {
+            if (act != null && act.getLandsPlayedThisTurn() > 0 && sa.hasParam("ReplaceIfLandPlayed")) {
+                return sa.getParam("ReplaceIfLandPlayed");
+            }
             return original;
         }
         if (manaReplace.startsWith("Any")) {

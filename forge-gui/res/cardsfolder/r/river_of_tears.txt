@@ -1,9 +1,7 @@
 Name:River of Tears
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ U | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X | SubAbility$ DBBlack | SpellDescription$ Add {U} to your mana pool. If you played a land this turn, add {B} to your mana pool instead.
-SVar:DBBlack:DB$ Mana | Produced$ B | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X
-SVar:X:Count$YourLandsPlayed
+A:AB$ Mana | Cost$ T | Produced$ U | ReplaceIfLandPlayed$ B | SpellDescription$ Add {U} to your mana pool. If you played a land this turn, add {B} to your mana pool instead.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/river_of_tears.jpg
 Oracle:{T}: Add {U} to your mana pool. If you played a land this turn, add {B} to your mana pool instead.
