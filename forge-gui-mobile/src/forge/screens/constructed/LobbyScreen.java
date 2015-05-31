@@ -160,7 +160,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 FThreads.invokeInEdtLater(new Runnable() {
                     @Override
                     public void run() {
-                        btnStart.setEnabled(lobby instanceof LocalLobby);
+                        btnStart.setEnabled(true);
                     }
                 });
             }
