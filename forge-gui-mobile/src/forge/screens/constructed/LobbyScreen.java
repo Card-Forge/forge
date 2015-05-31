@@ -15,10 +15,8 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.deck.CardPool;
 import forge.deck.Deck;
-import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
 import forge.deck.DeckType;
-import forge.deck.FDeckChooser;
 import forge.game.GameType;
 import forge.interfaces.ILobbyView;
 import forge.interfaces.IPlayerChangeListener;
@@ -41,7 +39,6 @@ import forge.toolbox.FList;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
-import forge.util.Lang;
 import forge.util.Utils;
 import forge.util.gui.SOptionPane;
 
@@ -233,10 +230,6 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         playersScroll.setBounds(0, y, width, height - y);
     }
 
-    public final FDeckChooser getDeckChooser(int playernum) {
-        return playerPanels.get(playernum).getDeckChooser();
-    }
-
     GameType getCurrentGameMode() {
         return lobby.getGameType();
     }
@@ -254,6 +247,9 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
     @Override
     protected void startMatch() {
+        for (int i = 0; i < getNumPlayers(); i++) {
+            updateDeck(i);
+        }
         FThreads.invokeInBackgroundThread(new Runnable() { //must call startGame in background thread in case there are alerts
             @Override
             public void run() {
@@ -447,7 +443,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 panel.setMayRemove(lobby.mayRemove(i));
 
                 if (fullUpdate && (type == LobbySlotType.LOCAL || type == LobbySlotType.AI)) {
-                    selectDeck(i);
+                    updateDeck(i);
                 }
                 if (isNewPanel) {
                     panel.setVisible(true);
@@ -463,74 +459,47 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     public void setPlayerChangeListener(IPlayerChangeListener playerChangeListener0) {
         playerChangeListener = playerChangeListener0;
     }
-    
-    private void selectDeck(final int playerIndex) {
-        // Full deck selection
-        selectMainDeck(playerIndex);
-        selectCommanderDeck(playerIndex);
 
-        // Deck section selection
-        selectSchemeDeck(playerIndex);
-        selectPlanarDeck(playerIndex);
-        selectVanguardAvatar(playerIndex);
-    }
+    private void updateDeck(final int playerIndex) {
+        if (playerIndex >= getNumPlayers()) { return; }
 
-    private void selectMainDeck(final int playerIndex) {
+        PlayerPanel playerPanel = playerPanels.get(playerIndex);
+
+        Deck deck;
         if (hasVariant(GameType.Commander) || hasVariant(GameType.TinyLeaders)) {
-            // These game types use specific deck panel
-            return;
+            deck = playerPanel.getCommanderDeck();
         }
-        final FDeckChooser mainChooser = getDeckChooser(playerIndex);
-        onDeckClicked(playerIndex, mainChooser.getSelectedDeckType(), mainChooser.getDeck(), mainChooser.getLstDecks().getSelectedItems());
-        getDeckChooser(playerIndex).saveState();
-    }
-
-    private void selectSchemeDeck(final int playerIndex) {
-        if (playerIndex >= getNumPlayers() || !(hasVariant(GameType.Archenemy) || hasVariant(GameType.ArchenemyRumble))) {
-            return;
+        else {
+            deck = playerPanel.getDeck();
         }
 
-        CardPool schemePool = playerPanels.get(playerIndex).getSchemeDeck().get(DeckSection.Schemes);
-        fireDeckSectionChangeListener(playerIndex, DeckSection.Schemes, schemePool);
-        getDeckChooser(playerIndex).saveState();
-    }
-
-    private void selectCommanderDeck(final int playerIndex) {
-        if (playerIndex >= getNumPlayers() || !(hasVariant(GameType.Commander) || hasVariant(GameType.TinyLeaders))) {
-            return;
+        Deck playerDeck = deck;
+        if (hasVariant(GameType.Archenemy) || hasVariant(GameType.ArchenemyRumble)) {
+            if (playerDeck == deck) {
+                playerDeck = new Deck(deck); //create copy that can be modified
+            }
+            playerDeck.putSection(DeckSection.Schemes, playerPanel.getSchemeDeck().get(DeckSection.Schemes));
+        }
+        if (hasVariant(GameType.Planechase)) {
+            if (playerDeck == deck) {
+                playerDeck = new Deck(deck); //create copy that can be modified
+            }
+            playerDeck.putSection(DeckSection.Planes, playerPanel.getPlanarDeck().get(DeckSection.Planes));
+        }
+        if (hasVariant(GameType.Vanguard)) {
+            if (playerDeck == deck) {
+                playerDeck = new Deck(deck); //create copy that can be modified
+            }
+            CardPool avatarPool = new CardPool();
+            avatarPool.add(playerPanel.getVanguardAvatar());
+            playerDeck.putSection(DeckSection.Avatar, avatarPool);
         }
 
-        Deck deck = playerPanels.get(playerIndex).getCommanderDeck();
-        fireDeckChangeListener(playerIndex, deck);
-        getDeckChooser(playerIndex).saveState();
-    }
+        playerPanel.getDeckChooser().saveState();
 
-    private void selectPlanarDeck(final int playerIndex) {
-        if (playerIndex >= getNumPlayers() || !hasVariant(GameType.Planechase)) {
-            return;
-        }
-
-        CardPool planePool = playerPanels.get(playerIndex).getPlanarDeck().get(DeckSection.Planes);
-        fireDeckSectionChangeListener(playerIndex, DeckSection.Planes, planePool);
-        getDeckChooser(playerIndex).saveState();
-    }
-
-    private void selectVanguardAvatar(final int playerIndex) {
-        if (playerIndex >= getNumPlayers() || !hasVariant(GameType.Vanguard)) {
-            return;
-        }
-
-        final CardPool avatarOnce = new CardPool();
-        avatarOnce.add(playerPanels.get(playerIndex).getVanguardAvatar());
-        fireDeckSectionChangeListener(playerIndex, DeckSection.Avatar, avatarOnce);
-        getDeckChooser(playerIndex).saveState();
-    }
-
-    protected void onDeckClicked(final int iPlayer, final DeckType type, final Deck deck, final Collection<DeckProxy> selectedDecks) {
-        if (iPlayer < getNumPlayers() && lobby.mayEdit(iPlayer)) {
-            final String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy.FN_GET_NAME);
-            playerPanels.get(iPlayer).setDeckSelectorButtonText(text);
-            fireDeckChangeListener(iPlayer, deck);
+        decks[playerIndex] = playerDeck;
+        if (playerChangeListener != null) {
+            playerChangeListener.update(playerIndex, UpdateLobbyPlayerEvent.deckUpdate(playerDeck));
         }
     }
 
@@ -546,21 +515,6 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     void firePlayerChangeListener(final int index) {
         if (playerChangeListener != null) {
             playerChangeListener.update(index, getSlot(index));
-        }
-    }
-    private void fireDeckChangeListener(final int index, final Deck deck) {
-        decks[index] = deck;
-        if (playerChangeListener != null) {
-            playerChangeListener.update(index, UpdateLobbyPlayerEvent.deckUpdate(deck));
-        }
-    }
-    private void fireDeckSectionChangeListener(final int index, final DeckSection section, final CardPool cards) {
-        final Deck deck = decks[index];
-        final Deck copy = deck == null ? new Deck() : new Deck(decks[index]);
-        copy.putSection(section, cards);
-        decks[index] = copy;
-        if (playerChangeListener != null) {
-            playerChangeListener.update(index, UpdateLobbyPlayerEvent.deckUpdate(section, cards));
         }
     }
 
