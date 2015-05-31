@@ -197,7 +197,12 @@ public class PlayerPanel extends FContainer {
             }
         });
 
-        setMayEdit(mayEdit0);
+        if (mayEdit == mayEdit0) {
+            updateVariantControlsVisibility();
+        }
+        else {
+            setMayEdit(false);
+        }
         setMayControl(mayControl0);
 
         //disable team combo boxes for now
