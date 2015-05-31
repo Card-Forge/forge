@@ -82,8 +82,6 @@ public class PlayerPanel extends FContainer {
         screen = screen0;
         allowNetworking = allowNetworking0;
         index = index0;
-        setMayEdit(mayEdit0);
-        setMayControl(mayControl0);
         populateTeamsComboBoxes();
         if (slot == null) {
             setTeam(index);
@@ -199,6 +197,9 @@ public class PlayerPanel extends FContainer {
                 Forge.openScreen(lstVanguardAvatars);
             }
         });
+
+        setMayEdit(mayEdit0);
+        setMayControl(mayControl0);
 
         updateVariantControlsVisibility();
 

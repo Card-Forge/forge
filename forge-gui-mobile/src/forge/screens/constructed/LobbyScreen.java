@@ -4,6 +4,7 @@ import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.google.common.collect.Iterables;
 
@@ -23,6 +24,7 @@ import forge.interfaces.IPlayerChangeListener;
 import forge.match.GameLobby;
 import forge.match.LobbySlot;
 import forge.match.LobbySlotType;
+import forge.match.LocalLobby;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.net.event.UpdateLobbyPlayerEvent;
@@ -148,24 +150,31 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             @Override
             public void run() {
                 playerPanels.get(0).initialize(FPref.CONSTRUCTED_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
-                playerPanels.get(1).initialize(FPref.CONSTRUCTED_P2_DECK_STATE, DeckType.COLOR_DECK);
-                /*playerPanels.get(2).initialize(FPref.CONSTRUCTED_P3_DECK_STATE, DeckType.COLOR_DECK);
-                playerPanels.get(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, DeckType.COLOR_DECK);
-                playerPanels.get(4).initialize(FPref.CONSTRUCTED_P5_DECK_STATE, DeckType.COLOR_DECK);
-                playerPanels.get(5).initialize(FPref.CONSTRUCTED_P6_DECK_STATE, DeckType.COLOR_DECK);
-                playerPanels.get(6).initialize(FPref.CONSTRUCTED_P7_DECK_STATE, DeckType.COLOR_DECK);
-                playerPanels.get(7).initialize(FPref.CONSTRUCTED_P8_DECK_STATE, DeckType.COLOR_DECK);*/ //TODO: Support multiplayer and improve performance of loading this screen by using background thread
 
-                FThreads.invokeInEdtLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        btnStart.setEnabled(true);
-                    }
-                });
+                if (lobby instanceof LocalLobby) { //only initialize other decks for Constructed screen
+                    playerPanels.get(1).initialize(FPref.CONSTRUCTED_P2_DECK_STATE, DeckType.COLOR_DECK);
+                    /*playerPanels.get(2).initialize(FPref.CONSTRUCTED_P3_DECK_STATE, DeckType.COLOR_DECK);
+                    playerPanels.get(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, DeckType.COLOR_DECK);
+                    playerPanels.get(4).initialize(FPref.CONSTRUCTED_P5_DECK_STATE, DeckType.COLOR_DECK);
+                    playerPanels.get(5).initialize(FPref.CONSTRUCTED_P6_DECK_STATE, DeckType.COLOR_DECK);
+                    playerPanels.get(6).initialize(FPref.CONSTRUCTED_P7_DECK_STATE, DeckType.COLOR_DECK);
+                    playerPanels.get(7).initialize(FPref.CONSTRUCTED_P8_DECK_STATE, DeckType.COLOR_DECK);*/ //TODO: Support multiplayer and improve performance of loading this screen by using background thread
+
+                    FThreads.invokeInEdtLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            btnStart.setEnabled(true);
+                        }
+                    });
+                }
+                else { //handle offline lobby case
+                    playerPanels.get(1).setDeckSelectorButtonText("Waiting for opponent...");
+                    Gdx.graphics.requestRendering();
+                }
             }
         });
 
-        //disable player count and variants for now until they work properly
+        //disable player count for now until multiplayer supported
         lblPlayers.setEnabled(false);
         cbPlayerCount.setEnabled(false);
     }
@@ -175,8 +184,6 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     }
     protected void initLobby(GameLobby lobby0) {
         lobby = lobby0;
-        if (lobby == null) { return; }
-
         lobby.setListener(this);
     }
 

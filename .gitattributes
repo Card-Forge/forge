@@ -17718,6 +17718,7 @@ forge-gui/src/main/java/forge/net/IOnlineChatInterface.java -text
 forge-gui/src/main/java/forge/net/IOnlineLobby.java -text
 forge-gui/src/main/java/forge/net/IRemote.java -text
 forge-gui/src/main/java/forge/net/NetConnectUtil.java -text
+forge-gui/src/main/java/forge/net/OfflineLobby.java -text
 forge-gui/src/main/java/forge/net/ProtocolMethod.java -text
 forge-gui/src/main/java/forge/net/ReplyPool.java -text
 forge-gui/src/main/java/forge/net/client/ClientGameLobby.java -text

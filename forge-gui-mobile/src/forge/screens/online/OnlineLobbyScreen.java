@@ -3,12 +3,13 @@ package forge.screens.online;
 import forge.interfaces.ILobbyView;
 import forge.match.GameLobby;
 import forge.net.IOnlineLobby;
+import forge.net.OfflineLobby;
 import forge.net.client.FGameClient;
 import forge.screens.constructed.LobbyScreen;
 
 public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
     public OnlineLobbyScreen() {
-        super(null, OnlineMenu.getMenu(), null); //must wait for lobby to be set
+        super(null, OnlineMenu.getMenu(), new OfflineLobby());
     }
 
     @Override
